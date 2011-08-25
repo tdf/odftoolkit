@@ -40,6 +40,7 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.Document.OdfMediaType;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -55,7 +56,8 @@ public class TableTest {
 	@Before
 	public void setUp() {
 		try {
-			mOdsDoc = (SpreadsheetDocument) SpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(mOdsTestFileName + ".ods"));
+			mOdsDoc = (SpreadsheetDocument) SpreadsheetDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream(mOdsTestFileName + ".ods"));
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
@@ -64,7 +66,8 @@ public class TableTest {
 
 	private TextDocument loadODTDocument(String name) {
 		try {
-			TextDocument odtdoc = (TextDocument) TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(name));
+			TextDocument odtdoc = (TextDocument) TextDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream(name));
 			return odtdoc;
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
@@ -93,7 +96,7 @@ public class TableTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testColumnWidthCompareNewTableWithGetCellByPosition() {
 		try {
@@ -103,7 +106,7 @@ public class TableTest {
 			double width1 = table.getColumnByIndex(0).getWidth();
 			table = Table.newTable(odsDoc);
 			table.setTableName("Table2");
-			//set the table size as 20*20.
+			// set the table size as 20*20.
 			table.getCellByPosition(19, 19);
 			double width2 = table.getColumnByIndex(0).getWidth();
 			Assert.assertEquals(width1, width2);
@@ -129,8 +132,7 @@ public class TableTest {
 			double[][] doubleArray = null;
 			String[][] stringArray = null;
 			SpreadsheetDocument spreadsheet = SpreadsheetDocument.newSpreadsheetDocument();
-			Table table1 = Table.newTable(spreadsheet, null, null,
-					doubleArray);
+			Table table1 = Table.newTable(spreadsheet, null, null, doubleArray);
 			Assert.assertEquals(0, table1.getHeaderColumnCount());
 			Assert.assertEquals(0, table1.getHeaderRowCount());
 			// row count should be DEFAULT_ROW_COUNT 2
@@ -138,8 +140,7 @@ public class TableTest {
 			// column count should be DEFAULT_COLUMN_COUNT 5
 			Assert.assertEquals(5, table1.getColumnCount());
 
-			table1 = Table.newTable(spreadsheet, rowLabels, columnLabels,
-					doubleArray);
+			table1 = Table.newTable(spreadsheet, rowLabels, columnLabels, doubleArray);
 			Assert.assertEquals(1, table1.getHeaderColumnCount());
 			Assert.assertEquals(1, table1.getHeaderRowCount());
 			// row count should be DEFAULT_ROW_COUNT+1 3
@@ -155,8 +156,7 @@ public class TableTest {
 			// column count should be DEFAULT_COLUMN_COUNT 5
 			Assert.assertEquals(5, table1.getColumnCount());
 
-			table1 = Table.newTable(spreadsheet, rowLabels, columnLabels,
-					stringArray);
+			table1 = Table.newTable(spreadsheet, rowLabels, columnLabels, stringArray);
 			Assert.assertEquals(1, table1.getHeaderColumnCount());
 			Assert.assertEquals(1, table1.getHeaderRowCount());
 			// row count should be DEFAULT_ROW_COUNT+1 3
@@ -176,8 +176,7 @@ public class TableTest {
 			Assert.assertEquals(rowCount, table1.getRowCount());
 			Assert.assertEquals(columnCount, table1.getColumnCount());
 
-			table1 = Table.newTable(spreadsheet, rowLabels, columnLabels,
-					doubleArray);
+			table1 = Table.newTable(spreadsheet, rowLabels, columnLabels, doubleArray);
 			Assert.assertEquals(1, table1.getHeaderColumnCount());
 			Assert.assertEquals(1, table1.getHeaderRowCount());
 			Assert.assertEquals(rowCount + 1, table1.getRowCount());
@@ -195,8 +194,7 @@ public class TableTest {
 			Assert.assertEquals(rowCount, table1.getRowCount());
 			Assert.assertEquals(columnCount, table1.getColumnCount());
 
-			table1 = Table.newTable(spreadsheet, rowLabels, columnLabels,
-					stringArray);
+			table1 = Table.newTable(spreadsheet, rowLabels, columnLabels, stringArray);
 			Assert.assertEquals(1, table1.getHeaderColumnCount());
 			Assert.assertEquals(1, table1.getHeaderRowCount());
 			Assert.assertEquals(rowCount + 1, table1.getRowCount());
@@ -213,14 +211,14 @@ public class TableTest {
 			// reproduce bug 145
 			SpreadsheetDocument spreadsheet = SpreadsheetDocument.newSpreadsheetDocument();
 			Table sheet = Table.newTable(spreadsheet, 3, 5);
-			TableTableHeaderColumnsElement headers = OdfElement.findFirstChildNode(TableTableHeaderColumnsElement.class,
-					sheet.getOdfElement());
+			TableTableHeaderColumnsElement headers = OdfElement.findFirstChildNode(
+					TableTableHeaderColumnsElement.class, sheet.getOdfElement());
 			if (headers != null) {
 				for (Node n : new DomNodeList(headers.getChildNodes())) {
 					if (n instanceof TableTableColumnElement) {
-						if (sheet.getColumnInstance(
-								((TableTableColumnElement) n), 0).getColumnsRepeatedNumber() == 0) {
-							Assert.fail("table:number-columns-repeated has the invalid value: '0'. It have to be a value matching the 'positiveInteger' type.");
+						if (sheet.getColumnInstance(((TableTableColumnElement) n), 0).getColumnsRepeatedNumber() == 0) {
+							Assert
+									.fail("table:number-columns-repeated has the invalid value: '0'. It have to be a value matching the 'positiveInteger' type.");
 						}
 					}
 				}
@@ -320,7 +318,6 @@ public class TableTest {
 		Cell cell = table.getCellByPosition(1, 1);
 		Assert.assertEquals("string", cell.getValueType());
 
-
 		return table3;
 
 	}
@@ -389,7 +386,7 @@ public class TableTest {
 		try {
 			document = TextDocument.newTextDocument();
 			document.newParagraph("Empty table:");
-			Table table = createEmptyTable(document);			
+			Table table = createEmptyTable(document);
 			table.setTableName(tablename);
 			Assert.assertEquals(tablename, table.getTableName());
 
@@ -400,19 +397,19 @@ public class TableTest {
 			Assert.assertNotNull(table);
 			String tablename2 = table.getTableName();
 			Assert.assertEquals(tablename, tablename2);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			Assert.fail(e.getMessage());
 		}
-		
-		try{
-			//new another table with the same name
-			//an exception will be thrown
+
+		try {
+			// new another table with the same name
+			// an exception will be thrown
 			Table table2 = Table.newTable(document);
 			table2.setTableName(tablename);
 			document.save(ResourceUtilities.newTestOutputFile("TestGetSetName.odt"));
 			Assert.fail("should not save the tables with the same table name.");
 		} catch (Exception e) {
-			if(! e.getMessage().startsWith("The table name is duplicate")) {
+			if (!e.getMessage().startsWith("The table name is duplicate")) {
 				Assert.fail(e.getMessage());
 			}
 		}
@@ -492,12 +489,11 @@ public class TableTest {
 		int originalRowCount = table2.getRowCount();
 		List<Row> newRows = table2.insertRowsBefore(0, 2);
 
-
 		Row newRow1 = table2.getRowByIndex(0);
 		Row newRow2 = table2.getRowByIndex(0);
 		Assert.assertEquals(newRow1.getCellCount(), newRows.get(0).getCellCount());
 		Assert.assertEquals(newRow2.getCellCount(), newRows.get(1).getCellCount());
-		//original row index 0
+		// original row index 0
 		Assert.assertEquals(row, table2.getRowByIndex(2));
 
 		saveodt(mOdtTestFileName + "Out.odt");
@@ -543,7 +539,8 @@ public class TableTest {
 			Column tmpColumn;
 			List<Column> columns = table.getColumnList();
 
-			//the code below prints the column value,it shows that the first columns value is the same with the last column
+			// the code below prints the column value,it shows that the first
+			// columns value is the same with the last column
 			for (int i = 0; i < columns.size(); i++) {
 				tmpColumn = columns.get(i);
 				for (int j = 0; j < tmpColumn.getCellCount(); j++) {
@@ -562,7 +559,7 @@ public class TableTest {
 
 			for (int i = 1; i < columns.size(); i++) {
 				tmpColumn = columns.get(i);
-				//each column's first cell is the column header
+				// each column's first cell is the column header
 				Assert.assertEquals(columnlabels[i - 1], tmpColumn.getCellByIndex(0).getStringValue());
 			}
 			Assert.assertEquals(columncount, columns.size() - 1);
@@ -611,7 +608,7 @@ public class TableTest {
 			List<Row> rows = table.getRowList();
 			for (int i = 1; i < rows.size(); i++) {
 				tmpRow = rows.get(i);
-				//each row's first cell is the row header
+				// each row's first cell is the row header
 				Assert.assertEquals(rowlabels[i - 1], tmpRow.getCellByIndex(0).getStringValue());
 			}
 			Assert.assertEquals(rowcount, rows.size() - 1);
@@ -630,7 +627,7 @@ public class TableTest {
 		mOdtDoc = loadODTDocument("CreateTableCase.odt");
 		Table table = mOdtDoc.getTableByName("Table3");
 		Assert.assertNotNull(table);
-		//test if index is negative number, which is an illegal argument.
+		// test if index is negative number, which is an illegal argument.
 		boolean illegalArgumentFlag = false;
 		try {
 			table.getColumnByIndex(-1);
@@ -661,7 +658,7 @@ public class TableTest {
 		mOdtDoc = loadODTDocument("CreateTableCase.odt");
 		Table table = mOdtDoc.getTableByName("Table3");
 		Assert.assertNotNull(table);
-		//test index is negative number. This is a illegal argument.
+		// test index is negative number. This is a illegal argument.
 		boolean illegalArgumentFlag = false;
 		try {
 			table.getRowByIndex(-1);
@@ -695,7 +692,7 @@ public class TableTest {
 		int originalRowCount = table2.getRowCount();
 		table2.removeRowsByIndex(1, 2);
 
-		//original row index 0
+		// original row index 0
 		Assert.assertEquals(row0, table2.getRowByIndex(0));
 		Assert.assertEquals(row3, table2.getRowByIndex(1));
 
@@ -719,12 +716,13 @@ public class TableTest {
 	@Test
 	public void testGetRowCount() {
 		try {
-			//without table rows
-			Document mOdpDoc = Document.loadDocument(ResourceUtilities.getTestResourceAsStream("TableCountTestcase.odp"));
+			// without table rows
+			Document mOdpDoc = Document.loadDocument(ResourceUtilities
+					.getTestResourceAsStream("TableCountTestcase.odp"));
 			Table table = mOdpDoc.getTableByName("Table1");
 			int rowCount = table.getRowCount();
 			Assert.assertEquals(5, rowCount);
-			//with table rows
+			// with table rows
 			Document mOdcDoc = mOdpDoc.getEmbeddedDocument("Object 2/");
 			table = mOdcDoc.getTableByName("local-table");
 			rowCount = table.getRowCount();
@@ -744,6 +742,25 @@ public class TableTest {
 		int headerColumnCount = table.getHeaderColumnCount();
 		Assert.assertEquals(1, headerColumnCount);
 
+	}
+
+	@Test
+	public void testGetColumnCountWithColumnsInDocument() {
+		try {
+			SpreadsheetDocument sDoc = SpreadsheetDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream("Spreadsheet with Embeded Chart.ods"));
+			List<Document> charts = sDoc.getEmbeddedDocuments(OdfMediaType.CHART);
+			for (Document chart : charts) {
+				// "local-table" is the inner table name of chart document with
+				// 2 columns
+				Table localTable = chart.getTableByName("local-table");
+				int columnCount = localTable.getColumnCount();
+				Assert.assertEquals(2, columnCount);
+			}
+		} catch (Exception e) {
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test
@@ -791,7 +808,7 @@ public class TableTest {
 		cell = table.getCellByPosition("D4");
 		Assert.assertNotNull(cell);
 		Assert.assertEquals("string12", cell.getStringValue());
-		//test index are negative numbers. They are illegal arguments.
+		// test index are negative numbers. They are illegal arguments.
 		boolean illegalArgumentFlag = false;
 		try {
 			cell = table.getCellByPosition(-1, 0);
@@ -803,32 +820,35 @@ public class TableTest {
 		Assert.assertTrue(illegalArgumentFlag);
 		// test TextTable automatically expands.
 		// Table3 original size is 7 rows and 5 columns;
-		//test row index 8 and column index 6, row index and column index both out of bound, work well. 
+		// test row index 8 and column index 6, row index and column index both
+		// out of bound, work well.
 		cell = table.getCellByPosition(8, 6);
 		Assert.assertNotNull(cell);
 		cell.setStringValue("string86");
 		Assert.assertEquals("string86", cell.getStringValue());
-		//test row index 9 and column index 4, row index out of bound, work well.
+		// test row index 9 and column index 4, row index out of bound, work
+		// well.
 		cell = table.getCellByPosition(4, 9);
 		Assert.assertNotNull(cell);
 		cell.setStringValue("string49");
 		Assert.assertEquals("string49", cell.getStringValue());
-		//test row index 9 and column index 4, column index out of bound, work well.
+		// test row index 9 and column index 4, column index out of bound, work
+		// well.
 		cell = table.getCellByPosition(9, 10);
 		Assert.assertNotNull(cell);
 		cell.setStringValue("string910");
 		Assert.assertEquals("string910", cell.getStringValue());
-		//test column index out of bound, work well.
+		// test column index out of bound, work well.
 		cell = table.getCellByPosition("I4");
 		Assert.assertNotNull(cell);
 		cell.setStringValue("stringI4");
 		Assert.assertEquals("stringI4", cell.getStringValue());
-		//test row index out of bound, work well.
+		// test row index out of bound, work well.
 		cell = table.getCellByPosition("D11");
 		Assert.assertNotNull(cell);
 		cell.setStringValue("stringD11");
 		Assert.assertEquals("stringD11", cell.getStringValue());
-		//test row index and column index both out of bound, work well. 
+		// test row index and column index both out of bound, work well.
 		cell = table.getCellByPosition("K12");
 		Assert.assertNotNull(cell);
 		cell.setStringValue("stringK12");
@@ -847,8 +867,7 @@ public class TableTest {
 		Assert.assertNotNull(cell);
 		Calendar cal = Calendar.getInstance();
 		cell.setTimeValue(cal);
-		SimpleDateFormat simpleFormat = new SimpleDateFormat(
-				"'PT'HH'H'mm'M'ss'S'");
+		SimpleDateFormat simpleFormat = new SimpleDateFormat("'PT'HH'H'mm'M'ss'S'");
 		String expectedString = simpleFormat.format(cal.getTime());
 		String targetString = simpleFormat.format(cell.getTimeValue().getTime());
 		Assert.assertEquals(expectedString, targetString);
@@ -889,7 +908,7 @@ public class TableTest {
 		// test TextTable automatically expands.
 		// Table3 original size is 7 rows and 5 columns;
 
-		//test index is negative number. They are illegal arguments.
+		// test index is negative number. They are illegal arguments.
 		boolean illegalArgumentFlag = false;
 		try {
 			range = table.getCellRangeByPosition(-1, 0, 2, -14);
@@ -948,7 +967,8 @@ public class TableTest {
 	public void testAppendRow() {
 		OdfFileDom dom;
 		try {
-			SpreadsheetDocument odsDoc = SpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("TestODSAppendRow.ods"));
+			SpreadsheetDocument odsDoc = SpreadsheetDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream("TestODSAppendRow.ods"));
 			dom = odsDoc.getContentDom();
 			NodeList tablelist = dom.getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "table");
 			for (int i = 0; i < tablelist.getLength(); i++) {
@@ -957,7 +977,8 @@ public class TableTest {
 			}
 			odsDoc.save(ResourceUtilities.newTestOutputFile("TestODSAppendRowOutput.ods"));
 
-			TextDocument odtDoc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("TestODTAppendRow.odt"));
+			TextDocument odtDoc = TextDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream("TestODTAppendRow.odt"));
 			dom = odtDoc.getContentDom();
 			tablelist = dom.getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "table");
 			for (int i = 0; i < tablelist.getLength(); i++) {
@@ -971,7 +992,7 @@ public class TableTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testAppendRowsWithCoveredCell() {
 		SpreadsheetDocument odsDoc = null;
@@ -985,9 +1006,9 @@ public class TableTest {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testAppendRowsWithRowsRepeated() {
 		SpreadsheetDocument odsDoc = null;
@@ -998,21 +1019,21 @@ public class TableTest {
 			table.appendRows(12);
 			Row row10 = table.getRowByIndex(10);
 			Row row11 = table.getRowByIndex(11);
-			//default appended rows described by single element
+			// default appended rows described by single element
 			Assert.assertSame(row10.getOdfElement(), row11.getOdfElement());
-			
+
 			table.setUseRepeat(false);
 			table.appendRows(12);
 			Row row20 = table.getRowByIndex(20);
 			Row row21 = table.getRowByIndex(21);
 			Assert.assertNotSame(row20.getOdfElement(), row21.getOdfElement());
-			
+
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testAppendColumnsWithColumnsRepeated() {
 		SpreadsheetDocument odsDoc = null;
@@ -1023,37 +1044,37 @@ public class TableTest {
 			table.appendColumns(12);
 			Column column10 = table.getColumnByIndex(10);
 			Column column11 = table.getColumnByIndex(11);
-			
+
 			Cell cell10 = table.getCellByPosition(10, 2);
 			Cell cell11 = table.getCellByPosition(11, 2);
-			
-			//default appended rows described by single element
+
+			// default appended rows described by single element
 			Assert.assertSame(column10.getOdfElement(), column11.getOdfElement());
 			Assert.assertSame(cell10.getOdfElement(), cell11.getOdfElement());
-			
+
 			table.setUseRepeat(false);
 			table.appendColumns(12);
 			Column column20 = table.getColumnByIndex(20);
 			Column column21 = table.getColumnByIndex(21);
-			
+
 			Cell cell20 = table.getCellByPosition(20, 2);
 			Cell cell21 = table.getCellByPosition(21, 2);
-			
+
 			Assert.assertNotSame(column20.getOdfElement(), column21.getOdfElement());
 			Assert.assertNotSame(cell20.getOdfElement(), cell21.getOdfElement());
-			
+
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testSplitCellAddress() {
 		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
 		Table table1 = mOdtDoc.getTableByName("Table1");
-		//reproduce bug 138, test case to proof the fix problem.
-		//test address without table name.
+		// reproduce bug 138, test case to proof the fix problem.
+		// test address without table name.
 		String[] address = table1.splitCellAddress("A1");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("A", address[1]);
@@ -1071,7 +1092,7 @@ public class TableTest {
 		Assert.assertEquals("AC", address[1]);
 		Assert.assertEquals("29", address[2]);
 
-		//test relative address
+		// test relative address
 		address = table1.splitCellAddress("Table1.A1");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("A", address[1]);
@@ -1089,7 +1110,7 @@ public class TableTest {
 		Assert.assertEquals("AC", address[1]);
 		Assert.assertEquals("29", address[2]);
 
-		//test absolute address.
+		// test absolute address.
 		address = table1.splitCellAddress("$Table1.$A$1");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("A", address[1]);
@@ -1112,7 +1133,8 @@ public class TableTest {
 	@Test
 	public void testGetCellAt() {
 		try {
-			SpreadsheetDocument doc = (SpreadsheetDocument) SpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("testGetCellAt.ods"));
+			SpreadsheetDocument doc = (SpreadsheetDocument) SpreadsheetDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream("testGetCellAt.ods"));
 			Table odfTable = doc.getTableList().get(0);
 			Row valueRows = odfTable.getRowByIndex(0);
 			for (int i = 0; i < 4; i++) {
@@ -1151,10 +1173,11 @@ public class TableTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	private void mergeCells(Table table, int cellCol, int cellRow, int colSpan, int rowSpan) {
 		if (table != null) {
-			CellRange range = table.getCellRangeByPosition(cellCol, cellRow, cellCol + colSpan - 1, cellRow + rowSpan - 1);
+			CellRange range = table.getCellRangeByPosition(cellCol, cellRow, cellCol + colSpan - 1, cellRow + rowSpan
+					- 1);
 			range.merge();
 		}
 	}

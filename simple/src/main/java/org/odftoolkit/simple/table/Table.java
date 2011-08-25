@@ -44,6 +44,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableNamedRangeElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableColumnsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderColumnsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderRowsElement;
@@ -966,10 +967,16 @@ public class Table {
 	public int getColumnCount() {
 		int result = 0;
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
-			// TODO: how about <table:table-column-group>, <table:table-columns>
+			// TODO: how about <table:table-column-group>
 			if (n instanceof TableTableHeaderColumnsElement) {
 				result += getHeaderColumnCount((TableTableHeaderColumnsElement) n);
 			}
+			
+			//<table:table-columns>
+			if (n instanceof TableTableColumnsElement) {
+				result += getColumnsCount((TableTableColumnsElement) n);
+			}
+			
 			if (n instanceof TableTableColumnElement) {
 				result += ((TableTableColumnElement) n).getTableNumberColumnsRepeatedAttribute();
 			}
@@ -2134,6 +2141,16 @@ public class Table {
 		int result = 0;
 		if (headers != null) {
 			for (Node n : new DomNodeList(headers.getChildNodes())) {
+				result += ((TableTableColumnElement) n).getTableNumberColumnsRepeatedAttribute();
+			}
+		}
+		return result;
+	}
+	
+	private int getColumnsCount(TableTableColumnsElement columns) {
+		int result = 0;
+		if (columns != null) {
+			for (Node n : new DomNodeList(columns.getChildNodes())) {
 				result += ((TableTableColumnElement) n).getTableNumberColumnsRepeatedAttribute();
 			}
 		}
