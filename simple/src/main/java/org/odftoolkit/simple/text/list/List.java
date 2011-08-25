@@ -787,7 +787,7 @@ public class List {
 			strBuilder.append(header);
 			splitStr = "\n";
 		}
-		String itemPrefix = "• ";
+		String itemPrefix = "â€¢ ";
 		int j = 0;
 		if (getType() == ListType.NUMBER) {
 			itemPrefix = ". ";

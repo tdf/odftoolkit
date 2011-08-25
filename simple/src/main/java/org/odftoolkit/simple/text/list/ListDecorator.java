@@ -58,7 +58,7 @@ public interface ListDecorator {
 		/**
 		 * IMAGE specifies a list type where list items are preceded by images.
 		 */
-		IMAGE;
+		IMAGE
 	}
 
 	/**

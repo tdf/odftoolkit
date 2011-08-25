@@ -55,7 +55,7 @@ public class BulletDecorator implements ListDecorator {
 			"2.001cm", "2.399cm", "2.8cm", "3.2cm", "3.601cm" };
 	private static String DEFAULT_TEXT_MIN_LABEL_WIDTH = "0.4cm";
 	private static String DEFAULT_FONT_NAME = "Tahoma";
-	private static String DEFAULT_BULLET_CHAR = "•";
+	private static String DEFAULT_BULLET_CHAR = "â€¢";
 	private static String DEFAULT_NAME = "Simple_Default_Bullet_List";
 
 	private OdfTextListStyle listStyle;

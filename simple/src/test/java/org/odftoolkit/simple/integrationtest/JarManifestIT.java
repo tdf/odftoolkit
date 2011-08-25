@@ -57,26 +57,26 @@ public class JarManifestIT {
 			LOG.log(Level.INFO, "The version info from commandline given by {0} is:\n", command);
 			LOG.log(Level.INFO, "\"{0}\"", firstOutputLine);
 			LOG.log(Level.INFO, "\"{0}\"", secondOutputLine);
-			Assert.assertEquals(firstOutputLine, JarManifest.getSimpleTitle() + " (build " + JarManifest.getSimpleBuildDate() + ')');
-			Assert.assertEquals(secondOutputLine, "from " + JarManifest.getSimpleWebsite() + " supporting ODF " + JarManifest.getSimpleSupportedOdfVersion());
+			Assert.assertEquals(firstOutputLine, JarManifest.getSimpleOdfTitle() + " (build " + JarManifest.getSimpleOdfBuildDate() + ')');
+			Assert.assertEquals(secondOutputLine, "from " + JarManifest.getSimpleOdfWebsite() + " supporting ODF " + JarManifest.getSimpleOdfSupportedOdfVersion());
 
-			LOG.log(Level.INFO, "\nJarManifest.getName(): {0}", JarManifest.getSimpleName());
-			Assert.assertNotNull(JarManifest.getSimpleName());
+			LOG.log(Level.INFO, "\nJarManifest.getName(): {0}", JarManifest.getSimpleOdfName());
+			Assert.assertNotNull(JarManifest.getSimpleOdfName());
 
-			LOG.log(Level.INFO, "\nJarManifest.getTitle(): {0}", JarManifest.getSimpleTitle());
-			Assert.assertNotNull(JarManifest.getSimpleTitle());
+			LOG.log(Level.INFO, "\nJarManifest.getTitle(): {0}", JarManifest.getSimpleOdfTitle());
+			Assert.assertNotNull(JarManifest.getSimpleOdfTitle());
 
-			LOG.log(Level.INFO, "\nJarManifest.getVersion(): {0}", JarManifest.getSimpleVersion());
-			Assert.assertNotNull(JarManifest.getSimpleVersion());
+			LOG.log(Level.INFO, "\nJarManifest.getVersion(): {0}", JarManifest.getSimpleOdfVersion());
+			Assert.assertNotNull(JarManifest.getSimpleOdfVersion());
 
-			LOG.log(Level.INFO, "\nJarManifest.getBuildDate(): {0}", JarManifest.getSimpleBuildDate());
-			Assert.assertNotNull(JarManifest.getSimpleBuildDate());
+			LOG.log(Level.INFO, "\nJarManifest.getBuildDate(): {0}", JarManifest.getSimpleOdfBuildDate());
+			Assert.assertNotNull(JarManifest.getSimpleOdfBuildDate());
 
-			LOG.log(Level.INFO, "\nJarManifest.getBuildResponsible(): {0}", JarManifest.getSimpleBuildResponsible());
-			Assert.assertNotNull(JarManifest.getSimpleBuildResponsible());
+			LOG.log(Level.INFO, "\nJarManifest.getBuildResponsible(): {0}", JarManifest.getSimpleOdfBuildResponsible());
+			Assert.assertNotNull(JarManifest.getSimpleOdfBuildResponsible());
 
-			LOG.log(Level.INFO, "\nJarManifest.getSupportedOdfVersion(): {0}", JarManifest.getSimpleSupportedOdfVersion());
-			Assert.assertNotNull(JarManifest.getSimpleSupportedOdfVersion());
+			LOG.log(Level.INFO, "\nJarManifest.getSupportedOdfVersion(): {0}", JarManifest.getSimpleOdfSupportedOdfVersion());
+			Assert.assertNotNull(JarManifest.getSimpleOdfSupportedOdfVersion());
 
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, null, e);
