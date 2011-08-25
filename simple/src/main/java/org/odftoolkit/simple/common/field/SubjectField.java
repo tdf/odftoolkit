@@ -25,6 +25,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSubjectElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.meta.Meta;
 
@@ -50,6 +51,7 @@ public class SubjectField extends Field {
 			// get meta info failed, do not set content value. Let editor update
 			// it.
 		}
+		Component.registerComponent(this, getOdfElement());
 	}
 
 	/**

@@ -34,6 +34,7 @@ import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberTimeStyle;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 
 /**
  * TimeField displays a time, by default this is the current time.
@@ -72,6 +73,7 @@ public class TimeField extends Field {
 		SimpleDateFormat contentFormat = new SimpleDateFormat(DEFAULT_TIME_FORMAT);
 		timeElement.setTextContent(contentFormat.format(time));
 		timeElement.setTextFixedAttribute(true);
+		Component.registerComponent(this, getOdfElement());
 	}
 
 	/**

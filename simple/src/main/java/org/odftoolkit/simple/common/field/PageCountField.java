@@ -25,6 +25,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPageCountElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.meta.Meta;
 import org.odftoolkit.simple.style.NumberFormat;
@@ -57,6 +58,7 @@ public class PageCountField extends Field {
 			// get meta info failed, do not set count value. Let editor update
 			// it.
 		}
+		Component.registerComponent(this, getOdfElement());
 	}
 
 	/**

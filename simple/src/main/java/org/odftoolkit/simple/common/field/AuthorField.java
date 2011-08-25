@@ -26,6 +26,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextAuthorNameElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 
 /**
  * An <tt>AuthorField</tt> represents the initials of the author or the full
@@ -55,6 +56,7 @@ public class AuthorField extends Field {
 			authorNameElement = spanElement.newTextAuthorNameElement();
 			authorNameElement.setTextFixedAttribute(false);
 		}
+		Component.registerComponent(this, getOdfElement());
 	}
 
 	/**

@@ -31,6 +31,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextVariableDeclsElement;
 import org.odftoolkit.odfdom.dom.element.text.TextVariableSetElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 
 /**
  * ODF document can contain variables, which are processed or displayed as
@@ -136,6 +137,7 @@ public class VariableField extends Field {
 		case SEQUENCE:
 			throw new IllegalArgumentException("Simple Java API for ODF doesn't support this type now.");
 		}
+		Component.registerComponent(this, getOdfElement());
 	}
 
 	/**

@@ -34,6 +34,7 @@ import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 
 /**
  * DateField displays a date, by default this is the current date.
@@ -72,6 +73,7 @@ public class DateField extends Field {
 		SimpleDateFormat contentFormat = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
 		dateElement.setTextContent(contentFormat.format(date));
 		dateElement.setTextFixedAttribute(true);
+		Component.registerComponent(this, getOdfElement());
 	}
 
 	/**

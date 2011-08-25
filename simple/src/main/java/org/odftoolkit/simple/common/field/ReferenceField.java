@@ -32,6 +32,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextReferenceRefElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 import org.w3c.dom.Node;
 
 /**
@@ -108,6 +109,7 @@ public class ReferenceField extends Field {
 			} else {
 				parentEle.insertBefore(referenceMarkEndElement, nextSiblingEle);
 			}
+			Component.registerComponent(this, getOdfElement());
 		} else {
 			throw new IllegalArgumentException("The specific odf element can't own a reference field.");
 		}

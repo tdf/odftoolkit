@@ -26,6 +26,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 
 /**
  * ConditionField specifies a condition for display of one text string or
@@ -54,6 +55,7 @@ public class ConditionField extends Field {
 		}
 		conditionalTextElement.setTextCurrentValueAttribute(true);
 		this.isHiddenTextField = isHiddenTextField;
+		Component.registerComponent(this, getOdfElement());
 	}
 
 	/**

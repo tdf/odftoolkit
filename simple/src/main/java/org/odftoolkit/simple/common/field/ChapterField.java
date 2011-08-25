@@ -25,6 +25,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextChapterElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 
 /**
  * ChapterField is placed inside a header or footer, it displays the current
@@ -71,6 +72,7 @@ public class ChapterField extends Field {
 		odfElement.appendChild(spanElement);
 		chapterElement = spanElement.newTextChapterElement(null, 1);
 		setDisplayPage(DisplayType.NUMBER_AND_NAME);
+		Component.registerComponent(this, getOdfElement());
 	}
 
 	/**

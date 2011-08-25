@@ -25,6 +25,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPageNumberElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.style.NumberFormat;
 
 /**
@@ -70,6 +71,7 @@ public class PageNumberField extends Field {
 		odfElement.appendChild(spanElement);
 		pageNumberElement = spanElement.newTextPageNumberElement(null);
 		setDisplayPage(DisplayType.CURRENT_PAGE);
+		Component.registerComponent(this, getOdfElement());
 	}
 
 	/**
