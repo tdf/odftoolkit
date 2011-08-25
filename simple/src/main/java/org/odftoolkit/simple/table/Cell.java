@@ -54,7 +54,10 @@ import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTextElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.table.TableContentValidationElement;
+import org.odftoolkit.odfdom.dom.element.table.TableContentValidationsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
+import org.odftoolkit.odfdom.dom.element.table.TableHelpMessageElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
@@ -2341,6 +2344,114 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	public Iterator<Paragraph> getParagraphIterator() {
 		return getParagraphContainerImpl().getParagraphIterator();
 	}
+
+	public OdfElement getFrameContainerElement() {
+		return mCellElement;
+	}
+	
+	/**
+	 * Specifies the allowed values of this cell in a list. Any value out of
+	 * this list is invalid.
+	 * 
+	 * @param values
+	 *            the list of allowed values.
+	 * @since 0.6
+	 */
+	public void setValidityList(List<String> values) {
+		try {
+			TableContentValidationElement validation = getContentValidationEle();
+			validation.setTableAllowEmptyCellAttribute(true);
+			String split = "";
+			StringBuilder listStr = new StringBuilder("");
+			for (String value : values) {
+				listStr.append(split);
+				listStr.append("\"");
+				listStr.append(value);
+				listStr.append("\"");
+				split = ";";
+			}
+			validation.setTableConditionAttribute("cell-content-is-in-list(" + listStr + ")");
+			String tableName = getTableElement().getTableNameAttribute();
+			validation.setTableBaseCellAddressAttribute(tableName + "." + getCellAddress());
+			validation.setTableDisplayListAttribute("unsorted");
+		} catch (Exception e) {
+			Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, e);
+		}
+	}
+
+	/**
+	 * Sets the title and the text of the tip, which will then be displayed if
+	 * the cell is selected.
+	 * 
+	 * @param title
+	 *            the title of the tip.
+	 * @param message
+	 *            the text of the tip.
+	 * @since 0.6
+	 */
+	public void setInputHelpMessage(String title, String text) {
+		try {
+			TableContentValidationElement validationElement = getContentValidationEle();
+			TableHelpMessageElement helpMessageElement = OdfElement.findFirstChildNode(TableHelpMessageElement.class,
+					validationElement);
+			if (helpMessageElement != null) {
+				validationElement.removeChild(helpMessageElement);
+			}
+			helpMessageElement = validationElement.newTableHelpMessageElement();
+			helpMessageElement.setTableTitleAttribute(title);
+			helpMessageElement.setTableDisplayAttribute(true);
+			helpMessageElement.newTextPElement().setTextContent(text);
+		} catch (Exception e) {
+			Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, e);
+		}
+	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////// private methods ///////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private TableContentValidationElement getContentValidationEle() throws Exception {
+		Document ownerDocument = getOwnerDocument();
+		OdfElement contentRootElement = ownerDocument.getContentRoot();
+		TableContentValidationsElement validations = OdfElement.findFirstChildNode(
+				TableContentValidationsElement.class, contentRootElement);
+		if (validations == null) {
+			validations = (TableContentValidationsElement) OdfXMLFactory.newOdfElement(ownerDocument
+					.getContentDom(), OdfName.newName(OdfDocumentNamespace.TABLE, "content-validations"));
+			contentRootElement.insertBefore(validations, contentRootElement.getFirstChild());
+		}
+		String validationName = getOdfElement().getTableContentValidationNameAttribute();
+		TableContentValidationElement validationElement = null;
+		if (validationName != null) {
+			Node child = validations.getFirstChild();
+			while (child != null) {
+				TableContentValidationElement contentValidationElementRef = (TableContentValidationElement) child;
+				if (validationName.equals(contentValidationElementRef.getTableNameAttribute())) {
+					validationElement = contentValidationElementRef;
+					break;
+				}
+			}
+		} else {
+			String valName = "val" + String.format("d%06x", (int) (Math.random() * 0xffffff));
+			validationElement = validations.newTableContentValidationElement(valName);
+			getOdfElement().setTableContentValidationNameAttribute(valName);
+		}
+		return validationElement;
+	}
+
+	private String getCellAddress() {
+		char[] digits = { '0', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
+				'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+		int i = getColumnIndex() + 1;
+		char[] buf = new char[32];
+		int charPos = 32;
+		do {
+			buf[--charPos] = digits[i % 26];
+			i /= 26;
+		} while (i != 0);
+		String cs = new String(buf, charPos, (32 - charPos));
+		return cs + (getRowIndex() + 1);
+	}
 	
 	private ListContainerImpl getListContainerImpl() {
 		if (listContainerImpl == null) {
@@ -2366,10 +2477,6 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 		if (paragraphContainerImpl == null)
 			paragraphContainerImpl = new ParagraphContainerImpl();
 		return paragraphContainerImpl;
-	}
-	
-	public OdfElement getFrameContainerElement() {
-		return mCellElement;
 	}
 	
 	//column can fit the width to the text, if column.isOptimalWidth() is true.

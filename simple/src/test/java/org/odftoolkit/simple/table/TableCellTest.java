@@ -23,6 +23,8 @@ package org.odftoolkit.simple.table;
 
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -1327,7 +1329,25 @@ public class TableCellTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-
+	
+	@Test
+	public void testSetValidityListAndInputHelpMessage() {
+		try {
+			int rowindex = 2, columnindex = 2;
+			Table table = odsdoc.getTableByName("Sheet2");
+			Cell fcell = table.getCellByPosition(columnindex, rowindex);
+			List<String> values = new ArrayList<String>(Arrays.asList("Mon", "Tue", "Wed", "Thu", "Fri"));
+			fcell.setValidityList(values);
+			fcell.setInputHelpMessage("Tip", "This cell only allows working days.");
+			fcell.setStringValue("Tue");
+			Assert.assertNotNull(fcell.getOdfElement().getTableContentValidationNameAttribute());
+			saveods();
+		} catch (Exception e) {
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
 	private void compareResults(Element element, String input, String[] output) {
 		int i;
 		int nSpaces;
