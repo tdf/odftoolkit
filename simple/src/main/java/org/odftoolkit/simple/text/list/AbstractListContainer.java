@@ -25,6 +25,8 @@ import java.util.Iterator;
 
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Document;
 import org.w3c.dom.Node;
 
 /**
@@ -71,6 +73,8 @@ public abstract class AbstractListContainer implements ListContainer {
 	public boolean removeList(List list) {
 		OdfElement containerElement = getListContainerElement();
 		Node child = containerElement.getFirstChild();
+		OdfFileDom ownerDocument = (OdfFileDom) containerElement.getOwnerDocument();
+		Document doc = (Document) ownerDocument.getDocument();
 		while (child != null) {
 			if (child instanceof TextListElement) {
 				TextListElement listElement1 = (TextListElement) child;
@@ -78,6 +82,7 @@ public abstract class AbstractListContainer implements ListContainer {
 				TextListElement listElement2 = list.getOdfElement();
 				String id2 = listElement2.getXmlIdAttribute();
 				if ((listElement1 == listElement2) || ((id1 != null) && (id2 != null) && (id1.equals(id2)))) {
+					doc.removeElementLinkedResource(listElement1);
 					containerElement.removeChild(child);
 					return true;
 				}

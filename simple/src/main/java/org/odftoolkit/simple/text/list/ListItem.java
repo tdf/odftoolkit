@@ -29,6 +29,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextNumberElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.text.list.ListDecorator.ListType;
 import org.w3c.dom.Node;
 
@@ -165,6 +166,9 @@ public class ListItem implements ListContainer {
 	 */
 	public void remove() {
 		Node parentElement = listItemElement.getParentNode();
+		OdfFileDom ownerDocument = (OdfFileDom) listItemElement.getOwnerDocument();
+		Document doc = (Document) ownerDocument.getDocument();
+		doc.removeElementLinkedResource(listItemElement);
 		parentElement.removeChild(listItemElement);
 	}
 
@@ -195,7 +199,7 @@ public class ListItem implements ListContainer {
 	 * 
 	 * @param number
 	 *            the start number to be set.
-	 * @throw IllegalArgumentException if <code>number < 0</code>.
+	 * @throws IllegalArgumentException if <code>number < 0</code>.
 	 */
 	public void setStartNumber(Integer number) {
 		if (number < 0) {

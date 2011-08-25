@@ -160,8 +160,6 @@ public class Table {
 		 * If the document is a text document, cell borders will be created by
 		 * default.
 		 * 
-		 * @param document
-		 *            the ODF document that contains this feature
 		 * @return the created <code>Table</code> feature instance
 		 */
 		public Table newTable() {
@@ -179,8 +177,6 @@ public class Table {
 		 * If the document is a text document, cell borders will be created by
 		 * default.
 		 * 
-		 * @param document
-		 *            the ODF document that contains this feature
 		 * @param numRows
 		 *            the row number
 		 * @param numCols
@@ -221,8 +217,6 @@ public class Table {
 		 * If the document is a text document, cell borders will be created by
 		 * default.
 		 * 
-		 * @param document
-		 *            the ODF document that contains this feature
 		 * @param numRows
 		 *            the row number
 		 * @param numCols
@@ -244,8 +238,6 @@ public class Table {
 		 * If the document is a text document, cell borders will be created by
 		 * default.
 		 * 
-		 * @param document
-		 *            the ODF document that contains this feature
 		 * @param rowLabel
 		 *            set as the header row, it can be null if no header row
 		 *            needed
@@ -335,8 +327,6 @@ public class Table {
 		 * If the document is a text document, cell borders will be created by
 		 * default.
 		 * 
-		 * @param document
-		 *            the ODF document that contains this feature
 		 * @param rowLabel
 		 *            set as the header row, it can be null if no header row
 		 *            needed
@@ -1451,21 +1441,21 @@ public class Table {
 	public TableTableElement getOdfElement() {
 		return mTableElement;
 	}
-	
+
 	/**
 	 * Return the Document instance which owns this table.
 	 * 
 	 * @return the instance of <code>Document</code>
 	 */
-	Document getOwnerDocument(){
+	Document getOwnerDocument() {
 		return mDocument;
 	}
-	
-	/** 
-	 * Insert a specific number of columns before the column whose index is 
+
+	/**
+	 * Insert a specific number of columns before the column whose index is
 	 * <code>index</code>.
 	 * 
-	 * @param index	
+	 * @param index
 	 *            is the index of the column to insert before.
 	 * @param columnCount
 	 *            is the number of columns to insert.

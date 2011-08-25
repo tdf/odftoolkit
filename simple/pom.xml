@@ -234,7 +234,7 @@
 		<repository>
 			<id>odfdom-snapshots</id>
 			<name>ODFDOM Snapshot</name>
-			<url>http://odftoolkit.org/svn/odfdom~maven2/snapshot/</url>
+			<url>http://odftoolkit.org/svn/simple~maven2/repository</url>
 			<releases>
 				<enabled>false</enabled>
 				<updatePolicy>always</updatePolicy>
@@ -249,7 +249,7 @@
 		<repository>
 			<id>odfdom-releases</id>
 			<name>ODFDOM Release</name>
-			<url>http://odftoolkit.org/svn/odfdom~maven2/release/</url>
+			<url>http://odftoolkit.org/svn/odfdom~maven2/release</url>
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>

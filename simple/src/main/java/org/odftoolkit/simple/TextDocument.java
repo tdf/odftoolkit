@@ -29,10 +29,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
+import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.simple.text.Section;
 import org.odftoolkit.simple.text.list.AbstractListContainer;
 import org.odftoolkit.simple.text.list.List;
 import org.odftoolkit.simple.text.list.ListContainer;
@@ -305,6 +307,47 @@ public class TextDocument extends Document implements ListContainer {
 	 */
 	public void changeMode(OdfMediaType mediaType) {
 		setOdfMediaType(mediaType.mMediaType);
+	}
+
+	/**
+	 * Copy a section and append it at the end of the text document, whether the
+	 * section is in this document or in a different document.
+	 * <p>
+	 * The IDs and names in this section would be changed to ensure unique.
+	 * <p>
+	 * If the section contains a linked resource, <code>isResourceCopied</code>
+	 * would specify whether the linked resource would be copied or not, when
+	 * the copy and append happens within a same document.
+	 * 
+	 * @param section
+	 *            - the section object
+	 * @param isResourceCopied
+	 *            - whether the linked resource is copied or not.
+	 */
+	public Section appendSection(Section section, boolean isResourceCopied) {
+		boolean isForeignNode = false;
+		try {
+			if (section.getOdfElement().getOwnerDocument() != getContentDom())
+				isForeignNode = true;
+			TextSectionElement oldSectionEle = section.getOdfElement();
+			TextSectionElement newSectionEle = (TextSectionElement) oldSectionEle.cloneNode(true);
+
+			if (isResourceCopied || isForeignNode)
+				copyLinkedRef(newSectionEle);
+			if (isForeignNode)
+				copyForeignStyleRef(newSectionEle, section.getOwnerDocument());
+			if (isForeignNode) // not in a same document
+				newSectionEle = (TextSectionElement) cloneForeignElement(newSectionEle, getContentDom(), true);
+
+			updateNames(newSectionEle);
+			updateXMLIds(newSectionEle);
+			OfficeTextElement contentRoot = getContentRoot();
+			contentRoot.appendChild(newSectionEle);
+			return Section.getInstance(newSectionEle);
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return null;
 	}
 
 	@Override

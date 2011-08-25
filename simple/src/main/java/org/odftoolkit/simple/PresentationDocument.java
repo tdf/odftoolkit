@@ -25,22 +25,13 @@ package org.odftoolkit.simple;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-
-import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationClassAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageThumbnailElement;
@@ -48,20 +39,13 @@ import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePresentationPageLayoutElement;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.pkg.MediaType;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
-import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
-import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.simple.presentation.Slide;
 import org.odftoolkit.simple.presentation.Notes.NotesBuilder;
 import org.odftoolkit.simple.presentation.Slide.SlideBuilder;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -258,24 +242,6 @@ public class PresentationDocument extends Document {
 	}
 
 	private boolean hasCheckSlideName = false;
-	// if the copy foreign slide for several times,
-	// the same style might be copied for several times with the different name
-	// so use styleRenameMap to keep track the renamed style so we can reuse the
-	// style,
-	// rather than new several styles which only have the different style names.
-	// while if the style elements really have the same style name but with
-	// different content
-	// such as that these style elements are from different document
-	// so the value for each key should be a list
-	private HashMap<String, List<String>> styleRenameMap = new HashMap<String, List<String>>();
-	// the map is used to record if the renamed style name is appended to the
-	// current dom
-	private HashMap<String, Boolean> styleAppendMap = new HashMap<String, Boolean>();
-
-	// the object rename map for image.
-	// can not easily recognize if the embedded document are the same.
-	// private HashMap<String, String> objectRenameMap = new HashMap<String,
-	// String>();
 
 	/**
 	 * Return the slide builder of this document. Every presentation document
@@ -461,133 +427,15 @@ public class PresentationDocument extends Document {
 		// remove all the content of the current page
 		// 1. the reference of the path that contained in this slide is 1, then
 		// remove it
-		success &= deleteLinkRef(slideElement);
+		// success &= deleteLinkedRef(slideElement);
 		// 2.the reference of the style is 1, then remove it
 		// in order to save time, do not delete the style here
-		success &= deleteStyleRef(slideElement);
+		// success &= deleteStyleRef(slideElement);
+		// these two methods have been merged into 1 method
+		success &= removeElementLinkedResource(slideElement);
 		// remove the current page element
 		contentRoot.removeChild(slideElement);
 		adjustNotePageNumber(index);
-		return success;
-	}
-
-	private boolean deleteStyleRef(DrawPageElement slideEle) {
-		boolean success = true;
-		try {
-			// method 1:
-			// 1.1. iterate child element of the content element
-			// 1.2. if the child element is an OdfStylableElement, get the
-			// style-name ref count
-			// //////////////
-			// method 2:
-			// 2.1. get the list of the style definition
-			ArrayList<OdfElement> removeStyles = new ArrayList<OdfElement>();
-			OdfOfficeAutomaticStyles autoStyles = getContentDom().getAutomaticStyles();
-
-			NodeList stylesList = autoStyles.getChildNodes();
-			OdfFileDom contentDom = getContentDom();
-			XPath xpath = contentDom.getXPath();
-
-			// 2.2. get the reference of each style which occurred in the
-			// current page
-			for (int i = 0; i < stylesList.getLength(); i++) {
-				Node item = stylesList.item(i);
-				if (item instanceof OdfElement) {
-					OdfElement node = (OdfElement) item;
-					String styleName = node.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "name");
-					if (styleName != null) {
-						// search the styleName contained at the current page
-						// element
-						NodeList styleNodes = (NodeList) xpath.evaluate("//*[@*='" + styleName + "']", contentDom,
-								XPathConstants.NODESET);
-						int styleCnt = styleNodes.getLength();
-						if (styleCnt > 1) {
-							// the first styleName is occurred in the style
-							// definition
-							// so check if the second styleName and last
-							// styleName is occurred in the current page element
-							// if yes, then remove it
-							OdfElement elementFirst = (OdfElement) styleNodes.item(1);
-							OdfElement elementLast = (OdfElement) styleNodes.item(styleCnt - 1);
-							boolean isSamePage = false;
-							if (elementFirst instanceof DrawPageElement) {
-								DrawPageElement tempPage = (DrawPageElement) elementFirst;
-								if (tempPage.equals(slideEle)) {
-									isSamePage = true;
-								}
-							}
-							int relationFirst = slideEle.compareDocumentPosition(elementFirst);
-							int relationLast = slideEle.compareDocumentPosition(elementLast);
-							// if slide element contains the child element which
-							// has the styleName reference
-							if (((relationFirst & Node.DOCUMENT_POSITION_CONTAINED_BY) > 0 && (relationLast & Node.DOCUMENT_POSITION_CONTAINED_BY) > 0)
-									|| (isSamePage && (styleCnt == 1))) {
-								if (node instanceof OdfStyleBase) {
-									removeStyles.add(node);
-								}
-							}
-						} else {
-							continue;
-						}
-					}
-				}
-			}
-			for (int i = 0; i < removeStyles.size(); i++) {
-				autoStyles.removeChild(removeStyles.get(i));
-			}
-		} catch (Exception e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
-			success = false;
-		}
-		return success;
-	}
-
-	// delete all the xlink:href object which is contained in slideElement and
-	// does not referred by other slides
-	private boolean deleteLinkRef(DrawPageElement slideEle) {
-		boolean success = true;
-		try {
-			OdfFileDom contentDom = getContentDom();
-			XPath xpath = contentDom.getXPath();
-			NodeList linkNodes = (NodeList) xpath.evaluate("//*[@xlink:href]", contentDom, XPathConstants.NODESET);
-			for (int i = 0; i < linkNodes.getLength(); i++) {
-				OdfElement object = (OdfElement) linkNodes.item(i);
-				String refObjPath = object.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
-				int relation = slideEle.compareDocumentPosition(object);
-				// if slide element contains the returned element which has the
-				// xlink:href reference
-				if ((relation & Node.DOCUMENT_POSITION_CONTAINED_BY) > 0 && refObjPath != null
-						&& refObjPath.length() > 0) {
-					// the path of the object is start with "./"
-					NodeList pathNodes = (NodeList) xpath.evaluate("//*[@xlink:href='" + refObjPath + "']",
-							getContentDom(), XPathConstants.NODESET);
-					int refCount = pathNodes.getLength();
-					if (refCount == 1) {
-						// delete "./"
-						if (refObjPath.startsWith("./")) {
-							refObjPath = refObjPath.substring(2);
-						}
-						// check if the current document contains the same path
-						OdfFileEntry fileEntry = getPackage().getFileEntry(refObjPath);
-						if (fileEntry != null) {
-							// it is a stream, such as image, binary file
-							getPackage().remove(refObjPath);
-						} else {
-							// note: if refObjPath is a directory, it must end
-							// with '/'
-							fileEntry = getPackage().getFileEntry(refObjPath + "/");
-							removeEmbeddedDocument(refObjPath);
-						}
-					}
-				}
-			}
-		} catch (XPathExpressionException e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
-			success = false;
-		} catch (Exception e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
-			success = false;
-		}
 		return success;
 	}
 
@@ -614,7 +462,7 @@ public class PresentationDocument extends Document {
 		// remove all the content of the current page
 		// 1. the reference of the path that contained in this slide is 1, then
 		// remove its
-		success &= deleteLinkRef(slideElement);
+		success &= deleteLinkedRef(slideElement);
 		// 2.the reference of the style is 1, then remove it
 		// in order to save time, do not delete style here
 		success &= deleteStyleRef(slideElement);
@@ -711,6 +559,11 @@ public class PresentationDocument extends Document {
 		adjustNotePageNumber(Math.min(source, dest));
 	}
 
+	private Node cloneForeignElement_(Node element, OdfFileDom dom, boolean deep) {
+		checkAllSlideName();
+		return cloneForeignElement(element, dom, deep);
+	}
+
 	/**
 	 * Append all the slides of the specified presentation document to the
 	 * current document.
@@ -736,12 +589,12 @@ public class PresentationDocument extends Document {
 		// clone the srcContentRoot, and make a modification on this clone node.
 		OfficePresentationElement srcCloneContentRoot = (OfficePresentationElement) srcContentRoot.cloneNode(true);
 		// copy all the referred xlink:href here
-		copyForeignLinkRef(srcCloneContentRoot);
+		copyLinkedRef(srcCloneContentRoot);
 		// copy all the referred style definition here
 		copyForeignStyleRef(srcCloneContentRoot, srcDoc);
 		Node child = srcCloneContentRoot.getFirstChild();
 		while (child != null) {
-			Node cloneElement = cloneForeignElement(child, contentDom, true);
+			Node cloneElement = cloneForeignElement_(child, contentDom, true);
 			contentRoot.appendChild(cloneElement);
 			child = child.getNextSibling();
 		}
@@ -795,12 +648,12 @@ public class PresentationDocument extends Document {
 		DrawPageElement sourceCloneSlideElement = (DrawPageElement) sourceSlideElement.cloneNode(true);
 
 		// copy all the referred xlink:href here
-		copyForeignLinkRef(sourceCloneSlideElement);
+		copyLinkedRef(sourceCloneSlideElement);
 		// copy all the referred style definition here
 		copyForeignStyleRef(sourceCloneSlideElement, srcDoc);
 		// clone the sourceCloneSlideEle, and this cloned element should in the
 		// current dom tree
-		DrawPageElement cloneSlideElement = (DrawPageElement) cloneForeignElement(sourceCloneSlideElement, contentDom,
+		DrawPageElement cloneSlideElement = (DrawPageElement) cloneForeignElement_(sourceCloneSlideElement, contentDom,
 				true);
 		if (destIndex == slideCount) {
 			contentRoot.appendChild(cloneSlideElement);
@@ -814,532 +667,6 @@ public class PresentationDocument extends Document {
 		hasCheckSlideName = false;
 		checkAllSlideName();
 		return Slide.getInstance(cloneSlideElement);
-	}
-
-	// clone the source clone element's referred object path to the current
-	// package
-	// if the current package contains the same name with the referred object
-	// path,
-	// rename the object path and path reference of this slide element
-	// notes: the source clone element is the copied one to avoid changing the
-	// content of the source document.
-	private void copyForeignLinkRef(OdfElement sourceCloneEle) {
-		try {
-			OdfFileDom fileDom = (OdfFileDom) sourceCloneEle.getOwnerDocument();
-			XPath xpath;
-			if (fileDom instanceof OdfContentDom) {
-				xpath = ((OdfContentDom) fileDom).getXPath();
-			} else {
-				xpath = ((OdfStylesDom) fileDom).getXPath();
-			}
-			OdfPackageDocument srcDoc = fileDom.getDocument();
-			// new a map to put the original name and the rename string, in case
-			// that the same name might be referred by the slide several times.
-			HashMap<String, String> objectRenameMap = new HashMap<String, String>();
-			NodeList linkNodes = (NodeList) xpath.evaluate(".//*[@xlink:href]", sourceCloneEle, XPathConstants.NODESET);
-			for (int i = 0; i <= linkNodes.getLength(); i++) {
-				OdfElement object = null;
-				if (linkNodes.getLength() == i) {
-					if (sourceCloneEle.hasAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href")) {
-						object = sourceCloneEle;
-					} else {
-						break;
-					}
-				} else {
-					object = (OdfElement) linkNodes.item(i);
-				}
-				String refObjPath = object.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
-				if (refObjPath != null && refObjPath.length() > 0) {
-					// the path of the object is start with "./"
-					boolean hasPrefix = false;
-					String prefix = "./";
-					if (refObjPath.startsWith(prefix)) {
-						refObjPath = refObjPath.substring(2);
-						hasPrefix = true;
-					}
-					// check if the current document contains the same path
-					OdfFileEntry fileEntry = getPackage().getFileEntry(refObjPath);
-					// note: if refObjPath is a directory, it must end with '/'
-					if (fileEntry == null) {
-						fileEntry = getPackage().getFileEntry(refObjPath + "/");
-					}
-					String newObjPath = refObjPath;
-					if (fileEntry != null) {
-						// rename the object path
-						newObjPath = objectRenameMap.get(refObjPath);
-						if (newObjPath == null) {
-							// if refObjPath still contains ".", it means that
-							// it has the suffix
-							// then change the name before the suffix string
-							int dotIndex = refObjPath.indexOf(".");
-							if (dotIndex != -1) {
-								newObjPath = refObjPath.substring(0, dotIndex) + "-" + makeUniqueName()
-										+ refObjPath.substring(dotIndex);
-							} else {
-								newObjPath = refObjPath + "-" + makeUniqueName();
-							}
-							objectRenameMap.put(refObjPath, newObjPath);
-						}
-						object.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href",
-								hasPrefix ? (prefix + newObjPath) : newObjPath);
-					}
-					InputStream is = srcDoc.getPackage().getInputStream(refObjPath);
-					if (is != null) {
-						String mediaType = srcDoc.getPackage().getFileEntry(refObjPath).getMediaTypeString();
-						getPackage().insert(is, newObjPath, mediaType);
-					} else {
-						Document embedDoc = ((Document) srcDoc).getEmbeddedDocument(refObjPath);
-						if (embedDoc != null) {
-							insertDocument(embedDoc, newObjPath);
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
-		}
-	}
-
-	private void copyForeignStyleRef(OdfElement sourceCloneEle, PresentationDocument doc) {
-		try {
-			OdfFileDom contentDom = getContentDom();
-			XPath xpath = contentDom.getXPath();
-			// 1. collect all the referred style element which has "style:name"
-			// attribute
-			// 1.1. style:name of content.xml
-			String styleQName = "style:name";
-			NodeList srcStyleDefNodeList = (NodeList) xpath.evaluate("//*[@" + styleQName + "]", contentDom,
-					XPathConstants.NODESET);
-			HashMap<OdfElement, List<OdfElement>> srcContentStyleCloneEleList = new HashMap<OdfElement, List<OdfElement>>();
-			HashMap<OdfElement, OdfElement> appendContentStyleList = new HashMap<OdfElement, OdfElement>();
-			getCopyStyleList(null, sourceCloneEle, styleQName, srcStyleDefNodeList, srcContentStyleCloneEleList,
-					appendContentStyleList, true);
-			// 1.2. style:name of styles.xml
-			srcStyleDefNodeList = (NodeList) xpath.evaluate("//*[@" + styleQName + "]", doc.getStylesDom(),
-					XPathConstants.NODESET);
-			HashMap<OdfElement, List<OdfElement>> srcStylesStyleCloneEleList = new HashMap<OdfElement, List<OdfElement>>();
-			HashMap<OdfElement, OdfElement> appendStylesStyleList = new HashMap<OdfElement, OdfElement>();
-			getCopyStyleList(null, sourceCloneEle, styleQName, srcStyleDefNodeList, srcStylesStyleCloneEleList,
-					appendStylesStyleList, true);
-			// 1.3 rename, copy the referred style element to the corresponding
-			// position in the dom tree
-			insertCollectedStyle(styleQName, srcContentStyleCloneEleList, getContentDom(), appendContentStyleList);
-			insertCollectedStyle(styleQName, srcStylesStyleCloneEleList, getStylesDom(), appendStylesStyleList);
-
-			// 2. collect all the referred style element which has "draw:name"
-			// attribute
-			// 2.1 draw:name of styles.xml
-			// the value of draw:name is string or StyleName,
-			// only when the value is StyleName type, the style definition
-			// should be cloned to the destination document
-			// in ODF spec, such attribute type is only exist in <office:styles>
-			// element, so only search it in styles.xml dom
-			styleQName = "draw:name";
-			srcStyleDefNodeList = (NodeList) xpath.evaluate("//*[@" + styleQName + "]", doc.getStylesDom(),
-					XPathConstants.NODESET);
-			HashMap<OdfElement, List<OdfElement>> srcDrawStyleCloneEleList = new HashMap<OdfElement, List<OdfElement>>();
-			HashMap<OdfElement, OdfElement> appendDrawStyleList = new HashMap<OdfElement, OdfElement>();
-			Iterator<OdfElement> iter = appendContentStyleList.keySet().iterator();
-			while (iter.hasNext()) {
-				OdfElement styleElement = iter.next();
-				OdfElement cloneStyleElement = appendContentStyleList.get(styleElement);
-				getCopyStyleList(styleElement, cloneStyleElement, styleQName, srcStyleDefNodeList,
-						srcDrawStyleCloneEleList, appendDrawStyleList, false);
-			}
-			iter = appendStylesStyleList.keySet().iterator();
-			while (iter.hasNext()) {
-				OdfElement styleElement = iter.next();
-				OdfElement cloneStyleElement = appendStylesStyleList.get(styleElement);
-				getCopyStyleList(styleElement, cloneStyleElement, styleQName, srcStyleDefNodeList,
-						srcDrawStyleCloneEleList, appendDrawStyleList, false);
-			}
-			// 2.2 rename, copy the referred style element to the corresponding
-			// position in the dom tree
-			// note: "draw:name" style element only exist in styles.dom
-			insertCollectedStyle(styleQName, srcDrawStyleCloneEleList, getStylesDom(), appendDrawStyleList);
-
-		} catch (Exception e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
-		}
-
-	}
-
-	// 1. modified the style name of the style definition element which has the
-	// same name with the source document
-	// 2. As to the style definition which match 1) condition, modified the
-	// referred style name of the element which reference this style
-	// 3. All the style which also contains other style reference, should be
-	// copied to the source document.
-	private void insertCollectedStyle(String styleQName, HashMap<OdfElement, List<OdfElement>> srcStyleCloneEleList,
-			OdfFileDom dom, HashMap<OdfElement, OdfElement> appendStyleList) {
-		try {
-			String stylePrefix = OdfNamespace.getPrefixPart(styleQName);
-			String styleLocalName = OdfNamespace.getLocalPart(styleQName);
-			String styleURI = OdfDocumentNamespace.STYLE.getUri();
-			// is the DOM always the styles.xml
-			XPath xpath = dom.getXPath();
-			NodeList destStyleNodeList = (NodeList) xpath.evaluate("//*[@" + styleQName + "]", dom,
-					XPathConstants.NODESET);
-
-			// HashMap<String, String> styleRenameMap = new HashMap<String,
-			// String>();
-			Iterator<OdfElement> iter = srcStyleCloneEleList.keySet().iterator();
-			while (iter.hasNext()) {
-				OdfElement styleElement = iter.next();
-				OdfElement cloneStyleElement = appendStyleList.get(styleElement);
-				if (cloneStyleElement == null) {
-					cloneStyleElement = (OdfElement) styleElement.cloneNode(true);
-					appendStyleList.put(styleElement, cloneStyleElement);
-				}
-				String styleName = styleElement.getAttributeNS(styleURI, styleLocalName);
-				List<String> newStyleNameList = styleRenameMap.get(styleName);
-				// if the newStyleNameList != null, means that styleName exists
-				// in dest document
-				// and it has already been renamed
-				if ((newStyleNameList != null) || (isStyleNameExist(destStyleNodeList, styleName) != null)) {
-					String newStyleName = null;
-					if (newStyleNameList == null) {
-						newStyleNameList = new ArrayList<String>();
-						newStyleName = styleName + "-" + makeUniqueName();
-						newStyleNameList.add(newStyleName);
-						styleRenameMap.put(styleName, newStyleNameList);
-					} else {
-						for (int i = 0; i < newStyleNameList.size(); i++) {
-							String styleNameIter = newStyleNameList.get(i);
-							OdfElement destStyleElementWithNewName = isStyleNameExist(destStyleNodeList, styleNameIter);
-							// check if the two style elements have the same
-							// content
-							// if not, the cloneStyleElement should rename,
-							// rather than reuse the new style name
-							cloneStyleElement.setAttributeNS(styleURI, styleQName, styleNameIter);
-							if ((destStyleElementWithNewName != null)
-									&& destStyleElementWithNewName.equals(cloneStyleElement)) {
-								newStyleName = styleNameIter;
-								break;
-							}
-						}
-						if (newStyleName == null) {
-							newStyleName = styleName + "-" + makeUniqueName();
-							newStyleNameList.add(newStyleName);
-						}
-					}
-					// if newStyleName has been set in the element as the new
-					// name
-					// which means that the newStyleName is conform to the odf
-					// spec
-					// then change element style reference name
-					if (changeStyleRefName(srcStyleCloneEleList.get(styleElement), styleName, newStyleName)) {
-						cloneStyleElement.setAttributeNS(styleURI, styleQName, newStyleName);
-						// if display name should also be renamed
-						String displayName = cloneStyleElement.getAttributeNS(styleURI, "display-name");
-						if ((displayName != null) && (displayName.length() > 0)) {
-							cloneStyleElement.setAttributeNS(styleURI, stylePrefix + ":display-name", displayName
-									+ newStyleName.substring(newStyleName.length() - 8));
-						}
-					}
-
-				}
-			}
-
-			iter = appendStyleList.keySet().iterator();
-			while (iter.hasNext()) {
-				OdfElement styleElement = iter.next();
-				OdfElement cloneStyleElement = appendStyleList.get(styleElement);
-				String newStyleName = cloneStyleElement.getAttributeNS(styleURI, styleLocalName);
-				Boolean isAppended = styleAppendMap.get(newStyleName);
-				// if styleAppendMap contain the newStyleName,
-				// means that cloneStyleElement has already been appended
-				if ((isAppended != null) && isAppended.booleanValue() == true) {
-					continue;
-				} else {
-					styleAppendMap.put(newStyleName, true);
-				}
-				OdfElement cloneForeignStyleElement = (OdfElement) cloneForeignElement(cloneStyleElement, dom, true);
-				String styleElePath = getElementPath(styleElement);
-				appendForeignStyleElement(cloneForeignStyleElement, dom, styleElePath);
-				copyForeignLinkRef(cloneStyleElement);
-			}
-		} catch (Exception e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
-		}
-
-	}
-
-	// get all the copy of referred style element which is directly referred or
-	// indirectly referred by cloneEle
-	// all the style are defined in srcStyleNodeList
-	// and these style are all have the styleName defined in styleQName
-	// attribute
-	// the key of copyStyleEleList is the style definition element
-	// the value of the corresponding key is the clone of the element which
-	// refer to the key,
-	// the cloned element can be the content of slide or the style element.
-	// the key of appendStyleList is the style definition element which has the
-	// other style reference
-	// the value of the corresponding key is the the style definition clone
-	// element
-	// loop means if recursive call this function
-	// if loop == true, get the style definition element reference other style
-	// definition element
-	private void getCopyStyleList(OdfElement ele, OdfElement cloneEle, String styleQName, NodeList srcStyleNodeList,
-			HashMap<OdfElement, List<OdfElement>> copyStyleEleList, HashMap<OdfElement, OdfElement> appendStyleList,
-			boolean loop) {
-		try {
-			String styleLocalName = OdfNamespace.getLocalPart(styleQName);
-			String styleURI = OdfDocumentNamespace.STYLE.getUri();
-			// OdfElement override the "toString" method
-			String cloneEleStr = cloneEle.toString();
-			for (int i = 0; i < srcStyleNodeList.getLength(); i++) {
-				OdfElement styleElement = (OdfElement) srcStyleNodeList.item(i);
-				String styleName = styleElement.getAttributeNS(styleURI, styleLocalName);
-				if (styleName != null) {
-					int index = 0;
-					index = cloneEleStr.indexOf("=\"" + styleName + "\"", index);
-					while (index >= 0) {
-						String subStr = cloneEleStr.substring(0, index);
-						int lastSpaceIndex = subStr.lastIndexOf(' ');
-						String attrStr = subStr.substring(lastSpaceIndex + 1, index);
-						XPath xpath = ((OdfFileDom) cloneEle.getOwnerDocument()).getXPath();
-						NodeList styleRefNodes = (NodeList) xpath.evaluate(
-								".//*[@" + attrStr + "='" + styleName + "']", cloneEle, XPathConstants.NODESET);
-						boolean isExist = false;
-						for (int j = 0; j <= styleRefNodes.getLength(); j++) {
-							OdfElement styleRefElement = null;
-							if (j == styleRefNodes.getLength()) {
-								isExist = isStyleNameRefExist(cloneEle, styleName, false);
-								if (isExist) {
-									styleRefElement = cloneEle;
-								} else {
-									continue;
-								}
-							} else {
-								OdfElement tmpElement = (OdfElement) styleRefNodes.item(j);
-								if (isStyleNameRefExist(tmpElement, styleName, false)) {
-									styleRefElement = tmpElement;
-								} else {
-									continue;
-								}
-							}
-							boolean hasLoopStyleDef = true;
-							if (copyStyleEleList.get(styleElement) == null) {
-								List<OdfElement> styleRefEleList = new ArrayList<OdfElement>();
-								copyStyleEleList.put(styleElement, styleRefEleList);
-								hasLoopStyleDef = false;
-							}
-							copyStyleEleList.get(styleElement).add(styleRefElement);
-
-							OdfElement cloneStyleElement = appendStyleList.get(styleElement);
-							if (cloneStyleElement == null) {
-								cloneStyleElement = (OdfElement) styleElement.cloneNode(true);
-								appendStyleList.put(styleElement, cloneStyleElement);
-							}
-							if (loop && !hasLoopStyleDef) {
-								getCopyStyleList(styleElement, cloneStyleElement, styleQName, srcStyleNodeList,
-										copyStyleEleList, appendStyleList, loop);
-							}
-						}
-						index = cloneEleStr.indexOf("=\"" + styleName + "\"", index + styleName.length());
-					}
-				}
-			}
-		} catch (Exception e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
-		}
-	}
-
-	// append the cloneStyleElement to the contentDom which position is defined
-	// by styleElePath
-
-	private void appendForeignStyleElement(OdfElement cloneStyleEle, OdfFileDom dom, String styleElePath) {
-		StringTokenizer token = new StringTokenizer(styleElePath, "/");
-		boolean isExist = true;
-		Node iterNode = dom.getFirstChild();
-		Node parentNode = dom;
-		while (token.hasMoreTokens()) {
-			String onePath = token.nextToken();
-
-			while ((iterNode != null) && isExist) {
-				String path = iterNode.getNamespaceURI();
-				String prefix = iterNode.getPrefix();
-				if (prefix == null) {
-					path += "@" + iterNode.getLocalName();
-				} else {
-					path += "@" + prefix + ":" + iterNode.getLocalName();
-				}
-				if (!path.equals(onePath)) {
-					// not found, then get the next sibling to find such path
-					// node
-					iterNode = iterNode.getNextSibling();
-				} else {
-					// found, then get the child nodes to find the next path
-					// node
-					parentNode = iterNode;
-					iterNode = iterNode.getFirstChild();
-					break;
-				}
-			}
-
-			if (iterNode == null) {
-				// should new the element since the current path node
-				if (isExist) {
-					isExist = false;
-				}
-				StringTokenizer token2 = new StringTokenizer(onePath, "@");
-				OdfElement newElement = dom.createElementNS(OdfName.newName(token2.nextToken(), token2.nextToken()));
-				parentNode.appendChild(newElement);
-				parentNode = newElement;
-			}
-		}
-		parentNode.appendChild(cloneStyleEle);
-	}
-
-	// The returned string is a path from the top of the dom tree to the
-	// specified element
-	// and the path is split by "/" between each node
-	private String getElementPath(OdfElement styleEle) {
-		String path = "";
-		Node parentNode = styleEle.getParentNode();
-		while (!(parentNode instanceof OdfFileDom)) {
-			String qname = null;
-			String prefix = parentNode.getPrefix();
-			if (prefix == null) {
-				qname = parentNode.getLocalName();
-			} else {
-				qname = prefix + ":" + parentNode.getLocalName();
-			}
-			path = parentNode.getNamespaceURI() + "@" + qname + "/" + path;
-			parentNode = parentNode.getParentNode();
-		}
-		return path;
-	}
-
-	// change the element referred oldStyleName to the new name
-	// if true then set newStyleName attribute value successfully
-	// if false means that the newStyleName value is not conform to the ODF
-	// spec, so do not modify the oldStyleName
-	private boolean changeStyleRefName(List<OdfElement> list, String oldStyleName, String newStyleName) {
-		boolean rtn = false;
-		for (int index = 0; index < list.size(); index++) {
-			OdfElement element = list.get(index);
-			NamedNodeMap attributes = element.getAttributes();
-
-			if (attributes != null) {
-				for (int i = 0; i < attributes.getLength(); i++) {
-					Node item = attributes.item(i);
-					String value = item.getNodeValue();
-					if (oldStyleName.equals(value)) {
-						try {
-							item.setNodeValue(newStyleName);
-							rtn = true;
-							break;
-						} catch (IllegalArgumentException e) {
-							return false;
-						}
-					}
-				}
-			}
-		}
-		return rtn;
-	}
-
-	// check if the element contains the referred styleName
-	private boolean isStyleNameRefExist(Node element, String styleName, boolean deep) {
-		NamedNodeMap attributes = element.getAttributes();
-		if (attributes != null) {
-			for (int i = 0; i < attributes.getLength(); i++) {
-				Node item = attributes.item(i);
-				if (item.getNodeValue().equals(styleName) && !item.getNodeName().equals("style:name")) // this
-				// is
-				// style
-				// definition,
-				// not
-				// reference
-				{
-					return true;
-				}
-			}
-		}
-		if (deep) {
-			Node childNode = element.getFirstChild();
-			while (childNode != null) {
-				if (!isStyleNameRefExist(childNode, styleName, true)) {
-					childNode = childNode.getNextSibling();
-				} else {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	// check if nodeList contains the node that "style:name" attribute has the
-	// same value with styleName
-	// Note: nodeList here is all the style definition list
-	private OdfElement isStyleNameExist(NodeList nodeList, String styleName) {
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			OdfElement element = (OdfElement) nodeList.item(i);
-			String name = element.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "name");
-			if (name.equals(styleName)) // return true;
-			{
-				return element;
-			}
-		}
-		// return false;
-		return null;
-	}
-
-	private String makeUniqueName() {
-		return String.format("a%06x", (int) (Math.random() * 0xffffff));
-	}
-
-	/**
-	 * Make a content copy of the specified element, and the returned element
-	 * should have the specified ownerDocument.
-	 * 
-	 * @param element
-	 *            The element that need to be copied
-	 * @param dom
-	 *            The specified DOM tree that the returned element belong to
-	 * @param deep
-	 *            If true, recursively clone the subtree under the element,
-	 *            false, only clone the element itself
-	 * @return Returns a duplicated element which is not in the DOM tree with
-	 *         the specified element
-	 */
-	public Node cloneForeignElement(Node element, OdfFileDom dom, boolean deep) {
-		checkAllSlideName();
-		if (element instanceof OdfElement) {
-			OdfElement cloneElement = dom.createElementNS(((OdfElement) element).getOdfName());
-
-			NamedNodeMap attributes = element.getAttributes();
-			if (attributes != null) {
-				for (int i = 0; i < attributes.getLength(); i++) {
-					Node item = attributes.item(i);
-					String qname = null;
-					String prefix = item.getPrefix();
-					if (prefix == null) {
-						qname = item.getLocalName();
-					} else {
-						qname = prefix + ":" + item.getLocalName();
-					}
-
-					cloneElement.setAttributeNS(item.getNamespaceURI(), qname, item.getNodeValue());
-				}
-			}
-
-			if (deep) {
-				Node childNode = element.getFirstChild();
-				while (childNode != null) {
-					cloneElement.appendChild(cloneForeignElement(childNode, dom, true));
-					childNode = childNode.getNextSibling();
-				}
-			}
-
-			return cloneElement;
-		} else {
-			return dom.createTextNode(element.getNodeValue());
-		}
-
 	}
 
 	/**

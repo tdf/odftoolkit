@@ -113,9 +113,6 @@ public class CellSelection extends TextSelection {
 	 * 
 	 * @param newText
 	 *            the replace text String
-	 * @param adapter
-	 *            the <code>CellValueAdapter</code> used to adapt cell value and
-	 *            value type
 	 * @throws InvalidNavigationException
 	 *            if the selection is unavailable.
 	 * 

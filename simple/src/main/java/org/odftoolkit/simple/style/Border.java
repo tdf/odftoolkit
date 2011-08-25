@@ -365,7 +365,7 @@ public class Border {
 	 * Set the outer line width of border with double lines If the line style is
 	 * not double, nothing will happen.
 	 * 
-	 * @param innerWidth
+	 * @param lineWidth
 	 *            - the outer line width
 	 */
 	public void setOuterLineWidth(double lineWidth) {
@@ -481,8 +481,8 @@ public class Border {
 	/**
 	 * Set linear measurement
 	 * 
-	 * @param the
-	 *            linear measurement
+	 * @param linearMeasure
+	 *            the linear measurement
 	 */
 	public void setLinearMeasure(StyleTypeDefinitions.SupportedLinearMeasure linearMeasure) {
 		this.linearMeasure = linearMeasure;

@@ -107,7 +107,6 @@ public class TableTest {
 			table.getCellByPosition(19, 19);
 			double width2 = table.getColumnByIndex(0).getWidth();
 			Assert.assertEquals(width1, width2);
-			odsDoc.save("C:\\o.ods");
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());

@@ -533,6 +533,9 @@ public class List {
 		if (itemElement == null) {
 			return false;
 		} else {
+			OdfFileDom ownerDocument = (OdfFileDom) listElement.getOwnerDocument();
+			Document doc = (Document) ownerDocument.getDocument();
+			doc.removeElementLinkedResource(itemElement);
 			listElement.removeChild(itemElement);
 			return true;
 		}
@@ -547,6 +550,9 @@ public class List {
 	 */
 	public boolean removeItem(ListItem item) {
 		TextListItemElement itemElement = item.getOdfElement();
+		OdfFileDom ownerDocument = (OdfFileDom) listElement.getOwnerDocument();
+		Document doc = (Document) ownerDocument.getDocument();
+		doc.removeElementLinkedResource(itemElement);
 		Node removedNode = listElement.removeChild(itemElement);
 		if (removedNode == null) {
 			return false;
@@ -566,6 +572,9 @@ public class List {
 		boolean listChanged = false;
 		for (ListItem item : items) {
 			TextListItemElement itemElement = item.getOdfElement();
+			OdfFileDom ownerDocument = (OdfFileDom) listElement.getOwnerDocument();
+			Document doc = (Document) ownerDocument.getDocument();
+			doc.removeElementLinkedResource(itemElement);
 			Node removedNode = listElement.removeChild(itemElement);
 			if (removedNode != null) {
 				listChanged = true;
@@ -595,6 +604,9 @@ public class List {
 	 */
 	public void remove() {
 		Node parentElement = listElement.getParentNode();
+		OdfFileDom ownerDocument = (OdfFileDom) listElement.getOwnerDocument();
+		Document doc = (Document) ownerDocument.getDocument();
+		doc.removeElementLinkedResource(listElement);
 		parentElement.removeChild(listElement);
 	}
 

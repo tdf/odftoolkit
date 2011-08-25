@@ -266,7 +266,6 @@ public class DocumentCreationTest {
 
 		try {
 			Document rootDocument = Document.loadDocument(TEST_FILE_EMBEDDED);
-			rootDocument.save("C:\\zhutou_svante.odt");
 			// Test DOM Access
 			Assert.assertNotNull(rootDocument.getDocumentStyles());
 			Assert.assertNotNull(rootDocument.getContentDom().getAutomaticStyles());
@@ -279,8 +278,6 @@ public class DocumentCreationTest {
 			Document embDoc = embDocs.get(0);
 			String pathOfSecondInnerDoc = "Object in Object1/";
 			embDoc.insertDocument(TextDocument.newTextDocument(), embDoc.getDocumentPath() + pathOfSecondInnerDoc);
-			rootDocument.save(ResourceUtilities.newTestOutputFile("5svante.odt"));
-			rootDocument.save("C:\\zhutou_svante2.odt");
 			OdfFileEntry fileEntry = embDoc.getPackage().getFileEntry(embDoc.getDocumentPath() + pathOfSecondInnerDoc);
 			Assert.assertNotNull(fileEntry);
 
@@ -289,8 +286,6 @@ public class DocumentCreationTest {
 			XPath xpath = contentDom.getXPath();
 			TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", contentDom, XPathConstants.NODE);
 			addFrameForEmbeddedDoc(contentDom, lastPara, "Object in Object1");
-			rootDocument.save(ResourceUtilities.newTestOutputFile("5svante-b.odt"));
-			rootDocument.save("C:\\5svante-b.odt");
 			List<Document> emb_embDocs = embDoc.getEmbeddedDocuments();
 			Assert.assertEquals(embDocsNumber + 1, emb_embDocs.size());
 			
@@ -354,7 +349,6 @@ public class DocumentCreationTest {
 			para.appendChild(spanElem);
 			//save the embed document to a stand alone document
 			doc1.save(TEST_FILE_SAVE_EMBEDDED_OUT);
-			doc1.save("C:\\doc1.odt");
 			// Load test
 			Document loadedDoc = Document.loadDocument(TEST_FILE_SAVE_EMBEDDED_OUT);
 			OdfContentDom contentDom2 = loadedDoc.getContentDom();
@@ -364,17 +358,14 @@ public class DocumentCreationTest {
 			List<Document> embDocs3 = docWithEmbeddedObjects.getEmbeddedDocuments(Document.OdfMediaType.TEXT);
 			// Writer Doc
 			Document doc3 = embDocs3.get(0);
-			doc3.save("C:\\doc1.odt");
 			Assert.assertNotNull(doc3);
 			OdfContentDom contentDom3 = doc3.getContentDom();
 			TextPElement para2 = (TextPElement) xpath.evaluate("//text:p[1]", contentDom3, XPathConstants.NODE);
 			addImageToDocument(contentDom3, para2);
-			doc3.save("C:\\doc2.odt");
 			TextPElement para3 = (TextPElement) xpath.evaluate("//text:p[last()]", contentDom3, XPathConstants.NODE);
 			addFrameForEmbeddedDoc(contentDom3, para3, "NewEmbedded");
-			doc3.save("C:\\doc3.odt");
 			doc3.insertDocument(TextDocument.newTextDocument(), doc3.getDocumentPath() + "/NewEmbedded/");
-			doc3.save("C:\\doc4.odt");
+			doc3.save(TEST_FILE_SAVE_EMBEDDED_OUT2);
 			Document doc4 = doc3.getEmbeddedDocument("NewEmbedded");
 			Assert.assertNotNull(doc4);
 			OdfContentDom contentDom4 = doc4.getContentDom();
@@ -382,7 +373,6 @@ public class DocumentCreationTest {
 			spanElem = new OdfTextSpan(contentDom4);
 			spanElem.setTextContent(TEST_SPAN_TEXT);
 			para.appendChild(spanElem);
-			doc3.save("C:\\doc5.odt");
 			doc3.save(TEST_FILE_SAVE_EMBEDDED_OUT2);
 
 			Document testLoad = Document.loadDocument(TEST_FILE_SAVE_EMBEDDED_OUT2);
@@ -419,16 +409,13 @@ public class DocumentCreationTest {
 			String pathToDocA = "docB/docA/";
 			String pathToDocB = "docB/";
 			containerDoc.insertDocument(TextDocument.newTextDocument(), pathToDocA);
-			containerDoc.save("C:\\queer_1.odt");
 			Document docA = containerDoc.getEmbeddedDocument(pathToDocA);
 			Assert.assertNotNull(docA);
 			docA.insertDocument(TextDocument.newTextDocument(), pathToDocB);
-			containerDoc.save("C:\\queer_2.odt");
 			Document docB = containerDoc.getEmbeddedDocument(pathToDocB);
 			Assert.assertNotNull(docB);
 
 			docB.save(TEST_FILE_SAVE_QUEER_PATH);
-			docB.save("C:\\queer_n.odt");
 
 		} catch (Exception ex) {
 			Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
