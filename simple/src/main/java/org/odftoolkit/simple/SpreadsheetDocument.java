@@ -24,11 +24,19 @@ package org.odftoolkit.simple;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.simple.table.Table;
+import org.odftoolkit.simple.table.TableContainer;
+import org.w3c.dom.Node;
 
 /**
  * This class represents an empty ODF spreadsheet document.
@@ -210,7 +218,270 @@ public class SpreadsheetDocument extends Document {
 		setOdfMediaType(mediaType.mMediaType);
 	}
 
+	/**
+	 * Retrieves sheet by index.
+	 * 
+	 * @param index
+	 *            the index of the retrieved sheet, which starts from 0. If the
+	 *            index value is out of range (index >= sheet count or index <
+	 *            0), this method would return <code>null</code>.
+	 * @since 0.6
+	 */
+	public Table getSheetByIndex(int index) {
+		if (index < 0) {
+			return null;
+		}
+		int count = 0;
+		try {
+			OfficeSpreadsheetElement spreadsheetElement = getContentRoot();
+			Node child = spreadsheetElement.getFirstChild();
+			while ((child != null) && (count <= index)) {
+				if (child instanceof TableTableElement) {
+					if (count == index) {
+						return getTableBuilder().getTableInstance((TableTableElement) child);
+					} else {
+						count++;
+					}
+				}
+				child = child.getNextSibling();
+			}
+		} catch (Exception e) {
+			Logger.getLogger(SpreadsheetDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return null;
+	}
+	
+	/**
+	 * Retrieves sheet by name.
+	 * 
+	 * @param name
+	 *            the name of the retrieved sheet.
+	 * @since 0.6
+	 */
+	public Table getSheetByName(String name) {
+		return getTableByName(name);
+	}
+
+	
+	/**
+	 * Adds a new blank sheet with the specified <code>name</code> to this
+	 * document.
+	 * 
+	 * @param name
+	 *            the name of the new sheet.
+	 * @return added sheet.
+	 * @since 0.6
+	 */
+	public Table appendSheet(String name) {
+		Table newTable = addTable();
+		newTable.setTableName(name);
+		return newTable;
+	}
+
+	/**
+	 * Adds a new sheet with data from existing table.
+	 * 
+	 * @param refTable
+	 *            the reference table, which is the data source of the new sheet.
+	 * @param name
+	 *            the name of the new sheet.
+	 * @return added sheet.
+	 * @since 0.6
+	 */
+	public Table appendSheet(Table refTable, String name) {
+		TableTableElement refTableElement = refTable.getOdfElement();
+		try {
+			OdfContentDom contentDom = getContentDom();
+			TableTableElement newTableEle = (TableTableElement) (refTableElement.cloneNode(true));
+			// not in a same document
+			if (refTableElement.getOwnerDocument() != contentDom) {
+				Document ownerDocument = refTable.getOwnerDocument();
+				copyLinkedRefInBatch(newTableEle, ownerDocument);
+				copyForeignStyleRef(newTableEle, ownerDocument);
+				newTableEle = (TableTableElement) cloneForeignElement(newTableEle, contentDom, true);
+			}
+			updateNames(newTableEle);
+			updateXMLIds(newTableEle);
+			getTableContainerElement().appendChild(newTableEle);
+			Table tableInstance = getTableBuilder().getTableInstance(newTableEle);
+			tableInstance.setTableName(name);
+			return tableInstance;
+		} catch (Exception e) {
+			Logger.getLogger(SpreadsheetDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return null;
+	}
+	
+	/**
+	 * Inserts a new blank sheet before the reference index.
+	 * 
+	 * @param before
+	 *            the reference index, which starts from 0. If the index value
+	 *            is out of range (index >= sheet count or index < 0), this
+	 *            method would return <code>null</code>.
+	 * @return inserted sheet.
+	 * @since 0.6
+	 */
+	public Table insertSheet(int before) {
+		if (before < 0) {
+			return null;
+		}
+		int count = 0;
+		try {
+			OfficeSpreadsheetElement spreadsheetElement = getContentRoot();
+			Node child = spreadsheetElement.getFirstChild();
+			while ((child != null) && (count <= before)) {
+				if (child instanceof TableTableElement) {
+					if (count == before) {
+						Table table = getTableBuilder().newTable();
+						getContentRoot().insertBefore(table.getOdfElement(), child);
+						return table;
+					} else {
+						count++;
+					}
+				}
+				child = child.getNextSibling();
+			}
+		} catch (Exception e) {
+			Logger.getLogger(SpreadsheetDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return null;
+	}
+	
+	/**
+	 * Inserts a new sheet with data from existing table.
+	 * 
+	 * @param refTable
+	 *            the reference table, which is the data source of the new
+	 *            sheet.
+	 * @param before
+	 *            the reference index, which starts from 0 and new sheet would
+	 *            be inserted before it. If the index value is out of range
+	 *            (index >= sheet count or index < 0), this method would return
+	 *            <code>null</code>.
+	 * @return inserted sheet.
+	 * @since 0.6
+	 */
+	public Table insertSheet(Table refTable, int before) {
+		if (before < 0) {
+			return null;
+		}
+		int count = 0;
+		try {
+			OfficeSpreadsheetElement spreadsheetElement = getContentRoot();
+			Node child = spreadsheetElement.getFirstChild();
+			while ((child != null) && (count <= before)) {
+				if (child instanceof TableTableElement) {
+					if (count == before) {
+						TableTableElement refTableElement = refTable.getOdfElement();
+						try {
+							OdfContentDom contentDom = getContentDom();
+							TableTableElement newTableEle = (TableTableElement) (refTableElement.cloneNode(true));
+							//foreign node not in a same document
+							if (refTableElement.getOwnerDocument() != contentDom) {
+								Document ownerDocument = refTable.getOwnerDocument();
+								copyLinkedRefInBatch(newTableEle, ownerDocument);
+								copyForeignStyleRef(newTableEle, ownerDocument);
+								newTableEle = (TableTableElement) cloneForeignElement(newTableEle, contentDom, true);
+							}
+							updateNames(newTableEle);
+							updateXMLIds(newTableEle);
+							newTableEle.setTableNameAttribute(getUniqueSheetName(this));
+							getContentRoot().insertBefore(newTableEle, child);
+							return getTableBuilder().getTableInstance(newTableEle);
+						} catch (Exception e) {
+							Logger.getLogger(SpreadsheetDocument.class.getName()).log(Level.SEVERE, null, e);
+						}
+					} else {
+						count++;
+					}
+				}
+				child = child.getNextSibling();
+			}
+		} catch (Exception e) {
+			Logger.getLogger(SpreadsheetDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return null;
+	}
+
+	/**
+	 * Removes the sheet in the specified <code>index</code>.
+	 * 
+	 * @param index
+	 *            the index of the removed sheet, which starts from 0. If the
+	 *            index value is out of range (index >= sheet count or index <
+	 *            0), this method would do nothing.
+	 * @since 0.6
+	 */
+	public void removeSheet(int index) {
+		if (index < 0) {
+			return;
+		}
+		int count = 0;
+		try {
+			OfficeSpreadsheetElement spreadsheetElement = getContentRoot();
+			Node child = spreadsheetElement.getFirstChild();
+			while ((child != null) && (count <= index)) {
+				if (child instanceof TableTableElement) {
+					if (count == index) {
+						spreadsheetElement.removeChild(child);
+						return;
+					} else {
+						count++;
+					}
+				}
+				child = child.getNextSibling();
+			}
+		} catch (Exception e) {
+			Logger.getLogger(SpreadsheetDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+	}
+
+	/**
+	 * Returns the sheet count of this document.
+	 * 
+	 * @return the sheet count of this document.
+	 * @since 0.6
+	 */
+	public int getSheetCount() {
+		int count = 0;
+		try {
+			OfficeSpreadsheetElement spreadsheetElement = getContentRoot();
+			Node child = spreadsheetElement.getFirstChild();
+			while (child != null) {
+				if (child instanceof TableTableElement) {
+					count++;
+				}
+				child = child.getNextSibling();
+			}
+		} catch (Exception e) {
+			Logger.getLogger(SpreadsheetDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return count;
+	}
+	
 	public OdfElement getTableContainerElement() {
 		return getTableContainerImpl().getTableContainerElement();
+	}
+	
+	private static String getUniqueSheetName(TableContainer container) {
+		List<Table> tableList = container.getTableList();
+		boolean notUnique = true;
+		String tablename = "Sheet" + (tableList.size() + 1);
+		while (notUnique) {
+			notUnique = false;
+			for (int i = 0; i < tableList.size(); i++) {
+				if (tableList.get(i).getTableName() != null) {
+					if (tableList.get(i).getTableName().equalsIgnoreCase(tablename)) {
+						notUnique = true;
+						break;
+					}
+				}
+			}
+			if (notUnique) {
+				tablename = tablename + Math.round(Math.random() * 10);
+			}
+		}
+		return tablename;
 	}
 }
