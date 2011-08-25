@@ -84,6 +84,7 @@ public class Table {
 	protected Document mDocument;
 	protected boolean mIsSpreadsheet;
 	protected boolean mIsCellStyleInheritance = true;
+	protected boolean mIsDescribedBySingleElement = true;
 	private static final int DEFAULT_ROW_COUNT = 2;
 	private static final int DEFAULT_COLUMN_COUNT = 5;
 	private static final double DEFAULT_TABLE_WIDTH = 6;
@@ -822,7 +823,11 @@ public class Table {
 					.newOdfElement(dom, OdfName.newName(OdfDocumentNamespace.TABLE, "table-header-columns"));
 			TableTableColumnElement headercolumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement(dom, OdfName
 					.newName(OdfDocumentNamespace.TABLE, "table-column"));
-			headercolumn.setTableNumberColumnsRepeatedAttribute(headerColumnNumber);
+			if (headerColumnNumber > 1) {
+				headercolumn.setTableNumberColumnsRepeatedAttribute(headerColumnNumber);
+			} else {
+				headercolumn.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
+			}
 			headercolumns.appendChild(headercolumn);
 			newTEle.appendChild(headercolumns);
 			headercolumn.setStyleName(columnStylename);
@@ -830,7 +835,10 @@ public class Table {
 		// 2.2 create common column elements
 		TableTableColumnElement columns = (TableTableColumnElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
 				OdfDocumentNamespace.TABLE, "table-column"));
-		columns.setTableNumberColumnsRepeatedAttribute(numCols - headerColumnNumber);
+		int tableNumberColumnsRepeatedValue = numCols - headerColumnNumber;
+		if(tableNumberColumnsRepeatedValue>1){
+			columns.setTableNumberColumnsRepeatedAttribute(tableNumberColumnsRepeatedValue);
+		}
 		columns.setStyleName(columnStylename);
 		newTEle.appendChild(columns);
 
@@ -936,7 +944,6 @@ public class Table {
 	 */
 	public int getRowCount() {
 		int result = 0;
-
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
 			if (n instanceof TableTableHeaderRowsElement) {
 				result += getHeaderRowCount((TableTableHeaderRowsElement) n);
@@ -1071,6 +1078,7 @@ public class Table {
 			int i = 1;
 			while (cellElement != null && i <= columnCount) {
 				// covered element
+				String tableNameSpace = OdfDocumentNamespace.TABLE.getUri();
 				if (cellElement instanceof TableCoveredTableCellElement) {
 					TableCoveredTableCellElement coveredCellEle = (TableCoveredTableCellElement) cellElement;
 					// find cover cell element
@@ -1094,19 +1102,20 @@ public class Table {
 						if (coverCellEle instanceof TableTableCellElement) {
 							TableTableCellElement newCellEle = (TableTableCellElement) (coverCellEle.cloneNode(true));
 							cleanCell(newCellEle);
-							newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-spanned");
+							newCellEle.removeAttributeNS(tableNameSpace, "number-rows-spanned");
 							newRow.appendChild(newCellEle);
 							// deal with the following covered cell, spread
 							// sheet need change these covered cell to cell.
 							if (mIsSpreadsheet) {
 								// update column repeated number.
 								int columnsSpannedNumber = newCellEle.getTableNumberColumnsSpannedAttribute();
-								newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(),
-										"number-columns-spanned");
+								newCellEle.removeAttributeNS(tableNameSpace, "number-columns-spanned");
 								int newColumnRepeatedNumber = newCellEle.getTableNumberColumnsRepeatedAttribute()
 										* columnsSpannedNumber;
 								if (newColumnRepeatedNumber > 1) {
 									newCellEle.setTableNumberColumnsRepeatedAttribute(newColumnRepeatedNumber);
+								} else {
+									newCellEle.removeAttributeNS(tableNameSpace, "number-columns-repeated");
 								}
 								// ignore the following covered cell of
 								// reference row.
@@ -1126,7 +1135,12 @@ public class Table {
 											TableTableCellElementBase newCoveredCellEle = (TableTableCellElementBase) cellElement
 													.cloneNode(true);
 											cleanCell(newCoveredCellEle);
-											newCoveredCellEle.setTableNumberColumnsRepeatedAttribute(tempi);
+											if (tempi > 1) {
+												newCoveredCellEle.setTableNumberColumnsRepeatedAttribute(tempi);
+											} else {
+												newCoveredCellEle.removeAttributeNS(
+														OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
+											}
 											refRowElement.insertBefore(newCoveredCellEle, cellElement);
 											cellElement = newCoveredCellEle;
 										}
@@ -1185,10 +1199,12 @@ public class Table {
 					if (tableNumberColumnsSpanned > 1) {
 						int j = 1;
 						if (mIsSpreadsheet) {
-							newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-spanned");
+							newCellEle.removeAttributeNS(tableNameSpace, "number-columns-spanned");
 							int newColumnRepeatedNumber = tableNumberColumnsRepeated * tableNumberColumnsSpanned;
 							if (newColumnRepeatedNumber > 1) {
 								newCellEle.setTableNumberColumnsRepeatedAttribute(newColumnRepeatedNumber);
+							}else{
+								newCellEle.removeAttributeNS(tableNameSpace, "number-columns-repeated");
 							}
 							// cellElement is not a covered cell.
 							// below codes will count
@@ -1278,17 +1294,30 @@ public class Table {
 		if (rowCount <= 0) {
 			return resultList;
 		}
-		for (int i = 0; i < rowCount; i++) {
+		if (isDescribedBySingleElement()) {
 			Row firstRow = appendRow();
 			resultList.add(firstRow);
+			if (rowCount > 1) {
+				firstRow.setRowsRepeatedNumber(rowCount);
+				TableTableRowElement firstRowEle = firstRow.getOdfElement();
+				for (int i = 1; i < rowCount; i++) {
+					Row row = getRowInstance(firstRowEle, i);
+					resultList.add(row);
+				}
+			}
+		} else {
+			for (int i = 0; i < rowCount; i++) {
+				Row firstRow = appendRow();
+				resultList.add(firstRow);
+			}
 		}
 		if (isCleanStyle) {
 			// clean style name
+			String tableNameSpace = OdfDocumentNamespace.TABLE.getUri();
 			for (Row row : resultList) {
 				Node cellE = row.getOdfElement().getFirstChild();
 				while (cellE != null) {
-					((TableTableCellElementBase) cellE).removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(),
-							"style-name");
+					((TableTableCellElementBase) cellE).removeAttributeNS(tableNameSpace, "style-name");
 					cellE = cellE.getNextSibling();
 				}
 			}
@@ -1348,9 +1377,8 @@ public class Table {
 		} else { // has column, append a same column as the last one.
 			TableTableColumnElement refColumn = columnList.get(columnList.size() - 1).getOdfElement();
 			newColumn = (TableTableColumnElement) refColumn.cloneNode(true);
-			newColumn.setTableNumberColumnsRepeatedAttribute(1);// chagne to
-			// remove
-			// attribute
+			String tableNameSpace = OdfDocumentNamespace.TABLE.getUri();
+			newColumn.removeAttributeNS(tableNameSpace, "number-columns-repeated");
 			mTableElement.insertBefore(newColumn, positonElement);
 		}
 
@@ -1405,7 +1433,7 @@ public class Table {
 	/**
 	 * This method is to insert a numbers of row
 	 */
-	private List<Row> insertMultipleRowBefore(Row refRow, Row positionRow, int count) {
+	private List<Row> insertMultipleRowsBefore(Row refRow, Row positionRow, int count) {
 		List<Row> resultList = new ArrayList<Row>();
 		int j = 1;
 
@@ -1419,7 +1447,6 @@ public class Table {
 		if (count == 1) {
 			return resultList;
 		}
-
 		TableTableRowElement rowEle = firstRow.getOdfElement();
 		for (int i = 0; i < getColumnCount();) {
 			Cell refCell = refRow.getCellByIndex(i);
@@ -1431,10 +1458,20 @@ public class Table {
 			}
 			i += refCell.getColumnsRepeatedNumber();
 		}
-		firstRow.setRowsRepeatedNumber(count);
-		while (j < count) {
-			resultList.add(getRowInstance(rowEle, j));
-			j++;
+		if (isDescribedBySingleElement()) {
+			firstRow.setRowsRepeatedNumber(count);
+			while (j < count) {
+				resultList.add(getRowInstance(rowEle, j));
+				j++;
+			}
+		}else{
+			while (j < count) {
+				TableTableRowElement newRowEle = (TableTableRowElement) rowEle.cloneNode(true);
+				newRowEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-repeated");
+				mTableElement.insertBefore(newRowEle, positionRow.getOdfElement());
+				resultList.add(getRowInstance(newRowEle, 0));
+				j++;
+			}
 		}
 		return resultList;
 	}
@@ -1446,6 +1483,7 @@ public class Table {
 		int coveredLength = 0, coveredHeigth = 0;
 		for (int i = 0; i < columnCount;) {
 			Cell refCell = refRow.getCellByIndex(i);
+			int columnsRepeatedNumber = refCell.getColumnsRepeatedNumber();
 			if (!refCell.isCoveredElement()) // not cover element
 			{
 				TableTableCellElement aCellEle = (TableTableCellElement) refCell.getOdfElement();
@@ -1459,12 +1497,16 @@ public class Table {
 					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfXMLFactory
 							.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(), OdfName.newName(
 									OdfDocumentNamespace.TABLE, "covered-table-cell"));
-					newCellEle.setTableNumberColumnsRepeatedAttribute(refCell.getColumnsRepeatedNumber());
+					if (columnsRepeatedNumber > 1) {
+						newCellEle.setTableNumberColumnsRepeatedAttribute(columnsRepeatedNumber);
+					} else {
+						newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
+					}
 					aRow.appendChild(newCellEle);
 				}
 
-				coveredLength = aCellEle.getTableNumberColumnsSpannedAttribute() - refCell.getColumnsRepeatedNumber();
-				i = i + refCell.getColumnsRepeatedNumber();
+				coveredLength = aCellEle.getTableNumberColumnsSpannedAttribute() - columnsRepeatedNumber;
+				i = i + columnsRepeatedNumber;
 			} else {
 				TableCoveredTableCellElement aCellEle = (TableCoveredTableCellElement) refCell.getOdfElement();
 				if (coveredLength >= 1) {
@@ -1477,11 +1519,9 @@ public class Table {
 					cleanCell(newCellEle);
 					newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-spanned");
 					aRow.appendChild(newCellEle);
-
-					coveredLength = coveredCell.getTableNumberColumnsSpannedAttribute()
-							- refCell.getColumnsRepeatedNumber();
+					coveredLength = coveredCell.getTableNumberColumnsSpannedAttribute() - columnsRepeatedNumber;
 				}
-				i = i + refCell.getColumnsRepeatedNumber();
+				i = i + columnsRepeatedNumber;
 			}
 		}
 		if (positionRow == null) {
@@ -1509,7 +1549,8 @@ public class Table {
 		Node n = newCellEle.getFirstChild();
 		while (n != null) {
 			Node m = n.getNextSibling();
-			if (n instanceof TextPElement || n instanceof TextHElement || n instanceof TextListElement || n instanceof OfficeAnnotationElement) {
+			if (n instanceof TextPElement || n instanceof TextHElement || n instanceof TextListElement
+					|| n instanceof OfficeAnnotationElement) {
 				newCellEle.removeChild(n);
 			}
 			n = m;
@@ -1547,6 +1588,7 @@ public class Table {
 	 */
 	public List<Column> insertColumnsBefore(int index, int columnCount) {
 		Column refColumn, positionCol;
+		String tableNameSpace = OdfDocumentNamespace.TABLE.getUri();
 		ArrayList<Column> list = new ArrayList<Column>();
 		int columncount = getColumnCount();
 
@@ -1560,16 +1602,29 @@ public class Table {
 				Row row = getRowByIndex(i);
 				row.insertCellByIndex(index, columnCount);
 			}
-
 			refColumn = getColumnByIndex(index);
 			positionCol = refColumn;
-
-			TableTableColumnElement newColumnEle = (TableTableColumnElement) refColumn.getOdfElement().cloneNode(true);
-			newColumnEle.setTableNumberColumnsRepeatedAttribute(new Integer(columnCount));
-			mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
-
-			for (int i = 0; i < columnCount; i++) {
-				list.add(getColumnInstance(newColumnEle, i));
+			// add a single column element to describe columns.
+			if (isDescribedBySingleElement()) {
+				TableTableColumnElement newColumnEle = (TableTableColumnElement) refColumn.getOdfElement().cloneNode(
+						true);
+				if (columnCount > 1) {
+					newColumnEle.setTableNumberColumnsRepeatedAttribute(columnCount);
+				}else{
+					newColumnEle.removeAttributeNS(tableNameSpace, "number-columns-repeated");
+				}
+				mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
+				for (int i = 0; i < columnCount; i++) {
+					list.add(getColumnInstance(newColumnEle, i));
+				}
+			} else {
+				for (int i = 0; i < columnCount; i++) {
+					TableTableColumnElement newColumnEle = (TableTableColumnElement) refColumn.getOdfElement()
+							.cloneNode(true);
+					mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
+					newColumnEle.removeAttributeNS(tableNameSpace, "number-columns-repeated");
+					list.add(getColumnInstance(newColumnEle, 0));
+				}
 			}
 			return list;
 		}
@@ -1591,25 +1646,69 @@ public class Table {
 		if (refColumn.getOdfElement() == positionCol.getOdfElement()) {
 			TableTableColumnElement column = refColumn.getOdfElement();
 			int repeatedCount = column.getTableNumberColumnsRepeatedAttribute();
-			column.setTableNumberColumnsRepeatedAttribute(repeatedCount + columnCount);
 			TableTableColumnElement columnEle = positionCol.getOdfElement();
-			Column startCol = getColumnInstance(positionCol.getOdfElement(), 0);
-			for (int i = repeatedCount + columnCount - 1; i >= columnCount + (index - startCol.getColumnIndex()); i--) {
-				updateColumnRepository(columnEle, i - columnCount, columnEle, i);
-			}
-			for (int i = 0; i < columnCount; i++) {
-				list.add(getColumnInstance(column, refColumn.mnRepeatedIndex + 1 + i));
+			// add a single column element to describe columns.
+			if(isDescribedBySingleElement()){
+				column.setTableNumberColumnsRepeatedAttribute(repeatedCount + columnCount);
+				Column startCol = getColumnInstance(positionCol.getOdfElement(), 0);
+				for (int i = repeatedCount + columnCount - 1; i >= columnCount + (index - startCol.getColumnIndex()); i--) {
+					updateColumnRepository(columnEle, i - columnCount, columnEle, i);
+				}
+				for (int i = 0; i < columnCount; i++) {
+					list.add(getColumnInstance(column, refColumn.mnRepeatedIndex + 1 + i));
+				}
+			}else{
+				TableTableColumnElement newBeforeColumnEle = (TableTableColumnElement) refColumn.getOdfElement().cloneNode(true);
+				if (index > 1) {
+					newBeforeColumnEle.setTableNumberColumnsRepeatedAttribute(index);
+				}else{
+					newBeforeColumnEle.removeAttributeNS(tableNameSpace, "number-columns-repeated");
+				}
+				mTableElement.insertBefore(newBeforeColumnEle, positionCol.getOdfElement());
+				for (int i = 0; i < index; i++) {
+					updateColumnRepository(columnEle, i, newBeforeColumnEle, i);
+				}
+				int newAfterCount = repeatedCount - index;
+				if(newAfterCount>1){
+					positionCol.setColumnsRepeatedNumber(newAfterCount);
+				}else{
+					positionCol.getOdfElement().removeAttributeNS(tableNameSpace, "number-columns-repeated");
+				}
+				for (int i = repeatedCount - 1; i >= index; i--) {
+					updateColumnRepository(columnEle, i, columnEle, i - index);
+				}
+				for (int i = 0; i < columnCount; i++) {
+					TableTableColumnElement newColumnEle = (TableTableColumnElement) refColumn.getOdfElement()
+							.cloneNode(true);
+					newColumnEle.removeAttributeNS(tableNameSpace, "number-columns-repeated");
+					mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
+					list.add(getColumnInstance(newColumnEle, 0));
+				}
 			}
 		} else {
-			TableTableColumnElement newColumnEle = (TableTableColumnElement) refColumn.getOdfElement().cloneNode(true);
-			newColumnEle.setTableNumberColumnsRepeatedAttribute(new Integer(columnCount));
-			mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
-
-			for (int i = 0; i < columnCount; i++) {
-				list.add(getColumnInstance(newColumnEle, i));
+			// add a single column element to describe columns.
+			if (isDescribedBySingleElement()) {
+				TableTableColumnElement newColumnEle = (TableTableColumnElement) refColumn.getOdfElement().cloneNode(
+						true);
+				if (columnCount > 1) {
+					newColumnEle.setTableNumberColumnsRepeatedAttribute(columnCount);
+				}else{
+					newColumnEle.removeAttributeNS(tableNameSpace, "number-columns-repeated");
+				}
+				mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
+				for (int i = 0; i < columnCount; i++) {
+					list.add(getColumnInstance(newColumnEle, i));
+				}
+			} else {
+				for (int i = 0; i < columnCount; i++) {
+					TableTableColumnElement newColumnEle = (TableTableColumnElement) refColumn.getOdfElement()
+							.cloneNode(true);
+					newColumnEle.removeAttributeNS(tableNameSpace, "number-columns-repeated");
+					mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
+					list.add(getColumnInstance(newColumnEle, 0));
+				}
 			}
 		}
-
 		return list;
 	}
 
@@ -1731,7 +1830,7 @@ public class Table {
 			Row newFirstRow = insertRowBefore(refRow, positionRow, getColumnCount());
 			reviseStyleFromTopRowToMediumRow(refRow);
 			list.add(newFirstRow);
-			List<Row> rowList = insertMultipleRowBefore(refRow, refRow, rowCount - 1);
+			List<Row> rowList = insertMultipleRowsBefore(refRow, refRow, rowCount - 1);
 			for (int i = 0; i < rowList.size(); i++) {
 				list.add(rowList.get(i));
 			}
@@ -1740,7 +1839,7 @@ public class Table {
 
 		Row refRow = getRowByIndex(index - 1);
 		Row positionRow = getRowByIndex(index);
-		// 1. insert a <table:table-column>
+		// 1. insert a <table:table-row>
 		if (refRow.getOdfElement() == positionRow.getOdfElement()) {
 			TableTableRowElement row = refRow.getOdfElement();
 			int repeatedCount = refRow.getRowsRepeatedNumber();
@@ -1754,7 +1853,7 @@ public class Table {
 				list.add(getRowInstance(row, refRow.mnRepeatedIndex + 1 + i));
 			}
 		} else {
-			List<Row> newRowList = insertMultipleRowBefore(refRow, positionRow, rowCount);
+			List<Row> newRowList = insertMultipleRowsBefore(refRow, positionRow, rowCount);
 			if (index - 1 == 0) {
 				// correct styles
 				reviseStyleFromTopRowToMediumRow(newRowList.get(0));
@@ -2196,6 +2295,87 @@ public class Table {
 	 */
 	public void setCellStyleInheritance(boolean isEnabled) {
 		mIsCellStyleInheritance = isEnabled;
+	}
+
+	/**
+	 * Return true if the new created multiple columns/rows/cells are described by a
+	 * single element when it's possible.
+	 * <p>
+	 * The default setting is <code>true</code>, which helps to decrease the
+	 * document size. If setting is <code>false</code>, each column/row/cell
+	 * will be described by its owned single element.
+	 * <p>
+	 * This feature setting will influence <code>appendRows()</code>,
+	 * <code>appendColumns()</code>, <code>insertRowsBefore()</code>,
+	 * <code>insertColumnsBefore()</code>, <code>getCellByPosition()</code>,
+	 * <code>getCellRangeByPosition()</code>, <code>getCellRangeByName()</code>,
+	 * <code>getRowByIndex()</code> and <code>getColumnByIndex()</code>.
+	 * 
+	 * @return true if the new created columns/rows/cells are described by a
+	 *         single element when it's possible.
+	 * 
+	 * @see #setDescribedBySingleElement(boolean)
+	 * @see #appendColumns(int)
+	 * @see #appendRows(int)
+	 * @see #insertColumnsBefore(int, int)
+	 * @see #insertRowsBefore(int, int)
+	 * @see #getCellByPosition(int, int)
+	 * @see #getCellByPosition(String)
+	 * @see #getCellRangeByPosition(int, int, int, int)
+	 * @see #getCellRangeByPosition(String, String)
+	 * @see #getCellRangeByName(String)
+	 * @see #getColumnByIndex(int)
+	 * @see #getRowByIndex(int)
+	 * 
+	 * @since 0.4.5
+	 */
+	public boolean isDescribedBySingleElement() {
+		return mIsDescribedBySingleElement;
+	}
+
+	/**
+	 * When two or more columns/rows/cells are added to a table, if they are
+	 * adjoining, and have the same content and style, and do not contain
+	 * horizontally/vertically merged cells, they may be described by a single
+	 * element. The repeated number attribute, for row is
+	 * table:number-rows-repeated, while for column and cell are
+	 * table:number-columns-repeated, specifies the number of columns/rows/cells
+	 * to which a column/row/cell element applies.
+	 * <p>
+	 * This method allows users to set whether the new created
+	 * columns/rows/cells are described by a single element. Of course, the
+	 * default setting is <code>true</code>, which helps to decrease the
+	 * document size. If setting is <code>false</code>, each column/row/cell
+	 * will be described by its owned single element.
+	 * <p>
+	 * This feature setting will influence <code>appendRows()</code>,
+	 * <code>appendColumns()</code>, <code>insertRowsBefore()</code>,
+	 * <code>insertColumnsBefore()</code>, <code>getCellByPosition()</code>,
+	 * <code>getCellRangeByPosition()</code>, <code>getCellRangeByName()</code>,
+	 * <code>getRowByIndex()</code> and <code>getColumnByIndex()</code>.
+	 * 
+	 * @param isSingle
+	 *            if<code>isSingle</code> is true, the new created
+	 *            columns/rows/cells are described by a single element, if
+	 *            possible.
+	 * 
+	 * @see #isDescribedBySingleElement()
+	 * @see #appendColumns(int)
+	 * @see #appendRows(int)
+	 * @see #insertColumnsBefore(int, int)
+	 * @see #insertRowsBefore(int, int)
+	 * @see #getCellByPosition(int, int)
+	 * @see #getCellByPosition(String)
+	 * @see #getCellRangeByPosition(int, int, int, int)
+	 * @see #getCellRangeByPosition(String, String)
+	 * @see #getCellRangeByName(String)
+	 * @see #getColumnByIndex(int)
+	 * @see #getRowByIndex(int)
+	 * 
+	 * @since 0.4.5
+	 */
+	public void setDescribedBySingleElement(boolean isSingle) {
+		mIsDescribedBySingleElement = isSingle;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////////////////
@@ -2693,15 +2873,12 @@ public class Table {
  * Sometimes the covered cell is not tagged as
  * <table:covered-table-cell>
  * element.
- * 
  */
 class CellCoverInfo {
-
 	int nStartCol;
 	int nStartRow;
 	int nEndCol;
 	int nEndRow;
-
 	CellCoverInfo(int nSC, int nSR, int nColumnSpan, int nRowSpan) {
 		nStartCol = nSC;
 		nStartRow = nSR;

@@ -419,9 +419,10 @@ public class TableTest {
 	}
 
 	@Test
-	public void testInsertColumnBefore() {
+	public void testInsertColumnBefore() throws Exception {
 		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
 		Table table1 = mOdtDoc.getTableByName("Table3");
+		table1.setDescribedBySingleElement(false);
 		CellRange range = table1.getCellRangeByPosition(0, 1, 1, 2);
 		range.merge();
 
@@ -985,6 +986,66 @@ public class TableTest {
 			Assert.fail(e.getMessage());
 		}
 		
+	}
+	
+	@Test
+	public void testAppendRowsWithRowsRepeated() {
+		SpreadsheetDocument odsDoc = null;
+		Table table = null;
+		try {
+			odsDoc = SpreadsheetDocument.newSpreadsheetDocument();
+			table = Table.newTable(odsDoc, 1, 1);
+			table.appendRows(12);
+			Row row10 = table.getRowByIndex(10);
+			Row row11 = table.getRowByIndex(11);
+			//default appended rows described by single element
+			Assert.assertSame(row10.getOdfElement(), row11.getOdfElement());
+			
+			table.setDescribedBySingleElement(false);
+			table.appendRows(12);
+			Row row20 = table.getRowByIndex(20);
+			Row row21 = table.getRowByIndex(21);
+			Assert.assertNotSame(row20.getOdfElement(), row21.getOdfElement());
+			
+		} catch (Exception e) {
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAppendColumnsWithColumnsRepeated() {
+		SpreadsheetDocument odsDoc = null;
+		Table table = null;
+		try {
+			odsDoc = SpreadsheetDocument.newSpreadsheetDocument();
+			table = Table.newTable(odsDoc, 1, 1);
+			table.appendColumns(12);
+			Column column10 = table.getColumnByIndex(10);
+			Column column11 = table.getColumnByIndex(11);
+			
+			Cell cell10 = table.getCellByPosition(10, 2);
+			Cell cell11 = table.getCellByPosition(11, 2);
+			
+			//default appended rows described by single element
+			Assert.assertSame(column10.getOdfElement(), column11.getOdfElement());
+			Assert.assertSame(cell10.getOdfElement(), cell11.getOdfElement());
+			
+			table.setDescribedBySingleElement(false);
+			table.appendColumns(12);
+			Column column20 = table.getColumnByIndex(20);
+			Column column21 = table.getColumnByIndex(21);
+			
+			Cell cell20 = table.getCellByPosition(20, 2);
+			Cell cell21 = table.getCellByPosition(21, 2);
+			
+			Assert.assertNotSame(column20.getOdfElement(), column21.getOdfElement());
+			Assert.assertNotSame(cell20.getOdfElement(), cell21.getOdfElement());
+			
+		} catch (Exception e) {
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
 	}
 	
 	@Test

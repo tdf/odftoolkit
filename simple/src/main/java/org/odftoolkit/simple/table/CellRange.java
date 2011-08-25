@@ -33,6 +33,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableNamedExpressionsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableNamedRangeElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
@@ -254,10 +255,11 @@ public class CellRange {
 			//first keep the column and row count in this cell range
 			//the first cell, set the span attribute
 			if (firstCell.getOdfElement() instanceof TableTableCellElement) {
+				//first cell number columns repeated attribute may > 1.
+				firstCell.splitRepeatedCells();
 				TableTableCellElement firstCellElement = (TableTableCellElement) (firstCell.getOdfElement());
-				firstCellElement.setTableNumberColumnsSpannedAttribute(Integer.valueOf(mnEndColumn - mnStartColumn + 1));
-				firstCellElement.setTableNumberRowsSpannedAttribute(Integer.valueOf(mnEndRow - mnStartRow + 1));
-				firstCellElement.setOfficeValueTypeAttribute(OfficeValueTypeAttribute.Value.STRING.toString());
+				firstCellElement.setTableNumberColumnsSpannedAttribute(mnEndColumn - mnStartColumn + 1);
+				firstCellElement.setTableNumberRowsSpannedAttribute(mnEndRow - mnStartRow + 1);
 			}
 			//the other cell, set to the covered cell
 			for (int i = mnStartRow; i < mnEndRow + 1; i++) {
@@ -271,22 +273,26 @@ public class CellRange {
 									(OdfFileDom) cell.getOwnerDocument(),
 									OdfName.newName(OdfDocumentNamespace.TABLE, "covered-table-cell"));
 
-							Row parentRow = cellBase.getTableRow();
-							parentRow.getOdfElement().insertBefore(coveredCell, cell);
+							TableTableRowElement parentRowEle = cellBase.getTableRow().getOdfElement();
+							parentRowEle.insertBefore(coveredCell, cell);
 							//copy the content of this cell to the first cell
 							firstCell.appendContentFrom(cellBase);
 							cellBase.removeContent();
 							//set the table column repeated attribute
-							int repeatedNum = cell.getTableNumberColumnsRepeatedAttribute().intValue();
+							int repeatedNum = cell.getTableNumberColumnsRepeatedAttribute();
 							int num = (mnEndColumn - j + 1) - repeatedNum;
 							if (num >= 0) {
-								coveredCell.setTableNumberColumnsRepeatedAttribute(Integer.valueOf(repeatedNum));
-								parentRow.getOdfElement().removeChild(cell);
+								if(repeatedNum > 1){
+									coveredCell.setTableNumberColumnsRepeatedAttribute(repeatedNum);
+								}
+								parentRowEle.removeChild(cell);
 							} else {
-								coveredCell.setTableNumberColumnsRepeatedAttribute(new Integer(mnEndColumn - j + 1));
-								cell.setTableNumberColumnsRepeatedAttribute(Integer.valueOf(-num));
+								int tableNumberColumnsRepeatedValue = mnEndColumn - j + 1;
+								if(tableNumberColumnsRepeatedValue > 1){
+									coveredCell.setTableNumberColumnsRepeatedAttribute(tableNumberColumnsRepeatedValue);
+								}
+								cell.setTableNumberColumnsRepeatedAttribute(-num);
 							}
-
 						} else if (cellBase.getOdfElement() instanceof TableCoveredTableCellElement) {
 							try {
 								//copy the content of this cell to the first cell

@@ -622,12 +622,23 @@ public class Row {
 		if (nextCell == null) {
 			nextCell = getCellByIndex(getCellCount() - 1);
 		}
-		for (int i = index + count; i > index; i--) {
+		// add a single cell element to describe cells.
+		OdfName tableCellNameSpace = OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell");
+		if (table.isDescribedBySingleElement()) {
 			TableTableCellElement newCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(
-					(OdfFileDom) maRowElement.getOwnerDocument(), OdfName.newName(OdfDocumentNamespace.TABLE,
-							"table-cell"));
+					(OdfFileDom) maRowElement.getOwnerDocument(), tableCellNameSpace);
 			newCell.setTableStyleNameAttribute(preCell.getStyleName());
+			if (count > 1) {
+				newCell.setTableNumberColumnsRepeatedAttribute(count);
+			}
 			maRowElement.insertBefore(newCell, nextCell.getOdfElement());
+		} else {
+			for (int i = index + count; i > index; i--) {
+				TableTableCellElement newCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(
+						(OdfFileDom) maRowElement.getOwnerDocument(), tableCellNameSpace);
+				newCell.setTableStyleNameAttribute(preCell.getStyleName());
+				maRowElement.insertBefore(newCell, nextCell.getOdfElement());
+			}
 		}
 	}
 
@@ -657,15 +668,25 @@ public class Row {
 	 */
 	private void insertCellElementBefore(OdfElement parentEle, TableTableCellElementBase positionEle,
 			TableTableCellElementBase cellEle, int count) {
+		boolean isDescribedBySingleElement = getTable().isDescribedBySingleElement();
 		if (positionEle == null) {
 			parentEle.appendChild(cellEle);
-			for (int i = 1; i < count; i++) {
-				parentEle.appendChild(cellEle.cloneNode(true));
+			if (isDescribedBySingleElement && count > 1) {
+				cellEle.setTableNumberColumnsRepeatedAttribute(count);
+			} else {
+				for (int i = 1; i < count; i++) {
+					parentEle.appendChild(cellEle.cloneNode(true));
+				}
 			}
+
 		} else {
 			parentEle.insertBefore(cellEle, positionEle);
-			for (int i = 1; i < count; i++) {
-				parentEle.insertBefore(cellEle.cloneNode(true), positionEle);
+			if (isDescribedBySingleElement && count > 1) {
+				cellEle.setTableNumberColumnsRepeatedAttribute(count);
+			} else {
+				for (int i = 1; i < count; i++) {
+					parentEle.insertBefore(cellEle.cloneNode(true), positionEle);
+				}
 			}
 		}
 	}
@@ -736,7 +757,6 @@ public class Row {
 			} else if ((refCell.getOdfElement() == positionCell.getOdfElement())
 					&& (refCell.getColumnsRepeatedNumber() > 1)) {
 				// repeated number
-
 				int repeatNum = refCell.getColumnsRepeatedNumber();
 				// update the cell that after the ref cell
 				for (int i = repeatNum - 1; i > refCell.mnRepeatedColIndex; i--) {
