@@ -78,4 +78,19 @@ public class FooterTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+	
+	@Test
+	public void testFooterHidden() {
+		try {
+			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("headerFooterHidden.odt"));
+			Footer footer = doc.getFooter();
+			Assert.assertEquals(true, footer.isVisible());
+			footer.setVisible(false);
+			Assert.assertEquals(false, footer.isVisible());
+			doc.save(ResourceUtilities.newTestOutputFile("footerHiddenOutput.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(FooterTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
 }

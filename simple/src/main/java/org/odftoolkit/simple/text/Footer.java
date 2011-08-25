@@ -28,8 +28,10 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
@@ -76,7 +78,60 @@ public class Footer extends Component implements TableContainer, VariableContain
 	public StyleFooterElement getOdfElement() {
 		return footerEle;
 	}
-
+	
+	/**
+	 * Get this footer is visible or not.
+	 * 
+	 * @return If this footer is visible return <code>true</code>, otherwise
+	 *         return <code>false</code>.
+	 * @since 0.5.5
+	 */
+	public boolean isVisible() {
+		boolean isVisible = footerEle.getStyleDisplayAttribute();
+		return isVisible;
+	}
+	
+	/**
+	 * Set this footer visible or not.
+	 * 
+	 * @param isVisible
+	 *            If <code>isVisible</code> is true, the footer of this document
+	 *            is visible, otherwise is invisible.
+	 * @since 0.5.5
+	 */
+	public void setVisible(boolean isVisible) {
+		if (isVisible) {
+			footerEle.removeAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "display");
+		} else {
+			footerEle.setStyleDisplayAttribute(false);
+		}
+		NodeList nodeList = footerEle.getElementsByTagName(TextPElement.ELEMENT_NAME.getQName());
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			TextPElement textEle = (TextPElement) nodeList.item(i);
+			String stylename = textEle.getStyleName();
+			OdfFileDom dom = (OdfFileDom) footerEle.getOwnerDocument();
+			OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
+			
+			OdfStyle newStyle = styles.newStyle(OdfStyleFamily.Paragraph);
+			OdfStyle style = styles.getStyle(stylename, OdfStyleFamily.Paragraph);
+			if (style != null) {
+				String styleName = newStyle.getStyleNameAttribute();
+				styles.removeChild(newStyle);
+				newStyle = (OdfStyle) style.cloneNode(true);
+				newStyle.setStyleNameAttribute(styleName);
+				styles.appendChild(newStyle);
+			}
+			if (isVisible) {
+				if (newStyle.hasProperty(StyleTextPropertiesElement.Display)) {
+					newStyle.removeProperty(StyleTextPropertiesElement.Display);
+				}
+			} else {
+				newStyle.setProperty(StyleTextPropertiesElement.Display, "none");
+			}
+			textEle.setStyleName(newStyle.getStyleNameAttribute());
+		}
+	}
+	
 	public Table addTable() {
 		Table table = getTableContainerImpl().addTable();
 		updateTableToNone(table);

@@ -58,7 +58,7 @@ public class HeaderTest {
 			table = header.addTable();
 			table.setTableName("headerHTable");
 			doc.save(ResourceUtilities.newTestOutputFile(headerDocumentPath));
-
+			
 			// load the document again.
 			doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(headerDocumentPath));
 			header = doc.getHeader();
@@ -73,6 +73,21 @@ public class HeaderTest {
 			header = doc.getHeader(true);
 			table = header.getTableByName("headerHTable");
 			Assert.assertNotNull(table);
+		} catch (Exception e) {
+			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void testHeaderHidden() {
+		try {
+			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("headerFooterHidden.odt"));
+			Header header = doc.getHeader();
+			Assert.assertEquals(true, header.isVisible());
+			header.setVisible(false);
+			Assert.assertEquals(false, header.isVisible());
+			doc.save(ResourceUtilities.newTestOutputFile("headerHiddenOutput.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());

@@ -28,14 +28,18 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.simple.Component;
+import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.common.field.AbstractVariableContainer;
 import org.odftoolkit.simple.common.field.VariableContainer;
 import org.odftoolkit.simple.common.field.VariableField;
@@ -76,6 +80,59 @@ public class Header extends Component implements TableContainer, VariableContain
 	 */
 	public StyleHeaderElement getOdfElement() {
 		return headerEle;
+	}
+	
+	/**
+	 * Get this header is visible or not.
+	 * 
+	 * @return If this header is visible return <code>true</code>, otherwise
+	 *         return <code>false</code>.
+	 * @since 0.5.5
+	 */
+	public boolean isVisible() {
+		boolean isVisible = headerEle.getStyleDisplayAttribute();
+		return isVisible;
+	}
+	
+	/**
+	 * Set this header visible or not.
+	 * 
+	 * @param isVisible
+	 *            If <code>isVisible</code> is true, the header of this document
+	 *            is visible, otherwise is invisible.
+	 * @since 0.5.5
+	 */
+	public void setVisible(boolean isVisible) {
+		if (isVisible) {
+			headerEle.removeAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "display");
+		} else {
+			headerEle.setStyleDisplayAttribute(false);
+		}
+		NodeList nodeList = headerEle.getElementsByTagName(TextPElement.ELEMENT_NAME.getQName());
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			TextPElement textEle = (TextPElement) nodeList.item(i);
+			String stylename = textEle.getStyleName();
+			OdfFileDom dom = (OdfFileDom) headerEle.getOwnerDocument();
+			OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
+			
+			OdfStyle newStyle = styles.newStyle(OdfStyleFamily.Paragraph);
+			OdfStyle style = styles.getStyle(stylename, OdfStyleFamily.Paragraph);
+			if (style != null) {
+				String styleName = newStyle.getStyleNameAttribute();
+				styles.removeChild(newStyle);
+				newStyle = (OdfStyle) style.cloneNode(true);
+				newStyle.setStyleNameAttribute(styleName);
+				styles.appendChild(newStyle);
+			}
+			if (isVisible) {
+				if (newStyle.hasProperty(StyleTextPropertiesElement.Display)) {
+					newStyle.removeProperty(StyleTextPropertiesElement.Display);
+				}
+			} else {
+				newStyle.setProperty(StyleTextPropertiesElement.Display, "none");
+			}
+			textEle.setStyleName(newStyle.getStyleNameAttribute());
+		}
 	}
 
 	public Table addTable() {
