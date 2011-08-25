@@ -121,7 +121,7 @@ public class TextSelectionTest {
 				Assert.fail(e.getMessage());
 			}
 		}
-		Assert.assertTrue(8 == i);
+		Assert.assertTrue(10 == i);
 		// research the "delete"
 		search = new TextNavigation("delete", doc);
 		Assert.assertFalse(search.hasNext());

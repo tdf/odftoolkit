@@ -68,28 +68,8 @@ public abstract class Navigation {
 	 * @return the next matched element node
 	 */
 	protected Node getNextMatchElement(Node startpoint) {
-		Node matchedNode = null;
-		matchedNode = traverseTree(startpoint);
-		Node currentpoint = startpoint;
-		while ((matchedNode == null) && (currentpoint != null)) {
-			Node sibling = currentpoint.getNextSibling();
-			if ((sibling != null)
-					&& (sibling.getNodeType() == Node.TEXT_NODE || sibling.getNodeType() == Node.ELEMENT_NODE)
-					&& (match(sibling))) {
-				matchedNode = sibling;
-			}
-			while ((sibling != null) && (matchedNode == null)) {
-				if ((sibling.getNodeType() == Node.TEXT_NODE || sibling.getNodeType() == Node.ELEMENT_NODE)) {
-					matchedNode = traverseTree(sibling);
-				}
-				sibling = sibling.getNextSibling();
-				if (sibling != null && match(sibling)) {
-					matchedNode = sibling;
-				}
-			}
-			currentpoint = currentpoint.getParentNode();
-		}
-		return matchedNode;
+		// match the sub tree up to the root node (parent == null)
+		return getNextMatchElementInTree(startpoint, null);
 	}
 
 	/**
@@ -111,14 +91,18 @@ public abstract class Navigation {
 					&& (sibling.getNodeType() == Node.TEXT_NODE || sibling.getNodeType() == Node.ELEMENT_NODE)
 					&& (match(sibling))) {
 				matchedNode = sibling;
+				break;
 			}
 			while ((sibling != null) && (matchedNode == null)) {
 				if ((sibling.getNodeType() == Node.TEXT_NODE || sibling.getNodeType() == Node.ELEMENT_NODE)) {
 					matchedNode = traverseTree(sibling);
 				}
-				sibling = sibling.getNextSibling();
-				if (sibling != null && match(sibling)) {
-					matchedNode = sibling;
+				if (matchedNode == null) {
+					sibling = sibling.getNextSibling();
+					if (sibling != null && match(sibling)) {
+						matchedNode = sibling;
+						break;
+					}
 				}
 			}
 			currentpoint = currentpoint.getParentNode();

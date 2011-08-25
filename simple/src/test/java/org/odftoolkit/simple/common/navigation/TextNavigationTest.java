@@ -37,6 +37,7 @@ import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.common.TextExtractor;
 import org.odftoolkit.simple.presentation.Slide;
 import org.odftoolkit.simple.utils.ResourceUtilities;
+import org.w3c.dom.Node;
 
 /**
  * Test the method of class org.odftoolkit.simple.common.navigation.TextNavigation 
@@ -48,7 +49,6 @@ public class TextNavigationTest {
 	private static final String NAVIGATION_ODFELEMENT_FILE = "NavigationInOdfElementTest.odp";
 	
 	TextDocument doc;
-	TextNavigation search;
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
@@ -77,8 +77,7 @@ public class TextNavigationTest {
 	 */
 	@Test
 	public void testGotoNext() {
-		search = null;
-		search = new TextNavigation("delete", doc);
+		TextNavigation search = new TextNavigation("delete", doc);
 		while (search.hasNext()) {
 			TextSelection item = (TextSelection) search.nextSelection();
 			LOG.info(item.toString());
@@ -101,60 +100,50 @@ public class TextNavigationTest {
 	 */
 	@Test
 	public void testGetNextMatchElement() {
-		search = null;
-		search = new TextNavigation("delete", doc);
 		try {
-			//NodeList list = doc.getContentDom().getElementsByTagName("text:p");
-			OdfElement firstmatch = (OdfElement) search.getNextMatchElement(doc.getContentRoot());
-			Assert.assertNotNull(firstmatch);
-			Assert.assertEquals("Task2.delete next paragraph", TextExtractor.getText(firstmatch));
-
-			OdfElement secondmatch = (OdfElement) search.getNextMatchElement(firstmatch);
-			Assert.assertNotNull(secondmatch);
-			Assert.assertEquals("Hello [delete], I will be delete", TextExtractor.getText(secondmatch));
-
-			OdfElement thirdmatch = (OdfElement) search.getNextMatchElement(secondmatch);
-			Assert.assertNotNull(thirdmatch);
-			Assert.assertEquals("indeed   delete", TextExtractor.getText(thirdmatch));
-
-			OdfElement match4 = (OdfElement) search.getNextMatchElement(thirdmatch);
-			Assert.assertNotNull(match4);
-			Assert.assertEquals("different span in one single word delete indeed", TextExtractor.getText(match4));
-
-			OdfElement match5 = (OdfElement) search.getNextMatchElement(match4);
-			Assert.assertNotNull(match5);
-			Assert.assertEquals("Hello delete this word delete true delete  indeed", TextExtractor.getText(match5));
-		} catch (Exception e) {
-			Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
-		}
-		
-		try {
+			// match values by specifying a document to TextNavigation
+			TextNavigation search = new TextNavigation("delete", doc);
+			matchLines(search, doc.getContentRoot());
+			
+			// match value by specifying a Node to the TextNavigation
 			search = new TextNavigation("delete", doc.getContentRoot());
-			//NodeList list = doc.getContentDom().getElementsByTagName("text:p");
-			OdfElement firstmatch = (OdfElement) search.getNextMatchElement(doc.getContentRoot());
-			Assert.assertNotNull(firstmatch);
-			Assert.assertEquals("Task2.delete next paragraph", TextExtractor.getText(firstmatch));
-
-			OdfElement secondmatch = (OdfElement) search.getNextMatchElement(firstmatch);
-			Assert.assertNotNull(secondmatch);
-			Assert.assertEquals("Hello [delete], I will be delete", TextExtractor.getText(secondmatch));
-
-			OdfElement thirdmatch = (OdfElement) search.getNextMatchElement(secondmatch);
-			Assert.assertNotNull(thirdmatch);
-			Assert.assertEquals("indeed   delete", TextExtractor.getText(thirdmatch));
-
-			OdfElement match4 = (OdfElement) search.getNextMatchElement(thirdmatch);
-			Assert.assertNotNull(match4);
-			Assert.assertEquals("different span in one single word delete indeed", TextExtractor.getText(match4));
-
-			OdfElement match5 = (OdfElement) search.getNextMatchElement(match4);
-			Assert.assertNotNull(match5);
-			Assert.assertEquals("Hello delete this word delete true delete  indeed", TextExtractor.getText(match5));
+			matchLines(search, doc.getContentRoot());
 		} catch (Exception e) {
 			Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
+	}
+	
+	/**
+	 * Matches the lines on the given search and rootNode
+	 * @param search
+	 * @param rootNode
+	 */
+	private void matchLines(TextNavigation search, Node rootNode) {
+		//NodeList list = doc.getContentDom().getElementsByTagName("text:p");
+		OdfElement match = (OdfElement) search.getNextMatchElement(rootNode);
+		Assert.assertNotNull(match);
+		Assert.assertEquals("Task2.delete next paragraph", TextExtractor.getText(match));
+
+		match = (OdfElement) search.getNextMatchElement(match);
+		Assert.assertNotNull(match);
+		Assert.assertEquals("Hello [delete], I will be delete", TextExtractor.getText(match));
+
+		match = (OdfElement) search.getNextMatchElement(match);
+		Assert.assertNotNull(match);
+		Assert.assertEquals("indeed   delete", TextExtractor.getText(match));
+
+		match = (OdfElement) search.getNextMatchElement(match);
+		Assert.assertNotNull(match);
+		Assert.assertEquals("different span in one single word delete indeed", TextExtractor.getText(match));
+
+		match = (OdfElement) search.getNextMatchElement(match);
+		Assert.assertNotNull(match);
+		Assert.assertEquals("Hello delete this word delete true delete  indeed", TextExtractor.getText(match));
+		
+		match = (OdfElement) search.getNextMatchElement(match);
+		Assert.assertNotNull(match);
+		Assert.assertEquals("something to delete in a frame!", TextExtractor.getText(match));
 	}
 
 	@Test
