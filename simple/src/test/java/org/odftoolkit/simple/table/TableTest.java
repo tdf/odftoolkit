@@ -947,20 +947,23 @@ public class TableTest {
 	public void testAppendRow() {
 		OdfFileDom dom;
 		try {
-			dom = mOdsDoc.getContentDom();
+			SpreadsheetDocument odsDoc = SpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("TestODSAppendRow.ods"));
+			dom = odsDoc.getContentDom();
 			NodeList tablelist = dom.getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "table");
-			mOdsTable = (TableTableElement) tablelist.item(0);
-			testAppendRow(mOdsTable);
-			saveods();
+			for (int i = 0; i < tablelist.getLength(); i++) {
+				mOdsTable = (TableTableElement) tablelist.item(i);
+				testAppendRow(mOdsTable);
+			}
+			odsDoc.save(ResourceUtilities.newTestOutputFile("TestODSAppendRowOutput.ods"));
 
-			mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
-			dom = mOdtDoc.getContentDom();
+			TextDocument odtDoc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("TestODTAppendRow.odt"));
+			dom = odtDoc.getContentDom();
 			tablelist = dom.getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "table");
 			for (int i = 0; i < tablelist.getLength(); i++) {
 				mOdtTable = (TableTableElement) tablelist.item(i);
 				testAppendRow(mOdtTable);
 			}
-			saveodt(mOdtTestFileName + "Out.odt");
+			odtDoc.save(ResourceUtilities.newTestOutputFile("TestODTAppendRowOutput.odt"));
 
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
