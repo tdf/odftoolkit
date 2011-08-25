@@ -41,17 +41,17 @@ public class ParagraphTest {
 
 	private static final String[] PLAIN_TEXT = { "nospace", "one space", "two  spaces", "three   spaces",
 			"   three leading spaces", "three trailing spaces   ", "one\ttab", "two\t\ttabs", "\tleading tab",
-			"trailing tab\t", "mixed   \t   spaces and tabs", "line\r\nbreak" };
+			"trailing tab\t", "mixed   \t   spaces and tabs", "line" + System.getProperty("line.separator") + "break" };
 
 	private static final String[][] ELEMENT_RESULT = { { "nospace" }, { "one space" }, { "two ", "*s1", "spaces" },
 			{ "three ", "*s2", "spaces" }, { " ", "*s2", "three leading spaces" }, { "three trailing spaces ", "*s2" },
 			{ "one", "*t", "tab" }, { "two", "*t", "*t", "tabs" }, { "*t", "leading tab" }, { "trailing tab", "*t" },
 			{ "mixed ", "*s2", "*t", " ", "*s2", "spaces and tabs" }, { "line", "*n", "break" } };
-	
-	private static final Logger LOGGER =  Logger.getLogger(ParagraphTest.class.getName());
+
+	private static final Logger LOGGER = Logger.getLogger(ParagraphTest.class.getName());
 
 	private static final String TEST_FILE = "CommentBreakHeadingDocument.odt";
-	
+
 	@Test
 	public void testAppend() {
 		TextDocument doc;
@@ -163,7 +163,7 @@ public class ParagraphTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testSetGetFont() {
 		try {
@@ -174,7 +174,7 @@ public class ParagraphTest {
 			paragraph1.setFont(font1);
 			Font font11 = paragraph1.getFont();
 			LOGGER.info(font11.toString());
-			if (!font11.equals(font1)){
+			if (!font11.equals(font1)) {
 				Assert.fail();
 			}
 
@@ -184,10 +184,10 @@ public class ParagraphTest {
 			paragraph2.setFont(font2);
 			Font font22 = paragraph2.getFont();
 			LOGGER.info(font22.toString());
-			if (!font22.equals(font2)){
+			if (!font22.equals(font2)) {
 				Assert.fail();
 			}
-			
+
 			Paragraph paragraph3 = doc.addParagraph("paragraph3");
 			Font font3 = paragraph3.getFont();
 			LOGGER.info(font3.toString());
@@ -196,7 +196,7 @@ public class ParagraphTest {
 			paragraph3.setFont(font3);
 			LOGGER.info(font3.toString());
 			Font font33 = paragraph3.getFont();
-			if (!font33.equals(font3)){
+			if (!font33.equals(font3)) {
 				Assert.fail();
 			}
 			doc.save(ResourceUtilities.newTestOutputFile("TestParagraphSetGetFont.odt"));
@@ -205,7 +205,7 @@ public class ParagraphTest {
 			Assert.fail();
 		}
 	}
-	
+
 	@Test
 	public void testGetSetHoriAlignment() {
 		try {
@@ -230,7 +230,7 @@ public class ParagraphTest {
 			Assert.fail();
 		}
 	}
-	
+
 	@Test
 	public void testGetSetHeading() {
 		try {
@@ -257,7 +257,7 @@ public class ParagraphTest {
 			Assert.fail();
 		}
 	}
-	
+
 	@Test
 	public void testHyperlink() {
 		try {
@@ -266,47 +266,46 @@ public class ParagraphTest {
 			TextHyperlink link1 = para.applyHyperlink(new URI("http://odftoolkit.org"));
 			Assert.assertEquals("http://odftoolkit.org", link1.getURI().toString());
 			Assert.assertEquals("abc", link1.getTextContent());
-			
+
 			String text = para.getTextContent();
 			Assert.assertEquals("abc", text);
-			
+
 			para.removeTextContent();
 			text = para.getTextContent();
 			Assert.assertEquals("", text);
 			para.setTextContent("no hyperlink there ");
 			para.appendHyperlink("link to ibm", new URI("http://www.ibm.com"));
-			
+
 			Paragraph heading = doc.addParagraph("Heading1");
 			TextHyperlink link2 = heading.applyHyperlink(new URI("mailto:daisy@odftoolkit.org"));
 			heading.applyHeading(true, 1);
-			
+
 			link2.setTextContent("New Heading1");
 			link2.setURI(new URI("mailto:devin@odftoolkit.org"));
 			Assert.assertEquals("mailto:devin@odftoolkit.org", link2.getURI().toString());
-			
+
 			Paragraph para3 = doc.addParagraph("world");
 			TextHyperlink link3 = para3.applyHyperlink(new URI("http://odftoolkit.org"));
 			link3.setTextContent("new world");
 			para3.appendTextContent("_prefix");
-			para3.appendTextContent("_nolink",false);
-			
+			para3.appendTextContent("_nolink", false);
+
 			doc.save(ResourceUtilities.newTestOutputFile("TestParagraphHyperlink.odt"));
-			
-			TextDocument textdoc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("TestParagraphHyperlink.odt"));
+
+			TextDocument textdoc = TextDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream("TestParagraphHyperlink.odt"));
 			Iterator<TextHyperlink> linkList = textdoc.getParagraphByReverseIndex(1, true).getHyperlinkIterator();
-			if (linkList.hasNext())
-			{
+			if (linkList.hasNext()) {
 				TextHyperlink aLink = linkList.next();
-				Assert.assertEquals("New Heading1",aLink.getTextContent());
-				Assert.assertEquals("mailto:devin@odftoolkit.org",aLink.getURI().toString());
+				Assert.assertEquals("New Heading1", aLink.getTextContent());
+				Assert.assertEquals("mailto:devin@odftoolkit.org", aLink.getURI().toString());
 			}
-			
+
 			linkList = textdoc.getParagraphByReverseIndex(0, true).getHyperlinkIterator();
-			if (linkList.hasNext())
-			{
+			if (linkList.hasNext()) {
 				TextHyperlink aLink = linkList.next();
-				Assert.assertEquals("new world_prefix",aLink.getTextContent());
-				Assert.assertEquals("http://odftoolkit.org",aLink.getURI().toString());
+				Assert.assertEquals("new world_prefix", aLink.getTextContent());
+				Assert.assertEquals("http://odftoolkit.org", aLink.getURI().toString());
 			}
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);

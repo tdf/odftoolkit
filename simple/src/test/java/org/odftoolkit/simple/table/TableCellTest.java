@@ -21,6 +21,7 @@
  ************************************************************************/
 package org.odftoolkit.simple.table;
 
+import java.awt.GraphicsEnvironment;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1233,7 +1234,7 @@ public class TableCellTest {
 	public void testCellParagraph() {
 		String[] plainText = { "nospace", "one space", "two  spaces", "three   spaces", "   three leading spaces",
 				"three trailing spaces   ", "one\ttab", "two\t\ttabs", "\tleading tab", "trailing tab\t",
-				"mixed   \t   spaces and tabs", "line\r\nbreak" };
+				"mixed   \t   spaces and tabs", "line" + System.getProperty("line.separator") + "break" };
 
 		String[][] elementResult = { { "nospace" }, { "one space" }, { "two ", "*s1", "spaces" },
 				{ "three ", "*s2", "spaces" }, { " ", "*s2", "three leading spaces" },
@@ -1304,32 +1305,47 @@ public class TableCellTest {
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			Table table = doc.addTable();
 			String contentStr = "This is a long text content.";
-			Cell cell = table.getCellByPosition(0, 0);
-			cell.getTableColumn().setUseOptimalWidth(true);
-			cell.setStringValue(contentStr);
-			Assert.assertEquals(44.0977, cell.getTableColumn().getWidth());
-			cell = table.getCellByPosition(1, 1);
-			cell.setFont(font1Base);
-			cell.getTableColumn().setUseOptimalWidth(true);
-			cell.setStringValue(contentStr);
-			Assert.assertEquals(24.3424, cell.getTableColumn().getWidth());
-			cell = table.getCellByPosition(2, 2);
-			cell.setFont(font2Base);
-			cell.getTableColumn().setUseOptimalWidth(true);
-			cell.setStringValue(contentStr);
-			Assert.assertEquals(49.7414, cell.getTableColumn().getWidth());
-			cell = table.getCellByPosition(3, 3);
-			cell.setFont(font3Base);
-			cell.getTableColumn().setUseOptimalWidth(true);
-			cell.setStringValue(contentStr);
-			Assert.assertEquals(88.899, cell.getTableColumn().getWidth());
+			checkCellWidth(table.getCellByPosition(0, 0), null, 44.0977, contentStr);
+			if (isFontAvailable(font1Base.getFamilyName())) {
+				checkCellWidth(table.getCellByPosition(1, 1), font1Base, 24.3424, contentStr);
+			}
+			if (isFontAvailable(font2Base.getFamilyName())) {
+				checkCellWidth(table.getCellByPosition(2, 2), font2Base, 49.7414, contentStr);
+			}
+			if (isFontAvailable(font3Base.getFamilyName())) {
+				checkCellWidth(table.getCellByPosition(3, 3), font3Base, 88.899, contentStr);
+			}
 			doc.save(ResourceUtilities.newTestOutputFile("testCellSizeOptimal.ods"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
+	private boolean isFontAvailable(String name) {
+		java.awt.Font[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
+		for (java.awt.Font font : fonts) {
+			if (font.getName().equalsIgnoreCase(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void checkCellWidth(Cell cell, Font font, double expectedOptimalWidth, String contentStr) {
+		try {
+			if (font != null) {
+				cell.setFont(font);
+			}
+			cell.getTableColumn().setUseOptimalWidth(true);
+			cell.setStringValue(contentStr);
+			Assert.assertEquals(expectedOptimalWidth, cell.getTableColumn().getWidth());
+		} catch (Exception e) {
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+
 	@Test
 	public void testSetValidityListAndInputHelpMessage() {
 		try {
@@ -1347,7 +1363,7 @@ public class TableCellTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	private void compareResults(Element element, String input, String[] output) {
 		int i;
 		int nSpaces;
