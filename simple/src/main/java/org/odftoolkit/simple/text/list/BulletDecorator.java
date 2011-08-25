@@ -117,14 +117,12 @@ public class BulletDecorator implements ListDecorator {
 			Logger.getLogger(BulletDecorator.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
-
-	@Override
+	
 	public void decorateList(List list) {
 		TextListElement listElement = list.getOdfElement();
 		listElement.setTextStyleNameAttribute(listStyle.getStyleNameAttribute());
 	}
 
-	@Override
 	public void decorateListItem(ListItem item) {
 		TextListItemElement listItemElement = item.getOdfElement();
 		Node child = listItemElement.getFirstChild();
@@ -149,7 +147,6 @@ public class BulletDecorator implements ListDecorator {
 		}
 	}
 
-	@Override
 	public ListType getListType() {
 		return ListType.BULLET;
 	}

@@ -39,17 +39,14 @@ import org.w3c.dom.Node;
  */
 public abstract class AbstractListContainer implements ListContainer {
 
-	@Override
 	public List addList() {
 		return new List(this);
 	}
 
-	@Override
 	public List addList(ListDecorator decorator) {
 		return new List(this, decorator);
 	}
 
-	@Override
 	public void clearList() {
 		OdfElement containerElement = getListContainerElement();
 		Node child = getListContainerElement().getFirstChild();
@@ -64,12 +61,10 @@ public abstract class AbstractListContainer implements ListContainer {
 		}
 	}
 
-	@Override
 	public Iterator<List> getListIterator() {
 		return new SimpleListIterator(this);
 	}
 
-	@Override
 	public boolean removeList(List list) {
 		OdfElement containerElement = getListContainerElement();
 		Node child = containerElement.getFirstChild();

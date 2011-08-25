@@ -304,39 +304,32 @@ public class Slide implements ListContainer {
 		}
 	}
 
-	@Override
 	public OdfElement getListContainerElement() {
 		return listContainerImpl.getListContainerElement();
 	}
 
-	@Override
 	public List addList() {
 		return listContainerImpl.addList();
 	}
-
-	@Override
+	
 	public List addList(ListDecorator decorator) {
 		return listContainerImpl.addList(decorator);
 	}
-
-	@Override
+	
 	public void clearList() {
 		listContainerImpl.clearList();
 	}
 
-	@Override
 	public Iterator<List> getListIterator() {
 		return listContainerImpl.getListIterator();
 	}
-
-	@Override
+	
 	public boolean removeList(List list) {
 		return listContainerImpl.removeList(list);
 	}
 
 	private class ListContainerImpl extends AbstractListContainer {
 
-		@Override
 		public OdfElement getListContainerElement() {
 			DrawFrameElement frame = null;
 			DrawTextBoxElement textBox = null;

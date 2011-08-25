@@ -94,7 +94,7 @@ public class Table {
 	IdentityHashMap<TableTableRowElement, Vector<Row>> mRowRepository = new IdentityHashMap<TableTableRowElement, Vector<Row>>();
 	IdentityHashMap<TableTableColumnElement, Vector<Column>> mColumnRepository = new IdentityHashMap<TableTableColumnElement, Vector<Column>>();
 	static {
-		IN_FORMAT.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
+		IN_FORMAT.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
 	}
 
 	/**

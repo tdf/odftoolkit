@@ -60,7 +60,6 @@ public class DefaultCellValueAdapter implements CellValueAdapter{
 	/* (non-Javadoc)
 	 * @see org.odftoolkit.simple.table.CellValueAdapter#adaptValue()
 	 */
-	@Override
 	public void adaptValue(Cell cell, String value){
 		String type = cell.getValueType();
 		String formatStr = cell.getFormatString();
