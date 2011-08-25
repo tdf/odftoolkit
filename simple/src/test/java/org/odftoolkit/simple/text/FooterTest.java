@@ -21,6 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.simple.text;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -51,6 +54,12 @@ public class FooterTest {
 			cellByPosition.setStringValue(expectedCellValue);
 			cellByPosition.setHorizontalAlignment(HorizontalAlignmentType.CENTER);
 			cellByPosition.setCellBackgroundColor(Color.GREEN);
+			
+			//first page
+			footer = doc.getFooter(true);
+			Assert.assertNotNull(footer);
+			table = footer.addTable(1, 2);
+			table.setTableName("footerFTable");
 			doc.save(ResourceUtilities.newTestOutputFile(footerDocumentPath));
 
 			// load the document again.
@@ -60,9 +69,13 @@ public class FooterTest {
 			Assert.assertEquals(rowCount, table.getRowCount());
 			Assert.assertEquals(columnCount, table.getColumnCount());
 			Assert.assertEquals(expectedCellValue, cellByPosition.getStringValue());
+
+			footer = doc.getFooter(true);
+			table = footer.getTableByName("footerFTable");
+			Assert.assertNotNull(table);
 		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail();
+			Logger.getLogger(FooterTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 	}
 }

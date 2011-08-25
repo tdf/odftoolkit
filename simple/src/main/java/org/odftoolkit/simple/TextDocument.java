@@ -62,8 +62,11 @@ public class TextDocument extends Document implements ListContainer {
 
 	private ListContainerImpl listContainerImpl;
 
-	private Header header;
-	private Footer footer;
+	private Header firstPageHeader;
+	private Header standardHeader;
+
+	private Footer firstPageFooter;
+	private Footer standardFooter;
 
 	/**
 	 * This enum contains all possible media types of SpreadsheetDocument
@@ -365,49 +368,89 @@ public class TextDocument extends Document implements ListContainer {
 	}
 
 	/**
-	 * Get the header of this text document.
+	 * Get the Standard Page header of this text document.
 	 * 
-	 * @return the header of this text document.
+	 * @return the Standard Page header of this text document.
 	 * @since 0.4.5
 	 */
 	public Header getHeader() {
-		if (header == null) {
+		return getHeader(false);
+	}
+
+	/**
+	 * Get the header of this text document.
+	 * 
+	 * @param isFirstPage
+	 *            if <code>isFirstPage</code> is true, return the First Page
+	 *            header, otherwise return Standard Page header.
+	 * 
+	 * @return the header of this text document.
+	 * @since 0.5
+	 */
+	public Header getHeader(boolean isFirstPage) {
+		Header tmpHeader = isFirstPage ? firstPageHeader : standardHeader;
+		if (tmpHeader == null) {
 			try {
-				StyleMasterPageElement masterPageElement = getStandardMasterPage();
+				StyleMasterPageElement masterPageElement = getMasterPage(isFirstPage);
 				StyleHeaderElement headerElement = OdfElement.findFirstChildNode(StyleHeaderElement.class,
 						masterPageElement);
 				if (headerElement == null) {
 					headerElement = masterPageElement.newStyleHeaderElement();
 				}
-				header = new Header(headerElement);
+				tmpHeader = new Header(headerElement);
 			} catch (Exception e) {
 				Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
 			}
+			if (isFirstPage) {
+				firstPageHeader = tmpHeader;
+			} else {
+				standardHeader = tmpHeader;
+			}
 		}
-		return header;
+		return tmpHeader;
+	}
+
+	/**
+	 * Get the Standard Page footer of this text document.
+	 * 
+	 * @return the Standard Page footer of this text document.
+	 * @since 0.4.5
+	 */
+	public Footer getFooter() {
+		return getFooter(false);
 	}
 
 	/**
 	 * Get the footer of this text document.
 	 * 
+	 * @param isFirstPage
+	 *            if <code>isFirstPage</code> is true, return the First Page
+	 *            footer, otherwise return Standard Page footer.
+	 * 
 	 * @return the footer of this text document.
-	 * @since 0.4.5
+	 * @since 0.5
 	 */
-	public Footer getFooter() {
-		if (footer == null) {
+	public Footer getFooter(boolean pFirstPage) {
+		Footer tmpFooter = pFirstPage ? firstPageFooter : standardFooter;
+		if (tmpFooter == null) {
 			try {
-				StyleMasterPageElement masterPageElement = getStandardMasterPage();
+				StyleMasterPageElement masterPageElement = getMasterPage(pFirstPage);
 				StyleFooterElement footerElement = OdfElement.findFirstChildNode(StyleFooterElement.class,
 						masterPageElement);
 				if (footerElement == null) {
 					footerElement = masterPageElement.newStyleFooterElement();
 				}
-				footer = new Footer(footerElement);
+				tmpFooter = new Footer(footerElement);
 			} catch (Exception e) {
 				Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
 			}
+			if (pFirstPage) {
+				firstPageFooter = tmpFooter;
+			} else {
+				standardFooter = tmpFooter;
+			}
 		}
-		return footer;
+		return tmpFooter;
 	}
 
 	public OdfElement getTableContainerElement() {
@@ -458,7 +501,8 @@ public class TextDocument extends Document implements ListContainer {
 		}
 	}
 
-	private StyleMasterPageElement getStandardMasterPage() throws Exception {
+	private StyleMasterPageElement getMasterPage(boolean pFirstPage) throws Exception {
+		String pageStyleName = pFirstPage ? "First_20_Page" : "Standard";
 		OfficeDocumentStylesElement rootElement = getStylesDom().getRootElement();
 		OfficeMasterStylesElement masterStyles = OdfElement.findFirstChildNode(OfficeMasterStylesElement.class,
 				rootElement);
@@ -472,7 +516,7 @@ public class TextDocument extends Document implements ListContainer {
 			for (int i = 0; i < lastMasterPages.getLength(); i++) {
 				StyleMasterPageElement masterPage = (StyleMasterPageElement) lastMasterPages.item(i);
 				String styleName = masterPage.getStyleNameAttribute();
-				if ("Standard".equals(styleName)) {
+				if (pageStyleName.equals(styleName)) {
 					masterPageEle = masterPage;
 					break;
 				}
@@ -481,7 +525,7 @@ public class TextDocument extends Document implements ListContainer {
 		if (masterPageEle == null) {
 			OdfStylePageLayout layout = OdfElement.findFirstChildNode(OdfStylePageLayout.class, getStylesDom()
 					.getAutomaticStyles());
-			masterPageEle = masterStyles.newStyleMasterPageElement("Standard", layout.getStyleNameAttribute());
+			masterPageEle = masterStyles.newStyleMasterPageElement(pageStyleName, layout.getStyleNameAttribute());
 		}
 		return masterPageEle;
 	}

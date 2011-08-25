@@ -21,6 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.simple.text;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -48,6 +51,12 @@ public class HeaderTest {
 			table.getCellByPosition(1, 1).setStringValue(expectedCellValue);
 			Cell cell = table.getCellByPosition(4, 0);
 			cell.setImage(ResourceUtilities.getURI("image_list_item.png"));
+			// first page
+			header = doc.getHeader(true);
+			Assert.assertNotNull(header);
+
+			table = header.addTable();
+			table.setTableName("headerHTable");
 			doc.save(ResourceUtilities.newTestOutputFile(headerDocumentPath));
 
 			// load the document again.
@@ -59,9 +68,12 @@ public class HeaderTest {
 			Assert.assertEquals(expectedCellValue, table.getCellByPosition(1, 1).getStringValue());
 			cell = table.getCellByPosition(4, 0);
 			Assert.assertEquals(34, cell.getImage().getHeight(null));
+			header = doc.getHeader(true);
+			table = header.getTableByName("headerHTable");
+			Assert.assertNotNull(table);
 		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail();
+			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 	}
 }
