@@ -40,7 +40,7 @@ public abstract class Component {
 	 * 
 	 * @return the instance of OdfElement
 	 */
-	abstract public OdfElement getOdfElement();
+	public abstract OdfElement getOdfElement();
 
 	/**
 	 * Register component to the map repository
@@ -56,6 +56,23 @@ public abstract class Component {
 		synchronized (ownerDoc) {
 			IdentityHashMap<OdfElement, Component> repository = ownerDoc.getComponentMap();
 			repository.put(element, component);
+		}
+	}
+	
+	/**
+	 * Unregister component from the map repository
+	 * 
+	 * @param element
+	 *            the instance of OdfElement which presents this component.
+	 * 
+	 * @see Document#getComponentMap()
+	 * @since 0.6.5
+	 */
+	protected static void unregisterComponent(OdfElement element) {
+		Document ownerDoc = (Document) ((OdfFileDom) element.getOwnerDocument()).getDocument();
+		synchronized (ownerDoc) {
+			IdentityHashMap<OdfElement, Component> repository = ownerDoc.getComponentMap();
+			repository.remove(element);
 		}
 	}
 

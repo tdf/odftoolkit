@@ -336,7 +336,8 @@ public class Font {
 
 	@Override
 	public String toString() {
-		return "FamilyName:" + getFamilyName() + ";" + "Style:" + getFontStyle() + ";" + "Size:" + getSize();
+		return "FamilyName:" + getFamilyName() + "; Style:" + getFontStyle() + "; Size:" + getSize() + "; Color:"
+				+ getColor() + "; TextLinePosition:" + getTextLinePosition();
 	}
 
 	@Override

@@ -41,6 +41,9 @@ import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
@@ -513,9 +516,52 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	public boolean removeList(List list) {
 		return getListContainerImpl().removeList(list);
 	}
-
+	
 	/**
-	 * Creates a new paragraph and append text
+	 * Appends a new page break to this document.
+	 * 
+	 * @since 0.6.5
+	 */
+	public void addPageBreak() {
+		try {
+			OdfContentDom contentDocument = getContentDom();
+			OdfOfficeAutomaticStyles styles = contentDocument.getAutomaticStyles();
+			OdfStyle style = styles.newStyle(OdfStyleFamily.Paragraph);
+			style.newStyleParagraphPropertiesElement().setFoBreakBeforeAttribute("page");
+			TextPElement pEle = getContentRoot().newTextPElement();
+			pEle.setStyleName(style.getStyleNameAttribute());
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+			throw new RuntimeException("PageBreak appends failed.", e);
+		}
+	}
+	
+	/**
+	 * Appends a new page break to this document after the reference paragraph.
+	 * 
+	 * @param refParagraph
+	 *            the reference paragraph after where the page break inserted.
+	 * @since 0.6.5
+	 */
+	public void addPageBreak(Paragraph refParagraph) {
+		try {
+			OdfContentDom contentDocument = getContentDom();
+			OdfOfficeAutomaticStyles styles = contentDocument.getAutomaticStyles();
+			OdfStyle style = styles.newStyle(OdfStyleFamily.Paragraph);
+			style.newStyleParagraphPropertiesElement().setFoBreakBeforeAttribute("page");
+			OfficeTextElement contentRoot = getContentRoot();
+			TextPElement pEle = contentRoot.newTextPElement();
+			OdfElement refEle = refParagraph.getOdfElement();
+			contentRoot.insertBefore(pEle, refEle.getNextSibling());
+			pEle.setStyleName(style.getStyleNameAttribute());
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+			throw new RuntimeException("PageBreak appends failed.", e);
+		}
+	}
+	
+	/**
+	 * Creates a new paragraph and append text.
 	 * 
 	 * @param text
 	 * @return the new paragraph

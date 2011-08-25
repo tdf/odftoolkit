@@ -26,35 +26,43 @@ import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.style.Font;
+import org.odftoolkit.simple.style.StyleTypeDefinitions;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 public class ParagraphTest {
 
-	String[] plainText = { "nospace", "one space", "two  spaces", "three   spaces", "   three leading spaces",
-			"three trailing spaces   ", "one\ttab", "two\t\ttabs", "\tleading tab", "trailing tab\t",
-			"mixed   \t   spaces and tabs", "line\r\nbreak" };
+	private static final String[] PLAIN_TEXT = { "nospace", "one space", "two  spaces", "three   spaces",
+			"   three leading spaces", "three trailing spaces   ", "one\ttab", "two\t\ttabs", "\tleading tab",
+			"trailing tab\t", "mixed   \t   spaces and tabs", "line\r\nbreak" };
 
-	String[][] elementResult = { { "nospace" }, { "one space" }, { "two ", "*s1", "spaces" },
+	private static final String[][] ELEMENT_RESULT = { { "nospace" }, { "one space" }, { "two ", "*s1", "spaces" },
 			{ "three ", "*s2", "spaces" }, { " ", "*s2", "three leading spaces" }, { "three trailing spaces ", "*s2" },
 			{ "one", "*t", "tab" }, { "two", "*t", "*t", "tabs" }, { "*t", "leading tab" }, { "trailing tab", "*t" },
 			{ "mixed ", "*s2", "*t", " ", "*s2", "spaces and tabs" }, { "line", "*n", "break" } };
+	
+	private static final Logger LOGGER =  Logger.getLogger(ParagraphTest.class.getName());
 
+	private static final String TEST_FILE = "CommentBreakHeadingDocument.odt";
+	
 	@Test
 	public void testAppend() {
 		TextDocument doc;
 		try {
 			doc = TextDocument.newTextDocument();
 			int i;
-			for (i = 0; i < plainText.length; i++) {
+			for (i = 0; i < PLAIN_TEXT.length; i++) {
 				Paragraph para = Paragraph.newParagraph(doc);
-				para.appendTextContent(plainText[i]);
-				compareResults(para.getOdfElement(), plainText[i], elementResult[i]);
+				para.appendTextContent(PLAIN_TEXT[i]);
+				compareResults(para.getOdfElement(), PLAIN_TEXT[i], ELEMENT_RESULT[i]);
 			}
 		} catch (Exception e) {
-			Logger.getLogger(ParagraphTest.class.getName()).log(Level.SEVERE, null, e);
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -65,16 +73,16 @@ public class ParagraphTest {
 		try {
 			doc = TextDocument.newTextDocument();
 			int i;
-			for (i = 0; i < plainText.length; i++) {
+			for (i = 0; i < PLAIN_TEXT.length; i++) {
 				Paragraph para = Paragraph.newParagraph(doc);
-				para.setTextContent(plainText[i]);
-				compareResults(para.getOdfElement(), plainText[i], elementResult[i]);
+				para.setTextContent(PLAIN_TEXT[i]);
+				compareResults(para.getOdfElement(), PLAIN_TEXT[i], ELEMENT_RESULT[i]);
 
 				String content = para.getTextContent();
-				Assert.assertEquals(plainText[i], content);
+				Assert.assertEquals(PLAIN_TEXT[i], content);
 			}
 		} catch (Exception e) {
-			Logger.getLogger(ParagraphTest.class.getName()).log(Level.SEVERE, null, e);
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -85,17 +93,17 @@ public class ParagraphTest {
 		try {
 			doc = TextDocument.newTextDocument();
 			int i;
-			for (i = 0; i < plainText.length; i++) {
+			for (i = 0; i < PLAIN_TEXT.length; i++) {
 				Paragraph para = Paragraph.newParagraph(doc);
-				para.setTextContentNotCollapsed(plainText[i]);
+				para.setTextContentNotCollapsed(PLAIN_TEXT[i]);
 				String content = para.getTextContent();
-				Assert.assertEquals(plainText[i], content);
+				Assert.assertEquals(PLAIN_TEXT[i], content);
 				para.removeTextContent();
 				content = para.getTextContent();
 				Assert.assertEquals("", content);
 			}
 		} catch (Exception e) {
-			Logger.getLogger(ParagraphTest.class.getName()).log(Level.SEVERE, null, e);
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -149,9 +157,102 @@ public class ParagraphTest {
 			Assert.assertEquals(t1, paragraph1);
 			doc.save(ResourceUtilities.newTestOutputFile("testGetParagraphByIndex.odt"));
 		} catch (Exception e) {
-			Logger.getLogger(ParagraphTest.class.getName()).log(Level.SEVERE, null, e);
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
+	
+	@Test
+	public void testSetGetFont() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Paragraph paragraph1 = doc.addParagraph("paragraph1");
+			Font font1 = new Font("Arial", StyleTypeDefinitions.FontStyle.ITALIC, 12, Color.BLACK,
+					StyleTypeDefinitions.TextLinePosition.THROUGH);
+			paragraph1.setFont(font1);
+			Font font11 = paragraph1.getFont();
+			LOGGER.info(font11.toString());
+			if (!font11.equals(font1)){
+				Assert.fail();
+			}
 
+			Paragraph paragraph2 = doc.addParagraph("paragraph2");
+			Font font2 = new Font("Arial", StyleTypeDefinitions.FontStyle.ITALIC, 12, Color.RED,
+					StyleTypeDefinitions.TextLinePosition.UNDER);
+			paragraph2.setFont(font2);
+			Font font22 = paragraph2.getFont();
+			LOGGER.info(font22.toString());
+			if (!font22.equals(font2)){
+				Assert.fail();
+			}
+			
+			Paragraph paragraph3 = doc.addParagraph("paragraph3");
+			Font font3 = paragraph3.getFont();
+			LOGGER.info(font3.toString());
+			font3.setColor(Color.GREEN);
+			font3.setFontStyle(StyleTypeDefinitions.FontStyle.BOLD);
+			paragraph3.setFont(font3);
+			LOGGER.info(font3.toString());
+			Font font33 = paragraph3.getFont();
+			if (!font33.equals(font3)){
+				Assert.fail();
+			}
+			doc.save(ResourceUtilities.newTestOutputFile("TestParagraphSetGetFont.odt"));
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail();
+		}
+	}
+	
+	@Test
+	public void testGetSetHoriAlignment() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Paragraph paragraph1 = doc.addParagraph("paragraph1");
+
+			paragraph1.setHorizontalAlignment(HorizontalAlignmentType.DEFAULT);
+			HorizontalAlignmentType align = paragraph1.getHorizontalAlignment();
+			Assert.assertEquals(HorizontalAlignmentType.DEFAULT, align);
+
+			paragraph1.setHorizontalAlignment(HorizontalAlignmentType.LEFT);
+			align = paragraph1.getHorizontalAlignment();
+			Assert.assertEquals(HorizontalAlignmentType.LEFT, align);
+
+			paragraph1.setHorizontalAlignment(HorizontalAlignmentType.RIGHT);
+			align = paragraph1.getHorizontalAlignment();
+			Assert.assertEquals(HorizontalAlignmentType.RIGHT, align);
+
+			doc.save(ResourceUtilities.newTestOutputFile("TestParagraphSetGetHoriAlignment.odt"));
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail();
+		}
+	}
+	
+	@Test
+	public void testGetSetHeading() {
+		try {
+			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+			// test isHeading() and getHeadingLevel();
+			Paragraph headingParagraph = doc.getParagraphByIndex(0, true);
+			Assert.assertEquals(true, headingParagraph.isHeading());
+			Assert.assertEquals(1, headingParagraph.getHeadingLevel());
+			Paragraph textParagraph = doc.getParagraphByIndex(1, true);
+			Assert.assertEquals(false, textParagraph.isHeading());
+			Assert.assertEquals(0, textParagraph.getHeadingLevel());
+
+			// test applyHeading()
+			textParagraph.applyHeading();
+			Assert.assertEquals(true, textParagraph.isHeading());
+			Assert.assertEquals(1, textParagraph.getHeadingLevel());
+			textParagraph.applyHeading(true, 3);
+			Assert.assertEquals(true, textParagraph.isHeading());
+			Assert.assertEquals(3, textParagraph.getHeadingLevel());
+
+			doc.save(ResourceUtilities.newTestOutputFile("TestParagraphSetGetHeading.odt"));
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail();
+		}
+	}
 }

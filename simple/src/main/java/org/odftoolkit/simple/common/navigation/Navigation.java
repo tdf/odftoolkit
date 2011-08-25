@@ -21,6 +21,7 @@
  ************************************************************************/
 package org.odftoolkit.simple.common.navigation;
 
+import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.w3c.dom.Node;
 
 /**
@@ -133,7 +134,8 @@ public abstract class Navigation {
 		// if (match(root)) return root;
 		Node node = root.getFirstChild();
 		while (node != null) {
-			if ((node.getNodeType() == Node.TEXT_NODE || node.getNodeType() == Node.ELEMENT_NODE)) {
+			if ((node.getNodeType() == Node.TEXT_NODE || node.getNodeType() == Node.ELEMENT_NODE)
+					&& (!(node instanceof OfficeAnnotationElement))) {
 				if (match(node) == true) {
 					matchedNode = node;
 					break;

@@ -22,18 +22,26 @@
 package org.odftoolkit.simple.common.navigation;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
+import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
+import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextAElement;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextHeading;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
@@ -209,7 +217,7 @@ public class TextSelection extends Selection {
 		OdfTextSpan textSpan = new OdfTextSpan((OdfFileDom) parentElement.getOwnerDocument());
 		textSpan.addContentWhitespace(newText);
 		mIsInserted = false;
-		insertSpan(textSpan, index, parentElement);
+		insertOdfElement(textSpan, index, parentElement);
 		// optimize the parent element
 		optimize(parentElement);
 		int offset = newText.length() - leftLength;
@@ -236,7 +244,7 @@ public class TextSelection extends Selection {
 		OdfTextSpan textSpan = new OdfTextSpan((OdfFileDom) parentElement.getOwnerDocument());
 		textSpan.addContentWhitespace(getText());
 		mIsInserted = false;
-		insertSpan(textSpan, index, parentElement);
+		insertOdfElement(textSpan, index, parentElement);
 		// optimize the parent element
 		optimize(parentElement);
 
@@ -265,7 +273,7 @@ public class TextSelection extends Selection {
 
 		OdfTextSpan textSpan = getSpan((OdfFileDom) positionItem.getElement().getOwnerDocument());
 		mIsInserted = false;
-		insertSpan(textSpan, indexOfNew, newElement);
+		insertOdfElement(textSpan, indexOfNew, newElement);
 		adjustStyle(newElement, textSpan, null);
 		SelectionManager.refreshAfterPasteAtFrontOf(this, positionItem);
 	}
@@ -292,7 +300,7 @@ public class TextSelection extends Selection {
 		}
 		OdfTextSpan textSpan = getSpan((OdfFileDom) positionItem.getElement().getOwnerDocument());
 		mIsInserted = false;
-		insertSpan(textSpan, indexOfNew, newElement);
+		insertOdfElement(textSpan, indexOfNew, newElement);
 		adjustStyle(newElement, textSpan, null);
 		SelectionManager.refreshAfterPasteAtEndOf(this, positionItem);
 	}
@@ -314,7 +322,58 @@ public class TextSelection extends Selection {
 		int index = mIndexInContainer;
 		addHref(index, leftLength, parentElement, url.toString());
 	}
-
+	
+	/**
+	 * Add a comment to the selection.
+	 * 
+	 * @param content
+	 *            the content of this comment.
+	 * @param creator
+	 *            the creator of this comment, if <code>creator</code> is null,
+	 *            the value of <code>System.getProperty("user.name")</code> will
+	 *            be used.
+	 * @throws InvalidNavigationException
+	 *            if the selection is unavailable.
+	 * @since 0.6.5
+	 */
+	public void addComment(String content, String creator) throws InvalidNavigationException {
+		if (validate() == false) {
+			throw new InvalidNavigationException("No matched string at this position");
+		}
+		// create annotation element
+		OdfElement parentElement = getContainerElement();
+		OdfFileDom dom = (OdfFileDom) parentElement.getOwnerDocument();
+		OfficeAnnotationElement annotationElement = dom.newOdfElement(OfficeAnnotationElement.class);
+		// set creator
+		DcCreatorElement dcCreatorElement = annotationElement.newDcCreatorElement();
+		if (creator == null) {
+			creator = System.getProperty("user.name");
+		}
+		dcCreatorElement.setTextContent(creator);
+		// set date
+		String dcDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(new Date());
+		DcDateElement dcDateElement = annotationElement.newDcDateElement();
+		dcDateElement.setTextContent(dcDate);
+		TextPElement notePElement = annotationElement.newTextPElement();
+		TextSpanElement noteSpanElement = notePElement.newTextSpanElement();
+		// set comment style
+		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
+		OdfStyle textStyle = styles.newStyle(OdfStyleFamily.Text);
+		StyleTextPropertiesElement styleTextPropertiesElement = textStyle.newStyleTextPropertiesElement(null);
+		styleTextPropertiesElement.setStyleFontNameAttribute("Tahoma");
+		styleTextPropertiesElement.setFoFontSizeAttribute("10pt");
+		styleTextPropertiesElement.setStyleFontNameAsianAttribute("Lucida Sans Unicode");
+		styleTextPropertiesElement.setStyleFontSizeAsianAttribute("12pt");
+		noteSpanElement.setStyleName(textStyle.getStyleNameAttribute());
+		// set comment content
+		noteSpanElement.setTextContent(content);
+		// insert comment to its position
+		insertOdfElement(annotationElement, mIndexInContainer, parentElement);
+		// three text length plus two '\r'
+		int offset = content.length() + 1 + dcDate.length() + 1 + creator.length();
+		SelectionManager.refresh(getContainerElement(), offset, getIndex());
+	}
+	
 	/**
 	 * return a String Object representing this selection value the text content
 	 * of the selection, start index in the container element and the text
@@ -428,9 +487,9 @@ public class TextSelection extends Selection {
 	}
 
 	/*
-	 * Insert <code>textSpan</code> into the from index of <code>pNode<code>.
+	 * Insert <code>odfElement</code>, span or annotation, into the from index of <code>pNode<code>.
 	 */
-	private void insertSpan(OdfTextSpan textSpan, int fromIndex, Node pNode) {
+	private void insertOdfElement(OdfElement odfElement, int fromIndex, Node pNode) {
 		if (fromIndex < 0) {
 			fromIndex = 0;
 		}
@@ -460,10 +519,10 @@ public class TextSelection extends Selection {
 					Node newNode = node.cloneNode(true);
 					newNode.setNodeValue(value.substring(fromIndex, value.length()));
 					if (nextNode != null) {
-						parNode.insertBefore(textSpan, nextNode);
+						parNode.insertBefore(odfElement, nextNode);
 						parNode.insertBefore(newNode, nextNode);
 					} else {
-						parNode.appendChild(textSpan);
+						parNode.appendChild(odfElement);
 						parNode.appendChild(newNode);
 					}
 					mIsInserted = true;
@@ -487,7 +546,7 @@ public class TextSelection extends Selection {
 					fromIndex--;
 				} else {
 					nodeLength = TextExtractor.getText((OdfElement) node).length();
-					insertSpan(textSpan, fromIndex, node);
+					insertOdfElement(odfElement, fromIndex, node);
 					fromIndex -= nodeLength;
 				}
 			}

@@ -50,14 +50,16 @@ import org.w3c.dom.Node;
  */
 public class TextSelectionTest {
 
-	public static final String TEXT_FILE = "TestTextSelection.odt";
-	public static final String SAVE_FILE_DELETE = "TextSelectionResultDelete.odt";
-	public static final String SAVE_FILE_STYLE = "TextSelectionResultStyle.odt";
-	public static final String SAVE_FILE_HREF = "TextSelectionResultHref.odt";
-	public static final String SAVE_FILE_REPLACE = "TextSelectionResultReplace.odt";
-	public static final String SAVE_FILE_COPYTO = "TextSelectionResultCopyTo.odt";
-	public static final String SAVE_FILE_COPYTO1 = "TextSelectionResultCopyTo1.odt";
-	public static final String SAVE_FILE_DELETE_PATTERN = "TextSelectionResultPatternDelete.odt";
+	private static final String TEXT_FILE = "TestTextSelection.odt";
+	private static final String TEXT_COMMENT_FILE = "TestTextSelectionComment.odt";
+	private static final String SAVE_FILE_DELETE = "TextSelectionResultDelete.odt";
+	private static final String SAVE_FILE_STYLE = "TextSelectionResultStyle.odt";
+	private static final String SAVE_FILE_HREF = "TextSelectionResultHref.odt";
+	private static final String SAVE_FILE_COMMENT = "TextSelectionResultComment.odt";
+	private static final String SAVE_FILE_REPLACE = "TextSelectionResultReplace.odt";
+	private static final String SAVE_FILE_COPYTO = "TextSelectionResultCopyTo.odt";
+	private static final String SAVE_FILE_COPYTO1 = "TextSelectionResultCopyTo1.odt";
+	private static final String SAVE_FILE_DELETE_PATTERN = "TextSelectionResultPatternDelete.odt";
 	TextDocument doc;
 	OdfFileDom contentDOM;
 	TextNavigation search;
@@ -314,7 +316,32 @@ public class TextSelectionTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-
+	
+	/**
+	 * Test addComment method of
+	 * org.odftoolkit.simple.common.navigation.TextSelection add comment
+	 * "simpleODF should be Simple ODF" for all the 'simpleODF' word
+	 */
+	@Test
+	public void testAddComment() {
+		try {
+			TextDocument textDoc = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_COMMENT_FILE));
+			search = new TextNavigation("simpleODF", textDoc);
+			int i=0;
+			while (search.hasNext()) {
+				TextSelection item = (TextSelection) search.nextSelection();
+				item.addComment("simpleODF should be replaced by Simple ODF.", "devin-"+i);
+				i++;
+			}
+			// there are 7 simpleODF in this test document.
+			Assert.assertEquals(7, i);
+			textDoc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_COMMENT));
+		} catch (Exception e) {
+			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+	}
+	
 	/**
 	 * Test addHref method of
 	 * org.odftoolkit.simple.common.navigation.TextSelection add href

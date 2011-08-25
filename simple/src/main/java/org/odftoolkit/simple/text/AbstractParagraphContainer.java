@@ -25,7 +25,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
@@ -45,7 +45,7 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 	 * Add paragraph at the end of the container with specified text content.
 	 * 
 	 * @param textContent
-	 *            - the text content
+	 *            the text content
 	 * @return an instance of paragraph
 	 */
 	public Paragraph addParagraph(String textContent) {
@@ -58,7 +58,7 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 	 * Remove paragraph from the container
 	 * 
 	 * @param para
-	 *            - the instance of paragraph
+	 *            the instance of paragraph
 	 * @return true if the paragraph is removed successfully, false if errors
 	 *         happen.
 	 */
@@ -90,9 +90,9 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 	 * If empty paragraph is skipped, the empty paragraph won't be counted.
 	 * 
 	 * @param index
-	 *            - the index started from 0.
+	 *            the index started from 0.
 	 * @param isEmptyParagraphSkipped
-	 *            - whether the empty paragraph is skipped or not
+	 *            whether the empty paragraph is skipped or not.
 	 * @return the paragraph with a given index
 	 */
 	public Paragraph getParagraphByIndex(int index, boolean isEmptyParagraphSkipped) {
@@ -101,8 +101,9 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 			Paragraph current = iterator.next();
 			if (isEmptyParagraphSkipped) {
 				String content = current.getTextContent();
-				if ((content == null) || (content.length() == 0))
+				if ((content == null) || (content.length() == 0)) {
 					continue;
+				}
 			}
 			if (index == 0) {
 				return current;
@@ -120,10 +121,10 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 	 * If empty paragraph is skipped, the empty paragraph won't be counted.
 	 * 
 	 * @param reverseIndex
-	 *            - the index started from 0 in reverse order.
+	 *            the index started from 0 in reverse order.
 	 * @param isEmptyParagraphSkipped
-	 *            - whether the empty paragraph is skipped or not
-	 * @return the paragraph with a given index
+	 *            whether the empty paragraph is skipped or not.
+	 * @return the paragraph with a given index.
 	 */
 	public Paragraph getParagraphByReverseIndex(int reverseIndex, boolean isEmptyParagraphSkipped) {
 		OdfElement containerElement = getParagraphContainerElement();
@@ -133,7 +134,7 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 				node = node.getPreviousSibling();
 				continue;
 			}
-			if (node instanceof TextPElement) {
+			if (node instanceof TextParagraphElementBase) {
 				if (isEmptyParagraphSkipped) {
 					if (node.hasChildNodes() == false || node.getTextContent() == null
 							|| node.getTextContent().length() == 0) {
@@ -142,7 +143,7 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 					}
 				}
 				if (reverseIndex == 0) {
-					return Paragraph.getInstanceof((TextPElement) node);
+					return Paragraph.getInstanceof((TextParagraphElementBase) node);
 				}
 				reverseIndex--;
 			}
@@ -188,15 +189,15 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 		}
 
 		private Paragraph findNext(Paragraph thisBox) {
-			TextPElement nextFrame = null;
+			TextParagraphElementBase nextParagraph = null;
 			if (thisBox == null) {
-				nextFrame = OdfElement.findFirstChildNode(TextPElement.class, containerElement);
+				nextParagraph = OdfElement.findFirstChildNode(TextParagraphElementBase.class, containerElement);
 			} else {
-				nextFrame = OdfElement.findNextChildNode(TextPElement.class, thisBox.getOdfElement());
+				nextParagraph = OdfElement.findNextChildNode(TextParagraphElementBase.class, thisBox.getOdfElement());
 			}
 
-			if (nextFrame != null) {
-				return Paragraph.getInstanceof(nextFrame);
+			if (nextParagraph != null) {
+				return Paragraph.getInstanceof(nextParagraph);
 			}
 			return null;
 		}
