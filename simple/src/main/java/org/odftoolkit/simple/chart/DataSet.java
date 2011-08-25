@@ -563,9 +563,12 @@ public class DataSet {
 	 * @param spreadsheet
 	 *            the spreadsheet document instance, the cell address is
 	 *            relative to the spreadsheet document.
-	 * @param isRowLabel
-	 *            true if select the first row as labels, false if select the
-	 *            first column as labels.
+	 * @param bFirstRowAsLabel
+	 *            whether this data set uses first row as chart label.
+	 * @param bFirstColumnAsLabel
+	 *            whether this data set uses first column as chart label.
+	 * @param rowAsDataSeries
+	 *            whether this data set uses row as data series.
 	 */
 	public void setValues(CellRangeAddressList cellRangeAddress, SpreadsheetDocument spreadsheet,
 			boolean bFirstRowAsLabel, boolean bFirstColumnAsLabel, boolean rowAsDataSeries) {

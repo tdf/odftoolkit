@@ -296,10 +296,10 @@ public class Image extends Component {
 	}
 
 	/**
-	 * Return an iterator of image
+	 * Return an iterator of image.
 	 * 
-	 * @param container
-	 * @return
+	 * @param container the frame container.
+	 * @return the image iterator.
 	 */
 	public static Iterator<Image> imageIterator(FrameContainer container) {
 		return new SimpleImageIterator(container);

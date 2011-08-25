@@ -2388,7 +2388,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * 
 	 * @param title
 	 *            the title of the tip.
-	 * @param message
+	 * @param text
 	 *            the text of the tip.
 	 * @since 0.6
 	 */

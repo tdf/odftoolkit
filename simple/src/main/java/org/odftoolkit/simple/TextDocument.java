@@ -550,7 +550,7 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	 * @param spacing
 	 * 			column spacing in cm (ex. 2.40 for 2,4 cm)
 	 * 
-	 * @since 0.7
+	 * @since 0.6.6
 	 */
 	public void setPageColumns(int columnsNumber, double spacing) {
 		String vSpacingColumn = (new DecimalFormat("#0.###").format(spacing) + Unit.CENTIMETER.abbr()).replace(",", ".");
@@ -617,7 +617,7 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	/**
 	 * Appends a new column break to this document.
 	 * 
-	 * @since 0.7
+	 * @since 0.6.6
 	 */
 	public void addColumnBreak() {
 		addPageOrColumnBreak(null, "column");
@@ -628,7 +628,7 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	 * 
 	 * @param refParagraph
 	 *            the reference paragraph after where the column break inserted.
-	 * @since 0.7
+	 * @since 0.6.6
 	 */
 	public void addColumnBreak(Paragraph refParagraph) {
 		addPageOrColumnBreak(refParagraph, "column");

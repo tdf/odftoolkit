@@ -61,7 +61,8 @@ public class Span extends Component implements TextHyperlinkContainer {
 	/**
 	 * Create a span instance with a text selection
 	 * 
-	 * @param text
+	 * @param textSelection
+	 *            the TextSelection which the span is applied to.
 	 * @return an instance of span
 	 * @see org.odftoolkit.simple.common.navigation.TextSelection
 	 */

@@ -217,7 +217,7 @@ public class Chart {
 	/**
 	 * chart axis manipulation, temporarily only consider the axis title
 	 * 
-	 * @param dim
+	 * @param dimType
 	 *            the chart axis dimension, x, y or z
 	 * @return return axis title according to the given dimension,null if the
 	 *         specific dimensional axis has no title
@@ -512,7 +512,7 @@ public class Chart {
 	 * chart axis manipulation, set the chart axis title according to the give
 	 * dimension
 	 * 
-	 * @param dim
+	 * @param dimType
 	 *            the chart axis dimension, x,y, or z
 	 * @param title
 	 *            the title of axis

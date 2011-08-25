@@ -565,12 +565,16 @@ public class SpreadsheetDocument extends Document implements ChartContainer {
 	 * 
 	 * @param title
 	 *            chart rectangle.
-	 * @param labels
-	 *            label strings
-	 * @param legends
-	 *            legend strings
-	 * @param data
-	 *            chart data set.
+	 * @param document
+	 *            the data source spreadsheet document.
+	 * @param cellRangeAddr
+	 *            the cell range list to be used as chart data.
+	 * @param firstRowAsLabel
+	 *            whether use first row as label.
+	 * @param firstColumnAsLabel
+	 *            whether use first column as label.
+	 * @param rowAsDataSeries
+	 *            whether use row as data series.
 	 * @param rect
 	 *            chart rectangle.
 	 * @param cell
