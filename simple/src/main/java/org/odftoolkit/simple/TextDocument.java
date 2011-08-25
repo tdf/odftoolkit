@@ -22,25 +22,35 @@
  ************************************************************************/
 package org.odftoolkit.simple;
 
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
+import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.odfdom.type.CellRangeAddressList;
+import org.odftoolkit.simple.chart.AbstractChartContainer;
+import org.odftoolkit.simple.chart.Chart;
+import org.odftoolkit.simple.chart.ChartContainer;
+import org.odftoolkit.simple.chart.DataSet;
 import org.odftoolkit.simple.common.field.AbstractVariableContainer;
 import org.odftoolkit.simple.common.field.VariableContainer;
 import org.odftoolkit.simple.common.field.VariableField;
@@ -62,7 +72,7 @@ import org.w3c.dom.NodeList;
  * This class represents an empty ODF text document.
  * 
  */
-public class TextDocument extends Document implements ListContainer, ParagraphContainer, VariableContainer {
+public class TextDocument extends Document implements ListContainer, ParagraphContainer, VariableContainer, ChartContainer {
 
 	private static final String EMPTY_TEXT_DOCUMENT_PATH = "/OdfTextDocument.odt";
 	static final Resource EMPTY_TEXT_DOCUMENT_RESOURCE = new Resource(EMPTY_TEXT_DOCUMENT_PATH);
@@ -70,7 +80,8 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	private ListContainerImpl listContainerImpl;
 	private ParagraphContainerImpl paragraphContainerImpl;
 	private VariableContainerImpl variableContainerImpl;
-
+	private ChartContainerImpl chartContainerImpl;
+	
 	private Header firstPageHeader;
 	private Header standardHeader;
 
@@ -555,7 +566,41 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	public OdfElement getVariableContainerElement() {
 		return getVariableContainerImpl().getVariableContainerElement();
 	}
+	
+	public Chart createChart(String title, DataSet dataset, Rectangle rect) {
+		return getChartContainerImpl().createChart(title, dataset, rect);
+	}
 
+	public Chart createChart(String title, SpreadsheetDocument document, CellRangeAddressList cellRangeAddr, boolean firstRowAsLabel,
+			boolean firstColumnAsLabel, boolean rowAsDataSeries, Rectangle rect) {
+		return getChartContainerImpl().createChart(title, document, cellRangeAddr, firstRowAsLabel, firstColumnAsLabel,
+				rowAsDataSeries, rect);
+	}
+
+	public Chart createChart(String title, String[] labels, String[] legends, double[][] data, Rectangle rect) {
+		return getChartContainerImpl().createChart(title, labels, legends, data, rect);
+	}
+
+	public void deleteChartById(String chartId) {
+		getChartContainerImpl().deleteChartById(chartId);
+	}
+
+	public void deleteChartByTitle(String title) {
+		getChartContainerImpl().deleteChartByTitle(title);
+	}
+
+	public Chart getChartById(String chartId) {
+		return getChartContainerImpl().getChartById(chartId);
+	}
+
+	public java.util.List<Chart> getChartByTitle(String title) {
+		return getChartContainerImpl().getChartByTitle(title);
+	}
+
+	public int getChartCount() {
+		return getChartContainerImpl().getChartCount();
+	}
+	
 	private ListContainerImpl getListContainerImpl() {
 		if (listContainerImpl == null) {
 			listContainerImpl = new ListContainerImpl();
@@ -640,5 +685,30 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 			variableContainerImpl = new VariableContainerImpl();
 		}
 		return variableContainerImpl;
+	}
+	
+	private ChartContainerImpl getChartContainerImpl() {
+		if (chartContainerImpl == null) {
+			chartContainerImpl = new ChartContainerImpl(this);
+		}
+		return chartContainerImpl;
+	}
+	
+	private class ChartContainerImpl extends AbstractChartContainer {
+		TextDocument sdoc;
+
+		protected ChartContainerImpl(Document doc) {
+			super(doc);
+			sdoc = (TextDocument) doc;
+		}
+
+		protected DrawFrameElement getChartFrame() throws Exception {
+			OdfContentDom contentDom2 = sdoc.getContentDom();
+			DrawFrameElement drawFrame = contentDom2.newOdfElement(DrawFrameElement.class);
+			TextPElement lastPara = sdoc.getContentRoot().newTextPElement();
+			lastPara.appendChild(drawFrame);
+			drawFrame.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PARAGRAPH.toString());
+			return drawFrame;
+		}
 	}
 }

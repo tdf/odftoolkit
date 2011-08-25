@@ -22,7 +22,6 @@
 
 package org.odftoolkit.simple;
 
-import java.util.HashMap;
 import java.util.IdentityHashMap;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;

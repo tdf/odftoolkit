@@ -22,6 +22,7 @@
  ************************************************************************/
 package org.odftoolkit.simple;
 
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -30,20 +31,25 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.xml.xpath.XPathConstants;
+
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationClassAttribute;
+import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageThumbnailElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StylePresentationPageLayoutElement;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.odfdom.type.CellRangeAddressList;
+import org.odftoolkit.simple.chart.AbstractChartContainer;
+import org.odftoolkit.simple.chart.Chart;
+import org.odftoolkit.simple.chart.ChartContainer;
+import org.odftoolkit.simple.chart.DataSet;
 import org.odftoolkit.simple.presentation.Slide;
 import org.odftoolkit.simple.presentation.Notes.NotesBuilder;
 import org.odftoolkit.simple.presentation.Slide.SlideBuilder;
@@ -53,13 +59,14 @@ import org.w3c.dom.NodeList;
 /**
  * This class represents an empty ODF presentation.
  */
-public class PresentationDocument extends Document {
+public class PresentationDocument extends Document implements ChartContainer{
 
 	private static final String EMPTY_PRESENTATION_DOCUMENT_PATH = "/OdfPresentationDocument.odp";
 	static final Resource EMPTY_PRESENTATION_DOCUMENT_RESOURCE = new Resource(EMPTY_PRESENTATION_DOCUMENT_PATH);
 	private final SlideBuilder slideBuilder;
 	private final NotesBuilder notesBuilder;
-
+	private ChartContainerImpl chartContainerImpl;
+	
 	/**
 	 * It represents the defined values of presentation:class. The
 	 * presentation:class attribute classifies presentation shapes by their
@@ -853,7 +860,41 @@ public class PresentationDocument extends Document {
 		checkAllSlideName();
 		return Slide.getInstance(newSlideElement);
 	}
+	
+	public Chart createChart(String title, DataSet dataset, Rectangle rect) {
+		return getChartContainerImpl().createChart(title, dataset, rect);
+	}
 
+	public Chart createChart(String title, SpreadsheetDocument document, CellRangeAddressList cellRangeAddr, boolean firstRowAsLabel,
+			boolean firstColumnAsLabel, boolean rowAsDataSeries, Rectangle rect) {
+		return getChartContainerImpl().createChart(title, document, cellRangeAddr, firstRowAsLabel, firstColumnAsLabel,
+				rowAsDataSeries, rect);
+	}
+
+	public Chart createChart(String title, String[] labels, String[] legends, double[][] data, Rectangle rect) {
+		return getChartContainerImpl().createChart(title, labels, legends, data, rect);
+	}
+
+	public void deleteChartById(String chartId) {
+		getChartContainerImpl().deleteChartById(chartId);
+	}
+
+	public void deleteChartByTitle(String title) {
+		getChartContainerImpl().deleteChartByTitle(title);
+	}
+
+	public Chart getChartById(String chartId) {
+		return getChartContainerImpl().getChartById(chartId);
+	}
+
+	public List<Chart> getChartByTitle(String title) {
+		return getChartContainerImpl().getChartByTitle(title);
+	}
+
+	public int getChartCount() {
+		return getChartContainerImpl().getChartCount();
+	}
+	
 	// when insert a slide, the note page for this slide is also inserted.
 	// note page refer the slide index in order to show the corresponding slide
 	// notes view
@@ -889,183 +930,36 @@ public class PresentationDocument extends Document {
 		if (slideLayout == null) {
 			slideLayout = Slide.SlideLayout.BLANK;
 		}
-		OdfOfficeStyles styles = getOrCreateDocumentStyles();
-		String layoutName;
-
-		if (slideLayout.toString().equals(Slide.SlideLayout.TITLE_ONLY.toString())) {
-			layoutName = "AL1T" + makeUniqueName();
-			try {
-				StylePresentationPageLayoutElement layout = styles.newStylePresentationPageLayoutElement(layoutName);
-				layout.newPresentationPlaceholderElement("title", "2.058cm", "1.743cm", "23.91cm", "3.507cm");
-			} catch (Exception e1) {
-				Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e1);
-			}
-			page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
-
-			DrawFrameElement frame1 = page.newDrawFrameElement();
-			frame1.setProperty(StyleGraphicPropertiesElement.StyleShadow, "true");
-			frame1.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
-			frame1.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
-			frame1.setPresentationStyleNameAttribute(frame1.getStyleName());
-
-			frame1.setDrawLayerAttribute("layout");
-			frame1.setSvgHeightAttribute("3.006cm");
-			frame1.setSvgWidthAttribute("24.299cm");
-			frame1.setSvgXAttribute("1.35cm");
-			frame1.setSvgYAttribute("0.717cm");
-			frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
-			frame1.setPresentationPlaceholderAttribute(true);
-			frame1.newDrawTextBoxElement();
-		} else if (slideLayout.toString().equals(Slide.SlideLayout.TITLE_OUTLINE.toString())) {
-			layoutName = makeUniqueName();
-			try {
-				styles = super.getStylesDom().getOfficeStyles();
-				if (styles == null) {
-					styles = super.getStylesDom().newOdfElement(OdfOfficeStyles.class);
-				}
-				StylePresentationPageLayoutElement layout = styles.newStylePresentationPageLayoutElement(layoutName);
-				layout.newPresentationPlaceholderElement("title", "2.058cm", "1.743cm", "23.91cm", "3.507cm");
-				layout.newPresentationPlaceholderElement("outline", "2.058cm", "1.743cm", "23.91cm", "3.507cm");
-
-			} catch (Exception e1) {
-				Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e1);
-			}
-			page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
-
-			DrawFrameElement frame1 = page.newDrawFrameElement();
-			frame1.setProperty(StyleGraphicPropertiesElement.StyleShadow, "true");
-			frame1.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
-			frame1.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
-			frame1.setPresentationStyleNameAttribute(frame1.getStyleName());
-
-			frame1.setDrawLayerAttribute("layout");
-			frame1.setSvgHeightAttribute("3.006cm");
-			frame1.setSvgWidthAttribute("24.299cm");
-			frame1.setSvgXAttribute("1.35cm");
-			frame1.setSvgYAttribute("0.717cm");
-			frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
-			frame1.setPresentationPlaceholderAttribute(true);
-			frame1.newDrawTextBoxElement();
-			DrawFrameElement frame2 = page.newDrawFrameElement();
-
-			frame2.setProperty(StyleGraphicPropertiesElement.FillColor, "#ffffff");
-			frame2.setProperty(StyleGraphicPropertiesElement.MinHeight, "13.114");
-			frame2.setPresentationStyleNameAttribute(frame2.getStyleName());
-
-			frame2.setDrawLayerAttribute("layout");
-			frame2.setSvgHeightAttribute("11.629cm");
-			frame2.setSvgWidthAttribute("24.199cm");
-			frame2.setSvgXAttribute("1.35cm");
-			frame2.setSvgYAttribute("4.337cm");
-			frame2.setPresentationClassAttribute(PresentationClassAttribute.Value.OUTLINE.toString());
-			frame2.setPresentationPlaceholderAttribute(true);
-			frame2.newDrawTextBoxElement();
-		} else if (slideLayout.toString().equals(Slide.SlideLayout.TITLE_PLUS_TEXT.toString())) {
-			layoutName = makeUniqueName();
-			try {
-				styles = super.getStylesDom().getOfficeStyles();
-				if (styles == null) {
-					styles = super.getStylesDom().newOdfElement(OdfOfficeStyles.class);
-				}
-				StylePresentationPageLayoutElement layout = styles.newStylePresentationPageLayoutElement(layoutName);
-				layout.newPresentationPlaceholderElement("title", "2.058cm", "1.743cm", "23.91cm", "1.743cm");
-				layout.newPresentationPlaceholderElement("subtitle", "2.058cm", "5.838cm", "23.91cm", "13.23cm");
-
-			} catch (Exception e1) {
-				Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e1);
-			}
-			page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
-
-			DrawFrameElement frame1 = page.newDrawFrameElement();
-			frame1.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
-			frame1.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
-			frame1.setPresentationStyleNameAttribute(frame1.getStyleName());
-
-			frame1.setDrawLayerAttribute("layout");
-			frame1.setSvgHeightAttribute("3.006cm");
-			frame1.setSvgWidthAttribute("24.299cm");
-			frame1.setSvgXAttribute("1.35cm");
-			frame1.setSvgYAttribute("0.717cm");
-			frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
-			frame1.setPresentationPlaceholderAttribute(true);
-			frame1.newDrawTextBoxElement();
-			DrawFrameElement frame2 = page.newDrawFrameElement();
-			frame2.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
-			frame2.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
-			frame2.setPresentationStyleNameAttribute(frame2.getStyleName());
-
-			frame2.setDrawLayerAttribute("layout");
-			frame2.setSvgHeightAttribute("11.88cm");
-			frame2.setSvgWidthAttribute("24.299cm");
-			frame2.setSvgXAttribute("1.35cm");
-			frame2.setSvgYAttribute("4.712cm");
-			frame2.setPresentationClassAttribute(PresentationClassAttribute.Value.SUBTITLE.toString());
-			frame2.setPresentationPlaceholderAttribute(true);
-			frame2.newDrawTextBoxElement();
-
-		} else if (slideLayout.toString().equals(Slide.SlideLayout.TITLE_PLUS_2_TEXT_BLOCK.toString())) {
-
-			layoutName = makeUniqueName();
-			try {
-				styles = super.getStylesDom().getOfficeStyles();
-				if (styles == null) {
-					styles = super.getStylesDom().newOdfElement(OdfOfficeStyles.class);
-				}
-				StylePresentationPageLayoutElement layout = styles.newStylePresentationPageLayoutElement(layoutName);
-				layout.newPresentationPlaceholderElement("outline", "2.058cm", "1.743cm", "23.91cm", "1.743cm");
-				layout.newPresentationPlaceholderElement("outline", "1.35cm", "4.212cm", "11.857cm", "11.629cm");
-				layout.newPresentationPlaceholderElement("outline", "4.212cm", "13.8cm", "11.857cm", "11.629cm");
-
-			} catch (Exception e1) {
-				Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e1);
-			}
-
-			DrawFrameElement frame1 = page.newDrawFrameElement();
-			frame1.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
-			frame1.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
-			frame1.setPresentationStyleNameAttribute(frame1.getStyleName());
-
-			frame1.setDrawLayerAttribute("layout");
-			frame1.setSvgHeightAttribute("3.006cm");
-			frame1.setSvgWidthAttribute("24.299cm");
-			frame1.setSvgXAttribute("1.35cm");
-			frame1.setSvgYAttribute("0.717cm");
-			frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
-			frame1.setPresentationPlaceholderAttribute(true);
-			frame1.newDrawTextBoxElement();
-			DrawFrameElement frame2 = page.newDrawFrameElement();
-			frame2.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
-			frame2.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
-			frame2.setPresentationStyleNameAttribute(frame2.getStyleName());
-
-			frame2.setDrawLayerAttribute("layout");
-			frame2.setSvgHeightAttribute("11.629cm");
-			frame2.setSvgWidthAttribute("11.857cm");
-			frame2.setSvgXAttribute("1.35cm");
-			frame2.setSvgYAttribute("4.212cm");
-			frame2.setPresentationClassAttribute(PresentationClassAttribute.Value.OUTLINE.toString());
-			frame2.setPresentationPlaceholderAttribute(true);
-			frame2.newDrawTextBoxElement();
-			DrawFrameElement frame3 = page.newDrawFrameElement();
-			frame3.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
-			frame3.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
-			frame3.setPresentationStyleNameAttribute(frame3.getStyleName());
-
-			frame3.setDrawLayerAttribute("layout");
-			frame3.setSvgHeightAttribute("11.62cm");
-			frame3.setSvgWidthAttribute("11.857cm");
-			frame3.setSvgXAttribute("13.8cm");
-			frame3.setSvgYAttribute("4.212cm");
-			frame3.setPresentationClassAttribute(PresentationClassAttribute.Value.OUTLINE.toString());
-			frame3.setPresentationPlaceholderAttribute(true);
-			frame3.newDrawTextBoxElement();
-
-			page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
-
-		}
+		slideLayout.apply(page);
 	}
 
 	public OdfElement getTableContainerElement() {
 		throw new UnsupportedOperationException("Presentation document is not supported to hold table directly.");
+	}
+	
+	private ChartContainerImpl getChartContainerImpl() {
+		if (chartContainerImpl == null) {
+			chartContainerImpl = new ChartContainerImpl(this);
+		}
+		return chartContainerImpl;
+	}
+	
+	private class ChartContainerImpl extends AbstractChartContainer {
+		PresentationDocument sdoc;
+
+		protected ChartContainerImpl(Document doc) {
+			super(doc);
+			sdoc = (PresentationDocument) doc;
+		}
+
+		protected DrawFrameElement getChartFrame() throws Exception {
+			OdfContentDom contentDom2 = sdoc.getContentDom();
+			DrawFrameElement drawFrame = contentDom2.newOdfElement(DrawFrameElement.class);
+			DrawPageElement lastPage = (DrawPageElement) contentDom2.getXPath().evaluate("//draw:page[last()]",
+					contentDom2, XPathConstants.NODE);
+			lastPage.appendChild(drawFrame);
+			drawFrame.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PAGE.toString());
+			return drawFrame;
+		}
 	}
 }

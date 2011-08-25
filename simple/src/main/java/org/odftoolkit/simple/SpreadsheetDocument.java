@@ -22,18 +22,29 @@
  ************************************************************************/
 package org.odftoolkit.simple;
 
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.xml.xpath.XPathConstants;
+
 import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.odfdom.type.CellRangeAddressList;
+import org.odftoolkit.simple.chart.AbstractChartContainer;
+import org.odftoolkit.simple.chart.Chart;
+import org.odftoolkit.simple.chart.ChartContainer;
+import org.odftoolkit.simple.chart.DataSet;
+import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.table.TableContainer;
 import org.w3c.dom.Node;
@@ -42,11 +53,11 @@ import org.w3c.dom.Node;
  * This class represents an empty ODF spreadsheet document.
  * 
  */
-public class SpreadsheetDocument extends Document {
+public class SpreadsheetDocument extends Document implements ChartContainer {
 
 	private static final String EMPTY_SPREADSHEET_DOCUMENT_PATH = "/OdfSpreadsheetDocument.ods";
 	static final Resource EMPTY_SPREADSHEET_DOCUMENT_RESOURCE = new Resource(EMPTY_SPREADSHEET_DOCUMENT_PATH);
-
+	private ChartContainerImpl chartContainerImpl;
 	/**
 	 * This enum contains all possible media types of SpreadsheetDocument
 	 * documents.
@@ -484,6 +495,116 @@ public class SpreadsheetDocument extends Document {
 		return getTableContainerImpl().getTableContainerElement();
 	}
 	
+	/**
+	 * Creates a new Chart for this spreadsheet document.
+	 * 
+	 * @param title
+	 *            chart title.
+	 * @param dataset
+	 *            chart data set.
+	 * @param rect
+	 *            chart rectangle.
+	 * @return the created chart.
+	 * 
+	 * @since 0.6
+	 */
+	public Chart createChart(String title, DataSet dataset, Rectangle rect) {
+		return getChartContainerImpl().createChart(title, dataset, rect);
+	}
+	
+	/**
+	 * Creates a new Chart for this spreadsheet document.
+	 * 
+	 * @param title
+	 *            chart title.
+	 * @param document
+	 *            the data source spreadsheet document.
+	 * @param cellRangeAddr
+	 *            the cell range address list which is used as chart data set.
+	 * @param firstRowAsLabel
+	 *            whether uses first row as label.
+	 * @param firstColumnAsLabel
+	 *            whether uses first column as label.
+	 * @param rowAsDataSeries
+	 *            whether uses data as series.
+	 * @param rect
+	 *            chart rectangle.
+	 * @return the created chart.
+	 * 
+	 * @since 0.6
+	 */
+	public Chart createChart(String title, SpreadsheetDocument document, CellRangeAddressList cellRangeAddr, boolean firstRowAsLabel,
+			boolean firstColumnAsLabel, boolean rowAsDataSeries, Rectangle rect) {
+		return getChartContainerImpl().createChart(title, document, cellRangeAddr, firstRowAsLabel, firstColumnAsLabel,
+				rowAsDataSeries, rect);
+	}
+	
+	/**
+	 * Creates a new Chart for this spreadsheet document.
+	 * 
+	 * @param title
+	 *            chart rectangle.
+	 * @param labels
+	 *            label strings
+	 * @param legends
+	 *            legend strings
+	 * @param data
+	 *            chart data set.
+	 * @param rect
+	 *            chart rectangle.
+	 * @return the created chart.
+	 * 
+	 * @since 0.6
+	 */
+	public Chart createChart(String title, String[] labels, String[] legends, double[][] data, Rectangle rect) {
+		return getChartContainerImpl().createChart(title, labels, legends, data, rect);
+	}
+	
+	/**
+	 * Creates a new Chart for this spreadsheet document.
+	 * 
+	 * @param title
+	 *            chart rectangle.
+	 * @param labels
+	 *            label strings
+	 * @param legends
+	 *            legend strings
+	 * @param data
+	 *            chart data set.
+	 * @param rect
+	 *            chart rectangle.
+	 * @param cell
+	 *            the position cell where the new chart is inserted.
+	 * @return the created chart.
+	 * 
+	 * @since 0.6
+	 */
+	public Chart createChart(String title, SpreadsheetDocument document, CellRangeAddressList cellRangeAddr, boolean firstRowAsLabel,
+			boolean firstColumnAsLabel, boolean rowAsDataSeries, Rectangle rect, Cell cell) {
+		return getChartContainerImpl().createChart(title, document, cellRangeAddr, firstRowAsLabel, firstColumnAsLabel,
+				rowAsDataSeries, rect, cell);
+	}
+	
+	public void deleteChartById(String chartId) {
+		getChartContainerImpl().deleteChartById(chartId);
+	}
+
+	public void deleteChartByTitle(String title) {
+		getChartContainerImpl().deleteChartByTitle(title);
+	}
+
+	public Chart getChartById(String chartId) {
+		return getChartContainerImpl().getChartById(chartId);
+	}
+
+	public List<Chart> getChartByTitle(String title) {
+		return getChartContainerImpl().getChartByTitle(title);
+	}
+
+	public int getChartCount() {
+		return getChartContainerImpl().getChartCount();
+	}
+	
 	private static String getUniqueSheetName(TableContainer container) {
 		List<Table> tableList = container.getTableList();
 		boolean notUnique = true;
@@ -503,5 +624,40 @@ public class SpreadsheetDocument extends Document {
 			}
 		}
 		return tablename;
+	}
+	
+	private ChartContainerImpl getChartContainerImpl() {
+		if (chartContainerImpl == null) {
+			chartContainerImpl = new ChartContainerImpl(this);
+		}
+		return chartContainerImpl;
+	}
+	
+	private class ChartContainerImpl extends AbstractChartContainer {
+		SpreadsheetDocument sdoc;
+		DrawFrameElement drawFrame;
+		protected ChartContainerImpl(Document doc) {
+			super(doc);
+			sdoc = (SpreadsheetDocument) doc;
+		}
+
+		protected DrawFrameElement getChartFrame() throws Exception {
+			OdfContentDom contentDom2 = sdoc.getContentDom();
+			DrawFrameElement drawFrame = contentDom2.newOdfElement(DrawFrameElement.class);
+			TableTableCellElement lastCell = (TableTableCellElement) contentDom2.getXPath().evaluate(
+					"//table:table-cell[last()]", contentDom2, XPathConstants.NODE);
+			lastCell.appendChild(drawFrame);
+			drawFrame.removeAttribute("text:anchor-type");
+			this.drawFrame = drawFrame;
+			return drawFrame;
+		}
+		
+		private Chart createChart(String title, SpreadsheetDocument document, CellRangeAddressList cellRangeAddr, boolean firstRowAsLabel,
+				boolean firstColumnAsLabel, boolean rowAsDataSeries, Rectangle rect, Cell cell) {
+			Chart chart = getChartContainerImpl().createChart(title, document, cellRangeAddr, firstRowAsLabel, firstColumnAsLabel,
+					rowAsDataSeries, rect);
+			cell.getOdfElement().appendChild(this.drawFrame);
+			return chart;
+		}
 	}
 }

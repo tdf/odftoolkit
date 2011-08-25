@@ -2399,7 +2399,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	public TableBuilder getTableBuilder() {
 		return getTableContainerImpl().getTableBuilder();
 	}
-
+	
 	protected TableContainer getTableContainerImpl() {
 		if (tableContainerImpl == null) {
 			tableContainerImpl = new TableContainerImpl();
