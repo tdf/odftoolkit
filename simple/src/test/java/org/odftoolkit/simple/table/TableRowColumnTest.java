@@ -22,6 +22,7 @@
 package org.odftoolkit.simple.table;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -96,6 +97,32 @@ public class TableRowColumnTest {
 		saveodt("ChangeSize");
 	}
 
+	/**
+	 * The DecimalFormat will create the depicted "000,8571" with the comma as
+	 * separator if used in a German Locale.
+	 * 
+	 * Within org.odftoolkit.simple.table.Column.setWith(long) there is a
+	 * getWith() call which ultimately calls
+	 * org.odftoolkit.odfdom.type.Length.parseDouble(), where
+	 * Double.valueOf(String s) is used to transform the String into a Double.
+	 * This method uses "." as separator. Hence the Exception.
+	 */
+	@Test
+	public void testGetLocaleColumnWidth() {
+		Locale oldLocale = Locale.getDefault();
+		try {
+			Locale.setDefault(Locale.GERMAN);
+			Table table = Table.newTable(odtdoc, 30, 7);
+			table.setTableName("Table21");
+			table.getColumnByIndex(2).setWidth(50); // NumberFormatException
+			saveodt("LocalColumnWidth");
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		} finally {
+			Locale.setDefault(oldLocale);
+		}
+	}
+	
 	/**
 	 * When a repeated column without width is split up, no width attribute should be set.
 	 */

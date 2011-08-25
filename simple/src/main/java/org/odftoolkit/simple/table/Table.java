@@ -22,9 +22,11 @@
 package org.odftoolkit.simple.table;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -83,6 +85,7 @@ public class Table {
 	private static final double DEFAULT_TABLE_WIDTH = 6;
 	private static final int DEFAULT_REL_TABLE_WIDTH = 65535;
 	private static final String DEFAULT_TABLE_ALIGN = "margins";
+	private static final DecimalFormat IN_FORMAT = new DecimalFormat("000.0000"); 
 	// TODO: should save seperately for different dom tree
 	static IdentityHashMap<TableTableElement, Table> mTableRepository =
 			new IdentityHashMap<TableTableElement, Table>();
@@ -92,7 +95,9 @@ public class Table {
 			new IdentityHashMap<TableTableRowElement, Vector<Row>>();
 	IdentityHashMap<TableTableColumnElement, Vector<Column>> mColumnRepository =
 			new IdentityHashMap<TableTableColumnElement, Vector<Column>>();
-
+	static{
+		IN_FORMAT.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
+	}
 	private Table(TableTableElement table) {
 		mTableElement = table;
 		mDocument = (Document) ((OdfFileDom)(table.getOwnerDocument())).getDocument();
@@ -365,8 +370,7 @@ public class Table {
 		// 2.0 create column style
 		OdfStyle columnStyle = styles.newStyle(OdfStyleFamily.TableColumn);
 		String columnStylename = columnStyle.getStyleNameAttribute();
-		columnStyle.setProperty(StyleTableColumnPropertiesElement.ColumnWidth,
-				new DecimalFormat("000.0000").format(DEFAULT_TABLE_WIDTH / numCols) + "in");
+		columnStyle.setProperty(StyleTableColumnPropertiesElement.ColumnWidth,	IN_FORMAT.format(DEFAULT_TABLE_WIDTH / numCols) + "in");
 		columnStyle.setProperty(StyleTableColumnPropertiesElement.RelColumnWidth, Math.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
 		// 2.1 create header column elements
 		if (headerColumnNumber > 0) {
