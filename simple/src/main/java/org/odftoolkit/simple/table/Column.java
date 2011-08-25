@@ -225,6 +225,8 @@ public class Column extends Component {
 
 			if (ownerColumnElement != null) {
 				table.updateColumnRepository(maColumnElement, mnRepeatedIndex, ownerColumnElement, 0);
+				// update column element.
+				maColumnElement = ownerColumnElement;
 			}
 		}
 	}

@@ -68,6 +68,8 @@ public class HeaderTest {
 			Assert.assertEquals(expectedCellValue, table.getCellByPosition(1, 1).getStringValue());
 			cell = table.getCellByPosition(4, 0);
 			Assert.assertEquals(34, cell.getImage().getHeight(null));
+			table.getColumnByIndex(4).setWidth(15);
+			
 			header = doc.getHeader(true);
 			table = header.getTableByName("headerHTable");
 			Assert.assertNotNull(table);
