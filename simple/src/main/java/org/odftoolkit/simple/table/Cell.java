@@ -71,6 +71,7 @@ import org.odftoolkit.simple.style.Border;
 import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleHorizontalAlignmentType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleVerticalAlignmentType;
 import org.w3c.dom.Node;
 
 /**
@@ -165,10 +166,14 @@ public class Cell {
 	/**
 	 * Return the horizontal alignment setting of this cell.
 	 * <p>
-	 * The returned value can be "center", "end", "justify", "left", "right", or "start".
-	 * If no horizontal alignment is set, null will be returned.
+	 * The returned value can be "center", "end", "justify", "left", "right", or
+	 * "start". If no horizontal alignment is set, null will be returned.
 	 * 
-	 * @return the horizontal alignment setting. 
+	 * @return the horizontal alignment setting.
+	 * 
+	 * @see #getHorizontalAlignmentType()
+	 * @deprecated As of Simple version 0.3, replaced by
+	 *             <code>getHorizontalAlignmentType()</code>
 	 */
 	@Deprecated
 	public String getHorizontalAlignment() {
@@ -199,6 +204,9 @@ public class Cell {
 	 * If argument is null, the explicit horizontal alignment setting is removed.
 	 * 
 	 * @param horizontalAlignment	the horizontal alignment setting.
+	 * @see #setHorizontalAlignment(SimpleHorizontalAlignmentType)
+	 * @deprecated As of Simple version 0.3, replaced by
+	 *             <code>setHorizontalAlignment(SimpleHorizontalAlignmentType)</code>
 	 */
 	@Deprecated
 	public void setHorizontalAlignment(String horizontalAlignment) {
@@ -237,6 +245,10 @@ public class Cell {
 	 * The returned value can be "auto", "automatic", "baseline", "bottom", "middle", or "top".
 	 * 
 	 * @return the vertical alignment setting of this cell. 
+	 * 
+	 * @see #getVerticalAlignmentType()
+	 * @deprecated As of Simple version 0.3, replaced by
+	 *             <code>getVerticalAlignmentType()</code>
 	 */
 	@Deprecated
 	public String getVerticalAlignment() {
@@ -255,8 +267,7 @@ public class Cell {
 	 * <p>Default value will be returned if explicit style definition is found but no vertical alignment is set.
 	 * @return the vertical alignment setting. 
 	 */
-	public StyleTypeDefinitions.SimpleVerticalAlignmentType getVerticalAlignmentType()
-	{
+	public SimpleVerticalAlignmentType getVerticalAlignmentType() {
 		return getStyleHandler().getVerticalAlignment();
 	}
 
@@ -267,6 +278,9 @@ public class Cell {
 	 * If argument is null, the explicit vertical alignment setting is removed.
 	 * 
 	 * @param verticalAlignment	the vertical alignment setting.
+	 * @see #setVerticalAlignment(SimpleVerticalAlignmentType)
+	 * @deprecated As of Simple version 0.3, replaced by
+	 *             <code>setVerticalAlignment(SimpleVerticalAlignmentType)</code>
 	 */
 	@Deprecated
 	public void setVerticalAlignment(String verticalAlignment) {
@@ -289,7 +303,7 @@ public class Cell {
 	 * 
 	 * @param verticalAlignment	the vertical alignment setting.
 	 */
-	public void setVerticalAlignment(StyleTypeDefinitions.SimpleVerticalAlignmentType verticalAlignment) {
+	public void setVerticalAlignment(SimpleVerticalAlignmentType verticalAlignment) {
 		getStyleHandler().setVerticalAlignment(verticalAlignment);
 	}	
 
@@ -1040,6 +1054,10 @@ public class Cell {
 	 * If no background color is set, default background color "#FFFFFF" will be returned.
 	 * 
 	 * @return the background color of this cell 
+	 * 
+	 * @see #getCellBackgroundColor()
+	 * @deprecated As of Simple version 0.3, replaced by
+	 *             <code>getCellBackgroundColor()</code>
 	 */
 	@Deprecated
 	public String getCellBackgroundColorString() {
@@ -1075,6 +1093,9 @@ public class Cell {
 	 *            the background color that need to set. 
 	 *            If cellBackgroundColor is null, default background color #FFFFFF will be set.
 	 * @see org.odftoolkit.odfdom.type.Color
+	 * @see #setCellBackgroundColor(Color)
+	 * @deprecated As of Simple version 0.3, replaced by
+	 *             <code>setCellBackgroundColor(Color)</code>
 	 */
 	@Deprecated
 	public void setCellBackgroundColor(String cellBackgroundColor) {
