@@ -4,7 +4,7 @@
 	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>simple-java</artifactId>
-	<version>0.3.5</version>
+	<version>0.4</version>
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
@@ -265,7 +265,7 @@
 		<repository>
 			<id>simple-snapshots</id>
 			<name>SIMPLE Snapshot</name>
-			<url>http://odftoolkit.org/svn/simple~maven2/snapshot/</url>
+			<url>http://odftoolkit.org/svn/simple~maven2/repository</url>
 			<releases>
 				<enabled>false</enabled>
 				<updatePolicy>always</updatePolicy>
@@ -280,7 +280,7 @@
 		<repository>
 			<id>simple-releases</id>
 			<name>SIMPLE Release</name>
-			<url>http://odftoolkit.org/svn/simple~maven2/release/</url>
+			<url>http://odftoolkit.org/svn/simple~maven2/repository</url>
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
@@ -297,7 +297,7 @@
 		<pluginRepository>
 			<id>simple-snapshots</id>
 			<name>SIMPLE Snapshot</name>
-			<url>http://odftoolkit.org/svn/simple~maven2/snapshot/</url>
+			<url>http://odftoolkit.org/svn/simple~maven2/repository</url>
 			<releases>
 				<enabled>false</enabled>
 				<updatePolicy>always</updatePolicy>
@@ -312,7 +312,7 @@
 		<pluginRepository>
 			<id>simple-releases</id>
 			<name>SIMPLE Release</name>
-			<url>http://odftoolkit.org/svn/simple~maven2/release/</url>
+			<url>http://odftoolkit.org/svn/simple~maven2/repository</url>
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
@@ -329,13 +329,13 @@
 		<repository>
 			<id>simple-releases</id>
 			<name>SIMPLE Release</name>
-			<url>svn:https://odftoolkit.org/svn/simple~maven2/release/</url>
+			<url>svn:http://odftoolkit.org/svn/simple~maven2/repository</url>
 			<uniqueVersion>false</uniqueVersion>
 		</repository>
 		<snapshotRepository>
 			<id>simple-snapshots</id>
 			<name>SIMPLE Snapshot</name>
-			<url>svn:https://odftoolkit.org/svn/simple~maven2/snapshot/</url>
+			<url>svn:http://odftoolkit.org/svn/simple~maven2/repository</url>
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>

@@ -3,8 +3,8 @@
 *                                                           *
 *************************************************************
 *                                                           *
-* Version: 0.3.5                                            *
-* Release Date: 12/24/2010                                  *
+* Version: 0.4                                              *
+* Release Date: 01/31/2011                                  *
 *                                                           *
 *************************************************************
 
@@ -53,5 +53,5 @@ Installation
 
 Just put the file simple.jar in your classpath. You will
 need ODFDOM0.9-SNAPSHOT and Apache Xerces-J 2.9.1 as well. Get them from
-    http://odftoolkit.org/projects/odfdom/downloads/directory/current-version/snapshot
+    http://odftoolkit.org/projects/simple/downloads/directory/tools
     http://xerces.apache.org/mirrors.cgi
