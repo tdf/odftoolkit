@@ -248,25 +248,24 @@ public class TextNavigation extends Navigation {
 			selected = null;
 			mbFinishFindInHeaderFooter = true;
 		}
-
-		if (selected == null) {
-			OdfElement element = null;
-			try {
-				if (mElement != null) {
-					element = (OdfElement) getNextMatchElement(mElement);
-				} else {
-					element = (OdfElement) getNextMatchElement((Node) mDocument.getContentRoot());
-				}
-			} catch (Exception ex) {
-				Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+		OdfElement rootElement = null;
+		try {
+			if (mElement != null) {
+				rootElement = mElement;
+			} else {
+				rootElement = mDocument.getContentRoot();
 			}
+		} catch (Exception ex) {
+			Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+		}
+		if (selected == null) {
+			OdfElement element = (OdfElement) getNextMatchElementInTree(rootElement, rootElement);
 			if (element != null) {
 				return createSelection(element, mNextIndex);
 			} else {
 				return null;
 			}
 		}
-
 		OdfElement containerElement = selected.getContainerElement();
 		int index = selected.getIndex();
 		String content = TextExtractor.getText(containerElement);
@@ -284,7 +283,7 @@ public class TextNavigation extends Navigation {
 		if (nextIndex != -1) {
 			return createSelection(selected.getContainerElement(), nextIndex);
 		} else {
-			OdfElement element = (OdfElement) getNextMatchElement((Node) containerElement);
+			OdfElement element = (OdfElement) getNextMatchElementInTree(containerElement, rootElement);
 			if (element != null) {
 				return createSelection(element, mNextIndex);
 			} else {

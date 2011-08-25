@@ -141,18 +141,15 @@ public class TextStyleNavigation extends Navigation {
 	 */
 	private TextSelection findNext(TextSelection selected) {
 		OdfElement element = null;
-		if (selected == null) {
-			try {
-				mNode = getNextMatchElement((Node) mTextDocument.getContentRoot());
-			} catch (Exception ex) {
-				Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+		try {
+			Node rootNode = mTextDocument.getContentRoot();
+			if (selected == null) {
+				mNode = getNextMatchElementInTree(rootNode, rootNode);
+			} else {
+				mNode = getNextMatchElementInTree(mNode, rootNode);
 			}
-		} else {
-			try {
-				mNode = getNextMatchElement(mNode);
-			} catch (Exception ex) {
-				Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-			}
+		} catch (Exception ex) {
+			Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 		}
 		if (mNode != null) {
 			element = (OdfElement) getPHElement(mNode);

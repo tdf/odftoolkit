@@ -32,8 +32,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.simple.Document;
+import org.odftoolkit.simple.PresentationDocument;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.common.TextExtractor;
+import org.odftoolkit.simple.presentation.Slide;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 /**
@@ -42,7 +44,9 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 public class TextNavigationTest {
 
 	private static final Logger LOG = Logger.getLogger(TextNavigationTest.class.getName());
-	public static final String TEXT_FILE = "TestTextSelection.odt";
+	private static final String TEXT_FILE = "TestTextSelection.odt";
+	private static final String NAVIGATION_ODFELEMENT_FILE = "NavigationInOdfElementTest.odp";
+	
 	TextDocument doc;
 	TextNavigation search;
 
@@ -147,6 +151,34 @@ public class TextNavigationTest {
 			OdfElement match5 = (OdfElement) search.getNextMatchElement(match4);
 			Assert.assertNotNull(match5);
 			Assert.assertEquals("Hello delete this word delete true delete  indeed", TextExtractor.getText(match5));
+		} catch (Exception e) {
+			Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+	}
+
+	@Test
+	public void testNavigationInOdfElement() {
+		try {
+			PresentationDocument document = PresentationDocument.loadDocument(ResourceUtilities
+					.getAbsolutePath(NAVIGATION_ODFELEMENT_FILE));
+			TextNavigation navigation = new TextNavigation("RANDOM COLORED TEXTBOX", document);
+			int count = 0;
+			while (navigation.hasNext()) {
+				navigation.nextSelection();
+				count++;
+			}
+			Assert.assertEquals(3, count);
+
+			Slide slide = document.getSlideByIndex(0);
+			navigation = new TextNavigation("RANDOM COLORED TEXTBOX", slide.getOdfElement());
+			count = 0;
+			while (navigation.hasNext()) {
+				navigation.nextSelection();
+				count++;
+			}
+			Assert.assertEquals(1, count);
+			document.close();
 		} catch (Exception e) {
 			Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
