@@ -2148,8 +2148,10 @@ public class Table {
 	 * @see #getCellRangeByName(String)
 	 * @see #getColumnByIndex(int)
 	 * @see #getRowByIndex(int)
+	 * 
+	 * @since 0.4.5
 	 */
-	protected boolean isCellStyleInheritance() {
+	public boolean isCellStyleInheritance() {
 		return mIsCellStyleInheritance;
 	}
 
@@ -2189,8 +2191,10 @@ public class Table {
 	 * @see #getCellRangeByName(String)
 	 * @see #getColumnByIndex(int)
 	 * @see #getRowByIndex(int)
+	 * 
+	 * @since 0.4.5
 	 */
-	protected void setCellStyleInheritance(boolean isEnabled) {
+	public void setCellStyleInheritance(boolean isEnabled) {
 		mIsCellStyleInheritance = isEnabled;
 	}
 
