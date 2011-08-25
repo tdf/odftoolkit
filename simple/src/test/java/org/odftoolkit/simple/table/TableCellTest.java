@@ -140,6 +140,17 @@ public class TableCellTest {
 			Cell cell = tbl.getCellByPosition(0, 0);
 			String horizonAlignment = cell.getHorizontalAlignment();
 			Assert.assertEquals(null, horizonAlignment);
+			
+			table = ods.getTableByName("Sheet2");
+			if (table != null) {
+				table.remove();
+			}
+			table = Table.newTable(ods);
+			table.setTableName("Sheet2");
+			cell = table.getCellByPosition(1, 1);
+			cell.setHorizontalAlignment("center");
+			horizonAlignment = cell.getHorizontalAlignment();
+			Assert.assertEquals("center", horizonAlignment);
 		} catch (Exception e) {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
@@ -170,6 +181,17 @@ public class TableCellTest {
 			Cell cell = tbl.getCellByPosition(0, 0);
 			String verticalAlignment = cell.getVerticalAlignment();
 			Assert.assertEquals(null, verticalAlignment);
+			
+			table = ods.getTableByName("Sheet2");
+			if (table != null) {
+				table.remove();
+			}
+			table = Table.newTable(ods);
+			table.setTableName("Sheet2");
+			cell = table.getCellByPosition(1, 1);
+			cell.setVerticalAlignment("top");
+			verticalAlignment = cell.getVerticalAlignment();
+			Assert.assertEquals("top", verticalAlignment);
 		} catch (Exception e) {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());

@@ -1427,47 +1427,50 @@ public class Cell {
 	}
 
 	protected OdfStyle getCellStyleElementForWrite() {
-		boolean copy = false;
+		boolean createNew = false;
+		OdfStyle styleElement = null;
 		String styleName = mCellElement.getStyleName();
-		if (styleName == null || (styleName.equals(""))) {	//search in row
+		if (styleName == null || (styleName.equals(""))) { // search in row
 			Row aRow = getTableRow();
 			styleName = aRow.getOdfElement().getTableDefaultCellStyleNameAttribute();
-			copy = true;
+			createNew = true;
 		}
-		if (styleName == null || (styleName.equals(""))) {	//search in column
+		if (styleName == null || (styleName.equals(""))) { // search in column
 			Column aColumn = getTableColumn();
 			styleName = aColumn.getOdfElement().getTableDefaultCellStyleNameAttribute();
-			copy = true;
+			createNew = true;
 		}
 		if (styleName == null || (styleName.equals(""))) {
-			return null;
+			createNew = true;
+		} else {
+			OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
+			styleElement = styles.getStyle(styleName, mCellElement.getStyleFamily());
+			if (styleElement == null) {
+				styleElement = mDocument.getDocumentStyles().getStyle(styleName, OdfStyleFamily.TableCell);
+			}
+			if (styleElement == null) {
+				styleElement = mCellElement.getDocumentStyle();
+			}
+			if (styleElement == null || styleElement.getStyleUserCount() > 1) {
+				createNew = true;
+			}
 		}
-
-		OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
-		OdfStyle styleElement = styles.getStyle(styleName, mCellElement.getStyleFamily());
-
-		if (styleElement == null) {
-			styleElement = mDocument.getDocumentStyles().getStyle(styleName, OdfStyleFamily.TableCell);
-		}
-
-		if (styleElement == null) {
-			styleElement = mCellElement.getDocumentStyle();
-		}
-
-		if (styleElement.getStyleUserCount() > 1 || copy) //if this style are used by many users,
-		//should create a new one.
-		{
+		// if style name is null or this style are used by many users,
+		// should create a new one.
+		if (createNew) {
 			OdfStyle newStyle = mCellElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-			newStyle.setProperties(styleElement.getStylePropertiesDeep());
-			//copy attributes
-			NamedNodeMap attributes = styleElement.getAttributes();
-			for (int i = 0; i < attributes.getLength(); i++) {
-				Node attr = attributes.item(i);
-				if (!attr.getNodeName().equals("style:name")) {
-					newStyle.setAttributeNS(attr.getNamespaceURI(), attr.getNodeName(), attr.getNodeValue());
-				}
-			}//end of copying attributes
-			//mCellElement.getAutomaticStyles().appendChild(newStyle);
+			if (styleElement != null) {
+				newStyle.setProperties(styleElement.getStylePropertiesDeep());
+				// copy attributes
+				NamedNodeMap attributes = styleElement.getAttributes();
+				for (int i = 0; i < attributes.getLength(); i++) {
+					Node attr = attributes.item(i);
+					if (!attr.getNodeName().equals("style:name")) {
+						newStyle.setAttributeNS(attr.getNamespaceURI(), attr.getNodeName(), attr.getNodeValue());
+					}
+				}// end of copying attributes
+			}
+			// mCellElement.getAutomaticStyles().appendChild(newStyle);
 			String newname = newStyle.getStyleNameAttribute();
 			mCellElement.setStyleName(newname);
 			return newStyle;
