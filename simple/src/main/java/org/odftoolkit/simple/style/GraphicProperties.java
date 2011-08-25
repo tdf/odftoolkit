@@ -35,6 +35,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleDiagonalBlTrAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDiagonalBlTrWidthsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDiagonalTlBrAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDiagonalTlBrWidthsAttribute;
+import org.odftoolkit.odfdom.dom.attribute.style.StyleRunThroughAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
@@ -395,7 +396,25 @@ public class GraphicProperties {
 			throw new RuntimeException(fillType.toString() + " not supported!");
 		}
 	}
-
+	
+	/**
+	 * Set whether the content of a graphic object is displayed in the
+	 * background or foreground. If it's displayed in the background, the
+	 * content wouldn't be selected or moved.
+	 * 
+	 * @param isBackgroundObject
+	 *            If <code>true</code>, the graphic object is displayed in the
+	 *            background.
+	 * @since 0.5.5
+	 */
+	public void setStyleRunThrough(boolean isBackgroundObject) {
+		if (isBackgroundObject) {
+			mElement.setStyleRunThroughAttribute(StyleRunThroughAttribute.Value.BACKGROUND.toString());
+		} else {
+			mElement.setStyleRunThroughAttribute(StyleRunThroughAttribute.Value.FOREGROUND.toString());
+		}
+	}
+	
 	private boolean verifyWidthDesc(String widthDesc) {
 		char char1 = widthDesc.charAt(widthDesc.length() - 1);
 		char char2 = widthDesc.charAt(widthDesc.length() - 2);

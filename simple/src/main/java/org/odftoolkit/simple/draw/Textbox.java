@@ -23,6 +23,7 @@ package org.odftoolkit.simple.draw;
 
 import java.util.Iterator;
 
+import org.odftoolkit.odfdom.dom.attribute.style.StyleRunThroughAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawTextBoxElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
@@ -133,6 +134,8 @@ public class Textbox extends Frame implements ListContainer, ParagraphContainer 
 		textbox.getStyleHandler().setBorders(null, CellBordersType.NONE);
 		textbox.getStyleHandler().setStroke(OdfDrawStroke.NONE, null, null, null);
 		textbox.getStyleHandler().setBackgroundColor(null);
+		// set style:run-through="foreground"
+		textbox.getStyleHandler().setBackgroundFrame(false);
 		return textbox;
 	}
 

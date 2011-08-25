@@ -24,6 +24,7 @@ package org.odftoolkit.simple.draw;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.style.Border;
 import org.odftoolkit.simple.style.DefaultStyleHandler;
+import org.odftoolkit.simple.style.GraphicProperties;
 import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.OdfDrawFill;
@@ -101,5 +102,20 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 		else
 			getGraphicPropertiesForWrite().setFill(OdfDrawFill.SOLID, color);
 
+	}
+
+	/**
+	 * Set whether the content of a frame is displayed in the background or
+	 * foreground. If it's displayed in the background, the content wouldn't be
+	 * selected or moved.
+	 * 
+	 * @param isBackgroundFrame
+	 *            If <code>true</code>, the frame is displayed in the
+	 *            background.
+	 * @since 0.5.5
+	 */
+	public void setBackgroundFrame(boolean isBackgroundFrame) {
+		GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
+		graphicPropertiesForWrite.setStyleRunThrough(isBackgroundFrame);
 	}
 }
