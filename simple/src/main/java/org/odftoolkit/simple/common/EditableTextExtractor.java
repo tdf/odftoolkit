@@ -198,9 +198,10 @@ public class EditableTextExtractor extends TextExtractor {
 	public void visit(TableTableElement ele) {
 		Table table = Table.getInstance(ele);
 		List<Row> rowlist = table.getRowList();
+		int column = table.getColumnCount();
 		for (int i = 0; i < rowlist.size(); i++) {
 			Row row = rowlist.get(i);
-			for (int j = 0; j < row.getCellCount(); j++) {
+			for (int j = 0; j < column; j++) {
 				mTextBuilder.append(row.getCellByIndex(j).getDisplayText());
 				mTextBuilder.append(TabChar);
 			}

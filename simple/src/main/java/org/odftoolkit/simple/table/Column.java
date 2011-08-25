@@ -42,6 +42,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.type.Length.Unit;
+import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
 import org.w3c.dom.Node;
 
@@ -50,7 +51,7 @@ import org.w3c.dom.Node;
  * <p>
  * Column provides methods to get table cells that belong to this table column.
  */
-public class Column {
+public class Column extends Component {
 
 	TableTableColumnElement maColumnElement;
 	int mnRepeatedIndex;
@@ -61,9 +62,9 @@ public class Column {
 	 * Construct the <code>Column</code> feature.
 	 * 
 	 * @param odfElement
-	 * 					the element that can construct this table column
-	 * @param repeatedIndex 
-	 * 					the index in the repeated columns
+	 *            the element that can construct this table column
+	 * @param repeatedIndex
+	 *            the index in the repeated columns
 	 */
 	Column(TableTableColumnElement colElement, int repeatedIndex) {
 		maColumnElement = colElement;
@@ -72,12 +73,17 @@ public class Column {
 	}
 
 	/**
-	 * Get the <code>Column</code> instance from the <code>TableTableColumnElement</code> instance.
+	 * Get the <code>Column</code> instance from the
+	 * <code>TableTableColumnElement</code> instance.
 	 * <p>
-	 * Each <code>TableTableColumnElement</code> instance has a one-to-one relationship to the a <code>Column</code> instance.
+	 * Each <code>TableTableColumnElement</code> instance has a one-to-one
+	 * relationship to the a <code>Column</code> instance.
 	 * 
-	 * @param colElement	the column element that need to get the corresponding <code>Column</code> instance
-	 * @return the <code>Column</code> instance represent the specified column element
+	 * @param colElement
+	 *            the column element that need to get the corresponding
+	 *            <code>Column</code> instance
+	 * @return the <code>Column</code> instance represent the specified column
+	 *         element
 	 */
 	public static Column getInstance(TableTableColumnElement colElement) {
 		TableTableElement tableElement = null;
@@ -97,14 +103,17 @@ public class Column {
 
 		Column column = table.getColumnInstance(colElement, 0);
 		if (column.getColumnsRepeatedNumber() > 1) {
-			Logger.getLogger(Column.class.getName()).log(Level.WARNING, "the column has the repeated column number, and puzzled about get which repeated index of the column,"
-					+ "here just return the first column of the repeated columns.");
+			Logger.getLogger(Column.class.getName()).log(
+					Level.WARNING,
+					"the column has the repeated column number, and puzzled about get which repeated index of the column,"
+							+ "here just return the first column of the repeated columns.");
 		}
 		return column;
 	}
 
 	/**
 	 * Get the <code>TableTableElement</code> who contains this cell.
+	 * 
 	 * @return the table that contains the cell.
 	 */
 	private TableTableElement getTableElement() {
@@ -120,9 +129,8 @@ public class Column {
 
 	/**
 	 * Get owner table of the current column.
-	 *
-	 * @return
-	 * 			the parent table of this column
+	 * 
+	 * @return the parent table of this column
 	 */
 	public Table getTable() {
 		TableTableElement tableElement = getTableElement();
@@ -147,8 +155,9 @@ public class Column {
 
 	/**
 	 * Set the width of the column (in Millimeter).
+	 * 
 	 * @param width
-	 * 				the width that will be set to the column (in Millimeter).
+	 *            the width that will be set to the column (in Millimeter).
 	 */
 	public void setWidth(long width) {
 		String sWidthMM = String.valueOf(width) + Unit.MILLIMETER.abbr();
@@ -157,7 +166,7 @@ public class Column {
 		splitRepeatedColumns();
 		maColumnElement.setProperty(OdfTableColumnProperties.ColumnWidth, sWidthIN);
 
-		//check if need set relative width
+		// check if need set relative width
 		int index = getColumnIndex();
 		if (index >= 1) {
 			index = index - 1;
@@ -177,15 +186,16 @@ public class Column {
 		}
 	}
 
-	//if one of the repeated column want to change something
-	//then this repeated column have to split to repeated number columns
-	//the maColumnElement should also be updated according to the original index in the repeated column
+	// if one of the repeated column want to change something
+	// then this repeated column have to split to repeated number columns
+	// the maColumnElement should also be updated according to the original
+	// index in the repeated column
 	void splitRepeatedColumns() {
 		Table table = getTable();
 		TableTableElement tableEle = table.getOdfElement();
 		int repeateNum = getColumnsRepeatedNumber();
 		if (repeateNum > 1) {
-			//change this repeated column to several single columns
+			// change this repeated column to several single columns
 			TableTableColumnElement ownerColumnElement = null;
 			int repeatedColumnIndex = mnRepeatedIndex;
 			Node refElement = maColumnElement;
@@ -193,8 +203,9 @@ public class Column {
 			String originalWidth = maColumnElement.getProperty(OdfTableColumnProperties.ColumnWidth);
 			String originalRelWidth = maColumnElement.getProperty(OdfTableColumnProperties.RelColumnWidth);
 			for (int i = repeateNum - 1; i >= 0; i--) {
-				TableTableColumnElement newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement((OdfFileDom) maColumnElement.getOwnerDocument(),
-						OdfName.newName(OdfDocumentNamespace.TABLE, "table-column"));
+				TableTableColumnElement newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement(
+						(OdfFileDom) maColumnElement.getOwnerDocument(), OdfName.newName(OdfDocumentNamespace.TABLE,
+								"table-column"));
 				if (originalWidth != null && originalWidth.length() > 0) {
 					newColumn.setProperty(OdfTableColumnProperties.ColumnWidth, originalWidth);
 				}
@@ -209,7 +220,7 @@ public class Column {
 					table.updateColumnRepository(maColumnElement, i, newColumn, 0);
 				}
 			}
-			//remove this column element
+			// remove this column element
 			tableEle.removeChild(maColumnElement);
 
 			if (ownerColumnElement != null) {
@@ -239,9 +250,8 @@ public class Column {
 
 	/**
 	 * Returns if the column always keeps its optimal width.
-	 * @return 
-	 * 			true if the column always keeps its optimal width;
-	 * 			vice versa
+	 * 
+	 * @return true if the column always keeps its optimal width; vice versa
 	 */
 	public boolean isOptimalWidth() {
 		return Boolean.parseBoolean(maColumnElement.getProperty(OdfTableColumnProperties.UseOptimalColumnWidth));
@@ -251,14 +261,16 @@ public class Column {
 	 * Set if the column always keeps its optimal width.
 	 * 
 	 * @param isUseOptimalWidth
-	 * 					the flag that indicate column should keep its optimal width or not
+	 *            the flag that indicate column should keep its optimal width or
+	 *            not
 	 */
 	public void setUseOptimalWidth(boolean isUseOptimalWidth) {
 		maColumnElement.setProperty(OdfTableColumnProperties.UseOptimalColumnWidth, String.valueOf(isUseOptimalWidth));
 	}
 
 	/**
-	 * Return an instance of <code>TableTableColumnElement</code> which represents this feature.
+	 * Return an instance of <code>TableTableColumnElement</code> which
+	 * represents this feature.
 	 * 
 	 * @return an instance of <code>TableTableColumnElement</code>
 	 */
@@ -269,7 +281,7 @@ public class Column {
 	/**
 	 * Get the count of cells in this column.
 	 * 
-	 * @return 	the cells count in the current column
+	 * @return the cells count in the current column
 	 */
 	public int getCellCount() {
 		return getTable().getRowCount();
@@ -289,45 +301,52 @@ public class Column {
 
 	/**
 	 * Get the previous column of the current column.
-	 *
+	 * 
 	 * @return the previous column before this column in the owner table
 	 */
 	public Column getPreviousColumn() {
 		Table table = getTable();
-		//the column has repeated column number > 1
+		// the column has repeated column number > 1
 		if (maColumnElement.getTableNumberColumnsRepeatedAttribute().intValue() > 1) {
 			if (mnRepeatedIndex > 0) {
 				return table.getColumnInstance(maColumnElement, mnRepeatedIndex - 1);
 			}
 		}
-		//the column has repeated column number > 1 && the index is 0
-		//or the column has repeated column num = 1
+		// the column has repeated column number > 1 && the index is 0
+		// or the column has repeated column num = 1
 		Node aPrevNode = maColumnElement.getPreviousSibling();
 		Node aCurNode = maColumnElement;
 		while (true) {
 			if (aPrevNode == null) {
-				//does not have previous sibling, then get the parent
-				//because aCurNode might be the child element of table-header-columns, table-columns, table-column-group
+				// does not have previous sibling, then get the parent
+				// because aCurNode might be the child element of
+				// table-header-columns, table-columns, table-column-group
 				Node parentNode = aCurNode.getParentNode();
-				//if the parent is table, then it means that this column is the first column in this table
-				//it has no previous column
+				// if the parent is table, then it means that this column is the
+				// first column in this table
+				// it has no previous column
 				if (parentNode instanceof TableTableElement) {
 					return null;
 				}
 				aPrevNode = parentNode.getPreviousSibling();
 			}
-			//else the parent node might be table-header-columns, table-columns, table-column-group
+			// else the parent node might be table-header-columns,
+			// table-columns, table-column-group
 			if (aPrevNode != null) {
 				try {
 					if (aPrevNode instanceof TableTableColumnElement) {
-						return table.getColumnInstance((TableTableColumnElement) aPrevNode, ((TableTableColumnElement) aPrevNode).getTableNumberColumnsRepeatedAttribute().intValue() - 1);
+						return table.getColumnInstance((TableTableColumnElement) aPrevNode,
+								((TableTableColumnElement) aPrevNode).getTableNumberColumnsRepeatedAttribute()
+										.intValue() - 1);
 					} else if (aPrevNode instanceof TableTableColumnsElement
 							|| aPrevNode instanceof TableTableHeaderColumnsElement
 							|| aPrevNode instanceof TableTableColumnGroupElement) {
 						XPath xpath = ((OdfFileDom) maColumnElement.getOwnerDocument()).getXPath();
-						TableTableColumnElement lastCol = (TableTableColumnElement) xpath.evaluate("//table:table-column[last()]", aPrevNode, XPathConstants.NODE);
+						TableTableColumnElement lastCol = (TableTableColumnElement) xpath.evaluate(
+								"//table:table-column[last()]", aPrevNode, XPathConstants.NODE);
 						if (lastCol != null) {
-							return table.getColumnInstance(lastCol, lastCol.getTableNumberColumnsRepeatedAttribute().intValue() - 1);
+							return table.getColumnInstance(lastCol, lastCol.getTableNumberColumnsRepeatedAttribute()
+									.intValue() - 1);
 						}
 					} else {
 						aCurNode = aPrevNode;
@@ -342,12 +361,12 @@ public class Column {
 
 	/**
 	 * Get the next column of the current column.
-	 *
+	 * 
 	 * @return the next column after this column in the owner table
 	 */
 	public Column getNextColumn() {
 		Table table = getTable();
-		//the column has repeated column number > 1
+		// the column has repeated column number > 1
 		int columnsRepeatedNumber = getColumnsRepeatedNumber();
 		if (columnsRepeatedNumber > 1) {
 			if (mnRepeatedIndex < (columnsRepeatedNumber - 1)) {
@@ -358,17 +377,20 @@ public class Column {
 		Node aCurNode = maColumnElement;
 		while (true) {
 			if (aNextNode == null) {
-				//does not have next sibling, then get the parent
-				//because aCurNode might be the child element of table-header-columns, table-columns, table-column-group
+				// does not have next sibling, then get the parent
+				// because aCurNode might be the child element of
+				// table-header-columns, table-columns, table-column-group
 				Node parentNode = aCurNode.getParentNode();
-				//if the parent is table, then it means that this column is the last column in this table
-				//it has no next column
+				// if the parent is table, then it means that this column is the
+				// last column in this table
+				// it has no next column
 				if (parentNode instanceof TableTableElement) {
 					return null;
 				}
 				aNextNode = parentNode.getNextSibling();
 			}
-			//else the parent node might be table-header-columns, table-columns, table-column-group
+			// else the parent node might be table-header-columns,
+			// table-columns, table-column-group
 			if (aNextNode != null) {
 				try {
 					if (aNextNode instanceof TableTableColumnElement) {
@@ -377,7 +399,8 @@ public class Column {
 							|| aNextNode instanceof TableTableHeaderColumnsElement
 							|| aNextNode instanceof TableTableColumnGroupElement) {
 						XPath xpath = ((OdfFileDom) maColumnElement.getOwnerDocument()).getXPath();
-						TableTableColumnElement firstCol = (TableTableColumnElement) xpath.evaluate("//table:table-column[first()]", aNextNode, XPathConstants.NODE);
+						TableTableColumnElement firstCol = (TableTableColumnElement) xpath.evaluate(
+								"//table:table-column[first()]", aNextNode, XPathConstants.NODE);
 						if (firstCol != null) {
 							return table.getColumnInstance(firstCol, 0);
 						}
@@ -439,12 +462,12 @@ public class Column {
 	 * <p>
 	 * The style should already exist in this document.
 	 * <p>
-	 * This method is not recommended for text document cases. 
-	 * These is a style assigned to each cell in tables under text documents.
-	 * So setting the default cell style to a column may not work.
+	 * This method is not recommended for text document cases. These is a style
+	 * assigned to each cell in tables under text documents. So setting the
+	 * default cell style to a column may not work.
 	 * 
 	 * @param style
-	 * 			the cell style of the document
+	 *            the cell style of the document
 	 */
 	public void setDefaultCellStyle(OdfStyle style) {
 		splitRepeatedColumns();
@@ -455,19 +478,18 @@ public class Column {
 
 		if (style != null) {
 			style.addStyleUser(maColumnElement);
-			maColumnElement.setTableDefaultCellStyleNameAttribute(
-					style.getStyleNameAttribute());
+			maColumnElement.setTableDefaultCellStyleNameAttribute(style.getStyleNameAttribute());
 		}
 	}
 
 	/**
 	 * Get the default cell style of this column.
+	 * 
 	 * @return the default cell style of this column
 	 */
 	public OdfStyle getDefaultCellStyle() {
 		String styleName = maColumnElement.getTableDefaultCellStyleNameAttribute();
-		OdfStyle style = maColumnElement.getAutomaticStyles().getStyle(
-				styleName, OdfStyleFamily.TableCell);
+		OdfStyle style = maColumnElement.getAutomaticStyles().getStyle(styleName, OdfStyleFamily.TableCell);
 
 		if (style == null) {
 			style = mDocument.getDocumentStyles().getStyle(styleName, OdfStyleFamily.TableCell);
@@ -475,10 +497,10 @@ public class Column {
 		return style;
 	}
 
-	//note: we have to use this method to modify the column repeated number
-	//in order to update mnRepeatedIndex of the each column
+	// note: we have to use this method to modify the column repeated number
+	// in order to update mnRepeatedIndex of the each column
 	void setColumnsRepeatedNumber(int num) {
-		//update the mnRepeatedIndex for the ever repeated column
+		// update the mnRepeatedIndex for the ever repeated column
 		maColumnElement.setTableNumberColumnsRepeatedAttribute(Integer.valueOf(num));
 	}
 

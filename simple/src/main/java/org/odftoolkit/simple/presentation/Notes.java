@@ -33,6 +33,7 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.PresentationDocument;
 import org.odftoolkit.simple.text.list.AbstractListContainer;
 import org.odftoolkit.simple.text.list.List;
@@ -41,10 +42,12 @@ import org.odftoolkit.simple.text.list.ListDecorator;
 import org.w3c.dom.NodeList;
 
 /**
- * Convenient functionality for the parent ODF OpenDocument element
+ * <code>Notes</code> represents the presentation notes feature of the ODF
+ * document. <code>Notes</code> provides methods to creates notes, add content,
+ * add list, etc.
  * 
  */
-public class Notes implements ListContainer {
+public class Notes extends Component implements ListContainer {
 
 	PresentationNotesElement maNoteElement;
 	private ListContainerImpl listContainerImpl;

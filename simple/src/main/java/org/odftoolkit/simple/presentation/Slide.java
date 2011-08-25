@@ -32,6 +32,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawTextBoxElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.PresentationDocument;
 import org.odftoolkit.simple.table.AbstractTableContainer;
 import org.odftoolkit.simple.table.Table;
@@ -48,7 +49,7 @@ import org.w3c.dom.NodeList;
  * document. <code>Slide</code> provides methods to get the slide index,get the
  * content of the current slide, etc.
  */
-public class Slide implements ListContainer, TableContainer {
+public class Slide extends Component implements ListContainer, TableContainer {
 
 	DrawPageElement maSlideElement;
 	private ListContainerImpl listContainerImpl;
@@ -381,7 +382,7 @@ public class Slide implements ListContainer, TableContainer {
 	public Table addTable(int numRows, int numCols) {
 		return getTableContainerImpl().addTable(numRows, numCols);
 	}
-	
+
 	public Table getTableByName(String name) {
 		return getTableContainerImpl().getTableByName(name);
 	}

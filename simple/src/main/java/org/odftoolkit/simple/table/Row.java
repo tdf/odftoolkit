@@ -56,6 +56,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.type.Length.Unit;
+import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
 import org.w3c.dom.Node;
 
@@ -64,7 +65,7 @@ import org.w3c.dom.Node;
  * <p>
  * Row provides methods to get table cells that belong to this table row.
  */
-public class Row {
+public class Row extends Component {
 
 	// boolean mbVisible;
 	TableTableRowElement maRowElement;
@@ -889,7 +890,7 @@ public class Row {
 		if (getTable().mIsSpreadsheet) {
 			return;
 		}
-		OdfStyle styleEle = oldLastCell.getStyleHandler().getCellStyleElementForWrite();
+		OdfStyle styleEle = oldLastCell.getStyleHandler().getStyleElementForWrite();
 		if (styleEle != null) {
 			if (oldLastCell.getRowIndex() == 0) {
 				Table.setLeftTopBorderStyleProperties(styleEle);
@@ -903,7 +904,7 @@ public class Row {
 		if (getTable().mIsSpreadsheet) {
 			return;
 		}
-		OdfStyle styleEle = newLastCell.getStyleHandler().getCellStyleElementForWrite();
+		OdfStyle styleEle = newLastCell.getStyleHandler().getStyleElementForWrite();
 		if (styleEle != null) {
 			if (newLastCell.getRowIndex() == 0) {
 				Table.setRightTopBorderStyleProperties(styleEle);

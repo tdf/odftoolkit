@@ -39,10 +39,12 @@ import org.odftoolkit.simple.table.Table.TableBuilder;
 public interface TableContainer {
 
 	/**
-	 * Get the ODF element which can have <text:table> as child element directly
-	 * according to ODF specification. This Element will help to find the
-	 * position to insert a new Table. For example, <text:table> element is
-	 * usable with <office:text> element, so TextDocument will return
+	 * Get the ODF element which can have
+	 * <table:table>
+	 * as child element directly according to ODF specification. This Element
+	 * will help to find the position to insert a new Table. For example,
+	 * <table:table>
+	 * element is usable with <office:text> element, so TextDocument will return
 	 * OfficeTextElement. While Presentation Notes is an indirectly
 	 * TableContainer, which holds Table with the help of its grand-child
 	 * element <draw:text-box>, so for Notes, DrawTextBoxElement should be
@@ -60,13 +62,13 @@ public interface TableContainer {
 	public Table addTable();
 
 	/**
-	 * Add a new Table to this container with a specified row number and
-	 * column number.
+	 * Add a new Table to this container with a specified row number and column
+	 * number.
 	 * <p>
 	 * The table will be inserted at the end of the tableContainer. An unique
 	 * table name will be given, you may set a custom table name using the
 	 * <code>setTableName</code> method.
-	 *
+	 * 
 	 * @param numRows
 	 *            the row number
 	 * @param numCols

@@ -83,6 +83,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.type.Color;
+import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.common.TextExtractor;
@@ -105,7 +106,7 @@ import org.w3c.dom.NodeList;
  * Table provides methods to get/set/modify the cell content and cell
  * properties.
  */
-public class Cell implements ListContainer {
+public class Cell extends Component implements ListContainer {
 
 	TableTableCellElementBase mCellElement;
 	Document mDocument;
@@ -219,7 +220,7 @@ public class Cell implements ListContainer {
 	 */
 	@Deprecated
 	public String getHorizontalAlignment() {
-		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForRead();
+		OdfStyleBase styleElement = getStyleHandler().getStyleElementForRead();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName
 					.newName(OdfDocumentNamespace.FO, "text-align"));
@@ -266,7 +267,7 @@ public class Cell implements ListContainer {
 			horizontalAlignment = FoTextAlignAttribute.Value.END.toString();
 		}
 		splitRepeatedCells();
-		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForWrite();
+		OdfStyleBase styleElement = getStyleHandler().getStyleElementForWrite();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName
 					.newName(OdfDocumentNamespace.FO, "text-align"));
@@ -303,7 +304,7 @@ public class Cell implements ListContainer {
 	 */
 	@Deprecated
 	public String getVerticalAlignment() {
-		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForRead();
+		OdfStyleBase styleElement = getStyleHandler().getStyleElementForRead();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName
 					.newName(OdfDocumentNamespace.STYLE, "vertical-align"));
@@ -343,7 +344,7 @@ public class Cell implements ListContainer {
 	@Deprecated
 	public void setVerticalAlignment(String verticalAlignment) {
 		splitRepeatedCells();
-		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForWrite();
+		OdfStyleBase styleElement = getStyleHandler().getStyleElementForWrite();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName
 					.newName(OdfDocumentNamespace.STYLE, "vertical-align"));
@@ -733,7 +734,7 @@ public class Cell implements ListContainer {
 			throw new IllegalArgumentException();
 		}
 
-		OdfStyleBase style = getStyleHandler().getCellStyleElementForRead();
+		OdfStyleBase style = getStyleHandler().getStyleElementForRead();
 		if (style != null) {
 			String dataStyleName = style.getOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.STYLE,
 					"data-style-name"));
@@ -1260,7 +1261,7 @@ public class Cell implements ListContainer {
 	@Deprecated
 	public String getCellBackgroundColorString() {
 		String color = DEFAULT_BACKGROUND_COLOR;
-		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForRead();
+		OdfStyleBase styleElement = getStyleHandler().getStyleElementForRead();
 		if (styleElement != null) {
 			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName
 					.newName(OdfDocumentNamespace.FO, "background-color"));
@@ -1305,7 +1306,7 @@ public class Cell implements ListContainer {
 			cellBackgroundColor = DEFAULT_BACKGROUND_COLOR;
 		}
 		splitRepeatedCells();
-		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForWrite();
+		OdfStyleBase styleElement = getStyleHandler().getStyleElementForWrite();
 		if (styleElement != null) {
 			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName
 					.newName(OdfDocumentNamespace.FO, "background-color"));
@@ -1429,7 +1430,7 @@ public class Cell implements ListContainer {
 	 * @return the name of the style
 	 */
 	public String getStyleName() {
-		OdfStyleBase style = getStyleHandler().getCellStyleElementForRead();
+		OdfStyleBase style = getStyleHandler().getStyleElementForRead();
 		if (style == null) {
 			return "";
 		}
@@ -1678,7 +1679,7 @@ public class Cell implements ListContainer {
 	}
 
 	private void setDataDisplayStyleName(String name) {
-		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForWrite();
+		OdfStyleBase styleElement = getStyleHandler().getStyleElementForWrite();
 		if (styleElement != null) {
 			styleElement.setOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.STYLE, "data-style-name"), name);
 		}
@@ -1686,7 +1687,7 @@ public class Cell implements ListContainer {
 
 	private String getDataDisplayStyleName() {
 		String datadisplayStylename = null;
-		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForRead();
+		OdfStyleBase styleElement = getStyleHandler().getStyleElementForRead();
 		if (styleElement != null) {
 			datadisplayStylename = styleElement.getOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.STYLE,
 					"data-style-name"));
@@ -2113,13 +2114,13 @@ public class Cell implements ListContainer {
 				int width = image.getWidth(null);
 				long widthInMI = new Double((Math.round(10000.0 * width / 1.0 * 0.28) / 10000.0)).longValue();
 				Column column = getTableColumn();
-				if(widthInMI > column.getWidth()){
+				if (widthInMI > column.getWidth()) {
 					column.setWidth(widthInMI);
 				}
-				
+
 				long heightInMI = new Double((Math.round(10000.0 * height / 1.0 * 0.28) / 10000.0)).longValue();
 				Row row = getTableRow();
-				if(heightInMI>row.getHeight()){
+				if (heightInMI > row.getHeight()) {
 					row.setHeight(heightInMI, false);
 				}
 			}
@@ -2127,7 +2128,7 @@ public class Cell implements ListContainer {
 			Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	
+
 	/**
 	 * Get the Image from the specified cell.
 	 * 
@@ -2157,7 +2158,7 @@ public class Cell implements ListContainer {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Return style handler for this cell
 	 * 

@@ -85,8 +85,6 @@ import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.type.Duration;
-import org.odftoolkit.simple.Document;
-import org.odftoolkit.simple.PresentationDocument;
 import org.odftoolkit.simple.meta.Meta;
 import org.odftoolkit.simple.table.AbstractTableContainer;
 import org.odftoolkit.simple.table.Table;
@@ -99,8 +97,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.ErrorHandler;
 
-/** This abstract class is representing one of the possible ODF documents */
-public abstract class Document extends OdfSchemaDocument implements TableContainer{
+/**
+ * This abstract class is representing one of the possible ODF documents
+ */
+public abstract class Document extends OdfSchemaDocument implements TableContainer {
 	// Static parts of file references
 	private static final String SLASH = "/";
 	private OdfMediaType mMediaType;
@@ -109,6 +109,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	private TableContainerImpl tableContainerImpl;
 	private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
 	private static final String EMPTY_STRING = "";
+	
+	private IdentityHashMap<OdfElement, Component> mComponentRepository = new IdentityHashMap<OdfElement, Component>();
 	
 	// FIXME: This field is only used in method copyResourcesFrom to improve
 	// copy performance, should not be used in any other way.
@@ -149,25 +151,25 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * This enum contains all possible media types of Document documents.
 	 */
 	public enum OdfMediaType implements MediaType {
-		
+
 		CHART("application/vnd.oasis.opendocument.chart", "odc"), 
-		CHART_TEMPLATE("application/vnd.oasis.opendocument.chart-template", "otc"),
-		FORMULA("application/vnd.oasis.opendocument.formula", "odf"),
-		FORMULA_TEMPLATE("application/vnd.oasis.opendocument.formula-template", "otf"),
-		DATABASE_FRONT_END("application/vnd.oasis.opendocument.base", "otf"),
+		CHART_TEMPLATE("application/vnd.oasis.opendocument.chart-template", "otc"), 
+		FORMULA("application/vnd.oasis.opendocument.formula", "odf"), 
+		FORMULA_TEMPLATE("application/vnd.oasis.opendocument.formula-template", "otf"), 
+		DATABASE_FRONT_END("application/vnd.oasis.opendocument.base", "otf"), 
 		GRAPHICS("application/vnd.oasis.opendocument.graphics", "odg"), 
 		GRAPHICS_TEMPLATE("application/vnd.oasis.opendocument.graphics-template", "otg"), 
 		IMAGE("application/vnd.oasis.opendocument.image", "odi"), 
 		IMAGE_TEMPLATE("application/vnd.oasis.opendocument.image-template", "oti"), 
 		PRESENTATION("application/vnd.oasis.opendocument.presentation", "odp"), 
-		PRESENTATION_TEMPLATE("application/vnd.oasis.opendocument.presentation-template", "otp"), 
+		PRESENTATION_TEMPLATE("application/vnd.oasis.opendocument.presentation-template", "otp"),
 		SPREADSHEET("application/vnd.oasis.opendocument.spreadsheet", "ods"), 
 		SPREADSHEET_TEMPLATE("application/vnd.oasis.opendocument.spreadsheet-template", "ots"), 
 		TEXT("application/vnd.oasis.opendocument.text", "odt"), 
-		TEXT_MASTER("application/vnd.oasis.opendocument.text-master", "odm"), 
+		TEXT_MASTER("application/vnd.oasis.opendocument.text-master", "odm"),
 		TEXT_TEMPLATE("application/vnd.oasis.opendocument.text-template", "ott"), 
 		TEXT_WEB("application/vnd.oasis.opendocument.text-web", "oth");
-		
+
 		private final String mMediaType;
 		private final String mSuffix;
 
@@ -216,15 +218,15 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	}
 
 	/**
-	 * Loads an Document from the given resource. NOTE: Initial meta data
-	 * will be added in this method.
+	 * Loads an Document from the given resource. NOTE: Initial meta data will
+	 * be added in this method.
 	 * 
 	 * @param res
 	 *            a resource containing a package with a root document
 	 * @param odfMediaType
 	 *            the media type of the root document
-	 * @return the Document document or NULL if the media type is not
-	 *         supported by SIMPLE.
+	 * @return the Document document or NULL if the media type is not supported
+	 *         by SIMPLE.
 	 * @throws java.lang.Exception
 	 *             - if the document could not be created.
 	 */
@@ -252,8 +254,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * 
 	 * @param documentPath
 	 *            - the path from where the document can be loaded
-	 * @return the Document from the given path or NULL if the media type is
-	 *         not supported by SIMPLE.
+	 * @return the Document from the given path or NULL if the media type is not
+	 *         supported by SIMPLE.
 	 * @throws java.lang.Exception
 	 *             - if the document could not be created.
 	 */
@@ -455,7 +457,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 			break;
 
 		case PRESENTATION_TEMPLATE:
-			newDoc = new PresentationDocument(pkg, internalPath, PresentationDocument.OdfMediaType.PRESENTATION_TEMPLATE);
+			newDoc = new PresentationDocument(pkg, internalPath,
+					PresentationDocument.OdfMediaType.PRESENTATION_TEMPLATE);
 			break;
 
 		case GRAPHICS:
@@ -524,8 +527,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * Method returns all embedded OdfPackageDocuments, which match a valid
 	 * OdfMediaType, of the root OdfPackageDocument.
 	 * 
-	 * @return a list with all embedded documents of the root
-	 *         OdfPackageDocument
+	 * @return a list with all embedded documents of the root OdfPackageDocument
 	 */
 	// ToDo: (Issue 219 - PackageRefactoring) - Better return Path of
 	// Documents??
@@ -743,6 +745,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 		// set all member variables explicit to null
 		mMediaType = null;
 		mOfficeMeta = null;
+		mComponentRepository.clear();
 		super.close();
 	}
 
@@ -1535,10 +1538,11 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
-	
+
 	/*****************************/
-	/* These codes are moved from OdfPackage, and should be removed 
-	 * till OdfPackage can provide a mechanism to copy resources in batch.
+	/*
+	 * These codes are moved from OdfPackage, and should be removed till
+	 * OdfPackage can provide a mechanism to copy resources in batch.
 	 */
 	/*****************************/
 	private InputStream readAsInputStream(ZipInputStream inputStream) throws IOException {
@@ -2032,8 +2036,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	// if loop == true, get the style definition element reference other style
 	// definition element
 	private void getCopyStyleList(OdfElement ele, OdfElement cloneEle, String styleQName, NodeList srcStyleNodeList,
-			IdentityHashMap<OdfElement, List<OdfElement>> copyStyleEleList, IdentityHashMap<OdfElement, OdfElement> appendStyleList, List<String> attrStrList,
-			boolean loop) {
+			IdentityHashMap<OdfElement, List<OdfElement>> copyStyleEleList,
+			IdentityHashMap<OdfElement, OdfElement> appendStyleList, List<String> attrStrList, boolean loop) {
 		try {
 			String styleLocalName = OdfNamespace.getLocalPart(styleQName);
 			String stylePrefix = OdfNamespace.getPrefixPart(styleQName);
@@ -2052,12 +2056,11 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 						String subStr = cloneEleStr.substring(0, index);
 						int lastSpaceIndex = subStr.lastIndexOf(' ');
 						String attrStr = subStr.substring(lastSpaceIndex + 1, index);
-						if (attrStr.equals(styleQName) || attrStrList.contains(attrStr+"="+"\""+styleName+"\""))
-						{
+						if (attrStr.equals(styleQName) || attrStrList.contains(attrStr + "=" + "\"" + styleName + "\"")) {
 							index = cloneEleStr.indexOf("=\"" + styleName + "\"", index + styleName.length());
 							continue;
 						}
-						attrStrList.add(attrStr+"="+"\""+styleName+"\"");
+						attrStrList.add(attrStr + "=" + "\"" + styleName + "\"");
 						XPath xpath = ((OdfFileDom) cloneEle.getOwnerDocument()).getXPath();
 						NodeList styleRefNodes = (NodeList) xpath.evaluate(
 								".//*[@" + attrStr + "='" + styleName + "']", cloneEle, XPathConstants.NODESET);
@@ -2376,15 +2379,15 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 		}
 		return success;
 	}
-	
+
 	public Table addTable() {
 		return getTableContainerImpl().addTable();
 	}
-	
+
 	public Table addTable(int numRows, int numCols) {
 		return getTableContainerImpl().addTable(numRows, numCols);
 	}
-	
+
 	public Table getTableByName(String name) {
 		return getTableContainerImpl().getTableByName(name);
 	}
@@ -2396,7 +2399,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	public TableBuilder getTableBuilder() {
 		return getTableContainerImpl().getTableBuilder();
 	}
-	
+
 	protected TableContainer getTableContainerImpl() {
 		if (tableContainerImpl == null) {
 			tableContainerImpl = new TableContainerImpl();
@@ -2415,5 +2418,14 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 			}
 			return containerElement;
 		}
+	}
+
+	/**
+	 * Return the component repository of this document.
+	 * 
+	 * @return the component repository of this document.
+	 */
+	protected IdentityHashMap<OdfElement, Component> getComponentMap() {
+		return mComponentRepository;
 	}
 }

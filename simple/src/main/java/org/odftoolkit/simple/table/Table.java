@@ -64,6 +64,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.type.Length.Unit;
+import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.TextDocument;
@@ -77,7 +78,7 @@ import org.w3c.dom.NodeList;
  * Table provides methods to get/add/delete/modify table column/row/cell.
  * 
  */
-public class Table {
+public class Table extends Component {
 
 	private final TableTableElement mTableElement;
 	protected Document mDocument;
@@ -414,7 +415,7 @@ public class Table {
 		OdfFileDom ownerDocument = (OdfFileDom) containerElement.getOwnerDocument();
 		return (Document) ownerDocument.getDocument();
 	}
-	
+
 	/**
 	 * Get a table feature instance by an instance of
 	 * <code>TableTableElement</code>.
@@ -428,7 +429,7 @@ public class Table {
 		Document ownerDocument = (Document) ((OdfFileDom) (element.getOwnerDocument())).getDocument();
 		return ownerDocument.getTableBuilder().getTableInstance(element);
 	}
-	
+
 	/**
 	 * Construct the <code>Table</code> feature. The default column count is 5.
 	 * The default row count is 2.
@@ -778,7 +779,7 @@ public class Table {
 		Document document = getOwnerDocument(container);
 		OdfElement containerElement = container.getTableContainerElement();
 		OdfFileDom dom = (OdfFileDom) containerElement.getOwnerDocument();
-		
+
 		boolean isTextDocument = document instanceof TextDocument;
 
 		// check arguments
@@ -971,12 +972,12 @@ public class Table {
 			if (n instanceof TableTableHeaderColumnsElement) {
 				result += getHeaderColumnCount((TableTableHeaderColumnsElement) n);
 			}
-			
-			//<table:table-columns>
+
+			// <table:table-columns>
 			if (n instanceof TableTableColumnsElement) {
 				result += getColumnsCount((TableTableColumnsElement) n);
 			}
-			
+
 			if (n instanceof TableTableColumnElement) {
 				result += ((TableTableColumnElement) n).getTableNumberColumnsRepeatedAttribute();
 			}
@@ -1571,15 +1572,6 @@ public class Table {
 	}
 
 	/**
-	 * Return the Document instance which owns this table.
-	 * 
-	 * @return the instance of <code>Document</code>
-	 */
-	Document getOwnerDocument() {
-		return mDocument;
-	}
-
-	/**
 	 * Insert a specific number of columns before the column whose index is
 	 * <code>index</code>.
 	 * 
@@ -1781,7 +1773,7 @@ public class Table {
 				i = i + cell.getColumnsRepeatedNumber();
 				continue;
 			}
-			OdfStyle styleEle = cell.getStyleHandler().getCellStyleElementForWrite();
+			OdfStyle styleEle = cell.getStyleHandler().getStyleElementForWrite();
 			if (i < length - 1) {
 				setLeftBottomBorderStylesProperties(styleEle);
 			} else {
@@ -1803,7 +1795,7 @@ public class Table {
 				i = i + cell.getColumnsRepeatedNumber();
 				continue;
 			}
-			OdfStyle styleEle = cell.getStyleHandler().getCellStyleElementForWrite();
+			OdfStyle styleEle = cell.getStyleHandler().getStyleElementForWrite();
 			if (i < length - 1) {
 				setLeftTopBorderStyleProperties(styleEle);
 			} else {
@@ -2146,7 +2138,7 @@ public class Table {
 		}
 		return result;
 	}
-	
+
 	private int getColumnsCount(TableTableColumnsElement columns) {
 		int result = 0;
 		if (columns != null) {
@@ -2312,8 +2304,8 @@ public class Table {
 	}
 
 	/**
-	 * Return true if the new created multiple columns/rows/cells are described by a
-	 * single element when it's possible.
+	 * Return true if the new created multiple columns/rows/cells are described
+	 * by a single element when it's possible.
 	 * <p>
 	 * The default setting is <code>true</code>, which helps to decrease the
 	 * document size. If setting is <code>false</code>, each column/row/cell

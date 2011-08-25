@@ -32,6 +32,7 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.table.AbstractTableContainer;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.table.TableContainer;
@@ -44,11 +45,11 @@ import org.w3c.dom.NodeList;
  * 
  * @since 0.4.5
  */
-public class Header implements TableContainer {
+public class Header extends Component implements TableContainer {
 
 	private StyleHeaderElement headerEle;
 	private TableContainerImpl tableContainerImpl;
-	
+
 	/**
 	 * Create a header instance by an object of <code>StyleHeaderElement</code>.
 	 * 
@@ -58,7 +59,7 @@ public class Header implements TableContainer {
 	public Header(StyleHeaderElement element) {
 		headerEle = element;
 	}
-	
+
 	/**
 	 * Return an instance of <code>StyleHeaderElement</code> which represents
 	 * this feature.
@@ -68,19 +69,19 @@ public class Header implements TableContainer {
 	public StyleHeaderElement getOdfElement() {
 		return headerEle;
 	}
-	
+
 	public Table addTable() {
 		Table table = getTableContainerImpl().addTable();
 		updateTableToNone(table);
 		return table;
 	}
-	
+
 	public Table addTable(int numRows, int numCols) {
 		Table table = getTableContainerImpl().addTable(numRows, numCols);
 		updateTableToNone(table);
 		return table;
 	}
-	
+
 	public Table getTableByName(String name) {
 		return getTableContainerImpl().getTableByName(name);
 	}
@@ -123,11 +124,11 @@ public class Header implements TableContainer {
 			}
 		}
 	}
-	
+
 	private class TableContainerImpl extends AbstractTableContainer {
 
 		public OdfElement getTableContainerElement() {
 			return headerEle;
 		}
-	}	
+	}
 }

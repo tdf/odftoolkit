@@ -22,8 +22,6 @@
 package org.odftoolkit.simple.table;
 
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
@@ -31,11 +29,11 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfDefaultStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.Document.ScriptType;
 import org.odftoolkit.simple.style.Border;
+import org.odftoolkit.simple.style.DefaultStyleHandler;
 import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.ParagraphProperties;
 import org.odftoolkit.simple.style.StyleTypeDefinitions;
@@ -46,8 +44,6 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.FontStyle;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.TextLinePosition;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
 
 /**
  * This class provides functions to handle the style of a cell.
@@ -58,10 +54,9 @@ import org.w3c.dom.Node;
  * 
  * @since 0.3
  */
-public class CellStyleHandler {
+public class CellStyleHandler extends DefaultStyleHandler {
 
 	Cell mCell;
-	Document mDocument;
 	TableTableCellElementBase mCellElement;
 
 	TextProperties mTextProperties;
@@ -70,250 +65,36 @@ public class CellStyleHandler {
 	TableCellProperties mWritableTableCellProperties;
 	ParagraphProperties mParagraphProperties;
 	ParagraphProperties mWritableParagraphProperties;
-	OdfStyleBase mStyleElement;
-	OdfStyle mWritableStyleElement;
-	boolean isUseDefaultStyle = false;
 
 	CellStyleHandler(Cell aCell) {
+		super(aCell.getOdfElement());
 		mCell = aCell;
-		mCellElement = mCell.getOdfElement();
-		mDocument = ((Document) ((OdfFileDom) mCellElement.getOwnerDocument()).getDocument());
+		mCellElement = (TableTableCellElementBase) mCell.getOdfElement();
 	}
 
-	/**
-	 * Return the text style properties definition for this cell, only for read
-	 * function.
-	 * <p>
-	 * Null will be returned if there is no style definition.
-	 * <p>
-	 * Null will be returned if there is no explicit text style properties
-	 * definition for this cell.
-	 * <p>
-	 * Note if you try to write style properties to the returned object, errors
-	 * will be met with.
-	 * 
-	 * @return the text style properties definition for this cell, only for read
-	 *         function
-	 */
-	public TextProperties getTextPropertiesForRead() {
-		if (mWritableTextProperties != null)
-			return mWritableTextProperties;
-		else if (mTextProperties != null)
-			return mTextProperties;
-
-		OdfStyleBase style = getCellStyleElementForRead();
-		if (style == null) {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO, "No style definition is found!", "");
-			return null;
-		}
-		mTextProperties = TextProperties.getTextProperties(style);
-		if (mTextProperties != null)
-			return mTextProperties;
-		else {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
-					"No explicit text properties definition is found!", "");
-			return null;
-		}
-	}
+	private boolean isShared = false;
 
 	/**
-	 * Return the text style properties definition for this cell, for read and
-	 * write function.
+	 * Return the used style name of this cell.
 	 * <p>
-	 * An empty style definition will be created if there is no style
-	 * definition.
-	 * <p>
-	 * An empty text style properties definition will be created if there is no
-	 * explicit text style properties definition.
-	 * 
-	 * @return the text style properties definition for this cell, for read and
-	 *         write function
+	 * If there is no style name defined for cell, the attribute
+	 * "table:default-cell-style-name" in table row and table column would be
+	 * returned.
 	 */
-	public TextProperties getTextPropertiesForWrite() {
-		if (mWritableTextProperties != null)
-			return mWritableTextProperties;
-		OdfStyle style = getCellStyleElementForWrite();
-		mWritableTextProperties = TextProperties.getOrCreateTextProperties(style);
-		return mWritableTextProperties;
-	}
-
-	/**
-	 * Return the cell style properties definition for this cell, only for read
-	 * function.
-	 * <p>
-	 * Null will be returned if there is no style definition.
-	 * <p>
-	 * Null will be returned if there is no explicit cell style properties
-	 * definition for this cell.
-	 * <p>
-	 * Note if you try to write style properties to the returned object, errors
-	 * will be met with.
-	 * 
-	 * @return the cell style properties definition for this cell, only for read
-	 *         function
-	 */
-	public TableCellProperties getTableCellPropertiesForRead() {
-		if (mWritableTableCellProperties != null)
-			return mWritableTableCellProperties;
-		else if (mTableCellProperties != null)
-			return mTableCellProperties;
-
-		OdfStyleBase style = getCellStyleElementForRead();
-		if (style == null) {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO, "No style definition is found!", "");
-			return null;
-		}
-		mTableCellProperties = TableCellProperties.getTableCellProperties(style);
-		if (mTableCellProperties != null)
-			return mTableCellProperties;
-		else {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
-					"No explicit table cell properties definition is found!", "");
-			return null;
-		}
-	}
-
-	/**
-	 * Return the cell style properties definition for this cell, for read and
-	 * write function.
-	 * <p>
-	 * An empty style definition will be created if there is no style
-	 * definition.
-	 * <p>
-	 * An empty cell style properties definition will be created if there is no
-	 * explicit cell style properties definition.
-	 * 
-	 * @return the cell style properties definition for this cell, for read and
-	 *         write function
-	 */
-	public TableCellProperties getTableCellPropertiesForWrite() {
-		if (mWritableTableCellProperties != null)
-			return mWritableTableCellProperties;
-		OdfStyle style = getCellStyleElementForWrite();
-		mWritableTableCellProperties = TableCellProperties.getOrCreateTableCellProperties(style);
-		return mWritableTableCellProperties;
-	}
-
-	/**
-	 * Return the paragraph style properties definition for this cell, only for
-	 * read function.
-	 * <p>
-	 * Null will be returned if there is no style definition.
-	 * <p>
-	 * Null will be returned if there is no explicit paragraph style properties
-	 * definition for this cell.
-	 * <p>
-	 * Note if you try to write style properties to the returned object, errors
-	 * will be met with.
-	 * 
-	 * @return the paragraph style properties definition for this cell, only for
-	 *         read function
-	 */
-	public ParagraphProperties getParagraphPropertiesForRead() {
-		if (mWritableParagraphProperties != null)
-			return mWritableParagraphProperties;
-		else if (mParagraphProperties != null)
-			return mParagraphProperties;
-
-		OdfStyleBase style = getCellStyleElementForRead();
-		if (style == null) {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO, "No style definition is found!", "");
-			return null;
-		}
-		mParagraphProperties = ParagraphProperties.getParagraphProperties(style);
-		if (mParagraphProperties != null)
-			return mParagraphProperties;
-		else {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
-					"No explicit paragraph properties definition is found!", "");
-			return null;
-		}
-	}
-
-	/**
-	 * Return the paragraph style properties definition for this cell, for read
-	 * and write function.
-	 * <p>
-	 * An empty style definition will be created if there is no style
-	 * definition.
-	 * <p>
-	 * An empty paragraph style properties definition will be created if there
-	 * is no explicit paragraph style properties definition.
-	 * 
-	 * @return the paragraph style properties definition for this cell, for read
-	 *         and write function
-	 */
-	public ParagraphProperties getParagraphPropertiesForWrite() {
-		if (mWritableParagraphProperties != null)
-			return mWritableParagraphProperties;
-		OdfStyle style = getCellStyleElementForWrite();
-		mWritableParagraphProperties = ParagraphProperties.getOrCreateParagraphProperties(style);
-		return mWritableParagraphProperties;
-	}
-
-	/**
-	 * Return the style element for this cell, only for read function.
-	 * <p>
-	 * Null will be returned if there is no style definition.
-	 * <p>
-	 * Note if you try to write style properties to the returned object, errors
-	 * will be met with.
-	 * 
-	 * @return the style element
-	 */
-	protected OdfStyleBase getCellStyleElementForRead() {
-		// Return current used style
-		if (getCurrentUsedStyle() != null)
-			return getCurrentUsedStyle();
-
+	@Override
+	public String getUsedStyleName() {
 		String styleName = mCellElement.getStyleName();
-		OdfDefaultStyle defaultStyleElement = null;
 		if (styleName == null || (styleName.equals(""))) { // search in row
 			Row aRow = mCell.getTableRow();
 			styleName = aRow.getOdfElement().getTableDefaultCellStyleNameAttribute();
+			isShared = true;
 		}
 		if (styleName == null || (styleName.equals(""))) { // search in column
 			Column aColumn = mCell.getTableColumn();
 			styleName = aColumn.getOdfElement().getTableDefaultCellStyleNameAttribute();
+			isShared = true;
 		}
-		if (styleName == null || (styleName.equals(""))) {
-			// get from default style element
-			defaultStyleElement = mDocument.getDocumentStyles().getDefaultStyle(OdfStyleFamily.TableCell);
-			mStyleElement = defaultStyleElement;
-			isUseDefaultStyle = true;
-			return mStyleElement;
-		}
-
-		OdfStyle styleElement = mCellElement.getAutomaticStyles().getStyle(styleName, mCellElement.getStyleFamily());
-
-		if (styleElement == null) {
-			styleElement = mDocument.getDocumentStyles().getStyle(styleName, OdfStyleFamily.TableCell);
-		}
-
-		// if (styleElement == null && styleName.equals("Default")) {
-		// defaultStyleElement = mDocument.getDocumentStyles()
-		// .getDefaultStyle(OdfStyleFamily.TableCell);
-		// mStyleElement = defaultStyleElement;
-		// isUseDefaultStyle = true;
-		// return mStyleElement;
-		// }
-
-		if (styleElement == null) {
-			styleElement = mCellElement.getDocumentStyle();
-		}
-
-		if (styleElement == null) {
-			// OdfStyle newStyle = mCellElement.getAutomaticStyles().newStyle(
-			// OdfStyleFamily.TableCell);
-			// String newname = newStyle.getStyleNameAttribute();
-			// mCellElement.setStyleName(newname);
-			// newStyle.addStyleUser(mCellElement);
-			mStyleElement = null;
-			return mStyleElement;
-		}
-
-		mStyleElement = styleElement;
-		return mStyleElement;
+		return styleName;
 	}
 
 	/**
@@ -324,89 +105,19 @@ public class CellStyleHandler {
 	 * 
 	 * @return the style element
 	 */
-	protected OdfStyle getCellStyleElementForWrite() {
+	@Override
+	public OdfStyle getStyleElementForWrite() {
 		if (mWritableStyleElement != null)
 			return mWritableStyleElement;
 
 		mCell.splitRepeatedCells();
-		mCellElement = mCell.getOdfElement();
+		mCellElement = (TableTableCellElementBase) mCell.getOdfElement();
+		mOdfElement = mCellElement; // note here: mOdfElement in
+									// DefaultStyleHandler must be updated at
+									// the same time
 
-		boolean createNew = false;
-		OdfStyle styleElement = null;
-		OdfDefaultStyle defaultStyleElement = null;
-		String styleName = mCellElement.getStyleName();
-		if (styleName == null || (styleName.equals(""))) { // search in row
-			Row aRow = mCell.getTableRow();
-			styleName = aRow.getOdfElement().getTableDefaultCellStyleNameAttribute();
-			createNew = true;
-		}
-		if (styleName == null || (styleName.equals(""))) { // search in column
-			Column aColumn = mCell.getTableColumn();
-			styleName = aColumn.getOdfElement().getTableDefaultCellStyleNameAttribute();
-			createNew = true;
-		}
-		if (styleName == null || (styleName.equals(""))) {
-			createNew = true;
-			// get from default style element
-			defaultStyleElement = mDocument.getDocumentStyles().getDefaultStyle(OdfStyleFamily.TableCell);
-		} else {
-			OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
-			styleElement = styles.getStyle(styleName, mCellElement.getStyleFamily());
-
-			// If not default cell style definition,
-			// Try to find if the style is defined in document styles
-			if (styleElement == null && defaultStyleElement == null) {
-				styleElement = mDocument.getDocumentStyles().getStyle(styleName, OdfStyleFamily.TableCell);
-			}
-
-			// // Try default cell style definition
-			// if (styleElement == null && styleName.equals("Default")) {
-			// defaultStyleElement = mDocument.getDocumentStyles()
-			// .getDefaultStyle(OdfStyleFamily.TableCell);
-			// }
-
-			// If not default cell style definition, and no style definition
-			// Try to find if the parent style is defined
-			if (styleElement == null && defaultStyleElement == null) {
-				styleElement = mCellElement.getDocumentStyle();
-			}
-			if (styleElement == null || styleElement.getStyleUserCount() > 1) {
-				createNew = true;
-			}
-		}
-		// if style name is null or this style are used by many users,
-		// should create a new one.
-		if (createNew) {
-			OdfStyle newStyle = mCellElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-			if (styleElement != null) {
-				newStyle.setProperties(styleElement.getStylePropertiesDeep());
-				// copy attributes
-				NamedNodeMap attributes = styleElement.getAttributes();
-				for (int i = 0; i < attributes.getLength(); i++) {
-					Node attr = attributes.item(i);
-					if (!attr.getNodeName().equals("style:name")) {
-						newStyle.setAttributeNS(attr.getNamespaceURI(), attr.getNodeName(), attr.getNodeValue());
-					}
-				}// end of copying attributes
-			} else if (defaultStyleElement != null) {
-				newStyle.setProperties(defaultStyleElement.getStylePropertiesDeep());
-				// copy attributes
-				NamedNodeMap attributes = defaultStyleElement.getAttributes();
-				for (int i = 0; i < attributes.getLength(); i++) {
-					Node attr = attributes.item(i);
-					if (!attr.getNodeName().equals("style:name")) {
-						newStyle.setAttributeNS(attr.getNamespaceURI(), attr.getNodeName(), attr.getNodeValue());
-					}
-				}// end of copying attributes
-				isUseDefaultStyle = true;
-			}
-			// mCellElement.getAutomaticStyles().appendChild(newStyle);
-			String newname = newStyle.getStyleNameAttribute();
-			mCellElement.setStyleName(newname);
-			mWritableStyleElement = newStyle;
-			return mWritableStyleElement;
-		}
-		mWritableStyleElement = styleElement;
+		String styleName = getUsedStyleName();
+		mWritableStyleElement = getWritableStyleElementByName(styleName, isShared);
 		return mWritableStyleElement;
 	}
 

@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
 
 /**
@@ -35,7 +36,7 @@ import org.odftoolkit.simple.Document;
  * 
  * @since 0.4
  */
-public class Section {
+public class Section extends Component {
 
 	TextSectionElement mSectionElement;
 	Document mDocument;

@@ -41,8 +41,11 @@ import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.simple.text.AbstractParagraphContainer;
 import org.odftoolkit.simple.text.Footer;
 import org.odftoolkit.simple.text.Header;
+import org.odftoolkit.simple.text.Paragraph;
+import org.odftoolkit.simple.text.ParagraphContainer;
 import org.odftoolkit.simple.text.Section;
 import org.odftoolkit.simple.text.list.AbstractListContainer;
 import org.odftoolkit.simple.text.list.List;
@@ -55,12 +58,13 @@ import org.w3c.dom.NodeList;
  * This class represents an empty ODF text document.
  * 
  */
-public class TextDocument extends Document implements ListContainer {
+public class TextDocument extends Document implements ListContainer, ParagraphContainer {
 
 	private static final String EMPTY_TEXT_DOCUMENT_PATH = "/OdfTextDocument.odt";
 	static final Resource EMPTY_TEXT_DOCUMENT_RESOURCE = new Resource(EMPTY_TEXT_DOCUMENT_PATH);
 
 	private ListContainerImpl listContainerImpl;
+	private ParagraphContainerImpl paragraphContainerImpl;
 
 	private Header firstPageHeader;
 	private Header standardHeader;
@@ -528,5 +532,53 @@ public class TextDocument extends Document implements ListContainer {
 			masterPageEle = masterStyles.newStyleMasterPageElement(pageStyleName, layout.getStyleNameAttribute());
 		}
 		return masterPageEle;
+	}
+
+	private class ParagraphContainerImpl extends AbstractParagraphContainer {
+		public OdfElement getParagraphContainerElement() {
+			OdfElement containerElement = null;
+			try {
+				containerElement = getContentRoot();
+			} catch (Exception e) {
+				Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+			}
+			return containerElement;
+		}
+	}
+
+	private ParagraphContainerImpl getParagraphContainerImpl() {
+		if (paragraphContainerImpl == null)
+			paragraphContainerImpl = new ParagraphContainerImpl();
+		return paragraphContainerImpl;
+	}
+
+	/**
+	 * Creates a new paragraph and append text
+	 * 
+	 * @param text
+	 *            the text content of this paragraph
+	 * @return the new paragraph
+	 * @throws Exception
+	 *             if the file DOM could not be created.
+	 */
+	public Paragraph addParagraph(String text) {
+		Paragraph para = getParagraphContainerImpl().addParagraph(text);
+		return para;
+	}
+
+	/**
+	 * Remove paragraph from this document
+	 * 
+	 * @param para
+	 *            the instance of paragraph
+	 * @return true if the paragraph is removed successfully, false if errors
+	 *         happen.
+	 */
+	public boolean removeParagraph(Paragraph para) {
+		return getParagraphContainerImpl().removeParagraph(para);
+	}
+
+	public OdfElement getParagraphContainerElement() {
+		return getParagraphContainerImpl().getParagraphContainerElement();
 	}
 }

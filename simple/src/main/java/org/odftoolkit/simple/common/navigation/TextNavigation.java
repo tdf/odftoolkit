@@ -33,7 +33,6 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.common.TextExtractor;
-import org.odftoolkit.simple.common.WhitespaceProcessor;
 import org.odftoolkit.simple.table.Cell;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -91,7 +90,7 @@ public class TextNavigation extends Navigation {
 		mTempSelectedItem = null;
 		mbFinishFindInHeaderFooter = false;
 	}
-	
+
 	/**
 	 * Check if has next <code>TextSelection</code> with satisfied content
 	 * pattern.
@@ -137,15 +136,13 @@ public class TextNavigation extends Navigation {
 	@Override
 	public boolean match(Node element) {
 		if (element instanceof OdfElement) {
-			WhitespaceProcessor textProcessor = new WhitespaceProcessor();
-			String content = textProcessor.getText(element);
+			String content = TextExtractor.getText((OdfElement) element);
 			Matcher matcher = mPattern.matcher(content);
 			if (matcher.find()) {
 				// check whether this container is minimum
 				Node childNode = element.getFirstChild();
 				while (childNode != null) {
-					WhitespaceProcessor childTextProcessor = new WhitespaceProcessor();
-					String childContent = childTextProcessor.getText(childNode);
+					String childContent = getText(childNode);
 					Matcher childMatcher = mPattern.matcher(childContent);
 					if (childMatcher.find()) {
 						if (childNode.getNodeType() == Node.TEXT_NODE
@@ -169,6 +166,14 @@ public class TextNavigation extends Navigation {
 			}
 		}
 		return false;
+	}
+
+	private String getText(Node node) {
+		if (node.getNodeType() == Node.TEXT_NODE)
+			return node.getNodeValue();
+		if (node instanceof OdfElement)
+			return TextExtractor.getText((OdfElement) node);
+		return "";
 	}
 
 	/*
@@ -234,7 +239,7 @@ public class TextNavigation extends Navigation {
 	private TextSelection findNext(TextSelection selected) {
 		if (!mbFinishFindInHeaderFooter) {
 			// find in document.
-			if(mElement== null){
+			if (mElement == null) {
 				TextSelection styleselected = findInHeaderFooter(selected);
 				if (styleselected != null) {
 					return styleselected;
@@ -247,9 +252,9 @@ public class TextNavigation extends Navigation {
 		if (selected == null) {
 			OdfElement element = null;
 			try {
-				if(mElement!= null){
+				if (mElement != null) {
 					element = (OdfElement) getNextMatchElement(mElement);
-				}else{
+				} else {
 					element = (OdfElement) getNextMatchElement((Node) mDocument.getContentRoot());
 				}
 			} catch (Exception ex) {
@@ -269,7 +274,7 @@ public class TextNavigation extends Navigation {
 		int nextIndex = -1;
 		Matcher matcher = mPattern.matcher(content);
 		// start from the end index of the selected item
-		if (((content.length() > index + selected.getText().length())) 
+		if (((content.length() > index + selected.getText().length()))
 				&& (matcher.find(index + selected.getText().length()))) {
 			// here just consider \n\r\t occupy one char
 			nextIndex = matcher.start();
