@@ -414,6 +414,10 @@ public class CellStyleHandler {
 		return mDocument.getDocumentStyles().getDefaultStyle(OdfStyleFamily.TableCell);
 	}
 
+	private OdfDefaultStyle getParagraphDefaultStyle() {
+		return mDocument.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Paragraph);
+	}
+
 	private OdfStyleBase getParentStyle(OdfStyle aStyle) {
 		String parentName = aStyle.getStyleParentStyleNameAttribute();
 		if (parentName == null || parentName.length() == 0)
@@ -521,7 +525,7 @@ public class CellStyleHandler {
 		if (textProperties != null)
 			font = textProperties.getFont(type);
 		else
-			font = new Font(null, null, 0, (StyleTypeDefinitions.TextLinePosition)null);
+			font = new Font(null, null, 0, (StyleTypeDefinitions.TextLinePosition) null);
 
 		if (font != null && font.getFamilyName() != null && font.getColor() != null && font.getSize() != 0
 				&& font.getFontStyle() != null && font.getTextLinePosition() != null)
@@ -547,6 +551,11 @@ public class CellStyleHandler {
 		}
 		if (!isDefault) {
 			OdfDefaultStyle defaultStyle = getCellDefaultStyle();
+			// For text document, there is no default table cell style.
+			// So use default font style in default paragraph style.
+			if (defaultStyle == null) {
+				defaultStyle = getParagraphDefaultStyle();
+			}
 			TextProperties defaultStyleSetting = TextProperties.getTextProperties(defaultStyle);
 			Font tempFont = defaultStyleSetting.getFont(type);
 			mergeFont(font, tempFont);

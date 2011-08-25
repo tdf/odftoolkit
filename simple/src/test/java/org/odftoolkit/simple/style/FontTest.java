@@ -29,6 +29,7 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
+import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.FontStyle;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.TextLinePosition;
 import org.odftoolkit.simple.table.Cell;
@@ -43,7 +44,8 @@ public class FontTest {
 	@Test
 	public void testGetSetFont() {
 		Font font1Base = new Font("Arial", FontStyle.ITALIC, 10, Color.BLACK, TextLinePosition.THROUGH);
-		Font font2Base = new Font("'Times New Roman'", FontStyle.REGULAR, (float) 13.95, new Color("#ff3333"), TextLinePosition.THROUGHUNDER);
+		Font font2Base = new Font("'Times New Roman'", FontStyle.REGULAR, (float) 13.95, new Color("#ff3333"),
+				TextLinePosition.THROUGHUNDER);
 		Font font3Base = new Font("SimSun", FontStyle.BOLD, 8, Color.BLACK, TextLinePosition.REGULAR);
 		Font font4Base = new Font("Arial", FontStyle.REGULAR, 10, Color.BLACK, TextLinePosition.UNDER);
 		try {
@@ -94,6 +96,14 @@ public class FontTest {
 			e.printStackTrace();
 			Assert.fail();
 		}
+	}
+
+	@Test
+	public void testGetSetFontInODT() throws Exception {
+		TextDocument doc = TextDocument.newTextDocument();
+		Table table = Table.newTable(doc);
+		Font font = table.getCellByPosition(0, 0).getFont();
+		Assert.assertNotNull(font);
 	}
 
 	// public StyleTypeDefinitions.SimpleFontStyle getFontStyle(
