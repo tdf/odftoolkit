@@ -21,13 +21,18 @@
  ************************************************************************/
 package org.odftoolkit.simple.text;
 
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
+import org.odftoolkit.simple.text.AbstractParagraphContainer;
+import org.odftoolkit.simple.text.Paragraph;
+import org.odftoolkit.simple.text.ParagraphContainer;
 
 /**
  * This class represents section definition in text document. It provides
@@ -36,8 +41,9 @@ import org.odftoolkit.simple.Document;
  * 
  * @since 0.4
  */
-public class Section extends Component {
+public class Section extends Component implements ParagraphContainer {
 
+	private ParagraphContainerImpl paragraphContainerImpl;
 	TextSectionElement mSectionElement;
 	Document mDocument;
 
@@ -133,5 +139,43 @@ public class Section extends Component {
 		if (aSection == this)
 			return true;
 		return aSection.getOdfElement().equals(mSectionElement);
+	}
+
+	//****************Paragraph support******************//
+	
+	public Paragraph addParagraph(String textContent) {
+		return getParagraphContainerImpl().addParagraph(textContent);
+	}
+
+	public OdfElement getParagraphContainerElement() {
+		return getParagraphContainerImpl().getParagraphContainerElement();
+	}
+
+	public boolean removeParagraph(Paragraph para) {
+		return getParagraphContainerImpl().removeParagraph(para);
+	}
+
+	private class ParagraphContainerImpl extends AbstractParagraphContainer {
+		public OdfElement getParagraphContainerElement()
+		{
+			return mSectionElement;
+		}
+	}
+	private ParagraphContainerImpl getParagraphContainerImpl() {
+		if (paragraphContainerImpl == null)
+			paragraphContainerImpl = new ParagraphContainerImpl();
+		return paragraphContainerImpl;
+	}
+
+	public Paragraph getParagraphByIndex(int index, boolean isEmptyParagraphSkipped) {
+		return getParagraphContainerImpl().getParagraphByIndex(index, isEmptyParagraphSkipped);
+	}
+
+	public Paragraph getParagraphByReverseIndex(int reverseIndex, boolean isEmptyParagraphSkipped) {
+		return getParagraphContainerImpl().getParagraphByReverseIndex(reverseIndex, isEmptyParagraphSkipped);
+	}
+
+	public Iterator<Paragraph> getParagraphIterator() {
+		return getParagraphContainerImpl().getParagraphIterator();
 	}
 }
