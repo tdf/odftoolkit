@@ -22,6 +22,8 @@
 package org.odftoolkit.simple.style;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 import org.odftoolkit.odfdom.type.Color;
@@ -265,7 +267,7 @@ public class Border {
 	protected String getDoubleLineWidthDescription() {
 		if (lineStyle == StyleTypeDefinitions.LineType.SINGLE)
 			return null;
-		DecimalFormat formater = new DecimalFormat(WidthFormatInInch);
+		DecimalFormat formater = new DecimalFormat(WidthFormatInInch, new DecimalFormatSymbols(Locale.US));
 		return formater.format(innerLineWidth) + linearMeasure.toString() + " " + formater.format(distance)
 				+ linearMeasure + " " + formater.format(outerLineWidth) + linearMeasure;
 	}

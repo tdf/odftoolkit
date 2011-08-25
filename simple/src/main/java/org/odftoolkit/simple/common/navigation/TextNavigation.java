@@ -242,7 +242,8 @@ public class TextNavigation extends Navigation {
 		int nextIndex = -1;
 		Matcher matcher = mPattern.matcher(content);
 		// start from the end index of the selected item
-		if (matcher.find(index + selected.getText().length())) {
+		if (((content.length() > index + selected.getText().length())) 
+				&& (matcher.find(index + selected.getText().length()))) {
 			// here just consider \n\r\t occupy one char
 			nextIndex = matcher.start();
 			int eIndex = matcher.end();
