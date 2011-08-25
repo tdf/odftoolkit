@@ -31,11 +31,10 @@ import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute.Value;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.type.Duration;
 import org.odftoolkit.simple.TextDocument;
-import org.odftoolkit.simple.meta.Meta;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class OfficeMetaTest {
@@ -247,12 +246,16 @@ public class OfficeMetaTest {
 	@Test
 	public void testSetAndGetUserdefinedData() throws Exception {
 		// remove if there is userdefined data
-		List<String> names = new ArrayList<String>();
+		List<String> names;
 		names = fMetadata.getUserDefinedDataNames();
-		for (String name : names) {
-			fMetadata.removeUserDefinedDataByName(name);
+		if (names == null) {
+			names = new ArrayList<String>();
+		} else {
+			for (String name : names) {
+				fMetadata.removeUserDefinedDataByName(name);
+			}
+			names.clear();
 		}
-		names.clear();
 		names.add("weather");
 		names.add("mood");
 		names.add("late");
@@ -291,7 +294,6 @@ public class OfficeMetaTest {
 		tearDown();
 		setUp();
 		Assert.assertEquals(2, fMetadata.getUserDefinedDataNames().size());
-
 	}
 
 	@Test
@@ -305,8 +307,8 @@ public class OfficeMetaTest {
 		doc = (TextDocument) TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("EmptyDocForMetaTest.odt"));
 		metadom = doc.getMetaDom();
 		fMetadata = new Meta(metadom);
-		//ToDO: automatic check of VERSION number SIMPLE/0.2.1$Build-TIMESTAMP
 		//Assert.assertTrue(fMetadata.getGenerator().startsWith(generator));
+		//ToDO: http://odftoolkit.org/bugzilla/show_bug.cgi?id=171
 		// Assert.assertEquals(fMetadata.getGenerator(), generator);
 		Assert.assertNull(fMetadata.getTitle());
 		Assert.assertNull(fMetadata.getDescription());
@@ -314,7 +316,7 @@ public class OfficeMetaTest {
 		Assert.assertNull(fMetadata.getKeywords());
 		Assert.assertNull(fMetadata.getPrintedBy());
 		Assert.assertNull(fMetadata.getPrintDate());
-		Assert.assertNotNull(fMetadata.getUserDefinedDataNames());
+		Assert.assertNull(fMetadata.getUserDefinedDataNames());
 	}
 	
 	@Test

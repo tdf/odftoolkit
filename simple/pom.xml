@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>simple-java</artifactId>
 	<version>0.4</version>
 	<packaging>jar</packaging>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>6</version>
+	</parent>
 	<dependencies>
 		<dependency>
 			<groupId>org.odftoolkit</groupId>
 			<artifactId>odfdom-java</artifactId>
-			<version>0.9-SNAPSHOT</version>
+			<version>0.8.7</version>
 		</dependency>
 		<dependency>
 			<groupId>xerces</groupId>
@@ -20,12 +26,13 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.5</version>
+			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
 	</properties>
 	<!-- Build Settings -->
 	<build>
@@ -34,16 +41,19 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
 					<meminitial>512m</meminitial>
 					<maxmem>1024m</maxmem>
+					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
 				<configuration>
 					<archive>
 						<index>true</index>
@@ -57,7 +67,7 @@
 							<manifestSection>
 								<name>SIMPLE</name>
 								<manifestEntries>
-									<SIMPLE-Name>simple</SIMPLE-Name>
+									<SIMPLE-Name>Simple Java API for ODF</SIMPLE-Name>
 									<SIMPLE-Version>${project.version}</SIMPLE-Version>
 									<SIMPLE-Website>http://odftoolkit.org</SIMPLE-Website>
 									<SIMPLE-Built-By>${user.name}</SIMPLE-Built-By>
@@ -70,18 +80,79 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<!-- Workaround for http://jira.codehaus.org/browse/MGPG-9 -->
+					<mavenExecutorId>forked-path</mavenExecutorId>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<doctitle>Simple Java API for ODF</doctitle>
+					<minmemory>512m</minmemory>
+					<maxmemory>1024m</maxmemory>
+					<links>
+						<link>http://download.oracle.com/javase/6/docs/api/</link>
+						<link>http://xerces.apache.org/xerces-j/apiDocs/</link>
+						<link>http://odfdom.odftoolkit.org/0.8.7/odfdom/apidocs/</link>
+					</links>
+					<splitindex>true</splitindex>
+					<windowtitle>SIMPLE API v${project.version} - http://odftoolkit</windowtitle>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<!-- Explizit version required for fix on systemPropertyVariables -->
-				<version>2.5</version>
+				<version>2.6</version>
 				<configuration>
 					<systemPropertyVariables>
 						<simple.version>${project.version}</simple.version>
 						<simple.timestamp>${build.timestamp}</simple.timestamp>
 					</systemPropertyVariables>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>single</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<extensions>
@@ -90,6 +161,11 @@
 				<artifactId>wagon-svn</artifactId>
 				<version>1.9</version>
 			</extension>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>1.0-beta-7</version>
+			</extension>
 		</extensions>
 	</build>
 	<reporting>
@@ -97,15 +173,15 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.5</version>
+				<version>2.7</version>
 				<configuration>
 					<doctitle>Simple Java API for ODF</doctitle>
 					<minmemory>512m</minmemory>
 					<maxmemory>1024m</maxmemory>
 					<links>
-						<link>http://java.sun.com/javase/6/docs/api/</link>
+						<link>http://download.oracle.com/javase/6/docs/api/</link>
 						<link>http://xerces.apache.org/xerces-j/apiDocs/</link>
-						<link>http://odfdom.odftoolkit.org/0.8.6/docs/api/</link>
+						<link>http://odfdom.odftoolkit.org/0.8.7/odfdom/apidocs/</link>
 					</links>
 					<splitindex>true</splitindex>
 					<windowtitle>SIMPLE API v${project.version} - http://odftoolkit</windowtitle>
@@ -126,21 +202,21 @@
 			</plugin>
 			<!-- Reporting integration test results -->
 			<plugin>
-        		<groupId>org.apache.maven.plugins</groupId>
-        		<artifactId>maven-failsafe-plugin</artifactId>
-        		<version>2.5</version>
-        		<reportSets>
-          			<reportSet>
-            			<id>integration-tests</id>
-            			<reports>
-              				<report>report-only</report>
-            			</reports>
-            			<configuration>
-              				<outputName>failsafe-report</outputName>
-            			</configuration>
-        			</reportSet>
-        		</reportSets>
-      		</plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.5</version>
+				<reportSets>
+					<reportSet>
+						<id>integration-tests</id>
+						<reports>
+							<report>report-only</report>
+						</reports>
+						<configuration>
+							<outputName>failsafe-report</outputName>
+						</configuration>
+					</reportSet>
+				</reportSets>
+			</plugin>
 		</plugins>
 	</reporting>
 	<!-- More Project Information -->
@@ -150,8 +226,9 @@
 	<inceptionYear>2010</inceptionYear>
 	<licenses>
 		<license>
-			<name>Apache 2</name>
+			<name>The Apache Software License, Version 2.0</name>
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
 		</license>
 	</licenses>
 	<organization>
@@ -193,9 +270,11 @@
 		<url>https://odftoolkit.org/bugzilla/enter_bug.cgi?product=simple</url>
 	</issueManagement>
 	<mailingLists>
-		<!-- To subscribe one of the mailing lists:
-			1) First become a member of the http://odftoolkit.org project
-			2) Second subscribe here: http://odftoolkit.org/projects/simple/lists -->
+		<!--
+			To subscribe one of the mailing lists: 1) First become a member of
+			the http://odftoolkit.org project 2) Second subscribe here:
+			http://odftoolkit.org/projects/simple/lists
+		-->
 		<mailingList>
 			<name>Dev List</name>
 			<archive>http://odftoolkit.org/projects/simple/lists/dev/archive</archive>
@@ -216,141 +295,22 @@
 	<scm>
 		<connection>scm:hg:https://hg.odftoolkit.org/hg/simple~code-base </connection>
 		<developerConnection>scm:hg:https://hg.odftoolkit.org/hg/simple~code-base </developerConnection>
-		<url>http://odftoolkit.org/projects/simple/sources/developer/show</url>
+		<url>http://odftoolkit.org/projects/simple/sources/code-base/show</url>
 	</scm>
-	<repositories>
-		<!-- we get wagon-svn from here -->
-		<repository>
-			<id>maven2-repository.dev.java.net</id>
-			<name>Java.net Repository for Maven</name>
-			<url>http://download.java.net/maven/2/</url>
-			<snapshots>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</repository>
-		<!-- we get odfdom from here -->
-		<repository>
-			<id>odfdom-snapshots</id>
-			<name>ODFDOM Snapshot</name>
-			<url>http://odftoolkit.org/svn/simple~maven2/repository</url>
-			<releases>
-				<enabled>false</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>odfdom-releases</id>
-			<name>ODFDOM Release</name>
-			<url>http://odftoolkit.org/svn/odfdom~maven2/release</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</repository>
-		<!-- the simple interim repositories in svn -->
-		<repository>
-			<id>simple-snapshots</id>
-			<name>SIMPLE Snapshot</name>
-			<url>http://odftoolkit.org/svn/simple~maven2/repository</url>
-			<releases>
-				<enabled>false</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>simple-releases</id>
-			<name>SIMPLE Release</name>
-			<url>http://odftoolkit.org/svn/simple~maven2/repository</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>simple-snapshots</id>
-			<name>SIMPLE Snapshot</name>
-			<url>http://odftoolkit.org/svn/simple~maven2/repository</url>
-			<releases>
-				<enabled>false</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>simple-releases</id>
-			<name>SIMPLE Release</name>
-			<url>http://odftoolkit.org/svn/simple~maven2/repository</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-	<distributionManagement><!-- where outcome is being delivered -->
-		<repository>
-			<id>simple-releases</id>
-			<name>SIMPLE Release</name>
-			<url>svn:http://odftoolkit.org/svn/simple~maven2/repository</url>
-			<uniqueVersion>false</uniqueVersion>
-		</repository>
-		<snapshotRepository>
-			<id>simple-snapshots</id>
-			<name>SIMPLE Snapshot</name>
-			<url>svn:http://odftoolkit.org/svn/simple~maven2/repository</url>
-			<uniqueVersion>false</uniqueVersion>
-		</snapshotRepository>
-	</distributionManagement>
 	<profiles>
 		<profile>
 			<id>release</id>
 			<activation>
 				<property>
 					<name>release</name>
-					<value/>
+					<value />
 				</property>
 			</activation>
 			<build>
 				<plugins>
-					<!-- We want to deploy the artifact to a staging location for perusal -->
+					<!--
+						We want to deploy the artifact to a staging location for perusal
+					-->
 					<plugin>
 						<artifactId>maven-assembly-plugin</artifactId>
 						<configuration>
@@ -469,6 +429,47 @@
 					</plugin>
 				</plugins>
 			</build>
+		</profile>
+		<!--
+			Profile for deploying to the Sonatype repository, which requires GPG
+			signatures see:
+			https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+			https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+			https://issues.sonatype.org/browse/OSSRH-1321
+		-->
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.1</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<distributionManagement>
+				<site>
+					<id>simple</id>
+					<name>Simple Java API for ODF Project</name>
+					<url>dav:https://odftoolkit.org/website/simple/${project.version}/simple</url>
+				</site>
+			</distributionManagement>
 		</profile>
 	</profiles>
 </project>

@@ -33,6 +33,7 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
@@ -40,7 +41,6 @@ import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberStyle;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.TextDocument;
@@ -1022,7 +1022,7 @@ public class TableCellTest {
 	@Test
 	public void testSetDefaultCellStyle() {
 		SpreadsheetDocument outputDocument;
-		OdfFileDom contentDom; // the document object model for content.xml
+		OdfContentDom contentDom; // the document object model for content.xml
 		// the office:automatic-styles element in content.xml
 		OdfOfficeAutomaticStyles contentAutoStyles;
 		OdfStyle style;
@@ -1081,7 +1081,8 @@ public class TableCellTest {
 			Table table1 = document.getTableByName("Sheet1");
 			Cell cell1 = table1.getCellByPosition("A1");
 			cell1.setStringValue("abcdefg");
-			Font font1 = new Font("Arial", StyleTypeDefinitions.FontStyle.ITALIC, 12, Color.BLACK, StyleTypeDefinitions.TextLinePosition.THROUGH);
+			Font font1 = new Font("Arial", StyleTypeDefinitions.FontStyle.ITALIC, 12, Color.BLACK,
+					StyleTypeDefinitions.TextLinePosition.THROUGH);
 			cell1.setFont(font1);
 			Font font11 = cell1.getFont();
 			System.out.println(font11);
@@ -1090,7 +1091,8 @@ public class TableCellTest {
 
 			Cell cell2 = table1.getCellByPosition("A2");
 			cell2.setStringValue("redstring");
-			Font font2 = new Font("Arial", StyleTypeDefinitions.FontStyle.ITALIC, 12, Color.RED, StyleTypeDefinitions.TextLinePosition.UNDER);
+			Font font2 = new Font("Arial", StyleTypeDefinitions.FontStyle.ITALIC, 12, Color.RED,
+					StyleTypeDefinitions.TextLinePosition.UNDER);
 			cell2.setFont(font2);
 			Font font22 = cell2.getFont();
 			System.out.println(font22);

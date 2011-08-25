@@ -32,6 +32,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
@@ -787,7 +788,7 @@ public class Table {
 					+ ", Columns " + numCols + ", HeaderRows " + headerRowNumber + ", HeaderColumns "
 					+ headerColumnNumber);
 		}
-		OdfFileDom dom = document.getContentDom();
+		OdfContentDom dom = document.getContentDom();
 		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
 		// 1. create table element
 		TableTableElement newTEle = (TableTableElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
@@ -1024,7 +1025,7 @@ public class Table {
 		}
 		return aRow;
 	}
-	
+
 	/**
 	 * Append a row to the end of the table. The style of new row is same with
 	 * the last row in the table.
@@ -1109,19 +1110,20 @@ public class Table {
 								// ignore the following covered cell of
 								// reference row.
 								// added by Daisy because of a bug in demo4
-								// cellElement is a covered cell. coverCellEle is its cover cell.
-								// below codes will count newColumnRepeatedNumber covered cell.
+								// cellElement is a covered cell. coverCellEle
+								// is its cover cell.
+								// below codes will count
+								// newColumnRepeatedNumber covered cell.
 								int tempi = newColumnRepeatedNumber;
-								while (tempi>0)
-								{
+								while (tempi > 0) {
 									int iColumnRepeatedNumber = cellElement.getTableNumberColumnsRepeatedAttribute();
-									if (iColumnRepeatedNumber>tempi)
-									{
-										//split covered cell
-										if (cellElement instanceof TableCoveredTableCellElement)
-										{
-											cellElement.setTableNumberColumnsRepeatedAttribute(iColumnRepeatedNumber-tempi);
-											TableTableCellElementBase newCoveredCellEle = (TableTableCellElementBase) cellElement.cloneNode(true);
+									if (iColumnRepeatedNumber > tempi) {
+										// split covered cell
+										if (cellElement instanceof TableCoveredTableCellElement) {
+											cellElement.setTableNumberColumnsRepeatedAttribute(iColumnRepeatedNumber
+													- tempi);
+											TableTableCellElementBase newCoveredCellEle = (TableTableCellElementBase) cellElement
+													.cloneNode(true);
 											cleanCell(newCoveredCellEle);
 											newCoveredCellEle.setTableNumberColumnsRepeatedAttribute(tempi);
 											refRowElement.insertBefore(newCoveredCellEle, cellElement);
@@ -1129,23 +1131,28 @@ public class Table {
 										}
 									}
 									tempi = tempi - cellElement.getTableNumberColumnsRepeatedAttribute();
-									i = i+cellElement.getTableNumberColumnsRepeatedAttribute();
-									if (!(cellElement instanceof TableCoveredTableCellElement) && (tempi>0))
-										Logger.getLogger(Table.class.getName()).log(Level.INFO, "Not covered cell was ignored");
+									i = i + cellElement.getTableNumberColumnsRepeatedAttribute();
+									if (!(cellElement instanceof TableCoveredTableCellElement) && (tempi > 0))
+										Logger.getLogger(Table.class.getName()).log(Level.INFO,
+												"Not covered cell was ignored");
 									cellElement = (TableTableCellElementBase) (cellElement.getNextSibling());
-//									while ((cellElement != null) && (cellElement instanceof TableCoveredTableCellElement)) {
-//										cellElement = (TableTableCellElementBase) (cellElement.getNextSibling());
-//									}
+									// while ((cellElement != null) &&
+									// (cellElement instanceof
+									// TableCoveredTableCellElement)) {
+									// cellElement = (TableTableCellElementBase)
+									// (cellElement.getNextSibling());
+									// }
 								}
-								//i += newColumnRepeatedNumber;
+								// i += newColumnRepeatedNumber;
 							} else {
 								// clone the following covered cell of reference
 								// row.
 								// added by Daisy because of a bug in demo4
 								cellElement = (TableTableCellElementBase) cellElement.getNextSibling();
 								i += cellElement.getTableNumberColumnsRepeatedAttribute();
-								int newColumnSpanNumber = newCellEle.getTableNumberColumnsSpannedAttribute(); 
-								while ((cellElement != null) && (cellElement instanceof TableCoveredTableCellElement) && (newColumnSpanNumber>1)) {
+								int newColumnSpanNumber = newCellEle.getTableNumberColumnsSpannedAttribute();
+								while ((cellElement != null) && (cellElement instanceof TableCoveredTableCellElement)
+										&& (newColumnSpanNumber > 1)) {
 									TableCoveredTableCellElement newCoveredCellElement = (TableCoveredTableCellElement) cellElement
 											.cloneNode(true);
 									cleanCell(newCoveredCellElement);
@@ -1176,51 +1183,50 @@ public class Table {
 					cellElement = (TableTableCellElementBase) cellElement.getNextSibling();
 					if (tableNumberColumnsSpanned > 1) {
 						int j = 1;
-						if (mIsSpreadsheet)
-						{
-							newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(),
-									"number-columns-spanned");
-							int newColumnRepeatedNumber = tableNumberColumnsRepeated*tableNumberColumnsSpanned;
+						if (mIsSpreadsheet) {
+							newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-spanned");
+							int newColumnRepeatedNumber = tableNumberColumnsRepeated * tableNumberColumnsSpanned;
 							if (newColumnRepeatedNumber > 1) {
 								newCellEle.setTableNumberColumnsRepeatedAttribute(newColumnRepeatedNumber);
 							}
 							// cellElement is not a covered cell.
-							// below codes will count (newColumnRepeatedNumber-1) covered cell.
+							// below codes will count
+							// (newColumnRepeatedNumber-1) covered cell.
 							int tempi = newColumnRepeatedNumber;
-							while (tempi>1)
-							{
+							while (tempi > 1) {
 								int iColumnRepeatedNumber = cellElement.getTableNumberColumnsRepeatedAttribute();
-								if (iColumnRepeatedNumber>tempi+1)
-								{
-									//split covered cell
-									if (cellElement instanceof TableCoveredTableCellElement)
-									{
-										cellElement.setTableNumberColumnsRepeatedAttribute(iColumnRepeatedNumber-tempi+1);
-										TableTableCellElementBase newCoveredCellEle = (TableTableCellElementBase) cellElement.cloneNode(true);
+								if (iColumnRepeatedNumber > tempi + 1) {
+									// split covered cell
+									if (cellElement instanceof TableCoveredTableCellElement) {
+										cellElement.setTableNumberColumnsRepeatedAttribute(iColumnRepeatedNumber
+												- tempi + 1);
+										TableTableCellElementBase newCoveredCellEle = (TableTableCellElementBase) cellElement
+												.cloneNode(true);
 										cleanCell(newCoveredCellEle);
-										newCoveredCellEle.setTableNumberColumnsRepeatedAttribute(tempi-1);
+										newCoveredCellEle.setTableNumberColumnsRepeatedAttribute(tempi - 1);
 										refRowElement.insertBefore(newCoveredCellEle, cellElement);
 										cellElement = newCoveredCellEle;
 									}
 								}
 								tempi = tempi - cellElement.getTableNumberColumnsRepeatedAttribute();
-								if (!(cellElement instanceof TableCoveredTableCellElement) && (tempi>1))
-									Logger.getLogger(Table.class.getName()).log(Level.INFO, "Not covered cell was ignored");
+								if (!(cellElement instanceof TableCoveredTableCellElement) && (tempi > 1))
+									Logger.getLogger(Table.class.getName()).log(Level.INFO,
+											"Not covered cell was ignored");
 								cellElement = (TableTableCellElementBase) (cellElement.getNextSibling());
 							}
-						}
-						else {
+						} else {
 							while ((j < tableNumberColumnsSpanned) && (cellElement != null)) {
 								int iColumnRepeatedNumber = cellElement.getTableNumberColumnsRepeatedAttribute();
-								if (iColumnRepeatedNumber > tableNumberColumnsSpanned - j)
-								{
-									//split covered cell
-									if (cellElement instanceof TableCoveredTableCellElement)
-									{
-										cellElement.setTableNumberColumnsRepeatedAttribute(iColumnRepeatedNumber-tableNumberColumnsSpanned+j);
-										TableTableCellElementBase newCoveredCellEle = (TableTableCellElementBase) cellElement.cloneNode(true);
+								if (iColumnRepeatedNumber > tableNumberColumnsSpanned - j) {
+									// split covered cell
+									if (cellElement instanceof TableCoveredTableCellElement) {
+										cellElement.setTableNumberColumnsRepeatedAttribute(iColumnRepeatedNumber
+												- tableNumberColumnsSpanned + j);
+										TableTableCellElementBase newCoveredCellEle = (TableTableCellElementBase) cellElement
+												.cloneNode(true);
 										cleanCell(newCoveredCellEle);
-										newCoveredCellEle.setTableNumberColumnsRepeatedAttribute(tableNumberColumnsSpanned - j);
+										newCoveredCellEle
+												.setTableNumberColumnsRepeatedAttribute(tableNumberColumnsSpanned - j);
 										refRowElement.insertBefore(newCoveredCellEle, cellElement);
 										cellElement = newCoveredCellEle;
 									}

@@ -37,6 +37,8 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -46,6 +48,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfSchemaConstraint;
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
@@ -73,6 +76,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
+import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.type.Duration;
 import org.odftoolkit.simple.meta.Meta;
@@ -83,6 +87,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.ErrorHandler;
 
 /** This abstract class is representing one of the possible ODF documents */
 public class Document extends OdfSchemaDocument {
@@ -92,6 +97,8 @@ public class Document extends OdfSchemaDocument {
 	private Meta mOfficeMeta;
 	private final TableBuilder tableBuilder;
 	private long documentOpeningTime;
+	private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
+	private static final String EMPTY_STRING = "";
 
 	// if the copy foreign slide for several times,
 	// the same style might be copied for several times with the different name
@@ -127,24 +134,24 @@ public class Document extends OdfSchemaDocument {
 	 */
 	public enum OdfMediaType implements MediaType {
 
-		CHART("application/vnd.oasis.opendocument.chart", "odc"), CHART_TEMPLATE(
-				"application/vnd.oasis.opendocument.chart-template", "otc"),
-		// FORMULA("application/vnd.oasis.opendocument.formula", "odf"),
-		// FORMULA_TEMPLATE("application/vnd.oasis.opendocument.formula-template",
-		// "otf"),
-		// DATABASE_FRONT_END("application/vnd.oasis.opendocument.base", "otf"),
-		GRAPHICS("application/vnd.oasis.opendocument.graphics", "odg"), GRAPHICS_TEMPLATE(
-				"application/vnd.oasis.opendocument.graphics-template", "otg"), IMAGE(
-				"application/vnd.oasis.opendocument.image", "odi"), IMAGE_TEMPLATE(
-				"application/vnd.oasis.opendocument.image-template", "oti"), PRESENTATION(
-				"application/vnd.oasis.opendocument.presentation", "odp"), PRESENTATION_TEMPLATE(
-				"application/vnd.oasis.opendocument.presentation-template", "otp"), SPREADSHEET(
-				"application/vnd.oasis.opendocument.spreadsheet", "ods"), SPREADSHEET_TEMPLATE(
-				"application/vnd.oasis.opendocument.spreadsheet-template", "ots"), TEXT(
-				"application/vnd.oasis.opendocument.text", "odt"), TEXT_MASTER(
-				"application/vnd.oasis.opendocument.text-master", "odm"), TEXT_TEMPLATE(
-				"application/vnd.oasis.opendocument.text-template", "ott"), TEXT_WEB(
-				"application/vnd.oasis.opendocument.text-web", "oth");
+		CHART("application/vnd.oasis.opendocument.chart", "odc"), 
+		CHART_TEMPLATE("application/vnd.oasis.opendocument.chart-template", "otc"),
+		FORMULA("application/vnd.oasis.opendocument.formula", "odf"),
+		FORMULA_TEMPLATE("application/vnd.oasis.opendocument.formula-template", "otf"),
+		DATABASE_FRONT_END("application/vnd.oasis.opendocument.base", "otf"),
+		GRAPHICS("application/vnd.oasis.opendocument.graphics", "odg"), 
+		GRAPHICS_TEMPLATE("application/vnd.oasis.opendocument.graphics-template", "otg"), 
+		IMAGE("application/vnd.oasis.opendocument.image", "odi"), 
+		IMAGE_TEMPLATE("application/vnd.oasis.opendocument.image-template", "oti"), 
+		PRESENTATION("application/vnd.oasis.opendocument.presentation", "odp"), 
+		PRESENTATION_TEMPLATE("application/vnd.oasis.opendocument.presentation-template", "otp"), 
+		SPREADSHEET("application/vnd.oasis.opendocument.spreadsheet", "ods"), 
+		SPREADSHEET_TEMPLATE("application/vnd.oasis.opendocument.spreadsheet-template", "ots"), 
+		TEXT("application/vnd.oasis.opendocument.text", "odt"), 
+		TEXT_MASTER("application/vnd.oasis.opendocument.text-master", "odm"), 
+		TEXT_TEMPLATE("application/vnd.oasis.opendocument.text-template", "ott"), 
+		TEXT_WEB("application/vnd.oasis.opendocument.text-web", "oth");
+		
 		private final String mMediaType;
 		private final String mSuffix;
 
@@ -235,13 +242,7 @@ public class Document extends OdfSchemaDocument {
 	 *             - if the document could not be created.
 	 */
 	public static Document loadDocument(String documentPath) throws Exception {
-		OdfPackage pkg = OdfPackage.loadPackage(documentPath);
-		OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(pkg.getMediaTypeString());
-		if (odfMediaType == null) {
-			throw new IllegalArgumentException("Document contains incorrect ODF Mediatype '" + pkg.getMediaTypeString()
-					+ "'");
-		}
-		return newDocument(pkg, ROOT_DOCUMENT_PATH, odfMediaType);
+		return loadDocument(OdfPackage.loadPackage(documentPath));
 	}
 
 	/**
@@ -309,10 +310,24 @@ public class Document extends OdfSchemaDocument {
 	 */
 	public static Document loadDocument(OdfPackage odfPackage, String internalPath) throws Exception {
 		String documentMediaType = odfPackage.getMediaTypeString(internalPath);
-		OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(documentMediaType);
+		OdfMediaType odfMediaType = null;
+		try {
+			odfMediaType = OdfMediaType.getOdfMediaType(documentMediaType);
+		} catch (IllegalArgumentException e) {
+			// the returned NULL will be taking care of afterwards
+		}
 		if (odfMediaType == null) {
-			throw new IllegalArgumentException("Document contains incorrect ODF Mediatype '"
-					+ odfPackage.getMediaTypeString() + "'");
+			ErrorHandler errorHandler = odfPackage.getErrorHandler();
+			Matcher matcherCTRL = CONTROL_CHAR_PATTERN.matcher(documentMediaType);
+			if (matcherCTRL.find()) {
+				documentMediaType = matcherCTRL.replaceAll(EMPTY_STRING);
+			}
+			OdfValidationException ve = new OdfValidationException(OdfSchemaConstraint.DOCUMENT_WITHOUT_ODF_MIMETYPE,
+					internalPath, documentMediaType);
+			if (errorHandler != null) {
+				errorHandler.fatalError(ve);
+			}
+			throw ve;
 		}
 		return newDocument(odfPackage, internalPath, odfMediaType);
 	}
@@ -443,7 +458,8 @@ public class Document extends OdfSchemaDocument {
 
 		default:
 			newDoc = null;
-			break;
+			throw new IllegalArgumentException("Given mediaType '" + odfMediaType.mMediaType
+					+ "' is not yet supported!");
 		}
 		// returning null if MediaType is not supported
 		return newDoc;
@@ -452,31 +468,33 @@ public class Document extends OdfSchemaDocument {
 	/**
 	 * Returns an embedded OdfPackageDocument from the given package path.
 	 * 
-	 * @param internalDocumentPath
-	 *            path to the directory of the embedded ODF document (relative
-	 *            to ODF package root).
-	 * @return an embedded OdfPackageDocument
+	 * @param documentPath
+	 *            path to the ODF document within the package. The path is
+	 *            relative to the current document.
+	 * @return an embedded Document
 	 */
-	public Document getEmbeddedDocument(String internalDocumentPath) {
-
-		internalDocumentPath = normalizeDocumentPath(internalDocumentPath);
-		Document embeddedDocument = (Document) mPackage.getCachedPackageDocument(internalDocumentPath);
+	public Document getEmbeddedDocument(String documentPath) {
+		String internalPath = getDocumentPath() + documentPath;
+		internalPath = normalizeDocumentPath(internalPath);
+		Document embeddedDocument = (Document) mPackage.getCachedDocument(internalPath);
 		// if the document was not already loaded, fine mimetype and create a
 		// new instance
 		if (embeddedDocument == null) {
-			try {
-				OdfFileEntry entry = mPackage.getFileEntry(internalDocumentPath);
-				// if the document is not in the package, the return is NULL
-				if (entry != null) {
-					String mediaTypeOfEmbeddedDoc = entry.getMediaTypeString();
-					// if there is no mediaType, the return is NULL
-					if (mediaTypeOfEmbeddedDoc != null) {
-						return embeddedDocument = newDocument(mPackage, internalDocumentPath, OdfMediaType
-								.getOdfMediaType(mediaTypeOfEmbeddedDoc));
+			String mediaTypeString = getMediaTypeString();
+			OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(mediaTypeString);
+			if (odfMediaType == null) {
+				embeddedDocument = new Document(mPackage, internalPath, odfMediaType);
+			} else {
+				try {
+					String documentMediaType = mPackage.getMediaTypeString(internalPath);
+					odfMediaType = OdfMediaType.getOdfMediaType(documentMediaType);
+					if (odfMediaType == null) {
+						return null;
 					}
+					embeddedDocument = Document.loadDocument(mPackage, internalPath);
+				} catch (Exception ex) {
+					Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
 				}
-			} catch (Exception ex) {
-				Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
 		return embeddedDocument;
@@ -484,9 +502,9 @@ public class Document extends OdfSchemaDocument {
 
 	/**
 	 * Method returns all embedded OdfPackageDocuments, which match a valid
-	 * OdfMediaType, of the current OdfPackageDocument.
+	 * OdfMediaType, of the root OdfPackageDocument.
 	 * 
-	 * @return a list with all embedded documents of the current
+	 * @return a list with all embedded documents of the root
 	 *         OdfPackageDocument
 	 */
 	// ToDo: (Issue 219 - PackageRefactoring) - Better return Path of
@@ -504,14 +522,14 @@ public class Document extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Method returns all embedded OdfPackageDocuments of the current
+	 * Method returns all embedded OdfPackageDocuments of the root
 	 * OdfPackageDocument matching the according MediaType. This is done by
 	 * matching the subfolder entries of the manifest file with the given
 	 * OdfMediaType.
 	 * 
 	 * @param mediaType
 	 *            media type which is used as a filter
-	 * @return embedded documents of the current OdfPackageDocument matching the
+	 * @return embedded documents of the root OdfPackageDocument matching the
 	 *         given media type
 	 */
 	public List<Document> getEmbeddedDocuments(OdfMediaType mediaType) {
@@ -521,7 +539,7 @@ public class Document extends OdfSchemaDocument {
 		}
 		List<Document> embeddedObjects = new ArrayList<Document>();
 		// check manifest for current embedded OdfPackageDocuments
-		Set<String> manifestEntries = mPackage.getFileEntries();
+		Set<String> manifestEntries = mPackage.getFilePaths();
 		for (String path : manifestEntries) {
 			// any directory that is not the root document "/"
 			if (path.length() > 1 && path.endsWith(SLASH)) {
@@ -556,12 +574,12 @@ public class Document extends OdfSchemaDocument {
 	 * 
 	 * @param documentPath
 	 *            to the directory the ODF document should be inserted (relative
-	 *            to the root of this document).
+	 *            to the current document).
 	 * @param sourceDocument
 	 *            the OdfPackageDocument to be embedded.
 	 */
 	public void insertDocument(OdfPackageDocument sourceDocument, String documentPath) {
-		mPackage.insertDocument(sourceDocument, documentPath);
+		super.insertDocument(sourceDocument, documentPath);
 	}
 
 	/**
@@ -1994,7 +2012,7 @@ public class Document extends OdfSchemaDocument {
 							// note: if refObjPath is a directory, it must end
 							// with '/'
 							fileEntry = getPackage().getFileEntry(refObjPath + "/");
-							removeEmbeddedDocument(refObjPath);
+							removeDocument(refObjPath);
 						}
 					}
 				}

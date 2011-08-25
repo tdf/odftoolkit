@@ -44,10 +44,9 @@ import javax.xml.transform.stream.StreamResult;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
@@ -57,6 +56,10 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.odftoolkit.simple.utils.NodeAction;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Node;
@@ -77,12 +80,12 @@ public class DocumentTest {
 	@Test
 	public void loadDocument() {
 		try {
-			System.setProperty("org.odftoolkit.simple.tmpfile.disable", "true");
+			System.setProperty("org.odftoolkit.odfdom.tmpfile.disable", "true");
 			// LOAD INVALID GENERATED SPREADSHEET DOCUMENT
 			LOG.info("Loading an supported ODF Spreadsheet document as an ODF Document!");
 			try {
 				// Should work!
-				Document ods = Document.loadDocument(ResourceUtilities.getTestResourceAsStream(GENERATED_INVALID_SPREADSHEET));
+				Document ods = Document.loadDocument(ResourceUtilities.getAbsolutePath(GENERATED_INVALID_SPREADSHEET));
 				Assert.assertNotNull(ods);
 			} catch (Exception e) {
 				LOG.log(Level.SEVERE, e.getMessage(), e);
@@ -93,11 +96,11 @@ public class DocumentTest {
 			// LOAD EMPTY DOCUMENT
 			LOG.info("Loading an empty document as an ODF Document!");
 			try {
-				// Should throw adequate error message!
-				Document ods = Document.loadDocument(ResourceUtilities.getTestResourceAsStream(ZERO_BYTE_SPREADSHEET));
-				Assert.assertNull(ods);
+				// Should throw error!
+				Document ods = Document.loadDocument(ResourceUtilities.getAbsolutePath(ZERO_BYTE_SPREADSHEET));
+				Assert.fail();
 			} catch (Exception e) {
-				if (!e.getMessage().contains("empty file")) {
+				if (!e.getMessage().contains("shall be a ZIP file")) {
 					LOG.log(Level.SEVERE, e.getMessage(), e);
 					Assert.fail();
 				}
@@ -107,10 +110,10 @@ public class DocumentTest {
 			LOG.info("Loading an unsupported ODF Formula document as an ODF Document!");
 			try {
 				// Exception is expected!
-				Document.loadDocument(ResourceUtilities.getTestResourceAsStream(ODF_FORMULAR_TEST_FILE));
+				Document.loadDocument(ResourceUtilities.getAbsolutePath(ODF_FORMULAR_TEST_FILE));
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
-				if (!e.getMessage().contains("is either not yet supported or not an ODF mediatype!")) {
+				if (!e.getMessage().contains("is not yet supported!")) {
 					LOG.log(Level.SEVERE, e.getMessage(), e);
 					Assert.fail();
 				}
@@ -120,15 +123,19 @@ public class DocumentTest {
 			LOG.info("Loading an unsupported image file as an ODF Document!");
 			try {
 				// Exception is expected!
-				Document.loadDocument(ResourceUtilities.getTestResourceAsStream(IMAGE_TEST_FILE));
+				Document.loadDocument(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE));
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
-				if (!e.getMessage().contains("unzip the")) {
+				if (!e.getMessage().contains("shall be a ZIP file")) {
+					LOG.log(Level.SEVERE, e.getMessage(), e);
+					Assert.fail();
+				}
+			} catch (OdfValidationException e) {
+				if (!e.getMessage().contains("shall be a ZIP file")) {
 					LOG.log(Level.SEVERE, e.getMessage(), e);
 					Assert.fail();
 				}
 			}
-
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
@@ -157,11 +164,66 @@ public class DocumentTest {
 	}
 
 	@Test
+	@Ignore
+	public void testDumpDom() {
+		try {
+			Assert.assertTrue(testXSLT("content") & testXSLT("styles"));
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	private static boolean testXSLT(String odfFileNamePrefix) throws Exception {
+		Document odfdoc = Document.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+
+		Transformer trans = TransformerFactory.newInstance().newTransformer();
+		trans.setOutputProperty("indent", "yes");
+		// trans.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+		LOG.log(Level.INFO, "---------- {0}.xml transformed and compared ---------", odfFileNamePrefix);
+		// The XML file (e.g. content.xml) is transformed by XSLT into the similar/identical XML file
+		ByteArrayOutputStream xmlBytes = new ByteArrayOutputStream();
+		OdfFileDom fileDom = null;
+		if (odfFileNamePrefix.equals("content")) {
+			fileDom = odfdoc.getContentDom();
+		} else {
+			fileDom = odfdoc.getStylesDom();
+		}
+		// transforming the XML using identical transformation
+		trans.transform(new DOMSource(fileDom), new StreamResult(xmlBytes));
+		String xmlString = xmlBytes.toString("UTF-8");
+		// Saving test file to disc
+		saveString(xmlString, ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-temporary-test.xml");
+
+		// The template XML was once transformed and saved to the resource folder to gurantee the same indentation
+		String xmlStringOriginal = inputStreamToString(ResourceUtilities.getTestResourceAsStream("test2-" + odfFileNamePrefix + ".xml"));
+		// Saving original file to disc
+		saveString(xmlStringOriginal, ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-temporary-original.xml");
+
+
+		// Loading original file back to string representation
+		String testString = inputStreamToString(new FileInputStream(ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-temporary-test.xml"));
+		// Loading test file back to string representation
+		String originalString = inputStreamToString(new FileInputStream(ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-temporary-original.xml"));
+
+		boolean xmlEqual = originalString.equals(testString);
+		if (!xmlEqual) {
+			String testFilePath = ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-final-test.xml";
+			String originalFilePath = ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-final-original.xml";
+			saveString(testString, testFilePath);
+			saveString(originalString, originalFilePath);
+			LOG.log(Level.SEVERE, "Please compare the XML of two file:\n{0}\n and \n{1}", new Object[]{testFilePath, originalFilePath});
+		}
+		return xmlEqual;
+	}
+
+	@Test
 	public void testStylesDom() {
 		try {
 			Document odfdoc = Document.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
 
-			OdfFileDom stylesDom = odfdoc.getStylesDom();
+			OdfStylesDom stylesDom = odfdoc.getStylesDom();
 			Assert.assertNotNull(stylesDom);
 
 			// test styles.xml:styles
@@ -207,7 +269,7 @@ public class DocumentTest {
 		try {
 			Document odfdoc = Document.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
 
-			OdfFileDom contentDom = odfdoc.getContentDom();
+			OdfContentDom contentDom = odfdoc.getContentDom();
 
 			// test content.xml:automatic-styles
 			OdfOfficeAutomaticStyles autoStyles = contentDom.getAutomaticStyles();
@@ -259,20 +321,26 @@ public class DocumentTest {
 	}
 
 	private void testStyle(OdfStyle testStyle) throws Exception {
-		OdfFileDom dom = (OdfFileDom) testStyle.getOwnerDocument();
+		OdfFileDom fileDom = (OdfFileDom) testStyle.getOwnerDocument();
+		OdfOfficeAutomaticStyles autoStyles = null;
 		if (testStyle.getStyleParentStyleNameAttribute() != null) {
-			OdfStyle parentStyle = dom.getAutomaticStyles().getStyle(testStyle.getStyleParentStyleNameAttribute(), testStyle.getFamily());
+			if (fileDom instanceof OdfContentDom) {
+				autoStyles = ((OdfContentDom) fileDom).getAutomaticStyles();
+			} else if (fileDom instanceof OdfStylesDom) {
+				autoStyles = ((OdfStylesDom) fileDom).getAutomaticStyles();
+			}
+			OdfStyle parentStyle = autoStyles.getStyle(testStyle.getStyleParentStyleNameAttribute(), testStyle.getFamily());
 			if (parentStyle == null) {
-				parentStyle = ((Document) dom.getDocument()).getDocumentStyles().getStyle(testStyle.getStyleParentStyleNameAttribute(), testStyle.getFamily());
+				parentStyle = ((Document) fileDom.getDocument()).getDocumentStyles().getStyle(testStyle.getStyleParentStyleNameAttribute(), testStyle.getFamily());
 			}
 
 			Assert.assertNotNull(parentStyle);
 		}
 		if (testStyle.hasOdfAttribute(OdfName.newName(OdfDocumentNamespace.STYLE, "list-style-name"))) {
 			if (testStyle.getStyleListStyleNameAttribute() != null) {
-				OdfTextListStyle listStyle = dom.getAutomaticStyles().getListStyle(testStyle.getStyleListStyleNameAttribute());
+				OdfTextListStyle listStyle = autoStyles.getListStyle(testStyle.getStyleListStyleNameAttribute());
 				if (listStyle == null) {
-					listStyle = ((Document) dom.getDocument()).getDocumentStyles().getListStyle(testStyle.getStyleListStyleNameAttribute());
+					listStyle = ((Document) fileDom.getDocument()).getDocumentStyles().getListStyle(testStyle.getStyleListStyleNameAttribute());
 				}
 
 				Assert.assertNotNull(listStyle);
@@ -306,13 +374,12 @@ public class DocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testSetLocale() {
 		String filename = "testDefaultLanguage.odp";
 		try {
-			PresentationDocument doc = PresentationDocument
-					.newPresentationDocument();
+			PresentationDocument  doc = PresentationDocument .newPresentationDocument();
 
 			Assert.assertNull(doc.getLocale(Document.ScriptType.WESTERN));
 			Assert.assertNull(doc.getLocale(Document.ScriptType.CJK));
@@ -330,21 +397,16 @@ public class DocumentTest {
 
 			doc.save(ResourceUtilities.newTestOutputFile(filename));
 
-			PresentationDocument newDoc = PresentationDocument
-					.loadDocument(ResourceUtilities
-							.getTestResourceAsStream(filename));
-			Assert.assertEquals(eng_can, newDoc
-					.getLocale(Document.ScriptType.WESTERN));
-			Assert.assertEquals(chinese_china, newDoc
-					.getLocale(Document.ScriptType.CJK));
-			Assert.assertEquals(ar_eg, newDoc
-					.getLocale(Document.ScriptType.CTL));
+			PresentationDocument newDoc = PresentationDocument .loadDocument(ResourceUtilities.getTestResourceAsStream(filename));
+			Assert.assertEquals(eng_can, newDoc.getLocale(Document.ScriptType.WESTERN));
+			Assert.assertEquals(chinese_china, newDoc.getLocale(Document.ScriptType.CJK));
+			Assert.assertEquals(ar_eg, newDoc.getLocale(Document.ScriptType.CTL));
 
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-	}	
+	}
 
 	private static String inputStreamToString(InputStream in) throws IOException {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));

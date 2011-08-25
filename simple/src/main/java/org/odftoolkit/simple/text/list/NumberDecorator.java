@@ -24,6 +24,7 @@ package org.odftoolkit.simple.text.list;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
@@ -35,7 +36,6 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Document;
 import org.w3c.dom.Node;
 
@@ -70,7 +70,7 @@ public class NumberDecorator implements ListDecorator {
 	 *            the Document which this NumberDecorator will be used on.
 	 */
 	public NumberDecorator(Document doc) {
-		OdfFileDom contentDocument;
+		OdfContentDom contentDocument;
 		try {
 			contentDocument = doc.getContentDom();
 			styles = contentDocument.getAutomaticStyles();

@@ -59,7 +59,7 @@ public class SectionTest {
 			OdfPackage packageDocument = newDoc.getPackage();
 			String imagePathPrefix = "Pictures/";
 			int count = 0;
-			Iterator<String> filePaths = packageDocument.getFileEntries().iterator();
+			Iterator<String> filePaths = packageDocument.getFilePaths().iterator();
 			while (filePaths.hasNext()) {
 				String path = filePaths.next();
 				if (path.startsWith(imagePathPrefix) && path.length() > imagePathPrefix.length())
@@ -86,7 +86,7 @@ public class SectionTest {
 
 			packageDocument = newDoc.getPackage();
 			count = 0;
-			filePaths = packageDocument.getFileEntries().iterator();
+			filePaths = packageDocument.getFilePaths().iterator();
 			while (filePaths.hasNext()) {
 				String path = filePaths.next();
 				if (path.startsWith(imagePathPrefix) && path.length() > imagePathPrefix.length())
@@ -136,7 +136,7 @@ public class SectionTest {
 			OdfPackage packageDocument = newDoc.getPackage();
 			String imagePathPrefix = "Pictures/";
 			count = 0;
-			Iterator<String> filePaths = packageDocument.getFileEntries().iterator();
+			Iterator<String> filePaths = packageDocument.getFilePaths().iterator();
 			while (filePaths.hasNext()) {
 				String path = filePaths.next();
 				if (path.startsWith(imagePathPrefix) && path.length() > imagePathPrefix.length())
@@ -213,7 +213,7 @@ public class SectionTest {
 			OdfPackage packageDocument = doc.getPackage();
 			String imagePathPrefix = "Pictures/";
 			count = 0;
-			Iterator<String> filePaths = packageDocument.getFileEntries().iterator();
+			Iterator<String> filePaths = packageDocument.getFilePaths().iterator();
 			while (filePaths.hasNext()) {
 				String path = filePaths.next();
 				if (path.startsWith(imagePathPrefix) && path.length() > imagePathPrefix.length())
