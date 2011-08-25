@@ -46,7 +46,7 @@ public class TextTemplateTest {
 	@Test
 	public void testSavingATextTemplate() throws Exception {
 		Document document = Document.loadDocument(this.getClass().getResourceAsStream(TEST_TEXT_TEMPLATE));
-		File destination = File.createTempFile("odfdom-test", ".ott");
+		File destination = File.createTempFile("simple-test", ".ott");
 		document.save(destination);
 
 		// load again
@@ -62,7 +62,7 @@ public class TextTemplateTest {
 				document.getMediaTypeString());
 		Assert.assertEquals(Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
 				document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("odfdom-test", ".ott");
+		File destination = File.createTempFile("simple-test", ".ott");
 		document.save(destination);
 
 		// load again
@@ -79,7 +79,7 @@ public class TextTemplateTest {
 				document.getMediaTypeString());
 		Assert.assertEquals(Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(),
 				document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("odfdom-test", ".ott");
+		File destination = File.createTempFile("simple-test", ".ott");
 		document.save(destination);
 
 		// load again
@@ -96,7 +96,7 @@ public class TextTemplateTest {
 				document.getMediaTypeString());
 		Assert.assertEquals(Document.OdfMediaType.TEXT_WEB.getMediaTypeString(),
 				document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("odfdom-test", ".ott");
+		File destination = File.createTempFile("simple-test", ".ott");
 		document.save(destination);
 
 		// load again

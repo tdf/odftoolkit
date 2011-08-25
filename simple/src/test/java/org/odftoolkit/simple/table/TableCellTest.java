@@ -715,7 +715,7 @@ public class TableCellTest {
 	/**
 	 * This test case is used to check whether the new created cell uses correct
 	 * style settings.</br>
-	 * ODFDOM allows users to set if cell styles are inherited or not whenever a
+	 * SIMPLE allows users to set if cell styles are inherited or not whenever a
 	 * new cell is added to the table. The default setting is using inheritance.
 	 * In this condition, the style of new column is same with the
 	 * last column before the inserted position, while the style of new row

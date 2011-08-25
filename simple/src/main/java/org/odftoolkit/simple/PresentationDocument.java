@@ -3,7 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * Copyright 2009 IBM. All rights reserved.
+ * Copyright 2009, 2010 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -171,7 +171,7 @@ public class PresentationDocument extends Document {
 	 * 
 	 * @param documentPath - the path from where the document can be loaded
 	 * @return the presentation document from the given path
-	 *		  or NULL if the media type is not supported by ODFDOM.
+	 *		  or NULL if the media type is not supported by SIMPLE.
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	public static PresentationDocument loadDocument(String documentPath) throws Exception {

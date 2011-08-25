@@ -3,7 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * Copyright 2009 IBM. All rights reserved.
+ * Copyright 2009, 2010 IBM. All rights reserved.
  *
  * Use is subject to license terms.
  *
@@ -43,7 +43,7 @@ import javax.xml.xpath.XPathConstants;
 
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.OdfDomDocument;
+import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
@@ -70,7 +70,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /** This abstract class is representing one of the possible ODF documents */
-public class Document extends OdfDomDocument {
+public class Document extends OdfSchemaDocument {
 	// Static parts of file references
 	private static final String SLASH = "/";
 	private OdfMediaType mMediaType;
@@ -157,7 +157,7 @@ public class Document extends OdfDomDocument {
 	 * @param res a resource containing a package with a root document
 	 * @param odfMediaType the media type of the root document
 	 * @return the OpenDocument document
-	 *		  or NULL if the media type is not supported by ODFDOM.
+	 *		  or NULL if the media type is not supported by SIMPLE.
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	protected static Document loadTemplate(Resource res, OdfMediaType odfMediaType) throws Exception {
@@ -175,14 +175,14 @@ public class Document extends OdfDomDocument {
 	}
 
 	/**
-	 * Loads an OdfDocument from the provided path.
+	 * Loads a Document from the provided path.
 	 *
-	 * <p>OdfDocument relies on the file being available for read access over
-	 * the whole lifecycle of OdfDocument.</p>
+	 * <p>Document relies on the file being available for read access over
+	 * the whole lifecycle of Document.</p>
 	 *
 	 * @param documentPath - the path from where the document can be loaded
 	 * @return the OpenDocument from the given path
-	 *		  or NULL if the media type is not supported by ODFDOM.
+	 *		  or NULL if the media type is not supported by SIMPLE.
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	public static Document loadDocument(String documentPath) throws Exception {
@@ -195,10 +195,10 @@ public class Document extends OdfDomDocument {
 	}
 
 	/**
-	 * Creates an OdfDocument from the OpenDocument provided by a resource Stream.
+	 * Creates a Document from the OpenDocument provided by a resource Stream.
 	 *
 	 * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
-	 * read access needed by OdfDocument, the InputStream is cached. This usually
+	 * read access needed by Document, the InputStream is cached. This usually
 	 * takes more time compared to the other createInternalDocument methods.
 	 * An advantage of caching is that there are no problems overwriting
 	 * an input file.</p>
@@ -212,10 +212,10 @@ public class Document extends OdfDomDocument {
 	}
 
 	/**
-	 * Creates an OdfDocument from the OpenDocument provided by a File.
+	 * Creates a Document from the OpenDocument provided by a File.
 	 *
-	 * <p>OdfDocument relies on the file being available for read access over
-	 * the whole lifecycle of OdfDocument.</p>
+	 * <p>Document relies on the file being available for read access over
+	 * the whole lifecycle of Document.</p>
 	 *
 	 * @param file - a file representing the ODF document.
 	 * @return the document created from the given File
@@ -226,7 +226,7 @@ public class Document extends OdfDomDocument {
 	}
 
 	/**
-	 * Creates an OdfDocument from the OpenDocument provided by an ODF package.
+	 * Creates a Document from the OpenDocument provided by an ODF package.
 	 * @param odfPackage - the ODF package containing the ODF document.
 	 * @return the root document of the given OdfPackage
 	 * @throws java.lang.Exception - if the ODF document could not be created.
@@ -236,7 +236,7 @@ public class Document extends OdfDomDocument {
 	}
 	
 	/**
-	 * Creates an OdfDocument from the OpenDocument provided by an ODF package.
+	 * Creates a Document from the OpenDocument provided by an ODF package.
 	 * @param odfPackage - the ODF package containing the ODF document.
 	 * @param internalPath - the path to the ODF document relative to the package root.
 	 * @return the root document of the given OdfPackage
@@ -478,7 +478,7 @@ public class Document extends OdfDomDocument {
 	}
 	
 	/**
-	 * Sets the media type of the OdfDocument
+	 * Sets the media type of the Document
 	 * @param odfMediaType media type to be set
 	 */
 	protected void setOdfMediaType(OdfMediaType odfMediaType) {
@@ -487,7 +487,7 @@ public class Document extends OdfDomDocument {
 	}
 
 	/**
-	 * Gets the media type of the OdfDocument
+	 * Gets the media type of the Document
 	 */
 	protected OdfMediaType getOdfMediaType() {
 		return mMediaType;
@@ -512,7 +512,7 @@ public class Document extends OdfDomDocument {
 
 	/**
 	 * Save the document to an OutputStream. Delegate to the root document
-	 * and save possible embedded OdfDocuments.
+	 * and save possible embedded Documents.
 	 *
 	 * <p>If the input file has been cached (this is the case when loading from an
 	 * InputStream), the input file can be overwritten.</p>
@@ -603,10 +603,10 @@ public class Document extends OdfDomDocument {
 	 * Get the content root of a document.
 	 *
 	 * You may prefer to use the getContentRoot methods of subclasses of
-	 * OdfDocument. Their return parameters are already casted to
+	 * Document. Their return parameters are already casted to
 	 * respective subclasses of OdfElement.
 	 *
-	 * @param the type of the content root, depend on the document type
+	 * @param clazz the type of the content root, depend on the document type
 	 * @return the child element of office:body, e.g. office:text for text docs
 	 * @throws Exception if the file DOM could not be created.
 	 */
@@ -631,7 +631,7 @@ public class Document extends OdfDomDocument {
 	 * Get the content root of a document.
 	 *
 	 * You may prefer to use the getContentRoot methods of subclasses of
-	 * OdfDocument.
+	 * Document.
 	 * 
 	 * @return the child element of office:body, e.g. office:text for text docs
 	 * @throws Exception if the file DOM could not be created.
@@ -647,7 +647,7 @@ public class Document extends OdfDomDocument {
 	}
 
 	/**
-	 * Insert an Image from the specified uri to the end of the OdfDocument.
+	 * Insert an Image from the specified uri to the end of the Document.
 	 * @param imageUri The URI of the image that will be added to the document,
 	 * 				   add image stream to the package,
 	 *                 in the 'Pictures/' graphic directory with the same image file name as in the URI.
@@ -745,7 +745,7 @@ public class Document extends OdfDomDocument {
 	 * <li>The number of times this document has been edited.</li>
 	 * <li>The default language will be the Java user.language System property.</li>
 	 * </ul>
-	 * @param newDoc  the OdfDocument object which need to initialize meta data.
+	 * @param newDoc  the Document object which need to initialize meta data.
 	 * 
 	 * TODO:This method will be moved to OdfMetadata class. 
 	 *      see http://odftoolkit.org/bugzilla/show_bug.cgi?id=204

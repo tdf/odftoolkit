@@ -44,7 +44,7 @@ public class OfficeMetaTest {
 	private TextDocument doc;
 	private OdfFileDom metadom;
 	private Meta fMetadata;
-	private String generator = "ODFDOM/" + System.getProperty("odfdom.version");
+	private String generator = "SIMPLE/" + System.getProperty("simple.version");
 	private String dctitle = "dctitle";
 	private String dcdescription = "dcdescription";
 	private String subject = "dcsubject";
@@ -305,9 +305,8 @@ public class OfficeMetaTest {
 		doc = (TextDocument) TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("EmptyDocForMetaTest.odt"));
 		metadom = doc.getMetaDom();
 		fMetadata = new Meta(metadom);
-		//ToDO: automatic check of VERSION number ODFDOM/0.6.1$Build-TIMESTAMP
+		//ToDO: automatic check of VERSION number SIMPLE/0.2.1$Build-TIMESTAMP
 		//Assert.assertTrue(fMetadata.getGenerator().startsWith(generator));
-		//ToDO: http://odftoolkit.org/bugzilla/show_bug.cgi?id=171
 		// Assert.assertEquals(fMetadata.getGenerator(), generator);
 		Assert.assertNull(fMetadata.getTitle());
 		Assert.assertNull(fMetadata.getDescription());

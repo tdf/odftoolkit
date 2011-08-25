@@ -44,7 +44,7 @@ public class PresentationTemplateTest {
 	@Test
 	public void testSavingAPresentationTemplate() throws Exception {
 		Document document = Document.loadDocument(this.getClass().getResourceAsStream(TEST_PRESENTATION));
-		File destination = File.createTempFile("odfdom-test", ".otp");
+		File destination = File.createTempFile("simple-test", ".otp");
 		document.save(destination);
 
 		// load again
@@ -58,7 +58,7 @@ public class PresentationTemplateTest {
 		Assert.assertEquals(Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
 		Assert.assertEquals(Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
 
-		File destination = File.createTempFile("odfdom-test", ".otp");
+		File destination = File.createTempFile("simple-test", ".otp");
 		document.save(destination);
 
 		// load again

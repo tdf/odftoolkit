@@ -250,12 +250,12 @@ public class TextSelectionTest {
 
 	/**
 	 * Test replaceWith method of org.odftoolkit.simple.text.search.TextSelection
-	 * replace all the 'ODFDOM' with 'Odf Toolkit'
+	 * replace all the 'SIMPLE' with 'Odf Toolkit'
 	 */
 	@Test
 	public void testReplacewith() {
 		search = null;
-		search = new TextNavigation("ODFDOM", doc);
+		search = new TextNavigation("SIMPLE", doc);
 
 		TextSelection nextSelect = null;
 		TextNavigation nextsearch = new TextNavigation("next", doc);
@@ -263,8 +263,8 @@ public class TextSelectionTest {
 			nextSelect = (TextSelection) nextsearch.getCurrentItem();
 		}
 
-		//replace all the "ODFDOM" to "Odf Toolkit"
-		//except the sentence "Task5.Change the ODFDOM to Odf Toolkit, and bold them."
+		//replace all the "SIMPLE" to "Odf Toolkit"
+		//except the sentence "Task5.Change the SIMPLE to Odf Toolkit, and bold them."
 		OdfStyle style = new OdfStyle(contentDOM);
 		style.setProperty(StyleTextPropertiesElement.FontWeight, "bold");
 		style.setStyleFamilyAttribute("text");

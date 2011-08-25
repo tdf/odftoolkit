@@ -2,7 +2,7 @@
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
- * Copyright 2009 IBM. All rights reserved.
+ * Copyright 2009, 2010 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -837,7 +837,7 @@ public class Table {
 	 * Append a row to the end of the table. The style of new row is same with
 	 * the last row in the table.
 	 * <p>
-	 * Since ODFDOM 8.5 automatic table expansion is supported. Whenever a cell
+	 * Since SIMPLE supports automatic table expansion. Whenever a cell
 	 * outside the current table is addressed the table is instantly expanded.
 	 * Method <code>getCellByPosition</code> can randomly access any cell, no
 	 * matter it in or out of the table original range.
@@ -869,7 +869,7 @@ public class Table {
 	 * Append a specific number of rows to the end of the table. The style of
 	 * new rows are same with the last row in the table. 
 	 * <p>
-	 * Since ODFDOM 8.5 automatic table expansion is supported. Whenever a cell
+	 * Since SIMPLE supports automatic table expansion. Whenever a cell
 	 * outside the current table is addressed the table is instantly expanded.
 	 * Method <code>getCellByPosition</code> can randomly access any cell, no
 	 * matter it in or out of the table original range.
@@ -915,7 +915,7 @@ public class Table {
 	 * Append a column at the end of the table. The style of new column is
 	 * same with the last column in the table.
 	 * <p>
-	 * Since ODFDOM 8.5 automatic table expansion is supported. Whenever a cell
+	 * Since SIMPLE supports automatic table expansion. Whenever a cell
 	 * outside the current table is addressed the table is instantly expanded.
 	 * Method <code>getCellByPosition</code> can randomly access any cell, no
 	 * matter it in or out of the table original range.
@@ -973,7 +973,7 @@ public class Table {
 	 * Append a specific number of columns to the right of the table. The style
 	 * of new columns are same with the rightmost column in the table. 
 	 * <p>
-	 * Since ODFDOM 8.5 automatic table expansion is supported. Whenever a cell
+	 * Since SIMPLE supports automatic table expansion. Whenever a cell
 	 * outside the current table is addressed the table is instantly expanded.
 	 * Method <code>getCellByPosition</code> can randomly access any cell, no
 	 * matter it in or out of the table original range.

@@ -7,7 +7,7 @@
         this URL has to be added before the inner path.
         
         For instance sourceBaseURL might be:
-            file:/E:/cws/multiPkgFileTest-ODFDOM/target/test-classes/test2.odt/
+            file:/E:/cws/multiPkgFileTest/target/test-classes/test2.odt/
     -->
 	<xsl:param name="sourceBaseURL" select="'./'" />    
 

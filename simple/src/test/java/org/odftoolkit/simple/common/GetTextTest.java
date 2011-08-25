@@ -23,16 +23,16 @@ public class GetTextTest {
 			String output = extractor.getText();
 			LOG.info(output);
 			int count = 0;
-			int index = output.indexOf("ODFDOM");
+			int index = output.indexOf("SIMPLE");
 			while (index != -1) {
 				count++;
-				index = output.indexOf("ODFDOM", index + 1);
+				index = output.indexOf("SIMPLE", index + 1);
 			}
 			if (count != 30) {
 				// there are
-				// 23 ODFDOM in the /content.xml
-				// 2  ODFDOM in the /styles.xml
-				// 5 ODFDOM in the /Object 1/content.xml
+				// 23 SIMPLE in the /content.xml
+				// 2  SIMPLE in the /styles.xml
+				// 5 SIMPLE in the /Object 1/content.xml
 				throw new RuntimeException("Something wrong! count=" + count);
 			}
 		} catch (Exception e) {

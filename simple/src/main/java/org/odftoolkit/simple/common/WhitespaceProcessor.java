@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright 2009, 2010 IBM. All rights reserved.
  *
  * Use is subject to license terms.
  *
@@ -32,7 +33,7 @@ import org.w3c.dom.Node;
 
 /**
  *
- * @author J David Eisenberg
+ * It's a tool class to help process white space.
  */
 public class WhitespaceProcessor {
 	private int nSpaces;

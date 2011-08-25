@@ -3,7 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * Copyright 2009 IBM. All rights reserved.
+ * Copyright 2009, 2010 IBM. All rights reserved.
  *
  * Use is subject to license terms.
  *
@@ -56,24 +56,24 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaCellCountAttribute</code> , See {@odf.attribute
-	 *  meta:cell-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaCellCountAttribute</code>.
 	 * 
 	 * @return the number of table cells contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaCellCountAttribute
 	 */
 	public Integer getCellCount() {
 		return mDocStatistic.getMetaCellCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaCellCountAttribute</code> , See {@odf.attribute
-	 *  meta:cell-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaCellCountAttribute</code> .
 	 * 
 	 * @param cellCount	the number of table cells need to be set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaCellCountAttribute
 	 *            
 	 */
 	public void setCellCount(int cellCount) {
@@ -82,24 +82,24 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaCharacterCountAttribute</code> , See {@odf.attribute
-	 *  meta:character-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaCharacterCountAttribute</code> .
 	 * 
 	 * @return the number of characters contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaCharacterCountAttribute
 	 */
 	public Integer getCharacterCount() {
 		return mDocStatistic.getMetaCharacterCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaCharacterCountAttribute</code> , See {@odf.attribute
-	 *  meta:character-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaCharacterCountAttribute</code>.
 	 * 
 	 * @param characterCount	the number of characters need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaCharacterCountAttribute
 	 */
 	public void setCharacterCount(Integer characterCount) {
 		mDocStatistic.setMetaCharacterCountAttribute(characterCount);
@@ -107,24 +107,24 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaDrawCountAttribute</code> , See {@odf.attribute
-	 *  meta:draw-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaDrawCountAttribute</code> .
 	 * 
 	 * @return the number of all the graphic related element in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaDrawCountAttribute
 	 */
 	public Integer getDrawCount() {
 		return mDocStatistic.getMetaDrawCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaDrawCountAttribute</code> , See {@odf.attribute
-	 *  meta:draw-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaDrawCountAttribute</code>.
 	 * 
 	 * @param drawCount	the number of all the graphic related element need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaDrawCountAttribute
 	 */
 	public void setDrawCount(Integer drawCount) {
 		mDocStatistic.setMetaDrawCountAttribute(drawCount);
@@ -132,24 +132,24 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaFrameCountAttribute</code> , See {@odf.attribute
-	 *  meta:frame-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaFrameCountAttribute</code>.
 	 * 
 	 * @return the number of <code><draw:frame></code> element contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaFrameCountAttribute
 	 */
 	public Integer getFrameCount() {
 		return mDocStatistic.getMetaFrameCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaFrameCountAttribute</code> , See {@odf.attribute
-	 *  meta:frame-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaFrameCountAttribute</code> .
 	 * 
 	 * @param frameCount the number of <code><draw:frame></code> element need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaFrameCountAttribute
 	 */
 	public void setFrameCount(Integer frameCount) {
 		mDocStatistic.setMetaFrameCountAttribute(frameCount);
@@ -157,24 +157,24 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaImageCountAttribute</code> , See {@odf.attribute
-	 *  meta:image-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaImageCountAttribute</code> .
 	 * 
 	 * @return the number of <code><draw:image></code> element contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaImageCountAttribute
 	 */
 	public Integer getImageCount() {
 		return mDocStatistic.getMetaImageCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaImageCountAttribute</code> , See {@odf.attribute
-	 *  meta:image-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaImageCountAttribute</code> .
 	 * 
 	 * @param imageCount the number of <code><draw:image></code> element need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaImageCountAttribute
 	 */
 	public void setImageCount(Integer imageCount) {
 		mDocStatistic.setMetaImageCountAttribute(imageCount);
@@ -182,24 +182,24 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaNonWhitespaceCharacterCountAttribute</code> , See
-	 * {@odf.attribute meta:non-whitespace-character-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaNonWhitespaceCharacterCountAttribute</code>.
 	 * 
 	 * @return the number of non-whitespace characters contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaNonWhitespaceCharacterCountAttribute
 	 */
 	public Integer getNonWhitespaceCharacterCount() {
 		return mDocStatistic.getMetaNonWhitespaceCharacterCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaNonWhitespaceCharacterCountAttribute</code> , See
-	 * {@odf.attribute meta:non-whitespace-character-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaNonWhitespaceCharacterCountAttribute</code>.
 	 * 
 	 * @param nonWhitespaceCharacterCount	the number of non-whitespace characters need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaNonWhitespaceCharacterCountAttribute
 	 */
 	public void setNonWhitespaceCharacterCount(
 			Integer nonWhitespaceCharacterCount) {
@@ -208,24 +208,24 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaObjectCountAttribute</code> , See {@odf.attribute
-	 *  meta:object-count}
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaObjectCountAttribute</code>
 	 * 
 	 * @return the number of <code><draw:object></code> element contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaObjectCountAttribute
 	 */
 	public Integer getObjectCount() {
 		return mDocStatistic.getMetaObjectCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaObjectCountAttribute</code> , See {@odf.attribute
-	 *  meta:object-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaObjectCountAttribute</code>.
 	 * 
 	 * @param objectCount the number of <code><draw:object></code> element need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaObjectCountAttribute
 	 */
 	public void setObjectCount(Integer objectCount) {
 		mDocStatistic.setMetaObjectCountAttribute(objectCount);
@@ -233,13 +233,13 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaOleObjectCountAttribute</code> , See {@odf.attribute
-	 *  meta:ole-object-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaOleObjectCountAttribute</code>.
 	 * 
 	 * @return the number of <code><draw:object-ole></code> element contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaOleObjectCountAttribute
 	 */
 	public Integer getOleObjectCount() {
 		return mDocStatistic.getMetaOleObjectCountAttribute();
@@ -247,11 +247,11 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaOleObjectCountAttribute</code> , See {@odf.attribute
-	 *  meta:ole-object-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaOleObjectCountAttribute</code>.
 	 * 
 	 * @param oleObjectCount the number of <code><draw:object-ole></code> element need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaOleObjectCountAttribute
 	 */
 	public void setOleObjectCount(Integer oleObjectCount) {
 		mDocStatistic.setMetaOleObjectCountAttribute(oleObjectCount);
@@ -259,24 +259,24 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaPageCountAttribute</code> , See {@odf.attribute
-	 *  meta:page-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaPageCountAttribute</code>.
 	 * 
 	 * @return the number of page count contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaPageCountAttribute
 	 */
 	public Integer getPageCount() {
 		return mDocStatistic.getMetaPageCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaPageCountAttribute</code> , See {@odf.attribute
-	 *  meta:page-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaPageCountAttribute</code>.
 	 * 
 	 * @param pageCount the number of page count need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaPageCountAttribute
 	 */
 	public void setPageCount(Integer pageCount) {
 		mDocStatistic.setMetaPageCountAttribute(pageCount);
@@ -284,24 +284,24 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaParagraphCountAttribute</code> , See {@odf.attribute
-	 *  meta:paragraph-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaParagraphCountAttribute</code>.
 	 * 
 	 * @return the number of <code><text:p></code> element contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaParagraphCountAttribute
 	 */
 	public Integer getParagraphCount() {
 		return mDocStatistic.getMetaParagraphCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaParagraphCountAttribute</code> , See {@odf.attribute
-	 *  meta:paragraph-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaParagraphCountAttribute</code>.
 	 * 
 	 * @param paragraphCount the number of <code><text:p></code> element need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaParagraphCountAttribute
 	 */
 	public void setParagraphCount(Integer paragraphCount) {
 		mDocStatistic.setMetaParagraphCountAttribute(paragraphCount);
@@ -309,24 +309,24 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaRowCountAttribute</code> , See {@odf.attribute
-	 * meta:row-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaRowCountAttribute</code>.
 	 * 
 	 * @return the number of lines contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaRowCountAttribute
 	 */
 	public Integer getRowCount() {
 		return mDocStatistic.getMetaRowCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaRowCountAttribute</code> , See {@odf.attribute
-	 * meta:row-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaRowCountAttribute</code>.
 	 * 
 	 * @param rowCount the number of lines need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaRowCountAttribute
 	 */
 	public void setRowCount(Integer rowCount) {
 		mDocStatistic.setMetaRowCountAttribute(rowCount);
@@ -334,48 +334,48 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaSentenceCountAttribute</code> , See {@odf.attribute
-	 *  meta:sentence-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaSentenceCountAttribute</code>.
 	 * 
 	 * @return the number of sentences contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaSentenceCountAttribute.
 	 */
 	public Integer getSentenceCount() {
 		return mDocStatistic.getMetaSentenceCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaSentenceCountAttribute</code> , See {@odf.attribute
-	 *  meta:sentence-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaSentenceCountAttribute</code>.
 	 * 
 	 * @param sentenceCount the number of sentences need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaSentenceCountAttribute.
 	 */
 	public void setSentenceCount(Integer sentenceCount) {
 		mDocStatistic.setMetaSentenceCountAttribute(sentenceCount);
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaSyllableCountAttribute</code> , See {@odf.attribute
-	 *  meta:syllable-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaSyllableCountAttribute</code>.
 	 * 
 	 * @return the number of syllables contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaSyllableCountAttribute.
 	 */
 	public Integer getSyllableCount() {
 		return mDocStatistic.getMetaSyllableCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaSyllableCountAttribute</code> , See {@odf.attribute
-	 *  meta:syllable-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaSyllableCountAttribute</code>.
 	 * 
 	 * @param syllableCount the number of syllables need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaSyllableCountAttribute.
 	 */
 	public void setSyllableCount(Integer syllableCount) {
 		mDocStatistic.setMetaSyllableCountAttribute(syllableCount);
@@ -383,24 +383,24 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaTableCountAttribute</code> , See {@odf.attribute
-	 *  meta:table-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaTableCountAttribute</code>.
 	 * 
 	 * @return the number of <code><table:table></code> element contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaTableCountAttribute.
 	 */
 	public Integer getTableCount() {
 		return mDocStatistic.getMetaTableCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaTableCountAttribute</code> , See {@odf.attribute
-	 *  meta:table-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaTableCountAttribute</code>.
 	 * 
 	 * @param tableCount the number of <code><table:table></code> need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaTableCountAttribute.
 	 */
 	public void setTableCount(Integer tableCount) {
 		mDocStatistic.setMetaTableCountAttribute(tableCount);
@@ -408,24 +408,24 @@ public class DocumentStatistic {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation
-	 * <code>MetaWordCountAttribute</code> , See {@odf.attribute
-	 *  meta:word-count}.
+	 * Receives the value of the odf dom attribute representation
+	 * <code>MetaWordCountAttribute</code>.
 	 * 
 	 * @return the number of words contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaWordCountAttribute.
 	 */
 	public Integer getWordCount() {
 		return mDocStatistic.getMetaWordCountAttribute();
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation
-	 * <code>MetaWordCountAttribute</code> , See {@odf.attribute
-	 *  meta:word-count}.
+	 * Sets the value of odf dom attribute representation
+	 * <code>MetaWordCountAttribute</code>.
 	 * 
 	 * @param wordCount the number of words need to set
+	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaWordCountAttribute.
 	 */
 	public void setWordCount(Integer wordCount) {
 		mDocStatistic.setMetaWordCountAttribute(wordCount);

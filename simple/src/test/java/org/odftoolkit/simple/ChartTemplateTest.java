@@ -43,7 +43,7 @@ public class ChartTemplateTest {
 	@Test
 	public void testSavingAChartTemplate() throws Exception {
 		Document document = Document.loadDocument(this.getClass().getResourceAsStream(TEST_CHART_TEMPLATE));
-		File destination = File.createTempFile("odfdom-test", ".otc");
+		File destination = File.createTempFile("simple-test", ".otc");
 		document.save(destination);
 
 		// load again
@@ -60,7 +60,7 @@ public class ChartTemplateTest {
 
 		Assert.assertEquals(Document.OdfMediaType.CHART_TEMPLATE.getMediaTypeString(),
 				document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("odfdom-test", ".otc");
+		File destination = File.createTempFile("simple-test", ".otc");
 		document.save(destination);
 
 		// load again

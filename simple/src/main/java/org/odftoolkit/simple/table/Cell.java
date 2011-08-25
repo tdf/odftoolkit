@@ -2,7 +2,7 @@
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
- * Copyright 2009 IBM. All rights reserved.
+ * Copyright 2009, 2010 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -995,12 +995,12 @@ public class Cell {
 
 	/**
 	 * Set the background color of this cell using string. The string must be a valid argument for 
-	 * constructing {@link org.odftoolkit.simple.type.Color <code>org.odftoolkit.simple.type.Color</code>}. 
+	 * constructing {@link org.odftoolkit.odfdom.type.Color <code>org.odftoolkit.odfdom.type.Color</code>}. 
 	 * 
 	 * @param cellBackgroundColor
 	 *            the background color that need to set. 
 	 *            If cellBackgroundColor is null, default background color #FFFFFF will be set.
-	 * @see org.odftoolkit.simple.type.Color
+	 * @see org.odftoolkit.odfdom.type.Color
 	 */
 	public void setCellBackgroundColor(String cellBackgroundColor) {
 		if (!Color.isValid(cellBackgroundColor)) {
@@ -1118,7 +1118,7 @@ public class Cell {
 	/**
 	 * Judge if the ODF DOM element of this cell is the covered cell element.
 	 * 
-	 * @return true if the ODFDOM element is TableCoveredTableCellElement
+	 * @return true if the Odf element is TableCoveredTableCellElement
 	 */
 	boolean isCoveredElement() {
 		if (mCellElement instanceof TableCoveredTableCellElement) {
@@ -1145,9 +1145,10 @@ public class Cell {
 	 * <p>
 	 * Please note, the parameter <code>formula</code> will not be checked and interpreted;
 	 * the cell value will not be calculated.
-	 * It's just simply set as a formula attribute. See {@odf.attribute table:formula}
+	 * It's just simply set as a formula attribute.
 	 * 
 	 * @param formula	the formula that need to be set.
+	 * @see org.odftoolkit.odfdom.dom.attribute.table.TableFormulaAttribute
 	 * @throws IllegalArgumentException  if formula is null, an IllegalArgumentException will be thrown.
 	 */
 	public void setFormula(String formula) {

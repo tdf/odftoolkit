@@ -2,7 +2,7 @@
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
- * Copyright 2009 IBM. All rights reserved.
+ * Copyright 2010 IBM. All rights reserved.
  *
  * Use is subject to license terms.
  *
@@ -100,7 +100,7 @@ public class EditableTextExtractor extends TextExtractor {
 	@Override
 	public void visit(DrawObjectElement element) {
 		String embedDocPath = element.getXlinkHrefAttribute();
-		Document embedDoc = ((Document)(((OdfContentDom)element.getOwnerDocument()).getDomDocument())).getEmbeddedDocument(embedDocPath);
+		Document embedDoc = ((Document)(((OdfContentDom)element.getOwnerDocument()).getDocument())).getEmbeddedDocument(embedDocPath);
 		if (embedDoc != null) {
 			try {
 				mTextBuilder.append(EditableTextExtractor.newOdfEditableTextExtractor(embedDoc).getText());

@@ -107,10 +107,6 @@ public class DocumentCreationTest {
 			odcDoc2.getContentDom();
 			odcDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfChartDocument.odc"));
 
-			/////////////////////////////////////////
-			// ODFDOM PACKAGE LAYER - WIKI EXAMPLE //
-			/////////////////////////////////////////
-
 			// loads the ODF document package from the path
 			OdfPackage pkg = OdfPackage.loadPackage(ResourceUtilities.getTestResourceAsStream("TestEmpty_OdfTextDocument.odt"));
 
@@ -118,12 +114,7 @@ public class DocumentCreationTest {
 			pkg.insert(ResourceUtilities.getURI(TEST_PIC), "Pictures/" + TEST_PIC, null);
 			//Deactivated as test fail, when test machine is not online (painful for offline work)
 			//pkg.insert(new URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"), "someweiredname/tableandfruits.jpg", null);
-			pkg.save(ResourceUtilities.newTestOutputFile("odfdom-wiki-package.odt"));
-
-
-			/////////////////////////////////////
-			// ODFDOM XML LAYER - WIKI EXAMPLE //
-			/////////////////////////////////////
+			pkg.save(ResourceUtilities.newTestOutputFile("simple-wiki-package.odt"));
 
 			// loads the ODF document from the path
 			Document odfDoc = Document.loadDocument(ResourceUtilities.getTestResourceAsStream("TestEmpty_OdfTextDocument.odt"));
@@ -154,7 +145,7 @@ public class DocumentCreationTest {
 			odfFrame.appendChild(odfImage2);
 			//Deactivated as test fail, when test machine is not online (painful for offline work)
 			//odfImage2.newImage(new URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"));
-			odfDoc.save(ResourceUtilities.newTestOutputFile("odfdom-wiki-dom.odt"));
+			odfDoc.save(ResourceUtilities.newTestOutputFile("simple-wiki-dom.odt"));
 
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, null, e);
@@ -446,7 +437,7 @@ public class DocumentCreationTest {
 	}
 
 	/**
-	 * Test if saving OdfDocuments always results in a valid ODF file. This means
+	 * Test if saving Documents always results in a valid ODF file. This means
 	 * that the mimetype is written clearly at the first position in the zipped
 	 * ODF package.
 	 */
