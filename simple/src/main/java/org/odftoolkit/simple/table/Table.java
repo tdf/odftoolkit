@@ -85,25 +85,23 @@ public class Table {
 	private static final double DEFAULT_TABLE_WIDTH = 6;
 	private static final int DEFAULT_REL_TABLE_WIDTH = 65535;
 	private static final String DEFAULT_TABLE_ALIGN = "margins";
-	private static final DecimalFormat IN_FORMAT = new DecimalFormat("000.0000"); 
+	private static final DecimalFormat IN_FORMAT = new DecimalFormat("##0.0000"); 
 	// TODO: should save seperately for different dom tree
-	static IdentityHashMap<TableTableElement, Table> mTableRepository =
-			new IdentityHashMap<TableTableElement, Table>();
-	IdentityHashMap<TableTableCellElementBase, Vector<Cell>> mCellRepository =
-			new IdentityHashMap<TableTableCellElementBase, Vector<Cell>>();
-	IdentityHashMap<TableTableRowElement, Vector<Row>> mRowRepository =
-			new IdentityHashMap<TableTableRowElement, Vector<Row>>();
-	IdentityHashMap<TableTableColumnElement, Vector<Column>> mColumnRepository =
-			new IdentityHashMap<TableTableColumnElement, Vector<Column>>();
-	static{
+	static IdentityHashMap<TableTableElement, Table> mTableRepository = new IdentityHashMap<TableTableElement, Table>();
+	IdentityHashMap<TableTableCellElementBase, Vector<Cell>> mCellRepository = new IdentityHashMap<TableTableCellElementBase, Vector<Cell>>();
+	IdentityHashMap<TableTableRowElement, Vector<Row>> mRowRepository = new IdentityHashMap<TableTableRowElement, Vector<Row>>();
+	IdentityHashMap<TableTableColumnElement, Vector<Column>> mColumnRepository = new IdentityHashMap<TableTableColumnElement, Vector<Column>>();
+	static {
 		IN_FORMAT.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
 	}
 	private Table(TableTableElement table) {
 		mTableElement = table;
 		mDocument = (Document) ((OdfFileDom)(table.getOwnerDocument())).getDocument();
-		if (mDocument instanceof SpreadsheetDocument)
+		if (mDocument instanceof SpreadsheetDocument) {
 			mIsSpreadsheet = true;
-		else mIsSpreadsheet = false;
+		} else {
+			mIsSpreadsheet = false;
+		}
 	}
 
 	/**
@@ -370,8 +368,13 @@ public class Table {
 		// 2.0 create column style
 		OdfStyle columnStyle = styles.newStyle(OdfStyleFamily.TableColumn);
 		String columnStylename = columnStyle.getStyleNameAttribute();
-		columnStyle.setProperty(StyleTableColumnPropertiesElement.ColumnWidth,	IN_FORMAT.format(DEFAULT_TABLE_WIDTH / numCols) + "in");
-		columnStyle.setProperty(StyleTableColumnPropertiesElement.RelColumnWidth, Math.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
+		//for spreadsheet document, no need compute column width.
+		if (!isSpreadsheet) {
+			columnStyle.setProperty(StyleTableColumnPropertiesElement.ColumnWidth, 
+					IN_FORMAT.format(DEFAULT_TABLE_WIDTH / numCols) + "in");
+			columnStyle.setProperty(StyleTableColumnPropertiesElement.RelColumnWidth, Math
+					.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
+		}
 		// 2.1 create header column elements
 		if (headerColumnNumber > 0) {
 			TableTableHeaderColumnsElement headercolumns = (TableTableHeaderColumnsElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(OdfDocumentNamespace.TABLE, "table-header-columns"));
@@ -407,8 +410,7 @@ public class Table {
 		}
 
 		//3.1 create header row elements
-		if( headerRowNumber > 0)
-		{
+		if( headerRowNumber > 0){
 			TableTableHeaderRowsElement headerrows = (TableTableHeaderRowsElement) OdfXMLFactory.newOdfElement(dom,
 					OdfName.newName(OdfDocumentNamespace.TABLE, "table-header-rows"));
 			for (int i = 0; i < headerRowNumber; i++) {
@@ -417,9 +419,6 @@ public class Table {
 				for (int j = 0; j < numCols; j++) {
 					TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
 							OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell"));
-					TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
-							OdfName.newName(OdfDocumentNamespace.TEXT, "p"));
-					aCell.appendChild(aParagraph);
 					if (!isSpreadsheet) {
 						if ((j + 1 == numCols) && (i == 0)) {
 							aCell.setStyleName(righttopStyle.getStyleNameAttribute());
@@ -445,9 +444,6 @@ public class Table {
 			for (int j = 0; j < numCols; j++) {
 				TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
 						OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell"));
-				TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
-						OdfName.newName(OdfDocumentNamespace.TEXT, "p"));
-				aCell.appendChild(aParagraph);
 				if (!isSpreadsheet) {
 					if ((j + 1 == numCols) && (i == 0)) {
 						aCell.setStyleName(righttopStyle.getStyleNameAttribute());
@@ -481,24 +477,7 @@ public class Table {
 	 * @return the created <code>Table</code> feature instance
 	 */
 	public static Table newTable(Document document) {
-		try {
-			TableTableElement newTEle = createTable(document, DEFAULT_ROW_COUNT, DEFAULT_COLUMN_COUNT, 0, 0);
-
-			//4. append to the end of document
-			OdfElement root = document.getContentDom().getRootElement();
-			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-			typedContent.appendChild(newTEle);
-
-			return Table.getInstance(newTEle);
-
-		} catch (DOMException e) {
-			Logger.getLogger(Table.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-		} catch (Exception e) {
-			Logger.getLogger(Table.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-		}
-
-		return null;
+		return newTable(document, DEFAULT_ROW_COUNT, DEFAULT_COLUMN_COUNT, 0, 0);
 	}
 
 	private static String getUniqueTableName(Document document) {
@@ -539,22 +518,7 @@ public class Table {
 	 * @return a new instance of <code>Table</code>
 	 */
 	public static Table newTable(Document document, int numRows, int numCols) {
-		try {
-			TableTableElement newTEle = createTable(document, numRows, numCols, 0, 0);
-
-			//4. append to the end of document
-			OdfElement root = document.getContentDom().getRootElement();
-			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-			typedContent.appendChild(newTEle);
-
-			return Table.getInstance(newTEle);
-		
-		} catch (Exception e) {
-			Logger.getLogger(Table.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-		}
-
-		return null;
+		return newTable(document, numRows, numCols, 0, 0);
 	}
 
 	/**
@@ -904,16 +868,15 @@ public class Table {
 		}
 		Row firstRow = appendRow();
 		resultList.add(firstRow);
-		if (rowCount == 1) {
-			return resultList;
+		if (rowCount > 1) {
+			List<Row> list = insertRowsBefore((getRowCount() - 1), (rowCount - 1));
+			resultList.addAll(list);
 		}
-		List<Row> list = insertRowsBefore((getRowCount() - 1),
-				(rowCount - 1));
-		resultList.addAll(list);
 		if (isCleanStyle) {
 			// clean style name
 			for (Row row : resultList) {
-				for (int i = 0; i < row.getCellCount(); i++) {
+				int length = row.getCellCount();
+				for (int i = 0; i < length; i++) {
 					TableTableCellElementBase cellElement = row.getCellByIndex(i).mCellElement;
 					cellElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
 				}
@@ -1007,17 +970,16 @@ public class Table {
 		}
 		Column firstClm = appendColumn();
 		resultList.add(firstClm);
-		if (columnCount == 1) {
-			return resultList;
+		if (columnCount > 1) {
+			List<Column> list = insertColumnsBefore((getColumnCount() - 1), (columnCount - 1));
+			resultList.addAll(list);
 		}
-		List<Column> list = insertColumnsBefore((getColumnCount() - 1), (columnCount - 1));
-		resultList.addAll(list);
 		// clean style name
 		if(isCleanStyle){
 			for (Column column : resultList) {
-				for (int i = 0; i < column.getCellCount(); i++) {
-					TableTableCellElement cellElement = (TableTableCellElement) (column
-							.getCellByIndex(i).mCellElement);
+				int length = column.getCellCount();
+				for (int i = 0; i < length; i++) {
+					TableTableCellElementBase cellElement = column.getCellByIndex(i).mCellElement;
 					cellElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
 				}
 			}
@@ -1328,9 +1290,7 @@ public class Table {
 		if (index >= getRowCount()) {
 			throw new IndexOutOfBoundsException();
 		}
-
 		ArrayList<Row> list = new ArrayList<Row>();
-
 		if (index == 0) {
 			Row refRow = getRowByIndex(index);
 			Row positionRow = refRow;
@@ -1880,8 +1840,7 @@ public class Table {
 	 */
 	public Cell getCellByPosition(int colIndex, int rowIndex) {
 		if (colIndex < 0 || rowIndex < 0) {
-			throw new IllegalArgumentException(
-					"colIndex and rowIndex should be nonnegative integer.");
+			throw new IllegalArgumentException("colIndex and rowIndex should be nonnegative integer.");
 		}
 		// expand row as needed.
 		int lastRowIndex = getRowCount() - 1;
@@ -1950,8 +1909,7 @@ public class Table {
 	 * @return the cell at the specified position.
 	 */
 	public Cell getCellByPosition(String address) {
-		return getCellByPosition(getColIndexFromCellAddress(address),
-				getRowIndexFromCellAddress(address));
+		return getCellByPosition(getColIndexFromCellAddress(address), getRowIndexFromCellAddress(address));
 	}
 
 	//TODO: can put these two method to type.CellAddress

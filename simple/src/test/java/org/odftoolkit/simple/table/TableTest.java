@@ -93,6 +93,26 @@ public class TableTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+	
+	@Test
+	public void testColumnWidthCompareNewTableWithGetCellByPosition() {
+		try {
+			SpreadsheetDocument odsDoc = SpreadsheetDocument.newSpreadsheetDocument();
+			Table table = Table.newTable(odsDoc, 20, 20);
+			table.setTableName("Table1");
+			double width1 = table.getColumnByIndex(0).getWidth();
+			table = Table.newTable(odsDoc);
+			table.setTableName("Table2");
+			//set the table size as 20*20.
+			table.getCellByPosition(19, 19);
+			double width2 = table.getColumnByIndex(0).getWidth();
+			Assert.assertEquals(width1, width2);
+			odsDoc.save("C:\\o.ods");
+		} catch (Exception e) {
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
 
 	@Test
 	public void testNewTableWithArrayData() {
