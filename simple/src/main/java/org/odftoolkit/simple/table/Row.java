@@ -624,7 +624,7 @@ public class Row {
 		}
 		// add a single cell element to describe cells.
 		OdfName tableCellNameSpace = OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell");
-		if (table.isDescribedBySingleElement()) {
+		if (table.isUseRepeat()) {
 			TableTableCellElement newCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(
 					(OdfFileDom) maRowElement.getOwnerDocument(), tableCellNameSpace);
 			newCell.setTableStyleNameAttribute(preCell.getStyleName());
@@ -668,7 +668,7 @@ public class Row {
 	 */
 	private void insertCellElementBefore(OdfElement parentEle, TableTableCellElementBase positionEle,
 			TableTableCellElementBase cellEle, int count) {
-		boolean isDescribedBySingleElement = getTable().isDescribedBySingleElement();
+		boolean isDescribedBySingleElement = getTable().isUseRepeat();
 		if (positionEle == null) {
 			parentEle.appendChild(cellEle);
 			if (isDescribedBySingleElement && count > 1) {

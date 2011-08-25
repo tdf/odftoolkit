@@ -1198,4 +1198,26 @@ public class TableCellTest {
 		fcell = table.getCellByPosition(columnindex, rowindex);
 		Assert.assertEquals(expectedNote, fcell.getNoteText());
 	}
+	
+	@Test
+	public void testGetSetImage() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Table table = Table.newTable(doc, 2, 2);
+			table.setTableName("ImageTable");
+			Cell cell = table.getCellByPosition(0, 0);
+			cell.setImage(ResourceUtilities.getURI("image_list_item.png"));
+			doc.save(ResourceUtilities.newTestOutputFile("ImageCellTable.odt"));
+			
+			// load the document again.
+			doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("ImageCellTable.odt"));
+			table = doc.getTableByName("ImageTable");
+			cell = table.getCellByPosition(0, 0);
+			//image height = 34 pixels.
+			Assert.assertEquals(34, cell.getImage().getHeight(null));
+		} catch (Exception e) {
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
 }

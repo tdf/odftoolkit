@@ -21,6 +21,10 @@
  ************************************************************************/
 package org.odftoolkit.simple.table;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import java.net.URI;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,6 +37,8 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
+
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoTextAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
@@ -40,6 +46,8 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberCurrencySymbolElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTextElement;
@@ -58,6 +66,8 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberCurrencyStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberPercentageStyle;
@@ -70,6 +80,7 @@ import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.Document;
@@ -86,6 +97,7 @@ import org.odftoolkit.simple.text.list.AbstractListContainer;
 import org.odftoolkit.simple.text.list.ListContainer;
 import org.odftoolkit.simple.text.list.ListDecorator;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * Cell represents table cell feature in ODF document.
@@ -129,7 +141,7 @@ public class Cell implements ListContainer {
 	 */
 	private static final int DEFAULT_COLUMNS_REPEATED_NUMBER = 1;
 	private ListContainerImpl listContainerImpl;
-	
+
 	Cell(TableTableCellElementBase odfElement, int repeatedColIndex, int repeatedRowIndex) {
 		mCellElement = odfElement;
 		mnRepeatedColIndex = repeatedColIndex;
@@ -2000,7 +2012,7 @@ public class Cell implements ListContainer {
 	public Border getBorder(CellBordersType type) {
 		return getStyleHandler().getBorder(type);
 	}
-	
+
 	/**
 	 * Get the note text of this table cell. If there is no note on this cell,
 	 * <code>null</code> will be returned.
@@ -2019,14 +2031,14 @@ public class Cell implements ListContainer {
 			while (n != null) {
 				Node m = n.getNextSibling();
 				if (n instanceof TextPElement || n instanceof TextListElement) {
-					noteString += TextExtractor.getText((OdfElement)n);
+					noteString += TextExtractor.getText((OdfElement) n);
 				}
 				n = m;
 			}
 		}
 		return noteString;
 	}
-	
+
 	/**
 	 * Set note text for this table cell. This method creates a text paragraph
 	 * without style as note. The note text is text paragraph content.
@@ -2039,7 +2051,7 @@ public class Cell implements ListContainer {
 	 *            note content.
 	 */
 	public void setNoteText(String note) {
-		splitRepeatedCells();	
+		splitRepeatedCells();
 		OfficeAnnotationElement annotation = OdfElement.findFirstChildNode(OfficeAnnotationElement.class, mCellElement);
 		if (annotation == null) {
 			OdfFileDom dom = (OdfFileDom) mCellElement.getOwnerDocument();
@@ -2064,6 +2076,87 @@ public class Cell implements ListContainer {
 		dcDateElement.setTextContent(dcDate);
 		mCellElement.appendChild(annotation);
 	}
+
+	/**
+	 * Insert an Image from the specified uri to cell. Note: if there is any
+	 * other text content in this cell, it will be removed.
+	 * 
+	 * @param imageUri
+	 *            The URI of the image that will be added to the cell, add image
+	 *            stream to the package, in the 'Pictures/' graphic directory
+	 *            with the same image file name as in the URI. If the imageURI
+	 *            is relative first the user.dir is taken to make it absolute.
+	 * @since 0.4.5
+	 */
+	public void setImage(URI imageUri) {
+		splitRepeatedCells();
+		try {
+			NodeList cellPs = mCellElement.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
+			if (cellPs != null && cellPs.getLength() > 0) {
+				for (int i = 0; i < cellPs.getLength(); i++) {
+					mCellElement.removeChild(cellPs.item(i));
+				}
+			}
+			OdfFileDom dom = (OdfFileDom) mCellElement.getOwnerDocument();
+			TextPElement pElement = dom.newOdfElement(TextPElement.class);
+			mCellElement.appendChild(pElement);
+			if (imageUri != null) {
+				OdfDrawFrame drawFrame = dom.newOdfElement(OdfDrawFrame.class);
+				pElement.appendChild(drawFrame);
+				drawFrame.setTextAnchorTypeAttribute("paragraph");
+				OdfDrawImage imageEle = (OdfDrawImage) drawFrame.newDrawImageElement();
+				String packagePath = imageEle.newImage(imageUri);
+				OdfPackage mOdfPackage = dom.getDocument().getPackage();
+				InputStream is = mOdfPackage.getInputStream(packagePath);
+				BufferedImage image = ImageIO.read(is);
+				int height = image.getHeight(null);
+				int width = image.getWidth(null);
+				long widthInMI = new Double((Math.round(10000.0 * width / 1.0 * 0.28) / 10000.0)).longValue();
+				Column column = getTableColumn();
+				if(widthInMI > column.getWidth()){
+					column.setWidth(widthInMI);
+				}
+				
+				long heightInMI = new Double((Math.round(10000.0 * height / 1.0 * 0.28) / 10000.0)).longValue();
+				Row row = getTableRow();
+				if(heightInMI>row.getHeight()){
+					row.setHeight(heightInMI, false);
+				}
+			}
+		} catch (Exception ex) {
+			Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+	
+	/**
+	 * Get the Image from the specified cell.
+	 * 
+	 * @return If there is a image exist in this cell, An {@link java.awt.Image
+	 *         Image} will be returned.
+	 * @since 0.4.5
+	 */
+	public Image getImage() {
+		try {
+			TextPElement pElement = OdfElement.findFirstChildNode(TextPElement.class, mCellElement);
+			if (pElement != null) {
+				DrawFrameElement drawFrame = OdfElement.findFirstChildNode(DrawFrameElement.class, pElement);
+				if (drawFrame != null) {
+					DrawImageElement imageElement = OdfElement.findFirstChildNode(DrawImageElement.class, drawFrame);
+					if (imageElement != null) {
+						String packagePath = imageElement.getXlinkHrefAttribute();
+						OdfFileDom dom = (OdfFileDom) mCellElement.getOwnerDocument();
+						OdfPackage mOdfPackage = dom.getDocument().getPackage();
+						InputStream is = mOdfPackage.getInputStream(packagePath);
+						BufferedImage image = ImageIO.read(is);
+						return image;
+					}
+				}
+			}
+		} catch (Exception ex) {
+			Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
 	
 	/**
 	 * Return style handler for this cell
@@ -2084,18 +2177,20 @@ public class Cell implements ListContainer {
 
 	public org.odftoolkit.simple.text.list.List addList() {
 		Document ownerDocument = getTable().getOwnerDocument();
-		if(ownerDocument instanceof SpreadsheetDocument){
-			throw new UnsupportedOperationException("Open Office and Symphony can't show a list in spreadsheet document cell.");
-		}else{
+		if (ownerDocument instanceof SpreadsheetDocument) {
+			throw new UnsupportedOperationException(
+					"Open Office and Symphony can't show a list in spreadsheet document cell.");
+		} else {
 			return getListContainerImpl().addList();
 		}
 	}
-	
+
 	public org.odftoolkit.simple.text.list.List addList(ListDecorator decorator) {
 		Document ownerDocument = getTable().getOwnerDocument();
-		if(ownerDocument instanceof SpreadsheetDocument){
-			throw new UnsupportedOperationException("Open Office and Symphony can't show a list in spreadsheet document cell.");
-		}else{
+		if (ownerDocument instanceof SpreadsheetDocument) {
+			throw new UnsupportedOperationException(
+					"Open Office and Symphony can't show a list in spreadsheet document cell.");
+		} else {
 			return getListContainerImpl().addList(decorator);
 		}
 	}
@@ -2111,7 +2206,7 @@ public class Cell implements ListContainer {
 	public boolean removeList(org.odftoolkit.simple.text.list.List list) {
 		return getListContainerImpl().removeList(list);
 	}
-	
+
 	private ListContainerImpl getListContainerImpl() {
 		if (listContainerImpl == null) {
 			listContainerImpl = new ListContainerImpl();

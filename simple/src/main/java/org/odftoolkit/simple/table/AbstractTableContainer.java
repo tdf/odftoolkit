@@ -57,7 +57,25 @@ public abstract class AbstractTableContainer implements TableContainer {
 	public Table addTable() {
 		return Table.newTable(this);
 	}
-
+	
+	/**
+	 * Add a new Table to this container with a specified row number and column
+	 * number.
+	 * <p>
+	 * The table will be inserted at the end of the tableContainer. An unique
+	 * table name will be given, you may set a custom table name using the
+	 * <code>setTableName</code> method.
+	 * 
+	 * @param numRows
+	 *            the row number
+	 * @param numCols
+	 *            the column number
+	 * @return a new instance of <code>Table</code>
+	 */
+	public Table addTable(int numRows, int numCols) {
+		return Table.newTable(this, numRows, numCols);
+	}
+	
 	/**
 	 * Return an instance of table feature with the specific table name.
 	 * 

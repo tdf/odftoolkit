@@ -378,6 +378,10 @@ public class Slide implements ListContainer, TableContainer {
 		return getTableContainerImpl().addTable();
 	}
 
+	public Table addTable(int numRows, int numCols) {
+		return getTableContainerImpl().addTable(numRows, numCols);
+	}
+	
 	public Table getTableByName(String name) {
 		return getTableContainerImpl().getTableByName(name);
 	}

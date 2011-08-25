@@ -663,10 +663,10 @@ public class SlideTest {
 			table.setTableName("SlideTable");
 			String slideTableCellValue = "SlideTable Cell String";
 			table.getCellByPosition(0, 0).setStringValue(slideTableCellValue);
-			doc.save("SlideTableOutput.odp");
+			doc.save(ResourceUtilities.newTestOutputFile("SlideTableOutput.odp"));
 			
 			//load 
-			doc = PresentationDocument.loadDocument("SlideTableOutput.odp");
+			doc = PresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("SlideTableOutput.odp"));
 			Assert.assertEquals(slideTableCellValue, table.getCellByPosition(0, 0).getStringValue());
 
 		} catch (Exception e) {

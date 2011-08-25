@@ -2380,7 +2380,11 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	public Table addTable() {
 		return getTableContainerImpl().addTable();
 	}
-
+	
+	public Table addTable(int numRows, int numCols) {
+		return getTableContainerImpl().addTable(numRows, numCols);
+	}
+	
 	public Table getTableByName(String name) {
 		return getTableContainerImpl().getTableByName(name);
 	}

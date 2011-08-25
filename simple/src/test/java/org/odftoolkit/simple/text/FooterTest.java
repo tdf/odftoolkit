@@ -24,7 +24,10 @@ package org.odftoolkit.simple.text;
 import junit.framework.Assert;
 
 import org.junit.Test;
+import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
+import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
@@ -39,12 +42,15 @@ public class FooterTest {
 			Footer footer = doc.getFooter();
 			Assert.assertNotNull(footer);
 
-			Table table = Table.newTable(footer, 1, 1);
+			Table table = footer.addTable(1, 1);
 			table.setTableName("footerTable");
 			int rowCount = table.getRowCount();
 			int columnCount = table.getColumnCount();
 			String expectedCellValue = "footer table cell";
-			table.getCellByPosition(0, 0).setStringValue(expectedCellValue);
+			Cell cellByPosition = table.getCellByPosition(0, 0);
+			cellByPosition.setStringValue(expectedCellValue);
+			cellByPosition.setHorizontalAlignment(HorizontalAlignmentType.CENTER);
+			cellByPosition.setCellBackgroundColor(Color.GREEN);
 			doc.save(ResourceUtilities.newTestOutputFile(footerDocumentPath));
 
 			// load the document again.
@@ -53,7 +59,7 @@ public class FooterTest {
 			table = footer.getTableByName("footerTable");
 			Assert.assertEquals(rowCount, table.getRowCount());
 			Assert.assertEquals(columnCount, table.getColumnCount());
-			Assert.assertEquals(expectedCellValue, table.getCellByPosition(0, 0).getStringValue());
+			Assert.assertEquals(expectedCellValue, cellByPosition.getStringValue());
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();

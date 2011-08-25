@@ -422,7 +422,7 @@ public class TableTest {
 	public void testInsertColumnBefore() throws Exception {
 		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
 		Table table1 = mOdtDoc.getTableByName("Table3");
-		table1.setDescribedBySingleElement(false);
+		table1.setUseRepeat(false);
 		CellRange range = table1.getCellRangeByPosition(0, 1, 1, 2);
 		range.merge();
 
@@ -1001,7 +1001,7 @@ public class TableTest {
 			//default appended rows described by single element
 			Assert.assertSame(row10.getOdfElement(), row11.getOdfElement());
 			
-			table.setDescribedBySingleElement(false);
+			table.setUseRepeat(false);
 			table.appendRows(12);
 			Row row20 = table.getRowByIndex(20);
 			Row row21 = table.getRowByIndex(21);
@@ -1031,7 +1031,7 @@ public class TableTest {
 			Assert.assertSame(column10.getOdfElement(), column11.getOdfElement());
 			Assert.assertSame(cell10.getOdfElement(), cell11.getOdfElement());
 			
-			table.setDescribedBySingleElement(false);
+			table.setUseRepeat(false);
 			table.appendColumns(12);
 			Column column20 = table.getColumnByIndex(20);
 			Column column21 = table.getColumnByIndex(21);

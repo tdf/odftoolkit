@@ -65,7 +65,7 @@ import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.type.Length.Unit;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
-import org.odftoolkit.simple.Document.OdfMediaType;
+import org.odftoolkit.simple.TextDocument;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -778,7 +778,7 @@ public class Table {
 		OdfElement containerElement = container.getTableContainerElement();
 		OdfFileDom dom = (OdfFileDom) containerElement.getOwnerDocument();
 		
-		boolean isSpreadsheet = document instanceof SpreadsheetDocument;
+		boolean isTextDocument = document instanceof TextDocument;
 
 		// check arguments
 		if (numRows < 1 || numCols < 1 || headerRowNumber < 0 || headerColumnNumber < 0 || headerRowNumber > numRows
@@ -805,7 +805,7 @@ public class Table {
 		OdfStyle columnStyle = styles.newStyle(OdfStyleFamily.TableColumn);
 		String columnStylename = columnStyle.getStyleNameAttribute();
 		// for spreadsheet document, no need compute column width.
-		if (!isSpreadsheet) {
+		if (isTextDocument) {
 			columnStyle.setProperty(StyleTableColumnPropertiesElement.ColumnWidth, IN_FORMAT.format(DEFAULT_TABLE_WIDTH
 					/ numCols)
 					+ "in");
@@ -842,7 +842,7 @@ public class Table {
 		// 3.0 create 4 kinds of styles
 		OdfStyle lefttopStyle = null, leftbottomStyle = null, righttopStyle = null, rightbottomStyle = null;
 
-		if (!document.getMediaTypeString().equals(OdfMediaType.SPREADSHEET.getMediaTypeString())) {
+		if (isTextDocument) {
 			lefttopStyle = styles.newStyle(OdfStyleFamily.TableCell);
 			setLeftTopBorderStyleProperties(lefttopStyle);
 
@@ -866,7 +866,7 @@ public class Table {
 				for (int j = 0; j < numCols; j++) {
 					TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom, OdfName
 							.newName(OdfDocumentNamespace.TABLE, "table-cell"));
-					if (!isSpreadsheet) {
+					if (isTextDocument) {
 						if ((j + 1 == numCols) && (i == 0)) {
 							aCell.setStyleName(righttopStyle.getStyleNameAttribute());
 						} else if (i == 0) {
@@ -891,7 +891,7 @@ public class Table {
 			for (int j = 0; j < numCols; j++) {
 				TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
 						OdfDocumentNamespace.TABLE, "table-cell"));
-				if (!isSpreadsheet) {
+				if (isTextDocument) {
 					if ((j + 1 == numCols) && (i == 0)) {
 						aCell.setStyleName(righttopStyle.getStyleNameAttribute());
 					} else if (i == 0) {
@@ -1290,7 +1290,7 @@ public class Table {
 		if (rowCount <= 0) {
 			return resultList;
 		}
-		if (isDescribedBySingleElement()) {
+		if (isUseRepeat()) {
 			Row firstRow = appendRow();
 			resultList.add(firstRow);
 			if (rowCount > 1) {
@@ -1454,7 +1454,7 @@ public class Table {
 			}
 			i += refCell.getColumnsRepeatedNumber();
 		}
-		if (isDescribedBySingleElement()) {
+		if (isUseRepeat()) {
 			firstRow.setRowsRepeatedNumber(count);
 			while (j < count) {
 				resultList.add(getRowInstance(rowEle, j));
@@ -1601,7 +1601,7 @@ public class Table {
 			refColumn = getColumnByIndex(index);
 			positionCol = refColumn;
 			// add a single column element to describe columns.
-			if (isDescribedBySingleElement()) {
+			if (isUseRepeat()) {
 				TableTableColumnElement newColumnEle = (TableTableColumnElement) refColumn.getOdfElement().cloneNode(
 						true);
 				if (columnCount > 1) {
@@ -1644,7 +1644,7 @@ public class Table {
 			int repeatedCount = column.getTableNumberColumnsRepeatedAttribute();
 			TableTableColumnElement columnEle = positionCol.getOdfElement();
 			// add a single column element to describe columns.
-			if (isDescribedBySingleElement()) {
+			if (isUseRepeat()) {
 				column.setTableNumberColumnsRepeatedAttribute(repeatedCount + columnCount);
 				Column startCol = getColumnInstance(positionCol.getOdfElement(), 0);
 				for (int i = repeatedCount + columnCount - 1; i >= columnCount + (index - startCol.getColumnIndex()); i--) {
@@ -1684,7 +1684,7 @@ public class Table {
 			}
 		} else {
 			// add a single column element to describe columns.
-			if (isDescribedBySingleElement()) {
+			if (isUseRepeat()) {
 				TableTableColumnElement newColumnEle = (TableTableColumnElement) refColumn.getOdfElement().cloneNode(
 						true);
 				if (columnCount > 1) {
@@ -2311,7 +2311,7 @@ public class Table {
 	 * @return true if the new created columns/rows/cells are described by a
 	 *         single element when it's possible.
 	 * 
-	 * @see #setDescribedBySingleElement(boolean)
+	 * @see #setUseRepeat(boolean)
 	 * @see #appendColumns(int)
 	 * @see #appendRows(int)
 	 * @see #insertColumnsBefore(int, int)
@@ -2326,7 +2326,7 @@ public class Table {
 	 * 
 	 * @since 0.4.5
 	 */
-	public boolean isDescribedBySingleElement() {
+	public boolean isUseRepeat() {
 		return mIsDescribedBySingleElement;
 	}
 
@@ -2356,7 +2356,7 @@ public class Table {
 	 *            columns/rows/cells are described by a single element, if
 	 *            possible.
 	 * 
-	 * @see #isDescribedBySingleElement()
+	 * @see #isUseRepeat()
 	 * @see #appendColumns(int)
 	 * @see #appendRows(int)
 	 * @see #insertColumnsBefore(int, int)
@@ -2371,7 +2371,7 @@ public class Table {
 	 * 
 	 * @since 0.4.5
 	 */
-	public void setDescribedBySingleElement(boolean isSingle) {
+	public void setUseRepeat(boolean isSingle) {
 		mIsDescribedBySingleElement = isSingle;
 	}
 

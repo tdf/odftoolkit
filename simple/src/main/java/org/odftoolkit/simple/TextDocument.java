@@ -24,20 +24,19 @@ package org.odftoolkit.simple;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.OdfStylesDom;
+import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
@@ -364,7 +363,7 @@ public class TextDocument extends Document implements ListContainer {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Get the header of this text document.
 	 * 
@@ -374,7 +373,7 @@ public class TextDocument extends Document implements ListContainer {
 	public Header getHeader() {
 		if (header == null) {
 			try {
-				StyleMasterPageElement masterPageElement = getMasterPages().get("Standard");
+				StyleMasterPageElement masterPageElement = getStandardMasterPage();
 				StyleHeaderElement headerElement = OdfElement.findFirstChildNode(StyleHeaderElement.class,
 						masterPageElement);
 				if (headerElement == null) {
@@ -397,7 +396,7 @@ public class TextDocument extends Document implements ListContainer {
 	public Footer getFooter() {
 		if (footer == null) {
 			try {
-				StyleMasterPageElement masterPageElement = getMasterPages().get("Standard");
+				StyleMasterPageElement masterPageElement = getStandardMasterPage();
 				StyleFooterElement footerElement = OdfElement.findFirstChildNode(StyleFooterElement.class,
 						masterPageElement);
 				if (footerElement == null) {
@@ -410,7 +409,7 @@ public class TextDocument extends Document implements ListContainer {
 		}
 		return footer;
 	}
-	
+
 	public OdfElement getTableContainerElement() {
 		return getTableContainerImpl().getTableContainerElement();
 	}
@@ -458,25 +457,32 @@ public class TextDocument extends Document implements ListContainer {
 			return containerElement;
 		}
 	}
-	
-	private Map<String, StyleMasterPageElement> getMasterPages() throws Exception {
-		OdfStylesDom stylesDoc = getStylesDom();
+
+	private StyleMasterPageElement getStandardMasterPage() throws Exception {
+		OfficeDocumentStylesElement rootElement = getStylesDom().getRootElement();
 		OfficeMasterStylesElement masterStyles = OdfElement.findFirstChildNode(OfficeMasterStylesElement.class,
-				stylesDoc.getRootElement());
-		Map<String, StyleMasterPageElement> masterPages = null;
-		if (masterStyles != null) {
-			NodeList lstMasterPages = stylesDoc.getElementsByTagNameNS(OdfDocumentNamespace.STYLE.getUri(),
-					"master-page");
-			if (lstMasterPages != null && lstMasterPages.getLength() > 0) {
-				masterPages = new HashMap<String, StyleMasterPageElement>();
-				for (int i = 0; i < lstMasterPages.getLength(); i++) {
-					StyleMasterPageElement masterPage = (StyleMasterPageElement) lstMasterPages.item(i);
-					String styleName = masterPage.getStyleNameAttribute();
-					masterPages.put(styleName, masterPage);
+				rootElement);
+		if (masterStyles == null) {
+			masterStyles = rootElement.newOfficeMasterStylesElement();
+		}
+		StyleMasterPageElement masterPageEle = null;
+		NodeList lastMasterPages = masterStyles.getElementsByTagNameNS(OdfDocumentNamespace.STYLE.getUri(),
+				"master-page");
+		if (lastMasterPages != null && lastMasterPages.getLength() > 0) {
+			for (int i = 0; i < lastMasterPages.getLength(); i++) {
+				StyleMasterPageElement masterPage = (StyleMasterPageElement) lastMasterPages.item(i);
+				String styleName = masterPage.getStyleNameAttribute();
+				if ("Standard".equals(styleName)) {
+					masterPageEle = masterPage;
+					break;
 				}
 			}
 		}
-		return masterPages;
+		if (masterPageEle == null) {
+			OdfStylePageLayout layout = OdfElement.findFirstChildNode(OdfStylePageLayout.class, getStylesDom()
+					.getAutomaticStyles());
+			masterPageEle = masterStyles.newStyleMasterPageElement("Standard", layout.getStyleNameAttribute());
+		}
+		return masterPageEle;
 	}
-
 }

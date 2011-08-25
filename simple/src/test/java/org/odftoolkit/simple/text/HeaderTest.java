@@ -25,6 +25,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
@@ -38,22 +39,26 @@ public class HeaderTest {
 			TextDocument doc = TextDocument.newTextDocument();
 			Header header = doc.getHeader();
 			Assert.assertNotNull(header);
-			
+
 			Table table = header.addTable();
 			table.setTableName("headerTable");
 			int rowCount = table.getRowCount();
 			int columnCount = table.getColumnCount();
 			String expectedCellValue = "header table cell";
 			table.getCellByPosition(1, 1).setStringValue(expectedCellValue);
+			Cell cell = table.getCellByPosition(4, 0);
+			cell.setImage(ResourceUtilities.getURI("image_list_item.png"));
 			doc.save(ResourceUtilities.newTestOutputFile(headerDocumentPath));
 			
-			//load the document again.
+			// load the document again.
 			doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(headerDocumentPath));
 			header = doc.getHeader();
 			table = header.getTableByName("headerTable");
 			Assert.assertEquals(rowCount, table.getRowCount());
 			Assert.assertEquals(columnCount, table.getColumnCount());
 			Assert.assertEquals(expectedCellValue, table.getCellByPosition(1, 1).getStringValue());
+			cell = table.getCellByPosition(4, 0);
+			Assert.assertEquals(34, cell.getImage().getHeight(null));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
