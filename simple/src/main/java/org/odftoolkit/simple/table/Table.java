@@ -2,7 +2,7 @@
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
- * Copyright 2009, 2010 IBM. All rights reserved.
+ * Copyright 2009, 2010, 2011 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -25,6 +25,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
@@ -2035,7 +2036,19 @@ public class Table extends Component {
 		}
 		return list;
 	}
-
+	
+	/**
+	 * Return an Iterator of the column in this table.
+	 * 
+	 * @return an Iterator of the column in this table.
+	 * @see java.util.Iterator
+	 * 
+	 * @since 0.5.5
+	 */
+	public Iterator<Column> getColumnIterator(){
+		return new SimpleColumnIterator(this);
+	}
+	
 	/**
 	 * Return a list of table rows in the current table.
 	 * 
@@ -2065,7 +2078,19 @@ public class Table extends Component {
 		}
 		return list;
 	}
-
+	
+	/**
+	 * Return an Iterator of the row in this table.
+	 * 
+	 * @return an Iterator of the row in this table.
+	 * @see java.util.Iterator
+	 * 
+	 * @since 0.5.5
+	 */
+	public Iterator<Row> getRowIterator(){
+		return new SimpleRowIterator(this);
+	}
+	
 	/**
 	 * Get the column at the specified index. The table will be automatically
 	 * expanded, when the given index is outside of the original table.
@@ -3033,6 +3058,197 @@ public class Table extends Component {
 				updateCellRepository(cell.getOdfElement(), cell.mnRepeatedColIndex, cell.mnRepeatedRowIndex,
 						newCellEle, cell.mnRepeatedColIndex, cell.mnRepeatedRowIndex);
 			}
+		}
+	}
+	
+	// default iterator to iterate column item.
+	private class SimpleColumnIterator implements Iterator<Column> {
+		private Table ownerTable;
+		private TableTableColumnElement nextColumnElement;
+		private TableTableColumnElement tempColumnElement;
+		private int columnsRepeatedIndex = -1;
+		private int columnsRepeatedNumber = 0;
+
+		private SimpleColumnIterator(Table owner) {
+			ownerTable = owner;
+		}
+
+		public boolean hasNext() {
+			tempColumnElement = findNext(nextColumnElement);
+			return (tempColumnElement != null);
+		}
+
+		public Column next() {
+			if (tempColumnElement != null) {
+				nextColumnElement = tempColumnElement;
+				tempColumnElement = null;
+			} else {
+				nextColumnElement = findNext(nextColumnElement);
+			}
+			if (nextColumnElement == null) {
+				return null;
+			} else {
+				return getColumnInstance(nextColumnElement, columnsRepeatedIndex);
+			}
+		}
+
+		public void remove() {
+			if (nextColumnElement == null) {
+				throw new IllegalStateException("please call next() first.");
+			}
+			Column column = getColumnInstance(nextColumnElement, columnsRepeatedIndex);
+			ownerTable.removeColumnsByIndex(column.getColumnIndex(), 1);
+		}
+
+		private TableTableColumnElement findNext(TableTableColumnElement nextColumnElement) {
+			tempColumnElement = null;
+			columnsRepeatedIndex++;
+			if ((columnsRepeatedNumber > 0) && (columnsRepeatedIndex < columnsRepeatedNumber)) {
+				tempColumnElement = nextColumnElement;
+			} else {
+				Node child = null;
+				if (nextColumnElement == null) {
+					child = ownerTable.getOdfElement().getFirstChild();
+					while (child != null) {
+						if (child instanceof TableTableHeaderColumnsElement) {
+							TableTableHeaderColumnsElement headers = (TableTableHeaderColumnsElement) child;
+							Node header = headers.getFirstChild();
+							while (header != null) {
+								if (header instanceof TableTableColumnElement) {
+									tempColumnElement = (TableTableColumnElement) header;
+									break;
+								}
+								header = header.getNextSibling();
+							}
+							if (tempColumnElement != null) {
+								break;
+							}
+						}
+						if (child instanceof TableTableColumnElement) {
+							tempColumnElement = (TableTableColumnElement) child;
+							break;
+						}
+						child = child.getNextSibling();
+					}
+				} else {
+					child = nextColumnElement.getNextSibling();
+					if (child != null) {
+						if (child instanceof TableTableColumnElement) {
+							tempColumnElement = (TableTableColumnElement) child;
+						}
+					} else {
+						Node parentNode = nextColumnElement.getParentNode();
+						if (parentNode instanceof TableTableHeaderColumnsElement) {
+							parentNode = parentNode.getNextSibling();
+							if ((parentNode != null) && (parentNode instanceof TableTableColumnElement)) {
+								child = parentNode;
+								tempColumnElement = (TableTableColumnElement) child;
+							}
+						}
+					}
+				}
+				if (tempColumnElement != null) {
+					columnsRepeatedNumber = tempColumnElement.getTableNumberColumnsRepeatedAttribute();
+					columnsRepeatedIndex = 0;
+				}
+			}
+			return tempColumnElement;
+		}
+	}
+	
+	// default iterator to iterate row item.
+	private class SimpleRowIterator implements Iterator<Row> {
+		
+		private Table ownerTable;
+		private TableTableRowElement nextRowElement;
+		private TableTableRowElement tempRowElement;
+		private int rowsRepeatedIndex = -1;
+		private int rowsRepeatedNumber = 0;
+
+		private SimpleRowIterator(Table owner) {
+			ownerTable = owner;
+		}
+
+		public boolean hasNext() {
+			tempRowElement = findNext(nextRowElement);
+			return (tempRowElement != null);
+		}
+
+		public Row next() {
+			if (tempRowElement != null) {
+				nextRowElement = tempRowElement;
+				tempRowElement = null;
+			} else {
+				nextRowElement = findNext(nextRowElement);
+			}
+			if (nextRowElement == null) {
+				return null;
+			} else {
+				return getRowInstance(nextRowElement, rowsRepeatedIndex);
+			}
+		}
+
+		public void remove() {
+			if (nextRowElement == null) {
+				throw new IllegalStateException("please call next() first.");
+			}
+			Row row = getRowInstance(nextRowElement, rowsRepeatedIndex);
+			ownerTable.removeRowsByIndex(row.getRowIndex(), 1);
+		}
+
+		private TableTableRowElement findNext(TableTableRowElement nextRowElement) {
+			tempRowElement = null;
+			rowsRepeatedIndex++;
+			if ((rowsRepeatedNumber > 0) && (rowsRepeatedIndex < rowsRepeatedNumber)) {
+				tempRowElement = nextRowElement;
+			} else {
+				Node child = null;
+				if (nextRowElement == null) {
+					child = ownerTable.getOdfElement().getFirstChild();
+					while (child != null) {
+						if (child instanceof TableTableHeaderRowsElement) {
+							TableTableHeaderRowsElement headers = (TableTableHeaderRowsElement) child;
+							Node header = headers.getFirstChild();
+							while (header != null) {
+								if (header instanceof TableTableRowElement) {
+									tempRowElement = (TableTableRowElement) header;
+									break;
+								}
+								header = header.getNextSibling();
+							}
+							if (tempRowElement != null) {
+								break;
+							}
+						}
+						if (child instanceof TableTableRowElement) {
+							tempRowElement = (TableTableRowElement) child;
+							break;
+						}
+						child = child.getNextSibling();
+					}
+				} else {
+					child = nextRowElement.getNextSibling();
+					if (child != null) {
+						if (child instanceof TableTableRowElement) {
+							tempRowElement = (TableTableRowElement) child;
+						}
+					} else {
+						Node parentNode = nextRowElement.getParentNode();
+						if (parentNode instanceof TableTableHeaderRowsElement) {
+							parentNode = parentNode.getNextSibling();
+							if ((parentNode != null) && (parentNode instanceof TableTableRowElement)) {
+								child = parentNode;
+								tempRowElement = (TableTableRowElement) child;
+							}
+						}
+					}
+				}
+				if (tempRowElement != null) {
+					rowsRepeatedNumber = tempRowElement.getTableNumberRowsRepeatedAttribute();
+					rowsRepeatedIndex = 0;
+				}
+			}
+			return tempRowElement;
 		}
 	}
 }

@@ -23,6 +23,7 @@ package org.odftoolkit.simple.table;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -556,15 +557,29 @@ public class TableTest {
 					}
 				}
 			}
-
+			
 			for (int i = 1; i < columns.size(); i++) {
 				tmpColumn = columns.get(i);
 				// each column's first cell is the column header
 				Assert.assertEquals(columnlabels[i - 1], tmpColumn.getCellByIndex(0).getStringValue());
 			}
 			Assert.assertEquals(columncount, columns.size() - 1);
-
 			Assert.assertEquals("", columns.get(0).getCellByIndex(0).getStringValue());
+			
+			//test table column iterator
+			Iterator<Column> columnIterator = table.getColumnIterator();
+			int columnNumber =0;
+			if(columnIterator.hasNext()){
+				Column column = columnIterator.next();
+				Assert.assertEquals("", column.getCellByIndex(0).getStringValue());
+				columnNumber++;
+			}
+			while(columnIterator.hasNext()){
+				Column column = columnIterator.next();
+				Assert.assertEquals(columnlabels[columnNumber-1], column.getCellByIndex(0).getStringValue());
+				columnNumber++;
+			}
+			Assert.assertEquals(columnNumber, columns.size());
 
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
@@ -612,8 +627,22 @@ public class TableTest {
 				Assert.assertEquals(rowlabels[i - 1], tmpRow.getCellByIndex(0).getStringValue());
 			}
 			Assert.assertEquals(rowcount, rows.size() - 1);
-
 			Assert.assertEquals("", rows.get(0).getCellByIndex(0).getStringValue());
+			
+			//test table row iterator
+			Iterator<Row> rowIterator = table.getRowIterator();
+			int rowNumber =0;
+			if(rowIterator.hasNext()){
+				Row row = rowIterator.next();
+				Assert.assertEquals("", row.getCellByIndex(0).getStringValue());
+				rowNumber++;
+			}
+			while(rowIterator.hasNext()){
+				Row row = rowIterator.next();
+				Assert.assertEquals(rowlabels[rowNumber-1], row.getCellByIndex(0).getStringValue());
+				rowNumber++;
+			}
+			Assert.assertEquals(rowNumber, rows.size());
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
