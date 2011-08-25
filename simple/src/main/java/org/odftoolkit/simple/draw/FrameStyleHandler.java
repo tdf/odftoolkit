@@ -21,13 +21,19 @@
  ************************************************************************/
 package org.odftoolkit.simple.draw;
 
+import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.type.Color;
+import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.style.Border;
 import org.odftoolkit.simple.style.DefaultStyleHandler;
 import org.odftoolkit.simple.style.GraphicProperties;
 import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.FrameHorizontalPosition;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.FrameVerticalPosition;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalRelative;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.OdfDrawFill;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalRelative;
 
 /**
  * This class provides functions to handle the style of a frame.
@@ -118,4 +124,137 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 		GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
 		graphicPropertiesForWrite.setStyleRunThrough(isBackgroundFrame);
 	}
+	
+	/**
+	 * Set how a frame is bound to a text document. Default position relative and alignment will be set.
+	 * 
+	 * <p>If the document is not text document, nothing will happen.
+	 * @param achorType - the point at which a frame is bound to a text document
+	 */
+	public void setAchorType(StyleTypeDefinitions.AnchorType achorType)
+	{
+		if (!mDocument.getMediaTypeString().equals(Document.OdfMediaType.TEXT.toString()) &&
+				!mDocument.getMediaTypeString().equals(Document.OdfMediaType.TEXT_TEMPLATE.toString()))
+			return;
+		GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
+
+		DrawFrameElement frameElement = (DrawFrameElement)mOdfElement;
+		frameElement.setTextAnchorTypeAttribute(achorType.toString());
+		
+		//set default relative
+		switch(achorType)
+		{
+		case AS_CHARACTER:
+			graphicPropertiesForWrite.setVerticalRelative(VerticalRelative.BASELINE);
+			graphicPropertiesForWrite.setVerticalPosition(FrameVerticalPosition.TOP);
+			break;
+		case TO_CHARACTER:
+			graphicPropertiesForWrite.setVerticalRelative(VerticalRelative.PARAGRAPH);
+			graphicPropertiesForWrite.setVerticalPosition(FrameVerticalPosition.TOP);
+			graphicPropertiesForWrite.setHorizontalRelative(HorizontalRelative.PARAGRAPH);
+			graphicPropertiesForWrite.setHorizontalPosition(FrameHorizontalPosition.CENTER);
+			break;
+		case TO_PAGE:
+			graphicPropertiesForWrite.setVerticalRelative(VerticalRelative.PAGE);
+			graphicPropertiesForWrite.setVerticalPosition(FrameVerticalPosition.TOP);
+			graphicPropertiesForWrite.setHorizontalRelative(HorizontalRelative.PAGE);
+			graphicPropertiesForWrite.setHorizontalPosition(FrameHorizontalPosition.CENTER);
+			break;
+		case TO_PARAGRAPH:
+			graphicPropertiesForWrite.setVerticalRelative(VerticalRelative.PARAGRAPH);
+			graphicPropertiesForWrite.setVerticalPosition(FrameVerticalPosition.TOP);
+			graphicPropertiesForWrite.setHorizontalRelative(HorizontalRelative.PARAGRAPH);
+			graphicPropertiesForWrite.setHorizontalPosition(FrameHorizontalPosition.CENTER);
+			break;
+		case TO_FRAME:
+			break;
+		}
+	}
+	
+	/**
+	 * Set the horizontal position
+	 * 
+	 * @param horizontalPos
+	 *            - the horizontal position
+	 */
+	public void setHorizontalPosition(FrameHorizontalPosition horizontalPos) {
+		GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
+		graphicPropertiesForWrite.setHorizontalPosition(horizontalPos);
+	}
+	
+	/**
+	 * Set the horizontal relative
+	 * 
+	 * @param relative
+	 *            - the horizontal relative
+	 */
+	public void setHorizontalRelative(HorizontalRelative relative)
+	{
+		GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
+		graphicPropertiesForWrite.setHorizontalRelative(relative);
+	}
+	
+	/**
+	 * Set the vertical relative
+	 * 
+	 * @param relative
+	 *            - the vertical relative
+	 */
+	public void setVerticalRelative(VerticalRelative relative)
+	{
+		GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
+		graphicPropertiesForWrite.setVerticalRelative(relative);
+	}
+
+	/**
+	 * Set the vertical position
+	 * 
+	 * @param verticalPos
+	 *            - the vertical position
+	 */
+	public void setVerticalPosition(FrameVerticalPosition verticalPos) {
+		GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
+		graphicPropertiesForWrite.setVerticalPosition(verticalPos);
+	}
+
+	/**
+	 * Return the horizontal position
+	 * 
+	 * @return the horizontal position
+	 */
+	public FrameHorizontalPosition getHorizontalPosition() {
+		GraphicProperties graphicPropertiesForRead = getGraphicPropertiesForRead();
+		return graphicPropertiesForRead.getHorizontalPosition();
+	}
+
+	/**
+	 * Return the vertical position
+	 * 
+	 * @return the vertical position
+	 */
+	public FrameVerticalPosition getVerticalPosition() {
+		GraphicProperties graphicPropertiesForRead = getGraphicPropertiesForRead();
+		return graphicPropertiesForRead.getVerticalPosition();
+	}
+	
+	/**
+	 * Return the vertical relative
+	 * @return the vertical relative
+	 */
+	public VerticalRelative getVerticalRelative()
+	{
+		GraphicProperties graphicPropertiesForRead = getGraphicPropertiesForRead();
+		return graphicPropertiesForRead.getVerticalRelative();
+	}
+	
+	/**
+	 * Return the horizontal relative
+	 * @return the horizontal relative
+	 */
+	public HorizontalRelative getHorizontalRelative()
+	{
+		GraphicProperties graphicPropertiesForRead = getGraphicPropertiesForRead();
+		return graphicPropertiesForRead.getHorizontalRelative();
+	}
+
 }

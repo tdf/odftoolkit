@@ -21,7 +21,6 @@
  ************************************************************************/
 package org.odftoolkit.simple.table;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.net.URI;
@@ -66,8 +65,6 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
-import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
-import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberCurrencyStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberPercentageStyle;
@@ -88,6 +85,9 @@ import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.common.TextExtractor;
 import org.odftoolkit.simple.common.WhitespaceProcessor;
+import org.odftoolkit.simple.draw.FrameContainer;
+import org.odftoolkit.simple.draw.FrameRectangle;
+import org.odftoolkit.simple.draw.Image;
 import org.odftoolkit.simple.style.Border;
 import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.StyleTypeDefinitions;
@@ -109,7 +109,7 @@ import org.w3c.dom.NodeList;
  * Table provides methods to get/set/modify the cell content and cell
  * properties.
  */
-public class Cell extends Component implements ListContainer, ParagraphContainer {
+public class Cell extends Component implements ListContainer, ParagraphContainer, FrameContainer {
 
 	TableTableCellElementBase mCellElement;
 	Document mDocument;
@@ -2094,8 +2094,12 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 *            is relative first the user.dir is taken to make it absolute.
 	 * @since 0.4.5
 	 */
-	public void setImage(URI imageUri) {
+	public Image setImage(URI imageUri) {
+		if (imageUri == null)
+			return null;
+
 		splitRepeatedCells();
+		Image newImage;
 		try {
 			NodeList cellPs = mCellElement.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
 			if (cellPs != null && cellPs.getLength() > 0) {
@@ -2103,35 +2107,36 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 					mCellElement.removeChild(cellPs.item(i));
 				}
 			}
-			OdfFileDom dom = (OdfFileDom) mCellElement.getOwnerDocument();
-			TextPElement pElement = dom.newOdfElement(TextPElement.class);
-			mCellElement.appendChild(pElement);
+
+			if (mOwnerTable.mIsSpreadsheet) {
+				newImage = Image.newImage(this, imageUri);
+			} else {
+				OdfFileDom dom = (OdfFileDom) mCellElement.getOwnerDocument();
+				TextPElement pElement = dom.newOdfElement(TextPElement.class);
+				mCellElement.appendChild(pElement);
+				newImage = Image.newImage(Paragraph.getInstanceof(pElement), imageUri);
+			}
 			if (imageUri != null) {
-				OdfDrawFrame drawFrame = dom.newOdfElement(OdfDrawFrame.class);
-				pElement.appendChild(drawFrame);
-				drawFrame.setTextAnchorTypeAttribute("paragraph");
-				OdfDrawImage imageEle = (OdfDrawImage) drawFrame.newDrawImageElement();
-				String packagePath = imageEle.newImage(imageUri);
-				OdfPackage mOdfPackage = dom.getDocument().getPackage();
-				InputStream is = mOdfPackage.getInputStream(packagePath);
-				BufferedImage image = ImageIO.read(is);
-				int height = image.getHeight(null);
-				int width = image.getWidth(null);
-				long widthInMI = new Double((Math.round(10000.0 * width / 1.0 * 0.28) / 10000.0)).longValue();
+				FrameRectangle rect = newImage.getRectangle();
+				double height = rect.getHeight();
+				double width = rect.getWidth();
+				long widthInMI = new Double(width / 100).longValue();
 				Column column = getTableColumn();
 				if (widthInMI > column.getWidth()) {
 					column.setWidth(widthInMI);
 				}
 
-				long heightInMI = new Double((Math.round(10000.0 * height / 1.0 * 0.28) / 10000.0)).longValue();
+				long heightInMI = new Double(height / 100).longValue();
 				Row row = getTableRow();
 				if (heightInMI > row.getHeight()) {
 					row.setHeight(heightInMI, false);
 				}
+				return newImage;
 			}
 		} catch (Exception ex) {
 			Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
 		}
+		return null;
 	}
 
 	/**
@@ -2140,8 +2145,9 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * @return If there is a image exist in this cell, An {@link java.awt.Image
 	 *         Image} will be returned.
 	 * @since 0.4.5
+	 * @deprecated
 	 */
-	public Image getImage() {
+	public BufferedImage getBufferedImage() {
 		try {
 			TextPElement pElement = OdfElement.findFirstChildNode(TextPElement.class, mCellElement);
 			if (pElement != null) {
@@ -2164,6 +2170,35 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 		return null;
 	}
 
+	/**
+	 * Get the image from the specified cell.
+	 * 
+	 * @return If there is a image exist in this cell, an
+	 *         {@link org.odftoolkit.simple.draw.Image Image} will be returned.
+	 * @since 0.5.5
+	 */
+	public Image getImage() {
+		try {
+			TextPElement pElement = OdfElement.findFirstChildNode(TextPElement.class, mCellElement);
+			if (pElement != null) {
+				DrawFrameElement drawFrame = OdfElement.findFirstChildNode(DrawFrameElement.class, pElement);
+				if (drawFrame != null) {
+					DrawImageElement imageElement = OdfElement.findFirstChildNode(DrawImageElement.class, drawFrame);
+					return Image.getInstanceof(imageElement);
+				}
+			} else {
+				DrawFrameElement drawFrame = OdfElement.findFirstChildNode(DrawFrameElement.class, mCellElement);
+				if (drawFrame != null) {
+					DrawImageElement imageElement = OdfElement.findFirstChildNode(DrawImageElement.class, drawFrame);
+					return Image.getInstanceof(imageElement);
+				}
+			}
+		} catch (Exception ex) {
+			Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+	
 	/**
 	 * Return style handler for this cell
 	 * 
@@ -2324,5 +2359,9 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 		if (paragraphContainerImpl == null)
 			paragraphContainerImpl = new ParagraphContainerImpl();
 		return paragraphContainerImpl;
+	}
+	
+	public OdfElement getFrameContainerElement() {
+		return mCellElement;
 	}
 }

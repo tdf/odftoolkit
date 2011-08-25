@@ -30,6 +30,7 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.text.TextAElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSElement;
+import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
@@ -81,6 +82,25 @@ public class TextSelection extends Selection {
 			mHeading = (OdfTextHeading) containerElement;
 		}
 		mIndexInContainer = index;
+	}
+
+	/**
+	 * Create a new <code>TextSelection</code>.
+	 * 
+	 * @param text
+	 *            the text content of this <code>TextSelection</code>
+	 * @param containerElement
+	 *            the paragraph element or heading element that contains this
+	 *            <code>TextSelection</code>
+	 * @param index
+	 *            the start index of the text content in container element
+	 * 
+	 * @since 0.5.5
+	 */
+	public static TextSelection newTextSelection(String text, OdfElement containerElement, int index) {
+		TextSelection selection = new TextSelection(text, containerElement, index);
+		Selection.SelectionManager.registerItem(selection);
+		return selection;
 	}
 
 	/**
@@ -198,6 +218,32 @@ public class TextSelection extends Selection {
 	}
 
 	/**
+	 * Create a span element for this text selection.
+	 * 
+	 * @return the created text span element for this selection
+	 * @throws InvalidNavigationException
+	 *             if the selection is unavailable.
+	 * @since 0.5.5
+	 */
+	public TextSpanElement createSpanElement() throws InvalidNavigationException {
+		if (validate() == false) {
+			throw new InvalidNavigationException("No matched string at this position");
+		}
+		OdfElement parentElement = getContainerElement();
+		int leftLength = getText().length();
+		int index = mIndexInContainer;
+		delete(index, leftLength, parentElement);
+		OdfTextSpan textSpan = new OdfTextSpan((OdfFileDom) parentElement.getOwnerDocument());
+		textSpan.addContentWhitespace(getText());
+		mIsInserted = false;
+		insertSpan(textSpan, index, parentElement);
+		// optimize the parent element
+		optimize(parentElement);
+
+		return textSpan;
+	}
+
+	/**
 	 * Paste this selection just before a specific selection.
 	 * 
 	 * @param positionItem
@@ -300,7 +346,7 @@ public class TextSelection extends Selection {
 	@Override
 	protected void refresh(int offset) {
 		mIndexInContainer += offset;
-		if(mIndexInContainer<0){
+		if (mIndexInContainer < 0) {
 			mIndexInContainer = 0;
 		}
 	}

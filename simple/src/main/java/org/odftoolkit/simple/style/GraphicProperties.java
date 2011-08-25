@@ -41,13 +41,16 @@ import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.type.Color;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.FrameHorizontalPosition;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.FrameVerticalPosition;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalRelative;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.OdfDrawFill;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.OdfDrawStroke;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalRelative;
 
 /**
  * This class represents the graphic style settings. It provides methods to
  * access borders and background styles. More functions will be added later.
- * 
  * <p>
  * This class is a corresponded high level class for element
  * "style:graphic-properties". It provides methods to access the attributes and
@@ -332,13 +335,13 @@ public class GraphicProperties {
 	 * and the style name of dash line need to be specified.
 	 * 
 	 * @param stroke
-	 *            - the stroke type
+	 *            the stroke type
 	 * @param color
-	 *            - the color of the stroke
+	 *            the color of the stroke
 	 * @param widthDesc
-	 *            - the width description of the stroke, e.g. "0.01in"
+	 *            the width description of the stroke, e.g. "0.01in"
 	 * @param dashStyleName
-	 *            - the dash style name
+	 *            the dash style name
 	 * @see org.odftoolkit.simple.style.StyleTypeDefinitions.OdfDrawStroke
 	 */
 	public void setStroke(OdfDrawStroke stroke, Color color, String widthDesc, String dashStyleName) {
@@ -377,9 +380,9 @@ public class GraphicProperties {
 	 * specified by the second parameter.
 	 * 
 	 * @param fillType
-	 *            - the fill style type
+	 *            the fill style type
 	 * @param color
-	 *            - the specified color
+	 *            the specified color
 	 */
 	public void setFill(OdfDrawFill fillType, Color color) {
 		switch (fillType) {
@@ -396,7 +399,7 @@ public class GraphicProperties {
 			throw new RuntimeException(fillType.toString() + " not supported!");
 		}
 	}
-	
+
 	/**
 	 * Set whether the content of a graphic object is displayed in the
 	 * background or foreground. If it's displayed in the background, the
@@ -414,7 +417,92 @@ public class GraphicProperties {
 			mElement.setStyleRunThroughAttribute(StyleRunThroughAttribute.Value.FOREGROUND.toString());
 		}
 	}
-	
+
+	/**
+	 * Set the horizontal position
+	 * 
+	 * @param horizontalPos
+	 *            the horizontal position
+	 * @since 0.5.5
+	 */
+	public void setHorizontalPosition(FrameHorizontalPosition horizontalPos) {
+		mElement.setStyleHorizontalPosAttribute(horizontalPos.toString());
+	}
+
+	/**
+	 * Set the horizontal relative
+	 * 
+	 * @param relative
+	 *            the horizontal relative
+	 * @since 0.5.5
+	 */
+	public void setHorizontalRelative(HorizontalRelative relative) {
+		mElement.setStyleHorizontalRelAttribute(relative.toString());
+	}
+
+	/**
+	 * Set the vertical relative
+	 * 
+	 * @param relative
+	 *            the vertical relative
+	 * @since 0.5.5
+	 */
+	public void setVerticalRelative(VerticalRelative relative) {
+		mElement.setStyleVerticalRelAttribute(relative.toString());
+	}
+
+	/**
+	 * Set the vertical position
+	 * 
+	 * @param verticalPos
+	 *            the vertical position
+	 * @since 0.5.5
+	 */
+	public void setVerticalPosition(FrameVerticalPosition verticalPos) {
+		mElement.setStyleVerticalPosAttribute(verticalPos.toString());
+	}
+
+	/**
+	 * Return the horizontal position
+	 * 
+	 * @return the horizontal position
+	 * @since 0.5.5
+	 */
+	public FrameHorizontalPosition getHorizontalPosition() {
+		return FrameHorizontalPosition.enumValueOf(mElement.getStyleHorizontalPosAttribute());
+	}
+
+	/**
+	 * Return the vertical position
+	 * 
+	 * @return the vertical position
+	 * @since 0.5.5
+	 */
+	public FrameVerticalPosition getVerticalPosition() {
+		return FrameVerticalPosition.enumValueOf(mElement.getStyleVerticalPosAttribute());
+	}
+
+	/**
+	 * Return the vertical relative
+	 * 
+	 * @return the vertical relative
+	 * @since 0.5.5
+	 */
+	public VerticalRelative getVerticalRelative() {
+		return VerticalRelative.enumValueOf(mElement.getStyleVerticalRelAttribute());
+	}
+
+	/**
+	 * Return the horizontal relative
+	 * 
+	 * @return the horizontal relative
+	 * 
+	 * @since 0.5.5
+	 */
+	public HorizontalRelative getHorizontalRelative() {
+		return HorizontalRelative.enumValueOf(mElement.getStyleHorizontalRelAttribute());
+	}
+
 	private boolean verifyWidthDesc(String widthDesc) {
 		char char1 = widthDesc.charAt(widthDesc.length() - 1);
 		char char2 = widthDesc.charAt(widthDesc.length() - 2);

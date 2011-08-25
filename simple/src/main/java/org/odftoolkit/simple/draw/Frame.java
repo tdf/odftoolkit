@@ -21,6 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.simple.draw;
 
+import java.net.URI;
+
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgTitleElement;
@@ -29,7 +32,8 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
-import org.odftoolkit.simple.style.DefaultStyleHandler;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * This class presents frame object. It provides method to get/set frame
@@ -124,23 +128,23 @@ public class Frame extends Component {
 		return mElement.getDrawNameAttribute();
 	}
 
-	/**
-	 * Get the style handler of this frame.
-	 * 
-	 * @return the style handler of this frame
-	 */
-	public FrameStyleHandler getFrameStyleHandler() {
-		return null;
-	}
-
-	/**
-	 * Get the paragraph style handler of this frame.
-	 * 
-	 * @return the paragraph style handler of this frame
-	 */
-	public DefaultStyleHandler getParagraphStyleHandler() {
-		return null;
-	}
+	// /**
+	// * Get the style handler of this frame.
+	// *
+	// * @return the style handler of this frame
+	// */
+	// public FrameStyleHandler getFrameStyleHandler() {
+	// return null;
+	// }
+	//
+	// /**
+	// * Get the paragraph style handler of this frame.
+	// *
+	// * @return the paragraph style handler of this frame
+	// */
+	// public DefaultStyleHandler getParagraphStyleHandler() {
+	// return null;
+	// }
 
 	/**
 	 * Get the instance of <code>DrawFrameElement</code> which represents this
@@ -170,10 +174,14 @@ public class Frame extends Component {
 	 */
 	public void setRectangle(FrameRectangle rectangle) {
 		String linemeasure = rectangle.getLinearMeasure().toString();
-		mElement.setSvgWidthAttribute(rectangle.getWidth() + linemeasure);
-		mElement.setSvgHeightAttribute(rectangle.getHeight() + linemeasure);
-		mElement.setSvgXAttribute(rectangle.getX() + linemeasure);
-		mElement.setSvgYAttribute(rectangle.getY() + linemeasure);
+		if (rectangle.getWidth() > 0)
+			mElement.setSvgWidthAttribute(rectangle.getWidth() + linemeasure);
+		if (rectangle.getHeight() > 0)
+			mElement.setSvgHeightAttribute(rectangle.getHeight() + linemeasure);
+		if (rectangle.getX() > 0)
+			mElement.setSvgXAttribute(rectangle.getX() + linemeasure);
+		if (rectangle.getY() > 0)
+			mElement.setSvgYAttribute(rectangle.getY() + linemeasure);
 	}
 
 	/**
@@ -267,7 +275,35 @@ public class Frame extends Component {
 	public void setBackgroundColor(Color color) {
 		getStyleHandler().setBackgroundColor(color);
 	}
-	
+
+	private void removeContent() {
+		NodeList nodeList = mElement.getChildNodes();
+		int i;
+		for (i = 0; i < nodeList.getLength(); i++) {
+			Node node;
+			node = nodeList.item(i);
+			if (node.getNodeType() == Node.TEXT_NODE)
+				mElement.removeChild(node);
+			else if (node.getNodeType() == Node.ELEMENT_NODE) {
+				mElement.removeChild(node);
+			}
+		}
+		// mElement.removeAttributeNS(OdfDocumentNamespace.PRESENTATION.getUri(),
+		// "class");
+		mElement.removeAttributeNS(OdfDocumentNamespace.PRESENTATION.getUri(), "placeholder");
+	}
+
+	/**
+	 * Add a image to the frame after all the contents get removed.
+	 * 
+	 * @since 0.5.5
+	 */
+	public Image setImage(URI uri) {
+		removeContent();
+		Image image = Image.newImage(this, uri);
+		return image;
+	}
+
 	// /**
 	// * Set the frame to be transparent, with none border and none fill color.
 	// */

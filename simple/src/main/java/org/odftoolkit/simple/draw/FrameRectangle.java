@@ -129,11 +129,17 @@ public class FrameRectangle {
 	}
 
 	/**
-	 * @param linearMeasure
+	 * @param newLinearMeasure
 	 *            the line measurement to set
 	 */
-	public void setLinearMeasure(StyleTypeDefinitions.SupportedLinearMeasure linearMeasure) {
-		this.linearMeasure = linearMeasure;
+	public void setLinearMeasure(StyleTypeDefinitions.SupportedLinearMeasure newLinearMeasure) {
+		if (this.linearMeasure != linearMeasure) {
+			x = newLinearMeasure.convert(x, linearMeasure);
+			y = newLinearMeasure.convert(y, linearMeasure);
+			width = newLinearMeasure.convert(width, linearMeasure);
+			height = newLinearMeasure.convert(height, linearMeasure);
+		}
+		this.linearMeasure = newLinearMeasure;
 	}
 
 	/**
@@ -177,14 +183,37 @@ public class FrameRectangle {
 		StyleTypeDefinitions.SupportedLinearMeasure tempXMeasure, tempYMeasure, tempWMeasure, tempHMeasure;
 
 		// get the basic information of width and measurement
-		x = getLineWidth(xDesc);
-		y = getLineWidth(yDesc);
-		width = getLineWidth(widthDesc);
-		height = getLineWidth(heightDesc);
-		tempXMeasure = getLineMeasure(xDesc);
-		tempYMeasure = getLineMeasure(yDesc);
-		tempWMeasure = getLineMeasure(widthDesc);
-		tempHMeasure = getLineMeasure(heightDesc);
+		if (xDesc == null || xDesc.length() == 0) {
+			x = 0;
+			tempXMeasure = StyleTypeDefinitions.SupportedLinearMeasure.CM;
+		} else {
+			x = getLineWidth(xDesc);
+			tempXMeasure = getLineMeasure(xDesc);
+		}
+
+		if (yDesc == null || yDesc.length() == 0) {
+			y = 0;
+			tempYMeasure = StyleTypeDefinitions.SupportedLinearMeasure.CM;
+		} else {
+			y = getLineWidth(yDesc);
+			tempYMeasure = getLineMeasure(yDesc);
+		}
+
+		if (widthDesc == null || widthDesc.length() == 0) {
+			width = 0;
+			tempWMeasure = StyleTypeDefinitions.SupportedLinearMeasure.CM;
+		} else {
+			width = getLineWidth(widthDesc);
+			tempWMeasure = getLineMeasure(widthDesc);
+		}
+
+		if (heightDesc == null || heightDesc.length() == 0) {
+			height = 0;
+			tempHMeasure = StyleTypeDefinitions.SupportedLinearMeasure.CM;
+		} else {
+			height = getLineWidth(heightDesc);
+			tempHMeasure = getLineMeasure(heightDesc);
+		}
 
 		// if all the measurement are empty, an exception will be thrown.
 		if (tempXMeasure == null && tempYMeasure == null && tempWMeasure == null && tempHMeasure == null)

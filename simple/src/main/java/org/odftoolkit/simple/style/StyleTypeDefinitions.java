@@ -444,6 +444,205 @@ public class StyleTypeDefinitions {
 			return lineType;
 		}
 	}
+	
+	/**
+	 * Anchor type from users perspective.
+	 * 
+	 * @since 0.5.5
+	 */
+	public static enum AnchorType {
+		TO_PAGE("page"), 
+		TO_PARAGRAPH("paragraph"), 
+		TO_CHARACTER("char"),
+		AS_CHARACTER("as-char"),
+		TO_FRAME("frame");
+
+		private String anchorType;
+
+		AnchorType(String type) {
+			this.anchorType = type;
+		}
+
+		public static AnchorType enumValueOf(String aValue) {
+			if ((aValue == null) || (aValue.length() == 0))
+				return TO_PAGE;
+
+			for (AnchorType aIter : values()) {
+				if (aValue.equals(aIter.toString())) {
+					return aIter;
+				}
+			}
+			return TO_PAGE;
+		}
+
+		@Override
+		public String toString() {
+			return anchorType;
+		}
+	}
+
+	/**
+	 * Position vertical relative from ODF specification perspective
+	 * 
+	 * @since 0.5.5
+	 */
+	public static enum VerticalRelative
+	{
+		PAGE("page"), 
+		PAGE_CONTENT("page-content"),
+		FRAME("frame"),
+		FRAME_CONTENT("frame-content"),
+		PARAGRAPH("paragraph"),
+		PARAGRAPH_CONTENT("paragraph-content"),
+		CHAR("char"),
+		LINE("line"),
+		BASELINE("baseline"),
+		TEXT("text");
+
+		private String relativeType;
+
+		VerticalRelative(String type) {
+			this.relativeType = type;
+		}
+
+		public static VerticalRelative enumValueOf(String aValue) {
+			if ((aValue == null) || (aValue.length() == 0))
+				return PAGE;
+
+			for (VerticalRelative aIter : values()) {
+				if (aValue.equals(aIter.toString())) {
+					return aIter;
+				}
+			}
+			return PAGE;
+		}
+
+		@Override
+		public String toString() {
+			return relativeType;
+		}
+	}
+	
+	/**
+	 * Position horizontal relative from ODF specification perspective
+	 * @since 0.5.5
+	 */
+	public static enum HorizontalRelative
+	{
+		PAGE("page"), 
+		PAGE_CONTENT("page-content"),
+		FRAME("frame"),
+		FRAME_CONTENT("frame-content"),
+		PARAGRAPH("paragraph"),
+		PARAGRAPH_CONTENT("paragraph-content"),
+		CHAR("char"),
+		PAGE_START_MARGIN("page-start-margin"),
+		PAGE_END_MARGIN("page-end-margin"),
+		FRAME_START_MARGIN("frame-start-margin"),
+		FRAME_END_MARGIN("frame-end-margin"),
+		PARAGRAPH_START_MARGIN("paragraph-start-margin"),
+		PARAGRAPH_END_MARGIN("paragraph-end-margin");
+
+		private String relativeType;
+
+		HorizontalRelative(String type) {
+			this.relativeType = type;
+		}
+
+		public static HorizontalRelative enumValueOf(String aValue) {
+			if ((aValue == null) || (aValue.length() == 0))
+				return PAGE;
+
+			for (HorizontalRelative aIter : values()) {
+				if (aValue.equals(aIter.toString())) {
+					return aIter;
+				}
+			}
+			return PAGE;
+		}
+
+		@Override
+		public String toString() {
+			return relativeType;
+		}
+	}
+	
+	/**
+	 * specifies the vertical alignment of a frame relative to a specific area.
+	 * 
+	 * @since 0.5.5
+	 */
+	public static enum FrameVerticalPosition
+	{
+		TOP("top"),
+		MIDDLE("middle"),
+		BOTTOM("bottom"),
+		FROMTOP("from-top"),
+		BELOW("below");
+
+		private String verticalPos;
+
+		FrameVerticalPosition(String type) {
+			this.verticalPos = type;
+		}
+
+		public static FrameVerticalPosition enumValueOf(String aValue) {
+			if ((aValue == null) || (aValue.length() == 0))
+				return MIDDLE;
+
+			for (FrameVerticalPosition aIter : values()) {
+				if (aValue.equals(aIter.toString())) {
+					return aIter;
+				}
+			}
+			return MIDDLE;
+		}
+
+		@Override
+		public String toString() {
+			return verticalPos;
+		}
+	}
+	
+	/**
+	 * specifies the horizontal alignment of a frame relative to a specific area.
+	 * 
+	 * @since 0.5.5
+	 */
+	public static enum FrameHorizontalPosition
+	{
+		LEFT("left"),
+		CENTER("center"),
+		RIGHT("right"),
+		FROMLEFT("from-left"),
+		INSIDE("inside"),
+		OUTSIDE("outside"),
+		FROMINSIDE("from-inside");
+
+		private String horizontalPos;
+
+		FrameHorizontalPosition(String type) {
+			this.horizontalPos = type;
+		}
+
+		public static FrameHorizontalPosition enumValueOf(String aValue) {
+			if ((aValue == null) || (aValue.length() == 0))
+				return CENTER;
+
+			for (FrameHorizontalPosition aIter : values()) {
+				if (aValue.equals(aIter.toString())) {
+					return aIter;
+				}
+			}
+			return CENTER;
+		}
+
+		@Override
+		public String toString() {
+			return horizontalPos;
+		}
+	}
+	
 
 	/**
 	 * Line width from ODF specification perspective

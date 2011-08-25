@@ -1217,7 +1217,7 @@ public class TableCellTest {
 			table = doc.getTableByName("ImageTable");
 			cell = table.getCellByPosition(0, 0);
 			//image height = 34 pixels.
-			Assert.assertEquals(34, cell.getImage().getHeight(null));
+			Assert.assertEquals(34, cell.getBufferedImage().getHeight(null));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
