@@ -765,13 +765,13 @@ public class Table extends Component {
 	}
 
 	/**
-	 * Get the width of the table (in Millimeter).
+	 * Get the width of the table (in 1/100th Millimeter).
 	 * <p>
 	 * Throw an UnsupportedOperationException if the table is one sheet of a
 	 * spreadsheet document. because the sheet doesn't have an attribute of
 	 * table width.
 	 * 
-	 * @return the width of the current table (in Millimeter).
+	 * @return the width of the current table (in 1/100th Millimeter).
 	 *         <p>
 	 *         An UnsupportedOperationException will be thrown if the table is
 	 *         in the spreadsheet document.
@@ -787,30 +787,33 @@ public class Table extends Component {
 					tableWidth += col.getWidth();
 				}
 				return tableWidth;
-			} else
-				return PositiveLength.parseLong(sWidth, Unit.MILLIMETER);
+			} else{
+				return (long) (PositiveLength.parseDouble(sWidth, Unit.MILLIMETER) * 100);
+			}
 		} else {
 			throw new UnsupportedOperationException();
 		}
 	}
 
 	/**
-	 * Set the width of the table (in Millimeter).
+	 * Set the width of the table (in 1/100th Millimeter).
 	 * <p>
 	 * Throw an UnsupportedOperationException if the table is part of a
 	 * spreadsheet document that does not allow to change the table size,
 	 * because spreadsheet is not allow user to set the table size.
 	 * 
 	 * @param width
-	 *            the width that need to set (in Millimeter).
+	 *            the width that need to set (in 1/100th Millimeter).
 	 *            <p>
 	 *            An UnsupportedOperationException will be thrown if the table
 	 *            is in the spreadsheet document.
 	 */
 	public void setWidth(long width) {
 		if (!mIsSpreadsheet) {
-			String sWidthMM = String.valueOf(width) + Unit.MILLIMETER.abbr();
-			String sWidthIN = PositiveLength.mapToUnit(sWidthMM, Unit.INCH);
+			double roundingFactor = 10000.0;
+			//TODO:need refactor to PositiveLength.
+			double inValue = Math.round(roundingFactor * width / Unit.INCH.unitInMillimiter() / 100 ) / roundingFactor;
+			String sWidthIN = String.valueOf(inValue) + Unit.INCH.abbr();
 			mTableElement.setProperty(OdfTableProperties.Width, sWidthIN);
 			// if the width is changed, we should also change the table:align
 			// properties if it is "margins"

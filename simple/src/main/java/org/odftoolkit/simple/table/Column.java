@@ -144,27 +144,29 @@ public class Column extends Component {
 	}
 
 	/**
-	 * Get the width of the column (in Millimeter).
+	 * Get the width of the column (in 1/100th Millimeter).
 	 * 
-	 * @return the width of the current column (in Millimeter).
+	 * @return the width of the current column (in 1/100th Millimeter).
 	 */
 	public long getWidth() {
 		String sWidth = maColumnElement.getProperty(OdfTableColumnProperties.ColumnWidth);
 		if (sWidth == null) {
 			sWidth = DEFAULT_WIDTH;
 		}
-		return PositiveLength.parseLong(sWidth, Unit.MILLIMETER);
+		return (long) (PositiveLength.parseDouble(sWidth, Unit.MILLIMETER) * 100);
 	}
 
 	/**
-	 * Set the width of the column (in Millimeter).
+	 * Set the width of the column (in 1/100th Millimeter).
 	 * 
 	 * @param width
-	 *            the width that will be set to the column (in Millimeter).
+	 *            the width that will be set to the column (in 1/100th Millimeter).
 	 */
 	public void setWidth(long width) {
-		String sWidthMM = String.valueOf(width) + Unit.MILLIMETER.abbr();
-		String sWidthIN = PositiveLength.mapToUnit(sWidthMM, Unit.INCH);
+		double roundingFactor = 10000.0;
+		//TODO:need refactor to PositiveLength.
+		double inValue = Math.round(roundingFactor * width / Unit.INCH.unitInMillimiter() / 100 ) / roundingFactor;
+		String sWidthIN = String.valueOf(inValue) + Unit.INCH.abbr();
 		//width before modification
 		long columnWidth = getWidth();
 		if(columnWidth < 0)	{
@@ -205,10 +207,8 @@ public class Column extends Component {
 				if (newWidthNextColumn < 0) {
 					newWidthNextColumn = 0;
 				}
-
-				sWidthMM = String.valueOf(newWidthNextColumn) + Unit.MILLIMETER.abbr();
-				sWidthIN = PositiveLength.mapToUnit(sWidthMM, Unit.INCH);
-
+				inValue = Math.round(roundingFactor * newWidthNextColumn / Unit.INCH.unitInMillimiter() / 100 ) / roundingFactor;
+				sWidthIN = String.valueOf(inValue) + Unit.INCH.abbr();
 				column.getOdfElement().setProperty(OdfTableColumnProperties.ColumnWidth, sWidthIN);
 				long relWidth = (DEFAULT_REL_TABLE_WIDTH / table.getWidth()) * newWidthNextColumn;
 				column.setRelativeWidth(relWidth);

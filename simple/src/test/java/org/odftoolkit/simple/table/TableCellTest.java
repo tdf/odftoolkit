@@ -1305,22 +1305,22 @@ public class TableCellTest {
 			Cell cell = table.getCellByPosition(0, 0);
 			cell.getTableColumn().setUseOptimalWidth(true);
 			cell.setStringValue(contentStr);
-			Assert.assertEquals(44, cell.getTableColumn().getWidth());
+			Assert.assertEquals(4509, cell.getTableColumn().getWidth());
 			cell = table.getCellByPosition(1, 1);
 			cell.setFont(font1Base);
 			cell.getTableColumn().setUseOptimalWidth(true);
 			cell.setStringValue(contentStr);
-			Assert.assertEquals(25, cell.getTableColumn().getWidth());
+			Assert.assertEquals(2534, cell.getTableColumn().getWidth());
 			cell = table.getCellByPosition(2, 2);
 			cell.setFont(font2Base);
 			cell.getTableColumn().setUseOptimalWidth(true);
 			cell.setStringValue(contentStr);
-			Assert.assertEquals(50, cell.getTableColumn().getWidth());
+			Assert.assertEquals(5073, cell.getTableColumn().getWidth());
 			cell = table.getCellByPosition(3, 3);
 			cell.setFont(font3Base);
 			cell.getTableColumn().setUseOptimalWidth(true);
 			cell.setStringValue(contentStr);
-			Assert.assertEquals(89, cell.getTableColumn().getWidth());
+			Assert.assertEquals(8989, cell.getTableColumn().getWidth());
 			doc.save(ResourceUtilities.newTestOutputFile("testCellSizeOptimal.ods"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);

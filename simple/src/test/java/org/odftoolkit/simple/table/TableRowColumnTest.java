@@ -76,9 +76,10 @@ public class TableRowColumnTest {
 			Row row = table3.getRowByIndex(i);
 			long oldHeight = row.getHeight() / 2;
 			row.setHeight(oldHeight, false);
-			String sHeightMM = String.valueOf(oldHeight) + Unit.MILLIMETER.abbr();
-			String sHeightIN = PositiveLength.mapToUnit(sHeightMM, Unit.INCH);
-			long expectedHeight = PositiveLength.parseLong(sHeightIN, Unit.MILLIMETER);
+			double roundingFactor = 10000.0;
+			double inValue = Math.round(roundingFactor * oldHeight / Unit.INCH.unitInMillimiter() / 100 ) / roundingFactor;
+			String sHeightIN = String.valueOf(inValue) + Unit.INCH.abbr();
+			long expectedHeight = (long) (PositiveLength.parseDouble(sHeightIN, Unit.MILLIMETER) * 100);
 			Assert.assertEquals(expectedHeight, row.getHeight());
 		}
 
@@ -89,9 +90,10 @@ public class TableRowColumnTest {
 			Column column = table1.getColumnByIndex(i);
 			long oldWidth = column.getWidth() / 2;
 			column.setWidth(oldWidth);
-			String sWidthMM = String.valueOf(oldWidth) + Unit.MILLIMETER.abbr();
-			String sWidthIN = PositiveLength.mapToUnit(sWidthMM, Unit.INCH);
-			long expectedWidth = PositiveLength.parseLong(sWidthIN, Unit.MILLIMETER);
+			double roundingFactor = 10000.0;
+			double inValue = Math.round(roundingFactor * oldWidth / Unit.INCH.unitInMillimiter() / 100 ) / roundingFactor;
+			String sWidthIN = String.valueOf(inValue) + Unit.INCH.abbr();
+			long expectedWidth = (long) (PositiveLength.parseDouble(sWidthIN, Unit.MILLIMETER)*100);
 			Assert.assertEquals(expectedWidth, column.getWidth());
 		}
 		saveodt("ChangeSize");

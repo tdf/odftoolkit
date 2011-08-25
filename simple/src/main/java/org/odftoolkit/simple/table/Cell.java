@@ -2420,15 +2420,15 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 				millimeterPadding = Length.parseDouble(padding, Unit.MILLIMETER);
 			}
 		}
-		// convert width pixels to mm
-		double columnWidth = widthPixels / 2.83464;
-		columnWidth += millimeterPadding * 2;
+		// convert width pixels to 1/100th mm
+		double columnWidth = (widthPixels * 100) / 2.83464;
+		columnWidth += millimeterPadding * 100 * 2;
 		Column column = getTableColumn();
 		if (column.isOptimalWidth()) {
 			double width = column.getWidth();
 			if (width < columnWidth) {
 				long columnLongWidth = (long) columnWidth;
-				columnLongWidth = columnLongWidth < columnWidth ? (columnLongWidth + 1) : columnLongWidth;
+				columnLongWidth = columnLongWidth < columnWidth ? (columnLongWidth + 100) : columnLongWidth;
 				column.setWidth(columnLongWidth);
 			}
 		}
