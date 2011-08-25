@@ -24,6 +24,7 @@ package org.odftoolkit.simple.style;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoBackgroundColorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoBorderAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoBorderBottomAttribute;
@@ -130,6 +131,8 @@ public class TableCellProperties {
 	// String borderLineWidthTop;
 	// String diagonalBlTrWidths;
 	// String diagonalTlBrWidths;
+	
+	BorderPropertiesImpl mBorderPropertiesHandler;
 
 	StyleTableCellPropertiesElement mElement;
 
@@ -148,6 +151,7 @@ public class TableCellProperties {
 	 */
 	protected TableCellProperties(StyleTableCellPropertiesElement properties) {
 		mElement = properties;
+		mBorderPropertiesHandler = new BorderPropertiesImpl(mElement);
 	}
 
 	/**
@@ -228,18 +232,7 @@ public class TableCellProperties {
 	 * @return the border setting
 	 */
 	public Border getBorder() {
-		Border border = new Border();
-		String borderAttr = mElement.getFoBorderAttribute();
-		String borderWidth = mElement.getStyleBorderLineWidthAttribute();
-
-		if (borderAttr == null || borderAttr.length() == 0)
-			return null;
-
-		border.setBorderByDescription(borderAttr);
-		if ((borderWidth != null) && (borderWidth.length() != 0)) {
-			border.setDoubleLineWidthByDescription(borderWidth);
-		}
-		return border;
+		return mBorderPropertiesHandler.getBorder();
 	}
 
 	/**
@@ -250,18 +243,7 @@ public class TableCellProperties {
 	 * @return the border setting
 	 */
 	public Border getTopBorder() {
-		Border border = new Border();
-		String borderAttr = mElement.getFoBorderTopAttribute();
-		String borderWidth = mElement.getStyleBorderLineWidthTopAttribute();
-
-		if (borderAttr == null || borderAttr.length() == 0)
-			return getBorder();
-
-		border.setBorderByDescription(borderAttr);
-		if ((borderWidth != null) && (borderWidth.length() != 0)) {
-			border.setDoubleLineWidthByDescription(borderWidth);
-		}
-		return border;
+		return mBorderPropertiesHandler.getTopBorder();
 	}
 
 	/**
@@ -272,18 +254,7 @@ public class TableCellProperties {
 	 * @return the border setting
 	 */
 	public Border getLeftBorder() {
-		Border border = new Border();
-		String borderAttr = mElement.getFoBorderLeftAttribute();
-		String borderWidth = mElement.getStyleBorderLineWidthLeftAttribute();
-
-		if (borderAttr == null || borderAttr.length() == 0)
-			return getBorder();
-
-		border.setBorderByDescription(borderAttr);
-		if ((borderWidth != null) && (borderWidth.length() != 0)) {
-			border.setDoubleLineWidthByDescription(borderWidth);
-		}
-		return border;
+		return mBorderPropertiesHandler.getLeftBorder();
 	}
 
 	/**
@@ -294,18 +265,7 @@ public class TableCellProperties {
 	 * @return the border setting
 	 */
 	public Border getRightBorder() {
-		Border border = new Border();
-		String borderAttr = mElement.getFoBorderRightAttribute();
-		String borderWidth = mElement.getStyleBorderLineWidthRightAttribute();
-
-		if (borderAttr == null || borderAttr.length() == 0)
-			return getBorder();
-
-		border.setBorderByDescription(borderAttr);
-		if ((borderWidth != null) && (borderWidth.length() != 0)) {
-			border.setDoubleLineWidthByDescription(borderWidth);
-		}
-		return border;
+		return mBorderPropertiesHandler.getRightBorder();
 	}
 
 	// fo:border-bottom
@@ -319,19 +279,7 @@ public class TableCellProperties {
 	 * @return the border setting
 	 */
 	public Border getBottomBorder() {
-		Border border = new Border();
-		String borderAttr = mElement.getFoBorderBottomAttribute();
-		String borderWidth = mElement.getStyleBorderLineWidthBottomAttribute();
-
-		if (borderAttr == null || borderAttr.length() == 0) {
-			return getBorder();
-		}
-
-		border.setBorderByDescription(borderAttr);
-		if ((borderWidth != null) && (borderWidth.length() != 0)) {
-			border.setDoubleLineWidthByDescription(borderWidth);
-		}
-		return border;
+		return mBorderPropertiesHandler.getBottomBorder();
 	}
 
 	/**
@@ -400,23 +348,7 @@ public class TableCellProperties {
 	 *            - the border setting
 	 */
 	public void setBottomBorder(Border border) {
-		if (border == null) {
-			mElement.removeAttribute(StyleBorderLineWidthBottomAttribute.ATTRIBUTE_NAME.getQName());
-			mElement.removeAttribute(FoBorderBottomAttribute.ATTRIBUTE_NAME.getQName());
-			return;
-		}
-		switch (border.lineStyle) {
-		case DOUBLE:
-			mElement.setStyleBorderLineWidthBottomAttribute(border.getDoubleLineWidthDescription());
-			mElement.setFoBorderBottomAttribute(border.getBorderDescription());
-			break;
-		case SINGLE:
-			mElement.setFoBorderBottomAttribute(border.getBorderDescription());
-			break;
-		case NONE:
-			mElement.removeAttribute(StyleBorderLineWidthBottomAttribute.ATTRIBUTE_NAME.getQName());
-			mElement.removeAttribute(FoBorderBottomAttribute.ATTRIBUTE_NAME.getQName());
-		}
+		mBorderPropertiesHandler.setBottomBorder(border);
 	}
 
 	// fo:border-top
@@ -434,23 +366,7 @@ public class TableCellProperties {
 	 *            - the border setting
 	 */
 	public void setTopBorder(Border border) {
-		if (border == null) {
-			mElement.removeAttribute(StyleBorderLineWidthTopAttribute.ATTRIBUTE_NAME.getQName());
-			mElement.removeAttribute(FoBorderTopAttribute.ATTRIBUTE_NAME.getQName());
-			return;
-		}
-		switch (border.lineStyle) {
-		case DOUBLE:
-			mElement.setStyleBorderLineWidthTopAttribute(border.getDoubleLineWidthDescription());
-			mElement.setFoBorderTopAttribute(border.getBorderDescription());
-			break;
-		case SINGLE:
-			mElement.setFoBorderTopAttribute(border.getBorderDescription());
-			break;
-		case NONE:
-			mElement.removeAttribute(StyleBorderLineWidthTopAttribute.ATTRIBUTE_NAME.getQName());
-			mElement.removeAttribute(FoBorderTopAttribute.ATTRIBUTE_NAME.getQName());
-		}
+		mBorderPropertiesHandler.setTopBorder(border);
 	}
 
 	// fo:border-left
@@ -468,23 +384,7 @@ public class TableCellProperties {
 	 *            - the border setting
 	 */
 	public void setLeftBorder(Border border) {
-		if (border == null) {
-			mElement.removeAttribute(StyleBorderLineWidthLeftAttribute.ATTRIBUTE_NAME.getQName());
-			mElement.removeAttribute(FoBorderLeftAttribute.ATTRIBUTE_NAME.getQName());
-			return;
-		}
-		switch (border.lineStyle) {
-		case DOUBLE:
-			mElement.setStyleBorderLineWidthLeftAttribute(border.getDoubleLineWidthDescription());
-			mElement.setFoBorderLeftAttribute(border.getBorderDescription());
-			break;
-		case SINGLE:
-			mElement.setFoBorderLeftAttribute(border.getBorderDescription());
-			break;
-		case NONE:
-			mElement.removeAttribute(StyleBorderLineWidthLeftAttribute.ATTRIBUTE_NAME.getQName());
-			mElement.removeAttribute(FoBorderLeftAttribute.ATTRIBUTE_NAME.getQName());
-		}
+		mBorderPropertiesHandler.setLeftBorder(border);
 	}
 
 	// fo:border-right
@@ -502,23 +402,7 @@ public class TableCellProperties {
 	 *            - the border setting
 	 */
 	public void setRightBorder(Border border) {
-		if (border == null) {
-			mElement.removeAttribute(StyleBorderLineWidthRightAttribute.ATTRIBUTE_NAME.getQName());
-			mElement.removeAttribute(FoBorderRightAttribute.ATTRIBUTE_NAME.getQName());
-			return;
-		}
-		switch (border.lineStyle) {
-		case DOUBLE:
-			mElement.setStyleBorderLineWidthRightAttribute(border.getDoubleLineWidthDescription());
-			mElement.setFoBorderRightAttribute(border.getBorderDescription());
-			break;
-		case SINGLE:
-			mElement.setFoBorderRightAttribute(border.getBorderDescription());
-			break;
-		case NONE:
-			mElement.removeAttribute(StyleBorderLineWidthRightAttribute.ATTRIBUTE_NAME.getQName());
-			mElement.removeAttribute(FoBorderRightAttribute.ATTRIBUTE_NAME.getQName());
-		}
+		mBorderPropertiesHandler.setRightBorder(border);
 	}
 
 	// style:diagonal-bl-tr
@@ -604,23 +488,7 @@ public class TableCellProperties {
 	 *            - the border setting
 	 */
 	public void setBorder(Border border) {
-		if (border == null) {
-			mElement.removeAttribute(StyleBorderLineWidthAttribute.ATTRIBUTE_NAME.getQName());
-			mElement.removeAttribute(FoBorderAttribute.ATTRIBUTE_NAME.getQName());
-			return;
-		}
-		switch (border.lineStyle) {
-		case DOUBLE:
-			mElement.setStyleBorderLineWidthAttribute(border.getDoubleLineWidthDescription());
-			mElement.setFoBorderAttribute(border.getBorderDescription());
-			break;
-		case SINGLE:
-			mElement.setFoBorderAttribute(border.getBorderDescription());
-			break;
-		case NONE:
-			mElement.removeAttribute(StyleBorderLineWidthAttribute.ATTRIBUTE_NAME.getQName());
-			mElement.removeAttribute(FoBorderAttribute.ATTRIBUTE_NAME.getQName());
-		}
+		mBorderPropertiesHandler.setBorder(border);
 	}
 
 	// fo:background-color
@@ -796,3 +664,299 @@ public class TableCellProperties {
 	}
 
 }
+
+class BorderPropertiesImpl {
+	
+	OdfStylePropertiesBase borderPropertiesElement;
+	
+	public BorderPropertiesImpl(OdfStylePropertiesBase element)
+	{
+		borderPropertiesElement = element;
+	}
+
+	// fo:border-bottom
+	// style:border-line-width-bottom
+	/**
+	 * Set the border definition for the bottom border.
+	 * <p>
+	 * If the parameter <code>border</code> is null, the border definition for
+	 * the bottom border will be removed.
+	 * <p>
+	 * If the line type in the border definition is NONE, the border definition
+	 * for the bottom border will be removed.
+	 * 
+	 * @param border
+	 *            - the border setting
+	 */
+	public void setBottomBorder(Border border) {
+		if (border == null) {
+			borderPropertiesElement.removeAttribute(StyleBorderLineWidthBottomAttribute.ATTRIBUTE_NAME.getQName());
+			borderPropertiesElement.removeAttribute(FoBorderBottomAttribute.ATTRIBUTE_NAME.getQName());
+			return;
+		}
+		switch (border.lineStyle) {
+		case DOUBLE:
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "style:border-line-width-bottom",border.getDoubleLineWidthDescription());
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.FO.getUri(), "fo:border-bottom",border.getBorderDescription());
+			break;
+		case SINGLE:
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.FO.getUri(), "fo:border-bottom",border.getBorderDescription());
+			break;
+		case NONE:
+			borderPropertiesElement.removeAttribute(StyleBorderLineWidthBottomAttribute.ATTRIBUTE_NAME.getQName());
+			borderPropertiesElement.removeAttribute(FoBorderBottomAttribute.ATTRIBUTE_NAME.getQName());
+		}
+	}
+
+	// fo:border-top
+	// style:border-line-width-top
+	/**
+	 * Set the border definition for the top border.
+	 * <p>
+	 * If the parameter <code>border</code> is null, the border definition for
+	 * the top border will be removed.
+	 * <p>
+	 * If the line type in the border definition is NONE, the border definition
+	 * for the top border will be removed.
+	 * 
+	 * @param border
+	 *            - the border setting
+	 */
+	public void setTopBorder(Border border) {
+		if (border == null) {
+			borderPropertiesElement.removeAttribute(StyleBorderLineWidthTopAttribute.ATTRIBUTE_NAME.getQName());
+			borderPropertiesElement.removeAttribute(FoBorderTopAttribute.ATTRIBUTE_NAME.getQName());
+			return;
+		}
+		switch (border.lineStyle) {
+		case DOUBLE:
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "style:border-line-width-top",border.getDoubleLineWidthDescription());
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.FO.getUri(), "fo:border-top",border.getBorderDescription());
+			break;
+		case SINGLE:
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.FO.getUri(), "fo:border-top",border.getBorderDescription());
+			break;
+		case NONE:
+			borderPropertiesElement.removeAttribute(StyleBorderLineWidthTopAttribute.ATTRIBUTE_NAME.getQName());
+			borderPropertiesElement.removeAttribute(FoBorderTopAttribute.ATTRIBUTE_NAME.getQName());
+		}
+	}
+
+	// fo:border-left
+	// style:border-line-width-left
+	/**
+	 * Set the border definition for the left border.
+	 * <p>
+	 * If the parameter <code>border</code> is null, the border definition for
+	 * the left border will be removed.
+	 * <p>
+	 * If the line type in the border definition is NONE, the border definition
+	 * for the left border will be removed.
+	 * 
+	 * @param border
+	 *            - the border setting
+	 */
+	public void setLeftBorder(Border border) {
+		if (border == null) {
+			borderPropertiesElement.removeAttribute(StyleBorderLineWidthLeftAttribute.ATTRIBUTE_NAME.getQName());
+			borderPropertiesElement.removeAttribute(FoBorderLeftAttribute.ATTRIBUTE_NAME.getQName());
+			return;
+		}
+		switch (border.lineStyle) {
+		case DOUBLE:
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "style:border-line-width-left",border.getDoubleLineWidthDescription());
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.FO.getUri(), "fo:border-left",border.getBorderDescription());
+			break;
+		case SINGLE:
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.FO.getUri(), "fo:border-left",border.getBorderDescription());
+			break;
+		case NONE:
+			borderPropertiesElement.removeAttribute(StyleBorderLineWidthLeftAttribute.ATTRIBUTE_NAME.getQName());
+			borderPropertiesElement.removeAttribute(FoBorderLeftAttribute.ATTRIBUTE_NAME.getQName());
+		}
+	}
+
+	// fo:border-right
+	// style:border-line-width-right
+	/**
+	 * Set the border definition for the right border.
+	 * <p>
+	 * If the parameter <code>border</code> is null, the border definition for
+	 * the right border will be removed.
+	 * <p>
+	 * If the line type in the border definition is NONE, the border definition
+	 * for the right border will be removed.
+	 * 
+	 * @param border
+	 *            - the border setting
+	 */
+	public void setRightBorder(Border border) {
+		if (border == null) {
+			borderPropertiesElement.removeAttribute(StyleBorderLineWidthRightAttribute.ATTRIBUTE_NAME.getQName());
+			borderPropertiesElement.removeAttribute(FoBorderRightAttribute.ATTRIBUTE_NAME.getQName());
+			return;
+		}
+		switch (border.lineStyle) {
+		case DOUBLE:
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "style:border-line-width-right",border.getDoubleLineWidthDescription());
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.FO.getUri(), "fo:border-right",border.getBorderDescription());
+			break;
+		case SINGLE:
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.FO.getUri(), "fo:border-right",border.getBorderDescription());
+			break;
+		case NONE:
+			borderPropertiesElement.removeAttribute(StyleBorderLineWidthRightAttribute.ATTRIBUTE_NAME.getQName());
+			borderPropertiesElement.removeAttribute(FoBorderRightAttribute.ATTRIBUTE_NAME.getQName());
+		}
+	}
+
+	// fo:border
+	// style:border-line-width
+	/**
+	 * Set the border definition for all four borders.
+	 * <p>
+	 * If the parameter <code>border</code> is null, the border definition for
+	 * all four borders will be removed.
+	 * <p>
+	 * If the line type in the border definition is NONE, the border definition
+	 * for all four borders will be removed.
+	 * 
+	 * @param border
+	 *            - the border setting
+	 */
+	public void setBorder(Border border) {
+		if (border == null) {
+			borderPropertiesElement.removeAttribute(StyleBorderLineWidthAttribute.ATTRIBUTE_NAME.getQName());
+			borderPropertiesElement.removeAttribute(FoBorderAttribute.ATTRIBUTE_NAME.getQName());
+			return;
+		}
+		switch (border.lineStyle) {
+		case DOUBLE:
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "style:border-line-width",border.getDoubleLineWidthDescription());
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.FO.getUri(), "fo:border",border.getBorderDescription());
+			break;
+		case SINGLE:
+			borderPropertiesElement.setAttributeNS(OdfDocumentNamespace.FO.getUri(), "fo:border",border.getBorderDescription());
+			break;
+		case NONE:
+			borderPropertiesElement.removeAttribute(StyleBorderLineWidthAttribute.ATTRIBUTE_NAME.getQName());
+			borderPropertiesElement.removeAttribute(FoBorderAttribute.ATTRIBUTE_NAME.getQName());
+		}
+	}
+	
+	/**
+	 * Return the border setting for all four borders.
+	 * <p>
+	 * Null will be returned if there is no border setting for all four borders.
+	 * 
+	 * @return the border setting
+	 */
+	public Border getBorder() {
+		Border border = new Border();
+		String borderAttr = borderPropertiesElement.getAttributeNS(OdfDocumentNamespace.FO.getUri(), "border");
+		String borderWidth = borderPropertiesElement.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "border-line-width");
+
+		if (borderAttr == null || borderAttr.length() == 0)
+			return null;
+
+		border.setBorderByDescription(borderAttr);
+		if ((borderWidth != null) && (borderWidth.length() != 0)) {
+			border.setDoubleLineWidthByDescription(borderWidth);
+		}
+		return border;
+	}
+
+	/**
+	 * Return the border setting for the top border.
+	 * <p>
+	 * Null will be returned if there is no border setting for the top border.
+	 * 
+	 * @return the border setting
+	 */
+	public Border getTopBorder() {
+		Border border = new Border();
+		String borderAttr = borderPropertiesElement.getAttributeNS(OdfDocumentNamespace.FO.getUri(), "border-top");
+		String borderWidth = borderPropertiesElement.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "border-line-width-top");
+
+		if (borderAttr == null || borderAttr.length() == 0)
+			return getBorder();
+
+		border.setBorderByDescription(borderAttr);
+		if ((borderWidth != null) && (borderWidth.length() != 0)) {
+			border.setDoubleLineWidthByDescription(borderWidth);
+		}
+		return border;
+	}
+
+	/**
+	 * Return the border setting for the left border.
+	 * <p>
+	 * Null will be returned if there is no border setting for the left border.
+	 * 
+	 * @return the border setting
+	 */
+	public Border getLeftBorder() {
+		Border border = new Border();
+		String borderAttr = borderPropertiesElement.getAttributeNS(OdfDocumentNamespace.FO.getUri(), "border-left");
+		String borderWidth = borderPropertiesElement.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "border-line-width-left");
+
+		if (borderAttr == null || borderAttr.length() == 0)
+			return getBorder();
+
+		border.setBorderByDescription(borderAttr);
+		if ((borderWidth != null) && (borderWidth.length() != 0)) {
+			border.setDoubleLineWidthByDescription(borderWidth);
+		}
+		return border;
+	}
+
+	/**
+	 * Return the border setting for the right border.
+	 * <p>
+	 * Null will be returned if there is no border setting for the right border.
+	 * 
+	 * @return the border setting
+	 */
+	public Border getRightBorder() {
+		Border border = new Border();
+		String borderAttr = borderPropertiesElement.getAttributeNS(OdfDocumentNamespace.FO.getUri(), "border-right");
+		String borderWidth = borderPropertiesElement.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "border-line-width-right");
+
+		if (borderAttr == null || borderAttr.length() == 0)
+			return getBorder();
+
+		border.setBorderByDescription(borderAttr);
+		if ((borderWidth != null) && (borderWidth.length() != 0)) {
+			border.setDoubleLineWidthByDescription(borderWidth);
+		}
+		return border;
+	}
+
+	// fo:border-bottom
+	// style:border-line-width-bottom
+	/**
+	 * Return the border setting for the bottom border.
+	 * <p>
+	 * Null will be returned if there is no border setting for the bottom
+	 * border.
+	 * 
+	 * @return the border setting
+	 */
+	public Border getBottomBorder() {
+		Border border = new Border();
+		String borderAttr = borderPropertiesElement.getAttributeNS(OdfDocumentNamespace.FO.getUri(), "border-bottom");
+		String borderWidth = borderPropertiesElement.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "border-line-width-bottom");
+
+		if (borderAttr == null || borderAttr.length() == 0) {
+			return getBorder();
+		}
+
+		border.setBorderByDescription(borderAttr);
+		if ((borderWidth != null) && (borderWidth.length() != 0)) {
+			border.setDoubleLineWidthByDescription(borderWidth);
+		}
+		return border;
+	}
+
+}
+

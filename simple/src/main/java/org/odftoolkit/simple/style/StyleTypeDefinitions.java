@@ -250,6 +250,7 @@ public class StyleTypeDefinitions {
 	 * 
 	 */
 	public static enum SupportedLinearMeasure {
+		//1in = 2.54cm = 25.4 mm = 72pt = 6pc
 		PT("pt") {
 			public double toINs(double measure) {
 				return measure / 72;
@@ -258,7 +259,11 @@ public class StyleTypeDefinitions {
 			public double toPTs(double measure) {
 				return measure;
 			}
-
+			
+			public double toCMs(double measure) {
+				return measure / 28.3465;
+			}
+			
 			public double convert(double measure, SupportedLinearMeasure measureUnit) {
 				return measureUnit.toPTs(measure);
 			}
@@ -272,12 +277,34 @@ public class StyleTypeDefinitions {
 				return 72 * measure;
 			}
 
+			public double toCMs(double measure) {
+				return 2.54 * measure;
+			}
+			
 			public double convert(double measure, SupportedLinearMeasure measureUnit) {
 				return measureUnit.toINs(measure);
 			}
+		},
+		CM("cm") {
+			public double toINs(double measure) {
+				return measure / 2.54;
+			}
+
+			public double toPTs(double measure) {
+				return measure * 28.3465;
+			}
+			
+			public double toCMs(double measure) {
+				return measure;
+			}
+			
+			public double convert(double measure, SupportedLinearMeasure measureUnit) {
+				return measureUnit.toPTs(measure);
+			}
 		};
-		// CM("cm")
-		// MM("mm");
+//		MM("mm") {
+//			
+//		}
 
 		private String value;
 
@@ -319,6 +346,18 @@ public class StyleTypeDefinitions {
 		 * @see #convert
 		 */
 		public double toPTs(double measure) {
+			throw new AbstractMethodError();
+		}
+		
+		/**
+		 * Convert other measure to centimeter(CM) measure.
+		 * 
+		 * @param measure
+		 *            the measure
+		 * @return the converted measure
+		 * @see #convert
+		 */
+		public double toCMs(double measure) {
 			throw new AbstractMethodError();
 		}
 
@@ -479,6 +518,100 @@ public class StyleTypeDefinitions {
 				}
 			}
 			return NORMAL;
+		}
+
+		@Override
+		public String toString() {
+			return value;
+		}
+	}
+	
+	/**
+	 * 
+	 * the fill style for a graphic object. 
+	 *
+	 */
+	public static enum OdfDrawFill {
+		/**
+		 * the drawing object is filled with the bitmap specified by the draw:fill-image-name attribute.
+		 */
+		BITMAP("bitmap"),
+		/**
+		 * the drawing object is filled with the gradient specified by the draw:fill-gradient-name attribute.
+		 */
+		GRADIENT("gradient"),
+		/**
+		 * the drawing object is filled with the hatch specified by the draw:fill-hatch-name attribute. 
+		 */
+		HATCH("hatch"),
+		/**
+		 * the drawing object is not filled.
+		 */
+		NONE("none"),
+		/**
+		 * the drawing object is filled with the color specified by the draw:fill-color attribute.
+		 */
+		SOLID("solid");  		
+
+		private String value;
+
+		OdfDrawFill(String style) {
+			this.value = style;
+		}
+
+		public static OdfDrawFill enumValueOf(String aValue) {
+			if ((aValue == null) || (aValue.length() == 0))
+				return NONE;
+
+			for (OdfDrawFill aIter : values()) {
+				if (aValue.equals(aIter.toString())) {
+					return aIter;
+				}
+			}
+			return NONE;
+		}
+
+		@Override
+		public String toString() {
+			return value;
+		}
+	}
+	
+	/**
+	 * 
+	 * The style of the stroke from ODF perspective
+	 *
+	 */
+	public static enum OdfDrawStroke {
+		/**
+		 * stroke referenced by a draw:stroke-dash attribute of a style on the object is drawn
+		 */
+		DASH("dash"),
+		/**
+		 * no stroke is drawn.
+		 */
+		NONE("none"),
+		/**
+		 * solid stroke is drawn.
+		 */
+		SOLID("solid");
+		
+		private String value;
+
+		OdfDrawStroke(String style) {
+			this.value = style;
+		}
+
+		public static OdfDrawStroke enumValueOf(String aValue) {
+			if ((aValue == null) || (aValue.length() == 0))
+				return NONE;
+
+			for (OdfDrawStroke aIter : values()) {
+				if (aValue.equals(aIter.toString())) {
+					return aIter;
+				}
+			}
+			return NONE;
 		}
 
 		@Override

@@ -280,6 +280,9 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	 * @return the new paragraph
 	 * @throws Exception
 	 *             if the file DOM could not be created.
+	 * @deprecated As of Simple version 0.5, replaced by
+	 *             <code>addParagraph(String text)</code>
+	 * @see #addParagraph(String)
 	 */
 	public OdfTextParagraph newParagraph(String text) throws Exception {
 		OdfTextParagraph para = newParagraph();
@@ -293,6 +296,10 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	 * @return The new paragraph
 	 * @throws Exception
 	 *             if the file DOM could not be created.
+	 * @deprecated As of Simple version 0.5, replaced by
+	 *             <code>Paragraph.newParagraph(ParagraphContainer)</code>
+	 * @see Paragraph#newParagraph(ParagraphContainer)
+	 * @see #addParagraph(String)
 	 */
 	public OdfTextParagraph newParagraph() throws Exception {
 		OfficeTextElement odfText = getContentRoot();
@@ -309,6 +316,12 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	 *         been added to.
 	 * @throws Exception
 	 *             if the file DOM could not be created.
+	 * @deprecated As of Simple version 0.5, replaced by
+	 *             <code>Paragraph.appendTextContent(String content)</code>
+	 * @see Paragraph#appendTextContent(String)
+	 * @see Paragraph#appendTextContentNotCollapsed(String)
+	 * @see #getParagraphByIndex(int, boolean)
+	 * @see #getParagraphByReverseIndex(int, boolean)
 	 */
 	public OdfTextParagraph addText(String text) throws Exception {
 		OfficeTextElement odfText = getContentRoot();
@@ -438,11 +451,11 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	 * @return the footer of this text document.
 	 * @since 0.5
 	 */
-	public Footer getFooter(boolean pFirstPage) {
-		Footer tmpFooter = pFirstPage ? firstPageFooter : standardFooter;
+	public Footer getFooter(boolean isFirstPage) {
+		Footer tmpFooter = isFirstPage ? firstPageFooter : standardFooter;
 		if (tmpFooter == null) {
 			try {
-				StyleMasterPageElement masterPageElement = getMasterPage(pFirstPage);
+				StyleMasterPageElement masterPageElement = getMasterPage(isFirstPage);
 				StyleFooterElement footerElement = OdfElement.findFirstChildNode(StyleFooterElement.class,
 						masterPageElement);
 				if (footerElement == null) {
@@ -452,7 +465,7 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 			} catch (Exception e) {
 				Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
 			}
-			if (pFirstPage) {
+			if (isFirstPage) {
 				firstPageFooter = tmpFooter;
 			} else {
 				standardFooter = tmpFooter;
@@ -539,7 +552,8 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	}
 
 	private class ParagraphContainerImpl extends AbstractParagraphContainer {
-		public OdfElement getParagraphContainerElement() {
+		public OdfElement getParagraphContainerElement()
+		{
 			OdfElement containerElement = null;
 			try {
 				containerElement = getContentRoot();
@@ -549,7 +563,6 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 			return containerElement;
 		}
 	}
-
 	private ParagraphContainerImpl getParagraphContainerImpl() {
 		if (paragraphContainerImpl == null)
 			paragraphContainerImpl = new ParagraphContainerImpl();
@@ -560,30 +573,42 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	 * Creates a new paragraph and append text
 	 * 
 	 * @param text
-	 *            the text content of this paragraph
 	 * @return the new paragraph
 	 * @throws Exception
 	 *             if the file DOM could not be created.
 	 */
-	public Paragraph addParagraph(String text) {
+	public Paragraph addParagraph(String text)
+	{
 		Paragraph para = getParagraphContainerImpl().addParagraph(text);
 		return para;
 	}
-
+	
 	/**
 	 * Remove paragraph from this document
-	 * 
 	 * @param para
-	 *            the instance of paragraph
+	 *            - the instance of paragraph
 	 * @return true if the paragraph is removed successfully, false if errors
 	 *         happen.
 	 */
-	public boolean removeParagraph(Paragraph para) {
+	public boolean removeParagraph(Paragraph para)
+	{
 		return getParagraphContainerImpl().removeParagraph(para);
 	}
 
 	public OdfElement getParagraphContainerElement() {
 		return getParagraphContainerImpl().getParagraphContainerElement();
+	}
+
+	public Paragraph getParagraphByIndex(int index, boolean isEmptyParagraphSkipped) {
+		return getParagraphContainerImpl().getParagraphByIndex(index, isEmptyParagraphSkipped);
+	}
+
+	public Paragraph getParagraphByReverseIndex(int reverseIndex, boolean isEmptyParagraphSkipped) {
+		return getParagraphContainerImpl().getParagraphByReverseIndex(reverseIndex, isEmptyParagraphSkipped);
+	}
+
+	public Iterator<Paragraph> getParagraphIterator() {
+		return getParagraphContainerImpl().getParagraphIterator();
 	}
 
 	public VariableField declareVariable(String name, VariableType type) {

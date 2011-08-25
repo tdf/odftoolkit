@@ -21,9 +21,13 @@
  ************************************************************************/
 package org.odftoolkit.simple.text;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -118,6 +122,33 @@ public class ParagraphTest {
 			node = node.getNextSibling();
 		}
 		Assert.assertEquals(node, null);
+	}
+
+	@Test
+	public void testGetParagraphByIndex() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Paragraph paragraph1 = doc.addParagraph("paragraph1");
+			Paragraph paragraphE = doc.addParagraph(null);
+			Paragraph paragraph2 = doc.addParagraph("p2");
+
+			Paragraph t1 = doc.getParagraphByIndex(1, false);
+			Assert.assertEquals(t1, paragraph1);
+			t1 = doc.getParagraphByIndex(3, false);
+			Assert.assertEquals(t1, paragraph2);
+			t1 = doc.getParagraphByIndex(1, true);
+			Assert.assertEquals(t1, paragraph2);
+			t1 = doc.getParagraphByReverseIndex(0, false);
+			Assert.assertEquals(t1, paragraph2);
+			t1 = doc.getParagraphByReverseIndex(2, false);
+			Assert.assertEquals(t1, paragraph1);
+			t1 = doc.getParagraphByReverseIndex(1, true);
+			Assert.assertEquals(t1, paragraph1);
+			doc.save(ResourceUtilities.newTestOutputFile("testGetParagraphByIndex.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(ParagraphTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
 	}
 
 }

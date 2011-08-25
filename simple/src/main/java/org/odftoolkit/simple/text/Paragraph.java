@@ -21,6 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.simple.text;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSElement;
@@ -29,6 +32,11 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
+import org.odftoolkit.simple.PresentationDocument;
+import org.odftoolkit.simple.draw.AbstractTextboxContainer;
+import org.odftoolkit.simple.draw.FrameRectangle;
+import org.odftoolkit.simple.draw.Textbox;
+import org.odftoolkit.simple.draw.TextboxContainer;
 import org.odftoolkit.simple.style.DefaultStyleHandler;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -40,12 +48,13 @@ import org.w3c.dom.Text;
  * 
  * @since 0.5
  */
-public class Paragraph extends Component {
+public class Paragraph extends Component implements TextboxContainer {
 
 	private TextPElement mParagraphElement;
 	private Document mOwnerDocument;
 	private ParagraphContainer mContainer;
 	private DefaultStyleHandler mStyleHandler;
+	private TextboxContainerImpl mTextboxContainerImpl;
 
 	private Paragraph(TextPElement pElement) {
 		mParagraphElement = pElement;
@@ -62,6 +71,9 @@ public class Paragraph extends Component {
 	 * @return an instance of paragraph
 	 */
 	public static Paragraph getInstanceof(TextPElement pElement) {
+		if (pElement == null)
+			return null;
+
 		Paragraph para = null;
 		para = (Paragraph) Component.getComponentByElement(pElement);
 		if (para != null)
@@ -88,6 +100,7 @@ public class Paragraph extends Component {
 		parent.appendChild(pEle);
 		para = new Paragraph(pEle);
 		para.mContainer = container;
+		Component.registerComponent(para, pEle);
 
 		return para;
 	}
@@ -332,4 +345,43 @@ public class Paragraph extends Component {
 		return mParagraphElement;
 	}
 
+	public Textbox addTextbox() {
+		return getTextboxContainerImpl().addTextbox();
+	}
+
+	public Iterator<Textbox> getTextboxIterator() {
+		return getTextboxContainerImpl().getTextboxIterator();
+	}
+
+	public boolean removeTextbox(Textbox box) {
+		return getTextboxContainerImpl().removeTextbox(box);
+	}
+
+	public OdfElement getFrameContainerElement() {
+		return getTextboxContainerImpl().getFrameContainerElement();
+	}
+
+	public Textbox addTextbox(FrameRectangle position) {
+		return getTextboxContainerImpl().addTextbox(position);
+	}
+
+	public Textbox getTextboxByName(String name) {
+		return getTextboxContainerImpl().getTextboxByName(name);
+	}
+
+	public List<Textbox> getTextboxByUsage(PresentationDocument.PresentationClass usage) {
+		throw new UnsupportedOperationException("this method is not supported by paragraph.");
+	}
+
+	private class TextboxContainerImpl extends AbstractTextboxContainer {
+		public OdfElement getFrameContainerElement() {
+			return mParagraphElement;
+		}
+	}
+
+	private TextboxContainerImpl getTextboxContainerImpl() {
+		if (mTextboxContainerImpl == null)
+			mTextboxContainerImpl = new TextboxContainerImpl();
+		return mTextboxContainerImpl;
+	}
 }

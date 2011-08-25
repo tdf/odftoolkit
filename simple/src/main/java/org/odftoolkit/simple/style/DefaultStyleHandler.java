@@ -48,17 +48,14 @@ import org.w3c.dom.Node;
  * @since 0.5
  */
 public class DefaultStyleHandler {
-
 	/**
 	 * The style element that will be processed.
 	 */
 	protected OdfStyleBase mStyleElement;
-
 	/**
 	 * The writable style element that will be processed.
 	 */
 	protected OdfStyle mWritableStyleElement;
-
 	/**
 	 * Whether the default style is used.
 	 */
@@ -104,9 +101,19 @@ public class DefaultStyleHandler {
 	protected ParagraphProperties mWritableParagraphProperties;
 
 	/**
+	 * The readable graphics properties element.
+	 */
+	protected GraphicProperties mGraphicProperties;
+
+	/**
+	 * The writable graphics properties element.
+	 */
+	protected GraphicProperties mWritableGraphicProperties;
+
+	/**
 	 * Constructor of DefaultStyleHandler
 	 * 
-	 * @param component
+	 * @param element
 	 *            - the instance of structure component in an ODF document
 	 * 
 	 */
@@ -178,7 +185,7 @@ public class DefaultStyleHandler {
 		if (mTextProperties != null)
 			return mTextProperties;
 		else {
-			Logger.getLogger(DefaultStyleHandler.class.getName()).log(Level.INFO,
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
 					"No explicit text properties definition is found!", "");
 			return null;
 		}
@@ -199,7 +206,7 @@ public class DefaultStyleHandler {
 	 */
 	public TextProperties getTextPropertiesForWrite() {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.TextProperties)) {
-			Logger.getLogger(DefaultStyleHandler.class.getName()).log(Level.INFO,
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
 					"Text properties are not supported by style family: " + mOdfElement.getStyleFamily() + "!", "");
 			return null;
 		}
@@ -228,7 +235,7 @@ public class DefaultStyleHandler {
 	 */
 	public TableCellProperties getTableCellPropertiesForRead() {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.TableCellProperties)) {
-			Logger.getLogger(DefaultStyleHandler.class.getName())
+			Logger.getLogger(CellStyleHandler.class.getName())
 					.log(
 							Level.INFO,
 							"TableCell properties are not supported by style family: " + mOdfElement.getStyleFamily()
@@ -243,14 +250,14 @@ public class DefaultStyleHandler {
 
 		OdfStyleBase style = getStyleElementForRead();
 		if (style == null) {
-			Logger.getLogger(DefaultStyleHandler.class.getName()).log(Level.INFO, "No style definition is found!", "");
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO, "No style definition is found!", "");
 			return null;
 		}
 		mTableCellProperties = TableCellProperties.getTableCellProperties(style);
 		if (mTableCellProperties != null)
 			return mTableCellProperties;
 		else {
-			Logger.getLogger(DefaultStyleHandler.class.getName()).log(Level.INFO,
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
 					"No explicit table cell properties definition is found!", "");
 			return null;
 		}
@@ -271,7 +278,7 @@ public class DefaultStyleHandler {
 	 */
 	public TableCellProperties getTableCellPropertiesForWrite() {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.TableCellProperties)) {
-			Logger.getLogger(DefaultStyleHandler.class.getName())
+			Logger.getLogger(CellStyleHandler.class.getName())
 					.log(
 							Level.INFO,
 							"TableCell properties are not supported by style family: " + mOdfElement.getStyleFamily()
@@ -303,7 +310,7 @@ public class DefaultStyleHandler {
 	 */
 	public ParagraphProperties getParagraphPropertiesForRead() {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.ParagraphProperties)) {
-			Logger.getLogger(DefaultStyleHandler.class.getName())
+			Logger.getLogger(CellStyleHandler.class.getName())
 					.log(
 							Level.INFO,
 							"Paragraph properties are not supported by style family: " + mOdfElement.getStyleFamily()
@@ -318,14 +325,14 @@ public class DefaultStyleHandler {
 
 		OdfStyleBase style = getStyleElementForRead();
 		if (style == null) {
-			Logger.getLogger(DefaultStyleHandler.class.getName()).log(Level.INFO, "No style definition is found!", "");
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO, "No style definition is found!", "");
 			return null;
 		}
 		mParagraphProperties = ParagraphProperties.getParagraphProperties(style);
 		if (mParagraphProperties != null)
 			return mParagraphProperties;
 		else {
-			Logger.getLogger(DefaultStyleHandler.class.getName()).log(Level.INFO,
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
 					"No explicit paragraph properties definition is found!", "");
 			return null;
 		}
@@ -346,7 +353,7 @@ public class DefaultStyleHandler {
 	 */
 	public ParagraphProperties getParagraphPropertiesForWrite() {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.ParagraphProperties)) {
-			Logger.getLogger(DefaultStyleHandler.class.getName())
+			Logger.getLogger(CellStyleHandler.class.getName())
 					.log(
 							Level.INFO,
 							"Paragraph properties are not supported by style family: " + mOdfElement.getStyleFamily()
@@ -359,6 +366,75 @@ public class DefaultStyleHandler {
 		OdfStyle style = getStyleElementForWrite();
 		mWritableParagraphProperties = ParagraphProperties.getOrCreateParagraphProperties(style);
 		return mWritableParagraphProperties;
+	}
+
+	/**
+	 * Return the graphic style properties definition for this component, only
+	 * for read function.
+	 * <p>
+	 * Null will be returned if there is no style definition.
+	 * <p>
+	 * Null will be returned if there is no explicit graphic style properties
+	 * definition for this component.
+	 * <p>
+	 * Note if you try to write style properties to the returned object, errors
+	 * will be met with.
+	 * 
+	 * @return the graphic style properties definition for this component, only
+	 *         for read function
+	 */
+	public GraphicProperties getGraphicPropertiesForRead() {
+		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.GraphicProperties)) {
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
+					"Graphics properties are not supported by style family: " + mOdfElement.getStyleFamily() + "!", "");
+			return null;
+		}
+
+		if (mWritableGraphicProperties != null)
+			return mWritableGraphicProperties;
+		else if (mGraphicProperties != null)
+			return mGraphicProperties;
+
+		OdfStyleBase style = getStyleElementForRead();
+		if (style == null) {
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO, "No style definition is found!", "");
+			return null;
+		}
+		mGraphicProperties = GraphicProperties.getGraphicProperties(style);
+		if (mGraphicProperties != null)
+			return mGraphicProperties;
+		else {
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
+					"No explicit graphic properties definition is found!", "");
+			return null;
+		}
+	}
+
+	/**
+	 * Return the text style properties definition for this component, for read
+	 * and write function.
+	 * <p>
+	 * An empty style definition will be created if there is no style
+	 * definition.
+	 * <p>
+	 * An empty text style properties definition will be created if there is no
+	 * explicit text style properties definition.
+	 * 
+	 * @return the text style properties definition for this component, for read
+	 *         and write function
+	 */
+	public GraphicProperties getGraphicPropertiesForWrite() {
+		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.GraphicProperties)) {
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
+					"Graphics properties are not supported by style family: " + mOdfElement.getStyleFamily() + "!", "");
+			return null;
+		}
+
+		if (mWritableGraphicProperties != null)
+			return mWritableGraphicProperties;
+		OdfStyle style = getStyleElementForWrite();
+		mWritableGraphicProperties = GraphicProperties.getOrCreateGraphicProperties(style);
+		return mWritableGraphicProperties;
 	}
 
 	/**
@@ -483,7 +559,9 @@ public class DefaultStyleHandler {
 	}
 
 	/**
-	 * Return the style element for this component, only for read function.
+	 * Return the style element for this component, only for read function. This
+	 * method will invode <code>getusedStyleName</code> to get the style name,
+	 * and then find the readable style element by name.
 	 * <p>
 	 * Null will be returned if there is no style definition.
 	 * <p>
@@ -491,6 +569,7 @@ public class DefaultStyleHandler {
 	 * will be met with.
 	 * 
 	 * @return the style element
+	 * @see #getUsedStyleName()
 	 */
 	public OdfStyleBase getStyleElementForRead() {
 		// Return current used style
@@ -499,17 +578,20 @@ public class DefaultStyleHandler {
 
 		String styleName = getUsedStyleName();
 		mStyleElement = getReadableStyleElementByName(styleName);
+		;
 		return mStyleElement;
 	}
 
 	/**
 	 * Return the style element for this component, for read and write
-	 * functions.
+	 * functions. This method will invode <code>getusedStyleName</code> to get
+	 * the style name, and then find the writable style element by name.
 	 * <p>
 	 * An empty style definition will be created if there is no style
 	 * definition.
 	 * 
 	 * @return the style element
+	 * @see #getUsedStyleName()
 	 */
 	public OdfStyle getStyleElementForWrite() {
 		if (mWritableStyleElement != null)
@@ -526,4 +608,5 @@ public class DefaultStyleHandler {
 		else
 			return mStyleElement;
 	}
+
 }

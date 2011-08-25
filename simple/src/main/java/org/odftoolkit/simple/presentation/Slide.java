@@ -34,6 +34,10 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.PresentationDocument;
+import org.odftoolkit.simple.draw.AbstractTextboxContainer;
+import org.odftoolkit.simple.draw.FrameRectangle;
+import org.odftoolkit.simple.draw.Textbox;
+import org.odftoolkit.simple.draw.TextboxContainer;
 import org.odftoolkit.simple.table.AbstractTableContainer;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.table.TableContainer;
@@ -49,11 +53,12 @@ import org.w3c.dom.NodeList;
  * document. <code>Slide</code> provides methods to get the slide index,get the
  * content of the current slide, etc.
  */
-public class Slide extends Component implements ListContainer, TableContainer {
+public class Slide extends Component implements ListContainer, TableContainer, TextboxContainer {
 
 	DrawPageElement maSlideElement;
 	private ListContainerImpl listContainerImpl;
 	private TableContainerImpl tableContainerImpl;
+	private TextboxContainerImpl mTextboxContainerImpl;
 
 	/**
 	 * This is a tool class which supplies all of the slide creation detail.
@@ -436,5 +441,46 @@ public class Slide extends Component implements ListContainer, TableContainer {
 			}
 			return frame;
 		}
+	}
+
+	// *********Text box support **********//
+	public Textbox addTextbox() {
+		return getTextboxContainerImpl().addTextbox();
+	}
+
+	public Iterator<Textbox> getTextboxIterator() {
+		return getTextboxContainerImpl().getTextboxIterator();
+	}
+
+	public boolean removeTextbox(Textbox box) {
+		return getTextboxContainerImpl().removeTextbox(box);
+	}
+
+	public OdfElement getFrameContainerElement() {
+		return getTextboxContainerImpl().getFrameContainerElement();
+	}
+
+	public Textbox addTextbox(FrameRectangle position) {
+		return getTextboxContainerImpl().addTextbox(position);
+	}
+
+	public Textbox getTextboxByName(String name) {
+		return getTextboxContainerImpl().getTextboxByName(name);
+	}
+
+	private class TextboxContainerImpl extends AbstractTextboxContainer {
+		public OdfElement getFrameContainerElement() {
+			return maSlideElement;
+		}
+	}
+
+	private TextboxContainerImpl getTextboxContainerImpl() {
+		if (mTextboxContainerImpl == null)
+			mTextboxContainerImpl = new TextboxContainerImpl();
+		return mTextboxContainerImpl;
+	}
+
+	public java.util.List<Textbox> getTextboxByUsage(PresentationDocument.PresentationClass usage) {
+		return getTextboxContainerImpl().getTextboxByUsage(usage);
 	}
 }

@@ -22,6 +22,7 @@
 
 package org.odftoolkit.simple;
 
+import java.util.HashMap;
 import java.util.IdentityHashMap;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
@@ -43,7 +44,7 @@ public abstract class Component {
 	abstract public OdfElement getOdfElement();
 
 	/**
-	 * Register component to the map repository.
+	 * Register component to the map repository
 	 * 
 	 * @param component
 	 *            the component to be registered.
@@ -68,7 +69,7 @@ public abstract class Component {
 	 * @return the component instance
 	 */
 	protected static Component getComponentByElement(OdfElement element) {
-		Document doc = (Document) ((OdfFileDom) element.getOwnerDocument()).getOwnerDocument();
+		Document doc = (Document) ((OdfFileDom) element.getOwnerDocument()).getDocument();
 		IdentityHashMap<OdfElement, Component> repository = doc.getComponentMap();
 		if (repository != null)
 			return repository.get(element);
@@ -77,9 +78,9 @@ public abstract class Component {
 	}
 
 	/**
-	 * Get the owner document of this component.
+	 * Get the owner document of this component
 	 * 
-	 * @return the owner document.
+	 * @return - the owner document
 	 */
 	public Document getOwnerDocument() {
 		return (Document) ((OdfFileDom) getOdfElement().getOwnerDocument()).getDocument();

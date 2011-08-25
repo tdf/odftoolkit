@@ -61,6 +61,108 @@ public class PresentationDocument extends Document {
 	private final NotesBuilder notesBuilder;
 
 	/**
+	 * It represents the defined values of presentation:class. The
+	 * presentation:class attribute classifies presentation shapes by their
+	 * usage within a draw page.
+	 * 
+	 * @since 0.5
+	 */
+	public static enum PresentationClass {
+		/**
+		 * presentation charts are standard object shapes.
+		 */
+		CHAT("chart"),
+		/**
+		 * presentation graphics are standard graphic shapes.
+		 */
+		GRAPHIC("graphic"),
+		/**
+		 * presentation handouts are placeholder for the drawing page in a
+		 * handout page.
+		 */
+		HANDOUT("handout"),
+		/**
+		 * presentation notes are used on notes pages.
+		 */
+		NOTES("notes"),
+		/**
+		 * presentation objects are standard object shapes.
+		 */
+		OBJECTS("object"),
+		/**
+		 * presentation organization charts are standard object shapes.
+		 */
+		ORGCHART("orgchart"),
+		/**
+		 * outlines are standard text shapes
+		 */
+		OUTLINE("outline"),
+		/**
+		 * presentation pages are used on notes pages
+		 */
+		PAGE("page"),
+		/**
+		 * subtitles are standard text shapes
+		 */
+		SUBTITLE("subtitle"),
+		/**
+		 * presentation tables are standard object shapes
+		 */
+		TABLE("table"),
+		/**
+		 * presentation texts are standard text shapes
+		 */
+		TEXT("text"),
+		/**
+		 * titles are standard text shapes
+		 */
+		TITLE("title"),
+		/**
+		 * drawing shape is used as a date and/or time shape. Date and Time
+		 * shapes are standard text shapes.
+		 */
+		DATETIME("date-time"),
+		/**
+		 * drawing shape is used as a footer. Footer shapes are standard text
+		 * shapes.
+		 */
+		FOOTER("footer"),
+		/**
+		 * drawing shape is used as a header. Header shapes are standard text
+		 * shapes.
+		 */
+		HEADER("header"),
+		/**
+		 * drawing shape is used as a page number shape. Page Number shapes are
+		 * standard text shapes.
+		 */
+		PAGENUMBER("page-number");
+
+		private String value;
+
+		PresentationClass(String aClass) {
+			value = aClass;
+		}
+
+		@Override
+		public String toString() {
+			return value;
+		}
+
+		public static PresentationClass enumValueOf(String aValue) {
+			if ((aValue == null) || (aValue.length() == 0))
+				return null;
+
+			for (PresentationClass aIter : values()) {
+				if (aValue.equals(aIter.toString())) {
+					return aIter;
+				}
+			}
+			throw new RuntimeException("Unsupported Presentation Class!");
+		}
+	}
+	
+	/**
 	 * This enum contains all possible media types of PresentationDocument
 	 * documents.
 	 */
