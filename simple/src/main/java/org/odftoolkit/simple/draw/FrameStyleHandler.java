@@ -133,8 +133,8 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 	 */
 	public void setAchorType(StyleTypeDefinitions.AnchorType achorType)
 	{
-		if (!mDocument.getMediaTypeString().equals(Document.OdfMediaType.TEXT.toString()) &&
-				!mDocument.getMediaTypeString().equals(Document.OdfMediaType.TEXT_TEMPLATE.toString()))
+		if (!mDocument.getMediaTypeString().equals(Document.OdfMediaType.TEXT.getMediaTypeString()) &&
+				!mDocument.getMediaTypeString().equals(Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString()))
 			return;
 		GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
 
