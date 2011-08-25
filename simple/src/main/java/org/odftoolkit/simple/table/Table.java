@@ -921,9 +921,11 @@ public class Table extends Component {
 		while (notUnique) {
 			notUnique = false;
 			for (int i = 0; i < tableList.size(); i++) {
-				if (tableList.get(i).getTableName().equalsIgnoreCase(tablename)) {
-					notUnique = true;
-					break;
+				if (tableList.get(i).getTableName() != null) {
+					if (tableList.get(i).getTableName().equalsIgnoreCase(tablename)) {
+						notUnique = true;
+						break;
+					}
 				}
 			}
 			if (notUnique) {
