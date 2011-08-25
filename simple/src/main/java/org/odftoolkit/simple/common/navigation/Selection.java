@@ -19,17 +19,17 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.simple.text.search;
+package org.odftoolkit.simple.common.navigation;
 
 import java.util.Hashtable;
 import java.util.Vector;
+
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /**
- * Abstract class Selection describe one of the matched results 
- * The selection can be recognized by the container mElement, the start
- * mIndex of the text content of this mElement and the text content.
- *
+ * Abstract class Selection describes one of the matched results.
+ * The selection can be recognized by the container element, the start
+ * index of the text content of this element and the text content.
  */
 public abstract class Selection {
 
@@ -45,8 +45,8 @@ public abstract class Selection {
 	}
 
 	/**
-	 * get the start mIndex of the text content of the container mElement
-	 * this is only meaningful for TextSelection. other type Selection 
+	 * get the start index of the text content of the container mElement
+	 * this is only meaningful for TextSelection. other type of Selection 
 	 * will return 0.
 	 * @return the start mIndex of the container mElement
 	 */
@@ -58,57 +58,57 @@ public abstract class Selection {
 	 * cut the current selection
 	 * @throws InvalidNavigationException 
 	 */
-	abstract public void cut() throws InvalidNavigationException;
+	public abstract void cut() throws InvalidNavigationException;
 
 	/**
 	 * paste the current selection at front of the specified position selection
 	 * @param positionitem	the position selection
 	 * @throws InvalidNavigationException 
 	 */
-	abstract public void pasteAtFrontOf(Selection positionitem) throws InvalidNavigationException;
+	public abstract void pasteAtFrontOf(Selection positionitem) throws InvalidNavigationException;
 
 	/**
 	 * paste the current selection at end of the specified position selection
 	 * @param positionitem	the position selection
 	 * @throws InvalidNavigationException 
-	 * @throws org.odftoolkit.simple.text.search.InvalidNavigationException 
+	 * @throws org.odftoolkit.simple.common.navigation.InvalidNavigationException 
 	 */
-	abstract public void pasteAtEndOf(Selection positionitem) throws InvalidNavigationException, org.odftoolkit.simple.text.search.InvalidNavigationException;
+	public abstract void pasteAtEndOf(Selection positionitem) throws InvalidNavigationException, org.odftoolkit.simple.common.navigation.InvalidNavigationException;
 
 	/**
 	 * when a selected item has been delete, the selections after this deleted selection should be refresh
 	 * because these selections mIndex will be changed
 	 * @param deleteditem	the deleted selection
 	 */
-	abstract protected void refreshAfterFrontalDelete(Selection deleteditem);
+	protected abstract void refreshAfterFrontalDelete(Selection deleteditem);
 
 	/**
 	 * when a selected item has been inserted, the selection after the inserted item should be refresh
 	 * because these selections mIndex will be changed
 	 * @param inserteditem	the inserted selection
 	 */
-	abstract protected void refreshAfterFrontalInsert(Selection inserteditem);
+	protected abstract void refreshAfterFrontalInsert(Selection inserteditem);
 
 	/**
 	 * A quick method to update the mIndex of this selection
 	 * @param offset	the offset that the mIndex should be added
 	 */
-	abstract protected void refresh(int offset);
+	protected abstract void refresh(int offset);
 
 	/**
 	 * SelectionManager can manage all the selections that are returned to end users.
-	 * This SelectionManager contains a repository of all selections, and will refresh the status/mIndex
+	 * This SelectionManager contains a repository of all selections, and will refresh the status/index
 	 * of selections after certain operation.
 	 */
 	static class SelectionManager {
 
-		static private Hashtable<OdfElement, Vector<Selection>> repository = new Hashtable<OdfElement, Vector<Selection>>();
+		private static Hashtable<OdfElement, Vector<Selection>> repository = new Hashtable<OdfElement, Vector<Selection>>();
 
 		/**
 		 * Register the selection item
 		 * @param item	the selection item
 		 */
-		static public void registerItem(Selection item) {
+		public static void registerItem(Selection item) {
 			OdfElement element = item.getElement();
 			if (repository.containsKey(element)) {
 				Vector<Selection> selections = repository.get(element);
@@ -134,7 +134,7 @@ public abstract class Selection {
 		 * Refresh the selections in repository after a item is cut.
 		 * @param cutItem	the cut item
 		 */
-		synchronized static public void refreshAfterCut(Selection cutItem) {
+		public synchronized static void refreshAfterCut(Selection cutItem) {
 			//travase the whole sub tree
 			OdfElement element = cutItem.getElement();
 			if (repository.containsKey(element)) {
@@ -152,7 +152,7 @@ public abstract class Selection {
 		 * @param item	the pasted item
 		 * @param positionItem	the position item
 		 */
-		synchronized static public void refreshAfterPasteAtFrontOf(Selection item, Selection positionItem) {
+		public synchronized static void refreshAfterPasteAtFrontOf(Selection item, Selection positionItem) {
 			//travase the whole sub tree
 			OdfElement element = positionItem.getElement();
 			if (repository.containsKey(element)) {
@@ -170,7 +170,7 @@ public abstract class Selection {
 		 * @param item	the pasted item
 		 * @param positionItem	the position item
 		 */
-		synchronized static public void refreshAfterPasteAtEndOf(Selection item, Selection positionItem) {
+		public synchronized static void refreshAfterPasteAtEndOf(Selection item, Selection positionItem) {
 			OdfElement element = positionItem.getElement();
 			int positionIndex;
 
@@ -194,7 +194,7 @@ public abstract class Selection {
 		 * Remove the selection from repository.
 		 * @param item	selection item
 		 */
-		static public void unregisterItem(Selection item) {
+		public static void unregisterItem(Selection item) {
 			OdfElement element = item.getElement();
 			if (repository.containsKey(element)) {
 				Vector<Selection> selections = repository.get(element);
@@ -208,7 +208,7 @@ public abstract class Selection {
 		 * @param offset	the offset
 		 * @param positionIndex	the mIndex of a certain position
 		 */
-		synchronized static public void refresh(OdfElement containerElement, int offset, int positionIndex) {
+		public synchronized static void refresh(OdfElement containerElement, int offset, int positionIndex) {
 			if (repository.containsKey(containerElement)) {
 				Vector<Selection> selections = repository.get(containerElement);
 				for (int i = 0; i < selections.size(); i++) {

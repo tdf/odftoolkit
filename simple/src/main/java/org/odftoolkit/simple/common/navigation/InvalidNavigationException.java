@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.simple.text.search;
+package org.odftoolkit.simple.common.navigation;
 
 /**
  * Thrown to indicate that the navigation operation  

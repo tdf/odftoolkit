@@ -30,10 +30,6 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
@@ -49,6 +45,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderColumnsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderRowsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableRowsElement;
 import org.odftoolkit.odfdom.dom.element.text.TextHElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
@@ -56,6 +53,10 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfTableProperties;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.type.Length.Unit;
 import org.odftoolkit.simple.Document;
@@ -769,6 +770,13 @@ public class Table {
 			}
 			if (n instanceof TableTableRowElement) {
 				result += ((TableTableRowElement) n).getTableNumberRowsRepeatedAttribute();
+			}
+			if (n instanceof TableTableRowsElement) {
+				for (Node nn : new DomNodeList(n.getChildNodes())) {
+					if (nn instanceof TableTableRowElement) {
+						result += ((TableTableRowElement) nn).getTableNumberRowsRepeatedAttribute();
+					}
+				}
 			}
 		}
 		return result;
@@ -1517,8 +1525,7 @@ public class Table {
 		Row row = null;
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
 			if (n instanceof TableTableHeaderRowsElement) {
-				row = getHeaderRowByIndex((TableTableHeaderRowsElement) n,
-						index);
+				row = getHeaderRowByIndex((TableTableHeaderRowsElement) n, index);
 				if (row != null) {
 					return row;
 				}
@@ -1528,9 +1535,19 @@ public class Table {
 				row = getRowInstance((TableTableRowElement) n, 0);
 				result += row.getRowsRepeatedNumber();
 			}
+			if (n instanceof TableTableRowsElement) {
+				for (Node nn : new DomNodeList(n.getChildNodes())) {
+					if (nn instanceof TableTableRowElement) {
+						row = getRowInstance((TableTableRowElement) nn, 0);
+						result += row.getRowsRepeatedNumber();
+						if (result > index) {
+							return getRowInstance(row.getOdfElement(), index - (result - row.getRowsRepeatedNumber()));
+						}
+					}
+				}
+			}
 			if (result > index) {
-				return getRowInstance(row.getOdfElement(), index
-						- (result - row.getRowsRepeatedNumber()));
+				return getRowInstance(row.getOdfElement(), index - (result - row.getRowsRepeatedNumber()));
 			}
 		}
 		return null;

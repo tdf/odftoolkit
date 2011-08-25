@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.simple.text.search;
+package org.odftoolkit.simple.common.navigation;
 
 import org.w3c.dom.Node;
 

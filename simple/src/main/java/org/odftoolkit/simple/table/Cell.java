@@ -30,13 +30,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoTextAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoWrapOptionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.number.NumberCurrencySymbolElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
@@ -64,6 +62,10 @@ import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberTimeStyle;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.common.WhitespaceProcessor;
@@ -669,52 +671,117 @@ public class Cell {
 	}
 
 	/**
-	 * Set the text displayed in this cell.
+	 * Set the text displayed in this cell. If content is null, it will display
+	 * the empty string instead.
 	 * <p>
-	 * Please note the displayed text in ODF viewer might be different with the value set by this method,
-	 * because the displayed text in ODF viewer is calculated and set by editor. 
+	 * Please note the displayed text in ODF viewer might be different with the
+	 * value set by this method, because the displayed text in ODF viewer is
+	 * calculated and set by editor. So an adapter can be assigned to adapt cell
+	 * value and value type.
 	 * 
-	 * @param content	the displayed text. 
-	 * If content is null, it will display the empty string instead. 
+	 * @param content   the displayed text.
+	 * @param adapter   the <code>CellValueAdapter</code> used to adapt cell value and value type.
+	 * 
+	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 */
-	public void setDisplayText(String content) {
+	public void setDisplayText(String content, CellValueAdapter adapter) {
 		if (content == null) {
 			content = "";
 		}
-		removeContent();
-
-		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
-		OdfTextParagraph para = new OdfTextParagraph((OdfFileDom) mCellElement.getOwnerDocument());
-		textProcessor.append(para, content);
-
-		mCellElement.appendChild(para);
+		setDisplayTextContent(content, null);
+		// adapt value and value type by display text.
+		adapter.adaptValue(this, content);
 	}
-
+	
+	/**
+	 * Set the text displayed in this cell. If content is null, it will display
+	 * the empty string instead.
+	 * <p>
+	 * Please note the displayed text in ODF viewer might be different with the
+	 * value set by this method, because the displayed text in ODF viewer is
+	 * calculated and set by editor. The cell value and value type will be
+	 * updated follow by the rules which are designed in the
+	 * {@link org.odftoolkit.simple.table.DefaultCellValueAdapter
+	 * <code>DefaultCellValueAdapter</code>}.
+	 * 
+	 * @param content   the displayed text.
+	 * 
+	 * @see org.odftoolkit.simple.table.CellValueAdapter
+	 * @see org.odftoolkit.simple.table.DefaultCellValueAdapter
+	 */
+	public void setDisplayText(String content) {
+		setDisplayText(content, CellValueAdapter.DEFAULT_VALUE_ADAPTER);
+	}
+	
 	/**
 	 * Set the text displayed in this cell, with a specified style name.
 	 * <p>
-	 * Please note the displayed text in ODF viewer might be different with the value set by this method,
-	 * because the displayed text in ODF viewer are calculated and set by editor. 
+	 * Please note the displayed text in ODF viewer might be different with the
+	 * value set by this method, because the displayed text in ODF viewer is
+	 * calculated and set by editor. So an adapter can be assigned to adapt cell
+	 * value and value type.
 	 * 
 	 * @param content    the displayed text. If content is null, it will display the empty string instead. 
+	 * @param adapter    the <code>CellValueAdapter</code> used to adapt cell value and value type.
 	 * @param stylename  the style name. If stylename is null, the content will use the default paragraph style.
+	 *
+	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 */
-	public void setDisplayText(String content, String stylename) {
+	public void setDisplayText(String content, CellValueAdapter adapter, String stylename) {
 		if (content == null) {
 			content = "";
 		}
-		removeContent();
-
-		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
-		OdfTextParagraph para = new OdfTextParagraph((OdfFileDom) mCellElement.getOwnerDocument());
-		if ((stylename != null) && (stylename.length() > 0)) {
-			para.setStyleName(stylename);
-		}
-		textProcessor.append(para, content);
-
-		mCellElement.appendChild(para);
+		setDisplayTextContent(content, stylename);
+		// adapt value and value type by display text.
+		adapter.adaptValue(this, content);
 	}
-
+	
+	/**
+	 * Set the text displayed in this cell, with a specified style name.
+	 * <p>
+	 * Please note the displayed text in ODF viewer might be different with the
+	 * value set by this method, because the displayed text in ODF viewer is
+	 * calculated and set by editor. The cell value and value type will be
+	 * updated follow by the rules which are designed in the
+	 * {@link org.odftoolkit.simple.table.DefaultCellValueAdapter
+	 * <code>DefaultCellValueAdapter</code>}.
+	 * 
+	 * @param content    the displayed text. If content is null, it will display the empty string instead. 
+	 * @param stylename  the style name. If stylename is null, the content will use the default paragraph style.
+	 * 
+	 * @see org.odftoolkit.simple.table.CellValueAdapter
+	 * @see org.odftoolkit.simple.table.DefaultCellValueAdapter
+	 */
+	public void setDisplayText(String content, String stylename) {
+		setDisplayText(content, CellValueAdapter.DEFAULT_VALUE_ADAPTER, stylename);
+	}
+	
+	// Set the text content in this cell. If content is null, it will display the empty string instead. 
+	private void setDisplayTextContent(String content, String stylename) {
+		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
+		OdfStylableElement element = OdfElement.findFirstChildNode(OdfTextParagraph.class, mCellElement);
+		if (element == null) {
+			removeContent();
+			element = new OdfTextParagraph((OdfFileDom) mCellElement.getOwnerDocument());
+			mCellElement.appendChild(element);
+		} else {
+			String formerContent = element.getTextContent();
+			while (formerContent == null || "".equals(formerContent)) {
+				OdfTextSpan span = OdfElement.findFirstChildNode(OdfTextSpan.class, element);
+				if (span == null) {
+					break;
+				}
+				formerContent = span.getTextContent();
+				element = span;
+			}
+		}
+		if ((stylename != null) && (stylename.length() > 0)) {
+			element.setStyleName(stylename);
+		}
+		element.setTextContent(null);
+		textProcessor.append(element, content);
+	}
+	
 	/**
 	 * Set the cell value as a double and set the value type to be "float".
 	 * 
@@ -724,7 +791,7 @@ public class Cell {
 		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.FLOAT);
 		mCellElement.setOfficeValueAttribute(value);
-		setDisplayText(value + "");
+		setDisplayTextContent(value + "", null);
 	}
 
 	/**
@@ -752,7 +819,7 @@ public class Cell {
 		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.BOOLEAN);
 		mCellElement.setOfficeBooleanValueAttribute(value);
-		setDisplayText(value + "");
+		setDisplayTextContent(value + "", null);
 	}
 
 	/**
@@ -792,7 +859,7 @@ public class Cell {
 		SimpleDateFormat simpleFormat = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
 		String svalue = simpleFormat.format(date.getTime());
 		mCellElement.setOfficeDateValueAttribute(svalue);
-		setDisplayText(svalue);
+		setDisplayTextContent(svalue, null);
 	}
 
 	/**
@@ -808,7 +875,7 @@ public class Cell {
 		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.STRING);
 		mCellElement.setOfficeStringValueAttribute(str);
-		setDisplayText(str);
+		setDisplayTextContent(str, null);
 	}
 
 	//Note: if you want to change the cell
@@ -910,7 +977,7 @@ public class Cell {
 		SimpleDateFormat simpleFormat = new SimpleDateFormat(DEFAULT_TIME_FORMAT);
 		String svalue = simpleFormat.format(time.getTime());
 		mCellElement.setOfficeTimeValueAttribute(svalue);
-		setDisplayText(svalue);
+		setDisplayTextContent(svalue, null);
 	}
 
 	private Date parseString(String value, String format) {
@@ -1224,7 +1291,7 @@ public class Cell {
 
 		//set display text
 		if (value != null) {
-			setDisplayText(formatCurrency(currencyStyle, value.doubleValue()));
+			setDisplayTextContent(formatCurrency(currencyStyle, value.doubleValue()), null);
 		}
 	}
 
@@ -1341,7 +1408,7 @@ public class Cell {
 			setDataDisplayStyleName(numberStyle.getStyleNameAttribute());
 			Double value = getDoubleValue();
 			if (value != null) {
-				setDisplayText((new DecimalFormat(formatStr)).format(value.doubleValue()));
+				setDisplayTextContent((new DecimalFormat(formatStr)).format(value.doubleValue()), null);
 			}
 		} else if (typeValue == OfficeValueTypeAttribute.Value.DATE) {
 			OdfNumberDateStyle dateStyle = new OdfNumberDateStyle(
@@ -1353,7 +1420,7 @@ public class Cell {
 			String dateStr = mCellElement.getOfficeDateValueAttribute();
 			if (dateStr != null) {
 				Calendar date = getDateValue();
-				setDisplayText((new SimpleDateFormat(formatStr)).format(date.getTime()));
+				setDisplayTextContent((new SimpleDateFormat(formatStr)).format(date.getTime()), null);
 			}
 		} else if (typeValue == OfficeValueTypeAttribute.Value.TIME) {
 			OdfNumberTimeStyle timeStyle = new OdfNumberTimeStyle(
@@ -1364,7 +1431,7 @@ public class Cell {
 			String timeStr = mCellElement.getOfficeTimeValueAttribute();
 			if (timeStr != null) {
 				Calendar time = getTimeValue();
-				setDisplayText((new SimpleDateFormat(formatStr)).format(time.getTime()));
+				setDisplayTextContent((new SimpleDateFormat(formatStr)).format(time.getTime()), null);
 			}
 		} else if (typeValue == OfficeValueTypeAttribute.Value.PERCENTAGE) {
 			OdfNumberPercentageStyle dateStyle = new OdfNumberPercentageStyle(
@@ -1375,7 +1442,7 @@ public class Cell {
 			setDataDisplayStyleName(dateStyle.getStyleNameAttribute());
 			Double value = getPercentageValue();
 			if (value != null) {
-				setDisplayText((new DecimalFormat(formatStr)).format(value.doubleValue()));
+				setDisplayTextContent((new DecimalFormat(formatStr)).format(value.doubleValue()), null);
 			}
 		} else {
 			throw new IllegalArgumentException("This function doesn't support " + typeValue + " cell.");
@@ -1554,6 +1621,15 @@ public class Cell {
 				return style.getFormat();
 			}
 		} else if (typeValue == OfficeValueTypeAttribute.Value.DATE) {
+			String name = getDataDisplayStyleName();
+			OdfNumberDateStyle style = mCellElement.getAutomaticStyles().getDateStyle(name);
+			if (style == null) {
+				style = mDocument.getDocumentStyles().getDateStyle(name);
+			}
+			if (style != null) {
+				return style.getFormat();
+			}
+		}else if (typeValue == OfficeValueTypeAttribute.Value.TIME) {
 			String name = getDataDisplayStyleName();
 			OdfNumberDateStyle style = mCellElement.getAutomaticStyles().getDateStyle(name);
 			if (style == null) {

@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.simple.text.search;
+package org.odftoolkit.simple.common.navigation;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -112,7 +112,7 @@ public class TextStyleNavigation extends Navigation {
 
 	/* (non-Javadoc)
 	 * get current TextSelection
-	 * @see org.odftoolkit.simple.text.search.Navigation#getCurrentItem()
+	 * @see org.odftoolkit.simple.common.navigation.Navigation#getCurrentItem()
 	 */
 	@Override
 	public Selection getCurrentItem() {
@@ -122,7 +122,7 @@ public class TextStyleNavigation extends Navigation {
 
 	/* (non-Javadoc)
 	 * check if has next TextSelection with satisfied style
-	 * @see org.odftoolkit.simple.text.search.Navigation#hasNext()
+	 * @see org.odftoolkit.simple.common.navigation.Navigation#hasNext()
 	 */
 	@Override
 	public boolean hasNext() {

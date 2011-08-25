@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.simple.text.search;
+package org.odftoolkit.simple.common.navigation;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,13 +28,13 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.TextDocument;
-import org.odftoolkit.simple.text.search.InvalidNavigationException;
-import org.odftoolkit.simple.text.search.TextNavigation;
-import org.odftoolkit.simple.text.search.TextSelection;
+import org.odftoolkit.simple.common.navigation.InvalidNavigationException;
+import org.odftoolkit.simple.common.navigation.TextNavigation;
+import org.odftoolkit.simple.common.navigation.TextSelection;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 /**
- * Test ReplaceWith method for class org.odftoolkit.simple.text.search.TextSelection 
+ * Test ReplaceWith method for class org.odftoolkit.simple.common.navigation.TextSelection 
  */
 public class MONPTest {
 

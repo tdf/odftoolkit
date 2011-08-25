@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.simple.text.search;
+package org.odftoolkit.simple.common.navigation;
 
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -36,14 +36,14 @@ import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.TextDocument;
-import org.odftoolkit.simple.text.search.InvalidNavigationException;
-import org.odftoolkit.simple.text.search.TextNavigation;
-import org.odftoolkit.simple.text.search.TextSelection;
-import org.odftoolkit.simple.text.search.TextStyleNavigation;
+import org.odftoolkit.simple.common.navigation.InvalidNavigationException;
+import org.odftoolkit.simple.common.navigation.TextNavigation;
+import org.odftoolkit.simple.common.navigation.TextSelection;
+import org.odftoolkit.simple.common.navigation.TextStyleNavigation;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 /**
- * Test the method of class org.odftoolkit.simple.text.search.TextStyleNavigation 
+ * Test the method of class org.odftoolkit.simple.common.navigation.TextStyleNavigation 
  */
 public class TextStyleNavigationTest {
 
@@ -87,7 +87,7 @@ public class TextStyleNavigationTest {
 	}
 
 	/**
-	 * Test pasteAtFrontOf method of org.odftoolkit.simple.text.search.TextStyleNavigation
+	 * Test pasteAtFrontOf method of org.odftoolkit.simple.common.navigation.TextStyleNavigation
 	 */
 	@Test
 	public void testPasteAtFrontOf() {
@@ -136,7 +136,7 @@ public class TextStyleNavigationTest {
 	}
 
 	/**
-	 * Test pasteAtEndOf method of org.odftoolkit.simple.text.search.TextStyleNavigation
+	 * Test pasteAtEndOf method of org.odftoolkit.simple.common.navigation.TextStyleNavigation
 	 */
 	@Test
 	public void testPasteAtEndOf() {
@@ -183,7 +183,7 @@ public class TextStyleNavigationTest {
 	}
 
 	/**
-	 * Test cut method of org.odftoolkit.simple.text.search.TextStyleNavigation
+	 * Test cut method of org.odftoolkit.simple.common.navigation.TextStyleNavigation
 	 */
 	@Test
 	public void testCut() {
@@ -215,7 +215,7 @@ public class TextStyleNavigationTest {
 	}
 
 	/**
-	 * Test applyStyle method of org.odftoolkit.simple.text.search.TextStyleNavigation
+	 * Test applyStyle method of org.odftoolkit.simple.common.navigation.TextStyleNavigation
 	 */
 	@Test
 	public void testApplyStyle() {

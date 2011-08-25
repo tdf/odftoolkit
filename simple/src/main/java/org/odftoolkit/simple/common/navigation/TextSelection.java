@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.simple.text.search;
+package org.odftoolkit.simple.common.navigation;
 
 import java.net.URL;
 import java.util.Map;
@@ -45,11 +45,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- * A TextSelection can describe a sub element in a mParagraph element or a mHeading element.
- * it is recognized by the container element(which type should be OdfTextParagraph or
- *  OdfTextHeadingt), the start index of the text content of the container element and 
- *  the text content of this selection.
- * 
+ * A TextSelection can describe a sub element in a paragraph element or a
+ * heading element. It is recognized by the container element(which type should
+ * be OdfTextParagraph or OdfTextHeadingt), the start index of the text content
+ * of the container element and the text content of this selection.
  */
 public class TextSelection extends Selection {
 
@@ -61,9 +60,14 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Constructor of TextSelection
-	 * @param text				the text content of this TextSelection
-	 * @param containerElement	the mParagraph element or mHeading element that contain this TextSelection
-	 * @param index				the start index of the text content of the container element
+	 * 
+	 * @param text
+	 *            the text content of this TextSelection
+	 * @param containerElement
+	 *            the paragraph element or heading element that contain this
+	 *            TextSelection
+	 * @param index
+	 *            the start index of the text content of the container element
 	 * 
 	 */
 	TextSelection(String text, OdfElement containerElement, int index) {
@@ -77,8 +81,10 @@ public class TextSelection extends Selection {
 	}
 
 	/**
-	 * Get the mParagraph element or mHeading element that contain this TextSelection
-	 * @return OdfElement	the container element
+	 * Get the mParagraph element or mHeading element that contain this
+	 * TextSelection
+	 * 
+	 * @return OdfElement the container element
 	 */
 	@Override
 	public OdfElement getElement() {
@@ -87,6 +93,7 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Get the mParagraph element or mHeading element that contain this text
+	 * 
 	 * @return OdfElement
 	 */
 	public OdfElement getContainerElement() {
@@ -99,7 +106,9 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Get the start index of the text content of its container element
-	 * @return index	the start index of the text content of its container element
+	 * 
+	 * @return index the start index of the text content of its container
+	 *         element
 	 */
 	@Override
 	public int getIndex() {
@@ -107,8 +116,9 @@ public class TextSelection extends Selection {
 	}
 
 	/**
-	 * Get the text content of this TextSelection 
-	 * @return text	the text content
+	 * Get the text content of this TextSelection
+	 * 
+	 * @return text the text content
 	 */
 	public String getText() {
 		return mMatchedText;
@@ -116,7 +126,9 @@ public class TextSelection extends Selection {
 
 	/*
 	 * Validate if the selection is still available.
-	 * @return true	if the selection is available; false if the selection is not available.
+	 * 
+	 * @return true if the selection is available; false if the selection is not
+	 * available.
 	 */
 	private boolean validate() {
 		if (getContainerElement() == null) {
@@ -136,11 +148,13 @@ public class TextSelection extends Selection {
 	}
 
 	/**
-	 * Delete the selection from the document
-	 * the other matched selection in the same container element will be updated automatically
-	 * because the start index of the following selections will be changed when the previous 
-	 * selection has been deleted 
-	 * @throws InvalidNavigationException if the selection is unavailable.
+	 * Delete the selection from the document the other matched selection in the
+	 * same container element will be updated automatically because the start
+	 * index of the following selections will be changed when the previous
+	 * selection has been deleted
+	 * 
+	 * @throws InvalidNavigationException
+	 *             if the selection is unavailable.
 	 */
 	@Override
 	public void cut() throws InvalidNavigationException {
@@ -154,13 +168,16 @@ public class TextSelection extends Selection {
 	}
 
 	/**
-	 * Apply a style to the selection so that the text style of this selection 
+	 * Apply a style to the selection so that the text style of this selection
 	 * will append the specified style
-	 * @param style	the style can be from the current document or user defined
-	 * @throws InvalidNavigationException if the selection is unavailable.
+	 * 
+	 * @param style
+	 *            the style can be from the current document or user defined
+	 * @throws InvalidNavigationException
+	 *             if the selection is unavailable.
 	 */
 	public void applyStyle(OdfStyleBase style) throws InvalidNavigationException {
-		//append the specified style to the selection
+		// append the specified style to the selection
 		if (validate() == false) {
 			throw new InvalidNavigationException("No matched string at this position");
 		}
@@ -174,8 +191,8 @@ public class TextSelection extends Selection {
 	}
 
 	/*
-	 * append specified style for a range text of pNode
-	 * from 'fromindex' and cover 'leftLength'
+	 * append specified style for a range text of pNode from 'fromindex' and
+	 * cover 'leftLength'
 	 */
 	private void appendStyle(int fromindex, int leftLength, Node pNode, OdfStyleBase style) {
 		if ((fromindex == 0) && (leftLength == 0)) {
@@ -195,7 +212,8 @@ public class TextSelection extends Selection {
 				if (node.getLocalName().equals("s")) // text:s
 				{
 					try {
-						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c"));
+						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT
+								.getUri(), "c"));
 					} catch (Exception e) {
 						nodeLength = 1;
 					}
@@ -222,18 +240,15 @@ public class TextSelection extends Selection {
 					Node nextNode = node.getNextSibling();
 					Node parNode = node.getParentNode();
 					// init text:a
-					OdfTextSpan textSpan = new OdfTextSpan(
-							(OdfFileDom) node.getOwnerDocument());
+					OdfTextSpan textSpan = new OdfTextSpan((OdfFileDom) node.getOwnerDocument());
 					Node newNode = null;
 					if (nextLength >= 0) {
-						textSpan.setTextContent(value.substring(fromindex,
-								endLength));
+						textSpan.setTextContent(value.substring(fromindex, endLength));
 						newNode = node.cloneNode(true);
 						newNode.setNodeValue(value.substring(endLength, value.length()));
 						leftLength = 0;
 					} else {
-						textSpan.setTextContent(value.substring(fromindex,
-								value.length()));
+						textSpan.setTextContent(value.substring(fromindex, value.length()));
 						leftLength = endLength - value.length();
 					}
 					textSpan.setProperties(style.getStyleProperties());
@@ -258,11 +273,10 @@ public class TextSelection extends Selection {
 
 				} else if (node.getNodeType() == Node.ELEMENT_NODE) {
 					// if text:s?????????
-					if (node.getLocalName().equals("s")) // text:s
-					{
+					// text:s
+					if (node.getLocalName().equals("s")) {
 						// delete space
-						((TextSElement) node).setTextCAttribute(new Integer(
-								nodeLength - fromindex));
+						((TextSElement) node).setTextCAttribute(new Integer(nodeLength - fromindex));
 						leftLength = leftLength - (nodeLength - fromindex);
 						fromindex = 0;
 
@@ -275,9 +289,7 @@ public class TextSelection extends Selection {
 						leftLength = length > 0 ? length : 0;
 						fromindex = 0;
 					}
-
 				}
-
 			}
 			node = node.getNextSibling();
 		}
@@ -286,24 +298,21 @@ public class TextSelection extends Selection {
 	/**
 	 * Replace the text content of selection with a new string
 	 * 
-	 * @param newText	the replace text String
-	 * @throws InvalidNavigationException if the selection is unavailable.
+	 * @param newText
+	 *            the replace text String
+	 * @throws InvalidNavigationException
+	 *             if the selection is unavailable.
 	 */
 	public void replaceWith(String newText) throws InvalidNavigationException {
 		if (validate() == false) {
 			throw new InvalidNavigationException("No matched string at this position");
 		}
-
 		OdfElement parentElement = getContainerElement();
-
 		int leftLength = getText().length();
 		int index = mIndexInContainer;
 		delete(index, leftLength, parentElement);
 		OdfTextSpan textSpan = new OdfTextSpan((OdfFileDom) parentElement.getOwnerDocument());
 		textSpan.addContentWhitespace(newText);
-		/*if (startElement instanceof OdfStyleBase)
-		textSpan.setProperties(((OdfStyleBase) startElement)
-		.getStyleProperties());*/
 		mIsInserted = false;
 		insertSpan(textSpan, index, parentElement);
 		// optimize the parent element
@@ -315,8 +324,11 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Paste this selection just before a specific selection.
-	 * @param positionItem	a selection that is used to point out the position
-	 * @throws InvalidNavigationException if the selection is unavailable.
+	 * 
+	 * @param positionItem
+	 *            a selection that is used to point out the position
+	 * @throws InvalidNavigationException
+	 *             if the selection is unavailable.
 	 */
 	@Override
 	public void pasteAtFrontOf(Selection positionItem) throws InvalidNavigationException {
@@ -339,15 +351,20 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Paste this selection just after a specific selection.
-	 * @param positionItem	a selection that is used to point out the position
-	 * @throws InvalidNavigationException if the selection is unavailable.
+	 * 
+	 * @param positionItem
+	 *            a selection that is used to point out the position
+	 * @throws InvalidNavigationException
+	 *             if the selection is unavailable.
 	 */
 	@Override
 	public void pasteAtEndOf(Selection positionItem) throws InvalidNavigationException {
 		if (validate() == false) {
 			throw new InvalidNavigationException("No matched string at this position");
 		}
-		int indexOfNew = 0;//TODO: think about and test if searchitem is a element selection
+		// TODO: think about and test if search item is a
+		// element selection
+		int indexOfNew = 0;
 		OdfElement newElement = positionItem.getElement();
 		if (positionItem instanceof TextSelection) {
 			indexOfNew = ((TextSelection) positionItem).getIndex() + ((TextSelection) positionItem).getText().length();
@@ -365,8 +382,10 @@ public class TextSelection extends Selection {
 	/**
 	 * Add a hypertext reference to the selection
 	 * 
-	 * @param url	the url of the hypertext reference
-	 * @throws InvalidNavigationException if the selection is unavailable.
+	 * @param url
+	 *            the url of the hypertext reference
+	 * @throws InvalidNavigationException
+	 *             if the selection is unavailable.
 	 */
 	public void addHref(URL url) throws InvalidNavigationException {
 		if (validate() == false) {
@@ -381,9 +400,8 @@ public class TextSelection extends Selection {
 	}
 
 	/*
-	 * add href for a range text of pNode from the 'fromindex' text, and the href will cover
-	 * 'leftLength' text
-	 * 
+	 * add href for a range text of pNode from the 'fromindex' text, and the
+	 * href will cover 'leftLength' text
 	 */
 	private void addHref(int fromindex, int leftLength, Node pNode, String href) {
 		if ((fromindex == 0) && (leftLength == 0)) {
@@ -400,14 +418,14 @@ public class TextSelection extends Selection {
 			if (node.getNodeType() == Node.TEXT_NODE) {
 				nodeLength = node.getNodeValue().length();
 			} else if (node.getNodeType() == Node.ELEMENT_NODE) {
-				if (node.getLocalName().equals("s")) // text:s
-				{
+				// text:s
+				if (node.getLocalName().equals("s")) {
 					try {
-						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c"));
+						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT
+								.getUri(), "c"));
 					} catch (Exception e) {
 						nodeLength = 1;
 					}
-
 				} else if (node.getLocalName().equals("line-break")) {
 					nodeLength = 1;
 				} else if (node.getLocalName().equals("tab")) {
@@ -430,18 +448,15 @@ public class TextSelection extends Selection {
 					Node nextNode = node.getNextSibling();
 					Node parNode = node.getParentNode();
 					// init text:a
-					TextAElement textLink = new TextAElement(
-							(OdfFileDom) node.getOwnerDocument());
+					TextAElement textLink = new TextAElement((OdfFileDom) node.getOwnerDocument());
 					Node newNode = null;
 					if (nextLength >= 0) {
-						textLink.setTextContent(value.substring(fromindex,
-								endLength));
+						textLink.setTextContent(value.substring(fromindex, endLength));
 						newNode = node.cloneNode(true);
 						newNode.setNodeValue(value.substring(endLength, value.length()));
 						leftLength = 0;
 					} else {
-						textLink.setTextContent(value.substring(fromindex,
-								value.length()));
+						textLink.setTextContent(value.substring(fromindex, value.length()));
 						leftLength = endLength - value.length();
 					}
 					textLink.setXlinkTypeAttribute("simple");
@@ -467,11 +482,10 @@ public class TextSelection extends Selection {
 
 				} else if (node.getNodeType() == Node.ELEMENT_NODE) {
 					// if text:s?????????
-					if (node.getLocalName().equals("s")) // text:s
-					{
+					// text:s
+					if (node.getLocalName().equals("s")) {
 						// delete space
-						((TextSElement) node).setTextCAttribute(new Integer(
-								nodeLength - fromindex));
+						((TextSElement) node).setTextCAttribute(new Integer(nodeLength - fromindex));
 						leftLength = leftLength - (nodeLength - fromindex);
 						fromindex = 0;
 
@@ -484,13 +498,12 @@ public class TextSelection extends Selection {
 						leftLength = length > 0 ? length : 0;
 						fromindex = 0;
 					}
-
 				}
-
 			}
 			node = node.getNextSibling();
 		}
 	}
+
 	/*
 	 * delete the pNode from the fromindex text, and delete leftLength text
 	 */
@@ -510,10 +523,11 @@ public class TextSelection extends Selection {
 			if (node.getNodeType() == Node.TEXT_NODE) {
 				nodeLength = node.getNodeValue().length();
 			} else if (node.getNodeType() == Node.ELEMENT_NODE) {
-				if (node.getLocalName().equals("s")) // text:s
-				{
+				// text:s
+				if (node.getLocalName().equals("s")) {
 					try {
-						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c"));
+						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT
+								.getUri(), "c"));
 					} catch (Exception e) {
 						nodeLength = 1;
 					}
@@ -549,14 +563,12 @@ public class TextSelection extends Selection {
 
 				} else if (node.getNodeType() == Node.ELEMENT_NODE) {
 					// if text:s?????????
-					if (node.getLocalName().equals("s")) // text:s
-					{
+					// text:s
+					if (node.getLocalName().equals("s")) {
 						// delete space
-						((TextSElement) node).setTextCAttribute(new Integer(
-								nodeLength - fromindex));
+						((TextSElement) node).setTextCAttribute(new Integer(nodeLength - fromindex));
 						leftLength = leftLength - (nodeLength - fromindex);
 						fromindex = 0;
-
 					} else if (node.getLocalName().equals("line-break") || node.getLocalName().equals("tab")) {
 						fromindex = 0;
 						leftLength--;
@@ -566,9 +578,7 @@ public class TextSelection extends Selection {
 						leftLength = length > 0 ? length : 0;
 						fromindex = 0;
 					}
-
 				}
-
 			}
 			node = node.getNextSibling();
 		}
@@ -594,23 +604,24 @@ public class TextSelection extends Selection {
 	}
 
 	/**
-	 * return a String Object representing this selection value
-	 * the text content of the selection, start index in the container element and the
-	 * text content of the container element will be provided
+	 * return a String Object representing this selection value the text content
+	 * of the selection, start index in the container element and the text
+	 * content of the container element will be provided
+	 * 
 	 * @return a String representation of the value of this TextSelection
 	 */
 	@Override
 	public String toString() {
 		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
 
-		return "[" + mMatchedText + "] started from " + mIndexInContainer + " in paragraph:" + textProcessor.getText(getContainerElement());
+		return "[" + mMatchedText + "] started from " + mIndexInContainer + " in paragraph:"
+				+ textProcessor.getText(getContainerElement());
 	}
 
 	// return a new span that cover this selection
 	// and keep the original style of this selection
 	private OdfTextSpan getSpan(OdfFileDom ownerDoc) {
 		OdfElement parentElement = getContainerElement();
-
 		if (parentElement != null) {
 			Node copyParentNode = parentElement.cloneNode(true);
 			if (ownerDoc != parentElement.getOwnerDocument()) {
@@ -633,8 +644,7 @@ public class TextSelection extends Selection {
 			}
 			// apply text style for the textSpan
 			if (copyParentNode instanceof OdfStylableElement) {
-				applyTextStyleProperties(getTextStylePropertiesDeep((OdfStylableElement) copyParentNode),
-						textSpan);
+				applyTextStyleProperties(getTextStylePropertiesDeep((OdfStylableElement) copyParentNode), textSpan);
 			}
 			return textSpan;
 		}
@@ -652,7 +662,8 @@ public class TextSelection extends Selection {
 		Node node = pNode.getFirstChild();
 		while (node != null) {
 			Node nextNode = node.getNextSibling();
-			//if ((node.getNodeType() == Node.ELEMENT_NODE) && (node.getPrefix().equals("text"))) {
+			// if ((node.getNodeType() == Node.ELEMENT_NODE) &&
+			// (node.getPrefix().equals("text"))) {
 			if (node instanceof OdfTextSpan) {
 				if (textProcess.getText(node).length() == 0) {
 					node.getParentNode().removeChild(node);
@@ -663,18 +674,17 @@ public class TextSelection extends Selection {
 			node = nextNode;
 		}
 	}
-	
+
 	/*
-	 * apply the styleMap to the toElement
-	 * reserve the style property of toElement if it is also exist in styleMap
+	 * apply the styleMap to the toElement reserve the style property of
+	 * toElement if it is also exist in styleMap
 	 */
 
-	private void applyTextStyleProperties(Map<OdfStyleProperty, String> styleMap,
-			OdfStylableElement toElement) {
+	private void applyTextStyleProperties(Map<OdfStyleProperty, String> styleMap, OdfStylableElement toElement) {
 		if (styleMap != null) {
-			//preserve the style property of toElement if it is also exist in styleMap
-			OdfStyle resultStyleElement = toElement.getAutomaticStyles().newStyle(
-					OdfStyleFamily.Text);
+			// preserve the style property of toElement if it is also exist in
+			// styleMap
+			OdfStyle resultStyleElement = toElement.getAutomaticStyles().newStyle(OdfStyleFamily.Text);
 
 			for (Map.Entry<OdfStyleProperty, String> entry : styleMap.entrySet()) {
 				if (toElement.hasProperty(entry.getKey())) {
@@ -733,15 +743,15 @@ public class TextSelection extends Selection {
 					return;
 				}
 			} else if (node.getNodeType() == Node.ELEMENT_NODE) {
-				if (node.getLocalName().equals("s")) // text:s
-				{
+				// text:s
+				if (node.getLocalName().equals("s")) {
 					try {
-						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c"));
+						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT
+								.getUri(), "c"));
 					} catch (Exception e) {
 						nodeLength = 1;
 					}
 					fromindex -= nodeLength;
-
 				} else if (node.getLocalName().equals("line-break")) {
 					nodeLength = 1;
 					fromindex--;
@@ -753,17 +763,16 @@ public class TextSelection extends Selection {
 					insertSpan(textSpan, fromindex, node);
 					fromindex -= nodeLength;
 				}
-
 			}
 			node = node.getNextSibling();
 		}
 	}
 
 	/*
-	 * the textSpan must be the child element of parentNode
-	 * this method is used to keep the style of text span when it has been insert into the parentNode
-	 * if we don't deal with the style, the inserted span will also have the style of parentNode
-	 * 
+	 * the textSpan must be the child element of parentNode this method is used
+	 * to keep the style of text span when it has been insert into the
+	 * parentNode if we don't deal with the style, the inserted span will also
+	 * have the style of parentNode
 	 */
 	private void adjustStyle(Node parentNode, OdfTextSpan textSpan, Map<OdfStyleProperty, String> styleMap) {
 		if (parentNode instanceof OdfStylableElement) {
@@ -796,41 +805,41 @@ public class TextSelection extends Selection {
 							styles.putAll(styles1);
 						}
 						int comp = node.compareDocumentPosition(textSpan);
-						//if node contains textSpan, then recurse the node
+						// if node contains textSpan, then recurse the node
 						if ((comp & Node.DOCUMENT_POSITION_CONTAINED_BY) > 0) {
 							adjustStyle(node, textSpan, styles);
 						} else {
 							applyTextStyleProperties(styles, (OdfStylableElement) node);
 						}
 					}
-
 				}
 				node = node.getNextSibling();
 			}
-			//change the parentNode to default style
-			//here we don't know the default style name, so here just
-			//remove the text:style-name attribute
+			// change the parentNode to default style
+			// here we don't know the default style name, so here just
+			// remove the text:style-name attribute
 			pStyleNode.removeAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "style-name");
 		}
 	}
 
 	/*
 	 * get a map containing text properties of the specified styleable element.
-	 * @return  a map of text properties.
+	 * 
+	 * @return a map of text properties.
 	 */
 	private Map<OdfStyleProperty, String> getTextStyleProperties(OdfStylableElement element) {
 		String styleName = element.getStyleName();
-		OdfStyleBase styleElement = element.getAutomaticStyles().getStyle(
-				styleName, element.getStyleFamily());
+		OdfStyleBase styleElement = element.getAutomaticStyles().getStyle(styleName, element.getStyleFamily());
 
 		if (styleElement == null) {
 			styleElement = element.getDocumentStyle();
 		}
 		if (styleElement != null) {
-			//check if it is the style:defaut-style
-			if ((styleElement.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties) == null) &&
-					(styleElement.getPropertiesElement(OdfStylePropertiesSet.TextProperties) == null)) {
-				styleElement = ((Document) ((OdfFileDom) styleElement.getOwnerDocument()).getDocument()).getDocumentStyles().getDefaultStyle(styleElement.getFamily());
+			// check if it is the style:defaut-style
+			if ((styleElement.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties) == null)
+					&& (styleElement.getPropertiesElement(OdfStylePropertiesSet.TextProperties) == null)) {
+				styleElement = ((Document) ((OdfFileDom) styleElement.getOwnerDocument()).getDocument())
+						.getDocumentStyles().getDefaultStyle(styleElement.getFamily());
 			}
 			TreeMap<OdfStyleProperty, String> result = new TreeMap<OdfStyleProperty, String>();
 			OdfStyleFamily family = OdfStyleFamily.Text;
@@ -849,23 +858,23 @@ public class TextSelection extends Selection {
 	/*
 	 * get a map containing text properties of the specified styleable element.
 	 * The map will also include any properties set by parent styles
-	 * @return  a map of text properties.
-	 *
+	 * 
+	 * @return a map of text properties.
 	 */
 	private Map<OdfStyleProperty, String> getTextStylePropertiesDeep(OdfStylableElement element) {
 		String styleName = element.getStyleName();
-		OdfStyleBase styleElement = element.getAutomaticStyles().getStyle(
-				styleName, element.getStyleFamily());
+		OdfStyleBase styleElement = element.getAutomaticStyles().getStyle(styleName, element.getStyleFamily());
 
 		if (styleElement == null) {
 			styleElement = element.getDocumentStyle();
 		}
 		TreeMap<OdfStyleProperty, String> result = new TreeMap<OdfStyleProperty, String>();
 		while (styleElement != null) {
-			//check if it is the style:defaut-style
-			if ((styleElement.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties) == null) &&
-					(styleElement.getPropertiesElement(OdfStylePropertiesSet.TextProperties) == null)) {
-				styleElement = ((Document) ((OdfFileDom) styleElement.getOwnerDocument()).getDocument()).getDocumentStyles().getDefaultStyle(styleElement.getFamily());
+			// check if it is the style:defaut-style
+			if ((styleElement.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties) == null)
+					&& (styleElement.getPropertiesElement(OdfStylePropertiesSet.TextProperties) == null)) {
+				styleElement = ((Document) ((OdfFileDom) styleElement.getOwnerDocument()).getDocument())
+						.getDocumentStyles().getDefaultStyle(styleElement.getFamily());
 			}
 			OdfStyleFamily family = OdfStyleFamily.Text;
 			if (family != null) {

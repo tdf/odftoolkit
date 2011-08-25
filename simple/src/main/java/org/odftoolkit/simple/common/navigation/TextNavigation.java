@@ -19,32 +19,34 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.simple.text.search;
+package org.odftoolkit.simple.common.navigation;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
-import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.common.WhitespaceProcessor;
+import org.odftoolkit.simple.table.Cell;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
  * A derived Navigation class used for navigate the text content
  * it is used to search the document and find the matched text 
- * and would return TextSelection instance
- *
+ * and would return TextSelection instance.
  */
 public class TextNavigation extends Navigation {
 
 	private String mMatchedElementName = "text:p,text:h";
-	private String mPatternText;
-	private TextDocument mTextDocument;
+	private Pattern mPattern;
+	private Document mDocument;
 	private TextSelection mCurrentSelectedItem;
 	private String mCurrentText;
 	private int mCurrentIndex;
@@ -55,11 +57,72 @@ public class TextNavigation extends Navigation {
 	 * @param pattern	the matched pattern String
 	 * @param doc	the navigation scope
 	 */
-	public TextNavigation(String pattern, TextDocument doc) {
-		this.mPatternText = pattern;
-		mTextDocument = doc;
+	public TextNavigation(String pattern, Document doc) {
+		mPattern = Pattern.compile(pattern);
+		mDocument = doc;
 		mCurrentSelectedItem = null;
 		mbFinishFindInHeaderFooter = false;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.odftoolkit.simple.common.navigation.Navigation#getCurrentItem()
+	 */
+	@Override
+	public Selection getCurrentItem() {
+		Selection.SelectionManager.registerItem(mCurrentSelectedItem);
+		return mCurrentSelectedItem;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.odftoolkit.simple.common.navigation.Navigation#hasNext()
+	 */
+	@Override
+	public boolean hasNext() {
+		mCurrentSelectedItem = findnext(mCurrentSelectedItem);
+		return (mCurrentSelectedItem != null);
+	}
+
+	/**
+	 * Check if the text content of element match the specified pattern string
+	 * @param element	navigate this element
+	 * @return true if the text content of this element match this pattern; 
+	 * 		   false if not match
+	 */
+	@Override
+	public boolean match(Node element) {
+		if (element instanceof OdfElement) {
+			WhitespaceProcessor textProcessor = new WhitespaceProcessor();
+			String content = textProcessor.getText(element);
+			Matcher matcher = mPattern.matcher(content);
+			if (matcher.find()) {
+				// check whether this container is minimum
+				Node childNode = element.getFirstChild();
+				while (childNode != null) {
+					WhitespaceProcessor childTextProcessor = new WhitespaceProcessor();
+					String childContent = childTextProcessor.getText(childNode);
+					Matcher childMatcher = mPattern.matcher(childContent);
+					if (childMatcher.find()) {
+						if (childNode.getNodeType() == Node.TEXT_NODE
+								|| "text:span".equalsIgnoreCase(childNode.getNodeName())
+								|| "text:a".equalsIgnoreCase(childNode.getNodeName())) {
+							break;
+						} else {
+							return false;
+						}
+					} else {
+						childNode = childNode.getNextSibling();
+					}
+				}
+				if (mMatchedElementName.indexOf(element.getNodeName()) != -1) {
+					// here just consider \n\r\t occupy one char
+					mCurrentIndex = matcher.start();
+					int eIndex = matcher.end();
+					mCurrentText = content.substring(mCurrentIndex, eIndex);
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	//the matched text might exist in header/footer
@@ -75,8 +138,7 @@ public class TextNavigation extends Navigation {
 			String content = textProcessor.getText(containerElement);
 
 			int nextIndex = -1;
-			Pattern pattern = Pattern.compile(mPatternText);
-			Matcher matcher = pattern.matcher(content);
+			Matcher matcher = mPattern.matcher(content);
 			//start from the end index of the selected item
 			if (matcher.find(index + selected.getText().length())) {
 				// here just consider \n\r\t occupy one char
@@ -85,12 +147,11 @@ public class TextNavigation extends Navigation {
 				mCurrentText = content.substring(nextIndex, eIndex);
 			}
 			if (nextIndex != -1) {
-				TextSelection item = new TextSelection(mCurrentText, selected.getContainerElement(), nextIndex);
-				return item;
+				return createSelection(selected.getContainerElement(), nextIndex);
 			}
 		}
 		try {
-			styledom = mTextDocument.getStylesDom();
+			styledom = mDocument.getStylesDom();
 			NodeList list = styledom.getElementsByTagName("office:master-styles");
 			if (styledom == null) {
 				return null;
@@ -108,8 +169,7 @@ public class TextNavigation extends Navigation {
 			}
 
 			if (element != null) {
-				TextSelection item = new TextSelection(mCurrentText, element, mCurrentIndex);
-				return item;
+				return createSelection(element, mCurrentIndex);
 			} else {
 				return null;
 			}
@@ -134,13 +194,13 @@ public class TextNavigation extends Navigation {
 		if (selected == null) {
 			OdfElement element = null;
 			try {
-				element = (OdfElement) getNextMatchElement((Node) mTextDocument.getContentRoot());
+				element = (OdfElement) getNextMatchElement((Node) mDocument.getContentRoot());
 			} catch (Exception ex) {
 				Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 
 			}
 			if (element != null) {
-				return new TextSelection(mCurrentText, element, mCurrentIndex);
+				return createSelection(element, mCurrentIndex);
 			} else {
 				return null;
 			}
@@ -152,8 +212,7 @@ public class TextNavigation extends Navigation {
 		String content = textProcessor.getText(containerElement);
 
 		int nextIndex = -1;
-		Pattern pattern = Pattern.compile(mPatternText);
-		Matcher matcher = pattern.matcher(content);
+		Matcher matcher = mPattern.matcher(content);
 		//start from the end index of the selected item
 		if (matcher.find(index + selected.getText().length())) {
 			// here just consider \n\r\t occupy one char
@@ -162,61 +221,41 @@ public class TextNavigation extends Navigation {
 			mCurrentText = content.substring(nextIndex, eIndex);
 		}
 		if (nextIndex != -1) {
-			TextSelection item = new TextSelection(mCurrentText, selected.getContainerElement(), nextIndex);
-			return item;
+			return createSelection(selected.getContainerElement(), nextIndex);
 		} else {
 			OdfElement element = (OdfElement) getNextMatchElement((Node) containerElement);
 			if (element != null) {
-				TextSelection item = new TextSelection(mCurrentText, element, mCurrentIndex);
-				return item;
+				return createSelection(element, mCurrentIndex);
 			} else {
 				return null;
 			}
 		}
 	}
-
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.text.search.Navigation#getCurrentItem()
-	 */
-	@Override
-	public Selection getCurrentItem() {
-		Selection.SelectionManager.registerItem(mCurrentSelectedItem);
-		return mCurrentSelectedItem;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.text.search.Navigation#hasNext()
-	 */
-	@Override
-	public boolean hasNext() {
-		mCurrentSelectedItem = findnext(mCurrentSelectedItem);
-		return (mCurrentSelectedItem != null);
-	}
-
-	/**
-	 * check if the text content of element match the specified pattern string
-	 * @param element	navigate this element
-	 * @return true if the text content of this element match this pattern; 
-	 * 		   false if not match
-	 */
-	@Override
-	public boolean match(Node element) {
-		if (element instanceof OdfElement) {
-			if (mMatchedElementName.indexOf(element.getNodeName()) != -1) {
-				WhitespaceProcessor textProcessor = new WhitespaceProcessor();
-				String content = textProcessor.getText(element);
-
-				Pattern pattern = Pattern.compile(mPatternText);
-				Matcher matcher = pattern.matcher(content);
-				while (matcher.find()) {
-					// here just consider \n\r\t occupy one char
-					mCurrentIndex = matcher.start();
-					int eIndex = matcher.end();
-					mCurrentText = content.substring(mCurrentIndex, eIndex);
-					return true;
+	
+	// in order to keep the consist between value and display text, spreadsheet and chart document
+	// should use CellSelection.
+	private TextSelection createSelection(OdfElement containerElement, int nextIndex) {
+		TextSelection item = null;
+		Node parent = containerElement.getParentNode();
+		while (parent != null) {
+			if (TableTableCellElementBase.class.isInstance(parent)) {
+				TableTableCellElementBase cellElement = (TableTableCellElementBase) parent;
+				Cell cell = Cell.getInstance(cellElement);
+				item = new CellSelection(mCurrentText, containerElement, nextIndex, cell);
+				break;
+			} else {
+				OdfName odfName=((OdfElement)parent).getOdfName();
+				String ns=odfName.getPrefix();
+				if("text".equals(ns)){
+					parent = parent.getParentNode();
+				}else{
+					break;
 				}
 			}
 		}
-		return false;
+		if (item == null) {
+			item = new TextSelection(mCurrentText, containerElement, nextIndex);
+		}
+		return item;
 	}
 }

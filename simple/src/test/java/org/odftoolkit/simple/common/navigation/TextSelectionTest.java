@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.simple.text.search;
+package org.odftoolkit.simple.common.navigation;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,6 +32,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
@@ -40,13 +41,14 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.TextDocument;
-import org.odftoolkit.simple.text.search.InvalidNavigationException;
-import org.odftoolkit.simple.text.search.TextNavigation;
-import org.odftoolkit.simple.text.search.TextSelection;
+import org.odftoolkit.simple.common.navigation.InvalidNavigationException;
+import org.odftoolkit.simple.common.navigation.TextNavigation;
+import org.odftoolkit.simple.common.navigation.TextSelection;
 import org.odftoolkit.simple.utils.ResourceUtilities;
+import org.w3c.dom.Node;
 
 /**
- * Test the method of class org.odftoolkit.simple.text.search.TextSelection
+ * Test the method of class org.odftoolkit.simple.common.navigation.TextSelection
  */
 public class TextSelectionTest {
 
@@ -86,7 +88,7 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test cut method of org.odftoolkit.simple.text.search.TextSelection
+	 * Test cut method of org.odftoolkit.simple.common.navigation.TextSelection
 	 * delete all the 'delete' word
 	 */
 	@Test
@@ -131,7 +133,7 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test pasteAtFrontOf method of org.odftoolkit.simple.text.search.TextSelection
+	 * Test pasteAtFrontOf method of org.odftoolkit.simple.common.navigation.TextSelection
 	 * copy the first 'change' word in the front of all the 'delete' word
 	 */
 	@Test
@@ -173,7 +175,7 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test pasteAtEndOf method of org.odftoolkit.simple.text.search.TextSelection
+	 * Test pasteAtEndOf method of org.odftoolkit.simple.common.navigation.TextSelection
 	 * copy the first 'change' word at the end of all the 'delete' word
 	 */
 	@Test
@@ -214,7 +216,7 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test applyStyle method of org.odftoolkit.simple.text.search.TextSelection
+	 * Test applyStyle method of org.odftoolkit.simple.common.navigation.TextSelection
 	 * append "T4" style for all the 'delete' word, 'T4' in the original document is the 'bold' style
 	 */
 	@Test
@@ -249,7 +251,7 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test replaceWith method of org.odftoolkit.simple.text.search.TextSelection
+	 * Test replaceWith method of org.odftoolkit.simple.common.navigation.TextSelection
 	 * replace all the 'SIMPLE' with 'Odf Toolkit'
 	 */
 	@Test
@@ -304,7 +306,7 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test addHref method of org.odftoolkit.simple.text.search.TextSelection
+	 * Test addHref method of org.odftoolkit.simple.common.navigation.TextSelection
 	 * add href "http://www.ibm.com" for all the 'delete' word
 	 */
 	@Test
@@ -334,7 +336,7 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test search pattern of org.odftoolkit.simple.text.search.TextSelection
+	 * Test search pattern of org.odftoolkit.simple.common.navigation.TextSelection
 	 * search a snippet of text match the pattern "<%([^>]*)%>", and extract the content 
 	 * between "<%" and "%>"
 	 */
@@ -353,6 +355,47 @@ public class TextSelectionTest {
 			}
 		}
 
+		try {
+			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_DELETE_PATTERN));
+		} catch (Exception e) {
+			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+	}
+	
+	/**
+	 * Test TextSelection container element, all of them must be minimum text:p or text:h. 
+	 * It means container element can't has child element has the same text content.
+	 */
+	@Test
+	public void testTextSelectionContainerElement() {
+		search = new TextNavigation("TextSelectionContainer", doc);
+		if (search.hasNext()) {
+			TextSelection item = (TextSelection) search.getCurrentItem();
+			OdfElement container = item.getContainerElement();
+			Node childNode = container.getFirstChild();
+			while (childNode != null) {
+				String containerText = childNode.getTextContent();
+				Assert.assertFalse(container.getTextContent().equals(containerText));
+				childNode = childNode.getNextSibling();
+			}
+		} else {
+			Assert.fail("Navigation search nothing.");
+		}
+		//test selected table cell content in draw:frame.
+		search = new TextNavigation("Task", doc);
+		if (search.hasNext()) {
+			TextSelection item = (TextSelection) search.getCurrentItem();
+			OdfElement container = item.getContainerElement();
+			Node childNode = container.getFirstChild();
+			while (childNode != null) {
+				String containerText = childNode.getTextContent();
+				Assert.assertFalse(container.getTextContent().equals(containerText));
+				childNode = childNode.getNextSibling();
+			}
+		} else {
+			Assert.fail("Navigation search nothing.");
+		}
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_DELETE_PATTERN));
 		} catch (Exception e) {

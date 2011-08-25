@@ -917,9 +917,6 @@ public class TableCellTest {
 		Table table = odsdoc.getTableByName("Sheet1");
 		Cell fcell = table.getCellByPosition(columnindex, rowindex);
 		String expected = "display text";
-
-		// Assert.assertEquals(expected, fcell.getDisplayText());
-
 		fcell.setDisplayText(expected);
 		saveods();
 		// reload
@@ -927,6 +924,19 @@ public class TableCellTest {
 		table = odsdoc.getTableByName("Sheet1");
 		fcell = table.getCellByPosition(columnindex, rowindex);
 		Assert.assertEquals(expected, fcell.getDisplayText());
+		// if the value type is "float", cell value need to be updated, too.
+		String cellAddress = "A4";
+		fcell = table.getCellByPosition(cellAddress);
+		expected = "400.0";
+		int expectedValue = 400;
+		fcell.setDisplayText(expected);
+		saveods();
+		// reload
+		loadOutputSpreadsheet();
+		table = odsdoc.getTableByName("Sheet1");
+		fcell = table.getCellByPosition(cellAddress);
+		Assert.assertEquals(expected, fcell.getDisplayText());
+		Assert.assertEquals(expectedValue, fcell.getDoubleValue().intValue());
 	}
 
 	@Test

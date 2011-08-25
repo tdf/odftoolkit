@@ -37,8 +37,10 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderColumnsElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.Document.OdfMediaType;
 import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.CellRange;
 import org.odftoolkit.simple.table.Column;
@@ -698,6 +700,25 @@ public class TableTest {
 		Table table = mOdtDoc.getTableByName("Table3");
 		int headerRowCount = table.getHeaderRowCount();
 		Assert.assertEquals(1, headerRowCount);
+	}
+
+	@Test
+	public void testGetRowCount() {
+		try {
+			//without table rows
+			Document mOdpDoc = Document.loadDocument(ResourceUtilities.getTestResourceAsStream("TableCountTestcase.odp"));
+			Table table = mOdpDoc.getTableByName("Table1");
+			int rowCount = table.getRowCount();
+			Assert.assertEquals(5, rowCount);
+			//with table rows
+			Document mOdcDoc = mOdpDoc.getEmbeddedDocument("Object 2/");
+			table = mOdcDoc.getTableByName("local-table");
+			rowCount = table.getRowCount();
+			Assert.assertEquals(5, rowCount);
+		} catch (Exception e) {
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test

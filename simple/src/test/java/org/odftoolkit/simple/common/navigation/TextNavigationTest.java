@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.simple.text.search;
+package org.odftoolkit.simple.common.navigation;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,12 +34,12 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.common.WhitespaceProcessor;
-import org.odftoolkit.simple.text.search.TextNavigation;
-import org.odftoolkit.simple.text.search.TextSelection;
+import org.odftoolkit.simple.common.navigation.TextNavigation;
+import org.odftoolkit.simple.common.navigation.TextSelection;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 /**
- * Test the method of class org.odftoolkit.simple.text.search.TextNavigation 
+ * Test the method of class org.odftoolkit.simple.common.navigation.TextNavigation 
  */
 public class TextNavigationTest {
 
@@ -71,7 +71,7 @@ public class TextNavigationTest {
 	}
 
 	/**
-	 * Test getCurrentItem method of org.odftoolkit.simple.text.search.TextNavigation
+	 * Test getCurrentItem method of org.odftoolkit.simple.common.navigation.TextNavigation
 	 */
 	@Test
 	public void testGotoNext() {
@@ -88,7 +88,7 @@ public class TextNavigationTest {
 	}
 
 	/**
-	 * Test getNextMatchElement method of org.odftoolkit.simple.text.search.TextNavigation
+	 * Test getNextMatchElement method of org.odftoolkit.simple.common.navigation.TextNavigation
 	 */
 	@Test
 	public void testGetNextMatchElement() {
@@ -123,6 +123,5 @@ public class TextNavigationTest {
 			Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
-
 	}
 }
