@@ -79,6 +79,17 @@ public class TextNavigationTest {
 			TextSelection item = (TextSelection) search.nextSelection();
 			LOG.info(item.toString());
 		}
+
+		try {
+			search = new TextNavigation("delete", doc.getContentRoot());
+			while (search.hasNext()) {
+				TextSelection item = (TextSelection) search.nextSelection();
+				LOG.info(item.toString());
+			}
+		} catch (Exception e) {
+			Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
 	}
 
 	/**
@@ -89,6 +100,33 @@ public class TextNavigationTest {
 		search = null;
 		search = new TextNavigation("delete", doc);
 		try {
+			//NodeList list = doc.getContentDom().getElementsByTagName("text:p");
+			OdfElement firstmatch = (OdfElement) search.getNextMatchElement(doc.getContentRoot());
+			Assert.assertNotNull(firstmatch);
+			Assert.assertEquals("Task2.delete next paragraph", TextExtractor.getText(firstmatch));
+
+			OdfElement secondmatch = (OdfElement) search.getNextMatchElement(firstmatch);
+			Assert.assertNotNull(secondmatch);
+			Assert.assertEquals("Hello [delete], I will be delete", TextExtractor.getText(secondmatch));
+
+			OdfElement thirdmatch = (OdfElement) search.getNextMatchElement(secondmatch);
+			Assert.assertNotNull(thirdmatch);
+			Assert.assertEquals("indeed   delete", TextExtractor.getText(thirdmatch));
+
+			OdfElement match4 = (OdfElement) search.getNextMatchElement(thirdmatch);
+			Assert.assertNotNull(match4);
+			Assert.assertEquals("different span in one single word delete indeed", TextExtractor.getText(match4));
+
+			OdfElement match5 = (OdfElement) search.getNextMatchElement(match4);
+			Assert.assertNotNull(match5);
+			Assert.assertEquals("Hello delete this word delete true delete  indeed", TextExtractor.getText(match5));
+		} catch (Exception e) {
+			Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+		
+		try {
+			search = new TextNavigation("delete", doc.getContentRoot());
 			//NodeList list = doc.getContentDom().getElementsByTagName("text:p");
 			OdfElement firstmatch = (OdfElement) search.getNextMatchElement(doc.getContentRoot());
 			Assert.assertNotNull(firstmatch);

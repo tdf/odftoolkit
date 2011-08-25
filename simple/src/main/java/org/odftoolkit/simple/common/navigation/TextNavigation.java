@@ -48,6 +48,7 @@ public class TextNavigation extends Navigation {
 	private String mMatchedElementName = "text:p,text:h";
 	private Pattern mPattern;
 	private Document mDocument;
+	private OdfElement mElement;
 	private TextSelection mNextSelectedItem;
 	private TextSelection mTempSelectedItem;
 	private String mNextText;
@@ -66,11 +67,31 @@ public class TextNavigation extends Navigation {
 	public TextNavigation(String pattern, Document doc) {
 		mPattern = Pattern.compile(pattern);
 		mDocument = doc;
+		mElement = null;
 		mNextSelectedItem = null;
 		mTempSelectedItem = null;
 		mbFinishFindInHeaderFooter = false;
 	}
 
+	/**
+	 * Construct <code>TextNavigation</code> with matched condition and
+	 * navigation scope.
+	 * 
+	 * @param pattern
+	 *            the matched pattern String
+	 * @param element
+	 *            the ODF element whose content will be navigated.
+	 * @since 0.5
+	 */
+	public TextNavigation(String pattern, OdfElement element) {
+		mPattern = Pattern.compile(pattern);
+		mDocument = null;
+		mElement = element;
+		mNextSelectedItem = null;
+		mTempSelectedItem = null;
+		mbFinishFindInHeaderFooter = false;
+	}
+	
 	/**
 	 * Check if has next <code>TextSelection</code> with satisfied content
 	 * pattern.
@@ -212,9 +233,12 @@ public class TextNavigation extends Navigation {
 	 */
 	private TextSelection findNext(TextSelection selected) {
 		if (!mbFinishFindInHeaderFooter) {
-			TextSelection styleselected = findInHeaderFooter(selected);
-			if (styleselected != null) {
-				return styleselected;
+			// find in document.
+			if(mElement== null){
+				TextSelection styleselected = findInHeaderFooter(selected);
+				if (styleselected != null) {
+					return styleselected;
+				}
 			}
 			selected = null;
 			mbFinishFindInHeaderFooter = true;
@@ -223,10 +247,13 @@ public class TextNavigation extends Navigation {
 		if (selected == null) {
 			OdfElement element = null;
 			try {
-				element = (OdfElement) getNextMatchElement((Node) mDocument.getContentRoot());
+				if(mElement!= null){
+					element = (OdfElement) getNextMatchElement(mElement);
+				}else{
+					element = (OdfElement) getNextMatchElement((Node) mDocument.getContentRoot());
+				}
 			} catch (Exception ex) {
 				Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-
 			}
 			if (element != null) {
 				return createSelection(element, mNextIndex);
