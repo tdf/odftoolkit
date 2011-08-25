@@ -74,12 +74,12 @@ public class TableRowColumnTest {
 		//change the table height to 1/2
 		for (int i = 0; i < table3.getRowCount(); i++) {
 			Row row = table3.getRowByIndex(i);
-			long oldHeight = row.getHeight() / 2;
+			double oldHeight = row.getHeight() / 2;
 			row.setHeight(oldHeight, false);
 			double roundingFactor = 10000.0;
-			double inValue = Math.round(roundingFactor * oldHeight / Unit.INCH.unitInMillimiter() / 100 ) / roundingFactor;
+			double inValue = Math.round(roundingFactor * oldHeight / Unit.INCH.unitInMillimiter()) / roundingFactor;
 			String sHeightIN = String.valueOf(inValue) + Unit.INCH.abbr();
-			long expectedHeight = (long) (PositiveLength.parseDouble(sHeightIN, Unit.MILLIMETER) * 100);
+			double expectedHeight = PositiveLength.parseDouble(sHeightIN, Unit.MILLIMETER);
 			Assert.assertEquals(expectedHeight, row.getHeight());
 		}
 
@@ -88,12 +88,12 @@ public class TableRowColumnTest {
 		table1.setWidth(table1.getWidth() / 2);
 		for (int i = 0; i < table1.getColumnCount(); i++) {
 			Column column = table1.getColumnByIndex(i);
-			long oldWidth = column.getWidth() / 2;
+			double oldWidth = column.getWidth() / 2;
 			column.setWidth(oldWidth);
 			double roundingFactor = 10000.0;
-			double inValue = Math.round(roundingFactor * oldWidth / Unit.INCH.unitInMillimiter() / 100 ) / roundingFactor;
+			double inValue = Math.round(roundingFactor * oldWidth / Unit.INCH.unitInMillimiter()) / roundingFactor;
 			String sWidthIN = String.valueOf(inValue) + Unit.INCH.abbr();
-			long expectedWidth = (long) (PositiveLength.parseDouble(sWidthIN, Unit.MILLIMETER)*100);
+			double expectedWidth = PositiveLength.parseDouble(sWidthIN, Unit.MILLIMETER);
 			Assert.assertEquals(expectedWidth, column.getWidth());
 		}
 		saveodt("ChangeSize");

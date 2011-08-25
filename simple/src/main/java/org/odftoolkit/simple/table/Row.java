@@ -156,13 +156,13 @@ public class Row extends Component {
 	}
 
 	/**
-	 * Return the height of the row (in 1/100th Millimeter).
+	 * Return the height of the row (in Millimeter).
 	 * <p>
 	 * Return the minimal height, if the row height is not set,
 	 * 
-	 * @return the height of the current row (in 1/100th Millimeter).
+	 * @return the height of the current row (in Millimeter).
 	 */
-	public long getHeight() {
+	public double getHeight() {
 		String sHeight = maRowElement.getProperty(OdfTableRowProperties.RowHeight);
 		if (sHeight == null) {
 			sHeight = maRowElement.getProperty(OdfTableRowProperties.MinRowHeight);
@@ -170,24 +170,24 @@ public class Row extends Component {
 		if (sHeight == null) {
 			sHeight = DEFAULT_HEIGHT;
 		}
-		return (long) (PositiveLength.parseDouble(sHeight, Unit.MILLIMETER) * 100);
+		return PositiveLength.parseDouble(sHeight, Unit.MILLIMETER);
 	}
 
 	/**
-	 * Set the height/minimal height of the row (in 1/100th Millimeter)
-	 * according to the second parameter.
+	 * Set the height/minimal height of the row (in Millimeter) according to the
+	 * second parameter.
 	 * 
 	 * @param height
 	 *            the height/minimal height that will be set to the row (in
-	 *            1/100th Millimeter).
+	 *            Millimeter).
 	 * @param isMinHeight
 	 *            if it is true, the row can fit the height to the text, vice
 	 *            versa.
 	 */
-	public void setHeight(long height, boolean isMinHeight) {
+	public void setHeight(double height, boolean isMinHeight) {
 		double roundingFactor = 10000.0;
 		//TODO:need refactor to PositiveLength.
-		double inValue = Math.round(roundingFactor * height / Unit.INCH.unitInMillimiter() / 100 ) / roundingFactor;
+		double inValue = Math.round(roundingFactor * height / Unit.INCH.unitInMillimiter()) / roundingFactor;
 		String sHeightIN = String.valueOf(inValue) + Unit.INCH.abbr();
 		splitRepeatedRows();
 		maRowElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");

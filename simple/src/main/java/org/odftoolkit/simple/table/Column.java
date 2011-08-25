@@ -144,31 +144,31 @@ public class Column extends Component {
 	}
 
 	/**
-	 * Get the width of the column (in 1/100th Millimeter).
+	 * Get the width of the column (in Millimeter).
 	 * 
-	 * @return the width of the current column (in 1/100th Millimeter).
+	 * @return the width of the current column (in Millimeter).
 	 */
-	public long getWidth() {
+	public double getWidth() {
 		String sWidth = maColumnElement.getProperty(OdfTableColumnProperties.ColumnWidth);
 		if (sWidth == null) {
 			sWidth = DEFAULT_WIDTH;
 		}
-		return (long) (PositiveLength.parseDouble(sWidth, Unit.MILLIMETER) * 100);
+		return PositiveLength.parseDouble(sWidth, Unit.MILLIMETER) ;
 	}
 
 	/**
-	 * Set the width of the column (in 1/100th Millimeter).
+	 * Set the width of the column (in Millimeter).
 	 * 
 	 * @param width
-	 *            the width that will be set to the column (in 1/100th Millimeter).
+	 *            the width that will be set to the column (in Millimeter).
 	 */
-	public void setWidth(long width) {
+	public void setWidth(double width) {
 		double roundingFactor = 10000.0;
 		//TODO:need refactor to PositiveLength.
-		double inValue = Math.round(roundingFactor * width / Unit.INCH.unitInMillimiter() / 100 ) / roundingFactor;
+		double inValue = Math.round(roundingFactor * width / Unit.INCH.unitInMillimiter()) / roundingFactor;
 		String sWidthIN = String.valueOf(inValue) + Unit.INCH.abbr();
 		//width before modification
-		long columnWidth = getWidth();
+		double columnWidth = getWidth();
 		if(columnWidth < 0)	{
 			columnWidth = 0;
 		}
@@ -194,24 +194,25 @@ public class Column extends Component {
 					column = table.getColumnByIndex(columnCount - 2);
 				}
 
-				long nextColumnWidth = 0;
+				double nextColumnWidth = 0;
 				if (column != null) {
 					nextColumnWidth = column.getWidth();
-					setRelativeWidth((DEFAULT_REL_TABLE_WIDTH / table.getWidth()) * width);
+					setRelativeWidth((long) (DEFAULT_REL_TABLE_WIDTH / table.getWidth() * width));
 				}
 
 				// total width of two columns
-				long columnsWidth = nextColumnWidth + columnWidth;
+				double columnsWidth = nextColumnWidth + columnWidth;
 				// calculates the new width of the next / previous column
-				long newWidthNextColumn = (long) (columnsWidth - width);
+				double newWidthNextColumn = columnsWidth - width;
 				if (newWidthNextColumn < 0) {
 					newWidthNextColumn = 0;
 				}
-				inValue = Math.round(roundingFactor * newWidthNextColumn / Unit.INCH.unitInMillimiter() / 100 ) / roundingFactor;
+				inValue = Math.round(roundingFactor * newWidthNextColumn / Unit.INCH.unitInMillimiter())
+						/ roundingFactor;
 				sWidthIN = String.valueOf(inValue) + Unit.INCH.abbr();
 				column.getOdfElement().setProperty(OdfTableColumnProperties.ColumnWidth, sWidthIN);
-				long relWidth = (DEFAULT_REL_TABLE_WIDTH / table.getWidth()) * newWidthNextColumn;
-				column.setRelativeWidth(relWidth);
+				double relWidth = (DEFAULT_REL_TABLE_WIDTH / table.getWidth()) * newWidthNextColumn;
+				column.setRelativeWidth((long)relWidth);
 			}
 		}
 	}

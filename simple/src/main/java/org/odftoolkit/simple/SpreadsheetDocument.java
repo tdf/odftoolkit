@@ -280,9 +280,19 @@ public class SpreadsheetDocument extends Document {
 
 	/**
 	 * Adds a new sheet with data from existing table.
+	 * <p>
+	 * NOTE: This method copies data from existing table, including linked
+	 * resources and styles, if the source table is not in the target document.
+	 * If these data has dependencies to other data of the source document, the
+	 * data dependencies will not be copied. For example, document A has two
+	 * sheets, "Sheet1" and "Sheet2". In "Sheet2", there is a cell with formula,
+	 * "=sum(Sheet1.A1:Sheet1.A10)". After copy the data of "Sheet2" to the new
+	 * sheet in document B, the result of this formula would be different or
+	 * even invalid in document B.
 	 * 
 	 * @param refTable
-	 *            the reference table, which is the data source of the new sheet.
+	 *            the reference table, which is the data source of the new
+	 *            sheet.
 	 * @param name
 	 *            the name of the new sheet.
 	 * @return added sheet.
@@ -350,6 +360,16 @@ public class SpreadsheetDocument extends Document {
 	
 	/**
 	 * Inserts a new sheet with data from existing table.
+	 * 
+	 * <p>
+	 * NOTE: This method copies data from existing table, including linked
+	 * resources and styles, if the source table is not in the target document.
+	 * If these data has dependencies to other data of the source document, the
+	 * data dependencies will not be copied. For example, document A has two
+	 * sheets, "Sheet1" and "Sheet2". In "Sheet2", there is a cell with formula,
+	 * "=sum(Sheet1.A1:Sheet1.A10)". After copy the data of "Sheet2" to the new
+	 * sheet in document B, the result of this formula would be different or
+	 * even invalid in document B.
 	 * 
 	 * @param refTable
 	 *            the reference table, which is the data source of the new

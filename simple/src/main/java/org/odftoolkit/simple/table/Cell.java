@@ -2348,10 +2348,13 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	public OdfElement getFrameContainerElement() {
 		return mCellElement;
 	}
-	
+
 	/**
 	 * Specifies the allowed values of this cell in a list. Any value out of
 	 * this list is invalid.
+	 * <p>
+	 * NOTE: Now, the validity rule does not take effect when a cell value
+	 * is updated by Simple ODF API yet.
 	 * 
 	 * @param values
 	 *            the list of allowed values.
@@ -2527,16 +2530,14 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 				millimeterPadding = Length.parseDouble(padding, Unit.MILLIMETER);
 			}
 		}
-		// convert width pixels to 1/100th mm
-		double columnWidth = (widthPixels * 100) / 2.83464;
-		columnWidth += millimeterPadding * 100 * 2;
+		// convert width pixels to mm
+		double columnWidth = widthPixels / 2.83464;
+		columnWidth += millimeterPadding * 2;
 		Column column = getTableColumn();
 		if (column.isOptimalWidth()) {
 			double width = column.getWidth();
 			if (width < columnWidth) {
-				long columnLongWidth = (long) columnWidth;
-				columnLongWidth = columnLongWidth < columnWidth ? (columnLongWidth + 100) : columnLongWidth;
-				column.setWidth(columnLongWidth);
+				column.setWidth(columnWidth);
 			}
 		}
 	}

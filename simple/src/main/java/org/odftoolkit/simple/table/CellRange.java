@@ -206,8 +206,8 @@ public class CellRange {
 					}
 				}
 			}
-			List<Long> widthList = getCellRangeWidthList();
-			long nCellRangeWidth = widthList.get(widthList.size() - 1).longValue() - widthList.get(0).longValue();
+			List<Double> widthList = getCellRangeWidthList();
+			double nCellRangeWidth = widthList.get(widthList.size() - 1) - widthList.get(0);
 			maOwnerTable.removeColumnsByIndex(mnStartColumn + 1, mnEndColumn - mnStartColumn);
 			Column firstColumn = maOwnerTable.getColumnByIndex(mnStartColumn);
 			firstColumn.setWidth(nCellRangeWidth);
@@ -310,9 +310,9 @@ public class CellRange {
 
 	//vector store the x coordinate of each column which reference to the left start point of owner table
 	//the returned value is all measured with "mm" unit
-	private List<Long> getCellRangeWidthList() {
-		List<Long> list = new ArrayList<Long>();
-		Long length = Long.valueOf(0);
+	private List<Double> getCellRangeWidthList() {
+		List<Double> list = new ArrayList<Double>();
+		Double length = Double.valueOf(0.0);
 		for (int i = 0; i < maOwnerTable.getColumnCount() - 1; i++) {
 			Column col = maOwnerTable.getColumnByIndex(i);
 			int repeateNum = col.getColumnsRepeatedNumber();
@@ -320,12 +320,12 @@ public class CellRange {
 				if (isColumnInCellRange(i)) {
 					list.add(length);
 				}
-				length = Long.valueOf(length.longValue() + col.getWidth());
+				length = Double.valueOf(length + col.getWidth());
 			} else {
 				for (int j = 0; j < repeateNum; j++) {
 					if (isColumnInCellRange(i + j)) {
 						list.add(length);
-						length = Long.valueOf(length.longValue() + col.getWidth());
+						length = Double.valueOf(length + col.getWidth());
 					}
 				}
 				i += repeateNum - 1;
@@ -337,19 +337,19 @@ public class CellRange {
 	}
 
 	//vector store the x coordinate of each will split column start point
-	List<Long> getVeticalSplitCellRangeWidthList(int splitNum) {
+	List<Double> getVeticalSplitCellRangeWidthList(int splitNum) {
 		//get each cell in the cell range(the cell here means the real cell, not the covered cell)
 		List<CellCoverInfo> coverList = maOwnerTable.getCellCoverInfos(mnStartColumn, mnStartRow, mnEndColumn, mnEndRow);
 		//then get the real(uncovered) cell x coordinate
-		List<Long> tmpList = new ArrayList<Long>();
-		List<Long> widthList = getCellRangeWidthList();
+		List<Double> tmpList = new ArrayList<Double>();
+		List<Double> widthList = getCellRangeWidthList();
 		for (int i = mnStartColumn; i < mnEndColumn + 1; i++) {
 			for (int j = mnStartRow; j < mnEndRow + 1; j++) {
 				if (maOwnerTable.isCoveredCellInOwnerTable(coverList, i, j)) {
 					continue;
 				} else {
 					//the real cell, record the x coordinate of the left point
-					Long width = widthList.get(i - mnStartColumn);
+					Double width = widthList.get(i - mnStartColumn);
 					if (!tmpList.contains(width)) {
 						tmpList.add(width);
 					}
@@ -358,18 +358,18 @@ public class CellRange {
 		}
 
 		//last, reorder the tmpVector and split it to splitNum between each item
-		Long[] widthArray = (Long[]) tmpList.toArray();
+		Double[] widthArray = (Double[]) tmpList.toArray();
 		Arrays.sort(widthArray);
-		List<Long> rtnValues = new ArrayList<Long>();
-		Long colWidth;
-		long unitWidth;
+		List<Double> rtnValues = new ArrayList<Double>();
+		double colWidth;
+		double unitWidth;
 		rtnValues.add(widthArray[0]);
 		for (int i = 1; i < widthArray.length; i++) {
-			colWidth = Long.valueOf(widthArray[i].longValue() - widthArray[i - 1].longValue());
-			unitWidth = colWidth.longValue() / splitNum;
+			colWidth = Double.valueOf(widthArray[i] - widthArray[i - 1]);
+			unitWidth = colWidth / splitNum;
 			for (int j = 1; j < splitNum; j++) {
-				long eachWidth = unitWidth * j + widthArray[i - 1].longValue();
-				rtnValues.add(Long.valueOf(eachWidth));
+				double eachWidth = unitWidth * j + widthArray[i - 1];
+				rtnValues.add(Double.valueOf(eachWidth));
 			}
 			rtnValues.add(widthArray[i]);
 		}
