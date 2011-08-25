@@ -84,7 +84,7 @@ public class CellRange {
 		mnStartRow = startRow;
 		mnEndColumn = endColumn;
 		mnEndRow = endRow;
-		List<CellCoverInfo> coverList = maOwnerTable.getCellCoverInfos(0, 0, maOwnerTable.getColumnCount() - 1, maOwnerTable.getRowCount() - 1);
+		List<CellCoverInfo> coverList = maOwnerTable.getCellCoverInfos(0, 0, endColumn, endRow);
 		Cell cell;// = maOwnerTable.getOwnerCellByPosition(coverList, nStartColumn, nStartRow);
 		for (int i = startColumn; i <= endColumn; i++) {
 			cell = maOwnerTable.getOwnerCellByPosition(coverList, i, startRow);
