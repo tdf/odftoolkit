@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
-import org.odftoolkit.simple.common.field.Fields;
+import org.odftoolkit.simple.common.field.AbstractVariableContainer;
 import org.odftoolkit.simple.common.field.VariableContainer;
 import org.odftoolkit.simple.common.field.VariableField;
 import org.odftoolkit.simple.common.field.VariableField.VariableType;
@@ -69,6 +69,7 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 
 	private ListContainerImpl listContainerImpl;
 	private ParagraphContainerImpl paragraphContainerImpl;
+	private VariableContainerImpl variableContainerImpl;
 
 	private Header firstPageHeader;
 	private Header standardHeader;
@@ -502,6 +503,59 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 		return getListContainerImpl().removeList(list);
 	}
 
+	/**
+	 * Creates a new paragraph and append text
+	 * 
+	 * @param text
+	 * @return the new paragraph
+	 * @throws Exception
+	 *             if the file DOM could not be created.
+	 */
+	public Paragraph addParagraph(String text) {
+		Paragraph para = getParagraphContainerImpl().addParagraph(text);
+		return para;
+	}
+
+	/**
+	 * Remove paragraph from this document
+	 * 
+	 * @param para
+	 *            - the instance of paragraph
+	 * @return true if the paragraph is removed successfully, false if errors
+	 *         happen.
+	 */
+	public boolean removeParagraph(Paragraph para) {
+		return getParagraphContainerImpl().removeParagraph(para);
+	}
+
+	public OdfElement getParagraphContainerElement() {
+		return getParagraphContainerImpl().getParagraphContainerElement();
+	}
+
+	public Paragraph getParagraphByIndex(int index, boolean isEmptyParagraphSkipped) {
+		return getParagraphContainerImpl().getParagraphByIndex(index, isEmptyParagraphSkipped);
+	}
+
+	public Paragraph getParagraphByReverseIndex(int reverseIndex, boolean isEmptyParagraphSkipped) {
+		return getParagraphContainerImpl().getParagraphByReverseIndex(reverseIndex, isEmptyParagraphSkipped);
+	}
+
+	public Iterator<Paragraph> getParagraphIterator() {
+		return getParagraphContainerImpl().getParagraphIterator();
+	}
+
+	public VariableField declareVariable(String name, VariableType type) {
+		return getVariableContainerImpl().declareVariable(name, type);
+	}
+
+	public VariableField getVariableFieldByName(String name) {
+		return getVariableContainerImpl().getVariableFieldByName(name);
+	}
+
+	public OdfElement getVariableContainerElement() {
+		return getVariableContainerImpl().getVariableContainerElement();
+	}
+
 	private ListContainerImpl getListContainerImpl() {
 		if (listContainerImpl == null) {
 			listContainerImpl = new ListContainerImpl();
@@ -552,8 +606,7 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	}
 
 	private class ParagraphContainerImpl extends AbstractParagraphContainer {
-		public OdfElement getParagraphContainerElement()
-		{
+		public OdfElement getParagraphContainerElement() {
 			OdfElement containerElement = null;
 			try {
 				containerElement = getContentRoot();
@@ -563,75 +616,29 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 			return containerElement;
 		}
 	}
+
 	private ParagraphContainerImpl getParagraphContainerImpl() {
 		if (paragraphContainerImpl == null)
 			paragraphContainerImpl = new ParagraphContainerImpl();
 		return paragraphContainerImpl;
 	}
 
-	/**
-	 * Creates a new paragraph and append text
-	 * 
-	 * @param text
-	 * @return the new paragraph
-	 * @throws Exception
-	 *             if the file DOM could not be created.
-	 */
-	public Paragraph addParagraph(String text)
-	{
-		Paragraph para = getParagraphContainerImpl().addParagraph(text);
-		return para;
-	}
-	
-	/**
-	 * Remove paragraph from this document
-	 * @param para
-	 *            - the instance of paragraph
-	 * @return true if the paragraph is removed successfully, false if errors
-	 *         happen.
-	 */
-	public boolean removeParagraph(Paragraph para)
-	{
-		return getParagraphContainerImpl().removeParagraph(para);
-	}
+	private class VariableContainerImpl extends AbstractVariableContainer {
 
-	public OdfElement getParagraphContainerElement() {
-		return getParagraphContainerImpl().getParagraphContainerElement();
-	}
-
-	public Paragraph getParagraphByIndex(int index, boolean isEmptyParagraphSkipped) {
-		return getParagraphContainerImpl().getParagraphByIndex(index, isEmptyParagraphSkipped);
-	}
-
-	public Paragraph getParagraphByReverseIndex(int reverseIndex, boolean isEmptyParagraphSkipped) {
-		return getParagraphContainerImpl().getParagraphByReverseIndex(reverseIndex, isEmptyParagraphSkipped);
-	}
-
-	public Iterator<Paragraph> getParagraphIterator() {
-		return getParagraphContainerImpl().getParagraphIterator();
-	}
-
-	public VariableField declareVariable(String name, VariableType type) {
-		VariableField variableField = null;
-		switch (type) {
-		case SIMPLE:
-			variableField = Fields.createSimpleVariableField(this, name);
-			break;
-		case USER:
-			variableField = Fields.createUserVariableField(this, name, "0");
-			break;
-		case SEQUENCE:
-			throw new IllegalArgumentException("Simple Java API for ODF doesn't support this type now.");
+		public OdfElement getVariableContainerElement() {
+			try {
+				return getContentRoot();
+			} catch (Exception e) {
+				Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+				return null;
+			}
 		}
-		return variableField;
 	}
 
-	public OdfElement getVariableContainerElement() {
-		try {
-			return this.getContentRoot();
-		} catch (Exception e) {
-			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
-			return null;
+	private VariableContainer getVariableContainerImpl() {
+		if (variableContainerImpl == null) {
+			variableContainerImpl = new VariableContainerImpl();
 		}
+		return variableContainerImpl;
 	}
 }

@@ -95,8 +95,21 @@ public class VariableField extends Field {
 				simpleVariableElements = ((OdfFileDom) containerElement.getOwnerDocument())
 						.newOdfElement(TextVariableDeclsElement.class);
 				containerElement.insertBefore(simpleVariableElements, containerElement.getFirstChild());
+			} else {
+				TextVariableDeclElement simpleVariableElementTmp = (TextVariableDeclElement) simpleVariableElements
+						.getFirstChild();
+				while (simpleVariableElementTmp != null) {
+					if (name.equals(simpleVariableElementTmp.getTextNameAttribute())) {
+						simpleVariableElement = simpleVariableElementTmp;
+						break;
+					} else {
+						simpleVariableElementTmp = (TextVariableDeclElement) simpleVariableElementTmp.getNextSibling();
+					}
+				}
 			}
-			simpleVariableElement = simpleVariableElements.newTextVariableDeclElement("string", name);
+			if (simpleVariableElement == null) {
+				simpleVariableElement = simpleVariableElements.newTextVariableDeclElement("string", name);
+			}
 			break;
 		case USER:
 			userVariableElements = OdfElement.findFirstChildNode(TextUserFieldDeclsElement.class, containerElement);
@@ -104,8 +117,21 @@ public class VariableField extends Field {
 				userVariableElements = ((OdfFileDom) containerElement.getOwnerDocument())
 						.newOdfElement(TextUserFieldDeclsElement.class);
 				containerElement.insertBefore(userVariableElements, containerElement.getFirstChild());
+			} else {
+				TextUserFieldDeclElement userVariableElementTmp = (TextUserFieldDeclElement) userVariableElements
+						.getFirstChild();
+				while (userVariableElementTmp != null) {
+					if (name.equals(userVariableElementTmp.getTextNameAttribute())) {
+						userVariableElement = userVariableElementTmp;
+						break;
+					} else {
+						userVariableElementTmp = (TextUserFieldDeclElement) userVariableElementTmp.getNextSibling();
+					}
+				}
 			}
-			userVariableElement = userVariableElements.newTextUserFieldDeclElement(0, "string", name);
+			if (userVariableElement == null) {
+				userVariableElement = userVariableElements.newTextUserFieldDeclElement(0, "string", name);
+			}
 			break;
 		case SEQUENCE:
 			throw new IllegalArgumentException("Simple Java API for ODF doesn't support this type now.");

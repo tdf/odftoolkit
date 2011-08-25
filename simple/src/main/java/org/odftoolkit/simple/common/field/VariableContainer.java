@@ -62,11 +62,12 @@ public interface VariableContainer {
 	public VariableField declareVariable(String name, VariableType type);
 
 	/**
-	 * Return the declared variable list of this VariableContainer.
+	 * Return the declared variable by name.
 	 * 
-	 * @return the declared variable list of this VariableContainer.
+	 * @param name
+	 *            the unique name of this variable field.
+	 * @return the declared variable.
 	 */
-	/*
-	 * public List<VariableField> getVariableFieldList();
-	 */
+	public VariableField getVariableFieldByName(String name);
+
 }

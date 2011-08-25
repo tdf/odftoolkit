@@ -36,7 +36,7 @@ import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Component;
-import org.odftoolkit.simple.common.field.Fields;
+import org.odftoolkit.simple.common.field.AbstractVariableContainer;
 import org.odftoolkit.simple.common.field.VariableContainer;
 import org.odftoolkit.simple.common.field.VariableField;
 import org.odftoolkit.simple.common.field.VariableField.VariableType;
@@ -55,6 +55,7 @@ import org.w3c.dom.NodeList;
 public class Footer extends Component implements TableContainer, VariableContainer {
 	private StyleFooterElement footerEle;
 	private TableContainerImpl tableContainerImpl;
+	private VariableContainerImpl variableContainerImpl;
 
 	/**
 	 * Create a footer instance by an object of <code>StyleFooterElement</code>.
@@ -103,36 +104,31 @@ public class Footer extends Component implements TableContainer, VariableContain
 	public OdfElement getTableContainerElement() {
 		return getTableContainerImpl().getTableContainerElement();
 	}
-	
-	public VariableField declareVariable(String name, VariableType type) {
-		VariableField variableField = null;
-		switch (type) {
-		case SIMPLE:
-			variableField = Fields.createSimpleVariableField(this, name);
-			break;
-		case USER:
-			variableField = Fields.createUserVariableField(this, name, "0");
-			break;
-		case SEQUENCE:
-			throw new IllegalArgumentException("Simple Java API for ODF doesn't support this type now.");
-		}
-		return variableField;
-	}
 
 	public OdfElement getVariableContainerElement() {
-		try {
-			return footerEle;
-		} catch (Exception e) {
-			Logger.getLogger(Footer.class.getName()).log(Level.SEVERE, null, e);
-			return null;
-		}
+		return getVariableContainerImpl().getVariableContainerElement();
 	}
-	
+
+	public VariableField declareVariable(String name, VariableType type) {
+		return getVariableContainerImpl().declareVariable(name, type);
+	}
+
+	public VariableField getVariableFieldByName(String name) {
+		return getVariableContainerImpl().getVariableFieldByName(name);
+	}
+
 	private TableContainer getTableContainerImpl() {
 		if (tableContainerImpl == null) {
 			tableContainerImpl = new TableContainerImpl();
 		}
 		return tableContainerImpl;
+	}
+
+	private VariableContainer getVariableContainerImpl() {
+		if (variableContainerImpl == null) {
+			variableContainerImpl = new VariableContainerImpl();
+		}
+		return variableContainerImpl;
 	}
 
 	private void updateTableToNone(Table table) {
@@ -159,6 +155,18 @@ public class Footer extends Component implements TableContainer, VariableContain
 
 		public OdfElement getTableContainerElement() {
 			return footerEle;
+		}
+	}
+
+	private class VariableContainerImpl extends AbstractVariableContainer {
+
+		public OdfElement getVariableContainerElement() {
+			try {
+				return footerEle;
+			} catch (Exception e) {
+				Logger.getLogger(Footer.class.getName()).log(Level.SEVERE, null, e);
+				return null;
+			}
 		}
 	}
 }
