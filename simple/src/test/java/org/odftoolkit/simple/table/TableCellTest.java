@@ -1308,10 +1308,16 @@ public class TableCellTest {
 		Font font2Base = new Font("Times New Roman", FontStyle.REGULAR, 13, Color.RED, TextLinePosition.REGULAR);
 		Font font3Base = new Font("SimSun", FontStyle.REGULAR, 17, Color.BLUE, TextLinePosition.REGULAR);
 		try {
-			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
-			Table table = doc.addTable();
-			String contentStr = "This is a long text content.";
-			checkCellWidth(table.getCellByPosition(0, 0), null, 44.0977, contentStr);
+			final SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
+			final Table table = doc.addTable();
+			final String contentStr = "This is a long text content.";
+			
+			// basically the default font is of Arial type, so assume the default family
+			final String nfFamilyName = "Arial";
+			
+			if (isFontAvailable(nfFamilyName)) {
+				checkCellWidth(table.getCellByPosition(0, 0), null, 44.0977, contentStr);
+			}
 			if (isFontAvailable(font1Base.getFamilyName())) {
 				checkCellWidth(table.getCellByPosition(1, 1), font1Base, 24.3424, contentStr);
 			}
