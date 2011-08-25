@@ -25,6 +25,7 @@ package org.odftoolkit.simple;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,13 +37,16 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleColumnsElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
+import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
@@ -50,6 +54,7 @@ import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.type.CellRangeAddressList;
+import org.odftoolkit.odfdom.type.Length.Unit;
 import org.odftoolkit.simple.chart.AbstractChartContainer;
 import org.odftoolkit.simple.chart.Chart;
 import org.odftoolkit.simple.chart.ChartContainer;
@@ -523,17 +528,7 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	 * @since 0.6.5
 	 */
 	public void addPageBreak() {
-		try {
-			OdfContentDom contentDocument = getContentDom();
-			OdfOfficeAutomaticStyles styles = contentDocument.getAutomaticStyles();
-			OdfStyle style = styles.newStyle(OdfStyleFamily.Paragraph);
-			style.newStyleParagraphPropertiesElement().setFoBreakBeforeAttribute("page");
-			TextPElement pEle = getContentRoot().newTextPElement();
-			pEle.setStyleName(style.getStyleNameAttribute());
-		} catch (Exception e) {
-			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
-			throw new RuntimeException("PageBreak appends failed.", e);
-		}
+		addPageOrColumnBreak(null, "page");
 	}
 	
 	/**
@@ -544,19 +539,128 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	 * @since 0.6.5
 	 */
 	public void addPageBreak(Paragraph refParagraph) {
+		addPageOrColumnBreak(refParagraph, "page");
+	}
+	
+	/** 
+	 * Defines several columns to the page whose style is specified.
+	 * 
+	 * @param columnsNumber
+	 * 			the number of columns (are of width identical)
+	 * @param spacing
+	 * 			column spacing in cm (ex. 2.40 for 2,4 cm)
+	 * 
+	 * @since 0.7
+	 */
+	public void setPageColumns(int columnsNumber, double spacing) {
+		String vSpacingColumn = (new DecimalFormat("#0.###").format(spacing) + Unit.CENTIMETER.abbr()).replace(",", ".");
+		// Get back the name of the style Page wanted Layout
+		// (Example of the got back name : pm1 or Mpm1 for the standard style)
+		try {
+			String stylePageLayoutName = null;
+			int pageLayoutNameCount = 0;
+			NodeList list = getStylesDom().getElementsByTagName("office:master-styles");
+			if (list.getLength() > 0) {
+				OdfOfficeMasterStyles officeMasterStyles = (OdfOfficeMasterStyles) list.item(0);
+				// Get back the StylePageLayoutName
+				for (int i = 0; i < officeMasterStyles.getLength(); i++) {
+					StyleMasterPageElement syleMasterPage = (StyleMasterPageElement) officeMasterStyles.item(i);
+					if(syleMasterPage.getStyleNameAttribute().equals("Standard")){					
+						stylePageLayoutName = syleMasterPage.getStylePageLayoutNameAttribute();
+						break;
+					}
+				}
+				// Allows to know if StylePageLayoutName is unique
+				for (int i = 0; i < officeMasterStyles.getLength(); i++) {
+					StyleMasterPageElement syleMasterPage = (StyleMasterPageElement) officeMasterStyles.item(i);
+					if(syleMasterPage.getStylePageLayoutNameAttribute().equals(stylePageLayoutName)){					
+						pageLayoutNameCount++;
+					}
+				}
+			}
+			
+			OdfOfficeAutomaticStyles autoStyles = getStylesDom().getAutomaticStyles();
+			int autoStylesCount = autoStyles.getLength();			
+			OdfStylePageLayout pageLayout = autoStyles.getPageLayout(stylePageLayoutName);
+			if(pageLayout != null) {
+				// Clone the OdfStylePageLayout if another master style possesses the same name before modifying its properties
+				if(pageLayoutNameCount > 1){
+					Node pageLayoutNew = pageLayout.cloneNode(true);					
+					// Rename the style of the clone before modifying its properties
+					String oldPageLayoutName = pageLayout.getStyleNameAttribute();
+					pageLayout.setStyleNameAttribute("Mpm" + (autoStylesCount+1));
+					// Allocate the new name of the style to the master style (the cloned style)
+					if (list.getLength() > 0) {
+						OdfOfficeMasterStyles masterpage = (OdfOfficeMasterStyles) list.item(0);
+						for (int i = 0; i < masterpage.getLength(); i++) {
+							StyleMasterPageElement vSyleMasterPage = (StyleMasterPageElement) masterpage.item(i);
+							if(vSyleMasterPage.getStyleNameAttribute().equals("Standard")){
+								if(vSyleMasterPage.getStylePageLayoutNameAttribute().equals(oldPageLayoutName)){					
+									vSyleMasterPage.setStylePageLayoutNameAttribute(pageLayout.getStyleNameAttribute());
+								}
+							}
+						}
+					}
+					autoStyles.appendChild(pageLayoutNew);
+				}
+				NodeList vListStlePageLprop = pageLayout.getElementsByTagName("style:page-layout-properties");
+				StylePageLayoutPropertiesElement vStlePageLprop = (StylePageLayoutPropertiesElement) vListStlePageLprop.item(0);
+				StyleColumnsElement vStyleColumnsElement = vStlePageLprop.newStyleColumnsElement(columnsNumber);
+				vStyleColumnsElement.setFoColumnGapAttribute(vSpacingColumn);
+			}
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+			throw new RuntimeException("Page column sets failed.", e);
+		}		
+	}
+	
+	/**
+	 * Appends a new column break to this document.
+	 * 
+	 * @since 0.7
+	 */
+	public void addColumnBreak() {
+		addPageOrColumnBreak(null, "column");
+	}
+	
+	/**
+	 * Appends a new column break to this document after the reference paragraph.
+	 * 
+	 * @param refParagraph
+	 *            the reference paragraph after where the column break inserted.
+	 * @since 0.7
+	 */
+	public void addColumnBreak(Paragraph refParagraph) {
+		addPageOrColumnBreak(refParagraph, "column");
+	}
+	
+	/** 
+	 * Appends a new column or page break to this document.
+	 * 
+	 * @param refParagraph
+	 * 			the reference paragraph after where the column break inserted.
+	 * @param breakAttribute
+	 * 			the attribute name (page or column)
+	 */
+	private void addPageOrColumnBreak(Paragraph refParagraph, String breakAttribute) {
+		TextPElement pEle = null;
 		try {
 			OdfContentDom contentDocument = getContentDom();
 			OdfOfficeAutomaticStyles styles = contentDocument.getAutomaticStyles();
 			OdfStyle style = styles.newStyle(OdfStyleFamily.Paragraph);
-			style.newStyleParagraphPropertiesElement().setFoBreakBeforeAttribute("page");
-			OfficeTextElement contentRoot = getContentRoot();
-			TextPElement pEle = contentRoot.newTextPElement();
-			OdfElement refEle = refParagraph.getOdfElement();
-			contentRoot.insertBefore(pEle, refEle.getNextSibling());
+			style.newStyleParagraphPropertiesElement().setFoBreakBeforeAttribute(breakAttribute);
+			if(refParagraph == null){
+				pEle = getContentRoot().newTextPElement();
+			} else {
+				OfficeTextElement contentRoot = getContentRoot();
+				pEle = contentRoot.newTextPElement();
+				OdfElement refEle = refParagraph.getOdfElement();
+				contentRoot.insertBefore(pEle, refEle.getNextSibling());
+			}
 			pEle.setStyleName(style.getStyleNameAttribute());
 		} catch (Exception e) {
 			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
-			throw new RuntimeException("PageBreak appends failed.", e);
+			throw new RuntimeException(breakAttribute + "Break appends failed.", e);
 		}
 	}
 	
@@ -564,9 +668,8 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	 * Creates a new paragraph and append text.
 	 * 
 	 * @param text
+	 *            the text content of this paragraph
 	 * @return the new paragraph
-	 * @throws Exception
-	 *             if the file DOM could not be created.
 	 */
 	public Paragraph addParagraph(String text) {
 		Paragraph para = getParagraphContainerImpl().addParagraph(text);
@@ -577,7 +680,7 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	 * Remove paragraph from this document
 	 * 
 	 * @param para
-	 *            - the instance of paragraph
+	 *            the instance of paragraph
 	 * @return true if the paragraph is removed successfully, false if errors
 	 *         happen.
 	 */

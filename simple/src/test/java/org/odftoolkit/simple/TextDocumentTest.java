@@ -40,7 +40,7 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Node;
 
 public class TextDocumentTest {
-	
+
 	@Test
 	public void testAddPageBreak() {
 		try {
@@ -64,19 +64,19 @@ public class TextDocumentTest {
 			existDoc.addPageBreak(refParagraph);
 			validPageBreakExist(existDoc, refParagraph);
 			existDoc.save(ResourceUtilities.newTestOutputFile("test2Out.odt"));
-			
+
 		} catch (Exception e) {
 			Logger.getLogger(TextDocumentTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail();
 		}
 	}
-	
+
 	@Test
 	public void testAddComment() {
 		try {
 			// test new creation document.
 			TextDocument newDoc = TextDocument.newTextDocument();
-			
+
 			Paragraph paragraph = newDoc.addParagraph("Paragraph1");
 			paragraph.addComment("This is a comment for Paragraph1", "Simple ODF");
 			Node firstChildNode = paragraph.getOdfElement().getFirstChild();
@@ -85,7 +85,7 @@ public class TextDocumentTest {
 			Assert.assertEquals("Simple ODF", comment.getFirstChild().getTextContent());
 			Assert.assertEquals("This is a comment for Paragraph1", comment.getLastChild().getTextContent());
 			Assert.assertTrue(firstChildNode instanceof OfficeAnnotationElement);
-			
+
 			paragraph = newDoc.addParagraph("Paragraph2");
 			paragraph.addComment("This is a comment for Paragraph2", null);
 			firstChildNode = paragraph.getOdfElement().getFirstChild();
@@ -93,14 +93,14 @@ public class TextDocumentTest {
 			comment = (OfficeAnnotationElement) firstChildNode;
 			Assert.assertEquals(System.getProperty("user.name"), comment.getFirstChild().getTextContent());
 			Assert.assertEquals("This is a comment for Paragraph2", comment.getLastChild().getTextContent());
-			
+
 			newDoc.save(ResourceUtilities.newTestOutputFile("AddCommentOutput.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TextDocumentTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail();
 		}
 	}
-	
+
 	private void validPageBreakExist(TextDocument newDoc, Paragraph paragraph) throws Exception {
 		Node paragraphNode = paragraph.getOdfElement().getNextSibling();
 		Assert.assertTrue(paragraphNode instanceof TextPElement);
@@ -113,7 +113,7 @@ public class TextDocumentTest {
 		Assert.assertEquals(((StyleParagraphPropertiesElement) paragraphPropertiesNode).getFoBreakBeforeAttribute(),
 				"page");
 	}
-	
+
 	@Test
 	public void testRemoveParagraph() throws Exception {
 		try {
@@ -127,6 +127,27 @@ public class TextDocumentTest {
 			TextParagraphElementBase paraEle = para.getOdfElement();
 			Assert.assertNull(paraEle);
 		} catch (Exception e) {
+			Logger.getLogger(TextDocumentTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void testColumnAndPageBreak() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			doc.setPageColumns(2, 0.2);
+			// the current document is Standard (2 columns)
+			doc.addParagraph("First Paragraph in left column");
+			doc.addColumnBreak();
+			doc.addParagraph("This text is in the second column of the first page. ");
+			doc.addColumnBreak();
+			doc.addParagraph("This text is int the second page, first colums.");
+			doc.addParagraph("This text is in the second column of the first page. ");
+			// save the document
+			doc.save(ResourceUtilities.newTestOutputFile("testColumnAndPageBreak.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(TextDocumentTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
 	}
