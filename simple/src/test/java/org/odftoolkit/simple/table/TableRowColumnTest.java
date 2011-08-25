@@ -21,9 +21,6 @@
  ************************************************************************/
 package org.odftoolkit.simple.table;
 
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;

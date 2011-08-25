@@ -48,7 +48,9 @@ import org.odftoolkit.simple.style.Border;
 import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.FontStyle;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.TextLinePosition;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
 import org.odftoolkit.simple.text.Paragraph;
 import org.odftoolkit.simple.text.list.BulletDecorator;
@@ -1166,7 +1168,7 @@ public class TableCellTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * This test case check whether getNoteText and setNoteText work as
 	 * expected. When test getNoteText, the cell note may be null, a text
@@ -1180,7 +1182,7 @@ public class TableCellTest {
 		int rowindex = 10, columnindex = 12;
 		Table table = odsdoc.getTableByName("Sheet1");
 		Cell fcell = table.getCellByPosition(columnindex, rowindex);
-		String note=fcell.getNoteText();
+		String note = fcell.getNoteText();
 		Assert.assertNull(note);
 		// cell A16 contains a text paragraph without style.
 		fcell = table.getCellByPosition("A16");
@@ -1188,7 +1190,8 @@ public class TableCellTest {
 		// cell A16 contains a text paragraph with style.
 		fcell = table.getCellByPosition("A17");
 		Assert.assertEquals("note2 ", fcell.getNoteText());
-		// cell A16 contains a text list with style. all of the list items should be extracted.
+		// cell A16 contains a text list with style. all of the list items
+		// should be extracted.
 		fcell = table.getCellByPosition("A18");
 		Assert.assertEquals("note1note2note3", fcell.getNoteText());
 		String expectedNote = "note test";
@@ -1201,7 +1204,7 @@ public class TableCellTest {
 		fcell = table.getCellByPosition(columnindex, rowindex);
 		Assert.assertEquals(expectedNote, fcell.getNoteText());
 	}
-	
+
 	@Test
 	public void testGetSetImage() {
 		try {
@@ -1211,19 +1214,19 @@ public class TableCellTest {
 			Cell cell = table.getCellByPosition(0, 0);
 			cell.setImage(ResourceUtilities.getURI("image_list_item.png"));
 			doc.save(ResourceUtilities.newTestOutputFile("ImageCellTable.odt"));
-			
+
 			// load the document again.
 			doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("ImageCellTable.odt"));
 			table = doc.getTableByName("ImageTable");
 			cell = table.getCellByPosition(0, 0);
-			//image height = 34 pixels.
+			// image height = 34 pixels.
 			Assert.assertEquals(34, cell.getBufferedImage().getHeight(null));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testCellParagraph() {
 		String[] plainText = { "nospace", "one space", "two  spaces", "three   spaces", "   three leading spaces",
@@ -1231,11 +1234,12 @@ public class TableCellTest {
 				"mixed   \t   spaces and tabs", "line\r\nbreak" };
 
 		String[][] elementResult = { { "nospace" }, { "one space" }, { "two ", "*s1", "spaces" },
-				{ "three ", "*s2", "spaces" }, { " ", "*s2", "three leading spaces" }, { "three trailing spaces ", "*s2" },
-				{ "one", "*t", "tab" }, { "two", "*t", "*t", "tabs" }, { "*t", "leading tab" }, { "trailing tab", "*t" },
+				{ "three ", "*s2", "spaces" }, { " ", "*s2", "three leading spaces" },
+				{ "three trailing spaces ", "*s2" }, { "one", "*t", "tab" }, { "two", "*t", "*t", "tabs" },
+				{ "*t", "leading tab" }, { "trailing tab", "*t" },
 				{ "mixed ", "*s2", "*t", " ", "*s2", "spaces and tabs" }, { "line", "*n", "break" } };
 		try {
-			//test append paragraph
+			// test append paragraph
 			TextDocument doc = TextDocument.newTextDocument();
 			Table table = Table.newTable(doc, 2, 2);
 			Cell cell = table.getCellByPosition(0, 0);
@@ -1243,7 +1247,7 @@ public class TableCellTest {
 				Paragraph para = cell.addParagraph(plainText[i]);
 				compareResults(para.getOdfElement(), plainText[i], elementResult[i]);
 			}
-			
+
 			// test set paragraph content
 			cell = table.getCellByPosition(0, 1);
 			for (int i = 0; i < plainText.length; i++) {
@@ -1252,8 +1256,8 @@ public class TableCellTest {
 				String content = para.getTextContent();
 				Assert.assertEquals(plainText[i], content);
 			}
-			
-			//test remove paragraph content
+
+			// test remove paragraph content
 			cell = table.getCellByPosition(1, 0);
 			for (int i = 0; i < plainText.length; i++) {
 				Paragraph para = cell.addParagraph(plainText[i]);
@@ -1263,8 +1267,8 @@ public class TableCellTest {
 				content = para.getTextContent();
 				Assert.assertEquals("", content);
 			}
-			
-			//test get paragraph by index
+
+			// test get paragraph by index
 			cell = table.getCellByPosition(1, 1);
 			Paragraph paragraph1 = cell.addParagraph("paragraph1");
 			Paragraph paragraphE = cell.addParagraph(null);
@@ -1288,7 +1292,42 @@ public class TableCellTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
+	@Test
+	public void testCellSizeOptimal() {
+		Font font1Base = new Font("Arial", FontStyle.REGULAR, 6, Color.GREEN, TextLinePosition.REGULAR);
+		Font font2Base = new Font("Times New Roman", FontStyle.REGULAR, 13, Color.RED, TextLinePosition.REGULAR);
+		Font font3Base = new Font("SimSun", FontStyle.REGULAR, 17, Color.BLUE, TextLinePosition.REGULAR);
+		try {
+			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
+			Table table = doc.addTable();
+			String contentStr = "This is a long text content.";
+			Cell cell = table.getCellByPosition(0, 0);
+			cell.getTableColumn().setUseOptimalWidth(true);
+			cell.setStringValue(contentStr);
+			Assert.assertEquals(44, cell.getTableColumn().getWidth());
+			cell = table.getCellByPosition(1, 1);
+			cell.setFont(font1Base);
+			cell.getTableColumn().setUseOptimalWidth(true);
+			cell.setStringValue(contentStr);
+			Assert.assertEquals(25, cell.getTableColumn().getWidth());
+			cell = table.getCellByPosition(2, 2);
+			cell.setFont(font2Base);
+			cell.getTableColumn().setUseOptimalWidth(true);
+			cell.setStringValue(contentStr);
+			Assert.assertEquals(50, cell.getTableColumn().getWidth());
+			cell = table.getCellByPosition(3, 3);
+			cell.setFont(font3Base);
+			cell.getTableColumn().setUseOptimalWidth(true);
+			cell.setStringValue(contentStr);
+			Assert.assertEquals(89, cell.getTableColumn().getWidth());
+			doc.save(ResourceUtilities.newTestOutputFile("testCellSizeOptimal.ods"));
+		} catch (Exception e) {
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+
 	private void compareResults(Element element, String input, String[] output) {
 		int i;
 		int nSpaces;

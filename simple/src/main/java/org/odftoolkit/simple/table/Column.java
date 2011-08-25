@@ -45,6 +45,7 @@ import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.type.Length.Unit;
 import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
+import org.odftoolkit.simple.SpreadsheetDocument;
 import org.w3c.dom.Node;
 
 /**
@@ -174,42 +175,44 @@ public class Column extends Component {
 
 		Table table = getTable();
 		// check if need set relative width
-		int index = getColumnIndex();
-		int columnCount = table.getColumnCount();
-		if (index == columnCount-1) {
-			//if the column to resize is the rightmost
-			index = index - 1;
-		} else {
-			index = index + 1;
-		}
-		if (index >= 0) {
-			Column column = null;
-			if (index < columnCount) {
-				column = table.getColumnByIndex(index);
-			} else if (columnCount >= 2) {
-				column = table.getColumnByIndex(columnCount - 2);
+		if (!(table.getOwnerDocument() instanceof SpreadsheetDocument)) {
+			int index = getColumnIndex();
+			int columnCount = table.getColumnCount();
+			if (index == columnCount-1) {
+				//if the column to resize is the rightmost
+				index = index - 1;
+			} else {
+				index = index + 1;
 			}
+			if (index >= 0) {
+				Column column = null;
+				if (index < columnCount) {
+					column = table.getColumnByIndex(index);
+				} else if (columnCount >= 2) {
+					column = table.getColumnByIndex(columnCount - 2);
+				}
 
-			long nextColumnWidth = 0;
-			if (column != null) {
-				nextColumnWidth = column.getWidth();
-				setRelativeWidth((DEFAULT_REL_TABLE_WIDTH / table.getWidth()) * width);
+				long nextColumnWidth = 0;
+				if (column != null) {
+					nextColumnWidth = column.getWidth();
+					setRelativeWidth((DEFAULT_REL_TABLE_WIDTH / table.getWidth()) * width);
+				}
+
+				// total width of two columns
+				long columnsWidth = nextColumnWidth + columnWidth;
+				// calculates the new width of the next / previous column
+				long newWidthNextColumn = (long) (columnsWidth - width);
+				if (newWidthNextColumn < 0) {
+					newWidthNextColumn = 0;
+				}
+
+				sWidthMM = String.valueOf(newWidthNextColumn) + Unit.MILLIMETER.abbr();
+				sWidthIN = PositiveLength.mapToUnit(sWidthMM, Unit.INCH);
+
+				column.getOdfElement().setProperty(OdfTableColumnProperties.ColumnWidth, sWidthIN);
+				long relWidth = (DEFAULT_REL_TABLE_WIDTH / table.getWidth()) * newWidthNextColumn;
+				column.setRelativeWidth(relWidth);
 			}
-
-			// total width of two columns
-			long columnsWidth = nextColumnWidth + columnWidth;
-			// calculates the new width of the next / previous column
-			long newWidthNextColumn = (long) (columnsWidth - width);
-			if (newWidthNextColumn < 0) {
-				newWidthNextColumn = 0;
-			}
-
-			sWidthMM = String.valueOf(newWidthNextColumn) + Unit.MILLIMETER.abbr();
-			sWidthIN = PositiveLength.mapToUnit(sWidthMM, Unit.INCH);
-
-			column.getOdfElement().setProperty(OdfTableColumnProperties.ColumnWidth, sWidthIN);
-			long relWidth = (DEFAULT_REL_TABLE_WIDTH / table.getWidth()) * newWidthNextColumn;
-			column.setRelativeWidth(relWidth);
 		}
 	}
 
@@ -224,13 +227,17 @@ public class Column extends Component {
 		if (repeateNum > 1) {
 			// change this repeated column to several single columns
 			TableTableColumnElement ownerColumnElement = null;
+			String columnWidthStr = null;
+			long columnWidth = 0;
 			int repeatedColumnIndex = mnRepeatedIndex;
 			Node refElement = maColumnElement;
 			maColumnElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
 			String originalWidth = maColumnElement.getProperty(OdfTableColumnProperties.ColumnWidth);
 			String originalRelWidth = maColumnElement.getProperty(OdfTableColumnProperties.RelColumnWidth);
-			String columnWidthStr = Length.mapToUnit(originalWidth, Unit.MILLIMETER);
-			long columnWidth = PositiveLength.parseLong(columnWidthStr, Unit.MILLIMETER);
+			if (originalWidth != null) {
+				columnWidthStr = Length.mapToUnit(originalWidth, Unit.MILLIMETER);
+				columnWidth = PositiveLength.parseLong(columnWidthStr, Unit.MILLIMETER);
+			}
 			for (int i = repeateNum - 1; i >= 0; i--) {
 				TableTableColumnElement newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement(
 						(OdfFileDom) maColumnElement.getOwnerDocument(), OdfName.newName(OdfDocumentNamespace.TABLE,

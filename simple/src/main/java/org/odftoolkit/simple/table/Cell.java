@@ -21,6 +21,7 @@
  ************************************************************************/
 package org.odftoolkit.simple.table;
 
+import java.awt.FontMetrics;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.net.URI;
@@ -37,6 +38,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
+import javax.swing.JTextField;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoTextAlignAttribute;
@@ -51,6 +53,7 @@ import org.odftoolkit.odfdom.dom.element.number.NumberCurrencySymbolElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTextElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
@@ -80,6 +83,8 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.type.Color;
+import org.odftoolkit.odfdom.type.Length;
+import org.odftoolkit.odfdom.type.Length.Unit;
 import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
@@ -92,6 +97,7 @@ import org.odftoolkit.simple.style.Border;
 import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.FontStyle;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
 import org.odftoolkit.simple.text.AbstractParagraphContainer;
@@ -948,6 +954,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 		}
 		element.setTextContent(null);
 		textProcessor.append(element, content);
+		optimizeCellSize(content);
 	}
 
 	/**
@@ -2363,5 +2370,67 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	
 	public OdfElement getFrameContainerElement() {
 		return mCellElement;
+	}
+	
+	//column can fit the width to the text, if column.isOptimalWidth() is true.
+	//since 0.5.5
+	private void optimizeCellSize(String content){
+		JTextField txtField = new JTextField();
+		// map font to awt font
+		Font font = getFont();
+		String fontFamilyName = font.getFamilyName();
+		if (fontFamilyName == null) {
+			fontFamilyName = "Times New Roman";
+		}
+		int fontStyleNum = java.awt.Font.PLAIN;
+		FontStyle fontStyle = font.getFontStyle();
+		if (fontStyle != null) {
+			switch (fontStyle) {
+			case BOLD:
+				fontStyleNum = java.awt.Font.BOLD;
+				break;
+			case REGULAR:
+				fontStyleNum = java.awt.Font.PLAIN;
+				break;
+			case ITALIC:
+				fontStyleNum = java.awt.Font.ITALIC;
+				break;
+			case BOLDITALIC:
+				fontStyleNum = java.awt.Font.BOLD | java.awt.Font.ITALIC;
+				break;
+			default:
+				fontStyleNum = java.awt.Font.PLAIN;
+			}
+		}
+		double fontSize = font.getSize();
+		if (fontSize < 0.0001) {
+			fontSize = 10;
+		}
+		txtField.setFont(new java.awt.Font(fontFamilyName, fontStyleNum, (int)fontSize));
+		FontMetrics fm = txtField.getFontMetrics(txtField.getFont());
+		// content width in pixels.
+		int widthPixels = fm.stringWidth(content);
+		// content height in pixels.
+		// int heightPixels = fm.getHeight();
+		OdfStyleBase properties = getStyleHandler().getStyleElementForRead();
+		double millimeterPadding = 0.0;
+		if(properties!=null){
+			String padding = properties.getProperty(StyleTableCellPropertiesElement.Padding);
+			if(padding!=null){
+				millimeterPadding = Length.parseDouble(padding, Unit.MILLIMETER);
+			}
+		}
+		// convert width pixels to mm
+		double columnWidth = widthPixels / 2.83464;
+		columnWidth += millimeterPadding * 2;
+		Column column = getTableColumn();
+		if (column.isOptimalWidth()) {
+			double width = column.getWidth();
+			if (width < columnWidth) {
+				long columnLongWidth = (long) columnWidth;
+				columnLongWidth = columnLongWidth < columnWidth ? (columnLongWidth + 1) : columnLongWidth;
+				column.setWidth(columnLongWidth);
+			}
+		}
 	}
 }

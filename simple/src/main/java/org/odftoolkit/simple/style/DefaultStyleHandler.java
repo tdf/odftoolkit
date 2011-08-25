@@ -578,7 +578,6 @@ public class DefaultStyleHandler {
 
 		String styleName = getUsedStyleName();
 		mStyleElement = getReadableStyleElementByName(styleName);
-		;
 		return mStyleElement;
 	}
 
