@@ -267,9 +267,11 @@ public class CellStyleHandler extends DefaultStyleHandler {
 			if (defaultStyle == null) {
 				defaultStyle = getParagraphDefaultStyle();
 			}
-			TextProperties defaultStyleSetting = TextProperties.getTextProperties(defaultStyle);
-			Font tempFont = defaultStyleSetting.getFont(type);
-			mergeFont(font, tempFont);
+			if (defaultStyle != null) {
+				TextProperties defaultStyleSetting = TextProperties.getTextProperties(defaultStyle);
+				Font tempFont = defaultStyleSetting.getFont(type);
+				mergeFont(font, tempFont);
+			}
 		}
 
 		if (font.getColor() == null)
