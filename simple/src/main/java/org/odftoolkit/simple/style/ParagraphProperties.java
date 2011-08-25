@@ -98,7 +98,7 @@ public class ParagraphProperties {
 		case END:
 			return HorizontalAlignmentType.RIGHT;
 		case JUSTIFY:
-			return HorizontalAlignmentType.JUSTIFIED;
+			return HorizontalAlignmentType.JUSTIFY;
 		case LEFT:
 			return HorizontalAlignmentType.LEFT;
 		case RIGHT:

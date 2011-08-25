@@ -137,7 +137,7 @@ public class StyleTypeDefinitions {
 	 * 
 	 */
 	public static enum HorizontalAlignmentType {
-		DEFAULT("default"), LEFT("left"), RIGHT("right"), CENTER("center"), JUSTIFIED("justified"), FILLED("filled");
+		DEFAULT("default"), LEFT("left"), RIGHT("right"), CENTER("center"), JUSTIFY("justify"), FILLED("filled");
 
 		private String value;
 
