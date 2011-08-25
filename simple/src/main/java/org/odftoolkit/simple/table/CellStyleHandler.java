@@ -21,6 +21,7 @@
  ************************************************************************/
 package org.odftoolkit.simple.table;
 
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,10 +40,10 @@ import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.ParagraphProperties;
 import org.odftoolkit.simple.style.TableCellProperties;
 import org.odftoolkit.simple.style.TextProperties;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleCellBordersType;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleFontStyle;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleHorizontalAlignmentType;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleVerticalAlignmentType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.FontStyle;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
@@ -492,8 +493,8 @@ public class CellStyleHandler {
 			target.setColor(source.getColor());
 		if (target.getSize() == 0 && source.getSize() > 0)
 			target.setSize(source.getSize());
-		if (target.getSimpleFontStyle() == null && source.getSimpleFontStyle() != null)
-			target.setSimpleFontStyle(source.getSimpleFontStyle());
+		if (target.getFontStyle() == null && source.getFontStyle() != null)
+			target.setFontStyle(source.getFontStyle());
 	}
 
 	/**
@@ -519,7 +520,7 @@ public class CellStyleHandler {
 			font = new Font(null, null, 0);
 
 		if (font != null && font.getFamilyName() != null && font.getColor() != null && font.getSize() != 0
-				&& font.getSimpleFontStyle() != null)
+				&& font.getFontStyle() != null)
 			return font;
 
 		boolean isDefault = isUseDefaultStyle;
@@ -531,7 +532,7 @@ public class CellStyleHandler {
 			Font tempFont = parentStyleSetting.getFont(type);
 			mergeFont(font, tempFont);
 			if (font.getFamilyName() != null && font.getColor() != null && font.getSize() != 0
-					&& font.getSimpleFontStyle() != null) {
+					&& font.getFontStyle() != null) {
 				return font;
 			}
 			// continue to get parent properties
@@ -549,8 +550,8 @@ public class CellStyleHandler {
 
 		if (font.getColor() == null)
 			font.setColor(Color.BLACK);
-		if (font.getSimpleFontStyle() == null)
-			font.setSimpleFontStyle(SimpleFontStyle.REGULAR);
+		if (font.getFontStyle() == null)
+			font.setFontStyle(FontStyle.REGULAR);
 
 		return font;
 	}
@@ -602,6 +603,8 @@ public class CellStyleHandler {
 	/**
 	 * Set the country information for a specific script type
 	 * <p>
+	 * The consistency between country and script type is not verified.
+	 * <p>
 	 * If the parameter <code>country</code> is null, the country information
 	 * for this script type will be removed.
 	 * 
@@ -609,6 +612,8 @@ public class CellStyleHandler {
 	 *            - the country information
 	 * @param type
 	 *            - script type
+	 * @see TextProperties#setCountry(String, ScriptType)
+	 * @see org.odftoolkit.simple.Document.ScriptType
 	 */
 	public void setCountry(String country, ScriptType type) {
 		getTextPropertiesForWrite().setCountry(country, type);
@@ -625,6 +630,19 @@ public class CellStyleHandler {
 	 */
 	public void setFont(Font font) {
 		getTextPropertiesForWrite().setFont(font);
+	}
+
+	/**
+	 * Set the font definition. The locale information in font definition will
+	 * be used to justify the script type.
+	 * <p>
+	 * If the parameter <code>font</code> is null, nothing will be happened.
+	 * 
+	 * @param font
+	 *            - font definition
+	 */
+	public void setFont(Font font, Locale language) {
+		getTextPropertiesForWrite().setFont(font, language);
 	}
 
 	/**
@@ -689,7 +707,7 @@ public class CellStyleHandler {
 		return tempColor;
 	}
 
-	private Border getNullableBorder(TableCellProperties properties, SimpleCellBordersType type) {
+	private Border getNullableBorder(TableCellProperties properties, CellBordersType type) {
 		switch (type) {
 		case LEFT:
 			return properties.getLeftBorder();
@@ -727,7 +745,7 @@ public class CellStyleHandler {
 	 *            - the border type which describes a single border
 	 * @return the border setting
 	 */
-	public Border getBorder(SimpleCellBordersType type) {
+	public Border getBorder(CellBordersType type) {
 
 		Border tempBorder = null;
 		TableCellProperties properties = getTableCellPropertiesForRead();
@@ -777,8 +795,8 @@ public class CellStyleHandler {
 	 * 
 	 * @return the vertical alignment
 	 */
-	public SimpleVerticalAlignmentType getVerticalAlignment() {
-		SimpleVerticalAlignmentType tempAlign = null;
+	public VerticalAlignmentType getVerticalAlignment() {
+		VerticalAlignmentType tempAlign = null;
 		TableCellProperties properties = getTableCellPropertiesForRead();
 		if (properties != null) {
 			tempAlign = properties.getVerticalAlignment();
@@ -810,7 +828,7 @@ public class CellStyleHandler {
 		}
 		// use default
 		if (tempAlign == null) {
-			return SimpleVerticalAlignmentType.DEFAULT;
+			return VerticalAlignmentType.DEFAULT;
 		}
 		return tempAlign;
 	}
@@ -885,7 +903,7 @@ public class CellStyleHandler {
 	 * @param bordersType
 	 *            - the type of the borders
 	 */
-	public void setBorders(Border border, SimpleCellBordersType bordersType) {
+	public void setBorders(Border border, CellBordersType bordersType) {
 		getTableCellPropertiesForWrite().setBorders(bordersType, border);
 	}
 
@@ -898,7 +916,7 @@ public class CellStyleHandler {
 	 * @param alignType
 	 *            - the vertical alignment setting.
 	 */
-	public void setVerticalAlignment(SimpleVerticalAlignmentType alignType) {
+	public void setVerticalAlignment(VerticalAlignmentType alignType) {
 		getTableCellPropertiesForWrite().setVerticalAlignment(alignType);
 	}
 
@@ -921,7 +939,7 @@ public class CellStyleHandler {
 	 * @param alignType
 	 *            - the horizontal alignment
 	 */
-	public void setHorizontalAlignment(SimpleHorizontalAlignmentType alignType) {
+	public void setHorizontalAlignment(HorizontalAlignmentType alignType) {
 		getParagraphPropertiesForWrite().setHorizontalAlignment(alignType);
 	}
 
@@ -936,8 +954,8 @@ public class CellStyleHandler {
 	 * @return - the horizontal alignment; null if there is no horizontal
 	 *         alignment setting.
 	 */
-	public SimpleHorizontalAlignmentType getHorizontalAlignment() {
-		SimpleHorizontalAlignmentType tempAlign = null;
+	public HorizontalAlignmentType getHorizontalAlignment() {
+		HorizontalAlignmentType tempAlign = null;
 		ParagraphProperties properties = getParagraphPropertiesForRead();
 		if (properties != null)
 			tempAlign = properties.getHorizontalAlignment();
@@ -968,7 +986,7 @@ public class CellStyleHandler {
 		}
 		// use default
 		if (tempAlign == null)
-			return SimpleHorizontalAlignmentType.DEFAULT;
+			return HorizontalAlignmentType.DEFAULT;
 		return tempAlign;
 	}
 

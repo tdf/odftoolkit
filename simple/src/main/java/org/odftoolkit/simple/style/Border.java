@@ -25,18 +25,17 @@ import java.text.DecimalFormat;
 import java.util.StringTokenizer;
 
 import org.odftoolkit.odfdom.type.Color;
-import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.SupportedLinearMeasure;
 
 /**
- * This class represents border style settings, 
- * including line style, color, width, inner line width, outer line width and the distance.
+ * This class represents border style settings, including line style, color,
+ * width, inner line width, outer line width and the distance.
  * 
  * @since 0.3
  */
 public class Border {
 
-	StyleTypeDefinitions.LineType lineStyle;
+	StyleTypeDefinitions.OdfLineType lineStyle;
 	Color color;
 	double width;
 	double innerLineWidth, distance, outerLineWidth;
@@ -47,7 +46,7 @@ public class Border {
 	 * A static variable to represent a border without any lines, which means no
 	 * border at all.
 	 */
-	public static Border NONE = new Border(StyleTypeDefinitions.LineType.NONE);
+	public static Border NONE = new Border(StyleTypeDefinitions.OdfLineType.NONE);
 
 	/**
 	 * Constructor to create an empty border
@@ -56,7 +55,7 @@ public class Border {
 
 	}
 
-	private Border(StyleTypeDefinitions.LineType lineType) {
+	private Border(StyleTypeDefinitions.OdfLineType lineType) {
 		this.lineStyle = lineType;
 		width = 0;
 	}
@@ -75,7 +74,7 @@ public class Border {
 		color = aColor;
 		this.width = width;
 		this.linearMeasure = linearMeasure;
-		this.lineStyle = StyleTypeDefinitions.LineType.SINGLE;
+		this.lineStyle = StyleTypeDefinitions.OdfLineType.SINGLE;
 	}
 
 	// /**
@@ -119,7 +118,7 @@ public class Border {
 		this.innerLineWidth = innerLineWidth;
 		this.outerLineWidth = outerLineWidth;
 		this.distance = width - innerLineWidth - outerLineWidth;
-		this.lineStyle = StyleTypeDefinitions.LineType.DOUBLE;
+		this.lineStyle = StyleTypeDefinitions.OdfLineType.DOUBLE;
 
 		if (distance <= 0)
 			throw new IllegalArgumentException(
@@ -154,7 +153,7 @@ public class Border {
 	 * 
 	 * @return the line style of the border.
 	 */
-	public StyleTypeDefinitions.LineType getLineStyle() {
+	public StyleTypeDefinitions.OdfLineType getLineStyle() {
 		return lineStyle;
 	}
 
@@ -166,7 +165,7 @@ public class Border {
 	 * @param lineStyle
 	 *            - the line style of the border.
 	 */
-	public void setLineStyle(StyleTypeDefinitions.LineType lineStyle) {
+	public void setLineStyle(StyleTypeDefinitions.OdfLineType lineStyle) {
 		this.lineStyle = lineStyle;
 	}
 
@@ -189,9 +188,9 @@ public class Border {
 		Color borderColor = new Color(st.nextToken());
 
 		if (borderStyle.equals("solid"))
-			borderStyle = StyleTypeDefinitions.LineType.SINGLE.toString();
+			borderStyle = StyleTypeDefinitions.OdfLineType.SINGLE.toString();
 
-		StyleTypeDefinitions.LineType borderStyleType = StyleTypeDefinitions.LineType.enumValueOf(borderStyle);
+		StyleTypeDefinitions.OdfLineType borderStyleType = StyleTypeDefinitions.OdfLineType.enumValueOf(borderStyle);
 
 		this.width = getLineWidth(borderWidth);
 		this.linearMeasure = getLineMeasure(borderWidth);
@@ -264,7 +263,7 @@ public class Border {
 	 * @return - the description for border widths with double lines
 	 */
 	protected String getDoubleLineWidthDescription() {
-		if (lineStyle == StyleTypeDefinitions.LineType.SINGLE)
+		if (lineStyle == StyleTypeDefinitions.OdfLineType.SINGLE)
 			return null;
 		DecimalFormat formater = new DecimalFormat(WidthFormatInInch);
 		return formater.format(innerLineWidth) + linearMeasure.toString() + " " + formater.format(distance)
@@ -299,7 +298,7 @@ public class Border {
 	 */
 	public double getInnerLineWidth() {
 		// DecimalFormat formater = new DecimalFormat(WidthFormatInInch);
-		if (lineStyle == StyleTypeDefinitions.LineType.SINGLE)
+		if (lineStyle == StyleTypeDefinitions.OdfLineType.SINGLE)
 			return getWidth();
 		else
 			return innerLineWidth;
@@ -314,7 +313,7 @@ public class Border {
 	 *            - the inner line width
 	 */
 	public void setInnerLineWidth(double innerWidth) {
-		if (lineStyle == StyleTypeDefinitions.LineType.SINGLE)
+		if (lineStyle == StyleTypeDefinitions.OdfLineType.SINGLE)
 			return;
 		innerLineWidth = innerWidth;
 	}
@@ -327,7 +326,7 @@ public class Border {
 	 */
 	public double getDistance() {
 		// DecimalFormat formater = new DecimalFormat(WidthFormatInInch);
-		if (lineStyle == StyleTypeDefinitions.LineType.SINGLE)
+		if (lineStyle == StyleTypeDefinitions.OdfLineType.SINGLE)
 			return getWidth();
 		else
 			return distance;
@@ -342,7 +341,7 @@ public class Border {
 	 *            - the distance between inner line and outer line.
 	 */
 	public void setDistance(double distance) {
-		if (lineStyle == StyleTypeDefinitions.LineType.SINGLE)
+		if (lineStyle == StyleTypeDefinitions.OdfLineType.SINGLE)
 			return;
 		else
 			this.distance = distance;
@@ -356,7 +355,7 @@ public class Border {
 	 */
 	public double getOuterLineWidth() {
 		// DecimalFormat formater = new DecimalFormat(WidthFormatInInch);
-		if (lineStyle == StyleTypeDefinitions.LineType.SINGLE)
+		if (lineStyle == StyleTypeDefinitions.OdfLineType.SINGLE)
 			return getWidth();
 		else
 			return outerLineWidth;
@@ -370,7 +369,7 @@ public class Border {
 	 *            - the outer line width
 	 */
 	public void setOuterLineWidth(double lineWidth) {
-		if (lineStyle == StyleTypeDefinitions.LineType.SINGLE)
+		if (lineStyle == StyleTypeDefinitions.OdfLineType.SINGLE)
 			return;
 		else
 			this.outerLineWidth = lineWidth;
@@ -390,7 +389,7 @@ public class Border {
 		// get line width for inner line
 		this.innerLineWidth = getLineWidth(innerLineWidth);
 		// set line style
-		lineStyle = StyleTypeDefinitions.LineType.DOUBLE;
+		lineStyle = StyleTypeDefinitions.OdfLineType.DOUBLE;
 	}
 
 	private StyleTypeDefinitions.SupportedLinearMeasure getLineMeasure(String width) {
@@ -457,7 +456,7 @@ public class Border {
 			}
 			if (!doubleEqual(aBorder.width, this.width))
 				return false;
-			if (lineStyle == StyleTypeDefinitions.LineType.DOUBLE) {
+			if (lineStyle == StyleTypeDefinitions.OdfLineType.DOUBLE) {
 				if (!doubleEqual(aBorder.distance, this.distance))
 					return false;
 				if (!doubleEqual(aBorder.innerLineWidth, this.innerLineWidth))

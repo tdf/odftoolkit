@@ -36,7 +36,7 @@ public class StyleTypeDefinitions {
 	 * Common used line style from users perspective
 	 * 
 	 */
-	public static enum SimpleLineStyle {
+	public static enum LineStyle {
 		/**
 		 * no border
 		 */
@@ -63,7 +63,7 @@ public class StyleTypeDefinitions {
 
 		private String lineStyle;
 
-		SimpleLineStyle(String value) {
+		LineStyle(String value) {
 			lineStyle = value;
 		}
 
@@ -78,12 +78,12 @@ public class StyleTypeDefinitions {
 	 * Common used font style from users perspective
 	 * 
 	 */
-	public static enum SimpleFontStyle {
+	public static enum FontStyle {
 		REGULAR("Regular"), ITALIC("Italic"), BOLD("Bold"), BOLDITALIC("Bold_Italic");
 
 		private String fontStyle;
 
-		SimpleFontStyle(String style) {
+		FontStyle(String style) {
 			this.fontStyle = style;
 		}
 
@@ -97,12 +97,12 @@ public class StyleTypeDefinitions {
 	 * Common used style of line lining through text from users perspective
 	 * 
 	 */
-	public static enum SimpleLineThroughStyle {
+	public static enum LineThroughStyle {
 		NONE("none"), SINGLE("single"), DOUBLE("double"), BOLD("bold"), WITH_X("with X"), WITH_SLASH("with /");
 
 		private String value;
 
-		SimpleLineThroughStyle(String style) {
+		LineThroughStyle(String style) {
 			this.value = style;
 		}
 
@@ -116,20 +116,20 @@ public class StyleTypeDefinitions {
 	 * Common used horizontal alignment type from users perspective
 	 * 
 	 */
-	public static enum SimpleHorizontalAlignmentType {
+	public static enum HorizontalAlignmentType {
 		DEFAULT("default"), LEFT("left"), RIGHT("right"), CENTER("center"), JUSTIFIED("justified"), FILLED("filled");
 
 		private String value;
 
-		SimpleHorizontalAlignmentType(String style) {
+		HorizontalAlignmentType(String style) {
 			this.value = style;
 		}
 
-		public static SimpleHorizontalAlignmentType enumValueOf(String aValue) {
+		public static HorizontalAlignmentType enumValueOf(String aValue) {
 			if ((aValue == null) || (aValue.length() == 0))
 				return null;
 
-			for (SimpleHorizontalAlignmentType aIter : values()) {
+			for (HorizontalAlignmentType aIter : values()) {
 				if (aValue.equals(aIter.toString())) {
 					return aIter;
 				}
@@ -157,20 +157,20 @@ public class StyleTypeDefinitions {
 	 * Common used vertical alignment type from users perspective
 	 * 
 	 */
-	public static enum SimpleVerticalAlignmentType {
+	public static enum VerticalAlignmentType {
 		DEFAULT("default"), TOP("top"), MIDDLE("middle"), BOTTOM("bottom");
 
 		private String value;
 
-		SimpleVerticalAlignmentType(String style) {
+		VerticalAlignmentType(String style) {
 			this.value = style;
 		}
 
-		public static SimpleVerticalAlignmentType enumValueOf(String aValue) {
+		public static VerticalAlignmentType enumValueOf(String aValue) {
 			if ((aValue == null) || (aValue.length() == 0))
 				return null;
 
-			for (SimpleVerticalAlignmentType aIter : values()) {
+			for (VerticalAlignmentType aIter : values()) {
 				if (aValue.equals(aIter.toString())) {
 					return aIter;
 				}
@@ -188,14 +188,14 @@ public class StyleTypeDefinitions {
 	 * Emphasis mark type from ODF specification perspective
 	 * 
 	 */
-	public static enum EmphasisMarkType {
+	public static enum OdfEmphasisMarkType {
 		NONE("none"), ACCENT_ABOVE("accent above"), DOT_ABOVE("dot above"), CIRCLE_ABOVE("circle above"), DISC_ABOVE(
 				"disc above"), ACCENT_BELOW("accent below"), DOT_BELOW("dot below"), CIRCLE_BELOW("circle below"), DISC_BELOW(
 				"disc below");
 
 		private String value;
 
-		EmphasisMarkType(String style) {
+		OdfEmphasisMarkType(String style) {
 			this.value = style;
 		}
 
@@ -209,13 +209,13 @@ public class StyleTypeDefinitions {
 	 * Line style from ODF specification perspective
 	 * 
 	 */
-	public static enum LineStyle {
+	public static enum OdfLineStyle {
 		DASH("dash"), DOT_DASH("dot-dash"), DOT_DOT_DASH("dot-dot-dash"), DOTTED("dotted"), LONG_DASH("long-dash"), NONE(
 				"none"), SOLID("solid"), WAVE("wave");
 
 		private String lineStyle;
 
-		LineStyle(String value) {
+		OdfLineStyle(String value) {
 			lineStyle = value;
 		}
 
@@ -325,22 +325,22 @@ public class StyleTypeDefinitions {
 	 * Common used border types from users perspective
 	 * 
 	 */
-	public static enum SimpleCellBordersType {
+	public static enum CellBordersType {
 		TOP("top"), BOTTOM("bottom"), LEFT("left"), RIGHT("right"), DIAGONALBLTR("diagonal_bltr"), DIAGONALTLBR(
 				"diagonal_tlbr"), NONE("none"), ALL_FOUR("all_four"), LEFT_RIGHT("left_right"), TOP_BOTTOM("top_bottom"), DIAGONAL_LINES(
 				"diagonal_lines");
 
 		private String value;
 
-		SimpleCellBordersType(String style) {
+		CellBordersType(String style) {
 			this.value = style;
 		}
 
-		public static SimpleCellBordersType enumValueOf(String aValue) {
+		public static CellBordersType enumValueOf(String aValue) {
 			if ((aValue == null) || (aValue.length() == 0))
 				return null;
 
-			for (SimpleCellBordersType aIter : values()) {
+			for (CellBordersType aIter : values()) {
 				if (aValue.equals(aIter.toString())) {
 					return aIter;
 				}
@@ -359,20 +359,20 @@ public class StyleTypeDefinitions {
 	 * Line type from ODF specification perspective
 	 * 
 	 */
-	public static enum LineType {
+	public static enum OdfLineType {
 		DOUBLE("double"), NONE("none"), SINGLE("single");
 
 		private String lineType;
 
-		LineType(String type) {
+		OdfLineType(String type) {
 			this.lineType = type;
 		}
 
-		public static LineType enumValueOf(String aValue) {
+		public static OdfLineType enumValueOf(String aValue) {
 			if ((aValue == null) || (aValue.length() == 0))
 				return NONE;
 
-			for (LineType aIter : values()) {
+			for (OdfLineType aIter : values()) {
 				if (aValue.equals(aIter.toString())) {
 					return aIter;
 				}
@@ -390,12 +390,12 @@ public class StyleTypeDefinitions {
 	 * Line width from ODF specification perspective
 	 * 
 	 */
-	public static enum LineWidth {
+	public static enum OdfLineWidth {
 		AUTO("auto"), BOLD("bold"), MEDIUM("medium"), NORMAL("normal"), THICK("thick"), THIN("thin");
 
 		private String lineWidth;
 
-		LineWidth(String type) {
+		OdfLineWidth(String type) {
 			this.lineWidth = type;
 		}
 
@@ -409,20 +409,20 @@ public class StyleTypeDefinitions {
 	 * Font style from ODF specification perspective
 	 * 
 	 */
-	public static enum FontStyle {
+	public static enum OdfFontStyle {
 		ITALIC("italic"), NORMAL("normal"), OBLIQUE("oblique");
 
 		private String value;
 
-		FontStyle(String style) {
+		OdfFontStyle(String style) {
 			this.value = style;
 		}
 
-		public static FontStyle enumValueOf(String aValue) {
+		public static OdfFontStyle enumValueOf(String aValue) {
 			if ((aValue == null) || (aValue.length() == 0))
 				return NORMAL;
 
-			for (FontStyle aIter : values()) {
+			for (OdfFontStyle aIter : values()) {
 				if (aValue.equals(aIter.toString())) {
 					return aIter;
 				}
@@ -440,20 +440,20 @@ public class StyleTypeDefinitions {
 	 * Font weight from ODF specification perspective
 	 * 
 	 */
-	public static enum FontWeight {
+	public static enum OdfFontWeight {
 		_100("100"), _200("200"), _300("300"), _400("400"), _500("500"), _600("600"), _700("700"), _800("800"), _900(
 				"900"), BOLD("bold"), NORMAL("normal");
 		private String value;
 
-		FontWeight(String style) {
+		OdfFontWeight(String style) {
 			this.value = style;
 		}
 
-		public static FontWeight enumValueOf(String aValue) {
+		public static OdfFontWeight enumValueOf(String aValue) {
 			if ((aValue == null) || (aValue.length() == 0))
 				return NORMAL;
 
-			for (FontWeight aIter : values()) {
+			for (OdfFontWeight aIter : values()) {
 				if (aValue.equals(aIter.toString())) {
 					return aIter;
 				}

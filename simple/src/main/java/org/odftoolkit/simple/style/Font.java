@@ -27,7 +27,7 @@ import org.odftoolkit.odfdom.type.Color;
 
 /**
  * This class represents the font style settings, including font family name,
- * font style, size, front color and locale information.
+ * font style, size, front color.
  * 
  * @since 0.3
  */
@@ -35,10 +35,10 @@ public class Font {
 
 	String familyName; // svg:font-family
 	String fontName; // style:name @ <style:font-face>
-	StyleTypeDefinitions.SimpleFontStyle simpleFontStyle; // fo:font-style,
+	StyleTypeDefinitions.FontStyle simpleFontStyle; // fo:font-style,
 	// fo:font-weight
 	double size; // fo:font-size
-	Locale language;
+	// Locale language;
 	Color color;
 
 	/**
@@ -51,11 +51,10 @@ public class Font {
 	 * @param fontSize
 	 *            - the size
 	 */
-	public Font(String fontFamilyName, StyleTypeDefinitions.SimpleFontStyle simpleFontStyle, double fontSize) {
+	public Font(String fontFamilyName, StyleTypeDefinitions.FontStyle simpleFontStyle, double fontSize) {
 		this.familyName = fontFamilyName;
 		this.simpleFontStyle = simpleFontStyle;
 		this.size = fontSize;
-		language = null;
 	}
 
 	/**
@@ -70,12 +69,10 @@ public class Font {
 	 * @param color
 	 *            - the front color
 	 */
-	public Font(String fontFamilyName, StyleTypeDefinitions.SimpleFontStyle simpleFontStyle, double fontSize,
-			Color color) {
+	public Font(String fontFamilyName, StyleTypeDefinitions.FontStyle simpleFontStyle, double fontSize, Color color) {
 		this.familyName = fontFamilyName;
 		this.simpleFontStyle = simpleFontStyle;
 		this.size = fontSize;
-		language = null;
 		this.color = color;
 	}
 
@@ -92,12 +89,10 @@ public class Font {
 	 * @param language
 	 *            - the character information
 	 */
-	public Font(String fontFamilyName, StyleTypeDefinitions.SimpleFontStyle simpleFontStyle, double fontSize,
-			Locale language) {
+	public Font(String fontFamilyName, StyleTypeDefinitions.FontStyle simpleFontStyle, double fontSize, Locale language) {
 		this.familyName = fontFamilyName;
 		this.simpleFontStyle = simpleFontStyle;
 		this.size = fontSize;
-		this.language = language;
 	}
 
 	/**
@@ -116,12 +111,11 @@ public class Font {
 	 * @param language
 	 *            - the character information
 	 */
-	public Font(String fontFamilyName, StyleTypeDefinitions.SimpleFontStyle simpleFontStyle, double fontSize,
-			Color color, Locale language) {
+	public Font(String fontFamilyName, StyleTypeDefinitions.FontStyle simpleFontStyle, double fontSize, Color color,
+			Locale language) {
 		this.familyName = fontFamilyName;
 		this.simpleFontStyle = simpleFontStyle;
 		this.size = fontSize;
-		this.language = language;
 		this.color = color;
 	}
 
@@ -176,7 +170,7 @@ public class Font {
 	 * 
 	 * @return the font style
 	 */
-	public StyleTypeDefinitions.SimpleFontStyle getSimpleFontStyle() {
+	public StyleTypeDefinitions.FontStyle getFontStyle() {
 		return simpleFontStyle;
 	}
 
@@ -186,7 +180,7 @@ public class Font {
 	 * @param simpleFontStyle
 	 *            - the font style
 	 */
-	public void setSimpleFontStyle(StyleTypeDefinitions.SimpleFontStyle simpleFontStyle) {
+	public void setFontStyle(StyleTypeDefinitions.FontStyle simpleFontStyle) {
 		this.simpleFontStyle = simpleFontStyle;
 	}
 
@@ -209,24 +203,26 @@ public class Font {
 		this.size = size;
 	}
 
-	/**
-	 * Return the character information, which the font setting will affect.
-	 * 
-	 * @return the character information
-	 */
-	public Locale getLocale() {
-		return language;
-	}
-
-	/**
-	 * Set the character information, which the font setting will affect.
-	 * 
-	 * @param language
-	 *            - the character information
-	 */
-	public void setLocale(Locale language) {
-		this.language = language;
-	}
+	// /**
+	// * Return the character information, which the font setting will affect.
+	// *
+	// * @return the character information
+	// * @deprecated
+	// */
+	// public Locale getLocale() {
+	// return language;
+	// }
+	//
+	// /**
+	// * Set the character information, which the font setting will affect.
+	// *
+	// * @param language
+	// * - the character information
+	// * @deprecated
+	// */
+	// public void setLocale(Locale language) {
+	// this.language = language;
+	// }
 
 	/**
 	 * Return the font color
@@ -249,7 +245,7 @@ public class Font {
 
 	@Override
 	public String toString() {
-		return "FamilyName:" + getFamilyName() + ";" + "Style:" + getSimpleFontStyle() + ";" + "Size:" + getSize();
+		return "FamilyName:" + getFamilyName() + ";" + "Style:" + getFontStyle() + ";" + "Size:" + getSize();
 	}
 
 	@Override
@@ -260,7 +256,7 @@ public class Font {
 				return false;
 			if (!(Math.abs(this.getSize() - f.getSize()) < 0.005))
 				return false;
-			if (!(this.getSimpleFontStyle() == f.getSimpleFontStyle()))
+			if (!(this.getFontStyle() == f.getFontStyle()))
 				return false;
 			// if ((this.getLocale() != null && f.getLocale() == null)
 			// || (this.getLocale() == null && f.getLocale() != null))
@@ -268,8 +264,7 @@ public class Font {
 			// if ((this.getLocale() != null && f.getLocale() != null)
 			// && (!this.getLocale().equals(f.getLocale())))
 			// return false;
-			if ((this.getColor() != null && f.getColor() == null)
-					|| (this.getColor() == null && f.getColor() != null))
+			if ((this.getColor() != null && f.getColor() == null) || (this.getColor() == null && f.getColor() != null))
 				return false;
 			if ((this.getColor() != null && f.getColor() != null)
 					&& (!this.getColor().toString().equals(f.getColor().toString())))

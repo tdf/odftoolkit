@@ -71,8 +71,9 @@ import org.odftoolkit.simple.common.WhitespaceProcessor;
 import org.odftoolkit.simple.style.Border;
 import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.StyleTypeDefinitions;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleHorizontalAlignmentType;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleVerticalAlignmentType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
 import org.w3c.dom.Node;
 
 /**
@@ -213,7 +214,7 @@ public class Cell {
 	 * 
 	 * @return the horizontal alignment setting.
 	 */
-	public SimpleHorizontalAlignmentType getHorizontalAlignmentType() {
+	public HorizontalAlignmentType getHorizontalAlignmentType() {
 		return getStyleHandler().getHorizontalAlignment();
 	}
 
@@ -227,7 +228,7 @@ public class Cell {
 	 * 
 	 * @param horizontalAlignment
 	 *            the horizontal alignment setting.
-	 * @see #setHorizontalAlignment(SimpleHorizontalAlignmentType)
+	 * @see #setHorizontalAlignment(HorizontalAlignmentType)
 	 * @deprecated As of Simple version 0.3, replaced by
 	 *             <code>setHorizontalAlignment(SimpleHorizontalAlignmentType)</code>
 	 */
@@ -259,7 +260,7 @@ public class Cell {
 	 * @param alignType
 	 *            the horizontal alignment setting.
 	 */
-	public void setHorizontalAlignment(SimpleHorizontalAlignmentType alignType) {
+	public void setHorizontalAlignment(HorizontalAlignmentType alignType) {
 		getStyleHandler().setHorizontalAlignment(alignType);
 	}
 
@@ -297,7 +298,7 @@ public class Cell {
 	 * 
 	 * @return the vertical alignment setting.
 	 */
-	public SimpleVerticalAlignmentType getVerticalAlignmentType() {
+	public VerticalAlignmentType getVerticalAlignmentType() {
 		return getStyleHandler().getVerticalAlignment();
 	}
 
@@ -310,7 +311,7 @@ public class Cell {
 	 * 
 	 * @param verticalAlignment
 	 *            the vertical alignment setting.
-	 * @see #setVerticalAlignment(SimpleVerticalAlignmentType)
+	 * @see #setVerticalAlignment(VerticalAlignmentType)
 	 * @deprecated As of Simple version 0.3, replaced by
 	 *             <code>setVerticalAlignment(SimpleVerticalAlignmentType)</code>
 	 */
@@ -338,7 +339,7 @@ public class Cell {
 	 * @param verticalAlignment
 	 *            the vertical alignment setting.
 	 */
-	public void setVerticalAlignment(SimpleVerticalAlignmentType verticalAlignment) {
+	public void setVerticalAlignment(VerticalAlignmentType verticalAlignment) {
 		getStyleHandler().setVerticalAlignment(verticalAlignment);
 	}
 
@@ -1893,16 +1894,38 @@ public class Cell {
 
 	/**
 	 * Set the border style definitions for this cell.
+	 * <p>
+	 * This method will invoke
+	 * <code>CellStyleHandler.setBorders(Border border, SimpleCellBordersType bordersType).</code>
 	 * 
 	 * @param bordersType
 	 *            - A predefined border type
 	 * @param border
 	 *            - border style description
 	 * 
+	 * @see CellStyleHandler#setBorders(Border border, CellBordersType
+	 *      bordersType)
 	 * @since 0.3
 	 */
-	public void setBorders(StyleTypeDefinitions.SimpleCellBordersType bordersType, Border border) {
+	public void setBorders(StyleTypeDefinitions.CellBordersType bordersType, Border border) {
 		getStyleHandler().setBorders(border, bordersType);
+	}
+
+	/**
+	 * Return the border setting for a specific border.
+	 * <p>
+	 * This method will invoke
+	 * <code>CellStyleHandler.getBorder(SimpleCellBordersType type).</code>
+	 * 
+	 * @param type
+	 *            - the border type which describes a single border
+	 * @return the border setting
+	 * 
+	 * @see CellStyleHandler#getBorder(CellBordersType type)
+	 * @since 0.3.5
+	 */
+	public Border getBorder(CellBordersType type) {
+		return getStyleHandler().getBorder(type);
 	}
 
 	/**

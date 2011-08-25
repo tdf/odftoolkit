@@ -26,7 +26,7 @@ import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleHorizontalAlignmentType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
 
 /**
  * This class represents the paragraph style settings. It provides methods to
@@ -71,8 +71,8 @@ public class ParagraphProperties {
 	 * @param alignType
 	 *            - the horizontal alignment
 	 */
-	public void setHorizontalAlignment(SimpleHorizontalAlignmentType alignType) {
-		if (alignType == SimpleHorizontalAlignmentType.DEFAULT)
+	public void setHorizontalAlignment(HorizontalAlignmentType alignType) {
+		if (alignType == HorizontalAlignmentType.DEFAULT)
 			mElement.removeAttribute(FoTextAlignAttribute.ATTRIBUTE_NAME.getQName());
 		else
 			mElement.setFoTextAlignAttribute(alignType.getAlignmentString());
@@ -86,25 +86,25 @@ public class ParagraphProperties {
 	 * @return - the horizontal alignment; null if there is no horizontal
 	 *         alignment setting.
 	 */
-	public SimpleHorizontalAlignmentType getHorizontalAlignment() {
+	public HorizontalAlignmentType getHorizontalAlignment() {
 		String alignType = mElement.getFoTextAlignAttribute();
 		if ((alignType == null) || (alignType.length() == 0))
-			return SimpleHorizontalAlignmentType.DEFAULT;
+			return HorizontalAlignmentType.DEFAULT;
 
 		FoTextAlignAttribute.Value value = FoTextAlignAttribute.Value.enumValueOf(alignType);
 		switch (value) {
 		case CENTER:
-			return SimpleHorizontalAlignmentType.CENTER;
+			return HorizontalAlignmentType.CENTER;
 		case END:
-			return SimpleHorizontalAlignmentType.RIGHT;
+			return HorizontalAlignmentType.RIGHT;
 		case JUSTIFY:
-			return SimpleHorizontalAlignmentType.JUSTIFIED;
+			return HorizontalAlignmentType.JUSTIFIED;
 		case LEFT:
-			return SimpleHorizontalAlignmentType.LEFT;
+			return HorizontalAlignmentType.LEFT;
 		case RIGHT:
-			return SimpleHorizontalAlignmentType.RIGHT;
+			return HorizontalAlignmentType.RIGHT;
 		case START:
-			return SimpleHorizontalAlignmentType.LEFT;
+			return HorizontalAlignmentType.LEFT;
 		}
 		return null;
 	}

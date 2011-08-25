@@ -165,7 +165,7 @@ public class TableCellProperties {
 	 * @param border
 	 *            - the border style description
 	 */
-	public void setBorders(StyleTypeDefinitions.SimpleCellBordersType bordersType, Border border) {
+	public void setBorders(StyleTypeDefinitions.CellBordersType bordersType, Border border) {
 		switch (bordersType) {
 		case BOTTOM:
 			setBottomBorder(border);
@@ -698,8 +698,8 @@ public class TableCellProperties {
 	 * @param alignType
 	 *            - the vertical alignment
 	 */
-	public void setVerticalAlignment(StyleTypeDefinitions.SimpleVerticalAlignmentType alignType) {
-		if (alignType == StyleTypeDefinitions.SimpleVerticalAlignmentType.DEFAULT || alignType == null)
+	public void setVerticalAlignment(StyleTypeDefinitions.VerticalAlignmentType alignType) {
+		if (alignType == StyleTypeDefinitions.VerticalAlignmentType.DEFAULT || alignType == null)
 			mElement.removeAttribute(StyleVerticalAlignAttribute.ATTRIBUTE_NAME.getQName());
 		else
 			mElement.setStyleVerticalAlignAttribute(alignType.toString());
@@ -713,7 +713,7 @@ public class TableCellProperties {
 	 * 
 	 * @return the vertical alignment
 	 */
-	public StyleTypeDefinitions.SimpleVerticalAlignmentType getVerticalAlignment() {
+	public StyleTypeDefinitions.VerticalAlignmentType getVerticalAlignment() {
 		String alignType = mElement.getStyleVerticalAlignAttribute();
 		if ((alignType == null) || (alignType.length() == 0))
 			return null;
@@ -722,17 +722,17 @@ public class TableCellProperties {
 
 		switch (value) {
 		case AUTO:
-			return StyleTypeDefinitions.SimpleVerticalAlignmentType.DEFAULT;
+			return StyleTypeDefinitions.VerticalAlignmentType.DEFAULT;
 		case AUTOMATIC:
-			return StyleTypeDefinitions.SimpleVerticalAlignmentType.DEFAULT;
+			return StyleTypeDefinitions.VerticalAlignmentType.DEFAULT;
 		case BASELINE:
-			return StyleTypeDefinitions.SimpleVerticalAlignmentType.BOTTOM;
+			return StyleTypeDefinitions.VerticalAlignmentType.BOTTOM;
 		case BOTTOM:
-			return StyleTypeDefinitions.SimpleVerticalAlignmentType.BOTTOM;
+			return StyleTypeDefinitions.VerticalAlignmentType.BOTTOM;
 		case MIDDLE:
-			return StyleTypeDefinitions.SimpleVerticalAlignmentType.MIDDLE;
+			return StyleTypeDefinitions.VerticalAlignmentType.MIDDLE;
 		case TOP:
-			return StyleTypeDefinitions.SimpleVerticalAlignmentType.TOP;
+			return StyleTypeDefinitions.VerticalAlignmentType.TOP;
 		}
 		return null;
 	}

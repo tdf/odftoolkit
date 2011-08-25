@@ -26,7 +26,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.SpreadsheetDocument;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleCellBordersType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.SupportedLinearMeasure;
 import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.Table;
@@ -35,7 +35,7 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 public class BorderTest {
 
 	static final String filename = "testGetCellAt.ods";
-	
+
 	@Test
 	public void testGetSetBorder() {
 		Border borderbase1 = new Border(new Color("#ff3333"), 5, SupportedLinearMeasure.PT);
@@ -47,40 +47,40 @@ public class BorderTest {
 					.getTestResourceAsStream(filename));
 			Table table = doc.getTableByName("A");
 			Cell cell1 = table.getCellByPosition("A8");
-			Border border1 = cell1.getStyleHandler().getBorder(SimpleCellBordersType.BOTTOM);
-			Border border11 = cell1.getStyleHandler().getBorder(SimpleCellBordersType.LEFT);
+			Border border1 = cell1.getBorder(CellBordersType.BOTTOM);
+			Border border11 = cell1.getBorder(CellBordersType.LEFT);
 			Assert.assertEquals(borderbase1, border1);
 			Assert.assertEquals(borderbase1, border11);
 
 			Cell cell2 = table.getCellByPosition("A10");
-			Border border2 = cell2.getStyleHandler().getBorder(SimpleCellBordersType.TOP);
+			Border border2 = cell2.getBorder(CellBordersType.TOP);
 			Assert.assertEquals(borderbase2, border2);
-			Border border3 = cell2.getStyleHandler().getBorder(SimpleCellBordersType.DIAGONALBLTR);
+			Border border3 = cell2.getBorder(CellBordersType.DIAGONALBLTR);
 			Assert.assertEquals(borderbase3, border3);
 
 			Cell cell3 = table.getCellByPosition("A12");
-			Border border4 = cell3.getStyleHandler().getBorder(SimpleCellBordersType.LEFT);
-			Border border41 = cell3.getStyleHandler().getBorder(SimpleCellBordersType.RIGHT);
+			Border border4 = cell3.getBorder(CellBordersType.LEFT);
+			Border border41 = cell3.getBorder(CellBordersType.RIGHT);
 			Assert.assertEquals(borderbase4, border4);
 			Assert.assertEquals(borderbase4, border41);
 
 			Cell cell4 = table.getCellByPosition("B8");
-			cell4.setBorders(SimpleCellBordersType.ALL_FOUR, borderbase1);
-			Border border5 = cell4.getStyleHandler().getBorder(SimpleCellBordersType.BOTTOM);
-			Border border51 = cell4.getStyleHandler().getBorder(SimpleCellBordersType.LEFT);
+			cell4.setBorders(CellBordersType.ALL_FOUR, borderbase1);
+			Border border5 = cell4.getBorder(CellBordersType.BOTTOM);
+			Border border51 = cell4.getBorder(CellBordersType.LEFT);
 			Assert.assertEquals(borderbase1, border5);
 			Assert.assertEquals(borderbase1, border51);
 
 			Cell cell5 = table.getCellByPosition("B10");
-			cell5.setBorders(SimpleCellBordersType.TOP, borderbase2);
-			cell5.setBorders(SimpleCellBordersType.DIAGONALBLTR, borderbase3);
-			Assert.assertEquals(borderbase2, cell5.getStyleHandler().getBorder(SimpleCellBordersType.TOP));
-			Assert.assertEquals(borderbase3, cell5.getStyleHandler().getBorder(SimpleCellBordersType.DIAGONALBLTR));
+			cell5.setBorders(CellBordersType.TOP, borderbase2);
+			cell5.setBorders(CellBordersType.DIAGONALBLTR, borderbase3);
+			Assert.assertEquals(borderbase2, cell5.getBorder(CellBordersType.TOP));
+			Assert.assertEquals(borderbase3, cell5.getBorder(CellBordersType.DIAGONALBLTR));
 
 			Cell cell6 = table.getCellByPosition("B12");
-			cell6.setBorders(SimpleCellBordersType.LEFT_RIGHT, borderbase4);
-			Assert.assertEquals(borderbase4, cell6.getStyleHandler().getBorder(SimpleCellBordersType.LEFT));
-			Assert.assertEquals(borderbase4, cell6.getStyleHandler().getBorder(SimpleCellBordersType.RIGHT));
+			cell6.setBorders(CellBordersType.LEFT_RIGHT, borderbase4);
+			Assert.assertEquals(borderbase4, cell6.getBorder(CellBordersType.LEFT));
+			Assert.assertEquals(borderbase4, cell6.getBorder(CellBordersType.RIGHT));
 
 		} catch (Exception e) {
 			e.printStackTrace();

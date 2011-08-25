@@ -199,28 +199,28 @@ public class TextProperties {
 	 * 
 	 * @return the font style
 	 */
-	public StyleTypeDefinitions.SimpleFontStyle getFontStyle() {
+	public StyleTypeDefinitions.FontStyle getFontStyle() {
 
 		String fontstyle = mElement.getFoFontStyleAttribute();
 		String fontweight = mElement.getFoFontWeightAttribute();
-		StyleTypeDefinitions.FontStyle theFontType = StyleTypeDefinitions.FontStyle.enumValueOf(fontstyle);
-		StyleTypeDefinitions.FontWeight theFontWeight = StyleTypeDefinitions.FontWeight.enumValueOf(fontweight);
+		StyleTypeDefinitions.OdfFontStyle theFontType = StyleTypeDefinitions.OdfFontStyle.enumValueOf(fontstyle);
+		StyleTypeDefinitions.OdfFontWeight theFontWeight = StyleTypeDefinitions.OdfFontWeight.enumValueOf(fontweight);
 
-		if (theFontType == StyleTypeDefinitions.FontStyle.NORMAL
-				&& theFontWeight == StyleTypeDefinitions.FontWeight.NORMAL)
-			return StyleTypeDefinitions.SimpleFontStyle.REGULAR;
+		if (theFontType == StyleTypeDefinitions.OdfFontStyle.NORMAL
+				&& theFontWeight == StyleTypeDefinitions.OdfFontWeight.NORMAL)
+			return StyleTypeDefinitions.FontStyle.REGULAR;
 
-		if (theFontType == StyleTypeDefinitions.FontStyle.ITALIC
-				&& theFontWeight == StyleTypeDefinitions.FontWeight.NORMAL)
-			return StyleTypeDefinitions.SimpleFontStyle.ITALIC;
+		if (theFontType == StyleTypeDefinitions.OdfFontStyle.ITALIC
+				&& theFontWeight == StyleTypeDefinitions.OdfFontWeight.NORMAL)
+			return StyleTypeDefinitions.FontStyle.ITALIC;
 
-		if (theFontType == StyleTypeDefinitions.FontStyle.ITALIC
-				&& theFontWeight == StyleTypeDefinitions.FontWeight.BOLD)
-			return StyleTypeDefinitions.SimpleFontStyle.BOLDITALIC;
+		if (theFontType == StyleTypeDefinitions.OdfFontStyle.ITALIC
+				&& theFontWeight == StyleTypeDefinitions.OdfFontWeight.BOLD)
+			return StyleTypeDefinitions.FontStyle.BOLDITALIC;
 
-		if (theFontType == StyleTypeDefinitions.FontStyle.NORMAL
-				&& theFontWeight == StyleTypeDefinitions.FontWeight.BOLD)
-			return StyleTypeDefinitions.SimpleFontStyle.BOLD;
+		if (theFontType == StyleTypeDefinitions.OdfFontStyle.NORMAL
+				&& theFontWeight == StyleTypeDefinitions.OdfFontWeight.BOLD)
+			return StyleTypeDefinitions.FontStyle.BOLD;
 
 		return null;
 	}
@@ -235,7 +235,7 @@ public class TextProperties {
 	 *            - script type
 	 * @return the font style for a specific script type
 	 */
-	public StyleTypeDefinitions.SimpleFontStyle getFontStyle(Document.ScriptType type) {
+	public StyleTypeDefinitions.FontStyle getFontStyle(Document.ScriptType type) {
 		if (type == null)
 			type = Document.ScriptType.WESTERN;
 		String fontstyle = null, fontweight = null;
@@ -253,24 +253,24 @@ public class TextProperties {
 			fontweight = mElement.getStyleFontWeightComplexAttribute();
 			break;
 		}
-		StyleTypeDefinitions.FontStyle theFontType = StyleTypeDefinitions.FontStyle.enumValueOf(fontstyle);
-		StyleTypeDefinitions.FontWeight theFontWeight = StyleTypeDefinitions.FontWeight.enumValueOf(fontweight);
+		StyleTypeDefinitions.OdfFontStyle theFontType = StyleTypeDefinitions.OdfFontStyle.enumValueOf(fontstyle);
+		StyleTypeDefinitions.OdfFontWeight theFontWeight = StyleTypeDefinitions.OdfFontWeight.enumValueOf(fontweight);
 
-		if (theFontType == StyleTypeDefinitions.FontStyle.NORMAL
-				&& theFontWeight == StyleTypeDefinitions.FontWeight.NORMAL)
-			return StyleTypeDefinitions.SimpleFontStyle.REGULAR;
+		if (theFontType == StyleTypeDefinitions.OdfFontStyle.NORMAL
+				&& theFontWeight == StyleTypeDefinitions.OdfFontWeight.NORMAL)
+			return StyleTypeDefinitions.FontStyle.REGULAR;
 
-		if (theFontType == StyleTypeDefinitions.FontStyle.ITALIC
-				&& theFontWeight == StyleTypeDefinitions.FontWeight.NORMAL)
-			return StyleTypeDefinitions.SimpleFontStyle.ITALIC;
+		if (theFontType == StyleTypeDefinitions.OdfFontStyle.ITALIC
+				&& theFontWeight == StyleTypeDefinitions.OdfFontWeight.NORMAL)
+			return StyleTypeDefinitions.FontStyle.ITALIC;
 
-		if (theFontType == StyleTypeDefinitions.FontStyle.ITALIC
-				&& theFontWeight == StyleTypeDefinitions.FontWeight.BOLD)
-			return StyleTypeDefinitions.SimpleFontStyle.BOLDITALIC;
+		if (theFontType == StyleTypeDefinitions.OdfFontStyle.ITALIC
+				&& theFontWeight == StyleTypeDefinitions.OdfFontWeight.BOLD)
+			return StyleTypeDefinitions.FontStyle.BOLDITALIC;
 
-		if (theFontType == StyleTypeDefinitions.FontStyle.NORMAL
-				&& theFontWeight == StyleTypeDefinitions.FontWeight.BOLD)
-			return StyleTypeDefinitions.SimpleFontStyle.BOLD;
+		if (theFontType == StyleTypeDefinitions.OdfFontStyle.NORMAL
+				&& theFontWeight == StyleTypeDefinitions.OdfFontWeight.BOLD)
+			return StyleTypeDefinitions.FontStyle.BOLD;
 
 		return null;
 	}
@@ -284,19 +284,19 @@ public class TextProperties {
 	 * @param style
 	 *            - the font style
 	 */
-	public void setFontStyle(StyleTypeDefinitions.SimpleFontStyle style) {
+	public void setFontStyle(StyleTypeDefinitions.FontStyle style) {
 		switch (style) {
 		case BOLD:
 			mElement.removeAttribute(FoFontStyleAttribute.ATTRIBUTE_NAME.getQName());
-			mElement.setFoFontWeightAttribute(StyleTypeDefinitions.FontWeight.BOLD.toString());
+			mElement.setFoFontWeightAttribute(StyleTypeDefinitions.OdfFontWeight.BOLD.toString());
 			break;
 		case ITALIC:
-			mElement.setFoFontStyleAttribute(StyleTypeDefinitions.FontStyle.ITALIC.toString());
+			mElement.setFoFontStyleAttribute(StyleTypeDefinitions.OdfFontStyle.ITALIC.toString());
 			mElement.removeAttribute(FoFontWeightAttribute.ATTRIBUTE_NAME.getQName());
 			break;
 		case BOLDITALIC:
-			mElement.setFoFontStyleAttribute(StyleTypeDefinitions.FontStyle.ITALIC.toString());
-			mElement.setFoFontWeightAttribute(StyleTypeDefinitions.FontWeight.BOLD.toString());
+			mElement.setFoFontStyleAttribute(StyleTypeDefinitions.OdfFontStyle.ITALIC.toString());
+			mElement.setFoFontWeightAttribute(StyleTypeDefinitions.OdfFontWeight.BOLD.toString());
 			break;
 		case REGULAR:
 			mElement.removeAttribute(FoFontStyleAttribute.ATTRIBUTE_NAME.getQName());
@@ -315,7 +315,7 @@ public class TextProperties {
 	 * @param type
 	 *            - script type
 	 */
-	public void setFontStyle(StyleTypeDefinitions.SimpleFontStyle style, Document.ScriptType type) {
+	public void setFontStyle(StyleTypeDefinitions.FontStyle style, Document.ScriptType type) {
 		if (type == null)
 			type = Document.ScriptType.WESTERN;
 		switch (type) {
@@ -323,15 +323,15 @@ public class TextProperties {
 			switch (style) {
 			case BOLD:
 				mElement.removeAttribute(FoFontStyleAttribute.ATTRIBUTE_NAME.getQName());
-				mElement.setFoFontWeightAttribute(StyleTypeDefinitions.FontWeight.BOLD.toString());
+				mElement.setFoFontWeightAttribute(StyleTypeDefinitions.OdfFontWeight.BOLD.toString());
 				break;
 			case ITALIC:
-				mElement.setFoFontStyleAttribute(StyleTypeDefinitions.FontStyle.ITALIC.toString());
+				mElement.setFoFontStyleAttribute(StyleTypeDefinitions.OdfFontStyle.ITALIC.toString());
 				mElement.removeAttribute(FoFontWeightAttribute.ATTRIBUTE_NAME.getQName());
 				break;
 			case BOLDITALIC:
-				mElement.setFoFontStyleAttribute(StyleTypeDefinitions.FontStyle.ITALIC.toString());
-				mElement.setFoFontWeightAttribute(StyleTypeDefinitions.FontWeight.BOLD.toString());
+				mElement.setFoFontStyleAttribute(StyleTypeDefinitions.OdfFontStyle.ITALIC.toString());
+				mElement.setFoFontWeightAttribute(StyleTypeDefinitions.OdfFontWeight.BOLD.toString());
 				break;
 			case REGULAR:
 				mElement.removeAttribute(FoFontStyleAttribute.ATTRIBUTE_NAME.getQName());
@@ -342,15 +342,15 @@ public class TextProperties {
 			switch (style) {
 			case BOLD:
 				mElement.removeAttribute(StyleFontStyleAsianAttribute.ATTRIBUTE_NAME.getQName());
-				mElement.setStyleFontWeightAsianAttribute(StyleTypeDefinitions.FontWeight.BOLD.toString());
+				mElement.setStyleFontWeightAsianAttribute(StyleTypeDefinitions.OdfFontWeight.BOLD.toString());
 				break;
 			case ITALIC:
-				mElement.setStyleFontStyleAsianAttribute(StyleTypeDefinitions.FontStyle.ITALIC.toString());
+				mElement.setStyleFontStyleAsianAttribute(StyleTypeDefinitions.OdfFontStyle.ITALIC.toString());
 				mElement.removeAttribute(StyleFontWeightAsianAttribute.ATTRIBUTE_NAME.getQName());
 				break;
 			case BOLDITALIC:
-				mElement.setStyleFontStyleAsianAttribute(StyleTypeDefinitions.FontStyle.ITALIC.toString());
-				mElement.setStyleFontWeightAsianAttribute(StyleTypeDefinitions.FontWeight.BOLD.toString());
+				mElement.setStyleFontStyleAsianAttribute(StyleTypeDefinitions.OdfFontStyle.ITALIC.toString());
+				mElement.setStyleFontWeightAsianAttribute(StyleTypeDefinitions.OdfFontWeight.BOLD.toString());
 				break;
 			case REGULAR:
 				mElement.removeAttribute(StyleFontStyleAsianAttribute.ATTRIBUTE_NAME.getQName());
@@ -361,15 +361,15 @@ public class TextProperties {
 			switch (style) {
 			case BOLD:
 				mElement.removeAttribute(StyleFontStyleComplexAttribute.ATTRIBUTE_NAME.getQName());
-				mElement.setStyleFontWeightComplexAttribute(StyleTypeDefinitions.FontWeight.BOLD.toString());
+				mElement.setStyleFontWeightComplexAttribute(StyleTypeDefinitions.OdfFontWeight.BOLD.toString());
 				break;
 			case ITALIC:
-				mElement.setStyleFontStyleComplexAttribute(StyleTypeDefinitions.FontStyle.ITALIC.toString());
+				mElement.setStyleFontStyleComplexAttribute(StyleTypeDefinitions.OdfFontStyle.ITALIC.toString());
 				mElement.removeAttribute(StyleFontWeightComplexAttribute.ATTRIBUTE_NAME.getQName());
 				break;
 			case BOLDITALIC:
-				mElement.setStyleFontStyleComplexAttribute(StyleTypeDefinitions.FontStyle.ITALIC.toString());
-				mElement.setStyleFontWeightComplexAttribute(StyleTypeDefinitions.FontWeight.BOLD.toString());
+				mElement.setStyleFontStyleComplexAttribute(StyleTypeDefinitions.OdfFontStyle.ITALIC.toString());
+				mElement.setStyleFontWeightComplexAttribute(StyleTypeDefinitions.OdfFontWeight.BOLD.toString());
 				break;
 			case REGULAR:
 				mElement.removeAttribute(StyleFontStyleComplexAttribute.ATTRIBUTE_NAME.getQName());
@@ -406,8 +406,8 @@ public class TextProperties {
 	}
 
 	/**
-	 * Return the font size definition in measurement point(PT) for a specific script
-	 * type.
+	 * Return the font size definition in measurement point(PT) for a specific
+	 * script type.
 	 * <p>
 	 * Zero will be returned if there is no font size definition for this script
 	 * type.
@@ -546,6 +546,8 @@ public class TextProperties {
 	/**
 	 * Set the language information for a specific script type
 	 * <p>
+	 * The consistency between country and script type is not verified.
+	 * <p>
 	 * If the parameter <code>language</code> is null, the language information
 	 * for this script type will be removed.
 	 * 
@@ -630,7 +632,9 @@ public class TextProperties {
 	}
 
 	/**
-	 * Set the country information for a specific script type
+	 * Set the country information for a specific script type.
+	 * <p>
+	 * The consistency between country and script type is not verified.
 	 * <p>
 	 * If the parameter <code>country</code> is null, the country information
 	 * for this script type will be removed.
@@ -818,27 +822,28 @@ public class TextProperties {
 		else
 			familyName = getFontFamilyName(type);
 		double size = getFontSizeInPoint(type);
-		StyleTypeDefinitions.SimpleFontStyle fontStyle = getFontStyle(type);
+		StyleTypeDefinitions.FontStyle fontStyle = getFontStyle(type);
 		Font aFont = new Font(familyName, fontStyle, size);
 
 		Color color = getFontColor();
-		String language = getLanguage(type);
-		String country = getCountry(type);
+		// String language = getLanguage(type);
+		// String country = getCountry(type);
 
 		if (color != null)
 			aFont.setColor(color);
 
-		if (language != null && country != null) {
-			Locale locale = new Locale(language, country);
-			aFont.setLocale(locale);
-		}
+		// Commented since 0.3.5 because the font won't contain the language
+		// information
+		// if (language != null && country != null) {
+		// Locale locale = new Locale(language, country);
+		// aFont.setLocale(locale);
+		// }
 		return aFont;
 
 	}
 
 	/**
-	 * Set the font definition. The locale information in font definition will
-	 * be used to justify the script type.
+	 * Set the font definition for western character.
 	 * <p>
 	 * If the parameter <code>font</code> is null, nothing will be happened.
 	 * 
@@ -849,10 +854,35 @@ public class TextProperties {
 		if (font == null)
 			return;
 
-		if (font.getLocale() == null) {
-			setFont(font, Document.ScriptType.WESTERN);
+		setFont(font, Document.ScriptType.WESTERN, null);
+		if (font.getColor() != null)
+			setFontColor(font.getColor());
+	}
+
+	/**
+	 * Set the font definition.
+	 * <p>
+	 * This method can be used to set font for different script type, such as
+	 * western characters, CJK characters, and CTL characters. The second
+	 * parameter will be used to determine the script type.
+	 * <p>
+	 * If the parameter <code>font</code> is null, nothing will be happened.
+	 * 
+	 * @param font
+	 *            - font definition
+	 * @param language
+	 *            - the language
+	 * @see org.odftoolkit.simple.Document.ScriptType
+	 * 
+	 */
+	public void setFont(Font font, Locale language) {
+		if (font == null)
+			return;
+
+		if (language == null) {
+			setFont(font, Document.ScriptType.WESTERN, null);
 		} else
-			setFont(font, Document.getScriptType(font.getLocale()));
+			setFont(font, Document.getScriptType(language), language);
 		if (font.getColor() != null)
 			setFontColor(font.getColor());
 	}
@@ -967,7 +997,7 @@ public class TextProperties {
 
 	}
 
-	private void setFont(Font font, Document.ScriptType type) {
+	private void setFont(Font font, Document.ScriptType type, Locale locale) {
 		// get font name by font family name
 		String fontName = getFontNameFromFamilyName(font.getFamilyName());
 		if (fontName == null)
@@ -977,29 +1007,29 @@ public class TextProperties {
 		switch (type) {
 		case WESTERN:
 			setFontName(font.getFontName(), Document.ScriptType.WESTERN);
-			setFontStyle(font.getSimpleFontStyle(), Document.ScriptType.WESTERN);
+			setFontStyle(font.getFontStyle(), Document.ScriptType.WESTERN);
 			setFontSizeInPoint(font.getSize(), Document.ScriptType.WESTERN);
-			if (font.getLocale() != null) {
-				setLanguage(font.getLocale().getLanguage(), Document.ScriptType.WESTERN);
-				setCountry(font.getLocale().getCountry(), Document.ScriptType.WESTERN);
+			if (locale != null) {
+				setLanguage(locale.getLanguage(), Document.ScriptType.WESTERN);
+				setCountry(locale.getCountry(), Document.ScriptType.WESTERN);
 			}
 			break;
 		case CJK:
 			setFontName(font.getFontName(), Document.ScriptType.CJK);
-			setFontStyle(font.getSimpleFontStyle(), Document.ScriptType.CJK);
+			setFontStyle(font.getFontStyle(), Document.ScriptType.CJK);
 			setFontSizeInPoint(font.getSize(), Document.ScriptType.CJK);
-			if (font.getLocale() != null) {
-				setLanguage(font.getLocale().getLanguage(), Document.ScriptType.CJK);
-				setCountry(font.getLocale().getCountry(), Document.ScriptType.CJK);
+			if (locale != null) {
+				setLanguage(locale.getLanguage(), Document.ScriptType.CJK);
+				setCountry(locale.getCountry(), Document.ScriptType.CJK);
 			}
 			break;
 		case CTL:
 			setFontName(font.getFontName(), Document.ScriptType.CTL);
-			setFontStyle(font.getSimpleFontStyle(), Document.ScriptType.CTL);
+			setFontStyle(font.getFontStyle(), Document.ScriptType.CTL);
 			setFontSizeInPoint(font.getSize(), Document.ScriptType.CTL);
-			if (font.getLocale() != null) {
-				setLanguage(font.getLocale().getLanguage(), Document.ScriptType.CTL);
-				setCountry(font.getLocale().getCountry(), Document.ScriptType.CTL);
+			if (locale != null) {
+				setLanguage(locale.getLanguage(), Document.ScriptType.CTL);
+				setCountry(locale.getCountry(), Document.ScriptType.CTL);
 			}
 			break;
 		}
