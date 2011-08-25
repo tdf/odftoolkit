@@ -40,6 +40,7 @@ import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
+import org.odftoolkit.odfdom.type.Length;
 import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.type.Length.Unit;
 import org.odftoolkit.simple.Component;
@@ -56,6 +57,7 @@ public class Column extends Component {
 	TableTableColumnElement maColumnElement;
 	int mnRepeatedIndex;
 	private static final String DEFAULT_WIDTH = "0in";
+	private final int DEFAULT_REL_TABLE_WIDTH = 65535;
 	private Document mDocument;
 
 	/**
@@ -162,27 +164,52 @@ public class Column extends Component {
 	public void setWidth(long width) {
 		String sWidthMM = String.valueOf(width) + Unit.MILLIMETER.abbr();
 		String sWidthIN = PositiveLength.mapToUnit(sWidthMM, Unit.INCH);
-
+		//width before modification
+		long columnWidth = getWidth();
+		if(columnWidth < 0)	{
+			columnWidth = 0;
+		}
 		splitRepeatedColumns();
 		maColumnElement.setProperty(OdfTableColumnProperties.ColumnWidth, sWidthIN);
 
+		Table table = getTable();
 		// check if need set relative width
 		int index = getColumnIndex();
-		if (index >= 1) {
+		int columnCount = table.getColumnCount();
+		if (index == columnCount-1) {
+			//if the column to resize is the rightmost
 			index = index - 1;
 		} else {
 			index = index + 1;
 		}
-		Column column = null;
-		if (index < getTable().getColumnCount()) {
-			column = getTable().getColumnByIndex(index);
-		}
-		if (column != null) {
-			long prevColumnRelWidth = column.getRelativeWidth();
-			if (prevColumnRelWidth != 0) {
-				long prevColumnWidth = column.getWidth();
-				setRelativeWidth(prevColumnRelWidth / prevColumnWidth * width);
+		if (index >= 0) {
+			Column column = null;
+			if (index < columnCount) {
+				column = table.getColumnByIndex(index);
+			} else if (columnCount >= 2) {
+				column = table.getColumnByIndex(columnCount - 2);
 			}
+
+			long nextColumnWidth = 0;
+			if (column != null) {
+				nextColumnWidth = column.getWidth();
+				setRelativeWidth((DEFAULT_REL_TABLE_WIDTH / table.getWidth()) * width);
+			}
+
+			// total width of two columns
+			long columnsWidth = nextColumnWidth + columnWidth;
+			// calculates the new width of the next / previous column
+			long newWidthNextColumn = (long) (columnsWidth - width);
+			if (newWidthNextColumn < 0) {
+				newWidthNextColumn = 0;
+			}
+
+			sWidthMM = String.valueOf(newWidthNextColumn) + Unit.MILLIMETER.abbr();
+			sWidthIN = PositiveLength.mapToUnit(sWidthMM, Unit.INCH);
+
+			column.getOdfElement().setProperty(OdfTableColumnProperties.ColumnWidth, sWidthIN);
+			long relWidth = (DEFAULT_REL_TABLE_WIDTH / table.getWidth()) * newWidthNextColumn;
+			column.setRelativeWidth(relWidth);
 		}
 	}
 
@@ -202,6 +229,8 @@ public class Column extends Component {
 			maColumnElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
 			String originalWidth = maColumnElement.getProperty(OdfTableColumnProperties.ColumnWidth);
 			String originalRelWidth = maColumnElement.getProperty(OdfTableColumnProperties.RelColumnWidth);
+			String columnWidthStr = Length.mapToUnit(originalWidth, Unit.MILLIMETER);
+			long columnWidth = PositiveLength.parseLong(columnWidthStr, Unit.MILLIMETER);
 			for (int i = repeateNum - 1; i >= 0; i--) {
 				TableTableColumnElement newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement(
 						(OdfFileDom) maColumnElement.getOwnerDocument(), OdfName.newName(OdfDocumentNamespace.TABLE,
@@ -210,7 +239,8 @@ public class Column extends Component {
 					newColumn.setProperty(OdfTableColumnProperties.ColumnWidth, originalWidth);
 				}
 				if (originalRelWidth != null && originalRelWidth.length() > 0) {
-					newColumn.setProperty(OdfTableColumnProperties.RelColumnWidth, originalRelWidth);
+					long relWidth = (long) ((DEFAULT_REL_TABLE_WIDTH / table.getWidth()) *	columnWidth);
+					newColumn.setProperty(OdfTableColumnProperties.RelColumnWidth, String.valueOf(relWidth) + "*");
 				}
 				tableEle.insertBefore(newColumn, refElement);
 				refElement = newColumn;
@@ -231,16 +261,16 @@ public class Column extends Component {
 		}
 	}
 
-	private long getRelativeWidth() {
-		String sRelWidth = maColumnElement.getProperty(OdfTableColumnProperties.RelColumnWidth);
-		if (sRelWidth != null) {
-			if (sRelWidth.contains("*")) {
-				Long value = Long.valueOf(sRelWidth.substring(0, sRelWidth.indexOf("*")));
-				return value.longValue();
-			}
-		}
-		return 0;
-	}
+//	private long getRelativeWidth() {
+//		String sRelWidth = maColumnElement.getProperty(OdfTableColumnProperties.RelColumnWidth);
+//		if (sRelWidth != null) {
+//			if (sRelWidth.contains("*")) {
+//				Long value = Long.valueOf(sRelWidth.substring(0, sRelWidth.indexOf("*")));
+//				return value.longValue();
+//			}
+//		}
+//		return 0;
+//	}
 
 	private void setRelativeWidth(long relWidth) {
 		if (relWidth < 40) {

@@ -2,7 +2,7 @@
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
- * Copyright 2009 IBM. All rights reserved.
+ * Copyright 2009, 2011 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -21,6 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.simple.table;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -246,6 +249,95 @@ public class TableRowColumnTest {
 		}
 	}
 
+	@Test
+	public void testTableColumnWidth() {
+		TextDocument textDocument = null;
+		try {
+			textDocument = TextDocument.newTextDocument();
+
+			textDocument.getParagraphByIndex(0, false).setTextContent(
+					"Above, table in header Standard (bug with getWidth, but the widths are good)");
+			Table table = textDocument.getHeader().addTable(1, 8);
+			long[] columnsWidth = new long[] { 5, 19, 11, 14, 27, 12, 75, 4 };
+			setColumnsWidth(table, columnsWidth);
+			textDocument.addParagraph(null);
+			textDocument.addParagraph(null);
+
+			textDocument.addParagraph("First table (columns width : demande / result)");
+			table = Table.newTable(textDocument, 1, 6);
+			columnsWidth = new long[] { 10, 15, 20, 25, 30, -1 };
+			setColumnsWidth(table, columnsWidth);
+
+			textDocument.addParagraph("Second table");
+			table = Table.newTable(textDocument, 1, 8);
+			columnsWidth = new long[] { 5, 19, 11, 14, 27, 12, 75, 4 };
+			setColumnsWidth(table, columnsWidth);
+
+			textDocument.addParagraph("Third table");
+			table = Table.newTable(textDocument, 1, 12);
+			columnsWidth = new long[] { 5, 8, 10, 11, 7, 7, 26, 12, 19, 19, 41, 3 };
+			setColumnsWidth(table, columnsWidth);
+
+			textDocument.addParagraph("fourth table (left space of 15mm and 10mm space right)");
+			table = Table.newTable(textDocument, 1, 12, 1.5, 1.0);
+			columnsWidth = new long[] { 5, 8, 10, 11, 7, 7, 11, 12, 9, 19, -1, 3 };
+			setColumnsWidth(table, columnsWidth);
+
+			textDocument.addParagraph("fifth table (space of -1 cm to the left and right space of -1.5cm)");
+			table = Table.newTable(textDocument, 1, 10, -1, -1.5);
+			columnsWidth = new long[] { 32, 8, 10, 11, 7, 7, 16, 12, -1, 18 };
+			setColumnsWidth(table, columnsWidth);
+
+			textDocument.addParagraph("sixth table (merging of columns 3-4, row 0, and other merging)");
+			table = Table.newTable(textDocument, 2, 8);
+			columnsWidth = new long[] { 5, 19, 11, 14, 27, 12, 75, 4 };
+			setColumnsWidth(table, columnsWidth);
+			CellRange vCellRange = table.getCellRangeByPosition(3, 0, 4, 0);
+			vCellRange.merge();
+			table.appendRows(2);
+			vCellRange = table.getCellRangeByPosition(4, 1, 5, 2);
+			vCellRange.merge();
+
+			textDocument.addParagraph("as above, but no merging");
+			table = Table.newTable(textDocument, 1, 8);
+			columnsWidth = new long[] { 5, 19, 11, 14, 27, 12, 75, 4 };
+			setColumnsWidth(table, columnsWidth);
+
+			textDocument.addParagraph("table with three columns width at 0");
+			table = Table.newTable(textDocument, 1, 12);
+			columnsWidth = new long[] { 0, 13, 10, 11, 0, 14, 26, 12, 19, 19, 47, 0 };
+			setColumnsWidth(table, columnsWidth);
+
+			table = Table.newTable(textDocument, 1, 3);
+			columnsWidth = new long[] { 100 };
+			setColumnsWidth(table, columnsWidth);
+			table.setVerticalMargin(0.25, 0.5);
+			textDocument.addParagraph("Above, other table with top space of 0.25cm and bottom spacin of 0.5cm");
+
+			textDocument.addParagraph(null);
+			textDocument.addParagraph(null);
+			textDocument.addParagraph("below, table in footer Standard (bug with getWidth, but the widths are good)");
+			table = textDocument.getFooter().addTable(1, 8);
+			columnsWidth = new long[] { 5, 19, 11, 14, 27, 12, 75, 4 };
+			setColumnsWidth(table, columnsWidth);
+			
+			textDocument.save(ResourceUtilities.newTestOutputFile("testColumsWidth.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	private void setColumnsWidth(Table table, long[] columnsWidth){
+		List<Column> vListColumns = table.getColumnList();
+		for (int i = 0; i < columnsWidth.length; i++) {
+			if(columnsWidth[i] >= 0){
+				table.getColumnByIndex(i).setWidth(columnsWidth[i]);
+			}
+			table.getCellByPosition(i, 0).setStringValue(columnsWidth[i] + "/" + vListColumns.get(i).getWidth());
+		}
+	}
+	
 	private void saveods(String name) {
 		try {
 			odsdoc.save(ResourceUtilities.newTestOutputFile(filename + name + ".ods"));

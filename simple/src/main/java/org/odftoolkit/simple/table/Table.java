@@ -34,7 +34,9 @@ import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
+import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
+import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
@@ -58,10 +60,12 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfTableProperties;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
+import org.odftoolkit.odfdom.type.Length;
 import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.type.Length.Unit;
 import org.odftoolkit.simple.Component;
@@ -87,7 +91,7 @@ public class Table extends Component {
 	protected boolean mIsDescribedBySingleElement = true;
 	private static final int DEFAULT_ROW_COUNT = 2;
 	private static final int DEFAULT_COLUMN_COUNT = 5;
-	private static final double DEFAULT_TABLE_WIDTH = 6;
+	private static final double DEFAULT_TABLE_WIDTH = 6.692; // 6
 	private static final int DEFAULT_REL_TABLE_WIDTH = 65535;
 	private static final String DEFAULT_TABLE_ALIGN = "margins";
 	private static final DecimalFormat IN_FORMAT = new DecimalFormat("##0.0000");
@@ -199,6 +203,50 @@ public class Table extends Component {
 				return getTableInstance(newTEle);
 			} catch (DOMException e) {
 				Logger.getLogger(Table.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			} catch (Exception e) {
+				Logger.getLogger(Table.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			}
+			return null;
+		}
+		
+		/**
+		 * Construct the <code>Table</code> feature with a specified row number,
+		 * column number, header row number, header column number, left margin
+		 * space and right margin space.
+		 * <p>
+		 * The table will be inserted at the end of the container. An unique
+		 * table name will be given, you may set a custom table name using the
+		 * <code>setTableName</code> method.
+		 * <p>
+		 * If the container is a text document, cell borders will be created by
+		 * default.
+		 * 
+		 * @param numRows
+		 *            the row number
+		 * @param numCols
+		 *            the column number
+		 * @param headerRowNumber
+		 *            the header row number
+		 * @param headerColumnNumber
+		 *            the header column number
+		 * @param marginLeft
+		 *            the left table margin in centimeter(cm), between the left
+		 *            margin of table container and the table
+		 * @param marginRight
+		 *            the right table margin in centimeter(cm), between the
+		 *            right margin of table container and the table
+		 * 
+		 * @return a new instance of <code>Table</code>
+		 * 
+		 * @since 0.5.5
+		 * */
+		public Table newTable(int numRows, int numCols, int headerRowNumber, int headerColumnNumber, double marginLeft,
+				double marginRight) {
+			try {
+				TableTableElement newTEle = createTable(ownerContainer, numRows, numCols, headerRowNumber,
+						headerColumnNumber, marginLeft, marginRight);
+				ownerContainer.getTableContainerElement().appendChild(newTEle);
+				return getTableInstance(newTEle);
 			} catch (Exception e) {
 				Logger.getLogger(Table.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			}
@@ -471,6 +519,34 @@ public class Table extends Component {
 	public static Table newTable(TableContainer tableContainer, int numRows, int numCols) {
 		return tableContainer.getTableBuilder().newTable(numRows, numCols);
 	}
+	
+	/**
+	 * Construct the <code>Table</code> feature with a specified row number and
+	 * column number.
+	 * <p>
+	 * The table will be inserted at the end of the tableContainer. An unique
+	 * table name will be given, you may set a custom table name using the
+	 * <code>setTableName</code> method.
+	 * <p>
+	 * If the <code>tableContainer</code> is a text document, cell borders will
+	 * be created by default.
+	 * 
+	 * @param tableContainer
+	 *            the table container that contains this table
+	 * @param numRows
+	 *            the row number
+	 * @param numCols
+	 *            the column number
+	 * @param marginLeft double
+	 * 			  <I>the left table margin in cm (between the left margin of document and the table)</I>
+	 * @param marginRight double
+	 * 			  <I>the right table margin in cm (between the right margin of document and the table)</I>
+	 * @return a new instance of <code>Table</code>
+	 */
+	public static Table newTable(TableContainer tableContainer, int numRows, int numCols, 
+			double marginLeft, double marginRight) {
+		return tableContainer.getTableBuilder().newTable(numRows, numCols, 0, 0, marginLeft, marginRight);
+	}
 
 	/**
 	 * Construct the <code>Table</code> feature with a specified row number,
@@ -499,6 +575,8 @@ public class Table extends Component {
 			int headerColumnNumber) {
 		return tableContainer.getTableBuilder().newTable(numRows, numCols, headerRowNumber, headerColumnNumber);
 	}
+	
+	
 
 	/**
 	 * Construct the Table feature with a specified 2 dimension array as the
@@ -773,12 +851,18 @@ public class Table extends Component {
 		style.setProperty(StyleTableCellPropertiesElement.BorderTop, "none");
 		style.setProperty(StyleTableCellPropertiesElement.BorderBottom, "0.0007in solid #000000");
 	}
-
+	
 	private static TableTableElement createTable(TableContainer container, int numRows, int numCols,
 			int headerRowNumber, int headerColumnNumber) throws Exception {
+		return createTable(container, numRows, numCols, headerRowNumber, headerColumnNumber, 0, 0);
+	}
+
+	private static TableTableElement createTable(TableContainer container, int numRows, int numCols,
+			int headerRowNumber, int headerColumnNumber, double marginLeft, double marginRight) throws Exception {
 		Document document = getOwnerDocument(container);
 		OdfElement containerElement = container.getTableContainerElement();
 		OdfFileDom dom = (OdfFileDom) containerElement.getOwnerDocument();
+		double tableWidth = getTableWidth(container, marginLeft, marginRight);
 
 		boolean isTextDocument = document instanceof TextDocument;
 
@@ -798,8 +882,16 @@ public class Table extends Component {
 		// create style
 		OdfStyle tableStyle = styles.newStyle(OdfStyleFamily.Table);
 		String stylename = tableStyle.getStyleNameAttribute();
-		tableStyle.setProperty(StyleTablePropertiesElement.Width, DEFAULT_TABLE_WIDTH + "in");
+		tableStyle.setProperty(StyleTablePropertiesElement.Width, tableWidth + "in");
 		tableStyle.setProperty(StyleTablePropertiesElement.Align, DEFAULT_TABLE_ALIGN);
+		if (marginLeft != 0) {
+			tableStyle.setProperty(StyleTablePropertiesElement.MarginLeft, (new DecimalFormat("#0.##")
+					.format(marginLeft) + Unit.CENTIMETER.abbr()).replace(",", "."));
+		}
+		if (marginRight != 0) {
+			tableStyle.setProperty(StyleTablePropertiesElement.MarginRight, (new DecimalFormat("#0.##")
+					.format(marginRight) + Unit.CENTIMETER.abbr()).replace(",", "."));
+		}
 		newTEle.setStyleName(stylename);
 
 		// 2. create column elements
@@ -808,7 +900,7 @@ public class Table extends Component {
 		String columnStylename = columnStyle.getStyleNameAttribute();
 		// for spreadsheet document, no need compute column width.
 		if (isTextDocument) {
-			columnStyle.setProperty(StyleTableColumnPropertiesElement.ColumnWidth, IN_FORMAT.format(DEFAULT_TABLE_WIDTH
+			columnStyle.setProperty(StyleTableColumnPropertiesElement.ColumnWidth, IN_FORMAT.format(tableWidth
 					/ numCols)
 					+ "in");
 			columnStyle.setProperty(StyleTableColumnPropertiesElement.RelColumnWidth, Math
@@ -1763,6 +1855,54 @@ public class Table extends Component {
 		}
 
 	}
+	
+	/**
+	 * Calculates the width between the left and right margins of the table
+	 * container.
+	 * 
+	 * @param container
+	 *            TableContainer
+	 * @param marginLeft
+	 *            space between left margin and the table
+	 * @param marginRight
+	 *            space between right margin and the table
+	 * @return width that can be attributed at the table (in)
+	 */
+	private static double getTableWidth(TableContainer container, double marginLeft, double marginRight) {
+		String pageWidthStr = null;
+		double pageWidth = 0;
+		double tableWidth = DEFAULT_TABLE_WIDTH;
+		OdfOfficeAutomaticStyles automaticStyles = null;
+		try {
+			automaticStyles = getOwnerDocument(container).getStylesDom().getAutomaticStyles();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		OdfStylePageLayout pageLayout = automaticStyles.getPageLayout("pm1");
+		if (pageLayout == null) {
+			pageLayout = automaticStyles.getPageLayout("Mpm1");
+		}
+		if (pageLayout != null) {
+			pageWidthStr = pageLayout.getProperty(StylePageLayoutPropertiesElement.PageWidth);
+			if (pageWidthStr != null) {
+				pageWidth = Length.parseDouble(pageWidthStr, Unit.CENTIMETER);
+			}
+			// margins
+			double dLeftPageMargin = 0;
+			double dRightPageMargin = 0;
+			String leftPageMargin = pageLayout.getProperty(StylePageLayoutPropertiesElement.MarginLeft);
+			String rightPageMargin = pageLayout.getProperty(StylePageLayoutPropertiesElement.MarginRight);
+			if (leftPageMargin != null && rightPageMargin != null) {
+				dLeftPageMargin = Length.parseDouble(leftPageMargin, Unit.CENTIMETER);
+				dRightPageMargin = Length.parseDouble(rightPageMargin, Unit.CENTIMETER);
+			}
+			tableWidth = (pageWidth - (dLeftPageMargin + dRightPageMargin + marginLeft + marginRight)) / 2.5399;
+			if (tableWidth <= 0) {
+				tableWidth = DEFAULT_TABLE_WIDTH;
+			}
+		}
+		return Double.valueOf(new DecimalFormat("#0.###").format(tableWidth).replace(",", ".")).doubleValue();
+	}
 
 	private void reviseStyleFromTopRowToMediumRow(Row oldTopRow) {
 		if (mIsSpreadsheet)
@@ -2546,6 +2686,28 @@ public class Table extends Component {
 	 */
 	public Cell getCellByPosition(String address) {
 		return getCellByPosition(getColIndexFromCellAddress(address), getRowIndexFromCellAddress(address));
+	}
+	
+	/**
+	 * Modifies the margin above and below the table.
+	 * 
+	 * @param spaceTop
+	 *            space above the table in centimeter(cm), ex. 1.25 cm
+	 * @param spaceBottom
+	 *            spacing below the table in centimeter(cm), ex. 0.7 cm
+	 *            
+	 * @since 0.5.5
+	 */
+	public void setVerticalMargin(double spaceTop, double spaceBottom) {
+		String tableStyleName = mTableElement.getStyleName();
+		OdfOfficeAutomaticStyles automaticStyles = mTableElement.getAutomaticStyles();
+		OdfStyleBase tableStyle = automaticStyles.getStyle(tableStyleName, OdfStyleFamily.Table);
+		if (tableStyle != null) {
+			tableStyle.setProperty(StyleTablePropertiesElement.MarginTop,
+					(new DecimalFormat("#0.##").format(spaceTop) + Unit.CENTIMETER.abbr()).replace(",", "."));
+			tableStyle.setProperty(StyleTablePropertiesElement.MarginBottom, (new DecimalFormat("#0.##")
+					.format(spaceBottom) + Unit.CENTIMETER.abbr()).replace(",", "."));
+		}
 	}
 
 	// TODO: can put these two method to type.CellAddress
