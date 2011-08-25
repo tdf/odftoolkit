@@ -75,11 +75,13 @@ public class TableRowColumnTest {
 		for (int i = 0; i < table3.getRowCount(); i++) {
 			Row row = table3.getRowByIndex(i);
 			double oldHeight = row.getHeight() / 2;
-			row.setHeight(oldHeight, false);
+			row.setHeight(oldHeight, true);
 			double roundingFactor = 10000.0;
 			double inValue = Math.round(roundingFactor * oldHeight / Unit.INCH.unitInMillimiter()) / roundingFactor;
 			String sHeightIN = String.valueOf(inValue) + Unit.INCH.abbr();
 			double expectedHeight = PositiveLength.parseDouble(sHeightIN, Unit.MILLIMETER);
+			
+			row.setHeight(oldHeight, false);
 			Assert.assertEquals(expectedHeight, row.getHeight());
 		}
 

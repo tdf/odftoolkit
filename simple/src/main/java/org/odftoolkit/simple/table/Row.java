@@ -48,6 +48,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextHElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfTableRowProperties;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfElement;
@@ -186,12 +187,13 @@ public class Row extends Component {
 	 */
 	public void setHeight(double height, boolean isMinHeight) {
 		double roundingFactor = 10000.0;
-		//TODO:need refactor to PositiveLength.
+		OdfStyleProperty rowHeightProp = isMinHeight ? OdfTableRowProperties.MinRowHeight : OdfTableRowProperties.RowHeight;
+		// TODO:need refactor to PositiveLength.
 		double inValue = Math.round(roundingFactor * height / Unit.INCH.unitInMillimiter()) / roundingFactor;
 		String sHeightIN = String.valueOf(inValue) + Unit.INCH.abbr();
 		splitRepeatedRows();
 		maRowElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
-		maRowElement.setProperty(OdfTableRowProperties.RowHeight, sHeightIN);
+		maRowElement.setProperty(rowHeightProp, sHeightIN);
 	}
 
 	// if one of the repeated row want to change something
