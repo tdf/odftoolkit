@@ -22,20 +22,21 @@
 package org.odftoolkit.simple.common.navigation;
 
 /**
- * Thrown to indicate that the navigation operation  
- * can not be processed on selections
+ * Thrown to indicate that the navigation operation can not be processed on
+ * selections
  */
 public class InvalidNavigationException extends Exception {
 
-    private static final long serialVersionUID = -6139894252732076102L;
+	private static final long serialVersionUID = 704778271501721996L;
 
-    /**
-     * Constructs a <code>InvalidNavigateOperation</code> with the 
-     * specified detail message. 
-     *
-     * @param   msg   the detail message.
-     */
-    public InvalidNavigationException(String msg) {
-	super(msg);
-    }
+	/**
+	 * Constructs a <code>InvalidNavigateOperation</code> with the specified
+	 * detail message.
+	 * 
+	 * @param msg
+	 *            the detail message.
+	 */
+	public InvalidNavigationException(String msg) {
+		super(msg);
+	}
 }

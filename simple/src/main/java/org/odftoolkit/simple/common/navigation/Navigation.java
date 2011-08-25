@@ -24,53 +24,57 @@ package org.odftoolkit.simple.common.navigation;
 import org.w3c.dom.Node;
 
 /**
- * Abstract class Navigation used to navigate the document
- * and find the matched element by the user defined conditions
- *
+ * <code>Navigation</code> is used to navigate the document and find the matched
+ * element by user defined conditions.
  */
 public abstract class Navigation {
-
+	
 	/**
-	 * Return true if document still has more matched Selection
-	 * when traversing the document(In other words return true
-	 * if getNextMatchElement() would return an element instance
-	 * rather than return null)
-	 * @return true if document still has more matched Selection,
-	 * and vice versa
-	 *
+	 * Return true if document still has more matched {@link Selection
+	 * Selection} when traversing the document(in other words return true if
+	 * getNextMatchElement() would return an element instance rather than return
+	 * null)
+	 * 
+	 * @return true if document still has more matched Selection, and vice versa
 	 */
-	abstract public boolean hasNext();
-	//abstract public void gotoPrevious();
+	public abstract boolean hasNext();
 
+	// public abstract void gotoPrevious();
+	
 	/**
-	 * get the current Selection result
-	 * @return the current Selection result
+	 * Get next {@link Selection Selection} result.
+	 * 
+	 * @return the next <code>Selection</code> result
 	 */
-	abstract public Selection getCurrentItem();
-
+	public abstract Selection nextSelection();
+	
 	/**
-	 * check if the element match the user defined condition
-	 * @param element	navigate this element
-	 * @return true if the element match the user defined condition;
-	 * 		   false if not match
-	 *
+	 * Check if the element is a qualified one.
+	 * <p> Developers can define their own logic here to determine whether an element satisfies the requirements. 
+	 * 
+	 * @param element
+	 *            navigate this element node.
+	 * @return true if the element node match the user defined condition; false
+	 *         if not match.
 	 */
-	abstract public boolean match(Node element);
+	public abstract boolean match(Node element);
 
 	/**
-	 * get the next matched element in a whole dom tree
-	 * @param startpoint	navigate from the startpoint
-	 * @return	the next matched element
+	 * Get the next matched element in the whole element tree.
+	 * 
+	 * @param startpoint
+	 *            navigate from the start point
+	 * @return the next matched element node
 	 */
 	protected Node getNextMatchElement(Node startpoint) {
 		Node matchedNode = null;
 		matchedNode = traverseTree(startpoint);
-
 		Node currentpoint = startpoint;
 		while ((matchedNode == null) && (currentpoint != null)) {
 			Node sibling = currentpoint.getNextSibling();
-			if ((sibling != null) &&
-					(sibling.getNodeType() == Node.TEXT_NODE || sibling.getNodeType() == Node.ELEMENT_NODE) && (match(sibling))) {
+			if ((sibling != null)
+					&& (sibling.getNodeType() == Node.TEXT_NODE || sibling.getNodeType() == Node.ELEMENT_NODE)
+					&& (match(sibling))) {
 				matchedNode = sibling;
 			}
 			while ((sibling != null) && (matchedNode == null)) {
@@ -84,25 +88,27 @@ public abstract class Navigation {
 			}
 			currentpoint = currentpoint.getParentNode();
 		}
-
 		return matchedNode;
 	}
 
 	/**
-	 * get the next matched element in a sub tree
-	 * @param startpoint	navigate from the startpoint
-	 * @param root			the root of the sub tree
-	 * @return	the next matched element
+	 * Get the next matched element node in a sub tree
+	 * 
+	 * @param startpoint
+	 *            navigate from the start point
+	 * @param root
+	 *            the root of the sub tree
+	 * @return the next matched element
 	 */
 	protected Node getNextMatchElementInTree(Node startpoint, Node root) {
 		Node matchedNode = null;
 		matchedNode = traverseTree(startpoint);
-
 		Node currentpoint = startpoint;
 		while ((matchedNode == null) && (currentpoint != root)) {
 			Node sibling = currentpoint.getNextSibling();
-			if ((sibling != null) &&
-					(sibling.getNodeType() == Node.TEXT_NODE || sibling.getNodeType() == Node.ELEMENT_NODE) && (match(sibling))) {
+			if ((sibling != null)
+					&& (sibling.getNodeType() == Node.TEXT_NODE || sibling.getNodeType() == Node.ELEMENT_NODE)
+					&& (match(sibling))) {
 				matchedNode = sibling;
 			}
 			while ((sibling != null) && (matchedNode == null)) {
@@ -116,7 +122,6 @@ public abstract class Navigation {
 			}
 			currentpoint = currentpoint.getParentNode();
 		}
-
 		return matchedNode;
 	}
 
@@ -125,8 +130,7 @@ public abstract class Navigation {
 		if (root == null) {
 			return null;
 		}
-		//if (match(root)) return root;
-
+		// if (match(root)) return root;
 		Node node = root.getFirstChild();
 		while (node != null) {
 			if ((node.getNodeType() == Node.TEXT_NODE || node.getNodeType() == Node.ELEMENT_NODE)) {

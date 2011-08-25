@@ -38,27 +38,34 @@ import org.odftoolkit.simple.table.CellValueAdapter;
  * @since 0.3
  */
 public class CellSelection extends TextSelection {
-	
+
 	private Cell mCell;
-	
+
 	/**
 	 * Constructor of CellSelection.
-	 * @param text				the text content of this CellSelection
-	 * @param containerElement	the paragraph element that contains this CellSelection
-	 * @param index				the start index of the text content of the container element
-	 * @param cell              the table cell which is selected
+	 * 
+	 * @param text
+	 *            the text content of this CellSelection
+	 * @param containerElement
+	 *            the paragraph element that contains this CellSelection
+	 * @param index
+	 *            the start index of the text content of the container element
+	 * @param cell
+	 *            the table cell which is selected
 	 */
 	CellSelection(String text, OdfElement containerElement, int index, Cell cell) {
 		super(text, containerElement, index);
-		mCell=cell;
+		mCell = cell;
 	}
 
 	/**
-	 * Replace the text content of selection with a new string. 
-	 * The cell value type will be updated as "string" after replacement.
+	 * Replace the text content of selection with a new string. The cell value
+	 * type will be updated as "string" after replacement.
 	 * 
-	 * @param newText	the replace text String
-	 * @throws InvalidNavigationException if the selection is unavailable.
+	 * @param newText
+	 *            the replace text String
+	 * @throws InvalidNavigationException
+	 *            if the selection is unavailable.
 	 * 
 	 * @see org.odftoolkit.simple.table.Cell#setValueType(String)
 	 * @see org.odftoolkit.simple.table.Cell#setStringValue(String)
@@ -71,50 +78,59 @@ public class CellSelection extends TextSelection {
 			mCell.setStringValue(text);
 		}
 	}
-	
+
 	/**
 	 * Replace the text content of selection with a new string. The cell value
 	 * and value type will be updated follow by the rules which are designed in
 	 * the {@link org.odftoolkit.simple.table.CellValueAdapter
 	 * <code>CellValueAdapter</code>}.
 	 * 
-	 * @param newText  the replace text String
-	 * @param adapter  the <code>CellValueAdapter</code> used to adapt cell value and value type
-	 * @throws InvalidNavigationException  if the selection is unavailable.
+	 * @param newText
+	 *            the replace text String
+	 * @param adapter
+	 *            the <code>CellValueAdapter</code> used to adapt cell value and
+	 *            value type
+	 * @throws InvalidNavigationException
+	 *            if the selection is unavailable.
 	 * 
 	 * @see #replaceWith(String)
 	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 */
 	public void advancedReplaceWith(String newText, CellValueAdapter adapter) throws InvalidNavigationException {
 		super.replaceWith(newText);
-		if(mCell!=null){
+		if (mCell != null) {
 			String text = mCell.getDisplayText();
-			//update mCell value and value type.
+			// update mCell value and value type.
 			mCell.setDisplayText(text, adapter);
-		}		
+		}
 	}
-	
+
 	/**
 	 * Replace the text content of selection with a new string. The cell value
 	 * and value type will be updated follow by the rules which are designed in
 	 * the {@link org.odftoolkit.simple.table.DefaultCellValueAdapter
 	 * <code>DefaultCellValueAdapter</code>}.
 	 * 
-	 * @param newText  the replace text String
-	 * @param adapter  the <code>CellValueAdapter</code> used to adapt cell value and value type
-	 * @throws InvalidNavigationException  if the selection is unavailable.
+	 * @param newText
+	 *            the replace text String
+	 * @param adapter
+	 *            the <code>CellValueAdapter</code> used to adapt cell value and
+	 *            value type
+	 * @throws InvalidNavigationException
+	 *            if the selection is unavailable.
 	 * 
 	 * @see org.odftoolkit.simple.table.DefaultCellValueAdapter
 	 */
 	public void advancedReplaceWith(String newText) throws InvalidNavigationException {
 		advancedReplaceWith(newText, CellValueAdapter.DEFAULT_VALUE_ADAPTER);
 	}
-	
+
 	/**
 	 * Get the selected table cell.
+	 * 
 	 * @return the selected table cell
 	 */
-	public Cell getCell(){
+	public Cell getCell() {
 		return mCell;
 	}
 }

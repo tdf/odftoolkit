@@ -99,11 +99,11 @@ public class TextSelectionTest {
 		TextSelection nextSelect = null;
 		TextNavigation nextsearch = new TextNavigation("next", doc);
 		if (nextsearch.hasNext()) {
-			nextSelect = (TextSelection) nextsearch.getCurrentItem();
+			nextSelect = (TextSelection) nextsearch.nextSelection();
 		}
 		int i = 0;
 		while (search.hasNext()) {
-			TextSelection item = (TextSelection) search.getCurrentItem();
+			TextSelection item = (TextSelection) search.nextSelection();
 			i++;
 			try {
 				item.cut();
@@ -144,12 +144,12 @@ public class TextSelectionTest {
 
 		TextNavigation search1 = new TextNavigation("change", doc);
 		if (search1.hasNext()) {
-			sel = (TextSelection) search1.getCurrentItem();
+			sel = (TextSelection) search1.nextSelection();
 		}
 
 		int i = 0;
 		while (search.hasNext()) {
-			TextSelection item = (TextSelection) search.getCurrentItem();
+			TextSelection item = (TextSelection) search.nextSelection();
 			i++;
 			try {
 				sel.pasteAtFrontOf(item);
@@ -161,6 +161,7 @@ public class TextSelectionTest {
 		int j = 0;
 		search = new TextNavigation("changedelete", doc);
 		while (search.hasNext()) {
+			search.nextSelection();
 			j++;
 		}
 		Assert.assertTrue(i == j);
@@ -186,12 +187,12 @@ public class TextSelectionTest {
 
 		TextNavigation search1 = new TextNavigation("change", doc);
 		if (search1.hasNext()) {
-			sel = (TextSelection) search1.getCurrentItem();
+			sel = (TextSelection) search1.nextSelection();
 		}
 
 		int i = 0;
 		while (search.hasNext()) {
-			TextSelection item = (TextSelection) search.getCurrentItem();
+			TextSelection item = (TextSelection) search.nextSelection();
 			i++;
 			try {
 				sel.pasteAtEndOf(item);
@@ -202,6 +203,7 @@ public class TextSelectionTest {
 		int j = 0;
 		search = new TextNavigation("deletechange", doc);
 		while (search.hasNext()) {
+			search.nextSelection();
 			j++;
 		}
 		Assert.assertTrue(i == j);
@@ -234,7 +236,7 @@ public class TextSelectionTest {
 		Assert.assertNotNull(style);
 
 		while (search.hasNext()) {
-			TextSelection item = (TextSelection) search.getCurrentItem();
+			TextSelection item = (TextSelection) search.nextSelection();
 			try {
 				item.applyStyle(style);
 			} catch (InvalidNavigationException e) {
@@ -262,7 +264,7 @@ public class TextSelectionTest {
 		TextSelection nextSelect = null;
 		TextNavigation nextsearch = new TextNavigation("next", doc);
 		if (nextsearch.hasNext()) {
-			nextSelect = (TextSelection) nextsearch.getCurrentItem();
+			nextSelect = (TextSelection) nextsearch.nextSelection();
 		}
 
 		//replace all the "SIMPLE" to "Odf Toolkit"
@@ -273,7 +275,7 @@ public class TextSelectionTest {
 		int i = 0;
 		while (search.hasNext()) {
 			if (i > 0) {
-				TextSelection item = (TextSelection) search.getCurrentItem();
+				TextSelection item = (TextSelection) search.nextSelection();
 				try {
 					item.replaceWith("Odf Toolkit");
 					item.applyStyle(style);
@@ -287,6 +289,7 @@ public class TextSelectionTest {
 		search = new TextNavigation("Odf Toolkit", doc);
 		int j = 0;
 		while (search.hasNext()) {
+			search.nextSelection();
 			j++;
 		}
 		Assert.assertTrue(i == j);
@@ -314,7 +317,7 @@ public class TextSelectionTest {
 		search = null;
 		search = new TextNavigation("^delete", doc);
 		while (search.hasNext()) {
-			TextSelection item = (TextSelection) search.getCurrentItem();
+			TextSelection item = (TextSelection) search.nextSelection();
 			// LOG.info(item);
 			try {
 				item.addHref(new URL("http://www.ibm.com"));
@@ -345,7 +348,7 @@ public class TextSelectionTest {
 		search = new TextNavigation("<%([^>]*)%>", doc);
 
 		while (search.hasNext()) {
-			TextSelection item = (TextSelection) search.getCurrentItem();
+			TextSelection item = (TextSelection) search.nextSelection();
 			try {
 				String text = item.getText();
 				text = text.substring(2, text.length() - 2);
@@ -371,7 +374,7 @@ public class TextSelectionTest {
 	public void testTextSelectionContainerElement() {
 		search = new TextNavigation("TextSelectionContainer", doc);
 		if (search.hasNext()) {
-			TextSelection item = (TextSelection) search.getCurrentItem();
+			TextSelection item = (TextSelection) search.nextSelection();
 			OdfElement container = item.getContainerElement();
 			Node childNode = container.getFirstChild();
 			while (childNode != null) {
@@ -385,7 +388,7 @@ public class TextSelectionTest {
 		//test selected table cell content in draw:frame.
 		search = new TextNavigation("Task", doc);
 		if (search.hasNext()) {
-			TextSelection item = (TextSelection) search.getCurrentItem();
+			TextSelection item = (TextSelection) search.nextSelection();
 			OdfElement container = item.getContainerElement();
 			Node childNode = container.getFirstChild();
 			while (childNode != null) {

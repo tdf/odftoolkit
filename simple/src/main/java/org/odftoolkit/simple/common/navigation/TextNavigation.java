@@ -38,55 +38,78 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * A derived Navigation class used for navigate the text content
- * it is used to search the document and find the matched text 
- * and would return TextSelection instance.
+ * A derived <code>Navigation</code> class used to navigate the text content,
+ * which can search the document and find the matched text and return
+ * <code>TextSelection</code> instance.
  */
 public class TextNavigation extends Navigation {
 
 	private String mMatchedElementName = "text:p,text:h";
 	private Pattern mPattern;
 	private Document mDocument;
-	private TextSelection mCurrentSelectedItem;
-	private String mCurrentText;
-	private int mCurrentIndex;
+	private TextSelection mNextSelectedItem;
+	private TextSelection mTempSelectedItem;
+	private String mNextText;
+	private int mNextIndex;
 	private boolean mbFinishFindInHeaderFooter;
 
 	/**
-	 * Construct TextNavigation with matched condition and navigation scope
-	 * @param pattern	the matched pattern String
-	 * @param doc	the navigation scope
+	 * Construct <code>TextNavigation</code> with matched condition and
+	 * navigation scope.
+	 * 
+	 * @param pattern
+	 *            the matched pattern String
+	 * @param doc
+	 *            the navigation scope
 	 */
 	public TextNavigation(String pattern, Document doc) {
 		mPattern = Pattern.compile(pattern);
 		mDocument = doc;
-		mCurrentSelectedItem = null;
+		mNextSelectedItem = null;
+		mTempSelectedItem = null;
 		mbFinishFindInHeaderFooter = false;
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.common.navigation.Navigation#getCurrentItem()
-	 */
-	@Override
-	public Selection getCurrentItem() {
-		Selection.SelectionManager.registerItem(mCurrentSelectedItem);
-		return mCurrentSelectedItem;
-	}
 
-	/* (non-Javadoc)
+	/**
+	 * Check if has next <code>TextSelection</code> with satisfied content pattern.
+	 * 
 	 * @see org.odftoolkit.simple.common.navigation.Navigation#hasNext()
 	 */
 	@Override
 	public boolean hasNext() {
-		mCurrentSelectedItem = findnext(mCurrentSelectedItem);
-		return (mCurrentSelectedItem != null);
+		mTempSelectedItem = findNext(mNextSelectedItem);
+		return (mTempSelectedItem != null);
 	}
-
+	
 	/**
-	 * Check if the text content of element match the specified pattern string
-	 * @param element	navigate this element
-	 * @return true if the text content of this element match this pattern; 
-	 * 		   false if not match
+	 * Get next <code>TextSelection</code>.
+	 * 
+	 * @see org.odftoolkit.simple.common.navigation.Navigation#nextSelection()
+	 */
+	@Override
+	public Selection nextSelection() {
+		if(mTempSelectedItem !=null){
+			mNextSelectedItem = mTempSelectedItem;
+			mTempSelectedItem = null;
+		}else{
+			mNextSelectedItem = findNext(mNextSelectedItem);
+		}
+		if (mNextSelectedItem == null) {
+			return null;
+		} else {
+			Selection.SelectionManager.registerItem(mNextSelectedItem);
+			return mNextSelectedItem;
+		}
+	}
+	
+	/**
+	 * Check if the text content of element match the specified matched
+	 * condition, which is stated when the <code>TextNavigation</code> created.
+	 * 
+	 * @param element
+	 *            navigate this element
+	 * @return true if the text content of this element match this pattern;
+	 *         false if not match
 	 */
 	@Override
 	public boolean match(Node element) {
@@ -115,9 +138,9 @@ public class TextNavigation extends Navigation {
 				}
 				if (mMatchedElementName.indexOf(element.getNodeName()) != -1) {
 					// here just consider \n\r\t occupy one char
-					mCurrentIndex = matcher.start();
+					mNextIndex = matcher.start();
 					int eIndex = matcher.end();
-					mCurrentText = content.substring(mCurrentIndex, eIndex);
+					mNextText = content.substring(mNextIndex, eIndex);
 					return true;
 				}
 			}
@@ -125,7 +148,9 @@ public class TextNavigation extends Navigation {
 		return false;
 	}
 
-	//the matched text might exist in header/footer
+	/*
+	 * Return the matched text might exist in header/footer.
+	 */
 	private TextSelection findInHeaderFooter(TextSelection selected) {
 		OdfFileDom styledom = null;
 		OdfOfficeMasterStyles masterpage = null;
@@ -139,12 +164,12 @@ public class TextNavigation extends Navigation {
 
 			int nextIndex = -1;
 			Matcher matcher = mPattern.matcher(content);
-			//start from the end index of the selected item
+			// start from the end index of the selected item
 			if (matcher.find(index + selected.getText().length())) {
 				// here just consider \n\r\t occupy one char
 				nextIndex = matcher.start();
 				int eIndex = matcher.end();
-				mCurrentText = content.substring(nextIndex, eIndex);
+				mNextText = content.substring(nextIndex, eIndex);
 			}
 			if (nextIndex != -1) {
 				return createSelection(selected.getContainerElement(), nextIndex);
@@ -169,7 +194,7 @@ public class TextNavigation extends Navigation {
 			}
 
 			if (element != null) {
-				return createSelection(element, mCurrentIndex);
+				return createSelection(element, mNextIndex);
 			} else {
 				return null;
 			}
@@ -180,8 +205,10 @@ public class TextNavigation extends Navigation {
 		return null;
 	}
 
-	//found the next selection start from the 'selected' TextSelection
-	private TextSelection findnext(TextSelection selected) {
+	/*
+	 * Found the next <code>Selection</code> start from the <code>selected</code>.
+	 */
+	private TextSelection findNext(TextSelection selected) {
 		if (!mbFinishFindInHeaderFooter) {
 			TextSelection styleselected = findInHeaderFooter(selected);
 			if (styleselected != null) {
@@ -200,7 +227,7 @@ public class TextNavigation extends Navigation {
 
 			}
 			if (element != null) {
-				return createSelection(element, mCurrentIndex);
+				return createSelection(element, mNextIndex);
 			} else {
 				return null;
 			}
@@ -213,27 +240,29 @@ public class TextNavigation extends Navigation {
 
 		int nextIndex = -1;
 		Matcher matcher = mPattern.matcher(content);
-		//start from the end index of the selected item
+		// start from the end index of the selected item
 		if (matcher.find(index + selected.getText().length())) {
 			// here just consider \n\r\t occupy one char
 			nextIndex = matcher.start();
 			int eIndex = matcher.end();
-			mCurrentText = content.substring(nextIndex, eIndex);
+			mNextText = content.substring(nextIndex, eIndex);
 		}
 		if (nextIndex != -1) {
 			return createSelection(selected.getContainerElement(), nextIndex);
 		} else {
 			OdfElement element = (OdfElement) getNextMatchElement((Node) containerElement);
 			if (element != null) {
-				return createSelection(element, mCurrentIndex);
+				return createSelection(element, mNextIndex);
 			} else {
 				return null;
 			}
 		}
 	}
-	
-	// in order to keep the consist between value and display text, spreadsheet and chart document
-	// should use CellSelection.
+
+	/*
+	 * In order to keep the consist between value and display text, spreadsheet
+	 * and chart document should use <code>CellSelection</code>.
+	 */
 	private TextSelection createSelection(OdfElement containerElement, int nextIndex) {
 		TextSelection item = null;
 		Node parent = containerElement.getParentNode();
@@ -241,20 +270,20 @@ public class TextNavigation extends Navigation {
 			if (TableTableCellElementBase.class.isInstance(parent)) {
 				TableTableCellElementBase cellElement = (TableTableCellElementBase) parent;
 				Cell cell = Cell.getInstance(cellElement);
-				item = new CellSelection(mCurrentText, containerElement, nextIndex, cell);
+				item = new CellSelection(mNextText, containerElement, nextIndex, cell);
 				break;
 			} else {
-				OdfName odfName=((OdfElement)parent).getOdfName();
-				String ns=odfName.getPrefix();
-				if("text".equals(ns)){
+				OdfName odfName = ((OdfElement) parent).getOdfName();
+				String ns = odfName.getPrefix();
+				if ("text".equals(ns)) {
 					parent = parent.getParentNode();
-				}else{
+				} else {
 					break;
 				}
 			}
 		}
 		if (item == null) {
-			item = new TextSelection(mCurrentText, containerElement, nextIndex);
+			item = new TextSelection(mNextText, containerElement, nextIndex);
 		}
 		return item;
 	}

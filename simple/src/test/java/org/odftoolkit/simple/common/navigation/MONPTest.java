@@ -54,7 +54,7 @@ public class MONPTest {
 
 			int i = 0;
 			while (search.hasNext()) {
-				TextSelection item = (TextSelection) search.getCurrentItem();
+				TextSelection item = (TextSelection) search.nextSelection();
 				try {
 					item.replaceWith("success");
 					i++;

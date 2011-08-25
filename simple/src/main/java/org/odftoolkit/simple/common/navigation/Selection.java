@@ -27,9 +27,9 @@ import java.util.Vector;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /**
- * Abstract class Selection describes one of the matched results.
- * The selection can be recognized by the container element, the start
- * index of the text content of this element and the text content.
+ * <code>Selection</code> describes one of the matched results, which is
+ * recognized by the container element, the start index of the text content in
+ * this element and the text content.
  */
 public abstract class Selection {
 
@@ -37,76 +37,95 @@ public abstract class Selection {
 	private int mIndex;
 
 	/**
-	 * get the container mElement of this selection
-	 * @return the container mElement
+	 * Get the container element of this <code>Selection</code>.
+	 * 
+	 * @return the container element
 	 */
 	public OdfElement getElement() {
 		return mElement;
 	}
 
 	/**
-	 * get the start index of the text content of the container mElement
-	 * this is only meaningful for TextSelection. other type of Selection 
-	 * will return 0.
-	 * @return the start mIndex of the container mElement
+	 * Get the start index of the text content in the container element. This is
+	 * only meaningful for {@link TextSelection TextSelection} and its sub
+	 * classes, other type of <code>Selection</code> will return 0.
+	 * 
+	 * @return the start index of the container element
 	 */
 	public int getIndex() {
 		return mIndex;
 	}
 
 	/**
-	 * cut the current selection
-	 * @throws InvalidNavigationException 
+	 * Cut current <code>Selection</code>.
+	 * 
+	 * @throws InvalidNavigationException
 	 */
 	public abstract void cut() throws InvalidNavigationException;
 
 	/**
-	 * paste the current selection at front of the specified position selection
-	 * @param positionitem	the position selection
-	 * @throws InvalidNavigationException 
+	 * Paste current <code>Selection</code> at front of the specified position
+	 * <code>Selection</code>.
+	 * 
+	 * @param positionItem
+	 *            the position <code>Selection</code>
+	 * @throws InvalidNavigationException
 	 */
-	public abstract void pasteAtFrontOf(Selection positionitem) throws InvalidNavigationException;
+	public abstract void pasteAtFrontOf(Selection positionItem) throws InvalidNavigationException;
 
 	/**
-	 * paste the current selection at end of the specified position selection
-	 * @param positionitem	the position selection
-	 * @throws InvalidNavigationException 
-	 * @throws org.odftoolkit.simple.common.navigation.InvalidNavigationException 
+	 * Paste current <code>Selection</code> at end of the specified position
+	 * <code>Selection</code>.
+	 * 
+	 * @param positionItem
+	 *            the position <code>Selection</code>
+	 * @throws InvalidNavigationException
 	 */
-	public abstract void pasteAtEndOf(Selection positionitem) throws InvalidNavigationException, org.odftoolkit.simple.common.navigation.InvalidNavigationException;
+	public abstract void pasteAtEndOf(Selection positionItem) throws InvalidNavigationException;
 
 	/**
-	 * when a selected item has been delete, the selections after this deleted selection should be refresh
-	 * because these selections mIndex will be changed
-	 * @param deleteditem	the deleted selection
+	 * When a selected item has been deleted, the <code>Selection</code>s after
+	 * this deleted <code>Selection</code> should be refreshed, as these
+	 * <code>Selection</code>s index have been changed.
+	 * 
+	 * @param deletedItem
+	 *            the deleted <code>Selection</code>
 	 */
-	protected abstract void refreshAfterFrontalDelete(Selection deleteditem);
+	protected abstract void refreshAfterFrontalDelete(Selection deletedItem);
 
 	/**
-	 * when a selected item has been inserted, the selection after the inserted item should be refresh
-	 * because these selections mIndex will be changed
-	 * @param inserteditem	the inserted selection
+	 * When a selected item has been inserted, the <code>Selection</code> after
+	 * the inserted item should be refresh, as these <code>Selection</code>s
+	 * index have been changed.
+	 * 
+	 * @param insertedItem
+	 *            the inserted <code>Selection</code>
 	 */
-	protected abstract void refreshAfterFrontalInsert(Selection inserteditem);
+	protected abstract void refreshAfterFrontalInsert(Selection insertedItem);
 
 	/**
-	 * A quick method to update the mIndex of this selection
-	 * @param offset	the offset that the mIndex should be added
+	 * A quick method to update the index of this <code>Selection</code>.
+	 * 
+	 * @param offset
+	 *            the offset that the index should be added.
 	 */
 	protected abstract void refresh(int offset);
 
 	/**
-	 * SelectionManager can manage all the selections that are returned to end users.
-	 * This SelectionManager contains a repository of all selections, and will refresh the status/index
-	 * of selections after certain operation.
+	 * SelectionManager can manage all the <code>Selection</code>s that are
+	 * returned to end users. This SelectionManager contains a repository of all
+	 * <code>Selection</code>s, and will refresh the status/index of
+	 * <code>Selection</code>s after certain operation.
 	 */
 	static class SelectionManager {
 
 		private static Hashtable<OdfElement, Vector<Selection>> repository = new Hashtable<OdfElement, Vector<Selection>>();
 
 		/**
-		 * Register the selection item
-		 * @param item	the selection item
+		 * Register the <code>Selection</code> item.
+		 * 
+		 * @param item
+		 *            the <code>Selection</code> item
 		 */
 		public static void registerItem(Selection item) {
 			OdfElement element = item.getElement();
@@ -131,11 +150,14 @@ public abstract class Selection {
 		}
 
 		/**
-		 * Refresh the selections in repository after a item is cut.
-		 * @param cutItem	the cut item
+		 * Refresh the <code>Selection</code>s in repository after a item is
+		 * cut.
+		 * 
+		 * @param cutItem
+		 *            the cut item
 		 */
 		public synchronized static void refreshAfterCut(Selection cutItem) {
-			//travase the whole sub tree
+			// travase the whole sub tree
 			OdfElement element = cutItem.getElement();
 			if (repository.containsKey(element)) {
 				Vector<Selection> selections = repository.get(element);
@@ -148,12 +170,16 @@ public abstract class Selection {
 		}
 
 		/**
-		 * Refresh the selections in repository after a pastedAtFrontOf operation is called.
-		 * @param item	the pasted item
-		 * @param positionItem	the position item
+		 * Refresh the selections in repository after pastedAtFrontOf operation
+		 * is called.
+		 * 
+		 * @param item
+		 *            the pasted item
+		 * @param positionItem
+		 *            the position item
 		 */
 		public synchronized static void refreshAfterPasteAtFrontOf(Selection item, Selection positionItem) {
-			//travase the whole sub tree
+			// travase the whole sub tree
 			OdfElement element = positionItem.getElement();
 			if (repository.containsKey(element)) {
 				Vector<Selection> selections = repository.get(element);
@@ -166,20 +192,22 @@ public abstract class Selection {
 		}
 
 		/**
-		 * Refresh the selections in repository after a pastedAtEndOf operation is called.
-		 * @param item	the pasted item
-		 * @param positionItem	the position item
+		 * Refresh the <code>Selection</code>s in repository after pastedAtEndOf
+		 * operation is called.
+		 * 
+		 * @param item
+		 *            the pasted item
+		 * @param positionItem
+		 *            the position item
 		 */
 		public synchronized static void refreshAfterPasteAtEndOf(Selection item, Selection positionItem) {
 			OdfElement element = positionItem.getElement();
 			int positionIndex;
-
 			if (positionItem instanceof TextSelection) {
 				positionIndex = positionItem.getIndex() + ((TextSelection) positionItem).getText().length();
 			} else {
 				positionIndex = positionItem.getIndex();
 			}
-
 			if (repository.containsKey(element)) {
 				Vector<Selection> selections = repository.get(element);
 				for (int i = 0; i < selections.size(); i++) {
@@ -191,8 +219,10 @@ public abstract class Selection {
 		}
 
 		/**
-		 * Remove the selection from repository.
-		 * @param item	selection item
+		 * Remove the <code>Selection</code> from repository.
+		 * 
+		 * @param item
+		 *            <code>Selection</code> item
 		 */
 		public static void unregisterItem(Selection item) {
 			OdfElement element = item.getElement();
@@ -203,10 +233,15 @@ public abstract class Selection {
 		}
 
 		/**
-		 * A direct method to update all the selections contained in a mElement after a certain position.
-		 * @param containerElement	the container mElement
-		 * @param offset	the offset
-		 * @param positionIndex	the mIndex of a certain position
+		 * A direct method to update all the <code>Selection</code>s contained
+		 * in a element after a certain position.
+		 * 
+		 * @param containerElement
+		 *            the container element
+		 * @param offset
+		 *            the offset
+		 * @param positionIndex
+		 *            the index of a certain position
 		 */
 		public synchronized static void refresh(OdfElement containerElement, int offset, int positionIndex) {
 			if (repository.containsKey(containerElement)) {

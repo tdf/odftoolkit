@@ -44,14 +44,15 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * A derived Navigation class used for navigate the mText content
- * it is used to search the document and find the matched style properties
- * and would return TextSelection instance
+ * A derived <code>Navigation</code> class used to navigate the text content,
+ * which can search the document and find matched style properties and return
+ * <code>TextSelection</code> instance(s).
  */
 public class TextStyleNavigation extends Navigation {
 
 	private TextDocument mTextDocument;
-	private TextSelection mCurrentSelectedItem;
+	private TextSelection mNextSelectedItem;
+	private TextSelection mTempSelectedItem;
 	private int mCurrentIndex;
 	private Map<OdfStyleProperty, String> mProps;
 	private String mText;
@@ -60,23 +61,87 @@ public class TextStyleNavigation extends Navigation {
 	private Node mNode;
 
 	/**
-	 * Construct TextStyleNavigation with style properties condition and navigation scope
-	 * @param props	the matched style properties conditions
-	 * @param doc	the navigation search scope
+	 * Construct <code>TextStyleNavigation</code> with style properties condition and
+	 * navigation scope.
+	 * 
+	 * @param props
+	 *            the matched style properties conditions
+	 * @param doc
+	 *            the navigation search scope
 	 */
 	public TextStyleNavigation(Map<OdfStyleProperty, String> props, TextDocument doc) {
 		mTextDocument = doc;
-		mCurrentSelectedItem = null;
+		mNextSelectedItem = null;
+		mTempSelectedItem = null;
 		this.mProps = props;
 	}
 
-	/*
-	 * Find next TextSelection which match specified style
+	/**
+	 * Check if has next <code>TextSelection</code> with satisfied style.
+	 * 
+	 * @see org.odftoolkit.simple.common.navigation.Navigation#hasNext()
 	 */
-	private TextSelection findnext(TextSelection selected) {
+	@Override
+	public boolean hasNext() {
+		mTempSelectedItem = findNext(mNextSelectedItem);
+		return (mTempSelectedItem != null);
+	}
+	
+	/**
+	 * Get next <code>TextSelection</code>.
+	 * 
+	 * @see org.odftoolkit.simple.common.navigation.Navigation#nextSelection()
+	 */
+	@Override
+	public Selection nextSelection() {
+		if(mTempSelectedItem !=null){
+			mNextSelectedItem = mTempSelectedItem;
+			mTempSelectedItem = null;
+		}else{
+			mNextSelectedItem = findNext(mNextSelectedItem);
+		}
+		if (mNextSelectedItem == null) {
+			return null;
+		} else {
+			Selection.SelectionManager.registerItem(mNextSelectedItem);
+			return mNextSelectedItem;
+		}
+	}
+
+	/**
+	 * Check if the element has specified style properties, which are stated
+	 * when the <code>TextStyleNavigation</code> created.
+	 * 
+	 * @param element
+	 *            navigate this element
+	 * @return true if this element has the specified style properties false if
+	 *         not match
+	 */
+	@Override
+	public boolean match(Node element) {
+		boolean match = false;
+		if (element.getNodeType() == Node.TEXT_NODE && !element.getNodeValue().trim().equals("")) {
+			if (element.getParentNode() instanceof OdfStylableElement) {
+				OdfStylableElement parStyleElement = (OdfStylableElement) element.getParentNode();
+				String parStyleName = getStyleName(parStyleElement);
+				if (getMatchStyleNames().contains(parStyleName)) {
+					match = true;
+					mText = element.getNodeValue();
+					NodeList nodes = getPHElement(element.getParentNode()).getChildNodes();
+					mIndex = 0;
+					getIndex(nodes, element);
+				}
+			}
+		}
+		return match;
+	}
+
+	/*
+	 * Find next <code>TextSelection</code> which match specified style.
+	 */
+	private TextSelection findNext(TextSelection selected) {
 		OdfElement element = null;
 		if (selected == null) {
-
 			try {
 				mNode = getNextMatchElement((Node) mTextDocument.getContentRoot());
 			} catch (Exception ex) {
@@ -98,8 +163,7 @@ public class TextStyleNavigation extends Navigation {
 	}
 
 	private Node getPHElement(Node node) {
-
-		//get paragraph or heading element
+		// get paragraph or heading element
 		if (node instanceof OdfTextParagraph) {
 			mPhNode = node;
 		} else if (node instanceof OdfTextHeading) {
@@ -108,53 +172,6 @@ public class TextStyleNavigation extends Navigation {
 			getPHElement(node.getParentNode());
 		}
 		return mPhNode;
-	}
-
-	/* (non-Javadoc)
-	 * get current TextSelection
-	 * @see org.odftoolkit.simple.common.navigation.Navigation#getCurrentItem()
-	 */
-	@Override
-	public Selection getCurrentItem() {
-		Selection.SelectionManager.registerItem(mCurrentSelectedItem);
-		return mCurrentSelectedItem;
-	}
-
-	/* (non-Javadoc)
-	 * check if has next TextSelection with satisfied style
-	 * @see org.odftoolkit.simple.common.navigation.Navigation#hasNext()
-	 */
-	@Override
-	public boolean hasNext() {
-		mCurrentSelectedItem = findnext(mCurrentSelectedItem);
-		return (mCurrentSelectedItem != null);
-	}
-
-	/**
-	 * check if the element has the specified style properties
-	 * @param element	navigate this element
-	 * @return true if this element has the specified style properties
-	 * 		   false if not match
-	 */
-	@Override
-	public boolean match(Node element) {
-		boolean match = false;
-		if (element.getNodeType() == Node.TEXT_NODE && !element.getNodeValue().trim().equals("")) {
-			if (element.getParentNode() instanceof OdfStylableElement) {
-				OdfStylableElement parStyleElement = (OdfStylableElement) element.getParentNode();
-
-				String parStyleName = getStyleName(parStyleElement);
-
-				if (getMatchStyleNames().contains(parStyleName)) {
-					match = true;
-					mText = element.getNodeValue();
-					NodeList nodes = getPHElement(element.getParentNode()).getChildNodes();
-					mIndex = 0;
-					getIndex(nodes, element);
-				}
-			}
-		}
-		return match;
 	}
 
 	private void getIndex(NodeList nodes, Node element) {
@@ -167,14 +184,15 @@ public class TextStyleNavigation extends Navigation {
 				if (node.getNodeType() == Node.TEXT_NODE) {
 					mIndex = mIndex + node.getNodeValue().length();
 				} else if (node.getNodeType() == Node.ELEMENT_NODE) {
-					if (node.getLocalName().equals("s")) // mText:s
-					{
+					// mText:s
+					if (node.getLocalName().equals("s")) {
 						try {
-							mIndex = mIndex + Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c"));
+							mIndex = mIndex
+									+ Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT
+											.getUri(), "c"));
 						} catch (Exception e) {
 							mIndex++;
 						}
-
 					} else if (node.getLocalName().equals("line-break")) {
 						mIndex++;
 					} else if (node.getLocalName().equals("tab")) {
@@ -204,19 +222,18 @@ public class TextStyleNavigation extends Navigation {
 		String sname;
 		HashMap<String, OdfDefaultStyle> defaultStyles = new HashMap<String, OdfDefaultStyle>();
 		try {
-
 			NodeList defStyleList = mTextDocument.getDocumentStyles().getElementsByTagName("style:default-style");
 			for (int i = 0; i < defStyleList.getLength(); i++) {
 				OdfDefaultStyle defStyle = (OdfDefaultStyle) defStyleList.item(i);
 				defaultStyles.put(defStyle.getFamilyName(), defStyle);
 			}
-
 			NodeList styleList = mTextDocument.getDocumentStyles().getElementsByTagName("style:style");
 			for (int i = 0; i < styleList.getLength(); i++) {
 				OdfStyle sStyle = (OdfStyle) styleList.item(i);
-				//get default properties and style properties
+				// get default properties and style properties
 				Map<OdfStyleProperty, String> map = sStyle.getStylePropertiesDeep();
-				//check if properties include all search properties and value equal
+				// check if properties include all search properties and value
+				// equal
 				Iterator<OdfStyleProperty> pIter = mProps.keySet().iterator();
 				boolean isStyle = false;
 				while (pIter.hasNext()) {
@@ -232,18 +249,18 @@ public class TextStyleNavigation extends Navigation {
 						break;
 					}
 				}
-				//put all match style names
+				// put all match style names
 				if (isStyle) {
 					sname = sStyle.getStyleNameAttribute();
-					//if(sname.contains("default"))sname="defaultstyle";
+					// if(sname.contains("default"))sname="defaultstyle";
 					styleNames.add(sname);
 				}
 			}
-			//get all automatic styles
+			// get all automatic styles
 			Iterator<OdfStyle> cStyles = mTextDocument.getContentDom().getAutomaticStyles().getAllStyles().iterator();
 			while (cStyles.hasNext()) {
 				OdfStyle cStyle = cStyles.next();
-				//get default properties and style properties
+				// get default properties and style properties
 				Map<OdfStyleProperty, String> map = cStyle.getStylePropertiesDeep();
 
 				if (cStyle.getParentStyle() == null) {
@@ -255,8 +272,7 @@ public class TextStyleNavigation extends Navigation {
 						}
 					}
 				}
-
-				//check if the search properties is in properties
+				// check if the search properties is in properties
 				Iterator<OdfStyleProperty> pIter = mProps.keySet().iterator();
 				boolean isStyle = false;
 				while (pIter.hasNext()) {
@@ -272,21 +288,18 @@ public class TextStyleNavigation extends Navigation {
 						break;
 					}
 				}
-				//put all match style names
+				// put all match style names
 				if (isStyle) {
 					styleNames.add(cStyle.getStyleNameAttribute());
 				}
 			}
-
 		} catch (Exception e1) {
 			Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, e1.getMessage(), e1);
 		}
 		return styleNames;
 	}
 
-	private void getTextDefaultProperties(
-			String familyName,
-			HashMap<String, OdfDefaultStyle> defaultStyles,
+	private void getTextDefaultProperties(String familyName, HashMap<String, OdfDefaultStyle> defaultStyles,
 			Map<OdfStyleProperty, String> map) {
 		OdfDefaultStyle defStyle = defaultStyles.get(familyName);
 		if (defStyle != null) {
@@ -299,6 +312,5 @@ public class TextStyleNavigation extends Navigation {
 				}
 			}
 		}
-
 	}
 }

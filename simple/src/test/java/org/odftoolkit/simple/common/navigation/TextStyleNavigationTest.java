@@ -103,14 +103,14 @@ public class TextStyleNavigationTest {
 
 		TextSelection itemstyle = null;
 		if (search1.hasNext()) {
-			itemstyle = (TextSelection) search1.getCurrentItem();
+			itemstyle = (TextSelection) search1.nextSelection();
 			LOG.info(itemstyle.toString());
 		}
 		int i = 0;
 		if (itemstyle != null) {
 			while (search2.hasNext()) {
 				i++;
-				TextSelection itemtext = (TextSelection) search2.getCurrentItem();
+				TextSelection itemtext = (TextSelection) search2.nextSelection();
 				try {
 					itemstyle.pasteAtFrontOf(itemtext);
 				} catch (InvalidNavigationException e) {
@@ -124,6 +124,7 @@ public class TextStyleNavigationTest {
 		int j = 0;
 		while (search3.hasNext()) {
 			j++;
+			search3.nextSelection();
 		}
 		Assert.assertTrue(i == j);
 
@@ -150,14 +151,14 @@ public class TextStyleNavigationTest {
 		search3 = new TextNavigation("deleteRoman16 Romanl16", doc);
 		TextSelection itemstyle = null;
 		if (search1.hasNext()) {
-			itemstyle = (TextSelection) search1.getCurrentItem();
+			itemstyle = (TextSelection) search1.nextSelection();
 			LOG.info(itemstyle.toString());
 		}
 		int i = 0;
 		if (itemstyle != null) {
 			while (search2.hasNext()) {
 				i++;
-				TextSelection itemtext = (TextSelection) search2.getCurrentItem();
+				TextSelection itemtext = (TextSelection) search2.nextSelection();
 				try {
 					itemstyle.pasteAtEndOf(itemtext);
 				} catch (InvalidNavigationException e) {
@@ -170,6 +171,7 @@ public class TextStyleNavigationTest {
 		int j = 0;
 		while (search3.hasNext()) {
 			j++;
+			search3.nextSelection();
 		}
 
 		Assert.assertTrue(i == j);
@@ -196,7 +198,7 @@ public class TextStyleNavigationTest {
 		search2 = new TextNavigation("Century22", doc);
 
 		while (search1.hasNext()) {
-			TextSelection item = (TextSelection) search1.getCurrentItem();
+			TextSelection item = (TextSelection) search1.nextSelection();
 			try {
 				item.cut();
 			} catch (InvalidNavigationException e) {
@@ -239,7 +241,7 @@ public class TextStyleNavigationTest {
 		int i = 0;
 		while (search1.hasNext()) {
 			i++;
-			TextSelection item = (TextSelection) search1.getCurrentItem();
+			TextSelection item = (TextSelection) search1.nextSelection();
 			// LOG.info(item);
 			try {
 				item.applyStyle(style);
@@ -255,6 +257,7 @@ public class TextStyleNavigationTest {
 		int j = 0;
 		while (search4.hasNext()) {
 			j++;
+			search4.nextSelection();
 		}
 		Assert.assertTrue(i == j);
 

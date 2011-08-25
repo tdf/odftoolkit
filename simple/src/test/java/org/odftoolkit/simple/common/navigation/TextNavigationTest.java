@@ -81,7 +81,7 @@ public class TextNavigationTest {
 
 
 		while (search.hasNext()) {
-			TextSelection item = (TextSelection) search.getCurrentItem();
+			TextSelection item = (TextSelection) search.nextSelection();
 			LOG.info(item.toString());
 		}
 

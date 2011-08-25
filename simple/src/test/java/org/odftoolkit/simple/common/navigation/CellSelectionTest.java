@@ -75,7 +75,7 @@ public class CellSelectionTest {
 			String value = valueProperties.get(key);
 			TextNavigation navigate = new TextNavigation(key, doc);
 			while (navigate.hasNext()) {
-				CellSelection selection = (CellSelection) navigate.getCurrentItem();
+				CellSelection selection = (CellSelection) navigate.nextSelection();
 				try {
 					selection.advancedReplaceWith(value);
 					String valueType = selection.getCell().getValueType();
