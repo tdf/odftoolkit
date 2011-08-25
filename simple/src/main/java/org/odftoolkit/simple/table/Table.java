@@ -1282,7 +1282,7 @@ public class Table {
 				i = i + cell.getColumnsRepeatedNumber();
 				continue;
 			}
-			OdfStyle styleEle = cell.getCellStyleElementForWrite();
+			OdfStyle styleEle = cell.getStyleHandler().getCellStyleElementForWrite();
 			if (i < length - 1) {
 				setLeftBottomBorderStylesProperties(styleEle);
 			} else {
@@ -1304,7 +1304,7 @@ public class Table {
 				i = i + cell.getColumnsRepeatedNumber();
 				continue;
 			}
-			OdfStyle styleEle = cell.getCellStyleElementForWrite();
+			OdfStyle styleEle = cell.getStyleHandler().getCellStyleElementForWrite();
 			if (i < length - 1) {
 				setLeftTopBorderStyleProperties(styleEle);
 			} else {

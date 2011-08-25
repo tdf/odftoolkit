@@ -46,10 +46,12 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.TextDocument;
-import org.odftoolkit.simple.table.Cell;
-import org.odftoolkit.simple.table.Column;
-import org.odftoolkit.simple.table.Row;
-import org.odftoolkit.simple.table.Table;
+import org.odftoolkit.simple.style.Border;
+import org.odftoolkit.simple.style.Font;
+import org.odftoolkit.simple.style.StyleTypeDefinitions;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleCellBordersType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleHorizontalAlignmentType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.SimpleVerticalAlignmentType;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class TableCellTest {
@@ -113,24 +115,32 @@ public class TableCellTest {
 		Table table = odsdoc.getTableByName("Sheet1");
 		Cell fcell = table.getCellByPosition(columnindex, rowindex);
 
-		String align = fcell.getHorizontalAlignment();
-		Assert.assertEquals("center", align);
+		SimpleHorizontalAlignmentType align = fcell.getHorizontalAlignmentType();
+		Assert.assertEquals(SimpleHorizontalAlignmentType.CENTER, align);
 
-		fcell.setHorizontalAlignment(null);
-		String newAlign = fcell.getHorizontalAlignment();
-		Assert.assertEquals(null, newAlign);
+		fcell.setHorizontalAlignment(SimpleHorizontalAlignmentType.DEFAULT);
+		SimpleHorizontalAlignmentType newAlign = fcell.getHorizontalAlignmentType();
+		Assert.assertEquals(SimpleHorizontalAlignmentType.DEFAULT, newAlign);
 
-		fcell.setHorizontalAlignment("start");
-		align = fcell.getHorizontalAlignment();
-		Assert.assertEquals("start", align);
+		fcell.setHorizontalAlignment(SimpleHorizontalAlignmentType.LEFT);
+		align = fcell.getHorizontalAlignmentType();
+		Assert.assertEquals(SimpleHorizontalAlignmentType.LEFT, align);
 
 		// "left" and "right" should be mapped as "start" and "end".
-		fcell.setHorizontalAlignment("left");
-		align = fcell.getHorizontalAlignment();
-		Assert.assertEquals("start", align);
-		fcell.setHorizontalAlignment("right");
-		align = fcell.getHorizontalAlignment();
-		Assert.assertEquals("end", align);
+		fcell.setHorizontalAlignment(SimpleHorizontalAlignmentType.LEFT);
+		//get string
+		String aligns = fcell.getHorizontalAlignment();
+		Assert.assertEquals("start", aligns);
+		//get type
+		align = fcell.getHorizontalAlignmentType();
+		Assert.assertEquals(SimpleHorizontalAlignmentType.LEFT, align);
+		fcell.setHorizontalAlignment(SimpleHorizontalAlignmentType.RIGHT);
+		//get string
+		aligns = fcell.getHorizontalAlignment();
+		Assert.assertEquals("end", aligns);
+		//get type
+		align = fcell.getHorizontalAlignmentType();
+		Assert.assertEquals(SimpleHorizontalAlignmentType.RIGHT, align);
 		saveods();
 
 		SpreadsheetDocument ods;
@@ -138,8 +148,8 @@ public class TableCellTest {
 			ods = SpreadsheetDocument.newSpreadsheetDocument();
 			Table tbl = ods.getTableByName("Sheet1");
 			Cell cell = tbl.getCellByPosition(0, 0);
-			String horizonAlignment = cell.getHorizontalAlignment();
-			Assert.assertEquals(null, horizonAlignment);
+			SimpleHorizontalAlignmentType horizonAlignment = cell.getHorizontalAlignmentType();
+			Assert.assertEquals(SimpleHorizontalAlignmentType.DEFAULT, horizonAlignment);
 			
 			table = ods.getTableByName("Sheet2");
 			if (table != null) {
@@ -148,9 +158,9 @@ public class TableCellTest {
 			table = Table.newTable(ods);
 			table.setTableName("Sheet2");
 			cell = table.getCellByPosition(1, 1);
-			cell.setHorizontalAlignment("center");
-			horizonAlignment = cell.getHorizontalAlignment();
-			Assert.assertEquals("center", horizonAlignment);
+			cell.setHorizontalAlignment(SimpleHorizontalAlignmentType.CENTER);
+			horizonAlignment = cell.getHorizontalAlignmentType();
+			Assert.assertEquals(SimpleHorizontalAlignmentType.CENTER, horizonAlignment);
 		} catch (Exception e) {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
@@ -163,24 +173,24 @@ public class TableCellTest {
 		Table table = odsdoc.getTableByName("Sheet1");
 		Cell fcell = table.getCellByPosition(columnindex, rowindex);
 
-		String align = fcell.getVerticalAlignment();
-		Assert.assertEquals("top", align);
+		StyleTypeDefinitions.SimpleVerticalAlignmentType align = fcell.getVerticalAlignmentType();
+		Assert.assertEquals(StyleTypeDefinitions.SimpleVerticalAlignmentType.TOP, align);
 
-		fcell.setVerticalAlignment(null);
-		String newAlign = fcell.getVerticalAlignment();
-		Assert.assertEquals(null, newAlign);
+		fcell.setVerticalAlignment(SimpleVerticalAlignmentType.DEFAULT);
+		StyleTypeDefinitions.SimpleVerticalAlignmentType newAlign = fcell.getVerticalAlignmentType();
+		Assert.assertEquals(StyleTypeDefinitions.SimpleVerticalAlignmentType.DEFAULT, newAlign);
 
-		fcell.setVerticalAlignment("bottom");
-		align = fcell.getVerticalAlignment();
-		Assert.assertEquals("bottom", align);
+		fcell.setVerticalAlignment(StyleTypeDefinitions.SimpleVerticalAlignmentType.BOTTOM);
+		align = fcell.getVerticalAlignmentType();
+		Assert.assertEquals(StyleTypeDefinitions.SimpleVerticalAlignmentType.BOTTOM, align);
 		saveods();
 		SpreadsheetDocument ods;
 		try {
 			ods = SpreadsheetDocument.newSpreadsheetDocument();
 			Table tbl = ods.getTableByName("Sheet1");
 			Cell cell = tbl.getCellByPosition(0, 0);
-			String verticalAlignment = cell.getVerticalAlignment();
-			Assert.assertEquals(null, verticalAlignment);
+			StyleTypeDefinitions.SimpleVerticalAlignmentType verticalAlignment = cell.getVerticalAlignmentType();
+			Assert.assertEquals(StyleTypeDefinitions.SimpleVerticalAlignmentType.DEFAULT, verticalAlignment);
 			
 			table = ods.getTableByName("Sheet2");
 			if (table != null) {
@@ -189,9 +199,9 @@ public class TableCellTest {
 			table = Table.newTable(ods);
 			table.setTableName("Sheet2");
 			cell = table.getCellByPosition(1, 1);
-			cell.setVerticalAlignment("top");
-			verticalAlignment = cell.getVerticalAlignment();
-			Assert.assertEquals("top", verticalAlignment);
+			cell.setVerticalAlignment(StyleTypeDefinitions.SimpleVerticalAlignmentType.TOP);
+			verticalAlignment = cell.getVerticalAlignmentType();
+			Assert.assertEquals(StyleTypeDefinitions.SimpleVerticalAlignmentType.TOP, verticalAlignment);
 		} catch (Exception e) {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
@@ -418,14 +428,14 @@ public class TableCellTest {
 		int rowindex = 2, columnindex = 0;
 		Table table = odsdoc.getTableByName("Sheet1");
 		Cell fcell = table.getCellByPosition(columnindex, rowindex);
-		fcell.setCellBackgroundColor("#ffffff");
+		fcell.setCellBackgroundColor(new Color("#ffffff"));
 		saveods();
 		// reload
 		loadOutputSpreadsheet();
 		table = odsdoc.getTableByName("Sheet1");
 		fcell = table.getCellByPosition(columnindex, rowindex);
 		// set color as DEFAULT_BACKGROUND_COLOR #FFFFFF
-		Assert.assertEquals("#ffffff", fcell.getCellBackgroundColorString());
+		Assert.assertEquals("#ffffff", fcell.getCellBackgroundColor().toString());
 
 		Color expectedColor = Color.valueOf("#000000");
 		fcell.setCellBackgroundColor(expectedColor);
@@ -1079,6 +1089,64 @@ public class TableCellTest {
 			String bformat = bCell.getFormatString();
 			Assert.assertEquals("#0.00", bformat);
 			Assert.assertEquals("end", bCell.getHorizontalAlignment());
+		} catch (Exception e) {
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testSetGetFont() {
+		try {
+			SpreadsheetDocument document;
+			document = SpreadsheetDocument.newSpreadsheetDocument();
+			Table table1 = document.getTableByName("Sheet1");
+			Cell cell1 = table1.getCellByPosition("A1");
+			cell1.setStringValue("abcdefg");
+			Font font1 = new Font("Arial", StyleTypeDefinitions.SimpleFontStyle.ITALIC, 12, Color.BLACK);
+			cell1.setFont(font1);
+			Font font11 = cell1.getFont();
+			System.out.println(font11);
+			if (!font11.equals(font1))
+				Assert.fail();
+
+			Cell cell2 = table1.getCellByPosition("A2");
+			cell2.setStringValue("redstring");
+			Font font2 = new Font("Arial", StyleTypeDefinitions.SimpleFontStyle.ITALIC, 12, Color.RED);
+			cell2.setFont(font2);
+			Font font22 = cell2.getFont();
+			System.out.println(font22);
+			if (!font22.equals(font2))
+				Assert.fail();
+			document.save(ResourceUtilities.newTestOutputFile("TestSetGetFont.ods"));
+		} catch (Exception e) {
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail();
+		}
+	}
+	
+	@Test
+	public void testSetGetBorder() {
+		try {
+			SpreadsheetDocument document;
+			document = SpreadsheetDocument.newSpreadsheetDocument();
+			Table table1 = document.getTableByName("Sheet1");
+			Cell cell1 = table1.getCellByPosition("A1");
+			cell1.setStringValue("four border");
+			Border border = new Border(Color.RED, 1, StyleTypeDefinitions.SupportedLinearMeasure.PT);
+			cell1.setBorders(SimpleCellBordersType.ALL_FOUR, border);
+			Border bottomBorder = cell1.getStyleHandler().getBorder(SimpleCellBordersType.BOTTOM);
+			Assert.assertEquals(border, bottomBorder);
+
+			Cell cell2 = table1.getCellByPosition("C2");
+			cell2.setStringValue("top bottom");
+			Border border2 = new Border(Color.BLUE, 5, 1, 2, StyleTypeDefinitions.SupportedLinearMeasure.PT);
+			cell2.setBorders(SimpleCellBordersType.TOP_BOTTOM, border2);
+			Border bottomBorder2 = cell2.getStyleHandler().getBorder(SimpleCellBordersType.BOTTOM);
+			Assert.assertEquals(border2, bottomBorder2);
+			Border bottomBorder22 = cell2.getStyleHandler().getBorder(SimpleCellBordersType.LEFT);
+			Assert.assertEquals(Border.NONE, bottomBorder22);
+			document.save(ResourceUtilities.newTestOutputFile("TestSetGetBorder.ods"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail();

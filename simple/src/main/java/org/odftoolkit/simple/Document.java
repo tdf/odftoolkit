@@ -898,7 +898,7 @@ public class Document extends OdfSchemaDocument {
 		setLocale(locale, getScriptType(locale));
 	}
 
-	private ScriptType getScriptType(Locale locale) {
+	public static ScriptType getScriptType(Locale locale) {
 		String language = locale.getLanguage();
 		if (CJKLanguage.contains(language))
 			return ScriptType.CJK;

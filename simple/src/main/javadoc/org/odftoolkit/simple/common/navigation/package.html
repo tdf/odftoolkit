@@ -9,6 +9,7 @@
  *
   DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
 
+  Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
   Copyright 2010 IBM. All rights reserved.
 
   Use is subject to license terms.
@@ -37,26 +38,30 @@
         -->
         
         
-        Provide convenient methods to manipulate table in ODF text and spreadsheet document.
+        Provide classes to operate the content and style of the selected text content.
         
-	<p>
-	Table is a common used feature in ODF. 
-	This package provides convenient methods to manipulate table feature and its child features, such as row, column, cell, cell range.
-	<p>
-	Table represents table in ODF. It provides methods to new a table, delete a table, get rows, 
-	columns, and cells of a table, new a cell range, insert and delete rows and columns, and so on.
-	<p>
-	TableRow and OdfTableColumn represents row and column in ODF. It provides methods to get cells, 
-	get next and previous row and column, set properties of rows and columns, and so on.
-	<p>
-	TableCell represents cell in ODF. It provides many methods to set the properties and values of a cell, 
-	such as horizontal alignment, vertical alignment, value, formula, value format, and so on.
-	<p>
-	TableRange represents a range of cells in ODF. It provides a method to merge a range of cells to a single cell, and some other methods too.
-	<p>
-	CellStyleHandler provides methods to handle styles, for example, defining font and border styles.
-	<p>
-	CellValueAdapter and DefaultCellValueAdapter provide functions to adapt string content to a more proper cell value type as need.
+        <p>
+        Abstract class Navigation represent the navigate action on the specified document, 
+        and user can iterate all the results of this navigation operation. Abstract class
+        Selection describes one result of navigation.
+        
+        <p>
+        The instance of derived navigation class will give the match condition so that user
+        can get the corresponding derived Selection class instance. e.g. TextNavigation class
+        is used to search the specified text content in the document, and TextStyleNavigation
+        class can select the text which match the specified style.
+        <p>
+        TextSelection class which inherits Selection represents a snippet text of the 
+        paragraph/heading/header/footer, it can be represent by the belonged element and the 
+        text index of this element. User can get delete this result, or replace this text with 
+        other content, add href link for this selections, append the italic style for it and paste 
+        this selection at the front of or the end of other selction.
+        
+        <p>
+        CellSelection inherits TextSelection. It provides a new function to not only replace text 
+        but also reset the cell values.
+        <p>
+       
         <!-- Put @see and @since tags down here. -->
         
     </body>

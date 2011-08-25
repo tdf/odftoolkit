@@ -732,7 +732,7 @@ public class Row {
 	private void reviseStyleFromLastColumnToMedium(Cell oldLastCell) {
 		if (getTable().mIsSpreadsheet) return;
 		
-		OdfStyle styleEle = oldLastCell.getCellStyleElementForWrite();
+		OdfStyle styleEle = oldLastCell.getStyleHandler().getCellStyleElementForWrite();
 		if (styleEle != null) {
 			if (oldLastCell.getRowIndex() == 0) {
 				Table.setLeftTopBorderStyleProperties(styleEle);
@@ -745,7 +745,7 @@ public class Row {
 	private void reviseStyleFromMediumColumnToLast(Cell newLastCell) {
 		if (getTable().mIsSpreadsheet) return;
 		
-		OdfStyle styleEle = newLastCell.getCellStyleElementForWrite();
+		OdfStyle styleEle = newLastCell.getStyleHandler().getCellStyleElementForWrite();
 		if (styleEle != null) {
 			if (newLastCell.getRowIndex() == 0) {
 				Table.setRightTopBorderStyleProperties(styleEle);
