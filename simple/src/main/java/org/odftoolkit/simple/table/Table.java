@@ -35,6 +35,7 @@ import java.util.logging.Logger;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
+import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
@@ -1508,7 +1509,7 @@ public class Table {
 		Node n = newCellEle.getFirstChild();
 		while (n != null) {
 			Node m = n.getNextSibling();
-			if (n instanceof TextPElement || n instanceof TextHElement || n instanceof TextListElement) {
+			if (n instanceof TextPElement || n instanceof TextHElement || n instanceof TextListElement || n instanceof OfficeAnnotationElement) {
 				newCellEle.removeChild(n);
 			}
 			n = m;

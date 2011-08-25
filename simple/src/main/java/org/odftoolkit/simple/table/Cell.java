@@ -38,9 +38,12 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoTextAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
+import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
+import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberCurrencySymbolElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTextElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
@@ -67,6 +70,7 @@ import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
@@ -1996,7 +2000,71 @@ public class Cell implements ListContainer {
 	public Border getBorder(CellBordersType type) {
 		return getStyleHandler().getBorder(type);
 	}
-
+	
+	/**
+	 * Get the note text of this table cell. If there is no note on this cell,
+	 * <code>null</code> will be returned.
+	 * <p>
+	 * The note may contain text list, text paragraph and styles, but this
+	 * method extracts only text from them.
+	 * 
+	 * @return the note text of this cell.
+	 */
+	public String getNoteText() {
+		String noteString = null;
+		OfficeAnnotationElement annotation = OdfElement.findFirstChildNode(OfficeAnnotationElement.class, mCellElement);
+		if (annotation != null) {
+			noteString = "";
+			Node n = annotation.getFirstChild();
+			while (n != null) {
+				Node m = n.getNextSibling();
+				if (n instanceof TextPElement || n instanceof TextListElement) {
+					noteString += TextExtractor.getText((OdfElement)n);
+				}
+				n = m;
+			}
+		}
+		return noteString;
+	}
+	
+	/**
+	 * Set note text for this table cell. This method creates a text paragraph
+	 * without style as note. The note text is text paragraph content.
+	 * <p>
+	 * Only simple text is supported to receive in this method, which is a sub
+	 * function of office annotation. So overwriting a note with text might
+	 * loose structure and styles.
+	 * 
+	 * @param note
+	 *            note content.
+	 */
+	public void setNoteText(String note) {
+		splitRepeatedCells();	
+		OfficeAnnotationElement annotation = OdfElement.findFirstChildNode(OfficeAnnotationElement.class, mCellElement);
+		if (annotation == null) {
+			OdfFileDom dom = (OdfFileDom) mCellElement.getOwnerDocument();
+			annotation = (OfficeAnnotationElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
+					OdfDocumentNamespace.OFFICE, "annotation"));
+		}
+		TextPElement noteElement = OdfElement.findFirstChildNode(TextPElement.class, annotation);
+		if (noteElement == null) {
+			noteElement = annotation.newTextPElement();
+		}
+		noteElement.setTextContent(note);
+		DcCreatorElement dcCreatorElement = OdfElement.findFirstChildNode(DcCreatorElement.class, annotation);
+		if (dcCreatorElement == null) {
+			dcCreatorElement = annotation.newDcCreatorElement();
+		}
+		dcCreatorElement.setTextContent(System.getProperty("user.name"));
+		String dcDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(new Date());
+		DcDateElement dcDateElement = OdfElement.findFirstChildNode(DcDateElement.class, annotation);
+		if (dcDateElement == null) {
+			dcDateElement = annotation.newDcDateElement();
+		}
+		dcDateElement.setTextContent(dcDate);
+		mCellElement.appendChild(annotation);
+	}
+	
 	/**
 	 * Return style handler for this cell
 	 * 

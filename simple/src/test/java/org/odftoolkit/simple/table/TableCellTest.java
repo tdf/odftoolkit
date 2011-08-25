@@ -1163,4 +1163,39 @@ public class TableCellTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+	
+	/**
+	 * This test case check whether getNoteText and setNoteText work as
+	 * expected. When test getNoteText, the cell note may be null, a text
+	 * paragraph with style or a text list. getNoteText extracts the text
+	 * content from them and return it as string. When test setNoteText, a text
+	 * paragraph will be created to show text content. text list and style is
+	 * not supported.
+	 */
+	@Test
+	public void testGetSetNoteText() throws Exception {
+		int rowindex = 10, columnindex = 12;
+		Table table = odsdoc.getTableByName("Sheet1");
+		Cell fcell = table.getCellByPosition(columnindex, rowindex);
+		String note=fcell.getNoteText();
+		Assert.assertNull(note);
+		// cell A16 contains a text paragraph without style.
+		fcell = table.getCellByPosition("A16");
+		Assert.assertEquals("note1 ", fcell.getNoteText());
+		// cell A16 contains a text paragraph with style.
+		fcell = table.getCellByPosition("A17");
+		Assert.assertEquals("note2 ", fcell.getNoteText());
+		// cell A16 contains a text list with style. all of the list items should be extracted.
+		fcell = table.getCellByPosition("A18");
+		Assert.assertEquals("note1note2note3", fcell.getNoteText());
+		String expectedNote = "note test";
+		fcell = table.getCellByPosition(columnindex, rowindex);
+		fcell.setNoteText(expectedNote);
+		saveods();
+		// reload
+		loadOutputSpreadsheet();
+		table = odsdoc.getTableByName("Sheet1");
+		fcell = table.getCellByPosition(columnindex, rowindex);
+		Assert.assertEquals(expectedNote, fcell.getNoteText());
+	}
 }
