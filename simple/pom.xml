@@ -293,8 +293,8 @@
 		</mailingList>
 	</mailingLists>
 	<scm>
-		<connection>scm:hg:https://hg.odftoolkit.org/hg/simple~code-base </connection>
-		<developerConnection>scm:hg:https://hg.odftoolkit.org/hg/simple~code-base </developerConnection>
+		<connection>scm:hg:https://hg.odftoolkit.org/hg/simple~code-base</connection>
+		<developerConnection>scm:hg:https://hg.odftoolkit.org/hg/simple~code-base</developerConnection>
 		<url>http://odftoolkit.org/projects/simple/sources/code-base/show</url>
 	</scm>
 	<profiles>
