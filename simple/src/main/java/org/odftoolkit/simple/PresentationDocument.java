@@ -41,6 +41,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePresentationPageLayoutElement;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.pkg.MediaType;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.simple.presentation.Slide;
@@ -960,5 +961,9 @@ public class PresentationDocument extends Document {
 			page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
 
 		}
+	}
+
+	public OdfElement getTableContainerElement() {
+		throw new UnsupportedOperationException("Presentation document is not supported to hold table directly.");
 	}
 }

@@ -128,7 +128,7 @@ public class Cell implements ListContainer {
 	 * The default columns repeated number.
 	 */
 	private static final int DEFAULT_COLUMNS_REPEATED_NUMBER = 1;
-	private ListContainerImpl listContainerImpl = new ListContainerImpl();
+	private ListContainerImpl listContainerImpl;
 	
 	Cell(TableTableCellElementBase odfElement, int repeatedColIndex, int repeatedRowIndex) {
 		mCellElement = odfElement;
@@ -2079,7 +2079,7 @@ public class Cell implements ListContainer {
 	}
 
 	public OdfElement getListContainerElement() {
-		return listContainerImpl.getListContainerElement();
+		return getListContainerImpl().getListContainerElement();
 	}
 
 	public org.odftoolkit.simple.text.list.List addList() {
@@ -2087,7 +2087,7 @@ public class Cell implements ListContainer {
 		if(ownerDocument instanceof SpreadsheetDocument){
 			throw new UnsupportedOperationException("Open Office and Symphony can't show a list in spreadsheet document cell.");
 		}else{
-			return listContainerImpl.addList();
+			return getListContainerImpl().addList();
 		}
 	}
 	
@@ -2096,20 +2096,27 @@ public class Cell implements ListContainer {
 		if(ownerDocument instanceof SpreadsheetDocument){
 			throw new UnsupportedOperationException("Open Office and Symphony can't show a list in spreadsheet document cell.");
 		}else{
-			return listContainerImpl.addList(decorator);
+			return getListContainerImpl().addList(decorator);
 		}
 	}
 
 	public void clearList() {
-		listContainerImpl.clearList();
+		getListContainerImpl().clearList();
 	}
 
 	public Iterator<org.odftoolkit.simple.text.list.List> getListIterator() {
-		return listContainerImpl.getListIterator();
+		return getListContainerImpl().getListIterator();
 	}
 
 	public boolean removeList(org.odftoolkit.simple.text.list.List list) {
-		return listContainerImpl.removeList(list);
+		return getListContainerImpl().removeList(list);
+	}
+	
+	private ListContainerImpl getListContainerImpl() {
+		if (listContainerImpl == null) {
+			listContainerImpl = new ListContainerImpl();
+		}
+		return listContainerImpl;
 	}
 
 	private class ListContainerImpl extends AbstractListContainer {

@@ -47,7 +47,7 @@ import org.w3c.dom.NodeList;
 public class Notes implements ListContainer {
 
 	PresentationNotesElement maNoteElement;
-	private ListContainerImpl listContainerImpl = new ListContainerImpl();
+	private ListContainerImpl listContainerImpl;
 
 	/**
 	 * This is a tool class which supplies all of the notes creation detail.
@@ -151,27 +151,34 @@ public class Notes implements ListContainer {
 	}
 
 	public OdfElement getListContainerElement() {
-		return listContainerImpl.getListContainerElement();
+		return getListContainerImpl().getListContainerElement();
 	}
-	
+
 	public List addList() {
-		return listContainerImpl.addList();
+		return getListContainerImpl().addList();
 	}
 
 	public List addList(ListDecorator decorator) {
-		return listContainerImpl.addList(decorator);
+		return getListContainerImpl().addList(decorator);
 	}
 
 	public void clearList() {
-		listContainerImpl.clearList();
+		getListContainerImpl().clearList();
 	}
-	
+
 	public Iterator<List> getListIterator() {
-		return listContainerImpl.getListIterator();
+		return getListContainerImpl().getListIterator();
 	}
 
 	public boolean removeList(List list) {
-		return listContainerImpl.removeList(list);
+		return getListContainerImpl().removeList(list);
+	}
+
+	private ListContainerImpl getListContainerImpl() {
+		if (listContainerImpl == null) {
+			listContainerImpl = new ListContainerImpl();
+		}
+		return listContainerImpl;
 	}
 
 	private class ListContainerImpl extends AbstractListContainer {

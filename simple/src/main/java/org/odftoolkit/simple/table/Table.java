@@ -32,11 +32,9 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
-import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
@@ -109,27 +107,28 @@ public class Table {
 	 */
 	public static class TableBuilder {
 
-		private final Document ownerDocument;
+		private final TableContainer ownerContainer;
 
 		private final IdentityHashMap<TableTableElement, Table> mTableRepository = new IdentityHashMap<TableTableElement, Table>();
 
 		/**
-		 * SlideBuilder constructor. This constructor should only be use in
-		 * owner {@link org.odftoolkit.simple.Document Document} constructor.
-		 * The end user isn't allowed to call it directly, otherwise an
-		 * <code>IllegalStateException</code> will be thrown.
+		 * TableBuilder constructor. This constructor should only be use in
+		 * owner {@link org.odftoolkit.simple.table.TableContainer
+		 * TableContainer} constructor. The end user isn't allowed to call it
+		 * directly, otherwise an <code>IllegalStateException</code> will be
+		 * thrown.
 		 * 
-		 * @param doc
-		 *            the owner <code>Document</code>.
+		 * @param container
+		 *            the owner <code>TableContainer</code>.
 		 * @throws IllegalStateException
-		 *             if new SlideBuilder out of owner Document constructor,
+		 *             if new TableBuilder out of owner Document constructor,
 		 *             this exception will be thrown.
 		 */
-		public TableBuilder(Document doc) {
-			if (doc.getTableBuilder() == null) {
-				ownerDocument = doc;
+		public TableBuilder(TableContainer container) {
+			if (container.getTableBuilder() == null) {
+				ownerContainer = container;
 			} else {
-				throw new IllegalStateException("TableBuilder only can be created in owner Document constructor.");
+				throw new IllegalStateException("TableBuilder only can be created in table containter constructor.");
 			}
 		}
 
@@ -146,7 +145,7 @@ public class Table {
 			if (mTableRepository.containsKey(odfElement)) {
 				return mTableRepository.get(odfElement);
 			} else {
-				Table newTable = new Table(ownerDocument, odfElement);
+				Table newTable = new Table(ownerContainer, odfElement);
 				mTableRepository.put(odfElement, newTable);
 				return newTable;
 			}
@@ -156,11 +155,11 @@ public class Table {
 		 * Construct the <code>Table</code> feature. The default column count is
 		 * 5. The default row count is 2.
 		 * <p>
-		 * The table will be inserted at the end of the document. An unique
-		 * table name will be given, you may set a custom table name using the
-		 * <code>setTableName</code> method.
+		 * The table will be inserted at the end of the table container. An
+		 * unique table name will be given, you may set a custom table name
+		 * using the <code>setTableName</code> method.
 		 * <p>
-		 * If the document is a text document, cell borders will be created by
+		 * If the container is a text document, cell borders will be created by
 		 * default.
 		 * 
 		 * @return the created <code>Table</code> feature instance
@@ -173,11 +172,11 @@ public class Table {
 		 * Construct the <code>Table</code> feature with a specified row number,
 		 * column number, header row number, header column number.
 		 * <p>
-		 * The table will be inserted at the end of the document. An unique
+		 * The table will be inserted at the end of the container. An unique
 		 * table name will be given, you may set a custom table name using the
 		 * <code>setTableName</code> method.
 		 * <p>
-		 * If the document is a text document, cell borders will be created by
+		 * If the container is a text document, cell borders will be created by
 		 * default.
 		 * 
 		 * @param numRows
@@ -192,15 +191,10 @@ public class Table {
 		 * */
 		public Table newTable(int numRows, int numCols, int headerRowNumber, int headerColumnNumber) {
 			try {
-				TableTableElement newTEle = createTable(ownerDocument, numRows, numCols, headerRowNumber,
+				TableTableElement newTEle = createTable(ownerContainer, numRows, numCols, headerRowNumber,
 						headerColumnNumber);
-				// 4. append to the end of document
-				OdfElement root = ownerDocument.getContentDom().getRootElement();
-				OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-				OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-				typedContent.appendChild(newTEle);
+				ownerContainer.getTableContainerElement().appendChild(newTEle);
 				return getTableInstance(newTEle);
-
 			} catch (DOMException e) {
 				Logger.getLogger(Table.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			} catch (Exception e) {
@@ -213,11 +207,11 @@ public class Table {
 		 * Construct the <code>Table</code> feature with a specified row number
 		 * and column number.
 		 * <p>
-		 * The table will be inserted at the end of the document. An unique
+		 * The table will be inserted at the end of the container. An unique
 		 * table name will be given, you may set a custom table name using the
 		 * <code>setTableName</code> method.
 		 * <p>
-		 * If the document is a text document, cell borders will be created by
+		 * If the container is a text document, cell borders will be created by
 		 * default.
 		 * 
 		 * @param numRows
@@ -234,11 +228,11 @@ public class Table {
 		 * Construct the Table feature with a specified 2 dimension array as the
 		 * data of this table. The value type of each cell is float.
 		 * <p>
-		 * The table will be inserted at the end of the document. An unique
+		 * The table will be inserted at the end of the container. An unique
 		 * table name will be given, you may set a custom table name using the
 		 * <code>setTableName</code> method.
 		 * <p>
-		 * If the document is a text document, cell borders will be created by
+		 * If the container is a text document, cell borders will be created by
 		 * default.
 		 * 
 		 * @param rowLabel
@@ -268,13 +262,10 @@ public class Table {
 				columnHeaders = 1;
 			}
 			try {
-				TableTableElement newTEle = createTable(ownerDocument, rowNumber + rowHeaders, columnNumber
+				TableTableElement newTEle = createTable(ownerContainer, rowNumber + rowHeaders, columnNumber
 						+ columnHeaders, rowHeaders, columnHeaders);
-				// 4. append to the end of document
-				OdfElement root = ownerDocument.getContentDom().getRootElement();
-				OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-				OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-				typedContent.appendChild(newTEle);
+				// append to the end of table container
+				ownerContainer.getTableContainerElement().appendChild(newTEle);
 				Table table = getTableInstance(newTEle);
 				List<Row> rowList = table.getRowList();
 				for (int i = 0; i < rowNumber + rowHeaders; i++) {
@@ -323,11 +314,11 @@ public class Table {
 		 * Construct the Table feature with a specified 2 dimension array as the
 		 * data of this table. The value type of each cell is string.
 		 * <p>
-		 * The table will be inserted at the end of the document. An unique
+		 * The table will be inserted at the end of the container. An unique
 		 * table name will be given, you may set a custom table name using the
 		 * <code>setTableName</code> method.
 		 * <p>
-		 * If the document is a text document, cell borders will be created by
+		 * If the container is a text document, cell borders will be created by
 		 * default.
 		 * 
 		 * @param rowLabel
@@ -357,13 +348,10 @@ public class Table {
 				columnHeaders = 1;
 			}
 			try {
-				TableTableElement newTEle = createTable(ownerDocument, rowNumber + rowHeaders, columnNumber
+				TableTableElement newTEle = createTable(ownerContainer, rowNumber + rowHeaders, columnNumber
 						+ columnHeaders, rowHeaders, columnHeaders);
-				// 4. append to the end of document
-				OdfElement root = ownerDocument.getContentDom().getRootElement();
-				OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-				OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-				typedContent.appendChild(newTEle);
+				// append to the end of table container
+				ownerContainer.getTableContainerElement().appendChild(newTEle);
 
 				Table table = getTableInstance(newTEle);
 				List<Row> rowList = table.getRowList();
@@ -410,9 +398,9 @@ public class Table {
 		}
 	}
 
-	private Table(Document doc, TableTableElement table) {
+	private Table(TableContainer container, TableTableElement table) {
 		mTableElement = table;
-		mDocument = doc;
+		mDocument = getOwnerDocument(container);
 		if (mDocument instanceof SpreadsheetDocument) {
 			mIsSpreadsheet = true;
 		} else {
@@ -420,74 +408,80 @@ public class Table {
 		}
 	}
 
+	private static Document getOwnerDocument(TableContainer tableContainer) {
+		OdfElement containerElement = tableContainer.getTableContainerElement();
+		OdfFileDom ownerDocument = (OdfFileDom) containerElement.getOwnerDocument();
+		return (Document) ownerDocument.getDocument();
+	}
+	
 	/**
 	 * Get a table feature instance by an instance of
 	 * <code>TableTableElement</code>.
 	 * 
-	 * @param odfElement
+	 * @param element
 	 *            an instance of <code>TableTableElement</code>
 	 * @return an instance of <code>Table</code> that can represent
-	 *         <code>odfElement</code>
+	 *         <code>element</code>
 	 */
-	public static Table getInstance(TableTableElement odfElement) {
-		Document ownerDocument = (Document) ((OdfFileDom) (odfElement.getOwnerDocument())).getDocument();
-		return ownerDocument.getTableBuilder().getTableInstance(odfElement);
+	public static Table getInstance(TableTableElement element) {
+		Document ownerDocument = (Document) ((OdfFileDom) (element.getOwnerDocument())).getDocument();
+		return ownerDocument.getTableBuilder().getTableInstance(element);
 	}
-
+	
 	/**
 	 * Construct the <code>Table</code> feature. The default column count is 5.
 	 * The default row count is 2.
 	 * <p>
-	 * The table will be inserted at the end of the document. An unique table
+	 * The table will be inserted at the end of the container. An unique table
 	 * name will be given, you may set a custom table name using the
 	 * <code>setTableName</code> method.
 	 * <p>
-	 * If the document is a text document, cell borders will be created by
-	 * default.
+	 * If the <code>tableContainer</code> is a text document, cell borders will
+	 * be created by default.
 	 * 
-	 * @param document
-	 *            the ODF document that contains this feature
+	 * @param tableContainer
+	 *            the table container that contains this table
 	 * @return the created <code>Table</code> feature instance
 	 */
-	public static Table newTable(Document document) {
-		return document.getTableBuilder().newTable();
+	public static Table newTable(TableContainer tableContainer) {
+		return tableContainer.getTableBuilder().newTable();
 	}
 
 	/**
 	 * Construct the <code>Table</code> feature with a specified row number and
 	 * column number.
 	 * <p>
-	 * The table will be inserted at the end of the document. An unique table
-	 * name will be given, you may set a custom table name using the
+	 * The table will be inserted at the end of the tableContainer. An unique
+	 * table name will be given, you may set a custom table name using the
 	 * <code>setTableName</code> method.
 	 * <p>
-	 * If the document is a text document, cell borders will be created by
-	 * default.
+	 * If the <code>tableContainer</code> is a text document, cell borders will
+	 * be created by default.
 	 * 
-	 * @param document
-	 *            the ODF document that contains this feature
+	 * @param tableContainer
+	 *            the table container that contains this table
 	 * @param numRows
 	 *            the row number
 	 * @param numCols
 	 *            the column number
 	 * @return a new instance of <code>Table</code>
 	 */
-	public static Table newTable(Document document, int numRows, int numCols) {
-		return document.getTableBuilder().newTable(numRows, numCols);
+	public static Table newTable(TableContainer tableContainer, int numRows, int numCols) {
+		return tableContainer.getTableBuilder().newTable(numRows, numCols);
 	}
 
 	/**
 	 * Construct the <code>Table</code> feature with a specified row number,
 	 * column number, header row number, header column number.
 	 * <p>
-	 * The table will be inserted at the end of the document. An unique table
-	 * name will be given, you may set a custom table name using the
+	 * The table will be inserted at the end of the tableContainer. An unique
+	 * table name will be given, you may set a custom table name using the
 	 * <code>setTableName</code> method.
 	 * <p>
-	 * If the document is a text document, cell borders will be created by
-	 * default.
+	 * If the <code>tableContainer</code> is a text document, cell borders will
+	 * be created by default.
 	 * 
-	 * @param document
+	 * @param tableContainer
 	 *            the ODF document that contains this feature
 	 * @param numRows
 	 *            the row number
@@ -499,24 +493,24 @@ public class Table {
 	 *            the header column number
 	 * @return a new instance of <code>Table</code>
 	 * */
-	public static Table newTable(Document document, int numRows, int numCols, int headerRowNumber,
+	public static Table newTable(TableContainer tableContainer, int numRows, int numCols, int headerRowNumber,
 			int headerColumnNumber) {
-		return document.getTableBuilder().newTable(numRows, numCols, headerRowNumber, headerColumnNumber);
+		return tableContainer.getTableBuilder().newTable(numRows, numCols, headerRowNumber, headerColumnNumber);
 	}
 
 	/**
 	 * Construct the Table feature with a specified 2 dimension array as the
 	 * data of this table. The value type of each cell is float.
 	 * <p>
-	 * The table will be inserted at the end of the document. An unique table
-	 * name will be given, you may set a custom table name using the
+	 * The table will be inserted at the end of the tableContainer. An unique
+	 * table name will be given, you may set a custom table name using the
 	 * <code>setTableName</code> method.
 	 * <p>
-	 * If the document is a text document, cell borders will be created by
-	 * default.
+	 * If the <code>tableContainer</code> is a text document, cell borders will
+	 * be created by default.
 	 * 
-	 * @param document
-	 *            the ODF document that contains this feature
+	 * @param tableContainer
+	 *            the table container that contains this table
 	 * @param rowLabel
 	 *            set as the header row, it can be null if no header row needed
 	 * @param columnLabel
@@ -526,23 +520,23 @@ public class Table {
 	 *            the two dimension array of double as the data of this table
 	 * @return a new instance of <code>Table</code>
 	 */
-	public static Table newTable(Document document, String[] rowLabel, String[] columnLabel, double[][] data) {
-		return document.getTableBuilder().newTable(rowLabel, columnLabel, data);
+	public static Table newTable(TableContainer tableContainer, String[] rowLabel, String[] columnLabel, double[][] data) {
+		return tableContainer.getTableBuilder().newTable(rowLabel, columnLabel, data);
 	}
 
 	/**
 	 * Construct the Table feature with a specified 2 dimension array as the
 	 * data of this table. The value type of each cell is string.
 	 * <p>
-	 * The table will be inserted at the end of the document. An unique table
-	 * name will be given, you may set a custom table name using the
+	 * The table will be inserted at the end of the tableContainer. An unique
+	 * table name will be given, you may set a custom table name using the
 	 * <code>setTableName</code> method.
 	 * <p>
-	 * If the document is a text document, cell borders will be created by
-	 * default.
+	 * If the <code>tableContainer</code> is a text document, cell borders will
+	 * be created by default.
 	 * 
-	 * @param document
-	 *            the ODF document that contains this feature
+	 * @param tableContainer
+	 *            the table container that contains this table
 	 * @param rowLabel
 	 *            set as the header row, it can be null if no header row needed
 	 * @param columnLabel
@@ -552,8 +546,8 @@ public class Table {
 	 *            the two dimension array of string as the data of this table
 	 * @return a new instance of <code>Table</code>
 	 */
-	public static Table newTable(Document document, String[] rowLabel, String[] columnLabel, String[][] data) {
-		return document.getTableBuilder().newTable(rowLabel, columnLabel, data);
+	public static Table newTable(TableContainer tableContainer, String[] rowLabel, String[] columnLabel, String[][] data) {
+		return tableContainer.getTableBuilder().newTable(rowLabel, columnLabel, data);
 	}
 
 	Cell getCellInstance(TableTableCellElementBase cell, int repeatedColIndex, int repeatedRowIndex) {
@@ -778,9 +772,12 @@ public class Table {
 		style.setProperty(StyleTableCellPropertiesElement.BorderBottom, "0.0007in solid #000000");
 	}
 
-	private static TableTableElement createTable(Document document, int numRows, int numCols, int headerRowNumber,
-			int headerColumnNumber) throws Exception {
-
+	private static TableTableElement createTable(TableContainer container, int numRows, int numCols,
+			int headerRowNumber, int headerColumnNumber) throws Exception {
+		Document document = getOwnerDocument(container);
+		OdfElement containerElement = container.getTableContainerElement();
+		OdfFileDom dom = (OdfFileDom) containerElement.getOwnerDocument();
+		
 		boolean isSpreadsheet = document instanceof SpreadsheetDocument;
 
 		// check arguments
@@ -790,12 +787,11 @@ public class Table {
 					+ ", Columns " + numCols + ", HeaderRows " + headerRowNumber + ", HeaderColumns "
 					+ headerColumnNumber);
 		}
-		OdfContentDom dom = document.getContentDom();
 		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
 		// 1. create table element
 		TableTableElement newTEle = (TableTableElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
 				OdfDocumentNamespace.TABLE, "table"));
-		String tablename = getUniqueTableName(document);
+		String tablename = getUniqueTableName(container);
 		newTEle.setTableNameAttribute(tablename);
 		// create style
 		OdfStyle tableStyle = styles.newStyle(OdfStyleFamily.Table);
@@ -836,7 +832,7 @@ public class Table {
 		TableTableColumnElement columns = (TableTableColumnElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
 				OdfDocumentNamespace.TABLE, "table-column"));
 		int tableNumberColumnsRepeatedValue = numCols - headerColumnNumber;
-		if(tableNumberColumnsRepeatedValue>1){
+		if (tableNumberColumnsRepeatedValue > 1) {
 			columns.setTableNumberColumnsRepeatedAttribute(tableNumberColumnsRepeatedValue);
 		}
 		columns.setStyleName(columnStylename);
@@ -914,8 +910,8 @@ public class Table {
 		return newTEle;
 	}
 
-	private static String getUniqueTableName(Document document) {
-		List<Table> tableList = document.getTableList();
+	private static String getUniqueTableName(TableContainer container) {
+		List<Table> tableList = container.getTableList();
 		boolean notUnique = true;
 
 		String tablename = "Table" + (tableList.size() + 1);
@@ -1203,7 +1199,7 @@ public class Table {
 							int newColumnRepeatedNumber = tableNumberColumnsRepeated * tableNumberColumnsSpanned;
 							if (newColumnRepeatedNumber > 1) {
 								newCellEle.setTableNumberColumnsRepeatedAttribute(newColumnRepeatedNumber);
-							}else{
+							} else {
 								newCellEle.removeAttributeNS(tableNameSpace, "number-columns-repeated");
 							}
 							// cellElement is not a covered cell.
@@ -1464,7 +1460,7 @@ public class Table {
 				resultList.add(getRowInstance(rowEle, j));
 				j++;
 			}
-		}else{
+		} else {
 			while (j < count) {
 				TableTableRowElement newRowEle = (TableTableRowElement) rowEle.cloneNode(true);
 				newRowEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-repeated");
@@ -1610,7 +1606,7 @@ public class Table {
 						true);
 				if (columnCount > 1) {
 					newColumnEle.setTableNumberColumnsRepeatedAttribute(columnCount);
-				}else{
+				} else {
 					newColumnEle.removeAttributeNS(tableNameSpace, "number-columns-repeated");
 				}
 				mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
@@ -1648,7 +1644,7 @@ public class Table {
 			int repeatedCount = column.getTableNumberColumnsRepeatedAttribute();
 			TableTableColumnElement columnEle = positionCol.getOdfElement();
 			// add a single column element to describe columns.
-			if(isDescribedBySingleElement()){
+			if (isDescribedBySingleElement()) {
 				column.setTableNumberColumnsRepeatedAttribute(repeatedCount + columnCount);
 				Column startCol = getColumnInstance(positionCol.getOdfElement(), 0);
 				for (int i = repeatedCount + columnCount - 1; i >= columnCount + (index - startCol.getColumnIndex()); i--) {
@@ -1657,11 +1653,12 @@ public class Table {
 				for (int i = 0; i < columnCount; i++) {
 					list.add(getColumnInstance(column, refColumn.mnRepeatedIndex + 1 + i));
 				}
-			}else{
-				TableTableColumnElement newBeforeColumnEle = (TableTableColumnElement) refColumn.getOdfElement().cloneNode(true);
+			} else {
+				TableTableColumnElement newBeforeColumnEle = (TableTableColumnElement) refColumn.getOdfElement()
+						.cloneNode(true);
 				if (index > 1) {
 					newBeforeColumnEle.setTableNumberColumnsRepeatedAttribute(index);
-				}else{
+				} else {
 					newBeforeColumnEle.removeAttributeNS(tableNameSpace, "number-columns-repeated");
 				}
 				mTableElement.insertBefore(newBeforeColumnEle, positionCol.getOdfElement());
@@ -1669,9 +1666,9 @@ public class Table {
 					updateColumnRepository(columnEle, i, newBeforeColumnEle, i);
 				}
 				int newAfterCount = repeatedCount - index;
-				if(newAfterCount>1){
+				if (newAfterCount > 1) {
 					positionCol.setColumnsRepeatedNumber(newAfterCount);
-				}else{
+				} else {
 					positionCol.getOdfElement().removeAttributeNS(tableNameSpace, "number-columns-repeated");
 				}
 				for (int i = repeatedCount - 1; i >= index; i--) {
@@ -1692,7 +1689,7 @@ public class Table {
 						true);
 				if (columnCount > 1) {
 					newColumnEle.setTableNumberColumnsRepeatedAttribute(columnCount);
-				}else{
+				} else {
 					newColumnEle.removeAttributeNS(tableNameSpace, "number-columns-repeated");
 				}
 				mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
@@ -2879,6 +2876,7 @@ class CellCoverInfo {
 	int nStartRow;
 	int nEndCol;
 	int nEndRow;
+
 	CellCoverInfo(int nSC, int nSR, int nColumnSpan, int nRowSpan) {
 		nStartCol = nSC;
 		nStartRow = nSR;

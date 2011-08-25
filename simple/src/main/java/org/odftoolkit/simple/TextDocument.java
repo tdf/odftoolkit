@@ -24,22 +24,33 @@ package org.odftoolkit.simple;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
+import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.simple.text.Footer;
+import org.odftoolkit.simple.text.Header;
 import org.odftoolkit.simple.text.Section;
 import org.odftoolkit.simple.text.list.AbstractListContainer;
 import org.odftoolkit.simple.text.list.List;
 import org.odftoolkit.simple.text.list.ListContainer;
 import org.odftoolkit.simple.text.list.ListDecorator;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * This class represents an empty ODF text document.
@@ -49,7 +60,11 @@ public class TextDocument extends Document implements ListContainer {
 
 	private static final String EMPTY_TEXT_DOCUMENT_PATH = "/OdfTextDocument.odt";
 	static final Resource EMPTY_TEXT_DOCUMENT_RESOURCE = new Resource(EMPTY_TEXT_DOCUMENT_PATH);
-	private ListContainerImpl listContainerImpl = new ListContainerImpl();
+
+	private ListContainerImpl listContainerImpl;
+
+	private Header header;
+	private Footer footer;
 
 	/**
 	 * This enum contains all possible media types of SpreadsheetDocument
@@ -349,33 +364,90 @@ public class TextDocument extends Document implements ListContainer {
 		}
 		return null;
 	}
+	
+	/**
+	 * Get the header of this text document.
+	 * 
+	 * @return the header of this text document.
+	 * @since 0.4.5
+	 */
+	public Header getHeader() {
+		if (header == null) {
+			try {
+				StyleMasterPageElement masterPageElement = getMasterPages().get("Standard");
+				StyleHeaderElement headerElement = OdfElement.findFirstChildNode(StyleHeaderElement.class,
+						masterPageElement);
+				if (headerElement == null) {
+					headerElement = masterPageElement.newStyleHeaderElement();
+				}
+				header = new Header(headerElement);
+			} catch (Exception e) {
+				Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+			}
+		}
+		return header;
+	}
+
+	/**
+	 * Get the footer of this text document.
+	 * 
+	 * @return the footer of this text document.
+	 * @since 0.4.5
+	 */
+	public Footer getFooter() {
+		if (footer == null) {
+			try {
+				StyleMasterPageElement masterPageElement = getMasterPages().get("Standard");
+				StyleFooterElement footerElement = OdfElement.findFirstChildNode(StyleFooterElement.class,
+						masterPageElement);
+				if (footerElement == null) {
+					footerElement = masterPageElement.newStyleFooterElement();
+				}
+				footer = new Footer(footerElement);
+			} catch (Exception e) {
+				Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+			}
+		}
+		return footer;
+	}
+	
+	public OdfElement getTableContainerElement() {
+		return getTableContainerImpl().getTableContainerElement();
+	}
 
 	public OdfElement getListContainerElement() {
-		return listContainerImpl.getListContainerElement();
+		return getListContainerImpl().getListContainerElement();
 	}
 
 	public List addList() {
-		return listContainerImpl.addList();
+		return getListContainerImpl().addList();
 	}
 
 	public List addList(ListDecorator decorator) {
-		return listContainerImpl.addList(decorator);
+		return getListContainerImpl().addList(decorator);
 	}
 
 	public void clearList() {
-		listContainerImpl.clearList();
+		getListContainerImpl().clearList();
 	}
 
 	public Iterator<List> getListIterator() {
-		return listContainerImpl.getListIterator();
+		return getListContainerImpl().getListIterator();
 	}
 
 	public boolean removeList(List list) {
-		return listContainerImpl.removeList(list);
+		return getListContainerImpl().removeList(list);
+	}
+
+	private ListContainerImpl getListContainerImpl() {
+		if (listContainerImpl == null) {
+			listContainerImpl = new ListContainerImpl();
+		}
+		return listContainerImpl;
 	}
 
 	private class ListContainerImpl extends AbstractListContainer {
-		
+
 		public OdfElement getListContainerElement() {
 			OdfElement containerElement = null;
 			try {
@@ -386,4 +458,25 @@ public class TextDocument extends Document implements ListContainer {
 			return containerElement;
 		}
 	}
+	
+	private Map<String, StyleMasterPageElement> getMasterPages() throws Exception {
+		OdfStylesDom stylesDoc = getStylesDom();
+		OfficeMasterStylesElement masterStyles = OdfElement.findFirstChildNode(OfficeMasterStylesElement.class,
+				stylesDoc.getRootElement());
+		Map<String, StyleMasterPageElement> masterPages = null;
+		if (masterStyles != null) {
+			NodeList lstMasterPages = stylesDoc.getElementsByTagNameNS(OdfDocumentNamespace.STYLE.getUri(),
+					"master-page");
+			if (lstMasterPages != null && lstMasterPages.getLength() > 0) {
+				masterPages = new HashMap<String, StyleMasterPageElement>();
+				for (int i = 0; i < lstMasterPages.getLength(); i++) {
+					StyleMasterPageElement masterPage = (StyleMasterPageElement) lstMasterPages.item(i);
+					String styleName = masterPage.getStyleNameAttribute();
+					masterPages.put(styleName, masterPage);
+				}
+			}
+		}
+		return masterPages;
+	}
+
 }

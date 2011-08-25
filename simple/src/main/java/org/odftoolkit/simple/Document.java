@@ -58,7 +58,6 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
@@ -80,7 +79,9 @@ import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.type.Duration;
 import org.odftoolkit.simple.meta.Meta;
+import org.odftoolkit.simple.table.AbstractTableContainer;
 import org.odftoolkit.simple.table.Table;
+import org.odftoolkit.simple.table.TableContainer;
 import org.odftoolkit.simple.table.Table.TableBuilder;
 import org.odftoolkit.simple.text.Section;
 import org.w3c.dom.Attr;
@@ -90,13 +91,13 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.ErrorHandler;
 
 /** This abstract class is representing one of the possible ODF documents */
-public class Document extends OdfSchemaDocument {
+public abstract class Document extends OdfSchemaDocument implements TableContainer{
 	// Static parts of file references
 	private static final String SLASH = "/";
 	private OdfMediaType mMediaType;
 	private Meta mOfficeMeta;
-	private final TableBuilder tableBuilder;
 	private long documentOpeningTime;
+	private TableContainerImpl tableContainerImpl;
 	private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
 	private static final String EMPTY_STRING = "";
 
@@ -123,17 +124,15 @@ public class Document extends OdfSchemaDocument {
 	protected Document(OdfPackage pkg, String internalPath, OdfMediaType mediaType) {
 		super(pkg, internalPath, mediaType.getMediaTypeString());
 		mMediaType = mediaType;
-		// create table builder
-		tableBuilder = new Table.TableBuilder(this);
 		// set document opening time.
 		documentOpeningTime = System.currentTimeMillis();
 	}
 
 	/**
-	 * This enum contains all possible media types of OpenDocument documents.
+	 * This enum contains all possible media types of Document documents.
 	 */
 	public enum OdfMediaType implements MediaType {
-
+		
 		CHART("application/vnd.oasis.opendocument.chart", "odc"), 
 		CHART_TEMPLATE("application/vnd.oasis.opendocument.chart-template", "otc"),
 		FORMULA("application/vnd.oasis.opendocument.formula", "odf"),
@@ -200,14 +199,14 @@ public class Document extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Loads an OpenDocument from the given resource. NOTE: Initial meta data
+	 * Loads an Document from the given resource. NOTE: Initial meta data
 	 * will be added in this method.
 	 * 
 	 * @param res
 	 *            a resource containing a package with a root document
 	 * @param odfMediaType
 	 *            the media type of the root document
-	 * @return the OpenDocument document or NULL if the media type is not
+	 * @return the Document document or NULL if the media type is not
 	 *         supported by SIMPLE.
 	 * @throws java.lang.Exception
 	 *             - if the document could not be created.
@@ -236,7 +235,7 @@ public class Document extends OdfSchemaDocument {
 	 * 
 	 * @param documentPath
 	 *            - the path from where the document can be loaded
-	 * @return the OpenDocument from the given path or NULL if the media type is
+	 * @return the Document from the given path or NULL if the media type is
 	 *         not supported by SIMPLE.
 	 * @throws java.lang.Exception
 	 *             - if the document could not be created.
@@ -246,7 +245,7 @@ public class Document extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Creates a Document from the OpenDocument provided by a resource Stream.
+	 * Creates a Document from the Document provided by a resource Stream.
 	 * 
 	 * <p>
 	 * Since an InputStream does not provide the arbitrary (non sequentiell)
@@ -267,7 +266,7 @@ public class Document extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Creates a Document from the OpenDocument provided by a File.
+	 * Creates a Document from the Document provided by a File.
 	 * 
 	 * <p>
 	 * Document relies on the file being available for read access over the
@@ -285,7 +284,7 @@ public class Document extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Creates a Document from the OpenDocument provided by an ODF package.
+	 * Creates a Document from the Document provided by an ODF package.
 	 * 
 	 * @param odfPackage
 	 *            - the ODF package containing the ODF document.
@@ -298,7 +297,7 @@ public class Document extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Creates a Document from the OpenDocument provided by an ODF package.
+	 * Creates a Document from the Document provided by an ODF package.
 	 * 
 	 * @param odfPackage
 	 *            - the ODF package containing the ODF document.
@@ -434,8 +433,7 @@ public class Document extends OdfSchemaDocument {
 			break;
 
 		case PRESENTATION_TEMPLATE:
-			newDoc = new PresentationDocument(pkg, internalPath,
-					PresentationDocument.OdfMediaType.PRESENTATION_TEMPLATE);
+			newDoc = new PresentationDocument(pkg, internalPath, PresentationDocument.OdfMediaType.PRESENTATION_TEMPLATE);
 			break;
 
 		case GRAPHICS:
@@ -483,7 +481,7 @@ public class Document extends OdfSchemaDocument {
 			String mediaTypeString = getMediaTypeString();
 			OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(mediaTypeString);
 			if (odfMediaType == null) {
-				embeddedDocument = new Document(mPackage, internalPath, odfMediaType);
+				embeddedDocument = newDocument(mPackage, internalPath, odfMediaType);
 			} else {
 				try {
 					String documentMediaType = mPackage.getMediaTypeString(internalPath);
@@ -815,62 +813,6 @@ public class Document extends OdfSchemaDocument {
 			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return null;
-	}
-
-	/**
-	 * Return the table builder of this document. Every document has a table
-	 * builder, which supplies all of the table creation realization, for
-	 * example newTable().
-	 * 
-	 * @return the table builder of this document.
-	 * @since 0.3.5
-	 */
-	public TableBuilder getTableBuilder() {
-		return tableBuilder;
-	}
-
-	/**
-	 * Return an instance of table feature with the specific table name.
-	 * 
-	 * @param name
-	 *            of the table beeing searched for.
-	 * @return an instance of table feature with the specific table name.
-	 */
-	public Table getTableByName(String name) {
-		try {
-			OdfElement root = getContentDom().getRootElement();
-			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-			NodeList nodeList = officeBody.getElementsByTagName(TableTableElement.ELEMENT_NAME.getQName());
-			for (int i = 0; i < nodeList.getLength(); i++) {
-				TableTableElement table = (TableTableElement) nodeList.item(i);
-				if (table.getOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.TABLE, "name")).equals(name)) {
-					return getTableBuilder().getTableInstance(table);
-				}
-			}
-		} catch (Exception e) {
-			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
-		}
-		return null;
-	}
-
-	/**
-	 * Return a list of table features in this document.
-	 * 
-	 * @return a list of table features in this document.
-	 */
-	public List<Table> getTableList() {
-		List<Table> tableList = new ArrayList<Table>();
-		try {
-			OdfElement root = getContentDom().getRootElement();
-			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-			NodeList nodeList = officeBody.getElementsByTagName(TableTableElement.ELEMENT_NAME.getQName());
-			for (int i = 0; i < nodeList.getLength(); i++) {
-				tableList.add(getTableBuilder().getTableInstance((TableTableElement) nodeList.item(i)));
-			}
-		} catch (Exception e) {
-			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
-		}
-		return tableList;
 	}
 
 	/**
@@ -2105,5 +2047,40 @@ public class Document extends OdfSchemaDocument {
 		}
 		return success;
 	}
+	
+	public Table addTable() {
+		return getTableContainerImpl().addTable();
+	}
 
+	public Table getTableByName(String name) {
+		return getTableContainerImpl().getTableByName(name);
+	}
+
+	public java.util.List<Table> getTableList() {
+		return getTableContainerImpl().getTableList();
+	}
+
+	public TableBuilder getTableBuilder() {
+		return getTableContainerImpl().getTableBuilder();
+	}
+	
+	protected TableContainer getTableContainerImpl() {
+		if (tableContainerImpl == null) {
+			tableContainerImpl = new TableContainerImpl();
+		}
+		return tableContainerImpl;
+	}
+
+	private class TableContainerImpl extends AbstractTableContainer {
+
+		public OdfElement getTableContainerElement() {
+			OdfElement containerElement = null;
+			try {
+				containerElement = getContentRoot();
+			} catch (Exception e) {
+				Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
+			}
+			return containerElement;
+		}
+	}
 }

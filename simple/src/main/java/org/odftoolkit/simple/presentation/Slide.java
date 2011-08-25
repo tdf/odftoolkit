@@ -33,6 +33,10 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.PresentationDocument;
+import org.odftoolkit.simple.table.AbstractTableContainer;
+import org.odftoolkit.simple.table.Table;
+import org.odftoolkit.simple.table.TableContainer;
+import org.odftoolkit.simple.table.Table.TableBuilder;
 import org.odftoolkit.simple.text.list.AbstractListContainer;
 import org.odftoolkit.simple.text.list.List;
 import org.odftoolkit.simple.text.list.ListContainer;
@@ -44,10 +48,11 @@ import org.w3c.dom.NodeList;
  * document. <code>Slide</code> provides methods to get the slide index,get the
  * content of the current slide, etc.
  */
-public class Slide implements ListContainer {
+public class Slide implements ListContainer, TableContainer {
 
 	DrawPageElement maSlideElement;
-	private ListContainerImpl listContainerImpl = new ListContainerImpl();
+	private ListContainerImpl listContainerImpl;
+	private TableContainerImpl tableContainerImpl;
 
 	/**
 	 * This is a tool class which supplies all of the slide creation detail.
@@ -305,27 +310,34 @@ public class Slide implements ListContainer {
 	}
 
 	public OdfElement getListContainerElement() {
-		return listContainerImpl.getListContainerElement();
+		return getListContainerImpl().getListContainerElement();
 	}
 
 	public List addList() {
-		return listContainerImpl.addList();
+		return getListContainerImpl().addList();
 	}
-	
+
 	public List addList(ListDecorator decorator) {
-		return listContainerImpl.addList(decorator);
+		return getListContainerImpl().addList(decorator);
 	}
-	
+
 	public void clearList() {
-		listContainerImpl.clearList();
+		getListContainerImpl().clearList();
 	}
 
 	public Iterator<List> getListIterator() {
-		return listContainerImpl.getListIterator();
+		return getListContainerImpl().getListIterator();
 	}
-	
+
 	public boolean removeList(List list) {
-		return listContainerImpl.removeList(list);
+		return getListContainerImpl().removeList(list);
+	}
+
+	private ListContainerImpl getListContainerImpl() {
+		if (listContainerImpl == null) {
+			listContainerImpl = new ListContainerImpl();
+		}
+		return listContainerImpl;
 	}
 
 	private class ListContainerImpl extends AbstractListContainer {
@@ -359,6 +371,65 @@ public class Slide implements ListContainer {
 				textBox = (DrawTextBoxElement) textBoxList.item(textBoxList.getLength() - 1);
 			}
 			return textBox;
+		}
+	}
+
+	public Table addTable() {
+		return getTableContainerImpl().addTable();
+	}
+
+	public Table getTableByName(String name) {
+		return getTableContainerImpl().getTableByName(name);
+	}
+
+	public java.util.List<Table> getTableList() {
+		return getTableContainerImpl().getTableList();
+	}
+
+	public TableBuilder getTableBuilder() {
+		return getTableContainerImpl().getTableBuilder();
+	}
+
+	public OdfElement getTableContainerElement() {
+		return getTableContainerImpl().getTableContainerElement();
+	}
+
+	protected TableContainer getTableContainerImpl() {
+		if (tableContainerImpl == null) {
+			tableContainerImpl = new TableContainerImpl();
+		}
+		return tableContainerImpl;
+	}
+
+	private class TableContainerImpl extends AbstractTableContainer {
+
+		public OdfElement getTableContainerElement() {
+			DrawFrameElement frame = null;
+			NodeList frameList = maSlideElement.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "frame");
+			if (frameList.getLength() > 0) {
+				int index = frameList.getLength() - 1;
+				while (index >= 0) {
+					frame = (DrawFrameElement) frameList.item(index);
+					String presentationClass = frame.getPresentationClassAttribute();
+					if (presentationClass == null || "table".equals(presentationClass)) {
+						break;
+					} else {
+						index--;
+					}
+					frame = null;
+				}
+			}
+			if (frame == null) {
+				frame = maSlideElement.newDrawFrameElement();
+				frame.setPresentationClassAttribute("table");
+				frame.setDrawLayerAttribute("layout");
+				frame.setStyleName("standard");
+				frame.setSvgHeightAttribute("1.945cm");
+				frame.setSvgWidthAttribute("14.098cm");
+				frame.setSvgXAttribute("6.922cm");
+				frame.setSvgYAttribute("10.386cm");
+			}
+			return frame;
 		}
 	}
 }

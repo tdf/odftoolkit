@@ -1,0 +1,87 @@
+/************************************************************************
+ *
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
+ * 
+ * Copyright 2011 IBM. All rights reserved.
+ * 
+ * Use is subject to license terms.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
+ * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * 
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ************************************************************************/
+package org.odftoolkit.simple.table;
+
+import java.util.List;
+
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.simple.table.Table.TableBuilder;
+
+/**
+ * TableContainer is a container which maintains Table(s) as element(s).
+ * Table(s) can be added, removed and iterated in this container.
+ * 
+ * @see Table
+ * @see org.odftoolkit.simple.TextDocument
+ * @see org.odftoolkit.simple.SpreadsheetDocument
+ * 
+ * @since 0.4.5
+ */
+public interface TableContainer {
+
+	/**
+	 * Get the ODF element which can have <text:table> as child element directly
+	 * according to ODF specification. This Element will help to find the
+	 * position to insert a new Table. For example, <text:table> element is
+	 * usable with <office:text> element, so TextDocument will return
+	 * OfficeTextElement. While Presentation Notes is an indirectly
+	 * TableContainer, which holds Table with the help of its grand-child
+	 * element <draw:text-box>, so for Notes, DrawTextBoxElement should be
+	 * return.
+	 * 
+	 * @return container element which can hold <text:table>.
+	 */
+	public OdfElement getTableContainerElement();
+
+	/**
+	 * Add a new Table to this container.
+	 * 
+	 * @return added table.
+	 */
+	public Table addTable();
+
+
+	/**
+	 * Return an instance of table feature with the specific table name.
+	 * 
+	 * @param name
+	 *            of the table being searched for.
+	 * @return an instance of table feature with the specific table name.
+	 */
+	public Table getTableByName(String name);
+
+	/**
+	 * Return a list of table features in this document.
+	 * 
+	 * @return a list of table features in this document.
+	 */
+	public List<Table> getTableList();
+
+	/**
+	 * Return the table builder of this document. Every document has a table
+	 * builder, which supplies all of the table creation realization, for
+	 * example newTable().
+	 * 
+	 * @return the table builder of this document.
+	 */
+	public TableBuilder getTableBuilder();
+}

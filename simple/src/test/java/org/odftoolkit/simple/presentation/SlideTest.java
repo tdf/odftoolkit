@@ -37,6 +37,8 @@ import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.PresentationDocument;
+import org.odftoolkit.simple.table.Table;
+import org.odftoolkit.simple.table.TableContainer;
 import org.odftoolkit.simple.text.list.BulletDecorator;
 import org.odftoolkit.simple.text.list.ImageDecorator;
 import org.odftoolkit.simple.text.list.ListContainer;
@@ -645,6 +647,28 @@ public class SlideTest {
 			// remove list
 			container.clearList();
 			Assert.assertFalse(container.getListIterator().hasNext());
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAddTable() {
+		try {
+			doc = PresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			// add table.
+			TableContainer container = doc.newSlide(0, "test_table", Slide.SlideLayout.TITLE_PLUS_TEXT);
+			Table table = container.addTable();
+			table.setTableName("SlideTable");
+			String slideTableCellValue = "SlideTable Cell String";
+			table.getCellByPosition(0, 0).setStringValue(slideTableCellValue);
+			doc.save("SlideTableOutput.odp");
+			
+			//load 
+			doc = PresentationDocument.loadDocument("SlideTableOutput.odp");
+			Assert.assertEquals(slideTableCellValue, table.getCellByPosition(0, 0).getStringValue());
+
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
