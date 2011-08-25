@@ -3,7 +3,8 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- *
+ * Copyright 2009, 2010 IBM. All rights reserved.
+ * 
  * Use is subject to license terms.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -48,20 +49,14 @@ public class WhitespaceProcessorTest {
 	private static final Logger LOG = Logger.getLogger(WhitespaceProcessorTest.class.getName());
 	TextDocument doc;
 	OdfFileDom dom;
-	String[] plainText = { "nospace", "one space", "two  spaces",
-			"three   spaces", "   three leading spaces",
-			"three trailing spaces   ", "one\ttab", "two\t\ttabs",
-			"\tleading tab", "trailing tab\t", "mixed   \t   spaces and tabs",
-			"line\nbreak" };
+	String[] plainText = { "nospace", "one space", "two  spaces", "three   spaces", "   three leading spaces",
+			"three trailing spaces   ", "one\ttab", "two\t\ttabs", "\tleading tab", "trailing tab\t",
+			"mixed   \t   spaces and tabs", "line\nbreak" };
 
-	String[][] elementResult = { { "nospace" }, { "one space" },
-			{ "two ", "*s1", "spaces" }, { "three ", "*s2", "spaces" },
-			{ " ", "*s2", "three leading spaces" },
-			{ "three trailing spaces ", "*s2" }, { "one", "*t", "tab" },
-			{ "two", "*t", "*t", "tabs" }, { "*t", "leading tab" },
-			{ "trailing tab", "*t" },
-			{ "mixed ", "*s2", "*t", " ", "*s2", "spaces and tabs" },
-			{ "line", "*n", "break" } };
+	String[][] elementResult = { { "nospace" }, { "one space" }, { "two ", "*s1", "spaces" },
+			{ "three ", "*s2", "spaces" }, { " ", "*s2", "three leading spaces" }, { "three trailing spaces ", "*s2" },
+			{ "one", "*t", "tab" }, { "two", "*t", "*t", "tabs" }, { "*t", "leading tab" }, { "trailing tab", "*t" },
+			{ "mixed ", "*s2", "*t", " ", "*s2", "spaces and tabs" }, { "line", "*n", "break" } };
 
 	public WhitespaceProcessorTest() {
 	}
@@ -120,8 +115,7 @@ public class WhitespaceProcessorTest {
 				} else {
 					nSpaces = Integer.parseInt(output[i].substring(2));
 					Assert.assertEquals(node.getLocalName(), "s");
-					nSpacesInAttribute = Integer.parseInt(((Element) node)
-							.getAttribute("text:c"));
+					nSpacesInAttribute = Integer.parseInt(((Element) node).getAttribute("text:c"));
 					Assert.assertEquals(nSpaces, nSpacesInAttribute);
 				}
 			} else {

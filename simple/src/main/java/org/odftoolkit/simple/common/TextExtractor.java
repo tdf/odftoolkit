@@ -32,95 +32,187 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.w3c.dom.Node;
 
 /**
- * It's a sub class of DefaultElementVisitor. It provides a method to get the display text
- * of a single element.
- * <p> If you pass the content root as the parameter, the whole document content will be 
- * returned, without any tag information.</p>
- * <p> It implements part of white space handling fuctions: text:p, text:h, text:s, text:tab, text:linebreak are processed
- * according to ODF specification.</p>
+ * This is a sub class of <code>DefaultElementVisitor</code>, which is used to
+ * extract display text from ODF element. For example, if you want to get all of
+ * the text content in a slide notes, you can call <code>getOdfElement()</code>
+ * to get the ODF element of this notes, then pass it to
+ * <code>newOdfTextExtractor</code> to create a TextExtractor. The last step is
+ * very easy, you only need to use <code>getText()</code>, all of the text
+ * content will be return as string. Another easier way is pass the ODF element
+ * to the static method <code>TextExtractor.getText(OdfElement)</code> directly.
+ * <p>
+ * If you pass the content root which you can get by
+ * {@link org.odftoolkit.simple.Document#getContentRoot()
+ * Document.getContentRoot()} as the parameter, the whole document content will
+ * be returned, without any tag information.
+ * <p>
+ * This extractor implements parts of ODF elements' white space handling
+ * functions. They are text:p, text:h, text:s, text:tab and text:linebreak,
+ * which <code>visit()</code> are override to process white space, according to
+ * ODF specification.
+ * 
+ * @see org.odftoolkit.odfdom.pkg.OdfElement
  */
 public class TextExtractor extends DefaultElementVisitor {
 
-	protected StringBuilder mTextBuilder;
-	OdfElement mElement;
 	protected static final char NewLineChar = '\r';
 	protected static final char TabChar = '\t';
+	protected final ExtractorStringBuilder mTextBuilder;
+	OdfElement mElement;
 
 	/**
-	 * Default constructor
+	 * This class is used to provide the string builder functions to extractor.
+	 * It will automatically process the last NewLineChar.
+	 * 
+	 * @since 0.3.5
 	 */
-	protected TextExtractor() {
-	}
+	protected static class ExtractorStringBuilder {
+		private StringBuilder mBuilder;
+		private boolean lastAppendNewLine;
 
-	/**
-	 * Constructor with an ODF element as paramter
-	 * @param element the ODF element whose text would be extracted. 
-	 */
-	protected TextExtractor(OdfElement element) {
-		mTextBuilder = new StringBuilder();
-		mElement = element;
-	}
+		ExtractorStringBuilder() {
+			mBuilder = new StringBuilder();
+			lastAppendNewLine = false;
+		}
 
-	/**
-	 * Append the text content of this element to string buffer.
-	 * @param ele the ODF element whose text will be appended.
-	 */
-	protected void appendElementText(OdfElement ele) {
-		Node node = ele.getFirstChild();
+		/**
+		 * Append a string
+		 * 
+		 * @param str
+		 *            - the string
+		 */
+		public void append(String str) {
+			mBuilder.append(str);
+		}
 
-		while (node != null) {
-			if (node.getNodeType() == Node.TEXT_NODE) {
-				mTextBuilder.append(node.getNodeValue());
-			} else if (node.getNodeType() == Node.ELEMENT_NODE) {
-				OdfElement element = (OdfElement) node;
-				element.accept(this);
+		/**
+		 * Append a character
+		 * 
+		 * @param ch
+		 *            - the character
+		 */
+		public void append(char ch) {
+			mBuilder.append(ch);
+		}
+
+		/**
+		 * Append a new line character at the end
+		 */
+		public void appendLine() {
+			mBuilder.append(NewLineChar);
+			lastAppendNewLine = true;
+		}
+
+		/**
+		 * Return the string value.
+		 * <p>
+		 * If the last character is a new line character and is appended with
+		 * appendLine(), the last new line character will be removed.
+		 */
+		public String toString() {
+			if (lastAppendNewLine) {
+				mBuilder.deleteCharAt(mBuilder.length() - 1);
 			}
-			node = node.getNextSibling();
+			return mBuilder.toString();
 		}
 	}
 
 	/**
-	 * An instance of TextExtractor will be created to 
-	 * extract the text content of an ODF element.
-	 * @param element the ODF element whose text will be extracted.
-	 * @return An instance of TextExtractor
+	 * Return the text content of a element as String
+	 * 
+	 * @param ele
+	 *            the ODF element
+	 * @return the text content of the element
+	 */
+	public static synchronized String getText(OdfElement ele) {
+		TextExtractor extractor = newOdfTextExtractor(ele);
+		return extractor.getText();
+	}
+
+	/**
+	 * Create a TextExtractor instance using specified ODF element, which text
+	 * content can be extracted by <code>getText()</code>.
+	 * 
+	 * @param element
+	 *            the ODF element whose text will be extracted.
+	 * @return an instance of TextExtractor
 	 */
 	public static TextExtractor newOdfTextExtractor(OdfElement element) {
 		return new TextExtractor(element);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.dom.DefaultElementVisitor#visit(org.odftoolkit.simple.pkg.OdfElement)
+	/**
+	 * Return the text content of specified ODF element as a string.
+	 * 
+	 * @return the text content as a string
+	 */
+	public String getText() {
+		visit(mElement);
+		return mTextBuilder.toString();
+	}
+
+	/**
+	 * Default constructor
+	 */
+	protected TextExtractor() {
+		mTextBuilder = new ExtractorStringBuilder();
+	}
+
+	/**
+	 * Constructor with an ODF element as parameter
+	 * 
+	 * @param element
+	 *            the ODF element whose text would be extracted.
+	 */
+	protected TextExtractor(OdfElement element) {
+		mTextBuilder = new ExtractorStringBuilder();
+		mElement = element;
+	}
+
+	/**
+	 * The end users needn't to care of this method, if you don't want to
+	 * override the text content handling strategy of <code>OdfElement</code>.
+	 * 
+	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.pkg.OdfElement)
 	 */
 	@Override
 	public void visit(OdfElement element) {
+		appendElementText(element);
 		if (element.getNamespaceURI().equals(OdfDocumentNamespace.META.getUri())
 				|| element.getNamespaceURI().equals(OdfDocumentNamespace.DC.getUri())) {
-			mTextBuilder.append(NewLineChar);
+			mTextBuilder.appendLine();
 		}
-		appendElementText(element);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.dom.DefaultElementVisitor#visit(org.odftoolkit.simple.dom.element.text.TextPElement)
+	/**
+	 * The end users needn't to care of this method, if you don't want to
+	 * override the text content handling strategy of text:p.
+	 * 
+	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextPElement)
 	 */
 	@Override
 	public void visit(TextPElement ele) {
-		mTextBuilder.append(NewLineChar);
 		appendElementText(ele);
+		mTextBuilder.appendLine();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.dom.DefaultElementVisitor#visit(org.odftoolkit.simple.dom.element.text.TextHElement)
+	/**
+	 * The end users needn't to care of this method, if you don't want to
+	 * override the text content handling strategy of text:h.
+	 * 
+	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextHElement)
 	 */
 	@Override
 	public void visit(TextHElement ele) {
-		mTextBuilder.append(NewLineChar);
 		appendElementText(ele);
+		mTextBuilder.appendLine();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.dom.DefaultElementVisitor#visit(org.odftoolkit.simple.dom.element.text.TextSElement)
+	/**
+	 * The end users needn't to care of this method, if you don't want to
+	 * override the text content handling strategy of text:s.
+	 * 
+	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextSElement)
 	 */
 	@Override
 	public void visit(TextSElement ele) {
@@ -133,29 +225,44 @@ public class TextExtractor extends DefaultElementVisitor {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.dom.DefaultElementVisitor#visit(org.odftoolkit.simple.dom.element.text.TextTabElement)
+	/**
+	 * The end users needn't to care of this method, if you don't want to
+	 * override the text content handling strategy of text:tab.
+	 * 
+	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextTabElement)
 	 */
 	@Override
 	public void visit(TextTabElement ele) {
 		mTextBuilder.append(TabChar);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.dom.DefaultElementVisitor#visit(org.odftoolkit.simple.dom.element.text.TextLineBreakElement)
+	/**
+	 * The end users needn't to care of this method, if you don't want to
+	 * override the text content handling strategy of text:linebreak.
+	 * 
+	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextLineBreakElement)
 	 */
 	@Override
 	public void visit(TextLineBreakElement ele) {
 		mTextBuilder.append(NewLineChar);
-		appendElementText(ele);
 	}
 
 	/**
-	 * Return the text content as a string
-	 * @return the text content as a string
+	 * Append the text content of this element to string buffer.
+	 * 
+	 * @param ele
+	 *            the ODF element whose text will be appended.
 	 */
-	public String getText() {
-		visit(mElement);
-		return mTextBuilder.toString();
+	protected void appendElementText(OdfElement ele) {
+		Node node = ele.getFirstChild();
+		while (node != null) {
+			if (node.getNodeType() == Node.TEXT_NODE) {
+				mTextBuilder.append(node.getNodeValue());
+			} else if (node.getNodeType() == Node.ELEMENT_NODE) {
+				OdfElement element = (OdfElement) node;
+				element.accept(this);
+			}
+			node = node.getNextSibling();
+		}
 	}
 }

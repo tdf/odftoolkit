@@ -32,23 +32,21 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.TextDocument;
-import org.odftoolkit.simple.common.navigation.InvalidNavigationException;
-import org.odftoolkit.simple.common.navigation.TextNavigation;
-import org.odftoolkit.simple.common.navigation.TextSelection;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Node;
 
 /**
- * Test the method of class org.odftoolkit.simple.common.navigation.TextSelection
+ * Test the method of class
+ * org.odftoolkit.simple.common.navigation.TextSelection
  */
 public class TextSelectionTest {
 
@@ -87,6 +85,18 @@ public class TextSelectionTest {
 	public void tearDown() {
 	}
 
+	@Test
+	public void testHasNext() {
+		search = null;
+		search = new TextNavigation("range", doc);
+
+		Assert.assertTrue(search.hasNext());
+		Assert.assertTrue(search.hasNext());
+		Assert.assertTrue(search.hasNext());
+		Assert.assertTrue(search.hasNext());
+		Assert.assertTrue(search.hasNext());
+	}
+
 	/**
 	 * Test cut method of org.odftoolkit.simple.common.navigation.TextSelection
 	 * delete all the 'delete' word
@@ -98,9 +108,7 @@ public class TextSelectionTest {
 
 		TextSelection nextSelect = null;
 		TextNavigation nextsearch = new TextNavigation("next", doc);
-		if (nextsearch.hasNext()) {
-			nextSelect = (TextSelection) nextsearch.nextSelection();
-		}
+		nextSelect = (TextSelection) nextsearch.nextSelection();
 		int i = 0;
 		while (search.hasNext()) {
 			TextSelection item = (TextSelection) search.nextSelection();
@@ -112,11 +120,11 @@ public class TextSelectionTest {
 			}
 		}
 		Assert.assertTrue(8 == i);
-		//research the "delete"
+		// research the "delete"
 		search = new TextNavigation("delete", doc);
 		Assert.assertFalse(search.hasNext());
 
-		//this document just have one "next"
+		// this document just have one "next"
 		try {
 			nextSelect.cut();
 		} catch (InvalidNavigationException e1) {
@@ -133,8 +141,9 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test pasteAtFrontOf method of org.odftoolkit.simple.common.navigation.TextSelection
-	 * copy the first 'change' word in the front of all the 'delete' word
+	 * Test pasteAtFrontOf method of
+	 * org.odftoolkit.simple.common.navigation.TextSelection copy the first
+	 * 'change' word in the front of all the 'delete' word
 	 */
 	@Test
 	public void testPasteAtFrontOf() {
@@ -143,9 +152,7 @@ public class TextSelectionTest {
 		TextSelection sel = null;
 
 		TextNavigation search1 = new TextNavigation("change", doc);
-		if (search1.hasNext()) {
-			sel = (TextSelection) search1.nextSelection();
-		}
+		sel = (TextSelection) search1.nextSelection();
 
 		int i = 0;
 		while (search.hasNext()) {
@@ -165,7 +172,6 @@ public class TextSelectionTest {
 			j++;
 		}
 		Assert.assertTrue(i == j);
-
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_COPYTO));
 		} catch (Exception e) {
@@ -176,8 +182,9 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test pasteAtEndOf method of org.odftoolkit.simple.common.navigation.TextSelection
-	 * copy the first 'change' word at the end of all the 'delete' word
+	 * Test pasteAtEndOf method of
+	 * org.odftoolkit.simple.common.navigation.TextSelection copy the first
+	 * 'change' word at the end of all the 'delete' word
 	 */
 	@Test
 	public void testPasteAtEndOf() {
@@ -186,9 +193,7 @@ public class TextSelectionTest {
 		TextSelection sel = null;
 
 		TextNavigation search1 = new TextNavigation("change", doc);
-		if (search1.hasNext()) {
-			sel = (TextSelection) search1.nextSelection();
-		}
+		sel = (TextSelection) search1.nextSelection();
 
 		int i = 0;
 		while (search.hasNext()) {
@@ -218,8 +223,10 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test applyStyle method of org.odftoolkit.simple.common.navigation.TextSelection
-	 * append "T4" style for all the 'delete' word, 'T4' in the original document is the 'bold' style
+	 * Test applyStyle method of
+	 * org.odftoolkit.simple.common.navigation.TextSelection append "T4" style
+	 * for all the 'delete' word, 'T4' in the original document is the 'bold'
+	 * style
 	 */
 	@Test
 	public void testApplyStyle() {
@@ -231,7 +238,7 @@ public class TextSelectionTest {
 		} catch (Exception e1) {
 			Assert.fail("Failed with " + e1.getClass().getName() + ": '" + e1.getMessage() + "'");
 		}
-		//T4 is the bold style for text
+		// T4 is the bold style for text
 		OdfStyleBase style = autoStyles.getStyle("T4", OdfStyleFamily.Text);
 		Assert.assertNotNull(style);
 
@@ -253,8 +260,9 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test replaceWith method of org.odftoolkit.simple.common.navigation.TextSelection
-	 * replace all the 'SIMPLE' with 'Odf Toolkit'
+	 * Test replaceWith method of
+	 * org.odftoolkit.simple.common.navigation.TextSelection replace all the
+	 * 'SIMPLE' with 'Odf Toolkit'
 	 */
 	@Test
 	public void testReplacewith() {
@@ -263,12 +271,11 @@ public class TextSelectionTest {
 
 		TextSelection nextSelect = null;
 		TextNavigation nextsearch = new TextNavigation("next", doc);
-		if (nextsearch.hasNext()) {
-			nextSelect = (TextSelection) nextsearch.nextSelection();
-		}
+		nextSelect = (TextSelection) nextsearch.nextSelection();
 
-		//replace all the "SIMPLE" to "Odf Toolkit"
-		//except the sentence "Task5.Change the SIMPLE to Odf Toolkit, and bold them."
+		// replace all the "SIMPLE" to "Odf Toolkit"
+		// except the sentence
+		// "Task5.Change the SIMPLE to Odf Toolkit, and bold them."
 		OdfStyle style = new OdfStyle(contentDOM);
 		style.setProperty(StyleTextPropertiesElement.FontWeight, "bold");
 		style.setStyleFamilyAttribute("text");
@@ -309,8 +316,9 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test addHref method of org.odftoolkit.simple.common.navigation.TextSelection
-	 * add href "http://www.ibm.com" for all the 'delete' word
+	 * Test addHref method of
+	 * org.odftoolkit.simple.common.navigation.TextSelection add href
+	 * "http://www.ibm.com" for all the 'delete' word
 	 */
 	@Test
 	public void testAddHref() {
@@ -318,7 +326,6 @@ public class TextSelectionTest {
 		search = new TextNavigation("^delete", doc);
 		while (search.hasNext()) {
 			TextSelection item = (TextSelection) search.nextSelection();
-			// LOG.info(item);
 			try {
 				item.addHref(new URL("http://www.ibm.com"));
 			} catch (InvalidNavigationException e) {
@@ -339,9 +346,10 @@ public class TextSelectionTest {
 	}
 
 	/**
-	 * Test search pattern of org.odftoolkit.simple.common.navigation.TextSelection
-	 * search a snippet of text match the pattern "<%([^>]*)%>", and extract the content 
-	 * between "<%" and "%>"
+	 * Test search pattern of
+	 * org.odftoolkit.simple.common.navigation.TextSelection search a snippet of
+	 * text match the pattern "<%([^>]*)%>", and extract the content between
+	 * "<%" and "%>"
 	 */
 	@Test
 	public void testCutPattern() {
@@ -365,10 +373,11 @@ public class TextSelectionTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	/**
-	 * Test TextSelection container element, all of them must be minimum text:p or text:h. 
-	 * It means container element can't has child element has the same text content.
+	 * Test TextSelection container element, all of them must be minimum text:p
+	 * or text:h. It means container element can't has child element has the
+	 * same text content.
 	 */
 	@Test
 	public void testTextSelectionContainerElement() {
@@ -385,7 +394,7 @@ public class TextSelectionTest {
 		} else {
 			Assert.fail("Navigation search nothing.");
 		}
-		//test selected table cell content in draw:frame.
+		// test selected table cell content in draw:frame.
 		search = new TextNavigation("Task", doc);
 		if (search.hasNext()) {
 			TextSelection item = (TextSelection) search.nextSelection();

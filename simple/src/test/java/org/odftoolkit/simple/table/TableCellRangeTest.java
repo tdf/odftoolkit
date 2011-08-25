@@ -2,7 +2,7 @@
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
- * Copyright 2009 IBM. All rights reserved.
+ * Copyright 2009, 2010 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -32,10 +32,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.TextDocument;
-import org.odftoolkit.simple.common.WhitespaceProcessor;
-import org.odftoolkit.simple.table.Cell;
-import org.odftoolkit.simple.table.CellRange;
-import org.odftoolkit.simple.table.Table;
+import org.odftoolkit.simple.common.TextExtractor;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
@@ -50,8 +47,10 @@ public class TableCellRangeTest {
 	@Before
 	public void setUp() {
 		try {
-			odsdoc = (SpreadsheetDocument) SpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(filename + ".ods"));
-			odtdoc = (TextDocument) TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(odtfilename + ".odt"));
+			odsdoc = (SpreadsheetDocument) SpreadsheetDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream(filename + ".ods"));
+			odtdoc = (TextDocument) TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(odtfilename
+					+ ".odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -60,27 +59,27 @@ public class TableCellRangeTest {
 
 	@Test
 	public void testTextCellMerge() {
-		//get cell range, then merge
+		// get cell range, then merge
 		Table table1 = odtdoc.getTableByName("Table1");
-		//get the first two cell
+		// get the first two cell
 		CellRange cellRange = table1.getCellRangeByPosition(0, 0, 1, 0);
 		cellRange.merge();
 		Cell cell = cellRange.getCellByPosition(0, 0);
-		Assert.assertEquals(cell.getDisplayText(), "cell1cell2");
 		saveodt("MergeTwoCell");
+		Assert.assertEquals(cell.getDisplayText(), "cell1\rcell2");
 		try {
-			TextDocument saveddoc = (TextDocument) TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(odtfilename + "MergeTwoCell.odt"));
+			TextDocument saveddoc = (TextDocument) TextDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream(odtfilename + "MergeTwoCell.odt"));
 			Table savedTable1 = saveddoc.getTableByName("Table1");
-			//get the cell range which the first cell is the covered cell.
-			//so the cell range will be enlarged
+			// get the cell range which the first cell is the covered cell.
+			// so the cell range will be enlarged
 			CellRange savedCellRange = savedTable1.getCellRangeByPosition(1, 0, 2, 0);
 			savedCellRange.merge();
 			Assert.assertTrue(savedCellRange.getColumnNumber() == 3);
 			Cell savedCell = savedCellRange.getCellByPosition(0, 0);
 			NodeList paraList = savedCell.getOdfElement().getChildNodes();
-			WhitespaceProcessor textProcessor = new WhitespaceProcessor();
 			Assert.assertTrue(paraList.item(2) instanceof OdfTextParagraph);
-			Assert.assertEquals(textProcessor.getText(paraList.item(2)),"0.00");
+			Assert.assertEquals(TextExtractor.getText((OdfTextParagraph) paraList.item(2)), "0.00");
 			saveddoc.save(ResourceUtilities.newTestOutputFile(odtfilename + "MergeCoveredCell.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -88,10 +87,11 @@ public class TableCellRangeTest {
 		}
 
 		try {
-			TextDocument saveddoc = (TextDocument) TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(odtfilename + "MergeTwoCell.odt"));
+			TextDocument saveddoc = (TextDocument) TextDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream(odtfilename + "MergeTwoCell.odt"));
 			Table savedTable1 = saveddoc.getTableByName("Table1");
-			//get the cell range which the first cell is the covered cell.
-			//so the cell range will be enlarged
+			// get the cell range which the first cell is the covered cell.
+			// so the cell range will be enlarged
 			CellRange savedCellRange = savedTable1.getCellRangeByPosition(0, 0, 0, 1);
 			savedCellRange.merge();
 			Assert.assertTrue(savedCellRange.getColumnNumber() == 2);
@@ -105,13 +105,14 @@ public class TableCellRangeTest {
 		}
 	}
 
-	/////////////////////////////////////////
-	//issue: removeColumnByIndex removeRowByIndex removeCellByIndex
+	// ///////////////////////////////////////
+	// issue: removeColumnByIndex removeRowByIndex removeCellByIndex
 	@Test
 	public void testTextTableMerge() {
 		Table table1 = odtdoc.getTableByName("Table1");
-		//merge whole table
-		CellRange cellRange = table1.getCellRangeByPosition(0, 0, table1.getColumnCount() - 1, table1.getRowCount() - 1);
+		// merge whole table
+		CellRange cellRange = table1
+				.getCellRangeByPosition(0, 0, table1.getColumnCount() - 1, table1.getRowCount() - 1);
 		cellRange.merge();
 		Assert.assertEquals(table1.getColumnCount(), 1);
 		Assert.assertEquals(table1.getRowCount(), 1);
@@ -120,7 +121,7 @@ public class TableCellRangeTest {
 
 	@Test
 	public void testTextColumnMerge() {
-		//merge first column
+		// merge first column
 		Table table1 = odtdoc.getTableByName("Table1");
 		CellRange firstColumn = table1.getCellRangeByPosition(0, 0, 0, table1.getRowCount() - 1);
 		firstColumn.merge();
@@ -129,7 +130,8 @@ public class TableCellRangeTest {
 		Assert.assertTrue(cell.getOwnerTableCell().equals(firstCell));
 		saveodt("MergeFirstColumn");
 		try {
-			TextDocument saveddoc = (TextDocument) TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(odtfilename + "MergeFirstColumn.odt"));
+			TextDocument saveddoc = (TextDocument) TextDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream(odtfilename + "MergeFirstColumn.odt"));
 			Table savedTable = saveddoc.getTableByName("Table1");
 			CellRange firstTwoColumn = savedTable.getCellRangeByPosition(0, 0, 1, savedTable.getRowCount() - 1);
 			firstTwoColumn.merge();
@@ -145,7 +147,7 @@ public class TableCellRangeTest {
 
 	@Test
 	public void testTextRowMerge() {
-		//merge first two row
+		// merge first two row
 		Table table1 = odtdoc.getTableByName("Table1");
 		int rowCount = table1.getRowCount();
 		CellRange firstTwoRow = table1.getCellRangeByPosition(0, 0, table1.getColumnCount() - 1, 1);
@@ -156,7 +158,7 @@ public class TableCellRangeTest {
 
 	@Test
 	public void testSpreadSheetMerge() {
-		//get cell range, set name
+		// get cell range, set name
 		Table sheet1 = odsdoc.getTableByName("Sheet1");
 		CellRange cellRange = sheet1.getCellRangeByPosition(28, 0, 28, 5);
 		cellRange.setCellRangeName("test");
@@ -167,7 +169,8 @@ public class TableCellRangeTest {
 
 		saveods("CellRangeName");
 		try {
-			SpreadsheetDocument saveddos = (SpreadsheetDocument) SpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(filename + "CellRangeName.ods"));
+			SpreadsheetDocument saveddos = (SpreadsheetDocument) SpreadsheetDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream(filename + "CellRangeName.ods"));
 			Table savedSheet = saveddos.getTableByName("Sheet1");
 			CellRange namedCellRange = savedSheet.getCellRangeByName("TimeCellRange");
 			Cell cell = namedCellRange.getCellByPosition("A1");
@@ -181,8 +184,7 @@ public class TableCellRangeTest {
 	@Test
 	public void testMergeExpandCellRange() {
 		try {
-			SpreadsheetDocument ods = SpreadsheetDocument
-					.newSpreadsheetDocument();
+			SpreadsheetDocument ods = SpreadsheetDocument.newSpreadsheetDocument();
 			// the doc contain the table which only have one column and one row
 			// element
 			Table table = ods.getTableByName("Sheet1");
@@ -190,13 +192,13 @@ public class TableCellRangeTest {
 			int nRows = table.getRowCount();
 			Assert.assertTrue(nCols == 1);
 			Assert.assertTrue(nRows == 1);
-			CellRange cellRange = table.getCellRangeByPosition("A1","E1");
+			CellRange cellRange = table.getCellRangeByPosition("A1", "E1");
 			Cell cell = table.getCellByPosition("A1");
 			cell.setStringValue("Merge A1:E1");
 			cellRange.merge();
 			Table table2 = Table.newTable(ods, 1, 1);
 			table2.setTableName("Sheet2");
-			CellRange cellRange2 = table2.getCellRangeByPosition("A1","F3");
+			CellRange cellRange2 = table2.getCellRangeByPosition("A1", "F3");
 			Cell cell2 = table2.getCellByPosition("A1");
 			cell2.setStringValue("Merge A1:F3");
 			cellRange2.merge();
@@ -218,7 +220,7 @@ public class TableCellRangeTest {
 			Assert.assertTrue(swTable.getColumnCount() == 1);
 			Assert.assertTrue(swTable.getRowCount() == 1);
 		} catch (Exception ex) {
-			Logger.getLogger(TableCellRangeTest.class.getName()).log( Level.SEVERE, ex.getMessage(), ex);
+			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
 		}
 

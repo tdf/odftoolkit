@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Document;
-import org.odftoolkit.simple.common.WhitespaceProcessor;
+import org.odftoolkit.simple.common.TextExtractor;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -134,7 +134,7 @@ public class TextSelection extends Selection {
 	 * selection has been deleted.
 	 * 
 	 * @throws InvalidNavigationException
-	 *            if the selection is unavailable.
+	 *             if the selection is unavailable.
 	 */
 	@Override
 	public void cut() throws InvalidNavigationException {
@@ -154,7 +154,7 @@ public class TextSelection extends Selection {
 	 * @param style
 	 *            the style can be from the current document or user defined
 	 * @throws InvalidNavigationException
-	 *            if the selection is unavailable.
+	 *             if the selection is unavailable.
 	 */
 	public void applyStyle(OdfStyleBase style) throws InvalidNavigationException {
 		// append the specified style to the selection
@@ -176,7 +176,7 @@ public class TextSelection extends Selection {
 	 * @param newText
 	 *            the replace text String
 	 * @throws InvalidNavigationException
-	 *            if the selection is unavailable.
+	 *             if the selection is unavailable.
 	 */
 	public void replaceWith(String newText) throws InvalidNavigationException {
 		if (validate() == false) {
@@ -203,7 +203,7 @@ public class TextSelection extends Selection {
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
-	 *            if the selection is unavailable.
+	 *             if the selection is unavailable.
 	 */
 	@Override
 	public void pasteAtFrontOf(Selection positionItem) throws InvalidNavigationException {
@@ -230,7 +230,7 @@ public class TextSelection extends Selection {
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
-	 *            if the selection is unavailable.
+	 *             if the selection is unavailable.
 	 */
 	@Override
 	public void pasteAtEndOf(Selection positionItem) throws InvalidNavigationException {
@@ -257,7 +257,7 @@ public class TextSelection extends Selection {
 	 * @param url
 	 *            the URL of this hypertext reference
 	 * @throws InvalidNavigationException
-	 *            if the selection is unavailable.
+	 *             if the selection is unavailable.
 	 */
 	public void addHref(URL url) throws InvalidNavigationException {
 		if (validate() == false) {
@@ -279,9 +279,8 @@ public class TextSelection extends Selection {
 	 */
 	@Override
 	public String toString() {
-		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
 		return "[" + mMatchedText + "] started from " + mIndexInContainer + " in paragraph:"
-				+ textProcessor.getText(getContainerElement());
+				+ TextExtractor.getText(getContainerElement());
 	}
 
 	@Override
@@ -311,9 +310,9 @@ public class TextSelection extends Selection {
 
 		OdfElement parentElement = getContainerElement();
 		if (parentElement != null) {
-			Node copyParentNode = parentElement.cloneNode(true);
+			OdfElement copyParentNode = (OdfElement) parentElement.cloneNode(true);
 			if (ownerDoc != parentElement.getOwnerDocument()) {
-				copyParentNode = ownerDoc.adoptNode(copyParentNode);
+				copyParentNode = (OdfElement) ownerDoc.adoptNode(copyParentNode);
 			}
 			OdfTextSpan textSpan = new OdfTextSpan(ownerDoc);
 			int sIndex = mIndexInContainer;
@@ -321,8 +320,7 @@ public class TextSelection extends Selection {
 			// delete the content except the selection string
 			// delete from the end to start, so that the postion will not be
 			// impact by delete action
-			WhitespaceProcessor textProcessor = new WhitespaceProcessor();
-			delete(eIndex, textProcessor.getText(copyParentNode).length() - eIndex, copyParentNode);
+			delete(eIndex, TextExtractor.getText(copyParentNode).length() - eIndex, copyParentNode);
 			delete(0, sIndex, copyParentNode);
 			optimize(copyParentNode);
 			Node childNode = copyParentNode.getFirstChild();
@@ -344,14 +342,13 @@ public class TextSelection extends Selection {
 	 */
 	private void optimize(Node pNode) {
 		// check if the text:a can be optimized
-		WhitespaceProcessor textProcess = new WhitespaceProcessor();
 		Node node = pNode.getFirstChild();
 		while (node != null) {
 			Node nextNode = node.getNextSibling();
 			// if ((node.getNodeType() == Node.ELEMENT_NODE) &&
 			// (node.getPrefix().equals("text"))) {
 			if (node instanceof OdfTextSpan) {
-				if (textProcess.getText(node).length() == 0) {
+				if (TextExtractor.getText((OdfTextSpan) node).length() == 0) {
 					node.getParentNode().removeChild(node);
 				} else {
 					optimize(node);
@@ -391,7 +388,6 @@ public class TextSelection extends Selection {
 		if (fromIndex == 0 && mIsInserted) {
 			return;
 		}
-		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
 		int nodeLength = 0;
 		Node node = pNode.getFirstChild();
 		while (node != null) {
@@ -441,7 +437,7 @@ public class TextSelection extends Selection {
 					nodeLength = 1;
 					fromIndex--;
 				} else {
-					nodeLength = textProcessor.getText(node).length();
+					nodeLength = TextExtractor.getText((OdfElement) node).length();
 					insertSpan(textSpan, fromIndex, node);
 					fromIndex -= nodeLength;
 				}
@@ -515,7 +511,6 @@ public class TextSelection extends Selection {
 		}
 		int nodeLength = 0;
 		Node node = pNode.getFirstChild();
-		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
 		while (node != null) {
 			if ((fromIndex == 0) && (leftLength == 0)) {
 				return;
@@ -536,7 +531,7 @@ public class TextSelection extends Selection {
 				} else if (node.getLocalName().equals("tab")) {
 					nodeLength = 1;
 				} else {
-					nodeLength = textProcessor.getText((OdfElement) node).length();
+					nodeLength = TextExtractor.getText((OdfElement) node).length();
 				}
 			}
 			if (nodeLength <= fromIndex) {
@@ -593,7 +588,6 @@ public class TextSelection extends Selection {
 		}
 		int nodeLength = 0;
 		Node node = pNode.getFirstChild();
-		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
 
 		while (node != null) {
 			if ((fromIndex == 0) && (leftLength == 0)) {
@@ -615,7 +609,7 @@ public class TextSelection extends Selection {
 				} else if (node.getLocalName().equals("tab")) {
 					nodeLength = 1;
 				} else {
-					nodeLength = textProcessor.getText((OdfElement) node).length();
+					nodeLength = TextExtractor.getText((OdfElement) node).length();
 				}
 
 			}
@@ -770,8 +764,7 @@ public class TextSelection extends Selection {
 		if (container == null) {
 			return false;
 		}
-		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
-		String content = textProcessor.getText(container);
+		String content = TextExtractor.getText(container);
 		if (content.indexOf(mMatchedText, mIndexInContainer) == mIndexInContainer) {
 			return true;
 		} else {
@@ -789,7 +782,6 @@ public class TextSelection extends Selection {
 		}
 		int nodeLength = 0;
 		Node node = pNode.getFirstChild();
-		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
 		while (node != null) {
 			if ((fromIndex == 0) && (leftLength == 0)) {
 				return;
@@ -810,7 +802,7 @@ public class TextSelection extends Selection {
 				} else if (node.getLocalName().equals("tab")) {
 					nodeLength = 1;
 				} else {
-					nodeLength = textProcessor.getText((OdfElement) node).length();
+					nodeLength = TextExtractor.getText((OdfElement) node).length();
 				}
 			}
 			if (nodeLength <= fromIndex) {

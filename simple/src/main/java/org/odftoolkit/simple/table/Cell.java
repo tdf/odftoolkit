@@ -66,6 +66,7 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.Document;
+import org.odftoolkit.simple.common.TextExtractor;
 import org.odftoolkit.simple.common.WhitespaceProcessor;
 import org.odftoolkit.simple.style.Border;
 import org.odftoolkit.simple.style.Font;
@@ -77,8 +78,8 @@ import org.w3c.dom.Node;
 /**
  * Cell represents table cell feature in ODF document.
  * <p>
- * Table provides methods to get/set/modify the cell content and cell properties.
- *
+ * Table provides methods to get/set/modify the cell content and cell
+ * properties.
  */
 public class Cell {
 
@@ -125,12 +126,17 @@ public class Cell {
 	}
 
 	/**
-	 * Get the <code>Cell</code> instance from the <code>TableTableCellElementBase</code> instance.
+	 * Get the <code>Cell</code> instance from the
+	 * <code>TableTableCellElementBase</code> instance.
 	 * <p>
-	 * Each <code>TableTableCellElementBase</code> instance has a one-to-one relationship to the a <code>Cell</code> instance.
+	 * Each <code>TableTableCellElementBase</code> instance has a one-to-one
+	 * relationship to the a <code>Cell</code> instance.
 	 * 
-	 * @param cellElement	the cell element that need to get the corresponding <code>Cell</code> instance
-	 * @return the <code>Cell</code> instance that represents a specified cell element
+	 * @param cellElement
+	 *            the cell element that need to get the corresponding
+	 *            <code>Cell</code> instance
+	 * @return the <code>Cell</code> instance that represents a specified cell
+	 *         element
 	 */
 	public static Cell getInstance(TableTableCellElementBase cellElement) {
 		TableTableElement tableElement = null;
@@ -153,12 +159,22 @@ public class Cell {
 		int rowRepeatedNum = cell.getTableRow().getRowsRepeatedNumber();
 		if (colRepeatedNum > 1 && rowRepeatedNum > 1) {
 			if (colRepeatedNum > 1) {
-				Logger.getLogger(Cell.class.getName()).log(Level.WARNING, "the cell has the repeated column number, and puzzled about get which repeated column index of the cell,");
+				Logger
+						.getLogger(Cell.class.getName())
+						.log(Level.WARNING,
+								"the cell has the repeated column number, and puzzled about get which repeated column index of the cell,");
 			}
 			if (rowRepeatedNum > 1) {
-				Logger.getLogger(Cell.class.getName()).log(Level.WARNING, "the row contains the current cell has the repeated row number, and puzzled about get which repeated row index of the cell,");
+				Logger
+						.getLogger(Cell.class.getName())
+						.log(
+								Level.WARNING,
+								"the row contains the current cell has the repeated row number, and puzzled about get which repeated row index of the cell,");
 			}
-			Logger.getLogger(Cell.class.getName()).log(Level.WARNING, "here just return the first cell that the repeated column index is 0 and repeated row index is 0, too.");
+			Logger
+					.getLogger(Cell.class.getName())
+					.log(Level.WARNING,
+							"here just return the first cell that the repeated column index is 0 and repeated row index is 0, too.");
 		}
 		return cell;
 	}
@@ -179,8 +195,8 @@ public class Cell {
 	public String getHorizontalAlignment() {
 		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForRead();
 		if (styleElement != null) {
-			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties,
-					OdfName.newName(OdfDocumentNamespace.FO, "text-align"));
+			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName
+					.newName(OdfDocumentNamespace.FO, "text-align"));
 			return styleElement.getProperty(property);
 		}
 		return null;
@@ -188,9 +204,14 @@ public class Cell {
 
 	/**
 	 * Return the horizontal alignment setting of this cell.
-	 * <p>Null will returned if there is no explicit style definition for this cell. 
-	 * <p>Default value will be returned if explicit style definition is found but no horizontal alignment is set.
-	 * @return the horizontal alignment setting. 
+	 * <p>
+	 * Null will returned if there is no explicit style definition for this
+	 * cell.
+	 * <p>
+	 * Default value will be returned if explicit style definition is found but
+	 * no horizontal alignment is set.
+	 * 
+	 * @return the horizontal alignment setting.
 	 */
 	public SimpleHorizontalAlignmentType getHorizontalAlignmentType() {
 		return getStyleHandler().getHorizontalAlignment();
@@ -199,11 +220,13 @@ public class Cell {
 	/**
 	 * Set the horizontal alignment setting of this cell.
 	 * <p>
-	 * The parameter can be "center", "end", "justify", "left", "right", or "start".
-	 * Actually, "left" will be interpreted as "start", while "right" will be interpreted as "end".
-	 * If argument is null, the explicit horizontal alignment setting is removed.
+	 * The parameter can be "center", "end", "justify", "left", "right", or
+	 * "start". Actually, "left" will be interpreted as "start", while "right"
+	 * will be interpreted as "end". If argument is null, the explicit
+	 * horizontal alignment setting is removed.
 	 * 
-	 * @param horizontalAlignment	the horizontal alignment setting.
+	 * @param horizontalAlignment
+	 *            the horizontal alignment setting.
 	 * @see #setHorizontalAlignment(SimpleHorizontalAlignmentType)
 	 * @deprecated As of Simple version 0.3, replaced by
 	 *             <code>setHorizontalAlignment(SimpleHorizontalAlignmentType)</code>
@@ -219,8 +242,8 @@ public class Cell {
 		splitRepeatedCells();
 		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForWrite();
 		if (styleElement != null) {
-			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(
-					OdfDocumentNamespace.FO, "text-align"));
+			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName
+					.newName(OdfDocumentNamespace.FO, "text-align"));
 			if (horizontalAlignment != null) {
 				styleElement.setProperty(property, horizontalAlignment);
 			} else {
@@ -228,12 +251,13 @@ public class Cell {
 			}
 		}
 	}
-	
+
 	/**
-	 * Set the horizontal alignment setting of this cell.
-	 * If the alignment is set as Default, the explicit horizontal alignment setting is removed.
+	 * Set the horizontal alignment setting of this cell. If the alignment is
+	 * set as Default, the explicit horizontal alignment setting is removed.
 	 * 
-	 * @param alignType	the horizontal alignment setting.
+	 * @param alignType
+	 *            the horizontal alignment setting.
 	 */
 	public void setHorizontalAlignment(SimpleHorizontalAlignmentType alignType) {
 		getStyleHandler().setHorizontalAlignment(alignType);
@@ -242,9 +266,10 @@ public class Cell {
 	/**
 	 * Return the vertical alignment setting of this cell.
 	 * <p>
-	 * The returned value can be "auto", "automatic", "baseline", "bottom", "middle", or "top".
+	 * The returned value can be "auto", "automatic", "baseline", "bottom",
+	 * "middle", or "top".
 	 * 
-	 * @return the vertical alignment setting of this cell. 
+	 * @return the vertical alignment setting of this cell.
 	 * 
 	 * @see #getVerticalAlignmentType()
 	 * @deprecated As of Simple version 0.3, replaced by
@@ -254,18 +279,23 @@ public class Cell {
 	public String getVerticalAlignment() {
 		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForRead();
 		if (styleElement != null) {
-			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
-					OdfName.newName(OdfDocumentNamespace.STYLE, "vertical-align"));
+			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName
+					.newName(OdfDocumentNamespace.STYLE, "vertical-align"));
 			return styleElement.getProperty(property);
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Return the vertical alignment setting of this cell.
-	 * <p>Null will returned if there is no explicit style definition for this cell. 
-	 * <p>Default value will be returned if explicit style definition is found but no vertical alignment is set.
-	 * @return the vertical alignment setting. 
+	 * <p>
+	 * Null will returned if there is no explicit style definition for this
+	 * cell.
+	 * <p>
+	 * Default value will be returned if explicit style definition is found but
+	 * no vertical alignment is set.
+	 * 
+	 * @return the vertical alignment setting.
 	 */
 	public SimpleVerticalAlignmentType getVerticalAlignmentType() {
 		return getStyleHandler().getVerticalAlignment();
@@ -274,10 +304,12 @@ public class Cell {
 	/**
 	 * Set the vertical alignment setting of this cell.
 	 * <p>
-	 * The parameter can be "auto", "automatic", "baseline", "bottom", "middle", or "top".
-	 * If argument is null, the explicit vertical alignment setting is removed.
+	 * The parameter can be "auto", "automatic", "baseline", "bottom", "middle",
+	 * or "top". If argument is null, the explicit vertical alignment setting is
+	 * removed.
 	 * 
-	 * @param verticalAlignment	the vertical alignment setting.
+	 * @param verticalAlignment
+	 *            the vertical alignment setting.
 	 * @see #setVerticalAlignment(SimpleVerticalAlignmentType)
 	 * @deprecated As of Simple version 0.3, replaced by
 	 *             <code>setVerticalAlignment(SimpleVerticalAlignmentType)</code>
@@ -287,8 +319,8 @@ public class Cell {
 		splitRepeatedCells();
 		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForWrite();
 		if (styleElement != null) {
-			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(
-					OdfDocumentNamespace.STYLE, "vertical-align"));
+			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName
+					.newName(OdfDocumentNamespace.STYLE, "vertical-align"));
 			if (verticalAlignment != null) {
 				styleElement.setProperty(property, verticalAlignment);
 			} else {
@@ -299,19 +331,23 @@ public class Cell {
 
 	/**
 	 * Set the vertical alignment setting of this cell.
-	 * <p>If the alignment is set as Default or null, the explicit vertical alignment setting is removed.
+	 * <p>
+	 * If the alignment is set as Default or null, the explicit vertical
+	 * alignment setting is removed.
 	 * 
-	 * @param verticalAlignment	the vertical alignment setting.
+	 * @param verticalAlignment
+	 *            the vertical alignment setting.
 	 */
 	public void setVerticalAlignment(SimpleVerticalAlignmentType verticalAlignment) {
 		getStyleHandler().setVerticalAlignment(verticalAlignment);
-	}	
+	}
 
 	/**
 	 * Return the wrap option of this cell.
-	 * @return true if the cell content can be wrapped; 
-	 * <p>
-	 * false if the cell content cannot be wrapped.
+	 * 
+	 * @return true if the cell content can be wrapped;
+	 *         <p>
+	 *         false if the cell content cannot be wrapped.
 	 */
 	public boolean isTextWrapped() {
 		return getStyleHandler().isTextWrapped();
@@ -319,13 +355,16 @@ public class Cell {
 
 	/**
 	 * Set the wrap option of this cell.
-	 * @param isTextWrapped	whether the cell content can be wrapped or not
+	 * 
+	 * @param isTextWrapped
+	 *            whether the cell content can be wrapped or not
 	 */
 	public void setTextWrapped(boolean isTextWrapped) {
 		getStyleHandler().setTextWrapped(isTextWrapped);
 	}
 
-	private TableTableRowElement findRowInTableHeaderRows(TableTableHeaderRowsElement headers, TableTableRowElement tr, int[] indexs) {
+	private TableTableRowElement findRowInTableHeaderRows(TableTableHeaderRowsElement headers, TableTableRowElement tr,
+			int[] indexs) {
 		int result = 0;
 		for (Node m : new DomNodeList(headers.getChildNodes())) {
 			if (m == tr) {
@@ -369,7 +408,7 @@ public class Cell {
 				TableTableHeaderRowsElement headers = (TableTableHeaderRowsElement) m;
 				TableTableRowElement returnEle = findRowInTableHeaderRows(headers, tr, resultIndexs);
 				result += resultIndexs[0];
-				if (returnEle != null) {//find
+				if (returnEle != null) {// find
 					indexs[0] = result;
 					return returnEle;
 				}
@@ -377,7 +416,7 @@ public class Cell {
 				TableTableRowGroupElement aGroup = (TableTableRowGroupElement) m;
 				TableTableRowElement returnEle = findRowInTableRowGroup(aGroup, tr, resultIndexs);
 				result += resultIndexs[0];
-				if (returnEle != null) {//find
+				if (returnEle != null) {// find
 					indexs[0] = result;
 					return returnEle;
 				}
@@ -385,12 +424,12 @@ public class Cell {
 				TableTableRowsElement rows = (TableTableRowsElement) m;
 				TableTableRowElement returnEle = findRowInTableRows(rows, tr, resultIndexs);
 				result += resultIndexs[0];
-				if (returnEle != null) {//find
+				if (returnEle != null) {// find
 					indexs[0] = result;
 					return returnEle;
 				}
 			} else if (m instanceof TableTableRowElement) {
-				if (m == tr) { //find
+				if (m == tr) { // find
 					indexs[0] = result;
 					return tr;
 				}
@@ -403,6 +442,7 @@ public class Cell {
 
 	/**
 	 * Get the index of the table row which contains this cell.
+	 * 
 	 * @return the index of the row containing this cell
 	 */
 	public int getRowIndex() {
@@ -420,6 +460,7 @@ public class Cell {
 
 	/**
 	 * Get an instance of table feature which contains this cell.
+	 * 
 	 * @return the table containing this cell
 	 */
 	public Table getTable() {
@@ -432,6 +473,7 @@ public class Cell {
 
 	/**
 	 * Get the index of the table column which contains this cell.
+	 * 
 	 * @return the index of the column containing this cell
 	 */
 	public int getColumnIndex() {
@@ -450,6 +492,7 @@ public class Cell {
 
 	/**
 	 * Get the instance of table column feature which contains this cell.
+	 * 
 	 * @return the instance of table column feature which contains the cell.
 	 */
 	public Column getTableColumn() {
@@ -459,7 +502,8 @@ public class Cell {
 	}
 
 	TableTableColumnElement getTableColumnElement() {
-		//return OdfTableCellBaseImpl.getTableColumn((OdfTableCellBase) mCellElement);
+		// return OdfTableCellBaseImpl.getTableColumn((OdfTableCellBase)
+		// mCellElement);
 		TableTableElement tableElement = getTableElement();
 		int columnindex = getColumnIndex();
 		Table fTable = Table.getInstance(tableElement);
@@ -468,6 +512,7 @@ public class Cell {
 
 	/**
 	 * Get the instance of table row feature which contains this cell.
+	 * 
 	 * @return the instance of table row feature which contains the cell.
 	 */
 	public Row getTableRow() {
@@ -486,6 +531,7 @@ public class Cell {
 
 	/**
 	 * Get the table object who contains this cell.
+	 * 
 	 * @return the table object who contains the cell.
 	 */
 	private TableTableElement getTableElement() {
@@ -502,32 +548,40 @@ public class Cell {
 	/**
 	 * Get the cell that covers this cell.
 	 * <p>
-	 * If the cell is a covered cell, the owner cell will be returned;
-	 * if the cell is a real cell , the cell itself will be returned.
+	 * If the cell is a covered cell, the owner cell will be returned; if the
+	 * cell is a real cell , the cell itself will be returned.
+	 * 
 	 * @return the cell that covers the current cell
 	 */
 	public Cell getOwnerTableCell() {
 		Table ownerTable = getTable();
-		List<CellCoverInfo> coverList = ownerTable.getCellCoverInfos(0, 0, ownerTable.getColumnCount() - 1, ownerTable.getRowCount() - 1);
+		List<CellCoverInfo> coverList = ownerTable.getCellCoverInfos(0, 0, ownerTable.getColumnCount() - 1, ownerTable
+				.getRowCount() - 1);
 		return ownerTable.getOwnerCellByPosition(coverList, getColumnIndex(), getRowIndex());
 	}
 
 	/**
-	 * Get the instance of <code>TableTableCellElementBase</code> which represents this cell.
-	 * @return the instance of <code>TableTableCellElementBase</code> 
+	 * Get the instance of <code>TableTableCellElementBase</code> which
+	 * represents this cell.
+	 * 
+	 * @return the instance of <code>TableTableCellElementBase</code>
 	 */
 	public TableTableCellElementBase getOdfElement() {
 		return mCellElement;
 	}
 
 	/**
-	 * Return the currency code of this cell, for example, "USD", "EUR", "CNY", and etc. 
+	 * Return the currency code of this cell, for example, "USD", "EUR", "CNY",
+	 * and etc.
 	 * <p>
-	 * If the value type is not "currency", an IllegalArgumentException will be thrown.
+	 * If the value type is not "currency", an IllegalArgumentException will be
+	 * thrown.
 	 * 
 	 * @return the currency code
-	 * <p>
-	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the value type is not "currency".
+	 *         <p>
+	 * @throws IllegalArgumentException
+	 *             an IllegalArgumentException will be thrown if the value type
+	 *             is not "currency".
 	 */
 	public String getCurrencyCode() {
 		if (mCellElement.getOfficeValueTypeAttribute().equals(OfficeValueTypeAttribute.Value.CURRENCY.toString())) {
@@ -538,15 +592,18 @@ public class Cell {
 	}
 
 	/**
-	 * Set the currency code of this cell, for example, "USD", "EUR", "CNY", and etc.
+	 * Set the currency code of this cell, for example, "USD", "EUR", "CNY", and
+	 * etc.
 	 * 
-	 * @param currency	the currency code that need to be set.
-	 * @throws IllegalArgumentException  If input <code>currency</code> is null, an IllegalArgumentException will be thrown.
+	 * @param currency
+	 *            the currency code that need to be set.
+	 * @throws IllegalArgumentException
+	 *             If input <code>currency</code> is null, an
+	 *             IllegalArgumentException will be thrown.
 	 */
 	public void setCurrencyCode(String currency) {
 		if (currency == null) {
-			throw new IllegalArgumentException(
-					"Currency code of cell should not be null.");
+			throw new IllegalArgumentException("Currency code of cell should not be null.");
 		}
 		splitRepeatedCells();
 		if (mCellElement.getOfficeValueTypeAttribute().equals(OfficeValueTypeAttribute.Value.CURRENCY.toString())) {
@@ -561,13 +618,15 @@ public class Cell {
 	}
 
 	/**
-	 * Set the value type of this cell.
-	 * The parameter can be "boolean", "currency", "date", "float", "percentage", "string" or "time".
+	 * Set the value type of this cell. The parameter can be "boolean",
+	 * "currency", "date", "float", "percentage", "string" or "time".
 	 * <p>
-	 * If the parameter <code>type</code> is not a valid cell type, an IllegalArgumentException will be thrown.
+	 * If the parameter <code>type</code> is not a valid cell type, an
+	 * IllegalArgumentException will be thrown.
 	 * 
-	 * @param type	the type that need to be set
-	 * If input type is null, an IllegalArgumentException will be thrown.
+	 * @param type
+	 *            the type that need to be set If input type is null, an
+	 *            IllegalArgumentException will be thrown.
 	 */
 	public void setValueType(String type) {
 		if (type == null) {
@@ -583,9 +642,9 @@ public class Cell {
 	}
 
 	/**
-	 * Get the value type of this cell.
-	 * The returned value can be "boolean", "currency", "date", "float", "percentage", "string" or "time".
-	 * If no value type is set, null will be returned.
+	 * Get the value type of this cell. The returned value can be "boolean",
+	 * "currency", "date", "float", "percentage", "string" or "time". If no
+	 * value type is set, null will be returned.
 	 * 
 	 * @return the type of the cell
 	 */
@@ -603,9 +662,11 @@ public class Cell {
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "float".
 	 * 
-	 * @return the double value of this cell as a Double object. If the cell value is empty, null will be returned.
-	 * <p>
-	 * An IllegalArgumentException will be thrown if the cell type is not "float".
+	 * @return the double value of this cell as a Double object. If the cell
+	 *         value is empty, null will be returned.
+	 *         <p>
+	 *         An IllegalArgumentException will be thrown if the cell type is
+	 *         not "float".
 	 */
 	public Double getDoubleValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.FLOAT) {
@@ -620,8 +681,11 @@ public class Cell {
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "currency".
 	 * 
-	 * @return the currency value of this cell as a Double object. If the cell value is empty, null will be returned.
-	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the cell type is not "currency".
+	 * @return the currency value of this cell as a Double object. If the cell
+	 *         value is empty, null will be returned.
+	 * @throws IllegalArgumentException
+	 *             an IllegalArgumentException will be thrown if the cell type
+	 *             is not "currency".
 	 */
 	public Double getCurrencyValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.CURRENCY) {
@@ -633,8 +697,11 @@ public class Cell {
 
 	/**
 	 * Get the symbol of currency.
+	 * 
 	 * @return the currency symbol
-	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the value type is not "currency".
+	 * @throws IllegalArgumentException
+	 *             an IllegalArgumentException will be thrown if the value type
+	 *             is not "currency".
 	 */
 	public String getCurrencySymbol() {
 		if (getTypeAttr() != OfficeValueTypeAttribute.Value.CURRENCY) {
@@ -643,7 +710,8 @@ public class Cell {
 
 		OdfStyleBase style = getStyleHandler().getCellStyleElementForRead();
 		if (style != null) {
-			String dataStyleName = style.getOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.STYLE, "data-style-name"));
+			String dataStyleName = style.getOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.STYLE,
+					"data-style-name"));
 			OdfNumberCurrencyStyle dataStyle = mCellElement.getAutomaticStyles().getCurrencyStyle(dataStyleName);
 			if (dataStyle == null) {
 				dataStyle = mDocument.getDocumentStyles().getCurrencyStyle(dataStyleName);
@@ -656,12 +724,17 @@ public class Cell {
 	}
 
 	/**
-	 * Set the value and currency of the cell, and set the value type as "currency". 
-	 * If<code>value</value> is null, the cell value will be removed.
+	 * Set the value and currency of the cell, and set the value type as
+	 * "currency". If
+	 * <code>value</value> is null, the cell value will be removed.
 	 * 
-	 * @param value  the value that will be set 
-	 * @param currency	the currency that will be set.
-	 * @throws IllegalArgumentException  If input currency is null, an IllegalArgumentException will be thrown.
+	 * @param value
+	 *            the value that will be set
+	 * @param currency
+	 *            the currency that will be set.
+	 * @throws IllegalArgumentException
+	 *             If input currency is null, an IllegalArgumentException will
+	 *             be thrown.
 	 */
 	public void setCurrencyValue(Double value, String currency) {
 		if (currency == null) {
@@ -678,8 +751,11 @@ public class Cell {
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "percentage".
 	 * 
-	 * @return the percentage value of this cell as a Double object. If the cell value is empty, null will be returned.
-	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the cell type is not "percentage".
+	 * @return the percentage value of this cell as a Double object. If the cell
+	 *         value is empty, null will be returned.
+	 * @throws IllegalArgumentException
+	 *             an IllegalArgumentException will be thrown if the cell type
+	 *             is not "percentage".
 	 */
 	public Double getPercentageValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.PERCENTAGE) {
@@ -690,10 +766,12 @@ public class Cell {
 	}
 
 	/**
-	 * Set the cell value as a percentage value and set the value type as percentage too.
-	 * If<code>value</value> is null, the cell value will be removed.
+	 * Set the cell value as a percentage value and set the value type as
+	 * percentage too. If
+	 * <code>value</value> is null, the cell value will be removed.
 	 * 
-	 * @param value	the value that will be set
+	 * @param value
+	 *            the value that will be set
 	 */
 	public void setPercentageValue(Double value) {
 		splitRepeatedCells();
@@ -707,10 +785,9 @@ public class Cell {
 	 * @return the text displayed in this cell
 	 */
 	public String getDisplayText() {
-		//TODO: This function doesn't work well if a cell contains a list.
-		//Refer to testGetSetTextValue();
-		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
-		return textProcessor.getText(mCellElement);
+		// TODO: This function doesn't work well if a cell contains a list.
+		// Refer to testGetSetTextValue();
+		return TextExtractor.getText(mCellElement);
 	}
 
 	/**
@@ -722,8 +799,11 @@ public class Cell {
 	 * calculated and set by editor. So an adapter can be assigned to adapt cell
 	 * value and value type.
 	 * 
-	 * @param content   the displayed text.
-	 * @param adapter   the <code>CellValueAdapter</code> used to adapt cell value and value type.
+	 * @param content
+	 *            the displayed text.
+	 * @param adapter
+	 *            the <code>CellValueAdapter</code> used to adapt cell value and
+	 *            value type.
 	 * 
 	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 * @since 0.3
@@ -736,7 +816,7 @@ public class Cell {
 		// adapt value and value type by display text.
 		adapter.adaptValue(this, content);
 	}
-	
+
 	/**
 	 * Set the text displayed in this cell. If content is null, it will display
 	 * the empty string instead.
@@ -748,7 +828,8 @@ public class Cell {
 	 * {@link org.odftoolkit.simple.table.DefaultCellValueAdapter
 	 * <code>DefaultCellValueAdapter</code>}.
 	 * 
-	 * @param content   the displayed text.
+	 * @param content
+	 *            the displayed text.
 	 * 
 	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 * @see org.odftoolkit.simple.table.DefaultCellValueAdapter
@@ -756,7 +837,7 @@ public class Cell {
 	public void setDisplayText(String content) {
 		setDisplayText(content, CellValueAdapter.DEFAULT_VALUE_ADAPTER);
 	}
-	
+
 	/**
 	 * Set the text displayed in this cell, with a specified style name.
 	 * <p>
@@ -765,10 +846,16 @@ public class Cell {
 	 * calculated and set by editor. So an adapter can be assigned to adapt cell
 	 * value and value type.
 	 * 
-	 * @param content    the displayed text. If content is null, it will display the empty string instead. 
-	 * @param adapter    the <code>CellValueAdapter</code> used to adapt cell value and value type.
-	 * @param stylename  the style name. If stylename is null, the content will use the default paragraph style.
-	 *
+	 * @param content
+	 *            the displayed text. If content is null, it will display the
+	 *            empty string instead.
+	 * @param adapter
+	 *            the <code>CellValueAdapter</code> used to adapt cell value and
+	 *            value type.
+	 * @param stylename
+	 *            the style name. If stylename is null, the content will use the
+	 *            default paragraph style.
+	 * 
 	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 * @since 0.3
 	 */
@@ -780,7 +867,7 @@ public class Cell {
 		// adapt value and value type by display text.
 		adapter.adaptValue(this, content);
 	}
-	
+
 	/**
 	 * Set the text displayed in this cell, with a specified style name.
 	 * <p>
@@ -791,8 +878,12 @@ public class Cell {
 	 * {@link org.odftoolkit.simple.table.DefaultCellValueAdapter
 	 * <code>DefaultCellValueAdapter</code>}.
 	 * 
-	 * @param content    the displayed text. If content is null, it will display the empty string instead. 
-	 * @param stylename  the style name. If stylename is null, the content will use the default paragraph style.
+	 * @param content
+	 *            the displayed text. If content is null, it will display the
+	 *            empty string instead.
+	 * @param stylename
+	 *            the style name. If stylename is null, the content will use the
+	 *            default paragraph style.
 	 * 
 	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 * @see org.odftoolkit.simple.table.DefaultCellValueAdapter
@@ -800,8 +891,9 @@ public class Cell {
 	public void setDisplayText(String content, String stylename) {
 		setDisplayText(content, CellValueAdapter.DEFAULT_VALUE_ADAPTER, stylename);
 	}
-	
-	// Set the text content in this cell. If content is null, it will display the empty string instead. 
+
+	// Set the text content in this cell. If content is null, it will display
+	// the empty string instead.
 	private void setDisplayTextContent(String content, String stylename) {
 		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
 		OdfStylableElement element = OdfElement.findFirstChildNode(OdfTextParagraph.class, mCellElement);
@@ -826,11 +918,13 @@ public class Cell {
 		element.setTextContent(null);
 		textProcessor.append(element, content);
 	}
-	
+
 	/**
 	 * Set the cell value as a double and set the value type to be "float".
 	 * 
-	 * @param value	the double value that will be set. If<code>value</value> is null, the cell value will be removed.
+	 * @param value
+	 *            the double value that will be set. If
+	 *            <code>value</value> is null, the cell value will be removed.
 	 */
 	public void setDoubleValue(Double value) {
 		splitRepeatedCells();
@@ -844,8 +938,11 @@ public class Cell {
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "boolean".
 	 * 
-	 * @return the Boolean value of cell. If the cell value is empty, null will be returned.
-	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the cell type is not "boolean".
+	 * @return the Boolean value of cell. If the cell value is empty, null will
+	 *         be returned.
+	 * @throws IllegalArgumentException
+	 *             an IllegalArgumentException will be thrown if the cell type
+	 *             is not "boolean".
 	 */
 	public Boolean getBooleanValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.BOOLEAN) {
@@ -856,9 +953,11 @@ public class Cell {
 	}
 
 	/**
-	 * Set the cell value as a boolean and set the value type to be boolean. If<code>value</value> is null, the cell value will be removed.
+	 * Set the cell value as a boolean and set the value type to be boolean. If
+	 * <code>value</value> is null, the cell value will be removed.
 	 * 
-	 * @param value	the value of boolean type
+	 * @param value
+	 *            the value of boolean type
 	 */
 	public void setBooleanValue(Boolean value) {
 		splitRepeatedCells();
@@ -873,7 +972,9 @@ public class Cell {
 	 * Throw IllegalArgumentException if the cell type is not "date".
 	 * 
 	 * @return the Calendar value of cell
-	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown, if the cell type is not "date".
+	 * @throws IllegalArgumentException
+	 *             an IllegalArgumentException will be thrown, if the cell type
+	 *             is not "date".
 	 */
 	public Calendar getDateValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.DATE) {
@@ -893,7 +994,9 @@ public class Cell {
 	/**
 	 * Set the cell value as a date, and set the value type to be "date".
 	 * 
-	 * @param date	the value of {@link java.util.Calendar java.util.Calendar} type.
+	 * @param date
+	 *            the value of {@link java.util.Calendar java.util.Calendar}
+	 *            type.
 	 */
 	public void setDateValue(Calendar date) {
 		if (date == null) {
@@ -910,8 +1013,9 @@ public class Cell {
 	/**
 	 * Set the cell value as a string, and set the value type to be string.
 	 * 
-	 * @param str	the value of string type. 
-	 * If input string is null, an empty string will be set.
+	 * @param str
+	 *            the value of string type. If input string is null, an empty
+	 *            string will be set.
 	 */
 	public void setStringValue(String str) {
 		if (str == null) {
@@ -923,16 +1027,16 @@ public class Cell {
 		setDisplayTextContent(str, null);
 	}
 
-	//Note: if you want to change the cell
-	//splitRepeatedCells must be called first in order to 
-	//1. update parent row if the row is the repeated rows.
-	//2. update the cell itself if the cell is the column repeated cells.
+	// Note: if you want to change the cell
+	// splitRepeatedCells must be called first in order to
+	// 1. update parent row if the row is the repeated rows.
+	// 2. update the cell itself if the cell is the column repeated cells.
 	void splitRepeatedCells() {
 		Table table = getTable();
-		//1.if the parent row is the repeated row
-		//the repeated row has to be separated
-		//after this the cell element and repeated index will be updated
-		//according to the new parent row
+		// 1.if the parent row is the repeated row
+		// the repeated row has to be separated
+		// after this the cell element and repeated index will be updated
+		// according to the new parent row
 		Row row = getTableRow();
 		int colIndex = getColumnIndex();
 		if (row.getRowsRepeatedNumber() > 1) {
@@ -943,11 +1047,11 @@ public class Cell {
 			mnRepeatedRowIndex = cell.mnRepeatedRowIndex;
 		}
 
-		//2.if the cell is the column repeated cell
-		//this repeated cell has to be separated
+		// 2.if the cell is the column repeated cell
+		// this repeated cell has to be separated
 		int repeateNum = getColumnsRepeatedNumber();
 		if (repeateNum > 1) {
-			//change this repeated column to several single columns
+			// change this repeated column to several single columns
 			TableTableCellElementBase ownerCellElement = null;
 			int repeatedColIndex = mnRepeatedColIndex;
 			Node refElement = mCellElement;
@@ -962,11 +1066,12 @@ public class Cell {
 					table.updateCellRepository(mCellElement, i, mnRepeatedRowIndex, newCell, 0, mnRepeatedRowIndex);
 				}
 			}
-			//remove this column element
+			// remove this column element
 			row.getOdfElement().removeChild(mCellElement);
 
 			if (ownerCellElement != null) {
-				table.updateCellRepository(mCellElement, mnRepeatedColIndex, mnRepeatedRowIndex, ownerCellElement, 0, mnRepeatedRowIndex);
+				table.updateCellRepository(mCellElement, mnRepeatedColIndex, mnRepeatedRowIndex, ownerCellElement, 0,
+						mnRepeatedRowIndex);
 				mCellElement = ownerCellElement;
 				mnRepeatedColIndex = 0;
 			}
@@ -990,7 +1095,9 @@ public class Cell {
 	 * Throw exception if the cell type is not "time".
 	 * 
 	 * @return the Calendar value of cell
-	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the cell type is not time.
+	 * @throws IllegalArgumentException
+	 *             an IllegalArgumentException will be thrown if the cell type
+	 *             is not time.
 	 */
 	public Calendar getTimeValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.TIME) {
@@ -1010,8 +1117,12 @@ public class Cell {
 	/**
 	 * Set the cell value as a time and set the value type to be "time" too.
 	 * 
-	 * @param time  the value of {@link java.util.Calendar java.util.Calendar} type.
-	 * @throws IllegalArgumentException   If input time is null, an IllegalArgumentException exception will be thrown.
+	 * @param time
+	 *            the value of {@link java.util.Calendar java.util.Calendar}
+	 *            type.
+	 * @throws IllegalArgumentException
+	 *             If input time is null, an IllegalArgumentException exception
+	 *             will be thrown.
 	 */
 	public void setTimeValue(Calendar time) {
 		if (time == null) {
@@ -1040,9 +1151,10 @@ public class Cell {
 	/**
 	 * Get the background color of this cell.
 	 * <p>
-	 * If no background color is set, default background color "#FFFFFF" will be returned.
+	 * If no background color is set, default background color "#FFFFFF" will be
+	 * returned.
 	 * 
-	 * @return the background color of this cell 
+	 * @return the background color of this cell
 	 */
 	public Color getCellBackgroundColor() {
 		return getStyleHandler().getBackgroundColor();
@@ -1051,9 +1163,10 @@ public class Cell {
 	/**
 	 * Get the background color string of this cell.
 	 * <p>
-	 * If no background color is set, default background color "#FFFFFF" will be returned.
+	 * If no background color is set, default background color "#FFFFFF" will be
+	 * returned.
 	 * 
-	 * @return the background color of this cell 
+	 * @return the background color of this cell
 	 * 
 	 * @see #getCellBackgroundColor()
 	 * @deprecated As of Simple version 0.3, replaced by
@@ -1064,8 +1177,8 @@ public class Cell {
 		String color = DEFAULT_BACKGROUND_COLOR;
 		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForRead();
 		if (styleElement != null) {
-			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
-					OdfName.newName(OdfDocumentNamespace.FO, "background-color"));
+			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName
+					.newName(OdfDocumentNamespace.FO, "background-color"));
 			String property = styleElement.getProperty(bkColorProperty);
 			if (Color.isValid(property)) {
 				color = property;
@@ -1078,20 +1191,22 @@ public class Cell {
 	 * Set the background color of this cell.
 	 * 
 	 * @param cellBackgroundColor
-	 *            the background color that need to set. 
-	 *            If <code>cellBackgroundColor</code> is null, default background color <code>Color.WHITE</code> will be set.
+	 *            the background color that need to set. If
+	 *            <code>cellBackgroundColor</code> is null, default background
+	 *            color <code>Color.WHITE</code> will be set.
 	 */
 	public void setCellBackgroundColor(Color cellBackgroundColor) {
 		getStyleHandler().setBackgroundColor(cellBackgroundColor);
 	}
 
 	/**
-	 * Set the background color of this cell using string. The string must be a valid argument for 
-	 * constructing {@link org.odftoolkit.odfdom.type.Color <code>org.odftoolkit.odfdom.type.Color</code>}. 
+	 * Set the background color of this cell using string. The string must be a
+	 * valid argument for constructing {@link org.odftoolkit.odfdom.type.Color
+	 * <code>org.odftoolkit.odfdom.type.Color</code>}.
 	 * 
 	 * @param cellBackgroundColor
-	 *            the background color that need to set. 
-	 *            If cellBackgroundColor is null, default background color #FFFFFF will be set.
+	 *            the background color that need to set. If cellBackgroundColor
+	 *            is null, default background color #FFFFFF will be set.
 	 * @see org.odftoolkit.odfdom.type.Color
 	 * @see #setCellBackgroundColor(Color)
 	 * @deprecated As of Simple version 0.3, replaced by
@@ -1100,14 +1215,15 @@ public class Cell {
 	@Deprecated
 	public void setCellBackgroundColor(String cellBackgroundColor) {
 		if (!Color.isValid(cellBackgroundColor)) {
-			Logger.getLogger(Cell.class.getName()).log(Level.WARNING, "Parameter is invalid for datatype Color, default background color #FFFFFF will be set.");
+			Logger.getLogger(Cell.class.getName()).log(Level.WARNING,
+					"Parameter is invalid for datatype Color, default background color #FFFFFF will be set.");
 			cellBackgroundColor = DEFAULT_BACKGROUND_COLOR;
 		}
 		splitRepeatedCells();
 		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForWrite();
 		if (styleElement != null) {
-			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
-					OdfName.newName(OdfDocumentNamespace.FO, "background-color"));
+			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName
+					.newName(OdfDocumentNamespace.FO, "background-color"));
 			styleElement.setProperty(bkColorProperty, cellBackgroundColor);
 		}
 	}
@@ -1161,9 +1277,8 @@ public class Cell {
 	 * Set the column spanned number.
 	 * 
 	 * @param spannedNum
-	 *            the column spanned number to be set. If spannedNum is less than 1,
-	 *            default column spanned number 1 will be
-	 *            set.
+	 *            the column spanned number to be set. If spannedNum is less
+	 *            than 1, default column spanned number 1 will be set.
 	 */
 	void setColumnSpannedNumber(int spannedNum) {
 		if (spannedNum < 1) {
@@ -1194,10 +1309,10 @@ public class Cell {
 	/**
 	 * Set the row spanned number.
 	 * 
-	 * @param spannedNum	row spanned number that need to be set 
-	 *            the row spanned number that need to be set. If spannedNum is
-	 *            less than 1, default row spanned number 1 will be
-	 *            set.
+	 * @param spannedNum
+	 *            row spanned number that need to be set the row spanned number
+	 *            that need to be set. If spannedNum is less than 1, default row
+	 *            spanned number 1 will be set.
 	 */
 	void setRowSpannedNumber(int spannedNum) {
 		if (spannedNum < 1) {
@@ -1234,21 +1349,24 @@ public class Cell {
 			return "";
 		}
 		if (style instanceof OdfStyle)
-			return ((OdfStyle)style).getStyleNameAttribute();
+			return ((OdfStyle) style).getStyleNameAttribute();
 		else
 			return "";
 	}
 
-	/** 
+	/**
 	 * Set a formula to the cell.
 	 * <p>
-	 * Please note, the parameter <code>formula</code> will not be checked and interpreted;
-	 * the cell value will not be calculated.
-	 * It's just simply set as a formula attribute.
+	 * Please note, the parameter <code>formula</code> will not be checked and
+	 * interpreted; the cell value will not be calculated. It's just simply set
+	 * as a formula attribute.
 	 * 
-	 * @param formula	the formula that need to be set.
+	 * @param formula
+	 *            the formula that need to be set.
 	 * @see org.odftoolkit.odfdom.dom.attribute.table.TableFormulaAttribute
-	 * @throws IllegalArgumentException  if formula is null, an IllegalArgumentException will be thrown.
+	 * @throws IllegalArgumentException
+	 *             if formula is null, an IllegalArgumentException will be
+	 *             thrown.
 	 */
 	public void setFormula(String formula) {
 		if (formula == null) {
@@ -1262,40 +1380,46 @@ public class Cell {
 	 * Get the formula string of the cell.
 	 * 
 	 * @return the formula representation of the cell
-	 * <p>
-	 * If the cell does not contain a formula, null will be returned.
+	 *         <p>
+	 *         If the cell does not contain a formula, null will be returned.
 	 * 
 	 */
 	public String getFormula() {
 		return mCellElement.getTableFormulaAttribute();
 	}
 
-//	/**
-//	 * get the error value of the cell
-//	 * if the formula can not be calculated, an error will be set
-//	 * @return
-//	 * 			return 0 if the cell has no error
-//	 * 			return the error value of the cell if the formula result can not be calculated
-//	 * 			such as divided by 0
-//	 */
-//	public long getError()
-//	{
-//		return 0;
-//	}
+	// /**
+	// * get the error value of the cell
+	// * if the formula can not be calculated, an error will be set
+	// * @return
+	// * return 0 if the cell has no error
+	// * return the error value of the cell if the formula result can not be
+	// calculated
+	// * such as divided by 0
+	// */
+	// public long getError()
+	// {
+	// return 0;
+	// }
 	/**
 	 * Set the currency symbol and overall format of a currency cell.
 	 * <p>
-	 * Please note the overall format includes the symbol character, for example: $#,##0.00.
+	 * Please note the overall format includes the symbol character, for
+	 * example: $#,##0.00.
 	 * <p>
 	 * This function only works for currency.
-	 * @param currencySymbol	the currency symbol
-	 * @param format			overall format
-	 * @throws IllegalArgumentException  if input currencySymbol or format is null, an IllegalArgumentException will be thrown.
+	 * 
+	 * @param currencySymbol
+	 *            the currency symbol
+	 * @param format
+	 *            overall format
+	 * @throws IllegalArgumentException
+	 *             if input currencySymbol or format is null, an
+	 *             IllegalArgumentException will be thrown.
 	 */
 	public void setCurrencyFormat(String currencySymbol, String format) {
 		if (currencySymbol == null) {
-			throw new IllegalArgumentException(
-					"currencySymbol shouldn't be null.");
+			throw new IllegalArgumentException("currencySymbol shouldn't be null.");
 		}
 		if (format == null) {
 			throw new IllegalArgumentException("format shouldn't be null.");
@@ -1312,22 +1436,19 @@ public class Cell {
 			throw new IllegalArgumentException();
 		}
 
-		OdfNumberCurrencyStyle currencyStyle = new OdfNumberCurrencyStyle(
-				(OdfFileDom) mCellElement.getOwnerDocument(),
-				currencySymbol,
-				format,
-				getUniqueCurrencyStyleName());
+		OdfNumberCurrencyStyle currencyStyle = new OdfNumberCurrencyStyle((OdfFileDom) mCellElement.getOwnerDocument(),
+				currencySymbol, format, getUniqueCurrencyStyleName());
 		mCellElement.getAutomaticStyles().appendChild(currencyStyle);
 		setDataDisplayStyleName(currencyStyle.getStyleNameAttribute());
 		Double value = getCurrencyValue();
 
-		//set display text
+		// set display text
 		if (value != null) {
 			setDisplayTextContent(formatCurrency(currencyStyle, value.doubleValue()), null);
 		}
 	}
 
-	//This method doesn't handle style:map element.
+	// This method doesn't handle style:map element.
 	private String formatCurrency(OdfNumberCurrencyStyle currencyStyle, double value) {
 		String valuestr = "";
 		for (Node m : new DomNodeList(currencyStyle.getChildNodes())) {
@@ -1347,7 +1468,7 @@ public class Cell {
 		return valuestr;
 	}
 
-	/**
+/**
 	 * Set the format string of the cell.
 	 * <p>
 	 * This function only works for float, date, time and percentage, otherwise an
@@ -1404,21 +1525,18 @@ public class Cell {
 		if (type == null) {
 			if (formatStr.contains("%")) {
 				setValueType("percentage");
-			} else if (formatStr.contains("H") || formatStr.contains("k")
-					|| formatStr.contains("m") || formatStr.contains("s")
-					|| formatStr.contains("S")) {
+			} else if (formatStr.contains("H") || formatStr.contains("k") || formatStr.contains("m")
+					|| formatStr.contains("s") || formatStr.contains("S")) {
 				setValueType("time");
-			} else if (formatStr.contains("y") || formatStr.contains("M")
-					|| formatStr.contains("w") || formatStr.contains("W")
-					|| formatStr.contains("D") || formatStr.contains("d")
-					|| formatStr.contains("F") || formatStr.contains("E")
-					|| formatStr.contains("K") || formatStr.contains("h")) {
+			} else if (formatStr.contains("y") || formatStr.contains("M") || formatStr.contains("w")
+					|| formatStr.contains("W") || formatStr.contains("D") || formatStr.contains("d")
+					|| formatStr.contains("F") || formatStr.contains("E") || formatStr.contains("K")
+					|| formatStr.contains("h")) {
 				setValueType("date");
 			} else if (formatStr.contains("#") || formatStr.contains("0")) {
 				setValueType("float");
 			} else {
-				throw new UnsupportedOperationException("format string: "
-						+ formatStr
+				throw new UnsupportedOperationException("format string: " + formatStr
 						+ " can't be adapted to a possible value type.");
 			}
 			type = getValueType();
@@ -1432,9 +1550,7 @@ public class Cell {
 		splitRepeatedCells();
 		typeValue = OfficeValueTypeAttribute.Value.enumValueOf(type);
 		if (typeValue == OfficeValueTypeAttribute.Value.FLOAT) {
-			OdfNumberStyle numberStyle = new OdfNumberStyle(
-					(OdfFileDom) mCellElement.getOwnerDocument(),
-					formatStr,
+			OdfNumberStyle numberStyle = new OdfNumberStyle((OdfFileDom) mCellElement.getOwnerDocument(), formatStr,
 					getUniqueNumberStyleName());
 			mCellElement.getAutomaticStyles().appendChild(numberStyle);
 			setDataDisplayStyleName(numberStyle.getStyleNameAttribute());
@@ -1443,10 +1559,8 @@ public class Cell {
 				setDisplayTextContent((new DecimalFormat(formatStr)).format(value.doubleValue()), null);
 			}
 		} else if (typeValue == OfficeValueTypeAttribute.Value.DATE) {
-			OdfNumberDateStyle dateStyle = new OdfNumberDateStyle(
-					(OdfFileDom) mCellElement.getOwnerDocument(),
-					formatStr,
-					getUniqueDateStyleName(), null);
+			OdfNumberDateStyle dateStyle = new OdfNumberDateStyle((OdfFileDom) mCellElement.getOwnerDocument(),
+					formatStr, getUniqueDateStyleName(), null);
 			mCellElement.getAutomaticStyles().appendChild(dateStyle);
 			setDataDisplayStyleName(dateStyle.getStyleNameAttribute());
 			String dateStr = mCellElement.getOfficeDateValueAttribute();
@@ -1455,9 +1569,8 @@ public class Cell {
 				setDisplayTextContent((new SimpleDateFormat(formatStr)).format(date.getTime()), null);
 			}
 		} else if (typeValue == OfficeValueTypeAttribute.Value.TIME) {
-			OdfNumberTimeStyle timeStyle = new OdfNumberTimeStyle(
-					(OdfFileDom) mCellElement.getOwnerDocument(), formatStr,
-					getUniqueDateStyleName());
+			OdfNumberTimeStyle timeStyle = new OdfNumberTimeStyle((OdfFileDom) mCellElement.getOwnerDocument(),
+					formatStr, getUniqueDateStyleName());
 			mCellElement.getAutomaticStyles().appendChild(timeStyle);
 			setDataDisplayStyleName(timeStyle.getStyleNameAttribute());
 			String timeStr = mCellElement.getOfficeTimeValueAttribute();
@@ -1466,10 +1579,8 @@ public class Cell {
 				setDisplayTextContent((new SimpleDateFormat(formatStr)).format(time.getTime()), null);
 			}
 		} else if (typeValue == OfficeValueTypeAttribute.Value.PERCENTAGE) {
-			OdfNumberPercentageStyle dateStyle = new OdfNumberPercentageStyle(
-					(OdfFileDom) mCellElement.getOwnerDocument(),
-					formatStr,
-					getUniquePercentageStyleName());
+			OdfNumberPercentageStyle dateStyle = new OdfNumberPercentageStyle((OdfFileDom) mCellElement
+					.getOwnerDocument(), formatStr, getUniquePercentageStyleName());
 			mCellElement.getAutomaticStyles().appendChild(dateStyle);
 			setDataDisplayStyleName(dateStyle.getStyleNameAttribute());
 			Double value = getPercentageValue();
@@ -1492,7 +1603,8 @@ public class Cell {
 		String datadisplayStylename = null;
 		OdfStyleBase styleElement = getStyleHandler().getCellStyleElementForRead();
 		if (styleElement != null) {
-			datadisplayStylename = styleElement.getOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.STYLE, "data-style-name"));
+			datadisplayStylename = styleElement.getOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.STYLE,
+					"data-style-name"));
 		}
 
 		return datadisplayStylename;
@@ -1525,14 +1637,14 @@ public class Cell {
 		return unique_name;
 	}
 
-//    private String getUniqueCellStyleName() {
-//    	String unique_name;
-//		OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
-//	    do {
-//			unique_name = String.format("a%06x", (int) (Math.random() * 0xffffff));
-//		} while (styles.getStyle(unique_name, OdfStyleFamily.TableCell) != null);
-//    	return unique_name;
-//    }	
+	// private String getUniqueCellStyleName() {
+	// String unique_name;
+	// OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
+	// do {
+	// unique_name = String.format("a%06x", (int) (Math.random() * 0xffffff));
+	// } while (styles.getStyle(unique_name, OdfStyleFamily.TableCell) != null);
+	// return unique_name;
+	// }
 	private String getUniqueCurrencyStyleName() {
 		String unique_name;
 		OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
@@ -1572,7 +1684,7 @@ public class Cell {
 			if (style != null) {
 				return style.getFormat();
 			}
-		}else if (typeValue == OfficeValueTypeAttribute.Value.TIME) {
+		} else if (typeValue == OfficeValueTypeAttribute.Value.TIME) {
 			String name = getDataDisplayStyleName();
 			OdfNumberDateStyle style = mCellElement.getAutomaticStyles().getDateStyle(name);
 			if (style == null) {
@@ -1621,13 +1733,11 @@ public class Cell {
 	 */
 	public void removeTextContent() {
 		splitRepeatedCells();
-		//delete text:p child element
+		// delete text:p child element
 		Node node = mCellElement.getFirstChild();
 		while (node != null) {
 			Node nextNode = node.getNextSibling();
-			if (node instanceof TextPElement
-					|| node instanceof TextHElement
-					|| node instanceof TextListElement) {
+			if (node instanceof TextPElement || node instanceof TextHElement || node instanceof TextListElement) {
 				mCellElement.removeChild(node);
 			}
 			node = nextNode;
@@ -1650,16 +1760,16 @@ public class Cell {
 	/**
 	 * Append the content of another cell.
 	 * 
-	 * @param fromCell	another cell whose content will be appended to this cell
+	 * @param fromCell
+	 *            another cell whose content will be appended to this cell
 	 */
 	void appendContentFrom(Cell fromCell) {
 		splitRepeatedCells();
-		WhitespaceProcessor textProcess = new WhitespaceProcessor();
 		TableTableCellElementBase cell = fromCell.getOdfElement();
 		Node node = cell.getFirstChild();
 		while (node != null) {
 			if (node instanceof OdfTextParagraph) {
-				if (!textProcess.getText(node).equals("")) {
+				if (!TextExtractor.getText((OdfTextParagraph) node).equals("")) {
 					mCellElement.appendChild(node.cloneNode(true));
 				}
 			} else {
@@ -1674,10 +1784,10 @@ public class Cell {
 	 * 
 	 *******************************************/
 	/**
-	 * This method is invoked by insertCellBefore and insertRowBefore
-	 * When it is needed to clone a cell and the cell is a cover cell,
-	 * for some instance, we need to find the cell who covers this cell.
-	 * So this method is to get the cell who covers this cell
+	 * This method is invoked by insertCellBefore and insertRowBefore When it is
+	 * needed to clone a cell and the cell is a cover cell, for some instance,
+	 * we need to find the cell who covers this cell. So this method is to get
+	 * the cell who covers this cell
 	 */
 	Cell getCoverCell() {
 		int startRowi = getRowIndex();
@@ -1703,11 +1813,11 @@ public class Cell {
 	}
 
 	/**
-	 * This method is invoked by getCoverCell.
-	 * It's to get the cell in a same row who covers this cell.
+	 * This method is invoked by getCoverCell. It's to get the cell in a same
+	 * row who covers this cell.
 	 * 
 	 * @return the cell in a same row who covers this cell
-	 * <p>
+	 *         <p>
 	 *         Null if there is no cell who covers this cell
 	 */
 	Cell getCoverCellInSameRow() {
@@ -1722,7 +1832,7 @@ public class Cell {
 
 			int oldSpanN = cell.getColumnSpannedNumber();
 			if (oldSpanN + j > startColumni) {
-				//cell.setColumnSpannedNumber(oldSpanN-1);
+				// cell.setColumnSpannedNumber(oldSpanN-1);
 				return cell;
 			}
 			return null;
@@ -1745,7 +1855,7 @@ public class Cell {
 
 			int oldSpanN = cell.getRowSpannedNumber();
 			if (oldSpanN + i > startRowi) {
-				//cell.setRowSpannedNumber(oldSpanN-1);
+				// cell.setRowSpannedNumber(oldSpanN-1);
 				return cell;
 			}
 			return null;
@@ -1755,11 +1865,13 @@ public class Cell {
 
 	/**
 	 * Return the font definition for this cell.
-	 * <p>Null will be returned if there is no 
-	 * explicit style definition, or even default style definition, for this cell. 
-	 * @return the font definition
-	 *         null if there is no style definition for this cell
-	 *         
+	 * <p>
+	 * Null will be returned if there is no explicit style definition, or even
+	 * default style definition, for this cell.
+	 * 
+	 * @return the font definition null if there is no style definition for this
+	 *         cell
+	 * 
 	 * @since 0.3
 	 */
 	public Font getFont() {
@@ -1769,7 +1881,9 @@ public class Cell {
 
 	/**
 	 * Set font style for this cell.
-	 * @param font - the font
+	 * 
+	 * @param font
+	 *            - the font
 	 * 
 	 * @since 0.3
 	 */
@@ -1780,15 +1894,17 @@ public class Cell {
 	/**
 	 * Set the border style definitions for this cell.
 	 * 
-	 * @param bordersType - A predefined border type
-	 * @param border - border style description
+	 * @param bordersType
+	 *            - A predefined border type
+	 * @param border
+	 *            - border style description
 	 * 
 	 * @since 0.3
 	 */
 	public void setBorders(StyleTypeDefinitions.SimpleCellBordersType bordersType, Border border) {
 		getStyleHandler().setBorders(border, bordersType);
 	}
-	
+
 	/**
 	 * Return style handler for this cell
 	 * 

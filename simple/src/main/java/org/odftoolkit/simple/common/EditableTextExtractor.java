@@ -41,43 +41,29 @@ import org.odftoolkit.simple.table.Table;
 import org.w3c.dom.NodeList;
 
 /**
- * It's a sub class of TextExtractor. It provides a method to return all the text 
- * that the user can typically edit in a document, including text in cotent.xml, 
- * header and footer in styles.xml, meta data in meta.xml. 
+ * It's a sub class of TextExtractor, which provides a method
+ * <code>getText()</code> to return all the text that the user can typically
+ * edit in a document, including text in cotent.xml, header and footer in
+ * styles.xml, meta data in meta.xml.
  * 
- * <p>This function can be used by search engine, and text analytic operations. </p> 
- *
+ * <p>
+ * This function can be used by search engine, and text analytic operations.
+ * </p>
+ * 
+ * @see org.odftoolkit.odfdom.pkg.OdfElement
+ * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor
  */
 public class EditableTextExtractor extends TextExtractor {
 
 	Document mDocument = null;
-	OdfElement mElement = null;
 	boolean mIsDocumentExtractor = false;
 
 	/**
-	 * Constructor with an ODF document as a parameter
-	 * @param doc the ODF document whose editable text would be extracted. 
-	 */
-	private EditableTextExtractor(Document doc) {
-		mTextBuilder = new StringBuilder();
-		mDocument = doc;
-		mIsDocumentExtractor = true;
-	}
-
-	/**
-	 * Constructor with an ODF element as parameter
-	 * @param element the ODF element whose editable text would be extracted. 
-	 */
-	private EditableTextExtractor(OdfElement element) {
-		mTextBuilder = new StringBuilder();
-		mElement = element;
-		mIsDocumentExtractor = false;
-	}
-
-	/**
-	 * An instance of EditableTextExtractor will be created to 
-	 * extract the editable text content of an ODF element.
-	 * @param doc the ODF document whose text will be extracted.
+	 * An instance of EditableTextExtractor will be created to extract the
+	 * editable text content in specified document.
+	 * 
+	 * @param doc
+	 *            the document whose text will be extracted.
 	 * @return An instance of EditableTextExtractor
 	 */
 	public static EditableTextExtractor newOdfEditableTextExtractor(Document doc) {
@@ -85,67 +71,44 @@ public class EditableTextExtractor extends TextExtractor {
 	}
 
 	/**
-	 * An instance of EditableTextExtractor will be created to 
-	 * extract the editable text content of an ODF element.
-	 * @param element the ODF element whose text will be extracted.
+	 * An instance of EditableTextExtractor will be created to extract the
+	 * editable text content of an ODF element.
+	 * 
+	 * @param element
+	 *            the ODF element whose text will be extracted.
 	 * @return An instance of EditableTextExtractor
 	 */
 	public static EditableTextExtractor newOdfEditableTextExtractor(OdfElement element) {
 		return new EditableTextExtractor(element);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.dom.DefaultElementVisitor#visit(org.odftoolkit.simple.dom.element.draw.DrawObjectElement)
+	/**
+	 * Return the text content of a element as String
+	 * 
+	 * @param ele
+	 *            the ODF element
+	 * @return the text content of the element
 	 */
-	@Override
-	public void visit(DrawObjectElement element) {
-		String embedDocPath = element.getXlinkHrefAttribute();
-		Document embedDoc = ((Document)(((OdfContentDom)element.getOwnerDocument()).getDocument())).getEmbeddedDocument(embedDocPath);
-		if (embedDoc != null) {
-			try {
-				mTextBuilder.append(EditableTextExtractor.newOdfEditableTextExtractor(embedDoc).getText());
-			} catch (Exception e) {
-				Logger.getLogger(EditableTextExtractor.class.getName()).log(Level.SEVERE, null, e);
-			}
-		}
+	public static synchronized String getText(OdfElement ele) {
+		EditableTextExtractor extractor = newOdfEditableTextExtractor(ele);
+		return extractor.getText();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.dom.DefaultElementVisitor#visit(org.odftoolkit.simple.dom.element.text.TextTrackedChangesElement)
+	/**
+	 * Return the text content of document as String
+	 * 
+	 * @param doc
+	 *            the document
+	 * @return the text content of the document
 	 */
-	@Override
-	public void visit(TextTrackedChangesElement ele) {
-		return;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.dom.DefaultElementVisitor#visit(org.odftoolkit.simple.dom.element.text.TextAElement)
-	 */
-	@Override
-	public void visit(TextAElement ele) {
-		String link = ele.getXlinkHrefAttribute();
-		mTextBuilder.append(link);
-		appendElementText(ele);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.simple.dom.DefaultElementVisitor#visit(org.odftoolkit.simple.dom.element.text.TextTabElement)
-	 */
-	@Override
-	public void visit(TableTableElement ele) {
-		Table table = Table.getInstance(ele);
-		List<Row> rowlist = table.getRowList();
-		for (int i = 0; i < rowlist.size(); i++) {
-			Row row = rowlist.get(i);
-			for (int j = 0; j < row.getCellCount(); j++) {
-				mTextBuilder.append(row.getCellByIndex(j).getDisplayText()).append(TabChar);
-			}
-			mTextBuilder.append(NewLineChar);
-		}
+	public static synchronized String getText(Document doc) {
+		EditableTextExtractor extractor = newOdfEditableTextExtractor(doc);
+		return extractor.getText();
 	}
 
 	/**
 	 * Return the editable text content as a string
+	 * 
 	 * @return the editable text content as a string
 	 */
 	@Override
@@ -158,14 +121,100 @@ public class EditableTextExtractor extends TextExtractor {
 		}
 	}
 
+	/**
+	 * Constructor with a document as parameter
+	 * 
+	 * @param doc
+	 *            the document whose editable text would be extracted.
+	 */
+	private EditableTextExtractor(Document doc) {
+		super();
+		mDocument = doc;
+		mIsDocumentExtractor = true;
+	}
+
+	/**
+	 * Constructor with an ODF element as parameter
+	 * 
+	 * @param element
+	 *            the ODF element whose editable text would be extracted.
+	 */
+	private EditableTextExtractor(OdfElement element) {
+		super(element);
+		mIsDocumentExtractor = false;
+	}
+
+	/**
+	 * The end users needn't to care of this method, if you don't want to
+	 * override the text content handling strategy of draw:object.
+	 * 
+	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.draw.DrawObjectElement)
+	 */
+	@Override
+	public void visit(DrawObjectElement element) {
+		String embedDocPath = element.getXlinkHrefAttribute();
+		Document embedDoc = ((Document) (((OdfContentDom) element.getOwnerDocument()).getDocument()))
+				.getEmbeddedDocument(embedDocPath);
+		if (embedDoc != null) {
+			try {
+				mTextBuilder.append(EditableTextExtractor.newOdfEditableTextExtractor(embedDoc).getText());
+			} catch (Exception e) {
+				Logger.getLogger(EditableTextExtractor.class.getName()).log(Level.SEVERE, null, e);
+			}
+		}
+	}
+
+	/**
+	 * The end users needn't to care of this method, if you don't want to
+	 * override the text content handling strategy of text:tracked-changes.
+	 * 
+	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextTrackedChangesElement)
+	 */
+	@Override
+	public void visit(TextTrackedChangesElement ele) {
+		return;
+	}
+
+	/**
+	 * The end users needn't to care of this method, if you don't want to
+	 * override the text content handling strategy of text:a.
+	 * 
+	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextAElement)
+	 */
+	@Override
+	public void visit(TextAElement ele) {
+		String link = ele.getXlinkHrefAttribute();
+		mTextBuilder.append(link);
+		appendElementText(ele);
+	}
+
+	/**
+	 * The end users needn't to care of this method, if you don't want to
+	 * override the text content handling strategy of table:table.
+	 * 
+	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextTabElement)
+	 */
+	@Override
+	public void visit(TableTableElement ele) {
+		Table table = Table.getInstance(ele);
+		List<Row> rowlist = table.getRowList();
+		for (int i = 0; i < rowlist.size(); i++) {
+			Row row = rowlist.get(i);
+			for (int j = 0; j < row.getCellCount(); j++) {
+				mTextBuilder.append(row.getCellByIndex(j).getDisplayText());
+				mTextBuilder.append(TabChar);
+			}
+			mTextBuilder.appendLine();
+		}
+	}
+
 	private String getDocumentText() {
 		StringBuilder builder = new StringBuilder();
 		try {
-			//Extract text from content.xml
+			// Extract text from content.xml
 			EditableTextExtractor contentDomExtractor = newOdfEditableTextExtractor(mDocument.getContentRoot());
 			builder.append(contentDomExtractor.getText());
-
-			//Extract text from style.xml
+			// Extract text from style.xml
 			OdfStylesDom styleDom = mDocument.getStylesDom();
 			if (styleDom != null) {
 				StyleMasterPageElement masterpage = null;
@@ -177,8 +226,7 @@ public class EditableTextExtractor extends TextExtractor {
 					builder.append(newOdfEditableTextExtractor(masterpage).getText());
 				}
 			}
-
-			//Extract text from meta.xml
+			// Extract text from meta.xml
 			OdfMetaDom metaDom = mDocument.getMetaDom();
 			if (metaDom != null) {
 				OdfElement root = metaDom.getRootElement();
@@ -187,7 +235,6 @@ public class EditableTextExtractor extends TextExtractor {
 					builder.append(newOdfEditableTextExtractor(officemeta).getText());
 				}
 			}
-
 			return builder.toString();
 		} catch (Exception e) {
 			e.printStackTrace();

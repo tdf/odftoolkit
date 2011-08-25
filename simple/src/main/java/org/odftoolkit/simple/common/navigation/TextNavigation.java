@@ -32,6 +32,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.simple.Document;
+import org.odftoolkit.simple.common.TextExtractor;
 import org.odftoolkit.simple.common.WhitespaceProcessor;
 import org.odftoolkit.simple.table.Cell;
 import org.w3c.dom.Node;
@@ -71,7 +72,8 @@ public class TextNavigation extends Navigation {
 	}
 
 	/**
-	 * Check if has next <code>TextSelection</code> with satisfied content pattern.
+	 * Check if has next <code>TextSelection</code> with satisfied content
+	 * pattern.
 	 * 
 	 * @see org.odftoolkit.simple.common.navigation.Navigation#hasNext()
 	 */
@@ -80,7 +82,7 @@ public class TextNavigation extends Navigation {
 		mTempSelectedItem = findNext(mNextSelectedItem);
 		return (mTempSelectedItem != null);
 	}
-	
+
 	/**
 	 * Get next <code>TextSelection</code>.
 	 * 
@@ -88,10 +90,10 @@ public class TextNavigation extends Navigation {
 	 */
 	@Override
 	public Selection nextSelection() {
-		if(mTempSelectedItem !=null){
+		if (mTempSelectedItem != null) {
 			mNextSelectedItem = mTempSelectedItem;
 			mTempSelectedItem = null;
-		}else{
+		} else {
 			mNextSelectedItem = findNext(mNextSelectedItem);
 		}
 		if (mNextSelectedItem == null) {
@@ -101,7 +103,7 @@ public class TextNavigation extends Navigation {
 			return mNextSelectedItem;
 		}
 	}
-	
+
 	/**
 	 * Check if the text content of element match the specified matched
 	 * condition, which is stated when the <code>TextNavigation</code> created.
@@ -159,8 +161,7 @@ public class TextNavigation extends Navigation {
 		if (selected != null) {
 			OdfElement containerElement = selected.getContainerElement();
 			int index = selected.getIndex();
-			WhitespaceProcessor textProcessor = new WhitespaceProcessor();
-			String content = textProcessor.getText(containerElement);
+			String content = TextExtractor.getText(containerElement);
 
 			int nextIndex = -1;
 			Matcher matcher = mPattern.matcher(content);
@@ -206,7 +207,8 @@ public class TextNavigation extends Navigation {
 	}
 
 	/*
-	 * Found the next <code>Selection</code> start from the <code>selected</code>.
+	 * Found the next <code>Selection</code> start from the
+	 * <code>selected</code>.
 	 */
 	private TextSelection findNext(TextSelection selected) {
 		if (!mbFinishFindInHeaderFooter) {
@@ -235,8 +237,7 @@ public class TextNavigation extends Navigation {
 
 		OdfElement containerElement = selected.getContainerElement();
 		int index = selected.getIndex();
-		WhitespaceProcessor textProcessor = new WhitespaceProcessor();
-		String content = textProcessor.getText(containerElement);
+		String content = TextExtractor.getText(containerElement);
 
 		int nextIndex = -1;
 		Matcher matcher = mPattern.matcher(content);
