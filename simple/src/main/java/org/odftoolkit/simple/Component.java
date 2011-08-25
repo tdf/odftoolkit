@@ -70,10 +70,7 @@ public abstract class Component {
 	protected static Component getComponentByElement(OdfElement element) {
 		Document doc = (Document) ((OdfFileDom) element.getOwnerDocument()).getDocument();
 		IdentityHashMap<OdfElement, Component> repository = doc.getComponentMap();
-		if (repository != null)
-			return repository.get(element);
-		else
-			return null;
+		return repository.get(element);
 	}
 
 	/**
