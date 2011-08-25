@@ -4,7 +4,7 @@
 	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>simple-java</artifactId>
-	<version>0.3</version>
+	<version>0.3.5</version>
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
