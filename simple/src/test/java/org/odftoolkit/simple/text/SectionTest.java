@@ -30,6 +30,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.utils.ResourceUtilities;
@@ -244,6 +245,108 @@ public class SectionTest {
 			theSec = newDoc.getSectionByName("ImageSection_NewName");
 			Assert.assertNotNull(theSec);
 			Assert.assertEquals("ImageSection_NewName", theSec.getName());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+	
+	@Test
+	public void testAddParagraph() {
+		try {
+			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("Sections.odt"));
+			Section theSec = doc.getSectionByName("ImageSection");
+			
+			Paragraph para = theSec.addParagraph("paragraph");
+			String paracontent = para.getTextContent();
+			Assert.assertEquals("paragraph", paracontent);
+			
+			OdfElement odfEle = theSec.getParagraphContainerElement();
+			Assert.assertEquals("paragraph", odfEle.getLastChild().getTextContent());
+			
+			boolean flag = theSec.removeParagraph(para);
+			if(flag){
+				OdfElement odfEle1 = theSec.getParagraphContainerElement();
+				Assert.assertTrue(odfEle1.getLastChild().getTextContent() != "paragraph");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+	
+	
+	@Test
+	public void testGetParagraphIterator() {
+		try {
+			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("Sections.odt"));
+			Section theSec = doc.getSectionByName("ImageSection");
+			
+			Paragraph para = theSec.addParagraph("paragraph");
+			String paracontent = para.getTextContent();
+			Assert.assertEquals("paragraph", paracontent);
+			
+			boolean flag = false;
+			Iterator<Paragraph> iter = theSec.getParagraphIterator();
+			while(iter.hasNext()){
+				Paragraph parai = iter.next();
+				if("paragraph".equals(parai.getTextContent()))
+						flag = true;
+			}
+			
+			Assert.assertTrue(flag);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+	
+	
+	@Test
+	public void testGetParagraphByIndex() {
+		try {
+			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("Sections.odt"));
+			Section theSec = doc.getSectionByName("ImageSection");
+			
+			Paragraph para = theSec.addParagraph("paragraph");
+			String paracontent = para.getTextContent();
+			Assert.assertEquals("paragraph", paracontent);
+			
+			Paragraph para1 = theSec.getParagraphByIndex(2, true);
+			Assert.assertEquals("paragraph", para1.getTextContent());
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+	
+	
+	@Test
+	public void testGetParagraphByReverseIndex() {
+		try {
+			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("Sections.odt"));
+			Section theSec = doc.getSectionByName("ImageSection");
+			Section theSec2 = doc.getSectionByName("ImageSection");
+			
+			Paragraph para = theSec.addParagraph("paragraph");
+			String paracontent = para.getTextContent();
+			Assert.assertEquals("paragraph", paracontent);
+			
+			Paragraph para1 = theSec.getParagraphByReverseIndex(0, true);
+			Assert.assertEquals("paragraph", para1.getTextContent());
+			
+			Paragraph para2 = theSec.getParagraphByIndex(2, true);
+			Assert.assertEquals("paragraph", para2.getTextContent());
+			
+			boolean flag = theSec.equals(para);
+			Assert.assertTrue(!flag);
+			flag = theSec.equals(theSec2);
+			Assert.assertTrue(flag);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();

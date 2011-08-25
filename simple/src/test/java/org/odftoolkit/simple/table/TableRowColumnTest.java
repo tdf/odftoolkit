@@ -349,4 +349,37 @@ public class TableRowColumnTest {
 			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
+	
+	@Test
+	public void testGetInstanceColumn() {
+		try {
+			Table table2 = odtdoc.getTableByName("Table1");
+			Column col = Column.getInstance(table2.getColumnByIndex(0).getOdfElement());
+			Column col1 = table2.getColumnByIndex(0);
+			
+			Assert.assertEquals(col, col1);
+		} catch (Exception e) {
+			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail();
+		}
+	}
+
+	
+	@Test
+	public void testGetColumnElementByIndex() {
+		try {
+			Table table2 = odtdoc.getTableByName("Table1");
+			Row row = table2.getRowByIndex(1);
+			//Cell cell = row.getCellByIndex(0);
+			row.setHeight(4.3, true);
+			row.setUseOptimalHeight(true);
+			
+			boolean flag = row.isOptimalHeight();
+			Assert.assertTrue(flag);
+			
+		} catch (Exception e) {
+			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail();
+		}
+	}
 }

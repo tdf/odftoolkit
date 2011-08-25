@@ -22,6 +22,7 @@
 package org.odftoolkit.simple.text;
 
 import java.net.URI;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,4 +67,90 @@ public class SpanTest {
 		}
 
 	}
+	
+	@Test
+	public void testRemoveTextContent() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			
+			Iterator<Paragraph> paraA = doc.getParagraphIterator();
+			while(paraA.hasNext()){
+				Paragraph pp = paraA.next();
+				doc.removeParagraph(pp);
+			}
+			
+			doc.addParagraph("This is a test paragraph!");
+			
+			TextNavigation navigation = new TextNavigation("test", doc);
+			TextSelection sel = (TextSelection) navigation.nextSelection();
+			Span span = Span.newSpan(sel);
+			
+			span.removeTextContent();
+			boolean flag = false;
+			Iterator<Paragraph> parai = doc.getParagraphIterator();
+			while(parai.hasNext()){
+				Paragraph pp = parai.next();
+				if("This is a  paragraph!".equals(pp.getTextContent()))
+					flag = true;
+			}
+			Assert.assertTrue(flag);
+
+			//save
+			doc.save(ResourceUtilities.newTestOutputFile("spantest.odt"));
+
+		} catch (Exception e) {
+			Logger.getLogger(SpanTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail();
+		}
+
+	}
+	
+	@Test
+	public void testAppendTextContent() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			doc.addParagraph("This is a test paragraph!");
+			
+			TextNavigation navigation = new TextNavigation("test", doc);
+			TextSelection sel = (TextSelection) navigation.nextSelection();
+			Span span = Span.newSpan(sel);
+			
+			span.appendTextContent("hello world.");
+			Assert.assertEquals("testhello world.", span.getTextContent());
+
+			//save
+			//doc.save(ResourceUtilities.newTestOutputFile("spantest.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(SpanTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail();
+		}
+
+	}
+	
+	
+	@Test
+	public void testAppendTextContentPara() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			doc.addParagraph("This is a test paragraph!");
+			
+			TextNavigation navigation = new TextNavigation("test", doc);
+			TextSelection sel = (TextSelection) navigation.nextSelection();
+			Span span = Span.newSpan(sel);
+			
+			span.appendTextContent("hello world.", true);
+			Assert.assertEquals("testhello world.", span.getTextContent());
+			
+			span.appendTextContent("hello world.", false);
+			Assert.assertEquals("testhello world.hello world.", span.getTextContent());
+
+			//save
+			//doc.save(ResourceUtilities.newTestOutputFile("spantest.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(SpanTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail();
+		}
+
+	}
+	
 }

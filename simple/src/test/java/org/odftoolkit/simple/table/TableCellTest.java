@@ -64,12 +64,18 @@ import org.odftoolkit.simple.text.list.NumberDecorator;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.odftoolkit.simple.Document;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.SupportedLinearMeasure;
+
 
 public class TableCellTest {
 
+	private static final Logger LOGGER =  Logger.getLogger(TableCellTest.class.getName());
 	final static String SAMPLE_SPREADSHEET = "TestSpreadsheetTable";
 	final static String SAMPLE_STYLE_SPREADSHEET = "TestSpreadsheetStyleTable";
 	final static String SAMPLE_TEXT = "TestTextTable";
+	static final String filename = "testGetCellAt.ods";
+	
 	SpreadsheetDocument odsdoc, odsstyle;
 	TextDocument odtdoc;
 	Table odsTable, odtTable;
@@ -1389,5 +1395,167 @@ public class TableCellTest {
 			node = node.getNextSibling();
 		}
 		Assert.assertEquals(node, null);
+	}
+	
+	
+	@Test
+	public void testSetHorizontalAlignment() {
+		try {
+			Table table = odsdoc.getTableByName("Sheet1");
+			Cell cell1 = table.getCellByPosition("C2");
+			Assert.assertEquals("$", cell1.getCurrencySymbol());
+			String right = cell1.getHorizontalAlignment();
+			Assert.assertEquals(null, right);
+			/**
+			 *The parameter can be "center", "end", "justify", "left", "right", or 
+			 * "start". Actually, "left" will be interpreted as "start", while "right" 
+             * will be interpreted as "end". If argument is null, the explicit 
+             * horizontal alignment setting is removed. 
+			 */
+			cell1.setHorizontalAlignment("left");
+			
+			//validate
+			String left = cell1.getHorizontalAlignment();
+			Assert.assertEquals("start", left);
+			
+			//save
+			//odsdoc.save(ResourceUtilities.newTestOutputFile("testTableCell.ods"));
+
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+		
+	}
+	
+	
+	@Test
+	public void testGetCountry() {
+		try {
+			Border borderbase = new Border(Color.LIME, 3.0701, 0.0208, 0.0346, SupportedLinearMeasure.CM);
+			borderbase.setLineStyle(StyleTypeDefinitions.LineType.DOUBLE);
+			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
+			Table table = doc.getTableByName("Sheet1");
+			
+			Cell cell = table.getCellByPosition(2, 2);
+
+			CellStyleHandler cellHandler = cell.getStyleHandler();
+			cellHandler.setCountry("English", Document.ScriptType.CJK);
+			//validate
+			String country = cellHandler.getCountry(Document.ScriptType.CJK);
+			Assert.assertEquals("English", country);
+			
+			//save
+			doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+		
+	}
+	
+	
+	@Test
+	public void testGetLanguage() {
+		try {
+			Border borderbase = new Border(Color.LIME, 3.0701, 0.0208, 0.0346, SupportedLinearMeasure.CM);
+			borderbase.setLineStyle(StyleTypeDefinitions.LineType.DOUBLE);
+			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
+			Table table = doc.getTableByName("Sheet1");
+			
+			Cell cell = table.getCellByPosition(2, 2);
+
+			CellStyleHandler cellHandler = cell.getStyleHandler();
+			cellHandler.setLanguage("English", Document.ScriptType.WESTERN);
+			//validate
+			String language = cellHandler.getLanguage(Document.ScriptType.WESTERN);
+			System.out.println(language);
+			Assert.assertEquals("English", language);
+			
+			//save
+			doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+		
+	}
+	
+	
+	@Test
+	public void testSetColor() {
+		try {
+			Border borderbase = new Border(Color.LIME, 3.0701, 0.0208, 0.0346, SupportedLinearMeasure.CM);
+			borderbase.setLineStyle(StyleTypeDefinitions.LineType.DOUBLE);
+			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
+			Table table = doc.getTableByName("Sheet1");
+			
+			Cell cell = table.getCellByPosition(2, 2);
+
+			CellStyleHandler cellHandler = cell.getStyleHandler();
+			cellHandler.setBackgroundColor(Color.RED);
+			//validate
+			Color red = cellHandler.getBackgroundColor();
+			Assert.assertEquals(Color.RED.toString(), red.toString());
+			
+			//save
+			doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+		
+	}
+	
+	
+	@Test
+	public void testSetBorder() {
+		Border borderbase = new Border(new Color("#00ccff"), 0.0701, 0.0008, 0.0346, SupportedLinearMeasure.IN);
+		try {
+			SpreadsheetDocument doc = SpreadsheetDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream(filename));
+			Table table = doc.getTableByName("A");
+			
+			borderbase.setLinearMeasure(StyleTypeDefinitions.SupportedLinearMeasure.CM);
+			
+			Cell cell = table.getCellByPosition("A14");
+			cell.setBorders(CellBordersType.LEFT, borderbase);
+			
+
+			CellStyleHandler cellHandler = cell.getStyleHandler();
+			Border border = cellHandler.getBorder(CellBordersType.LEFT);
+			Assert.assertEquals(borderbase, border);
+			//save
+			//doc.save(ResourceUtilities.newTestOutputFile("testSetWidth.ods"));
+
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail();
+		}
+		
+	}
+	
+	@Test
+	public void testIsTextWrapped() {
+		Border borderbase = new Border(new Color("#00ccff"), 0.0701, 0.0008, 0.0346, SupportedLinearMeasure.CM);
+		try {
+			SpreadsheetDocument doc = SpreadsheetDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream(filename));
+			Table table = doc.getTableByName("A");
+			Cell cell = table.getCellByPosition("A14");
+			cell.setStringValue("testIsTextWrapped.");
+			cell.setBorders(CellBordersType.ALL_FOUR, borderbase);
+
+			CellStyleHandler cellHandler = cell.getStyleHandler();
+			cellHandler.setTextWrapped(true);
+			Assert.assertTrue(cellHandler.isTextWrapped());
+			
+			//save
+			//doc.save(ResourceUtilities.newTestOutputFile("testSetWidth.ods"));
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail();
+		}
+		
 	}
 }

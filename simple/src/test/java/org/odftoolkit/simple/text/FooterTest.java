@@ -21,18 +21,27 @@
  ************************************************************************/
 package org.odftoolkit.simple.text;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
+import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.common.field.VariableField;
+import org.odftoolkit.simple.common.field.VariableField.VariableType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
 import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.Table;
+import org.odftoolkit.simple.table.Table.TableBuilder;
 import org.odftoolkit.simple.utils.ResourceUtilities;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 public class FooterTest {
 
@@ -88,6 +97,166 @@ public class FooterTest {
 			footer.setVisible(false);
 			Assert.assertEquals(false, footer.isVisible());
 			doc.save(ResourceUtilities.newTestOutputFile("footerHiddenOutput.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(FooterTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetOdfElement() {
+		try {
+			//TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("headerFooterHidden.odt"));
+			TextDocument doc = TextDocument.newTextDocument();
+			Footer footer = doc.getFooter();
+			StyleFooterElement footerEle = footer.getOdfElement();
+			footerEle.setTextContent("hello world");
+			Assert.assertEquals("hello world", footerEle.getTextContent());
+
+			//save
+			//doc.save(ResourceUtilities.newTestOutputFile("footerOutput.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(FooterTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	
+	@Test
+	public void testAddtable() {
+		try {
+			//TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("headerFooterHidden.odt"));
+			TextDocument doc = TextDocument.newTextDocument();
+			Footer footer = doc.getFooter();
+			Table tab = footer.addTable();
+			Assert.assertNotNull(tab);
+			Assert.assertTrue(2 == tab.getRowCount());
+			Assert.assertTrue(5 == tab.getColumnCount());
+			
+			TableTableElement tabEle = tab.getOdfElement();
+			System.out.println(tabEle);
+			
+			//save
+			//doc.save(ResourceUtilities.newTestOutputFile("footerOutput.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(FooterTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	
+	@Test
+	public void testGetTableList() {
+		try {
+			//TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("headerFooterHidden.odt"));
+			TextDocument doc = TextDocument.newTextDocument();
+			Footer footer = doc.getFooter();
+			Table tab = footer.addTable();
+			
+			List<Table> tabList = footer.getTableList();
+			Assert.assertEquals(tab, tabList.get(0));
+			
+			//save
+			//doc.save(ResourceUtilities.newTestOutputFile("footerOutput.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(FooterTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	
+	@Test
+	public void testGetTableBuilder() {
+		try {
+			//TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("headerFooterHidden.odt"));
+			TextDocument doc = TextDocument.newTextDocument();
+			Footer footer = doc.getFooter();
+			//Table tab = footer.addTable();
+			
+			TableBuilder tb = footer.getTableBuilder();
+			Table tab = tb.newTable();
+			
+			Assert.assertNotNull(tab);
+			Assert.assertTrue(2 == tab.getRowCount());
+			Assert.assertTrue(5 == tab.getColumnCount());
+			
+			//save
+			doc.save(ResourceUtilities.newTestOutputFile("footerOutput.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(FooterTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	
+	@Test
+	public void testGetVariableContainerElement() {
+		try {
+			//TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("headerFooterHidden.odt"));
+			TextDocument doc = TextDocument.newTextDocument();
+			Footer footer = doc.getFooter();
+			OdfElement odfEle = footer.getVariableContainerElement();
+			
+			TableBuilder tb = footer.getTableBuilder();
+			Table tab = tb.newTable();
+			
+			Assert.assertNotNull(tab);
+			Assert.assertTrue(2 == tab.getRowCount());
+			Assert.assertTrue(5 == tab.getColumnCount());
+			
+			Node nod = odfEle.getFirstChild();
+			Assert.assertEquals("table:table", nod.getNodeName());
+			
+			//save
+			doc.save(ResourceUtilities.newTestOutputFile("footerOutput.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(FooterTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	
+	@Test
+	public void testDeclareVariable() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Footer footer = doc.getFooter();
+			footer.declareVariable("footername", VariableType.USER);
+			
+			//validate
+			StyleFooterElement styleFoot = footer.getOdfElement();
+			Node nod = styleFoot.getFirstChild().getFirstChild();
+			NamedNodeMap nameMap = nod.getAttributes();
+			Node nodtext = nameMap.getNamedItem("text:name");
+			Assert.assertEquals("footername", nodtext.getNodeValue());
+			
+			//save
+			doc.save(ResourceUtilities.newTestOutputFile("footerOutput.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(FooterTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	
+	@Test
+	public void testGetVariableFieldByName() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Footer footer = doc.getFooter();
+			footer.declareVariable("footername", VariableType.USER);
+			VariableField vField = footer.getVariableFieldByName("footername");
+			String vName = vField.getVariableName();
+			
+			//validate
+			StyleFooterElement styleFoot = footer.getOdfElement();
+			Node nod = styleFoot.getFirstChild().getFirstChild();
+			NamedNodeMap nameMap = nod.getAttributes();
+			Node nodtext = nameMap.getNamedItem("text:name");
+			Assert.assertEquals(vName, nodtext.getNodeValue());
+			
+			//save
+			//doc.save(ResourceUtilities.newTestOutputFile("footerOutput.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(FooterTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());

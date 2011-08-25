@@ -48,4 +48,23 @@ public class CellStyleHandlerTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+	
+	
+	@Test
+	public void testGetCountry() {
+		try {
+			Document doc = Document.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_NAME));
+			Table table = doc.getTableByName("slideTable");
+			CellStyleHandler styleHandler = table.getCellByPosition(1, 1).getStyleHandler();
+			
+			styleHandler.setCountry("English", Document.ScriptType.WESTERN);
+			//validate
+			String country = styleHandler.getCountry(Document.ScriptType.WESTERN);
+			Assert.assertEquals("English", country);
+			
+		} catch (Exception e) {
+			Logger.getLogger(CellStyleHandlerTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
 }
