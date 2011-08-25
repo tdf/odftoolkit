@@ -34,6 +34,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.text.TextAElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
@@ -401,11 +402,7 @@ public class TextSelectionTest {
 		}
 	}
 
-	/**
-	 * Test TextSelection container element, all of them must be minimum text:p
-	 * or text:h. It means container element can't has child element has the
-	 * same text content.
-	 */
+
 	@Test
 	public void testTextSelectionContainerElement() {
 		search = new TextNavigation("TextSelectionContainer", doc);
@@ -441,5 +438,32 @@ public class TextSelectionTest {
 			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
+	}
+	
+	//me
+	@Test
+	public void testGetContainerElement() throws Exception {
+		search = new TextNavigation("TextSelectionContainer", doc);
+		if (search.hasNext()) {
+			TextSelection item = (TextSelection) search.nextSelection();
+			URL url = new URL("http://www.IBM.com");
+			item.addHref(url);
+			
+			//save
+			//doc.save(ResourceUtilities.getAbsolutePath(TEXT_FILE));
+			
+			//validate
+			OdfElement parentElement = item.getContainerElement();
+			Node node = parentElement.getFirstChild().getFirstChild().getNextSibling();
+			TextAElement textAele = (TextAElement)node;
+			System.out.println(textAele.getXlinkTypeAttribute());
+			System.out.println(textAele.getXlinkHrefAttribute());
+			Assert.assertEquals("simple", textAele.getXlinkTypeAttribute());
+			Assert.assertEquals("http://www.IBM.com", textAele.getXlinkHrefAttribute());
+			
+		} else {
+			Assert.fail("Navigation search nothing.");
+		}
+		
 	}
 }

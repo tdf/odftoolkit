@@ -22,6 +22,9 @@
 package org.odftoolkit.simple;
 
 import java.io.File;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,7 +33,8 @@ import org.junit.Test;
  * Test class for template aspects of chart.
  */
 public class ChartTemplateTest {
-
+	
+	private static final Logger LOG = Logger.getLogger(ChartTemplateTest.class.getName());
 	private static final String TEST_CHART_TEMPLATE = "/chartTestTemplate.otc";
 
 	@Test
@@ -80,5 +84,74 @@ public class ChartTemplateTest {
 		document = ChartDocument.newChartTemplateDocument();
 		document.changeMode(ChartDocument.OdfMediaType.CHART);
 		Assert.assertEquals(Document.OdfMediaType.CHART.getMediaTypeString(), document.getPackage().getMediaTypeString());
+	}
+	
+	@Test
+	public void testGetOdfMediaType() throws Exception {
+		
+		try {
+			Document.OdfMediaType chartType = ChartDocument.OdfMediaType.getOdfMediaType("CHART");
+			Assert.assertEquals("CHART", chartType.name());
+			Assert.assertEquals("application/vnd.oasis.opendocument.chart", chartType.getMediaTypeString());
+			Assert.assertEquals("odc", chartType.getSuffix());
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+
+	}
+	
+	@Test
+	public void testGetMediaTypeString() throws Exception {
+		try {
+			ChartDocument.OdfMediaType odfMediaTypeChart = ChartDocument.OdfMediaType.valueOf(ChartDocument.OdfMediaType.class, ChartDocument.OdfMediaType.CHART.name());
+			String MediaType = odfMediaTypeChart.getMediaTypeString();
+			Assert.assertEquals("application/vnd.oasis.opendocument.chart", MediaType);
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+		
+	}
+	
+	@Test
+	public void testLoadDocumentInputStream() throws Exception {
+		try {
+			InputStream inStream = this.getClass().getResourceAsStream(TEST_CHART_TEMPLATE);
+			ChartDocument chardoc = ChartDocument.loadDocument(inStream);
+			Assert.assertNotNull(chardoc);
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+
+	}
+	
+	@Test
+	public void testLoadDocumentFilePath() throws Exception {
+		try {
+			String filePath = this.getClass().getResource(TEST_CHART_TEMPLATE).getPath();
+			ChartDocument chardoc = ChartDocument.loadDocument(filePath);
+			Assert.assertNotNull(chardoc);
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+		
+	}
+	
+	@Test
+	public void testLoadDocumentFile() throws Exception {
+		try {
+			String filePath = this.getClass().getResource(TEST_CHART_TEMPLATE).getPath();
+			File filedoc = new File(filePath);
+			Assert.assertNotNull(filedoc);
+			ChartDocument chardoc = ChartDocument.loadDocument(filedoc);
+			Assert.assertNotNull(chardoc);
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+		
 	}
 }

@@ -30,8 +30,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -446,5 +448,99 @@ public class DocumentTest {
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), "UTF8"));
 		out.append(dataString);
 		out.close();
+	}
+	
+	@Test
+	public void testGetEmbeddedDocuments() throws Exception {
+		try {
+			Document doc = Document.loadDocument(OdfPackage.loadPackage(this.getClass().getResource("/").getPath() + "presentationWithEmbedDoc.odp"));
+			Document.OdfMediaType odfMediaType_Chart = Document.OdfMediaType.valueOf(Document.OdfMediaType.class, "CHART");
+			List<Document> doclist = doc.getEmbeddedDocuments(odfMediaType_Chart);
+			if(doclist.size() > 0){
+				for(Document docitem : doclist){
+					Assert.assertEquals("application/vnd.oasis.opendocument.chart", docitem.getMediaTypeString());
+				}
+			}else{
+				Assert.fail();
+			}
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+		
+	}
+	
+	@Test
+	public void testGetEmbeddedDocument() throws Exception {
+		try {
+			Document doc = Document.loadDocument(OdfPackage.loadPackage(this.getClass().getResource("/").getPath() + "Spreadsheet with Embeded Chart.ods"));
+			Document innerdoc = doc.getEmbeddedDocument("/");
+			Assert.assertNotNull(innerdoc);
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetContentRootDoc() throws Exception {
+		try {
+			Document odt = Document.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_WITHOUT_OPT));
+			OdfContentDom odfcon = odt.getContentDom();
+			Assert.assertNotNull(odfcon);
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testToString() throws Exception {
+		try {
+			Document doc = Document.loadDocument(ResourceUtilities.getTestResourceAsStream("test2.odt"));
+			String docStr = doc.toString();
+			System.out.println(docStr);
+			Assert.assertTrue(docStr.indexOf("application/vnd.oasis.opendocument.text")>0);
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+		
+	}
+	
+	@Test
+	public void testSave() throws Exception {
+		try {
+			Document doc = Document.loadDocument(ResourceUtilities.getAbsolutePath("test2.odt"));
+			Assert.assertNotNull(doc);
+			String docmedia = doc.getOdfMediaType().getMediaTypeString();
+			//create a document for test
+			Document doctest = Document.loadDocument(ResourceUtilities.getAbsolutePath("test2.odt"));
+			doctest.save(ResourceUtilities.newTestOutputFile("testSave.odt"));
+			String filePath = ResourceUtilities.getAbsolutePath("testSave.odt");
+			File outerFile = new File(filePath);
+			if(!outerFile.exists()){
+				System.out.println("outerFile is not exist. ");
+			}
+			Assert.assertNotNull(doc);
+			
+			OutputStream out = new FileOutputStream(outerFile);
+			doc.save(out);
+			
+			//save
+			doc.save(ResourceUtilities.newTestOutputFile("testSave.odt"));
+			out.close();
+			
+			//verify
+			Document docnew = Document.loadDocument(ResourceUtilities.getTestResourceAsStream("testSave.odt"));
+			Assert.assertNotNull(docnew);
+			String docnewMedia = docnew.getOdfMediaType().getMediaTypeString();
+			
+			Assert.assertEquals(docmedia, docnewMedia);
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+		
 	}
 }

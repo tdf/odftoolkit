@@ -283,4 +283,68 @@ public class FieldSelectionTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
+	
+	
+	@Test
+	public void testReplaceWithSimpleField2() {
+		try {
+			search = new TextNavigation("ReplaceDateTarget", doc);
+			// count the initial date field count. should be 1.
+			OdfContentDom contentDom = doc.getContentDom();
+			NodeList nodeList = contentDom.getElementsByTagName(TextDateElement.ELEMENT_NAME.getQName());
+			int i = nodeList.getLength();
+			OdfStylesDom styleDom = doc.getStylesDom();
+			nodeList = styleDom.getElementsByTagName(TextDateElement.ELEMENT_NAME.getQName());
+			i += nodeList.getLength();
+			// replace all the 3 "ReplaceDateTarget" to FixedDateField.
+			while (search.hasNext()) {
+				TextSelection item = (TextSelection) search.nextSelection();
+				FieldSelection fieldSelection = new FieldSelection(item);
+				//fieldSelection.replaceWithSimpleField(Field.FieldType.FIXED_DATE_FIELD);
+				fieldSelection.replaceWithSimpleField(Field.FieldType.DATE_FIELD);	// 1
+				//fieldSelection.replaceWithSimpleField(Field.FieldType.TIME_FIELD);	//3
+				i++;
+			}
+			
+			nodeList = contentDom.getElementsByTagName(TextDateElement.ELEMENT_NAME.getQName());
+			int j = nodeList.getLength();
+			nodeList = styleDom.getElementsByTagName(TextDateElement.ELEMENT_NAME.getQName());
+			j += nodeList.getLength();
+			Assert.assertEquals(j, i);
+			
+			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_REPLACE));
+			
+			
+			//validate  
+			/*TextDocument doc1 = (TextDocument) Document.loadDocument(ResourceUtilities.getAbsolutePath(SAVE_FILE_REPLACE));
+			OdfContentDom contentDom1 = doc1.getContentDom();
+			
+			nodeList = contentDom1.getElementsByTagName(TextDateElement.ELEMENT_NAME.getQName());
+			System.out.println(nodeList.getLength());
+			Node n = nodeList.item(0);
+			Node n1 = nodeList.item(1);
+			Node n2 = nodeList.item(2);
+			
+			n.getLocalName();
+			System.out.println("&&&&&: " + nodeList.getLength());
+			System.out.println("*****: " + n.getLocalName());
+			NamedNodeMap m = n.getAttributes();
+			Node nn = m.getNamedItem("text:fixed");
+			System.out.println(")))) " + nn.getNodeValue());
+			
+			NamedNodeMap m1 = n1.getAttributes();
+			Node nn1 = m1.getNamedItem("text:fixed");
+			System.out.println("))))1 " + nn1.getNodeValue());
+			
+			NamedNodeMap m2 = n2.getAttributes();
+			Node nn2 = m2.getNamedItem("text:fixed");
+			System.out.println("))))2 " + nn2.getNodeValue());
+			
+		//	Assert.assertEquals("false", nn.getNodeValue());
+*/			
+		} catch (Exception e) {
+			Logger.getLogger(FieldSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+	}
 }
