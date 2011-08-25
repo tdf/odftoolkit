@@ -21,6 +21,8 @@
  ************************************************************************/
 package org.odftoolkit.simple;
 
+import static org.junit.Assert.*;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -32,6 +34,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,7 +62,9 @@ import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
+import org.odftoolkit.simple.Document.OdfMediaType;
 import org.odftoolkit.simple.utils.NodeAction;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Node;
@@ -407,7 +412,27 @@ public class DocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-
+	
+	@Test
+	public void testLoadDocumentWithIllegalArgument() throws Exception {
+		String filepath = ResourceUtilities.getAbsolutePath("presentation.odp");
+		OdfPackage odfpackage = OdfPackage.loadPackage(filepath);
+		// illegal internal patch
+		try {
+			Document.loadDocument(odfpackage, "odt");
+		} catch (Exception e) {
+			Assert.assertTrue(e instanceof IllegalArgumentException);
+			Assert.assertEquals("Given internalPath 'odt' is an illegal or inappropriate argument.", e.getMessage());
+		}
+		// illegal media type
+		try {
+			Document.loadDocument(odfpackage, "meta.xml");
+		} catch (Exception e) {
+			Assert.assertTrue(e instanceof IllegalArgumentException);
+			Assert.assertEquals("Given mediaType 'text/xml' is either not yet supported or not an ODF mediatype!", e.getMessage());
+		}
+	}
+	
 	private static String inputStreamToString(InputStream in) throws IOException {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
 		StringBuilder stringBuilder = new StringBuilder();

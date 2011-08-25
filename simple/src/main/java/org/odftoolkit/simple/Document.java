@@ -202,15 +202,12 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 		public static OdfMediaType getOdfMediaType(String mediaType) {
 			OdfMediaType odfMediaType = null;
 			if (mediaType != null) {
-
 				String mediaTypeShort = mediaType.substring(mediaType.lastIndexOf(".") + 1, mediaType.length());
 				mediaTypeShort = mediaTypeShort.replace('-', '_').toUpperCase();
 				try {
 					odfMediaType = OdfMediaType.valueOf(mediaTypeShort);
-
 				} catch (IllegalArgumentException e) {
-					throw new IllegalArgumentException("Given mediaType '" + mediaType
-							+ "' is either not yet supported or not an ODF mediatype!");
+					throw new IllegalArgumentException("Given mediaType '" + mediaType + "' is either not yet supported or not an ODF mediatype!");
 				}
 			}
 			return odfMediaType;
@@ -333,12 +330,11 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 */
 	public static Document loadDocument(OdfPackage odfPackage, String internalPath) throws Exception {
 		String documentMediaType = odfPackage.getMediaTypeString(internalPath);
-		OdfMediaType odfMediaType = null;
-		try {
-			odfMediaType = OdfMediaType.getOdfMediaType(documentMediaType);
-		} catch (IllegalArgumentException e) {
-			// the returned NULL will be taking care of afterwards
+		if (documentMediaType == null) {
+			throw new IllegalArgumentException("Given internalPath '" + internalPath
+					+ "' is an illegal or inappropriate argument.");
 		}
+		OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(documentMediaType);
 		if (odfMediaType == null) {
 			ErrorHandler errorHandler = odfPackage.getErrorHandler();
 			Matcher matcherCTRL = CONTROL_CHAR_PATTERN.matcher(documentMediaType);
