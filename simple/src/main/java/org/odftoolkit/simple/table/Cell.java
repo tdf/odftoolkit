@@ -28,6 +28,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -89,12 +91,15 @@ import org.w3c.dom.Node;
  */
 public class Cell implements ListContainer {
 
-	TableTableCellElementBase mOdfElement;
+	TableTableCellElementBase mCellElement;
+	Document mDocument;
+
 	int mnRepeatedColIndex;
 	int mnRepeatedRowIndex;
 	Table mOwnerTable;
 	String msFormatString;
 	CellStyleHandler mStyleHandler;
+
 	/**
 	 * The default date format of table cell.
 	 */
@@ -119,8 +124,6 @@ public class Cell implements ListContainer {
 	 * The default columns repeated number.
 	 */
 	private static final int DEFAULT_COLUMNS_REPEATED_NUMBER = 1;
-	TableTableCellElementBase mCellElement;
-	Document mDocument;
 	private ListContainerImpl listContainerImpl = new ListContainerImpl();
 	
 	Cell(TableTableCellElementBase odfElement, int repeatedColIndex, int repeatedRowIndex) {
@@ -524,8 +527,7 @@ public class Cell implements ListContainer {
 	 */
 	public Row getTableRow() {
 		Table table = getTable();
-		int index = getRowIndex();
-		return table.getRowByIndex(index);
+		return table.getRowInstance(getTableRowElement(), mnRepeatedRowIndex);
 	}
 
 	private TableTableRowElement getTableRowElement() {
@@ -860,8 +862,8 @@ public class Cell implements ListContainer {
 	 *            the <code>CellValueAdapter</code> used to adapt cell value and
 	 *            value type.
 	 * @param stylename
-	 *            the style name. If stylename is null, the content will use the
-	 *            default paragraph style.
+	 *            the style name. If style name is null, the content will use
+	 *            the default paragraph style.
 	 * 
 	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 * @since 0.3
@@ -889,8 +891,8 @@ public class Cell implements ListContainer {
 	 *            the displayed text. If content is null, it will display the
 	 *            empty string instead.
 	 * @param stylename
-	 *            the style name. If stylename is null, the content will use the
-	 *            default paragraph style.
+	 *            the style name. If style name is null, the content will use
+	 *            the default paragraph style.
 	 * 
 	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 * @see org.odftoolkit.simple.table.DefaultCellValueAdapter
@@ -1018,6 +1020,29 @@ public class Cell implements ListContainer {
 	}
 
 	/**
+	 * Set the cell style name. When lots of cells have the same style features,
+	 * the user can configuration the first one and set the other's style name
+	 * directly. That will improve the performance.
+	 * 
+	 * @param styleName
+	 *            an exit cell style name.
+	 * @since 0.4
+	 */
+	public void setCellStyleName(String styleName) {
+		mCellElement.setStyleName(styleName);
+	}
+
+	/**
+	 * Get the cell style name.
+	 * 
+	 * @return cell style name.
+	 * @since 0.4
+	 */
+	public String getCellStyleName() {
+		return mCellElement.getStyleName();
+	}
+
+	/**
 	 * Set the cell value as a string, and set the value type to be string.
 	 * 
 	 * @param str
@@ -1040,48 +1065,85 @@ public class Cell implements ListContainer {
 	// 2. update the cell itself if the cell is the column repeated cells.
 	void splitRepeatedCells() {
 		Table table = getTable();
+		TableTableRowElement ownerRowElement = getTableRowElement();
 		// 1.if the parent row is the repeated row
 		// the repeated row has to be separated
 		// after this the cell element and repeated index will be updated
 		// according to the new parent row
-		Row row = getTableRow();
-		int colIndex = getColumnIndex();
-		if (row.getRowsRepeatedNumber() > 1) {
-			row.splitRepeatedRows();
-			Cell cell = row.getCellByIndex(colIndex);
-			mCellElement = cell.getOdfElement();
-			mnRepeatedColIndex = cell.mnRepeatedColIndex;
-			mnRepeatedRowIndex = cell.mnRepeatedRowIndex;
+		Row ownerRow = table.getRowInstance(ownerRowElement, mnRepeatedRowIndex);
+		if (ownerRow.getRowsRepeatedNumber() > 1) {
+			ownerRow.splitRepeatedRows();
+			// update row element, new row element maybe created.
+			ownerRowElement = ownerRow.maRowElement;
+			mnRepeatedRowIndex = 0;
 		}
-
 		// 2.if the cell is the column repeated cell
 		// this repeated cell has to be separated
 		int repeateNum = getColumnsRepeatedNumber();
 		if (repeateNum > 1) {
-			// change this repeated column to several single columns
-			TableTableCellElementBase ownerCellElement = null;
-			int repeatedColIndex = mnRepeatedColIndex;
-			Node refElement = mCellElement;
-			for (int i = repeateNum - 1; i >= 0; i--) {
-				TableTableCellElementBase newCell = (TableTableCellElementBase) mCellElement.cloneNode(true);
-				newCell.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
-				row.getOdfElement().insertBefore(newCell, refElement);
-				refElement = newCell;
-				if (repeatedColIndex == i) {
-					ownerCellElement = newCell;
+			// change this repeated cell to three parts: repeated cell before,
+			// new single cell and repeated cell after.
+			Map<TableTableCellElementBase, Vector<Cell>> cellRepository = table.mCellRepository;
+			String tableNamespaceURI = OdfDocumentNamespace.TABLE.getUri();
+			Vector<Cell> oldList = null;
+			if (cellRepository.containsKey(mCellElement)) {
+				oldList = cellRepository.remove(mCellElement);
+			}
+			int offetAfterCurrentCell = repeateNum - mnRepeatedColIndex - 1;
+			TableTableCellElementBase currentCellElement = mCellElement;
+			TableTableCellElementBase newBeforeCellElement = null;
+			TableTableCellElementBase newAfterCellElement = null;
+			if (mnRepeatedColIndex > 0) {
+				newBeforeCellElement = (TableTableCellElementBase) mCellElement.cloneNode(true);
+				if (mnRepeatedColIndex > 1) {
+					newBeforeCellElement.setTableNumberColumnsRepeatedAttribute(mnRepeatedColIndex);
 				} else {
-					table.updateCellRepository(mCellElement, i, mnRepeatedRowIndex, newCell, 0, mnRepeatedRowIndex);
+					newBeforeCellElement.removeAttributeNS(tableNamespaceURI, "number-columns-repeated");
+				}
+				// insert new before repeated cell
+				ownerRowElement.insertBefore(newBeforeCellElement, currentCellElement);
+				// update cell cache
+				if (oldList != null) {
+					Vector<Cell> newBeforeList = new Vector<Cell>(mnRepeatedColIndex);
+					for (int i = 0; i < mnRepeatedColIndex && i < oldList.size(); i++) {
+						Cell beforeCell = oldList.get(i);
+						if (beforeCell != null) {
+							beforeCell.mCellElement = newBeforeCellElement;
+							newBeforeList.add(i, beforeCell);
+						}
+					}
+					cellRepository.put(newBeforeCellElement, newBeforeList);
 				}
 			}
-			// remove this column element
-			row.getOdfElement().removeChild(mCellElement);
-
-			if (ownerCellElement != null) {
-				table.updateCellRepository(mCellElement, mnRepeatedColIndex, mnRepeatedRowIndex, ownerCellElement, 0,
-						mnRepeatedRowIndex);
-				mCellElement = ownerCellElement;
-				mnRepeatedColIndex = 0;
+			currentCellElement.removeAttributeNS(tableNamespaceURI, "number-columns-repeated");
+			if (offetAfterCurrentCell > 0) {
+				newAfterCellElement = (TableTableCellElementBase) currentCellElement.cloneNode(true);
+				ownerRowElement.insertBefore(newAfterCellElement, currentCellElement);
+				currentCellElement = newAfterCellElement;
+				newAfterCellElement = (TableTableCellElementBase) currentCellElement.getNextSibling();
+				if (offetAfterCurrentCell > 1) {
+					newAfterCellElement.setTableNumberColumnsRepeatedAttribute(offetAfterCurrentCell);
+				}
+				// update cell cache
+				if (oldList != null) {
+					Vector<Cell> newAfterList = new Vector<Cell>(offetAfterCurrentCell);
+					for (int i = mnRepeatedColIndex + 1; i < repeateNum && i < oldList.size(); i++) {
+						Cell afterCell = oldList.get(i);
+						if (afterCell != null) {
+							afterCell.mCellElement = newAfterCellElement;
+							afterCell.mnRepeatedColIndex = i - mnRepeatedColIndex - 1;
+							newAfterList.add(afterCell.mnRepeatedColIndex, afterCell);
+						}
+					}
+					cellRepository.put(newAfterCellElement, newAfterList);
+				}
 			}
+			mnRepeatedColIndex = 0;
+			mCellElement = currentCellElement;
+			// update cell cache
+			Vector<Cell> currentList = new Vector<Cell>(1);
+			currentList.add(0, this);
+			cellRepository.put(currentCellElement, currentList);
 		}
 	}
 

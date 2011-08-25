@@ -344,8 +344,9 @@ public class Column {
 	public Column getNextColumn() {
 		Table table = getTable();
 		//the column has repeated column number > 1
-		if (getColumnsRepeatedNumber() > 1) {
-			if (mnRepeatedIndex < (getColumnsRepeatedNumber() - 1)) {
+		int columnsRepeatedNumber = getColumnsRepeatedNumber();
+		if (columnsRepeatedNumber > 1) {
+			if (mnRepeatedIndex < (columnsRepeatedNumber - 1)) {
 				return table.getColumnInstance(maColumnElement, mnRepeatedIndex + 1);
 			}
 		}

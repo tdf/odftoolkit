@@ -21,9 +21,12 @@
  ************************************************************************/
 package org.odftoolkit.simple.table;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -63,17 +66,21 @@ import org.w3c.dom.Node;
  */
 public class Row {
 
-	//boolean mbVisible;
+	// boolean mbVisible;
 	TableTableRowElement maRowElement;
 	int mnRepeatedIndex;
 	int mRowsRepeatedNumber = -1;
+
 	private static final String DEFAULT_HEIGHT = "0.30in";
 	private Document mDocument;
 
 	/**
 	 * Construct the <code>Row</code> feature.
-	 * @param rowElement	the row element represent this row
-	 * @param repeatedIndex	the index in the repeated rows
+	 * 
+	 * @param rowElement
+	 *            the row element represent this row
+	 * @param repeatedIndex
+	 *            the index in the repeated rows
 	 */
 	Row(TableTableRowElement rowElement, int repeatedIndex) {
 		maRowElement = rowElement;
@@ -82,11 +89,15 @@ public class Row {
 	}
 
 	/**
-	 * Get the <code>Row</code> instance from the <code>TableTableRowElement</code> instance.
+	 * Get the <code>Row</code> instance from the
+	 * <code>TableTableRowElement</code> instance.
 	 * <p>
-	 * Each <code>TableTableRowElement</code> instance has a one-to-one relationship to a <code>Row</code> instance.
+	 * Each <code>TableTableRowElement</code> instance has a one-to-one
+	 * relationship to a <code>Row</code> instance.
 	 * 
-	 * @param rowElement	the row element that need to get the corresponding <code>Row</code> instance
+	 * @param rowElement
+	 *            the row element that need to get the corresponding
+	 *            <code>Row</code> instance
 	 * @return the <code>Row</code> instance represent the specified row element
 	 */
 	public static Row getInstance(TableTableRowElement rowElement) {
@@ -104,17 +115,18 @@ public class Row {
 		} else {
 			throw new IllegalArgumentException("the rowElement is not in the table dom tree");
 		}
-
 		Row row = table.getRowInstance(rowElement, 0);
 		if (row.getRowsRepeatedNumber() > 1) {
-			Logger.getLogger(Row.class.getName()).log(Level.WARNING, "the row has the repeated row number, and puzzled about get which repeated index of the row,"
-					+ "here just return the first row of the repeated rows.");
+			Logger.getLogger(Row.class.getName()).log(
+					Level.WARNING,
+					"the row has the repeated row number, and puzzled about get which repeated index of the row,"
+							+ "here just return the first row of the repeated rows.");
 		}
 		return row;
 	}
 
 	/**
-	 * Get the <code>TableTableElement</code>  who contains this row.
+	 * Get the <code>TableTableElement</code> who contains this row.
 	 * 
 	 * @return the table element that contains the row.
 	 */
@@ -131,7 +143,8 @@ public class Row {
 
 	/**
 	 * Get owner table of the current row.
-	 * @return	the parent table of this row
+	 * 
+	 * @return the parent table of this row
 	 */
 	public Table getTable() {
 		TableTableElement tableElement = getTableElement();
@@ -144,7 +157,8 @@ public class Row {
 	/**
 	 * Return the height of the row (in Millimeter).
 	 * <p>
-	 * Return the minimal height, if the row height is not set, 
+	 * Return the minimal height, if the row height is not set,
+	 * 
 	 * @return the height of the current row (in Millimeter).
 	 */
 	public long getHeight() {
@@ -159,11 +173,15 @@ public class Row {
 	}
 
 	/**
-	 * Set the height/minimal height of the row (in Millimeter) according to the second parameter.
+	 * Set the height/minimal height of the row (in Millimeter) according to the
+	 * second parameter.
+	 * 
 	 * @param height
-	 * 				the height/minimal height that will be set to the row (in Millimeter).
+	 *            the height/minimal height that will be set to the row (in
+	 *            Millimeter).
 	 * @param isMinHeight
-	 * 				if it is true, the row can fit the height to the text, vice versa.
+	 *            if it is true, the row can fit the height to the text, vice
+	 *            versa.
 	 */
 	public void setHeight(long height, boolean isMinHeight) {
 		String sHeightMM = String.valueOf(height) + Unit.MILLIMETER.abbr();
@@ -173,44 +191,142 @@ public class Row {
 		maRowElement.setProperty(OdfTableRowProperties.RowHeight, sHeightIN);
 	}
 
-	//if one of the repeated row want to change something
-	//then this repeated row have to split to repeated number rows
-	//the maRowElement/mnRepeatedIndex should also be updated according to the original index in the repeated column
+	// if one of the repeated row want to change something
+	// then this repeated row have to split to repeated number rows
+	// the maRowElement/mnRepeatedIndex should also be updated according to the
+	// original index in the repeated column
 	void splitRepeatedRows() {
 		int repeateNum = getRowsRepeatedNumber();
 		if (repeateNum > 1) {
+			// change this repeated row to three parts: repeated row before, new
+			// single row and repeated row after.
+			Node rowOwnerElement = maRowElement.getParentNode();
 			Table table = getTable();
-			TableTableElement tableEle = table.getOdfElement();
-			//change this repeated row to several single rows
-			TableTableRowElement ownerRowElement = null;
-			int repeatedRowIndex = mnRepeatedIndex;
-			Node refElement = maRowElement;
-			Node oldRowElement = maRowElement;
-			for (int i = repeateNum - 1; i >= 0; i--) {
-				TableTableRowElement newRow = (TableTableRowElement) maRowElement.cloneNode(true);
-				newRow.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-repeated");
-				tableEle.insertBefore(newRow, refElement);
-				refElement = newRow;
-				if (repeatedRowIndex == i) {
-					ownerRowElement = newRow;
+			Map<TableTableRowElement, Vector<Row>> rowRepository = table.mRowRepository;
+			Map<TableTableCellElementBase, Vector<Cell>> cellRepository = table.mCellRepository;
+			String tableNameSpaceURI = OdfDocumentNamespace.TABLE.getUri();
+			Vector<Row> oldList = null;
+			if (rowRepository.containsKey(maRowElement)) {
+				oldList = rowRepository.remove(maRowElement);
+			}
+			int offetAfterCurrentRow = repeateNum - mnRepeatedIndex - 1;
+			TableTableRowElement currentRowElement = null;
+			TableTableRowElement newBeforeRowElement = null;
+			TableTableRowElement newAfterRowElement = null;
+			List<TableTableCellElementBase> newBeforeCellElements = new ArrayList<TableTableCellElementBase>();
+			List<TableTableCellElementBase> newCurrentCellElements = new ArrayList<TableTableCellElementBase>();
+			List<TableTableCellElementBase> newAfterCellElements = new ArrayList<TableTableCellElementBase>();
+			if (mnRepeatedIndex > 0) {
+				newBeforeRowElement = (TableTableRowElement) maRowElement.cloneNode(true);
+				if (mnRepeatedIndex > 1) {
+					newBeforeRowElement.setTableNumberRowsRepeatedAttribute(mnRepeatedIndex);
 				} else {
-					table.updateRowRepository(maRowElement, i, newRow, 0);
+					newBeforeRowElement.removeAttributeNS(tableNameSpaceURI, "number-rows-repeated");
+				}
+				// insert new before repeated row
+				rowOwnerElement.insertBefore(newBeforeRowElement, maRowElement);
+				// update row cache
+				if (oldList != null) {
+					Vector<Row> newBeforeList = new Vector<Row>(mnRepeatedIndex);
+					for (int i = 0; i < mnRepeatedIndex && i < oldList.size(); i++) {
+						Row beforeRow = oldList.get(i);
+						if (beforeRow != null) {
+							beforeRow.maRowElement = newBeforeRowElement;
+							beforeRow.mRowsRepeatedNumber = -1;
+							newBeforeList.add(i, beforeRow);
+						}
+					}
+					rowRepository.put(newBeforeRowElement, newBeforeList);
+					// create new cell element map.
+					for (Node n : new DomNodeList(newBeforeRowElement.getChildNodes())) {
+						int columnsRepeatedNumber = ((TableTableCellElementBase) n)
+								.getTableNumberColumnsRepeatedAttribute();
+						for (int i = 0; i < columnsRepeatedNumber; i++) {
+							newBeforeCellElements.add((TableTableCellElementBase) n);
+						}
+					}
 				}
 			}
-
-			if (ownerRowElement != null) {
-				table.updateRowRepository(maRowElement, mnRepeatedIndex, ownerRowElement, 0);
+			currentRowElement = (TableTableRowElement) maRowElement.cloneNode(true);
+			currentRowElement.removeAttributeNS(tableNameSpaceURI, "number-rows-repeated");
+			rowOwnerElement.insertBefore(currentRowElement, maRowElement);
+			// create new cell element map.
+			for (Node n : new DomNodeList(currentRowElement.getChildNodes())) {
+				int columnsRepeatedNumber = ((TableTableCellElementBase) n).getTableNumberColumnsRepeatedAttribute();
+				for (int i = 0; i < columnsRepeatedNumber; i++) {
+					newCurrentCellElements.add((TableTableCellElementBase) n);
+				}
 			}
-			tableEle.removeChild(oldRowElement);
+			if (offetAfterCurrentRow > 0) {
+				newAfterRowElement = (TableTableRowElement) maRowElement.cloneNode(true);
+				if (offetAfterCurrentRow > 1) {
+					newAfterRowElement.setTableNumberRowsRepeatedAttribute(offetAfterCurrentRow);
+				} else {
+					newAfterRowElement.removeAttributeNS(tableNameSpaceURI, "number-rows-repeated");
+				}
+				rowOwnerElement.insertBefore(newAfterRowElement, maRowElement);
+				// update row cache
+				if (oldList != null) {
+					Vector<Row> newAfterList = new Vector<Row>(offetAfterCurrentRow);
+					for (int i = mnRepeatedIndex + 1; i < repeateNum && i < oldList.size(); i++) {
+						Row afterRow = oldList.get(i);
+						if (afterRow != null) {
+							afterRow.maRowElement = newAfterRowElement;
+							afterRow.mnRepeatedIndex = i - mnRepeatedIndex - 1;
+							afterRow.mRowsRepeatedNumber = -1;
+							newAfterList.add(afterRow.mnRepeatedIndex, afterRow);
+						}
+					}
+					rowRepository.put(newAfterRowElement, newAfterList);
+					// create new cell element map.
+					for (Node n : new DomNodeList(newAfterRowElement.getChildNodes())) {
+						int columnsRepeatedNumber = ((TableTableCellElementBase) n)
+								.getTableNumberColumnsRepeatedAttribute();
+						for (int i = 0; i < columnsRepeatedNumber; i++) {
+							newAfterCellElements.add((TableTableCellElementBase) n);
+						}
+					}
+				}
+			}
+			// this var help to avoid calling duplicate.
+			int cellColumnIndexBase = 0;
+			// update cache cell list
+			for (Node n : new DomNodeList(maRowElement.getChildNodes())) {
+				if (cellRepository.containsKey(n)) {
+					Vector<Cell> cellList = cellRepository.get(n);
+					for (Cell cell : cellList) {
+						if (cell != null) {
+							int oldColumnIndex = cellColumnIndexBase + cell.mnRepeatedColIndex;
+							if (cell.mnRepeatedRowIndex > mnRepeatedIndex) {
+								cell.mnRepeatedRowIndex = cell.mnRepeatedRowIndex - mnRepeatedIndex - 1;
+								cell.mCellElement = newAfterCellElements.get(oldColumnIndex);
+							} else if (cell.mnRepeatedRowIndex == mnRepeatedIndex) {
+								cell.mnRepeatedRowIndex = 0;
+								cell.mCellElement = newCurrentCellElements.get(oldColumnIndex);
+							} else {
+								cell.mCellElement = newBeforeCellElements.get(oldColumnIndex);
+							}
+						}
+					}
+				}
+				cellColumnIndexBase += ((TableTableCellElementBase) n).getTableNumberColumnsRepeatedAttribute()
+						.intValue();
+			}
+			// update row cache
+			Vector<Row> currentList = new Vector<Row>(1);
+			currentList.add(0, this);
+			rowRepository.put(currentRowElement, currentList);
 			mRowsRepeatedNumber = -1;
+			mnRepeatedIndex = 0;
+			rowOwnerElement.removeChild(maRowElement);
+			maRowElement = currentRowElement;
 		}
 	}
 
 	/**
 	 * Return if the row always keeps its optimal height.
-	 * @return 
-	 * 			true if the row always keeps its optimal height;
-	 * 			vice versa
+	 * 
+	 * @return true if the row always keeps its optimal height; vice versa
 	 */
 	public boolean isOptimalHeight() {
 		return Boolean.parseBoolean(maRowElement.getProperty(OdfTableRowProperties.UseOptimalRowHeight));
@@ -218,15 +334,19 @@ public class Row {
 
 	/**
 	 * Set if the row always keeps its optimal height.
+	 * 
 	 * @param isUseOptimalHeight
-	 * 					the flag that indicate row should keep its optimal height or not
+	 *            the flag that indicate row should keep its optimal height or
+	 *            not
 	 */
 	public void setUseOptimalHeight(boolean isUseOptimalHeight) {
 		maRowElement.setProperty(OdfTableRowProperties.UseOptimalRowHeight, String.valueOf(isUseOptimalHeight));
 	}
 
 	/**
-	 * Return an instance of <code>TableTableRowElement</code> which represents this feature.
+	 * Return an instance of <code>TableTableRowElement</code> which represents
+	 * this feature.
+	 * 
 	 * @return an instance of <code>TableTableRowElement</code>
 	 */
 	public TableTableRowElement getOdfElement() {
@@ -249,21 +369,18 @@ public class Row {
 		// expand column as needed.
 		int lastColumnIndex = table.getColumnCount() - 1;
 		if (index > lastColumnIndex) {
-			//need clean cell style.
+			// need clean cell style.
 			table.appendColumns((index - lastColumnIndex), true);
 		}
 		for (Node n : new DomNodeList(maRowElement.getChildNodes())) {
 			if (n instanceof TableTableCellElementBase) {
 				if (index == 0) {
-					return table.getCellInstance((TableTableCellElementBase) n,
-							0, mnRepeatedIndex);
+					return table.getCellInstance((TableTableCellElementBase) n, 0, mnRepeatedIndex);
 				} else {
 					int nextIndex = index
 							- ((TableTableCellElementBase) n).getTableNumberColumnsRepeatedAttribute().intValue();
 					if (nextIndex < 0) {
-						Cell cell = table.getCellInstance(
-								(TableTableCellElementBase) n, index,
-								mnRepeatedIndex);
+						Cell cell = table.getCellInstance((TableTableCellElementBase) n, index, mnRepeatedIndex);
 						return cell;
 					} else {
 						index = nextIndex;
@@ -275,17 +392,19 @@ public class Row {
 	}
 
 	/**
-	 * Return the count of real cells in this row.
-	 * The cells covered by top cells are not counted.
+	 * Return the count of real cells in this row. The cells covered by top
+	 * cells are not counted.
 	 * <p>
 	 * Please note it might not equal to the column count of the owner table,
 	 * because some of them are the covered cells.
-	 * @return 		the cell count
+	 * 
+	 * @return the cell count
 	 */
 	public int getCellCount() {
 		Table table = getTable();
 		Set<Cell> realCells = new HashSet<Cell>();
-		List<CellCoverInfo> coverList = table.getCellCoverInfos(0, 0, table.getColumnCount() - 1, table.getRowCount() - 1);
+		List<CellCoverInfo> coverList = table.getCellCoverInfos(0, 0, table.getColumnCount() - 1,
+				table.getRowCount() - 1);
 		int rowIndex = getRowIndex();
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			Cell cell = table.getOwnerCellByPosition(coverList, i, rowIndex);
@@ -296,49 +415,55 @@ public class Row {
 
 	/**
 	 * Return the previous row of the current row.
-	 *
+	 * 
 	 * @return the previous row before this row in the owner table
 	 */
 	public Row getPreviousRow() {
 		Table table = getTable();
-		//the row has repeated row number > 1
+		// the row has repeated row number > 1
 		if (getRowsRepeatedNumber() > 1) {
 			if (mnRepeatedIndex > 0) {
 				return table.getRowInstance(maRowElement, mnRepeatedIndex - 1);
 			}
 		}
-		//the row has repeated row number > 1 && the index is 0
-		//or the row has repeated row num = 1
+		// the row has repeated row number > 1 && the index is 0
+		// or the row has repeated row num = 1
 		Node aPrevNode = maRowElement.getPreviousSibling();
 		Node aCurNode = maRowElement;
 		TableTableRowElement lastRow;
 		while (true) {
 			if (aPrevNode == null) {
-				//does not have previous sibling, then get the parent
-				//because aCurNode might be the child element of table-header-rows, table-rows, table-row-group
+				// does not have previous sibling, then get the parent
+				// because aCurNode might be the child element of
+				// table-header-rows, table-rows, table-row-group
 				Node parentNode = aCurNode.getParentNode();
-				//if the parent is table, then it means that this row is the first row in this table
-				//it has no previous row
+				// if the parent is table, then it means that this row is the
+				// first row in this table
+				// it has no previous row
 				if (parentNode instanceof TableTableElement) {
 					return null;
 				}
 				aPrevNode = parentNode.getPreviousSibling();
 			}
-			//else the previous node might be table-header-rows, table-rows, table-row-group
+			// else the previous node might be table-header-rows, table-rows,
+			// table-row-group
 			if (aPrevNode != null) {
 				try {
 					if (aPrevNode instanceof TableTableRowElement) {
-						return table.getRowInstance((TableTableRowElement) aPrevNode,
-								((TableTableRowElement) aPrevNode).getTableNumberRowsRepeatedAttribute().intValue() - 1);
+						return table
+								.getRowInstance((TableTableRowElement) aPrevNode, ((TableTableRowElement) aPrevNode)
+										.getTableNumberRowsRepeatedAttribute().intValue() - 1);
 					} else if (aPrevNode instanceof TableTableRowsElement
 							|| aPrevNode instanceof TableTableHeaderRowsElement
 							|| aPrevNode instanceof TableTableRowGroupElement) {
 						XPath xpath = ((OdfContentDom) aPrevNode.getOwnerDocument()).getXPath();
 						synchronized (mDocument) {
-							lastRow = (TableTableRowElement) xpath.evaluate(".//table:table-row[last()]", aPrevNode, XPathConstants.NODE);
+							lastRow = (TableTableRowElement) xpath.evaluate(".//table:table-row[last()]", aPrevNode,
+									XPathConstants.NODE);
 						}
 						if (lastRow != null) {
-							return table.getRowInstance(lastRow, lastRow.getTableNumberRowsRepeatedAttribute().intValue() - 1);
+							return table.getRowInstance(lastRow, lastRow.getTableNumberRowsRepeatedAttribute()
+									.intValue() - 1);
 						}
 					} else {
 						aCurNode = aPrevNode;
@@ -353,34 +478,36 @@ public class Row {
 
 	/**
 	 * Return the next row of the current row.
-	 *
+	 * 
 	 * @return the next row after this row in the owner table
 	 */
 	public Row getNextRow() {
 		Table table = getTable();
-		//the row has repeated row number > 1
+		// the row has repeated row number > 1
 		if (getRowsRepeatedNumber() > 1) {
 			if (mnRepeatedIndex < (getRowsRepeatedNumber() - 1)) {
 				return table.getRowInstance(maRowElement, mnRepeatedIndex + 1);
 			}
 		}
-
 		Node aNextNode = maRowElement.getNextSibling();
-		Node aCurNode = maRowElement;		
+		Node aCurNode = maRowElement;
 		TableTableRowElement firstRow;
 		while (true) {
 			if (aNextNode == null) {
-				//does not have next sibling, then get the parent
-				//because aCurNode might be the child element of table-header-rows, table-rows, table-row-group
+				// does not have next sibling, then get the parent
+				// because aCurNode might be the child element of
+				// table-header-rows, table-rows, table-row-group
 				Node parentNode = aCurNode.getParentNode();
-				//if the parent is table, then it means that this row is the last row in this table
-				//it has no next row
+				// if the parent is table, then it means that this row is the
+				// last row in this table
+				// it has no next row
 				if (parentNode instanceof TableTableElement) {
 					return null;
 				}
 				aNextNode = parentNode.getNextSibling();
 			}
-			//else the next node might be table-header-rows, table-rows, table-row-group
+			// else the next node might be table-header-rows, table-rows,
+			// table-row-group
 			if (aNextNode != null) {
 				try {
 					if (aNextNode instanceof TableTableRowElement) {
@@ -390,7 +517,8 @@ public class Row {
 							|| aNextNode instanceof TableTableRowGroupElement) {
 						XPath xpath = ((OdfContentDom) aNextNode.getOwnerDocument()).getXPath();
 						synchronized (mDocument) {
-							firstRow = (TableTableRowElement) xpath.evaluate(".//table:table-row[first()]", aNextNode, XPathConstants.NODE);
+							firstRow = (TableTableRowElement) xpath.evaluate(".//table:table-row[first()]", aNextNode,
+									XPathConstants.NODE);
 						}
 						if (firstRow != null) {
 							return table.getRowInstance(firstRow, 0);
@@ -405,12 +533,14 @@ public class Row {
 			}
 		}
 	}
+
 	/**
 	 * Set the default cell style to this row.
 	 * <p>
 	 * The style should already exist in this document.
+	 * 
 	 * @param style
-	 * 			the cell style of the document
+	 *            the cell style of the document
 	 */
 	public void setDefaultCellStyle(OdfStyle style) {
 		splitRepeatedRows();
@@ -421,20 +551,18 @@ public class Row {
 
 		if (style != null) {
 			style.addStyleUser(maRowElement);
-			maRowElement.setTableDefaultCellStyleNameAttribute(
-					style.getStyleNameAttribute());
+			maRowElement.setTableDefaultCellStyleNameAttribute(style.getStyleNameAttribute());
 		}
 	}
 
 	/**
 	 * Get the default cell style of this row.
-	 *
+	 * 
 	 * @return the default cell style of this row
 	 */
 	public OdfStyle getDefaultCellStyle() {
 		String styleName = maRowElement.getTableDefaultCellStyleNameAttribute();
-		OdfStyle style = maRowElement.getAutomaticStyles().getStyle(
-				styleName, OdfStyleFamily.TableCell);
+		OdfStyle style = maRowElement.getAutomaticStyles().getStyle(styleName, OdfStyleFamily.TableCell);
 
 		if (style == null) {
 			style = mDocument.getDocumentStyles().getStyle(styleName, OdfStyleFamily.TableCell);
@@ -473,16 +601,16 @@ public class Row {
 			}
 		}
 		return result + mnRepeatedIndex;
-
 	}
 
-	//insert count number of cell from index
-	//this is called after insertColumn has been called by Table
+	// insert count number of cell from index
+	// this is called after insertColumn has been called by Table
 	void insertCellByIndex(int index, int count) {
 		splitRepeatedRows();
-		//all insert the real cell
+		// all insert the real cell
 		Table table = getTable();
-		List<CellCoverInfo> coverList = table.getCellCoverInfos(0, 0, table.getColumnCount() - 1, table.getRowCount() - 1);
+		List<CellCoverInfo> coverList = table.getCellCoverInfos(0, 0, table.getColumnCount() - 1,
+				table.getRowCount() - 1);
 		int rowIndex = getRowIndex();
 		Cell preCell;
 		if (index == 0) {
@@ -495,18 +623,19 @@ public class Row {
 			nextCell = getCellByIndex(getCellCount() - 1);
 		}
 		for (int i = index + count; i > index; i--) {
-			TableTableCellElement newCell = (TableTableCellElement) OdfXMLFactory.newOdfElement((OdfFileDom) maRowElement.getOwnerDocument() ,
-					OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell"));
+			TableTableCellElement newCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(
+					(OdfFileDom) maRowElement.getOwnerDocument(), OdfName.newName(OdfDocumentNamespace.TABLE,
+							"table-cell"));
 			newCell.setTableStyleNameAttribute(preCell.getStyleName());
 			maRowElement.insertBefore(newCell, nextCell.getOdfElement());
 		}
 	}
 
-	//note: we have to use this method to modify the row repeated number
-	//in order to update mnRepeatedIndex of the each row
+	// note: we have to use this method to modify the row repeated number
+	// in order to update mnRepeatedIndex of the each row
 	void setRowsRepeatedNumber(int num) {
 		mRowsRepeatedNumber = num;
-		//update the mnRepeatedIndex for the ever repeated row
+		// update the mnRepeatedIndex for the ever repeated row
 		maRowElement.setTableNumberRowsRepeatedAttribute(Integer.valueOf(num));
 	}
 
@@ -526,7 +655,8 @@ public class Row {
 	 * Moved from Table
 	 * 
 	 */
-	private void insertCellElementBefore(OdfElement parentEle, TableTableCellElementBase positionEle, TableTableCellElementBase cellEle, int count) {
+	private void insertCellElementBefore(OdfElement parentEle, TableTableCellElementBase positionEle,
+			TableTableCellElementBase cellEle, int count) {
 		if (positionEle == null) {
 			parentEle.appendChild(cellEle);
 			for (int i = 1; i < count; i++) {
@@ -543,7 +673,6 @@ public class Row {
 	void insertCellBefore(Cell refCell, Cell positionCell, int count) {
 		splitRepeatedRows();
 		Table ownerTable = getTable();
-
 		if (positionCell == null) {
 			if (refCell.isCoveredElement()) {
 				TableTableCellElement coverCellEle = (TableTableCellElement) refCell.getCoverCell().getOdfElement();
@@ -565,49 +694,54 @@ public class Row {
 			TableTableCellElement coverRefCellEle = null;
 			TableTableCellElement coverPosCellEle = null;
 			Cell coverRefCell = null;
-			if (refCell.isCoveredElement()) { //get ref cover cell
+			// get ref cover cell
+			if (refCell.isCoveredElement()) {
 				coverRefCell = refCell.getCoverCell();
 				coverRefCellEle = (TableTableCellElement) coverRefCell.getOdfElement();
 			}
-			if (positionCell.isCoveredElement()) //get position cover cell
-			{
+			// get position cover cell
+			if (positionCell.isCoveredElement()) {
 				coverPosCellEle = (TableTableCellElement) positionCell.getCoverCell().getOdfElement();
 			}
-
-			if ((coverRefCellEle != null && coverRefCellEle == coverPosCellEle) //is cover cell and have the same cover cell
-					|| (coverPosCellEle != null && refCell.getOdfElement() == coverPosCellEle)) //position cell is cover cell and refer cell covers position cell
-			{
+			// is cover cell and have the same cover cell
+			// position cell is cover cell and refer cell covers position cell
+			if ((coverRefCellEle != null && coverRefCellEle == coverPosCellEle)
+					|| (coverPosCellEle != null && refCell.getOdfElement() == coverPosCellEle)) {
 				if (coverRefCellEle == null) {
 					coverRefCellEle = (TableTableCellElement) refCell.getOdfElement();
 					coverRefCell = refCell;
 				}
 				TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
-						(OdfFileDom) ownerTable.getOdfElement().getOwnerDocument(),
-						OdfName.newName(OdfDocumentNamespace.TABLE, "covered-table-cell"));
+						(OdfFileDom) ownerTable.getOdfElement().getOwnerDocument(), OdfName.newName(
+								OdfDocumentNamespace.TABLE, "covered-table-cell"));
 				insertCellElementBefore(getOdfElement(), positionCell.getOdfElement(), newCellEle, count);
-				if (refCell.getRowIndex() == coverRefCell.getRowIndex()) //the first cover line
-				{
+				// the first cover line
+				if (refCell.getRowIndex() == coverRefCell.getRowIndex()) {
 					coverRefCell.setColumnSpannedNumber(coverRefCell.getColumnSpannedNumber() + count);
 				}
-			} else if (coverRefCellEle != null) //is cover cell
-			{
-				if (refCell.getRowIndex() == coverRefCell.getRowIndex()) { //the first cover line
+			} else if (coverRefCellEle != null) {
+				// This is a cover cell
+
+				// the first cover line
+				if (refCell.getRowIndex() == coverRefCell.getRowIndex()) {
 					TableTableCellElement newCellEle = (TableTableCellElement) coverRefCellEle.cloneNode(true);
 					cleanCell(newCellEle);
 					insertCellElementBefore(getOdfElement(), positionCell.getOdfElement(), newCellEle, count);
-				} else { //the second and other cover line
-					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) refCell.getOdfElement().cloneNode(true);
+				} else { // the second and other cover line
+					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) refCell.getOdfElement()
+							.cloneNode(true);
 					newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
 					insertCellElementBefore(getOdfElement(), positionCell.getOdfElement(), newCellEle, count);
 				}
 			} else if ((refCell.getOdfElement() == positionCell.getOdfElement())
-					&& (refCell.getColumnsRepeatedNumber() > 1)) //repeated number
-			{
+					&& (refCell.getColumnsRepeatedNumber() > 1)) {
+				// repeated number
+
 				int repeatNum = refCell.getColumnsRepeatedNumber();
-				//update the cell that after the ref cell
+				// update the cell that after the ref cell
 				for (int i = repeatNum - 1; i > refCell.mnRepeatedColIndex; i--) {
-					ownerTable.updateCellRepository(refCell.getOdfElement(), i, refCell.mnRepeatedRowIndex,
-							refCell.getOdfElement(), i + count, refCell.mnRepeatedRowIndex);
+					ownerTable.updateCellRepository(refCell.getOdfElement(), i, refCell.mnRepeatedRowIndex, refCell
+							.getOdfElement(), i + count, refCell.mnRepeatedRowIndex);
 				}
 				refCell.getOdfElement().setTableNumberColumnsRepeatedAttribute(repeatNum + count);
 			} else {
@@ -627,7 +761,6 @@ public class Row {
 		splitRepeatedRows();
 		Cell newCell = null;
 		Table ownerTable = getTable();
-
 		if (positionCell == null) {
 			if (refCell.isCoveredElement()) {
 				TableTableCellElement coverCellEle = (TableTableCellElement) refCell.getCoverCell().getOdfElement();
@@ -646,55 +779,60 @@ public class Row {
 			TableTableCellElement coverRefCellEle = null;
 			TableTableCellElement coverPosCellEle = null;
 			Cell coverRefCell = null;
-			if (refCell.isCoveredElement()) { //get ref cover cell
+			if (refCell.isCoveredElement()) {
+				// get ref cover cell
 				coverRefCell = refCell.getCoverCell();
 				coverRefCellEle = (TableTableCellElement) coverRefCell.getOdfElement();
 			}
-			if (positionCell.isCoveredElement()) //get position cover cell
-			{
+			if (positionCell.isCoveredElement()) {
+				// get position cover cell
 				coverPosCellEle = (TableTableCellElement) positionCell.getCoverCell().getOdfElement();
 			}
-
-			if ((coverRefCellEle != null && coverRefCellEle == coverPosCellEle) //is cover cell and have the same cover cell
-					|| (coverPosCellEle != null && refCell.getOdfElement() == coverPosCellEle)) //position cell is cover cell and refer cell covers position cell
-			{
+			// is cover cell and have the same cover cell
+			// position cell is cover cell and refer cell covers position cell
+			if ((coverRefCellEle != null && coverRefCellEle == coverPosCellEle)
+					|| (coverPosCellEle != null && refCell.getOdfElement() == coverPosCellEle)) {
 				if (coverRefCellEle == null) {
 					coverRefCellEle = (TableTableCellElement) refCell.getOdfElement();
 					coverRefCell = refCell;
 				}
 				TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
-						(OdfFileDom) ownerTable.getOdfElement().getOwnerDocument(),
-						OdfName.newName(OdfDocumentNamespace.TABLE, "covered-table-cell"));
+						(OdfFileDom) ownerTable.getOdfElement().getOwnerDocument(), OdfName.newName(
+								OdfDocumentNamespace.TABLE, "covered-table-cell"));
 				getOdfElement().insertBefore(newCellEle, positionCell.getOdfElement());
-				if (refCell.getRowIndex() == coverRefCell.getRowIndex()) //the first cover line
-				{
+				if (refCell.getRowIndex() == coverRefCell.getRowIndex()) {
+					// the first cover line
 					coverRefCell.setColumnSpannedNumber(coverRefCell.getColumnSpannedNumber() + 1);
 				}
 				newCell = ownerTable.getCellInstance(newCellEle, 0, 0);
-			} else if (coverRefCellEle != null) //is cover cell
-			{
-				if (refCell.getRowIndex() == coverRefCell.getRowIndex()) { //the first cover line
+			} else if (coverRefCellEle != null) {
+				// This is cover cell
+				if (refCell.getRowIndex() == coverRefCell.getRowIndex()) {
+					// the first cover line
 					TableTableCellElement newCellEle = (TableTableCellElement) coverRefCellEle.cloneNode(true);
 					cleanCell(newCellEle);
 					getOdfElement().insertBefore(newCellEle, positionCell.getOdfElement());
 					newCell = ownerTable.getCellInstance(newCellEle, 0, 0);
-				} else { //the second and other cover line
-					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) refCell.getOdfElement().cloneNode(true);
+				} else { // the second and other cover line
+					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) refCell.getOdfElement()
+							.cloneNode(true);
 					newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
 					getOdfElement().insertBefore(newCellEle, positionCell.getOdfElement());
 					newCell = ownerTable.getCellInstance(newCellEle, 0, 0);
 				}
 			} else if ((refCell.getOdfElement() == positionCell.getOdfElement())
-					&& (refCell.getColumnsRepeatedNumber() > 1)) //repeated number
-			{
+					&& (refCell.getColumnsRepeatedNumber() > 1)) {
+				// repeated number
+
 				int repeatNum = refCell.getColumnsRepeatedNumber();
-				//update the cell that after the ref cell
+				// update the cell that after the ref cell
 				for (int i = repeatNum - 1; i > refCell.mnRepeatedColIndex; i--) {
-					ownerTable.updateCellRepository(refCell.getOdfElement(), i, refCell.mnRepeatedRowIndex,
-							refCell.getOdfElement(), i + 1, refCell.mnRepeatedRowIndex);
+					ownerTable.updateCellRepository(refCell.getOdfElement(), i, refCell.mnRepeatedRowIndex, refCell
+							.getOdfElement(), i + 1, refCell.mnRepeatedRowIndex);
 				}
 				refCell.getOdfElement().setTableNumberColumnsRepeatedAttribute(repeatNum + 1);
-				newCell = ownerTable.getCellInstance(refCell.getOdfElement(), refCell.mnRepeatedColIndex + 1, refCell.mnRepeatedRowIndex);
+				newCell = ownerTable.getCellInstance(refCell.getOdfElement(), refCell.mnRepeatedColIndex + 1,
+						refCell.mnRepeatedRowIndex);
 			} else {
 				TableTableCellElement newCellEle = (TableTableCellElement) refCell.getOdfElement().cloneNode(true);
 				cleanCell(newCellEle);
@@ -714,15 +852,13 @@ public class Row {
 		newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "formula");
 		newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
 		newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-spanned");
-		if(!getTable().isCellStyleInheritance()){
+		if (!getTable().isCellStyleInheritance()) {
 			newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
 		}
 		Node n = newCellEle.getFirstChild();
 		while (n != null) {
 			Node m = n.getNextSibling();
-			if (n instanceof TextPElement
-					|| n instanceof TextHElement
-					|| n instanceof TextListElement) {
+			if (n instanceof TextPElement || n instanceof TextHElement || n instanceof TextListElement) {
 				newCellEle.removeChild(n);
 			}
 			n = m;
@@ -730,8 +866,9 @@ public class Row {
 	}
 
 	private void reviseStyleFromLastColumnToMedium(Cell oldLastCell) {
-		if (getTable().mIsSpreadsheet) return;
-		
+		if (getTable().mIsSpreadsheet) {
+			return;
+		}
 		OdfStyle styleEle = oldLastCell.getStyleHandler().getCellStyleElementForWrite();
 		if (styleEle != null) {
 			if (oldLastCell.getRowIndex() == 0) {
@@ -743,8 +880,9 @@ public class Row {
 	}
 
 	private void reviseStyleFromMediumColumnToLast(Cell newLastCell) {
-		if (getTable().mIsSpreadsheet) return;
-		
+		if (getTable().mIsSpreadsheet) {
+			return;
+		}
 		OdfStyle styleEle = newLastCell.getStyleHandler().getCellStyleElementForWrite();
 		if (styleEle != null) {
 			if (newLastCell.getRowIndex() == 0) {
@@ -756,9 +894,8 @@ public class Row {
 	}
 
 	/**
-	 * This method is invoked by removeColumnByIndex
-	 * So we don't need to care about 
-	 * the covered and spanned cell in a same column 
+	 * This method is invoked by removeColumnByIndex So we don't need to care
+	 * about the covered and spanned cell in a same column
 	 */
 	void removeCellByIndex(int nStart, int nCount) {
 		splitRepeatedRows();
@@ -767,7 +904,6 @@ public class Row {
 		if (startCell.isCoveredElement()) {
 			coverCell = startCell.getCoverCellInSameRow();
 		}
-
 		int index = nStart;
 		for (int i = 0; i < nCount; i++) {
 			Cell cell = getCellByIndex(index);
@@ -788,7 +924,6 @@ public class Row {
 				}
 			}
 		}
-
 		int clmnum = getTable().getColumnCount();
 		if (nStart + nCount >= clmnum) {
 			Cell cell = getCellByIndex(nStart - 1);
@@ -798,20 +933,19 @@ public class Row {
 
 	void removeAllCellsRelationship() {
 		Table table = getTable();
-
 		for (int i = 0; i < table.getColumnCount();) {
 			Cell cell = getCellByIndex(i);
-			if (cell.isCoveredElement()) //cell is a cover cell
-			{
+			if (cell.isCoveredElement()) {
+				// cell is a cover cell
 				Cell coverCell = cell.getCoverCellInSameColumn();
 				if (coverCell != null) {
 					coverCell.setRowSpannedNumber(coverCell.getRowSpannedNumber() - getRowsRepeatedNumber());
 				}
 				getOdfElement().removeChild(cell.getOdfElement());
 			} else {
-				if (cell.getRowSpannedNumber() > 1) //cell is not a cover cell, and it span more rows
-				{
-					//split the cell under this cell to a single cell
+				// cell is not a cover cell and it span more rows
+				if (cell.getRowSpannedNumber() > 1) {
+					// split the cell under this cell to a single cell
 					Row nextRow = table.getRowByIndex(getRowIndex() + 1);
 					if (nextRow.getRowsRepeatedNumber() > 1) {
 						nextRow.splitRepeatedRows();
@@ -821,17 +955,16 @@ public class Row {
 						coveredCell.splitRepeatedCells();
 						coveredCell = table.getCellByPosition(cell.getColumnIndex(), getRowIndex() + 1);
 					}
-
-					//create a new cell
+					// create a new cell
 					TableTableCellElement newCellEle = (TableTableCellElement) cell.getOdfElement().cloneNode(true);
 					newCellEle.setTableNumberRowsSpannedAttribute(cell.getRowSpannedNumber() - getRowsRepeatedNumber());
-					//update repository
+					// update repository
 					int startRow = coveredCell.getRowIndex();
 					int endRow = coveredCell.getRowIndex() + newCellEle.getTableNumberRowsSpannedAttribute();
 					int startClm = coveredCell.getColumnIndex();
-					int endClm = coveredCell.getColumnIndex() + newCellEle.getTableNumberColumnsSpannedAttribute() * newCellEle.getTableNumberColumnsRepeatedAttribute();
+					int endClm = coveredCell.getColumnIndex() + newCellEle.getTableNumberColumnsSpannedAttribute()
+							* newCellEle.getTableNumberColumnsRepeatedAttribute();
 					coveredCell.getOdfElement().getParentNode().replaceChild(newCellEle, coveredCell.getOdfElement());
-
 					table.updateRepositoryWhenCellElementChanged(startRow, endRow, startClm, endClm, newCellEle);
 				}
 			}

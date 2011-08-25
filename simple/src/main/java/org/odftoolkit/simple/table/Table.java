@@ -39,6 +39,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
+import org.odftoolkit.odfdom.dom.element.table.TableNamedExpressionsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableNamedRangeElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
@@ -47,6 +48,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderColumnsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderRowsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableRowGroupElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableRowsElement;
 import org.odftoolkit.odfdom.dom.element.text.TextHElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
@@ -72,7 +74,7 @@ import org.w3c.dom.NodeList;
  * Table represents the table feature in ODF spreadsheet and text documents.
  * <p>
  * Table provides methods to get/add/delete/modify table column/row/cell.
- *
+ * 
  */
 public class Table {
 
@@ -85,7 +87,7 @@ public class Table {
 	private static final double DEFAULT_TABLE_WIDTH = 6;
 	private static final int DEFAULT_REL_TABLE_WIDTH = 65535;
 	private static final String DEFAULT_TABLE_ALIGN = "margins";
-	private static final DecimalFormat IN_FORMAT = new DecimalFormat("##0.0000"); 
+	private static final DecimalFormat IN_FORMAT = new DecimalFormat("##0.0000");
 	// TODO: should save seperately for different dom tree
 	IdentityHashMap<TableTableCellElementBase, Vector<Cell>> mCellRepository = new IdentityHashMap<TableTableCellElementBase, Vector<Cell>>();
 	IdentityHashMap<TableTableRowElement, Vector<Row>> mRowRepository = new IdentityHashMap<TableTableRowElement, Vector<Row>>();
@@ -93,7 +95,7 @@ public class Table {
 	static {
 		IN_FORMAT.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
 	}
-	
+
 	/**
 	 * This is a tool class which supplies all of the table creation detail.
 	 * <p>
@@ -288,8 +290,8 @@ public class Table {
 						}
 						Cell cell = row.getCellByIndex(j);
 						if (i == 0 && columnLabel != null) // first row, should
-															// fill column
-															// labels
+						// fill column
+						// labels
 						{
 							if (j <= columnLabel.length) {
 								cell.setStringValue(columnLabel[j - 1]);
@@ -297,8 +299,8 @@ public class Table {
 								cell.setStringValue("");
 							}
 						} else if (j == 0 && rowLabel != null) // first column,
-																// should fill
-																// row labels
+						// should fill
+						// row labels
 						{
 							if (i <= rowLabel.length) {
 								cell.setStringValue(rowLabel[i - 1]);
@@ -380,8 +382,8 @@ public class Table {
 						}
 						Cell cell = row.getCellByIndex(j);
 						if (i == 0 && columnLabel != null) // first row, should
-															// fill column
-															// labels
+						// fill column
+						// labels
 						{
 							if (j <= columnLabel.length) {
 								cell.setStringValue(columnLabel[j - 1]);
@@ -389,8 +391,8 @@ public class Table {
 								cell.setStringValue("");
 							}
 						} else if (j == 0 && rowLabel != null) // first column,
-																// should fill
-																// row labels
+						// should fill
+						// row labels
 						{
 							if (i <= rowLabel.length) {
 								cell.setStringValue(rowLabel[i - 1]);
@@ -414,7 +416,7 @@ public class Table {
 			return null;
 		}
 	}
-	
+
 	private Table(Document doc, TableTableElement table) {
 		mTableElement = table;
 		mDocument = doc;
@@ -424,87 +426,111 @@ public class Table {
 			mIsSpreadsheet = false;
 		}
 	}
-	
+
 	/**
-	 * Get a table feature instance by an instance of <code>TableTableElement</code>.
+	 * Get a table feature instance by an instance of
+	 * <code>TableTableElement</code>.
 	 * 
-	 * @param odfElement	an instance of <code>TableTableElement</code>
-	 * @return an instance of <code>Table</code> that can represent <code>odfElement</code>
+	 * @param odfElement
+	 *            an instance of <code>TableTableElement</code>
+	 * @return an instance of <code>Table</code> that can represent
+	 *         <code>odfElement</code>
 	 */
 	public static Table getInstance(TableTableElement odfElement) {
-		Document ownerDocument= (Document) ((OdfFileDom)(odfElement.getOwnerDocument())).getDocument();
+		Document ownerDocument = (Document) ((OdfFileDom) (odfElement.getOwnerDocument())).getDocument();
 		return ownerDocument.getTableBuilder().getTableInstance(odfElement);
 	}
-	
+
 	/**
-	 * Construct the <code>Table</code> feature.
-	 * The default column count is 5.
+	 * Construct the <code>Table</code> feature. The default column count is 5.
 	 * The default row count is 2.
 	 * <p>
-	 * The table will be inserted at the end of the document.
-	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * The table will be inserted at the end of the document. An unique table
+	 * name will be given, you may set a custom table name using the
+	 * <code>setTableName</code> method.
 	 * <p>
-	 * If the document is a text document, cell borders will be created by default.
+	 * If the document is a text document, cell borders will be created by
+	 * default.
 	 * 
-	 * @param document	the ODF document that contains this feature 
+	 * @param document
+	 *            the ODF document that contains this feature
 	 * @return the created <code>Table</code> feature instance
 	 */
 	public static Table newTable(Document document) {
 		return document.getTableBuilder().newTable();
 	}
-	
+
 	/**
-	 * Construct the <code>Table</code> feature
-	 * with a specified row number and column number.
+	 * Construct the <code>Table</code> feature with a specified row number and
+	 * column number.
 	 * <p>
-	 * The table will be inserted at the end of the document.
-	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * The table will be inserted at the end of the document. An unique table
+	 * name will be given, you may set a custom table name using the
+	 * <code>setTableName</code> method.
 	 * <p>
-	 * If the document is a text document, cell borders will be created by default.
+	 * If the document is a text document, cell borders will be created by
+	 * default.
 	 * 
-	 * @param document	the ODF document that contains this feature 
-	 * @param numRows	the row number
-	 * @param numCols	the column number
+	 * @param document
+	 *            the ODF document that contains this feature
+	 * @param numRows
+	 *            the row number
+	 * @param numCols
+	 *            the column number
 	 * @return a new instance of <code>Table</code>
 	 */
 	public static Table newTable(Document document, int numRows, int numCols) {
 		return document.getTableBuilder().newTable(numRows, numCols);
 	}
-	
+
 	/**
-	 * Construct the <code>Table</code> feature
-	 * with a specified row number, column number, header row number, header column number.
+	 * Construct the <code>Table</code> feature with a specified row number,
+	 * column number, header row number, header column number.
 	 * <p>
-	 * The table will be inserted at the end of the document.
-	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * The table will be inserted at the end of the document. An unique table
+	 * name will be given, you may set a custom table name using the
+	 * <code>setTableName</code> method.
 	 * <p>
-	 * If the document is a text document, cell borders will be created by default.
+	 * If the document is a text document, cell borders will be created by
+	 * default.
 	 * 
-	 * @param document	the ODF document that contains this feature 
-	 * @param numRows	the row number
-	 * @param numCols	the column number
-	 * @param headerRowNumber	the header row number
-	 * @param headerColumnNumber	the header column number
+	 * @param document
+	 *            the ODF document that contains this feature
+	 * @param numRows
+	 *            the row number
+	 * @param numCols
+	 *            the column number
+	 * @param headerRowNumber
+	 *            the header row number
+	 * @param headerColumnNumber
+	 *            the header column number
 	 * @return a new instance of <code>Table</code>
 	 * */
-	public static Table newTable(Document document, int numRows, int numCols, int headerRowNumber, int headerColumnNumber) {
+	public static Table newTable(Document document, int numRows, int numCols, int headerRowNumber,
+			int headerColumnNumber) {
 		return document.getTableBuilder().newTable(numRows, numCols, headerRowNumber, headerColumnNumber);
 	}
-	
+
 	/**
-	 * Construct the Table feature
-	 * with a specified 2 dimension array as the data of this table.
-	 * The value type of each cell is float.
+	 * Construct the Table feature with a specified 2 dimension array as the
+	 * data of this table. The value type of each cell is float.
 	 * <p>
-	 * The table will be inserted at the end of the document.
-	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * The table will be inserted at the end of the document. An unique table
+	 * name will be given, you may set a custom table name using the
+	 * <code>setTableName</code> method.
 	 * <p>
-	 * If the document is a text document, cell borders will be created by default.
+	 * If the document is a text document, cell borders will be created by
+	 * default.
 	 * 
-	 * @param document	the ODF document that contains this feature
-	 * @param rowLabel	set as the header row, it can be null if no header row needed
-	 * @param columnLabel	set as the header column, it can be null if no header column needed
-	 * @param data	the two dimension array of double as the data of this table
+	 * @param document
+	 *            the ODF document that contains this feature
+	 * @param rowLabel
+	 *            set as the header row, it can be null if no header row needed
+	 * @param columnLabel
+	 *            set as the header column, it can be null if no header column
+	 *            needed
+	 * @param data
+	 *            the two dimension array of double as the data of this table
 	 * @return a new instance of <code>Table</code>
 	 */
 	public static Table newTable(Document document, String[] rowLabel, String[] columnLabel, double[][] data) {
@@ -512,32 +538,37 @@ public class Table {
 	}
 
 	/**
-	 * Construct the Table feature
-	 * with a specified 2 dimension array as the data of this table.
-	 * The value type of each cell is string.
+	 * Construct the Table feature with a specified 2 dimension array as the
+	 * data of this table. The value type of each cell is string.
 	 * <p>
-	 * The table will be inserted at the end of the document.
-	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * The table will be inserted at the end of the document. An unique table
+	 * name will be given, you may set a custom table name using the
+	 * <code>setTableName</code> method.
 	 * <p>
-	 * If the document is a text document, cell borders will be created by default.
+	 * If the document is a text document, cell borders will be created by
+	 * default.
 	 * 
-	 * @param document	the ODF document that contains this feature
-	 * @param rowLabel	set as the header row, it can be null if no header row needed
-	 * @param columnLabel	set as the header column, it can be null if no header column needed
-	 * @param data	the two dimension array of string as the data of this table
+	 * @param document
+	 *            the ODF document that contains this feature
+	 * @param rowLabel
+	 *            set as the header row, it can be null if no header row needed
+	 * @param columnLabel
+	 *            set as the header column, it can be null if no header column
+	 *            needed
+	 * @param data
+	 *            the two dimension array of string as the data of this table
 	 * @return a new instance of <code>Table</code>
 	 */
 	public static Table newTable(Document document, String[] rowLabel, String[] columnLabel, String[][] data) {
 		return document.getTableBuilder().newTable(rowLabel, columnLabel, data);
-	}		
-	
+	}
+
 	Cell getCellInstance(TableTableCellElementBase cell, int repeatedColIndex, int repeatedRowIndex) {
 		if (mCellRepository.containsKey(cell)) {
 			Vector<Cell> list = mCellRepository.get(cell);
 			Cell fCell = null;
 			for (int i = 0; i < list.size(); i++) {
-				if (list.get(i).getOdfElement() == cell
-						&& list.get(i).mnRepeatedColIndex == repeatedColIndex
+				if (list.get(i).getOdfElement() == cell && list.get(i).mnRepeatedColIndex == repeatedColIndex
 						&& list.get(i).mnRepeatedRowIndex == repeatedRowIndex) {
 					fCell = list.get(i);
 					break;
@@ -570,13 +601,13 @@ public class Table {
 			}
 			return fCell;
 		} else {
-			Row newCell = new Row(row, repeatedRowIndex);
+			Row newRow = new Row(row, repeatedRowIndex);
 			int size = (repeatedRowIndex > 7) ? (repeatedRowIndex + 1) : 8;
 			Vector<Row> list = new Vector<Row>(size);
 			list.setSize(repeatedRowIndex + 1);
-			list.set(repeatedRowIndex, newCell);
+			list.set(repeatedRowIndex, newRow);
 			mRowRepository.put(row, list);
-			return newCell;
+			return newRow;
 		}
 	}
 
@@ -593,13 +624,13 @@ public class Table {
 			}
 			return fClm;
 		} else {
-			Column newCell = new Column(col, repeatedColIndex);
+			Column newColumn = new Column(col, repeatedColIndex);
 			int size = (repeatedColIndex > 7) ? (repeatedColIndex + 1) : 8;
 			Vector<Column> list = new Vector<Column>(size);
 			list.setSize(repeatedColIndex + 1);
-			list.set(repeatedColIndex, newCell);
+			list.set(repeatedColIndex, newColumn);
 			mColumnRepository.put(col, list);
-			return newCell;
+			return newColumn;
 		}
 	}
 
@@ -668,26 +699,27 @@ public class Table {
 	/**
 	 * Get the width of the table (in Millimeter).
 	 * <p>
-	 * Throw an UnsupportedOperationException if the 
-	 * table is one sheet of a spreadsheet document.
-	 * because the sheet doesn't have an attribute of table width.
+	 * Throw an UnsupportedOperationException if the table is one sheet of a
+	 * spreadsheet document. because the sheet doesn't have an attribute of
+	 * table width.
 	 * 
 	 * @return the width of the current table (in Millimeter).
-	 * <p>
-	 * An UnsupportedOperationException will be thrown if the table is in the spreadsheet document.
+	 *         <p>
+	 *         An UnsupportedOperationException will be thrown if the table is
+	 *         in the spreadsheet document.
 	 */
-	public long getWidth() {	
+	public long getWidth() {
 		if (!mIsSpreadsheet) {
 			String sWidth = mTableElement.getProperty(OdfTableProperties.Width);
-			if(sWidth == null){
+			if (sWidth == null) {
 				int colCount = getColumnCount();
 				int tableWidth = 0;
-				for(int i = 0; i<colCount;i++){
+				for (int i = 0; i < colCount; i++) {
 					Column col = getColumnByIndex(i);
 					tableWidth += col.getWidth();
 				}
 				return tableWidth;
-			}else
+			} else
 				return PositiveLength.parseLong(sWidth, Unit.MILLIMETER);
 		} else {
 			throw new UnsupportedOperationException();
@@ -697,21 +729,24 @@ public class Table {
 	/**
 	 * Set the width of the table (in Millimeter).
 	 * <p>
-	 * Throw an UnsupportedOperationException if the 
-	 * table is part of a spreadsheet document that does not allow to change the table size,
+	 * Throw an UnsupportedOperationException if the table is part of a
+	 * spreadsheet document that does not allow to change the table size,
 	 * because spreadsheet is not allow user to set the table size.
 	 * 
-	 * @param width	the width that need to set (in Millimeter).
-	 * <p>
-	 * An UnsupportedOperationException will be thrown if the table is in the spreadsheet document.
+	 * @param width
+	 *            the width that need to set (in Millimeter).
+	 *            <p>
+	 *            An UnsupportedOperationException will be thrown if the table
+	 *            is in the spreadsheet document.
 	 */
 	public void setWidth(long width) {
 		if (!mIsSpreadsheet) {
 			String sWidthMM = String.valueOf(width) + Unit.MILLIMETER.abbr();
 			String sWidthIN = PositiveLength.mapToUnit(sWidthMM, Unit.INCH);
 			mTableElement.setProperty(OdfTableProperties.Width, sWidthIN);
-			//if the width is changed, we should also change the table:align properties if it is "margins"
-			//otherwise the width seems not changed
+			// if the width is changed, we should also change the table:align
+			// properties if it is "margins"
+			// otherwise the width seems not changed
 			String alineStyle = mTableElement.getProperty(StyleTablePropertiesElement.Align);
 			if (TableAlignAttribute.Value.MARGINS.toString().equals(alineStyle)) {
 				mTableElement.setProperty(StyleTablePropertiesElement.Align, TableAlignAttribute.Value.LEFT.toString());
@@ -750,25 +785,26 @@ public class Table {
 		style.setProperty(StyleTableCellPropertiesElement.BorderBottom, "0.0007in solid #000000");
 	}
 
-	private static TableTableElement createTable(Document document, int numRows, int numCols, int headerRowNumber, int headerColumnNumber) throws Exception {
-		
+	private static TableTableElement createTable(Document document, int numRows, int numCols, int headerRowNumber,
+			int headerColumnNumber) throws Exception {
+
 		boolean isSpreadsheet = document instanceof SpreadsheetDocument;
-		
+
 		// check arguments
-		if (numRows < 1 || numCols < 1 || headerRowNumber < 0
-				|| headerColumnNumber < 0 || headerRowNumber > numRows
+		if (numRows < 1 || numCols < 1 || headerRowNumber < 0 || headerColumnNumber < 0 || headerRowNumber > numRows
 				|| headerColumnNumber > numCols) {
-			throw new IllegalArgumentException("Can not create table with the given parameters:\n"
-					+ "Rows " + numRows + ", Columns " + numCols + ", HeaderRows " + headerRowNumber + ", HeaderColumns " + headerColumnNumber);
+			throw new IllegalArgumentException("Can not create table with the given parameters:\n" + "Rows " + numRows
+					+ ", Columns " + numCols + ", HeaderRows " + headerRowNumber + ", HeaderColumns "
+					+ headerColumnNumber);
 		}
 		OdfFileDom dom = document.getContentDom();
 		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
-		//1. create table element
-		TableTableElement newTEle = (TableTableElement) OdfXMLFactory.newOdfElement(dom,
-				OdfName.newName(OdfDocumentNamespace.TABLE, "table"));
+		// 1. create table element
+		TableTableElement newTEle = (TableTableElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
+				OdfDocumentNamespace.TABLE, "table"));
 		String tablename = getUniqueTableName(document);
 		newTEle.setTableNameAttribute(tablename);
-		//create style
+		// create style
 		OdfStyle tableStyle = styles.newStyle(OdfStyleFamily.Table);
 		String stylename = tableStyle.getStyleNameAttribute();
 		tableStyle.setProperty(StyleTablePropertiesElement.Width, DEFAULT_TABLE_WIDTH + "in");
@@ -779,57 +815,61 @@ public class Table {
 		// 2.0 create column style
 		OdfStyle columnStyle = styles.newStyle(OdfStyleFamily.TableColumn);
 		String columnStylename = columnStyle.getStyleNameAttribute();
-		//for spreadsheet document, no need compute column width.
+		// for spreadsheet document, no need compute column width.
 		if (!isSpreadsheet) {
-			columnStyle.setProperty(StyleTableColumnPropertiesElement.ColumnWidth, 
-					IN_FORMAT.format(DEFAULT_TABLE_WIDTH / numCols) + "in");
+			columnStyle.setProperty(StyleTableColumnPropertiesElement.ColumnWidth, IN_FORMAT.format(DEFAULT_TABLE_WIDTH
+					/ numCols)
+					+ "in");
 			columnStyle.setProperty(StyleTableColumnPropertiesElement.RelColumnWidth, Math
-					.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
+					.round(DEFAULT_REL_TABLE_WIDTH / numCols)
+					+ "*");
 		}
 		// 2.1 create header column elements
 		if (headerColumnNumber > 0) {
-			TableTableHeaderColumnsElement headercolumns = (TableTableHeaderColumnsElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(OdfDocumentNamespace.TABLE, "table-header-columns"));
-			TableTableColumnElement headercolumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(OdfDocumentNamespace.TABLE, "table-column"));
+			TableTableHeaderColumnsElement headercolumns = (TableTableHeaderColumnsElement) OdfXMLFactory
+					.newOdfElement(dom, OdfName.newName(OdfDocumentNamespace.TABLE, "table-header-columns"));
+			TableTableColumnElement headercolumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement(dom, OdfName
+					.newName(OdfDocumentNamespace.TABLE, "table-column"));
 			headercolumn.setTableNumberColumnsRepeatedAttribute(headerColumnNumber);
 			headercolumns.appendChild(headercolumn);
 			newTEle.appendChild(headercolumns);
 			headercolumn.setStyleName(columnStylename);
 		}
-		//2.2 create common column elements
-		TableTableColumnElement columns = (TableTableColumnElement) OdfXMLFactory.newOdfElement(dom,
-				OdfName.newName(OdfDocumentNamespace.TABLE, "table-column"));
+		// 2.2 create common column elements
+		TableTableColumnElement columns = (TableTableColumnElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
+				OdfDocumentNamespace.TABLE, "table-column"));
 		columns.setTableNumberColumnsRepeatedAttribute(numCols - headerColumnNumber);
 		columns.setStyleName(columnStylename);
 		newTEle.appendChild(columns);
 
-		//3. create row elements
-		//3.0 create 4 kinds of styles
-		OdfStyle lefttopStyle=null,leftbottomStyle=null,righttopStyle=null,rightbottomStyle=null;
-		
+		// 3. create row elements
+		// 3.0 create 4 kinds of styles
+		OdfStyle lefttopStyle = null, leftbottomStyle = null, righttopStyle = null, rightbottomStyle = null;
+
 		if (!document.getMediaTypeString().equals(OdfMediaType.SPREADSHEET.getMediaTypeString())) {
 			lefttopStyle = styles.newStyle(OdfStyleFamily.TableCell);
 			setLeftTopBorderStyleProperties(lefttopStyle);
-	
+
 			leftbottomStyle = styles.newStyle(OdfStyleFamily.TableCell);
 			setLeftBottomBorderStylesProperties(leftbottomStyle);
-	
+
 			righttopStyle = styles.newStyle(OdfStyleFamily.TableCell);
 			setRightTopBorderStyleProperties(righttopStyle);
-	
+
 			rightbottomStyle = styles.newStyle(OdfStyleFamily.TableCell);
 			setRightBottomBorderStylesProperties(rightbottomStyle);
 		}
 
-		//3.1 create header row elements
-		if( headerRowNumber > 0){
+		// 3.1 create header row elements
+		if (headerRowNumber > 0) {
 			TableTableHeaderRowsElement headerrows = (TableTableHeaderRowsElement) OdfXMLFactory.newOdfElement(dom,
 					OdfName.newName(OdfDocumentNamespace.TABLE, "table-header-rows"));
 			for (int i = 0; i < headerRowNumber; i++) {
-				TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom,
-						OdfName.newName(OdfDocumentNamespace.TABLE, "table-row"));
+				TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
+						OdfDocumentNamespace.TABLE, "table-row"));
 				for (int j = 0; j < numCols; j++) {
-					TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
-							OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell"));
+					TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom, OdfName
+							.newName(OdfDocumentNamespace.TABLE, "table-cell"));
 					if (!isSpreadsheet) {
 						if ((j + 1 == numCols) && (i == 0)) {
 							aCell.setStyleName(righttopStyle.getStyleNameAttribute());
@@ -848,13 +888,13 @@ public class Table {
 			newTEle.appendChild(headerrows);
 		}
 
-		//3.2 create common row elements
+		// 3.2 create common row elements
 		for (int i = headerRowNumber; i < numRows; i++) {
-			TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom,
-					OdfName.newName(OdfDocumentNamespace.TABLE, "table-row"));
+			TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
+					OdfDocumentNamespace.TABLE, "table-row"));
 			for (int j = 0; j < numCols; j++) {
-				TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
-						OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell"));
+				TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
+						OdfDocumentNamespace.TABLE, "table-cell"));
 				if (!isSpreadsheet) {
 					if ((j + 1 == numCols) && (i == 0)) {
 						aCell.setStyleName(righttopStyle.getStyleNameAttribute());
@@ -873,8 +913,6 @@ public class Table {
 
 		return newTEle;
 	}
-
-	
 
 	private static String getUniqueTableName(Document document) {
 		List<Table> tableList = document.getTableList();
@@ -899,7 +937,6 @@ public class Table {
 
 	}
 
-	
 	/**
 	 * Get the row count of this table.
 	 * 
@@ -933,55 +970,68 @@ public class Table {
 	 */
 	public int getColumnCount() {
 		int result = 0;
-
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
+			// TODO: how about <table:table-column-group>, <table:table-columns>
 			if (n instanceof TableTableHeaderColumnsElement) {
 				result += getHeaderColumnCount((TableTableHeaderColumnsElement) n);
 			}
 			if (n instanceof TableTableColumnElement) {
-				result += getColumnInstance((TableTableColumnElement) n, 0).getColumnsRepeatedNumber();
+				result += ((TableTableColumnElement) n).getTableNumberColumnsRepeatedAttribute();
+			}
+			// as different type of elements appear in order, so if n is one of
+			// the the following elements, computing will stop. It's helpful
+			// when the table has lots of rows.
+			if (n instanceof TableTableHeaderRowsElement || n instanceof TableTableRowsElement
+					|| n instanceof TableTableRowGroupElement || n instanceof TableTableRowElement) {
+				break;
 			}
 		}
 		return result;
 	}
 
 	/**
-	 * This method is invoked by appendRow.
-	 * When a table has no row, the first row is a default row.
+	 * This method is invoked by appendRow. When a table has no row, the first
+	 * row is a default row.
 	 */
-	private TableTableRowElement createDefaultRow(int columnCount) {
+	private TableTableRowElement createDefaultRow(int columnCount, boolean createRepeatedCell) {
 		OdfFileDom dom = (OdfFileDom) mTableElement.getOwnerDocument();
-		//3. create row elements
-		//3.0 create 4 kinds of styles
-		OdfStyle lefttopStyle=null,righttopStyle=null;
-		
-		if (!mIsSpreadsheet) {
-			lefttopStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-			setLeftTopBorderStyleProperties(lefttopStyle);
-	
-			righttopStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-			setRightTopBorderStyleProperties(righttopStyle);
-		}
-
-		//3.1 create header row elements
-		TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom,
-				OdfName.newName(OdfDocumentNamespace.TABLE, "table-row"));
-		for (int j = 0; j < columnCount; j++) {
-			TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
-					OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell"));
-			TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
-					OdfName.newName(OdfDocumentNamespace.TEXT, "p"));
-			aCell.appendChild(aParagraph);
-			if (!mIsSpreadsheet) {
-				if (j + 1 == columnCount) {
-					aCell.setStyleName(righttopStyle.getStyleNameAttribute());
-				} else {
-					aCell.setStyleName(lefttopStyle.getStyleNameAttribute());
-				}
+		TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
+				OdfDocumentNamespace.TABLE, "table-row"));
+		if (createRepeatedCell) {
+			TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
+					OdfDocumentNamespace.TABLE, "table-cell"));
+			if (columnCount > 1) {
+				aCell.setTableNumberColumnsRepeatedAttribute(columnCount);
 			}
-			aRow.appendChild(aCell);
+			if (!mIsSpreadsheet) {
+				OdfOfficeAutomaticStyles automaticStyles = mTableElement.getAutomaticStyles();
+				OdfStyle borderStyle = automaticStyles.newStyle(OdfStyleFamily.TableCell);
+				setRightTopBorderStyleProperties(borderStyle);
+				aCell.setStyleName(borderStyle.getStyleNameAttribute());
+			}
+		} else {
+			OdfStyle lefttopStyle = null, righttopStyle = null;
+			// create 2 kinds of styles
+			if (!mIsSpreadsheet) {
+				OdfOfficeAutomaticStyles automaticStyles = mTableElement.getAutomaticStyles();
+				lefttopStyle = automaticStyles.newStyle(OdfStyleFamily.TableCell);
+				setLeftTopBorderStyleProperties(lefttopStyle);
+				righttopStyle = automaticStyles.newStyle(OdfStyleFamily.TableCell);
+				setRightTopBorderStyleProperties(righttopStyle);
+			}
+			for (int j = 0; j < columnCount; j++) {
+				TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
+						OdfDocumentNamespace.TABLE, "table-cell"));
+				if (!mIsSpreadsheet) {
+					if (j + 1 == columnCount) {
+						aCell.setStyleName(righttopStyle.getStyleNameAttribute());
+					} else {
+						aCell.setStyleName(lefttopStyle.getStyleNameAttribute());
+					}
+				}
+				aRow.appendChild(aCell);
+			}
 		}
-
 		return aRow;
 	}
 
@@ -989,10 +1039,10 @@ public class Table {
 	 * Append a row to the end of the table. The style of new row is same with
 	 * the last row in the table.
 	 * <p>
-	 * Since SIMPLE supports automatic table expansion. Whenever a cell
-	 * outside the current table is addressed the table is instantly expanded.
-	 * Method <code>getCellByPosition</code> can randomly access any cell, no
-	 * matter it in or out of the table original range.
+	 * Since SIMPLE supports automatic table expansion. Whenever a cell outside
+	 * the current table is addressed the table is instantly expanded. Method
+	 * <code>getCellByPosition</code> can randomly access any cell, no matter it
+	 * in or out of the table original range.
 	 * 
 	 * @return a new appended row
 	 * @see #appendRows(int)
@@ -1001,32 +1051,144 @@ public class Table {
 	 * @see #getCellByPosition(String)
 	 */
 	public Row appendRow() {
-		int columnCount = getColumnCount();
-		List<Row> rowList = getRowList();
-
-		if (rowList.size() == 0) //no row, create a default row
-		{
-			TableTableRowElement newRow = createDefaultRow(columnCount);
-			mTableElement.appendChild(newRow);
-
-			return getRowInstance(newRow, 0);
-		} else {
-			Row refRow = rowList.get(rowList.size() - 1);
-			Row newRow = insertRowBefore(refRow, null);
-			return newRow;
+		// find append position
+		Node childNode = mTableElement.getLastChild();
+		// where is the new row inserted before.
+		Node positionNode = null;
+		// row style and structure clone from.
+		TableTableRowElement refRowElement = null;
+		TableTableRowElement newRow = null;
+		if (childNode instanceof TableNamedExpressionsElement) {
+			childNode = childNode.getPreviousSibling();
+			positionNode = childNode;
 		}
+		if (childNode instanceof TableTableRowElement) {
+			refRowElement = (TableTableRowElement) childNode;
+		}
+		// TODO: what about childNode instanceof TableTableHeaderRowsElement,
+		// TableTableRowsElement or TableTableRowGroupElement
+		int columnCount = getColumnCount();
+		// no row, create a default row
+		if (refRowElement == null) {
+			newRow = createDefaultRow(columnCount, true);
+			mTableElement.appendChild(newRow);
+		} else {
+			newRow = (TableTableRowElement) OdfXMLFactory.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(),
+					OdfName.newName(OdfDocumentNamespace.TABLE, "table-row"));
+			TableTableCellElementBase cellElement = (TableTableCellElementBase) refRowElement.getFirstChild();
+			int i = 1;
+			while (cellElement != null && i <= columnCount) {
+				// covered element
+				if (cellElement instanceof TableCoveredTableCellElement) {
+					TableCoveredTableCellElement coveredCellEle = (TableCoveredTableCellElement) cellElement;
+					// find cover cell element
+					TableTableRowElement aRowEle = (TableTableRowElement) (coveredCellEle.getParentNode()
+							.getPreviousSibling());
+					while (aRowEle != null) {
+						// the cover cell and the first covered cell must have
+						// the same column index.
+						TableTableCellElementBase coverCellEle = (TableTableCellElementBase) (aRowEle.getFirstChild());
+						int j = coverCellEle.getTableNumberColumnsRepeatedAttribute();
+						while (j < i) {
+							coverCellEle = (TableTableCellElementBase) (coverCellEle.getNextSibling());
+							if (coverCellEle instanceof TableTableCellElement) {
+								j += (coverCellEle.getTableNumberColumnsRepeatedAttribute() * (((TableTableCellElement) coverCellEle)
+										.getTableNumberColumnsSpannedAttribute()));
+							} else {
+								j += coverCellEle.getTableNumberColumnsRepeatedAttribute();
+							}
+						}
+						// find the cover cell, now start cell clone.
+						if (coverCellEle instanceof TableTableCellElement) {
+							TableTableCellElement newCellEle = (TableTableCellElement) (coverCellEle.cloneNode(true));
+							cleanCell(newCellEle);
+							newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-spanned");
+							newRow.appendChild(newCellEle);
+							// deal with the following covered cell, spread
+							// sheet need change these covered cell to cell.
+							if (mIsSpreadsheet) {
+								// update column repeated number.
+								int columnsSpannedNumber = newCellEle.getTableNumberColumnsSpannedAttribute();
+								newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(),
+										"number-columns-spanned");
+								int newColumnRepeatedNumber = newCellEle.getTableNumberColumnsRepeatedAttribute()
+										* columnsSpannedNumber;
+								if (newColumnRepeatedNumber > 1) {
+									newCellEle.setTableNumberColumnsRepeatedAttribute(newColumnRepeatedNumber);
+								}
+								// ignore the following covered cell of
+								// reference row.
+								cellElement = (TableTableCellElementBase) (cellElement.getNextSibling());
+								while ((cellElement != null) && (cellElement instanceof TableCoveredTableCellElement)) {
+									cellElement = (TableTableCellElementBase) (cellElement.getNextSibling());
+								}
+								i += newColumnRepeatedNumber;
+							} else {
+								// clone the following covered cell of reference
+								// row.
+								i += cellElement.getTableNumberColumnsRepeatedAttribute();
+								cellElement = (TableTableCellElementBase) cellElement.getNextSibling();
+								while ((cellElement != null) && (cellElement instanceof TableCoveredTableCellElement)) {
+									TableCoveredTableCellElement newCoveredCellElement = (TableCoveredTableCellElement) cellElement
+											.cloneNode(true);
+									cleanCell(newCoveredCellElement);
+									newRow.appendChild(newCoveredCellElement);
+									i += cellElement.getTableNumberColumnsRepeatedAttribute();
+									cellElement = (TableTableCellElementBase) cellElement.getNextSibling();
+								}
+							}
+							break;
+						}
+						// continue find cover cell
+						Node preNode = aRowEle.getPreviousSibling();
+						if (preNode instanceof TableTableRowElement) {
+							aRowEle = (TableTableRowElement) preNode;
+						} else {
+							// </table:table-header-rows>
+							aRowEle = (TableTableRowElement) (preNode.getLastChild());
+						}
+					}
+				} else {
+					TableTableCellElement newCellEle = (TableTableCellElement) cellElement.cloneNode(true);
+					cleanCell(newCellEle);
+					newRow.appendChild(newCellEle);
+					Integer tableNumberColumnsRepeated = newCellEle.getTableNumberColumnsRepeatedAttribute();
+					Integer tableNumberColumnsSpanned = newCellEle.getTableNumberColumnsSpannedAttribute();
+					i += tableNumberColumnsRepeated * tableNumberColumnsSpanned;
+					cellElement = (TableTableCellElementBase) cellElement.getNextSibling();
+					if (tableNumberColumnsSpanned > 1) {
+						int j = 1;
+						while ((j <= tableNumberColumnsSpanned) && (cellElement != null)) {
+							TableTableCellElementBase newCoveredCellEle = (TableTableCellElementBase) cellElement
+									.cloneNode(true);
+							cleanCell(newCoveredCellEle);
+							newRow.appendChild(newCoveredCellEle);
+							j += newCoveredCellEle.getTableNumberColumnsRepeatedAttribute();
+							cellElement = (TableTableCellElementBase) cellElement.getNextSibling();
+						}
+					}
+				}
+			}
+			if (positionNode == null) {
+				mTableElement.appendChild(newRow);
+			} else {
+				mTableElement.insertBefore(newRow, positionNode);
+			}
+		}
+		return getRowInstance(newRow, 0);
 	}
 
 	/**
 	 * Append a specific number of rows to the end of the table. The style of
-	 * new rows are same with the last row in the table. 
+	 * new rows are same with the last row in the table.
 	 * <p>
-	 * Since SIMPLE supports automatic table expansion. Whenever a cell
-	 * outside the current table is addressed the table is instantly expanded.
-	 * Method <code>getCellByPosition</code> can randomly access any cell, no
-	 * matter it in or out of the table original range.
+	 * Since SIMPLE supports automatic table expansion. Whenever a cell outside
+	 * the current table is addressed the table is instantly expanded. Method
+	 * <code>getCellByPosition</code> can randomly access any cell, no matter it
+	 * in or out of the table original range.
 	 * 
-	 * @param rowCount  is the number of rows to be appended.
+	 * @param rowCount
+	 *            is the number of rows to be appended.
 	 * @return a list of new appended rows
 	 * @see #appendRow()
 	 * @see #getRowByIndex(int)
@@ -1042,19 +1204,18 @@ public class Table {
 		if (rowCount <= 0) {
 			return resultList;
 		}
-		Row firstRow = appendRow();
-		resultList.add(firstRow);
-		if (rowCount > 1) {
-			List<Row> list = insertRowsBefore((getRowCount() - 1), (rowCount - 1));
-			resultList.addAll(list);
+		for (int i = 0; i < rowCount; i++) {
+			Row firstRow = appendRow();
+			resultList.add(firstRow);
 		}
 		if (isCleanStyle) {
 			// clean style name
 			for (Row row : resultList) {
-				int length = row.getCellCount();
-				for (int i = 0; i < length; i++) {
-					TableTableCellElementBase cellElement = row.getCellByIndex(i).mCellElement;
-					cellElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
+				Node cellE = row.getOdfElement().getFirstChild();
+				while (cellE != null) {
+					((TableTableCellElementBase) cellE).removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(),
+							"style-name");
+					cellE = cellE.getNextSibling();
 				}
 			}
 		}
@@ -1062,13 +1223,13 @@ public class Table {
 	}
 
 	/**
-	 * Append a column at the end of the table. The style of new column is
-	 * same with the last column in the table.
+	 * Append a column at the end of the table. The style of new column is same
+	 * with the last column in the table.
 	 * <p>
-	 * Since SIMPLE supports automatic table expansion. Whenever a cell
-	 * outside the current table is addressed the table is instantly expanded.
-	 * Method <code>getCellByPosition</code> can randomly access any cell, no
-	 * matter it in or out of the table original range.
+	 * Since SIMPLE supports automatic table expansion. Whenever a cell outside
+	 * the current table is addressed the table is instantly expanded. Method
+	 * <code>getCellByPosition</code> can randomly access any cell, no matter it
+	 * in or out of the table original range.
 	 * 
 	 * @return a new appended column
 	 * @see #appendColumns(int)
@@ -1085,34 +1246,37 @@ public class Table {
 		if (positonElement.getParentNode() instanceof TableTableHeaderRowsElement) {
 			positonElement = (OdfElement) positonElement.getParentNode();
 		}
-		
-		//Moved before column elements inserted
-		//insert cells firstly
-		//Or else, wrong column number will be gotten in updateCellRepository, which will cause a NPE.
-		//insertCellBefore()->splitRepeatedRows()->updateRowRepository()->updateCellRepository() 
+
+		// Moved before column elements inserted
+		// insert cells firstly
+		// Or else, wrong column number will be gotten in updateCellRepository,
+		// which will cause a NPE.
+		// insertCellBefore()->splitRepeatedRows()->updateRowRepository()->updateCellRepository()
 		List<Row> rowList = getRowList();
 		for (int i = 0; i < rowList.size();) {
 			Row row1 = rowList.get(i);
 			row1.insertCellBefore(row1.getCellByIndex(columnCount - 1), null);
 			i = i + row1.getRowsRepeatedNumber();
-		}		
+		}
 
-		//insert columns secondly
-		if (columnList.size() == 0) //no column, create a new column
+		// insert columns secondly
+		if (columnList.size() == 0) // no column, create a new column
 		{
 			OdfStyle columnStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableColumn);
 			String columnStylename = columnStyle.getStyleNameAttribute();
 			columnStyle.setProperty(StyleTableColumnPropertiesElement.ColumnWidth, DEFAULT_TABLE_WIDTH + "in");
 			columnStyle.setProperty(StyleTableColumnPropertiesElement.RelColumnWidth, DEFAULT_REL_TABLE_WIDTH + "*");
 
-			newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(),
-					OdfName.newName(OdfDocumentNamespace.TABLE, "table-column"));
+			newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement((OdfFileDom) mTableElement
+					.getOwnerDocument(), OdfName.newName(OdfDocumentNamespace.TABLE, "table-column"));
 			newColumn.setStyleName(columnStylename);
 			mTableElement.insertBefore(newColumn, positonElement);
-		} else { //has column, append a same column as the last one.
+		} else { // has column, append a same column as the last one.
 			TableTableColumnElement refColumn = columnList.get(columnList.size() - 1).getOdfElement();
 			newColumn = (TableTableColumnElement) refColumn.cloneNode(true);
-			newColumn.setTableNumberColumnsRepeatedAttribute(1);//chagne to remove attribute
+			newColumn.setTableNumberColumnsRepeatedAttribute(1);// chagne to
+			// remove
+			// attribute
 			mTableElement.insertBefore(newColumn, positonElement);
 		}
 
@@ -1121,14 +1285,15 @@ public class Table {
 
 	/**
 	 * Append a specific number of columns to the right of the table. The style
-	 * of new columns are same with the rightmost column in the table. 
+	 * of new columns are same with the rightmost column in the table.
 	 * <p>
-	 * Since SIMPLE supports automatic table expansion. Whenever a cell
-	 * outside the current table is addressed the table is instantly expanded.
-	 * Method <code>getCellByPosition</code> can randomly access any cell, no
-	 * matter it in or out of the table original range.
+	 * Since SIMPLE supports automatic table expansion. Whenever a cell outside
+	 * the current table is addressed the table is instantly expanded. Method
+	 * <code>getCellByPosition</code> can randomly access any cell, no matter it
+	 * in or out of the table original range.
 	 * 
-	 * @param columnCount is the number of columns to be appended.
+	 * @param columnCount
+	 *            is the number of columns to be appended.
 	 * @return a list of new appended columns
 	 * @see #appendColumn()
 	 * @see #getColumnByIndex(int)
@@ -1151,7 +1316,7 @@ public class Table {
 			resultList.addAll(list);
 		}
 		// clean style name
-		if(isCleanStyle){
+		if (isCleanStyle) {
 			for (Column column : resultList) {
 				int length = column.getCellCount();
 				for (int i = 0; i < length; i++) {
@@ -1159,12 +1324,12 @@ public class Table {
 					cellElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
 				}
 			}
-		}		
+		}
 		return resultList;
 	}
 
 	/**
-	 * This method is to insert a numbers of row  
+	 * This method is to insert a numbers of row
 	 */
 	private List<Row> insertMultipleRowBefore(Row refRow, Row positionRow, int count) {
 		List<Row> resultList = new ArrayList<Row>();
@@ -1174,7 +1339,7 @@ public class Table {
 			return resultList;
 		}
 
-		Row firstRow = insertRowBefore(refRow, positionRow);
+		Row firstRow = insertRowBefore(refRow, positionRow, getColumnCount());
 		resultList.add(firstRow);
 
 		if (count == 1) {
@@ -1200,15 +1365,14 @@ public class Table {
 		return resultList;
 	}
 
-	private Row insertRowBefore(Row refRow, Row positionRow) //only insert one Row
-	{
-		int columnCount = getColumnCount();
-		TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(),
-				OdfName.newName(OdfDocumentNamespace.TABLE, "table-row"));
+	// only insert one Row
+	private Row insertRowBefore(Row refRow, Row positionRow, int columnCount) {
+		TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement((OdfFileDom) mTableElement
+				.getOwnerDocument(), OdfName.newName(OdfDocumentNamespace.TABLE, "table-row"));
 		int coveredLength = 0, coveredHeigth = 0;
 		for (int i = 0; i < columnCount;) {
 			Cell refCell = refRow.getCellByIndex(i);
-			if (!refCell.isCoveredElement()) //not cover element
+			if (!refCell.isCoveredElement()) // not cover element
 			{
 				TableTableCellElement aCellEle = (TableTableCellElement) refCell.getOdfElement();
 				coveredHeigth = aCellEle.getTableNumberRowsSpannedAttribute();
@@ -1216,11 +1380,11 @@ public class Table {
 					TableTableCellElement newCellEle = (TableTableCellElement) aCellEle.cloneNode(true);
 					cleanCell(newCellEle);
 					aRow.appendChild(newCellEle);
-				} else { //cover more rows
+				} else { // cover more rows
 					aCellEle.setTableNumberRowsSpannedAttribute(coveredHeigth + 1);
-					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
-							(OdfFileDom) mTableElement.getOwnerDocument(),
-							OdfName.newName(OdfDocumentNamespace.TABLE, "covered-table-cell"));
+					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfXMLFactory
+							.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(), OdfName.newName(
+									OdfDocumentNamespace.TABLE, "covered-table-cell"));
 					newCellEle.setTableNumberColumnsRepeatedAttribute(refCell.getColumnsRepeatedNumber());
 					aRow.appendChild(newCellEle);
 				}
@@ -1240,7 +1404,8 @@ public class Table {
 					newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-spanned");
 					aRow.appendChild(newCellEle);
 
-					coveredLength = coveredCell.getTableNumberColumnsSpannedAttribute() - refCell.getColumnsRepeatedNumber();
+					coveredLength = coveredCell.getTableNumberColumnsSpannedAttribute()
+							- refCell.getColumnsRepeatedNumber();
 				}
 				i = i + refCell.getColumnsRepeatedNumber();
 			}
@@ -1254,23 +1419,23 @@ public class Table {
 		return getRowInstance(aRow, 0);
 	}
 
-	void cleanCell(TableTableCellElement newCellEle) {
-		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value");
-		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "date-value");
-		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "time-value");
-		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "boolean-value");
-		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "string-value");
-		newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "formula");
-		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value-type");
-		if(!isCellStyleInheritance()){
-			newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
+	void cleanCell(TableTableCellElementBase newCellEle) {
+		String officeNameSpaceURI = OdfDocumentNamespace.OFFICE.getUri();
+		String tableNameSpaceURI = OdfDocumentNamespace.TABLE.getUri();
+		newCellEle.removeAttributeNS(officeNameSpaceURI, "value");
+		newCellEle.removeAttributeNS(officeNameSpaceURI, "date-value");
+		newCellEle.removeAttributeNS(officeNameSpaceURI, "time-value");
+		newCellEle.removeAttributeNS(officeNameSpaceURI, "boolean-value");
+		newCellEle.removeAttributeNS(officeNameSpaceURI, "string-value");
+		newCellEle.removeAttributeNS(tableNameSpaceURI, "formula");
+		newCellEle.removeAttributeNS(officeNameSpaceURI, "value-type");
+		if (!isCellStyleInheritance()) {
+			newCellEle.removeAttributeNS(tableNameSpaceURI, "style-name");
 		}
 		Node n = newCellEle.getFirstChild();
 		while (n != null) {
 			Node m = n.getNextSibling();
-			if (n instanceof TextPElement
-					|| n instanceof TextHElement
-					|| n instanceof TextListElement) {
+			if (n instanceof TextPElement || n instanceof TextHElement || n instanceof TextListElement) {
 				newCellEle.removeChild(n);
 			}
 			n = m;
@@ -1278,7 +1443,8 @@ public class Table {
 	}
 
 	/**
-	 * Return an instance of <code>TableTableElement</code> which represents this feature.
+	 * Return an instance of <code>TableTableElement</code> which represents
+	 * this feature.
 	 * 
 	 * @return an instance of <code>TableTableElement</code>
 	 */
@@ -1296,10 +1462,13 @@ public class Table {
 	}
 	
 	/** 
-	 * Insert a specific number of columns before the column whose index is <code>index</code>.
+	 * Insert a specific number of columns before the column whose index is 
+	 * <code>index</code>.
 	 * 
-	 * @param index	is the index of the column to insert before.
-	 * @param columnCount	is the number of columns to insert.
+	 * @param index	
+	 *            is the index of the column to insert before.
+	 * @param columnCount
+	 *            is the number of columns to insert.
 	 * @return a list of new inserted columns
 	 */
 	public List<Column> insertColumnsBefore(int index, int columnCount) {
@@ -1331,7 +1500,7 @@ public class Table {
 			return list;
 		}
 
-		//1. insert the cell
+		// 1. insert the cell
 		int iRowCount = getRowCount();
 		for (int i = iRowCount - 1; i >= 0;) {
 			Row row = getRowByIndex(i);
@@ -1344,11 +1513,11 @@ public class Table {
 
 		refColumn = getColumnByIndex(index - 1);
 		positionCol = getColumnByIndex(index);
-		//2. insert a <table:table-column>
+		// 2. insert a <table:table-column>
 		if (refColumn.getOdfElement() == positionCol.getOdfElement()) {
 			TableTableColumnElement column = refColumn.getOdfElement();
-			int repeatedCount = getColumnInstance(column, 0).getColumnsRepeatedNumber();
-			getColumnInstance(column, 0).setColumnsRepeatedNumber((repeatedCount + columnCount));
+			int repeatedCount = column.getTableNumberColumnsRepeatedAttribute();
+			column.setTableNumberColumnsRepeatedAttribute(repeatedCount + columnCount);
 			TableTableColumnElement columnEle = positionCol.getOdfElement();
 			Column startCol = getColumnInstance(positionCol.getOdfElement(), 0);
 			for (int i = repeatedCount + columnCount - 1; i >= columnCount + (index - startCol.getColumnIndex()); i--) {
@@ -1370,20 +1539,21 @@ public class Table {
 		return list;
 	}
 
-	/** 
-	 * Remove a specific number of columns, starting from the column at <code>index</code>.
+	/**
+	 * Remove a specific number of columns, starting from the column at
+	 * <code>index</code>.
 	 * 
 	 * @param startIndex
-	 * 				is the index of the first column to delete.
+	 *            is the index of the first column to delete.
 	 * @param deleteColCount
-	 * 				is the number of columns to delete.
+	 *            is the number of columns to delete.
 	 */
 	public void removeColumnsByIndex(int startIndex, int deleteColCount) {
-		//0. verify the index
-		if(deleteColCount <= 0) {
+		// 0. verify the index
+		if (deleteColCount <= 0) {
 			return;
 		}
-		if(startIndex < 0) {
+		if (startIndex < 0) {
 			throw new IllegalArgumentException("startIndex of the deleted columns should not be negative");
 		}
 		int colCount = getColumnCount();
@@ -1394,19 +1564,20 @@ public class Table {
 			deleteColCount = colCount - startIndex;
 		}
 
-		//1. remove cell
+		// 1. remove cell
 		for (int i = 0; i < getRowCount(); i++) {
 			Row aRow = getRowByIndex(i);
 			aRow.removeCellByIndex(startIndex, deleteColCount);
 		}
 
-		//2. remove column
+		// 2. remove column
 		Column firstColumn;
 		for (int i = 0; i < deleteColCount; i++) {
 			firstColumn = getColumnByIndex(startIndex);
 			int repeatedAttr = firstColumn.getColumnsRepeatedNumber();
 			if (repeatedAttr == 1) {
-				TableTableColumnElement columnEle = OdfElement.findNextChildNode(TableTableColumnElement.class, firstColumn.getOdfElement());
+				TableTableColumnElement columnEle = OdfElement.findNextChildNode(TableTableColumnElement.class,
+						firstColumn.getOdfElement());
 				mTableElement.removeChild(firstColumn.getOdfElement());
 				if (i < (deleteColCount - 1)) {
 					firstColumn = this.getColumnInstance(columnEle, 0);
@@ -1423,7 +1594,8 @@ public class Table {
 	}
 
 	private void reviseStyleFromTopRowToMediumRow(Row oldTopRow) {
-		if (mIsSpreadsheet) return;
+		if (mIsSpreadsheet)
+			return;
 		int length = getColumnCount();
 
 		for (int i = 0; i < length;) {
@@ -1447,7 +1619,7 @@ public class Table {
 			return;
 		}
 		int length = getColumnCount();
-		
+
 		for (int i = 0; i < length;) {
 			Cell cell = newTopRow.getCellByIndex(i);
 			if (cell.isCoveredElement()) {
@@ -1467,8 +1639,10 @@ public class Table {
 	/**
 	 * Insert a specific number of rows before the row at <code>index</code>.
 	 * 
-	 * @param index	is the index of the row to insert before.
-	 * @param rowCount	is the number of rows to insert.
+	 * @param index
+	 *            is the index of the row to insert before.
+	 * @param rowCount
+	 *            is the number of rows to insert.
 	 * @return a list of new inserted rows
 	 */
 	public List<Row> insertRowsBefore(int index, int rowCount) {
@@ -1479,8 +1653,8 @@ public class Table {
 		if (index == 0) {
 			Row refRow = getRowByIndex(index);
 			Row positionRow = refRow;
-			//add first row
-			Row newFirstRow = insertRowBefore(refRow, positionRow);
+			// add first row
+			Row newFirstRow = insertRowBefore(refRow, positionRow, getColumnCount());
 			reviseStyleFromTopRowToMediumRow(refRow);
 			list.add(newFirstRow);
 			List<Row> rowList = insertMultipleRowBefore(refRow, refRow, rowCount - 1);
@@ -1492,7 +1666,7 @@ public class Table {
 
 		Row refRow = getRowByIndex(index - 1);
 		Row positionRow = getRowByIndex(index);
-		//1. insert a <table:table-column>
+		// 1. insert a <table:table-column>
 		if (refRow.getOdfElement() == positionRow.getOdfElement()) {
 			TableTableRowElement row = refRow.getOdfElement();
 			int repeatedCount = refRow.getRowsRepeatedNumber();
@@ -1508,7 +1682,7 @@ public class Table {
 		} else {
 			List<Row> newRowList = insertMultipleRowBefore(refRow, positionRow, rowCount);
 			if (index - 1 == 0) {
-				//correct styles
+				// correct styles
 				reviseStyleFromTopRowToMediumRow(newRowList.get(0));
 			}
 			for (int i = 0; i < newRowList.size(); i++) {
@@ -1533,7 +1707,8 @@ public class Table {
 				for (Node m : new DomNodeList(headers.getChildNodes())) {
 					if (m instanceof TableTableColumnElement) {
 						colEle = (TableTableColumnElement) m;
-						for (int i = 0; i < getColumnInstance(colEle, 0).getColumnsRepeatedNumber(); i++) {
+						int columnsRepeatedNumber = colEle.getTableNumberColumnsRepeatedAttribute();
+						for (int i = 0; i < columnsRepeatedNumber; i++) {
 							list.add(getColumnInstance(colEle, i));
 						}
 					}
@@ -1541,7 +1716,8 @@ public class Table {
 			}
 			if (n instanceof TableTableColumnElement) {
 				colEle = (TableTableColumnElement) n;
-				for (int i = 0; i < getColumnInstance(colEle, 0).getColumnsRepeatedNumber(); i++) {
+				int columnsRepeatedNumber = colEle.getTableNumberColumnsRepeatedAttribute();
+				for (int i = 0; i < columnsRepeatedNumber; i++) {
 					list.add(getColumnInstance(colEle, i));
 				}
 			}
@@ -1589,8 +1765,7 @@ public class Table {
 	 */
 	public Column getColumnByIndex(int index) {
 		if (index < 0) {
-			throw new IllegalArgumentException(
-					"index should be nonnegative integer.");
+			throw new IllegalArgumentException("index should be nonnegative integer.");
 		}
 		// expand column as needed.
 		int lastIndex = getColumnCount() - 1;
@@ -1602,8 +1777,7 @@ public class Table {
 		// TableTableColumnElement colEle=null;
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
 			if (n instanceof TableTableHeaderColumnsElement) {
-				col = getHeaderColumnByIndex(
-						(TableTableHeaderColumnsElement) n, index);
+				col = getHeaderColumnByIndex((TableTableHeaderColumnsElement) n, index);
 				if (col != null) {
 					return col;
 				}
@@ -1614,8 +1788,7 @@ public class Table {
 				result += col.getColumnsRepeatedNumber();
 			}
 			if ((result > index) && (col != null)) {
-				return getColumnInstance(col.getOdfElement(), index
-						- (result - col.getColumnsRepeatedNumber()));
+				return getColumnInstance(col.getOdfElement(), index - (result - col.getColumnsRepeatedNumber()));
 			}
 		}
 		return null;
@@ -1661,8 +1834,7 @@ public class Table {
 	 */
 	public Row getRowByIndex(int index) {
 		if (index < 0) {
-			throw new IllegalArgumentException(
-					"index should be nonnegative integer.");
+			throw new IllegalArgumentException("index should be nonnegative integer.");
 		}
 		// expand row as needed.
 		int lastIndex = getRowCount() - 1;
@@ -1701,19 +1873,22 @@ public class Table {
 		return null;
 	}
 
-	/** 
-	 * Remove the specific number of rows, starting from the row at <code>index</code>.
+	/**
+	 * Remove the specific number of rows, starting from the row at
+	 * <code>index</code>.
 	 * 
-	 * @param startIndex	is the zero-based index of the first row to delete.
-	 * @param deleteRowCount	is the number of rows to delete.
+	 * @param startIndex
+	 *            is the zero-based index of the first row to delete.
+	 * @param deleteRowCount
+	 *            is the number of rows to delete.
 	 */
 	public void removeRowsByIndex(int startIndex, int deleteRowCount) {
 		boolean deleted = false;
-		//0. verify the index
-		if(deleteRowCount <= 0) {
+		// 0. verify the index
+		if (deleteRowCount <= 0) {
 			return;
 		}
-		if(startIndex < 0) {
+		if (startIndex < 0) {
 			throw new IllegalArgumentException("startIndex of the deleted rows should not be negative");
 		}
 		int rowCount = getRowCount();
@@ -1724,12 +1899,13 @@ public class Table {
 			deleteRowCount = rowCount - startIndex;
 		}
 
-		//1. remove row
+		// 1. remove row
 		Row firstRow = getRowByIndex(startIndex);
 		for (int i = startIndex; i < startIndex + deleteRowCount; i++) {
 			int repeatedAttr = firstRow.getRowsRepeatedNumber();
 			if (repeatedAttr == 1) {
-				TableTableRowElement rowEle = OdfElement.findNextChildNode(TableTableRowElement.class, firstRow.getOdfElement());
+				TableTableRowElement rowEle = OdfElement.findNextChildNode(TableTableRowElement.class, firstRow
+						.getOdfElement());
 				firstRow.removeAllCellsRelationship();
 				firstRow.getOdfElement().getParentNode().removeChild(firstRow.getOdfElement());
 				updateRowRepository(firstRow.getOdfElement(), firstRow.mnRepeatedIndex, null, 0);
@@ -1745,7 +1921,7 @@ public class Table {
 				}
 			}
 		}
-		//2. if mediumRow becomes as top row, revise style
+		// 2. if mediumRow becomes as top row, revise style
 		if (deleted && startIndex == 0) {
 			Row aRow = getRowByIndex(0);
 			reviseStyleFromMediumRowToTopRow(aRow);
@@ -1779,7 +1955,8 @@ public class Table {
 	 */
 	public int getHeaderRowCount() {
 
-		TableTableHeaderRowsElement headers = OdfElement.findFirstChildNode(TableTableHeaderRowsElement.class, mTableElement);
+		TableTableHeaderRowsElement headers = OdfElement.findFirstChildNode(TableTableHeaderRowsElement.class,
+				mTableElement);
 		return getHeaderRowCount(headers);
 	}
 
@@ -1787,10 +1964,7 @@ public class Table {
 		int result = 0;
 		if (headers != null) {
 			for (Node n : new DomNodeList(headers.getChildNodes())) {
-				if (n instanceof TableTableColumnElement) {
-					result += getColumnInstance(((TableTableColumnElement) n),
-							0).getColumnsRepeatedNumber();
-				}
+				result += ((TableTableColumnElement) n).getTableNumberColumnsRepeatedAttribute();
 			}
 		}
 		return result;
@@ -1802,7 +1976,8 @@ public class Table {
 	 * @return the number of header columns.
 	 */
 	public int getHeaderColumnCount() {
-		TableTableHeaderColumnsElement headers = OdfElement.findFirstChildNode(TableTableHeaderColumnsElement.class, mTableElement);
+		TableTableHeaderColumnsElement headers = OdfElement.findFirstChildNode(TableTableHeaderColumnsElement.class,
+				mTableElement);
 		return getHeaderColumnCount(headers);
 	}
 
@@ -1818,20 +1993,24 @@ public class Table {
 	/**
 	 * Set the table name.
 	 * 
-	 * @param tableName the table name
-	 * @throws IllegalArgumentException if the tableName is duplicate with one of tables in the current document
+	 * @param tableName
+	 *            the table name
+	 * @throws IllegalArgumentException
+	 *             if the tableName is duplicate with one of tables in the
+	 *             current document
 	 */
 	public void setTableName(String tableName) {
-		//check if the table name is already exist 		
+		// check if the table name is already exist
 		List<Table> tableList = mDocument.getTableList();
-		for(int i=0;i<tableList.size();i++){
+		for (int i = 0; i < tableList.size(); i++) {
 			Table table = tableList.get(i);
-			if(tableName.equals(table.getTableName())){
-				if(table != this) {
-					throw new IllegalArgumentException("The table name is duplicate with one of tables in the current document.");
+			if (tableName.equals(table.getTableName())) {
+				if (table != this) {
+					throw new IllegalArgumentException(
+							"The table name is duplicate with one of tables in the current document.");
 				}
-			}	
-		}		
+			}
+		}
 		mTableElement.setTableNameAttribute(tableName);
 	}
 
@@ -1850,12 +2029,14 @@ public class Table {
 
 	/**
 	 * Set if the table is protected.
-	 * @param isProtected	the protected attribute of the table to be set
+	 * 
+	 * @param isProtected
+	 *            the protected attribute of the table to be set
 	 */
 	public void setProtected(boolean isProtected) {
 		mTableElement.setTableProtectedAttribute(isProtected);
 	}
-	
+
 	/**
 	 * Return true if cell style is inherited when a new cell is added to the
 	 * table.
@@ -1919,7 +2100,7 @@ public class Table {
 	 * @param isEnabled
 	 *            if<code>isEnabled</code> is true, cell style will be inherited
 	 *            by new cell.
-	 *            
+	 * 
 	 * @see #isCellStyleInheritance()
 	 * @see #appendColumn()
 	 * @see #appendColumns(int)
@@ -1935,10 +2116,11 @@ public class Table {
 	 * @see #getColumnByIndex(int)
 	 * @see #getRowByIndex(int)
 	 */
-	protected void setCellStyleInheritance(boolean	isEnabled) {
-		mIsCellStyleInheritance=isEnabled;
+	protected void setCellStyleInheritance(boolean isEnabled) {
+		mIsCellStyleInheritance = isEnabled;
 	}
-	////////////////////////////////////////////////////////////////////////////////////////////
+
+	// //////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * Return a range of cells within the specified range. The table will be
 	 * automatically expanded as need.
@@ -1953,8 +2135,7 @@ public class Table {
 	 *            the row index of the last cell inside the range.
 	 * @return the specified cell range.
 	 */
-	public CellRange getCellRangeByPosition(int startCol, int startRow,
-			int endCol, int endRow) {
+	public CellRange getCellRangeByPosition(int startCol, int startRow, int endCol, int endRow) {
 		// test whether cell position is out of table range and expand table
 		// automatically.
 		getCellByPosition(startCol, startRow);
@@ -1978,29 +2159,30 @@ public class Table {
 	 *            the cell address of the last cell inside the range.
 	 * @return the specified cell range.
 	 */
-	public CellRange getCellRangeByPosition(String startAddress,
-			String endAddress) {
+	public CellRange getCellRangeByPosition(String startAddress, String endAddress) {
 		return getCellRangeByPosition(getColIndexFromCellAddress(startAddress),
-				getRowIndexFromCellAddress(startAddress),
-				getColIndexFromCellAddress(endAddress),
+				getRowIndexFromCellAddress(startAddress), getColIndexFromCellAddress(endAddress),
 				getRowIndexFromCellAddress(endAddress));
 	}
 
 	/**
 	 * Return a range of cells by a specified name.
 	 * <p>
-	 * After you get a cell range with <code>getCellRangeByPosition</code>,  
-	 * you can assign a name to this cell range with the method <code>setCellRangeName<code> in class <code>CellRange</code>.
-	 * Then you will get a <b>named range</b> which can be represented by name.
-	 * This method can be used to get a named range.
+	 * After you get a cell range with <code>getCellRangeByPosition</code>, you
+	 * can assign a name to this cell range with the method
+	 * <code>setCellRangeName<code> in class <code>CellRange</code>. Then you
+	 * will get a <b>named range</b> which can be represented by name. This
+	 * method can be used to get a named range.
 	 * 
-	 * @param name	the name of the specified named range
-	 * @return	the specified cell range.
+	 * @param name
+	 *            the name of the specified named range
+	 * @return the specified cell range.
 	 */
 	public CellRange getCellRangeByName(String name) {
 		NodeList nameRanges;
 		try {
-			nameRanges = mTableElement.getOwnerDocument().getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "named-range");
+			nameRanges = mTableElement.getOwnerDocument().getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(),
+					"named-range");
 			for (int i = 0; i < nameRanges.getLength(); i++) {
 				TableNamedRangeElement nameRange = (TableNamedRangeElement) nameRanges.item(i);
 				if (nameRange.getTableNameAttribute().equals(name)) {
@@ -2016,11 +2198,13 @@ public class Table {
 	}
 
 	/**
-	 * Return a single cell that is positioned at the specified column and row. 
+	 * Return a single cell that is positioned at the specified column and row.
 	 * The table will be automatically expanded as need.
 	 * 
-	 * @param colIndex  the column index of the cell.
-	 * @param rowIndex  the row index of the cell.
+	 * @param colIndex
+	 *            the column index of the cell.
+	 * @param rowIndex
+	 *            the row index of the cell.
 	 * @return the cell at the specified position
 	 */
 	public Cell getCellByPosition(int colIndex, int rowIndex) {
@@ -2030,28 +2214,28 @@ public class Table {
 		// expand row as needed.
 		int lastRowIndex = getRowCount() - 1;
 		if (rowIndex > lastRowIndex) {
-			//need clean cell style.
+			// need clean cell style.
 			appendRows((rowIndex - lastRowIndex), true);
 		}
 		// expand column as needed.
 		int lastColumnIndex = getColumnCount() - 1;
 		if (colIndex > lastColumnIndex) {
-			//need clean cell style.
+			// need clean cell style.
 			appendColumns((colIndex - lastColumnIndex), true);
 		}
 		Row row = getRowByIndex(rowIndex);
 		return row.getCellByIndex(colIndex);
 	}
 
-	//return array of string contain 3 member
-	//1. sheet table name
-	//2. alphabetic represent the column 
-	//3. string represent the row number
+	// return array of string contain 3 member
+	// 1. sheet table name
+	// 2. alphabetic represent the column
+	// 3. string represent the row number
 	String[] splitCellAddress(String cellAddress) {
 		String[] returnArray = new String[3];
-		//seperate column and row from cell range
+		// seperate column and row from cell range
 		StringTokenizer stDot = new StringTokenizer(cellAddress, ".");
-		//get sheet table name and the cell address
+		// get sheet table name and the cell address
 		String cell = "";
 		if (stDot.countTokens() >= 2) {
 			StringTokenizer stDollar = new StringTokenizer(stDot.nextToken(), "$");
@@ -2062,7 +2246,7 @@ public class Table {
 			cell = stDot.nextToken();
 		}
 
-		//get the column/row number from the cell address
+		// get the column/row number from the cell address
 		StringTokenizer stDollar = new StringTokenizer(cell, "$");
 		if (stDollar.countTokens() >= 2) {
 			returnArray[1] = stDollar.nextToken();
@@ -2085,19 +2269,20 @@ public class Table {
 	 * Return a single cell that is positioned at the specified cell address.
 	 * The table can be automatically expanded as need.
 	 * <p>
-	 * The cell address is constructed with a table name, a dot (.), 
-	 * an alphabetic value representing the column, and a numeric value representing the row. 
-	 * The table name can be omitted. For example: "$Sheet1.A1", "Sheet1.A1" and "A1" are all
-	 * valid cell address.
+	 * The cell address is constructed with a table name, a dot (.), an
+	 * alphabetic value representing the column, and a numeric value
+	 * representing the row. The table name can be omitted. For example:
+	 * "$Sheet1.A1", "Sheet1.A1" and "A1" are all valid cell address.
 	 * 
-	 * @param address	the cell address of the cell.
+	 * @param address
+	 *            the cell address of the cell.
 	 * @return the cell at the specified position.
 	 */
 	public Cell getCellByPosition(String address) {
 		return getCellByPosition(getColIndexFromCellAddress(address), getRowIndexFromCellAddress(address));
 	}
 
-	//TODO: can put these two method to type.CellAddress
+	// TODO: can put these two method to type.CellAddress
 	int getColIndexFromCellAddress(String cellAddress) {
 		String[] returnArray = splitCellAddress(cellAddress);
 		String colNum = returnArray[1];
@@ -2135,8 +2320,10 @@ public class Table {
 		return cellRange;
 
 	}
-	//the parameter is the column/row index in the ownerTable,rather than in the cell range
-	//if the position is a covered cell, then get the owner cell for it
+
+	// the parameter is the column/row index in the ownerTable,rather than in
+	// the cell range
+	// if the position is a covered cell, then get the owner cell for it
 
 	Cell getOwnerCellByPosition(List<CellCoverInfo> coverList, int nCol, int nRow) {
 		CellCoverInfo info;
@@ -2146,12 +2333,9 @@ public class Table {
 		} else {
 			for (int m = 0; m < coverList.size(); m++) {
 				info = coverList.get(m);
-				if (((nCol > info.nStartCol) && (nCol <= info.nEndCol)
-						&& (nRow == info.nStartRow) && (nRow == info.nEndRow))
-						|| ((nCol == info.nStartCol) && (nCol == info.nEndCol)
-						&& (nRow > info.nStartRow) && (nRow <= info.nEndRow))
-						|| ((nCol > info.nStartCol) && (nCol <= info.nEndCol)
-						&& (nRow > info.nStartRow) && (nRow <= info.nEndRow))) {
+				if (((nCol > info.nStartCol) && (nCol <= info.nEndCol) && (nRow == info.nStartRow) && (nRow == info.nEndRow))
+						|| ((nCol == info.nStartCol) && (nCol == info.nEndCol) && (nRow > info.nStartRow) && (nRow <= info.nEndRow))
+						|| ((nCol > info.nStartCol) && (nCol <= info.nEndCol) && (nRow > info.nStartRow) && (nRow <= info.nEndRow))) {
 					Cell cell = getCellByPosition(info.nStartCol, info.nStartRow);
 					return cell;
 				}
@@ -2160,17 +2344,16 @@ public class Table {
 		return null;
 	}
 
-	//the parameter is the column/row index in the ownerTable,rather than in the cell range
+	// the parameter is the column/row index in the ownerTable,rather than in
+	// the cell range
 	boolean isCoveredCellInOwnerTable(List<CellCoverInfo> coverList, int nCol, int nRow) {
 		CellCoverInfo info;
 		for (int m = 0; m < coverList.size(); m++) {
 			info = coverList.get(m);
-			if (((nCol > info.nStartCol) && (nCol <= info.nEndCol)
-					&& (nRow == info.nStartRow) && (nRow == info.nEndRow))
-					|| ((nCol == info.nStartCol) && (nCol == info.nEndCol)
-					&& (nRow > info.nStartRow) && (nRow <= info.nEndRow))
-					|| ((nCol > info.nStartCol) && (nCol <= info.nEndCol)
-					&& (nRow > info.nStartRow) && (nRow <= info.nEndRow))) //covered cell
+			if (((nCol > info.nStartCol) && (nCol <= info.nEndCol) && (nRow == info.nStartRow) && (nRow == info.nEndRow))
+					|| ((nCol == info.nStartCol) && (nCol == info.nEndCol) && (nRow > info.nStartRow) && (nRow <= info.nEndRow))
+					|| ((nCol > info.nStartCol) && (nCol <= info.nEndCol) && (nRow > info.nStartRow) && (nRow <= info.nEndRow))) // covered
+			// cell
 			{
 				return true;
 			}
@@ -2196,16 +2379,19 @@ public class Table {
 		return coverList;
 	}
 
-	//the odfelement of the FTableColumn changed, so we should update the repository here
-	void updateColumnRepository(TableTableColumnElement oldElement, int oldRepeatIndex, TableTableColumnElement newElement, int newRepeatIndex) {
+	// the odfelement of the FTableColumn changed, so we should update the
+	// repository here
+	void updateColumnRepository(TableTableColumnElement oldElement, int oldRepeatIndex,
+			TableTableColumnElement newElement, int newRepeatIndex) {
 		if (mColumnRepository.containsKey(oldElement)) {
 			Vector<Column> oldList = mColumnRepository.get(oldElement);
 			if (oldRepeatIndex < oldList.size()) {
 				if (oldElement != newElement) {
-					//the new column replace the old column
+					// the new column replace the old column
 					Column oldColumn = oldList.get(oldRepeatIndex);
 					if (oldColumn != null) {
-						//update the mnRepeateIndex of the column which locate after the removed column
+						// update the mnRepeateIndex of the column which locate
+						// after the removed column
 						for (int i = oldRepeatIndex + 1; i < oldList.size(); i++) {
 							Column column = oldList.get(i);
 							if (column != null) {
@@ -2213,7 +2399,7 @@ public class Table {
 							}
 						}
 						oldList.remove(oldColumn);
-						//oldList.add(oldRepeatIndex, null);
+						// oldList.add(oldRepeatIndex, null);
 						if (newElement != null) {
 							oldColumn.maColumnElement = newElement;
 							oldColumn.mnRepeatedIndex = newRepeatIndex;
@@ -2227,7 +2413,8 @@ public class Table {
 						}
 					}
 				} else {
-					//the new column element is equal to the old column element, just change the repeatIndex
+					// the new column element is equal to the old column
+					// element, just change the repeatIndex
 					Column oldColumn = oldList.get(oldRepeatIndex);
 					if (oldColumn != null) {
 						oldList.remove(oldColumn);
@@ -2245,21 +2432,24 @@ public class Table {
 		}
 	}
 
-	//the odfelement of the FTableRow changed, so we should update the repository here
-	void updateRowRepository(TableTableRowElement oldElement, int oldRepeatIndex, TableTableRowElement newElement, int newRepeatIndex) {
+	// the odfelement of the FTableRow changed, so we should update the
+	// repository here
+	void updateRowRepository(TableTableRowElement oldElement, int oldRepeatIndex, TableTableRowElement newElement,
+			int newRepeatIndex) {
 		if (mRowRepository.containsKey(oldElement)) {
 			Vector<Row> oldList = mRowRepository.get(oldElement);
 			if (oldRepeatIndex < oldList.size()) {
 				if (oldElement != newElement) {
-					//the new row replace the old row
+					// the new row replace the old row
 					Row oldRow = oldList.get(oldRepeatIndex);
 					Vector<Cell> updateCellList = new Vector<Cell>();
 					if (oldRow != null) {
-						//update the mnRepeateIndex of the row which locate after the removed row
+						// update the mnRepeateIndex of the row which locate
+						// after the removed row
 						for (int i = oldRepeatIndex + 1; i < oldList.size(); i++) {
 							Row row = oldList.get(i);
 							if (row != null) {
-								//update the cell in this row, 
+								// update the cell in this row,
 								int colNum = getColumnCount();
 								for (int j = 0; j < colNum; j++) {
 									Cell cell = row.getCellByIndex(j);
@@ -2270,13 +2460,13 @@ public class Table {
 						}
 						oldList.remove(oldRow);
 						if (newElement != null) {
-							//update the cell in this row
+							// update the cell in this row
 							int colNum = getColumnCount();
 							Cell[] oldCells = new Cell[colNum];
 							for (int j = 0; j < colNum; j++) {
 								oldCells[j] = oldRow.getCellByIndex(j);
 							}
-							///
+							// /
 							oldRow.maRowElement = newElement;
 							oldRow.mnRepeatedIndex = newRepeatIndex;
 							int size = (newRepeatIndex > 7) ? (newRepeatIndex + 1) : 8;
@@ -2284,17 +2474,19 @@ public class Table {
 							list.setSize(newRepeatIndex + 1);
 							list.set(newRepeatIndex, oldRow);
 							mRowRepository.put(newElement, list);
-							//update the cell in this row
+							// update the cell in this row
 							Cell[] newCells = new Cell[colNum];
 							for (int j = 0; j < colNum; j++) {
 								newCells[j] = oldRow.getCellByIndex(j);
 							}
 							for (int j = 0; j < colNum; j++) {
-								this.updateCellRepository(oldCells[j].getOdfElement(), oldCells[j].mnRepeatedColIndex, oldCells[j].mnRepeatedRowIndex,
-										newCells[j].getOdfElement(), newCells[j].mnRepeatedColIndex, newCells[j].mnRepeatedRowIndex);
+								this.updateCellRepository(oldCells[j].getOdfElement(), oldCells[j].mnRepeatedColIndex,
+										oldCells[j].mnRepeatedRowIndex, newCells[j].getOdfElement(),
+										newCells[j].mnRepeatedColIndex, newCells[j].mnRepeatedRowIndex);
 							}
 
-							//update the mnRepeatedRowIndex of the cell which locate after the removed row
+							// update the mnRepeatedRowIndex of the cell which
+							// locate after the removed row
 							for (int j = 0; j < updateCellList.size(); j++) {
 								Cell cell = updateCellList.get(j);
 								if (cell.mnRepeatedRowIndex > oldRepeatIndex) {
@@ -2306,7 +2498,8 @@ public class Table {
 						}
 					}
 				} else {
-					//the new row element is equal to the old row element, just change the repeatIndex
+					// the new row element is equal to the old row element, just
+					// change the repeatIndex
 					Row oldRow = oldList.get(oldRepeatIndex);
 					if (oldRow != null) {
 						oldList.remove(oldRow);
@@ -2324,7 +2517,8 @@ public class Table {
 		}
 	}
 
-	//the odfelement of the FTableCell changed, so we should update the repository here
+	// the odfelement of the FTableCell changed, so we should update the
+	// repository here
 	void updateCellRepository(TableTableCellElementBase oldElement, int oldRepeatColIndex, int oldRepeatRowIndex,
 			TableTableCellElementBase newElement, int newRepeatColIndex, int newRepeatRowIndex) {
 		if (mCellRepository.containsKey(oldElement)) {
@@ -2339,9 +2533,10 @@ public class Table {
 				}
 			}
 			if (oldElement != newElement) {
-				//the new cell replace the old cell
+				// the new cell replace the old cell
 				if (oldCell != null) {
-					//update the mnRepeateRowIndex &  mnRepeateColIndex of the cell which locate after the removed cell
+					// update the mnRepeateRowIndex & mnRepeateColIndex of the
+					// cell which locate after the removed cell
 					for (int i = 0; i < oldList.size(); i++) {
 						Cell cell = oldList.get(i);
 						if (cell != null && (cell.getOdfElement() == oldElement)) {
@@ -2390,7 +2585,8 @@ public class Table {
 					}
 				}
 			} else {
-				//the new cell element is equal to the old cell element, just change the repeatIndex
+				// the new cell element is equal to the old cell element, just
+				// change the repeatIndex
 				if (oldCell != null) {
 					oldCell.mnRepeatedColIndex = newRepeatColIndex;
 					oldCell.mnRepeatedRowIndex = newRepeatRowIndex;
@@ -2401,7 +2597,8 @@ public class Table {
 		}
 	}
 
-	void updateRepositoryWhenCellElementChanged(int startRow, int endRow, int startClm, int endClm, TableTableCellElement newCellEle) {
+	void updateRepositoryWhenCellElementChanged(int startRow, int endRow, int startClm, int endClm,
+			TableTableCellElement newCellEle) {
 		for (int i = startRow; i < endRow; i++) {
 			for (int j = startClm; j < endClm; j++) {
 				Cell cell = getCellByPosition(j, i);
@@ -2415,8 +2612,10 @@ public class Table {
 /**
  * Record the Cell Cover Info in this cell range.
  * <p>
- * Sometimes the covered cell is not tagged as <table:covered-table-cell> element.
- *
+ * Sometimes the covered cell is not tagged as
+ * <table:covered-table-cell>
+ * element.
+ * 
  */
 class CellCoverInfo {
 
