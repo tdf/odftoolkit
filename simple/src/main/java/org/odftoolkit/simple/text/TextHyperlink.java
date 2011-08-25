@@ -32,9 +32,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextHElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Component;
-import org.odftoolkit.simple.Document;
 import org.w3c.dom.Node;
 
 /**
@@ -46,12 +44,9 @@ import org.w3c.dom.Node;
 public class TextHyperlink extends Component {
 
 	TextAElement hyperLinkElement;
-	private Document mOwnerDocument;
 
 	private TextHyperlink(TextAElement aElement) {
 		hyperLinkElement = aElement;
-		mOwnerDocument = (Document) ((OdfFileDom) hyperLinkElement
-				.getOwnerDocument()).getDocument();
 	}
 
 	/**
@@ -139,13 +134,10 @@ class AbstractTextHyperlinkContainer implements TextHyperlinkContainer {
 	OdfElement linkContainer;
 
 	public AbstractTextHyperlinkContainer(OdfElement parent) {
-		if ((parent instanceof TextPElement)
-				|| (parent instanceof TextHElement)
-				|| (parent instanceof TextSpanElement))
+		if ((parent instanceof TextPElement) || (parent instanceof TextHElement) || (parent instanceof TextSpanElement))
 			linkContainer = parent;
 		else
-			throw new InvalidParameterException(parent.getClass()
-					+ "is not a valid element.");
+			throw new InvalidParameterException(parent.getClass() + "is not a valid element.");
 	}
 
 	public TextHyperlink applyHyperlink(URI linkto) {
@@ -153,8 +145,7 @@ class AbstractTextHyperlinkContainer implements TextHyperlinkContainer {
 		OdfElement parent = linkContainer;
 		removeHyperlinks();
 		TextAElement aElement;
-		aElement = ((OdfContentDom) (parent.getOwnerDocument()))
-				.newOdfElement(TextAElement.class);
+		aElement = ((OdfContentDom) (parent.getOwnerDocument())).newOdfElement(TextAElement.class);
 		aElement.setXlinkTypeAttribute("simple");
 		aElement.setXlinkHrefAttribute(linkto.toString());
 		Node node = parent.getFirstChild();
@@ -170,8 +161,7 @@ class AbstractTextHyperlinkContainer implements TextHyperlinkContainer {
 
 	public void removeHyperlinks() {
 		OdfElement parent = linkContainer;
-		TextAElement aElement = OdfElement.findFirstChildNode(
-				TextAElement.class, parent);
+		TextAElement aElement = OdfElement.findFirstChildNode(TextAElement.class, parent);
 		while (aElement != null) {
 			Node node = aElement.getFirstChild();
 			while (node != null) {
@@ -181,8 +171,7 @@ class AbstractTextHyperlinkContainer implements TextHyperlinkContainer {
 				parent.insertBefore(thisNode, aElement);
 			}
 			TextAElement thisElement = aElement;
-			aElement = OdfElement.findNextChildNode(TextAElement.class,
-					aElement);
+			aElement = OdfElement.findNextChildNode(TextAElement.class, aElement);
 			parent.removeChild(thisElement);
 		}
 	}
@@ -194,8 +183,7 @@ class AbstractTextHyperlinkContainer implements TextHyperlinkContainer {
 	public TextHyperlink appendHyperlink(String text, URI linkto) {
 		OdfElement parent = linkContainer;
 		TextAElement aElement;
-		aElement = ((OdfContentDom) (parent.getOwnerDocument()))
-				.newOdfElement(TextAElement.class);
+		aElement = ((OdfContentDom) (parent.getOwnerDocument())).newOdfElement(TextAElement.class);
 		aElement.setXlinkTypeAttribute("simple");
 		aElement.setXlinkHrefAttribute(linkto.toString());
 		aElement.setTextContent(text);
@@ -242,11 +230,9 @@ class AbstractTextHyperlinkContainer implements TextHyperlinkContainer {
 		private TextHyperlink findNext(TextHyperlink thisLink) {
 			TextAElement nextLink = null;
 			if (thisLink == null) {
-				nextLink = OdfElement.findFirstChildNode(TextAElement.class,
-						containerElement);
+				nextLink = OdfElement.findFirstChildNode(TextAElement.class, containerElement);
 			} else {
-				nextLink = OdfElement.findNextChildNode(TextAElement.class,
-						thisLink.getOdfElement());
+				nextLink = OdfElement.findNextChildNode(TextAElement.class, thisLink.getOdfElement());
 			}
 
 			if (nextLink != null) {

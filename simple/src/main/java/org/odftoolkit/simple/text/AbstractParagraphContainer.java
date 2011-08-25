@@ -27,7 +27,6 @@ import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
 import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
 /**
@@ -63,10 +62,9 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 	 *         happen.
 	 */
 	public boolean removeParagraph(Paragraph para) {
-		OdfElement containerElement = getParagraphContainerElement();
 		try {
-			containerElement.removeChild(para.getOdfElement());
-		} catch (DOMException exception) {
+			para.remove();
+		} catch (Exception exception) {
 			Logger.getLogger(AbstractParagraphContainer.class.getName()).log(Level.WARNING, exception.getMessage());
 			return false;
 		}
@@ -185,7 +183,7 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 			if (nextElement == null) {
 				throw new IllegalStateException("please call next() first.");
 			}
-			containerElement.removeChild(nextElement.getOdfElement());
+			nextElement.remove();
 		}
 
 		private Paragraph findNext(Paragraph thisBox) {

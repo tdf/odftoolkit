@@ -149,7 +149,7 @@ public class ChartTest {
 			Chart chart8 = doc.getChartById(chartID8.getChartID());
 			chart8.setChartType(ChartType.AREA);
 			Assert.assertEquals(ChartType.AREA, chart8.getChartType());
-			Assert.assertTrue(doc.getChartByTitle(barTitle).size() == 8);
+			Assert.assertEquals(8, doc.getChartByTitle(barTitle).size());
 			Assert.assertNotNull(doc.getChartByTitle(areaTitle));
 			doc.save(ResourceUtilities.newTestOutputFile(CHART_FILE2));
 			

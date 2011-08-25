@@ -37,9 +37,7 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.simple.Component;
-import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.common.field.AbstractVariableContainer;
 import org.odftoolkit.simple.common.field.VariableContainer;
 import org.odftoolkit.simple.common.field.VariableField;
@@ -81,7 +79,7 @@ public class Header extends Component implements TableContainer, VariableContain
 	public StyleHeaderElement getOdfElement() {
 		return headerEle;
 	}
-	
+
 	/**
 	 * Get this header is visible or not.
 	 * 
@@ -93,7 +91,7 @@ public class Header extends Component implements TableContainer, VariableContain
 		boolean isVisible = headerEle.getStyleDisplayAttribute();
 		return isVisible;
 	}
-	
+
 	/**
 	 * Set this header visible or not.
 	 * 
@@ -114,7 +112,7 @@ public class Header extends Component implements TableContainer, VariableContain
 			String stylename = textEle.getStyleName();
 			OdfFileDom dom = (OdfFileDom) headerEle.getOwnerDocument();
 			OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
-			
+
 			OdfStyle newStyle = styles.newStyle(OdfStyleFamily.Paragraph);
 			OdfStyle style = styles.getStyle(stylename, OdfStyleFamily.Paragraph);
 			if (style != null) {

@@ -23,7 +23,6 @@ package org.odftoolkit.simple.draw;
 
 import java.util.Iterator;
 
-import org.odftoolkit.odfdom.dom.attribute.style.StyleRunThroughAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawTextBoxElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;

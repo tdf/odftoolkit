@@ -367,14 +367,30 @@ public class Paragraph extends Component implements TextboxContainer, TextHyperl
 	}
 
 	/**
-	 * Get the owner document of this paragraph
+	 * Get the owner document of this paragraph.
 	 * 
-	 * @return the document who owns this paragraph
+	 * @return the document who owns this paragraph.
 	 */
 	public Document getOwnerDocument() {
 		return mOwnerDocument;
 	}
 
+	/**
+	 * Remove this paragraph from its container.
+	 * 
+	 * @since 0.6.5
+	 */
+	public void remove(){
+		Component.unregisterComponent(getOdfElement());
+		getOdfElement().getParentNode().removeChild(getOdfElement());
+		mParagraphElement=null;
+		mHeadingElement=null;
+		mOwnerDocument=null;
+		mStyleHandler=null;
+		mTextboxContainerImpl=null;
+		mHyperlinkContainerImpl=null;
+	}
+	
 	/**
 	 * Get the style handler of this paragraph.
 	 * <p>

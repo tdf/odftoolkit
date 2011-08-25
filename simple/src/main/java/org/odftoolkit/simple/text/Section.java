@@ -44,8 +44,8 @@ import org.odftoolkit.simple.text.ParagraphContainer;
 public class Section extends Component implements ParagraphContainer {
 
 	private ParagraphContainerImpl paragraphContainerImpl;
-	TextSectionElement mSectionElement;
-	Document mDocument;
+	private TextSectionElement mSectionElement;
+	private Document mDocument;
 
 	private Section(Document doc, TextSectionElement element) {
 		mSectionElement = element;
@@ -102,6 +102,9 @@ public class Section extends Component implements ParagraphContainer {
 	public void remove() {
 		mDocument.removeElementLinkedResource(mSectionElement);
 		mSectionElement.getParentNode().removeChild(mSectionElement);
+		paragraphContainerImpl = null;
+		mSectionElement = null;
+		mDocument = null;
 	}
 
 	/**

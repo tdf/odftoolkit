@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Iterator;
 
 import org.odftoolkit.odfdom.dom.element.text.TextAElement;
-import org.odftoolkit.odfdom.dom.element.text.TextSElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
@@ -15,7 +14,6 @@ import org.odftoolkit.simple.common.navigation.TextSelection;
 import org.odftoolkit.simple.style.DefaultStyleHandler;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
 
 /**
  * This class represents the application of a style to the character data of a

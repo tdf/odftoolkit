@@ -32,7 +32,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
-import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;

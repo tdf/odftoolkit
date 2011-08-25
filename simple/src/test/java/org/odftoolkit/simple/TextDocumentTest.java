@@ -31,6 +31,7 @@ import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
@@ -111,5 +112,22 @@ public class TextDocumentTest {
 		Assert.assertNotNull(paragraphPropertiesNode instanceof StyleParagraphPropertiesElement);
 		Assert.assertEquals(((StyleParagraphPropertiesElement) paragraphPropertiesNode).getFoBreakBeforeAttribute(),
 				"page");
+	}
+	
+	@Test
+	public void testRemoveParagraph() throws Exception {
+		try {
+			String filePath = ResourceUtilities.getAbsolutePath("headerFooterHidden.odt");
+			TextDocument tdoc = TextDocument.loadDocument(filePath);
+			Paragraph para = tdoc.addParagraph("paragraph1");
+			boolean flag = tdoc.removeParagraph(para);
+			Assert.assertEquals(true, flag);
+			Document doc = para.getOwnerDocument();
+			Assert.assertNull(doc);
+			TextParagraphElementBase paraEle = para.getOdfElement();
+			Assert.assertNull(paraEle);
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
 	}
 }
