@@ -693,15 +693,11 @@ public class Document extends OdfSchemaDocument {
 		try {
 			OdfElement root = getContentDom().getRootElement();
 			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-
-			NodeList childList = typedContent.getChildNodes();
-			for (int i = 0; i < childList.getLength(); i++) {
-				if (childList.item(i) instanceof TableTableElement) {
-					TableTableElement table = (TableTableElement) childList.item(i);
-					if (table.getOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.TABLE, "name")).equals(name)) {
-						return Table.getInstance(table);
-					}
+			NodeList nodeList = officeBody.getElementsByTagName(TableTableElement.ELEMENT_NAME.getQName());
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				TableTableElement table = (TableTableElement) nodeList.item(i);
+				if (table.getOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.TABLE, "name")).equals(name)) {
+					return Table.getInstance(table);
 				}
 			}
 		} catch (Exception e) {
@@ -719,15 +715,9 @@ public class Document extends OdfSchemaDocument {
 		try {
 			OdfElement root = getContentDom().getRootElement();
 			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-			OdfElement typedContent = OdfElement.findFirstChildNode(
-					OdfElement.class, officeBody);
-			NodeList childList = typedContent.getChildNodes();
-			for (int i = 0;
-					i < childList.getLength();
-					i++) {
-				if (childList.item(i) instanceof TableTableElement) {
-					tableList.add(Table.getInstance((TableTableElement) childList.item(i)));
-				}
+			NodeList nodeList = officeBody.getElementsByTagName(TableTableElement.ELEMENT_NAME.getQName());
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				tableList.add(Table.getInstance((TableTableElement) nodeList.item(i)));
 			}
 		} catch (Exception e) {
 			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
