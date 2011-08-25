@@ -4,7 +4,7 @@
 	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>simple-odf</artifactId>
-	<version>0.5.5-SNAPSHOT</version>
+	<version>0.5.5</version>
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -160,8 +160,7 @@
 						<phase>compile</phase>
 						<configuration>
 							<tasks>
-								<copy file="./README.txt"
-									tofile="./target/README.txt" overwrite="yes">
+								<copy file="./README.txt" tofile="./target/README.txt" overwrite="yes">
 									<filterset>
 										<filter token="VERSION" value="${project.version}" />
 										<filter token="DATE" value="${build.timestamp}" />
