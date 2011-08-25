@@ -21,6 +21,7 @@
  ************************************************************************/
 package org.odftoolkit.simple.text;
 
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -32,6 +33,7 @@ import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.text.TextAElement;
 import org.odftoolkit.odfdom.dom.element.text.TextHElement;
 import org.odftoolkit.odfdom.dom.element.text.TextLineBreakElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
@@ -55,6 +57,7 @@ import org.odftoolkit.simple.draw.Textbox;
 import org.odftoolkit.simple.draw.TextboxContainer;
 import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
+import org.odftoolkit.simple.text.AbstractTextHyperlinkContainer;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
@@ -67,13 +70,14 @@ import org.w3c.dom.Text;
  * 
  * @since 0.5
  */
-public class Paragraph extends Component implements TextboxContainer {
+public class Paragraph extends Component implements TextboxContainer, TextHyperlinkContainer {
 
 	private TextPElement mParagraphElement;
 	private TextHElement mHeadingElement;
 	private Document mOwnerDocument;
 	private ParagraphStyleHandler mStyleHandler;
 	private TextboxContainerImpl mTextboxContainerImpl;
+	private TextHyperlinkContainerImpl mHyperlinkContainerImpl;
 
 	private Paragraph(TextParagraphElementBase paragraphElement) {
 		if (paragraphElement instanceof TextPElement) {
@@ -134,7 +138,8 @@ public class Paragraph extends Component implements TextboxContainer {
 	 * Set the text content of this paragraph.
 	 * <p>
 	 * All the existing text content of this paragraph would be removed, and
-	 * then new text content would be set.
+	 * then new text content would be set. The style of the last character will
+	 * be inherited.
 	 * <p>
 	 * The white space characters in the content would be collapsed by default.
 	 * For example, tab character would be replaced with <text:tab>, break line
@@ -145,33 +150,63 @@ public class Paragraph extends Component implements TextboxContainer {
 	 * @see #setTextContentNotCollapsed(String content)
 	 */
 	public void setTextContent(String content) {
-		removeTextContent();
-		if (content != null && !content.equals(""))
-			appendTextElements(content, true);
+		removeTextContentImpl(getOdfElement());
+		Node lastNode = getOdfElement().getLastChild();
+		if (lastNode != null && lastNode.getNodeName() != null
+				&& (lastNode.getNodeName().equals("text:a") || lastNode.getNodeName().equals("text:span"))) {
+			if (content != null && !content.equals(""))
+				appendTextElements((TextAElement) lastNode, content, true);
+		} else {
+			if (content != null && !content.equals(""))
+				appendTextElements(getOdfElement(), content, true);
+		}
+		// remove empty hyperlink
+		removeEmptyHyperlink(getOdfElement());
+	}
+
+	static void removeEmptyHyperlink(OdfElement element) {
+		// remove empty hyperlink
+		NodeList nodeList = element.getChildNodes();
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node node;
+			node = nodeList.item(i);
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+				String nodename = node.getNodeName();
+				if (nodename.equals("text:a") && node.hasChildNodes() == false)
+					element.removeChild(node);
+			}
+		}
 	}
 
 	/**
-	 * Remove the text content of this paragraph.
+	 * Remove the text content of this paragraph. The empty hyperlink element
+	 * will be removed.
 	 * <p>
 	 * The other child elements except text content will not be removed.
 	 * 
 	 */
 	public void removeTextContent() {
-		NodeList nodeList = getOdfElement().getChildNodes();
+		removeTextContentImpl(getOdfElement());
+		removeEmptyHyperlink(getOdfElement());
+	}
+
+	static void removeTextContentImpl(OdfElement ownerElement) {
+		NodeList nodeList = ownerElement.getChildNodes();
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node node;
 			node = nodeList.item(i);
 			if (node.getNodeType() == Node.TEXT_NODE) {
-				this.getOdfElement().removeChild(node);
+				ownerElement.removeChild(node);
 				// element removed need reset index.
 				i--;
 			} else if (node.getNodeType() == Node.ELEMENT_NODE) {
 				String nodename = node.getNodeName();
 				if (nodename.equals("text:s") || nodename.equals("text:tab") || nodename.equals("text:line-break")) {
-					this.getOdfElement().removeChild(node);
+					ownerElement.removeChild(node);
 					// element removed need reset index.
 					i--;
-				}
+				} else if (nodename.equals("text:a"))
+					removeTextContentImpl((OdfElement) node);
 			}
 		}
 	}
@@ -184,8 +219,12 @@ public class Paragraph extends Component implements TextboxContainer {
 	 * @return - the text content of this paragraph
 	 */
 	public String getTextContent() {
+		return getTextContent(getOdfElement());
+	}
+
+	static String getTextContent(OdfElement ownerEle) {
 		StringBuffer buffer = new StringBuffer();
-		NodeList nodeList = this.getOdfElement().getChildNodes();
+		NodeList nodeList = ownerEle.getChildNodes();
 		int i;
 		for (i = 0; i < nodeList.getLength(); i++) {
 			Node node;
@@ -202,7 +241,8 @@ public class Paragraph extends Component implements TextboxContainer {
 				else if (node.getNodeName().equals("text:line-break")) {
 					String lineseperator = System.getProperty("line.separator");
 					buffer.append(lineseperator);
-				}
+				} else if (node.getNodeName().equals("text:a"))
+					buffer.append(TextHyperlink.getInstanceof((TextAElement) node).getTextContent());
 			}
 		}
 		return buffer.toString();
@@ -223,11 +263,12 @@ public class Paragraph extends Component implements TextboxContainer {
 	public void setTextContentNotCollapsed(String content) {
 		removeTextContent();
 		if (content != null && !content.equals(""))
-			appendTextElements(content, false);
+			appendTextElements(getOdfElement(), content, false);
 	}
-	
+
 	/**
-	 * Append the text content at the end of this paragraph.
+	 * Append the text content at the end of this paragraph. The appended text
+	 * would follow the style of the last character.
 	 * <p>
 	 * The white space characters in the content would be collapsed by default.
 	 * For example, tab character would be replaced with <text:tab>, break line
@@ -238,12 +279,44 @@ public class Paragraph extends Component implements TextboxContainer {
 	 * @see #appendTextContentNotCollapsed(String content)
 	 */
 	public void appendTextContent(String content) {
-		if (content != null && !content.equals(""))
-			appendTextElements(content, true);
+		appendTextContent(content, true);
 	}
 
 	/**
-	 * Append the text content at the end of this paragraph.
+	 * Append the text content at the end of this paragraph. The appended text
+	 * would follow the style of the last character if the second parameter is
+	 * set to true; Or else, the appended text would follow the default style of
+	 * this paragraph.
+	 * <p>
+	 * The white space characters in the content would be collapsed by default.
+	 * For example, tab character would be replaced with <text:tab>, break line
+	 * character would be replaced with <text:line-break>.
+	 * 
+	 * @param content
+	 *            - the text content
+	 * @param isStyleInherited
+	 *            - whether the style would be inherited by the appended text
+	 * @see #appendTextContentNotCollapsed(String content)
+	 */
+	public void appendTextContent(String content, boolean isStyleInherited) {
+		boolean canInherited = false;
+		Node lastNode = getOdfElement().getLastChild();
+		if (lastNode != null && lastNode.getNodeName() != null
+				&& (lastNode.getNodeName().equals("text:a") || lastNode.getNodeName().equals("text:span")))
+			canInherited = true;
+
+		if (isStyleInherited && canInherited) {
+			if (content != null && !content.equals(""))
+				appendTextElements((OdfElement) lastNode, content, true);
+		} else {
+			if (content != null && !content.equals(""))
+				appendTextElements(getOdfElement(), content, true);
+		}
+	}
+
+	/**
+	 * Append the text content at the end of this paragraph. The appended text
+	 * would follow the style of the last character.
 	 * <p>
 	 * The white space characters in the content would not be collapsed.
 	 * 
@@ -252,8 +325,19 @@ public class Paragraph extends Component implements TextboxContainer {
 	 * @see #appendTextContent(String content)
 	 */
 	public void appendTextContentNotCollapsed(String content) {
-		if (content != null && !content.equals(""))
-			appendTextElements(content, false);
+		Node lastNode = getOdfElement().getLastChild();
+		boolean canInherited = false;
+		if (lastNode != null && lastNode.getNodeName() != null
+				&& (lastNode.getNodeName().equals("text:a") || lastNode.getNodeName().equals("text:span")))
+			canInherited = true;
+
+		if (canInherited) {
+			if (content != null && !content.equals(""))
+				appendTextElements((OdfElement) lastNode, content, false);
+		} else {
+			if (content != null && !content.equals(""))
+				appendTextElements(getOdfElement(), content, false);
+		}
 	}
 
 	/**
@@ -309,9 +393,10 @@ public class Paragraph extends Component implements TextboxContainer {
 	}
 
 	/**
-	 * Return the <code>TextParagraphElementBase</code> of this paragraph. Headings and body
-	 * text paragraphs are collectively referred to as paragraph elements, so
-	 * the <code>TextParagraphElementBase</code> can be <code>TextHElement</code> element or <code>TextPElement</code> element.
+	 * Return the <code>TextParagraphElementBase</code> of this paragraph.
+	 * Headings and body text paragraphs are collectively referred to as
+	 * paragraph elements, so the <code>TextParagraphElementBase</code> can be
+	 * <code>TextHElement</code> element or <code>TextPElement</code> element.
 	 * 
 	 * @return the <code>TextParagraphElementBase</code> of this paragraph.
 	 */
@@ -384,18 +469,19 @@ public class Paragraph extends Component implements TextboxContainer {
 
 	/**
 	 * Returns outline level of this paragraph.
+	 * 
 	 * @return outline level, if this paragraph is a body text paragraph, 0 will
 	 *         be returned.
 	 * 
 	 * @since 0.6.5
 	 */
 	public int getHeadingLevel() {
-		if(isHeading()){
+		if (isHeading()) {
 			return mHeadingElement.getTextOutlineLevelAttribute();
 		}
 		return 0;
 	}
-	
+
 	/**
 	 * Sets the paragraph type, heading or body text paragraph.
 	 * 
@@ -403,21 +489,25 @@ public class Paragraph extends Component implements TextboxContainer {
 	 *            if <code>true</code>, this paragraph would be formatted as
 	 *            heading, otherwise as a body text paragraph.
 	 * @param level
-	 *            the heading outline level of this paragraph, if <code>isHeading</code>
-	 *            is <code>true</code>.
+	 *            the heading outline level of this paragraph, if
+	 *            <code>isHeading</code> is <code>true</code>.
 	 * 
 	 * @since 0.6.5
 	 */
 	public void applyHeading(boolean isHeading, int level) {
 		if (isHeading) {
-			if (!isHeading()){
+			if (!isHeading()) {
 				// create new heading element, clone children nodes.
 				OdfFileDom ownerDocument = (OdfFileDom) getOdfElement().getOwnerDocument();
 				mHeadingElement = ownerDocument.newOdfElement(TextHElement.class);
 				Node firstChild = mParagraphElement.getFirstChild();
 				while (firstChild != null) {
-					mHeadingElement.appendChild(firstChild.cloneNode(true));
+					// mHeadingElement.appendChild(firstChild.cloneNode(true));
+					// firstChild = firstChild.getNextSibling();
+					Node thisChild = firstChild;
 					firstChild = firstChild.getNextSibling();
+					mParagraphElement.removeChild(thisChild);
+					mHeadingElement.appendChild(thisChild);
 				}
 				// update style
 				mHeadingElement.setStyleName(mParagraphElement.getStyleName());
@@ -439,19 +529,21 @@ public class Paragraph extends Component implements TextboxContainer {
 				mParagraphElement = ownerDocument.newOdfElement(TextPElement.class);
 				Node firstChild = mHeadingElement.getFirstChild();
 				while (firstChild != null) {
-					mParagraphElement.appendChild(firstChild.cloneNode(true));
+					Node thisChild = firstChild;
 					firstChild = firstChild.getNextSibling();
+					mHeadingElement.removeChild(thisChild);
+					mParagraphElement.appendChild(thisChild);
 				}
 				// update style
 				mParagraphElement.setStyleName(mHeadingElement.getStyleName());
 				// unregister component
 				Component.unregisterComponent(mHeadingElement);
 				// replace heading with paragraph
-				OdfElement parentOdfElement = (OdfElement)mHeadingElement.getParentNode();
+				OdfElement parentOdfElement = (OdfElement) mHeadingElement.getParentNode();
 				parentOdfElement.replaceChild(mParagraphElement, mHeadingElement);
 				mHeadingElement = null;
 				// re-register component.
-				Component.registerComponent(this, mParagraphElement);				
+				Component.registerComponent(this, mParagraphElement);
 			}
 		}
 	}
@@ -464,7 +556,7 @@ public class Paragraph extends Component implements TextboxContainer {
 	public void applyHeading() {
 		applyHeading(true, 1);
 	}
-	
+
 	/**
 	 * Returns the font definition for this paragraph.
 	 * 
@@ -488,7 +580,7 @@ public class Paragraph extends Component implements TextboxContainer {
 	public void setFont(Font font) {
 		getStyleHandler().setFont(font);
 	}
-	
+
 	/**
 	 * Return the horizontal alignment setting of this paragraph.
 	 * <p>
@@ -516,7 +608,7 @@ public class Paragraph extends Component implements TextboxContainer {
 	public void setHorizontalAlignment(HorizontalAlignmentType alignType) {
 		getStyleHandler().setHorizontalAlignment(alignType);
 	}
-	
+
 	public Textbox addTextbox() {
 		return getTextboxContainerImpl().addTextbox();
 	}
@@ -556,9 +648,9 @@ public class Paragraph extends Component implements TextboxContainer {
 			mTextboxContainerImpl = new TextboxContainerImpl();
 		return mTextboxContainerImpl;
 	}
-	
-	private void appendTextElements(String content, boolean isWhitespaceCollapsed) {
-		OdfFileDom ownerDocument = (OdfFileDom)getOdfElement().getOwnerDocument();
+
+	static void appendTextElements(OdfElement ownerElement, String content, boolean isWhitespaceCollapsed) {
+		OdfFileDom ownerDocument = (OdfFileDom) ownerElement.getOwnerDocument();
 		if (isWhitespaceCollapsed) {
 			int i = 0, length = content.length();
 			String str = "";
@@ -576,29 +668,29 @@ public class Paragraph extends Component implements TextboxContainer {
 					} else {
 						str += ' ';
 						Text textnode = ownerDocument.createTextNode(str);
-						this.getOdfElement().appendChild(textnode);
+						ownerElement.appendChild(textnode);
 						str = "";
 						TextSElement spaceElement = ownerDocument.newOdfElement(TextSElement.class);
-						getOdfElement().appendChild(spaceElement);
+						ownerElement.appendChild(spaceElement);
 						spaceElement.setTextCAttribute(j - 1);
 					}
 				} else if (ch == '\n') {
 					if (str.length() > 0) {
 						Text textnode = ownerDocument.createTextNode(str);
-						getOdfElement().appendChild(textnode);
+						ownerElement.appendChild(textnode);
 						str = "";
 					}
 					TextLineBreakElement lineBreakElement = ownerDocument.newOdfElement(TextLineBreakElement.class);
-					getOdfElement().appendChild(lineBreakElement);
+					ownerElement.appendChild(lineBreakElement);
 					i++;
 				} else if (ch == '\t') {
 					if (str.length() > 0) {
-						Text textnode = this.getOdfElement().getOwnerDocument().createTextNode(str);
-						this.getOdfElement().appendChild(textnode);
+						Text textnode = ownerElement.getOwnerDocument().createTextNode(str);
+						ownerElement.appendChild(textnode);
 						str = "";
 					}
 					TextTabElement tabElement = ownerDocument.newOdfElement(TextTabElement.class);
-					getOdfElement().appendChild(tabElement);
+					ownerElement.appendChild(tabElement);
 					i++;
 				} else if (ch == '\r') {
 					i++;
@@ -609,11 +701,41 @@ public class Paragraph extends Component implements TextboxContainer {
 			}
 			if (str.length() > 0) {
 				Text textnode = ownerDocument.createTextNode(str);
-				getOdfElement().appendChild(textnode);
+				ownerElement.appendChild(textnode);
 			}
 		} else {
 			Text textnode = ownerDocument.createTextNode(content);
-			getOdfElement().appendChild(textnode);
+			ownerElement.appendChild(textnode);
 		}
 	}
+
+	/************ Hyperlink support ************/
+	public TextHyperlink applyHyperlink(URI linkto) {
+		return getTextHyperlinkContainerImpl().applyHyperlink(linkto);
+	}
+
+	public Iterator<TextHyperlink> getHyperlinkIterator() {
+		return getTextHyperlinkContainerImpl().getHyperlinkIterator();
+	}
+
+	public void removeHyperlinks() {
+		getTextHyperlinkContainerImpl().removeHyperlinks();
+	}
+
+	public TextHyperlink appendHyperlink(String text, URI linkto) {
+		return getTextHyperlinkContainerImpl().appendHyperlink(text, linkto);
+	}
+
+	private class TextHyperlinkContainerImpl extends AbstractTextHyperlinkContainer {
+		public TextHyperlinkContainerImpl(OdfElement parent) {
+			super(parent);
+		}
+	}
+
+	private TextHyperlinkContainerImpl getTextHyperlinkContainerImpl() {
+		if (mHyperlinkContainerImpl == null)
+			mHyperlinkContainerImpl = new TextHyperlinkContainerImpl(getOdfElement());
+		return mHyperlinkContainerImpl;
+	}
+	/************ End of Hyperlink support ************/
 }

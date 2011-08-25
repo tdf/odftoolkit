@@ -24,7 +24,9 @@ package org.odftoolkit.simple.draw;
 import java.net.URI;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeImageElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgTitleElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
@@ -250,6 +252,57 @@ public class Frame extends Component {
 		if (descElement == null)
 			descElement = mElement.newSvgDescElement();
 		descElement.setTextContent(description);
+	}
+	
+	/**
+	 * Add a hypertext reference to this frame.
+	 * 
+	 * @param linkto
+	 *            the hyperlink
+	 * @since 0.6.5
+	 * 
+	 */
+	public void setHyperlink(URI linkto) {
+		OdfElement thisFrame = getOdfElement();
+		OdfElement parent = (OdfElement) thisFrame.getParentNode();
+		// if this frame has a hyperlink setting
+		if (parent instanceof DrawAElement) {
+			((DrawAElement) parent).setXlinkHrefAttribute(linkto.toString());
+			return;
+		}
+		// if this frame has not hyperlink setting
+		Node brother = thisFrame.getNextSibling();
+		if (parent instanceof OfficeImageElement)
+			return;
+		try {
+			DrawAElement aElement = mOwnerDocument.getContentDom()
+					.newOdfElement(DrawAElement.class);
+			aElement.setXlinkHrefAttribute(linkto.toString());
+			aElement.setXlinkTypeAttribute("simple");
+			parent.removeChild(thisFrame);
+			aElement.appendChild(thisFrame);
+			if (brother == null)
+				parent.appendChild(aElement);
+			parent.insertBefore(aElement, brother);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Return the URI of hypertext reference if exists, or else, return null.
+	 * 
+	 * @return the URI of hyperlink if exists
+	 */
+	public URI getHyperlink() {
+		OdfElement thisFrame = getOdfElement();
+		OdfElement parent = (OdfElement) thisFrame.getParentNode();
+		// if this frame has a hyperlink setting
+		if (parent instanceof DrawAElement) {
+
+			return URI.create(((DrawAElement) parent).getXlinkHrefAttribute());
+		}
+		return null;
 	}
 
 	/**

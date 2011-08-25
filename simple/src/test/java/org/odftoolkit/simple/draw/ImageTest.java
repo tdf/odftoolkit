@@ -1,5 +1,6 @@
 package org.odftoolkit.simple.draw;
 
+import java.net.URI;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,7 @@ public class ImageTest {
 			Paragraph para = doc.addParagraph("");
 			Image image = Image.newImage(para, ResourceUtilities.getURI("image_list_item.png"));
 			image.setName("this image");
+			image.setHyperlink(new URI("http://odftoolkit.org"));
 			doc.save(ResourceUtilities.newTestOutputFile("imagetest.odt"));
 			Iterator<Image> iter = Image.imageIterator(para);
 			if (iter.hasNext()) {
@@ -48,6 +50,8 @@ public class ImageTest {
 			Cell cell1 = table1.getCellByPosition(0, 0);
 			Image image3 = cell1.setImage(ResourceUtilities.getURI("image_list_item.png"));
 			image3.setHorizontalPosition(FrameHorizontalPosition.LEFT);
+			image3.setHyperlink(new URI("http://odftoolkit.org"));
+			Assert.assertEquals("http://odftoolkit.org", image3.getHyperlink().toString());
 			sDoc.save(ResourceUtilities.newTestOutputFile("imges.odt"));
 
 			SpreadsheetDocument sheet = SpreadsheetDocument.newSpreadsheetDocument();

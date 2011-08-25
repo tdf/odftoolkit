@@ -1,7 +1,12 @@
 package org.odftoolkit.simple.text;
 
+import java.net.URI;
+import java.util.Iterator;
+
+import org.odftoolkit.odfdom.dom.element.text.TextAElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
@@ -21,11 +26,12 @@ import org.w3c.dom.Text;
  * 
  * @since 0.5.5
  */
-public class Span extends Component {
+public class Span extends Component implements TextHyperlinkContainer {
 
 	private TextSpanElement mSpanElement;
 	private Document mOwnerDocument;
 	private DefaultStyleHandler mStyleHandler;
+	private TextHyperlinkContainerImpl mHyperlinkContainerImpl;
 
 	private Span(TextSpanElement element) {
 		mSpanElement = element;
@@ -112,17 +118,16 @@ public class Span extends Component {
 	 * 
 	 */
 	public void removeTextContent() {
-		NodeList nodeList = mSpanElement.getChildNodes();
-		int i;
-		for (i = 0; i < nodeList.getLength(); i++) {
+		Paragraph.removeTextContentImpl(getOdfElement());
+		// remove empty hyperlink
+		NodeList nodeList = getOdfElement().getChildNodes();
+		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node node;
 			node = nodeList.item(i);
-			if (node.getNodeType() == Node.TEXT_NODE)
-				mSpanElement.removeChild(node);
-			else if (node.getNodeType() == Node.ELEMENT_NODE) {
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
 				String nodename = node.getNodeName();
-				if (nodename.equals("text:s") || nodename.equals("text:tab") || nodename.equals("text:line-break"))
-					mSpanElement.removeChild(node);
+				if (nodename.equals("text:a") && node.hasChildNodes() == false)
+					getOdfElement().removeChild(node);
 			}
 		}
 	}
@@ -137,9 +142,17 @@ public class Span extends Component {
 	 *            - the text content
 	 */
 	public void setTextContent(String content) {
-		removeTextContent();
-		if (content != null && !content.equals(""))
-			appendTextElements(content, true);
+		Paragraph.removeTextContentImpl(getOdfElement());
+		Node lastNode = getOdfElement().getLastChild();
+		if (lastNode.getNodeName() != null && lastNode.getNodeName().equals("text:a")) {
+			if (content != null && !content.equals(""))
+				Paragraph.appendTextElements((TextAElement) lastNode, content, true);
+		} else {
+			if (content != null && !content.equals(""))
+				Paragraph.appendTextElements(getOdfElement(), content, true);
+		}
+		// remove empty hyperlink
+		Paragraph.removeEmptyHyperlink(getOdfElement());
 	}
 
 	/**
@@ -150,94 +163,77 @@ public class Span extends Component {
 	 * @return - the text content of this span
 	 */
 	public String getTextContent() {
-		StringBuffer buffer = new StringBuffer();
-		NodeList nodeList = mSpanElement.getChildNodes();
-		int i;
-		for (i = 0; i < nodeList.getLength(); i++) {
-			Node node;
-			node = nodeList.item(i);
-			if (node.getNodeType() == Node.TEXT_NODE)
-				buffer.append(node.getNodeValue());
-			else if (node.getNodeType() == Node.ELEMENT_NODE) {
-				if (node.getNodeName().equals("text:s")) {
-					int count = ((TextSElement) node).getTextCAttribute();
-					for (int j = 0; j < count; j++)
-						buffer.append(' ');
-				} else if (node.getNodeName().equals("text:tab"))
-					buffer.append('\t');
-				else if (node.getNodeName().equals("text:line-break")) {
-					String lineseperator = System.getProperty("line.separator");
-					buffer.append(lineseperator);
-				}
-			}
-		}
-		return buffer.toString();
+		return Paragraph.getTextContent(getOdfElement());
 	}
 
 	/**
-	 * Append the text content at the end of this paragraph.
+	 * Append the text content at the end of this span.
+	 * <p>
+	 * The appended text would follow the style of the last character.
 	 * 
 	 * @param content
 	 *            - the text content
 	 */
 	public void appendTextContent(String content) {
-		if (content != null && !content.equals(""))
-			appendTextElements(content, true);
+		appendTextContent(content, true);
 	}
 
-	private void appendTextElements(String content, boolean isWhitespaceCollapsed) {
-		if (isWhitespaceCollapsed) {
-			int i = 0, length = content.length();
-			String str = "";
-			while (i < length) {
-				char ch = content.charAt(i);
-				if (ch == ' ') {
-					int j = 1;
-					i++;
-					while ((i < length) && (content.charAt(i) == ' ')) {
-						j++;
-						i++;
-					}
-					if (j == 1) {
-						str += ' ';
-					} else {
-						str += ' ';
-						Text textnode = mSpanElement.getOwnerDocument().createTextNode(str);
-						mSpanElement.appendChild(textnode);
-						str = "";
-						TextSElement spaceElement = mSpanElement.newTextSElement();
-						spaceElement.setTextCAttribute(j - 1);
-					}
-				} else if (ch == '\n') {
-					if (str.length() > 0) {
-						Text textnode = mSpanElement.getOwnerDocument().createTextNode(str);
-						mSpanElement.appendChild(textnode);
-						str = "";
-					}
-					mSpanElement.newTextLineBreakElement();
-					i++;
-				} else if (ch == '\t') {
-					if (str.length() > 0) {
-						Text textnode = mSpanElement.getOwnerDocument().createTextNode(str);
-						mSpanElement.appendChild(textnode);
-						str = "";
-					}
-					mSpanElement.newTextTabElement();
-					i++;
-				} else if (ch == '\r') {
-					i++;
-				} else {
-					str += ch;
-					i++;
-				}
-			}
-			if (str.length() > 0) {
-				Text textnode = mSpanElement.getOwnerDocument().createTextNode(str);
-				mSpanElement.appendChild(textnode);
-			}
+	/**
+	 * Append the text content at the end of this span.
+	 * <p>
+	 * The appended text would follow the style of the last character if the
+	 * second parameter is set to true; Or else, the appended text would follow
+	 * the default style of this paragraph.
+	 * 
+	 * @param content
+	 *            - the text content
+	 * @param isStyleInherited
+	 *            - whether the hyperlink style would be inherited by the
+	 *            appended text
+	 */
+	public void appendTextContent(String content, boolean isStyleInherited) {
+		boolean canInherited = false;
+		Node lastNode = getOdfElement().getLastChild();
+		if (lastNode != null && lastNode.getNodeName() != null && lastNode.getNodeName().equals("text:a"))
+			canInherited = true;
+
+		if (isStyleInherited && canInherited) {
+			if (content != null && !content.equals(""))
+				Paragraph.appendTextElements((OdfElement) lastNode, content, true);
 		} else {
-			Text textnode = mSpanElement.getOwnerDocument().createTextNode(content);
-			mSpanElement.appendChild(textnode);
+			if (content != null && !content.equals(""))
+				Paragraph.appendTextElements(getOdfElement(), content, true);
 		}
 	}
+
+	/************ Hyperlink support ************/
+	public TextHyperlink applyHyperlink(URI linkto) {
+		return getTextHyperlinkContainerImpl().applyHyperlink(linkto);
+	}
+
+	public Iterator<TextHyperlink> getHyperlinkIterator() {
+		return getTextHyperlinkContainerImpl().getHyperlinkIterator();
+	}
+
+	public void removeHyperlinks() {
+		getTextHyperlinkContainerImpl().removeHyperlinks();
+	}
+	
+	public TextHyperlink appendHyperlink(String text, URI linkto) {
+		return getTextHyperlinkContainerImpl().appendHyperlink(text, linkto);
+	}
+
+	private class TextHyperlinkContainerImpl extends AbstractTextHyperlinkContainer {
+		public TextHyperlinkContainerImpl(OdfElement parent) {
+			super(parent);
+		}
+	}
+
+	private TextHyperlinkContainerImpl getTextHyperlinkContainerImpl() {
+		if (mHyperlinkContainerImpl == null)
+			mHyperlinkContainerImpl = new TextHyperlinkContainerImpl(getOdfElement());
+		return mHyperlinkContainerImpl;
+	}
+	/************ End of Hyperlink support ************/
+
 }

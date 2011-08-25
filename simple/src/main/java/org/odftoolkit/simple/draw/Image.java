@@ -32,29 +32,22 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
+import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
-import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
-import org.odftoolkit.odfdom.dom.element.svg.SvgTitleElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.type.AnyURI;
-import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.odfdom.type.Length;
 import org.odftoolkit.odfdom.type.Length.Unit;
 import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
-import org.odftoolkit.simple.style.GraphicProperties;
 import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.AnchorType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.FrameHorizontalPosition;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.FrameVerticalPosition;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalRelative;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
-import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.text.AbstractParagraphContainer;
 import org.odftoolkit.simple.text.Paragraph;
 import org.w3c.dom.DOMException;
@@ -109,6 +102,28 @@ public class Image extends Component {
 		return myImage;
 
 	}
+	
+	/**
+	 * Add a hypertext reference to this image.
+	 * 
+	 * @param linkto
+	 *            the hyperlink
+	 * @since 0.6.5
+	 * 
+	 */
+	public void setHyperlink(URI linkto) {
+		mFrame.setHyperlink(linkto);
+	}	
+	
+	/**
+	 * Return the URI of hypertext reference if exists, or else, return null.
+	 * 
+	 * @return the URI of hyperlink if exists
+	 */
+	public URI getHyperlink() {
+		return mFrame.getHyperlink();
+	}
+	
 
 	/**
 	 * Get the owner document of this image

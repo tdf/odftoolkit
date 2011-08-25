@@ -21,6 +21,8 @@
  ************************************************************************/
 package org.odftoolkit.simple.text;
 
+import java.net.URI;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -250,6 +252,62 @@ public class ParagraphTest {
 			Assert.assertEquals(3, textParagraph.getHeadingLevel());
 
 			doc.save(ResourceUtilities.newTestOutputFile("TestParagraphSetGetHeading.odt"));
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail();
+		}
+	}
+	
+	@Test
+	public void testHyperlink() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Paragraph para = doc.addParagraph("abc");
+			TextHyperlink link1 = para.applyHyperlink(new URI("http://odftoolkit.org"));
+			Assert.assertEquals("http://odftoolkit.org", link1.getURI().toString());
+			Assert.assertEquals("abc", link1.getTextContent());
+			
+			String text = para.getTextContent();
+			Assert.assertEquals("abc", text);
+			
+			para.removeTextContent();
+			text = para.getTextContent();
+			Assert.assertEquals("", text);
+			para.setTextContent("no hyperlink there ");
+			para.appendHyperlink("link to ibm", new URI("http://www.ibm.com"));
+			
+			Paragraph heading = doc.addParagraph("Heading1");
+			TextHyperlink link2 = heading.applyHyperlink(new URI("mailto:daisy@odftoolkit.org"));
+			heading.applyHeading(true, 1);
+			
+			link2.setTextContent("New Heading1");
+			link2.setURI(new URI("mailto:devin@odftoolkit.org"));
+			Assert.assertEquals("mailto:devin@odftoolkit.org", link2.getURI().toString());
+			
+			Paragraph para3 = doc.addParagraph("world");
+			TextHyperlink link3 = para3.applyHyperlink(new URI("http://odftoolkit.org"));
+			link3.setTextContent("new world");
+			para3.appendTextContent("_prefix");
+			para3.appendTextContent("_nolink",false);
+			
+			doc.save(ResourceUtilities.newTestOutputFile("TestParagraphHyperlink.odt"));
+			
+			TextDocument textdoc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("TestParagraphHyperlink.odt"));
+			Iterator<TextHyperlink> linkList = textdoc.getParagraphByReverseIndex(1, true).getHyperlinkIterator();
+			if (linkList.hasNext())
+			{
+				TextHyperlink aLink = linkList.next();
+				Assert.assertEquals("New Heading1",aLink.getTextContent());
+				Assert.assertEquals("mailto:devin@odftoolkit.org",aLink.getURI().toString());
+			}
+			
+			linkList = textdoc.getParagraphByReverseIndex(0, true).getHyperlinkIterator();
+			if (linkList.hasNext())
+			{
+				TextHyperlink aLink = linkList.next();
+				Assert.assertEquals("new world_prefix",aLink.getTextContent());
+				Assert.assertEquals("http://odftoolkit.org",aLink.getURI().toString());
+			}
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail();
