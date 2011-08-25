@@ -156,7 +156,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 		CHART_TEMPLATE("application/vnd.oasis.opendocument.chart-template", "otc"), 
 		FORMULA("application/vnd.oasis.opendocument.formula", "odf"), 
 		FORMULA_TEMPLATE("application/vnd.oasis.opendocument.formula-template", "otf"), 
-		DATABASE_FRONT_END("application/vnd.oasis.opendocument.base", "otf"), 
+		DATABASE_FRONT_END("application/vnd.oasis.opendocument.base", "odb"), 
 		GRAPHICS("application/vnd.oasis.opendocument.graphics", "odg"), 
 		GRAPHICS_TEMPLATE("application/vnd.oasis.opendocument.graphics-template", "otg"), 
 		IMAGE("application/vnd.oasis.opendocument.image", "odi"), 

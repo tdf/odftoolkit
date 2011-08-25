@@ -21,6 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.simple.text;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
@@ -33,6 +36,10 @@ import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Component;
+import org.odftoolkit.simple.common.field.Fields;
+import org.odftoolkit.simple.common.field.VariableContainer;
+import org.odftoolkit.simple.common.field.VariableField;
+import org.odftoolkit.simple.common.field.VariableField.VariableType;
 import org.odftoolkit.simple.table.AbstractTableContainer;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.table.TableContainer;
@@ -45,7 +52,7 @@ import org.w3c.dom.NodeList;
  * 
  * @since 0.4.5
  */
-public class Footer extends Component implements TableContainer {
+public class Footer extends Component implements TableContainer, VariableContainer {
 	private StyleFooterElement footerEle;
 	private TableContainerImpl tableContainerImpl;
 
@@ -96,7 +103,31 @@ public class Footer extends Component implements TableContainer {
 	public OdfElement getTableContainerElement() {
 		return getTableContainerImpl().getTableContainerElement();
 	}
+	
+	public VariableField declareVariable(String name, VariableType type) {
+		VariableField variableField = null;
+		switch (type) {
+		case SIMPLE:
+			variableField = Fields.createSimpleVariableField(this, name);
+			break;
+		case USER:
+			variableField = Fields.createUserVariableField(this, name, "0");
+			break;
+		case SEQUENCE:
+			throw new IllegalArgumentException("Simple Java API for ODF doesn't support this type now.");
+		}
+		return variableField;
+	}
 
+	public OdfElement getVariableContainerElement() {
+		try {
+			return footerEle;
+		} catch (Exception e) {
+			Logger.getLogger(Footer.class.getName()).log(Level.SEVERE, null, e);
+			return null;
+		}
+	}
+	
 	private TableContainer getTableContainerImpl() {
 		if (tableContainerImpl == null) {
 			tableContainerImpl = new TableContainerImpl();

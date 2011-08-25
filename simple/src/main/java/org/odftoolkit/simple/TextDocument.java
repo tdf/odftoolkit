@@ -41,6 +41,10 @@ import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.simple.common.field.Fields;
+import org.odftoolkit.simple.common.field.VariableContainer;
+import org.odftoolkit.simple.common.field.VariableField;
+import org.odftoolkit.simple.common.field.VariableField.VariableType;
 import org.odftoolkit.simple.text.AbstractParagraphContainer;
 import org.odftoolkit.simple.text.Footer;
 import org.odftoolkit.simple.text.Header;
@@ -58,7 +62,7 @@ import org.w3c.dom.NodeList;
  * This class represents an empty ODF text document.
  * 
  */
-public class TextDocument extends Document implements ListContainer, ParagraphContainer {
+public class TextDocument extends Document implements ListContainer, ParagraphContainer, VariableContainer {
 
 	private static final String EMPTY_TEXT_DOCUMENT_PATH = "/OdfTextDocument.odt";
 	static final Resource EMPTY_TEXT_DOCUMENT_RESOURCE = new Resource(EMPTY_TEXT_DOCUMENT_PATH);
@@ -580,5 +584,29 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 
 	public OdfElement getParagraphContainerElement() {
 		return getParagraphContainerImpl().getParagraphContainerElement();
+	}
+
+	public VariableField declareVariable(String name, VariableType type) {
+		VariableField variableField = null;
+		switch (type) {
+		case SIMPLE:
+			variableField = Fields.createSimpleVariableField(this, name);
+			break;
+		case USER:
+			variableField = Fields.createUserVariableField(this, name, "0");
+			break;
+		case SEQUENCE:
+			throw new IllegalArgumentException("Simple Java API for ODF doesn't support this type now.");
+		}
+		return variableField;
+	}
+
+	public OdfElement getVariableContainerElement() {
+		try {
+			return this.getContentRoot();
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+			return null;
+		}
 	}
 }

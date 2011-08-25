@@ -55,7 +55,7 @@ import org.w3c.dom.Node;
  */
 public class TextSelection extends Selection {
 
-	private String mMatchedText;
+	String mMatchedText;
 	private OdfTextParagraph mParagraph;
 	private OdfTextHeading mHeading;
 	private int mIndexInContainer;
@@ -300,6 +300,9 @@ public class TextSelection extends Selection {
 	@Override
 	protected void refresh(int offset) {
 		mIndexInContainer += offset;
+		if(mIndexInContainer<0){
+			mIndexInContainer = 0;
+		}
 	}
 
 	/*
