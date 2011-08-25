@@ -153,6 +153,28 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<configuration>
+							<tasks>
+								<copy file="./README.txt"
+									tofile="./target/README.txt" overwrite="yes">
+									<filterset>
+										<filter token="VERSION" value="${project.version}" />
+										<filter token="DATE" value="${build.timestamp}" />
+									</filterset>
+								</copy>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> 
 		</plugins>
 		<extensions>
 			<extension>
@@ -437,34 +459,22 @@
 			https://issues.sonatype.org/browse/OSSRH-1321
 		-->
 		<profile>
-			<id>release-sign-artifacts</id>
+			<id>release-javadoc</id>
 			<activation>
 				<property>
-					<name>performRelease</name>
+					<name>deploy</name>
 					<value>true</value>
 				</property>
 			</activation>
 			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.1</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
+				<defaultGoal>site</defaultGoal>
 			</build>
+			<properties>
+				<project.reporting.outputDirectory>target/site/apidocs</project.reporting.outputDirectory>
+			</properties>
 			<distributionManagement>
 				<site>
-					<id>simple-odf</id>
+					<id>simple-odf-website</id>
 					<name>Simple Java API for ODF Project</name>
 					<url>dav:https://odftoolkit.org/website/simple/${project.version}/simple</url>
 				</site>
