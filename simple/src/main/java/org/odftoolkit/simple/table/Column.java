@@ -230,7 +230,11 @@ public class Column {
 	}
 
 	private void setRelativeWidth(long relWidth) {
-		maColumnElement.setProperty(OdfTableColumnProperties.RelColumnWidth, String.valueOf(relWidth) + "*");
+		if (relWidth < 40) {
+			maColumnElement.setProperty(OdfTableColumnProperties.RelColumnWidth, String.valueOf(40) + "*");
+		} else {
+			maColumnElement.setProperty(OdfTableColumnProperties.RelColumnWidth, String.valueOf(relWidth) + "*");
+		}
 	}
 
 	/**
