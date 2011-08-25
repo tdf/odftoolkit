@@ -1076,7 +1076,7 @@ public class TableCellTest {
 			Table table1 = document.getTableByName("Sheet1");
 			Cell cell1 = table1.getCellByPosition("A1");
 			cell1.setStringValue("abcdefg");
-			Font font1 = new Font("Arial", StyleTypeDefinitions.FontStyle.ITALIC, 12, Color.BLACK);
+			Font font1 = new Font("Arial", StyleTypeDefinitions.FontStyle.ITALIC, 12, Color.BLACK, StyleTypeDefinitions.TextLinePosition.THROUGH);
 			cell1.setFont(font1);
 			Font font11 = cell1.getFont();
 			System.out.println(font11);
@@ -1085,7 +1085,7 @@ public class TableCellTest {
 
 			Cell cell2 = table1.getCellByPosition("A2");
 			cell2.setStringValue("redstring");
-			Font font2 = new Font("Arial", StyleTypeDefinitions.FontStyle.ITALIC, 12, Color.RED);
+			Font font2 = new Font("Arial", StyleTypeDefinitions.FontStyle.ITALIC, 12, Color.RED, StyleTypeDefinitions.TextLinePosition.UNDER);
 			cell2.setFont(font2);
 			Font font22 = cell2.getFont();
 			System.out.println(font22);

@@ -36,15 +36,16 @@ public class Font {
 	String familyName; // svg:font-family
 	String fontName; // style:name @ <style:font-face>
 	StyleTypeDefinitions.FontStyle simpleFontStyle; // fo:font-style,
+	StyleTypeDefinitions.TextLinePosition textLinePosition; //style:text-line-through-style and style:text-underline-style
 	// fo:font-weight
 	double size; // fo:font-size
 	// Locale language;
 	Color color;
 
 	/**
-	 * Create a font with specific family name, style and size.
+	 * Create a font with specific family name, font style, and size.
 	 * 
-	 * @param familyName
+	 * @param fontFamilyName
 	 *            - the family name
 	 * @param simpleFontStyle
 	 *            - the font style
@@ -54,13 +55,33 @@ public class Font {
 	public Font(String fontFamilyName, StyleTypeDefinitions.FontStyle simpleFontStyle, double fontSize) {
 		this.familyName = fontFamilyName;
 		this.simpleFontStyle = simpleFontStyle;
+		this.textLinePosition = StyleTypeDefinitions.TextLinePosition.REGULAR;
 		this.size = fontSize;
 	}
 
 	/**
-	 * Create a font with specific family name, style, size and front color.
+	 * Create a font with specific family name, font style, size and line position.
 	 * 
-	 * @param familyName
+	 * @param fontFamilyName
+	 *            - the family name
+	 * @param simpleFontStyle
+	 *            - the font style
+	 * @param fontSize
+	 *            - the size
+	 * @param textLinePosition
+	 * 			  - the line position
+	 */
+	public Font(String fontFamilyName, StyleTypeDefinitions.FontStyle simpleFontStyle, double fontSize, StyleTypeDefinitions.TextLinePosition textLinePosition) {
+		this.familyName = fontFamilyName;
+		this.simpleFontStyle = simpleFontStyle;
+		this.textLinePosition = textLinePosition;
+		this.size = fontSize;
+	}
+
+	/**
+	 * Create a font with specific family name, style, size, and front color.
+	 * 
+	 * @param fontFamilyName
 	 *            - the family name
 	 * @param simpleFontStyle
 	 *            - the font style
@@ -72,6 +93,29 @@ public class Font {
 	public Font(String fontFamilyName, StyleTypeDefinitions.FontStyle simpleFontStyle, double fontSize, Color color) {
 		this.familyName = fontFamilyName;
 		this.simpleFontStyle = simpleFontStyle;
+		this.textLinePosition = StyleTypeDefinitions.TextLinePosition.REGULAR;
+		this.size = fontSize;
+		this.color = color;
+	}
+
+	/**
+	 * Create a font with specific family name, style, size, front color and line position
+	 * 
+	 * @param fontFamilyName
+	 *            - the family name
+	 * @param simpleFontStyle
+	 *            - the font style
+	 * @param fontSize
+	 *            - the size
+	 * @param color
+	 *            - the front color
+	 * @param textLinePosition
+	 * 			  - the line position
+	 */
+	public Font(String fontFamilyName, StyleTypeDefinitions.FontStyle simpleFontStyle, double fontSize, Color color, StyleTypeDefinitions.TextLinePosition textLinePosition) {
+		this.familyName = fontFamilyName;
+		this.simpleFontStyle = simpleFontStyle;
+		this.textLinePosition = textLinePosition;
 		this.size = fontSize;
 		this.color = color;
 	}
@@ -80,7 +124,7 @@ public class Font {
 	 * Create a font with specific family name, style, size for a specific
 	 * character. For example, a font style setting for English character.
 	 * 
-	 * @param familyName
+	 * @param fontFamilyName
 	 *            - the family name
 	 * @param simpleFontStyle
 	 *            - the font style
@@ -92,15 +136,16 @@ public class Font {
 	public Font(String fontFamilyName, StyleTypeDefinitions.FontStyle simpleFontStyle, double fontSize, Locale language) {
 		this.familyName = fontFamilyName;
 		this.simpleFontStyle = simpleFontStyle;
+		this.textLinePosition = StyleTypeDefinitions.TextLinePosition.REGULAR;
 		this.size = fontSize;
 	}
 
 	/**
-	 * Create a font with specific family name, style, size and color for a
+	 * Create a font with specific family name, style, size, and color for a
 	 * specific character. For example, a font style setting for English
 	 * character.
 	 * 
-	 * @param familyName
+	 * @param fontFamilyName
 	 *            - the family name
 	 * @param simpleFontStyle
 	 *            - the font style
@@ -111,10 +156,37 @@ public class Font {
 	 * @param language
 	 *            - the character information
 	 */
-	public Font(String fontFamilyName, StyleTypeDefinitions.FontStyle simpleFontStyle, double fontSize, Color color,
+	public Font(String fontFamilyName, StyleTypeDefinitions.FontStyle simpleFontStyle, double fontSize, Color color, Locale language) {
+		this.familyName = fontFamilyName;
+		this.simpleFontStyle = simpleFontStyle;
+		this.textLinePosition = StyleTypeDefinitions.TextLinePosition.REGULAR;
+		this.size = fontSize;
+		this.color = color;
+	}
+	
+	/**
+	 * Create a font with specific family name, style, size, color, and line position for a
+	 * specific character. For example, a font style setting for English
+	 * character.
+	 * 
+	 * @param fontFamilyName
+	 *            - the family name
+	 * @param simpleFontStyle
+	 *            - the font style
+	 * @param fontSize
+	 *            - the size
+	 * @param color
+	 *            - the front color
+	 * @param textLinePosition
+	 * 			  - the line position
+	 * @param language
+	 *            - the character information
+	 */
+	public Font(String fontFamilyName, StyleTypeDefinitions.FontStyle simpleFontStyle, double fontSize, Color color, StyleTypeDefinitions.TextLinePosition textLinePosition,
 			Locale language) {
 		this.familyName = fontFamilyName;
 		this.simpleFontStyle = simpleFontStyle;
+		this.textLinePosition = textLinePosition;
 		this.size = fontSize;
 		this.color = color;
 	}
@@ -184,6 +256,25 @@ public class Font {
 		this.simpleFontStyle = simpleFontStyle;
 	}
 
+	/**
+	 * Get the font text line position
+	 * 
+	 * @return the font text line position
+	 */
+	public StyleTypeDefinitions.TextLinePosition getTextLinePosition() {
+		return textLinePosition;
+	}
+
+	/**
+	 * Set the font text line position
+	 * 
+	 * @param textLinePosition
+	 *            - the font text line position
+	 */
+	public void setTextLinePosition(StyleTypeDefinitions.TextLinePosition textLinePosition) {
+		this.textLinePosition = textLinePosition;
+	}
+	
 	/**
 	 * Return the font size in measurement point(PT).
 	 * 

@@ -228,7 +228,7 @@ public class Cell {
 	 * 
 	 * @param horizontalAlignment
 	 *            the horizontal alignment setting.
-	 * @see #setHorizontalAlignment(HorizontalAlignmentType)
+	 * @see #setHorizontalAlignment(StyleTypeDefinitions.HorizontalAlignmentType)
 	 * @deprecated As of Simple version 0.3, replaced by
 	 *             <code>setHorizontalAlignment(SimpleHorizontalAlignmentType)</code>
 	 */
@@ -311,7 +311,7 @@ public class Cell {
 	 * 
 	 * @param verticalAlignment
 	 *            the vertical alignment setting.
-	 * @see #setVerticalAlignment(VerticalAlignmentType)
+	 * @see #setVerticalAlignment(StyleTypeDefinitions.VerticalAlignmentType)
 	 * @deprecated As of Simple version 0.3, replaced by
 	 *             <code>setVerticalAlignment(SimpleVerticalAlignmentType)</code>
 	 */
@@ -1903,8 +1903,8 @@ public class Cell {
 	 * @param border
 	 *            - border style description
 	 * 
-	 * @see CellStyleHandler#setBorders(Border border, CellBordersType
-	 *      bordersType)
+	 * @see CellStyleHandler#setBorders(Border border,
+	 *      StyleTypeDefinitions.CellBordersType bordersType)
 	 * @since 0.3
 	 */
 	public void setBorders(StyleTypeDefinitions.CellBordersType bordersType, Border border) {
@@ -1921,7 +1921,8 @@ public class Cell {
 	 *            - the border type which describes a single border
 	 * @return the border setting
 	 * 
-	 * @see CellStyleHandler#getBorder(CellBordersType type)
+	 * @see CellStyleHandler#getBorder(StyleTypeDefinitions.CellBordersType
+	 *      type)
 	 * @since 0.3.5
 	 */
 	public Border getBorder(CellBordersType type) {

@@ -38,11 +38,13 @@ import org.odftoolkit.simple.Document.ScriptType;
 import org.odftoolkit.simple.style.Border;
 import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.ParagraphProperties;
+import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.TableCellProperties;
 import org.odftoolkit.simple.style.TextProperties;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.FontStyle;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.TextLinePosition;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -495,6 +497,8 @@ public class CellStyleHandler {
 			target.setSize(source.getSize());
 		if (target.getFontStyle() == null && source.getFontStyle() != null)
 			target.setFontStyle(source.getFontStyle());
+		if (target.getTextLinePosition() == null && source.getTextLinePosition() != null)
+			target.setTextLinePosition(source.getTextLinePosition());
 	}
 
 	/**
@@ -517,10 +521,10 @@ public class CellStyleHandler {
 		if (textProperties != null)
 			font = textProperties.getFont(type);
 		else
-			font = new Font(null, null, 0);
+			font = new Font(null, null, 0, (StyleTypeDefinitions.TextLinePosition)null);
 
 		if (font != null && font.getFamilyName() != null && font.getColor() != null && font.getSize() != 0
-				&& font.getFontStyle() != null)
+				&& font.getFontStyle() != null && font.getTextLinePosition() != null)
 			return font;
 
 		boolean isDefault = isUseDefaultStyle;
@@ -531,8 +535,8 @@ public class CellStyleHandler {
 			TextProperties parentStyleSetting = TextProperties.getTextProperties(parentStyle);
 			Font tempFont = parentStyleSetting.getFont(type);
 			mergeFont(font, tempFont);
-			if (font.getFamilyName() != null && font.getColor() != null && font.getSize() != 0
-					&& font.getFontStyle() != null) {
+			if (font.getFamilyName() != null && font.getColor() != null && font.getSize() > 0
+					&& font.getFontStyle() != null && font.getTextLinePosition() != null) {
 				return font;
 			}
 			// continue to get parent properties
@@ -552,6 +556,8 @@ public class CellStyleHandler {
 			font.setColor(Color.BLACK);
 		if (font.getFontStyle() == null)
 			font.setFontStyle(FontStyle.REGULAR);
+		if (font.getTextLinePosition() == null)
+			font.setTextLinePosition(TextLinePosition.REGULAR);
 
 		return font;
 	}
@@ -612,7 +618,7 @@ public class CellStyleHandler {
 	 *            - the country information
 	 * @param type
 	 *            - script type
-	 * @see TextProperties#setCountry(String, ScriptType)
+	 * @see TextProperties#setCountry(String, Document.ScriptType)
 	 * @see org.odftoolkit.simple.Document.ScriptType
 	 */
 	public void setCountry(String country, ScriptType type) {
@@ -989,5 +995,4 @@ public class CellStyleHandler {
 			return HorizontalAlignmentType.DEFAULT;
 		return tempAlign;
 	}
-
 }

@@ -44,6 +44,11 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleFontWeightAsianAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleFontWeightComplexAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleLanguageAsianAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleLanguageComplexAttribute;
+import org.odftoolkit.odfdom.dom.attribute.style.StyleTextLineThroughColorAttribute;
+import org.odftoolkit.odfdom.dom.attribute.style.StyleTextLineThroughStyleAttribute;
+import org.odftoolkit.odfdom.dom.attribute.style.StyleTextUnderlineColorAttribute;
+import org.odftoolkit.odfdom.dom.attribute.style.StyleTextUnderlineStyleAttribute;
+import org.odftoolkit.odfdom.dom.attribute.style.StyleTextUnderlineWidthAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.element.office.OfficeFontFaceDeclsElement;
@@ -224,6 +229,27 @@ public class TextProperties {
 
 		return null;
 	}
+	
+	/**
+	 * Return the font text line style
+	 * <p>
+	 * TextLineStyle.REGULAR will be returned if there is no text line style setting
+	 * 
+	 * @return the font style
+	 */
+	public StyleTypeDefinitions.TextLinePosition getTextLineStyle() {
+		String throughLine = mElement.getStyleTextLineThroughStyleAttribute();
+		String underLine = mElement.getStyleTextUnderlineStyleAttribute();
+		if (throughLine ==null && underLine == null)
+			return StyleTypeDefinitions.TextLinePosition.REGULAR;
+		if (throughLine !=null && underLine == null)
+			return StyleTypeDefinitions.TextLinePosition.THROUGH;
+		if (throughLine !=null && underLine != null)
+			return StyleTypeDefinitions.TextLinePosition.THROUGHUNDER;
+		if (throughLine ==null && underLine != null)
+			return StyleTypeDefinitions.TextLinePosition.UNDER;
+		return null;
+	}
 
 	/**
 	 * Return the font style for a specific script type
@@ -301,6 +327,42 @@ public class TextProperties {
 		case REGULAR:
 			mElement.removeAttribute(FoFontStyleAttribute.ATTRIBUTE_NAME.getQName());
 			mElement.removeAttribute(FoFontWeightAttribute.ATTRIBUTE_NAME.getQName());
+		}
+	}
+
+	/**
+	 * Set the font text line style for characters
+	 * <p>
+	 * If the parameter <code>style</code> is REGULAR, the font text line style
+	 * setting for characters will be removed.
+	 * 
+	 * @param style
+	 *            - the font text line style
+	 */
+	public void setTextLineStyle(StyleTypeDefinitions.TextLinePosition style) {
+		switch (style) {
+		case THROUGH:
+			mElement.setStyleTextLineThroughStyleAttribute(StyleTypeDefinitions.LineStyle.SOLID.toString());
+			mElement.setStyleTextLineThroughColorAttribute("font-color");
+			break;
+		case UNDER:
+			mElement.setStyleTextUnderlineStyleAttribute(StyleTypeDefinitions.LineStyle.SOLID.toString());
+			mElement.setStyleTextUnderlineWidthAttribute("auto");
+			mElement.setStyleTextUnderlineColorAttribute("font-color");
+			break;
+		case THROUGHUNDER:
+			mElement.setStyleTextLineThroughStyleAttribute(StyleTypeDefinitions.LineStyle.SOLID.toString());
+			mElement.setStyleTextLineThroughColorAttribute("font-color");
+			mElement.setStyleTextUnderlineStyleAttribute(StyleTypeDefinitions.LineStyle.SOLID.toString());
+			mElement.setStyleTextUnderlineWidthAttribute("auto");
+			mElement.setStyleTextUnderlineColorAttribute("font-color");
+			break;
+		case REGULAR:
+			mElement.removeAttribute(StyleTextLineThroughStyleAttribute.ATTRIBUTE_NAME.getQName());
+			mElement.removeAttribute(StyleTextLineThroughColorAttribute.ATTRIBUTE_NAME.getQName());
+			mElement.removeAttribute(StyleTextUnderlineStyleAttribute.ATTRIBUTE_NAME.getQName());
+			mElement.removeAttribute(StyleTextUnderlineWidthAttribute.ATTRIBUTE_NAME.getQName());
+			mElement.removeAttribute(StyleTextUnderlineColorAttribute.ATTRIBUTE_NAME.getQName());
 		}
 	}
 
@@ -823,7 +885,8 @@ public class TextProperties {
 			familyName = getFontFamilyName(type);
 		double size = getFontSizeInPoint(type);
 		StyleTypeDefinitions.FontStyle fontStyle = getFontStyle(type);
-		Font aFont = new Font(familyName, fontStyle, size);
+		StyleTypeDefinitions.TextLinePosition lineStyle = getTextLineStyle();
+		Font aFont = new Font(familyName, fontStyle, size, lineStyle);
 
 		Color color = getFontColor();
 		// String language = getLanguage(type);
@@ -1003,7 +1066,6 @@ public class TextProperties {
 		if (fontName == null)
 			return;
 		font.setFontName(fontName);
-
 		switch (type) {
 		case WESTERN:
 			setFontName(font.getFontName(), Document.ScriptType.WESTERN);
@@ -1033,6 +1095,7 @@ public class TextProperties {
 			}
 			break;
 		}
+		setTextLineStyle(font.getTextLinePosition());
 	}
 
 	/**

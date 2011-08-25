@@ -30,6 +30,7 @@ import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.FontStyle;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.TextLinePosition;
 import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.CellStyleHandler;
 import org.odftoolkit.simple.table.Table;
@@ -41,10 +42,10 @@ public class FontTest {
 
 	@Test
 	public void testGetSetFont() {
-		Font font1Base = new Font("Arial", FontStyle.ITALIC, 10, Color.BLACK);
-		Font font2Base = new Font("'Times New Roman'", FontStyle.REGULAR, (float) 13.95, new Color("#ff3333"));
-		Font font3Base = new Font("SimSun", FontStyle.BOLD, 8, Color.BLACK);
-		Font font4Base = new Font("Arial", FontStyle.REGULAR, 10, Color.BLACK);
+		Font font1Base = new Font("Arial", FontStyle.ITALIC, 10, Color.BLACK, TextLinePosition.THROUGH);
+		Font font2Base = new Font("'Times New Roman'", FontStyle.REGULAR, (float) 13.95, new Color("#ff3333"), TextLinePosition.THROUGHUNDER);
+		Font font3Base = new Font("SimSun", FontStyle.BOLD, 8, Color.BLACK, TextLinePosition.REGULAR);
+		Font font4Base = new Font("Arial", FontStyle.REGULAR, 10, Color.BLACK, TextLinePosition.UNDER);
 		try {
 			SpreadsheetDocument doc = SpreadsheetDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream(filename));

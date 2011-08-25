@@ -92,6 +92,26 @@ public class StyleTypeDefinitions {
 			return fontStyle;
 		}
 	}
+	
+	/**
+	 * Common used font text line position from users perspective.
+	 * <p>Currently, only support underline and strike through.
+	 * 
+	 */
+	public static enum TextLinePosition {
+		REGULAR("Regular"), THROUGH("Through"), UNDER("Under"), THROUGHUNDER("Through_Under");
+
+		private String textLineStyle;
+
+		TextLinePosition(String style) {
+			this.textLineStyle = style;
+		}
+
+		@Override
+		public String toString() {
+			return textLineStyle;
+		}
+	}
 
 	/**
 	 * Common used style of line lining through text from users perspective
