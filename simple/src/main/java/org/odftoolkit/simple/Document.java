@@ -22,7 +22,11 @@
  ************************************************************************/
 package org.odftoolkit.simple;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
@@ -30,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -39,6 +44,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -78,6 +85,8 @@ import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.type.Duration;
+import org.odftoolkit.simple.Document;
+import org.odftoolkit.simple.PresentationDocument;
 import org.odftoolkit.simple.meta.Meta;
 import org.odftoolkit.simple.table.AbstractTableContainer;
 import org.odftoolkit.simple.table.Table;
@@ -100,6 +109,14 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	private TableContainerImpl tableContainerImpl;
 	private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
 	private static final String EMPTY_STRING = "";
+	
+	// FIXME: This field is only used in method copyResourcesFrom to improve
+	// copy performance, should not be used in any other way.
+	// methods loadDocument(String documentPath) and loadDocument(File file)
+	// will initialize it.
+	// This field and its methods should be removed after ODFDOM supplies batch
+	// copy.
+	private File mFile = null;
 
 	// if the copy foreign slide for several times,
 	// the same style might be copied for several times with the different name
@@ -241,7 +258,10 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 *             - if the document could not be created.
 	 */
 	public static Document loadDocument(String documentPath) throws Exception {
-		return loadDocument(OdfPackage.loadPackage(documentPath));
+		File file = new File(documentPath);
+		Document doc = loadDocument(OdfPackage.loadPackage(documentPath));
+		doc.setFile(file);
+		return doc;
 	}
 
 	/**
@@ -280,7 +300,9 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 *             - if the document could not be created.
 	 */
 	public static Document loadDocument(File file) throws Exception {
-		return loadDocument(OdfPackage.loadPackage(file));
+		Document doc = loadDocument(OdfPackage.loadPackage(file));
+		doc.setFile(file);
+		return doc;
 	}
 
 	/**
@@ -1427,6 +1449,303 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * <p>
 	 * If the target package contains a resource with the same path and name,
 	 * the name of the resource will be renamed.
+	 * <p>
+	 * This method will copy resources all in one batch.
+	 * 
+	 * @param sourceCloneEle
+	 *            - the element that need to be copied
+	 * @param srcDocument
+	 *            - the source document
+	 */
+	void copyLinkedRefInBatch(OdfElement sourceCloneEle, Document srcDocument) {
+		try {
+			OdfFileDom fileDom = (OdfFileDom) sourceCloneEle.getOwnerDocument();
+			XPath xpath;
+			if (fileDom instanceof OdfContentDom) {
+				xpath = ((OdfContentDom) fileDom).getXPath();
+			} else {
+				xpath = ((OdfStylesDom) fileDom).getXPath();
+			}
+			// OdfPackageDocument srcDoc = fileDom.getDocument();
+			// new a map to put the original name and the rename string, in case
+			// that the same name might be referred by the slide several times.
+			HashMap<String, String> objectRenameMap = new HashMap<String, String>();
+			NodeList linkNodes = (NodeList) xpath.evaluate(".//*[@xlink:href]", sourceCloneEle, XPathConstants.NODESET);
+			for (int i = 0; i <= linkNodes.getLength(); i++) {
+				OdfElement object = null;
+				if (linkNodes.getLength() == i) {
+					if (sourceCloneEle.hasAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href")) {
+						object = sourceCloneEle;
+					} else {
+						break;
+					}
+				} else {
+					object = (OdfElement) linkNodes.item(i);
+				}
+				String refObjPath = object.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
+				if (refObjPath != null && refObjPath.length() > 0) {
+					// the path of the object is start with "./"
+					boolean hasPrefix = false;
+					String prefix = "./";
+					String newObjPath;
+					if (refObjPath.startsWith(prefix)) {
+						refObjPath = refObjPath.substring(2);
+						hasPrefix = true;
+					}
+					// check if this linked resource has been copied
+					if (objectRenameMap.containsKey(refObjPath)) {
+						// this object has been copied already
+						newObjPath = objectRenameMap.get(refObjPath);
+						object.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href",
+								hasPrefix ? (prefix + newObjPath) : newObjPath);
+						continue;
+					}
+					// check if the current document contains the same path
+					OdfFileEntry fileEntry = getPackage().getFileEntry(refObjPath);
+					// note: if refObjPath is a directory, it must end with '/'
+					if (fileEntry == null) {
+						fileEntry = getPackage().getFileEntry(refObjPath + "/");
+					}
+					newObjPath = refObjPath;
+					if (fileEntry != null) {
+						// rename the object path
+						newObjPath = objectRenameMap.get(refObjPath);
+						if (newObjPath == null) {
+							// if refObjPath still contains ".", it means that
+							// it has the suffix
+							// then change the name before the suffix string
+							int dotIndex = refObjPath.indexOf(".");
+							if (dotIndex != -1) {
+								newObjPath = refObjPath.substring(0, dotIndex) + "-" + makeUniqueName()
+										+ refObjPath.substring(dotIndex);
+							} else {
+								newObjPath = refObjPath + "-" + makeUniqueName();
+							}
+							objectRenameMap.put(refObjPath, newObjPath);
+						}
+						object.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href",
+								hasPrefix ? (prefix + newObjPath) : newObjPath);
+					} else
+						objectRenameMap.put(refObjPath, refObjPath);
+				}
+			}
+			// copy resource in batch
+			copyResourcesFrom(srcDocument, objectRenameMap);
+		} catch (Exception e) {
+			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
+		}
+	}
+	
+	/*****************************/
+	/* These codes are moved from OdfPackage, and should be removed 
+	 * till OdfPackage can provide a mechanism to copy resources in batch.
+	 */
+	/*****************************/
+	private InputStream readAsInputStream(ZipInputStream inputStream) throws IOException {
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		if (outputStream != null) {
+			byte[] buf = new byte[4096];
+			int r = 0;
+			while ((r = inputStream.read(buf, 0, 4096)) > -1) {
+				outputStream.write(buf, 0, r);
+			}
+		}
+		return new ByteArrayInputStream(outputStream.toByteArray());
+	}
+
+	private String normalizeFilePath(String internalPath) {
+		if (internalPath.equals(EMPTY_STRING)) {
+			String errMsg = "The internalPath given by parameter is an empty string!";
+			Logger.getLogger(OdfPackage.class.getName()).severe(errMsg);
+			throw new IllegalArgumentException(errMsg);
+		} else {
+			return normalizePath(internalPath);
+		}
+	}
+
+	private static final String DOUBLE_DOT = "..";
+	private static final String DOT = ".";
+	private static final String COLON = ":";
+	private static final Pattern BACK_SLASH_PATTERN = Pattern.compile("\\\\");
+	private static final Pattern DOUBLE_SLASH_PATTERN = Pattern.compile("//");
+
+	private String normalizePath(String path) {
+		if (path == null) {
+			String errMsg = "The internalPath given by parameter is NULL!";
+			Logger.getLogger(OdfPackage.class.getName()).severe(errMsg);
+			throw new IllegalArgumentException(errMsg);
+		} else if (!mightBeExternalReference(path)) {
+			if (path.equals(EMPTY_STRING)) {
+				path = SLASH;
+			} else {
+				// exchange all backslash "\" with a slash "/"
+				if (path.indexOf('\\') != -1) {
+					path = BACK_SLASH_PATTERN.matcher(path).replaceAll(SLASH);
+				}
+				// exchange all double slash "//" with a slash "/"
+				while (path.indexOf("//") != -1) {
+					path = DOUBLE_SLASH_PATTERN.matcher(path).replaceAll(SLASH);
+				}
+				// if directory replacements (e.g. ..) exist, resolve and remove
+				// them
+				if (path.indexOf("/.") != -1 || path.indexOf("./") != -1) {
+					path = removeChangeDirectories(path);
+				}
+			}
+		}
+		return path;
+	}
+
+	private boolean mightBeExternalReference(String internalPath) {
+		boolean isExternalReference = false;
+		// if the fileReference is a external relative documentURL..
+		if (internalPath.startsWith(DOUBLE_DOT) || // or absolute documentURL
+				// AND not root document
+				internalPath.startsWith(SLASH) && !internalPath.equals(SLASH) || // or
+				// absolute
+				// IRI
+				internalPath.contains(COLON)) {
+			isExternalReference = true;
+		}
+		return isExternalReference;
+	}
+
+	private String removeChangeDirectories(String path) {
+		boolean isDirectory = path.endsWith(SLASH);
+		StringTokenizer tokenizer = new StringTokenizer(path, SLASH);
+		int tokenCount = tokenizer.countTokens();
+		List<String> tokenList = new ArrayList<String>(tokenCount);
+		// add all paths to a list
+		while (tokenizer.hasMoreTokens()) {
+			String token = tokenizer.nextToken();
+			tokenList.add(token);
+		}
+		if (!isDirectory) {
+			String lastPath = tokenList.get(tokenCount - 1);
+			if (lastPath.equals(DOT) || lastPath.equals(DOUBLE_DOT)) {
+				isDirectory = true;
+			}
+		}
+		String currentToken;
+		int removeDirLevel = 0;
+		StringBuilder out = new StringBuilder();
+		// work on the list from back to front
+		for (int i = tokenCount - 1; i >= 0; i--) {
+			currentToken = tokenList.get(i);
+			// every ".." will remove an upcoming path
+			if (currentToken.equals(DOUBLE_DOT)) {
+				removeDirLevel++;
+			} else if (currentToken.equals(DOT)) {
+			} else {
+				// if a path have to be remove, neglect current path
+				if (removeDirLevel > 0) {
+					removeDirLevel--;
+				} else {
+					// add the path segment
+					out.insert(0, SLASH);
+					out.insert(0, currentToken);
+				}
+			}
+		}
+		if (removeDirLevel > 0) {
+			return EMPTY_STRING;
+		} else {
+			if (!isDirectory) {
+				// remove trailing slash /
+				out.deleteCharAt(out.length() - 1);
+			}
+			return out.toString();
+		}
+	}
+
+	/*****************************/
+	// FIXME: These two methods are only used in method copyResourcesFrom to
+	// improve copy performance, should not be used in any other way.
+	// methods loadDocument(String documentPath) and loadDocument(File file)
+	// will initialize mFile.
+	// This field and these two methods should be removed after ODFDOM supplies
+	// batch copy.
+	private void setFile(File thisFile) {
+		mFile = thisFile;
+	}
+
+	private File getFile() {
+		return mFile;
+	}
+
+	/**
+	 * This method will copy resources from source document to this document.
+	 * The second parameter contains a map between all the name of resources in
+	 * the source document and the rename string. If the source document is
+	 * loaded from a file, a good performance method will be used. If the source
+	 * document is loaded from a input stream, package layer methods will be
+	 * invoked to copy these resources, with bad performance.
+	 * 
+	 * In future, the code of this method will move to ODFDOM package layer.
+	 * Till then, good performance will be gotten whether the source document is
+	 * loaded from file or from input stream.
+	 * 
+	 */
+	void copyResourcesFrom(Document srcDoc, HashMap<String, String> objectRenameMap) throws Exception {
+		if (srcDoc.getFile() != null) {
+			ArrayList<String> copiedFolder = new ArrayList<String>();
+			Set<String> refObjPathSet = objectRenameMap.keySet();
+			FileInputStream tempFileStream = new FileInputStream(srcDoc.getFile());
+			ZipInputStream zipStream = new ZipInputStream(tempFileStream);
+			ZipEntry zipEntry = zipStream.getNextEntry();
+			while (zipEntry != null) {
+				String refObjPath = zipEntry.getName();
+				for (String path : refObjPathSet) {
+					if (refObjPath.equals(path)) {
+						String newObjPath = objectRenameMap.get(refObjPath);
+						refObjPath = normalizeFilePath(refObjPath);
+						String mediaType = srcDoc.getPackage().getFileEntry(refObjPath).getMediaTypeString();
+						InputStream is = readAsInputStream(zipStream);
+						getPackage().insert(is, newObjPath, mediaType);
+						break;
+					} else if (refObjPath.startsWith(path + "/")) {
+						String suffix = refObjPath.substring(path.length());
+						String newObjPath = objectRenameMap.get(path) + suffix;
+						refObjPath = normalizeFilePath(refObjPath);
+						String mediaType = srcDoc.getPackage().getFileEntry(refObjPath).getMediaTypeString();
+						InputStream is = readAsInputStream(zipStream);
+						getPackage().insert(is, newObjPath, mediaType);
+						if (!copiedFolder.contains(path)) {
+							mediaType = srcDoc.getPackage().getFileEntry(path + "/").getMediaTypeString();
+							getPackage().insert((InputStream) null, objectRenameMap.get(path) + "/", mediaType);
+							copiedFolder.add(path);
+						}
+						break;
+					}
+				}
+				zipEntry = zipStream.getNextEntry();
+			}
+			zipStream.close();
+			tempFileStream.close();
+		} else {
+			Set<String> refObjPathSet = objectRenameMap.keySet();
+			for (String refObjPath : refObjPathSet) {
+				String newObjPath = objectRenameMap.get(refObjPath);
+				InputStream is = srcDoc.getPackage().getInputStream(refObjPath);
+				if (is != null) {
+					String mediaType = srcDoc.getPackage().getFileEntry(refObjPath).getMediaTypeString();
+					getPackage().insert(is, newObjPath, mediaType);
+				} else {
+					Document embedDoc = ((Document) srcDoc).getEmbeddedDocument(refObjPath);
+					if (embedDoc != null) {
+						insertDocument(embedDoc, newObjPath);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * This method will copy the linked resource of the element which need to be
+	 * copied, from the source package to the target package.
+	 * <p>
+	 * If the target package contains a resource with the same path and name,
+	 * the name of the resource will be renamed.
 	 * 
 	 * @param sourceCloneEle
 	 *            - the element that need to be copied
@@ -1511,7 +1830,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 				}
 			}
 		} catch (Exception e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 
@@ -1521,30 +1840,32 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * 
 	 * @param sourceCloneEle
 	 *            - the element that need to be copied
-	 * @param doc
+	 * @param srcDoc
 	 *            - the source document
 	 */
-	void copyForeignStyleRef(OdfElement sourceCloneEle, Document doc) {
+	void copyForeignStyleRef(OdfElement sourceCloneEle, Document srcDoc) {
 		try {
-			OdfFileDom contentDom = getContentDom();
-			XPath xpath = contentDom.getXPath();
+			ArrayList<String> tempList = new ArrayList<String>();
+			OdfFileDom srcContentDom = srcDoc.getContentDom();
+			XPath xpath = srcContentDom.getXPath();
 			// 1. collect all the referred style element which has "style:name"
 			// attribute
 			// 1.1. style:name of content.xml
 			String styleQName = "style:name";
-			NodeList srcStyleDefNodeList = (NodeList) xpath.evaluate("//*[@" + styleQName + "]", contentDom,
-					XPathConstants.NODESET);
-			HashMap<OdfElement, List<OdfElement>> srcContentStyleCloneEleList = new HashMap<OdfElement, List<OdfElement>>();
-			HashMap<OdfElement, OdfElement> appendContentStyleList = new HashMap<OdfElement, OdfElement>();
+			NodeList srcStyleDefNodeList = (NodeList) xpath.evaluate(
+					"*/office:automatic-styles/*[@" + styleQName + "]", srcContentDom, XPathConstants.NODESET);
+			IdentityHashMap<OdfElement, List<OdfElement>> srcContentStyleCloneEleList = new IdentityHashMap<OdfElement, List<OdfElement>>();
+			IdentityHashMap<OdfElement, OdfElement> appendContentStyleList = new IdentityHashMap<OdfElement, OdfElement>();
 			getCopyStyleList(null, sourceCloneEle, styleQName, srcStyleDefNodeList, srcContentStyleCloneEleList,
-					appendContentStyleList, true);
+					appendContentStyleList, tempList, true);
 			// 1.2. style:name of styles.xml
-			srcStyleDefNodeList = (NodeList) xpath.evaluate("//*[@" + styleQName + "]", doc.getStylesDom(),
+			srcStyleDefNodeList = (NodeList) xpath.evaluate(".//*[@" + styleQName + "]", srcDoc.getStylesDom(),
 					XPathConstants.NODESET);
-			HashMap<OdfElement, List<OdfElement>> srcStylesStyleCloneEleList = new HashMap<OdfElement, List<OdfElement>>();
-			HashMap<OdfElement, OdfElement> appendStylesStyleList = new HashMap<OdfElement, OdfElement>();
+			IdentityHashMap<OdfElement, List<OdfElement>> srcStylesStyleCloneEleList = new IdentityHashMap<OdfElement, List<OdfElement>>();
+			IdentityHashMap<OdfElement, OdfElement> appendStylesStyleList = new IdentityHashMap<OdfElement, OdfElement>();
+			tempList.clear();
 			getCopyStyleList(null, sourceCloneEle, styleQName, srcStyleDefNodeList, srcStylesStyleCloneEleList,
-					appendStylesStyleList, true);
+					appendStylesStyleList, tempList, true);
 			// 1.3 rename, copy the referred style element to the corresponding
 			// position in the dom tree
 			insertCollectedStyle(styleQName, srcContentStyleCloneEleList, getContentDom(), appendContentStyleList);
@@ -1558,32 +1879,32 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 			// should be cloned to the destination document
 			// in ODF spec, such attribute type is only exist in <office:styles>
 			// element, so only search it in styles.xml dom
+			tempList.clear();
 			styleQName = "draw:name";
-			srcStyleDefNodeList = (NodeList) xpath.evaluate("//*[@" + styleQName + "]", doc.getStylesDom(),
+			srcStyleDefNodeList = (NodeList) xpath.evaluate(".//*[@" + styleQName + "]", srcDoc.getStylesDom(),
 					XPathConstants.NODESET);
-			HashMap<OdfElement, List<OdfElement>> srcDrawStyleCloneEleList = new HashMap<OdfElement, List<OdfElement>>();
-			HashMap<OdfElement, OdfElement> appendDrawStyleList = new HashMap<OdfElement, OdfElement>();
+			IdentityHashMap<OdfElement, List<OdfElement>> srcDrawStyleCloneEleList = new IdentityHashMap<OdfElement, List<OdfElement>>();
+			IdentityHashMap<OdfElement, OdfElement> appendDrawStyleList = new IdentityHashMap<OdfElement, OdfElement>();
 			Iterator<OdfElement> iter = appendContentStyleList.keySet().iterator();
 			while (iter.hasNext()) {
 				OdfElement styleElement = iter.next();
 				OdfElement cloneStyleElement = appendContentStyleList.get(styleElement);
 				getCopyStyleList(styleElement, cloneStyleElement, styleQName, srcStyleDefNodeList,
-						srcDrawStyleCloneEleList, appendDrawStyleList, false);
+						srcDrawStyleCloneEleList, appendDrawStyleList, tempList, false);
 			}
 			iter = appendStylesStyleList.keySet().iterator();
 			while (iter.hasNext()) {
 				OdfElement styleElement = iter.next();
 				OdfElement cloneStyleElement = appendStylesStyleList.get(styleElement);
 				getCopyStyleList(styleElement, cloneStyleElement, styleQName, srcStyleDefNodeList,
-						srcDrawStyleCloneEleList, appendDrawStyleList, false);
+						srcDrawStyleCloneEleList, appendDrawStyleList, tempList, false);
 			}
 			// 2.2 rename, copy the referred style element to the corresponding
 			// position in the dom tree
 			// note: "draw:name" style element only exist in styles.dom
 			insertCollectedStyle(styleQName, srcDrawStyleCloneEleList, getStylesDom(), appendDrawStyleList);
-
 		} catch (Exception e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
 		}
 
 	}
@@ -1594,19 +1915,23 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	// referred style name of the element which reference this style
 	// 3. All the style which also contains other style reference, should be
 	// copied to the source document.
-	private void insertCollectedStyle(String styleQName, HashMap<OdfElement, List<OdfElement>> srcStyleCloneEleList,
-			OdfFileDom dom, HashMap<OdfElement, OdfElement> appendStyleList) {
+	private void insertCollectedStyle(String styleQName,
+			IdentityHashMap<OdfElement, List<OdfElement>> srcStyleCloneEleList, OdfFileDom dom,
+			IdentityHashMap<OdfElement, OdfElement> appendStyleList) {
 		try {
 			String stylePrefix = OdfNamespace.getPrefixPart(styleQName);
 			String styleLocalName = OdfNamespace.getLocalPart(styleQName);
 			String styleURI = OdfDocumentNamespace.STYLE.getUri();
+			if (stylePrefix.equals("draw"))
+				styleURI = OdfDocumentNamespace.DRAW.getUri();
 			// is the DOM always the styles.xml
 			XPath xpath = dom.getXPath();
-			NodeList destStyleNodeList = (NodeList) xpath.evaluate("//*[@" + styleQName + "]", dom,
-					XPathConstants.NODESET);
-
-			// HashMap<String, String> styleRenameMap = new HashMap<String,
-			// String>();
+			NodeList destStyleNodeList;
+			if (dom instanceof OdfContentDom)
+				destStyleNodeList = (NodeList) xpath.evaluate("*/office:automatic-styles/*[@" + styleQName + "]", dom,
+						XPathConstants.NODESET);
+			else
+				destStyleNodeList = (NodeList) xpath.evaluate(".//*[@" + styleQName + "]", dom, XPathConstants.NODESET);
 			Iterator<OdfElement> iter = srcStyleCloneEleList.keySet().iterator();
 			while (iter.hasNext()) {
 				OdfElement styleElement = iter.next();
@@ -1647,6 +1972,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 							newStyleNameList.add(newStyleName);
 						}
 					}
+					// System.out.println("renaming:"+styleName+"-"+newStyleName);
 					// if newStyleName has been set in the element as the new
 					// name
 					// which means that the newStyleName is conform to the odf
@@ -1661,7 +1987,6 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 									+ newStyleName.substring(newStyleName.length() - 8));
 						}
 					}
-
 				}
 			}
 
@@ -1684,13 +2009,14 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 				copyLinkedRef(cloneStyleElement);
 			}
 		} catch (Exception e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
 		}
 
 	}
 
 	// get all the copy of referred style element which is directly referred or
 	// indirectly referred by cloneEle
+	// styleQName is style:name
 	// all the style are defined in srcStyleNodeList
 	// and these style are all have the styleName defined in styleQName
 	// attribute
@@ -1706,11 +2032,14 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	// if loop == true, get the style definition element reference other style
 	// definition element
 	private void getCopyStyleList(OdfElement ele, OdfElement cloneEle, String styleQName, NodeList srcStyleNodeList,
-			HashMap<OdfElement, List<OdfElement>> copyStyleEleList, HashMap<OdfElement, OdfElement> appendStyleList,
+			IdentityHashMap<OdfElement, List<OdfElement>> copyStyleEleList, IdentityHashMap<OdfElement, OdfElement> appendStyleList, List<String> attrStrList,
 			boolean loop) {
 		try {
 			String styleLocalName = OdfNamespace.getLocalPart(styleQName);
+			String stylePrefix = OdfNamespace.getPrefixPart(styleQName);
 			String styleURI = OdfDocumentNamespace.STYLE.getUri();
+			if (stylePrefix.equals("draw"))
+				styleURI = OdfDocumentNamespace.DRAW.getUri();
 			// OdfElement override the "toString" method
 			String cloneEleStr = cloneEle.toString();
 			for (int i = 0; i < srcStyleNodeList.getLength(); i++) {
@@ -1723,6 +2052,12 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 						String subStr = cloneEleStr.substring(0, index);
 						int lastSpaceIndex = subStr.lastIndexOf(' ');
 						String attrStr = subStr.substring(lastSpaceIndex + 1, index);
+						if (attrStr.equals(styleQName) || attrStrList.contains(attrStr+"="+"\""+styleName+"\""))
+						{
+							index = cloneEleStr.indexOf("=\"" + styleName + "\"", index + styleName.length());
+							continue;
+						}
+						attrStrList.add(attrStr+"="+"\""+styleName+"\"");
 						XPath xpath = ((OdfFileDom) cloneEle.getOwnerDocument()).getXPath();
 						NodeList styleRefNodes = (NodeList) xpath.evaluate(
 								".//*[@" + attrStr + "='" + styleName + "']", cloneEle, XPathConstants.NODESET);
@@ -1759,7 +2094,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 							}
 							if (loop && !hasLoopStyleDef) {
 								getCopyStyleList(styleElement, cloneStyleElement, styleQName, srcStyleNodeList,
-										copyStyleEleList, appendStyleList, loop);
+										copyStyleEleList, appendStyleList, attrStrList, loop);
 							}
 						}
 						index = cloneEleStr.indexOf("=\"" + styleName + "\"", index + styleName.length());
@@ -1767,13 +2102,12 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 				}
 			}
 		} catch (Exception e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 
 	// append the cloneStyleElement to the contentDom which position is defined
 	// by styleElePath
-
 	private void appendForeignStyleElement(OdfElement cloneStyleEle, OdfFileDom dom, String styleElePath) {
 		StringTokenizer token = new StringTokenizer(styleElePath, "/");
 		boolean isExist = true;
@@ -1872,13 +2206,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 		if (attributes != null) {
 			for (int i = 0; i < attributes.getLength(); i++) {
 				Node item = attributes.item(i);
-				if (item.getNodeValue().equals(styleName) && !item.getNodeName().equals("style:name")) // this
-				// is
-				// style
-				// definition,
-				// not
-				// reference
-				{
+				if (item.getNodeValue().equals(styleName) && !item.getNodeName().equals("style:name")) {
+					// this is style definition, not reference.
 					return true;
 				}
 			}
@@ -1903,8 +2232,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			OdfElement element = (OdfElement) nodeList.item(i);
 			String name = element.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "name");
-			if (name.equals(styleName)) // return true;
-			{
+			if (name.equals(styleName)) {
+				// return true;
 				return element;
 			}
 		}
@@ -1960,10 +2289,10 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 				}
 			}
 		} catch (XPathExpressionException e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
 			success = false;
 		} catch (Exception e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
 			success = false;
 		}
 		return success;
@@ -2042,7 +2371,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 				autoStyles.removeChild(removeStyles.get(i));
 			}
 		} catch (Exception e) {
-			Logger.getLogger(PresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
 			success = false;
 		}
 		return success;

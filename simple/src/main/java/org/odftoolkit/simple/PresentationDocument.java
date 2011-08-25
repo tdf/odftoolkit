@@ -590,7 +590,7 @@ public class PresentationDocument extends Document {
 		// clone the srcContentRoot, and make a modification on this clone node.
 		OfficePresentationElement srcCloneContentRoot = (OfficePresentationElement) srcContentRoot.cloneNode(true);
 		// copy all the referred xlink:href here
-		copyLinkedRef(srcCloneContentRoot);
+		copyLinkedRefInBatch(srcCloneContentRoot, srcDoc);
 		// copy all the referred style definition here
 		copyForeignStyleRef(srcCloneContentRoot, srcDoc);
 		Node child = srcCloneContentRoot.getFirstChild();
@@ -649,7 +649,7 @@ public class PresentationDocument extends Document {
 		DrawPageElement sourceCloneSlideElement = (DrawPageElement) sourceSlideElement.cloneNode(true);
 
 		// copy all the referred xlink:href here
-		copyLinkedRef(sourceCloneSlideElement);
+		copyLinkedRefInBatch(sourceCloneSlideElement, srcDoc);
 		// copy all the referred style definition here
 		copyForeignStyleRef(sourceCloneSlideElement, srcDoc);
 		// clone the sourceCloneSlideEle, and this cloned element should in the

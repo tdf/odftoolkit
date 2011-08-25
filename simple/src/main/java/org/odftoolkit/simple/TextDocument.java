@@ -348,7 +348,7 @@ public class TextDocument extends Document implements ListContainer {
 			TextSectionElement newSectionEle = (TextSectionElement) oldSectionEle.cloneNode(true);
 
 			if (isResourceCopied || isForeignNode)
-				copyLinkedRef(newSectionEle);
+				copyLinkedRefInBatch(newSectionEle, section.getOwnerDocument());
 			if (isForeignNode)
 				copyForeignStyleRef(newSectionEle, section.getOwnerDocument());
 			if (isForeignNode) // not in a same document
