@@ -49,7 +49,7 @@ public class HeaderTest {
 			Cell cell = table.getCellByPosition(4, 0);
 			cell.setImage(ResourceUtilities.getURI("image_list_item.png"));
 			doc.save(ResourceUtilities.newTestOutputFile(headerDocumentPath));
-			
+
 			// load the document again.
 			doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(headerDocumentPath));
 			header = doc.getHeader();

@@ -114,7 +114,7 @@ public class Footer implements TableContainer {
 		if (cells != null && cells.getLength() > 0) {
 			OdfStyle cellStyleWithoutBorder = styles.newStyle(OdfStyleFamily.TableCell);
 			cellStyleWithoutBorder.setProperty(StyleTableCellPropertiesElement.Border, "none");
-			cellStyleWithoutBorder.setProperty(StyleTableCellPropertiesElement.Padding, "0.0382in");
+			cellStyleWithoutBorder.removeProperty(StyleTableCellPropertiesElement.Padding);
 			String cellStyleName = cellStyleWithoutBorder.getStyleNameAttribute();
 			for (int i = 0; i < cells.getLength(); i++) {
 				TableTableCellElement cell = (TableTableCellElement) cells.item(i);
