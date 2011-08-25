@@ -359,20 +359,20 @@ public class StyleTypeDefinitions {
 	 * Line type from ODF specification perspective
 	 * 
 	 */
-	public static enum OdfLineType {
+	public static enum LineType {
 		DOUBLE("double"), NONE("none"), SINGLE("single");
 
 		private String lineType;
 
-		OdfLineType(String type) {
+		LineType(String type) {
 			this.lineType = type;
 		}
 
-		public static OdfLineType enumValueOf(String aValue) {
+		public static LineType enumValueOf(String aValue) {
 			if ((aValue == null) || (aValue.length() == 0))
 				return NONE;
 
-			for (OdfLineType aIter : values()) {
+			for (LineType aIter : values()) {
 				if (aValue.equals(aIter.toString())) {
 					return aIter;
 				}
