@@ -40,12 +40,6 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.TextDocument;
-import org.odftoolkit.simple.Document.OdfMediaType;
-import org.odftoolkit.simple.table.Cell;
-import org.odftoolkit.simple.table.CellRange;
-import org.odftoolkit.simple.table.Column;
-import org.odftoolkit.simple.table.Row;
-import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -844,8 +838,7 @@ public class TableTest {
 	}
 
 	@Test
-	public void testGetCellWithAutoExtend()
-	{
+	public void testGetCellWithAutoExtend() {
 		SpreadsheetDocument ods;
 		try {
 			ods = SpreadsheetDocument.newSpreadsheetDocument();
@@ -860,7 +853,7 @@ public class TableTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testGetCellRangeByPosition() {
 		testNewTable();
@@ -954,7 +947,23 @@ public class TableTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-
+	
+	@Test
+	public void testAppendRowsWithCoveredCell() {
+		SpreadsheetDocument odsDoc = null;
+		Table table = null;
+		try {
+			odsDoc = SpreadsheetDocument.newSpreadsheetDocument();
+			table = Table.newTable(odsDoc);
+			mergeCells(table, 1, 1, 3, 2);
+			mergeCells(table, 2, 4, 3, 3);
+		} catch (Exception e) {
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+		
+	}
+	
 	@Test
 	public void testSplitCellAddress() {
 		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
@@ -1056,6 +1065,13 @@ public class TableTest {
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
+		}
+	}
+	
+	private void mergeCells(Table table, int cellCol, int cellRow, int colSpan, int rowSpan) {
+		if (table != null) {
+			CellRange range = table.getCellRangeByPosition(cellCol, cellRow, cellCol + colSpan - 1, cellRow + rowSpan - 1);
+			range.merge();
 		}
 	}
 }

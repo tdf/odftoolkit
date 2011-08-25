@@ -914,8 +914,7 @@ public class Table {
 			// clean style name
 			for (Row row : resultList) {
 				for (int i = 0; i < row.getCellCount(); i++) {
-					TableTableCellElement cellElement = (TableTableCellElement) (row
-							.getCellByIndex(i).mCellElement);
+					TableTableCellElementBase cellElement = row.getCellByIndex(i).mCellElement;
 					cellElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
 				}
 			}
