@@ -133,16 +133,20 @@ public class Paragraph extends Component implements TextboxContainer {
 	 */
 	public void removeTextContent() {
 		NodeList nodeList = mParagraphElement.getChildNodes();
-		int i;
-		for (i = 0; i < nodeList.getLength(); i++) {
+		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node node;
 			node = nodeList.item(i);
-			if (node.getNodeType() == Node.TEXT_NODE)
+			if (node.getNodeType() == Node.TEXT_NODE){
 				mParagraphElement.removeChild(node);
-			else if (node.getNodeType() == Node.ELEMENT_NODE) {
+				//element removed need reset index.
+				i--;
+			}else if (node.getNodeType() == Node.ELEMENT_NODE) {
 				String nodename = node.getNodeName();
-				if (nodename.equals("text:s") || nodename.equals("text:tab") || nodename.equals("text:line-break"))
+				if (nodename.equals("text:s") || nodename.equals("text:tab") || nodename.equals("text:line-break")){
 					mParagraphElement.removeChild(node);
+					//element removed need reset index.
+					i--;
+				}
 			}
 		}
 	}

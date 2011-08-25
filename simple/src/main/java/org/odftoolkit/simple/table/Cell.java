@@ -94,6 +94,9 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
+import org.odftoolkit.simple.text.AbstractParagraphContainer;
+import org.odftoolkit.simple.text.Paragraph;
+import org.odftoolkit.simple.text.ParagraphContainer;
 import org.odftoolkit.simple.text.list.AbstractListContainer;
 import org.odftoolkit.simple.text.list.ListContainer;
 import org.odftoolkit.simple.text.list.ListDecorator;
@@ -106,7 +109,7 @@ import org.w3c.dom.NodeList;
  * Table provides methods to get/set/modify the cell content and cell
  * properties.
  */
-public class Cell extends Component implements ListContainer {
+public class Cell extends Component implements ListContainer, ParagraphContainer {
 
 	TableTableCellElementBase mCellElement;
 	Document mDocument;
@@ -141,6 +144,8 @@ public class Cell extends Component implements ListContainer {
 	 * The default columns repeated number.
 	 */
 	private static final int DEFAULT_COLUMNS_REPEATED_NUMBER = 1;
+	
+	private ParagraphContainerImpl paragraphContainerImpl;
 	private ListContainerImpl listContainerImpl;
 
 	Cell(TableTableCellElementBase odfElement, int repeatedColIndex, int repeatedRowIndex) {
@@ -2208,6 +2213,93 @@ public class Cell extends Component implements ListContainer {
 		return getListContainerImpl().removeList(list);
 	}
 
+	/**
+	 * Creates a new paragraph and append text
+	 * 
+	 * @param text
+	 * @return the new paragraph
+	 * @throws Exception
+	 *             if the file DOM could not be created.
+	 * @since 0.5.5
+	 */
+	public Paragraph addParagraph(String text) {
+		Paragraph para = getParagraphContainerImpl().addParagraph(text);
+		return para;
+	}
+
+	/**
+	 * Remove paragraph from this document
+	 * 
+	 * @param para
+	 *            - the instance of paragraph
+	 * @return true if the paragraph is removed successfully, false if errors
+	 *         happen.
+	 *         
+	 * @since 0.5.5
+	 */
+	public boolean removeParagraph(Paragraph para) {
+		return getParagraphContainerImpl().removeParagraph(para);
+	}
+	
+	/**
+	 * Get the ODF element which can have <text:p> as child element directly.
+	 * 
+	 * @return - an ODF element which can have paragraph as child.
+	 * 
+	 * @since 0.5.5
+	 */
+	public OdfElement getParagraphContainerElement() {
+		return getParagraphContainerImpl().getParagraphContainerElement();
+	}
+	/**
+	 * Return a paragraph with a given index.
+	 * <p>
+	 * An index of zero represents the first paragraph.
+	 * <p>
+	 * If empty paragraph is skipped, the empty paragraph won't be counted.
+	 * 
+	 * @param index
+	 *            - the index started from 0.
+	 * @param isEmptyParagraphSkipped
+	 *            - whether the empty paragraph is skipped or not
+	 * @return the paragraph with a given index
+	 * 
+	 * @since 0.5.5
+	 */
+	public Paragraph getParagraphByIndex(int index, boolean isEmptyParagraphSkipped) {
+		return getParagraphContainerImpl().getParagraphByIndex(index, isEmptyParagraphSkipped);
+	}
+	
+	/**
+	 * Return a paragraph with a given index. The index is in reverse order.
+	 * <p>
+	 * An index of zero represents the last paragraph.
+	 * <p>
+	 * If empty paragraph is skipped, the empty paragraph won't be counted.
+	 * 
+	 * @param reverseIndex
+	 *            - the index started from 0 in reverse order.
+	 * @param isEmptyParagraphSkipped
+	 *            - whether the empty paragraph is skipped or not
+	 * @return the paragraph with a given index
+	 * 
+	 * @since 0.5.5
+	 */
+	public Paragraph getParagraphByReverseIndex(int reverseIndex, boolean isEmptyParagraphSkipped) {
+		return getParagraphContainerImpl().getParagraphByReverseIndex(reverseIndex, isEmptyParagraphSkipped);
+	}
+	
+	/**
+	 * Return an Iterator of the paragraph in this container.
+	 * 
+	 * @return an Iterator of the paragraph in this container
+	 * 
+	 * @since 0.5.5
+	 */
+	public Iterator<Paragraph> getParagraphIterator() {
+		return getParagraphContainerImpl().getParagraphIterator();
+	}
+	
 	private ListContainerImpl getListContainerImpl() {
 		if (listContainerImpl == null) {
 			listContainerImpl = new ListContainerImpl();
@@ -2220,5 +2312,17 @@ public class Cell extends Component implements ListContainer {
 		public OdfElement getListContainerElement() {
 			return mCellElement;
 		}
+	}
+	
+	private class ParagraphContainerImpl extends AbstractParagraphContainer {
+		public OdfElement getParagraphContainerElement() {
+			return mCellElement;
+		}
+	}
+
+	private ParagraphContainerImpl getParagraphContainerImpl() {
+		if (paragraphContainerImpl == null)
+			paragraphContainerImpl = new ParagraphContainerImpl();
+		return paragraphContainerImpl;
 	}
 }

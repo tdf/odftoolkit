@@ -54,7 +54,8 @@ public class ParagraphTest {
 				compareResults(para.getOdfElement(), plainText[i], elementResult[i]);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(ParagraphTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 	}
 
@@ -73,7 +74,8 @@ public class ParagraphTest {
 				Assert.assertEquals(plainText[i], content);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(ParagraphTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 	}
 
@@ -93,7 +95,8 @@ public class ParagraphTest {
 				Assert.assertEquals("", content);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(ParagraphTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 	}
 

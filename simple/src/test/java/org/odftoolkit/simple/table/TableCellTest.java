@@ -50,12 +50,15 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
+import org.odftoolkit.simple.text.Paragraph;
 import org.odftoolkit.simple.text.list.BulletDecorator;
 import org.odftoolkit.simple.text.list.ImageDecorator;
 import org.odftoolkit.simple.text.list.ListContainer;
 import org.odftoolkit.simple.text.list.ListDecorator;
 import org.odftoolkit.simple.text.list.NumberDecorator;
 import org.odftoolkit.simple.utils.ResourceUtilities;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 public class TableCellTest {
 
@@ -1219,5 +1222,97 @@ public class TableCellTest {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
+	}
+	
+	@Test
+	public void testCellParagraph() {
+		String[] plainText = { "nospace", "one space", "two  spaces", "three   spaces", "   three leading spaces",
+				"three trailing spaces   ", "one\ttab", "two\t\ttabs", "\tleading tab", "trailing tab\t",
+				"mixed   \t   spaces and tabs", "line\r\nbreak" };
+
+		String[][] elementResult = { { "nospace" }, { "one space" }, { "two ", "*s1", "spaces" },
+				{ "three ", "*s2", "spaces" }, { " ", "*s2", "three leading spaces" }, { "three trailing spaces ", "*s2" },
+				{ "one", "*t", "tab" }, { "two", "*t", "*t", "tabs" }, { "*t", "leading tab" }, { "trailing tab", "*t" },
+				{ "mixed ", "*s2", "*t", " ", "*s2", "spaces and tabs" }, { "line", "*n", "break" } };
+		try {
+			//test append paragraph
+			TextDocument doc = TextDocument.newTextDocument();
+			Table table = Table.newTable(doc, 2, 2);
+			Cell cell = table.getCellByPosition(0, 0);
+			for (int i = 0; i < plainText.length; i++) {
+				Paragraph para = cell.addParagraph(plainText[i]);
+				compareResults(para.getOdfElement(), plainText[i], elementResult[i]);
+			}
+			
+			// test set paragraph content
+			cell = table.getCellByPosition(0, 1);
+			for (int i = 0; i < plainText.length; i++) {
+				Paragraph para = cell.addParagraph(plainText[i]);
+				compareResults(para.getOdfElement(), plainText[i], elementResult[i]);
+				String content = para.getTextContent();
+				Assert.assertEquals(plainText[i], content);
+			}
+			
+			//test remove paragraph content
+			cell = table.getCellByPosition(1, 0);
+			for (int i = 0; i < plainText.length; i++) {
+				Paragraph para = cell.addParagraph(plainText[i]);
+				String content = para.getTextContent();
+				Assert.assertEquals(plainText[i], content);
+				para.removeTextContent();
+				content = para.getTextContent();
+				Assert.assertEquals("", content);
+			}
+			
+			//test get paragraph by index
+			cell = table.getCellByPosition(1, 1);
+			Paragraph paragraph1 = cell.addParagraph("paragraph1");
+			Paragraph paragraphE = cell.addParagraph(null);
+			Paragraph paragraph2 = cell.addParagraph("p2");
+
+			Paragraph t1 = cell.getParagraphByIndex(0, false);
+			Assert.assertEquals(t1, paragraph1);
+			t1 = cell.getParagraphByIndex(2, false);
+			Assert.assertEquals(t1, paragraph2);
+			t1 = cell.getParagraphByIndex(1, true);
+			Assert.assertEquals(t1, paragraph2);
+			t1 = cell.getParagraphByReverseIndex(0, false);
+			Assert.assertEquals(t1, paragraph2);
+			t1 = cell.getParagraphByReverseIndex(2, false);
+			Assert.assertEquals(t1, paragraph1);
+			t1 = cell.getParagraphByReverseIndex(1, true);
+			Assert.assertEquals(t1, paragraph1);
+			doc.save(ResourceUtilities.newTestOutputFile("testCellParagraph.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	private void compareResults(Element element, String input, String[] output) {
+		int i;
+		int nSpaces;
+		int nSpacesInAttribute;
+		Node node = element.getFirstChild();
+		for (i = 0; i < output.length; i++) {
+			if (output[i].startsWith("*")) {
+				Assert.assertEquals(Node.ELEMENT_NODE, node.getNodeType());
+				if (output[i].equals("*t")) {
+					Assert.assertEquals("tab", node.getLocalName());
+				} else if (output[i].equals("*n")) {
+					Assert.assertEquals("line-break", node.getLocalName());
+				} else {
+					nSpaces = Integer.parseInt(output[i].substring(2));
+					Assert.assertEquals(node.getLocalName(), "s");
+					nSpacesInAttribute = Integer.parseInt(((Element) node).getAttribute("text:c"));
+					Assert.assertEquals(nSpaces, nSpacesInAttribute);
+				}
+			} else {
+				Assert.assertEquals(Node.TEXT_NODE, node.getNodeType());
+				Assert.assertEquals(output[i], node.getTextContent());
+			}
+			node = node.getNextSibling();
+		}
+		Assert.assertEquals(node, null);
 	}
 }
