@@ -50,6 +50,11 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
+import org.odftoolkit.simple.text.list.BulletDecorator;
+import org.odftoolkit.simple.text.list.ImageDecorator;
+import org.odftoolkit.simple.text.list.ListContainer;
+import org.odftoolkit.simple.text.list.ListDecorator;
+import org.odftoolkit.simple.text.list.NumberDecorator;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class TableCellTest {
@@ -1123,6 +1128,37 @@ public class TableCellTest {
 		} catch (Exception e) {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testAddRemoveIterateList() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Table table = Table.newTable(doc, 3, 3);
+			ListDecorator bulletDecorator = new BulletDecorator(doc);
+			ListDecorator numberDecorator = new NumberDecorator(doc);
+			ListDecorator imageDecorator = new ImageDecorator(doc, ResourceUtilities.getURI("image_list_item.png"));
+			String[] numberItemContents = { "number item 1", "number item 2", "number item 3" };
+
+			// add list.
+			ListContainer container = table.getCellByPosition(0, 0);
+			org.odftoolkit.simple.text.list.List bulletList = container.addList(bulletDecorator);
+			bulletList.addItems(numberItemContents);
+			container = table.getCellByPosition(1, 1);
+			org.odftoolkit.simple.text.list.List numberList = container.addList(numberDecorator);
+			numberList.addItems(numberItemContents);
+			container = table.getCellByPosition(2, 2);
+			org.odftoolkit.simple.text.list.List imageList = container.addList(imageDecorator);
+			imageList.addItems(numberItemContents);
+			// iterate list
+			Assert.assertTrue(container.getListIterator().hasNext());
+			// remove list
+			container.clearList();
+			Assert.assertFalse(container.getListIterator().hasNext());
+		} catch (Exception e) {
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 	}
 }

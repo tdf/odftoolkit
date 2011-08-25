@@ -26,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,6 +67,7 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.Document;
+import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.common.TextExtractor;
 import org.odftoolkit.simple.common.WhitespaceProcessor;
 import org.odftoolkit.simple.style.Border;
@@ -74,6 +76,9 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
+import org.odftoolkit.simple.text.list.AbstractListContainer;
+import org.odftoolkit.simple.text.list.ListContainer;
+import org.odftoolkit.simple.text.list.ListDecorator;
 import org.w3c.dom.Node;
 
 /**
@@ -82,7 +87,7 @@ import org.w3c.dom.Node;
  * Table provides methods to get/set/modify the cell content and cell
  * properties.
  */
-public class Cell {
+public class Cell implements ListContainer {
 
 	TableTableCellElementBase mOdfElement;
 	int mnRepeatedColIndex;
@@ -116,7 +121,8 @@ public class Cell {
 	private static final int DEFAULT_COLUMNS_REPEATED_NUMBER = 1;
 	TableTableCellElementBase mCellElement;
 	Document mDocument;
-
+	private ListContainerImpl listContainerImpl = new ListContainerImpl();
+	
 	Cell(TableTableCellElementBase odfElement, int repeatedColIndex, int repeatedRowIndex) {
 		mCellElement = odfElement;
 		mnRepeatedColIndex = repeatedColIndex;
@@ -1234,7 +1240,7 @@ public class Cell {
 	 * 
 	 * @return the column spanned number
 	 */
-	int getColumnSpannedNumber() {
+	public int getColumnSpannedNumber() {
 		if (mCellElement instanceof TableCoveredTableCellElement) {
 			return 1;
 		}
@@ -1263,7 +1269,7 @@ public class Cell {
 	 * 
 	 * @return the row spanned number
 	 */
-	int getRowSpannedNumber() {
+	public int getRowSpannedNumber() {
 		if (mCellElement instanceof TableCoveredTableCellElement) {
 			return 1;
 		}
@@ -1940,5 +1946,53 @@ public class Cell {
 		if (mStyleHandler == null)
 			mStyleHandler = new CellStyleHandler(this);
 		return mStyleHandler;
+	}
+
+	@Override
+	public OdfElement getListContainerElement() {
+		return listContainerImpl.getListContainerElement();
+	}
+
+	@Override
+	public org.odftoolkit.simple.text.list.List addList() {
+		Document ownerDocument = getTable().getOwnerDocument();
+		if(ownerDocument instanceof SpreadsheetDocument){
+			throw new UnsupportedOperationException("Open Office and Symphony can't show a list in spreadsheet document cell.");
+		}else{
+			return listContainerImpl.addList();
+		}
+	}
+
+	@Override
+	public org.odftoolkit.simple.text.list.List addList(ListDecorator decorator) {
+		Document ownerDocument = getTable().getOwnerDocument();
+		if(ownerDocument instanceof SpreadsheetDocument){
+			throw new UnsupportedOperationException("Open Office and Symphony can't show a list in spreadsheet document cell.");
+		}else{
+			return listContainerImpl.addList(decorator);
+		}
+	}
+
+	@Override
+	public void clearList() {
+		listContainerImpl.clearList();
+	}
+
+	@Override
+	public Iterator<org.odftoolkit.simple.text.list.List> getListIterator() {
+		return listContainerImpl.getListIterator();
+	}
+
+	@Override
+	public boolean removeList(org.odftoolkit.simple.text.list.List list) {
+		return listContainerImpl.removeList(list);
+	}
+
+	private class ListContainerImpl extends AbstractListContainer {
+
+		@Override
+		public OdfElement getListContainerElement() {
+			return mCellElement;
+		}
 	}
 }

@@ -23,12 +23,20 @@
 package org.odftoolkit.simple.presentation;
 
 import java.util.IdentityHashMap;
+import java.util.Iterator;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawTextBoxElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.PresentationDocument;
+import org.odftoolkit.simple.text.list.AbstractListContainer;
+import org.odftoolkit.simple.text.list.List;
+import org.odftoolkit.simple.text.list.ListContainer;
+import org.odftoolkit.simple.text.list.ListDecorator;
 import org.w3c.dom.NodeList;
 
 /**
@@ -36,9 +44,10 @@ import org.w3c.dom.NodeList;
  * document. <code>Slide</code> provides methods to get the slide index,get the
  * content of the current slide, etc.
  */
-public class Slide {
+public class Slide implements ListContainer {
 
 	DrawPageElement maSlideElement;
+	private ListContainerImpl listContainerImpl = new ListContainerImpl();
 
 	/**
 	 * This is a tool class which supplies all of the slide creation detail.
@@ -292,6 +301,71 @@ public class Slide {
 				}
 			}
 			return null;
+		}
+	}
+
+	@Override
+	public OdfElement getListContainerElement() {
+		return listContainerImpl.getListContainerElement();
+	}
+
+	@Override
+	public List addList() {
+		return listContainerImpl.addList();
+	}
+
+	@Override
+	public List addList(ListDecorator decorator) {
+		return listContainerImpl.addList(decorator);
+	}
+
+	@Override
+	public void clearList() {
+		listContainerImpl.clearList();
+	}
+
+	@Override
+	public Iterator<List> getListIterator() {
+		return listContainerImpl.getListIterator();
+	}
+
+	@Override
+	public boolean removeList(List list) {
+		return listContainerImpl.removeList(list);
+	}
+
+	private class ListContainerImpl extends AbstractListContainer {
+
+		@Override
+		public OdfElement getListContainerElement() {
+			DrawFrameElement frame = null;
+			DrawTextBoxElement textBox = null;
+			NodeList frameList = maSlideElement.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "frame");
+			if (frameList.getLength() > 0) {
+				int index = frameList.getLength() - 1;
+				while (index >= 0) {
+					frame = (DrawFrameElement) frameList.item(index);
+					String presentationClass = frame.getPresentationClassAttribute();
+					if (presentationClass == null || "outline".equals(presentationClass)
+							|| "text".equals(presentationClass) || "subtitle".equals(presentationClass)) {
+						break;
+					} else {
+						index--;
+					}
+					frame = null;
+				}
+			}
+			if (frame == null) {
+				throw new UnsupportedOperationException(
+						"There is no list container in this slide, please chose a proper slide layout.");
+			}
+			NodeList textBoxList = frame.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "text-box");
+			if (textBoxList.getLength() <= 0) {
+				textBox = frame.newDrawTextBoxElement();
+			} else {
+				textBox = (DrawTextBoxElement) textBoxList.item(textBoxList.getLength() - 1);
+			}
+			return textBox;
 		}
 	}
 }

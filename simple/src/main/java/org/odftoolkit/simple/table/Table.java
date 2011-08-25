@@ -124,7 +124,7 @@ public class Table {
 			if (doc.getTableBuilder() == null) {
 				ownerDocument = doc;
 			} else {
-				throw new IllegalStateException("SlideBuilder only can be created in owner Document constructor.");
+				throw new IllegalStateException("TableBuilder only can be created in owner Document constructor.");
 			}
 		}
 
@@ -1285,7 +1285,16 @@ public class Table {
 	public TableTableElement getOdfElement() {
 		return mTableElement;
 	}
-
+	
+	/**
+	 * Return the Document instance which owns this table.
+	 * 
+	 * @return the instance of <code>Document</code>
+	 */
+	Document getOwnerDocument(){
+		return mDocument;
+	}
+	
 	/** 
 	 * Insert a specific number of columns before the column whose index is <code>index</code>.
 	 * 
