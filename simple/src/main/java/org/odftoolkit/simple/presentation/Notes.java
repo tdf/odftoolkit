@@ -23,67 +23,120 @@
 
 package org.odftoolkit.simple.presentation;
 
-import java.util.Hashtable;
+import java.util.IdentityHashMap;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawTextBoxElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.PresentationDocument;
 import org.w3c.dom.NodeList;
 
 /**
  * Convenient functionality for the parent ODF OpenDocument element
- *
+ * 
  */
-public class Notes
-{
+public class Notes {
+
 	PresentationNotesElement maNoteElement;
-	private static Hashtable<PresentationNotesElement, Notes> maNotesRepository = 
-		new Hashtable<PresentationNotesElement, Notes>();	
-	
-	private Notes( PresentationNotesElement noteElement )
-	{
+
+	/**
+	 * This is a tool class which supplies all of the notes creation detail.
+	 * <p>
+	 * The end user isn't allowed to create it directly, otherwise an
+	 * <code>IllegalStateException</code> will be thrown.
+	 * 
+	 *@since 0.3.5
+	 */
+	public static class NotesBuilder {
+
+		private final IdentityHashMap<PresentationNotesElement, Notes> maNotesRepository = new IdentityHashMap<PresentationNotesElement, Notes>();
+
+		/**
+		 * NotesBuilder constructor. This constructor should only be use in
+		 * owner {@link org.odftoolkit.simple.PresentationDocument
+		 * PresentationDocument} constructor. The end user isn't allowed to call
+		 * it directly, otherwise an <code>IllegalStateException</code> will be
+		 * thrown.
+		 * 
+		 * @param doc
+		 *            the owner <code>PresentationDocument</code>.
+		 * @throws IllegalStateException
+		 *             if new NotesBuilder out of owner PresentationDocument
+		 *             constructor, this exception will be thrown.
+		 */
+		public NotesBuilder(PresentationDocument doc) {
+			if (doc.getNotesBuilder() != null) {
+				throw new IllegalStateException(
+						"NotesBuilder only can be created in owner PresentationDocument constructor.");
+			}
+		}
+
+		/**
+		 * Get a presentation notes page instance by an instance of
+		 * <code>PresentationNotesElement</code>.
+		 * 
+		 * @param noteElement
+		 *            an instance of <code>PresentationNotesElement</code>
+		 * @return an instance of <code>Notes</code> that can represent
+		 *         <code>PresentationNotesElement</code>
+		 */
+		public synchronized Notes getNotesInstance(PresentationNotesElement noteElement) {
+			if (maNotesRepository.containsKey(noteElement))
+				return maNotesRepository.get(noteElement);
+			else {
+				Notes newNotes = new Notes(noteElement);
+				maNotesRepository.put(noteElement, newNotes);
+				return newNotes;
+			}
+		}
+	}
+
+	private Notes(PresentationNotesElement noteElement) {
 		maNoteElement = noteElement;
 	}
-	
+
 	/**
-	 * Return an instance of <code>PresentationNotesElement</code> which represents presentation notes page feature.
+	 * Get a presentation notes page instance by an instance of
+	 * <code>PresentationNotesElement</code>.
+	 * 
+	 * @param noteElement
+	 *            an instance of <code>PresentationNotesElement</code>
+	 * @return an instance of <code>Notes</code> that can represent
+	 *         <code>PresentationNotesElement</code>
+	 */
+	public static Notes getInstance(PresentationNotesElement noteElement) {
+		PresentationDocument ownerDocument = (PresentationDocument) ((OdfFileDom) (noteElement.getOwnerDocument()))
+				.getDocument();
+		return ownerDocument.getNotesBuilder().getNotesInstance(noteElement);
+
+	}
+
+	/**
+	 * Return an instance of <code>PresentationNotesElement</code> which
+	 * represents presentation notes page feature.
 	 * 
 	 * @return an instance of <code>PresentationNotesElement</code>
 	 */
-	public PresentationNotesElement getOdfElement()
-	{
+	public PresentationNotesElement getOdfElement() {
 		return maNoteElement;
 	}
-	/**
-	 * Get a presentation notes page instance by an instance of <code>PresentationNotesElement</code>.
-	 * 
-	 * @param noteElement	an instance of <code>PresentationNotesElement</code>
-	 * @return an instance of <code>Notes</code> that can represent <code>PresentationNotesElement</code>
-	 */
-	public static Notes getInstance(PresentationNotesElement noteElement)
-	{
-		if (maNotesRepository.containsKey(noteElement))
-			return maNotesRepository.get(noteElement);
-		else {
-			Notes newNotes = new Notes(noteElement);
-			maNotesRepository.put(noteElement, newNotes);
-			return newNotes;
-		}	
-	}
-	
+
 	/**
 	 * insert some text to the notes page
-	 * @param text	the text that need to insert in the notes page
+	 * 
+	 * @param text
+	 *            the text that need to insert in the notes page
 	 */
-	public void addText(String text){
+	public void addText(String text) {
 		NodeList frameList = maNoteElement.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "frame");
-		if(frameList.getLength() > 0){
-			DrawFrameElement frame = (DrawFrameElement)frameList.item(0);
+		if (frameList.getLength() > 0) {
+			DrawFrameElement frame = (DrawFrameElement) frameList.item(0);
 			NodeList textBoxList = frame.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "text-box");
-			if(textBoxList.getLength() > 0){
-				DrawTextBoxElement textBox = (DrawTextBoxElement)textBoxList.item(0);
+			if (textBoxList.getLength() > 0) {
+				DrawTextBoxElement textBox = (DrawTextBoxElement) textBoxList.item(0);
 				TextPElement newPara = textBox.newTextPElement();
 				newPara.setTextContent(text);
 			}

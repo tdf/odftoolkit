@@ -22,45 +22,98 @@
  ************************************************************************/
 package org.odftoolkit.simple.presentation;
 
-import java.util.Hashtable;
+import java.util.IdentityHashMap;
+
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.simple.PresentationDocument;
 import org.w3c.dom.NodeList;
 
 /**
- * <code>Slide</code> represents the presentation slide feature of the ODF document.
- * <code>Slide</code> provides methods to get the slide index,get the content of the current slide, etc.
+ * <code>Slide</code> represents the presentation slide feature of the ODF
+ * document. <code>Slide</code> provides methods to get the slide index,get the
+ * content of the current slide, etc.
  */
 public class Slide {
 
 	DrawPageElement maSlideElement;
-	private static Hashtable<DrawPageElement, Slide> maSlideRepository =
-			new Hashtable<DrawPageElement, Slide>();
+
+	/**
+	 * This is a tool class which supplies all of the slide creation detail.
+	 * <p>
+	 * The end user isn't allowed to create it directly, otherwise an
+	 * <code>IllegalStateException</code> will be thrown.
+	 * 
+	 *@since 0.3.5
+	 */
+	public static class SlideBuilder {
+
+		private final IdentityHashMap<DrawPageElement, Slide> maSlideRepository = new IdentityHashMap<DrawPageElement, Slide>();
+
+		/**
+		 * SlideBuilder constructor. This constructor should only be use in
+		 * owner {@link org.odftoolkit.simple.PresentationDocument
+		 * PresentationDocument} constructor. The end user isn't allowed to call
+		 * it directly, otherwise an <code>IllegalStateException</code> will be
+		 * thrown.
+		 * 
+		 * @param doc
+		 *            the owner <code>PresentationDocument</code>.
+		 * @throws IllegalStateException
+		 *             if new SlideBuilder out of owner PresentationDocument
+		 *             constructor, this exception will be thrown.
+		 */
+		public SlideBuilder(PresentationDocument doc) {
+			if (doc.getSlideBuilder() != null) {
+				throw new IllegalStateException(
+						"SlideBuilder only can be created in owner PresentationDocument constructor.");
+			}
+		}
+
+		/**
+		 * Get a presentation slide instance by an instance of
+		 * <code>DrawPageElement</code>.
+		 * 
+		 * @param pageElement
+		 *            an instance of <code>DrawPageElement</code>
+		 * @return an instance of <code>Slide</code> that can represent
+		 *         <code>pageElement</code>
+		 */
+		public synchronized Slide getSlideInstance(DrawPageElement pageElement) {
+			if (maSlideRepository.containsKey(pageElement)) {
+				return maSlideRepository.get(pageElement);
+			} else {
+				Slide newSlide = new Slide(pageElement);
+				maSlideRepository.put(pageElement, newSlide);
+				return newSlide;
+			}
+		}
+	}
 
 	private Slide(DrawPageElement pageElement) {
 		maSlideElement = pageElement;
 	}
 
 	/**
-	 * Get a presentation slide instance by an instance of <code>DrawPageElement</code>.
+	 * Get a presentation slide instance by an instance of
+	 * <code>DrawPageElement</code>.
 	 * 
-	 * @param pageElement	an instance of <code>DrawPageElement</code>
-	 * @return an instance of <code>Slide</code> that can represent <code>pageElement</code>
+	 * @param pageElement
+	 *            an instance of <code>DrawPageElement</code>
+	 * @return an instance of <code>Slide</code> that can represent
+	 *         <code>pageElement</code>
 	 */
 	public static Slide getInstance(DrawPageElement pageElement) {
-		if (maSlideRepository.containsKey(pageElement)) {
-			return maSlideRepository.get(pageElement);
-		} else {
-			Slide newSlide = new Slide(pageElement);
-			maSlideRepository.put(pageElement, newSlide);
-			return newSlide;
-		}
+		PresentationDocument ownerDocument = (PresentationDocument) ((OdfFileDom) (pageElement.getOwnerDocument()))
+				.getDocument();
+		return ownerDocument.getSlideBuilder().getSlideInstance(pageElement);
 	}
 
 	/**
-	 * Return an instance of <code>DrawPageElement</code> which represents presentation slide feature.
+	 * Return an instance of <code>DrawPageElement</code> which represents
+	 * presentation slide feature.
 	 * 
 	 * @return an instance of <code>DrawPageElement</code>
 	 */
@@ -70,16 +123,19 @@ public class Slide {
 
 	/**
 	 * Get the current slide index in the owner document.
+	 * 
 	 * @return the slide index in the owner document
-	 * <p>
-	 * -1, if the odf element which can represent this slide is not in the document DOM tree
+	 *         <p>
+	 *         -1, if the odf element which can represent this slide is not in
+	 *         the document DOM tree
 	 */
 	public int getSlideIndex() {
 		OdfFileDom contentDom = (OdfFileDom) maSlideElement.getOwnerDocument();
 		NodeList slideNodes = contentDom.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		for (int i = 0; i < slideNodes.getLength(); i++) {
 			DrawPageElement slideEle = (DrawPageElement) slideNodes.item(i);
-			if (slideEle == maSlideElement)//should not equals here, see OdfElement.equals(Object obj)
+			if (slideEle == maSlideElement)// should not equals here, see
+			// OdfElement.equals(Object obj)
 			{
 				return i;
 			}
@@ -90,8 +146,9 @@ public class Slide {
 	/**
 	 * Get the current slide name.
 	 * <p>
-	 * If the "draw:name" attribute is not present there,
-	 * create an unique name for this slide
+	 * If the "draw:name" attribute is not present there, create an unique name
+	 * for this slide
+	 * 
 	 * @return the name of the current slide
 	 */
 	public String getSlideName() {
@@ -104,19 +161,23 @@ public class Slide {
 	}
 
 	/**
-	 * Set the current slide name. 
+	 * Set the current slide name.
 	 * <p>
-	 * It must be unique slide name in the current presentation.
-	 * If not, an IllegalArgumentException will be thrown.
-	 * If the given name is null,  an IllegalArgumentException will also be thrown.
-	 * @param name	the new name of the current slide
-	 * @throws IllegalArgumentException if the given name is null or it is not unique in the current presentation.
+	 * It must be unique slide name in the current presentation. If not, an
+	 * IllegalArgumentException will be thrown. If the given name is null, an
+	 * IllegalArgumentException will also be thrown.
+	 * 
+	 * @param name
+	 *            the new name of the current slide
+	 * @throws IllegalArgumentException
+	 *             if the given name is null or it is not unique in the current
+	 *             presentation.
 	 */
 	public void setSlideName(String name) {
 		if (name == null) {
 			throw new IllegalArgumentException("slide name is null is not accepted in the presentation document");
 		}
-		//check if name is unique in this presentation
+		// check if name is unique in this presentation
 		OdfFileDom contentDom = (OdfFileDom) maSlideElement.getOwnerDocument();
 		NodeList slideNodes = contentDom.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		for (int i = 0; i < slideNodes.getLength(); i++) {
@@ -124,7 +185,8 @@ public class Slide {
 			Slide slide = Slide.getInstance(slideEle);
 			String slideName = slide.getSlideName();
 			if (slideName.equals(name)) {
-				throw new IllegalArgumentException("the given slide name is already exist in the current presentation document");
+				throw new IllegalArgumentException(
+						"the given slide name is already exist in the current presentation document");
 			}
 		}
 		maSlideElement.setDrawNameAttribute(name);
@@ -132,7 +194,9 @@ public class Slide {
 
 	/**
 	 * Get the Notes page of this slide
-	 * @return the instance of <code>Notes</code> which represent the notes page of the current slide
+	 * 
+	 * @return the instance of <code>Notes</code> which represent the notes page
+	 *         of the current slide
 	 */
 	public Notes getNotesPage() {
 		NodeList notesList = maSlideElement.getElementsByTagNameNS(OdfDocumentNamespace.PRESENTATION.getUri(), "notes");
@@ -150,25 +214,25 @@ public class Slide {
 		return slideName;
 	}
 
-	/** 
+	/**
 	 * A slide layout is a slide with some predefine placeholder.
-	 *
+	 * 
 	 * we define some template layout as below:
-	 *
+	 * 
 	 * "blank" template is a slide without any filled element,
-	 *
+	 * 
 	 * "title_only" template is a slide with a title,
-	 *
+	 * 
 	 * "title_outline" template is a slide with a title and an outline block,
-	 *
+	 * 
 	 * "title_text" template is a slide with a title and a text block,
-	 *
+	 * 
 	 * "title_two_text_block" template is a slide with a title two text blocks.
 	 */
 	public enum SlideLayout {
 
 		/**
-		 * Blank,  a blank presentation
+		 * Blank, a blank presentation
 		 */
 		BLANK("blank"),
 		/**
@@ -195,7 +259,8 @@ public class Slide {
 
 		/**
 		 * Return the slide template type value.
-		 * @return   the template type value
+		 * 
+		 * @return the template type value
 		 */
 		@Override
 		public String toString() {
@@ -204,8 +269,10 @@ public class Slide {
 
 		/**
 		 * Return the name of the template slide type.
-		 * @param aEnum    a <code>SlideLayout</code>
-		 * @return         the name of slide template type
+		 * 
+		 * @param aEnum
+		 *            a <code>SlideLayout</code>
+		 * @return the name of slide template type
 		 */
 		public static String toString(SlideLayout aEnum) {
 			return aEnum.toString();
@@ -213,8 +280,10 @@ public class Slide {
 
 		/**
 		 * Return a template slide type.
-		 * @param aString   the name of the slide template type
-		 * @return       a <code>SlideLayout</code>
+		 * 
+		 * @param aString
+		 *            the name of the slide template type
+		 * @return a <code>SlideLayout</code>
 		 */
 		public static SlideLayout enumValueOf(String aString) {
 			for (SlideLayout aIter : values()) {

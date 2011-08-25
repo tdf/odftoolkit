@@ -215,7 +215,7 @@ public class TableTest {
 			SpreadsheetDocument spreadsheet = SpreadsheetDocument.newSpreadsheetDocument();
 			Table sheet = Table.newTable(spreadsheet, 3, 5);
 			TableTableHeaderColumnsElement headers = OdfElement.findFirstChildNode(TableTableHeaderColumnsElement.class,
-					sheet.mTableElement);
+					sheet.getOdfElement());
 			if (headers != null) {
 				for (Node n : new DomNodeList(headers.getChildNodes())) {
 					if (n instanceof TableTableColumnElement) {
@@ -731,6 +731,7 @@ public class TableTest {
 			Assert.assertEquals(5, rowCount);
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
 	}
