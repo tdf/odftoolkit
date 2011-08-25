@@ -1,0 +1,6 @@
+org.odftoolkit.simple
+org.odftoolkit.simple.common
+org.odftoolkit.simple.meta
+org.odftoolkit.simple.presentation
+org.odftoolkit.simple.table
+org.odftoolkit.simple.text.search
