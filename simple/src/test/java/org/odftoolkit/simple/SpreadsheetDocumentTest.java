@@ -150,7 +150,7 @@ public class SpreadsheetDocumentTest {
 	
 	@Test
 	public void testGetSheetByIndex() throws Exception{
-		File file = new File(ResourceUtilities.getAbsolutePath(TEST_FILE));
+		File file = new File(ResourceUtilities.getAbsolutePath("TestSpreadsheetTable.ods"));
 		SpreadsheetDocument spDocument = SpreadsheetDocument.loadDocument(file);
 		//index < 0 , Not expected, table ==null
 		Table tablenull = spDocument.getSheetByIndex(-1);
@@ -159,13 +159,13 @@ public class SpreadsheetDocumentTest {
 		//index = 0
 		Table tableSheet0 = spDocument.getSheetByIndex(0);
 		Assert.assertTrue((tableSheet0 != null));
-		Assert.assertEquals("Tabelle1", tableSheet0.getTableName());
-		Assert.assertTrue(tableSheet0.getColumnCount() == 1);
+		Assert.assertEquals("Sheet1", tableSheet0.getTableName());
+		Assert.assertEquals(29, tableSheet0.getColumnCount());
 		//index = 1
 		Table tableSheet1 = spDocument.getSheetByIndex(1);
 		Assert.assertTrue((tableSheet1 != null));
-		Assert.assertEquals("Tabelle2", tableSheet1.getTableName());
-		Assert.assertTrue(tableSheet1.getColumnCount() == 1);
+		Assert.assertEquals("Sheet2", tableSheet1.getTableName());
+		Assert.assertEquals(1, tableSheet1.getColumnCount());
 	}
 	
 	@Test

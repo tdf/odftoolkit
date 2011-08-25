@@ -52,12 +52,6 @@ import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
-import org.odftoolkit.simple.ChartDocument;
-import org.odftoolkit.simple.Document;
-import org.odftoolkit.simple.GraphicsDocument;
-import org.odftoolkit.simple.PresentationDocument;
-import org.odftoolkit.simple.SpreadsheetDocument;
-import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 

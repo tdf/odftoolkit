@@ -100,49 +100,7 @@ public class TextSelectionTest {
 		Assert.assertTrue(search.hasNext());
 	}
 
-	/**
-	 * Test cut method of org.odftoolkit.simple.common.navigation.TextSelection
-	 * delete all the 'delete' word
-	 */
-	@Test
-	public void testCut() {
-		search = null;
-		search = new TextNavigation("delete", doc);
-
-		TextSelection nextSelect = null;
-		TextNavigation nextsearch = new TextNavigation("next", doc);
-		nextSelect = (TextSelection) nextsearch.nextSelection();
-		int i = 0;
-		while (search.hasNext()) {
-			TextSelection item = (TextSelection) search.nextSelection();
-			i++;
-			try {
-				item.cut();
-			} catch (InvalidNavigationException e) {
-				Assert.fail(e.getMessage());
-			}
-		}
-		Assert.assertTrue(10 == i);
-		// research the "delete"
-		search = new TextNavigation("delete", doc);
-		Assert.assertFalse(search.hasNext());
-
-		// this document just have one "next"
-		try {
-			nextSelect.cut();
-		} catch (InvalidNavigationException e1) {
-			Assert.fail(e1.getMessage());
-		}
-		Assert.assertFalse(nextsearch.hasNext());
-
-		try {
-			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_DELETE));
-		} catch (Exception e) {
-			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
-		}
-	}
-
+	
 	/**
 	 * Test pasteAtFrontOf method of
 	 * org.odftoolkit.simple.common.navigation.TextSelection copy the first
@@ -402,7 +360,11 @@ public class TextSelectionTest {
 		}
 	}
 
-
+	/**
+	 * Test TextSelection container element, all of them must be minimum text:p
+	 * or text:h. It means container element can't has child element has the
+	 * same text content.
+	 */
 	@Test
 	public void testTextSelectionContainerElement() {
 		search = new TextNavigation("TextSelectionContainer", doc);
@@ -440,7 +402,6 @@ public class TextSelectionTest {
 		}
 	}
 	
-	//me
 	@Test
 	public void testGetContainerElement() throws Exception {
 		search = new TextNavigation("TextSelectionContainer", doc);

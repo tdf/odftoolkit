@@ -24,8 +24,6 @@ import java.io.File;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.simple.Document;
-import org.odftoolkit.simple.GraphicsDocument;
 
 /**
  * Test class for template aspects of graphics.

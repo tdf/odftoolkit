@@ -57,7 +57,6 @@ import org.odftoolkit.simple.draw.Textbox;
 import org.odftoolkit.simple.draw.TextboxContainer;
 import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
-import org.odftoolkit.simple.text.AbstractTextHyperlinkContainer;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;

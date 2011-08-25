@@ -27,11 +27,9 @@ import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.meta.MetaDocumentStatisticElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.TextDocument;
-import org.odftoolkit.simple.meta.DocumentStatistic;
-import org.odftoolkit.simple.meta.Meta;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class MetaDocumentStatisticTest {

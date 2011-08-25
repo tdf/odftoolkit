@@ -36,10 +36,6 @@ import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.TextDocument;
-import org.odftoolkit.simple.common.navigation.InvalidNavigationException;
-import org.odftoolkit.simple.common.navigation.TextNavigation;
-import org.odftoolkit.simple.common.navigation.TextSelection;
-import org.odftoolkit.simple.common.navigation.TextStyleNavigation;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 /**

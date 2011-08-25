@@ -28,9 +28,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.TextDocument;
-import org.odftoolkit.simple.common.navigation.InvalidNavigationException;
-import org.odftoolkit.simple.common.navigation.TextNavigation;
-import org.odftoolkit.simple.common.navigation.TextSelection;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 /**

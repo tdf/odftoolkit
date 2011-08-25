@@ -30,7 +30,6 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentContentElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;

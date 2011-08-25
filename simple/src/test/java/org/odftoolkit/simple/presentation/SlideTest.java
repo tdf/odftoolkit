@@ -21,6 +21,7 @@
  ************************************************************************/
 package org.odftoolkit.simple.presentation;
 
+import java.awt.Rectangle;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -37,14 +38,20 @@ import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.PresentationDocument;
+import org.odftoolkit.simple.PresentationDocument.PresentationClass;
+import org.odftoolkit.simple.chart.Chart;
+import org.odftoolkit.simple.draw.Textbox;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.table.TableContainer;
 import org.odftoolkit.simple.text.list.BulletDecorator;
 import org.odftoolkit.simple.text.list.ImageDecorator;
+import org.odftoolkit.simple.text.list.List;
 import org.odftoolkit.simple.text.list.ListContainer;
 import org.odftoolkit.simple.text.list.ListDecorator;
 import org.odftoolkit.simple.text.list.NumberDecorator;
 import org.odftoolkit.simple.utils.ResourceUtilities;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -658,7 +665,7 @@ public class SlideTest {
 		try {
 			doc = PresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			// add table.
-			TableContainer container = doc.newSlide(0, "test_table", Slide.SlideLayout.TITLE_PLUS_TEXT);
+			TableContainer container = doc.newSlide(2, "title_plus_text", Slide.SlideLayout.TITLE_PLUS_TEXT);
 			Table table = container.addTable();
 			table.setTableName("SlideTable");
 			String slideTableCellValue = "SlideTable Cell String";
@@ -674,4 +681,370 @@ public class SlideTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+	
+	
+	@Test
+	public void testNewSlideTitle_subtitle() {
+		try {
+			//Creates an empty presentation document.
+			doc = PresentationDocument.newPresentationDocument();
+			
+			TableContainer container = doc.newSlide(0, "testlayout", Slide.SlideLayout.TITLE_SUBTITLE);
+			Table table = container.addTable();
+			table.setTableName("SlideTable");
+			String slideTableCellValue = " Cell[0,0]";
+			table.getCellByPosition(0, 0).setStringValue(slideTableCellValue);
+			String slideTableCellValue1 = " Cell[0,1]";
+			table.getCellByPosition(0, 1).setStringValue(slideTableCellValue1);
+			doc.save(ResourceUtilities.newTestOutputFile("slidetitlelayout.odp"));
+			
+			//load 
+			doc = PresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("slidetitlelayout.odp"));
+			Slide slide = doc.getSlideByIndex(0);
+			Slide slide1 = doc.getSlideByName("testlayout");
+
+			//validate
+			Node nodetitle = slide1.getOdfElement().getFirstChild();
+			Assert.assertEquals("frame", nodetitle.getLocalName());
+			NamedNodeMap map = nodetitle.getAttributes();
+			Assert.assertEquals("layout", map.item(0).getNodeValue());
+			Assert.assertEquals("title", map.item(1).getNodeValue());
+			
+			//
+			Node nodetitle1 = slide1.getOdfElement().getFirstChild().getNextSibling();
+			Assert.assertEquals("frame", nodetitle1.getLocalName());
+			NamedNodeMap map1 = nodetitle1.getAttributes();
+			Assert.assertEquals("layout", map1.item(0).getNodeValue());
+			Assert.assertEquals("subtitle", map1.item(1).getNodeValue());
+			
+			if(slide.equals(slide1))
+				Assert.assertEquals(slide, slide1);
+
+			Assert.assertEquals(slideTableCellValue, table.getCellByPosition(0, 0).getStringValue());
+			Assert.assertEquals(slideTableCellValue1, table.getCellByPosition(0, 1).getStringValue());
+
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+
+	}
+	
+	
+	@Test
+	public void testNewSlideTitle_left_chart_right_outline() {
+		try {
+			doc = PresentationDocument.newPresentationDocument();
+			
+			Slide slidepre = doc.newSlide(0, "testlayout", Slide.SlideLayout.TITLE_LEFT_CHART_RIGHT_OUTLINE);
+			Textbox titleBox = slidepre.getTextboxByUsage(PresentationClass.TITLE).get(0);
+		    titleBox.setTextContent("This is the title");
+
+			Textbox outline = slidepre.getTextboxByUsage(PresentationClass.OUTLINE).get(0);
+		    List txtList = outline.addList();
+		    txtList.addItem("List Item1");
+		    txtList.addItem("List Item2");
+
+			doc.save(ResourceUtilities.newTestOutputFile("slidetitlelayout.odp"));
+			
+			//load 
+			doc = PresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("slidetitlelayout.odp"));
+			Slide slide1 = doc.getSlideByName("testlayout");
+
+			//validate
+			Node nodetitle2 = slide1.getOdfElement().getFirstChild();
+			Assert.assertEquals("frame", nodetitle2.getLocalName());
+			NamedNodeMap map2 = nodetitle2.getAttributes();
+			Assert.assertEquals("layout", map2.item(0).getNodeValue());
+			Assert.assertEquals("title", map2.item(1).getNodeValue());
+			
+			Node nodetitle = slide1.getOdfElement().getFirstChild().getNextSibling();
+			Assert.assertEquals("frame", nodetitle.getLocalName());
+			NamedNodeMap map = nodetitle.getAttributes();
+			Assert.assertEquals("layout", map.item(0).getNodeValue());
+			Assert.assertEquals("chart", map.item(2).getNodeValue());
+			
+			Node nodetitle1 = slide1.getOdfElement().getFirstChild().getNextSibling().getNextSibling();
+			Assert.assertEquals("frame", nodetitle1.getLocalName());
+			NamedNodeMap map1 = nodetitle1.getAttributes();
+			Assert.assertEquals("layout", map1.item(0).getNodeValue());
+			Assert.assertEquals("outline", map1.item(1).getNodeValue());
+			
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+	}
+	
+	
+	@Test
+	public void testNewSlideTitle_plus_chart() {
+		try {
+			doc = PresentationDocument.newPresentationDocument();
+			Slide slidepre = doc.newSlide(0, "testlayout", Slide.SlideLayout.TITLE_PLUS_CHART);
+			Textbox titleBox = slidepre.getTextboxByUsage(PresentationClass.TITLE).get(0);
+		    titleBox.setTextContent("This is the Presentation title");
+		    //chart
+		    String title = "new Chart";
+			String[] lables = new String[] { "Anna", "Daisy", "Tony", "MingFei" };
+			String[] legends = new String[] { "Day1", "Day2", "Day3" };
+			double[][] data = new double[][] { { 1, 6, 3, 8 }, { 9, 1, 0, 5 }, { 3, 7, 8, 1 } };
+			Rectangle rect = new Rectangle();
+			rect.x = 2000;
+			rect.y = 3300;
+			rect.width = 21000;
+			rect.height = 12000;
+			Chart newChart = slidepre.createChart(title, lables, legends, data, rect);
+
+			doc.save(ResourceUtilities.newTestOutputFile("slidetitlelayout.odp"));
+			
+			//load 
+			doc = PresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("slidetitlelayout.odp"));
+			Slide slide1 = doc.getSlideByName("testlayout");
+
+			//validate
+			Node nodetitle2 = slide1.getOdfElement().getFirstChild();
+			Assert.assertEquals("frame", nodetitle2.getLocalName());
+			NamedNodeMap map2 = nodetitle2.getAttributes();
+			Assert.assertEquals("layout", map2.item(0).getNodeValue());
+			Assert.assertEquals("title", map2.item(1).getNodeValue());
+			
+			Node nodetitle = slide1.getOdfElement().getFirstChild().getNextSibling();
+			Assert.assertEquals("frame", nodetitle.getLocalName());
+			NamedNodeMap map = nodetitle.getAttributes();
+			Assert.assertEquals("layout", map.item(0).getNodeValue());
+			Assert.assertEquals("chart", map.item(2).getNodeValue());
+			
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+	}
+	
+	
+	@Test
+	public void testNewSlideTitle_plus_2_chart() {
+		try {
+			doc = PresentationDocument.newPresentationDocument();
+			Slide slidepre = doc.newSlide(0, "testlayout", Slide.SlideLayout.TITLE_PLUS_2_CHART);
+			Textbox titleBox = slidepre.getTextboxByUsage(PresentationClass.TITLE).get(0);
+		    titleBox.setTextContent("This is the Presentation title");
+		    //chart1
+		    String title = "Chart one";
+			String[] lables = new String[] { "AAA", "XXX", "KKK" };
+			String[] legends = new String[] { "condition1", "condition2", "condition3" };
+			double[][] data = new double[][] { { 3, 3, 2 }, { 2, 1, 5 }, { 1, 4, 0 } };
+			Rectangle rect = new Rectangle();
+			rect.x = 2000;
+			rect.y = 3300;
+			rect.width = 22000;
+			rect.height = 8000;
+			//char2
+			String title1 = "Chart two";
+			String[] lables1 = new String[] { "Anna", "Daisy", "Tony", "MingFei" };
+			String[] legends1 = new String[] { "Day1", "Day2", "Day3" };
+			double[][] data1 = new double[][] { { 1, 5, 3, 2 }, { 2, 1, 0, 5 }, { 3, 3, 4, 1 } };
+			Rectangle rect1 = new Rectangle();
+			rect1.x = 2000;
+			rect1.y = 11300;
+			rect1.width = 22000;
+			rect1.height = 8000;
+			Chart newChart = slidepre.createChart(title, lables, legends, data, rect);
+			Chart newChart1 = slidepre.createChart(title1, lables1, legends1, data1, rect1);
+
+			doc.save(ResourceUtilities.newTestOutputFile("slidetitlelayout.odp"));
+			
+			//load 
+			doc = PresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("slidetitlelayout.odp"));
+			Slide slide1 = doc.getSlideByName("testlayout");
+
+			//validate
+			Node nodetitle2 = slide1.getOdfElement().getFirstChild();
+			Assert.assertEquals("frame", nodetitle2.getLocalName());
+			NamedNodeMap map2 = nodetitle2.getAttributes();
+			Assert.assertEquals("layout", map2.item(0).getNodeValue());
+			Assert.assertEquals("title", map2.item(1).getNodeValue());
+			
+			Node nodetitle = slide1.getOdfElement().getFirstChild().getNextSibling();
+			Assert.assertEquals("frame", nodetitle.getLocalName());
+			NamedNodeMap map = nodetitle.getAttributes();
+			Assert.assertEquals("layout", map.item(0).getNodeValue());
+			Assert.assertEquals("chart", map.item(2).getNodeValue());
+			
+			Node nodetitle1 = slide1.getOdfElement().getFirstChild().getNextSibling().getNextSibling();
+			Assert.assertEquals("frame", nodetitle1.getLocalName());
+			NamedNodeMap map1 = nodetitle1.getAttributes();
+			Assert.assertEquals("layout", map1.item(0).getNodeValue());
+			Assert.assertEquals("chart", map1.item(2).getNodeValue());
+			
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+	}
+	
+	
+	@Test
+	public void testNewSlideTitle_plus_3_object() {
+		try {
+			doc = PresentationDocument.newPresentationDocument();
+			Slide slidepre = doc.newSlide(0, "testlayout", Slide.SlideLayout.TITLE_PLUS_3_OBJECT);
+			Textbox titleBox = slidepre.getTextboxByUsage(PresentationClass.TITLE).get(0);
+		    titleBox.setTextContent("This is the Presentation title");
+		    //chart1
+		    String title = "Chart one";
+			String[] lables = new String[] { "AAA", "XXX", "KKK" };
+			String[] legends = new String[] { "condition1", "condition2", "condition3" };
+			double[][] data = new double[][] { { 3, 3, 2 }, { 2, 1, 5 }, { 1, 4, 0 } };
+			Rectangle rect = new Rectangle();
+			rect.x = 2000;
+			rect.y = 3300;
+			rect.width = 10000;
+			rect.height = 8000;
+			//char2
+			String title1 = "Chart two";
+			String[] lables1 = new String[] { "Anna", "Daisy", "Tony", "MingFei" };
+			String[] legends1 = new String[] { "Day1", "Day2", "Day3" };
+			double[][] data1 = new double[][] { { 1, 5, 3, 2 }, { 2, 1, 0, 5 }, { 3, 3, 4, 1 } };
+			Rectangle rect1 = new Rectangle();
+			rect1.x = 2000;
+			rect1.y = 11300;
+			rect1.width = 10000;
+			rect1.height = 8000;
+			Chart newChart = slidepre.createChart(title, lables, legends, data, rect);
+			
+			Textbox outline = slidepre.getTextboxByUsage(PresentationClass.OUTLINE).get(0);
+		    List txtList = outline.addList();
+		    txtList.addItem("List Item1");
+		    txtList.addItem("List Item2");
+			
+			Chart newChart1 = slidepre.createChart(title1, lables1, legends1, data1, rect1);
+
+			doc.save(ResourceUtilities.newTestOutputFile("slidetitlelayout.odp"));
+			
+			//load 
+			doc = PresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("slidetitlelayout.odp"));
+			Slide slide1 = doc.getSlideByName("testlayout");
+
+			//validate
+			Node nodetitle2 = slide1.getOdfElement().getFirstChild();
+			Assert.assertEquals("frame", nodetitle2.getLocalName());
+			NamedNodeMap map2 = nodetitle2.getAttributes();
+			Assert.assertEquals("layout", map2.item(0).getNodeValue());
+			Assert.assertEquals("title", map2.item(1).getNodeValue());
+			
+			Node nodetitle = slide1.getOdfElement().getFirstChild().getNextSibling();
+			Assert.assertEquals("frame", nodetitle.getLocalName());
+			NamedNodeMap map = nodetitle.getAttributes();
+			Assert.assertEquals("layout", map.item(0).getNodeValue());
+			Assert.assertEquals("chart", map.item(2).getNodeValue());
+			
+			Node nodetitle1 = slide1.getOdfElement().getFirstChild().getNextSibling().getNextSibling();
+			Assert.assertEquals("frame", nodetitle1.getLocalName());
+			NamedNodeMap map1 = nodetitle1.getAttributes();
+			Assert.assertEquals("layout", map1.item(0).getNodeValue());
+			Assert.assertEquals("outline", map1.item(1).getNodeValue());
+			
+			Node nodetitle3 = slide1.getOdfElement().getFirstChild().getNextSibling().getNextSibling().getNextSibling();
+			Assert.assertEquals("frame", nodetitle3.getLocalName());
+			NamedNodeMap map3 = nodetitle3.getAttributes();
+			Assert.assertEquals("layout", map3.item(0).getNodeValue());
+			Assert.assertEquals("chart", map3.item(2).getNodeValue());
+			
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+	}
+	
+	
+	@Test
+	public void testNewSlideTitle_plus_4_object() {
+		try {
+			doc = PresentationDocument.newPresentationDocument();
+			Slide slidepre = doc.newSlide(0, "testlayout", Slide.SlideLayout.TITLE_PLUS_4_OBJECT);
+			Textbox titleBox = slidepre.getTextboxByUsage(PresentationClass.TITLE).get(0);
+		    titleBox.setTextContent("This is the Presentation title");
+		    //chart1
+		    String title = "Chart one";
+			String[] lables = new String[] { "AAA", "XXX", "KKK" };
+			String[] legends = new String[] { "condition1", "condition2", "condition3" };
+			double[][] data = new double[][] { { 3, 3, 2 }, { 2, 1, 5 }, { 1, 4, 0 } };
+			Rectangle rect = new Rectangle();
+			rect.x = 2000;
+			rect.y = 2300;
+			rect.width = 5000;
+			rect.height = 6000;
+			//char2
+			String title1 = "Chart two";
+			String[] lables1 = new String[] { "Anna", "Daisy", "Tony", "MingFei" };
+			String[] legends1 = new String[] { "Day1", "Day2", "Day3" };
+			double[][] data1 = new double[][] { { 1, 5, 3, 2 }, { 2, 1, 0, 5 }, { 3, 3, 4, 1 } };
+			Rectangle rect1 = new Rectangle();
+			rect1.x = 2000;
+			rect1.y = 11300;
+			rect1.width = 5000;
+			rect1.height = 6000;
+			//char3
+			String title2 = "Chart three";
+			String[] lables2 = new String[] { "Anna", "Daisy", "Tony", "MingFei" };
+			String[] legends2 = new String[] { "Day1", "Day2", "Day3" };
+			double[][] data2 = new double[][] { { 1, 5, 3, 2 }, { 2, 1, 0, 5 }, { 3, 3, 4, 1 } };
+			Rectangle rect2 = new Rectangle();
+			rect2.x = 2000;
+			rect2.y = 16300;
+			rect2.width = 5000;
+			rect2.height = 6000;
+			
+			Chart newChart = slidepre.createChart(title, lables, legends, data, rect);
+			Chart newChart1 = slidepre.createChart(title1, lables1, legends1, data1, rect1);
+			Textbox outline = slidepre.getTextboxByUsage(PresentationClass.OUTLINE).get(0);
+		    List txtList = outline.addList();
+		    txtList.addItem("List Item1");
+		    txtList.addItem("List Item2");
+		    Chart newChart2 = slidepre.createChart(title2, lables2, legends2, data2, rect2);
+			
+			doc.save(ResourceUtilities.newTestOutputFile("slidetitlelayout.odp"));
+			
+			//load 
+			doc = PresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("slidetitlelayout.odp"));
+			Slide slide1 = doc.getSlideByName("testlayout");
+
+			//validate
+			Node nodetitle2 = slide1.getOdfElement().getFirstChild();
+			Assert.assertEquals("frame", nodetitle2.getLocalName());
+			NamedNodeMap map2 = nodetitle2.getAttributes();
+			Assert.assertEquals("layout", map2.item(0).getNodeValue());
+			Assert.assertEquals("title", map2.item(1).getNodeValue());
+			
+			Node nodetitle = slide1.getOdfElement().getFirstChild().getNextSibling();
+			Assert.assertEquals("frame", nodetitle.getLocalName());
+			NamedNodeMap map = nodetitle.getAttributes();
+			Assert.assertEquals("layout", map.item(0).getNodeValue());
+			Assert.assertEquals("chart", map.item(2).getNodeValue());
+			
+			Node nodetitle1 = slide1.getOdfElement().getFirstChild().getNextSibling().getNextSibling();
+			Assert.assertEquals("frame", nodetitle1.getLocalName());
+			NamedNodeMap map1 = nodetitle1.getAttributes();
+			Assert.assertEquals("layout", map1.item(0).getNodeValue());
+			Assert.assertEquals("outline", map1.item(1).getNodeValue());
+			
+			Node nodetitle3 = slide1.getOdfElement().getFirstChild().getNextSibling().getNextSibling().getNextSibling();
+			Assert.assertEquals("frame", nodetitle3.getLocalName());
+			NamedNodeMap map3 = nodetitle3.getAttributes();
+			Assert.assertEquals("layout", map3.item(0).getNodeValue());
+			Assert.assertEquals("chart", map3.item(2).getNodeValue());
+			
+			Node nodetitle4 = slide1.getOdfElement().getFirstChild().getNextSibling().getNextSibling().getNextSibling().getNextSibling();
+			Assert.assertEquals("frame", nodetitle4.getLocalName());
+			NamedNodeMap map4 = nodetitle4.getAttributes();
+			Assert.assertEquals("layout", map4.item(0).getNodeValue());
+			Assert.assertEquals("chart", map4.item(2).getNodeValue());
+			
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+	}
+	
 }

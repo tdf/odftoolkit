@@ -42,11 +42,6 @@ import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.common.navigation.TextNavigation;
 import org.odftoolkit.simple.common.navigation.TextSelection;
-import org.odftoolkit.simple.table.Cell;
-import org.odftoolkit.simple.table.CellRange;
-import org.odftoolkit.simple.table.Column;
-import org.odftoolkit.simple.table.Row;
-import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Node;
 

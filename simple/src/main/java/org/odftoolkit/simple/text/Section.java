@@ -30,9 +30,6 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
-import org.odftoolkit.simple.text.AbstractParagraphContainer;
-import org.odftoolkit.simple.text.Paragraph;
-import org.odftoolkit.simple.text.ParagraphContainer;
 
 /**
  * This class represents section definition in text document. It provides
