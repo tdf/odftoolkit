@@ -454,11 +454,11 @@ public class TextProperties {
 	 */
 	public double getFontSizeInPoint() {
 		String fontsize = mElement.getFoFontSizeAttribute();
-		if (fontsize.equals("pt")) {
+		if (fontsize.endsWith("pt")) {
 			fontsize = fontsize.substring(0, fontsize.length() - 2);
 			double iSize;
 			try {
-				iSize = Integer.parseInt(fontsize.trim());
+				iSize = Double.parseDouble(fontsize.trim());
 			} catch (Exception e) {
 				iSize = 0;
 			}
