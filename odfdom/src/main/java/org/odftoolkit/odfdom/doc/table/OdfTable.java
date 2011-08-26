@@ -27,6 +27,8 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
@@ -71,6 +73,8 @@ import org.w3c.dom.NodeList;
  */
 public class OdfTable {
 
+	private static final Logger LOG = Logger.getLogger(OdfTable.class.getName());
+	
 	TableTableElement mTableElement;
 	protected OdfDocument mDocument;
 	protected boolean mIsSpreadsheet;
@@ -251,8 +255,8 @@ public class OdfTable {
 	 * Get the width of the table (in Millimeter).
 	 * <p>
 	 * Throw an UnsupportedOperationException if the 
-	 * table is part of a spreadsheet document that does not have an attribute of table width,
-	 * because that spreadsheet doesn't have an attribute of table width.
+	 * table is one sheet of a spreadsheet document.
+	 * because the sheet doesn't have an attribute of table width.
 	 * 
 	 * @return the width of the current table (in Millimeter).
 	 * <p>
@@ -262,7 +266,16 @@ public class OdfTable {
 		OdfDocument doc = ((OdfFileDom) mTableElement.getOwnerDocument()).getOdfDocument();
 		if (!(doc instanceof OdfSpreadsheetDocument)) {
 			String sWidth = mTableElement.getProperty(OdfTableProperties.Width);
-			return PositiveLength.parseLong(sWidth, Unit.MILLIMETER);
+			if(sWidth == null){
+				int colCount = getColumnCount();
+				int tableWidth = 0;
+				for(int i = 0; i<colCount;i++){
+					OdfTableColumn col = getColumnByIndex(i);
+					tableWidth += col.getWidth();
+				}
+				return tableWidth;
+			}else
+				return PositiveLength.parseLong(sWidth, Unit.MILLIMETER);
 		} else {
 			throw new UnsupportedOperationException();
 		}
@@ -478,11 +491,9 @@ public class OdfTable {
 			return OdfTable.getInstance(newTEle);
 
 		} catch (DOMException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		}
 
 		return null;
@@ -536,13 +547,9 @@ public class OdfTable {
 			typedContent.appendChild(newTEle);
 
 			return OdfTable.getInstance(newTEle);
-
-		} catch (DOMException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		}
 
 		return null;
@@ -577,11 +584,9 @@ public class OdfTable {
 			return OdfTable.getInstance(newTEle);
 
 		} catch (DOMException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		}
 
 		return null;
@@ -662,11 +667,9 @@ public class OdfTable {
 			return table;
 
 		} catch (DOMException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		}
 
 		return null;
@@ -747,11 +750,9 @@ public class OdfTable {
 			return table;
 
 		} catch (DOMException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		}
 
 		return null;
@@ -1144,43 +1145,47 @@ public class OdfTable {
 	/** 
 	 * Remove a specific number of columns, starting from the column at <code>index</code>.
 	 * 
-	 * @param startindex
+	 * @param startIndex
 	 * 				is the index of the first column to delete.
-	 * @param clmCount
+	 * @param deleteColCount
 	 * 				is the number of columns to delete.
 	 */
-	public void removeColumnsByIndex(int startindex, int clmCount) {
+	public void removeColumnsByIndex(int startIndex, int deleteColCount) {
 		//0. verify the index
-		int columncount = getColumnCount();
-		if (startindex >= columncount) {
-			throw new IndexOutOfBoundsException("Start index out of bound");
+		if(deleteColCount <= 0)
+			return;
+		if(startIndex < 0)
+			throw new IllegalArgumentException("startIndex of the deleted columns should not be negative");
+		int colCount = getColumnCount();
+		if (startIndex >= colCount) {
+			throw new IndexOutOfBoundsException("Start column index is out of bound");
 		}
-		if (startindex + clmCount >= columncount) {
-			clmCount = columncount - startindex;
+		if (startIndex + deleteColCount >= colCount) {
+			deleteColCount = colCount - startIndex;
 		}
 
 		//1. remove cell
 		for (int i = 0; i < getRowCount(); i++) {
 			OdfTableRow aRow = getRowByIndex(i);
-			aRow.removeCellByIndex(startindex, clmCount);
+			aRow.removeCellByIndex(startIndex, deleteColCount);
 		}
 
 		//2. remove column
 		OdfTableColumn firstColumn;
-		for (int i = 0; i < clmCount; i++) {
-			firstColumn = getColumnByIndex(startindex);
+		for (int i = 0; i < deleteColCount; i++) {
+			firstColumn = getColumnByIndex(startIndex);
 			int repeatedAttr = firstColumn.getColumnsRepeatedNumber();
 			if (repeatedAttr == 1) {
 				TableTableColumnElement columnEle = OdfElement.findNextChildNode(TableTableColumnElement.class, firstColumn.getOdfElement());
 				mTableElement.removeChild(firstColumn.getOdfElement());
-				if (i < (clmCount - 1)) {
+				if (i < (deleteColCount - 1)) {
 					firstColumn = this.getColumnInstance(columnEle, 0);
 				}
 			} else {
 				if (repeatedAttr > firstColumn.mnRepeatedIndex) {
 					firstColumn.setColumnsRepeatedNumber(repeatedAttr - 1);
 					OdfTableColumn startCol = this.getColumnInstance(firstColumn.getOdfElement(), 0);
-					updateColumnRepository(firstColumn.getOdfElement(), startindex - startCol.getColumnIndex(), null, 0);
+					updateColumnRepository(firstColumn.getOdfElement(), startIndex - startCol.getColumnIndex(), null, 0);
 				}
 			}
 		}
@@ -1460,30 +1465,34 @@ public class OdfTable {
 	/** 
 	 * Remove the specific number of rows, starting from the row at <code>index</code>.
 	 * 
-	 * @param startindex	is the zero-based index of the first row to delete.
-	 * @param rowCount	is the number of rows to delete.
+	 * @param startIndex	is the zero-based index of the first row to delete.
+	 * @param deleteRowCount	is the number of rows to delete.
 	 */
-	public void removeRowsByIndex(int startindex, int rowCount) {
+	public void removeRowsByIndex(int startIndex, int deleteRowCount) {
 		boolean deleted = false;
 		//0. verify the index
-		int rowcount = getRowCount();
-		if (startindex >= rowcount) {
+		if(deleteRowCount <= 0)
+			return;
+		if(startIndex < 0)
+			throw new IllegalArgumentException("startIndex of the deleted rows should not be negative");
+		int rowCount = getRowCount();
+		if (startIndex >= rowCount) {
 			throw new IndexOutOfBoundsException("Start index out of bound");
 		}
-		if (startindex + rowCount >= rowcount) {
-			rowCount = rowcount - startindex;
+		if (startIndex + deleteRowCount >= rowCount) {
+			deleteRowCount = rowCount - startIndex;
 		}
 
 		//1. remove row
-		OdfTableRow firstRow = getRowByIndex(startindex);
-		for (int i = startindex; i < startindex + rowCount; i++) {
+		OdfTableRow firstRow = getRowByIndex(startIndex);
+		for (int i = startIndex; i < startIndex + deleteRowCount; i++) {
 			int repeatedAttr = firstRow.getRowsRepeatedNumber();
 			if (repeatedAttr == 1) {
 				TableTableRowElement rowEle = OdfElement.findNextChildNode(TableTableRowElement.class, firstRow.getOdfElement());
 				firstRow.removeAllCellsRelationship();
 				firstRow.getOdfElement().getParentNode().removeChild(firstRow.getOdfElement());
 				updateRowRepository(firstRow.getOdfElement(), firstRow.mnRepeatedIndex, null, 0);
-				if (i < (startindex + rowCount - 1)) {
+				if (i < (startIndex + deleteRowCount - 1)) {
 					firstRow = this.getRowInstance(rowEle, 0);
 				}
 				deleted = true;
@@ -1496,7 +1505,7 @@ public class OdfTable {
 			}
 		}
 		//2. if mediumRow becomes as top row, revise style
-		if (deleted && startindex == 0) {
+		if (deleted && startIndex == 0) {
 			OdfTableRow aRow = getRowByIndex(0);
 			reviseStyleFromMediumRowToTopRow(aRow);
 		}
@@ -1604,7 +1613,7 @@ public class OdfTable {
 	 * @param isProtected	the protected attribute of the table to be set
 	 */
 	public void setProtected(boolean isProtected) {
-		mTableElement.setTableProtectedAttribute(new Boolean(isProtected));
+		mTableElement.setTableProtectedAttribute(isProtected);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////
@@ -1679,8 +1688,7 @@ public class OdfTable {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		}
 		return null;
 	}

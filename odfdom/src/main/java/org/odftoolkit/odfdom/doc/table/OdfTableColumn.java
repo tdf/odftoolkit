@@ -21,6 +21,7 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.table;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.xpath.XPath;
@@ -56,7 +57,7 @@ public class OdfTableColumn {
 	int mnRepeatedIndex;
 	private XPath xpath;
 	private static final String DEFAULT_WIDTH = "0in";
-	static private Logger mLog = Logger.getLogger(OdfTableColumn.class.getName());
+	private static final Logger LOG = Logger.getLogger(OdfTableColumn.class.getName());
 
 	/**
 	 * Construct the <code>OdfTableColumn</code> feature.
@@ -100,7 +101,7 @@ public class OdfTableColumn {
 
 		OdfTableColumn column = table.getColumnInstance(colElement, 0);
 		if (column.getColumnsRepeatedNumber() > 1) {
-			mLog.warning("the column has the repeated column number, and puzzled about get which repeated index of the column,"
+			LOG.warning("the column has the repeated column number, and puzzled about get which repeated index of the column,"
 					+ "here just return the first column of the repeated columns.");
 		}
 		return column;
@@ -167,7 +168,9 @@ public class OdfTableColumn {
 		} else {
 			index = index + 1;
 		}
-		OdfTableColumn column = getTable().getColumnByIndex(index);
+		OdfTableColumn column = null;
+		if( index < getTable().getColumnCount() )
+			column = getTable().getColumnByIndex(index);
 		if (column != null) {
 			long prevColumnRelWidth = column.getRelativeWidth();
 			if (prevColumnRelWidth != 0) {
@@ -325,7 +328,7 @@ public class OdfTableColumn {
 						aPrevNode = aPrevNode.getPreviousSibling();
 					}
 				} catch (XPathExpressionException e) {
-					e.printStackTrace();
+					LOG.log(Level.SEVERE, null, e);
 				}
 			}
 		}
@@ -375,7 +378,7 @@ public class OdfTableColumn {
 						aNextNode = aNextNode.getNextSibling();
 					}
 				} catch (XPathExpressionException e) {
-					e.printStackTrace();
+					LOG.log(Level.SEVERE, null, e);
 				}
 			}
 		}

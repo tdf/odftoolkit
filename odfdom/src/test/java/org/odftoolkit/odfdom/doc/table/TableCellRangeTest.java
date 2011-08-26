@@ -21,14 +21,20 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.table;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.doc.text.OdfWhitespaceProcessor;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
+import org.w3c.dom.NodeList;
 
 public class TableCellRangeTest {
 
@@ -44,8 +50,8 @@ public class TableCellRangeTest {
 			odsdoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(filename + ".ods"));
 			odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(odtfilename + ".odt"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -57,7 +63,7 @@ public class TableCellRangeTest {
 		OdfTableCellRange cellRange = table1.getCellRangeByPosition(0, 0, 1, 0);
 		cellRange.merge();
 		OdfTableCell cell = cellRange.getCellByPosition(0, 0);
-//    	Assert.assertEquals(cell.getDisplayText(), "cell1cell2");
+		Assert.assertEquals(cell.getDisplayText(), "cell1cell2");
 		saveodt("MergeTwoCell");
 		try {
 			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(odtfilename + "MergeTwoCell.odt"));
@@ -68,14 +74,14 @@ public class TableCellRangeTest {
 			savedCellRange.merge();
 			Assert.assertTrue(savedCellRange.getColumnNumber() == 3);
 			OdfTableCell savedCell = savedCellRange.getCellByPosition(0, 0);
-//        	NodeList paraList = savedCell.getOdfElement().getChildNodes();
-//        	OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
-//        	Assert.assertTrue(paraList.item(2) instanceof OdfTextParagraph);
-//        	Assert.assertEquals(textProcessor.getText(paraList.item(2)),"0.00");
+			NodeList paraList = savedCell.getOdfElement().getChildNodes();
+			OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
+			Assert.assertTrue(paraList.item(2) instanceof OdfTextParagraph);
+			Assert.assertEquals(textProcessor.getText(paraList.item(2)),"0.00");
 			saveddoc.save(ResourceUtilities.newTestOutputFile(odtfilename + "MergeCoveredCell.odt"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 
 		try {
@@ -88,12 +94,11 @@ public class TableCellRangeTest {
 			Assert.assertTrue(savedCellRange.getColumnNumber() == 2);
 			Assert.assertTrue(savedCellRange.getRowNumber() == 2);
 			OdfTableCell savedCell = savedCellRange.getCellByPosition(0, 1);
-			//Assert.assertTrue(savedCell.getOdfElement() instanceof OdfCoveredTableCell);
 			Assert.assertTrue(savedCell.getOdfElement() instanceof TableCoveredTableCellElement);
 			saveddoc.save(ResourceUtilities.newTestOutputFile(odtfilename + "MergeCoveredCell2.odt"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -105,7 +110,7 @@ public class TableCellRangeTest {
 		//merge whole table
 		OdfTableCellRange cellRange = table1.getCellRangeByPosition(0, 0, table1.getColumnCount() - 1, table1.getRowCount() - 1);
 		cellRange.merge();
-		Assert.assertEquals(table1.getColumnCount(), 2);
+		Assert.assertEquals(table1.getColumnCount(), 1);
 		Assert.assertEquals(table1.getRowCount(), 1);
 		saveodt("MergeTable");
 	}
@@ -130,8 +135,8 @@ public class TableCellRangeTest {
 			Assert.assertTrue(cell1.getOwnerTableCell().equals(firstCell1));
 			saveddoc.save(ResourceUtilities.newTestOutputFile(odtfilename + "MergeFirstTwoColumn.odt"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -165,29 +170,63 @@ public class TableCellRangeTest {
 			OdfTableCell cell = namedCellRange.getCellByPosition("A1");
 			Assert.assertTrue(cell.getRowSpannedNumber() == 6);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
 	@Test
-	public void testChangeCell() {
-		//get cell range by name
-		//set the cell with the same background color
-		//and format String
-	}
+	public void testMergeExpandCellRange() {
+		try {
+			OdfSpreadsheetDocument ods = OdfSpreadsheetDocument
+					.newSpreadsheetDocument();
+			// the doc contain the table which only have one column and one row
+			// element
+			OdfTable table = ods.getTableByName("Sheet1");
+			int nCols = table.getColumnCount();
+			int nRows = table.getRowCount();
+			Assert.assertTrue(nCols == 1);
+			Assert.assertTrue(nRows == 1);
+			OdfTableCellRange cellRange = table.getCellRangeByPosition("A1","E1");
+			OdfTableCell cell = table.getCellByPosition("A1");
+			cell.setStringValue("Merge A1:E1");
+			cellRange.merge();
+			OdfTable table2 = OdfTable.newTable(ods, 1, 1);
+			table2.setTableName("Sheet2");
+			OdfTableCellRange cellRange2 = table2.getCellRangeByPosition("A1","F3");
+			OdfTableCell cell2 = table2.getCellByPosition("A1");
+			cell2.setStringValue("Merge A1:F3");
+			cellRange2.merge();
+			ods.save(ResourceUtilities.newTestOutputFile(filename + "MergeExpandCell.ods"));
+			table = ods.getTableByName("Sheet1");
+			Assert.assertTrue(table.getColumnCount() == 5);
+			Assert.assertTrue(table.getRowCount() == 1);
+			table = ods.getTableByName("Sheet2");
+			Assert.assertTrue(table.getColumnCount() == 6);
+			Assert.assertTrue(table.getRowCount() == 3);
+			OdfTextDocument odt = OdfTextDocument.newTextDocument();
+			OdfTable swTable = OdfTable.newTable(odt, 1, 5);
+			OdfTableCellRange swCellRange = swTable.getCellRangeByPosition("A1", "E2");
+			OdfTableCell swCell = swTable.getCellByPosition("E2");
+			swCell.setStringValue("Merge A1:E2");
+			swCellRange.merge();
+			odt.save(ResourceUtilities.newTestOutputFile(odtfilename + "MergeTextExpandCell.odt"));
+			swTable = odt.getTableList().get(0);
+			Assert.assertTrue(swTable.getColumnCount() == 1);
+			Assert.assertTrue(swTable.getRowCount() == 1);
+		} catch (Exception ex) {
+			Logger.getLogger(TableCellRangeTest.class.getName()).log( Level.SEVERE, ex.getMessage(), ex);
+			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
+		}
 
-	public void testGetCell() {
-		//cellrange.getcell = OdfTable.getCell
-		//=FTableRow.getCell
 	}
 
 	private void saveods(String name) {
 		try {
 			odsdoc.save(ResourceUtilities.newTestOutputFile(filename + name + ".ods"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -195,8 +234,8 @@ public class TableCellRangeTest {
 		try {
 			odtdoc.save(ResourceUtilities.newTestOutputFile(odtfilename + name + ".odt"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 }
