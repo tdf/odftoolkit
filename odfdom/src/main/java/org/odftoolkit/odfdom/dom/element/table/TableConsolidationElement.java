@@ -90,7 +90,7 @@ public class TableConsolidationElement extends OdfElement
 	 */
 	public String getTableFunctionAttribute()
 	{
-		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "function" ) );
+		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "function" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -117,7 +117,7 @@ public class TableConsolidationElement extends OdfElement
 	 */
 	public String getTableSourceCellRangeAddressesAttribute()
 	{
-		TableSourceCellRangeAddressesAttribute attr = (TableSourceCellRangeAddressesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "source-cell-range-addresses" ) );
+		TableSourceCellRangeAddressesAttribute attr = (TableSourceCellRangeAddressesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "source-cell-range-addresses" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -144,7 +144,7 @@ public class TableConsolidationElement extends OdfElement
 	 */
 	public String getTableTargetCellAddressAttribute()
 	{
-		TableTargetCellAddressAttribute attr = (TableTargetCellAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "target-cell-address" ) );
+		TableTargetCellAddressAttribute attr = (TableTargetCellAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "target-cell-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -171,7 +171,7 @@ public class TableConsolidationElement extends OdfElement
 	 */
 	public String getTableUseLabelsAttribute()
 	{
-		TableUseLabelsAttribute attr = (TableUseLabelsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-labels" ) );
+		TableUseLabelsAttribute attr = (TableUseLabelsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-labels" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -198,7 +198,7 @@ public class TableConsolidationElement extends OdfElement
 	 */
 	public Boolean getTableLinkToSourceDataAttribute()
 	{
-		TableLinkToSourceDataAttribute attr = (TableLinkToSourceDataAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "link-to-source-data" ) );
+		TableLinkToSourceDataAttribute attr = (TableLinkToSourceDataAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "link-to-source-data" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

@@ -73,7 +73,7 @@ public class NumberWeekOfYearElement extends OdfElement
 	 */
 	public String getNumberCalendarAttribute()
 	{
-		NumberCalendarAttribute attr = (NumberCalendarAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "calendar" ) );
+		NumberCalendarAttribute attr = (NumberCalendarAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "calendar" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

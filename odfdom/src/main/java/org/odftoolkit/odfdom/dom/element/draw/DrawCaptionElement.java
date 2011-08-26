@@ -87,7 +87,7 @@ public class DrawCaptionElement extends DrawShapeElementBase
 	 */
 	public String getDrawCaptionPointXAttribute()
 	{
-		DrawCaptionPointXAttribute attr = (DrawCaptionPointXAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-point-x" ) );
+		DrawCaptionPointXAttribute attr = (DrawCaptionPointXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-point-x" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -114,7 +114,7 @@ public class DrawCaptionElement extends DrawShapeElementBase
 	 */
 	public String getDrawCaptionPointYAttribute()
 	{
-		DrawCaptionPointYAttribute attr = (DrawCaptionPointYAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-point-y" ) );
+		DrawCaptionPointYAttribute attr = (DrawCaptionPointYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-point-y" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -141,7 +141,7 @@ public class DrawCaptionElement extends DrawShapeElementBase
 	 */
 	public String getDrawCornerRadiusAttribute()
 	{
-		DrawCornerRadiusAttribute attr = (DrawCornerRadiusAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "corner-radius" ) );
+		DrawCornerRadiusAttribute attr = (DrawCornerRadiusAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "corner-radius" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -168,7 +168,7 @@ public class DrawCaptionElement extends DrawShapeElementBase
 	 */
 	public String getSvgXAttribute()
 	{
-		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x" ) );
+		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -195,7 +195,7 @@ public class DrawCaptionElement extends DrawShapeElementBase
 	 */
 	public String getSvgYAttribute()
 	{
-		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) );
+		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -222,7 +222,7 @@ public class DrawCaptionElement extends DrawShapeElementBase
 	 */
 	public String getSvgWidthAttribute()
 	{
-		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "width" ) );
+		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -249,7 +249,7 @@ public class DrawCaptionElement extends DrawShapeElementBase
 	 */
 	public String getSvgHeightAttribute()
 	{
-		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) );
+		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -276,7 +276,7 @@ public class DrawCaptionElement extends DrawShapeElementBase
 	 */
 	public String getDrawLayerAttribute()
 	{
-		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "layer" ) );
+		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "layer" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -303,7 +303,7 @@ public class DrawCaptionElement extends DrawShapeElementBase
 	 */
 	public String getDrawTransformAttribute()
 	{
-		DrawTransformAttribute attr = (DrawTransformAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "transform" ) );
+		DrawTransformAttribute attr = (DrawTransformAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "transform" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -330,7 +330,7 @@ public class DrawCaptionElement extends DrawShapeElementBase
 	 */
 	public String getDrawTextStyleNameAttribute()
 	{
-		DrawTextStyleNameAttribute attr = (DrawTextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-style-name" ) );
+		DrawTextStyleNameAttribute attr = (DrawTextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -357,7 +357,7 @@ public class DrawCaptionElement extends DrawShapeElementBase
 	 */
 	public String getDrawCaptionIdAttribute()
 	{
-		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-id" ) );
+		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

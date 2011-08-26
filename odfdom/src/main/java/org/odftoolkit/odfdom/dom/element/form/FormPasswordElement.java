@@ -99,7 +99,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public String getFormNameAttribute()
 	{
-		FormNameAttribute attr = (FormNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "name" ) );
+		FormNameAttribute attr = (FormNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -126,7 +126,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public String getFormControlImplementationAttribute()
 	{
-		FormControlImplementationAttribute attr = (FormControlImplementationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "control-implementation" ) );
+		FormControlImplementationAttribute attr = (FormControlImplementationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "control-implementation" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -153,7 +153,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public String getFormIdAttribute()
 	{
-		FormIdAttribute attr = (FormIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "id" ) );
+		FormIdAttribute attr = (FormIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -180,7 +180,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -207,7 +207,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public String getXformsBindAttribute()
 	{
-		XformsBindAttribute attr = (XformsBindAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XFORMS), "bind" ) );
+		XformsBindAttribute attr = (XformsBindAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XFORMS), "bind" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -234,7 +234,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public Boolean getFormDisabledAttribute()
 	{
-		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "disabled" ) );
+		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "disabled" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -261,7 +261,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public Integer getFormMaxLengthAttribute()
 	{
-		FormMaxLengthAttribute attr = (FormMaxLengthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "max-length" ) );
+		FormMaxLengthAttribute attr = (FormMaxLengthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "max-length" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -288,7 +288,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public Boolean getFormPrintableAttribute()
 	{
-		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "printable" ) );
+		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "printable" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -315,7 +315,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public Integer getFormTabIndexAttribute()
 	{
-		FormTabIndexAttribute attr = (FormTabIndexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "tab-index" ) );
+		FormTabIndexAttribute attr = (FormTabIndexAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "tab-index" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -342,7 +342,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public Boolean getFormTabStopAttribute()
 	{
-		FormTabStopAttribute attr = (FormTabStopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "tab-stop" ) );
+		FormTabStopAttribute attr = (FormTabStopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "tab-stop" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -369,7 +369,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public String getFormTitleAttribute()
 	{
-		FormTitleAttribute attr = (FormTitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "title" ) );
+		FormTitleAttribute attr = (FormTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "title" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -396,7 +396,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public String getFormValueAttribute()
 	{
-		FormValueAttribute attr = (FormValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "value" ) );
+		FormValueAttribute attr = (FormValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -423,7 +423,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public Boolean getFormConvertEmptyToNullAttribute()
 	{
-		FormConvertEmptyToNullAttribute attr = (FormConvertEmptyToNullAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "convert-empty-to-null" ) );
+		FormConvertEmptyToNullAttribute attr = (FormConvertEmptyToNullAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "convert-empty-to-null" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -450,7 +450,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public String getFormLinkedCellAttribute()
 	{
-		FormLinkedCellAttribute attr = (FormLinkedCellAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "linked-cell" ) );
+		FormLinkedCellAttribute attr = (FormLinkedCellAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "linked-cell" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -477,7 +477,7 @@ public class FormPasswordElement extends OdfElement
 	 */
 	public String getFormEchoCharAttribute()
 	{
-		FormEchoCharAttribute attr = (FormEchoCharAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "echo-char" ) );
+		FormEchoCharAttribute attr = (FormEchoCharAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "echo-char" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

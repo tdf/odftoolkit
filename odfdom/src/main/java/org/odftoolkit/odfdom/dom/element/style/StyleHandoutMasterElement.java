@@ -106,7 +106,7 @@ public class StyleHandoutMasterElement extends OdfStylableElement
 	 */
 	public String getPresentationUseHeaderNameAttribute()
 	{
-		PresentationUseHeaderNameAttribute attr = (PresentationUseHeaderNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-header-name" ) );
+		PresentationUseHeaderNameAttribute attr = (PresentationUseHeaderNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-header-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -133,7 +133,7 @@ public class StyleHandoutMasterElement extends OdfStylableElement
 	 */
 	public String getPresentationUseFooterNameAttribute()
 	{
-		PresentationUseFooterNameAttribute attr = (PresentationUseFooterNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-footer-name" ) );
+		PresentationUseFooterNameAttribute attr = (PresentationUseFooterNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-footer-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -160,7 +160,7 @@ public class StyleHandoutMasterElement extends OdfStylableElement
 	 */
 	public String getPresentationUseDateTimeNameAttribute()
 	{
-		PresentationUseDateTimeNameAttribute attr = (PresentationUseDateTimeNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-date-time-name" ) );
+		PresentationUseDateTimeNameAttribute attr = (PresentationUseDateTimeNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-date-time-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -187,7 +187,7 @@ public class StyleHandoutMasterElement extends OdfStylableElement
 	 */
 	public String getPresentationPresentationPageLayoutNameAttribute()
 	{
-		PresentationPresentationPageLayoutNameAttribute attr = (PresentationPresentationPageLayoutNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "presentation-page-layout-name" ) );
+		PresentationPresentationPageLayoutNameAttribute attr = (PresentationPresentationPageLayoutNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "presentation-page-layout-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -214,7 +214,7 @@ public class StyleHandoutMasterElement extends OdfStylableElement
 	 */
 	public String getStylePageLayoutNameAttribute()
 	{
-		StylePageLayoutNameAttribute attr = (StylePageLayoutNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "page-layout-name" ) );
+		StylePageLayoutNameAttribute attr = (StylePageLayoutNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "page-layout-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -241,7 +241,7 @@ public class StyleHandoutMasterElement extends OdfStylableElement
 	 */
 	public String getDrawStyleNameAttribute()
 	{
-		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style-name" ) );
+		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -121,7 +121,7 @@ public class MetaTemplateElement extends OdfElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) );
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -148,7 +148,7 @@ public class MetaTemplateElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -175,7 +175,7 @@ public class MetaTemplateElement extends OdfElement
 	 */
 	public String getXlinkActuateAttribute()
 	{
-		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) );
+		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -202,7 +202,7 @@ public class MetaTemplateElement extends OdfElement
 	 */
 	public String getXlinkTitleAttribute()
 	{
-		XlinkTitleAttribute attr = (XlinkTitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "title" ) );
+		XlinkTitleAttribute attr = (XlinkTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "title" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -229,7 +229,7 @@ public class MetaTemplateElement extends OdfElement
 	 */
 	public String getMetaDateAttribute()
 	{
-		MetaDateAttribute attr = (MetaDateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.META), "date" ) );
+		MetaDateAttribute attr = (MetaDateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.META), "date" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

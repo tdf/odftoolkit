@@ -126,7 +126,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public Boolean getDbVisibleAttribute()
 	{
-		DbVisibleAttribute attr = (DbVisibleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "visible" ) );
+		DbVisibleAttribute attr = (DbVisibleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "visible" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -153,7 +153,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public String getDbStyleNameAttribute()
 	{
-		DbStyleNameAttribute attr = (DbStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "style-name" ) );
+		DbStyleNameAttribute attr = (DbStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -180,7 +180,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public String getDbDefaultCellStyleNameAttribute()
 	{
-		DbDefaultCellStyleNameAttribute attr = (DbDefaultCellStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "default-cell-style-name" ) );
+		DbDefaultCellStyleNameAttribute attr = (DbDefaultCellStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "default-cell-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -207,7 +207,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) );
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -234,7 +234,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public String getDbTitleAttribute()
 	{
-		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "title" ) );
+		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "title" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -261,7 +261,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public String getDbDescriptionAttribute()
 	{
-		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "description" ) );
+		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "description" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -288,7 +288,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public String getOfficeValueTypeAttribute()
 	{
-		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value-type" ) );
+		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -315,7 +315,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public Double getOfficeValueAttribute()
 	{
-		OfficeValueAttribute attr = (OfficeValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value" ) );
+		OfficeValueAttribute attr = (OfficeValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
@@ -342,7 +342,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public String getOfficeCurrencyAttribute()
 	{
-		OfficeCurrencyAttribute attr = (OfficeCurrencyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "currency" ) );
+		OfficeCurrencyAttribute attr = (OfficeCurrencyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "currency" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -369,7 +369,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public String getOfficeDateValueAttribute()
 	{
-		OfficeDateValueAttribute attr = (OfficeDateValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "date-value" ) );
+		OfficeDateValueAttribute attr = (OfficeDateValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "date-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -396,7 +396,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public String getOfficeTimeValueAttribute()
 	{
-		OfficeTimeValueAttribute attr = (OfficeTimeValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "time-value" ) );
+		OfficeTimeValueAttribute attr = (OfficeTimeValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "time-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -423,7 +423,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public Boolean getOfficeBooleanValueAttribute()
 	{
-		OfficeBooleanValueAttribute attr = (OfficeBooleanValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "boolean-value" ) );
+		OfficeBooleanValueAttribute attr = (OfficeBooleanValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "boolean-value" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -450,7 +450,7 @@ public class DbColumnElement extends OdfElement
 	 */
 	public String getOfficeStringValueAttribute()
 	{
-		OfficeStringValueAttribute attr = (OfficeStringValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "string-value" ) );
+		OfficeStringValueAttribute attr = (OfficeStringValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "string-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

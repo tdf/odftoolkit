@@ -110,7 +110,7 @@ public class DrawPageElement extends OdfStylableElement
 	 */
 	public String getPresentationUseHeaderNameAttribute()
 	{
-		PresentationUseHeaderNameAttribute attr = (PresentationUseHeaderNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-header-name" ) );
+		PresentationUseHeaderNameAttribute attr = (PresentationUseHeaderNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-header-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -137,7 +137,7 @@ public class DrawPageElement extends OdfStylableElement
 	 */
 	public String getPresentationUseFooterNameAttribute()
 	{
-		PresentationUseFooterNameAttribute attr = (PresentationUseFooterNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-footer-name" ) );
+		PresentationUseFooterNameAttribute attr = (PresentationUseFooterNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-footer-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -164,7 +164,7 @@ public class DrawPageElement extends OdfStylableElement
 	 */
 	public String getPresentationUseDateTimeNameAttribute()
 	{
-		PresentationUseDateTimeNameAttribute attr = (PresentationUseDateTimeNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-date-time-name" ) );
+		PresentationUseDateTimeNameAttribute attr = (PresentationUseDateTimeNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-date-time-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -191,7 +191,7 @@ public class DrawPageElement extends OdfStylableElement
 	 */
 	public String getDrawNameAttribute()
 	{
-		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) );
+		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -218,7 +218,7 @@ public class DrawPageElement extends OdfStylableElement
 	 */
 	public String getDrawStyleNameAttribute()
 	{
-		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style-name" ) );
+		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -245,7 +245,7 @@ public class DrawPageElement extends OdfStylableElement
 	 */
 	public String getDrawMasterPageNameAttribute()
 	{
-		DrawMasterPageNameAttribute attr = (DrawMasterPageNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "master-page-name" ) );
+		DrawMasterPageNameAttribute attr = (DrawMasterPageNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "master-page-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -272,7 +272,7 @@ public class DrawPageElement extends OdfStylableElement
 	 */
 	public String getPresentationPresentationPageLayoutNameAttribute()
 	{
-		PresentationPresentationPageLayoutNameAttribute attr = (PresentationPresentationPageLayoutNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "presentation-page-layout-name" ) );
+		PresentationPresentationPageLayoutNameAttribute attr = (PresentationPresentationPageLayoutNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "presentation-page-layout-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -299,7 +299,7 @@ public class DrawPageElement extends OdfStylableElement
 	 */
 	public String getDrawIdAttribute()
 	{
-		DrawIdAttribute attr = (DrawIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "id" ) );
+		DrawIdAttribute attr = (DrawIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -326,7 +326,7 @@ public class DrawPageElement extends OdfStylableElement
 	 */
 	public String getDrawNavOrderAttribute()
 	{
-		DrawNavOrderAttribute attr = (DrawNavOrderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "nav-order" ) );
+		DrawNavOrderAttribute attr = (DrawNavOrderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "nav-order" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -353,7 +353,7 @@ public class DrawPageElement extends OdfStylableElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

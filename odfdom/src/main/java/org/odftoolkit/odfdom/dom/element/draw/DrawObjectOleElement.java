@@ -156,7 +156,7 @@ public class DrawObjectOleElement extends OdfElement
 	 */
 	public String getDrawClassIdAttribute()
 	{
-		DrawClassIdAttribute attr = (DrawClassIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "class-id" ) );
+		DrawClassIdAttribute attr = (DrawClassIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "class-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -183,7 +183,7 @@ public class DrawObjectOleElement extends OdfElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -210,7 +210,7 @@ public class DrawObjectOleElement extends OdfElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) );
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -237,7 +237,7 @@ public class DrawObjectOleElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -264,7 +264,7 @@ public class DrawObjectOleElement extends OdfElement
 	 */
 	public String getXlinkShowAttribute()
 	{
-		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) );
+		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -291,7 +291,7 @@ public class DrawObjectOleElement extends OdfElement
 	 */
 	public String getXlinkActuateAttribute()
 	{
-		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) );
+		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

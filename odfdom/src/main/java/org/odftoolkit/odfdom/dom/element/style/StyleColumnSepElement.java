@@ -117,7 +117,7 @@ public class StyleColumnSepElement extends OdfElement
 	 */
 	public String getStyleStyleAttribute()
 	{
-		StyleStyleAttribute attr = (StyleStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "style" ) );
+		StyleStyleAttribute attr = (StyleStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -144,7 +144,7 @@ public class StyleColumnSepElement extends OdfElement
 	 */
 	public String getStyleWidthAttribute()
 	{
-		StyleWidthAttribute attr = (StyleWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "width" ) );
+		StyleWidthAttribute attr = (StyleWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -171,7 +171,7 @@ public class StyleColumnSepElement extends OdfElement
 	 */
 	public String getStyleHeightAttribute()
 	{
-		StyleHeightAttribute attr = (StyleHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "height" ) );
+		StyleHeightAttribute attr = (StyleHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -198,7 +198,7 @@ public class StyleColumnSepElement extends OdfElement
 	 */
 	public String getStyleVerticalAlignAttribute()
 	{
-		StyleVerticalAlignAttribute attr = (StyleVerticalAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-align" ) );
+		StyleVerticalAlignAttribute attr = (StyleVerticalAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-align" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -225,7 +225,7 @@ public class StyleColumnSepElement extends OdfElement
 	 */
 	public String getStyleColorAttribute()
 	{
-		StyleColorAttribute attr = (StyleColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "color" ) );
+		StyleColorAttribute attr = (StyleColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

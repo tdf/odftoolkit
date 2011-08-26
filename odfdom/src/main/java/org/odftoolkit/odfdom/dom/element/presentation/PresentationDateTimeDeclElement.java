@@ -86,7 +86,7 @@ public class PresentationDateTimeDeclElement extends OdfElement
 	 */
 	public String getPresentationNameAttribute()
 	{
-		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "name" ) );
+		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public class PresentationDateTimeDeclElement extends OdfElement
 	 */
 	public String getPresentationSourceAttribute()
 	{
-		PresentationSourceAttribute attr = (PresentationSourceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "source" ) );
+		PresentationSourceAttribute attr = (PresentationSourceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "source" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public class PresentationDateTimeDeclElement extends OdfElement
 	 */
 	public String getStyleDataStyleNameAttribute()
 	{
-		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) );
+		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

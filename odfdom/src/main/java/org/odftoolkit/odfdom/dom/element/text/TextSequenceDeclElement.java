@@ -86,7 +86,7 @@ public class TextSequenceDeclElement extends OdfElement
 	 */
 	public String getTextNameAttribute()
 	{
-		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) );
+		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public class TextSequenceDeclElement extends OdfElement
 	 */
 	public Integer getTextDisplayOutlineLevelAttribute()
 	{
-		TextDisplayOutlineLevelAttribute attr = (TextDisplayOutlineLevelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display-outline-level" ) );
+		TextDisplayOutlineLevelAttribute attr = (TextDisplayOutlineLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display-outline-level" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -140,7 +140,7 @@ public class TextSequenceDeclElement extends OdfElement
 	 */
 	public String getTextSeparationCharacterAttribute()
 	{
-		TextSeparationCharacterAttribute attr = (TextSeparationCharacterAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "separation-character" ) );
+		TextSeparationCharacterAttribute attr = (TextSeparationCharacterAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "separation-character" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

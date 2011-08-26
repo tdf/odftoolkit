@@ -74,7 +74,7 @@ public class TextTableCountElement extends OdfElement
 	 */
 	public String getStyleNumFormatAttribute()
 	{
-		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-format" ) );
+		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-format" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -101,7 +101,7 @@ public class TextTableCountElement extends OdfElement
 	 */
 	public Boolean getStyleNumLetterSyncAttribute()
 	{
-		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-letter-sync" ) );
+		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-letter-sync" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

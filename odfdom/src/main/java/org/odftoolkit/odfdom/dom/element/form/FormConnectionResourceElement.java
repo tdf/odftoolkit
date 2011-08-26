@@ -82,7 +82,7 @@ public class FormConnectionResourceElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

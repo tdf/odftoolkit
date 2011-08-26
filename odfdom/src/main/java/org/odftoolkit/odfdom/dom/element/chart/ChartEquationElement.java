@@ -79,7 +79,7 @@ public class ChartEquationElement extends OdfElement
 	 */
 	public Boolean getChartAutomaticContentAttribute()
 	{
-		ChartAutomaticContentAttribute attr = (ChartAutomaticContentAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "automatic-content" ) );
+		ChartAutomaticContentAttribute attr = (ChartAutomaticContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "automatic-content" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -106,7 +106,7 @@ public class ChartEquationElement extends OdfElement
 	 */
 	public Boolean getChartDisplayRSquareAttribute()
 	{
-		ChartDisplayRSquareAttribute attr = (ChartDisplayRSquareAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "display-r-square" ) );
+		ChartDisplayRSquareAttribute attr = (ChartDisplayRSquareAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "display-r-square" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -133,7 +133,7 @@ public class ChartEquationElement extends OdfElement
 	 */
 	public Boolean getChartDisplayEquationAttribute()
 	{
-		ChartDisplayEquationAttribute attr = (ChartDisplayEquationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "display-equation" ) );
+		ChartDisplayEquationAttribute attr = (ChartDisplayEquationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "display-equation" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -160,7 +160,7 @@ public class ChartEquationElement extends OdfElement
 	 */
 	public String getSvgXAttribute()
 	{
-		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x" ) );
+		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -187,7 +187,7 @@ public class ChartEquationElement extends OdfElement
 	 */
 	public String getSvgYAttribute()
 	{
-		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) );
+		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -214,7 +214,7 @@ public class ChartEquationElement extends OdfElement
 	 */
 	public String getChartStyleNameAttribute()
 	{
-		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) );
+		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

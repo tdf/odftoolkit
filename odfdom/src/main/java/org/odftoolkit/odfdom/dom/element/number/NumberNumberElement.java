@@ -77,7 +77,7 @@ public class NumberNumberElement extends OdfElement
 	 */
 	public String getNumberDecimalReplacementAttribute()
 	{
-		NumberDecimalReplacementAttribute attr = (NumberDecimalReplacementAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "decimal-replacement" ) );
+		NumberDecimalReplacementAttribute attr = (NumberDecimalReplacementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "decimal-replacement" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -104,7 +104,7 @@ public class NumberNumberElement extends OdfElement
 	 */
 	public Double getNumberDisplayFactorAttribute()
 	{
-		NumberDisplayFactorAttribute attr = (NumberDisplayFactorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "display-factor" ) );
+		NumberDisplayFactorAttribute attr = (NumberDisplayFactorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "display-factor" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
@@ -131,7 +131,7 @@ public class NumberNumberElement extends OdfElement
 	 */
 	public Integer getNumberDecimalPlacesAttribute()
 	{
-		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "decimal-places" ) );
+		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "decimal-places" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -158,7 +158,7 @@ public class NumberNumberElement extends OdfElement
 	 */
 	public Integer getNumberMinIntegerDigitsAttribute()
 	{
-		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-integer-digits" ) );
+		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-integer-digits" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -185,7 +185,7 @@ public class NumberNumberElement extends OdfElement
 	 */
 	public Boolean getNumberGroupingAttribute()
 	{
-		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "grouping" ) );
+		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "grouping" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

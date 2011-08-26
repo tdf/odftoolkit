@@ -76,7 +76,7 @@ public class FormColumnElement extends OdfElement
 	 */
 	public String getFormNameAttribute()
 	{
-		FormNameAttribute attr = (FormNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "name" ) );
+		FormNameAttribute attr = (FormNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -103,7 +103,7 @@ public class FormColumnElement extends OdfElement
 	 */
 	public String getFormControlImplementationAttribute()
 	{
-		FormControlImplementationAttribute attr = (FormControlImplementationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "control-implementation" ) );
+		FormControlImplementationAttribute attr = (FormControlImplementationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "control-implementation" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public class FormColumnElement extends OdfElement
 	 */
 	public String getFormLabelAttribute()
 	{
-		FormLabelAttribute attr = (FormLabelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "label" ) );
+		FormLabelAttribute attr = (FormLabelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "label" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public class FormColumnElement extends OdfElement
 	 */
 	public String getFormTextStyleNameAttribute()
 	{
-		FormTextStyleNameAttribute attr = (FormTextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "text-style-name" ) );
+		FormTextStyleNameAttribute attr = (FormTextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "text-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

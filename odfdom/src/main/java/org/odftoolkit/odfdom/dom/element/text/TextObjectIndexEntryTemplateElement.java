@@ -82,7 +82,7 @@ public class TextObjectIndexEntryTemplateElement extends OdfStylableElement
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) );
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

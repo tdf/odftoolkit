@@ -84,7 +84,7 @@ public class DbQueryCollectionElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) );
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -111,7 +111,7 @@ public class DbQueryCollectionElement extends OdfElement
 	 */
 	public String getDbTitleAttribute()
 	{
-		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "title" ) );
+		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "title" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -138,7 +138,7 @@ public class DbQueryCollectionElement extends OdfElement
 	 */
 	public String getDbDescriptionAttribute()
 	{
-		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "description" ) );
+		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "description" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

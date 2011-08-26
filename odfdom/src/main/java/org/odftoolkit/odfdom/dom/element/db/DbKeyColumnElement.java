@@ -74,7 +74,7 @@ public class DbKeyColumnElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) );
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -101,7 +101,7 @@ public class DbKeyColumnElement extends OdfElement
 	 */
 	public String getDbRelatedColumnNameAttribute()
 	{
-		DbRelatedColumnNameAttribute attr = (DbRelatedColumnNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "related-column-name" ) );
+		DbRelatedColumnNameAttribute attr = (DbRelatedColumnNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "related-column-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

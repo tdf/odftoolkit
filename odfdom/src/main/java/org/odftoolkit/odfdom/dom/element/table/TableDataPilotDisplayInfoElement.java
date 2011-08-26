@@ -91,7 +91,7 @@ public class TableDataPilotDisplayInfoElement extends OdfElement
 	 */
 	public Boolean getTableEnabledAttribute()
 	{
-		TableEnabledAttribute attr = (TableEnabledAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "enabled" ) );
+		TableEnabledAttribute attr = (TableEnabledAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "enabled" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -118,7 +118,7 @@ public class TableDataPilotDisplayInfoElement extends OdfElement
 	 */
 	public String getTableDataFieldAttribute()
 	{
-		TableDataFieldAttribute attr = (TableDataFieldAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-field" ) );
+		TableDataFieldAttribute attr = (TableDataFieldAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-field" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -145,7 +145,7 @@ public class TableDataPilotDisplayInfoElement extends OdfElement
 	 */
 	public Integer getTableMemberCountAttribute()
 	{
-		TableMemberCountAttribute attr = (TableMemberCountAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "member-count" ) );
+		TableMemberCountAttribute attr = (TableMemberCountAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "member-count" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -172,7 +172,7 @@ public class TableDataPilotDisplayInfoElement extends OdfElement
 	 */
 	public String getTableDisplayMemberModeAttribute()
 	{
-		TableDisplayMemberModeAttribute attr = (TableDisplayMemberModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display-member-mode" ) );
+		TableDisplayMemberModeAttribute attr = (TableDisplayMemberModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display-member-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

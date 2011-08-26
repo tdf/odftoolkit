@@ -79,7 +79,7 @@ public class StyleFootnoteSepElement extends OdfElement
 	 */
 	public String getStyleWidthAttribute()
 	{
-		StyleWidthAttribute attr = (StyleWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "width" ) );
+		StyleWidthAttribute attr = (StyleWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -106,7 +106,7 @@ public class StyleFootnoteSepElement extends OdfElement
 	 */
 	public String getStyleRelWidthAttribute()
 	{
-		StyleRelWidthAttribute attr = (StyleRelWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rel-width" ) );
+		StyleRelWidthAttribute attr = (StyleRelWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rel-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -133,7 +133,7 @@ public class StyleFootnoteSepElement extends OdfElement
 	 */
 	public String getStyleColorAttribute()
 	{
-		StyleColorAttribute attr = (StyleColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "color" ) );
+		StyleColorAttribute attr = (StyleColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -160,7 +160,7 @@ public class StyleFootnoteSepElement extends OdfElement
 	 */
 	public String getStyleLineStyleAttribute()
 	{
-		StyleLineStyleAttribute attr = (StyleLineStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "line-style" ) );
+		StyleLineStyleAttribute attr = (StyleLineStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "line-style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -187,7 +187,7 @@ public class StyleFootnoteSepElement extends OdfElement
 	 */
 	public String getStyleAdjustmentAttribute()
 	{
-		StyleAdjustmentAttribute attr = (StyleAdjustmentAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "adjustment" ) );
+		StyleAdjustmentAttribute attr = (StyleAdjustmentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "adjustment" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -214,7 +214,7 @@ public class StyleFootnoteSepElement extends OdfElement
 	 */
 	public String getStyleDistanceBeforeSepAttribute()
 	{
-		StyleDistanceBeforeSepAttribute attr = (StyleDistanceBeforeSepAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "distance-before-sep" ) );
+		StyleDistanceBeforeSepAttribute attr = (StyleDistanceBeforeSepAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "distance-before-sep" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -241,7 +241,7 @@ public class StyleFootnoteSepElement extends OdfElement
 	 */
 	public String getStyleDistanceAfterSepAttribute()
 	{
-		StyleDistanceAfterSepAttribute attr = (StyleDistanceAfterSepAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "distance-after-sep" ) );
+		StyleDistanceAfterSepAttribute attr = (StyleDistanceAfterSepAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "distance-after-sep" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

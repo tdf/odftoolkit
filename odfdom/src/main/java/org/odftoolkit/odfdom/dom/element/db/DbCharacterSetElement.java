@@ -73,7 +73,7 @@ public class DbCharacterSetElement extends OdfElement
 	 */
 	public String getDbEncodingAttribute()
 	{
-		DbEncodingAttribute attr = (DbEncodingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "encoding" ) );
+		DbEncodingAttribute attr = (DbEncodingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "encoding" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -93,7 +93,7 @@ public class NumberNumberStyleElement extends OdfElement
 	 */
 	public String getStyleNameAttribute()
 	{
-		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) );
+		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -120,7 +120,7 @@ public class NumberNumberStyleElement extends OdfElement
 	 */
 	public String getNumberLanguageAttribute()
 	{
-		NumberLanguageAttribute attr = (NumberLanguageAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "language" ) );
+		NumberLanguageAttribute attr = (NumberLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "language" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -147,7 +147,7 @@ public class NumberNumberStyleElement extends OdfElement
 	 */
 	public String getNumberCountryAttribute()
 	{
-		NumberCountryAttribute attr = (NumberCountryAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "country" ) );
+		NumberCountryAttribute attr = (NumberCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "country" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -174,7 +174,7 @@ public class NumberNumberStyleElement extends OdfElement
 	 */
 	public String getNumberScriptAttribute()
 	{
-		NumberScriptAttribute attr = (NumberScriptAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "script" ) );
+		NumberScriptAttribute attr = (NumberScriptAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "script" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -201,7 +201,7 @@ public class NumberNumberStyleElement extends OdfElement
 	 */
 	public String getNumberRfcLanguageTagAttribute()
 	{
-		NumberRfcLanguageTagAttribute attr = (NumberRfcLanguageTagAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "rfc-language-tag" ) );
+		NumberRfcLanguageTagAttribute attr = (NumberRfcLanguageTagAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "rfc-language-tag" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -228,7 +228,7 @@ public class NumberNumberStyleElement extends OdfElement
 	 */
 	public String getNumberTitleAttribute()
 	{
-		NumberTitleAttribute attr = (NumberTitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "title" ) );
+		NumberTitleAttribute attr = (NumberTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "title" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -255,7 +255,7 @@ public class NumberNumberStyleElement extends OdfElement
 	 */
 	public Boolean getStyleVolatileAttribute()
 	{
-		StyleVolatileAttribute attr = (StyleVolatileAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "volatile" ) );
+		StyleVolatileAttribute attr = (StyleVolatileAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "volatile" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -282,7 +282,7 @@ public class NumberNumberStyleElement extends OdfElement
 	 */
 	public String getNumberTransliterationFormatAttribute()
 	{
-		NumberTransliterationFormatAttribute attr = (NumberTransliterationFormatAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "transliteration-format" ) );
+		NumberTransliterationFormatAttribute attr = (NumberTransliterationFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "transliteration-format" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -309,7 +309,7 @@ public class NumberNumberStyleElement extends OdfElement
 	 */
 	public String getNumberTransliterationLanguageAttribute()
 	{
-		NumberTransliterationLanguageAttribute attr = (NumberTransliterationLanguageAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "transliteration-language" ) );
+		NumberTransliterationLanguageAttribute attr = (NumberTransliterationLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "transliteration-language" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -336,7 +336,7 @@ public class NumberNumberStyleElement extends OdfElement
 	 */
 	public String getNumberTransliterationCountryAttribute()
 	{
-		NumberTransliterationCountryAttribute attr = (NumberTransliterationCountryAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "transliteration-country" ) );
+		NumberTransliterationCountryAttribute attr = (NumberTransliterationCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "transliteration-country" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -363,7 +363,7 @@ public class NumberNumberStyleElement extends OdfElement
 	 */
 	public String getNumberTransliterationStyleAttribute()
 	{
-		NumberTransliterationStyleAttribute attr = (NumberTransliterationStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "transliteration-style" ) );
+		NumberTransliterationStyleAttribute attr = (NumberTransliterationStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "transliteration-style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

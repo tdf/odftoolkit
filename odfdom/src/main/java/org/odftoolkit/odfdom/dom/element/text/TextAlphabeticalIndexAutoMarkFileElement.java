@@ -85,7 +85,7 @@ public class TextAlphabeticalIndexAutoMarkFileElement extends OdfElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) );
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class TextAlphabeticalIndexAutoMarkFileElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

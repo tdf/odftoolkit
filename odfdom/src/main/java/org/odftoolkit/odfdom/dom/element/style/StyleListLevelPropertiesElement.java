@@ -107,7 +107,7 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoTextAlignAttribute()
 	{
-		FoTextAlignAttribute attr = (FoTextAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "text-align" ) );
+		FoTextAlignAttribute attr = (FoTextAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "text-align" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -134,7 +134,7 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getTextSpaceBeforeAttribute()
 	{
-		TextSpaceBeforeAttribute attr = (TextSpaceBeforeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "space-before" ) );
+		TextSpaceBeforeAttribute attr = (TextSpaceBeforeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "space-before" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -161,7 +161,7 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getTextMinLabelWidthAttribute()
 	{
-		TextMinLabelWidthAttribute attr = (TextMinLabelWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "min-label-width" ) );
+		TextMinLabelWidthAttribute attr = (TextMinLabelWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "min-label-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -188,7 +188,7 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getTextMinLabelDistanceAttribute()
 	{
-		TextMinLabelDistanceAttribute attr = (TextMinLabelDistanceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "min-label-distance" ) );
+		TextMinLabelDistanceAttribute attr = (TextMinLabelDistanceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "min-label-distance" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -215,7 +215,7 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontNameAttribute()
 	{
-		StyleFontNameAttribute attr = (StyleFontNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-name" ) );
+		StyleFontNameAttribute attr = (StyleFontNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -242,7 +242,7 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoWidthAttribute()
 	{
-		FoWidthAttribute attr = (FoWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "width" ) );
+		FoWidthAttribute attr = (FoWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -269,7 +269,7 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoHeightAttribute()
 	{
-		FoHeightAttribute attr = (FoHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "height" ) );
+		FoHeightAttribute attr = (FoHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -296,7 +296,7 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleVerticalRelAttribute()
 	{
-		StyleVerticalRelAttribute attr = (StyleVerticalRelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-rel" ) );
+		StyleVerticalRelAttribute attr = (StyleVerticalRelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-rel" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -323,7 +323,7 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleVerticalPosAttribute()
 	{
-		StyleVerticalPosAttribute attr = (StyleVerticalPosAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-pos" ) );
+		StyleVerticalPosAttribute attr = (StyleVerticalPosAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-pos" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -350,7 +350,7 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getSvgYAttribute()
 	{
-		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) );
+		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -377,7 +377,7 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getTextListLevelPositionAndSpaceModeAttribute()
 	{
-		TextListLevelPositionAndSpaceModeAttribute attr = (TextListLevelPositionAndSpaceModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "list-level-position-and-space-mode" ) );
+		TextListLevelPositionAndSpaceModeAttribute attr = (TextListLevelPositionAndSpaceModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "list-level-position-and-space-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

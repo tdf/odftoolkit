@@ -1239,7 +1239,7 @@ public class OdfPackage {
 		mZipEntries.put(zipe.getName(), zipe);
 	}
 
-	private HashMap<String, OdfFileEntry> getManifestEntries() {
+	public HashMap<String, OdfFileEntry> getManifestEntries() {
 		if (mManifestEntries == null) {
 			try {
 				parseManifest();
@@ -1259,7 +1259,7 @@ public class OdfPackage {
 	 * Get Manifest as String NOTE: This functionality should better be moved to
 	 * a DOM based Manifest class
 	 */
-	String getManifestAsString() {
+	public String getManifestAsString() {
 		HashMap<String, OdfFileEntry> manifestEntries = getManifestEntries();
 		StringBuffer buf = new StringBuffer();
 

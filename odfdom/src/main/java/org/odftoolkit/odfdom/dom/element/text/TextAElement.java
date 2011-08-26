@@ -182,7 +182,7 @@ public class TextAElement extends OdfStylableElement
 	 */
 	public String getOfficeNameAttribute()
 	{
-		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "name" ) );
+		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -209,7 +209,7 @@ public class TextAElement extends OdfStylableElement
 	 */
 	public String getOfficeTitleAttribute()
 	{
-		OfficeTitleAttribute attr = (OfficeTitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "title" ) );
+		OfficeTitleAttribute attr = (OfficeTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "title" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -236,7 +236,7 @@ public class TextAElement extends OdfStylableElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) );
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -263,7 +263,7 @@ public class TextAElement extends OdfStylableElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -290,7 +290,7 @@ public class TextAElement extends OdfStylableElement
 	 */
 	public String getXlinkActuateAttribute()
 	{
-		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) );
+		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -317,7 +317,7 @@ public class TextAElement extends OdfStylableElement
 	 */
 	public String getOfficeTargetFrameNameAttribute()
 	{
-		OfficeTargetFrameNameAttribute attr = (OfficeTargetFrameNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "target-frame-name" ) );
+		OfficeTargetFrameNameAttribute attr = (OfficeTargetFrameNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "target-frame-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -344,7 +344,7 @@ public class TextAElement extends OdfStylableElement
 	 */
 	public String getXlinkShowAttribute()
 	{
-		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) );
+		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -371,7 +371,7 @@ public class TextAElement extends OdfStylableElement
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) );
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -398,7 +398,7 @@ public class TextAElement extends OdfStylableElement
 	 */
 	public String getTextVisitedStyleNameAttribute()
 	{
-		TextVisitedStyleNameAttribute attr = (TextVisitedStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "visited-style-name" ) );
+		TextVisitedStyleNameAttribute attr = (TextVisitedStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "visited-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

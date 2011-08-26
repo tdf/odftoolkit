@@ -82,7 +82,7 @@ public class ConfigConfigItemSetElement extends OdfElement
 	 */
 	public String getConfigNameAttribute()
 	{
-		ConfigNameAttribute attr = (ConfigNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CONFIG), "name" ) );
+		ConfigNameAttribute attr = (ConfigNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CONFIG), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

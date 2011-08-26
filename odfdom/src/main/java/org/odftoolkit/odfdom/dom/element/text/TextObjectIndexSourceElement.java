@@ -79,7 +79,7 @@ public class TextObjectIndexSourceElement extends OdfElement
 	 */
 	public String getTextIndexScopeAttribute()
 	{
-		TextIndexScopeAttribute attr = (TextIndexScopeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "index-scope" ) );
+		TextIndexScopeAttribute attr = (TextIndexScopeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "index-scope" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -106,7 +106,7 @@ public class TextObjectIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextRelativeTabStopPositionAttribute()
 	{
-		TextRelativeTabStopPositionAttribute attr = (TextRelativeTabStopPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "relative-tab-stop-position" ) );
+		TextRelativeTabStopPositionAttribute attr = (TextRelativeTabStopPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "relative-tab-stop-position" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -133,7 +133,7 @@ public class TextObjectIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextUseSpreadsheetObjectsAttribute()
 	{
-		TextUseSpreadsheetObjectsAttribute attr = (TextUseSpreadsheetObjectsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-spreadsheet-objects" ) );
+		TextUseSpreadsheetObjectsAttribute attr = (TextUseSpreadsheetObjectsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-spreadsheet-objects" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -160,7 +160,7 @@ public class TextObjectIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextUseMathObjectsAttribute()
 	{
-		TextUseMathObjectsAttribute attr = (TextUseMathObjectsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-math-objects" ) );
+		TextUseMathObjectsAttribute attr = (TextUseMathObjectsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-math-objects" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -187,7 +187,7 @@ public class TextObjectIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextUseDrawObjectsAttribute()
 	{
-		TextUseDrawObjectsAttribute attr = (TextUseDrawObjectsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-draw-objects" ) );
+		TextUseDrawObjectsAttribute attr = (TextUseDrawObjectsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-draw-objects" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -214,7 +214,7 @@ public class TextObjectIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextUseChartObjectsAttribute()
 	{
-		TextUseChartObjectsAttribute attr = (TextUseChartObjectsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-chart-objects" ) );
+		TextUseChartObjectsAttribute attr = (TextUseChartObjectsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-chart-objects" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -241,7 +241,7 @@ public class TextObjectIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextUseOtherObjectsAttribute()
 	{
-		TextUseOtherObjectsAttribute attr = (TextUseOtherObjectsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-other-objects" ) );
+		TextUseOtherObjectsAttribute attr = (TextUseOtherObjectsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-other-objects" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

@@ -81,7 +81,7 @@ public class TextIndexSourceStylesElement extends OdfElement
 	 */
 	public String getTextOutlineLevelAttribute()
 	{
-		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "outline-level" ) );
+		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "outline-level" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

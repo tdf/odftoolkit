@@ -82,7 +82,7 @@ public class TextMeasureElement extends OdfElement
 	 */
 	public String getTextKindAttribute()
 	{
-		TextKindAttribute attr = (TextKindAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "kind" ) );
+		TextKindAttribute attr = (TextKindAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "kind" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

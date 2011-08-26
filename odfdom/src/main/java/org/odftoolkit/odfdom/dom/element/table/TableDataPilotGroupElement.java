@@ -81,7 +81,7 @@ public class TableDataPilotGroupElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) );
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

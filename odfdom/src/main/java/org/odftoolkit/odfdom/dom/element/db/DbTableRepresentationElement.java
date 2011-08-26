@@ -88,7 +88,7 @@ public class DbTableRepresentationElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) );
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -115,7 +115,7 @@ public class DbTableRepresentationElement extends OdfElement
 	 */
 	public String getDbCatalogNameAttribute()
 	{
-		DbCatalogNameAttribute attr = (DbCatalogNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "catalog-name" ) );
+		DbCatalogNameAttribute attr = (DbCatalogNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "catalog-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -142,7 +142,7 @@ public class DbTableRepresentationElement extends OdfElement
 	 */
 	public String getDbSchemaNameAttribute()
 	{
-		DbSchemaNameAttribute attr = (DbSchemaNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "schema-name" ) );
+		DbSchemaNameAttribute attr = (DbSchemaNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "schema-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -169,7 +169,7 @@ public class DbTableRepresentationElement extends OdfElement
 	 */
 	public String getDbTitleAttribute()
 	{
-		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "title" ) );
+		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "title" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -196,7 +196,7 @@ public class DbTableRepresentationElement extends OdfElement
 	 */
 	public String getDbDescriptionAttribute()
 	{
-		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "description" ) );
+		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "description" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -223,7 +223,7 @@ public class DbTableRepresentationElement extends OdfElement
 	 */
 	public String getDbStyleNameAttribute()
 	{
-		DbStyleNameAttribute attr = (DbStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "style-name" ) );
+		DbStyleNameAttribute attr = (DbStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -250,7 +250,7 @@ public class DbTableRepresentationElement extends OdfElement
 	 */
 	public String getDbDefaultRowStyleNameAttribute()
 	{
-		DbDefaultRowStyleNameAttribute attr = (DbDefaultRowStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "default-row-style-name" ) );
+		DbDefaultRowStyleNameAttribute attr = (DbDefaultRowStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "default-row-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

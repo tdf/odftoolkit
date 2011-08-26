@@ -98,7 +98,7 @@ public class TextSpanElement extends OdfStylableElement
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) );
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -125,7 +125,7 @@ public class TextSpanElement extends OdfStylableElement
 	 */
 	public String getTextClassNamesAttribute()
 	{
-		TextClassNamesAttribute attr = (TextClassNamesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "class-names" ) );
+		TextClassNamesAttribute attr = (TextClassNamesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "class-names" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

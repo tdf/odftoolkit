@@ -73,7 +73,7 @@ public class FormItemElement extends OdfElement
 	 */
 	public String getFormLabelAttribute()
 	{
-		FormLabelAttribute attr = (FormLabelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "label" ) );
+		FormLabelAttribute attr = (FormLabelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "label" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

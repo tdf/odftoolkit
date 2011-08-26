@@ -85,7 +85,7 @@ public class TableInsertionCutOffElement extends OdfElement
 	 */
 	public String getTableIdAttribute()
 	{
-		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "id" ) );
+		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class TableInsertionCutOffElement extends OdfElement
 	 */
 	public Integer getTablePositionAttribute()
 	{
-		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "position" ) );
+		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "position" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

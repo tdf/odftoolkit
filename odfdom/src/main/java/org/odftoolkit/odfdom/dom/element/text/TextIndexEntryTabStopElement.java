@@ -77,7 +77,7 @@ public class TextIndexEntryTabStopElement extends OdfStylableElement
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) );
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -104,7 +104,7 @@ public class TextIndexEntryTabStopElement extends OdfStylableElement
 	 */
 	public String getStyleLeaderCharAttribute()
 	{
-		StyleLeaderCharAttribute attr = (StyleLeaderCharAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "leader-char" ) );
+		StyleLeaderCharAttribute attr = (StyleLeaderCharAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "leader-char" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -131,7 +131,7 @@ public class TextIndexEntryTabStopElement extends OdfStylableElement
 	 */
 	public String getStyleTypeAttribute()
 	{
-		StyleTypeAttribute attr = (StyleTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "type" ) );
+		StyleTypeAttribute attr = (StyleTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -158,7 +158,7 @@ public class TextIndexEntryTabStopElement extends OdfStylableElement
 	 */
 	public String getStylePositionAttribute()
 	{
-		StylePositionAttribute attr = (StylePositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "position" ) );
+		StylePositionAttribute attr = (StylePositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "position" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

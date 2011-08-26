@@ -89,7 +89,7 @@ public class TableSourceServiceElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) );
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -116,7 +116,7 @@ public class TableSourceServiceElement extends OdfElement
 	 */
 	public String getTableSourceNameAttribute()
 	{
-		TableSourceNameAttribute attr = (TableSourceNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "source-name" ) );
+		TableSourceNameAttribute attr = (TableSourceNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "source-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -143,7 +143,7 @@ public class TableSourceServiceElement extends OdfElement
 	 */
 	public String getTableObjectNameAttribute()
 	{
-		TableObjectNameAttribute attr = (TableObjectNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "object-name" ) );
+		TableObjectNameAttribute attr = (TableObjectNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "object-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -170,7 +170,7 @@ public class TableSourceServiceElement extends OdfElement
 	 */
 	public String getTableUserNameAttribute()
 	{
-		TableUserNameAttribute attr = (TableUserNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "user-name" ) );
+		TableUserNameAttribute attr = (TableUserNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "user-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -197,7 +197,7 @@ public class TableSourceServiceElement extends OdfElement
 	 */
 	public String getTablePasswordAttribute()
 	{
-		TablePasswordAttribute attr = (TablePasswordAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "password" ) );
+		TablePasswordAttribute attr = (TablePasswordAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "password" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -115,7 +115,7 @@ public class TextChapterElement extends OdfElement
 	 */
 	public String getTextDisplayAttribute()
 	{
-		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display" ) );
+		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -142,7 +142,7 @@ public class TextChapterElement extends OdfElement
 	 */
 	public String getTextOutlineLevelAttribute()
 	{
-		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "outline-level" ) );
+		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "outline-level" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

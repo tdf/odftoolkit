@@ -86,7 +86,7 @@ public class StyleMapElement extends OdfElement
 	 */
 	public String getStyleConditionAttribute()
 	{
-		StyleConditionAttribute attr = (StyleConditionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "condition" ) );
+		StyleConditionAttribute attr = (StyleConditionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "condition" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public class StyleMapElement extends OdfElement
 	 */
 	public String getStyleApplyStyleNameAttribute()
 	{
-		StyleApplyStyleNameAttribute attr = (StyleApplyStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "apply-style-name" ) );
+		StyleApplyStyleNameAttribute attr = (StyleApplyStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "apply-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public class StyleMapElement extends OdfElement
 	 */
 	public String getStyleBaseCellAddressAttribute()
 	{
-		StyleBaseCellAddressAttribute attr = (StyleBaseCellAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "base-cell-address" ) );
+		StyleBaseCellAddressAttribute attr = (StyleBaseCellAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "base-cell-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

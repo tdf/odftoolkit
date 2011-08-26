@@ -116,7 +116,7 @@ public class FormListPropertyElement extends OdfElement
 	 */
 	public String getFormPropertyNameAttribute()
 	{
-		FormPropertyNameAttribute attr = (FormPropertyNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "property-name" ) );
+		FormPropertyNameAttribute attr = (FormPropertyNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "property-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -143,7 +143,7 @@ public class FormListPropertyElement extends OdfElement
 	 */
 	public String getOfficeValueTypeAttribute()
 	{
-		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value-type" ) );
+		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

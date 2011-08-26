@@ -77,7 +77,7 @@ public class DrawGElement extends DrawShapeElementBase
 	 */
 	public String getSvgYAttribute()
 	{
-		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) );
+		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -104,7 +104,7 @@ public class DrawGElement extends DrawShapeElementBase
 	 */
 	public String getDrawCaptionIdAttribute()
 	{
-		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-id" ) );
+		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -74,7 +74,7 @@ public class ChartMeanValueElement extends OdfStylableElement
 	 */
 	public String getChartStyleNameAttribute()
 	{
-		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) );
+		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

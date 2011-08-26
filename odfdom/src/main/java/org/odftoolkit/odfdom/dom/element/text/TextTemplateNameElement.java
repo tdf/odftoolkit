@@ -105,7 +105,7 @@ public class TextTemplateNameElement extends OdfElement
 	 */
 	public String getTextDisplayAttribute()
 	{
-		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display" ) );
+		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

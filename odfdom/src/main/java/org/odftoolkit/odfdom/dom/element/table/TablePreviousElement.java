@@ -73,7 +73,7 @@ public class TablePreviousElement extends OdfElement
 	 */
 	public String getTableIdAttribute()
 	{
-		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "id" ) );
+		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

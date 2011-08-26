@@ -83,7 +83,7 @@ public class TableDataPilotMemberElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) );
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public class TableDataPilotMemberElement extends OdfElement
 	 */
 	public Boolean getTableDisplayAttribute()
 	{
-		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display" ) );
+		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -137,7 +137,7 @@ public class TableDataPilotMemberElement extends OdfElement
 	 */
 	public Boolean getTableShowDetailsAttribute()
 	{
-		TableShowDetailsAttribute attr = (TableShowDetailsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "show-details" ) );
+		TableShowDetailsAttribute attr = (TableShowDetailsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "show-details" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

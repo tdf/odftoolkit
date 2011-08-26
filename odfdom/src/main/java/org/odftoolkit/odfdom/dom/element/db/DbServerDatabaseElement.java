@@ -87,7 +87,7 @@ public class DbServerDatabaseElement extends OdfElement
 	 */
 	public String getDbTypeAttribute()
 	{
-		DbTypeAttribute attr = (DbTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "type" ) );
+		DbTypeAttribute attr = (DbTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -114,7 +114,7 @@ public class DbServerDatabaseElement extends OdfElement
 	 */
 	public String getDbHostnameAttribute()
 	{
-		DbHostnameAttribute attr = (DbHostnameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "hostname" ) );
+		DbHostnameAttribute attr = (DbHostnameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "hostname" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -141,7 +141,7 @@ public class DbServerDatabaseElement extends OdfElement
 	 */
 	public Integer getDbPortAttribute()
 	{
-		DbPortAttribute attr = (DbPortAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "port" ) );
+		DbPortAttribute attr = (DbPortAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "port" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -168,7 +168,7 @@ public class DbServerDatabaseElement extends OdfElement
 	 */
 	public String getDbLocalSocketAttribute()
 	{
-		DbLocalSocketAttribute attr = (DbLocalSocketAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "local-socket" ) );
+		DbLocalSocketAttribute attr = (DbLocalSocketAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "local-socket" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -195,7 +195,7 @@ public class DbServerDatabaseElement extends OdfElement
 	 */
 	public String getDbDatabaseNameAttribute()
 	{
-		DbDatabaseNameAttribute attr = (DbDatabaseNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "database-name" ) );
+		DbDatabaseNameAttribute attr = (DbDatabaseNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "database-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

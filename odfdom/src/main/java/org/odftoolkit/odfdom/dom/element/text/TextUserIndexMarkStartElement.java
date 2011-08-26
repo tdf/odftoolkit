@@ -85,7 +85,7 @@ public class TextUserIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextIdAttribute()
 	{
-		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "id" ) );
+		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class TextUserIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextOutlineLevelAttribute()
 	{
-		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "outline-level" ) );
+		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "outline-level" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public class TextUserIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextIndexNameAttribute()
 	{
-		TextIndexNameAttribute attr = (TextIndexNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "index-name" ) );
+		TextIndexNameAttribute attr = (TextIndexNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "index-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

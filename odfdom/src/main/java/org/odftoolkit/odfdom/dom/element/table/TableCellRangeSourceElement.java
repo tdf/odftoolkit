@@ -130,7 +130,7 @@ public class TableCellRangeSourceElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) );
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public class TableCellRangeSourceElement extends OdfElement
 	 */
 	public Integer getTableLastColumnSpannedAttribute()
 	{
-		TableLastColumnSpannedAttribute attr = (TableLastColumnSpannedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "last-column-spanned" ) );
+		TableLastColumnSpannedAttribute attr = (TableLastColumnSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "last-column-spanned" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -184,7 +184,7 @@ public class TableCellRangeSourceElement extends OdfElement
 	 */
 	public Integer getTableLastRowSpannedAttribute()
 	{
-		TableLastRowSpannedAttribute attr = (TableLastRowSpannedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "last-row-spanned" ) );
+		TableLastRowSpannedAttribute attr = (TableLastRowSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "last-row-spanned" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -211,7 +211,7 @@ public class TableCellRangeSourceElement extends OdfElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) );
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -238,7 +238,7 @@ public class TableCellRangeSourceElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -265,7 +265,7 @@ public class TableCellRangeSourceElement extends OdfElement
 	 */
 	public String getXlinkActuateAttribute()
 	{
-		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) );
+		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -292,7 +292,7 @@ public class TableCellRangeSourceElement extends OdfElement
 	 */
 	public String getTableFilterNameAttribute()
 	{
-		TableFilterNameAttribute attr = (TableFilterNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "filter-name" ) );
+		TableFilterNameAttribute attr = (TableFilterNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "filter-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -319,7 +319,7 @@ public class TableCellRangeSourceElement extends OdfElement
 	 */
 	public String getTableFilterOptionsAttribute()
 	{
-		TableFilterOptionsAttribute attr = (TableFilterOptionsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "filter-options" ) );
+		TableFilterOptionsAttribute attr = (TableFilterOptionsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "filter-options" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -346,7 +346,7 @@ public class TableCellRangeSourceElement extends OdfElement
 	 */
 	public String getTableRefreshDelayAttribute()
 	{
-		TableRefreshDelayAttribute attr = (TableRefreshDelayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "refresh-delay" ) );
+		TableRefreshDelayAttribute attr = (TableRefreshDelayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "refresh-delay" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

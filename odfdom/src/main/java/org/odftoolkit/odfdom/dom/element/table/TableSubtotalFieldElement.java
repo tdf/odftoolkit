@@ -85,7 +85,7 @@ public class TableSubtotalFieldElement extends OdfElement
 	 */
 	public Integer getTableFieldNumberAttribute()
 	{
-		TableFieldNumberAttribute attr = (TableFieldNumberAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "field-number" ) );
+		TableFieldNumberAttribute attr = (TableFieldNumberAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "field-number" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -112,7 +112,7 @@ public class TableSubtotalFieldElement extends OdfElement
 	 */
 	public String getTableFunctionAttribute()
 	{
-		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "function" ) );
+		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "function" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

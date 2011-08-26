@@ -77,7 +77,7 @@ public class StyleDropCapElement extends OdfStylableElement
 	 */
 	public String getStyleLengthAttribute()
 	{
-		StyleLengthAttribute attr = (StyleLengthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "length" ) );
+		StyleLengthAttribute attr = (StyleLengthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "length" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -104,7 +104,7 @@ public class StyleDropCapElement extends OdfStylableElement
 	 */
 	public Integer getStyleLinesAttribute()
 	{
-		StyleLinesAttribute attr = (StyleLinesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "lines" ) );
+		StyleLinesAttribute attr = (StyleLinesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "lines" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -131,7 +131,7 @@ public class StyleDropCapElement extends OdfStylableElement
 	 */
 	public String getStyleDistanceAttribute()
 	{
-		StyleDistanceAttribute attr = (StyleDistanceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "distance" ) );
+		StyleDistanceAttribute attr = (StyleDistanceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "distance" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -158,7 +158,7 @@ public class StyleDropCapElement extends OdfStylableElement
 	 */
 	public String getStyleStyleNameAttribute()
 	{
-		StyleStyleNameAttribute attr = (StyleStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "style-name" ) );
+		StyleStyleNameAttribute attr = (StyleStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

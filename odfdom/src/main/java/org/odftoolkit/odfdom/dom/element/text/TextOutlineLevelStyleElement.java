@@ -93,7 +93,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase
 	 */
 	public Integer getTextLevelAttribute()
 	{
-		TextLevelAttribute attr = (TextLevelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "level" ) );
+		TextLevelAttribute attr = (TextLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "level" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -120,7 +120,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) );
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -147,7 +147,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase
 	 */
 	public String getStyleNumFormatAttribute()
 	{
-		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-format" ) );
+		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-format" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -174,7 +174,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase
 	 */
 	public Boolean getStyleNumLetterSyncAttribute()
 	{
-		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-letter-sync" ) );
+		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-letter-sync" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -201,7 +201,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase
 	 */
 	public String getStyleNumPrefixAttribute()
 	{
-		StyleNumPrefixAttribute attr = (StyleNumPrefixAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-prefix" ) );
+		StyleNumPrefixAttribute attr = (StyleNumPrefixAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-prefix" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -228,7 +228,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase
 	 */
 	public String getStyleNumSuffixAttribute()
 	{
-		StyleNumSuffixAttribute attr = (StyleNumSuffixAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-suffix" ) );
+		StyleNumSuffixAttribute attr = (StyleNumSuffixAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-suffix" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -255,7 +255,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase
 	 */
 	public Integer getTextDisplayLevelsAttribute()
 	{
-		TextDisplayLevelsAttribute attr = (TextDisplayLevelsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display-levels" ) );
+		TextDisplayLevelsAttribute attr = (TextDisplayLevelsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display-levels" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -282,7 +282,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase
 	 */
 	public String getTextStartValueAttribute()
 	{
-		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "start-value" ) );
+		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "start-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

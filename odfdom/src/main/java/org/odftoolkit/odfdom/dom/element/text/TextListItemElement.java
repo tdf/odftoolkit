@@ -75,7 +75,7 @@ public class TextListItemElement extends OdfElement
 	 */
 	public String getTextStartValueAttribute()
 	{
-		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "start-value" ) );
+		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "start-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -102,7 +102,7 @@ public class TextListItemElement extends OdfElement
 	 */
 	public String getTextStyleOverrideAttribute()
 	{
-		TextStyleOverrideAttribute attr = (TextStyleOverrideAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-override" ) );
+		TextStyleOverrideAttribute attr = (TextStyleOverrideAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-override" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -129,7 +129,7 @@ public class TextListItemElement extends OdfElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

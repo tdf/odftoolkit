@@ -81,7 +81,7 @@ public class TableFilterSetItemElement extends OdfElement
 	 */
 	public String getTableValueAttribute()
 	{
-		TableValueAttribute attr = (TableValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "value" ) );
+		TableValueAttribute attr = (TableValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -91,7 +91,7 @@ public class ChartChartElement extends OdfStylableElement
 	 */
 	public String getChartClassAttribute()
 	{
-		ChartClassAttribute attr = (ChartClassAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "class" ) );
+		ChartClassAttribute attr = (ChartClassAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "class" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -118,7 +118,7 @@ public class ChartChartElement extends OdfStylableElement
 	 */
 	public String getSvgWidthAttribute()
 	{
-		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "width" ) );
+		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -145,7 +145,7 @@ public class ChartChartElement extends OdfStylableElement
 	 */
 	public String getSvgHeightAttribute()
 	{
-		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) );
+		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -172,7 +172,7 @@ public class ChartChartElement extends OdfStylableElement
 	 */
 	public String getChartColumnMappingAttribute()
 	{
-		ChartColumnMappingAttribute attr = (ChartColumnMappingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "column-mapping" ) );
+		ChartColumnMappingAttribute attr = (ChartColumnMappingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "column-mapping" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -199,7 +199,7 @@ public class ChartChartElement extends OdfStylableElement
 	 */
 	public String getChartRowMappingAttribute()
 	{
-		ChartRowMappingAttribute attr = (ChartRowMappingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "row-mapping" ) );
+		ChartRowMappingAttribute attr = (ChartRowMappingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "row-mapping" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -226,7 +226,7 @@ public class ChartChartElement extends OdfStylableElement
 	 */
 	public String getChartStyleNameAttribute()
 	{
-		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) );
+		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -253,7 +253,7 @@ public class ChartChartElement extends OdfStylableElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) );
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -280,7 +280,7 @@ public class ChartChartElement extends OdfStylableElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -307,7 +307,7 @@ public class ChartChartElement extends OdfStylableElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

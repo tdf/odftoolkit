@@ -91,7 +91,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getPresentationNodeTypeAttribute()
 	{
-		PresentationNodeTypeAttribute attr = (PresentationNodeTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "node-type" ) );
+		PresentationNodeTypeAttribute attr = (PresentationNodeTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "node-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -118,7 +118,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getPresentationPresetIdAttribute()
 	{
-		PresentationPresetIdAttribute attr = (PresentationPresetIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "preset-id" ) );
+		PresentationPresetIdAttribute attr = (PresentationPresetIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "preset-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -145,7 +145,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getPresentationPresetSubTypeAttribute()
 	{
-		PresentationPresetSubTypeAttribute attr = (PresentationPresetSubTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "preset-sub-type" ) );
+		PresentationPresetSubTypeAttribute attr = (PresentationPresetSubTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "preset-sub-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -172,7 +172,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getPresentationPresetClassAttribute()
 	{
-		PresentationPresetClassAttribute attr = (PresentationPresetClassAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "preset-class" ) );
+		PresentationPresetClassAttribute attr = (PresentationPresetClassAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "preset-class" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -199,7 +199,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getPresentationMasterElementAttribute()
 	{
-		PresentationMasterElementAttribute attr = (PresentationMasterElementAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "master-element" ) );
+		PresentationMasterElementAttribute attr = (PresentationMasterElementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "master-element" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -226,7 +226,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getPresentationGroupIdAttribute()
 	{
-		PresentationGroupIdAttribute attr = (PresentationGroupIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "group-id" ) );
+		PresentationGroupIdAttribute attr = (PresentationGroupIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "group-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -253,7 +253,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getAnimIdAttribute()
 	{
-		AnimIdAttribute attr = (AnimIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "id" ) );
+		AnimIdAttribute attr = (AnimIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -280,7 +280,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -307,7 +307,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -334,7 +334,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public Double getAnimAudioLevelAttribute()
 	{
-		AnimAudioLevelAttribute attr = (AnimAudioLevelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "audio-level" ) );
+		AnimAudioLevelAttribute attr = (AnimAudioLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "audio-level" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
@@ -361,7 +361,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getSmilBeginAttribute()
 	{
-		SmilBeginAttribute attr = (SmilBeginAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "begin" ) );
+		SmilBeginAttribute attr = (SmilBeginAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "begin" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -388,7 +388,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getSmilEndAttribute()
 	{
-		SmilEndAttribute attr = (SmilEndAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "end" ) );
+		SmilEndAttribute attr = (SmilEndAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "end" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -415,7 +415,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getSmilDurAttribute()
 	{
-		SmilDurAttribute attr = (SmilDurAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "dur" ) );
+		SmilDurAttribute attr = (SmilDurAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "dur" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -442,7 +442,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getSmilRepeatDurAttribute()
 	{
-		SmilRepeatDurAttribute attr = (SmilRepeatDurAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "repeatDur" ) );
+		SmilRepeatDurAttribute attr = (SmilRepeatDurAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "repeatDur" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -469,7 +469,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getSmilRepeatCountAttribute()
 	{
-		SmilRepeatCountAttribute attr = (SmilRepeatCountAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "repeatCount" ) );
+		SmilRepeatCountAttribute attr = (SmilRepeatCountAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "repeatCount" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -496,7 +496,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getSmilRestartAttribute()
 	{
-		SmilRestartAttribute attr = (SmilRestartAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "restart" ) );
+		SmilRestartAttribute attr = (SmilRestartAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "restart" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -523,7 +523,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getSmilRestartDefaultAttribute()
 	{
-		SmilRestartDefaultAttribute attr = (SmilRestartDefaultAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "restartDefault" ) );
+		SmilRestartDefaultAttribute attr = (SmilRestartDefaultAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "restartDefault" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -550,7 +550,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getSmilFillAttribute()
 	{
-		SmilFillAttribute attr = (SmilFillAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "fill" ) );
+		SmilFillAttribute attr = (SmilFillAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "fill" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -577,7 +577,7 @@ public class AnimAudioElement extends OdfElement
 	 */
 	public String getSmilFillDefaultAttribute()
 	{
-		SmilFillDefaultAttribute attr = (SmilFillDefaultAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "fillDefault" ) );
+		SmilFillDefaultAttribute attr = (SmilFillDefaultAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "fillDefault" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

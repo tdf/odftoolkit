@@ -90,7 +90,7 @@ public class DrawContourPolygonElement extends OdfElement
 	 */
 	public Boolean getDrawRecreateOnEditAttribute()
 	{
-		DrawRecreateOnEditAttribute attr = (DrawRecreateOnEditAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "recreate-on-edit" ) );
+		DrawRecreateOnEditAttribute attr = (DrawRecreateOnEditAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "recreate-on-edit" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -117,7 +117,7 @@ public class DrawContourPolygonElement extends OdfElement
 	 */
 	public String getSvgWidthAttribute()
 	{
-		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "width" ) );
+		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -144,7 +144,7 @@ public class DrawContourPolygonElement extends OdfElement
 	 */
 	public String getSvgHeightAttribute()
 	{
-		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) );
+		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -171,7 +171,7 @@ public class DrawContourPolygonElement extends OdfElement
 	 */
 	public String getSvgViewBoxAttribute()
 	{
-		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "viewBox" ) );
+		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "viewBox" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -198,7 +198,7 @@ public class DrawContourPolygonElement extends OdfElement
 	 */
 	public String getDrawPointsAttribute()
 	{
-		DrawPointsAttribute attr = (DrawPointsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "points" ) );
+		DrawPointsAttribute attr = (DrawPointsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "points" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

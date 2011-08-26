@@ -76,7 +76,7 @@ public class TableFilterElement extends OdfElement
 	 */
 	public String getTableTargetRangeAddressAttribute()
 	{
-		TableTargetRangeAddressAttribute attr = (TableTargetRangeAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "target-range-address" ) );
+		TableTargetRangeAddressAttribute attr = (TableTargetRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "target-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -103,7 +103,7 @@ public class TableFilterElement extends OdfElement
 	 */
 	public String getTableConditionSourceAttribute()
 	{
-		TableConditionSourceAttribute attr = (TableConditionSourceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "condition-source" ) );
+		TableConditionSourceAttribute attr = (TableConditionSourceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "condition-source" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public class TableFilterElement extends OdfElement
 	 */
 	public String getTableConditionSourceRangeAddressAttribute()
 	{
-		TableConditionSourceRangeAddressAttribute attr = (TableConditionSourceRangeAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "condition-source-range-address" ) );
+		TableConditionSourceRangeAddressAttribute attr = (TableConditionSourceRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "condition-source-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public class TableFilterElement extends OdfElement
 	 */
 	public Boolean getTableDisplayDuplicatesAttribute()
 	{
-		TableDisplayDuplicatesAttribute attr = (TableDisplayDuplicatesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display-duplicates" ) );
+		TableDisplayDuplicatesAttribute attr = (TableDisplayDuplicatesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display-duplicates" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

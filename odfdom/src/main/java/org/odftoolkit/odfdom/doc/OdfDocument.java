@@ -71,6 +71,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -453,23 +454,54 @@ public abstract class OdfDocument {
 	 */
 	public void embedDocument(String pkgPathToChildDocument, OdfDocument newOdfDocument) {
 		newOdfDocument.insertDOMsToPkg();
-		// insert to package and add it to the Manifest
-		pkgPathToChildDocument = ensureValidPackagePath(pkgPathToChildDocument);
-		newOdfDocument.setDocumentPathInPackage(pkgPathToChildDocument);
+		// Gets the odfDocument's manifest entry info, no matter it is a independent document or an embedDocument.
+		HashMap<String, OdfFileEntry> copyEntryMap;
+		if (newOdfDocument.isRootDocument()) {
+			copyEntryMap = newOdfDocument.getPackage().getManifestEntries();
+		} else {
+			copyEntryMap = new HashMap<String, OdfFileEntry>();
+			String fileEntryPrefix = newOdfDocument.getDocumentPackagePath();
+			HashMap<String, OdfFileEntry> rootEntries = newOdfDocument.getRootDocument().getPackage().getManifestEntries();
+			Set<String> rootEntryNameSet = newOdfDocument.getRootDocument().getPackage().getFileEntries();
+			for (String entryName : rootEntryNameSet) {
+				if (entryName.startsWith(fileEntryPrefix)) {
+					String newEntryName = entryName.substring(fileEntryPrefix.length());
+					OdfFileEntry srcFileEntry=rootEntries.get(entryName);
+					OdfFileEntry newFileEntry=new OdfFileEntry();
+					newFileEntry.setEncryptionData(srcFileEntry.getEncryptionData());
+					newFileEntry.setMediaType(srcFileEntry.getMediaType());
+					newFileEntry.setPath(newEntryName);
+					newFileEntry.setSize(srcFileEntry.getSize());			
+					copyEntryMap.put(entryName, newFileEntry);
+				}
+			}
+		}
+		//reset mRootDocument
 		if (isRootDocument()) {
 			newOdfDocument.mRootDocument = this;
 		} else {
 			newOdfDocument.mRootDocument = this.mRootDocument;
 		}
-		for (OdfXMLFile odfFile : OdfXMLFile.values()) {
-			try {
-				if (newOdfDocument.mPackage.getInputStream(odfFile.mFileName) != null) {
-					mPackage.insert(newOdfDocument.mPackage.getInputStream(odfFile.mFileName), newOdfDocument.getXMLFilePath(odfFile), newOdfDocument.mPackage.getMediaType());
+		//insert to package and add it to the Manifest
+		newOdfDocument.setDocumentPathInPackage(pkgPathToChildDocument);
+		Set<String> entryNameList = copyEntryMap.keySet();
+		for (String entryName : entryNameList) {
+			OdfFileEntry entry = copyEntryMap.get(entryName);
+			if (entry != null) {
+				try {
+					if (entryName.equalsIgnoreCase(SLASH)) {
+						mPackage.insert((byte[]) null, newOdfDocument.getDocumentPackagePath(), entry.getMediaType());
+                    } else {
+						mPackage.insert(newOdfDocument.getPackage().getInputStream(entryName),(newOdfDocument.getDocumentPackagePath() + entry.getPath()), entry.getMediaType());
+					}
+				} catch (Exception ex) {
+					Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
 				}
-			} catch (Exception ex) {
-				Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
+		//make sure the embedDocument's media type is right set.
+		OdfFileEntry embedDocumentRootEntry = new OdfFileEntry(newOdfDocument.getDocumentPackagePath(), newOdfDocument.getMediaType());
+		mPackage.getManifestEntries().put(newOdfDocument.getDocumentPackagePath(), embedDocumentRootEntry);
 	}
 
 	/**
@@ -531,15 +563,19 @@ public abstract class OdfDocument {
 		OdfDocument cachedDocument;
 		pathToObject = ensureValidPackagePath(pathToObject);
 		try {
-			String mediaTypeOfEmbeddedDoc = mPackage.getFileEntry(pathToObject).getMediaType();
-			if (mediaTypeOfEmbeddedDoc != null) {
-				// look if OdfDocument was already created, if so return reference, otherwise create OdfDocument.OdfDocument
-				if ((cachedDocument = lookupDocumentCache(pathToObject)) != null) {
-					return cachedDocument;
-				} else {
-					OdfDocument newDoc = OdfDocument.loadDocument(this, pathToObject, mediaTypeOfEmbeddedDoc);
-					addToCache(newDoc.getDocumentPackagePath(), newDoc);
-					return newDoc;
+			OdfFileEntry entry = mPackage.getFileEntry(pathToObject);
+			//entry might be null if the odf package does not contain the specified path
+			if(entry != null){
+				String mediaTypeOfEmbeddedDoc = entry.getMediaType();
+				if (mediaTypeOfEmbeddedDoc != null) {
+					// look if OdfDocument was already created, if so return reference, otherwise create OdfDocument.OdfDocument
+					if ((cachedDocument = lookupDocumentCache(pathToObject)) != null) {
+						return cachedDocument;
+					} else {
+						OdfDocument newDoc = OdfDocument.loadDocument(this, pathToObject, mediaTypeOfEmbeddedDoc);
+						addToCache(newDoc.getDocumentPackagePath(), newDoc);
+						return newDoc;
+					}
 				}
 			}
 		} catch (Exception ex) {

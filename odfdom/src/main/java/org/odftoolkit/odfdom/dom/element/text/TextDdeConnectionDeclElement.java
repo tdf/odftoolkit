@@ -92,7 +92,7 @@ public class TextDdeConnectionDeclElement extends OdfElement
 	 */
 	public String getOfficeNameAttribute()
 	{
-		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "name" ) );
+		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -119,7 +119,7 @@ public class TextDdeConnectionDeclElement extends OdfElement
 	 */
 	public String getOfficeDdeApplicationAttribute()
 	{
-		OfficeDdeApplicationAttribute attr = (OfficeDdeApplicationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "dde-application" ) );
+		OfficeDdeApplicationAttribute attr = (OfficeDdeApplicationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "dde-application" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -146,7 +146,7 @@ public class TextDdeConnectionDeclElement extends OdfElement
 	 */
 	public String getOfficeDdeTopicAttribute()
 	{
-		OfficeDdeTopicAttribute attr = (OfficeDdeTopicAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "dde-topic" ) );
+		OfficeDdeTopicAttribute attr = (OfficeDdeTopicAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "dde-topic" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -173,7 +173,7 @@ public class TextDdeConnectionDeclElement extends OdfElement
 	 */
 	public String getOfficeDdeItemAttribute()
 	{
-		OfficeDdeItemAttribute attr = (OfficeDdeItemAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "dde-item" ) );
+		OfficeDdeItemAttribute attr = (OfficeDdeItemAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "dde-item" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -200,7 +200,7 @@ public class TextDdeConnectionDeclElement extends OdfElement
 	 */
 	public Boolean getOfficeAutomaticUpdateAttribute()
 	{
-		OfficeAutomaticUpdateAttribute attr = (OfficeAutomaticUpdateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "automatic-update" ) );
+		OfficeAutomaticUpdateAttribute attr = (OfficeAutomaticUpdateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "automatic-update" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

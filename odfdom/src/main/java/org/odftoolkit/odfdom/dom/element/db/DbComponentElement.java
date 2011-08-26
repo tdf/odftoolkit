@@ -155,7 +155,7 @@ public class DbComponentElement extends OdfElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) );
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -182,7 +182,7 @@ public class DbComponentElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -209,7 +209,7 @@ public class DbComponentElement extends OdfElement
 	 */
 	public String getXlinkShowAttribute()
 	{
-		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) );
+		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -236,7 +236,7 @@ public class DbComponentElement extends OdfElement
 	 */
 	public String getXlinkActuateAttribute()
 	{
-		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) );
+		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -263,7 +263,7 @@ public class DbComponentElement extends OdfElement
 	 */
 	public Boolean getDbAsTemplateAttribute()
 	{
-		DbAsTemplateAttribute attr = (DbAsTemplateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "as-template" ) );
+		DbAsTemplateAttribute attr = (DbAsTemplateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "as-template" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -290,7 +290,7 @@ public class DbComponentElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) );
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -317,7 +317,7 @@ public class DbComponentElement extends OdfElement
 	 */
 	public String getDbTitleAttribute()
 	{
-		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "title" ) );
+		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "title" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -344,7 +344,7 @@ public class DbComponentElement extends OdfElement
 	 */
 	public String getDbDescriptionAttribute()
 	{
-		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "description" ) );
+		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "description" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -85,7 +85,7 @@ public class DbIndexElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) );
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class DbIndexElement extends OdfElement
 	 */
 	public String getDbCatalogNameAttribute()
 	{
-		DbCatalogNameAttribute attr = (DbCatalogNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "catalog-name" ) );
+		DbCatalogNameAttribute attr = (DbCatalogNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "catalog-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public class DbIndexElement extends OdfElement
 	 */
 	public Boolean getDbIsUniqueAttribute()
 	{
-		DbIsUniqueAttribute attr = (DbIsUniqueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-unique" ) );
+		DbIsUniqueAttribute attr = (DbIsUniqueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-unique" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -166,7 +166,7 @@ public class DbIndexElement extends OdfElement
 	 */
 	public Boolean getDbIsClusteredAttribute()
 	{
-		DbIsClusteredAttribute attr = (DbIsClusteredAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-clustered" ) );
+		DbIsClusteredAttribute attr = (DbIsClusteredAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-clustered" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

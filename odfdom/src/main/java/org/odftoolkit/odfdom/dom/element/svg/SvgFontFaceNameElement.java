@@ -73,7 +73,7 @@ public class SvgFontFaceNameElement extends OdfElement
 	 */
 	public String getSvgNameAttribute()
 	{
-		SvgNameAttribute attr = (SvgNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "name" ) );
+		SvgNameAttribute attr = (SvgNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

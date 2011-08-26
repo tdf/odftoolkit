@@ -76,7 +76,7 @@ public class NumberCurrencySymbolElement extends OdfElement
 	 */
 	public String getNumberLanguageAttribute()
 	{
-		NumberLanguageAttribute attr = (NumberLanguageAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "language" ) );
+		NumberLanguageAttribute attr = (NumberLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "language" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -103,7 +103,7 @@ public class NumberCurrencySymbolElement extends OdfElement
 	 */
 	public String getNumberCountryAttribute()
 	{
-		NumberCountryAttribute attr = (NumberCountryAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "country" ) );
+		NumberCountryAttribute attr = (NumberCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "country" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public class NumberCurrencySymbolElement extends OdfElement
 	 */
 	public String getNumberScriptAttribute()
 	{
-		NumberScriptAttribute attr = (NumberScriptAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "script" ) );
+		NumberScriptAttribute attr = (NumberScriptAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "script" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public class NumberCurrencySymbolElement extends OdfElement
 	 */
 	public String getNumberRfcLanguageTagAttribute()
 	{
-		NumberRfcLanguageTagAttribute attr = (NumberRfcLanguageTagAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "rfc-language-tag" ) );
+		NumberRfcLanguageTagAttribute attr = (NumberRfcLanguageTagAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "rfc-language-tag" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

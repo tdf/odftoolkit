@@ -83,7 +83,7 @@ public class TextSortKeyElement extends OdfElement
 	 */
 	public String getTextKeyAttribute()
 	{
-		TextKeyAttribute attr = (TextKeyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "key" ) );
+		TextKeyAttribute attr = (TextKeyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "key" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public class TextSortKeyElement extends OdfElement
 	 */
 	public Boolean getTextSortAscendingAttribute()
 	{
-		TextSortAscendingAttribute attr = (TextSortAscendingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "sort-ascending" ) );
+		TextSortAscendingAttribute attr = (TextSortAscendingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "sort-ascending" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

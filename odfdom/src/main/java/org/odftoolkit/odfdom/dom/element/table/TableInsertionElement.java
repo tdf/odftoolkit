@@ -124,7 +124,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public String getTableTypeAttribute()
 	{
-		TableTypeAttribute attr = (TableTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "type" ) );
+		TableTypeAttribute attr = (TableTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -151,7 +151,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public Integer getTablePositionAttribute()
 	{
-		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "position" ) );
+		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "position" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -178,7 +178,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public Integer getTableCountAttribute()
 	{
-		TableCountAttribute attr = (TableCountAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "count" ) );
+		TableCountAttribute attr = (TableCountAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "count" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -205,7 +205,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public Integer getTableTableAttribute()
 	{
-		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "table" ) );
+		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "table" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -232,7 +232,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public String getTableIdAttribute()
 	{
-		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "id" ) );
+		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -259,7 +259,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public String getTableAcceptanceStateAttribute()
 	{
-		TableAcceptanceStateAttribute attr = (TableAcceptanceStateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "acceptance-state" ) );
+		TableAcceptanceStateAttribute attr = (TableAcceptanceStateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "acceptance-state" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -286,7 +286,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public String getTableRejectingChangeIdAttribute()
 	{
-		TableRejectingChangeIdAttribute attr = (TableRejectingChangeIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "rejecting-change-id" ) );
+		TableRejectingChangeIdAttribute attr = (TableRejectingChangeIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "rejecting-change-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

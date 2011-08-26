@@ -84,7 +84,7 @@ public class TextVariableDeclElement extends OdfElement
 	 */
 	public String getTextNameAttribute()
 	{
-		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) );
+		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -111,7 +111,7 @@ public class TextVariableDeclElement extends OdfElement
 	 */
 	public String getOfficeValueTypeAttribute()
 	{
-		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value-type" ) );
+		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

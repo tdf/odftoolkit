@@ -84,7 +84,7 @@ public class OfficeDocumentSettingsElement extends OdfElement
 	 */
 	public String getOfficeVersionAttribute()
 	{
-		OfficeVersionAttribute attr = (OfficeVersionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "version" ) );
+		OfficeVersionAttribute attr = (OfficeVersionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "version" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -111,7 +111,7 @@ public class OfficeDocumentSettingsElement extends OdfElement
 	 */
 	public String getGrddlTransformationAttribute()
 	{
-		GrddlTransformationAttribute attr = (GrddlTransformationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.GRDDL), "transformation" ) );
+		GrddlTransformationAttribute attr = (GrddlTransformationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.GRDDL), "transformation" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

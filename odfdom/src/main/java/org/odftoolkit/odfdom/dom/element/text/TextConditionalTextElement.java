@@ -88,7 +88,7 @@ public class TextConditionalTextElement extends OdfElement
 	 */
 	public String getTextConditionAttribute()
 	{
-		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "condition" ) );
+		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "condition" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -115,7 +115,7 @@ public class TextConditionalTextElement extends OdfElement
 	 */
 	public String getTextStringValueIfTrueAttribute()
 	{
-		TextStringValueIfTrueAttribute attr = (TextStringValueIfTrueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "string-value-if-true" ) );
+		TextStringValueIfTrueAttribute attr = (TextStringValueIfTrueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "string-value-if-true" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -142,7 +142,7 @@ public class TextConditionalTextElement extends OdfElement
 	 */
 	public String getTextStringValueIfFalseAttribute()
 	{
-		TextStringValueIfFalseAttribute attr = (TextStringValueIfFalseAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "string-value-if-false" ) );
+		TextStringValueIfFalseAttribute attr = (TextStringValueIfFalseAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "string-value-if-false" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -169,7 +169,7 @@ public class TextConditionalTextElement extends OdfElement
 	 */
 	public Boolean getTextCurrentValueAttribute()
 	{
-		TextCurrentValueAttribute attr = (TextCurrentValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "current-value" ) );
+		TextCurrentValueAttribute attr = (TextCurrentValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "current-value" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

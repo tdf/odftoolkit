@@ -86,7 +86,7 @@ public class TableDatabaseSourceSqlElement extends OdfElement
 	 */
 	public String getTableDatabaseNameAttribute()
 	{
-		TableDatabaseNameAttribute attr = (TableDatabaseNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "database-name" ) );
+		TableDatabaseNameAttribute attr = (TableDatabaseNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "database-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public class TableDatabaseSourceSqlElement extends OdfElement
 	 */
 	public String getTableSqlStatementAttribute()
 	{
-		TableSqlStatementAttribute attr = (TableSqlStatementAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "sql-statement" ) );
+		TableSqlStatementAttribute attr = (TableSqlStatementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "sql-statement" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public class TableDatabaseSourceSqlElement extends OdfElement
 	 */
 	public Boolean getTableParseSqlStatementAttribute()
 	{
-		TableParseSqlStatementAttribute attr = (TableParseSqlStatementAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "parse-sql-statement" ) );
+		TableParseSqlStatementAttribute attr = (TableParseSqlStatementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "parse-sql-statement" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

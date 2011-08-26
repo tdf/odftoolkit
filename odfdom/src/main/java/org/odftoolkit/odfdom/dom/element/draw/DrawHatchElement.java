@@ -119,7 +119,7 @@ public class DrawHatchElement extends OdfElement
 	 */
 	public String getDrawNameAttribute()
 	{
-		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) );
+		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -146,7 +146,7 @@ public class DrawHatchElement extends OdfElement
 	 */
 	public String getDrawDisplayNameAttribute()
 	{
-		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "display-name" ) );
+		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "display-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -173,7 +173,7 @@ public class DrawHatchElement extends OdfElement
 	 */
 	public String getDrawStyleAttribute()
 	{
-		DrawStyleAttribute attr = (DrawStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style" ) );
+		DrawStyleAttribute attr = (DrawStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -200,7 +200,7 @@ public class DrawHatchElement extends OdfElement
 	 */
 	public String getDrawColorAttribute()
 	{
-		DrawColorAttribute attr = (DrawColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "color" ) );
+		DrawColorAttribute attr = (DrawColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -227,7 +227,7 @@ public class DrawHatchElement extends OdfElement
 	 */
 	public String getDrawDistanceAttribute()
 	{
-		DrawDistanceAttribute attr = (DrawDistanceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "distance" ) );
+		DrawDistanceAttribute attr = (DrawDistanceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "distance" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -254,7 +254,7 @@ public class DrawHatchElement extends OdfElement
 	 */
 	public String getDrawRotationAttribute()
 	{
-		DrawRotationAttribute attr = (DrawRotationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "rotation" ) );
+		DrawRotationAttribute attr = (DrawRotationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "rotation" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

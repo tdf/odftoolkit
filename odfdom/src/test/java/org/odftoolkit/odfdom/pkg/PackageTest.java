@@ -46,7 +46,9 @@ import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawPage;
-import org.odftoolkit.odfdom.doc.office.OdfOfficePresentation;
+import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
 import org.odftoolkit.odfdom.type.AnyURI;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.xml.sax.InputSource;
@@ -73,9 +75,9 @@ public class PackageTest {
 	public void testNotCompressImages() throws Exception {
 	    //create test presentation
 	         OdfPresentationDocument odp=OdfPresentationDocument.newPresentationDocument();
-		 OdfOfficePresentation officePresentation=odp.getContentRoot();
-	    	   OdfDrawPage page = (OdfDrawPage) officePresentation.newDrawPageElement(null);
-		   OdfDrawFrame frame = (OdfDrawFrame) page.newDrawFrameElement();
+	         OfficePresentationElement officePresentation=odp.getContentRoot();
+	    	   DrawPageElement page = officePresentation.newDrawPageElement(null);
+		   DrawFrameElement frame = page.newDrawFrameElement();
 		   OdfDrawImage image= (OdfDrawImage) frame.newDrawImageElement();
 		   image.newImage(ResourceUtilities.getURI(IMAGE_TEST_FILE));
 	        odp.save(ResourceUtilities.newTestOutputFile(IMAGE_PRESENTATION));

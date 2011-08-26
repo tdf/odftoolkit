@@ -85,7 +85,7 @@ public class TableDatabaseSourceQueryElement extends OdfElement
 	 */
 	public String getTableDatabaseNameAttribute()
 	{
-		TableDatabaseNameAttribute attr = (TableDatabaseNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "database-name" ) );
+		TableDatabaseNameAttribute attr = (TableDatabaseNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "database-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class TableDatabaseSourceQueryElement extends OdfElement
 	 */
 	public String getTableQueryNameAttribute()
 	{
-		TableQueryNameAttribute attr = (TableQueryNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "query-name" ) );
+		TableQueryNameAttribute attr = (TableQueryNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "query-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

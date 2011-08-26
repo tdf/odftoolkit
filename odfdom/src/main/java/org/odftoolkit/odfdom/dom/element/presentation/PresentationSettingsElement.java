@@ -86,7 +86,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public String getPresentationStartPageAttribute()
 	{
-		PresentationStartPageAttribute attr = (PresentationStartPageAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "start-page" ) );
+		PresentationStartPageAttribute attr = (PresentationStartPageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "start-page" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public String getPresentationShowAttribute()
 	{
-		PresentationShowAttribute attr = (PresentationShowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "show" ) );
+		PresentationShowAttribute attr = (PresentationShowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "show" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public Boolean getPresentationFullScreenAttribute()
 	{
-		PresentationFullScreenAttribute attr = (PresentationFullScreenAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "full-screen" ) );
+		PresentationFullScreenAttribute attr = (PresentationFullScreenAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "full-screen" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -167,7 +167,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public Boolean getPresentationEndlessAttribute()
 	{
-		PresentationEndlessAttribute attr = (PresentationEndlessAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "endless" ) );
+		PresentationEndlessAttribute attr = (PresentationEndlessAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "endless" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -194,7 +194,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public String getPresentationPauseAttribute()
 	{
-		PresentationPauseAttribute attr = (PresentationPauseAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "pause" ) );
+		PresentationPauseAttribute attr = (PresentationPauseAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "pause" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -221,7 +221,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public Boolean getPresentationShowLogoAttribute()
 	{
-		PresentationShowLogoAttribute attr = (PresentationShowLogoAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "show-logo" ) );
+		PresentationShowLogoAttribute attr = (PresentationShowLogoAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "show-logo" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -248,7 +248,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public Boolean getPresentationForceManualAttribute()
 	{
-		PresentationForceManualAttribute attr = (PresentationForceManualAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "force-manual" ) );
+		PresentationForceManualAttribute attr = (PresentationForceManualAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "force-manual" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -275,7 +275,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public Boolean getPresentationMouseVisibleAttribute()
 	{
-		PresentationMouseVisibleAttribute attr = (PresentationMouseVisibleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "mouse-visible" ) );
+		PresentationMouseVisibleAttribute attr = (PresentationMouseVisibleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "mouse-visible" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -302,7 +302,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public Boolean getPresentationMouseAsPenAttribute()
 	{
-		PresentationMouseAsPenAttribute attr = (PresentationMouseAsPenAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "mouse-as-pen" ) );
+		PresentationMouseAsPenAttribute attr = (PresentationMouseAsPenAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "mouse-as-pen" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -329,7 +329,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public Boolean getPresentationStartWithNavigatorAttribute()
 	{
-		PresentationStartWithNavigatorAttribute attr = (PresentationStartWithNavigatorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "start-with-navigator" ) );
+		PresentationStartWithNavigatorAttribute attr = (PresentationStartWithNavigatorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "start-with-navigator" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -356,7 +356,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public String getPresentationAnimationsAttribute()
 	{
-		PresentationAnimationsAttribute attr = (PresentationAnimationsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "animations" ) );
+		PresentationAnimationsAttribute attr = (PresentationAnimationsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "animations" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -383,7 +383,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public String getPresentationTransitionOnClickAttribute()
 	{
-		PresentationTransitionOnClickAttribute attr = (PresentationTransitionOnClickAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "transition-on-click" ) );
+		PresentationTransitionOnClickAttribute attr = (PresentationTransitionOnClickAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "transition-on-click" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -410,7 +410,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public Boolean getPresentationStayOnTopAttribute()
 	{
-		PresentationStayOnTopAttribute attr = (PresentationStayOnTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "stay-on-top" ) );
+		PresentationStayOnTopAttribute attr = (PresentationStayOnTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "stay-on-top" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -437,7 +437,7 @@ public class PresentationSettingsElement extends OdfElement
 	 */
 	public Boolean getPresentationShowEndOfPresentationSlideAttribute()
 	{
-		PresentationShowEndOfPresentationSlideAttribute attr = (PresentationShowEndOfPresentationSlideAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "show-end-of-presentation-slide" ) );
+		PresentationShowEndOfPresentationSlideAttribute attr = (PresentationShowEndOfPresentationSlideAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "show-end-of-presentation-slide" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

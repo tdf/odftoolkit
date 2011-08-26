@@ -80,7 +80,7 @@ public class StyleRubyPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRubyPositionAttribute()
 	{
-		StyleRubyPositionAttribute attr = (StyleRubyPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "ruby-position" ) );
+		StyleRubyPositionAttribute attr = (StyleRubyPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "ruby-position" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -107,7 +107,7 @@ public class StyleRubyPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRubyAlignAttribute()
 	{
-		StyleRubyAlignAttribute attr = (StyleRubyAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "ruby-align" ) );
+		StyleRubyAlignAttribute attr = (StyleRubyAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "ruby-align" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

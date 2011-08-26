@@ -74,7 +74,7 @@ public class TextPageVariableSetElement extends OdfElement
 	 */
 	public Boolean getTextActiveAttribute()
 	{
-		TextActiveAttribute attr = (TextActiveAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "active" ) );
+		TextActiveAttribute attr = (TextActiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "active" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -101,7 +101,7 @@ public class TextPageVariableSetElement extends OdfElement
 	 */
 	public Integer getTextPageAdjustAttribute()
 	{
-		TextPageAdjustAttribute attr = (TextPageAdjustAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "page-adjust" ) );
+		TextPageAdjustAttribute attr = (TextPageAdjustAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "page-adjust" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

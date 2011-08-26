@@ -81,7 +81,7 @@ public class TextOutlineStyleElement extends OdfElement
 	 */
 	public String getStyleNameAttribute()
 	{
-		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) );
+		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

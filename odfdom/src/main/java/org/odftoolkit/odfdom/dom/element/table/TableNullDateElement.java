@@ -74,7 +74,7 @@ public class TableNullDateElement extends OdfElement
 	 */
 	public String getTableValueTypeAttribute()
 	{
-		TableValueTypeAttribute attr = (TableValueTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "value-type" ) );
+		TableValueTypeAttribute attr = (TableValueTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "value-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -101,7 +101,7 @@ public class TableNullDateElement extends OdfElement
 	 */
 	public String getTableDateValueAttribute()
 	{
-		TableDateValueAttribute attr = (TableDateValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "date-value" ) );
+		TableDateValueAttribute attr = (TableDateValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "date-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -84,7 +84,7 @@ public class TextUserFieldInputElement extends OdfElement
 	 */
 	public String getTextNameAttribute()
 	{
-		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) );
+		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -111,7 +111,7 @@ public class TextUserFieldInputElement extends OdfElement
 	 */
 	public String getTextDescriptionAttribute()
 	{
-		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "description" ) );
+		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "description" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -138,7 +138,7 @@ public class TextUserFieldInputElement extends OdfElement
 	 */
 	public String getStyleDataStyleNameAttribute()
 	{
-		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) );
+		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

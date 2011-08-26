@@ -82,7 +82,7 @@ public class NumberEmbeddedTextElement extends OdfElement
 	 */
 	public Integer getNumberPositionAttribute()
 	{
-		NumberPositionAttribute attr = (NumberPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "position" ) );
+		NumberPositionAttribute attr = (NumberPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "position" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

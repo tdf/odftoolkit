@@ -90,7 +90,7 @@ public class OfficeSpreadsheetElement extends OdfElement
 	 */
 	public Boolean getTableStructureProtectedAttribute()
 	{
-		TableStructureProtectedAttribute attr = (TableStructureProtectedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "structure-protected" ) );
+		TableStructureProtectedAttribute attr = (TableStructureProtectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "structure-protected" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -117,7 +117,7 @@ public class OfficeSpreadsheetElement extends OdfElement
 	 */
 	public String getTableProtectionKeyAttribute()
 	{
-		TableProtectionKeyAttribute attr = (TableProtectionKeyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protection-key" ) );
+		TableProtectionKeyAttribute attr = (TableProtectionKeyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protection-key" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -144,7 +144,7 @@ public class OfficeSpreadsheetElement extends OdfElement
 	 */
 	public String getTableProtectionKeyDigestAlgorithmAttribute()
 	{
-		TableProtectionKeyDigestAlgorithmAttribute attr = (TableProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protection-key-digest-algorithm" ) );
+		TableProtectionKeyDigestAlgorithmAttribute attr = (TableProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protection-key-digest-algorithm" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

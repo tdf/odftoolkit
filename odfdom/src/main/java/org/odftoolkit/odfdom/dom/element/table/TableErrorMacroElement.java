@@ -73,7 +73,7 @@ public class TableErrorMacroElement extends OdfElement
 	 */
 	public Boolean getTableExecuteAttribute()
 	{
-		TableExecuteAttribute attr = (TableExecuteAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "execute" ) );
+		TableExecuteAttribute attr = (TableExecuteAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "execute" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

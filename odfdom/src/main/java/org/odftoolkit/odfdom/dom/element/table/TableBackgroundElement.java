@@ -82,7 +82,7 @@ public class TableBackgroundElement extends OdfElement
 	 */
 	public String getTableStyleNameAttribute()
 	{
-		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "style-name" ) );
+		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -74,7 +74,7 @@ public class NumberSecondsElement extends OdfElement
 	 */
 	public String getNumberStyleAttribute()
 	{
-		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "style" ) );
+		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -101,7 +101,7 @@ public class NumberSecondsElement extends OdfElement
 	 */
 	public Integer getNumberDecimalPlacesAttribute()
 	{
-		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "decimal-places" ) );
+		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "decimal-places" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

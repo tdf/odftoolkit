@@ -85,7 +85,7 @@ public class AnimParamElement extends OdfElement
 	 */
 	public String getAnimNameAttribute()
 	{
-		AnimNameAttribute attr = (AnimNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "name" ) );
+		AnimNameAttribute attr = (AnimNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class AnimParamElement extends OdfElement
 	 */
 	public String getAnimValueAttribute()
 	{
-		AnimValueAttribute attr = (AnimValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "value" ) );
+		AnimValueAttribute attr = (AnimValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

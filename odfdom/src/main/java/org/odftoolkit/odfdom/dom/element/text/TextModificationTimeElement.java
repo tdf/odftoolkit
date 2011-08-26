@@ -75,7 +75,7 @@ public class TextModificationTimeElement extends OdfElement
 	 */
 	public Boolean getTextFixedAttribute()
 	{
-		TextFixedAttribute attr = (TextFixedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "fixed" ) );
+		TextFixedAttribute attr = (TextFixedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "fixed" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -102,7 +102,7 @@ public class TextModificationTimeElement extends OdfElement
 	 */
 	public String getStyleDataStyleNameAttribute()
 	{
-		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) );
+		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -129,7 +129,7 @@ public class TextModificationTimeElement extends OdfElement
 	 */
 	public String getTextTimeValueAttribute()
 	{
-		TextTimeValueAttribute attr = (TextTimeValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "time-value" ) );
+		TextTimeValueAttribute attr = (TextTimeValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "time-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

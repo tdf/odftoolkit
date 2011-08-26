@@ -28,7 +28,7 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
-import org.odftoolkit.odfdom.doc.office.OdfOfficePresentation;
+import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeSpreadsheet;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeText;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
@@ -531,7 +531,7 @@ public class OdfTableCellRange {
 		for (int i = 0; i < childs.getLength(); i++) {
 			Node cur = childs.item(i);
 			if ((cur != null)
-					&& (cur instanceof OdfOfficeText || cur instanceof OdfOfficeSpreadsheet || cur instanceof OdfOfficePresentation)) {
+					&& (cur instanceof OdfOfficeText || cur instanceof OdfOfficeSpreadsheet || cur instanceof OfficePresentationElement)) {
 				//create name range element
 				//OdfTableNamedExpressions nameExpress = new OdfTableNamedExpressions(contentDom);
 				TableNamedExpressionsElement nameExpress = (TableNamedExpressionsElement) OdfXMLFactory.newOdfElement(

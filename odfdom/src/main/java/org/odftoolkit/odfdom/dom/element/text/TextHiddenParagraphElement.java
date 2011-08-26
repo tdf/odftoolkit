@@ -82,7 +82,7 @@ public class TextHiddenParagraphElement extends OdfElement
 	 */
 	public String getTextConditionAttribute()
 	{
-		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "condition" ) );
+		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "condition" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -109,7 +109,7 @@ public class TextHiddenParagraphElement extends OdfElement
 	 */
 	public Boolean getTextIsHiddenAttribute()
 	{
-		TextIsHiddenAttribute attr = (TextIsHiddenAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "is-hidden" ) );
+		TextIsHiddenAttribute attr = (TextIsHiddenAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "is-hidden" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

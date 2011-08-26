@@ -86,7 +86,7 @@ public class TextDatabaseNextElement extends OdfElement
 	 */
 	public String getTextTableNameAttribute()
 	{
-		TextTableNameAttribute attr = (TextTableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "table-name" ) );
+		TextTableNameAttribute attr = (TextTableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "table-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public class TextDatabaseNextElement extends OdfElement
 	 */
 	public String getTextTableTypeAttribute()
 	{
-		TextTableTypeAttribute attr = (TextTableTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "table-type" ) );
+		TextTableTypeAttribute attr = (TextTableTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "table-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public class TextDatabaseNextElement extends OdfElement
 	 */
 	public String getTextDatabaseNameAttribute()
 	{
-		TextDatabaseNameAttribute attr = (TextDatabaseNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "database-name" ) );
+		TextDatabaseNameAttribute attr = (TextDatabaseNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "database-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -167,7 +167,7 @@ public class TextDatabaseNextElement extends OdfElement
 	 */
 	public String getTextConditionAttribute()
 	{
-		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "condition" ) );
+		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "condition" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

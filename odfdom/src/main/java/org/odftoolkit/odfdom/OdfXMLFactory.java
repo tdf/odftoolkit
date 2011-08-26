@@ -104,7 +104,8 @@ public class OdfXMLFactory {
 				String qName = odfName.getQName();
 				String localName = odfName.getLocalName();
 				if ((nodeName==ATTRIBUTE_PACKAGE_NAME) || 
-						(prefix.equals("meta") || prefix.equals("table") || qName.equals("office:meta")))
+						(prefix.equals("meta") || prefix.equals("table") || qName.equals("office:meta") || qName.equals("draw:page") 
+								|| qName.equals("office:presentation") || qName.equals("presentation:notes")))
 					className = getOdfDOMNodeClassName(odfName.getPrefix(),odfName.getLocalName(),nodeName);
 				else {
 					if (mElementRenames.containsKey(qName))

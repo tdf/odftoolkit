@@ -87,7 +87,7 @@ public class TableHighlightedRangeElement extends OdfElement
 	 */
 	public String getTableCellRangeAddressAttribute()
 	{
-		TableCellRangeAddressAttribute attr = (TableCellRangeAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "cell-range-address" ) );
+		TableCellRangeAddressAttribute attr = (TableCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "cell-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -114,7 +114,7 @@ public class TableHighlightedRangeElement extends OdfElement
 	 */
 	public String getTableDirectionAttribute()
 	{
-		TableDirectionAttribute attr = (TableDirectionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "direction" ) );
+		TableDirectionAttribute attr = (TableDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "direction" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -141,7 +141,7 @@ public class TableHighlightedRangeElement extends OdfElement
 	 */
 	public Boolean getTableContainsErrorAttribute()
 	{
-		TableContainsErrorAttribute attr = (TableContainsErrorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "contains-error" ) );
+		TableContainsErrorAttribute attr = (TableContainsErrorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "contains-error" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -168,7 +168,7 @@ public class TableHighlightedRangeElement extends OdfElement
 	 */
 	public Boolean getTableMarkedInvalidAttribute()
 	{
-		TableMarkedInvalidAttribute attr = (TableMarkedInvalidAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "marked-invalid" ) );
+		TableMarkedInvalidAttribute attr = (TableMarkedInvalidAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "marked-invalid" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

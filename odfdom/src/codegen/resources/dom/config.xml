@@ -127,7 +127,7 @@
         <element name="office:styles" base="container"/>
         <element name="office:automatic-styles" base="container"/>
         <element name="office:master-styles" base="container"/>
-        <element name="office:presentation" base="container"/>
+        <!--element name="office:presentation" base="container"/-->
 
         <element name="style:style" base="style"/>
         <element name="style:default-style" base="style"/>

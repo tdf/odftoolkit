@@ -114,7 +114,7 @@ public class TextPageContinuationElement extends OdfElement
 	 */
 	public String getTextSelectPageAttribute()
 	{
-		TextSelectPageAttribute attr = (TextSelectPageAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "select-page" ) );
+		TextSelectPageAttribute attr = (TextSelectPageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "select-page" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -141,7 +141,7 @@ public class TextPageContinuationElement extends OdfElement
 	 */
 	public String getTextStringValueAttribute()
 	{
-		TextStringValueAttribute attr = (TextStringValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "string-value" ) );
+		TextStringValueAttribute attr = (TextStringValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "string-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

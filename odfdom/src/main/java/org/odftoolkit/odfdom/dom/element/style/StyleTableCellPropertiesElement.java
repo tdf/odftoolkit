@@ -209,7 +209,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleVerticalAlignAttribute()
 	{
-		StyleVerticalAlignAttribute attr = (StyleVerticalAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-align" ) );
+		StyleVerticalAlignAttribute attr = (StyleVerticalAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-align" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -236,7 +236,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextAlignSourceAttribute()
 	{
-		StyleTextAlignSourceAttribute attr = (StyleTextAlignSourceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-align-source" ) );
+		StyleTextAlignSourceAttribute attr = (StyleTextAlignSourceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-align-source" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -263,7 +263,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleDirectionAttribute()
 	{
-		StyleDirectionAttribute attr = (StyleDirectionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "direction" ) );
+		StyleDirectionAttribute attr = (StyleDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "direction" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -290,7 +290,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleGlyphOrientationVerticalAttribute()
 	{
-		StyleGlyphOrientationVerticalAttribute attr = (StyleGlyphOrientationVerticalAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "glyph-orientation-vertical" ) );
+		StyleGlyphOrientationVerticalAttribute attr = (StyleGlyphOrientationVerticalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "glyph-orientation-vertical" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -317,7 +317,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleWritingModeAttribute()
 	{
-		StyleWritingModeAttribute attr = (StyleWritingModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode" ) );
+		StyleWritingModeAttribute attr = (StyleWritingModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -344,7 +344,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleShadowAttribute()
 	{
-		StyleShadowAttribute attr = (StyleShadowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shadow" ) );
+		StyleShadowAttribute attr = (StyleShadowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shadow" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -371,7 +371,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBackgroundColorAttribute()
 	{
-		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color" ) );
+		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -398,7 +398,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderAttribute()
 	{
-		FoBorderAttribute attr = (FoBorderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border" ) );
+		FoBorderAttribute attr = (FoBorderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -425,7 +425,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderTopAttribute()
 	{
-		FoBorderTopAttribute attr = (FoBorderTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-top" ) );
+		FoBorderTopAttribute attr = (FoBorderTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-top" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -452,7 +452,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderBottomAttribute()
 	{
-		FoBorderBottomAttribute attr = (FoBorderBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-bottom" ) );
+		FoBorderBottomAttribute attr = (FoBorderBottomAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-bottom" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -479,7 +479,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderLeftAttribute()
 	{
-		FoBorderLeftAttribute attr = (FoBorderLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-left" ) );
+		FoBorderLeftAttribute attr = (FoBorderLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -506,7 +506,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderRightAttribute()
 	{
-		FoBorderRightAttribute attr = (FoBorderRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-right" ) );
+		FoBorderRightAttribute attr = (FoBorderRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -533,7 +533,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleDiagonalTlBrAttribute()
 	{
-		StyleDiagonalTlBrAttribute attr = (StyleDiagonalTlBrAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "diagonal-tl-br" ) );
+		StyleDiagonalTlBrAttribute attr = (StyleDiagonalTlBrAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "diagonal-tl-br" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -560,7 +560,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleDiagonalTlBrWidthsAttribute()
 	{
-		StyleDiagonalTlBrWidthsAttribute attr = (StyleDiagonalTlBrWidthsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "diagonal-tl-br-widths" ) );
+		StyleDiagonalTlBrWidthsAttribute attr = (StyleDiagonalTlBrWidthsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "diagonal-tl-br-widths" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -587,7 +587,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleDiagonalBlTrAttribute()
 	{
-		StyleDiagonalBlTrAttribute attr = (StyleDiagonalBlTrAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "diagonal-bl-tr" ) );
+		StyleDiagonalBlTrAttribute attr = (StyleDiagonalBlTrAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "diagonal-bl-tr" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -614,7 +614,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleDiagonalBlTrWidthsAttribute()
 	{
-		StyleDiagonalBlTrWidthsAttribute attr = (StyleDiagonalBlTrWidthsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "diagonal-bl-tr-widths" ) );
+		StyleDiagonalBlTrWidthsAttribute attr = (StyleDiagonalBlTrWidthsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "diagonal-bl-tr-widths" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -641,7 +641,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthAttribute()
 	{
-		StyleBorderLineWidthAttribute attr = (StyleBorderLineWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width" ) );
+		StyleBorderLineWidthAttribute attr = (StyleBorderLineWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -668,7 +668,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthTopAttribute()
 	{
-		StyleBorderLineWidthTopAttribute attr = (StyleBorderLineWidthTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-top" ) );
+		StyleBorderLineWidthTopAttribute attr = (StyleBorderLineWidthTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-top" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -695,7 +695,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthBottomAttribute()
 	{
-		StyleBorderLineWidthBottomAttribute attr = (StyleBorderLineWidthBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-bottom" ) );
+		StyleBorderLineWidthBottomAttribute attr = (StyleBorderLineWidthBottomAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-bottom" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -722,7 +722,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthLeftAttribute()
 	{
-		StyleBorderLineWidthLeftAttribute attr = (StyleBorderLineWidthLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-left" ) );
+		StyleBorderLineWidthLeftAttribute attr = (StyleBorderLineWidthLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -749,7 +749,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthRightAttribute()
 	{
-		StyleBorderLineWidthRightAttribute attr = (StyleBorderLineWidthRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-right" ) );
+		StyleBorderLineWidthRightAttribute attr = (StyleBorderLineWidthRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -776,7 +776,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingAttribute()
 	{
-		FoPaddingAttribute attr = (FoPaddingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding" ) );
+		FoPaddingAttribute attr = (FoPaddingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -803,7 +803,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingTopAttribute()
 	{
-		FoPaddingTopAttribute attr = (FoPaddingTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-top" ) );
+		FoPaddingTopAttribute attr = (FoPaddingTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-top" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -830,7 +830,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingBottomAttribute()
 	{
-		FoPaddingBottomAttribute attr = (FoPaddingBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-bottom" ) );
+		FoPaddingBottomAttribute attr = (FoPaddingBottomAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-bottom" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -857,7 +857,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingLeftAttribute()
 	{
-		FoPaddingLeftAttribute attr = (FoPaddingLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-left" ) );
+		FoPaddingLeftAttribute attr = (FoPaddingLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -884,7 +884,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingRightAttribute()
 	{
-		FoPaddingRightAttribute attr = (FoPaddingRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-right" ) );
+		FoPaddingRightAttribute attr = (FoPaddingRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -911,7 +911,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoWrapOptionAttribute()
 	{
-		FoWrapOptionAttribute attr = (FoWrapOptionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "wrap-option" ) );
+		FoWrapOptionAttribute attr = (FoWrapOptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "wrap-option" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -938,7 +938,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRotationAngleAttribute()
 	{
-		StyleRotationAngleAttribute attr = (StyleRotationAngleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rotation-angle" ) );
+		StyleRotationAngleAttribute attr = (StyleRotationAngleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rotation-angle" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -965,7 +965,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRotationAlignAttribute()
 	{
-		StyleRotationAlignAttribute attr = (StyleRotationAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rotation-align" ) );
+		StyleRotationAlignAttribute attr = (StyleRotationAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rotation-align" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -992,7 +992,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleCellProtectAttribute()
 	{
-		StyleCellProtectAttribute attr = (StyleCellProtectAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "cell-protect" ) );
+		StyleCellProtectAttribute attr = (StyleCellProtectAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "cell-protect" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1019,7 +1019,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStylePrintContentAttribute()
 	{
-		StylePrintContentAttribute attr = (StylePrintContentAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "print-content" ) );
+		StylePrintContentAttribute attr = (StylePrintContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "print-content" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1046,7 +1046,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Integer getStyleDecimalPlacesAttribute()
 	{
-		StyleDecimalPlacesAttribute attr = (StyleDecimalPlacesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "decimal-places" ) );
+		StyleDecimalPlacesAttribute attr = (StyleDecimalPlacesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "decimal-places" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -1073,7 +1073,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleRepeatContentAttribute()
 	{
-		StyleRepeatContentAttribute attr = (StyleRepeatContentAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "repeat-content" ) );
+		StyleRepeatContentAttribute attr = (StyleRepeatContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "repeat-content" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1100,7 +1100,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleShrinkToFitAttribute()
 	{
-		StyleShrinkToFitAttribute attr = (StyleShrinkToFitAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shrink-to-fit" ) );
+		StyleShrinkToFitAttribute attr = (StyleShrinkToFitAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shrink-to-fit" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

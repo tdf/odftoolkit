@@ -74,7 +74,7 @@ public class TableTableColumnGroupElement extends OdfElement
 	 */
 	public Boolean getTableDisplayAttribute()
 	{
-		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display" ) );
+		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

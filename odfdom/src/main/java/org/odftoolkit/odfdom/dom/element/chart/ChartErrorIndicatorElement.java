@@ -86,7 +86,7 @@ public class ChartErrorIndicatorElement extends OdfStylableElement
 	 */
 	public String getChartStyleNameAttribute()
 	{
-		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) );
+		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public class ChartErrorIndicatorElement extends OdfStylableElement
 	 */
 	public String getChartDimensionAttribute()
 	{
-		ChartDimensionAttribute attr = (ChartDimensionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "dimension" ) );
+		ChartDimensionAttribute attr = (ChartDimensionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "dimension" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public class ChartErrorIndicatorElement extends OdfStylableElement
 	 */
 	public String getChartErrorLowerRangeAttribute()
 	{
-		ChartErrorLowerRangeAttribute attr = (ChartErrorLowerRangeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "error-lower-range" ) );
+		ChartErrorLowerRangeAttribute attr = (ChartErrorLowerRangeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "error-lower-range" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -167,7 +167,7 @@ public class ChartErrorIndicatorElement extends OdfStylableElement
 	 */
 	public String getChartErrorUpperRangeAttribute()
 	{
-		ChartErrorUpperRangeAttribute attr = (ChartErrorUpperRangeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "error-upper-range" ) );
+		ChartErrorUpperRangeAttribute attr = (ChartErrorUpperRangeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "error-upper-range" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

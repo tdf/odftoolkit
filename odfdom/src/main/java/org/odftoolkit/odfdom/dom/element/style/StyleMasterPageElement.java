@@ -121,7 +121,7 @@ public class StyleMasterPageElement extends OdfStylableElement
 	 */
 	public String getStyleNameAttribute()
 	{
-		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) );
+		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -148,7 +148,7 @@ public class StyleMasterPageElement extends OdfStylableElement
 	 */
 	public String getStyleDisplayNameAttribute()
 	{
-		StyleDisplayNameAttribute attr = (StyleDisplayNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "display-name" ) );
+		StyleDisplayNameAttribute attr = (StyleDisplayNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "display-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -175,7 +175,7 @@ public class StyleMasterPageElement extends OdfStylableElement
 	 */
 	public String getStylePageLayoutNameAttribute()
 	{
-		StylePageLayoutNameAttribute attr = (StylePageLayoutNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "page-layout-name" ) );
+		StylePageLayoutNameAttribute attr = (StylePageLayoutNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "page-layout-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -202,7 +202,7 @@ public class StyleMasterPageElement extends OdfStylableElement
 	 */
 	public String getDrawStyleNameAttribute()
 	{
-		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style-name" ) );
+		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -229,7 +229,7 @@ public class StyleMasterPageElement extends OdfStylableElement
 	 */
 	public String getStyleNextStyleNameAttribute()
 	{
-		StyleNextStyleNameAttribute attr = (StyleNextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "next-style-name" ) );
+		StyleNextStyleNameAttribute attr = (StyleNextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "next-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

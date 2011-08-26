@@ -119,7 +119,7 @@ public class TextVariableInputElement extends OdfElement
 	 */
 	public String getTextNameAttribute()
 	{
-		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) );
+		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -146,7 +146,7 @@ public class TextVariableInputElement extends OdfElement
 	 */
 	public String getTextDescriptionAttribute()
 	{
-		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "description" ) );
+		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "description" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -173,7 +173,7 @@ public class TextVariableInputElement extends OdfElement
 	 */
 	public String getOfficeValueTypeAttribute()
 	{
-		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value-type" ) );
+		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -200,7 +200,7 @@ public class TextVariableInputElement extends OdfElement
 	 */
 	public String getTextDisplayAttribute()
 	{
-		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display" ) );
+		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -227,7 +227,7 @@ public class TextVariableInputElement extends OdfElement
 	 */
 	public String getStyleDataStyleNameAttribute()
 	{
-		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) );
+		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

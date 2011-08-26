@@ -76,7 +76,7 @@ public class TextDateElement extends OdfElement
 	 */
 	public Boolean getTextFixedAttribute()
 	{
-		TextFixedAttribute attr = (TextFixedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "fixed" ) );
+		TextFixedAttribute attr = (TextFixedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "fixed" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -103,7 +103,7 @@ public class TextDateElement extends OdfElement
 	 */
 	public String getStyleDataStyleNameAttribute()
 	{
-		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) );
+		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public class TextDateElement extends OdfElement
 	 */
 	public String getTextDateValueAttribute()
 	{
-		TextDateValueAttribute attr = (TextDateValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "date-value" ) );
+		TextDateValueAttribute attr = (TextDateValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "date-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public class TextDateElement extends OdfElement
 	 */
 	public String getTextDateAdjustAttribute()
 	{
-		TextDateAdjustAttribute attr = (TextDateAdjustAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "date-adjust" ) );
+		TextDateAdjustAttribute attr = (TextDateAdjustAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "date-adjust" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

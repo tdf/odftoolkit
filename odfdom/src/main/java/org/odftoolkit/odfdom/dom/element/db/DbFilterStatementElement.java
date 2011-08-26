@@ -83,7 +83,7 @@ public class DbFilterStatementElement extends OdfElement
 	 */
 	public String getDbCommandAttribute()
 	{
-		DbCommandAttribute attr = (DbCommandAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "command" ) );
+		DbCommandAttribute attr = (DbCommandAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "command" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public class DbFilterStatementElement extends OdfElement
 	 */
 	public Boolean getDbApplyCommandAttribute()
 	{
-		DbApplyCommandAttribute attr = (DbApplyCommandAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "apply-command" ) );
+		DbApplyCommandAttribute attr = (DbApplyCommandAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "apply-command" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

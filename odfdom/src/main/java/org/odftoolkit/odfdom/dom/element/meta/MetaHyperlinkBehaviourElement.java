@@ -106,7 +106,7 @@ public class MetaHyperlinkBehaviourElement extends OdfElement
 	 */
 	public String getOfficeTargetFrameNameAttribute()
 	{
-		OfficeTargetFrameNameAttribute attr = (OfficeTargetFrameNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "target-frame-name" ) );
+		OfficeTargetFrameNameAttribute attr = (OfficeTargetFrameNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "target-frame-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -133,7 +133,7 @@ public class MetaHyperlinkBehaviourElement extends OdfElement
 	 */
 	public String getXlinkShowAttribute()
 	{
-		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) );
+		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

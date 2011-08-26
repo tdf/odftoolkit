@@ -85,7 +85,7 @@ public class TableNamedRangeElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) );
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class TableNamedRangeElement extends OdfElement
 	 */
 	public String getTableCellRangeAddressAttribute()
 	{
-		TableCellRangeAddressAttribute attr = (TableCellRangeAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "cell-range-address" ) );
+		TableCellRangeAddressAttribute attr = (TableCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "cell-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public class TableNamedRangeElement extends OdfElement
 	 */
 	public String getTableBaseCellAddressAttribute()
 	{
-		TableBaseCellAddressAttribute attr = (TableBaseCellAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "base-cell-address" ) );
+		TableBaseCellAddressAttribute attr = (TableBaseCellAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "base-cell-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -166,7 +166,7 @@ public class TableNamedRangeElement extends OdfElement
 	 */
 	public String getTableRangeUsableAsAttribute()
 	{
-		TableRangeUsableAsAttribute attr = (TableRangeUsableAsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "range-usable-as" ) );
+		TableRangeUsableAsAttribute attr = (TableRangeUsableAsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "range-usable-as" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

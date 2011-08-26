@@ -123,7 +123,7 @@ public class TableFilterConditionElement extends OdfElement
 	 */
 	public Integer getTableFieldNumberAttribute()
 	{
-		TableFieldNumberAttribute attr = (TableFieldNumberAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "field-number" ) );
+		TableFieldNumberAttribute attr = (TableFieldNumberAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "field-number" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -150,7 +150,7 @@ public class TableFilterConditionElement extends OdfElement
 	 */
 	public String getTableValueAttribute()
 	{
-		TableValueAttribute attr = (TableValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "value" ) );
+		TableValueAttribute attr = (TableValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -177,7 +177,7 @@ public class TableFilterConditionElement extends OdfElement
 	 */
 	public String getTableOperatorAttribute()
 	{
-		TableOperatorAttribute attr = (TableOperatorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "operator" ) );
+		TableOperatorAttribute attr = (TableOperatorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "operator" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -204,7 +204,7 @@ public class TableFilterConditionElement extends OdfElement
 	 */
 	public String getTableCaseSensitiveAttribute()
 	{
-		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "case-sensitive" ) );
+		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "case-sensitive" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -231,7 +231,7 @@ public class TableFilterConditionElement extends OdfElement
 	 */
 	public String getTableDataTypeAttribute()
 	{
-		TableDataTypeAttribute attr = (TableDataTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-type" ) );
+		TableDataTypeAttribute attr = (TableDataTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

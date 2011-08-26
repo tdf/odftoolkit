@@ -83,7 +83,7 @@ public class StylePresentationPageLayoutElement extends OdfElement
 	 */
 	public String getStyleNameAttribute()
 	{
-		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) );
+		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public class StylePresentationPageLayoutElement extends OdfElement
 	 */
 	public String getStyleDisplayNameAttribute()
 	{
-		StyleDisplayNameAttribute attr = (StyleDisplayNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "display-name" ) );
+		StyleDisplayNameAttribute attr = (StyleDisplayNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "display-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

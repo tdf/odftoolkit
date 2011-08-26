@@ -107,7 +107,7 @@ public class TextTableFormulaElement extends OdfElement
 	 */
 	public String getTextFormulaAttribute()
 	{
-		TextFormulaAttribute attr = (TextFormulaAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "formula" ) );
+		TextFormulaAttribute attr = (TextFormulaAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "formula" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -134,7 +134,7 @@ public class TextTableFormulaElement extends OdfElement
 	 */
 	public String getTextDisplayAttribute()
 	{
-		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display" ) );
+		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -161,7 +161,7 @@ public class TextTableFormulaElement extends OdfElement
 	 */
 	public String getStyleDataStyleNameAttribute()
 	{
-		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) );
+		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

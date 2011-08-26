@@ -85,7 +85,7 @@ public class PresentationShowElement extends OdfElement
 	 */
 	public String getPresentationNameAttribute()
 	{
-		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "name" ) );
+		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class PresentationShowElement extends OdfElement
 	 */
 	public String getPresentationPagesAttribute()
 	{
-		PresentationPagesAttribute attr = (PresentationPagesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "pages" ) );
+		PresentationPagesAttribute attr = (PresentationPagesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "pages" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -84,7 +84,7 @@ public class DbUpdateTableElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) );
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -111,7 +111,7 @@ public class DbUpdateTableElement extends OdfElement
 	 */
 	public String getDbCatalogNameAttribute()
 	{
-		DbCatalogNameAttribute attr = (DbCatalogNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "catalog-name" ) );
+		DbCatalogNameAttribute attr = (DbCatalogNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "catalog-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -138,7 +138,7 @@ public class DbUpdateTableElement extends OdfElement
 	 */
 	public String getDbSchemaNameAttribute()
 	{
-		DbSchemaNameAttribute attr = (DbSchemaNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "schema-name" ) );
+		DbSchemaNameAttribute attr = (DbSchemaNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "schema-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

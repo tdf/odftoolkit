@@ -88,7 +88,7 @@ public class TextDatabaseRowNumberElement extends OdfElement
 	 */
 	public String getTextTableNameAttribute()
 	{
-		TextTableNameAttribute attr = (TextTableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "table-name" ) );
+		TextTableNameAttribute attr = (TextTableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "table-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -115,7 +115,7 @@ public class TextDatabaseRowNumberElement extends OdfElement
 	 */
 	public String getTextTableTypeAttribute()
 	{
-		TextTableTypeAttribute attr = (TextTableTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "table-type" ) );
+		TextTableTypeAttribute attr = (TextTableTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "table-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -142,7 +142,7 @@ public class TextDatabaseRowNumberElement extends OdfElement
 	 */
 	public String getTextDatabaseNameAttribute()
 	{
-		TextDatabaseNameAttribute attr = (TextDatabaseNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "database-name" ) );
+		TextDatabaseNameAttribute attr = (TextDatabaseNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "database-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -169,7 +169,7 @@ public class TextDatabaseRowNumberElement extends OdfElement
 	 */
 	public String getStyleNumFormatAttribute()
 	{
-		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-format" ) );
+		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-format" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -196,7 +196,7 @@ public class TextDatabaseRowNumberElement extends OdfElement
 	 */
 	public Boolean getStyleNumLetterSyncAttribute()
 	{
-		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-letter-sync" ) );
+		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-letter-sync" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -223,7 +223,7 @@ public class TextDatabaseRowNumberElement extends OdfElement
 	 */
 	public Integer getTextValueAttribute()
 	{
-		TextValueAttribute attr = (TextValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "value" ) );
+		TextValueAttribute attr = (TextValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "value" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

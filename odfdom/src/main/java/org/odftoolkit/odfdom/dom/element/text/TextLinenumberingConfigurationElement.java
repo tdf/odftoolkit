@@ -83,7 +83,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement
 	 */
 	public Boolean getTextNumberLinesAttribute()
 	{
-		TextNumberLinesAttribute attr = (TextNumberLinesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "number-lines" ) );
+		TextNumberLinesAttribute attr = (TextNumberLinesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "number-lines" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -110,7 +110,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement
 	 */
 	public String getStyleNumFormatAttribute()
 	{
-		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-format" ) );
+		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-format" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -137,7 +137,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement
 	 */
 	public Boolean getStyleNumLetterSyncAttribute()
 	{
-		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-letter-sync" ) );
+		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-letter-sync" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -164,7 +164,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) );
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -191,7 +191,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement
 	 */
 	public Integer getTextIncrementAttribute()
 	{
-		TextIncrementAttribute attr = (TextIncrementAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "increment" ) );
+		TextIncrementAttribute attr = (TextIncrementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "increment" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -218,7 +218,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement
 	 */
 	public String getTextNumberPositionAttribute()
 	{
-		TextNumberPositionAttribute attr = (TextNumberPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "number-position" ) );
+		TextNumberPositionAttribute attr = (TextNumberPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "number-position" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -245,7 +245,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement
 	 */
 	public String getTextOffsetAttribute()
 	{
-		TextOffsetAttribute attr = (TextOffsetAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "offset" ) );
+		TextOffsetAttribute attr = (TextOffsetAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "offset" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -272,7 +272,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement
 	 */
 	public Boolean getTextCountEmptyLinesAttribute()
 	{
-		TextCountEmptyLinesAttribute attr = (TextCountEmptyLinesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "count-empty-lines" ) );
+		TextCountEmptyLinesAttribute attr = (TextCountEmptyLinesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "count-empty-lines" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -299,7 +299,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement
 	 */
 	public Boolean getTextCountInTextBoxesAttribute()
 	{
-		TextCountInTextBoxesAttribute attr = (TextCountInTextBoxesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "count-in-text-boxes" ) );
+		TextCountInTextBoxesAttribute attr = (TextCountInTextBoxesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "count-in-text-boxes" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -326,7 +326,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement
 	 */
 	public Boolean getTextRestartOnPageAttribute()
 	{
-		TextRestartOnPageAttribute attr = (TextRestartOnPageAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "restart-on-page" ) );
+		TextRestartOnPageAttribute attr = (TextRestartOnPageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "restart-on-page" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

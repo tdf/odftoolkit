@@ -73,7 +73,7 @@ public class TextTextInputElement extends OdfElement
 	 */
 	public String getTextDescriptionAttribute()
 	{
-		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "description" ) );
+		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "description" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

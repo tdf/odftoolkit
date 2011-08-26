@@ -85,7 +85,7 @@ public class TableCellContentChangeElement extends OdfElement
 	 */
 	public String getTableIdAttribute()
 	{
-		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "id" ) );
+		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class TableCellContentChangeElement extends OdfElement
 	 */
 	public String getTableAcceptanceStateAttribute()
 	{
-		TableAcceptanceStateAttribute attr = (TableAcceptanceStateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "acceptance-state" ) );
+		TableAcceptanceStateAttribute attr = (TableAcceptanceStateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "acceptance-state" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public class TableCellContentChangeElement extends OdfElement
 	 */
 	public String getTableRejectingChangeIdAttribute()
 	{
-		TableRejectingChangeIdAttribute attr = (TableRejectingChangeIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "rejecting-change-id" ) );
+		TableRejectingChangeIdAttribute attr = (TableRejectingChangeIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "rejecting-change-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

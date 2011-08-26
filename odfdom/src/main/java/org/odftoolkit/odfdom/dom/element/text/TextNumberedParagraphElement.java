@@ -88,7 +88,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement
 	 */
 	public String getTextListIdAttribute()
 	{
-		TextListIdAttribute attr = (TextListIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "list-id" ) );
+		TextListIdAttribute attr = (TextListIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "list-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -115,7 +115,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement
 	 */
 	public Integer getTextLevelAttribute()
 	{
-		TextLevelAttribute attr = (TextLevelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "level" ) );
+		TextLevelAttribute attr = (TextLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "level" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -142,7 +142,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) );
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -169,7 +169,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement
 	 */
 	public Boolean getTextContinueNumberingAttribute()
 	{
-		TextContinueNumberingAttribute attr = (TextContinueNumberingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "continue-numbering" ) );
+		TextContinueNumberingAttribute attr = (TextContinueNumberingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "continue-numbering" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -196,7 +196,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement
 	 */
 	public String getTextStartValueAttribute()
 	{
-		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "start-value" ) );
+		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "start-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -223,7 +223,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

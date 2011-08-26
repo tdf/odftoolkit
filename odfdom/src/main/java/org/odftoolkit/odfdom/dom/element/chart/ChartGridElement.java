@@ -107,7 +107,7 @@ public class ChartGridElement extends OdfStylableElement
 	 */
 	public String getChartClassAttribute()
 	{
-		ChartClassAttribute attr = (ChartClassAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "class" ) );
+		ChartClassAttribute attr = (ChartClassAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "class" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -134,7 +134,7 @@ public class ChartGridElement extends OdfStylableElement
 	 */
 	public String getChartStyleNameAttribute()
 	{
-		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) );
+		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

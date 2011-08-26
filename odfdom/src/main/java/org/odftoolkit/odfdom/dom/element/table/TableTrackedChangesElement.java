@@ -73,7 +73,7 @@ public class TableTrackedChangesElement extends OdfElement
 	 */
 	public Boolean getTableTrackChangesAttribute()
 	{
-		TableTrackChangesAttribute attr = (TableTrackChangesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "track-changes" ) );
+		TableTrackChangesAttribute attr = (TableTrackChangesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "track-changes" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

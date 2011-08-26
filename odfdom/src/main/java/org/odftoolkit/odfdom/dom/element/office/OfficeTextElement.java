@@ -123,7 +123,7 @@ public class OfficeTextElement extends OdfElement
 	 */
 	public Boolean getTextGlobalAttribute()
 	{
-		TextGlobalAttribute attr = (TextGlobalAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "global" ) );
+		TextGlobalAttribute attr = (TextGlobalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "global" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -150,7 +150,7 @@ public class OfficeTextElement extends OdfElement
 	 */
 	public Boolean getTextUseSoftPageBreaksAttribute()
 	{
-		TextUseSoftPageBreaksAttribute attr = (TextUseSoftPageBreaksAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-soft-page-breaks" ) );
+		TextUseSoftPageBreaksAttribute attr = (TextUseSoftPageBreaksAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-soft-page-breaks" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

@@ -73,7 +73,7 @@ public class TextSElement extends OdfElement
 	 */
 	public Integer getTextCAttribute()
 	{
-		TextCAttribute attr = (TextCAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "c" ) );
+		TextCAttribute attr = (TextCAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "c" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

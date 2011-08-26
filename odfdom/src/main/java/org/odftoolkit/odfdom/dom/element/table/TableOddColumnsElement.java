@@ -84,7 +84,7 @@ public class TableOddColumnsElement extends OdfStylableElement
 	 */
 	public String getTableStyleNameAttribute()
 	{
-		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "style-name" ) );
+		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -111,7 +111,7 @@ public class TableOddColumnsElement extends OdfStylableElement
 	 */
 	public String getTableParagraphStyleNameAttribute()
 	{
-		TableParagraphStyleNameAttribute attr = (TableParagraphStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "paragraph-style-name" ) );
+		TableParagraphStyleNameAttribute attr = (TableParagraphStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "paragraph-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

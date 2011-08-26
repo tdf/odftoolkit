@@ -83,7 +83,7 @@ public class TextListStyleElement extends OdfStyleBase
 	 */
 	public String getStyleNameAttribute()
 	{
-		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) );
+		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public class TextListStyleElement extends OdfStyleBase
 	 */
 	public String getStyleDisplayNameAttribute()
 	{
-		StyleDisplayNameAttribute attr = (StyleDisplayNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "display-name" ) );
+		StyleDisplayNameAttribute attr = (StyleDisplayNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "display-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -137,7 +137,7 @@ public class TextListStyleElement extends OdfStyleBase
 	 */
 	public Boolean getTextConsecutiveNumberingAttribute()
 	{
-		TextConsecutiveNumberingAttribute attr = (TextConsecutiveNumberingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "consecutive-numbering" ) );
+		TextConsecutiveNumberingAttribute attr = (TextConsecutiveNumberingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "consecutive-numbering" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

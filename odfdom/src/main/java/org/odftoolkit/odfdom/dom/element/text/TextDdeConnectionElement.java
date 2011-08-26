@@ -82,7 +82,7 @@ public class TextDdeConnectionElement extends OdfElement
 	 */
 	public String getTextConnectionNameAttribute()
 	{
-		TextConnectionNameAttribute attr = (TextConnectionNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "connection-name" ) );
+		TextConnectionNameAttribute attr = (TextConnectionNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "connection-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

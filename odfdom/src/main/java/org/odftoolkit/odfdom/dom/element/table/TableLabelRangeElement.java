@@ -88,7 +88,7 @@ public class TableLabelRangeElement extends OdfElement
 	 */
 	public String getTableLabelCellRangeAddressAttribute()
 	{
-		TableLabelCellRangeAddressAttribute attr = (TableLabelCellRangeAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "label-cell-range-address" ) );
+		TableLabelCellRangeAddressAttribute attr = (TableLabelCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "label-cell-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -115,7 +115,7 @@ public class TableLabelRangeElement extends OdfElement
 	 */
 	public String getTableDataCellRangeAddressAttribute()
 	{
-		TableDataCellRangeAddressAttribute attr = (TableDataCellRangeAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-cell-range-address" ) );
+		TableDataCellRangeAddressAttribute attr = (TableDataCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-cell-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -142,7 +142,7 @@ public class TableLabelRangeElement extends OdfElement
 	 */
 	public String getTableOrientationAttribute()
 	{
-		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "orientation" ) );
+		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "orientation" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

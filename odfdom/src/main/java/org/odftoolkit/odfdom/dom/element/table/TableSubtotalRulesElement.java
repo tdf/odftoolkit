@@ -76,7 +76,7 @@ public class TableSubtotalRulesElement extends OdfElement
 	 */
 	public Boolean getTableBindStylesToContentAttribute()
 	{
-		TableBindStylesToContentAttribute attr = (TableBindStylesToContentAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "bind-styles-to-content" ) );
+		TableBindStylesToContentAttribute attr = (TableBindStylesToContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "bind-styles-to-content" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -103,7 +103,7 @@ public class TableSubtotalRulesElement extends OdfElement
 	 */
 	public String getTableCaseSensitiveAttribute()
 	{
-		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "case-sensitive" ) );
+		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "case-sensitive" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public class TableSubtotalRulesElement extends OdfElement
 	 */
 	public Boolean getTablePageBreaksOnGroupChangeAttribute()
 	{
-		TablePageBreaksOnGroupChangeAttribute attr = (TablePageBreaksOnGroupChangeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "page-breaks-on-group-change" ) );
+		TablePageBreaksOnGroupChangeAttribute attr = (TablePageBreaksOnGroupChangeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "page-breaks-on-group-change" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

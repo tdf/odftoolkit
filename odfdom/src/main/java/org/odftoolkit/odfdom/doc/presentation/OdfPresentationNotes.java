@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  *
  * Use is subject to license terms.
  *
@@ -22,17 +23,70 @@
 
 package org.odftoolkit.odfdom.doc.presentation;
 
-import org.odftoolkit.odfdom.OdfFileDom;
+import java.util.Hashtable;
+import org.odftoolkit.odfdom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawTextBoxElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.w3c.dom.NodeList;
 
 /**
- * Convenient functionalty for the parent ODF OpenDocument element
+ * Convenient functionality for the parent ODF OpenDocument element
  *
  */
-public class OdfPresentationNotes extends PresentationNotesElement
+public class OdfPresentationNotes
 {
-	public OdfPresentationNotes( OdfFileDom ownerDoc )
+	PresentationNotesElement maNoteElement;
+	private static Hashtable<PresentationNotesElement, OdfPresentationNotes> maNotesRepository = 
+		new Hashtable<PresentationNotesElement, OdfPresentationNotes>();	
+	
+	private OdfPresentationNotes( PresentationNotesElement noteElement )
 	{
-		super( ownerDoc );
+		maNoteElement = noteElement;
+	}
+	
+	/**
+	 * Return an instance of <code>PresentationNotesElement</code> which represents presentation notes page feature.
+	 * 
+	 * @return an instance of <code>PresentationNotesElement</code>
+	 */
+	public PresentationNotesElement getOdfElement()
+	{
+		return maNoteElement;
+	}
+	/**
+	 * Get a presentation notes page instance by an instance of <code>PresentationNotesElement</code>.
+	 * 
+	 * @param noteElement	an instance of <code>PresentationNotesElement</code>
+	 * @return an instance of <code>OdfPresentationNotes</code> that can represent <code>PresentationNotesElement</code>
+	 */
+	public static OdfPresentationNotes getInstance(PresentationNotesElement noteElement)
+	{
+		if (maNotesRepository.containsKey(noteElement))
+			return maNotesRepository.get(noteElement);
+		else {
+			OdfPresentationNotes newNotes = new OdfPresentationNotes(noteElement);
+			maNotesRepository.put(noteElement, newNotes);
+			return newNotes;
+		}	
+	}
+	
+	/**
+	 * insert some text to the notes page
+	 * @param text	the text that need to insert in the notes page
+	 */
+	public void addText(String text){
+		NodeList frameList = maNoteElement.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "frame");
+		if(frameList.getLength() > 0){
+			DrawFrameElement frame = (DrawFrameElement)frameList.item(0);
+			NodeList textBoxList = frame.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "text-box");
+			if(textBoxList.getLength() > 0){
+				DrawTextBoxElement textBox = (DrawTextBoxElement)textBoxList.item(0);
+				TextPElement newPara = textBox.newTextPElement();
+				newPara.setTextContent(text);
+			}
+		}
 	}
 }

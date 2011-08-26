@@ -76,7 +76,7 @@ public class NumberScientificNumberElement extends OdfElement
 	 */
 	public Integer getNumberMinExponentDigitsAttribute()
 	{
-		NumberMinExponentDigitsAttribute attr = (NumberMinExponentDigitsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-exponent-digits" ) );
+		NumberMinExponentDigitsAttribute attr = (NumberMinExponentDigitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-exponent-digits" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -103,7 +103,7 @@ public class NumberScientificNumberElement extends OdfElement
 	 */
 	public Integer getNumberDecimalPlacesAttribute()
 	{
-		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "decimal-places" ) );
+		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "decimal-places" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -130,7 +130,7 @@ public class NumberScientificNumberElement extends OdfElement
 	 */
 	public Integer getNumberMinIntegerDigitsAttribute()
 	{
-		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-integer-digits" ) );
+		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-integer-digits" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -157,7 +157,7 @@ public class NumberScientificNumberElement extends OdfElement
 	 */
 	public Boolean getNumberGroupingAttribute()
 	{
-		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "grouping" ) );
+		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "grouping" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

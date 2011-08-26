@@ -81,7 +81,7 @@ public class TextUserIndexMarkEndElement extends OdfElement
 	 */
 	public String getTextIdAttribute()
 	{
-		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "id" ) );
+		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

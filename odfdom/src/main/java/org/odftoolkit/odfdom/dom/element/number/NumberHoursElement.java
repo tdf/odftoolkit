@@ -73,7 +73,7 @@ public class NumberHoursElement extends OdfElement
 	 */
 	public String getNumberStyleAttribute()
 	{
-		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "style" ) );
+		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

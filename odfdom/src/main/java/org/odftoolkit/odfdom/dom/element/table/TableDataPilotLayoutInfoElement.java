@@ -85,7 +85,7 @@ public class TableDataPilotLayoutInfoElement extends OdfElement
 	 */
 	public String getTableLayoutModeAttribute()
 	{
-		TableLayoutModeAttribute attr = (TableLayoutModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "layout-mode" ) );
+		TableLayoutModeAttribute attr = (TableLayoutModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "layout-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class TableDataPilotLayoutInfoElement extends OdfElement
 	 */
 	public Boolean getTableAddEmptyLinesAttribute()
 	{
-		TableAddEmptyLinesAttribute attr = (TableAddEmptyLinesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "add-empty-lines" ) );
+		TableAddEmptyLinesAttribute attr = (TableAddEmptyLinesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "add-empty-lines" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

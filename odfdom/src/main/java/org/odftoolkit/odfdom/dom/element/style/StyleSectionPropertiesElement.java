@@ -97,7 +97,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBackgroundColorAttribute()
 	{
-		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color" ) );
+		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -124,7 +124,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginLeftAttribute()
 	{
-		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-left" ) );
+		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -151,7 +151,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginRightAttribute()
 	{
-		FoMarginRightAttribute attr = (FoMarginRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-right" ) );
+		FoMarginRightAttribute attr = (FoMarginRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -178,7 +178,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleProtectAttribute()
 	{
-		StyleProtectAttribute attr = (StyleProtectAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "protect" ) );
+		StyleProtectAttribute attr = (StyleProtectAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "protect" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -205,7 +205,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleEditableAttribute()
 	{
-		StyleEditableAttribute attr = (StyleEditableAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "editable" ) );
+		StyleEditableAttribute attr = (StyleEditableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "editable" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -232,7 +232,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getTextDontBalanceTextColumnsAttribute()
 	{
-		TextDontBalanceTextColumnsAttribute attr = (TextDontBalanceTextColumnsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "dont-balance-text-columns" ) );
+		TextDontBalanceTextColumnsAttribute attr = (TextDontBalanceTextColumnsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "dont-balance-text-columns" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -259,7 +259,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleWritingModeAttribute()
 	{
-		StyleWritingModeAttribute attr = (StyleWritingModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode" ) );
+		StyleWritingModeAttribute attr = (StyleWritingModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

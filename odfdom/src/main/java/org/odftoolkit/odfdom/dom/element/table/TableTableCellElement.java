@@ -108,7 +108,7 @@ public class TableTableCellElement extends TableTableCellElementBase
 	 */
 	public Integer getTableNumberColumnsSpannedAttribute()
 	{
-		TableNumberColumnsSpannedAttribute attr = (TableNumberColumnsSpannedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-columns-spanned" ) );
+		TableNumberColumnsSpannedAttribute attr = (TableNumberColumnsSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-columns-spanned" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -135,7 +135,7 @@ public class TableTableCellElement extends TableTableCellElementBase
 	 */
 	public Integer getTableNumberRowsSpannedAttribute()
 	{
-		TableNumberRowsSpannedAttribute attr = (TableNumberRowsSpannedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-rows-spanned" ) );
+		TableNumberRowsSpannedAttribute attr = (TableNumberRowsSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-rows-spanned" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -162,7 +162,7 @@ public class TableTableCellElement extends TableTableCellElementBase
 	 */
 	public Integer getTableNumberMatrixColumnsSpannedAttribute()
 	{
-		TableNumberMatrixColumnsSpannedAttribute attr = (TableNumberMatrixColumnsSpannedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-matrix-columns-spanned" ) );
+		TableNumberMatrixColumnsSpannedAttribute attr = (TableNumberMatrixColumnsSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-matrix-columns-spanned" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -189,7 +189,7 @@ public class TableTableCellElement extends TableTableCellElementBase
 	 */
 	public Integer getTableNumberMatrixRowsSpannedAttribute()
 	{
-		TableNumberMatrixRowsSpannedAttribute attr = (TableNumberMatrixRowsSpannedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-matrix-rows-spanned" ) );
+		TableNumberMatrixRowsSpannedAttribute attr = (TableNumberMatrixRowsSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-matrix-rows-spanned" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

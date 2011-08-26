@@ -121,7 +121,7 @@ public class DrawOpacityElement extends OdfElement
 	 */
 	public String getDrawNameAttribute()
 	{
-		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) );
+		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -148,7 +148,7 @@ public class DrawOpacityElement extends OdfElement
 	 */
 	public String getDrawDisplayNameAttribute()
 	{
-		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "display-name" ) );
+		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "display-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -175,7 +175,7 @@ public class DrawOpacityElement extends OdfElement
 	 */
 	public String getDrawStyleAttribute()
 	{
-		DrawStyleAttribute attr = (DrawStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style" ) );
+		DrawStyleAttribute attr = (DrawStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -202,7 +202,7 @@ public class DrawOpacityElement extends OdfElement
 	 */
 	public String getDrawCxAttribute()
 	{
-		DrawCxAttribute attr = (DrawCxAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "cx" ) );
+		DrawCxAttribute attr = (DrawCxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "cx" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -229,7 +229,7 @@ public class DrawOpacityElement extends OdfElement
 	 */
 	public String getDrawCyAttribute()
 	{
-		DrawCyAttribute attr = (DrawCyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "cy" ) );
+		DrawCyAttribute attr = (DrawCyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "cy" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -256,7 +256,7 @@ public class DrawOpacityElement extends OdfElement
 	 */
 	public String getDrawAngleAttribute()
 	{
-		DrawAngleAttribute attr = (DrawAngleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "angle" ) );
+		DrawAngleAttribute attr = (DrawAngleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "angle" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -283,7 +283,7 @@ public class DrawOpacityElement extends OdfElement
 	 */
 	public String getDrawBorderAttribute()
 	{
-		DrawBorderAttribute attr = (DrawBorderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "border" ) );
+		DrawBorderAttribute attr = (DrawBorderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "border" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -310,7 +310,7 @@ public class DrawOpacityElement extends OdfElement
 	 */
 	public String getDrawStartAttribute()
 	{
-		DrawStartAttribute attr = (DrawStartAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start" ) );
+		DrawStartAttribute attr = (DrawStartAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -337,7 +337,7 @@ public class DrawOpacityElement extends OdfElement
 	 */
 	public String getDrawEndAttribute()
 	{
-		DrawEndAttribute attr = (DrawEndAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end" ) );
+		DrawEndAttribute attr = (DrawEndAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

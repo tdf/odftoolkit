@@ -73,7 +73,7 @@ public class TextTrackedChangesElement extends OdfElement
 	 */
 	public Boolean getTextTrackChangesAttribute()
 	{
-		TextTrackChangesAttribute attr = (TextTrackChangesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "track-changes" ) );
+		TextTrackChangesAttribute attr = (TextTrackChangesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "track-changes" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

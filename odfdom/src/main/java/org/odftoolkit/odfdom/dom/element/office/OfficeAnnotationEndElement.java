@@ -82,7 +82,7 @@ public class OfficeAnnotationEndElement extends OdfElement
 	 */
 	public String getOfficeNameAttribute()
 	{
-		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "name" ) );
+		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -89,7 +89,7 @@ public class DbFileBasedDatabaseElement extends OdfElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) );
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -116,7 +116,7 @@ public class DbFileBasedDatabaseElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -143,7 +143,7 @@ public class DbFileBasedDatabaseElement extends OdfElement
 	 */
 	public String getDbMediaTypeAttribute()
 	{
-		DbMediaTypeAttribute attr = (DbMediaTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "media-type" ) );
+		DbMediaTypeAttribute attr = (DbMediaTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "media-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -170,7 +170,7 @@ public class DbFileBasedDatabaseElement extends OdfElement
 	 */
 	public String getDbExtensionAttribute()
 	{
-		DbExtensionAttribute attr = (DbExtensionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "extension" ) );
+		DbExtensionAttribute attr = (DbExtensionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "extension" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

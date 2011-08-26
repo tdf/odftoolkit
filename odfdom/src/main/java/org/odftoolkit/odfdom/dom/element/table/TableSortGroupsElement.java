@@ -75,7 +75,7 @@ public class TableSortGroupsElement extends OdfElement
 	 */
 	public String getTableDataTypeAttribute()
 	{
-		TableDataTypeAttribute attr = (TableDataTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-type" ) );
+		TableDataTypeAttribute attr = (TableDataTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -102,7 +102,7 @@ public class TableSortGroupsElement extends OdfElement
 	 */
 	public String getTableOrderAttribute()
 	{
-		TableOrderAttribute attr = (TableOrderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "order" ) );
+		TableOrderAttribute attr = (TableOrderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "order" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

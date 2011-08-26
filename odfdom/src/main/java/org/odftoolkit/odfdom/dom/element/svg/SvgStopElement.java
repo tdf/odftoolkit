@@ -84,7 +84,7 @@ public class SvgStopElement extends OdfElement
 	 */
 	public String getSvgOffsetAttribute()
 	{
-		SvgOffsetAttribute attr = (SvgOffsetAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "offset" ) );
+		SvgOffsetAttribute attr = (SvgOffsetAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "offset" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -111,7 +111,7 @@ public class SvgStopElement extends OdfElement
 	 */
 	public String getSvgStopColorAttribute()
 	{
-		SvgStopColorAttribute attr = (SvgStopColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stop-color" ) );
+		SvgStopColorAttribute attr = (SvgStopColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stop-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -138,7 +138,7 @@ public class SvgStopElement extends OdfElement
 	 */
 	public Double getSvgStopOpacityAttribute()
 	{
-		SvgStopOpacityAttribute attr = (SvgStopOpacityAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stop-opacity" ) );
+		SvgStopOpacityAttribute attr = (SvgStopOpacityAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stop-opacity" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}

@@ -79,7 +79,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public String getChartValuesCellRangeAddressAttribute()
 	{
-		ChartValuesCellRangeAddressAttribute attr = (ChartValuesCellRangeAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "values-cell-range-address" ) );
+		ChartValuesCellRangeAddressAttribute attr = (ChartValuesCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "values-cell-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -106,7 +106,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public String getChartLabelCellAddressAttribute()
 	{
-		ChartLabelCellAddressAttribute attr = (ChartLabelCellAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "label-cell-address" ) );
+		ChartLabelCellAddressAttribute attr = (ChartLabelCellAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "label-cell-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -133,7 +133,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public String getChartClassAttribute()
 	{
-		ChartClassAttribute attr = (ChartClassAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "class" ) );
+		ChartClassAttribute attr = (ChartClassAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "class" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -160,7 +160,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public String getChartAttachedAxisAttribute()
 	{
-		ChartAttachedAxisAttribute attr = (ChartAttachedAxisAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "attached-axis" ) );
+		ChartAttachedAxisAttribute attr = (ChartAttachedAxisAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "attached-axis" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -187,7 +187,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public String getChartStyleNameAttribute()
 	{
-		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) );
+		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -214,7 +214,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

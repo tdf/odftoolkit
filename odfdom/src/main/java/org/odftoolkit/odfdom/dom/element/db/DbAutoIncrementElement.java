@@ -74,7 +74,7 @@ public class DbAutoIncrementElement extends OdfElement
 	 */
 	public String getDbAdditionalColumnStatementAttribute()
 	{
-		DbAdditionalColumnStatementAttribute attr = (DbAdditionalColumnStatementAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "additional-column-statement" ) );
+		DbAdditionalColumnStatementAttribute attr = (DbAdditionalColumnStatementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "additional-column-statement" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -101,7 +101,7 @@ public class DbAutoIncrementElement extends OdfElement
 	 */
 	public String getDbRowRetrievingStatementAttribute()
 	{
-		DbRowRetrievingStatementAttribute attr = (DbRowRetrievingStatementAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "row-retrieving-statement" ) );
+		DbRowRetrievingStatementAttribute attr = (DbRowRetrievingStatementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "row-retrieving-statement" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

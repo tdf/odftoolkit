@@ -126,7 +126,7 @@ public class DrawAreaCircleElement extends OdfElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) );
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -153,7 +153,7 @@ public class DrawAreaCircleElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -180,7 +180,7 @@ public class DrawAreaCircleElement extends OdfElement
 	 */
 	public String getOfficeTargetFrameNameAttribute()
 	{
-		OfficeTargetFrameNameAttribute attr = (OfficeTargetFrameNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "target-frame-name" ) );
+		OfficeTargetFrameNameAttribute attr = (OfficeTargetFrameNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "target-frame-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -207,7 +207,7 @@ public class DrawAreaCircleElement extends OdfElement
 	 */
 	public String getXlinkShowAttribute()
 	{
-		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) );
+		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -234,7 +234,7 @@ public class DrawAreaCircleElement extends OdfElement
 	 */
 	public String getOfficeNameAttribute()
 	{
-		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "name" ) );
+		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -261,7 +261,7 @@ public class DrawAreaCircleElement extends OdfElement
 	 */
 	public String getDrawNohrefAttribute()
 	{
-		DrawNohrefAttribute attr = (DrawNohrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "nohref" ) );
+		DrawNohrefAttribute attr = (DrawNohrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "nohref" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -288,7 +288,7 @@ public class DrawAreaCircleElement extends OdfElement
 	 */
 	public String getSvgCxAttribute()
 	{
-		SvgCxAttribute attr = (SvgCxAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "cx" ) );
+		SvgCxAttribute attr = (SvgCxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "cx" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -315,7 +315,7 @@ public class DrawAreaCircleElement extends OdfElement
 	 */
 	public String getSvgCyAttribute()
 	{
-		SvgCyAttribute attr = (SvgCyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "cy" ) );
+		SvgCyAttribute attr = (SvgCyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "cy" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -342,7 +342,7 @@ public class DrawAreaCircleElement extends OdfElement
 	 */
 	public String getSvgRAttribute()
 	{
-		SvgRAttribute attr = (SvgRAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "r" ) );
+		SvgRAttribute attr = (SvgRAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "r" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

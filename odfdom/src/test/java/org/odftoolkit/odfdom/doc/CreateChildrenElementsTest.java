@@ -34,7 +34,6 @@ import org.odftoolkit.odfdom.doc.chart.OdfChartPlotArea;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawPage;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeDocumentContent;
-import org.odftoolkit.odfdom.doc.office.OdfOfficePresentation;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeSpreadsheet;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.doc.text.OdfTextHeading;
@@ -51,6 +50,7 @@ import org.odftoolkit.odfdom.dom.element.chart.ChartPlotAreaElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLineElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.form.FormFormElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleDefaultStyleElement;
@@ -87,7 +87,7 @@ public class CreateChildrenElementsTest {
 
 			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("presentation.odp"));
 
-			OdfOfficePresentation presentation = OdfElement.findFirstChildNode(OdfOfficePresentation.class, odfdoc.getOfficeBody());
+			OfficePresentationElement presentation = OdfElement.findFirstChildNode(OfficePresentationElement.class, odfdoc.getOfficeBody());
 			Assert.assertNotNull(presentation);
 
 			DrawPageElement page = presentation.newDrawPageElement("NewPage");
@@ -248,9 +248,9 @@ public class CreateChildrenElementsTest {
 			OdfFileDom doc = odgDoc1.getContentDom();
 
 			NodeList lst = doc.getElementsByTagNameNS(
-					OdfDrawPage.ELEMENT_NAME.getUri(),
-					OdfDrawPage.ELEMENT_NAME.getLocalName());
-			OdfDrawPage page = (OdfDrawPage) lst.item(lst.getLength() - 1);
+					DrawPageElement.ELEMENT_NAME.getUri(),
+					DrawPageElement.ELEMENT_NAME.getLocalName());
+			DrawPageElement page = (DrawPageElement) lst.item(lst.getLength() - 1);
 			//page.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "name" ), "page1" );
 			//page.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "style-name" ), "dp1" );
 			//page.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "master-page-name" ), "Default" );
@@ -429,7 +429,7 @@ public class CreateChildrenElementsTest {
 
 			OdfDocument odfdoc = OdfPresentationDocument.newPresentationDocument();
 
-			OdfOfficePresentation presentation = OdfElement.findFirstChildNode(OdfOfficePresentation.class, odfdoc.getOfficeBody());
+			OfficePresentationElement presentation = OdfElement.findFirstChildNode(OfficePresentationElement.class, odfdoc.getOfficeBody());
 			Assert.assertNotNull(presentation);
 
 			DrawPageElement page = presentation.newDrawPageElement("NewPage");

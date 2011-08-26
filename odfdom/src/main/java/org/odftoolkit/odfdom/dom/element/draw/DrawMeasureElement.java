@@ -95,7 +95,7 @@ public class DrawMeasureElement extends DrawShapeElementBase
 	 */
 	public String getSvgX1Attribute()
 	{
-		SvgX1Attribute attr = (SvgX1Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x1" ) );
+		SvgX1Attribute attr = (SvgX1Attribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x1" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -122,7 +122,7 @@ public class DrawMeasureElement extends DrawShapeElementBase
 	 */
 	public String getSvgY1Attribute()
 	{
-		SvgY1Attribute attr = (SvgY1Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y1" ) );
+		SvgY1Attribute attr = (SvgY1Attribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y1" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -149,7 +149,7 @@ public class DrawMeasureElement extends DrawShapeElementBase
 	 */
 	public String getSvgX2Attribute()
 	{
-		SvgX2Attribute attr = (SvgX2Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x2" ) );
+		SvgX2Attribute attr = (SvgX2Attribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x2" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -176,7 +176,7 @@ public class DrawMeasureElement extends DrawShapeElementBase
 	 */
 	public String getSvgY2Attribute()
 	{
-		SvgY2Attribute attr = (SvgY2Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y2" ) );
+		SvgY2Attribute attr = (SvgY2Attribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y2" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -203,7 +203,7 @@ public class DrawMeasureElement extends DrawShapeElementBase
 	 */
 	public String getDrawLayerAttribute()
 	{
-		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "layer" ) );
+		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "layer" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -230,7 +230,7 @@ public class DrawMeasureElement extends DrawShapeElementBase
 	 */
 	public String getDrawTransformAttribute()
 	{
-		DrawTransformAttribute attr = (DrawTransformAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "transform" ) );
+		DrawTransformAttribute attr = (DrawTransformAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "transform" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -257,7 +257,7 @@ public class DrawMeasureElement extends DrawShapeElementBase
 	 */
 	public String getDrawTextStyleNameAttribute()
 	{
-		DrawTextStyleNameAttribute attr = (DrawTextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-style-name" ) );
+		DrawTextStyleNameAttribute attr = (DrawTextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -284,7 +284,7 @@ public class DrawMeasureElement extends DrawShapeElementBase
 	 */
 	public String getDrawCaptionIdAttribute()
 	{
-		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-id" ) );
+		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

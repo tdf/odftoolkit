@@ -89,7 +89,7 @@ public class StyleTableColumnPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleColumnWidthAttribute()
 	{
-		StyleColumnWidthAttribute attr = (StyleColumnWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "column-width" ) );
+		StyleColumnWidthAttribute attr = (StyleColumnWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "column-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -116,7 +116,7 @@ public class StyleTableColumnPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRelColumnWidthAttribute()
 	{
-		StyleRelColumnWidthAttribute attr = (StyleRelColumnWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rel-column-width" ) );
+		StyleRelColumnWidthAttribute attr = (StyleRelColumnWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rel-column-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -143,7 +143,7 @@ public class StyleTableColumnPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleUseOptimalColumnWidthAttribute()
 	{
-		StyleUseOptimalColumnWidthAttribute attr = (StyleUseOptimalColumnWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "use-optimal-column-width" ) );
+		StyleUseOptimalColumnWidthAttribute attr = (StyleUseOptimalColumnWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "use-optimal-column-width" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -170,7 +170,7 @@ public class StyleTableColumnPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBreakBeforeAttribute()
 	{
-		FoBreakBeforeAttribute attr = (FoBreakBeforeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-before" ) );
+		FoBreakBeforeAttribute attr = (FoBreakBeforeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-before" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -197,7 +197,7 @@ public class StyleTableColumnPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBreakAfterAttribute()
 	{
-		FoBreakAfterAttribute attr = (FoBreakAfterAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-after" ) );
+		FoBreakAfterAttribute attr = (FoBreakAfterAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-after" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

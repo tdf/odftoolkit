@@ -116,7 +116,7 @@ public class TableOperationElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) );
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -143,7 +143,7 @@ public class TableOperationElement extends OdfElement
 	 */
 	public Integer getTableIndexAttribute()
 	{
-		TableIndexAttribute attr = (TableIndexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "index" ) );
+		TableIndexAttribute attr = (TableIndexAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "index" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

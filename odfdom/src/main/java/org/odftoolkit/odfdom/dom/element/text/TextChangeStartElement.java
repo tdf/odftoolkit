@@ -82,7 +82,7 @@ public class TextChangeStartElement extends OdfElement
 	 */
 	public String getTextChangeIdAttribute()
 	{
-		TextChangeIdAttribute attr = (TextChangeIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "change-id" ) );
+		TextChangeIdAttribute attr = (TextChangeIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "change-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -86,7 +86,7 @@ public class TextSequenceElement extends OdfElement
 	 */
 	public String getTextNameAttribute()
 	{
-		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) );
+		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public class TextSequenceElement extends OdfElement
 	 */
 	public String getTextFormulaAttribute()
 	{
-		TextFormulaAttribute attr = (TextFormulaAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "formula" ) );
+		TextFormulaAttribute attr = (TextFormulaAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "formula" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public class TextSequenceElement extends OdfElement
 	 */
 	public String getStyleNumFormatAttribute()
 	{
-		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-format" ) );
+		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-format" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -167,7 +167,7 @@ public class TextSequenceElement extends OdfElement
 	 */
 	public Boolean getStyleNumLetterSyncAttribute()
 	{
-		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-letter-sync" ) );
+		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-letter-sync" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -194,7 +194,7 @@ public class TextSequenceElement extends OdfElement
 	 */
 	public String getTextRefNameAttribute()
 	{
-		TextRefNameAttribute attr = (TextRefNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "ref-name" ) );
+		TextRefNameAttribute attr = (TextRefNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "ref-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

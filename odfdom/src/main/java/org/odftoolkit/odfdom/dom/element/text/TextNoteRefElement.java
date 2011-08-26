@@ -116,7 +116,7 @@ public class TextNoteRefElement extends OdfElement
 	 */
 	public String getTextRefNameAttribute()
 	{
-		TextRefNameAttribute attr = (TextRefNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "ref-name" ) );
+		TextRefNameAttribute attr = (TextRefNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "ref-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -143,7 +143,7 @@ public class TextNoteRefElement extends OdfElement
 	 */
 	public String getTextReferenceFormatAttribute()
 	{
-		TextReferenceFormatAttribute attr = (TextReferenceFormatAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "reference-format" ) );
+		TextReferenceFormatAttribute attr = (TextReferenceFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "reference-format" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -170,7 +170,7 @@ public class TextNoteRefElement extends OdfElement
 	 */
 	public String getTextNoteClassAttribute()
 	{
-		TextNoteClassAttribute attr = (TextNoteClassAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "note-class" ) );
+		TextNoteClassAttribute attr = (TextNoteClassAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "note-class" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -82,7 +82,7 @@ public class PresentationHeaderDeclElement extends OdfElement
 	 */
 	public String getPresentationNameAttribute()
 	{
-		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "name" ) );
+		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -88,7 +88,7 @@ public class TableMovementCutOffElement extends OdfElement
 	 */
 	public Integer getTablePositionAttribute()
 	{
-		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "position" ) );
+		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "position" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -115,7 +115,7 @@ public class TableMovementCutOffElement extends OdfElement
 	 */
 	public Integer getTableStartPositionAttribute()
 	{
-		TableStartPositionAttribute attr = (TableStartPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "start-position" ) );
+		TableStartPositionAttribute attr = (TableStartPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "start-position" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -142,7 +142,7 @@ public class TableMovementCutOffElement extends OdfElement
 	 */
 	public Integer getTableEndPositionAttribute()
 	{
-		TableEndPositionAttribute attr = (TableEndPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-position" ) );
+		TableEndPositionAttribute attr = (TableEndPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-position" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

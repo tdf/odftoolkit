@@ -73,7 +73,7 @@ public class TextTabElement extends OdfElement
 	 */
 	public Integer getTextTabRefAttribute()
 	{
-		TextTabRefAttribute attr = (TextTabRefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "tab-ref" ) );
+		TextTabRefAttribute attr = (TextTabRefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "tab-ref" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

@@ -92,7 +92,7 @@ public class StyleHeaderElement extends OdfElement
 	 */
 	public Boolean getStyleDisplayAttribute()
 	{
-		StyleDisplayAttribute attr = (StyleDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "display" ) );
+		StyleDisplayAttribute attr = (StyleDisplayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "display" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

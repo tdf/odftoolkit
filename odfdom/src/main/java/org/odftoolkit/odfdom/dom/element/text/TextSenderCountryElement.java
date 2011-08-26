@@ -73,7 +73,7 @@ public class TextSenderCountryElement extends OdfElement
 	 */
 	public Boolean getTextFixedAttribute()
 	{
-		TextFixedAttribute attr = (TextFixedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "fixed" ) );
+		TextFixedAttribute attr = (TextFixedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "fixed" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

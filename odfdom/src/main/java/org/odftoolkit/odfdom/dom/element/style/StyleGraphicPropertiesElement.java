@@ -630,7 +630,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawStrokeAttribute()
 	{
-		DrawStrokeAttribute attr = (DrawStrokeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "stroke" ) );
+		DrawStrokeAttribute attr = (DrawStrokeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "stroke" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -657,7 +657,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawStrokeDashAttribute()
 	{
-		DrawStrokeDashAttribute attr = (DrawStrokeDashAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "stroke-dash" ) );
+		DrawStrokeDashAttribute attr = (DrawStrokeDashAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "stroke-dash" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -684,7 +684,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawStrokeDashNamesAttribute()
 	{
-		DrawStrokeDashNamesAttribute attr = (DrawStrokeDashNamesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "stroke-dash-names" ) );
+		DrawStrokeDashNamesAttribute attr = (DrawStrokeDashNamesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "stroke-dash-names" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -711,7 +711,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getSvgStrokeWidthAttribute()
 	{
-		SvgStrokeWidthAttribute attr = (SvgStrokeWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stroke-width" ) );
+		SvgStrokeWidthAttribute attr = (SvgStrokeWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stroke-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -738,7 +738,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getSvgStrokeColorAttribute()
 	{
-		SvgStrokeColorAttribute attr = (SvgStrokeColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stroke-color" ) );
+		SvgStrokeColorAttribute attr = (SvgStrokeColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stroke-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -765,7 +765,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawMarkerStartAttribute()
 	{
-		DrawMarkerStartAttribute attr = (DrawMarkerStartAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "marker-start" ) );
+		DrawMarkerStartAttribute attr = (DrawMarkerStartAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "marker-start" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -792,7 +792,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawMarkerEndAttribute()
 	{
-		DrawMarkerEndAttribute attr = (DrawMarkerEndAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "marker-end" ) );
+		DrawMarkerEndAttribute attr = (DrawMarkerEndAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "marker-end" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -819,7 +819,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawMarkerStartWidthAttribute()
 	{
-		DrawMarkerStartWidthAttribute attr = (DrawMarkerStartWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "marker-start-width" ) );
+		DrawMarkerStartWidthAttribute attr = (DrawMarkerStartWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "marker-start-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -846,7 +846,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawMarkerEndWidthAttribute()
 	{
-		DrawMarkerEndWidthAttribute attr = (DrawMarkerEndWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "marker-end-width" ) );
+		DrawMarkerEndWidthAttribute attr = (DrawMarkerEndWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "marker-end-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -873,7 +873,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawMarkerStartCenterAttribute()
 	{
-		DrawMarkerStartCenterAttribute attr = (DrawMarkerStartCenterAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "marker-start-center" ) );
+		DrawMarkerStartCenterAttribute attr = (DrawMarkerStartCenterAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "marker-start-center" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -900,7 +900,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawMarkerEndCenterAttribute()
 	{
-		DrawMarkerEndCenterAttribute attr = (DrawMarkerEndCenterAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "marker-end-center" ) );
+		DrawMarkerEndCenterAttribute attr = (DrawMarkerEndCenterAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "marker-end-center" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -927,7 +927,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Double getSvgStrokeOpacityAttribute()
 	{
-		SvgStrokeOpacityAttribute attr = (SvgStrokeOpacityAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stroke-opacity" ) );
+		SvgStrokeOpacityAttribute attr = (SvgStrokeOpacityAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stroke-opacity" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
@@ -954,7 +954,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawStrokeLinejoinAttribute()
 	{
-		DrawStrokeLinejoinAttribute attr = (DrawStrokeLinejoinAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "stroke-linejoin" ) );
+		DrawStrokeLinejoinAttribute attr = (DrawStrokeLinejoinAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "stroke-linejoin" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -981,7 +981,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getSvgStrokeLinecapAttribute()
 	{
-		SvgStrokeLinecapAttribute attr = (SvgStrokeLinecapAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stroke-linecap" ) );
+		SvgStrokeLinecapAttribute attr = (SvgStrokeLinecapAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stroke-linecap" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1008,7 +1008,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawSymbolColorAttribute()
 	{
-		DrawSymbolColorAttribute attr = (DrawSymbolColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "symbol-color" ) );
+		DrawSymbolColorAttribute attr = (DrawSymbolColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "symbol-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1035,7 +1035,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getTextAnimationAttribute()
 	{
-		TextAnimationAttribute attr = (TextAnimationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation" ) );
+		TextAnimationAttribute attr = (TextAnimationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1062,7 +1062,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getTextAnimationDirectionAttribute()
 	{
-		TextAnimationDirectionAttribute attr = (TextAnimationDirectionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation-direction" ) );
+		TextAnimationDirectionAttribute attr = (TextAnimationDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation-direction" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1089,7 +1089,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getTextAnimationStartInsideAttribute()
 	{
-		TextAnimationStartInsideAttribute attr = (TextAnimationStartInsideAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation-start-inside" ) );
+		TextAnimationStartInsideAttribute attr = (TextAnimationStartInsideAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation-start-inside" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1116,7 +1116,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getTextAnimationStopInsideAttribute()
 	{
-		TextAnimationStopInsideAttribute attr = (TextAnimationStopInsideAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation-stop-inside" ) );
+		TextAnimationStopInsideAttribute attr = (TextAnimationStopInsideAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation-stop-inside" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1143,7 +1143,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Integer getTextAnimationRepeatAttribute()
 	{
-		TextAnimationRepeatAttribute attr = (TextAnimationRepeatAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation-repeat" ) );
+		TextAnimationRepeatAttribute attr = (TextAnimationRepeatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation-repeat" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -1170,7 +1170,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getTextAnimationDelayAttribute()
 	{
-		TextAnimationDelayAttribute attr = (TextAnimationDelayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation-delay" ) );
+		TextAnimationDelayAttribute attr = (TextAnimationDelayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation-delay" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1197,7 +1197,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getTextAnimationStepsAttribute()
 	{
-		TextAnimationStepsAttribute attr = (TextAnimationStepsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation-steps" ) );
+		TextAnimationStepsAttribute attr = (TextAnimationStepsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "animation-steps" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1224,7 +1224,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawAutoGrowWidthAttribute()
 	{
-		DrawAutoGrowWidthAttribute attr = (DrawAutoGrowWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "auto-grow-width" ) );
+		DrawAutoGrowWidthAttribute attr = (DrawAutoGrowWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "auto-grow-width" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1251,7 +1251,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawAutoGrowHeightAttribute()
 	{
-		DrawAutoGrowHeightAttribute attr = (DrawAutoGrowHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "auto-grow-height" ) );
+		DrawAutoGrowHeightAttribute attr = (DrawAutoGrowHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "auto-grow-height" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1278,7 +1278,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawFitToSizeAttribute()
 	{
-		DrawFitToSizeAttribute attr = (DrawFitToSizeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fit-to-size" ) );
+		DrawFitToSizeAttribute attr = (DrawFitToSizeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fit-to-size" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1305,7 +1305,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawFitToContourAttribute()
 	{
-		DrawFitToContourAttribute attr = (DrawFitToContourAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fit-to-contour" ) );
+		DrawFitToContourAttribute attr = (DrawFitToContourAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fit-to-contour" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1332,7 +1332,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawTextareaVerticalAlignAttribute()
 	{
-		DrawTextareaVerticalAlignAttribute attr = (DrawTextareaVerticalAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "textarea-vertical-align" ) );
+		DrawTextareaVerticalAlignAttribute attr = (DrawTextareaVerticalAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "textarea-vertical-align" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1359,7 +1359,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawTextareaHorizontalAlignAttribute()
 	{
-		DrawTextareaHorizontalAlignAttribute attr = (DrawTextareaHorizontalAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "textarea-horizontal-align" ) );
+		DrawTextareaHorizontalAlignAttribute attr = (DrawTextareaHorizontalAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "textarea-horizontal-align" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1386,7 +1386,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoWrapOptionAttribute()
 	{
-		FoWrapOptionAttribute attr = (FoWrapOptionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "wrap-option" ) );
+		FoWrapOptionAttribute attr = (FoWrapOptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "wrap-option" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1413,7 +1413,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleShrinkToFitAttribute()
 	{
-		StyleShrinkToFitAttribute attr = (StyleShrinkToFitAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shrink-to-fit" ) );
+		StyleShrinkToFitAttribute attr = (StyleShrinkToFitAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shrink-to-fit" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1440,7 +1440,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawColorModeAttribute()
 	{
-		DrawColorModeAttribute attr = (DrawColorModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "color-mode" ) );
+		DrawColorModeAttribute attr = (DrawColorModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "color-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1467,7 +1467,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawColorInversionAttribute()
 	{
-		DrawColorInversionAttribute attr = (DrawColorInversionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "color-inversion" ) );
+		DrawColorInversionAttribute attr = (DrawColorInversionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "color-inversion" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1494,7 +1494,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawLuminanceAttribute()
 	{
-		DrawLuminanceAttribute attr = (DrawLuminanceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "luminance" ) );
+		DrawLuminanceAttribute attr = (DrawLuminanceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "luminance" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1521,7 +1521,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawContrastAttribute()
 	{
-		DrawContrastAttribute attr = (DrawContrastAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "contrast" ) );
+		DrawContrastAttribute attr = (DrawContrastAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "contrast" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1548,7 +1548,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawGammaAttribute()
 	{
-		DrawGammaAttribute attr = (DrawGammaAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "gamma" ) );
+		DrawGammaAttribute attr = (DrawGammaAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "gamma" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1575,7 +1575,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawRedAttribute()
 	{
-		DrawRedAttribute attr = (DrawRedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "red" ) );
+		DrawRedAttribute attr = (DrawRedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "red" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1602,7 +1602,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawGreenAttribute()
 	{
-		DrawGreenAttribute attr = (DrawGreenAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "green" ) );
+		DrawGreenAttribute attr = (DrawGreenAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "green" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1629,7 +1629,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawBlueAttribute()
 	{
-		DrawBlueAttribute attr = (DrawBlueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "blue" ) );
+		DrawBlueAttribute attr = (DrawBlueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "blue" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1656,7 +1656,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawImageOpacityAttribute()
 	{
-		DrawImageOpacityAttribute attr = (DrawImageOpacityAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "image-opacity" ) );
+		DrawImageOpacityAttribute attr = (DrawImageOpacityAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "image-opacity" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1683,7 +1683,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawShadowAttribute()
 	{
-		DrawShadowAttribute attr = (DrawShadowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shadow" ) );
+		DrawShadowAttribute attr = (DrawShadowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shadow" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1710,7 +1710,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawShadowOffsetXAttribute()
 	{
-		DrawShadowOffsetXAttribute attr = (DrawShadowOffsetXAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shadow-offset-x" ) );
+		DrawShadowOffsetXAttribute attr = (DrawShadowOffsetXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shadow-offset-x" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1737,7 +1737,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawShadowOffsetYAttribute()
 	{
-		DrawShadowOffsetYAttribute attr = (DrawShadowOffsetYAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shadow-offset-y" ) );
+		DrawShadowOffsetYAttribute attr = (DrawShadowOffsetYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shadow-offset-y" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1764,7 +1764,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawShadowColorAttribute()
 	{
-		DrawShadowColorAttribute attr = (DrawShadowColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shadow-color" ) );
+		DrawShadowColorAttribute attr = (DrawShadowColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shadow-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1791,7 +1791,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawShadowOpacityAttribute()
 	{
-		DrawShadowOpacityAttribute attr = (DrawShadowOpacityAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shadow-opacity" ) );
+		DrawShadowOpacityAttribute attr = (DrawShadowOpacityAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shadow-opacity" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1818,7 +1818,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawStartLineSpacingHorizontalAttribute()
 	{
-		DrawStartLineSpacingHorizontalAttribute attr = (DrawStartLineSpacingHorizontalAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start-line-spacing-horizontal" ) );
+		DrawStartLineSpacingHorizontalAttribute attr = (DrawStartLineSpacingHorizontalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start-line-spacing-horizontal" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1845,7 +1845,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawStartLineSpacingVerticalAttribute()
 	{
-		DrawStartLineSpacingVerticalAttribute attr = (DrawStartLineSpacingVerticalAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start-line-spacing-vertical" ) );
+		DrawStartLineSpacingVerticalAttribute attr = (DrawStartLineSpacingVerticalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start-line-spacing-vertical" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1872,7 +1872,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawEndLineSpacingHorizontalAttribute()
 	{
-		DrawEndLineSpacingHorizontalAttribute attr = (DrawEndLineSpacingHorizontalAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end-line-spacing-horizontal" ) );
+		DrawEndLineSpacingHorizontalAttribute attr = (DrawEndLineSpacingHorizontalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end-line-spacing-horizontal" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1899,7 +1899,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawEndLineSpacingVerticalAttribute()
 	{
-		DrawEndLineSpacingVerticalAttribute attr = (DrawEndLineSpacingVerticalAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end-line-spacing-vertical" ) );
+		DrawEndLineSpacingVerticalAttribute attr = (DrawEndLineSpacingVerticalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end-line-spacing-vertical" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1926,7 +1926,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawLineDistanceAttribute()
 	{
-		DrawLineDistanceAttribute attr = (DrawLineDistanceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "line-distance" ) );
+		DrawLineDistanceAttribute attr = (DrawLineDistanceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "line-distance" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1953,7 +1953,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawGuideOverhangAttribute()
 	{
-		DrawGuideOverhangAttribute attr = (DrawGuideOverhangAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "guide-overhang" ) );
+		DrawGuideOverhangAttribute attr = (DrawGuideOverhangAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "guide-overhang" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1980,7 +1980,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawGuideDistanceAttribute()
 	{
-		DrawGuideDistanceAttribute attr = (DrawGuideDistanceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "guide-distance" ) );
+		DrawGuideDistanceAttribute attr = (DrawGuideDistanceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "guide-distance" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2007,7 +2007,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawStartGuideAttribute()
 	{
-		DrawStartGuideAttribute attr = (DrawStartGuideAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start-guide" ) );
+		DrawStartGuideAttribute attr = (DrawStartGuideAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start-guide" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2034,7 +2034,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawEndGuideAttribute()
 	{
-		DrawEndGuideAttribute attr = (DrawEndGuideAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end-guide" ) );
+		DrawEndGuideAttribute attr = (DrawEndGuideAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end-guide" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2061,7 +2061,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawPlacingAttribute()
 	{
-		DrawPlacingAttribute attr = (DrawPlacingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "placing" ) );
+		DrawPlacingAttribute attr = (DrawPlacingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "placing" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2088,7 +2088,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawParallelAttribute()
 	{
-		DrawParallelAttribute attr = (DrawParallelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "parallel" ) );
+		DrawParallelAttribute attr = (DrawParallelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "parallel" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -2115,7 +2115,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawMeasureAlignAttribute()
 	{
-		DrawMeasureAlignAttribute attr = (DrawMeasureAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "measure-align" ) );
+		DrawMeasureAlignAttribute attr = (DrawMeasureAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "measure-align" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2142,7 +2142,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawMeasureVerticalAlignAttribute()
 	{
-		DrawMeasureVerticalAlignAttribute attr = (DrawMeasureVerticalAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "measure-vertical-align" ) );
+		DrawMeasureVerticalAlignAttribute attr = (DrawMeasureVerticalAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "measure-vertical-align" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2169,7 +2169,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawUnitAttribute()
 	{
-		DrawUnitAttribute attr = (DrawUnitAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "unit" ) );
+		DrawUnitAttribute attr = (DrawUnitAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "unit" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2196,7 +2196,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawShowUnitAttribute()
 	{
-		DrawShowUnitAttribute attr = (DrawShowUnitAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "show-unit" ) );
+		DrawShowUnitAttribute attr = (DrawShowUnitAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "show-unit" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -2223,7 +2223,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Integer getDrawDecimalPlacesAttribute()
 	{
-		DrawDecimalPlacesAttribute attr = (DrawDecimalPlacesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "decimal-places" ) );
+		DrawDecimalPlacesAttribute attr = (DrawDecimalPlacesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "decimal-places" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -2250,7 +2250,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawCaptionTypeAttribute()
 	{
-		DrawCaptionTypeAttribute attr = (DrawCaptionTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-type" ) );
+		DrawCaptionTypeAttribute attr = (DrawCaptionTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2277,7 +2277,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawCaptionAngleTypeAttribute()
 	{
-		DrawCaptionAngleTypeAttribute attr = (DrawCaptionAngleTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-angle-type" ) );
+		DrawCaptionAngleTypeAttribute attr = (DrawCaptionAngleTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-angle-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2304,7 +2304,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawCaptionAngleAttribute()
 	{
-		DrawCaptionAngleAttribute attr = (DrawCaptionAngleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-angle" ) );
+		DrawCaptionAngleAttribute attr = (DrawCaptionAngleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-angle" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2331,7 +2331,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawCaptionGapAttribute()
 	{
-		DrawCaptionGapAttribute attr = (DrawCaptionGapAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-gap" ) );
+		DrawCaptionGapAttribute attr = (DrawCaptionGapAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-gap" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2358,7 +2358,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawCaptionEscapeDirectionAttribute()
 	{
-		DrawCaptionEscapeDirectionAttribute attr = (DrawCaptionEscapeDirectionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-escape-direction" ) );
+		DrawCaptionEscapeDirectionAttribute attr = (DrawCaptionEscapeDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-escape-direction" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2385,7 +2385,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawCaptionEscapeAttribute()
 	{
-		DrawCaptionEscapeAttribute attr = (DrawCaptionEscapeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-escape" ) );
+		DrawCaptionEscapeAttribute attr = (DrawCaptionEscapeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-escape" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2412,7 +2412,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawCaptionLineLengthAttribute()
 	{
-		DrawCaptionLineLengthAttribute attr = (DrawCaptionLineLengthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-line-length" ) );
+		DrawCaptionLineLengthAttribute attr = (DrawCaptionLineLengthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-line-length" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2439,7 +2439,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawCaptionFitLineLengthAttribute()
 	{
-		DrawCaptionFitLineLengthAttribute attr = (DrawCaptionFitLineLengthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-fit-line-length" ) );
+		DrawCaptionFitLineLengthAttribute attr = (DrawCaptionFitLineLengthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-fit-line-length" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -2466,7 +2466,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Integer getDr3dHorizontalSegmentsAttribute()
 	{
-		Dr3dHorizontalSegmentsAttribute attr = (Dr3dHorizontalSegmentsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "horizontal-segments" ) );
+		Dr3dHorizontalSegmentsAttribute attr = (Dr3dHorizontalSegmentsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "horizontal-segments" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -2493,7 +2493,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Integer getDr3dVerticalSegmentsAttribute()
 	{
-		Dr3dVerticalSegmentsAttribute attr = (Dr3dVerticalSegmentsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "vertical-segments" ) );
+		Dr3dVerticalSegmentsAttribute attr = (Dr3dVerticalSegmentsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "vertical-segments" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -2520,7 +2520,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dEdgeRoundingAttribute()
 	{
-		Dr3dEdgeRoundingAttribute attr = (Dr3dEdgeRoundingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "edge-rounding" ) );
+		Dr3dEdgeRoundingAttribute attr = (Dr3dEdgeRoundingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "edge-rounding" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2547,7 +2547,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dEdgeRoundingModeAttribute()
 	{
-		Dr3dEdgeRoundingModeAttribute attr = (Dr3dEdgeRoundingModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "edge-rounding-mode" ) );
+		Dr3dEdgeRoundingModeAttribute attr = (Dr3dEdgeRoundingModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "edge-rounding-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2574,7 +2574,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dBackScaleAttribute()
 	{
-		Dr3dBackScaleAttribute attr = (Dr3dBackScaleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "back-scale" ) );
+		Dr3dBackScaleAttribute attr = (Dr3dBackScaleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "back-scale" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2601,7 +2601,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dDepthAttribute()
 	{
-		Dr3dDepthAttribute attr = (Dr3dDepthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "depth" ) );
+		Dr3dDepthAttribute attr = (Dr3dDepthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "depth" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2628,7 +2628,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dBackfaceCullingAttribute()
 	{
-		Dr3dBackfaceCullingAttribute attr = (Dr3dBackfaceCullingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "backface-culling" ) );
+		Dr3dBackfaceCullingAttribute attr = (Dr3dBackfaceCullingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "backface-culling" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2655,7 +2655,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dEndAngleAttribute()
 	{
-		Dr3dEndAngleAttribute attr = (Dr3dEndAngleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "end-angle" ) );
+		Dr3dEndAngleAttribute attr = (Dr3dEndAngleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "end-angle" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2682,7 +2682,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDr3dCloseFrontAttribute()
 	{
-		Dr3dCloseFrontAttribute attr = (Dr3dCloseFrontAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "close-front" ) );
+		Dr3dCloseFrontAttribute attr = (Dr3dCloseFrontAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "close-front" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -2709,7 +2709,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDr3dCloseBackAttribute()
 	{
-		Dr3dCloseBackAttribute attr = (Dr3dCloseBackAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "close-back" ) );
+		Dr3dCloseBackAttribute attr = (Dr3dCloseBackAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "close-back" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -2736,7 +2736,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dLightingModeAttribute()
 	{
-		Dr3dLightingModeAttribute attr = (Dr3dLightingModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "lighting-mode" ) );
+		Dr3dLightingModeAttribute attr = (Dr3dLightingModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "lighting-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2763,7 +2763,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dNormalsKindAttribute()
 	{
-		Dr3dNormalsKindAttribute attr = (Dr3dNormalsKindAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "normals-kind" ) );
+		Dr3dNormalsKindAttribute attr = (Dr3dNormalsKindAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "normals-kind" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2790,7 +2790,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dNormalsDirectionAttribute()
 	{
-		Dr3dNormalsDirectionAttribute attr = (Dr3dNormalsDirectionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "normals-direction" ) );
+		Dr3dNormalsDirectionAttribute attr = (Dr3dNormalsDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "normals-direction" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2817,7 +2817,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dTextureGenerationModeXAttribute()
 	{
-		Dr3dTextureGenerationModeXAttribute attr = (Dr3dTextureGenerationModeXAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "texture-generation-mode-x" ) );
+		Dr3dTextureGenerationModeXAttribute attr = (Dr3dTextureGenerationModeXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "texture-generation-mode-x" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2844,7 +2844,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dTextureGenerationModeYAttribute()
 	{
-		Dr3dTextureGenerationModeYAttribute attr = (Dr3dTextureGenerationModeYAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "texture-generation-mode-y" ) );
+		Dr3dTextureGenerationModeYAttribute attr = (Dr3dTextureGenerationModeYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "texture-generation-mode-y" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2871,7 +2871,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dTextureKindAttribute()
 	{
-		Dr3dTextureKindAttribute attr = (Dr3dTextureKindAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "texture-kind" ) );
+		Dr3dTextureKindAttribute attr = (Dr3dTextureKindAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "texture-kind" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2898,7 +2898,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dTextureFilterAttribute()
 	{
-		Dr3dTextureFilterAttribute attr = (Dr3dTextureFilterAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "texture-filter" ) );
+		Dr3dTextureFilterAttribute attr = (Dr3dTextureFilterAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "texture-filter" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2925,7 +2925,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dTextureModeAttribute()
 	{
-		Dr3dTextureModeAttribute attr = (Dr3dTextureModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "texture-mode" ) );
+		Dr3dTextureModeAttribute attr = (Dr3dTextureModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "texture-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2952,7 +2952,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dAmbientColorAttribute()
 	{
-		Dr3dAmbientColorAttribute attr = (Dr3dAmbientColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "ambient-color" ) );
+		Dr3dAmbientColorAttribute attr = (Dr3dAmbientColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "ambient-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2979,7 +2979,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dEmissiveColorAttribute()
 	{
-		Dr3dEmissiveColorAttribute attr = (Dr3dEmissiveColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "emissive-color" ) );
+		Dr3dEmissiveColorAttribute attr = (Dr3dEmissiveColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "emissive-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3006,7 +3006,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dSpecularColorAttribute()
 	{
-		Dr3dSpecularColorAttribute attr = (Dr3dSpecularColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "specular-color" ) );
+		Dr3dSpecularColorAttribute attr = (Dr3dSpecularColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "specular-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3033,7 +3033,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dDiffuseColorAttribute()
 	{
-		Dr3dDiffuseColorAttribute attr = (Dr3dDiffuseColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "diffuse-color" ) );
+		Dr3dDiffuseColorAttribute attr = (Dr3dDiffuseColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "diffuse-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3060,7 +3060,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dShininessAttribute()
 	{
-		Dr3dShininessAttribute attr = (Dr3dShininessAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "shininess" ) );
+		Dr3dShininessAttribute attr = (Dr3dShininessAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "shininess" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3087,7 +3087,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDr3dShadowAttribute()
 	{
-		Dr3dShadowAttribute attr = (Dr3dShadowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "shadow" ) );
+		Dr3dShadowAttribute attr = (Dr3dShadowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "shadow" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3114,7 +3114,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getSvgWidthAttribute()
 	{
-		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "width" ) );
+		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3141,7 +3141,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getSvgHeightAttribute()
 	{
-		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) );
+		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3168,7 +3168,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRelWidthAttribute()
 	{
-		StyleRelWidthAttribute attr = (StyleRelWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rel-width" ) );
+		StyleRelWidthAttribute attr = (StyleRelWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rel-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3195,7 +3195,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRelHeightAttribute()
 	{
-		StyleRelHeightAttribute attr = (StyleRelHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rel-height" ) );
+		StyleRelHeightAttribute attr = (StyleRelHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rel-height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3222,7 +3222,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMinWidthAttribute()
 	{
-		FoMinWidthAttribute attr = (FoMinWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "min-width" ) );
+		FoMinWidthAttribute attr = (FoMinWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "min-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3249,7 +3249,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMinHeightAttribute()
 	{
-		FoMinHeightAttribute attr = (FoMinHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "min-height" ) );
+		FoMinHeightAttribute attr = (FoMinHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "min-height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3276,7 +3276,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMaxHeightAttribute()
 	{
-		FoMaxHeightAttribute attr = (FoMaxHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "max-height" ) );
+		FoMaxHeightAttribute attr = (FoMaxHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "max-height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3303,7 +3303,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMaxWidthAttribute()
 	{
-		FoMaxWidthAttribute attr = (FoMaxWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "max-width" ) );
+		FoMaxWidthAttribute attr = (FoMaxWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "max-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3330,7 +3330,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginLeftAttribute()
 	{
-		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-left" ) );
+		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3357,7 +3357,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginRightAttribute()
 	{
-		FoMarginRightAttribute attr = (FoMarginRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-right" ) );
+		FoMarginRightAttribute attr = (FoMarginRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3384,7 +3384,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginTopAttribute()
 	{
-		FoMarginTopAttribute attr = (FoMarginTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-top" ) );
+		FoMarginTopAttribute attr = (FoMarginTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-top" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3411,7 +3411,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginBottomAttribute()
 	{
-		FoMarginBottomAttribute attr = (FoMarginBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-bottom" ) );
+		FoMarginBottomAttribute attr = (FoMarginBottomAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-bottom" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3438,7 +3438,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginAttribute()
 	{
-		FoMarginAttribute attr = (FoMarginAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin" ) );
+		FoMarginAttribute attr = (FoMarginAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3465,7 +3465,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStylePrintContentAttribute()
 	{
-		StylePrintContentAttribute attr = (StylePrintContentAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "print-content" ) );
+		StylePrintContentAttribute attr = (StylePrintContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "print-content" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -3492,7 +3492,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleProtectAttribute()
 	{
-		StyleProtectAttribute attr = (StyleProtectAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "protect" ) );
+		StyleProtectAttribute attr = (StyleProtectAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "protect" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3519,7 +3519,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleHorizontalPosAttribute()
 	{
-		StyleHorizontalPosAttribute attr = (StyleHorizontalPosAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "horizontal-pos" ) );
+		StyleHorizontalPosAttribute attr = (StyleHorizontalPosAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "horizontal-pos" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3546,7 +3546,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getSvgXAttribute()
 	{
-		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x" ) );
+		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3573,7 +3573,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleHorizontalRelAttribute()
 	{
-		StyleHorizontalRelAttribute attr = (StyleHorizontalRelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "horizontal-rel" ) );
+		StyleHorizontalRelAttribute attr = (StyleHorizontalRelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "horizontal-rel" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3600,7 +3600,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleVerticalPosAttribute()
 	{
-		StyleVerticalPosAttribute attr = (StyleVerticalPosAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-pos" ) );
+		StyleVerticalPosAttribute attr = (StyleVerticalPosAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-pos" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3627,7 +3627,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getSvgYAttribute()
 	{
-		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) );
+		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3654,7 +3654,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleVerticalRelAttribute()
 	{
-		StyleVerticalRelAttribute attr = (StyleVerticalRelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-rel" ) );
+		StyleVerticalRelAttribute attr = (StyleVerticalRelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-rel" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3681,7 +3681,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getTextAnchorTypeAttribute()
 	{
-		TextAnchorTypeAttribute attr = (TextAnchorTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "anchor-type" ) );
+		TextAnchorTypeAttribute attr = (TextAnchorTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "anchor-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3708,7 +3708,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Integer getTextAnchorPageNumberAttribute()
 	{
-		TextAnchorPageNumberAttribute attr = (TextAnchorPageNumberAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "anchor-page-number" ) );
+		TextAnchorPageNumberAttribute attr = (TextAnchorPageNumberAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "anchor-page-number" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -3735,7 +3735,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderAttribute()
 	{
-		FoBorderAttribute attr = (FoBorderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border" ) );
+		FoBorderAttribute attr = (FoBorderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3762,7 +3762,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderTopAttribute()
 	{
-		FoBorderTopAttribute attr = (FoBorderTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-top" ) );
+		FoBorderTopAttribute attr = (FoBorderTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-top" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3789,7 +3789,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderBottomAttribute()
 	{
-		FoBorderBottomAttribute attr = (FoBorderBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-bottom" ) );
+		FoBorderBottomAttribute attr = (FoBorderBottomAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-bottom" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3816,7 +3816,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderLeftAttribute()
 	{
-		FoBorderLeftAttribute attr = (FoBorderLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-left" ) );
+		FoBorderLeftAttribute attr = (FoBorderLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3843,7 +3843,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderRightAttribute()
 	{
-		FoBorderRightAttribute attr = (FoBorderRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-right" ) );
+		FoBorderRightAttribute attr = (FoBorderRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3870,7 +3870,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthAttribute()
 	{
-		StyleBorderLineWidthAttribute attr = (StyleBorderLineWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width" ) );
+		StyleBorderLineWidthAttribute attr = (StyleBorderLineWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3897,7 +3897,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthTopAttribute()
 	{
-		StyleBorderLineWidthTopAttribute attr = (StyleBorderLineWidthTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-top" ) );
+		StyleBorderLineWidthTopAttribute attr = (StyleBorderLineWidthTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-top" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3924,7 +3924,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthBottomAttribute()
 	{
-		StyleBorderLineWidthBottomAttribute attr = (StyleBorderLineWidthBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-bottom" ) );
+		StyleBorderLineWidthBottomAttribute attr = (StyleBorderLineWidthBottomAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-bottom" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3951,7 +3951,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthLeftAttribute()
 	{
-		StyleBorderLineWidthLeftAttribute attr = (StyleBorderLineWidthLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-left" ) );
+		StyleBorderLineWidthLeftAttribute attr = (StyleBorderLineWidthLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -3978,7 +3978,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthRightAttribute()
 	{
-		StyleBorderLineWidthRightAttribute attr = (StyleBorderLineWidthRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-right" ) );
+		StyleBorderLineWidthRightAttribute attr = (StyleBorderLineWidthRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4005,7 +4005,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingAttribute()
 	{
-		FoPaddingAttribute attr = (FoPaddingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding" ) );
+		FoPaddingAttribute attr = (FoPaddingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4032,7 +4032,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingTopAttribute()
 	{
-		FoPaddingTopAttribute attr = (FoPaddingTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-top" ) );
+		FoPaddingTopAttribute attr = (FoPaddingTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-top" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4059,7 +4059,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingBottomAttribute()
 	{
-		FoPaddingBottomAttribute attr = (FoPaddingBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-bottom" ) );
+		FoPaddingBottomAttribute attr = (FoPaddingBottomAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-bottom" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4086,7 +4086,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingLeftAttribute()
 	{
-		FoPaddingLeftAttribute attr = (FoPaddingLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-left" ) );
+		FoPaddingLeftAttribute attr = (FoPaddingLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4113,7 +4113,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingRightAttribute()
 	{
-		FoPaddingRightAttribute attr = (FoPaddingRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-right" ) );
+		FoPaddingRightAttribute attr = (FoPaddingRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4140,7 +4140,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleShadowAttribute()
 	{
-		StyleShadowAttribute attr = (StyleShadowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shadow" ) );
+		StyleShadowAttribute attr = (StyleShadowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shadow" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4167,7 +4167,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBackgroundColorAttribute()
 	{
-		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color" ) );
+		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4194,7 +4194,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBackgroundTransparencyAttribute()
 	{
-		StyleBackgroundTransparencyAttribute attr = (StyleBackgroundTransparencyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "background-transparency" ) );
+		StyleBackgroundTransparencyAttribute attr = (StyleBackgroundTransparencyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "background-transparency" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4221,7 +4221,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleEditableAttribute()
 	{
-		StyleEditableAttribute attr = (StyleEditableAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "editable" ) );
+		StyleEditableAttribute attr = (StyleEditableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "editable" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -4248,7 +4248,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleWrapAttribute()
 	{
-		StyleWrapAttribute attr = (StyleWrapAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "wrap" ) );
+		StyleWrapAttribute attr = (StyleWrapAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "wrap" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4275,7 +4275,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleWrapDynamicThresholdAttribute()
 	{
-		StyleWrapDynamicThresholdAttribute attr = (StyleWrapDynamicThresholdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "wrap-dynamic-threshold" ) );
+		StyleWrapDynamicThresholdAttribute attr = (StyleWrapDynamicThresholdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "wrap-dynamic-threshold" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4302,7 +4302,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleNumberWrappedParagraphsAttribute()
 	{
-		StyleNumberWrappedParagraphsAttribute attr = (StyleNumberWrappedParagraphsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "number-wrapped-paragraphs" ) );
+		StyleNumberWrappedParagraphsAttribute attr = (StyleNumberWrappedParagraphsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "number-wrapped-paragraphs" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4329,7 +4329,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleWrapContourAttribute()
 	{
-		StyleWrapContourAttribute attr = (StyleWrapContourAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "wrap-contour" ) );
+		StyleWrapContourAttribute attr = (StyleWrapContourAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "wrap-contour" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -4356,7 +4356,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleWrapContourModeAttribute()
 	{
-		StyleWrapContourModeAttribute attr = (StyleWrapContourModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "wrap-contour-mode" ) );
+		StyleWrapContourModeAttribute attr = (StyleWrapContourModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "wrap-contour-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4383,7 +4383,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRunThroughAttribute()
 	{
-		StyleRunThroughAttribute attr = (StyleRunThroughAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "run-through" ) );
+		StyleRunThroughAttribute attr = (StyleRunThroughAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "run-through" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4410,7 +4410,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleFlowWithTextAttribute()
 	{
-		StyleFlowWithTextAttribute attr = (StyleFlowWithTextAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "flow-with-text" ) );
+		StyleFlowWithTextAttribute attr = (StyleFlowWithTextAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "flow-with-text" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -4437,7 +4437,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleOverflowBehaviorAttribute()
 	{
-		StyleOverflowBehaviorAttribute attr = (StyleOverflowBehaviorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "overflow-behavior" ) );
+		StyleOverflowBehaviorAttribute attr = (StyleOverflowBehaviorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "overflow-behavior" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4464,7 +4464,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleMirrorAttribute()
 	{
-		StyleMirrorAttribute attr = (StyleMirrorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "mirror" ) );
+		StyleMirrorAttribute attr = (StyleMirrorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "mirror" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4491,7 +4491,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoClipAttribute()
 	{
-		FoClipAttribute attr = (FoClipAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "clip" ) );
+		FoClipAttribute attr = (FoClipAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "clip" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4518,7 +4518,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawWrapInfluenceOnPositionAttribute()
 	{
-		DrawWrapInfluenceOnPositionAttribute attr = (DrawWrapInfluenceOnPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "wrap-influence-on-position" ) );
+		DrawWrapInfluenceOnPositionAttribute attr = (DrawWrapInfluenceOnPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "wrap-influence-on-position" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4545,7 +4545,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleWritingModeAttribute()
 	{
-		StyleWritingModeAttribute attr = (StyleWritingModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode" ) );
+		StyleWritingModeAttribute attr = (StyleWritingModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4572,7 +4572,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawFrameDisplayScrollbarAttribute()
 	{
-		DrawFrameDisplayScrollbarAttribute attr = (DrawFrameDisplayScrollbarAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "frame-display-scrollbar" ) );
+		DrawFrameDisplayScrollbarAttribute attr = (DrawFrameDisplayScrollbarAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "frame-display-scrollbar" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -4599,7 +4599,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawFrameDisplayBorderAttribute()
 	{
-		DrawFrameDisplayBorderAttribute attr = (DrawFrameDisplayBorderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "frame-display-border" ) );
+		DrawFrameDisplayBorderAttribute attr = (DrawFrameDisplayBorderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "frame-display-border" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -4626,7 +4626,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawFrameMarginHorizontalAttribute()
 	{
-		DrawFrameMarginHorizontalAttribute attr = (DrawFrameMarginHorizontalAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "frame-margin-horizontal" ) );
+		DrawFrameMarginHorizontalAttribute attr = (DrawFrameMarginHorizontalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "frame-margin-horizontal" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4653,7 +4653,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawFrameMarginVerticalAttribute()
 	{
-		DrawFrameMarginVerticalAttribute attr = (DrawFrameMarginVerticalAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "frame-margin-vertical" ) );
+		DrawFrameMarginVerticalAttribute attr = (DrawFrameMarginVerticalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "frame-margin-vertical" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4680,7 +4680,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawVisibleAreaLeftAttribute()
 	{
-		DrawVisibleAreaLeftAttribute attr = (DrawVisibleAreaLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "visible-area-left" ) );
+		DrawVisibleAreaLeftAttribute attr = (DrawVisibleAreaLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "visible-area-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4707,7 +4707,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawVisibleAreaTopAttribute()
 	{
-		DrawVisibleAreaTopAttribute attr = (DrawVisibleAreaTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "visible-area-top" ) );
+		DrawVisibleAreaTopAttribute attr = (DrawVisibleAreaTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "visible-area-top" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4734,7 +4734,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawVisibleAreaWidthAttribute()
 	{
-		DrawVisibleAreaWidthAttribute attr = (DrawVisibleAreaWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "visible-area-width" ) );
+		DrawVisibleAreaWidthAttribute attr = (DrawVisibleAreaWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "visible-area-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4761,7 +4761,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawVisibleAreaHeightAttribute()
 	{
-		DrawVisibleAreaHeightAttribute attr = (DrawVisibleAreaHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "visible-area-height" ) );
+		DrawVisibleAreaHeightAttribute attr = (DrawVisibleAreaHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "visible-area-height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4788,7 +4788,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawDrawAspectAttribute()
 	{
-		DrawDrawAspectAttribute attr = (DrawDrawAspectAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "draw-aspect" ) );
+		DrawDrawAspectAttribute attr = (DrawDrawAspectAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "draw-aspect" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4815,7 +4815,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Integer getDrawOleDrawAspectAttribute()
 	{
-		DrawOleDrawAspectAttribute attr = (DrawOleDrawAspectAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "ole-draw-aspect" ) );
+		DrawOleDrawAspectAttribute attr = (DrawOleDrawAspectAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "ole-draw-aspect" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -4842,7 +4842,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawFillAttribute()
 	{
-		DrawFillAttribute attr = (DrawFillAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill" ) );
+		DrawFillAttribute attr = (DrawFillAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4869,7 +4869,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawFillColorAttribute()
 	{
-		DrawFillColorAttribute attr = (DrawFillColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-color" ) );
+		DrawFillColorAttribute attr = (DrawFillColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4896,7 +4896,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawSecondaryFillColorAttribute()
 	{
-		DrawSecondaryFillColorAttribute attr = (DrawSecondaryFillColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "secondary-fill-color" ) );
+		DrawSecondaryFillColorAttribute attr = (DrawSecondaryFillColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "secondary-fill-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4923,7 +4923,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawFillGradientNameAttribute()
 	{
-		DrawFillGradientNameAttribute attr = (DrawFillGradientNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-gradient-name" ) );
+		DrawFillGradientNameAttribute attr = (DrawFillGradientNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-gradient-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -4950,7 +4950,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Integer getDrawGradientStepCountAttribute()
 	{
-		DrawGradientStepCountAttribute attr = (DrawGradientStepCountAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "gradient-step-count" ) );
+		DrawGradientStepCountAttribute attr = (DrawGradientStepCountAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "gradient-step-count" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -4977,7 +4977,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawFillHatchNameAttribute()
 	{
-		DrawFillHatchNameAttribute attr = (DrawFillHatchNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-hatch-name" ) );
+		DrawFillHatchNameAttribute attr = (DrawFillHatchNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-hatch-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -5004,7 +5004,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getDrawFillHatchSolidAttribute()
 	{
-		DrawFillHatchSolidAttribute attr = (DrawFillHatchSolidAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-hatch-solid" ) );
+		DrawFillHatchSolidAttribute attr = (DrawFillHatchSolidAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-hatch-solid" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -5031,7 +5031,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawFillImageNameAttribute()
 	{
-		DrawFillImageNameAttribute attr = (DrawFillImageNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-image-name" ) );
+		DrawFillImageNameAttribute attr = (DrawFillImageNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-image-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -5058,7 +5058,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRepeatAttribute()
 	{
-		StyleRepeatAttribute attr = (StyleRepeatAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "repeat" ) );
+		StyleRepeatAttribute attr = (StyleRepeatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "repeat" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -5085,7 +5085,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawFillImageWidthAttribute()
 	{
-		DrawFillImageWidthAttribute attr = (DrawFillImageWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-image-width" ) );
+		DrawFillImageWidthAttribute attr = (DrawFillImageWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-image-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -5112,7 +5112,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawFillImageHeightAttribute()
 	{
-		DrawFillImageHeightAttribute attr = (DrawFillImageHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-image-height" ) );
+		DrawFillImageHeightAttribute attr = (DrawFillImageHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-image-height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -5139,7 +5139,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawFillImageRefPointXAttribute()
 	{
-		DrawFillImageRefPointXAttribute attr = (DrawFillImageRefPointXAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-image-ref-point-x" ) );
+		DrawFillImageRefPointXAttribute attr = (DrawFillImageRefPointXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-image-ref-point-x" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -5166,7 +5166,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawFillImageRefPointYAttribute()
 	{
-		DrawFillImageRefPointYAttribute attr = (DrawFillImageRefPointYAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-image-ref-point-y" ) );
+		DrawFillImageRefPointYAttribute attr = (DrawFillImageRefPointYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-image-ref-point-y" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -5193,7 +5193,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawFillImageRefPointAttribute()
 	{
-		DrawFillImageRefPointAttribute attr = (DrawFillImageRefPointAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-image-ref-point" ) );
+		DrawFillImageRefPointAttribute attr = (DrawFillImageRefPointAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "fill-image-ref-point" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -5220,7 +5220,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawTileRepeatOffsetAttribute()
 	{
-		DrawTileRepeatOffsetAttribute attr = (DrawTileRepeatOffsetAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "tile-repeat-offset" ) );
+		DrawTileRepeatOffsetAttribute attr = (DrawTileRepeatOffsetAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "tile-repeat-offset" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -5247,7 +5247,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawOpacityAttribute()
 	{
-		DrawOpacityAttribute attr = (DrawOpacityAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "opacity" ) );
+		DrawOpacityAttribute attr = (DrawOpacityAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "opacity" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -5274,7 +5274,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getDrawOpacityNameAttribute()
 	{
-		DrawOpacityNameAttribute attr = (DrawOpacityNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "opacity-name" ) );
+		DrawOpacityNameAttribute attr = (DrawOpacityNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "opacity-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -5301,7 +5301,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getSvgFillRuleAttribute()
 	{
-		SvgFillRuleAttribute attr = (SvgFillRuleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "fill-rule" ) );
+		SvgFillRuleAttribute attr = (SvgFillRuleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "fill-rule" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

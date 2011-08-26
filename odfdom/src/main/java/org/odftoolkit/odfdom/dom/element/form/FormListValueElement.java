@@ -82,7 +82,7 @@ public class FormListValueElement extends OdfElement
 	 */
 	public String getOfficeStringValueAttribute()
 	{
-		OfficeStringValueAttribute attr = (OfficeStringValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "string-value" ) );
+		OfficeStringValueAttribute attr = (OfficeStringValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "string-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

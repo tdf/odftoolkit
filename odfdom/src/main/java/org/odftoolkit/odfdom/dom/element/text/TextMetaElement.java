@@ -100,7 +100,7 @@ public class TextMetaElement extends OdfElement
 	 */
 	public String getXhtmlAboutAttribute()
 	{
-		XhtmlAboutAttribute attr = (XhtmlAboutAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "about" ) );
+		XhtmlAboutAttribute attr = (XhtmlAboutAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "about" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -127,7 +127,7 @@ public class TextMetaElement extends OdfElement
 	 */
 	public String getXhtmlPropertyAttribute()
 	{
-		XhtmlPropertyAttribute attr = (XhtmlPropertyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "property" ) );
+		XhtmlPropertyAttribute attr = (XhtmlPropertyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "property" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -154,7 +154,7 @@ public class TextMetaElement extends OdfElement
 	 */
 	public String getXhtmlDatatypeAttribute()
 	{
-		XhtmlDatatypeAttribute attr = (XhtmlDatatypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "datatype" ) );
+		XhtmlDatatypeAttribute attr = (XhtmlDatatypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "datatype" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -181,7 +181,7 @@ public class TextMetaElement extends OdfElement
 	 */
 	public String getXhtmlContentAttribute()
 	{
-		XhtmlContentAttribute attr = (XhtmlContentAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "content" ) );
+		XhtmlContentAttribute attr = (XhtmlContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "content" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -208,7 +208,7 @@ public class TextMetaElement extends OdfElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

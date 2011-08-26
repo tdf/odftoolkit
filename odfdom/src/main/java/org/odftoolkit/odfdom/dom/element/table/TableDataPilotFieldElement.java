@@ -91,7 +91,7 @@ public class TableDataPilotFieldElement extends OdfElement
 	 */
 	public String getTableSourceFieldNameAttribute()
 	{
-		TableSourceFieldNameAttribute attr = (TableSourceFieldNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "source-field-name" ) );
+		TableSourceFieldNameAttribute attr = (TableSourceFieldNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "source-field-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -118,7 +118,7 @@ public class TableDataPilotFieldElement extends OdfElement
 	 */
 	public String getTableOrientationAttribute()
 	{
-		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "orientation" ) );
+		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "orientation" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -145,7 +145,7 @@ public class TableDataPilotFieldElement extends OdfElement
 	 */
 	public String getTableSelectedPageAttribute()
 	{
-		TableSelectedPageAttribute attr = (TableSelectedPageAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "selected-page" ) );
+		TableSelectedPageAttribute attr = (TableSelectedPageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "selected-page" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -172,7 +172,7 @@ public class TableDataPilotFieldElement extends OdfElement
 	 */
 	public String getTableIsDataLayoutFieldAttribute()
 	{
-		TableIsDataLayoutFieldAttribute attr = (TableIsDataLayoutFieldAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "is-data-layout-field" ) );
+		TableIsDataLayoutFieldAttribute attr = (TableIsDataLayoutFieldAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "is-data-layout-field" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -199,7 +199,7 @@ public class TableDataPilotFieldElement extends OdfElement
 	 */
 	public String getTableFunctionAttribute()
 	{
-		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "function" ) );
+		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "function" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -226,7 +226,7 @@ public class TableDataPilotFieldElement extends OdfElement
 	 */
 	public Integer getTableUsedHierarchyAttribute()
 	{
-		TableUsedHierarchyAttribute attr = (TableUsedHierarchyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "used-hierarchy" ) );
+		TableUsedHierarchyAttribute attr = (TableUsedHierarchyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "used-hierarchy" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

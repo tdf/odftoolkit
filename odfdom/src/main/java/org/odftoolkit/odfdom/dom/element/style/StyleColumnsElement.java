@@ -83,7 +83,7 @@ public class StyleColumnsElement extends OdfElement
 	 */
 	public Integer getFoColumnCountAttribute()
 	{
-		FoColumnCountAttribute attr = (FoColumnCountAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "column-count" ) );
+		FoColumnCountAttribute attr = (FoColumnCountAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "column-count" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -110,7 +110,7 @@ public class StyleColumnsElement extends OdfElement
 	 */
 	public String getFoColumnGapAttribute()
 	{
-		FoColumnGapAttribute attr = (FoColumnGapAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "column-gap" ) );
+		FoColumnGapAttribute attr = (FoColumnGapAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "column-gap" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

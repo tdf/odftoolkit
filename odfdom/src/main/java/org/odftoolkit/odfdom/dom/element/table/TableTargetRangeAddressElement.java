@@ -106,7 +106,7 @@ public class TableTargetRangeAddressElement extends OdfElement
 	 */
 	public Integer getTableColumnAttribute()
 	{
-		TableColumnAttribute attr = (TableColumnAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "column" ) );
+		TableColumnAttribute attr = (TableColumnAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "column" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -133,7 +133,7 @@ public class TableTargetRangeAddressElement extends OdfElement
 	 */
 	public Integer getTableRowAttribute()
 	{
-		TableRowAttribute attr = (TableRowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "row" ) );
+		TableRowAttribute attr = (TableRowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "row" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -160,7 +160,7 @@ public class TableTargetRangeAddressElement extends OdfElement
 	 */
 	public Integer getTableTableAttribute()
 	{
-		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "table" ) );
+		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "table" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -187,7 +187,7 @@ public class TableTargetRangeAddressElement extends OdfElement
 	 */
 	public Integer getTableStartColumnAttribute()
 	{
-		TableStartColumnAttribute attr = (TableStartColumnAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "start-column" ) );
+		TableStartColumnAttribute attr = (TableStartColumnAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "start-column" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -214,7 +214,7 @@ public class TableTargetRangeAddressElement extends OdfElement
 	 */
 	public Integer getTableStartRowAttribute()
 	{
-		TableStartRowAttribute attr = (TableStartRowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "start-row" ) );
+		TableStartRowAttribute attr = (TableStartRowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "start-row" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -241,7 +241,7 @@ public class TableTargetRangeAddressElement extends OdfElement
 	 */
 	public Integer getTableStartTableAttribute()
 	{
-		TableStartTableAttribute attr = (TableStartTableAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "start-table" ) );
+		TableStartTableAttribute attr = (TableStartTableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "start-table" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -268,7 +268,7 @@ public class TableTargetRangeAddressElement extends OdfElement
 	 */
 	public Integer getTableEndColumnAttribute()
 	{
-		TableEndColumnAttribute attr = (TableEndColumnAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-column" ) );
+		TableEndColumnAttribute attr = (TableEndColumnAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-column" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -295,7 +295,7 @@ public class TableTargetRangeAddressElement extends OdfElement
 	 */
 	public Integer getTableEndRowAttribute()
 	{
-		TableEndRowAttribute attr = (TableEndRowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-row" ) );
+		TableEndRowAttribute attr = (TableEndRowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-row" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -322,7 +322,7 @@ public class TableTargetRangeAddressElement extends OdfElement
 	 */
 	public Integer getTableEndTableAttribute()
 	{
-		TableEndTableAttribute attr = (TableEndTableAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-table" ) );
+		TableEndTableAttribute attr = (TableEndTableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-table" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

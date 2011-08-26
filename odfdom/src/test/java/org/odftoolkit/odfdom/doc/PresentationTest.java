@@ -21,6 +21,7 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -33,7 +34,6 @@ import org.odftoolkit.odfdom.doc.draw.OdfDrawHatch;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawMarker;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawPage;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
-import org.odftoolkit.odfdom.doc.office.OdfOfficePresentation;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.doc.style.OdfStyleMasterPage;
 import org.odftoolkit.odfdom.doc.style.OdfStyle;
@@ -65,22 +65,20 @@ public class PresentationTest {
 	@Test
 	public void testPresentation() {
 		try {
-			OdfOfficePresentation presentation = OdfElement.findFirstChildNode(OdfOfficePresentation.class, odfdoc.getOfficeBody());
-			Assert.assertNotNull(presentation);
+			OdfPresentationDocument odpdoc = (OdfPresentationDocument)odfdoc;
+			
+			OdfDrawPage page = odpdoc.getSlideByName("slide-name-1");
+			Assert.assertTrue((page != null) && page.getSlideName().equals("slide-name-1"));
+			Assert.assertEquals(page, odpdoc.getSlideByIndex(0));
 
-			OdfDrawPage page = presentation.getPage("slide-name-1");
-			Assert.assertTrue((page != null) && page.getDrawNameAttribute().equals("slide-name-1"));
-			Assert.assertEquals(page, presentation.getPageAt(0));
+			page = odpdoc.getSlideByName("slide-name-2");
+			Assert.assertTrue((page != null) && page.getSlideName().equals("slide-name-2"));
+			Assert.assertEquals(page, odpdoc.getSlideByIndex(1));
 
-			page = presentation.getPage("slide-name-2");
-			Assert.assertTrue((page != null) && page.getDrawNameAttribute().equals("slide-name-2"));
-			Assert.assertEquals(page, presentation.getPageAt(1));
+			page = odpdoc.getSlideByName("slide-name-3");
+			Assert.assertTrue((page != null) && page.getSlideName().equals("slide-name-3"));
+			Assert.assertEquals(page, odpdoc.getSlideByIndex(2));
 
-			page = presentation.getPage("slide-name-3");
-			Assert.assertTrue((page != null) && page.getDrawNameAttribute().equals("slide-name-3"));
-			Assert.assertEquals(page, presentation.getPageAt(2));
-
-			testIterator(OdfDrawPage.class, presentation.getPages(), 3);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());

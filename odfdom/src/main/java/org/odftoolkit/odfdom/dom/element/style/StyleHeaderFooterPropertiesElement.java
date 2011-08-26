@@ -150,7 +150,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getSvgHeightAttribute()
 	{
-		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) );
+		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -177,7 +177,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMinHeightAttribute()
 	{
-		FoMinHeightAttribute attr = (FoMinHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "min-height" ) );
+		FoMinHeightAttribute attr = (FoMinHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "min-height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -204,7 +204,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginLeftAttribute()
 	{
-		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-left" ) );
+		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -231,7 +231,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginRightAttribute()
 	{
-		FoMarginRightAttribute attr = (FoMarginRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-right" ) );
+		FoMarginRightAttribute attr = (FoMarginRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -258,7 +258,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginTopAttribute()
 	{
-		FoMarginTopAttribute attr = (FoMarginTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-top" ) );
+		FoMarginTopAttribute attr = (FoMarginTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-top" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -285,7 +285,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginBottomAttribute()
 	{
-		FoMarginBottomAttribute attr = (FoMarginBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-bottom" ) );
+		FoMarginBottomAttribute attr = (FoMarginBottomAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-bottom" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -312,7 +312,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginAttribute()
 	{
-		FoMarginAttribute attr = (FoMarginAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin" ) );
+		FoMarginAttribute attr = (FoMarginAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -339,7 +339,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderAttribute()
 	{
-		FoBorderAttribute attr = (FoBorderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border" ) );
+		FoBorderAttribute attr = (FoBorderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -366,7 +366,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderTopAttribute()
 	{
-		FoBorderTopAttribute attr = (FoBorderTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-top" ) );
+		FoBorderTopAttribute attr = (FoBorderTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-top" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -393,7 +393,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderBottomAttribute()
 	{
-		FoBorderBottomAttribute attr = (FoBorderBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-bottom" ) );
+		FoBorderBottomAttribute attr = (FoBorderBottomAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-bottom" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -420,7 +420,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderLeftAttribute()
 	{
-		FoBorderLeftAttribute attr = (FoBorderLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-left" ) );
+		FoBorderLeftAttribute attr = (FoBorderLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -447,7 +447,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBorderRightAttribute()
 	{
-		FoBorderRightAttribute attr = (FoBorderRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-right" ) );
+		FoBorderRightAttribute attr = (FoBorderRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -474,7 +474,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthAttribute()
 	{
-		StyleBorderLineWidthAttribute attr = (StyleBorderLineWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width" ) );
+		StyleBorderLineWidthAttribute attr = (StyleBorderLineWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -501,7 +501,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthTopAttribute()
 	{
-		StyleBorderLineWidthTopAttribute attr = (StyleBorderLineWidthTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-top" ) );
+		StyleBorderLineWidthTopAttribute attr = (StyleBorderLineWidthTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-top" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -528,7 +528,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthBottomAttribute()
 	{
-		StyleBorderLineWidthBottomAttribute attr = (StyleBorderLineWidthBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-bottom" ) );
+		StyleBorderLineWidthBottomAttribute attr = (StyleBorderLineWidthBottomAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-bottom" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -555,7 +555,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthLeftAttribute()
 	{
-		StyleBorderLineWidthLeftAttribute attr = (StyleBorderLineWidthLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-left" ) );
+		StyleBorderLineWidthLeftAttribute attr = (StyleBorderLineWidthLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -582,7 +582,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleBorderLineWidthRightAttribute()
 	{
-		StyleBorderLineWidthRightAttribute attr = (StyleBorderLineWidthRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-right" ) );
+		StyleBorderLineWidthRightAttribute attr = (StyleBorderLineWidthRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -609,7 +609,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingAttribute()
 	{
-		FoPaddingAttribute attr = (FoPaddingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding" ) );
+		FoPaddingAttribute attr = (FoPaddingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -636,7 +636,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingTopAttribute()
 	{
-		FoPaddingTopAttribute attr = (FoPaddingTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-top" ) );
+		FoPaddingTopAttribute attr = (FoPaddingTopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-top" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -663,7 +663,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingBottomAttribute()
 	{
-		FoPaddingBottomAttribute attr = (FoPaddingBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-bottom" ) );
+		FoPaddingBottomAttribute attr = (FoPaddingBottomAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-bottom" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -690,7 +690,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingLeftAttribute()
 	{
-		FoPaddingLeftAttribute attr = (FoPaddingLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-left" ) );
+		FoPaddingLeftAttribute attr = (FoPaddingLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -717,7 +717,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoPaddingRightAttribute()
 	{
-		FoPaddingRightAttribute attr = (FoPaddingRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-right" ) );
+		FoPaddingRightAttribute attr = (FoPaddingRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -744,7 +744,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBackgroundColorAttribute()
 	{
-		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color" ) );
+		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -771,7 +771,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleShadowAttribute()
 	{
-		StyleShadowAttribute attr = (StyleShadowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shadow" ) );
+		StyleShadowAttribute attr = (StyleShadowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shadow" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -798,7 +798,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleDynamicSpacingAttribute()
 	{
-		StyleDynamicSpacingAttribute attr = (StyleDynamicSpacingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "dynamic-spacing" ) );
+		StyleDynamicSpacingAttribute attr = (StyleDynamicSpacingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "dynamic-spacing" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

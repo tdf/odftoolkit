@@ -80,7 +80,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public String getTableCaseSensitiveAttribute()
 	{
-		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "case-sensitive" ) );
+		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "case-sensitive" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -107,7 +107,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public Boolean getTablePrecisionAsShownAttribute()
 	{
-		TablePrecisionAsShownAttribute attr = (TablePrecisionAsShownAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "precision-as-shown" ) );
+		TablePrecisionAsShownAttribute attr = (TablePrecisionAsShownAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "precision-as-shown" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -134,7 +134,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public Boolean getTableSearchCriteriaMustApplyToWholeCellAttribute()
 	{
-		TableSearchCriteriaMustApplyToWholeCellAttribute attr = (TableSearchCriteriaMustApplyToWholeCellAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "search-criteria-must-apply-to-whole-cell" ) );
+		TableSearchCriteriaMustApplyToWholeCellAttribute attr = (TableSearchCriteriaMustApplyToWholeCellAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "search-criteria-must-apply-to-whole-cell" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -161,7 +161,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public Boolean getTableAutomaticFindLabelsAttribute()
 	{
-		TableAutomaticFindLabelsAttribute attr = (TableAutomaticFindLabelsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "automatic-find-labels" ) );
+		TableAutomaticFindLabelsAttribute attr = (TableAutomaticFindLabelsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "automatic-find-labels" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -188,7 +188,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public Boolean getTableUseRegularExpressionsAttribute()
 	{
-		TableUseRegularExpressionsAttribute attr = (TableUseRegularExpressionsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-regular-expressions" ) );
+		TableUseRegularExpressionsAttribute attr = (TableUseRegularExpressionsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-regular-expressions" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -215,7 +215,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public Boolean getTableUseWildcardsAttribute()
 	{
-		TableUseWildcardsAttribute attr = (TableUseWildcardsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-wildcards" ) );
+		TableUseWildcardsAttribute attr = (TableUseWildcardsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-wildcards" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -242,7 +242,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public Integer getTableNullYearAttribute()
 	{
-		TableNullYearAttribute attr = (TableNullYearAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "null-year" ) );
+		TableNullYearAttribute attr = (TableNullYearAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "null-year" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

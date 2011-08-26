@@ -77,7 +77,7 @@ public class NumberFractionElement extends OdfElement
 	 */
 	public Integer getNumberMinNumeratorDigitsAttribute()
 	{
-		NumberMinNumeratorDigitsAttribute attr = (NumberMinNumeratorDigitsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-numerator-digits" ) );
+		NumberMinNumeratorDigitsAttribute attr = (NumberMinNumeratorDigitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-numerator-digits" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -104,7 +104,7 @@ public class NumberFractionElement extends OdfElement
 	 */
 	public Integer getNumberMinDenominatorDigitsAttribute()
 	{
-		NumberMinDenominatorDigitsAttribute attr = (NumberMinDenominatorDigitsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-denominator-digits" ) );
+		NumberMinDenominatorDigitsAttribute attr = (NumberMinDenominatorDigitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-denominator-digits" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -131,7 +131,7 @@ public class NumberFractionElement extends OdfElement
 	 */
 	public Integer getNumberDenominatorValueAttribute()
 	{
-		NumberDenominatorValueAttribute attr = (NumberDenominatorValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "denominator-value" ) );
+		NumberDenominatorValueAttribute attr = (NumberDenominatorValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "denominator-value" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -158,7 +158,7 @@ public class NumberFractionElement extends OdfElement
 	 */
 	public Integer getNumberMinIntegerDigitsAttribute()
 	{
-		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-integer-digits" ) );
+		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-integer-digits" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -185,7 +185,7 @@ public class NumberFractionElement extends OdfElement
 	 */
 	public Boolean getNumberGroupingAttribute()
 	{
-		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "grouping" ) );
+		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "grouping" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

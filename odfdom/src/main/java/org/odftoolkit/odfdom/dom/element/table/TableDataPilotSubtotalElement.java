@@ -82,7 +82,7 @@ public class TableDataPilotSubtotalElement extends OdfElement
 	 */
 	public String getTableFunctionAttribute()
 	{
-		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "function" ) );
+		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "function" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

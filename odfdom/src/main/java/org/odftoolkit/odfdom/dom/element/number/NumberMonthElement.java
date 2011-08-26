@@ -76,7 +76,7 @@ public class NumberMonthElement extends OdfElement
 	 */
 	public Boolean getNumberTextualAttribute()
 	{
-		NumberTextualAttribute attr = (NumberTextualAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "textual" ) );
+		NumberTextualAttribute attr = (NumberTextualAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "textual" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -103,7 +103,7 @@ public class NumberMonthElement extends OdfElement
 	 */
 	public Boolean getNumberPossessiveFormAttribute()
 	{
-		NumberPossessiveFormAttribute attr = (NumberPossessiveFormAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "possessive-form" ) );
+		NumberPossessiveFormAttribute attr = (NumberPossessiveFormAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "possessive-form" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -130,7 +130,7 @@ public class NumberMonthElement extends OdfElement
 	 */
 	public String getNumberStyleAttribute()
 	{
-		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "style" ) );
+		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public class NumberMonthElement extends OdfElement
 	 */
 	public String getNumberCalendarAttribute()
 	{
-		NumberCalendarAttribute attr = (NumberCalendarAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "calendar" ) );
+		NumberCalendarAttribute attr = (NumberCalendarAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "calendar" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

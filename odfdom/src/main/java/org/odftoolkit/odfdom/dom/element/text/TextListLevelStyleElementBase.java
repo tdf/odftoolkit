@@ -66,7 +66,7 @@ public abstract class TextListLevelStyleElementBase extends OdfStyleBase
 	 */
 	public Integer getTextLevelAttribute()
 	{
-		TextLevelAttribute attr = (TextLevelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "level" ) );
+		TextLevelAttribute attr = (TextLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "level" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

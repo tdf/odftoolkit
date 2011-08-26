@@ -88,7 +88,7 @@ public class TextObjectIndexElement extends OdfStylableElement
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) );
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -115,7 +115,7 @@ public class TextObjectIndexElement extends OdfStylableElement
 	 */
 	public String getTextNameAttribute()
 	{
-		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) );
+		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -142,7 +142,7 @@ public class TextObjectIndexElement extends OdfStylableElement
 	 */
 	public Boolean getTextProtectedAttribute()
 	{
-		TextProtectedAttribute attr = (TextProtectedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "protected" ) );
+		TextProtectedAttribute attr = (TextProtectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "protected" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -169,7 +169,7 @@ public class TextObjectIndexElement extends OdfStylableElement
 	 */
 	public String getTextProtectionKeyAttribute()
 	{
-		TextProtectionKeyAttribute attr = (TextProtectionKeyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "protection-key" ) );
+		TextProtectionKeyAttribute attr = (TextProtectionKeyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "protection-key" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -196,7 +196,7 @@ public class TextObjectIndexElement extends OdfStylableElement
 	 */
 	public String getTextProtectionKeyDigestAlgorithmAttribute()
 	{
-		TextProtectionKeyDigestAlgorithmAttribute attr = (TextProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "protection-key-digest-algorithm" ) );
+		TextProtectionKeyDigestAlgorithmAttribute attr = (TextProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "protection-key-digest-algorithm" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -223,7 +223,7 @@ public class TextObjectIndexElement extends OdfStylableElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
