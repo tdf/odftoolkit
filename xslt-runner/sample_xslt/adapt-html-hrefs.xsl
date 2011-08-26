@@ -25,9 +25,10 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="xsl">
-  <xsl:output method="xml" encoding="UTF-8" media-type="application/xhtml+xml" indent="no" omit-xml-declaration="no" doctype-public="-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" doctype-system="http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd"/>
+  <xsl:output method="xml" encoding="UTF-8" media-type="application/xhtml+xml" indent="no" omit-xml-declaration="no" doctype-public="-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" doctype-system="http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd"/>
 
   <xsl:param name="baseURI" select="'.'"/>
+  <xsl:variable name="adapt-fragments" select="false()"/>
   
   <xsl:variable name="baseURIDir" select="concat($baseURI,'/')"/>
 
@@ -68,7 +69,7 @@
               </xsl:otherwise>
           </xsl:choose>
           <xsl:choose>
-              <xsl:when test="starts-with($fragment,'__RefHeading__')">
+              <xsl:when test="$adapt-fragments and starts-with($fragment,'__RefHeading__')">
                   <xsl:variable name="t">
                       <xsl:call-template name="strip-trailing-space">
                           <xsl:with-param name="text" select="translate(text(),'0123456789&#160;','           ')"/>
