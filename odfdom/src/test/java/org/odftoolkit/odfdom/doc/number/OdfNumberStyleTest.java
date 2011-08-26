@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  *
  * Use is subject to license terms.
  *
@@ -21,8 +22,6 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.number;
 
-import org.odftoolkit.odfdom.doc.number.OdfNumberStyle;
-import org.odftoolkit.odfdom.doc.number.OdfNumber;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -91,6 +90,17 @@ public class OdfNumberStyleTest {
 			"before:##0:after"
 		};
 
+		String[] expectedFormat = {
+				"#",
+				"#0",
+				"#00",
+				"#,###",
+				"#,##0",
+				"#,##0.00",
+				"before:#0",
+				"#0:after",
+				"before:#0:after"
+		};
 		/*
 		 * Expected elements.
          * t -- <number:text> with following text
@@ -137,6 +147,7 @@ public class OdfNumberStyleTest {
 						break;
 				}
 				node = node.getNextSibling();
+				Assert.assertEquals(expectedFormat[i], instance.getFormat());
 			}
 		}
 	}

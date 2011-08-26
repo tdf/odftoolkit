@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -23,112 +24,111 @@ package org.odftoolkit.odfdom.doc;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.doc.table.OdfTableCell;
 import org.odftoolkit.odfdom.doc.table.OdfTableRow;
 import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
-import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class TableTest {
-    
-    private static final String TEST_FILE_SAVE_2TABLES_OUT = "TestSave2Tables.odt";
 
-    public TableTest() {
-    }
-    
-    @Test
-    public void testTable() {
-        try {
-            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("table.odt"));
-            NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getUri(), "table");
-            int tscount = 0;
-            for (int i = 0; i < lst.getLength(); i++) {
-                Node node = lst.item(i);
-                Assert.assertTrue(node instanceof OdfTable);
-                OdfTable te = (OdfTable) lst.item(i);
+	private static final String TEST_FILE_SAVE_2TABLES_OUT = "TestSave2Tables.odt";
 
-                OdfStyle ds = te.getDocumentStyle();
-                Assert.assertNull(ds);
+	public TableTest() {
+	}
 
-                if (te.hasAutomaticStyle()) {
-                    te.getAutomaticStyle();
-                    tscount++;
-                }
-            }
-            Assert.assertTrue(tscount > 0);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail(e.getMessage());
-        }
-    }
+	@Test
+	public void testTable() {
+		try {
+			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("table.odt"));
+			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getUri(), "table");
+			int tscount = 0;
+			for (int i = 0; i < lst.getLength(); i++) {
+				Node node = lst.item(i);
+				Assert.assertTrue(node instanceof TableTableElement);
+				TableTableElement te = (TableTableElement) lst.item(i);
 
-    @Test
-    public void testCellsAndRows() {
-        try {
-            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("table.odt"));
-            NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getUri(), "table-cell");
-            for (int i = 0; i < lst.getLength(); i++) {
-                Node node = lst.item(i);
-                Assert.assertTrue(node instanceof OdfTableCell);
-                OdfTableCell td = (OdfTableCell) lst.item(i);
-                OdfTableRow tr = td.getTableRow();
-                Assert.assertNotNull(tr);
+				OdfStyle ds = te.getDocumentStyle();
+				Assert.assertNull(ds);
 
-                OdfTable table = tr.getTable();
-                Assert.assertNotNull(table);
-                Assert.assertTrue(table == td.getTable());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail(e.getMessage());
-        }
-    }
+				if (te.hasAutomaticStyle()) {
+					te.getAutomaticStyle();
+					tscount++;
+				}
+			}
+			Assert.assertTrue(tscount > 0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+	}
 
-    @Test
-    public void create2ndTableTab() throws Exception {
-        OdfSpreadsheetDocument mysheet = OdfSpreadsheetDocument.newSpreadsheetDocument();
-        OdfFileDom odt = mysheet.getContentDom();
+	@Test
+	public void testCellsAndRows() {
+		try {
+			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("table.odt"));
+			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getUri(), "table-cell");
+			for (int i = 0; i < lst.getLength(); i++) {
+				Node node = lst.item(i);
+				Assert.assertTrue(node instanceof TableTableCellElement);
+				TableTableCellElement td = (TableTableCellElement) lst.item(i);
+				TableTableRowElement tr = (TableTableRowElement) td.getParentNode();
+				Assert.assertNotNull(tr);
 
-        // find the first table in the sheet
-        NodeList lst =
-                odt.getElementsByTagNameNS(TableTableElement.ELEMENT_NAME.getUri(), TableTableElement.ELEMENT_NAME.getLocalName());
-        OdfTable mytable = (OdfTable) lst.item(0);
-        mytable.setTableNameAttribute("Cars Sheet");
+				OdfTable table = OdfTableRow.getInstance(tr).getTable();
+				Assert.assertNotNull(table);
+				Assert.assertTrue(table == OdfTableCell.getInstance(td).getTable());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+	}
 
-        // remove first empty row of table.
-        mytable.removeChild(mytable.getFirstChild().getNextSibling());
+	@Test
+	public void create2ndTableTab() throws Exception {
+		OdfSpreadsheetDocument mysheet = OdfSpreadsheetDocument.newSpreadsheetDocument();
+		OdfFileDom odt = mysheet.getContentDom();
 
-        OdfTableRow row = (OdfTableRow) mytable.appendChild(new OdfTableRow(odt));
-        OdfTableCell cell = (OdfTableCell) row.appendChild(new OdfTableCell(odt));
+		// find the first table in the sheet
+		NodeList lst =
+				odt.getElementsByTagNameNS(TableTableElement.ELEMENT_NAME.getUri(), TableTableElement.ELEMENT_NAME.getLocalName());
+		TableTableElement mytable = (TableTableElement) lst.item(0);
+		mytable.setTableNameAttribute("Cars Sheet");
 
-        OdfTextParagraph p = new OdfTextParagraph(odt);
-        p.appendChild(odt.createTextNode("Corvette"));
-        cell.appendChild(p);
+		// remove first empty row of table.
+		mytable.removeChild(mytable.getFirstChild().getNextSibling());
 
-        // 2nd Table
-        OdfTable my2table = new OdfTable(odt);
+		TableTableRowElement row = (TableTableRowElement) mytable.appendChild(new TableTableRowElement(odt));
+		TableTableCellElement cell = (TableTableCellElement) row.appendChild(new TableTableCellElement(odt));
 
-        Element spreadsheetElement = (Element) odt.getElementsByTagNameNS(OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
-        my2table.setAttributeNS(OdfNamespaceNames.TABLE.getUri(), "table:name", "BikesSheet");
-        spreadsheetElement.appendChild(my2table);
+		OdfTextParagraph p = new OdfTextParagraph(odt);
+		p.appendChild(odt.createTextNode("Corvette"));
+		cell.appendChild(p);
 
-        OdfTableRow row2 = (OdfTableRow) my2table.appendChild(new OdfTableRow(odt));
-        OdfTableCell cell2 = (OdfTableCell) row2.appendChild(new OdfTableCell(odt));
+		// 2nd Table
+		TableTableElement my2table = new TableTableElement(odt);
 
-        OdfTextParagraph p2 = new OdfTextParagraph(odt);
-        p2.appendChild(odt.createTextNode("Bandit 600"));
-        cell2.appendChild(p2);
+		Element spreadsheetElement = (Element) odt.getElementsByTagNameNS(OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
+		my2table.setAttributeNS(OdfNamespaceNames.TABLE.getUri(), "table:name", "BikesSheet");
+		spreadsheetElement.appendChild(my2table);
 
-        mysheet.save(ResourceUtilities.getTestOutput(TEST_FILE_SAVE_2TABLES_OUT));
-    }
+		TableTableRowElement row2 = (TableTableRowElement) my2table.appendChild(new TableTableRowElement(odt));
+		TableTableCellElement cell2 = (TableTableCellElement) row2.appendChild(new TableTableCellElement(odt));
+
+		OdfTextParagraph p2 = new OdfTextParagraph(odt);
+		p2.appendChild(odt.createTextNode("Bandit 600"));
+		cell2.appendChild(p2);
+
+		mysheet.save(ResourceUtilities.getTestOutput(TEST_FILE_SAVE_2TABLES_OUT));
+	}
 }

@@ -1616,7 +1616,7 @@ public enum %{local_name(classname)} {
 	<set elementclass="org.odftoolkit.odfdom.doc.%{prefix(elementqname)}.Odf%{identifier(prefix(elementqname))}%{identifier(elementname)}"/>
 </else>
 </if>
-<if test="prefix(elementqname) = 'meta' or elementqname='office:meta'">
+<if test="prefix(elementqname) = 'meta' or elementqname='office:meta' or prefix(elementqname) = 'table'">
 	<set elementclass="org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)}.%{identifier(prefix(elementqname))}%{identifier(local_name(elementqname))}Element"/>
 </if>
 <!-- we must use the full qualified class name here as we have equal element names in different namespaces! -->

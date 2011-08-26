@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  *
  * Use is subject to license terms.
  *
@@ -21,7 +22,6 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.number;
 
-import org.odftoolkit.odfdom.doc.number.OdfNumberDateStyle;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -103,6 +103,15 @@ s 	Second in minute     55
 			"dd-MM-yyyy hh:mm:ss a"
 		};
 
+		String[] expectedFormat = {
+				"d-M-yy GGGG",
+				"dd/MM/yyyy GG",
+	            "EEE, MMM d, yy",
+				"EEE, MMMM dd, yyyy",
+				"EEEE, MMM dd",
+				"QQQ quarter, yy",
+				"dd-MM-yyyy hh:mm:ss a"
+		};
 		/*
 		 * starts with "T" if a text node (followed by content)
 		 * starts with "E" if an element, followed by:
@@ -138,6 +147,7 @@ s 	Second in minute     55
 			Assert.assertNotNull(instance.getFirstChild());
 
 			checkNodes(instance.getFirstChild(), expected[i], 0);
+			Assert.assertEquals(expectedFormat[i], instance.getFormat());
 		}
 	}
 

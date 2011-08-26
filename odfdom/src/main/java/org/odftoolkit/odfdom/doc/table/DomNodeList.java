@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -25,7 +26,7 @@ import java.util.AbstractList;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class DomNodeList extends AbstractList<Node> {
+class DomNodeList extends AbstractList<Node> {
     
     private NodeList m_nodeList;
     

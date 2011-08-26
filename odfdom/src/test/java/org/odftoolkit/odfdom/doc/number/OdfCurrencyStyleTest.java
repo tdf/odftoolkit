@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  *
  * Use is subject to license terms.
  *
@@ -21,9 +22,6 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.number;
 
-import org.odftoolkit.odfdom.doc.number.OdfNumberCurrencyStyle;
-import org.odftoolkit.odfdom.doc.number.OdfNumber;
-import org.odftoolkit.odfdom.doc.number.OdfNumberCurrencySymbol;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -87,6 +85,14 @@ public class OdfCurrencyStyleTest {
 			"cr#,##0.00 $US"
 		};
 
+		String[] getFormatExpected = {
+				"$US#,##0.00",
+				"cr$US#0.00",
+				"# $US",
+				"#0 \u03b4\u03c1\u03c7", // Greek drachma
+				"cr#,##0.00 $US"
+		};
+
 		String[] currencySymbol = { "$", "$", "$", "\u03b4\u03c1\u03c7", "$" };
 
 		/*
@@ -137,6 +143,7 @@ public class OdfCurrencyStyleTest {
 				}
 				node = node.getNextSibling();
 			}
+			Assert.assertEquals(getFormatExpected[i], instance.getFormat());
 		}
 	}
 

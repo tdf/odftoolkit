@@ -54,6 +54,7 @@ import javax.xml.xpath.XPathFactory;
 import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
@@ -61,11 +62,13 @@ import org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.w3c.dom.Element;
@@ -1311,4 +1314,61 @@ public abstract class OdfDocument {
 			mRootDocument.mCachedDocuments.remove(pathToObject);
 		}
 	}
+	
+	/**
+	 * Return an instance of table feature with the specific table name.
+	 * @param name of the table beeing searched for.
+	 * @return an instance of table feature with the specific table name.
+	 */
+	public OdfTable getTableByName(String name)
+	{
+		try {
+			OdfElement root = getContentDom().getRootElement();
+			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
+			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
+			
+			NodeList childList = typedContent.getChildNodes();
+			for(int i=0;i<childList.getLength();i++)
+			{
+				if (childList.item(i) instanceof TableTableElement)
+				{
+					TableTableElement table = (TableTableElement) childList.item(i);
+					if (table.getOdfAttributeValue(OdfName.newName(OdfNamespaceNames.TABLE,"name")).equals(name))
+						return OdfTable.getInstance(table);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Return a list of table features in this document.
+	 * @return a list of table features in this document.
+	 */
+	public List<OdfTable> getTableList()
+	{
+		List<OdfTable> tableList = new ArrayList<OdfTable>();
+		try {
+			OdfElement root = getContentDom().getRootElement();
+			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
+			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
+			
+			NodeList childList = typedContent.getChildNodes();
+			for(int i=0;i<childList.getLength();i++)
+			{
+				if (childList.item(i) instanceof TableTableElement) {
+					tableList.add(OdfTable.getInstance((TableTableElement) childList.item(i)));
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tableList;
+	}
+	
 }
