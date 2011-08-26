@@ -28,7 +28,7 @@
                 version="1.0">
     <xsl:output method="xml" indent="no"/>
 
-    <xsl:param name="state-old" select="'(none)'"/>
+<!--    <xsl:param name="state-old" select="'(none)'"/>-->
     <xsl:param name="state-new" select="'(none)'"/>
 
     <xsl:variable name="toc-prefix" select="'toc-'"/>
@@ -38,13 +38,44 @@
     <!-- ************************ -->
     <!-- ** toc anchors (toc-) ** -->
     <!-- ************************ -->
-    <xsl:template match="text:section[starts-with(@text:name,$toc-prefix)]//text:a[starts-with(@xlink:href,'../')]">
-            <xsl:variable name="new-href">
-                <xsl:call-template name="remove-rel-path">
-                    <xsl:with-param name="path" select="@xlink:href"/>
+    <xsl:template match="text:section[starts-with(@text:name,$toc-prefix)]">
+		<xsl:variable name="part" select="concat('-',substring(@text:name,string-length($toc-prefix)+1))"/>
+		<xsl:variable name="state-old">
+            <xsl:call-template name="get-state">
+                <xsl:with-param name="path" select="substring-before(.//text:a[starts-with(@xlink:href,'../')][1]/@xlink:href,$part)"/>
+            </xsl:call-template>
+		</xsl:variable>
+		<xsl:message>Old state for <xsl:value-of select="$part"/> is <xsl:value-of select="$state-old"/>.</xsl:message>
+		<xsl:copy>
+			<xsl:apply-templates select="@*|node()" mode="in-toc">
+				<xsl:with-param name="state-old" select="$state-old"/>
+			</xsl:apply-templates>
+		</xsl:copy>
+	</xsl:template>
+
+    <xsl:template name="get-state">
+        <xsl:param name="path"/>
+        <xsl:choose>
+            <xsl:when test="contains($path,'-')">
+                <xsl:call-template name="get-state">
+                    <xsl:with-param name="path" select="substring-after($path,'-')"/>
                 </xsl:call-template>
-            </xsl:variable>
-            <xsl:message>href: <xsl:value-of select="@xlink:href"/> = <xsl:value-of select="$new-href"/></xsl:message>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat('-',$path)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+	<xsl:template match="text:a[starts-with(@xlink:href,'../')]" mode="in-toc">
+		<xsl:param name="state-old"/>
+        <xsl:variable name="new-href">
+	        <xsl:call-template name="remove-rel-path">
+		        <xsl:with-param name="path" select="@xlink:href"/>
+				<xsl:with-param name="state-old" select="$state-old"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:message>href: <xsl:value-of select="@xlink:href"/> = <xsl:value-of select="$new-href"/></xsl:message>
         <text:a>
             <xsl:attribute name="xlink:href"><xsl:value-of select="$new-href"/></xsl:attribute>
             <xsl:apply-templates select="@*[not(name(.)='xlink:href')]"/>
@@ -52,12 +83,25 @@
         </text:a>
     </xsl:template>
 
+    <!-- default: copy everything. -->
+    <xsl:template match="@*|node()" mode="in-toc">
+		<xsl:param name="state-old"/>
+	    <xsl:copy>
+            <xsl:apply-templates select="@*|node()" mode="in-toc">
+				<xsl:with-param name="state-old" select="$state-old"/>
+			</xsl:apply-templates>
+        </xsl:copy>
+    </xsl:template>
+
+
     <xsl:template name="remove-rel-path">
         <xsl:param name="path"/>
+		<xsl:param name="state-old"/>
         <xsl:choose>
             <xsl:when test="contains($path,'/')">
                 <xsl:call-template name="remove-rel-path">
                     <xsl:with-param name="path" select="substring-after($path,'/')"/>
+					<xsl:with-param name="state-old" select="$state-old"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
