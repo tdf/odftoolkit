@@ -66,7 +66,9 @@ public class Schema
               {
                 if( populateBaseElements() )
                 {
-                    return removeBaseAttributes();
+                    if( renameBaseAttributes()){
+                	     return removeBaseAttributes();
+                    }
                 }
               }
             }
@@ -554,6 +556,93 @@ public class Schema
     private boolean renameAttributes()
     {
         Iterator< Element > elementIter = Elements.values().iterator();
+        while( elementIter.hasNext() )
+        {
+            Element element = elementIter.next();
+            HashMap< String, AttributeConfig > confMap = new HashMap< String, AttributeConfig >();
+            
+            Iterator< AttributeConfig > configIter = Config.getAttributeConfigurations();
+            while( configIter.hasNext() )
+            {
+                AttributeConfig config = configIter.next();
+               
+                if( config.Element.equals( element.getQName() ) && (element.getAttribute(config.Name) != null) )
+                    confMap.put(config.Name, config);
+                
+                if( (config.Element.length() == 0) && (element.getAttribute(config.Name) != null) && !confMap.containsKey(config.Name))
+                    confMap.put(config.Name, config);                    
+            }
+            
+            if( !confMap.isEmpty() )
+            {
+                configIter = confMap.values().iterator();
+                while( configIter.hasNext() )
+                {
+                    AttributeConfig config = configIter.next();
+                    Attribute attr = element.getAttribute(config.Name);
+                    if( (config.TypeName.length() != 0) )
+                    {                       
+                        DataTypeConfig type_config = Config.getDataTypeConfiguration(config.TypeName);
+                        if( type_config != null )
+                        {
+                            attr.setValueType( type_config.ValueType );
+                            if( type_config.ConversionType.length() == 0 )
+                                attr.setConversionType( type_config.ValueType );
+                            else
+                                attr.setConversionType( type_config.ConversionType );
+                        }
+                        else
+                        {                           
+                            attr.setConversionType( config.TypeName );
+                        }
+                    }
+                    if( (config.Rename.length() != 0) )
+                        attr.setName( config.Rename );
+                    
+                    if( (config.DefaultValue.length() != 0) )
+                        attr.setDefaultValue( config.DefaultValue );
+                    
+                    //rename subattributes
+					Iterator<Vector<Attribute>> subAttrs = element.getSubAttributes().iterator();
+					while (subAttrs.hasNext()) {
+						Iterator<Attribute> subAttr = subAttrs.next()
+								.iterator();
+						while (subAttr.hasNext()) {
+							Attribute aAttr = subAttr.next();
+							if (aAttr.getQName().equals(config.Name)) {
+								if ((config.TypeName.length() != 0)) {
+									DataTypeConfig type_config = Config
+											.getDataTypeConfiguration(config.TypeName);
+									if (type_config != null) {
+										aAttr
+												.setValueType(type_config.ValueType);
+										if (type_config.ConversionType.length() == 0)
+											aAttr
+													.setConversionType(type_config.ValueType);
+										else
+											aAttr
+													.setConversionType(type_config.ConversionType);
+									} else {
+										aAttr
+												.setConversionType(config.TypeName);
+									}
+								}
+								if ((config.Rename.length() != 0))
+									aAttr.setName(config.Rename);
+							}
+						}
+					}
+
+                
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean renameBaseAttributes()
+    {
+        Iterator< Element > elementIter = BaseElements.values().iterator();
         while( elementIter.hasNext() )
         {
             Element element = elementIter.next();
