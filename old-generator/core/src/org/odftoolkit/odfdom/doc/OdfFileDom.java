@@ -29,6 +29,7 @@ import org.odftoolkit.odfdom.doc.element.office.OdfBody;
 import org.odftoolkit.odfdom.doc.element.office.OdfMasterStyles;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
@@ -39,6 +40,7 @@ public class OdfFileDom extends DocumentImpl {
 	private static final long serialVersionUID = 766167617530147000L;
 	private String mPackagePath;
     private OdfDocument mOdfDocument;
+    private OdfPackage mOdfPackage;
     
     /**
      * Creates the DOM representation of an XML file of an Odf document.
@@ -46,9 +48,21 @@ public class OdfFileDom extends DocumentImpl {
      * @param odfDocument   the document the XML files belongs to
      * @param packagePath   the internal package path to the XML file
      */  
-    OdfFileDom(OdfDocument odfDocument, String packagePath){
+    public OdfFileDom(OdfDocument odfDocument, String packagePath){
         mOdfDocument = odfDocument;        
         mPackagePath = packagePath;
+    }
+    
+    /**
+     * Creates the DOM representation of an XML file of an Odf package.
+     * such as the Manifest DOM
+     * 
+     * @param odfPackage	the package the XML files belongs to
+     * @param packagePath	the internal package path to the XML file
+     */
+    public OdfFileDom(OdfPackage odfPackage, String packagePath){
+    	mOdfPackage = odfPackage;
+    	mPackagePath = packagePath;
     }
        
     public OdfDocument getOdfDocument(){
@@ -58,6 +72,14 @@ public class OdfFileDom extends DocumentImpl {
     public String getPackagePath(){
         return mPackagePath;
     }     
+    
+    public OdfPackage getOdfPackage(){
+    	if(mOdfPackage != null)
+    		return mOdfPackage;
+    	else if(mOdfDocument != null)
+    		return mOdfDocument.getPackage();
+    	return null;
+    }
     
     @Override
     public OdfElement createElementNS(String nsuri, String qname) throws DOMException {

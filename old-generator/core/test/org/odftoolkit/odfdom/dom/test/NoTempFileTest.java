@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.OdfImageElement;
 import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
-import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
+import org.odftoolkit.odfdom.pkg.manifest.FileEntry;
 
 public class NoTempFileTest {
 
@@ -64,7 +64,7 @@ public class NoTempFileTest {
 			OdfPackage pkg = OdfPackage.loadPackage(docStream,false);
 			docStream.close();
 			
-			OdfFileEntry imagefile = pkg.getFileEntry("Pictures/10000000000000B400000050FF285AE0.png");
+			FileEntry imagefile = pkg.getFileEntry("Pictures/10000000000000B400000050FF285AE0.png");
 			Assert.assertNotNull(imagefile);
 			Assert.assertEquals("image/png", imagefile.getMediaType());
 			

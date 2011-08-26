@@ -69,6 +69,7 @@
 		<configuration>
 		  <sourceRoot>${basedir}/src</sourceRoot>
 		  <schemaFile>${basedir}/../schema/OpenDocument-schema-v1.2-cd01.rng</schemaFile>
+		  <!--schemaFile>${basedir}/../schema/OpenDocument-manifest-schema-v1.2-draft7.rng</schemaFile-->
 		  <configFile>${basedir}/../codegen/config.xml</configFile>
 		  <templateFile>${basedir}/../codegen/javacodetemplate.xml</templateFile>
 		</configuration>
@@ -77,6 +78,7 @@
 	    <configuration>
 	      <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
 	      <schemaFile>${basedir}/../schema/OpenDocument-schema-v1.2-cd01.rng</schemaFile>
+		  <!--schemaFile>${basedir}/../schema/OpenDocument-manifest-schema-v1.2-draft7.rng</schemaFile-->
 	      <configFile>${basedir}/../codegen/config.xml</configFile>
 	      <templateFile>${basedir}/../codegen/javacodetemplate.xml</templateFile>
 	    </configuration>

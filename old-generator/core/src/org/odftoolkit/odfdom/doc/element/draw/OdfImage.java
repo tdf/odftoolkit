@@ -31,7 +31,7 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.draw.OdfImageElement;
 import org.odftoolkit.odfdom.dom.util.URITransformer;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
-import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
+import org.odftoolkit.odfdom.pkg.manifest.FileEntry;
 
 public class OdfImage extends OdfImageElement {
     /**
@@ -96,7 +96,7 @@ public class OdfImage extends OdfImageElement {
         }
         String packagePath = OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + imageRef;
         packagePath = mOdfDocument.getDocumentPackagePath() + packagePath;
-        String mediaType = OdfFileEntry.getMediaType(imageRef);            
+        String mediaType = FileEntry.getMediaType(imageRef);            
         mOdfPackage.insert(imageUri, packagePath, mediaType);
         return packagePath;
     }

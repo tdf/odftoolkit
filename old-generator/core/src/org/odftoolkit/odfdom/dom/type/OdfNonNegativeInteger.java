@@ -25,6 +25,8 @@ public class OdfNonNegativeInteger {
     
     public static String toString( int _n )
     {
+    	if( _n < 0 )
+    		throw new IllegalArgumentException( "Illegal ODFNonNegativeInteger value");
         return Integer.toString( _n );
     }
 

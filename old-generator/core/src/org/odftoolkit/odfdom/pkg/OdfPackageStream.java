@@ -27,7 +27,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import javax.xml.transform.stream.StreamSource;
 
-import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
+import org.odftoolkit.odfdom.pkg.manifest.FileEntry;
 
 /**
  * OdfPackageStream is a representation of a stream that is part of an ODF file.
@@ -61,7 +61,7 @@ class OdfPackageStream extends StreamSource {
         return outputStream;
     }
         
-    public OdfFileEntry geFileEntry() {
+    public FileEntry geFileEntry() {
         return pkg.getFileEntry(name);
     }
 

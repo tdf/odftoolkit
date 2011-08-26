@@ -67,11 +67,14 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.xerces.dom.DOMXSImplementationSourceImpl;
 import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.pkg.manifest.Algorithm;
-import org.odftoolkit.odfdom.pkg.manifest.EncryptionData;
-import org.odftoolkit.odfdom.pkg.manifest.KeyDerivation;
-import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.doc.element.OdfElementFactory;
+import org.odftoolkit.odfdom.dom.OdfName;
+import org.odftoolkit.odfdom.pkg.manifest.FileEntry;
+import org.odftoolkit.odfdom.pkg.manifest.Manifest;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSOutput;
 import org.w3c.dom.ls.LSSerializer;
@@ -126,12 +129,11 @@ public class OdfPackage {
     private HashMap<String, Document> mContentDoms;
     private HashMap<String, byte[]> mContentStreams;
     private HashMap<String, File> mTempFiles;
-    private List<String> mManifestList;
-    private HashMap<String, OdfFileEntry> mManifestEntries;
     private String mBaseURI;
     private Resolver mResolver;
     // use temporary files whether or not
     private boolean mUseTempFile; 
+	private OdfFileDom mManifestDom = null;
 
     /**
      * Creates an OdfPackage from the OpenDocument provided by a filePath.
@@ -271,6 +273,17 @@ public class OdfPackage {
         return new OdfPackage(odfStream, useTempFile);
     }
     
+    /**
+     * Return the ODF type-based Manifest DOM of the current OdfDocument
+     * @return ODF type-based Manifest DOM
+     * @throws Exception if Manifest DOM could not be initialized
+     */
+    public OdfFileDom getManifestDom() throws Exception {
+        if (mManifestDom == null) {
+            mManifestDom = new OdfFileDom(this,OdfPackage.OdfFile.MANIFEST.getPath());
+        }
+        return mManifestDom;
+    }
     private void initialize(File odfFile, boolean isInitialized) throws Exception {
         // only temp Files copied from an InputStream should already be initialized
         if (!isInitialized) {
@@ -391,13 +404,17 @@ public class OdfPackage {
         mContentDoms = new HashMap<String, Document>();
         mContentStreams = new HashMap<String, byte[]>();
         mTempFiles = new HashMap<String, File>();
-        mManifestList = new LinkedList<String>();
-        mManifestEntries = null;
         if (mTempDir != null) {
             TempDir.release(mTempDir);
             mTempDir = null;
         }
-    }
+		try {
+			mManifestDom = getManifestDom();
+		} catch (Exception e) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE,
+					null, e);
+		}
+	}
 
     /**
      * Get the media type of the ODF package (equal to media type of ODF root document)
@@ -423,39 +440,60 @@ public class OdfPackage {
 
     /**
      * 
-     * Get an OdfFileEntry for the packagePath
+     * Get a FileEntry for the packagePath
      * NOTE: This method should be better moved to a DOM inherited Manifest class
      * 
      * @param packagePath The relative package path within the ODF package
      * @return The manifest file entry will be returned.
      */
-    public OdfFileEntry getFileEntry(String packagePath) {
+    public FileEntry getFileEntry(String packagePath) {
+    	
         packagePath = ensureValidPackagePath(packagePath);
-        if (mManifestEntries == null) {
-            try {
-                parseManifest();
-            } catch (Exception ex) {
-                mLog.log(Level.SEVERE, null, ex);
-            }
-        }
-        return mManifestEntries.get(packagePath);
+        try {
+			return ((Manifest)getManifestDom().getFirstChild()).getFileEntry(packagePath);
+		} catch (Exception e) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return null;
     }
 
     /**
-     * Get a OdfFileEntries from the manifest file (i.e. /META/manifest.xml")
+     * Get FileEntries from the manifest file (i.e. /META/manifest.xml")
      * @return The manifest file entries will be returned.
      */
     public Set<String> getFileEntries() {
-        if (mManifestEntries == null) {
-            try {
-                parseManifest();
-            } catch (Exception ex) {
-                mLog.log(Level.SEVERE, null, ex);
-            }
-        }
-        return mManifestEntries.keySet();
+    	
+    	try {
+    		return ((Manifest)getManifestDom().getFirstChild()).getFileEntries();
+		} catch (Exception e) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return null;
+    	
     }
-
+    
+    /**add a FileEntry in the manifest dom*/
+    private FileEntry addFileEntry(String _fullPath, String _mediaType)
+    {
+    	try {
+    		return ((Manifest)getManifestDom().getFirstChild()).addFileEntry(_fullPath, _mediaType);
+		} catch (Exception e) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return null;
+    	
+    }
+    
+    /** remove a FileEntry in the manifest dom*/
+    private void removeFileEntry(String _fullPath)
+    {
+    	try {
+    		((Manifest)getManifestDom().getFirstChild()).removeFileEntry(_fullPath);
+		} catch (Exception e) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, e);
+		}
+    }
+    
     /**
      * 
      * Check existence of a file in the package. 
@@ -507,7 +545,7 @@ public class OdfPackage {
 
         mBaseURI = baseURI;
 
-        if (mManifestEntries == null) {
+        if (mManifestDom == null) {
             try {
                 parseManifest();
             } catch (Exception e) {
@@ -515,11 +553,9 @@ public class OdfPackage {
             }
         }
 
-        OdfFileEntry rootEntry = mManifestEntries.get(SLASH);
+        FileEntry rootEntry = ((Manifest)mManifestDom.getFirstChild()).getFileEntry(SLASH);
         if (rootEntry == null) {
-            rootEntry = new OdfFileEntry(SLASH, mMediaType);
-            mManifestList.add(0, rootEntry.getPath());
-
+        	rootEntry = addFileEntry(SLASH,mMediaType);
         } else {
             rootEntry.setMediaType(mMediaType);
         }
@@ -644,17 +680,19 @@ public class OdfPackage {
         } else {
             size = data.length;
         }
-        if (mManifestEntries == null) {
+        if (mManifestDom == null) {
             parseManifest();
         }
-        OdfFileEntry fileEntry = mManifestEntries.get(packagePath);
+        FileEntry fileEntry = ((Manifest)mManifestDom.getFirstChild()).getFileEntry(packagePath);
         ZipEntry zipEntry = mZipEntries.get(packagePath);
         if (zipEntry == null) {
             return;
         }
         if (fileEntry != null) {
             if (XML_MEDIA_TYPE.equals(fileEntry.getMediaType())) {
-                fileEntry.setSize(-1);
+            	//2Do, weihuaw, why not set the size to text/xml type fileentry,
+            	//besides that fileEntry is not allowed to set the negative integer.
+                //fileEntry.setSize(-1);
             } else {
                 fileEntry.setSize(size);
             }
@@ -678,12 +716,8 @@ public class OdfPackage {
 
         InputStream is = getInputStream(OdfPackage.OdfFile.MANIFEST.packagePath);
         if (is == null) {
-            mManifestList = null;
-            mManifestEntries = null;
             return;
         }
-
-        mManifestList = new LinkedList<String>();
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
         factory.setNamespaceAware(true);
@@ -705,7 +739,7 @@ public class OdfPackage {
 
         String uri = mBaseURI + OdfPackage.OdfFile.MANIFEST.packagePath;
         xmlReader.setEntityResolver(getEntityResolver());
-        xmlReader.setContentHandler(new ManifestContentHandler());
+        xmlReader.setContentHandler(new ManifestContentHandler(getManifestDom()));
 
         InputSource ins = new InputSource(is);
         ins.setSystemId(uri);
@@ -775,7 +809,7 @@ public class OdfPackage {
     public void insert(Document fileDOM, String packagePath, String mediaType) throws Exception {    
         packagePath = ensureValidPackagePath(packagePath);
 
-        if (mManifestEntries == null) {
+        if (mManifestDom == null) {
             try {
                 parseManifest();
             } catch (Exception e) {
@@ -817,10 +851,8 @@ public class OdfPackage {
 
         try {
             if (!OdfPackage.OdfFile.MANIFEST.packagePath.equals(packagePath)) {
-                if (mManifestEntries.get(packagePath) == null) {
-                    OdfFileEntry fileEntry = new OdfFileEntry(packagePath, mediaType);
-                    mManifestEntries.put(packagePath, fileEntry);
-                    mManifestList.add(packagePath);
+                if (getFileEntry(packagePath) == null) {
+                	addFileEntry(packagePath,mediaType);
                 }
             } else {
                 parseManifest();
@@ -1037,12 +1069,8 @@ public class OdfPackage {
                         // media type for folder has to be set for embedded objects
                         if (!OdfPackage.OdfFile.MANIFEST.packagePath.equals(d)) {
                             if (mediaType != null) {
-                                if (mManifestEntries.get(d) == null) {
-                                    OdfFileEntry fileEntry = new OdfFileEntry(d, mediaType);
-                                    mManifestEntries.put(d, fileEntry);
-                                    if (!mManifestList.contains(d)) {
-                                        mManifestList.add(d);
-                                    }
+                                if (getFileEntry(d) == null) {
+                                	addFileEntry(d,mediaType);
                                 }
                             }
                         }
@@ -1069,12 +1097,8 @@ public class OdfPackage {
             }
             if (!OdfPackage.OdfFile.MANIFEST.packagePath.equals(fileDestPath)) {
                 if (mediaType != null) {
-                    if (mManifestEntries.get(fileDestPath) == null) {
-                        OdfFileEntry fileEntry = new OdfFileEntry(fileDestPath, mediaType);
-                        mManifestEntries.put(fileDestPath, fileEntry);
-                        if (!mManifestList.contains(fileDestPath)) {
-                            mManifestList.add(fileDestPath);
-                        }
+                    if (getFileEntry(fileDestPath) == null) {
+                    	addFileEntry(fileDestPath,mediaType);
                     }
                 }
             } else {
@@ -1130,110 +1154,6 @@ public class OdfPackage {
         mZipEntries.put(zipe.getName(), zipe);
     }
 
-    /**
-     * Get Manifest as String
-     * NOTE: This functionality should better be moved to a DOM based Manifest class
-     */
-    String getManifestAsString() {
-        if (mManifestEntries == null) {
-            try {
-                parseManifest();
-                if (mManifestEntries == null) {
-                    return null;
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-        StringBuffer buf = new StringBuffer();
-
-        buf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-        buf.append("<manifest:manifest xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\">\n");
-
-        Iterator<String> it = mManifestList.iterator();
-        while (it.hasNext()) {
-            String key = it.next();
-            String s = null;
-            OdfFileEntry fileEntry = mManifestEntries.get(key);
-            if (fileEntry != null) {
-                buf.append(" <manifest:file-entry");
-                s = fileEntry.getMediaType();
-                if (s == null) {
-                    s = EMPTY_STRING;
-                }
-                buf.append(" manifest:media-type=\"");
-                buf.append(encodeXMLAttributes(s));
-                buf.append("\"");
-                s = fileEntry.getPath();
-
-                if (s == null) {
-                    s = EMPTY_STRING;
-                }
-                buf.append(" manifest:full-path=\"");
-                buf.append(encodeXMLAttributes(s));
-                buf.append("\"");
-                int i = fileEntry.getSize();
-                if (i > 0) {
-                    buf.append(" manifest:size=\"");
-                    buf.append(i);
-                    buf.append("\"");
-                }
-                EncryptionData enc = fileEntry.getEncryptionData();
-
-                if (enc != null) {
-                    buf.append(">\n");
-                    buf.append("  <manifest:encryption-data>\n");
-                    Algorithm alg = enc.getAlgorithm();
-                    if (alg != null) {
-                        buf.append("   <manifest:algorithm");
-                        s = alg.getName();
-                        if (s == null) {
-                            s = EMPTY_STRING;
-                        }
-                        buf.append(" manifest:algorithm-name=\"");
-                        buf.append(encodeXMLAttributes(s));
-                        buf.append("\"");
-                        s = alg.getInitializationVector();
-                        if (s == null) {
-                            s = EMPTY_STRING;
-                        }
-                        buf.append(" manifest:initialization-vector=\"");
-                        buf.append(encodeXMLAttributes(s));
-                        buf.append("\"/>\n");
-                    }
-                    KeyDerivation keyDerivation = enc.getKeyDerivation();
-                    if (keyDerivation != null) {
-                        buf.append("   <manifest:key-derivation");
-                        s = keyDerivation.getName();
-                        if (s == null) {
-                            s = EMPTY_STRING;
-                        }
-                        buf.append(" manifest:key-derivation-name=\"");
-                        buf.append(encodeXMLAttributes(s));
-                        buf.append("\"");
-                        s = keyDerivation.getSalt();
-                        if (s == null) {
-                            s = EMPTY_STRING;
-                        }
-                        buf.append(" manifest:salt=\"");
-                        buf.append(encodeXMLAttributes(s));
-                        buf.append("\"");
-
-                        buf.append(" manifest:iteration-count=\"");
-                        buf.append(keyDerivation.getIterationCount());
-                        buf.append("\"/>\n");
-                    }
-                    buf.append("  </manifest:encryption-data>\n");
-                    buf.append(" </<manifest:file-entry>\n");
-                } else {
-                    buf.append("/>\n");
-                }
-            }
-        }
-        buf.append("</manifest:manifest>");
-
-        return buf.toString();
-    }
 
     /**
      * Get package (sub-) content as byte array
@@ -1291,16 +1211,21 @@ public class OdfPackage {
         } else if (mPackageEntries.contains(packagePath) && mContentStreams.get(packagePath) != null) {
             data = mContentStreams.get(packagePath);
         } else if (packagePath.equals(OdfPackage.OdfFile.MANIFEST.packagePath)) {
-            if (mManifestEntries == null) {
+            if (mManifestDom == null) {
                 // manifest was not present
                 return null;
             }
-            String s = getManifestAsString();
-            if (s == null) {
-                return null;
-            } else {
-                data = s.getBytes("UTF-8");
-            }
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            
+            DOMXSImplementationSourceImpl dis = new org.apache.xerces.dom.DOMXSImplementationSourceImpl();
+            DOMImplementationLS impl = (DOMImplementationLS) dis.getDOMImplementation("LS");
+            LSSerializer writer = impl.createLSSerializer();
+
+            LSOutput output = impl.createLSOutput();
+            output.setByteStream(baos);
+
+            writer.write(mManifestDom, output);
+            data = baos.toByteArray();
         }
         return data;
     }
@@ -1396,7 +1321,7 @@ public class OdfPackage {
     public OutputStream insertOutputStream(String packagePath, String mediaType) throws Exception {
         packagePath = ensureValidPackagePath(packagePath);
         final String fPath = packagePath;
-        final OdfFileEntry fFileEntry = getFileEntry(packagePath);
+        final FileEntry fFileEntry = getFileEntry(packagePath);
         final String fMediaType = mediaType;
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream() {
@@ -1430,12 +1355,8 @@ public class OdfPackage {
 ////        return stream;
 //    }
     public void remove(String packagePath) {
-        if (mManifestList.contains(packagePath)) {
-            mManifestList.remove(packagePath);
-        }
-        if (mManifestEntries.containsKey(packagePath)) {
-            mManifestEntries.remove(packagePath);
-        }
+    	removeFileEntry(packagePath);
+        
         if (mZipEntries.containsKey(packagePath)) {
             mZipEntries.remove(packagePath);
         }
@@ -1572,9 +1493,20 @@ public class OdfPackage {
 
     private class ManifestContentHandler implements ContentHandler {
 
-        private OdfFileEntry _currentFileEntry;
-        private EncryptionData _currentEncryptionData;
+        private OdfFileDom mDocument;
+        private Node mNode; 
+        private Node m_root;
 
+        public ManifestContentHandler(Node root)
+        {
+        	m_root = root;
+            if (m_root instanceof OdfFileDom) {
+                mDocument = (OdfFileDom) m_root;
+            } else {
+                mDocument = (OdfFileDom) m_root.getOwnerDocument();
+            }
+            mNode = m_root;
+        }
         /**
          * Receive an object for locating the origin of SAX document events.
          */
@@ -1585,28 +1517,6 @@ public class OdfPackage {
          * Receive notification of the beginning of a document.
          */
         public void startDocument() throws SAXException {
-            mManifestList = new LinkedList<String>();
-            mManifestEntries = new HashMap<String, OdfFileEntry>();
-        }
-
-        /**
-         * Receive notification of the end of a document.
-         */
-        public void endDocument() throws SAXException {
-        }
-
-        /**
-         * Begin the scope of a prefix-URI Namespace mapping.
-         */
-        public void startPrefixMapping(String prefix, String uri)
-                throws SAXException {
-        }
-
-        /**
-         * End the scope of a prefix-URI mapping.
-         */
-        public void endPrefixMapping(String prefix)
-                throws SAXException {
         }
 
         /**
@@ -1615,47 +1525,15 @@ public class OdfPackage {
         public void startElement(String namespaceURI, String localName, String qName, Attributes atts)
                 throws SAXException {
 
-            if (localName.equals("file-entry")) {
-                _currentFileEntry = new OdfFileEntry();
-                _currentFileEntry.setPath(atts.getValue("manifest:full-path"));
-                _currentFileEntry.setMediaType(atts.getValue("manifest:media-type"));
-                if (atts.getValue("manifest:size") != null) {
-                    try {
-                        _currentFileEntry.setSize(Integer.parseInt(atts.getValue("manifest:size")));
-                    } catch (NumberFormatException nfe) {
-                        throw new SAXException("not a number: " + atts.getValue("manifest:size"));
-                    }
-                }
-            } else if (localName.equals("encryption-data")) {
-                _currentEncryptionData = new EncryptionData();
-                if (_currentFileEntry != null) {
-                    _currentEncryptionData.setChecksumType(atts.getValue("manifest:checksum-type"));
-                    _currentEncryptionData.setChecksum(atts.getValue("manifest:checksum"));
-                    _currentFileEntry.setEncryptionData(_currentEncryptionData);
-                }
-            } else if (localName.equals("algorithm")) {
-                Algorithm algorithm = new Algorithm();
-                algorithm.setName(atts.getValue("manifest:algorithm-name"));
-                algorithm.setInitializationVector(atts.getValue("manifest:initialization-vector"));
-                if (_currentEncryptionData != null) {
-                    _currentEncryptionData.setAlgorithm(algorithm);
-                }
-            } else if (localName.equals("key-derivation")) {
-                KeyDerivation keyDerivation = new KeyDerivation();
-                keyDerivation.setName(atts.getValue("manifest:key-derivation-name"));
-                keyDerivation.setSalt(atts.getValue("manifest:salt"));
-                if (atts.getValue("manifest:iteration-count") != null) {
-                    try {
-                        keyDerivation.setIterationCount(Integer.parseInt(atts.getValue("manifest:iteration-count")));
-                    } catch (NumberFormatException nfe) {
-                        throw new SAXException("not a number: " + atts.getValue("manifest:iteration-count"));
-                    }
-                }
-                if (_currentEncryptionData != null) {
-                    _currentEncryptionData.setKeyDerivation(keyDerivation);
-                }
+            Element element = OdfElementFactory.createOdfElement(mDocument,OdfName.get(namespaceURI, qName));
+            for (int i = 0; i < atts.getLength(); i++) {
+                element.setAttributeNS(atts.getURI(i),
+                		atts.getQName(i), atts.getValue(i));
             }
-
+            // add the new element as a child of the current context node
+            mNode.appendChild(element);
+            // push the new element as the context node...
+            mNode = element;
         }
 
         /**
@@ -1663,15 +1541,7 @@ public class OdfPackage {
          */
         public void endElement(String namespaceURI, String localName, String qName)
                 throws SAXException {
-            if (localName.equals("file-entry")) {
-                if (_currentFileEntry.getPath() != null) {
-                    mManifestEntries.put(_currentFileEntry.getPath(), _currentFileEntry);
-                }
-                mManifestList.add(_currentFileEntry.getPath());
-                _currentFileEntry = null;
-            } else if (localName.equals("encryption-data")) {
-                _currentEncryptionData = null;
-            }
+            mNode = mNode.getParentNode();
         }
 
         /**
@@ -1700,6 +1570,19 @@ public class OdfPackage {
          */
         public void skippedEntity(String name) throws SAXException {
         }
+		public void endDocument() throws SAXException {
+			// TODO Auto-generated method stub
+			
+		}
+		public void endPrefixMapping(String arg0) throws SAXException {
+			// TODO Auto-generated method stub
+			
+		}
+		public void startPrefixMapping(String arg0, String arg1)
+				throws SAXException {
+			// TODO Auto-generated method stub
+			
+		}
     }
 
     /**

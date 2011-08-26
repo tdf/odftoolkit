@@ -44,30 +44,31 @@ public class OdfNamespace implements Comparable, NamespaceContext {
 
     static private enum OOoNamespace {
 
-        CHART("chart", "urn:oasis:names:tc:opendocument:xmlns:chart:1.0"),
-        XLINK("xlink", "http://www.w3.org/1999/xlink"),
         PRESENTATION("presentation", "urn:oasis:names:tc:opendocument:xmlns:presentation:1.0"),
-        DR3D("dr3d", "urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0"),
-        MATH("math", "http://www.w3.org/1998/Math/MathML"),
-        SCRIPT("script", "urn:oasis:names:tc:opendocument:xmlns:script:1.0"),
         TABLE("table", "urn:oasis:names:tc:opendocument:xmlns:table:1.0"),
-        NUMBER("number", "urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0"),
-        A("a", "http://relaxng.org/ns/compatibility/annotations/1.0"),
         FORM("form", "urn:oasis:names:tc:opendocument:xmlns:form:1.0"),
-        XFORMS("xforms", "http://www.w3.org/2002/xforms"),
-        SVG("svg", "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"),
-        TEXT("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0"),
-        DB("db", "urn:oasis:names:tc:opendocument:xmlns:database:1.0"),
-        OFFICE("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0"),
-        DC("dc", "http://purl.org/dc/elements/1.1/"),
-        FO("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"),
-        CONFIG("config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0"),
-        STYLE("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0"),
+        MANIFEST("manifest", "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"),
+        SCRIPT("script", "urn:oasis:names:tc:opendocument:xmlns:script:1.0"),
+        CHART("chart", "urn:oasis:names:tc:opendocument:xmlns:chart:1.0"),
+        SMIL("smil", "urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0"),
+        MATH("math", "http://www.w3.org/1998/Math/MathML"),
         DRAW("draw", "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0"),
         META("meta", "urn:oasis:names:tc:opendocument:xmlns:meta:1.0"),
-        GRDDL("grddl", "http://www.w3.org/2003/g/data-view#"),
         XHTML("xhtml", "http://www.w3.org/1999/xhtml"),
-        SMIL("smil", "urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0"),
+        GRDDL("grddl", "http://www.w3.org/2003/g/data-view#"),
+        OFFICE("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0"),
+        A("a", "http://relaxng.org/ns/compatibility/annotations/1.0"),
+        DR3D("dr3d", "urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0"),
+        STYLE("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0"),
+        XFORMS("xforms", "http://www.w3.org/2002/xforms"),
+        SVG("svg", "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"),
+        NUMBER("number", "urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0"),
+        FO("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"),
+        XLINK("xlink", "http://www.w3.org/1999/xlink"),
+        TEXT("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0"),
+        CONFIG("config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0"),
+        DB("db", "urn:oasis:names:tc:opendocument:xmlns:database:1.0"),
+        DC("dc", "http://purl.org/dc/elements/1.1/"),
         ANIM("anim", "urn:oasis:names:tc:opendocument:xmlns:animation:1.0"),
     	XML("xml", "http://www.w3.org/XML/1998/namespace" );
     
@@ -213,32 +214,32 @@ public class OdfNamespace implements Comparable, NamespaceContext {
     
     // 2DO: use only constants from Enumeration
     // 2DO: move Namespaceconstants into OdfName.. (?)
-    public static final OdfNamespace CHART = get("chart", "urn:oasis:names:tc:opendocument:xmlns:chart:1.0");
-    public static final OdfNamespace XLINK = get("xlink", "http://www.w3.org/1999/xlink");
     public static final OdfNamespace PRESENTATION = get("presentation", "urn:oasis:names:tc:opendocument:xmlns:presentation:1.0");
-    public static final OdfNamespace DR3D = get("dr3d", "urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0");
-    public static final OdfNamespace MATH = get("math", "http://www.w3.org/1998/Math/MathML");
-    public static final OdfNamespace SCRIPT = get("script", "urn:oasis:names:tc:opendocument:xmlns:script:1.0");
     public static final OdfNamespace TABLE = get("table", "urn:oasis:names:tc:opendocument:xmlns:table:1.0");
-    public static final OdfNamespace NUMBER = get("number", "urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0");
-    public static final OdfNamespace A = get("a", "http://relaxng.org/ns/compatibility/annotations/1.0");
     public static final OdfNamespace FORM = get("form", "urn:oasis:names:tc:opendocument:xmlns:form:1.0");
-    public static final OdfNamespace XFORMS = get("xforms", "http://www.w3.org/2002/xforms");
-    public static final OdfNamespace SVG = get("svg", "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0");
-    public static final OdfNamespace TEXT = get("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
-    public static final OdfNamespace DB = get("db", "urn:oasis:names:tc:opendocument:xmlns:database:1.0");
-    public static final OdfNamespace OFFICE = get("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
-    public static final OdfNamespace DC = get("dc", "http://purl.org/dc/elements/1.1/");
-    public static final OdfNamespace FO = get("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
-    public static final OdfNamespace CONFIG = get("config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0");
-    public static final OdfNamespace STYLE = get("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+    public static final OdfNamespace MANIFEST = get("manifest", "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0");
+    public static final OdfNamespace SCRIPT = get("script", "urn:oasis:names:tc:opendocument:xmlns:script:1.0");
+    public static final OdfNamespace CHART = get("chart", "urn:oasis:names:tc:opendocument:xmlns:chart:1.0");
+    public static final OdfNamespace SMIL = get("smil", "urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0");
+    public static final OdfNamespace MATH = get("math", "http://www.w3.org/1998/Math/MathML");
     public static final OdfNamespace DRAW = get("draw", "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0");
     public static final OdfNamespace META = get("meta", "urn:oasis:names:tc:opendocument:xmlns:meta:1.0");
-    public static final OdfNamespace GRDDL = get("grddl", "http://www.w3.org/2003/g/data-view#");
     public static final OdfNamespace XHTML = get("xhtml", "http://www.w3.org/1999/xhtml");
-    public static final OdfNamespace SMIL = get("smil", "urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0");
+    public static final OdfNamespace GRDDL = get("grddl", "http://www.w3.org/2003/g/data-view#");
+    public static final OdfNamespace OFFICE = get("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+    public static final OdfNamespace A = get("a", "http://relaxng.org/ns/compatibility/annotations/1.0");
+    public static final OdfNamespace DR3D = get("dr3d", "urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0");
+    public static final OdfNamespace STYLE = get("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+    public static final OdfNamespace XFORMS = get("xforms", "http://www.w3.org/2002/xforms");
+    public static final OdfNamespace SVG = get("svg", "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0");
+    public static final OdfNamespace NUMBER = get("number", "urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0");
+    public static final OdfNamespace FO = get("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+    public static final OdfNamespace XLINK = get("xlink", "http://www.w3.org/1999/xlink");
+    public static final OdfNamespace TEXT = get("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+    public static final OdfNamespace CONFIG = get("config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0");
+    public static final OdfNamespace DB = get("db", "urn:oasis:names:tc:opendocument:xmlns:database:1.0");
+    public static final OdfNamespace DC = get("dc", "http://purl.org/dc/elements/1.1/");
     public static final OdfNamespace ANIM = get("anim", "urn:oasis:names:tc:opendocument:xmlns:animation:1.0");
-
     public static final OdfNamespace XML = get("xml", "http://www.w3.org/XML/1998/namespace" );
     
     public String getNamespaceURI(String prefix) {

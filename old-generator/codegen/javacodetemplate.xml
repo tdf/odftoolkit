@@ -29,6 +29,7 @@
 <ref name="gen_OdfNamespace"/>
 <!--ref name="gen_doc_elements"/-->
 <ref name="gen_OdfElementFactory"/>
+<!--ref name="gen_pkg_elements"/-->
     
 <!-- generate flat rng -->
 <!--file name="elements" extension="xml">
@@ -977,6 +978,7 @@ public class %{local_name(classname)} implements Comparable, NamespaceContext {
 <!-- generate doc element java classes ===================================== -->
 <define name="gen_doc_elements">
 <foreach type="element">
+	<if test="prefix(elementqname) != 'manifest' ">
     <set classname="org.odftoolkit.odfdom.doc.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}"/>
     <set baseclassname="org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}Element"/>
     <file path="org/odftoolkit/odfdom/doc/element/%{prefix(elementqname)}" name="Odf%{identifier(elementname)}" extensions="java">
@@ -999,6 +1001,7 @@ public class %{local_name(classname)} extends %{local_name(baseclassname)}
 }
 </code>
 </file>
+</if>
 </foreach>
 </define>
 
@@ -1032,7 +1035,12 @@ public class OdfElementFactory {
         m_elementTypes = new HashMap&lt;OdfName, Class&gt;();
 </code>
 <foreach type="element">
+<if test="prefix(elementqname) != 'manifest'">
 <set classname="org.odftoolkit.odfdom.doc.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}"/>
+<else>
+<set classname="org.odftoolkit.odfdom.pkg.%{prefix(elementqname)}.%{identifier(elementname)}"/>
+</else>
+</if>
 <!-- we must use the full qualified class name here as we have equal element names in different namespaces! -->
 <code>        m_elementTypes.put(%{classname}.ELEMENT_NAME, %{classname}.class);
 </code>
@@ -1067,5 +1075,34 @@ public class OdfElementFactory {
 }
 </code>    
 </file>
+</define>
+<!-- generate pkg element java classes for manifest===================================== -->
+<define name="gen_pkg_elements">
+<foreach type="element">
+	<if test="prefix(elementqname) = 'manifest' ">
+    <set classname="org.odftoolkit.odfdom.pkg.%{prefix(elementqname)}.%{identifier(elementname)}"/>
+    <set baseclassname="org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}Element"/>
+    <file path="org/odftoolkit/odfdom/pkg/%{prefix(elementqname)}" name="%{identifier(elementname)}" extensions="java">
+      <ref name="header"/>
+      <code>
+package %{prefix(classname)};
+
+import org.odftoolkit.odfdom.doc.OdfFileDom;
+import %{baseclassname};
+
+/**
+ *
+ */
+public class %{local_name(classname)} extends %{local_name(baseclassname)}
+{
+    public %{local_name(classname)}( OdfFileDom _aOwnerDoc )
+    {
+        super( _aOwnerDoc );
+    }
+}
+</code>
+</file>
+</if>
+</foreach>
 </define>
 </template>
