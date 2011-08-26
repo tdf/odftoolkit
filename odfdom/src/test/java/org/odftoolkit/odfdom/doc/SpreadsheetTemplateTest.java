@@ -67,11 +67,11 @@ public class SpreadsheetTemplateTest {
 	@Test
 	public void testSwitchingOdfSpreadsheetDocument() throws Exception {
 		OdfSpreadsheetDocument document = OdfSpreadsheetDocument.newSpreadsheetDocument();
-		document.changeMode(OdfSpreadsheetDocument.SupportedType.SPREADSHEET_TEMPLATE);
+		document.changeMode(OdfSpreadsheetDocument.OdfMediaType.SPREADSHEET_TEMPLATE);
 		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getName(), document.getPackage().getMediaType());
 
 		document = OdfSpreadsheetDocument.newSpreadsheetTemplateDocument();
-		document.changeMode(OdfSpreadsheetDocument.SupportedType.SPREADSHEET);
+		document.changeMode(OdfSpreadsheetDocument.OdfMediaType.SPREADSHEET);
 		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET.getName(),
 				document.getPackage().getMediaType());
 	}

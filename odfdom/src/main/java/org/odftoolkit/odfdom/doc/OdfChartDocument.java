@@ -39,23 +39,52 @@ public class OdfChartDocument extends OdfDocument {
 	/**
 	 * This enum contains all possible media types of OdfChartDocument documents.
 	 */
-	public enum SupportedType {
+	public enum OdfMediaType {
 
-		CHART(OdfMediaType.CHART),
-		CHART_TEMPLATE(OdfMediaType.CHART_TEMPLATE);
-		private final OdfMediaType mMediaType;
+		CHART(OdfDocument.OdfMediaType.CHART),
+		CHART_TEMPLATE(OdfDocument.OdfMediaType.CHART_TEMPLATE);
+		private final OdfDocument.OdfMediaType mMediaType;
 
-		SupportedType(OdfMediaType mediaType) {
+		OdfMediaType(OdfDocument.OdfMediaType mediaType) {
 			this.mMediaType = mediaType;
 		}
 
-		public OdfMediaType getOdfMediaType() {
+		@Override
+		/**
+		 * @return the mediatype of this document
+		 */
+		public String toString() {
+			return mMediaType.toString();
+		}
+
+		/**
+		 * @return the ODF mediatype of this document
+		 */
+		public OdfDocument.OdfMediaType getOdfMediaType() {
 			return mMediaType;
 		}
 
-		@Override
-		public String toString() {
-			return mMediaType.toString();
+		/**
+		 * @return the mediatype of this document
+		 */
+		public String getName() {
+			return mMediaType.getName();
+		}
+
+		/**
+		 * @return the ODF filesuffix of this document
+		 */
+		public String getSuffix() {
+			return mMediaType.getSuffix();
+		}
+
+		/**
+		 *
+		 * @param mediaType string defining an ODF document
+		 * @return the according OdfMediatype encapuslating the given string and the suffix
+		 */
+		public static OdfDocument.OdfMediaType getOdfMediaType(String mediaType) {
+			return OdfDocument.OdfMediaType.getOdfMediaType(mediaType);
 		}
 	}
 
@@ -77,7 +106,7 @@ public class OdfChartDocument extends OdfDocument {
 	 */
 	public static OdfChartDocument newChartTemplateDocument() throws Exception {
 		OdfChartDocument doc = (OdfChartDocument) OdfDocument.loadTemplate(EMPTY_CHART_DOCUMENT_RESOURCE);
-		doc.changeMode(SupportedType.CHART_TEMPLATE);
+		doc.changeMode(OdfMediaType.CHART_TEMPLATE);
 		return doc;
 	}
 
@@ -100,7 +129,7 @@ public class OdfChartDocument extends OdfDocument {
 	 * a document instance to a template and vice versa. 
 	 * @param type
 	 */
-	public void changeMode(SupportedType type) {
+	public void changeMode(OdfMediaType type) {
 		setMediaType(type.getOdfMediaType());
 		getPackage().setMediaType(type.toString());
 	}

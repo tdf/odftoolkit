@@ -42,25 +42,54 @@ public class OdfTextDocument extends OdfDocument {
 	 * This enum contains all possible media types of OdfSpreadsheetDocument
 	 * documents.
 	 */
-	public enum SupportedType {
+	public enum OdfMediaType {
 
-		TEXT(OdfMediaType.TEXT),
-		TEXT_TEMPLATE(OdfMediaType.TEXT_TEMPLATE),
-		TEXT_MASTER(OdfMediaType.TEXT_MASTER),
-		TEXT_WEB(OdfMediaType.TEXT_WEB);
-		private final OdfMediaType mMediaType;
+		TEXT(OdfDocument.OdfMediaType.TEXT),
+		TEXT_TEMPLATE(OdfDocument.OdfMediaType.TEXT_TEMPLATE),
+		TEXT_MASTER(OdfDocument.OdfMediaType.TEXT_MASTER),
+		TEXT_WEB(OdfDocument.OdfMediaType.TEXT_WEB);
+		private final OdfDocument.OdfMediaType mMediaType;
 
-		SupportedType(OdfMediaType mediaType) {
+		OdfMediaType(OdfDocument.OdfMediaType mediaType) {
 			this.mMediaType = mediaType;
 		}
 
-		public OdfMediaType getOdfMediaType() {
+		@Override
+		/**
+		 * @return the mediatype of this document
+		 */
+		public String toString() {
+			return mMediaType.toString();
+		}
+
+		/**
+		 * @return the ODF mediatype of this document
+		 */
+		public OdfDocument.OdfMediaType getOdfMediaType() {
 			return mMediaType;
 		}
 
-		@Override
-		public String toString() {
-			return mMediaType.toString();
+		/**
+		 * @return the mediatype of this document
+		 */
+		public String getName() {
+			return mMediaType.getName();
+		}
+
+		/**
+		 * @return the ODF filesuffix of this document
+		 */
+		public String getSuffix() {
+			return mMediaType.getSuffix();
+		}
+
+		/**
+		 *
+		 * @param mediaType string defining an ODF document
+		 * @return the according OdfMediatype encapuslating the given string and the suffix
+		 */
+		public static OdfDocument.OdfMediaType getOdfMediaType(String mediaType) {
+			return OdfDocument.OdfMediaType.getOdfMediaType(mediaType);
 		}
 	}
 
@@ -80,7 +109,7 @@ public class OdfTextDocument extends OdfDocument {
 	 */
 	public static OdfTextDocument newTextTemplateDocument() throws Exception {
 		OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
-		doc.changeMode(SupportedType.TEXT_TEMPLATE);
+		doc.changeMode(OdfMediaType.TEXT_TEMPLATE);
 		return doc;
 	}
 
@@ -91,7 +120,7 @@ public class OdfTextDocument extends OdfDocument {
 	 */
 	public static OdfTextDocument newTextMasterDocument() throws Exception {
 		OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
-		doc.changeMode(SupportedType.TEXT_MASTER);
+		doc.changeMode(OdfMediaType.TEXT_MASTER);
 		return doc;
 	}
 
@@ -102,7 +131,7 @@ public class OdfTextDocument extends OdfDocument {
 	 */
 	public static OdfTextDocument newTextWebDocument() throws Exception {
 		OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
-		doc.changeMode(SupportedType.TEXT_WEB);
+		doc.changeMode(OdfMediaType.TEXT_WEB);
 		return doc;
 	}
 
@@ -171,7 +200,7 @@ public class OdfTextDocument extends OdfDocument {
 	 * convert a document instance to a template and vice versa. 	 * 
 	 * @param type
 	 */
-	public void changeMode(SupportedType type) {
+	public void changeMode(OdfMediaType type) {
 		setMediaType(type.getOdfMediaType());
 		getPackage().setMediaType(type.toString());
 	}

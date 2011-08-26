@@ -73,12 +73,12 @@ public class ChartTemplateTest {
 	@Test
 	public void testSwitchingOdfChartDocument() throws Exception {
 		OdfChartDocument document = OdfChartDocument.newChartDocument();
-		document.changeMode(OdfChartDocument.SupportedType.CHART_TEMPLATE);
+		document.changeMode(OdfChartDocument.OdfMediaType.CHART_TEMPLATE);
 		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getName(),
 				document.getPackage().getMediaType());
 
 		document = OdfChartDocument.newChartTemplateDocument();
-		document.changeMode(OdfChartDocument.SupportedType.CHART);
+		document.changeMode(OdfChartDocument.OdfMediaType.CHART);
 		Assert.assertEquals(OdfDocument.OdfMediaType.CHART.getName(), document.getPackage().getMediaType());
 	}
 }

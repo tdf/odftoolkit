@@ -68,11 +68,11 @@ public class PresentationTemplateTest {
 	@Test
 	public void testSwitchingOdfPresentationDocument() throws Exception {
 		OdfPresentationDocument document = OdfPresentationDocument.newPresentationDocument();
-		document.changeMode(OdfPresentationDocument.SupportedType.PRESENTATION_TEMPLATE);
+		document.changeMode(OdfPresentationDocument.OdfMediaType.PRESENTATION_TEMPLATE);
 		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getName(), document.getPackage().getMediaType());
 
 		document = OdfPresentationDocument.newPresentationTemplateDocument();
-		document.changeMode(OdfPresentationDocument.SupportedType.PRESENTATION);
+		document.changeMode(OdfPresentationDocument.OdfMediaType.PRESENTATION);
 		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION.getName(),
 				document.getPackage().getMediaType());
 	}

@@ -146,14 +146,32 @@ public abstract class OdfDocument {
 			this.mSuffix = suffix;
 		}
 
+		/**
+		 * @return the ODF mediatype of this document
+		 */
+		public OdfMediaType getOdfMediaType() {
+			return this;
+		}
+
+		/**
+		 * @return the mediatype of this document
+		 */
 		public String getName() {
 			return mMediaType;
 		}
 
+		/**
+		 * @return the ODF filesuffix of this document
+		 */
 		public String getSuffix() {
 			return mSuffix;
 		}
 
+		/**
+		 *
+		 * @param mediaType string defining an ODF document
+		 * @return the according OdfMediatype encapuslating the given string and the suffix
+		 */
 		public static OdfMediaType getOdfMediaType(String mediaType) {
 			OdfMediaType odfMediaType = null;
 			if (mediaType != null) {
@@ -170,6 +188,9 @@ public abstract class OdfDocument {
 		}
 
 		@Override
+		/**
+		 * @return the mediatype of this document
+		 */
 		public String toString() {
 			return mMediaType;
 		}

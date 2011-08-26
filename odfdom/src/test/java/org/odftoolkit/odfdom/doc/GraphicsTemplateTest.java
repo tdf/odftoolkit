@@ -67,11 +67,11 @@ public class GraphicsTemplateTest {
 	@Test
 	public void testSwitchingOdfGraphicsDocument() throws Exception {
 		OdfGraphicsDocument document = OdfGraphicsDocument.newGraphicsDocument();
-		document.changeMode(OdfGraphicsDocument.SupportedType.GRAPHICS_TEMPLATE);
+		document.changeMode(OdfGraphicsDocument.OdfMediaType.GRAPHICS_TEMPLATE);
 		Assert.assertEquals(OdfDocument.OdfMediaType.GRAPHICS_TEMPLATE.getName(), document.getPackage().getMediaType());
 
 		document = OdfGraphicsDocument.newGraphicsTemplateDocument();
-		document.changeMode(OdfGraphicsDocument.SupportedType.GRAPHICS);
+		document.changeMode(OdfGraphicsDocument.OdfMediaType.GRAPHICS);
 		Assert.assertEquals(OdfDocument.OdfMediaType.GRAPHICS.getName(),
 				document.getPackage().getMediaType());
 	}

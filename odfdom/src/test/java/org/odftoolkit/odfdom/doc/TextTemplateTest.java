@@ -106,35 +106,35 @@ public class TextTemplateTest {
 	@Test
 	public void testSwitchingOdfTextDocument() throws Exception {
 		OdfTextDocument document = OdfTextDocument.newTextDocument();
-		document.changeMode(OdfTextDocument.SupportedType.TEXT_TEMPLATE);
+		document.changeMode(OdfTextDocument.OdfMediaType.TEXT_TEMPLATE);
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_TEMPLATE.getName(), document.getPackage().getMediaType());
-		document.changeMode(OdfTextDocument.SupportedType.TEXT_WEB);
+		document.changeMode(OdfTextDocument.OdfMediaType.TEXT_WEB);
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_WEB.getName(), document.getPackage().getMediaType());
-		document.changeMode(OdfTextDocument.SupportedType.TEXT_MASTER);
+		document.changeMode(OdfTextDocument.OdfMediaType.TEXT_MASTER);
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_MASTER.getName(), document.getPackage().getMediaType());
 
 		document = OdfTextDocument.newTextTemplateDocument();
-		document.changeMode(OdfTextDocument.SupportedType.TEXT);
+		document.changeMode(OdfTextDocument.OdfMediaType.TEXT);
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT.getName(), document.getPackage().getMediaType());
-		document.changeMode(OdfTextDocument.SupportedType.TEXT_MASTER);
+		document.changeMode(OdfTextDocument.OdfMediaType.TEXT_MASTER);
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_MASTER.getName(), document.getPackage().getMediaType());
-		document.changeMode(OdfTextDocument.SupportedType.TEXT_WEB);
+		document.changeMode(OdfTextDocument.OdfMediaType.TEXT_WEB);
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_WEB.getName(), document.getPackage().getMediaType());
 
 		document = OdfTextDocument.newTextMasterDocument();
-		document.changeMode(OdfTextDocument.SupportedType.TEXT);
+		document.changeMode(OdfTextDocument.OdfMediaType.TEXT);
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT.getName(), document.getPackage().getMediaType());
-		document.changeMode(OdfTextDocument.SupportedType.TEXT_TEMPLATE);
+		document.changeMode(OdfTextDocument.OdfMediaType.TEXT_TEMPLATE);
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_TEMPLATE.getName(), document.getPackage().getMediaType());
-		document.changeMode(OdfTextDocument.SupportedType.TEXT_WEB);
+		document.changeMode(OdfTextDocument.OdfMediaType.TEXT_WEB);
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_WEB.getName(), document.getPackage().getMediaType());
 
 		document = OdfTextDocument.newTextWebDocument();
-		document.changeMode(OdfTextDocument.SupportedType.TEXT);
+		document.changeMode(OdfTextDocument.OdfMediaType.TEXT);
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT.getName(), document.getPackage().getMediaType());
-		document.changeMode(OdfTextDocument.SupportedType.TEXT_TEMPLATE);
+		document.changeMode(OdfTextDocument.OdfMediaType.TEXT_TEMPLATE);
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_TEMPLATE.getName(), document.getPackage().getMediaType());
-		document.changeMode(OdfTextDocument.SupportedType.TEXT_MASTER);
+		document.changeMode(OdfTextDocument.OdfMediaType.TEXT_MASTER);
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_MASTER.getName(), document.getPackage().getMediaType());
 	}
 }
