@@ -624,7 +624,66 @@ public class TableTest {
 			e.printStackTrace();
 		}
 	}
-
+	
+	@Test
+	public void testSplitCellAddress() {
+		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
+		OdfTable table1 = mOdtDoc.getTableByName("Table1");
+		//FIXME:bug 138, test case to proof the fix problem.
+		//test address without table name.
+		String[] address=table1.splitCellAddress("A1");
+		Assert.assertEquals("Table1", address[0]);
+		Assert.assertEquals("A", address[1]);
+		Assert.assertEquals("1", address[2]);
+		address=table1.splitCellAddress("AC1");
+		Assert.assertEquals("Table1", address[0]);
+		Assert.assertEquals("AC", address[1]);
+		Assert.assertEquals("1", address[2]);
+		address=table1.splitCellAddress("B34");
+		Assert.assertEquals("Table1", address[0]);
+		Assert.assertEquals("B", address[1]);
+		Assert.assertEquals("34", address[2]);
+		address=table1.splitCellAddress("AC29");
+		Assert.assertEquals("Table1", address[0]);
+		Assert.assertEquals("AC", address[1]);
+		Assert.assertEquals("29", address[2]);
+		
+		//test relative address
+		address=table1.splitCellAddress("Table1.A1");
+		Assert.assertEquals("Table1", address[0]);
+		Assert.assertEquals("A", address[1]);
+		Assert.assertEquals("1", address[2]);
+		address=table1.splitCellAddress("Table1.AC1");
+		Assert.assertEquals("Table1", address[0]);
+		Assert.assertEquals("AC", address[1]);
+		Assert.assertEquals("1", address[2]);
+		address=table1.splitCellAddress("Table1.B34");
+		Assert.assertEquals("Table1", address[0]);
+		Assert.assertEquals("B", address[1]);
+		Assert.assertEquals("34", address[2]);
+		address=table1.splitCellAddress("Table1.AC29");
+		Assert.assertEquals("Table1", address[0]);
+		Assert.assertEquals("AC", address[1]);
+		Assert.assertEquals("29", address[2]);
+		
+		//test absolute address.
+		address=table1.splitCellAddress("$Table1.$A$1");
+		Assert.assertEquals("Table1", address[0]);
+		Assert.assertEquals("A", address[1]);
+		Assert.assertEquals("1", address[2]);
+		address=table1.splitCellAddress("$Table1.$AC$1");
+		Assert.assertEquals("Table1", address[0]);
+		Assert.assertEquals("AC", address[1]);
+		Assert.assertEquals("1", address[2]);
+		address=table1.splitCellAddress("$Table1.$B$34");
+		Assert.assertEquals("Table1", address[0]);
+		Assert.assertEquals("B", address[1]);
+		Assert.assertEquals("34", address[2]);
+		address=table1.splitCellAddress("$Table1.$AC$29");
+		Assert.assertEquals("Table1", address[0]);
+		Assert.assertEquals("AC", address[1]);
+		Assert.assertEquals("29", address[2]);
+	}
 	private void testAppendRow(TableTableElement table) {
 		OdfTable fTable = OdfTable.getInstance(table);
 		int count = fTable.getRowCount();
