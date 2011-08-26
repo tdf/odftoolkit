@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.presentation.OdfShowShapeElement;
  */
 public class OdfShowShape extends OdfShowShapeElement
 {
-    public OdfShowShape( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2666435112632344637L;
+
+	public OdfShowShape( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

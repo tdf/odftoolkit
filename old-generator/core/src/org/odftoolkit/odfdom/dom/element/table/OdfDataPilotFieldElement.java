@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfOrientationType;
  */
 public abstract class OdfDataPilotFieldElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-field" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4948137429938287066L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-field" );
 
     public OdfDataPilotFieldElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

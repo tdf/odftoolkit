@@ -45,14 +45,19 @@ import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
  */
 public abstract class OdfEventListenerElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "event-listener" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2279342452907216742L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "event-listener" );
 
     public OdfEventListenerElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

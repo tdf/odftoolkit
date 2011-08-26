@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfQuarterElement;
  */
 public class OdfQuarter extends OdfQuarterElement
 {
-    public OdfQuarter( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2395303573723173969L;
+
+	public OdfQuarter( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

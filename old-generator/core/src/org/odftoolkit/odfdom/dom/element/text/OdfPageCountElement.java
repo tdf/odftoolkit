@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfPageCountElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-count" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7949268609211231193L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-count" );
 
     public OdfPageCountElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

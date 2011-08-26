@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfVariableDeclsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-decls" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5531763077016840196L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-decls" );
 
     public OdfVariableDeclsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

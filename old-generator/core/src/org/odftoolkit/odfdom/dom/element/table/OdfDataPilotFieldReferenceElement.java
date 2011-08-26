@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfFieldReferenceType;
  */
 public abstract class OdfDataPilotFieldReferenceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-field-reference" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3023936007941401351L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-field-reference" );
 
     public OdfDataPilotFieldReferenceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

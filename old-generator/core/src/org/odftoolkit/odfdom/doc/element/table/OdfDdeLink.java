@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfDdeLinkElement;
  */
 public class OdfDdeLink extends OdfDdeLinkElement
 {
-    public OdfDdeLink( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4625678823163564391L;
+
+	public OdfDdeLink( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

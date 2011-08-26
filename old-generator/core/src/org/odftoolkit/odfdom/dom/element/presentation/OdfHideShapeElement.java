@@ -45,14 +45,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPercent;
  */
 public abstract class OdfHideShapeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "hide-shape" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5947001272891437862L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "hide-shape" );
 
     public OdfHideShapeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

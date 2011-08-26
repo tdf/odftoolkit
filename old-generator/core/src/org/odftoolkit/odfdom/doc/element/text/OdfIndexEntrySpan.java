@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfIndexEntrySpanElement;
  */
 public class OdfIndexEntrySpan extends OdfIndexEntrySpanElement
 {
-    public OdfIndexEntrySpan( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3329677765896067750L;
+
+	public OdfIndexEntrySpan( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfFractionElement;
  */
 public class OdfFraction extends OdfFractionElement
 {
-    public OdfFraction( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1064896620410913093L;
+
+	public OdfFraction( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

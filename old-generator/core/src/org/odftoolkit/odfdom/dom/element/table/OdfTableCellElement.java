@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
  */
 public abstract class OdfTableCellElement extends OdfTableCellElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-cell" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5124613510057791590L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-cell" );
 
     public OdfTableCellElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.get( OdfNamespace.TABLE, "style-name" ) );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

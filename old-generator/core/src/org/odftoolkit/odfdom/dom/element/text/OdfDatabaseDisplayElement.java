@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfDatabaseDisplayElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "database-display" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4281071171457545375L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "database-display" );
 
     public OdfDatabaseDisplayElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

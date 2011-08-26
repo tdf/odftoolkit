@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.presentation.OdfDimElement;
  */
 public class OdfDim extends OdfDimElement
 {
-    public OdfDim( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1546613247331717258L;
+
+	public OdfDim( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

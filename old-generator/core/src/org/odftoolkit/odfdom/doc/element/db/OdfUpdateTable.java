@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfUpdateTableElement;
  */
 public class OdfUpdateTable extends OdfUpdateTableElement
 {
-    public OdfUpdateTable( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6556700053454898615L;
+
+	public OdfUpdateTable( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

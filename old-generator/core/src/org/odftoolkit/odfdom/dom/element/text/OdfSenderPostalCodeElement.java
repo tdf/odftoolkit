@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfSenderPostalCodeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sender-postal-code" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6668982490290877706L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sender-postal-code" );
 
     public OdfSenderPostalCodeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

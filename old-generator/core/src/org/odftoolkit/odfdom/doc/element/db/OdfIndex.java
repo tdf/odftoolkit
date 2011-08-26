@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfIndexElement;
  */
 public class OdfIndex extends OdfIndexElement
 {
-    public OdfIndex( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8788819008947889266L;
+
+	public OdfIndex( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

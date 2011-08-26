@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfMapElement;
  */
 public class OdfMap extends OdfMapElement
 {
-    public OdfMap( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3316136595868293347L;
+
+	public OdfMap( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

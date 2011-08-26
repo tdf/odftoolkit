@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSenderStateOrProvinceElement;
  */
 public class OdfSenderStateOrProvince extends OdfSenderStateOrProvinceElement
 {
-    public OdfSenderStateOrProvince( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7253391593270111199L;
+
+	public OdfSenderStateOrProvince( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfSubjectElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "subject" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2231890762546795106L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "subject" );
 
     public OdfSubjectElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

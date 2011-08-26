@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfUserFieldInputElement;
  */
 public class OdfUserFieldInput extends OdfUserFieldInputElement
 {
-    public OdfUserFieldInput( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5507694521176767196L;
+
+	public OdfUserFieldInput( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

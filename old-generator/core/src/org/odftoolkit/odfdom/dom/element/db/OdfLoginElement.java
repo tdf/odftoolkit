@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
  */
 public abstract class OdfLoginElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "login" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6195443469778249389L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "login" );
 
     public OdfLoginElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

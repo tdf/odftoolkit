@@ -34,11 +34,13 @@ public class DomNodeList extends AbstractList<Node> {
         m_nodeList = list;
     }
 
-    public int size() {
+    @Override
+	public int size() {
         return m_nodeList.getLength();
     }
 
-    public Node get(int index) {
+    @Override
+	public Node get(int index) {
         return m_nodeList.item(index);
     }    
 }

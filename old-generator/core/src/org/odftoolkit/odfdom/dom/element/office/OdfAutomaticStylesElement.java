@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfContainerElementBase;
  */
 public abstract class OdfAutomaticStylesElement extends OdfContainerElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "automatic-styles" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2627131360273893311L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "automatic-styles" );
 
     public OdfAutomaticStylesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

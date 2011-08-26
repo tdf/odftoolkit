@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfAreaPolygonElement;
  */
 public class OdfAreaPolygon extends OdfAreaPolygonElement
 {
-    public OdfAreaPolygon( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2351310313046115608L;
+
+	public OdfAreaPolygon( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfTocMarkStartElement;
  */
 public class OdfTocMarkStart extends OdfTocMarkStartElement
 {
-    public OdfTocMarkStart( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8528980795682712575L;
+
+	public OdfTocMarkStart( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

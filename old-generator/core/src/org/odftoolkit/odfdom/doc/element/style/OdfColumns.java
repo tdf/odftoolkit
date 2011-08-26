@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfColumnsElement;
  */
 public class OdfColumns extends OdfColumnsElement
 {
-    public OdfColumns( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5843969822484798729L;
+
+	public OdfColumns( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

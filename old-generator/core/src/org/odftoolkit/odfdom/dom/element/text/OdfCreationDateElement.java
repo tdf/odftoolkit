@@ -42,14 +42,19 @@ import org.odftoolkit.odfdom.dom.type.OdfDate;
  */
 public abstract class OdfCreationDateElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "creation-date" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1150886965460600063L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "creation-date" );
 
     public OdfCreationDateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

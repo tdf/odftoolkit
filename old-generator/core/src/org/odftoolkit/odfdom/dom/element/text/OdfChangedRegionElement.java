@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfChangedRegionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "changed-region" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4646341569106688340L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "changed-region" );
 
     public OdfChangedRegionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

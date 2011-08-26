@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfFloorElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "floor" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5837017489551668860L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "floor" );
 
     public OdfFloorElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.get( OdfNamespace.CHART, "style-name" ) );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -72,7 +77,8 @@ public abstract class OdfFloorElement extends OdfStylableElement
     /**
      * Get value of attribute "chart:style-name".
      */
-    public String getStyleName()
+    @Override
+	public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -81,7 +87,8 @@ public abstract class OdfFloorElement extends OdfStylableElement
     /**
      * Set value of attribute "chart:style-name".
      */
-    public void setStyleName( String _aStyleName )
+    @Override
+	public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ), aStringVal );

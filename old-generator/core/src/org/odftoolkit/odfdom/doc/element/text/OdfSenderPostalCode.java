@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSenderPostalCodeElement;
  */
 public class OdfSenderPostalCode extends OdfSenderPostalCodeElement
 {
-    public OdfSenderPostalCode( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3224228546463084569L;
+
+	public OdfSenderPostalCode( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

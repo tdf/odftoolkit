@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfEditingDurationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "editing-duration" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1988087315987827853L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "editing-duration" );
 
     public OdfEditingDurationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

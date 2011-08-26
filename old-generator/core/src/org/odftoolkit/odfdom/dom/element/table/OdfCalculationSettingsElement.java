@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
  */
 public abstract class OdfCalculationSettingsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "calculation-settings" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3445960828328250785L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "calculation-settings" );
 
     public OdfCalculationSettingsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSortKeyElement;
  */
 public class OdfSortKey extends OdfSortKeyElement
 {
-    public OdfSortKey( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6045846019621953460L;
+
+	public OdfSortKey( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

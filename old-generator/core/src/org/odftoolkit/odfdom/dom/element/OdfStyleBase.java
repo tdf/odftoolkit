@@ -61,7 +61,11 @@ import org.w3c.dom.NodeList;
  */
 abstract public class OdfStyleBase extends OdfContainerElementBase implements OdfStylePropertySet
 {
-    private HashMap< OdfStylePropertiesSet, OdfStylePropertiesBase > mPropertySetElementMap;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8271282184913774000L;
+	private HashMap< OdfStylePropertiesSet, OdfStylePropertiesBase > mPropertySetElementMap;
     private Vector< OdfStylableElement > mStyleUser;
 
     static HashMap< OdfName, OdfStylePropertiesSet > mStylePropertiesElementToSetMap;
@@ -469,8 +473,8 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
         {
             Node n1 = nodes1.get(i);
             Node n2 = nodes2.get(i);
-            String sn1 = n1.toString();
-            String sn2 = n2.toString();
+            n1.toString();
+            n2.toString();
             if( !n1.equals(n2) )
                 return false;
         }

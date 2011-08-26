@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfDdeSourceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "dde-source" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5467780082245968948L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "dde-source" );
 
     public OdfDdeSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

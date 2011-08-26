@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfAlphabeticalIndexMarkElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "alphabetical-index-mark" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7483200092933604781L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "alphabetical-index-mark" );
 
     public OdfAlphabeticalIndexMarkElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

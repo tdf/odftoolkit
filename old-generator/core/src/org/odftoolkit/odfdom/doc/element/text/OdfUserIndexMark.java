@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfUserIndexMarkElement;
  */
 public class OdfUserIndexMark extends OdfUserIndexMarkElement
 {
-    public OdfUserIndexMark( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4057516560653490296L;
+
+	public OdfUserIndexMark( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

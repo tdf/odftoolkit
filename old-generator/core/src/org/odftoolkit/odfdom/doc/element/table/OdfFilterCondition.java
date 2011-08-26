@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfFilterConditionElement;
  */
 public class OdfFilterCondition extends OdfFilterConditionElement
 {
-    public OdfFilterCondition( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8869128208677083596L;
+
+	public OdfFilterCondition( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

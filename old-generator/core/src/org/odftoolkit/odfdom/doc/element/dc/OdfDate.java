@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.dc.OdfDateElement;
  */
 public class OdfDate extends OdfDateElement
 {
-    public OdfDate( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1273821049564782355L;
+
+	public OdfDate( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

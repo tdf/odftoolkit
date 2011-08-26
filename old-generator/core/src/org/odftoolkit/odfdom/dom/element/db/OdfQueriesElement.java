@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfQueriesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "queries" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 146566994754293357L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "queries" );
 
     public OdfQueriesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.anim.OdfTransitionfilterElement;
  */
 public class OdfTransitionfilter extends OdfTransitionfilterElement
 {
-    public OdfTransitionfilter( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5226047891509594222L;
+
+	public OdfTransitionfilter( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

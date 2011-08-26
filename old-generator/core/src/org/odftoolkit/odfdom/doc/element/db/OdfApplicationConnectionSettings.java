@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfApplicationConnectionSettingsElem
  */
 public class OdfApplicationConnectionSettings extends OdfApplicationConnectionSettingsElement
 {
-    public OdfApplicationConnectionSettings( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3071372837310121616L;
+
+	public OdfApplicationConnectionSettings( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfNoteBodyElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "note-body" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2877345477249093103L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "note-body" );
 
     public OdfNoteBodyElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

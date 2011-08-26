@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.number.OdfStyleType;
  */
 public abstract class OdfQuarterElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "quarter" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7745215106790873366L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "quarter" );
 
     public OdfQuarterElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

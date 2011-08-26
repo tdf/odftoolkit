@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.xforms.OdfModelElement;
  */
 public class OdfModel extends OdfModelElement
 {
-    public OdfModel( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6291054495852625227L;
+
+	public OdfModel( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

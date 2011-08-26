@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfIndexEntryTabStopElement;
  */
 public class OdfIndexEntryTabStop extends OdfIndexEntryTabStopElement
 {
-    public OdfIndexEntryTabStop( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6395756404425067428L;
+
+	public OdfIndexEntryTabStop( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

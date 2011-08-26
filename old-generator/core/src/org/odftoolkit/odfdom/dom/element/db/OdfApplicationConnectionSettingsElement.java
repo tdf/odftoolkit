@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.db.OdfBooleanComparisonModeType;
  */
 public abstract class OdfApplicationConnectionSettingsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "application-connection-settings" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1166983791589419905L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "application-connection-settings" );
 
     public OdfApplicationConnectionSettingsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

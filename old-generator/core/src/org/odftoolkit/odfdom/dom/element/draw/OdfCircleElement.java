@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.element.draw;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.type.draw.OdfKindType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfId;
@@ -41,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfCircleElement extends OdfShapeElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "circle" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8471673295756358218L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "circle" );
 
     public OdfCircleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

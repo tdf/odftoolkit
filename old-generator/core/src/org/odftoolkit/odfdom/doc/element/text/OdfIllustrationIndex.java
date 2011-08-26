@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfIllustrationIndexElement;
  */
 public class OdfIllustrationIndex extends OdfIllustrationIndexElement
 {
-    public OdfIllustrationIndex( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 281286164334357728L;
+
+	public OdfIllustrationIndex( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

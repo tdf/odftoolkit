@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfDataPilotSubtotalElement;
  */
 public class OdfDataPilotSubtotal extends OdfDataPilotSubtotalElement
 {
-    public OdfDataPilotSubtotal( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 54254276249829176L;
+
+	public OdfDataPilotSubtotal( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfPageCountElement;
  */
 public class OdfPageCount extends OdfPageCountElement
 {
-    public OdfPageCount( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6004417917034539624L;
+
+	public OdfPageCount( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

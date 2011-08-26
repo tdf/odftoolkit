@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPercent;
  */
 public abstract class OdfOpacityElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "opacity" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3452736930307916346L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "opacity" );
 
     public OdfOpacityElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

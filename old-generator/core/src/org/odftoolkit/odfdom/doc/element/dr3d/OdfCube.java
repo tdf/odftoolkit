@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.dr3d.OdfCubeElement;
  */
 public class OdfCube extends OdfCubeElement
 {
-    public OdfCube( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9096321550870725744L;
+
+	public OdfCube( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -42,14 +42,19 @@ import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
  */
 public abstract class OdfPasswordElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "password" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8224426277189696952L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "password" );
 
     public OdfPasswordElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.draw.OdfHatchStyleType;
  */
 public abstract class OdfHatchElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "hatch" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2136197666218367894L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "hatch" );
 
     public OdfHatchElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -47,6 +47,7 @@ import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
 import org.odftoolkit.odfdom.doc.element.style.OdfTextProperties;
 import org.odftoolkit.odfdom.doc.element.text.OdfSpan;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.element.draw.OdfFrameElement;
 import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 import org.odftoolkit.odfdom.dom.element.text.OdfSpanElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
@@ -79,31 +80,29 @@ public class DocumentCreationTest {
     @Test
     public void createEmptyDocs() {
         try {
-            OdfFileDom contentDom = null;
-
             OdfTextDocument odtDoc1 = OdfTextDocument.createTextDocument();
             OdfTextDocument odtDoc2 = OdfTextDocument.createTextDocument();
-            contentDom = odtDoc2.getContentDom();
+            odtDoc2.getContentDom();
             odtDoc1.save("build/test/TestEmpty_OdfTextDocument.odt");
 
             OdfGraphicsDocument odgDoc1 = OdfGraphicsDocument.createGraphicsDocument();
             OdfGraphicsDocument odgDoc2 = OdfGraphicsDocument.createGraphicsDocument();
-            contentDom = odgDoc2.getContentDom();
+            odgDoc2.getContentDom();
             odgDoc1.save("build/test/TestEmpty_OdfGraphicsDocument.odg");
 
             OdfSpreadsheetDocument odsDoc1 = OdfSpreadsheetDocument.createSpreadsheetDocument();
             OdfSpreadsheetDocument odsDoc2 = OdfSpreadsheetDocument.createSpreadsheetDocument();
-            contentDom = odsDoc2.getContentDom();
+            odsDoc2.getContentDom();
             odsDoc1.save("build/test/TestEmpty_OdfSpreadsheetDocument.ods");
 
             OdfPresentationDocument odpDoc1 = OdfPresentationDocument.createPresentationDocument();
             OdfPresentationDocument odpDoc2 = OdfPresentationDocument.createPresentationDocument();
-            contentDom = odpDoc2.getContentDom();
+            odpDoc2.getContentDom();
             odpDoc1.save("build/test/TestEmpty_OdfPresentationDocument.odp");
 
             OdfChartDocument odcDoc1 = OdfChartDocument.createChartDocument();
             OdfChartDocument odcDoc2 = OdfChartDocument.createChartDocument();
-            contentDom = odcDoc2.getContentDom();
+            odcDoc2.getContentDom();
             odcDoc1.save("build/test/TestEmpty_OdfChartDocument.odc");
 
             /////////////////////////////////////////
@@ -143,7 +142,7 @@ public class DocumentCreationTest {
             // FUTURE USAGE: para.createDrawFrame().createDrawImage("/myweb.org/images/myHoliday.png", "/Pictures/myHoliday.png");
             //             Child access methods are still not part of the v0.6.x releases
             // CURRENT USAGE:
-            OdfFrame odfFrame =  (OdfFrame) OdfElementFactory.createOdfElement(odfContent, OdfFrame.ELEMENT_NAME);
+            OdfFrame odfFrame =  (OdfFrame) OdfElementFactory.createOdfElement(odfContent, OdfFrameElement.ELEMENT_NAME);
             para.appendChild(odfFrame);
             OdfImage odfImage = (OdfImage) OdfElementFactory.createOdfElement(odfContent, OdfImage.ELEMENT_NAME);
             odfImage.insertImage(new URI("test/resources/test.jpg"));                        

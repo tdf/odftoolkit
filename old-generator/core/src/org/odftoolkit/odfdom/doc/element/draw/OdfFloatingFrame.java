@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfFloatingFrameElement;
  */
 public class OdfFloatingFrame extends OdfFloatingFrameElement
 {
-    public OdfFloatingFrame( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1510746662934169571L;
+
+	public OdfFloatingFrame( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

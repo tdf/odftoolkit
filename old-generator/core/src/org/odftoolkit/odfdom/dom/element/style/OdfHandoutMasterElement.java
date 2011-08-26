@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfHandoutMasterElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "handout-master" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3283055403011285249L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "handout-master" );
 
     public OdfHandoutMasterElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.DrawingPage, OdfName.get( OdfNamespace.DRAW, "style-name" ) );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

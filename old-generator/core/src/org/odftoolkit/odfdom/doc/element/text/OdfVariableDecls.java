@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfVariableDeclsElement;
  */
 public class OdfVariableDecls extends OdfVariableDeclsElement
 {
-    public OdfVariableDecls( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8395179239725752521L;
+
+	public OdfVariableDecls( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

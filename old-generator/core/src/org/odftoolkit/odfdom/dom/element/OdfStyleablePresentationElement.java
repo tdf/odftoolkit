@@ -32,7 +32,8 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
  */
 abstract public class OdfStyleablePresentationElement extends OdfStylableElement
 {
-    private static OdfName PresStyleAttrName = OdfName.get( OdfNamespace.PRESENTATION, "style-name" );
+	private static final long serialVersionUID = 3604813885619852184L;
+	private static OdfName PresStyleAttrName = OdfName.get( OdfNamespace.PRESENTATION, "style-name" );
     private static OdfName DrawStyleAttrName = OdfName.get( OdfNamespace.DRAW, "style-name" );
     
     public OdfStyleablePresentationElement(OdfFileDom ownerDocument, OdfName name)
@@ -43,7 +44,7 @@ abstract public class OdfStyleablePresentationElement extends OdfStylableElement
     @Override
     public void setAttributeNS(String uri, String name, String value)
     {    
-        if( !(value == null) || (value.length() != 0) )
+        if( (value != null) && (value.length() != 0) )
         {
             if( DrawStyleAttrName.equals( uri, name ) )
             {

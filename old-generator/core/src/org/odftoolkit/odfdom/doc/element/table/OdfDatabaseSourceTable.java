@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfDatabaseSourceTableElement;
  */
 public class OdfDatabaseSourceTable extends OdfDatabaseSourceTableElement
 {
-    public OdfDatabaseSourceTable( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7966352811566572397L;
+
+	public OdfDatabaseSourceTable( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfPreviousElement;
  */
 public class OdfPrevious extends OdfPreviousElement
 {
-    public OdfPrevious( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -899775729105475589L;
+
+	public OdfPrevious( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

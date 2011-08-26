@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfImageCountElement;
  */
 public class OdfImageCount extends OdfImageCountElement
 {
-    public OdfImageCount( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2833555129850634300L;
+
+	public OdfImageCount( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

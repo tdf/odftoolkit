@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfIndexSourceStyleElement;
  */
 public class OdfIndexSourceStyle extends OdfIndexSourceStyleElement
 {
-    public OdfIndexSourceStyle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7087065879197272322L;
+
+	public OdfIndexSourceStyle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

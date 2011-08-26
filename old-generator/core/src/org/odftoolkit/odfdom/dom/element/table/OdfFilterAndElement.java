@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfFilterAndElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "filter-and" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8602010146107687344L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "filter-and" );
 
     public OdfFilterAndElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

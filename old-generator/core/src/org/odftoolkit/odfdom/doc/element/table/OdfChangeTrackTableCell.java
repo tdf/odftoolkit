@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfChangeTrackTableCellElement;
  */
 public class OdfChangeTrackTableCell extends OdfChangeTrackTableCellElement
 {
-    public OdfChangeTrackTableCell( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6041065621284973395L;
+
+	public OdfChangeTrackTableCell( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

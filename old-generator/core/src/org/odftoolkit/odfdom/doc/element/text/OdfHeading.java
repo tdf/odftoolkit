@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfHeadingElement;
 
 public class OdfHeading extends OdfHeadingElement {
 
-    /** Creates a new instance of this class */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -873026187130508101L;
+
+	/** Creates a new instance of this class */
     public OdfHeading(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

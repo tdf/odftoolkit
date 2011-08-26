@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfParamElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "param" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6394725726352839780L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "param" );
 
     public OdfParamElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfFillImageElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "fill-image" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6000631022607828386L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "fill-image" );
 
     public OdfFillImageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

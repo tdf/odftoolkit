@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
  */
 public abstract class OdfSubtotalFieldElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "subtotal-field" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3007836177225373735L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "subtotal-field" );
 
     public OdfSubtotalFieldElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

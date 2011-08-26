@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfOpacityElement;
  */
 public class OdfOpacity extends OdfOpacityElement
 {
-    public OdfOpacity( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 496070981153462268L;
+
+	public OdfOpacity( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

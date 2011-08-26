@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.db.OdfDeleteRuleType;
  */
 public abstract class OdfKeyElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "key" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5949876771998826956L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "key" );
 
     public OdfKeyElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

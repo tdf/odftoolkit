@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfDatabaseRangesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "database-ranges" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2109147095402857639L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "database-ranges" );
 
     public OdfDatabaseRangesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

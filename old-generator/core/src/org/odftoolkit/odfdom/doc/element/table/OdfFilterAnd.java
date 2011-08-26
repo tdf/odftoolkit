@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfFilterAndElement;
  */
 public class OdfFilterAnd extends OdfFilterAndElement
 {
-    public OdfFilterAnd( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7003070669473635138L;
+
+	public OdfFilterAnd( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

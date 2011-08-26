@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
  */
 public abstract class OdfDrawingPagePropertiesElement extends OdfStylePropertiesBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "drawing-page-properties" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5760715594981831520L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "drawing-page-properties" );
 
     public OdfDrawingPagePropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

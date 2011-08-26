@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfListLevelPropertiesElement;
  */
 public class OdfListLevelProperties extends OdfListLevelPropertiesElement
 {
-    public OdfListLevelProperties( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1866800805090188253L;
+
+	public OdfListLevelProperties( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

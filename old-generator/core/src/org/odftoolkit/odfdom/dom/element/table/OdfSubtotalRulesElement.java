@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfSubtotalRulesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "subtotal-rules" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9133895850627361443L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "subtotal-rules" );
 
     public OdfSubtotalRulesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

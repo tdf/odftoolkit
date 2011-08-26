@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.text.OdfNoteClassType;
  */
 public abstract class OdfNoteRefElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "note-ref" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8402205522034434585L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "note-ref" );
 
     public OdfNoteRefElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

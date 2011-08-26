@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfListLevelLabelAlignmentElement
  */
 public class OdfListLevelLabelAlignment extends OdfListLevelLabelAlignmentElement
 {
-    public OdfListLevelLabelAlignment( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2871068587010758826L;
+
+	public OdfListLevelLabelAlignment( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfFrameElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "frame" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -924137999101902161L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "frame" );
 
     public OdfFrameElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfSortKeyElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sort-key" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9061741451866289129L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sort-key" );
 
     public OdfSortKeyElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

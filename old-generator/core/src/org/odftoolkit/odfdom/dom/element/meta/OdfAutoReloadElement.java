@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.OdfDuration;
  */
 public abstract class OdfAutoReloadElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "auto-reload" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7654262038620200904L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "auto-reload" );
 
     public OdfAutoReloadElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

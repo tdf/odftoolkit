@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfHeaderStyleElement;
  */
 public class OdfHeaderStyle extends OdfHeaderStyleElement
 {
-    public OdfHeaderStyle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6363189771440222275L;
+
+	public OdfHeaderStyle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

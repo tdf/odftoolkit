@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfUserFieldDeclsElement;
  */
 public class OdfUserFieldDecls extends OdfUserFieldDeclsElement
 {
-    public OdfUserFieldDecls( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7644142093943522687L;
+
+	public OdfUserFieldDecls( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

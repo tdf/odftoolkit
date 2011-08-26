@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.office.OdfDdeSourceElement;
  */
 public class OdfDdeSource extends OdfDdeSourceElement
 {
-    public OdfDdeSource( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6635051617319872275L;
+
+	public OdfDdeSource( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

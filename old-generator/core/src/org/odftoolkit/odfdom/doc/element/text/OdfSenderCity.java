@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSenderCityElement;
  */
 public class OdfSenderCity extends OdfSenderCityElement
 {
-    public OdfSenderCity( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8984981871926678552L;
+
+	public OdfSenderCity( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

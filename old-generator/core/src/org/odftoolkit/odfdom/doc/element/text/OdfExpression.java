@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfExpressionElement;
  */
 public class OdfExpression extends OdfExpressionElement
 {
-    public OdfExpression( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5901852104913925256L;
+
+	public OdfExpression( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

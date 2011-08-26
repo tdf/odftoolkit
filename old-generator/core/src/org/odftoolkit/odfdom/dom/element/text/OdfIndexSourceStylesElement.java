@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
  */
 public abstract class OdfIndexSourceStylesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "index-source-styles" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 554292075399968229L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "index-source-styles" );
 
     public OdfIndexSourceStylesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

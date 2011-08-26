@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfNotesConfigurationElement;
  */
 public class OdfNotesConfiguration extends OdfNotesConfigurationElement
 {
-    public OdfNotesConfiguration( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6513490582724893876L;
+
+	public OdfNotesConfiguration( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

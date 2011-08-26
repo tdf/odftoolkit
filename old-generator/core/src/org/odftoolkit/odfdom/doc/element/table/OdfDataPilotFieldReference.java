@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfDataPilotFieldReferenceElement
  */
 public class OdfDataPilotFieldReference extends OdfDataPilotFieldReferenceElement
 {
-    public OdfDataPilotFieldReference( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3188287335047052794L;
+
+	public OdfDataPilotFieldReference( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

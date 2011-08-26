@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
  */
 public abstract class OdfHeadingElement extends OdfParagraphElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "h" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 52748665948684597L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "h" );
 
     public OdfHeadingElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Paragraph, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

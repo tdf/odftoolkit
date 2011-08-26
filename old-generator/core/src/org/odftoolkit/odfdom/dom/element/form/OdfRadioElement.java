@@ -45,14 +45,19 @@ import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
  */
 public abstract class OdfRadioElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "radio" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8376003175749630835L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "radio" );
 
     public OdfRadioElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

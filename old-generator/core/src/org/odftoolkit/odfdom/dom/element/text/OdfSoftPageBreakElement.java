@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfSoftPageBreakElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "soft-page-break" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2371177339047275988L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "soft-page-break" );
 
     public OdfSoftPageBreakElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

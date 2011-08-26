@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfMeasureElement;
  */
 public class OdfMeasure extends OdfMeasureElement
 {
-    public OdfMeasure( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4131324382829989088L;
+
+	public OdfMeasure( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

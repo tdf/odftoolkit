@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfParagraphCountElement;
  */
 public class OdfParagraphCount extends OdfParagraphCountElement
 {
-    public OdfParagraphCount( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7420108996088484469L;
+
+	public OdfParagraphCount( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

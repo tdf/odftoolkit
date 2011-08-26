@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfSenderLastnameElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sender-lastname" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2420238688014495946L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sender-lastname" );
 
     public OdfSenderLastnameElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

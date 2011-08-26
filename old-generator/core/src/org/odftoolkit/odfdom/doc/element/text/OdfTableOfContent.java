@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfTableOfContentElement;
 
 public class OdfTableOfContent extends OdfTableOfContentElement {
 
-    /** Creates a new instance of OdfParagraphElementImpl */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6513254353025884868L;
+
+	/** Creates a new instance of OdfParagraphElementImpl */
     public OdfTableOfContent(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

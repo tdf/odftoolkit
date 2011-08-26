@@ -50,7 +50,6 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 
-import org.apache.xerces.dom.ParentNode;
 import org.odftoolkit.odfdom.doc.element.office.OdfAutomaticStyles;
 import org.odftoolkit.odfdom.doc.element.office.OdfBody;
 import org.odftoolkit.odfdom.doc.element.office.OdfMasterStyles;
@@ -61,7 +60,6 @@ import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.EntityResolver;
@@ -76,7 +74,6 @@ public abstract class OdfDocument {
     private static final String SLASH = "/";
     private static final String COLON = ":";
     private static final String EMPTY_STRING = "";
-    private static final String TEXT_XML_MEDIA_TYPE = "text/xml";
     private String mDocumentPathInPackage = EMPTY_STRING;
 
     /**
@@ -828,7 +825,7 @@ public abstract class OdfDocument {
     public OdfBody getOfficeBody() {
         try {
             if (getContentDom() != null) {
-                return OdfElement.findFirstChildNode(OdfBody.class, (ParentNode) getContentDom().getFirstChild());
+                return OdfElement.findFirstChildNode(OdfBody.class, getContentDom().getFirstChild());
             }
         } catch (Exception ex) {
             Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
@@ -844,7 +841,7 @@ public abstract class OdfDocument {
         try {
             OdfFileDom fileDom = getStylesDom();
             if (fileDom != null) {
-                return OdfElement.findFirstChildNode(OdfMasterStyles.class, (ParentNode) fileDom.getFirstChild());
+                return OdfElement.findFirstChildNode(OdfMasterStyles.class, fileDom.getFirstChild());
             }
         } catch (Exception ex) {
             Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);

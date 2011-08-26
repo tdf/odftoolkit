@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.element.draw;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.type.draw.OdfType;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
@@ -42,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfConnectorElement extends OdfShapeElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "connector" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4039666781082212019L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "connector" );
 
     public OdfConnectorElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

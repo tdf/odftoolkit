@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfSchemaDefinitionElement;
  */
 public class OdfSchemaDefinition extends OdfSchemaDefinitionElement
 {
-    public OdfSchemaDefinition( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4881314335730675302L;
+
+	public OdfSchemaDefinition( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

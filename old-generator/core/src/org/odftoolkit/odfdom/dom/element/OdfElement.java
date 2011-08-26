@@ -38,7 +38,11 @@ import org.w3c.dom.Text;
 //2DO: Refactor public to package viewer, when inheritance is exchanged from OdfElement to specific Odf Element
 abstract public class OdfElement extends ElementNSImpl {
 
-    // the OdfDocument containing the element
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4939293285696678939L;
+	// the OdfDocument containing the element
     protected OdfDocument mOdfDocument;
 
     /** Creates a new instance of OdfElement */

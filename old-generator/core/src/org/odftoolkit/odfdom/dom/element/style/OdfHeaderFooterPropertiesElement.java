@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
  */
 public abstract class OdfHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "header-footer-properties" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -737571128411767371L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "header-footer-properties" );
 
     public OdfHeaderFooterPropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

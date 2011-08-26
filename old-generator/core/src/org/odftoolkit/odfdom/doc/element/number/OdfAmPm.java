@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfAmPmElement;
  */
 public class OdfAmPm extends OdfAmPmElement
 {
-    public OdfAmPm( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7750278303467866954L;
+
+	public OdfAmPm( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

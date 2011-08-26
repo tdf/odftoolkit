@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfListLevelStyleImageElement extends OdfListLevelStyleElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-level-style-image" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4646982772586992017L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-level-style-image" );
 
     public OdfListLevelStyleImageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

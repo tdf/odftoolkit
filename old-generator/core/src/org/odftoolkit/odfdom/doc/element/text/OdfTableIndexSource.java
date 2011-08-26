@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfTableIndexSourceElement;
  */
 public class OdfTableIndexSource extends OdfTableIndexSourceElement
 {
-    public OdfTableIndexSource( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1533442299458985859L;
+
+	public OdfTableIndexSource( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

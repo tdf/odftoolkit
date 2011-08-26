@@ -31,7 +31,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfCircleElement;
  */
 public class OdfCircle extends OdfCircleElement
 {
-    public OdfCircle( OdfFileDom ownerDoc)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1049008300702441343L;
+
+	public OdfCircle( OdfFileDom ownerDoc)
     {
         super(ownerDoc);
     }

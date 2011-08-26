@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSenderPhoneWorkElement;
  */
 public class OdfSenderPhoneWork extends OdfSenderPhoneWorkElement
 {
-    public OdfSenderPhoneWork( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6474410066125172201L;
+
+	public OdfSenderPhoneWork( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

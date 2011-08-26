@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfDataPointElement;
  */
 public class OdfDataPoint extends OdfDataPointElement
 {
-    public OdfDataPoint( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9002224677888077378L;
+
+	public OdfDataPoint( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -45,14 +45,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPercent;
  */
 public abstract class OdfShowTextElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "show-text" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4404822404484685690L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "show-text" );
 
     public OdfShowTextElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

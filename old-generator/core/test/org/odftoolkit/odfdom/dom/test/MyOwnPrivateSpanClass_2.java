@@ -27,7 +27,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSpanElement;
 
 public class MyOwnPrivateSpanClass_2 extends OdfSpanElement {
 
-    /** Creates a new instance of this class */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3782225493052113393L;
+
+	/** Creates a new instance of this class */
     public MyOwnPrivateSpanClass_2(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

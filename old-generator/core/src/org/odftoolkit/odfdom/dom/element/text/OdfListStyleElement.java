@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfListStyleElement extends OdfStyleBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-style" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -754831726388172400L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-style" );
 
     public OdfListStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfNumberedParagraphElement;
  */
 public class OdfNumberedParagraph extends OdfNumberedParagraphElement
 {
-    public OdfNumberedParagraph( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8977506163516623967L;
+
+	public OdfNumberedParagraph( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.draw.OdfDisplayType;
  */
 public abstract class OdfLayerElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "layer" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -292630674877620967L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "layer" );
 
     public OdfLayerElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

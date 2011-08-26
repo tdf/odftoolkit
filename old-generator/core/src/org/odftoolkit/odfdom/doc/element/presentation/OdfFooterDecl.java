@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.presentation.OdfFooterDeclElement;
  */
 public class OdfFooterDecl extends OdfFooterDeclElement
 {
-    public OdfFooterDecl( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -889156206518313295L;
+
+	public OdfFooterDecl( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

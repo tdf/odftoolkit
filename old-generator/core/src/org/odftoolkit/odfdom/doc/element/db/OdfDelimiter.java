@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfDelimiterElement;
  */
 public class OdfDelimiter extends OdfDelimiterElement
 {
-    public OdfDelimiter( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6807634049901508L;
+
+	public OdfDelimiter( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

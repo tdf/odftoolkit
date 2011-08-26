@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.office.OdfBinaryDataElement;
  */
 public class OdfBinaryData extends OdfBinaryDataElement
 {
-    public OdfBinaryData( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5394225539923454428L;
+
+	public OdfBinaryData( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

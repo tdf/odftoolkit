@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfTableRowsElement;
 
 public class OdfTableRows extends OdfTableRowsElement {
 
-    /** Creates a new instance of this class */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3952828244127872697L;
+
+	/** Creates a new instance of this class */
     public OdfTableRows(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

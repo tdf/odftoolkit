@@ -43,14 +43,19 @@ import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
  */
 public abstract class OdfComboboxElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "combobox" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1491871766812847631L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "combobox" );
 
     public OdfComboboxElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

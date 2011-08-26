@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.text.OdfKindType;
  */
 public abstract class OdfMeasureElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "measure" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3768810327286681957L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "measure" );
 
     public OdfMeasureElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

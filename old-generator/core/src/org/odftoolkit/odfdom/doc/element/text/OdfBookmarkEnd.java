@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfBookmarkEndElement;
  */
 public class OdfBookmarkEnd extends OdfBookmarkEndElement
 {
-    public OdfBookmarkEnd( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7827289778255902703L;
+
+	public OdfBookmarkEnd( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

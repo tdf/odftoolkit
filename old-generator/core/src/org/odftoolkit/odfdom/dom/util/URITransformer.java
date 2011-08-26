@@ -206,7 +206,7 @@ public class URITransformer {
             byte[] bytes = null;
             bytes = path.getBytes("UTF-8");
             for (int i = 0; i < bytes.length; i++) {
-                int v = (int) bytes[i];
+                int v = bytes[i];
                 if (v < 0) {
                     v += 256;
                 }
@@ -340,7 +340,6 @@ public class URITransformer {
             }
             scheme=npath.substring(0,i)+":";
             if ( i+4 <= l ) {
-                boolean bcf=true;
                 String hier=npath.substring(i+1,i+4);
                 if ( hier.startsWith("==0/") ) {
                     i+=5;
@@ -355,7 +354,6 @@ public class URITransformer {
                     i+=3;
                     bauth=false;
                 } else {
-                    bcf=false;
                     scheme+="//";
                 }
 
@@ -546,7 +544,7 @@ public class URITransformer {
         } catch ( java.io.UnsupportedEncodingException e) {
         }
         for (i=0; i<bytes.length; i++ ) {
-            int v=(int)bytes[i];
+            int v=bytes[i];
             if ( v < 0 ) {
                 v+=256;
             }

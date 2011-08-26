@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfAcceptanceStateType;
  */
 public abstract class OdfInsertionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "insertion" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1356231672738942614L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "insertion" );
 
     public OdfInsertionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

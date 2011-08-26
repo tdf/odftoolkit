@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfPlotAreaElement;
  */
 public class OdfPlotArea extends OdfPlotAreaElement
 {
-    public OdfPlotArea( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7142689028759716257L;
+
+	public OdfPlotArea( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

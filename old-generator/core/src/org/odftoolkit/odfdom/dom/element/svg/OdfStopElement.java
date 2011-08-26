@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfStopElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "stop" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7797378712247925456L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "stop" );
 
     public OdfStopElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

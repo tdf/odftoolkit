@@ -21,22 +21,15 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.dom.test;
 
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.doc.element.office.OdfStyles;
 import org.odftoolkit.odfdom.doc.element.style.OdfDefaultStyle;
-import org.odftoolkit.odfdom.doc.element.style.OdfParagraphProperties;
 import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.element.style.OdfTextProperties;
-import org.odftoolkit.odfdom.doc.element.text.OdfParagraph;
-import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.element.style.OdfTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 
 public class StyleTest {
 
@@ -81,18 +74,18 @@ public class StyleTest {
             OdfStyles styles = doc.getOrCreateDocumentStyles();
             
             OdfDefaultStyle def = styles.getOrCreateDefaultStyle(OdfStyleFamily.Paragraph);
-            def.setProperty(OdfTextProperties.TextUnderlineColor, "#00FF00");
+            def.setProperty(OdfTextPropertiesElement.TextUnderlineColor, "#00FF00");
             
             OdfStyle parent = styles.createStyle("TheParent", OdfStyleFamily.Paragraph);          
-            parent.setProperty(OdfTextProperties.FontSize, "17pt");
-            parent.setProperty(OdfTextProperties.Color, "#FF0000");
+            parent.setProperty(OdfTextPropertiesElement.FontSize, "17pt");
+            parent.setProperty(OdfTextPropertiesElement.Color, "#FF0000");
 
             OdfStyle child = styles.createStyle("TheChild", OdfStyleFamily.Paragraph);
             child.setParentStyleName(parent.getName());
 
-            Assert.assertEquals("17pt", child.getProperty(OdfTextProperties.FontSize));
-            Assert.assertEquals("#FF0000", child.getProperty(OdfTextProperties.Color));
-            Assert.assertEquals("#00FF00", child.getProperty(OdfTextProperties.TextUnderlineColor));
+            Assert.assertEquals("17pt", child.getProperty(OdfTextPropertiesElement.FontSize));
+            Assert.assertEquals("#FF0000", child.getProperty(OdfTextPropertiesElement.Color));
+            Assert.assertEquals("#00FF00", child.getProperty(OdfTextPropertiesElement.TextUnderlineColor));
             
         } catch (Exception e) {
             e.printStackTrace();

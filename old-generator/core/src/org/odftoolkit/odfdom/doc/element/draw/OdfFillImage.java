@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfFillImageElement;
  */
 public class OdfFillImage extends OdfFillImageElement
 {
-    public OdfFillImage( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 276310402041935792L;
+
+	public OdfFillImage( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfBibliographyConfigurationElemen
  */
 public class OdfBibliographyConfiguration extends OdfBibliographyConfigurationElement
 {
-    public OdfBibliographyConfiguration( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2183469521758592322L;
+
+	public OdfBibliographyConfiguration( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

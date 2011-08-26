@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.element.draw;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
@@ -39,14 +38,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfGroupElement extends OdfShapeElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "g" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7446924825723143465L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "g" );
 
     public OdfGroupElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

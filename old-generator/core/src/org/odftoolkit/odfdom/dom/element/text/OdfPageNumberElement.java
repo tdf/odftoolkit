@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.text.OdfPageNumberSelectType;
  */
 public abstract class OdfPageNumberElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-number" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -733720894419782420L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-number" );
 
     public OdfPageNumberElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

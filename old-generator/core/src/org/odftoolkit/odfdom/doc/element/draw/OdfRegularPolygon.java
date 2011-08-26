@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfRegularPolygonElement;
  */
 public class OdfRegularPolygon extends OdfRegularPolygonElement
 {
-    public OdfRegularPolygon( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4144221075033704760L;
+
+	public OdfRegularPolygon( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

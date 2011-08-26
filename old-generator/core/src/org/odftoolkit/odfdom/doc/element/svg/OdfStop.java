@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.svg.OdfStopElement;
  */
 public class OdfStop extends OdfStopElement
 {
-    public OdfStop( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3556675997509256196L;
+
+	public OdfStop( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.db.OdfDataSourceSettingType;
  */
 public abstract class OdfDataSourceSettingElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "data-source-setting" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1208408949954803822L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "data-source-setting" );
 
     public OdfDataSourceSettingElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

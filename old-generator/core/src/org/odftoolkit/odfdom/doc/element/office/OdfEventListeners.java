@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.office.OdfEventListenersElement;
  */
 public class OdfEventListeners extends OdfEventListenersElement
 {
-    public OdfEventListeners( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6477327752393270496L;
+
+	public OdfEventListeners( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

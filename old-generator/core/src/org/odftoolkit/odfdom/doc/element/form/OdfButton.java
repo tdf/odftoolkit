@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfButtonElement;
  */
 public class OdfButton extends OdfButtonElement
 {
-    public OdfButton( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7220187013547474351L;
+
+	public OdfButton( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

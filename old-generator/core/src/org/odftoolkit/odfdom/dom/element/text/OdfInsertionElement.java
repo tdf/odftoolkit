@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfInsertionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "insertion" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3219518276263555308L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "insertion" );
 
     public OdfInsertionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

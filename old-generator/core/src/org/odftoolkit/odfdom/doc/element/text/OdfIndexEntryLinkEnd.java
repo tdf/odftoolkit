@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfIndexEntryLinkEndElement;
  */
 public class OdfIndexEntryLinkEnd extends OdfIndexEntryLinkEndElement
 {
-    public OdfIndexEntryLinkEnd( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2165801820844724872L;
+
+	public OdfIndexEntryLinkEnd( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

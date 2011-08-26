@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfHiddenParagraphElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "hidden-paragraph" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7768101820020189579L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "hidden-paragraph" );
 
     public OdfHiddenParagraphElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

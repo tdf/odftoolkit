@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfOddRowsElement;
  */
 public class OdfOddRows extends OdfOddRowsElement
 {
-    public OdfOddRows( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7286514999452214064L;
+
+	public OdfOddRows( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

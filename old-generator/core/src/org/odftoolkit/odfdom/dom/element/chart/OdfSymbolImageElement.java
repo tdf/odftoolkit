@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfSymbolImageElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "symbol-image" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5559052828914877466L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "symbol-image" );
 
     public OdfSymbolImageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

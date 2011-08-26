@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfEditingDurationElement;
  */
 public class OdfEditingDuration extends OdfEditingDurationElement
 {
-    public OdfEditingDuration( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8658558706094469201L;
+
+	public OdfEditingDuration( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfInsertionCutOffElement;
  */
 public class OdfInsertionCutOff extends OdfInsertionCutOffElement
 {
-    public OdfInsertionCutOff( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1713528551660003226L;
+
+	public OdfInsertionCutOff( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

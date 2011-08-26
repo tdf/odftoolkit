@@ -46,14 +46,19 @@ import org.odftoolkit.odfdom.dom.type.OdfDuration;
  */
 public abstract class OdfChangeTrackTableCellElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "change-track-table-cell" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9135702330233578574L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "change-track-table-cell" );
 
     public OdfChangeTrackTableCellElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

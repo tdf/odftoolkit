@@ -29,7 +29,6 @@
 package org.odftoolkit.odfdom.doc.element.office;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Vector;
 
 import org.odftoolkit.odfdom.doc.OdfFileDom;
@@ -51,7 +50,11 @@ import org.w3c.dom.Node;
  */
 public class OdfStyles extends OdfStylesElement
 {
-    HashMap< OdfStyleFamily, OdfDefaultStyle > mDefaultStyles;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 700763983193326060L;
+	HashMap< OdfStyleFamily, OdfDefaultStyle > mDefaultStyles;
     private HashMap< OdfStyleFamily, HashMap< String, OdfStyle > > mStyles;
     private HashMap< String, OdfListStyle > mListStyles;
     private HashMap< String, OdfMarker > mMarker;
@@ -267,7 +270,8 @@ public class OdfStyles extends OdfStylesElement
             return new Vector< OdfFillImage >();
     }
 
-    protected void onOdfNodeInserted( OdfElement node, Node refNode )
+    @Override
+	protected void onOdfNodeInserted( OdfElement node, Node refNode )
     {
         if( node instanceof OdfDefaultStyle )
         {
@@ -339,7 +343,8 @@ public class OdfStyles extends OdfStylesElement
         }
     }
     
-    protected void onOdfNodeRemoved( OdfElement node )
+    @Override
+	protected void onOdfNodeRemoved( OdfElement node )
     {
         if( node instanceof OdfDefaultStyle )
         {

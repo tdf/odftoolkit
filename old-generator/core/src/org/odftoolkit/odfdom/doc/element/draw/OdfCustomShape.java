@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfCustomShapeElement;
  */
 public class OdfCustomShape extends OdfCustomShapeElement
 {
-    public OdfCustomShape( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5854048706864230874L;
+
+	public OdfCustomShape( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

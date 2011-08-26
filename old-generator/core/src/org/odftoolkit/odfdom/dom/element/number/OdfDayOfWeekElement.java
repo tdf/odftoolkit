@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.number.OdfStyleType;
  */
 public abstract class OdfDayOfWeekElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "day-of-week" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5121332500503557120L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "day-of-week" );
 
     public OdfDayOfWeekElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

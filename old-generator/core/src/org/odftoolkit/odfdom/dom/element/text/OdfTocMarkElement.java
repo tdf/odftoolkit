@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
  */
 public abstract class OdfTocMarkElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "toc-mark" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 267558080262463303L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "toc-mark" );
 
     public OdfTocMarkElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfPageElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "page" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1310779923515422257L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "page" );
 
     public OdfPageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.DrawingPage, OdfName.get( OdfNamespace.DRAW, "style-name" ) );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

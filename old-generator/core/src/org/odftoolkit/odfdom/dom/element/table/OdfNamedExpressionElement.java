@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
  */
 public abstract class OdfNamedExpressionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "named-expression" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3993198834778439819L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "named-expression" );
 
     public OdfNamedExpressionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

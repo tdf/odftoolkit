@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfEnhancedGeometryElement;
  */
 public class OdfEnhancedGeometry extends OdfEnhancedGeometryElement
 {
-    public OdfEnhancedGeometry( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1319760440740885054L;
+
+	public OdfEnhancedGeometry( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

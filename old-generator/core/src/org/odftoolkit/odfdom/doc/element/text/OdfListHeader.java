@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfListHeaderElement;
  */
 public class OdfListHeader extends OdfListHeaderElement
 {
-    public OdfListHeader( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1082246637305557722L;
+
+	public OdfListHeader( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

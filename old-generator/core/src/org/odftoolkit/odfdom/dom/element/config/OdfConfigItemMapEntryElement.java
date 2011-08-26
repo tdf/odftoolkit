@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfConfigItemMapEntryElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CONFIG, "config-item-map-entry" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2507970186721431093L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CONFIG, "config-item-map-entry" );
 
     public OdfConfigItemMapEntryElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -37,7 +37,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfDefaultStyleElement;
  */
 public class OdfDefaultStyle extends OdfDefaultStyleElement
 {
-    public OdfDefaultStyle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8824457719103504447L;
+
+	public OdfDefaultStyle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

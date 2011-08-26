@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfTableCountElement;
  */
 public class OdfTableCount extends OdfTableCountElement
 {
-    public OdfTableCount( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7445292585034671676L;
+
+	public OdfTableCount( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

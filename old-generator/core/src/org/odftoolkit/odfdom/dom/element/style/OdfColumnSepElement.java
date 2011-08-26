@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.style.OdfVerticalAlignType;
  */
 public abstract class OdfColumnSepElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "column-sep" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6804706283669001629L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "column-sep" );
 
     public OdfColumnSepElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

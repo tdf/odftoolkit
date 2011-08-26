@@ -59,7 +59,8 @@ public class ImageTest {
             final OdfPackage pkg = doc.getPackage();
             NodeAction addImages = new NodeAction() {
 
-                protected void apply(Node node, Object arg, int depth) {
+                @Override
+				protected void apply(Node node, Object arg, int depth) {
                     if (node instanceof OdfImage) {
                         OdfImage img = (OdfImage) node;
                         try {
@@ -91,9 +92,10 @@ public class ImageTest {
         try {
             OdfDocument doc = OdfDocument.loadDocument("test/resources/image.odt");
             final OdfPackage pkg = doc.getPackage();
-            NodeAction removeImages = new NodeAction() {
+            NodeAction<?> removeImages = new NodeAction<Object>() {
 
-                protected void apply(Node node, Object arg, int depth) {
+                @Override
+				protected void apply(Node node, Object arg, int depth) {
                     if (node instanceof OdfImage) {
                         OdfImage img = (OdfImage) node;
                         String ref = img.getAttributeNS(OdfNamespace.XLINK.getUri(), "href");

@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfAlphabeticalIndexMarkEndElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "alphabetical-index-mark-end" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2011151960377134064L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "alphabetical-index-mark-end" );
 
     public OdfAlphabeticalIndexMarkEndElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

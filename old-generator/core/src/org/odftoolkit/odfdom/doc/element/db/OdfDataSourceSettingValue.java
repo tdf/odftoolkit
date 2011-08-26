@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfDataSourceSettingValueElement;
  */
 public class OdfDataSourceSettingValue extends OdfDataSourceSettingValueElement
 {
-    public OdfDataSourceSettingValue( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8326613988727233265L;
+
+	public OdfDataSourceSettingValue( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -31,7 +31,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfEllipseElement;
  */
 public class OdfEllipse extends OdfEllipseElement
 {
-    public OdfEllipse( OdfFileDom ownerDoc)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1308477273647745285L;
+
+	public OdfEllipse( OdfFileDom ownerDoc)
     {
         super(ownerDoc);
     }

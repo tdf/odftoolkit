@@ -44,14 +44,19 @@ import org.odftoolkit.odfdom.dom.type.OdfDuration;
  */
 public abstract class OdfFormattedTextElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "formatted-text" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1110746523986292508L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "formatted-text" );
 
     public OdfFormattedTextElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

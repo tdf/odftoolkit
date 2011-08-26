@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfYearElement;
  */
 public class OdfYear extends OdfYearElement
 {
-    public OdfYear( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2154904800488988144L;
+
+	public OdfYear( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

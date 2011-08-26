@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfHyperlinkElement;
 
 public class OdfHyperlink extends OdfHyperlinkElement {
 
-    /** Creates a new instance of OdfParagraphElementImpl */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4759505570352874752L;
+
+	/** Creates a new instance of OdfParagraphElementImpl */
     public OdfHyperlink(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

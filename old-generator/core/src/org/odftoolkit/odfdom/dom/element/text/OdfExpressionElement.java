@@ -46,14 +46,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfExpressionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "expression" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7314907507889014131L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "expression" );
 
     public OdfExpressionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

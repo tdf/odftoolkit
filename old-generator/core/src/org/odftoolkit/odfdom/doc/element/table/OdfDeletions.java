@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfDeletionsElement;
  */
 public class OdfDeletions extends OdfDeletionsElement
 {
-    public OdfDeletions( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2721262461419266834L;
+
+	public OdfDeletions( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

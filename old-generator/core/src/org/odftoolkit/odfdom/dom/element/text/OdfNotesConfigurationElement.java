@@ -44,14 +44,19 @@ import org.odftoolkit.odfdom.dom.type.text.OdfFootnotesPositionType;
  */
 public abstract class OdfNotesConfigurationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "notes-configuration" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8120148674315734326L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "notes-configuration" );
 
     public OdfNotesConfigurationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

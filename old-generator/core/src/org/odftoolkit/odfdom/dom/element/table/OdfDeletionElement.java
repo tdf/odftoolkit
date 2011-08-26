@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfAcceptanceStateType;
  */
 public abstract class OdfDeletionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "deletion" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5446117641243790258L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "deletion" );
 
     public OdfDeletionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

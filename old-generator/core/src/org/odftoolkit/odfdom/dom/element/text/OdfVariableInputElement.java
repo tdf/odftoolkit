@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfVariableInputElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-input" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6367309005775256626L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-input" );
 
     public OdfVariableInputElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

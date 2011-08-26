@@ -42,14 +42,19 @@ import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
  */
 public abstract class OdfTextareaElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "textarea" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8909747387531889015L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "textarea" );
 
     public OdfTextareaElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

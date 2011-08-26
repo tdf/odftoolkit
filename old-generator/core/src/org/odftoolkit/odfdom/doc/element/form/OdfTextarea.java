@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfTextareaElement;
  */
 public class OdfTextarea extends OdfTextareaElement
 {
-    public OdfTextarea( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7025458419446140835L;
+
+	public OdfTextarea( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

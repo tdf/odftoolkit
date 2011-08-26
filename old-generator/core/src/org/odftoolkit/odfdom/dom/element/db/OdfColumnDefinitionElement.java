@@ -47,14 +47,19 @@ import org.odftoolkit.odfdom.dom.type.OdfDuration;
  */
 public abstract class OdfColumnDefinitionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "column-definition" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9102291038399493575L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "column-definition" );
 
     public OdfColumnDefinitionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -104,7 +109,8 @@ public abstract class OdfColumnDefinitionElement extends OdfElement
     /**
      * Get value of attribute "db:type-name".
      */
-    public String getTypeName()
+    @Override
+	public String getTypeName()
     {
         return getOdfAttribute( OdfName.get( OdfNamespace.DB, "type-name" ) );
     }

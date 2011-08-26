@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfDatabaseNextElement;
  */
 public class OdfDatabaseNext extends OdfDatabaseNextElement
 {
-    public OdfDatabaseNext( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6241739545409865677L;
+
+	public OdfDatabaseNext( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

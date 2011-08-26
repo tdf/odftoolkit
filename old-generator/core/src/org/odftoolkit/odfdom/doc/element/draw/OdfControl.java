@@ -31,7 +31,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfControlElement;
  */
 public class OdfControl extends OdfControlElement
 {
-    public OdfControl( OdfFileDom ownerDoc)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6347751138926642937L;
+
+	public OdfControl( OdfFileDom ownerDoc)
     {
         super(ownerDoc);
     }

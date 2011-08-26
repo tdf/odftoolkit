@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.draw.OdfStrokeStyleType;
  */
 public abstract class OdfStrokeDashElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "stroke-dash" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7727504785384053664L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "stroke-dash" );
 
     public OdfStrokeDashElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

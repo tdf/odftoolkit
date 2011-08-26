@@ -33,7 +33,11 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
 public class OdfFileDom extends DocumentImpl {
-    private String mPackagePath;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 766167617530147000L;
+	private String mPackagePath;
     private OdfDocument mOdfDocument;
     
     /**

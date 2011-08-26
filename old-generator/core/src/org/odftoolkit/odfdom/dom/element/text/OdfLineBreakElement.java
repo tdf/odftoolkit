@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfLineBreakElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "line-break" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6779432851572210976L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "line-break" );
 
     public OdfLineBreakElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

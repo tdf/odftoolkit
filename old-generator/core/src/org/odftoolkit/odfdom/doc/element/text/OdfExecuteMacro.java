@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfExecuteMacroElement;
  */
 public class OdfExecuteMacro extends OdfExecuteMacroElement
 {
-    public OdfExecuteMacro( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4541839315480594766L;
+
+	public OdfExecuteMacro( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

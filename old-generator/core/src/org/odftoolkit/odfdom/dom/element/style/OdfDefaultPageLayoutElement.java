@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfDefaultPageLayoutElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "default-page-layout" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1879942412339912346L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "default-page-layout" );
 
     public OdfDefaultPageLayoutElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

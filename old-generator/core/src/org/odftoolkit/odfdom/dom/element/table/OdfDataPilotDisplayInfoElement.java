@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfDisplayMemberModeType;
  */
 public abstract class OdfDataPilotDisplayInfoElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-display-info" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3045759173277118316L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-display-info" );
 
     public OdfDataPilotDisplayInfoElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

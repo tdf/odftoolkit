@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
 import org.odftoolkit.odfdom.doc.element.text.OdfListStyle;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.element.office.OdfAutomaticStylesElement;
-import org.odftoolkit.odfdom.dom.element.style.OdfStyleElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.w3c.dom.Node;
 
@@ -46,7 +45,11 @@ import org.w3c.dom.Node;
  */
 public class OdfAutomaticStyles extends OdfAutomaticStylesElement
 {
-    private HashMap< OdfStyleFamily, HashMap< String, OdfStyle > > mStyles;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2925910664631016175L;
+	private HashMap< OdfStyleFamily, HashMap< String, OdfStyle > > mStyles;
     private HashMap< String, OdfPageLayout > mPageLayouts;
     private HashMap< String, OdfListStyle > mListStyles;
     
@@ -166,7 +169,8 @@ public class OdfAutomaticStyles extends OdfAutomaticStylesElement
         return newStyle;
     }
 
-    protected void onOdfNodeInserted( OdfElement node, Node refNode )
+    @Override
+	protected void onOdfNodeInserted( OdfElement node, Node refNode )
     {
         if( node instanceof OdfStyle )
         {
@@ -201,7 +205,8 @@ public class OdfAutomaticStyles extends OdfAutomaticStylesElement
         }
     }
     
-    protected void onOdfNodeRemoved( OdfElement node )
+    @Override
+	protected void onOdfNodeRemoved( OdfElement node )
     {
         if( node instanceof OdfStyle )
         {

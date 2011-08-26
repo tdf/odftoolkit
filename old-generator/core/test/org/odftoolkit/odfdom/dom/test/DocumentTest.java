@@ -21,15 +21,11 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.dom.test;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeSet;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
@@ -37,20 +33,13 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.doc.element.office.OdfAutomaticStyles;
 import org.odftoolkit.odfdom.doc.element.office.OdfStyles;
 import org.odftoolkit.odfdom.doc.element.style.OdfPageLayout;
-import org.odftoolkit.odfdom.doc.element.style.OdfPageLayoutProperties;
 import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.element.style.OdfTextProperties;
 import org.odftoolkit.odfdom.doc.element.text.OdfListStyle;
-import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfPageLayoutPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.util.NodeAction;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentFragment;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class DocumentTest {
 
@@ -62,9 +51,7 @@ public class DocumentTest {
     @Test
     public void testParser() {
         try {
-            OdfDocument odfdoc = OdfDocument.loadDocument(TEST_FILE);
-            OdfElement e = (OdfElement) odfdoc.getContentDom().getDocumentElement();
-
+            OdfDocument.loadDocument(TEST_FILE);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
@@ -117,9 +104,9 @@ public class DocumentTest {
             
             style = styles.getStyle("List", OdfStyleFamily.Paragraph);
             Assert.assertNotNull(style);
-            Assert.assertEquals( style.getProperty(OdfTextProperties.FontNameComplex), "Tahoma1" );
-            Assert.assertTrue( style.hasProperty(OdfTextProperties.FontNameComplex));
-            Assert.assertFalse( style.hasProperty(OdfTextProperties.FontNameAsian));            
+            Assert.assertEquals( style.getProperty(OdfTextPropertiesElement.FontNameComplex), "Tahoma1" );
+            Assert.assertTrue( style.hasProperty(OdfTextPropertiesElement.FontNameComplex));
+            Assert.assertFalse( style.hasProperty(OdfTextPropertiesElement.FontNameAsian));            
 
             Assert.assertNull( styles.getStyle("foobar", OdfStyleFamily.Chart));
             
@@ -129,8 +116,8 @@ public class DocumentTest {
             
             OdfPageLayout pageLayout = autostyles.getPageLayout("pm1");
             Assert.assertNotNull(pageLayout);
-            Assert.assertEquals(pageLayout.getProperty(OdfPageLayoutProperties.PageWidth), "8.5in");
-            Assert.assertEquals(pageLayout.getProperty(OdfPageLayoutProperties.PageHeight), "11in");
+            Assert.assertEquals(pageLayout.getProperty(OdfPageLayoutPropertiesElement.PageWidth), "8.5in");
+            Assert.assertEquals(pageLayout.getProperty(OdfPageLayoutPropertiesElement.PageHeight), "11in");
 
             Assert.assertNull( autostyles.getStyle("foobar", OdfStyleFamily.Chart));
             
@@ -178,10 +165,10 @@ public class DocumentTest {
     public void testSaveDocument() {
         try {
             OdfDocument odfdoc = OdfDocument.loadDocument(TEST_FILE);
-            OdfElement e = (OdfElement) odfdoc.getContentDom().getDocumentElement();
-            NodeAction<String> replaceText = new NodeAction<String>() {
+            new NodeAction<String>() {
 
-                protected void apply(Node cur, String replace, int depth) {
+                @Override
+				protected void apply(Node cur, String replace, int depth) {
                     if (cur.getNodeType() == Node.TEXT_NODE) {
                         cur.setNodeValue(cur.getNodeValue().replaceAll("\\w", replace));
                     }

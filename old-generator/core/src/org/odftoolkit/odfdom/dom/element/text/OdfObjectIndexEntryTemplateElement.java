@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfObjectIndexEntryTemplateElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "object-index-entry-template" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2001556880079342791L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "object-index-entry-template" );
 
     public OdfObjectIndexEntryTemplateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Paragraph, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -63,7 +68,8 @@ public abstract class OdfObjectIndexEntryTemplateElement extends OdfStylableElem
     /**
      * Get value of attribute "text:style-name".
      */
-    public String getStyleName()
+    @Override
+	public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -72,7 +78,8 @@ public abstract class OdfObjectIndexEntryTemplateElement extends OdfStylableElem
     /**
      * Set value of attribute "text:style-name".
      */
-    public void setStyleName( String _aStyleName )
+    @Override
+	public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );

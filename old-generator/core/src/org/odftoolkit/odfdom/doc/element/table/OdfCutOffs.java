@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfCutOffsElement;
  */
 public class OdfCutOffs extends OdfCutOffsElement
 {
-    public OdfCutOffs( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4733933435754082031L;
+
+	public OdfCutOffs( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

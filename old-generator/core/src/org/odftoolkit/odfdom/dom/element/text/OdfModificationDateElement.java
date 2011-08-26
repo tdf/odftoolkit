@@ -42,14 +42,19 @@ import org.odftoolkit.odfdom.dom.type.OdfDate;
  */
 public abstract class OdfModificationDateElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "modification-date" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2732470694812555774L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "modification-date" );
 
     public OdfModificationDateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

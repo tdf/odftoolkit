@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfPrintTimeElement;
  */
 public class OdfPrintTime extends OdfPrintTimeElement
 {
-    public OdfPrintTime( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5726035216614340715L;
+
+	public OdfPrintTime( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

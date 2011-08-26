@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.presentation.OdfSpeedType;
  */
 public abstract class OdfPlayElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "play" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6183940067014127362L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "play" );
 
     public OdfPlayElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

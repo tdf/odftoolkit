@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfEvenRowsElement;
  */
 public class OdfEvenRows extends OdfEvenRowsElement
 {
-    public OdfEvenRows( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7754145520334781018L;
+
+	public OdfEvenRows( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

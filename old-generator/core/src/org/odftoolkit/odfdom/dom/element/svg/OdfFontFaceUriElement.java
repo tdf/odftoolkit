@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfFontFaceUriElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "font-face-uri" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8934131301259961869L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "font-face-uri" );
 
     public OdfFontFaceUriElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -35,6 +35,7 @@ import org.odftoolkit.odfdom.doc.element.table.OdfTableCell;
 import org.odftoolkit.odfdom.doc.element.table.OdfTableRow;
 import org.odftoolkit.odfdom.doc.element.text.OdfParagraph;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.element.table.OdfTableElement;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -67,7 +68,7 @@ public class TableTest {
                 Assert.assertNull(ds);
 
                 if (te.hasAutomaticStyle()) {
-                    OdfStyle ls = (OdfStyle) te.getAutomaticStyle();
+                    te.getAutomaticStyle();
                     tscount++;
                 }
             }
@@ -107,7 +108,7 @@ public class TableTest {
 
         // find the first table in the sheet
         NodeList lst =
-                odt.getElementsByTagNameNS(OdfTable.ELEMENT_NAME.getUri(), OdfTable.ELEMENT_NAME.getLocalName());
+                odt.getElementsByTagNameNS(OdfTableElement.ELEMENT_NAME.getUri(), OdfTableElement.ELEMENT_NAME.getLocalName());
         OdfTable mytable = (OdfTable) lst.item(0);
         mytable.setName("Cars Sheet");
 

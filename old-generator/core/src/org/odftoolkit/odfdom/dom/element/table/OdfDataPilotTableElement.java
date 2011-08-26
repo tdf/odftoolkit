@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
  */
 public abstract class OdfDataPilotTableElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-table" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8185219132088830266L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-table" );
 
     public OdfDataPilotTableElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

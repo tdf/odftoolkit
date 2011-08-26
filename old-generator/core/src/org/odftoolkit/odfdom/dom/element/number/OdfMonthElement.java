@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.number.OdfStyleType;
  */
 public abstract class OdfMonthElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "month" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4100147692171547891L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "month" );
 
     public OdfMonthElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

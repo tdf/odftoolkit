@@ -31,14 +31,20 @@ import org.w3c.dom.DOMException;
  */
 public class OdfDefault extends OdfElement {
 
-    public OdfDefault(OdfFileDom ownerDocument,
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6693153432396354134L;
+
+	public OdfDefault(OdfFileDom ownerDocument,
             OdfName name) throws DOMException {
         super(ownerDocument, name.getUri(), name.getQName());
         ELEMENT_NAME = name;
     }
     public final OdfName ELEMENT_NAME;
 
-    public OdfName getOdfName() {
+    @Override
+	public OdfName getOdfName() {
         return ELEMENT_NAME;
     }
 }

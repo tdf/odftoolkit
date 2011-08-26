@@ -26,8 +26,8 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.doc.element.OdfElementFactory;
-import org.odftoolkit.odfdom.doc.element.text.OdfSpan;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.element.text.OdfSpanElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -41,7 +41,7 @@ public class FactoryManipulationTest {
     public void testFactoryManipulation() {
         try {
             // MyOwnPrivateSpanClass_1 is derived from OdfSpan (doc layer)
-            OdfElementFactory.mapOdfNameToClass(OdfSpan.ELEMENT_NAME, MyOwnPrivateSpanClass_1.class);
+            OdfElementFactory.mapOdfNameToClass(OdfSpanElement.ELEMENT_NAME, MyOwnPrivateSpanClass_1.class);
             OdfPackage pkg = OdfPackage.loadPackage("test/resources/factorymanipulation.odt");        
             OdfFileDom contentDom = OdfDocument.loadDocument(pkg).getContentDom();
             NodeList lst = contentDom.getElementsByTagNameNS(OdfNamespace.TEXT.getUri(), "span");
@@ -50,7 +50,7 @@ public class FactoryManipulationTest {
             Assert.assertTrue(node instanceof MyOwnPrivateSpanClass_1);
             
             // MyOwnPrivateSpanClass_2 is derived from OdfSpanElement (dom layer)
-            OdfElementFactory.mapOdfNameToClass(OdfSpan.ELEMENT_NAME, MyOwnPrivateSpanClass_2.class);
+            OdfElementFactory.mapOdfNameToClass(OdfSpanElement.ELEMENT_NAME, MyOwnPrivateSpanClass_2.class);
             contentDom = OdfDocument.loadDocument(pkg).getContentDom();
             lst = contentDom.getElementsByTagNameNS(OdfNamespace.TEXT.getUri(), "span");
             Assert.assertTrue(lst.getLength() == 1);
@@ -58,7 +58,7 @@ public class FactoryManipulationTest {
             Assert.assertTrue(node instanceof MyOwnPrivateSpanClass_2);
 
             // MyOwnPrivateSpanClass_3 is derived from OdfElement to replace OdfSpanElement (dom layer)
-            OdfElementFactory.mapOdfNameToClass(OdfSpan.ELEMENT_NAME, MyOwnPrivateSpanClass_3.class);
+            OdfElementFactory.mapOdfNameToClass(OdfSpanElement.ELEMENT_NAME, MyOwnPrivateSpanClass_3.class);
             contentDom = OdfDocument.loadDocument(pkg).getContentDom();
             lst = contentDom.getElementsByTagNameNS(OdfNamespace.TEXT.getUri(), "span");
             Assert.assertTrue(lst.getLength() == 1);

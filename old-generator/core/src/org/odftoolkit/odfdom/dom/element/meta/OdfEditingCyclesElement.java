@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfEditingCyclesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "editing-cycles" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7377788762979333779L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "editing-cycles" );
 
     public OdfEditingCyclesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

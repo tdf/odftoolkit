@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
  */
 public abstract class OdfIterationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "iteration" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -314414872468453798L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "iteration" );
 
     public OdfIterationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfTocMarkElement;
  */
 public class OdfTocMark extends OdfTocMarkElement
 {
-    public OdfTocMark( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2315144620967451829L;
+
+	public OdfTocMark( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

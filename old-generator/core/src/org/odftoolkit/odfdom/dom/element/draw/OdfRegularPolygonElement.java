@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.element.draw;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfPercent;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
@@ -43,14 +42,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfRegularPolygonElement extends OdfShapeElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "regular-polygon" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8843548373445089360L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "regular-polygon" );
 
     public OdfRegularPolygonElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.anim.OdfParamElement;
  */
 public class OdfParam extends OdfParamElement
 {
-    public OdfParam( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 804073757720580147L;
+
+	public OdfParam( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

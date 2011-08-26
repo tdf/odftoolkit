@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfTableRowPropertiesElement;
  */
 public class OdfTableRowProperties extends OdfTableRowPropertiesElement
 {
-    public OdfTableRowProperties( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5230386737312652704L;
+
+	public OdfTableRowProperties( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

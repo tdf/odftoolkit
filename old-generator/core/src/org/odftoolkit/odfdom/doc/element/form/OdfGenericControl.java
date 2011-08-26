@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfGenericControlElement;
  */
 public class OdfGenericControl extends OdfGenericControlElement
 {
-    public OdfGenericControl( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6874044910181209629L;
+
+	public OdfGenericControl( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

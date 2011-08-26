@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfCutOffsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "cut-offs" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8371690871976981414L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "cut-offs" );
 
     public OdfCutOffsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

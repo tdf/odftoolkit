@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfChangeEndElement;
  */
 public class OdfChangeEnd extends OdfChangeEndElement
 {
-    public OdfChangeEnd( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3547088065656263465L;
+
+	public OdfChangeEnd( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfOrderType;
  */
 public abstract class OdfSortByElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "sort-by" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 108840462194711615L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "sort-by" );
 
     public OdfSortByElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

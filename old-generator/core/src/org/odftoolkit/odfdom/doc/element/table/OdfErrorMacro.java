@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfErrorMacroElement;
  */
 public class OdfErrorMacro extends OdfErrorMacroElement
 {
-    public OdfErrorMacro( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5434647508676429758L;
+
+	public OdfErrorMacro( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

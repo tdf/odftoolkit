@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.element.draw;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
@@ -40,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfCustomShapeElement extends OdfShapeElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "custom-shape" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7060385176153020633L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "custom-shape" );
 
     public OdfCustomShapeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

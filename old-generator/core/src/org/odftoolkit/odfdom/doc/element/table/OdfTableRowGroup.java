@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfTableRowGroupElement;
 
 public class OdfTableRowGroup extends OdfTableRowGroupElement {
 
-    /** Creates a new instance of this class */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5925099713464743412L;
+
+	/** Creates a new instance of this class */
     public OdfTableRowGroup(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

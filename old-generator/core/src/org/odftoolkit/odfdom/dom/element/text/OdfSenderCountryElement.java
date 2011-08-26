@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfSenderCountryElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sender-country" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6149191058847475489L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sender-country" );
 
     public OdfSenderCountryElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

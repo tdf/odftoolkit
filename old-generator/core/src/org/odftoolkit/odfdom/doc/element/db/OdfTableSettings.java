@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfTableSettingsElement;
  */
 public class OdfTableSettings extends OdfTableSettingsElement
 {
-    public OdfTableSettings( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5575406049271707276L;
+
+	public OdfTableSettings( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

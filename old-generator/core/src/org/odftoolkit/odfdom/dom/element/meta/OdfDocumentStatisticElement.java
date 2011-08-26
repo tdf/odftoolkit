@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
  */
 public abstract class OdfDocumentStatisticElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "document-statistic" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5003529216552171914L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "document-statistic" );
 
     public OdfDocumentStatisticElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

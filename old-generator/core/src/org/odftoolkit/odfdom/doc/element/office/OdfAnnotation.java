@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.office.OdfAnnotationElement;
  */
 public class OdfAnnotation extends OdfAnnotationElement
 {
-    public OdfAnnotation( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1705138186778379013L;
+
+	public OdfAnnotation( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfFootnoteSepElement;
  */
 public class OdfFootnoteSep extends OdfFootnoteSepElement
 {
-    public OdfFootnoteSep( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4457246974756085041L;
+
+	public OdfFootnoteSep( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

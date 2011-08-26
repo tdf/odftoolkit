@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfSortByElement;
  */
 public class OdfSortBy extends OdfSortByElement
 {
-    public OdfSortBy( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4437913729256085208L;
+
+	public OdfSortBy( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

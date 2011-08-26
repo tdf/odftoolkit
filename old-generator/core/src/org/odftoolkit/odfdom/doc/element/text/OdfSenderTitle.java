@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSenderTitleElement;
  */
 public class OdfSenderTitle extends OdfSenderTitleElement
 {
-    public OdfSenderTitle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3421537177192815710L;
+
+	public OdfSenderTitle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

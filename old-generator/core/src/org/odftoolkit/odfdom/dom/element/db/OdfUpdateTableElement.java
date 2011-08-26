@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfUpdateTableElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "update-table" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8342293068786588598L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "update-table" );
 
     public OdfUpdateTableElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

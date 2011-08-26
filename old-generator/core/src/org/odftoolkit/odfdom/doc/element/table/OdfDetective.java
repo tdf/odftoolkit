@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfDetectiveElement;
  */
 public class OdfDetective extends OdfDetectiveElement
 {
-    public OdfDetective( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5939427453645758296L;
+
+	public OdfDetective( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

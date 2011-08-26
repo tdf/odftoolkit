@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.anim.OdfAudioElement;
  */
 public class OdfAudio extends OdfAudioElement
 {
-    public OdfAudio( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6658955577976285320L;
+
+	public OdfAudio( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

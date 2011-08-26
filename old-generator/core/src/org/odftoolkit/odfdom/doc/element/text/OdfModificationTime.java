@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfModificationTimeElement;
  */
 public class OdfModificationTime extends OdfModificationTimeElement
 {
-    public OdfModificationTime( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6985923366481021759L;
+
+	public OdfModificationTime( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfMovementCutOffElement;
  */
 public class OdfMovementCutOff extends OdfMovementCutOffElement
 {
-    public OdfMovementCutOff( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2375337759598346674L;
+
+	public OdfMovementCutOff( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

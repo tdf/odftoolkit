@@ -44,14 +44,19 @@ import org.odftoolkit.odfdom.dom.type.office.OdfTargetFrameNameType;
  */
 public abstract class OdfImageElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "image" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8816468034168414975L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "image" );
 
     public OdfImageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

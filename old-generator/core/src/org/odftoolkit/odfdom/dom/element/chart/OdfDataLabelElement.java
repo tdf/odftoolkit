@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfDataLabelElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "data-label" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5473297823258771264L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "data-label" );
 
     public OdfDataLabelElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

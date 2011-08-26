@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfStrokeDashElement;
  */
 public class OdfStrokeDash extends OdfStrokeDashElement
 {
-    public OdfStrokeDash( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -603566977580568037L;
+
+	public OdfStrokeDash( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

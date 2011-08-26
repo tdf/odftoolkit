@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfFileBasedDatabaseElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "file-based-database" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2001042770197074697L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "file-based-database" );
 
     public OdfFileBasedDatabaseElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

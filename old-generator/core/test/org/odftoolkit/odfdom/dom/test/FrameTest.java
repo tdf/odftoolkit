@@ -25,8 +25,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.element.draw.OdfFrame;
-import org.odftoolkit.odfdom.doc.element.style.OdfGraphicProperties;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.element.style.OdfGraphicPropertiesElement;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -40,12 +40,12 @@ public class FrameTest {
         try {            
             OdfDocument odfdoc = OdfDocument.loadDocument("test/resources/frame.odt");
             NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespace.DRAW.getUri(), "frame");
-            Assert.assertEquals( lst.getLength(), (int)1 );
+            Assert.assertEquals( lst.getLength(), 1 );
             Node node = lst.item(0);
             Assert.assertTrue(node instanceof OdfFrame);
             OdfFrame fe = (OdfFrame) lst.item(0);
 
-            Assert.assertEquals( fe.getProperty(OdfGraphicProperties.VerticalPos), "top");            
+            Assert.assertEquals( fe.getProperty(OdfGraphicPropertiesElement.VerticalPos), "top");            
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());

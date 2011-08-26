@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.config.OdfConfigItemMapIndexedElement;
  */
 public class OdfConfigItemMapIndexed extends OdfConfigItemMapIndexedElement
 {
-    public OdfConfigItemMapIndexed( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6321095207389454667L;
+
+	public OdfConfigItemMapIndexed( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

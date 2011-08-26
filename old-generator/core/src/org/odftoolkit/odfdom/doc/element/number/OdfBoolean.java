@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfBooleanElement;
  */
 public class OdfBoolean extends OdfBooleanElement
 {
-    public OdfBoolean( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4782704285532919672L;
+
+	public OdfBoolean( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

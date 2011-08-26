@@ -48,14 +48,19 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfEndsyncType;
  */
 public abstract class OdfParElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "par" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4322283620957951831L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "par" );
 
     public OdfParElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

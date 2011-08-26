@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.dr3d.OdfExtrudeElement;
  */
 public class OdfExtrude extends OdfExtrudeElement
 {
-    public OdfExtrude( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6547269326859556193L;
+
+	public OdfExtrude( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

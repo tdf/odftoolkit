@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.presentation.OdfHideShapeElement;
  */
 public class OdfHideShape extends OdfHideShapeElement
 {
-    public OdfHideShape( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7558017041905499478L;
+
+	public OdfHideShape( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

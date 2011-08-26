@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPresentationClasses;
  */
 public abstract class OdfPlaceholderElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "placeholder" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7433022023334108759L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "placeholder" );
 
     public OdfPlaceholderElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

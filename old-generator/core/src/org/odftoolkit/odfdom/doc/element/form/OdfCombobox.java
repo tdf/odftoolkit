@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfComboboxElement;
  */
 public class OdfCombobox extends OdfComboboxElement
 {
-    public OdfCombobox( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2291469711243811506L;
+
+	public OdfCombobox( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSenderEmailElement;
  */
 public class OdfSenderEmail extends OdfSenderEmailElement
 {
-    public OdfSenderEmail( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -778593504116403671L;
+
+	public OdfSenderEmail( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
  */
 public abstract class OdfTableOfContentSourceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-of-content-source" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2777520307658642336L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-of-content-source" );
 
     public OdfTableOfContentSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

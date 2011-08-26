@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfImageFrameElement;
  */
 public class OdfImageFrame extends OdfImageFrameElement
 {
-    public OdfImageFrame( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5685269945187337108L;
+
+	public OdfImageFrame( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

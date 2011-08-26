@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.anim.OdfAnimatemotionElement;
  */
 public class OdfAnimatemotion extends OdfAnimatemotionElement
 {
-    public OdfAnimatemotion( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7293841236648154435L;
+
+	public OdfAnimatemotion( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

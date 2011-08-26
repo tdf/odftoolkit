@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
  */
 public abstract class OdfCoveredTableCellElement extends OdfTableCellElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "covered-table-cell" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3694684514413802938L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "covered-table-cell" );
 
     public OdfCoveredTableCellElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.get( OdfNamespace.TABLE, "style-name" ) );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

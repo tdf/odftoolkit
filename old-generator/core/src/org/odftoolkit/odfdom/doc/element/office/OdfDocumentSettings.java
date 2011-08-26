@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.office.OdfDocumentSettingsElement;
  */
 public class OdfDocumentSettings extends OdfDocumentSettingsElement
 {
-    public OdfDocumentSettings( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1020708030511646199L;
+
+	public OdfDocumentSettings( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

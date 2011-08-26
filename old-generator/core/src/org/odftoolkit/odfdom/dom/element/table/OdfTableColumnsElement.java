@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfTableColumnsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-columns" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2166532690641122866L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-columns" );
 
     public OdfTableColumnsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

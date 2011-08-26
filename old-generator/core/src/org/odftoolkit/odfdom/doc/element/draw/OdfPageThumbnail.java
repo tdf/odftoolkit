@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfPageThumbnailElement;
  */
 public class OdfPageThumbnail extends OdfPageThumbnailElement
 {
-    public OdfPageThumbnail( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -373162610621344099L;
+
+	public OdfPageThumbnail( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

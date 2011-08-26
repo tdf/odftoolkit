@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfOutlineStyleElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "outline-style" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1284419782918524756L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "outline-style" );
 
     public OdfOutlineStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

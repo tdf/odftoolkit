@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfDatabaseDisplayElement;
  */
 public class OdfDatabaseDisplay extends OdfDatabaseDisplayElement
 {
-    public OdfDatabaseDisplay( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 735290152100962426L;
+
+	public OdfDatabaseDisplay( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

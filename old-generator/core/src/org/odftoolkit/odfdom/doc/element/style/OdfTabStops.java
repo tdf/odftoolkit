@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfTabStopsElement;
  */
 public class OdfTabStops extends OdfTabStopsElement
 {
-    public OdfTabStops( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4792448094506931801L;
+
+	public OdfTabStops( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

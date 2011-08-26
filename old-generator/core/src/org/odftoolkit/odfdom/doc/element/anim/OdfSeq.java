@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.anim.OdfSeqElement;
  */
 public class OdfSeq extends OdfSeqElement
 {
-    public OdfSeq( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5578657447691037827L;
+
+	public OdfSeq( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

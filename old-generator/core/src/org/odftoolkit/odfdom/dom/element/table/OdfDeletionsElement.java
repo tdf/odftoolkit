@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfDeletionsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "deletions" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1073255299243193682L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "deletions" );
 
     public OdfDeletionsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

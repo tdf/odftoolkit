@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfFormatChangeElement;
  */
 public class OdfFormatChange extends OdfFormatChangeElement
 {
-    public OdfFormatChange( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -82150004353236428L;
+
+	public OdfFormatChange( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

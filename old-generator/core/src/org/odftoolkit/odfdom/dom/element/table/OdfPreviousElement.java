@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfPreviousElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "previous" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8858597218893669973L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "previous" );
 
     public OdfPreviousElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

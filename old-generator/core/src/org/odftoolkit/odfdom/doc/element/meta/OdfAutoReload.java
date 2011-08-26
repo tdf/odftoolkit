@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.meta.OdfAutoReloadElement;
  */
 public class OdfAutoReload extends OdfAutoReloadElement
 {
-    public OdfAutoReload( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3546928926604531240L;
+
+	public OdfAutoReload( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfPresentationPageLayoutElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "presentation-page-layout" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1184739787175699700L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "presentation-page-layout" );
 
     public OdfPresentationPageLayoutElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

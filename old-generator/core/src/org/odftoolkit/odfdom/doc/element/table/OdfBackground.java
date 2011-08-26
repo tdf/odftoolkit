@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfBackgroundElement;
  */
 public class OdfBackground extends OdfBackgroundElement
 {
-    public OdfBackground( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -170481804355970101L;
+
+	public OdfBackground( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

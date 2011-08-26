@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfNullDateElement;
  */
 public class OdfNullDate extends OdfNullDateElement
 {
-    public OdfNullDate( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2697900040297571634L;
+
+	public OdfNullDate( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfAlphabeticalIndexMarkElement;
  */
 public class OdfAlphabeticalIndexMark extends OdfAlphabeticalIndexMarkElement
 {
-    public OdfAlphabeticalIndexMark( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 211347436050941608L;
+
+	public OdfAlphabeticalIndexMark( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

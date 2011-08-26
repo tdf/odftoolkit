@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfRangeUsableAsType;
  */
 public abstract class OdfNamedRangeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "named-range" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7894549420665114969L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "named-range" );
 
     public OdfNamedRangeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

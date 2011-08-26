@@ -25,12 +25,13 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.doc.element.style.OdfTableColumnProperties;
-import org.odftoolkit.odfdom.doc.element.style.OdfTableProperties;
 import org.odftoolkit.odfdom.doc.element.table.OdfTable;
 import org.odftoolkit.odfdom.doc.element.table.OdfTableCell;
 import org.odftoolkit.odfdom.doc.element.table.OdfTableRow;
 import org.odftoolkit.odfdom.doc.element.text.OdfParagraph;
+import org.odftoolkit.odfdom.dom.element.style.OdfTableColumnPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfTablePropertiesElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 import org.w3c.dom.NodeList;
 
 public class CreateTableTest {
@@ -45,8 +46,8 @@ public class CreateTableTest {
             
             // find the last paragraph
             NodeList lst = doc.getElementsByTagNameNS(
-                    OdfParagraph.ELEMENT_NAME.getUri(),
-                    OdfParagraph.ELEMENT_NAME.getLocalName());
+                    OdfParagraphElement.ELEMENT_NAME.getUri(),
+                    OdfParagraphElement.ELEMENT_NAME.getLocalName());
             Assert.assertTrue(lst.getLength() > 0);
             OdfParagraph p0 = (OdfParagraph) lst.item(lst.getLength() - 1);
 
@@ -74,14 +75,14 @@ public class CreateTableTest {
 
             p0.getParentNode().insertBefore(table, p0);
 
-            table.setProperty(OdfTableProperties.Width, "12cm");
-            table.setProperty(OdfTableProperties.Align, "left");
+            table.setProperty(OdfTablePropertiesElement.Width, "12cm");
+            table.setProperty(OdfTablePropertiesElement.Align, "left");
 
-            td1.setProperty(OdfTableColumnProperties.ColumnWidth, "2cm");
+            td1.setProperty(OdfTableColumnPropertiesElement.ColumnWidth, "2cm");
 
-            td2.setProperty(OdfTableColumnProperties.ColumnWidth, "4cm");
+            td2.setProperty(OdfTableColumnPropertiesElement.ColumnWidth, "4cm");
 
-            td3.setProperty(OdfTableColumnProperties.ColumnWidth, "6cm");
+            td3.setProperty(OdfTableColumnPropertiesElement.ColumnWidth, "6cm");
 
             doc.getOdfDocument().save("build/test/tabletest.odt");
 

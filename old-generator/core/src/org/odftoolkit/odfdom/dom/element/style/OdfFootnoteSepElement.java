@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.style.OdfAdjustmentType;
  */
 public abstract class OdfFootnoteSepElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "footnote-sep" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2838085152293769817L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "footnote-sep" );
 
     public OdfFootnoteSepElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

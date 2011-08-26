@@ -37,7 +37,12 @@ import org.w3c.dom.Node;
  */
 public class OdfOutlineStyle extends OdfOutlineStyleElement
 {
-    public OdfOutlineStyle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -337172468409606629L;
+
+	public OdfOutlineStyle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }
@@ -64,7 +69,7 @@ public class OdfOutlineStyle extends OdfOutlineStyleElement
         OdfOutlineLevelStyle style = getLevel(level);
         if( style != null )
         {      
-            style = (OdfOutlineLevelStyle)((OdfFileDom)this.ownerDocument).createOdfElement(OdfOutlineLevelStyle.class);
+            style = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfOutlineLevelStyle.class);
             style.setLevel(level);
             this.appendChild(style);
         }

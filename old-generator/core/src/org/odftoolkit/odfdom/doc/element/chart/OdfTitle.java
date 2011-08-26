@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfTitleElement;
  */
 public class OdfTitle extends OdfTitleElement
 {
-    public OdfTitle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8935808608159096970L;
+
+	public OdfTitle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

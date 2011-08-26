@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfBookmarkStartElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bookmark-start" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4642985720068003833L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bookmark-start" );
 
     public OdfBookmarkStartElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

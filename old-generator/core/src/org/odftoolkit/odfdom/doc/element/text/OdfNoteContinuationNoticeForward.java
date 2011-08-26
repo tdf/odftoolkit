@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfNoteContinuationNoticeForwardEl
  */
 public class OdfNoteContinuationNoticeForward extends OdfNoteContinuationNoticeForwardElement
 {
-    public OdfNoteContinuationNoticeForward( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3340116974282455791L;
+
+	public OdfNoteContinuationNoticeForward( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

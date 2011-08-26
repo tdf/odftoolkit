@@ -27,9 +27,8 @@ import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.doc.element.office.OdfStyles;
 import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.element.style.OdfTextProperties;
 import org.odftoolkit.odfdom.doc.element.text.OdfListStyle;
-import org.odftoolkit.odfdom.dom.element.text.OdfListLevelStyleNumberElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 
 public class ElementTest {
@@ -44,7 +43,7 @@ public class ElementTest {
             OdfStyles styles = doc.getOrCreateDocumentStyles();
             
             OdfStyle p1 = styles.createStyle("P1", OdfStyleFamily.Paragraph );
-            p1.setProperty( OdfTextProperties.FontSize, "42pt" );
+            p1.setProperty( OdfTextPropertiesElement.FontSize, "42pt" );
             
             OdfStyle clone = (OdfStyle) p1.cloneNode(true);
             clone.setName("p1-clone");
@@ -52,7 +51,7 @@ public class ElementTest {
             
             OdfStyle p1clone = styles.getStyle("p1-clone", OdfStyleFamily.Paragraph );
             Assert.assertNotNull(p1clone);
-            Assert.assertEquals(p1clone.getProperty(OdfTextProperties.FontSize), p1.getProperty(OdfTextProperties.FontSize));            
+            Assert.assertEquals(p1clone.getProperty(OdfTextPropertiesElement.FontSize), p1.getProperty(OdfTextPropertiesElement.FontSize));            
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -66,16 +65,13 @@ public class ElementTest {
             OdfStyles styles = doc.getOrCreateDocumentStyles();
             
             OdfStyle p1 = styles.createStyle("P1", OdfStyleFamily.Paragraph );
-            p1.setProperty( OdfTextProperties.FontSize, "42pt" );
+            p1.setProperty( OdfTextPropertiesElement.FontSize, "42pt" );
             OdfStyle p2 = styles.createStyle("P2", OdfStyleFamily.Paragraph );
-            p2.setProperty( OdfTextProperties.FontSize, "42pt" );
+            p2.setProperty( OdfTextPropertiesElement.FontSize, "42pt" );
             OdfStyle p3 = styles.createStyle("P3", OdfStyleFamily.Paragraph );
-            p3.setProperty( OdfTextProperties.FontSize, "13pt" );
+            p3.setProperty( OdfTextPropertiesElement.FontSize, "13pt" );
 
             OdfListStyle l1 = styles.createListStyle("L1" );
-            OdfListLevelStyleNumberElement levelStyle = (OdfListLevelStyleNumberElement) l1.getOrCreateListLevel(1, OdfListLevelStyleNumberElement.class );
-
-
             Assert.assertTrue( p1.equals(p1) );
             Assert.assertTrue( p1.equals(p2) );
             Assert.assertTrue( p2.equals(p1) );

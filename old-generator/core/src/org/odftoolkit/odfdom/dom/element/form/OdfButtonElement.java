@@ -48,14 +48,19 @@ import org.odftoolkit.odfdom.dom.type.OdfDuration;
  */
 public abstract class OdfButtonElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "button" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2075236498522493424L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "button" );
 
     public OdfButtonElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

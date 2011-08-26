@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfAuthorNameElement;
  */
 public class OdfAuthorName extends OdfAuthorNameElement
 {
-    public OdfAuthorName( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3210027372419203243L;
+
+	public OdfAuthorName( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

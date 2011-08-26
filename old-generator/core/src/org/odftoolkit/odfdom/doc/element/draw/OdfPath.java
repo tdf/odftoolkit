@@ -31,7 +31,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfPathElement;
  */
 public class OdfPath extends OdfPathElement
 {
-    public OdfPath( OdfFileDom ownerDoc)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3992595960578508359L;
+
+	public OdfPath( OdfFileDom ownerDoc)
     {
         super(ownerDoc);
     }

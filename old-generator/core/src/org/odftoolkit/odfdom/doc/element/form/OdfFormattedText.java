@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfFormattedTextElement;
  */
 public class OdfFormattedText extends OdfFormattedTextElement
 {
-    public OdfFormattedText( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1177459078346281055L;
+
+	public OdfFormattedText( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

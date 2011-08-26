@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfPrintedByElement;
  */
 public class OdfPrintedBy extends OdfPrintedByElement
 {
-    public OdfPrintedBy( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5924513646500848559L;
+
+	public OdfPrintedBy( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

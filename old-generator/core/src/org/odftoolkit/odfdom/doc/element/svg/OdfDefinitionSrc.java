@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.svg.OdfDefinitionSrcElement;
  */
 public class OdfDefinitionSrc extends OdfDefinitionSrcElement
 {
-    public OdfDefinitionSrc( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7361001224080531656L;
+
+	public OdfDefinitionSrc( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfVariableInputElement;
  */
 public class OdfVariableInput extends OdfVariableInputElement
 {
-    public OdfVariableInput( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -449164946407801420L;
+
+	public OdfVariableInput( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

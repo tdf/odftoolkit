@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfReferenceMarkStartElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "reference-mark-start" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3362862478923238718L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "reference-mark-start" );
 
     public OdfReferenceMarkStartElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

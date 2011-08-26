@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfTableRepresentationsElement;
  */
 public class OdfTableRepresentations extends OdfTableRepresentationsElement
 {
-    public OdfTableRepresentations( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -890511506658688991L;
+
+	public OdfTableRepresentations( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

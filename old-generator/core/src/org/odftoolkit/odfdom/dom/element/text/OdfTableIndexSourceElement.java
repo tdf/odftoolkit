@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.text.OdfCaptionSequenceFormatType;
  */
 public abstract class OdfTableIndexSourceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-index-source" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 979022245355069156L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-index-source" );
 
     public OdfTableIndexSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

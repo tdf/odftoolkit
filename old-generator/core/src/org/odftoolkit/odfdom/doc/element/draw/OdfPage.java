@@ -31,7 +31,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfPageElement;
  */
 public class OdfPage extends OdfPageElement
 {
-    public OdfPage(OdfFileDom ownerDoc)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3258084007561297638L;
+
+	public OdfPage(OdfFileDom ownerDoc)
     {
         super(ownerDoc);
     }

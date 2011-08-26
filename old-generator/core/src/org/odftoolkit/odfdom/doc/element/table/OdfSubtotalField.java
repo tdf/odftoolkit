@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfSubtotalFieldElement;
  */
 public class OdfSubtotalField extends OdfSubtotalFieldElement
 {
-    public OdfSubtotalField( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7922769137193952105L;
+
+	public OdfSubtotalField( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.element.dr3d;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStyleablePresentationElement;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
@@ -44,14 +43,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleNames;
  */
 public abstract class OdfExtrudeElement extends OdfStyleablePresentationElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DR3D, "extrude" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6276898526279900182L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DR3D, "extrude" );
 
     public OdfExtrudeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

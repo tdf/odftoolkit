@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.meta.OdfInitialCreatorElement;
  */
 public class OdfInitialCreator extends OdfInitialCreatorElement
 {
-    public OdfInitialCreator( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1691366766749787727L;
+
+	public OdfInitialCreator( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

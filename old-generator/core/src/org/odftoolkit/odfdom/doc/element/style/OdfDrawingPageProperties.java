@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfDrawingPagePropertiesElement;
  */
 public class OdfDrawingPageProperties extends OdfDrawingPagePropertiesElement
 {
-    public OdfDrawingPageProperties( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9063468596871445287L;
+
+	public OdfDrawingPageProperties( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

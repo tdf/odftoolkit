@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfDateStringElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "date-string" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5769711962059208414L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "date-string" );
 
     public OdfDateStringElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

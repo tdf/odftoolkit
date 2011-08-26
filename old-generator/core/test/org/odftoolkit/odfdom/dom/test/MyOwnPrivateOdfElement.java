@@ -32,6 +32,10 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 public class MyOwnPrivateOdfElement extends OdfElement
 {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2777209641983266195L;
+	/**
      * 
      */
     public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "userdefined" );
@@ -41,7 +45,8 @@ public class MyOwnPrivateOdfElement extends OdfElement
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

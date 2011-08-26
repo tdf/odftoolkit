@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
  */
 public abstract class OdfDatabaseRowNumberElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "database-row-number" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2306213897802966710L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "database-row-number" );
 
     public OdfDatabaseRowNumberElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.presentation.OdfAnimationGroupElement;
  */
 public class OdfAnimationGroup extends OdfAnimationGroupElement
 {
-    public OdfAnimationGroup( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4758194795651156025L;
+
+	public OdfAnimationGroup( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfBookmarkEndElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bookmark-end" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6556545930888298612L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bookmark-end" );
 
     public OdfBookmarkEndElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

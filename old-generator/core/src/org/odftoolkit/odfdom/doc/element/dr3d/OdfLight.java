@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.dr3d.OdfLightElement;
  */
 public class OdfLight extends OdfLightElement
 {
-    public OdfLight( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4565162400468134324L;
+
+	public OdfLight( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

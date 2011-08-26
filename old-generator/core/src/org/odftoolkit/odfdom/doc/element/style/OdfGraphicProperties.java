@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfGraphicPropertiesElement;
  */
 public class OdfGraphicProperties extends OdfGraphicPropertiesElement
 {
-    public OdfGraphicProperties( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6496815046066485582L;
+
+	public OdfGraphicProperties( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

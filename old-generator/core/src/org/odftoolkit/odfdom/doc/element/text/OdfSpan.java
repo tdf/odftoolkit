@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSpanElement;
 
 public class OdfSpan extends OdfSpanElement {
 
-    /** Creates a new instance of this class */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1372084754145664634L;
+
+	/** Creates a new instance of this class */
     public OdfSpan(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

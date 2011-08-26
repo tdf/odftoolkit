@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.dc.OdfLanguageElement;
  */
 public class OdfLanguage extends OdfLanguageElement
 {
-    public OdfLanguage( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5923368902727932366L;
+
+	public OdfLanguage( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

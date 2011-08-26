@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfCellAddressElement;
  */
 public class OdfCellAddress extends OdfCellAddressElement
 {
-    public OdfCellAddress( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 313895278866635064L;
+
+	public OdfCellAddress( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

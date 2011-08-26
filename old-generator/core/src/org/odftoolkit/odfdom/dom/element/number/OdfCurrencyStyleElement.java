@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.number.OdfTransliterationStyleType;
  */
 public abstract class OdfCurrencyStyleElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "currency-style" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8322153142504216218L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "currency-style" );
 
     public OdfCurrencyStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

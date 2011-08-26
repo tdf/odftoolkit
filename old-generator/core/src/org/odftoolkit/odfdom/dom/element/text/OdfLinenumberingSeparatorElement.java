@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
  */
 public abstract class OdfLinenumberingSeparatorElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "linenumbering-separator" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -489245782647220734L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "linenumbering-separator" );
 
     public OdfLinenumberingSeparatorElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

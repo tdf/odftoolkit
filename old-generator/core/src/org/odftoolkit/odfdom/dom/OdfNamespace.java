@@ -37,7 +37,7 @@ import javax.xml.namespace.NamespaceContext;
 /**
  * class keeping some constants for OpenDocument namespaces
  */
-public class OdfNamespace implements Comparable, NamespaceContext {
+public class OdfNamespace implements Comparable<OdfNamespace>, NamespaceContext {
 
     private static Map<String, String> namesspacesByPrefix;
     private static Map<String, String> namesspacesByUri;
@@ -113,13 +113,13 @@ public class OdfNamespace implements Comparable, NamespaceContext {
             return OdfName.get(this, name);
         }
     }
-    private static SortedSet m_namespaces = new TreeSet();
+    private static SortedSet<OdfNamespace> m_namespaces = new TreeSet<OdfNamespace>();
 
     public static OdfNamespace get(String uri) {
         OdfNamespace newns = new OdfNamespace(uri);
-        SortedSet tail = m_namespaces.tailSet(newns);
+        SortedSet<OdfNamespace> tail = m_namespaces.tailSet(newns);
         if (tail.size() > 0) {
-            OdfNamespace result = (OdfNamespace) tail.first();
+            OdfNamespace result = tail.first();
             if (result.equals(uri)) {
                 return result;
             }
@@ -131,7 +131,7 @@ public class OdfNamespace implements Comparable, NamespaceContext {
 
     public static OdfNamespace get(String prefix, String uri) {
         OdfNamespace newns = new OdfNamespace(prefix, uri);
-        SortedSet tail = m_namespaces.tailSet(newns);
+        SortedSet<OdfNamespace> tail = m_namespaces.tailSet(newns);
         for (Object obj : tail) {
             OdfNamespace result = (OdfNamespace) obj;
             if (tail.first().equals(uri)) {
@@ -206,7 +206,7 @@ public class OdfNamespace implements Comparable, NamespaceContext {
         return splitQName(qname)[1];
     }
 
-    public int compareTo(Object o) {
+    public int compareTo(OdfNamespace o) {
         return toString().compareTo(o.toString());
     }
     
@@ -250,7 +250,7 @@ public class OdfNamespace implements Comparable, NamespaceContext {
         return namesspacesByUri.get(namespaceUri);
     }
 
-    public Iterator getPrefixes(String namespaceuri) {
+    public Iterator<String> getPrefixes(String namespaceuri) {
         return namesspacesByPrefix.keySet().iterator();
     }
 }

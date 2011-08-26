@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfGridElement;
  */
 public class OdfGrid extends OdfGridElement
 {
-    public OdfGrid( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5295311784239401554L;
+
+	public OdfGrid( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

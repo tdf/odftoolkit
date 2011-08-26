@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.dr3d.OdfRotateElement;
  */
 public class OdfRotate extends OdfRotateElement
 {
-    public OdfRotate( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7445174377846536232L;
+
+	public OdfRotate( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

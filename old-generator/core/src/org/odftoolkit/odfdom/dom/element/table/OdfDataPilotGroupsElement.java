@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfGroupedByType;
  */
 public abstract class OdfDataPilotGroupsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-groups" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8884234377545008882L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-groups" );
 
     public OdfDataPilotGroupsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

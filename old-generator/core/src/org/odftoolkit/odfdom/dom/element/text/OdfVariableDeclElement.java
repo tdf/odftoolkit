@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.office.OdfValueType;
  */
 public abstract class OdfVariableDeclElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-decl" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7090397525837319338L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-decl" );
 
     public OdfVariableDeclElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.text.OdfBibliographyType;
  */
 public abstract class OdfBibliographyMarkElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bibliography-mark" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6808591390708174691L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bibliography-mark" );
 
     public OdfBibliographyMarkElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

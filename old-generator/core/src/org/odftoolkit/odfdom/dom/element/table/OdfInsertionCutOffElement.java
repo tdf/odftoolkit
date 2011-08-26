@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfInsertionCutOffElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "insertion-cut-off" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2072535451721428305L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "insertion-cut-off" );
 
     public OdfInsertionCutOffElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

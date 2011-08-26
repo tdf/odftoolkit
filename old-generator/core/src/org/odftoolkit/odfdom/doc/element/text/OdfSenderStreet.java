@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSenderStreetElement;
  */
 public class OdfSenderStreet extends OdfSenderStreetElement
 {
-    public OdfSenderStreet( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4701996179476971174L;
+
+	public OdfSenderStreet( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

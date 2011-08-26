@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfSourceCellRangeElement;
  */
 public class OdfSourceCellRange extends OdfSourceCellRangeElement
 {
-    public OdfSourceCellRange( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7569793096976094523L;
+
+	public OdfSourceCellRange( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

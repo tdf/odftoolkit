@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfAcceptanceStateType;
  */
 public abstract class OdfMovementElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "movement" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2576706773681937021L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "movement" );
 
     public OdfMovementElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

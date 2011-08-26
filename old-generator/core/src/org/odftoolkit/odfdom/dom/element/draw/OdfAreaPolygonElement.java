@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.xlink.OdfShowType;
  */
 public abstract class OdfAreaPolygonElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "area-polygon" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5672179142612633569L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "area-polygon" );
 
     public OdfAreaPolygonElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

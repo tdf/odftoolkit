@@ -40,7 +40,7 @@ public class OdfPercent
 
         int n = value.indexOf( "%" );
     	if( n != -1 )
-            return Double.valueOf( value.substring(0,n) ).doubleValue() / (double)100;
+            return Double.valueOf( value.substring(0,n) ).doubleValue() / 100;
         else
             throw new IllegalArgumentException( "Illegal percentage value");
     }

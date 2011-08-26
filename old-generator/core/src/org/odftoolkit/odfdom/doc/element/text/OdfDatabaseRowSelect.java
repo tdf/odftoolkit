@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfDatabaseRowSelectElement;
  */
 public class OdfDatabaseRowSelect extends OdfDatabaseRowSelectElement
 {
-    public OdfDatabaseRowSelect( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5740314553242616449L;
+
+	public OdfDatabaseRowSelect( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

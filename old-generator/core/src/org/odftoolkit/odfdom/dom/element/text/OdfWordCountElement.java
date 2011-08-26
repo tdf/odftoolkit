@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfWordCountElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "word-count" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9147458816464638743L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "word-count" );
 
     public OdfWordCountElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

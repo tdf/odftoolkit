@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfUserFieldInputElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-field-input" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8166658408201711631L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-field-input" );
 
     public OdfUserFieldInputElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfJavaClasspathElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "java-classpath" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4380288508054475475L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "java-classpath" );
 
     public OdfJavaClasspathElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

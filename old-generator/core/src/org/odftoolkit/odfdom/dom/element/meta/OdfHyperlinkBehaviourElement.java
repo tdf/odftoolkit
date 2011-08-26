@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.xlink.OdfShowType;
  */
 public abstract class OdfHyperlinkBehaviourElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "hyperlink-behaviour" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -906275740495935223L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "hyperlink-behaviour" );
 
     public OdfHyperlinkBehaviourElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

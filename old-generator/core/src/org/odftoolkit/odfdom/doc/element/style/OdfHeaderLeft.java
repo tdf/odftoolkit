@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfHeaderLeftElement;
  */
 public class OdfHeaderLeft extends OdfHeaderLeftElement
 {
-    public OdfHeaderLeft( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 474431973185083578L;
+
+	public OdfHeaderLeft( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

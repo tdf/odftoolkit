@@ -188,6 +188,6 @@ public class OdfUnitConverter
      */
     public final static String getMeasureString( int measure )
     {        
-        return new Double((double)measure / (double)1000.0 ).toString() + "cm";
+        return new Double(measure / 1000.0 ).toString() + "cm";
     }
 }

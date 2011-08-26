@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfTextContentElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "text-content" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5775047356655619918L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "text-content" );
 
     public OdfTextContentElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

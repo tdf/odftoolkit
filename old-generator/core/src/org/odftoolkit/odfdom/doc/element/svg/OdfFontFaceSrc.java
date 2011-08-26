@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.svg.OdfFontFaceSrcElement;
  */
 public class OdfFontFaceSrc extends OdfFontFaceSrcElement
 {
-    public OdfFontFaceSrc( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2811416630216144995L;
+
+	public OdfFontFaceSrc( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

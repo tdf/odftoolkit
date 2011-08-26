@@ -21,27 +21,26 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.element.draw;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.draw.OdfImageElement;
 import org.odftoolkit.odfdom.dom.util.URITransformer;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class OdfImage extends OdfImageElement {
-
-    private URI mImageURI;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6157458382218705296L;
+	private URI mImageURI;
     // OdfPackage necessary to adapt the manifest referencing the image
     private OdfPackage mOdfPackage;
-    private static final String COLON = ":";
     private static final String SLASH = "/";
 
     /** Creates a new instance of this class

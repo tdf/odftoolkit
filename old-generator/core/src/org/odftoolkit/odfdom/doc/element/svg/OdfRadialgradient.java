@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.svg.OdfRadialgradientElement;
  */
 public class OdfRadialgradient extends OdfRadialgradientElement
 {
-    public OdfRadialgradient( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3226792939215488685L;
+
+	public OdfRadialgradient( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

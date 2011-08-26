@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfGluePointElement;
  */
 public class OdfGluePoint extends OdfGluePointElement
 {
-    public OdfGluePoint( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 10240463232256654L;
+
+	public OdfGluePoint( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

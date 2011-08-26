@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 
 public class OdfParagraph extends OdfParagraphElement {
 
-    /** Creates a new instance of this class */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6207442137342531878L;
+
+	/** Creates a new instance of this class */
     public OdfParagraph(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

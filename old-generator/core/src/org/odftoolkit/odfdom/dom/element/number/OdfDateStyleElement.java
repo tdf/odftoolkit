@@ -42,14 +42,19 @@ import org.odftoolkit.odfdom.dom.type.number.OdfFormatSourceType;
  */
 public abstract class OdfDateStyleElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "date-style" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6258653196092296970L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "date-style" );
 
     public OdfDateStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

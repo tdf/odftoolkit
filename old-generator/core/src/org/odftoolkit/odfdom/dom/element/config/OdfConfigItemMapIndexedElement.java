@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfConfigItemMapIndexedElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CONFIG, "config-item-map-indexed" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2593692826290921237L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CONFIG, "config-item-map-indexed" );
 
     public OdfConfigItemMapIndexedElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -39,7 +39,11 @@ import org.w3c.dom.DOMException;
 // 2DO: change modifier public to package after refactoring
 abstract public class OdfStylableElement extends OdfElement implements OdfStylePropertySet  {
 
-    // 2DO: Overall StyleRefactoring: DOM Layer reaches to upper layer here...
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3212297545322486428L;
+	// 2DO: Overall StyleRefactoring: DOM Layer reaches to upper layer here...
     private OdfStyle mAutomaticStyle;    
     protected OdfStyleFamily mFamily;
     protected OdfName mStyleNameAttrib;

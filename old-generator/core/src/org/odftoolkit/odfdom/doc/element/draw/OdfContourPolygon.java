@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfContourPolygonElement;
  */
 public class OdfContourPolygon extends OdfContourPolygonElement
 {
-    public OdfContourPolygon( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5135195712316382518L;
+
+	public OdfContourPolygon( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

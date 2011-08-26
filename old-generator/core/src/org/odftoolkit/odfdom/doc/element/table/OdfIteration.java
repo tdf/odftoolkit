@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfIterationElement;
  */
 public class OdfIteration extends OdfIterationElement
 {
-    public OdfIteration( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4174223585425602116L;
+
+	public OdfIteration( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

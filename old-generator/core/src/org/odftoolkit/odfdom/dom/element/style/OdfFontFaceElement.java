@@ -44,14 +44,19 @@ import org.odftoolkit.odfdom.dom.type.style.OdfFontPitchType;
  */
 public abstract class OdfFontFaceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "font-face" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7734825797629487029L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "font-face" );
 
     public OdfFontFaceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

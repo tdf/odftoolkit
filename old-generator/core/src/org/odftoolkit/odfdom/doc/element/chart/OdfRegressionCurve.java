@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfRegressionCurveElement;
  */
 public class OdfRegressionCurve extends OdfRegressionCurveElement
 {
-    public OdfRegressionCurve( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7518903717184435899L;
+
+	public OdfRegressionCurve( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

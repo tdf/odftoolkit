@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.text.OdfTableType;
  */
 public abstract class OdfDatabaseNextElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "database-next" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4242796232055941863L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "database-next" );
 
     public OdfDatabaseNextElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

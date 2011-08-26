@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfUserDefinedElement;
  */
 public class OdfUserDefined extends OdfUserDefinedElement
 {
-    public OdfUserDefined( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8333915129920551504L;
+
+	public OdfUserDefined( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

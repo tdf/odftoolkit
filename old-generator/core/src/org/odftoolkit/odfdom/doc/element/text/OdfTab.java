@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfTabElement;
 
 public class OdfTab extends OdfTabElement {
 
-    /** Creates a new instance of this class */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5741812860683879873L;
+
+	/** Creates a new instance of this class */
     public OdfTab(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

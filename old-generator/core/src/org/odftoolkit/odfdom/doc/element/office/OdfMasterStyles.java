@@ -45,7 +45,11 @@ import org.w3c.dom.Node;
  */
 public class OdfMasterStyles extends OdfMasterStylesElement
 {
-    private OdfLayerSet mLayerSet;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6598785919980862801L;
+	private OdfLayerSet mLayerSet;
     private OdfHandoutMaster mHandoutMaster;
     private HashMap< String, OdfMasterPage > mMasterPages;
     
@@ -82,7 +86,8 @@ public class OdfMasterStyles extends OdfMasterStylesElement
     
     /** override this method to get notified about element insertion
      */
-    protected void onOdfNodeInserted( OdfElement node, Node refNode )
+    @Override
+	protected void onOdfNodeInserted( OdfElement node, Node refNode )
     {
         if( node instanceof OdfLayerSet )
         {
@@ -105,7 +110,8 @@ public class OdfMasterStyles extends OdfMasterStylesElement
             
     /** override this method to get notified about element insertion
      */
-    protected void onOdfNodeRemoved( OdfElement node )
+    @Override
+	protected void onOdfNodeRemoved( OdfElement node )
     {
         if( node instanceof OdfLayerSet )
         {

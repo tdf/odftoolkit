@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfTableHeaderColumnsElement;
  */
 public class OdfTableHeaderColumns extends OdfTableHeaderColumnsElement
 {
-    public OdfTableHeaderColumns( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3546932470601351499L;
+
+	public OdfTableHeaderColumns( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

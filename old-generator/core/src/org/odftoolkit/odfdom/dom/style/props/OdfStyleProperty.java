@@ -30,7 +30,7 @@ import org.odftoolkit.odfdom.dom.OdfName;
  * Class to represent a odf style attribut. Each instance has a name and belongs
  * to an ODF style-properties element. 
  */
-public class OdfStyleProperty implements Comparable {
+public class OdfStyleProperty implements Comparable<OdfStyleProperty> {
 
     private OdfStylePropertiesSet m_propSet;
     private OdfName m_name;
@@ -53,7 +53,7 @@ public class OdfStyleProperty implements Comparable {
         //Replacement for (JDK1.6)
         //OdfStyleProperty result = m_styleProperties.floor(temp);
 
-        Iterator iter = m_styleProperties.iterator();
+        Iterator<OdfStyleProperty> iter = m_styleProperties.iterator();
         OdfStyleProperty result = null;
 
         //check if key exists 
@@ -62,7 +62,7 @@ public class OdfStyleProperty implements Comparable {
             return temp;
         }
         while (iter.hasNext()) {
-            result = (OdfStyleProperty) iter.next();
+            result = iter.next();
             if (result.equals(temp)) {
                 return result;
             }
@@ -118,14 +118,18 @@ public class OdfStyleProperty implements Comparable {
      */
     @Override
     public boolean equals(Object o) {
-        return compareTo(o) == 0;
+    	if (o instanceof OdfStyleProperty) {
+    		OdfStyleProperty sp = (OdfStyleProperty) o;
+    		return compareTo(sp) == 0;
+    	}
+        return false;
     }
 
-    public int compareTo(Object o) {
+    public int compareTo(OdfStyleProperty o) {
         if (!(o instanceof OdfStyleProperty)) {
             return -1;
         }
-        OdfStyleProperty prop = (OdfStyleProperty) o;
+        OdfStyleProperty prop = o;
         int c = 0;
         if ((c = m_propSet.compareTo(prop.m_propSet)) != 0) {
             return c;

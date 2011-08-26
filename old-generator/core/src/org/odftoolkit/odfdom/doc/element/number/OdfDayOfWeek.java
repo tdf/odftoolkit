@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfDayOfWeekElement;
  */
 public class OdfDayOfWeek extends OdfDayOfWeekElement
 {
-    public OdfDayOfWeek( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7675087183966796957L;
+
+	public OdfDayOfWeek( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

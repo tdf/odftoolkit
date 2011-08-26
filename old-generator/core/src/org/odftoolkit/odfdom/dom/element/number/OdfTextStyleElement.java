@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.number.OdfTransliterationStyleType;
  */
 public abstract class OdfTextStyleElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "text-style" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4388640923220462320L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "text-style" );
 
     public OdfTextStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

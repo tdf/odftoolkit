@@ -26,7 +26,11 @@ import org.odftoolkit.odfdom.dom.element.table.OdfCoveredTableCellElement;
 
 public class OdfCoveredTableCell extends OdfCoveredTableCellElement implements OdfTableCellBase {
 
-    int m_nRowSpan = 1;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2307643816608850158L;
+	int m_nRowSpan = 1;
     int m_nColSpan = 1;
     boolean m_bAutoGen = false;
 

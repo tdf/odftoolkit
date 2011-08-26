@@ -28,12 +28,11 @@ public class LoadMultipleTimes {
     
     final static int num = 50;
     public static void main(String[] args) {
-        OdfDocument doc = null;
         try {
             long t = 0;
             for (int i=0; i<num; i++) {
                 long t1 = System.currentTimeMillis();                
-                doc = OdfDocument.loadDocument("test/resources/test1.odt");
+                OdfDocument.loadDocument("test/resources/test1.odt");
                 long t2 = System.currentTimeMillis() - t1;
                 t = t + t2;
                 System.out.println("open in " + t2 + " milliseconds");

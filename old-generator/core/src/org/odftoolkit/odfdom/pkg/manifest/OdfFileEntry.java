@@ -100,7 +100,7 @@ public class OdfFileEntry {
         String mediaType = null;
         try {
             // use 'JavaBeans Activation Framework' if available (as library or as part of JDK 6)
-            Class mimetypesClass = Class.forName("javax.activation.MimetypesFileTypeMap");
+            Class<?> mimetypesClass = Class.forName("javax.activation.MimetypesFileTypeMap");
             Method getContentTypeMethod = mimetypesClass.getMethod("getContentType", String.class);
             mediaType = (String) getContentTypeMethod.invoke(getContentTypeMethod, fileRef);
         } catch (Exception e) {

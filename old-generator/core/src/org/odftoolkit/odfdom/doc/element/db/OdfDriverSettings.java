@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfDriverSettingsElement;
  */
 public class OdfDriverSettings extends OdfDriverSettingsElement
 {
-    public OdfDriverSettings( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2065016447186827692L;
+
+	public OdfDriverSettings( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

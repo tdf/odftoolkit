@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfQueryElement;
  */
 public class OdfQuery extends OdfQueryElement
 {
-    public OdfQuery( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 266636705981457728L;
+
+	public OdfQuery( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

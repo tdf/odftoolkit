@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfTableFormulaElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-formula" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4233665438464681105L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-formula" );
 
     public OdfTableFormulaElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

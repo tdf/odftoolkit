@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfTableCellElement;
 
 public class OdfTableCell extends OdfTableCellElement implements OdfTableCellBase {
 
-    /** Creates a new instance of this class */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7645718490353862947L;
+
+	/** Creates a new instance of this class */
     public OdfTableCell(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

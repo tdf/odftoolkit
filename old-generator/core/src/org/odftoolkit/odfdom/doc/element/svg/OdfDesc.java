@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.svg.OdfDescElement;
  */
 public class OdfDesc extends OdfDescElement
 {
-    public OdfDesc( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4337270727372312623L;
+
+	public OdfDesc( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

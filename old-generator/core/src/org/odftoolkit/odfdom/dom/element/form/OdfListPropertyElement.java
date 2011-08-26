@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.office.OdfValueMaybeVoidType;
  */
 public abstract class OdfListPropertyElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "list-property" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4455137011481921868L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "list-property" );
 
     public OdfListPropertyElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

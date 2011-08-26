@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfCurrencySymbolElement;
  */
 public class OdfCurrencySymbol extends OdfCurrencySymbolElement
 {
-    public OdfCurrencySymbol( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1362167866315426842L;
+
+	public OdfCurrencySymbol( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

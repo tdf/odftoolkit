@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSpaceElement;
 
 public class OdfSpace extends OdfSpaceElement {
 
-    /** Creates a new instance of this class */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1167590347868218851L;
+
+	/** Creates a new instance of this class */
     public OdfSpace(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

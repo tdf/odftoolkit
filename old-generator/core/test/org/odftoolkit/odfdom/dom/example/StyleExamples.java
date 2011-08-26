@@ -28,14 +28,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.element.style.OdfDefaultStyle;
-import org.odftoolkit.odfdom.doc.element.style.OdfGraphicProperties;
 import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.element.style.OdfTableProperties;
-import org.odftoolkit.odfdom.doc.element.style.OdfTableRowProperties;
-import org.odftoolkit.odfdom.doc.element.style.OdfTextProperties;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
+import org.odftoolkit.odfdom.dom.element.style.OdfGraphicPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfTablePropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfTableRowPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.util.NodeAction;
@@ -58,7 +58,8 @@ public class StyleExamples {
             this.desiredProperty = desiredProperty;
         }
 
-        protected void apply(Node textNode, ArrayList<String> fontAndText, int depth) {
+        @Override
+		protected void apply(Node textNode, ArrayList<String> fontAndText, int depth) {
 
             if (textNode.getNodeType() != Node.TEXT_NODE) {
                 return;
@@ -90,7 +91,7 @@ public class StyleExamples {
 
         ArrayList<String> fontAndText = new ArrayList<String>();
 
-        DumpPropertyAndText dumpFontAndText = new DumpPropertyAndText(OdfTextProperties.FontName);
+        DumpPropertyAndText dumpFontAndText = new DumpPropertyAndText(OdfTextPropertiesElement.FontName);
         dumpFontAndText.performAction(documentRoot, fontAndText);
 
         Assert.assertEquals("Thorndale: Hello", fontAndText.get(0));
@@ -117,7 +118,8 @@ public class StyleExamples {
             OdfElement e = (OdfElement) odfdoc.getContentDom().getDocumentElement();
             NodeAction dumpStyles = new NodeAction() {
 
-                protected void apply(Node node, Object arg, int depth) {
+                @Override
+				protected void apply(Node node, Object arg, int depth) {
                     String indent = new String();
                     for (int i = 0; i < depth; i++) {
                         indent += "  ";
@@ -153,28 +155,28 @@ public class StyleExamples {
         try {
             OdfDocument doc = OdfDocument.loadDocument(TEST_FILE);
 
-            Object o = doc.getDocumentStyles();
+            doc.getDocumentStyles();
             OdfDefaultStyle oDSG = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Graphic);
             Assert.assertEquals(oDSG.getFamilyName(), OdfStyleFamily.Graphic.getName());
-            String prop1 = oDSG.getProperty(OdfGraphicProperties.ShadowOffsetX);
+            String prop1 = oDSG.getProperty(OdfGraphicPropertiesElement.ShadowOffsetX);
             Assert.assertEquals(prop1, "0.1181in");
 
             OdfDefaultStyle oDSP = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Paragraph);
             Assert.assertEquals(oDSP.getFamilyName(), OdfStyleFamily.Paragraph.getName());
-            String prop2 = oDSP.getProperty(OdfTextProperties.FontName);
+            String prop2 = oDSP.getProperty(OdfTextPropertiesElement.FontName);
             Assert.assertEquals(prop2, "Thorndale");
-            String prop3 = oDSP.getProperty(OdfTextProperties.LetterKerning);
+            String prop3 = oDSP.getProperty(OdfTextPropertiesElement.LetterKerning);
             Assert.assertEquals(prop3, "true");
 
             OdfDefaultStyle oDST = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Table);
             Assert.assertEquals(oDST.getFamilyName(), OdfStyleFamily.Table.getName());
-            String prop4 = oDST.getProperty(OdfTableProperties.BorderModel);
+            String prop4 = oDST.getProperty(OdfTablePropertiesElement.BorderModel);
             Assert.assertEquals(prop4, "collapsing");
 
 
             OdfDefaultStyle oDSTR = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.TableRow);
             Assert.assertEquals(oDSTR.getFamilyName(), OdfStyleFamily.TableRow.getName());
-            String prop5 = oDSTR.getProperty(OdfTableRowProperties.KeepTogether);
+            String prop5 = oDSTR.getProperty(OdfTableRowPropertiesElement.KeepTogether);
             Assert.assertEquals(prop5, "auto");
 
         } catch (Exception e) {

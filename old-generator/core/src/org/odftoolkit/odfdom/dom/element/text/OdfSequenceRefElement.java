@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.text.OdfSequenceReferenceFormatType;
  */
 public abstract class OdfSequenceRefElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sequence-ref" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3194536011463622865L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sequence-ref" );
 
     public OdfSequenceRefElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

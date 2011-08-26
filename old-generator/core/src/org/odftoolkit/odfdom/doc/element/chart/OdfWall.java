@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfWallElement;
  */
 public class OdfWall extends OdfWallElement
 {
-    public OdfWall( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7136936241913662938L;
+
+	public OdfWall( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

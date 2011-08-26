@@ -44,14 +44,19 @@ import org.odftoolkit.odfdom.dom.type.OdfDuration;
  */
 public abstract class OdfNumberElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "number" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2530474044266678764L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "number" );
 
     public OdfNumberElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

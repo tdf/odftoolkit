@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfObjectIndexEntryTemplateElement
  */
 public class OdfObjectIndexEntryTemplate extends OdfObjectIndexEntryTemplateElement
 {
-    public OdfObjectIndexEntryTemplate( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 596093035741866612L;
+
+	public OdfObjectIndexEntryTemplate( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

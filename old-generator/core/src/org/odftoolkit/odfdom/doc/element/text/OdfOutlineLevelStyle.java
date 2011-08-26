@@ -38,7 +38,12 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
  */
 public class OdfOutlineLevelStyle extends OdfOutlineLevelStyleElement
 {
-    public OdfOutlineLevelStyle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4117353513688453621L;
+
+	public OdfOutlineLevelStyle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

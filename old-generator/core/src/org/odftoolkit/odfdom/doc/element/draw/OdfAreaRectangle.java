@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfAreaRectangleElement;
  */
 public class OdfAreaRectangle extends OdfAreaRectangleElement
 {
-    public OdfAreaRectangle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5077972941353987286L;
+
+	public OdfAreaRectangle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

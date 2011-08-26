@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
  */
 public abstract class OdfDomainElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "domain" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7185308075921541319L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "domain" );
 
     public OdfDomainElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

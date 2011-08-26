@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfDataType;
  */
 public abstract class OdfFilterConditionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "filter-condition" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5685734831202519588L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "filter-condition" );
 
     public OdfFilterConditionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

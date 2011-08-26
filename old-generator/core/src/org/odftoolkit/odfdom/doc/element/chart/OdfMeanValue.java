@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfMeanValueElement;
  */
 public class OdfMeanValue extends OdfMeanValueElement
 {
-    public OdfMeanValue( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3440705834532997523L;
+
+	public OdfMeanValue( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

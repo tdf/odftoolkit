@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfDatabaseOrientationType;
  */
 public abstract class OdfDatabaseRangeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "database-range" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9130674120189517663L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "database-range" );
 
     public OdfDatabaseRangeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

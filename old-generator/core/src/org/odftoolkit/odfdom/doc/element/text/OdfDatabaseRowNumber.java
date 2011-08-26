@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfDatabaseRowNumberElement;
  */
 public class OdfDatabaseRowNumber extends OdfDatabaseRowNumberElement
 {
-    public OdfDatabaseRowNumber( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6477716724162816455L;
+
+	public OdfDatabaseRowNumber( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

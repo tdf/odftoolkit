@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfTextInputElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "text-input" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3879315560466010788L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "text-input" );
 
     public OdfTextInputElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

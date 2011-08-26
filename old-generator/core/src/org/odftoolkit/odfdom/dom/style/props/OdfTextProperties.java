@@ -24,7 +24,6 @@ package org.odftoolkit.odfdom.dom.style.props;
 
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.*;
 
 public interface OdfTextProperties {
     public final static OdfStyleProperty BackgroundColor = 

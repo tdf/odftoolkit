@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfInsertionElement;
  */
 public class OdfInsertion extends OdfInsertionElement
 {
-    public OdfInsertion( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7804107379844364987L;
+
+	public OdfInsertion( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

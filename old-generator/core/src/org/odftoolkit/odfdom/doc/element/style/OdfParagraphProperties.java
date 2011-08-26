@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfParagraphPropertiesElement;
  */
 public class OdfParagraphProperties extends OdfParagraphPropertiesElement
 {
-    public OdfParagraphProperties( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4870682989995616610L;
+
+	public OdfParagraphProperties( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

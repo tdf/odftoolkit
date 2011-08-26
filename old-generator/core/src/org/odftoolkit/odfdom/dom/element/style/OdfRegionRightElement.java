@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfRegionRightElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "region-right" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8247844879996660044L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "region-right" );
 
     public OdfRegionRightElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

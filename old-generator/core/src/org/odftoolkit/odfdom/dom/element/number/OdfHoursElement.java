@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.number.OdfStyleType;
  */
 public abstract class OdfHoursElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "hours" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7025217616100700806L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "hours" );
 
     public OdfHoursElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

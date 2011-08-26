@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
  */
 public abstract class OdfParagraphElement extends OdfParagraphElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "p" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8663400661614520152L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "p" );
 
     public OdfParagraphElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Paragraph, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

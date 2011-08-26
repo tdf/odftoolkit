@@ -42,14 +42,19 @@ import org.odftoolkit.odfdom.dom.type.OdfDate;
  */
 public abstract class OdfPrintDateElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "print-date" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2434698198210211586L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "print-date" );
 
     public OdfPrintDateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

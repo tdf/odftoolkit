@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfContourPathElement;
  */
 public class OdfContourPath extends OdfContourPathElement
 {
-    public OdfContourPath( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1156819002936273146L;
+
+	public OdfContourPath( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

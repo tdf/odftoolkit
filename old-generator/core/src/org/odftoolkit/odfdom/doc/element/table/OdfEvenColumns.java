@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfEvenColumnsElement;
  */
 public class OdfEvenColumns extends OdfEvenColumnsElement
 {
-    public OdfEvenColumns( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1147916359177576448L;
+
+	public OdfEvenColumns( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

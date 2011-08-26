@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfLayerElement;
  */
 public class OdfLayer extends OdfLayerElement
 {
-    public OdfLayer( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4406618765125139778L;
+
+	public OdfLayer( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

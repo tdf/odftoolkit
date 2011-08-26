@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.number.OdfStyleType;
  */
 public abstract class OdfYearElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "year" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5224416630617944335L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "year" );
 
     public OdfYearElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

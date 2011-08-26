@@ -84,7 +84,7 @@ class TempDir {
      * increase refCount
      */
     static int ref(File dir) {
-        int refCount = ((Integer) _refCounts.get(dir)).intValue();
+        int refCount = (_refCounts.get(dir)).intValue();
         ++refCount;
         _refCounts.put(dir, new Integer(refCount));
         return refCount;
@@ -94,7 +94,7 @@ class TempDir {
      * release reference, when refcount gets 0 Directory is deleted
      */
     static void release(File dir) {
-        int refCount = ((Integer) _refCounts.get(dir)).intValue();
+        int refCount = (_refCounts.get(dir)).intValue();
         if (--refCount == 0) {
             TempDirDeleter.getInstance().deleteDirectory(dir);
             _refCounts.remove(dir);

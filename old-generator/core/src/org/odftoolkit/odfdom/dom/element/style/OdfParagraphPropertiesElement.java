@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
  */
 public abstract class OdfParagraphPropertiesElement extends OdfStylePropertiesBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "paragraph-properties" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6754376254029519117L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "paragraph-properties" );
 
     public OdfParagraphPropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

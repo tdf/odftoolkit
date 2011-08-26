@@ -28,7 +28,11 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 
 public class MyOwnPrivateSpanClass_3 extends OdfElement {
 
-    public static final OdfName ELEMENT_NAME = OdfName.get(OdfNamespace.TEXT, "span");
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4819629767539792181L;
+	public static final OdfName ELEMENT_NAME = OdfName.get(OdfNamespace.TEXT, "span");
 
     /** Creates a new instance of OdfParagraphElementImpl
      */

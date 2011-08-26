@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfLabelOrientationType;
  */
 public abstract class OdfLabelRangeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "label-range" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6716333030406505460L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "label-range" );
 
     public OdfLabelRangeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

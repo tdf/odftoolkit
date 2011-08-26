@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfSortGroupsElement;
  */
 public class OdfSortGroups extends OdfSortGroupsElement
 {
-    public OdfSortGroups( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6753985367355405094L;
+
+	public OdfSortGroups( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

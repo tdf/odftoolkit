@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfCharacterSetElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "character-set" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7741364383532300139L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "character-set" );
 
     public OdfCharacterSetElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

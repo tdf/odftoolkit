@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfStockRangeLineElement;
  */
 public class OdfStockRangeLine extends OdfStockRangeLineElement
 {
-    public OdfStockRangeLine( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1030858871198602943L;
+
+	public OdfStockRangeLine( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

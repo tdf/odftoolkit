@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.text.OdfTemplateNameDisplayType;
  */
 public abstract class OdfTemplateNameElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "template-name" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4524125961444494781L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "template-name" );
 
     public OdfTemplateNameElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

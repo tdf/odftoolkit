@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfListboxElement;
  */
 public class OdfListbox extends OdfListboxElement
 {
-    public OdfListbox( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7570890907326110777L;
+
+	public OdfListbox( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

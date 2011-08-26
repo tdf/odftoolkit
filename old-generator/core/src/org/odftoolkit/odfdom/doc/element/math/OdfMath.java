@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.math.OdfMathElement;
  */
 public class OdfMath extends OdfMathElement
 {
-    public OdfMath( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4937292676997516575L;
+
+	public OdfMath( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

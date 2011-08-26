@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfContainerElementBase;
  */
 public abstract class OdfMasterStylesElement extends OdfContainerElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "master-styles" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2531103295060714985L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "master-styles" );
 
     public OdfMasterStylesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

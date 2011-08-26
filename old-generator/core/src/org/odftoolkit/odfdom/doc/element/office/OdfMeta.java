@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.office.OdfMetaElement;
  */
 public class OdfMeta extends OdfMetaElement
 {
-    public OdfMeta( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6444402744278258524L;
+
+	public OdfMeta( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

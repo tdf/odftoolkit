@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfScenarioElement;
  */
 public class OdfScenario extends OdfScenarioElement
 {
-    public OdfScenario( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6647844015520357587L;
+
+	public OdfScenario( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

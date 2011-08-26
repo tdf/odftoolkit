@@ -27,8 +27,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.element.office.OdfStyles;
-import org.odftoolkit.odfdom.doc.element.style.OdfParagraphProperties;
 import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
+import org.odftoolkit.odfdom.dom.element.style.OdfParagraphPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 
 public class StyleManipulationTest {
@@ -45,12 +45,12 @@ public class StyleManipulationTest {
             OdfStyles styles = odfDocument.getDocumentStyles();
             Assert.assertNotNull(styles);
             OdfStyle standardStyle = styles.getStyle("Standard", OdfStyleFamily.Paragraph);
-            standardStyle.setProperty(OdfParagraphProperties.MarginLeft, "4711");
+            standardStyle.setProperty(OdfParagraphPropertiesElement.MarginLeft, "4711");
             odfDocument.save(TARGET);
             odfDocument = OdfDocument.loadDocument(TARGET);
             styles = odfDocument.getDocumentStyles();
             standardStyle = styles.getStyle("Standard", OdfStyleFamily.Paragraph);
-            String marginLeft = standardStyle.getProperty(OdfParagraphProperties.MarginLeft);
+            String marginLeft = standardStyle.getProperty(OdfParagraphPropertiesElement.MarginLeft);
             
             Assert.assertTrue(marginLeft != null && marginLeft.equals("4711"));
         } catch (Exception e) {

@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfRowOrColumnType;
  */
 public abstract class OdfTableTemplateElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-template" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4765650086195403411L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-template" );
 
     public OdfTableTemplateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

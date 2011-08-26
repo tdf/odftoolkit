@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfPageVariableGetElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-variable-get" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6674834767810654614L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-variable-get" );
 
     public OdfPageVariableGetElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

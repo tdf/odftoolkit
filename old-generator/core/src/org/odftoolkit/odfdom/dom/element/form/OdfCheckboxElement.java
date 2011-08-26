@@ -46,14 +46,19 @@ import org.odftoolkit.odfdom.dom.type.form.OdfStateType;
  */
 public abstract class OdfCheckboxElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "checkbox" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2607760072442194300L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "checkbox" );
 
     public OdfCheckboxElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

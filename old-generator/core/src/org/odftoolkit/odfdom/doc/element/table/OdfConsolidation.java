@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfConsolidationElement;
  */
 public class OdfConsolidation extends OdfConsolidationElement
 {
-    public OdfConsolidation( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8473338593769805298L;
+
+	public OdfConsolidation( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

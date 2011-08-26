@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfObjectCountElement;
  */
 public class OdfObjectCount extends OdfObjectCountElement
 {
-    public OdfObjectCount( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2624076392392999967L;
+
+	public OdfObjectCount( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

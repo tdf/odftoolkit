@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.meta.OdfDocumentStatisticElement;
  */
 public class OdfDocumentStatistic extends OdfDocumentStatisticElement
 {
-    public OdfDocumentStatistic( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -602359064979555630L;
+
+	public OdfDocumentStatistic( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

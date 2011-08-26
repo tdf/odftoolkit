@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfChartPropertiesElement;
  */
 public class OdfChartProperties extends OdfChartPropertiesElement
 {
-    public OdfChartProperties( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8409664127814273242L;
+
+	public OdfChartProperties( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

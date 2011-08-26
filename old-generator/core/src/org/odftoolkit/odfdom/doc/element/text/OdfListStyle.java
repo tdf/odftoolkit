@@ -35,7 +35,12 @@ import org.w3c.dom.Node;
  */
 public class OdfListStyle extends OdfListStyleElement
 {
-    public OdfListStyle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5493176392198676430L;
+
+	public OdfListStyle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

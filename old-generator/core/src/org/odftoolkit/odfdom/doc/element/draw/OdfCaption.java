@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfCaptionElement;
  */
 public class OdfCaption extends OdfCaptionElement
 {
-    public OdfCaption( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7136736940536256059L;
+
+	public OdfCaption( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfErrorIndicatorElement;
  */
 public class OdfErrorIndicator extends OdfErrorIndicatorElement
 {
-    public OdfErrorIndicator( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5926807410554078455L;
+
+	public OdfErrorIndicator( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -31,7 +31,12 @@ import org.w3c.dom.Node;
 
 public class OdfList extends OdfListElement {
 
-    /** Creates a new instance of OdfParagraphElementImpl 
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3490592040586665276L;
+
+	/** Creates a new instance of OdfParagraphElementImpl 
      * @param ownerDoc 
      */
     public OdfList(OdfFileDom ownerDoc) {

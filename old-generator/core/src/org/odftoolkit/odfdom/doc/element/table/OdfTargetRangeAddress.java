@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfTargetRangeAddressElement;
  */
 public class OdfTargetRangeAddress extends OdfTargetRangeAddressElement
 {
-    public OdfTargetRangeAddress( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6859073437916794150L;
+
+	public OdfTargetRangeAddress( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.office.OdfChangeInfoElement;
  */
 public class OdfChangeInfo extends OdfChangeInfoElement
 {
-    public OdfChangeInfo( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -781842739006363745L;
+
+	public OdfChangeInfo( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

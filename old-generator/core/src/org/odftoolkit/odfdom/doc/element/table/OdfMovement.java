@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfMovementElement;
  */
 public class OdfMovement extends OdfMovementElement
 {
-    public OdfMovement( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8571782769801137788L;
+
+	public OdfMovement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

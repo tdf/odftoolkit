@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
  */
 public abstract class OdfCategoriesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "categories" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9126159559278647895L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "categories" );
 
     public OdfCategoriesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

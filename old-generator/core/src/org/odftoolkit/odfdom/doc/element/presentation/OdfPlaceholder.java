@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.presentation.OdfPlaceholderElement;
  */
 public class OdfPlaceholder extends OdfPlaceholderElement
 {
-    public OdfPlaceholder( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2108666254016025293L;
+
+	public OdfPlaceholder( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

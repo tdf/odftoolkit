@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfHighlightedRangeElement;
  */
 public class OdfHighlightedRange extends OdfHighlightedRangeElement
 {
-    public OdfHighlightedRange( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2874165955492790296L;
+
+	public OdfHighlightedRange( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

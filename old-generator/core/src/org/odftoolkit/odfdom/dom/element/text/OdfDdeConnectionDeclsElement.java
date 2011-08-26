@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfDdeConnectionDeclsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "dde-connection-decls" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7648827101659237379L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "dde-connection-decls" );
 
     public OdfDdeConnectionDeclsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

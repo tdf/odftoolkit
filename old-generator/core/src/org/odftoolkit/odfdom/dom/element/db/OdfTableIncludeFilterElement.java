@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfTableIncludeFilterElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-include-filter" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9148597820786270536L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-include-filter" );
 
     public OdfTableIncludeFilterElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

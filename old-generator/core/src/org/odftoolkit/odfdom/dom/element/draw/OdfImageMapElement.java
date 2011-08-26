@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfImageMapElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "image-map" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5147148082518298610L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "image-map" );
 
     public OdfImageMapElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

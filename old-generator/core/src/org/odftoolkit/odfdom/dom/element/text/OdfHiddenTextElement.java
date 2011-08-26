@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfHiddenTextElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "hidden-text" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 862481012127372317L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "hidden-text" );
 
     public OdfHiddenTextElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

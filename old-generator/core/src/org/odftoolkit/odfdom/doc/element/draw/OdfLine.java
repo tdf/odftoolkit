@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfLineElement;
  */
 public class OdfLine extends OdfLineElement
 {
-    public OdfLine( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4389193312096440299L;
+
+	public OdfLine( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

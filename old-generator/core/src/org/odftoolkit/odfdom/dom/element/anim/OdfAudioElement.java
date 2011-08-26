@@ -47,14 +47,19 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
  */
 public abstract class OdfAudioElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "audio" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4334090272152937317L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "audio" );
 
     public OdfAudioElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

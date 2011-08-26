@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfRegionRightElement;
  */
 public class OdfRegionRight extends OdfRegionRightElement
 {
-    public OdfRegionRight( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -577473533441854324L;
+
+	public OdfRegionRight( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

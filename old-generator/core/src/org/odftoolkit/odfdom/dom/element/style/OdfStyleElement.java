@@ -42,14 +42,19 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
  */
 public abstract class OdfStyleElement extends OdfStyleBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "style" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3422526560028454787L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "style" );
 
     public OdfStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -278,7 +283,8 @@ public abstract class OdfStyleElement extends OdfStyleBase
     /**
      * Get value of attribute "style:family".
      */
-    public OdfStyleFamily getFamily()
+    @Override
+	public OdfStyleFamily getFamily()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "family" ) );
         return OdfStyleFamily.valueOf( aStringVal);

@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfAppletElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "applet" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4039534993281088376L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "applet" );
 
     public OdfAppletElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.text.OdfReferenceFormatType;
  */
 public abstract class OdfBookmarkRefElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bookmark-ref" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3260216685699754602L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bookmark-ref" );
 
     public OdfBookmarkRefElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

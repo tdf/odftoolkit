@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfConnectionResourceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "connection-resource" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3781992131782015728L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "connection-resource" );
 
     public OdfConnectionResourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

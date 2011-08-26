@@ -27,7 +27,11 @@ import org.odftoolkit.odfdom.dom.element.table.OdfTableColumnElement;
 
 public class OdfTableColumn extends OdfTableColumnElement {
     
-    private OdfStyle m_defaultCellStyle;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7100319535968633027L;
+	private OdfStyle m_defaultCellStyle;
     
     /** Creates a new instance of this class */
     public OdfTableColumn(OdfFileDom ownerDoc) {

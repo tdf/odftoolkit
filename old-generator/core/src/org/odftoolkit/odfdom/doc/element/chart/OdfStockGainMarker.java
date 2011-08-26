@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfStockGainMarkerElement;
  */
 public class OdfStockGainMarker extends OdfStockGainMarkerElement
 {
-    public OdfStockGainMarker( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4729643592754672539L;
+
+	public OdfStockGainMarker( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

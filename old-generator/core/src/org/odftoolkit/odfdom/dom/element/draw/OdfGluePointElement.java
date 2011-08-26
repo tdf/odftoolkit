@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.draw.OdfEscapeDirectionType;
  */
 public abstract class OdfGluePointElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "glue-point" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4080826675875362087L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "glue-point" );
 
     public OdfGluePointElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

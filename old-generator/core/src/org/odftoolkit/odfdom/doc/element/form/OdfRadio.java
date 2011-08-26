@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfRadioElement;
  */
 public class OdfRadio extends OdfRadioElement
 {
-    public OdfRadio( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6227439870139254089L;
+
+	public OdfRadio( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

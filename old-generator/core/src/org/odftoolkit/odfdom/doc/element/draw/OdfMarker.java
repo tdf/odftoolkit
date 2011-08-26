@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfMarkerElement;
  */
 public class OdfMarker extends OdfMarkerElement
 {
-    public OdfMarker( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1330282024113092957L;
+
+	public OdfMarker( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

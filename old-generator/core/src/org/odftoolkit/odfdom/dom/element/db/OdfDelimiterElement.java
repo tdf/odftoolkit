@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfDelimiterElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "delimiter" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8089664417395904741L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "delimiter" );
 
     public OdfDelimiterElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

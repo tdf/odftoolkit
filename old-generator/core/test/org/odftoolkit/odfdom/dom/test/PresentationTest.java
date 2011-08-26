@@ -37,8 +37,6 @@ import org.odftoolkit.odfdom.doc.element.style.OdfMasterPage;
 import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  *

@@ -38,7 +38,12 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
  */
 public class OdfListLevelStyleBullet extends OdfListLevelStyleBulletElement
 {
-    public OdfListLevelStyleBullet( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3212773855360365622L;
+
+	public OdfListLevelStyleBullet( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

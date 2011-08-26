@@ -45,11 +45,12 @@ class TempDirDeleter extends Thread {
         dirList.remove(dir);
     }
 
-    public void run() {
+    @Override
+	public void run() {
         synchronized (this) {
-            Iterator iterator = dirList.iterator();
+            Iterator<File> iterator = dirList.iterator();
             while (iterator.hasNext()) {
-                File dir = (File)iterator.next();
+                File dir = iterator.next();
                 deleteDirectoryRecursive(dir);
                 iterator.remove();
             }

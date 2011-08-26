@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfReferenceMarkEndElement;
  */
 public class OdfReferenceMarkEnd extends OdfReferenceMarkEndElement
 {
-    public OdfReferenceMarkEnd( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7912734314967194305L;
+
+	public OdfReferenceMarkEnd( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

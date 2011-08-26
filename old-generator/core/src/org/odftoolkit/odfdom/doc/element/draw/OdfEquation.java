@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfEquationElement;
  */
 public class OdfEquation extends OdfEquationElement
 {
-    public OdfEquation( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5442810663689795831L;
+
+	public OdfEquation( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

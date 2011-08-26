@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfDataPilotSortInfoElement;
  */
 public class OdfDataPilotSortInfo extends OdfDataPilotSortInfoElement
 {
-    public OdfDataPilotSortInfo( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 403929054796599910L;
+
+	public OdfDataPilotSortInfo( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

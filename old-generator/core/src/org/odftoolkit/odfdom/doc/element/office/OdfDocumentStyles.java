@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.office.OdfDocumentStylesElement;
  */
 public class OdfDocumentStyles extends OdfDocumentStylesElement
 {
-    public OdfDocumentStyles( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8574556839397248381L;
+
+	public OdfDocumentStyles( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

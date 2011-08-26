@@ -23,7 +23,7 @@ package org.odftoolkit.odfdom.dom;
 
 import java.util.HashMap;
 
-public class OdfName implements Comparable {
+public class OdfName implements Comparable<OdfName> {
     
     private OdfNamespace m_ns;
     private String m_localname;
@@ -89,11 +89,13 @@ public class OdfName implements Comparable {
             return m_localname;
     }
     
-    public String toString() {
+    @Override
+	public String toString() {
         return m_fullstring;
     }
     
-    public boolean equals(Object obj) { 
+    @Override
+	public boolean equals(Object obj) { 
         if (obj != null)
             return toString().equals(obj.toString());
         else
@@ -116,11 +118,12 @@ public class OdfName implements Comparable {
         }
     }    
     
-    public int hashCode() {
+    @Override
+	public int hashCode() {
        return toString().hashCode();
     }
 
-    public int compareTo(Object o) {
+    public int compareTo(OdfName o) {
         return toString().compareTo(o.toString());
     }
 }

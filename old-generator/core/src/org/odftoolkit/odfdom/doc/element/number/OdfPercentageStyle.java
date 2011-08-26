@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfPercentageStyleElement;
  */
 public class OdfPercentageStyle extends OdfPercentageStyleElement
 {
-    public OdfPercentageStyle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9006189035163170703L;
+
+	public OdfPercentageStyle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

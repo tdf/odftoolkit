@@ -43,14 +43,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfTabStopElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "tab-stop" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7667952503265565719L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "tab-stop" );
 
     public OdfTabStopElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

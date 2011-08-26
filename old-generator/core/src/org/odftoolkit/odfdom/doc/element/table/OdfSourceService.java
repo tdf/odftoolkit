@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfSourceServiceElement;
  */
 public class OdfSourceService extends OdfSourceServiceElement
 {
-    public OdfSourceService( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2084159392680889432L;
+
+	public OdfSourceService( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

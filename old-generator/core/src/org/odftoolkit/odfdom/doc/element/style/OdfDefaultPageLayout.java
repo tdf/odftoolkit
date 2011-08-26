@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfDefaultPageLayoutElement;
  */
 public class OdfDefaultPageLayout extends OdfDefaultPageLayoutElement
 {
-    public OdfDefaultPageLayout( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7647464119886135124L;
+
+	public OdfDefaultPageLayout( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

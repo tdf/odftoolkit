@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfHiddenParagraphElement;
  */
 public class OdfHiddenParagraph extends OdfHiddenParagraphElement
 {
-    public OdfHiddenParagraph( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1598160601346612074L;
+
+	public OdfHiddenParagraph( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

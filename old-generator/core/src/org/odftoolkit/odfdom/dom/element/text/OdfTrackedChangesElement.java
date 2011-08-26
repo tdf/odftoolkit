@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfTrackedChangesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "tracked-changes" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5478267779947630035L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "tracked-changes" );
 
     public OdfTrackedChangesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

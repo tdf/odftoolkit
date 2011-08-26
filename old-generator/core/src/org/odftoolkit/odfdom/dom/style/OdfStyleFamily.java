@@ -22,8 +22,6 @@
 // !!! GENERATED SOURCE CODE !!!
 package org.odftoolkit.odfdom.dom.style;
 
-import org.odftoolkit.odfdom.dom.OdfName;
-import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.element.style.OdfChartPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.OdfDrawingPagePropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.OdfGraphicPropertiesElement;
@@ -36,7 +34,6 @@ import org.odftoolkit.odfdom.dom.element.style.OdfTableColumnPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.OdfTablePropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.OdfTableRowPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.OdfTextPropertiesElement;
-import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 
 import java.util.Set;
@@ -44,7 +41,7 @@ import java.util.TreeSet;
 import java.util.Map;
 import java.util.HashMap;
 
-public class OdfStyleFamily implements Comparable {
+public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 
     private String m_name;
 //    private Class m_styleClass;
@@ -68,7 +65,7 @@ public class OdfStyleFamily implements Comparable {
         return m_name;
     }
 
-    public int compareTo(Object o) {
+    public int compareTo(OdfStyleFamily o) {
         return m_name.compareTo(o.toString());
     }  
 

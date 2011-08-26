@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfNamedRangeElement;
  */
 public class OdfNamedRange extends OdfNamedRangeElement
 {
-    public OdfNamedRange( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -761371316874665260L;
+
+	public OdfNamedRange( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

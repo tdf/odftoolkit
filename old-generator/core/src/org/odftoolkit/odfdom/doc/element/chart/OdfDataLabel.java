@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfDataLabelElement;
  */
 public class OdfDataLabel extends OdfDataLabelElement
 {
-    public OdfDataLabel( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4063971439300898827L;
+
+	public OdfDataLabel( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

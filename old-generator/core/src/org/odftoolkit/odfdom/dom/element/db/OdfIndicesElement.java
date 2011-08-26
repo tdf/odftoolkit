@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfIndicesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "indices" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3551751162281159574L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "indices" );
 
     public OdfIndicesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

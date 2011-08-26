@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfCellContentDeletionElement;
  */
 public class OdfCellContentDeletion extends OdfCellContentDeletionElement
 {
-    public OdfCellContentDeletion( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6696615852724486791L;
+
+	public OdfCellContentDeletion( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

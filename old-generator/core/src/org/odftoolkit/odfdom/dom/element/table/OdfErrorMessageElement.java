@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfMessageType;
  */
 public abstract class OdfErrorMessageElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "error-message" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 646473265630538443L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "error-message" );
 
     public OdfErrorMessageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

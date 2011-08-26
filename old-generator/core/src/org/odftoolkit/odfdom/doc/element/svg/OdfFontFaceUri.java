@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.svg.OdfFontFaceUriElement;
  */
 public class OdfFontFaceUri extends OdfFontFaceUriElement
 {
-    public OdfFontFaceUri( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 106724817035653274L;
+
+	public OdfFontFaceUri( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

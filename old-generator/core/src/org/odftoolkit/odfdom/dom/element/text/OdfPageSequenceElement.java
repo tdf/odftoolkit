@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfPageSequenceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-sequence" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6905295336142284368L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-sequence" );
 
     public OdfPageSequenceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

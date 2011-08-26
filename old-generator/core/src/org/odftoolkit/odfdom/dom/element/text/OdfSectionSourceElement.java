@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfSectionSourceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "section-source" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7525190097774783012L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "section-source" );
 
     public OdfSectionSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

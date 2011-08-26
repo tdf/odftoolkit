@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfMonthElement;
  */
 public class OdfMonth extends OdfMonthElement
 {
-    public OdfMonth( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -897567848873696196L;
+
+	public OdfMonth( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

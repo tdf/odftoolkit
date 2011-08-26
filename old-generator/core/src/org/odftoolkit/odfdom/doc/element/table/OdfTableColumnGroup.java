@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfTableColumnGroupElement;
  */
 public class OdfTableColumnGroup extends OdfTableColumnGroupElement
 {
-    public OdfTableColumnGroup( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7092104801383810657L;
+
+	public OdfTableColumnGroup( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

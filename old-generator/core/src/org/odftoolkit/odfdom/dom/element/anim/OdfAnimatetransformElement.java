@@ -48,14 +48,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfAnimatetransformElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "animateTransform" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5967346968061824345L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "animateTransform" );
 
     public OdfAnimatetransformElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

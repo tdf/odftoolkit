@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfSourceCellRangeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "source-cell-range" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5857104079610462509L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "source-cell-range" );
 
     public OdfSourceCellRangeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfFloorElement;
  */
 public class OdfFloor extends OdfFloorElement
 {
-    public OdfFloor( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5959308538847633779L;
+
+	public OdfFloor( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

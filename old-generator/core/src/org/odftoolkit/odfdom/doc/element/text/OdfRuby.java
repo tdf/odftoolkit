@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfRubyElement;
  */
 public class OdfRuby extends OdfRubyElement
 {
-    public OdfRuby( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -235148771220905973L;
+
+	public OdfRuby( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

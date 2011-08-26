@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfHelpMessageElement;
  */
 public class OdfHelpMessage extends OdfHelpMessageElement
 {
-    public OdfHelpMessage( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6721540545229202538L;
+
+	public OdfHelpMessage( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

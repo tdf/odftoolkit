@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfAuthorInitialsElement;
  */
 public class OdfAuthorInitials extends OdfAuthorInitialsElement
 {
-    public OdfAuthorInitials( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8064630559700679627L;
+
+	public OdfAuthorInitials( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

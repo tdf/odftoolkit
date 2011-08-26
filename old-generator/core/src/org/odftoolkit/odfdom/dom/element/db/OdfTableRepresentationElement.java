@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfTableRepresentationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-representation" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4620924909094397623L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-representation" );
 
     public OdfTableRepresentationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

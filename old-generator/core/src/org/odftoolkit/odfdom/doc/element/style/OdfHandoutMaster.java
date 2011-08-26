@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfHandoutMasterElement;
  */
 public class OdfHandoutMaster extends OdfHandoutMasterElement
 {
-    public OdfHandoutMaster( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1156027291778615792L;
+
+	public OdfHandoutMaster( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

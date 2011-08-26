@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfWeekOfYearElement;
  */
 public class OdfWeekOfYear extends OdfWeekOfYearElement
 {
-    public OdfWeekOfYear( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5637667039391937715L;
+
+	public OdfWeekOfYear( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

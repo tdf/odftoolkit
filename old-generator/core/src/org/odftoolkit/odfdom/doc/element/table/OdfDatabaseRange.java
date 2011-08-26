@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfDatabaseRangeElement;
  */
 public class OdfDatabaseRange extends OdfDatabaseRangeElement
 {
-    public OdfDatabaseRange( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2036149832016555572L;
+
+	public OdfDatabaseRange( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

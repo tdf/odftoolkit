@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfDataPilotGroupMemberElement;
  */
 public class OdfDataPilotGroupMember extends OdfDataPilotGroupMemberElement
 {
-    public OdfDataPilotGroupMember( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4239116610306822562L;
+
+	public OdfDataPilotGroupMember( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

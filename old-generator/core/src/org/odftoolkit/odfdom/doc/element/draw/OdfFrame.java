@@ -29,7 +29,12 @@ public class OdfFrame extends OdfFrameElement {
 
     // 2DO: OdfMeassure / OdfUnit
 
-    // 2DO - What are mandatory ODF attributes, what are the OOo defaults?
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2260696671403198845L;
+
+	// 2DO - What are mandatory ODF attributes, what are the OOo defaults?
     // 2DO - mandatory attributes part of the constructor default values should always be set in constructor
     /** Creates a new instance of this class */
     public OdfFrame(OdfFileDom ownerDoc) {

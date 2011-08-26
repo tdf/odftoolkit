@@ -43,14 +43,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfIndexTitleElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "index-title" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8701817949716551218L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "index-title" );
 
     public OdfIndexTitleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Section, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -66,7 +71,8 @@ public abstract class OdfIndexTitleElement extends OdfStylableElement
     /**
      * Get value of attribute "text:style-name".
      */
-    public String getStyleName()
+    @Override
+	public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -75,7 +81,8 @@ public abstract class OdfIndexTitleElement extends OdfStylableElement
     /**
      * Set value of attribute "text:style-name".
      */
-    public void setStyleName( String _aStyleName )
+    @Override
+	public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );

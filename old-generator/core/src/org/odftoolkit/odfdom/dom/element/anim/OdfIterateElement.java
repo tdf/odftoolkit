@@ -50,14 +50,19 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfEndsyncType;
  */
 public abstract class OdfIterateElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "iterate" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2388032723455294386L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "iterate" );
 
     public OdfIterateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

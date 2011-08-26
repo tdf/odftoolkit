@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfScriptElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "script" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8201921494187883300L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "script" );
 
     public OdfScriptElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

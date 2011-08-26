@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfEquationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "equation" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6499938895800872781L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "equation" );
 
     public OdfEquationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

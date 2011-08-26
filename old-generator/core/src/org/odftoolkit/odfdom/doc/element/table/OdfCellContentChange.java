@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfCellContentChangeElement;
  */
 public class OdfCellContentChange extends OdfCellContentChangeElement
 {
-    public OdfCellContentChange( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7614817758963771911L;
+
+	public OdfCellContentChange( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

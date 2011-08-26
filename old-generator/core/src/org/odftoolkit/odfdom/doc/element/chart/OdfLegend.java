@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfLegendElement;
  */
 public class OdfLegend extends OdfLegendElement
 {
-    public OdfLegend( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2432012377763670262L;
+
+	public OdfLegend( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

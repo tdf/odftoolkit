@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfBookmarkElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bookmark" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7579227474608133527L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bookmark" );
 
     public OdfBookmarkElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfLastRowElement;
  */
 public class OdfLastRow extends OdfLastRowElement
 {
-    public OdfLastRow( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8451438768457566026L;
+
+	public OdfLastRow( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

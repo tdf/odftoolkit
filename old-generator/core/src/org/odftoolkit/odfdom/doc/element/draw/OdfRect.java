@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfRectElement;
  */
 public class OdfRect extends OdfRectElement
 {
-    public OdfRect( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -549259677801381540L;
+
+	public OdfRect( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

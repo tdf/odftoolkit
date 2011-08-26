@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfHatchElement;
  */
 public class OdfHatch extends OdfHatchElement
 {
-    public OdfHatch( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7561974927153259117L;
+
+	public OdfHatch( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

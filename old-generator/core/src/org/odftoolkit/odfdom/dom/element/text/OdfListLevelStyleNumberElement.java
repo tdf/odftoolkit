@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
  */
 public abstract class OdfListLevelStyleNumberElement extends OdfListLevelStyleElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-level-style-number" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6579831970338189444L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-level-style-number" );
 
     public OdfListLevelStyleNumberElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

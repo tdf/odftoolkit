@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfCheckboxElement;
  */
 public class OdfCheckbox extends OdfCheckboxElement
 {
-    public OdfCheckbox( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8406160603180020271L;
+
+	public OdfCheckbox( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

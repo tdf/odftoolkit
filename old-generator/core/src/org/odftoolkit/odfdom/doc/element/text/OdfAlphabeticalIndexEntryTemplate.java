@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfAlphabeticalIndexEntryTemplateE
  */
 public class OdfAlphabeticalIndexEntryTemplate extends OdfAlphabeticalIndexEntryTemplateElement
 {
-    public OdfAlphabeticalIndexEntryTemplate( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5518537931676153361L;
+
+	public OdfAlphabeticalIndexEntryTemplate( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

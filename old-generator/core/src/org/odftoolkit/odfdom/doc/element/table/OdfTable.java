@@ -34,7 +34,11 @@ import org.w3c.dom.Node;
 
 public class OdfTable extends OdfTableElement {
 
-    private int mCurrentNumberOfColumns = 0;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5690924242559379435L;
+	private int mCurrentNumberOfColumns = 0;
 
     /** Creates a new instance of OdfTable */
     public OdfTable(OdfFileDom ownerDoc) {
@@ -77,8 +81,8 @@ public class OdfTable extends OdfTableElement {
         }
         OdfTableColumn tce =
                 (OdfTableColumn) getOwnerDocument().createElementNS(
-                OdfTableColumn.ELEMENT_NAME.getUri(),
-                OdfTableColumn.ELEMENT_NAME.getQName());
+                OdfTableColumnElement.ELEMENT_NAME.getUri(),
+                OdfTableColumnElement.ELEMENT_NAME.getQName());
         if (ref != null) {
             tce = (OdfTableColumn) insertBefore(tce, ref);
         } else {

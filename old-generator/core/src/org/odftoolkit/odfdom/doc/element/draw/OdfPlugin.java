@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfPluginElement;
  */
 public class OdfPlugin extends OdfPluginElement
 {
-    public OdfPlugin( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8747033915279391258L;
+
+	public OdfPlugin( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfLinenumberingSeparatorElement;
  */
 public class OdfLinenumberingSeparator extends OdfLinenumberingSeparatorElement
 {
-    public OdfLinenumberingSeparator( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2334537573119091144L;
+
+	public OdfLinenumberingSeparator( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

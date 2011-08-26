@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfFontFaceSrcElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "font-face-src" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5053048278758402604L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "font-face-src" );
 
     public OdfFontFaceSrcElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

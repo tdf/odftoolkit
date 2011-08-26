@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSenderPositionElement;
  */
 public class OdfSenderPosition extends OdfSenderPositionElement
 {
-    public OdfSenderPosition( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1676654903370325445L;
+
+	public OdfSenderPosition( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

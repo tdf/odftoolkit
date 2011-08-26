@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfAlphabeticalIndexSourceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "alphabetical-index-source" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4251162583388638919L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "alphabetical-index-source" );
 
     public OdfAlphabeticalIndexSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

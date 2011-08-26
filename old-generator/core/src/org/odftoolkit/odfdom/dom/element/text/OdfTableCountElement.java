@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfTableCountElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-count" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1105725578610141486L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-count" );
 
     public OdfTableCountElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

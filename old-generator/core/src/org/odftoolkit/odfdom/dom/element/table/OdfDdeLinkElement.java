@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfDdeLinkElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "dde-link" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8998966067700686992L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "dde-link" );
 
     public OdfDdeLinkElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

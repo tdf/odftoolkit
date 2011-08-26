@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.element.office;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.draw.OdfShapeElementBase;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeLength;
@@ -42,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfAnnotationElement extends OdfShapeElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "annotation" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4342608990560439678L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "annotation" );
 
     public OdfAnnotationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -76,7 +80,8 @@ public abstract class OdfAnnotationElement extends OdfShapeElementBase
     /**
      * Get value of attribute "office:name".
      */
-    public String getName()
+    @Override
+	public String getName()
     {
         return getOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "name" ) );
     }
@@ -84,7 +89,8 @@ public abstract class OdfAnnotationElement extends OdfShapeElementBase
     /**
      * Set value of attribute "office:name".
      */
-    public void setName( String _aName )
+    @Override
+	public void setName( String _aName )
     {
         setOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "name" ), _aName );
     }

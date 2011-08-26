@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.anim.OdfAnimatecolorElement;
  */
 public class OdfAnimatecolor extends OdfAnimatecolorElement
 {
-    public OdfAnimatecolor( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2172973795128135883L;
+
+	public OdfAnimatecolor( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

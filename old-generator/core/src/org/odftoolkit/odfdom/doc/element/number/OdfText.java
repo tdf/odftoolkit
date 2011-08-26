@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfTextElement;
  */
 public class OdfText extends OdfTextElement
 {
-    public OdfText( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7868322374684220343L;
+
+	public OdfText( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

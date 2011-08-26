@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfPageVariableGetElement;
  */
 public class OdfPageVariableGet extends OdfPageVariableGetElement
 {
-    public OdfPageVariableGet( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 701991531638507216L;
+
+	public OdfPageVariableGet( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

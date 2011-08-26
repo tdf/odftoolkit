@@ -44,14 +44,19 @@ import org.odftoolkit.odfdom.dom.type.form.OdfTabCycleType;
  */
 public abstract class OdfFormElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "form" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6361736565154315288L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "form" );
 
     public OdfFormElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

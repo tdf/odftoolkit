@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
  */
 public abstract class OdfUserIndexMarkEndElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-index-mark-end" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1703548171015905961L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-index-mark-end" );
 
     public OdfUserIndexMarkEndElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfGenericControlElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "generic-control" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7186248479311329925L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "generic-control" );
 
     public OdfGenericControlElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfPageLayoutPropertiesElement;
  */
 public class OdfPageLayoutProperties extends OdfPageLayoutPropertiesElement
 {
-    public OdfPageLayoutProperties( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2624417557959992802L;
+
+	public OdfPageLayoutProperties( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
  */
 public abstract class OdfSectionPropertiesElement extends OdfStylePropertiesBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "section-properties" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6160844582330826802L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "section-properties" );
 
     public OdfSectionPropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -31,7 +31,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfRectElement;
  */
 public class OdfRectangle extends OdfRectElement
 {
-    public OdfRectangle( OdfFileDom ownerDoc)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3882079897301570108L;
+
+	public OdfRectangle( OdfFileDom ownerDoc)
     {
         super(ownerDoc);
     }

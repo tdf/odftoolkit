@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.table.OdfEmbeddedNumberBehaviorType;
  */
 public abstract class OdfSortElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "sort" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6174494538779647817L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "sort" );
 
     public OdfSortElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

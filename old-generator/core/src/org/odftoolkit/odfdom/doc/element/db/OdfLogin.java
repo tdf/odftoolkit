@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfLoginElement;
  */
 public class OdfLogin extends OdfLoginElement
 {
-    public OdfLogin( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5007787696710385612L;
+
+	public OdfLogin( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfLabelSeparatorElement;
  */
 public class OdfLabelSeparator extends OdfLabelSeparatorElement
 {
-    public OdfLabelSeparator( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6313492497102627942L;
+
+	public OdfLabelSeparator( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

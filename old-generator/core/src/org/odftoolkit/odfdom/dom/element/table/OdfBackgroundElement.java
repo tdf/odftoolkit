@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfBackgroundElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "background" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5261800543526414681L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "background" );
 
     public OdfBackgroundElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

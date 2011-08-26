@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfGradientElement;
  */
 public class OdfGradient extends OdfGradientElement
 {
-    public OdfGradient( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3618485917493997223L;
+
+	public OdfGradient( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

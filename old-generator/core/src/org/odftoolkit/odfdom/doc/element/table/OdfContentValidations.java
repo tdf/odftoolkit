@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfContentValidationsElement;
  */
 public class OdfContentValidations extends OdfContentValidationsElement
 {
-    public OdfContentValidations( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1353318933640060571L;
+
+	public OdfContentValidations( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

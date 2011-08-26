@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfTableFormulaElement;
  */
 public class OdfTableFormula extends OdfTableFormulaElement
 {
-    public OdfTableFormula( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -949822603159497700L;
+
+	public OdfTableFormula( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

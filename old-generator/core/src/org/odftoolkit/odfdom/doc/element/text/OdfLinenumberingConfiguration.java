@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfLinenumberingConfigurationEleme
  */
 public class OdfLinenumberingConfiguration extends OdfLinenumberingConfigurationElement
 {
-    public OdfLinenumberingConfiguration( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7176337478741245350L;
+
+	public OdfLinenumberingConfiguration( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

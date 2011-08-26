@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfFooterStyleElement;
  */
 public class OdfFooterStyle extends OdfFooterStyleElement
 {
-    public OdfFooterStyle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1094901965097533501L;
+
+	public OdfFooterStyle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfTrackedChangesElement;
  */
 public class OdfTrackedChanges extends OdfTrackedChangesElement
 {
-    public OdfTrackedChanges( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -21989075960602822L;
+
+	public OdfTrackedChanges( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfJavaClasspathElement;
  */
 public class OdfJavaClasspath extends OdfJavaClasspathElement
 {
-    public OdfJavaClasspath( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6964151500889513959L;
+
+	public OdfJavaClasspath( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

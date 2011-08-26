@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfListItemElement;
 
 public class OdfListItem extends OdfListItemElement {
 
-    /** Creates a new instance of this class */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -101525534693789046L;
+
+	/** Creates a new instance of this class */
     public OdfListItem(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

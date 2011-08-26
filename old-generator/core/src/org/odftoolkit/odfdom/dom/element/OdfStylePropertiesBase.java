@@ -31,7 +31,12 @@ import org.w3c.dom.DOMException;
  */
 abstract public class OdfStylePropertiesBase extends OdfElement
 {
-    /** Creates a new instance of OdfStyleProperties */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6575728390842696683L;
+
+	/** Creates a new instance of OdfStyleProperties */
     public OdfStylePropertiesBase(OdfFileDom ownerDocument,
             String namespaceURI,
             String qualifiedName) throws DOMException {

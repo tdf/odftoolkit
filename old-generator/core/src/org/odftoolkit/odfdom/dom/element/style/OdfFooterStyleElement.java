@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfFooterStyleElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "footer-style" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6788075344007200043L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "footer-style" );
 
     public OdfFooterStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfFormatChangeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "format-change" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3972348589333118124L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "format-change" );
 
     public OdfFormatChangeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

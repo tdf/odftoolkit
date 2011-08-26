@@ -27,12 +27,18 @@ import org.odftoolkit.odfdom.dom.element.text.OdfLineBreakElement;
 
 public class OdfLineBreak extends OdfLineBreakElement {
 
-    /** Creates a new instance */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6842777790102960791L;
+
+	/** Creates a new instance */
     public OdfLineBreak(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }
 
-    public OdfName getOdfName() {
+    @Override
+	public OdfName getOdfName() {
         return ELEMENT_NAME;
     }
 }

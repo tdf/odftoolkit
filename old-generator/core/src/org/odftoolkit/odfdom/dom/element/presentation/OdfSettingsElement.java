@@ -43,14 +43,19 @@ import org.odftoolkit.odfdom.dom.type.presentation.OdfTransitionOnClickType;
  */
 public abstract class OdfSettingsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "settings" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4213452008339912160L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "settings" );
 
     public OdfSettingsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfAutoIncrementElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "auto-increment" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4646883243903145130L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "auto-increment" );
 
     public OdfAutoIncrementElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

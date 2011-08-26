@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.meta.OdfValueType;
  */
 public abstract class OdfUserDefinedElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "user-defined" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2759616857576723478L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "user-defined" );
 
     public OdfUserDefinedElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

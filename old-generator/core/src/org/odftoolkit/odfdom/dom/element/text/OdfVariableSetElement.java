@@ -46,14 +46,19 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
  */
 public abstract class OdfVariableSetElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-set" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6164444486204199664L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-set" );
 
     public OdfVariableSetElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

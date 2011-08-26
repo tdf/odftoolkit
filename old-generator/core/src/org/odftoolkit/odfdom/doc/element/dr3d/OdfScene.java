@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.dr3d.OdfSceneElement;
  */
 public class OdfScene extends OdfSceneElement
 {
-    public OdfScene( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8555743179314432593L;
+
+	public OdfScene( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfFileNameElement;
  */
 public class OdfFileName extends OdfFileNameElement
 {
-    public OdfFileName( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4561521468596527166L;
+
+	public OdfFileName( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

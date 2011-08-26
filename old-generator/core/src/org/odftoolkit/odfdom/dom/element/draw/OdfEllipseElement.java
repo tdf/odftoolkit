@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.element.draw;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.type.draw.OdfKindType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfId;
@@ -41,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfEllipseElement extends OdfShapeElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "ellipse" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7690701964640053140L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "ellipse" );
 
     public OdfEllipseElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

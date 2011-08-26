@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfCalculationSettingsElement;
  */
 public class OdfCalculationSettings extends OdfCalculationSettingsElement
 {
-    public OdfCalculationSettings( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2712278416380810865L;
+
+	public OdfCalculationSettings( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

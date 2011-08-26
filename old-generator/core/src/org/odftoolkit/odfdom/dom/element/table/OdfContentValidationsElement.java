@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfContentValidationsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "content-validations" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5673653688691351014L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "content-validations" );
 
     public OdfContentValidationsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

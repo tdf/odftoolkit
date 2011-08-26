@@ -34,7 +34,12 @@ import org.w3c.dom.Node;
  */
 abstract public class OdfContainerElementBase extends OdfElement
 {
-    /** Creates a new instance of OdfElement */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6944696143015713668L;
+
+	/** Creates a new instance of OdfElement */
     public OdfContainerElementBase(OdfFileDom ownerDocument,
             String namespaceURI,
             String qualifiedName) throws DOMException {

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfPolylineElement;
  */
 public class OdfPolyline extends OdfPolylineElement
 {
-    public OdfPolyline( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3382223925056854147L;
+
+	public OdfPolyline( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

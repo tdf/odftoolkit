@@ -38,7 +38,8 @@ public enum OdfFamilyType
         m_aValue = _aValue;
     }
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return m_aValue;
     }

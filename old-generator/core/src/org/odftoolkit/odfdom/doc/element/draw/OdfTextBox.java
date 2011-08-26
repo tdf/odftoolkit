@@ -31,7 +31,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfTextBoxElement;
  */
 public class OdfTextBox extends OdfTextBoxElement
 {
-    /** Creates a new instance of this class */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5013307683161385752L;
+
+	/** Creates a new instance of this class */
     public OdfTextBox(OdfFileDom ownerDoc)
     {
         super(ownerDoc);

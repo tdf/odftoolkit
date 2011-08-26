@@ -51,8 +51,8 @@ import java.util.logging.Logger;
 import java.util.zip.CRC32;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipOutputStream;
 import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -72,8 +72,6 @@ import org.odftoolkit.odfdom.pkg.manifest.EncryptionData;
 import org.odftoolkit.odfdom.pkg.manifest.KeyDerivation;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.w3c.dom.Document;
-
-import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSOutput;
 import org.w3c.dom.ls.LSSerializer;
@@ -1548,7 +1546,8 @@ public class OdfPackage {
             }
         }
 
-        public void write(int b) {
+        @Override
+		public void write(int b) {
             try {
 
                 mOs.write(b);

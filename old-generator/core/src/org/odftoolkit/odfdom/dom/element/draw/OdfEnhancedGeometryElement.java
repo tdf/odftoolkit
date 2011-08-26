@@ -45,14 +45,19 @@ import org.odftoolkit.odfdom.dom.type.draw.OdfTextPathScaleType;
  */
 public abstract class OdfEnhancedGeometryElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "enhanced-geometry" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 911975622961121660L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "enhanced-geometry" );
 
     public OdfEnhancedGeometryElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

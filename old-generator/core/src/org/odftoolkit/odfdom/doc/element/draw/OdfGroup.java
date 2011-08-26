@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfGroupElement;
  */
 public class OdfGroup extends OdfGroupElement
 {
-    public OdfGroup( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3574878570266241005L;
+
+	public OdfGroup( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

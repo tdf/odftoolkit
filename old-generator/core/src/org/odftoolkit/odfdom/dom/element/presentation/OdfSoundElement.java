@@ -42,14 +42,19 @@ import org.odftoolkit.odfdom.dom.type.xlink.OdfShowType;
  */
 public abstract class OdfSoundElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "sound" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4284016580261407215L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "sound" );
 
     public OdfSoundElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

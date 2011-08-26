@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfBodyElement;
  */
 public class OdfBody extends OdfBodyElement
 {
-    public OdfBody( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3552180820829408546L;
+
+	public OdfBody( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

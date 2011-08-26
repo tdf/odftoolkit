@@ -42,14 +42,19 @@ import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
  */
 public abstract class OdfFileElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "file" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -253576497091786935L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "file" );
 
     public OdfFileElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.meta.OdfEditingCyclesElement;
  */
 public class OdfEditingCycles extends OdfEditingCyclesElement
 {
-    public OdfEditingCycles( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6804018153079840912L;
+
+	public OdfEditingCycles( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

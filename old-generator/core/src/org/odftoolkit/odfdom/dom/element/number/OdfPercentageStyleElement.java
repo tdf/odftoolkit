@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.number.OdfTransliterationStyleType;
  */
 public abstract class OdfPercentageStyleElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "percentage-style" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -818744115090575263L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "percentage-style" );
 
     public OdfPercentageStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfConnectionDataElement;
  */
 public class OdfConnectionData extends OdfConnectionDataElement
 {
-    public OdfConnectionData( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5244393725418892276L;
+
+	public OdfConnectionData( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

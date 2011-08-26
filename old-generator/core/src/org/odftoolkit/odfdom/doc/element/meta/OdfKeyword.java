@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.meta.OdfKeywordElement;
  */
 public class OdfKeyword extends OdfKeywordElement
 {
-    public OdfKeyword( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2220936980864170506L;
+
+	public OdfKeyword( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

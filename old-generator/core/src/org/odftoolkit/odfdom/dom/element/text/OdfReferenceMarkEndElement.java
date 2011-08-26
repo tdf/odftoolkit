@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfReferenceMarkEndElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "reference-mark-end" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 925514283358536007L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "reference-mark-end" );
 
     public OdfReferenceMarkEndElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.presentation.OdfHideTextElement;
  */
 public class OdfHideText extends OdfHideTextElement
 {
-    public OdfHideText( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5522381031520245714L;
+
+	public OdfHideText( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfChangedRegionElement;
  */
 public class OdfChangedRegion extends OdfChangedRegionElement
 {
-    public OdfChangedRegion( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5944258330465769903L;
+
+	public OdfChangedRegion( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

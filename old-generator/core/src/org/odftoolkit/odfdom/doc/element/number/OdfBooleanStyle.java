@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfBooleanStyleElement;
  */
 public class OdfBooleanStyle extends OdfBooleanStyleElement
 {
-    public OdfBooleanStyle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3992537556310136980L;
+
+	public OdfBooleanStyle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

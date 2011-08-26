@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSenderFaxElement;
  */
 public class OdfSenderFax extends OdfSenderFaxElement
 {
-    public OdfSenderFax( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2016204165662014730L;
+
+	public OdfSenderFax( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

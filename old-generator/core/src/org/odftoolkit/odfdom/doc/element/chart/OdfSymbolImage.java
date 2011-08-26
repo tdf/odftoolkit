@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfSymbolImageElement;
  */
 public class OdfSymbolImage extends OdfSymbolImageElement
 {
-    public OdfSymbolImage( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4902926560084965016L;
+
+	public OdfSymbolImage( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

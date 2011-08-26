@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfCurrencyStyleElement;
  */
 public class OdfCurrencyStyle extends OdfCurrencyStyleElement
 {
-    public OdfCurrencyStyle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1781890456172080213L;
+
+	public OdfCurrencyStyle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

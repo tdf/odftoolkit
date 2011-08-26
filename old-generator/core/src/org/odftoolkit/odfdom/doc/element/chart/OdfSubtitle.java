@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfSubtitleElement;
  */
 public class OdfSubtitle extends OdfSubtitleElement
 {
-    public OdfSubtitle( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7198091048019274868L;
+
+	public OdfSubtitle( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

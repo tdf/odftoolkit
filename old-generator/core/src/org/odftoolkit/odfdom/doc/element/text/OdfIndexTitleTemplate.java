@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfIndexTitleTemplateElement;
 
 public class OdfIndexTitleTemplate extends OdfIndexTitleTemplateElement {
 
-    /** Creates a new instance of OdfParagraphElementImpl */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1784484648444813866L;
+
+	/** Creates a new instance of OdfParagraphElementImpl */
     public OdfIndexTitleTemplate(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }

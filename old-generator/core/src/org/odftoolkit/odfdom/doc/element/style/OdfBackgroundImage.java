@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfBackgroundImageElement;
  */
 public class OdfBackgroundImage extends OdfBackgroundImageElement
 {
-    public OdfBackgroundImage( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5075868231893846671L;
+
+	public OdfBackgroundImage( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

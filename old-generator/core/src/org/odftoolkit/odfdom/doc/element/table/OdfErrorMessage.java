@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfErrorMessageElement;
  */
 public class OdfErrorMessage extends OdfErrorMessageElement
 {
-    public OdfErrorMessage( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8965696839299608446L;
+
+	public OdfErrorMessage( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

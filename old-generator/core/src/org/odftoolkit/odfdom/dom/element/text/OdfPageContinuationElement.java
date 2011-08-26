@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.text.OdfPageContiuationSelectType;
  */
 public abstract class OdfPageContinuationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-continuation" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8740271317202013930L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-continuation" );
 
     public OdfPageContinuationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

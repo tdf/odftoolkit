@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.meta.OdfHyperlinkBehaviourElement;
  */
 public class OdfHyperlinkBehaviour extends OdfHyperlinkBehaviourElement
 {
-    public OdfHyperlinkBehaviour( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4924776383032480227L;
+
+	public OdfHyperlinkBehaviour( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

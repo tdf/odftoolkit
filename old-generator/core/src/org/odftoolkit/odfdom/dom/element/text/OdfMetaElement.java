@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfMetaElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "meta" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4631237933357316028L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "meta" );
 
     public OdfMetaElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

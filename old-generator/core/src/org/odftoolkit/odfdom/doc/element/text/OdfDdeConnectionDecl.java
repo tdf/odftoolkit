@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfDdeConnectionDeclElement;
  */
 public class OdfDdeConnectionDecl extends OdfDdeConnectionDeclElement
 {
-    public OdfDdeConnectionDecl( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4520625900072827091L;
+
+	public OdfDdeConnectionDecl( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.office.OdfSpreadsheetElement;
  */
 public class OdfSpreadsheet extends OdfSpreadsheetElement
 {
-    public OdfSpreadsheet( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4311913392237160427L;
+
+	public OdfSpreadsheet( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

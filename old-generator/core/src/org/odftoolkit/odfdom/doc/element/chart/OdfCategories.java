@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfCategoriesElement;
  */
 public class OdfCategories extends OdfCategoriesElement
 {
-    public OdfCategories( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 311879238211262711L;
+
+	public OdfCategories( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

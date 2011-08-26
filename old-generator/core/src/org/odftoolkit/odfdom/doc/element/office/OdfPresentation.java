@@ -42,7 +42,11 @@ import org.w3c.dom.Node;
  */
 public class OdfPresentation extends OdfPresentationElement
 {
-    private Vector< OdfPage > mPages;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4270501450912600653L;
+	private Vector< OdfPage > mPages;
     
     public OdfPresentation( OdfFileDom _aOwnerDoc )
     {
@@ -90,7 +94,8 @@ public class OdfPresentation extends OdfPresentationElement
 
     /** override this method to get notified about element insertion
      */
-    protected void onOdfNodeInserted( OdfElement node, Node refNode )
+    @Override
+	protected void onOdfNodeInserted( OdfElement node, Node refNode )
     {
         if( node instanceof OdfPage )
         {
@@ -115,7 +120,8 @@ public class OdfPresentation extends OdfPresentationElement
             
     /** override this method to get notified about element insertion
      */
-    protected void onOdfNodeRemoved( OdfElement node )
+    @Override
+	protected void onOdfNodeRemoved( OdfElement node )
     {
         if( node instanceof OdfPage )
         {

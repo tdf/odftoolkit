@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.number.OdfHoursElement;
  */
 public class OdfHours extends OdfHoursElement
 {
-    public OdfHours( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7164433772046827971L;
+
+	public OdfHours( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

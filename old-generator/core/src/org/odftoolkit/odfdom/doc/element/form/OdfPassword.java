@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfPasswordElement;
  */
 public class OdfPassword extends OdfPasswordElement
 {
-    public OdfPassword( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1737316341643041253L;
+
+	public OdfPassword( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

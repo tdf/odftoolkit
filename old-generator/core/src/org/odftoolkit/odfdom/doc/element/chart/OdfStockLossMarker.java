@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.chart.OdfStockLossMarkerElement;
  */
 public class OdfStockLossMarker extends OdfStockLossMarkerElement
 {
-    public OdfStockLossMarker( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8722031316071224751L;
+
+	public OdfStockLossMarker( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -38,7 +38,12 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
  */
 public class OdfListLevelStyleNumber extends OdfListLevelStyleNumberElement
 {
-    public OdfListLevelStyleNumber( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5198532536808129901L;
+
+	public OdfListLevelStyleNumber( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

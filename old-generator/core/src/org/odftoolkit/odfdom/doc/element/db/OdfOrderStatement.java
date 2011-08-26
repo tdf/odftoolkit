@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfOrderStatementElement;
  */
 public class OdfOrderStatement extends OdfOrderStatementElement
 {
-    public OdfOrderStatement( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5551806021632884198L;
+
+	public OdfOrderStatement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.draw.OdfHyperlinkElement;
  */
 public class OdfHyperlink extends OdfHyperlinkElement
 {
-    public OdfHyperlink( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -696973877539333793L;
+
+	public OdfHyperlink( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

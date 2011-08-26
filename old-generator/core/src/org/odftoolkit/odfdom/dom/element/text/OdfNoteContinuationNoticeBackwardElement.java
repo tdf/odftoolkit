@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfNoteContinuationNoticeBackwardElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "note-continuation-notice-backward" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5331959182536304121L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "note-continuation-notice-backward" );
 
     public OdfNoteContinuationNoticeBackwardElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

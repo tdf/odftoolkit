@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.table.OdfLabelRangesElement;
  */
 public class OdfLabelRanges extends OdfLabelRangesElement
 {
-    public OdfLabelRanges( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8062210149973983365L;
+
+	public OdfLabelRanges( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

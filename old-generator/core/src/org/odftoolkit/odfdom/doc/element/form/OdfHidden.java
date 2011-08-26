@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfHiddenElement;
  */
 public class OdfHidden extends OdfHiddenElement
 {
-    public OdfHidden( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7034426974530463665L;
+
+	public OdfHidden( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

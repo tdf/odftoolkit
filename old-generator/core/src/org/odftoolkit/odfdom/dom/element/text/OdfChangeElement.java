@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfChangeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "change" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4420942725932265292L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "change" );
 
     public OdfChangeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

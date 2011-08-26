@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.form.OdfConnectionResourceElement;
  */
 public class OdfConnectionResource extends OdfConnectionResourceElement
 {
-    public OdfConnectionResource( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5777190019685876458L;
+
+	public OdfConnectionResource( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

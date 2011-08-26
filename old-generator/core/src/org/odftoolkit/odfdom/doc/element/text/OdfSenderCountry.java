@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSenderCountryElement;
  */
 public class OdfSenderCountry extends OdfSenderCountryElement
 {
-    public OdfSenderCountry( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1735586492924239957L;
+
+	public OdfSenderCountry( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

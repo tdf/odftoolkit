@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfListHeaderElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-header" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5001169150396144059L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-header" );
 
     public OdfListHeaderElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

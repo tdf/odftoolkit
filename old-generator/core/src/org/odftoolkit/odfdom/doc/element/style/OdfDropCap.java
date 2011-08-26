@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfDropCapElement;
  */
 public class OdfDropCap extends OdfDropCapElement
 {
-    public OdfDropCap( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9153460798673228827L;
+
+	public OdfDropCap( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

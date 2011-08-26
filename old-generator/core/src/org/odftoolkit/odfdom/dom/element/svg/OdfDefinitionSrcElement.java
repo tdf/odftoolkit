@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfDefinitionSrcElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "definition-src" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2676412996179003059L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "definition-src" );
 
     public OdfDefinitionSrcElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

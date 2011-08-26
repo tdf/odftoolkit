@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.number.OdfTransliterationStyleType;
  */
 public abstract class OdfBooleanStyleElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "boolean-style" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8790846737350462548L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "boolean-style" );
 
     public OdfBooleanStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

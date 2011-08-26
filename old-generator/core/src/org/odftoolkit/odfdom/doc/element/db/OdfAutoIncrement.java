@@ -35,7 +35,12 @@ import org.odftoolkit.odfdom.dom.element.db.OdfAutoIncrementElement;
  */
 public class OdfAutoIncrement extends OdfAutoIncrementElement
 {
-    public OdfAutoIncrement( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5059237557627270563L;
+
+	public OdfAutoIncrement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

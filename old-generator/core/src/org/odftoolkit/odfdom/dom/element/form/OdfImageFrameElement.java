@@ -41,14 +41,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfImageFrameElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "image-frame" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9096795902689356874L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "image-frame" );
 
     public OdfImageFrameElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

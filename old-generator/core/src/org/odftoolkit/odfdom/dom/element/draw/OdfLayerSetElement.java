@@ -38,14 +38,19 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
  */
 public abstract class OdfLayerSetElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "layer-set" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 726654006101842588L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "layer-set" );
 
     public OdfLayerSetElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -48,14 +48,19 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
  */
 public abstract class OdfSeqElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "seq" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4403727716678208566L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "seq" );
 
     public OdfSeqElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

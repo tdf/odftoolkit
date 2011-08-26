@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfAlphabeticalIndexAutoMarkFileEl
  */
 public class OdfAlphabeticalIndexAutoMarkFile extends OdfAlphabeticalIndexAutoMarkFileElement
 {
-    public OdfAlphabeticalIndexAutoMarkFile( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1150897035454928524L;
+
+	public OdfAlphabeticalIndexAutoMarkFile( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

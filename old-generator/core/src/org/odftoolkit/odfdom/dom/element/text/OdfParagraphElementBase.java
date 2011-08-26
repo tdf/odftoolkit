@@ -42,7 +42,12 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfParagraphElementBase extends OdfStylableElement
 {
-    public OdfParagraphElementBase( OdfFileDom _aOwnerDoc ,OdfName _elementName ,OdfStyleFamily _styleFamily ,OdfName _styleAttrName )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6536572475784077670L;
+
+	public OdfParagraphElementBase( OdfFileDom _aOwnerDoc ,OdfName _elementName ,OdfStyleFamily _styleFamily ,OdfName _styleAttrName )
     {
         super( _aOwnerDoc, _elementName, _styleFamily, _styleAttrName );
     }
@@ -56,7 +61,8 @@ public abstract class OdfParagraphElementBase extends OdfStylableElement
     /**
      * Get value of attribute "text:style-name".
      */
-    public String getStyleName()
+    @Override
+	public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -65,7 +71,8 @@ public abstract class OdfParagraphElementBase extends OdfStylableElement
     /**
      * Set value of attribute "text:style-name".
      */
-    public void setStyleName( String _aStyleName )
+    @Override
+	public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );

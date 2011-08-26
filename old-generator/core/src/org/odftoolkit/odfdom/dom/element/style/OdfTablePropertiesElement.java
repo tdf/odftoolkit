@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
  */
 public abstract class OdfTablePropertiesElement extends OdfStylePropertiesBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "table-properties" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -724366356950940830L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "table-properties" );
 
     public OdfTablePropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

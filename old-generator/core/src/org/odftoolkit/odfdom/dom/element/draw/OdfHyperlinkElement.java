@@ -43,14 +43,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfHyperlinkElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "a" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5796673088460149021L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "a" );
 
     public OdfHyperlinkElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

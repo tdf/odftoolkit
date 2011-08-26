@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfPageContinuationElement;
  */
 public class OdfPageContinuation extends OdfPageContinuationElement
 {
-    public OdfPageContinuation( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -658224973591789319L;
+
+	public OdfPageContinuation( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

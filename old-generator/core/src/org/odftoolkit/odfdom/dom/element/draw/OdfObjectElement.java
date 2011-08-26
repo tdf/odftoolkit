@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfObjectElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "object" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1494701147591003635L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "object" );
 
     public OdfObjectElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

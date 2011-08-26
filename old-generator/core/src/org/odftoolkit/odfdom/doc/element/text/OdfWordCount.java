@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfWordCountElement;
  */
 public class OdfWordCount extends OdfWordCountElement
 {
-    public OdfWordCount( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4555723436363893202L;
+
+	public OdfWordCount( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

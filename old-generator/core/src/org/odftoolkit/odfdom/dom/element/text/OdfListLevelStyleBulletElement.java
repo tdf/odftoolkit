@@ -39,14 +39,19 @@ import org.odftoolkit.odfdom.dom.type.OdfPercent;
  */
 public abstract class OdfListLevelStyleBulletElement extends OdfListLevelStyleElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-level-style-bullet" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8683162572102270433L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-level-style-bullet" );
 
     public OdfListLevelStyleBulletElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

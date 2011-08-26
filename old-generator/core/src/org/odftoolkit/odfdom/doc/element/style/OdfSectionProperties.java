@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.style.OdfSectionPropertiesElement;
  */
 public class OdfSectionProperties extends OdfSectionPropertiesElement
 {
-    public OdfSectionProperties( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3357894063864350353L;
+
+	public OdfSectionProperties( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

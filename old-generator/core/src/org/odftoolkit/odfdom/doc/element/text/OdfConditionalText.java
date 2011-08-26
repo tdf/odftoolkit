@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfConditionalTextElement;
  */
 public class OdfConditionalText extends OdfConditionalTextElement
 {
-    public OdfConditionalText( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7852298418399397161L;
+
+	public OdfConditionalText( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

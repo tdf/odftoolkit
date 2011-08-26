@@ -40,14 +40,19 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
  */
 public abstract class OdfTextBoxElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "text-box" );
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5035389749395798297L;
+	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "text-box" );
 
     public OdfTextBoxElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    public OdfName getOdfName()
+    @Override
+	public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

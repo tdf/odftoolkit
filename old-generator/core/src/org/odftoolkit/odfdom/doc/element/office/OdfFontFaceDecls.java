@@ -36,7 +36,12 @@ import org.odftoolkit.odfdom.dom.element.office.OdfFontFaceDeclsElement;
  */
 public class OdfFontFaceDecls extends OdfFontFaceDeclsElement
 {
-    public OdfFontFaceDecls( OdfFileDom _aOwnerDoc )
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 94325657019277114L;
+
+	public OdfFontFaceDecls( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

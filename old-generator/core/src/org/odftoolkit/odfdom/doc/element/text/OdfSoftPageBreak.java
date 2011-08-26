@@ -26,7 +26,12 @@ import org.odftoolkit.odfdom.dom.element.text.OdfSoftPageBreakElement;
 
 public class OdfSoftPageBreak extends OdfSoftPageBreakElement {
 
-    /** Creates a new instance of this class */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6195363003828757295L;
+
+	/** Creates a new instance of this class */
     public OdfSoftPageBreak(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }
