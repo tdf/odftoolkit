@@ -87,7 +87,7 @@ public class TableTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testNewTableWithArrayData() {
 		try {
@@ -103,8 +103,7 @@ public class TableTest {
 			}
 			double[][] doubleArray = null;
 			String[][] stringArray = null;
-			OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument
-					.newSpreadsheetDocument();
+			OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.newSpreadsheetDocument();
 			OdfTable table1 = OdfTable.newTable(spreadsheet, null, null,
 					doubleArray);
 			Assert.assertEquals(0, table1.getHeaderColumnCount());
@@ -113,7 +112,7 @@ public class TableTest {
 			Assert.assertEquals(2, table1.getRowCount());
 			// column count should be DEFAULT_COLUMN_COUNT 5
 			Assert.assertEquals(5, table1.getColumnCount());
-			 
+
 			table1 = OdfTable.newTable(spreadsheet, rowLabels, columnLabels,
 					doubleArray);
 			Assert.assertEquals(1, table1.getHeaderColumnCount());
@@ -122,7 +121,7 @@ public class TableTest {
 			Assert.assertEquals(3, table1.getRowCount());
 			// column count should be DEFAULT_COLUMN_COUNT+1 6
 			Assert.assertEquals(6, table1.getColumnCount());
-			
+
 			table1 = OdfTable.newTable(spreadsheet, null, null, stringArray);
 			Assert.assertEquals(0, table1.getHeaderColumnCount());
 			Assert.assertEquals(0, table1.getHeaderRowCount());
@@ -130,7 +129,7 @@ public class TableTest {
 			Assert.assertEquals(2, table1.getRowCount());
 			// column count should be DEFAULT_COLUMN_COUNT 5
 			Assert.assertEquals(5, table1.getColumnCount());
-			
+
 			table1 = OdfTable.newTable(spreadsheet, rowLabels, columnLabels,
 					stringArray);
 			Assert.assertEquals(1, table1.getHeaderColumnCount());
@@ -139,7 +138,7 @@ public class TableTest {
 			Assert.assertEquals(3, table1.getRowCount());
 			// column count should be DEFAULT_COLUMN_COUNT+1 6
 			Assert.assertEquals(6, table1.getColumnCount());
-			
+
 			doubleArray = new double[rowCount][columnCount];
 			for (int i = 0; i < rowCount; i++) {
 				for (int j = 0; j < columnCount; j++) {
@@ -151,13 +150,13 @@ public class TableTest {
 			Assert.assertEquals(0, table1.getHeaderRowCount());
 			Assert.assertEquals(rowCount, table1.getRowCount());
 			Assert.assertEquals(columnCount, table1.getColumnCount());
-			
+
 			table1 = OdfTable.newTable(spreadsheet, rowLabels, columnLabels,
 					doubleArray);
 			Assert.assertEquals(1, table1.getHeaderColumnCount());
 			Assert.assertEquals(1, table1.getHeaderRowCount());
-			Assert.assertEquals(rowCount+1, table1.getRowCount());
-			Assert.assertEquals(columnCount+1, table1.getColumnCount());
+			Assert.assertEquals(rowCount + 1, table1.getRowCount());
+			Assert.assertEquals(columnCount + 1, table1.getColumnCount());
 
 			stringArray = new String[rowCount][columnCount];
 			for (int i = 0; i < rowCount; i++) {
@@ -170,13 +169,13 @@ public class TableTest {
 			Assert.assertEquals(0, table1.getHeaderRowCount());
 			Assert.assertEquals(rowCount, table1.getRowCount());
 			Assert.assertEquals(columnCount, table1.getColumnCount());
-			
+
 			table1 = OdfTable.newTable(spreadsheet, rowLabels, columnLabels,
 					stringArray);
 			Assert.assertEquals(1, table1.getHeaderColumnCount());
 			Assert.assertEquals(1, table1.getHeaderRowCount());
-			Assert.assertEquals(rowCount+1, table1.getRowCount());
-			Assert.assertEquals(columnCount+1, table1.getColumnCount());
+			Assert.assertEquals(rowCount + 1, table1.getRowCount());
+			Assert.assertEquals(columnCount + 1, table1.getColumnCount());
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -187,18 +186,15 @@ public class TableTest {
 	public void testNewTableWithoutHeaderColumn() {
 		try {
 			// reproduce bug 145
-			OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument
-					.newSpreadsheetDocument();
+			OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.newSpreadsheetDocument();
 			OdfTable sheet = OdfTable.newTable(spreadsheet, 3, 5);
-			TableTableHeaderColumnsElement headers = OdfElement
-					.findFirstChildNode(TableTableHeaderColumnsElement.class,
-							sheet.mTableElement);
+			TableTableHeaderColumnsElement headers = OdfElement.findFirstChildNode(TableTableHeaderColumnsElement.class,
+					sheet.mTableElement);
 			if (headers != null) {
 				for (Node n : new DomNodeList(headers.getChildNodes())) {
 					if (n instanceof TableTableColumnElement) {
 						if (sheet.getColumnInstance(
-								((TableTableColumnElement) n), 0)
-								.getColumnsRepeatedNumber() == 0) {
+								((TableTableColumnElement) n), 0).getColumnsRepeatedNumber() == 0) {
 							Assert.fail("table:number-columns-repeated has the invalid value: '0'. It have to be a value matching the 'positiveInteger' type.");
 						}
 					}
@@ -209,6 +205,7 @@ public class TableTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+
 	private OdfTable createEmptyTable(OdfTextDocument document) {
 		String tablename = "Table1";
 		int rownumber = 5;
@@ -747,66 +744,86 @@ public class TableTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testSplitCellAddress() {
 		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
 		OdfTable table1 = mOdtDoc.getTableByName("Table1");
 		//reproduce bug 138, test case to proof the fix problem.
 		//test address without table name.
-		String[] address=table1.splitCellAddress("A1");
+		String[] address = table1.splitCellAddress("A1");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("A", address[1]);
 		Assert.assertEquals("1", address[2]);
-		address=table1.splitCellAddress("AC1");
+		address = table1.splitCellAddress("AC1");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("AC", address[1]);
 		Assert.assertEquals("1", address[2]);
-		address=table1.splitCellAddress("B34");
+		address = table1.splitCellAddress("B34");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("B", address[1]);
 		Assert.assertEquals("34", address[2]);
-		address=table1.splitCellAddress("AC29");
+		address = table1.splitCellAddress("AC29");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("AC", address[1]);
 		Assert.assertEquals("29", address[2]);
-		
+
 		//test relative address
-		address=table1.splitCellAddress("Table1.A1");
+		address = table1.splitCellAddress("Table1.A1");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("A", address[1]);
 		Assert.assertEquals("1", address[2]);
-		address=table1.splitCellAddress("Table1.AC1");
+		address = table1.splitCellAddress("Table1.AC1");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("AC", address[1]);
 		Assert.assertEquals("1", address[2]);
-		address=table1.splitCellAddress("Table1.B34");
+		address = table1.splitCellAddress("Table1.B34");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("B", address[1]);
 		Assert.assertEquals("34", address[2]);
-		address=table1.splitCellAddress("Table1.AC29");
+		address = table1.splitCellAddress("Table1.AC29");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("AC", address[1]);
 		Assert.assertEquals("29", address[2]);
-		
+
 		//test absolute address.
-		address=table1.splitCellAddress("$Table1.$A$1");
+		address = table1.splitCellAddress("$Table1.$A$1");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("A", address[1]);
 		Assert.assertEquals("1", address[2]);
-		address=table1.splitCellAddress("$Table1.$AC$1");
+		address = table1.splitCellAddress("$Table1.$AC$1");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("AC", address[1]);
 		Assert.assertEquals("1", address[2]);
-		address=table1.splitCellAddress("$Table1.$B$34");
+		address = table1.splitCellAddress("$Table1.$B$34");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("B", address[1]);
 		Assert.assertEquals("34", address[2]);
-		address=table1.splitCellAddress("$Table1.$AC$29");
+		address = table1.splitCellAddress("$Table1.$AC$29");
 		Assert.assertEquals("Table1", address[0]);
 		Assert.assertEquals("AC", address[1]);
 		Assert.assertEquals("29", address[2]);
 	}
+
+	// Bug 97 - OdfTableRow.getCellAt(int) returns null when the cell is a repeat cell
+	@Test
+	public void testGetCellAt() {
+		try {
+			OdfSpreadsheetDocument doc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("testGetCellAt.ods"));
+			OdfTable odfTable = doc.getTableList().get(0);
+			OdfTableRow valueRows = odfTable.getRowByIndex(0);
+			for (int i = 0; i < 4; i++) {
+				OdfTableCell cell = valueRows.getCellByIndex(i);
+				Assert.assertNotNull(cell);
+				int value = cell.getDoubleValue().intValue();
+				Assert.assertEquals(1, value);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	private void testAppendRow(TableTableElement table) {
 		OdfTable fTable = OdfTable.getInstance(table);
 		int count = fTable.getRowCount();
