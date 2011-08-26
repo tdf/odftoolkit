@@ -917,7 +917,8 @@ public class CodeGen implements IFunctionSupplier
             }
             else
             {
-                name.append( Character.toLowerCase(c));                
+                //name.append( Character.toLowerCase(c));
+            	name.append( c );
             }
 
         }
