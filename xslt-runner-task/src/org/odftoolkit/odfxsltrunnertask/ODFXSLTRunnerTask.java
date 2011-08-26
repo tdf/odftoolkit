@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
- * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
- * 
+ *
+ * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -49,8 +49,8 @@ public class ODFXSLTRunnerTask extends Task {
     private File m_aOutput = null;
     private File m_aOutputFile = null;
     private String m_aPath = "content.xml";
-    private String m_aProcessor = null;
     private Vector<XSLTParameter> m_aParams = null;
+    private Factory m_aFactory = null;
     boolean m_bForce = false;
     boolean m_bTemplate = false;
     
@@ -131,16 +131,6 @@ public class ODFXSLTRunnerTask extends Task {
         m_bForce = bForce;
     }
 
-    /**
-     * Set processor.
-     *
-     * @param bForce
-     */
-    public void setProcessor( String aProcessor )
-    {
-        m_aProcessor = aProcessor;
-    }
-
 
     /**
      * Paramter class for nested <param> elements.
@@ -193,7 +183,40 @@ public class ODFXSLTRunnerTask extends Task {
             return m_aValue;
         }
     }
-    
+
+    /**
+     * Paramter class for nested <factory> elements.
+     */
+    public static class Factory
+    {
+        private String m_aName = null;
+
+        Factory()
+        {
+        }
+
+        /**
+         * Set factory name.
+         * @param aName
+         */
+        public void setName( String aName )
+        {
+            m_aName = aName;
+        }
+
+        /**
+         * Get factory name.
+         *
+         * @return paramter name
+         */
+        public String getName()
+        {
+            return m_aName;
+        }
+
+    }
+
+
     /**
      * Create a new paramter for a nested <param> element.
      * 
@@ -206,6 +229,17 @@ public class ODFXSLTRunnerTask extends Task {
             m_aParams = new Vector<XSLTParameter>();
         m_aParams.add( aParam );
         return aParam;
+    }
+
+    /**
+     * Create a new factory for a nested <factory> element.
+     *
+     * @return new paramter.
+     */
+    public Factory createFactory()
+    {
+        m_aFactory = new Factory();
+        return m_aFactory;
     }
     
 
@@ -262,6 +296,14 @@ public class ODFXSLTRunnerTask extends Task {
                     throw new BuildException( "parameter expression attribute must be set", getLocation() );
             }
         }
+
+        String aFactory = null;
+        if( m_aFactory != null )
+        {
+            aFactory = m_aFactory.getName();
+            if( aFactory == null )
+                throw new BuildException( "factory name attribute must be set", getLocation() );
+        }
         
         if( !m_bForce && m_aOutput.exists() && 
             m_aOutput.lastModified() > m_aInput.lastModified() &&
@@ -286,7 +328,7 @@ public class ODFXSLTRunnerTask extends Task {
         {
             ODFXSLTRunner aRunner = new ODFXSLTRunner();
             Logger aLogger = new AntLogger( getProject() );
-            bError = aRunner.runXSLT( m_aStyleSheet, m_aParams, m_aInput, m_aInputMode, m_aOutput, m_aOutputMode, m_aPath, m_aProcessor, null, aLogger  );
+            bError = aRunner.runXSLT( m_aStyleSheet, m_aParams, m_aInput, m_aInputMode, m_aOutput, m_aOutputMode, m_aPath, aFactory, null, aLogger  );
         }
         catch( Exception e )
         {
