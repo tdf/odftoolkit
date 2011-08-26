@@ -518,6 +518,8 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
             MSVExpressionIterator childFinder = new MSVExpressionIterator(def.getExpression(), NameClassAndExpression.class, MSVExpressionIterator.DIRECT_CHILDREN_ONLY);
             while (childFinder.hasNext()) {
                 Expression child_exp = childFinder.next();
+				//2DO: IS CHILDEXPR BEREITS VORGEKOMMEN
+				// OR UNIQUE NEXT
                 List<PuzzlePiece> child_defs = null;
                 PuzzlePieceSet whereToAdd = null;
                 if (child_exp instanceof ElementExp) {

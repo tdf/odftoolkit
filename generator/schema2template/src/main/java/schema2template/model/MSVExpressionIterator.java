@@ -21,6 +21,7 @@
  ************************************************************************/
 package schema2template.model;
 
+import static schema2template.example.odf.OdfHelper.DEBUG;
 import com.sun.msv.grammar.DataExp;
 import com.sun.msv.grammar.ElementExp;
 import com.sun.msv.grammar.Expression;
@@ -31,27 +32,54 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
+import java.util.logging.Logger;
 
 /**
  * Iterates through the MSV expression tree.
+ *
+ * Traversing the MSV Tree structure by 
+ *	1) First trying to get the child (going as deep as possible)
+ *  2) Second if no child is available, trying to get the next sibling
+ *  3) If no sibling available, get a sibling of the parent (going back to step 1)
+ * 
  * <p>Also has the ability to limit iteration to given subclasses and to limit subtree
  * to the next element expressions below. </p>
  */
-public class MSVExpressionIterator implements Iterator<Expression> {
+public final class MSVExpressionIterator implements Iterator<Expression> {
 
-	private Expression mNextElement;        // Next Element
-	private int mCurrentElementLevel;      // Level of current element (only for method dumpSchema
+	private static final Logger LOG = Logger.getLogger(MSVExpressionIterator.class.getName());
+	private Expression mCurrentExpression; // the expression that will be received by next()
+	public int mCurrentExpressionDepth;   // Level of current expression starting with 0 
 	private MSVExpressionVisitorChildren mVisitor;
 	// list of already visited expressions to avoid endless recursion
-	private HashSet<Expression> mVisited;
-	// current expression, parent, grandparent, ...
-	private Stack<Expression> mAncestors;
+	// The stack assists the iteration to go back up (usually done in by recursion)
+	// The stack contains the next expression, parent, grandparent, ...
+	private Stack<UniqueAncestor> mAncestorsAndCurrent;
+	// to prevent enless loops, known Element expression will be remembered and not again reentered
+	// Situation: Element a contains Element b contains Element a, will stop after the second a not continuing with b
+	private HashSet<Expression> mKnownElementExpressions;
+
+	// The vertical tree position is remembered by the stack, the vertical position will be remembered by a sibling index
+	private class UniqueAncestor {
+
+		public UniqueAncestor(Expression exp, int siblingIndex) {
+			mExp = exp;
+			mSiblingIndex = siblingIndex;
+		}
+		private Expression mExp;
+		private int mSiblingIndex;
+	}
 	// limit browsing to subclasses of Expression
-	private Class mSuperclass;
+	private Class mDesiredExpression;
 	// if false, only return direct children of root. Don't return root as first element or grand children
-	private boolean mAllElements;
-	public static final boolean ALL_ELEMENTS = true;
-	public static final boolean DIRECT_CHILDREN_ONLY = false;
+	private boolean mOnlyChildren;
+	private int mCurrentDepth = 0;
+	public static final boolean ALL_SUBTREE = true;
+	public static final boolean DIRECT_CHILDREN_ONLY = true;
+
+	public int getDepth() {
+		return mCurrentDepth;
+	}
 
 	/**
 	 * Iterate through the expression tree
@@ -59,155 +87,182 @@ public class MSVExpressionIterator implements Iterator<Expression> {
 	 * @param root Expression root
 	 */
 	public MSVExpressionIterator(Expression root) {
-		this(root, Expression.class, true);
+		this(root, Expression.class, false);
 	}
 
 	/**
-	 *  Iterate through the expression tree, but only return objects of superClass
+	 *  Iterate through the expression tree, but only return objects of desiredExpression
 	 *
 	 * @param root Expression root
-	 * @param superClass Limit returned expressions to subclasses of superClass
+	 * @param desiredExpression Limit returned expressions to subclasses of desiredExpression
 	 */
-	public MSVExpressionIterator(Expression root, Class superClass) {
-		this(root, superClass, true);
+	public MSVExpressionIterator(Expression root, Class desiredExpression) {
+		this(root, desiredExpression, false);
 	}
 
 	/**
-	 * Iterate..., but only return objects of superClass and (if not allElements)
+	 * Iterate..., but only return objects of desiredExpression and (if not onlyChildren)
 	 * don't go to children of ElementExp elements (this does not concern root node!).
 	 *
-	 * <p>Example: Root is table:table. If you choose allElements=false and to limit
-	 * superClass=ElementExp.class, then you will get all direct element children of table:table,
+	 * <p>Example: Root is table:table. If you choose onlyChildren=false and to limit
+	 * desiredExpression=ElementExp.class, then you will get all direct element children of table:table,
 	 * like table:table-row. But you won't get the children of table:table-row.
 	 * </p>
 	 *
 	 * @param root Expression root
-	 * @param superClass Limit returned expressions to subclasses of superClass
-	 * @param allElements Whether element subchildren should be expanded
+	 * @param desiredExpression Limit returned expressions to subclasses of desiredExpression
+	 * @param onlyChildren if only children should be returned
 	 */
-	public MSVExpressionIterator(Expression root, Class superClass, boolean allElements) {
-		mSuperclass = superClass;
-		mAllElements = allElements;
-		mAncestors = new Stack<Expression>();
-		mAncestors.push(root);
-		mVisited = new HashSet<Expression>();
+	public MSVExpressionIterator(Expression root, Class desiredExpression, boolean onlyChildren) {
+		// initialize members
+		mCurrentExpression = root;
+		mDesiredExpression = desiredExpression;
+		mOnlyChildren = onlyChildren;
+
+		// create helpers
 		mVisitor = new MSVExpressionVisitorChildren();
-		mNextElement = root;
-		mCurrentElementLevel = 0;
+		mKnownElementExpressions = new HashSet<Expression>();
 
-		// Ignore root if we only want direct children
-		if (hasNext() && !mAllElements) {
-			next();
-			mVisited.remove(root); // give root a chance in case it's a child of itself
+		// Initialize status
+		mAncestorsAndCurrent = new Stack<UniqueAncestor>();
+		mAncestorsAndCurrent.push(new UniqueAncestor(root, 0));
+
+		// make sure that there is at least one desired expression - for hasNext()
+		while (!mDesiredExpression.isInstance(mCurrentExpression) && mCurrentExpression != null) {
+			mCurrentExpression = getNextExpression();
 		}
-
-		// Got to first node of valid type
-		if (hasNext() && !mSuperclass.isInstance(mNextElement)) {
-			next();
+		
+		// Ignore root, if only children are desired
+		if (mOnlyChildren && root == mCurrentExpression) {
+			mCurrentExpression = getNextExpression();
 		}
 	}
 
-
-	public static String dumpSchema(Expression rootExpression) throws Exception {
+	public static String dumpMSVExpressionTree(Expression rootExpression) throws Exception {
 		MSVExpressionIterator iterator = new MSVExpressionIterator(rootExpression);
-		MSVExpressionVisitorType typeVisitor = new MSVExpressionVisitorType();
-		MSVNameClassVisitorList nameVisitor = new MSVNameClassVisitorList();
 		StringBuilder builder = new StringBuilder();
 		while (iterator.hasNext()) {
 			Expression expr = iterator.next();
-			
-			MSVExpressionType type = (MSVExpressionType) expr.visit(typeVisitor);
-			builder.append(iterator.mCurrentElementLevel + ": ");
-			builder.append(type.toString());
-
-
-			// AttributeExp, ElementExp
-			if (expr instanceof NameClassAndExpression) {
-				List<String> names = (List<String>) ((NameClassAndExpression) expr).getNameClass().visit(nameVisitor);
-				for (String name : names) {
-					builder.append(" '" + name + "',");
-				}
-			} else if (expr instanceof ReferenceExp) {
-				builder.append(" '" + ((ReferenceExp) expr).name + "',");
-			} else if (type == MSVExpressionType.VALUE) {
-				builder.append(" '" + ((ValueExp) expr).value.toString() + "',");
-			} else if (type == MSVExpressionType.DATA) {
-				builder.append(" '" + ((DataExp) expr).getName().localName + "',");
-			}
-			builder.append("\n");
+			builder.append(dumpMSVExpression(expr, iterator.getDepth())).append("\n");
 		}
 		return builder.toString();
 	}
 
+	private static String dumpMSVExpression(Expression expr, int depth) {
+		String returnValue = null;
+		MSVExpressionVisitorType typeVisitor = new MSVExpressionVisitorType();
+		MSVNameClassVisitorList nameVisitor = new MSVNameClassVisitorList();
+		MSVExpressionType type = (MSVExpressionType) expr.visit(typeVisitor);
+		returnValue = (depth + ": " + type.toString());
+
+		// AttributeExp, ElementExp
+		if (expr instanceof NameClassAndExpression) {
+			List<String> names = (List<String>) ((NameClassAndExpression) expr).getNameClass().visit(nameVisitor);
+			for (String name : names) {
+				returnValue += (" \"" + name + "\",");
+				if(DEBUG) System.out.println(returnValue);
+			}
+		} else if (expr instanceof ReferenceExp) {
+			returnValue += (" '" + ((ReferenceExp) expr).name + "',");
+			if(DEBUG) System.out.println(returnValue);
+		} else if (type == MSVExpressionType.VALUE) {
+			returnValue += (" '" + ((ValueExp) expr).value.toString() + "',");
+			if(DEBUG) System.out.println(returnValue);
+		} else if (type == MSVExpressionType.DATA) {
+			returnValue += (" '" + ((DataExp) expr).getName().localName + "',");
+			if(DEBUG) System.out.println(returnValue);
+		} else {
+			if(DEBUG) System.out.println(returnValue);
+		}
+		return returnValue;
+	}
+
 	@Override
 	public boolean hasNext() {
-		return (mNextElement != null) ? true : false;
+		return (mCurrentExpression != null) ? true : false;
 	}
 
-	// Configure mNextElement. Please note that the current mNextElement has
-	// to be last stack element and has to be marked visited!
-	private void setNext() {
-		while (true) {
-			List<Expression> children = (List<Expression>) mNextElement.visit(mVisitor);
-
-			mNextElement = null;
-
-			// Only proceed with children if it is allowed to expand ElementExp nodes (not counting root)
-			if (mAllElements || mAncestors.size() <= 1 || !(mAncestors.peek() instanceof ElementExp)) {
-				// Proceed with children. But ignore all already visited elements to avoid recursion.
-				for (Expression candidate : children) {
-					if (!mVisited.contains(candidate)) {
-						mNextElement = candidate;
-						mAncestors.push(mNextElement);
-						break;
+	/** Iterating the Tree like the following	 
+	If there are (unvisited) children -> go down
+	If there are no (unvisited) children, but unvistsiblings -> go up and right
+	 */
+	private Expression getNextExpression() {
+		Expression nextExpression = null;
+		// the current expression might be null if the desired type of expression was never found in the tree
+		if (mCurrentExpression != null) {
+			// if all tree is desired, or root, or if it is not element expression
+			if (!mOnlyChildren || mAncestorsAndCurrent.size() == 1 || !(mAncestorsAndCurrent.peek().mExp instanceof ElementExp)) {
+				List<Expression> children = (List<Expression>) mCurrentExpression.visit(mVisitor);
+				// see if we can go DOWN the tree
+				if (children.size() > 0) {
+					Expression nextExpCandidate = children.get(0);
+					// DO NOT expand elements which occur more than one time in the ancestors hierarchy (i.e.
+					// since we compute the last element: Do not expand it, if it also occurs before)
+					if (isNoKnownElement(nextExpCandidate)) {
+						// GO DOWN - Proceed with first child
+						nextExpression = nextExpCandidate;
+						mAncestorsAndCurrent.push(new UniqueAncestor(nextExpression, 0));
 					}
 				}
 			}
 
-			// if there are no (unvisited) children -> go up, up, ..., and right
-			while (mNextElement == null && mAncestors.size() > 1) {
-				mAncestors.pop();
-				Expression parent = mAncestors.peek();
+			// if you could not get depper, but you can go up
+			// if there was no first child for the next expression and still some parent not being the root
+			while (nextExpression == null && mAncestorsAndCurrent.size() > 1) {
+				// go one up the stack
+				UniqueAncestor uniqueAncestor = mAncestorsAndCurrent.pop();
+				// get the new parent
+				Expression parent = mAncestorsAndCurrent.peek().mExp;
+				// to get the siblings
 				List<Expression> siblings = (List<Expression>) parent.visit(mVisitor);
-
-				// Proceed with siblings
-				for (Expression candidate : siblings) {
-					if (!mVisited.contains(candidate)) {
-						mNextElement = candidate;
-						mAncestors.push(mNextElement);
-						break;
+				// get the unvisted sibling index
+				final int nextSiblingIndex = uniqueAncestor.mSiblingIndex + 1;
+				if (nextSiblingIndex < siblings.size()) {
+					Expression nextExpCandidate = siblings.get(nextSiblingIndex);
+					// DO NOT expand elements which occur more than one time in the ancestors hierarchy (i.e.
+					// since we compute the last element: Do not expand it, if it also occurs before)
+					if (isNoKnownElement(nextExpCandidate)) {
+						// GO RIGHT - Add next sibling to the stack
+						nextExpression = nextExpCandidate;
+						mAncestorsAndCurrent.push(new UniqueAncestor(nextExpression, nextSiblingIndex));
 					}
 				}
 			}
-
-			if (mNextElement == null || mSuperclass.isInstance(mNextElement)) {
-				return;
-			}
-
-			// Ignore mNextElement since it has the wrong type
-			mVisited.add(mNextElement);
 		}
+		return nextExpression;
 	}
 
-	// Get next element of type ElementExp. Internally set mNextElement to next expression.
+	private boolean isNoKnownElement(Expression exp) {
+		boolean isNew = false;
+		if (!(exp instanceof ElementExp) || !mKnownElementExpressions.contains(exp)) {
+			mKnownElementExpressions.add(exp);
+			isNew = true;
+		} else {
+//			LOG.info("Found known element expression:" + dumpMSVExpression(exp, this.getDepth()));
+		}
+		return isNew;
+	}
+
 	@Override
 	public Expression next() {
-		if (mNextElement == null) {
+		if (mCurrentExpression == null) {
 			return null;
 		}
-		Expression retval = mNextElement;
-		mVisited.add(retval);
-		mCurrentElementLevel = mAncestors.size() - 1;
-
-		// configure mNextElement
-		setNext();
-
-		return retval;
+		Expression retVal = mCurrentExpression;
+		mCurrentDepth = mAncestorsAndCurrent.size() - 1;
+		mCurrentExpression = getNextExpression();
+		
+		// as there is always a desired expression, make sure the next one is adequate
+		while (!mDesiredExpression.isInstance(mCurrentExpression) && mCurrentExpression != null) {
+			mCurrentExpression = getNextExpression();
+		}
+		return retVal;
 	}
 
 	// Unsupported
 	@Override
 	public void remove() {
 		throw new UnsupportedOperationException("Not supported.");
+
 	}
 }
