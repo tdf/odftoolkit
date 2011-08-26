@@ -76,6 +76,7 @@
 				<configuration>
 					<systemPropertyVariables>
 						<odfdom.version>${project.version}</odfdom.version>
+						<odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
 					</systemPropertyVariables>
 					<excludes>
 						<exclude>**/integrationtest/**</exclude>

@@ -304,7 +304,9 @@ public class OfficeMetaTest {
 		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("EmptyDocForMetaTest.odt"));
 		metadom = doc.getMetaDom();
 		fMetadata = new OdfOfficeMeta(metadom);
-		Assert.assertEquals(generator, fMetadata.getGenerator());
+		//ToDO: automatic check of VERSION number ODFDOM/0.6.1$Build-TIMESTAMP
+		//Assert.assertTrue(fMetadata.getGenerator().startsWith(generator));
+		Assert.assertEquals(fMetadata.getGenerator(), generator);
 		Assert.assertNull(fMetadata.getTitle());
 		Assert.assertNull(fMetadata.getDescription());
 		Assert.assertNull(fMetadata.getSubject());
