@@ -30,8 +30,10 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"                 
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"                
                 xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"                
+                xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
                 xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
                 xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns="http://relaxng.org/ns/structure/1.0" 
                 exclude-result-prefixes="rng xsl a"
                 version="1.0">    
@@ -45,6 +47,22 @@
     
     <!-- Whether or not to add element and attribute lists. -->
     <xsl:param name="add-xrefs" select="'true'"/>
+
+    <!-- The paths to the three parts (only required for part 0) -->
+    <xsl:param name="part1-content-path" select="''"/>
+    <xsl:param name="part2-content-path" select="''"/>
+    <xsl:param name="part3-content-path" select="''"/>
+
+    <!-- The paths to the three parts (only required for part 0) -->
+    <xsl:param name="part1-toc-rel-path" select="''"/>
+    <xsl:param name="part2-toc-rel-path" select="''"/>
+    <xsl:param name="part3-toc-rel-path" select="''"/>
+
+    <!-- The hypelink mode for copying TOC's to part 0 -->
+    <!-- 'none': remove hyperlinks -->
+    <!-- 'adapt': add relative URI to the documents -->
+    <!-- '': do not adapt hyperlinks -->
+    <xsl:param name="toc-hyperlink-mode" select="''"/>
     
     <xsl:variable name="add-attr-elem-xrefs" select="$add-xrefs='true'"/>
     <xsl:variable name="add-text-info" select="$add-xrefs='true'"/>
@@ -54,18 +72,22 @@
     <xsl:variable name="keep-xref-anchors" select="$keep-anchors='true'"/>
     <xsl:variable name="check-xref-anchors" select="true()"/>
 
-    <xsl:variable name="create-odf-references" select="true()"/>
+    <xsl:variable name="create-odf-references" select="$xref-schema-file!=''"/>
     <xsl:variable name="create-cardinality-info" select="false()"/>
 
     <xsl:variable name="keep-annotations" select="false()"/>
 
     <xsl:variable name="keep-todos" select="false()"/>
 
+    <xsl:variable name="convert-bookmarks-and-hyperlinks" select="true()"/>
+
 
     <xsl:variable name="element-prefix" select="'element-'"/>
     <xsl:variable name="attribute-prefix" select="'attribute-'"/>
     <xsl:variable name="property-prefix" select="'property-'"/>
     <xsl:variable name="datatype-prefix" select="'datatype-'"/>
+    <xsl:variable name="function-prefix" select="'anchor:'"/>
+    <xsl:variable name="toc-prefix" select="'toc-'"/>
 
     <xsl:variable name="attributes-heading" select="'General Attributes'"/>
     <xsl:variable name="properties-heading" select="'Formatting Attributes'"/>
@@ -171,6 +193,172 @@
         </xsl:if>
     </xsl:template>
 
+    <!-- *********************************** -->
+    <!-- ** formula anchors (anchor:*) ** -->
+    <!-- *********************************** -->
+    <xsl:template match="text:p[starts-with(.,$function-prefix)]">
+        <!-- Remove anchor paragraph if $keep-xref-anchors is false -->
+        <xsl:if test="$keep-xref-anchors">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|node()"/>
+            </xsl:copy>
+        </xsl:if>
+        <xsl:variable name="function-name" 
+                      select="translate(substring-after(normalize-space(.),':'),'abcdefghijklmnopqrstuvwxyz“”','ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;&quot;')"/>
+        <xsl:if test="not(//text:h[translate(normalize-space(.),'abcdefghijklmnopqrstuvwxyz “”','ABCDEFGHIJKLMNOPQRSTUVWXYZ-&quot;&quot;')=$function-name])">
+            <xsl:message>*** XRef &quot;<xsl:value-of select="."/>&quot;: No heading found for anchor.</xsl:message>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- ************************ -->
+    <!-- ** toc anchors (toc-) ** -->
+    <!-- ************************ -->
+    <xsl:template match="text:p[starts-with(.,$toc-prefix)]">
+        <!-- Remove anchor paragraph if $keep-xref-anchors is false -->
+        <xsl:if test="$keep-xref-anchors">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|node()"/>
+            </xsl:copy>
+        </xsl:if>
+        <xsl:variable name="part" select="substring-after(normalize-space(.), '-')"/>
+        <xsl:variable name="content-path">
+            <xsl:choose>
+                <xsl:when test="$part='part1'">
+                    <xsl:value-of select="$part1-content-path"/>
+                </xsl:when>
+                <xsl:when test="$part='part2'">
+                    <xsl:value-of select="$part2-content-path"/>
+                </xsl:when>
+                <xsl:when test="$part='part3'">
+                    <xsl:value-of select="$part3-content-path"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:message terminate="yes">*** Invalid part sepcified for toc: <xsl:value-of select="$part"/></xsl:message>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:if test="$content-path=''">
+            <xsl:message terminate="yes" >*** No content path set for <xsl:value-of select="$part"/></xsl:message>
+        </xsl:if>
+        <text:section text:name="{normalize-space(.)}" text:protected="true">
+            <xsl:apply-templates select="document($content-path)//text:table-of-content/text:index-body/*" mode="insert-toc">
+                <xsl:with-param name="part" select="$part"/>
+            </xsl:apply-templates>
+        </text:section>
+    </xsl:template>
+
+    <xsl:template match="text:p" mode="insert-toc">
+        <xsl:param name="part"/>
+        <xsl:copy>
+            <xsl:apply-templates select="@*" mode="insert-toc">
+                <xsl:with-param name="part" select="$part"/>
+            </xsl:apply-templates>
+            <xsl:attribute name="text:style-name"><xsl:value-of select="concat($part,'-',@text:style-name)"/></xsl:attribute>
+            <xsl:apply-templates select="node()" mode="insert-toc">
+                <xsl:with-param name="part" select="$part"/>
+            </xsl:apply-templates>
+        </xsl:copy>
+    </xsl:template>
+
+
+    <xsl:template match="text:a" mode="insert-toc">
+        <xsl:param name="part"/>
+        <xsl:choose>
+            <xsl:when test="$toc-hyperlink-mode='none'">
+                <xsl:apply-templates select="node()" mode="insert-toc">
+                    <xsl:with-param name="part" select="$part"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <xsl:when test="$toc-hyperlink-mode='adapt'">
+                <xsl:variable name="doc">
+                    <xsl:choose>
+                        <xsl:when test="$part='part1'">
+                            <xsl:value-of select="$part1-toc-rel-path"/>
+                        </xsl:when>
+                        <xsl:when test="$part='part2'">
+                            <xsl:value-of select="$part2-toc-rel-path"/>
+                        </xsl:when>
+                        <xsl:when test="$part='part3'">
+                            <xsl:value-of select="$part3-toc-rel-path"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:message terminate="yes">*** Invalid part sepcified for toc: <xsl:value-of select="$part"/></xsl:message>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <text:a xlink:type="simple">
+                    <xsl:attribute name="xlink:href">
+                        <xsl:choose>
+                            <xsl:when test="$doc=''">
+                                <xsl:value-of select="concat('../',$doc,@xlink:href)"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="@xlink:href"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <xsl:apply-templates select="node()" mode="insert-toc">
+                        <xsl:with-param name="part" select="$part"/>
+                    </xsl:apply-templates>
+                </text:a>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates select="@*|node()" mode="insert-toc">
+                        <xsl:with-param name="part" select="$part"/>
+                    </xsl:apply-templates>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="@*|node()" mode="insert-toc">
+        <xsl:param name="part"/>
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()" mode="insert-toc">
+                <xsl:with-param name="part" select="$part"/>
+            </xsl:apply-templates>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="office:automatic-styles">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+            <xsl:if test="$part1-content-path!=''">
+                <xsl:call-template name="copy-toc-auto-styles">
+                    <xsl:with-param name="part" select="'part1'"/>
+                    <xsl:with-param name="content-path" select="$part1-content-path"/>
+                </xsl:call-template>
+            </xsl:if>
+            <xsl:if test="$part2-content-path!=''">
+                <xsl:call-template name="copy-toc-auto-styles">
+                    <xsl:with-param name="part" select="'part2'"/>
+                    <xsl:with-param name="content-path" select="$part2-content-path"/>
+                </xsl:call-template>
+            </xsl:if>
+            <xsl:if test="$part3-content-path!=''">
+                <xsl:call-template name="copy-toc-auto-styles">
+                    <xsl:with-param name="part" select="'part3'"/>
+                    <xsl:with-param name="content-path" select="$part3-content-path"/>
+                </xsl:call-template>
+            </xsl:if>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template name="copy-toc-auto-styles">
+        <xsl:param name="part"/>
+        <xsl:param name="content-path"/>
+        <xsl:for-each select="document($content-path)//office:automatic-styles/style:style[@style:family='paragraph']">
+            <xsl:if test="ancestor::office:document-content//text:table-of-content/text:index-body/text:p[@text:style-name=current()/@style:name]">
+                <xsl:copy>
+                    <xsl:apply-templates select="@*"/>
+                    <xsl:attribute name="style:name"><xsl:value-of select="concat($part,'-',@style:name)"/></xsl:attribute>
+                    <xsl:apply-templates select="node()"/>
+                </xsl:copy>
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:template>
+
     <!-- ************************* -->
     <!-- ** existing references ** -->
     <!-- ************************* -->
@@ -205,6 +393,71 @@
         </xsl:if>
     </xsl:template>
 
+    <!-- *************************** -->
+    <!-- ** Bookmarks in headings ** -->
+    <!-- *************************** -->
+    <xsl:template match="text:h[text:bookmark[not(starts-with(@text:name,'__'))] or text:bookmark-start[not(starts-with(@text:name,'__'))]]" priority="1">
+        <xsl:copy>
+            <xsl:choose>
+                <xsl:when test="$convert-bookmarks-and-hyperlinks">
+                    <xsl:apply-templates select="@*"/>
+                    <xsl:for-each select="text:bookmark[not(starts-with(@text:name,'__'))]|text:bookmark-start[not(starts-with(@text:name,'__'))]">
+                        <xsl:sort select="@text:name"/>
+                        <xsl:variable name="ref-name" select="@text:name"/>
+                        <!-- xsl:message>Turning bookmark into reference mark: <xsl:value-of select="$ref-name"/>.</xsl:message -->
+                        <text:reference-mark-start text:name="{$ref-name}"/>
+                    </xsl:for-each>
+                    <xsl:apply-templates select="node()" mode="convert_bookmarks"/>
+                    <xsl:for-each select="text:bookmark[not(starts-with(@text:name,'__'))]|text:bookmark-start[not(starts-with(@text:name,'__'))]">
+                        <xsl:sort select="@text:name" order="reverse"/>
+                        <xsl:variable name="ref-name" select="@text:name"/>
+                        <text:reference-mark-end text:name="{$ref-name}"/>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="@*|node()"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="text:bookmark[not(starts-with(@text:name,'__'))]" mode="convert_bookmarks">
+        <xsl:apply-templates select="node()"/>
+    </xsl:template>
+
+    <xsl:template match="text:bookmark-start[not(starts-with(@text:name,'__'))]|text:bookmark-end[not(starts-with(@text:name,'__'))]" mode="convert_bookmarks"/>
+
+    <xsl:template match="@*|node()" mode="convert_bookmarks">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="text:a[starts-with(@xlink:href,'#') and not(starts-with(@xlink:href,'#__') or contains(@xlink:href,'|outline'))]">
+        <xsl:choose>
+            <xsl:when test="$convert-bookmarks-and-hyperlinks">
+                <xsl:variable name="ref-name" select="substring(@xlink:href,2)"/>
+                <xsl:variable name="non-empty" select="string-length(normalize-space(.)) &gt; 0"/>
+                <xsl:apply-templates select="node()"/>
+                <xsl:choose>
+                    <xsl:when test="$non-empty">
+                        <!-- xsl:message>Turning hyperlink into reference: <xsl:value-of select="$ref-name"/>.</xsl:message -->
+                        <xsl:text> </xsl:text><text:reference-ref text:ref-name="{$ref-name}" text:reference-format="chapter">?</text:reference-ref>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!-- xsl:message>Ignoring empty hyperlink: <xsl:value-of select="$ref-name"/>.</xsl:message -->
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates select="@*|node()"/>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
 
     <!-- ****************************************** -->
     <!-- ** Headings for elements and attributes ** -->
@@ -223,6 +476,12 @@
         </xsl:variable>
         <!-- create ODF ref-mark elements if it is a valid element or attribute name -->
         <xsl:choose>
+            <xsl:when test="not($create-odf-references) or starts-with($tag, 'odf:') or starts-with($tag, 'pkg:')">
+                <!-- OWL -->
+                <xsl:copy>
+                    <xsl:apply-templates select="@*|node()"/>
+                </xsl:copy>
+            </xsl:when>
             <xsl:when test="starts-with($tag, '&lt;') and contains($tag,'&gt;')">
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
@@ -242,6 +501,20 @@
                                  <xsl:with-param name="fp" select="$fp"/>
                             </xsl:call-template>
                         </xsl:when>
+                        <xsl:when test="preceding::text:h[@text:outline-level='3'][last()]='manifest:version'">
+                            <xsl:variable name="attr-name" select="'manifest:version'"/>
+                            <xsl:call-template name="create-element-ref-mark-start">
+                                 <xsl:with-param name="tag" select="$tag"/>
+                                 <xsl:with-param name="attr-name" select="$attr-name"/>
+                                 <xsl:with-param name="fp" select="false()"/>
+                            </xsl:call-template>
+                            <xsl:apply-templates select="node()"/>
+                            <xsl:call-template name="create-element-ref-mark-end">
+                                 <xsl:with-param name="tag" select="$tag"/>
+                                 <xsl:with-param name="attr-name" select="$attr-name"/>
+                                 <xsl:with-param name="fp" select="false()"/>
+                            </xsl:call-template>
+                        </xsl:when>
                         <xsl:otherwise>
                             <xsl:call-template name="create-element-ref-mark-start">
                                  <xsl:with-param name="tag" select="$tag"/>
@@ -252,12 +525,6 @@
                             </xsl:call-template>
                         </xsl:otherwise>
                     </xsl:choose>
-                </xsl:copy>
-            </xsl:when>
-            <xsl:when test="starts-with($tag, 'odf:') or starts-with($tag, 'pkg:')">
-                <!-- OWL -->
-                <xsl:copy>
-                    <xsl:apply-templates select="@*|node()"/>
                 </xsl:copy>
             </xsl:when>
             <xsl:otherwise>
@@ -373,7 +640,7 @@
         
         <xsl:if test="$check-xref-anchors">
             <xsl:choose>
-                <xsl:when test="$element-name='dsig:document-signatures' or $element-name='xmldsig:Signature'"/>
+                <xsl:when test="$element-name='dsig:document-signatures' or $element-name='ds:Signature'"/>
                 <xsl:when test="not(document($xref-schema-file)/rng:grammar/rng:element[@name=$element-name])">
                     <xsl:message>Heading: &quot;<xsl:value-of select="."/>&quot;: No element definition found in schema for element &quot;<xsl:value-of select="$element-name"/>&quot;.</xsl:message>
                 </xsl:when>
