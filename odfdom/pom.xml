@@ -129,7 +129,7 @@
 					<tagletArtifact>
 						<groupId>org.odftoolkit</groupId>
 						<artifactId>taglets</artifactId>
-						<version>0.8.7-SNAPSHOT</version>
+						<version>0.8.7</version>
 					</tagletArtifact>
 				</configuration>
 				<executions>
@@ -202,7 +202,7 @@
 					<tagletArtifact>
 						<groupId>org.odftoolkit</groupId>
 						<artifactId>taglets</artifactId>
-						<version>0.8.7-SNAPSHOT</version>
+						<version>0.8.7</version>
 					</tagletArtifact>
 				</configuration>
 			</plugin>
@@ -455,7 +455,7 @@
 					<plugin>
 						<groupId>org.odftoolkit</groupId>
 						<artifactId>schema2template-maven-plugin</artifactId>
-						<version>0.8.7-SNAPSHOT</version>
+						<version>0.8.7</version>
 						<executions>
 							<execution>
 								<id>dom</id>
