@@ -35,25 +35,39 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+import org.odftoolkit.odfdom.dom.element.svg.OdfTitleElement;
+import org.odftoolkit.odfdom.dom.element.svg.OdfDescElement;
+import org.odftoolkit.odfdom.dom.element.form.OdfFormElement;
+import org.odftoolkit.odfdom.dom.element.xforms.OdfModelElement;
+import org.odftoolkit.odfdom.dom.element.dr3d.OdfSceneElement;
+import org.odftoolkit.odfdom.dom.element.presentation.OdfAnimationsElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfAnimateElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfSetElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfAnimatemotionElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfAnimatecolorElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfAnimatetransformElement;
+import org.odftoolkit.odfdom.dom.type.svg.OdfType;
+import org.odftoolkit.odfdom.dom.element.anim.OdfTransitionfilterElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfParElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfSeqElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfIterateElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfAudioElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfCommandElement;
+import org.odftoolkit.odfdom.dom.element.presentation.OdfNotesElement;
 
 /**
  * ODF DOM Element implementation for element "<draw:page>".
  */
 public abstract class OdfPageElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1310779923515422257L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "page" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "page" );
 
     public OdfPageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.DrawingPage, OdfName.get( OdfNamespace.DRAW, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -236,4 +250,403 @@ public abstract class OdfPageElement extends OdfStylableElement
         setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
+    /**
+    * Create child element "svg:title".
+    */
+    public OdfTitleElement createTitleElement()
+    {
+        OdfTitleElement  _nTitle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTitleElement.class);
+        this.appendChild( _nTitle);
+        return  _nTitle;
+    }                   
+               
+    /**
+    * Create child element "svg:desc".
+    */
+    public OdfDescElement createDescElement()
+    {
+        OdfDescElement  _nDesc = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDescElement.class);
+        this.appendChild( _nDesc);
+        return  _nDesc;
+    }                   
+               
+    /**
+    * Create child element "draw:layer-set".
+    */
+    public OdfLayerSetElement createLayerSetElement()
+    {
+        OdfLayerSetElement  _nLayerSet = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLayerSetElement.class);
+        this.appendChild( _nLayerSet);
+        return  _nLayerSet;
+    }                   
+               
+    /**
+    * Create child element "form:form".
+    */
+    public OdfFormElement createFormElement()
+    {
+        OdfFormElement  _nForm = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFormElement.class);
+        this.appendChild( _nForm);
+        return  _nForm;
+    }                   
+               
+    /**
+    * Create child element "xforms:model".
+    */
+    public OdfModelElement createModelElement()
+    {
+        OdfModelElement  _nModel = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfModelElement.class);
+        this.appendChild( _nModel);
+        return  _nModel;
+    }                   
+               
+    /**
+    * Create child element "draw:rect".
+    */
+    public OdfRectElement createRectElement()
+    {
+        OdfRectElement  _nRect = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRectElement.class);
+        this.appendChild( _nRect);
+        return  _nRect;
+    }                   
+               
+    /**
+    * Create child element "draw:line".
+    */
+    public OdfLineElement createLineElement(String   _aX1, String   _aY1, String   _aX2, String   _aY2)
+    {
+        OdfLineElement  _nLine = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLineElement.class);
+        _nLine.setX1( _aX1);
+        _nLine.setY1( _aY1);
+        _nLine.setX2( _aX2);
+        _nLine.setY2( _aY2);
+        this.appendChild( _nLine);
+        return  _nLine;      
+    }
+    
+    /**
+    * Create child element "draw:polyline".
+    */
+    public OdfPolylineElement createPolylineElement(String   _aPoints, Integer   _aViewbox)
+    {
+        OdfPolylineElement  _nPolyline = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPolylineElement.class);
+        _nPolyline.setPoints( _aPoints);
+        _nPolyline.setViewbox( _aViewbox);
+        this.appendChild( _nPolyline);
+        return  _nPolyline;      
+    }
+    
+    /**
+    * Create child element "draw:polygon".
+    */
+    public OdfPolygonElement createPolygonElement(String   _aPoints, Integer   _aViewbox)
+    {
+        OdfPolygonElement  _nPolygon = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPolygonElement.class);
+        _nPolygon.setPoints( _aPoints);
+        _nPolygon.setViewbox( _aViewbox);
+        this.appendChild( _nPolygon);
+        return  _nPolygon;      
+    }
+    
+    /**
+    * Create child element "draw:regular-polygon".
+    */
+    public OdfRegularPolygonElement createRegularPolygonElement(Integer   _aCorners, Boolean   _aConcave)
+    {
+        OdfRegularPolygonElement  _nRegularPolygon = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRegularPolygonElement.class);
+        _nRegularPolygon.setCorners( _aCorners);
+        _nRegularPolygon.setConcave( _aConcave);
+        this.appendChild( _nRegularPolygon);
+        return  _nRegularPolygon;      
+    }
+    
+    /**
+    * Create child element "draw:regular-polygon".
+    */
+    public OdfRegularPolygonElement createRegularPolygonElement(Boolean   _aConcave, Integer   _aCorners)
+    {
+        OdfRegularPolygonElement  _nRegularPolygon = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRegularPolygonElement.class);
+        _nRegularPolygon.setConcave( _aConcave);
+        _nRegularPolygon.setCorners( _aCorners);
+        this.appendChild( _nRegularPolygon);
+        return  _nRegularPolygon;      
+    }
+    
+    /**
+    * Create child element "draw:path".
+    */
+    public OdfPathElement createPathElement(String   _aD, Integer   _aViewbox)
+    {
+        OdfPathElement  _nPath = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPathElement.class);
+        _nPath.setD( _aD);
+        _nPath.setViewbox( _aViewbox);
+        this.appendChild( _nPath);
+        return  _nPath;      
+    }
+    
+    /**
+    * Create child element "draw:circle".
+    */
+    public OdfCircleElement createCircleElement()
+    {
+        OdfCircleElement  _nCircle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCircleElement.class);
+        this.appendChild( _nCircle);
+        return  _nCircle;
+    }                   
+               
+    /**
+    * Create child element "draw:ellipse".
+    */
+    public OdfEllipseElement createEllipseElement()
+    {
+        OdfEllipseElement  _nEllipse = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEllipseElement.class);
+        this.appendChild( _nEllipse);
+        return  _nEllipse;
+    }                   
+               
+    /**
+    * Create child element "draw:g".
+    */
+    public OdfGroupElement createGroupElement()
+    {
+        OdfGroupElement  _nGroup = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfGroupElement.class);
+        this.appendChild( _nGroup);
+        return  _nGroup;
+    }                   
+               
+    /**
+    * Create child element "draw:page-thumbnail".
+    */
+    public OdfPageThumbnailElement createPageThumbnailElement()
+    {
+        OdfPageThumbnailElement  _nPageThumbnail = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPageThumbnailElement.class);
+        this.appendChild( _nPageThumbnail);
+        return  _nPageThumbnail;
+    }                   
+               
+    /**
+    * Create child element "draw:frame".
+    */
+    public OdfFrameElement createFrameElement()
+    {
+        OdfFrameElement  _nFrame = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFrameElement.class);
+        this.appendChild( _nFrame);
+        return  _nFrame;
+    }                   
+               
+    /**
+    * Create child element "draw:measure".
+    */
+    public org.odftoolkit.odfdom.dom.element.draw.OdfMeasureElement createdrawMeasureElement(String   _aX1, String   _aY1, String   _aX2, String   _aY2)
+    {
+        org.odftoolkit.odfdom.dom.element.draw.OdfMeasureElement  _nMeasure = ((OdfFileDom)this.ownerDocument).createOdfElement(org.odftoolkit.odfdom.dom.element.draw.OdfMeasureElement.class);
+        _nMeasure.setX1( _aX1);
+        _nMeasure.setY1( _aY1);
+        _nMeasure.setX2( _aX2);
+        _nMeasure.setY2( _aY2);
+        this.appendChild( _nMeasure);
+        return  _nMeasure;      
+    }
+    
+    /**
+    * Create child element "draw:caption".
+    */
+    public OdfCaptionElement createCaptionElement()
+    {
+        OdfCaptionElement  _nCaption = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCaptionElement.class);
+        this.appendChild( _nCaption);
+        return  _nCaption;
+    }                   
+               
+    /**
+    * Create child element "draw:connector".
+    */
+    public OdfConnectorElement createConnectorElement(Integer   _aViewbox)
+    {
+        OdfConnectorElement  _nConnector = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConnectorElement.class);
+        _nConnector.setViewbox( _aViewbox);
+        this.appendChild( _nConnector);
+        return  _nConnector;      
+    }
+    
+    /**
+    * Create child element "draw:control".
+    */
+    public OdfControlElement createControlElement(String   _aControl)
+    {
+        OdfControlElement  _nControl = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfControlElement.class);
+        _nControl.setControl( _aControl);
+        this.appendChild( _nControl);
+        return  _nControl;      
+    }
+    
+    /**
+    * Create child element "dr3d:scene".
+    */
+    public OdfSceneElement createSceneElement()
+    {
+        OdfSceneElement  _nScene = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSceneElement.class);
+        this.appendChild( _nScene);
+        return  _nScene;
+    }                   
+               
+    /**
+    * Create child element "draw:custom-shape".
+    */
+    public OdfCustomShapeElement createCustomShapeElement()
+    {
+        OdfCustomShapeElement  _nCustomShape = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCustomShapeElement.class);
+        this.appendChild( _nCustomShape);
+        return  _nCustomShape;
+    }                   
+               
+    /**
+    * Create child element "draw:a".
+    */
+    public org.odftoolkit.odfdom.dom.element.draw.OdfHyperlinkElement createdrawHyperlinkElement(String   _aHref)
+    {
+        org.odftoolkit.odfdom.dom.element.draw.OdfHyperlinkElement  _nHyperlink = ((OdfFileDom)this.ownerDocument).createOdfElement(org.odftoolkit.odfdom.dom.element.draw.OdfHyperlinkElement.class);
+        _nHyperlink.setHref( _aHref);
+        this.appendChild( _nHyperlink);
+        return  _nHyperlink;      
+    }
+    
+    /**
+    * Create child element "presentation:animations".
+    */
+    public OdfAnimationsElement createAnimationsElement()
+    {
+        OdfAnimationsElement  _nAnimations = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimationsElement.class);
+        this.appendChild( _nAnimations);
+        return  _nAnimations;
+    }                   
+               
+    /**
+    * Create child element "anim:animate".
+    */
+    public OdfAnimateElement createAnimateElement(String   _aAttributename)
+    {
+        OdfAnimateElement  _nAnimate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimateElement.class);
+        _nAnimate.setAttributename( _aAttributename);
+        this.appendChild( _nAnimate);
+        return  _nAnimate;      
+    }
+    
+    /**
+    * Create child element "anim:set".
+    */
+    public OdfSetElement createSetElement(String   _aAttributename)
+    {
+        OdfSetElement  _nSet = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSetElement.class);
+        _nSet.setAttributename( _aAttributename);
+        this.appendChild( _nSet);
+        return  _nSet;      
+    }
+    
+    /**
+    * Create child element "anim:animateMotion".
+    */
+    public OdfAnimatemotionElement createAnimatemotionElement(String   _aAttributename)
+    {
+        OdfAnimatemotionElement  _nAnimatemotion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimatemotionElement.class);
+        _nAnimatemotion.setAttributename( _aAttributename);
+        this.appendChild( _nAnimatemotion);
+        return  _nAnimatemotion;      
+    }
+    
+    /**
+    * Create child element "anim:animateColor".
+    */
+    public OdfAnimatecolorElement createAnimatecolorElement(String   _aAttributename)
+    {
+        OdfAnimatecolorElement  _nAnimatecolor = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimatecolorElement.class);
+        _nAnimatecolor.setAttributename( _aAttributename);
+        this.appendChild( _nAnimatecolor);
+        return  _nAnimatecolor;      
+    }
+    
+    /**
+    * Create child element "anim:animateTransform".
+    */
+    public OdfAnimatetransformElement createAnimatetransformElement(String   _aAttributename, OdfType   _aType)
+    {
+        OdfAnimatetransformElement  _nAnimatetransform = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimatetransformElement.class);
+        _nAnimatetransform.setAttributename( _aAttributename);
+        _nAnimatetransform.setType( _aType);
+        this.appendChild( _nAnimatetransform);
+        return  _nAnimatetransform;      
+    }
+    
+    /**
+    * Create child element "anim:transitionFilter".
+    */
+    public OdfTransitionfilterElement createTransitionfilterElement(String   _aType)
+    {
+        OdfTransitionfilterElement  _nTransitionfilter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTransitionfilterElement.class);
+        _nTransitionfilter.setType( _aType);
+        this.appendChild( _nTransitionfilter);
+        return  _nTransitionfilter;      
+    }
+    
+    /**
+    * Create child element "anim:par".
+    */
+    public OdfParElement createParElement()
+    {
+        OdfParElement  _nPar = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParElement.class);
+        this.appendChild( _nPar);
+        return  _nPar;
+    }                   
+               
+    /**
+    * Create child element "anim:seq".
+    */
+    public OdfSeqElement createSeqElement()
+    {
+        OdfSeqElement  _nSeq = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSeqElement.class);
+        this.appendChild( _nSeq);
+        return  _nSeq;
+    }                   
+               
+    /**
+    * Create child element "anim:iterate".
+    */
+    public OdfIterateElement createIterateElement()
+    {
+        OdfIterateElement  _nIterate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIterateElement.class);
+        this.appendChild( _nIterate);
+        return  _nIterate;
+    }                   
+               
+    /**
+    * Create child element "anim:audio".
+    */
+    public OdfAudioElement createAudioElement()
+    {
+        OdfAudioElement  _nAudio = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAudioElement.class);
+        this.appendChild( _nAudio);
+        return  _nAudio;
+    }                   
+               
+    /**
+    * Create child element "anim:command".
+    */
+    public OdfCommandElement createCommandElement(String   _aCommand)
+    {
+        OdfCommandElement  _nCommand = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCommandElement.class);
+        _nCommand.setCommand( _aCommand);
+        this.appendChild( _nCommand);
+        return  _nCommand;      
+    }
+    
+    /**
+    * Create child element "presentation:notes".
+    */
+    public OdfNotesElement createNotesElement()
+    {
+        OdfNotesElement  _nNotes = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNotesElement.class);
+        this.appendChild( _nNotes);
+        return  _nNotes;
+    }                   
+               
 }

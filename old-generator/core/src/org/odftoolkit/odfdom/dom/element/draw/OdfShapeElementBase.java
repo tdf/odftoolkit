@@ -28,6 +28,7 @@ package org.odftoolkit.odfdom.dom.element.draw;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStyleablePresentationElement;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.OdfId;
@@ -45,12 +46,7 @@ import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
  */
 public abstract class OdfShapeElementBase extends OdfStyleablePresentationElement
 {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5687732372719552934L;
-
-	public OdfShapeElementBase( OdfFileDom _aOwnerDoc, OdfName element_name )
+    public OdfShapeElementBase( OdfFileDom _aOwnerDoc, OdfName element_name )
     {
         super( _aOwnerDoc, element_name );
     }

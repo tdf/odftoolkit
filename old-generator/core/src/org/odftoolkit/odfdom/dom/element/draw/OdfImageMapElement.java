@@ -32,28 +32,67 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<draw:image-map>".
  */
 public abstract class OdfImageMapElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5147148082518298610L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "image-map" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "image-map" );
 
     public OdfImageMapElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "draw:area-rectangle".
+    */
+    public OdfAreaRectangleElement createAreaRectangleElement(String   _aX, String   _aY, String   _aWidth, String   _aHeight)
+    {
+        OdfAreaRectangleElement  _nAreaRectangle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAreaRectangleElement.class);
+        _nAreaRectangle.setX( _aX);
+        _nAreaRectangle.setY( _aY);
+        _nAreaRectangle.setWidth( _aWidth);
+        _nAreaRectangle.setHeight( _aHeight);
+        this.appendChild( _nAreaRectangle);
+        return  _nAreaRectangle;      
+    }
+    
+    /**
+    * Create child element "draw:area-circle".
+    */
+    public OdfAreaCircleElement createAreaCircleElement(String   _aCx, String   _aCy, String   _aR)
+    {
+        OdfAreaCircleElement  _nAreaCircle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAreaCircleElement.class);
+        _nAreaCircle.setCx( _aCx);
+        _nAreaCircle.setCy( _aCy);
+        _nAreaCircle.setR( _aR);
+        this.appendChild( _nAreaCircle);
+        return  _nAreaCircle;      
+    }
+    
+    /**
+    * Create child element "draw:area-polygon".
+    */
+    public OdfAreaPolygonElement createAreaPolygonElement(String   _aX, String   _aY, String   _aWidth, String   _aHeight, Integer   _aViewbox, String   _aPoints)
+    {
+        OdfAreaPolygonElement  _nAreaPolygon = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAreaPolygonElement.class);
+        _nAreaPolygon.setX( _aX);
+        _nAreaPolygon.setY( _aY);
+        _nAreaPolygon.setWidth( _aWidth);
+        _nAreaPolygon.setHeight( _aHeight);
+        _nAreaPolygon.setViewbox( _aViewbox);
+        _nAreaPolygon.setPoints( _aPoints);
+        this.appendChild( _nAreaPolygon);
+        return  _nAreaPolygon;      
+    }
+    
 }

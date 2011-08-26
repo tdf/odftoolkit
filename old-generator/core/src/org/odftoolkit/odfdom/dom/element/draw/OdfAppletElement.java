@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<draw:applet>".
  */
 public abstract class OdfAppletElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4039534993281088376L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "applet" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "applet" );
 
     public OdfAppletElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -164,4 +160,14 @@ public abstract class OdfAppletElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.XLINK, "actuate" ), "onLoad" );
     }
 
+    /**
+    * Create child element "draw:param".
+    */
+    public OdfParamElement createParamElement()
+    {
+        OdfParamElement  _nParam = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParamElement.class);
+        this.appendChild( _nParam);
+        return  _nParam;
+    }                   
+               
 }

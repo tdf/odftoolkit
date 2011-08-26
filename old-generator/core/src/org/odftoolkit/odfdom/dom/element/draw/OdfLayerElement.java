@@ -34,25 +34,22 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.draw.OdfDisplayType;
 
+import org.odftoolkit.odfdom.dom.element.svg.OdfTitleElement;
+import org.odftoolkit.odfdom.dom.element.svg.OdfDescElement;
 
 /**
  * ODF DOM Element implementation for element "<draw:layer>".
  */
 public abstract class OdfLayerElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -292630674877620967L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "layer" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "layer" );
 
     public OdfLayerElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -122,4 +119,24 @@ public abstract class OdfLayerElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "display" ), aStringVal );
     }
 
+    /**
+    * Create child element "svg:title".
+    */
+    public OdfTitleElement createTitleElement()
+    {
+        OdfTitleElement  _nTitle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTitleElement.class);
+        this.appendChild( _nTitle);
+        return  _nTitle;
+    }                   
+               
+    /**
+    * Create child element "svg:desc".
+    */
+    public OdfDescElement createDescElement()
+    {
+        OdfDescElement  _nDesc = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDescElement.class);
+        this.appendChild( _nDesc);
+        return  _nDesc;
+    }                   
+               
 }

@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfBinaryDataElement;
 
 /**
  * ODF DOM Element implementation for element "<draw:object-ole>".
  */
 public abstract class OdfObjectOleElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7556734247285128464L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "object-ole" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "object-ole" );
 
     public OdfObjectOleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -120,4 +116,14 @@ public abstract class OdfObjectOleElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.XLINK, "actuate" ), "onLoad" );
     }
 
+    /**
+    * Create child element "office:binary-data".
+    */
+    public OdfBinaryDataElement createBinaryDataElement()
+    {
+        OdfBinaryDataElement  _nBinaryData = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBinaryDataElement.class);
+        this.appendChild( _nBinaryData);
+        return  _nBinaryData;
+    }                   
+               
 }

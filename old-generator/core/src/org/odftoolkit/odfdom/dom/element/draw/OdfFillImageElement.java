@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<draw:fill-image>".
  */
 public abstract class OdfFillImageElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6000631022607828386L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "fill-image" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "fill-image" );
 
     public OdfFillImageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

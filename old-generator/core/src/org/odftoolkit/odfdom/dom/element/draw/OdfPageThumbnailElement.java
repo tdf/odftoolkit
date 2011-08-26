@@ -30,30 +30,28 @@ package org.odftoolkit.odfdom.dom.element.draw;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.OdfPresentationClasses;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+import org.odftoolkit.odfdom.dom.element.svg.OdfTitleElement;
+import org.odftoolkit.odfdom.dom.element.svg.OdfDescElement;
 
 /**
  * ODF DOM Element implementation for element "<draw:page-thumbnail>".
  */
 public abstract class OdfPageThumbnailElement extends OdfShapeElementBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1778902438207523184L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "page-thumbnail" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "page-thumbnail" );
 
     public OdfPageThumbnailElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -245,4 +243,24 @@ public abstract class OdfPageThumbnailElement extends OdfShapeElementBase
         setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "caption-id" ), aStringVal );
     }
 
+    /**
+    * Create child element "svg:title".
+    */
+    public OdfTitleElement createTitleElement()
+    {
+        OdfTitleElement  _nTitle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTitleElement.class);
+        this.appendChild( _nTitle);
+        return  _nTitle;
+    }                   
+               
+    /**
+    * Create child element "svg:desc".
+    */
+    public OdfDescElement createDescElement()
+    {
+        OdfDescElement  _nDesc = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDescElement.class);
+        this.appendChild( _nDesc);
+        return  _nDesc;
+    }                   
+               
 }

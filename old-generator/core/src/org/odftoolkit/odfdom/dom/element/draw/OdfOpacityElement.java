@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.draw.OdfGradientStyleType;
 import org.odftoolkit.odfdom.dom.type.OdfPercent;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<draw:opacity>".
  */
 public abstract class OdfOpacityElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3452736930307916346L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "opacity" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "opacity" );
 
     public OdfOpacityElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

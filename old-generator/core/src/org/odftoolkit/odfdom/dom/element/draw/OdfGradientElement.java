@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.draw.OdfGradientStyleType;
 import org.odftoolkit.odfdom.dom.type.OdfPercent;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<draw:gradient>".
  */
 public abstract class OdfGradientElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7457035865689721826L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "gradient" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "gradient" );
 
     public OdfGradientElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

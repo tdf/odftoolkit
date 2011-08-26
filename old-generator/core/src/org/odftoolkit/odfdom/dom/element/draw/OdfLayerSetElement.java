@@ -32,28 +32,35 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<draw:layer-set>".
  */
 public abstract class OdfLayerSetElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 726654006101842588L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "layer-set" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "layer-set" );
 
     public OdfLayerSetElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "draw:layer".
+    */
+    public OdfLayerElement createLayerElement(String   _aName)
+    {
+        OdfLayerElement  _nLayer = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLayerElement.class);
+        _nLayer.setName( _aName);
+        this.appendChild( _nLayer);
+        return  _nLayer;      
+    }
+    
 }

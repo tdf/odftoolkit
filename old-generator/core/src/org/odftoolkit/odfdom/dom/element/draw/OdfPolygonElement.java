@@ -30,28 +30,30 @@ package org.odftoolkit.odfdom.dom.element.draw;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+import org.odftoolkit.odfdom.dom.element.svg.OdfTitleElement;
+import org.odftoolkit.odfdom.dom.element.svg.OdfDescElement;
+import org.odftoolkit.odfdom.dom.element.office.OdfEventListenersElement;
+import org.odftoolkit.odfdom.dom.type.draw.OdfEscapeDirectionType;
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfListElement;
 
 /**
  * ODF DOM Element implementation for element "<draw:polygon>".
  */
 public abstract class OdfPolygonElement extends OdfShapeElementBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 857028524847420680L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "polygon" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "polygon" );
 
     public OdfPolygonElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -231,4 +233,68 @@ public abstract class OdfPolygonElement extends OdfShapeElementBase
         setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "caption-id" ), aStringVal );
     }
 
+    /**
+    * Create child element "svg:title".
+    */
+    public OdfTitleElement createTitleElement()
+    {
+        OdfTitleElement  _nTitle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTitleElement.class);
+        this.appendChild( _nTitle);
+        return  _nTitle;
+    }                   
+               
+    /**
+    * Create child element "svg:desc".
+    */
+    public OdfDescElement createDescElement()
+    {
+        OdfDescElement  _nDesc = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDescElement.class);
+        this.appendChild( _nDesc);
+        return  _nDesc;
+    }                   
+               
+    /**
+    * Create child element "office:event-listeners".
+    */
+    public OdfEventListenersElement createEventListenersElement()
+    {
+        OdfEventListenersElement  _nEventListeners = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEventListenersElement.class);
+        this.appendChild( _nEventListeners);
+        return  _nEventListeners;
+    }                   
+               
+    /**
+    * Create child element "draw:glue-point".
+    */
+    public OdfGluePointElement createGluePointElement(Integer   _aDrawid, String   _aX, String   _aY, OdfEscapeDirectionType   _aEscapeDirection)
+    {
+        OdfGluePointElement  _nGluePoint = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfGluePointElement.class);
+        _nGluePoint.setDrawid( _aDrawid);
+        _nGluePoint.setX( _aX);
+        _nGluePoint.setY( _aY);
+        _nGluePoint.setEscapeDirection( _aEscapeDirection);
+        this.appendChild( _nGluePoint);
+        return  _nGluePoint;      
+    }
+    
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
+    /**
+    * Create child element "text:list".
+    */
+    public OdfListElement createListElement()
+    {
+        OdfListElement  _nList = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListElement.class);
+        this.appendChild( _nList);
+        return  _nList;
+    }                   
+               
 }

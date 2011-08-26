@@ -34,25 +34,23 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfBinaryDataElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfListElement;
 
 /**
  * ODF DOM Element implementation for element "<draw:image>".
  */
 public abstract class OdfImageElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4972358681469660043L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "image" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "image" );
 
     public OdfImageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -120,4 +118,34 @@ public abstract class OdfImageElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.XLINK, "actuate" ), "onLoad" );
     }
 
+    /**
+    * Create child element "office:binary-data".
+    */
+    public OdfBinaryDataElement createBinaryDataElement()
+    {
+        OdfBinaryDataElement  _nBinaryData = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBinaryDataElement.class);
+        this.appendChild( _nBinaryData);
+        return  _nBinaryData;
+    }                   
+               
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
+    /**
+    * Create child element "text:list".
+    */
+    public OdfListElement createListElement()
+    {
+        OdfListElement  _nList = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListElement.class);
+        this.appendChild( _nList);
+        return  _nList;
+    }                   
+               
 }

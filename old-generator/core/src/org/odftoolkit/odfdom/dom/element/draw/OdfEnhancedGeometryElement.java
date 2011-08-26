@@ -39,25 +39,21 @@ import org.odftoolkit.odfdom.dom.type.draw.OdfGluePointType;
 import org.odftoolkit.odfdom.dom.type.draw.OdfTextPathModeType;
 import org.odftoolkit.odfdom.dom.type.draw.OdfTextPathScaleType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<draw:enhanced-geometry>".
  */
 public abstract class OdfEnhancedGeometryElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 911975622961121660L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "enhanced-geometry" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "enhanced-geometry" );
 
     public OdfEnhancedGeometryElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -948,4 +944,25 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "modifiers" ), _aModifiers );
     }
 
+    /**
+    * Create child element "draw:equation".
+    */
+    public OdfEquationElement createEquationElement()
+    {
+        OdfEquationElement  _nEquation = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEquationElement.class);
+        this.appendChild( _nEquation);
+        return  _nEquation;
+    }                   
+               
+    /**
+    * Create child element "draw:handle".
+    */
+    public OdfHandleElement createHandleElement(String   _aHandlePosition)
+    {
+        OdfHandleElement  _nHandle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHandleElement.class);
+        _nHandle.setHandlePosition( _aHandlePosition);
+        this.appendChild( _nHandle);
+        return  _nHandle;      
+    }
+    
 }

@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<draw:contour-polygon>".
  */
 public abstract class OdfContourPolygonElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3097241356936763995L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "contour-polygon" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "contour-polygon" );
 
     public OdfContourPolygonElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

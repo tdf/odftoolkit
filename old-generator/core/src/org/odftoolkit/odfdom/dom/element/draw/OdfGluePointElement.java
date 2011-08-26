@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.draw.OdfAlignType;
 import org.odftoolkit.odfdom.dom.type.draw.OdfEscapeDirectionType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<draw:glue-point>".
  */
 public abstract class OdfGluePointElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4080826675875362087L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "glue-point" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "glue-point" );
 
     public OdfGluePointElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

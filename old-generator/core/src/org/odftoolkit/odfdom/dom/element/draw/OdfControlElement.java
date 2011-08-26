@@ -30,28 +30,27 @@ package org.odftoolkit.odfdom.dom.element.draw;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+import org.odftoolkit.odfdom.dom.element.svg.OdfTitleElement;
+import org.odftoolkit.odfdom.dom.element.svg.OdfDescElement;
+import org.odftoolkit.odfdom.dom.type.draw.OdfEscapeDirectionType;
 
 /**
  * ODF DOM Element implementation for element "<draw:control>".
  */
 public abstract class OdfControlElement extends OdfShapeElementBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2290734242386613169L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "control" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DRAW, "control" );
 
     public OdfControlElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -214,4 +213,38 @@ public abstract class OdfControlElement extends OdfShapeElementBase
         setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "caption-id" ), aStringVal );
     }
 
+    /**
+    * Create child element "svg:title".
+    */
+    public OdfTitleElement createTitleElement()
+    {
+        OdfTitleElement  _nTitle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTitleElement.class);
+        this.appendChild( _nTitle);
+        return  _nTitle;
+    }                   
+               
+    /**
+    * Create child element "svg:desc".
+    */
+    public OdfDescElement createDescElement()
+    {
+        OdfDescElement  _nDesc = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDescElement.class);
+        this.appendChild( _nDesc);
+        return  _nDesc;
+    }                   
+               
+    /**
+    * Create child element "draw:glue-point".
+    */
+    public OdfGluePointElement createGluePointElement(Integer   _aDrawid, String   _aX, String   _aY, OdfEscapeDirectionType   _aEscapeDirection)
+    {
+        OdfGluePointElement  _nGluePoint = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfGluePointElement.class);
+        _nGluePoint.setDrawid( _aDrawid);
+        _nGluePoint.setX( _aX);
+        _nGluePoint.setY( _aY);
+        _nGluePoint.setEscapeDirection( _aEscapeDirection);
+        this.appendChild( _nGluePoint);
+        return  _nGluePoint;      
+    }
+    
 }
