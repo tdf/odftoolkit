@@ -35,6 +35,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.element.table.TableCalculationSettingsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableFilterConditionElement;
 import org.odftoolkit.odfdom.dom.element.table.TableSortElement;
+import org.odftoolkit.odfdom.dom.element.table.TableSubtotalRulesElement;
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute table:case-sensitive}.
  *
@@ -131,6 +132,9 @@ public class TableCaseSensitiveAttribute extends OdfAttribute {
 				defaultValue = DEFAULT_VALUE_FALSE;
 			}
 			if (parentElement instanceof TableSortElement) {
+				defaultValue = DEFAULT_VALUE_FALSE;
+			}
+			if (parentElement instanceof TableSubtotalRulesElement) {
 				defaultValue = DEFAULT_VALUE_FALSE;
 			}
 		}
