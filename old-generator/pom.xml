@@ -37,6 +37,7 @@
     <module>codegen</module>
     <module>codegen-maven-plugin</module>
     <module>core</module>
+    <module>maven-performancetest-plugin</module>
 
   </modules>
   <build>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.odftoolkit</groupId>
+  <artifactId>maven-performancetest-plugin</artifactId>
+  <version>0.6-SNAPSHOT</version>
+  <packaging>maven-plugin</packaging>
+  <name>ODFDOM Performance Test Maven2 Plugin</name>
+  <url>http://odftoolkit.org</url>
+
+    <build>
+      <defaultGoal>install</defaultGoal>
+    <resources>
+      <resource>
+        <targetPath>templates/</targetPath>
+        <directory>src</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+          <plugins>
+	<plugin>
+	  <artifactId>maven-plugin-plugin</artifactId>
+	  <version>2.3</version>
+	  <configuration>
+	    <goalPrefix>odfdom</goalPrefix>
+	  </configuration>
+	</plugin>
+        <plugin>
+          <groupId>org.odftoolkit</groupId>
+          <artifactId>maven-performancetest-plugin</artifactId>
+          <version>0.6-SNAPSHOT</version>
+	  <configuration>
+	    <testFileFolder>C:\odf\testdocuments</testFileFolder>
+	    <count>3</count>
+	    <testLable>mytest</testLable>
+	    <timeLogFileName>c:\odf\timelog.ods</timeLogFileName>
+	    <memoryLogFileName>c:\odf\memorylog.ods</memoryLogFileName>
+	  </configuration>
+        </plugin>
+      </plugins>
+    </build>
+    
+  <dependencies>
+      <dependency>
+	<groupId>org.odftoolkit</groupId>
+	<artifactId>odfdom-core</artifactId>
+	<version>${project.version}</version>
+      </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
