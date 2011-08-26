@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
+
+  Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+
+  Use is subject to license terms.
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  use this file except in compliance with the License. You may obtain a copy
+  of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
+  obtain a copy of the License at http://odftoolkit.org/docs/license.txt
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+-->
+<project name="ODF Cross References" default="default" basedir=".">
+    <description>Creates cross references from ODF schema.</description>
+    <import file="nbproject/build-impl.xml"/>
+    <import file="build-schemas.xml"/>
+ 
+    <property name="opendocument.v12.schema.xref" value="OpenDocument-xref-schema-v1.2${opendocument.v12.schema.state}.rng"/>
+    <property name="opendocument.v12.schema.dtype" value="OpenDocument-dtype-schema-v1.2${opendocument.v12.schema.state}.rng"/>
+
+    <target name="add-v12-xref" depends="init,jar,-create-v12-xref-schema" 
+            description="add cross references to ODF 1.2 specification.">
+        <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
+        <property name="log-file" location="${dist.dir}/xref/OpenDocument-v1.2-${opendocument.v12.schema.state.target}.log"/>
+        <mkdir dir="${dist.dir}/xref"/>
+        <java jar="${dist.jar}" fork="true">
+            <arg value="-v"/>
+            <arg value="-l"/>
+            <arg value="${log-file}"/>
+            <arg value="sample_xslt/create-embedded-xref.xsl"/>
+            <arg value="${opendocument.v12.spec-source.main}"/>
+            <arg value="${dist.dir}/xref/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"/>
+            <arg value="xref-schema-file=${xref-schema-file}"/>
+        </java>
+    </target>
+
+    <target name="create-v12-attribute-xref-ods" depends="init,jar,-create-v12-dtype-schema" 
+            description="Creates cross reference document from ODF 1.2 schema.">
+        <copy file="misc/odf-attribute-xref.ods" todir="${dist.dir}/attr-xref"/>
+        <java jar="${dist.jar}" fork="true">
+            <arg value="-v"/>
+            <arg value="sample_xslt/create-attribute-xref.xsl"/>
+            <arg value="-i"/>
+            <arg value="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}"/>
+            <arg value="-t"/>
+            <arg value="${dist.dir}/attr-xref/odf-attribute-xref.ods"/>
+        </java>
+    </target>
+    
+    <target name="-create-v12-xref-schema" depends="init,-get-v12-schemas">
+        <xslt style="sample_xslt/create-flat-schema.xsl" 
+                    in="${v12.schema.dir}/${opendocument.v12.schema.strict}" 
+                    out="${build.dir}/schema/flat/${opendocument.v12.schema.xref}">  
+            <param name="incl-conditions" expression="false"/>
+            <param name="incl-default-values" expression="false"/>
+            <param name="incl-types" expression="false"/>
+            <param name="incl-elements" expression="true"/>
+        </xslt>
+    </target>
+    
+    <target name="-create-v12-dtype-schema" depends="init,-get-v12-schemas">
+        <xslt style="sample_xslt/create-flat-schema.xsl" 
+                    in="${v12.schema.dir}/${opendocument.v12.schema.strict}" 
+                    out="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}">  
+            <param name="incl-conditions" expression="false"/>
+            <param name="incl-default-values" expression="true"/>
+            <param name="incl-types" expression="true"/>
+            <param name="incl-elements" expression="false"/>
+        </xslt>
+    </target>
+    
+</project>
