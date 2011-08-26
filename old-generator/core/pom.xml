@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.odftoolkit</groupId>
+  <artifactId>odfdom-core</artifactId>
+  <version>0.6-SNAPSHOT</version>
+  <name>ODFDOM Core</name>
+  <parent>
+    <groupId>org.odftoolkit</groupId>
+    <artifactId>odfdom-parent</artifactId>
+    <version>0.6-SNAPSHOT</version>
+    <relativePath>../parent/pom.xml</relativePath>
+  </parent>
+
+  <scm>
+    <connection>scm:hg:http://http://odftoolkit.org/hg/odfdom~developer/core</connection>
+    <developerConnection>scm:hg:https://odftoolkit.org/hg/odfdom~developer/core</developerConnection>
+  </scm>
+
+  <build>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

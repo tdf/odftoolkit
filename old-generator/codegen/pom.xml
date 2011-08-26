@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.odftoolkit</groupId>
+  <artifactId>odfdom-codegen</artifactId>
+  <version>0.6-SNAPSHOT</version>
+  <name>ODFDOM Code Generator</name>
+  <parent>
+    <groupId>org.odftoolkit</groupId>
+    <artifactId>odfdom-parent</artifactId>
+    <version>0.6-SNAPSHOT</version>
+    <relativePath>../parent/pom.xml</relativePath>
+  </parent>
+
+  <scm>
+    <connection>scm:hg:http://http://odftoolkit.org/hg/odfdom~developer/codegen</connection>
+    <developerConnection>scm:hg:https://odftoolkit.org/hg/odfdom~developer/codegen</developerConnection>
+  </scm>
+
+  <build>
+    <plugins>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-jar-plugin</artifactId>
+	<configuration>
+	  <archive>
+	    <index>true</index>
+	  </archive>
+	  <manifest>
+	    <mainClass>org.openoffice.odf.codegen.CodeGen</mainClass>
+	  </manifest>
+	</configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
