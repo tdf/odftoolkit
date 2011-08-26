@@ -30,6 +30,7 @@ package org.odftoolkit.odfdom.dom.element.dr3d;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStyleablePresentationElement;
 import org.odftoolkit.odfdom.dom.type.dr3d.OdfProjectionType;
 import org.odftoolkit.odfdom.dom.type.dr3d.OdfShadeModeType;
@@ -43,25 +44,24 @@ import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
 import org.odftoolkit.odfdom.dom.type.text.OdfAnchorType;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 
+import org.odftoolkit.odfdom.dom.element.svg.OdfTitleElement;
+import org.odftoolkit.odfdom.dom.element.svg.OdfDescElement;
+import org.odftoolkit.odfdom.dom.element.draw.OdfGluePointElement;
+import org.odftoolkit.odfdom.dom.type.draw.OdfEscapeDirectionType;
 
 /**
  * ODF DOM Element implementation for element "<dr3d:scene>".
  */
 public abstract class OdfSceneElement extends OdfStyleablePresentationElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1535545046111898240L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DR3D, "scene" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DR3D, "scene" );
 
     public OdfSceneElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -575,4 +575,103 @@ public abstract class OdfSceneElement extends OdfStyleablePresentationElement
         setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "caption-id" ), aStringVal );
     }
 
+    /**
+    * Create child element "svg:title".
+    */
+    public OdfTitleElement createTitleElement()
+    {
+        OdfTitleElement  _nTitle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTitleElement.class);
+        this.appendChild( _nTitle);
+        return  _nTitle;
+    }                   
+               
+    /**
+    * Create child element "svg:desc".
+    */
+    public OdfDescElement createDescElement()
+    {
+        OdfDescElement  _nDesc = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDescElement.class);
+        this.appendChild( _nDesc);
+        return  _nDesc;
+    }                   
+               
+    /**
+    * Create child element "dr3d:light".
+    */
+    public OdfLightElement createLightElement(String   _aDirection)
+    {
+        OdfLightElement  _nLight = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLightElement.class);
+        _nLight.setDirection( _aDirection);
+        this.appendChild( _nLight);
+        return  _nLight;      
+    }
+    
+    /**
+    * Create child element "dr3d:scene".
+    */
+    public OdfSceneElement createSceneElement()
+    {
+        OdfSceneElement  _nScene = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSceneElement.class);
+        this.appendChild( _nScene);
+        return  _nScene;
+    }                   
+               
+    /**
+    * Create child element "dr3d:extrude".
+    */
+    public OdfExtrudeElement createExtrudeElement(String   _aD, Integer   _aViewbox)
+    {
+        OdfExtrudeElement  _nExtrude = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfExtrudeElement.class);
+        _nExtrude.setD( _aD);
+        _nExtrude.setViewbox( _aViewbox);
+        this.appendChild( _nExtrude);
+        return  _nExtrude;      
+    }
+    
+    /**
+    * Create child element "dr3d:sphere".
+    */
+    public OdfSphereElement createSphereElement()
+    {
+        OdfSphereElement  _nSphere = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSphereElement.class);
+        this.appendChild( _nSphere);
+        return  _nSphere;
+    }                   
+               
+    /**
+    * Create child element "dr3d:rotate".
+    */
+    public OdfRotateElement createRotateElement(Integer   _aViewbox, String   _aD)
+    {
+        OdfRotateElement  _nRotate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRotateElement.class);
+        _nRotate.setViewbox( _aViewbox);
+        _nRotate.setD( _aD);
+        this.appendChild( _nRotate);
+        return  _nRotate;      
+    }
+    
+    /**
+    * Create child element "dr3d:cube".
+    */
+    public OdfCubeElement createCubeElement()
+    {
+        OdfCubeElement  _nCube = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCubeElement.class);
+        this.appendChild( _nCube);
+        return  _nCube;
+    }                   
+               
+    /**
+    * Create child element "draw:glue-point".
+    */
+    public OdfGluePointElement createGluePointElement(Integer   _aDrawid, String   _aX, String   _aY, OdfEscapeDirectionType   _aEscapeDirection)
+    {
+        OdfGluePointElement  _nGluePoint = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfGluePointElement.class);
+        _nGluePoint.setDrawid( _aDrawid);
+        _nGluePoint.setX( _aX);
+        _nGluePoint.setY( _aY);
+        _nGluePoint.setEscapeDirection( _aEscapeDirection);
+        this.appendChild( _nGluePoint);
+        return  _nGluePoint;      
+    }
+    
 }
