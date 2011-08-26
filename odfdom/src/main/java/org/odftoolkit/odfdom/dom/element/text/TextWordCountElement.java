@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNumFormatAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNumLetterSyncAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:word-count}.

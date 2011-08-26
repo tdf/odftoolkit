@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:variable-input}.

@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbReferencedTableNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbUpdateRuleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbDeleteRuleAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:key}.

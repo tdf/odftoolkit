@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element svg:font-face-uri}.

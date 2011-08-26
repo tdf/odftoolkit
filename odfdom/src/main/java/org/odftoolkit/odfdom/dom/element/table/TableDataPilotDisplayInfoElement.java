@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDataFieldAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableMemberCountAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayMemberModeAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-display-info}.

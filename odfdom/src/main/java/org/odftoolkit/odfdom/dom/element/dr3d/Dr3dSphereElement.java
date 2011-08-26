@@ -45,7 +45,6 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationStyleNameAtt
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationClassNamesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dTransformAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element dr3d:sphere}.

@@ -119,7 +119,6 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoHyphenationPushCharCountAttribut
 import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:text-properties}.

@@ -48,7 +48,6 @@ import org.odftoolkit.odfdom.dom.attribute.meta.MetaNonWhitespaceCharacterCountA
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaRowCountAttribute;
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaCellCountAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element meta:document-statistic}.

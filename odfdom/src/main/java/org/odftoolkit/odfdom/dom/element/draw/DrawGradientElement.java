@@ -44,7 +44,6 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawEndColorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawStartIntensityAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawEndIntensityAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:gradient}.

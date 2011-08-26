@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStringValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:toc-mark}.

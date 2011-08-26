@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextIsHiddenAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:hidden-paragraph}.

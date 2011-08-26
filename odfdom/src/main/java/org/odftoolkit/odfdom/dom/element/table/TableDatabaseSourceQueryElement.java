@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDatabaseNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableQueryNameAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:database-source-query}.

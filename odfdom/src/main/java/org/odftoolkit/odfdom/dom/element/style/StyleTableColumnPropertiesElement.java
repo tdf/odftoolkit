@@ -40,7 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleUseOptimalColumnWidthAttri
 import org.odftoolkit.odfdom.dom.attribute.fo.FoBreakBeforeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoBreakAfterAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:table-column-properties}.

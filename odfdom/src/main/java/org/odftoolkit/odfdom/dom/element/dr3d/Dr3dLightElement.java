@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dDirectionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dEnabledAttribute;
 import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dSpecularAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element dr3d:light}.

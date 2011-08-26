@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleRubyPositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleRubyAlignAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:ruby-properties}.

@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartRepeatedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element chart:data-point}.

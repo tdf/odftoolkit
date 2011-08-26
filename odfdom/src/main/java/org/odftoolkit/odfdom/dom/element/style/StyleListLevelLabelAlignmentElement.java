@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextListTabStopPositionAttribute
 import org.odftoolkit.odfdom.dom.attribute.fo.FoTextIndentAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoMarginLeftAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:list-level-label-alignment}.

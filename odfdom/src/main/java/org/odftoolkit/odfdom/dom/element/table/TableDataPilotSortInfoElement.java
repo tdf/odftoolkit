@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableSortModeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDataFieldAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableOrderAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-sort-info}.

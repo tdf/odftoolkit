@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawFormulaAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:equation}.

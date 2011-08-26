@@ -42,7 +42,6 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawBorderAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawStartAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawEndAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:opacity}.

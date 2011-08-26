@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbIsFirstRowHeaderLineAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbShowDeletedAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:table-setting}.

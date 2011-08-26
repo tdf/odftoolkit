@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextContinueNumberingAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextContinueListAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:list}.

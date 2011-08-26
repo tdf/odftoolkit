@@ -73,6 +73,7 @@ public class DrawRedAttribute extends OdfAttribute {
 	@Override
 	public void setValue(String attrValue) {
 		try{
+			//2DO: need validate value against SignedZeroToHundredPercent
 			super.setValue(attrValue);		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
@@ -86,6 +87,7 @@ public class DrawRedAttribute extends OdfAttribute {
 	@Override
 	public String getValue(){
 		try{
+			//2DO: need validate value against SignedZeroToHundredPercent
 			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging

@@ -46,7 +46,6 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilEndAttribute;
 import org.odftoolkit.odfdom.dom.attribute.smil.SmilTargetElementAttribute;
 import org.odftoolkit.odfdom.dom.attribute.anim.AnimSubItemAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element anim:command}.

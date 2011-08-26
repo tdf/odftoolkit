@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableObjectNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableUserNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TablePasswordAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:source-service}.

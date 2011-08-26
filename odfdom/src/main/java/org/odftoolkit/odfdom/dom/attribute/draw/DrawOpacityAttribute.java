@@ -31,7 +31,8 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;import org.odftoolkit.odfdom.dom.element.style.StyleBackgroundImageElement;
+import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleBackgroundImageElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleDrawingPagePropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
      
@@ -79,6 +80,7 @@ public class DrawOpacityAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof StyleBackgroundImageElement ){
+					//2DO: need validate value against ZeroToHundredPercent
 					super.setValue(attrValue);
 				}else if( parentElement instanceof StyleDrawingPagePropertiesElement ){
 					//2DO: need validate value against Percent
@@ -106,6 +108,7 @@ public class DrawOpacityAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof StyleBackgroundImageElement ){
+					//2DO: need validate value against ZeroToHundredPercent
 					return super.getValue();
 				}else if( parentElement instanceof StyleDrawingPagePropertiesElement ){
 					//2DO: need validate value against Percent

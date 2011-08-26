@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDateValueAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:null-date}.

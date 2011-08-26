@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbCatalogNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbSchemaNameAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:update-table}.

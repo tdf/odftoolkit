@@ -45,7 +45,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNumLetterSyncAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStartNumberingAtAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextFootnotesPositionAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:notes-configuration}.

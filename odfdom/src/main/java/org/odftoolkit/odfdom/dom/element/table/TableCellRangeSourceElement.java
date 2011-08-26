@@ -42,7 +42,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableFilterNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableFilterOptionsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableRefreshDelayAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:cell-range-source}.

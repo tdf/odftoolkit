@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableColumnAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableRowAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTableAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:cell-address}.

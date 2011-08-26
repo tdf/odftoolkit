@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbBaseDnAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbIsFirstRowHeaderLineAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbParameterNameSubstitutionAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:driver-settings}.

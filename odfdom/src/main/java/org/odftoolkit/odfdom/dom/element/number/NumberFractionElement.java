@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberDenominatorValueAttribut
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinIntegerDigitsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberGroupingAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element number:fraction}.

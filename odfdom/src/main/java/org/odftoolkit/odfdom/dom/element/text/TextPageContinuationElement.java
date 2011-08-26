@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextSelectPageAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStringValueAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:page-continuation}.

@@ -34,7 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgStringAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element svg:font-face-format}.

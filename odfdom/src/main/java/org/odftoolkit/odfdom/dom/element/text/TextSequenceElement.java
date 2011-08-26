@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNumFormatAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNumLetterSyncAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextRefNameAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:sequence}.

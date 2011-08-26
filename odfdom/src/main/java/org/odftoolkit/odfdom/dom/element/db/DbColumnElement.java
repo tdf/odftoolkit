@@ -46,7 +46,6 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeTimeValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeBooleanValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeStringValueAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:column}.

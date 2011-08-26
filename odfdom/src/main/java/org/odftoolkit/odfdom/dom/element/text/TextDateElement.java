@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextDateValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextDateAdjustAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:date}.

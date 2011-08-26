@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartDimensionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element chart:axis}.

@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableStatusAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStepsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableMaximumDifferenceAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:iteration}.

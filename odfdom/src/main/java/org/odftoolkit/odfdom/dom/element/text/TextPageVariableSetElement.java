@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextActiveAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextPageAdjustAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:page-variable-set}.

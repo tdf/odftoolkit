@@ -31,7 +31,8 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;import org.odftoolkit.odfdom.dom.element.db.DbDriverSettingsElement;
+import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.dom.element.db.DbDriverSettingsElement;
 import org.odftoolkit.odfdom.dom.element.db.DbTableSettingElement;
      
 /**

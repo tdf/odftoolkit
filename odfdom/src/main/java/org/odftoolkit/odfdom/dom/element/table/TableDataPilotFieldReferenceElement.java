@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableMemberTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableMemberNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTypeAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-field-reference}.

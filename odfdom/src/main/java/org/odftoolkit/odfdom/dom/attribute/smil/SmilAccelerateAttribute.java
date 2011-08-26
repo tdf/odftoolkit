@@ -31,7 +31,8 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateElement;
+import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateColorElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateMotionElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateTransformElement;
@@ -78,12 +79,34 @@ public class SmilAccelerateAttribute extends OdfAttribute {
 	}
 
 	/**
+	 * @param value The <code>double</code> value of the attribute.
+	 */
+	public void setDoubleValue(double value) {
+    	//2DO: need validate value against ZeroToOneDecimal 
+ 		super.setValue(String.valueOf(value));
+	}
+    
+	/**
+	 * @return Returns the <code>double</code> value of the attribute
+	 */
+	public double getDoubleValue(){
+		String value = super.getValue();
+		try {
+        	//2DO: need validate value against ZeroToOneDecimal
+			return Double.parseDouble(value);
+		} catch (NumberFormatException e) {
+			// TODO: validation handling/logging
+			throw (e);
+		}
+	}
+	/**
 	 * @param attrValue The <code>String</code> value of the attribute.
 	 */
 	@Override
 	public void setValue(String attrValue) {
 		try{
-			super.setValue(attrValue);		
+			//2DO: need validate value against ZeroToOneDecimal
+			super.setValue(Double.toString(Double.parseDouble(attrValue)));		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw (e);
@@ -96,7 +119,8 @@ public class SmilAccelerateAttribute extends OdfAttribute {
 	@Override
 	public String getValue(){
 		try{
-			return super.getValue();		
+			//2DO: need validate value against ZeroToOneDecimal
+			return String.valueOf(Double.parseDouble(super.getValue()));		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of smil:accelerate is not valid");

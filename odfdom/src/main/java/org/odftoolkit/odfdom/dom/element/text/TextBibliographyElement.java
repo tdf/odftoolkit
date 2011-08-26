@@ -40,7 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextProtectionKeyAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextProtectionKeyDigestAlgorithmAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:bibliography}.

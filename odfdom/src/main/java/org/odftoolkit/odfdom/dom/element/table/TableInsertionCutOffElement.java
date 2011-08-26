@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TablePositionAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:insertion-cut-off}.

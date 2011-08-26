@@ -31,7 +31,8 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;import org.odftoolkit.odfdom.dom.element.style.StyleColumnElement;
+import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleColumnElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute fo:space-before}.

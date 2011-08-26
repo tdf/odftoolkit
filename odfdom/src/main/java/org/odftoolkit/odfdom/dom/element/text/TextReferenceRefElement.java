@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextRefNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextReferenceFormatAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:reference-ref}.

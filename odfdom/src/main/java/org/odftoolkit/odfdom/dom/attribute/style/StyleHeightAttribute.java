@@ -31,7 +31,8 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;import org.odftoolkit.odfdom.dom.element.style.StyleColumnSepElement;
+import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleColumnSepElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute style:height}.
@@ -75,6 +76,7 @@ public class StyleHeightAttribute extends OdfAttribute {
 	@Override
 	public void setValue(String attrValue) {
 		try{
+			//2DO: need validate value against ZeroToHundredPercent
 			super.setValue(attrValue);		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
@@ -88,6 +90,7 @@ public class StyleHeightAttribute extends OdfAttribute {
 	@Override
 	public String getValue(){
 		try{
+			//2DO: need validate value against ZeroToHundredPercent
 			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging

@@ -58,7 +58,6 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilAutoReverseAttribute;
 import org.odftoolkit.odfdom.dom.attribute.smil.SmilAccumulateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.smil.SmilAdditiveAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element anim:animate}.
@@ -644,54 +643,54 @@ public abstract class AnimAnimateElement extends OdfElement
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>SmilAccelerateAttribute</code> , See {@odf.attribute smil:accelerate}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getSmilAccelerateAttribute()
+	public Double getSmilAccelerateAttribute()
 	{
 		SmilAccelerateAttribute attr = (SmilAccelerateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "accelerate" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+		 	return Double.valueOf( attr.getDoubleValue() );
 		}
-		return SmilAccelerateAttribute.DEFAULT_VALUE;
+		return Double.valueOf( SmilAccelerateAttribute.DEFAULT_VALUE );
 	}
 		 
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>SmilAccelerateAttribute</code> , See {@odf.attribute smil:accelerate}
 	 *
-	 * @param smilAccelerateValue   The type is <code>String</code>
+	 * @param smilAccelerateValue   The type is <code>Double</code>
 	 */
-	public void setSmilAccelerateAttribute( String smilAccelerateValue )
+	public void setSmilAccelerateAttribute( Double smilAccelerateValue )
 	{
 		SmilAccelerateAttribute attr =  new SmilAccelerateAttribute( (OdfFileDom)this.ownerDocument );
 		setOdfAttribute( attr );
-		attr.setValue( smilAccelerateValue );
+		attr.setDoubleValue( smilAccelerateValue.doubleValue() );
 	}
 
 
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>SmilDecelerateAttribute</code> , See {@odf.attribute smil:decelerate}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getSmilDecelerateAttribute()
+	public Double getSmilDecelerateAttribute()
 	{
 		SmilDecelerateAttribute attr = (SmilDecelerateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "decelerate" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+		 	return Double.valueOf( attr.getDoubleValue() );
 		}
-		return SmilDecelerateAttribute.DEFAULT_VALUE;
+		return Double.valueOf( SmilDecelerateAttribute.DEFAULT_VALUE );
 	}
 		 
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>SmilDecelerateAttribute</code> , See {@odf.attribute smil:decelerate}
 	 *
-	 * @param smilDecelerateValue   The type is <code>String</code>
+	 * @param smilDecelerateValue   The type is <code>Double</code>
 	 */
-	public void setSmilDecelerateAttribute( String smilDecelerateValue )
+	public void setSmilDecelerateAttribute( Double smilDecelerateValue )
 	{
 		SmilDecelerateAttribute attr =  new SmilDecelerateAttribute( (OdfFileDom)this.ownerDocument );
 		setOdfAttribute( attr );
-		attr.setValue( smilDecelerateValue );
+		attr.setDoubleValue( smilDecelerateValue.doubleValue() );
 	}
 
 

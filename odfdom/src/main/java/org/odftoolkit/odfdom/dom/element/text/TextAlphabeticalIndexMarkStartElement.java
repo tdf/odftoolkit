@@ -40,7 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextKey1PhoneticAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextKey2PhoneticAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextMainEntryAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:alphabetical-index-mark-start}.

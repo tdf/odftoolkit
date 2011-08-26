@@ -120,7 +120,7 @@ public class SmilRepeatCountAttribute extends OdfAttribute {
 	@Override
 	public void setValue(String attrValue) {
 		try{
-			//2DO: need validate value against decimal;enum
+			//2DO: need validate value against nonNegativeDecimal;enum
 			super.setValue(attrValue);		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
@@ -134,7 +134,7 @@ public class SmilRepeatCountAttribute extends OdfAttribute {
 	@Override
 	public String getValue(){
 		try{
-			//2DO: need validate value against decimal;enum
+			//2DO: need validate value against nonNegativeDecimal;enum
 			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging

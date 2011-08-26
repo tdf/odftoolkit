@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableLayoutModeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAddEmptyLinesAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-layout-info}.

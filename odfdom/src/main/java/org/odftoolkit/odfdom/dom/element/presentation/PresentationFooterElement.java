@@ -33,7 +33,6 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element presentation:footer}.

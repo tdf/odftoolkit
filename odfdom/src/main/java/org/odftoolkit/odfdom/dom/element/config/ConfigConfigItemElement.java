@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.config.ConfigNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.config.ConfigTypeAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element config:config-item}.

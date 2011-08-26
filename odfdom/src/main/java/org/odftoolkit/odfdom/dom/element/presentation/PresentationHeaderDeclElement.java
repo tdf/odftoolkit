@@ -34,7 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationNameAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element presentation:header-decl}.

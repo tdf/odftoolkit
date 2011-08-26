@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlPropertyAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlDatatypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlContentAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:bookmark-start}.

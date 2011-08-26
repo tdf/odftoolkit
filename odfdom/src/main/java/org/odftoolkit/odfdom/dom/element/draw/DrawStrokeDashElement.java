@@ -41,7 +41,6 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawDots2Attribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawDots2LengthAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawDistanceAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:stroke-dash}.

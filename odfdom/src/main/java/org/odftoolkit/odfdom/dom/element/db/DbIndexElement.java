@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbCatalogNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbIsUniqueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbIsClusteredAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:index}.

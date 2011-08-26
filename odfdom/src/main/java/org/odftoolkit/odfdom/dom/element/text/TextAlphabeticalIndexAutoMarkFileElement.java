@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:alphabetical-index-auto-mark-file}.

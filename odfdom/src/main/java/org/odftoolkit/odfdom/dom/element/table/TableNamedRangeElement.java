@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableCellRangeAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableBaseCellAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableRangeUsableAsAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:named-range}.

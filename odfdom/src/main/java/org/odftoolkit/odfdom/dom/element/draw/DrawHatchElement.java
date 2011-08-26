@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawColorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawDistanceAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawRotationAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:hatch}.

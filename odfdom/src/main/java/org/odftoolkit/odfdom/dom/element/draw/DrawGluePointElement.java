@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawEscapeDirectionAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:glue-point}.

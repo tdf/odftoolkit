@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbCommandAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbApplyCommandAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:order-statement}.

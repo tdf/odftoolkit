@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element chart:stock-loss-marker}.

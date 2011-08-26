@@ -52,7 +52,6 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilRestartDefaultAttribute;
 import org.odftoolkit.odfdom.dom.attribute.smil.SmilFillAttribute;
 import org.odftoolkit.odfdom.dom.attribute.smil.SmilFillDefaultAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element anim:audio}.

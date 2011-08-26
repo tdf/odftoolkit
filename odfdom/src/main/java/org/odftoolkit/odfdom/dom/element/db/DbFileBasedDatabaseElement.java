@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbMediaTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbExtensionAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:file-based-database}.

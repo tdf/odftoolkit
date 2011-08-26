@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgOffsetAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgStopColorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgStopOpacityAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element svg:stop}.

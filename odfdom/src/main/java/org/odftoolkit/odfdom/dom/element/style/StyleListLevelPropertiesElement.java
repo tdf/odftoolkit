@@ -46,7 +46,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleVerticalPosAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextListLevelPositionAndSpaceModeAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:list-level-properties}.

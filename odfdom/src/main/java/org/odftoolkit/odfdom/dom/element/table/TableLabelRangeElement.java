@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableLabelCellRangeAddressAttri
 import org.odftoolkit.odfdom.dom.attribute.table.TableDataCellRangeAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableOrientationAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:label-range}.

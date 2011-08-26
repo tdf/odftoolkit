@@ -42,7 +42,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableEndColumnAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableEndRowAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableEndTableAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:source-range-address}.

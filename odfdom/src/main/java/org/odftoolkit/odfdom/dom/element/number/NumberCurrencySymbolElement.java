@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberCountryAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberScriptAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberRfcLanguageTagAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element number:currency-symbol}.

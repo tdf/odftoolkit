@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.form.FormSelectedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.form.FormLabelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.form.FormValueAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element form:option}.

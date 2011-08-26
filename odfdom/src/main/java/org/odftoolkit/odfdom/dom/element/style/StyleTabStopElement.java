@@ -42,7 +42,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleLeaderColorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleLeaderTextAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleLeaderTextStyleAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:tab-stop}.

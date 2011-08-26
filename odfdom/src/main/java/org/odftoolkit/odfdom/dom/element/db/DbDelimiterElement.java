@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbStringAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbDecimalAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbThousandAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:delimiter}.

@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbPortAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbLocalSocketAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbDatabaseNameAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:server-database}.

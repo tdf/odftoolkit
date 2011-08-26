@@ -184,7 +184,7 @@
                                 <!-- DOM LAYER CONFIGURATION -->
 								<configuration>
 									<sourceRoot>${basedir}/src/main/java</sourceRoot>
-									<schemaFile>${basedir}/src/codegen/resources/dom/OpenDocument-schema-v1.2-cd02-rev02.rng</schemaFile>
+									<schemaFile>${basedir}/src/codegen/resources/dom/OpenDocument-schema-v1.2-cd02-rev03.rng</schemaFile>
 									<configFile>${basedir}/src/codegen/resources/dom/config.xml</configFile>
 									<templateFile>${basedir}/src/codegen/resources/dom/javacodetemplate.xml</templateFile>
 								</configuration>

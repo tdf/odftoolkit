@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeTopicAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeItemAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeAutomaticUpdateAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:dde-source}.

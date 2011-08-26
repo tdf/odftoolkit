@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleHeightAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleVerticalAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleColorAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:column-sep}.

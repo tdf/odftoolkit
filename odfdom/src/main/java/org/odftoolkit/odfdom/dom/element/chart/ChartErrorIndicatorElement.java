@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartDimensionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartErrorLowerRangeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartErrorUpperRangeAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element chart:error-indicator}.

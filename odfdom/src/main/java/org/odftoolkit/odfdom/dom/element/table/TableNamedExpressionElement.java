@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableExpressionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableBaseCellAddressAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:named-expression}.

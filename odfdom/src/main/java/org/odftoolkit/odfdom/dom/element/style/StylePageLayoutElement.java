@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StylePageUsageAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:page-layout}.

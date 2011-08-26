@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaDelayAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element meta:auto-reload}.

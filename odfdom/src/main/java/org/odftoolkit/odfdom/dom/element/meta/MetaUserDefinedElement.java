@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element meta:user-defined}.

@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbUseSystemUserAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbIsPasswordRequiredAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbLoginTimeoutAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:login}.

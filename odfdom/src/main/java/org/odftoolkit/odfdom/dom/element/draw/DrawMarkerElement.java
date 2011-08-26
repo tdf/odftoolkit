@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawDisplayNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:marker}.

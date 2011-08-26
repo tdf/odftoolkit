@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:index-entry-chapter}.

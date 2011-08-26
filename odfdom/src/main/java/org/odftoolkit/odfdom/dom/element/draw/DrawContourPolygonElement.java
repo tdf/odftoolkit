@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgHeightAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawPointsAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:contour-polygon}.

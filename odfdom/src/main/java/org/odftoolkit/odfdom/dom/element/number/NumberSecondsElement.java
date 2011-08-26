@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberStyleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberDecimalPlacesAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element number:seconds}.

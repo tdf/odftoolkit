@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextSectionNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextFilterNameAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:section-source}.

@@ -44,7 +44,6 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawHandlePolarAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawHandleRadiusRangeMinimumAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawHandleRadiusRangeMaximumAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:handle}.

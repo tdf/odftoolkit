@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableVisibilityAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDefaultCellStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:table-column}.

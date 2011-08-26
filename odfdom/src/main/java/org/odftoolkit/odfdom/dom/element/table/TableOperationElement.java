@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableIndexAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:operation}.

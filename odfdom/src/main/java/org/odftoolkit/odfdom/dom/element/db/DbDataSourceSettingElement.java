@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbDataSourceSettingIsListAttribute
 import org.odftoolkit.odfdom.dom.attribute.db.DbDataSourceSettingNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbDataSourceSettingTypeAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:data-source-setting}.

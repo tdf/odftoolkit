@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbIsAscendingAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:index-column}.

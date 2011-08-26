@@ -55,6 +55,7 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgFillRuleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationTransitionTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationTransitionStyleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationTransitionSpeedAttribute;
+import org.odftoolkit.odfdom.dom.attribute.smil.SmilTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.smil.SmilSubtypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.smil.SmilDirectionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.smil.SmilFadeColorAttribute;
@@ -143,6 +144,8 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
         OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "transition-style"));
     public final static OdfStyleProperty TransitionSpeed = 
         OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "transition-speed"));
+    public final static OdfStyleProperty Type = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "type"));
     public final static OdfStyleProperty Subtype = 
         OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "subtype"));
     public final static OdfStyleProperty Direction = 
@@ -733,6 +736,33 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 		PresentationTransitionSpeedAttribute attr =  new PresentationTransitionSpeedAttribute( (OdfFileDom)this.ownerDocument );
 		setOdfAttribute( attr );
 		attr.setValue( presentationTransitionSpeedValue );
+	}
+
+
+	/**
+	 * Receives the value of the ODFDOM attribute representation <code>SmilTypeAttribute</code> , See {@odf.attribute smil:type}
+	 *
+	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 */
+	public String getSmilTypeAttribute()
+	{
+		SmilTypeAttribute attr = (SmilTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "type" ) );
+		if( attr != null ){
+		 	return String.valueOf( attr.getValue() );
+		}
+		return null;
+	}
+		 
+	/**
+	 * Sets the value of ODFDOM attribute representation <code>SmilTypeAttribute</code> , See {@odf.attribute smil:type}
+	 *
+	 * @param smilTypeValue   The type is <code>String</code>
+	 */
+	public void setSmilTypeAttribute( String smilTypeValue )
+	{
+		SmilTypeAttribute attr =  new SmilTypeAttribute( (OdfFileDom)this.ownerDocument );
+		setOdfAttribute( attr );
+		attr.setValue( smilTypeValue );
 	}
 
 

@@ -44,7 +44,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextCountEmptyLinesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextCountInTextBoxesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextRestartOnPageAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:linenumbering-configuration}.

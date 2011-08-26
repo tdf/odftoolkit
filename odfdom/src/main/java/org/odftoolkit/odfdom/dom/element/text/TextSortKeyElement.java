@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextKeyAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextSortAscendingAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:sort-key}.

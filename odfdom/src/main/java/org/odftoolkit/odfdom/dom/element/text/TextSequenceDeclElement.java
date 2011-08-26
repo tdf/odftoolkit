@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayOutlineLevelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextSeparationCharacterAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:sequence-decl}.

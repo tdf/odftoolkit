@@ -42,7 +42,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableCopyFormulasAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableCommentAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableProtectedAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:scenario}.

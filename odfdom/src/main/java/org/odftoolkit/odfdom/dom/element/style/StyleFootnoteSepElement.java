@@ -40,7 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleAdjustmentAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDistanceBeforeSepAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDistanceAfterSepAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:footnote-sep}.

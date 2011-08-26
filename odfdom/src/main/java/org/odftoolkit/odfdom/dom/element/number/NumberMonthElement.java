@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberPossessiveFormAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberStyleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberCalendarAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element number:month}.

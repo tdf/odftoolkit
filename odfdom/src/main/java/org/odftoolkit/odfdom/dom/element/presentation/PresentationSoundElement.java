@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element presentation:sound}.

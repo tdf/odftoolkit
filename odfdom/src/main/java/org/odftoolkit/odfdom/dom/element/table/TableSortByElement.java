@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableFieldNumberAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDataTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableOrderAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:sort-by}.

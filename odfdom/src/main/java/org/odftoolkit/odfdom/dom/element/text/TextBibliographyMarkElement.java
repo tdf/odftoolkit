@@ -65,7 +65,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextCustom5Attribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextIsbnAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextIssnAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:bibliography-mark}.

@@ -41,7 +41,6 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbUseCatalogAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbMaxRowCountAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbSuppressVersionColumnsAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:application-connection-settings}.

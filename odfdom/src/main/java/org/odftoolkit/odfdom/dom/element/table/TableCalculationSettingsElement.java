@@ -40,7 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableUseRegularExpressionsAttri
 import org.odftoolkit.odfdom.dom.attribute.table.TableUseWildcardsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNullYearAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:calculation-settings}.

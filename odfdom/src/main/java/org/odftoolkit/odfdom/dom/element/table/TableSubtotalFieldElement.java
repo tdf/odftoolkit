@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableFieldNumberAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableFunctionAttribute;
 
-;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:subtotal-field}.
