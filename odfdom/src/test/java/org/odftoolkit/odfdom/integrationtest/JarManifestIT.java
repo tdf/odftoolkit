@@ -39,16 +39,27 @@ public class JarManifestIT {
 	@Test
 	public void testJar() {
 		try {
-			String line;
 			String command = "java -jar target/odfdom.jar";
 			Process process = Runtime.getRuntime().exec(command);
 			process.waitFor();
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-			LOG.log(Level.INFO, "The version info from commandline given by {0} is:\n", command);
-			while ((line = bufferedReader.readLine()) != null) {
+			BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+			BufferedReader outputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			String line;
+			while ((line = errorReader.readLine()) != null) {
 				LOG.info(line);
 				Assert.assertTrue(line.indexOf("Exception") == -1);
 			}
+			String firstOutputLine = outputReader.readLine();
+			String secondOutputLine = outputReader.readLine();
+			errorReader.close();
+			outputReader.close();
+			process.destroy();
+			LOG.log(Level.INFO, "The version info from commandline given by {0} is:\n", command);
+			LOG.log(Level.INFO, "\"{0}\"", firstOutputLine);
+			LOG.log(Level.INFO, "\"{0}\"", secondOutputLine);
+			Assert.assertEquals(firstOutputLine, JarManifest.getOdfdomTitle() + " (build " + JarManifest.getOdfdomBuildDate() + ')');
+			Assert.assertEquals(secondOutputLine, "from " + JarManifest.getOdfdomWebsite() + " supporting ODF " + JarManifest.getOdfdomSupportedOdfVersion());
+
 			LOG.log(Level.INFO, "\nJarManifest.getName(): {0}", JarManifest.getOdfdomName());
 			Assert.assertNotNull(JarManifest.getOdfdomName());
 

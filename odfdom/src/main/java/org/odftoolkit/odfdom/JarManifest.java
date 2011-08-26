@@ -93,7 +93,7 @@ public class JarManifest {
 	 * (requiring the change of classpath for every version due to JAR naming change).
 	 */
     public static void main(String[] args) throws IOException {
-        System.out.println(getOdfdomTitle() + " (build " + getOdfdomBuildDate() + ')' + "\nfrom " + getOdfdomWebsite() + " supporting ODF " + getOdfdomVersion());
+        System.out.println(getOdfdomTitle() + " (build " + getOdfdomBuildDate() + ')' + "\nfrom " + getOdfdomWebsite() + " supporting ODF " + getOdfdomSupportedOdfVersion());
     }
 
     /**
