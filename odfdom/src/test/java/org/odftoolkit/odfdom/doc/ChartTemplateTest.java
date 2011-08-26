@@ -81,4 +81,16 @@ public class ChartTemplateTest {
 		document.changeMode(OdfChartDocument.OdfMediaType.CHART);
 		Assert.assertEquals(OdfDocument.OdfMediaType.CHART.getName(), document.getPackage().getMediaType());
 	}
+
+	@Test
+	public void testSwitchingOdfImageDocument() throws Exception {
+		OdfImageDocument document = OdfImageDocument.newImageDocument();
+		document.changeMode(OdfImageDocument.OdfMediaType.IMAGE_TEMPLATE);
+		Assert.assertEquals(OdfDocument.OdfMediaType.IMAGE_TEMPLATE.getName(),
+				document.getPackage().getMediaType());
+
+		document = OdfImageDocument.newImageTemplateDocument();
+		document.changeMode(OdfImageDocument.OdfMediaType.IMAGE);
+		Assert.assertEquals(OdfDocument.OdfMediaType.IMAGE.getName(), document.getPackage().getMediaType());
+	}
 }

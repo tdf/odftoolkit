@@ -128,8 +128,8 @@ public abstract class OdfDocument {
 		//        FORMULA_TEMPLATE("application/vnd.oasis.opendocument.formula-template", "otf"),
 		GRAPHICS("application/vnd.oasis.opendocument.graphics", "odg"),
 		GRAPHICS_TEMPLATE("application/vnd.oasis.opendocument.graphics-template", "otg"),
-		//        IMAGE("application/vnd.oasis.opendocument.image", "odi"),
-		//        IMAGE_TEMPLATE("application/vnd.oasis.opendocument.image-template", "oti"),
+		IMAGE("application/vnd.oasis.opendocument.image", "odi"),
+		IMAGE_TEMPLATE("application/vnd.oasis.opendocument.image-template", "oti"),
 		PRESENTATION("application/vnd.oasis.opendocument.presentation", "odp"),
 		PRESENTATION_TEMPLATE("application/vnd.oasis.opendocument.presentation-template", "otp"),
 		SPREADSHEET("application/vnd.oasis.opendocument.spreadsheet", "ods"),
@@ -226,6 +226,10 @@ public abstract class OdfDocument {
 		} else if (odfMediaType == OdfMediaType.CHART
 				|| odfMediaType == OdfMediaType.CHART_TEMPLATE) {
 			newDoc = new OdfChartDocument();
+		} else if (odfMediaType == OdfMediaType.IMAGE
+				|| odfMediaType == OdfMediaType.IMAGE_TEMPLATE) {
+			newDoc = new OdfImageDocument();
+
 		} else {
 			// if MediaType is not supported
 			return null;

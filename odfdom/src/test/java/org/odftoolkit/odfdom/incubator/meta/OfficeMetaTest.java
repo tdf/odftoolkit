@@ -19,7 +19,6 @@
  * limitations under the License.
  *
  ************************************************************************/
-
 package org.odftoolkit.odfdom.incubator.meta;
 
 import java.text.SimpleDateFormat;
@@ -35,7 +34,6 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute.Value;
-import org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta;
 import org.odftoolkit.odfdom.type.Duration;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
@@ -60,8 +58,7 @@ public class OfficeMetaTest {
 
 	@Before
 	public void setUp() throws Exception {
-		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities
-				.getTestResourceAsStream(filename));
+		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(filename));
 		metadom = doc.getMetaDom();
 		fMetadata = new OdfOfficeMeta(metadom);
 	}
@@ -225,8 +222,7 @@ public class OfficeMetaTest {
 
 	@Test
 	public void testGetEditingDuration() {
-		Assert.assertEquals(editingDuration.toString(), fMetadata
-				.getEditingDuration().toString());
+		Assert.assertEquals(editingDuration.toString(), fMetadata.getEditingDuration().toString());
 	}
 
 	@Test
@@ -271,28 +267,21 @@ public class OfficeMetaTest {
 		setUp();
 		// test get
 		Assert.assertEquals(names, fMetadata.getUserDefinedDataNames());
-		Assert.assertEquals(Value.STRING.toString(), fMetadata
-				.getUserDefinedDataType(names.get(0)));
-		Assert.assertEquals("windy", fMetadata.getUserDefinedDataValue(names
-				.get(0)));
+		Assert.assertEquals(Value.STRING.toString(), fMetadata.getUserDefinedDataType(names.get(0)));
+		Assert.assertEquals("windy", fMetadata.getUserDefinedDataValue(names.get(0)));
 
 		fMetadata.setUserDefinedDataValue(names.get(1), "false");
-		fMetadata
-				.setUserDefinedDataType(names.get(1), Value.BOOLEAN.toString());
+		fMetadata.setUserDefinedDataType(names.get(1), Value.BOOLEAN.toString());
 		fMetadata.setUserDefinedData(names.get(2), Value.STRING.toString(),
 				"no");
 		tearDown();
 
 		setUp();
 		// update
-		Assert.assertEquals("false", fMetadata.getUserDefinedDataValue(names
-				.get(1)));
-		Assert.assertEquals(Value.BOOLEAN.toString(), fMetadata
-				.getUserDefinedDataType(names.get(1)));
-		Assert.assertEquals("no", fMetadata.getUserDefinedDataValue(names
-				.get(2)));
-		Assert.assertEquals(Value.STRING.toString(), fMetadata
-				.getUserDefinedDataType(names.get(2)));
+		Assert.assertEquals("false", fMetadata.getUserDefinedDataValue(names.get(1)));
+		Assert.assertEquals(Value.BOOLEAN.toString(), fMetadata.getUserDefinedDataType(names.get(1)));
+		Assert.assertEquals("no", fMetadata.getUserDefinedDataValue(names.get(2)));
+		Assert.assertEquals(Value.STRING.toString(), fMetadata.getUserDefinedDataType(names.get(2)));
 		tearDown();
 
 		setUp();
@@ -308,18 +297,14 @@ public class OfficeMetaTest {
 	public void testReadEmptyDocumentMeta() throws Exception {
 
 		// create a new empty document
-		doc = (OdfTextDocument) OdfTextDocument.newTextDocument();
-		doc
-				.save(ResourceUtilities
-						.newTestOutputFile("EmptyDocForMetaTest.odt"));
+		doc = OdfTextDocument.newTextDocument();
+		doc.save(ResourceUtilities.newTestOutputFile("EmptyDocForMetaTest.odt"));
 
 		// read empty document meta
-		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities
-				.getTestResourceAsStream("EmptyDocForMetaTest.odt"));
+		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("EmptyDocForMetaTest.odt"));
 		metadom = doc.getMetaDom();
 		fMetadata = new OdfOfficeMeta(metadom);
-
-		Assert.assertEquals("ODFDOM/0.6.1$Build-1", fMetadata.getGenerator());
+		Assert.assertEquals("ODFDOM/" + System.getProperty("odfdom.version") + ".5", fMetadata.getGenerator());
 		Assert.assertNull(fMetadata.getTitle());
 		Assert.assertNull(fMetadata.getDescription());
 		Assert.assertNull(fMetadata.getSubject());
@@ -334,7 +319,5 @@ public class OfficeMetaTest {
 		Assert.assertNull(fMetadata.getPrintDate());
 		Assert.assertNull(fMetadata.getDcdate());
 		Assert.assertNotNull(fMetadata.getUserDefinedDataNames());
-
 	}
-
 }
