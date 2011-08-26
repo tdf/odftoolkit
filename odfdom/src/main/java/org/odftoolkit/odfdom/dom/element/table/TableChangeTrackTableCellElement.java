@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  * DOM implementation of OpenDocument element  {@odf.element table:change-track-table-cell}.
  *
  */
-public abstract class TableChangeTrackTableCellElement extends OdfElement
+public class TableChangeTrackTableCellElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "change-track-table-cell" );
 

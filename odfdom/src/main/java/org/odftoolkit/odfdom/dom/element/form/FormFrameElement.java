@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:frame}.
  *
  */
-public abstract class FormFrameElement extends OdfElement
+public class FormFrameElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "frame" );
 

@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element table:content-validation}.
  *
  */
-public abstract class TableContentValidationElement extends OdfElement
+public class TableContentValidationElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "content-validation" );
 

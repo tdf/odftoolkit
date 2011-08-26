@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element db:key-columns}.
  *
  */
-public abstract class DbKeyColumnsElement extends OdfElement
+public class DbKeyColumnsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "key-columns" );
 

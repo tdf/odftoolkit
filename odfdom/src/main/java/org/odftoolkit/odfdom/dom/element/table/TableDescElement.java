@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element table:desc}.
  *
  */
-public abstract class TableDescElement extends OdfElement
+public class TableDescElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "desc" );
 

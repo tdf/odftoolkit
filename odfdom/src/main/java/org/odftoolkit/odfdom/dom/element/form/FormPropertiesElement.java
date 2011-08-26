@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element form:properties}.
  *
  */
-public abstract class FormPropertiesElement extends OdfElement
+public class FormPropertiesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "properties" );
 

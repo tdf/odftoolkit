@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextFixedAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:sender-title}.
  *
  */
-public abstract class TextSenderTitleElement extends OdfElement
+public class TextSenderTitleElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "sender-title" );
 

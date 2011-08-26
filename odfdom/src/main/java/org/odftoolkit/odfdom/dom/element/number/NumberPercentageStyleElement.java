@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
  * DOM implementation of OpenDocument element  {@odf.element number:percentage-style}.
  *
  */
-public abstract class NumberPercentageStyleElement extends OdfElement
+public class NumberPercentageStyleElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "percentage-style" );
 

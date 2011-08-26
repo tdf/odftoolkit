@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextRestartOnPageAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:linenumbering-configuration}.
  *
  */
-public abstract class TextLinenumberingConfigurationElement extends OdfStylableElement
+public class TextLinenumberingConfigurationElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "linenumbering-configuration" );
 

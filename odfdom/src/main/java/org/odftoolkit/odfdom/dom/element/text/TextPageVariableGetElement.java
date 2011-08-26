@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNumLetterSyncAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:page-variable-get}.
  *
  */
-public abstract class TextPageVariableGetElement extends OdfElement
+public class TextPageVariableGetElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "page-variable-get" );
 

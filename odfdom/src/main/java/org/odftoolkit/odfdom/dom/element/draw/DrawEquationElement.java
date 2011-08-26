@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawFormulaAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:equation}.
  *
  */
-public abstract class DrawEquationElement extends OdfElement
+public class DrawEquationElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "equation" );
 

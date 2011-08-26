@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgStopOpacityAttribute;
  * DOM implementation of OpenDocument element  {@odf.element svg:stop}.
  *
  */
-public abstract class SvgStopElement extends OdfElement
+public class SvgStopElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SVG, "stop" );
 

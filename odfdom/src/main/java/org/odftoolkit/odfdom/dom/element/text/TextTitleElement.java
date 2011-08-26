@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextFixedAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:title}.
  *
  */
-public abstract class TextTitleElement extends OdfElement
+public class TextTitleElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "title" );
 

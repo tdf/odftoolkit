@@ -60,7 +60,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:listbox}.
  *
  */
-public abstract class FormListboxElement extends OdfElement
+public class FormListboxElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "listbox" );
 

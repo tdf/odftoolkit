@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:dependency}.
  *
  */
-public abstract class TableDependencyElement extends OdfElement
+public class TableDependencyElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "dependency" );
 

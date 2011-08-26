@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableParagraphStyleNameAttribut
  * DOM implementation of OpenDocument element  {@odf.element table:last-row}.
  *
  */
-public abstract class TableLastRowElement extends OdfStylableElement
+public class TableLastRowElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "last-row" );
 

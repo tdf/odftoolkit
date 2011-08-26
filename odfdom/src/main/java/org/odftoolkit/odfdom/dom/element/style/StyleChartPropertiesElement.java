@@ -108,7 +108,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  * DOM implementation of OpenDocument element  {@odf.element style:chart-properties}.
  *
  */
-public abstract class StyleChartPropertiesElement extends OdfStylePropertiesBase
+public class StyleChartPropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "chart-properties" );
 

@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextFixedAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:sender-phone-private}.
  *
  */
-public abstract class TextSenderPhonePrivateElement extends OdfElement
+public class TextSenderPhonePrivateElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "sender-phone-private" );
 

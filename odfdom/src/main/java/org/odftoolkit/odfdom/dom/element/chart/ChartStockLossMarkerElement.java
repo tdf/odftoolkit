@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element chart:stock-loss-marker}.
  *
  */
-public abstract class ChartStockLossMarkerElement extends OdfStylableElement
+public class ChartStockLossMarkerElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "stock-loss-marker" );
 

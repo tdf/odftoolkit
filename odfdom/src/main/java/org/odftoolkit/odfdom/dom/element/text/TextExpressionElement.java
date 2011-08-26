@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:expression}.
  *
  */
-public abstract class TextExpressionElement extends OdfElement
+public class TextExpressionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "expression" );
 

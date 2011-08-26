@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableNullYearAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:calculation-settings}.
  *
  */
-public abstract class TableCalculationSettingsElement extends OdfElement
+public class TableCalculationSettingsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "calculation-settings" );
 

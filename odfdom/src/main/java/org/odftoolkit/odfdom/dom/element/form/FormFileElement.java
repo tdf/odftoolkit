@@ -54,7 +54,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:file}.
  *
  */
-public abstract class FormFileElement extends OdfElement
+public class FormFileElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "file" );
 

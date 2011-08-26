@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeChangeInfoElement;
  * DOM implementation of OpenDocument element  {@odf.element text:format-change}.
  *
  */
-public abstract class TextFormatChangeElement extends OdfElement
+public class TextFormatChangeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "format-change" );
 

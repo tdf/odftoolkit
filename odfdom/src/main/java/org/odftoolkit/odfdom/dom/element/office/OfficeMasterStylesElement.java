@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
  * DOM implementation of OpenDocument element  {@odf.element office:master-styles}.
  *
  */
-public abstract class OfficeMasterStylesElement extends OdfContainerElementBase
+public class OfficeMasterStylesElement extends OdfContainerElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "master-styles" );
 

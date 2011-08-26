@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
  * DOM implementation of OpenDocument element  {@odf.element form:connection-resource}.
  *
  */
-public abstract class FormConnectionResourceElement extends OdfElement
+public class FormConnectionResourceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "connection-resource" );
 

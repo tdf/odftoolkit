@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableLastRowEndColumnAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:table-template}.
  *
  */
-public abstract class TableTableTemplateElement extends OdfElement
+public class TableTableTemplateElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-template" );
 

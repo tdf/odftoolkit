@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeChangeInfoElement;
  * DOM implementation of OpenDocument element  {@odf.element table:movement}.
  *
  */
-public abstract class TableMovementElement extends OdfElement
+public class TableMovementElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "movement" );
 

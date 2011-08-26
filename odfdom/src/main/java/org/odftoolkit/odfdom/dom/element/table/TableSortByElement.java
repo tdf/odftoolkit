@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableOrderAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:sort-by}.
  *
  */
-public abstract class TableSortByElement extends OdfElement
+public class TableSortByElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "sort-by" );
 

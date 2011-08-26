@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutElement;
  * DOM implementation of OpenDocument element  {@odf.element office:document-content}.
  *
  */
-public abstract class OfficeDocumentContentElement extends OdfElement
+public class OfficeDocumentContentElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "document-content" );
 

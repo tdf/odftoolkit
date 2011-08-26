@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  * DOM implementation of OpenDocument element  {@odf.element chart:legend}.
  *
  */
-public abstract class ChartLegendElement extends OdfStylableElement
+public class ChartLegendElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "legend" );
 

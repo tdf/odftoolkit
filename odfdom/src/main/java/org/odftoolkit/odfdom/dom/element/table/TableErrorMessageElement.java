@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  * DOM implementation of OpenDocument element  {@odf.element table:error-message}.
  *
  */
-public abstract class TableErrorMessageElement extends OdfElement
+public class TableErrorMessageElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "error-message" );
 

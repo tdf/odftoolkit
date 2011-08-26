@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:control}.
  *
  */
-public abstract class DrawControlElement extends DrawShapeElementBase
+public class DrawControlElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "control" );
 

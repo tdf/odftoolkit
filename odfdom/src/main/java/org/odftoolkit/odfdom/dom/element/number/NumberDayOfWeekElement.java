@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberCalendarAttribute;
  * DOM implementation of OpenDocument element  {@odf.element number:day-of-week}.
  *
  */
-public abstract class NumberDayOfWeekElement extends OdfElement
+public class NumberDayOfWeekElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "day-of-week" );
 

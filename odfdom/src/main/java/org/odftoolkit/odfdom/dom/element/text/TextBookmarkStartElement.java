@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlContentAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:bookmark-start}.
  *
  */
-public abstract class TextBookmarkStartElement extends OdfElement
+public class TextBookmarkStartElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "bookmark-start" );
 

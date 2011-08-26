@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNumLetterSyncAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:character-count}.
  *
  */
-public abstract class TextCharacterCountElement extends OdfElement
+public class TextCharacterCountElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "character-count" );
 

@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoBreakAfterAttribute;
  * DOM implementation of OpenDocument element  {@odf.element style:table-column-properties}.
  *
  */
-public abstract class StyleTableColumnPropertiesElement extends OdfStylePropertiesBase
+public class StyleTableColumnPropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "table-column-properties" );
 

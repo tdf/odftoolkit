@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element db:queries}.
  *
  */
-public abstract class DbQueriesElement extends OdfElement
+public class DbQueriesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "queries" );
 

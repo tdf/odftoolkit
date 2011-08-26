@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element db:data-source-setting-value}.
  *
  */
-public abstract class DbDataSourceSettingValueElement extends OdfElement
+public class DbDataSourceSettingValueElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "data-source-setting-value" );
 

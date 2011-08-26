@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element office:annotation-end}.
  *
  */
-public abstract class OfficeAnnotationEndElement extends OdfElement
+public class OfficeAnnotationEndElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "annotation-end" );
 

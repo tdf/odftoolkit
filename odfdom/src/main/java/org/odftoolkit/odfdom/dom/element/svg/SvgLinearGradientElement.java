@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgY2Attribute;
  * DOM implementation of OpenDocument element  {@odf.element svg:linearGradient}.
  *
  */
-public abstract class SvgLinearGradientElement extends OdfElement
+public class SvgLinearGradientElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SVG, "linearGradient" );
 

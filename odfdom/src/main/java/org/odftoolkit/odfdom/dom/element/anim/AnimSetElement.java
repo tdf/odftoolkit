@@ -56,7 +56,7 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilAdditiveAttribute;
  * DOM implementation of OpenDocument element  {@odf.element anim:set}.
  *
  */
-public abstract class AnimSetElement extends OdfElement
+public class AnimSetElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "set" );
 

@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element chart:series}.
  *
  */
-public abstract class ChartSeriesElement extends OdfStylableElement
+public class ChartSeriesElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "series" );
 

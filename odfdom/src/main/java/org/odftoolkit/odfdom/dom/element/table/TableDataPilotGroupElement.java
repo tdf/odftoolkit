@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-group}.
  *
  */
-public abstract class TableDataPilotGroupElement extends OdfElement
+public class TableDataPilotGroupElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-group" );
 

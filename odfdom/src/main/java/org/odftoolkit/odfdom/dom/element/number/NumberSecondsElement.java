@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberDecimalPlacesAttribute;
  * DOM implementation of OpenDocument element  {@odf.element number:seconds}.
  *
  */
-public abstract class NumberSecondsElement extends OdfElement
+public class NumberSecondsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "seconds" );
 

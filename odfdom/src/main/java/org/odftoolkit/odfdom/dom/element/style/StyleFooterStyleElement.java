@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element style:footer-style}.
  *
  */
-public abstract class StyleFooterStyleElement extends OdfElement
+public class StyleFooterStyleElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "footer-style" );
 

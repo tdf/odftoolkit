@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute;
  * DOM implementation of OpenDocument element  {@odf.element meta:user-defined}.
  *
  */
-public abstract class MetaUserDefinedElement extends OdfElement
+public class MetaUserDefinedElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "user-defined" );
 

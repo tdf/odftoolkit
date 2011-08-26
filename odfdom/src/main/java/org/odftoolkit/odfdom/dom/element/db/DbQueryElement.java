@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbDefaultRowStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:query}.
  *
  */
-public abstract class DbQueryElement extends OdfElement
+public class DbQueryElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "query" );
 

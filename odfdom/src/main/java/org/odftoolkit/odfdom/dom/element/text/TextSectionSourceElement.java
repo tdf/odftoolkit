@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextFilterNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:section-source}.
  *
  */
-public abstract class TextSectionSourceElement extends OdfElement
+public class TextSectionSourceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "section-source" );
 

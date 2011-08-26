@@ -62,7 +62,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:formatted-text}.
  *
  */
-public abstract class FormFormattedTextElement extends OdfElement
+public class FormFormattedTextElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "formatted-text" );
 

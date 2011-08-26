@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element db:data-source}.
  *
  */
-public abstract class DbDataSourceElement extends OdfElement
+public class DbDataSourceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "data-source" );
 

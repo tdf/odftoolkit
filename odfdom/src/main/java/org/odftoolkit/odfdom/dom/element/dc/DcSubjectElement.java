@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element dc:subject}.
  *
  */
-public abstract class DcSubjectElement extends OdfElement
+public class DcSubjectElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DC, "subject" );
 

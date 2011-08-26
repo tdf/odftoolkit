@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  * DOM implementation of OpenDocument element  {@odf.element style:region-center}.
  *
  */
-public abstract class StyleRegionCenterElement extends OdfElement
+public class StyleRegionCenterElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "region-center" );
 

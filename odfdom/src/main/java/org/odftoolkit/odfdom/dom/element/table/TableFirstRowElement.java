@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableParagraphStyleNameAttribut
  * DOM implementation of OpenDocument element  {@odf.element table:first-row}.
  *
  */
-public abstract class TableFirstRowElement extends OdfStylableElement
+public class TableFirstRowElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "first-row" );
 

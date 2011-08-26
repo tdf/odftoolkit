@@ -181,7 +181,6 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
         return getFamily().getName();
     }
 
-    abstract public OdfStyleFamily getFamily();
 
     /**
      * 
@@ -519,6 +518,12 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
     public int hashCode() {
         return 59 * 7 + (this.mPropertySetElementMap != null ? this.mPropertySetElementMap.hashCode() : 0);
     }
+    
+    public OdfStyleFamily getFamily() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-    abstract public OdfStyleBase getParentStyle();
+    public OdfStyleBase getParentStyle() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

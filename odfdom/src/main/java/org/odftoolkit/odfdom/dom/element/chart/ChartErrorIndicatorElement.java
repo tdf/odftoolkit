@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartErrorUpperRangeAttribute;
  * DOM implementation of OpenDocument element  {@odf.element chart:error-indicator}.
  *
  */
-public abstract class ChartErrorIndicatorElement extends OdfStylableElement
+public class ChartErrorIndicatorElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "error-indicator" );
 

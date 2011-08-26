@@ -64,7 +64,7 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationDateTimeElemen
  * DOM implementation of OpenDocument element  {@odf.element text:span}.
  *
  */
-public abstract class TextSpanElement extends OdfStylableElement
+public class TextSpanElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "span" );
 

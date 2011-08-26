@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableBaseCellAddressAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:named-expression}.
  *
  */
-public abstract class TableNamedExpressionElement extends OdfElement
+public class TableNamedExpressionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "named-expression" );
 

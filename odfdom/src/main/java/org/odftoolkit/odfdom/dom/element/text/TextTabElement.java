@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextTabRefAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:tab}.
  *
  */
-public abstract class TextTabElement extends OdfElement
+public class TextTabElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "tab" );
 

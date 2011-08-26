@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextSortAlgorithmAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:bibliography-configuration}.
  *
  */
-public abstract class TextBibliographyConfigurationElement extends OdfElement
+public class TextBibliographyConfigurationElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "bibliography-configuration" );
 

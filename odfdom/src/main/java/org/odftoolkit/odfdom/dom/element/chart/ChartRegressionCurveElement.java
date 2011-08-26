@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element chart:regression-curve}.
  *
  */
-public abstract class ChartRegressionCurveElement extends OdfStylableElement
+public class ChartRegressionCurveElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "regression-curve" );
 

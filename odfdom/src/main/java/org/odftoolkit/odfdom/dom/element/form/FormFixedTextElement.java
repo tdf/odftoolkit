@@ -50,7 +50,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:fixed-text}.
  *
  */
-public abstract class FormFixedTextElement extends OdfElement
+public class FormFixedTextElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "fixed-text" );
 

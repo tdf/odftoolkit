@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextFixedAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:editing-cycles}.
  *
  */
-public abstract class TextEditingCyclesElement extends OdfElement
+public class TextEditingCyclesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "editing-cycles" );
 

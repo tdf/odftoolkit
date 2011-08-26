@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:table-formula}.
  *
  */
-public abstract class TextTableFormulaElement extends OdfElement
+public class TextTableFormulaElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "table-formula" );
 

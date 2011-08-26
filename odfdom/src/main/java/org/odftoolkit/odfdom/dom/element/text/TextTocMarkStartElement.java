@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:toc-mark-start}.
  *
  */
-public abstract class TextTocMarkStartElement extends OdfElement
+public class TextTocMarkStartElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "toc-mark-start" );
 

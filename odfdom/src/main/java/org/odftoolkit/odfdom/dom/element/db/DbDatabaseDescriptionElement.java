@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element db:database-description}.
  *
  */
-public abstract class DbDatabaseDescriptionElement extends OdfElement
+public class DbDatabaseDescriptionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "database-description" );
 

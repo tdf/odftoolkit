@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.attribute.anim.AnimSubItemAttribute;
  * DOM implementation of OpenDocument element  {@odf.element anim:command}.
  *
  */
-public abstract class AnimCommandElement extends OdfElement
+public class AnimCommandElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "command" );
 

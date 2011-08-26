@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:index-entry-page-number}.
  *
  */
-public abstract class TextIndexEntryPageNumberElement extends OdfStylableElement
+public class TextIndexEntryPageNumberElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "index-entry-page-number" );
 

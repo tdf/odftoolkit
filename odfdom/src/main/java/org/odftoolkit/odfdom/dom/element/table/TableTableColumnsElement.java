@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element table:table-columns}.
  *
  */
-public abstract class TableTableColumnsElement extends OdfElement
+public class TableTableColumnsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-columns" );
 

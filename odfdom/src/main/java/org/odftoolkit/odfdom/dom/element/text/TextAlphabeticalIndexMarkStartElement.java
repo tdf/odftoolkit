@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextMainEntryAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:alphabetical-index-mark-start}.
  *
  */
-public abstract class TextAlphabeticalIndexMarkStartElement extends OdfElement
+public class TextAlphabeticalIndexMarkStartElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "alphabetical-index-mark-start" );
 

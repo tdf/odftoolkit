@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element office:scripts}.
  *
  */
-public abstract class OfficeScriptsElement extends OdfElement
+public class OfficeScriptsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "scripts" );
 

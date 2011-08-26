@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableFunctionAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-subtotal}.
  *
  */
-public abstract class TableDataPilotSubtotalElement extends OdfElement
+public class TableDataPilotSubtotalElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-subtotal" );
 

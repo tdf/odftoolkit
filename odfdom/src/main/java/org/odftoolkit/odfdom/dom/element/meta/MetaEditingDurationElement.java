@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element meta:editing-duration}.
  *
  */
-public abstract class MetaEditingDurationElement extends OdfElement
+public class MetaEditingDurationElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "editing-duration" );
 

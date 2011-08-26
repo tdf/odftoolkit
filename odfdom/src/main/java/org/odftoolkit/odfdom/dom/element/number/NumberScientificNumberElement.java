@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberGroupingAttribute;
  * DOM implementation of OpenDocument element  {@odf.element number:scientific-number}.
  *
  */
-public abstract class NumberScientificNumberElement extends OdfElement
+public class NumberScientificNumberElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "scientific-number" );
 

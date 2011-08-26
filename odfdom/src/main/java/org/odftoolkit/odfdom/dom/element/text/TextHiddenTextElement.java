@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextIsHiddenAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:hidden-text}.
  *
  */
-public abstract class TextHiddenTextElement extends OdfElement
+public class TextHiddenTextElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "hidden-text" );
 

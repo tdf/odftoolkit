@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextRelativeTabStopPositionAttri
  * DOM implementation of OpenDocument element  {@odf.element text:table-of-content-source}.
  *
  */
-public abstract class TextTableOfContentSourceElement extends OdfElement
+public class TextTableOfContentSourceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "table-of-content-source" );
 

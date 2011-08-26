@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextCurrentValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:conditional-text}.
  *
  */
-public abstract class TextConditionalTextElement extends OdfElement
+public class TextConditionalTextElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "conditional-text" );
 

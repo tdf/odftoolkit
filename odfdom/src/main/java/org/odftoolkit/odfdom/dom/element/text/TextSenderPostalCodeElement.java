@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextFixedAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:sender-postal-code}.
  *
  */
-public abstract class TextSenderPostalCodeElement extends OdfElement
+public class TextSenderPostalCodeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "sender-postal-code" );
 

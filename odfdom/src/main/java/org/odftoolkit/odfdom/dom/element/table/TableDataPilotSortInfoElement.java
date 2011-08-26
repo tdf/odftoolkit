@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableOrderAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-sort-info}.
  *
  */
-public abstract class TableDataPilotSortInfoElement extends OdfElement
+public class TableDataPilotSortInfoElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-sort-info" );
 

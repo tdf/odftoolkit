@@ -59,7 +59,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
  * DOM implementation of OpenDocument element  {@odf.element style:table-properties}.
  *
  */
-public abstract class StyleTablePropertiesElement extends OdfStylePropertiesBase
+public class StyleTablePropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "table-properties" );
 

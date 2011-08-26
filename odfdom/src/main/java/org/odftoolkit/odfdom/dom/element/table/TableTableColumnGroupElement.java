@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:table-column-group}.
  *
  */
-public abstract class TableTableColumnGroupElement extends OdfElement
+public class TableTableColumnGroupElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-column-group" );
 

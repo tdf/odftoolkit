@@ -56,7 +56,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableDdeLinksElement;
  * DOM implementation of OpenDocument element  {@odf.element office:presentation}.
  *
  */
-public abstract class OfficePresentationElement extends OdfContainerElementBase
+public class OfficePresentationElement extends OdfContainerElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "presentation" );
 

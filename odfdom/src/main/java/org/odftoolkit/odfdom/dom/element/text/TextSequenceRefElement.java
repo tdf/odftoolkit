@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextReferenceFormatAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:sequence-ref}.
  *
  */
-public abstract class TextSequenceRefElement extends OdfElement
+public class TextSequenceRefElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "sequence-ref" );
 

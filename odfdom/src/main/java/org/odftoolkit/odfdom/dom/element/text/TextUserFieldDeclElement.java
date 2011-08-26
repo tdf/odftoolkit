@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeStringValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:user-field-decl}.
  *
  */
-public abstract class TextUserFieldDeclElement extends OdfElement
+public class TextUserFieldDeclElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "user-field-decl" );
 

@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element table:database-ranges}.
  *
  */
-public abstract class TableDatabaseRangesElement extends OdfElement
+public class TableDatabaseRangesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "database-ranges" );
 

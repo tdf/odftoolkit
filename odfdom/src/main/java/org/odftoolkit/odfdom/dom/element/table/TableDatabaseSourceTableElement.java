@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDatabaseTableNameAttribute
  * DOM implementation of OpenDocument element  {@odf.element table:database-source-table}.
  *
  */
-public abstract class TableDatabaseSourceTableElement extends OdfElement
+public class TableDatabaseSourceTableElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "database-source-table" );
 

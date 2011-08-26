@@ -59,7 +59,7 @@ import org.odftoolkit.odfdom.dom.element.meta.MetaUserDefinedElement;
  * DOM implementation of OpenDocument element  {@odf.element office:document-meta}.
  *
  */
-public abstract class OfficeDocumentMetaElement extends OdfElement
+public class OfficeDocumentMetaElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "document-meta" );
 

@@ -53,7 +53,7 @@ import org.odftoolkit.odfdom.dom.attribute.meta.MetaCellCountAttribute;
  * DOM implementation of OpenDocument element  {@odf.element meta:document-statistic}.
  *
  */
-public abstract class MetaDocumentStatisticElement extends OdfElement
+public class MetaDocumentStatisticElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "document-statistic" );
 

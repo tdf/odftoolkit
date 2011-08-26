@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:reference-mark-end}.
  *
  */
-public abstract class TextReferenceMarkEndElement extends OdfElement
+public class TextReferenceMarkEndElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "reference-mark-end" );
 

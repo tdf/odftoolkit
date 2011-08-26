@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableEndPositionAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:movement-cut-off}.
  *
  */
-public abstract class TableMovementCutOffElement extends OdfElement
+public class TableMovementCutOffElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "movement-cut-off" );
 

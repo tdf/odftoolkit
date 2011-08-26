@@ -65,7 +65,7 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationDateTimeElemen
  * DOM implementation of OpenDocument element  {@odf.element text:h}.
  *
  */
-public abstract class TextHElement extends TextParagraphElementBase
+public class TextHElement extends TextParagraphElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "h" );
 

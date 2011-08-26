@@ -81,7 +81,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawModifiersAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:enhanced-geometry}.
  *
  */
-public abstract class DrawEnhancedGeometryElement extends OdfElement
+public class DrawEnhancedGeometryElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "enhanced-geometry" );
 

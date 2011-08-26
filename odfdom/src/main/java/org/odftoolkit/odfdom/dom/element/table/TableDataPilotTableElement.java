@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDrillDownOnDoubleClickAttr
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-table}.
  *
  */
-public abstract class TableDataPilotTableElement extends OdfElement
+public class TableDataPilotTableElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-table" );
 

@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableMaximumDifferenceAttribute
  * DOM implementation of OpenDocument element  {@odf.element table:iteration}.
  *
  */
-public abstract class TableIterationElement extends OdfElement
+public class TableIterationElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "iteration" );
 

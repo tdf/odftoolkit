@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element presentation:date-time-decl}.
  *
  */
-public abstract class PresentationDateTimeDeclElement extends OdfElement
+public class PresentationDateTimeDeclElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "date-time-decl" );
 

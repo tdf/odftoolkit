@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbParameterNameSubstitutionAttribu
  * DOM implementation of OpenDocument element  {@odf.element db:driver-settings}.
  *
  */
-public abstract class DbDriverSettingsElement extends OdfElement
+public class DbDriverSettingsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "driver-settings" );
 

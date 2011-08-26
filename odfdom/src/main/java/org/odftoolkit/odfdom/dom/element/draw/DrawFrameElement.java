@@ -55,7 +55,7 @@ import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:frame}.
  *
  */
-public abstract class DrawFrameElement extends DrawShapeElementBase
+public class DrawFrameElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "frame" );
 

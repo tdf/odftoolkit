@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element text:variable-decls}.
  *
  */
-public abstract class TextVariableDeclsElement extends OdfElement
+public class TextVariableDeclsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "variable-decls" );
 

@@ -61,7 +61,7 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilAutoReverseAttribute;
  * DOM implementation of OpenDocument element  {@odf.element anim:animateTransform}.
  *
  */
-public abstract class AnimAnimateTransformElement extends OdfElement
+public class AnimAnimateTransformElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "animateTransform" );
 

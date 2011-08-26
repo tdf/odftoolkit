@@ -59,7 +59,7 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilEndsyncAttribute;
  * DOM implementation of OpenDocument element  {@odf.element anim:par}.
  *
  */
-public abstract class AnimParElement extends OdfElement
+public class AnimParElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "par" );
 

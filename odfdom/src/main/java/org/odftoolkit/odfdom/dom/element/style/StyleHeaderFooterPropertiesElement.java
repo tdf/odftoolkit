@@ -66,7 +66,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
  * DOM implementation of OpenDocument element  {@odf.element style:header-footer-properties}.
  *
  */
-public abstract class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
+public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "header-footer-properties" );
 

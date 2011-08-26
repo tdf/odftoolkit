@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableExecuteAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:error-macro}.
  *
  */
-public abstract class TableErrorMacroElement extends OdfElement
+public class TableErrorMacroElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "error-macro" );
 

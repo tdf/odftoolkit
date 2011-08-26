@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element db:table-type}.
  *
  */
-public abstract class DbTableTypeElement extends OdfElement
+public class DbTableTypeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "table-type" );
 

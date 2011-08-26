@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element meta:print-date}.
  *
  */
-public abstract class MetaPrintDateElement extends OdfElement
+public class MetaPrintDateElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "print-date" );
 

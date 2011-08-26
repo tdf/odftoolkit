@@ -64,7 +64,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  * DOM implementation of OpenDocument element  {@odf.element presentation:notes}.
  *
  */
-public abstract class PresentationNotesElement extends OdfStylableElement
+public class PresentationNotesElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "notes" );
 

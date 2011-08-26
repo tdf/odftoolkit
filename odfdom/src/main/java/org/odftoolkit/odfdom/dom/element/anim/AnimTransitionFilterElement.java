@@ -65,7 +65,7 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilAutoReverseAttribute;
  * DOM implementation of OpenDocument element  {@odf.element anim:transitionFilter}.
  *
  */
-public abstract class AnimTransitionFilterElement extends OdfElement
+public class AnimTransitionFilterElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "transitionFilter" );
 

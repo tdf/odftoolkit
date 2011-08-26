@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNumLetterSyncAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:image-count}.
  *
  */
-public abstract class TextImageCountElement extends OdfElement
+public class TextImageCountElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "image-count" );
 

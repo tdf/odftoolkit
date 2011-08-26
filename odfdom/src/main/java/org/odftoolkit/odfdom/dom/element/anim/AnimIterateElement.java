@@ -63,7 +63,7 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilEndsyncAttribute;
  * DOM implementation of OpenDocument element  {@odf.element anim:iterate}.
  *
  */
-public abstract class AnimIterateElement extends OdfElement
+public class AnimIterateElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "iterate" );
 

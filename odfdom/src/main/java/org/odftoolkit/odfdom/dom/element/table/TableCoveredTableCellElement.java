@@ -70,7 +70,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  * DOM implementation of OpenDocument element  {@odf.element table:covered-table-cell}.
  *
  */
-public abstract class TableCoveredTableCellElement extends TableTableCellElementBase
+public class TableCoveredTableCellElement extends TableTableCellElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell" );
 

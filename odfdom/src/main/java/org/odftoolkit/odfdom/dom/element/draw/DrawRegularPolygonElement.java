@@ -53,7 +53,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:regular-polygon}.
  *
  */
-public abstract class DrawRegularPolygonElement extends DrawShapeElementBase
+public class DrawRegularPolygonElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "regular-polygon" );
 

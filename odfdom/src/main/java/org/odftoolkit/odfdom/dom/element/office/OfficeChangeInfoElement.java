@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  * DOM implementation of OpenDocument element  {@odf.element office:change-info}.
  *
  */
-public abstract class OfficeChangeInfoElement extends OdfElement
+public class OfficeChangeInfoElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "change-info" );
 

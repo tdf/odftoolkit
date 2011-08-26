@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextTimeValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:creation-time}.
  *
  */
-public abstract class TextCreationTimeElement extends OdfElement
+public class TextCreationTimeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "creation-time" );
 

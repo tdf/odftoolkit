@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableOrderAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:sort-groups}.
  *
  */
-public abstract class TableSortGroupsElement extends OdfElement
+public class TableSortGroupsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "sort-groups" );
 

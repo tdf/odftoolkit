@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNumLetterSyncAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:word-count}.
  *
  */
-public abstract class TextWordCountElement extends OdfElement
+public class TextWordCountElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "word-count" );
 

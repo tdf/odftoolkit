@@ -59,7 +59,7 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilAutoReverseAttribute;
  * DOM implementation of OpenDocument element  {@odf.element anim:seq}.
  *
  */
-public abstract class AnimSeqElement extends OdfElement
+public class AnimSeqElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "seq" );
 

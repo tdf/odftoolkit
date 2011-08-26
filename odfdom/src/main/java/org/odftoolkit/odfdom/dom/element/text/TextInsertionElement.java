@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeChangeInfoElement;
  * DOM implementation of OpenDocument element  {@odf.element text:insertion}.
  *
  */
-public abstract class TextInsertionElement extends OdfElement
+public class TextInsertionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "insertion" );
 

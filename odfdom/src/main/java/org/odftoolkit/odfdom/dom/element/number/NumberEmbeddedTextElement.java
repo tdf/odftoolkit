@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberPositionAttribute;
  * DOM implementation of OpenDocument element  {@odf.element number:embedded-text}.
  *
  */
-public abstract class NumberEmbeddedTextElement extends OdfElement
+public class NumberEmbeddedTextElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "embedded-text" );
 

@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element text:execute-macro}.
  *
  */
-public abstract class TextExecuteMacroElement extends OdfElement
+public class TextExecuteMacroElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "execute-macro" );
 

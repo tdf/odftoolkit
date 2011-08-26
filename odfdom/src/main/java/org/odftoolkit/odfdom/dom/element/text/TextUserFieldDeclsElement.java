@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element text:user-field-decls}.
  *
  */
-public abstract class TextUserFieldDeclsElement extends OdfElement
+public class TextUserFieldDeclsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "user-field-decls" );
 

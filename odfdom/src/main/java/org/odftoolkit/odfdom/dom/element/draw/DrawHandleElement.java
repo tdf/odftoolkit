@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawHandleRadiusRangeMaximumAttr
  * DOM implementation of OpenDocument element  {@odf.element draw:handle}.
  *
  */
-public abstract class DrawHandleElement extends OdfElement
+public class DrawHandleElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "handle" );
 

@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.form.FormLabelAttribute;
  * DOM implementation of OpenDocument element  {@odf.element form:item}.
  *
  */
-public abstract class FormItemElement extends OdfElement
+public class FormItemElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "item" );
 

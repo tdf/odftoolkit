@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextSelectPageAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:page-number}.
  *
  */
-public abstract class TextPageNumberElement extends OdfElement
+public class TextPageNumberElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "page-number" );
 

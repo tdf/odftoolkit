@@ -58,7 +58,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextIndexTitleElement;
  * DOM implementation of OpenDocument element  {@odf.element style:header}.
  *
  */
-public abstract class StyleHeaderElement extends OdfElement
+public class StyleHeaderElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "header" );
 

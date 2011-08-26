@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbIsAscendingAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:index-column}.
  *
  */
-public abstract class DbIndexColumnElement extends OdfElement
+public class DbIndexColumnElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "index-column" );
 

@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
  * DOM implementation of OpenDocument element  {@odf.element chart:chart}.
  *
  */
-public abstract class ChartChartElement extends OdfStylableElement
+public class ChartChartElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "chart" );
 

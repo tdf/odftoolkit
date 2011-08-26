@@ -75,7 +75,7 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationSoundElement;
  * DOM implementation of OpenDocument element  {@odf.element style:drawing-page-properties}.
  *
  */
-public abstract class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase
+public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "drawing-page-properties" );
 

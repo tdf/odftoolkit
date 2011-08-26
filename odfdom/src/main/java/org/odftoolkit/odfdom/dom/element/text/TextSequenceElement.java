@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextRefNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:sequence}.
  *
  */
-public abstract class TextSequenceElement extends OdfElement
+public class TextSequenceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "sequence" );
 

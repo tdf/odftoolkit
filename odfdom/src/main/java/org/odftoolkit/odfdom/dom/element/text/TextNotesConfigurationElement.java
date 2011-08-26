@@ -50,7 +50,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextFootnotesPositionAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:notes-configuration}.
  *
  */
-public abstract class TextNotesConfigurationElement extends OdfElement
+public class TextNotesConfigurationElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "notes-configuration" );
 

@@ -53,7 +53,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeStringValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:column-definition}.
  *
  */
-public abstract class DbColumnDefinitionElement extends OdfElement
+public class DbColumnDefinitionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "column-definition" );
 

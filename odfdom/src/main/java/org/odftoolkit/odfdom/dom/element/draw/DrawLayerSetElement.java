@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:layer-set}.
  *
  */
-public abstract class DrawLayerSetElement extends OdfElement
+public class DrawLayerSetElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "layer-set" );
 

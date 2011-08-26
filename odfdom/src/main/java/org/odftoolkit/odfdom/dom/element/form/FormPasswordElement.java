@@ -54,7 +54,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:password}.
  *
  */
-public abstract class FormPasswordElement extends OdfElement
+public class FormPasswordElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "password" );
 

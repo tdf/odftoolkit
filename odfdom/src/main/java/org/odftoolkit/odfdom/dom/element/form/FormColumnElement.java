@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.form.FormTextStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element form:column}.
  *
  */
-public abstract class FormColumnElement extends OdfElement
+public class FormColumnElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "column" );
 

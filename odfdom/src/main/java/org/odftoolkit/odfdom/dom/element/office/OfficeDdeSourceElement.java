@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeAutomaticUpdateAttribute
  * DOM implementation of OpenDocument element  {@odf.element office:dde-source}.
  *
  */
-public abstract class OfficeDdeSourceElement extends OdfElement
+public class OfficeDdeSourceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "dde-source" );
 

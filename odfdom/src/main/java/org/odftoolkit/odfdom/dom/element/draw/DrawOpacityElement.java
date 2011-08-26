@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawEndAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:opacity}.
  *
  */
-public abstract class DrawOpacityElement extends OdfElement
+public class DrawOpacityElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "opacity" );
 

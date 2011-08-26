@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableAddEmptyLinesAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-layout-info}.
  *
  */
-public abstract class TableDataPilotLayoutInfoElement extends OdfElement
+public class TableDataPilotLayoutInfoElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-layout-info" );
 

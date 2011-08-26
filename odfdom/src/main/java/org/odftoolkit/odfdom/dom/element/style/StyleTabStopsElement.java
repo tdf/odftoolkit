@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element style:tab-stops}.
  *
  */
-public abstract class StyleTabStopsElement extends OdfElement
+public class StyleTabStopsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "tab-stops" );
 

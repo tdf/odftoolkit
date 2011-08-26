@@ -56,7 +56,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableDdeLinksElement;
  * DOM implementation of OpenDocument element  {@odf.element office:spreadsheet}.
  *
  */
-public abstract class OfficeSpreadsheetElement extends OdfElement
+public class OfficeSpreadsheetElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "spreadsheet" );
 

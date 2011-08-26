@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  * DOM implementation of OpenDocument element  {@odf.element style:region-right}.
  *
  */
-public abstract class StyleRegionRightElement extends OdfElement
+public class StyleRegionRightElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "region-right" );
 

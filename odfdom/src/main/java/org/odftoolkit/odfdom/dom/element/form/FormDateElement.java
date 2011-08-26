@@ -61,7 +61,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:date}.
  *
  */
-public abstract class FormDateElement extends OdfElement
+public class FormDateElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "date" );
 

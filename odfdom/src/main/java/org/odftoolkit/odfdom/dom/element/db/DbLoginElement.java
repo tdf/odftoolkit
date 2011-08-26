@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbLoginTimeoutAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:login}.
  *
  */
-public abstract class DbLoginElement extends OdfElement
+public class DbLoginElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "login" );
 

@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextNotesConfigurationElement;
  * DOM implementation of OpenDocument element  {@odf.element style:section-properties}.
  *
  */
-public abstract class StyleSectionPropertiesElement extends OdfStylePropertiesBase
+public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "section-properties" );
 

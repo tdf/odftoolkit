@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element text:note-continuation-notice-forward}.
  *
  */
-public abstract class TextNoteContinuationNoticeForwardElement extends OdfElement
+public class TextNoteContinuationNoticeForwardElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "note-continuation-notice-forward" );
 

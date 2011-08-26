@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  * DOM implementation of OpenDocument element  {@odf.element chart:title}.
  *
  */
-public abstract class ChartTitleElement extends OdfStylableElement
+public class ChartTitleElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "title" );
 

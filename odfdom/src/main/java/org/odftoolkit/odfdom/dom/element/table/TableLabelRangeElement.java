@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableOrientationAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:label-range}.
  *
  */
-public abstract class TableLabelRangeElement extends OdfElement
+public class TableLabelRangeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "label-range" );
 

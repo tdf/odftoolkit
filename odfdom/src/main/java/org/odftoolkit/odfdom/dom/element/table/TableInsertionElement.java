@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeChangeInfoElement;
  * DOM implementation of OpenDocument element  {@odf.element table:insertion}.
  *
  */
-public abstract class TableInsertionElement extends OdfElement
+public class TableInsertionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "insertion" );
 

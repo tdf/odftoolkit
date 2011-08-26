@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
  * DOM implementation of OpenDocument element  {@odf.element chart:symbol-image}.
  *
  */
-public abstract class ChartSymbolImageElement extends OdfElement
+public class ChartSymbolImageElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "symbol-image" );
 

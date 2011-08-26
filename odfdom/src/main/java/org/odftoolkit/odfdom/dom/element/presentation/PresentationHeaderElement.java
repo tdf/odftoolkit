@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element presentation:header}.
  *
  */
-public abstract class PresentationHeaderElement extends OdfElement
+public class PresentationHeaderElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "header" );
 

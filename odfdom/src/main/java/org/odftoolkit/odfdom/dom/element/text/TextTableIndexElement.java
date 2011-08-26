@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:table-index}.
  *
  */
-public abstract class TextTableIndexElement extends OdfStylableElement
+public class TextTableIndexElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "table-index" );
 

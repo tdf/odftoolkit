@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:filter-set-item}.
  *
  */
-public abstract class TableFilterSetItemElement extends OdfElement
+public class TableFilterSetItemElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "filter-set-item" );
 

@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
  * DOM implementation of OpenDocument element  {@odf.element text:list-level-style-image}.
  *
  */
-public abstract class TextListLevelStyleImageElement extends TextListLevelStyleElementBase
+public class TextListLevelStyleImageElement extends TextListLevelStyleElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "list-level-style-image" );
 

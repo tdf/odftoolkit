@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element svg:font-face-src}.
  *
  */
-public abstract class SvgFontFaceSrcElement extends OdfElement
+public class SvgFontFaceSrcElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SVG, "font-face-src" );
 

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.xforms.XformsModelElement;
  * DOM implementation of OpenDocument element  {@odf.element office:forms}.
  *
  */
-public abstract class OfficeFormsElement extends OdfElement
+public class OfficeFormsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "forms" );
 

@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleColorAttribute;
  * DOM implementation of OpenDocument element  {@odf.element style:column-sep}.
  *
  */
-public abstract class StyleColumnSepElement extends OdfElement
+public class StyleColumnSepElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "column-sep" );
 

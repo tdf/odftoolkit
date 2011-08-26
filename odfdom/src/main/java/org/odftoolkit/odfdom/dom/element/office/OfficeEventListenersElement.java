@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationEventListenerE
  * DOM implementation of OpenDocument element  {@odf.element office:event-listeners}.
  *
  */
-public abstract class OfficeEventListenersElement extends OdfElement
+public class OfficeEventListenersElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "event-listeners" );
 

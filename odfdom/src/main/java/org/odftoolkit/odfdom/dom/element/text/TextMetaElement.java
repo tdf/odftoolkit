@@ -66,7 +66,7 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationDateTimeElemen
  * DOM implementation of OpenDocument element  {@odf.element text:meta}.
  *
  */
-public abstract class TextMetaElement extends OdfElement
+public class TextMetaElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "meta" );
 

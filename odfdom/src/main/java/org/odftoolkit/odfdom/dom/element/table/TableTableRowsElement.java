@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextSoftPageBreakElement;
  * DOM implementation of OpenDocument element  {@odf.element table:table-rows}.
  *
  */
-public abstract class TableTableRowsElement extends OdfElement
+public class TableTableRowsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-rows" );
 

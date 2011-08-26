@@ -91,7 +91,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
  * DOM implementation of OpenDocument element  {@odf.element style:page-layout-properties}.
  *
  */
-public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase
+public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "page-layout-properties" );
 

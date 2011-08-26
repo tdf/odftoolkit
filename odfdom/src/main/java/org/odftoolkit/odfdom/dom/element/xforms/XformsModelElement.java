@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element xforms:model}.
  *
  */
-public abstract class XformsModelElement extends OdfElement
+public class XformsModelElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.XFORMS, "model" );
 

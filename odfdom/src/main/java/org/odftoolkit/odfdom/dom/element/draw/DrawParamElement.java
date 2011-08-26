@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:param}.
  *
  */
-public abstract class DrawParamElement extends OdfElement
+public class DrawParamElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "param" );
 

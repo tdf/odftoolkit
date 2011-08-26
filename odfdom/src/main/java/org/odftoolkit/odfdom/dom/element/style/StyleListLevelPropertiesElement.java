@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextListLevelPositionAndSpaceMod
  * DOM implementation of OpenDocument element  {@odf.element style:list-level-properties}.
  *
  */
-public abstract class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
+public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "list-level-properties" );
 

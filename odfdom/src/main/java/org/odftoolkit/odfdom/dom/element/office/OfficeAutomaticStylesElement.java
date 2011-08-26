@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutElement;
  * DOM implementation of OpenDocument element  {@odf.element office:automatic-styles}.
  *
  */
-public abstract class OfficeAutomaticStylesElement extends OdfContainerElementBase
+public class OfficeAutomaticStylesElement extends OdfContainerElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "automatic-styles" );
 

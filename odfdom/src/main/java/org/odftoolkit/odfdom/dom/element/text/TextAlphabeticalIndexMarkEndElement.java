@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:alphabetical-index-mark-end}.
  *
  */
-public abstract class TextAlphabeticalIndexMarkEndElement extends OdfElement
+public class TextAlphabeticalIndexMarkEndElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "alphabetical-index-mark-end" );
 

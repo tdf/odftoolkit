@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextKindAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:measure}.
  *
  */
-public abstract class TextMeasureElement extends OdfElement
+public class TextMeasureElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "measure" );
 

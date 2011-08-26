@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDataTypeAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:filter-condition}.
  *
  */
-public abstract class TableFilterConditionElement extends OdfElement
+public class TableFilterConditionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "filter-condition" );
 

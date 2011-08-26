@@ -56,7 +56,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  * DOM implementation of OpenDocument element  {@odf.element table:shapes}.
  *
  */
-public abstract class TableShapesElement extends OdfElement
+public class TableShapesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "shapes" );
 

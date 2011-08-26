@@ -52,7 +52,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:custom-shape}.
  *
  */
-public abstract class DrawCustomShapeElement extends DrawShapeElementBase
+public class DrawCustomShapeElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "custom-shape" );
 

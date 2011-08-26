@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbSchemaNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:update-table}.
  *
  */
-public abstract class DbUpdateTableElement extends OdfElement
+public class DbUpdateTableElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "update-table" );
 

@@ -57,6 +57,7 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
+import org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
@@ -88,7 +89,6 @@ public abstract class OdfDocument {
 	private static final String COLON = ":";
 	private static final String EMPTY_STRING = "";
 	private String mDocumentPathInPackage = EMPTY_STRING;
-
 	/**
 	 * This enum contains all possible standardized XML ODF files of the OpenDocument document.
 	 */
@@ -202,6 +202,8 @@ public abstract class OdfDocument {
 	private OdfOfficeStyles mDocumentStyles;
 	private OdfFileDom mContentDom;
 	private OdfFileDom mStylesDom;
+	private OdfFileDom mMetaDom;
+	private OdfOfficeMeta mOfficeMeta;
 	private StringBuilder mCharsForTextNode = new StringBuilder();
 //    private OdfFileDom mSettingsDom;
 //    private OdfFileDom mMetaDom;
@@ -666,6 +668,33 @@ public abstract class OdfDocument {
 		}
 		return mStylesDom;
 	}
+	
+	/**
+	 * Return the ODF type-based content DOM of the meta.xml
+	 * 
+	 * @return ODF type-based meta DOM
+	 * @throws Exception if meta DOM could not be initialized
+	 */
+	public OdfFileDom getMetaDom() throws Exception {
+		if (mMetaDom == null) {
+			mMetaDom = getFileDom(OdfXMLFile.META);
+		}
+		return mMetaDom;
+	}
+
+	/**
+	 * Get the meta data feature instance of the current document
+	 * 
+	 * @return the meta data feature instance which represent 
+	 * <code>office:meta</code> in the meta.xml
+	 * @throws Exception if the file meta DOM could not be created.
+	 */
+	public OdfOfficeMeta getOfficeMetadata() throws Exception {
+		if (mOfficeMeta == null) {
+			mOfficeMeta = new OdfOfficeMeta(getMetaDom());
+		}
+		return mOfficeMeta;
+	}
 
 	/**
 	 * Get the media type from document
@@ -768,6 +797,11 @@ public abstract class OdfDocument {
 		} else {
 			mPackage.insert(getStylesDom(), getXMLFilePath(OdfXMLFile.STYLES), null);
 		}
+		if (mMetaDom == null) {
+			mPackage.insert(getMetaStream(), getXMLFilePath(OdfXMLFile.META), getMediaType());
+		} else {
+			mPackage.insert(getMetaDom(), getXMLFilePath(OdfXMLFile.META), null);
+		}
 	}
 
 	/**
@@ -815,6 +849,9 @@ public abstract class OdfDocument {
 			}
 			if (getStylesStream() != null) {
 				mPackage.insert(getStylesDom(), getXMLFilePath(OdfXMLFile.STYLES), null);
+			}
+			if(getMetaStream()!=null) {
+				mPackage.insert(getMetaDom(), getXMLFilePath(OdfXMLFile.META), null);
 			}
 		} catch (Exception ex) {
 			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);

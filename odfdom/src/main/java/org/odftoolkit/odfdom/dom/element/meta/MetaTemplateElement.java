@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.meta.MetaDateAttribute;
  * DOM implementation of OpenDocument element  {@odf.element meta:template}.
  *
  */
-public abstract class MetaTemplateElement extends OdfElement
+public class MetaTemplateElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "template" );
 

@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableShowEmptyAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-level}.
  *
  */
-public abstract class TableDataPilotLevelElement extends OdfElement
+public class TableDataPilotLevelElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-level" );
 

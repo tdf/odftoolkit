@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element chart:mean-value}.
  *
  */
-public abstract class ChartMeanValueElement extends OdfStylableElement
+public class ChartMeanValueElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "mean-value" );
 

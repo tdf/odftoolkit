@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StylePageUsageAttribute;
  * DOM implementation of OpenDocument element  {@odf.element style:page-layout}.
  *
  */
-public abstract class StylePageLayoutElement extends OdfStyleBase
+public class StylePageLayoutElement extends OdfStyleBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "page-layout" );
 

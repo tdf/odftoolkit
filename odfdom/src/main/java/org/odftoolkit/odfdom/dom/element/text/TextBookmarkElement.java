@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:bookmark}.
  *
  */
-public abstract class TextBookmarkElement extends OdfElement
+public class TextBookmarkElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "bookmark" );
 

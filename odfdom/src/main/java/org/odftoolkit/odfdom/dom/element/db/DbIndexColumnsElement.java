@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element db:index-columns}.
  *
  */
-public abstract class DbIndexColumnsElement extends OdfElement
+public class DbIndexColumnsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "index-columns" );
 

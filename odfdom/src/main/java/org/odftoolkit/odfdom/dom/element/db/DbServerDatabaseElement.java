@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbDatabaseNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:server-database}.
  *
  */
-public abstract class DbServerDatabaseElement extends OdfElement
+public class DbServerDatabaseElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "server-database" );
 

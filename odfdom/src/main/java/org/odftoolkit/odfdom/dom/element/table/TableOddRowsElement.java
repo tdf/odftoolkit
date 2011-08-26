@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableParagraphStyleNameAttribut
  * DOM implementation of OpenDocument element  {@odf.element table:odd-rows}.
  *
  */
-public abstract class TableOddRowsElement extends OdfStylableElement
+public class TableOddRowsElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "odd-rows" );
 

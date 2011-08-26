@@ -63,7 +63,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:button}.
  *
  */
-public abstract class FormButtonElement extends OdfElement
+public class FormButtonElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "button" );
 

@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawPointsAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:contour-polygon}.
  *
  */
-public abstract class DrawContourPolygonElement extends OdfElement
+public class DrawContourPolygonElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "contour-polygon" );
 

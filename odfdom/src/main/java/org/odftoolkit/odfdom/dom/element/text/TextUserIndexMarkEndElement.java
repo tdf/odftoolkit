@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:user-index-mark-end}.
  *
  */
-public abstract class TextUserIndexMarkEndElement extends OdfElement
+public class TextUserIndexMarkEndElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "user-index-mark-end" );
 

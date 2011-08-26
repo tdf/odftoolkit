@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element meta:generator}.
  *
  */
-public abstract class MetaGeneratorElement extends OdfElement
+public class MetaGeneratorElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "generator" );
 

@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:template-name}.
  *
  */
-public abstract class TextTemplateNameElement extends OdfElement
+public class TextTemplateNameElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "template-name" );
 

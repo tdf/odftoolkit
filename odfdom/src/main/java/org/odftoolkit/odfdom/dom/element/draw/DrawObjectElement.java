@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.element.math.MathMathElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:object}.
  *
  */
-public abstract class DrawObjectElement extends OdfElement
+public class DrawObjectElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "object" );
 

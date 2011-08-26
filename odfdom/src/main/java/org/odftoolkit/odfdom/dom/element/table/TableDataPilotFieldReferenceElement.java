@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableTypeAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-field-reference}.
  *
  */
-public abstract class TableDataPilotFieldReferenceElement extends OdfElement
+public class TableDataPilotFieldReferenceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-field-reference" );
 

@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeStringValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element form:list-value}.
  *
  */
-public abstract class FormListValueElement extends OdfElement
+public class FormListValueElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "list-value" );
 

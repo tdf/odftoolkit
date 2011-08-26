@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableUsedHierarchyAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-field}.
  *
  */
-public abstract class TableDataPilotFieldElement extends OdfElement
+public class TableDataPilotFieldElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-field" );
 

@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element svg:desc}.
  *
  */
-public abstract class SvgDescElement extends OdfElement
+public class SvgDescElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SVG, "desc" );
 

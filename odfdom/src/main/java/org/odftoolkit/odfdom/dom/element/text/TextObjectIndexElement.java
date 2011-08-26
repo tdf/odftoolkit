@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:object-index}.
  *
  */
-public abstract class TextObjectIndexElement extends OdfStylableElement
+public class TextObjectIndexElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "object-index" );
 

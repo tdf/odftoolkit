@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.config.ConfigTypeAttribute;
  * DOM implementation of OpenDocument element  {@odf.element config:config-item}.
  *
  */
-public abstract class ConfigConfigItemElement extends OdfElement
+public class ConfigConfigItemElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CONFIG, "config-item" );
 

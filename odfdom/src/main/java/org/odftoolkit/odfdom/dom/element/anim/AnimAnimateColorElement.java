@@ -65,7 +65,7 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilAutoReverseAttribute;
  * DOM implementation of OpenDocument element  {@odf.element anim:animateColor}.
  *
  */
-public abstract class AnimAnimateColorElement extends OdfElement
+public class AnimAnimateColorElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "animateColor" );
 

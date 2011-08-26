@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:hidden}.
  *
  */
-public abstract class FormHiddenElement extends OdfElement
+public class FormHiddenElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "hidden" );
 

@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element style:drop-cap}.
  *
  */
-public abstract class StyleDropCapElement extends OdfStylableElement
+public class StyleDropCapElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "drop-cap" );
 

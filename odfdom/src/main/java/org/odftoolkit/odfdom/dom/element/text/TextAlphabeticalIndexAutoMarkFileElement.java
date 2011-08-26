@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:alphabetical-index-auto-mark-file}.
  *
  */
-public abstract class TextAlphabeticalIndexAutoMarkFileElement extends OdfElement
+public class TextAlphabeticalIndexAutoMarkFileElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "alphabetical-index-auto-mark-file" );
 

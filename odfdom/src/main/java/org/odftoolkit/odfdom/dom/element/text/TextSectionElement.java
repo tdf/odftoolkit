@@ -67,7 +67,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  * DOM implementation of OpenDocument element  {@odf.element text:section}.
  *
  */
-public abstract class TextSectionElement extends OdfStylableElement
+public class TextSectionElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "section" );
 

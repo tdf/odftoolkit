@@ -57,7 +57,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:ellipse}.
  *
  */
-public abstract class DrawEllipseElement extends DrawShapeElementBase
+public class DrawEllipseElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "ellipse" );
 

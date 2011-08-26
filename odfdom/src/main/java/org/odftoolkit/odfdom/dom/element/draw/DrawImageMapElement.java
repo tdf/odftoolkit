@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:image-map}.
  *
  */
-public abstract class DrawImageMapElement extends OdfElement
+public class DrawImageMapElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "image-map" );
 

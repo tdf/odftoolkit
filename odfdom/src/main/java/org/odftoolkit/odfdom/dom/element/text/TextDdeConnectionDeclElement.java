@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeAutomaticUpdateAttribute
  * DOM implementation of OpenDocument element  {@odf.element text:dde-connection-decl}.
  *
  */
-public abstract class TextDdeConnectionDeclElement extends OdfElement
+public class TextDdeConnectionDeclElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "dde-connection-decl" );
 

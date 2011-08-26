@@ -52,7 +52,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationShowEndOfPre
  * DOM implementation of OpenDocument element  {@odf.element presentation:settings}.
  *
  */
-public abstract class PresentationSettingsElement extends OdfElement
+public class PresentationSettingsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "settings" );
 

@@ -57,7 +57,7 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilFillDefaultAttribute;
  * DOM implementation of OpenDocument element  {@odf.element anim:audio}.
  *
  */
-public abstract class AnimAudioElement extends OdfElement
+public class AnimAudioElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "audio" );
 

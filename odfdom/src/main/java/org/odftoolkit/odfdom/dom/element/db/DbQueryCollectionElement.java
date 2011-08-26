@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbDescriptionAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:query-collection}.
  *
  */
-public abstract class DbQueryCollectionElement extends OdfElement
+public class DbQueryCollectionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "query-collection" );
 

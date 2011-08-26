@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element table:detective}.
  *
  */
-public abstract class TableDetectiveElement extends OdfElement
+public class TableDetectiveElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "detective" );
 

@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleDistanceAfterSepAttribute;
  * DOM implementation of OpenDocument element  {@odf.element style:footnote-sep}.
  *
  */
-public abstract class StyleFootnoteSepElement extends OdfElement
+public class StyleFootnoteSepElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "footnote-sep" );
 

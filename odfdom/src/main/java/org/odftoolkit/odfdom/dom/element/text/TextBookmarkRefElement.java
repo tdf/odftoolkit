@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextReferenceFormatAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:bookmark-ref}.
  *
  */
-public abstract class TextBookmarkRefElement extends OdfElement
+public class TextBookmarkRefElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "bookmark-ref" );
 

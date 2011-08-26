@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StylePositionAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:index-entry-tab-stop}.
  *
  */
-public abstract class TextIndexEntryTabStopElement extends OdfStylableElement
+public class TextIndexEntryTabStopElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "index-entry-tab-stop" );
 

@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:note}.
  *
  */
-public abstract class TextNoteElement extends OdfElement
+public class TextNoteElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "note" );
 

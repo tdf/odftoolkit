@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableIndexAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:operation}.
  *
  */
-public abstract class TableOperationElement extends OdfElement
+public class TableOperationElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "operation" );
 

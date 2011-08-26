@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:index-entry-text}.
  *
  */
-public abstract class TextIndexEntryTextElement extends OdfStylableElement
+public class TextIndexEntryTextElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "index-entry-text" );
 

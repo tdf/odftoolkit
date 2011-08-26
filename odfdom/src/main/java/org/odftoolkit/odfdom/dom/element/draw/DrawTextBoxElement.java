@@ -61,7 +61,7 @@ import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:text-box}.
  *
  */
-public abstract class DrawTextBoxElement extends OdfElement
+public class DrawTextBoxElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "text-box" );
 

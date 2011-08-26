@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-tables}.
  *
  */
-public abstract class TableDataPilotTablesElement extends OdfElement
+public class TableDataPilotTablesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-tables" );
 

@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
  * DOM implementation of OpenDocument element  {@odf.element text:list-level-style-bullet}.
  *
  */
-public abstract class TextListLevelStyleBulletElement extends TextListLevelStyleElementBase
+public class TextListLevelStyleBulletElement extends TextListLevelStyleElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "list-level-style-bullet" );
 

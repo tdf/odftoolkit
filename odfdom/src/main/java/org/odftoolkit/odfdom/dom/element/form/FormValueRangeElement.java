@@ -58,7 +58,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:value-range}.
  *
  */
-public abstract class FormValueRangeElement extends OdfElement
+public class FormValueRangeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "value-range" );
 

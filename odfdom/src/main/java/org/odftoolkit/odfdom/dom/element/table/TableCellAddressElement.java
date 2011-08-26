@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableTableAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:cell-address}.
  *
  */
-public abstract class TableCellAddressElement extends OdfElement
+public class TableCellAddressElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "cell-address" );
 

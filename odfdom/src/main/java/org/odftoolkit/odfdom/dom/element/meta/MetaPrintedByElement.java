@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element meta:printed-by}.
  *
  */
-public abstract class MetaPrintedByElement extends OdfElement
+public class MetaPrintedByElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "printed-by" );
 

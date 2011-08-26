@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  * DOM implementation of OpenDocument element  {@odf.element chart:equation}.
  *
  */
-public abstract class ChartEquationElement extends OdfElement
+public class ChartEquationElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "equation" );
 

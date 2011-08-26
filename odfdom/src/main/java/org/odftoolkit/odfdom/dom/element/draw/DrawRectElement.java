@@ -53,7 +53,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:rect}.
  *
  */
-public abstract class DrawRectElement extends DrawShapeElementBase
+public class DrawRectElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "rect" );
 

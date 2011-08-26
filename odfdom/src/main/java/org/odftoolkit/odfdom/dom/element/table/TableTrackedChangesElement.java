@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableTrackChangesAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:tracked-changes}.
  *
  */
-public abstract class TableTrackedChangesElement extends OdfElement
+public class TableTrackedChangesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "tracked-changes" );
 

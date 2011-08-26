@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextSeparationCharacterAttribute
  * DOM implementation of OpenDocument element  {@odf.element text:sequence-decl}.
  *
  */
-public abstract class TextSequenceDeclElement extends OdfElement
+public class TextSequenceDeclElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "sequence-decl" );
 

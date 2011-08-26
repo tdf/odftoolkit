@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawDistanceAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:stroke-dash}.
  *
  */
-public abstract class DrawStrokeDashElement extends OdfElement
+public class DrawStrokeDashElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "stroke-dash" );
 

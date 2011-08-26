@@ -70,7 +70,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextIssnAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:bibliography-mark}.
  *
  */
-public abstract class TextBibliographyMarkElement extends OdfElement
+public class TextBibliographyMarkElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "bibliography-mark" );
 

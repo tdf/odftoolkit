@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:index-entry-chapter}.
  *
  */
-public abstract class TextIndexEntryChapterElement extends OdfStylableElement
+public class TextIndexEntryChapterElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "index-entry-chapter" );
 

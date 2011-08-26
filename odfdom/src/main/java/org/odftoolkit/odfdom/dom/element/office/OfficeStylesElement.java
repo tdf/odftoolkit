@@ -62,7 +62,7 @@ import org.odftoolkit.odfdom.dom.element.style.StylePresentationPageLayoutElemen
  * DOM implementation of OpenDocument element  {@odf.element office:styles}.
  *
  */
-public abstract class OfficeStylesElement extends OdfContainerElementBase
+public class OfficeStylesElement extends OdfContainerElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "styles" );
 

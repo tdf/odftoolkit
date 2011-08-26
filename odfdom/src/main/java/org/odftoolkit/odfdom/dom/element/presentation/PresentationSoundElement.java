@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
  * DOM implementation of OpenDocument element  {@odf.element presentation:sound}.
  *
  */
-public abstract class PresentationSoundElement extends OdfElement
+public class PresentationSoundElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "sound" );
 

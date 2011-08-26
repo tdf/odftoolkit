@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:fill-image}.
  *
  */
-public abstract class DrawFillImageElement extends OdfElement
+public class DrawFillImageElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "fill-image" );
 

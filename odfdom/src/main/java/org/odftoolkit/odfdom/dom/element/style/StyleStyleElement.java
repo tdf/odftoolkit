@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleFamilyAttribute;
  * DOM implementation of OpenDocument element  {@odf.element style:style}.
  *
  */
-public abstract class StyleStyleElement extends OdfStyleBase
+public class StyleStyleElement extends OdfStyleBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "style" );
 

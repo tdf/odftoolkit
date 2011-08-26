@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoMarginLeftAttribute;
  * DOM implementation of OpenDocument element  {@odf.element style:list-level-label-alignment}.
  *
  */
-public abstract class StyleListLevelLabelAlignmentElement extends OdfElement
+public class StyleListLevelLabelAlignmentElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "list-level-label-alignment" );
 

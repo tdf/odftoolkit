@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element style:header-style}.
  *
  */
-public abstract class StyleHeaderStyleElement extends OdfElement
+public class StyleHeaderStyleElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "header-style" );
 

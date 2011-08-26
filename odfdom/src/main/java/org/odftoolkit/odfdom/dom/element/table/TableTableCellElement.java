@@ -74,7 +74,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  * DOM implementation of OpenDocument element  {@odf.element table:table-cell}.
  *
  */
-public abstract class TableTableCellElement extends TableTableCellElementBase
+public class TableTableCellElement extends TableTableCellElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-cell" );
 

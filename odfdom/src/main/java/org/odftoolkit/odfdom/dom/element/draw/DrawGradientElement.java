@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawEndIntensityAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:gradient}.
  *
  */
-public abstract class DrawGradientElement extends OdfElement
+public class DrawGradientElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "gradient" );
 

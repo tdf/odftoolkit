@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element presentation:footer}.
  *
  */
-public abstract class PresentationFooterElement extends OdfElement
+public class PresentationFooterElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "footer" );
 

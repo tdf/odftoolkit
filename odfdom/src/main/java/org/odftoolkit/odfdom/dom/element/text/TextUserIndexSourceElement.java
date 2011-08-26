@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextIndexNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:user-index-source}.
  *
  */
-public abstract class TextUserIndexSourceElement extends OdfElement
+public class TextUserIndexSourceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "user-index-source" );
 

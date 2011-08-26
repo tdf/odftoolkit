@@ -50,7 +50,7 @@ import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:page-thumbnail}.
  *
  */
-public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
+public class DrawPageThumbnailElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "page-thumbnail" );
 

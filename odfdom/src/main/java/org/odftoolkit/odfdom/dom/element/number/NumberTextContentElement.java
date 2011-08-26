@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element number:text-content}.
  *
  */
-public abstract class NumberTextContentElement extends OdfElement
+public class NumberTextContentElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "text-content" );
 

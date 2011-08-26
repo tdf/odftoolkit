@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationVerbAttribut
  * DOM implementation of OpenDocument element  {@odf.element presentation:event-listener}.
  *
  */
-public abstract class PresentationEventListenerElement extends OdfElement
+public class PresentationEventListenerElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "event-listener" );
 

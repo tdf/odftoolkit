@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:image}.
  *
  */
-public abstract class DrawImageElement extends OdfElement
+public class DrawImageElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "image" );
 

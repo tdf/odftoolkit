@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextNoteClassAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:note-ref}.
  *
  */
-public abstract class TextNoteRefElement extends OdfElement
+public class TextNoteRefElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "note-ref" );
 

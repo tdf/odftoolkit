@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextConsecutiveNumberingAttribut
  * DOM implementation of OpenDocument element  {@odf.element text:list-style}.
  *
  */
-public abstract class TextListStyleElement extends OdfStyleBase
+public class TextListStyleElement extends OdfStyleBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "list-style" );
 

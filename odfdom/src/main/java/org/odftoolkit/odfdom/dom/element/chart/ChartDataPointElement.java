@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element chart:data-point}.
  *
  */
-public abstract class ChartDataPointElement extends OdfStylableElement
+public class ChartDataPointElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "data-point" );
 

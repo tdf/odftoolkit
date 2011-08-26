@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
  * DOM implementation of OpenDocument element  {@odf.element meta:hyperlink-behaviour}.
  *
  */
-public abstract class MetaHyperlinkBehaviourElement extends OdfElement
+public class MetaHyperlinkBehaviourElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "hyperlink-behaviour" );
 

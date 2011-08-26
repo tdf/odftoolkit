@@ -59,7 +59,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:checkbox}.
  *
  */
-public abstract class FormCheckboxElement extends OdfElement
+public class FormCheckboxElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "checkbox" );
 

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableMarkedInvalidAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:highlighted-range}.
  *
  */
-public abstract class TableHighlightedRangeElement extends OdfElement
+public class TableHighlightedRangeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "highlighted-range" );
 

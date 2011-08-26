@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableGroupByFieldNumberAttribut
  * DOM implementation of OpenDocument element  {@odf.element table:subtotal-rule}.
  *
  */
-public abstract class TableSubtotalRuleElement extends OdfElement
+public class TableSubtotalRuleElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "subtotal-rule" );
 

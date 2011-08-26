@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
  * DOM implementation of OpenDocument element  {@odf.element text:outline-level-style}.
  *
  */
-public abstract class TextOutlineLevelStyleElement extends OdfStyleBase
+public class TextOutlineLevelStyleElement extends OdfStyleBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "outline-level-style" );
 

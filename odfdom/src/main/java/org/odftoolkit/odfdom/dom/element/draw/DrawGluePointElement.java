@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawEscapeDirectionAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:glue-point}.
  *
  */
-public abstract class DrawGluePointElement extends OdfElement
+public class DrawGluePointElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "glue-point" );
 

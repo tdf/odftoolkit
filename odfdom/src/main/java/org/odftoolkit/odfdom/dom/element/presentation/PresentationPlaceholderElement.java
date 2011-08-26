@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgHeightAttribute;
  * DOM implementation of OpenDocument element  {@odf.element presentation:placeholder}.
  *
  */
-public abstract class PresentationPlaceholderElement extends OdfElement
+public class PresentationPlaceholderElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "placeholder" );
 

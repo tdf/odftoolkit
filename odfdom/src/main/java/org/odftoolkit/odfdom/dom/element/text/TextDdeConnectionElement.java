@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextConnectionNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:dde-connection}.
  *
  */
-public abstract class TextDdeConnectionElement extends OdfElement
+public class TextDdeConnectionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "dde-connection" );
 

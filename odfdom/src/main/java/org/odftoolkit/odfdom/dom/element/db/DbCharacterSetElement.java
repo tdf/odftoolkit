@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbEncodingAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:character-set}.
  *
  */
-public abstract class DbCharacterSetElement extends OdfElement
+public class DbCharacterSetElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "character-set" );
 

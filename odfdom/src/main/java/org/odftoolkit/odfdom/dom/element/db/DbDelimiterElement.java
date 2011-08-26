@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbThousandAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:delimiter}.
  *
  */
-public abstract class DbDelimiterElement extends OdfElement
+public class DbDelimiterElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "delimiter" );
 

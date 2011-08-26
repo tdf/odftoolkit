@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextTrackChangesAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:tracked-changes}.
  *
  */
-public abstract class TextTrackedChangesElement extends OdfElement
+public class TextTrackedChangesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "tracked-changes" );
 

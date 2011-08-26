@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationPathIdAttrib
  * DOM implementation of OpenDocument element  {@odf.element presentation:show-shape}.
  *
  */
-public abstract class PresentationShowShapeElement extends OdfElement
+public class PresentationShowShapeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "show-shape" );
 

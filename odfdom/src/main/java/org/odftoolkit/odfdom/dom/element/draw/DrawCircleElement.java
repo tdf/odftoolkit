@@ -56,7 +56,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:circle}.
  *
  */
-public abstract class DrawCircleElement extends DrawShapeElementBase
+public class DrawCircleElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "circle" );
 

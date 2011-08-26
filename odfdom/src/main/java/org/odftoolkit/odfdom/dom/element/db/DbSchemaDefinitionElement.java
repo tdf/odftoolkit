@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element db:schema-definition}.
  *
  */
-public abstract class DbSchemaDefinitionElement extends OdfElement
+public class DbSchemaDefinitionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "schema-definition" );
 

@@ -54,7 +54,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextSortAlgorithmAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:alphabetical-index-source}.
  *
  */
-public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
+public class TextAlphabeticalIndexSourceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "alphabetical-index-source" );
 

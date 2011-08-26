@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextLabelAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:note-citation}.
  *
  */
-public abstract class TextNoteCitationElement extends OdfElement
+public class TextNoteCitationElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "note-citation" );
 

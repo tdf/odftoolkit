@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
  * DOM implementation of OpenDocument element  {@odf.element script:event-listener}.
  *
  */
-public abstract class ScriptEventListenerElement extends OdfElement
+public class ScriptEventListenerElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SCRIPT, "event-listener" );
 

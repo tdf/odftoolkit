@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:table-column}.
  *
  */
-public abstract class TableTableColumnElement extends OdfStylableElement
+public class TableTableColumnElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-column" );
 

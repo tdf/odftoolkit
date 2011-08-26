@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element text:soft-page-break}.
  *
  */
-public abstract class TextSoftPageBreakElement extends OdfElement
+public class TextSoftPageBreakElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "soft-page-break" );
 

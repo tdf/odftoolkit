@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDescriptionAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:placeholder}.
  *
  */
-public abstract class TextPlaceholderElement extends OdfElement
+public class TextPlaceholderElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "placeholder" );
 

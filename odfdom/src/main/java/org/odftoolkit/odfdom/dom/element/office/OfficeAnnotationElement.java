@@ -55,7 +55,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
  * DOM implementation of OpenDocument element  {@odf.element office:annotation}.
  *
  */
-public abstract class OfficeAnnotationElement extends DrawShapeElementBase
+public class OfficeAnnotationElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "annotation" );
 

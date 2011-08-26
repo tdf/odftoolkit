@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableCellRangeAddressAttribute;
  * DOM implementation of OpenDocument element  {@odf.element chart:domain}.
  *
  */
-public abstract class ChartDomainElement extends OdfElement
+public class ChartDomainElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "domain" );
 

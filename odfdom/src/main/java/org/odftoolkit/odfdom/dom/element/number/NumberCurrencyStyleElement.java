@@ -52,7 +52,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
  * DOM implementation of OpenDocument element  {@odf.element number:currency-style}.
  *
  */
-public abstract class NumberCurrencyStyleElement extends OdfElement
+public class NumberCurrencyStyleElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "currency-style" );
 

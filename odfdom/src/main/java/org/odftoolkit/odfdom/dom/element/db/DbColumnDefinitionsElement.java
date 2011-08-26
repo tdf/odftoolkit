@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element db:column-definitions}.
  *
  */
-public abstract class DbColumnDefinitionsElement extends OdfElement
+public class DbColumnDefinitionsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "column-definitions" );
 

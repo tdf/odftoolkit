@@ -94,7 +94,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
  * DOM implementation of OpenDocument element  {@odf.element style:paragraph-properties}.
  *
  */
-public abstract class StyleParagraphPropertiesElement extends OdfStylePropertiesBase
+public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "paragraph-properties" );
 

@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationSpeedAttribu
  * DOM implementation of OpenDocument element  {@odf.element presentation:play}.
  *
  */
-public abstract class PresentationPlayElement extends OdfElement
+public class PresentationPlayElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "play" );
 

@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextCaptionSequenceFormatAttribu
  * DOM implementation of OpenDocument element  {@odf.element text:illustration-index-source}.
  *
  */
-public abstract class TextIllustrationIndexSourceElement extends OdfElement
+public class TextIllustrationIndexSourceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "illustration-index-source" );
 

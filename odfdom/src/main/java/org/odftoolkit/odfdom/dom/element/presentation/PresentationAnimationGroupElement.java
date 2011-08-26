@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element presentation:animation-group}.
  *
  */
-public abstract class PresentationAnimationGroupElement extends OdfElement
+public class PresentationAnimationGroupElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "animation-group" );
 

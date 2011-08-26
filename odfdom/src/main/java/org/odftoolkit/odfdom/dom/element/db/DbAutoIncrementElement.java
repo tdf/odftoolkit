@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbRowRetrievingStatementAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:auto-increment}.
  *
  */
-public abstract class DbAutoIncrementElement extends OdfElement
+public class DbAutoIncrementElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "auto-increment" );
 

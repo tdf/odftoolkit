@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.meta.MetaDelayAttribute;
  * DOM implementation of OpenDocument element  {@odf.element meta:auto-reload}.
  *
  */
-public abstract class MetaAutoReloadElement extends OdfElement
+public class MetaAutoReloadElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "auto-reload" );
 

@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationPathIdAttrib
  * DOM implementation of OpenDocument element  {@odf.element presentation:hide-shape}.
  *
  */
-public abstract class PresentationHideShapeElement extends OdfElement
+public class PresentationHideShapeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "hide-shape" );
 

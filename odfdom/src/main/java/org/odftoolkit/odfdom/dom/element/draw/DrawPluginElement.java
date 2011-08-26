@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:plugin}.
  *
  */
-public abstract class DrawPluginElement extends OdfElement
+public class DrawPluginElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "plugin" );
 

@@ -63,7 +63,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  * DOM implementation of OpenDocument element  {@odf.element style:handout-master}.
  *
  */
-public abstract class StyleHandoutMasterElement extends OdfStylableElement
+public class StyleHandoutMasterElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "handout-master" );
 

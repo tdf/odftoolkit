@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:cell-content-deletion}.
  *
  */
-public abstract class TableCellContentDeletionElement extends OdfElement
+public class TableCellContentDeletionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "cell-content-deletion" );
 

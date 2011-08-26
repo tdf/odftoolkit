@@ -67,7 +67,7 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:page}.
  *
  */
-public abstract class DrawPageElement extends OdfStylableElement
+public class DrawPageElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "page" );
 

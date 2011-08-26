@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextSoftPageBreakElement;
  * DOM implementation of OpenDocument element  {@odf.element table:table-row-group}.
  *
  */
-public abstract class TableTableRowGroupElement extends OdfElement
+public class TableTableRowGroupElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-row-group" );
 

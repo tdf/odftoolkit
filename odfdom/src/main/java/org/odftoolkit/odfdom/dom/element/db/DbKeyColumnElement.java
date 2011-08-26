@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbRelatedColumnNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:key-column}.
  *
  */
-public abstract class DbKeyColumnElement extends OdfElement
+public class DbKeyColumnElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "key-column" );
 

@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element math:math}.
  *
  */
-public abstract class MathMathElement extends OdfElement
+public class MathMathElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.MATH, "math" );
 

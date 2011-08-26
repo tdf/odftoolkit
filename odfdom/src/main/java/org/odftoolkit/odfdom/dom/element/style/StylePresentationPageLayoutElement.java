@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationPlaceholderEle
  * DOM implementation of OpenDocument element  {@odf.element style:presentation-page-layout}.
  *
  */
-public abstract class StylePresentationPageLayoutElement extends OdfElement
+public class StylePresentationPageLayoutElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "presentation-page-layout" );
 

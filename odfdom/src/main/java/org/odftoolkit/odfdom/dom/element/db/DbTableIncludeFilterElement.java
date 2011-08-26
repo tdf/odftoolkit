@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element db:table-include-filter}.
  *
  */
-public abstract class DbTableIncludeFilterElement extends OdfElement
+public class DbTableIncludeFilterElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "table-include-filter" );
 

@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  *
  * Use is subject to license terms.
  *
@@ -20,19 +21,38 @@
  *
  ************************************************************************/
 
-package org.odftoolkit.odfdom.doc.office;
+package org.odftoolkit.odfdom.incubator.meta;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.element.office.OfficeMetaElement;
+import org.odftoolkit.odfdom.dom.element.meta.MetaTemplateElement;
 
 /**
- * Convenient functionalty for the parent ODF OpenDocument element
- *
+ * <code>OdfMetaTemplate</code> feature specified the URL for the document that
+ * was used to create a document.
+ * 
  */
-public class OdfOfficeMeta extends OfficeMetaElement
-{
-	public OdfOfficeMeta( OdfFileDom ownerDoc )
-	{
-		super( ownerDoc );
+
+// TODO: the functions are not completed.
+public class OdfMetaTemplate {
+
+	private MetaTemplateElement mMetaTemplateElement;
+
+	/**
+	 * Constructor of <code>OdfMetaTemplate</code> feature.
+	 * 
+	 * @param element
+	 *            an instance of ODF Element <code>MetaTemplateElement</code>
+	 */
+	public OdfMetaTemplate(MetaTemplateElement element) {
+		mMetaTemplateElement = element;
+	}
+
+	/**
+	 * Return the instance of ODF Element <code>MetaTemplateElement</code> which
+	 * represents this feature.
+	 * 
+	 * @return the instance of ODF Element <code>MetaTemplateElement</code>
+	 */
+	public MetaTemplateElement getMetaTemplateElement() {
+		return mMetaTemplateElement;
 	}
 }

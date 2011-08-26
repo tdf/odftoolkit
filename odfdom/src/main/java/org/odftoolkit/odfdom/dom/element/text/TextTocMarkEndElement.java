@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:toc-mark-end}.
  *
  */
-public abstract class TextTocMarkEndElement extends OdfElement
+public class TextTocMarkEndElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "toc-mark-end" );
 

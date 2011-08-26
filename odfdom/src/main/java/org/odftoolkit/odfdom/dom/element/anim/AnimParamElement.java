@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.anim.AnimValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element anim:param}.
  *
  */
-public abstract class AnimParamElement extends OdfElement
+public class AnimParamElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "param" );
 

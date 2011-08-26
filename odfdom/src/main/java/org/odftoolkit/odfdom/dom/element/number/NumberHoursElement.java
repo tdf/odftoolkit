@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberStyleAttribute;
  * DOM implementation of OpenDocument element  {@odf.element number:hours}.
  *
  */
-public abstract class NumberHoursElement extends OdfElement
+public class NumberHoursElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "hours" );
 

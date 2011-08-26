@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbDeleteRuleAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:key}.
  *
  */
-public abstract class DbKeyElement extends OdfElement
+public class DbKeyElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "key" );
 

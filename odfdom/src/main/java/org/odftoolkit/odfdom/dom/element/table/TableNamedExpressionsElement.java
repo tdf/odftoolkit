@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element table:named-expressions}.
  *
  */
-public abstract class TableNamedExpressionsElement extends OdfElement
+public class TableNamedExpressionsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "named-expressions" );
 

@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextChangeIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:change}.
  *
  */
-public abstract class TextChangeElement extends OdfElement
+public class TextChangeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "change" );
 

@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
  * DOM implementation of OpenDocument element  {@odf.element text:list-level-style-number}.
  *
  */
-public abstract class TextListLevelStyleNumberElement extends TextListLevelStyleElementBase
+public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "list-level-style-number" );
 

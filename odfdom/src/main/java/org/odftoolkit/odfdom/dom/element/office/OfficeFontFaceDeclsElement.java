@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleFontFaceElement;
  * DOM implementation of OpenDocument element  {@odf.element office:font-face-decls}.
  *
  */
-public abstract class OfficeFontFaceDeclsElement extends OdfElement
+public class OfficeFontFaceDeclsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "font-face-decls" );
 

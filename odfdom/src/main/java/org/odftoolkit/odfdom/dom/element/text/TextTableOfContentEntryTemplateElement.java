@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:table-of-content-entry-template}.
  *
  */
-public abstract class TextTableOfContentEntryTemplateElement extends OdfStylableElement
+public class TextTableOfContentEntryTemplateElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "table-of-content-entry-template" );
 

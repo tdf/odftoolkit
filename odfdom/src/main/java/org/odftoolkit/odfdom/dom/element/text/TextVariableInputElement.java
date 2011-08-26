@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:variable-input}.
  *
  */
-public abstract class TextVariableInputElement extends OdfElement
+public class TextVariableInputElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "variable-input" );
 

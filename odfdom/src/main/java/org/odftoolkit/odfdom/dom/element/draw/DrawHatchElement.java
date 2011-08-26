@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawRotationAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:hatch}.
  *
  */
-public abstract class DrawHatchElement extends OdfElement
+public class DrawHatchElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "hatch" );
 

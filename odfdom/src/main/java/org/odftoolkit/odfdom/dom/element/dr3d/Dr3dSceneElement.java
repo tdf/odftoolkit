@@ -71,7 +71,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawGluePointElement;
  * DOM implementation of OpenDocument element  {@odf.element dr3d:scene}.
  *
  */
-public abstract class Dr3dSceneElement extends OdfStyleableShapeElement
+public class Dr3dSceneElement extends OdfStyleableShapeElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DR3D, "scene" );
 

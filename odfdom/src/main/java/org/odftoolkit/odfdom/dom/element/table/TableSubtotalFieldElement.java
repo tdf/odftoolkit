@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableFunctionAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:subtotal-field}.
  *
  */
-public abstract class TableSubtotalFieldElement extends OdfElement
+public class TableSubtotalFieldElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "subtotal-field" );
 

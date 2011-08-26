@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableEndTableAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:target-range-address}.
  *
  */
-public abstract class TableTargetRangeAddressElement extends OdfElement
+public class TableTargetRangeAddressElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "target-range-address" );
 

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeChangeInfoElement;
  * DOM implementation of OpenDocument element  {@odf.element table:cell-content-change}.
  *
  */
-public abstract class TableCellContentChangeElement extends OdfElement
+public class TableCellContentChangeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "cell-content-change" );
 

@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextTimeValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:print-time}.
  *
  */
-public abstract class TextPrintTimeElement extends OdfElement
+public class TextPrintTimeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "print-time" );
 

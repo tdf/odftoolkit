@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableCellRangeAddressAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:source-cell-range}.
  *
  */
-public abstract class TableSourceCellRangeElement extends OdfElement
+public class TableSourceCellRangeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "source-cell-range" );
 

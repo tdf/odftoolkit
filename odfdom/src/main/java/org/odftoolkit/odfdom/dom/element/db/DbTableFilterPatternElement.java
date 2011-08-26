@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element db:table-filter-pattern}.
  *
  */
-public abstract class DbTableFilterPatternElement extends OdfElement
+public class DbTableFilterPatternElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "table-filter-pattern" );
 

@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbApplyCommandAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:order-statement}.
  *
  */
-public abstract class DbOrderStatementElement extends OdfElement
+public class DbOrderStatementElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "order-statement" );
 

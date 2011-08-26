@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleFamilyAttribute;
  * DOM implementation of OpenDocument element  {@odf.element style:default-style}.
  *
  */
-public abstract class StyleDefaultStyleElement extends OdfStyleBase
+public class StyleDefaultStyleElement extends OdfStyleBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "default-style" );
 

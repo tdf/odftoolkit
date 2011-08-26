@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element number:boolean}.
  *
  */
-public abstract class NumberBooleanElement extends OdfElement
+public class NumberBooleanElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "boolean" );
 

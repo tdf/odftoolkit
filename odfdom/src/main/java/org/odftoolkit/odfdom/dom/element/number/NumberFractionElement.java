@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberGroupingAttribute;
  * DOM implementation of OpenDocument element  {@odf.element number:fraction}.
  *
  */
-public abstract class NumberFractionElement extends OdfElement
+public class NumberFractionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "fraction" );
 

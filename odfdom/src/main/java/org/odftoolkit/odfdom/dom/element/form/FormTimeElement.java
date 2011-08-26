@@ -61,7 +61,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:time}.
  *
  */
-public abstract class FormTimeElement extends OdfElement
+public class FormTimeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "time" );
 

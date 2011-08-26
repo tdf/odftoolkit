@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:list}.
  *
  */
-public abstract class TextListElement extends OdfElement
+public class TextListElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "list" );
 

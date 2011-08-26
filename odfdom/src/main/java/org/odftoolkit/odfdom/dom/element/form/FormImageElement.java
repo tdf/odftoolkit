@@ -54,7 +54,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element form:image}.
  *
  */
-public abstract class FormImageElement extends OdfElement
+public class FormImageElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "image" );
 

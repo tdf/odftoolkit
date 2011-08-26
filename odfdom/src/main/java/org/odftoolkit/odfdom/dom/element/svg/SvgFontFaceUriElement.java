@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
  * DOM implementation of OpenDocument element  {@odf.element svg:font-face-uri}.
  *
  */
-public abstract class SvgFontFaceUriElement extends OdfElement
+public class SvgFontFaceUriElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SVG, "font-face-uri" );
 

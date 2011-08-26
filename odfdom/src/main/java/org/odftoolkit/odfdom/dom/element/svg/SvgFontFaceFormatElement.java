@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgStringAttribute;
  * DOM implementation of OpenDocument element  {@odf.element svg:font-face-format}.
  *
  */
-public abstract class SvgFontFaceFormatElement extends OdfElement
+public class SvgFontFaceFormatElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SVG, "font-face-format" );
 

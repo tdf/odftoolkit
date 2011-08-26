@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbShowDeletedAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:table-setting}.
  *
  */
-public abstract class DbTableSettingElement extends OdfElement
+public class DbTableSettingElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "table-setting" );
 

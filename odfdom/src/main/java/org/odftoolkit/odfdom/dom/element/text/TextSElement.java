@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextCAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:s}.
  *
  */
-public abstract class TextSElement extends OdfElement
+public class TextSElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "s" );
 

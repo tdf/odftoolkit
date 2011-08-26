@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationNameAttribut
  * DOM implementation of OpenDocument element  {@odf.element presentation:footer-decl}.
  *
  */
-public abstract class PresentationFooterDeclElement extends OdfElement
+public class PresentationFooterDeclElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "footer-decl" );
 

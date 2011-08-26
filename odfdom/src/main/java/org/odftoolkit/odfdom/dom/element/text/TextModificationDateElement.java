@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDateValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:modification-date}.
  *
  */
-public abstract class TextModificationDateElement extends OdfElement
+public class TextModificationDateElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "modification-date" );
 

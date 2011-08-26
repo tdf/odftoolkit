@@ -91,7 +91,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
  * DOM implementation of OpenDocument element  {@odf.element office:document}.
  *
  */
-public abstract class OfficeDocumentElement extends OdfElement
+public class OfficeDocumentElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "document" );
 

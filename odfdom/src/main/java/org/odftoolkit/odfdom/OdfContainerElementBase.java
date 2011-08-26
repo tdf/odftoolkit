@@ -54,11 +54,15 @@ abstract public class OdfContainerElementBase extends OdfElement
     
     /** override this method to get notified about element insertion
      */
-    abstract protected void onOdfNodeInserted( OdfElement node, Node refChild );
+    protected void onOdfNodeInserted(OdfElement node, Node refChild) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
             
     /** override this method to get notified about element insertion
      */
-    abstract protected void onOdfNodeRemoved( OdfElement node );
+    protected void onOdfNodeRemoved(OdfElement node) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 
     @Override
     public Node insertBefore(Node newChild, Node refChild) throws DOMException

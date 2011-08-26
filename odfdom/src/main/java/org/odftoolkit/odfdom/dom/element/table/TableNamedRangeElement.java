@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableRangeUsableAsAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:named-range}.
  *
  */
-public abstract class TableNamedRangeElement extends OdfElement
+public class TableNamedRangeElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "named-range" );
 

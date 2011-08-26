@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableParagraphStyleNameAttribut
  * DOM implementation of OpenDocument element  {@odf.element table:odd-columns}.
  *
  */
-public abstract class TableOddColumnsElement extends OdfStylableElement
+public class TableOddColumnsElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "odd-columns" );
 

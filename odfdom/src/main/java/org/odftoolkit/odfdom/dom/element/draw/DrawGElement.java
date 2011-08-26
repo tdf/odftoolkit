@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:g}.
  *
  */
-public abstract class DrawGElement extends DrawShapeElementBase
+public class DrawGElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "g" );
 

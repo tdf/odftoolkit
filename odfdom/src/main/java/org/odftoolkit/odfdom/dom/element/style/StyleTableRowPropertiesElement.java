@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
  * DOM implementation of OpenDocument element  {@odf.element style:table-row-properties}.
  *
  */
-public abstract class StyleTableRowPropertiesElement extends OdfStylePropertiesBase
+public class StyleTableRowPropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "table-row-properties" );
 

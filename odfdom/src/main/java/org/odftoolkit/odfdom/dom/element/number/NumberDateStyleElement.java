@@ -53,7 +53,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
  * DOM implementation of OpenDocument element  {@odf.element number:date-style}.
  *
  */
-public abstract class NumberDateStyleElement extends OdfElement
+public class NumberDateStyleElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "date-style" );
 

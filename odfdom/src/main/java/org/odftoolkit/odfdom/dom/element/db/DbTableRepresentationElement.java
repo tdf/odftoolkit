@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbDefaultRowStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:table-representation}.
  *
  */
-public abstract class DbTableRepresentationElement extends OdfElement
+public class DbTableRepresentationElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "table-representation" );
 

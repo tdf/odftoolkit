@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:changed-region}.
  *
  */
-public abstract class TextChangedRegionElement extends OdfElement
+public class TextChangedRegionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "changed-region" );
 

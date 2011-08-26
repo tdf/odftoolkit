@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:applet}.
  *
  */
-public abstract class DrawAppletElement extends OdfElement
+public class DrawAppletElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "applet" );
 

@@ -52,7 +52,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableDdeLinksElement;
  * DOM implementation of OpenDocument element  {@odf.element office:chart}.
  *
  */
-public abstract class OfficeChartElement extends OdfElement
+public class OfficeChartElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "chart" );
 

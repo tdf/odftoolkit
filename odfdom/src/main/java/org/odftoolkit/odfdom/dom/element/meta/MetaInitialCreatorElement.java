@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element meta:initial-creator}.
  *
  */
-public abstract class MetaInitialCreatorElement extends OdfElement
+public class MetaInitialCreatorElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "initial-creator" );
 

@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawColorAttribute;
  * DOM implementation of OpenDocument element  {@odf.element presentation:dim}.
  *
  */
-public abstract class PresentationDimElement extends OdfElement
+public class PresentationDimElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "dim" );
 

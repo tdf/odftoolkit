@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoSpaceAfterAttribute;
  * DOM implementation of OpenDocument element  {@odf.element style:column}.
  *
  */
-public abstract class StyleColumnElement extends OdfElement
+public class StyleColumnElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "column" );
 

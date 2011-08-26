@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableRefreshDelayAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:table-source}.
  *
  */
-public abstract class TableTableSourceElement extends OdfElement
+public class TableTableSourceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-source" );
 

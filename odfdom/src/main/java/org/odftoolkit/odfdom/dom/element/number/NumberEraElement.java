@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberCalendarAttribute;
  * DOM implementation of OpenDocument element  {@odf.element number:era}.
  *
  */
-public abstract class NumberEraElement extends OdfElement
+public class NumberEraElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "era" );
 

@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
  * DOM implementation of OpenDocument element  {@odf.element form:list-property}.
  *
  */
-public abstract class FormListPropertyElement extends OdfElement
+public class FormListPropertyElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "list-property" );
 

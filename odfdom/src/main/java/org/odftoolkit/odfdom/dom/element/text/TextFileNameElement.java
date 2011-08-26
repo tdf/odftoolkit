@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextFixedAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:file-name}.
  *
  */
-public abstract class TextFileNameElement extends OdfElement
+public class TextFileNameElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "file-name" );
 

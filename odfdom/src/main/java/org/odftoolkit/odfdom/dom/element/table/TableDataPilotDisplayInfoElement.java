@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayMemberModeAttribute
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-display-info}.
  *
  */
-public abstract class TableDataPilotDisplayInfoElement extends OdfElement
+public class TableDataPilotDisplayInfoElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-display-info" );
 

@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoColumnGapAttribute;
  * DOM implementation of OpenDocument element  {@odf.element style:columns}.
  *
  */
-public abstract class StyleColumnsElement extends OdfElement
+public class StyleColumnsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "columns" );
 

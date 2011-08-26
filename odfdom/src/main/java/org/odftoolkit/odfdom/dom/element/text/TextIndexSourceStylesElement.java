@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:index-source-styles}.
  *
  */
-public abstract class TextIndexSourceStylesElement extends OdfElement
+public class TextIndexSourceStylesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "index-source-styles" );
 

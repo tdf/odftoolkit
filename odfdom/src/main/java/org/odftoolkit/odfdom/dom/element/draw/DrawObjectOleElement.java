@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:object-ole}.
  *
  */
-public abstract class DrawObjectOleElement extends OdfElement
+public class DrawObjectOleElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "object-ole" );
 

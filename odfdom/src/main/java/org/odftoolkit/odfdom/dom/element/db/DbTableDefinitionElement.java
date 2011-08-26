@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbTypeAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:table-definition}.
  *
  */
-public abstract class DbTableDefinitionElement extends OdfElement
+public class DbTableDefinitionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "table-definition" );
 

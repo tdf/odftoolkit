@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.element.form.FormConnectionResourceElement;
  * DOM implementation of OpenDocument element  {@odf.element text:database-row-number}.
  *
  */
-public abstract class TextDatabaseRowNumberElement extends OdfElement
+public class TextDatabaseRowNumberElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "database-row-number" );
 

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.form.FormValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element form:option}.
  *
  */
-public abstract class FormOptionElement extends OdfElement
+public class FormOptionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "option" );
 

@@ -50,7 +50,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:measure}.
  *
  */
-public abstract class DrawMeasureElement extends DrawShapeElementBase
+public class DrawMeasureElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "measure" );
 

@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextStringValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:page-continuation}.
  *
  */
-public abstract class TextPageContinuationElement extends OdfElement
+public class TextPageContinuationElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "page-continuation" );
 

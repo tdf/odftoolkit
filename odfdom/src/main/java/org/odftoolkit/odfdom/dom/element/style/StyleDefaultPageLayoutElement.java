@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element style:default-page-layout}.
  *
  */
-public abstract class StyleDefaultPageLayoutElement extends OdfElement
+public class StyleDefaultPageLayoutElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "default-page-layout" );
 

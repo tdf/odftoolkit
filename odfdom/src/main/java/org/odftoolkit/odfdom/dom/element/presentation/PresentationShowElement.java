@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationPagesAttribu
  * DOM implementation of OpenDocument element  {@odf.element presentation:show}.
  *
  */
-public abstract class PresentationShowElement extends OdfElement
+public class PresentationShowElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "show" );
 

@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:a}.
  *
  */
-public abstract class DrawAElement extends OdfElement
+public class DrawAElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "a" );
 

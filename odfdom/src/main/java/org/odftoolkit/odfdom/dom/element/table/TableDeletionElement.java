@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeChangeInfoElement;
  * DOM implementation of OpenDocument element  {@odf.element table:deletion}.
  *
  */
-public abstract class TableDeletionElement extends OdfElement
+public class TableDeletionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "deletion" );
 

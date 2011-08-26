@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element table:dde-links}.
  *
  */
-public abstract class TableDdeLinksElement extends OdfElement
+public class TableDdeLinksElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "dde-links" );
 

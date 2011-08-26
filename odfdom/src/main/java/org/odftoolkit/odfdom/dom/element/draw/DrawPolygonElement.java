@@ -52,7 +52,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:polygon}.
  *
  */
-public abstract class DrawPolygonElement extends DrawShapeElementBase
+public class DrawPolygonElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "polygon" );
 

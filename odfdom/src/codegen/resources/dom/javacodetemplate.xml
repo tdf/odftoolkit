@@ -1318,7 +1318,7 @@ package %{prefix(classname)};
  * DOM implementation of OpenDocument element  {@odf.element %{elementqname}}.
  *
  */
-public abstract class %{local_name(classname)} extends %{local_name(baseclassname)}
+public class %{local_name(classname)} extends %{local_name(baseclassname)}
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.%{toupper(prefix(elementqname))}, "%{local_name(elementqname)}" );
 </code>
@@ -1615,6 +1615,9 @@ public enum %{local_name(classname)} {
 <else>
 	<set elementclass="org.odftoolkit.odfdom.doc.%{prefix(elementqname)}.Odf%{identifier(prefix(elementqname))}%{identifier(elementname)}"/>
 </else>
+</if>
+<if test="prefix(elementqname) = 'meta' or elementqname='office:meta'">
+	<set elementclass="org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)}.%{identifier(prefix(elementqname))}%{identifier(local_name(elementqname))}Element"/>
 </if>
 <!-- we must use the full qualified class name here as we have equal element names in different namespaces! -->
 <code>

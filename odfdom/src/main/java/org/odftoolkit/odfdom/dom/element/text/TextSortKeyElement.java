@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextSortAscendingAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:sort-key}.
  *
  */
-public abstract class TextSortKeyElement extends OdfElement
+public class TextSortKeyElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "sort-key" );
 

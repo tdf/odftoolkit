@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:marker}.
  *
  */
-public abstract class DrawMarkerElement extends OdfElement
+public class DrawMarkerElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "marker" );
 

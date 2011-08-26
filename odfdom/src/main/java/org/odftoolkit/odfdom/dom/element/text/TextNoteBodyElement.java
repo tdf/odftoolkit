@@ -57,7 +57,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  * DOM implementation of OpenDocument element  {@odf.element text:note-body}.
  *
  */
-public abstract class TextNoteBodyElement extends OdfElement
+public class TextNoteBodyElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "note-body" );
 

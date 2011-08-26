@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.element.db.DbSchemaDefinitionElement;
  * DOM implementation of OpenDocument element  {@odf.element office:database}.
  *
  */
-public abstract class OfficeDatabaseElement extends OdfElement
+public class OfficeDatabaseElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "database" );
 

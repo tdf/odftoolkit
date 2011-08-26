@@ -124,7 +124,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
  * DOM implementation of OpenDocument element  {@odf.element style:text-properties}.
  *
  */
-public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
+public class StyleTextPropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "text-properties" );
 

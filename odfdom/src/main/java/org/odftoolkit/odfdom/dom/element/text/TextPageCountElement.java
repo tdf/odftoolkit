@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNumLetterSyncAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:page-count}.
  *
  */
-public abstract class TextPageCountElement extends OdfElement
+public class TextPageCountElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "page-count" );
 

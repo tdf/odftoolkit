@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleBaseCellAddressAttribute;
  * DOM implementation of OpenDocument element  {@odf.element style:map}.
  *
  */
-public abstract class StyleMapElement extends OdfElement
+public class StyleMapElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "map" );
 

@@ -53,7 +53,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:caption}.
  *
  */
-public abstract class DrawCaptionElement extends DrawShapeElementBase
+public class DrawCaptionElement extends DrawShapeElementBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "caption" );
 

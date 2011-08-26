@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:outline-style}.
  *
  */
-public abstract class TextOutlineStyleElement extends OdfElement
+public class TextOutlineStyleElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "outline-style" );
 

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element chart:axis}.
  *
  */
-public abstract class ChartAxisElement extends OdfStylableElement
+public class ChartAxisElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "axis" );
 

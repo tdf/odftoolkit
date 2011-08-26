@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
  * DOM implementation of OpenDocument element  {@odf.element number:number-style}.
  *
  */
-public abstract class NumberNumberStyleElement extends OdfElement
+public class NumberNumberStyleElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "number-style" );
 

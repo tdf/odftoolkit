@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDurationAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:editing-duration}.
  *
  */
-public abstract class TextEditingDurationElement extends OdfElement
+public class TextEditingDurationElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "editing-duration" );
 

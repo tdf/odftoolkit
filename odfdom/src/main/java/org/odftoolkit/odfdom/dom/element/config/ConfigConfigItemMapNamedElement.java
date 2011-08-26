@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.config.ConfigNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element config:config-item-map-named}.
  *
  */
-public abstract class ConfigConfigItemMapNamedElement extends OdfElement
+public class ConfigConfigItemMapNamedElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CONFIG, "config-item-map-named" );
 

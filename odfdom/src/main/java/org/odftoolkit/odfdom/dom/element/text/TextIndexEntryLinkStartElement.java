@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:index-entry-link-start}.
  *
  */
-public abstract class TextIndexEntryLinkStartElement extends OdfStylableElement
+public class TextIndexEntryLinkStartElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "index-entry-link-start" );
 

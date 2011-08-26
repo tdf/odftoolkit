@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dTransformAttribute;
  * DOM implementation of OpenDocument element  {@odf.element dr3d:rotate}.
  *
  */
-public abstract class Dr3dRotateElement extends OdfStyleableShapeElement
+public class Dr3dRotateElement extends OdfStyleableShapeElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DR3D, "rotate" );
 

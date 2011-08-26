@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element chart:stock-gain-marker}.
  *
  */
-public abstract class ChartStockGainMarkerElement extends OdfStylableElement
+public class ChartStockGainMarkerElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "stock-gain-marker" );
 

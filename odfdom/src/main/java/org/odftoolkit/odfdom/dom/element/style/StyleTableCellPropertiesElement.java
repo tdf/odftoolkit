@@ -75,7 +75,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
  * DOM implementation of OpenDocument element  {@odf.element style:table-cell-properties}.
  *
  */
-public abstract class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
+public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "table-cell-properties" );
 

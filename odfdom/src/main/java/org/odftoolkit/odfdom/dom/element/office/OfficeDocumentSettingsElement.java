@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.config.ConfigConfigItemSetElement;
  * DOM implementation of OpenDocument element  {@odf.element office:document-settings}.
  *
  */
-public abstract class OfficeDocumentSettingsElement extends OdfElement
+public class OfficeDocumentSettingsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "document-settings" );
 

@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TablePageBreaksOnGroupChangeAtt
  * DOM implementation of OpenDocument element  {@odf.element table:subtotal-rules}.
  *
  */
-public abstract class TableSubtotalRulesElement extends OdfElement
+public class TableSubtotalRulesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "subtotal-rules" );
 

@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dTransformAttribute;
  * DOM implementation of OpenDocument element  {@odf.element dr3d:cube}.
  *
  */
-public abstract class Dr3dCubeElement extends OdfStyleableShapeElement
+public class Dr3dCubeElement extends OdfStyleableShapeElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DR3D, "cube" );
 

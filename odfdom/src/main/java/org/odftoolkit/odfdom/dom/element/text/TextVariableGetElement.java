@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:variable-get}.
  *
  */
-public abstract class TextVariableGetElement extends OdfElement
+public class TextVariableGetElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "variable-get" );
 

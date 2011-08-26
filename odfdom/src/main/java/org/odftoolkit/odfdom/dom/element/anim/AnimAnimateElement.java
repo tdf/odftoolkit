@@ -63,7 +63,7 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilAdditiveAttribute;
  * DOM implementation of OpenDocument element  {@odf.element anim:animate}.
  *
  */
-public abstract class AnimAnimateElement extends OdfElement
+public class AnimAnimateElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "animate" );
 

@@ -216,7 +216,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
  * DOM implementation of OpenDocument element  {@odf.element style:graphic-properties}.
  *
  */
-public abstract class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
+public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "graphic-properties" );
 

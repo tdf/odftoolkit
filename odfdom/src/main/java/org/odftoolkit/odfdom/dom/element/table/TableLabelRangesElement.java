@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element table:label-ranges}.
  *
  */
-public abstract class TableLabelRangesElement extends OdfElement
+public class TableLabelRangesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "label-ranges" );
 

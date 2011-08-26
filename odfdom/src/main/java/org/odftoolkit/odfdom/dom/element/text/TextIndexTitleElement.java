@@ -64,7 +64,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  * DOM implementation of OpenDocument element  {@odf.element text:index-title}.
  *
  */
-public abstract class TextIndexTitleElement extends OdfStylableElement
+public class TextIndexTitleElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "index-title" );
 

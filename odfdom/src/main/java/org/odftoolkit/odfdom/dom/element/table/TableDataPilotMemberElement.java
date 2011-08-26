@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableShowDetailsAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-member}.
  *
  */
-public abstract class TableDataPilotMemberElement extends OdfElement
+public class TableDataPilotMemberElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-member" );
 

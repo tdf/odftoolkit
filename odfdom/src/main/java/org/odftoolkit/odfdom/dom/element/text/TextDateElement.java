@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDateAdjustAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:date}.
  *
  */
-public abstract class TextDateElement extends OdfElement
+public class TextDateElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "date" );
 

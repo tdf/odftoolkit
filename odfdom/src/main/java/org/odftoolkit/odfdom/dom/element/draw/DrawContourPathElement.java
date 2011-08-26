@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
  * DOM implementation of OpenDocument element  {@odf.element draw:contour-path}.
  *
  */
-public abstract class DrawContourPathElement extends OdfElement
+public class DrawContourPathElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "contour-path" );
 

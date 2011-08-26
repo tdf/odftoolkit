@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element office:binary-data}.
  *
  */
-public abstract class OfficeBinaryDataElement extends OdfElement
+public class OfficeBinaryDataElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "binary-data" );
 

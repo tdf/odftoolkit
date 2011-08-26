@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  * DOM implementation of OpenDocument element  {@odf.element table:help-message}.
  *
  */
-public abstract class TableHelpMessageElement extends OdfElement
+public class TableHelpMessageElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "help-message" );
 

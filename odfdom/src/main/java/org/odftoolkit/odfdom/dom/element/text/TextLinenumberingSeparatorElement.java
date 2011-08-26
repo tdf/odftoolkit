@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextIncrementAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:linenumbering-separator}.
  *
  */
-public abstract class TextLinenumberingSeparatorElement extends OdfElement
+public class TextLinenumberingSeparatorElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "linenumbering-separator" );
 

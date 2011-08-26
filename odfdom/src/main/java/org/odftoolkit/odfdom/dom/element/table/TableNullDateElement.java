@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDateValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:null-date}.
  *
  */
-public abstract class TableNullDateElement extends OdfElement
+public class TableNullDateElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "null-date" );
 

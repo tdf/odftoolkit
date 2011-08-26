@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextCaptionSequenceFormatAttribu
  * DOM implementation of OpenDocument element  {@odf.element text:table-index-source}.
  *
  */
-public abstract class TextTableIndexSourceElement extends OdfElement
+public class TextTableIndexSourceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "table-index-source" );
 

@@ -70,7 +70,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
  * DOM implementation of OpenDocument element  {@odf.element office:document-styles}.
  *
  */
-public abstract class OfficeDocumentStylesElement extends OdfElement
+public class OfficeDocumentStylesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "document-styles" );
 

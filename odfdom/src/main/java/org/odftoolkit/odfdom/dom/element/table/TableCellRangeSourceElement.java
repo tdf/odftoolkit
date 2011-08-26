@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableRefreshDelayAttribute;
  * DOM implementation of OpenDocument element  {@odf.element table:cell-range-source}.
  *
  */
-public abstract class TableCellRangeSourceElement extends OdfElement
+public class TableCellRangeSourceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "cell-range-source" );
 

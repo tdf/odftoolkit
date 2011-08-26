@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDateValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:print-date}.
  *
  */
-public abstract class TextPrintDateElement extends OdfElement
+public class TextPrintDateElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "print-date" );
 

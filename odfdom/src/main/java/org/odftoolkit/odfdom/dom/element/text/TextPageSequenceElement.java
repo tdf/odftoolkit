@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element text:page-sequence}.
  *
  */
-public abstract class TextPageSequenceElement extends OdfElement
+public class TextPageSequenceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "page-sequence" );
 

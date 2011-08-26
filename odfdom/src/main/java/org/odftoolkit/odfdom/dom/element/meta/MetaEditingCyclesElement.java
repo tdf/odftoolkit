@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element meta:editing-cycles}.
  *
  */
-public abstract class MetaEditingCyclesElement extends OdfElement
+public class MetaEditingCyclesElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "editing-cycles" );
 

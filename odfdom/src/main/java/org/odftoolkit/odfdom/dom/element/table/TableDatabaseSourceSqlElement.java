@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableParseSqlStatementAttribute
  * DOM implementation of OpenDocument element  {@odf.element table:database-source-sql}.
  *
  */
-public abstract class TableDatabaseSourceSqlElement extends OdfElement
+public class TableDatabaseSourceSqlElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "database-source-sql" );
 

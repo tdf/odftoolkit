@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextFixedAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:sender-state-or-province}.
  *
  */
-public abstract class TextSenderStateOrProvinceElement extends OdfElement
+public class TextSenderStateOrProvinceElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "sender-state-or-province" );
 

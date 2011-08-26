@@ -65,7 +65,7 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilKeySplinesAttribute;
  * DOM implementation of OpenDocument element  {@odf.element anim:animateMotion}.
  *
  */
-public abstract class AnimAnimateMotionElement extends OdfElement
+public class AnimAnimateMotionElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "animateMotion" );
 

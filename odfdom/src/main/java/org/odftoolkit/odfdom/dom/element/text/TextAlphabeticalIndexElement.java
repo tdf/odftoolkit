@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:alphabetical-index}.
  *
  */
-public abstract class TextAlphabeticalIndexElement extends OdfStylableElement
+public class TextAlphabeticalIndexElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "alphabetical-index" );
 

@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.dom.element.math.MathMathElement;
  * DOM implementation of OpenDocument element  {@odf.element db:component}.
  *
  */
-public abstract class DbComponentElement extends OdfElement
+public class DbComponentElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "component" );
 

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberRfcLanguageTagAttribute;
  * DOM implementation of OpenDocument element  {@odf.element number:currency-symbol}.
  *
  */
-public abstract class NumberCurrencySymbolElement extends OdfElement
+public class NumberCurrencySymbolElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "currency-symbol" );
 

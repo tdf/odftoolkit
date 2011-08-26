@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
  * DOM implementation of OpenDocument element  {@odf.element chart:grid}.
  *
  */
-public abstract class ChartGridElement extends OdfStylableElement
+public class ChartGridElement extends OdfStylableElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "grid" );
 

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbIsClusteredAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:index}.
  *
  */
-public abstract class DbIndexElement extends OdfElement
+public class DbIndexElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "index" );
 

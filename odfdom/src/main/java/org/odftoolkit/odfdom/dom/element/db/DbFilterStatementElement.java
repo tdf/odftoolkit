@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbApplyCommandAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:filter-statement}.
  *
  */
-public abstract class DbFilterStatementElement extends OdfElement
+public class DbFilterStatementElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "filter-statement" );
 

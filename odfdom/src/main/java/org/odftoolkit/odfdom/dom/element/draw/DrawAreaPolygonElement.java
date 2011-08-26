@@ -53,7 +53,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  * DOM implementation of OpenDocument element  {@odf.element draw:area-polygon}.
  *
  */
-public abstract class DrawAreaPolygonElement extends OdfElement
+public class DrawAreaPolygonElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "area-polygon" );
 

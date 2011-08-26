@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDateValueAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:creation-date}.
  *
  */
-public abstract class TextCreationDateElement extends OdfElement
+public class TextCreationDateElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "creation-date" );
 

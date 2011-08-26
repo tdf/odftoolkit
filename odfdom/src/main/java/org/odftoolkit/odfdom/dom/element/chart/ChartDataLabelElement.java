@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  * DOM implementation of OpenDocument element  {@odf.element chart:data-label}.
  *
  */
-public abstract class ChartDataLabelElement extends OdfElement
+public class ChartDataLabelElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "data-label" );
 

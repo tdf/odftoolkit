@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbExtensionAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:file-based-database}.
  *
  */
-public abstract class DbFileBasedDatabaseElement extends OdfElement
+public class DbFileBasedDatabaseElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "file-based-database" );
 

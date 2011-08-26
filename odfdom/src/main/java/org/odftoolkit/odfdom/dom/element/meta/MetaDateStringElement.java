@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfElement;
  * DOM implementation of OpenDocument element  {@odf.element meta:date-string}.
  *
  */
-public abstract class MetaDateStringElement extends OdfElement
+public class MetaDateStringElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "date-string" );
 

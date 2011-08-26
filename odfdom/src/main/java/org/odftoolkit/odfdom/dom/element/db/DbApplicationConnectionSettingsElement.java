@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbSuppressVersionColumnsAttribute;
  * DOM implementation of OpenDocument element  {@odf.element db:application-connection-settings}.
  *
  */
-public abstract class DbApplicationConnectionSettingsElement extends OdfElement
+public class DbApplicationConnectionSettingsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "application-connection-settings" );
 

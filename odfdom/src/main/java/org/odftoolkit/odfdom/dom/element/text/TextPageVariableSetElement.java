@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextPageAdjustAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:page-variable-set}.
  *
  */
-public abstract class TextPageVariableSetElement extends OdfElement
+public class TextPageVariableSetElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "page-variable-set" );
 
