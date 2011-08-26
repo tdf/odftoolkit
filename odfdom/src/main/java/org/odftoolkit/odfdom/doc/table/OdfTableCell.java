@@ -1021,7 +1021,7 @@ public class OdfTableCell {
 	 * 
 	 * @return the column spanned number
 	 */
-	public int getColumnSpannedNumber() {
+	int getColumnSpannedNumber() {
 		if (mCellElement instanceof TableCoveredTableCellElement) {
 			return 1;
 		}
@@ -1037,7 +1037,7 @@ public class OdfTableCell {
 	 * 
 	 * @return the column repeated number
 	 */
-	public int getColumnsRepeatedNumber() {
+	int getColumnsRepeatedNumber() {
 		Integer value = mCellElement.getTableNumberColumnsRepeatedAttribute();
 		if (value != null) {
 			return value.intValue();
@@ -1050,7 +1050,7 @@ public class OdfTableCell {
 	 * 
 	 * @return the row spanned number
 	 */
-	public int getRowSpannedNumber() {
+	int getRowSpannedNumber() {
 		if (mCellElement instanceof TableCoveredTableCellElement) {
 			return 1;
 		}
@@ -1069,7 +1069,7 @@ public class OdfTableCell {
 	 *            default column spanned number 1 will be
 	 *            set.
 	 */
-	public void setColumnSpannedNumber(int spannedNum) {
+	void setColumnSpannedNumber(int spannedNum) {
 		if (spannedNum < 1) {
 			spannedNum = DEFAULT_COLUMN_SPANNED_NUMBER;
 		}
@@ -1088,7 +1088,7 @@ public class OdfTableCell {
 	 *            the column repeated number that need to be set. If repeatedNum
 	 *            is less than 1, default columns repeated number 1 will be set.
 	 */
-	public void setColumnsRepeatedNumber(int repeatedNum) {
+	void setColumnsRepeatedNumber(int repeatedNum) {
 		if (repeatedNum < 1) {
 			repeatedNum = DEFAULT_COLUMNS_REPEATED_NUMBER;
 		}
@@ -1103,7 +1103,7 @@ public class OdfTableCell {
 	 *            less than 1, default row spanned number 1 will be
 	 *            set.
 	 */
-	public void setRowSpannedNumber(int spannedNum) {
+	void setRowSpannedNumber(int spannedNum) {
 		if (spannedNum < 1) {
 			spannedNum = DEFAULT_ROW_SPANNED_NUMBER;
 		}

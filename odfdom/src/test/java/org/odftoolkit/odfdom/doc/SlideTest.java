@@ -207,12 +207,12 @@ public class SlideTest {
 			OdfSlide slide3 = doc.getSlideByIndex(3);
 			//this slide contains an embed document, remove this slide will also remove the embed document
 			int nEmbedDoc = doc.getEmbeddedDocuments().size();
-			doc.deleteSlideByIndex(2);
+			Assert.assertTrue(doc.deleteSlideByIndex(2));
 			//slide3 is no longer exist
 			Assert.assertTrue(-1 == slide2.getSlideIndex());
 			Assert.assertTrue(2 == slide3.getSlideIndex());
 			Assert.assertTrue(doc.getEmbeddedDocuments().size() == (nEmbedDoc - 1));
-			doc.deleteSlideByName("page5");
+			Assert.assertTrue(doc.deleteSlideByName("page5"));
 			int count = doc.getSlideCount();
 			Assert.assertTrue(8 == count);
 			//slide at index 9 contains two images and one embed document, the embed document aslo have the object replacement image
@@ -223,7 +223,7 @@ public class SlideTest {
 			int nImageCnt = OdfDrawImage.getImageCount(doc);
 			InputStream imageStream1 = doc.getPackage().getInputStream(IMAGE_NAME_1);
 			Assert.assertNotNull(imageStream1);
-			doc.deleteSlideByIndex(doc.getSlideCount() - 2);
+			Assert.assertTrue(doc.deleteSlideByIndex(doc.getSlideCount() - 2));
 			Assert.assertTrue(OdfDrawImage.getImageCount(doc) == (nImageCnt - 3));
 			imageStream1 = doc.getPackage().getInputStream(IMAGE_NAME_1);
 			Assert.assertNull(imageStream1);
@@ -235,7 +235,7 @@ public class SlideTest {
 			//so the image of this slide will not be removed
 			doc2 = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
 			nImageCnt = OdfDrawImage.getImageCount(doc2);
-			doc2.deleteSlideByIndex(2);
+			Assert.assertTrue(doc2.deleteSlideByIndex(2));
 			Assert.assertTrue(OdfDrawImage.getImageCount(doc2) == (nImageCnt - 1));
 			imageStream1 = doc2.getPackage().getInputStream(IMAGE_NAME_1);
 			Assert.assertNotNull(imageStream1);
@@ -245,7 +245,7 @@ public class SlideTest {
 		}
 
 		try {
-			doc.deleteSlideByIndex(20);
+			Assert.assertTrue(doc.deleteSlideByIndex(20));
 			Assert.assertTrue(false);
 		} catch (IndexOutOfBoundsException iobe) {
 			Assert.assertTrue("slide index is out of bounds", true);

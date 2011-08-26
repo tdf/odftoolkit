@@ -364,16 +364,18 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * @param index	the index of the slide that need to be delete
 	 * <p>
 	 * Throw IndexOutOfBoundsException if the slide index is out of the presentation document slide count.
-	 * 
+	 * @return false if the operation was not successful
 	 */
-	public void deleteSlideByIndex(int index) {
+	public boolean deleteSlideByIndex(int index) {
+		boolean success = true;
 		checkAllSlideName();
 		OfficePresentationElement contentRoot = null;
 		try {
 			contentRoot = getContentRoot();
 		} catch (Exception e) {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
-			return;
+			success = false;
+			return success;
 		}
 		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		if ((index >= slideNodes.getLength()) || (index < 0)) {
@@ -382,17 +384,19 @@ public class OdfPresentationDocument extends OdfDocument {
 		DrawPageElement slideElement = (DrawPageElement) slideNodes.item(index);
 		//remove all the content of the current page
 		//1. the reference of the path that contained in this slide is 1, then remove it
-		deleteLinkRef(slideElement);
+		success &= deleteLinkRef(slideElement);
 		//2.the reference of the style is 1, then remove it
 		//in order to save time, do not delete the style here
-		deleteStyleRef(slideElement);
+		success &= deleteStyleRef(slideElement);
 		//remove the current page element
 		contentRoot.removeChild(slideElement);
 		adjustNotePageNumber(index);
+		return success;
 	}
 
-	private void deleteStyleRef(DrawPageElement slideEle) {
-		try {
+	private boolean deleteStyleRef(DrawPageElement slideEle) {
+		boolean success = true;
+		try {			
 			//method 1:
 			//1.1. iterate child element of the content element
 			//1.2. if the child element is an OdfStylableElement, get the style-name ref count
@@ -450,11 +454,14 @@ public class OdfPresentationDocument extends OdfDocument {
 			}
 		} catch (Exception e) {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+			success = false;
 		}
+		return success;
 	}
 
 	//delete all the xlink:href object which is contained in slideElement and does not referred by other slides
-	private void deleteLinkRef(DrawPageElement slideEle) {
+	private boolean deleteLinkRef(DrawPageElement slideEle) {
+		boolean success = true;
 		try {
 			OdfContentDom contentDom = getContentDom();
 			XPath xpath = contentDom.getXPath();
@@ -488,36 +495,43 @@ public class OdfPresentationDocument extends OdfDocument {
 			}
 		} catch (XPathExpressionException e) {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+			success = false;
 		} catch (Exception e) {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+			success = false;
 		}
+		return success;
 	}
 
 	/**
 	 * Delete all the slides with a specified name in this presentation.
 	 *
 	 * @param name	the name of the slide that need to be delete
+	 * @return false if the operation was not successful
 	 */
-	public void deleteSlideByName(String name) {
+	public boolean deleteSlideByName(String name) {
+		boolean success = true;
 		checkAllSlideName();
 		OfficePresentationElement contentRoot = null;
 		try {
 			contentRoot = getContentRoot();
 		} catch (Exception e) {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
-			return;
+			success = false;
+			return success;
 		}
 		OdfSlide slide = getSlideByName(name);
 		DrawPageElement slideElement = slide.getOdfElement();
 		//remove all the content of the current page
 		//1. the reference of the path that contained in this slide is 1, then remove its
-		deleteLinkRef(slideElement);
+		success &= deleteLinkRef(slideElement);
 		//2.the reference of the style is 1, then remove it
 		//in order to save time, do not delete style here
-		deleteStyleRef(slideElement);
+		success &= deleteStyleRef(slideElement);
 		//remove the current page element
 		contentRoot.removeChild(slideElement);
 		adjustNotePageNumber(0);
+		return success;
 	}
 
 	/**
