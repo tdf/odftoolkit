@@ -679,7 +679,7 @@
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:apply-templates select="ancestor::rng:grammar/rng:element[((starts-with(@name,'style:') and contains(@name,'-properties'))=$fp) and (not($element-list) or contains($element-list,concat('_',$element-prefix,@name,'_')))]/rng:attribute[@name=$attr-name]/*" mode="attr-value">
+                <xsl:apply-templates select="ancestor::rng:grammar/rng:element[((starts-with(@name,'style:') and contains(@name,'-properties'))=$fp) and starts-with($element-list,concat('_',$element-prefix,@name,'_'))]/rng:attribute[@name=$attr-name]/*" mode="attr-value">
                     <xsl:with-param name="attr-name" select="$attr-name"/>
                 </xsl:apply-templates>
             </xsl:otherwise>
