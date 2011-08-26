@@ -18,7 +18,7 @@
  * limitations under the License.
  *
  */
-package org.openoffice.odf.codegen_maven_plugin;
+package org.odftoolkit.odfdom.codegen_maven_plugin;
 
 import java.io.File;
 
@@ -26,7 +26,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
-import org.openoffice.odf.codegen.CodeGen;
+import org.odftoolkit.odfdom.codegen.CodeGen;
 
 /**
  * Generate Java code for ODFDOM.
