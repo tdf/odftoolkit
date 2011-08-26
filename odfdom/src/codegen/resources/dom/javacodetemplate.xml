@@ -308,7 +308,7 @@
 	 */
 	public %{attributetype} get%{attributeclassname}Attribute()
 	{
-		%{attributeclassname}Attribute attr = (%{attributeclassname}Attribute) getOdfAttribute( OdfName.newName( %{namespace}, "%{local_name(attributeqname)}" ) );
+		%{attributeclassname}Attribute attr = (%{attributeclassname}Attribute) getOdfAttribute( %{namespace}, "%{local_name(attributeqname)}" ) ;
 		if( attr != null ){</code>
 	<if test="methodtype!=''">
 		<code>

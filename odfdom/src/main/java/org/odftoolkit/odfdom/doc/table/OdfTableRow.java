@@ -26,16 +26,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfElementFactory;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
@@ -65,7 +63,7 @@ public class OdfTableRow {
 	//boolean mbVisible;
 	TableTableRowElement maRowElement;
 	int mnRepeatedIndex;
-	private XPath xpath;
+	int mRowsRepeatedNumber = -1;
 	private static final String DEFAULT_HEIGHT = "0.30in";
 	static private Logger mLog = Logger.getLogger(OdfTableRow.class.getName());
 
@@ -77,9 +75,6 @@ public class OdfTableRow {
 	OdfTableRow(TableTableRowElement rowElement, int repeatedIndex) {
 		maRowElement = rowElement;
 		mnRepeatedIndex = repeatedIndex;
-
-		xpath = XPathFactory.newInstance().newXPath();
-		xpath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
 	}
 
 	/**
@@ -205,6 +200,7 @@ public class OdfTableRow {
 				table.updateRowRepository(maRowElement, mnRepeatedIndex, ownerRowElement, 0);
 			}
 			tableEle.removeChild(oldRowElement);
+			mRowsRepeatedNumber = -1;
 		}
 	}
 
@@ -334,6 +330,8 @@ public class OdfTableRow {
 		//or the row has repeated row num = 1
 		Node aPrevNode = maRowElement.getPreviousSibling();
 		Node aCurNode = maRowElement;
+		TableTableRowElement lastRow;
+		OdfDocument ownerDoc = ((OdfFileDom) maRowElement.getOwnerDocument()).getOdfDocument();
 		while (true) {
 			if (aPrevNode == null) {
 				//does not have previous sibling, then get the parent
@@ -355,7 +353,9 @@ public class OdfTableRow {
 					} else if (aPrevNode instanceof TableTableRowsElement
 							|| aPrevNode instanceof TableTableHeaderRowsElement
 							|| aPrevNode instanceof TableTableRowGroupElement) {
-						TableTableRowElement lastRow = (TableTableRowElement) xpath.evaluate("//table:table-row[last()]", aPrevNode, XPathConstants.NODE);
+						synchronized(ownerDoc) {
+							lastRow = (TableTableRowElement) ownerDoc.getXPath().evaluate(".//table:table-row[last()]", aPrevNode, XPathConstants.NODE);
+						}
 						if (lastRow != null) {
 							return table.getRowInstance(lastRow, lastRow.getTableNumberRowsRepeatedAttribute().intValue() - 1);
 						}
@@ -386,6 +386,8 @@ public class OdfTableRow {
 
 		Node aNextNode = maRowElement.getNextSibling();
 		Node aCurNode = maRowElement;
+		OdfDocument ownerDoc = ((OdfFileDom) maRowElement.getOwnerDocument()).getOdfDocument();
+		TableTableRowElement firstRow;
 		while (true) {
 			if (aNextNode == null) {
 				//does not have next sibling, then get the parent
@@ -406,7 +408,9 @@ public class OdfTableRow {
 					} else if (aNextNode instanceof TableTableRowsElement
 							|| aNextNode instanceof TableTableHeaderRowsElement
 							|| aNextNode instanceof TableTableRowGroupElement) {
-						TableTableRowElement firstRow = (TableTableRowElement) xpath.evaluate("//table:table-row[first()]", aNextNode, XPathConstants.NODE);
+						synchronized(ownerDoc) {
+							firstRow = (TableTableRowElement) ownerDoc.getXPath().evaluate(".//table:table-row[first()]", aNextNode, XPathConstants.NODE);
+						}
 						if (firstRow != null) {
 							return table.getRowInstance(firstRow, 0);
 						}
@@ -596,17 +600,22 @@ public class OdfTableRow {
 	//note: we have to use this method to modify the row repeated number
 	//in order to update mnRepeatedIndex of the each row
 	void setRowsRepeatedNumber(int num) {
+		mRowsRepeatedNumber = num;
 		//update the mnRepeatedIndex for the ever repeated row
 		maRowElement.setTableNumberRowsRepeatedAttribute(Integer.valueOf(num));
 	}
 
 	int getRowsRepeatedNumber() {
-		Integer count = maRowElement.getTableNumberRowsRepeatedAttribute();
-		if (count == null) {
-			return 1;
-		} else {
-			return count.intValue();
+		if (mRowsRepeatedNumber<0)
+		{
+			Integer count = maRowElement.getTableNumberRowsRepeatedAttribute();
+			if (count == null) {
+				mRowsRepeatedNumber = 1;
+			} else {
+				mRowsRepeatedNumber = count.intValue();
+			}
 		}
+		return mRowsRepeatedNumber;
 	}
 
 	/****************************

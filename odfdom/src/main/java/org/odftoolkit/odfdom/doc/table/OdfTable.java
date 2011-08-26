@@ -23,7 +23,7 @@ package org.odftoolkit.odfdom.doc.table;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -80,10 +80,14 @@ public class OdfTable {
 	private static final int DEFAULT_REL_TABLE_WIDTH = 65535;
 	private static final String DEFAULT_TABLE_ALIGN = "margins";
 	// TODO: should save seperately for different dom tree
-	static Hashtable<TableTableElement, OdfTable> mTableRepository = new Hashtable<TableTableElement, OdfTable>();
-	Hashtable<TableTableCellElementBase, Vector<OdfTableCell>> mCellRepository = new Hashtable<TableTableCellElementBase, Vector<OdfTableCell>>();
-	Hashtable<TableTableRowElement, Vector<OdfTableRow>> mRowRepository = new Hashtable<TableTableRowElement, Vector<OdfTableRow>>();
-	Hashtable<TableTableColumnElement, Vector<OdfTableColumn>> mColumnRepository = new Hashtable<TableTableColumnElement, Vector<OdfTableColumn>>();
+	static IdentityHashMap<TableTableElement, OdfTable> mTableRepository =
+			new IdentityHashMap<TableTableElement, OdfTable>();
+	IdentityHashMap<TableTableCellElementBase, Vector<OdfTableCell>> mCellRepository =
+			new IdentityHashMap<TableTableCellElementBase, Vector<OdfTableCell>>();
+	IdentityHashMap<TableTableRowElement, Vector<OdfTableRow>> mRowRepository =
+			new IdentityHashMap<TableTableRowElement, Vector<OdfTableRow>>();
+	IdentityHashMap<TableTableColumnElement, Vector<OdfTableColumn>> mColumnRepository =
+			new IdentityHashMap<TableTableColumnElement, Vector<OdfTableColumn>>();
 
 	private OdfTable(TableTableElement table) {
 		mTableElement = table;
@@ -95,7 +99,7 @@ public class OdfTable {
 	 * @param odfElement	an instance of <code>TableTableElement</code>
 	 * @return an instance of <code>OdfTable</code> that can represent <code>odfElement</code>
 	 */
-	public static OdfTable getInstance(TableTableElement odfElement) {
+	public synchronized static OdfTable getInstance(TableTableElement odfElement) {
 		if (mTableRepository.containsKey(odfElement)) {
 			return mTableRepository.get(odfElement);
 		} else {
@@ -322,8 +326,8 @@ public class OdfTable {
 		if (numRows < 1 || numCols < 1 || headerRowNumber < 0
 				|| headerColumnNumber < 0 || headerRowNumber > numRows
 				|| headerColumnNumber > numCols) {
-			throw new IllegalArgumentException("Can not create table with the given parameters:\n" +
-					"Rows " + numRows + ", Columns " + numCols + ", HeaderRows " + headerRowNumber + ", HeaderColumns " + headerColumnNumber);
+			throw new IllegalArgumentException("Can not create table with the given parameters:\n"
+					+ "Rows " + numRows + ", Columns " + numCols + ", HeaderRows " + headerRowNumber + ", HeaderColumns " + headerColumnNumber);
 		}
 		OdfFileDom dom = document.getContentDom();
 		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
@@ -338,7 +342,7 @@ public class OdfTable {
 		tableStyle.setProperty(OdfStyleTableProperties.Width, DEFAULT_TABLE_WIDTH + "in");
 		tableStyle.setProperty(OdfStyleTableProperties.Align, DEFAULT_TABLE_ALIGN);
 		newTEle.setStyleName(tablename);
-		
+
 		// 2. create column elements
 		// 2.0 create column style
 		String columnStylename = tablename + ".A";
@@ -903,7 +907,7 @@ public class OdfTable {
 			}
 			i += refCell.getColumnsRepeatedNumber();
 		}
-		rowEle.setTableNumberRowsRepeatedAttribute(count);
+		firstRow.setRowsRepeatedNumber(count);
 		while (j < count) {
 			resultList.add(getRowInstance(rowEle, j));
 			j++;
@@ -1439,13 +1443,13 @@ public class OdfTable {
 
 	private int getHeaderRowCount(TableTableHeaderRowsElement headers) {
 		int result = 0;
-		if(headers!=null){
+		if (headers != null) {
 			for (Node n : new DomNodeList(headers.getChildNodes())) {
 				if (n instanceof TableTableRowElement) {
 					result += ((TableTableRowElement) n).getTableNumberRowsRepeatedAttribute();
 				}
 			}
-		}		
+		}
 		return result;
 	}
 

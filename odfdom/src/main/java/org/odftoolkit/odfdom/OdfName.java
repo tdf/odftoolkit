@@ -94,10 +94,9 @@ public class OdfName implements Comparable<OdfName> {
 	 * @return the XML Namespace URI, for <text:p> it would be urn:oasis:names:tc:opendocument:xmlns:text:1.0
 	 */
 	public String getUri() {
-		if(mNS == null) {
+		if (mNS == null) {
 			return null;
-		}
-		else {
+		} else {
 			return mNS.getUri();
 		}
 	}
@@ -114,7 +113,7 @@ public class OdfName implements Comparable<OdfName> {
 	 */
 	public String getQName() {
 		if (mNS != null) {
-			return mNS.getPrefix() + ":" + mLocalName;
+			return ((mNS.getPrefix() + ":" + mLocalName).intern());
 		} else {
 			return mLocalName;
 		}
