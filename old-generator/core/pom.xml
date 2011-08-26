@@ -99,4 +99,23 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <reporting>
+    <plugins>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-javadoc-plugin</artifactId>
+	<configuration>
+	  <doctitle>ODFDOM</doctitle>
+	  <overview>src/resources/overview.html</overview>
+	  <links>
+            <link>http://java.sun.com/javase/6/docs/api/</link>
+            <link>http://xerces.apache.org/xerces-j/apiDocs/</link>
+	  </links>
+	  <splitindex>true</splitindex>
+	  <windowtitle>ODFDOM API v${project.version} - http://odftoolkit</windowtitle>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
