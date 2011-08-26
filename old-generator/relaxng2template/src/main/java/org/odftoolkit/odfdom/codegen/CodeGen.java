@@ -51,6 +51,7 @@ public class CodeGen implements IFunctionSupplier
     private CodeTemplate template;
     private String targetPath;
     private Schema schema;
+	private String head;
 
     public static void main(String[] args)
     {       
@@ -633,6 +634,14 @@ public class CodeGen implements IFunctionSupplier
             i = 1;
             if( params.size() == i )
                 return params.get(0).toLowerCase();
+        }
+        else if( func.equals("lowerfirst") )
+        {
+            i = 1;
+			if( params.size() == i ){
+				String p = params.get(0).substring(0, 1).toLowerCase();
+				return p+ params.get(0).substring(1);
+			}			    
         }
         else if( func.equals("prefix" ) )
         {
