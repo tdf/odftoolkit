@@ -46,23 +46,18 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
 
 /**
- * ODF DOM Element implementation for element "&lt;anim:animateColor>".
+ * ODF DOM Element implementation for element "<anim:animateColor>".
  */
 public abstract class OdfAnimatecolorElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8204739958749757065L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "animateColor" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "animateColor" );
 
     public OdfAnimatecolorElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
