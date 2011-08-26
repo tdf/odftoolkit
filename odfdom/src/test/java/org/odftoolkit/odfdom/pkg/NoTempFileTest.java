@@ -106,6 +106,7 @@ public class NoTempFileTest {
 			TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", docdom, XPathConstants.NODE);
 			para.appendChild(frame);
 			doc.save(TEST_FILE_FOLDER + New_File);
+			doc.close();
 
 			//Test if the image has been inserted
 			doc = OdfDocument.loadDocument(TEST_FILE_FOLDER + New_File);
