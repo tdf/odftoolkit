@@ -36,25 +36,22 @@ import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 
+import org.odftoolkit.odfdom.dom.type.chart.OdfSymbolNameType;
+import org.odftoolkit.odfdom.dom.type.chart.OdfSymbolNameType;
 
 /**
  * ODF DOM Element implementation for element "<style:style>".
  */
 public abstract class OdfStyleElement extends OdfStyleBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3422526560028454787L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "style" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "style" );
 
     public OdfStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -283,8 +280,7 @@ public abstract class OdfStyleElement extends OdfStyleBase
     /**
      * Get value of attribute "style:family".
      */
-    @Override
-	public OdfStyleFamily getFamily()
+    public OdfStyleFamily getFamily()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "family" ) );
         return OdfStyleFamily.valueOf( aStringVal);
@@ -299,4 +295,146 @@ public abstract class OdfStyleElement extends OdfStyleBase
         setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "family" ), aStringVal );
     }
 
+    /**
+    * Create child element "style:text-properties".
+    */
+    public OdfTextPropertiesElement createTextPropertiesElement(String   _aDisplay)
+    {
+        OdfTextPropertiesElement  _nTextProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextPropertiesElement.class);
+        this.appendChild( _nTextProperties);
+        return  _nTextProperties;      
+    }
+    
+    /**
+    * Create child element "style:text-properties".
+    */
+    public OdfTextPropertiesElement createTextPropertiesElement(String   _aDisplay, String   _aCondition)
+    {
+        OdfTextPropertiesElement  _nTextProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextPropertiesElement.class);
+        this.appendChild( _nTextProperties);
+        return  _nTextProperties;      
+    }
+    
+    /**
+    * Create child element "style:paragraph-properties".
+    */
+    public OdfParagraphPropertiesElement createParagraphPropertiesElement()
+    {
+        OdfParagraphPropertiesElement  _nParagraphProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphPropertiesElement.class);
+        this.appendChild( _nParagraphProperties);
+        return  _nParagraphProperties;
+    }                   
+               
+    /**
+    * Create child element "style:section-properties".
+    */
+    public OdfSectionPropertiesElement createSectionPropertiesElement()
+    {
+        OdfSectionPropertiesElement  _nSectionProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSectionPropertiesElement.class);
+        this.appendChild( _nSectionProperties);
+        return  _nSectionProperties;
+    }                   
+               
+    /**
+    * Create child element "style:ruby-properties".
+    */
+    public OdfRubyPropertiesElement createRubyPropertiesElement()
+    {
+        OdfRubyPropertiesElement  _nRubyProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRubyPropertiesElement.class);
+        this.appendChild( _nRubyProperties);
+        return  _nRubyProperties;
+    }                   
+               
+    /**
+    * Create child element "style:table-properties".
+    */
+    public OdfTablePropertiesElement createTablePropertiesElement()
+    {
+        OdfTablePropertiesElement  _nTableProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTablePropertiesElement.class);
+        this.appendChild( _nTableProperties);
+        return  _nTableProperties;
+    }                   
+               
+    /**
+    * Create child element "style:table-column-properties".
+    */
+    public OdfTableColumnPropertiesElement createTableColumnPropertiesElement()
+    {
+        OdfTableColumnPropertiesElement  _nTableColumnProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableColumnPropertiesElement.class);
+        this.appendChild( _nTableColumnProperties);
+        return  _nTableColumnProperties;
+    }                   
+               
+    /**
+    * Create child element "style:table-row-properties".
+    */
+    public OdfTableRowPropertiesElement createTableRowPropertiesElement()
+    {
+        OdfTableRowPropertiesElement  _nTableRowProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableRowPropertiesElement.class);
+        this.appendChild( _nTableRowProperties);
+        return  _nTableRowProperties;
+    }                   
+               
+    /**
+    * Create child element "style:table-cell-properties".
+    */
+    public OdfTableCellPropertiesElement createTableCellPropertiesElement()
+    {
+        OdfTableCellPropertiesElement  _nTableCellProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableCellPropertiesElement.class);
+        this.appendChild( _nTableCellProperties);
+        return  _nTableCellProperties;
+    }                   
+               
+    /**
+    * Create child element "style:graphic-properties".
+    */
+    public OdfGraphicPropertiesElement createGraphicPropertiesElement()
+    {
+        OdfGraphicPropertiesElement  _nGraphicProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfGraphicPropertiesElement.class);
+        this.appendChild( _nGraphicProperties);
+        return  _nGraphicProperties;
+    }                   
+               
+    /**
+    * Create child element "style:drawing-page-properties".
+    */
+    public OdfDrawingPagePropertiesElement createDrawingPagePropertiesElement()
+    {
+        OdfDrawingPagePropertiesElement  _nDrawingPageProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDrawingPagePropertiesElement.class);
+        this.appendChild( _nDrawingPageProperties);
+        return  _nDrawingPageProperties;
+    }                   
+               
+    /**
+    * Create child element "style:chart-properties".
+    */
+    public OdfChartPropertiesElement createChartPropertiesElement(String   _aSymbolType)
+    {
+        OdfChartPropertiesElement  _nChartProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfChartPropertiesElement.class);
+        this.appendChild( _nChartProperties);
+        return  _nChartProperties;      
+    }
+    
+    /**
+    * Create child element "style:chart-properties".
+    */
+    public OdfChartPropertiesElement createChartPropertiesElement(String   _aSymbolType, OdfSymbolNameType   _aSymbolName)
+    {
+        OdfChartPropertiesElement  _nChartProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfChartPropertiesElement.class);
+        this.appendChild( _nChartProperties);
+        return  _nChartProperties;      
+    }
+    
+    /**
+    * Create child element "style:map".
+    */
+    public OdfMapElement createMapElement(String   _aCondition, String   _aApplyStyleName)
+    {
+        OdfMapElement  _nMap = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfMapElement.class);
+        _nMap.setCondition( _aCondition);
+        _nMap.setApplyStyleName( _aApplyStyleName);
+        this.appendChild( _nMap);
+        return  _nMap;      
+    }
+    
 }

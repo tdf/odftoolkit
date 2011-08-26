@@ -32,28 +32,36 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.type.style.OdfTabStopType;
 
 /**
  * ODF DOM Element implementation for element "<style:tab-stops>".
  */
 public abstract class OdfTabStopsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3206552216762740155L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "tab-stops" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "tab-stops" );
 
     public OdfTabStopsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "style:tab-stop".
+    */
+    public OdfTabStopElement createTabStopElement(OdfTabStopType   _aType, String   _aPosition)
+    {
+        OdfTabStopElement  _nTabStop = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTabStopElement.class);
+        _nTabStop.setType( _aType);
+        _nTabStop.setPosition( _aPosition);
+        this.appendChild( _nTabStop);
+        return  _nTabStop;      
+    }
+    
 }

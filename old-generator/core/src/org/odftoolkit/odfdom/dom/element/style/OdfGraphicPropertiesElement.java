@@ -34,25 +34,22 @@ import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
+import org.odftoolkit.odfdom.dom.element.text.OdfListStyleElement;
+import org.odftoolkit.odfdom.dom.element.office.OdfBinaryDataElement;
 
 /**
  * ODF DOM Element implementation for element "<style:graphic-properties>".
  */
 public abstract class OdfGraphicPropertiesElement extends OdfStylePropertiesBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8499985940759078054L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "graphic-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "graphic-properties" );
 
     public OdfGraphicPropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -406,4 +403,47 @@ public abstract class OdfGraphicPropertiesElement extends OdfStylePropertiesBase
     public final static OdfStyleProperty FillRule = 
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.SVG, "fill-rule"));
 
+    /**
+    * Create child element "text:list-style".
+    */
+    public OdfListStyleElement createListStyleElement(String   _aName)
+    {
+        OdfListStyleElement  _nListStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListStyleElement.class);
+        _nListStyle.setName( _aName);
+        this.appendChild( _nListStyle);
+        return  _nListStyle;      
+    }
+    
+    /**
+    * Create child element "office:binary-data".
+    */
+    public OdfBinaryDataElement createBinaryDataElement()
+    {
+        OdfBinaryDataElement  _nBinaryData = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBinaryDataElement.class);
+        this.appendChild( _nBinaryData);
+        return  _nBinaryData;
+    }                   
+               
+    /**
+    * Create child element "style:column-sep".
+    */
+    public OdfColumnSepElement createColumnSepElement(String   _aWidth)
+    {
+        OdfColumnSepElement  _nColumnSep = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfColumnSepElement.class);
+        _nColumnSep.setWidth( _aWidth);
+        this.appendChild( _nColumnSep);
+        return  _nColumnSep;      
+    }
+    
+    /**
+    * Create child element "style:column".
+    */
+    public OdfColumnElement createColumnElement(String   _aRelWidth)
+    {
+        OdfColumnElement  _nColumn = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfColumnElement.class);
+        _nColumn.setRelWidth( _aRelWidth);
+        this.appendChild( _nColumn);
+        return  _nColumn;      
+    }
+    
 }

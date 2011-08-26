@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.style.OdfPageUsageType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<style:page-layout>".
  */
 public abstract class OdfPageLayoutElement extends OdfStyleBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5366797530770869037L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "page-layout" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "page-layout" );
 
     public OdfPageLayoutElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -106,4 +102,34 @@ public abstract class OdfPageLayoutElement extends OdfStyleBase
         setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "page-usage" ), aStringVal );
     }
 
+    /**
+    * Create child element "style:page-layout-properties".
+    */
+    public OdfPageLayoutPropertiesElement createPageLayoutPropertiesElement()
+    {
+        OdfPageLayoutPropertiesElement  _nPageLayoutProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPageLayoutPropertiesElement.class);
+        this.appendChild( _nPageLayoutProperties);
+        return  _nPageLayoutProperties;
+    }                   
+               
+    /**
+    * Create child element "style:header-style".
+    */
+    public OdfHeaderStyleElement createHeaderStyleElement()
+    {
+        OdfHeaderStyleElement  _nHeaderStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHeaderStyleElement.class);
+        this.appendChild( _nHeaderStyle);
+        return  _nHeaderStyle;
+    }                   
+               
+    /**
+    * Create child element "style:footer-style".
+    */
+    public OdfFooterStyleElement createFooterStyleElement()
+    {
+        OdfFooterStyleElement  _nFooterStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFooterStyleElement.class);
+        this.appendChild( _nFooterStyle);
+        return  _nFooterStyle;
+    }                   
+               
 }

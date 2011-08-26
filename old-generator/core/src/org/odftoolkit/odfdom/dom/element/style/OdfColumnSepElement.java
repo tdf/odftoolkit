@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.style.OdfStyleType;
 import org.odftoolkit.odfdom.dom.type.OdfPercent;
 import org.odftoolkit.odfdom.dom.type.style.OdfVerticalAlignType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<style:column-sep>".
  */
 public abstract class OdfColumnSepElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6804706283669001629L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "column-sep" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "column-sep" );
 
     public OdfColumnSepElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -37,25 +37,21 @@ import org.odftoolkit.odfdom.dom.type.style.OdfLeaderStyleType;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<style:tab-stop>".
  */
 public abstract class OdfTabStopElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7667952503265565719L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "tab-stop" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "tab-stop" );
 
     public OdfTabStopElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

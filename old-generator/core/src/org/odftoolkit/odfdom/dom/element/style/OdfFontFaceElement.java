@@ -38,25 +38,22 @@ import org.odftoolkit.odfdom.dom.type.svg.OdfFontStretchType;
 import org.odftoolkit.odfdom.dom.type.style.OdfFontFamilyGenericType;
 import org.odftoolkit.odfdom.dom.type.style.OdfFontPitchType;
 
+import org.odftoolkit.odfdom.dom.element.svg.OdfFontFaceSrcElement;
+import org.odftoolkit.odfdom.dom.element.svg.OdfDefinitionSrcElement;
 
 /**
  * ODF DOM Element implementation for element "<style:font-face>".
  */
 public abstract class OdfFontFaceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7734825797629487029L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "font-face" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "font-face" );
 
     public OdfFontFaceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -735,4 +732,25 @@ public abstract class OdfFontFaceElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "font-charset" ), _aFontCharset );
     }
 
+    /**
+    * Create child element "svg:font-face-src".
+    */
+    public OdfFontFaceSrcElement createFontFaceSrcElement()
+    {
+        OdfFontFaceSrcElement  _nFontFaceSrc = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFontFaceSrcElement.class);
+        this.appendChild( _nFontFaceSrc);
+        return  _nFontFaceSrc;
+    }                   
+               
+    /**
+    * Create child element "svg:definition-src".
+    */
+    public OdfDefinitionSrcElement createDefinitionSrcElement(String   _aHref)
+    {
+        OdfDefinitionSrcElement  _nDefinitionSrc = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDefinitionSrcElement.class);
+        _nDefinitionSrc.setHref( _aHref);
+        this.appendChild( _nDefinitionSrc);
+        return  _nDefinitionSrc;      
+    }
+    
 }

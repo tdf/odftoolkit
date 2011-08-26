@@ -32,28 +32,34 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<style:header-style>".
  */
 public abstract class OdfHeaderStyleElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6095451160050181965L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "header-style" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "header-style" );
 
     public OdfHeaderStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "style:header-footer-properties".
+    */
+    public OdfHeaderFooterPropertiesElement createHeaderFooterPropertiesElement()
+    {
+        OdfHeaderFooterPropertiesElement  _nHeaderFooterProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHeaderFooterPropertiesElement.class);
+        this.appendChild( _nHeaderFooterProperties);
+        return  _nHeaderFooterProperties;
+    }                   
+               
 }

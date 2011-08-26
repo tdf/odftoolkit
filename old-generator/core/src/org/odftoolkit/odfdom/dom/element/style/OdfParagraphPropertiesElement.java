@@ -34,25 +34,22 @@ import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
+import org.odftoolkit.odfdom.dom.type.style.OdfTabStopType;
+import org.odftoolkit.odfdom.dom.element.office.OdfBinaryDataElement;
 
 /**
  * ODF DOM Element implementation for element "<style:paragraph-properties>".
  */
 public abstract class OdfParagraphPropertiesElement extends OdfStylePropertiesBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6754376254029519117L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "paragraph-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "paragraph-properties" );
 
     public OdfParagraphPropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -164,4 +161,26 @@ public abstract class OdfParagraphPropertiesElement extends OdfStylePropertiesBa
     public final static OdfStyleProperty BackgroundTransparency = 
         OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get(OdfNamespace.STYLE, "background-transparency"));
 
+    /**
+    * Create child element "style:tab-stop".
+    */
+    public OdfTabStopElement createTabStopElement(OdfTabStopType   _aType, String   _aPosition)
+    {
+        OdfTabStopElement  _nTabStop = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTabStopElement.class);
+        _nTabStop.setType( _aType);
+        _nTabStop.setPosition( _aPosition);
+        this.appendChild( _nTabStop);
+        return  _nTabStop;      
+    }
+    
+    /**
+    * Create child element "office:binary-data".
+    */
+    public OdfBinaryDataElement createBinaryDataElement()
+    {
+        OdfBinaryDataElement  _nBinaryData = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBinaryDataElement.class);
+        this.appendChild( _nBinaryData);
+        return  _nBinaryData;
+    }                   
+               
 }

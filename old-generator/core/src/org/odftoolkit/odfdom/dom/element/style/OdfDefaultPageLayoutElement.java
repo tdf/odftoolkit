@@ -32,28 +32,54 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<style:default-page-layout>".
  */
 public abstract class OdfDefaultPageLayoutElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1879942412339912346L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "default-page-layout" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "default-page-layout" );
 
     public OdfDefaultPageLayoutElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "style:page-layout-properties".
+    */
+    public OdfPageLayoutPropertiesElement createPageLayoutPropertiesElement()
+    {
+        OdfPageLayoutPropertiesElement  _nPageLayoutProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPageLayoutPropertiesElement.class);
+        this.appendChild( _nPageLayoutProperties);
+        return  _nPageLayoutProperties;
+    }                   
+               
+    /**
+    * Create child element "style:header-style".
+    */
+    public OdfHeaderStyleElement createHeaderStyleElement()
+    {
+        OdfHeaderStyleElement  _nHeaderStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHeaderStyleElement.class);
+        this.appendChild( _nHeaderStyle);
+        return  _nHeaderStyle;
+    }                   
+               
+    /**
+    * Create child element "style:footer-style".
+    */
+    public OdfFooterStyleElement createFooterStyleElement()
+    {
+        OdfFooterStyleElement  _nFooterStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFooterStyleElement.class);
+        this.appendChild( _nFooterStyle);
+        return  _nFooterStyle;
+    }                   
+               
 }

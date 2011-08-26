@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.OdfPercent;
 import org.odftoolkit.odfdom.dom.type.style.OdfLineStyleType;
 import org.odftoolkit.odfdom.dom.type.style.OdfAdjustmentType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<style:footnote-sep>".
  */
 public abstract class OdfFootnoteSepElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2838085152293769817L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "footnote-sep" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "footnote-sep" );
 
     public OdfFootnoteSepElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

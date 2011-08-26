@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<style:columns>".
  */
 public abstract class OdfColumnsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8722506965582505192L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "columns" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "columns" );
 
     public OdfColumnsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -98,4 +94,26 @@ public abstract class OdfColumnsElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.FO, "column-gap" ), _aColumnGap );
     }
 
+    /**
+    * Create child element "style:column-sep".
+    */
+    public OdfColumnSepElement createColumnSepElement(String   _aWidth)
+    {
+        OdfColumnSepElement  _nColumnSep = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfColumnSepElement.class);
+        _nColumnSep.setWidth( _aWidth);
+        this.appendChild( _nColumnSep);
+        return  _nColumnSep;      
+    }
+    
+    /**
+    * Create child element "style:column".
+    */
+    public OdfColumnElement createColumnElement(String   _aRelWidth)
+    {
+        OdfColumnElement  _nColumn = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfColumnElement.class);
+        _nColumn.setRelWidth( _aRelWidth);
+        this.appendChild( _nColumn);
+        return  _nColumn;      
+    }
+    
 }

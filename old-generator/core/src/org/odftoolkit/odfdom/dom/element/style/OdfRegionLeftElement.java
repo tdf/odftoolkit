@@ -32,28 +32,34 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 
 /**
  * ODF DOM Element implementation for element "<style:region-left>".
  */
 public abstract class OdfRegionLeftElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6855073354430537855L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "region-left" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "region-left" );
 
     public OdfRegionLeftElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
 }

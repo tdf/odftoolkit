@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfLabelFollowedByType;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeLength;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<style:list-level-label-alignment>".
  */
 public abstract class OdfListLevelLabelAlignmentElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3637526684455873864L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "list-level-label-alignment" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "list-level-label-alignment" );
 
     public OdfListLevelLabelAlignmentElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

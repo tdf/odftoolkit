@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
+import org.odftoolkit.odfdom.dom.element.presentation.OdfSoundElement;
 
 /**
  * ODF DOM Element implementation for element "<style:drawing-page-properties>".
  */
 public abstract class OdfDrawingPagePropertiesElement extends OdfStylePropertiesBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5760715594981831520L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "drawing-page-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "drawing-page-properties" );
 
     public OdfDrawingPagePropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -124,4 +120,15 @@ public abstract class OdfDrawingPagePropertiesElement extends OdfStyleProperties
     public final static OdfStyleProperty DisplayDateTime = 
         OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.get(OdfNamespace.PRESENTATION, "display-date-time"));
 
+    /**
+    * Create child element "presentation:sound".
+    */
+    public OdfSoundElement createSoundElement(String   _aHref)
+    {
+        OdfSoundElement  _nSound = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSoundElement.class);
+        _nSound.setHref( _aHref);
+        this.appendChild( _nSound);
+        return  _nSound;      
+    }
+    
 }

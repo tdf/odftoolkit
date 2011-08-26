@@ -33,25 +33,22 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+import org.odftoolkit.odfdom.dom.element.presentation.OdfPlaceholderElement;
+import org.odftoolkit.odfdom.dom.type.OdfPresentationClasses;
 
 /**
  * ODF DOM Element implementation for element "<style:presentation-page-layout>".
  */
 public abstract class OdfPresentationPageLayoutElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1184739787175699700L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "presentation-page-layout" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "presentation-page-layout" );
 
     public OdfPresentationPageLayoutElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -98,4 +95,19 @@ public abstract class OdfPresentationPageLayoutElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "display-name" ), _aDisplayName );
     }
 
+    /**
+    * Create child element "presentation:placeholder".
+    */
+    public OdfPlaceholderElement createPlaceholderElement(OdfPresentationClasses   _aObject, String   _aX, String   _aY, String   _aWidth, String   _aHeight)
+    {
+        OdfPlaceholderElement  _nPlaceholder = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPlaceholderElement.class);
+        _nPlaceholder.setObject( _aObject);
+        _nPlaceholder.setX( _aX);
+        _nPlaceholder.setY( _aY);
+        _nPlaceholder.setWidth( _aWidth);
+        _nPlaceholder.setHeight( _aHeight);
+        this.appendChild( _nPlaceholder);
+        return  _nPlaceholder;      
+    }
+    
 }

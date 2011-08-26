@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<style:ruby-properties>".
  */
 public abstract class OdfRubyPropertiesElement extends OdfStylePropertiesBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7617120142953840406L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "ruby-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "ruby-properties" );
 
     public OdfRubyPropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<style:map>".
  */
 public abstract class OdfMapElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1477380371801661655L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "map" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "map" );
 
     public OdfMapElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

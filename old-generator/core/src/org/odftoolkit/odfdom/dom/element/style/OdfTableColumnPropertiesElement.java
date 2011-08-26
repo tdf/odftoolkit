@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<style:table-column-properties>".
  */
 public abstract class OdfTableColumnPropertiesElement extends OdfStylePropertiesBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1406543535771619311L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "table-column-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "table-column-properties" );
 
     public OdfTableColumnPropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

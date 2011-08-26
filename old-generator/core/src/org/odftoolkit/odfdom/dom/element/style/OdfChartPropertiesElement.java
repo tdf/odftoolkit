@@ -34,25 +34,22 @@ import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
+import org.odftoolkit.odfdom.dom.element.chart.OdfSymbolImageElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 
 /**
  * ODF DOM Element implementation for element "<style:chart-properties>".
  */
 public abstract class OdfChartPropertiesElement extends OdfStylePropertiesBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7194118878295835755L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "chart-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "chart-properties" );
 
     public OdfChartPropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -190,4 +187,25 @@ public abstract class OdfChartPropertiesElement extends OdfStylePropertiesBase
     public final static OdfStyleProperty IncludeHiddenCells = 
         OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "include-hidden-cells"));
 
+    /**
+    * Create child element "chart:symbol-image".
+    */
+    public OdfSymbolImageElement createSymbolImageElement(String   _aHref)
+    {
+        OdfSymbolImageElement  _nSymbolImage = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSymbolImageElement.class);
+        _nSymbolImage.setHref( _aHref);
+        this.appendChild( _nSymbolImage);
+        return  _nSymbolImage;      
+    }
+    
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
 }

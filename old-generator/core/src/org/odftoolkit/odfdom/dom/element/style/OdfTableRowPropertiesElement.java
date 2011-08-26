@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfBinaryDataElement;
 
 /**
  * ODF DOM Element implementation for element "<style:table-row-properties>".
  */
 public abstract class OdfTableRowPropertiesElement extends OdfStylePropertiesBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3493038513248227222L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "table-row-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "table-row-properties" );
 
     public OdfTableRowPropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -72,4 +68,14 @@ public abstract class OdfTableRowPropertiesElement extends OdfStylePropertiesBas
     public final static OdfStyleProperty KeepTogether = 
         OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get(OdfNamespace.FO, "keep-together"));
 
+    /**
+    * Create child element "office:binary-data".
+    */
+    public OdfBinaryDataElement createBinaryDataElement()
+    {
+        OdfBinaryDataElement  _nBinaryData = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBinaryDataElement.class);
+        this.appendChild( _nBinaryData);
+        return  _nBinaryData;
+    }                   
+               
 }

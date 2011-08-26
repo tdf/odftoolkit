@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<style:drop-cap>".
  */
 public abstract class OdfDropCapElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4649357663910510737L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "drop-cap" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "drop-cap" );
 
     public OdfDropCapElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Text, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -130,8 +126,7 @@ public abstract class OdfDropCapElement extends OdfStylableElement
     /**
      * Get value of attribute "style:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -140,8 +135,7 @@ public abstract class OdfDropCapElement extends OdfStylableElement
     /**
      * Set value of attribute "style:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "style-name" ), aStringVal );

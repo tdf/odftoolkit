@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfBinaryDataElement;
 
 /**
  * ODF DOM Element implementation for element "<style:header-footer-properties>".
  */
 public abstract class OdfHeaderFooterPropertiesElement extends OdfStylePropertiesBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -737571128411767371L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "header-footer-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.STYLE, "header-footer-properties" );
 
     public OdfHeaderFooterPropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -108,4 +104,14 @@ public abstract class OdfHeaderFooterPropertiesElement extends OdfStylePropertie
     public final static OdfStyleProperty DynamicSpacing = 
         OdfStyleProperty.get(OdfStylePropertiesSet.HeaderFooterProperties, OdfName.get(OdfNamespace.STYLE, "dynamic-spacing"));
 
+    /**
+    * Create child element "office:binary-data".
+    */
+    public OdfBinaryDataElement createBinaryDataElement()
+    {
+        OdfBinaryDataElement  _nBinaryData = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBinaryDataElement.class);
+        this.appendChild( _nBinaryData);
+        return  _nBinaryData;
+    }                   
+               
 }
