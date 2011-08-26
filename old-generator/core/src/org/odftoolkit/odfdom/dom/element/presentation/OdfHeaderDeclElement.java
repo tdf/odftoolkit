@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<presentation:header-decl>".
  */
 public abstract class OdfHeaderDeclElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3995483235443599832L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "header-decl" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "header-decl" );
 
     public OdfHeaderDeclElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

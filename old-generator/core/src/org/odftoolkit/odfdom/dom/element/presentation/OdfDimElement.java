@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<presentation:dim>".
  */
 public abstract class OdfDimElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6045846872434483937L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "dim" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "dim" );
 
     public OdfDimElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -99,4 +95,15 @@ public abstract class OdfDimElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "color" ), _aColor );
     }
 
+    /**
+    * Create child element "presentation:sound".
+    */
+    public OdfSoundElement createSoundElement(String   _aHref)
+    {
+        OdfSoundElement  _nSound = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSoundElement.class);
+        _nSound.setHref( _aHref);
+        this.appendChild( _nSound);
+        return  _nSound;      
+    }
+    
 }

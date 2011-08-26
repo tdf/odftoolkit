@@ -39,25 +39,21 @@ import org.odftoolkit.odfdom.dom.type.OdfPercent;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<presentation:event-listener>".
  */
 public abstract class OdfEventListenerElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2279342452907216742L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "event-listener" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "event-listener" );
 
     public OdfEventListenerElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -236,4 +232,15 @@ public abstract class OdfEventListenerElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "verb" ), aStringVal );
     }
 
+    /**
+    * Create child element "presentation:sound".
+    */
+    public OdfSoundElement createSoundElement(String   _aHref)
+    {
+        OdfSoundElement  _nSound = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSoundElement.class);
+        _nSound.setHref( _aHref);
+        this.appendChild( _nSound);
+        return  _nSound;      
+    }
+    
 }

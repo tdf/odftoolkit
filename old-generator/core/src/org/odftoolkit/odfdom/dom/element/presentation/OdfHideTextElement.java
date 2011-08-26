@@ -39,25 +39,21 @@ import javax.xml.datatype.Duration;
 import org.odftoolkit.odfdom.dom.type.OdfDuration;
 import org.odftoolkit.odfdom.dom.type.OdfPercent;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<presentation:hide-text>".
  */
 public abstract class OdfHideTextElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -94601599041526936L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "hide-text" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "hide-text" );
 
     public OdfHideTextElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -214,4 +210,15 @@ public abstract class OdfHideTextElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "path-id" ), _aPathId );
     }
 
+    /**
+    * Create child element "presentation:sound".
+    */
+    public OdfSoundElement createSoundElement(String   _aHref)
+    {
+        OdfSoundElement  _nSound = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSoundElement.class);
+        _nSound.setHref( _aHref);
+        this.appendChild( _nSound);
+        return  _nSound;      
+    }
+    
 }

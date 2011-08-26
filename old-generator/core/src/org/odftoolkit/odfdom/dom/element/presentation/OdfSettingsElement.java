@@ -37,25 +37,21 @@ import org.odftoolkit.odfdom.dom.type.OdfDuration;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfAnimationsType;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfTransitionOnClickType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<presentation:settings>".
  */
 public abstract class OdfSettingsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4213452008339912160L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "settings" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "settings" );
 
     public OdfSettingsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -334,4 +330,16 @@ public abstract class OdfSettingsElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "show-end-of-presentation-slide" ), aStringVal );
     }
 
+    /**
+    * Create child element "presentation:show".
+    */
+    public OdfShowElement createShowElement(String   _aName, String   _aPages)
+    {
+        OdfShowElement  _nShow = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfShowElement.class);
+        _nShow.setName( _aName);
+        _nShow.setPages( _aPages);
+        this.appendChild( _nShow);
+        return  _nShow;      
+    }
+    
 }

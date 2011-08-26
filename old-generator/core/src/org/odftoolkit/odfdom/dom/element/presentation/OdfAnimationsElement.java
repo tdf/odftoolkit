@@ -32,28 +32,101 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<presentation:animations>".
  */
 public abstract class OdfAnimationsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 677421737913178817L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "animations" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.PRESENTATION, "animations" );
 
     public OdfAnimationsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "presentation:show-shape".
+    */
+    public OdfShowShapeElement createShowShapeElement(String   _aShapeId)
+    {
+        OdfShowShapeElement  _nShowShape = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfShowShapeElement.class);
+        _nShowShape.setShapeId( _aShapeId);
+        this.appendChild( _nShowShape);
+        return  _nShowShape;      
+    }
+    
+    /**
+    * Create child element "presentation:show-text".
+    */
+    public OdfShowTextElement createShowTextElement(String   _aShapeId)
+    {
+        OdfShowTextElement  _nShowText = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfShowTextElement.class);
+        _nShowText.setShapeId( _aShapeId);
+        this.appendChild( _nShowText);
+        return  _nShowText;      
+    }
+    
+    /**
+    * Create child element "presentation:hide-shape".
+    */
+    public OdfHideShapeElement createHideShapeElement(String   _aShapeId)
+    {
+        OdfHideShapeElement  _nHideShape = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHideShapeElement.class);
+        _nHideShape.setShapeId( _aShapeId);
+        this.appendChild( _nHideShape);
+        return  _nHideShape;      
+    }
+    
+    /**
+    * Create child element "presentation:hide-text".
+    */
+    public OdfHideTextElement createHideTextElement(String   _aShapeId)
+    {
+        OdfHideTextElement  _nHideText = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHideTextElement.class);
+        _nHideText.setShapeId( _aShapeId);
+        this.appendChild( _nHideText);
+        return  _nHideText;      
+    }
+    
+    /**
+    * Create child element "presentation:dim".
+    */
+    public OdfDimElement createDimElement(String   _aShapeId, String   _aColor)
+    {
+        OdfDimElement  _nDim = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDimElement.class);
+        _nDim.setShapeId( _aShapeId);
+        _nDim.setColor( _aColor);
+        this.appendChild( _nDim);
+        return  _nDim;      
+    }
+    
+    /**
+    * Create child element "presentation:play".
+    */
+    public OdfPlayElement createPlayElement(String   _aShapeId)
+    {
+        OdfPlayElement  _nPlay = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPlayElement.class);
+        _nPlay.setShapeId( _aShapeId);
+        this.appendChild( _nPlay);
+        return  _nPlay;      
+    }
+    
+    /**
+    * Create child element "presentation:animation-group".
+    */
+    public OdfAnimationGroupElement createAnimationGroupElement()
+    {
+        OdfAnimationGroupElement  _nAnimationGroup = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimationGroupElement.class);
+        this.appendChild( _nAnimationGroup);
+        return  _nAnimationGroup;
+    }                   
+               
 }
