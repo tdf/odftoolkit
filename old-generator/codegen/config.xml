@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
+
+  Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+
+  Use is subject to license terms.
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  use this file except in compliance with the License. You may obtain a copy
+  of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
+  obtain a copy of the License at http://odftoolkit.org/docs/license.txt
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+-->
+<config>
+    <elements>
+        <element name="chart:axis" family="chart:chart"/>
+        <element name="chart:chart" family="chart:chart"/>
+        <element name="chart:data-point" family="chart:chart"/>
+        <element name="chart:error-indicator" family="chart:chart"/>
+        <element name="chart:floor" family="chart:chart"/>
+        <element name="chart:footer" family="chart:chart"/>
+        <element name="chart:grid" family="chart:chart"/>
+        <element name="chart:legend" family="chart:chart"/>
+        <element name="chart:mean-value" family="chart:chart"/>
+        <element name="chart:plot-area" family="chart:chart"/>
+        <element name="chart:regression-curve" family="chart:chart"/>
+        <element name="chart:series" family="chart:chart"/>
+        <element name="chart:stock-gain-marker" family="chart:chart"/>
+        <element name="chart:stock-loss-marker" family="chart:chart"/>
+        <element name="chart:stock-range-line" family="chart:chart"/>
+        <element name="chart:subtitle" family="chart:chart"/>
+        <element name="chart:title" family="chart:chart"/>
+        <element name="chart:wall" family="chart:chart"/>
+        <element name="draw:page" family="draw:drawing-page"/>
+        <element name="presentation:notes" family="draw:drawing-page"/>
+        <element name="dr3d:cube" family="draw:graphic,presentation:presentation"/>
+        <element name="dr3d:extrude" family="draw:graphic,presentation:presentation"/>
+        <element name="dr3d:rotate" family="draw:graphic,presentation:presentation"/>
+        <element name="dr3d:scene" family="draw:graphic,presentation:presentation"/>
+        <element name="dr3d:sphere" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:caption" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:circle" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:connector" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:control" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:custom-shape" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:ellipse" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:frame" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:g" rename="draw:group" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:line" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:measure" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:page-thumbnail" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:path" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:polygon" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:polyline" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:rect" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="draw:regular-polygon" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="office:annotation" base="draw:shape" family="draw:graphic,presentation:presentation"/>
+        <element name="text:alphabetical-index-entry-template" family="text:paragraph"/>
+        <element name="text:bibliography-entry-template" family="text:paragraph"/>
+        <element name="text:h" rename="text:heading" base="text:paragraph" family="text:paragraph"/>
+        <element name="text:illustration-index-entry-template" family="text:paragraph"/>
+        <element name="text:index-source-style" family="text:paragraph"/>
+        <element name="text:index-title-template" family="text:paragraph"/>
+        <element name="text:object-index-entry-template" family="text:paragraph"/>
+        <element name="text:p" rename="text:paragraph" base="text:paragraph" family="text:paragraph"/>
+        <element name="text:table-index-entry-template" family="text:paragraph"/>
+        <element name="text:table-of-content-entry-template" family="text:paragraph"/>
+        <element name="text:user-index-entry-template" family="text:paragraph"/>
+        <element name="text:ruby" family="text:ruby"/>
+        <element name="text:ruby-text" family="text:ruby"/>
+        <element name="text:alphabetical-index" family="text:section"/>
+        <element name="text:bibliography" family="text:section"/>
+        <element name="text:illustration-index" family="text:section"/>
+        <element name="text:index-title" family="text:section"/>
+        <element name="text:object-index" family="text:section"/>
+        <element name="text:section" family="text:section"/>
+        <element name="text:table-index" family="text:section"/>
+        <element name="text:table-of-content" family="text:section"/>
+        <element name="text:user-index" family="text:section"/>
+        <element name="table:table" family="table:table"/>
+        <element name="table:covered-table-cell" base="table:table-cell" family="table:table-cell"/>
+        <element name="table:table-cell" base="table:table-cell" family="table:table-cell"/>
+        <element name="table:table-column" family="table:table-column"/>
+        <element name="table:table-row" family="table:table-row"/>
+        <element name="text:a" rename="text:hyperlink" family="text:text"/>
+        <element name="text:index-entry-bibliography" family="text:text"/>
+        <element name="text:index-entry-chapter" family="text:text"/>
+        <element name="text:index-entry-link-end" family="text:text"/>
+        <element name="text:index-entry-link-start" family="text:text"/>
+        <element name="text:index-entry-page-number" family="text:text"/>
+        <element name="text:index-entry-span" family="text:text"/>
+        <element name="text:index-entry-tab-stop" family="text:text"/>
+        <element name="text:index-entry-text" family="text:text"/>
+        <element name="text:span" family="text:text"/>
+        <element name="style:handout-master" family="draw:drawing-page"/>
+        <element name="style:master-page" family="draw:drawing-page"/>
+        <element name="table:body" family="table:table-cell"/>
+        <element name="table:even-columns" family="table:table-cell"/>
+        <element name="table:even-rows" family="table:table-cell"/>
+        <element name="table:first-column" family="table:table-cell"/>
+        <element name="table:first-row" family="table:table-cell"/>
+        <element name="table:last-column" family="table:table-cell"/>
+        <element name="table:last-row" family="table:table-cell"/>
+        <element name="table:odd-columns" family="table:table-cell"/>
+        <element name="table:odd-rows" family="table:table-cell"/>
+        <element name="style:drop-cap" family="text:text"/>
+        <element name="text:linenumbering-configuration" family="text:text"/>
+
+        <element name="text:list-level-style" base="style"/>
+        <element name="text:list-level-style-number" base="text:list-level-style"/>
+        <element name="text:list-level-style-bullet" base="text:list-level-style"/>
+        <element name="text:list-level-style-image" base="text:list-level-style"/>
+
+        <element name="text:numbered-paragraph" family="text:list"/>
+        <element name="draw:a" rename="draw:hyperlink"/>
+        <element name="text:s" rename="text:space"/>
+        <element name="office:styles" base="container"/>
+        <element name="office:automatic-styles" base="container"/>
+        <element name="office:master-styles" base="container"/>
+        <element name="office:presentation" base="container"/>
+
+        <element name="style:style" base="style"/>
+        <element name="style:default-style" base="style"/>
+        <element name="style:page-layout" base="style"/>
+        <element name="text:outline-level-style" base="style"/>
+        <element name="text:list-style" base="style"/>
+
+        <element name="style:chart-properties" base="styleproperties"/>
+        <element name="style:drawing-page-properties" base="styleproperties"/>
+        <element name="style:graphic-properties" base="styleproperties"/>
+        <element name="style:list-level-properties" base="styleproperties"/>
+        <element name="style:paragraph-properties" base="styleproperties"/>
+        <element name="style:ruby-properties" base="styleproperties"/>
+        <element name="style:section-properties" base="styleproperties"/>
+        <element name="style:page-layout-properties" base="styleproperties"/>
+        <element name="style:header-footer-properties" base="styleproperties"/>
+        <element name="style:text-properties" base="styleproperties"/>
+        <element name="style:table-properties" base="styleproperties"/>
+        <element name="style:table-column-properties" base="styleproperties"/>
+        <element name="style:table-row-properties" base="styleproperties"/>
+        <element name="style:table-cell-properties" base="styleproperties"/>
+    </elements>
+    <data-types>
+        <data name="NCName" value-type="String" conversion-type="String"/>
+        <data name="anyURI" value-type="String" conversion-type="org.openoffice.odf.dom.type.OdfAnyURI"/>
+        <data name="integer" value-type="Integer" conversion-type="Integer"/>
+        <data name="ID" value-type="String" conversion-type="org.openoffice.odf.dom.type.OdfId"/>
+        <data name="IDREF" value-type="String" conversion-type="org.openoffice.odf.dom.type.OdfId"/>
+        <data name="IDREFS" value-type="String" conversion-type="org.openoffice.odf.dom.type.OdfId"/>
+        <data name="double" value-type="Double" conversion-type="Double"/>
+        <data name="date" value-type="javax.xml.datatype.XMLGregorianCalendar" conversion-type="org.openoffice.odf.dom.type.OdfDate"/>
+        <data name="nonNegativeInteger" value-type="Integer" conversion-type="org.openoffice.odf.dom.type.OdfNonNegativeInteger"/>
+        <data name="positiveInteger" value-type="Integer" conversion-type="org.openoffice.odf.dom.type.OdfPositiveInteger"/>
+        <data name="time" value-type="javax.xml.datatype.XMLGregorianCalendar" conversion-type="org.openoffice.odf.dom.type.OdfDate"/>
+        <data name="duration" value-type="javax.xml.datatype.Duration" conversion-type="org.openoffice.odf.dom.type.OdfDuration"/>
+        <data name="base64Binary" value-type="String" conversion-type="String"/>
+        <data name="token" value-type="String" conversion-type="String"/>
+        <data name="string" value-type="String" conversion-type="String"/>
+        <data name="language" value-type="String" conversion-type="String"/>
+        <data name="dateOrDateTime" value-type="javax.xml.datatype.XMLGregorianCalendar" conversion-type="org.openoffice.odf.dom.type.OdfDate"/>
+        <data name="dateTime" value-type="javax.xml.datatype.XMLGregorianCalendar" conversion-type="org.openoffice.odf.dom.type.OdfDate"/>
+        <data name="boolean" value-type="Boolean" conversion-type="org.openoffice.odf.dom.type.OdfBoolean"/>
+        <data name="styleName" value-type="String" conversion-type="org.openoffice.odf.dom.type.OdfStyleName"/>
+        <data name="styleNameRef" value-type="String" conversion-type="org.openoffice.odf.dom.type.OdfStyleName"/>
+        <data name="styleNameRefs" value-type="java.util.List&lt;String&gt;" conversion-type="org.openoffice.odf.dom.type.OdfStyleNames"/>
+        <data name="percent" value-type="Double" conversion-type="org.openoffice.odf.dom.type.OdfPercent"/>
+        <data name="cellAddress" value-type="String" conversion-type="org.openoffice.odf.dom.type.OdfCellAddress"/>
+        <data name="cellRangeAddressList" value-type="String" conversion-type="org.openoffice.odf.dom.type.OdfCellRangeAddressList"/>
+        <data name="presentation-classes" value-type="org.openoffice.odf.dom.type.OdfPresentationClasses" conversion-type="org.openoffice.odf.dom.type.OdfPresentationClasses"/>
+        <data name="nonNegativeLength" value-type="String" conversion-type="org.openoffice.odf.dom.type.OdfNonNegativeLength"/>
+        <data name="targetFrameName" value-type="enum" conversion-type="office:target-frame-name"/>
+        <data name="rowOrCol" value-type="enum" conversion-type="table:row-or-column"/>
+        <data name="stylefamily" value-type="org.openoffice.odf.dom.style.OdfStyleFamily" conversion-type="org.openoffice.odf.dom.style.OdfStyleFamily"/>
+    </data-types>
+    <attributes>
+        <!-- renames to seperate attributes with same qname but different values -->
+        <attribute name="draw:style" element="draw:gradient" type-name="draw:gradient-style"/>
+        <attribute name="draw:style" element="draw:opacity" type-name="draw:gradient-style"/>
+        <attribute name="draw:style" element="draw:stroke-dash" type-name="draw:stroke-style"/>
+        <attribute name="draw:style" element="draw:hatch" type-name="draw:hatch-style"/>
+        <attribute name="office:value-type" element="form:list-property" type-name="office:value-maybe-void"/>
+        <attribute name="office:value-type" element="form:property" type-name="office:value-maybe-void"/>
+        <attribute name="office:value-type" element="text:variable-set" type-name="office:value"/>
+        <attribute name="office:value-type" element="table:change-track-table-cell" type-name="office:value"/>
+        <attribute name="office:value-type" element="text:expression" type-name="office:value"/>
+        <attribute name="office:value-type" element="text:user-field-decl" type-name="office:value"/>
+        <attribute name="office:value-type" element="text:variable-input" type-name="office:value"/>
+        <attribute name="office:value-type" element="text:variable-decl" type-name="office:value"/>
+        <attribute name="style:type" element="text:index-entry-tab-stop" type-name="style:index-tab-stop"/>
+        <attribute name="style:type" element="style:tab-stop" type-name="style:tab-stop"/>
+        <attribute name="table:type" element="table:deletion" type-name="table:sheet-object"/>
+        <attribute name="table:type" element="table:insertion" type-name="table:sheet-object"/>
+        <attribute name="table:type" element="table:data-pilot-field-reference" type-name="table:field-reference"/>
+        <attribute name="text:display" element="text:user-field-get" type-name="text:value-formula-none-display"/>
+        <attribute name="text:display" element="text:variable-get" type-name="text:value-formula-display"/>
+        <attribute name="text:display" element="text:expression" type-name="text:value-formula-display"/>
+        <attribute name="text:display" element="text:table-formula" type-name="text:value-formula-display"/>
+        <attribute name="text:display" element="text:variable-set" type-name="text:value-none-display"/>
+        <attribute name="text:display" element="text:variable-input" type-name="text:value-none-display"/>
+        <attribute name="text:display" element="text:section" type-name="text:section-display"/>
+        <attribute name="text:display" element="text:file-name" type-name="text:file-name-display"/>
+        <attribute name="text:display" element="text:template-name" type-name="text:template-name-display"/>
+        <attribute name="text:display" element="text:chapter" type-name="text:chapter-display"/>
+        <attribute name="text:display" element="text:index-entry-chapter" type-name="text:index-entry-chapter-display"/>
+        <attribute name="text:reference-format" element="text:sequence-ref" type-name="text:sequence-reference-format"/>
+        <attribute name="text:reference-format" element="text:bookmark-ref" type-name="text:reference-format"/>
+        <attribute name="text:reference-format" element="text:reference-ref" type-name="text:reference-format"/>
+        <attribute name="text:reference-format" element="text:note-ref" type-name="text:reference-format"/>
+        <attribute name="text:select-page" element="text:page-continuation" type-name="text:page-contiuation-select"/>
+        <attribute name="text:select-page" element="text:page-number" type-name="text:page-number-select"/>
+
+     <!-- rename attributes to avoid overinging base class methods with name that equals attribute get or set method-->
+        <attribute name="presentation:node-type" rename="presentation:presentation-node"/>
+        <attribute name="presentation:class" rename="presentation:presentation-class"/>
+        <attribute name="chart:class" rename="chart:chart-class"/>
+        <attribute name="style:length" rename="style:style-length"/>
+        <attribute name="style:class" rename="style:style-class"/>
+
+     <!-- rename draw:style-name and presentation-style name as shape elements uses both of them -->
+        <attribute name="presentation:style-name" rename="presentation:presentation-style-name"/>
+        <attribute name="presentation:class-names" rename="presentation:presentation-class-names"/>
+        <attribute name="draw:style-name" rename="draw:draw-style-name"/>
+        <attribute name="draw:class-names" rename="draw:draw-class-names"/>
+
+      <!-- renames to remove duplicate Type from OdfFooTypeType
+        <attribute name="draw:glue-point-type" type-name="draw:glue-point"/>
+        <attribute name="draw:type" type-name="draw:connector"/> <! good name? >
+        <attribute name="form:buttom-type" type-name="form:button"/>
+        <attribute name="form:command-type" type-name="form:command"/>
+        <attribute name="svg:type" type-name="svg:transform"/>
+        <attribute name="table:data-type" type-name="table:data"/>
+        <attribute name="table:member-type" type-name="table:member"/>
+        <attribute name="table:message-type" type-name="table:message"/>
+        <attribute name="table:value-type" type-name="table:value"/>
+        <attribute name="config:type" type-name="config:value"/>
+        <attribute name="meta:value-type" type-name="meta:value"/>-->
+
+        <!-- renames to use same type from other attribute -->
+        <attribute name="form:current-state" type-name="form:state"/>
+        <attribute name="style:family" type-name="stylefamily"/>
+        
+        <!-- rename attributes where one element has two attributes with the same local name -->
+        <attribute name="dr3d:shadow" rename="dr3d:shadow3d"/>
+        <attribute name="draw:shadow" rename="draw:draw-shadow"/>
+
+    </attributes>
+</config>
