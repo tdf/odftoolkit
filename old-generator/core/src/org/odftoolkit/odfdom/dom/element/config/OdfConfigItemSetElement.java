@@ -32,25 +32,22 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.type.config.OdfType;
+import org.odftoolkit.odfdom.dom.type.config.OdfType;
 
 /**
  * ODF DOM Element implementation for element "<config:config-item-set>".
  */
 public abstract class OdfConfigItemSetElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7354953861996808460L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CONFIG, "config-item-set" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CONFIG, "config-item-set" );
 
     public OdfConfigItemSetElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -79,4 +76,49 @@ public abstract class OdfConfigItemSetElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.CONFIG, "name" ), _aName );
     }
 
+    /**
+    * Create child element "config:config-item".
+    */
+    public OdfConfigItemElement createConfigItemElement(String   _aName, OdfType   _aType)
+    {
+        OdfConfigItemElement  _nConfigItem = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConfigItemElement.class);
+        _nConfigItem.setName( _aName);
+        _nConfigItem.setType( _aType);
+        this.appendChild( _nConfigItem);
+        return  _nConfigItem;      
+    }
+    
+    /**
+    * Create child element "config:config-item-set".
+    */
+    public OdfConfigItemSetElement createConfigItemSetElement(String   _aName)
+    {
+        OdfConfigItemSetElement  _nConfigItemSet = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConfigItemSetElement.class);
+        _nConfigItemSet.setName( _aName);
+        this.appendChild( _nConfigItemSet);
+        return  _nConfigItemSet;      
+    }
+    
+    /**
+    * Create child element "config:config-item-map-named".
+    */
+    public OdfConfigItemMapNamedElement createConfigItemMapNamedElement(String   _aName)
+    {
+        OdfConfigItemMapNamedElement  _nConfigItemMapNamed = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConfigItemMapNamedElement.class);
+        _nConfigItemMapNamed.setName( _aName);
+        this.appendChild( _nConfigItemMapNamed);
+        return  _nConfigItemMapNamed;      
+    }
+    
+    /**
+    * Create child element "config:config-item-map-indexed".
+    */
+    public OdfConfigItemMapIndexedElement createConfigItemMapIndexedElement(String   _aName)
+    {
+        OdfConfigItemMapIndexedElement  _nConfigItemMapIndexed = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConfigItemMapIndexedElement.class);
+        _nConfigItemMapIndexed.setName( _aName);
+        this.appendChild( _nConfigItemMapIndexed);
+        return  _nConfigItemMapIndexed;      
+    }
+    
 }

@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<config:config-item-map-named>".
  */
 public abstract class OdfConfigItemMapNamedElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6528341421232697027L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CONFIG, "config-item-map-named" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CONFIG, "config-item-map-named" );
 
     public OdfConfigItemMapNamedElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -79,4 +75,14 @@ public abstract class OdfConfigItemMapNamedElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.CONFIG, "name" ), _aName );
     }
 
+    /**
+    * Create child element "config:config-item-map-entry".
+    */
+    public OdfConfigItemMapEntryElement createConfigItemMapEntryElement()
+    {
+        OdfConfigItemMapEntryElement  _nConfigItemMapEntry = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConfigItemMapEntryElement.class);
+        this.appendChild( _nConfigItemMapEntry);
+        return  _nConfigItemMapEntry;
+    }                   
+               
 }
