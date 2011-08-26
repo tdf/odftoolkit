@@ -1,13 +1,227 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>odfdom-java</artifactId>
 	<version>0.8-SNAPSHOT</version>
-	<name>ODFDOM</name>
 	<packaging>jar</packaging>
+	<dependencies>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.5</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+
+	<!-- Build Settings -->
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<finalName>odfdom</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<fork>true</fork>
+					<meminitial>512m</meminitial>
+					<maxmem>1024m</maxmem>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<index>true</index>
+						<manifest>
+							<mainClass>org.odftoolkit.odfdom.Version</mainClass>
+						</manifest>
+						<manifestEntries>
+							<version>${project.version}</version>
+						</manifestEntries>
+						<manifestSections>
+							<manifestSection>
+								<name>ODFDOM</name>
+								<manifestEntries>
+									<Application-Name>odfdom</Application-Name>
+									<Application-Version>${project.version}</Application-Version>
+									<Application-Website>http://odftoolkit.org</Application-Website>
+									<Built-By>${user.name}</Built-By>
+									<Built-Date>${build.timestamp}</Built-Date>
+									<Supported-Odf-Version>1.2</Supported-Odf-Version>
+								</manifestEntries>
+							</manifestSection>
+						</manifestSections>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/integrationtest/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.jvnet.wagon-svn</groupId>
+				<artifactId>wagon-svn</artifactId>
+				<version>1.9</version>
+			</extension>
+		</extensions>
+	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<doctitle>ODFDOM</doctitle>
+					<minmemory>512m</minmemory>
+					<maxmemory>1024m</maxmemory>
+					<links>
+						<link>http://java.sun.com/javase/6/docs/api/</link>
+						<link>http://xerces.apache.org/xerces-j/apiDocs/</link>
+					</links>
+					<splitindex>true</splitindex>
+					<windowtitle>ODFDOM API v${project.version} - http://odftoolkit</windowtitle>
+					<taglets>
+						<taglet>
+							<tagletClass>org.odftoolkit.odfdom.taglet.OdfElementTaglet</tagletClass>
+						</taglet>
+						<taglet>
+							<tagletClass>org.odftoolkit.odfdom.taglet.OdfAttributeTaglet</tagletClass>
+						</taglet>
+						<taglet>
+							<tagletClass>org.odftoolkit.odfdom.taglet.OdfDatatypeTaglet</tagletClass>
+						</taglet>
+					</taglets>
+					<tagletArtifact>
+						<groupId>org.odftoolkit</groupId>
+						<artifactId>taglets</artifactId>
+						<version>0.8-SNAPSHOT</version>
+					</tagletArtifact>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
+
+	<!-- More Project Information -->
+	<name>ODFDOM</name>
+	<description>OpenDocument Format (ODF) library</description>
+	<url>http://odftoolkit.org/projects/odfdom/pages/Home</url>
+	<inceptionYear>2008</inceptionYear>
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	<organization>
+		<name>ODF Toolkit Project</name>
+		<url>http://odftoolkit.org/</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>svanteschubert</id>
+			<name>Svante</name>
+			<email>svanteschubert AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/7-Svante-Schubert</url>
+			<organization>Sun Microsystems Inc.</organization>
+			<organizationUrl>http://www.sun.com/</organizationUrl>
+			<roles>
+				<role>ODFDOM working group chair</role>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+			<properties>
+				<picUrl>http://asset-1.odftoolkit.org/attachments/images/person/SvanteSchubert-2_small.jpg</picUrl>
+			</properties>
+		</developer>
+		<developer>
+			<id>Daisy</id>
+			<name>Ying Chun Guo</name>
+			<email>Daisy AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/274-Ying-Chun-Guo</url>
+			<organization>IBM</organization>
+			<organizationUrl>http://www.ibm.com/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+			<properties>
+				<picUrl>http://asset-2.odftoolkit.org/attachments/images/person/Daisy.jpg</picUrl>
+			</properties>
+		</developer>
+		<developer>
+			<id>weihuaWang</id>
+			<name>Wei Hua Wang</name>
+			<email>weihuaWang AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/297-weihuaWang</url>
+			<organization>IBM</organization>
+			<organizationUrl>http://www.ibm.com/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+
+
+	<!-- Environment Settings -->
+	<issueManagement>
+		<system>Bugzilla</system>
+		<url>https://odftoolkit.org/bugzilla/enter_bug.cgi?product=odfdom</url>
+	</issueManagement>
+	<mailingLists>
+		<!-- To subscribe one of the mailing lists:
+			1) First become a member of the http://odftoolkit.org project
+			2) Second subscribe here: http://odftoolkit.org/projects/odfdom/lists -->
+		<mailingList>
+			<name>Dev List</name>
+			<archive>http://odftoolkit.org/projects/odfdom/lists/dev/archive</archive>
+		</mailingList>
+		<mailingList>
+			<name>Users List</name>
+			<archive>http://odftoolkit.org/projects/odfdom/lists/users/archive</archive>
+		</mailingList>
+		<mailingList>
+			<name>Issues List</name>
+			<archive>http://odftoolkit.org/projects/odfdom/lists/issues/archive</archive>
+		</mailingList>
+		<mailingList>
+			<name>Commits List</name>
+			<archive>http://odftoolkit.org/projects/odfdom/lists/commits/archive</archive>
+		</mailingList>
+	</mailingLists>
+	<scm>
+		<connection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~developer</connection>
+		<developerConnection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~developer</developerConnection>
+		<url>http://odftoolkit.org/projects/odfdom/sources/developer/show</url>
+	</scm>
 	<repositories>
-<!-- we get wagon-svn from here -->
+		<!-- we get wagon-svn from here -->
 		<repository>
 			<id>maven2-repository.dev.java.net</id>
 			<name>Java.net Repository for Maven</name>
@@ -18,7 +232,7 @@
 				<checksumPolicy>fail</checksumPolicy>
 			</snapshots>
 		</repository>
-<!-- the odfdom interim repositories in svn -->
+		<!-- the odfdom interim repositories in svn -->
 		<repository>
 			<id>odfdom-snapshots</id>
 			<name>ODFDOM Snapshot</name>
@@ -82,8 +296,7 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-<!-- where this pom puts stuff -->
-	<distributionManagement>
+	<distributionManagement><!-- where outcome is being delivered -->
 		<repository>
 			<id>odfdom-releases</id>
 			<name>ODFDOM Release</name>
@@ -97,76 +310,14 @@
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>
-	<build>
-		<defaultGoal>install</defaultGoal>
-		<finalName>odfdom</finalName>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-					<fork>true</fork>
-					<meminitial>512m</meminitial>
-					<maxmem>1024m</maxmem>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<index>true</index>
-						<manifest>
-							<mainClass>org.odftoolkit.odfdom.Version</mainClass>
-						</manifest>
-						<manifestEntries>
-							<version>${project.version}</version>
-						</manifestEntries>
-						<manifestSections>
-							<manifestSection>
-								<name>ODFDOM</name>
-								<manifestEntries>
-									<Application-Name>odfdom</Application-Name>
-									<Application-Version>${project.version}</Application-Version>
-									<Application-Website>http://odftoolkit.org</Application-Website>
-									<Built-By>${user.name}</Built-By>
-									<Built-Date>${build.timestamp}</Built-Date>
-									<Supported-Odf-Version>1.2</Supported-Odf-Version>
-								</manifestEntries>
-							</manifestSection>
-						</manifestSections>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>**/integrationtest/**</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-		<extensions>
-			<extension>
-				<groupId>org.jvnet.wagon-svn</groupId>
-				<artifactId>wagon-svn</artifactId>
-				<version>1.9</version>
-			</extension>
-		</extensions>
-	</build>
 	<profiles>
 		<profile>
 			<id>codegen</id>
-<!--
-            <activation>
-              <activeByDefault>true</activeByDefault>
-            </activation>
-            -->
+			<!--
+			<activation>
+			  <activeByDefault>true</activeByDefault>
+			</activation>
+			-->
 			<build>
 				<defaultGoal>install</defaultGoal>
 				<plugins>
@@ -181,7 +332,7 @@
 								<goals>
 									<goal>codegen</goal>
 								</goals>
-                                <!-- DOM LAYER CONFIGURATION -->
+								<!-- DOM LAYER CONFIGURATION -->
 								<configuration>
 									<sourceRoot>${basedir}/src/main/java</sourceRoot>
 									<schemaFile>${basedir}/src/codegen/resources/dom/OpenDocument-schema-v1.2-cd03-rev02.rng</schemaFile>
@@ -194,38 +345,38 @@
 				</plugins>
 			</build>
 		</profile>
-<!--
-        <profile>
-            <id>codegen-pkg</id> 
-            <activation>
-              <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <defaultGoal>install</defaultGoal>
-                <plugins>
-                    <plugin>
-                        <groupId>org.odftoolkit</groupId>
-                        <artifactId>maven-codegen-plugin</artifactId>
-                        <version>0.8-SNAPSHOT</version>
-                        <executions>
-                            <execution>
-                                <id>pkg</id>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>codegen</goal>
-                                </goals>
-                                <configuration>
-                                    <sourceRoot>${basedir}/src/main/java</sourceRoot>
-                                    <schemaFile>${basedir}/src/codegen/resources/pkg/OpenDocument-manifest-schema-v1.2-draft7.rng</schemaFile>
-                                    <configFile>${basedir}/src/codegen/resources/pkg/config.xml</configFile>
-                                    <templateFile>${basedir}/src/codegen/resources/pkg/javacodetemplate.xml</templateFile>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+		<!--
+		<profile>
+			<id>codegen-pkg</id>
+			<activation>
+			  <activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<defaultGoal>install</defaultGoal>
+				<plugins>
+					<plugin>
+						<groupId>org.odftoolkit</groupId>
+						<artifactId>maven-codegen-plugin</artifactId>
+						<version>0.8-SNAPSHOT</version>
+						<executions>
+							<execution>
+								<id>pkg</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>codegen</goal>
+								</goals>
+								<configuration>
+									<sourceRoot>${basedir}/src/main/java</sourceRoot>
+									<schemaFile>${basedir}/src/codegen/resources/pkg/OpenDocument-manifest-schema-v1.2-draft7.rng</schemaFile>
+									<configFile>${basedir}/src/codegen/resources/pkg/config.xml</configFile>
+									<templateFile>${basedir}/src/codegen/resources/pkg/javacodetemplate.xml</templateFile>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 -->
 		<profile>
 			<id>release</id>
@@ -237,8 +388,8 @@
 			</activation>
 			<build>
 				<plugins>
-<!--
-                        We want to sign the artifact, the POM, and all attached artifacts
+					<!--
+						We want to sign the artifact, the POM, and all attached artifacts
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
@@ -250,10 +401,10 @@
 							</execution>
 						</executions>
 					</plugin>
-                    -->
+					-->
 <!--
-                        We want to deploy the artifact to a staging location for perusal
-                    -->
+						We want to deploy the artifact to a staging location for perusal
+					-->
 					<plugin>
 						<artifactId>maven-assembly-plugin</artifactId>
 						<configuration>
@@ -378,53 +529,4 @@
 			</build>
 		</profile>
 	</profiles>
-	<dependencies>
-		<dependency>
-			<groupId>xerces</groupId>
-			<artifactId>xercesImpl</artifactId>
-			<version>2.9.1</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.5</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<doctitle>ODFDOM</doctitle>
-					<minmemory>512m</minmemory>
-					<maxmemory>1024m</maxmemory>
-					<links>
-						<link>http://java.sun.com/javase/6/docs/api/</link>
-						<link>http://xerces.apache.org/xerces-j/apiDocs/</link>
-					</links>
-					<splitindex>true</splitindex>
-					<windowtitle>ODFDOM API v${project.version} - http://odftoolkit</windowtitle>
-					<taglets>
-						<taglet>
-							<tagletClass>org.odftoolkit.odfdom.taglet.OdfElementTaglet</tagletClass>
-						</taglet>
-						<taglet>
-							<tagletClass>org.odftoolkit.odfdom.taglet.OdfAttributeTaglet</tagletClass>
-						</taglet>
-						<taglet>
-							<tagletClass>org.odftoolkit.odfdom.taglet.OdfDatatypeTaglet</tagletClass>
-						</taglet>
-					</taglets>
-					<tagletArtifact>
-						<groupId>org.odftoolkit</groupId>
-						<artifactId>taglets</artifactId>
-						<version>0.8-SNAPSHOT</version>
-					</tagletArtifact>
-				</configuration>
-			</plugin>
-		</plugins>
-	</reporting>
 </project>
