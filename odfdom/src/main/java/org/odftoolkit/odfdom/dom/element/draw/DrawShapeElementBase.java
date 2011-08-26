@@ -25,10 +25,10 @@
  * Don't edit manually.
  */    
 package org.odftoolkit.odfdom.dom.element.draw;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawZIndexAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawIdAttribute;
@@ -69,7 +69,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public Integer getDrawZIndexAttribute()
 	{
-		DrawZIndexAttribute attr = (DrawZIndexAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "z-index" ) ;
+		DrawZIndexAttribute attr = (DrawZIndexAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "z-index" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -96,7 +96,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public String getDrawIdAttribute()
 	{
-		DrawIdAttribute attr = (DrawIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "id" ) ;
+		DrawIdAttribute attr = (DrawIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -123,7 +123,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -150,7 +150,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public String getDrawStyleNameAttribute()
 	{
-		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style-name" ) ;
+		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -177,7 +177,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public String getDrawClassNamesAttribute()
 	{
-		DrawClassNamesAttribute attr = (DrawClassNamesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "class-names" ) ;
+		DrawClassNamesAttribute attr = (DrawClassNamesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "class-names" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -204,7 +204,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public String getPresentationStyleNameAttribute()
 	{
-		PresentationStyleNameAttribute attr = (PresentationStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "style-name" ) ;
+		PresentationStyleNameAttribute attr = (PresentationStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -231,7 +231,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public String getPresentationClassNamesAttribute()
 	{
-		PresentationClassNamesAttribute attr = (PresentationClassNamesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "class-names" ) ;
+		PresentationClassNamesAttribute attr = (PresentationClassNamesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "class-names" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -258,7 +258,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public String getDrawNameAttribute()
 	{
-		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) ;
+		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -285,7 +285,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public String getTableEndCellAddressAttribute()
 	{
-		TableEndCellAddressAttribute attr = (TableEndCellAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-cell-address" ) ;
+		TableEndCellAddressAttribute attr = (TableEndCellAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "end-cell-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -312,7 +312,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public String getTableEndXAttribute()
 	{
-		TableEndXAttribute attr = (TableEndXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-x" ) ;
+		TableEndXAttribute attr = (TableEndXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "end-x" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -339,7 +339,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public String getTableEndYAttribute()
 	{
-		TableEndYAttribute attr = (TableEndYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-y" ) ;
+		TableEndYAttribute attr = (TableEndYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "end-y" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -366,7 +366,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public Boolean getTableTableBackgroundAttribute()
 	{
-		TableTableBackgroundAttribute attr = (TableTableBackgroundAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "table-background" ) ;
+		TableTableBackgroundAttribute attr = (TableTableBackgroundAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "table-background" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -393,7 +393,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public String getTextAnchorTypeAttribute()
 	{
-		TextAnchorTypeAttribute attr = (TextAnchorTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "anchor-type" ) ;
+		TextAnchorTypeAttribute attr = (TextAnchorTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "anchor-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -420,7 +420,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement
 	 */
 	public Integer getTextAnchorPageNumberAttribute()
 	{
-		TextAnchorPageNumberAttribute attr = (TextAnchorPageNumberAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "anchor-page-number" ) ;
+		TextAnchorPageNumberAttribute attr = (TextAnchorPageNumberAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "anchor-page-number" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

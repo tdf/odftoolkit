@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberTruncateOnOverflowAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberLanguageAttribute;
@@ -55,7 +55,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
  */
 public class NumberTimeStyleElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "time-style" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "time-style" );
 
 
 	/**
@@ -95,7 +95,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public Boolean getNumberTruncateOnOverflowAttribute()
 	{
-		NumberTruncateOnOverflowAttribute attr = (NumberTruncateOnOverflowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "truncate-on-overflow" ) ;
+		NumberTruncateOnOverflowAttribute attr = (NumberTruncateOnOverflowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "truncate-on-overflow" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -122,7 +122,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public String getStyleNameAttribute()
 	{
-		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) ;
+		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -149,7 +149,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public String getNumberLanguageAttribute()
 	{
-		NumberLanguageAttribute attr = (NumberLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "language" ) ;
+		NumberLanguageAttribute attr = (NumberLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "language" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -176,7 +176,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public String getNumberCountryAttribute()
 	{
-		NumberCountryAttribute attr = (NumberCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "country" ) ;
+		NumberCountryAttribute attr = (NumberCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "country" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -203,7 +203,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public String getNumberScriptAttribute()
 	{
-		NumberScriptAttribute attr = (NumberScriptAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "script" ) ;
+		NumberScriptAttribute attr = (NumberScriptAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "script" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -230,7 +230,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public String getNumberRfcLanguageTagAttribute()
 	{
-		NumberRfcLanguageTagAttribute attr = (NumberRfcLanguageTagAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "rfc-language-tag" ) ;
+		NumberRfcLanguageTagAttribute attr = (NumberRfcLanguageTagAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "rfc-language-tag" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -257,7 +257,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public String getNumberTitleAttribute()
 	{
-		NumberTitleAttribute attr = (NumberTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "title" ) ;
+		NumberTitleAttribute attr = (NumberTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "title" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -284,7 +284,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public Boolean getStyleVolatileAttribute()
 	{
-		StyleVolatileAttribute attr = (StyleVolatileAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "volatile" ) ;
+		StyleVolatileAttribute attr = (StyleVolatileAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "volatile" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -311,7 +311,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public String getNumberTransliterationFormatAttribute()
 	{
-		NumberTransliterationFormatAttribute attr = (NumberTransliterationFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "transliteration-format" ) ;
+		NumberTransliterationFormatAttribute attr = (NumberTransliterationFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "transliteration-format" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -338,7 +338,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public String getNumberTransliterationLanguageAttribute()
 	{
-		NumberTransliterationLanguageAttribute attr = (NumberTransliterationLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "transliteration-language" ) ;
+		NumberTransliterationLanguageAttribute attr = (NumberTransliterationLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "transliteration-language" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -365,7 +365,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public String getNumberTransliterationCountryAttribute()
 	{
-		NumberTransliterationCountryAttribute attr = (NumberTransliterationCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "transliteration-country" ) ;
+		NumberTransliterationCountryAttribute attr = (NumberTransliterationCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "transliteration-country" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -392,7 +392,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public String getNumberTransliterationStyleAttribute()
 	{
-		NumberTransliterationStyleAttribute attr = (NumberTransliterationStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "transliteration-style" ) ;
+		NumberTransliterationStyleAttribute attr = (NumberTransliterationStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "transliteration-style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -419,7 +419,7 @@ public class NumberTimeStyleElement extends OdfElement
 	 */
 	public String getNumberFormatSourceAttribute()
 	{
-		NumberFormatSourceAttribute attr = (NumberFormatSourceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "format-source" ) ;
+		NumberFormatSourceAttribute attr = (NumberFormatSourceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "format-source" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

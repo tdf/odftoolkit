@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.text;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawTextBoxElement;
 import org.odftoolkit.odfdom.dom.element.text.TextAlphabeticalIndexMarkEndElement;
 import org.odftoolkit.odfdom.dom.element.text.TextAlphabeticalIndexMarkStartElement;
@@ -50,7 +50,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextUserIndexMarkStartElement;
  */
 public class TextIdAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "id" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.TEXT, "id" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:id}.

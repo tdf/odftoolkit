@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.presentation;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationPlayFullAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
  */
 public class PresentationSoundElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "sound" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.PRESENTATION, "sound" );
 
 	/**
 	 * The value set of {@odf.attribute xlink:actuate}.
@@ -154,7 +154,7 @@ public class PresentationSoundElement extends OdfElement
 	 */
 	public Boolean getPresentationPlayFullAttribute()
 	{
-		PresentationPlayFullAttribute attr = (PresentationPlayFullAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "play-full" ) ;
+		PresentationPlayFullAttribute attr = (PresentationPlayFullAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "play-full" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -181,7 +181,7 @@ public class PresentationSoundElement extends OdfElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -208,7 +208,7 @@ public class PresentationSoundElement extends OdfElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) ;
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -235,7 +235,7 @@ public class PresentationSoundElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -262,7 +262,7 @@ public class PresentationSoundElement extends OdfElement
 	 */
 	public String getXlinkActuateAttribute()
 	{
-		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) ;
+		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK), "actuate" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -289,7 +289,7 @@ public class PresentationSoundElement extends OdfElement
 	 */
 	public String getXlinkShowAttribute()
 	{
-		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) ;
+		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK), "show" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

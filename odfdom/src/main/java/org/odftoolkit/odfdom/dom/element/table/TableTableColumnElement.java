@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberColumnsRepeatedAttribute;
@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  */
 public class TableTableColumnElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-column" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "table-column" );
 
 
 	/**
@@ -56,7 +56,7 @@ public class TableTableColumnElement extends OdfStylableElement
 	 */
 	public TableTableColumnElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableColumn, OdfName.newName(OdfNamespaceNames.TABLE, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableColumn, OdfName.newName(OdfDocumentNamespace.TABLE, "style-name" )	);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class TableTableColumnElement extends OdfStylableElement
 	 */
 	public Integer getTableNumberColumnsRepeatedAttribute()
 	{
-		TableNumberColumnsRepeatedAttribute attr = (TableNumberColumnsRepeatedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-columns-repeated" ) ;
+		TableNumberColumnsRepeatedAttribute attr = (TableNumberColumnsRepeatedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "number-columns-repeated" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -105,7 +105,7 @@ public class TableTableColumnElement extends OdfStylableElement
 	 */
 	public String getTableStyleNameAttribute()
 	{
-		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "style-name" ) ;
+		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -132,7 +132,7 @@ public class TableTableColumnElement extends OdfStylableElement
 	 */
 	public String getTableVisibilityAttribute()
 	{
-		TableVisibilityAttribute attr = (TableVisibilityAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "visibility" ) ;
+		TableVisibilityAttribute attr = (TableVisibilityAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "visibility" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -159,7 +159,7 @@ public class TableTableColumnElement extends OdfStylableElement
 	 */
 	public String getTableDefaultCellStyleNameAttribute()
 	{
-		TableDefaultCellStyleNameAttribute attr = (TableDefaultCellStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "default-cell-style-name" ) ;
+		TableDefaultCellStyleNameAttribute attr = (TableDefaultCellStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "default-cell-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -186,7 +186,7 @@ public class TableTableColumnElement extends OdfStylableElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

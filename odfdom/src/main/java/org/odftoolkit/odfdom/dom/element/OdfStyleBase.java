@@ -30,12 +30,12 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfContainerElementBase;
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.style.StyleChartPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleDrawingPagePropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
@@ -476,7 +476,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
             String namespace = cur.getNamespaceURI();
             String local = cur.getLocalName();
             // styles can be still the same, even if they have different names
-            if (local.equals("name") && namespace.equals(OdfNamespaceNames.STYLE.getUri())) {
+            if (local.equals("name") && namespace.equals(OdfDocumentNamespace.STYLE.getUri())) {
                 continue;
             }
             ret.put(namespace + ":" + local, ((Attr) cur).getValue());

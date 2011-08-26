@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTrackChangesAttribute;
 
 
@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableTrackChangesAttribute;
  */
 public class TableTrackedChangesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "tracked-changes" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "tracked-changes" );
 
 
 	/**
@@ -73,7 +73,7 @@ public class TableTrackedChangesElement extends OdfElement
 	 */
 	public Boolean getTableTrackChangesAttribute()
 	{
-		TableTrackChangesAttribute attr = (TableTrackChangesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "track-changes" ) ;
+		TableTrackChangesAttribute attr = (TableTrackChangesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "track-changes" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

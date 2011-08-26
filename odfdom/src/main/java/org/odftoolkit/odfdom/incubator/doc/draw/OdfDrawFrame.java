@@ -22,7 +22,7 @@
 
 package org.odftoolkit.odfdom.incubator.doc.draw;
 
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 

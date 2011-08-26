@@ -22,8 +22,8 @@
 package org.odftoolkit.odfdom.incubator.doc.text;
 
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.text.TextLineBreakElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTabElement;
@@ -143,7 +143,7 @@ public class OdfWhitespaceProcessor {
 					{
 						spaceCount = Integer.parseInt(
 							((Element) node).getAttributeNS(
-							OdfNamespaceNames.TEXT.getUri(), "c"));
+							OdfDocumentNamespace.TEXT.getUri(), "c"));
 					}
 					catch(Exception e)
 					{

@@ -26,16 +26,18 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.xpath.XPath;
 
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfXMLFactory;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
@@ -66,6 +68,7 @@ public class OdfTableRow {
 	int mnRepeatedIndex;
 	int mRowsRepeatedNumber = -1;
 	private static final String DEFAULT_HEIGHT = "0.30in";
+	private OdfDocument mDocument;
 
 	/**
 	 * Construct the <code>OdfTableRow</code> feature.
@@ -75,6 +78,7 @@ public class OdfTableRow {
 	OdfTableRow(TableTableRowElement rowElement, int repeatedIndex) {
 		maRowElement = rowElement;
 		mnRepeatedIndex = repeatedIndex;
+		mDocument = (OdfDocument) ((OdfFileDom) maRowElement.getOwnerDocument()).getDocument();
 	}
 
 	/**
@@ -165,7 +169,7 @@ public class OdfTableRow {
 		String sHeightMM = String.valueOf(height) + Unit.MILLIMETER.abbr();
 		String sHeightIN = PositiveLength.mapToUnit(sHeightMM, Unit.INCH);
 		splitRepeatedRows();
-		maRowElement.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "style-name");
+		maRowElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
 		maRowElement.setProperty(OdfTableRowProperties.RowHeight, sHeightIN);
 	}
 
@@ -184,7 +188,7 @@ public class OdfTableRow {
 			Node oldRowElement = maRowElement;
 			for (int i = repeateNum - 1; i >= 0; i--) {
 				TableTableRowElement newRow = (TableTableRowElement) maRowElement.cloneNode(true);
-				newRow.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-rows-repeated");
+				newRow.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-repeated");
 				tableEle.insertBefore(newRow, refElement);
 				refElement = newRow;
 				if (repeatedRowIndex == i) {
@@ -308,7 +312,6 @@ public class OdfTableRow {
 		Node aPrevNode = maRowElement.getPreviousSibling();
 		Node aCurNode = maRowElement;
 		TableTableRowElement lastRow;
-		OdfDocument ownerDoc = ((OdfFileDom) maRowElement.getOwnerDocument()).getOdfDocument();
 		while (true) {
 			if (aPrevNode == null) {
 				//does not have previous sibling, then get the parent
@@ -330,8 +333,9 @@ public class OdfTableRow {
 					} else if (aPrevNode instanceof TableTableRowsElement
 							|| aPrevNode instanceof TableTableHeaderRowsElement
 							|| aPrevNode instanceof TableTableRowGroupElement) {
-						synchronized (ownerDoc) {
-							lastRow = (TableTableRowElement) ownerDoc.getXPath().evaluate(".//table:table-row[last()]", aPrevNode, XPathConstants.NODE);
+						XPath xpath = ((OdfContentDom) aPrevNode.getOwnerDocument()).getXPath();
+						synchronized (mDocument) {
+							lastRow = (TableTableRowElement) xpath.evaluate(".//table:table-row[last()]", aPrevNode, XPathConstants.NODE);
 						}
 						if (lastRow != null) {
 							return table.getRowInstance(lastRow, lastRow.getTableNumberRowsRepeatedAttribute().intValue() - 1);
@@ -362,8 +366,7 @@ public class OdfTableRow {
 		}
 
 		Node aNextNode = maRowElement.getNextSibling();
-		Node aCurNode = maRowElement;
-		OdfDocument ownerDoc = ((OdfFileDom) maRowElement.getOwnerDocument()).getOdfDocument();
+		Node aCurNode = maRowElement;		
 		TableTableRowElement firstRow;
 		while (true) {
 			if (aNextNode == null) {
@@ -385,8 +388,9 @@ public class OdfTableRow {
 					} else if (aNextNode instanceof TableTableRowsElement
 							|| aNextNode instanceof TableTableHeaderRowsElement
 							|| aNextNode instanceof TableTableRowGroupElement) {
-						synchronized (ownerDoc) {
-							firstRow = (TableTableRowElement) ownerDoc.getXPath().evaluate(".//table:table-row[first()]", aNextNode, XPathConstants.NODE);
+						XPath xpath = ((OdfContentDom) aNextNode.getOwnerDocument()).getXPath();
+						synchronized (mDocument) {
+							firstRow = (TableTableRowElement) xpath.evaluate(".//table:table-row[first()]", aNextNode, XPathConstants.NODE);
 						}
 						if (firstRow != null) {
 							return table.getRowInstance(firstRow, 0);
@@ -433,7 +437,7 @@ public class OdfTableRow {
 				styleName, OdfStyleFamily.TableCell);
 
 		if (style == null) {
-			style = ((OdfFileDom) maRowElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getStyle(styleName, OdfStyleFamily.TableCell);
+			style = mDocument.getDocumentStyles().getStyle(styleName, OdfStyleFamily.TableCell);
 		}
 		return style;
 	}
@@ -491,8 +495,8 @@ public class OdfTableRow {
 			nextCell = getCellByIndex(getCellCount() - 1);
 		}
 		for (int i = index + count; i > index; i--) {
-			TableTableCellElement newCell = (TableTableCellElement) OdfXMLFactory.newOdfElement((OdfFileDom) maRowElement.getOwnerDocument(),
-					OdfName.newName(OdfNamespaceNames.TABLE, "table-cell"));
+			TableTableCellElement newCell = (TableTableCellElement) OdfXMLFactory.newOdfElement((OdfFileDom) maRowElement.getOwnerDocument() ,
+					OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell"));
 			newCell.setTableStyleNameAttribute(preCell.getStyleName());
 			maRowElement.insertBefore(newCell, nextCell.getOdfElement());
 		}
@@ -579,7 +583,7 @@ public class OdfTableRow {
 				}
 				TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
 						(OdfFileDom) ownerTable.getOdfElement().getOwnerDocument(),
-						OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell"));
+						OdfName.newName(OdfDocumentNamespace.TABLE, "covered-table-cell"));
 				insertCellElementBefore(getOdfElement(), positionCell.getOdfElement(), newCellEle, count);
 				if (refCell.getRowIndex() == coverRefCell.getRowIndex()) //the first cover line
 				{
@@ -593,7 +597,7 @@ public class OdfTableRow {
 					insertCellElementBefore(getOdfElement(), positionCell.getOdfElement(), newCellEle, count);
 				} else { //the second and other cover line
 					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) refCell.getOdfElement().cloneNode(true);
-					newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-columns-repeated");
+					newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
 					insertCellElementBefore(getOdfElement(), positionCell.getOdfElement(), newCellEle, count);
 				}
 			} else if ((refCell.getOdfElement() == positionCell.getOdfElement())
@@ -660,7 +664,7 @@ public class OdfTableRow {
 				}
 				TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
 						(OdfFileDom) ownerTable.getOdfElement().getOwnerDocument(),
-						OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell"));
+						OdfName.newName(OdfDocumentNamespace.TABLE, "covered-table-cell"));
 				getOdfElement().insertBefore(newCellEle, positionCell.getOdfElement());
 				if (refCell.getRowIndex() == coverRefCell.getRowIndex()) //the first cover line
 				{
@@ -676,7 +680,7 @@ public class OdfTableRow {
 					newCell = ownerTable.getCellInstance(newCellEle, 0, 0);
 				} else { //the second and other cover line
 					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) refCell.getOdfElement().cloneNode(true);
-					newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-columns-repeated");
+					newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
 					getOdfElement().insertBefore(newCellEle, positionCell.getOdfElement());
 					newCell = ownerTable.getCellInstance(newCellEle, 0, 0);
 				}
@@ -702,16 +706,16 @@ public class OdfTableRow {
 	}
 
 	private void cleanCell(TableTableCellElement newCellEle) {
-		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "value");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "date-value");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "time-value");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "boolean-value");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "string-value");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "formula");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-columns-repeated");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-columns-spanned");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "date-value");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "time-value");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "boolean-value");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "string-value");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "formula");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-spanned");
 		if(!getTable().isCellStyleInheritance()){
-			newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "style-name");
+			newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
 		}
 		Node n = newCellEle.getFirstChild();
 		while (n != null) {

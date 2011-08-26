@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TablePositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStartPositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableEndPositionAttribute;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableEndPositionAttribute;
  */
 public class TableMovementCutOffElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "movement-cut-off" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "movement-cut-off" );
 
 
 	/**
@@ -88,7 +88,7 @@ public class TableMovementCutOffElement extends OdfElement
 	 */
 	public Integer getTablePositionAttribute()
 	{
-		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "position" ) ;
+		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "position" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -115,7 +115,7 @@ public class TableMovementCutOffElement extends OdfElement
 	 */
 	public Integer getTableStartPositionAttribute()
 	{
-		TableStartPositionAttribute attr = (TableStartPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "start-position" ) ;
+		TableStartPositionAttribute attr = (TableStartPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "start-position" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -142,7 +142,7 @@ public class TableMovementCutOffElement extends OdfElement
 	 */
 	public Integer getTableEndPositionAttribute()
 	{
-		TableEndPositionAttribute attr = (TableEndPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-position" ) ;
+		TableEndPositionAttribute attr = (TableEndPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "end-position" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

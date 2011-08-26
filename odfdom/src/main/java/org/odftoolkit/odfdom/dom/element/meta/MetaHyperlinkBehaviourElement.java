@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.meta;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeTargetFrameNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
 
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
  */
 public class MetaHyperlinkBehaviourElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "hyperlink-behaviour" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.META, "hyperlink-behaviour" );
 
 	/**
 	 * The value set of {@odf.attribute xlink:show}.
@@ -106,7 +106,7 @@ public class MetaHyperlinkBehaviourElement extends OdfElement
 	 */
 	public String getOfficeTargetFrameNameAttribute()
 	{
-		OfficeTargetFrameNameAttribute attr = (OfficeTargetFrameNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "target-frame-name" ) ;
+		OfficeTargetFrameNameAttribute attr = (OfficeTargetFrameNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.OFFICE), "target-frame-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -133,7 +133,7 @@ public class MetaHyperlinkBehaviourElement extends OdfElement
 	 */
 	public String getXlinkShowAttribute()
 	{
-		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) ;
+		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK), "show" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

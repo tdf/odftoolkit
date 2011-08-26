@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.db;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute db:enable-sql92-check}.
@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class DbEnableSql92CheckAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DB, "enable-sql92-check" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.DB, "enable-sql92-check" );
 	public static final String DEFAULT_VALUE = "false";
 
 	/**

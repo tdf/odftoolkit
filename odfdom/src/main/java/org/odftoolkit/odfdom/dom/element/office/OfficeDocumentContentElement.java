@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.office;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.grddl.GrddlTransformationAttribute;
 
@@ -53,7 +53,7 @@ import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutElement;
  */
 public class OfficeDocumentContentElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "document-content" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.OFFICE, "document-content" );
 
 
 	/**
@@ -94,7 +94,7 @@ public class OfficeDocumentContentElement extends OdfElement
 	 */
 	public String getOfficeVersionAttribute()
 	{
-		OfficeVersionAttribute attr = (OfficeVersionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "version" ) ;
+		OfficeVersionAttribute attr = (OfficeVersionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.OFFICE), "version" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -121,7 +121,7 @@ public class OfficeDocumentContentElement extends OdfElement
 	 */
 	public String getGrddlTransformationAttribute()
 	{
-		GrddlTransformationAttribute attr = (GrddlTransformationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.GRDDL), "transformation" ) ;
+		GrddlTransformationAttribute attr = (GrddlTransformationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.GRDDL), "transformation" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextTableNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextTableTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextDatabaseNameAttribute;
@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.element.form.FormConnectionResourceElement;
  */
 public class TextDatabaseDisplayElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "database-display" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "database-display" );
 
 
 	/**
@@ -89,7 +89,7 @@ public class TextDatabaseDisplayElement extends OdfElement
 	 */
 	public String getTextTableNameAttribute()
 	{
-		TextTableNameAttribute attr = (TextTableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "table-name" ) ;
+		TextTableNameAttribute attr = (TextTableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "table-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -116,7 +116,7 @@ public class TextDatabaseDisplayElement extends OdfElement
 	 */
 	public String getTextTableTypeAttribute()
 	{
-		TextTableTypeAttribute attr = (TextTableTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "table-type" ) ;
+		TextTableTypeAttribute attr = (TextTableTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "table-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -143,7 +143,7 @@ public class TextDatabaseDisplayElement extends OdfElement
 	 */
 	public String getTextDatabaseNameAttribute()
 	{
-		TextDatabaseNameAttribute attr = (TextDatabaseNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "database-name" ) ;
+		TextDatabaseNameAttribute attr = (TextDatabaseNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "database-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -170,7 +170,7 @@ public class TextDatabaseDisplayElement extends OdfElement
 	 */
 	public String getStyleDataStyleNameAttribute()
 	{
-		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) ;
+		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "data-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -197,7 +197,7 @@ public class TextDatabaseDisplayElement extends OdfElement
 	 */
 	public String getTextColumnNameAttribute()
 	{
-		TextColumnNameAttribute attr = (TextColumnNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "column-name" ) ;
+		TextColumnNameAttribute attr = (TextColumnNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "column-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

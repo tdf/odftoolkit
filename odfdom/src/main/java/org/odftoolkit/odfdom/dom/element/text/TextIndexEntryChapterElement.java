@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
  */
 public class TextIndexEntryChapterElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "index-entry-chapter" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "index-entry-chapter" );
 
 	/**
 	 * The value set of {@odf.attribute text:display}.
@@ -86,7 +86,7 @@ public class TextIndexEntryChapterElement extends OdfStylableElement
 	 */
 	public TextIndexEntryChapterElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Text, OdfName.newName(OdfNamespaceNames.TEXT, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Text, OdfName.newName(OdfDocumentNamespace.TEXT, "style-name" )	);
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class TextIndexEntryChapterElement extends OdfStylableElement
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) ;
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -135,7 +135,7 @@ public class TextIndexEntryChapterElement extends OdfStylableElement
 	 */
 	public String getTextDisplayAttribute()
 	{
-		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display" ) ;
+		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "display" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -162,7 +162,7 @@ public class TextIndexEntryChapterElement extends OdfStylableElement
 	 */
 	public String getTextOutlineLevelAttribute()
 	{
-		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "outline-level" ) ;
+		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "outline-level" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -32,8 +32,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
@@ -94,25 +94,25 @@ public class NoTempFileTest {
 			pkg.save(ResourceUtilities.newTestOutputFile(New_File));
 
 			OdfDocument doc = OdfDocument.loadDocument(TEST_FILE_FOLDER + New_File);
-			OdfFileDom docdom = doc.getContentDom();
+			OdfContentDom contentDom = doc.getContentDom();
 
-			XPath xpath = doc.getXPath();
-			DrawFrameElement frame = docdom.newOdfElement(DrawFrameElement.class);
+			XPath xpath = contentDom.getXPath();
+			DrawFrameElement frame = contentDom.newOdfElement(DrawFrameElement.class);
 			frame.setSvgHeightAttribute("3in");
 			frame.setSvgWidthAttribute("7in");
-			DrawImageElement image = docdom.newOdfElement(DrawImageElement.class);
+			DrawImageElement image = contentDom.newOdfElement(DrawImageElement.class);
 			image.setXlinkHrefAttribute("Pictures/myHoliday.jpg");
 			frame.appendChild(image);
 
-			TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", docdom, XPathConstants.NODE);
+			TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", contentDom, XPathConstants.NODE);
 			para.appendChild(frame);
 			doc.save(TEST_FILE_FOLDER + New_File);
 			doc.close();
 
 			//Test if the image has been inserted
 			doc = OdfDocument.loadDocument(TEST_FILE_FOLDER + New_File);
-			docdom = doc.getContentDom();
-			DrawFrameElement frameobj = (DrawFrameElement) xpath.evaluate("//text:p[1]/draw:frame", docdom, XPathConstants.NODE);
+			contentDom = doc.getContentDom();
+			DrawFrameElement frameobj = (DrawFrameElement) xpath.evaluate("//text:p[1]/draw:frame", contentDom, XPathConstants.NODE);
 			Assert.assertEquals("3in", frameobj.getSvgHeightAttribute());
 			Assert.assertEquals("7in", frameobj.getSvgWidthAttribute());
 			DrawImageElement imageobj = (DrawImageElement) frameobj.getFirstChild();

@@ -32,9 +32,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 import org.w3c.dom.Element;
@@ -114,7 +114,7 @@ public class OdfParagraphTest {
 		Assert.assertEquals(part1, node.getTextContent());
 		node = node.getNextSibling();
 		Assert.assertEquals(Node.ELEMENT_NODE, node.getNodeType());
-		Assert.assertEquals(OdfNamespaceNames.TEXT.getUri(),
+		Assert.assertEquals(OdfDocumentNamespace.TEXT.getUri(),
 			node.getNamespaceURI());
 		Assert.assertEquals("tab", node.getLocalName());
 		node = node.getNextSibling();
@@ -163,7 +163,7 @@ public class OdfParagraphTest {
 		Assert.assertEquals(part1, node.getTextContent());
 		node = node.getNextSibling();
 		Assert.assertEquals(Node.ELEMENT_NODE, node.getNodeType());
-		Assert.assertEquals(OdfNamespaceNames.TEXT.getUri(),
+		Assert.assertEquals(OdfDocumentNamespace.TEXT.getUri(),
 			node.getNamespaceURI());
 		Assert.assertEquals("line-break", node.getLocalName());
 		node = node.getNextSibling();
@@ -256,7 +256,7 @@ public class OdfParagraphTest {
 		Assert.assertEquals("s", node.getLocalName());
 		element = (Element) node;
 		Assert.assertEquals("3", element.getAttributeNS(
-			OdfNamespaceNames.TEXT.getUri(), "c"));
+			OdfDocumentNamespace.TEXT.getUri(), "c"));
 
 		node = node.getNextSibling();
 		Assert.assertNotNull(node);

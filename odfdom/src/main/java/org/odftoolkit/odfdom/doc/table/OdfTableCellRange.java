@@ -27,13 +27,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfXMLFactory;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableNamedExpressionsElement;
@@ -71,7 +71,7 @@ public class OdfTableCellRange {
 	OdfTableCellRange(OdfTable table, int startColumn, int startRow, int endColumn, int endRow) {
 		maOwnerTable = table;
 
-		OdfDocument doc = ((OdfFileDom) maOwnerTable.getOdfElement().getOwnerDocument()).getOdfDocument();
+		OdfDocument doc = (OdfDocument) ((OdfFileDom) maOwnerTable.getOdfElement().getOwnerDocument()).getDocument();
 		if (doc instanceof OdfSpreadsheetDocument) {
 			mbSpreadsheet = true;
 		}
@@ -149,8 +149,8 @@ public class OdfTableCellRange {
 				&& !mbSpreadsheet) {
 			if (firstCell.getOdfElement() instanceof TableTableCellElement) {
 				TableTableCellElement firstCellElement = (TableTableCellElement) (firstCell.getOdfElement());
-				firstCellElement.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-columns-spanned");
-				firstCellElement.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-rows-spanned");
+				firstCellElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-spanned");
+				firstCellElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-spanned");
 				firstCellElement.setOfficeValueTypeAttribute(OfficeValueTypeAttribute.Value.STRING.toString());
 			}
 			//just copy the text of the other cells to this first cell
@@ -178,7 +178,7 @@ public class OdfTableCellRange {
 			//the first cell, set the span attribute
 			if (firstCell.getOdfElement() instanceof TableTableCellElement) {
 				TableTableCellElement firstCellElement = (TableTableCellElement) (firstCell.getOdfElement());
-				firstCellElement.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-columns-spanned");
+				firstCellElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-spanned");
 				firstCellElement.setTableNumberRowsSpannedAttribute(Integer.valueOf(mnEndRow - mnStartRow + 1));
 				firstCellElement.setOfficeValueTypeAttribute(OfficeValueTypeAttribute.Value.STRING.toString());
 			}
@@ -197,7 +197,7 @@ public class OdfTableCellRange {
 							TableTableCellElement firstColumnCell = (TableTableCellElement) cellBase.getOdfElement();
 							TableCoveredTableCellElement coveredCell = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
 									(OdfFileDom) firstColumnCell.getOwnerDocument(),
-									OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell"));
+									OdfName.newName(OdfDocumentNamespace.TABLE, "covered-table-cell"));
 							OdfTableRow parentRow = cellBase.getTableRow();
 							parentRow.getOdfElement().insertBefore(coveredCell, firstColumnCell);
 							parentRow.getOdfElement().removeChild(firstColumnCell);
@@ -219,7 +219,7 @@ public class OdfTableCellRange {
 			//the first cell, set the span attribute
 			if (firstCell.getOdfElement() instanceof TableTableCellElement) {
 				TableTableCellElement firstCellElement = (TableTableCellElement) (firstCell.getOdfElement());
-				firstCellElement.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-rows-spanned");
+				firstCellElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-spanned");
 				firstCellElement.setTableNumberColumnsSpannedAttribute(Integer.valueOf(mnEndColumn - mnStartColumn + 1));
 				firstCellElement.setOfficeValueTypeAttribute(OfficeValueTypeAttribute.Value.STRING.toString());
 			}
@@ -238,7 +238,7 @@ public class OdfTableCellRange {
 							TableTableCellElement firstRowCell = (TableTableCellElement) cellBase.getOdfElement();
 							TableCoveredTableCellElement coveredCell = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
 									(OdfFileDom) firstRowCell.getOwnerDocument(),
-									OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell"));
+									OdfName.newName(OdfDocumentNamespace.TABLE, "covered-table-cell"));
 							OdfTableRow parentRow = cellBase.getTableRow();
 							parentRow.getOdfElement().insertBefore(coveredCell, firstRowCell);
 							parentRow.getOdfElement().removeChild(firstRowCell);
@@ -269,7 +269,7 @@ public class OdfTableCellRange {
 							TableTableCellElement cell = (TableTableCellElement) cellBase.getOdfElement();
 							TableCoveredTableCellElement coveredCell = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
 									(OdfFileDom) cell.getOwnerDocument(),
-									OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell"));
+									OdfName.newName(OdfDocumentNamespace.TABLE, "covered-table-cell"));
 
 							OdfTableRow parentRow = cellBase.getTableRow();
 							parentRow.getOdfElement().insertBefore(coveredCell, cell);
@@ -391,7 +391,7 @@ public class OdfTableCellRange {
 			OdfFileDom contentDom = ((OdfFileDom) maOwnerTable.getOdfElement().getOwnerDocument());
 			TableNamedExpressionsElement nameExpress = (TableNamedExpressionsElement) OdfXMLFactory.newOdfElement(
 					contentDom,
-					OdfName.newName(OdfNamespaceNames.TABLE, "named-expressions"));
+					OdfName.newName(OdfDocumentNamespace.TABLE, "named-expressions"));
 			String startCellRange = "$" + maOwnerTable.getTableName() + "." + maOwnerTable.getAbsoluteCellAddress(mnStartColumn, mnStartRow);
 			String endCellRange = "$" + maOwnerTable.getTableName() + "." + maOwnerTable.getAbsoluteCellAddress(mnEndColumn, mnEndRow);
 			TableNamedRangeElement nameRange = (TableNamedRangeElement) nameExpress.newTableNamedRangeElement(startCellRange + ":" + endCellRange, cellRangeName);

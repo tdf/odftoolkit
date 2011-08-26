@@ -22,116 +22,116 @@
 // !!! GENERATED SOURCE CODE !!!
 package org.odftoolkit.odfdom.dom.style.props;
 
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 
 
 public interface OdfParagraphProperties {
     public final static OdfStyleProperty BackgroundColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "background-color"));
     public final static OdfStyleProperty Border = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "border"));
     public final static OdfStyleProperty BorderBottom = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-bottom"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "border-bottom"));
     public final static OdfStyleProperty BorderLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "border-left"));
     public final static OdfStyleProperty BorderRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "border-right"));
     public final static OdfStyleProperty BorderTop = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-top"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "border-top"));
     public final static OdfStyleProperty BreakAfter = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-after"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "break-after"));
     public final static OdfStyleProperty BreakBefore = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-before"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "break-before"));
     public final static OdfStyleProperty HyphenationKeep = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "hyphenation-keep"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "hyphenation-keep"));
     public final static OdfStyleProperty HyphenationLadderCount = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "hyphenation-ladder-count"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "hyphenation-ladder-count"));
     public final static OdfStyleProperty JoinBorder = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "join-border"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "join-border"));
     public final static OdfStyleProperty KeepTogether = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "keep-together"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "keep-together"));
     public final static OdfStyleProperty KeepWithNext = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "keep-with-next"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "keep-with-next"));
     public final static OdfStyleProperty LineHeight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "line-height"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "line-height"));
     public final static OdfStyleProperty Margin = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "margin"));
     public final static OdfStyleProperty MarginBottom = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-bottom"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "margin-bottom"));
     public final static OdfStyleProperty MarginLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "margin-left"));
     public final static OdfStyleProperty MarginRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "margin-right"));
     public final static OdfStyleProperty MarginTop = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-top"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "margin-top"));
     public final static OdfStyleProperty Orphans = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "orphans"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "orphans"));
     public final static OdfStyleProperty Padding = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "padding"));
     public final static OdfStyleProperty PaddingBottom = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-bottom"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "padding-bottom"));
     public final static OdfStyleProperty PaddingLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "padding-left"));
     public final static OdfStyleProperty PaddingRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "padding-right"));
     public final static OdfStyleProperty PaddingTop = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-top"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "padding-top"));
     public final static OdfStyleProperty TextAlign = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "text-align"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "text-align"));
     public final static OdfStyleProperty TextAlignLast = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "text-align-last"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "text-align-last"));
     public final static OdfStyleProperty TextIndent = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "text-indent"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "text-indent"));
     public final static OdfStyleProperty Widows = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "widows"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "widows"));
     public final static OdfStyleProperty AutoTextIndent = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "auto-text-indent"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "auto-text-indent"));
     public final static OdfStyleProperty BackgroundTransparency = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "background-transparency"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "background-transparency"));
     public final static OdfStyleProperty BorderLineWidth = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "border-line-width"));
     public final static OdfStyleProperty BorderLineWidthBottom = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-bottom"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "border-line-width-bottom"));
     public final static OdfStyleProperty BorderLineWidthLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "border-line-width-left"));
     public final static OdfStyleProperty BorderLineWidthRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "border-line-width-right"));
     public final static OdfStyleProperty BorderLineWidthTop = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-top"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "border-line-width-top"));
     public final static OdfStyleProperty FontIndependentLineSpacing = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-independent-line-spacing"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "font-independent-line-spacing"));
     public final static OdfStyleProperty JustifySingleWord = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "justify-single-word"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "justify-single-word"));
     public final static OdfStyleProperty LineBreak = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "line-break"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "line-break"));
     public final static OdfStyleProperty LineHeightAtLeast = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "line-height-at-least"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "line-height-at-least"));
     public final static OdfStyleProperty LineSpacing = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "line-spacing"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "line-spacing"));
     public final static OdfStyleProperty PageNumber = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "page-number"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "page-number"));
     public final static OdfStyleProperty PunctuationWrap = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "punctuation-wrap"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "punctuation-wrap"));
     public final static OdfStyleProperty RegisterTrue = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "register-true"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "register-true"));
     public final static OdfStyleProperty StyleShadow = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shadow"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "shadow"));
     public final static OdfStyleProperty SnapToLayoutGrid = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "snap-to-layout-grid"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "snap-to-layout-grid"));
     public final static OdfStyleProperty TabStopDistance = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "tab-stop-distance"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "tab-stop-distance"));
     public final static OdfStyleProperty TextAutospace = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-autospace"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "text-autospace"));
     public final static OdfStyleProperty VerticalAlign = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-align"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "vertical-align"));
     public final static OdfStyleProperty WritingMode = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "writing-mode"));
     public final static OdfStyleProperty WritingModeAutomatic = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode-automatic"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "writing-mode-automatic"));
     public final static OdfStyleProperty LineNumber = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "line-number"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "line-number"));
     public final static OdfStyleProperty NumberLines = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "number-lines"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "number-lines"));
 }

@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.script.ScriptLanguageAttribute;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.script.ScriptLanguageAttribute;
  */
 public class TextScriptElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "script" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "script" );
 
 
 	/**
@@ -86,7 +86,7 @@ public class TextScriptElement extends OdfElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) ;
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public class TextScriptElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public class TextScriptElement extends OdfElement
 	 */
 	public String getScriptLanguageAttribute()
 	{
-		ScriptLanguageAttribute attr = (ScriptLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SCRIPT), "language" ) ;
+		ScriptLanguageAttribute attr = (ScriptLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SCRIPT), "language" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

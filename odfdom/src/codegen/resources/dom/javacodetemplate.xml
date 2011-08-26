@@ -26,10 +26,9 @@
 <ref name="gen_dom_attributes"/>
 <ref name="gen_dom_base_elements"/>
 <ref name="gen_dom_elements"/>
-<!--ref name="gen_doc_elements"/-->
-<ref name="gen_OdfNamespaceNames"/>
-<ref name="gen_OdfElementNames"/>
-<ref name="gen_OdfAttributeNames"/>
+<!--ref name="gen_doc_elements"/
+<ref name="gen_OdfDocumentNamespace"/>-->
+
     
 <!-- generate flat rng -->
 <!--file name="elements" extension="xml">
@@ -238,7 +237,7 @@
     <if test="not prefix(attributeqname)">
         <set namespace='""'/>
         <else>
-            <set namespace="OdfNamespace.newNamespace(OdfNamespaceNames.%{toupper(prefix(attributeqname))})"/>
+            <set namespace="OdfNamespace.newNamespace(OdfDocumentNamespace.%{toupper(prefix(attributeqname))})"/>
         </else>
     </if>
     <set attributeclassname="%{identifier(prefix(attributeqname))}%{identifier(attributename)}Attribute"/>
@@ -273,7 +272,7 @@
     <if test="not prefix(attributeqname)">
         <set namespace='""'/>
         <else>
-            <set namespace="OdfNamespace.newNamespace(OdfNamespaceNames.%{toupper(prefix(attributeqname))})"/>
+            <set namespace="OdfNamespace.newNamespace(OdfDocumentNamespace.%{toupper(prefix(attributeqname))})"/>
         </else>
     </if>
     
@@ -378,10 +377,10 @@
 </define>
 
 <define name="element-import-section">
-<code>import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+<code>import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 </code>
 <if test="(elementstylefamily != '') and (elementstylefamily != 'draw:graphic,presentation:presentation')">
 <code>import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
@@ -504,15 +503,15 @@ import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
           <ref name="header"/>
 <code>package %{pathname};
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
 </code>
 
 <if test="hasmultivaluesets or hasdefaultvalue">
-<code>import org.odftoolkit.odfdom.OdfElement;
+<code>import org.odftoolkit.odfdom.pkg.OdfElement;
 </code>
 </if>
 <foreach type="attribute">
@@ -528,7 +527,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class %{attributeclassname} extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.%{toupper(prefix(attributeqname))}, "%{local_name(attributeqname)}" );</code>
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.%{toupper(prefix(attributeqname))}, "%{local_name(attributeqname)}" );</code>
 	<foreach type="defaultvalueset">
 		<if test="hasmultidefaultvalues">
 			<if test="(value='true' or value='false') and ( valuetype!='enum' )">
@@ -1106,7 +1105,7 @@ public class %{attributeclassname} extends OdfAttribute {
     <set classname="org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)}.%{identifier(prefix(elementqname))}%{identifier(local_name(elementqname))}ElementBase"/>
     <if test="not elementstylefamily">        
         <if test="elementbasename = 'container'">
-            <set baseclassname="org.odftoolkit.odfdom.OdfContainerElementBase"/>
+            <set baseclassname="org.odftoolkit.odfdom.pkg.OdfContainerElementBase"/>
             <else>
                 <if test="elementbasename = 'style'">
                     <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStyleBase"/>
@@ -1114,7 +1113,7 @@ public class %{attributeclassname} extends OdfAttribute {
                        <if test="elementbasename = 'styleproperties'">
                           <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
                           <else>
-                              <set baseclassname="org.odftoolkit.odfdom.OdfElement"/>
+                              <set baseclassname="org.odftoolkit.odfdom.pkg.OdfElement"/>
                           </else>
                        </if>
                      </else>
@@ -1208,7 +1207,7 @@ public abstract class %{local_name(classname)} extends %{local_name(baseclassnam
 <define name="get_baseclassname">
     <if test="not elementbasename">
         <if test="not elementstylefamily">        
-            <set baseclassname="org.odftoolkit.odfdom.OdfElement"/>
+            <set baseclassname="org.odftoolkit.odfdom.pkg.OdfElement"/>
             <else>
                 <if test="elementstylefamily!='draw:graphic,presentation:presentation'">
                     <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStylableElement"/>
@@ -1220,7 +1219,7 @@ public abstract class %{local_name(classname)} extends %{local_name(baseclassnam
         </if>
         <else>
             <if test="elementbasename = 'container'">
-                <set baseclassname="org.odftoolkit.odfdom.OdfContainerElementBase"/>
+                <set baseclassname="org.odftoolkit.odfdom.pkg.OdfContainerElementBase"/>
             <else>
                 <if test="elementbasename = 'style'">
                     <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStyleBase"/>
@@ -1320,7 +1319,7 @@ package %{prefix(classname)};
  */
 public class %{local_name(classname)} extends %{local_name(baseclassname)}
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.%{toupper(prefix(elementqname))}, "%{local_name(elementqname)}" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.%{toupper(prefix(elementqname))}, "%{local_name(elementqname)}" );
 </code>
 <ref name = "attributevaluedeclare"/>
 <code>
@@ -1334,7 +1333,7 @@ public class %{local_name(classname)} extends %{local_name(baseclassname)}
 	{
 		super( ownerDoc, ELEMENT_NAME</code>
 <if test="(elementstylefamily != '') and (elementstylefamily != 'draw:graphic,presentation:presentation')">
-<code>, OdfStyleFamily.%{identifier(elementstylefamily)}, OdfName.newName(OdfNamespaceNames.%{toupper(prefix(elementstylefamily))}, "style-name" )</code>
+<code>, OdfStyleFamily.%{identifier(elementstylefamily)}, OdfName.newName(OdfDocumentNamespace.%{toupper(prefix(elementstylefamily))}, "style-name" )</code>
 </if>
 <code>	);
 	}
@@ -1358,7 +1357,7 @@ public class %{local_name(classname)} extends %{local_name(baseclassname)}
             		<set propertysetname = '%{identifier(prefix(attributeqname))}%{identifier(local_name(attributeqname))}'/>
             	</if>
 <code>    public final static OdfStyleProperty %{propertysetname} = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.%{identifier(local_name(elementqname))}, OdfName.newName(OdfNamespaceNames.%{toupper(prefix(attributeqname))}, "%{local_name(attributeqname)}"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.%{identifier(local_name(elementqname))}, OdfName.newName(OdfDocumentNamespace.%{toupper(prefix(attributeqname))}, "%{local_name(attributeqname)}"));
 </code>
             </foreach>
 	   </if>
@@ -1534,22 +1533,22 @@ public class %{local_name(classname)} extends %{local_name(baseclassname)}
     </file>
   </foreach>  
 </define>
-<!-- generate OdfNamespaceNames java file -->
-<define name="gen_OdfNamespaceNames">
-	<set classname="org.odftoolkit.odfdom.dom.OdfNamespaceNames"/>
+<!-- generate OdfDocumentNamespace java file
+<define name="gen_OdfDocumentNamespace">
+	<set classname="org.odftoolkit.odfdom.dom.OdfDocumentNamespace"/>
   	<file path="%{prefix(classname)}" name="%{local_name(classname)}" extensions="java">
       <ref name="header"/>
 <code>
 package %{prefix(classname)};
 
-import org.odftoolkit.odfdom.NamespaceName;
+import org.odftoolkit.odfdom.pkg.NamespaceName;
 
 /**
  * Namespaces of OpenDocument 1.2 XML Schema
  */
 public enum %{local_name(classname)} implements NamespaceName {
 </code>
-<!-- add XML namespace in OdfNameSpace.java if it is not exist-->
+<!~~ add XML namespace in OdfNameSpace.java if it is not exist~~>
 	<set testHasXMLNS = "false"/>
     <foreach type="namespace" seperator=","><code>
 	%{toupper(namespaceprefix)}("%{namespaceprefix}", "%{namespaceuri}")</code>  
@@ -1570,7 +1569,7 @@ public enum %{local_name(classname)} implements NamespaceName {
 	private String mPrefix;
 	private String mUri;
 	
-	OdfNamespaceNames(String prefix, String uri) {
+	OdfDocumentNamespace(String prefix, String uri) {
 		mPrefix = prefix;
 		mUri = uri;
 	}    
@@ -1592,101 +1591,7 @@ public enum %{local_name(classname)} implements NamespaceName {
 </code>
 </file>
 </define>
-
-
-
-<define name="gen_OdfElementNames">
-	<set classname="org.odftoolkit.odfdom.dom.OdfElementNames"/>
-  	<file path="%{prefix(classname)}" name="%{local_name(classname)}" extensions="java">
-      <ref name="header"/>
-<code>
-package %{prefix(classname)};
-
-import org.odftoolkit.odfdom.OdfName;
-
-/**
- * constants for OpenDocument Element
- */
-public enum %{local_name(classname)} {
-</code>
-<foreach type="element" seperator=",">
-<if test="(contains(elementname, prefix(elementqname), '-') and not endswith(elementname,'table') ) or ( elementname=prefix(elementqname) ) or (startswith(elementname, prefix(elementqname)) and prefix(elementqname) = 'anim')">
-	<set elementclass="org.odftoolkit.odfdom.doc.%{prefix(elementqname)}.Odf%{identifier(elementname)}"/>
-<else>
-	<set elementclass="org.odftoolkit.odfdom.doc.%{prefix(elementqname)}.Odf%{identifier(prefix(elementqname))}%{identifier(elementname)}"/>
-</else>
-</if>
-<if test="prefix(elementqname) = 'meta' or elementqname='office:meta' or prefix(elementqname) = 'table' or elementqname='draw:page' or elementqname='office:presentation' or elementqname='presentation:notes'">
-	<set elementclass="org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)}.%{identifier(prefix(elementqname))}%{identifier(local_name(elementqname))}Element"/>
-</if>
-<!-- we must use the full qualified class name here as we have equal element names in different namespaces! -->
-<code>
-	%{toupper(identifier(prefix(elementqname)))}%{toupper(identifier(elementname))}(%{elementclass}.ELEMENT_NAME, %{elementclass}.class)</code>
-</foreach>
-<code>;
-</code>
-<code>
-	private OdfName mName;
-    private Class mElementClass;
-    
-    OdfElementNames(OdfName name, Class elementclass) {
-    	mName = name;
-    	mElementClass = elementclass;
-    }
-    
-    public OdfName getOdfName(){
-    	return mName;
-    }
-    
-    public Class getElementClass(){
-    	return mElementClass;
-    }
-}
-</code>
-</file>
-</define>
-<define name="gen_OdfAttributeNames">
-	<set classname="org.odftoolkit.odfdom.dom.OdfAttributeNames"/>
-  	<file path="%{prefix(classname)}" name="%{local_name(classname)}" extensions="java">
-      <ref name="header"/>
-<code>
-package %{prefix(classname)};
-
-import org.odftoolkit.odfdom.OdfName;
-
-/**
- * constants for OpenDocument Attribute
- */
-public enum %{local_name(classname)} {</code>
-<foreach type="attributeset" seperator=",">
-<set attributeclass="org.odftoolkit.odfdom.dom.attribute.%{prefix(attributeqname)}.%{identifier(prefix(attributeqname))}%{identifier(attributename)}Attribute"/>
-<!-- we must use the full qualified class name here as we have equal attribute names in different namespaces! -->
-<code>
-	%{toupper(identifier(prefix(attributeqname)))}%{toupper(identifier(attributename))}(%{attributeclass}.ATTRIBUTE_NAME, %{attributeclass}.class)</code>
-</foreach>
-<code>;
-</code>
-<code>
-	private OdfName mName;
-    private Class mAttributeClass;
-    
-    OdfAttributeNames(OdfName name, Class attributeclass) {
-    	mName = name;
-    	mAttributeClass = attributeclass;
-    }
-    
-    public OdfName getOdfName(){
-    	return mName;
-    }
-    
-    public Class getAttributeClass(){
-    	return mAttributeClass;
-    }
-}
-</code>
-</file>
-</define>
-
+ -->
 <!-- generate doc element java classes ===================================== -->
 <define name="gen_doc_elements">
 <foreach type="element">
@@ -1702,7 +1607,7 @@ public enum %{local_name(classname)} {</code>
       <code>
 package %{prefix(classname)};
 
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import %{baseclassname};
 
 /**

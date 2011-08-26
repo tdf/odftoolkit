@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.db;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbUserNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbUseSystemUserAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbIsPasswordRequiredAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbLoginTimeoutAttribute;
  */
 public class DbLoginElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "login" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DB, "login" );
 
 
 	/**
@@ -76,7 +76,7 @@ public class DbLoginElement extends OdfElement
 	 */
 	public String getDbUserNameAttribute()
 	{
-		DbUserNameAttribute attr = (DbUserNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "user-name" ) ;
+		DbUserNameAttribute attr = (DbUserNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "user-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -103,7 +103,7 @@ public class DbLoginElement extends OdfElement
 	 */
 	public Boolean getDbUseSystemUserAttribute()
 	{
-		DbUseSystemUserAttribute attr = (DbUseSystemUserAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "use-system-user" ) ;
+		DbUseSystemUserAttribute attr = (DbUseSystemUserAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "use-system-user" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -130,7 +130,7 @@ public class DbLoginElement extends OdfElement
 	 */
 	public Boolean getDbIsPasswordRequiredAttribute()
 	{
-		DbIsPasswordRequiredAttribute attr = (DbIsPasswordRequiredAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-password-required" ) ;
+		DbIsPasswordRequiredAttribute attr = (DbIsPasswordRequiredAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "is-password-required" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -157,7 +157,7 @@ public class DbLoginElement extends OdfElement
 	 */
 	public Integer getDbLoginTimeoutAttribute()
 	{
-		DbLoginTimeoutAttribute attr = (DbLoginTimeoutAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "login-timeout" ) ;
+		DbLoginTimeoutAttribute attr = (DbLoginTimeoutAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "login-timeout" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

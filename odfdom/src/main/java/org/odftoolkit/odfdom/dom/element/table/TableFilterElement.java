@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTargetRangeAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableConditionSourceAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableConditionSourceRangeAddressAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayDuplicatesAttribute
  */
 public class TableFilterElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "filter" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "filter" );
 
 
 	/**
@@ -76,7 +76,7 @@ public class TableFilterElement extends OdfElement
 	 */
 	public String getTableTargetRangeAddressAttribute()
 	{
-		TableTargetRangeAddressAttribute attr = (TableTargetRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "target-range-address" ) ;
+		TableTargetRangeAddressAttribute attr = (TableTargetRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "target-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -103,7 +103,7 @@ public class TableFilterElement extends OdfElement
 	 */
 	public String getTableConditionSourceAttribute()
 	{
-		TableConditionSourceAttribute attr = (TableConditionSourceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "condition-source" ) ;
+		TableConditionSourceAttribute attr = (TableConditionSourceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "condition-source" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public class TableFilterElement extends OdfElement
 	 */
 	public String getTableConditionSourceRangeAddressAttribute()
 	{
-		TableConditionSourceRangeAddressAttribute attr = (TableConditionSourceRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "condition-source-range-address" ) ;
+		TableConditionSourceRangeAddressAttribute attr = (TableConditionSourceRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "condition-source-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public class TableFilterElement extends OdfElement
 	 */
 	public Boolean getTableDisplayDuplicatesAttribute()
 	{
-		TableDisplayDuplicatesAttribute attr = (TableDisplayDuplicatesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display-duplicates" ) ;
+		TableDisplayDuplicatesAttribute attr = (TableDisplayDuplicatesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "display-duplicates" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

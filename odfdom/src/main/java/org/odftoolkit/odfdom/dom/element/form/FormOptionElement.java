@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.form;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.form.FormCurrentSelectedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.form.FormSelectedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.form.FormLabelAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.form.FormValueAttribute;
  */
 public class FormOptionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "option" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.FORM, "option" );
 
 
 	/**
@@ -76,7 +76,7 @@ public class FormOptionElement extends OdfElement
 	 */
 	public Boolean getFormCurrentSelectedAttribute()
 	{
-		FormCurrentSelectedAttribute attr = (FormCurrentSelectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "current-selected" ) ;
+		FormCurrentSelectedAttribute attr = (FormCurrentSelectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "current-selected" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -103,7 +103,7 @@ public class FormOptionElement extends OdfElement
 	 */
 	public Boolean getFormSelectedAttribute()
 	{
-		FormSelectedAttribute attr = (FormSelectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "selected" ) ;
+		FormSelectedAttribute attr = (FormSelectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "selected" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -130,7 +130,7 @@ public class FormOptionElement extends OdfElement
 	 */
 	public String getFormLabelAttribute()
 	{
-		FormLabelAttribute attr = (FormLabelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "label" ) ;
+		FormLabelAttribute attr = (FormLabelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "label" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public class FormOptionElement extends OdfElement
 	 */
 	public String getFormValueAttribute()
 	{
-		FormValueAttribute attr = (FormValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "value" ) ;
+		FormValueAttribute attr = (FormValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleRubyAlignAttribute;
  */
 public class StyleRubyPropertiesElement extends OdfStylePropertiesBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "ruby-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.STYLE, "ruby-properties" );
 
 
 	/**
@@ -68,9 +68,9 @@ public class StyleRubyPropertiesElement extends OdfStylePropertiesBase
 	}
 
     public final static OdfStyleProperty RubyPosition = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.newName(OdfNamespaceNames.STYLE, "ruby-position"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.newName(OdfDocumentNamespace.STYLE, "ruby-position"));
     public final static OdfStyleProperty RubyAlign = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.newName(OdfNamespaceNames.STYLE, "ruby-align"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.newName(OdfDocumentNamespace.STYLE, "ruby-align"));
 
 
 	/**
@@ -80,7 +80,7 @@ public class StyleRubyPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRubyPositionAttribute()
 	{
-		StyleRubyPositionAttribute attr = (StyleRubyPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "ruby-position" ) ;
+		StyleRubyPositionAttribute attr = (StyleRubyPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "ruby-position" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -107,7 +107,7 @@ public class StyleRubyPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRubyAlignAttribute()
 	{
-		StyleRubyAlignAttribute attr = (StyleRubyAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "ruby-align" ) ;
+		StyleRubyAlignAttribute attr = (StyleRubyAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "ruby-align" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

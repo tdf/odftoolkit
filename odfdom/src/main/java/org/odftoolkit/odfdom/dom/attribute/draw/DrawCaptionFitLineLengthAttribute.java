@@ -26,11 +26,11 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.draw;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute draw:caption-fit-line-length}.
@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DrawCaptionFitLineLengthAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "caption-fit-line-length" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.DRAW, "caption-fit-line-length" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:caption-fit-line-length}.

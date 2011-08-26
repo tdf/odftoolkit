@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.text;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.text.TextCreationDateElement;
 import org.odftoolkit.odfdom.dom.element.text.TextDateElement;
 import org.odftoolkit.odfdom.dom.element.text.TextModificationDateElement;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPrintDateElement;
  */
 public class TextDateValueAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "date-value" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.TEXT, "date-value" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:date-value}.

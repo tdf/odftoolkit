@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDatabaseNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableSqlStatementAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableParseSqlStatementAttribute;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableParseSqlStatementAttribute
  */
 public class TableDatabaseSourceSqlElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "database-source-sql" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "database-source-sql" );
 
 
 	/**
@@ -86,7 +86,7 @@ public class TableDatabaseSourceSqlElement extends OdfElement
 	 */
 	public String getTableDatabaseNameAttribute()
 	{
-		TableDatabaseNameAttribute attr = (TableDatabaseNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "database-name" ) ;
+		TableDatabaseNameAttribute attr = (TableDatabaseNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "database-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public class TableDatabaseSourceSqlElement extends OdfElement
 	 */
 	public String getTableSqlStatementAttribute()
 	{
-		TableSqlStatementAttribute attr = (TableSqlStatementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "sql-statement" ) ;
+		TableSqlStatementAttribute attr = (TableSqlStatementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "sql-statement" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public class TableDatabaseSourceSqlElement extends OdfElement
 	 */
 	public Boolean getTableParseSqlStatementAttribute()
 	{
-		TableParseSqlStatementAttribute attr = (TableParseSqlStatementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "parse-sql-statement" ) ;
+		TableParseSqlStatementAttribute attr = (TableParseSqlStatementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "parse-sql-statement" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.text;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPageContinuationElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPageNumberElement;
      
@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPageNumberElement;
  */
 public class TextSelectPageAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "select-page" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.TEXT, "select-page" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:select-page}.

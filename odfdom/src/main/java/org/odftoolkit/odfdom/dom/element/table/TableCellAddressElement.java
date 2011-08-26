@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableColumnAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableRowAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTableAttribute;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableTableAttribute;
  */
 public class TableCellAddressElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "cell-address" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "cell-address" );
 
 
 	/**
@@ -88,7 +88,7 @@ public class TableCellAddressElement extends OdfElement
 	 */
 	public Integer getTableColumnAttribute()
 	{
-		TableColumnAttribute attr = (TableColumnAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "column" ) ;
+		TableColumnAttribute attr = (TableColumnAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "column" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -115,7 +115,7 @@ public class TableCellAddressElement extends OdfElement
 	 */
 	public Integer getTableRowAttribute()
 	{
-		TableRowAttribute attr = (TableRowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "row" ) ;
+		TableRowAttribute attr = (TableRowAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "row" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -142,7 +142,7 @@ public class TableCellAddressElement extends OdfElement
 	 */
 	public Integer getTableTableAttribute()
 	{
-		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "table" ) ;
+		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "table" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

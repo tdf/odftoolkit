@@ -25,10 +25,10 @@
  * Don't edit manually.
  */    
 package org.odftoolkit.odfdom.dom.element.text;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.attribute.text.TextLevelAttribute;
 
@@ -66,7 +66,7 @@ public abstract class TextListLevelStyleElementBase extends OdfStyleBase
 	 */
 	public Integer getTextLevelAttribute()
 	{
-		TextLevelAttribute attr = (TextLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "level" ) ;
+		TextLevelAttribute attr = (TextLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "level" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

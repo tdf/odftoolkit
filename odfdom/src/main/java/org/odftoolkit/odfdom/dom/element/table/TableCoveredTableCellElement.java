@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
@@ -72,7 +72,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  */
 public class TableCoveredTableCellElement extends TableTableCellElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "covered-table-cell" );
 
 
 	/**
@@ -82,7 +82,7 @@ public class TableCoveredTableCellElement extends TableTableCellElementBase
 	 */
 	public TableCoveredTableCellElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.newName(OdfNamespaceNames.TABLE, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.newName(OdfDocumentNamespace.TABLE, "style-name" )	);
 	}
 
 	/**

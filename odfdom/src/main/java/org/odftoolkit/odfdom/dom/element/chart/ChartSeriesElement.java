@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.chart;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartValuesCellRangeAddressAttribute;
@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  */
 public class ChartSeriesElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "series" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.CHART, "series" );
 
 
 	/**
@@ -57,7 +57,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public ChartSeriesElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.newName(OdfNamespaceNames.CHART, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.newName(OdfDocumentNamespace.CHART, "style-name" )	);
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public String getChartValuesCellRangeAddressAttribute()
 	{
-		ChartValuesCellRangeAddressAttribute attr = (ChartValuesCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "values-cell-range-address" ) ;
+		ChartValuesCellRangeAddressAttribute attr = (ChartValuesCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "values-cell-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -106,7 +106,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public String getChartLabelCellAddressAttribute()
 	{
-		ChartLabelCellAddressAttribute attr = (ChartLabelCellAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "label-cell-address" ) ;
+		ChartLabelCellAddressAttribute attr = (ChartLabelCellAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "label-cell-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -133,7 +133,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public String getChartClassAttribute()
 	{
-		ChartClassAttribute attr = (ChartClassAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "class" ) ;
+		ChartClassAttribute attr = (ChartClassAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "class" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -160,7 +160,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public String getChartAttachedAxisAttribute()
 	{
-		ChartAttachedAxisAttribute attr = (ChartAttachedAxisAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "attached-axis" ) ;
+		ChartAttachedAxisAttribute attr = (ChartAttachedAxisAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "attached-axis" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -187,7 +187,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public String getChartStyleNameAttribute()
 	{
-		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) ;
+		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -214,7 +214,7 @@ public class ChartSeriesElement extends OdfStylableElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

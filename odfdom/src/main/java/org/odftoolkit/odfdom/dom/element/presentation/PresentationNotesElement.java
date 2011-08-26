@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.presentation;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationUseHeaderNameAttribute;
@@ -66,7 +66,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  */
 public class PresentationNotesElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "notes" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.PRESENTATION, "notes" );
 
 
 	/**
@@ -76,7 +76,7 @@ public class PresentationNotesElement extends OdfStylableElement
 	 */
 	public PresentationNotesElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.DrawingPage, OdfName.newName(OdfNamespaceNames.DRAW, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.DrawingPage, OdfName.newName(OdfDocumentNamespace.DRAW, "style-name" )	);
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class PresentationNotesElement extends OdfStylableElement
 	 */
 	public String getPresentationUseHeaderNameAttribute()
 	{
-		PresentationUseHeaderNameAttribute attr = (PresentationUseHeaderNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-header-name" ) ;
+		PresentationUseHeaderNameAttribute attr = (PresentationUseHeaderNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "use-header-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -125,7 +125,7 @@ public class PresentationNotesElement extends OdfStylableElement
 	 */
 	public String getPresentationUseFooterNameAttribute()
 	{
-		PresentationUseFooterNameAttribute attr = (PresentationUseFooterNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-footer-name" ) ;
+		PresentationUseFooterNameAttribute attr = (PresentationUseFooterNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "use-footer-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -152,7 +152,7 @@ public class PresentationNotesElement extends OdfStylableElement
 	 */
 	public String getPresentationUseDateTimeNameAttribute()
 	{
-		PresentationUseDateTimeNameAttribute attr = (PresentationUseDateTimeNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "use-date-time-name" ) ;
+		PresentationUseDateTimeNameAttribute attr = (PresentationUseDateTimeNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "use-date-time-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -179,7 +179,7 @@ public class PresentationNotesElement extends OdfStylableElement
 	 */
 	public String getStylePageLayoutNameAttribute()
 	{
-		StylePageLayoutNameAttribute attr = (StylePageLayoutNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "page-layout-name" ) ;
+		StylePageLayoutNameAttribute attr = (StylePageLayoutNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "page-layout-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -206,7 +206,7 @@ public class PresentationNotesElement extends OdfStylableElement
 	 */
 	public String getDrawStyleNameAttribute()
 	{
-		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style-name" ) ;
+		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

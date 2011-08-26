@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.db;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbTitleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbDescriptionAttribute;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbDescriptionAttribute;
  */
 public class DbComponentCollectionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "component-collection" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DB, "component-collection" );
 
 
 	/**
@@ -84,7 +84,7 @@ public class DbComponentCollectionElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) ;
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -111,7 +111,7 @@ public class DbComponentCollectionElement extends OdfElement
 	 */
 	public String getDbTitleAttribute()
 	{
-		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "title" ) ;
+		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "title" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -138,7 +138,7 @@ public class DbComponentCollectionElement extends OdfElement
 	 */
 	public String getDbDescriptionAttribute()
 	{
-		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "description" ) ;
+		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "description" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

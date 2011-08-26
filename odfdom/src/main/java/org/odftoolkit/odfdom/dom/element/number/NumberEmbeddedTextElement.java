@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberPositionAttribute;
 
 
@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberPositionAttribute;
  */
 public class NumberEmbeddedTextElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "embedded-text" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "embedded-text" );
 
 
 	/**
@@ -82,7 +82,7 @@ public class NumberEmbeddedTextElement extends OdfElement
 	 */
 	public Integer getNumberPositionAttribute()
 	{
-		NumberPositionAttribute attr = (NumberPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "position" ) ;
+		NumberPositionAttribute attr = (NumberPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "position" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

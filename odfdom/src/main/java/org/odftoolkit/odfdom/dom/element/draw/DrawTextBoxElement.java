@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawChainNextNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawCornerRadiusAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoMinHeightAttribute;
@@ -63,7 +63,7 @@ import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
  */
 public class DrawTextBoxElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "text-box" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DRAW, "text-box" );
 
 
 	/**
@@ -95,7 +95,7 @@ public class DrawTextBoxElement extends OdfElement
 	 */
 	public String getDrawChainNextNameAttribute()
 	{
-		DrawChainNextNameAttribute attr = (DrawChainNextNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "chain-next-name" ) ;
+		DrawChainNextNameAttribute attr = (DrawChainNextNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "chain-next-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -122,7 +122,7 @@ public class DrawTextBoxElement extends OdfElement
 	 */
 	public String getDrawCornerRadiusAttribute()
 	{
-		DrawCornerRadiusAttribute attr = (DrawCornerRadiusAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "corner-radius" ) ;
+		DrawCornerRadiusAttribute attr = (DrawCornerRadiusAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "corner-radius" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -149,7 +149,7 @@ public class DrawTextBoxElement extends OdfElement
 	 */
 	public String getFoMinHeightAttribute()
 	{
-		FoMinHeightAttribute attr = (FoMinHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "min-height" ) ;
+		FoMinHeightAttribute attr = (FoMinHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "min-height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -176,7 +176,7 @@ public class DrawTextBoxElement extends OdfElement
 	 */
 	public String getFoMinWidthAttribute()
 	{
-		FoMinWidthAttribute attr = (FoMinWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "min-width" ) ;
+		FoMinWidthAttribute attr = (FoMinWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "min-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -203,7 +203,7 @@ public class DrawTextBoxElement extends OdfElement
 	 */
 	public String getFoMaxHeightAttribute()
 	{
-		FoMaxHeightAttribute attr = (FoMaxHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "max-height" ) ;
+		FoMaxHeightAttribute attr = (FoMaxHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "max-height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -230,7 +230,7 @@ public class DrawTextBoxElement extends OdfElement
 	 */
 	public String getFoMaxWidthAttribute()
 	{
-		FoMaxWidthAttribute attr = (FoMaxWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "max-width" ) ;
+		FoMaxWidthAttribute attr = (FoMaxWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "max-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -257,7 +257,7 @@ public class DrawTextBoxElement extends OdfElement
 	 */
 	public String getTextIdAttribute()
 	{
-		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "id" ) ;
+		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -284,7 +284,7 @@ public class DrawTextBoxElement extends OdfElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

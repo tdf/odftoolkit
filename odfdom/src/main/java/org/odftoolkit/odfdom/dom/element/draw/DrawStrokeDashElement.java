@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawDisplayNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawStyleAttribute;
@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawDistanceAttribute;
  */
 public class DrawStrokeDashElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "stroke-dash" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DRAW, "stroke-dash" );
 
 	/**
 	 * The value set of {@odf.attribute draw:style}.
@@ -120,7 +120,7 @@ public class DrawStrokeDashElement extends OdfElement
 	 */
 	public String getDrawNameAttribute()
 	{
-		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) ;
+		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -147,7 +147,7 @@ public class DrawStrokeDashElement extends OdfElement
 	 */
 	public String getDrawDisplayNameAttribute()
 	{
-		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "display-name" ) ;
+		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "display-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -174,7 +174,7 @@ public class DrawStrokeDashElement extends OdfElement
 	 */
 	public String getDrawStyleAttribute()
 	{
-		DrawStyleAttribute attr = (DrawStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style" ) ;
+		DrawStyleAttribute attr = (DrawStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -201,7 +201,7 @@ public class DrawStrokeDashElement extends OdfElement
 	 */
 	public Integer getDrawDots1Attribute()
 	{
-		DrawDots1Attribute attr = (DrawDots1Attribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "dots1" ) ;
+		DrawDots1Attribute attr = (DrawDots1Attribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "dots1" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -228,7 +228,7 @@ public class DrawStrokeDashElement extends OdfElement
 	 */
 	public String getDrawDots1LengthAttribute()
 	{
-		DrawDots1LengthAttribute attr = (DrawDots1LengthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "dots1-length" ) ;
+		DrawDots1LengthAttribute attr = (DrawDots1LengthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "dots1-length" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -255,7 +255,7 @@ public class DrawStrokeDashElement extends OdfElement
 	 */
 	public Integer getDrawDots2Attribute()
 	{
-		DrawDots2Attribute attr = (DrawDots2Attribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "dots2" ) ;
+		DrawDots2Attribute attr = (DrawDots2Attribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "dots2" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -282,7 +282,7 @@ public class DrawStrokeDashElement extends OdfElement
 	 */
 	public String getDrawDots2LengthAttribute()
 	{
-		DrawDots2LengthAttribute attr = (DrawDots2LengthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "dots2-length" ) ;
+		DrawDots2LengthAttribute attr = (DrawDots2LengthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "dots2-length" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -309,7 +309,7 @@ public class DrawStrokeDashElement extends OdfElement
 	 */
 	public String getDrawDistanceAttribute()
 	{
-		DrawDistanceAttribute attr = (DrawDistanceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "distance" ) ;
+		DrawDistanceAttribute attr = (DrawDistanceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "distance" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

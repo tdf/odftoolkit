@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStatusAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStepsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableMaximumDifferenceAttribute;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableMaximumDifferenceAttribute
  */
 public class TableIterationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "iteration" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "iteration" );
 
 
 	/**
@@ -75,7 +75,7 @@ public class TableIterationElement extends OdfElement
 	 */
 	public String getTableStatusAttribute()
 	{
-		TableStatusAttribute attr = (TableStatusAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "status" ) ;
+		TableStatusAttribute attr = (TableStatusAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "status" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -102,7 +102,7 @@ public class TableIterationElement extends OdfElement
 	 */
 	public Integer getTableStepsAttribute()
 	{
-		TableStepsAttribute attr = (TableStepsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "steps" ) ;
+		TableStepsAttribute attr = (TableStepsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "steps" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -129,7 +129,7 @@ public class TableIterationElement extends OdfElement
 	 */
 	public Double getTableMaximumDifferenceAttribute()
 	{
-		TableMaximumDifferenceAttribute attr = (TableMaximumDifferenceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "maximum-difference" ) ;
+		TableMaximumDifferenceAttribute attr = (TableMaximumDifferenceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "maximum-difference" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}

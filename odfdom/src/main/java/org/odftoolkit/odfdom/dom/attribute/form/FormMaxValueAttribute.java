@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.form;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.form.FormDateElement;
 import org.odftoolkit.odfdom.dom.element.form.FormFormattedTextElement;
 import org.odftoolkit.odfdom.dom.element.form.FormNumberElement;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.element.form.FormValueRangeElement;
  */
 public class FormMaxValueAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FORM, "max-value" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.FORM, "max-value" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute form:max-value}.

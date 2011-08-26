@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.meta;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute;
 
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute;
  */
 public class MetaUserDefinedElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "user-defined" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.META, "user-defined" );
 
 
 	/**
@@ -85,7 +85,7 @@ public class MetaUserDefinedElement extends OdfElement
 	 */
 	public String getMetaNameAttribute()
 	{
-		MetaNameAttribute attr = (MetaNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.META), "name" ) ;
+		MetaNameAttribute attr = (MetaNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.META), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class MetaUserDefinedElement extends OdfElement
 	 */
 	public String getMetaValueTypeAttribute()
 	{
-		MetaValueTypeAttribute attr = (MetaValueTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.META), "value-type" ) ;
+		MetaValueTypeAttribute attr = (MetaValueTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.META), "value-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

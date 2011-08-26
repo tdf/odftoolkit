@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableCellRangeAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDirectionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableContainsErrorAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableMarkedInvalidAttribute;
  */
 public class TableHighlightedRangeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "highlighted-range" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "highlighted-range" );
 
 
 	/**
@@ -87,7 +87,7 @@ public class TableHighlightedRangeElement extends OdfElement
 	 */
 	public String getTableCellRangeAddressAttribute()
 	{
-		TableCellRangeAddressAttribute attr = (TableCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "cell-range-address" ) ;
+		TableCellRangeAddressAttribute attr = (TableCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "cell-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -114,7 +114,7 @@ public class TableHighlightedRangeElement extends OdfElement
 	 */
 	public String getTableDirectionAttribute()
 	{
-		TableDirectionAttribute attr = (TableDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "direction" ) ;
+		TableDirectionAttribute attr = (TableDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "direction" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -141,7 +141,7 @@ public class TableHighlightedRangeElement extends OdfElement
 	 */
 	public Boolean getTableContainsErrorAttribute()
 	{
-		TableContainsErrorAttribute attr = (TableContainsErrorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "contains-error" ) ;
+		TableContainsErrorAttribute attr = (TableContainsErrorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "contains-error" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -168,7 +168,7 @@ public class TableHighlightedRangeElement extends OdfElement
 	 */
 	public Boolean getTableMarkedInvalidAttribute()
 	{
-		TableMarkedInvalidAttribute attr = (TableMarkedInvalidAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "marked-invalid" ) ;
+		TableMarkedInvalidAttribute attr = (TableMarkedInvalidAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "marked-invalid" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

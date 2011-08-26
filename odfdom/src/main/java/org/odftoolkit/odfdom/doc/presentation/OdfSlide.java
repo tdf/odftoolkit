@@ -24,9 +24,9 @@ package org.odftoolkit.odfdom.doc.presentation;
 
 import java.util.Hashtable;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
 import org.w3c.dom.NodeList;
@@ -78,7 +78,7 @@ public class OdfSlide {
 	 */
 	public int getSlideIndex() {
 		OdfFileDom contentDom = (OdfFileDom) maSlideElement.getOwnerDocument();
-		NodeList slideNodes = contentDom.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "page");
+		NodeList slideNodes = contentDom.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
 		for (int i = 0; i < slideNodes.getLength(); i++) {
 			DrawPageElement slideEle = (DrawPageElement) slideNodes.item(i);
 			if (slideEle == maSlideElement)//should not equals here, see OdfElement.equals(Object obj)
@@ -120,7 +120,7 @@ public class OdfSlide {
 		}
 		//check if name is unique in this presentation
 		OdfFileDom contentDom = (OdfFileDom) maSlideElement.getOwnerDocument();
-		NodeList slideNodes = contentDom.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "page");
+		NodeList slideNodes = contentDom.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
 		for (int i = 0; i < slideNodes.getLength(); i++) {
 			DrawPageElement slideEle = (DrawPageElement) slideNodes.item(i);
 			OdfSlide slide = OdfSlide.getInstance(slideEle);
@@ -137,7 +137,7 @@ public class OdfSlide {
 	 * @return the instance of <code>OdfPresentationNotes</code> which represent the notes page of the current slide
 	 */
 	public OdfPresentationNotes getNotesPage() {
-		NodeList notesList = maSlideElement.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION).toString(), "notes");
+		NodeList notesList = maSlideElement.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION).toString(), "notes");
 		if (notesList.getLength() > 0) {
 			PresentationNotesElement noteEle = (PresentationNotesElement) notesList.item(0);
 			return OdfPresentationNotes.getInstance(noteEle);

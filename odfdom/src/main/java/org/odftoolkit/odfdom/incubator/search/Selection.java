@@ -24,7 +24,7 @@ package org.odftoolkit.odfdom.incubator.search;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /**
  * Abstract class Selection describe one of the matched results 

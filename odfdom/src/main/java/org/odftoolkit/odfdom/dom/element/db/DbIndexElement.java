@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.db;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbCatalogNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbIsUniqueAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbIsClusteredAttribute;
  */
 public class DbIndexElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "index" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DB, "index" );
 
 
 	/**
@@ -85,7 +85,7 @@ public class DbIndexElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) ;
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class DbIndexElement extends OdfElement
 	 */
 	public String getDbCatalogNameAttribute()
 	{
-		DbCatalogNameAttribute attr = (DbCatalogNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "catalog-name" ) ;
+		DbCatalogNameAttribute attr = (DbCatalogNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "catalog-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public class DbIndexElement extends OdfElement
 	 */
 	public Boolean getDbIsUniqueAttribute()
 	{
-		DbIsUniqueAttribute attr = (DbIsUniqueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-unique" ) ;
+		DbIsUniqueAttribute attr = (DbIsUniqueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "is-unique" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -166,7 +166,7 @@ public class DbIndexElement extends OdfElement
 	 */
 	public Boolean getDbIsClusteredAttribute()
 	{
-		DbIsClusteredAttribute attr = (DbIsClusteredAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-clustered" ) ;
+		DbIsClusteredAttribute attr = (DbIsClusteredAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "is-clustered" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

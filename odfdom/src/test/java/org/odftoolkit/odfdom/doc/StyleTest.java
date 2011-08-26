@@ -27,9 +27,9 @@ import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfXMLFactory;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleBackgroundImageElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleChartPropertiesElement;
@@ -282,7 +282,7 @@ public class StyleTest {
             OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("sharedautostyles.odt"));
             OdfFileDom dom = odfDocument.getContentDom();
 
-            NodeList lst = dom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "p");
+            NodeList lst = dom.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
             Assert.assertTrue(lst.getLength() == 2);
 
             OdfTextParagraph p = (OdfTextParagraph)lst.item(0);

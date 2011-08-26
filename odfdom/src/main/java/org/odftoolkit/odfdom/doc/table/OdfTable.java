@@ -30,14 +30,14 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfXMLFactory;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
@@ -94,7 +94,7 @@ public class OdfTable {
 
 	private OdfTable(TableTableElement table) {
 		mTableElement = table;
-		mDocument = ((OdfFileDom)(table.getOwnerDocument())).getOdfDocument();
+		mDocument = (OdfDocument) ((OdfFileDom)(table.getOwnerDocument())).getDocument();
 		if (mDocument instanceof OdfSpreadsheetDocument)
 			mIsSpreadsheet = true;
 		else mIsSpreadsheet = false;
@@ -261,9 +261,8 @@ public class OdfTable {
 	 * <p>
 	 * An UnsupportedOperationException will be thrown if the table is in the spreadsheet document.
 	 */
-	public long getWidth() {
-		OdfDocument doc = ((OdfFileDom) mTableElement.getOwnerDocument()).getOdfDocument();
-		if (!(doc instanceof OdfSpreadsheetDocument)) {
+	public long getWidth() {	
+		if (!mIsSpreadsheet) {
 			String sWidth = mTableElement.getProperty(OdfTableProperties.Width);
 			if(sWidth == null){
 				int colCount = getColumnCount();
@@ -292,8 +291,7 @@ public class OdfTable {
 	 * An UnsupportedOperationException will be thrown if the table is in the spreadsheet document.
 	 */
 	public void setWidth(long width) {
-		OdfDocument doc = ((OdfFileDom) mTableElement.getOwnerDocument()).getOdfDocument();
-		if (!(doc instanceof OdfSpreadsheetDocument)) {
+		if (!mIsSpreadsheet) {
 			String sWidthMM = String.valueOf(width) + Unit.MILLIMETER.abbr();
 			String sWidthIN = PositiveLength.mapToUnit(sWidthMM, Unit.INCH);
 			mTableElement.setProperty(OdfTableProperties.Width, sWidthIN);
@@ -352,7 +350,7 @@ public class OdfTable {
 		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
 		//1. create table element
 		TableTableElement newTEle = (TableTableElement) OdfXMLFactory.newOdfElement(dom,
-				OdfName.newName(OdfNamespaceNames.TABLE, "table"));
+				OdfName.newName(OdfDocumentNamespace.TABLE, "table"));
 		String tablename = getUniqueTableName(document);
 		newTEle.setTableNameAttribute(tablename);
 		//create style
@@ -371,8 +369,8 @@ public class OdfTable {
 		columnStyle.setProperty(StyleTableColumnPropertiesElement.RelColumnWidth, Math.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
 		// 2.1 create header column elements
 		if (headerColumnNumber > 0) {
-			TableTableHeaderColumnsElement headercolumns = (TableTableHeaderColumnsElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(OdfNamespaceNames.TABLE, "table-header-columns"));
-			TableTableColumnElement headercolumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
+			TableTableHeaderColumnsElement headercolumns = (TableTableHeaderColumnsElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(OdfDocumentNamespace.TABLE, "table-header-columns"));
+			TableTableColumnElement headercolumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(OdfDocumentNamespace.TABLE, "table-column"));
 			headercolumn.setTableNumberColumnsRepeatedAttribute(headerColumnNumber);
 			headercolumns.appendChild(headercolumn);
 			newTEle.appendChild(headercolumns);
@@ -380,7 +378,7 @@ public class OdfTable {
 		}
 		//2.2 create common column elements
 		TableTableColumnElement columns = (TableTableColumnElement) OdfXMLFactory.newOdfElement(dom,
-				OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
+				OdfName.newName(OdfDocumentNamespace.TABLE, "table-column"));
 		columns.setTableNumberColumnsRepeatedAttribute(numCols - headerColumnNumber);
 		columns.setStyleName(columnStylename);
 		newTEle.appendChild(columns);
@@ -407,15 +405,15 @@ public class OdfTable {
 		if( headerRowNumber > 0)
 		{
 			TableTableHeaderRowsElement headerrows = (TableTableHeaderRowsElement) OdfXMLFactory.newOdfElement(dom,
-					OdfName.newName(OdfNamespaceNames.TABLE, "table-header-rows"));
+					OdfName.newName(OdfDocumentNamespace.TABLE, "table-header-rows"));
 			for (int i = 0; i < headerRowNumber; i++) {
 				TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom,
-						OdfName.newName(OdfNamespaceNames.TABLE, "table-row"));
+						OdfName.newName(OdfDocumentNamespace.TABLE, "table-row"));
 				for (int j = 0; j < numCols; j++) {
 					TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
-							OdfName.newName(OdfNamespaceNames.TABLE, "table-cell"));
+							OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell"));
 					TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
-							OdfName.newName(OdfNamespaceNames.TEXT, "p"));
+							OdfName.newName(OdfDocumentNamespace.TEXT, "p"));
 					aCell.appendChild(aParagraph);
 					if (!isSpreadsheet) {
 						if ((j + 1 == numCols) && (i == 0)) {
@@ -438,12 +436,12 @@ public class OdfTable {
 		//3.2 create common row elements
 		for (int i = headerRowNumber; i < numRows; i++) {
 			TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom,
-					OdfName.newName(OdfNamespaceNames.TABLE, "table-row"));
+					OdfName.newName(OdfDocumentNamespace.TABLE, "table-row"));
 			for (int j = 0; j < numCols; j++) {
 				TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
-						OdfName.newName(OdfNamespaceNames.TABLE, "table-cell"));
+						OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell"));
 				TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
-						OdfName.newName(OdfNamespaceNames.TEXT, "p"));
+						OdfName.newName(OdfDocumentNamespace.TEXT, "p"));
 				aCell.appendChild(aParagraph);
 				if (!isSpreadsheet) {
 					if ((j + 1 == numCols) && (i == 0)) {
@@ -815,12 +813,12 @@ public class OdfTable {
 
 		//3.1 create header row elements
 		TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom,
-				OdfName.newName(OdfNamespaceNames.TABLE, "table-row"));
+				OdfName.newName(OdfDocumentNamespace.TABLE, "table-row"));
 		for (int j = 0; j < columnCount; j++) {
 			TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
-					OdfName.newName(OdfNamespaceNames.TABLE, "table-cell"));
+					OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell"));
 			TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
-					OdfName.newName(OdfNamespaceNames.TEXT, "p"));
+					OdfName.newName(OdfDocumentNamespace.TEXT, "p"));
 			aCell.appendChild(aParagraph);
 			if (!mIsSpreadsheet) {
 				if (j + 1 == columnCount) {
@@ -906,7 +904,7 @@ public class OdfTable {
 				for (int i = 0; i < row.getCellCount(); i++) {
 					TableTableCellElement cellElement = (TableTableCellElement) (row
 							.getCellByIndex(i).mCellElement);
-					cellElement.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "style-name");
+					cellElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
 				}
 			}
 		}
@@ -958,7 +956,7 @@ public class OdfTable {
 			columnStyle.setProperty(StyleTableColumnPropertiesElement.RelColumnWidth, DEFAULT_REL_TABLE_WIDTH + "*");
 
 			newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(),
-					OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
+					OdfName.newName(OdfDocumentNamespace.TABLE, "table-column"));
 			newColumn.setStyleName(columnStylename);
 			mTableElement.insertBefore(newColumn, positonElement);
 		} else { //has column, append a same column as the last one.
@@ -1009,7 +1007,7 @@ public class OdfTable {
 				for (int i = 0; i < column.getCellCount(); i++) {
 					TableTableCellElement cellElement = (TableTableCellElement) (column
 							.getCellByIndex(i).mCellElement);
-					cellElement.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "style-name");
+					cellElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
 				}
 			}
 		}		
@@ -1057,7 +1055,7 @@ public class OdfTable {
 	{
 		int columnCount = getColumnCount();
 		TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(),
-				OdfName.newName(OdfNamespaceNames.TABLE, "table-row"));
+				OdfName.newName(OdfDocumentNamespace.TABLE, "table-row"));
 		int coveredLength = 0, coveredHeigth = 0;
 		for (int i = 0; i < columnCount;) {
 			OdfTableCell refCell = refRow.getCellByIndex(i);
@@ -1073,7 +1071,7 @@ public class OdfTable {
 					aCellEle.setTableNumberRowsSpannedAttribute(coveredHeigth + 1);
 					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
 							(OdfFileDom) mTableElement.getOwnerDocument(),
-							OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell"));
+							OdfName.newName(OdfDocumentNamespace.TABLE, "covered-table-cell"));
 					newCellEle.setTableNumberColumnsRepeatedAttribute(refCell.getColumnsRepeatedNumber());
 					aRow.appendChild(newCellEle);
 				}
@@ -1090,7 +1088,7 @@ public class OdfTable {
 					TableTableCellElement coveredCell = (TableTableCellElement) refCell.getCoverCell().getOdfElement();
 					TableTableCellElement newCellEle = (TableTableCellElement) coveredCell.cloneNode(true);
 					cleanCell(newCellEle);
-					newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-rows-spanned");
+					newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-spanned");
 					aRow.appendChild(newCellEle);
 
 					coveredLength = coveredCell.getTableNumberColumnsSpannedAttribute() - refCell.getColumnsRepeatedNumber();
@@ -1108,15 +1106,15 @@ public class OdfTable {
 	}
 
 	void cleanCell(TableTableCellElement newCellEle) {
-		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "value");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "date-value");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "time-value");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "boolean-value");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "string-value");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "formula");
-		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "value-type");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "date-value");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "time-value");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "boolean-value");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "string-value");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "formula");
+		newCellEle.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value-type");
 		if(!isCellStyleInheritance()){
-			newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "style-name");
+			newCellEle.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
 		}
 		Node n = newCellEle.getFirstChild();
 		while (n != null) {
@@ -1659,9 +1657,8 @@ public class OdfTable {
 	 * @throws IllegalArgumentException if the tableName is duplicate with one of tables in the current document
 	 */
 	public void setTableName(String tableName) {
-		//check if the table name is already exist 
-		OdfDocument doc = ((OdfFileDom) mTableElement.getOwnerDocument()).getOdfDocument();
-		List<OdfTable> tableList = doc.getTableList();
+		//check if the table name is already exist 		
+		List<OdfTable> tableList = mDocument.getTableList();
 		for(int i=0;i<tableList.size();i++){
 			OdfTable table = tableList.get(i);
 			if(tableName.equals(table.getTableName())){
@@ -1838,7 +1835,7 @@ public class OdfTable {
 	public OdfTableCellRange getCellRangeByName(String name) {
 		NodeList nameRanges;
 		try {
-			nameRanges = mTableElement.getOwnerDocument().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getUri(), "named-range");
+			nameRanges = mTableElement.getOwnerDocument().getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "named-range");
 			for (int i = 0; i < nameRanges.getLength(); i++) {
 				TableNamedRangeElement nameRange = (TableNamedRangeElement) nameRanges.item(i);
 				if (nameRange.getTableNameAttribute().equals(name)) {

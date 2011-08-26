@@ -36,7 +36,7 @@ import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
 import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
@@ -113,7 +113,7 @@ public class ImageTest {
 				if (node instanceof OdfDrawImage) {
 					OdfDrawImage img = (OdfDrawImage) node;
 					String ref = img.getAttributeNS(
-							OdfNamespaceNames.XLINK.getUri(), "href");
+							OdfDocumentNamespace.XLINK.getUri(), "href");
 					pkg.remove(ref);
 					img.getParentNode().removeChild(img);
 				}

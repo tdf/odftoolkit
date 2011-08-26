@@ -29,7 +29,7 @@ import javax.xml.xpath.XPath;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
@@ -45,8 +45,8 @@ public class NamespaceTest {
         try {
             OdfTextDocument doc = OdfTextDocument.newTextDocument();
 
-            XPath xpath = doc.getXPath();
-            OdfFileDom contentDom = doc.getContentDom();
+            OdfContentDom contentDom = doc.getContentDom();
+            XPath xpath = contentDom.getXPath();
             
             // Postive test for XPath on ODF attributes
             String resTest1 = xpath.evaluate("//text:p[@text:style-name='Standard']", contentDom);
@@ -71,10 +71,10 @@ public class NamespaceTest {
             
             // Load document with ODF foreign attriute
             OdfTextDocument docReloaded = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TARGET));
-            OdfFileDom contentDomReloaded = doc.getContentDom();
+            OdfContentDom contentDomReloaded = docReloaded.getContentDom();
 
             // Postive test for XPath on ODF attributes
-            xpath = docReloaded.getXPath();
+            xpath = contentDomReloaded.getXPath();
             String resTest2 = xpath.evaluate("//text:p[@text:style-name='Standard']", contentDomReloaded);
             Assert.assertTrue(resTest2 != null);
             

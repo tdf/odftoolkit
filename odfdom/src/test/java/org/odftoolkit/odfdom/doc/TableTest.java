@@ -27,11 +27,11 @@ import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.doc.table.OdfTableCell;
 import org.odftoolkit.odfdom.doc.table.OdfTableRow;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
@@ -53,7 +53,7 @@ public class TableTest {
 	public void testTable() {
 		try {
 			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("table.odt"));
-			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getUri(), "table");
+			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "table");
 			int tscount = 0;
 			for (int i = 0; i < lst.getLength(); i++) {
 				Node node = lst.item(i);
@@ -79,7 +79,7 @@ public class TableTest {
 	public void testCellsAndRows() {
 		try {
 			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("table.odt"));
-			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getUri(), "table-cell");
+			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "table-cell");
 			for (int i = 0; i < lst.getLength(); i++) {
 				Node node = lst.item(i);
 				Assert.assertTrue(node instanceof TableTableCellElement);
@@ -121,8 +121,8 @@ public class TableTest {
 		// 2nd Table
 		TableTableElement my2table = new TableTableElement(odt);
 
-		Element spreadsheetElement = (Element) odt.getElementsByTagNameNS(OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
-		my2table.setAttributeNS(OdfNamespaceNames.TABLE.getUri(), "table:name", "BikesSheet");
+		Element spreadsheetElement = (Element) odt.getElementsByTagNameNS(OdfDocumentNamespace.OFFICE.getUri(), "spreadsheet").item(0);
+		my2table.setAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "table:name", "BikesSheet");
 		spreadsheetElement.appendChild(my2table);
 
 		TableTableRowElement row2 = (TableTableRowElement) my2table.appendChild(new TableTableRowElement(odt));

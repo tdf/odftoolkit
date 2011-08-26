@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinExponentDigitsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberDecimalPlacesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinIntegerDigitsAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberGroupingAttribute;
  */
 public class NumberScientificNumberElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "scientific-number" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "scientific-number" );
 
 
 	/**
@@ -76,7 +76,7 @@ public class NumberScientificNumberElement extends OdfElement
 	 */
 	public Integer getNumberMinExponentDigitsAttribute()
 	{
-		NumberMinExponentDigitsAttribute attr = (NumberMinExponentDigitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-exponent-digits" ) ;
+		NumberMinExponentDigitsAttribute attr = (NumberMinExponentDigitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "min-exponent-digits" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -103,7 +103,7 @@ public class NumberScientificNumberElement extends OdfElement
 	 */
 	public Integer getNumberDecimalPlacesAttribute()
 	{
-		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "decimal-places" ) ;
+		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "decimal-places" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -130,7 +130,7 @@ public class NumberScientificNumberElement extends OdfElement
 	 */
 	public Integer getNumberMinIntegerDigitsAttribute()
 	{
-		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-integer-digits" ) ;
+		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "min-integer-digits" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -157,7 +157,7 @@ public class NumberScientificNumberElement extends OdfElement
 	 */
 	public Boolean getNumberGroupingAttribute()
 	{
-		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "grouping" ) ;
+		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "grouping" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

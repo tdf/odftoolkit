@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberDecimalReplacementAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberDisplayFactorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberDecimalPlacesAttribute;
@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberGroupingAttribute;
  */
 public class NumberNumberElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "number" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "number" );
 
 
 	/**
@@ -77,7 +77,7 @@ public class NumberNumberElement extends OdfElement
 	 */
 	public String getNumberDecimalReplacementAttribute()
 	{
-		NumberDecimalReplacementAttribute attr = (NumberDecimalReplacementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "decimal-replacement" ) ;
+		NumberDecimalReplacementAttribute attr = (NumberDecimalReplacementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "decimal-replacement" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -104,7 +104,7 @@ public class NumberNumberElement extends OdfElement
 	 */
 	public Double getNumberDisplayFactorAttribute()
 	{
-		NumberDisplayFactorAttribute attr = (NumberDisplayFactorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "display-factor" ) ;
+		NumberDisplayFactorAttribute attr = (NumberDisplayFactorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "display-factor" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
@@ -131,7 +131,7 @@ public class NumberNumberElement extends OdfElement
 	 */
 	public Integer getNumberDecimalPlacesAttribute()
 	{
-		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "decimal-places" ) ;
+		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "decimal-places" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -158,7 +158,7 @@ public class NumberNumberElement extends OdfElement
 	 */
 	public Integer getNumberMinIntegerDigitsAttribute()
 	{
-		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "min-integer-digits" ) ;
+		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "min-integer-digits" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -185,7 +185,7 @@ public class NumberNumberElement extends OdfElement
 	 */
 	public Boolean getNumberGroupingAttribute()
 	{
-		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "grouping" ) ;
+		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "grouping" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

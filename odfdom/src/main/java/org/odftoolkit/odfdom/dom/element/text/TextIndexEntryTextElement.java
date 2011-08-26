@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
  */
 public class TextIndexEntryTextElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "index-entry-text" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "index-entry-text" );
 
 
 	/**
@@ -52,7 +52,7 @@ public class TextIndexEntryTextElement extends OdfStylableElement
 	 */
 	public TextIndexEntryTextElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Text, OdfName.newName(OdfNamespaceNames.TEXT, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Text, OdfName.newName(OdfDocumentNamespace.TEXT, "style-name" )	);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class TextIndexEntryTextElement extends OdfStylableElement
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) ;
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

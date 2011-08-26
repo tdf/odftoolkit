@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawProtectedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawDisplayAttribute;
@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
  */
 public class DrawLayerElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "layer" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DRAW, "layer" );
 
 
 	/**
@@ -85,7 +85,7 @@ public class DrawLayerElement extends OdfElement
 	 */
 	public String getDrawNameAttribute()
 	{
-		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) ;
+		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class DrawLayerElement extends OdfElement
 	 */
 	public Boolean getDrawProtectedAttribute()
 	{
-		DrawProtectedAttribute attr = (DrawProtectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "protected" ) ;
+		DrawProtectedAttribute attr = (DrawProtectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "protected" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -139,7 +139,7 @@ public class DrawLayerElement extends OdfElement
 	 */
 	public String getDrawDisplayAttribute()
 	{
-		DrawDisplayAttribute attr = (DrawDisplayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "display" ) ;
+		DrawDisplayAttribute attr = (DrawDisplayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "display" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

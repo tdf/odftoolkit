@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextIndexScopeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextRelativeTabStopPositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextUseCaptionAttribute;
@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextCaptionSequenceFormatAttribu
  */
 public class TextTableIndexSourceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "table-index-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "table-index-source" );
 
 
 	/**
@@ -77,7 +77,7 @@ public class TextTableIndexSourceElement extends OdfElement
 	 */
 	public String getTextIndexScopeAttribute()
 	{
-		TextIndexScopeAttribute attr = (TextIndexScopeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "index-scope" ) ;
+		TextIndexScopeAttribute attr = (TextIndexScopeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "index-scope" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -104,7 +104,7 @@ public class TextTableIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextRelativeTabStopPositionAttribute()
 	{
-		TextRelativeTabStopPositionAttribute attr = (TextRelativeTabStopPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "relative-tab-stop-position" ) ;
+		TextRelativeTabStopPositionAttribute attr = (TextRelativeTabStopPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "relative-tab-stop-position" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -131,7 +131,7 @@ public class TextTableIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextUseCaptionAttribute()
 	{
-		TextUseCaptionAttribute attr = (TextUseCaptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-caption" ) ;
+		TextUseCaptionAttribute attr = (TextUseCaptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "use-caption" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -158,7 +158,7 @@ public class TextTableIndexSourceElement extends OdfElement
 	 */
 	public String getTextCaptionSequenceNameAttribute()
 	{
-		TextCaptionSequenceNameAttribute attr = (TextCaptionSequenceNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "caption-sequence-name" ) ;
+		TextCaptionSequenceNameAttribute attr = (TextCaptionSequenceNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "caption-sequence-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -185,7 +185,7 @@ public class TextTableIndexSourceElement extends OdfElement
 	 */
 	public String getTextCaptionSequenceFormatAttribute()
 	{
-		TextCaptionSequenceFormatAttribute attr = (TextCaptionSequenceFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "caption-sequence-format" ) ;
+		TextCaptionSequenceFormatAttribute attr = (TextCaptionSequenceFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "caption-sequence-format" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

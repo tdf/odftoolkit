@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStyleNameAttribute;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableParagraphStyleNameAttribut
  */
 public class TableFirstColumnElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "first-column" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "first-column" );
 
 
 	/**
@@ -53,7 +53,7 @@ public class TableFirstColumnElement extends OdfStylableElement
 	 */
 	public TableFirstColumnElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.newName(OdfNamespaceNames.TABLE, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.newName(OdfDocumentNamespace.TABLE, "style-name" )	);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class TableFirstColumnElement extends OdfStylableElement
 	 */
 	public String getTableStyleNameAttribute()
 	{
-		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "style-name" ) ;
+		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -111,7 +111,7 @@ public class TableFirstColumnElement extends OdfStylableElement
 	 */
 	public String getTableParagraphStyleNameAttribute()
 	{
-		TableParagraphStyleNameAttribute attr = (TableParagraphStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "paragraph-style-name" ) ;
+		TableParagraphStyleNameAttribute attr = (TableParagraphStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "paragraph-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

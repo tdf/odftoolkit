@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextNotesConfigurationElement;
  */
 public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "section-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.STYLE, "section-properties" );
 
 
 	/**
@@ -75,19 +75,19 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	}
 
     public final static OdfStyleProperty BackgroundColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespaceNames.FO, "background-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfDocumentNamespace.FO, "background-color"));
     public final static OdfStyleProperty MarginLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespaceNames.FO, "margin-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfDocumentNamespace.FO, "margin-left"));
     public final static OdfStyleProperty MarginRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespaceNames.FO, "margin-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfDocumentNamespace.FO, "margin-right"));
     public final static OdfStyleProperty Protect = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespaceNames.STYLE, "protect"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfDocumentNamespace.STYLE, "protect"));
     public final static OdfStyleProperty Editable = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespaceNames.STYLE, "editable"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfDocumentNamespace.STYLE, "editable"));
     public final static OdfStyleProperty DontBalanceTextColumns = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespaceNames.TEXT, "dont-balance-text-columns"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfDocumentNamespace.TEXT, "dont-balance-text-columns"));
     public final static OdfStyleProperty WritingMode = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespaceNames.STYLE, "writing-mode"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfDocumentNamespace.STYLE, "writing-mode"));
 
 
 	/**
@@ -97,7 +97,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBackgroundColorAttribute()
 	{
-		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color" ) ;
+		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "background-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -124,7 +124,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginLeftAttribute()
 	{
-		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-left" ) ;
+		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "margin-left" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -151,7 +151,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoMarginRightAttribute()
 	{
-		FoMarginRightAttribute attr = (FoMarginRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-right" ) ;
+		FoMarginRightAttribute attr = (FoMarginRightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "margin-right" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -178,7 +178,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleProtectAttribute()
 	{
-		StyleProtectAttribute attr = (StyleProtectAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "protect" ) ;
+		StyleProtectAttribute attr = (StyleProtectAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "protect" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -205,7 +205,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleEditableAttribute()
 	{
-		StyleEditableAttribute attr = (StyleEditableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "editable" ) ;
+		StyleEditableAttribute attr = (StyleEditableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "editable" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -232,7 +232,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getTextDontBalanceTextColumnsAttribute()
 	{
-		TextDontBalanceTextColumnsAttribute attr = (TextDontBalanceTextColumnsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "dont-balance-text-columns" ) ;
+		TextDontBalanceTextColumnsAttribute attr = (TextDontBalanceTextColumnsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "dont-balance-text-columns" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -259,7 +259,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleWritingModeAttribute()
 	{
-		StyleWritingModeAttribute attr = (StyleWritingModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode" ) ;
+		StyleWritingModeAttribute attr = (StyleWritingModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "writing-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

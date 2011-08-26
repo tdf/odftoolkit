@@ -8,10 +8,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
@@ -147,7 +147,7 @@ public class PerformanceIT {
 			//Create an empty spreadsheet
 			timedoc = OdfSpreadsheetDocument.newSpreadsheetDocument();
 			OfficeSpreadsheetElement spreadsheet = (OfficeSpreadsheetElement) timedoc.getContentDom().getElementsByTagNameNS(
-					OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
+					OdfDocumentNamespace.OFFICE.getUri(), "spreadsheet").item(0);
 			spreadsheet.removeChild(spreadsheet.getFirstChild());
 		}
 
@@ -158,7 +158,7 @@ public class PerformanceIT {
 			//Create an empty spreadsheet
 			memorydoc = OdfSpreadsheetDocument.newSpreadsheetDocument();
 			OfficeSpreadsheetElement spreadsheet = (OfficeSpreadsheetElement) memorydoc.getContentDom().getElementsByTagNameNS(
-					OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
+					OdfDocumentNamespace.OFFICE.getUri(), "spreadsheet").item(0);
 			spreadsheet.removeChild(spreadsheet.getFirstChild());
 		}
 
@@ -197,9 +197,9 @@ public class PerformanceIT {
 		try {
 			dom = odfdoc.getContentDom();
 			tableList = dom.getElementsByTagNameNS(
-					OdfNamespaceNames.TABLE.getUri(), "table");
+					OdfDocumentNamespace.TABLE.getUri(), "table");
 			spreadsheet = (OfficeSpreadsheetElement) dom.getElementsByTagNameNS(
-					OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
+					OdfDocumentNamespace.OFFICE.getUri(), "spreadsheet").item(0);
 
 			i = 0;
 			if (tableList.getLength() > 0) {
@@ -222,7 +222,7 @@ public class PerformanceIT {
 				spreadsheet.appendChild(myTable);
 			}
 
-			lst = myTable.getElementsByTagNameNS(OdfNamespaceNames.TABLE.getUri(), "table-row");
+			lst = myTable.getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "table-row");
 			if (lst.getLength() == 0) { //the first table row is not existed. Create table row
 				td = dom.newOdfElement(TableTableRowElement.class);
 				cell = dom.newOdfElement(TableTableCellElement.class);

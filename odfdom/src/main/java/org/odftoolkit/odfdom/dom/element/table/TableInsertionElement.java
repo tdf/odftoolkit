@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TablePositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableCountAttribute;
@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeChangeInfoElement;
  */
 public class TableInsertionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "insertion" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "insertion" );
 
 	/**
 	 * The value set of {@odf.attribute table:type}.
@@ -124,7 +124,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public String getTableTypeAttribute()
 	{
-		TableTypeAttribute attr = (TableTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "type" ) ;
+		TableTypeAttribute attr = (TableTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -151,7 +151,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public Integer getTablePositionAttribute()
 	{
-		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "position" ) ;
+		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "position" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -178,7 +178,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public Integer getTableCountAttribute()
 	{
-		TableCountAttribute attr = (TableCountAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "count" ) ;
+		TableCountAttribute attr = (TableCountAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "count" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -205,7 +205,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public Integer getTableTableAttribute()
 	{
-		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "table" ) ;
+		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "table" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -232,7 +232,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public String getTableIdAttribute()
 	{
-		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "id" ) ;
+		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -259,7 +259,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public String getTableAcceptanceStateAttribute()
 	{
-		TableAcceptanceStateAttribute attr = (TableAcceptanceStateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "acceptance-state" ) ;
+		TableAcceptanceStateAttribute attr = (TableAcceptanceStateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "acceptance-state" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -286,7 +286,7 @@ public class TableInsertionElement extends OdfElement
 	 */
 	public String getTableRejectingChangeIdAttribute()
 	{
-		TableRejectingChangeIdAttribute attr = (TableRejectingChangeIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "rejecting-change-id" ) ;
+		TableRejectingChangeIdAttribute attr = (TableRejectingChangeIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "rejecting-change-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

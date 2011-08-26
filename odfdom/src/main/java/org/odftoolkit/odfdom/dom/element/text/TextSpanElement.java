@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
@@ -66,7 +66,7 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationDateTimeElemen
  */
 public class TextSpanElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "span" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "span" );
 
 
 	/**
@@ -76,7 +76,7 @@ public class TextSpanElement extends OdfStylableElement
 	 */
 	public TextSpanElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Text, OdfName.newName(OdfNamespaceNames.TEXT, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Text, OdfName.newName(OdfDocumentNamespace.TEXT, "style-name" )	);
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class TextSpanElement extends OdfStylableElement
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) ;
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -125,7 +125,7 @@ public class TextSpanElement extends OdfStylableElement
 	 */
 	public String getTextClassNamesAttribute()
 	{
-		TextClassNamesAttribute attr = (TextClassNamesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "class-names" ) ;
+		TextClassNamesAttribute attr = (TextClassNamesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "class-names" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

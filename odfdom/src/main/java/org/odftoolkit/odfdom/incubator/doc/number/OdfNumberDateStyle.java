@@ -22,8 +22,8 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.incubator.doc.number;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberFormatSourceAttribute;
 import org.odftoolkit.odfdom.dom.element.number.NumberAmPmElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberDateStyleElement;

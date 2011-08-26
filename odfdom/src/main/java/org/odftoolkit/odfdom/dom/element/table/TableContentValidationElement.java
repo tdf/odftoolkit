@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableConditionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableBaseCellAddressAttribute;
@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  */
 public class TableContentValidationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "content-validation" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "content-validation" );
 
 
 	/**
@@ -86,7 +86,7 @@ public class TableContentValidationElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) ;
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public class TableContentValidationElement extends OdfElement
 	 */
 	public String getTableConditionAttribute()
 	{
-		TableConditionAttribute attr = (TableConditionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "condition" ) ;
+		TableConditionAttribute attr = (TableConditionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "condition" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public class TableContentValidationElement extends OdfElement
 	 */
 	public String getTableBaseCellAddressAttribute()
 	{
-		TableBaseCellAddressAttribute attr = (TableBaseCellAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "base-cell-address" ) ;
+		TableBaseCellAddressAttribute attr = (TableBaseCellAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "base-cell-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -167,7 +167,7 @@ public class TableContentValidationElement extends OdfElement
 	 */
 	public Boolean getTableAllowEmptyCellAttribute()
 	{
-		TableAllowEmptyCellAttribute attr = (TableAllowEmptyCellAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "allow-empty-cell" ) ;
+		TableAllowEmptyCellAttribute attr = (TableAllowEmptyCellAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "allow-empty-cell" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -194,7 +194,7 @@ public class TableContentValidationElement extends OdfElement
 	 */
 	public String getTableDisplayListAttribute()
 	{
-		TableDisplayListAttribute attr = (TableDisplayListAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display-list" ) ;
+		TableDisplayListAttribute attr = (TableDisplayListAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "display-list" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

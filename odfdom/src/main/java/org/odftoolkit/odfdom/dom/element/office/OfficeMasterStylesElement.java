@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.office;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfContainerElementBase;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHandoutMasterElement;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
  */
 public class OfficeMasterStylesElement extends OdfContainerElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "master-styles" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.OFFICE, "master-styles" );
 
 
 	/**

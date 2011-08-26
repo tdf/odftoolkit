@@ -31,19 +31,18 @@ import java.util.logging.Logger;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawObjectElement;
 import org.odftoolkit.odfdom.dom.element.text.TextHElement;
@@ -69,12 +68,6 @@ public class EmbeddedDocumentTest {
 	private static final String TEST_PIC = "testA.jpg";
 	private static final String TEST_PIC_ANOTHER = "testB.jpg";
 	private static final String SLASH = "/";
-	private XPath mXpath;
-
-	public EmbeddedDocumentTest() {
-		mXpath = XPathFactory.newInstance().newXPath();
-		mXpath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
-	}
 
 	/**
 	 * The document A contains the embedded document E1, 
@@ -86,19 +79,19 @@ public class EmbeddedDocumentTest {
 			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED));
 			OdfDocument saveDoc = OdfTextDocument.newTextDocument();
 			List<OdfDocument> embeddedDocs = doc.getEmbeddedDocuments();
-			List<String> embedDocNames = new ArrayList<String>();
-			for(OdfDocument childDoc : embeddedDocs ){
-				String embedDocName = childDoc.getDocumentPackagePath();
-				saveDoc.insertDocument(childDoc, embedDocName);
-				embedDocNames.add(embedDocName);
+			List<String> embeddedDocNames = new ArrayList<String>();
+			for (OdfDocument childDoc : embeddedDocs) {
+				String embeddedDocName = childDoc.getDocumentPackagePath();
+				saveDoc.insertDocument(childDoc, embeddedDocName);
+				embeddedDocNames.add(embeddedDocName);
 			}
 			saveDoc.save(TEST_FILE_FOLDER + TEST_FILE_EMBEDDED_SAVE_OUT);
 			saveDoc.close();
 			saveDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED_SAVE_OUT));
-			List<OdfDocument> saveEmbedDocs = saveDoc.getEmbeddedDocuments();
-			Assert.assertTrue(embeddedDocs.size() == saveEmbedDocs.size());
+			List<OdfDocument> saveembeddedDocs = saveDoc.getEmbeddedDocuments();
+			Assert.assertTrue(embeddedDocs.size() == saveembeddedDocs.size());
 			for (int i = 0; i < embeddedDocs.size(); i++) {
-				Assert.assertEquals(embeddedDocs.get(i).getMediaTypeString(), saveEmbedDocs.get(i).getMediaTypeString());
+				Assert.assertEquals(embeddedDocs.get(i).getMediaTypeString(), saveembeddedDocs.get(i).getMediaTypeString());
 			}
 		} catch (Exception ex) {
 			LOG.log(Level.SEVERE, null, ex);
@@ -106,21 +99,22 @@ public class EmbeddedDocumentTest {
 		}
 	}
 
-	/**xpath
+	/**
 	 * The document B is embedded to document A 
 	 * and the directory path of A and B are absolute from the package
 	 * DOCA/ and DOCB/
 	 */
-	@Test	
-	public void testEmbedDocumentsLocatedSideBySide() {
+	@Test
+	public void testembeddedDocumentsLocatedSideBySide() {
 		try {
 			OdfTextDocument odtDoc1 = OdfTextDocument.newTextDocument();
 			odtDoc1.insertDocument(OdfTextDocument.newTextDocument(), "DOCA/");
 			OdfDocument docA = odtDoc1.getEmbeddedDocument("DOCA");
 			docA.newImage(ResourceUtilities.getURI(TEST_PIC));
 			docA.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "DOCB/");
-			OdfFileDom contentA = docA.getContentDom();
-			TextPElement lastPara = (TextPElement) mXpath.evaluate("//text:p[last()]", contentA, XPathConstants.NODE);
+			OdfContentDom contentA = docA.getContentDom();
+			XPath xpath = contentA.getXPath();
+			TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", contentA, XPathConstants.NODE);
 			addFrameForEmbeddedDoc(contentA, lastPara, "../DOCB");
 			OdfDocument docB = odtDoc1.getEmbeddedDocument("DOCB/");
 			Assert.assertNotNull(docB);
@@ -153,16 +147,17 @@ public class EmbeddedDocumentTest {
 	 * and the directory path of A and B are absolute from the package
 	 * DOCA/ and DOCA/DOCB/
 	 */
-	@Test	
-	public void testEmbedDocumentWithSubPath() {
+	@Test
+	public void testembeddedDocumentWithSubPath() {
 		try {
 			OdfTextDocument odtDoc1 = OdfTextDocument.newTextDocument();
 			odtDoc1.insertDocument(OdfTextDocument.newTextDocument(), "DOCA/");
 			OdfDocument docA = odtDoc1.getEmbeddedDocument("DOCA");
 			docA.newImage(ResourceUtilities.getURI(TEST_PIC));
 			docA.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "DOCA/DOCB/");
-			OdfFileDom contentA = docA.getContentDom();
-			TextPElement lastPara = (TextPElement) mXpath.evaluate("//text:p[last()]", contentA, XPathConstants.NODE);
+			OdfContentDom contentA = docA.getContentDom();
+			XPath xpath = contentA.getXPath();
+			TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", contentA, XPathConstants.NODE);
 			addFrameForEmbeddedDoc(contentA, lastPara, "./DOCB");
 			OdfDocument docB = odtDoc1.getEmbeddedDocument("DOCA/DOCB/");
 			docB.newImage(ResourceUtilities.getURI(TEST_PIC_ANOTHER));
@@ -202,8 +197,8 @@ public class EmbeddedDocumentTest {
 				embedFileName = embedFileName.replaceAll("/", "_") + "." + embedMediaType.getSuffix();
 				childDoc.save(TEST_FILE_FOLDER + embedFileName);
 				LOG.log(Level.INFO, "Save file : {0}", embedFileName);
-				OdfDocument embedDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(embedFileName));
-				Assert.assertEquals(embedDoc.getMediaTypeString(), embedMediaType.getMediaTypeString());
+				OdfDocument embeddedDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(embedFileName));
+				Assert.assertEquals(embeddedDoc.getMediaTypeString(), embedMediaType.getMediaTypeString());
 			}
 		} catch (Exception ex) {
 			LOG.log(Level.SEVERE, null, ex);
@@ -225,38 +220,39 @@ public class EmbeddedDocumentTest {
 		try {
 			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED));
 			OdfDocument saveDoc = OdfTextDocument.newTextDocument();
-			OdfDocument embedDoc = doc.getEmbeddedDocument("Object 1/");
+			OdfDocument embeddedDoc = doc.getEmbeddedDocument("Object 1/");
 			//modify content of "Object 1"
-			OdfFileDom embedContentDom = embedDoc.getContentDom();
-			TextHElement header = (TextHElement)mXpath.evaluate("//text:h[1]", embedContentDom, XPathConstants.NODE);
+			OdfContentDom embedContentDom = embeddedDoc.getContentDom();
+			XPath xpath = embedContentDom.getXPath();
+			TextHElement header = (TextHElement) xpath.evaluate("//text:h[1]", embedContentDom, XPathConstants.NODE);
 			LOG.log(Level.INFO, "First para: {0}", header.getTextContent());
 			OdfTextSpan spanElem = new OdfTextSpan(embedContentDom);
 			spanElem.setTextContent(TEST_SPAN_TEXT);
 			header.appendChild(spanElem);
 			//insert image to "Object 1"
-			embedDoc.newImage(ResourceUtilities.getURI(TEST_PIC));
+			embeddedDoc.newImage(ResourceUtilities.getURI(TEST_PIC));
 			//embed "Object 1" to TestModifiedEmbeddedDoc.odt as the path /DocA
 			String embedPath = "DocA";
-			saveDoc.insertDocument(embedDoc, embedPath);
+			saveDoc.insertDocument(embeddedDoc, embedPath);
 			saveDoc.save(TEST_FILE_FOLDER + TEST_FILE_MODIFIED_EMBEDDED);
 			saveDoc.close();
 			//reload TestModifiedEmbeddedDoc.odt
 			saveDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_MODIFIED_EMBEDDED));
-			embedDoc = saveDoc.getEmbeddedDocument(embedPath);
+			embeddedDoc = saveDoc.getEmbeddedDocument(embedPath);
 			//check the content of "DocA" and modify it again
-			embedContentDom = embedDoc.getContentDom();
-			header = (TextHElement) mXpath.evaluate("//text:h[1]", embedContentDom, XPathConstants.NODE);
+			embedContentDom = embeddedDoc.getContentDom();
+			header = (TextHElement) xpath.evaluate("//text:h[1]", embedContentDom, XPathConstants.NODE);
 			Assert.assertTrue(header.getTextContent().contains(TEST_SPAN_TEXT));
 			header.setTextContent("");
-			OdfFileEntry imageEntry = embedDoc.getPackage().getFileEntry(embedDoc.getDocumentPackagePath() + OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC);
+			OdfFileEntry imageEntry = embeddedDoc.getPackage().getFileEntry(embeddedDoc.getDocumentPackagePath() + OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC);
 			Assert.assertNotNull(imageEntry);
-			embedDoc.newImage(ResourceUtilities.getURI(TEST_PIC_ANOTHER));
+			embeddedDoc.newImage(ResourceUtilities.getURI(TEST_PIC_ANOTHER));
 			//save the "DocA" as the standalone document
-			embedDoc.save(TEST_FILE_FOLDER + TEST_FILE_MODIFIED_EMBEDDED_SAVE_STANDALONE);
+			embeddedDoc.save(TEST_FILE_FOLDER + TEST_FILE_MODIFIED_EMBEDDED_SAVE_STANDALONE);
 			//load the standalone document and check the content
 			OdfDocument standaloneDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_MODIFIED_EMBEDDED_SAVE_STANDALONE));
 			embedContentDom = standaloneDoc.getContentDom();
-			header = (TextHElement) mXpath.evaluate("//text:h[1]", embedContentDom, XPathConstants.NODE);			
+			header = (TextHElement) xpath.evaluate("//text:h[1]", embedContentDom, XPathConstants.NODE);
 			Assert.assertTrue(header.getTextContent().length() == 0);
 			imageEntry = standaloneDoc.getPackage().getFileEntry(OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC);
 			Assert.assertNotNull(imageEntry);
@@ -273,11 +269,11 @@ public class EmbeddedDocumentTest {
 		try {
 			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED));
 			List<OdfDocument> embeddedDocs = doc.getEmbeddedDocuments();
-			List<String> embedDocNames = new ArrayList<String>();
+			List<String> embeddedDocNames = new ArrayList<String>();
 			for (OdfPackageDocument childPackageDoc : embeddedDocs) {
 				OdfDocument childDoc = (OdfDocument) childPackageDoc;
 				String embedFileName = childDoc.getDocumentPackagePath();
-				embedDocNames.add(embedFileName);
+				embeddedDocNames.add(embedFileName);
 				childDoc.removeEmbeddedDocument(embedFileName);
 			}
 			doc.save(TEST_FILE_FOLDER + TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT);
@@ -285,16 +281,16 @@ public class EmbeddedDocumentTest {
 			//check manifest entry for the embed document 
 			//the sub entry of the embed document such as the pictures of the document should also be removed
 			doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT));
-			List<OdfDocument> saveEmbedDocs = doc.getEmbeddedDocuments();
-			Assert.assertTrue(0 == saveEmbedDocs.size());
+			List<OdfDocument> saveembeddedDocs = doc.getEmbeddedDocuments();
+			Assert.assertTrue(0 == saveembeddedDocs.size());
 			Set<String> entries = doc.getPackage().getFileEntries();
 			Iterator<String> entryIter = null;
-			for (int i = 0; i < embedDocNames.size(); i++) {
+			for (int i = 0; i < embeddedDocNames.size(); i++) {
 				entryIter = entries.iterator();
-				String embedDocPath = embedDocNames.get(i);
+				String embeddedDocPath = embeddedDocNames.get(i);
 				while (entryIter.hasNext()) {
 					String entry = entryIter.next();
-					Assert.assertFalse(entry.startsWith(embedDocPath));
+					Assert.assertFalse(entry.startsWith(embeddedDocPath));
 				}
 			}
 			doc.close();
@@ -325,12 +321,12 @@ public class EmbeddedDocumentTest {
 	}
 
 	private void updateFrameForEmbeddedDoc(OdfFileDom dom, String originPath, String newPath) throws Exception {
-		NodeList objNodes = dom.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "object");
+		NodeList objNodes = dom.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "object");
 		for (int i = 0; i < objNodes.getLength(); i++) {
 			OdfElement object = (OdfElement) objNodes.item(i);
-			String refObjPath = object.getAttributeNS(OdfNamespace.newNamespace(OdfNamespaceNames.XLINK).toString(), "href");
+			String refObjPath = object.getAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK).toString(), "href");
 			if (refObjPath.equals(originPath)) {
-				object.setAttributeNS(OdfNamespace.newNamespace(OdfNamespaceNames.XLINK).toString(), "href", newPath);
+				object.setAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK).toString(), "href", newPath);
 			}
 		}
 	}

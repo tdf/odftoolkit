@@ -29,9 +29,10 @@ import javax.xml.xpath.XPathConstants;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationClassAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFillImageElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawGradientElement;
@@ -67,8 +68,8 @@ public class PresentationTest {
 	@Test
 	public void testPresentation() {
 		try {
-			OdfPresentationDocument odpdoc = (OdfPresentationDocument)odfdoc;
-			
+			OdfPresentationDocument odpdoc = (OdfPresentationDocument) odfdoc;
+
 			OdfSlide page = odpdoc.getSlideByName("slide-name-1");
 			Assert.assertTrue((page != null) && page.getSlideName().equals("slide-name-1"));
 			Assert.assertEquals(page, odpdoc.getSlideByIndex(0));
@@ -181,9 +182,10 @@ public class PresentationTest {
 			OdfOfficeAutomaticStyles s = odfdoc.getStylesDom().getAutomaticStyles();
 			OdfStyle pr1 = s.getStyle("pr1", OdfStyleFamily.Presentation);
 			int styleUserCount = pr1.getStyleUserCount();
-			XPath xpath = odfdoc.getXPath();
+			OdfStylesDom stylesDom = odfdoc.getStylesDom();
+			XPath xpath = stylesDom.getXPath();
 			NodeList elementsWithStyle = (NodeList) xpath.evaluate("//draw:frame[@presentation:style-name='pr1']",
-					odfdoc.getStylesDom(), XPathConstants.NODESET);
+					stylesDom, XPathConstants.NODESET);
 			int elementsWithStyleCount = elementsWithStyle.getLength();
 			Assert.assertTrue(styleUserCount == elementsWithStyleCount);
 //			//#bug51,the bug will be induced by using set attribute method

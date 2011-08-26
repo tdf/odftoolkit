@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableCaseSensitiveAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TablePrecisionAsShownAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableSearchCriteriaMustApplyToWholeCellAttribute;
@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableNullYearAttribute;
  */
 public class TableCalculationSettingsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "calculation-settings" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "calculation-settings" );
 
 	public static final String  DEFAULT_VALUE_TABLE_CASESENSITIVE_ATTRIBUTE = TableCaseSensitiveAttribute.DEFAULT_VALUE_TRUE;
 
@@ -80,7 +80,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public String getTableCaseSensitiveAttribute()
 	{
-		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "case-sensitive" ) ;
+		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "case-sensitive" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -107,7 +107,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public Boolean getTablePrecisionAsShownAttribute()
 	{
-		TablePrecisionAsShownAttribute attr = (TablePrecisionAsShownAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "precision-as-shown" ) ;
+		TablePrecisionAsShownAttribute attr = (TablePrecisionAsShownAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "precision-as-shown" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -134,7 +134,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public Boolean getTableSearchCriteriaMustApplyToWholeCellAttribute()
 	{
-		TableSearchCriteriaMustApplyToWholeCellAttribute attr = (TableSearchCriteriaMustApplyToWholeCellAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "search-criteria-must-apply-to-whole-cell" ) ;
+		TableSearchCriteriaMustApplyToWholeCellAttribute attr = (TableSearchCriteriaMustApplyToWholeCellAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "search-criteria-must-apply-to-whole-cell" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -161,7 +161,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public Boolean getTableAutomaticFindLabelsAttribute()
 	{
-		TableAutomaticFindLabelsAttribute attr = (TableAutomaticFindLabelsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "automatic-find-labels" ) ;
+		TableAutomaticFindLabelsAttribute attr = (TableAutomaticFindLabelsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "automatic-find-labels" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -188,7 +188,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public Boolean getTableUseRegularExpressionsAttribute()
 	{
-		TableUseRegularExpressionsAttribute attr = (TableUseRegularExpressionsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-regular-expressions" ) ;
+		TableUseRegularExpressionsAttribute attr = (TableUseRegularExpressionsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "use-regular-expressions" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -215,7 +215,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public Boolean getTableUseWildcardsAttribute()
 	{
-		TableUseWildcardsAttribute attr = (TableUseWildcardsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-wildcards" ) ;
+		TableUseWildcardsAttribute attr = (TableUseWildcardsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "use-wildcards" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -242,7 +242,7 @@ public class TableCalculationSettingsElement extends OdfElement
 	 */
 	public Integer getTableNullYearAttribute()
 	{
-		TableNullYearAttribute attr = (TableNullYearAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "null-year" ) ;
+		TableNullYearAttribute attr = (TableNullYearAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "null-year" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

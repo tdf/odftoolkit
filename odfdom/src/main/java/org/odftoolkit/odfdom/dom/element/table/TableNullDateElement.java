@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDateValueAttribute;
 
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDateValueAttribute;
  */
 public class TableNullDateElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "null-date" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "null-date" );
 
 
 	/**
@@ -74,7 +74,7 @@ public class TableNullDateElement extends OdfElement
 	 */
 	public String getTableValueTypeAttribute()
 	{
-		TableValueTypeAttribute attr = (TableValueTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "value-type" ) ;
+		TableValueTypeAttribute attr = (TableValueTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "value-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -101,7 +101,7 @@ public class TableNullDateElement extends OdfElement
 	 */
 	public String getTableDateValueAttribute()
 	{
-		TableDateValueAttribute attr = (TableDateValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "date-value" ) ;
+		TableDateValueAttribute attr = (TableDateValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "date-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

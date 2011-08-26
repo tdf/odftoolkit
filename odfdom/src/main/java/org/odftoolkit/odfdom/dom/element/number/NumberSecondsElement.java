@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberStyleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberDecimalPlacesAttribute;
 
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberDecimalPlacesAttribute;
  */
 public class NumberSecondsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "seconds" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "seconds" );
 
 
 	/**
@@ -74,7 +74,7 @@ public class NumberSecondsElement extends OdfElement
 	 */
 	public String getNumberStyleAttribute()
 	{
-		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "style" ) ;
+		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -101,7 +101,7 @@ public class NumberSecondsElement extends OdfElement
 	 */
 	public Integer getNumberDecimalPlacesAttribute()
 	{
-		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "decimal-places" ) ;
+		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "decimal-places" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

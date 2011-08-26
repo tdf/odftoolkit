@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.form;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.form.FormNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.form.FormControlImplementationAttribute;
 import org.odftoolkit.odfdom.dom.attribute.form.FormIdAttribute;
@@ -60,7 +60,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  */
 public class FormValueRangeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "value-range" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.FORM, "value-range" );
 
 
 	/**
@@ -103,7 +103,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public String getFormNameAttribute()
 	{
-		FormNameAttribute attr = (FormNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "name" ) ;
+		FormNameAttribute attr = (FormNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public String getFormControlImplementationAttribute()
 	{
-		FormControlImplementationAttribute attr = (FormControlImplementationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "control-implementation" ) ;
+		FormControlImplementationAttribute attr = (FormControlImplementationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "control-implementation" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public String getFormIdAttribute()
 	{
-		FormIdAttribute attr = (FormIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "id" ) ;
+		FormIdAttribute attr = (FormIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -184,7 +184,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -211,7 +211,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public String getXformsBindAttribute()
 	{
-		XformsBindAttribute attr = (XformsBindAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XFORMS), "bind" ) ;
+		XformsBindAttribute attr = (XformsBindAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XFORMS), "bind" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -238,7 +238,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public Boolean getFormDisabledAttribute()
 	{
-		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "disabled" ) ;
+		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "disabled" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -265,7 +265,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public Boolean getFormPrintableAttribute()
 	{
-		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "printable" ) ;
+		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "printable" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -292,7 +292,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public Integer getFormTabIndexAttribute()
 	{
-		FormTabIndexAttribute attr = (FormTabIndexAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "tab-index" ) ;
+		FormTabIndexAttribute attr = (FormTabIndexAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "tab-index" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -319,7 +319,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public Boolean getFormTabStopAttribute()
 	{
-		FormTabStopAttribute attr = (FormTabStopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "tab-stop" ) ;
+		FormTabStopAttribute attr = (FormTabStopAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "tab-stop" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -346,7 +346,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public String getFormTitleAttribute()
 	{
-		FormTitleAttribute attr = (FormTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "title" ) ;
+		FormTitleAttribute attr = (FormTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "title" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -373,7 +373,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public String getFormValueAttribute()
 	{
-		FormValueAttribute attr = (FormValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "value" ) ;
+		FormValueAttribute attr = (FormValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -400,7 +400,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public String getFormLinkedCellAttribute()
 	{
-		FormLinkedCellAttribute attr = (FormLinkedCellAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "linked-cell" ) ;
+		FormLinkedCellAttribute attr = (FormLinkedCellAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "linked-cell" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -427,7 +427,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public Boolean getFormRepeatAttribute()
 	{
-		FormRepeatAttribute attr = (FormRepeatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "repeat" ) ;
+		FormRepeatAttribute attr = (FormRepeatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "repeat" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -454,7 +454,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public String getFormDelayForRepeatAttribute()
 	{
-		FormDelayForRepeatAttribute attr = (FormDelayForRepeatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "delay-for-repeat" ) ;
+		FormDelayForRepeatAttribute attr = (FormDelayForRepeatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "delay-for-repeat" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -481,7 +481,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public String getFormMaxValueAttribute()
 	{
-		FormMaxValueAttribute attr = (FormMaxValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "max-value" ) ;
+		FormMaxValueAttribute attr = (FormMaxValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "max-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -508,7 +508,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public String getFormMinValueAttribute()
 	{
-		FormMinValueAttribute attr = (FormMinValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "min-value" ) ;
+		FormMinValueAttribute attr = (FormMinValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "min-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -535,7 +535,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public Integer getFormStepSizeAttribute()
 	{
-		FormStepSizeAttribute attr = (FormStepSizeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "step-size" ) ;
+		FormStepSizeAttribute attr = (FormStepSizeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "step-size" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -562,7 +562,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public Integer getFormPageStepSizeAttribute()
 	{
-		FormPageStepSizeAttribute attr = (FormPageStepSizeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "page-step-size" ) ;
+		FormPageStepSizeAttribute attr = (FormPageStepSizeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "page-step-size" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -589,7 +589,7 @@ public class FormValueRangeElement extends OdfElement
 	 */
 	public String getFormOrientationAttribute()
 	{
-		FormOrientationAttribute attr = (FormOrientationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "orientation" ) ;
+		FormOrientationAttribute attr = (FormOrientationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "orientation" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

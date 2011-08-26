@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.dr3d;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dCenterAttribute;
 import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dSizeAttribute;
@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dTransformAttribute;
  */
 public class Dr3dSphereElement extends OdfStyleableShapeElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DR3D, "sphere" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DR3D, "sphere" );
 
 
 	/**
@@ -83,7 +83,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement
 	 */
 	public String getDr3dCenterAttribute()
 	{
-		Dr3dCenterAttribute attr = (Dr3dCenterAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "center" ) ;
+		Dr3dCenterAttribute attr = (Dr3dCenterAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DR3D), "center" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement
 	 */
 	public String getDr3dSizeAttribute()
 	{
-		Dr3dSizeAttribute attr = (Dr3dSizeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "size" ) ;
+		Dr3dSizeAttribute attr = (Dr3dSizeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DR3D), "size" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -137,7 +137,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement
 	 */
 	public Integer getDrawZIndexAttribute()
 	{
-		DrawZIndexAttribute attr = (DrawZIndexAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "z-index" ) ;
+		DrawZIndexAttribute attr = (DrawZIndexAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "z-index" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -164,7 +164,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement
 	 */
 	public String getDrawIdAttribute()
 	{
-		DrawIdAttribute attr = (DrawIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "id" ) ;
+		DrawIdAttribute attr = (DrawIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -191,7 +191,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -218,7 +218,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement
 	 */
 	public String getDrawLayerAttribute()
 	{
-		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "layer" ) ;
+		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "layer" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -245,7 +245,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement
 	 */
 	public String getDrawStyleNameAttribute()
 	{
-		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style-name" ) ;
+		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -272,7 +272,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement
 	 */
 	public String getDrawClassNamesAttribute()
 	{
-		DrawClassNamesAttribute attr = (DrawClassNamesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "class-names" ) ;
+		DrawClassNamesAttribute attr = (DrawClassNamesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "class-names" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -299,7 +299,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement
 	 */
 	public String getPresentationStyleNameAttribute()
 	{
-		PresentationStyleNameAttribute attr = (PresentationStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "style-name" ) ;
+		PresentationStyleNameAttribute attr = (PresentationStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -326,7 +326,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement
 	 */
 	public String getPresentationClassNamesAttribute()
 	{
-		PresentationClassNamesAttribute attr = (PresentationClassNamesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "class-names" ) ;
+		PresentationClassNamesAttribute attr = (PresentationClassNamesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "class-names" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -353,7 +353,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement
 	 */
 	public String getDr3dTransformAttribute()
 	{
-		Dr3dTransformAttribute attr = (Dr3dTransformAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "transform" ) ;
+		Dr3dTransformAttribute attr = (Dr3dTransformAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DR3D), "transform" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

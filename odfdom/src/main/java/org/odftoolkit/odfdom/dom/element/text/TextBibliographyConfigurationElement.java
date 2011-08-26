@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextPrefixAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextSuffixAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextNumberedEntriesAttribute;
@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextSortAlgorithmAttribute;
  */
 public class TextBibliographyConfigurationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "bibliography-configuration" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "bibliography-configuration" );
 
 
 	/**
@@ -81,7 +81,7 @@ public class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getTextPrefixAttribute()
 	{
-		TextPrefixAttribute attr = (TextPrefixAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "prefix" ) ;
+		TextPrefixAttribute attr = (TextPrefixAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "prefix" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -108,7 +108,7 @@ public class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getTextSuffixAttribute()
 	{
-		TextSuffixAttribute attr = (TextSuffixAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "suffix" ) ;
+		TextSuffixAttribute attr = (TextSuffixAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "suffix" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -135,7 +135,7 @@ public class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public Boolean getTextNumberedEntriesAttribute()
 	{
-		TextNumberedEntriesAttribute attr = (TextNumberedEntriesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "numbered-entries" ) ;
+		TextNumberedEntriesAttribute attr = (TextNumberedEntriesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "numbered-entries" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -162,7 +162,7 @@ public class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public Boolean getTextSortByPositionAttribute()
 	{
-		TextSortByPositionAttribute attr = (TextSortByPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "sort-by-position" ) ;
+		TextSortByPositionAttribute attr = (TextSortByPositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "sort-by-position" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -189,7 +189,7 @@ public class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getFoLanguageAttribute()
 	{
-		FoLanguageAttribute attr = (FoLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "language" ) ;
+		FoLanguageAttribute attr = (FoLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "language" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -216,7 +216,7 @@ public class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getFoCountryAttribute()
 	{
-		FoCountryAttribute attr = (FoCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "country" ) ;
+		FoCountryAttribute attr = (FoCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "country" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -243,7 +243,7 @@ public class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getFoScriptAttribute()
 	{
-		FoScriptAttribute attr = (FoScriptAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "script" ) ;
+		FoScriptAttribute attr = (FoScriptAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "script" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -270,7 +270,7 @@ public class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getStyleRfcLanguageTagAttribute()
 	{
-		StyleRfcLanguageTagAttribute attr = (StyleRfcLanguageTagAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rfc-language-tag" ) ;
+		StyleRfcLanguageTagAttribute attr = (StyleRfcLanguageTagAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "rfc-language-tag" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -297,7 +297,7 @@ public class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getTextSortAlgorithmAttribute()
 	{
-		TextSortAlgorithmAttribute attr = (TextSortAlgorithmAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "sort-algorithm" ) ;
+		TextSortAlgorithmAttribute attr = (TextSortAlgorithmAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "sort-algorithm" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

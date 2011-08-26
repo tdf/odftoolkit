@@ -25,8 +25,8 @@ package org.odftoolkit.odfdom.incubator.doc.number;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTextElement;

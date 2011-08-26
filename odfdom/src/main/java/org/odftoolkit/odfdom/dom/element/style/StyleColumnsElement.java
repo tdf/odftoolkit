@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoColumnCountAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoColumnGapAttribute;
 
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoColumnGapAttribute;
  */
 public class StyleColumnsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "columns" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.STYLE, "columns" );
 
 
 	/**
@@ -83,7 +83,7 @@ public class StyleColumnsElement extends OdfElement
 	 */
 	public Integer getFoColumnCountAttribute()
 	{
-		FoColumnCountAttribute attr = (FoColumnCountAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "column-count" ) ;
+		FoColumnCountAttribute attr = (FoColumnCountAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "column-count" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -110,7 +110,7 @@ public class StyleColumnsElement extends OdfElement
 	 */
 	public String getFoColumnGapAttribute()
 	{
-		FoColumnGapAttribute attr = (FoColumnGapAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "column-gap" ) ;
+		FoColumnGapAttribute attr = (FoColumnGapAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "column-gap" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -32,10 +32,10 @@ import java.util.logging.Logger;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
@@ -174,7 +174,7 @@ public class TextStyleNavigation extends Navigation {
 					if (node.getLocalName().equals("s")) // mText:s
 					{
 						try {
-							mIndex = mIndex + Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getUri(), "c"));
+							mIndex = mIndex + Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c"));
 						} catch (Exception e) {
 							mIndex++;
 						}
@@ -204,8 +204,6 @@ public class TextStyleNavigation extends Navigation {
 	}
 
 	private Set<String> getMatchStyleNames() {
-		XPath mInputXPath = XPathFactory.newInstance().newXPath();
-		mInputXPath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
 		Set<String> styleNames = new HashSet<String>();
 		String sname;
 		HashMap<String, OdfDefaultStyle> defaultStyles = new HashMap<String, OdfDefaultStyle>();

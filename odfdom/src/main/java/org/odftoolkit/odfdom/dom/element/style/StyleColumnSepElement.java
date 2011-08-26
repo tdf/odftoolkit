@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleStyleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleWidthAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleHeightAttribute;
@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleColorAttribute;
  */
 public class StyleColumnSepElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "column-sep" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.STYLE, "column-sep" );
 
 	/**
 	 * The value set of {@odf.attribute style:vertical-align}.
@@ -117,7 +117,7 @@ public class StyleColumnSepElement extends OdfElement
 	 */
 	public String getStyleStyleAttribute()
 	{
-		StyleStyleAttribute attr = (StyleStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "style" ) ;
+		StyleStyleAttribute attr = (StyleStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -144,7 +144,7 @@ public class StyleColumnSepElement extends OdfElement
 	 */
 	public String getStyleWidthAttribute()
 	{
-		StyleWidthAttribute attr = (StyleWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "width" ) ;
+		StyleWidthAttribute attr = (StyleWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -171,7 +171,7 @@ public class StyleColumnSepElement extends OdfElement
 	 */
 	public String getStyleHeightAttribute()
 	{
-		StyleHeightAttribute attr = (StyleHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "height" ) ;
+		StyleHeightAttribute attr = (StyleHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -198,7 +198,7 @@ public class StyleColumnSepElement extends OdfElement
 	 */
 	public String getStyleVerticalAlignAttribute()
 	{
-		StyleVerticalAlignAttribute attr = (StyleVerticalAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-align" ) ;
+		StyleVerticalAlignAttribute attr = (StyleVerticalAlignAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "vertical-align" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -225,7 +225,7 @@ public class StyleColumnSepElement extends OdfElement
 	 */
 	public String getStyleColorAttribute()
 	{
-		StyleColorAttribute attr = (StyleColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "color" ) ;
+		StyleColorAttribute attr = (StyleColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

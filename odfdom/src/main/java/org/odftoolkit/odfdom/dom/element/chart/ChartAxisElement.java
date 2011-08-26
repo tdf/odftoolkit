@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.chart;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartDimensionAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
  */
 public class ChartAxisElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "axis" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.CHART, "axis" );
 
 
 	/**
@@ -54,7 +54,7 @@ public class ChartAxisElement extends OdfStylableElement
 	 */
 	public ChartAxisElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.newName(OdfNamespaceNames.CHART, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.newName(OdfDocumentNamespace.CHART, "style-name" )	);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class ChartAxisElement extends OdfStylableElement
 	 */
 	public String getChartDimensionAttribute()
 	{
-		ChartDimensionAttribute attr = (ChartDimensionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "dimension" ) ;
+		ChartDimensionAttribute attr = (ChartDimensionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "dimension" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class ChartAxisElement extends OdfStylableElement
 	 */
 	public String getChartNameAttribute()
 	{
-		ChartNameAttribute attr = (ChartNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "name" ) ;
+		ChartNameAttribute attr = (ChartNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public class ChartAxisElement extends OdfStylableElement
 	 */
 	public String getChartStyleNameAttribute()
 	{
-		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) ;
+		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

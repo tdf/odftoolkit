@@ -22,39 +22,39 @@
 // !!! GENERATED SOURCE CODE !!!
 package org.odftoolkit.odfdom.dom.style.props;
 
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 
 public interface OdfDrawingPageProperties {
     public final static OdfStyleProperty BackgroundSize = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "background-size"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "background-size"));
     public final static OdfStyleProperty BackgroundObjectsVisible = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "background-objects-visible"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "background-objects-visible"));
     public final static OdfStyleProperty BackgroundVisible = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "background-visible"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "background-visible"));
     public final static OdfStyleProperty DisplayDateTime = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "display-date-time"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "display-date-time"));
     public final static OdfStyleProperty DisplayFooter = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "display-footer"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "display-footer"));
     public final static OdfStyleProperty DisplayHeader = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "display-header"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "display-header"));
     public final static OdfStyleProperty DisplayPageNumber = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "display-page-number"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "display-page-number"));
     public final static OdfStyleProperty Duration = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "duration"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "duration"));
     public final static OdfStyleProperty TransitionSpeed = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "transition-speed"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "transition-speed"));
     public final static OdfStyleProperty TransitionStyle = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "transition-style"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "transition-style"));
     public final static OdfStyleProperty TransitionType = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "transition-type"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "transition-type"));
     public final static OdfStyleProperty Visibility = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "visibility"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "visibility"));
     public final static OdfStyleProperty Direction = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "direction"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "direction"));
     public final static OdfStyleProperty Fadecolor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "fadeColor"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "fadeColor"));
     public final static OdfStyleProperty Subtype = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "subtype"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "subtype"));
 }

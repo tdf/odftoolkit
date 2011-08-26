@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleLengthAttribute;
@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleStyleNameAttribute;
  */
 public class StyleDropCapElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "drop-cap" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.STYLE, "drop-cap" );
 
 
 	/**
@@ -55,7 +55,7 @@ public class StyleDropCapElement extends OdfStylableElement
 	 */
 	public StyleDropCapElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Text, OdfName.newName(OdfNamespaceNames.TEXT, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Text, OdfName.newName(OdfDocumentNamespace.TEXT, "style-name" )	);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class StyleDropCapElement extends OdfStylableElement
 	 */
 	public String getStyleLengthAttribute()
 	{
-		StyleLengthAttribute attr = (StyleLengthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "length" ) ;
+		StyleLengthAttribute attr = (StyleLengthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "length" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -104,7 +104,7 @@ public class StyleDropCapElement extends OdfStylableElement
 	 */
 	public Integer getStyleLinesAttribute()
 	{
-		StyleLinesAttribute attr = (StyleLinesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "lines" ) ;
+		StyleLinesAttribute attr = (StyleLinesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "lines" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -131,7 +131,7 @@ public class StyleDropCapElement extends OdfStylableElement
 	 */
 	public String getStyleDistanceAttribute()
 	{
-		StyleDistanceAttribute attr = (StyleDistanceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "distance" ) ;
+		StyleDistanceAttribute attr = (StyleDistanceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "distance" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -158,7 +158,7 @@ public class StyleDropCapElement extends OdfStylableElement
 	 */
 	public String getStyleStyleNameAttribute()
 	{
-		StyleStyleNameAttribute attr = (StyleStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "style-name" ) ;
+		StyleStyleNameAttribute attr = (StyleStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

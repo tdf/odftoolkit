@@ -24,7 +24,7 @@ package org.odftoolkit.odfdom.dom.style.props;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-import org.odftoolkit.odfdom.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
  * Class to represent a odf style attribut. Each instance has a name and belongs

@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.text;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextConditionalTextElement;
 import org.odftoolkit.odfdom.dom.element.text.TextDatabaseNextElement;
@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
  */
 public class TextConditionAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "condition" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.TEXT, "condition" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:condition}.

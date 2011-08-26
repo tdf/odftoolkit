@@ -21,21 +21,21 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.dom.element;
 
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.OdfStylePropertySet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
-import org.odftoolkit.odfdom.type.StyleName;
 import org.odftoolkit.odfdom.type.StyleNameRef;
 import org.w3c.dom.DOMException;
 
@@ -50,6 +50,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
     private OdfStyle mAutomaticStyle;    
     protected OdfStyleFamily mFamily;
     protected OdfName mStyleNameAttrib;
+	private OdfDocument mOdfDocument;
     
     /** Creates a new instance of OdfElementImpl
      * @param ownerDocument
@@ -62,6 +63,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
         super(ownerDocument, name.getUri(), name.getQName());
         mFamily = family;
         mStyleNameAttrib = styleNameAttrib;
+		mOdfDocument = (OdfDocument) ownerDocument.getDocument();
     }
 
     /**
@@ -254,10 +256,12 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
     public OdfStyle getDocumentStyle()
     {
         String styleName;
-        if( mAutomaticStyle != null )
-            styleName = mAutomaticStyle.getStyleParentStyleNameAttribute();
-        else
-            styleName = getStyleName();
+        if( mAutomaticStyle != null ) {
+			styleName = mAutomaticStyle.getStyleParentStyleNameAttribute();
+		}
+        else {
+			styleName = getStyleName();
+		}
         
         return mOdfDocument.getDocumentStyles().getStyle(styleName, getStyleFamily() );
     }

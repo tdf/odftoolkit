@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.db;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbShowDeletedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbSystemDriverSettingsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbBaseDnAttribute;
@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbParameterNameSubstitutionAttribu
  */
 public class DbDriverSettingsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "driver-settings" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DB, "driver-settings" );
 
 
 	/**
@@ -77,7 +77,7 @@ public class DbDriverSettingsElement extends OdfElement
 	 */
 	public Boolean getDbShowDeletedAttribute()
 	{
-		DbShowDeletedAttribute attr = (DbShowDeletedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "show-deleted" ) ;
+		DbShowDeletedAttribute attr = (DbShowDeletedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "show-deleted" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -104,7 +104,7 @@ public class DbDriverSettingsElement extends OdfElement
 	 */
 	public String getDbSystemDriverSettingsAttribute()
 	{
-		DbSystemDriverSettingsAttribute attr = (DbSystemDriverSettingsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "system-driver-settings" ) ;
+		DbSystemDriverSettingsAttribute attr = (DbSystemDriverSettingsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "system-driver-settings" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -131,7 +131,7 @@ public class DbDriverSettingsElement extends OdfElement
 	 */
 	public String getDbBaseDnAttribute()
 	{
-		DbBaseDnAttribute attr = (DbBaseDnAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "base-dn" ) ;
+		DbBaseDnAttribute attr = (DbBaseDnAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "base-dn" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -158,7 +158,7 @@ public class DbDriverSettingsElement extends OdfElement
 	 */
 	public Boolean getDbIsFirstRowHeaderLineAttribute()
 	{
-		DbIsFirstRowHeaderLineAttribute attr = (DbIsFirstRowHeaderLineAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-first-row-header-line" ) ;
+		DbIsFirstRowHeaderLineAttribute attr = (DbIsFirstRowHeaderLineAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "is-first-row-header-line" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -185,7 +185,7 @@ public class DbDriverSettingsElement extends OdfElement
 	 */
 	public Boolean getDbParameterNameSubstitutionAttribute()
 	{
-		DbParameterNameSubstitutionAttribute attr = (DbParameterNameSubstitutionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "parameter-name-substitution" ) ;
+		DbParameterNameSubstitutionAttribute attr = (DbParameterNameSubstitutionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "parameter-name-substitution" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

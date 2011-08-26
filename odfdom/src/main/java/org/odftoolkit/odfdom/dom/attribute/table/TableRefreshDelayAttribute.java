@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.table;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.table.TableCellRangeSourceElement;
 import org.odftoolkit.odfdom.dom.element.table.TableDatabaseRangeElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableSourceElement;
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableSourceElement;
  */
 public class TableRefreshDelayAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "refresh-delay" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.TABLE, "refresh-delay" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:refresh-delay}.

@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableGroupByFieldNumberAttribute;
 
 
@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableGroupByFieldNumberAttribut
  */
 public class TableSubtotalRuleElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "subtotal-rule" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "subtotal-rule" );
 
 
 	/**
@@ -82,7 +82,7 @@ public class TableSubtotalRuleElement extends OdfElement
 	 */
 	public Integer getTableGroupByFieldNumberAttribute()
 	{
-		TableGroupByFieldNumberAttribute attr = (TableGroupByFieldNumberAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "group-by-field-number" ) ;
+		TableGroupByFieldNumberAttribute attr = (TableGroupByFieldNumberAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "group-by-field-number" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

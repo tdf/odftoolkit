@@ -19,9 +19,10 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.odfdom;
+package org.odftoolkit.odfdom.pkg;
 
 import org.apache.xerces.dom.AttrNSImpl;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.w3c.dom.DOMException;
 
 /**

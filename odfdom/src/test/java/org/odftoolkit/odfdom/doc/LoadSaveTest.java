@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -54,7 +54,7 @@ public class LoadSaveTest {
             Assert.assertEquals(ResourceUtilities.getURI(SOURCE).toString(), baseURI);
 
             Document odfContent = odfDocument.getContentDom();
-            NodeList lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "p");
+            NodeList lst = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
             Node node = lst.item(0);
             String oldText = "Changed!!!";
             node.setTextContent(oldText);
@@ -63,7 +63,7 @@ public class LoadSaveTest {
             odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
 
             odfContent = odfDocument.getContentDom();
-            lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "p");
+            lst = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
             node = lst.item(0);
             String newText = node.getTextContent();
             Assert.assertTrue(newText.equals(oldText));

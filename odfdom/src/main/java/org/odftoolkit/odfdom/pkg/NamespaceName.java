@@ -19,11 +19,11 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.odfdom;
+package org.odftoolkit.odfdom.pkg;
 
 /**
  * The NamespaceName interface is being used to provide an easy way to define Namespaces
- * in a higher layer and access them in the lower i.e. org.odftoolkit.odfdom.OdfNamespace.
+ * in a higher layer (e.g. via enum as OdfDocumentNamespace) and access them from a lower layer e.g. constructors of org.odftoolkit.odfdom.pkg.OdfNamespace.
  */
 public interface NamespaceName {
 

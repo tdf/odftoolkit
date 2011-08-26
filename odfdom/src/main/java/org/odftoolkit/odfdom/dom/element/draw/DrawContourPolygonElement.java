@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawRecreateOnEditAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgWidthAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgHeightAttribute;
@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawPointsAttribute;
  */
 public class DrawContourPolygonElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "contour-polygon" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DRAW, "contour-polygon" );
 
 
 	/**
@@ -90,7 +90,7 @@ public class DrawContourPolygonElement extends OdfElement
 	 */
 	public Boolean getDrawRecreateOnEditAttribute()
 	{
-		DrawRecreateOnEditAttribute attr = (DrawRecreateOnEditAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "recreate-on-edit" ) ;
+		DrawRecreateOnEditAttribute attr = (DrawRecreateOnEditAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "recreate-on-edit" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -117,7 +117,7 @@ public class DrawContourPolygonElement extends OdfElement
 	 */
 	public String getSvgWidthAttribute()
 	{
-		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "width" ) ;
+		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -144,7 +144,7 @@ public class DrawContourPolygonElement extends OdfElement
 	 */
 	public String getSvgHeightAttribute()
 	{
-		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) ;
+		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -171,7 +171,7 @@ public class DrawContourPolygonElement extends OdfElement
 	 */
 	public String getSvgViewBoxAttribute()
 	{
-		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "viewBox" ) ;
+		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "viewBox" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -198,7 +198,7 @@ public class DrawContourPolygonElement extends OdfElement
 	 */
 	public String getDrawPointsAttribute()
 	{
-		DrawPointsAttribute attr = (DrawPointsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "points" ) ;
+		DrawPointsAttribute attr = (DrawPointsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "points" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

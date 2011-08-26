@@ -21,8 +21,17 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,11 +42,11 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
@@ -148,29 +157,56 @@ public class DocumentTest {
 
 	@Test
 	public void testDumpDom() {
-		try {
-			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
-
-			Transformer trans = TransformerFactory.newInstance().newTransformer();
-			trans.setOutputProperty("indent", "yes");
-			// trans.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-
-			LOG.info("content.xml -------------------");
-			ByteArrayOutputStream contentBytes = new ByteArrayOutputStream();
-			trans.transform(new DOMSource(odfdoc.getContentDom()), new StreamResult(contentBytes));
-			LOG.info(contentBytes.toString());
-			LOG.info("-------------------------------");
-			LOG.info("styles.xml --------------------");
-			ByteArrayOutputStream stylesBytes = new ByteArrayOutputStream();
-			trans.transform(new DOMSource(odfdoc.getStylesDom()), new StreamResult(stylesBytes));
-			LOG.info(stylesBytes.toString());
-			LOG.info("-------------------------------");
-
-
+		try {			
+			Assert.assertTrue(testXSLT("content") & testXSLT("styles"));
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
+	}
+
+	private static boolean testXSLT(String odfFileNamePrefix) throws Exception {
+		OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+
+		Transformer trans = TransformerFactory.newInstance().newTransformer();
+		trans.setOutputProperty("indent", "yes");
+		// trans.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+		LOG.log(Level.INFO, "---------- {0}.xml transformed and compared ---------", odfFileNamePrefix);
+		// The XML file (e.g. content.xml) is transformed by XSLT into the similar/identical XML file
+		ByteArrayOutputStream xmlBytes = new ByteArrayOutputStream();
+		OdfFileDom fileDom = null;
+		if (odfFileNamePrefix.equals("content")) {
+			fileDom = odfdoc.getContentDom();
+		} else {
+			fileDom = odfdoc.getStylesDom();
+		}
+		// transforming the XML using identical transformation
+		trans.transform(new DOMSource(fileDom), new StreamResult(xmlBytes));
+		String xmlString = xmlBytes.toString("UTF-8");		
+		// Saving test file to disc
+		saveString(xmlString, ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-temporary-test.xml");
+
+		// The template XML was once transformed and saved to the resource folder to gurantee the same indentation
+		String xmlStringOriginal = inputStreamToString(ResourceUtilities.getTestResourceAsStream("test2-" + odfFileNamePrefix + ".xml"));
+		// Saving original file to disc
+		saveString(xmlStringOriginal, ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-temporary-original.xml");
+
+
+		// Loading original file back to string representation
+		String originalString = inputStreamToString(new FileInputStream(ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-temporary-test.xml"));
+		// Loading test file back to string representation
+		String testString = inputStreamToString(new FileInputStream(ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-temporary-original.xml"));
+
+		boolean xmlEqual = originalString.equals(testString);
+		if (!xmlEqual) {
+			String testFilePath = ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-final-test.xml";
+			String originalFilePath = ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-final-original.xml";
+			saveString(testString, testFilePath);
+			saveString(originalString, originalFilePath);
+			LOG.log(Level.SEVERE, "Please compare the XML of two file:\n{0}\n and \n{1}", new Object[]{testFilePath, originalFilePath});
+		}
+		return xmlEqual;
 	}
 
 	@Test
@@ -280,16 +316,16 @@ public class DocumentTest {
 		if (testStyle.getStyleParentStyleNameAttribute() != null) {
 			OdfStyle parentStyle = dom.getAutomaticStyles().getStyle(testStyle.getStyleParentStyleNameAttribute(), testStyle.getFamily());
 			if (parentStyle == null) {
-				parentStyle = dom.getOdfDocument().getDocumentStyles().getStyle(testStyle.getStyleParentStyleNameAttribute(), testStyle.getFamily());
+				parentStyle = ((OdfDocument) dom.getDocument()).getDocumentStyles().getStyle(testStyle.getStyleParentStyleNameAttribute(), testStyle.getFamily());
 			}
 
 			Assert.assertNotNull(parentStyle);
 		}
-		if (testStyle.hasOdfAttribute(OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "list-style-name"))) {
+		if (testStyle.hasOdfAttribute(OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "list-style-name"))) {
 			if (testStyle.getStyleListStyleNameAttribute() != null) {
 				OdfTextListStyle listStyle = dom.getAutomaticStyles().getListStyle(testStyle.getStyleListStyleNameAttribute());
 				if (listStyle == null) {
-					listStyle = dom.getOdfDocument().getDocumentStyles().getListStyle(testStyle.getStyleListStyleNameAttribute());
+					listStyle = ((OdfDocument) dom.getDocument()).getDocumentStyles().getListStyle(testStyle.getStyleListStyleNameAttribute());
 				}
 
 				Assert.assertNotNull(listStyle);
@@ -322,5 +358,24 @@ public class DocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
+	}
+
+	private static String inputStreamToString(InputStream in) throws IOException {
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+		StringBuilder stringBuilder = new StringBuilder();
+		String line = null;
+
+		while ((line = bufferedReader.readLine()) != null) {
+			stringBuilder.append(line).append("\n");
+		}
+		bufferedReader.close();
+		return stringBuilder.toString();
+	}
+
+	/** Saves the datastring as UTF8 to the given filePath */
+	private static void saveString(String dataString, String filePath) throws UnsupportedEncodingException, IOException {
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), "UTF8"));
+		out.append(dataString);
+		out.close();
 	}
 }

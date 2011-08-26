@@ -27,13 +27,11 @@ import java.util.logging.Logger;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateElement;
 import org.odftoolkit.odfdom.dom.element.chart.ChartChartElement;
 import org.odftoolkit.odfdom.dom.element.chart.ChartPlotAreaElement;
@@ -69,14 +67,6 @@ import org.w3c.dom.NodeList;
 
 public class CreateChildrenElementsTest {
 
-	private XPath xpath;
-
-	public CreateChildrenElementsTest() {
-		xpath = XPathFactory.newInstance().newXPath();
-		xpath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
-
-	}
-
 	@Test
 	public void testCreatChildrenForPresentation() {
 		try {
@@ -86,8 +76,9 @@ public class CreateChildrenElementsTest {
 
 			DrawPageElement page = presentation.newDrawPageElement("NewPage");
 
-
-			DrawPageElement presentationTest = (DrawPageElement) xpath.evaluate("//draw:page[last()]", odfdoc.getContentDom(), XPathConstants.NODE);
+			OdfContentDom contentDom = odfdoc.getContentDom();
+			XPath xpath = contentDom.getXPath();
+			DrawPageElement presentationTest = (DrawPageElement) xpath.evaluate("//draw:page[last()]", contentDom, XPathConstants.NODE);
 
 			Assert.assertTrue(presentationTest instanceof DrawPageElement);
 			Assert.assertEquals(page, presentationTest);
@@ -106,26 +97,27 @@ public class CreateChildrenElementsTest {
 	public void testCreatChildrenForChart() {
 		try {
 
-			OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
+			OdfContentDom contentDom = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
 
 			// find the last paragraph
-			NodeList lst = doc.getElementsByTagNameNS(
+			NodeList lst = contentDom.getElementsByTagNameNS(
 					OdfTextParagraph.ELEMENT_NAME.getUri(),
 					OdfTextParagraph.ELEMENT_NAME.getLocalName());
 			Assert.assertTrue(lst.getLength() > 0);
 			OdfTextParagraph p0 = (OdfTextParagraph) lst.item(lst.getLength() - 1);
 
-			OfficeDocumentContentElement content = doc.newOdfElement(OfficeDocumentContentElement.class);
-			OfficeBodyElement body = doc.newOdfElement(OfficeBodyElement.class);
+			OfficeDocumentContentElement content = contentDom.newOdfElement(OfficeDocumentContentElement.class);
+			OfficeBodyElement body = contentDom.newOdfElement(OfficeBodyElement.class);
 			content.appendChild(body);
-			ChartChartElement chart = doc.newOdfElement(ChartChartElement.class);
+			ChartChartElement chart = contentDom.newOdfElement(ChartChartElement.class);
 			//create children element
 			ChartPlotAreaElement plotArea = chart.newChartPlotAreaElement();
 			body.appendChild(chart);
 			p0.getParentNode().insertBefore(content, p0);
 
 
-			ChartChartElement chartTest = (ChartChartElement) xpath.evaluate("//chart:chart[last()]", doc, XPathConstants.NODE);
+			XPath xpath = contentDom.getXPath();
+			ChartChartElement chartTest = (ChartChartElement) xpath.evaluate("//chart:chart[last()]", contentDom, XPathConstants.NODE);
 
 			Assert.assertNotNull(chartTest.getChildNodes());
 
@@ -133,7 +125,7 @@ public class CreateChildrenElementsTest {
 			Assert.assertEquals(plotArea, chartTest.getChildNodes().item(0));
 			Assert.assertEquals(chartTest.getChildNodes().item(0).getNodeName(), "chart:plot-area");
 
-			doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForChartTest.odt"));
+			contentDom.getDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForChartTest.odt"));
 
 		} catch (Exception e) {
 			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -144,16 +136,16 @@ public class CreateChildrenElementsTest {
 	@Test
 	public void testCreateChildrenForTable() {
 		try {
-			OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
+			OdfContentDom contentDom = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
 
 			// find the last paragraph
-			NodeList lst = doc.getElementsByTagNameNS(
+			NodeList lst = contentDom.getElementsByTagNameNS(
 					TextPElement.ELEMENT_NAME.getUri(),
 					TextPElement.ELEMENT_NAME.getLocalName());
 			Assert.assertTrue(lst.getLength() > 0);
 			OdfTextParagraph p0 = (OdfTextParagraph) lst.item(lst.getLength() - 1);
 
-			TableTableElement table = doc.newOdfElement(TableTableElement.class);
+			TableTableElement table = contentDom.newOdfElement(TableTableElement.class);
 
 
 			TableTableRowElement tr = table.newTableTableRowElement();
@@ -161,7 +153,7 @@ public class CreateChildrenElementsTest {
 			TableTableCellElement td1 = tr.newTableTableCellElement();
 
 			TextPElement p1 = td1.newTextPElement();
-			p1.appendChild(doc.createTextNode("content 1"));
+			p1.appendChild(contentDom.createTextNode("content 1"));
 
 			p0.getParentNode().insertBefore(table, p0);
 
@@ -169,14 +161,14 @@ public class CreateChildrenElementsTest {
 			table.setProperty(StyleTablePropertiesElement.Align, "left");
 
 			td1.setProperty(StyleTableColumnPropertiesElement.ColumnWidth, "2cm");
-
-			TableTableRowElement tableRowTest = (TableTableRowElement) xpath.evaluate("//table:table-row [last()]", doc, XPathConstants.NODE);
+			XPath xpath = contentDom.getXPath();
+			TableTableRowElement tableRowTest = (TableTableRowElement) xpath.evaluate("//table:table-row [last()]", contentDom, XPathConstants.NODE);
 			Assert.assertNotNull(tableRowTest.getChildNodes());
 
 			Assert.assertTrue(tableRowTest.getChildNodes().item(0) instanceof TableTableCellElement);
 			Assert.assertEquals(tableRowTest.getChildNodes().item(0).getNodeName(), "table:table-cell");
 
-			doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreateChildrenForTableTest.odt"));
+			contentDom.getDocument().save(ResourceUtilities.newTestOutputFile("CreateChildrenForTableTest.odt"));
 
 		} catch (Exception e) {
 			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -188,16 +180,16 @@ public class CreateChildrenElementsTest {
 	public void testCreatChildrenForText() {
 		try {
 
-			OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
+			OdfContentDom contentDom = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
 
 			// find the last paragraph
-			NodeList lst = doc.getElementsByTagNameNS(
+			NodeList lst = contentDom.getElementsByTagNameNS(
 					OdfTextParagraph.ELEMENT_NAME.getUri(),
 					OdfTextParagraph.ELEMENT_NAME.getLocalName());
 			Assert.assertTrue(lst.getLength() > 0);
 			OdfTextParagraph p0 = (OdfTextParagraph) lst.item(lst.getLength() - 1);
 
-			TextListItemElement listItem = doc.newOdfElement(TextListItemElement.class);
+			TextListItemElement listItem = contentDom.newOdfElement(TextListItemElement.class);
 			//create children elements
 			TextHElement heading = listItem.newTextHElement("1");
 			TextListElement list = listItem.newTextListElement();
@@ -205,8 +197,8 @@ public class CreateChildrenElementsTest {
 			TextSoftPageBreakElement softPageBreak = listItem.newTextSoftPageBreakElement();
 
 			p0.getParentNode().insertBefore(listItem, p0);
-
-			TextListItemElement listItemTest = (TextListItemElement) xpath.evaluate("//text:list-item[last()]", doc, XPathConstants.NODE);
+			XPath xpath = contentDom.getXPath();
+			TextListItemElement listItemTest = (TextListItemElement) xpath.evaluate("//text:list-item[last()]", contentDom, XPathConstants.NODE);
 			Assert.assertNotNull(listItemTest.getChildNodes());
 
 			Assert.assertTrue(listItemTest.getChildNodes().item(0) instanceof OdfTextHeading);
@@ -226,7 +218,7 @@ public class CreateChildrenElementsTest {
 			Assert.assertEquals(listItemTest.getChildNodes().item(3).getNodeName(), "text:soft-page-break");
 
 
-			doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForTextTable.odt"));
+			contentDom.getDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForTextTable.odt"));
 
 		} catch (Exception e) {
 			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -239,28 +231,28 @@ public class CreateChildrenElementsTest {
 		try {
 
 			OdfGraphicsDocument odgDoc1 = OdfGraphicsDocument.newGraphicsDocument();
-			OdfFileDom doc = odgDoc1.getContentDom();
+			OdfContentDom contentDom = odgDoc1.getContentDom();
 
-			NodeList lst = doc.getElementsByTagNameNS(
+			NodeList lst = contentDom.getElementsByTagNameNS(
 					DrawPageElement.ELEMENT_NAME.getUri(),
 					DrawPageElement.ELEMENT_NAME.getLocalName());
 			DrawPageElement page = (DrawPageElement) lst.item(lst.getLength() - 1);
-			//page.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "name" ), "page1" );
-			//page.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "style-name" ), "dp1" );
-			//page.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "master-page-name" ), "Default" );
+			//page.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfDocumentNamespace.DRAW), "name" ), "page1" );
+			//page.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfDocumentNamespace.DRAW), "style-name" ), "dp1" );
+			//page.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfDocumentNamespace.DRAW), "master-page-name" ), "Default" );
 			page.setDrawNameAttribute("page1");
 			page.setDrawStyleNameAttribute("dp1");
 			page.setDrawMasterPageNameAttribute("Default");
 
 			DrawLineElement line = page.newDrawLineElement("6cm", "10cm", "15cm", "20cm");
-			//line.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "style-name" ), "gr1" );
-			//line.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "text-style-name" ), "P1" );
-			//line.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "layer" ), "layout" );
+			//line.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfDocumentNamespace.DRAW), "style-name" ), "gr1" );
+			//line.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfDocumentNamespace.DRAW), "text-style-name" ), "P1" );
+			//line.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfDocumentNamespace.DRAW), "layer" ), "layout" );
 			line.setDrawStyleNameAttribute("gr1");
 			line.setDrawTextStyleNameAttribute("P1");
 			line.setDrawLayerAttribute("layer");
-
-			DrawPageElement graphicTest = (DrawPageElement) xpath.evaluate("//draw:page[last()]", doc, XPathConstants.NODE);
+			XPath xpath = contentDom.getXPath();
+			DrawPageElement graphicTest = (DrawPageElement) xpath.evaluate("//draw:page[last()]", contentDom, XPathConstants.NODE);
 			Assert.assertNotNull(graphicTest.getChildNodes());
 
 			Assert.assertTrue(graphicTest.getChildNodes().item(0) instanceof DrawLineElement);
@@ -272,7 +264,7 @@ public class CreateChildrenElementsTest {
 			Assert.assertEquals(((DrawLineElement) graphicTest.getChildNodes().item(0)).getSvgY1Attribute().toString(), "15cm");
 			Assert.assertEquals(((DrawLineElement) graphicTest.getChildNodes().item(0)).getSvgY2Attribute().toString(), "20cm");
 
-			doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForGraphic.odg"));
+			contentDom.getDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForGraphic.odg"));
 
 		} catch (Exception e) {
 			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -283,9 +275,9 @@ public class CreateChildrenElementsTest {
 	@Test
 	public void testCreatChildrenForStyles() {
 		try {
-			OdfDocument doc = OdfTextDocument.newTextDocument();
+			OdfDocument textDoc = OdfTextDocument.newTextDocument();
 
-			OdfOfficeStyles styles = doc.getOrCreateDocumentStyles();
+			OdfOfficeStyles styles = textDoc.getOrCreateDocumentStyles();
 			StyleDefaultStyleElement def = styles.newStyleDefaultStyleElement();
 			def.setStyleFamilyAttribute(OdfStyleFamily.Paragraph.toString());
 			def.setProperty(StyleTextPropertiesElement.TextUnderlineColor, "#00FF00");
@@ -295,11 +287,11 @@ public class CreateChildrenElementsTest {
 
 			parent.setProperty(StyleTextPropertiesElement.FontSize, "17pt");
 			parent.setProperty(StyleTextPropertiesElement.Color, "#FF0000");
-
-			StyleStyleElement styleTest = (StyleStyleElement) xpath.evaluate("//style:style[last()]", doc.getStylesDom(), XPathConstants.NODE);
+			OdfStylesDom stylesDom = textDoc.getStylesDom();
+			XPath xpath = stylesDom.getXPath();
+			StyleStyleElement styleTest = (StyleStyleElement) xpath.evaluate("//style:style[last()]", stylesDom, XPathConstants.NODE);
 			Assert.assertEquals(styleTest, parent);
-
-			doc.getContentDom().getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForStyles.odt"));
+			textDoc.save(ResourceUtilities.newTestOutputFile("CreatChildrenForStyles.odt"));
 
 		} catch (Exception e) {
 			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -313,15 +305,15 @@ public class CreateChildrenElementsTest {
 			OdfDocument document = OdfTextDocument.newTextDocument();
 			document.insertDocument(OdfTextDocument.newTextDocument(), "Object1/");
 			OdfDocument embeddedObject1 = (OdfDocument) document.getEmbeddedDocument("Object1/");
-			OdfFileDom doc = embeddedObject1.getContentDom();
+			OdfContentDom contentDom = embeddedObject1.getContentDom();
 			// find the last paragraph
-			NodeList lst = doc.getElementsByTagNameNS(
+			NodeList lst = contentDom.getElementsByTagNameNS(
 					OdfTextParagraph.ELEMENT_NAME.getUri(),
 					OdfTextParagraph.ELEMENT_NAME.getLocalName());
 			Assert.assertTrue(lst.getLength() > 0);
 			OdfTextParagraph p0 = (OdfTextParagraph) lst.item(lst.getLength() - 1);
 
-			TextListItemElement listItem = doc.newOdfElement(TextListItemElement.class);
+			TextListItemElement listItem = contentDom.newOdfElement(TextListItemElement.class);
 			//create children elements
 			TextHElement heading = listItem.newTextHElement("1");
 			TextListElement list = listItem.newTextListElement();
@@ -329,8 +321,8 @@ public class CreateChildrenElementsTest {
 			TextSoftPageBreakElement softPageBreak = listItem.newTextSoftPageBreakElement();
 
 			p0.getParentNode().insertBefore(listItem, p0);
-
-			TextListItemElement listItemTest = (TextListItemElement) xpath.evaluate("//text:list-item[last()]", doc, XPathConstants.NODE);
+			XPath xpath = contentDom.getXPath();
+			TextListItemElement listItemTest = (TextListItemElement) xpath.evaluate("//text:list-item[last()]", contentDom, XPathConstants.NODE);
 			Assert.assertNotNull(listItemTest.getChildNodes());
 
 			Assert.assertTrue(listItemTest.getChildNodes().item(0) instanceof OdfTextHeading);
@@ -350,7 +342,7 @@ public class CreateChildrenElementsTest {
 			Assert.assertEquals(listItemTest.getChildNodes().item(3).getNodeName(), "text:soft-page-break");
 
 
-			doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForEmbedded.odt"));
+			contentDom.getDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForEmbedded.odt"));
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -364,24 +356,24 @@ public class CreateChildrenElementsTest {
 		try {
 
 			OdfSpreadsheetDocument odfSpreadSheet = OdfSpreadsheetDocument.newSpreadsheetDocument();
-			OdfFileDom doc = odfSpreadSheet.getContentDom();
+			OdfContentDom contentDom = odfSpreadSheet.getContentDom();
 
-			NodeList lst = doc.getElementsByTagNameNS(
+			NodeList lst = contentDom.getElementsByTagNameNS(
 					OfficeSpreadsheetElement.ELEMENT_NAME.getUri(),
 					OfficeSpreadsheetElement.ELEMENT_NAME.getLocalName());
 			OfficeSpreadsheetElement sheet = (OfficeSpreadsheetElement) lst.item(lst.getLength() - 1);
 			TableTableElement table = sheet.newTableTableElement();
-			//table.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.TABLE), "name" ), "newtable" );
-			//table.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.TABLE), "style-name" ), "ta1" );
+			//table.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfDocumentNamespace.TABLE), "name" ), "newtable" );
+			//table.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfDocumentNamespace.TABLE), "style-name" ), "ta1" );
 			table.setTableNameAttribute("newtable");
 			table.setTableStyleNameAttribute("ta1");
 			TableTableColumnElement column = table.newTableTableColumnElement();
-			//column.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.TABLE), "style-name" ), "co1" );
-			//column.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.TABLE), "default-cell-style-name" ), "Default" );
+			//column.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfDocumentNamespace.TABLE), "style-name" ), "co1" );
+			//column.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfDocumentNamespace.TABLE), "default-cell-style-name" ), "Default" );
 			column.setTableStyleNameAttribute("co1");
 			column.setTableDefaultCellStyleNameAttribute("Default");
-
-			TableTableElement spreadsheetTest = (TableTableElement) xpath.evaluate("//table:table[last()]", doc, XPathConstants.NODE);
+			XPath xpath = contentDom.getXPath();
+			TableTableElement spreadsheetTest = (TableTableElement) xpath.evaluate("//table:table[last()]", contentDom, XPathConstants.NODE);
 			Assert.assertNotNull(spreadsheetTest.getChildNodes());
 
 			Assert.assertTrue(spreadsheetTest.getChildNodes().item(0) instanceof TableTableColumnElement);
@@ -391,7 +383,7 @@ public class CreateChildrenElementsTest {
 			Assert.assertEquals(((TableTableColumnElement) spreadsheetTest.getChildNodes().item(0)).getAttribute("table:style-name"), "co1");
 			Assert.assertEquals(((TableTableColumnElement) spreadsheetTest.getChildNodes().item(0)).getAttribute("table:default-cell-style-name"), "Default");
 
-			doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForSpreadsheet.ods"));
+			contentDom.getDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForSpreadsheet.ods"));
 
 		} catch (Exception e) {
 			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -406,9 +398,11 @@ public class CreateChildrenElementsTest {
 			OfficeTextElement text = doc.getContentRoot();
 			FormFormElement form = text.newFormFormElement();
 			form.setFormNameAttribute("NewFrom");
-			FormFormElement formTest = (FormFormElement) xpath.evaluate("//form:form[last()]", doc.getContentDom(), XPathConstants.NODE);
+			OdfContentDom contentDom = doc.getContentDom();
+			XPath xpath = contentDom.getXPath();
+			FormFormElement formTest = (FormFormElement) xpath.evaluate("//form:form[last()]", contentDom, XPathConstants.NODE);
 			Assert.assertEquals(formTest, form);
-			doc.getContentDom().getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForForm.odt"));
+			doc.getContentDom().getDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForForm.odt"));
 
 		} catch (Exception e) {
 			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -426,9 +420,9 @@ public class CreateChildrenElementsTest {
 			DrawPageElement page = presentation.newDrawPageElement("NewPage");
 
 			AnimAnimateElement anim = page.newAnimAnimateElement("new");
-
-
-			AnimAnimateElement animTest = (AnimAnimateElement) xpath.evaluate("//anim:animate[last()]", odfdoc.getContentDom(), XPathConstants.NODE);
+			OdfContentDom contentDom = odfdoc.getContentDom();
+			XPath xpath = contentDom.getXPath();
+			AnimAnimateElement animTest = (AnimAnimateElement) xpath.evaluate("//anim:animate[last()]", contentDom, XPathConstants.NODE);
 
 			Assert.assertTrue(animTest instanceof AnimAnimateElement);
 

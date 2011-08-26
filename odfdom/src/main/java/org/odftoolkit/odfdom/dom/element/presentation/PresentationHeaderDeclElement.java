@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.presentation;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationNameAttribute;
 
 
@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationNameAttribut
  */
 public class PresentationHeaderDeclElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "header-decl" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.PRESENTATION, "header-decl" );
 
 
 	/**
@@ -82,7 +82,7 @@ public class PresentationHeaderDeclElement extends OdfElement
 	 */
 	public String getPresentationNameAttribute()
 	{
-		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "name" ) ;
+		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

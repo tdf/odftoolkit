@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableSourceFieldNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDateStartAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStartAttribute;
@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableGroupedByAttribute;
  */
 public class TableDataPilotGroupsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-groups" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "data-pilot-groups" );
 
 
 	/**
@@ -100,7 +100,7 @@ public class TableDataPilotGroupsElement extends OdfElement
 	 */
 	public String getTableSourceFieldNameAttribute()
 	{
-		TableSourceFieldNameAttribute attr = (TableSourceFieldNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "source-field-name" ) ;
+		TableSourceFieldNameAttribute attr = (TableSourceFieldNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "source-field-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -127,7 +127,7 @@ public class TableDataPilotGroupsElement extends OdfElement
 	 */
 	public String getTableDateStartAttribute()
 	{
-		TableDateStartAttribute attr = (TableDateStartAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "date-start" ) ;
+		TableDateStartAttribute attr = (TableDateStartAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "date-start" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -154,7 +154,7 @@ public class TableDataPilotGroupsElement extends OdfElement
 	 */
 	public String getTableStartAttribute()
 	{
-		TableStartAttribute attr = (TableStartAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "start" ) ;
+		TableStartAttribute attr = (TableStartAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "start" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -181,7 +181,7 @@ public class TableDataPilotGroupsElement extends OdfElement
 	 */
 	public String getTableDateEndAttribute()
 	{
-		TableDateEndAttribute attr = (TableDateEndAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "date-end" ) ;
+		TableDateEndAttribute attr = (TableDateEndAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "date-end" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -208,7 +208,7 @@ public class TableDataPilotGroupsElement extends OdfElement
 	 */
 	public String getTableEndAttribute()
 	{
-		TableEndAttribute attr = (TableEndAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end" ) ;
+		TableEndAttribute attr = (TableEndAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "end" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -235,7 +235,7 @@ public class TableDataPilotGroupsElement extends OdfElement
 	 */
 	public Double getTableStepAttribute()
 	{
-		TableStepAttribute attr = (TableStepAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "step" ) ;
+		TableStepAttribute attr = (TableStepAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "step" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
@@ -262,7 +262,7 @@ public class TableDataPilotGroupsElement extends OdfElement
 	 */
 	public String getTableGroupedByAttribute()
 	{
-		TableGroupedByAttribute attr = (TableGroupedByAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "grouped-by" ) ;
+		TableGroupedByAttribute attr = (TableGroupedByAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "grouped-by" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.odfdom;
+package org.odftoolkit.odfdom.pkg;
 
 import java.util.HashMap;
 
@@ -49,7 +49,7 @@ public class OdfName implements Comparable<OdfName> {
 
 	/** Returns the OdfName for the given namespace and name.
 	 *  Creates a new one, if the OdfName was not asked before.
-	 * @param odfNamespace
+	 * @param odfNamespace the namespace of the name to be created
 	 * @param name of the XML node. Can be both local or qualified name.
 	 * @return the OdfName for the given OdfNamesapce and name.
 	 */
@@ -59,7 +59,7 @@ public class OdfName implements Comparable<OdfName> {
 
 	/** Returns the OdfName for the given namespace and name.
 	 *  Creates a new one, if the OdfName was not asked before.
-	 * @param namespaceNamed a named XML node - even without namespace.
+	 * @param namespaceNamed represents a W3C Namespace Name. The interface <code>NamespaceName</code> is often implemented by an enum.
 	 * @param name of the XML node. Can be both local or qualified name.
 	 * @return the OdfName for the given OdfNamesapce and name.
 	 */

@@ -24,7 +24,8 @@ package org.odftoolkit.odfdom.incubator.doc.text;
 
 import java.util.logging.Logger;
 
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListItemElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleElementBase;
@@ -128,14 +129,14 @@ public class OdfTextList extends TextListElement {
 
 		String listName = getTextStyleNameAttribute();
 		if (listName != null && listName.length() > 0) {
-			OdfOfficeAutomaticStyles autoStyles = ((OdfFileDom) this.ownerDocument)
-					.getAutomaticStyles();
+			OdfFileDom fileDom = (OdfFileDom) this.ownerDocument;
+			OdfOfficeAutomaticStyles autoStyles = fileDom.getAutomaticStyles();
 			if (autoStyles != null) {
 				style = autoStyles.getListStyle(listName);
 			}
 
 			if (style == null) {
-				OdfOfficeStyles styles = mOdfDocument.getDocumentStyles();
+				OdfOfficeStyles styles = ((OdfDocument) fileDom.getDocument()).getDocumentStyles();
 				if (styles != null) {
 					style = styles.getListStyle(listName);
 				}

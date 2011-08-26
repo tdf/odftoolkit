@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.svg;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgStringAttribute;
 
 
@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgStringAttribute;
  */
 public class SvgFontFaceFormatElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SVG, "font-face-format" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.SVG, "font-face-format" );
 
 
 	/**
@@ -73,7 +73,7 @@ public class SvgFontFaceFormatElement extends OdfElement
 	 */
 	public String getSvgStringAttribute()
 	{
-		SvgStringAttribute attr = (SvgStringAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "string" ) ;
+		SvgStringAttribute attr = (SvgStringAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "string" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

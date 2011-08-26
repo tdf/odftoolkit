@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.presentation;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawShapeIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationSpeedAttribute;
 
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationSpeedAttribu
  */
 public class PresentationPlayElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "play" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.PRESENTATION, "play" );
 
 
 	/**
@@ -83,7 +83,7 @@ public class PresentationPlayElement extends OdfElement
 	 */
 	public String getDrawShapeIdAttribute()
 	{
-		DrawShapeIdAttribute attr = (DrawShapeIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shape-id" ) ;
+		DrawShapeIdAttribute attr = (DrawShapeIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "shape-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public class PresentationPlayElement extends OdfElement
 	 */
 	public String getPresentationSpeedAttribute()
 	{
-		PresentationSpeedAttribute attr = (PresentationSpeedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "speed" ) ;
+		PresentationSpeedAttribute attr = (PresentationSpeedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "speed" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

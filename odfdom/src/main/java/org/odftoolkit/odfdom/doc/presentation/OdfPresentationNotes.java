@@ -25,8 +25,8 @@ package org.odftoolkit.odfdom.doc.presentation;
 
 import java.util.Hashtable;
 
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawTextBoxElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
@@ -79,10 +79,10 @@ public class OdfPresentationNotes
 	 * @param text	the text that need to insert in the notes page
 	 */
 	public void addText(String text){
-		NodeList frameList = maNoteElement.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "frame");
+		NodeList frameList = maNoteElement.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "frame");
 		if(frameList.getLength() > 0){
 			DrawFrameElement frame = (DrawFrameElement)frameList.item(0);
-			NodeList textBoxList = frame.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "text-box");
+			NodeList textBoxList = frame.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "text-box");
 			if(textBoxList.getLength() > 0){
 				DrawTextBoxElement textBox = (DrawTextBoxElement)textBoxList.item(0);
 				TextPElement newPara = textBox.newTextPElement();

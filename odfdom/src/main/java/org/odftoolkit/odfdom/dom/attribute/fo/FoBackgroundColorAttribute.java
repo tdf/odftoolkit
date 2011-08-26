@@ -26,11 +26,11 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.fo;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute fo:background-color}.
@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class FoBackgroundColorAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FO, "background-color" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.FO, "background-color" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute fo:background-color}.

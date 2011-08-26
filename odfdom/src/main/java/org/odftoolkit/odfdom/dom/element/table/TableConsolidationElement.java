@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableFunctionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableSourceCellRangeAddressesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTargetCellAddressAttribute;
@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableLinkToSourceDataAttribute;
  */
 public class TableConsolidationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "consolidation" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "consolidation" );
 
 
 	/**
@@ -90,7 +90,7 @@ public class TableConsolidationElement extends OdfElement
 	 */
 	public String getTableFunctionAttribute()
 	{
-		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "function" ) ;
+		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "function" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -117,7 +117,7 @@ public class TableConsolidationElement extends OdfElement
 	 */
 	public String getTableSourceCellRangeAddressesAttribute()
 	{
-		TableSourceCellRangeAddressesAttribute attr = (TableSourceCellRangeAddressesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "source-cell-range-addresses" ) ;
+		TableSourceCellRangeAddressesAttribute attr = (TableSourceCellRangeAddressesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "source-cell-range-addresses" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -144,7 +144,7 @@ public class TableConsolidationElement extends OdfElement
 	 */
 	public String getTableTargetCellAddressAttribute()
 	{
-		TableTargetCellAddressAttribute attr = (TableTargetCellAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "target-cell-address" ) ;
+		TableTargetCellAddressAttribute attr = (TableTargetCellAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "target-cell-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -171,7 +171,7 @@ public class TableConsolidationElement extends OdfElement
 	 */
 	public String getTableUseLabelsAttribute()
 	{
-		TableUseLabelsAttribute attr = (TableUseLabelsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-labels" ) ;
+		TableUseLabelsAttribute attr = (TableUseLabelsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "use-labels" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -198,7 +198,7 @@ public class TableConsolidationElement extends OdfElement
 	 */
 	public Boolean getTableLinkToSourceDataAttribute()
 	{
-		TableLinkToSourceDataAttribute attr = (TableLinkToSourceDataAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "link-to-source-data" ) ;
+		TableLinkToSourceDataAttribute attr = (TableLinkToSourceDataAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "link-to-source-data" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

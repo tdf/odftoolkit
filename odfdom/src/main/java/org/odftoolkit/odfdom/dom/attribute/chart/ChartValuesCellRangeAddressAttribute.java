@@ -26,11 +26,11 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.chart;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute chart:values-cell-range-address}.
@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class ChartValuesCellRangeAddressAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.CHART, "values-cell-range-address" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.CHART, "values-cell-range-address" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute chart:values-cell-range-address}.

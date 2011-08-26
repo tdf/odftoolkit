@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableBindStylesToContentAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTargetRangeAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableCaseSensitiveAttribute;
@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableEmbeddedNumberBehaviorAttr
  */
 public class TableSortElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "sort" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "sort" );
 
 	public static final String  DEFAULT_VALUE_TABLE_CASESENSITIVE_ATTRIBUTE = TableCaseSensitiveAttribute.DEFAULT_VALUE_FALSE;
 
@@ -82,7 +82,7 @@ public class TableSortElement extends OdfElement
 	 */
 	public Boolean getTableBindStylesToContentAttribute()
 	{
-		TableBindStylesToContentAttribute attr = (TableBindStylesToContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "bind-styles-to-content" ) ;
+		TableBindStylesToContentAttribute attr = (TableBindStylesToContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "bind-styles-to-content" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -109,7 +109,7 @@ public class TableSortElement extends OdfElement
 	 */
 	public String getTableTargetRangeAddressAttribute()
 	{
-		TableTargetRangeAddressAttribute attr = (TableTargetRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "target-range-address" ) ;
+		TableTargetRangeAddressAttribute attr = (TableTargetRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "target-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -136,7 +136,7 @@ public class TableSortElement extends OdfElement
 	 */
 	public String getTableCaseSensitiveAttribute()
 	{
-		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "case-sensitive" ) ;
+		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "case-sensitive" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -163,7 +163,7 @@ public class TableSortElement extends OdfElement
 	 */
 	public String getTableLanguageAttribute()
 	{
-		TableLanguageAttribute attr = (TableLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "language" ) ;
+		TableLanguageAttribute attr = (TableLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "language" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -190,7 +190,7 @@ public class TableSortElement extends OdfElement
 	 */
 	public String getTableCountryAttribute()
 	{
-		TableCountryAttribute attr = (TableCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "country" ) ;
+		TableCountryAttribute attr = (TableCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "country" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -217,7 +217,7 @@ public class TableSortElement extends OdfElement
 	 */
 	public String getTableScriptAttribute()
 	{
-		TableScriptAttribute attr = (TableScriptAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "script" ) ;
+		TableScriptAttribute attr = (TableScriptAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "script" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -244,7 +244,7 @@ public class TableSortElement extends OdfElement
 	 */
 	public String getTableRfcLanguageTagAttribute()
 	{
-		TableRfcLanguageTagAttribute attr = (TableRfcLanguageTagAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "rfc-language-tag" ) ;
+		TableRfcLanguageTagAttribute attr = (TableRfcLanguageTagAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "rfc-language-tag" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -271,7 +271,7 @@ public class TableSortElement extends OdfElement
 	 */
 	public String getTableAlgorithmAttribute()
 	{
-		TableAlgorithmAttribute attr = (TableAlgorithmAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "algorithm" ) ;
+		TableAlgorithmAttribute attr = (TableAlgorithmAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "algorithm" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -298,7 +298,7 @@ public class TableSortElement extends OdfElement
 	 */
 	public String getTableEmbeddedNumberBehaviorAttribute()
 	{
-		TableEmbeddedNumberBehaviorAttribute attr = (TableEmbeddedNumberBehaviorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "embedded-number-behavior" ) ;
+		TableEmbeddedNumberBehaviorAttribute attr = (TableEmbeddedNumberBehaviorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "embedded-number-behavior" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

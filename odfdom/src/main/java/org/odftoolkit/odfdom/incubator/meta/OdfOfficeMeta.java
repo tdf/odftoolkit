@@ -28,8 +28,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDescriptionElement;

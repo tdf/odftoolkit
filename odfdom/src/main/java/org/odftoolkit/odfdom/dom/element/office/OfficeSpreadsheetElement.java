@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.office;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStructureProtectedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableProtectionKeyAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableProtectionKeyDigestAlgorithmAttribute;
@@ -58,7 +58,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableDdeLinksElement;
  */
 public class OfficeSpreadsheetElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "spreadsheet" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.OFFICE, "spreadsheet" );
 
 
 	/**
@@ -90,7 +90,7 @@ public class OfficeSpreadsheetElement extends OdfElement
 	 */
 	public Boolean getTableStructureProtectedAttribute()
 	{
-		TableStructureProtectedAttribute attr = (TableStructureProtectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "structure-protected" ) ;
+		TableStructureProtectedAttribute attr = (TableStructureProtectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "structure-protected" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -117,7 +117,7 @@ public class OfficeSpreadsheetElement extends OdfElement
 	 */
 	public String getTableProtectionKeyAttribute()
 	{
-		TableProtectionKeyAttribute attr = (TableProtectionKeyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protection-key" ) ;
+		TableProtectionKeyAttribute attr = (TableProtectionKeyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "protection-key" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -144,7 +144,7 @@ public class OfficeSpreadsheetElement extends OdfElement
 	 */
 	public String getTableProtectionKeyDigestAlgorithmAttribute()
 	{
-		TableProtectionKeyDigestAlgorithmAttribute attr = (TableProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protection-key-digest-algorithm" ) ;
+		TableProtectionKeyDigestAlgorithmAttribute attr = (TableProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "protection-key-digest-algorithm" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.db;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbFieldAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbStringAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbDecimalAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbThousandAttribute;
  */
 public class DbDelimiterElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "delimiter" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DB, "delimiter" );
 
 
 	/**
@@ -76,7 +76,7 @@ public class DbDelimiterElement extends OdfElement
 	 */
 	public String getDbFieldAttribute()
 	{
-		DbFieldAttribute attr = (DbFieldAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "field" ) ;
+		DbFieldAttribute attr = (DbFieldAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "field" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -103,7 +103,7 @@ public class DbDelimiterElement extends OdfElement
 	 */
 	public String getDbStringAttribute()
 	{
-		DbStringAttribute attr = (DbStringAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "string" ) ;
+		DbStringAttribute attr = (DbStringAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "string" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public class DbDelimiterElement extends OdfElement
 	 */
 	public String getDbDecimalAttribute()
 	{
-		DbDecimalAttribute attr = (DbDecimalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "decimal" ) ;
+		DbDecimalAttribute attr = (DbDecimalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "decimal" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public class DbDelimiterElement extends OdfElement
 	 */
 	public String getDbThousandAttribute()
 	{
-		DbThousandAttribute attr = (DbThousandAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "thousand" ) ;
+		DbThousandAttribute attr = (DbThousandAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "thousand" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -23,17 +23,16 @@ package org.odftoolkit.odfdom.doc.table;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.xml.xpath.XPath;
+
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfXMLFactory;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnGroupElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnsElement;
@@ -55,8 +54,8 @@ public class OdfTableColumn {
 
 	TableTableColumnElement maColumnElement;
 	int mnRepeatedIndex;
-	private XPath xpath;
 	private static final String DEFAULT_WIDTH = "0in";
+	private OdfDocument mDocument;
 
 	/**
 	 * Construct the <code>OdfTableColumn</code> feature.
@@ -69,9 +68,7 @@ public class OdfTableColumn {
 	OdfTableColumn(TableTableColumnElement colElement, int repeatedIndex) {
 		maColumnElement = colElement;
 		mnRepeatedIndex = repeatedIndex;
-
-		xpath = XPathFactory.newInstance().newXPath();
-		xpath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
+		mDocument = (OdfDocument) ((OdfFileDom) maColumnElement.getOwnerDocument()).getDocument();
 	}
 
 	/**
@@ -191,12 +188,12 @@ public class OdfTableColumn {
 			TableTableColumnElement ownerColumnElement = null;
 			int repeatedColumnIndex = mnRepeatedIndex;
 			Node refElement = maColumnElement;
-			maColumnElement.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-columns-repeated");
+			maColumnElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
 			String originalWidth = maColumnElement.getProperty(OdfTableColumnProperties.ColumnWidth);
 			String originalRelWidth = maColumnElement.getProperty(OdfTableColumnProperties.RelColumnWidth);
 			for (int i = repeateNum - 1; i >= 0; i--) {
 				TableTableColumnElement newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement((OdfFileDom) maColumnElement.getOwnerDocument(),
-						OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
+						OdfName.newName(OdfDocumentNamespace.TABLE, "table-column"));
 				newColumn.setProperty(OdfTableColumnProperties.ColumnWidth, originalWidth);
 				newColumn.setProperty(OdfTableColumnProperties.RelColumnWidth, originalRelWidth);
 				tableEle.insertBefore(newColumn, refElement);
@@ -318,6 +315,7 @@ public class OdfTableColumn {
 					} else if (aPrevNode instanceof TableTableColumnsElement
 							|| aPrevNode instanceof TableTableHeaderColumnsElement
 							|| aPrevNode instanceof TableTableColumnGroupElement) {
+						XPath xpath = ((OdfFileDom) maColumnElement.getOwnerDocument()).getXPath();
 						TableTableColumnElement lastCol = (TableTableColumnElement) xpath.evaluate("//table:table-column[last()]", aPrevNode, XPathConstants.NODE);
 						if (lastCol != null) {
 							return table.getColumnInstance(lastCol, lastCol.getTableNumberColumnsRepeatedAttribute().intValue() - 1);
@@ -368,6 +366,7 @@ public class OdfTableColumn {
 					} else if (aNextNode instanceof TableTableColumnsElement
 							|| aNextNode instanceof TableTableHeaderColumnsElement
 							|| aNextNode instanceof TableTableColumnGroupElement) {
+						XPath xpath = ((OdfFileDom) maColumnElement.getOwnerDocument()).getXPath();
 						TableTableColumnElement firstCol = (TableTableColumnElement) xpath.evaluate("//table:table-column[first()]", aNextNode, XPathConstants.NODE);
 						if (firstCol != null) {
 							return table.getColumnInstance(firstCol, 0);
@@ -461,7 +460,7 @@ public class OdfTableColumn {
 				styleName, OdfStyleFamily.TableCell);
 
 		if (style == null) {
-			style = ((OdfFileDom) maColumnElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getStyle(styleName, OdfStyleFamily.TableCell);
+			style = mDocument.getDocumentStyles().getStyle(styleName, OdfStyleFamily.TableCell);
 		}
 		return style;
 	}

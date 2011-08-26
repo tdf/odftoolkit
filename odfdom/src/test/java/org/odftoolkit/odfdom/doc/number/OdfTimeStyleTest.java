@@ -31,9 +31,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberTimeStyle;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -167,7 +167,7 @@ s 	Second in minute     55
 		Node childNode;
 		Assert.assertNotNull(node);
 		Assert.assertEquals(Node.ELEMENT_NODE, node.getNodeType());
-		Assert.assertEquals(OdfNamespaceNames.NUMBER.getUri(),
+		Assert.assertEquals(OdfDocumentNamespace.NUMBER.getUri(),
 			node.getNamespaceURI());
 		Assert.assertEquals(elementName, node.getLocalName());
 		childNode = node.getFirstChild();
@@ -216,14 +216,14 @@ s 	Second in minute     55
 				longShort = "long";
 			}
 			Assert.assertEquals("Element is " + expectedName, longShort,
-				((Element)node).getAttributeNS(OdfNamespaceNames.NUMBER.getUri(),
+				((Element)node).getAttributeNS(OdfDocumentNamespace.NUMBER.getUri(),
 				"style"));
 		}
 
 		if (monthTextual != null)
 		{
 			Assert.assertEquals(monthTextual,
-				((Element) node).getAttributeNS(OdfNamespaceNames.NUMBER.getUri(),
+				((Element) node).getAttributeNS(OdfDocumentNamespace.NUMBER.getUri(),
 				"textual")
 			);
 		}

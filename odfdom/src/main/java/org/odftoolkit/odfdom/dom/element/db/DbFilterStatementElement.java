@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.db;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbCommandAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbApplyCommandAttribute;
 
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbApplyCommandAttribute;
  */
 public class DbFilterStatementElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "filter-statement" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DB, "filter-statement" );
 
 
 	/**
@@ -83,7 +83,7 @@ public class DbFilterStatementElement extends OdfElement
 	 */
 	public String getDbCommandAttribute()
 	{
-		DbCommandAttribute attr = (DbCommandAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "command" ) ;
+		DbCommandAttribute attr = (DbCommandAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "command" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public class DbFilterStatementElement extends OdfElement
 	 */
 	public Boolean getDbApplyCommandAttribute()
 	{
-		DbApplyCommandAttribute attr = (DbApplyCommandAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "apply-command" ) ;
+		DbApplyCommandAttribute attr = (DbApplyCommandAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "apply-command" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

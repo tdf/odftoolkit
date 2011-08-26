@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.db;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbAdditionalColumnStatementAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbRowRetrievingStatementAttribute;
 
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbRowRetrievingStatementAttribute;
  */
 public class DbAutoIncrementElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "auto-increment" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DB, "auto-increment" );
 
 
 	/**
@@ -74,7 +74,7 @@ public class DbAutoIncrementElement extends OdfElement
 	 */
 	public String getDbAdditionalColumnStatementAttribute()
 	{
-		DbAdditionalColumnStatementAttribute attr = (DbAdditionalColumnStatementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "additional-column-statement" ) ;
+		DbAdditionalColumnStatementAttribute attr = (DbAdditionalColumnStatementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "additional-column-statement" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -101,7 +101,7 @@ public class DbAutoIncrementElement extends OdfElement
 	 */
 	public String getDbRowRetrievingStatementAttribute()
 	{
-		DbRowRetrievingStatementAttribute attr = (DbRowRetrievingStatementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "row-retrieving-statement" ) ;
+		DbRowRetrievingStatementAttribute attr = (DbRowRetrievingStatementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "row-retrieving-statement" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

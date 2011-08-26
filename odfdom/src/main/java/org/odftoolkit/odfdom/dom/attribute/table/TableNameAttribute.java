@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.table;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.table.TableCellRangeSourceElement;
 import org.odftoolkit.odfdom.dom.element.table.TableContentValidationElement;
 import org.odftoolkit.odfdom.dom.element.table.TableDataPilotGroupElement;
@@ -52,7 +52,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
  */
 public class TableNameAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "name" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.TABLE, "name" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:name}.

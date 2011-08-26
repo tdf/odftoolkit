@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.presentation;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawShapeIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationEffectAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationDirectionAttribute;
@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationPathIdAttrib
  */
 public class PresentationShowTextElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "show-text" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.PRESENTATION, "show-text" );
 
 
 	/**
@@ -88,7 +88,7 @@ public class PresentationShowTextElement extends OdfElement
 	 */
 	public String getDrawShapeIdAttribute()
 	{
-		DrawShapeIdAttribute attr = (DrawShapeIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shape-id" ) ;
+		DrawShapeIdAttribute attr = (DrawShapeIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "shape-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -115,7 +115,7 @@ public class PresentationShowTextElement extends OdfElement
 	 */
 	public String getPresentationEffectAttribute()
 	{
-		PresentationEffectAttribute attr = (PresentationEffectAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "effect" ) ;
+		PresentationEffectAttribute attr = (PresentationEffectAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "effect" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -142,7 +142,7 @@ public class PresentationShowTextElement extends OdfElement
 	 */
 	public String getPresentationDirectionAttribute()
 	{
-		PresentationDirectionAttribute attr = (PresentationDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "direction" ) ;
+		PresentationDirectionAttribute attr = (PresentationDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "direction" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -169,7 +169,7 @@ public class PresentationShowTextElement extends OdfElement
 	 */
 	public String getPresentationSpeedAttribute()
 	{
-		PresentationSpeedAttribute attr = (PresentationSpeedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "speed" ) ;
+		PresentationSpeedAttribute attr = (PresentationSpeedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "speed" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -196,7 +196,7 @@ public class PresentationShowTextElement extends OdfElement
 	 */
 	public String getPresentationDelayAttribute()
 	{
-		PresentationDelayAttribute attr = (PresentationDelayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "delay" ) ;
+		PresentationDelayAttribute attr = (PresentationDelayAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "delay" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -223,7 +223,7 @@ public class PresentationShowTextElement extends OdfElement
 	 */
 	public String getPresentationStartScaleAttribute()
 	{
-		PresentationStartScaleAttribute attr = (PresentationStartScaleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "start-scale" ) ;
+		PresentationStartScaleAttribute attr = (PresentationStartScaleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "start-scale" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -250,7 +250,7 @@ public class PresentationShowTextElement extends OdfElement
 	 */
 	public String getPresentationPathIdAttribute()
 	{
-		PresentationPathIdAttribute attr = (PresentationPathIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "path-id" ) ;
+		PresentationPathIdAttribute attr = (PresentationPathIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION), "path-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

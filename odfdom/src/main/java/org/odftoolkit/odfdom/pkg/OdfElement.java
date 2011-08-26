@@ -19,14 +19,14 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.odfdom;
+package org.odftoolkit.odfdom.pkg;
 
 import java.util.ArrayList;
 
 import org.apache.xerces.dom.ElementNSImpl;
 import org.apache.xerces.dom.ParentNode;
-import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -34,28 +34,22 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
-//2DO: Refactor public to package viewer, when inheritance is exchanged from OdfElement to specific Odf Element
 abstract public class OdfElement extends ElementNSImpl {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4939293285696678939L;
-	// the OdfDocument containing the element
-	protected OdfDocument mOdfDocument;
+
 
 	/** Creates a new instance of OdfElement */
 	public OdfElement(OdfFileDom ownerDocument, String namespaceURI,
 			String qualifiedName) throws DOMException {
 		super(ownerDocument, namespaceURI, qualifiedName);
-		mOdfDocument = ownerDocument.getOdfDocument();
 	}
 
 	/** Creates a new instance of OdfElement */
 	public OdfElement(OdfFileDom ownerDocument, OdfName aName)
 			throws DOMException {
 		super(ownerDocument, aName.getUri(), aName.getQName());
-		mOdfDocument = ownerDocument.getOdfDocument();
 	}
 
 	abstract public OdfName getOdfName();
@@ -397,7 +391,7 @@ abstract public class OdfElement extends ElementNSImpl {
 			Node n1 = attr1.get(i);
 			if (n1.getLocalName().equals("name")
 					&& n1.getNamespaceURI().equals(
-					OdfNamespaceNames.STYLE.getUri())) {
+					OdfDocumentNamespace.STYLE.getUri())) {
 				continue; // do not compare style names
 			}
 			Node n2 = null;

@@ -29,8 +29,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLayerSetElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHandoutMasterElement;

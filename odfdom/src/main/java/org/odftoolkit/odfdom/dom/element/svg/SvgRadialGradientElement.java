@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.svg;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgGradientUnitsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgGradientTransformAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgSpreadMethodAttribute;
@@ -50,7 +50,7 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgFyAttribute;
  */
 public class SvgRadialGradientElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SVG, "radialGradient" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.SVG, "radialGradient" );
 
 
 	/**
@@ -90,7 +90,7 @@ public class SvgRadialGradientElement extends OdfElement
 	 */
 	public String getSvgGradientUnitsAttribute()
 	{
-		SvgGradientUnitsAttribute attr = (SvgGradientUnitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "gradientUnits" ) ;
+		SvgGradientUnitsAttribute attr = (SvgGradientUnitsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "gradientUnits" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -117,7 +117,7 @@ public class SvgRadialGradientElement extends OdfElement
 	 */
 	public String getSvgGradientTransformAttribute()
 	{
-		SvgGradientTransformAttribute attr = (SvgGradientTransformAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "gradientTransform" ) ;
+		SvgGradientTransformAttribute attr = (SvgGradientTransformAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "gradientTransform" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -144,7 +144,7 @@ public class SvgRadialGradientElement extends OdfElement
 	 */
 	public String getSvgSpreadMethodAttribute()
 	{
-		SvgSpreadMethodAttribute attr = (SvgSpreadMethodAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "spreadMethod" ) ;
+		SvgSpreadMethodAttribute attr = (SvgSpreadMethodAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "spreadMethod" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -171,7 +171,7 @@ public class SvgRadialGradientElement extends OdfElement
 	 */
 	public String getDrawNameAttribute()
 	{
-		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) ;
+		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -198,7 +198,7 @@ public class SvgRadialGradientElement extends OdfElement
 	 */
 	public String getDrawDisplayNameAttribute()
 	{
-		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "display-name" ) ;
+		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "display-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -225,7 +225,7 @@ public class SvgRadialGradientElement extends OdfElement
 	 */
 	public String getSvgCxAttribute()
 	{
-		SvgCxAttribute attr = (SvgCxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "cx" ) ;
+		SvgCxAttribute attr = (SvgCxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "cx" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -252,7 +252,7 @@ public class SvgRadialGradientElement extends OdfElement
 	 */
 	public String getSvgCyAttribute()
 	{
-		SvgCyAttribute attr = (SvgCyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "cy" ) ;
+		SvgCyAttribute attr = (SvgCyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "cy" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -279,7 +279,7 @@ public class SvgRadialGradientElement extends OdfElement
 	 */
 	public String getSvgRAttribute()
 	{
-		SvgRAttribute attr = (SvgRAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "r" ) ;
+		SvgRAttribute attr = (SvgRAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "r" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -306,7 +306,7 @@ public class SvgRadialGradientElement extends OdfElement
 	 */
 	public String getSvgFxAttribute()
 	{
-		SvgFxAttribute attr = (SvgFxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "fx" ) ;
+		SvgFxAttribute attr = (SvgFxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "fx" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -333,7 +333,7 @@ public class SvgRadialGradientElement extends OdfElement
 	 */
 	public String getSvgFyAttribute()
 	{
-		SvgFyAttribute attr = (SvgFyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "fy" ) ;
+		SvgFyAttribute attr = (SvgFyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "fy" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

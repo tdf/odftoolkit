@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableLabelCellRangeAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDataCellRangeAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableOrientationAttribute;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableOrientationAttribute;
  */
 public class TableLabelRangeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "label-range" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "label-range" );
 
 
 	/**
@@ -88,7 +88,7 @@ public class TableLabelRangeElement extends OdfElement
 	 */
 	public String getTableLabelCellRangeAddressAttribute()
 	{
-		TableLabelCellRangeAddressAttribute attr = (TableLabelCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "label-cell-range-address" ) ;
+		TableLabelCellRangeAddressAttribute attr = (TableLabelCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "label-cell-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -115,7 +115,7 @@ public class TableLabelRangeElement extends OdfElement
 	 */
 	public String getTableDataCellRangeAddressAttribute()
 	{
-		TableDataCellRangeAddressAttribute attr = (TableDataCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-cell-range-address" ) ;
+		TableDataCellRangeAddressAttribute attr = (TableDataCellRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "data-cell-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -142,7 +142,7 @@ public class TableLabelRangeElement extends OdfElement
 	 */
 	public String getTableOrientationAttribute()
 	{
-		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "orientation" ) ;
+		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "orientation" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

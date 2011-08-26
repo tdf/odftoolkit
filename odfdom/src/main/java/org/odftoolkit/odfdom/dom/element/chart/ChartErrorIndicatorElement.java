@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.chart;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartErrorUpperRangeAttribute;
  */
 public class ChartErrorIndicatorElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "error-indicator" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.CHART, "error-indicator" );
 
 
 	/**
@@ -55,7 +55,7 @@ public class ChartErrorIndicatorElement extends OdfStylableElement
 	 */
 	public ChartErrorIndicatorElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.newName(OdfNamespaceNames.CHART, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.newName(OdfDocumentNamespace.CHART, "style-name" )	);
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class ChartErrorIndicatorElement extends OdfStylableElement
 	 */
 	public String getChartStyleNameAttribute()
 	{
-		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) ;
+		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public class ChartErrorIndicatorElement extends OdfStylableElement
 	 */
 	public String getChartDimensionAttribute()
 	{
-		ChartDimensionAttribute attr = (ChartDimensionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "dimension" ) ;
+		ChartDimensionAttribute attr = (ChartDimensionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "dimension" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public class ChartErrorIndicatorElement extends OdfStylableElement
 	 */
 	public String getChartErrorLowerRangeAttribute()
 	{
-		ChartErrorLowerRangeAttribute attr = (ChartErrorLowerRangeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "error-lower-range" ) ;
+		ChartErrorLowerRangeAttribute attr = (ChartErrorLowerRangeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "error-lower-range" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -167,7 +167,7 @@ public class ChartErrorIndicatorElement extends OdfStylableElement
 	 */
 	public String getChartErrorUpperRangeAttribute()
 	{
-		ChartErrorUpperRangeAttribute attr = (ChartErrorUpperRangeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "error-upper-range" ) ;
+		ChartErrorUpperRangeAttribute attr = (ChartErrorUpperRangeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "error-upper-range" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

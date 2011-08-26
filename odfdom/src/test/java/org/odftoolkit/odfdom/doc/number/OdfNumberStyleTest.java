@@ -31,10 +31,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberStyle;
@@ -189,7 +189,7 @@ public class OdfNumberStyleTest {
 		// Check for <number:text> with expected content
 		Assert.assertNotNull(node);
 		Assert.assertEquals(Node.ELEMENT_NODE, node.getNodeType());
-		Assert.assertEquals(OdfNamespaceNames.NUMBER.getUri(),
+		Assert.assertEquals(OdfDocumentNamespace.NUMBER.getUri(),
 			node.getNamespaceURI());
 		Assert.assertEquals(elementName, node.getLocalName());
 		childNode = node.getFirstChild();

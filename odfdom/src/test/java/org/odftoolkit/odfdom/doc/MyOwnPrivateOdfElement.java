@@ -21,10 +21,10 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 
 /**
  * ODF DOM Element implementation for element "<text:userdefined>".
@@ -38,7 +38,7 @@ public class MyOwnPrivateOdfElement extends OdfElement
 	/**
      * 
      */
-    public static final OdfName ELEMENT_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "userdefined" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName( OdfDocumentNamespace.TEXT, "userdefined" );
 
     public MyOwnPrivateOdfElement( OdfFileDom _aOwnerDoc )
     {

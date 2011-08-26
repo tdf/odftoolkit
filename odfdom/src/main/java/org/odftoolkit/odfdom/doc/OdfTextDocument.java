@@ -22,6 +22,11 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.io.File;
+import java.io.InputStream;
+
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
@@ -127,6 +132,58 @@ public class OdfTextDocument extends OdfDocument {
 		return doc;
 	}
 
+	/**
+	 * Creates an OdfTextDocument from the OpenDocument provided by a resource Stream.
+	 *
+	 * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
+	 * read access needed by OdfTextDocument, the InputStream is cached. This usually
+	 * takes more time compared to the other createInternalDocument methods.
+	 * An advantage of caching is that there are no problems overwriting
+	 * an input file.</p>
+	 * 
+	 * <p>If the resource stream is not a ODF text document, ClassCastException might be thrown.</p>
+	 *
+	 * @param inputStream - the InputStream of the ODF text document.
+	 * @return the text document created from the given InputStream
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfTextDocument loadDocument(InputStream inputStream) throws Exception {
+        return (OdfTextDocument) OdfDocument.loadDocument(inputStream);
+    }
+	
+	/**
+	 * Loads an OdfTextDocument from the provided path.
+	 *
+	 * <p>OdfTextDocument relies on the file being available for read access over
+	 * the whole lifecycle of OdfTextDocument.</p>
+	 *
+	 * <p>If the resource stream is not a ODF text document, ClassCastException might be thrown.</p>
+	 * 
+	 * @param documentPath - the path from where the document can be loaded
+	 * @return the text document from the given path
+	 *		  or NULL if the media type is not supported by ODFDOM.
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfTextDocument loadDocument(String documentPath) throws Exception {
+		return (OdfTextDocument)OdfDocument.loadDocument(documentPath);
+	}
+	
+	/**
+	 * Creates an OdfTextDocument from the OpenDocument provided by a File.
+	 *
+	 * <p>OdfTextDocument relies on the file being available for read access over
+	 * the whole lifecycle of OdfTextDocument.</p>
+	 *
+	 * <p>If the resource stream is not a ODF text document, ClassCastException might be thrown.</p>
+	 * 
+	 * @param file - a file representing the ODF text document.
+	 * @return the text document created from the given File
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfTextDocument loadDocument(File file) throws Exception {
+		return (OdfTextDocument)OdfDocument.loadDocument(file);
+	}
+	
 	// Using static factory instead of constructor
 	protected OdfTextDocument(OdfPackage pkg, String internalPath, OdfTextDocument.OdfMediaType odfMediaType) {
 		super(pkg, internalPath, odfMediaType.mMediaType);

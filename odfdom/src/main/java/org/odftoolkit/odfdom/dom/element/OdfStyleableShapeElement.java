@@ -21,10 +21,10 @@
 
 package org.odftoolkit.odfdom.dom.element;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.w3c.dom.Attr;
 
@@ -54,8 +54,8 @@ import org.w3c.dom.Attr;
  */
 abstract public class OdfStyleableShapeElement extends OdfStylableElement {
     private static final long serialVersionUID = 3604813885619852184L;
-    private static OdfName PresStyleAttrName = OdfName.newName( OdfNamespaceNames.PRESENTATION, "style-name");
-    private static OdfName DrawStyleAttrName = OdfName.newName(	OdfNamespaceNames.DRAW, "style-name");
+    private static OdfName PresStyleAttrName = OdfName.newName( OdfDocumentNamespace.PRESENTATION, "style-name");
+    private static OdfName DrawStyleAttrName = OdfName.newName(	OdfDocumentNamespace.DRAW, "style-name");
     
     public OdfStyleableShapeElement(OdfFileDom ownerDocument, OdfName name)
     {

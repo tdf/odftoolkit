@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextBulletCharAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNumPrefixAttribute;
@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
  */
 public class TextListLevelStyleBulletElement extends TextListLevelStyleElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "list-level-style-bullet" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "list-level-style-bullet" );
 
 
 	/**
@@ -89,7 +89,7 @@ public class TextListLevelStyleBulletElement extends TextListLevelStyleElementBa
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) ;
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -116,7 +116,7 @@ public class TextListLevelStyleBulletElement extends TextListLevelStyleElementBa
 	 */
 	public String getTextBulletCharAttribute()
 	{
-		TextBulletCharAttribute attr = (TextBulletCharAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "bullet-char" ) ;
+		TextBulletCharAttribute attr = (TextBulletCharAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "bullet-char" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -143,7 +143,7 @@ public class TextListLevelStyleBulletElement extends TextListLevelStyleElementBa
 	 */
 	public String getStyleNumPrefixAttribute()
 	{
-		StyleNumPrefixAttribute attr = (StyleNumPrefixAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-prefix" ) ;
+		StyleNumPrefixAttribute attr = (StyleNumPrefixAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "num-prefix" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -170,7 +170,7 @@ public class TextListLevelStyleBulletElement extends TextListLevelStyleElementBa
 	 */
 	public String getStyleNumSuffixAttribute()
 	{
-		StyleNumSuffixAttribute attr = (StyleNumSuffixAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "num-suffix" ) ;
+		StyleNumSuffixAttribute attr = (StyleNumSuffixAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "num-suffix" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -197,7 +197,7 @@ public class TextListLevelStyleBulletElement extends TextListLevelStyleElementBa
 	 */
 	public String getTextBulletRelativeSizeAttribute()
 	{
-		TextBulletRelativeSizeAttribute attr = (TextBulletRelativeSizeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "bullet-relative-size" ) ;
+		TextBulletRelativeSizeAttribute attr = (TextBulletRelativeSizeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "bullet-relative-size" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

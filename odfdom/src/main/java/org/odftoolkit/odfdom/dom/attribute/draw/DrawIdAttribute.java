@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.draw;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dCubeElement;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dExtrudeElement;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dRotateElement;
@@ -63,7 +63,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
  */
 public class DrawIdAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "id" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.DRAW, "id" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:id}.

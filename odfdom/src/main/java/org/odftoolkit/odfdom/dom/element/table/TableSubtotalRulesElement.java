@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableBindStylesToContentAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableCaseSensitiveAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TablePageBreaksOnGroupChangeAttribute;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TablePageBreaksOnGroupChangeAtt
  */
 public class TableSubtotalRulesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "subtotal-rules" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "subtotal-rules" );
 
 	public static final String  DEFAULT_VALUE_TABLE_CASESENSITIVE_ATTRIBUTE = TableCaseSensitiveAttribute.DEFAULT_VALUE_FALSE;
 
@@ -76,7 +76,7 @@ public class TableSubtotalRulesElement extends OdfElement
 	 */
 	public Boolean getTableBindStylesToContentAttribute()
 	{
-		TableBindStylesToContentAttribute attr = (TableBindStylesToContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "bind-styles-to-content" ) ;
+		TableBindStylesToContentAttribute attr = (TableBindStylesToContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "bind-styles-to-content" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -103,7 +103,7 @@ public class TableSubtotalRulesElement extends OdfElement
 	 */
 	public String getTableCaseSensitiveAttribute()
 	{
-		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "case-sensitive" ) ;
+		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "case-sensitive" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public class TableSubtotalRulesElement extends OdfElement
 	 */
 	public Boolean getTablePageBreaksOnGroupChangeAttribute()
 	{
-		TablePageBreaksOnGroupChangeAttribute attr = (TablePageBreaksOnGroupChangeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "page-breaks-on-group-change" ) ;
+		TablePageBreaksOnGroupChangeAttribute attr = (TablePageBreaksOnGroupChangeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "page-breaks-on-group-change" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

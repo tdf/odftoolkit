@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleRelWidthAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoStartIndentAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoEndIndentAttribute;
@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoSpaceAfterAttribute;
  */
 public class StyleColumnElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "column" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.STYLE, "column" );
 
 
 	/**
@@ -85,7 +85,7 @@ public class StyleColumnElement extends OdfElement
 	 */
 	public String getStyleRelWidthAttribute()
 	{
-		StyleRelWidthAttribute attr = (StyleRelWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rel-width" ) ;
+		StyleRelWidthAttribute attr = (StyleRelWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "rel-width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class StyleColumnElement extends OdfElement
 	 */
 	public String getFoStartIndentAttribute()
 	{
-		FoStartIndentAttribute attr = (FoStartIndentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "start-indent" ) ;
+		FoStartIndentAttribute attr = (FoStartIndentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "start-indent" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public class StyleColumnElement extends OdfElement
 	 */
 	public String getFoEndIndentAttribute()
 	{
-		FoEndIndentAttribute attr = (FoEndIndentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "end-indent" ) ;
+		FoEndIndentAttribute attr = (FoEndIndentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "end-indent" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -166,7 +166,7 @@ public class StyleColumnElement extends OdfElement
 	 */
 	public String getFoSpaceBeforeAttribute()
 	{
-		FoSpaceBeforeAttribute attr = (FoSpaceBeforeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "space-before" ) ;
+		FoSpaceBeforeAttribute attr = (FoSpaceBeforeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "space-before" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -193,7 +193,7 @@ public class StyleColumnElement extends OdfElement
 	 */
 	public String getFoSpaceAfterAttribute()
 	{
-		FoSpaceAfterAttribute attr = (FoSpaceAfterAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "space-after" ) ;
+		FoSpaceAfterAttribute attr = (FoSpaceAfterAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "space-after" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableSortModeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDataFieldAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableOrderAttribute;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableOrderAttribute;
  */
 public class TableDataPilotSortInfoElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-sort-info" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "data-pilot-sort-info" );
 
 
 	/**
@@ -88,7 +88,7 @@ public class TableDataPilotSortInfoElement extends OdfElement
 	 */
 	public String getTableSortModeAttribute()
 	{
-		TableSortModeAttribute attr = (TableSortModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "sort-mode" ) ;
+		TableSortModeAttribute attr = (TableSortModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "sort-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -115,7 +115,7 @@ public class TableDataPilotSortInfoElement extends OdfElement
 	 */
 	public String getTableDataFieldAttribute()
 	{
-		TableDataFieldAttribute attr = (TableDataFieldAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-field" ) ;
+		TableDataFieldAttribute attr = (TableDataFieldAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "data-field" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -142,7 +142,7 @@ public class TableDataPilotSortInfoElement extends OdfElement
 	 */
 	public String getTableOrderAttribute()
 	{
-		TableOrderAttribute attr = (TableOrderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "order" ) ;
+		TableOrderAttribute attr = (TableOrderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "order" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

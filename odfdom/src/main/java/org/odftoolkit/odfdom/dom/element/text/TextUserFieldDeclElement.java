@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextFormulaAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeStringValueAttribute;
  */
 public class TextUserFieldDeclElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "user-field-decl" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "user-field-decl" );
 
 	/**
 	 * The value set of {@odf.attribute office:value-type}.
@@ -122,7 +122,7 @@ public class TextUserFieldDeclElement extends OdfElement
 	 */
 	public String getTextNameAttribute()
 	{
-		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) ;
+		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -149,7 +149,7 @@ public class TextUserFieldDeclElement extends OdfElement
 	 */
 	public String getTextFormulaAttribute()
 	{
-		TextFormulaAttribute attr = (TextFormulaAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "formula" ) ;
+		TextFormulaAttribute attr = (TextFormulaAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "formula" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -176,7 +176,7 @@ public class TextUserFieldDeclElement extends OdfElement
 	 */
 	public String getOfficeValueTypeAttribute()
 	{
-		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value-type" ) ;
+		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.OFFICE), "value-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -203,7 +203,7 @@ public class TextUserFieldDeclElement extends OdfElement
 	 */
 	public Double getOfficeValueAttribute()
 	{
-		OfficeValueAttribute attr = (OfficeValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value" ) ;
+		OfficeValueAttribute attr = (OfficeValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.OFFICE), "value" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
@@ -230,7 +230,7 @@ public class TextUserFieldDeclElement extends OdfElement
 	 */
 	public String getOfficeCurrencyAttribute()
 	{
-		OfficeCurrencyAttribute attr = (OfficeCurrencyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "currency" ) ;
+		OfficeCurrencyAttribute attr = (OfficeCurrencyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.OFFICE), "currency" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -257,7 +257,7 @@ public class TextUserFieldDeclElement extends OdfElement
 	 */
 	public String getOfficeDateValueAttribute()
 	{
-		OfficeDateValueAttribute attr = (OfficeDateValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "date-value" ) ;
+		OfficeDateValueAttribute attr = (OfficeDateValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.OFFICE), "date-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -284,7 +284,7 @@ public class TextUserFieldDeclElement extends OdfElement
 	 */
 	public String getOfficeTimeValueAttribute()
 	{
-		OfficeTimeValueAttribute attr = (OfficeTimeValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "time-value" ) ;
+		OfficeTimeValueAttribute attr = (OfficeTimeValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.OFFICE), "time-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -311,7 +311,7 @@ public class TextUserFieldDeclElement extends OdfElement
 	 */
 	public Boolean getOfficeBooleanValueAttribute()
 	{
-		OfficeBooleanValueAttribute attr = (OfficeBooleanValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "boolean-value" ) ;
+		OfficeBooleanValueAttribute attr = (OfficeBooleanValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.OFFICE), "boolean-value" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -338,7 +338,7 @@ public class TextUserFieldDeclElement extends OdfElement
 	 */
 	public String getOfficeStringValueAttribute()
 	{
-		OfficeStringValueAttribute attr = (OfficeStringValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "string-value" ) ;
+		OfficeStringValueAttribute attr = (OfficeStringValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.OFFICE), "string-value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.office;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.form.FormAutomaticFocusAttribute;
 import org.odftoolkit.odfdom.dom.attribute.form.FormApplyDesignModeAttribute;
 
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.element.xforms.XformsModelElement;
  */
 public class OfficeFormsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "forms" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.OFFICE, "forms" );
 
 
 	/**
@@ -76,7 +76,7 @@ public class OfficeFormsElement extends OdfElement
 	 */
 	public Boolean getFormAutomaticFocusAttribute()
 	{
-		FormAutomaticFocusAttribute attr = (FormAutomaticFocusAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "automatic-focus" ) ;
+		FormAutomaticFocusAttribute attr = (FormAutomaticFocusAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "automatic-focus" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -103,7 +103,7 @@ public class OfficeFormsElement extends OdfElement
 	 */
 	public Boolean getFormApplyDesignModeAttribute()
 	{
-		FormApplyDesignModeAttribute attr = (FormApplyDesignModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "apply-design-mode" ) ;
+		FormApplyDesignModeAttribute attr = (FormApplyDesignModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.FORM), "apply-design-mode" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

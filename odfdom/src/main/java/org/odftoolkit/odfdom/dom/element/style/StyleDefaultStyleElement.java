@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleFamilyAttribute;
 
@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleFamilyAttribute;
  */
 public class StyleDefaultStyleElement extends OdfStyleBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "default-style" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.STYLE, "default-style" );
 
 
 	/**
@@ -82,7 +82,7 @@ public class StyleDefaultStyleElement extends OdfStyleBase
 	 */
 	public String getStyleFamilyAttribute()
 	{
-		StyleFamilyAttribute attr = (StyleFamilyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "family" ) ;
+		StyleFamilyAttribute attr = (StyleFamilyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "family" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

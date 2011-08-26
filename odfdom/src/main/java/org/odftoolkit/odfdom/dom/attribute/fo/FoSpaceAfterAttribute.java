@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.fo;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute fo:space-after}.
@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class FoSpaceAfterAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FO, "space-after" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.FO, "space-after" );
 	public static final String DEFAULT_VALUE = "0cm";
 
 	/**

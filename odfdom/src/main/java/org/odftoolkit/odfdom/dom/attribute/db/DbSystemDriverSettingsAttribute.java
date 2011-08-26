@@ -26,11 +26,11 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.db;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute db:system-driver-settings}.
@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DbSystemDriverSettingsAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DB, "system-driver-settings" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.DB, "system-driver-settings" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute db:system-driver-settings}.

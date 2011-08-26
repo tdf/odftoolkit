@@ -22,6 +22,11 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.io.File;
+import java.io.InputStream;
+
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfImageDocument;
 import org.odftoolkit.odfdom.dom.element.office.OfficeImageElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
@@ -97,6 +102,57 @@ public class OdfImageDocument extends OdfDocument {
 		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
 
+	/**
+	 * Creates an OdfImageDocument from the OpenDocument provided by a resource Stream.
+	 *
+	 * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
+	 * read access needed by OdfImageDocument, the InputStream is cached. This usually
+	 * takes more time compared to the other createInternalDocument methods.
+	 * An advantage of caching is that there are no problems overwriting
+	 * an input file.</p>
+	 * 
+	 * <p>If the resource stream is not a ODF image document, ClassCastException might be thrown.</p>
+	 *
+	 * @param inputStream - the InputStream of the ODF image document.
+	 * @return the image document created from the given InputStream
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfImageDocument loadDocument(InputStream inputStream) throws Exception {
+        return (OdfImageDocument) OdfDocument.loadDocument(inputStream);
+    }
+	
+	/**
+	 * Loads an OdfImageDocument from the provided path.
+	 *
+	 * <p>OdfImageDocument relies on the file being available for read access over
+	 * the whole lifecycle of OdfImageDocument.</p>
+	 *
+	 * <p>If the resource stream is not a ODF image document, ClassCastException might be thrown.</p>
+	 * 
+	 * @param documentPath - the path from where the document can be loaded
+	 * @return the image document from the given path
+	 *		  or NULL if the media type is not supported by ODFDOM.
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfImageDocument loadDocument(String documentPath) throws Exception {
+		return (OdfImageDocument)OdfDocument.loadDocument(documentPath);
+	}
+	
+	/**
+	 * Creates an OdfImageDocument from the OpenDocument provided by a File.
+	 *
+	 * <p>OdfImageDocument relies on the file being available for read access over
+	 * the whole lifecycle of OdfImageDocument.</p>
+	 *
+	 * <p>If the resource stream is not a ODF image document, ClassCastException might be thrown.</p>
+	 * 
+	 * @param file - a file representing the ODF image document.
+	 * @return the image document created from the given File
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfImageDocument loadDocument(File file) throws Exception {
+		return (OdfImageDocument)OdfDocument.loadDocument(file);
+	}
 	/**
 	 * Get the content root of a image document.
 	 *

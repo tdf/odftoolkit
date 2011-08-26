@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberColumnsSpannedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberRowsSpannedAttribute;
@@ -76,7 +76,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  */
 public class TableTableCellElement extends TableTableCellElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-cell" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "table-cell" );
 
 
 	/**
@@ -86,7 +86,7 @@ public class TableTableCellElement extends TableTableCellElementBase
 	 */
 	public TableTableCellElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.newName(OdfNamespaceNames.TABLE, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.newName(OdfDocumentNamespace.TABLE, "style-name" )	);
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class TableTableCellElement extends TableTableCellElementBase
 	 */
 	public Integer getTableNumberColumnsSpannedAttribute()
 	{
-		TableNumberColumnsSpannedAttribute attr = (TableNumberColumnsSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-columns-spanned" ) ;
+		TableNumberColumnsSpannedAttribute attr = (TableNumberColumnsSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "number-columns-spanned" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -135,7 +135,7 @@ public class TableTableCellElement extends TableTableCellElementBase
 	 */
 	public Integer getTableNumberRowsSpannedAttribute()
 	{
-		TableNumberRowsSpannedAttribute attr = (TableNumberRowsSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-rows-spanned" ) ;
+		TableNumberRowsSpannedAttribute attr = (TableNumberRowsSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "number-rows-spanned" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -162,7 +162,7 @@ public class TableTableCellElement extends TableTableCellElementBase
 	 */
 	public Integer getTableNumberMatrixColumnsSpannedAttribute()
 	{
-		TableNumberMatrixColumnsSpannedAttribute attr = (TableNumberMatrixColumnsSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-matrix-columns-spanned" ) ;
+		TableNumberMatrixColumnsSpannedAttribute attr = (TableNumberMatrixColumnsSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "number-matrix-columns-spanned" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -189,7 +189,7 @@ public class TableTableCellElement extends TableTableCellElementBase
 	 */
 	public Integer getTableNumberMatrixRowsSpannedAttribute()
 	{
-		TableNumberMatrixRowsSpannedAttribute attr = (TableNumberMatrixRowsSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-matrix-rows-spanned" ) ;
+		TableNumberMatrixRowsSpannedAttribute attr = (TableNumberMatrixRowsSpannedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "number-matrix-rows-spanned" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

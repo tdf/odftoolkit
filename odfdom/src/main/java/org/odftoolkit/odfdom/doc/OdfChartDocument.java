@@ -22,6 +22,11 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.io.File;
+import java.io.InputStream;
+
+import org.odftoolkit.odfdom.doc.OdfChartDocument;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.element.office.OfficeChartElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
@@ -94,6 +99,58 @@ public class OdfChartDocument extends OdfDocument {
 		return doc;
 	}
 
+	/**
+	 * Creates an OdfChartDocument from the OpenDocument provided by a resource Stream.
+	 *
+	 * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
+	 * read access needed by OdfChartDocument, the InputStream is cached. This usually
+	 * takes more time compared to the other createInternalDocument methods.
+	 * An advantage of caching is that there are no problems overwriting
+	 * an input file.</p>
+	 * 
+	 * <p>If the resource stream is not a ODF chart document, ClassCastException might be thrown.</p>
+	 *
+	 * @param inputStream - the InputStream of the ODF chart document.
+	 * @return the chart document created from the given InputStream
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfChartDocument loadDocument(InputStream inputStream) throws Exception {
+        return (OdfChartDocument) OdfDocument.loadDocument(inputStream);
+    }
+	
+	/**
+	 * Loads an OdfChartDocument from the provided path.
+	 *
+	 * <p>OdfChartDocument relies on the file being available for read access over
+	 * the whole lifecycle of OdfChartDocument.</p>
+	 *
+	 * <p>If the resource stream is not a ODF chart document, ClassCastException might be thrown.</p>
+	 * 
+	 * @param documentPath - the path from where the document can be loaded
+	 * @return the chart document from the given path
+	 *		  or NULL if the media type is not supported by ODFDOM.
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfChartDocument loadDocument(String documentPath) throws Exception {
+		return (OdfChartDocument)OdfDocument.loadDocument(documentPath);
+	}
+	
+	/**
+	 * Creates an OdfChartDocument from the OpenDocument provided by a File.
+	 *
+	 * <p>OdfChartDocument relies on the file being available for read access over
+	 * the whole lifecycle of OdfChartDocument.</p>
+	 *
+	 * <p>If the resource stream is not a ODF chart document, ClassCastException might be thrown.</p>
+	 * 
+	 * @param file - a file representing the ODF chart document.
+	 * @return the chart document created from the given File
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfChartDocument loadDocument(File file) throws Exception {
+		return (OdfChartDocument)OdfDocument.loadDocument(file);
+	}
+	
 	// Using static factory instead of constructor
 	protected OdfChartDocument(OdfPackage pkg, String internalPath, OdfChartDocument.OdfMediaType odfMediaType) {
 		super(pkg, internalPath, odfMediaType.mMediaType);

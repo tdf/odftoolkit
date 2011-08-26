@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawHandleMirrorVerticalAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawHandleMirrorHorizontalAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawHandleSwitchedAttribute;
@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawHandleRadiusRangeMaximumAttr
  */
 public class DrawHandleElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "handle" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DRAW, "handle" );
 
 
 	/**
@@ -92,7 +92,7 @@ public class DrawHandleElement extends OdfElement
 	 */
 	public Boolean getDrawHandleMirrorVerticalAttribute()
 	{
-		DrawHandleMirrorVerticalAttribute attr = (DrawHandleMirrorVerticalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "handle-mirror-vertical" ) ;
+		DrawHandleMirrorVerticalAttribute attr = (DrawHandleMirrorVerticalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "handle-mirror-vertical" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -119,7 +119,7 @@ public class DrawHandleElement extends OdfElement
 	 */
 	public Boolean getDrawHandleMirrorHorizontalAttribute()
 	{
-		DrawHandleMirrorHorizontalAttribute attr = (DrawHandleMirrorHorizontalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "handle-mirror-horizontal" ) ;
+		DrawHandleMirrorHorizontalAttribute attr = (DrawHandleMirrorHorizontalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "handle-mirror-horizontal" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -146,7 +146,7 @@ public class DrawHandleElement extends OdfElement
 	 */
 	public Boolean getDrawHandleSwitchedAttribute()
 	{
-		DrawHandleSwitchedAttribute attr = (DrawHandleSwitchedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "handle-switched" ) ;
+		DrawHandleSwitchedAttribute attr = (DrawHandleSwitchedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "handle-switched" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -173,7 +173,7 @@ public class DrawHandleElement extends OdfElement
 	 */
 	public String getDrawHandlePositionAttribute()
 	{
-		DrawHandlePositionAttribute attr = (DrawHandlePositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "handle-position" ) ;
+		DrawHandlePositionAttribute attr = (DrawHandlePositionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "handle-position" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -200,7 +200,7 @@ public class DrawHandleElement extends OdfElement
 	 */
 	public String getDrawHandleRangeXMinimumAttribute()
 	{
-		DrawHandleRangeXMinimumAttribute attr = (DrawHandleRangeXMinimumAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "handle-range-x-minimum" ) ;
+		DrawHandleRangeXMinimumAttribute attr = (DrawHandleRangeXMinimumAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "handle-range-x-minimum" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -227,7 +227,7 @@ public class DrawHandleElement extends OdfElement
 	 */
 	public String getDrawHandleRangeXMaximumAttribute()
 	{
-		DrawHandleRangeXMaximumAttribute attr = (DrawHandleRangeXMaximumAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "handle-range-x-maximum" ) ;
+		DrawHandleRangeXMaximumAttribute attr = (DrawHandleRangeXMaximumAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "handle-range-x-maximum" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -254,7 +254,7 @@ public class DrawHandleElement extends OdfElement
 	 */
 	public String getDrawHandleRangeYMinimumAttribute()
 	{
-		DrawHandleRangeYMinimumAttribute attr = (DrawHandleRangeYMinimumAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "handle-range-y-minimum" ) ;
+		DrawHandleRangeYMinimumAttribute attr = (DrawHandleRangeYMinimumAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "handle-range-y-minimum" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -281,7 +281,7 @@ public class DrawHandleElement extends OdfElement
 	 */
 	public String getDrawHandleRangeYMaximumAttribute()
 	{
-		DrawHandleRangeYMaximumAttribute attr = (DrawHandleRangeYMaximumAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "handle-range-y-maximum" ) ;
+		DrawHandleRangeYMaximumAttribute attr = (DrawHandleRangeYMaximumAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "handle-range-y-maximum" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -308,7 +308,7 @@ public class DrawHandleElement extends OdfElement
 	 */
 	public String getDrawHandlePolarAttribute()
 	{
-		DrawHandlePolarAttribute attr = (DrawHandlePolarAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "handle-polar" ) ;
+		DrawHandlePolarAttribute attr = (DrawHandlePolarAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "handle-polar" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -335,7 +335,7 @@ public class DrawHandleElement extends OdfElement
 	 */
 	public String getDrawHandleRadiusRangeMinimumAttribute()
 	{
-		DrawHandleRadiusRangeMinimumAttribute attr = (DrawHandleRadiusRangeMinimumAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "handle-radius-range-minimum" ) ;
+		DrawHandleRadiusRangeMinimumAttribute attr = (DrawHandleRadiusRangeMinimumAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "handle-radius-range-minimum" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -362,7 +362,7 @@ public class DrawHandleElement extends OdfElement
 	 */
 	public String getDrawHandleRadiusRangeMaximumAttribute()
 	{
-		DrawHandleRadiusRangeMaximumAttribute attr = (DrawHandleRadiusRangeMaximumAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "handle-radius-range-maximum" ) ;
+		DrawHandleRadiusRangeMaximumAttribute attr = (DrawHandleRadiusRangeMaximumAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "handle-radius-range-maximum" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

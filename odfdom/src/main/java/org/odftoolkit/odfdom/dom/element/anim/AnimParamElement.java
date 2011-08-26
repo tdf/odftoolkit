@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.anim;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.anim.AnimNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.anim.AnimValueAttribute;
 
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.anim.AnimValueAttribute;
  */
 public class AnimParamElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "param" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.ANIM, "param" );
 
 
 	/**
@@ -85,7 +85,7 @@ public class AnimParamElement extends OdfElement
 	 */
 	public String getAnimNameAttribute()
 	{
-		AnimNameAttribute attr = (AnimNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "name" ) ;
+		AnimNameAttribute attr = (AnimNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.ANIM), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class AnimParamElement extends OdfElement
 	 */
 	public String getAnimValueAttribute()
 	{
-		AnimValueAttribute attr = (AnimValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "value" ) ;
+		AnimValueAttribute attr = (AnimValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.ANIM), "value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

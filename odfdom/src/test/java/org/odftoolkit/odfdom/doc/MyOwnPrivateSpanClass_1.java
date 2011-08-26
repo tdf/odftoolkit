@@ -21,7 +21,7 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 
 public class MyOwnPrivateSpanClass_1 extends OdfTextSpan {

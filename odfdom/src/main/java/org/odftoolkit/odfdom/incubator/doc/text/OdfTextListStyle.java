@@ -26,7 +26,7 @@ package org.odftoolkit.odfdom.incubator.doc.text;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleElementBase;
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;

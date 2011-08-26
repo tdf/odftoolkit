@@ -25,10 +25,11 @@ import java.net.URL;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.text.TextAElement;
@@ -195,7 +196,7 @@ public class TextSelection extends Selection {
 				if (node.getLocalName().equals("s")) // text:s
 				{
 					try {
-						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getUri(), "c"));
+						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c"));
 					} catch (Exception e) {
 						nodeLength = 1;
 					}
@@ -403,7 +404,7 @@ public class TextSelection extends Selection {
 				if (node.getLocalName().equals("s")) // text:s
 				{
 					try {
-						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getUri(), "c"));
+						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c"));
 					} catch (Exception e) {
 						nodeLength = 1;
 					}
@@ -513,7 +514,7 @@ public class TextSelection extends Selection {
 				if (node.getLocalName().equals("s")) // text:s
 				{
 					try {
-						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getUri(), "c"));
+						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c"));
 					} catch (Exception e) {
 						nodeLength = 1;
 					}
@@ -736,7 +737,7 @@ public class TextSelection extends Selection {
 				if (node.getLocalName().equals("s")) // text:s
 				{
 					try {
-						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getUri(), "c"));
+						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c"));
 					} catch (Exception e) {
 						nodeLength = 1;
 					}
@@ -810,7 +811,7 @@ public class TextSelection extends Selection {
 			//change the parentNode to default style
 			//here we don't know the default style name, so here just
 			//remove the text:style-name attribute
-			pStyleNode.removeAttributeNS(OdfNamespace.newNamespace(OdfNamespaceNames.TEXT).toString(), "style-name");
+			pStyleNode.removeAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT).toString(), "style-name");
 		}
 	}
 
@@ -830,7 +831,7 @@ public class TextSelection extends Selection {
 			//check if it is the style:defaut-style
 			if ((styleElement.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties) == null) &&
 					(styleElement.getPropertiesElement(OdfStylePropertiesSet.TextProperties) == null)) {
-				styleElement = ((OdfFileDom) styleElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getDefaultStyle(styleElement.getFamily());
+				styleElement = ((OdfDocument) ((OdfFileDom) styleElement.getOwnerDocument()).getDocument()).getDocumentStyles().getDefaultStyle(styleElement.getFamily());
 			}
 			TreeMap<OdfStyleProperty, String> result = new TreeMap<OdfStyleProperty, String>();
 			OdfStyleFamily family = OdfStyleFamily.Text;
@@ -865,7 +866,7 @@ public class TextSelection extends Selection {
 			//check if it is the style:defaut-style
 			if ((styleElement.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties) == null) &&
 					(styleElement.getPropertiesElement(OdfStylePropertiesSet.TextProperties) == null)) {
-				styleElement = ((OdfFileDom) styleElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getDefaultStyle(styleElement.getFamily());
+				styleElement = ((OdfDocument) ((OdfFileDom) styleElement.getOwnerDocument()).getDocument()).getDocumentStyles().getDefaultStyle(styleElement.getFamily());
 			}
 			OdfStyleFamily family = OdfStyleFamily.Text;
 			if (family != null) {

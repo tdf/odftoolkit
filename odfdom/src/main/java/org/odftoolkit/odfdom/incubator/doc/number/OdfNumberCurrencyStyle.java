@@ -25,9 +25,9 @@ package org.odftoolkit.odfdom.incubator.doc.number;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.number.NumberCurrencyStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberCurrencySymbolElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
@@ -256,7 +256,7 @@ public class OdfNumberCurrencyStyle extends NumberCurrencyStyleElement {
 	public NumberCurrencySymbolElement getCurrencySymbolElement() {
 		NumberCurrencySymbolElement cSymbol = null;
 		NodeList list = this.getElementsByTagNameNS(
-				OdfNamespaceNames.NUMBER.getUri(), "currency-symbol");
+				OdfDocumentNamespace.NUMBER.getUri(), "currency-symbol");
 		if (list.getLength() > 0) {
 			cSymbol = (NumberCurrencySymbolElement) list.item(0);
 		}

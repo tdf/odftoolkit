@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableApplicationDataAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableGrandTotalAttribute;
@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDrillDownOnDoubleClickAttr
  */
 public class TableDataPilotTableElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-table" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "data-pilot-table" );
 
 
 	/**
@@ -91,7 +91,7 @@ public class TableDataPilotTableElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) ;
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -118,7 +118,7 @@ public class TableDataPilotTableElement extends OdfElement
 	 */
 	public String getTableApplicationDataAttribute()
 	{
-		TableApplicationDataAttribute attr = (TableApplicationDataAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "application-data" ) ;
+		TableApplicationDataAttribute attr = (TableApplicationDataAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "application-data" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -145,7 +145,7 @@ public class TableDataPilotTableElement extends OdfElement
 	 */
 	public String getTableGrandTotalAttribute()
 	{
-		TableGrandTotalAttribute attr = (TableGrandTotalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "grand-total" ) ;
+		TableGrandTotalAttribute attr = (TableGrandTotalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "grand-total" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -172,7 +172,7 @@ public class TableDataPilotTableElement extends OdfElement
 	 */
 	public Boolean getTableIgnoreEmptyRowsAttribute()
 	{
-		TableIgnoreEmptyRowsAttribute attr = (TableIgnoreEmptyRowsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "ignore-empty-rows" ) ;
+		TableIgnoreEmptyRowsAttribute attr = (TableIgnoreEmptyRowsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "ignore-empty-rows" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -199,7 +199,7 @@ public class TableDataPilotTableElement extends OdfElement
 	 */
 	public Boolean getTableIdentifyCategoriesAttribute()
 	{
-		TableIdentifyCategoriesAttribute attr = (TableIdentifyCategoriesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "identify-categories" ) ;
+		TableIdentifyCategoriesAttribute attr = (TableIdentifyCategoriesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "identify-categories" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -226,7 +226,7 @@ public class TableDataPilotTableElement extends OdfElement
 	 */
 	public String getTableTargetRangeAddressAttribute()
 	{
-		TableTargetRangeAddressAttribute attr = (TableTargetRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "target-range-address" ) ;
+		TableTargetRangeAddressAttribute attr = (TableTargetRangeAddressAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "target-range-address" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -253,7 +253,7 @@ public class TableDataPilotTableElement extends OdfElement
 	 */
 	public String getTableButtonsAttribute()
 	{
-		TableButtonsAttribute attr = (TableButtonsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "buttons" ) ;
+		TableButtonsAttribute attr = (TableButtonsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "buttons" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -280,7 +280,7 @@ public class TableDataPilotTableElement extends OdfElement
 	 */
 	public Boolean getTableShowFilterButtonAttribute()
 	{
-		TableShowFilterButtonAttribute attr = (TableShowFilterButtonAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "show-filter-button" ) ;
+		TableShowFilterButtonAttribute attr = (TableShowFilterButtonAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "show-filter-button" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -307,7 +307,7 @@ public class TableDataPilotTableElement extends OdfElement
 	 */
 	public Boolean getTableDrillDownOnDoubleClickAttribute()
 	{
-		TableDrillDownOnDoubleClickAttribute attr = (TableDrillDownOnDoubleClickAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "drill-down-on-double-click" ) ;
+		TableDrillDownOnDoubleClickAttribute attr = (TableDrillDownOnDoubleClickAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "drill-down-on-double-click" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

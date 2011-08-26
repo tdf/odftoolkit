@@ -20,36 +20,31 @@
  * limitations under the License.
  *
  ************************************************************************/
-
-package org.odftoolkit.odfdom;
+package org.odftoolkit.odfdom.pkg;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-
-import javax.xml.XMLConstants;
-import javax.xml.namespace.NamespaceContext;
 
 /**
  * Class wrapping the XML Namespace URI and XML Namespace prefix as a single entity.
  */
-public class OdfNamespace implements Comparable, NamespaceContext {
+public class OdfNamespace implements Comparable<OdfNamespace>, NamespaceName {
 
-	private static Map<String, String> mURIsByPrefix = new HashMap<String, String>();
-	private static Map<String, String> mPrefixesByURI = new HashMap<String, String>();
 	private static Map<String, OdfNamespace> mNamespacesByURI = new HashMap<String, OdfNamespace>();
 	private String mUri;
 	private String mPrefix;
 
-	private OdfNamespace() {}
+	private OdfNamespace() {
+	}
+
 	private OdfNamespace(String prefix, String uri) {
-			mUri = uri;
-			mPrefix = prefix;
+		mUri = uri;
+		mPrefix = prefix;
 	}
 
 	/** Returns the OdfNamespace for the given name.
 	 *  Creates a new one, if the name was not asked before.
-	 * @param name of the namespace.
+	 * @param name represents a W3C Namespace Name. The interface <code>NamespaceName</code> is often implemented by an enum.
 	 * @return the OdfNamespace for the given name.
 	 */
 	public static OdfNamespace newNamespace(NamespaceName name) {
@@ -72,11 +67,12 @@ public class OdfNamespace implements Comparable, NamespaceContext {
 			odfNamespace = mNamespacesByURI.get(uri);
 			if (odfNamespace == null) {
 				odfNamespace = new OdfNamespace(prefix, uri);
-				mPrefixesByURI.put(uri, prefix);
-				mURIsByPrefix.put(prefix, uri);
 				mNamespacesByURI.put(uri, odfNamespace);
+			} else {
+				// prefix will be adapted for all OdfNamespaces (last wins)
+				odfNamespace.mPrefix = prefix;
 			}
-		}
+		} 
 		return odfNamespace;
 	}
 
@@ -92,12 +88,10 @@ public class OdfNamespace implements Comparable, NamespaceContext {
 		return ns;
 	}
 
-	// 2do: after removing NamespaceContext rename to getNamespacePrefix()
 	public String getPrefix() {
 		return mPrefix;
 	}
 
-	// 2do: after removing NamespaceContext rename to getNamespaceURI()
 	public String getUri() {
 		return mUri;
 	}
@@ -132,7 +126,7 @@ public class OdfNamespace implements Comparable, NamespaceContext {
 	 * @return an array of two strings containing first the prefix and the second the local part.
 	 * @throws IllegalArgumentException if no qualified name was given.
 	 */
-	public static String[] splitQName(String qname) throws IllegalArgumentException{
+	public static String[] splitQName(String qname) throws IllegalArgumentException {
 		String localpart = qname;
 		String prefix = null;
 		int colon = qname.indexOf(':');
@@ -140,11 +134,10 @@ public class OdfNamespace implements Comparable, NamespaceContext {
 			localpart = qname.substring(colon + 1);
 			prefix = qname.substring(0, colon);
 		} else {
-			throw new IllegalArgumentException("A qualified name was required, but '" + qname +"' was given!");
+			throw new IllegalArgumentException("A qualified name was required, but '" + qname + "' was given!");
 		}
 		return new String[]{prefix, localpart};
 	}
-
 
 	/** 
 	 * @param qname is the qualified name to be splitted.
@@ -164,40 +157,7 @@ public class OdfNamespace implements Comparable, NamespaceContext {
 		return splitQName(qname)[1];
 	}
 
-	public int compareTo(Object o) {
-		return toString().compareTo(o.toString());
-	}
-
-
-	// 2DO: The NamespaceContext interface have to be moved to the 
-	// OdfElement/OdfAttribute as in case there are multiple namespaces declared
-	// The DOM Tree have to be reviewed from the beginning of the node up to the parents..
-	/** See JavaDoc of <code>NamespaceContext</code> interface */
-	public String getNamespaceURI(String prefix) {
-		String nsURI = null;
-		nsURI = mURIsByPrefix.get(prefix);
-		if (nsURI == null) {
-			nsURI = XMLConstants.NULL_NS_URI;
-		}
-		return nsURI;
-	}
-
-	/** See JavaDoc of <code>NamespaceContext</code> interface */
-	public String getPrefix(String namespaceUri) {
-		return mPrefixesByURI.get(namespaceUri);
-	}
-
-	// 2DO: Will be adapted when the NamespaceContext is being removed
-	/** See JavaDoc of <code>NamespaceContext</code> interface */
-	public Iterator getPrefixes(String namespaceuri) {
-		return mURIsByPrefix.keySet().iterator();
-	}
-
-	/**
-	 * @param prefix of the namespace questioned.
-	 * @return the namespace URI of the namespace prefix given.
-	 */
-	public static String getNamespaceURIByPrefix(String prefix) {
-		return mURIsByPrefix.get(prefix);
+	public int compareTo(OdfNamespace namespace) {
+		return toString().compareTo(namespace.toString());
 	}
 }

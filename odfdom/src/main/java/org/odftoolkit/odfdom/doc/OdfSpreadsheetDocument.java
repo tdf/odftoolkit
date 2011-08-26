@@ -22,6 +22,11 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.io.File;
+import java.io.InputStream;
+
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
@@ -98,6 +103,58 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
 
+	/**
+	 * Creates an OdfSpreadsheetDocument from the OpenDocument provided by a resource Stream.
+	 *
+	 * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
+	 * read access needed by OdfSpreadsheetDocument, the InputStream is cached. This usually
+	 * takes more time compared to the other createInternalDocument methods.
+	 * An advantage of caching is that there are no problems overwriting
+	 * an input file.</p>
+	 * 
+	 * <p>If the resource stream is not a ODF spreadsheet document, ClassCastException might be thrown.</p>
+	 *
+	 * @param inputStream - the InputStream of the ODF spreadsheet document.
+	 * @return the spreadsheet document created from the given InputStream
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfSpreadsheetDocument loadDocument(InputStream inputStream) throws Exception {
+        return (OdfSpreadsheetDocument) OdfDocument.loadDocument(inputStream);
+    }
+	
+	/**
+	 * Loads an OdfSpreadsheetDocument from the provided path.
+	 *
+	 * <p>OdfSpreadsheetDocument relies on the file being available for read access over
+	 * the whole lifecycle of OdfSpreadsheetDocument.</p>
+	 *
+	 * <p>If the resource stream is not a ODF spreadsheet document, ClassCastException might be thrown.</p>
+	 * 
+	 * @param documentPath - the path from where the document can be loaded
+	 * @return the spreadsheet document from the given path
+	 *		  or NULL if the media type is not supported by ODFDOM.
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfSpreadsheetDocument loadDocument(String documentPath) throws Exception {
+		return (OdfSpreadsheetDocument)OdfDocument.loadDocument(documentPath);
+	}
+	
+	/**
+	 * Creates an OdfSpreadsheetDocument from the OpenDocument provided by a File.
+	 *
+	 * <p>OdfSpreadsheetDocument relies on the file being available for read access over
+	 * the whole lifecycle of OdfSpreadsheetDocument.</p>
+	 *
+	 * <p>If the resource stream is not a ODF spreadsheet document, ClassCastException might be thrown.</p>
+	 * 
+	 * @param file - a file representing the ODF spreadsheet document.
+	 * @return the spreadsheet document created from the given File
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfSpreadsheetDocument loadDocument(File file) throws Exception {
+		return (OdfSpreadsheetDocument)OdfDocument.loadDocument(file);
+	}
+	
 	/**
 	 * Get the content root of a spreadsheet document.
 	 *

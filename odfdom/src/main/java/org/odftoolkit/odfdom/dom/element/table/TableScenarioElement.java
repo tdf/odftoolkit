@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableScenarioRangesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableIsActiveAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayBorderAttribute;
@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableProtectedAttribute;
  */
 public class TableScenarioElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "scenario" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "scenario" );
 
 
 	/**
@@ -92,7 +92,7 @@ public class TableScenarioElement extends OdfElement
 	 */
 	public String getTableScenarioRangesAttribute()
 	{
-		TableScenarioRangesAttribute attr = (TableScenarioRangesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "scenario-ranges" ) ;
+		TableScenarioRangesAttribute attr = (TableScenarioRangesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "scenario-ranges" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -119,7 +119,7 @@ public class TableScenarioElement extends OdfElement
 	 */
 	public Boolean getTableIsActiveAttribute()
 	{
-		TableIsActiveAttribute attr = (TableIsActiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "is-active" ) ;
+		TableIsActiveAttribute attr = (TableIsActiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "is-active" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -146,7 +146,7 @@ public class TableScenarioElement extends OdfElement
 	 */
 	public Boolean getTableDisplayBorderAttribute()
 	{
-		TableDisplayBorderAttribute attr = (TableDisplayBorderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display-border" ) ;
+		TableDisplayBorderAttribute attr = (TableDisplayBorderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "display-border" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -173,7 +173,7 @@ public class TableScenarioElement extends OdfElement
 	 */
 	public String getTableBorderColorAttribute()
 	{
-		TableBorderColorAttribute attr = (TableBorderColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "border-color" ) ;
+		TableBorderColorAttribute attr = (TableBorderColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "border-color" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -200,7 +200,7 @@ public class TableScenarioElement extends OdfElement
 	 */
 	public Boolean getTableCopyBackAttribute()
 	{
-		TableCopyBackAttribute attr = (TableCopyBackAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "copy-back" ) ;
+		TableCopyBackAttribute attr = (TableCopyBackAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "copy-back" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -227,7 +227,7 @@ public class TableScenarioElement extends OdfElement
 	 */
 	public Boolean getTableCopyStylesAttribute()
 	{
-		TableCopyStylesAttribute attr = (TableCopyStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "copy-styles" ) ;
+		TableCopyStylesAttribute attr = (TableCopyStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "copy-styles" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -254,7 +254,7 @@ public class TableScenarioElement extends OdfElement
 	 */
 	public Boolean getTableCopyFormulasAttribute()
 	{
-		TableCopyFormulasAttribute attr = (TableCopyFormulasAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "copy-formulas" ) ;
+		TableCopyFormulasAttribute attr = (TableCopyFormulasAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "copy-formulas" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -281,7 +281,7 @@ public class TableScenarioElement extends OdfElement
 	 */
 	public String getTableCommentAttribute()
 	{
-		TableCommentAttribute attr = (TableCommentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "comment" ) ;
+		TableCommentAttribute attr = (TableCommentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "comment" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -308,7 +308,7 @@ public class TableScenarioElement extends OdfElement
 	 */
 	public Boolean getTableProtectedAttribute()
 	{
-		TableProtectedAttribute attr = (TableProtectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protected" ) ;
+		TableProtectedAttribute attr = (TableProtectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "protected" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

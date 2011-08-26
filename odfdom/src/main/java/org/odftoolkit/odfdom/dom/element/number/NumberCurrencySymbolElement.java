@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberLanguageAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberCountryAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberScriptAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberRfcLanguageTagAttribute;
  */
 public class NumberCurrencySymbolElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "currency-symbol" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "currency-symbol" );
 
 
 	/**
@@ -76,7 +76,7 @@ public class NumberCurrencySymbolElement extends OdfElement
 	 */
 	public String getNumberLanguageAttribute()
 	{
-		NumberLanguageAttribute attr = (NumberLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "language" ) ;
+		NumberLanguageAttribute attr = (NumberLanguageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "language" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -103,7 +103,7 @@ public class NumberCurrencySymbolElement extends OdfElement
 	 */
 	public String getNumberCountryAttribute()
 	{
-		NumberCountryAttribute attr = (NumberCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "country" ) ;
+		NumberCountryAttribute attr = (NumberCountryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "country" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public class NumberCurrencySymbolElement extends OdfElement
 	 */
 	public String getNumberScriptAttribute()
 	{
-		NumberScriptAttribute attr = (NumberScriptAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "script" ) ;
+		NumberScriptAttribute attr = (NumberScriptAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "script" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public class NumberCurrencySymbolElement extends OdfElement
 	 */
 	public String getNumberRfcLanguageTagAttribute()
 	{
-		NumberRfcLanguageTagAttribute attr = (NumberRfcLanguageTagAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "rfc-language-tag" ) ;
+		NumberRfcLanguageTagAttribute attr = (NumberRfcLanguageTagAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "rfc-language-tag" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

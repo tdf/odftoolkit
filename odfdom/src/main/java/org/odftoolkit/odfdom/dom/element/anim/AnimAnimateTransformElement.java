@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.anim;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.smil.SmilTargetElementAttribute;
 import org.odftoolkit.odfdom.dom.attribute.anim.AnimSubItemAttribute;
 import org.odftoolkit.odfdom.dom.attribute.smil.SmilAttributeNameAttribute;
@@ -63,7 +63,7 @@ import org.odftoolkit.odfdom.dom.attribute.smil.SmilAutoReverseAttribute;
  */
 public class AnimAnimateTransformElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "animateTransform" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.ANIM, "animateTransform" );
 
 
 	/**
@@ -106,7 +106,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilTargetElementAttribute()
 	{
-		SmilTargetElementAttribute attr = (SmilTargetElementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "targetElement" ) ;
+		SmilTargetElementAttribute attr = (SmilTargetElementAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "targetElement" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -133,7 +133,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getAnimSubItemAttribute()
 	{
-		AnimSubItemAttribute attr = (AnimSubItemAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "sub-item" ) ;
+		AnimSubItemAttribute attr = (AnimSubItemAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.ANIM), "sub-item" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -160,7 +160,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilAttributeNameAttribute()
 	{
-		SmilAttributeNameAttribute attr = (SmilAttributeNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "attributeName" ) ;
+		SmilAttributeNameAttribute attr = (SmilAttributeNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "attributeName" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -187,7 +187,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilAccumulateAttribute()
 	{
-		SmilAccumulateAttribute attr = (SmilAccumulateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "accumulate" ) ;
+		SmilAccumulateAttribute attr = (SmilAccumulateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "accumulate" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -214,7 +214,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilAdditiveAttribute()
 	{
-		SmilAdditiveAttribute attr = (SmilAdditiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "additive" ) ;
+		SmilAdditiveAttribute attr = (SmilAdditiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "additive" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -241,7 +241,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilValuesAttribute()
 	{
-		SmilValuesAttribute attr = (SmilValuesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "values" ) ;
+		SmilValuesAttribute attr = (SmilValuesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "values" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -268,7 +268,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getAnimFormulaAttribute()
 	{
-		AnimFormulaAttribute attr = (AnimFormulaAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "formula" ) ;
+		AnimFormulaAttribute attr = (AnimFormulaAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.ANIM), "formula" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -295,7 +295,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilToAttribute()
 	{
-		SmilToAttribute attr = (SmilToAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "to" ) ;
+		SmilToAttribute attr = (SmilToAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "to" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -322,7 +322,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilFromAttribute()
 	{
-		SmilFromAttribute attr = (SmilFromAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "from" ) ;
+		SmilFromAttribute attr = (SmilFromAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "from" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -349,7 +349,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilByAttribute()
 	{
-		SmilByAttribute attr = (SmilByAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "by" ) ;
+		SmilByAttribute attr = (SmilByAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "by" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -376,7 +376,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSvgTypeAttribute()
 	{
-		SvgTypeAttribute attr = (SvgTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "type" ) ;
+		SvgTypeAttribute attr = (SvgTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -403,7 +403,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilBeginAttribute()
 	{
-		SmilBeginAttribute attr = (SmilBeginAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "begin" ) ;
+		SmilBeginAttribute attr = (SmilBeginAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "begin" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -430,7 +430,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilEndAttribute()
 	{
-		SmilEndAttribute attr = (SmilEndAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "end" ) ;
+		SmilEndAttribute attr = (SmilEndAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "end" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -457,7 +457,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilDurAttribute()
 	{
-		SmilDurAttribute attr = (SmilDurAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "dur" ) ;
+		SmilDurAttribute attr = (SmilDurAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "dur" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -484,7 +484,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilRepeatDurAttribute()
 	{
-		SmilRepeatDurAttribute attr = (SmilRepeatDurAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "repeatDur" ) ;
+		SmilRepeatDurAttribute attr = (SmilRepeatDurAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "repeatDur" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -511,7 +511,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilRepeatCountAttribute()
 	{
-		SmilRepeatCountAttribute attr = (SmilRepeatCountAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "repeatCount" ) ;
+		SmilRepeatCountAttribute attr = (SmilRepeatCountAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "repeatCount" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -538,7 +538,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilRestartAttribute()
 	{
-		SmilRestartAttribute attr = (SmilRestartAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "restart" ) ;
+		SmilRestartAttribute attr = (SmilRestartAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "restart" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -565,7 +565,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilRestartDefaultAttribute()
 	{
-		SmilRestartDefaultAttribute attr = (SmilRestartDefaultAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "restartDefault" ) ;
+		SmilRestartDefaultAttribute attr = (SmilRestartDefaultAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "restartDefault" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -592,7 +592,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilFillAttribute()
 	{
-		SmilFillAttribute attr = (SmilFillAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "fill" ) ;
+		SmilFillAttribute attr = (SmilFillAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "fill" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -619,7 +619,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public String getSmilFillDefaultAttribute()
 	{
-		SmilFillDefaultAttribute attr = (SmilFillDefaultAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "fillDefault" ) ;
+		SmilFillDefaultAttribute attr = (SmilFillDefaultAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "fillDefault" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -646,7 +646,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public Double getSmilAccelerateAttribute()
 	{
-		SmilAccelerateAttribute attr = (SmilAccelerateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "accelerate" ) ;
+		SmilAccelerateAttribute attr = (SmilAccelerateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "accelerate" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
@@ -673,7 +673,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public Double getSmilDecelerateAttribute()
 	{
-		SmilDecelerateAttribute attr = (SmilDecelerateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "decelerate" ) ;
+		SmilDecelerateAttribute attr = (SmilDecelerateAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "decelerate" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
@@ -700,7 +700,7 @@ public class AnimAnimateTransformElement extends OdfElement
 	 */
 	public Boolean getSmilAutoReverseAttribute()
 	{
-		SmilAutoReverseAttribute attr = (SmilAutoReverseAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SMIL), "autoReverse" ) ;
+		SmilAutoReverseAttribute attr = (SmilAutoReverseAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SMIL), "autoReverse" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

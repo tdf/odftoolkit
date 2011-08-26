@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextPlaceholderTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextDescriptionAttribute;
 
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDescriptionAttribute;
  */
 public class TextPlaceholderElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "placeholder" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "placeholder" );
 
 
 	/**
@@ -83,7 +83,7 @@ public class TextPlaceholderElement extends OdfElement
 	 */
 	public String getTextPlaceholderTypeAttribute()
 	{
-		TextPlaceholderTypeAttribute attr = (TextPlaceholderTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "placeholder-type" ) ;
+		TextPlaceholderTypeAttribute attr = (TextPlaceholderTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "placeholder-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public class TextPlaceholderElement extends OdfElement
 	 */
 	public String getTextDescriptionAttribute()
 	{
-		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "description" ) ;
+		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "description" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

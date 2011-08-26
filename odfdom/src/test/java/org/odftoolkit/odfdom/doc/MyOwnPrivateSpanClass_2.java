@@ -21,7 +21,7 @@
 
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 
 

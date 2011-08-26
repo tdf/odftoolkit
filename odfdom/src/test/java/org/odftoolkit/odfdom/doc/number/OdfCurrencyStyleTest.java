@@ -31,9 +31,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.number.NumberCurrencySymbolElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
@@ -167,7 +167,7 @@ public class OdfCurrencyStyleTest {
 		// Check for <number:elementName> with expected content
 		Assert.assertNotNull(node);
 		Assert.assertEquals(Node.ELEMENT_NODE, node.getNodeType());
-		Assert.assertEquals(OdfNamespaceNames.NUMBER.getUri(),
+		Assert.assertEquals(OdfDocumentNamespace.NUMBER.getUri(),
 			node.getNamespaceURI());
 		Assert.assertEquals(elementName, node.getLocalName());
 		childNode = node.getFirstChild();
@@ -253,7 +253,7 @@ public class OdfCurrencyStyleTest {
 		instance.setCurrencyLocale(language,
 			country);
 		NodeList list = instance.getElementsByTagNameNS(
-			OdfNamespaceNames.NUMBER.getUri(), "currency-symbol");
+			OdfDocumentNamespace.NUMBER.getUri(), "currency-symbol");
 		Assert.assertTrue("Has currency symbol", list.getLength() > 0);
 		cSymbol = (NumberCurrencySymbolElement) list.item(0);
 		Assert.assertEquals(language, cSymbol.getNumberLanguageAttribute());
@@ -277,7 +277,7 @@ public class OdfCurrencyStyleTest {
 			"\u20a9", "\u20a9#,##0.00", "kstyle");
 		instance.setCurrencyLocale(locale);
 		list = instance.getElementsByTagNameNS(
-			OdfNamespaceNames.NUMBER.getUri(), "currency-symbol");
+			OdfDocumentNamespace.NUMBER.getUri(), "currency-symbol");
 		Assert.assertTrue("Has currency symbol", list.getLength() > 0);
 		cSymbol = (NumberCurrencySymbolElement) list.item(0);
 		Assert.assertEquals(language, cSymbol.getNumberLanguageAttribute());
@@ -288,7 +288,7 @@ public class OdfCurrencyStyleTest {
 			"\u20a9", "\u20a9#,##0.00", "kstyle");
 		instance.setCurrencyLocale(language);
 		list = instance.getElementsByTagNameNS(
-			OdfNamespaceNames.NUMBER.getUri(), "currency-symbol");
+			OdfDocumentNamespace.NUMBER.getUri(), "currency-symbol");
 		Assert.assertTrue("Has currency symbol", list.getLength() > 0);
 		cSymbol = (NumberCurrencySymbolElement) list.item(0);
 		Assert.assertEquals(language, cSymbol.getNumberLanguageAttribute());

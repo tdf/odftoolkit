@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.db;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbEncodingAttribute;
 
 
@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbEncodingAttribute;
  */
 public class DbCharacterSetElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "character-set" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DB, "character-set" );
 
 
 	/**
@@ -73,7 +73,7 @@ public class DbCharacterSetElement extends OdfElement
 	 */
 	public String getDbEncodingAttribute()
 	{
-		DbEncodingAttribute attr = (DbEncodingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "encoding" ) ;
+		DbEncodingAttribute attr = (DbEncodingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "encoding" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

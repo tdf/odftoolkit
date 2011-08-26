@@ -53,13 +53,17 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfMetaDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfSettingsDom;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
@@ -96,15 +100,15 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	private static final String SLASH = "/";
 	private OdfMediaType mMediaType;
 	private OdfOfficeStyles mDocumentStyles;
-	private OdfFileDom mContentDom;
-	private OdfFileDom mStylesDom;
-	private OdfFileDom mMetaDom;
-	private OdfFileDom mSettingsDom;
+	private OdfContentDom mContentDom;
+	private OdfStylesDom mStylesDom;
+	private OdfMetaDom mMetaDom;
+	private OdfSettingsDom mSettingsDom;
 	private OdfOfficeMeta mOfficeMeta;
 	private StringBuilder mCharsForTextNode = new StringBuilder();
 	private XPath mXPath;
 	private long documentOpeningTime;
-	
+
 	// Using static factory instead of constructor
 	protected OdfDocument(OdfPackage pkg, String internalPath, OdfMediaType mediaType) {
 		super(pkg, internalPath, mediaType.getMediaTypeString());
@@ -598,28 +602,13 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	}
 
 	/**
-	 * Create an XPath instance to select one or more nodes from an ODF document.
-	 * Therefore the namespace context is set to the OdfNamespace
-	 * @return an XPath instance with namespace context set to include the standard
-	 * ODFDOM prefixes.
-	 */
-	public XPath getXPath() {
-		if (mXPath == null) {
-			mXPath = XPathFactory.newInstance().newXPath();
-			// could take any Namespace..
-			mXPath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
-		}
-		return mXPath;
-	}
-
-	/**
 	 * Return the ODF type-based content DOM of the content.xml
 	 * @return ODF type-based content DOM
 	 * @throws Exception if content DOM could not be initialized
 	 */
-	public OdfFileDom getContentDom() throws Exception {
+	public OdfContentDom getContentDom() throws Exception {
 		if (mContentDom == null) {
-			mContentDom = getFileDom(OdfXMLFile.CONTENT);
+			mContentDom = (OdfContentDom) getFileDom(OdfXMLFile.CONTENT);
 		}
 		return mContentDom;
 	}
@@ -629,9 +618,9 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	 * @return ODF type-based styles DOM
 	 * @throws Exception if styles DOM could not be initialized
 	 */
-	public OdfFileDom getStylesDom() throws Exception {
+	public OdfStylesDom getStylesDom() throws Exception {
 		if (mStylesDom == null) {
-			mStylesDom = getFileDom(OdfXMLFile.STYLES);
+			mStylesDom = (OdfStylesDom) getFileDom(OdfXMLFile.STYLES);
 		}
 		return mStylesDom;
 	}
@@ -642,9 +631,9 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	 * @return ODF type-based meta DOM
 	 * @throws Exception if meta DOM could not be initialized
 	 */
-	public OdfFileDom getMetaDom() throws Exception {
+	public OdfMetaDom getMetaDom() throws Exception {
 		if (mMetaDom == null) {
-			mMetaDom = getFileDom(OdfXMLFile.META);
+			mMetaDom = (OdfMetaDom) getFileDom(OdfXMLFile.META);
 		}
 		return mMetaDom;
 	}
@@ -655,9 +644,9 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	 * @return ODF type-based settings DOM
 	 * @throws Exception if settings DOM could not be initialized
 	 */
-	public OdfFileDom getSettingsDom() throws Exception {
+	public OdfSettingsDom getSettingsDom() throws Exception {
 		if (mSettingsDom == null) {
-			mSettingsDom = getFileDom(OdfXMLFile.SETTINGS);
+			mSettingsDom = (OdfSettingsDom) getFileDom(OdfXMLFile.SETTINGS);
 		}
 		return mSettingsDom;
 	}
@@ -677,23 +666,6 @@ public abstract class OdfDocument extends OdfPackageDocument {
 			}
 		}
 		return mOfficeMeta;
-	}
-
-	/**
-	 * Save the document to given path.
-	 * 
-	 * <p>When save the embedded document to a stand alone document,
-	 * all the file entries of the embedded document will be copied to a new document package.
-	 * If the embedded document is outside of the current document directory, 
-	 * you have to embed it to the sub directory and refresh the link of the embedded document.
-	 * You should reload it from the given path to get the saved embedded document.
-	 * 
-	 * @param path - the path to the file
-	 * @throws java.lang.Exception  if the document could not be saved
-	 */
-	public void save(String path) throws Exception {
-		File f = new File(path);
-		this.save(f);
 	}
 
 	/**
@@ -1120,16 +1092,32 @@ public abstract class OdfDocument extends OdfPackageDocument {
 		// More details at http://xerces.apache.org/xerces2-j/features.html#xmlns-uris
 		xmlReader.setFeature("http://xml.org/sax/features/xmlns-uris", true);
 
-		// initialize the input source's content.xml
-		OdfFileDom fileDom = new OdfFileDom(this, this.getXMLFilePath(file));
-
+		// initialize the file DOM
+		OdfFileDom fileDom;
+		switch (file) {
+			case CONTENT:
+				fileDom = new OdfContentDom(this, this.getXMLFilePath(file));
+				break;
+			case STYLES:
+				fileDom = new OdfStylesDom(this, this.getXMLFilePath(file));
+				break;
+			case META:
+				fileDom = new OdfMetaDom(this, this.getXMLFilePath(file));
+				break;
+			case SETTINGS:
+				fileDom = new OdfSettingsDom(this, this.getXMLFilePath(file));
+				break;
+			default:
+				fileDom = new OdfFileDom(this, this.getXMLFilePath(file));
+				break;
+		}
 		String path = getXMLFilePath(file);
 		InputStream fileStream = mPackage.getInputStream(path);
 		if (fileStream != null) {
 			Handler handler = new Handler(fileDom);
 			xmlReader.setContentHandler(handler);
-			InputSource contentSource = new InputSource(fileStream);
-			xmlReader.parse(contentSource);
+			InputSource xmlSource = new InputSource(fileStream);
+			xmlReader.parse(xmlSource);
 		}
 		return fileDom;
 	}
@@ -1138,7 +1126,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 
 		private static final String EMPTY_STRING = "";
 		// the empty XML file to which nodes will be added
-		private OdfFileDom mDocument;
+		private OdfFileDom mOdfDom;
 		// the context node
 		private Node mNode;        // a stack of sub handlers. handlers will be pushed on the stack whenever
 		// they are required and must pop themselves from the stack when done
@@ -1146,9 +1134,9 @@ public abstract class OdfDocument extends OdfPackageDocument {
 
 		Handler(Node rootNode) {
 			if (rootNode instanceof OdfFileDom) {
-				mDocument = (OdfFileDom) rootNode;
+				mOdfDom = (OdfFileDom) rootNode;
 			} else {
-				mDocument = (OdfFileDom) rootNode.getOwnerDocument();
+				mOdfDom = (OdfFileDom) rootNode.getOwnerDocument();
 			}
 			mNode = rootNode;
 		}
@@ -1174,33 +1162,42 @@ public abstract class OdfDocument extends OdfPackageDocument {
 			// if there is a specilized handler on the stack, dispatch the event
 			Element element = null;
 			if (uri.equals(EMPTY_STRING) || qName.equals(EMPTY_STRING)) {
-				element = mDocument.createElement(localName);
+				element = mOdfDom.createElement(localName);
 			} else {
-				element = mDocument.createElementNS(uri, qName);
+				element = mOdfDom.createElementNS(uri, qName);
 			}
-			String attrPrefix = null;
+			String attrQname = null;
 			String attrURL = null;
 			OdfAttribute attr = null;
 			for (int i = 0; i < attributes.getLength(); i++) {
 				attrURL = attributes.getURI(i);
-				attrPrefix = attributes.getQName(i);
-				if (attrURL.equals(EMPTY_STRING) || attrPrefix.equals(EMPTY_STRING)) {
-					attr = mDocument.createAttribute(attributes.getLocalName(i));
+				attrQname = attributes.getQName(i);
+				if (attrURL.equals(EMPTY_STRING) || attrQname.equals(EMPTY_STRING)) {
+					attr = mOdfDom.createAttribute(attributes.getLocalName(i));
 				} else {
-					attr = mDocument.createAttributeNS(attrURL, attrPrefix);
+					if (attrQname.startsWith("xmlns:")) {
+						// in case of xmlns prefix we have to create a new OdfNamespace
+						mOdfDom.setNamespace(attributes.getLocalName(i), attributes.getValue(i));
+					}
+					// create all attributes, even namespace attributes
+					attr = mOdfDom.createAttributeNS(attrURL, attrQname);
 				}
-				element.setAttributeNodeNS(attr);
-				if (attr instanceof OfficeVersionAttribute) {
-					// write out not the original value, but the version of this odf version
-					attr.setValue(OfficeVersionAttribute.Value._1_2.toString());
-				} else {
-					// don't exit because of invalid attribute values
-					try {
-						// set Value in the attribute to allow validation in the attribute
-						attr.setValue(attributes.getValue(i));
-					} // if we detect an attribute with invalid value: remove attribute node
-					catch (IllegalArgumentException e) {
-						element.removeAttributeNode(attr);
+
+				// namespace attributes will not be created and return null
+				if (attr != null) {
+					element.setAttributeNodeNS(attr);
+					if (attr instanceof OfficeVersionAttribute) {
+						// write out not the original value, but the version of this odf version
+						attr.setValue(OfficeVersionAttribute.Value._1_2.toString());
+					} else {
+						// don't exit because of invalid attribute values
+						try {
+							// set Value in the attribute to allow validation in the attribute
+							attr.setValue(attributes.getValue(i));
+						} // if we detect an attribute with invalid value: remove attribute node
+						catch (IllegalArgumentException e) {
+							element.removeAttributeNode(attr);
+						}
 					}
 				}
 			}
@@ -1219,7 +1216,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 		 */
 		private void flushTextNode() {
 			if (mCharsForTextNode.length() > 0) {
-				Text text = mDocument.createTextNode(mCharsForTextNode.toString());
+				Text text = mOdfDom.createTextNode(mCharsForTextNode.toString());
 				mNode.appendChild(text);
 				mCharsForTextNode.setLength(0);
 			}
@@ -1245,7 +1242,6 @@ public abstract class OdfDocument extends OdfPackageDocument {
 		return "\n" + getMediaTypeString() + " - ID: " + this.hashCode() + " "
 				+ getPackage().getBaseURI();
 	}
-	private XPath xpath;
 
 	/**
 	 * Insert an Image from the specified uri to the end of the OdfDocument.
@@ -1256,27 +1252,24 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	 * @return         Returns the internal package path of the image, which was created based on the given URI.
 	 * */
 	public String newImage(URI imageUri) {
-		if (xpath == null) {
-			xpath = XPathFactory.newInstance().newXPath();
-			xpath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
-		}
 		try {
-			OdfDrawFrame drawFrame = this.getContentDom().newOdfElement(OdfDrawFrame.class);
-
+			OdfContentDom contentDom = this.getContentDom();
+			OdfDrawFrame drawFrame = contentDom.newOdfElement(OdfDrawFrame.class);
+			XPath xpath = contentDom.getXPath();
 			if (this instanceof OdfSpreadsheetDocument) {
-				TableTableCellElement lastCell = (TableTableCellElement) xpath.evaluate("//table:table-cell[last()]", this.getContentDom(), XPathConstants.NODE);
+				TableTableCellElement lastCell = (TableTableCellElement) xpath.evaluate("//table:table-cell[last()]", contentDom, XPathConstants.NODE);
 				lastCell.appendChild(drawFrame);
 				drawFrame.removeAttribute("text:anchor-type");
 
 			} else if (this instanceof OdfTextDocument) {
-				TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", this.getContentDom(), XPathConstants.NODE);
+				TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", contentDom, XPathConstants.NODE);
 				if (lastPara == null) {
 					lastPara = ((OdfTextDocument) this).newParagraph();
 				}
 				lastPara.appendChild(drawFrame);
 				drawFrame.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PARAGRAPH.toString());
 			} else if (this instanceof OdfPresentationDocument) {
-				DrawPageElement lastPage = (DrawPageElement) xpath.evaluate("//draw:page[last()]", this.getContentDom(), XPathConstants.NODE);
+				DrawPageElement lastPage = (DrawPageElement) xpath.evaluate("//draw:page[last()]", contentDom, XPathConstants.NODE);
 				lastPage.appendChild(drawFrame);
 			}
 			OdfDrawImage image = (OdfDrawImage) drawFrame.newDrawImageElement();
@@ -1303,7 +1296,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 			for (int i = 0; i < childList.getLength(); i++) {
 				if (childList.item(i) instanceof TableTableElement) {
 					TableTableElement table = (TableTableElement) childList.item(i);
-					if (table.getOdfAttributeValue(OdfName.newName(OdfNamespaceNames.TABLE, "name")).equals(name)) {
+					if (table.getOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.TABLE, "name")).equals(name)) {
 						return OdfTable.getInstance(table);
 					}
 				}
@@ -1339,7 +1332,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 		return tableList;
 
 	}
-	
+
 	/**
 	 * Meta data about the document will be initialized.
 	 * Following metadata data is being added:
@@ -1402,6 +1395,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 			}
 			// update editing-duration info.
 			long editingDuration = calendar.getTimeInMillis() - documentOpeningTime;
+			editingDuration = (editingDuration<1)?1:editingDuration;
 			try {
 				DatatypeFactory aFactory = DatatypeFactory.newInstance();
 				metaData.setEditingDuration(new Duration(aFactory.newDurationDayTime(editingDuration)));

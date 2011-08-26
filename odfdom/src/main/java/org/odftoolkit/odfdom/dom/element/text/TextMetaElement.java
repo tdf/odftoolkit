@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlAboutAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlPropertyAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlDatatypeAttribute;
@@ -68,7 +68,7 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationDateTimeElemen
  */
 public class TextMetaElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "meta" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "meta" );
 
 
 	/**
@@ -100,7 +100,7 @@ public class TextMetaElement extends OdfElement
 	 */
 	public String getXhtmlAboutAttribute()
 	{
-		XhtmlAboutAttribute attr = (XhtmlAboutAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "about" ) ;
+		XhtmlAboutAttribute attr = (XhtmlAboutAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XHTML), "about" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -127,7 +127,7 @@ public class TextMetaElement extends OdfElement
 	 */
 	public String getXhtmlPropertyAttribute()
 	{
-		XhtmlPropertyAttribute attr = (XhtmlPropertyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "property" ) ;
+		XhtmlPropertyAttribute attr = (XhtmlPropertyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XHTML), "property" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -154,7 +154,7 @@ public class TextMetaElement extends OdfElement
 	 */
 	public String getXhtmlDatatypeAttribute()
 	{
-		XhtmlDatatypeAttribute attr = (XhtmlDatatypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "datatype" ) ;
+		XhtmlDatatypeAttribute attr = (XhtmlDatatypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XHTML), "datatype" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -181,7 +181,7 @@ public class TextMetaElement extends OdfElement
 	 */
 	public String getXhtmlContentAttribute()
 	{
-		XhtmlContentAttribute attr = (XhtmlContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "content" ) ;
+		XhtmlContentAttribute attr = (XhtmlContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XHTML), "content" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -208,7 +208,7 @@ public class TextMetaElement extends OdfElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

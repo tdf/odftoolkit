@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStringValueIfTrueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStringValueIfFalseAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextCurrentValueAttribute;
  */
 public class TextConditionalTextElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "conditional-text" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "conditional-text" );
 
 
 	/**
@@ -88,7 +88,7 @@ public class TextConditionalTextElement extends OdfElement
 	 */
 	public String getTextConditionAttribute()
 	{
-		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "condition" ) ;
+		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "condition" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -115,7 +115,7 @@ public class TextConditionalTextElement extends OdfElement
 	 */
 	public String getTextStringValueIfTrueAttribute()
 	{
-		TextStringValueIfTrueAttribute attr = (TextStringValueIfTrueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "string-value-if-true" ) ;
+		TextStringValueIfTrueAttribute attr = (TextStringValueIfTrueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "string-value-if-true" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -142,7 +142,7 @@ public class TextConditionalTextElement extends OdfElement
 	 */
 	public String getTextStringValueIfFalseAttribute()
 	{
-		TextStringValueIfFalseAttribute attr = (TextStringValueIfFalseAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "string-value-if-false" ) ;
+		TextStringValueIfFalseAttribute attr = (TextStringValueIfFalseAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "string-value-if-false" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -169,7 +169,7 @@ public class TextConditionalTextElement extends OdfElement
 	 */
 	public Boolean getTextCurrentValueAttribute()
 	{
-		TextCurrentValueAttribute attr = (TextCurrentValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "current-value" ) ;
+		TextCurrentValueAttribute attr = (TextCurrentValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "current-value" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

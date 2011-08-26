@@ -48,6 +48,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -77,6 +78,7 @@ import org.odftoolkit.odfdom.pkg.manifest.EncryptionData;
 import org.odftoolkit.odfdom.pkg.manifest.KeyDerivation;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSOutput;
 import org.w3c.dom.ls.LSSerializer;
@@ -642,67 +644,68 @@ public class OdfPackage {
 	 * @throws java.lang.Exception
 	 *             - if the package could not be saved
 	 */
-	private void save(OutputStream odfStream, String baseURI) throws Exception {
-		mBaseURI = baseURI;
-
-		OdfFileEntry rootEntry = getManifestEntries().get(SLASH);
-		if (rootEntry == null) {
-			rootEntry = new OdfFileEntry(SLASH, mMediaType);
-			mManifestPathList.add(0, rootEntry.getPath());
-
-		} else {
-			rootEntry.setMediaTypeString(mMediaType);
+	private void save(OutputStream odfStream, String baseURI) {
+		try {
+			mBaseURI = baseURI;
+			OdfFileEntry rootEntry = getManifestEntries().get(SLASH);
+			if (rootEntry == null) {
+				rootEntry = new OdfFileEntry(SLASH, mMediaType);
+				mManifestPathList.add(0, rootEntry.getPath());
+			} else {
+				rootEntry.setMediaTypeString(mMediaType);
+			}
+			ZipOutputStream zos = new ZipOutputStream(odfStream);
+			long modTime = (new java.util.Date()).getTime();
+			// remove mediatype path and use it as first
+			mPackagePathSet.remove(OdfFile.MEDIA_TYPE.getPath());
+			Iterator<String> it = mPackagePathSet.iterator();
+			String key = null;
+			boolean isFirstFile = true;
+			// ODF requires the "./mimetype" file to be at first in the package
+			while (it.hasNext() || isFirstFile) {
+				try {
+					if (isFirstFile) {
+						key = OdfFile.MEDIA_TYPE.getPath();
+						isFirstFile = false;
+					} else {
+						key = it.next();
+					}
+					byte[] data = getBytes(key);
+					ZipEntry ze = mZipEntries.get(key);
+					if (ze == null) {
+						ze = new ZipEntry(key);
+					}
+					ze.setTime(modTime);
+					if (fileNeedsCompression(key)) {
+						ze.setMethod(ZipEntry.STORED);
+					} else {
+						ze.setMethod(ZipEntry.DEFLATED);
+					}
+					CRC32 crc = new CRC32();
+					if (data != null) {
+						crc.update(data);
+						ze.setSize(data.length);
+					} else {
+						ze.setMethod(ZipEntry.STORED);
+						ze.setSize(0);
+					}
+					ze.setCrc(crc.getValue());
+					ze.setCompressedSize(-1);
+					zos.putNextEntry(ze);
+					if (data != null) {
+						zos.write(data, 0, data.length);
+					}
+					zos.closeEntry();
+					mZipEntries.put(key, ze);
+				} catch (IOException ex) {
+					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+			zos.close();
+			odfStream.flush();
+		} catch (IOException ex) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
-		ZipOutputStream zos = new ZipOutputStream(odfStream);
-		long modTime = (new java.util.Date()).getTime();
-
-		// remove mediatype path and use it as first
-		mPackagePathSet.remove(OdfFile.MEDIA_TYPE.getPath());
-		Iterator<String> it = mPackagePathSet.iterator();
-		String key = null;
-		boolean isFirstFile = true;
-		// ODF requires the "./mimetype" file to be at first in the package
-		while (it.hasNext() || isFirstFile) {
-			if (isFirstFile) {
-				key = OdfFile.MEDIA_TYPE.getPath();
-				isFirstFile = false;
-			} else {
-				key = it.next();
-			}
-			byte[] data = getBytes(key);
-
-			ZipEntry ze = mZipEntries.get(key);
-			if (ze == null) {
-				ze = new ZipEntry(key);
-			}
-			ze.setTime(modTime);
-			if (fileNeedsCompression(key)) {
-				ze.setMethod(ZipEntry.STORED);
-			} else {
-				ze.setMethod(ZipEntry.DEFLATED);
-			}
-
-			CRC32 crc = new CRC32();
-			if (data != null) {
-				crc.update(data);
-				ze.setSize(data.length);
-			} else {
-				ze.setMethod(ZipEntry.STORED);
-				ze.setSize(0);
-			}
-			ze.setCrc(crc.getValue());
-			ze.setCompressedSize(-1);
-			zos.putNextEntry(ze);
-			if (data != null) {
-				zos.write(data, 0, data.length);
-			}
-			zos.closeEntry();
-
-			mZipEntries.put(key, ze);
-		}
-		zos.close();
-		odfStream.flush();
 	}
 
 	/**
@@ -781,9 +784,7 @@ public class OdfPackage {
 	/**
 	 * Data was updated, update mZipEntry and OdfFileEntry as well
 	 */
-	private void entryUpdate(String packagePath) throws Exception,
-			SAXException, TransformerConfigurationException,
-			TransformerException, ParserConfigurationException {
+	private void entryUpdate(String packagePath) {
 
 		byte[] data = getBytes(packagePath);
 		int size = 0;
@@ -868,7 +869,7 @@ public class OdfPackage {
 		entryUpdate(OdfPackage.OdfFile.MANIFEST.packagePath);
 	}
 
-	private void insertDirectories(String packagePath, String mediaType) throws Exception {
+	private void insertDirectories(String packagePath, String mediaType) {
 		StringTokenizer tok = new StringTokenizer(packagePath, SLASH);
 		String path = EMPTY_STRING;
 		{
@@ -896,7 +897,7 @@ public class OdfPackage {
 	/**
 	 * add a directory to the OdfPackage
 	 */
-	private void insertDirectory(String packagePath, String mediaType) throws Exception {
+	private void insertDirectory(String packagePath, String mediaType) {
 		packagePath = normalizeFilePath(packagePath);
 
 		// If empty string OR not trailing SLASH
@@ -921,8 +922,7 @@ public class OdfPackage {
 	 * @throws java.lang.Exception
 	 *             when the DOM tree could not be inserted
 	 */
-	public void insert(Document fileDOM, String packagePath, String mediaType)
-			throws Exception {
+	public void insert(Document fileDOM, String packagePath, String mediaType) {
 		packagePath = normalizeFilePath(packagePath);
 		if (mediaType == null) {
 			mediaType = XML_MEDIA_TYPE;
@@ -939,13 +939,14 @@ public class OdfPackage {
 		mPkgTempFiles.remove(packagePath);
 	}
 
-	private void addPathToZip(String packagePath, String mediaType) throws Exception {
+	private void addPathToZip(String packagePath, String mediaType) {
 		if (!OdfPackage.OdfFile.MANIFEST.packagePath.equals(packagePath)) {
 			if (mManifestEntries == null) {
 				try {
 					parseManifest();
 				} catch (Exception e) {
-					throw new RuntimeException(e);
+					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE,
+							"The package manifest.xml could not be parsed!", e);
 				}
 			}
 			if (mManifestEntries.get(packagePath) == null) {
@@ -959,7 +960,12 @@ public class OdfPackage {
 			}
 		} else {
 			// we take information from given META-INF/manifest.xml
-			parseManifest();
+			try {
+				parseManifest();
+			} catch (Exception e) {
+				Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE,
+						"The package manifest.xml could not be parsed!", e);
+			}
 		}
 		// creates sub directories in the package for the given DOM
 		if (!mPackagePathSet.contains(packagePath)) {
@@ -1135,8 +1141,7 @@ public class OdfPackage {
 	 * @throws java.lang.Exception
 	 *             when the DOM tree could not be inserted
 	 */
-	public void insert(byte[] fileBytes, String packagePath, String mediaType)
-			throws Exception {
+	public void insert(byte[] fileBytes, String packagePath, String mediaType) {
 		packagePath = normalizeFilePath(packagePath);
 
 		if (OdfPackage.OdfFile.MEDIA_TYPE.getPath().equals(packagePath)) {
@@ -1309,7 +1314,7 @@ public class OdfPackage {
 	 * @return the unzipped package content as byte array
 	 * @throws java.lang.Exception
 	 */
-	public byte[] getBytes(String packagePath) throws Exception {
+	public byte[] getBytes(String packagePath) {
 		packagePath = normalizeFilePath(packagePath);
 		byte[] data = null;
 
@@ -1331,7 +1336,15 @@ public class OdfPackage {
 		} else if (mPackagePathSet.contains(packagePath)
 				&& mPkgDoms.get(packagePath) != null) {
 			{
-				Document doc = mPkgDoms.get(packagePath);
+				Document dom = mPkgDoms.get(packagePath);
+				if (dom instanceof OdfFileDom) {
+					OdfFileDom odfDom = (OdfFileDom) dom;
+					Map<String, String> nsByUri = odfDom.getNamespacesByURI();
+					OdfElement root = odfDom.getRootElement();
+					for (Entry<String, String> entry : nsByUri.entrySet()) {
+						root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:" + entry.getValue(), entry.getKey());
+					}
+				}
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 				DOMXSImplementationSourceImpl dis = new org.apache.xerces.dom.DOMXSImplementationSourceImpl();
@@ -1341,18 +1354,34 @@ public class OdfPackage {
 				LSOutput output = impl.createLSOutput();
 				output.setByteStream(baos);
 
-				writer.write(doc, output);
+				writer.write(dom, output);
 				data = baos.toByteArray();
 			}
 		} else if (mPackagePathSet.contains(packagePath)
 				&& mPkgTempFiles.get(packagePath) != null) {
-			ByteArrayOutputStream os = new ByteArrayOutputStream();
-			InputStream is = new BufferedInputStream(new FileInputStream(
-					mPkgTempFiles.get(packagePath)));
-			StreamHelper.stream(is, os);
-			is.close();
-			os.close();
-			data = os.toByteArray();
+			InputStream is = null;
+			ByteArrayOutputStream os = null;
+			try {
+				os = new ByteArrayOutputStream();
+				is = new BufferedInputStream(new FileInputStream(mPkgTempFiles.get(packagePath)));
+				StreamHelper.stream(is, os);
+				is.close();
+				os.close();
+				data = os.toByteArray();
+			} catch (IOException ex) {
+				Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+			} finally {
+				try {
+					if (is != null) {
+						is.close();
+					}
+					if (os != null) {
+						os.close();
+					}
+				} catch (IOException ex) {
+					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
 		} else if (mPackagePathSet.contains(packagePath)
 				&& mPkgData.get(packagePath) != null) {
 			data = mPkgData.get(packagePath);
@@ -1365,28 +1394,50 @@ public class OdfPackage {
 			if (s == null) {
 				return null;
 			} else {
-				data = s.getBytes("UTF-8");
+				try {
+					data = s.getBytes("UTF-8");
+				} catch (UnsupportedEncodingException ex) {
+					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+				}
 			}
 		}
 
 		if (data == null) { // not yet stored data; retrieve it.
 			ZipEntry entry = null;
 			if ((entry = mZipEntries.get(packagePath)) != null) {
-				InputStream inputStream = mZipFile.getInputStream(entry);
-				if (inputStream != null) {
-					ByteArrayOutputStream out = new ByteArrayOutputStream();
-					StreamHelper.stream(inputStream, out);
-					data = out.toByteArray();
-					// store for further usage; do not care about manifest: that
-					// is handled exclusively
-					mPkgData.put(packagePath, data);
-					if (!mPackagePathSet.contains(packagePath)) {
-						mPackagePathSet.add(packagePath);
+				InputStream inputStream = null;
+				try {
+					inputStream = mZipFile.getInputStream(entry);
+					if (inputStream != null) {
+						ByteArrayOutputStream out = new ByteArrayOutputStream();
+						StreamHelper.stream(inputStream, out);
+						data = out.toByteArray();
+						// store for further usage; do not care about manifest: that
+						// is handled exclusively
+						mPkgData.put(packagePath, data);
+						if (!mPackagePathSet.contains(packagePath)) {
+							mPackagePathSet.add(packagePath);
+						}
+					}
+				} catch (IOException ex) {
+					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+				} finally {
+					try {
+						if (inputStream != null) {
+							inputStream.close();
+						}
+					} catch (IOException ex) {
+						Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 					}
 				}
 			}
 		}
 		return data;
+	}
+
+	private void addNamespaces(OdfFileDom dom) {
+		dom.getXPath().getNamespaceContext();
+		Element e = dom.getDocumentElement();
 	}
 
 	/**
@@ -1774,7 +1825,9 @@ public class OdfPackage {
 								Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 							} finally {
 								try {
-									in.close();
+									if (in != null) {
+										in.close();
+									}
 								} catch (IOException ex) {
 									Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 								}

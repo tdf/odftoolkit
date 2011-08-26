@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgRAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgCxAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgCyAttribute;
@@ -58,7 +58,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
  */
 public class DrawCircleElement extends DrawShapeElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "circle" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DRAW, "circle" );
 
 
 	/**
@@ -100,7 +100,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getSvgRAttribute()
 	{
-		SvgRAttribute attr = (SvgRAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "r" ) ;
+		SvgRAttribute attr = (SvgRAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "r" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -127,7 +127,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getSvgCxAttribute()
 	{
-		SvgCxAttribute attr = (SvgCxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "cx" ) ;
+		SvgCxAttribute attr = (SvgCxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "cx" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -154,7 +154,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getSvgCyAttribute()
 	{
-		SvgCyAttribute attr = (SvgCyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "cy" ) ;
+		SvgCyAttribute attr = (SvgCyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "cy" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -181,7 +181,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getSvgXAttribute()
 	{
-		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x" ) ;
+		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "x" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -208,7 +208,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getSvgYAttribute()
 	{
-		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) ;
+		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "y" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -235,7 +235,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getSvgWidthAttribute()
 	{
-		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "width" ) ;
+		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "width" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -262,7 +262,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getSvgHeightAttribute()
 	{
-		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) ;
+		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "height" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -289,7 +289,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getDrawKindAttribute()
 	{
-		DrawKindAttribute attr = (DrawKindAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "kind" ) ;
+		DrawKindAttribute attr = (DrawKindAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "kind" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -316,7 +316,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getDrawStartAngleAttribute()
 	{
-		DrawStartAngleAttribute attr = (DrawStartAngleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start-angle" ) ;
+		DrawStartAngleAttribute attr = (DrawStartAngleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "start-angle" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -343,7 +343,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getDrawEndAngleAttribute()
 	{
-		DrawEndAngleAttribute attr = (DrawEndAngleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end-angle" ) ;
+		DrawEndAngleAttribute attr = (DrawEndAngleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "end-angle" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -370,7 +370,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getDrawLayerAttribute()
 	{
-		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "layer" ) ;
+		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "layer" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -397,7 +397,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getDrawTransformAttribute()
 	{
-		DrawTransformAttribute attr = (DrawTransformAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "transform" ) ;
+		DrawTransformAttribute attr = (DrawTransformAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "transform" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -424,7 +424,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getDrawTextStyleNameAttribute()
 	{
-		DrawTextStyleNameAttribute attr = (DrawTextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-style-name" ) ;
+		DrawTextStyleNameAttribute attr = (DrawTextStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "text-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -451,7 +451,7 @@ public class DrawCircleElement extends DrawShapeElementBase
 	 */
 	public String getDrawCaptionIdAttribute()
 	{
-		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-id" ) ;
+		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "caption-id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

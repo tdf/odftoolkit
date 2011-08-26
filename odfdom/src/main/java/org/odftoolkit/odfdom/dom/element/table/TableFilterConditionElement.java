@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableFieldNumberAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableOperatorAttribute;
@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDataTypeAttribute;
  */
 public class TableFilterConditionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "filter-condition" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "filter-condition" );
 
 	/**
 	 * The value set of {@odf.attribute table:data-type}.
@@ -123,7 +123,7 @@ public class TableFilterConditionElement extends OdfElement
 	 */
 	public Integer getTableFieldNumberAttribute()
 	{
-		TableFieldNumberAttribute attr = (TableFieldNumberAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "field-number" ) ;
+		TableFieldNumberAttribute attr = (TableFieldNumberAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "field-number" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -150,7 +150,7 @@ public class TableFilterConditionElement extends OdfElement
 	 */
 	public String getTableValueAttribute()
 	{
-		TableValueAttribute attr = (TableValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "value" ) ;
+		TableValueAttribute attr = (TableValueAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "value" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -177,7 +177,7 @@ public class TableFilterConditionElement extends OdfElement
 	 */
 	public String getTableOperatorAttribute()
 	{
-		TableOperatorAttribute attr = (TableOperatorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "operator" ) ;
+		TableOperatorAttribute attr = (TableOperatorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "operator" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -204,7 +204,7 @@ public class TableFilterConditionElement extends OdfElement
 	 */
 	public String getTableCaseSensitiveAttribute()
 	{
-		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "case-sensitive" ) ;
+		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "case-sensitive" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -231,7 +231,7 @@ public class TableFilterConditionElement extends OdfElement
 	 */
 	public String getTableDataTypeAttribute()
 	{
-		TableDataTypeAttribute attr = (TableDataTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-type" ) ;
+		TableDataTypeAttribute attr = (TableDataTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "data-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

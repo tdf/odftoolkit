@@ -26,8 +26,8 @@ import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleTabStopElement;
@@ -54,7 +54,7 @@ public class UnknownPropertiesTest {
                 OdfDocument odfDocument = i == 0 ? OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE)) : OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
 
                 Document odfContent = odfDocument.getContentDom();
-                NodeList lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "p");
+                NodeList lst = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
                 Node node = lst.item(0);
                 OdfTextParagraph para = (OdfTextParagraph) node;
                 OdfStyleBase paraLocalStyle = para.getAutomaticStyle();

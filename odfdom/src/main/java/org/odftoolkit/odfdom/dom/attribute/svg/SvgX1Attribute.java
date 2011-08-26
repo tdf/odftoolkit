@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.svg;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawConnectorElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLineElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawMeasureElement;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.element.svg.SvgLinearGradientElement;
  */
 public class SvgX1Attribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.SVG, "x1" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.SVG, "x1" );
 	public static final String DEFAULT_VALUE = "0%";
 
 	/**

@@ -22,20 +22,20 @@
 // !!! GENERATED SOURCE CODE !!!
 package org.odftoolkit.odfdom.dom.style.props;
 
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 
 
 public interface OdfTableColumnProperties {
     public final static OdfStyleProperty BreakAfter = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableColumnProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-after"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableColumnProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "break-after"));
     public final static OdfStyleProperty BreakBefore = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableColumnProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-before"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableColumnProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.FO), "break-before"));
     public final static OdfStyleProperty ColumnWidth = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableColumnProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "column-width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableColumnProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "column-width"));
     public final static OdfStyleProperty RelColumnWidth = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableColumnProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rel-column-width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableColumnProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "rel-column-width"));
     public final static OdfStyleProperty UseOptimalColumnWidth = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableColumnProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "use-optimal-column-width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableColumnProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "use-optimal-column-width"));
 }

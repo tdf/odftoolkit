@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StylePageUsageAttribute;
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StylePageUsageAttribute;
  */
 public class StylePageLayoutElement extends OdfStyleBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "page-layout" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.STYLE, "page-layout" );
 
 
 	/**
@@ -82,7 +82,7 @@ public class StylePageLayoutElement extends OdfStyleBase
 	 */
 	public String getStyleNameAttribute()
 	{
-		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) ;
+		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -109,7 +109,7 @@ public class StylePageLayoutElement extends OdfStyleBase
 	 */
 	public String getStylePageUsageAttribute()
 	{
-		StylePageUsageAttribute attr = (StylePageUsageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "page-usage" ) ;
+		StylePageUsageAttribute attr = (StylePageUsageAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "page-usage" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

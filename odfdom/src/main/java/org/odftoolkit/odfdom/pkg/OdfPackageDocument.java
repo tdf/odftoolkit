@@ -22,10 +22,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.pkg;
 
+import java.io.File;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -39,7 +38,7 @@ import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
  *
  * Still the abstract concept of documents exist in the ODF Package layer.
  */
-public abstract class OdfPackageDocument implements OdfPackageResource {
+public abstract class OdfPackageDocument {
 
 	private static final String TWO_DOTS = "..";
 	private static final String SLASH = "/";
@@ -69,9 +68,9 @@ public abstract class OdfPackageDocument implements OdfPackageResource {
 	}
 
 	/**
-	 * @param the mediatype of this document
+	 * @param mediaTypeString for the mediatype of this document
 	 */
-	protected void setMediaTypeString(String mediaTypeString) {
+	final protected void setMediaTypeString(String mediaTypeString) {
 		mDocumentMediaType = mediaTypeString;
 		if (isRootDocument()) {
 			mPackage.setMediaTypeString(mediaTypeString);
@@ -95,23 +94,6 @@ public abstract class OdfPackageDocument implements OdfPackageResource {
 		}
 	}
 
-//	/**
-//	 * Sets the root OdfPackageDocument that determines the mediatype of the package.
-//	 *
-//	 * @param root the OdfPackageDocument that has its file on the root level of the package
-//	 */
-//	protected void setRootDocument(OdfPackageDocument root) {
-//		mRootDocument = root;
-//	}
-//
-//	/**
-//	 * Retreives the root OdfPackageDocument that determines the mediatype of the package.
-//	 *
-//	 * @return the OdfPackageDocument that has its file on the root level of the package
-//	 */
-//	protected OdfPackageDocument getRootDocument() {
-//		return mRootDocument;
-//	}
 	/**
 	 * Sets the OdfPackage that contains this OdfPackageDocument.
 	 *
@@ -166,28 +148,7 @@ public abstract class OdfPackageDocument implements OdfPackageResource {
 	 */
 	abstract public OdfPackageDocument getEmbeddedDocument(String internDocumentPath);
 
-//	/**
-//	 * Method returns all embedded OdfPackageDocuments which located in the current OdfPackageDocument dir and matching the
-//	 * according MediaType. This is done by matching the subfolder entries of the
-//	 * manifest file with the given OdfMediaType.
-//	 */
-	// ToDo: (Issue 219 - PackageRefactoring) -- Instead of a list of already created documents a list of path might be sufficient
-//	private List<OdfPackageDocument> getEmbeddedDocumentOfSubDir(OdfMediaType mediaType) {
-//		Set<String> manifestEntries = this.getPackage().getFileEntries();
-//		List<OdfPackageDocument> embeddedObjects = new ArrayList<OdfPackageDocument>();
-//		String currentDocPath = getDocumentPackagePath();
-//		// check manifest for current embedded OdfPackageDocuments
-//		for (String entry : manifestEntries) {
-//			if (entry.length() > 1 && entry.endsWith(SLASH)
-//					&& entry.startsWith(currentDocPath) && !entry.equals(currentDocPath)) {
-//				String entryMediaType = getPackage().getFileEntry(entry).getMediaTypeString();
-//				if (entryMediaType.equals(mediaType.toString())) {
-//					embeddedObjects.add(getEmbeddedDocument(entry));
-//				}
-//			}
-//		}
-//		return embeddedObjects;
-//	}
+
 	//get all the file entries from rootDocument whose entry name is start with embed document path(entryPrefix)
 	//and rename these file entries with the new entry names
 	//which are relative to the embedded document path.
@@ -240,11 +201,54 @@ public abstract class OdfPackageDocument implements OdfPackageResource {
 	}
 
 	/** Ensure the document path for is valid and gurantee unique encoding by normalizing the path.
-	 *  @see OdfPackage#normalizeDirectoryPath(java.lang.String)
+	 * @see OdfPackage#normalizeDirectoryPath(java.lang.String)
 	 * @param documentPath the destination directory of the document. The path should end with a '/'.
 	 * @return the documentPath after normalization.
 	 */
 	protected String normalizeDocumentPath(String documentPath) {
-		return mPackage.normalizeDirectoryPath(documentPath);
+		return OdfPackage.normalizeDirectoryPath(documentPath);
 	}
+
+
+	/**
+	 * Save the document to given path.
+	 *
+	 * <p>When save the embedded document to a stand alone document,
+	 * all the file entries of the embedded document will be copied to a new document package.
+	 * If the embedded document is outside of the current document directory,
+	 * you have to embed it to the sub directory and refresh the link of the embedded document.
+	 * You should reload it from the given path to get the saved embedded document.
+	 *
+	 * @param path - the path to the file
+	 * @throws java.lang.Exception  if the document could not be saved
+	 */
+	public void save(String path) throws Exception {
+		File f = new File(path);
+		this.save(f);
+	}
+
+	/**
+	 * Save the document to a given file.
+	 *
+	 * <p>If the input file has been cached (this is the case when loading from an
+	 * InputStream), the input file can be overwritten.</p>
+	 *
+	 * <p>Otherwise it's allowed to overwrite the input file as long as
+	 * the same path name is used that was used for loading (no symbolic link
+	 * foo2.odt pointing to the loaded file foo1.odt, no network path X:\foo.odt
+	 * pointing to the loaded file D:\foo.odt).</p>
+	 *
+	 * <p>When saving the embedded document to a stand alone document,
+	 * all files of the embedded document will be copied to a new document package.
+	 * If the embedded document is outside of the current document directory,
+	 * you have to embed it to the sub directory and refresh the link of the embedded document.
+	 * You should reload it from the given file to get the saved embedded document.
+	 *
+	 * @param file - the file to save the document
+	 * @throws java.lang.Exception  if the document could not be saved
+	 */
+	public void save(File file) throws Exception {
+		this.mPackage.save(file);
+	}
+
 }

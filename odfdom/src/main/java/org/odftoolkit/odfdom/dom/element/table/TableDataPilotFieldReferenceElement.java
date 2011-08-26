@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableFieldNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableMemberTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableMemberNameAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableTypeAttribute;
  */
 public class TableDataPilotFieldReferenceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-field-reference" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "data-pilot-field-reference" );
 
 	/**
 	 * The value set of {@odf.attribute table:type}.
@@ -122,7 +122,7 @@ public class TableDataPilotFieldReferenceElement extends OdfElement
 	 */
 	public String getTableFieldNameAttribute()
 	{
-		TableFieldNameAttribute attr = (TableFieldNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "field-name" ) ;
+		TableFieldNameAttribute attr = (TableFieldNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "field-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -149,7 +149,7 @@ public class TableDataPilotFieldReferenceElement extends OdfElement
 	 */
 	public String getTableMemberTypeAttribute()
 	{
-		TableMemberTypeAttribute attr = (TableMemberTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "member-type" ) ;
+		TableMemberTypeAttribute attr = (TableMemberTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "member-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -176,7 +176,7 @@ public class TableDataPilotFieldReferenceElement extends OdfElement
 	 */
 	public String getTableMemberNameAttribute()
 	{
-		TableMemberNameAttribute attr = (TableMemberNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "member-name" ) ;
+		TableMemberNameAttribute attr = (TableMemberNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "member-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -203,7 +203,7 @@ public class TableDataPilotFieldReferenceElement extends OdfElement
 	 */
 	public String getTableTypeAttribute()
 	{
-		TableTypeAttribute attr = (TableTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "type" ) ;
+		TableTypeAttribute attr = (TableTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

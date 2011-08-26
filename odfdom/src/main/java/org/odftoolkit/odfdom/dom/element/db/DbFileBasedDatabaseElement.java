@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.db;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbMediaTypeAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbExtensionAttribute;
  */
 public class DbFileBasedDatabaseElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "file-based-database" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DB, "file-based-database" );
 
 
 	/**
@@ -89,7 +89,7 @@ public class DbFileBasedDatabaseElement extends OdfElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) ;
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -116,7 +116,7 @@ public class DbFileBasedDatabaseElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) ;
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK), "href" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -143,7 +143,7 @@ public class DbFileBasedDatabaseElement extends OdfElement
 	 */
 	public String getDbMediaTypeAttribute()
 	{
-		DbMediaTypeAttribute attr = (DbMediaTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "media-type" ) ;
+		DbMediaTypeAttribute attr = (DbMediaTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "media-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -170,7 +170,7 @@ public class DbFileBasedDatabaseElement extends OdfElement
 	 */
 	public String getDbExtensionAttribute()
 	{
-		DbExtensionAttribute attr = (DbExtensionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "extension" ) ;
+		DbExtensionAttribute attr = (DbExtensionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "extension" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

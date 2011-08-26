@@ -27,10 +27,10 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
@@ -61,7 +61,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextSoftPageBreakElement;
  */
 public class TableTableElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "table" );
 
 
 	/**
@@ -71,7 +71,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public TableTableElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Table, OdfName.newName(OdfNamespaceNames.TABLE, "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Table, OdfName.newName(OdfDocumentNamespace.TABLE, "style-name" )	);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) ;
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -120,7 +120,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public String getTableStyleNameAttribute()
 	{
-		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "style-name" ) ;
+		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -147,7 +147,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public String getTableTemplateNameAttribute()
 	{
-		TableTemplateNameAttribute attr = (TableTemplateNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "template-name" ) ;
+		TableTemplateNameAttribute attr = (TableTemplateNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "template-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -174,7 +174,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public Boolean getTableUseFirstRowStylesAttribute()
 	{
-		TableUseFirstRowStylesAttribute attr = (TableUseFirstRowStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-first-row-styles" ) ;
+		TableUseFirstRowStylesAttribute attr = (TableUseFirstRowStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "use-first-row-styles" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -201,7 +201,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public Boolean getTableUseLastRowStylesAttribute()
 	{
-		TableUseLastRowStylesAttribute attr = (TableUseLastRowStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-last-row-styles" ) ;
+		TableUseLastRowStylesAttribute attr = (TableUseLastRowStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "use-last-row-styles" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -228,7 +228,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public Boolean getTableUseFirstColumnStylesAttribute()
 	{
-		TableUseFirstColumnStylesAttribute attr = (TableUseFirstColumnStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-first-column-styles" ) ;
+		TableUseFirstColumnStylesAttribute attr = (TableUseFirstColumnStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "use-first-column-styles" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -255,7 +255,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public Boolean getTableUseLastColumnStylesAttribute()
 	{
-		TableUseLastColumnStylesAttribute attr = (TableUseLastColumnStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-last-column-styles" ) ;
+		TableUseLastColumnStylesAttribute attr = (TableUseLastColumnStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "use-last-column-styles" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -282,7 +282,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public Boolean getTableUseBandingRowsStylesAttribute()
 	{
-		TableUseBandingRowsStylesAttribute attr = (TableUseBandingRowsStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-banding-rows-styles" ) ;
+		TableUseBandingRowsStylesAttribute attr = (TableUseBandingRowsStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "use-banding-rows-styles" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -309,7 +309,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public Boolean getTableUseBandingColumnsStylesAttribute()
 	{
-		TableUseBandingColumnsStylesAttribute attr = (TableUseBandingColumnsStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "use-banding-columns-styles" ) ;
+		TableUseBandingColumnsStylesAttribute attr = (TableUseBandingColumnsStylesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "use-banding-columns-styles" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -336,7 +336,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public Boolean getTableProtectedAttribute()
 	{
-		TableProtectedAttribute attr = (TableProtectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protected" ) ;
+		TableProtectedAttribute attr = (TableProtectedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "protected" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -363,7 +363,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public String getTableProtectionKeyAttribute()
 	{
-		TableProtectionKeyAttribute attr = (TableProtectionKeyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protection-key" ) ;
+		TableProtectionKeyAttribute attr = (TableProtectionKeyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "protection-key" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -390,7 +390,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public String getTableProtectionKeyDigestAlgorithmAttribute()
 	{
-		TableProtectionKeyDigestAlgorithmAttribute attr = (TableProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protection-key-digest-algorithm" ) ;
+		TableProtectionKeyDigestAlgorithmAttribute attr = (TableProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "protection-key-digest-algorithm" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -417,7 +417,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public Boolean getTablePrintAttribute()
 	{
-		TablePrintAttribute attr = (TablePrintAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "print" ) ;
+		TablePrintAttribute attr = (TablePrintAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "print" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -444,7 +444,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public String getTablePrintRangesAttribute()
 	{
-		TablePrintRangesAttribute attr = (TablePrintRangesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "print-ranges" ) ;
+		TablePrintRangesAttribute attr = (TablePrintRangesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "print-ranges" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -471,7 +471,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -498,7 +498,7 @@ public class TableTableElement extends OdfStylableElement
 	 */
 	public Boolean getTableIsSubTableAttribute()
 	{
-		TableIsSubTableAttribute attr = (TableIsSubTableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "is-sub-table" ) ;
+		TableIsSubTableAttribute attr = (TableIsSubTableAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "is-sub-table" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

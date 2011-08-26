@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextRefNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextReferenceFormatAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextNoteClassAttribute;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextNoteClassAttribute;
  */
 public class TextNoteRefElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "note-ref" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "note-ref" );
 
 	/**
 	 * The value set of {@odf.attribute text:reference-format}.
@@ -116,7 +116,7 @@ public class TextNoteRefElement extends OdfElement
 	 */
 	public String getTextRefNameAttribute()
 	{
-		TextRefNameAttribute attr = (TextRefNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "ref-name" ) ;
+		TextRefNameAttribute attr = (TextRefNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "ref-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -143,7 +143,7 @@ public class TextNoteRefElement extends OdfElement
 	 */
 	public String getTextReferenceFormatAttribute()
 	{
-		TextReferenceFormatAttribute attr = (TextReferenceFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "reference-format" ) ;
+		TextReferenceFormatAttribute attr = (TextReferenceFormatAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "reference-format" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -170,7 +170,7 @@ public class TextNoteRefElement extends OdfElement
 	 */
 	public String getTextNoteClassAttribute()
 	{
-		TextNoteClassAttribute attr = (TextNoteClassAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "note-class" ) ;
+		TextNoteClassAttribute attr = (TextNoteClassAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "note-class" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableFieldNumberAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDataTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableOrderAttribute;
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableOrderAttribute;
  */
 public class TableSortByElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "sort-by" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "sort-by" );
 
 	public static final String  DEFAULT_VALUE_TABLE_DATATYPE_ATTRIBUTE = TableDataTypeAttribute.DEFAULT_VALUE_AUTOMATIC;
 
@@ -85,7 +85,7 @@ public class TableSortByElement extends OdfElement
 	 */
 	public Integer getTableFieldNumberAttribute()
 	{
-		TableFieldNumberAttribute attr = (TableFieldNumberAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "field-number" ) ;
+		TableFieldNumberAttribute attr = (TableFieldNumberAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "field-number" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -112,7 +112,7 @@ public class TableSortByElement extends OdfElement
 	 */
 	public String getTableDataTypeAttribute()
 	{
-		TableDataTypeAttribute attr = (TableDataTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-type" ) ;
+		TableDataTypeAttribute attr = (TableDataTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "data-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public class TableSortByElement extends OdfElement
 	 */
 	public String getTableOrderAttribute()
 	{
-		TableOrderAttribute attr = (TableOrderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "order" ) ;
+		TableOrderAttribute attr = (TableOrderAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "order" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

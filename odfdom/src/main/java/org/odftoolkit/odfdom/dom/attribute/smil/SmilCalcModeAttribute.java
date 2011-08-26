@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.smil;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateColorElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateMotionElement;
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateMotionElement;
  */
 public class SmilCalcModeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.SMIL, "calcMode" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.SMIL, "calcMode" );
 	public static final String DEFAULT_VALUE_DISCRETE = Value.DISCRETE.toString();
 	public static final String DEFAULT_VALUE_PACED = Value.PACED.toString();
 

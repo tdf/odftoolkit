@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.config;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.config.ConfigNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.config.ConfigTypeAttribute;
 
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.config.ConfigTypeAttribute;
  */
 public class ConfigConfigItemElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CONFIG, "config-item" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.CONFIG, "config-item" );
 
 
 	/**
@@ -85,7 +85,7 @@ public class ConfigConfigItemElement extends OdfElement
 	 */
 	public String getConfigNameAttribute()
 	{
-		ConfigNameAttribute attr = (ConfigNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CONFIG), "name" ) ;
+		ConfigNameAttribute attr = (ConfigNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CONFIG), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class ConfigConfigItemElement extends OdfElement
 	 */
 	public String getConfigTypeAttribute()
 	{
-		ConfigTypeAttribute attr = (ConfigTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CONFIG), "type" ) ;
+		ConfigTypeAttribute attr = (ConfigTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CONFIG), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

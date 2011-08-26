@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.chart;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartAutomaticContentAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartDisplayRSquareAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartDisplayEquationAttribute;
@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  */
 public class ChartEquationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "equation" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.CHART, "equation" );
 
 
 	/**
@@ -79,7 +79,7 @@ public class ChartEquationElement extends OdfElement
 	 */
 	public Boolean getChartAutomaticContentAttribute()
 	{
-		ChartAutomaticContentAttribute attr = (ChartAutomaticContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "automatic-content" ) ;
+		ChartAutomaticContentAttribute attr = (ChartAutomaticContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "automatic-content" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -106,7 +106,7 @@ public class ChartEquationElement extends OdfElement
 	 */
 	public Boolean getChartDisplayRSquareAttribute()
 	{
-		ChartDisplayRSquareAttribute attr = (ChartDisplayRSquareAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "display-r-square" ) ;
+		ChartDisplayRSquareAttribute attr = (ChartDisplayRSquareAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "display-r-square" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -133,7 +133,7 @@ public class ChartEquationElement extends OdfElement
 	 */
 	public Boolean getChartDisplayEquationAttribute()
 	{
-		ChartDisplayEquationAttribute attr = (ChartDisplayEquationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "display-equation" ) ;
+		ChartDisplayEquationAttribute attr = (ChartDisplayEquationAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "display-equation" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -160,7 +160,7 @@ public class ChartEquationElement extends OdfElement
 	 */
 	public String getSvgXAttribute()
 	{
-		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x" ) ;
+		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "x" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -187,7 +187,7 @@ public class ChartEquationElement extends OdfElement
 	 */
 	public String getSvgYAttribute()
 	{
-		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) ;
+		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "y" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -214,7 +214,7 @@ public class ChartEquationElement extends OdfElement
 	 */
 	public String getChartStyleNameAttribute()
 	{
-		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) ;
+		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.CHART), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

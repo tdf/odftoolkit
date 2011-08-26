@@ -24,8 +24,8 @@ package org.odftoolkit.odfdom.incubator.doc.office;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFillImageElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawGradientElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawHatchElement;

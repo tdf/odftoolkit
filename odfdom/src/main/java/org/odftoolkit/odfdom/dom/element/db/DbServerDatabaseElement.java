@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.db;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbHostnameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbPortAttribute;
@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbDatabaseNameAttribute;
  */
 public class DbServerDatabaseElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "server-database" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DB, "server-database" );
 
 
 	/**
@@ -87,7 +87,7 @@ public class DbServerDatabaseElement extends OdfElement
 	 */
 	public String getDbTypeAttribute()
 	{
-		DbTypeAttribute attr = (DbTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "type" ) ;
+		DbTypeAttribute attr = (DbTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -114,7 +114,7 @@ public class DbServerDatabaseElement extends OdfElement
 	 */
 	public String getDbHostnameAttribute()
 	{
-		DbHostnameAttribute attr = (DbHostnameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "hostname" ) ;
+		DbHostnameAttribute attr = (DbHostnameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "hostname" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -141,7 +141,7 @@ public class DbServerDatabaseElement extends OdfElement
 	 */
 	public Integer getDbPortAttribute()
 	{
-		DbPortAttribute attr = (DbPortAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "port" ) ;
+		DbPortAttribute attr = (DbPortAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "port" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -168,7 +168,7 @@ public class DbServerDatabaseElement extends OdfElement
 	 */
 	public String getDbLocalSocketAttribute()
 	{
-		DbLocalSocketAttribute attr = (DbLocalSocketAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "local-socket" ) ;
+		DbLocalSocketAttribute attr = (DbLocalSocketAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "local-socket" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -195,7 +195,7 @@ public class DbServerDatabaseElement extends OdfElement
 	 */
 	public String getDbDatabaseNameAttribute()
 	{
-		DbDatabaseNameAttribute attr = (DbDatabaseNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "database-name" ) ;
+		DbDatabaseNameAttribute attr = (DbDatabaseNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "database-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableLayoutModeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAddEmptyLinesAttribute;
 
@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableAddEmptyLinesAttribute;
  */
 public class TableDataPilotLayoutInfoElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-layout-info" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "data-pilot-layout-info" );
 
 
 	/**
@@ -85,7 +85,7 @@ public class TableDataPilotLayoutInfoElement extends OdfElement
 	 */
 	public String getTableLayoutModeAttribute()
 	{
-		TableLayoutModeAttribute attr = (TableLayoutModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "layout-mode" ) ;
+		TableLayoutModeAttribute attr = (TableLayoutModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "layout-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public class TableDataPilotLayoutInfoElement extends OdfElement
 	 */
 	public Boolean getTableAddEmptyLinesAttribute()
 	{
-		TableAddEmptyLinesAttribute attr = (TableAddEmptyLinesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "add-empty-lines" ) ;
+		TableAddEmptyLinesAttribute attr = (TableAddEmptyLinesAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TABLE), "add-empty-lines" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

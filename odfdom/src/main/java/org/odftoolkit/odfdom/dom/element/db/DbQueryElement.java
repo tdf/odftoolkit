@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.db;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.db.DbCommandAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbEscapeProcessingAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbNameAttribute;
@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbDefaultRowStyleNameAttribute;
  */
 public class DbQueryElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "query" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DB, "query" );
 
 
 	/**
@@ -90,7 +90,7 @@ public class DbQueryElement extends OdfElement
 	 */
 	public String getDbCommandAttribute()
 	{
-		DbCommandAttribute attr = (DbCommandAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "command" ) ;
+		DbCommandAttribute attr = (DbCommandAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "command" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -117,7 +117,7 @@ public class DbQueryElement extends OdfElement
 	 */
 	public Boolean getDbEscapeProcessingAttribute()
 	{
-		DbEscapeProcessingAttribute attr = (DbEscapeProcessingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "escape-processing" ) ;
+		DbEscapeProcessingAttribute attr = (DbEscapeProcessingAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "escape-processing" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -144,7 +144,7 @@ public class DbQueryElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) ;
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -171,7 +171,7 @@ public class DbQueryElement extends OdfElement
 	 */
 	public String getDbTitleAttribute()
 	{
-		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "title" ) ;
+		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "title" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -198,7 +198,7 @@ public class DbQueryElement extends OdfElement
 	 */
 	public String getDbDescriptionAttribute()
 	{
-		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "description" ) ;
+		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "description" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -225,7 +225,7 @@ public class DbQueryElement extends OdfElement
 	 */
 	public String getDbStyleNameAttribute()
 	{
-		DbStyleNameAttribute attr = (DbStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "style-name" ) ;
+		DbStyleNameAttribute attr = (DbStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -252,7 +252,7 @@ public class DbQueryElement extends OdfElement
 	 */
 	public String getDbDefaultRowStyleNameAttribute()
 	{
-		DbDefaultRowStyleNameAttribute attr = (DbDefaultRowStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "default-row-style-name" ) ;
+		DbDefaultRowStyleNameAttribute attr = (DbDefaultRowStyleNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DB), "default-row-style-name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

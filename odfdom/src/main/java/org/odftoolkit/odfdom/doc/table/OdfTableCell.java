@@ -30,10 +30,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoTextAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoWrapOptionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
@@ -107,12 +108,14 @@ public class OdfTableCell {
 	 */
 	private static final int DEFAULT_COLUMNS_REPEATED_NUMBER = 1;
 	TableTableCellElementBase mCellElement;
+	OdfDocument mDocument;
 
 	OdfTableCell(TableTableCellElementBase odfElement, int repeatedColIndex, int repeatedRowIndex) {
 		mCellElement = odfElement;
 		mnRepeatedColIndex = repeatedColIndex;
 		mnRepeatedRowIndex = repeatedRowIndex;
 		mOwnerTable = getTable();
+		mDocument = ((OdfDocument) ((OdfFileDom) mCellElement.getOwnerDocument()).getDocument());
 	}
 
 	/**
@@ -166,7 +169,7 @@ public class OdfTableCell {
 		OdfStyleBase styleElement = getCellStyleElement();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties,
-					OdfName.newName(OdfNamespaceNames.FO, "text-align"));
+					OdfName.newName(OdfDocumentNamespace.FO, "text-align"));
 			return styleElement.getProperty(property);
 		}
 		return null;
@@ -192,7 +195,7 @@ public class OdfTableCell {
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(
-					OdfNamespaceNames.FO, "text-align"));
+					OdfDocumentNamespace.FO, "text-align"));
 			if (horizontalAlignment != null) {
 				styleElement.setProperty(property, horizontalAlignment);
 			} else {
@@ -212,7 +215,7 @@ public class OdfTableCell {
 		OdfStyleBase styleElement = getCellStyleElement();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
-					OdfName.newName(OdfNamespaceNames.STYLE, "vertical-align"));
+					OdfName.newName(OdfDocumentNamespace.STYLE, "vertical-align"));
 			return styleElement.getProperty(property);
 		}
 		return null;
@@ -231,7 +234,7 @@ public class OdfTableCell {
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(
-					OdfNamespaceNames.STYLE, "vertical-align"));
+					OdfDocumentNamespace.STYLE, "vertical-align"));
 			if (verticalAlignment != null) {
 				styleElement.setProperty(property, verticalAlignment);
 			} else {
@@ -250,7 +253,7 @@ public class OdfTableCell {
 		OdfStyleBase styleElement = getCellStyleElement();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
-					OdfName.newName(OdfNamespaceNames.FO, "wrap-option"));
+					OdfName.newName(OdfDocumentNamespace.FO, "wrap-option"));
 			String wrapped = styleElement.getProperty(property);
 			if ((wrapped != null) && (wrapped.equals(FoWrapOptionAttribute.Value.WRAP.toString()))) {
 				return true;
@@ -268,7 +271,7 @@ public class OdfTableCell {
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
-					OdfName.newName(OdfNamespaceNames.FO, "wrap-option"));
+					OdfName.newName(OdfDocumentNamespace.FO, "wrap-option"));
 			if (isTextWrapped) {
 				styleElement.setProperty(property, FoWrapOptionAttribute.Value.WRAP.toString());
 			} else {
@@ -595,10 +598,10 @@ public class OdfTableCell {
 
 		OdfStyle style = getCellStyleElement();
 		if (style != null) {
-			String dataStyleName = style.getOdfAttributeValue(OdfName.newName(OdfNamespaceNames.STYLE, "data-style-name"));
+			String dataStyleName = style.getOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.STYLE, "data-style-name"));
 			OdfNumberCurrencyStyle dataStyle = mCellElement.getAutomaticStyles().getCurrencyStyle(dataStyleName);
 			if (dataStyle == null) {
-				dataStyle = ((OdfFileDom) mCellElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getCurrencyStyle(dataStyleName);
+				dataStyle = mDocument.getDocumentStyles().getCurrencyStyle(dataStyleName);
 			}
 			if ((dataStyle != null) && (dataStyle.getCurrencySymbolElement() != null)) {
 				return dataStyle.getCurrencySymbolElement().getTextContent();
@@ -838,7 +841,7 @@ public class OdfTableCell {
 			Node refElement = mCellElement;
 			for (int i = repeateNum - 1; i >= 0; i--) {
 				TableTableCellElementBase newCell = (TableTableCellElementBase) mCellElement.cloneNode(true);
-				newCell.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-columns-repeated");
+				newCell.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
 				row.getOdfElement().insertBefore(newCell, refElement);
 				refElement = newCell;
 				if (repeatedColIndex == i) {
@@ -934,7 +937,7 @@ public class OdfTableCell {
 		OdfStyleBase styleElement = getCellStyleElement();
 		if (styleElement != null) {
 			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
-					OdfName.newName(OdfNamespaceNames.FO, "background-color"));
+					OdfName.newName(OdfDocumentNamespace.FO, "background-color"));
 			String property = styleElement.getProperty(bkColorProperty);
 			if (property != null) {
 				try {
@@ -961,7 +964,7 @@ public class OdfTableCell {
 		OdfStyleBase styleElement = getCellStyleElement();
 		if (styleElement != null) {
 			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
-					OdfName.newName(OdfNamespaceNames.FO, "background-color"));
+					OdfName.newName(OdfDocumentNamespace.FO, "background-color"));
 			String property = styleElement.getProperty(bkColorProperty);
 			if (Color.isValid(property)) {
 				color = property;
@@ -985,7 +988,7 @@ public class OdfTableCell {
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
 		if (styleElement != null) {
 			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
-					OdfName.newName(OdfNamespaceNames.FO, "background-color"));
+					OdfName.newName(OdfDocumentNamespace.FO, "background-color"));
 			styleElement.setProperty(bkColorProperty, cellBackgroundColor.toString());
 		}
 	}
@@ -1008,7 +1011,7 @@ public class OdfTableCell {
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
 		if (styleElement != null) {
 			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
-					OdfName.newName(OdfNamespaceNames.FO, "background-color"));
+					OdfName.newName(OdfDocumentNamespace.FO, "background-color"));
 			styleElement.setProperty(bkColorProperty, cellBackgroundColor);
 		}
 	}
@@ -1381,7 +1384,7 @@ public class OdfTableCell {
 	private void setDataDisplayStyleName(String name) {
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
 		if (styleElement != null) {
-			styleElement.setOdfAttributeValue(OdfName.newName(OdfNamespaceNames.STYLE, "data-style-name"), name);
+			styleElement.setOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.STYLE, "data-style-name"), name);
 		}
 	}
 
@@ -1402,7 +1405,7 @@ public class OdfTableCell {
 		OdfStyle styleElement = mCellElement.getAutomaticStyles().getStyle(styleName, mCellElement.getStyleFamily());
 
 		if (styleElement == null) {
-			styleElement = ((OdfFileDom) mCellElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getStyle(styleName,
+			styleElement = mDocument.getDocumentStyles().getStyle(styleName,
 					OdfStyleFamily.TableCell);
 		}
 
@@ -1443,8 +1446,7 @@ public class OdfTableCell {
 		OdfStyle styleElement = styles.getStyle(styleName, mCellElement.getStyleFamily());
 
 		if (styleElement == null) {
-			styleElement = ((OdfFileDom) mCellElement.getOwnerDocument()).getOdfDocument().
-					getDocumentStyles().getStyle(styleName, OdfStyleFamily.TableCell);
+			styleElement = mDocument.getDocumentStyles().getStyle(styleName, OdfStyleFamily.TableCell);
 		}
 
 		if (styleElement == null) {
@@ -1476,7 +1478,7 @@ public class OdfTableCell {
 		String datadisplayStylename = null;
 		OdfStyleBase styleElement = getCellStyleElement();
 		if (styleElement != null) {
-			datadisplayStylename = styleElement.getOdfAttributeValue(OdfName.newName(OdfNamespaceNames.STYLE, "data-style-name"));
+			datadisplayStylename = styleElement.getOdfAttributeValue(OdfName.newName(OdfDocumentNamespace.STYLE, "data-style-name"));
 		}
 
 		return datadisplayStylename;
@@ -1542,7 +1544,7 @@ public class OdfTableCell {
 			String name = getDataDisplayStyleName();
 			OdfNumberStyle style = mCellElement.getAutomaticStyles().getNumberStyle(name);
 			if (style == null) {
-				style = ((OdfFileDom) mCellElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getNumberStyle(name);
+				style = mDocument.getDocumentStyles().getNumberStyle(name);
 			}
 			if (style != null) {
 				return style.getFormat();
@@ -1551,7 +1553,7 @@ public class OdfTableCell {
 			String name = getDataDisplayStyleName();
 			OdfNumberDateStyle style = mCellElement.getAutomaticStyles().getDateStyle(name);
 			if (style == null) {
-				style = ((OdfFileDom) mCellElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getDateStyle(name);
+				style = mDocument.getDocumentStyles().getDateStyle(name);
 			}
 			if (style != null) {
 				return style.getFormat();
@@ -1560,7 +1562,7 @@ public class OdfTableCell {
 			String name = getCurrencyDisplayStyleName();
 			OdfNumberCurrencyStyle dataStyle = mCellElement.getAutomaticStyles().getCurrencyStyle(name);
 			if (dataStyle == null) {
-				dataStyle = ((OdfFileDom) mCellElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getCurrencyStyle(name);
+				dataStyle = mDocument.getDocumentStyles().getCurrencyStyle(name);
 			}
 			if (dataStyle != null) {
 				return dataStyle.getFormat();
@@ -1569,7 +1571,7 @@ public class OdfTableCell {
 			String name = getDataDisplayStyleName();
 			OdfNumberPercentageStyle style = mCellElement.getAutomaticStyles().getPercentageStyle(name);
 			if (style == null) {
-				style = ((OdfFileDom) mCellElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getPercentageStyle(name);
+				style = mDocument.getDocumentStyles().getPercentageStyle(name);
 			}
 			if (style != null) {
 				return style.getFormat();
@@ -1582,7 +1584,7 @@ public class OdfTableCell {
 		String name = getDataDisplayStyleName();
 		OdfNumberCurrencyStyle dataStyle = mCellElement.getAutomaticStyles().getCurrencyStyle(name);
 		if (dataStyle == null) {
-			dataStyle = ((OdfFileDom) mCellElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getCurrencyStyle(name);
+			dataStyle = mDocument.getDocumentStyles().getCurrencyStyle(name);
 		}
 
 		if (dataStyle != null) {

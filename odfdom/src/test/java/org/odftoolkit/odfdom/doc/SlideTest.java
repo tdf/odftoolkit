@@ -29,10 +29,10 @@ import java.util.logging.Logger;
 import junit.framework.Assert;
 
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.doc.presentation.OdfPresentationNotes;
 import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawObjectElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
@@ -53,9 +53,9 @@ public class SlideTest {
 	final String TEST_PRESENTATION_FILE_MAIN = "Presentation1.odp";
 	final String TEST_PRESENTATION_FILE_ANOTHER = "Presentation2.odp";
 	final String TEST_PRESENTATION_FILE_OUT_PREFIX = "SlideResult";
-	final String TEST_SLIDE_STYLE_NAME1 = "SlideTest1.odp";
-	final String TEST_SLIDE_STYLE_NAME2 = "SlideTest2.odp";
-	final String TEST_SLIDE_STYLE_NAME3 = "SlideTest3.odp";
+	final String TEST_PRESENTATION_DOCUMENT1 = "SlideTest1.odp";
+	final String TEST_PRESENTATION_DOCUMENT2 = "SlideTest2.odp";
+	final String TEST_PRESENTATION_DOCUMENT3 = "SlideTest3.odp";
 
 	/**
 	 * Initialize the test case.
@@ -140,14 +140,14 @@ public class SlideTest {
 		try {
 			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			OfficePresentationElement contentRoot = doc.getContentRoot();
-			NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "page");
+			NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
 			DrawPageElement slideEle4 = (DrawPageElement) slideNodes.item(4);
 			Assert.assertEquals(slideEle4.getDrawNameAttribute(), "page5");
 			DrawPageElement slideEle8 = (DrawPageElement) slideNodes.item(8);
 			slideEle8.setDrawNameAttribute("page5");
 			OdfSlide slide7 = doc.getSlideByIndex(7);
 			DrawPageElement slideEle7 = (DrawPageElement) slideNodes.item(7);
-			slideEle7.removeAttributeNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "name");
+			slideEle7.removeAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "name");
 
 			OdfSlide slide4 = doc.getSlideByIndex(4);
 			Assert.assertTrue(slide4.getSlideName().equals("page5"));
@@ -432,9 +432,10 @@ public class SlideTest {
 			Assert.assertTrue(doc2.getEmbeddedDocuments().size() == (nEmbedDoc + 1));
 			// the copied slide also have an bitmap background, and the image bullet
 			// they should all be copied
-			String BACKGROUND_IMAGE_NAME = "Pictures/100000000000005E0000005E18D2F70E.png";
-			String BULLET_IMAGE_NAME = "Pictures/10000201000000170000001749B70F33.png";
-			Assert.assertNotNull(doc2.getPackage().getInputStream(BACKGROUND_IMAGE_NAME));
+			String BACKGROUND_IMAGE_NAME = "Pictures/1000000000000C80000004009305DCA3.jpg";
+			String BULLET_IMAGE_NAME = "Pictures/10000000000002580000018FB151A5C8.jpg";
+			InputStream backgroundImage = doc2.getPackage().getInputStream(BACKGROUND_IMAGE_NAME);
+			Assert.assertNotNull(backgroundImage);
 			// copy the slide at index 2 of doc to the end of doc2
 			OdfSlide newPage2 = doc2.copyForeignSlide(101, doc, 2);
 			Assert.assertNotNull(doc2.getPackage().getFileEntry(BULLET_IMAGE_NAME));
@@ -500,7 +501,7 @@ public class SlideTest {
 			//which is corresponding to the slide at index 3 of doc
 			OdfSlide slide = doc2.getSlideByIndex(103);
 			DrawPageElement slideEle = slide.getOdfElement();
-			NodeList objectList = slideEle.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "object");
+			NodeList objectList = slideEle.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "object");
 			Assert.assertTrue(objectList.getLength() == 2);
 			DrawObjectElement object1 = (DrawObjectElement) objectList.item(0);
 			String linkPath = object1.getXlinkHrefAttribute();
@@ -546,26 +547,26 @@ public class SlideTest {
 	public void testCopyThreeDoc() {
 		try {
 			//testdoc1 contain "dp1" for draw page style
-			OdfPresentationDocument testdoc1 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_SLIDE_STYLE_NAME1));
+			OdfPresentationDocument testdoc1 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_DOCUMENT1));
 			//testdoc1 contain "dp1" for draw page style
-			OdfPresentationDocument testdoc2 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_SLIDE_STYLE_NAME2));
+			OdfPresentationDocument testdoc2 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_DOCUMENT2));
 			//testdoc1 contain "dp1" for draw page style
-			OdfPresentationDocument testdoc3 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_SLIDE_STYLE_NAME3));
+			OdfPresentationDocument testdoc3 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_DOCUMENT3));
 			testdoc1.copyForeignSlide(1, testdoc2, 0);
 			testdoc1.copyForeignSlide(2, testdoc3, 0);
 			//after copy foreign slide, the each slide should has its own draw page style
 			DrawPageElement slide1 = testdoc1.getSlideByIndex(0).getOdfElement();
 			DrawPageElement slide2 = testdoc1.getSlideByIndex(1).getOdfElement();
 			DrawPageElement slide3 = testdoc1.getSlideByIndex(2).getOdfElement();
-			String slideStyle1 = slide1.getDrawStyleNameAttribute();
-			String slideStyle2 = slide2.getDrawStyleNameAttribute();
-			String slideStyle3 = slide3.getDrawStyleNameAttribute();
+			String slideStyle1 = slide1.getDrawNameAttribute();
+			String slideStyle2 = slide2.getDrawNameAttribute();
+			String slideStyle3 = slide3.getDrawNameAttribute();
 			LOG.info(slideStyle1);
 			LOG.info(slideStyle2);
 			LOG.info(slideStyle3);
+			testdoc1.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX + "CopyThreeDoc.odp"));
 			Assert.assertNotSame(slideStyle1, slideStyle2);
 			Assert.assertNotSame(slideStyle2, slideStyle3);
-			testdoc1.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX + "CopyThreeDoc.odp"));
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");

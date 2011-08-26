@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextKey1Attribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextKey2Attribute;
@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextMainEntryAttribute;
  */
 public class TextAlphabeticalIndexMarkStartElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "alphabetical-index-mark-start" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "alphabetical-index-mark-start" );
 
 
 	/**
@@ -87,7 +87,7 @@ public class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextIdAttribute()
 	{
-		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "id" ) ;
+		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -114,7 +114,7 @@ public class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextKey1Attribute()
 	{
-		TextKey1Attribute attr = (TextKey1Attribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "key1" ) ;
+		TextKey1Attribute attr = (TextKey1Attribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "key1" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -141,7 +141,7 @@ public class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextKey2Attribute()
 	{
-		TextKey2Attribute attr = (TextKey2Attribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "key2" ) ;
+		TextKey2Attribute attr = (TextKey2Attribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "key2" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -168,7 +168,7 @@ public class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextStringValuePhoneticAttribute()
 	{
-		TextStringValuePhoneticAttribute attr = (TextStringValuePhoneticAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "string-value-phonetic" ) ;
+		TextStringValuePhoneticAttribute attr = (TextStringValuePhoneticAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "string-value-phonetic" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -195,7 +195,7 @@ public class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextKey1PhoneticAttribute()
 	{
-		TextKey1PhoneticAttribute attr = (TextKey1PhoneticAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "key1-phonetic" ) ;
+		TextKey1PhoneticAttribute attr = (TextKey1PhoneticAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "key1-phonetic" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -222,7 +222,7 @@ public class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextKey2PhoneticAttribute()
 	{
-		TextKey2PhoneticAttribute attr = (TextKey2PhoneticAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "key2-phonetic" ) ;
+		TextKey2PhoneticAttribute attr = (TextKey2PhoneticAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "key2-phonetic" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -249,7 +249,7 @@ public class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public Boolean getTextMainEntryAttribute()
 	{
-		TextMainEntryAttribute attr = (TextMainEntryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "main-entry" ) ;
+		TextMainEntryAttribute attr = (TextMainEntryAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "main-entry" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

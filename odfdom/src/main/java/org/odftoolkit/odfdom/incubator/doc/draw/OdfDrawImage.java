@@ -35,9 +35,9 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
@@ -55,6 +55,7 @@ public class OdfDrawImage extends DrawImageElement {
 	private URI mImageURI;
 	// OdfPackage necessary to adapt the manifest referencing the image
 	private OdfPackage mOdfPackage;
+	private OdfDocument mOdfDocument;
 	private static final String SLASH = "/";
 
 	/** Creates a new instance of this class
@@ -62,7 +63,8 @@ public class OdfDrawImage extends DrawImageElement {
 	 */
 	public OdfDrawImage(OdfFileDom ownerDoc) {
 		super(ownerDoc);
-		mOdfPackage = ownerDoc.getOdfDocument().getPackage();
+		mOdfDocument = (OdfDocument) ownerDoc.getDocument();
+		mOdfPackage = mOdfDocument.getPackage();
 	}
 
 	/**
@@ -86,7 +88,7 @@ public class OdfDrawImage extends DrawImageElement {
 	 * @param packagePath The relative path from the package root to the image
 	 */
 	public void setImagePath(String packagePath) {
-		try {
+		try {			
 			packagePath = packagePath.replaceFirst(mOdfDocument.getDocumentPackagePath(), "");
 			URI uri = new URI(AnyURI.encodePath(packagePath).toString());
 			this.setXlinkHrefAttribute(AnyURI.decodePath(uri.toString()));
@@ -175,7 +177,7 @@ public class OdfDrawImage extends DrawImageElement {
 		ArrayList<OdfDrawImage> imageList = new ArrayList<OdfDrawImage>();
 
 		try {
-			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getUri(), "image");
+			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "image");
 
 			for (int i = 0; i < imageNodes.getLength(); i++) {
 				OdfDrawImage image = (OdfDrawImage) imageNodes.item(i);
@@ -271,7 +273,7 @@ public class OdfDrawImage extends DrawImageElement {
 	 */
 	public static int getImageCount(OdfDocument doc) {
 		try {
-			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getUri(), "image");
+			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "image");
 			return imageNodes.getLength();
 		} catch (Exception ex) {
 			Logger.getLogger(OdfDrawImage.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
@@ -288,7 +290,7 @@ public class OdfDrawImage extends DrawImageElement {
 	public static List<OdfDrawImage> getImages(OdfDocument doc) {
 		ArrayList<OdfDrawImage> imageList = new ArrayList<OdfDrawImage>();
 		try {
-			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getUri(), "image");
+			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "image");
 			for (int i = 0; i < imageNodes.getLength(); i++) {
 				OdfDrawImage image = (OdfDrawImage) imageNodes.item(i);
 				imageList.add(image);

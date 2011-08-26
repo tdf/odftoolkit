@@ -24,7 +24,7 @@
 
 package org.odftoolkit.odfdom.incubator.doc.style;
 
-import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleDefaultStyleElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;

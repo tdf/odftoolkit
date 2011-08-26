@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberBooleanStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTextStyleElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;

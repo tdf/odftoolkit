@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawMirrorVerticalAttribute;
@@ -83,7 +83,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawModifiersAttribute;
  */
 public class DrawEnhancedGeometryElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "enhanced-geometry" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.DRAW, "enhanced-geometry" );
 
 	public static final String  DEFAULT_VALUE_DRAW_TYPE_ATTRIBUTE = DrawTypeAttribute.DEFAULT_VALUE_NONPRIMITIVE;
 
@@ -116,7 +116,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawTypeAttribute()
 	{
-		DrawTypeAttribute attr = (DrawTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "type" ) ;
+		DrawTypeAttribute attr = (DrawTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -143,7 +143,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getSvgViewBoxAttribute()
 	{
-		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "viewBox" ) ;
+		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.SVG), "viewBox" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -170,7 +170,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawMirrorVerticalAttribute()
 	{
-		DrawMirrorVerticalAttribute attr = (DrawMirrorVerticalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "mirror-vertical" ) ;
+		DrawMirrorVerticalAttribute attr = (DrawMirrorVerticalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "mirror-vertical" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -197,7 +197,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawMirrorHorizontalAttribute()
 	{
-		DrawMirrorHorizontalAttribute attr = (DrawMirrorHorizontalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "mirror-horizontal" ) ;
+		DrawMirrorHorizontalAttribute attr = (DrawMirrorHorizontalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "mirror-horizontal" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -224,7 +224,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawTextRotateAngleAttribute()
 	{
-		DrawTextRotateAngleAttribute attr = (DrawTextRotateAngleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-rotate-angle" ) ;
+		DrawTextRotateAngleAttribute attr = (DrawTextRotateAngleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "text-rotate-angle" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -251,7 +251,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawExtrusionAllowedAttribute()
 	{
-		DrawExtrusionAllowedAttribute attr = (DrawExtrusionAllowedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-allowed" ) ;
+		DrawExtrusionAllowedAttribute attr = (DrawExtrusionAllowedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-allowed" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -278,7 +278,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawTextPathAllowedAttribute()
 	{
-		DrawTextPathAllowedAttribute attr = (DrawTextPathAllowedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-path-allowed" ) ;
+		DrawTextPathAllowedAttribute attr = (DrawTextPathAllowedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "text-path-allowed" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -305,7 +305,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawConcentricGradientFillAllowedAttribute()
 	{
-		DrawConcentricGradientFillAllowedAttribute attr = (DrawConcentricGradientFillAllowedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "concentric-gradient-fill-allowed" ) ;
+		DrawConcentricGradientFillAllowedAttribute attr = (DrawConcentricGradientFillAllowedAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "concentric-gradient-fill-allowed" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -332,7 +332,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawExtrusionAttribute()
 	{
-		DrawExtrusionAttribute attr = (DrawExtrusionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion" ) ;
+		DrawExtrusionAttribute attr = (DrawExtrusionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -359,7 +359,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionBrightnessAttribute()
 	{
-		DrawExtrusionBrightnessAttribute attr = (DrawExtrusionBrightnessAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-brightness" ) ;
+		DrawExtrusionBrightnessAttribute attr = (DrawExtrusionBrightnessAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-brightness" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -386,7 +386,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionDepthAttribute()
 	{
-		DrawExtrusionDepthAttribute attr = (DrawExtrusionDepthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-depth" ) ;
+		DrawExtrusionDepthAttribute attr = (DrawExtrusionDepthAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-depth" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -413,7 +413,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionDiffusionAttribute()
 	{
-		DrawExtrusionDiffusionAttribute attr = (DrawExtrusionDiffusionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-diffusion" ) ;
+		DrawExtrusionDiffusionAttribute attr = (DrawExtrusionDiffusionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-diffusion" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -440,7 +440,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Integer getDrawExtrusionNumberOfLineSegmentsAttribute()
 	{
-		DrawExtrusionNumberOfLineSegmentsAttribute attr = (DrawExtrusionNumberOfLineSegmentsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-number-of-line-segments" ) ;
+		DrawExtrusionNumberOfLineSegmentsAttribute attr = (DrawExtrusionNumberOfLineSegmentsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-number-of-line-segments" ) ;
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -467,7 +467,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawExtrusionLightFaceAttribute()
 	{
-		DrawExtrusionLightFaceAttribute attr = (DrawExtrusionLightFaceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-light-face" ) ;
+		DrawExtrusionLightFaceAttribute attr = (DrawExtrusionLightFaceAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-light-face" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -494,7 +494,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawExtrusionFirstLightHarshAttribute()
 	{
-		DrawExtrusionFirstLightHarshAttribute attr = (DrawExtrusionFirstLightHarshAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-first-light-harsh" ) ;
+		DrawExtrusionFirstLightHarshAttribute attr = (DrawExtrusionFirstLightHarshAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-first-light-harsh" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -521,7 +521,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawExtrusionSecondLightHarshAttribute()
 	{
-		DrawExtrusionSecondLightHarshAttribute attr = (DrawExtrusionSecondLightHarshAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-second-light-harsh" ) ;
+		DrawExtrusionSecondLightHarshAttribute attr = (DrawExtrusionSecondLightHarshAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-second-light-harsh" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -548,7 +548,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionFirstLightLevelAttribute()
 	{
-		DrawExtrusionFirstLightLevelAttribute attr = (DrawExtrusionFirstLightLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-first-light-level" ) ;
+		DrawExtrusionFirstLightLevelAttribute attr = (DrawExtrusionFirstLightLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-first-light-level" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -575,7 +575,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionSecondLightLevelAttribute()
 	{
-		DrawExtrusionSecondLightLevelAttribute attr = (DrawExtrusionSecondLightLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-second-light-level" ) ;
+		DrawExtrusionSecondLightLevelAttribute attr = (DrawExtrusionSecondLightLevelAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-second-light-level" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -602,7 +602,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionFirstLightDirectionAttribute()
 	{
-		DrawExtrusionFirstLightDirectionAttribute attr = (DrawExtrusionFirstLightDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-first-light-direction" ) ;
+		DrawExtrusionFirstLightDirectionAttribute attr = (DrawExtrusionFirstLightDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-first-light-direction" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -629,7 +629,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionSecondLightDirectionAttribute()
 	{
-		DrawExtrusionSecondLightDirectionAttribute attr = (DrawExtrusionSecondLightDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-second-light-direction" ) ;
+		DrawExtrusionSecondLightDirectionAttribute attr = (DrawExtrusionSecondLightDirectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-second-light-direction" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -656,7 +656,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawExtrusionMetalAttribute()
 	{
-		DrawExtrusionMetalAttribute attr = (DrawExtrusionMetalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-metal" ) ;
+		DrawExtrusionMetalAttribute attr = (DrawExtrusionMetalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-metal" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -683,7 +683,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDr3dShadeModeAttribute()
 	{
-		Dr3dShadeModeAttribute attr = (Dr3dShadeModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "shade-mode" ) ;
+		Dr3dShadeModeAttribute attr = (Dr3dShadeModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DR3D), "shade-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -710,7 +710,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionRotationAngleAttribute()
 	{
-		DrawExtrusionRotationAngleAttribute attr = (DrawExtrusionRotationAngleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-rotation-angle" ) ;
+		DrawExtrusionRotationAngleAttribute attr = (DrawExtrusionRotationAngleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-rotation-angle" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -737,7 +737,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionRotationCenterAttribute()
 	{
-		DrawExtrusionRotationCenterAttribute attr = (DrawExtrusionRotationCenterAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-rotation-center" ) ;
+		DrawExtrusionRotationCenterAttribute attr = (DrawExtrusionRotationCenterAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-rotation-center" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -764,7 +764,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionShininessAttribute()
 	{
-		DrawExtrusionShininessAttribute attr = (DrawExtrusionShininessAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-shininess" ) ;
+		DrawExtrusionShininessAttribute attr = (DrawExtrusionShininessAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-shininess" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -791,7 +791,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionSkewAttribute()
 	{
-		DrawExtrusionSkewAttribute attr = (DrawExtrusionSkewAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-skew" ) ;
+		DrawExtrusionSkewAttribute attr = (DrawExtrusionSkewAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-skew" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -818,7 +818,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionSpecularityAttribute()
 	{
-		DrawExtrusionSpecularityAttribute attr = (DrawExtrusionSpecularityAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-specularity" ) ;
+		DrawExtrusionSpecularityAttribute attr = (DrawExtrusionSpecularityAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-specularity" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -845,7 +845,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDr3dProjectionAttribute()
 	{
-		Dr3dProjectionAttribute attr = (Dr3dProjectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "projection" ) ;
+		Dr3dProjectionAttribute attr = (Dr3dProjectionAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DR3D), "projection" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -872,7 +872,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionViewpointAttribute()
 	{
-		DrawExtrusionViewpointAttribute attr = (DrawExtrusionViewpointAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-viewpoint" ) ;
+		DrawExtrusionViewpointAttribute attr = (DrawExtrusionViewpointAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-viewpoint" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -899,7 +899,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawExtrusionOriginAttribute()
 	{
-		DrawExtrusionOriginAttribute attr = (DrawExtrusionOriginAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-origin" ) ;
+		DrawExtrusionOriginAttribute attr = (DrawExtrusionOriginAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-origin" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -926,7 +926,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawExtrusionColorAttribute()
 	{
-		DrawExtrusionColorAttribute attr = (DrawExtrusionColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "extrusion-color" ) ;
+		DrawExtrusionColorAttribute attr = (DrawExtrusionColorAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "extrusion-color" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -953,7 +953,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawEnhancedPathAttribute()
 	{
-		DrawEnhancedPathAttribute attr = (DrawEnhancedPathAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "enhanced-path" ) ;
+		DrawEnhancedPathAttribute attr = (DrawEnhancedPathAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "enhanced-path" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -980,7 +980,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Double getDrawPathStretchpointXAttribute()
 	{
-		DrawPathStretchpointXAttribute attr = (DrawPathStretchpointXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "path-stretchpoint-x" ) ;
+		DrawPathStretchpointXAttribute attr = (DrawPathStretchpointXAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "path-stretchpoint-x" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
@@ -1007,7 +1007,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Double getDrawPathStretchpointYAttribute()
 	{
-		DrawPathStretchpointYAttribute attr = (DrawPathStretchpointYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "path-stretchpoint-y" ) ;
+		DrawPathStretchpointYAttribute attr = (DrawPathStretchpointYAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "path-stretchpoint-y" ) ;
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
@@ -1034,7 +1034,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawTextAreasAttribute()
 	{
-		DrawTextAreasAttribute attr = (DrawTextAreasAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-areas" ) ;
+		DrawTextAreasAttribute attr = (DrawTextAreasAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "text-areas" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1061,7 +1061,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawGluePointsAttribute()
 	{
-		DrawGluePointsAttribute attr = (DrawGluePointsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "glue-points" ) ;
+		DrawGluePointsAttribute attr = (DrawGluePointsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "glue-points" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1088,7 +1088,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawGluePointTypeAttribute()
 	{
-		DrawGluePointTypeAttribute attr = (DrawGluePointTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "glue-point-type" ) ;
+		DrawGluePointTypeAttribute attr = (DrawGluePointTypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "glue-point-type" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1115,7 +1115,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawGluePointLeavingDirectionsAttribute()
 	{
-		DrawGluePointLeavingDirectionsAttribute attr = (DrawGluePointLeavingDirectionsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "glue-point-leaving-directions" ) ;
+		DrawGluePointLeavingDirectionsAttribute attr = (DrawGluePointLeavingDirectionsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "glue-point-leaving-directions" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1142,7 +1142,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawTextPathAttribute()
 	{
-		DrawTextPathAttribute attr = (DrawTextPathAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-path" ) ;
+		DrawTextPathAttribute attr = (DrawTextPathAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "text-path" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1169,7 +1169,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawTextPathModeAttribute()
 	{
-		DrawTextPathModeAttribute attr = (DrawTextPathModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-path-mode" ) ;
+		DrawTextPathModeAttribute attr = (DrawTextPathModeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "text-path-mode" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1196,7 +1196,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawTextPathScaleAttribute()
 	{
-		DrawTextPathScaleAttribute attr = (DrawTextPathScaleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-path-scale" ) ;
+		DrawTextPathScaleAttribute attr = (DrawTextPathScaleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "text-path-scale" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1223,7 +1223,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public Boolean getDrawTextPathSameLetterHeightsAttribute()
 	{
-		DrawTextPathSameLetterHeightsAttribute attr = (DrawTextPathSameLetterHeightsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-path-same-letter-heights" ) ;
+		DrawTextPathSameLetterHeightsAttribute attr = (DrawTextPathSameLetterHeightsAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "text-path-same-letter-heights" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1250,7 +1250,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 	 */
 	public String getDrawModifiersAttribute()
 	{
-		DrawModifiersAttribute attr = (DrawModifiersAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "modifiers" ) ;
+		DrawModifiersAttribute attr = (DrawModifiersAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW), "modifiers" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

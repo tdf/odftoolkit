@@ -26,12 +26,12 @@
  */    
 package org.odftoolkit.odfdom.dom.attribute.style;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberBooleanStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberCurrencyStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberDateStyleElement;
@@ -53,7 +53,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextOutlineStyleElement;
  */
 public class StyleNameAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "name" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfDocumentNamespace.STYLE, "name" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:name}.

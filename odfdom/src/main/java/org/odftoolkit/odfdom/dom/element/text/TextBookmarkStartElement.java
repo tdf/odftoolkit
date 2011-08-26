@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlAboutAttribute;
@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlContentAttribute;
  */
 public class TextBookmarkStartElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "bookmark-start" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "bookmark-start" );
 
 
 	/**
@@ -87,7 +87,7 @@ public class TextBookmarkStartElement extends OdfElement
 	 */
 	public String getTextNameAttribute()
 	{
-		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) ;
+		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "name" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -114,7 +114,7 @@ public class TextBookmarkStartElement extends OdfElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) ;
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XML), "id" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -141,7 +141,7 @@ public class TextBookmarkStartElement extends OdfElement
 	 */
 	public String getXhtmlAboutAttribute()
 	{
-		XhtmlAboutAttribute attr = (XhtmlAboutAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "about" ) ;
+		XhtmlAboutAttribute attr = (XhtmlAboutAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XHTML), "about" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -168,7 +168,7 @@ public class TextBookmarkStartElement extends OdfElement
 	 */
 	public String getXhtmlPropertyAttribute()
 	{
-		XhtmlPropertyAttribute attr = (XhtmlPropertyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "property" ) ;
+		XhtmlPropertyAttribute attr = (XhtmlPropertyAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XHTML), "property" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -195,7 +195,7 @@ public class TextBookmarkStartElement extends OdfElement
 	 */
 	public String getXhtmlDatatypeAttribute()
 	{
-		XhtmlDatatypeAttribute attr = (XhtmlDatatypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "datatype" ) ;
+		XhtmlDatatypeAttribute attr = (XhtmlDatatypeAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XHTML), "datatype" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -222,7 +222,7 @@ public class TextBookmarkStartElement extends OdfElement
 	 */
 	public String getXhtmlContentAttribute()
 	{
-		XhtmlContentAttribute attr = (XhtmlContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.XHTML), "content" ) ;
+		XhtmlContentAttribute attr = (XhtmlContentAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.XHTML), "content" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

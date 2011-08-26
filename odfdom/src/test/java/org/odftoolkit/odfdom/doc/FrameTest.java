@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
@@ -42,7 +42,7 @@ public class FrameTest {
 	public void testFrame() {
 		try {
 			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("frame.odt"));
-			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getUri(), "frame");
+			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "frame");
 			Assert.assertEquals(lst.getLength(), 1);
 			Node node = lst.item(0);
 			Assert.assertTrue(node instanceof OdfDrawFrame);

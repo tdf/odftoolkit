@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.office;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextGlobalAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextUseSoftPageBreaksAttribute;
 
@@ -91,7 +91,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableDdeLinksElement;
  */
 public class OfficeTextElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "text" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.OFFICE, "text" );
 
 
 	/**
@@ -123,7 +123,7 @@ public class OfficeTextElement extends OdfElement
 	 */
 	public Boolean getTextGlobalAttribute()
 	{
-		TextGlobalAttribute attr = (TextGlobalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "global" ) ;
+		TextGlobalAttribute attr = (TextGlobalAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "global" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -150,7 +150,7 @@ public class OfficeTextElement extends OdfElement
 	 */
 	public Boolean getTextUseSoftPageBreaksAttribute()
 	{
-		TextUseSoftPageBreaksAttribute attr = (TextUseSoftPageBreaksAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-soft-page-breaks" ) ;
+		TextUseSoftPageBreaksAttribute attr = (TextUseSoftPageBreaksAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT), "use-soft-page-breaks" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

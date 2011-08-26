@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberTextualAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberPossessiveFormAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberStyleAttribute;
@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberCalendarAttribute;
  */
 public class NumberMonthElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "month" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "month" );
 
 
 	/**
@@ -76,7 +76,7 @@ public class NumberMonthElement extends OdfElement
 	 */
 	public Boolean getNumberTextualAttribute()
 	{
-		NumberTextualAttribute attr = (NumberTextualAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "textual" ) ;
+		NumberTextualAttribute attr = (NumberTextualAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "textual" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -103,7 +103,7 @@ public class NumberMonthElement extends OdfElement
 	 */
 	public Boolean getNumberPossessiveFormAttribute()
 	{
-		NumberPossessiveFormAttribute attr = (NumberPossessiveFormAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "possessive-form" ) ;
+		NumberPossessiveFormAttribute attr = (NumberPossessiveFormAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "possessive-form" ) ;
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -130,7 +130,7 @@ public class NumberMonthElement extends OdfElement
 	 */
 	public String getNumberStyleAttribute()
 	{
-		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "style" ) ;
+		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "style" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public class NumberMonthElement extends OdfElement
 	 */
 	public String getNumberCalendarAttribute()
 	{
-		NumberCalendarAttribute attr = (NumberCalendarAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "calendar" ) ;
+		NumberCalendarAttribute attr = (NumberCalendarAttribute) getOdfAttribute( OdfNamespace.newNamespace(OdfDocumentNamespace.NUMBER), "calendar" ) ;
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

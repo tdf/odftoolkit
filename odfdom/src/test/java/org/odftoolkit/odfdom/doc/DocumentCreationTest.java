@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -27,15 +28,16 @@ import java.util.logging.Logger;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfXMLFactory;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawObjectElement;
@@ -71,12 +73,6 @@ public class DocumentCreationTest {
 	private static final String CORRUPTED_MIMETYPE_DOC_OUT = TEST_FILE_FOLDER + "TestSaveCorruptedMimetypeDoc.odt";
 	private static final String CORRUPTED_MIMETYPE_CHART = TEST_FILE_FOLDER + "CorruptedMimetypeChart.odc";
 	private static final String CORRUPTED_MIMETYPE_CHART_OUT = TEST_FILE_FOLDER + "TestSaveCorruptedMimetypeChart.odc";
-	private XPath xpath;
-
-	public DocumentCreationTest() {
-		xpath = XPathFactory.newInstance().newXPath();
-		xpath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
-	}
 
 	@Test
 	public void createEmptyDocs() {
@@ -128,13 +124,11 @@ public class DocumentCreationTest {
 			OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("TestEmpty_OdfTextDocument.odt"));
 
 			// get the ODF content as DOM tree representation
-			OdfFileDom odfContent = odfDoc.getContentDom();
+			OdfContentDom odfContent = odfDoc.getContentDom();
 
 			//// W3C XPath initialization ''(JDK5 functionality)''  - XPath is the path within the XML file
 			//// (Find XPath examples here: http://www.w3.org/TR/xpath#path-abbrev)
-			XPath xpath2 = XPathFactory.newInstance().newXPath();
-			xpath2.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
-
+			XPath xpath2 = odfContent.getXPath();
 
 			// receiving the first paragraph "//text:p[1]" ''(JDK5 functionality)''
 			TextPElement para = (TextPElement) xpath2.evaluate("//text:p[1]", odfContent, XPathConstants.NODE);
@@ -224,7 +218,7 @@ public class DocumentCreationTest {
 
 			OdfDocument embDoc = docWithEmbeddedObjects.getEmbeddedDocument(pathToEmbeddedObject);
 			OdfFileDom contentDom = embDoc.getContentDom();
-
+			XPath xpath = contentDom.getXPath();
 			// Add text element
 			TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", contentDom, XPathConstants.NODE);
 			LOG.log(Level.INFO, "First para: {0}", para.getTextContent());
@@ -282,19 +276,21 @@ public class DocumentCreationTest {
 			docWithEmbeddedObject.getContentDom();
 
 			List<OdfDocument> embDocs = docWithEmbeddedObject.getEmbeddedDocuments();
+			int embDocsNumber = embDocs.size();
 			OdfDocument embDoc = (OdfDocument) embDocs.get(0);
 			String pathToDoc = embDoc.getDocumentPackagePath() + "Object in Object1/";
 			embDoc.insertDocument(OdfTextDocument.newTextDocument(), pathToDoc);
 			Assert.assertNotNull(embDoc.getPackage().getFileEntry(pathToDoc));
 			OdfFileDom contentDom = embDoc.getContentDom();
 
+			XPath xpath = contentDom.getXPath();
 			TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", contentDom, XPathConstants.NODE);
 			addFrameForEmbeddedDoc(contentDom, lastPara, "Object in Object1");
 			// embDoc.save(ResourceUtilities.newTestOutputFile("111debug.odt"));
 
 			List<OdfDocument> emb_embDocs = embDoc.getEmbeddedDocuments();
-			//ToDo: Remove list access, as the index is a moving target and should be avoided
-			OdfDocument emb_embDoc = (OdfDocument) emb_embDocs.get(1);
+			Assert.assertEquals(embDocsNumber+1, emb_embDocs.size());
+			OdfDocument emb_embDoc = (OdfDocument) docWithEmbeddedObject.getEmbeddedDocument(pathToDoc);
 			contentDom = emb_embDoc.getContentDom();
 
 			TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", contentDom, XPathConstants.NODE);
@@ -347,6 +343,7 @@ public class DocumentCreationTest {
 			Assert.assertNotNull(doc1);
 
 			OdfFileDom contentDom = doc1.getContentDom();
+			XPath xpath = contentDom.getXPath();
 			TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", contentDom, XPathConstants.NODE);
 			OdfTextSpan spanElem = new OdfTextSpan(contentDom);
 			spanElem.setTextContent(TEST_SPAN_TEXT);
@@ -386,7 +383,7 @@ public class DocumentCreationTest {
 			NodeList linkNodes = (NodeList) xpath.evaluate("//*[@xlink:href]", testLoad.getContentDom(), XPathConstants.NODE);
 			for (int i = 0; i < linkNodes.getLength(); i++) {
 				OdfElement object = (OdfElement) linkNodes.item(i);
-				String refObjPath = object.getAttributeNS(OdfNamespace.newNamespace(OdfNamespaceNames.XLINK).toString(), "href");
+				String refObjPath = object.getAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK).toString(), "href");
 				Assert.assertTrue(refObjPath.equals("Pictures/" + TEST_PIC) || refObjPath.equals("./NewEmbedded"));
 			}
 			Assert.assertNotNull(testLoad.getPackage().getFileEntry("Pictures/" + TEST_PIC));
