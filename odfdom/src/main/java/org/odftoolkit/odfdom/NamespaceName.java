@@ -2,7 +2,7 @@
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
- * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2010 Sun Microsystems, Inc. All rights reserved.
  *
  * Use is subject to license terms.
  *
@@ -19,20 +19,23 @@
  * limitations under the License.
  *
  ************************************************************************/
-
-package org.odftoolkit.odfdom.doc.db;
-
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.element.db.DbJavaClasspathElement;
+package org.odftoolkit.odfdom;
 
 /**
- * Convenient functionalty for the parent ODF OpenDocument element
- *
+ * The NamespaceName interface is being used to provide an easy way to define Namespaces
+ * in a higher layer and access them in the lower i.e. org.odftoolkit.odfdom.OdfNamespace.
  */
-public class OdfDbJavaClasspath extends DbJavaClasspathElement
-{
-	public OdfDbJavaClasspath( OdfFileDom ownerDoc )
-	{
-		super( ownerDoc );
-	}
+public interface NamespaceName {
+
+	/**
+	 * @return the prefix currently related to XML Namespace.
+	 * Note: Even in a single XML file, a user might assign different prefixes to a XML Namespace, different NamespaceNames might exist.
+	 */
+	public String getPrefix();
+
+	/**
+	 * @return the URI identifiying the XML Namespace.
+	 */
+	public String getUri();
+
 }

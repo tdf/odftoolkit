@@ -162,9 +162,9 @@ public class OdfOfficePresentation extends OfficePresentationElement {
 	 */
 	public void deletePage(int index) {
 
-		NodeList pages = this.getElementsByTagNameNS(OdfNamespace.get(OdfNamespaceNames.DRAW).toString(), "page");
+		NodeList pages = this.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "page");
 		try {
-			NodeList objects = ((OdfDrawPage) pages.item(index)).getElementsByTagNameNS(OdfNamespace.get(OdfNamespaceNames.DRAW).toString(), "object");
+			NodeList objects = ((OdfDrawPage) pages.item(index)).getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "object");
 			for (int j = 0; j < objects.getLength(); j++) {
 				OdfDrawObject object = (OdfDrawObject) objects.item(j);
 				mOdfDocument.RemoveEmbedDocument(object.getXlinkHrefAttribute().toString().substring(2));
@@ -182,11 +182,11 @@ public class OdfOfficePresentation extends OfficePresentationElement {
 	 * @param name  the name of the page to delete
 	 */
 	public void deletePage(String name) {
-		NodeList pages = this.getElementsByTagNameNS(OdfNamespace.get(OdfNamespaceNames.DRAW).toString(), "page");
+		NodeList pages = this.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "page");
 		for (int i = 0; i < pages.getLength(); i++) {
 			OdfDrawPage page = (OdfDrawPage) pages.item(i);
 			if (page.getDrawNameAttribute().equals(name)) {
-				NodeList objects = page.getElementsByTagNameNS(OdfNamespace.get(OdfNamespaceNames.DRAW).toString(), "object");
+				NodeList objects = page.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "object");
 				for (int j = 0; j < objects.getLength(); j++) {
 					OdfDrawObject object = (OdfDrawObject) objects.item(j);
 					mOdfDocument.RemoveEmbedDocument(object.getXlinkHrefAttribute().toString().trim().substring(2));
@@ -203,7 +203,7 @@ public class OdfOfficePresentation extends OfficePresentationElement {
 	 * @param page     the page to be inserted
 	 */
 	public void insertPageAfter(int index, OdfDrawPage page) {
-		NodeList pages = this.getElementsByTagNameNS(OdfNamespace.get(OdfNamespaceNames.DRAW).toString(), "page");
+		NodeList pages = this.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "page");
 		try {
 			this.insertBefore(page, pages.item(index + 1));
 		} catch (Exception ex) {
@@ -220,7 +220,7 @@ public class OdfOfficePresentation extends OfficePresentationElement {
 	 */
 	public void insertPageBefore(int index, OdfDrawPage page) {
 
-		NodeList pages = this.getElementsByTagNameNS(OdfNamespace.get(OdfNamespaceNames.DRAW).toString(), "page");
+		NodeList pages = this.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "page");
 		try {
 			this.insertBefore(page, pages.item(index));
 		} catch (Exception ex) {
@@ -236,7 +236,7 @@ public class OdfOfficePresentation extends OfficePresentationElement {
 	 */
 	public void movePage(int current, int destination) {
 
-		NodeList pages = this.getElementsByTagNameNS(OdfNamespace.get(OdfNamespaceNames.DRAW).toString(), "page");
+		NodeList pages = this.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "page");
 		try {
 			OdfDrawPage page = (OdfDrawPage) pages.item(current);
 			this.insertBefore(page, pages.item(destination));

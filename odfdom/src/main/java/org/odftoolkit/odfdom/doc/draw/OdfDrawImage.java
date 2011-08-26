@@ -175,7 +175,7 @@ public class OdfDrawImage extends DrawImageElement {
 		ArrayList<OdfDrawImage> imageList = new ArrayList<OdfDrawImage>();
 
 		try {
-			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getNamespaceUri(), "image");
+			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getUri(), "image");
 
 			for (int i = 0; i < imageNodes.getLength(); i++) {
 				OdfDrawImage image = (OdfDrawImage) imageNodes.item(i);
@@ -272,7 +272,7 @@ public class OdfDrawImage extends DrawImageElement {
 	 */
 	public static int getImageCount(OdfDocument doc) {
 		try {
-			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getNamespaceUri(), "image");
+			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getUri(), "image");
 			return imageNodes.getLength();
 		} catch (Exception ex) {
 			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
@@ -290,7 +290,7 @@ public class OdfDrawImage extends DrawImageElement {
 	public static List<OdfDrawImage> getImages(OdfDocument doc) {
 		ArrayList<OdfDrawImage> imageList = new ArrayList<OdfDrawImage>();
 		try {
-			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getNamespaceUri(), "image");
+			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getUri(), "image");
 			for (int i = 0; i < imageNodes.getLength(); i++) {
 				OdfDrawImage image = (OdfDrawImage) imageNodes.item(i);
 				imageList.add(image);

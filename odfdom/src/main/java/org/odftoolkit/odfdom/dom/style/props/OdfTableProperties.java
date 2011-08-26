@@ -29,39 +29,39 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 
 public interface OdfTableProperties {
     public final static OdfStyleProperty BackgroundColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "background-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color"));
     public final static OdfStyleProperty BreakAfter = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "break-after"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-after"));
     public final static OdfStyleProperty BreakBefore = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "break-before"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-before"));
     public final static OdfStyleProperty KeepWithNext = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "keep-with-next"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "keep-with-next"));
     public final static OdfStyleProperty Margin = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "margin"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin"));
     public final static OdfStyleProperty MarginBottom = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "margin-bottom"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-bottom"));
     public final static OdfStyleProperty MarginLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "margin-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-left"));
     public final static OdfStyleProperty MarginRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "margin-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-right"));
     public final static OdfStyleProperty MarginTop = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "margin-top"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-top"));
     public final static OdfStyleProperty MayBreakBetweenRows = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "may-break-between-rows"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "may-break-between-rows"));
     public final static OdfStyleProperty PageNumber = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "page-number"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "page-number"));
     public final static OdfStyleProperty RelWidth = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "rel-width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rel-width"));
     public final static OdfStyleProperty StyleShadow = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "shadow"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shadow"));
     public final static OdfStyleProperty Width = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "width"));
     public final static OdfStyleProperty WritingMode = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "writing-mode"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode"));
     public final static OdfStyleProperty Align = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.TABLE), "align"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "align"));
     public final static OdfStyleProperty BorderModel = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.TABLE), "border-model"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "border-model"));
     public final static OdfStyleProperty Display = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.TABLE), "display"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display"));
 }

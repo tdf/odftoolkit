@@ -50,7 +50,7 @@ public class TableTest {
     public void testTable() {
         try {
             OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("table.odt"));
-            NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getNamespaceUri(), "table");
+            NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getUri(), "table");
             int tscount = 0;
             for (int i = 0; i < lst.getLength(); i++) {
                 Node node = lst.item(i);
@@ -76,7 +76,7 @@ public class TableTest {
     public void testCellsAndRows() {
         try {
             OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("table.odt"));
-            NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getNamespaceUri(), "table-cell");
+            NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getUri(), "table-cell");
             for (int i = 0; i < lst.getLength(); i++) {
                 Node node = lst.item(i);
                 Assert.assertTrue(node instanceof OdfTableCell);
@@ -118,9 +118,8 @@ public class TableTest {
         // 2nd Table
         OdfTable my2table = new OdfTable(odt);
 
-        Element spreadsheetElement = (Element) odt.getElementsByTagNameNS(OdfNamespaceNames.OFFICE.getNamespaceUri(), "spreadsheet").item(0);
-        my2table.setAttributeNS(OdfNamespaceNames.TABLE.getNamespaceUri(), "name", "BikesSheet");
-
+        Element spreadsheetElement = (Element) odt.getElementsByTagNameNS(OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
+        my2table.setAttributeNS(OdfNamespaceNames.TABLE.getUri(), "table:name", "BikesSheet");
         spreadsheetElement.appendChild(my2table);
 
         OdfTableRow row2 = (OdfTableRow) my2table.appendChild(new OdfTableRow(odt));

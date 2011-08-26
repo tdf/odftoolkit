@@ -23,6 +23,7 @@ import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.doc.text.OdfTextSoftPageBreak;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateElement;
 import org.odftoolkit.odfdom.dom.element.chart.ChartChartElement;
 import org.odftoolkit.odfdom.dom.element.chart.ChartPlotAreaElement;
@@ -55,7 +56,8 @@ public class CreateChildrenElementsTest {
 
 	public CreateChildrenElementsTest() {
 		xpath = XPathFactory.newInstance().newXPath();
-        xpath.setNamespaceContext(new OdfNamespace());
+        xpath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
+
 	}
 
 	@Test
@@ -228,17 +230,17 @@ public class CreateChildrenElementsTest {
                     OdfDrawPage.ELEMENT_NAME.getUri(),
                     OdfDrawPage.ELEMENT_NAME.getLocalName());
             OdfDrawPage page = (OdfDrawPage) lst.item(lst.getLength() - 1);
-            //page.setOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "name" ), "page1" );
-            //page.setOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "style-name" ), "dp1" );
-            //page.setOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "master-page-name" ), "Default" );
+            //page.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "name" ), "page1" );
+            //page.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "style-name" ), "dp1" );
+            //page.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "master-page-name" ), "Default" );
             page.setDrawNameAttribute("page1");
             page.setDrawStyleNameAttribute("dp1");
             page.setDrawMasterPageNameAttribute("Default");
             
             DrawLineElement line = page.newDrawLineElement("6cm", "10cm","15cm","20cm");
-            //line.setOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "style-name" ), "gr1" );
-            //line.setOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "text-style-name" ), "P1" );
-            //line.setOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "layer" ), "layout" );
+            //line.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "style-name" ), "gr1" );
+            //line.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "text-style-name" ), "P1" );
+            //line.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.DRAW), "layer" ), "layout" );
             line.setDrawStyleNameAttribute("gr1");
             line.setDrawTextStyleNameAttribute("P1");
             line.setDrawLayerAttribute("layer");
@@ -354,13 +356,13 @@ public class CreateChildrenElementsTest {
             		OfficeSpreadsheetElement.ELEMENT_NAME.getLocalName());
             OdfOfficeSpreadsheet sheet = (OdfOfficeSpreadsheet) lst.item(lst.getLength() - 1);
             TableTableElement table = sheet.newTableTableElement();
-            //table.setOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "name" ), "newtable" );
-            //table.setOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "style-name" ), "ta1" );
+            //table.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.TABLE), "name" ), "newtable" );
+            //table.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.TABLE), "style-name" ), "ta1" );
             table.setTableNameAttribute("newtable");
             table.setTableStyleNameAttribute("ta1");
             TableTableColumnElement column = table.newTableTableColumnElement();
-            //column.setOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "style-name" ), "co1" );
-            //column.setOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "default-cell-style-name" ), "Default" );
+            //column.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.TABLE), "style-name" ), "co1" );
+            //column.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.TABLE), "default-cell-style-name" ), "Default" );
             column.setTableStyleNameAttribute("co1");
             column.setTableDefaultCellStyleNameAttribute("Default");
             

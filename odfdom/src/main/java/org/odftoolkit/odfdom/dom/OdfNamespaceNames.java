@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom;
 
-import org.odftoolkit.odfdom.OdfName;
+import org.odftoolkit.odfdom.NamespaceName;
 
 /**
- * constants for OpenDocument namespaces
+ * Namespaces of OpenDocument 1.2 XML Schema
  */
-public enum OdfNamespaceNames {
+public enum OdfNamespaceNames implements NamespaceName {
 
 	ANIM("anim", "urn:oasis:names:tc:opendocument:xmlns:animation:1.0"),
 	CHART("chart", "urn:oasis:names:tc:opendocument:xmlns:chart:1.0"),
@@ -61,18 +61,24 @@ public enum OdfNamespaceNames {
 	XML("xml", "http://www.w3.org/XML/1998/namespace" );
     	
 	private String mPrefix;
-	private String mNamespaceUri;
+	private String mUri;
 	
-	OdfNamespaceNames(String prefix, String namespaceUri) {
+	OdfNamespaceNames(String prefix, String uri) {
 		mPrefix = prefix;
-		mNamespaceUri = namespaceUri;
+		mUri = uri;
 	}    
-	
+
+	/**
+	 * @return the prefix currently related to ODF Namespace.
+	 */
 	public String getPrefix() {
 		return mPrefix;
 	}
-	
-	public String getNamespaceUri() {
-		return mNamespaceUri;
+
+	/**
+	 * @return the URI identifiying the ODF Namespace.
+	 */
+	public String getUri() {
+		return mUri;
 	}
 } 

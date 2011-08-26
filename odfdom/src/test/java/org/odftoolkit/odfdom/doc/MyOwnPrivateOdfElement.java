@@ -24,7 +24,6 @@ package org.odftoolkit.odfdom.doc;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfElement;
 
 /**
@@ -39,7 +38,7 @@ public class MyOwnPrivateOdfElement extends OdfElement
 	/**
      * 
      */
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespaceNames.TEXT.getNamespaceUri(), "userdefined" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "userdefined" );
 
     public MyOwnPrivateOdfElement( OdfFileDom _aOwnerDoc )
     {

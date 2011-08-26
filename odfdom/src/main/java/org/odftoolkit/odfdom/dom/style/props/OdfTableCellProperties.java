@@ -28,72 +28,72 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 
 public interface OdfTableCellProperties {
     public final static OdfStyleProperty BackgroundColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "background-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color"));
     public final static OdfStyleProperty Border = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "border"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border"));
     public final static OdfStyleProperty BorderBottom = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "border-bottom"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-bottom"));
     public final static OdfStyleProperty BorderLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "border-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-left"));
     public final static OdfStyleProperty BorderRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "border-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-right"));
     public final static OdfStyleProperty BorderTop = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "border-top"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-top"));
     public final static OdfStyleProperty Padding = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "padding"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding"));
     public final static OdfStyleProperty PaddingBottom = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "padding-bottom"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-bottom"));
     public final static OdfStyleProperty PaddingLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "padding-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-left"));
     public final static OdfStyleProperty PaddingRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "padding-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-right"));
     public final static OdfStyleProperty PaddingTop = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "padding-top"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-top"));
     public final static OdfStyleProperty WrapOption = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "wrap-option"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "wrap-option"));
     public final static OdfStyleProperty BorderLineWidth = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width"));
     public final static OdfStyleProperty BorderLineWidthBottom = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-bottom"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-bottom"));
     public final static OdfStyleProperty BorderLineWidthLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-left"));
     public final static OdfStyleProperty BorderLineWidthRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-right"));
     public final static OdfStyleProperty BorderLineWidthTop = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-top"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-top"));
     public final static OdfStyleProperty CellProtect = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "cell-protect"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "cell-protect"));
     public final static OdfStyleProperty DecimalPlaces = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "decimal-places"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "decimal-places"));
     public final static OdfStyleProperty DiagonalBlTr = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "diagonal-bl-tr"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "diagonal-bl-tr"));
     public final static OdfStyleProperty DiagonalBlTrWidths = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "diagonal-bl-tr-widths"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "diagonal-bl-tr-widths"));
     public final static OdfStyleProperty DiagonalTlBr = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "diagonal-tl-br"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "diagonal-tl-br"));
     public final static OdfStyleProperty DiagonalTlBrWidths = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "diagonal-tl-br-widths"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "diagonal-tl-br-widths"));
     public final static OdfStyleProperty Direction = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "direction"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "direction"));
     public final static OdfStyleProperty GlyphOrientationVertical = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "glyph-orientation-vertical"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "glyph-orientation-vertical"));
     public final static OdfStyleProperty PrintContent = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "print-content"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "print-content"));
     public final static OdfStyleProperty RepeatContent = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "repeat-content"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "repeat-content"));
     public final static OdfStyleProperty RotationAlign = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "rotation-align"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rotation-align"));
     public final static OdfStyleProperty RotationAngle = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "rotation-angle"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rotation-angle"));
     public final static OdfStyleProperty StyleShadow = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "shadow"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shadow"));
     public final static OdfStyleProperty ShrinkToFit = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "shrink-to-fit"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shrink-to-fit"));
     public final static OdfStyleProperty TextAlignSource = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "text-align-source"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-align-source"));
     public final static OdfStyleProperty VerticalAlign = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "vertical-align"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-align"));
     public final static OdfStyleProperty WritingMode = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "writing-mode"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode"));
 
 }

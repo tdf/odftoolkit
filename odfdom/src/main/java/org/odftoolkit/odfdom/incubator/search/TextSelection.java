@@ -195,7 +195,7 @@ public class TextSelection extends Selection {
 				if (node.getLocalName().equals("s")) // text:s
 				{
 					try {
-						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "c"));
+						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getUri(), "c"));
 					} catch (Exception e) {
 						nodeLength = 1;
 					}
@@ -403,7 +403,7 @@ public class TextSelection extends Selection {
 				if (node.getLocalName().equals("s")) // text:s
 				{
 					try {
-						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "c"));
+						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getUri(), "c"));
 					} catch (Exception e) {
 						nodeLength = 1;
 					}
@@ -513,7 +513,7 @@ public class TextSelection extends Selection {
 				if (node.getLocalName().equals("s")) // text:s
 				{
 					try {
-						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "c"));
+						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getUri(), "c"));
 					} catch (Exception e) {
 						nodeLength = 1;
 					}
@@ -736,7 +736,7 @@ public class TextSelection extends Selection {
 				if (node.getLocalName().equals("s")) // text:s
 				{
 					try {
-						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "c"));
+						nodeLength = Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getUri(), "c"));
 					} catch (Exception e) {
 						nodeLength = 1;
 					}
@@ -810,7 +810,7 @@ public class TextSelection extends Selection {
 			//change the parentNode to default style
 			//here we don't know the default style name, so here just
 			//remove the text:style-name attribute
-			pStyleNode.removeAttributeNS(OdfNamespace.get(OdfNamespaceNames.TEXT).toString(), "style-name");
+			pStyleNode.removeAttributeNS(OdfNamespace.newNamespace(OdfNamespaceNames.TEXT).toString(), "style-name");
 		}
 	}
 

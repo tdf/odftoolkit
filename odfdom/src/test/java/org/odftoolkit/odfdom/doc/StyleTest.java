@@ -279,7 +279,7 @@ public class StyleTest {
             OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("sharedautostyles.odt"));
             OdfFileDom dom = odfDocument.getContentDom();
 
-            NodeList lst = dom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "p");
+            NodeList lst = dom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "p");
             Assert.assertTrue(lst.getLength() == 2);
 
             OdfTextParagraph p = (OdfTextParagraph)lst.item(0);

@@ -29,18 +29,18 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 
 public interface OdfSectionProperties {
     public final static OdfStyleProperty BackgroundColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "background-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color"));
     public final static OdfStyleProperty MarginLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "margin-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-left"));
     public final static OdfStyleProperty MarginRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "margin-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-right"));
     public final static OdfStyleProperty Protect = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "protect"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "protect"));
     public final static OdfStyleProperty WritingMode = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "writing-mode"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode"));
     public final static OdfStyleProperty DontBalanceTextColumns = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.TEXT), "dont-balance-text-columns"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "dont-balance-text-columns"));
     public final static OdfStyleProperty Editable = 
-    	OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "editable"));
+    	OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "editable"));
 
 }

@@ -28,26 +28,26 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 
 public interface OdfListLevelProperties {
     public final static OdfStyleProperty Height = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "height"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "height"));
     public final static OdfStyleProperty TextAlign = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "text-align"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "text-align"));
     public final static OdfStyleProperty Width = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "width"));
     public final static OdfStyleProperty FontName = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "font-name"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-name"));
     public final static OdfStyleProperty VerticalPos = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "vertical-pos"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-pos"));
     public final static OdfStyleProperty VerticalRel = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "vertical-rel"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-rel"));
     public final static OdfStyleProperty Y = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.SVG), "y"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y"));
     public final static OdfStyleProperty MinLabelDistance = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.TEXT), "min-label-distance"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "min-label-distance"));
     public final static OdfStyleProperty MinLabelWidth = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.TEXT), "min-label-width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "min-label-width"));
     public final static OdfStyleProperty SpaceBefore = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.TEXT), "space-before"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "space-before"));
     public final static OdfStyleProperty ListLevelPositionAndSpaceMode = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.TEXT), "list-level-position-and-space-mode"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "list-level-position-and-space-mode"));
 
 }

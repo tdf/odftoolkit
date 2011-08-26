@@ -141,7 +141,7 @@ public class OdfWhitespaceProcessor {
 					{
 						spaceCount = Integer.parseInt(
 							((Element) node).getAttributeNS(
-							OdfNamespaceNames.TEXT.getNamespaceUri(), "c"));
+							OdfNamespaceNames.TEXT.getUri(), "c"));
 					}
 					catch(Exception e)
 					{

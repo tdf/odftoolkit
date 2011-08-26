@@ -479,7 +479,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
             String namespace = cur.getNamespaceURI();
             String local = cur.getLocalName();
             // styles can be still the same, even if they have different names
-            if (local.equals("name") && namespace.equals(OdfNamespaceNames.STYLE.getNamespaceUri())) {
+            if (local.equals("name") && namespace.equals(OdfNamespaceNames.STYLE.getUri())) {
                 continue;
             }
             ret.put(namespace + ":" + local, ((Attr) cur).getValue());

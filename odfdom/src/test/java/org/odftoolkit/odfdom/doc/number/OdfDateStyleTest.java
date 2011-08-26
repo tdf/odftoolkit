@@ -185,7 +185,7 @@ s 	Second in minute     55
 		Node childNode;
 		Assert.assertNotNull(node);
 		Assert.assertEquals(Node.ELEMENT_NODE, node.getNodeType());
-		Assert.assertEquals(OdfNamespaceNames.NUMBER.getNamespaceUri(),
+		Assert.assertEquals(OdfNamespaceNames.NUMBER.getUri(),
 			node.getNamespaceURI());
 		Assert.assertEquals(elementName, node.getLocalName());
 		childNode = node.getFirstChild();
@@ -234,14 +234,14 @@ s 	Second in minute     55
 				longShort = "long";
 			}
 			Assert.assertEquals("Element is " + expectedName, longShort,
-				((Element)node).getAttributeNS(OdfNamespaceNames.NUMBER.getNamespaceUri(),
+				((Element)node).getAttributeNS(OdfNamespaceNames.NUMBER.getUri(),
 				"style"));
 		}
 
 		if (monthTextual != null)
 		{
 			Assert.assertEquals(monthTextual,
-				((Element) node).getAttributeNS(OdfNamespaceNames.NUMBER.getNamespaceUri(),
+				((Element) node).getAttributeNS(OdfNamespaceNames.NUMBER.getUri(),
 				"textual")
 			);
 		}

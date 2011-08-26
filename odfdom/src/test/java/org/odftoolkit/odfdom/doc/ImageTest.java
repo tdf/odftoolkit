@@ -109,7 +109,7 @@ public class ImageTest {
 				if (node instanceof OdfDrawImage) {
 					OdfDrawImage img = (OdfDrawImage) node;
 					String ref = img.getAttributeNS(
-							OdfNamespaceNames.XLINK.getNamespaceUri(), "href");
+							OdfNamespaceNames.XLINK.getUri(), "href");
 					pkg.remove(ref);
 					img.getParentNode().removeChild(img);
 				}

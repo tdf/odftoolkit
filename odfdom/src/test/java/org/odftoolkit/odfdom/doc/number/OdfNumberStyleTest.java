@@ -154,7 +154,7 @@ public class OdfNumberStyleTest {
 		// Check for <number:text> with expected content
 		Assert.assertNotNull(node);
 		Assert.assertEquals(Node.ELEMENT_NODE, node.getNodeType());
-		Assert.assertEquals(OdfNamespaceNames.NUMBER.getNamespaceUri(),
+		Assert.assertEquals(OdfNamespaceNames.NUMBER.getUri(),
 			node.getNamespaceURI());
 		Assert.assertEquals(elementName, node.getLocalName());
 		childNode = node.getFirstChild();

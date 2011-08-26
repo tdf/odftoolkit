@@ -274,7 +274,15 @@ abstract public class OdfElement extends ElementNSImpl {
             for( int i = 0; i < attributes.getLength(); i++ )
             {
                 Node item = attributes.item(i);
-                cloneElement.setAttributeNS(item.getNamespaceURI(), item.getLocalName(), item.getNodeValue() );            
+				String qname = null;
+				String prefix = item.getPrefix();
+				if(prefix == null) {
+					qname = item.getLocalName();
+				}
+				else {
+					qname = prefix + ":" + item.getLocalName();
+				}
+                cloneElement.setAttributeNS(item.getNamespaceURI(), qname, item.getNodeValue() );
             }
         }
         
@@ -348,7 +356,7 @@ abstract public class OdfElement extends ElementNSImpl {
         for( int i = 0; i < attr1.size(); i++ )
         {
             Node n1 = attr1.get(i);
-            if( n1.getLocalName().equals( "name") && n1.getNamespaceURI().equals( OdfNamespaceNames.STYLE.getNamespaceUri()) )
+            if( n1.getLocalName().equals( "name") && n1.getNamespaceURI().equals( OdfNamespaceNames.STYLE.getUri()) )
                 continue; // do not compare style names
 
             Node n2 = null;

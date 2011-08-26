@@ -166,7 +166,7 @@ public class OdfNumberCurrencyStyle extends NumberCurrencyStyleElement
 	{
 		OdfNumberCurrencySymbol cSymbol = null;
 		NodeList list = this.getElementsByTagNameNS(
-				OdfNamespaceNames.NUMBER.getNamespaceUri(), "currency-symbol");
+				OdfNamespaceNames.NUMBER.getUri(), "currency-symbol");
 		if (list.getLength() > 0)
 		{
 			cSymbol = (OdfNumberCurrencySymbol) list.item(0);

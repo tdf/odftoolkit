@@ -60,6 +60,7 @@ import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
@@ -631,7 +632,8 @@ public abstract class OdfDocument {
 	public XPath getXPath() {
 		if (mXPath == null) {
 			mXPath = XPathFactory.newInstance().newXPath();
-			mXPath.setNamespaceContext(new OdfNamespace());
+			// could take any Namespace..
+			mXPath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
 		}
 		return mXPath;
 	}
@@ -1198,7 +1200,7 @@ public abstract class OdfDocument {
 	public String newImage(URI imageUri) {
 		if (xpath == null) {
 			xpath = XPathFactory.newInstance().newXPath();
-			xpath.setNamespaceContext(new OdfNamespace());
+			xpath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
 		}
 		try {
 			OdfDrawFrame drawFrame = this.getContentDom().newOdfElement(OdfDrawFrame.class);

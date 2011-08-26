@@ -23,12 +23,10 @@ package org.odftoolkit.odfdom.doc;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.text.OdfTextList;
 import org.odftoolkit.odfdom.doc.text.OdfTextListStyle;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Node;
@@ -44,7 +42,7 @@ public class ListTest {
         try {            
             OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("list.odt"));
             OdfFileDom odfContent = odfdoc.getContentDom();
-            NodeList lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "list");
+            NodeList lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "list");
             for (int i = 0; i < lst.getLength(); i++) {
                 Node node = lst.item(i);
                 Assert.assertTrue(node instanceof OdfTextList);

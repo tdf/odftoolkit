@@ -87,7 +87,7 @@ public class OdfFileDom extends DocumentImpl {
 	 *
 	 */
 	public OdfElement createElementNS(String nsuri, String qname) throws DOMException {
-		return createElementNS(OdfName.get(nsuri, qname));
+		return createElementNS(OdfName.newName(nsuri, qname));
 	}
 
 	/**
@@ -108,8 +108,9 @@ public class OdfFileDom extends DocumentImpl {
 	 * @return The <code>OdfAttribute</code>
 	 * @throws  DOMException
 	 */
+	@Override
 	public OdfAttribute createAttributeNS(String nsuri, String qname) throws DOMException {
-		return createAttributeNS(OdfName.get(nsuri, qname));
+		return createAttributeNS(OdfName.newName(nsuri, qname));
 	}
 
 	/**

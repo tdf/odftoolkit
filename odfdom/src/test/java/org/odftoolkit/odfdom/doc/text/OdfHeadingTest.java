@@ -110,7 +110,7 @@ public class OdfHeadingTest {
 		Assert.assertEquals(part1, node.getTextContent());
 		node = node.getNextSibling();
 		Assert.assertEquals(Node.ELEMENT_NODE, node.getNodeType());
-		Assert.assertEquals(OdfNamespaceNames.TEXT.getNamespaceUri(),
+		Assert.assertEquals(OdfNamespaceNames.TEXT.getUri(),
 			node.getNamespaceURI());
 		Assert.assertEquals("tab", node.getLocalName());
 		node = node.getNextSibling();
@@ -159,7 +159,7 @@ public class OdfHeadingTest {
 		Assert.assertEquals(part1, node.getTextContent());
 		node = node.getNextSibling();
 		Assert.assertEquals(Node.ELEMENT_NODE, node.getNodeType());
-		Assert.assertEquals(OdfNamespaceNames.TEXT.getNamespaceUri(),
+		Assert.assertEquals(OdfNamespaceNames.TEXT.getUri(),
 			node.getNamespaceURI());
 		Assert.assertEquals("line-break", node.getLocalName());
 		node = node.getNextSibling();
@@ -253,7 +253,7 @@ public class OdfHeadingTest {
 		Assert.assertEquals("s", node.getLocalName());
 		element = (Element) node;
 		Assert.assertEquals("3", element.getAttributeNS(
-			OdfNamespaceNames.TEXT.getNamespaceUri(), "c"));
+			OdfNamespaceNames.TEXT.getUri(), "c"));
 
 		node = node.getNextSibling();
 		Assert.assertNotNull(node);

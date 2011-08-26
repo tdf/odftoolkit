@@ -53,7 +53,7 @@ public class UnknownPropertiesTest {
                 OdfDocument odfDocument = i == 0 ? OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE)) : OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
 
                 Document odfContent = odfDocument.getContentDom();
-                NodeList lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "p");
+                NodeList lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "p");
                 Node node = lst.item(0);
                 OdfTextParagraph para = (OdfTextParagraph) node;
                 OdfStyleBase paraLocalStyle = para.getAutomaticStyle();

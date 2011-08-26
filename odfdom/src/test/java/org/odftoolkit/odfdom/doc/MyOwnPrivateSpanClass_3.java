@@ -24,7 +24,6 @@ package org.odftoolkit.odfdom.doc;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfElement;
 
 public class MyOwnPrivateSpanClass_3 extends OdfElement {
@@ -33,7 +32,7 @@ public class MyOwnPrivateSpanClass_3 extends OdfElement {
 	 * 
 	 */
 	private static final long serialVersionUID = -4819629767539792181L;
-	public static final OdfName ELEMENT_NAME = OdfName.get(OdfNamespaceNames.TEXT.getNamespaceUri(), "span");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "span");
 
     /** Creates a new instance of OdfParagraphElementImpl
      */

@@ -148,7 +148,7 @@ public class PerformanceTest {
 			//Create an empty spreadsheet
 			timedoc = OdfSpreadsheetDocument.newSpreadsheetDocument();
 			OdfOfficeSpreadsheet spreadsheet = (OdfOfficeSpreadsheet) timedoc.getContentDom().getElementsByTagNameNS(
-					OdfNamespaceNames.OFFICE.getNamespaceUri(), "spreadsheet").item(0);
+					OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
 			spreadsheet.removeChild(spreadsheet.getFirstChild());
 		}
 
@@ -159,7 +159,7 @@ public class PerformanceTest {
 			//Create an empty spreadsheet
 			memorydoc = OdfSpreadsheetDocument.newSpreadsheetDocument();
 			OdfOfficeSpreadsheet spreadsheet = (OdfOfficeSpreadsheet) memorydoc.getContentDom().getElementsByTagNameNS(
-					OdfNamespaceNames.OFFICE.getNamespaceUri(), "spreadsheet").item(0);
+					OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
 			spreadsheet.removeChild(spreadsheet.getFirstChild());
 		}
 		
@@ -199,9 +199,9 @@ public class PerformanceTest {
 		try {
 			dom = odfdoc.getContentDom();
 			tableList = dom.getElementsByTagNameNS(
-					OdfNamespaceNames.TABLE.getNamespaceUri(), "table");
+					OdfNamespaceNames.TABLE.getUri(), "table");
 			spreadsheet = (OdfOfficeSpreadsheet) dom.getElementsByTagNameNS(
-					OdfNamespaceNames.OFFICE.getNamespaceUri(), "spreadsheet").item(0);
+					OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
 			
 			i = 0;
 			if (tableList.getLength()>0)
@@ -224,8 +224,7 @@ public class PerformanceTest {
 				spreadsheet.appendChild(myTable);
 			}
 
-			lst = myTable.getElementsByTagNameNS(OdfNamespaceNames.TABLE
-					.getNamespaceUri(), "table-row");
+			lst = myTable.getElementsByTagNameNS(OdfNamespaceNames.TABLE.getUri(), "table-row");
 			if (lst.getLength()==0) { //the first table row is not existed. Create table row
 				td = (OdfTableRow)dom.newOdfElement(OdfTableRow.class);
 				cell = (OdfTableCell)dom.newOdfElement(OdfTableCell.class);

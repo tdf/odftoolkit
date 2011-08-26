@@ -46,7 +46,7 @@ public class LoadSaveTest {
             Assert.assertEquals(ResourceUtilities.getURI(SOURCE).toString(), baseURI);
 
             Document odfContent = odfDocument.getContentDom();
-            NodeList lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "p");
+            NodeList lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "p");
             Node node = lst.item(0);
             String oldText = "Changed!!!";
             node.setTextContent(oldText);
@@ -55,7 +55,7 @@ public class LoadSaveTest {
             odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
 
             odfContent = odfDocument.getContentDom();
-            lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "p");
+            lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "p");
             node = lst.item(0);
             String newText = node.getTextContent();
 

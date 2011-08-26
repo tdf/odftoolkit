@@ -238,7 +238,7 @@
     <if test="not prefix(attributeqname)">
         <set namespace='""'/>
         <else>
-            <set namespace="OdfNamespace.get(OdfNamespaceNames.%{toupper(prefix(attributeqname))})"/>
+            <set namespace="OdfNamespace.newNamespace(OdfNamespaceNames.%{toupper(prefix(attributeqname))})"/>
         </else>
     </if>
     <set attributeclassname="%{identifier(prefix(attributeqname))}%{identifier(attributename)}Attribute"/>
@@ -252,7 +252,7 @@
 	 */
 	public %{attributeclassname} get%{attributeclassname}()
 	{
-		return (%{attributeclassname}) getOdfAttribute( OdfName.get( %{namespace}, "%{local_name(attributeqname)}" ) );
+		return (%{attributeclassname}) getOdfAttribute( OdfName.newName( %{namespace}, "%{local_name(attributeqname)}" ) );
 	}
 	
 	/**
@@ -273,7 +273,7 @@
     <if test="not prefix(attributeqname)">
         <set namespace='""'/>
         <else>
-            <set namespace="OdfNamespace.get(OdfNamespaceNames.%{toupper(prefix(attributeqname))})"/>
+            <set namespace="OdfNamespace.newNamespace(OdfNamespaceNames.%{toupper(prefix(attributeqname))})"/>
         </else>
     </if>
     
@@ -308,7 +308,7 @@
 	 */
 	public %{attributetype} get%{attributeclassname}Attribute()
 	{
-		%{attributeclassname}Attribute attr = (%{attributeclassname}Attribute) getOdfAttribute( OdfName.get( %{namespace}, "%{local_name(attributeqname)}" ) );
+		%{attributeclassname}Attribute attr = (%{attributeclassname}Attribute) getOdfAttribute( OdfName.newName( %{namespace}, "%{local_name(attributeqname)}" ) );
 		if( attr != null ){</code>
 	<if test="methodtype!=''">
 		<code>
@@ -528,7 +528,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class %{attributeclassname} extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.%{toupper(prefix(attributeqname))}), "%{local_name(attributeqname)}" );</code>
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.%{toupper(prefix(attributeqname))}, "%{local_name(attributeqname)}" );</code>
 	<foreach type="defaultvalueset">
 		<if test="hasmultidefaultvalues">
 			<if test="(value='true' or value='false') and ( valuetype!='enum' )">
@@ -1298,7 +1298,7 @@ package %{prefix(classname)};
  */
 public abstract class %{local_name(classname)} extends %{local_name(baseclassname)}
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.%{toupper(prefix(elementqname))}), "%{local_name(elementqname)}" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.%{toupper(prefix(elementqname))}, "%{local_name(elementqname)}" );
 </code>
 <ref name = "attributevaluedeclare"/>
 <code>
@@ -1312,7 +1312,7 @@ public abstract class %{local_name(classname)} extends %{local_name(baseclassnam
 	{
 		super( ownerDoc, ELEMENT_NAME</code>
 <if test="(elementstylefamily != '') and (elementstylefamily != 'draw:graphic,presentation:presentation')">
-<code>, OdfStyleFamily.%{identifier(elementstylefamily)}, OdfName.get( OdfNamespace.get(OdfNamespaceNames.%{toupper(prefix(elementstylefamily))}), "style-name" )</code>
+<code>, OdfStyleFamily.%{identifier(elementstylefamily)}, OdfName.newName(OdfNamespaceNames.%{toupper(prefix(elementstylefamily))}, "style-name" )</code>
 </if>
 <code>	);
 	}
@@ -1336,7 +1336,7 @@ public abstract class %{local_name(classname)} extends %{local_name(baseclassnam
             		<set propertysetname = '%{identifier(prefix(attributeqname))}%{identifier(local_name(attributeqname))}'/>
             	</if>
 <code>    public final static OdfStyleProperty %{propertysetname} = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.%{identifier(local_name(elementqname))}, OdfName.get( OdfNamespace.get(OdfNamespaceNames.%{toupper(prefix(attributeqname))}), "%{local_name(attributeqname)}"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.%{identifier(local_name(elementqname))}, OdfName.newName(OdfNamespaceNames.%{toupper(prefix(attributeqname))}, "%{local_name(attributeqname)}"));
 </code>
             </foreach>
 	   </if>
@@ -1520,12 +1520,12 @@ public abstract class %{local_name(classname)} extends %{local_name(baseclassnam
 <code>
 package %{prefix(classname)};
 
-import org.odftoolkit.odfdom.OdfName;
+import org.odftoolkit.odfdom.NamespaceName;
 
 /**
- * constants for OpenDocument namespaces
+ * Namespaces of OpenDocument 1.2 XML Schema
  */
-public enum %{local_name(classname)} {
+public enum %{local_name(classname)} implements NamespaceName {
 </code>
 <!-- add XML namespace in OdfNameSpace.java if it is not exist-->
 	<set testHasXMLNS = "false"/>
@@ -1546,19 +1546,25 @@ public enum %{local_name(classname)} {
     </if>
 <code>
 	private String mPrefix;
-	private String mNamespaceUri;
+	private String mUri;
 	
-	OdfNamespaceNames(String prefix, String namespaceUri) {
+	OdfNamespaceNames(String prefix, String uri) {
 		mPrefix = prefix;
-		mNamespaceUri = namespaceUri;
+		mUri = uri;
 	}    
-	
+
+	/**
+	 * @return the prefix currently related to ODF Namespace.
+	 */
 	public String getPrefix() {
 		return mPrefix;
 	}
-	
-	public String getNamespaceUri() {
-		return mNamespaceUri;
+
+	/**
+	 * @return the URI identifiying the ODF Namespace.
+	 */
+	public String getUri() {
+		return mUri;
 	}
 } 
 </code>

@@ -105,7 +105,7 @@ public class TextStyleNavigation extends Navigation {
 
 	private Node getPHElement(Node node) {
 
-		//get paragraph or heading element       
+		//get paragraph or heading element
 		if (node instanceof OdfTextParagraph) {
 			mPhNode = node;
 		} else if (node instanceof OdfTextHeading) {
@@ -176,7 +176,7 @@ public class TextStyleNavigation extends Navigation {
 					if (node.getLocalName().equals("s")) // mText:s
 					{
 						try {
-							mIndex = mIndex + Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "c"));
+							mIndex = mIndex + Integer.parseInt(((Element) node).getAttributeNS(OdfNamespaceNames.TEXT.getUri(), "c"));
 						} catch (Exception e) {
 							mIndex++;
 						}
@@ -207,7 +207,7 @@ public class TextStyleNavigation extends Navigation {
 
 	private Set<String> getMatchStyleNames() {
 		XPath mInputXPath = XPathFactory.newInstance().newXPath();
-		mInputXPath.setNamespaceContext(new OdfNamespace());
+		mInputXPath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
 		Set<String> styleNames = new HashSet<String>();
 		String sname;
 		HashMap<String, OdfDefaultStyle> defaultStyles = new HashMap<String, OdfDefaultStyle>();

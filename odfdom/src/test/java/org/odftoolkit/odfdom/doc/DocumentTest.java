@@ -279,7 +279,7 @@ public class DocumentTest {
 
             Assert.assertNotNull(parentStyle);
         }
-        if(testStyle.hasOdfAttribute(OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "list-style-name" )))
+        if(testStyle.hasOdfAttribute(OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "list-style-name" )))
         {
 	        if( testStyle.getStyleListStyleNameAttribute()!=null )
 	        {

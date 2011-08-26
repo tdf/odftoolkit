@@ -23,9 +23,7 @@ package org.odftoolkit.odfdom.doc;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
@@ -45,7 +43,7 @@ public class FactoryManipulationTest {
             OdfElementFactory.mapElementOdfNameToClass(TextSpanElement.ELEMENT_NAME, MyOwnPrivateSpanClass_1.class);
             OdfPackage pkg = OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath("factorymanipulation.odt"));
             OdfFileDom contentDom = OdfDocument.loadDocument(pkg).getContentDom();
-            NodeList lst = contentDom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "span");
+            NodeList lst = contentDom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "span");
             Assert.assertTrue(lst.getLength() == 1);
             Node node = lst.item(0);
             Assert.assertTrue(node instanceof MyOwnPrivateSpanClass_1);
@@ -53,7 +51,7 @@ public class FactoryManipulationTest {
             // MyOwnPrivateSpanClass_2 is derived from TextSpanElement (dom layer)
             OdfElementFactory.mapElementOdfNameToClass(TextSpanElement.ELEMENT_NAME, MyOwnPrivateSpanClass_2.class);
             contentDom = OdfDocument.loadDocument(pkg).getContentDom();
-            lst = contentDom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "span");
+            lst = contentDom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "span");
             Assert.assertTrue(lst.getLength() == 1);
             node = lst.item(0);
             Assert.assertTrue(node instanceof MyOwnPrivateSpanClass_2);
@@ -61,7 +59,7 @@ public class FactoryManipulationTest {
             // MyOwnPrivateSpanClass_3 is derived from OdfElement to replace TextSpanElement (dom layer)
             OdfElementFactory.mapElementOdfNameToClass(TextSpanElement.ELEMENT_NAME, MyOwnPrivateSpanClass_3.class);
             contentDom = OdfDocument.loadDocument(pkg).getContentDom();
-            lst = contentDom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "span");
+            lst = contentDom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "span");
             Assert.assertTrue(lst.getLength() == 1);
             node = lst.item(0);
             Assert.assertTrue(node instanceof MyOwnPrivateSpanClass_3);
@@ -69,7 +67,7 @@ public class FactoryManipulationTest {
             // MyOwnPrivateOdfElement is derived from OdfElement to handle <text:userdefined>
             OdfElementFactory.mapElementOdfNameToClass(MyOwnPrivateOdfElement.ELEMENT_NAME, MyOwnPrivateOdfElement.class);
             contentDom = OdfDocument.loadDocument(pkg).getContentDom();
-            lst = contentDom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "userdefined");
+            lst = contentDom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "userdefined");
             Assert.assertTrue(lst.getLength() == 1);
             node = lst.item(0);
             Assert.assertTrue(node instanceof MyOwnPrivateOdfElement);

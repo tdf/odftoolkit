@@ -29,17 +29,17 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 
 public interface OdfTableRowProperties {
     public final static OdfStyleProperty BackgroundColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "background-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color"));
     public final static OdfStyleProperty BreakAfter = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "break-after"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-after"));
     public final static OdfStyleProperty BreakBefore = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "break-before"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-before"));
     public final static OdfStyleProperty KeepTogether = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.FO), "keep-together"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.FO), "keep-together"));
     public final static OdfStyleProperty MinRowHeight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "min-row-height"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "min-row-height"));
     public final static OdfStyleProperty RowHeight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "row-height"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "row-height"));
     public final static OdfStyleProperty UseOptimalRowHeight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get(OdfNamespace.get(OdfNamespaceNames.STYLE), "use-optimal-row-height"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "use-optimal-row-height"));
 }

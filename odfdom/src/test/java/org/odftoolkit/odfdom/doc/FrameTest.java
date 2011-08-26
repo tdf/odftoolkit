@@ -39,7 +39,7 @@ public class FrameTest {
 	public void testFrame() {
 		try {
 			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("frame.odt"));
-			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getNamespaceUri(), "frame");
+			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getUri(), "frame");
 			Assert.assertEquals(lst.getLength(), 1);
 			Node node = lst.item(0);
 			Assert.assertTrue(node instanceof OdfDrawFrame);

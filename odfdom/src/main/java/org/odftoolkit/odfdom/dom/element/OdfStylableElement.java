@@ -120,16 +120,16 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
     /**
      * Set style attribute value with uri and name
      * @param uri   The namespace uri
-     * @param name  The attribute name
+     * @param qname  The qualified name of the attribute
      * @param value The attribute value
      */
     @Override
-    public void setAttributeNS(String uri, String name, String value)
+    public void setAttributeNS(String uri, String qname, String value)
     {
-        super.setAttributeNS(uri, name, value);
+        super.setAttributeNS(uri, qname, value);
 
         // check if style has changed
-        if( mStyleNameAttrib.equals(uri, name) )
+        if( mStyleNameAttrib.equals(uri, qname) )
         {
             OdfStyle autoStyle = null;
             
@@ -176,7 +176,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
      */
     public void setStyleName(String name )
     {
-        setAttributeNS(mStyleNameAttrib.getUri(), mStyleNameAttrib.getLocalName(), name);
+        setAttributeNS(mStyleNameAttrib.getUri(), mStyleNameAttrib.getQName(), name);
     }
 
     /**
@@ -447,7 +447,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
         }
     }
 
-    // todo: rename after get rid of deprecated getDocumentStyle()
+    // todo: rename after newName rid of deprecated getDocumentStyle()
     private OdfStyle getOfficeStyle()
     {           
         OdfOfficeStyles styles = this.mOdfDocument.getDocumentStyles();

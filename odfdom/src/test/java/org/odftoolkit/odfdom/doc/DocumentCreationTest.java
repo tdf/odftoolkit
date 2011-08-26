@@ -39,6 +39,7 @@ import org.odftoolkit.odfdom.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.doc.style.OdfStyleTextProperties;
 import org.odftoolkit.odfdom.doc.text.OdfTextSpan;
 import org.odftoolkit.odfdom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
@@ -67,7 +68,7 @@ public class DocumentCreationTest {
 
     public DocumentCreationTest() {
         xpath = XPathFactory.newInstance().newXPath();
-        xpath.setNamespaceContext(new OdfNamespace());
+        xpath.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
     }
 
     @Test
@@ -125,7 +126,8 @@ public class DocumentCreationTest {
             //// W3C XPath initialization ''(JDK5 functionality)''  - XPath is the path within the XML file
             //// (Find XPath examples here: http://www.w3.org/TR/xpath#path-abbrev)
             XPath xpath2 = XPathFactory.newInstance().newXPath();
-            xpath2.setNamespaceContext(new OdfNamespace());
+            xpath2.setNamespaceContext(OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE));
+
 
             // receiving the first paragraph "//text:p[1]" ''(JDK5 functionality)''
             TextPElement para = (TextPElement) xpath2.evaluate("//text:p[1]", odfContent, XPathConstants.NODE);

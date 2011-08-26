@@ -21,8 +21,6 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.table;
 
-import org.odftoolkit.odfdom.doc.table.OdfTable;
-import org.odftoolkit.odfdom.doc.table.OdfTableColumn;
 import java.util.List;
 import java.util.Arrays;
 
