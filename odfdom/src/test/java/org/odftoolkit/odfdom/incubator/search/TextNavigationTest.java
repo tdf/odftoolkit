@@ -53,7 +53,7 @@ public class TextNavigationTest {
 	@Before
 	public void setUp() {
 		try {
-			doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getTestResource(TEXT_FILE));
+			doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");

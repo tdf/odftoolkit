@@ -43,7 +43,7 @@ public class PresentationAPITest {
 
 	public PresentationAPITest() {
 		try {
-			odfdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource("presentation.odp"));
+			odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("presentation.odp"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -90,7 +90,7 @@ public class PresentationAPITest {
 			Assert.assertEquals("slide-name-1", presentation.getPageAt(1).getDrawNameAttribute());
 			Assert.assertEquals("slide-name-2", presentation.getPageAt(2).getDrawNameAttribute());
 
-			odfdoc.save(ResourceUtilities.createTestResource(PRSENTATION_FILE1));
+			odfdoc.save(ResourceUtilities.newTestOutputFile(PRSENTATION_FILE1));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,14 +101,14 @@ public class PresentationAPITest {
 	@Test
 	public void testCreatePresentationPage() {
 		try {
-			OdfDocument odpdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource(PRSENTATION_FILE2));
+			OdfDocument odpdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(PRSENTATION_FILE2));
 			OdfOfficePresentation presentation = OdfElement.findFirstChildNode(OdfOfficePresentation.class, odpdoc.getOfficeBody());
 			presentation.createTemplatePage(TemplatePageType.DEFAULT, "slide_deault");
 			presentation.createTemplatePage(TemplatePageType.ONLYTITLE, "slide_title");
 			presentation.createTemplatePage(TemplatePageType.OUTLINE, "slide_outline");
 			presentation.createTemplatePage(TemplatePageType.TEXT, "slide_text");
 			presentation.createTemplatePage(TemplatePageType.TWOBLOCK, "slide_twoblock");
-			odpdoc.save(ResourceUtilities.createTestResource("TestPresentationCreatePage.odp"));
+			odpdoc.save(ResourceUtilities.newTestOutputFile("TestPresentationCreatePage.odp"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -118,11 +118,11 @@ public class PresentationAPITest {
 	@Test
 	public void testPresentationEmbedDocumentPage() {
 		try {
-			OdfDocument odpdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource(PRSENTATION_FILE3));
+			OdfDocument odpdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(PRSENTATION_FILE3));
 			OdfOfficePresentation presentation = OdfElement.findFirstChildNode(OdfOfficePresentation.class, odpdoc.getOfficeBody());
 			presentation.deletePage(1);
 			presentation.deletePage("chartInside");
-			odpdoc.save(ResourceUtilities.createTestResource(PRSENTATION_FILE4));
+			odpdoc.save(ResourceUtilities.newTestOutputFile(PRSENTATION_FILE4));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");

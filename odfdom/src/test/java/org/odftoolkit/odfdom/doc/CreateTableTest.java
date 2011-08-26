@@ -84,7 +84,7 @@ public class CreateTableTest {
 
             td3.setProperty(StyleTableColumnPropertiesElement.ColumnWidth, "6cm");
 
-            doc.getOdfDocument().save(ResourceUtilities.createTestResource("tabletest.odt"));
+            doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("tabletest.odt"));
 
         } catch (Exception e) {
             e.printStackTrace();

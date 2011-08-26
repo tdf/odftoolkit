@@ -184,9 +184,7 @@ public class OdfPackage {
      * Creates an OdfPackage from the OpenDocument provided by a filePath.
      *
      * <p>OdfPackage relies on the file being available for read access over
-     * the whole lifecycle of OdfPackage. Please refer to the documentation
-     * of the save methods to decide whether overwriting the input file
-     * is allowed.</p>
+     * the whole lifecycle of OdfPackage. </p>
      *
      * @param odfPath - the path to the ODF document.
      * @throws java.lang.Exception - if the package could not be created
@@ -200,9 +198,7 @@ public class OdfPackage {
      * Creates an OdfPackage from the OpenDocument provided by a File.    
      *
      * <p>OdfPackage relies on the file being available for read access over
-     * the whole lifecycle of OdfPackage. Please refer to the documentation
-     * of the save methods to decide whether overwriting the input file
-     * is allowed.</p>
+     * the whole lifecycle of OdfPackage.</p>
      *
      * @param odfFile - a file representing the ODF document
      * @throws java.lang.Exception - if the package could not be created
@@ -217,9 +213,7 @@ public class OdfPackage {
      *
      * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
      * read access needed by OdfPackage, the InputStream is cached. This usually
-     * takes more time compared to the other constructors.
-     * An advantage of caching is that there are no problems overwriting
-     * an input file.</p>
+     * takes more time compared to the other constructors. </p>
      *
      * @param odfStream - an inputStream representing the ODF package
      * @throws java.lang.Exception - if the package could not be created
@@ -237,9 +231,7 @@ public class OdfPackage {
      * Loads an OdfPackage from the given filePath.
      *
      * <p>OdfPackage relies on the file being available for read access over
-     * the whole lifecycle of OdfPackage. Please refer to the documentation
-     * of the save methods to decide whether overwriting the input file
-     * is allowed.</p>
+     * the whole lifecycle of OdfPackage.</p>
      *
      * @param odfPath - the filePath to the ODF package
      * @return the OpenDocument document represented as an OdfPackage
@@ -253,9 +245,7 @@ public class OdfPackage {
      * Loads an OdfPackage from the OpenDocument provided by a File.
      *
      * <p>OdfPackage relies on the file being available for read access over
-     * the whole lifecycle of OdfPackage. Please refer to the documentation
-     * of the save methods to decide whether overwriting the input file
-     * is allowed.</p>
+     * the whole lifecycle of OdfPackage. </p>
      *
      * @param odfFile - a File to loadPackage content from
      * @return the OpenDocument document represented as an OdfPackage
@@ -270,9 +260,7 @@ public class OdfPackage {
      *
      * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
      * read access needed by OdfPackage, the InputStream is cached. This usually
-     * takes more time compared to the other loadPackage methods.
-     * An advantage of caching is that there are no problems overwriting
-     * an input file.</p>
+     * takes more time compared to the other loadPackage methods.</p>
      *
      * @param odfStream - an inputStream representing the ODF package
      * @return the OpenDocument document represented as an OdfPackage
@@ -371,15 +359,8 @@ public class OdfPackage {
      * @return The manifest file entry will be returned.
      */
     public OdfFileEntry getFileEntry(String packagePath) {
-        packagePath = ensureValidPackagePath(packagePath);
-        if (mManifestEntries == null) {
-            try {
-                parseManifest();
-            } catch (Exception ex) {
-                mLog.log(Level.SEVERE, null, ex);
-            }
-        }
-        return mManifestEntries.get(packagePath);
+        packagePath = ensureValidPackagePath(packagePath);		
+        return getManifestEntries().get(packagePath);
     }
 
     /**
@@ -387,14 +368,7 @@ public class OdfPackage {
      * @return The manifest file entries will be returned.
      */
     public Set<String> getFileEntries() {
-        if (mManifestEntries == null) {
-            try {
-                parseManifest();
-            } catch (Exception ex) {
-                mLog.log(Level.SEVERE, null, ex);
-            }
-        }
-        return mManifestEntries.keySet();
+        return getManifestEntries().keySet();
     }
 
     /**
@@ -414,14 +388,6 @@ public class OdfPackage {
     /**
      * Save the package to given filePath.
      *
-     * <p>If the input file has been cached (this is the case when loading from an
-     * InputStream), the input file can be overwritten.</p>
-     *
-     * <p>Otherwise it's allowed to overwrite the input file as long as
-     * the same path name is used that was used for loading (no symbolic link
-     * foo2.odt pointing to the loaded file foo1.odt, no network path X:\foo.odt
-     * pointing to the loaded file D:\foo.odt).</p>
-     *
      * @param odfPath - the path to the ODF package destination
      * @throws java.lang.Exception - if the package could not be saved
      */
@@ -432,14 +398,7 @@ public class OdfPackage {
 
     /**
      * Save package to a given File.
-     *
-     * <p>If the input file has been cached (this is the case when loading from an
-     * InputStream), the input file can be overwritten.</p>
-     *
-     * <p>Otherwise it's allowed to overwrite the input file as long as
-     * the same path name is used that was used for loading (no symbolic link
-     * foo2.odt pointing to the loaded file foo1.odt, no network path X:\foo.odt
-     * pointing to the loaded file D:\foo.odt).</p>
+     * After saving it is still necessary to close the package to have again full access about the file.
      *
      * @param odfFile - the File to save the ODF package to
      * @throws java.lang.Exception - if the package could not be saved
@@ -458,41 +417,25 @@ public class OdfPackage {
         }
         FileOutputStream fos = new FileOutputStream(odfFile);
         save(fos, baseURI);
-        if (baseURI.equals(mBaseURI)) {
-            mZipFile.close();
-            this.initialize(odfFile);
-        }
+    }
+
+
+    public void save(OutputStream odfStream) throws Exception {
+        save(odfStream, null);
     }
 
     /**
      * Save an ODF document to the OutputStream.
      *
-     * <p>If the input file has been cached (this is the case when loading from an
-     * InputStream), the input file can be overwritten.</p>
-     *
-     * <p>If not, the OutputStream may not point to the input file! Otherwise
-     * this will result in unwanted behaviour and broken files.</p>
-     *
      * @param odfStream - the OutputStream to insert content to
+     * @param baseURI - a URI for the package to be stored
      * @throws java.lang.Exception - if the package could not be saved
      */
-    public void save(OutputStream odfStream) throws Exception {
-        save(odfStream, null);
-    }
-
     private void save(OutputStream odfStream, String baseURI) throws Exception {
 
         mBaseURI = baseURI;
 
-        if (mManifestEntries == null) {
-            try {
-                parseManifest();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        OdfFileEntry rootEntry = mManifestEntries.get(SLASH);
+        OdfFileEntry rootEntry = getManifestEntries().get(SLASH);
         if (rootEntry == null) {
             rootEntry = new OdfFileEntry(SLASH, mMediaType);
             mManifestList.add(0, rootEntry.getPath());
@@ -521,8 +464,7 @@ public class OdfPackage {
                 ze = new ZipEntry(key);
             }
             ze.setTime(modTime);
-            // 2DO Svante: No dependency to layer above!
-            if (key.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath()) || key.equals(OdfDocument.OdfXMLFile.META.getFileName())) {
+            if (key.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
                 ze.setMethod(ZipEntry.STORED);
             } else {
                 ze.setMethod(ZipEntry.DEFLATED);
@@ -556,14 +498,11 @@ public class OdfPackage {
      * must be read and stored in memory.
      */
     private void cacheContent() throws Exception {
-        // read all entries
-        // parse manifest first to make sure this won't happen later
-        if (mManifestEntries == null) {
-            parseManifest();
-        }
-        // open all entries once so the data is cached
+        // read all entries        
+		getManifestEntries();
         Iterator<String> entries = mZipEntries.keySet().iterator();
         while(entries.hasNext()) {
+			// open all entries once so the data is cached
             ZipEntry nextElement = mZipEntries.get(entries.next());
             String entryPath = nextElement.getName();
             getBytes(entryPath);
@@ -571,8 +510,9 @@ public class OdfPackage {
     }
 
     /**
-     * Close the OdfPackage and release all temporary created data.
-     * Acter execution of this method, this class is no longer usable.
+     * Close the OdfPackage after it is no longer needed.
+     * Even after saving it is still necessary to close the package to have again full access about the file.
+     * Closing the OdfPackage will release all temporary created data.
      * Do this as the last action to free resources.
      * Closing an already closed document has no effect.
      */
@@ -675,10 +615,7 @@ public class OdfPackage {
         } else {
             size = data.length;
         }
-        if (mManifestEntries == null) {
-            parseManifest();
-        }
-        OdfFileEntry fileEntry = mManifestEntries.get(packagePath);
+        OdfFileEntry fileEntry = getManifestEntries().get(packagePath);
         ZipEntry zipEntry = mZipEntries.get(packagePath);
         if (zipEntry == null) {
             return;
@@ -1013,9 +950,9 @@ public class OdfPackage {
                         // media type for folder has to be set for embedded objects
                         if (!OdfPackage.OdfFile.MANIFEST.packagePath.equals(d)) {
                             if (mediaType != null) {
-                                if (mManifestEntries.get(d) == null) {
+                                if (getManifestEntries().get(d) == null) {
                                     OdfFileEntry fileEntry = new OdfFileEntry(d, mediaType);
-                                    mManifestEntries.put(d, fileEntry);
+                                    getManifestEntries().put(d, fileEntry);
                                     if (!mManifestList.contains(d)) {
                                         mManifestList.add(d);
                                     }
@@ -1045,9 +982,9 @@ public class OdfPackage {
             }
             if (!OdfPackage.OdfFile.MANIFEST.packagePath.equals(packagePath)) {
                 if (mediaType != null) {
-                    if (mManifestEntries.get(packagePath) == null) {
+                    if (getManifestEntries().get(packagePath) == null) {
                         OdfFileEntry fileEntry = new OdfFileEntry(packagePath, mediaType);
-                        mManifestEntries.put(packagePath, fileEntry);
+                        getManifestEntries().put(packagePath, fileEntry);
                         if (!mManifestList.contains(packagePath)) {
                             mManifestList.add(packagePath);
                         }
@@ -1106,11 +1043,7 @@ public class OdfPackage {
         mZipEntries.put(zipe.getName(), zipe);
     }
 
-    /**
-     * Get Manifest as String
-     * NOTE: This functionality should better be moved to a DOM based Manifest class
-     */
-    String getManifestAsString() {
+	private HashMap<String, OdfFileEntry> getManifestEntries(){
         if (mManifestEntries == null) {
             try {
                 parseManifest();
@@ -1120,7 +1053,17 @@ public class OdfPackage {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }
+			return mManifestEntries;
+        }else
+			return mManifestEntries;
+	}
+
+    /**
+     * Get Manifest as String
+     * NOTE: This functionality should better be moved to a DOM based Manifest class
+     */
+    String getManifestAsString() {
+		HashMap<String, OdfFileEntry> manifestEntries = getManifestEntries();
         StringBuffer buf = new StringBuffer();
 
         buf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -1290,7 +1233,6 @@ public class OdfPackage {
                 }
             }
         }
-
         return data;
     }
 
@@ -1304,13 +1246,23 @@ public class OdfPackage {
             throws Exception {
 
         packagePath = ensureValidPackagePath(packagePath);
-        ZipEntry entry = null;
-        if ((entry = mZipEntries.get(packagePath)) != null) {
-            return mZipFile.getInputStream(entry);
+
+        if ( packagePath.equals(OdfPackage.OdfFile.MANIFEST.packagePath) && (mManifestEntries == null) ) {
+            ZipEntry entry = null;
+            if ((entry = mZipEntries.get(packagePath)) != null) {
+                return mZipFile.getInputStream(entry);
+            }
         }
+
         if (mPackageEntries.contains(packagePath) && mTempFiles.get(packagePath) != null) {
             return new BufferedInputStream(new FileInputStream(mTempFiles.get(packagePath)));
         }
+
+        // else we always cache here and return a ByteArrayInputStream because if
+        // we would return ZipFile getInputStream(entry) we would not be
+        // able to read 2 Entries at the same time. This is a limitation of the ZipFile class.
+        // As it would be quite a common thing to read the content.xml and the styles.xml
+        // simultanously when using XSLT on OdfPackages we want to circumvent this limitation
 
         byte[] data = getBytes(packagePath);
         if (data != null && data.length != 0) {
@@ -1419,11 +1371,12 @@ public class OdfPackage {
 ////        return stream;
 //    }
     public void remove(String packagePath) {
+        HashMap<String, OdfFileEntry> manifestEntries = getManifestEntries();
         if (mManifestList != null && mManifestList.contains(packagePath)) {
             mManifestList.remove(packagePath);
-        }
-        if (mManifestEntries != null && mManifestEntries.containsKey(packagePath)) {
-            mManifestEntries.remove(packagePath);
+        }		
+        if (manifestEntries != null && manifestEntries.containsKey(packagePath)) {
+            manifestEntries.remove(packagePath);
         }
         if (mZipEntries != null && mZipEntries.containsKey(packagePath)) {
             mZipEntries.remove(packagePath);
@@ -1570,7 +1523,7 @@ public class OdfPackage {
                 throws SAXException {
             if (localName.equals("file-entry")) {
                 if (_currentFileEntry.getPath() != null) {
-                    mManifestEntries.put(_currentFileEntry.getPath(), _currentFileEntry);
+                    getManifestEntries().put(_currentFileEntry.getPath(), _currentFileEntry);
                 }
                 mManifestList.add(_currentFileEntry.getPath());
                 _currentFileEntry = null;

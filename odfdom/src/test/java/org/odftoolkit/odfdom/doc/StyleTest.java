@@ -276,7 +276,7 @@ public class StyleTest {
     @Test
     public void testAutomaticStyleSharing() {
         try {
-            OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getTestResource("sharedautostyles.odt"));
+            OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("sharedautostyles.odt"));
             OdfFileDom dom = odfDocument.getContentDom();
 
             NodeList lst = dom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "p");

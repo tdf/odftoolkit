@@ -62,7 +62,7 @@ public class CreateChildrenElementsTest {
 	public void testCreatChildrenForPresentation() {
 		try {
 			
-			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource("presentation.odp"));
+			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("presentation.odp"));
             
 			OdfOfficePresentation presentation = OdfElement.findFirstChildNode( OdfOfficePresentation.class, odfdoc.getOfficeBody() );
             Assert.assertNotNull(presentation);
@@ -77,7 +77,7 @@ public class CreateChildrenElementsTest {
             Assert.assertEquals(presentationTest.getNodeName(), "draw:page");
             Assert.assertEquals(presentationTest.getDrawMasterPageNameAttribute(), "NewPage");
 			
-            odfdoc.save(ResourceUtilities.createTestResource("CreatChildrenForPresentationTest.odp"));
+            odfdoc.save(ResourceUtilities.newTestOutputFile("CreatChildrenForPresentationTest.odp"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,7 +89,7 @@ public class CreateChildrenElementsTest {
 	public void testCreatChildrenForChart() {
 		try {
 			
-            OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getTestResource("empty.odt")).getContentDom();
+            OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
             
             // find the last paragraph
             NodeList lst = doc.getElementsByTagNameNS(
@@ -116,7 +116,7 @@ public class CreateChildrenElementsTest {
             Assert.assertEquals(plotArea,chartTest.getChildNodes().item(0));
             Assert.assertEquals(chartTest.getChildNodes().item(0).getNodeName(), "chart:plot-area");
 			
-            doc.getOdfDocument().save(ResourceUtilities.createTestResource("CreatChildrenForChartTest.odt"));
+            doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForChartTest.odt"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -127,7 +127,7 @@ public class CreateChildrenElementsTest {
     @Test
     public void testCreateChildrenForTable() {
         try {            
-            OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getTestResource("empty.odt")).getContentDom();
+            OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
             
             // find the last paragraph
             NodeList lst = doc.getElementsByTagNameNS(
@@ -159,7 +159,7 @@ public class CreateChildrenElementsTest {
             Assert.assertTrue(tableRowTest.getChildNodes().item(0) instanceof TableTableCellElement);
             Assert.assertEquals(tableRowTest.getChildNodes().item(0).getNodeName(), "table:table-cell");
                                     
-            doc.getOdfDocument().save(ResourceUtilities.createTestResource("CreateChildrenForTableTest.odt"));
+            doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreateChildrenForTableTest.odt"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -171,7 +171,7 @@ public class CreateChildrenElementsTest {
 	public void testCreatChildrenForText() {
 		try {
 			
-            OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getTestResource("empty.odt")).getContentDom();
+            OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
             
             // find the last paragraph
             NodeList lst = doc.getElementsByTagNameNS(
@@ -209,7 +209,7 @@ public class CreateChildrenElementsTest {
             Assert.assertEquals(listItemTest.getChildNodes().item(3).getNodeName(), "text:soft-page-break");
                         
        
-            doc.getOdfDocument().save(ResourceUtilities.createTestResource("CreatChildrenForTextTable.odt"));
+            doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForTextTable.odt"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -255,7 +255,7 @@ public class CreateChildrenElementsTest {
             Assert.assertEquals(((DrawLineElement) graphicTest.getChildNodes().item(0)).getSvgY1Attribute().toString(),"15cm");
             Assert.assertEquals(((DrawLineElement) graphicTest.getChildNodes().item(0)).getSvgY2Attribute().toString(),"20cm");
             
-            doc.getOdfDocument().save(ResourceUtilities.createTestResource("CreatChildrenForGraphic.odg"));
+            doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForGraphic.odg"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -282,7 +282,7 @@ public class CreateChildrenElementsTest {
             StyleStyleElement styleTest = (StyleStyleElement) xpath.evaluate("//style:style[last()]", doc.getStylesDom() , XPathConstants.NODE);
             Assert.assertEquals(styleTest, parent);
             
-            doc.getContentDom().getOdfDocument().save(ResourceUtilities.createTestResource("CreatChildrenForStyles.odt"));
+            doc.getContentDom().getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForStyles.odt"));
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -333,7 +333,7 @@ public class CreateChildrenElementsTest {
             Assert.assertEquals(listItemTest.getChildNodes().item(3).getNodeName(), "text:soft-page-break");
                         
        
-            doc.getOdfDocument().save(ResourceUtilities.createTestResource("CreatChildrenForEmbedded.odt"));
+            doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForEmbedded.odt"));
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -374,7 +374,7 @@ public class CreateChildrenElementsTest {
             Assert.assertEquals(((TableTableColumnElement) spreadsheetTest.getChildNodes().item(0)).getAttribute("table:style-name"),"co1");
             Assert.assertEquals(((TableTableColumnElement) spreadsheetTest.getChildNodes().item(0)).getAttribute("table:default-cell-style-name"),"Default");
        
-            doc.getOdfDocument().save(ResourceUtilities.createTestResource("CreatChildrenForSpreadsheet.ods"));
+            doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForSpreadsheet.ods"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -392,7 +392,7 @@ public class CreateChildrenElementsTest {
 	            form.setFormNameAttribute("NewFrom");
 	            FormFormElement formTest = (FormFormElement) xpath.evaluate("//form:form[last()]", doc.getContentDom() , XPathConstants.NODE);
 	            Assert.assertEquals(formTest, form);
-	            doc.getContentDom().getOdfDocument().save(ResourceUtilities.createTestResource("CreatChildrenForForm.odt"));
+	            doc.getContentDom().getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForForm.odt"));
 	            
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -420,7 +420,7 @@ public class CreateChildrenElementsTest {
 	            
 	            Assert.assertEquals(anim,animTest);
 				
-	            odfdoc.save(ResourceUtilities.createTestResource("CreatChildrenForAnimateTest.odp"));
+	            odfdoc.save(ResourceUtilities.newTestOutputFile("CreatChildrenForAnimateTest.odp"));
 
 			} catch (Exception e) {
 				e.printStackTrace();

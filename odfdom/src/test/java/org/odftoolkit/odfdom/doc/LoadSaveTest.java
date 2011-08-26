@@ -23,9 +23,7 @@ package org.odftoolkit.odfdom.doc;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -42,10 +40,10 @@ public class LoadSaveTest {
     @Test
     public void testLoadSave() {
         try {
-            OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getTestResource(SOURCE));
+            OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE));
             Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
             String baseURI = odfDocument.getBaseURI();
-            Assert.assertEquals(ResourceUtilities.getTestResourceURI(SOURCE).toString(), baseURI);
+            Assert.assertEquals(ResourceUtilities.getURI(SOURCE).toString(), baseURI);
 
             Document odfContent = odfDocument.getContentDom();
             NodeList lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "p");
@@ -53,8 +51,8 @@ public class LoadSaveTest {
             String oldText = "Changed!!!";
             node.setTextContent(oldText);
 
-            odfDocument.save(ResourceUtilities.createTestResource(TARGET));
-            odfDocument = OdfDocument.loadDocument(ResourceUtilities.getTestResource(TARGET));
+            odfDocument.save(ResourceUtilities.newTestOutputFile(TARGET));
+            odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
 
             odfContent = odfDocument.getContentDom();
             lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "p");

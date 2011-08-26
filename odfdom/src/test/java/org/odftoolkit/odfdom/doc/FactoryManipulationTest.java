@@ -43,7 +43,7 @@ public class FactoryManipulationTest {
         try {
             // MyOwnPrivateSpanClass_1 is derived from OdfSpan (doc layer)
             OdfElementFactory.mapElementOdfNameToClass(TextSpanElement.ELEMENT_NAME, MyOwnPrivateSpanClass_1.class);
-            OdfPackage pkg = OdfPackage.loadPackage(ResourceUtilities.getTestResource("factorymanipulation.odt"));        
+            OdfPackage pkg = OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath("factorymanipulation.odt"));
             OdfFileDom contentDom = OdfDocument.loadDocument(pkg).getContentDom();
             NodeList lst = contentDom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "span");
             Assert.assertTrue(lst.getLength() == 1);

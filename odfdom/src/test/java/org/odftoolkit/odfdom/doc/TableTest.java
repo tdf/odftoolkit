@@ -49,7 +49,7 @@ public class TableTest {
     @Test
     public void testTable() {
         try {
-            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource("table.odt"));
+            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("table.odt"));
             NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getNamespaceUri(), "table");
             int tscount = 0;
             for (int i = 0; i < lst.getLength(); i++) {
@@ -75,7 +75,7 @@ public class TableTest {
     @Test
     public void testCellsAndRows() {
         try {
-            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource("table.odt"));
+            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("table.odt"));
             NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.TABLE.getNamespaceUri(), "table-cell");
             for (int i = 0; i < lst.getLength(); i++) {
                 Node node = lst.item(i);

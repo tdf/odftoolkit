@@ -63,7 +63,7 @@ public class ImageTest {
 	@SuppressWarnings("unchecked")
 	public void testAddImageByUri() {
 		try {
-			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResource("image.odt"));
+			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("image.odt"));
 			final OdfPackage pkg = doc.getPackage();
 			NodeAction addImages = new NodeAction() {
 
@@ -88,6 +88,8 @@ public class ImageTest {
 			};
 			addImages.performAction(doc.getContentDom().getDocumentElement(),
 					null);
+			String svante = ResourceUtilities.getTestOutput("add-images-by-uri.odt");
+			
 			doc.save(ResourceUtilities.getTestOutput("add-images-by-uri.odt"));
 
 		} catch (Exception e) {
@@ -98,7 +100,7 @@ public class ImageTest {
 
 	@Test
 	public void testRemoveImage() throws Exception {
-		OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResource("image.odt"));
+		OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("image.odt"));
 		final OdfPackage pkg = doc.getPackage();
 		NodeAction<?> removeImages = new NodeAction<Object>() {
 
@@ -123,7 +125,7 @@ public class ImageTest {
 	public void testImageInTextDocument() {
 		try {
 			OdfTextDocument doc = OdfTextDocument.newTextDocument();
-			String imagePath1 = doc.newImage(ResourceUtilities.getTestResourceURI("test.jpg"));
+			String imagePath1 = doc.newImage(ResourceUtilities.getURI("test.jpg"));
 			Assert.assertTrue(getImageCount(doc) == 1);
 			OdfDrawImage image = getImageByPath(doc, imagePath1).get(0);
 			Assert.assertTrue(image.getImageUri().toString().equals(imagePath1));
@@ -144,10 +146,10 @@ public class ImageTest {
 			OdfDrawFrame frame3 = (OdfDrawFrame) image3.getParentNode();
 			frame3.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.CHAR.toString());
 
-			doc.save(ResourceUtilities.createTestResource("addimages.odt"));
+			doc.save(ResourceUtilities.newTestOutputFile("addimages.odt"));
 
 			//load the file again
-			OdfTextDocument doc1 = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getTestResource("addimages.odt"));
+			OdfTextDocument doc1 = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("addimages.odt"));
 
 			Assert.assertTrue(getImageCount(doc1) == 3);
 			Assert.assertTrue(getImageByPath(doc1, imagePath2).size() == 2);
@@ -155,7 +157,7 @@ public class ImageTest {
 			Assert.assertTrue(getImageCount(doc1) == 1);
 			Assert.assertTrue(getImageByPath(doc1, imagePath3).size() == 0);
 			Assert.assertNull(doc1.getPackage().getBytes(imagePath3));
-			doc1.save(ResourceUtilities.createTestResource("removeimages.odt"));
+			doc1.save(ResourceUtilities.newTestOutputFile("removeimages.odt"));
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -167,7 +169,7 @@ public class ImageTest {
 	@Test
 	public void testRemoveAllImage() {
 		try {
-			OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getTestResource("addimages.odt"));
+			OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("addimages.odt"));
 
 			Set<String> pathSet = getImagePathSet(doc);
 			for (String pathIter : pathSet) {
@@ -182,7 +184,7 @@ public class ImageTest {
 				deleteImageByPath(doc, pathIter);
 			}
 			Assert.assertTrue(getImageCount(doc) == 0);
-			doc.save(ResourceUtilities.createTestResource("removeAllImages.odt"));
+			doc.save(ResourceUtilities.newTestOutputFile("removeAllImages.odt"));
 
 		} catch (Exception ex) {
 			ex.printStackTrace();

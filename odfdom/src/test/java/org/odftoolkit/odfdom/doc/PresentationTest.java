@@ -53,7 +53,7 @@ public class PresentationTest
     public PresentationTest()
     {
         try {                
-            odfdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource("presentation.odp"));
+            odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("presentation.odp"));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());

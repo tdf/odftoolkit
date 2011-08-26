@@ -68,7 +68,7 @@ public class TextSelectionTest {
 	@Before
 	public void setUp() {
 		try {
-			doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getTestResource(TEXT_FILE));
+			doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
 			contentDOM = doc.getContentDom();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,7 +118,7 @@ public class TextSelectionTest {
 		Assert.assertFalse(nextsearch.hasNext());
 
 		try {
-			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_DELETE));
+			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_DELETE));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -159,7 +159,7 @@ public class TextSelectionTest {
 		Assert.assertTrue(i == j);
 
 		try {
-			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_COPYTO));
+			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_COPYTO));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -200,7 +200,7 @@ public class TextSelectionTest {
 		Assert.assertTrue(i == j);
 
 		try {
-			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_COPYTO1));
+			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_COPYTO1));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -236,7 +236,7 @@ public class TextSelectionTest {
 		}
 
 		try {
-			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_STYLE));
+			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_STYLE));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -291,7 +291,7 @@ public class TextSelectionTest {
 		}
 
 		try {
-			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_REPLACE));
+			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_REPLACE));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -320,7 +320,7 @@ public class TextSelectionTest {
 		}
 
 		try {
-			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_HREF));
+			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_HREF));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -349,7 +349,7 @@ public class TextSelectionTest {
 		}
 
 		try {
-			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_DELETE_PATTERN));
+			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_DELETE_PATTERN));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");

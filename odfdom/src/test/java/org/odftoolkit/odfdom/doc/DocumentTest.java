@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.doc.text.OdfTextListStyle;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleTextUnderlineStyleAttribute;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
@@ -58,7 +57,7 @@ public class DocumentTest {
     @Test
     public void testParser() {
         try {
-            OdfDocument.loadDocument(ResourceUtilities.getTestResource(TEST_FILE));
+            OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
@@ -68,7 +67,7 @@ public class DocumentTest {
     @Test
     public void testGetContentRoot() {
         try {
-            OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getTestResource(TEST_FILE_WITHOUT_OPT));
+            OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_WITHOUT_OPT));
             Assert.assertNotNull(odt.getContentRoot());
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,11 +78,11 @@ public class DocumentTest {
     @Test
     public void testDumpDom() {
         try {
-            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource(TEST_FILE));
+            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
 
             Transformer trans = TransformerFactory.newInstance().newTransformer();
             trans.setOutputProperty("indent", "yes");
-            trans.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+           // trans.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
             System.out.println("content.xml -------------------");
             trans.transform(new DOMSource(odfdoc.getContentDom()), new StreamResult(System.out));
@@ -102,7 +101,7 @@ public class DocumentTest {
     @Test
     public void testStylesDom() {
         try {
-            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource(TEST_FILE));
+            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
 
             OdfFileDom stylesDom = odfdoc.getStylesDom();
             Assert.assertNotNull(stylesDom);
@@ -149,7 +148,7 @@ public class DocumentTest {
     public void testContentNode()
     {
         try {
-            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource(TEST_FILE));
+            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
             
             OdfFileDom contentDom = odfdoc.getContentDom();
             
@@ -182,7 +181,7 @@ public class DocumentTest {
     @Test
     public void testSaveDocument() {
         try {
-            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource(TEST_FILE));
+            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
             new NodeAction<String>() {
 
                 @Override
@@ -193,7 +192,7 @@ public class DocumentTest {
                 }
             };
 //            replaceText.performAction(e, "X");            
-            odfdoc.save(ResourceUtilities.createTestResource("list-out.odt"));
+            odfdoc.save(ResourceUtilities.newTestOutputFile("list-out.odt"));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
@@ -228,7 +227,7 @@ public class DocumentTest {
     public void testParsingOfInvalidAttribute() {
         try {
             // file with invalid value for enum text-underline-style
-            File testfile = ResourceUtilities.createTestResource("InvalidUnderlineAttribute.odt");
+            File testfile = ResourceUtilities.newTestOutputFile("InvalidUnderlineAttribute.odt");
             
             // Test1: Loading shouldn't fail just because of one invalid attribute
             OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(testfile);

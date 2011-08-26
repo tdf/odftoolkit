@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class DocumentCreationTest {
 
-    private static final String TEST_FILE_FOLDER = ResourceUtilities.getTestResourceFolder();
+    private static final String TEST_FILE_FOLDER = ResourceUtilities.getTestOutputFolder();
     private static final String TEST_FILE_EMBEDDED = TEST_FILE_FOLDER + "testEmbeddedDoc.odt";
     private static final String TEST_PIC = "test.jpg";    
     private static final String TEST_SPAN_TEXT = " Find Nemo!!!";
@@ -76,27 +76,27 @@ public class DocumentCreationTest {
             OdfTextDocument odtDoc1 = OdfTextDocument.newTextDocument();
             OdfTextDocument odtDoc2 = OdfTextDocument.newTextDocument();
             odtDoc2.getContentDom();
-            odtDoc1.save(ResourceUtilities.createTestResource("TestEmpty_OdfTextDocument.odt"));
+            odtDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfTextDocument.odt"));
 
             OdfGraphicsDocument odgDoc1 = OdfGraphicsDocument.newGraphicsDocument();
             OdfGraphicsDocument odgDoc2 = OdfGraphicsDocument.newGraphicsDocument();
             odgDoc2.getContentDom();
-            odgDoc1.save(ResourceUtilities.createTestResource("TestEmpty_OdfGraphicsDocument.odg"));
+            odgDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfGraphicsDocument.odg"));
 
             OdfSpreadsheetDocument odsDoc1 = OdfSpreadsheetDocument.newSpreadsheetDocument();
             OdfSpreadsheetDocument odsDoc2 = OdfSpreadsheetDocument.newSpreadsheetDocument();
             odsDoc2.getContentDom();
-            odsDoc1.save(ResourceUtilities.createTestResource("TestEmpty_OdfSpreadsheetDocument.ods"));
+            odsDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfSpreadsheetDocument.ods"));
 
             OdfPresentationDocument odpDoc1 = OdfPresentationDocument.newPresentationDocument();
             OdfPresentationDocument odpDoc2 = OdfPresentationDocument.newPresentationDocument();
             odpDoc2.getContentDom();
-            odpDoc1.save(ResourceUtilities.createTestResource("TestEmpty_OdfPresentationDocument.odp"));
+            odpDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfPresentationDocument.odp"));
 
             OdfChartDocument odcDoc1 = OdfChartDocument.newChartDocument();
             OdfChartDocument odcDoc2 = OdfChartDocument.newChartDocument();
             odcDoc2.getContentDom();
-            odcDoc1.save(ResourceUtilities.createTestResource("TestEmpty_OdfChartDocument.odc"));
+            odcDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfChartDocument.odc"));
 
             /////////////////////////////////////////
             // ODFDOM PACKAGE LAYER - WIKI EXAMPLE //          
@@ -106,10 +106,10 @@ public class DocumentCreationTest {
             OdfPackage pkg = OdfPackage.loadPackage(ResourceUtilities.getTestResourceAsStream("TestEmpty_OdfTextDocument.odt"));
 
             // loads the images from the URLs and inserts the image in the package, adapting the manifest
-            pkg.insert(ResourceUtilities.getTestResourceURI(TEST_PIC), "Pictures/" + TEST_PIC, null);
+            pkg.insert(ResourceUtilities.getURI(TEST_PIC), "Pictures/" + TEST_PIC, null);
 			//Deactivated as test fail, when test machine is not online (painful for offline work)
             //pkg.insert(new URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"), "someweiredname/tableandfruits.jpg", null);
-            pkg.save(ResourceUtilities.createTestResource("odfdom-wiki-package.odt"));
+            pkg.save(ResourceUtilities.newTestOutputFile("odfdom-wiki-package.odt"));
 
             
             /////////////////////////////////////
@@ -140,13 +140,13 @@ public class DocumentCreationTest {
             para.appendChild(odfFrame);
             OdfDrawImage odfImage = (OdfDrawImage) OdfElementFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
             odfFrame.appendChild(odfImage);
-            odfImage.newImage(ResourceUtilities.getTestResourceURI(TEST_PIC));
+            odfImage.newImage(ResourceUtilities.getURI(TEST_PIC));
             
             OdfDrawImage odfImage2 = (OdfDrawImage) OdfElementFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
             odfFrame.appendChild(odfImage2);
 			//Deactivated as test fail, when test machine is not online (painful for offline work)
             //odfImage2.newImage(new URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"));
-            odfDoc.save(ResourceUtilities.createTestResource("odfdom-wiki-dom.odt"));
+            odfDoc.save(ResourceUtilities.newTestOutputFile("odfdom-wiki-dom.odt"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -193,7 +193,7 @@ public class DocumentCreationTest {
             System.out.println("Embedded Object6 media-type: " + embeddedObject6.getMediaType());
             Assert.assertEquals(embeddedObject6.getMediaType(), OdfDocument.OdfMediaType.PRESENTATION.toString());
 
-            odtDoc1.save(ResourceUtilities.createTestResource("TestCreate_EmbeddedDocuments.odt"));
+            odtDoc1.save(ResourceUtilities.newTestOutputFile("TestCreate_EmbeddedDocuments.odt"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -432,7 +432,7 @@ public class DocumentCreationTest {
             
         OdfDrawImage image = new OdfDrawImage(dom);
         drawFrame.appendChild(image);
-        image.newImage(ResourceUtilities.getTestResourceURI(TEST_PIC));
+        image.newImage(ResourceUtilities.getURI(TEST_PIC));
     }
 
     private void addFrameForEmbeddedDoc(OdfFileDom dom, TextPElement para,String path) {
