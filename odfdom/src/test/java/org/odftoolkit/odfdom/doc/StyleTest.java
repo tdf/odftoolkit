@@ -36,11 +36,14 @@ import org.odftoolkit.odfdom.doc.style.OdfStyleTabStop;
 import org.odftoolkit.odfdom.doc.style.OdfStyleTabStops;
 import org.odftoolkit.odfdom.doc.style.OdfStyleTextProperties;
 import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
+import org.odftoolkit.odfdom.utils.ResourceUtilities;
+import org.w3c.dom.NodeList;
 
 public class StyleTest {
 
@@ -266,4 +269,24 @@ public class StyleTest {
         }
     }
 
+    /**
+     * Setting style property on an automatic style, which occurs on multiple
+     * elements and does not have a style parent results in an error (Bug 124).
+     */
+    @Test
+    public void testAutomaticStyleSharing() {
+        try {
+            OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getTestResource("sharedautostyles.odt"));
+            OdfFileDom dom = odfDocument.getContentDom();
+
+            NodeList lst = dom.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getNamespaceUri(), "p");
+            Assert.assertTrue(lst.getLength() == 2);
+
+            OdfTextParagraph p = (OdfTextParagraph)lst.item(0);
+            p.setProperty(OdfStyleTextProperties.FontSize, "17pt");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
+        }
+    }
 }

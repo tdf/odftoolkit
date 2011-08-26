@@ -85,7 +85,8 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
                 }
                 else
                 {
-                    sParentStyleName = new StyleNameRef(mAutomaticStyle.getStyleParentStyleNameAttribute());
+                    String nameAttr = mAutomaticStyle.getStyleParentStyleNameAttribute();
+                    sParentStyleName = new StyleNameRef(nameAttr == null ? "" : nameAttr);
                     mAutomaticStyle.removeStyleUser(this);
                     mAutomaticStyle = automatic_styles.makeStyleUnique(mAutomaticStyle);
                 }
