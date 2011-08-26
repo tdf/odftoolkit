@@ -134,7 +134,7 @@
         <xsl:variable name="remainder" select="substring-after($list,'_')"/>
         <xsl:if test="$remainder">
             <xsl:call-template name="check-element-list">
-                <xsl:with-param name="element-list" select="$remainder"/>
+                <xsl:with-param name="element-list" select="concat('_',$remainder)"/>
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
@@ -278,6 +278,7 @@
     
     <!-- select all <element> nodes in the file or in included files -->
     <xsl:template match="rng:element">                
+        <xsl:call-template name="create-elem-root-elem-list"/>
         <xsl:call-template name="create-elem-parent-elem-list"/>
         <xsl:call-template name="create-attr-list"/>
         <xsl:call-template name="create-child-elem-list"/>
@@ -431,38 +432,54 @@
         <xsl:param name="elem-name" select="@name"/>
         <xsl:variable name="parents" select="ancestor::rng:grammar/rng:element[rng:element[@name=$elem-name]]"/>
         <xsl:variable name="count" select="count($parents)"/>
-        <xsl:call-template name="new-line"/>
-        <text:p text:style-name="Parent_20_Element_20_List">
-            <xsl:text>The </xsl:text>
-            <text:span text:style-name="Element">
-                <xsl:text>&lt;</xsl:text><xsl:value-of select="$elem-name"/><xsl:text>&gt;</xsl:text>
-            </text:span>
-            <xsl:text> element </xsl:text>
-            <xsl:choose>
-                <xsl:when test="$count = 1">
-                    <xsl:text> may be used with the following element: </xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:text> may be used with the following elements: </xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
-            <!-- collect elements -->
-            <xsl:for-each select="$parents">
-                <xsl:sort select="@name"/>
-                <xsl:variable name="name" select="@name"/>
+        <xsl:if test="$count > 0">
+            <xsl:call-template name="new-line"/>
+            <text:p text:style-name="Parent_20_Element_20_List">
+                <xsl:text>The </xsl:text>
+                <text:span text:style-name="Element">
+                    <xsl:text>&lt;</xsl:text><xsl:value-of select="$elem-name"/><xsl:text>&gt;</xsl:text>
+                </text:span>
+                <xsl:text> element </xsl:text>
                 <xsl:choose>
-                    <xsl:when test="position() = 1"/>
-                    <xsl:when test="position() = last()">
-                        <xsl:text> and </xsl:text>
+                    <xsl:when test="$count = 1">
+                        <xsl:text> may be used with the following element: </xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text>, </xsl:text>
+                        <xsl:text> may be used with the following elements: </xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
-                <text:span text:style-name="Element"><xsl:text>&lt;</xsl:text><xsl:value-of select="@name"/><xsl:text>&gt;</xsl:text></text:span><xsl:text> </xsl:text><text:reference-ref text:ref-name="{concat($element-prefix,$name)}" text:reference-format="chapter">?</text:reference-ref>
-            </xsl:for-each>
-            <xsl:text>.</xsl:text>
-        </text:p>
+                <!-- collect elements -->
+                <xsl:for-each select="$parents">
+                    <xsl:sort select="@name"/>
+                    <xsl:variable name="name" select="@name"/>
+                    <xsl:choose>
+                        <xsl:when test="position() = 1"/>
+                        <xsl:when test="position() = last()">
+                            <xsl:text> and </xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>, </xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <text:span text:style-name="Element"><xsl:text>&lt;</xsl:text><xsl:value-of select="@name"/><xsl:text>&gt;</xsl:text></text:span><xsl:text> </xsl:text><text:reference-ref text:ref-name="{concat($element-prefix,$name)}" text:reference-format="chapter">?</text:reference-ref>
+                </xsl:for-each>
+                <xsl:text>.</xsl:text>
+            </text:p>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template name="create-elem-root-elem-list">
+        <xsl:param name="elem-name" select="@name"/>
+        <xsl:if test="ancestor::rng:grammar/rng:start/rng:element[@name=$elem-name]">
+            <xsl:call-template name="new-line"/>
+            <text:p text:style-name="Parent_20_Element_20_List">
+                <xsl:text>The </xsl:text>
+                <text:span text:style-name="Element">
+                    <xsl:text>&lt;</xsl:text><xsl:value-of select="$elem-name"/><xsl:text>&gt;</xsl:text>
+                </text:span>
+                <xsl:text> element is a root element.</xsl:text>
+            </text:p>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template name="new-line">
