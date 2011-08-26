@@ -2,64 +2,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.odftoolkit</groupId>
-  <artifactId>relaxng2template</artifactId>
+  <artifactId>odfdom-codegen</artifactId>
   <version>0.7-SNAPSHOT</version>
   <name>ODFDOM Code Generator</name>
+  <parent>
+    <groupId>org.odftoolkit</groupId>
+    <artifactId>odfdom-parent</artifactId>
+    <version>0.7-SNAPSHOT</version>
+    <relativePath>../parent/pom.xml</relativePath>
+  </parent>
+
   <scm>
-    <connection>scm:hg:${codegen.local.repo}/codegen</connection>
-    <developerConnection>scm:hg:${codegen.local.repo}/codegen</developerConnection>
+    <connection>scm:hg:http://http://odftoolkit.org/hg/odfdom~developer/codegen</connection>
+    <developerConnection>scm:hg:https://odftoolkit.org/hg/odfdom~developer/codegen</developerConnection>
   </scm>
+
   <build>
-    <defaultGoal>install</defaultGoal>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <index>true</index>
-          </archive>
-          <manifest>
-            <mainClass>org.odftoolkit.odfdom.codegen.CodeGen</mainClass>
-          </manifest>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-eclipse-plugin</artifactId>
-        <configuration>
-          <outputDirectory>${eclipse.outputDirectory}</outputDirectory>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <includes>
-            <include>**/*Test.java</include>
-            <include>**/*TestCase.java</include>
-            <include>**/*TestCases.java</include>
-          </includes>
-<!-- do not exclude **/Abstract*Test.java **/Abstract*TestCase.java -->
-          <excludes>
-            <exclude>**/*$*</exclude>
-          </excludes>
-          <reportFormat>${surefire.format}</reportFormat>
-          <useFile>${surefire.usefile}</useFile>
-          <forkMode>${surefire.fork.mode}</forkMode>
-          <childDelegation>false</childDelegation>
-          <argLine>${surefire.fork.vmargs}</argLine>
-          <systemProperties>
-            <property>
-              <name>java.awt.headless</name>
-              <value>${java.awt.headless}</value>
-            </property>
-            <property>
-              <name>surefire.fork.vmargs</name>
-              <value>${surefire.fork.vmargs}</value>
-            </property>
-          </systemProperties>
-        </configuration>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-jar-plugin</artifactId>
+	<configuration>
+	  <archive>
+	    <index>true</index>
+	  </archive>
+	  <manifest>
+	    <mainClass>org.odftoolkit.odfdom.codegen.CodeGen</mainClass>
+	  </manifest>
+	</configuration>
       </plugin>
     </plugins>
   </build>
@@ -67,118 +37,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.5</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.5</version>
-        <configuration>
-          <attach>true</attach>
-          <source>1.5</source>
-          <quiet>true</quiet>
-          <javadocVersion>1.5</javadocVersion>
-          <encoding>UTF-8</encoding>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.4.3</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.0.2</version>
-        <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
-          <maxmem>256M</maxmem>
-          <fork>${compiler.fork}</fork>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.2</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.2</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>2.2</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2-beta-2</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.0</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.5.1</version>
-      </plugin>
-    </plugins>
-  </reporting>
-  <profiles>
-    <profile>
-      <id>fastinstall</id>
-      <properties>
-        <maven.test.skip>true</maven.test.skip>
-      </properties>
-    </profile>
-    <profile>
-<!-- default profile enables checkstyle and Xlint stuff -->
-      <id>sourcecheck</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-<!-- not yet
-                            <showDeprecation>true</showDeprecation>
--->
-              <showWarnings>true</showWarnings>
-              <compilerArgument>${compile.flags}</compilerArgument>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>set.eclipse.output</id>
-      <properties>
-        <eclipse.outputDirectory>${basedir}/eclipse-classes</eclipse.outputDirectory>
-      </properties>
-    </profile>
-  </profiles>
 </project>
