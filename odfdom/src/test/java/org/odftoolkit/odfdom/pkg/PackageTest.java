@@ -49,15 +49,43 @@ public class PackageTest {
 	private static final String mImagePath = "src/main/javadoc/doc-files/";
 	private static final String mImageName = "ODFDOM-Layered-Model.png";
 	private static final String mImageMediaType = "image/png";
-
 	private static final String XSL_CONCAT = "xslt/concatfiles.xsl";
 	private static final String XSL_OUTPUT = "ResolverTest.html";
-	private static final String SIMPLE_ODT = "test2.odt";
-
 	//ToDo: Package Structure for test output possbile?
 	//private static final String XSL_OUTPUT ="pkg" + File.separator + "ResolverTest.html";
+	private static final String SIMPLE_ODT = "test2.odt";
+	private static final String ODF_FORMULAR_TEST_FILE = "SimpleFormula.odf";
+	private static final String IMAGE_TEST_FILE = "test.jpg";
 
 	public PackageTest() {
+	}
+
+	@Test
+	public void loadPackage() {
+		try {
+
+			// LOAD PACKAGE FORMULA
+			mLog.info("Loading an unsupported ODF Formula document as an ODF Package!");
+			OdfPackage formulaPackage = OdfPackage.loadPackage(ResourceUtilities.getTestResourceAsStream(ODF_FORMULAR_TEST_FILE));
+			Assert.assertNotNull(formulaPackage);
+
+			// LOAD PACKAGE IMAGE
+			mLog.info("Loading an unsupported image file as an ODF Package!");
+			try {
+				// Exception is expected!
+				OdfPackage.loadPackage(ResourceUtilities.getTestResourceAsStream(IMAGE_TEST_FILE));
+				Assert.fail();
+			} catch (IllegalArgumentException e) {
+				if (!e.getMessage().contains("Could not unzip the file")) {
+					e.printStackTrace();
+					Assert.fail();
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test

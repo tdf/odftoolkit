@@ -1,21 +1,21 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
  * Copyright 2009 IBM. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -150,11 +150,12 @@ public abstract class OdfDocument {
 		public static OdfMediaType getOdfMediaType(String mediaType) {
 			String mediaTypeShort = mediaType.substring(mediaType.lastIndexOf(".") + 1, mediaType.length());
 			mediaTypeShort = mediaTypeShort.replace('-', '_').toUpperCase();
-			OdfMediaType odfMediaType = OdfMediaType.valueOf(mediaTypeShort);
-			if (odfMediaType == null) {
-				throw new IllegalArgumentException("Given mediaType '" + mediaType + "' is not an ODF mediatype!");
+			try {
+				OdfMediaType odfMediaType = OdfMediaType.valueOf(mediaTypeShort);
+				return odfMediaType;
+			} catch (IllegalArgumentException e) {
+				throw new IllegalArgumentException("Given mediaType '" + mediaType + "' is either not yet supported or not an ODF mediatype!");
 			}
-			return odfMediaType;
 		}
 
 		@Override
@@ -167,7 +168,8 @@ public abstract class OdfDocument {
 	 * Creates one of the ODF documents based a given mediatype.
 	 *
 	 * @param odfMediaType The ODF Mediatype of the ODF document to be created.
-	 * @return The ODF document, which mediatype dependends on the parameter
+	 * @return The ODF document, which mediatype dependends on the parameter or
+	 *	NULL if media type were not supported.
 	 */
 	private static OdfDocument newDocument(OdfMediaType odfMediaType, OdfPackage pkg) {
 		OdfDocument newDoc = null;
@@ -181,6 +183,9 @@ public abstract class OdfDocument {
 			newDoc = new OdfGraphicsDocument();
 		} else if (odfMediaType.equals(OdfMediaType.CHART)) {
 			newDoc = new OdfChartDocument();
+		} else {
+			// if MediaType is not supported
+			return null;
 		}
 		newDoc.setMediaType(odfMediaType);
 		newDoc.setPackage(pkg);
@@ -220,6 +225,7 @@ public abstract class OdfDocument {
 	 * Loads an OpenDocument from the given resource
 	 * @param res a resource containing the document
 	 * @return the OpenDocument document
+	 *		  or NULL if the media type is not supported by ODFDOM.
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	static protected OdfDocument loadTemplate(Resource res) throws Exception {
@@ -245,6 +251,7 @@ public abstract class OdfDocument {
 	 *
 	 * @param path - the path from where the document can be loaded
 	 * @return the OpenDocument from the given path
+	 *		  or NULL if the media type is not supported by ODFDOM.
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	public static OdfDocument loadDocument(String path) throws Exception {
@@ -1071,10 +1078,10 @@ public abstract class OdfDocument {
 	private static boolean isExternalReference(String ref) {
 		boolean isExternalReference = false;
 		// if the reference is a external relative filePath..
-		if (ref.startsWith(TWO_DOTS) ||
-				// or absolute filePath
-				ref.startsWith(SLASH) ||
-				// or absolute IRI
+		if (ref.startsWith(TWO_DOTS)
+				|| // or absolute filePath
+				ref.startsWith(SLASH)
+				|| // or absolute IRI
 				ref.contains(COLON)) {
 			isExternalReference = true;
 		}
@@ -1224,7 +1231,7 @@ public abstract class OdfDocument {
 		return null;
 
 	}
-	
+
 	/**
 	 * remove an embedded Document from the current OdfDocument
 	 * @param pathToObject path to the directory of the embedded ODF document (always relative to ODF package root).
@@ -1259,5 +1266,4 @@ public abstract class OdfDocument {
 			mRootDocument.mCachedDocuments.remove(pathToObject);
 		}
 	}
-
 }

@@ -22,6 +22,7 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.io.File;
+import java.util.logging.Logger;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -48,11 +49,79 @@ import org.w3c.dom.Node;
 
 public class DocumentTest {
 
-    private static final String TEST_FILE = "test2.odt";
-    private static final String TEST_FILE_WITHOUT_OPT = "no_size_opt.odt";
+
+	private Logger mLog = Logger.getLogger(DocumentTest.class.getName());
+	private static final String TEST_FILE = "test2.odt";
+	private static final String TEST_FILE_WITHOUT_OPT = "no_size_opt.odt";
+	private static final String ODF_FORMULAR_TEST_FILE = "SimpleFormula.odf";
+	private static final String IMAGE_TEST_FILE = "test.jpg";
+	private static final String GENERATED_INVALID_SPREADSHEET = "invalid.ods";
+	private static final String ZERO_BYTE_SPREADSHEET = "empty_file.ods";
 
     public DocumentTest() {
     }
+
+	@Test
+	public void loadDocument() {
+		try {
+
+			// LOAD INVALID GENERATED SPREADSHEET DOCUMENT
+			mLog.info("Loading an supported ODF Spreadsheet document as an ODF Document!");
+			try {
+				// Should work!
+				OdfDocument ods = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(GENERATED_INVALID_SPREADSHEET));
+				Assert.assertNotNull(ods);
+			} catch (Exception e) {
+				e.printStackTrace();
+				Assert.fail();
+			}
+
+
+			// LOAD EMPTY DOCUMENT
+			mLog.info("Loading an empty document as an ODF Document!");
+			try {
+				// Should throw adequate error message!
+				OdfDocument ods = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(ZERO_BYTE_SPREADSHEET));
+				Assert.assertNull(ods);
+			} catch (Exception e) {
+				if (!e.getMessage().contains("The empty file")) {
+					e.printStackTrace();
+					Assert.fail();
+				}
+			}
+
+			// LOAD FORMULA DOCUMENT
+			mLog.info("Loading an unsupported ODF Formula document as an ODF Document!");
+			try {
+				// Exception is expected!
+				OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(ODF_FORMULAR_TEST_FILE));
+				Assert.fail();
+			} catch (IllegalArgumentException e) {
+				if (!e.getMessage().contains("is either not yet supported or not an ODF mediatype!")) {
+					e.printStackTrace();
+					Assert.fail();
+				}
+			}
+
+			// LOAD DOCUMENT IMAGE
+			mLog.info("Loading an unsupported image file as an ODF Document!");
+			try {
+				// Exception is expected!
+				OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(IMAGE_TEST_FILE));
+				Assert.fail();
+			} catch (IllegalArgumentException e) {
+				if (!e.getMessage().contains("Could not unzip the file")) {
+					e.printStackTrace();
+					Assert.fail();
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+	}
+
 
     @Test
     public void testParser() {
