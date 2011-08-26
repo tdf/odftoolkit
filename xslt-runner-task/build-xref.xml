@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
+
+  Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+
+  Use is subject to license terms.
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  use this file except in compliance with the License. You may obtain a copy
+  of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
+  obtain a copy of the License at http://odftoolkit.org/docs/license.txt
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+-->
+<project name="odfxsltrunnertask" default="default" basedir=".">
+    <description>Builds, tests, and runs the project odfxsltrunnertask.</description>
+    <import file="nbproject/build-impl.xml"/>
+
+    <property file="ant.properties"/>
+    <import file="${project.odfxsltrunner}/build-schemas.xml"/>
+    
+    <property name="opendocument.v12.schema.xref" value="OpenDocument-xref-schema-v1.2${opendocument.v12.schema.state}.rng"/>
+    <property name="opendocument.v12.schema.dtype" value="OpenDocument-dtype-schema-v1.2${opendocument.v12.schema.state}.rng"/>
+
+    <target name="add-v12-xref" depends="init,jar,-create-v12-xref-schema" 
+            description="Add cross references to ODF 1.2 specification.">
+        <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+        <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
+        <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-embedded-xref.xsl"
+                 in="${opendocument.v12.spec-source.main}"
+                 out="${dist.dir}/xref/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"
+                 force="false">
+            <param name="xref-schema-file" expression="${xref-schema-file}"/>
+            <param name="keep-anchors" expression="true"/>
+        </odfxslt>
+    </target>
+    
+    <target name="remove-v12-xref" depends="init,jar,-create-v12-xref-schema" 
+            description="Remove cross references to ODF 1.2 specification.">
+        <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+        <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
+        <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-embedded-xref.xsl"
+                 in="${opendocument.v12.spec-source.main}"
+                 out="${dist.dir}/no-xref/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"
+                 force="false">
+            <param name="xref-schema-file" expression="${xref-schema-file}"/>
+            <param name="add-xrefs" expression="false"/>
+            <param name="keep-anchors" expression="true"/>
+        </odfxslt>
+    </target>
+    
+    <target name="add-v12-default-values" depends="init,-create-v12-xref-schema" 
+            description="Add default values to the ODF 1.2 specification.">
+        <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+        <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
+        <property name="target-file" value="${dist.dir}/default-values/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"/>
+        <condition property="force">
+            <not>
+                <uptodate srcfile="${xref-schema-file}" targetfile="${target-file}"/>
+            </not>
+        </condition>
+        <odfxslt style="${project.odfxsltrunner}/sample_xslt/add-default-values.xsl"
+            in="${opendocument.v12.spec-source.main}"
+            out="${target-file}"
+            force="${force}">
+            <param name="xref-schema-file" expression="${xref-schema-file}"/>
+        </odfxslt>
+    </target>
+
+    <target name="create-v12-attribute-xref-ods" depends="init,jar,-create-v12-dtype-schema" 
+            description="Creates cross reference document from ODF 1.2 schema.">
+        <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+        <copy file="${project.odfxsltrunner}/misc/odf-attribute-xref.ods" todir="${dist.dir}/attr-xref"/>
+        <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-attribute-xref.xsl"
+            infile="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}"
+            out="${dist.dir}/attr-xref/odf-attribute-xref.ods"
+            template="true"/>
+    </target>
+    
+    <target name="-create-v12-xref-schema" depends="init,-get-v12-schemas">
+        <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl" 
+                    in="${v12.schema.dir}/${opendocument.v12.schema.strict}" 
+                    out="${build.dir}/schema/flat/${opendocument.v12.schema.xref}">  
+            <param name="incl-conditions" expression="false"/>
+            <param name="incl-default-values" expression="true"/>
+            <param name="incl-types" expression="false"/>
+            <param name="incl-elements" expression="true"/>
+        </xslt>
+    </target>
+    
+    <target name="-create-v12-dtype-schema" depends="init,-get-v12-schemas">
+        <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl" 
+                    in="${v12.schema.dir}/${opendocument.v12.schema.strict}" 
+                    out="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}">  
+            <param name="incl-conditions" expression="false"/>
+            <param name="incl-default-values" expression="true"/>
+            <param name="incl-types" expression="true"/>
+            <param name="incl-elements" expression="false"/>
+        </xslt>
+    </target>
+    
+</project>
