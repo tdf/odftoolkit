@@ -19,6 +19,41 @@
 
   <build>
   </build>
+  <profiles>
+    <profile>
+      <id>codegen</id>
+      <build>
+	<defaultGoal>generate-sources</defaultGoal>
+	<plugins>
+	  <plugin>
+	    <groupId>org.odftoolkit</groupId>
+	    <artifactId>maven-codegen-plugin</artifactId>
+	    <version>${project.version}</version>
+	    <executions>
+	      <execution>
+		<id>generate-sources</id>
+		<phase>generate-sources</phase>
+		<goals><goal>codegen</goal></goals>
+		<configuration>
+		  <sourceRoot>${basedir}/src</sourceRoot>
+		  <schemaFile>${basedir}/../schema/OpenDocument-strict-schema-v1.1.rng</schemaFile>
+		  <configFile>${basedir}/../codegen/config.xml</configFile>
+		  <templateFile>${basedir}/../codegen/javacodetemplate.xml</templateFile>
+		</configuration>
+	      </execution>
+	    </executions>
+	    <configuration>
+	      <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
+	      <schemaFile>${basedir}/../schema/OpenDocument-strict-schema-v1.1.rng</schemaFile>
+	      <configFile>${basedir}/../codegen/config.xml</configFile>
+	      <templateFile>${basedir}/../codegen/javacodetemplate.xml</templateFile>
+	    </configuration>
+	  </plugin>
+	</plugins>
+      </build>
+    </profile>
+  </profiles>
+
   <dependencies>
     <dependency>
       <groupId>xerces</groupId>
