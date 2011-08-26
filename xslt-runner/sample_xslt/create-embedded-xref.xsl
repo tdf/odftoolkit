@@ -122,7 +122,7 @@
             </xsl:call-template>
         </xsl:if>
         <xsl:variable name="fp" select="starts-with(.,$property-prefix)"/>
-        <xsl:variable name="attr-defs" select="document($xref-schema-file)/rng:grammar/rng:element/rng:attribute[@name=$attr-name]"/>
+        <xsl:variable name="attr-defs" select="document($xref-schema-file)/rng:grammar/rng:element[(starts-with(@name,'style:') and contains(@name,'-properties'))=$fp]/rng:attribute[@name=$attr-name]"/>
         <xsl:if test="$check-xref-anchors and not($attr-defs)">
             <xsl:message>XRef &quot;<xsl:value-of select="."/>&quot;: No attribute definition found in schema for &quot;<xsl:value-of select="$attr-name"/>&quot;.</xsl:message>
         </xsl:if>
@@ -320,9 +320,9 @@
     <xsl:template match="rng:element">                
         <xsl:call-template name="create-elem-root-elem-list"/>
         <xsl:call-template name="create-elem-parent-elem-list"/>
-        <xsl:call-template name="create-attr-list"/>
         <xsl:choose>
             <xsl:when test="@name='office:script'">
+                <xsl:call-template name="create-attr-list"/>
                 <text:p text:style-name="Child_20_Element_20_List">
                     <xsl:text>The </xsl:text>
                     <text:span text:style-name="Element">
@@ -338,6 +338,7 @@
                 <xsl:message>Element <xsl:value-of select="@name"/>: No child element info added (element may have any content).</xsl:message>
             </xsl:when>
             <xsl:otherwise>
+                <xsl:call-template name="create-attr-list"/>
                 <xsl:call-template name="create-child-elem-list"/>
                 <xsl:call-template name="create-text-info"/>
             </xsl:otherwise>
@@ -349,7 +350,7 @@
         <xsl:param name="element-list"/>
         <xsl:param name="fp"/>
         <xsl:variable name="name" select="@name"/>
-        <xsl:if test="not(preceding::rng:attribute[@name=$name])">
+        <xsl:if test="not(preceding::rng:attribute[@name=$name and (starts-with(ancestor::rng:element/@name,'style:') and contains(ancestor::rng:element/@name,'-properties'))=$fp])">
             <xsl:call-template name="create-attr-parent-elem-list">
                 <xsl:with-param name="element-list" select="$element-list"/>
                 <xsl:with-param name="fp" select="$fp"/>
@@ -668,6 +669,11 @@
                 <xsl:message>Attribute <xsl:value-of select="$attr-name"/>: No type info added (type too complex).</xsl:message>
             </xsl:when>
             <xsl:when test="not($element-list)">
+                <xsl:variable name="count" select="count(*)"/>
+                <xsl:variable name="ename" select="name(*)"/>
+                <xsl:if test="ancestor::rng:grammar/rng:element[(starts-with(@name,'style:') and contains(@name,'-properties'))=$fp]/rng:attribute[@name=$attr-name and (count(*)!=$count or name(*[1]) != $ename)]">
+                    <xsl:message>Attribute <xsl:value-of select="$attr-name"/>: Multiple attribute definitions do exist but no element constrained anchors. this: <xsl:value-of select="$count"/>/<xsl:value-of select="$ename"/> </xsl:message>
+                </xsl:if>
                 <xsl:apply-templates select="*" mode="attr-value">
                     <xsl:with-param name="attr-name" select="$attr-name"/>
                 </xsl:apply-templates>
