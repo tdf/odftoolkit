@@ -183,6 +183,11 @@ public class OdfPackage {
     /**
      * Creates an OdfPackage from the OpenDocument provided by a filePath.
      *
+     * <p>OdfPackage relies on the file being available for read access over
+     * the whole lifecycle of OdfPackage. Please refer to the documentation
+     * of the save methods to decide whether overwriting the input file
+     * is allowed.</p>
+     *
      * @param odfPath - the path to the ODF document.
      * @throws java.lang.Exception - if the package could not be created
      */
@@ -193,6 +198,12 @@ public class OdfPackage {
 
     /**
      * Creates an OdfPackage from the OpenDocument provided by a File.    
+     *
+     * <p>OdfPackage relies on the file being available for read access over
+     * the whole lifecycle of OdfPackage. Please refer to the documentation
+     * of the save methods to decide whether overwriting the input file
+     * is allowed.</p>
+     *
      * @param odfFile - a file representing the ODF document
      * @throws java.lang.Exception - if the package could not be created
      */
@@ -203,6 +214,12 @@ public class OdfPackage {
 
     /**
      * Creates an OdfPackage from the OpenDocument provided by a InputStream.
+     *
+     * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
+     * read access needed by OdfPackage, the InputStream is cached. This usually
+     * takes more time compared to the other constructors.
+     * An advantage of caching is that there are no problems overwriting
+     * an input file.</p>
      *
      * @param odfStream - an inputStream representing the ODF package
      * @throws java.lang.Exception - if the package could not be created
@@ -219,6 +236,11 @@ public class OdfPackage {
     /**
      * Loads an OdfPackage from the given filePath.
      *
+     * <p>OdfPackage relies on the file being available for read access over
+     * the whole lifecycle of OdfPackage. Please refer to the documentation
+     * of the save methods to decide whether overwriting the input file
+     * is allowed.</p>
+     *
      * @param odfPath - the filePath to the ODF package
      * @return the OpenDocument document represented as an OdfPackage
      * @throws java.lang.Exception - if the package could not be loaded
@@ -230,6 +252,11 @@ public class OdfPackage {
     /**
      * Loads an OdfPackage from the OpenDocument provided by a File.
      *
+     * <p>OdfPackage relies on the file being available for read access over
+     * the whole lifecycle of OdfPackage. Please refer to the documentation
+     * of the save methods to decide whether overwriting the input file
+     * is allowed.</p>
+     *
      * @param odfFile - a File to loadPackage content from
      * @return the OpenDocument document represented as an OdfPackage
      * @throws java.lang.Exception - if the package could not be loaded
@@ -240,6 +267,12 @@ public class OdfPackage {
 
     /**
      * Creates an OdfPackage from the OpenDocument provided by a InputStream.
+     *
+     * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
+     * read access needed by OdfPackage, the InputStream is cached. This usually
+     * takes more time compared to the other loadPackage methods.
+     * An advantage of caching is that there are no problems overwriting
+     * an input file.</p>
      *
      * @param odfStream - an inputStream representing the ODF package
      * @return the OpenDocument document represented as an OdfPackage
@@ -381,6 +414,14 @@ public class OdfPackage {
     /**
      * Save the package to given filePath.
      *
+     * <p>If the input file has been cached (this is the case when loading from an
+     * InputStream), the input file can be overwritten.</p>
+     *
+     * <p>Otherwise it's allowed to overwrite the input file as long as
+     * the same path name is used that was used for loading (no symbolic link
+     * foo2.odt pointing to the loaded file foo1.odt, no network path X:\foo.odt
+     * pointing to the loaded file D:\foo.odt).</p>
+     *
      * @param odfPath - the path to the ODF package destination
      * @throws java.lang.Exception - if the package could not be saved
      */
@@ -391,6 +432,14 @@ public class OdfPackage {
 
     /**
      * Save package to a given File.
+     *
+     * <p>If the input file has been cached (this is the case when loading from an
+     * InputStream), the input file can be overwritten.</p>
+     *
+     * <p>Otherwise it's allowed to overwrite the input file as long as
+     * the same path name is used that was used for loading (no symbolic link
+     * foo2.odt pointing to the loaded file foo1.odt, no network path X:\foo.odt
+     * pointing to the loaded file D:\foo.odt).</p>
      *
      * @param odfFile - the File to save the ODF package to
      * @throws java.lang.Exception - if the package could not be saved
@@ -415,17 +464,22 @@ public class OdfPackage {
         }
     }
 
+    /**
+     * Save an ODF document to the OutputStream.
+     *
+     * <p>If the input file has been cached (this is the case when loading from an
+     * InputStream), the input file can be overwritten.</p>
+     *
+     * <p>If not, the OutputStream may not point to the input file! Otherwise
+     * this will result in unwanted behaviour and broken files.</p>
+     *
+     * @param odfStream - the OutputStream to insert content to
+     * @throws java.lang.Exception - if the package could not be saved
+     */
     public void save(OutputStream odfStream) throws Exception {
         save(odfStream, null);
     }
 
-    /**
-     * Save an ODF document to the OutputStream.
-     *
-     * @param odfStream - the OutputStream to insert content to
-     * @param baseURI - a URI for the package to be stored
-     * @throws java.lang.Exception - if the package could not be saved
-     */
     private void save(OutputStream odfStream, String baseURI) throws Exception {
 
         mBaseURI = baseURI;

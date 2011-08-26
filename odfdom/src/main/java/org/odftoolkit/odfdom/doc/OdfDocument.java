@@ -240,6 +240,11 @@ public abstract class OdfDocument {
 	/**
 	 * Loads an OdfDocument from the provided path.
 	 *
+	 * <p>OdfDocument relies on the file being available for read access over
+	 * the whole lifecycle of OdfDocument. Please refer to the documentation
+	 * of the save methods to decide whether overwriting the input file
+	 * is allowed.</p>
+	 *
 	 * @param path - the path from where the document can be loaded
 	 * @return the OpenDocument from the given path
 	 * @throws java.lang.Exception - if the document could not be created.
@@ -256,6 +261,12 @@ public abstract class OdfDocument {
 	/**
 	 * Creates an OdfDocument from the OpenDocument provided by a resource Stream.
 	 *
+	 * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
+	 * read access needed by OdfDocument, the InputStream is cached. This usually
+	 * takes more time compared to the other loadDocument methods.
+	 * An advantage of caching is that there are no problems overwriting
+	 * an input file.</p>
+	 *
 	 * @param inStream - the InputStream of the ODF document.
 	 * @return the document created from the given InputStream
 	 * @throws java.lang.Exception - if the document could not be created.
@@ -266,6 +277,11 @@ public abstract class OdfDocument {
 
 	/**
 	 * Creates an OdfDocument from the OpenDocument provided by a File.
+	 *
+	 * <p>OdfDocument relies on the file being available for read access over
+	 * the whole lifecycle of OdfDocument. Please refer to the documentation
+	 * of the save methods to decide whether overwriting the input file
+	 * is allowed.</p>
 	 *
 	 * @param file - a file representing the ODF document.
 	 * @return the document created from the given File
@@ -651,8 +667,17 @@ public abstract class OdfDocument {
 	}
 
 	/**
-	 * Save the document to given path.Delegate to the root document
+	 * Save the document to given path. Delegate to the root document
 	 * and save possible embedded OdfDocuments.
+	 *
+	 * <p>If the input file has been cached (this is the case when loading from an
+	 * InputStream), the input file can be overwritten.</p>
+	 *
+	 * <p>Otherwise it's allowed to overwrite the input file as long as
+	 * the same path name is used that was used for loading (no symbolic link
+	 * foo2.odt pointing to the loaded file foo1.odt, no network path X:\foo.odt
+	 * pointing to the loaded file D:\foo.odt).</p>
+	 *
 	 * @param path - the path to the file
 	 * @throws java.lang.Exception  if the document could not be saved
 	 */
@@ -674,6 +699,15 @@ public abstract class OdfDocument {
 	/**
 	 * Save the document to given file. Delegate to the root document
 	 * and save possible embedded OdfDocuments.
+	 *
+	 * <p>If the input file has been cached (this is the case when loading from an
+	 * InputStream), the input file can be overwritten.</p>
+	 *
+	 * <p>Otherwise it's allowed to overwrite the input file as long as
+	 * the same path name is used that was used for loading (no symbolic link
+	 * foo2.odt pointing to the loaded file foo1.odt, no network path X:\foo.odt
+	 * pointing to the loaded file D:\foo.odt).</p>
+	 *
 	 * @param file - the file to save the document
 	 * @throws java.lang.Exception  if the document could not be saved
 	 */
@@ -695,6 +729,13 @@ public abstract class OdfDocument {
 	/**
 	 * Save the document to an OutputStream. Delegate to the root document
 	 * and save possible embedded OdfDocuments.
+	 *
+	 * <p>If the input file has been cached (this is the case when loading from an
+	 * InputStream), the input file can be overwritten.</p>
+	 *
+	 * <p>If not, the OutputStream may not point to the input file! Otherwise
+	 * this will result in unwanted behaviour and broken files.</p>
+	 *
 	 * @param out - the OutputStream to write the file to
 	 * @throws java.lang.Exception  if the document could not be saved
 	 */
