@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.svg.OdfSpreadmethodType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<svg:radialGradient>".
  */
 public abstract class OdfRadialgradientElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4252184975411010589L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "radialGradient" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "radialGradient" );
 
     public OdfRadialgradientElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -258,4 +254,15 @@ public abstract class OdfRadialgradientElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.SVG, "fy" ), _aFy );
     }
 
+    /**
+    * Create child element "svg:stop".
+    */
+    public OdfStopElement createStopElement(Double   _aOffset)
+    {
+        OdfStopElement  _nStop = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfStopElement.class);
+        _nStop.setOffset( _aOffset);
+        this.appendChild( _nStop);
+        return  _nStop;      
+    }
+    
 }

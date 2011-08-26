@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<svg:font-face-format>".
  */
 public abstract class OdfFontFaceFormatElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8923558473638030342L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "font-face-format" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "font-face-format" );
 
     public OdfFontFaceFormatElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

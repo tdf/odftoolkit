@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<svg:font-face-uri>".
  */
 public abstract class OdfFontFaceUriElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8934131301259961869L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "font-face-uri" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "font-face-uri" );
 
     public OdfFontFaceUriElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -84,4 +80,14 @@ public abstract class OdfFontFaceUriElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.XLINK, "actuate" ), "onRequest" );
     }
 
+    /**
+    * Create child element "svg:font-face-format".
+    */
+    public OdfFontFaceFormatElement createFontFaceFormatElement()
+    {
+        OdfFontFaceFormatElement  _nFontFaceFormat = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFontFaceFormatElement.class);
+        this.appendChild( _nFontFaceFormat);
+        return  _nFontFaceFormat;
+    }                   
+               
 }

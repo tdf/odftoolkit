@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<svg:stop>".
  */
 public abstract class OdfStopElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7797378712247925456L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "stop" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "stop" );
 
     public OdfStopElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
