@@ -67,36 +67,6 @@ public class AnimIterateTypeAttribute extends OdfAttribute {
 	}
 
 	/**
-	 * @param attrValue The <code>String</code> value of the attribute.
-	 * @throws IllegalArgumentException If the provided attribute value is invalid
-	 */
-	@Override
-	public void setValue(String attrValue) {
-		try {
-			super.setValue(attrValue);
-		} catch (NullPointerException e) {
-			// TODO: validation handling/logging
-			throw new IllegalArgumentException(e);
-		} catch (IllegalArgumentException e) {
-			// TODO: validation handling/logging
-			throw (e);
-		}
-	}
-
-	/**
-	 * @return Returns the <code>String</code> value of the attribute
-	 */
-	@Override
-	public String getValue() {
-		try {
-			return super.getValue();
-		} catch (IllegalArgumentException e) {
-			// TODO: validation handling/logging
-			throw new NumberFormatException("the value of anim:iterate-type is not valid");
-		}
-	}
-
-	/**
 	 * Returns the default value of {@odf.attribute anim:iterate-type}.
 	 *
 	 * @return the default value as <code>String</code> dependent of its element name

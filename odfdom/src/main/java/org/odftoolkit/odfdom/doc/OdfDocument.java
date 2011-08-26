@@ -51,13 +51,11 @@ import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfMetaDom;
@@ -68,6 +66,10 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentContentElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentMetaElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentSettingsElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentStylesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
@@ -603,7 +605,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 
 	/**
 	 * Return the ODF type-based content DOM of the content.xml
-	 * @return ODF type-based content DOM
+	 * @return ODF type-based content DOM or null if no content.xml exists.
 	 * @throws Exception if content DOM could not be initialized
 	 */
 	public OdfContentDom getContentDom() throws Exception {
@@ -615,7 +617,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 
 	/**
 	 * Return the ODF type-based styles DOM of the styles.xml
-	 * @return ODF type-based styles DOM
+	 * @return ODF type-based styles DOM or null if no styles.xml exists.
 	 * @throws Exception if styles DOM could not be initialized
 	 */
 	public OdfStylesDom getStylesDom() throws Exception {
@@ -628,7 +630,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	/**
 	 * Return the ODF type-based metadata DOM of the meta.xml
 	 * 
-	 * @return ODF type-based meta DOM
+	 * @return ODF type-based meta DOM or null if no meta.xml exists.
 	 * @throws Exception if meta DOM could not be initialized
 	 */
 	public OdfMetaDom getMetaDom() throws Exception {
@@ -641,7 +643,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	/**
 	 * Return the ODF type-based settings DOM of the settings.xml
 	 *
-	 * @return ODF type-based settings DOM
+	 * @return ODF type-based settings DOM or null if no settings.xml exists.
 	 * @throws Exception if settings DOM could not be initialized
 	 */
 	public OdfSettingsDom getSettingsDom() throws Exception {
@@ -764,10 +766,79 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	}
 
 	//XML DOM from the memory are written to the package ZIP
+	//ToDo: (Issue 219 - PackageRefactoring) - Move flush as much as possible to OdfPackage, avoiding duplication of work
 	private static void flushDOMsToPkg(OdfPackageDocument pkgDoc) {
 		OdfDocument doc = (OdfDocument) pkgDoc;
-//ToDo: (Issue 219 - PackageRefactoring) - Move flush as much as possible to OdfPackage, avoiding duplication of work
+// ToDo: Will be used for issue 60: Load & Save of previous ODF versions (ie. ODF 1.0, ODF 1.1)
+//		// if one of the DOM was loaded
+//		if (doc.mContentDom != null || doc.mStylesDom != null || doc.mSettingsDom != null || doc.mMetaDom != null) {
+//			String odf12 = OfficeVersionAttribute.Value._1_2.toString();
+//			boolean adaptVersion = false;
+//			String versionAttr = null;
+//			// check if the latest ODF version is being used
+//			if (doc.mContentDom != null) {
+//				OfficeDocumentContentElement contentElement = doc.mContentDom.getRootElement();
+//				if (contentElement != null && (versionAttr = contentElement.getOfficeVersionAttribute()) == null || !versionAttr.equals(odf12)) {
+//					adaptVersion = true;
+//				}
+//			} else if (doc.mStylesDom != null) {
+//				versionAttr = null;
+//				OfficeDocumentStylesElement stylesElement = doc.mStylesDom.getRootElement();
+//				if (stylesElement != null && (versionAttr = stylesElement.getOfficeVersionAttribute()) == null || !versionAttr.equals(odf12)) {
+//					adaptVersion = true;
+//				}
+//			} else if (doc.mMetaDom != null) {
+//				versionAttr = null;
+//				OfficeDocumentMetaElement metaElement = doc.mMetaDom.getRootElement();
+//				if (metaElement != null && (versionAttr = metaElement.getOfficeVersionAttribute()) == null || !versionAttr.equals(odf12)) {
+//					adaptVersion = true;
+//				}
+//			} else if (doc.mSettingsDom != null) {
+//				versionAttr = null;
+//				OfficeDocumentSettingsElement settingsElement = doc.mSettingsDom.getRootElement();
+//				if (settingsElement != null && (versionAttr = settingsElement.getOfficeVersionAttribute()) == null || !versionAttr.equals(odf12)) {
+//					adaptVersion = true;
+//				}
+//			}
 		try {
+// ToDo: Will be used for issue 60: Load & Save of previous ODF versions (ie. ODF 1.0, ODF 1.1)
+//				if (adaptVersion) {
+//					// change ODF version of content.xml and flush the DOM
+//					OdfContentDom contentDom = doc.getContentDom();
+//					if (contentDom != null) {
+//						OfficeDocumentContentElement contentElement = contentDom.getRootElement();
+//						if (contentElement != null) {
+//							contentElement.setOfficeVersionAttribute(odf12);
+//						}
+//					}
+//
+//					// change ODF version of styles.xml and flush the DOM
+//					OdfStylesDom stylesDom = doc.getStylesDom();
+//					if (stylesDom != null) {
+//						OfficeDocumentStylesElement stylesElement = stylesDom.getRootElement();
+//						if (stylesElement != null) {
+//							stylesElement.setOfficeVersionAttribute(odf12);
+//						}
+//					}
+//
+//					// change ODF version of meta.xml and flush the DOM
+//					OdfMetaDom metaDom = doc.getMetaDom();
+//					if (metaDom != null) {
+//						OfficeDocumentMetaElement metaElement = metaDom.getRootElement();
+//						if (metaElement != null) {
+//							metaElement.setOfficeVersionAttribute(odf12);
+//						}
+//					}
+//
+//					// change ODF version of settings.xml and flush the DOM
+//					OdfSettingsDom settingsDom = doc.getSettingsDom();
+//					if (settingsDom != null) {
+//						OfficeDocumentSettingsElement settingElement = settingsDom.getRootElement();
+//						if (settingElement != null) {
+//							settingElement.setOfficeVersionAttribute(odf12);
+//						}
+//					}
+//				}
 			if (doc.mContentDom != null) {
 				// currently commented because of bug 51:
 				// https://odftoolkit.org/bugzilla/show_bug.cgi?id=51
@@ -789,6 +860,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 		} catch (Exception e) {
 			Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, e);
 		}
+//		}
 	}
 
 	// flush the DOM of all descendant documents (children of the given document)
@@ -1079,41 +1151,41 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	}
 
 	private OdfFileDom getFileDom(OdfXMLFile file) throws Exception {
-		// create sax parser
-		SAXParserFactory saxFactory = new org.apache.xerces.jaxp.SAXParserFactoryImpl();
-		saxFactory.setNamespaceAware(true);
-		saxFactory.setValidating(false);
-		SAXParser parser = saxFactory.newSAXParser();
-		XMLReader xmlReader = parser.getXMLReader();
-		// More details at http://xerces.apache.org/xerces2-j/features.html#namespaces
-		xmlReader.setFeature("http://xml.org/sax/features/namespaces", true);
-		// More details at http://xerces.apache.org/xerces2-j/features.html#namespace-prefixes
-		xmlReader.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
-		// More details at http://xerces.apache.org/xerces2-j/features.html#xmlns-uris
-		xmlReader.setFeature("http://xml.org/sax/features/xmlns-uris", true);
-
-		// initialize the file DOM
-		OdfFileDom fileDom;
-		switch (file) {
-			case CONTENT:
-				fileDom = new OdfContentDom(this, this.getXMLFilePath(file));
-				break;
-			case STYLES:
-				fileDom = new OdfStylesDom(this, this.getXMLFilePath(file));
-				break;
-			case META:
-				fileDom = new OdfMetaDom(this, this.getXMLFilePath(file));
-				break;
-			case SETTINGS:
-				fileDom = new OdfSettingsDom(this, this.getXMLFilePath(file));
-				break;
-			default:
-				fileDom = new OdfFileDom(this, this.getXMLFilePath(file));
-				break;
-		}
 		String path = getXMLFilePath(file);
 		InputStream fileStream = mPackage.getInputStream(path);
+		OdfFileDom fileDom = null;
 		if (fileStream != null) {
+			// create sax parser
+			SAXParserFactory saxFactory = new org.apache.xerces.jaxp.SAXParserFactoryImpl();
+			saxFactory.setNamespaceAware(true);
+			saxFactory.setValidating(false);
+			SAXParser parser = saxFactory.newSAXParser();
+			XMLReader xmlReader = parser.getXMLReader();
+			// More details at http://xerces.apache.org/xerces2-j/features.html#namespaces
+			xmlReader.setFeature("http://xml.org/sax/features/namespaces", true);
+			// More details at http://xerces.apache.org/xerces2-j/features.html#namespace-prefixes
+			xmlReader.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
+			// More details at http://xerces.apache.org/xerces2-j/features.html#xmlns-uris
+			xmlReader.setFeature("http://xml.org/sax/features/xmlns-uris", true);
+
+			// initialize the file DOM
+			switch (file) {
+				case CONTENT:
+					fileDom = new OdfContentDom(this, this.getXMLFilePath(file));
+					break;
+				case STYLES:
+					fileDom = new OdfStylesDom(this, this.getXMLFilePath(file));
+					break;
+				case META:
+					fileDom = new OdfMetaDom(this, this.getXMLFilePath(file));
+					break;
+				case SETTINGS:
+					fileDom = new OdfSettingsDom(this, this.getXMLFilePath(file));
+					break;
+				default:
+					fileDom = new OdfFileDom(this, this.getXMLFilePath(file));
+					break;
+			}
 			Handler handler = new Handler(fileDom);
 			xmlReader.setContentHandler(handler);
 			InputSource xmlSource = new InputSource(fileStream);
@@ -1186,18 +1258,13 @@ public abstract class OdfDocument extends OdfPackageDocument {
 				// namespace attributes will not be created and return null
 				if (attr != null) {
 					element.setAttributeNodeNS(attr);
-					if (attr instanceof OfficeVersionAttribute) {
-						// write out not the original value, but the version of this odf version
-						attr.setValue(OfficeVersionAttribute.Value._1_2.toString());
-					} else {
-						// don't exit because of invalid attribute values
-						try {
-							// set Value in the attribute to allow validation in the attribute
-							attr.setValue(attributes.getValue(i));
-						} // if we detect an attribute with invalid value: remove attribute node
-						catch (IllegalArgumentException e) {
-							element.removeAttributeNode(attr);
-						}
+					// don't exit because of invalid attribute values
+					try {
+						// set Value in the attribute to allow validation in the attribute
+						attr.setValue(attributes.getValue(i));
+					} // if we detect an attribute with invalid value: remove attribute node
+					catch (IllegalArgumentException e) {
+						element.removeAttributeNode(attr);
 					}
 				}
 			}
@@ -1395,7 +1462,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 			}
 			// update editing-duration info.
 			long editingDuration = calendar.getTimeInMillis() - documentOpeningTime;
-			editingDuration = (editingDuration<1)?1:editingDuration;
+			editingDuration = (editingDuration < 1) ? 1 : editingDuration;
 			try {
 				DatatypeFactory aFactory = DatatypeFactory.newInstance();
 				metaData.setEditingDuration(new Duration(aFactory.newDurationDayTime(editingDuration)));

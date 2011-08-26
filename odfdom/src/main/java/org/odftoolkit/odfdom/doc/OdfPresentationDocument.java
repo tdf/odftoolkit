@@ -157,9 +157,9 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	public static OdfPresentationDocument loadDocument(InputStream inputStream) throws Exception {
-        return (OdfPresentationDocument) OdfDocument.loadDocument(inputStream);
-    }
-	
+		return (OdfPresentationDocument) OdfDocument.loadDocument(inputStream);
+	}
+
 	/**
 	 * Loads an OdfPresentationDocument from the provided path.
 	 *
@@ -174,9 +174,9 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	public static OdfPresentationDocument loadDocument(String documentPath) throws Exception {
-		return (OdfPresentationDocument)OdfDocument.loadDocument(documentPath);
+		return (OdfPresentationDocument) OdfDocument.loadDocument(documentPath);
 	}
-	
+
 	/**
 	 * Creates an OdfPresentationDocument from the OpenDocument provided by a File.
 	 *
@@ -190,9 +190,9 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	public static OdfPresentationDocument loadDocument(File file) throws Exception {
-		return (OdfPresentationDocument)OdfDocument.loadDocument(file);
+		return (OdfPresentationDocument) OdfDocument.loadDocument(file);
 	}
-	
+
 	/**
 	 * Get the content root of a presentation document.
 	 *
@@ -408,37 +408,40 @@ public class OdfPresentationDocument extends OdfDocument {
 
 			//2.2. get the reference of each style which occurred in the current page
 			for (int i = 0; i < stylesList.getLength(); i++) {
-				OdfElement node = (OdfElement) stylesList.item(i);
-				String styleName = node.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "name");
-				if (styleName != null) {
-					//search the styleName contained at the current page element
-					NodeList styleNodes = (NodeList) xpath.evaluate("//*[@*='" + styleName + "']", contentDom, XPathConstants.NODESET);
-					int styleCnt = styleNodes.getLength();
-					if (styleCnt > 1) {
-						//the first styleName is occurred in the style definition
-						//so check if the second styleName and last styleName is occurred in the current page element
-						//if yes, then remove it
-						OdfElement elementFirst = (OdfElement) styleNodes.item(1);
-						OdfElement elementLast = (OdfElement) styleNodes.item(styleCnt - 1);
-						boolean isSamePage = false;
-						if (elementFirst instanceof DrawPageElement) {
-							DrawPageElement tempPage = (DrawPageElement) elementFirst;
-							if (tempPage.equals(slideEle)) {
-								isSamePage = true;
+				Node item = stylesList.item(i);
+				if (item instanceof OdfElement) {
+					OdfElement node = (OdfElement) item;
+					String styleName = node.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "name");
+					if (styleName != null) {
+						//search the styleName contained at the current page element
+						NodeList styleNodes = (NodeList) xpath.evaluate("//*[@*='" + styleName + "']", contentDom, XPathConstants.NODESET);
+						int styleCnt = styleNodes.getLength();
+						if (styleCnt > 1) {
+							//the first styleName is occurred in the style definition
+							//so check if the second styleName and last styleName is occurred in the current page element
+							//if yes, then remove it
+							OdfElement elementFirst = (OdfElement) styleNodes.item(1);
+							OdfElement elementLast = (OdfElement) styleNodes.item(styleCnt - 1);
+							boolean isSamePage = false;
+							if (elementFirst instanceof DrawPageElement) {
+								DrawPageElement tempPage = (DrawPageElement) elementFirst;
+								if (tempPage.equals(slideEle)) {
+									isSamePage = true;
+								}
 							}
-						}
-						int relationFirst = slideEle.compareDocumentPosition(elementFirst);
-						int relationLast = slideEle.compareDocumentPosition(elementLast);
-						//if slide element contains the child element which has the styleName reference
-						if (((relationFirst & Node.DOCUMENT_POSITION_CONTAINED_BY) > 0
-								&& (relationLast & Node.DOCUMENT_POSITION_CONTAINED_BY) > 0)
-								|| (isSamePage && (styleCnt == 1))) {
-							if (node instanceof OdfStyleBase) {
-								removeStyles.add(node);
+							int relationFirst = slideEle.compareDocumentPosition(elementFirst);
+							int relationLast = slideEle.compareDocumentPosition(elementLast);
+							//if slide element contains the child element which has the styleName reference
+							if (((relationFirst & Node.DOCUMENT_POSITION_CONTAINED_BY) > 0
+									&& (relationLast & Node.DOCUMENT_POSITION_CONTAINED_BY) > 0)
+									|| (isSamePage && (styleCnt == 1))) {
+								if (node instanceof OdfStyleBase) {
+									removeStyles.add(node);
+								}
 							}
+						} else {
+							continue;
 						}
-					} else {
-						continue;
 					}
 				}
 			}

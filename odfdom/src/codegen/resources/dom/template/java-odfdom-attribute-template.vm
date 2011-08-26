@@ -221,7 +221,7 @@ public class $classname extends OdfAttribute {
 	}
 #end
 ##
-
+#*
 	/**
 	 * @param attrValue The <code>String</code> value of the attribute.
 	 * @throws IllegalArgumentException If the provided attribute value is invalid
@@ -281,7 +281,7 @@ public class $classname extends OdfAttribute {
 		}
 #end
 	}
-
+*#
 #if ($hasDefaultValue)
 	/**
 	 * Returns the default value of {@odf.attribute ${attribute}}.

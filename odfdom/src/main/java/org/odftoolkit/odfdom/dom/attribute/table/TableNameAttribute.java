@@ -108,25 +108,6 @@ public class TableNameAttribute extends OdfAttribute {
 	}
 
 	/**
-	 * @param attrValue The <code>String</code> value of the attribute.
-	 * @throws IllegalArgumentException If the provided attribute value is invalid
-	 */
-	@Override
-	public void setValue(String attrValue) {
-		// Since we have not only enumValues, but also a DataType, we use String as common base and don't validate.
-		super.setValue(attrValue);
-	}
-
-	/**
-	 * @return Returns the <code>String</code> value of the attribute
-	 */
-	@Override
-	public String getValue() {
-		// Since we have not only enumValues, but also a DataType, we use String as common base and don't validate.
-		return super.getValue();
-	}
-
-	/**
 	 * Returns the default value of {@odf.attribute table:name}.
 	 *
 	 * @return the default value as <code>String</code> dependent of its element name

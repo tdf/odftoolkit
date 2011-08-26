@@ -277,7 +277,7 @@ public class DocumentCreationTest {
 
 			List<OdfDocument> embDocs = docWithEmbeddedObject.getEmbeddedDocuments();
 			int embDocsNumber = embDocs.size();
-			OdfDocument embDoc = (OdfDocument) embDocs.get(0);
+			OdfDocument embDoc = embDocs.get(0);
 			String pathToDoc = embDoc.getDocumentPackagePath() + "Object in Object1/";
 			embDoc.insertDocument(OdfTextDocument.newTextDocument(), pathToDoc);
 			Assert.assertNotNull(embDoc.getPackage().getFileEntry(pathToDoc));
@@ -290,7 +290,7 @@ public class DocumentCreationTest {
 
 			List<OdfDocument> emb_embDocs = embDoc.getEmbeddedDocuments();
 			Assert.assertEquals(embDocsNumber+1, emb_embDocs.size());
-			OdfDocument emb_embDoc = (OdfDocument) docWithEmbeddedObject.getEmbeddedDocument(pathToDoc);
+			OdfDocument emb_embDoc = docWithEmbeddedObject.getEmbeddedDocument(pathToDoc);
 			contentDom = emb_embDoc.getContentDom();
 
 			TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", contentDom, XPathConstants.NODE);
@@ -320,7 +320,7 @@ public class DocumentCreationTest {
 		try {
 			docWithEmbeddedObjects = OdfDocument.loadDocument(TEST_FILE_EMBEDDED);
 			List<OdfDocument> embDocs = docWithEmbeddedObjects.getEmbeddedDocuments();
-			OdfDocument doc1 = (OdfDocument) embDocs.get(0);
+			OdfDocument doc1 = embDocs.get(0);
 			OdfFileDom contentDom1 = doc1.getContentDom();
 			OdfDocument doc2 = doc1.getEmbeddedDocument("Object 1");
 			OdfFileDom contentDom2 = doc2.getContentDom();
@@ -339,7 +339,7 @@ public class DocumentCreationTest {
 			docWithEmbeddedObjects = OdfDocument.loadDocument(TEST_FILE_SAVE_EMBEDDED);
 			List<OdfDocument> embDocs = docWithEmbeddedObjects.getEmbeddedDocuments(OdfDocument.OdfMediaType.GRAPHICS);
 			// Graphics Doc
-			OdfDocument doc1 = (OdfDocument) embDocs.get(0);
+			OdfDocument doc1 = embDocs.get(0);
 			Assert.assertNotNull(doc1);
 
 			OdfFileDom contentDom = doc1.getContentDom();
@@ -359,7 +359,7 @@ public class DocumentCreationTest {
 
 			List<OdfDocument> embDocs3 = docWithEmbeddedObjects.getEmbeddedDocuments(OdfDocument.OdfMediaType.TEXT);
 			// Writer Doc
-			OdfDocument doc3 = (OdfDocument) embDocs3.get(0);
+			OdfDocument doc3 = embDocs3.get(0);
 			Assert.assertNotNull(doc3);
 			OdfFileDom contentDom3 = doc3.getContentDom();
 			TextPElement para2 = (TextPElement) xpath.evaluate("//text:p[1]", contentDom3, XPathConstants.NODE);

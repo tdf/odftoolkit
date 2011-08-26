@@ -7,23 +7,22 @@ package org.odftoolkit.odfdom.dom.example;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import org.junit.Ignore;
 
 import org.junit.Test;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 
-/**
- *
- * @author hs234750
- */
+/** The test was deactivated. As an invalid value will no longer throw an exception and cause the removal of the attribute. */
 public class AttributesTest {
 
     @Test
+	@Ignore
     public void testSetValue() throws Exception {
         OdfTextDocument odt = OdfTextDocument.newTextDocument();
-        OdfFileDom dom = odt.getContentDom();
+        OdfContentDom dom = odt.getContentDom();
         OdfStyle style1 = new OdfStyle(dom);
 
         // No exception should be thrown here

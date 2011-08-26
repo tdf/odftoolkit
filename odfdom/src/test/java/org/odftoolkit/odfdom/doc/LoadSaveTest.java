@@ -23,67 +23,74 @@ package org.odftoolkit.odfdom.doc;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
+import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentContentElement;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class LoadSaveTest {
 
-    private static final String SOURCE = "not-only-odf.odt";
-    private static final String TARGET = "loadsavetest.odt";
+	private static final String SOURCE = "not-only-odf.odt";
+	private static final String TARGET = "loadsavetest.odt";
 	private static final String FOREIGN_ATTRIBUTE_NAME = "foreignAttribute";
 	private static final String FOREIGN_ATTRIBUTE_VALUE = "foreignAttributeValue";
 	private static final String FOREIGN_ELEMENT_TEXT = "foreignText";
 
-    public LoadSaveTest() {
-    }
+	public LoadSaveTest() {
+	}
 
-    @Test
-    public void testLoadSave() {
-        try {
-            OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE));
-            Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
-            String baseURI = odfDocument.getBaseURI();
-            Assert.assertEquals(ResourceUtilities.getURI(SOURCE).toString(), baseURI);
+	@Test
+	public void testLoadSave() {
+		try {
+			OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE));
+			Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
+			String baseURI = odfDocument.getBaseURI();
+			Assert.assertEquals(ResourceUtilities.getURI(SOURCE).toString(), baseURI);
+			OdfContentDom odfContent = odfDocument.getContentDom();
+			String odf12 = OfficeVersionAttribute.Value._1_2.toString();
+			OfficeDocumentContentElement content = odfContent.getRootElement();
+			String version = content.getOfficeVersionAttribute();
+			Assert.assertFalse(version.equals(odf12));
 
-            Document odfContent = odfDocument.getContentDom();
-            NodeList lst = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
-            Node node = lst.item(0);
-            String oldText = "Changed!!!";
-            node.setTextContent(oldText);
+			NodeList lst = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
+			Node node = lst.item(0);
+			String oldText = "Changed!!!";
+			node.setTextContent(oldText);
 
-            odfDocument.save(ResourceUtilities.newTestOutputFile(TARGET));
-            odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
+			odfDocument.save(ResourceUtilities.newTestOutputFile(TARGET));
+			odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
 
-            odfContent = odfDocument.getContentDom();
-            lst = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
-            node = lst.item(0);
-            String newText = node.getTextContent();
-            Assert.assertTrue(newText.equals(oldText));
+			odfContent = odfDocument.getContentDom();
+			// ToDo: Will be used for issue 60: Load & Save of previous ODF versions (ie. ODF 1.0, ODF 1.1)
+			//Assert.assertTrue(odfContent.getRootElement().getOfficeVersionAttribute().equals(odf12));
+			lst = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
+			node = lst.item(0);
+			String newText = node.getTextContent();
+			Assert.assertTrue(newText.equals(oldText));
 
 			node = lst.item(1);
 			//check foreign attribute without namespace
 			Element foreignElement = (Element) node.getChildNodes().item(0);
-            String foreignText = foreignElement.getTextContent();
-            Assert.assertTrue(foreignText.equals(FOREIGN_ELEMENT_TEXT));
+			String foreignText = foreignElement.getTextContent();
+			Assert.assertTrue(foreignText.equals(FOREIGN_ELEMENT_TEXT));
 
 			//check foreign element without namespace
 			Attr foreignAttr = (Attr) node.getAttributes().getNamedItem(FOREIGN_ATTRIBUTE_NAME);
 			String foreignAttrValue = foreignAttr.getValue();
-            Assert.assertTrue(foreignAttrValue.equals(FOREIGN_ATTRIBUTE_VALUE));
+			Assert.assertTrue(foreignAttrValue.equals(FOREIGN_ATTRIBUTE_VALUE));
 
 
 
-        } catch (Exception e) {
-        	Logger.getLogger(LoadSaveTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-            Assert.fail(e.getMessage());
-        }
-    }
+		} catch (Exception e) {
+			Logger.getLogger(LoadSaveTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+	}
 }

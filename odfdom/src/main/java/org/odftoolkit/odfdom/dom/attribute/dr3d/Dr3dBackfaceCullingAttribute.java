@@ -108,31 +108,6 @@ public class Dr3dBackfaceCullingAttribute extends OdfAttribute {
 	}
 
 	/**
-	 * @param attrValue The <code>String</code> value of the attribute.
-	 * @throws IllegalArgumentException If the provided attribute value is invalid
-	 */
-	@Override
-	public void setValue(String attrValue) {
-		try {
-			super.setValue(Value.enumValueOf(attrValue).toString());
-		} catch (NullPointerException e) {
-			throw new IllegalArgumentException(e);
-		}
-	}
-
-	/**
-	 * @return Returns the <code>String</code> value of the attribute
-	 */
-	@Override
-	public String getValue() {
-		try {
-			return Value.enumValueOf(super.getValue()).toString();
-		} catch (NullPointerException e) {
-			throw new IllegalArgumentException("the value of dr3d:backface-culling is not valid");
-		}
-	}
-
-	/**
 	 * Returns the default value of {@odf.attribute dr3d:backface-culling}.
 	 *
 	 * @return the default value as <code>String</code> dependent of its element name
