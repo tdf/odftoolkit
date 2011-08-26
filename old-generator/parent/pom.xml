@@ -17,7 +17,7 @@
     <connection>scm:hg:http://http://odftoolkit.org/hg/odfdom~developer/parent</connection>
     <developerConnection>scm:hg:https://odftoolkit.org/hg/odfdom~developer/parent</developerConnection>
   </scm>
-
+  
   <properties>
     <surefire.fork.mode>once</surefire.fork.mode>
     <surefire.format>brief</surefire.format>
@@ -96,11 +96,7 @@
       </plugins>
     </pluginManagement>
     <defaultGoal>install</defaultGoal>
-    </build>
-
-  <repositories>
-    <!-- no repo for odfdom yet -->
- </repositories>
+  </build>
 
   <dependencyManagement>
     <dependencies>
