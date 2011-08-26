@@ -233,10 +233,10 @@
              included files. -->
         <xsl:variable name="new-condition">
             <xsl:choose>
-                <xsl:when test="$include-conditions and @combine and string-length($condition) > 0">
+                <xsl:when test="$include-conditions and @rng:combine and string-length($condition) > 0">
                     <xsl:value-of select="concat($condition, '/', @combine)"/>
                 </xsl:when>
-                <xsl:when test="$include-conditions and @combine">
+                <xsl:when test="$include-conditions and @rng:combine">
                     <xsl:value-of select="concat(@combine)"/>
                 </xsl:when>
                 <xsl:otherwise>
