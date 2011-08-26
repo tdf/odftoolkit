@@ -26,11 +26,16 @@ import static java.util.logging.Level.INFO;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
@@ -187,4 +192,26 @@ public class StyleExamplesTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+
+    @Test
+	@Ignore
+	/** Should there be a validation in the future? */
+    public void testSetValue() throws Exception {
+        OdfTextDocument odt = OdfTextDocument.newTextDocument();
+        OdfContentDom dom = odt.getContentDom();
+        OdfStyle style1 = new OdfStyle(dom);
+
+        // No exception should be thrown here
+        style1.setStyleFamilyAttribute(OdfStyleFamily.Paragraph.toString());
+        assertEquals(style1.getStyleFamilyAttribute(), OdfStyleFamily.Paragraph.toString());
+
+        // Catch only IllegalArgumentException
+        try {
+            style1.setStyleFamilyAttribute("ImSoInvalid");
+        } catch (IllegalArgumentException e) {
+            return;   // test passed
+        }
+        // We need an exception from the setValue method! Otherwise we don't know that an empty attribute node has to be removed
+        fail("An IllegalArgumentException has to be thrown for invalid attributes so the attribute node can be removed afterwards.");
+    }
 }
