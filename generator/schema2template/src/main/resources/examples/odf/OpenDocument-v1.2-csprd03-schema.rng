@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-	OASIS OpenDocument v1.2
-	Committee Draft 05 Rev 02, 11 November 2010
+        Open Document Format for Office Applications (OpenDocument) Version 1.2
+        Committee Specification Public Review Draft (CSPRD) 03, 19 January 2011
 	Relax-NG Schema
 
-	Copyright © OASIS Open 2002-2010. All Rights Reserved.
+        Copyright (c) OASIS Open 2002-2011. All Rights Reserved.
 
 	All capitalized terms in the following text have the meanings assigned to them
 	in the OASIS Intellectual Property Rights Policy (the "OASIS IPR Policy"). The
@@ -29,7 +29,7 @@
 	basis and OASIS DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT
 	LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT
 	INFRINGE ANY OWNERSHIP RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR
-	FITNESS FOR A PARTICULAR PURPOSE.
+	FITNESS FOR A PARTICULAR PURPOSE. 
 -->
 <grammar
 	xmlns="http://relaxng.org/ns/structure/1.0"
@@ -10524,7 +10524,7 @@
 			<attribute name="form:list-linkage-type">
 				<choice>
 					<value>selection</value>
-					<value>selection-indexes</value>
+					<value>selection-indices</value>
 				</choice>
 			</attribute>
 		</optional>

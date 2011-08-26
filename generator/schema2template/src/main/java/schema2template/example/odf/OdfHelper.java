@@ -55,8 +55,8 @@ public class OdfHelper {
 	private static final Logger LOG = Logger.getLogger(OdfHelper.class.getName());
 	public static final Boolean DEBUG = Boolean.FALSE;
 
-	public static final int ODF11_ELEMENT_NUMBER = 507;
-	public static final int ODF11_ATTRIBUTE_NUMBER = 840;
+	public static final int ODF11_ELEMENT_NUMBER = 507;   // ToDO: 526  by Schema and UltraEdit
+	public static final int ODF11_ATTRIBUTE_NUMBER = 840; // ToDO: 1137 by Schema and UltraEdit
 	public static String odfResourceDir;
 	public static String outputRoot;
 	public static final String INPUT_ROOT = "target" + File.separator + "classes" + File.separator
@@ -64,8 +64,8 @@ public class OdfHelper {
 	public static final String TEST_INPUT_ROOT = "target" + File.separator + "test-classes" + File.separator
 				+ "examples" + File.separator + "odf";
 
-	public static final String ODF11_RNG_FILE_NAME = "OpenDocument-schema-v1.1.rng";
-	public static final String ODF12_RNG_FILE_NAME = "OpenDocument-v1.2-cd05-rev02-schema.rng";
+	public static final String ODF11_RNG_FILE_NAME = "OpenDocument-strict-schema-v1.1.rng";
+	public static final String ODF12_RNG_FILE_NAME = "OpenDocument-v1.2-csprd03-schema.rng";
 	private static String odf12RngFile;
 	private static String odf11RngFile;
 	private static String mConfigFile;

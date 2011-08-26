@@ -98,7 +98,7 @@ public class MSVNameClassVisitorList implements NameClassVisitor {
     private String simplify(String nsuri, String localname) {
         String shortns = nsdict.getLocalNamespace(nsuri);
         if (shortns == null || shortns.length() == 0) {
-            return "";
+            return localname;
         }
         return shortns + ":" + localname;
     }

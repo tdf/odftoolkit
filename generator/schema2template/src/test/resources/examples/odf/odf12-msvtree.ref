@@ -7555,7 +7555,7 @@
 70: ATTRIBUTE "form:list-linkage-type",
 71: CHOICE
 72: VALUE 'selection',
-72: VALUE 'selection-indexes',
+72: VALUE 'selection-indices',
 70: EPSILON
 68: REF 'common-source-cell-range',
 69: CHOICE

@@ -35,13 +35,13 @@ import org.junit.Test;
 import schema2template.model.PuzzlePiece;
 import schema2template.model.PuzzlePieceSet;
 import org.junit.Assert;
-import org.junit.Ignore;
 import schema2template.example.odf.OdfHelper;
 import schema2template.model.MSVExpressionIterator;
 
 public class PuzzlePieceTest {
 
 	private static final Logger LOG = Logger.getLogger(PuzzlePieceTest.class.getName());
+	private static final String OUTPUT_DUMP_ODF11 = "target" + File.separator + "odf11-msvtree.dump";
 	private static final String OUTPUT_DUMP_ODF12 = "target" + File.separator + "odf12-msvtree.dump";
 	private static final String OUTPUT_REF_ODF12 = TEST_INPUT_ROOT + File.separator + "odf12-msvtree.ref";
 
@@ -55,12 +55,19 @@ public class PuzzlePieceTest {
 	@Test
 	public void testMSVExpressionTree() {
 		try {
+			Expression odf11Root = OdfHelper.loadSchemaODF11();
+			String odf11Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf11Root);
+			LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF11);
+			PrintWriter out1 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF11));
+			out1.print(odf11Dump);
+			out1.close();
+
 			Expression odf12Root = OdfHelper.loadSchemaODF12();
 			String odf12Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf12Root);
 			LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF12);
-			PrintWriter out = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF12));
-			out.print(odf12Dump);
-			out.close();
+			PrintWriter out2 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF12));
+			out2.print(odf12Dump);
+			out2.close();
 			String odf12Ref = readFileAsString(OUTPUT_REF_ODF12);
 			Assert.assertTrue(odf12Ref.equals(odf12Dump));
 		} catch (Exception ex) {
@@ -95,14 +102,13 @@ public class PuzzlePieceTest {
 	 * extract PuzzlePieces out of a XML schema</p>
 	 */
 	@Test
-	@Ignore //bug Under some platforms (e.g. Oracle JDK 6b22 on W7 64bit) return changing results let the test fail
 	public void testExtractPuzzlePieces() {
 		try {
 			PuzzlePieceSet allElements = new PuzzlePieceSet();
 			PuzzlePieceSet allAttributes = new PuzzlePieceSet();
 			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF11(), allElements, allAttributes);
-			checkFoundNumber(allElements, ODF11_ELEMENT_NUMBER, "element");
-			checkFoundNumber(allAttributes, ODF11_ATTRIBUTE_NUMBER, "attribute");
+			checkFoundNumber(allElements.withoutMultiples(), ODF11_ELEMENT_NUMBER, "element");
+			checkFoundNumber(allAttributes.withoutMultiples(), ODF11_ATTRIBUTE_NUMBER, "attribute");
 		} catch (Exception ex) {
 			Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
 			Assert.fail(ex.toString());

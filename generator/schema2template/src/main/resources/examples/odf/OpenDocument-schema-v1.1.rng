@@ -4808,7 +4808,7 @@
 </define>
 <define name="table-filter-attlist" combine="interleave">
     <optional>
-        <attribute name="table:display-multiples" a:defaultValue="true">
+        <attribute name="table:display-duplicates" a:defaultValue="true">
             <ref name="boolean"/>
         </attribute>
     </optional>
