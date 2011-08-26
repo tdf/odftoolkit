@@ -20,20 +20,20 @@
  *
  ************************************************************************/
 
-package odfxsltrunner;
+package org.odftoolkit.odfxsltrunner;
 
 import java.io.PrintStream;
 
 /**
  * Logger for command line interface
  */
-class CommandLineLogger extends Logger 
+public class CommandLineLogger extends Logger
 {
     private PrintStream m_aOut;
     private int m_nLevel;
     
     /** Creates a new instance of CommandLineLogger */
-    CommandLineLogger( PrintStream aOut, int nLevel )     
+    public CommandLineLogger( PrintStream aOut, int nLevel )
     {
         m_nLevel = nLevel;
         m_aOut = aOut;

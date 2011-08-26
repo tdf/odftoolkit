@@ -20,7 +20,7 @@
  *
  ************************************************************************/
 
-package odfxsltrunner;
+package org.odftoolkit.odfxsltrunner;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;

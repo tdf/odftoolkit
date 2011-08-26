@@ -20,25 +20,35 @@
  *
  ************************************************************************/
 
-package odfxsltrunner;
+package org.odftoolkit.odfxsltrunner;
+
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+
 
 /**
- * Interface for XSLT parameters
+ * This class forwards error reports from the XSLT processor to the
+ * logger.
  */
-public interface XSLTParameter {
+class SAXErrorHandler implements ErrorHandler {
+    
+    private Logger m_aLogger;
 
-    /** 
-     * Get parameter name.
-     * 
-     * @return parameter name.
-     */
-    String getName();
+    /** Creates a new instance of TransforemerErrorListener */
+    SAXErrorHandler(Logger aLogger ) {
+        m_aLogger = aLogger;
+    }
+    
+    public void warning(SAXParseException e) throws SAXException {
+        m_aLogger.logWarning( e );
+    }
 
-    /**
-     * Get parameter value.
-     * 
-     * @return parameter value.
-     */
-    String getValue();
+    public void error(SAXParseException e) throws SAXException {
+        m_aLogger.logError( e );
+    }
 
+    public void fatalError(SAXParseException e) throws SAXException {
+        m_aLogger.logFatalError(  e );
+    }
 }

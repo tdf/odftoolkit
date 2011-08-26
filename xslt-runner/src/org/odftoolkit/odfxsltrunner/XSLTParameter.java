@@ -20,37 +20,25 @@
  *
  ************************************************************************/
 
-package odfxsltrunner;
-
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerException;
+package org.odftoolkit.odfxsltrunner;
 
 /**
- * This class forwards error reports from the XSLT processor to the
- * logger.
+ * Interface for XSLT parameters
  */
-class TransformerErrorListener implements javax.xml.transform.ErrorListener {
-    
-    private Logger m_aLogger;
+public interface XSLTParameter {
 
-    /** Creates a new instance of TransforemerErrorListener */
-    TransformerErrorListener(Logger aLogger ) {
-        m_aLogger = aLogger;
-    }
-    
-    public void warning(TransformerException e) throws TransformerException {
-        m_aLogger.logWarning(  e );
-    }
+    /** 
+     * Get parameter name.
+     * 
+     * @return parameter name.
+     */
+    String getName();
 
-    public void fatalError(TransformerException e) throws TransformerException {
-        fatalErrorNoException( e );
-    }
+    /**
+     * Get parameter value.
+     * 
+     * @return parameter value.
+     */
+    String getValue();
 
-    public void error(TransformerException e) throws TransformerException {
-        m_aLogger.logError( e );
-    }
-
-    public void fatalErrorNoException(TransformerException e) {
-        m_aLogger.logFatalError(  e );
-    }    
 }

@@ -20,7 +20,7 @@
  *
  ************************************************************************/
 
-package odfxsltrunner;
+package org.odftoolkit.odfxsltrunner;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,8 +38,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import org.openoffice.odf.pkg.OdfPackage;
-import org.openoffice.odf.pkg.manifest.OdfFileEntry;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;

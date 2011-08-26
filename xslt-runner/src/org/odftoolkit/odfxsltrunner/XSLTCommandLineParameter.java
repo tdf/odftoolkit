@@ -20,35 +20,38 @@
  *
  ************************************************************************/
 
-package odfxsltrunner;
+package org.odftoolkit.odfxsltrunner;
 
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
+class XSLTCommandLineParameter implements XSLTParameter
+{
+    private String m_aName;
+    private String m_aValue;
 
-
-/**
- * This class forwards error reports from the XSLT processor to the
- * logger.
- */
-class SAXErrorHandler implements ErrorHandler {
-    
-    private Logger m_aLogger;
-
-    /** Creates a new instance of TransforemerErrorListener */
-    SAXErrorHandler(Logger aLogger ) {
-        m_aLogger = aLogger;
-    }
-    
-    public void warning(SAXParseException e) throws SAXException {
-        m_aLogger.logWarning( e );
-    }
-
-    public void error(SAXParseException e) throws SAXException {
-        m_aLogger.logError( e );
+    XSLTCommandLineParameter( String aCmdLineParam )
+    {
+        String aParam = aCmdLineParam;
+        if( aParam.startsWith("\"") && aParam.endsWith("\""))
+            aParam = aCmdLineParam.substring(1, aCmdLineParam.length()-1);
+        int nIndex = aParam.indexOf( '=' );
+        if( nIndex != -1 )
+        {
+            m_aName = aParam.substring(0, nIndex );
+            m_aValue = aParam.substring(nIndex+1);
+        }
+        else
+        {
+            m_aName = aParam;
+            m_aValue = new String();
+        }
     }
 
-    public void fatalError(SAXParseException e) throws SAXException {
-        m_aLogger.logFatalError(  e );
+    public String getName()
+    {
+        return m_aName;
+    }
+
+    public String getValue()
+    {
+        return m_aValue;
     }
 }

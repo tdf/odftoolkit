@@ -20,38 +20,36 @@
  *
  ************************************************************************/
 
-package odfxsltrunner;
+package org.odftoolkit.odfxsltrunner;
 
-class XSLTCommandLineParameter implements XSLTParameter
-{
-    private String m_aName;
-    private String m_aValue;
+import javax.xml.transform.TransformerException;
 
-    XSLTCommandLineParameter( String aCmdLineParam )
-    {
-        String aParam = aCmdLineParam;
-        if( aParam.startsWith("\"") && aParam.endsWith("\""))
-            aParam = aCmdLineParam.substring(1, aCmdLineParam.length()-1);
-        int nIndex = aParam.indexOf( '=' );
-        if( nIndex != -1 )
-        {
-            m_aName = aParam.substring(0, nIndex );
-            m_aValue = aParam.substring(nIndex+1);
-        }
-        else
-        {
-            m_aName = aParam;
-            m_aValue = new String();
-        }
+/**
+ * This class forwards error reports from the XSLT processor to the
+ * logger.
+ */
+class TransformerErrorListener implements javax.xml.transform.ErrorListener {
+    
+    private Logger m_aLogger;
+
+    /** Creates a new instance of TransforemerErrorListener */
+    TransformerErrorListener(Logger aLogger ) {
+        m_aLogger = aLogger;
+    }
+    
+    public void warning(TransformerException e) throws TransformerException {
+        m_aLogger.logWarning(  e );
     }
 
-    public String getName()
-    {
-        return m_aName;
+    public void fatalError(TransformerException e) throws TransformerException {
+        fatalErrorNoException( e );
     }
 
-    public String getValue()
-    {
-        return m_aValue;
+    public void error(TransformerException e) throws TransformerException {
+        m_aLogger.logError( e );
     }
+
+    public void fatalErrorNoException(TransformerException e) {
+        m_aLogger.logFatalError(  e );
+    }    
 }

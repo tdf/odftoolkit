@@ -31,15 +31,15 @@
     <target name="add-v12-xref" depends="init,jar,-create-v12-xref-schema" 
             description="add cross references to ODF 1.2 specification.">
         <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
-        <property name="log-file" location="${dist.dir}/xref/OpenDocument-v1.2-${opendocument.v12.schema.state.target}.log"/>
+        <property name="log-file" location="${dist.dir}/xref/OpenDocument-v1.2${opendocument.v12.part1.state.target}.log"/>
         <mkdir dir="${dist.dir}/xref"/>
         <java jar="${dist.jar}" fork="true">
             <arg value="-v"/>
             <arg value="-l"/>
             <arg value="${log-file}"/>
             <arg value="sample_xslt/create-embedded-xref.xsl"/>
-            <arg value="${opendocument.v12.spec-source.main}"/>
-            <arg value="${dist.dir}/xref/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"/>
+            <arg value="${opendocument.v12.part1.spec-source}"/>
+            <arg value="${dist.dir}/xref/OpenDocument-v1.2${opendocument.v12.part1.state.target}.odt"/>
             <arg value="xref-schema-file=${xref-schema-file}"/>
         </java>
     </target>
@@ -57,9 +57,9 @@
         </java>
     </target>
     
-    <target name="-create-v12-xref-schema" depends="init,-get-v12-schemas">
+    <target name="-create-v12-xref-schema" depends="init">
         <xslt style="sample_xslt/create-flat-schema.xsl" 
-                    in="${v12.schema.dir}/${opendocument.v12.schema.strict}" 
+                    in="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}"
                     out="${build.dir}/schema/flat/${opendocument.v12.schema.xref}">  
             <param name="incl-conditions" expression="false"/>
             <param name="incl-default-values" expression="false"/>
@@ -68,9 +68,9 @@
         </xslt>
     </target>
     
-    <target name="-create-v12-dtype-schema" depends="init,-get-v12-schemas">
+    <target name="-create-v12-dtype-schema" depends="init">
         <xslt style="sample_xslt/create-flat-schema.xsl" 
-                    in="${v12.schema.dir}/${opendocument.v12.schema.strict}" 
+                    in="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}"
                     out="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}">  
             <param name="incl-conditions" expression="false"/>
             <param name="incl-default-values" expression="true"/>

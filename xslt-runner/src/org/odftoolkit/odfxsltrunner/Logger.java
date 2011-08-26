@@ -20,9 +20,8 @@
  *
  ************************************************************************/
 
-package odfxsltrunner;
+package org.odftoolkit.odfxsltrunner;
 
-import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXParseException;
 
