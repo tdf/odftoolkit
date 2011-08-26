@@ -39,6 +39,7 @@ import org.odftoolkit.odfdom.doc.number.OdfNumberDateStyle;
 import org.odftoolkit.odfdom.doc.number.OdfNumberPercentageStyle;
 import org.odftoolkit.odfdom.doc.number.OdfNumberStyle;
 import org.odftoolkit.odfdom.doc.number.OdfNumberText;
+import org.odftoolkit.odfdom.doc.number.OdfNumberTimeStyle;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
@@ -820,7 +821,7 @@ public class OdfTableCell {
 	 */
 	public Calendar getTimeValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.TIME) {
-			String timeStr = mCellElement.getOfficeDateValueAttribute();
+			String timeStr = mCellElement.getOfficeTimeValueAttribute();
 			Date date = parseString(timeStr, msTime_Format);
 			Calendar calender = Calendar.getInstance();
 			calender.setTime(date);
@@ -834,7 +835,7 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Set the cell value as a date
+	 * Set the cell value as a time
 	 * and set the value type to be date too.
 	 * 
 	 * @param date	the value of calendar type
@@ -844,7 +845,7 @@ public class OdfTableCell {
 		setTypeAttr(OfficeValueTypeAttribute.Value.TIME);
 		SimpleDateFormat simpleFormat = new SimpleDateFormat(msTime_Format);
 		String svalue = simpleFormat.format(date.getTime());
-		mCellElement.setOfficeDateValueAttribute(svalue);
+		mCellElement.setOfficeTimeValueAttribute(svalue);
 		setDisplayText(svalue);
 	}
 
@@ -1148,6 +1149,18 @@ public class OdfTableCell {
 				Calendar date = getDateValue();
 				setDisplayText((new SimpleDateFormat(formatStr)).format(date.getTime()));
 			}
+		} else if (typeValue == OfficeValueTypeAttribute.Value.TIME) {
+			OdfNumberTimeStyle timeStyle = new OdfNumberTimeStyle(
+					(OdfFileDom) mCellElement.getOwnerDocument(), formatStr,
+					getUniqueDateStyleName());
+			mCellElement.getAutomaticStyles().appendChild(timeStyle);
+			setDataDisplayStyleName(timeStyle.getStyleNameAttribute());
+			String timeStr = mCellElement.getOfficeTimeValueAttribute();
+			if (timeStr != null) {
+				Calendar time = getTimeValue();
+				setDisplayText((new SimpleDateFormat(formatStr)).format(time
+						.getTime()));
+			} 
 		} else if (typeValue == OfficeValueTypeAttribute.Value.PERCENTAGE) {
 			OdfNumberPercentageStyle dateStyle = new OdfNumberPercentageStyle(
 					(OdfFileDom) mCellElement.getOwnerDocument(),
@@ -1191,10 +1204,20 @@ public class OdfTableCell {
 			styleElement = ((OdfFileDom) mCellElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getStyle(styleName,
 					OdfStyleFamily.TableCell);
 		}
-
+		
 		if (styleElement == null) {
 			styleElement = mCellElement.getDocumentStyle();
 		}
+
+		if (styleElement == null) {
+			OdfStyle newStyle = mCellElement.getAutomaticStyles().newStyle(
+					OdfStyleFamily.TableCell);
+			String newname = newStyle.getStyleNameAttribute();
+			mCellElement.setStyleName(newname);
+			newStyle.addStyleUser(mCellElement);
+			return newStyle;
+		}
+
 		return styleElement;
 	}
 

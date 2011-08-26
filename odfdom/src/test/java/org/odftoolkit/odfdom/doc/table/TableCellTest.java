@@ -191,6 +191,21 @@ public class TableCellTest {
     	pcell.setFormatString("#0.00%");
     	displayvalue = pcell.getDisplayText();
     	Assert.assertEquals("200"+(new DecimalFormatSymbols()).getDecimalSeparator()+"00%", displayvalue);
+    	// reproduce bug 157
+    	try {
+    		OdfTableRow tablerow = table.getRowByIndex(6);
+    		OdfTableCell cell = tablerow.getCellByIndex(3);
+    		Calendar currenttime = Calendar.getInstance();
+    		cell.setDateValue(currenttime);
+    		cell.setFormatString("yyyy-MM-dd");
+    		tablerow = table.getRowByIndex(7);
+    		cell = tablerow.getCellByIndex(3);
+    		cell.setTimeValue(currenttime);
+    		cell.setFormatString("HH:mm:ss");
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Assert.fail(e.getMessage());
+    	}
     	saveods();
     	
 	}
@@ -330,6 +345,10 @@ public class TableCellTest {
             String  expectedString= simpleFormat.format(expected.getTime());
             String  targetString= simpleFormat.format(fcell.getTimeValue().getTime());
 	    Assert.assertEquals(expectedString,targetString);
+	    // reproduce bug156
+	    String timeValueAttribute = fcell.mCellElement.getOfficeTimeValueAttribute();
+	    Assert.assertNotNull(timeValueAttribute);
+	    Assert.assertEquals(expectedString, timeValueAttribute);
 	}
 	
 	@Test
