@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.number.OdfStyleType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<number:month>".
  */
 public abstract class OdfMonthElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4100147692171547891L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "month" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "month" );
 
     public OdfMonthElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

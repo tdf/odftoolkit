@@ -36,25 +36,22 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.number.OdfTransliterationStyleType;
 import org.odftoolkit.odfdom.dom.type.number.OdfFormatSourceType;
 
+import org.odftoolkit.odfdom.dom.element.style.OdfTextPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfMapElement;
 
 /**
  * ODF DOM Element implementation for element "<number:time-style>".
  */
 public abstract class OdfTimeStyleElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4355460456183072140L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "time-style" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "time-style" );
 
     public OdfTimeStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -306,4 +303,86 @@ public abstract class OdfTimeStyleElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "format-source" ), aStringVal );
     }
 
+    /**
+    * Create child element "style:text-properties".
+    */
+    public OdfTextPropertiesElement createTextPropertiesElement(String   _aDisplay)
+    {
+        OdfTextPropertiesElement  _nTextProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextPropertiesElement.class);
+        this.appendChild( _nTextProperties);
+        return  _nTextProperties;      
+    }
+    
+    /**
+    * Create child element "style:text-properties".
+    */
+    public OdfTextPropertiesElement createTextPropertiesElement(String   _aDisplay, String   _aCondition)
+    {
+        OdfTextPropertiesElement  _nTextProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextPropertiesElement.class);
+        this.appendChild( _nTextProperties);
+        return  _nTextProperties;      
+    }
+    
+    /**
+    * Create child element "number:text".
+    */
+    public OdfTextElement createTextElement()
+    {
+        OdfTextElement  _nText = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextElement.class);
+        this.appendChild( _nText);
+        return  _nText;
+    }                   
+               
+    /**
+    * Create child element "number:hours".
+    */
+    public OdfHoursElement createHoursElement()
+    {
+        OdfHoursElement  _nHours = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHoursElement.class);
+        this.appendChild( _nHours);
+        return  _nHours;
+    }                   
+               
+    /**
+    * Create child element "number:am-pm".
+    */
+    public OdfAmPmElement createAmPmElement()
+    {
+        OdfAmPmElement  _nAmPm = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAmPmElement.class);
+        this.appendChild( _nAmPm);
+        return  _nAmPm;
+    }                   
+               
+    /**
+    * Create child element "number:minutes".
+    */
+    public OdfMinutesElement createMinutesElement()
+    {
+        OdfMinutesElement  _nMinutes = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfMinutesElement.class);
+        this.appendChild( _nMinutes);
+        return  _nMinutes;
+    }                   
+               
+    /**
+    * Create child element "number:seconds".
+    */
+    public OdfSecondsElement createSecondsElement()
+    {
+        OdfSecondsElement  _nSeconds = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSecondsElement.class);
+        this.appendChild( _nSeconds);
+        return  _nSeconds;
+    }                   
+               
+    /**
+    * Create child element "style:map".
+    */
+    public OdfMapElement createMapElement(String   _aCondition, String   _aApplyStyleName)
+    {
+        OdfMapElement  _nMap = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfMapElement.class);
+        _nMap.setCondition( _aCondition);
+        _nMap.setApplyStyleName( _aApplyStyleName);
+        this.appendChild( _nMap);
+        return  _nMap;      
+    }
+    
 }

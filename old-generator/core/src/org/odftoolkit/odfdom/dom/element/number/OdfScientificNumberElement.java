@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<number:scientific-number>".
  */
 public abstract class OdfScientificNumberElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8861845935048380781L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "scientific-number" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "scientific-number" );
 
     public OdfScientificNumberElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

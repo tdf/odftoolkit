@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<number:number>".
  */
 public abstract class OdfNumberElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7597887137793085330L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "number" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "number" );
 
     public OdfNumberElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -150,4 +146,15 @@ public abstract class OdfNumberElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "grouping" ), aStringVal );
     }
 
+    /**
+    * Create child element "number:embedded-text".
+    */
+    public OdfEmbeddedTextElement createEmbeddedTextElement(Integer   _aPosition)
+    {
+        OdfEmbeddedTextElement  _nEmbeddedText = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEmbeddedTextElement.class);
+        _nEmbeddedText.setPosition( _aPosition);
+        this.appendChild( _nEmbeddedText);
+        return  _nEmbeddedText;      
+    }
+    
 }

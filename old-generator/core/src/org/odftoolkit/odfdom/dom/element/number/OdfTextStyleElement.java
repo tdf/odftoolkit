@@ -35,25 +35,22 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.number.OdfTransliterationStyleType;
 
+import org.odftoolkit.odfdom.dom.element.style.OdfTextPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfMapElement;
 
 /**
  * ODF DOM Element implementation for element "<number:text-style>".
  */
 public abstract class OdfTextStyleElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4388640923220462320L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "text-style" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.NUMBER, "text-style" );
 
     public OdfTextStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -259,4 +256,56 @@ public abstract class OdfTextStyleElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "transliteration-style" ), aStringVal );
     }
 
+    /**
+    * Create child element "style:text-properties".
+    */
+    public OdfTextPropertiesElement createTextPropertiesElement(String   _aDisplay)
+    {
+        OdfTextPropertiesElement  _nTextProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextPropertiesElement.class);
+        this.appendChild( _nTextProperties);
+        return  _nTextProperties;      
+    }
+    
+    /**
+    * Create child element "style:text-properties".
+    */
+    public OdfTextPropertiesElement createTextPropertiesElement(String   _aDisplay, String   _aCondition)
+    {
+        OdfTextPropertiesElement  _nTextProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextPropertiesElement.class);
+        this.appendChild( _nTextProperties);
+        return  _nTextProperties;      
+    }
+    
+    /**
+    * Create child element "number:text".
+    */
+    public OdfTextElement createTextElement()
+    {
+        OdfTextElement  _nText = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextElement.class);
+        this.appendChild( _nText);
+        return  _nText;
+    }                   
+               
+    /**
+    * Create child element "number:text-content".
+    */
+    public OdfTextContentElement createTextContentElement()
+    {
+        OdfTextContentElement  _nTextContent = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextContentElement.class);
+        this.appendChild( _nTextContent);
+        return  _nTextContent;
+    }                   
+               
+    /**
+    * Create child element "style:map".
+    */
+    public OdfMapElement createMapElement(String   _aCondition, String   _aApplyStyleName)
+    {
+        OdfMapElement  _nMap = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfMapElement.class);
+        _nMap.setCondition( _aCondition);
+        _nMap.setApplyStyleName( _aApplyStyleName);
+        this.appendChild( _nMap);
+        return  _nMap;      
+    }
+    
 }
