@@ -96,7 +96,7 @@ public class AttributeNameTaglet implements Taglet {
 	        //return "<u>" + tag.text() + "</u>";
 		int pos = tag.text().lastIndexOf(":");
 		String link = "attribute-"+tag.text().substring(0, pos)+"_"+tag.text().substring(pos+1);
-	    	return "<a href=\"../../../../../../OpenDocument-v1.2-cd02.xhtml#"+ link +"\">"+ tag.text()+ "</a>";
+	    	return "<a href=\"http://odftoolkit.org/downloads/odfdom/OpenDocument-v1.2-draft/OpenDocument-v1.2-cd02.xhtml#"+ link +"\">"+ tag.text()+ "</a>";
 	    }
 	    
 	    /**
