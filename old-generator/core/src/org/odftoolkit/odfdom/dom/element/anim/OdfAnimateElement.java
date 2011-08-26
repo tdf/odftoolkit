@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfAdditiveType;
 
 
 /**
- * ODF DOM Element implementation for element "<anim:animate>".
+ * ODF DOM Element implementation for element "&lt;anim:animate>".
  */
 public abstract class OdfAnimateElement extends OdfElement
 {        

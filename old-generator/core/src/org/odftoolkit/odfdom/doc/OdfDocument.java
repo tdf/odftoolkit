@@ -642,7 +642,8 @@ public abstract class OdfDocument {
     /**
      * Create an XPath instance to select one or more nodes from an ODF document.
      * Therefore the namespace context is set to the OdfNamespace
-     * @return
+     * @return an XPath instance with namespace context set to include the standard
+     * ODFDOM prefixes.
      */
     public XPath getXPath() {
         if (mXPath == null) {

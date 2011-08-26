@@ -37,7 +37,7 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
 /**
- * ODF DOM Element implementation for element "<anim:command>".
+ * ODF DOM Element implementation for element "&lt;anim:command>".
  */
 public abstract class OdfCommandElement extends OdfElement
 {        

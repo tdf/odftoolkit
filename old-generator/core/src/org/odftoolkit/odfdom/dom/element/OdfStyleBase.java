@@ -112,7 +112,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
 
     /**
      * get a map containing all properties of this style and their values.
-     * @return 
+     * @return map of properties. 
      */
     public Map<OdfStyleProperty, String> getStyleProperties()
     {
@@ -132,7 +132,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
     /**
      * get a map containing all properties of this style and their values.
      * The map will also include any properties set by parent styles
-     * @return 
+     * @return  a map of all the properties.
      */
     public Map<OdfStyleProperty, String> getStylePropertiesDeep()
     {
@@ -258,7 +258,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
     
     /**
      * 
-     * @return
+     * @return a property value.
      */
     public String getProperty(OdfStyleProperty prop)
     {

@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfAdditiveType;
 
 
 /**
- * ODF DOM Element implementation for element "<anim:set>".
+ * ODF DOM Element implementation for element "&lt;anim:set>".
  */
 public abstract class OdfSetElement extends OdfElement
 {        

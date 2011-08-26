@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
 
 /**
- * ODF DOM Element implementation for element "<anim:animateColor>".
+ * ODF DOM Element implementation for element "&lt;anim:animateColor>".
  */
 public abstract class OdfAnimatecolorElement extends OdfElement
 {        

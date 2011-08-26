@@ -63,7 +63,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
 
     /**
      * 
-     * @return
+     * @return style
      */
     public OdfStyleElement getOrCreateUnqiueAutomaticStyle()
     {
@@ -155,7 +155,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
     
     /**
      * 
-     * @return
+     * @return the style name
      */
     public String getStyleName()
     {
@@ -174,7 +174,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
 
     /**
      * 
-     * @return
+     * @return the automatic style
      */
     public OdfStyle getAutomaticStyle()
     {
@@ -183,7 +183,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
     
     /**
      * 
-     * @return
+     * @return true if there is an automatic style
      */
     public boolean hasAutomaticStyle()
     {
@@ -229,7 +229,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
 
     /**
      * 
-     * @return
+     * @return the document style
      */
     public OdfStyle getDocumentStyle()
     {
@@ -244,7 +244,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
       
     /**
      * 
-     * @return
+     * @return true if there is a document style.
      */
     public boolean hasDocumentStyle()
     {
@@ -267,7 +267,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
 
     /**
      * 
-     * @return
+     * @return the style family.
      */
     public OdfStyleFamily getStyleFamily()
     {
@@ -299,7 +299,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
     /**
      * 
      * @param property
-     * @return
+     * @return string for a property.
      */
     public String getProperty( OdfStyleProperty property )
     {
@@ -318,7 +318,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
     /**
      * 
      * @param properties
-     * @return
+     * @return a map of all the properties.
      */
     public Map<OdfStyleProperty, String> getProperties(Set<OdfStyleProperty> properties)
     {
@@ -331,7 +331,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
 
     /**
      * 
-     * @return
+     * @return a set of all the properties from the style family.
      */
     public Set<OdfStyleProperty> getStrictProperties()
     {
@@ -341,7 +341,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
     /**
      * 
      * @param property
-     * @return
+     * @return true if there is an automatic style with this property.
      */
     public boolean hasProperty(OdfStyleProperty property)
     {

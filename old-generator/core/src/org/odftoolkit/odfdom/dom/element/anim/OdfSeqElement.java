@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
 
 /**
- * ODF DOM Element implementation for element "<anim:seq>".
+ * ODF DOM Element implementation for element "&lt;anim:seq>".
  */
 public abstract class OdfSeqElement extends OdfElement
 {        

@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
 
 /**
- * ODF DOM Element implementation for element "<anim:animateMotion>".
+ * ODF DOM Element implementation for element "&lt;anim:animateMotion>".
  */
 public abstract class OdfAnimatemotionElement extends OdfElement
 {        

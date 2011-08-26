@@ -34,7 +34,7 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 
 
 /**
- * ODF DOM Element implementation for element "<anim:param>".
+ * ODF DOM Element implementation for element "&lt;anim:param>".
  */
 public abstract class OdfParamElement extends OdfElement
 {        

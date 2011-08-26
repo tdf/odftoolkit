@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
 
 /**
- * ODF DOM Element implementation for element "<anim:transitionFilter>".
+ * ODF DOM Element implementation for element "&lt;anim:transitionFilter>".
  */
 public abstract class OdfTransitionfilterElement extends OdfElement
 {        

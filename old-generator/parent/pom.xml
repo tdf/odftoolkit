@@ -37,6 +37,7 @@
         <directory>src</directory>
         <excludes>
           <exclude>**/*.java</exclude>
+          <exclude>**/package.html</exclude>
         </excludes>
       </resource>
       <resource>
@@ -51,6 +52,7 @@
         <directory>test</directory>
         <excludes>
           <exclude>**/*.java</exclude>
+	  <exclude>**/package.html</exclude>
         </excludes>
       </testResource>
     </testResources>

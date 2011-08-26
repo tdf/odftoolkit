@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfEndsyncType;
 
 
 /**
- * ODF DOM Element implementation for element "<anim:iterate>".
+ * ODF DOM Element implementation for element "&lt;anim:iterate>".
  */
 public abstract class OdfIterateElement extends OdfElement
 {        

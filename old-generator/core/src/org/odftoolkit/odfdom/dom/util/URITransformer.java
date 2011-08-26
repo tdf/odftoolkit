@@ -139,7 +139,7 @@ import java.util.logging.Logger;
  * authority component is present and is server-based then the host component
  * will be defined and the user-information and port components may be defined.
  * 
- * @see <a href="http://www.isi.edu/in-notes/rfc2396.txt""><i>RFC&nbsp;2396:
+ * See <a href="http://www.isi.edu/in-notes/rfc2396.txt""><i>RFC&nbsp;2396:
  * Uniform Resource Identifiers (URI): Generic Syntax</i></a>
  *
  */
@@ -294,13 +294,9 @@ public class URITransformer {
      * <p>Transforms a path that was created with the 
      * {@link #uri2path(String)} method back to an URI.</p>
      * 
-     * <p>This method does try to cope with an errornous 
+     * <p>This method does try to cope with an erroneous 
      * input parameter but the result returned in such a case is not 
-     * guaranteed to be a valid URI. For JDK1.4 constructing an 
-     * instance of the class java.net.URI with the String returned can
-     * be used to check if the result is valid. For JDK versions prior
-     * JDK1.4 the class {@link URI} in this package provides similar
-     * functionallity.</p>
+     * guaranteed to be a valid URI.</p>
      *
      * @param path the path that contains the URI information
      * @return a String representing a URI

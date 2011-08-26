@@ -77,7 +77,7 @@ public interface OdfStylePropertySet
     public Map< OdfStyleProperty, String > getProperties( Set< OdfStyleProperty > properties );
                                     
     /** 
-     * @returns a sequence with all properties which are specified in the strict odf format.
+     * @return a set with all properties which are specified in the strict odf format.
      */
     public Set< OdfStyleProperty > getStrictProperties();     
 }

@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfEndsyncType;
 
 
 /**
- * ODF DOM Element implementation for element "<anim:par>".
+ * ODF DOM Element implementation for element "&lt;anim:par>".
  */
 public abstract class OdfParElement extends OdfElement
 {        

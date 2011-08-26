@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
 
 
 /**
- * ODF DOM Element implementation for element "<anim:audio>".
+ * ODF DOM Element implementation for element "&lt;anim:audio>".
  */
 public abstract class OdfAudioElement extends OdfElement
 {        
