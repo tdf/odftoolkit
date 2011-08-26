@@ -29,19 +29,19 @@
 package org.odftoolkit.odfdom.doc.element.anim;
 
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.dom.element.anim.OdfAnimatetransformElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfAnimateTransformElement;
 
 /**
  *
  */
-public class OdfAnimatetransform extends OdfAnimatetransformElement
+public class OdfAnimateTransform extends OdfAnimateTransformElement
 {
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = -7629072437031824542L;
 
-	public OdfAnimatetransform( OdfFileDom _aOwnerDoc )
+	public OdfAnimateTransform( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

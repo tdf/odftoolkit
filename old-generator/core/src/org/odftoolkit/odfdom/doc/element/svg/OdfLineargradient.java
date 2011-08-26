@@ -29,19 +29,19 @@
 package org.odftoolkit.odfdom.doc.element.svg;
 
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.dom.element.svg.OdfLineargradientElement;
+import org.odftoolkit.odfdom.dom.element.svg.OdfLinearGradientElement;
 
 /**
  *
  */
-public class OdfLineargradient extends OdfLineargradientElement
+public class OdfLinearGradient extends OdfLinearGradientElement
 {
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = -5206038776281244258L;
 
-	public OdfLineargradient( OdfFileDom _aOwnerDoc )
+	public OdfLinearGradient( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

@@ -29,19 +29,19 @@
 package org.odftoolkit.odfdom.doc.element.anim;
 
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.dom.element.anim.OdfAnimatecolorElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfAnimateColorElement;
 
 /**
  *
  */
-public class OdfAnimatecolor extends OdfAnimatecolorElement
+public class OdfAnimateColor extends OdfAnimateColorElement
 {
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 2172973795128135883L;
 
-	public OdfAnimatecolor( OdfFileDom _aOwnerDoc )
+	public OdfAnimateColor( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }

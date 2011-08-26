@@ -29,19 +29,19 @@
 package org.odftoolkit.odfdom.doc.element.anim;
 
 import org.odftoolkit.odfdom.doc.OdfFileDom;
-import org.odftoolkit.odfdom.dom.element.anim.OdfTransitionfilterElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfTransitionFilterElement;
 
 /**
  *
  */
-public class OdfTransitionfilter extends OdfTransitionfilterElement
+public class OdfTransitionFilter extends OdfTransitionFilterElement
 {
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 5226047891509594222L;
 
-	public OdfTransitionfilter( OdfFileDom _aOwnerDoc )
+	public OdfTransitionFilter( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc );
     }
