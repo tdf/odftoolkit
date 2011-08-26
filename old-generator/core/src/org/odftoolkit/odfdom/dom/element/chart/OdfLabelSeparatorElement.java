@@ -32,28 +32,34 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 
 /**
  * ODF DOM Element implementation for element "<chart:label-separator>".
  */
 public abstract class OdfLabelSeparatorElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 432454669640993211L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "label-separator" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "label-separator" );
 
     public OdfLabelSeparatorElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
 }

@@ -40,25 +40,22 @@ import org.odftoolkit.odfdom.dom.type.dr3d.OdfShadeModeType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+import org.odftoolkit.odfdom.dom.element.dr3d.OdfLightElement;
+import org.odftoolkit.odfdom.dom.type.chart.OdfDimensionType;
 
 /**
  * ODF DOM Element implementation for element "<chart:plot-area>".
  */
 public abstract class OdfPlotAreaElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -360037012490394100L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "plot-area" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "plot-area" );
 
     public OdfPlotAreaElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.get( OdfNamespace.CHART, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -131,8 +128,7 @@ public abstract class OdfPlotAreaElement extends OdfStylableElement
     /**
      * Get value of attribute "chart:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -141,8 +137,7 @@ public abstract class OdfPlotAreaElement extends OdfStylableElement
     /**
      * Set value of attribute "chart:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ), aStringVal );
@@ -389,4 +384,86 @@ public abstract class OdfPlotAreaElement extends OdfStylableElement
         setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
+    /**
+    * Create child element "dr3d:light".
+    */
+    public OdfLightElement createLightElement(String   _aDirection)
+    {
+        OdfLightElement  _nLight = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLightElement.class);
+        _nLight.setDirection( _aDirection);
+        this.appendChild( _nLight);
+        return  _nLight;      
+    }
+    
+    /**
+    * Create child element "chart:axis".
+    */
+    public OdfAxisElement createAxisElement(OdfDimensionType   _aDimension)
+    {
+        OdfAxisElement  _nAxis = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAxisElement.class);
+        _nAxis.setDimension( _aDimension);
+        this.appendChild( _nAxis);
+        return  _nAxis;      
+    }
+    
+    /**
+    * Create child element "chart:series".
+    */
+    public OdfSeriesElement createSeriesElement()
+    {
+        OdfSeriesElement  _nSeries = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSeriesElement.class);
+        this.appendChild( _nSeries);
+        return  _nSeries;
+    }                   
+               
+    /**
+    * Create child element "chart:stock-gain-marker".
+    */
+    public OdfStockGainMarkerElement createStockGainMarkerElement()
+    {
+        OdfStockGainMarkerElement  _nStockGainMarker = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfStockGainMarkerElement.class);
+        this.appendChild( _nStockGainMarker);
+        return  _nStockGainMarker;
+    }                   
+               
+    /**
+    * Create child element "chart:stock-loss-marker".
+    */
+    public OdfStockLossMarkerElement createStockLossMarkerElement()
+    {
+        OdfStockLossMarkerElement  _nStockLossMarker = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfStockLossMarkerElement.class);
+        this.appendChild( _nStockLossMarker);
+        return  _nStockLossMarker;
+    }                   
+               
+    /**
+    * Create child element "chart:stock-range-line".
+    */
+    public OdfStockRangeLineElement createStockRangeLineElement()
+    {
+        OdfStockRangeLineElement  _nStockRangeLine = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfStockRangeLineElement.class);
+        this.appendChild( _nStockRangeLine);
+        return  _nStockRangeLine;
+    }                   
+               
+    /**
+    * Create child element "chart:wall".
+    */
+    public OdfWallElement createWallElement()
+    {
+        OdfWallElement  _nWall = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfWallElement.class);
+        this.appendChild( _nWall);
+        return  _nWall;
+    }                   
+               
+    /**
+    * Create child element "chart:floor".
+    */
+    public OdfFloorElement createFloorElement()
+    {
+        OdfFloorElement  _nFloor = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFloorElement.class);
+        this.appendChild( _nFloor);
+        return  _nFloor;
+    }                   
+               
 }

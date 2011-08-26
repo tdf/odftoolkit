@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 
 /**
  * ODF DOM Element implementation for element "<chart:footer>".
  */
 public abstract class OdfFooterElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7531083988752018180L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "footer" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "footer" );
 
     public OdfFooterElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.get( OdfNamespace.CHART, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -112,8 +108,7 @@ public abstract class OdfFooterElement extends OdfStylableElement
     /**
      * Get value of attribute "chart:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -122,11 +117,20 @@ public abstract class OdfFooterElement extends OdfStylableElement
     /**
      * Set value of attribute "chart:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
 }

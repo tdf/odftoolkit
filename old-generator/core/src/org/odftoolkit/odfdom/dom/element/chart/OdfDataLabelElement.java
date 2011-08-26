@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 
 /**
  * ODF DOM Element implementation for element "<chart:data-label>".
  */
 public abstract class OdfDataLabelElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5473297823258771264L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "data-label" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "data-label" );
 
     public OdfDataLabelElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -107,4 +103,14 @@ public abstract class OdfDataLabelElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
 }

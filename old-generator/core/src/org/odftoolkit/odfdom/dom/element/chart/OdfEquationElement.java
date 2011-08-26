@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 
 /**
  * ODF DOM Element implementation for element "<chart:equation>".
  */
 public abstract class OdfEquationElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6499938895800872781L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "equation" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "equation" );
 
     public OdfEquationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -172,4 +168,14 @@ public abstract class OdfEquationElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
 }

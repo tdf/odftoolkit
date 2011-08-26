@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<chart:regression-curve>".
  */
 public abstract class OdfRegressionCurveElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6091073538538541481L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "regression-curve" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "regression-curve" );
 
     public OdfRegressionCurveElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.get( OdfNamespace.CHART, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -61,8 +57,7 @@ public abstract class OdfRegressionCurveElement extends OdfStylableElement
     /**
      * Get value of attribute "chart:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -71,11 +66,20 @@ public abstract class OdfRegressionCurveElement extends OdfStylableElement
     /**
      * Set value of attribute "chart:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ), aStringVal );
     }
 
+    /**
+    * Create child element "chart:equation".
+    */
+    public OdfEquationElement createEquationElement()
+    {
+        OdfEquationElement  _nEquation = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEquationElement.class);
+        this.appendChild( _nEquation);
+        return  _nEquation;
+    }                   
+               
 }

@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.chart.OdfDimensionType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<chart:axis>".
  */
 public abstract class OdfAxisElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3868864485875555103L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "axis" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "axis" );
 
     public OdfAxisElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.get( OdfNamespace.CHART, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -103,8 +99,7 @@ public abstract class OdfAxisElement extends OdfStylableElement
     /**
      * Get value of attribute "chart:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -113,11 +108,40 @@ public abstract class OdfAxisElement extends OdfStylableElement
     /**
      * Set value of attribute "chart:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ), aStringVal );
     }
 
+    /**
+    * Create child element "chart:title".
+    */
+    public OdfTitleElement createTitleElement()
+    {
+        OdfTitleElement  _nTitle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTitleElement.class);
+        this.appendChild( _nTitle);
+        return  _nTitle;
+    }                   
+               
+    /**
+    * Create child element "chart:categories".
+    */
+    public OdfCategoriesElement createCategoriesElement()
+    {
+        OdfCategoriesElement  _nCategories = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCategoriesElement.class);
+        this.appendChild( _nCategories);
+        return  _nCategories;
+    }                   
+               
+    /**
+    * Create child element "chart:grid".
+    */
+    public OdfGridElement createGridElement()
+    {
+        OdfGridElement  _nGrid = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfGridElement.class);
+        this.appendChild( _nGrid);
+        return  _nGrid;
+    }                   
+               
 }

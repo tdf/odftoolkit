@@ -36,25 +36,23 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+import org.odftoolkit.odfdom.dom.type.chart.OdfLegendPositionType;
+import org.odftoolkit.odfdom.dom.type.style.OdfLegendExpansionType;
+import org.odftoolkit.odfdom.dom.element.table.OdfTableElement;
 
 /**
  * ODF DOM Element implementation for element "<chart:chart>".
  */
 public abstract class OdfChartElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8842572651427504772L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "chart" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "chart" );
 
     public OdfChartElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.get( OdfNamespace.CHART, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -150,8 +148,7 @@ public abstract class OdfChartElement extends OdfStylableElement
     /**
      * Get value of attribute "chart:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -160,8 +157,7 @@ public abstract class OdfChartElement extends OdfStylableElement
     /**
      * Set value of attribute "chart:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ), aStringVal );
@@ -204,4 +200,88 @@ public abstract class OdfChartElement extends OdfStylableElement
         setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
+    /**
+    * Create child element "chart:title".
+    */
+    public OdfTitleElement createTitleElement()
+    {
+        OdfTitleElement  _nTitle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTitleElement.class);
+        this.appendChild( _nTitle);
+        return  _nTitle;
+    }                   
+               
+    /**
+    * Create child element "chart:subtitle".
+    */
+    public OdfSubtitleElement createSubtitleElement()
+    {
+        OdfSubtitleElement  _nSubtitle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSubtitleElement.class);
+        this.appendChild( _nSubtitle);
+        return  _nSubtitle;
+    }                   
+               
+    /**
+    * Create child element "chart:footer".
+    */
+    public OdfFooterElement createFooterElement()
+    {
+        OdfFooterElement  _nFooter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFooterElement.class);
+        this.appendChild( _nFooter);
+        return  _nFooter;
+    }                   
+               
+    /**
+    * Create child element "chart:legend".
+    */
+    public OdfLegendElement createLegendElement(OdfLegendPositionType   _aLegendPosition)
+    {
+        OdfLegendElement  _nLegend = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLegendElement.class);
+        _nLegend.setLegendPosition( _aLegendPosition);
+        this.appendChild( _nLegend);
+        return  _nLegend;      
+    }
+    
+    /**
+    * Create child element "chart:legend".
+    */
+    public OdfLegendElement createLegendElement(OdfLegendExpansionType   _aLegendExpansion)
+    {
+        OdfLegendElement  _nLegend = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLegendElement.class);
+        _nLegend.setLegendExpansion( _aLegendExpansion);
+        this.appendChild( _nLegend);
+        return  _nLegend;      
+    }
+    
+    /**
+    * Create child element "chart:legend".
+    */
+    public OdfLegendElement createLegendElement(OdfLegendExpansionType   _aLegendExpansion, Double   _aLegendExpansionAspectRatio)
+    {
+        OdfLegendElement  _nLegend = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLegendElement.class);
+        _nLegend.setLegendExpansion( _aLegendExpansion);
+        _nLegend.setLegendExpansionAspectRatio( _aLegendExpansionAspectRatio);
+        this.appendChild( _nLegend);
+        return  _nLegend;      
+    }
+    
+    /**
+    * Create child element "chart:plot-area".
+    */
+    public OdfPlotAreaElement createPlotAreaElement()
+    {
+        OdfPlotAreaElement  _nPlotArea = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPlotAreaElement.class);
+        this.appendChild( _nPlotArea);
+        return  _nPlotArea;
+    }                   
+               
+    /**
+    * Create child element "table:table".
+    */
+    public OdfTableElement createTableElement()
+    {
+        OdfTableElement  _nTable = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableElement.class);
+        this.appendChild( _nTable);
+        return  _nTable;
+    }                   
+               
 }

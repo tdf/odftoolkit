@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.chart.OdfClassType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<chart:grid>".
  */
 public abstract class OdfGridElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5891180126640513830L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "grid" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "grid" );
 
     public OdfGridElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.get( OdfNamespace.CHART, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -85,8 +81,7 @@ public abstract class OdfGridElement extends OdfStylableElement
     /**
      * Get value of attribute "chart:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -95,8 +90,7 @@ public abstract class OdfGridElement extends OdfStylableElement
     /**
      * Set value of attribute "chart:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ), aStringVal );

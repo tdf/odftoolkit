@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<chart:domain>".
  */
 public abstract class OdfDomainElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7185308075921541319L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "domain" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "domain" );
 
     public OdfDomainElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

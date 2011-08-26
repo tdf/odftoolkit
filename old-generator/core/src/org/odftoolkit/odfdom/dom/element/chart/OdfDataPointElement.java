@@ -36,25 +36,21 @@ import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<chart:data-point>".
  */
 public abstract class OdfDataPointElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1167919650920579776L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "data-point" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.CHART, "data-point" );
 
     public OdfDataPointElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.get( OdfNamespace.CHART, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -81,8 +77,7 @@ public abstract class OdfDataPointElement extends OdfStylableElement
     /**
      * Get value of attribute "chart:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -91,8 +86,7 @@ public abstract class OdfDataPointElement extends OdfStylableElement
     /**
      * Set value of attribute "chart:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ), aStringVal );
@@ -116,4 +110,14 @@ public abstract class OdfDataPointElement extends OdfStylableElement
         setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
+    /**
+    * Create child element "chart:data-label".
+    */
+    public OdfDataLabelElement createDataLabelElement()
+    {
+        OdfDataLabelElement  _nDataLabel = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataLabelElement.class);
+        this.appendChild( _nDataLabel);
+        return  _nDataLabel;
+    }                   
+               
 }
