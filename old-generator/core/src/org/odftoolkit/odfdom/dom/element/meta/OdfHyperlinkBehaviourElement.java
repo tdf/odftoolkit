@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.office.OdfTargetFrameNameType;
 import org.odftoolkit.odfdom.dom.type.xlink.OdfShowType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<meta:hyperlink-behaviour>".
  */
 public abstract class OdfHyperlinkBehaviourElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -906275740495935223L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "hyperlink-behaviour" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "hyperlink-behaviour" );
 
     public OdfHyperlinkBehaviourElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

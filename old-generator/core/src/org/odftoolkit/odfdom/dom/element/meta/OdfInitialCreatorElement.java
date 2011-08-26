@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<meta:initial-creator>".
  */
 public abstract class OdfInitialCreatorElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7658134259345718991L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "initial-creator" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "initial-creator" );
 
     public OdfInitialCreatorElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

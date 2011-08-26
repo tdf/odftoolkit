@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<meta:editing-duration>".
  */
 public abstract class OdfEditingDurationElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1988087315987827853L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "editing-duration" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "editing-duration" );
 
     public OdfEditingDurationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.meta.OdfValueType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<meta:user-defined>".
  */
 public abstract class OdfUserDefinedElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2759616857576723478L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "user-defined" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "user-defined" );
 
     public OdfUserDefinedElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.odftoolkit.odfdom.dom.type.OdfDate;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<meta:template>".
  */
 public abstract class OdfTemplateElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7917748645826566536L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "template" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "template" );
 
     public OdfTemplateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 import javax.xml.datatype.Duration;
 import org.odftoolkit.odfdom.dom.type.OdfDuration;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<meta:auto-reload>".
  */
 public abstract class OdfAutoReloadElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7654262038620200904L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "auto-reload" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "auto-reload" );
 
     public OdfAutoReloadElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

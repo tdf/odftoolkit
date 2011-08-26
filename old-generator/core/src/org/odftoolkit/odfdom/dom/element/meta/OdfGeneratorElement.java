@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<meta:generator>".
  */
 public abstract class OdfGeneratorElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8354321896720922426L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "generator" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.META, "generator" );
 
     public OdfGeneratorElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
