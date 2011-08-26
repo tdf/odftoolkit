@@ -80,8 +80,8 @@ public class OdfTableCell {
 	OdfTable mOwnerTable;
 	String msFormatString;
 	static private Logger mLog = Logger.getLogger(OdfTableCell.class.getName());
-	private static final String msDate_Format = "yyyy-MM-dd";
-	private static final String msTime_Format = "'PT'HH'H'mm'M'ss'S'";
+	private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+	private static final String DEFAULT_TIME_FORMAT = "'PT'HH'H'mm'M'ss'S'";
 	TableTableCellElementBase mCellElement;
 
 	OdfTableCell(TableTableCellElementBase odfElement, int repeatedColIndex, int repeatedRowIndex) {
@@ -708,7 +708,7 @@ public class OdfTableCell {
 			if (dateStr == null) {
 				return null;
 			}
-			Date date = parseString(dateStr, msDate_Format);
+			Date date = parseString(dateStr, DEFAULT_DATE_FORMAT);
 			Calendar calender = Calendar.getInstance();
 			calender.setTime(date);
 			return calender;
@@ -726,7 +726,7 @@ public class OdfTableCell {
 	public void setDateValue(Calendar date) {
 		doPrepare();
 		setTypeAttr(OfficeValueTypeAttribute.Value.DATE);
-		SimpleDateFormat simpleFormat = new SimpleDateFormat(msDate_Format);
+		SimpleDateFormat simpleFormat = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
 		String svalue = simpleFormat.format(date.getTime());
 		mCellElement.setOfficeDateValueAttribute(svalue);
 		setDisplayText(svalue);
@@ -822,7 +822,7 @@ public class OdfTableCell {
 	public Calendar getTimeValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.TIME) {
 			String timeStr = mCellElement.getOfficeTimeValueAttribute();
-			Date date = parseString(timeStr, msTime_Format);
+			Date date = parseString(timeStr, DEFAULT_TIME_FORMAT);
 			Calendar calender = Calendar.getInstance();
 			calender.setTime(date);
 			calender.clear(Calendar.YEAR);
@@ -843,7 +843,7 @@ public class OdfTableCell {
 	public void setTimeValue(Calendar date) {
 		doPrepare();
 		setTypeAttr(OfficeValueTypeAttribute.Value.TIME);
-		SimpleDateFormat simpleFormat = new SimpleDateFormat(msTime_Format);
+		SimpleDateFormat simpleFormat = new SimpleDateFormat(DEFAULT_TIME_FORMAT);
 		String svalue = simpleFormat.format(date.getTime());
 		mCellElement.setOfficeTimeValueAttribute(svalue);
 		setDisplayText(svalue);

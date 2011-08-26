@@ -72,25 +72,20 @@ public class OdfTable {
 
 	TableTableElement mTableElement;
 	OdfDocument mDocument;
-	int mnRowNumber, mnColumnNumber, mnHeaderRowNumber, mnHeaderColumnNumber;
-	String msTableName;
+	String mTableName;
 	boolean mIsProtected;
-	static private final int DefaultRowCount = 2;
-	static private final int DefaultColumnCount = 5;
-	static private final double DefaultTableWidth = 6;
-	static private final int DefaultRelTableWidth = 65535;
-	//TODO: should save seperately for different dom tree
-	static Hashtable<TableTableElement, OdfTable> mTableRepository =
-			new Hashtable<TableTableElement, OdfTable>();
-	Hashtable<TableTableCellElementBase, Vector<OdfTableCell>> mCellRepository =
-			new Hashtable<TableTableCellElementBase, Vector<OdfTableCell>>();
-	Hashtable<TableTableRowElement, Vector<OdfTableRow>> mRowRepository =
-			new Hashtable<TableTableRowElement, Vector<OdfTableRow>>();
-	Hashtable<TableTableColumnElement, Vector<OdfTableColumn>> mColumnRepository =
-			new Hashtable<TableTableColumnElement, Vector<OdfTableColumn>>();
+	private static final int DEFAULT_ROW_COUNT = 2;
+	private static final int DEFAULT_COLUMN_COUNT = 5;
+	private static final double DEFAULT_TABLE_WIDTH = 6;
+	private static final int DEFAULT_REL_TABLE_WIDTH = 65535;
+	private static final String DEFAULT_TABLE_ALIGN = "margins";
+	// TODO: should save seperately for different dom tree
+	static Hashtable<TableTableElement, OdfTable> mTableRepository = new Hashtable<TableTableElement, OdfTable>();
+	Hashtable<TableTableCellElementBase, Vector<OdfTableCell>> mCellRepository = new Hashtable<TableTableCellElementBase, Vector<OdfTableCell>>();
+	Hashtable<TableTableRowElement, Vector<OdfTableRow>> mRowRepository = new Hashtable<TableTableRowElement, Vector<OdfTableRow>>();
+	Hashtable<TableTableColumnElement, Vector<OdfTableColumn>> mColumnRepository = new Hashtable<TableTableColumnElement, Vector<OdfTableColumn>>();
 
 	private OdfTable(TableTableElement table) {
-		super();
 		mTableElement = table;
 	}
 
@@ -322,7 +317,14 @@ public class OdfTable {
 		style.setProperty(OdfStyleTableCellProperties.BorderBottom, "0.0007in solid #000000");
 	}
 
-	private static TableTableElement createTable(OdfDocument document, int numRows, int numCols, int headerrownumber, int headercolumnnumber) throws Exception {
+	private static TableTableElement createTable(OdfDocument document, int numRows, int numCols, int headerRowNumber, int headerColumnNumber) throws Exception {
+		// check arguments
+		if (numRows < 1 || numCols < 1 || headerRowNumber < 0
+				|| headerColumnNumber < 0 || headerRowNumber > numRows
+				|| headerColumnNumber > numCols) {
+			throw new IllegalArgumentException("Can not create table with the given parameters:\n" +
+					"Rows " + numRows + ", Columns " + numCols + ", HeaderRows " + headerRowNumber + ", HeaderColumns " + headerColumnNumber);
+		}
 		OdfFileDom dom = document.getContentDom();
 		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
 		//1. create table element
@@ -333,8 +335,8 @@ public class OdfTable {
 		//create style
 		OdfStyle tableStyle = styles.newStyle(OdfStyleFamily.Table);
 		tableStyle.setStyleNameAttribute(tablename);
-		tableStyle.setProperty(OdfStyleTableProperties.Width, DefaultTableWidth + "in");
-		tableStyle.setProperty(OdfStyleTableProperties.Align, "margins");
+		tableStyle.setProperty(OdfStyleTableProperties.Width, DEFAULT_TABLE_WIDTH + "in");
+		tableStyle.setProperty(OdfStyleTableProperties.Align, DEFAULT_TABLE_ALIGN);
 		newTEle.setStyleName(tablename);
 
 		//2. create column elements
@@ -343,7 +345,7 @@ public class OdfTable {
 				OdfName.newName(OdfNamespaceNames.TABLE, "table-header-columns"));
 		TableTableColumnElement headercolumn = (TableTableColumnElement) OdfElementFactory.newOdfElement(dom,
 				OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
-		headercolumn.setTableNumberColumnsRepeatedAttribute(headercolumnnumber);
+		headercolumn.setTableNumberColumnsRepeatedAttribute(headerColumnNumber);
 		headercolumns.appendChild(headercolumn);
 		newTEle.appendChild(headercolumns);
 
@@ -351,14 +353,14 @@ public class OdfTable {
 		OdfStyle columnStyle = styles.newStyle(OdfStyleFamily.TableColumn);
 		columnStyle.setStyleNameAttribute(columnStylename);
 		columnStyle.setProperty(OdfStyleTableColumnProperties.ColumnWidth,
-				new DecimalFormat("000.0000").format(DefaultTableWidth / numCols) + "in");
-		columnStyle.setProperty(OdfStyleTableColumnProperties.RelColumnWidth, Math.round(DefaultRelTableWidth / numCols) + "*");
+				new DecimalFormat("000.0000").format(DEFAULT_TABLE_WIDTH / numCols) + "in");
+		columnStyle.setProperty(OdfStyleTableColumnProperties.RelColumnWidth, Math.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
 		headercolumn.setStyleName(columnStylename);
 
 		//2.2 create common column elements
 		TableTableColumnElement columns = (TableTableColumnElement) OdfElementFactory.newOdfElement(dom,
 				OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
-		columns.setTableNumberColumnsRepeatedAttribute(numCols - headercolumnnumber);
+		columns.setTableNumberColumnsRepeatedAttribute(numCols - headerColumnNumber);
 		columns.setStyleName(columnStylename);
 		newTEle.appendChild(columns);
 
@@ -387,7 +389,7 @@ public class OdfTable {
 		//3.1 create header row elements
 		TableTableHeaderRowsElement headerrows = (TableTableHeaderRowsElement) OdfElementFactory.newOdfElement(dom,
 				OdfName.newName(OdfNamespaceNames.TABLE, "table-header-rows"));
-		for (int i = 0; i < headerrownumber; i++) {
+		for (int i = 0; i < headerRowNumber; i++) {
 			TableTableRowElement aRow = (TableTableRowElement) OdfElementFactory.newOdfElement(dom,
 					OdfName.newName(OdfNamespaceNames.TABLE, "table-row"));
 			for (int j = 0; j < numCols; j++) {
@@ -412,7 +414,7 @@ public class OdfTable {
 		newTEle.appendChild(headerrows);
 
 		//3.2 create common row elements
-		for (int i = headerrownumber; i < numRows; i++) {
+		for (int i = headerRowNumber; i < numRows; i++) {
 			TableTableRowElement aRow = (TableTableRowElement) OdfElementFactory.newOdfElement(dom,
 					OdfName.newName(OdfNamespaceNames.TABLE, "table-row"));
 			for (int j = 0; j < numCols; j++) {
@@ -450,7 +452,7 @@ public class OdfTable {
 	 */
 	public static OdfTable newTable(OdfDocument document) {
 		try {
-			TableTableElement newTEle = createTable(document, DefaultRowCount, DefaultColumnCount, 0, 0);
+			TableTableElement newTEle = createTable(document, DEFAULT_ROW_COUNT, DEFAULT_COLUMN_COUNT, 0, 0);
 
 			//4. append to the end of document
 			OdfElement root = document.getContentDom().getRootElement();
@@ -482,8 +484,8 @@ public class OdfTable {
 			for (int i = 0; i < tableList.size(); i++) {
 				if (tableList.get(i).getTableName().equalsIgnoreCase(tablename)) {
 					notUnique = true;
+					break;
 				}
-				break;
 			}
 			if (notUnique) {
 				tablename = tablename + Math.round(Math.random() * 10);
@@ -537,13 +539,13 @@ public class OdfTable {
 	 * @param document	the ODF document that contains this feature 
 	 * @param numRows	the row number
 	 * @param numCols	the column number
-	 * @param headerrownumber	the header row number
-	 * @param headercolumnnumber	the header column number
+	 * @param headerRowNumber	the header row number
+	 * @param headerColumnNumber	the header column number
 	 * @return a new instance of <code>OdfTable</code>
 	 * */
-	public static OdfTable newTable(OdfDocument document, int numRows, int numCols, int headerrownumber, int headercolumnnumber) {
+	public static OdfTable newTable(OdfDocument document, int numRows, int numCols, int headerRowNumber, int headerColumnNumber) {
 		try {
-			TableTableElement newTEle = createTable(document, numRows, numCols, headerrownumber, headercolumnnumber);
+			TableTableElement newTEle = createTable(document, numRows, numCols, headerRowNumber, headerColumnNumber);
 
 			//4. append to the end of document
 			OdfElement root = document.getContentDom().getRootElement();
@@ -578,21 +580,26 @@ public class OdfTable {
 	 * @return a new instance of <code>OdfTable</code>
 	 */
 	public static OdfTable newTable(OdfDocument document, String[] rowLabel, String[] columnLabel, double[][] data) {
-		int rownumber = data.length;
-		int columnnumber = data[0].length;
-		int rowheaders = 0, columnheaders = 0;
+		//fix bug121
+		int rowNumber = DEFAULT_ROW_COUNT;
+		int columnNumber = DEFAULT_COLUMN_COUNT;
+		if (data != null) {
+			rowNumber = data.length;
+			columnNumber = data[0].length;
+		}
+		int rowHeaders = 0, columnHeaders = 0;
 
 		if (rowLabel != null) {
-			rowheaders = 1;
+			rowHeaders = 1;
 		}
 		if (columnLabel != null) {
-			columnheaders = 1;
+			columnHeaders = 1;
 		}
 
 		try {
-			TableTableElement newTEle = createTable(document, rownumber + rowheaders, columnnumber + columnheaders, rowheaders, columnheaders);
+			TableTableElement newTEle = createTable(document, rowNumber + rowHeaders, columnNumber + columnHeaders, rowHeaders, columnHeaders);
 
-			//4. append to the end of document
+			//append to the end of document
 			OdfElement root = document.getContentDom().getRootElement();
 			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
@@ -600,21 +607,21 @@ public class OdfTable {
 
 			OdfTable table = OdfTable.getInstance(newTEle);
 			List<OdfTableRow> rowList = table.getRowList();
-			for (int i = 0; i < rownumber + rowheaders; i++) {
+			for (int i = 0; i < rowNumber + rowHeaders; i++) {
 				OdfTableRow row = rowList.get(i);
-				for (int j = 0; j < columnnumber + columnheaders; j++) {
+				for (int j = 0; j < columnNumber + columnHeaders; j++) {
 					if ((i == 0) && (j == 0)) {
 						continue;
 					}
 					OdfTableCell cell = row.getCellByIndex(j);
-					if (i == 0) //first row, should fill column labels
+					if (i == 0 && columnLabel != null) //first row, should fill column labels
 					{
 						if (j <= columnLabel.length) {
 							cell.setStringValue(columnLabel[j - 1]);
 						} else {
 							cell.setStringValue("");
 						}
-					} else if (j == 0) //first column, should fill row labels
+					} else if (j == 0 && rowLabel != null) //first column, should fill row labels
 					{
 						if (i <= rowLabel.length) {
 							cell.setStringValue(rowLabel[i - 1]);
@@ -622,7 +629,10 @@ public class OdfTable {
 							cell.setStringValue("");
 						}
 					} else {//data
-						cell.setDoubleValue(data[i - 1][j - 1]);
+						//fix bug121
+						if ((data != null) && (i >= rowHeaders) && (j >= columnHeaders)) {
+							cell.setDoubleValue(data[i - rowHeaders][j - columnHeaders]);
+						}
 					}
 				}
 			}
@@ -653,21 +663,26 @@ public class OdfTable {
 	 * @return a new instance of <code>OdfTable</code>
 	 */
 	public static OdfTable newTable(OdfDocument document, String[] rowLabel, String[] columnLabel, String[][] data) {
-		int rownumber = data.length;
-		int columnnumber = data[0].length;
-		int rowheaders = 0, columnheaders = 0;
+		//fix bug121 
+		int rowNumber = DEFAULT_ROW_COUNT;
+		int columnNumber = DEFAULT_COLUMN_COUNT;
+		if (data != null) {
+			rowNumber = data.length;
+			columnNumber = data[0].length;
+		}
+		int rowHeaders = 0, columnHeaders = 0;
 
 		if (rowLabel != null) {
-			rowheaders = 1;
+			rowHeaders = 1;
 		}
 		if (columnLabel != null) {
-			columnheaders = 1;
+			columnHeaders = 1;
 		}
 
 		try {
-			TableTableElement newTEle = createTable(document, rownumber + rowheaders, columnnumber + columnheaders, rowheaders, columnheaders);
+			TableTableElement newTEle = createTable(document, rowNumber + rowHeaders, columnNumber + columnHeaders, rowHeaders, columnHeaders);
 
-			//4. append to the end of document
+			//append to the end of document
 			OdfElement root = document.getContentDom().getRootElement();
 			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
@@ -675,21 +690,21 @@ public class OdfTable {
 
 			OdfTable table = OdfTable.getInstance(newTEle);
 			List<OdfTableRow> rowList = table.getRowList();
-			for (int i = 0; i < rownumber + rowheaders; i++) {
+			for (int i = 0; i < rowNumber + rowHeaders; i++) {
 				OdfTableRow row = rowList.get(i);
-				for (int j = 0; j < columnnumber + columnheaders; j++) {
+				for (int j = 0; j < columnNumber + columnHeaders; j++) {
 					if ((i == 0) && (j == 0)) {
 						continue;
 					}
 					OdfTableCell cell = row.getCellByIndex(j);
-					if (i == 0) //first row, should fill column labels
+					if (i == 0 && columnLabel != null) //first row, should fill column labels
 					{
 						if (j <= columnLabel.length) {
 							cell.setStringValue(columnLabel[j - 1]);
 						} else {
 							cell.setStringValue("");
 						}
-					} else if (j == 0) //first column, should fill row labels
+					} else if (j == 0 && rowLabel != null) //first column, should fill row labels
 					{
 						if (i <= rowLabel.length) {
 							cell.setStringValue(rowLabel[i - 1]);
@@ -697,7 +712,10 @@ public class OdfTable {
 							cell.setStringValue("");
 						}
 					} else {
-						cell.setStringValue(data[i - 1][j - 1]);
+						//fix bug121
+						if ((data != null) && (i >= rowHeaders) && (j >= columnHeaders)) {
+							cell.setStringValue(data[i - rowHeaders][j - columnHeaders]);
+						}
 					}
 				}
 			}
@@ -831,8 +849,8 @@ public class OdfTable {
 			String columnStylename = getTableName() + ".A";
 			OdfStyle columnStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableColumn);
 			columnStyle.setStyleNameAttribute(columnStylename);
-			columnStyle.setProperty(OdfStyleTableColumnProperties.ColumnWidth, DefaultTableWidth + "in");
-			columnStyle.setProperty(OdfStyleTableColumnProperties.RelColumnWidth, DefaultRelTableWidth + "*");
+			columnStyle.setProperty(OdfStyleTableColumnProperties.ColumnWidth, DEFAULT_TABLE_WIDTH + "in");
+			columnStyle.setProperty(OdfStyleTableColumnProperties.RelColumnWidth, DEFAULT_REL_TABLE_WIDTH + "*");
 
 			newColumn = (TableTableColumnElement) OdfElementFactory.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(),
 					OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));

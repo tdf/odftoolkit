@@ -56,7 +56,7 @@ public class OdfTableColumn {
 	TableTableColumnElement maColumnElement;
 	int mnRepeatedIndex;
 	private XPath xpath;
-	String DEFAULT_WIDTH = "0in";
+	private static final String DEFAULT_WIDTH = "0in";
 	static private Logger mLog = Logger.getLogger(OdfTableColumn.class.getName());
 
 	/**

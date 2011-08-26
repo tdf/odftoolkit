@@ -79,10 +79,104 @@ public class TableTest {
 			createTableWithString(document);
 
 			document.save(ResourceUtilities.newTestOutputFile("CreateTableCase.odt"));
-
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testNewTableWithArrayData() {
+		try {
+			// reproduce bug 121
+			int rowCount = 10, columnCount = 4;
+			String[] rowLabels = new String[rowCount];
+			for (int i = 0; i < rowCount; i++) {
+				rowLabels[i] = "RowHeader" + i;
+			}
+			String[] columnLabels = new String[columnCount];
+			for (int i = 0; i < columnCount; i++) {
+				columnLabels[i] = "ColumnHeader" + i;
+			}
+			double[][] doubleArray = null;
+			String[][] stringArray = null;
+			OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument
+					.newSpreadsheetDocument();
+			OdfTable table1 = OdfTable.newTable(spreadsheet, null, null,
+					doubleArray);
+			Assert.assertEquals(0, table1.getHeaderColumnCount());
+			Assert.assertEquals(0, table1.getHeaderRowCount());
+			// row count should be DEFAULT_ROW_COUNT 2
+			Assert.assertEquals(2, table1.getRowCount());
+			// column count should be DEFAULT_COLUMN_COUNT 5
+			Assert.assertEquals(5, table1.getColumnCount());
+			 
+			table1 = OdfTable.newTable(spreadsheet, rowLabels, columnLabels,
+					doubleArray);
+			Assert.assertEquals(1, table1.getHeaderColumnCount());
+			Assert.assertEquals(1, table1.getHeaderRowCount());
+			// row count should be DEFAULT_ROW_COUNT+1 3
+			Assert.assertEquals(3, table1.getRowCount());
+			// column count should be DEFAULT_COLUMN_COUNT+1 6
+			Assert.assertEquals(6, table1.getColumnCount());
+			
+			table1 = OdfTable.newTable(spreadsheet, null, null, stringArray);
+			Assert.assertEquals(0, table1.getHeaderColumnCount());
+			Assert.assertEquals(0, table1.getHeaderRowCount());
+			// row count should be DEFAULT_ROW_COUNT 2
+			Assert.assertEquals(2, table1.getRowCount());
+			// column count should be DEFAULT_COLUMN_COUNT 5
+			Assert.assertEquals(5, table1.getColumnCount());
+			
+			table1 = OdfTable.newTable(spreadsheet, rowLabels, columnLabels,
+					stringArray);
+			Assert.assertEquals(1, table1.getHeaderColumnCount());
+			Assert.assertEquals(1, table1.getHeaderRowCount());
+			// row count should be DEFAULT_ROW_COUNT+1 3
+			Assert.assertEquals(3, table1.getRowCount());
+			// column count should be DEFAULT_COLUMN_COUNT+1 6
+			Assert.assertEquals(6, table1.getColumnCount());
+			
+			doubleArray = new double[rowCount][columnCount];
+			for (int i = 0; i < rowCount; i++) {
+				for (int j = 0; j < columnCount; j++) {
+					doubleArray[i][j] = Math.random();
+				}
+			}
+			table1 = OdfTable.newTable(spreadsheet, null, null, doubleArray);
+			Assert.assertEquals(0, table1.getHeaderColumnCount());
+			Assert.assertEquals(0, table1.getHeaderRowCount());
+			Assert.assertEquals(rowCount, table1.getRowCount());
+			Assert.assertEquals(columnCount, table1.getColumnCount());
+			
+			table1 = OdfTable.newTable(spreadsheet, rowLabels, columnLabels,
+					doubleArray);
+			Assert.assertEquals(1, table1.getHeaderColumnCount());
+			Assert.assertEquals(1, table1.getHeaderRowCount());
+			Assert.assertEquals(rowCount+1, table1.getRowCount());
+			Assert.assertEquals(columnCount+1, table1.getColumnCount());
+
+			stringArray = new String[rowCount][columnCount];
+			for (int i = 0; i < rowCount; i++) {
+				for (int j = 0; j < columnCount; j++) {
+					stringArray[i][j] = "string" + (i * columnCount + j);
+				}
+			}
+			table1 = OdfTable.newTable(spreadsheet, null, null, stringArray);
+			Assert.assertEquals(0, table1.getHeaderColumnCount());
+			Assert.assertEquals(0, table1.getHeaderRowCount());
+			Assert.assertEquals(rowCount, table1.getRowCount());
+			Assert.assertEquals(columnCount, table1.getColumnCount());
+			
+			table1 = OdfTable.newTable(spreadsheet, rowLabels, columnLabels,
+					stringArray);
+			Assert.assertEquals(1, table1.getHeaderColumnCount());
+			Assert.assertEquals(1, table1.getHeaderRowCount());
+			Assert.assertEquals(rowCount+1, table1.getRowCount());
+			Assert.assertEquals(columnCount+1, table1.getColumnCount());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 	}
 
@@ -629,7 +723,7 @@ public class TableTest {
 	public void testSplitCellAddress() {
 		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
 		OdfTable table1 = mOdtDoc.getTableByName("Table1");
-		//FIXME:bug 138, test case to proof the fix problem.
+		//reproduce bug 138, test case to proof the fix problem.
 		//test address without table name.
 		String[] address=table1.splitCellAddress("A1");
 		Assert.assertEquals("Table1", address[0]);

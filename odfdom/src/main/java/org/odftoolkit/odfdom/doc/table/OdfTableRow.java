@@ -66,7 +66,7 @@ public class OdfTableRow {
 	TableTableRowElement maRowElement;
 	int mnRepeatedIndex;
 	private XPath xpath;
-	String DEFAULT_HEIGHT = "0.30in";
+	private static final String DEFAULT_HEIGHT = "0.30in";
 	static private Logger mLog = Logger.getLogger(OdfTableRow.class.getName());
 
 	/**

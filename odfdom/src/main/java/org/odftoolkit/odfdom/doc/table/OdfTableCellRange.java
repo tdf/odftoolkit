@@ -47,9 +47,12 @@ import org.w3c.dom.NodeList;
  */
 public class OdfTableCellRange {
 
-	int mnStartRow, mnStartColumn, mnEndRow, mnEndColumn;
-	String msCellRangeName;
-	OdfTable maOwnerTable;
+	private int mnStartRow;
+	private int mnStartColumn;
+	private int mnEndRow;
+	private int mnEndColumn;
+	private String msCellRangeName;
+	private OdfTable maOwnerTable;
 
 	/**
 	 * Construct the instance of OdfTableCellRange.
