@@ -71,7 +71,7 @@
         <xsl:variable name="element-name" select="normalize-space(substring(., string-length($element-prefix)+1))"/>
         <xsl:variable name="element-defs" select="document($xref-schema-file)/rng:grammar/rng:element[@name=$element-name]"/>
         <xsl:if test="$check-xref-anchors and not($element-defs)">
-            <xsl:message>No element definition found in schema for xref &quot;<xsl:value-of select="."/>&quot;</xsl:message>
+            <xsl:message>XRef &quot;<xsl:value-of select="."/>&quot;: No element definition found in schema for &quot;<xsl:value-of select="$element-name"/>&quot;.</xsl:message>
         </xsl:if>
         <!-- Add xrefs -->
         <xsl:if test="$add-attr-elem-xrefs">
@@ -112,10 +112,9 @@
                 <xsl:with-param name="element-list" select="$element-list"/>
             </xsl:call-template>
         </xsl:if>
-        <!-- xsl:message><xsl:value-of select="$attr-name"/>/<xsl:value-of select="$attr-name-raw"/>/<xsl:value-of select="$has-elements"/>/<xsl:value-of select="$element-list"/></xsl:message -->
         <xsl:variable name="attr-defs" select="document($xref-schema-file)/rng:grammar/rng:element/rng:attribute[@name=$attr-name]"/>
         <xsl:if test="$check-xref-anchors and not($attr-defs)">
-            <xsl:message>No attribute definition found in schema for xref &quot;<xsl:value-of select="."/>&quot;</xsl:message>
+            <xsl:message>XRef &quot;<xsl:value-of select="."/>&quot;: No attribute definition found in schema for &quot;<xsl:value-of select="$attr-name"/>&quot;.</xsl:message>
         </xsl:if>
         <!-- Add xrefs -->
         <xsl:if test="$add-attr-elem-xrefs">
@@ -130,7 +129,7 @@
         <xsl:param name="list" select="substring($element-list,string-length($element-prefix)+2)"/>
         <xsl:variable name="element-name" select="substring-before($list,'_')"/>
         <xsl:if test="not(document($xref-schema-file)/rng:grammar/rng:element[@name=$element-name])">
-            <xsl:message>No element definition found in schema for xref &quot;<xsl:value-of select="."/>&quot;, value &quot;<xsl:value-of select="$element-name"/>&quot;</xsl:message>
+            <xsl:message>XRef &quot;<xsl:value-of select="."/>&quot;: No element definition found in schema for &quot;<xsl:value-of select="$element-name"/>&quot;.</xsl:message>
         </xsl:if>
         <xsl:variable name="remainder" select="substring-after($list,'_')"/>
         <xsl:if test="$remainder">
@@ -189,10 +188,10 @@
                 <xsl:if test="$check-xref-anchors">
                     <xsl:choose>
                         <xsl:when test="not(document($xref-schema-file)/rng:grammar//rng:attribute[@name=$attr-name])">
-                            <xsl:message>No attribute definition found in schema for heading &quot;<xsl:value-of select="."/>&quot;</xsl:message>
+                            <xsl:message>Heading &quot;<xsl:value-of select="."/>&quot;: No attribute definition found in schema for &quot;<xsl:value-of select="$attr-name"/>&quot;.</xsl:message>
                         </xsl:when>
                         <xsl:when test="not(//text:p[starts-with(.,$attribute-prefix) and (normalize-space(.)=concat($attribute-prefix,$attr-name) or starts-with(.,concat($attribute-prefix,$attr-name,'_')))])">
-                            <xsl:message>No attribute xref found for heading &quot;<xsl:value-of select="$tag"/>&quot;</xsl:message>
+                            <xsl:message>Heading &quot;<xsl:value-of select="."/>&quot;: No attribute xref found for &quot;<xsl:value-of select="$attr-name"/>&quot;.</xsl:message>
                         </xsl:when>
                     </xsl:choose>
                 </xsl:if>
@@ -228,10 +227,10 @@
         <xsl:if test="$check-xref-anchors">
             <xsl:choose>
                 <xsl:when test="not(document($xref-schema-file)/rng:grammar/rng:element[@name=$element-name])">
-                    <xsl:message>No element definition found in schema for element &quot;<xsl:value-of select="$element-name"/>&quot; contained in heading &quot;<xsl:value-of select="."/>&quot;</xsl:message>
+                    <xsl:message>Heading: &quot;<xsl:value-of select="."/>&quot;: No element definition found in schema for element &quot;<xsl:value-of select="$element-name"/>&quot;.</xsl:message>
                 </xsl:when>
                 <xsl:when test="not(//text:p[starts-with(.,$element-prefix) and normalize-space(.)=concat($element-prefix,$element-name)])">
-                    <xsl:message>No element xref found for element &quot;<xsl:value-of select="$element-name"/>&quot; contained in heading &quot;<xsl:value-of select="."/>&quot;</xsl:message>
+                    <xsl:message>Heading &quot;<xsl:value-of select="."/>&quot;: No element xref found for element &quot;<xsl:value-of select="$element-name"/>&quot;.</xsl:message>
                 </xsl:when>
             </xsl:choose>
         </xsl:if>
@@ -288,7 +287,6 @@
     <xsl:template match="rng:attribute">
         <xsl:param name="element-list"/>
         <xsl:variable name="name" select="@name"/>
-        <!-- <xsl:message><xsl:value-of select="$name"/>:<xsl:value-of select="concat('_',$element-prefix,../@name,'_')"/></xsl:message -->
         <xsl:if test="not(preceding::rng:attribute[@name=$name])">
             <xsl:call-template name="create-attr-parent-elem-list">
                 <xsl:with-param name="element-list" select="$element-list"/>
