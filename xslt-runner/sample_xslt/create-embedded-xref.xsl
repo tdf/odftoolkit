@@ -92,6 +92,7 @@
     <xsl:variable name="toc-prefix" select="'toc-'"/>
 
     <xsl:variable name="attributes-heading" select="'General Attributes'"/>
+    <xsl:variable name="attributes-heading-level" select="'1'"/>
     <xsl:variable name="properties-heading" select="'Formatting Attributes'"/>
     <xsl:variable name="datatypes-heading" select="'Other Datatypes'"/>
 
@@ -547,7 +548,7 @@
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
                     <xsl:choose>
-                        <xsl:when test="preceding::text:h[@text:outline-level='1']=$attributes-heading">
+                        <xsl:when test="preceding::text:h[@text:outline-level=$attributes-heading-level]=$attributes-heading">
                             <xsl:variable name="fp" select="preceding::text:h[@text:outline-level='1'][last()]=$properties-heading"/>
                             <xsl:variable name="attr-name" select="normalize-space(preceding::text:h[@text:outline-level='2'][last()])"/>
                             <xsl:call-template name="create-element-ref-mark-start">
@@ -724,12 +725,35 @@
     <!-- ********************************** -->
     <xsl:template match="text:section[(@text:display='condition' and @text:condition='ooow:Note==0') or @text:display='none']">
         <!-- Ignore sections that are hidable by the "Note" condition -->
-        <xsl:if test="$keep-annotations">
-            <xsl:copy>
-                <xsl:apply-templates select="@*|node()"/>
-            </xsl:copy>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="$keep-annotations">
+                <xsl:copy>
+                    <xsl:apply-templates select="@*|node()"/>
+                </xsl:copy>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="*" mode="check-annotations"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
+
+    <xsl:template match="text:p" mode="check-annotations">
+        <xsl:variable name="style-name" select="@text:style-name"/>
+        <xsl:choose>
+            <xsl:when test="starts-with(.,'Test Case') or normalize-space(.)=''"/>
+            <xsl:when test="$style-name='Rationale' or $style-name='Offset_20_Note' or $style-name='TODO'"/>
+            <xsl:when test="//style:style[@style:name=$style-name and @style:family='paragraph' and @style:parent-style-name='Rationale']"/>
+            <xsl:when test="//style:style[@style:name=$style-name and @style:family='paragraph' and @style:parent-style-name='Offset_20_Note']"/>
+            <xsl:when test="//style:style[@style:name=$style-name and @style:family='paragraph' and @style:parent-style-name='TODO']"/>
+            <xsl:when test="ancestor::text:section[@text:name='SectionTestCases']"/>
+            <xsl:when test="ancestor::text:tracked-changes"/>
+            <xsl:otherwise>
+                <xsl:message>Normative Content found in section &quot;<xsl:value-of select="ancestor::text:section/@text:name"/>&quot;: <xsl:value-of select="substring(.,1,40)"/></xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="*" mode="check-annotations"/>
 
     <xsl:template match="text:section">
         <xsl:message>Text sextions are not supported: <xsl_value-of select="@text:namd"/></xsl:message>
