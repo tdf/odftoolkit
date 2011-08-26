@@ -112,7 +112,6 @@
         <odfxslt style="${project.odfxsltrunner}/sample_xslt/update-toc-rel-paths.xsl"
                  in="${opendocument.v12.product.dir}/OpenDocument-v1.2${opendocument.v12.part0.state.target}-orig.odt"
                  out="${target-file}">
-            <param name="state-old" expression="-csd06-rev02"/>
             <param name="state-new" expression="${opendocument.v12.part0.state.target}"/>
         </odfxslt>
     </target>
@@ -269,10 +268,14 @@
         </odfxslt>
     </target>
 
-    <target name="create-v12-html-zip" depends="create-v12-part0-html,create-v12-part1-html,create-v12-part2-html,create-v12-part3-html"
+    <target name="create-v12-html-zip" depends="init"
             description="Create XHTML versions of all ODF 1.2 parts and zip them.">
-        <zip destfile="${dist.dir}/OpenDocument-v1.2${state.target}.html.zip">
-            <zipfileset dir="${dist.dir}/html${state.target}"/>
+		<antcall target="create-v12-part0-html"/>
+		<antcall target="create-v12-part1-html"/>
+		<antcall target="create-v12-part2-html"/>
+		<antcall target="create-v12-part3-html"/>
+        <zip destfile="${dist.dir}/OpenDocument-v1.2${opendocument.v12.part0.state.target}.html.zip">
+            <zipfileset dir="${dist.dir}/html${opendocument.v12.part0.state.target}"/>
         </zip>
     </target>
 
@@ -321,11 +324,22 @@
         <condition property="html-target" value="${build.dir}/html${state.target}/OpenDocument-v1.2${state.target}${part}.html" else="${dist.dir}/html${state.target}/OpenDocument-v1.2${state.target}${part}.html">
             <isset property="postprocess-style"/>
         </condition>
+        <dirname property="reference.odf2xhtml.xsl.dir2" file="${reference.odf2xhtml.xsl}"/>
+        <dirname property="reference.odf2xhtml.xsl.dir" file="${reference.odf2xhtml.xsl.dir2}"/>
+        <condition property="force">
+            <not>
+                <uptodate targetfile="${html-target}">
+                    <srcfiles dir="${reference.odf2xhtml.xsl.dir}">
+                        <include name="**/*.xsl"/>
+                    </srcfiles>
+                </uptodate>
+            </not>
+        </condition>
         <taskdef name="odfxslt-saxon" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}:${reference.saxon.jar}"/>
         <odfxslt-saxon style="${reference.odf2xhtml.xsl}"
                  in="${html-source}"
                  outfile="${html-target}"
-                 force="false">
+                 force="${force}">
                  <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         </odfxslt-saxon>
     </target>
@@ -334,14 +348,27 @@
         <xslt style="${postprocess-style}"
                  in="${build.dir}/html${state.target}/OpenDocument-v1.2${state.target}${part}.html"
                  out="${dist.dir}/html${state.target}/OpenDocument-v1.2${state.target}${part}.html"
-                 force="false"/>
+                 force="false">
+          <xmlcatalog>
+                <dtd
+                    publicId="-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+                    location="${project.odfxsltrunner}/sample_xslt/dummy.dtd"/>
+           </xmlcatalog>
+        </xslt>
     </target>
 
     <target name="-create-v12-html-copy-images" depends="init">
         <property name="html-image-list" value="${build.dir}/OpenDocument-v1.2${state.target}${part}-image-list.txt"/>
         <xslt in="${dist.dir}/html${state.target}/OpenDocument-v1.2${state.target}${part}.html"
              out="${html-image-list}"
-             style="${project.odfxsltrunner}/sample_xslt/create-html-img-list.xsl"/>
+             style="${project.odfxsltrunner}/sample_xslt/create-html-img-list.xsl">
+            <xmlcatalog>
+                <dtd
+                    publicId="-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+                    location="${project.odfxsltrunner}/sample_xslt/dummy.dtd"/>
+           </xmlcatalog>
+        </xslt>
+
         <unzip src="${html-source}" dest="${dist.dir}/html${state.target}">
             <patternset includesfile="${html-image-list}"/>
         </unzip>
