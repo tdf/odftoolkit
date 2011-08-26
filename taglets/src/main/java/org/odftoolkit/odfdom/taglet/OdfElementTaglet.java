@@ -2,6 +2,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * Copyright 2009 IBM. All rights reserved.
+ * Copyright 2010 Oracle and/or its affiliates. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
