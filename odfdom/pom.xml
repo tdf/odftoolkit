@@ -5,7 +5,7 @@
 	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>odfdom-java</artifactId>
-	<version>0.8.7</version>
+	<version>0.8.8-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -447,6 +447,14 @@
 		<developerConnection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~developer</developerConnection>
 		<url>http://odftoolkit.org/projects/odfdom/sources/developer/show</url>
 	</scm>
+	<!-- Upload of JAVA DOC for SNAPSHOOTs
+	<distributionManagement>
+		<site>
+			<id>odfdom</id>
+			<name>ODFDOM Java Toolkit Project</name>
+			<url>dav:https://odftoolkit.org/website/odfdom/${project.version}</url>
+		</site>
+	</distributionManagement> -->
 	<profiles>
 		<profile>
 			<id>codegen</id>
