@@ -169,7 +169,7 @@ public class Main {
         {
             ODFXSLTRunner aRunner = new ODFXSLTRunner();
             Logger aLogger = new CommandLineLogger( aLogStream!=null ? aLogStream : System.err, nLogLevel );
-            bError = aRunner.runXSLT( aStyleSheetName, aParams, aInputName, aInputMode, aOutputName, aOutputMode, aPath, aLogger  );
+            bError = aRunner.runXSLT( aStyleSheetName, aParams, aInputName, aInputMode, aOutputName, aOutputMode, aPath, null, aLogger  );
         }
         catch( Exception e )
         {

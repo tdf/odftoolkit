@@ -113,12 +113,13 @@ public class ODFXSLTRunner {
     public boolean runXSLT( String aStyleSheet, List<XSLTParameter> aParams,
                      String aInputFile, int aInputMode,
                      String aOutputFile, int aOutputMode,
-                     String aPathInPackage, Logger aLogger )
+                     String aPathInPackage,
+                     String aTransformerFactoryClassName, Logger aLogger )
     {
         return runXSLT( new File( aStyleSheet ), aParams,
                         new File( aInputFile), aInputMode,
                         aOutputFile != null ? new File(aOutputFile) : null, aOutputMode,
-                        aPathInPackage, aLogger );
+                        aPathInPackage, aTransformerFactoryClassName, aLogger );
     }
     
     
@@ -139,7 +140,8 @@ public class ODFXSLTRunner {
     public boolean runXSLT( File aStyleSheetFile, List<XSLTParameter> aParams,
                      File aInputFile, int aInputMode,
                      File aOutputFile, int aOutputMode,
-                     String aPathInPackage, Logger aLogger )
+                     String aPathInPackage,
+                     String aTransformerFactoryClassName, Logger aLogger )
     {
         boolean bError = false;
 
@@ -212,7 +214,8 @@ public class ODFXSLTRunner {
 
         aLogger.setName( aStyleSheetFile.getAbsolutePath() );
         aLogger.logInfo( "Applying stylesheet to '" + aInputName + "'");
-        bError = runXSLT( aStyleSheetFile, aParams, aInputSource, aOutputResult, aLogger );
+        bError = runXSLT( aStyleSheetFile, aParams, aInputSource, aOutputResult, 
+                          aTransformerFactoryClassName, aLogger );
         if( bError )
             return true;
         
@@ -238,6 +241,7 @@ public class ODFXSLTRunner {
     private boolean runXSLT( File aStyleSheetFile, 
                      List<XSLTParameter> aParams,
                      Source aInputSource, Result aOutputTarget,
+                     String aTransformerFactoryClassName,
                      Logger aLogger )
     {
         InputStream aStyleSheetInputStream = null;
@@ -269,7 +273,9 @@ public class ODFXSLTRunner {
         
         Source aSource = new SAXSource( aXMLReader, aStyleSheetInputSource );
 
-        TransformerFactory aFactory = TransformerFactory.newInstance();
+        TransformerFactory aFactory =
+                aTransformerFactoryClassName==null ? TransformerFactory.newInstance()
+                    : TransformerFactory.newInstance( aTransformerFactoryClassName, null );
         ErrorListener aErrorListener = new TransformerErrorListener( aLogger );
         aFactory.setErrorListener(aErrorListener);
         
@@ -288,11 +294,12 @@ public class ODFXSLTRunner {
                 }
             }
             aTransformer.setErrorListener(aErrorListener);
+//            aTransformer.setURIResolver(new ODFURIResolver( aFactory.getURIResolver(), aLogger ));
             aTransformer.transform(aInputSource, aOutputTarget);
         }
         catch( TransformerException e )
         {
-//            aLogger.logFatalError(e);
+            aLogger.logFatalError(e);
             return true;
         }
 
