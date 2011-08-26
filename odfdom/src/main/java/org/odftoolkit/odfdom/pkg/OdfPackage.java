@@ -149,6 +149,7 @@ public class OdfPackage {
 	// likely)
 	private File mTempDirParent;
 	private File mTempDir;
+	// only used indirectly for its finalizer (garbage collection)
 	private OdfFinalizablePackage mFinalize;
 	// some well known streams inside ODF packages
 	private String mMediaType;
@@ -941,14 +942,13 @@ public class OdfPackage {
 			} else {
 				parseManifest();
 			}
-
+			// try to get the package from our cache
 			ZipEntry ze = mZipEntries.get(packagePath);
-			if (ze != null) {
+			if (ze == null) {
 				ze = new ZipEntry(packagePath);
 				ze.setMethod(ZipEntry.DEFLATED);
 				mZipEntries.put(packagePath, ze);
 			}
-			// 2DO Svante: No dependency to layer above!
 			if (isFileCompressed(packagePath) == false) {
 				ze.setMethod(ZipEntry.STORED);
 			}
@@ -1258,9 +1258,10 @@ public class OdfPackage {
 	/**
 	 * Get Manifest as String NOTE: This functionality should better be moved to
 	 * a DOM based Manifest class
+	 *
+	 * @return the /META-INF/manifest.xml as a String
 	 */
 	public String getManifestAsString() {
-		HashMap<String, OdfFileEntry> manifestEntries = getManifestEntries();
 		StringBuffer buf = new StringBuffer();
 
 		buf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
