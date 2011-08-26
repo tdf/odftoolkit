@@ -336,10 +336,10 @@ public class CodeGen implements IFunctionSupplier
             if (element.getSubAttributes().size() > 0) {
 
 				Iterator<Vector<Attribute>> iter = element.getSubAttributes().iterator();
-                
+                Iterator <String>  diffIter = element.getDifferentName().iterator();
 				while (iter.hasNext()) {
 					Vector<Attribute> subAtt = (Vector<Attribute>)iter.next();
-					if( !selectSubAttribute( node, element,subAtt ))                                                  
+					if( !selectSubAttribute( node, element,subAtt , diffIter.next()))                                                  
 	                    return false;                
 			    }
             }
@@ -376,11 +376,15 @@ public class CodeGen implements IFunctionSupplier
 
     }
 
-    public boolean selectSubAttribute( TemplateNode node, Element element, Vector<Attribute> attributeGroup) throws IOException
+    public boolean selectSubAttribute( TemplateNode node, Element element, Vector<Attribute> attributeGroup, String diff) throws IOException
     {
     	context.pushElement(element);
-    	context.setCurrentAttributeGroup(attributeGroup);                
+    	context.setCurrentAttributeGroup(attributeGroup);
+    	context.setDifferentName(diff);
+    	context.pushVariable("diffqname", diff);
+//    	System.out.println("different qname "+ diff);
         boolean ret = executeTemplateChildNodes(node);
+        context.popVariable("diffqname");
         context.popElement();
         //Context.getCurrentAttributeGroup();
         return ret;
@@ -420,40 +424,82 @@ public class CodeGen implements IFunctionSupplier
         else if( type.equals("attribute") )
         {
             Element element = context.getCurrentElement();
-            if( element == null )
+            AttributeSet attrSet = context.getCurrentAttributeSet();
+            if( element != null )
             {
-                System.err.println("error: foreach attribute needs a current element!" );
+            	Iterator< Attribute > iter = element.getAttributes();
+                while( iter.hasNext() )
+                {
+                    first = printSeperator( sep, first );               
+                    if( !selectAttribute( node, iter.next() ) )
+                        return false;
+                }
+            }else if( attrSet != null ){
+            	Iterator< Attribute > iter = attrSet.getAttributes();
+            	while( iter.hasNext() )
+            	{
+            		first = printSeperator( sep, first );
+            		if( !selectAttribute( node, iter.next() ))
+            			return false;
+            	}
+            }else{
+            	System.err.println("error: foreach attribute needs a current element or a current attributeset!" );
                 return false;
             }
-               
-            Iterator< Attribute > iter = element.getAttributes();
-            while( iter.hasNext() )
-            {
-                first = printSeperator( sep, first );               
-                if( !selectAttribute( node, iter.next() ) )
-                    return false;
-            }
+        }
+        else if( type.equals("attributeset"))
+        {
+        	Iterator<AttributeSet> iter = schema.getAttributeSets();
+        	while( iter.hasNext() )
+        	{
+        		first = printSeperator( sep, first);
+        		if( !selectAttributeSet( node, iter.next() ))
+        			return false;
+        	}
         }
         else if( type.equals("value") )
         {
             Attribute attr = context.getCurrentAttribute();
-            if( attr == null )
+            if( attr != null )
+            {
+            	Iterator< String > iter = attr.getValues();
+                while( iter.hasNext() )
+                {
+                    first = printSeperator( sep, first );
+                    
+                    context.pushVariable( "value", iter.next() );
+                    boolean ret = executeTemplateChildNodes(node);               
+                    context.popVariable( "value" );
+                    
+                    if( !ret )
+                        return false;                
+                }
+        	}else
             {
                 System.err.println("error: foreach values needs a current attribute!" );
                 return false;
             }
-
-            Iterator< String > iter = attr.getValues();
-            while( iter.hasNext() )
+        }else if( type.equals("valueset") || type.equals("defaultvalueset") )
+        {
+            AttributeSet attrSet = context.getCurrentAttributeSet();
+            if( attrSet != null){
+            	boolean isValueSetType = type.equals("valueset");
+            	Iterator< String > iter = isValueSetType?attrSet.getValues():attrSet.getDefaultValues();
+            	while( iter.hasNext() )
+                {
+                    first = printSeperator( sep, first );
+                    
+                    context.pushVariable( "value", iter.next() );
+                    boolean ret = executeTemplateChildNodes(node);               
+                    context.popVariable( "value" );
+                    
+                    if( !ret )
+                        return false;                
+                }
+        	}else
             {
-                first = printSeperator( sep, first );
-                
-                context.pushVariable( "value", iter.next() );
-                boolean ret = executeTemplateChildNodes(node);               
-                context.popVariable( "value" );
-                
-                if( !ret )
-                    return false;                
+                System.err.println("error: foreach valueset or defaultvalueset needs a current attributeset!" );
+                return false;
             }
         }
         else if( type.equals("namespace") )
@@ -517,8 +563,7 @@ public class CodeGen implements IFunctionSupplier
                 return false;                
             }
             return selectAttribute( node, attr );
-        }
-        else if( type.equals("element") || type.equals("baseelement" ) )
+        }else if( type.equals("element") || type.equals("baseelement" ) )
         {
             boolean baseElement = type.equals("baseelement" );
             Element element = schema.getElement( name, baseElement );
@@ -566,6 +611,14 @@ public class CodeGen implements IFunctionSupplier
         context.pushAttribute(attr);                
         boolean ret = executeTemplateChildNodes(node);
         context.popAttribute();
+        return ret;
+    }
+    
+    public boolean selectAttributeSet( TemplateNode node, AttributeSet attrSet ) throws IOException
+    {
+        context.pushAttributeSet(attrSet);                
+        boolean ret = executeTemplateChildNodes(node);
+        context.popAttributeSet();
         return ret;
     }
     
@@ -749,6 +802,17 @@ public class CodeGen implements IFunctionSupplier
                 
                 return ExpressionParser.TOKEN_FALSE;
             }            
+        }
+        else if( func.equals("hasdelimiter"))
+        {
+        	i = 2;
+        	if( params.size() == i )
+        	{
+        		if (params.get(0).contains(params.get(1)) )
+        			return ExpressionParser.TOKEN_TRUE;
+        		else
+        			return ExpressionParser.TOKEN_FALSE;
+        	}
         }
         
         if( i == -1 )

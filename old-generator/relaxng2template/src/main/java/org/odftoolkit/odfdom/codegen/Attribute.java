@@ -38,7 +38,10 @@ public class Attribute
     private String DefaultValue;
     private HashSet< String > Values;
     private boolean Optional;
-
+    private Element ownerElement;
+    private boolean hasMultiValueSets;
+    private boolean hasMultiDefaultValues;
+    
     Attribute( String qName, String valueType, String conversionType, Iterator<String> values, boolean optional, String defaultValue )
     {
         Name = qName;
@@ -54,6 +57,8 @@ public class Attribute
             }
         }
         Optional = optional;
+        hasMultiValueSets = false;
+        hasMultiDefaultValues = false;
     }
 
     public void setDefaultValue(String defaultValue)
@@ -138,5 +143,35 @@ public class Attribute
     void setName(String name)
     {
         Name = name;
+    }
+    
+    public void setOwnerElement(Element element)
+    {
+    	ownerElement = element;
+    }
+    
+    public Element getOwnerElement()
+    {
+    	return ownerElement;
+    }
+    
+    public boolean isMultiValueSets()
+    {
+    	return hasMultiValueSets;
+    }
+    
+    public boolean isMultiDefaultValues()
+    {
+    	return hasMultiDefaultValues;
+    }
+    
+    public void enableMultiValueSets(boolean isMulti)
+    {
+    	hasMultiValueSets = isMulti;
+    }
+    
+    public void enableMultiDefaultValues(boolean isMulti)
+    {
+    	hasMultiDefaultValues = isMulti;
     }
 }

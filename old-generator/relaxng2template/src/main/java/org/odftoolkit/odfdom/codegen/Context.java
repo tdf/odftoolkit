@@ -37,13 +37,24 @@ public class Context
     private Stack< Attribute > CurrentAttribute;
     private Stack< Element > CurrentElement;
     private Stack< PrintWriter > CurrentFile;
+    private Stack< AttributeSet > CurrentAttrSet;
     private IFunctionSupplier FunctionSupplier;
     private Vector<Attribute> CurrentAttributeGroup;
+    private String DifferentName;
     
+	public String getDifferentName() {
+		return DifferentName;
+	}
+
+	public void setDifferentName(String differentName) {
+		DifferentName = differentName;
+	}
+
     public Context( IFunctionSupplier functionSupplier )
     {
         Environment = new HashMap< String, Stack< String > >();
         CurrentAttribute = new Stack< Attribute >();
+        CurrentAttrSet = new Stack< AttributeSet >();
         CurrentElement = new Stack< Element >();
         CurrentFile = new Stack< PrintWriter >();
         FunctionSupplier = functionSupplier;
@@ -67,6 +78,14 @@ public class Context
             return null;
     }
 
+    public AttributeSet getCurrentAttributeSet()
+    {
+        if( !CurrentAttrSet.isEmpty() )
+            return CurrentAttrSet.lastElement();
+        else
+            return null;
+    }
+    
     public Element getCurrentElement()
     {
         if( !CurrentElement.isEmpty() )
@@ -136,6 +155,16 @@ public class Context
         pushVariable( "valuetype", attr.getValueType() );
         pushVariable( "conversiontype", attr.getConversionType() );
         pushVariable( "defaultvalue", attr.getDefaultValue() );
+        if(attr.getOwnerElement() != null){
+        	pushVariable( "ownerelementname", attr.getOwnerElement().getName());
+        	pushVariable( "ownerelementqname", attr.getOwnerElement().getQName());
+        }
+        else{
+        	pushVariable( "ownerelementname", "");
+        	pushVariable( "ownerelementqname", "");
+        }
+        pushVariable( "hasmultivaluesets", attr.isMultiValueSets()? "true":"false");
+    	pushVariable( "hasmultidefaultvalues", attr.isMultiDefaultValues()?"true":"false");
         pushVariable( "optionalattribute", attr.isOptional() ? "true" : "false");        
     }
     
@@ -146,13 +175,18 @@ public class Context
         popVariable( "attributeqname" );
         popVariable( "valuetype" );
         popVariable( "conversiontype" );
-        popVariable( "defaultvalue" );                        
+        popVariable( "defaultvalue" );    
+        popVariable( "ownerelementname" );
+        popVariable( "ownerelementqname" );
+        popVariable( "hasmultivaluesets" );
+    	popVariable( "hasmultidefaultvalues" );
+        popVariable( "optionalattribute" );
     }
     
     public void pushElement( Element element )
     {
         CurrentElement.push(element);
-        
+        pushVariable( "diffqname", getDifferentName());
         pushVariable( "elementname", element.getName() );
         pushVariable( "elementqname", element.getQName() );
         pushVariable( "elementstylefamily", element.getStyleFamily() );
@@ -160,11 +194,36 @@ public class Context
     
     public void popElement()
     {
+        popVariable( "diffqname" );
         popVariable( "elementname" );
         popVariable( "elementqname" );
         popVariable( "elementstylefamily" );
         CurrentElement.pop();
     }        
+    
+    public void pushAttributeSet( AttributeSet attrSet)
+    {
+    	CurrentAttrSet.push(attrSet);
+    	pushVariable( "attributename", attrSet.getName());
+    	pushVariable( "attributeqname", attrSet.getQName());
+    	pushVariable( "valuetype", attrSet.getValueType());
+    	pushVariable( "conversiontype", attrSet.getConversionType());
+    	pushVariable( "hasmultivaluesets", attrSet.isMultiValueSets()? "true":"false");
+    	pushVariable( "hasdefaultvalue", attrSet.isDefaultValue()?"true":"false");
+    	pushVariable( "hasmultidefaultvalues", attrSet.isMultiDefaultValues()?"true":"false");
+    }
+    
+    public void popAttributeSet()
+    {
+    	popVariable( "attributename" );
+    	popVariable( "attributeqname" );
+    	popVariable( "valuetype" );
+    	popVariable( "conversiontype" );
+    	popVariable( "hasmultivaluesets" );
+    	popVariable( "hasdefaultvalue" );
+    	popVariable( "hasmultidefaultvalues" );
+    	CurrentAttrSet.pop();
+    }
 
     public void pushFile( PrintWriter file )
     {

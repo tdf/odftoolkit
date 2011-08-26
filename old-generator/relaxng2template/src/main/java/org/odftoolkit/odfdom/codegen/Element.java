@@ -42,6 +42,8 @@ public class Element
     private Vector< Element > SubElements;    
     private Vector< Vector<Attribute> > SubAttributes;
     
+    private Vector< String > DifferentName;
+    
     public Element( String name, String qName, String styleElement, Element refElement )
     {
         Name = name;
@@ -52,7 +54,7 @@ public class Element
         //add for children element
         SubElements =  new Vector< Element >();
 		SubAttributes = new Vector<Vector<Attribute>>();
-        
+        DifferentName = new Vector <String> ();
         if( refElement != null )
         {
             Iterator< Attribute > iter = refElement.Attributes.iterator();
@@ -85,15 +87,12 @@ public class Element
         }
         else
         {            
-            if( (mergeAttr.getValueType().equals( RngAttribute.TYPE_ENUM ) ) && (newAttr.getValueType().equals(RngAttribute.TYPE_ENUM)) )
+        	Iterator< String > iter = newAttr.getValues();
+            while( iter.hasNext() )
             {
-                Iterator< String > iter = newAttr.getValues();
-                while( iter.hasNext() )
-                {
-                    mergeAttr.addValue(iter.next());
-                }
+            	mergeAttr.addValue(iter.next());
             }
-            else if( !mergeAttr.getValueType().equals(newAttr.getValueType()) || !mergeAttr.getConversionType().equals(newAttr.getConversionType()) )
+            if( !mergeAttr.getValueType().equals(newAttr.getValueType()) || !mergeAttr.getConversionType().equals(newAttr.getConversionType()) )
             {
                 mergeAttr.setValueType( "String" );
                 mergeAttr.setConversionType( "String" );
@@ -176,5 +175,16 @@ public class Element
         SubAttributes.add(newAttrs);
            
     }
+
+    public Vector< String> getDifferentName()
+    { 
+      	return DifferentName;
+    }
     
+    public void addDifferentName( String  diff )
+    {
+                   
+        DifferentName.add(diff);
+           
+    }
 }

@@ -40,7 +40,13 @@ public class RngAttribute extends RngNode
     private String DefaultValue;
     private RngHandler Handler;
     private String Type;
+    //the enum value of attribute
     private Vector< String > Values;
+    //the list value of attribute
+    private Vector< String > ListTypes;
+    private String ListType;
+    private boolean isInList;
+    private boolean hasList;
     
     RngAttribute( RngHandler handler, Attributes attributes)
     {
@@ -77,7 +83,17 @@ public class RngAttribute extends RngNode
                 {                
                     Type = new String();
                 }
+                
+            }else
+            {
+            	if( (Values != null) && !Values.isEmpty())
+                {
+                    Type += ";" + TYPE_ENUM;
+                }
             }
+            
+            if(hasList)
+        		Type = "String";
         }
         
         return Type;
@@ -94,6 +110,17 @@ public class RngAttribute extends RngNode
         return Values.iterator();
     }
     
+    public Iterator< String > getListTypes()
+    {
+    	if( ListTypes == null )
+        {
+            Vector< String > temp = new Vector< String >();
+            return temp.iterator();
+        }
+        
+        return ListTypes.iterator();
+    }
+    
     private boolean getType( RngNode parent )
     {
         Iterator< RngNode > iter = parent.getChildren().iterator();
@@ -102,33 +129,56 @@ public class RngAttribute extends RngNode
             RngNode child = iter.next();
             if( child.getLocalName().equals( RngValue.LOCAL_NAME) )
             {
-                if( Values == null )
-                    Values = new Vector< String >();
-                
-                Values.add(((RngValue)child).Value);
+            	//if(!isInList)
+            	{
+	                if( Values == null )
+	                    Values = new Vector< String >();
+	                
+	                Values.add(((RngValue)child).Value);
+            	}
             }
             else if( child.getLocalName().equals( RngReference.LOCAL_NAME) )
             {
                 // if this reference name is equal to a configured data-type, stop here
                 String defName = ((RngReference)child).getName();
-                if( Type == null )
+                
+                DataTypeConfig config = Handler.getConfiguration().getDataTypeConfiguration(defName);
+                if( config != null )
                 {
-                    DataTypeConfig config = Handler.getConfiguration().getDataTypeConfiguration(defName);
-                    if( config != null )
-                        Type = defName;
-                }
-
-                Iterator< RngDefine > defineIter = Handler.getDefines( defName );
-                while( defineIter.hasNext() )
-                {
-                    if( getType( defineIter.next() ) )
-                        return true;
+                	if(isInList){
+                		if(ListType == null)
+                			ListType = defName;
+                		else
+                			ListType += "," + defName;
+                	}else{
+	                  	if( Type == null )
+	                   		Type = defName;
+	                   	else
+	                   		Type += ";" + defName;
+                	}
+                }else{
+                	Iterator<RngDefine> defineIter = Handler.getDefines(defName);
+					while (defineIter.hasNext()) {
+						if (getType(defineIter.next()))
+							if (!parent.getLocalName().equalsIgnoreCase(
+									"choice"))
+								return true;
+					}
                 }
             }            
             else if( child.getLocalName().equals( RngData.LOCAL_NAME ) )
             {
-                if( Type == null )
-                    Type = ((RngData)child).getType();
+            	if(isInList){
+            		if(ListType == null)
+            			ListType = ((RngData)child).getType();
+            		else
+            			ListType += "," + ((RngData)child).getType();
+            	}else{
+	                if( Type == null )
+	                    Type = ((RngData)child).getType();
+	                else
+	                	Type += ";" + ((RngData)child).getType();
+            	}
                 return true;
             }
             else if( child.getLocalName().equals( RngAttribute.LOCAL_NAME ) )
@@ -138,6 +188,19 @@ public class RngAttribute extends RngNode
             else if( child.getLocalName().equals( RngElement.LOCAL_NAME ) )
             {
                 continue; // skip names inside nested elements
+            }
+            else if( child.getLocalName().equals( "list" ))
+            {
+            	isInList = true;
+            	hasList = true;
+            	getType(child);
+            	if(ListType != null){
+            		if( ListTypes == null )
+                        ListTypes = new Vector< String >();
+            		ListTypes.add(ListType);
+            		ListType = null;
+            	}
+            	isInList = false;
             }
             else
             {

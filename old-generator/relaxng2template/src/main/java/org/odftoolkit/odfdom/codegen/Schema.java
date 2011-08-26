@@ -51,6 +51,7 @@ public class Schema
 {
     private HashMap< String, Element > BaseElements;
     private HashMap< String, Element > Elements;
+    private HashMap< String, AttributeSet > AttributeSetMap;
     private RngHandler Handler;
     private Config Config;
 
@@ -58,6 +59,7 @@ public class Schema
     {
         BaseElements = new HashMap< String, Element >();
         Elements = new HashMap< String, Element >();
+        AttributeSetMap = new HashMap< String, AttributeSet >();
         Config = config;
     }
     
@@ -73,7 +75,10 @@ public class Schema
                 if( populateBaseElements() )
                 {
                     if( renameBaseAttributes()){
-                	     return removeBaseAttributes();
+                    	
+                    	if( populateAttributeSets() ){
+                    		return removeBaseAttributes();
+                    	}
                     }
                 }
               }
@@ -96,6 +101,17 @@ public class Schema
         	values.add(Elements.get(keys[i].toString()));
         }
     	return values.iterator();
+    }
+    
+    public Iterator<AttributeSet> getAttributeSets()
+    {
+    	Object[] keys = AttributeSetMap.keySet().toArray();
+    	Arrays.sort(keys);
+    	List<AttributeSet> attrSetList = new ArrayList<AttributeSet>();
+    	for(int i=0; i< keys.length; i++){
+    		attrSetList.add(AttributeSetMap.get(keys[i].toString()));
+    	}
+    	return attrSetList.iterator();
     }
 
     public Iterator<String> getDataTypes()
@@ -297,8 +313,11 @@ public class Schema
                                     }
                                 }
                                 
+                                if(valueType.contains(";"))
+                                	valueType = "String";
                                 Attribute attr = new Attribute( QName, valueType, conversionType, entry.Attribute.getValues(), entry.Optional, entry.Attribute.getDefaultValue() );
                                 element.addAttribute(attr);
+                                attr.setOwnerElement(element);
                             }
                             else
                             {
@@ -321,8 +340,9 @@ public class Schema
                             switch( attr.getValueCount() )
                             {
                             case 0: // todo: give error?
-                            case 1: // todo: optimize
-                                valueType = "string";
+                            	System.err.println("attribute " + attr.getQName() + "does not have any value" );
+                            	break;
+                            case 1: // todo: optimize, just viewed as an enum for now
                                 break;
                             case 2:
                                 if( attr.hasValue("true") && attr.hasValue("false") )
@@ -452,6 +472,9 @@ public class Schema
             
 			Iterator<Vector<RngAttribute>> itOut = tmpattributes.iterator();
 			String strTypes ="";
+			String strQNames ="";
+			String strs ="";
+//			System.out.println("schema: attribute analyst");
 			while (itOut.hasNext()) {
 				Vector<Attribute> combAttributes = new Vector<Attribute>();
 				Vector<RngAttribute> outRngAttribute = (Vector<RngAttribute>) itOut.next();
@@ -475,7 +498,7 @@ public class Schema
 					while (attributeNames.hasNext()) {
 						String QName = attributeNames.next();
 						if (QName != null) {
-							String valueType = inAttribute.getType();
+							/*String valueType = inAttribute.getType();
 							String conversionType = null;
 
 							if (valueType.length() == 0)
@@ -500,8 +523,10 @@ public class Schema
 							}
 							Attribute attr = new Attribute(QName, valueType,
 									conversionType, inAttribute.getValues(),
-									false, inAttribute.getDefaultValue());
-							combAttributes.add(attr);
+									false, inAttribute.getDefaultValue());*/
+							Attribute attr = element.getAttribute(QName);
+							if(attr!=null)
+								combAttributes.add(attr);
 							
 						} else {
 							System.err.println("warning, element <"
@@ -511,7 +536,7 @@ public class Schema
 
 				}
 				
-				
+				/*
                 // optimize attributes
                 Iterator< Attribute > attrIter = combAttributes.iterator();
                 while( attrIter.hasNext() )
@@ -526,9 +551,9 @@ public class Schema
                         switch( attr.getValueCount() )
                         {
                         case 0: // todo: give error?
- 
-                        case 1: // todo: optimize
-                            valueType = "string";
+                        	System.err.println("attribute " + attr.getQName() + "does not have any value" );
+                        	break;
+                        case 1: // todo: optimize, just viewed as an enum for now
                             break;
                         case 2:
                             if( attr.hasValue("true") && attr.hasValue("false") ){
@@ -549,34 +574,124 @@ public class Schema
                         }
                     }
                 }
-				
+				*/
 				
 				//merge same type parameter
+
 				Iterator<Attribute> strIter = combAttributes.iterator();
+				String strQName ="";
 				String strType ="";
-				boolean isExist = false;
+				String str ="";
+				String type;
+				boolean isExistName = false;
+				boolean isExistType = false;
 				while(strIter.hasNext()){
 					Attribute strAttr = strIter.next();
-					if(strAttr.getQName().equals("table:date-start")||strAttr.getQName().equals("table:date-end")){
-						strType = strType + strAttr.getValueType();
+					if(strQName.equals("")){
+						strQName = strAttr.getQName();
 					}else{
-						strType = strType + strAttr.getQName();
-					}					
+						strQName = strQName +"%"+ strAttr.getQName();
+					}
+					
+					if(strAttr.getValueType().equals("Integer")){
+						type = "int";
+					}else if( strAttr.getValueType().equals("Boolean")){
+						type = "boolean";
+					}else if( strAttr.getValueType().equals("javax.xml.datatype.XMLGregorianCalendar")){
+						type = "String";
+					}else if( strAttr.getValueType().equals("java.net.URI")){
+						type = "String";
+					}else if( strAttr.getValueType().equals("javax.xml.datatype.Duration")){
+						type = "String";
+					}else if( strAttr.getValueType().equals("Double")){
+						type = "double";
+					}else if( strAttr.getValueType().equals("enum")){
+						type = "String";
+					}else{
+						type = strAttr.getValueType();
+					}
+					
+					if(strType.equals("")){
+						strType = type;
+					}else{
+						strType = strType +"%"+ type;
+					}
+					
 				}
+//				System.out.println("schema: strQName "+ strQName);
+//				System.out.println("schema: strType "+ strType);
 				
-				StringTokenizer tokens = new StringTokenizer(strTypes, ";" );
-	            while( tokens.hasMoreTokens() ){
-	            	if( tokens.nextToken().equals(strType) )
-	            		isExist = true;
+				StringTokenizer nameTokens = new StringTokenizer(strQNames, ";" );
+	            while( nameTokens.hasMoreTokens() ){
+	            	if( nameTokens.nextToken().equals(strQName) ){
+	            		isExistName =true;
+	            	}	
 	            }
-				if(!isExist){
+	            
+	            
+				StringTokenizer typeTokens = new StringTokenizer(strTypes, ";" );
+	            while( typeTokens.hasMoreTokens() ){
+	            	if( typeTokens.nextToken().equals(strType) )
+	            		isExistType = true;
+	            }
+
+	            String diff = "";
+	            if(!isExistName && isExistType){
+	                String[] nameTypes = strs.split(";");
+	                String[] attQNames = null;                
+	                for(int m= 0; m< nameTypes.length; m++){
+//	                	System.out.println("schema: nameTypes "+ nameTypes[m]);
+	                	if(nameTypes[m].endsWith("#"+strType)){
+//	                		System.out.println("schame: nametypes m "+nameTypes[m].split("#")[0]);
+//	                		System.out.println("schame: attqnames m "+nameTypes[m].split("#")[0].split("%")[0]);
+	                		attQNames = nameTypes[m].split("#")[0].split("%");
+	                	}
+	                }
+	                
+	                String[] curQNames = strQName.split("%");
+	                
+	                for(int n=0;n<curQNames.length; n++){
+//	                	System.out.println("schema: attQNames "+ curQNames[n]);
+	                	int diffInt =0;
+	                	for(int p=0; p< attQNames.length; p++){
+	                		if(curQNames[n].equals(attQNames[p])){
+	                			diffInt++;
+	                		}
+	                	}
+	                	if(diffInt==0){
+	                		diff = diff+curQNames[n];
+//	                		System.out.println("schema: diff "+ diff);
+	                	}
+	                }
 					element.addSubAttribute(combAttributes);
-					strTypes = strTypes+";"+strType;
+					element.addDifferentName(diff);
+		            str = strQName+"#"+strType;
+					strQNames = strQNames+";"+strQName;
+//					System.out.println("schema: strQNames "+ strQNames);
+					strTypes = strTypes +";"+strType;
+//					System.out.println("schema: strType "+ strTypes);
+					strs = strs + ";" + str;	
+//					System.out.println("schema: strs "+ strs);
+      
+	            }
+	            
+				if(!isExistName && !isExistType ){
+					diff ="";
+					element.addSubAttribute(combAttributes);
+					element.addDifferentName(diff);
+		            str = strQName+"#"+strType;
+					strQNames = strQNames+";"+strQName;
+					strTypes = strTypes +";"+strType;
+					strs = strs + ";" + str;	
+
 				}
-				
+
 				
 			}
+//			System.out.println("schema:  out strs "+ strs);
+			
 		}
+		
 		return true;
     }
 
@@ -728,17 +843,13 @@ public class Schema
 									DataTypeConfig type_config = Config
 											.getDataTypeConfiguration(config.TypeName);
 									if (type_config != null) {
-										aAttr
-												.setValueType(type_config.ValueType);
+										aAttr.setValueType(type_config.ValueType);
 										if (type_config.ConversionType.length() == 0)
-											aAttr
-													.setConversionType(type_config.ValueType);
+											aAttr.setConversionType(type_config.ValueType);
 										else
-											aAttr
-													.setConversionType(type_config.ConversionType);
+											aAttr.setConversionType(type_config.ConversionType);
 									} else {
-										aAttr
-												.setConversionType(config.TypeName);
+										aAttr.setConversionType(config.TypeName);
 									}
 								}
 								if ((config.Rename.length() != 0))
@@ -752,6 +863,28 @@ public class Schema
             }
         }
         return true;
+    }
+    
+    public boolean populateAttributeSets()
+    {
+    	//add AttributeSet which is represent the set of attribute with the same attribute name
+		Iterator<Element> elementIter = getElements();
+		while (elementIter.hasNext()) { 
+			Element element = elementIter.next();
+			Iterator<Attribute> attrIter = element.getAttributes();
+			AttributeSet retAttrSet;
+			while (attrIter.hasNext()) {
+				Attribute attr = attrIter.next();
+				if( (retAttrSet = AttributeSetMap.get(attr.getQName())) != null){
+					retAttrSet.addAttribute(attr);
+				}else{
+					AttributeSet newAttrSet = new AttributeSet(attr.getName(),attr.getQName(),attr.getValueType(),attr.getConversionType());
+					newAttrSet.addAttribute(attr);
+					AttributeSetMap.put(attr.getQName(), newAttrSet);
+				}
+			}
+		}
+		return true;
     }
 
     public HashMap<String, String> getNamespaces()
