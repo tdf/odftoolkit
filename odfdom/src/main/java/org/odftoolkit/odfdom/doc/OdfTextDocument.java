@@ -27,10 +27,7 @@ import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
 import org.w3c.dom.Node;
 
 /**
- * This class represents an empty ODF text document file.
- * Note: The way of receiving a new empty OdfTextDocument will probably change. 
- * In the future the streams and DOM representation of an OpenDocument file will
- * be clonable and this stream buffering will be neglected.
+ * This class represents an empty ODF text document.
  * 
  */
 public class OdfTextDocument extends OdfDocument {

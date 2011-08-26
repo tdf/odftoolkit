@@ -43,7 +43,7 @@ public class OfficeMetaTest {
 	private OdfTextDocument doc;
 	private OdfFileDom metadom;
 	private OdfOfficeMeta fMetadata;
-	private String generator = "odfdom-0.8 build";
+	private String generator = "ODFDOM/" + System.getProperty("odfdom.version");
 	private String dctitle = "dctitle";
 	private String dcdescription = "dcdescription";
 	private String subject = "dcsubject";
@@ -304,7 +304,7 @@ public class OfficeMetaTest {
 		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("EmptyDocForMetaTest.odt"));
 		metadom = doc.getMetaDom();
 		fMetadata = new OdfOfficeMeta(metadom);
-		Assert.assertEquals("ODFDOM/" + System.getProperty("odfdom.version") + ".5", fMetadata.getGenerator());
+		Assert.assertEquals(generator, fMetadata.getGenerator());
 		Assert.assertNull(fMetadata.getTitle());
 		Assert.assertNull(fMetadata.getDescription());
 		Assert.assertNull(fMetadata.getSubject());

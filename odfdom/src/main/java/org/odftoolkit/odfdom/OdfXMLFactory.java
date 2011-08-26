@@ -55,7 +55,7 @@ public class OdfXMLFactory {
 	private static final String LOCAL_NAME_DELIMITER = "-";
 	private static final String ELEMENT_PACKAGE_NAME = "element";
 	private static final String ATTRIBUTE_PACKAGE_NAME = "attribute";
-	
+
 	static {
 		mElementRenames.put("draw:a", "draw:hyperlink");
 		mElementRenames.put("draw:g", "draw:group");
@@ -64,7 +64,6 @@ public class OdfXMLFactory {
 		mElementRenames.put("text:s", "text:space");
 		mElementRenames.put("text:a", "text:hyperlink");
 	}
-
 
 	/** Mapping an ODF element to a new Java DOM element class.
 	 *  Note: There is a default class for each element being generated from the latest ODF schema 
@@ -86,7 +85,6 @@ public class OdfXMLFactory {
 		return getOdfNodeClass(odfName, ATTRIBUTE_PACKAGE_NAME, mAttributeTypes);
 	}
 
-
 	/**
 	 * @param odfName the name of the ODF element the desired DOM class should represent.
 	 * @return the Java DOM element class to be mapped to a certain ODF element. */
@@ -96,69 +94,67 @@ public class OdfXMLFactory {
 
 	private static Class getOdfNodeClass(OdfName odfName, String nodeName, Map<OdfName, Class> classCache) {
 		Class c = null;
-		String className="";
+		String className = "";
 		c = classCache.get(odfName);
 		if (c == null) {
 			String prefix = odfName.getPrefix();
 			if (prefix != null && !(nodeName.equals("attribute") && prefix.equals("xmlns"))) {
 				String qName = odfName.getQName();
 				String localName = odfName.getLocalName();
-				if ((nodeName==ATTRIBUTE_PACKAGE_NAME) || 
-						(prefix.equals("meta") || prefix.equals("table") || qName.equals("office:meta") || qName.equals("draw:page") 
-								|| qName.equals("office:presentation") || qName.equals("presentation:notes")))
-					className = getOdfDOMNodeClassName(odfName.getPrefix(),odfName.getLocalName(),nodeName);
-				else {
-					if (mElementRenames.containsKey(qName))
-					{
+				if ((nodeName == ATTRIBUTE_PACKAGE_NAME)
+						|| (prefix.equals("meta") || prefix.equals("table") || qName.equals("office:meta") || qName.equals("draw:page")
+						|| qName.equals("office:presentation") || qName.equals("presentation:notes"))) {
+					className = getOdfDOMNodeClassName(odfName.getPrefix(), odfName.getLocalName(), nodeName);
+				} else {
+					if (mElementRenames.containsKey(qName)) {
 						String renameName = mElementRenames.get(qName);
 						StringTokenizer stok = new StringTokenizer(renameName, ":");
-						className = getOdfDOCNodeClassName(stok.nextToken(),stok.nextToken());
-					} else 
-						className = getOdfDOCNodeClassName(prefix,localName);
+						className = getOdfDOCNodeClassName(stok.nextToken(), stok.nextToken());
+					} else {
+						className = getOdfDOCNodeClassName(prefix, localName);
+					}
 				}
 				try {
 					c = Class.forName(className);
 					classCache.put(odfName, c);
 				} catch (ClassNotFoundException ex) {
 					//Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.SEVERE, null, ex);
-					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.INFO,"ClassNotFoundException happened: "+className,ex.getMessage());
+					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.INFO, "ClassNotFoundException - not a problem for none ODF 1.2 XML node: " + className, ex.getMessage());
 				} catch (NoClassDefFoundError dex) {
-					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.INFO,"NoClassDefFoundError happened: "+className,dex.getMessage());
+					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.INFO, "NoClassDefFoundError: " + className, dex.getMessage());
 				}
 			}
 		}
 		return c;
 	}
-	
-	private static String getOdfDOCNodeClassName(String prefix, String localName)
-	{
+
+	private static String getOdfDOCNodeClassName(String prefix, String localName) {
 		boolean contains = false;
 		StringBuilder className = new StringBuilder();
-		
+
 		if (localName.indexOf(LOCAL_NAME_DELIMITER) != -1) {
 			StringTokenizer stok = new StringTokenizer(localName, LOCAL_NAME_DELIMITER);
 			while (stok.hasMoreElements()) {
 				String substr = stok.nextToken();
-				if (substr.equals(prefix))
+				if (substr.equals(prefix)) {
 					contains = true;
+				}
 				className = className.append(toUpperCaseFirstCharacter(substr));
 			}
 		} else {
 			className = className.append(toUpperCaseFirstCharacter(localName));
 		}
-		if (!((contains && !localName.endsWith("table")) 
-				|| (localName.equals(prefix)) 
-				|| (localName.startsWith(prefix) && prefix.equals("anim"))))
-		{
+		if (!((contains && !localName.endsWith("table"))
+				|| (localName.equals(prefix))
+				|| (localName.startsWith(prefix) && prefix.equals("anim")))) {
 			className = className.insert(0, toUpperCaseFirstCharacter(prefix));
 		}
-		className = className.insert(0, "org.odftoolkit.odfdom.doc."+prefix + "." + "Odf");
-		
+		className = className.insert(0, "org.odftoolkit.odfdom.doc." + prefix + "." + "Odf");
+
 		return className.toString();
 	}
-	
-	private static String getOdfDOMNodeClassName(String prefix, String localName, String nodeName)
-	{
+
+	private static String getOdfDOMNodeClassName(String prefix, String localName, String nodeName) {
 		StringBuilder className = new StringBuilder("org.odftoolkit.odfdom.dom." + nodeName + "." + prefix + ".");
 		className = className.append(toUpperCaseFirstCharacter(prefix));
 		if (localName.indexOf(LOCAL_NAME_DELIMITER) != -1) {
@@ -224,5 +220,4 @@ public class OdfXMLFactory {
 		}
 		return o;
 	}
-	
 }

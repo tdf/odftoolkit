@@ -58,11 +58,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * This class represents an empty ODF presentation file.
- * Note: The way of receiving a new empty OdfPresentationDocument will probably change. 
- * In the future the streams and DOM representation of an OpenDocument file will
- * be clonable and this stream buffering will be neglected.
- * 
+ * This class represents an empty ODF presentation.
  */
 public class OdfPresentationDocument extends OdfDocument {
 
@@ -1123,7 +1119,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * <p>
 	 * Throw IndexOutOfBoundsException if index is out of the presentation document slide count.
 	 */
-	public OdfDrawPage newSlide(int index, String name, OdfDrawPage.SlideLayout slideType) {
+	public OdfDrawPage newSlide(int index, String name, OdfDrawPage.SlideLayout slideLayout) {
 		checkAllSlideName();
 		OfficePresentationElement contentRoot = null;
 		try {
@@ -1161,7 +1157,7 @@ public class OdfPresentationDocument extends OdfDocument {
 		if (pageLayoutName != null) {
 			newSlideElement.setPresentationPresentationPageLayoutNameAttribute(pageLayoutName);
 		}
-		setSlideLayout(newSlideElement, slideType);
+		setSlideLayout(newSlideElement, slideLayout);
 		//insert notes page
 		NodeList noteNodes = refStyleSlide.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION).toString(), "notes");
 		if (noteNodes.getLength() > 0) {

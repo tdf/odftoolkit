@@ -84,6 +84,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
+/** This abstract class is representing one of the possible ODF documents */
 public abstract class OdfDocument {
 	// Static parts of file references
 

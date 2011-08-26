@@ -25,10 +25,7 @@ package org.odftoolkit.odfdom.doc;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeDrawing;
 
 /**
- * This class represents an empty ODF graphics document file.
- * Note: The way of receiving a new empty OdfGraphicsDocument will probably change. 
- * In the future the streams and DOM representation of an OpenDocument file will
- * be clonable and this stream buffering will be neglected.
+ * This class represents an empty ODF graphics document.
  * 
  */
 public class OdfGraphicsDocument extends OdfDocument {

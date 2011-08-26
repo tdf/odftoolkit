@@ -5,7 +5,7 @@
 	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>odfdom-java</artifactId>
-	<version>0.8</version>
+	<version>0.8.5</version>
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
@@ -23,7 +23,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
 
 	<!-- Build Settings -->
 	<build>
@@ -122,7 +121,7 @@
 					<tagletArtifact>
 						<groupId>org.odftoolkit</groupId>
 						<artifactId>taglets</artifactId>
-						<version>0.8</version>
+						<version>0.8.5</version>
 					</tagletArtifact>
 				</configuration>
 			</plugin>

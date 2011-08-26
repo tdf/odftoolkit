@@ -25,11 +25,8 @@ package org.odftoolkit.odfdom.doc;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeChart;
 
 /**
- * This class represents an empty ODF document file, which will be embedded
- * in an existing ODF document.
- * Note: The way of receiving a new empty OdfEmbeddedDocument will probably change. 
- * In the future the streams and DOM representation of an OpenDocument file will
- * be clonable and this stream buffering will be neglected.
+ * This class represents an empty ODF document , which will be in general embedded
+ * in an existing ODF (Spreadsheet) document.
  */
 public class OdfChartDocument extends OdfDocument {
 
