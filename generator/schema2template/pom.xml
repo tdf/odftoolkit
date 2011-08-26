@@ -5,7 +5,7 @@
 	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>schema2template</artifactId>
-	<version>0.8.8-SNAPSHOT</version>
+	<version>0.8.7</version>
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
@@ -28,7 +28,7 @@
 	<parent>
 		<groupId>org.odftoolkit</groupId>
 		<artifactId>schema2template-pom</artifactId>
-		<version>0.8.8-SNAPSHOT</version>
+		<version>0.8.7</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -77,6 +77,16 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<reporting>
@@ -116,3 +126,4 @@
 	<name>schema2template</name>
 	<description>XML Schema to Template Mapping Tool: Library</description>
 </project>
+

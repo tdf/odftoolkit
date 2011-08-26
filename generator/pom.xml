@@ -5,7 +5,7 @@
 	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>schema2template-pom</artifactId>
-	<version>0.8.8-SNAPSHOT</version>
+	<version>0.8.7</version>
 	<packaging>pom</packaging>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -78,6 +78,23 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>single</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>			
 		</plugins>
 	</build>
 
@@ -186,6 +203,7 @@
 			<build>
 				<plugins>
 					<plugin>
+                        <groupId>org.apache.maven.plugins</groupId>					
 						<artifactId>maven-gpg-plugin</artifactId>
 						<version>1.1</version>
 						<executions>
@@ -194,15 +212,19 @@
 								<phase>verify</phase>
 								<goals>
 									<goal>sign</goal>
-								</goals>
-								<configuration>
-									<useAgent>true</useAgent>
-								</configuration>
+								</goals>			
 							</execution>
 						</executions>
 					</plugin>
 				</plugins>
 			</build>
+			<distributionManagement>
+				<site>
+					<id>odfdom</id>
+					<name>ODFDOM Java Toolkit Project</name>
+					<url>dav:https://odftoolkit.org/website/odfdom/${project.version}</url>
+				</site>
+			</distributionManagement>			
 		</profile>
 	</profiles>
 </project>
