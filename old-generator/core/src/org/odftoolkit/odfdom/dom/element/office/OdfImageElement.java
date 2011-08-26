@@ -32,28 +32,34 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.draw.OdfFrameElement;
 
 /**
  * ODF DOM Element implementation for element "<office:image>".
  */
 public abstract class OdfImageElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2429805808735342788L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "image" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "image" );
 
     public OdfImageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "draw:frame".
+    */
+    public OdfFrameElement createFrameElement()
+    {
+        OdfFrameElement  _nFrame = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFrameElement.class);
+        this.appendChild( _nFrame);
+        return  _nFrame;
+    }                   
+               
 }

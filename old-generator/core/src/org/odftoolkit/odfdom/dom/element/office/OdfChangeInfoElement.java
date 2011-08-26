@@ -32,28 +32,56 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.dc.OdfCreatorElement;
+import org.odftoolkit.odfdom.dom.element.dc.OdfDateElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 
 /**
  * ODF DOM Element implementation for element "<office:change-info>".
  */
 public abstract class OdfChangeInfoElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6037353483235023607L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "change-info" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "change-info" );
 
     public OdfChangeInfoElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "dc:creator".
+    */
+    public OdfCreatorElement createCreatorElement()
+    {
+        OdfCreatorElement  _nCreator = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCreatorElement.class);
+        this.appendChild( _nCreator);
+        return  _nCreator;
+    }                   
+               
+    /**
+    * Create child element "dc:date".
+    */
+    public OdfDateElement createDateElement()
+    {
+        OdfDateElement  _nDate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDateElement.class);
+        this.appendChild( _nDate);
+        return  _nDate;
+    }                   
+               
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
 }

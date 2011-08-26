@@ -30,30 +30,31 @@ package org.odftoolkit.odfdom.dom.element.office;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.draw.OdfShapeElementBase;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeLength;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+import org.odftoolkit.odfdom.dom.element.dc.OdfCreatorElement;
+import org.odftoolkit.odfdom.dom.element.dc.OdfDateElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfDateStringElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfListElement;
 
 /**
  * ODF DOM Element implementation for element "<office:annotation>".
  */
 public abstract class OdfAnnotationElement extends OdfShapeElementBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4342608990560439678L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "annotation" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "annotation" );
 
     public OdfAnnotationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -80,8 +81,7 @@ public abstract class OdfAnnotationElement extends OdfShapeElementBase
     /**
      * Get value of attribute "office:name".
      */
-    @Override
-	public String getName()
+    public String getName()
     {
         return getOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "name" ) );
     }
@@ -89,8 +89,7 @@ public abstract class OdfAnnotationElement extends OdfShapeElementBase
     /**
      * Set value of attribute "office:name".
      */
-    @Override
-	public void setName( String _aName )
+    public void setName( String _aName )
     {
         setOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "name" ), _aName );
     }
@@ -259,4 +258,54 @@ public abstract class OdfAnnotationElement extends OdfShapeElementBase
         setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "text-style-name" ), aStringVal );
     }
 
+    /**
+    * Create child element "dc:creator".
+    */
+    public OdfCreatorElement createCreatorElement()
+    {
+        OdfCreatorElement  _nCreator = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCreatorElement.class);
+        this.appendChild( _nCreator);
+        return  _nCreator;
+    }                   
+               
+    /**
+    * Create child element "dc:date".
+    */
+    public OdfDateElement createDateElement()
+    {
+        OdfDateElement  _nDate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDateElement.class);
+        this.appendChild( _nDate);
+        return  _nDate;
+    }                   
+               
+    /**
+    * Create child element "meta:date-string".
+    */
+    public OdfDateStringElement createDateStringElement()
+    {
+        OdfDateStringElement  _nDateString = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDateStringElement.class);
+        this.appendChild( _nDateString);
+        return  _nDateString;
+    }                   
+               
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
+    /**
+    * Create child element "text:list".
+    */
+    public OdfListElement createListElement()
+    {
+        OdfListElement  _nList = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListElement.class);
+        this.appendChild( _nList);
+        return  _nList;
+    }                   
+               
 }

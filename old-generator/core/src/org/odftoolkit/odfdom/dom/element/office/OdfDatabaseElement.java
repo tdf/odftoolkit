@@ -32,28 +32,89 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.db.OdfDataSourceElement;
+import org.odftoolkit.odfdom.dom.element.db.OdfFormsElement;
+import org.odftoolkit.odfdom.dom.element.db.OdfReportsElement;
+import org.odftoolkit.odfdom.dom.element.db.OdfQueriesElement;
+import org.odftoolkit.odfdom.dom.element.db.OdfTableRepresentationsElement;
+import org.odftoolkit.odfdom.dom.element.db.OdfSchemaDefinitionElement;
 
 /**
  * ODF DOM Element implementation for element "<office:database>".
  */
 public abstract class OdfDatabaseElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4825982009320598814L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "database" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "database" );
 
     public OdfDatabaseElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:data-source".
+    */
+    public OdfDataSourceElement createDataSourceElement()
+    {
+        OdfDataSourceElement  _nDataSource = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataSourceElement.class);
+        this.appendChild( _nDataSource);
+        return  _nDataSource;
+    }                   
+               
+    /**
+    * Create child element "db:forms".
+    */
+    public OdfFormsElement createFormsElement()
+    {
+        OdfFormsElement  _nForms = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFormsElement.class);
+        this.appendChild( _nForms);
+        return  _nForms;
+    }                   
+               
+    /**
+    * Create child element "db:reports".
+    */
+    public OdfReportsElement createReportsElement()
+    {
+        OdfReportsElement  _nReports = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfReportsElement.class);
+        this.appendChild( _nReports);
+        return  _nReports;
+    }                   
+               
+    /**
+    * Create child element "db:queries".
+    */
+    public OdfQueriesElement createQueriesElement()
+    {
+        OdfQueriesElement  _nQueries = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfQueriesElement.class);
+        this.appendChild( _nQueries);
+        return  _nQueries;
+    }                   
+               
+    /**
+    * Create child element "db:table-representations".
+    */
+    public OdfTableRepresentationsElement createTableRepresentationsElement()
+    {
+        OdfTableRepresentationsElement  _nTableRepresentations = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableRepresentationsElement.class);
+        this.appendChild( _nTableRepresentations);
+        return  _nTableRepresentations;
+    }                   
+               
+    /**
+    * Create child element "db:schema-definition".
+    */
+    public OdfSchemaDefinitionElement createSchemaDefinitionElement()
+    {
+        OdfSchemaDefinitionElement  _nSchemaDefinition = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSchemaDefinitionElement.class);
+        this.appendChild( _nSchemaDefinition);
+        return  _nSchemaDefinition;
+    }                   
+               
 }

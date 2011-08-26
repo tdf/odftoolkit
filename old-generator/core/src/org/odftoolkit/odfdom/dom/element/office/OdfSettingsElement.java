@@ -32,28 +32,35 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.config.OdfConfigItemSetElement;
 
 /**
  * ODF DOM Element implementation for element "<office:settings>".
  */
 public abstract class OdfSettingsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7032691944857970984L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "settings" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "settings" );
 
     public OdfSettingsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "config:config-item-set".
+    */
+    public OdfConfigItemSetElement createConfigItemSetElement(String   _aName)
+    {
+        OdfConfigItemSetElement  _nConfigItemSet = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConfigItemSetElement.class);
+        _nConfigItemSet.setName( _aName);
+        this.appendChild( _nConfigItemSet);
+        return  _nConfigItemSet;      
+    }
+    
 }

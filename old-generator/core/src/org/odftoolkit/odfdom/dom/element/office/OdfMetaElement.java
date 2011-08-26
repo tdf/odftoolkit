@@ -32,28 +32,236 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.meta.OdfGeneratorElement;
+import org.odftoolkit.odfdom.dom.element.dc.OdfTitleElement;
+import org.odftoolkit.odfdom.dom.element.dc.OdfDescriptionElement;
+import org.odftoolkit.odfdom.dom.element.dc.OdfSubjectElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfKeywordElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfInitialCreatorElement;
+import org.odftoolkit.odfdom.dom.element.dc.OdfCreatorElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfPrintedByElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfCreationDateElement;
+import org.odftoolkit.odfdom.dom.element.dc.OdfDateElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfPrintDateElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfTemplateElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfAutoReloadElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfHyperlinkBehaviourElement;
+import org.odftoolkit.odfdom.dom.element.dc.OdfLanguageElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfEditingCyclesElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfEditingDurationElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfDocumentStatisticElement;
+import org.odftoolkit.odfdom.dom.element.meta.OdfUserDefinedElement;
+import org.odftoolkit.odfdom.dom.type.meta.OdfValueType;
 
 /**
  * ODF DOM Element implementation for element "<office:meta>".
  */
 public abstract class OdfMetaElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2730081950729792656L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "meta" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "meta" );
 
     public OdfMetaElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "meta:generator".
+    */
+    public OdfGeneratorElement createGeneratorElement()
+    {
+        OdfGeneratorElement  _nGenerator = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfGeneratorElement.class);
+        this.appendChild( _nGenerator);
+        return  _nGenerator;
+    }                   
+               
+    /**
+    * Create child element "dc:title".
+    */
+    public OdfTitleElement createTitleElement()
+    {
+        OdfTitleElement  _nTitle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTitleElement.class);
+        this.appendChild( _nTitle);
+        return  _nTitle;
+    }                   
+               
+    /**
+    * Create child element "dc:description".
+    */
+    public OdfDescriptionElement createDescriptionElement()
+    {
+        OdfDescriptionElement  _nDescription = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDescriptionElement.class);
+        this.appendChild( _nDescription);
+        return  _nDescription;
+    }                   
+               
+    /**
+    * Create child element "dc:subject".
+    */
+    public OdfSubjectElement createSubjectElement()
+    {
+        OdfSubjectElement  _nSubject = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSubjectElement.class);
+        this.appendChild( _nSubject);
+        return  _nSubject;
+    }                   
+               
+    /**
+    * Create child element "meta:keyword".
+    */
+    public OdfKeywordElement createKeywordElement()
+    {
+        OdfKeywordElement  _nKeyword = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfKeywordElement.class);
+        this.appendChild( _nKeyword);
+        return  _nKeyword;
+    }                   
+               
+    /**
+    * Create child element "meta:initial-creator".
+    */
+    public OdfInitialCreatorElement createInitialCreatorElement()
+    {
+        OdfInitialCreatorElement  _nInitialCreator = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfInitialCreatorElement.class);
+        this.appendChild( _nInitialCreator);
+        return  _nInitialCreator;
+    }                   
+               
+    /**
+    * Create child element "dc:creator".
+    */
+    public OdfCreatorElement createCreatorElement()
+    {
+        OdfCreatorElement  _nCreator = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCreatorElement.class);
+        this.appendChild( _nCreator);
+        return  _nCreator;
+    }                   
+               
+    /**
+    * Create child element "meta:printed-by".
+    */
+    public OdfPrintedByElement createPrintedByElement()
+    {
+        OdfPrintedByElement  _nPrintedBy = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPrintedByElement.class);
+        this.appendChild( _nPrintedBy);
+        return  _nPrintedBy;
+    }                   
+               
+    /**
+    * Create child element "meta:creation-date".
+    */
+    public OdfCreationDateElement createCreationDateElement()
+    {
+        OdfCreationDateElement  _nCreationDate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCreationDateElement.class);
+        this.appendChild( _nCreationDate);
+        return  _nCreationDate;
+    }                   
+               
+    /**
+    * Create child element "dc:date".
+    */
+    public OdfDateElement createDateElement()
+    {
+        OdfDateElement  _nDate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDateElement.class);
+        this.appendChild( _nDate);
+        return  _nDate;
+    }                   
+               
+    /**
+    * Create child element "meta:print-date".
+    */
+    public OdfPrintDateElement createPrintDateElement()
+    {
+        OdfPrintDateElement  _nPrintDate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPrintDateElement.class);
+        this.appendChild( _nPrintDate);
+        return  _nPrintDate;
+    }                   
+               
+    /**
+    * Create child element "meta:template".
+    */
+    public OdfTemplateElement createTemplateElement(String   _aHref)
+    {
+        OdfTemplateElement  _nTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTemplateElement.class);
+        _nTemplate.setHref( _aHref);
+        this.appendChild( _nTemplate);
+        return  _nTemplate;      
+    }
+    
+    /**
+    * Create child element "meta:auto-reload".
+    */
+    public OdfAutoReloadElement createAutoReloadElement()
+    {
+        OdfAutoReloadElement  _nAutoReload = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAutoReloadElement.class);
+        this.appendChild( _nAutoReload);
+        return  _nAutoReload;
+    }                   
+               
+    /**
+    * Create child element "meta:hyperlink-behaviour".
+    */
+    public OdfHyperlinkBehaviourElement createHyperlinkBehaviourElement()
+    {
+        OdfHyperlinkBehaviourElement  _nHyperlinkBehaviour = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHyperlinkBehaviourElement.class);
+        this.appendChild( _nHyperlinkBehaviour);
+        return  _nHyperlinkBehaviour;
+    }                   
+               
+    /**
+    * Create child element "dc:language".
+    */
+    public OdfLanguageElement createLanguageElement()
+    {
+        OdfLanguageElement  _nLanguage = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLanguageElement.class);
+        this.appendChild( _nLanguage);
+        return  _nLanguage;
+    }                   
+               
+    /**
+    * Create child element "meta:editing-cycles".
+    */
+    public OdfEditingCyclesElement createEditingCyclesElement()
+    {
+        OdfEditingCyclesElement  _nEditingCycles = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEditingCyclesElement.class);
+        this.appendChild( _nEditingCycles);
+        return  _nEditingCycles;
+    }                   
+               
+    /**
+    * Create child element "meta:editing-duration".
+    */
+    public OdfEditingDurationElement createEditingDurationElement()
+    {
+        OdfEditingDurationElement  _nEditingDuration = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEditingDurationElement.class);
+        this.appendChild( _nEditingDuration);
+        return  _nEditingDuration;
+    }                   
+               
+    /**
+    * Create child element "meta:document-statistic".
+    */
+    public OdfDocumentStatisticElement createDocumentStatisticElement()
+    {
+        OdfDocumentStatisticElement  _nDocumentStatistic = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDocumentStatisticElement.class);
+        this.appendChild( _nDocumentStatistic);
+        return  _nDocumentStatistic;
+    }                   
+               
+    /**
+    * Create child element "meta:user-defined".
+    */
+    public OdfUserDefinedElement createUserDefinedElement(OdfValueType   _aValueType, String   _aName)
+    {
+        OdfUserDefinedElement  _nUserDefined = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfUserDefinedElement.class);
+        _nUserDefined.setValueType( _aValueType);
+        _nUserDefined.setName( _aName);
+        this.appendChild( _nUserDefined);
+        return  _nUserDefined;      
+    }
+    
 }

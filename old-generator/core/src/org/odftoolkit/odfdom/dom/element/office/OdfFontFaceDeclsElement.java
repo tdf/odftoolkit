@@ -32,28 +32,35 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.style.OdfFontFaceElement;
 
 /**
  * ODF DOM Element implementation for element "<office:font-face-decls>".
  */
 public abstract class OdfFontFaceDeclsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5750857340607085338L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "font-face-decls" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "font-face-decls" );
 
     public OdfFontFaceDeclsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "style:font-face".
+    */
+    public OdfFontFaceElement createFontFaceElement(String   _aName)
+    {
+        OdfFontFaceElement  _nFontFace = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFontFaceElement.class);
+        _nFontFace.setName( _aName);
+        this.appendChild( _nFontFace);
+        return  _nFontFace;      
+    }
+    
 }

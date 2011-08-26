@@ -32,28 +32,45 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<office:scripts>".
  */
 public abstract class OdfScriptsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8971222647806581414L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "scripts" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "scripts" );
 
     public OdfScriptsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "office:script".
+    */
+    public OdfScriptElement createScriptElement(String   _aLanguage)
+    {
+        OdfScriptElement  _nScript = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfScriptElement.class);
+        _nScript.setLanguage( _aLanguage);
+        this.appendChild( _nScript);
+        return  _nScript;      
+    }
+    
+    /**
+    * Create child element "office:event-listeners".
+    */
+    public OdfEventListenersElement createEventListenersElement()
+    {
+        OdfEventListenersElement  _nEventListeners = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEventListenersElement.class);
+        this.appendChild( _nEventListeners);
+        return  _nEventListeners;
+    }                   
+               
 }

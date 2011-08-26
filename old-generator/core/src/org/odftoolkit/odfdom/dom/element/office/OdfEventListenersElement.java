@@ -32,28 +32,50 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.script.OdfEventListenerElement;
+import org.odftoolkit.odfdom.dom.type.presentation.OdfActionType;
 
 /**
  * ODF DOM Element implementation for element "<office:event-listeners>".
  */
 public abstract class OdfEventListenersElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2317557110669906666L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "event-listeners" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "event-listeners" );
 
     public OdfEventListenersElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "script:event-listener".
+    */
+    public OdfEventListenerElement createEventListenerElement(String   _aEventName, String   _aLanguage, String   _aMacroName)
+    {
+        OdfEventListenerElement  _nEventListener = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEventListenerElement.class);
+        _nEventListener.setEventName( _aEventName);
+        _nEventListener.setLanguage( _aLanguage);
+        _nEventListener.setMacroName( _aMacroName);
+        this.appendChild( _nEventListener);
+        return  _nEventListener;      
+    }
+    
+    /**
+    * Create child element "presentation:event-listener".
+    */
+    public org.odftoolkit.odfdom.dom.element.presentation.OdfEventListenerElement createpresentationEventListenerElement(String   _aEventName, OdfActionType   _aAction)
+    {
+        org.odftoolkit.odfdom.dom.element.presentation.OdfEventListenerElement  _nEventListener = ((OdfFileDom)this.ownerDocument).createOdfElement(org.odftoolkit.odfdom.dom.element.presentation.OdfEventListenerElement.class);
+        _nEventListener.setEventName( _aEventName);
+        _nEventListener.setAction( _aAction);
+        this.appendChild( _nEventListener);
+        return  _nEventListener;      
+    }
+    
 }

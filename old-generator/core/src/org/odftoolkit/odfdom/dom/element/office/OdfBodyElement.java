@@ -32,28 +32,94 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<office:body>".
  */
 public abstract class OdfBodyElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4145315266220240468L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "body" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "body" );
 
     public OdfBodyElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "office:text".
+    */
+    public OdfTextElement createTextElement()
+    {
+        OdfTextElement  _nText = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextElement.class);
+        this.appendChild( _nText);
+        return  _nText;
+    }                   
+               
+    /**
+    * Create child element "office:drawing".
+    */
+    public OdfDrawingElement createDrawingElement()
+    {
+        OdfDrawingElement  _nDrawing = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDrawingElement.class);
+        this.appendChild( _nDrawing);
+        return  _nDrawing;
+    }                   
+               
+    /**
+    * Create child element "office:presentation".
+    */
+    public OdfPresentationElement createPresentationElement()
+    {
+        OdfPresentationElement  _nPresentation = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPresentationElement.class);
+        this.appendChild( _nPresentation);
+        return  _nPresentation;
+    }                   
+               
+    /**
+    * Create child element "office:spreadsheet".
+    */
+    public OdfSpreadsheetElement createSpreadsheetElement()
+    {
+        OdfSpreadsheetElement  _nSpreadsheet = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSpreadsheetElement.class);
+        this.appendChild( _nSpreadsheet);
+        return  _nSpreadsheet;
+    }                   
+               
+    /**
+    * Create child element "office:chart".
+    */
+    public OdfChartElement createChartElement()
+    {
+        OdfChartElement  _nChart = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfChartElement.class);
+        this.appendChild( _nChart);
+        return  _nChart;
+    }                   
+               
+    /**
+    * Create child element "office:image".
+    */
+    public OdfImageElement createImageElement()
+    {
+        OdfImageElement  _nImage = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfImageElement.class);
+        this.appendChild( _nImage);
+        return  _nImage;
+    }                   
+               
+    /**
+    * Create child element "office:database".
+    */
+    public OdfDatabaseElement createDatabaseElement()
+    {
+        OdfDatabaseElement  _nDatabase = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDatabaseElement.class);
+        this.appendChild( _nDatabase);
+        return  _nDatabase;
+    }                   
+               
 }

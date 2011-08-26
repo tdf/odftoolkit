@@ -33,25 +33,31 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+import org.odftoolkit.odfdom.dom.element.style.OdfFontFaceElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfStyleElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfListStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfNumberStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfCurrencyStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfPercentageStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfDateStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfTimeStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfBooleanStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfTextStyleElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfPageLayoutElement;
 
 /**
  * ODF DOM Element implementation for element "<office:document-content>".
  */
 public abstract class OdfDocumentContentElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3035512058850190069L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "document-content" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "document-content" );
 
     public OdfDocumentContentElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -98,4 +104,156 @@ public abstract class OdfDocumentContentElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.GRDDL, "transformation" ), aStringVal );
     }
 
+    /**
+    * Create child element "office:script".
+    */
+    public OdfScriptElement createScriptElement(String   _aLanguage)
+    {
+        OdfScriptElement  _nScript = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfScriptElement.class);
+        _nScript.setLanguage( _aLanguage);
+        this.appendChild( _nScript);
+        return  _nScript;      
+    }
+    
+    /**
+    * Create child element "office:event-listeners".
+    */
+    public OdfEventListenersElement createEventListenersElement()
+    {
+        OdfEventListenersElement  _nEventListeners = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEventListenersElement.class);
+        this.appendChild( _nEventListeners);
+        return  _nEventListeners;
+    }                   
+               
+    /**
+    * Create child element "style:font-face".
+    */
+    public OdfFontFaceElement createFontFaceElement(String   _aName)
+    {
+        OdfFontFaceElement  _nFontFace = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFontFaceElement.class);
+        _nFontFace.setName( _aName);
+        this.appendChild( _nFontFace);
+        return  _nFontFace;      
+    }
+    
+    /**
+    * Create child element "style:style".
+    */
+    public OdfStyleElement createStyleElement(String   _aName)
+    {
+        OdfStyleElement  _nStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfStyleElement.class);
+        _nStyle.setName( _aName);
+        this.appendChild( _nStyle);
+        return  _nStyle;      
+    }
+    
+    /**
+    * Create child element "text:list-style".
+    */
+    public OdfListStyleElement createListStyleElement(String   _aName)
+    {
+        OdfListStyleElement  _nListStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListStyleElement.class);
+        _nListStyle.setName( _aName);
+        this.appendChild( _nListStyle);
+        return  _nListStyle;      
+    }
+    
+    /**
+    * Create child element "number:number-style".
+    */
+    public OdfNumberStyleElement createNumberStyleElement(String   _aName)
+    {
+        OdfNumberStyleElement  _nNumberStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNumberStyleElement.class);
+        _nNumberStyle.setName( _aName);
+        this.appendChild( _nNumberStyle);
+        return  _nNumberStyle;      
+    }
+    
+    /**
+    * Create child element "number:currency-style".
+    */
+    public OdfCurrencyStyleElement createCurrencyStyleElement(String   _aName)
+    {
+        OdfCurrencyStyleElement  _nCurrencyStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCurrencyStyleElement.class);
+        _nCurrencyStyle.setName( _aName);
+        this.appendChild( _nCurrencyStyle);
+        return  _nCurrencyStyle;      
+    }
+    
+    /**
+    * Create child element "number:percentage-style".
+    */
+    public OdfPercentageStyleElement createPercentageStyleElement(String   _aName)
+    {
+        OdfPercentageStyleElement  _nPercentageStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPercentageStyleElement.class);
+        _nPercentageStyle.setName( _aName);
+        this.appendChild( _nPercentageStyle);
+        return  _nPercentageStyle;      
+    }
+    
+    /**
+    * Create child element "number:date-style".
+    */
+    public OdfDateStyleElement createDateStyleElement(String   _aName)
+    {
+        OdfDateStyleElement  _nDateStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDateStyleElement.class);
+        _nDateStyle.setName( _aName);
+        this.appendChild( _nDateStyle);
+        return  _nDateStyle;      
+    }
+    
+    /**
+    * Create child element "number:time-style".
+    */
+    public OdfTimeStyleElement createTimeStyleElement(String   _aName)
+    {
+        OdfTimeStyleElement  _nTimeStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTimeStyleElement.class);
+        _nTimeStyle.setName( _aName);
+        this.appendChild( _nTimeStyle);
+        return  _nTimeStyle;      
+    }
+    
+    /**
+    * Create child element "number:boolean-style".
+    */
+    public OdfBooleanStyleElement createBooleanStyleElement(String   _aName)
+    {
+        OdfBooleanStyleElement  _nBooleanStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBooleanStyleElement.class);
+        _nBooleanStyle.setName( _aName);
+        this.appendChild( _nBooleanStyle);
+        return  _nBooleanStyle;      
+    }
+    
+    /**
+    * Create child element "number:text-style".
+    */
+    public OdfTextStyleElement createTextStyleElement(String   _aName)
+    {
+        OdfTextStyleElement  _nTextStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextStyleElement.class);
+        _nTextStyle.setName( _aName);
+        this.appendChild( _nTextStyle);
+        return  _nTextStyle;      
+    }
+    
+    /**
+    * Create child element "style:page-layout".
+    */
+    public OdfPageLayoutElement createPageLayoutElement(String   _aName)
+    {
+        OdfPageLayoutElement  _nPageLayout = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPageLayoutElement.class);
+        _nPageLayout.setName( _aName);
+        this.appendChild( _nPageLayout);
+        return  _nPageLayout;      
+    }
+    
+    /**
+    * Create child element "office:body".
+    */
+    public OdfBodyElement createBodyElement()
+    {
+        OdfBodyElement  _nBody = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBodyElement.class);
+        this.appendChild( _nBody);
+        return  _nBody;
+    }                   
+               
 }

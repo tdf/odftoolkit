@@ -34,25 +34,38 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+import org.odftoolkit.odfdom.dom.element.table.OdfTrackedChangesElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfVariableDeclElement;
+import org.odftoolkit.odfdom.dom.type.office.OdfValueType;
+import org.odftoolkit.odfdom.dom.element.text.OdfSequenceDeclElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfUserFieldDeclElement;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.datatype.Duration;
+import org.odftoolkit.odfdom.dom.element.text.OdfDdeConnectionDeclElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfAlphabeticalIndexAutoMarkFileElement;
+import org.odftoolkit.odfdom.dom.element.table.OdfCalculationSettingsElement;
+import org.odftoolkit.odfdom.dom.element.table.OdfContentValidationsElement;
+import org.odftoolkit.odfdom.dom.element.table.OdfLabelRangesElement;
+import org.odftoolkit.odfdom.dom.element.table.OdfTableElement;
+import org.odftoolkit.odfdom.dom.element.table.OdfNamedExpressionsElement;
+import org.odftoolkit.odfdom.dom.element.table.OdfDatabaseRangesElement;
+import org.odftoolkit.odfdom.dom.element.table.OdfDataPilotTablesElement;
+import org.odftoolkit.odfdom.dom.element.table.OdfConsolidationElement;
+import org.odftoolkit.odfdom.dom.element.table.OdfDdeLinksElement;
 
 /**
  * ODF DOM Element implementation for element "<office:spreadsheet>".
  */
 public abstract class OdfSpreadsheetElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7069339987835741812L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "spreadsheet" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "spreadsheet" );
 
     public OdfSpreadsheetElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -115,4 +128,220 @@ public abstract class OdfSpreadsheetElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "protection-key-digest-algorithm" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:tracked-changes".
+    */
+    public OdfTrackedChangesElement createTrackedChangesElement()
+    {
+        OdfTrackedChangesElement  _nTrackedChanges = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTrackedChangesElement.class);
+        this.appendChild( _nTrackedChanges);
+        return  _nTrackedChanges;
+    }                   
+               
+    /**
+    * Create child element "text:variable-decl".
+    */
+    public OdfVariableDeclElement createVariableDeclElement(String   _aName, OdfValueType   _aValueType)
+    {
+        OdfVariableDeclElement  _nVariableDecl = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfVariableDeclElement.class);
+        _nVariableDecl.setName( _aName);
+        _nVariableDecl.setValueType( _aValueType);
+        this.appendChild( _nVariableDecl);
+        return  _nVariableDecl;      
+    }
+    
+    /**
+    * Create child element "text:sequence-decl".
+    */
+    public OdfSequenceDeclElement createSequenceDeclElement(String   _aName, Integer   _aDisplayOutlineLevel)
+    {
+        OdfSequenceDeclElement  _nSequenceDecl = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSequenceDeclElement.class);
+        _nSequenceDecl.setName( _aName);
+        _nSequenceDecl.setDisplayOutlineLevel( _aDisplayOutlineLevel);
+        this.appendChild( _nSequenceDecl);
+        return  _nSequenceDecl;      
+    }
+    
+    /**
+    * Create child element "text:user-field-decl".
+    */
+    public OdfUserFieldDeclElement createUserFieldDeclElement(OdfValueType   _aValueType, Double   _aValue, String   _aName)
+    {
+        OdfUserFieldDeclElement  _nUserFieldDecl = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfUserFieldDeclElement.class);
+        _nUserFieldDecl.setValueType( _aValueType);
+        _nUserFieldDecl.setValue( _aValue);
+        _nUserFieldDecl.setName( _aName);
+        this.appendChild( _nUserFieldDecl);
+        return  _nUserFieldDecl;      
+    }
+    
+    /**
+    * Create child element "text:user-field-decl".
+    */
+    public OdfUserFieldDeclElement createUserFieldDeclElement(OdfValueType   _aValueType, XMLGregorianCalendar   _aDateValue, String   _aName)
+    {
+        OdfUserFieldDeclElement  _nUserFieldDecl = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfUserFieldDeclElement.class);
+        _nUserFieldDecl.setValueType( _aValueType);
+        _nUserFieldDecl.setDateValue( _aDateValue);
+        _nUserFieldDecl.setName( _aName);
+        this.appendChild( _nUserFieldDecl);
+        return  _nUserFieldDecl;      
+    }
+    
+    /**
+    * Create child element "text:user-field-decl".
+    */
+    public OdfUserFieldDeclElement createUserFieldDeclElement(OdfValueType   _aValueType, Duration   _aTimeValue, String   _aName)
+    {
+        OdfUserFieldDeclElement  _nUserFieldDecl = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfUserFieldDeclElement.class);
+        _nUserFieldDecl.setValueType( _aValueType);
+        _nUserFieldDecl.setTimeValue( _aTimeValue);
+        _nUserFieldDecl.setName( _aName);
+        this.appendChild( _nUserFieldDecl);
+        return  _nUserFieldDecl;      
+    }
+    
+    /**
+    * Create child element "text:user-field-decl".
+    */
+    public OdfUserFieldDeclElement createUserFieldDeclElement(OdfValueType   _aValueType, Boolean   _aBooleanValue, String   _aName)
+    {
+        OdfUserFieldDeclElement  _nUserFieldDecl = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfUserFieldDeclElement.class);
+        _nUserFieldDecl.setValueType( _aValueType);
+        _nUserFieldDecl.setBooleanValue( _aBooleanValue);
+        _nUserFieldDecl.setName( _aName);
+        this.appendChild( _nUserFieldDecl);
+        return  _nUserFieldDecl;      
+    }
+    
+    /**
+    * Create child element "text:user-field-decl".
+    */
+    public OdfUserFieldDeclElement createUserFieldDeclElement(OdfValueType   _aValueType, String   _aName)
+    {
+        OdfUserFieldDeclElement  _nUserFieldDecl = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfUserFieldDeclElement.class);
+        _nUserFieldDecl.setValueType( _aValueType);
+        _nUserFieldDecl.setName( _aName);
+        this.appendChild( _nUserFieldDecl);
+        return  _nUserFieldDecl;      
+    }
+    
+    /**
+    * Create child element "text:dde-connection-decl".
+    */
+    public OdfDdeConnectionDeclElement createDdeConnectionDeclElement(String   _aName, String   _aDdeApplication, String   _aDdeTopic, String   _aDdeItem)
+    {
+        OdfDdeConnectionDeclElement  _nDdeConnectionDecl = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDdeConnectionDeclElement.class);
+        _nDdeConnectionDecl.setName( _aName);
+        _nDdeConnectionDecl.setDdeApplication( _aDdeApplication);
+        _nDdeConnectionDecl.setDdeTopic( _aDdeTopic);
+        _nDdeConnectionDecl.setDdeItem( _aDdeItem);
+        this.appendChild( _nDdeConnectionDecl);
+        return  _nDdeConnectionDecl;      
+    }
+    
+    /**
+    * Create child element "text:alphabetical-index-auto-mark-file".
+    */
+    public OdfAlphabeticalIndexAutoMarkFileElement createAlphabeticalIndexAutoMarkFileElement(String   _aHref)
+    {
+        OdfAlphabeticalIndexAutoMarkFileElement  _nAlphabeticalIndexAutoMarkFile = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAlphabeticalIndexAutoMarkFileElement.class);
+        _nAlphabeticalIndexAutoMarkFile.setHref( _aHref);
+        this.appendChild( _nAlphabeticalIndexAutoMarkFile);
+        return  _nAlphabeticalIndexAutoMarkFile;      
+    }
+    
+    /**
+    * Create child element "table:calculation-settings".
+    */
+    public OdfCalculationSettingsElement createCalculationSettingsElement()
+    {
+        OdfCalculationSettingsElement  _nCalculationSettings = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCalculationSettingsElement.class);
+        this.appendChild( _nCalculationSettings);
+        return  _nCalculationSettings;
+    }                   
+               
+    /**
+    * Create child element "table:content-validations".
+    */
+    public OdfContentValidationsElement createContentValidationsElement()
+    {
+        OdfContentValidationsElement  _nContentValidations = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfContentValidationsElement.class);
+        this.appendChild( _nContentValidations);
+        return  _nContentValidations;
+    }                   
+               
+    /**
+    * Create child element "table:label-ranges".
+    */
+    public OdfLabelRangesElement createLabelRangesElement()
+    {
+        OdfLabelRangesElement  _nLabelRanges = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLabelRangesElement.class);
+        this.appendChild( _nLabelRanges);
+        return  _nLabelRanges;
+    }                   
+               
+    /**
+    * Create child element "table:table".
+    */
+    public OdfTableElement createTableElement()
+    {
+        OdfTableElement  _nTable = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableElement.class);
+        this.appendChild( _nTable);
+        return  _nTable;
+    }                   
+               
+    /**
+    * Create child element "table:named-expressions".
+    */
+    public OdfNamedExpressionsElement createNamedExpressionsElement()
+    {
+        OdfNamedExpressionsElement  _nNamedExpressions = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNamedExpressionsElement.class);
+        this.appendChild( _nNamedExpressions);
+        return  _nNamedExpressions;
+    }                   
+               
+    /**
+    * Create child element "table:database-ranges".
+    */
+    public OdfDatabaseRangesElement createDatabaseRangesElement()
+    {
+        OdfDatabaseRangesElement  _nDatabaseRanges = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDatabaseRangesElement.class);
+        this.appendChild( _nDatabaseRanges);
+        return  _nDatabaseRanges;
+    }                   
+               
+    /**
+    * Create child element "table:data-pilot-tables".
+    */
+    public OdfDataPilotTablesElement createDataPilotTablesElement()
+    {
+        OdfDataPilotTablesElement  _nDataPilotTables = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotTablesElement.class);
+        this.appendChild( _nDataPilotTables);
+        return  _nDataPilotTables;
+    }                   
+               
+    /**
+    * Create child element "table:consolidation".
+    */
+    public OdfConsolidationElement createConsolidationElement(String   _aFunction, String   _aSourceCellRangeAddresses, String   _aTargetCellAddress)
+    {
+        OdfConsolidationElement  _nConsolidation = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConsolidationElement.class);
+        _nConsolidation.setFunction( _aFunction);
+        _nConsolidation.setSourceCellRangeAddresses( _aSourceCellRangeAddresses);
+        _nConsolidation.setTargetCellAddress( _aTargetCellAddress);
+        this.appendChild( _nConsolidation);
+        return  _nConsolidation;      
+    }
+    
+    /**
+    * Create child element "table:dde-links".
+    */
+    public OdfDdeLinksElement createDdeLinksElement()
+    {
+        OdfDdeLinksElement  _nDdeLinks = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDdeLinksElement.class);
+        this.appendChild( _nDdeLinks);
+        return  _nDdeLinks;
+    }                   
+               
 }

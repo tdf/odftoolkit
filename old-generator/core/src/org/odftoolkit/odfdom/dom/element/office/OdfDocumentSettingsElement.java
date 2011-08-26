@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+import org.odftoolkit.odfdom.dom.element.config.OdfConfigItemSetElement;
 
 /**
  * ODF DOM Element implementation for element "<office:document-settings>".
  */
 public abstract class OdfDocumentSettingsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6674013072421584391L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "document-settings" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "document-settings" );
 
     public OdfDocumentSettingsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -98,4 +94,15 @@ public abstract class OdfDocumentSettingsElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.GRDDL, "transformation" ), aStringVal );
     }
 
+    /**
+    * Create child element "config:config-item-set".
+    */
+    public OdfConfigItemSetElement createConfigItemSetElement(String   _aName)
+    {
+        OdfConfigItemSetElement  _nConfigItemSet = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConfigItemSetElement.class);
+        _nConfigItemSet.setName( _aName);
+        this.appendChild( _nConfigItemSet);
+        return  _nConfigItemSet;      
+    }
+    
 }

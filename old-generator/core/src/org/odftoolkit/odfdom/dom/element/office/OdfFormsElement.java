@@ -33,25 +33,22 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+import org.odftoolkit.odfdom.dom.element.form.OdfFormElement;
+import org.odftoolkit.odfdom.dom.element.xforms.OdfModelElement;
 
 /**
  * ODF DOM Element implementation for element "<office:forms>".
  */
 public abstract class OdfFormsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1201357076280418283L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "forms" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "forms" );
 
     public OdfFormsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -98,4 +95,24 @@ public abstract class OdfFormsElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.FORM, "apply-design-mode" ), aStringVal );
     }
 
+    /**
+    * Create child element "form:form".
+    */
+    public OdfFormElement createFormElement()
+    {
+        OdfFormElement  _nForm = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFormElement.class);
+        this.appendChild( _nForm);
+        return  _nForm;
+    }                   
+               
+    /**
+    * Create child element "xforms:model".
+    */
+    public OdfModelElement createModelElement()
+    {
+        OdfModelElement  _nModel = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfModelElement.class);
+        this.appendChild( _nModel);
+        return  _nModel;
+    }                   
+               
 }

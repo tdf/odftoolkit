@@ -32,28 +32,314 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfContainerElementBase;
 
+import org.odftoolkit.odfdom.dom.element.style.OdfStyleElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfListStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfNumberStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfCurrencyStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfPercentageStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfDateStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfTimeStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfBooleanStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.OdfTextStyleElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfDefaultStyleElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfDefaultPageLayoutElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfOutlineStyleElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfNotesConfigurationElement;
+import org.odftoolkit.odfdom.dom.type.text.OdfNoteClassType;
+import org.odftoolkit.odfdom.dom.element.text.OdfBibliographyConfigurationElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfLinenumberingConfigurationElement;
+import org.odftoolkit.odfdom.dom.element.draw.OdfGradientElement;
+import org.odftoolkit.odfdom.dom.type.draw.OdfGradientStyleType;
+import org.odftoolkit.odfdom.dom.element.svg.OdfLineargradientElement;
+import org.odftoolkit.odfdom.dom.element.svg.OdfRadialgradientElement;
+import org.odftoolkit.odfdom.dom.element.draw.OdfHatchElement;
+import org.odftoolkit.odfdom.dom.type.draw.OdfHatchStyleType;
+import org.odftoolkit.odfdom.dom.element.draw.OdfFillImageElement;
+import org.odftoolkit.odfdom.dom.element.draw.OdfMarkerElement;
+import org.odftoolkit.odfdom.dom.element.draw.OdfStrokeDashElement;
+import org.odftoolkit.odfdom.dom.element.draw.OdfOpacityElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfPresentationPageLayoutElement;
 
 /**
  * ODF DOM Element implementation for element "<office:styles>".
  */
 public abstract class OdfStylesElement extends OdfContainerElementBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5841612714209197168L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "styles" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "styles" );
 
     public OdfStylesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "style:style".
+    */
+    public OdfStyleElement createStyleElement(String   _aName)
+    {
+        OdfStyleElement  _nStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfStyleElement.class);
+        _nStyle.setName( _aName);
+        this.appendChild( _nStyle);
+        return  _nStyle;      
+    }
+    
+    /**
+    * Create child element "text:list-style".
+    */
+    public OdfListStyleElement createListStyleElement(String   _aName)
+    {
+        OdfListStyleElement  _nListStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListStyleElement.class);
+        _nListStyle.setName( _aName);
+        this.appendChild( _nListStyle);
+        return  _nListStyle;      
+    }
+    
+    /**
+    * Create child element "number:number-style".
+    */
+    public OdfNumberStyleElement createNumberStyleElement(String   _aName)
+    {
+        OdfNumberStyleElement  _nNumberStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNumberStyleElement.class);
+        _nNumberStyle.setName( _aName);
+        this.appendChild( _nNumberStyle);
+        return  _nNumberStyle;      
+    }
+    
+    /**
+    * Create child element "number:currency-style".
+    */
+    public OdfCurrencyStyleElement createCurrencyStyleElement(String   _aName)
+    {
+        OdfCurrencyStyleElement  _nCurrencyStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCurrencyStyleElement.class);
+        _nCurrencyStyle.setName( _aName);
+        this.appendChild( _nCurrencyStyle);
+        return  _nCurrencyStyle;      
+    }
+    
+    /**
+    * Create child element "number:percentage-style".
+    */
+    public OdfPercentageStyleElement createPercentageStyleElement(String   _aName)
+    {
+        OdfPercentageStyleElement  _nPercentageStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPercentageStyleElement.class);
+        _nPercentageStyle.setName( _aName);
+        this.appendChild( _nPercentageStyle);
+        return  _nPercentageStyle;      
+    }
+    
+    /**
+    * Create child element "number:date-style".
+    */
+    public OdfDateStyleElement createDateStyleElement(String   _aName)
+    {
+        OdfDateStyleElement  _nDateStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDateStyleElement.class);
+        _nDateStyle.setName( _aName);
+        this.appendChild( _nDateStyle);
+        return  _nDateStyle;      
+    }
+    
+    /**
+    * Create child element "number:time-style".
+    */
+    public OdfTimeStyleElement createTimeStyleElement(String   _aName)
+    {
+        OdfTimeStyleElement  _nTimeStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTimeStyleElement.class);
+        _nTimeStyle.setName( _aName);
+        this.appendChild( _nTimeStyle);
+        return  _nTimeStyle;      
+    }
+    
+    /**
+    * Create child element "number:boolean-style".
+    */
+    public OdfBooleanStyleElement createBooleanStyleElement(String   _aName)
+    {
+        OdfBooleanStyleElement  _nBooleanStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBooleanStyleElement.class);
+        _nBooleanStyle.setName( _aName);
+        this.appendChild( _nBooleanStyle);
+        return  _nBooleanStyle;      
+    }
+    
+    /**
+    * Create child element "number:text-style".
+    */
+    public OdfTextStyleElement createTextStyleElement(String   _aName)
+    {
+        OdfTextStyleElement  _nTextStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextStyleElement.class);
+        _nTextStyle.setName( _aName);
+        this.appendChild( _nTextStyle);
+        return  _nTextStyle;      
+    }
+    
+    /**
+    * Create child element "style:default-style".
+    */
+    public OdfDefaultStyleElement createDefaultStyleElement()
+    {
+        OdfDefaultStyleElement  _nDefaultStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDefaultStyleElement.class);
+        this.appendChild( _nDefaultStyle);
+        return  _nDefaultStyle;
+    }                   
+               
+    /**
+    * Create child element "style:default-page-layout".
+    */
+    public OdfDefaultPageLayoutElement createDefaultPageLayoutElement()
+    {
+        OdfDefaultPageLayoutElement  _nDefaultPageLayout = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDefaultPageLayoutElement.class);
+        this.appendChild( _nDefaultPageLayout);
+        return  _nDefaultPageLayout;
+    }                   
+               
+    /**
+    * Create child element "text:outline-style".
+    */
+    public OdfOutlineStyleElement createOutlineStyleElement(String   _aName)
+    {
+        OdfOutlineStyleElement  _nOutlineStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfOutlineStyleElement.class);
+        _nOutlineStyle.setName( _aName);
+        this.appendChild( _nOutlineStyle);
+        return  _nOutlineStyle;      
+    }
+    
+    /**
+    * Create child element "text:notes-configuration".
+    */
+    public OdfNotesConfigurationElement createNotesConfigurationElement(OdfNoteClassType   _aNoteClass)
+    {
+        OdfNotesConfigurationElement  _nNotesConfiguration = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNotesConfigurationElement.class);
+        _nNotesConfiguration.setNoteClass( _aNoteClass);
+        this.appendChild( _nNotesConfiguration);
+        return  _nNotesConfiguration;      
+    }
+    
+    /**
+    * Create child element "text:bibliography-configuration".
+    */
+    public OdfBibliographyConfigurationElement createBibliographyConfigurationElement()
+    {
+        OdfBibliographyConfigurationElement  _nBibliographyConfiguration = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBibliographyConfigurationElement.class);
+        this.appendChild( _nBibliographyConfiguration);
+        return  _nBibliographyConfiguration;
+    }                   
+               
+    /**
+    * Create child element "text:linenumbering-configuration".
+    */
+    public OdfLinenumberingConfigurationElement createLinenumberingConfigurationElement()
+    {
+        OdfLinenumberingConfigurationElement  _nLinenumberingConfiguration = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLinenumberingConfigurationElement.class);
+        this.appendChild( _nLinenumberingConfiguration);
+        return  _nLinenumberingConfiguration;
+    }                   
+               
+    /**
+    * Create child element "draw:gradient".
+    */
+    public OdfGradientElement createGradientElement(OdfGradientStyleType   _aStyle)
+    {
+        OdfGradientElement  _nGradient = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfGradientElement.class);
+        _nGradient.setStyle( _aStyle);
+        this.appendChild( _nGradient);
+        return  _nGradient;      
+    }
+    
+    /**
+    * Create child element "svg:linearGradient".
+    */
+    public OdfLineargradientElement createLineargradientElement(String   _aName)
+    {
+        OdfLineargradientElement  _nLineargradient = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLineargradientElement.class);
+        _nLineargradient.setName( _aName);
+        this.appendChild( _nLineargradient);
+        return  _nLineargradient;      
+    }
+    
+    /**
+    * Create child element "svg:radialGradient".
+    */
+    public OdfRadialgradientElement createRadialgradientElement(String   _aName)
+    {
+        OdfRadialgradientElement  _nRadialgradient = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRadialgradientElement.class);
+        _nRadialgradient.setName( _aName);
+        this.appendChild( _nRadialgradient);
+        return  _nRadialgradient;      
+    }
+    
+    /**
+    * Create child element "draw:hatch".
+    */
+    public OdfHatchElement createHatchElement(String   _aName, OdfHatchStyleType   _aStyle)
+    {
+        OdfHatchElement  _nHatch = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHatchElement.class);
+        _nHatch.setName( _aName);
+        _nHatch.setStyle( _aStyle);
+        this.appendChild( _nHatch);
+        return  _nHatch;      
+    }
+    
+    /**
+    * Create child element "draw:fill-image".
+    */
+    public OdfFillImageElement createFillImageElement(String   _aName, String   _aHref)
+    {
+        OdfFillImageElement  _nFillImage = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFillImageElement.class);
+        _nFillImage.setName( _aName);
+        _nFillImage.setHref( _aHref);
+        this.appendChild( _nFillImage);
+        return  _nFillImage;      
+    }
+    
+    /**
+    * Create child element "draw:marker".
+    */
+    public OdfMarkerElement createMarkerElement(String   _aName, Integer   _aViewbox, String   _aD)
+    {
+        OdfMarkerElement  _nMarker = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfMarkerElement.class);
+        _nMarker.setName( _aName);
+        _nMarker.setViewbox( _aViewbox);
+        _nMarker.setD( _aD);
+        this.appendChild( _nMarker);
+        return  _nMarker;      
+    }
+    
+    /**
+    * Create child element "draw:stroke-dash".
+    */
+    public OdfStrokeDashElement createStrokeDashElement(String   _aName)
+    {
+        OdfStrokeDashElement  _nStrokeDash = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfStrokeDashElement.class);
+        _nStrokeDash.setName( _aName);
+        this.appendChild( _nStrokeDash);
+        return  _nStrokeDash;      
+    }
+    
+    /**
+    * Create child element "draw:opacity".
+    */
+    public OdfOpacityElement createOpacityElement(OdfGradientStyleType   _aStyle)
+    {
+        OdfOpacityElement  _nOpacity = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfOpacityElement.class);
+        _nOpacity.setStyle( _aStyle);
+        this.appendChild( _nOpacity);
+        return  _nOpacity;      
+    }
+    
+    /**
+    * Create child element "style:presentation-page-layout".
+    */
+    public OdfPresentationPageLayoutElement createPresentationPageLayoutElement(String   _aName)
+    {
+        OdfPresentationPageLayoutElement  _nPresentationPageLayout = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPresentationPageLayoutElement.class);
+        _nPresentationPageLayout.setName( _aName);
+        this.appendChild( _nPresentationPageLayout);
+        return  _nPresentationPageLayout;      
+    }
+    
 }

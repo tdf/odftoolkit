@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.office.OdfConversionModeType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<office:dde-source>".
  */
 public abstract class OdfDdeSourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5467780082245968948L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "dde-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.OFFICE, "dde-source" );
 
     public OdfDdeSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
