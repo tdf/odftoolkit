@@ -26,31 +26,30 @@
  */    
 package org.odftoolkit.odfdom.dom.type.smil;
 
-public enum OdfRestartdefaultType
+public enum OdfRestartDefaultType
 {
-              NEVER( "never" ), ALWAYS( "always" ), WHENNOTACTIVE( "whenNotActive" ), INHERIT( "inherit" );
+              ALWAYS( "always" ), INHERIT( "inherit" ), WHENNOTACTIVE( "whenNotActive" ), NEVER( "never" );
 
     private String m_aValue;
 
-    OdfRestartdefaultType( String _aValue )
+    OdfRestartDefaultType( String _aValue )
     {
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }
 
-    public static String toString( OdfRestartdefaultType _aEnum )
+    public static String toString( OdfRestartDefaultType _aEnum )
     {
         return _aEnum.toString();
     }
 
-    public static OdfRestartdefaultType enumValueOf( String _aString )
+    public static OdfRestartDefaultType enumValueOf( String _aString )
     {
-        for( OdfRestartdefaultType aIter : values() )
+        for( OdfRestartDefaultType aIter : values() )
         {
             if( _aString.equals( aIter.toString() ) )
             {
