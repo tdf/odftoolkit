@@ -120,7 +120,12 @@
     <profiles>
     </profiles>
     <dependencies>
-    </dependencies>
+        <dependency>
+            <groupId>com.sun</groupId>
+            <artifactId>tools</artifactId>
+            <version>1.5</version>
+        </dependency>
+    </dependencies> 
     <reporting>
     </reporting>
 </project>

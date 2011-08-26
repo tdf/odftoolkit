@@ -94,7 +94,9 @@ public class AttributeNameTaglet implements Taglet {
 	     */
 	    public String toString(Tag tag) {
 	        //return "<u>" + tag.text() + "</u>";
-	    	return "<a href='someURL#"+ tag.text() +"'>"+ tag.text()+ "</a>";
+		int pos = tag.text().lastIndexOf(":");
+		String link = "attribute-"+tag.text().substring(0, pos)+"_"+tag.text().substring(pos+1);
+	    	return "<a href=\"../../../../../../OpenDocument-v1.2-cd02.xhtml#"+ link +"\">"+ tag.text()+ "</a>";
 	    }
 	    
 	    /**
