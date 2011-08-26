@@ -21,27 +21,28 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.logging.Logger;
+
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawFillImage;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawGradient;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawHatch;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawMarker;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawPage;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
-import org.odftoolkit.odfdom.doc.style.OdfStyleMasterPage;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationClassAttribute;
+import org.odftoolkit.odfdom.dom.element.draw.DrawFillImageElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawGradientElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawHatchElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawMarkerElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
@@ -67,7 +68,7 @@ public class PresentationTest {
 		try {
 			OdfPresentationDocument odpdoc = (OdfPresentationDocument)odfdoc;
 			
-			OdfDrawPage page = odpdoc.getSlideByName("slide-name-1");
+			OdfSlide page = odpdoc.getSlideByName("slide-name-1");
 			Assert.assertTrue((page != null) && page.getSlideName().equals("slide-name-1"));
 			Assert.assertEquals(page, odpdoc.getSlideByIndex(0));
 
@@ -92,10 +93,10 @@ public class PresentationTest {
 			Assert.assertNotNull(officeMasterStyles);
 
 			// check if iterator has all two master pages
-			testIterator(OdfStyleMasterPage.class, officeMasterStyles.getMasterPages(), 2);
+			testIterator(StyleMasterPageElement.class, officeMasterStyles.getMasterPages(), 2);
 
 			// test "master-name-1"
-			OdfStyleMasterPage master = officeMasterStyles.getMasterPage("master-name-1");
+			StyleMasterPageElement master = officeMasterStyles.getMasterPage("master-name-1");
 			Assert.assertNotNull(master);
 			Assert.assertEquals(master.getStyleNameAttribute(), "master-name-1");
 
@@ -122,16 +123,16 @@ public class PresentationTest {
 			Assert.assertNotNull(officeStyles);
 
 			Assert.assertNotNull(officeStyles.getGradient("Linear_20_blue_2f_white"));
-			testIterator(OdfDrawGradient.class, officeStyles.getGradients().iterator(), 1);
+			testIterator(DrawGradientElement.class, officeStyles.getGradients().iterator(), 1);
 
 			Assert.assertNotNull(officeStyles.getMarker("Arrow"));
-			testIterator(OdfDrawMarker.class, officeStyles.getMarker().iterator(), 1);
+			testIterator(DrawMarkerElement.class, officeStyles.getMarker().iterator(), 1);
 
 			Assert.assertNotNull(officeStyles.getHatch("Black_20_0_20_Degrees"));
-			testIterator(OdfDrawHatch.class, officeStyles.getHatches().iterator(), 1);
+			testIterator(DrawHatchElement.class, officeStyles.getHatches().iterator(), 1);
 
 			Assert.assertNotNull(officeStyles.getFillImage("Aqua"));
-			testIterator(OdfDrawFillImage.class, officeStyles.getFillImages().iterator(), 1);
+			testIterator(DrawFillImageElement.class, officeStyles.getFillImages().iterator(), 1);
 
 			// check for some styles
 			Assert.assertNotNull(officeStyles.getDefaultStyle(OdfStyleFamily.Graphic));

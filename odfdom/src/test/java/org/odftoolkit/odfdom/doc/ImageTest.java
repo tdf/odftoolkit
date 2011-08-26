@@ -21,25 +21,31 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.deleteImage;
+import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.deleteImageByPath;
+import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.getImageByPath;
+import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.getImageCount;
+import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.getImagePathSet;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
-import static org.odftoolkit.odfdom.doc.draw.OdfDrawImage.*;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeText;
-import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
-import org.odftoolkit.odfdom.utils.NodeAction;
+import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.odfdom.utils.NodeAction;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Node;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
 
 public class ImageTest {
 
@@ -132,7 +138,7 @@ public class ImageTest {
 			frame1.setTextAnchorPageNumberAttribute(1);
 
 			//add paragraph
-			OdfOfficeText office = doc.getContentRoot();
+			OfficeTextElement office = doc.getContentRoot();
 			OdfTextParagraph para1 = (OdfTextParagraph) office.newTextPElement();
 			para1.setTextContent("insert an image here");
 			String imagePath2 = doc.newImage(mImageUri_ODFDOM);

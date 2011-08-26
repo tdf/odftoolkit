@@ -31,10 +31,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.style.OdfStyleTextProperties;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**
@@ -228,8 +227,8 @@ public class TextStyleNavigationTest {
 		OdfStyle style = null;
 		try {
 			style = new OdfStyle(doc.getContentDom());
-			style.setProperty(OdfStyleTextProperties.FontSize, "23pt");
-			style.setProperty(OdfStyleTextProperties.FontWeight, "bold");
+			style.setProperty(StyleTextPropertiesElement.FontSize, "23pt");
+			style.setProperty(StyleTextPropertiesElement.FontWeight, "bold");
 			style.setStyleFamilyAttribute("text");
 		} catch (Exception e1) {
 			e1.printStackTrace();

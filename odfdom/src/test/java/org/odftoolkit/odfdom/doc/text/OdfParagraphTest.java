@@ -23,17 +23,17 @@
 package org.odftoolkit.odfdom.doc.text;
 
 
-import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.OdfFileDom;
-
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.Assert;
-
+import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 

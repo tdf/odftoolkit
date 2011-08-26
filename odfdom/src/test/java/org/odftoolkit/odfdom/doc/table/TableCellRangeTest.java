@@ -30,10 +30,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
-import org.odftoolkit.odfdom.doc.text.OdfWhitespaceProcessor;
-import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfWhitespaceProcessor;
+import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
 public class TableCellRangeTest {

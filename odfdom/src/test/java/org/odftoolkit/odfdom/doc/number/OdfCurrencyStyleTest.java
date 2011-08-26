@@ -30,8 +30,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.doc.style.OdfStyleMap;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.element.number.NumberCurrencySymbolElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberCurrencyStyle;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -184,10 +187,10 @@ public class OdfCurrencyStyleTest {
 		int nDecimals = Integer.parseInt(expected.substring(1,2));
 		boolean grouped = (expected.charAt(2) == 'T');
 		boolean nodeGrouped;
-		OdfNumber number;
+		NumberNumberElement number;
 
-		Assert.assertTrue("node is OdfNumber", node instanceof OdfNumber);
-		number = (OdfNumber) node;
+		Assert.assertTrue("node is NumberNmberElement", node instanceof NumberNumberElement);
+		number = (NumberNumberElement) node;
 
 		// check number of digits and decimals
 		Assert.assertEquals(nDigits, (long) number.getNumberMinIntegerDigitsAttribute());
@@ -214,7 +217,7 @@ public class OdfCurrencyStyleTest {
 	private void checkCurrency(String expected, Node node)
 	{
 		Assert.assertTrue("node is currency symbol", node instanceof
-			OdfNumberCurrencySymbol);
+			NumberCurrencySymbolElement);
 		checkNumberText("currency-symbol", expected, node);
 	}
 
@@ -226,9 +229,9 @@ public class OdfCurrencyStyleTest {
 		System.out.println("getCurrencySymbolElement");
 		OdfNumberCurrencyStyle instance = new OdfNumberCurrencyStyle(dom,
 			"$", "$#,##0.00", "cstyle");
-		OdfNumberCurrencySymbol expResult = new OdfNumberCurrencySymbol(dom);
+		NumberCurrencySymbolElement expResult = new NumberCurrencySymbolElement(dom);
 		expResult.setTextContent("$");
-		OdfNumberCurrencySymbol result = instance.getCurrencySymbolElement();
+		NumberCurrencySymbolElement result = instance.getCurrencySymbolElement();
 		Assert.assertEquals(expResult.getTextContent(),
 			result.getTextContent());
 	}
@@ -243,13 +246,13 @@ public class OdfCurrencyStyleTest {
 		String country = "KR";
 		OdfNumberCurrencyStyle instance = new OdfNumberCurrencyStyle(dom,
 			"\u20a9", "\u20a9#,##0.00", "kstyle"); // korean Won
-		OdfNumberCurrencySymbol cSymbol;
+		NumberCurrencySymbolElement cSymbol;
 		instance.setCurrencyLocale(language,
 			country);
 		NodeList list = instance.getElementsByTagNameNS(
 			OdfNamespaceNames.NUMBER.getUri(), "currency-symbol");
 		Assert.assertTrue("Has currency symbol", list.getLength() > 0);
-		cSymbol = (OdfNumberCurrencySymbol) list.item(0);
+		cSymbol = (NumberCurrencySymbolElement) list.item(0);
 		Assert.assertEquals(language, cSymbol.getNumberLanguageAttribute());
 		Assert.assertEquals(country, cSymbol.getNumberCountryAttribute());
 	}
@@ -263,7 +266,7 @@ public class OdfCurrencyStyleTest {
 		String locale = "ko-KR";
 		String language = "ko";
 		String country = "KR";
-		OdfNumberCurrencySymbol cSymbol;
+		NumberCurrencySymbolElement cSymbol;
 		NodeList list;
 
 		// first, test setting with a combined language/country
@@ -273,7 +276,7 @@ public class OdfCurrencyStyleTest {
 		list = instance.getElementsByTagNameNS(
 			OdfNamespaceNames.NUMBER.getUri(), "currency-symbol");
 		Assert.assertTrue("Has currency symbol", list.getLength() > 0);
-		cSymbol = (OdfNumberCurrencySymbol) list.item(0);
+		cSymbol = (NumberCurrencySymbolElement) list.item(0);
 		Assert.assertEquals(language, cSymbol.getNumberLanguageAttribute());
 		Assert.assertEquals(country, cSymbol.getNumberCountryAttribute());
 
@@ -284,7 +287,7 @@ public class OdfCurrencyStyleTest {
 		list = instance.getElementsByTagNameNS(
 			OdfNamespaceNames.NUMBER.getUri(), "currency-symbol");
 		Assert.assertTrue("Has currency symbol", list.getLength() > 0);
-		cSymbol = (OdfNumberCurrencySymbol) list.item(0);
+		cSymbol = (NumberCurrencySymbolElement) list.item(0);
 		Assert.assertEquals(language, cSymbol.getNumberLanguageAttribute());
 
 	}
@@ -295,7 +298,7 @@ public class OdfCurrencyStyleTest {
 	@Test
 	public void testSetMapPositive() {
 		Node node;
-		OdfStyleMap mapNode;
+		StyleMapElement mapNode;
 
 		System.out.println("setMapPositive");
 		String mapName = "positiveMap";
@@ -304,8 +307,8 @@ public class OdfCurrencyStyleTest {
 		instance.setMapPositive(mapName);
 		node = instance.getLastChild();
 		Assert.assertNotNull(node);
-		Assert.assertTrue(node instanceof OdfStyleMap);
-		mapNode = (OdfStyleMap) node;
+		Assert.assertTrue(node instanceof StyleMapElement);
+		mapNode = (StyleMapElement) node;
 		Assert.assertEquals("value()>0", mapNode.getStyleConditionAttribute());
 		Assert.assertEquals(mapName, mapNode.getStyleApplyStyleNameAttribute());
 	}
@@ -316,7 +319,7 @@ public class OdfCurrencyStyleTest {
 	@Test
 	public void testSetMapNegative() {
 		Node node;
-		OdfStyleMap mapNode;
+		StyleMapElement mapNode;
 
 		System.out.println("setMapNegative");
 		String mapName = "negativeMap";
@@ -325,8 +328,8 @@ public class OdfCurrencyStyleTest {
 		instance.setMapNegative(mapName);
 		node = instance.getLastChild();
 		Assert.assertNotNull(node);
-		Assert.assertTrue(node instanceof OdfStyleMap);
-		mapNode = (OdfStyleMap) node;
+		Assert.assertTrue(node instanceof StyleMapElement);
+		mapNode = (StyleMapElement) node;
 		Assert.assertEquals("value()<0", mapNode.getStyleConditionAttribute());
 		Assert.assertEquals(mapName, mapNode.getStyleApplyStyleNameAttribute());
 	}

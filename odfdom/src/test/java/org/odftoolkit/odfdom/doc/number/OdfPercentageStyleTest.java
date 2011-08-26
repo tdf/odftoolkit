@@ -30,7 +30,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.doc.style.OdfStyleMap;
+import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberPercentageStyle;
 import org.w3c.dom.Node;
 
 /**
@@ -121,7 +122,7 @@ public class OdfPercentageStyleTest {
 	@Test
 	public void testSetMapPositive() {
 		Node node;
-		OdfStyleMap mapNode;
+		StyleMapElement mapNode;
 
 		System.out.println("setMapPositive");
 		String mapName = "positiveMap";
@@ -130,8 +131,8 @@ public class OdfPercentageStyleTest {
 		instance.setMapPositive(mapName);
 		node = instance.getLastChild();
 		Assert.assertNotNull(node);
-		Assert.assertTrue(node instanceof OdfStyleMap);
-		mapNode = (OdfStyleMap) node;
+		Assert.assertTrue(node instanceof StyleMapElement);
+		mapNode = (StyleMapElement) node;
 		Assert.assertEquals("value()>0", mapNode.getStyleConditionAttribute());
 		Assert.assertEquals(mapName, mapNode.getStyleApplyStyleNameAttribute());
 	}
@@ -142,7 +143,7 @@ public class OdfPercentageStyleTest {
 	@Test
 	public void testSetMapNegative() {
 		Node node;
-		OdfStyleMap mapNode;
+		StyleMapElement mapNode;
 
 		System.out.println("setMapNegative");
 		String mapName = "negativeMap";
@@ -151,8 +152,8 @@ public class OdfPercentageStyleTest {
 		instance.setMapNegative(mapName);
 		node = instance.getLastChild();
 		Assert.assertNotNull(node);
-		Assert.assertTrue(node instanceof OdfStyleMap);
-		mapNode = (OdfStyleMap) node;
+		Assert.assertTrue(node instanceof StyleMapElement);
+		mapNode = (StyleMapElement) node;
 		Assert.assertEquals("value()<0", mapNode.getStyleConditionAttribute());
 		Assert.assertEquals(mapName, mapNode.getStyleApplyStyleNameAttribute());
 	}

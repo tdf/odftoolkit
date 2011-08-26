@@ -31,8 +31,10 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.doc.style.OdfStyleMap;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberStyle;
 import org.w3c.dom.Node;
 
 /**
@@ -160,9 +162,13 @@ public class OdfNumberStyleTest {
 				}
 				node = node.getNextSibling();
 				Assert.assertEquals(expectedFormat[i], instance.getFormat());
-				//reproduce bug 180
-				OdfNumber number = OdfElement.findFirstChildNode(OdfNumber.class, instance);
-				Assert.assertEquals(expectedNumberDecimalPlaces[i], number.getNumberDecimalPlacesAttribute().intValue());
+				NumberNumberElement number = OdfElement.findFirstChildNode(NumberNumberElement.class, instance);
+				try {
+					Assert.assertEquals(expectedNumberDecimalPlaces[i], number
+							.getNumberDecimalPlacesAttribute().intValue());
+				} catch (Exception e) {
+					Assert.fail(e.getMessage());
+				}
 			}
 		}
 	}
@@ -202,10 +208,10 @@ public class OdfNumberStyleTest {
 		int nDecimals = Integer.parseInt(expected.substring(1,2));
 		boolean grouped = (expected.charAt(2) == 'T');
 		boolean nodeGrouped;
-		OdfNumber number;
+		NumberNumberElement number;
 
-		Assert.assertTrue("node is OdfNumber", node instanceof OdfNumber);
-		number = (OdfNumber) node;
+		Assert.assertTrue("node is OdfNumber", node instanceof NumberNumberElement);
+		number = (NumberNumberElement) node;
 
 		// check number of digits and decimals
 		Assert.assertEquals(nDigits, (long) number.getNumberMinIntegerDigitsAttribute());
@@ -222,12 +228,12 @@ public class OdfNumberStyleTest {
 	}
 
 	/**
-	 * Test of setMapPositive method, of class OdfNumberNumberStyle.
+	 * Test of setMapPositive method, of class NumberNumberElementNumberStyle.
 	 */
 	@Test
 	public void testSetMapPositive() {
 		Node node;
-		OdfStyleMap mapNode;
+		StyleMapElement mapNode;
 
 		System.out.println("setMapPositive");
 		String mapName = "positiveMap";
@@ -236,19 +242,19 @@ public class OdfNumberStyleTest {
 		instance.setMapPositive(mapName);
 		node = instance.getLastChild();
 		Assert.assertNotNull(node);
-		Assert.assertTrue(node instanceof OdfStyleMap);
-		mapNode = (OdfStyleMap) node;
+		Assert.assertTrue(node instanceof StyleMapElement);
+		mapNode = (StyleMapElement) node;
 		Assert.assertEquals("value()>0", mapNode.getStyleConditionAttribute());
 		Assert.assertEquals(mapName, mapNode.getStyleApplyStyleNameAttribute());
 	}
 
 	/**
-	 * Test of setMapNegative method, of class OdfNumberNumberStyle.
+	 * Test of setMapNegative method, of class NumberNumberElementNumberStyle.
 	 */
 	@Test
 	public void testSetMapNegative() {
 		Node node;
-		OdfStyleMap mapNode;
+		StyleMapElement mapNode;
 
 		System.out.println("setMapNegative");
 		String mapName = "negativeMap";
@@ -257,8 +263,8 @@ public class OdfNumberStyleTest {
 		instance.setMapNegative(mapName);
 		node = instance.getLastChild();
 		Assert.assertNotNull(node);
-		Assert.assertTrue(node instanceof OdfStyleMap);
-		mapNode = (OdfStyleMap) node;
+		Assert.assertTrue(node instanceof StyleMapElement);
+		mapNode = (StyleMapElement) node;
 		Assert.assertEquals("value()<0", mapNode.getStyleConditionAttribute());
 		Assert.assertEquals(mapName, mapNode.getStyleApplyStyleNameAttribute());
 	}

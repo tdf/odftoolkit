@@ -33,7 +33,7 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfXMLFactory;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnGroupElement;

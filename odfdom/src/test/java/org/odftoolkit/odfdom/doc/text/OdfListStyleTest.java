@@ -23,13 +23,13 @@
 package org.odftoolkit.odfdom.doc.text;
 
 
-import org.odftoolkit.odfdom.doc.text.OdfTextHeading;
-import org.odftoolkit.odfdom.doc.text.OdfTextListLevelStyleBullet;
-import org.odftoolkit.odfdom.doc.text.OdfTextListLevelStyleNumber;
-import org.odftoolkit.odfdom.doc.text.OdfTextListStyle;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextHeading;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListLevelStyleBullet;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListLevelStyleNumber;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleElementBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfListLevelProperties;
 

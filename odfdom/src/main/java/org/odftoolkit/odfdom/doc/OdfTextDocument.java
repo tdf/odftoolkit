@@ -22,8 +22,8 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.doc.office.OdfOfficeText;
-import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.w3c.dom.Node;
@@ -140,10 +140,9 @@ public class OdfTextDocument extends OdfDocument {
 	 * @throws Exception if the file DOM could not be created.
 	 */
 	@Override
-	public OdfOfficeText getContentRoot() throws Exception {
-		return super.getContentRoot(OdfOfficeText.class);
+	public OfficeTextElement getContentRoot() throws Exception {
+		return super.getContentRoot(OfficeTextElement.class);
 	}
-
 	/**
 	 * Creates a new paragraph and append text
 	 *
@@ -164,7 +163,7 @@ public class OdfTextDocument extends OdfDocument {
 	 * @throws Exception if the file DOM could not be created.
 	 */
 	public OdfTextParagraph newParagraph() throws Exception {
-		OdfOfficeText odfText = getContentRoot();
+		OfficeTextElement odfText = getContentRoot();
 		return (OdfTextParagraph) odfText.newTextPElement();
 	}
 
@@ -177,7 +176,7 @@ public class OdfTextDocument extends OdfDocument {
 	 * @throws Exception if the file DOM could not be created.
 	 */
 	public OdfTextParagraph addText(String text) throws Exception {
-		OdfOfficeText odfText = getContentRoot();
+		OfficeTextElement odfText = getContentRoot();
 		Node n = odfText.getLastChild();
 		OdfTextParagraph para;
 		if (OdfTextParagraph.class.isInstance(n)) {

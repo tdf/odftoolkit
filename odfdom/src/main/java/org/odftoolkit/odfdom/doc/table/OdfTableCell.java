@@ -32,23 +32,14 @@ import java.util.logging.Logger;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.doc.number.OdfNumber;
-import org.odftoolkit.odfdom.doc.number.OdfNumberCurrencyStyle;
-import org.odftoolkit.odfdom.doc.number.OdfNumberCurrencySymbol;
-import org.odftoolkit.odfdom.doc.number.OdfNumberDateStyle;
-import org.odftoolkit.odfdom.doc.number.OdfNumberPercentageStyle;
-import org.odftoolkit.odfdom.doc.number.OdfNumberStyle;
-import org.odftoolkit.odfdom.doc.number.OdfNumberText;
-import org.odftoolkit.odfdom.doc.number.OdfNumberTimeStyle;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
-import org.odftoolkit.odfdom.doc.text.OdfWhitespaceProcessor;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoTextAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoWrapOptionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
+import org.odftoolkit.odfdom.dom.element.number.NumberCurrencySymbolElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberTextElement;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
@@ -64,6 +55,15 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberCurrencyStyle;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberPercentageStyle;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberStyle;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberTimeStyle;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfWhitespaceProcessor;
 import org.odftoolkit.odfdom.type.Color;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -1229,12 +1229,12 @@ public class OdfTableCell {
 	private String formatCurrency(OdfNumberCurrencyStyle currencyStyle, double value) {
 		String valuestr = "";
 		for (Node m : new DomNodeList(currencyStyle.getChildNodes())) {
-			if (m instanceof OdfNumberCurrencySymbol) {
+			if (m instanceof NumberCurrencySymbolElement) {
 				valuestr += m.getTextContent();
-			} else if (m instanceof OdfNumber) {
+			} else if (m instanceof NumberNumberElement) {
 				String numberformat = currencyStyle.getNumberFormat();
 				valuestr += (new DecimalFormat(numberformat)).format(value);
-			} else if (m instanceof OdfNumberText) {
+			} else if (m instanceof NumberTextElement) {
 				String textcontent = m.getTextContent();
 				if (textcontent == null || textcontent.length() == 0) {
 					textcontent = " ";

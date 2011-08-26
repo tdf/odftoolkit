@@ -22,7 +22,7 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.doc.office.OdfOfficeImage;
+import org.odftoolkit.odfdom.dom.element.office.OfficeImageElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 
@@ -101,11 +101,11 @@ public class OdfImageDocument extends OdfDocument {
 	 * Get the content root of a image document.
 	 *
 	 * @return content root, representing the office:drawing tag
-	 * @throws OdfOfficeImageException if the file DOM could not be created.
+	 * @throws Exception if the file DOM could not be created.
 	 */
 	@Override
-	public OdfOfficeImage getContentRoot() throws Exception {
-		return super.getContentRoot(OdfOfficeImage.class);
+	public OfficeImageElement getContentRoot() throws Exception {
+		return super.getContentRoot(OfficeImageElement.class);
 	}
 
 	/**

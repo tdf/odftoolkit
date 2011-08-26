@@ -33,18 +33,16 @@ import java.util.logging.Logger;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.OdfXMLFactory;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.style.OdfStyleTableCellProperties;
-import org.odftoolkit.odfdom.doc.style.OdfStyleTableColumnProperties;
-import org.odftoolkit.odfdom.doc.style.OdfStyleTableProperties;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
+import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableNamedRangeElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
@@ -59,6 +57,8 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfTableProperties;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.type.Length.Unit;
 import org.w3c.dom.DOMException;
@@ -300,9 +300,9 @@ public class OdfTable {
 			mTableElement.setProperty(OdfTableProperties.Width, sWidthIN);
 			//if the width is changed, we should also change the table:align properties if it is "margins"
 			//otherwise the width seems not changed
-			String alineStyle = mTableElement.getProperty(OdfStyleTableProperties.Align);
+			String alineStyle = mTableElement.getProperty(StyleTablePropertiesElement.Align);
 			if (TableAlignAttribute.Value.MARGINS.toString().equals(alineStyle)) {
-				mTableElement.setProperty(OdfStyleTableProperties.Align, TableAlignAttribute.Value.LEFT.toString());
+				mTableElement.setProperty(StyleTablePropertiesElement.Align, TableAlignAttribute.Value.LEFT.toString());
 			}
 		} else {
 			throw new UnsupportedOperationException();
@@ -310,32 +310,32 @@ public class OdfTable {
 	}
 
 	static void setLeftTopBorderStyleProperties(OdfStyle style) {
-		style.setProperty(OdfStyleTableCellProperties.Padding, "0.0382in");
-		style.setProperty(OdfStyleTableCellProperties.BorderLeft, "0.0007in solid #000000");
-		style.setProperty(OdfStyleTableCellProperties.BorderRight, "none");
-		style.setProperty(OdfStyleTableCellProperties.BorderTop, "0.0007in solid #000000");
-		style.setProperty(OdfStyleTableCellProperties.BorderBottom, "0.0007in solid #000000");
+		style.setProperty(StyleTableCellPropertiesElement.Padding, "0.0382in");
+		style.setProperty(StyleTableCellPropertiesElement.BorderLeft, "0.0007in solid #000000");
+		style.setProperty(StyleTableCellPropertiesElement.BorderRight, "none");
+		style.setProperty(StyleTableCellPropertiesElement.BorderTop, "0.0007in solid #000000");
+		style.setProperty(StyleTableCellPropertiesElement.BorderBottom, "0.0007in solid #000000");
 	}
 
 	static void setRightTopBorderStyleProperties(OdfStyle style) {
-		style.setProperty(OdfStyleTableCellProperties.Padding, "0.0382in");
-		style.setProperty(OdfStyleTableCellProperties.Border, "0.0007in solid #000000");
+		style.setProperty(StyleTableCellPropertiesElement.Padding, "0.0382in");
+		style.setProperty(StyleTableCellPropertiesElement.Border, "0.0007in solid #000000");
 	}
 
 	static void setLeftBottomBorderStylesProperties(OdfStyle style) {
-		style.setProperty(OdfStyleTableCellProperties.Padding, "0.0382in");
-		style.setProperty(OdfStyleTableCellProperties.BorderLeft, "0.0007in solid #000000");
-		style.setProperty(OdfStyleTableCellProperties.BorderRight, "none");
-		style.setProperty(OdfStyleTableCellProperties.BorderTop, "none");
-		style.setProperty(OdfStyleTableCellProperties.BorderBottom, "0.0007in solid #000000");
+		style.setProperty(StyleTableCellPropertiesElement.Padding, "0.0382in");
+		style.setProperty(StyleTableCellPropertiesElement.BorderLeft, "0.0007in solid #000000");
+		style.setProperty(StyleTableCellPropertiesElement.BorderRight, "none");
+		style.setProperty(StyleTableCellPropertiesElement.BorderTop, "none");
+		style.setProperty(StyleTableCellPropertiesElement.BorderBottom, "0.0007in solid #000000");
 
 	}
 
 	static void setRightBottomBorderStylesProperties(OdfStyle style) {
-		style.setProperty(OdfStyleTableCellProperties.Padding, "0.0382in");
-		style.setProperty(OdfStyleTableCellProperties.Border, "0.0007in solid #000000");
-		style.setProperty(OdfStyleTableCellProperties.BorderTop, "none");
-		style.setProperty(OdfStyleTableCellProperties.BorderBottom, "0.0007in solid #000000");
+		style.setProperty(StyleTableCellPropertiesElement.Padding, "0.0382in");
+		style.setProperty(StyleTableCellPropertiesElement.Border, "0.0007in solid #000000");
+		style.setProperty(StyleTableCellPropertiesElement.BorderTop, "none");
+		style.setProperty(StyleTableCellPropertiesElement.BorderBottom, "0.0007in solid #000000");
 	}
 
 	private static TableTableElement createTable(OdfDocument document, int numRows, int numCols, int headerRowNumber, int headerColumnNumber) throws Exception {
@@ -359,17 +359,17 @@ public class OdfTable {
 		//create style
 		OdfStyle tableStyle = styles.newStyle(OdfStyleFamily.Table);
 		String stylename = tableStyle.getStyleNameAttribute();
-		tableStyle.setProperty(OdfStyleTableProperties.Width, DEFAULT_TABLE_WIDTH + "in");
-		tableStyle.setProperty(OdfStyleTableProperties.Align, DEFAULT_TABLE_ALIGN);
+		tableStyle.setProperty(StyleTablePropertiesElement.Width, DEFAULT_TABLE_WIDTH + "in");
+		tableStyle.setProperty(StyleTablePropertiesElement.Align, DEFAULT_TABLE_ALIGN);
 		newTEle.setStyleName(stylename);
 
 		// 2. create column elements
 		// 2.0 create column style
 		OdfStyle columnStyle = styles.newStyle(OdfStyleFamily.TableColumn);
 		String columnStylename = columnStyle.getStyleNameAttribute();
-		columnStyle.setProperty(OdfStyleTableColumnProperties.ColumnWidth,
+		columnStyle.setProperty(StyleTableColumnPropertiesElement.ColumnWidth,
 				new DecimalFormat("000.0000").format(DEFAULT_TABLE_WIDTH / numCols) + "in");
-		columnStyle.setProperty(OdfStyleTableColumnProperties.RelColumnWidth, Math.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
+		columnStyle.setProperty(StyleTableColumnPropertiesElement.RelColumnWidth, Math.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
 		// 2.1 create header column elements
 		if (headerColumnNumber > 0) {
 			TableTableHeaderColumnsElement headercolumns = (TableTableHeaderColumnsElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(OdfNamespaceNames.TABLE, "table-header-columns"));
@@ -484,7 +484,7 @@ public class OdfTable {
 
 			//4. append to the end of document
 			OdfElement root = document.getContentDom().getRootElement();
-			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
+			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
 			typedContent.appendChild(newTEle);
 
@@ -542,7 +542,7 @@ public class OdfTable {
 
 			//4. append to the end of document
 			OdfElement root = document.getContentDom().getRootElement();
-			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
+			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
 			typedContent.appendChild(newTEle);
 
@@ -577,7 +577,7 @@ public class OdfTable {
 
 			//4. append to the end of document
 			OdfElement root = document.getContentDom().getRootElement();
-			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
+			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
 			typedContent.appendChild(newTEle);
 
@@ -629,7 +629,7 @@ public class OdfTable {
 
 			//4. append to the end of document
 			OdfElement root = document.getContentDom().getRootElement();
-			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
+			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
 			typedContent.appendChild(newTEle);
 
@@ -712,7 +712,7 @@ public class OdfTable {
 
 			//4. append to the end of document
 			OdfElement root = document.getContentDom().getRootElement();
-			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
+			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
 			typedContent.appendChild(newTEle);
 
@@ -913,8 +913,8 @@ public class OdfTable {
 		{
 			OdfStyle columnStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableColumn);
 			String columnStylename = columnStyle.getStyleNameAttribute();
-			columnStyle.setProperty(OdfStyleTableColumnProperties.ColumnWidth, DEFAULT_TABLE_WIDTH + "in");
-			columnStyle.setProperty(OdfStyleTableColumnProperties.RelColumnWidth, DEFAULT_REL_TABLE_WIDTH + "*");
+			columnStyle.setProperty(StyleTableColumnPropertiesElement.ColumnWidth, DEFAULT_TABLE_WIDTH + "in");
+			columnStyle.setProperty(StyleTableColumnPropertiesElement.RelColumnWidth, DEFAULT_REL_TABLE_WIDTH + "*");
 
 			newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(),
 					OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));

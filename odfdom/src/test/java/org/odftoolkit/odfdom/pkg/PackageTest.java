@@ -36,16 +36,18 @@ import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
+
 import junit.framework.Assert;
+
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfPresentationDocument;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.type.AnyURI;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.xml.sax.InputSource;

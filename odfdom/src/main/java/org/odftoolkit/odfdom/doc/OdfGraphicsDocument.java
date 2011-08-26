@@ -22,7 +22,7 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.doc.office.OdfOfficeDrawing;
+import org.odftoolkit.odfdom.dom.element.office.OfficeDrawingElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 
@@ -104,8 +104,8 @@ public class OdfGraphicsDocument extends OdfDocument {
 	 * @throws Exception if the file DOM could not be created.
 	 */
 	@Override
-	public OdfOfficeDrawing getContentRoot() throws Exception {
-		return super.getContentRoot(OdfOfficeDrawing.class);
+	public OfficeDrawingElement getContentRoot() throws Exception {
+		return super.getContentRoot(OfficeDrawingElement.class);
 	}
 
 	/**

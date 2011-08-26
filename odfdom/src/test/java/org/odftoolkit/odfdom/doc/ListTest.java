@@ -23,11 +23,11 @@ package org.odftoolkit.odfdom.doc;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.doc.text.OdfTextList;
-import org.odftoolkit.odfdom.doc.text.OdfTextListStyle;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextList;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

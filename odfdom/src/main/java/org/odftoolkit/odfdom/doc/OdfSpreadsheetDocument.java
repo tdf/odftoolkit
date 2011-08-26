@@ -22,7 +22,7 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.doc.office.OdfOfficeSpreadsheet;
+import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 
@@ -105,8 +105,8 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 	 * @throws Exception if the file DOM could not be created.
 	 */
 	@Override
-	public OdfOfficeSpreadsheet getContentRoot() throws Exception {
-		return super.getContentRoot(OdfOfficeSpreadsheet.class);
+	public OfficeSpreadsheetElement getContentRoot() throws Exception {
+		return super.getContentRoot(OfficeSpreadsheetElement.class);
 	}
 
 	/**

@@ -33,11 +33,11 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.style.OdfStyleTextProperties;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
+import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**
@@ -261,7 +261,7 @@ public class TextSelectionTest {
 		//replace all the "ODFDOM" to "Odf Toolkit"
 		//except the sentence "Task5.Change the ODFDOM to Odf Toolkit, and bold them."
 		OdfStyle style = new OdfStyle(contentDOM);
-		style.setProperty(OdfStyleTextProperties.FontWeight, "bold");
+		style.setProperty(StyleTextPropertiesElement.FontWeight, "bold");
 		style.setStyleFamilyAttribute("text");
 		int i = 0;
 		while (search.hasNext()) {

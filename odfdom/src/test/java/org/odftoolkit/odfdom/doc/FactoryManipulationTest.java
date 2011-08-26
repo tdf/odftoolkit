@@ -74,7 +74,7 @@ public class FactoryManipulationTest {
             Assert.assertTrue(node instanceof MyOwnPrivateOdfElement);
             
             //set TextSpanElement.ELEMENT_NAME back to org.odftoolkit.odfdom.doc.element.text.OdfSpan
-            OdfXMLFactory.setOdfElementClass(TextSpanElement.ELEMENT_NAME, org.odftoolkit.odfdom.doc.text.OdfTextSpan.class);
+            OdfXMLFactory.setOdfElementClass(TextSpanElement.ELEMENT_NAME, org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan.class);
             
         } catch (Exception e) {
             e.printStackTrace();

@@ -34,6 +34,8 @@ import org.junit.Test;
 import org.junit.Assert;
 
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextHeading;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 

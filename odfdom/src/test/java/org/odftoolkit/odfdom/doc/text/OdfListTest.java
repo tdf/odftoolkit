@@ -22,21 +22,18 @@
 
 package org.odftoolkit.odfdom.doc.text;
 
-
-import org.odftoolkit.odfdom.doc.text.OdfTextListItem;
-import org.odftoolkit.odfdom.doc.text.OdfTextList;
-import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.dom.element.text.TextPElement;
-
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.Assert;
-
+import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.dom.element.text.TextListItemElement;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextList;
 import org.w3c.dom.Node;
 
 /**
@@ -148,7 +145,7 @@ public class OdfListTest {
 			}
 			else if (expected[position].startsWith("I"))
 			{
-				Assert.assertTrue("Not an item", node instanceof OdfTextListItem);
+				Assert.assertTrue("Not an item", node instanceof TextListItemElement);
 				position++;
 				if (node.hasChildNodes())
 				{

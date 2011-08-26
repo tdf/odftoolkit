@@ -39,9 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawPage;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationClassAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
@@ -52,6 +50,8 @@ import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePresentationPageLayoutElement;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
@@ -180,7 +180,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * @param index	the index of the slide to be returned
 	 * @return	a draw slide at the specified position
 	 */
-	public OdfDrawPage getSlideByIndex(int index) {
+	public OdfSlide getSlideByIndex(int index) {
 		checkAllSlideName();
 		OfficePresentationElement contentRoot = null;
 		try {
@@ -194,7 +194,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			return null;
 		}
 		DrawPageElement slideElement = (DrawPageElement) slideNodes.item(index);
-		return OdfDrawPage.getInstance(slideElement);
+		return OdfSlide.getInstance(slideElement);
 	}
 
 	/**
@@ -228,7 +228,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * @param name	the specified slide name
 	 * @return	the slide whose name equals to the specified name
 	 */
-	public OdfDrawPage getSlideByName(String name) {
+	public OdfSlide getSlideByName(String name) {
 		checkAllSlideName();
 		if (name == null) {
 			return null;
@@ -243,7 +243,7 @@ public class OdfPresentationDocument extends OdfDocument {
 		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "page");
 		for (int i = 0; i < slideNodes.getLength(); i++) {
 			DrawPageElement slideElement = (DrawPageElement) slideNodes.item(i);
-			OdfDrawPage slide = OdfDrawPage.getInstance(slideElement);
+			OdfSlide slide = OdfSlide.getInstance(slideElement);
 			String slideName = slide.getSlideName();
 			if (slideName.equals(name)) {
 				return slide;
@@ -284,7 +284,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 *
 	 * @return	a list iterator containing all slides in this presentation
 	 */
-	public Iterator<OdfDrawPage> getSlides() {
+	public Iterator<OdfSlide> getSlides() {
 		checkAllSlideName();
 		OfficePresentationElement contentRoot = null;
 		try {
@@ -293,11 +293,11 @@ public class OdfPresentationDocument extends OdfDocument {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 			return null;
 		}
-		ArrayList<OdfDrawPage> slideList = new ArrayList<OdfDrawPage>();
+		ArrayList<OdfSlide> slideList = new ArrayList<OdfSlide>();
 		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "page");
 		for (int i = 0; i < slideNodes.getLength(); i++) {
 			DrawPageElement slideElement = (DrawPageElement) slideNodes.item(i);
-			slideList.add(OdfDrawPage.getInstance(slideElement));
+			slideList.add(OdfSlide.getInstance(slideElement));
 		}
 		return slideList.iterator();
 	}
@@ -446,7 +446,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 			return;
 		}
-		OdfDrawPage slide = getSlideByName(name);
+		OdfSlide slide = getSlideByName(name);
 		DrawPageElement slideElement = slide.getOdfElement();
 		//remove all the content of the current page
 		//1. the reference of the path that contained in this slide is 1, then remove its
@@ -472,7 +472,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * Throw IndexOutOfBoundsException if the slide index is out of the presentation document slide count.
 	 * If copy the slide at the end of document, destIndex should set the same value with the slide count.
 	 */
-	public OdfDrawPage copySlide(int source, int dest, String newName) {
+	public OdfSlide copySlide(int source, int dest, String newName) {
 		checkAllSlideName();
 		OfficePresentationElement contentRoot = null;
 		try {
@@ -500,7 +500,7 @@ public class OdfPresentationDocument extends OdfDocument {
 		//in case that the appended new slide have the same name with the original slide
 		hasCheckSlideName = false;
 		checkAllSlideName();
-		return OdfDrawPage.getInstance(cloneSlideElement);
+		return OdfSlide.getInstance(cloneSlideElement);
 	}
 
 	/**
@@ -586,7 +586,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * If insert the foreign slide at the end of document, destIndex should set the same value
 	 * with the slide count of the current presentation document.
 	 */
-	public OdfDrawPage copyForeignSlide(int destIndex,
+	public OdfSlide copyForeignSlide(int destIndex,
 			OdfPresentationDocument srcDoc, int srcIndex) {
 		checkAllSlideName();
 		OfficePresentationElement contentRoot = null;
@@ -603,7 +603,7 @@ public class OdfPresentationDocument extends OdfDocument {
 		if ((destIndex < 0) || (destIndex > slideCount)) {
 			throw new IndexOutOfBoundsException("the specified Index is out of slide count when call copyForeignSlide method.");
 		}
-		OdfDrawPage sourceSlide = srcDoc.getSlideByIndex(srcIndex);
+		OdfSlide sourceSlide = srcDoc.getSlideByIndex(srcIndex);
 		DrawPageElement sourceSlideElement = sourceSlide.getOdfElement();
 		//clone the sourceSlideEle, and make a modification on this clone node.
 		DrawPageElement sourceCloneSlideElement = (DrawPageElement) sourceSlideElement.cloneNode(true);
@@ -624,7 +624,7 @@ public class OdfPresentationDocument extends OdfDocument {
 		//in case that the appended new slide have the same name with the original slide
 		hasCheckSlideName = false;
 		checkAllSlideName();
-		return OdfDrawPage.getInstance(cloneSlideElement);
+		return OdfSlide.getInstance(cloneSlideElement);
 	}
 
 	//clone the source clone element's referred object path to the current package
@@ -1115,7 +1115,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * <p>
 	 * Throw IndexOutOfBoundsException if index is out of the presentation document slide count.
 	 */
-	public OdfDrawPage newSlide(int index, String name, OdfDrawPage.SlideLayout slideLayout) {
+	public OdfSlide newSlide(int index, String name, OdfSlide.SlideLayout slideLayout) {
 		checkAllSlideName();
 		OfficePresentationElement contentRoot = null;
 		try {
@@ -1169,7 +1169,7 @@ public class OdfPresentationDocument extends OdfDocument {
 		//in case that the appended new slide have the same name with the original slide
 		hasCheckSlideName = false;
 		checkAllSlideName();
-		return OdfDrawPage.getInstance(newSlideElement);
+		return OdfSlide.getInstance(newSlideElement);
 	}
 
 	//when insert a slide, the note page for this slide is also inserted.
@@ -1201,14 +1201,14 @@ public class OdfPresentationDocument extends OdfDocument {
 	//<presentation:notes>, <draw:page-thumbnail>, <draw:frame>
 	//<style:presentation-page-layout>
 	private void setSlideLayout(DrawPageElement page,
-			OdfDrawPage.SlideLayout slideLayout) {
+			OdfSlide.SlideLayout slideLayout) {
 		if (slideLayout == null) {
-			slideLayout = OdfDrawPage.SlideLayout.BLANK;
+			slideLayout = OdfSlide.SlideLayout.BLANK;
 		}
 		OdfOfficeStyles styles = getOrCreateDocumentStyles();
 		String layoutName;
 
-		if (slideLayout.toString().equals(OdfDrawPage.SlideLayout.TITLE_ONLY.toString())) {
+		if (slideLayout.toString().equals(OdfSlide.SlideLayout.TITLE_ONLY.toString())) {
 			layoutName = "AL1T" + makeUniqueName();
 			try {
 				StylePresentationPageLayoutElement layout = styles.newStylePresentationPageLayoutElement(layoutName);
@@ -1232,7 +1232,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
 			frame1.setPresentationPlaceholderAttribute(true);
 			frame1.newDrawTextBoxElement();
-		} else if (slideLayout.toString().equals(OdfDrawPage.SlideLayout.TITLE_OUTLINE.toString())) {
+		} else if (slideLayout.toString().equals(OdfSlide.SlideLayout.TITLE_OUTLINE.toString())) {
 			layoutName = makeUniqueName();
 			try {
 				styles = super.getStylesDom().getOfficeStyles();
@@ -1277,7 +1277,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			frame2.setPresentationClassAttribute(PresentationClassAttribute.Value.OUTLINE.toString());
 			frame2.setPresentationPlaceholderAttribute(true);
 			frame2.newDrawTextBoxElement();
-		} else if (slideLayout.toString().equals(OdfDrawPage.SlideLayout.TITLE_PLUS_TEXT.toString())) {
+		} else if (slideLayout.toString().equals(OdfSlide.SlideLayout.TITLE_PLUS_TEXT.toString())) {
 			layoutName = makeUniqueName();
 			try {
 				styles = super.getStylesDom().getOfficeStyles();
@@ -1320,7 +1320,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			frame2.setPresentationPlaceholderAttribute(true);
 			frame2.newDrawTextBoxElement();
 
-		} else if (slideLayout.toString().equals(OdfDrawPage.SlideLayout.TITLE_PLUS_2_TEXT_BLOCK.toString())) {
+		} else if (slideLayout.toString().equals(OdfSlide.SlideLayout.TITLE_PLUS_2_TEXT_BLOCK.toString())) {
 
 			layoutName = makeUniqueName();
 			try {

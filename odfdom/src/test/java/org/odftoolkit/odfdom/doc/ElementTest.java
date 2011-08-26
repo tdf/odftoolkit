@@ -23,11 +23,11 @@ package org.odftoolkit.odfdom.doc;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.text.OdfTextListStyle;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
 
 public class ElementTest {
 

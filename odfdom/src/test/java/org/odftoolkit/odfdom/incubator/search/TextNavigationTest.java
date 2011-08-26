@@ -23,14 +23,14 @@ package org.odftoolkit.odfdom.incubator.search;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.Assert;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.doc.text.OdfWhitespaceProcessor;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfWhitespaceProcessor;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**

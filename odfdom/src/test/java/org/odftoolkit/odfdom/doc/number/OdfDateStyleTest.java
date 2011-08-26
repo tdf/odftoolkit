@@ -31,6 +31,7 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 

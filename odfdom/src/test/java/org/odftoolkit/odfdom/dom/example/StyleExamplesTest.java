@@ -21,16 +21,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.dom.example;
 
+import static java.util.logging.Level.INFO;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
-import static java.util.logging.Level.INFO;
 import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.doc.style.OdfDefaultStyle;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
@@ -39,6 +39,8 @@ import org.odftoolkit.odfdom.dom.element.style.StyleTableRowPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfDefaultStyle;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.utils.NodeAction;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Node;

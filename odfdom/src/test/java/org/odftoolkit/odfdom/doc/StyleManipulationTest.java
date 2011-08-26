@@ -25,11 +25,10 @@ package org.odftoolkit.odfdom.doc;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class StyleManipulationTest {

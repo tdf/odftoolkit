@@ -7,17 +7,17 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeSpreadsheet;
-import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.w3c.dom.NodeList;
-import org.junit.Test;
 
 public class PerformanceIT {
 
@@ -146,7 +146,7 @@ public class PerformanceIT {
 		} catch (FileNotFoundException e) {
 			//Create an empty spreadsheet
 			timedoc = OdfSpreadsheetDocument.newSpreadsheetDocument();
-			OdfOfficeSpreadsheet spreadsheet = (OdfOfficeSpreadsheet) timedoc.getContentDom().getElementsByTagNameNS(
+			OfficeSpreadsheetElement spreadsheet = (OfficeSpreadsheetElement) timedoc.getContentDom().getElementsByTagNameNS(
 					OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
 			spreadsheet.removeChild(spreadsheet.getFirstChild());
 		}
@@ -157,7 +157,7 @@ public class PerformanceIT {
 		} catch (FileNotFoundException e) {
 			//Create an empty spreadsheet
 			memorydoc = OdfSpreadsheetDocument.newSpreadsheetDocument();
-			OdfOfficeSpreadsheet spreadsheet = (OdfOfficeSpreadsheet) memorydoc.getContentDom().getElementsByTagNameNS(
+			OfficeSpreadsheetElement spreadsheet = (OfficeSpreadsheetElement) memorydoc.getContentDom().getElementsByTagNameNS(
 					OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
 			spreadsheet.removeChild(spreadsheet.getFirstChild());
 		}
@@ -192,13 +192,13 @@ public class PerformanceIT {
 		TableTableElement myTable;
 		NodeList lst;
 		OdfTextParagraph p;
-		OdfOfficeSpreadsheet spreadsheet = null;
+		OfficeSpreadsheetElement spreadsheet = null;
 
 		try {
 			dom = odfdoc.getContentDom();
 			tableList = dom.getElementsByTagNameNS(
 					OdfNamespaceNames.TABLE.getUri(), "table");
-			spreadsheet = (OdfOfficeSpreadsheet) dom.getElementsByTagNameNS(
+			spreadsheet = (OfficeSpreadsheetElement) dom.getElementsByTagNameNS(
 					OdfNamespaceNames.OFFICE.getUri(), "spreadsheet").item(0);
 
 			i = 0;

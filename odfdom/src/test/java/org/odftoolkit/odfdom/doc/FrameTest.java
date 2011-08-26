@@ -23,7 +23,7 @@ package org.odftoolkit.odfdom.doc;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;

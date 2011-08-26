@@ -22,7 +22,7 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.doc.office.OdfOfficeChart;
+import org.odftoolkit.odfdom.dom.element.office.OfficeChartElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 
@@ -106,10 +106,9 @@ public class OdfChartDocument extends OdfDocument {
 	 * @throws Exception if the file DOM could not be created.
 	 */
 	@Override
-	public OdfOfficeChart getContentRoot() throws Exception {
-		return super.getContentRoot(OdfOfficeChart.class);
+	public OfficeChartElement getContentRoot() throws Exception {
+		return super.getContentRoot(OfficeChartElement.class);
 	}
-
 	/**
 	 * Changes the document to the given mediatype.
 	 * This method can only be used to convert a document to a related mediatype, e.g. template.

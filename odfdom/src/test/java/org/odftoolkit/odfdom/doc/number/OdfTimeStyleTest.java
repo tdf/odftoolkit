@@ -22,7 +22,6 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.number;
 
-import org.odftoolkit.odfdom.doc.number.OdfNumberTimeStyle;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -32,6 +31,7 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberTimeStyle;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 

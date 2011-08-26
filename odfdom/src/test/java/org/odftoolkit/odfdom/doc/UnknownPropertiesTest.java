@@ -23,15 +23,13 @@ package org.odftoolkit.odfdom.doc;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.doc.style.OdfStyleTabStop;
-import org.odftoolkit.odfdom.doc.style.OdfStyleTabStops;
-import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
-import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
+import org.odftoolkit.odfdom.dom.element.style.StyleTabStopElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTabStopsElement;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Document;
@@ -60,10 +58,10 @@ public class UnknownPropertiesTest {
 
                 OdfStylePropertiesBase paraProperties = paraLocalStyle.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties);
 
-                OdfStyleTabStops tabstops = OdfElement.findFirstChildNode(OdfStyleTabStops.class, paraProperties );
+                StyleTabStopsElement tabstops = OdfElement.findFirstChildNode(StyleTabStopsElement.class, paraProperties );
                 Assert.assertNotNull(tabstops);
 
-                OdfStyleTabStop tabstop = OdfElement.findFirstChildNode(OdfStyleTabStop.class, tabstops);
+                StyleTabStopElement tabstop = OdfElement.findFirstChildNode(StyleTabStopElement.class, tabstops);
                 Assert.assertNotNull(tabstop);
 
                 Assert.assertEquals(tabstop.getStylePositionAttribute().toString(), "7.643cm");

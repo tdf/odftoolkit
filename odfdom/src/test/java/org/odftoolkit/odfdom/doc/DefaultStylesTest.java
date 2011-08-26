@@ -23,12 +23,12 @@ package org.odftoolkit.odfdom.doc;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.style.*;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableRowPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfDefaultStyle;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**

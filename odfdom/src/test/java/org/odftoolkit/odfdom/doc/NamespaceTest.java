@@ -26,7 +26,7 @@ import javax.xml.xpath.XPath;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class NamespaceTest {

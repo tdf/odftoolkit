@@ -29,7 +29,9 @@ package org.odftoolkit.odfdom;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,17 +54,40 @@ public class OdfXMLFactory {
 	private static Map<OdfName, Class> mElementTypes = new HashMap<OdfName, Class>();
 	private static Map<OdfName, Class> mAttributeTypes = new HashMap<OdfName, Class>();
 	private static Map<String, String> mElementRenames = new HashMap<String, String>();
+	//a set for the element which need to load class from incubator package.
+	private static Set<String> mIncubatorElements = new HashSet<String>();
 	private static final String LOCAL_NAME_DELIMITER = "-";
+	private static final String ELEMENT_NAME_DELIMITER = ":";
 	private static final String ELEMENT_PACKAGE_NAME = "element";
 	private static final String ATTRIBUTE_PACKAGE_NAME = "attribute";
 
 	static {
-		mElementRenames.put("draw:a", "draw:hyperlink");
-		mElementRenames.put("draw:g", "draw:group");
 		mElementRenames.put("text:h", "text:heading");
 		mElementRenames.put("text:p", "text:paragraph");
-		mElementRenames.put("text:s", "text:space");
-		mElementRenames.put("text:a", "text:hyperlink");
+		
+		mIncubatorElements.add("draw:frame");
+		mIncubatorElements.add("draw:image");
+		mIncubatorElements.add("number:currency-style");
+		mIncubatorElements.add("number:date-style");
+		mIncubatorElements.add("number:percentage-style");
+		mIncubatorElements.add("number:number-style");
+		mIncubatorElements.add("number:time-style");
+		mIncubatorElements.add("office:automatic-styles");
+		mIncubatorElements.add("office:master-styles");
+		mIncubatorElements.add("office:styles");
+		mIncubatorElements.add("style:default-style");
+		mIncubatorElements.add("style:style");
+		mIncubatorElements.add("style:page-layout");
+		mIncubatorElements.add("text:h");
+		mIncubatorElements.add("text:list");
+		mIncubatorElements.add("text:list-level-style-bullet");
+		mIncubatorElements.add("text:list-level-style-image");
+		mIncubatorElements.add("text:list-level-style-number");
+		mIncubatorElements.add("text:list-style");
+		mIncubatorElements.add("text:outline-level-style");
+		mIncubatorElements.add("text:outline-style");
+		mIncubatorElements.add("text:p");
+		mIncubatorElements.add("text:span");
 	}
 
 	/** Mapping an ODF element to a new Java DOM element class.
@@ -101,18 +126,18 @@ public class OdfXMLFactory {
 			if (prefix != null && !(nodeName.equals("attribute") && prefix.equals("xmlns"))) {
 				String qName = odfName.getQName();
 				String localName = odfName.getLocalName();
-				if ((nodeName == ATTRIBUTE_PACKAGE_NAME)
-						|| (prefix.equals("meta") || prefix.equals("table") || qName.equals("office:meta") || qName.equals("draw:page")
-						|| qName.equals("office:presentation") || qName.equals("presentation:notes"))) {
-					className = getOdfDOMNodeClassName(odfName.getPrefix(), odfName.getLocalName(), nodeName);
-				} else {
+				//judge whether the element need to load class from incubator package.
+				if(mIncubatorElements.contains(qName)){
+					//judge whether the element need to rename before find class name.
 					if (mElementRenames.containsKey(qName)) {
 						String renameName = mElementRenames.get(qName);
-						StringTokenizer stok = new StringTokenizer(renameName, ":");
-						className = getOdfDOCNodeClassName(stok.nextToken(), stok.nextToken());
-					} else {
-						className = getOdfDOCNodeClassName(prefix, localName);
+						StringTokenizer stok = new StringTokenizer(renameName, ELEMENT_NAME_DELIMITER);
+						prefix=stok.nextToken();
+						localName=stok.nextToken();
 					}
+					className = getOdfIncubatorNodeClassName(prefix, localName);
+				}else{
+					className = getOdfDOMNodeClassName(prefix, localName, nodeName);
 				}
 				try {
 					c = Class.forName(className);
@@ -127,8 +152,8 @@ public class OdfXMLFactory {
 		}
 		return c;
 	}
-
-	private static String getOdfDOCNodeClassName(String prefix, String localName) {
+	
+	private static String getOdfIncubatorNodeClassName(String prefix, String localName) {
 		boolean contains = false;
 		StringBuilder className = new StringBuilder();
 
@@ -149,7 +174,7 @@ public class OdfXMLFactory {
 				|| (localName.startsWith(prefix) && prefix.equals("anim")))) {
 			className = className.insert(0, toUpperCaseFirstCharacter(prefix));
 		}
-		className = className.insert(0, "org.odftoolkit.odfdom.doc." + prefix + "." + "Odf");
+		className = className.insert(0, "org.odftoolkit.odfdom.incubator.doc." + prefix + "." + "Odf");
 
 		return className.toString();
 	}

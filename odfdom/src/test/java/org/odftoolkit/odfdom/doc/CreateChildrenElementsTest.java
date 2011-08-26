@@ -29,19 +29,7 @@ import javax.xml.xpath.XPathFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.doc.chart.OdfChart;
-import org.odftoolkit.odfdom.doc.chart.OdfChartPlotArea;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeDocumentContent;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeSpreadsheet;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
-import org.odftoolkit.odfdom.doc.text.OdfTextHeading;
-import org.odftoolkit.odfdom.doc.text.OdfTextList;
-import org.odftoolkit.odfdom.doc.text.OdfTextListItem;
-import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
-import org.odftoolkit.odfdom.doc.text.OdfTextSoftPageBreak;
 import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateElement;
 import org.odftoolkit.odfdom.dom.element.chart.ChartChartElement;
@@ -49,6 +37,8 @@ import org.odftoolkit.odfdom.dom.element.chart.ChartPlotAreaElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLineElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.form.FormFormElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentContentElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
@@ -67,6 +57,10 @@ import org.odftoolkit.odfdom.dom.element.text.TextListItemElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSoftPageBreakElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextHeading;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextList;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
@@ -118,10 +112,10 @@ public class CreateChildrenElementsTest {
 			Assert.assertTrue(lst.getLength() > 0);
 			OdfTextParagraph p0 = (OdfTextParagraph) lst.item(lst.getLength() - 1);
 
-			OdfOfficeDocumentContent content = doc.newOdfElement(OdfOfficeDocumentContent.class);
-			OdfOfficeBody body = doc.newOdfElement(OdfOfficeBody.class);
+			OfficeDocumentContentElement content = doc.newOdfElement(OfficeDocumentContentElement.class);
+			OfficeBodyElement body = doc.newOdfElement(OfficeBodyElement.class);
 			content.appendChild(body);
-			OdfChart chart = doc.newOdfElement(OdfChart.class);
+			ChartChartElement chart = doc.newOdfElement(ChartChartElement.class);
 			//create children element
 			ChartPlotAreaElement plotArea = chart.newChartPlotAreaElement();
 			body.appendChild(chart);
@@ -132,7 +126,7 @@ public class CreateChildrenElementsTest {
 
 			Assert.assertNotNull(chartTest.getChildNodes());
 
-			Assert.assertTrue(chartTest.getChildNodes().item(0) instanceof OdfChartPlotArea);
+			Assert.assertTrue(chartTest.getChildNodes().item(0) instanceof ChartPlotAreaElement);
 			Assert.assertEquals(plotArea, chartTest.getChildNodes().item(0));
 			Assert.assertEquals(chartTest.getChildNodes().item(0).getNodeName(), "chart:plot-area");
 
@@ -200,7 +194,7 @@ public class CreateChildrenElementsTest {
 			Assert.assertTrue(lst.getLength() > 0);
 			OdfTextParagraph p0 = (OdfTextParagraph) lst.item(lst.getLength() - 1);
 
-			OdfTextListItem listItem = doc.newOdfElement(OdfTextListItem.class);
+			TextListItemElement listItem = doc.newOdfElement(TextListItemElement.class);
 			//create children elements
 			TextHElement heading = listItem.newTextHElement("1");
 			TextListElement list = listItem.newTextListElement();
@@ -224,7 +218,7 @@ public class CreateChildrenElementsTest {
 			Assert.assertEquals(paragraph, listItemTest.getChildNodes().item(2));
 			Assert.assertEquals(listItemTest.getChildNodes().item(2).getNodeName(), "text:p");
 
-			Assert.assertTrue(listItemTest.getChildNodes().item(3) instanceof OdfTextSoftPageBreak);
+			Assert.assertTrue(listItemTest.getChildNodes().item(3) instanceof TextSoftPageBreakElement);
 			Assert.assertEquals(softPageBreak, listItemTest.getChildNodes().item(3));
 			Assert.assertEquals(listItemTest.getChildNodes().item(3).getNodeName(), "text:soft-page-break");
 
@@ -324,7 +318,7 @@ public class CreateChildrenElementsTest {
 			Assert.assertTrue(lst.getLength() > 0);
 			OdfTextParagraph p0 = (OdfTextParagraph) lst.item(lst.getLength() - 1);
 
-			OdfTextListItem listItem = doc.newOdfElement(OdfTextListItem.class);
+			TextListItemElement listItem = doc.newOdfElement(TextListItemElement.class);
 			//create children elements
 			TextHElement heading = listItem.newTextHElement("1");
 			TextListElement list = listItem.newTextListElement();
@@ -348,7 +342,7 @@ public class CreateChildrenElementsTest {
 			Assert.assertEquals(paragraph, listItemTest.getChildNodes().item(2));
 			Assert.assertEquals(listItemTest.getChildNodes().item(2).getNodeName(), "text:p");
 
-			Assert.assertTrue(listItemTest.getChildNodes().item(3) instanceof OdfTextSoftPageBreak);
+			Assert.assertTrue(listItemTest.getChildNodes().item(3) instanceof TextSoftPageBreakElement);
 			Assert.assertEquals(softPageBreak, listItemTest.getChildNodes().item(3));
 			Assert.assertEquals(listItemTest.getChildNodes().item(3).getNodeName(), "text:soft-page-break");
 
@@ -372,7 +366,7 @@ public class CreateChildrenElementsTest {
 			NodeList lst = doc.getElementsByTagNameNS(
 					OfficeSpreadsheetElement.ELEMENT_NAME.getUri(),
 					OfficeSpreadsheetElement.ELEMENT_NAME.getLocalName());
-			OdfOfficeSpreadsheet sheet = (OdfOfficeSpreadsheet) lst.item(lst.getLength() - 1);
+			OfficeSpreadsheetElement sheet = (OfficeSpreadsheetElement) lst.item(lst.getLength() - 1);
 			TableTableElement table = sheet.newTableTableElement();
 			//table.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.TABLE), "name" ), "newtable" );
 			//table.setOdfAttribute( OdfName.newName( OdfNamespace.newName(OdfNamespaceNames.TABLE), "style-name" ), "ta1" );

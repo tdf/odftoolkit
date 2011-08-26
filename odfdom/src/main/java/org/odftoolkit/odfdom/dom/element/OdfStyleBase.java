@@ -21,21 +21,19 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.dom.element;
 
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfContainerElementBase;
-import org.odftoolkit.odfdom.OdfElement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
+import org.odftoolkit.odfdom.OdfAttribute;
+import org.odftoolkit.odfdom.OdfContainerElementBase;
+import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.doc.style.OdfStyleParagraphProperties;
-import org.odftoolkit.odfdom.doc.style.OdfStyleTextProperties;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.style.StyleChartPropertiesElement;
@@ -219,12 +217,12 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
                         // make sure the properties elements are in the correct order
                         Node beforeNode = null;
                         if (set.equals(OdfStylePropertiesSet.GraphicProperties)) {
-                            beforeNode = OdfElement.findFirstChildNode(OdfStyleParagraphProperties.class, this);
+                            beforeNode = OdfElement.findFirstChildNode(StyleParagraphPropertiesElement.class, this);
                             if (beforeNode == null) {
-                                beforeNode = OdfElement.findFirstChildNode(OdfStyleTextProperties.class, this);
+                                beforeNode = OdfElement.findFirstChildNode(StyleTextPropertiesElement.class, this);
                             }
                         } else if (set.equals(OdfStylePropertiesSet.ParagraphProperties)) {
-                            beforeNode = OdfElement.findFirstChildNode(OdfStyleTextProperties.class, this);
+                            beforeNode = OdfElement.findFirstChildNode(StyleTextPropertiesElement.class, this);
                         } else if (!set.equals(OdfStylePropertiesSet.TextProperties)) {
                             beforeNode = getFirstChild();
                         }

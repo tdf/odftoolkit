@@ -53,19 +53,19 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
@@ -923,8 +923,8 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	@SuppressWarnings("unchecked")
 	<T extends OdfElement> T getContentRoot(Class<T> clazz) throws Exception {
 		OdfElement contentRoot = getContentDom().getRootElement();
-		OdfOfficeBody contentBody = OdfElement.findFirstChildNode(
-				OdfOfficeBody.class, contentRoot);
+		OfficeBodyElement contentBody = OdfElement.findFirstChildNode(
+				OfficeBodyElement.class, contentRoot);
 		NodeList childs = contentBody.getChildNodes();
 		for (int i = 0;
 				i < childs.getLength();
@@ -1279,7 +1279,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	public OdfTable getTableByName(String name) {
 		try {
 			OdfElement root = getContentDom().getRootElement();
-			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
+			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
 
 			NodeList childList = typedContent.getChildNodes();
@@ -1307,7 +1307,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 
 		try {
 			OdfElement root = getContentDom().getRootElement();
-			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
+			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(
 					OdfElement.class, officeBody);
 			NodeList childList = typedContent.getChildNodes();

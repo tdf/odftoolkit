@@ -39,17 +39,17 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawObject;
+import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
-import org.odftoolkit.odfdom.doc.text.OdfTextSpan;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
+import org.odftoolkit.odfdom.dom.element.draw.DrawObjectElement;
 import org.odftoolkit.odfdom.dom.element.text.TextHElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
@@ -314,7 +314,7 @@ public class EmbeddedDocumentTest {
 		drawFrame.setSvgHeightAttribute("11.375cm");
 		drawFrame.setDrawZIndexAttribute(0);
 
-		OdfDrawObject object = new OdfDrawObject(dom);
+		DrawObjectElement object = new DrawObjectElement(dom);
 
 		object.setXlinkHrefAttribute(path);
 		object.setXlinkActuateAttribute("onLoad");

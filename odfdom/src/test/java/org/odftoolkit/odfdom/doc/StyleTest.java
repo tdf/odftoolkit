@@ -21,25 +21,25 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.OdfXMLFactory;
-import org.odftoolkit.odfdom.OdfFileDom;
 import java.util.Iterator;
+
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
-import org.odftoolkit.odfdom.doc.style.OdfStyleBackgroundImage;
-import org.odftoolkit.odfdom.doc.style.OdfStyleChartProperties;
-import org.odftoolkit.odfdom.doc.style.OdfDefaultStyle;
-import org.odftoolkit.odfdom.doc.style.OdfStyleParagraphProperties;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.style.OdfStyleTabStop;
-import org.odftoolkit.odfdom.doc.style.OdfStyleTabStops;
-import org.odftoolkit.odfdom.doc.style.OdfStyleTextProperties;
-import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.OdfXMLFactory;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfDefaultStyle;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
+import org.odftoolkit.odfdom.dom.element.style.StyleBackgroundImageElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleChartPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTabStopElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTabStopsElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
@@ -79,60 +79,60 @@ public class StyleTest {
             // 4. same # of attributes, same attributes, same values, different
             // number of children
             style2.setStyleNextStyleNameAttribute("nextStyle");
-            style2.setProperty(OdfStyleTextProperties.FontSize, "17pt");
-            style2.setProperty(OdfStyleParagraphProperties.TextAlign, "left");
+            style2.setProperty(StyleTextPropertiesElement.FontSize, "17pt");
+            style2.setProperty(StyleParagraphPropertiesElement.TextAlign, "left");
             Assert.assertTrue(style2.compareTo(style1) > 0);
 
             // 5. same # of attributes, same attributes, same values, same number
             // of children, different number of properties
-            style1.setProperty(OdfStyleChartProperties.DataLabelNumber, "value");
-            style1.setProperty(OdfStyleTextProperties.FontSize, "17pt");
-            style1.setProperty(OdfStyleParagraphProperties.TextAlign, "left");
-            style2.setProperty(OdfStyleParagraphProperties.KeepTogether, "auto");
-            style2.setProperty(OdfStyleChartProperties.DataLabelNumber, "value");
+            style1.setProperty(StyleChartPropertiesElement.DataLabelNumber, "value");
+            style1.setProperty(StyleTextPropertiesElement.FontSize, "17pt");
+            style1.setProperty(StyleParagraphPropertiesElement.TextAlign, "left");
+            style2.setProperty(StyleParagraphPropertiesElement.KeepTogether, "auto");
+            style2.setProperty(StyleChartPropertiesElement.DataLabelNumber, "value");
             Assert.assertTrue(style2.compareTo(style1) > 0);
 
             // 6. same # of attributes, same attributes, same values, same number
             // of children, same number of properties, different properties:
-            style1.setProperty(OdfStyleParagraphProperties.AutoTextIndent, "true");
+            style1.setProperty(StyleParagraphPropertiesElement.AutoTextIndent, "true");
             Assert.assertTrue(style2.compareTo(style1) > 0);
 
             // 7. same # of attributes, same attributes, same values, same number
             // of children, same number of properties, same properties, different
             // values:
-            style2.setProperty(OdfStyleParagraphProperties.AutoTextIndent, "true");
-            style1.setProperty(OdfStyleParagraphProperties.KeepTogether, "always");
+            style2.setProperty(StyleParagraphPropertiesElement.AutoTextIndent, "true");
+            style1.setProperty(StyleParagraphPropertiesElement.KeepTogether, "always");
             Assert.assertTrue(style2.compareTo(style1) > 0);
 
             // 8. same # of attributes, same attributes, same values, same number
             // of children, same number of properties, same properties, same
             // values:
-            style1.setProperty(OdfStyleParagraphProperties.KeepTogether, "auto");
+            style1.setProperty(StyleParagraphPropertiesElement.KeepTogether, "auto");
             Assert.assertTrue(style2.compareTo(style1) == 0);
 
             // 9. tab stops vs background image
-            OdfStyleTabStops tabStops = (OdfStyleTabStops) OdfXMLFactory.newOdfElement(dom, OdfStyleTabStops.ELEMENT_NAME);
-            OdfStyleTabStop tabStop1 = (OdfStyleTabStop) OdfXMLFactory.newOdfElement(dom, OdfStyleTabStop.ELEMENT_NAME);
-            OdfStyleTabStop tabStop2 = (OdfStyleTabStop) OdfXMLFactory.newOdfElement(dom, OdfStyleTabStop.ELEMENT_NAME);
+            StyleTabStopsElement tabStops = (StyleTabStopsElement) OdfXMLFactory.newOdfElement(dom, StyleTabStopsElement.ELEMENT_NAME);
+            StyleTabStopElement tabStop1 = (StyleTabStopElement) OdfXMLFactory.newOdfElement(dom, StyleTabStopElement.ELEMENT_NAME);
+            StyleTabStopElement tabStop2 = (StyleTabStopElement) OdfXMLFactory.newOdfElement(dom, StyleTabStopElement.ELEMENT_NAME);
             OdfStylePropertiesBase propElement = style1.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties);
             propElement.appendChild(tabStops);
             tabStops.appendChild(tabStop1);
             tabStops.appendChild(tabStop2);
-            OdfStyleBackgroundImage img = (OdfStyleBackgroundImage) OdfXMLFactory.newOdfElement(dom, OdfStyleBackgroundImage.ELEMENT_NAME);
+            StyleBackgroundImageElement img = (StyleBackgroundImageElement) OdfXMLFactory.newOdfElement(dom, StyleBackgroundImageElement.ELEMENT_NAME);
             propElement = style2.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties);
             propElement.appendChild(img);
             Assert.assertTrue(style2.compareTo(style1) < 0);
 
             // 10. Same tab stops and background image, different position:
             // These two styles are considered distinct!
-            tabStops = (OdfStyleTabStops) OdfXMLFactory.newOdfElement(dom, OdfStyleTabStops.ELEMENT_NAME);
-            tabStop1 = (OdfStyleTabStop) OdfXMLFactory.newOdfElement(dom, OdfStyleTabStop.ELEMENT_NAME);
-            tabStop2 = (OdfStyleTabStop) OdfXMLFactory.newOdfElement(dom, OdfStyleTabStop.ELEMENT_NAME);
+            tabStops = (StyleTabStopsElement) OdfXMLFactory.newOdfElement(dom, StyleTabStopsElement.ELEMENT_NAME);
+            tabStop1 = (StyleTabStopElement) OdfXMLFactory.newOdfElement(dom, StyleTabStopElement.ELEMENT_NAME);
+            tabStop2 = (StyleTabStopElement) OdfXMLFactory.newOdfElement(dom, StyleTabStopElement.ELEMENT_NAME);
             propElement = style2.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties);
             propElement.appendChild(tabStops);
             tabStops.appendChild(tabStop1);
             tabStops.appendChild(tabStop2);
-            img = (OdfStyleBackgroundImage) OdfXMLFactory.newOdfElement(dom, OdfStyleBackgroundImage.ELEMENT_NAME);
+            img = (StyleBackgroundImageElement) OdfXMLFactory.newOdfElement(dom, StyleBackgroundImageElement.ELEMENT_NAME);
             propElement = style1.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties);
             propElement.appendChild(img);
             Assert.assertTrue(style2.compareTo(style1) < 0);
@@ -150,14 +150,14 @@ public class StyleTest {
             OdfFileDom dom = doc.getContentDom();
 
             OdfTextParagraph para1 = (OdfTextParagraph) OdfXMLFactory.newOdfElement(dom, OdfTextParagraph.ELEMENT_NAME);
-            para1.setProperty(OdfStyleTextProperties.FontSize, "17pt");
-            para1.setProperty(OdfStyleParagraphProperties.TextAlign, "left");
-            para1.setProperty(OdfStyleChartProperties.DataLabelNumber, "value");
+            para1.setProperty(StyleTextPropertiesElement.FontSize, "17pt");
+            para1.setProperty(StyleParagraphPropertiesElement.TextAlign, "left");
+            para1.setProperty(StyleChartPropertiesElement.DataLabelNumber, "value");
 
             OdfTextParagraph para2 = (OdfTextParagraph) OdfXMLFactory.newOdfElement(dom, OdfTextParagraph.ELEMENT_NAME);
-            para2.setProperty(OdfStyleChartProperties.DataLabelNumber, "value");
-            para2.setProperty(OdfStyleParagraphProperties.TextAlign, "left");
-            para2.setProperty(OdfStyleTextProperties.FontSize, "17pt");
+            para2.setProperty(StyleChartPropertiesElement.DataLabelNumber, "value");
+            para2.setProperty(StyleParagraphPropertiesElement.TextAlign, "left");
+            para2.setProperty(StyleTextPropertiesElement.FontSize, "17pt");
 
             StyleStyleElement style1 = para1.getAutomaticStyle();
             StyleStyleElement style2 = para2.getAutomaticStyle();
@@ -284,7 +284,7 @@ public class StyleTest {
             Assert.assertTrue(lst.getLength() == 2);
 
             OdfTextParagraph p = (OdfTextParagraph)lst.item(0);
-            p.setProperty(OdfStyleTextProperties.FontSize, "17pt");
+            p.setProperty(StyleTextPropertiesElement.FontSize, "17pt");
         } catch (Exception ex) {
             ex.printStackTrace();
             Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");

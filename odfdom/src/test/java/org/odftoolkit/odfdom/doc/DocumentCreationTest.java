@@ -21,32 +21,34 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfXMLFactory;
-import org.odftoolkit.odfdom.OdfFileDom;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
+
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawObject;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.doc.style.OdfStyleParagraphProperties;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.style.OdfStyleTextProperties;
-import org.odftoolkit.odfdom.doc.text.OdfTextSpan;
+import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfNamespace;
+import org.odftoolkit.odfdom.OdfXMLFactory;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawObjectElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
@@ -245,8 +247,8 @@ public class DocumentCreationTest {
 			Assert.assertEquals(documentStyle.getStyleNameAttribute(), "myStyle");
 			Assert.assertEquals(documentStyle.getFamilyName(), "paragraph");
 
-			documentStyle.setProperty(OdfStyleTextProperties.FontWeight, "bold");
-			documentStyle.setProperty(OdfStyleParagraphProperties.BackgroundColor, "#14EA5D");
+			documentStyle.setProperty(StyleTextPropertiesElement.FontWeight, "bold");
+			documentStyle.setProperty(StyleParagraphPropertiesElement.BackgroundColor, "#14EA5D");
 
 			// SAVE / LOAD
 			docWithEmbeddedObjects.save(TEST_FILE_ACCESS_EMBEDDED);
@@ -255,7 +257,7 @@ public class DocumentCreationTest {
 			OdfDocument embDoc2 = doc2.getEmbeddedDocument("Object 1/");
 			embDoc2.getStylesDom();
 			OdfStyle documentStyle2 = embDoc2.getDocumentStyles().getStyle("myStyle", OdfStyleFamily.Paragraph);
-			String prop2 = documentStyle2.getProperty(OdfStyleTextProperties.FontWeight);
+			String prop2 = documentStyle2.getProperty(StyleTextPropertiesElement.FontWeight);
 			Assert.assertEquals(prop2, "bold");
 
 			TextSpanElement spanTest = (TextSpanElement) xpath.evaluate("//text:p[1]/text:span[1]", contentDom, XPathConstants.NODE);
@@ -469,7 +471,7 @@ public class DocumentCreationTest {
 		drawFrame.setSvgHeightAttribute("11.375cm");
 		drawFrame.setDrawZIndexAttribute(0);
 
-		OdfDrawObject object = new OdfDrawObject(dom);
+		DrawObjectElement object = new DrawObjectElement(dom);
 		object.setXlinkHrefAttribute("./" + path);
 		object.setXlinkActuateAttribute("onLoad");
 		object.setXlinkShowAttribute("embed");

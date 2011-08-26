@@ -34,15 +34,15 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.doc.number.OdfNumberDateStyle;
-import org.odftoolkit.odfdom.doc.number.OdfNumberStyle;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.style.OdfStyleParagraphProperties;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberStyle;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
@@ -929,7 +929,7 @@ public class TableCellTest {
 	        style = contentAutoStyles.newStyle(OdfStyleFamily.TableCell);
 	        noaaTempStyleName = style.getStyleNameAttribute();
 	        style.setStyleDataStyleNameAttribute("numberTemperatureStyle");
-	        style.setProperty(OdfStyleParagraphProperties.TextAlign, "end");
+	        style.setProperty(StyleParagraphPropertiesElement.TextAlign, "end");
 
 			OdfTable table = OdfTable.newTable(outputDocument);
 			List<OdfTableColumn> columns = table.insertColumnsBefore(0, 3);

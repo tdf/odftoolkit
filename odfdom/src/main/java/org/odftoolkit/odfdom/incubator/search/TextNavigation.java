@@ -29,8 +29,8 @@ import java.util.regex.Pattern;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
-import org.odftoolkit.odfdom.doc.text.OdfWhitespaceProcessor;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfWhitespaceProcessor;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 

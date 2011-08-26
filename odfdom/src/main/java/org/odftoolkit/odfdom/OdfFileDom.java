@@ -24,10 +24,10 @@ package org.odftoolkit.odfdom;
 import java.lang.reflect.Field;
 import org.apache.xerces.dom.DocumentImpl;
 import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
@@ -201,7 +201,7 @@ public class OdfFileDom extends DocumentImpl {
 			Node parent = getFirstChild();
 
 			// try to insert before body or before master-styles element
-			OdfElement sibling = OdfElement.findFirstChildNode(OdfOfficeBody.class, parent);
+			OdfElement sibling = OdfElement.findFirstChildNode(OfficeBodyElement.class, parent);
 			if (sibling == null) {
 				sibling = OdfElement.findFirstChildNode(OdfOfficeMasterStyles.class, parent);
 			}

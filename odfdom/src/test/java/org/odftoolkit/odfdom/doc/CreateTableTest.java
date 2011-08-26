@@ -25,7 +25,7 @@ package org.odftoolkit.odfdom.doc;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;

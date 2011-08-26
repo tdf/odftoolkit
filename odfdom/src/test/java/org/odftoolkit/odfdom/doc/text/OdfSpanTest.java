@@ -23,7 +23,7 @@
 package org.odftoolkit.odfdom.doc.text;
 
 
-import org.odftoolkit.odfdom.doc.text.OdfTextSpan;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.OdfFileDom;
 

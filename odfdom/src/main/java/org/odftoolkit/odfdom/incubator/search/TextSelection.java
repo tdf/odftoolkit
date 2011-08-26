@@ -28,19 +28,19 @@ import java.util.TreeMap;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.doc.text.OdfTextHeading;
-import org.odftoolkit.odfdom.doc.text.OdfTextHyperlink;
-import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
-import org.odftoolkit.odfdom.doc.text.OdfTextSpace;
-import org.odftoolkit.odfdom.doc.text.OdfTextSpan;
-import org.odftoolkit.odfdom.doc.text.OdfWhitespaceProcessor;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
+import org.odftoolkit.odfdom.dom.element.text.TextAElement;
+import org.odftoolkit.odfdom.dom.element.text.TextSElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextHeading;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfWhitespaceProcessor;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -261,7 +261,7 @@ public class TextSelection extends Selection {
 					if (node.getLocalName().equals("s")) // text:s
 					{
 						// delete space
-						((OdfTextSpace) node).setTextCAttribute(new Integer(
+						((TextSElement) node).setTextCAttribute(new Integer(
 								nodeLength - fromindex));
 						leftLength = leftLength - (nodeLength - fromindex);
 						fromindex = 0;
@@ -430,7 +430,7 @@ public class TextSelection extends Selection {
 					Node nextNode = node.getNextSibling();
 					Node parNode = node.getParentNode();
 					// init text:a
-					OdfTextHyperlink textLink = new OdfTextHyperlink(
+					TextAElement textLink = new TextAElement(
 							(OdfFileDom) node.getOwnerDocument());
 					Node newNode = null;
 					if (nextLength >= 0) {
@@ -470,7 +470,7 @@ public class TextSelection extends Selection {
 					if (node.getLocalName().equals("s")) // text:s
 					{
 						// delete space
-						((OdfTextSpace) node).setTextCAttribute(new Integer(
+						((TextSElement) node).setTextCAttribute(new Integer(
 								nodeLength - fromindex));
 						leftLength = leftLength - (nodeLength - fromindex);
 						fromindex = 0;
@@ -552,7 +552,7 @@ public class TextSelection extends Selection {
 					if (node.getLocalName().equals("s")) // text:s
 					{
 						// delete space
-						((OdfTextSpace) node).setTextCAttribute(new Integer(
+						((TextSElement) node).setTextCAttribute(new Integer(
 								nodeLength - fromindex));
 						leftLength = leftLength - (nodeLength - fromindex);
 						fromindex = 0;

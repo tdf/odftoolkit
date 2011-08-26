@@ -29,15 +29,15 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawPage;
-import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
-import org.odftoolkit.odfdom.utils.ResourceUtilities;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
-import org.odftoolkit.odfdom.doc.presentation.OdfPresentationNotes;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.draw.DrawObjectElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
+import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
+import org.odftoolkit.odfdom.doc.presentation.OdfPresentationNotes;
+import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
+import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
 /**
@@ -91,16 +91,16 @@ public class SlideTest {
 			doc = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			int slideCount = doc.getSlideCount();
 			Assert.assertTrue( 10 == slideCount);
-			OdfDrawPage page2 = doc.getSlideByIndex(2);
+			OdfSlide page2 = doc.getSlideByIndex(2);
 			Assert.assertTrue(2 == page2.getSlideIndex());
-			OdfDrawPage slide3 = doc.getSlideByName("Slide 3");
+			OdfSlide slide3 = doc.getSlideByName("Slide 3");
 			Assert.assertNull(slide3);
 			slide3 = doc.getSlideByName("page3");
 			Assert.assertEquals(page2, slide3);
-			Iterator<OdfDrawPage> slideIter= doc.getSlides();
+			Iterator<OdfSlide> slideIter= doc.getSlides();
 			int i = 0;
 			while(slideIter.hasNext()){
-				OdfDrawPage slide = slideIter.next();
+				OdfSlide slide = slideIter.next();
 				Assert.assertTrue(i == slide.getSlideIndex());
 				String name = "page" + (i + 1);  
 				Assert.assertTrue(name.equals(slide.getSlideName()));
@@ -111,9 +111,9 @@ public class SlideTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 		
-		OdfDrawPage slidesNoName = doc.getSlideByName(null);
+		OdfSlide slidesNoName = doc.getSlideByName(null);
 		Assert.assertNull(slidesNoName);
-		OdfDrawPage nullSlide = doc.getSlideByIndex(20);
+		OdfSlide nullSlide = doc.getSlideByIndex(20);
 		Assert.assertNull(nullSlide);
 		nullSlide = doc.getSlideByIndex(-1);
 		Assert.assertNull(nullSlide);
@@ -144,25 +144,25 @@ public class SlideTest {
 			Assert.assertEquals(slideEle4.getDrawNameAttribute(), "page5");
 			DrawPageElement slideEle8 = (DrawPageElement)slideNodes.item(8);
 			slideEle8.setDrawNameAttribute("page5");
-			OdfDrawPage slide7 = doc.getSlideByIndex(7);
+			OdfSlide slide7 = doc.getSlideByIndex(7);
 			DrawPageElement slideEle7 = (DrawPageElement)slideNodes.item(7);
 			slideEle7.removeAttributeNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "name");
 			
-			OdfDrawPage slide4 = doc.getSlideByIndex(4);
+			OdfSlide slide4 = doc.getSlideByIndex(4);
 			Assert.assertTrue(slide4.getSlideName().equals("page5"));
-			OdfDrawPage slide8 = doc.getSlideByIndex(8);
+			OdfSlide slide8 = doc.getSlideByIndex(8);
 			Assert.assertFalse(slide8.getSlideName().equals("page5"));
 			
 			Assert.assertTrue(slide7.getSlideName().startsWith("page8"));
 			OdfPresentationNotes note7 = slide7.getNotesPage();
 			note7.addText("This is slide at index" + slide7.getSlideIndex() + " named " + slide7.getSlideName());
 	
-			OdfDrawPage slide1 = doc.getSlideByIndex(1);
+			OdfSlide slide1 = doc.getSlideByIndex(1);
 			slide1.setSlideName("haha");
 			slide1.setSlideName("page1");
 			
 		} catch (IllegalArgumentException ile) {
-			OdfDrawPage slide1 = doc.getSlideByIndex(1);
+			OdfSlide slide1 = doc.getSlideByIndex(1);
 			Assert.assertTrue("the given name page1 is duplicate with the previous slide", slide1.getSlideName().equals("haha"));
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -203,8 +203,8 @@ public class SlideTest {
 	public void testDeleteSlide(){
 		try {
 			doc = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
-			OdfDrawPage slide2 = doc.getSlideByIndex(2);
-			OdfDrawPage slide3 = doc.getSlideByIndex(3);
+			OdfSlide slide2 = doc.getSlideByIndex(2);
+			OdfSlide slide3 = doc.getSlideByIndex(3);
 			//this slide contains an embed document, remove this slide will also remove the embed document
 			int nEmbedDoc = doc.getEmbeddedDocuments().size();
 			doc.deleteSlideByIndex(2);
@@ -281,17 +281,17 @@ public class SlideTest {
 	public void testNewSlide(){
 		try {
 			doc = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
-			OdfDrawPage slide5 = doc.getSlideByIndex(5);
-			OdfDrawPage newSlide1 = doc.newSlide(2, "Slide 2 new", OdfDrawPage.SlideLayout.BLANK);
+			OdfSlide slide5 = doc.getSlideByIndex(5);
+			OdfSlide newSlide1 = doc.newSlide(2, "Slide 2 new", OdfSlide.SlideLayout.BLANK);
 			Assert.assertTrue(2 == newSlide1.getSlideIndex());
-			OdfDrawPage newSlide2 = doc.newSlide(0, "", OdfDrawPage.SlideLayout.TITLE_ONLY);
+			OdfSlide newSlide2 = doc.newSlide(0, "", OdfSlide.SlideLayout.TITLE_ONLY);
 			Assert.assertTrue(newSlide2.getSlideName().equals(""));
 			Assert.assertTrue(7 == slide5.getSlideIndex());
-			doc.newSlide(3, OdfDrawPage.SlideLayout.TITLE_PLUS_TEXT.toString(), OdfDrawPage.SlideLayout.enumValueOf("title_text"));
-			OdfDrawPage newSlide4 = doc.newSlide(4, null, OdfDrawPage.SlideLayout.TITLE_PLUS_2_TEXT_BLOCK);
+			doc.newSlide(3, OdfSlide.SlideLayout.TITLE_PLUS_TEXT.toString(), OdfSlide.SlideLayout.enumValueOf("title_text"));
+			OdfSlide newSlide4 = doc.newSlide(4, null, OdfSlide.SlideLayout.TITLE_PLUS_2_TEXT_BLOCK);
 			Assert.assertTrue(newSlide4.getOdfElement().getDrawNameAttribute()!=null);
-			OdfDrawPage.SlideLayout outlineType = OdfDrawPage.SlideLayout.TITLE_OUTLINE;
-			doc.newSlide(14,OdfDrawPage. SlideLayout.toString(outlineType), outlineType);
+			OdfSlide.SlideLayout outlineType = OdfSlide.SlideLayout.TITLE_OUTLINE;
+			doc.newSlide(14,OdfSlide. SlideLayout.toString(outlineType), outlineType);
 			doc.newSlide(15, "Default", null);
 			int count = doc.getSlideCount();
 			Assert.assertTrue(16 == count);
@@ -301,7 +301,7 @@ public class SlideTest {
 		}
 		
 		try{
-			doc.newSlide(20, "Slide 20 new", OdfDrawPage.SlideLayout.BLANK);
+			doc.newSlide(20, "Slide 20 new", OdfSlide.SlideLayout.BLANK);
 		}catch(IndexOutOfBoundsException iobe){
 			Assert.assertTrue("slide index is out of bounds", true);
 		}
@@ -338,13 +338,13 @@ public class SlideTest {
 	public void testMoveAndCopySlide(){
 		try {
 			doc = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
-			OdfDrawPage lastSlide = doc.getSlideByIndex(9);
-			OdfDrawPage firstSlide = doc.getSlideByIndex(0);
+			OdfSlide lastSlide = doc.getSlideByIndex(9);
+			OdfSlide firstSlide = doc.getSlideByIndex(0);
 			
-			OdfDrawPage copyFirstToLastSlide = doc.copySlide(0, 10, firstSlide.getSlideName() + "(copy)");
+			OdfSlide copyFirstToLastSlide = doc.copySlide(0, 10, firstSlide.getSlideName() + "(copy)");
 			Assert.assertTrue(10 ==  copyFirstToLastSlide.getSlideIndex());
 			
-			OdfDrawPage copyLastToFirstSlide = doc.copySlide(9, 0, lastSlide.getSlideName() + "(copy)");
+			OdfSlide copyLastToFirstSlide = doc.copySlide(9, 0, lastSlide.getSlideName() + "(copy)");
 			Assert.assertTrue(0 ==  copyLastToFirstSlide.getSlideIndex());
 			
 			doc.moveSlide(11, 0);
@@ -422,7 +422,7 @@ public class SlideTest {
 			String embedDocName = "Object 3/";
 			OdfFileEntry fileEntry = doc2.getPackage().getFileEntry(embedDocName);
 			Assert.assertNull(fileEntry);
-			OdfDrawPage newPage1 = doc2.copyForeignSlide(2, doc, 2);
+			OdfSlide newPage1 = doc2.copyForeignSlide(2, doc, 2);
 			Assert.assertTrue(2 == newPage1.getSlideIndex());
 			// slide at index 2 of doc contains an embedded document called
 			// "Object 3"
@@ -435,7 +435,7 @@ public class SlideTest {
 			String BULLET_IMAGE_NAME = "Pictures/10000201000000170000001749B70F33.png";
 			Assert.assertNotNull(doc2.getPackage().getInputStream(BACKGROUND_IMAGE_NAME));
 			// copy the slide at index 2 of doc to the end of doc2
-			OdfDrawPage newPage2 = doc2.copyForeignSlide(101, doc, 2);
+			OdfSlide newPage2 = doc2.copyForeignSlide(101, doc, 2);
 			Assert.assertNotNull(doc2.getPackage().getFileEntry(BULLET_IMAGE_NAME));
 			Assert.assertFalse(newPage1.getSlideName().equals(newPage2.getSlideName()));
 		} catch (Exception e) {
@@ -497,7 +497,7 @@ public class SlideTest {
 			//slide at index 3 of doc contains "Object 2", "Object 6"
 			//after appendPresentation, let's check the slide at index 103 of merged document
 			//which is corresponding to the slide at index 3 of doc
-			OdfDrawPage slide = doc2.getSlideByIndex(103);
+			OdfSlide slide = doc2.getSlideByIndex(103);
 			DrawPageElement slideEle = slide.getOdfElement();
 			NodeList objectList = slideEle.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "object");
 			Assert.assertTrue(objectList.getLength() == 2);

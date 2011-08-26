@@ -5,13 +5,17 @@
 
 package org.odftoolkit.odfdom.doc.draw;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.FileInputStream;
 import java.net.URI;
+
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
-import static org.junit.Assert.*;
 
 /**
  *
