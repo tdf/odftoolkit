@@ -36,6 +36,12 @@ public class RngElement extends RngNode
     private RngHandler Handler;
     private Vector< AttributeEntry > Attributes;
     
+    // add for children elements
+    private Vector< SubElementEntry > SubElements;
+    //add for children attributes
+    private Vector< SubAttributeEntry > SubAttributes;
+    public static int groupCount;
+    
     public class AttributeEntry
     {
         public RngAttribute Attribute;
@@ -48,6 +54,31 @@ public class RngElement extends RngNode
         }
     }
 
+    public class SubElementEntry
+    {
+        public RngElement Element;
+        public boolean Optional;
+        
+        public SubElementEntry( RngElement element, boolean optional)
+        {
+            Element = element;
+            Optional = optional;  
+        }
+    }
+
+    public class SubAttributeEntry
+    {
+    	public RngAttribute Attribute ;
+    	public boolean IsChoice;
+    	public int GroupId;
+        
+        public SubAttributeEntry( RngAttribute attribute, boolean isChoice, int groupId)
+        {
+        	Attribute = attribute;
+        	IsChoice = isChoice;
+        	GroupId = groupId;
+         }
+    }
     RngElement( RngHandler handler, Attributes attributes)
     {
         super(LOCAL_NAME);
@@ -138,5 +169,219 @@ public class RngElement extends RngNode
                 getNames( names, child );
             }                
         }
+    }
+    
+    private void getSubElements( Vector< SubElementEntry > subelements, RngNode parent)
+    {
+        Iterator< RngNode > iter = parent.getChildren().iterator();
+        
+        while( iter.hasNext() )
+        {
+            RngNode child = iter.next();
+          
+            if( child.getLocalName().equals( RngReference.LOCAL_NAME) )
+            {
+        
+            	Iterator< RngDefine > defineIter = Handler.getDefines( ((RngReference)child).getName() );
+                while( defineIter.hasNext() )
+                    getSubElements( subelements, defineIter.next());
+            }
+            else if( child.getLocalName().equals( "attribute") )
+            {
+            	continue;
+            }
+            else if( child.getLocalName().equals( RngElement.LOCAL_NAME ) )
+            {
+            	
+            	if ( ((RngElement)child).getName()!= null )
+            	SubElements.add( new SubElementEntry((RngElement)child, false));
+            }
+            else if( child.getLocalName().equals( "optional" ) )
+            {
+            	Iterator< RngNode > optIter = child.getChildren().iterator();
+            	
+                getChildReference(subelements, optIter);
+
+            }
+            else if( child.getLocalName().equals( "choice" ) )
+            {
+            	Iterator< RngNode > choIter = child.getChildren().iterator();
+            	getChildReference(subelements, choIter);
+            }
+            else if( child.getLocalName().equals( "group" ) )
+            {
+                Iterator< RngNode > grpIter = child.getChildren().iterator();
+                getChildReference(subelements, grpIter);
+            }
+            else if( child.getLocalName().equals( "zeroOrMore" ) )
+            {
+            	Iterator< RngNode > zomIter = child.getChildren().iterator();
+            	getChildReference(subelements, zomIter);
+            }
+            else if( child.getLocalName().equals( "oneOrMore" ) )
+            {
+            	Iterator< RngNode > oomIter = child.getChildren().iterator();
+            	getChildReference(subelements, oomIter);
+            }
+            else if( child.getLocalName().equals( "interleave" ) )
+            {
+            	Iterator< RngNode > itlIter = child.getChildren().iterator();
+            	getChildReference(subelements, itlIter);
+            }
+            else
+            {
+            	continue;
+            }                
+        }        
+    }
+
+	private void getChildReference(Vector<SubElementEntry> subelements,
+			Iterator<RngNode> optIter) {
+		while( optIter.hasNext() ) {
+			RngNode temNode = optIter.next();
+			
+			if(temNode.getLocalName().equals(RngReference.LOCAL_NAME)){                		
+		    	Iterator< RngDefine > defineIter = Handler.getDefines( ((RngReference)temNode).getName() );
+		        while( defineIter.hasNext() )
+		            getSubElements( subelements, defineIter.next());
+			}
+			else{
+				getSubElements( subelements, temNode);	
+			}
+			               	
+		}
+	}
+    
+    public Vector< SubElementEntry > getSubElements()
+    {
+        if( SubElements == null )
+        {
+        	SubElements = new Vector< SubElementEntry >();
+            getSubElements( SubElements, this);
+        }
+        return SubElements;
+    }
+    
+    public String getName(){
+    	return Name;
+    }
+
+    private void getSubAttributes( Vector< SubAttributeEntry > subattributes, RngNode parent)
+    {
+        Iterator< RngNode > iter = parent.getChildren().iterator();
+        while( iter.hasNext() )
+        {
+            RngNode child = iter.next();
+          
+            if( child.getLocalName().equals( RngReference.LOCAL_NAME) )
+            {
+		    	Iterator< RngDefine > defineIter = Handler.getDefines( ((RngReference)child).getName() );
+		    	while( defineIter.hasNext()){
+		    		getSubAttributes( subattributes, defineIter.next());
+		    	}    
+            }
+            else if( child.getLocalName().equals( "attribute") )
+            {
+            	subattributes.add(new SubAttributeEntry((RngAttribute)child, false, 0));
+            }
+            else if( child.getLocalName().equals( RngElement.LOCAL_NAME ) )
+            {           	
+                continue;
+            }
+            else if( child.getLocalName().equals( "optional" ) )
+            {   
+            	continue;
+            }
+            else if( child.getLocalName().equals( "choice" ) )
+            {
+            	Iterator< RngNode > choIter = child.getChildren().iterator();
+             	while(choIter.hasNext()){
+            		RngNode choNode= choIter.next();
+            		if(choNode.getLocalName().equals("attribute")){            			
+            			subattributes.add(new SubAttributeEntry((RngAttribute)choNode, true, 0 ));
+            		}else if (choNode.getLocalName().equals("group")){ 
+            			Iterator< RngNode > grpIter = choNode.getChildren().iterator();
+            			while(grpIter.hasNext()){
+            				RngNode grpNode = grpIter.next();
+            				if(grpNode.getLocalName().equals("attribute")){
+            					subattributes.add(new SubAttributeEntry((RngAttribute)grpNode, true, groupCount)); 
+            				}else if (grpNode.getLocalName().equals("ref")){
+            					Iterator< RngDefine > defineIter = Handler.getDefines( ((RngReference)grpNode).getName() );
+            					while(defineIter.hasNext()){
+            						  RngNode refNode = defineIter.next();
+            						if(refNode.getLocalName().equals("attribute")){
+            							subattributes.add(new SubAttributeEntry((RngAttribute)refNode, true, groupCount)); 
+            						}else{
+            							continue;
+            						}
+            					}
+            				}else {
+            					continue;
+            				}
+            				
+            			}
+            			groupCount++;
+            		}else{
+            			continue;
+            		}           		
+            	}
+            }
+            else if( child.getLocalName().equals( "group" ) )
+            {
+                Iterator< RngNode > grpIter = child.getChildren().iterator();
+                getAttributeReference(subattributes, grpIter);
+            }
+            else if( child.getLocalName().equals( "zeroOrMore" ) )
+            {
+            	Iterator< RngNode > zomIter = child.getChildren().iterator();
+            	getAttributeReference(subattributes, zomIter);
+            }
+            else if( child.getLocalName().equals( "oneOrMore" ) )
+            {
+            	Iterator< RngNode > oomIter = child.getChildren().iterator();
+            	getAttributeReference(subattributes, oomIter);
+            }
+            else if( child.getLocalName().equals( "interleave" ) )
+            {
+            	Iterator< RngNode > itlIter = child.getChildren().iterator();
+            	getAttributeReference(subattributes, itlIter);
+            }
+            else
+            {
+            	continue;
+            }                
+        }        
+    }
+
+	private void getAttributeReference(Vector<SubAttributeEntry> subattributes,
+			Iterator<RngNode> optIter) {
+		while( optIter.hasNext() ) {
+			RngNode temNode = optIter.next();
+			
+			if(temNode.getLocalName().equals(RngReference.LOCAL_NAME)){                		
+		    	Iterator< RngDefine > defineIter = Handler.getDefines( ((RngReference)temNode).getName() );
+		        while( defineIter.hasNext() )
+		            getSubAttributes( subattributes, defineIter.next());
+			}else if(temNode.getLocalName().equals(RngElement.LOCAL_NAME)){
+				continue;
+			}else if(temNode.getLocalName().equals("optional")){
+				continue;
+			}
+			else{
+				getSubAttributes( subattributes, temNode);	
+			}
+			               	
+		}
+	}
+    
+    public Vector< SubAttributeEntry > getSubAttributes()
+    {
+        if( SubAttributes == null )
+        {
+        	SubAttributes = new Vector< SubAttributeEntry >();
+        	groupCount=1;
+            getSubAttributes( SubAttributes, this);
+        }
+        return SubAttributes;
     }
 }

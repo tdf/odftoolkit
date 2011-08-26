@@ -38,12 +38,20 @@ public class Element
    
     private Vector< Attribute > Attributes;
     
+    //add for children element
+    private Vector< Element > SubElements;    
+    private Vector< Vector<Attribute> > SubAttributes;
+    
     public Element( String name, String qName, String styleElement, Element refElement )
     {
         Name = name;
         QName = qName;
         StyleFamily = styleElement;
         Attributes = new Vector< Attribute >();
+        
+        //add for children element
+        SubElements =  new Vector< Element >();
+		SubAttributes = new Vector<Vector<Attribute>>();
         
         if( refElement != null )
         {
@@ -120,4 +128,53 @@ public class Element
     {
         return Attributes.iterator();
     }
+    
+    //add for children element
+    public void addSubElement( Element newSub )
+    {
+ 
+    	SubElements.add(newSub);
+    }
+    
+    public Element getSubElement( String name )
+    {
+        
+    	for( int i = 0; i < SubElements.size(); i++ )
+        {
+    		if( SubElements.get(i).getQName().equals( name ) )
+                return SubElements.get(i);
+        }
+    	return null;
+    }
+    
+    public void removeSubElement( String name )
+    {
+        for( int i = 0; i < SubElements.size(); i++ )
+        {
+            if( SubElements.get(i).getQName().equals( name ) )
+            {
+            	SubElements.remove(i);
+                break;
+            }
+        }
+    }
+
+    public Vector< Element > getSubElements()
+    { 
+      	return SubElements;
+    }
+    //
+    
+    public Vector< Vector<Attribute>> getSubAttributes()
+    { 
+      	return SubAttributes;
+    }
+    
+    public void addSubAttribute( Vector<Attribute> newAttrs )
+    {
+                   
+        SubAttributes.add(newAttrs);
+           
+    }
+    
 }

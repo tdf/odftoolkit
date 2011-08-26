@@ -23,6 +23,7 @@ package org.odftoolkit.odfdom.codegen;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
 import org.odftoolkit.odfdom.codegen.Config.AttributeConfig;
@@ -33,6 +34,8 @@ import org.odftoolkit.odfdom.codegen.rng.RngElement;
 import org.odftoolkit.odfdom.codegen.rng.RngHandler;
 import org.odftoolkit.odfdom.codegen.rng.RngNode;
 import org.odftoolkit.odfdom.codegen.rng.RngElement.AttributeEntry;
+import org.odftoolkit.odfdom.codegen.rng.RngElement.SubAttributeEntry;
+import org.odftoolkit.odfdom.codegen.rng.RngElement.SubElementEntry;
 
 /**
  *
@@ -328,7 +331,224 @@ public class Schema
             }
         }
         
-        return true;
+		// add children elements to Element
+		Iterator<RngElement> parentIter = Handler.getElements();
+		while (parentIter.hasNext()) {
+			RngElement parent = parentIter.next();
+			Element element = Elements.get(parent.getName());
+			Iterator<SubElementEntry> subIter = parent.getSubElements()
+					.iterator();
+			String strSubelements ="";			
+			while (subIter.hasNext()) {
+				boolean isHave = false;
+				SubElementEntry child = subIter.next();
+				String strSubelement = child.Element.getName();
+				if (element.getName() != null && child.Element.getName() != null) {
+					StringTokenizer tokens = new StringTokenizer(strSubelements, ";" );
+			        while( tokens.hasMoreTokens() ){
+			        	if( tokens.nextToken().equals(strSubelement) ){
+	                       isHave = true;    
+				        }
+			        }
+			        if(!isHave){
+	        		   element.addSubElement(Elements.get(child.Element.getName()));
+	        		   strSubelements = strSubelements+";"+strSubelement;
+			        }
+				}
+			}
+
+		}
+
+		
+		
+		//add sub attributes to Element
+		parentIter = Handler.getElements();
+		while (parentIter.hasNext()) {
+            
+			RngElement rngElement = parentIter.next();
+			if(rngElement.getName()==null){
+				continue;
+			}
+			
+			Element element = Elements.get(rngElement.getName());
+			// subattributes
+			Iterator<SubAttributeEntry> subattributes = rngElement
+					.getSubAttributes().iterator();
+			Vector<Vector<RngAttribute>> tmpattributes = new Vector<Vector<RngAttribute>>();
+
+			// find all required attributes
+			Vector<RngAttribute> requiredAttribute = new Vector<RngAttribute>();
+			while (subattributes.hasNext()) {
+				SubAttributeEntry entry = subattributes.next();
+				if (!entry.IsChoice) {
+					requiredAttribute.add(entry.Attribute);
+				}
+			}
+
+			// find all single choice attributes
+			subattributes = rngElement.getSubAttributes().iterator();
+			while (subattributes.hasNext()) {
+				SubAttributeEntry entry = subattributes.next();
+				if (entry.IsChoice && entry.GroupId == 0) {
+					Vector<RngAttribute> choiceAttribute = new Vector<RngAttribute>();
+					if(requiredAttribute.size()>0){
+						choiceAttribute.addAll(requiredAttribute);
+					}
+					choiceAttribute.add(entry.Attribute);
+					tmpattributes.add(choiceAttribute);
+				}
+					
+			}
+
+			// find max group id
+			int i = 0;
+			subattributes = rngElement.getSubAttributes().iterator();
+			while (subattributes.hasNext()) {
+				SubAttributeEntry entry = subattributes.next();
+				if (entry.GroupId > i) {
+					i = entry.GroupId;
+				}
+			}
+            
+     		// assemble choice group attribute with required attribute		
+			int j = 1;
+			while (j <= i) {
+				Vector<RngAttribute> groupAttribute = new Vector<RngAttribute>();
+				subattributes = rngElement.getSubAttributes().iterator();
+				while (subattributes.hasNext()) {
+					SubAttributeEntry entry = subattributes.next();
+					if (entry.IsChoice && entry.GroupId == j) {
+						groupAttribute.add(entry.Attribute);
+					}
+				}
+				if(requiredAttribute.size()>0){
+					groupAttribute.addAll(requiredAttribute);
+				}				
+				tmpattributes.add(groupAttribute);
+				j++;
+			}
+            
+			// only required attribute
+            if(tmpattributes.size()==0 && requiredAttribute.size() >0){
+            	tmpattributes.add(requiredAttribute);
+            }
+            
+			Iterator<Vector<RngAttribute>> itOut = tmpattributes.iterator();
+			String strTypes ="";
+			while (itOut.hasNext()) {
+				Vector<Attribute> combAttributes = new Vector<Attribute>();
+				Vector<RngAttribute> outRngAttribute = (Vector<RngAttribute>) itOut.next();
+				Iterator<RngAttribute> itIn = outRngAttribute.iterator();
+				while (itIn.hasNext()) {
+					RngAttribute inAttribute = itIn.next();
+					Iterator<String> attributeNames = inAttribute.getNames();
+					while (attributeNames.hasNext()) {
+						String QName = attributeNames.next();
+						if (QName != null) {
+							String valueType = inAttribute.getType();
+							String conversionType = null;
+
+							if (valueType.length() == 0)
+								valueType = "string";
+
+							DataTypeConfig config = Config
+									.getDataTypeConfiguration(valueType);
+
+							if (config != null) {
+								valueType = config.ValueType;
+								conversionType = config.ConversionType;
+							}
+							if (valueType == null)
+								valueType = inAttribute.getType();
+
+							if (conversionType == null) {
+								if (valueType.equals(RngAttribute.TYPE_ENUM)) {
+									conversionType = QName;
+								} else {
+									conversionType = valueType;
+								}
+							}
+							Attribute attr = new Attribute(QName, valueType,
+									conversionType, inAttribute.getValues(),
+									false, inAttribute.getDefaultValue());
+							combAttributes.add(attr);
+							
+						} else {
+							System.err.println("warning, element <"
+									+ "> has an attribute without a name!");
+						}
+					}
+
+				}
+				
+				
+                // optimize attributes
+                Iterator< Attribute > attrIter = combAttributes.iterator();
+                while( attrIter.hasNext() )
+                {
+                     Attribute attr = attrIter.next();
+                     
+                     String valueType = attr.getValueType();
+                                         
+                    // optimize enum types with only one value and boolean value types
+                    if( valueType.equals(RngAttribute.TYPE_ENUM) )
+                    {
+                        switch( attr.getValueCount() )
+                        {
+                        case 0: // todo: give error?
+ 
+                        case 1: // todo: optimize
+                            valueType = "string";
+                            break;
+                        case 2:
+                            if( attr.hasValue("true") && attr.hasValue("false") ){
+                            	valueType = "boolean";
+                            }
+                            break;
+                        default:
+ 
+                            continue;
+                        }
+ 
+                        DataTypeConfig config = Config.getDataTypeConfiguration(valueType);
+                        attr.setValueType( ( config != null && (config.ValueType.length() != 0) ) ? config.ValueType : valueType);
+
+                        if( (config != null) && (config.ConversionType.length() != 0) )
+                        {
+                            attr.setConversionType( config.ConversionType );
+                        }
+                    }
+                }
+				
+				
+				//merge same type parameter
+				Iterator<Attribute> strIter = combAttributes.iterator();
+				String strType ="";
+				boolean isExist = false;
+				while(strIter.hasNext()){
+					Attribute strAttr = strIter.next();
+					if(strAttr.getValueType().equals("String") || strAttr.getValueType().equals("Double") || strAttr.getValueType().equals("javax.xml.datatype.XMLGregorianCalendar")){
+						strType = strType+strAttr.getValueType();
+					}else{
+						strType=strType+strAttr.getQName();
+					}
+					
+				}
+				
+				StringTokenizer tokens = new StringTokenizer(strTypes, ";" );
+	            while( tokens.hasMoreTokens() ){
+	            	if( tokens.nextToken().equals(strType) )
+	            		isExist = true;
+	            }
+				if(!isExist){
+					element.addSubAttribute(combAttributes);
+					strTypes = strTypes+";"+strType;
+				}
+				
+				
+			}
+		}
+		return true;
     }
 
     private boolean renameAttributes()
@@ -376,6 +596,39 @@ public class Schema
                     }
                     if( (config.Rename.length() != 0) )
                         attr.setName( config.Rename );
+                    
+                    //rename subattributes
+					Iterator<Vector<Attribute>> subAttrs = element.getSubAttributes().iterator();
+					while (subAttrs.hasNext()) {
+						Iterator<Attribute> subAttr = subAttrs.next()
+								.iterator();
+						while (subAttr.hasNext()) {
+							Attribute aAttr = subAttr.next();
+							if (aAttr.getQName().equals(config.Name)) {
+								if ((config.TypeName.length() != 0)) {
+									DataTypeConfig type_config = Config
+											.getDataTypeConfiguration(config.TypeName);
+									if (type_config != null) {
+										aAttr
+												.setValueType(type_config.ValueType);
+										if (type_config.ConversionType.length() == 0)
+											aAttr
+													.setConversionType(type_config.ValueType);
+										else
+											aAttr
+													.setConversionType(type_config.ConversionType);
+									} else {
+										aAttr
+												.setConversionType(config.TypeName);
+									}
+								}
+								if ((config.Rename.length() != 0))
+									aAttr.setName(config.Rename);
+							}
+						}
+					}
+
+                
                 }
             }
         }

@@ -38,6 +38,7 @@ public class Context
     private Stack< Element > CurrentElement;
     private Stack< PrintWriter > CurrentFile;
     private IFunctionSupplier FunctionSupplier;
+    private Vector<Attribute> CurrentAttributeGroup;
     
     public Context( IFunctionSupplier functionSupplier )
     {
@@ -46,6 +47,7 @@ public class Context
         CurrentElement = new Stack< Element >();
         CurrentFile = new Stack< PrintWriter >();
         FunctionSupplier = functionSupplier;
+        CurrentAttributeGroup = new Vector<Attribute>();
     }
     
     public String getVariable( String name )
@@ -79,6 +81,18 @@ public class Context
             return CurrentFile.lastElement();
         else
             return null;
+    }
+    public Vector<Attribute> getCurrentAttributeGroup()
+    {
+
+            return CurrentAttributeGroup;
+
+    }    
+    public void setCurrentAttributeGroup(Vector<Attribute> groupAttr)
+    {
+
+            CurrentAttributeGroup = groupAttr;
+
     }
     
     public void setVariable( String name, String value )

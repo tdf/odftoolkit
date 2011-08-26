@@ -62,6 +62,11 @@ public class CodeTemplate extends DefaultHandler
         public final static String TEST_ATTRIBUTE = "test";
         public final static String EXTENSION_ATTRIBUTE = "extensions";
         
+        //add for select children elements
+        public final static String CHILDREN_ELEMENT = "children";
+        public final static String SUBATTRIBUTE_ELEMENT = "subattribute";
+        public final static String GROUP_ELEMENT = "group";
+        
         public HashMap< String, String > Attributes;
         public String LocalName;
         public String Characters;
