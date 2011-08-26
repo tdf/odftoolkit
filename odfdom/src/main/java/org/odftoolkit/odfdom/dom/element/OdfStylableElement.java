@@ -39,12 +39,12 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.type.StyleNameRef;
 import org.w3c.dom.DOMException;
 
-// 2DO: change modifier public to package after refactoring
+// ToDo: change modifier public to package after refactoring
 abstract public class OdfStylableElement extends OdfElement implements
 		OdfStylePropertySet {
 
 	private static final long serialVersionUID = -7828513537641758879L;
-	// 2DO: Overall StyleRefactoring: DOM Layer reaches to upper layer here...
+	// ToDo: Overall StyleRefactoring: DOM Layer reaches to upper layer here...
 	private OdfStyle mAutomaticStyle;
 	protected OdfStyleFamily mFamily;
 	protected OdfName mStyleNameAttrib;

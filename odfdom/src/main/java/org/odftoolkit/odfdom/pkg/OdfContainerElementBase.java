@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-//2DO: Move into tooling package?
+//ToDo: Move into tooling package?
 package org.odftoolkit.odfdom.pkg;
 
 import org.odftoolkit.odfdom.dom.OdfContentDom;

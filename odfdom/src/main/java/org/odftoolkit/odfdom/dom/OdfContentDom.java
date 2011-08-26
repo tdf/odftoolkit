@@ -27,7 +27,6 @@ import javax.xml.xpath.XPathFactory;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentContentElement;
 import org.odftoolkit.odfdom.pkg.NamespaceName;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 
 /**
  * The DOM repesentation of the ODF content.xml file of an ODF document.

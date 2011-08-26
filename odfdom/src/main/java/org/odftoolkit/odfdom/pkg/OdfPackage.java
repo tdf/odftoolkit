@@ -420,8 +420,8 @@ public class OdfPackage implements Closeable {
 	/** Removes directories without a mimetype (all none documents) */
 	private void removeDirectory(String path) {
 		if (path.endsWith(SLASH)) {
-			// is it a sub-document?
-			// assumption: if it has a mimetype...
+			// Check if it is a sub-document?
+			// Our assumption: it is a document if it has a mimetype...
 			String dirMimeType = mFileEntries.get(path).getMediaTypeString();
 			if (dirMimeType == null || EMPTY_STRING.equals(dirMimeType)) {
 				logValidationWarning(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, getBaseURI(), path);
@@ -563,7 +563,7 @@ public class OdfPackage implements Closeable {
 		OdfPackageDocument doc = getCachedDocument(internalPath);
 		if (doc == null) {
 			String mediaTypeString = getMediaTypeString();
-			// ToDo: Remove dependency by factory - issue ??? (to be written)
+			// ToDo: Issue 265 - Remove dependency to higher layer by factory
 			OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(mediaTypeString);
 			if (odfMediaType == null) {
 				doc = new OdfPackageDocument(this, internalPath, mediaTypeString);
@@ -574,7 +574,7 @@ public class OdfPackage implements Closeable {
 					if (odfMediaType == null) {
 						return null;
 					}
-					// ToDo: Remove dependency by facotory issue ??? (to be written)
+					// ToDo: Issue 265 - Remove dependency to higher layer by facotory
 					doc = OdfDocument.loadDocument(this, internalPath);
 				} catch (Exception ex) {
 					Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
@@ -744,7 +744,7 @@ public class OdfPackage implements Closeable {
 	 * 
 	 * @return The manifest file entries will be returned.
 	 */
-	// 2DO: When moved to Manifest, after generation, the method might be renamed "Entries" to "Paths" as well
+	// ToDo: When moved to Manifest, after generation, the method might be renamed "Entries" to "Paths" as well
 	public Set<String> getFileEntries() {
 		return getManifestEntries().keySet();
 	}
@@ -1315,8 +1315,6 @@ public class OdfPackage implements Closeable {
 		} else {
 			// otherwise create a file class to open the stream
 			is = new FileInputStream(sourceURI.toString());
-			// ToDo: (Issue 219 - PackageRefactoring) --error handling in this case! -> allow method insert(URI,
-			// ppath, mtype)?
 		}
 		insert(is, internalPath, mediaType);
 	}

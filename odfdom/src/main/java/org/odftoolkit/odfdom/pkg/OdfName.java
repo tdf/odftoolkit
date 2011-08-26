@@ -80,7 +80,7 @@ public class OdfName implements Comparable<OdfName> {
 			name = name.substring(i + 1);
 		}
 		String expandedName = null;
-		// 2DO: Is there need for the prefix? For instance during serialization?
+		// ToDo: Is there need for the prefix? For instance during serialization?
 		if (odfNamespace != null) {
 			StringBuilder b = new StringBuilder();
 			b.append('{');

@@ -136,7 +136,7 @@ class OdfManifestSaxHandler implements ContentHandler {
 	 */
 	public void endElement(String namespaceURI, String localName,
 			String qName) throws SAXException {
-		//ToDo Svante: Parsing of Manifest.xml specific part to be added to parser
+		//ToDo Issue 263: Parsing of Manifest.xml specific part to be added to parser
 		if (localName.equals("encryption-data")) {
 			_currentEncryptionData = null;
 		}

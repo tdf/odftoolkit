@@ -33,12 +33,12 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 public class OdfDrawFrame extends DrawFrameElement
 {
 
-    // 2DO: OdfMeassure / OdfUnit
+    // ToDo: OdfMeassure / OdfUnit
 
 	private static final long serialVersionUID = -2260696671403198845L;
 
-	// 2DO - What are mandatory ODF attributes, what are the OOo defaults?
-    // 2DO - mandatory attributes part of the constructor default values should always be set in constructor
+	// ToDo - What are mandatory ODF attributes, what are the OOo defaults?
+    // ToDo - mandatory attributes part of the constructor default values should always be set in constructor
     /** Creates a new instance of this class */
     public OdfDrawFrame(OdfFileDom ownerDoc) {
         super(ownerDoc);
