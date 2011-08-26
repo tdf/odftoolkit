@@ -21,6 +21,8 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.table;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -592,10 +594,29 @@ public class TableTest {
 		mOdtDoc = loadODTDocument("CreateTableCase.odt");
 		OdfTable table = mOdtDoc.getTableByName("Table3");
 		Assert.assertNotNull(table);
+		//test if index is negative number, which is an illegal argument.
+		boolean illegalArgumentFlag = false;
+		try {
+			table.getColumnByIndex(-1);
+		} catch (IllegalArgumentException ie) {
+			if ("index should be nonnegative integer.".equals(ie.getMessage())) {
+				illegalArgumentFlag = true;
+			}
+		}
+		Assert.assertTrue(illegalArgumentFlag);
 		OdfTableColumn column = table.getColumnByIndex(2);
 		Assert.assertNotNull(column);
 		Assert.assertEquals("string6", column.getCellByIndex(2).getStringValue());
-
+		// test column automatically expands.
+		// Table3 original size is 7 rows and 5 columns. this test case will
+		// test row index 8 and columns index 6 are work well though they are
+		// both out bound of the original table.
+		column = table.getColumnByIndex(8);
+		Assert.assertNotNull(column);
+		OdfTableCell cell = column.getCellByIndex(6);
+		Assert.assertNotNull(cell);
+		cell.setStringValue("string86");
+		Assert.assertEquals("string86", cell.getStringValue());
 	}
 
 	@Test
@@ -604,9 +625,29 @@ public class TableTest {
 		mOdtDoc = loadODTDocument("CreateTableCase.odt");
 		OdfTable table = mOdtDoc.getTableByName("Table3");
 		Assert.assertNotNull(table);
+		//test index is negative number. This is a illegal argument.
+		boolean illegalArgumentFlag = false;
+		try {
+			table.getRowByIndex(-1);
+		} catch (IllegalArgumentException ie) {
+			if ("index should be nonnegative integer.".equals(ie.getMessage())) {
+				illegalArgumentFlag = true;
+			}
+		}
+		Assert.assertTrue(illegalArgumentFlag);
 		OdfTableRow row = table.getRowByIndex(3);
 		Assert.assertNotNull(row);
 		Assert.assertEquals("string12", row.getCellByIndex(3).getStringValue());
+		// test row automatically expands.
+		// Table3 original size is 7 rows and 5 columns. this test case will
+		// test row index 8 and columns index 6 are work well though they are
+		// both out bound of the original table.
+		row = table.getRowByIndex(6);
+		Assert.assertNotNull(row);
+		OdfTableCell cell = row.getCellByIndex(8);
+		Assert.assertNotNull(cell);
+		cell.setStringValue("string86");
+		Assert.assertEquals("string86", cell.getStringValue());
 	}
 
 	@Test
@@ -691,11 +732,121 @@ public class TableTest {
 		OdfTableCell cell = table.getCellByPosition(3, 3);
 		Assert.assertNotNull(cell);
 		Assert.assertEquals("string12", cell.getStringValue());
-
+		cell = table.getCellByPosition("D4");
+		Assert.assertNotNull(cell);
+		Assert.assertEquals("string12", cell.getStringValue());
+		//test index are negative numbers. They are illegal arguments.
+		boolean illegalArgumentFlag = false;
+		try {
+			cell = table.getCellByPosition(-1, 0);
+		} catch (IllegalArgumentException ie) {
+			if ("colIndex and rowIndex should be nonnegative integer.".equals(ie.getMessage())) {
+				illegalArgumentFlag = true;
+			}
+		}
+		Assert.assertTrue(illegalArgumentFlag);
+		// test TextTable automatically expands.
+		// Table3 original size is 7 rows and 5 columns;
+		//test row index 8 and column index 6, row index and column index both out of bound, work well. 
+		cell = table.getCellByPosition(8, 6);
+		Assert.assertNotNull(cell);
+		cell.setStringValue("string86");
+		Assert.assertEquals("string86", cell.getStringValue());
+		//test row index 9 and column index 4, row index out of bound, work well.
+		cell = table.getCellByPosition(4, 9);
+		Assert.assertNotNull(cell);
+		cell.setStringValue("string49");
+		Assert.assertEquals("string49", cell.getStringValue());
+		//test row index 9 and column index 4, column index out of bound, work well.
+		cell = table.getCellByPosition(9, 10);
+		Assert.assertNotNull(cell);
+		cell.setStringValue("string910");
+		Assert.assertEquals("string910", cell.getStringValue());
+		//test column index out of bound, work well.
+		cell = table.getCellByPosition("I4");
+		Assert.assertNotNull(cell);
+		cell.setStringValue("stringI4");
+		Assert.assertEquals("stringI4", cell.getStringValue());
+		//test row index out of bound, work well.
+		cell = table.getCellByPosition("D11");
+		Assert.assertNotNull(cell);
+		cell.setStringValue("stringD11");
+		Assert.assertEquals("stringD11", cell.getStringValue());
+		//test row index and column index both out of bound, work well. 
+		cell = table.getCellByPosition("K12");
+		Assert.assertNotNull(cell);
+		cell.setStringValue("stringK12");
+		Assert.assertEquals("stringK12", cell.getStringValue());
+		// test TestSpreadsheetTable automatically expands.
+		// Sheet1 original size is 6 rows and 9 columns;
 		table = mOdsDoc.getTableByName("Sheet1");
 		cell = table.getCellByPosition("C1");
 		Assert.assertNotNull(cell);
 		Assert.assertEquals("Currency", cell.getStringValue());
+		cell = table.getCellByPosition("K4");
+		Assert.assertNotNull(cell);
+		cell.setBooleanValue(true);
+		Assert.assertEquals(new Boolean(true), cell.getBooleanValue());
+		cell = table.getCellByPosition("D10");
+		Assert.assertNotNull(cell);
+		Calendar cal = Calendar.getInstance();
+		cell.setTimeValue(cal);
+		SimpleDateFormat simpleFormat = new SimpleDateFormat(
+				"'PT'HH'H'mm'M'ss'S'");
+		String expectedString = simpleFormat.format(cal.getTime());
+		String targetString = simpleFormat.format(cell.getTimeValue().getTime());
+		Assert.assertEquals(expectedString, targetString);
+		cell = table.getCellByPosition("M15");
+		Assert.assertNotNull(cell);
+		cell.setStringValue("stringM15");
+		Assert.assertEquals("stringM15", cell.getStringValue());
+	}
+
+	@Test
+	public void testGetCellRangeByPosition() {
+		testNewTable();
+		mOdtDoc = loadODTDocument("CreateTableCase.odt");
+		OdfTable table = mOdtDoc.getTableByName("Table3");
+
+		OdfTableCellRange range = table.getCellRangeByPosition(0, 0, 3, 3);
+		Assert.assertNotNull(range);
+		range = table.getCellRangeByPosition("A1", "D4");
+		Assert.assertNotNull(range);
+
+		// test TextTable automatically expands.
+		// Table3 original size is 7 rows and 5 columns;
+
+		//test index is negative number. They are illegal arguments.
+		boolean illegalArgumentFlag = false;
+		try {
+			range = table.getCellRangeByPosition(-1, 0, 2, -14);
+		} catch (IllegalArgumentException ie) {
+			if ("colIndex and rowIndex should be nonnegative integer.".equals(ie.getMessage())) {
+				illegalArgumentFlag = true;
+			}
+		}
+		Assert.assertTrue(illegalArgumentFlag);
+		range = table.getCellRangeByPosition(0, 0, 8, 6);
+		Assert.assertNotNull(range);
+		range = table.getCellRangeByPosition(0, 0, 4, 9);
+		Assert.assertNotNull(range);
+		range = table.getCellRangeByPosition(0, 0, 9, 10);
+		Assert.assertNotNull(range);
+		// get cell range by address.
+		range = table.getCellRangeByPosition("A1", "I4");
+		Assert.assertNotNull(range);
+		range = table.getCellRangeByPosition("A1", "D11");
+		Assert.assertNotNull(range);
+		range = table.getCellRangeByPosition("A1", "K12");
+		Assert.assertNotNull(range);
+		// test TestSpreadsheetTable automatically expands.
+		// Sheet1 original size is 6 rows and 9 columns;
+		// get cell range by index.
+		table = mOdsDoc.getTableByName("Sheet1");
+		range = table.getCellRangeByPosition("A1", "C1");
+		Assert.assertNotNull(range);
+		range = table.getCellRangeByPosition("B7", "K12");
+		Assert.assertNotNull(range);
 	}
 
 	@Test

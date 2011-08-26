@@ -261,23 +261,35 @@ public class OdfTableRow {
 	}
 
 	/**
-	 * Get a cell with a specific index.
+	 * Get a cell with a specific index. The table will be automatically
+	 * expanded, when the given index is outside of the original table.
 	 * 
 	 * @param index
-	 * 					the cell index in this row
-	 * @return
-	 * 					the cell object in the given cell index
+	 *            the cell index in this row
+	 * @return the cell object in the given cell index
 	 */
 	public OdfTableCell getCellByIndex(int index) {
 		OdfTable table = getTable();
+		if (index < 0) {
+			throw new IllegalArgumentException("index should be nonnegative integer.");
+		}
+		// expand column as needed.
+		int lastColumnIndex = table.getColumnCount() - 1;
+		if (index > lastColumnIndex) {
+			table.appendColumns(index - lastColumnIndex);
+		}
 		for (Node n : new DomNodeList(maRowElement.getChildNodes())) {
 			if (n instanceof TableTableCellElementBase) {
 				if (index == 0) {
-					return table.getCellInstance((TableTableCellElementBase) n, 0, mnRepeatedIndex);
+					return table.getCellInstance((TableTableCellElementBase) n,
+							0, mnRepeatedIndex);
 				} else {
-					int nextIndex = index - ((TableTableCellElementBase) n).getTableNumberColumnsRepeatedAttribute().intValue();
+					int nextIndex = index
+							- ((TableTableCellElementBase) n).getTableNumberColumnsRepeatedAttribute().intValue();
 					if (nextIndex < 0) {
-						OdfTableCell cell = table.getCellInstance((TableTableCellElementBase) n, index, mnRepeatedIndex);
+						OdfTableCell cell = table.getCellInstance(
+								(TableTableCellElementBase) n, index,
+								mnRepeatedIndex);
 						return cell;
 					} else {
 						index = nextIndex;
@@ -285,7 +297,6 @@ public class OdfTableRow {
 				}
 			}
 		}
-
 		return null;
 	}
 
@@ -353,7 +364,7 @@ public class OdfTableRow {
 					} else if (aPrevNode instanceof TableTableRowsElement
 							|| aPrevNode instanceof TableTableHeaderRowsElement
 							|| aPrevNode instanceof TableTableRowGroupElement) {
-						synchronized(ownerDoc) {
+						synchronized (ownerDoc) {
 							lastRow = (TableTableRowElement) ownerDoc.getXPath().evaluate(".//table:table-row[last()]", aPrevNode, XPathConstants.NODE);
 						}
 						if (lastRow != null) {
@@ -408,7 +419,7 @@ public class OdfTableRow {
 					} else if (aNextNode instanceof TableTableRowsElement
 							|| aNextNode instanceof TableTableHeaderRowsElement
 							|| aNextNode instanceof TableTableRowGroupElement) {
-						synchronized(ownerDoc) {
+						synchronized (ownerDoc) {
 							firstRow = (TableTableRowElement) ownerDoc.getXPath().evaluate(".//table:table-row[first()]", aNextNode, XPathConstants.NODE);
 						}
 						if (firstRow != null) {
@@ -606,8 +617,7 @@ public class OdfTableRow {
 	}
 
 	int getRowsRepeatedNumber() {
-		if (mRowsRepeatedNumber<0)
-		{
+		if (mRowsRepeatedNumber < 0) {
 			Integer count = maRowElement.getTableNumberRowsRepeatedAttribute();
 			if (count == null) {
 				mRowsRepeatedNumber = 1;

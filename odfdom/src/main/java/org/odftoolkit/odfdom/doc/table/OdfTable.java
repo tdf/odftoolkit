@@ -810,7 +810,7 @@ public class OdfTable {
 
 	/**
 	 * Append a row to the end of the table.
-	 * The style of new row is same with the downmost row in the table.
+	 * The style of new row is same with the last row in the table.
 	 * 
 	 * @return a new appended row
 	 */
@@ -829,6 +829,28 @@ public class OdfTable {
 			OdfTableRow newRow = insertRowBefore(refRow, null);
 			return newRow;
 		}
+	}
+
+	/**
+	 * Append a specific number of rows to the end of the table.
+	 * The style of new rows are same with the last row in the table.
+	 * 
+	 * @param rowCount	is the number of rows to be appended.
+	 * @return a list of new appended rows
+	 */
+	public List<OdfTableRow> appendRows(int rowCount) {
+		List<OdfTableRow> resultList = new ArrayList<OdfTableRow>();
+		if (rowCount <= 0) {
+			return resultList;
+		}
+		OdfTableRow firstRow = appendRow();
+		resultList.add(firstRow);
+		if (rowCount == 1) {
+			return resultList;
+		}
+		List<OdfTableRow> list = insertRowsBefore((getRowCount() - 1), (rowCount - 1));
+		resultList.addAll(list);
+		return resultList;
 	}
 
 	/**
@@ -876,6 +898,28 @@ public class OdfTable {
 			i = i + row1.getRowsRepeatedNumber();
 		}
 		return getColumnInstance(newColumn, 0);
+	}
+
+	/**
+	 * Append a specific number of columns to the right of the table.
+	 * The style of new columns are same with the rightmost column in the table.
+	 * 
+	 * @param clmCount	is the number of columns to be appended.
+	 * @return a list of new appended columns
+	 */
+	public List<OdfTableColumn> appendColumns(int clmCount) {
+		List<OdfTableColumn> resultList = new ArrayList<OdfTableColumn>();
+		if (clmCount <= 0) {
+			return resultList;
+		}
+		OdfTableColumn firstClm = appendColumn();
+		resultList.add(firstClm);
+		if (clmCount == 1) {
+			return resultList;
+		}
+		List<OdfTableColumn> list = insertColumnsBefore((getColumnCount() - 1), (clmCount - 1));
+		resultList.addAll(list);
+		return resultList;
 	}
 
 	/**
@@ -1293,18 +1337,30 @@ public class OdfTable {
 	}
 
 	/**
-	 * Get the column at the specified index.
+	 * Get the column at the specified index. The table will be automatically
+	 * expanded, when the given index is outside of the original table.
 	 * 
-	 * @param index	the zero-based index of the column
+	 * @param index
+	 *            the zero-based index of the column.
 	 * @return the column at the specified index
 	 */
 	public OdfTableColumn getColumnByIndex(int index) {
+		if (index < 0) {
+			throw new IllegalArgumentException(
+					"index should be nonnegative integer.");
+		}
+		// expand column as needed.
+		int lastIndex = getColumnCount() - 1;
+		if (index > lastIndex) {
+			appendColumns(index - lastIndex);
+		}
 		int result = 0;
 		OdfTableColumn col = null;
-		//TableTableColumnElement colEle=null;
+		// TableTableColumnElement colEle=null;
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
 			if (n instanceof TableTableHeaderColumnsElement) {
-				col = getHeaderColumnByIndex((TableTableHeaderColumnsElement) n, index);
+				col = getHeaderColumnByIndex(
+						(TableTableHeaderColumnsElement) n, index);
 				if (col != null) {
 					return col;
 				}
@@ -1315,11 +1371,10 @@ public class OdfTable {
 				result += col.getColumnsRepeatedNumber();
 			}
 			if ((result > index) && (col != null)) {
-				return getColumnInstance(col.getOdfElement(), index - (result - col.getColumnsRepeatedNumber()));
+				return getColumnInstance(col.getOdfElement(), index
+						- (result - col.getColumnsRepeatedNumber()));
 			}
 		}
-
-		//return getColumnInstance(colEle, result - (int)nIndex - 1);
 		return null;
 	}
 
@@ -1356,18 +1411,29 @@ public class OdfTable {
 	}
 
 	/**
-	 * Get the row at the specified index.
+	 * Get the row at the specified index. The table will be automatically
+	 * expanded, when the given index is outside of the original table.
 	 * 
-	 * @param index	the zero-based index of the row
+	 * @param index
+	 *            the zero-based index of the row.
 	 * @return the row at the specified index
 	 */
 	public OdfTableRow getRowByIndex(int index) {
+		if (index < 0) {
+			throw new IllegalArgumentException(
+					"index should be nonnegative integer.");
+		}
+		// expand row as needed.
+		int lastIndex = getRowCount() - 1;
+		if (index > lastIndex) {
+			appendRows(index - lastIndex);
+		}
 		int result = 0;
-		//TableTableRowElement rowEle=null;
 		OdfTableRow row = null;
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
 			if (n instanceof TableTableHeaderRowsElement) {
-				row = getHeaderRowByIndex((TableTableHeaderRowsElement) n, index);
+				row = getHeaderRowByIndex((TableTableHeaderRowsElement) n,
+						index);
 				if (row != null) {
 					return row;
 				}
@@ -1378,10 +1444,10 @@ public class OdfTable {
 				result += row.getRowsRepeatedNumber();
 			}
 			if (result > index) {
-				return getRowInstance(row.getOdfElement(), index - (result - row.getRowsRepeatedNumber()));
+				return getRowInstance(row.getOdfElement(), index
+						- (result - row.getRowsRepeatedNumber()));
 			}
 		}
-
 		return null;
 	}
 
@@ -1528,43 +1594,50 @@ public class OdfTable {
 
 	////////////////////////////////////////////////////////////////////////////////////////////
 	/**
-	 * Return a range of cells within the specified range.
+	 * Return a range of cells within the specified range. The table will be
+	 * automatically expanded as need.
 	 * 
-	 * @param startCol	the column index of the first cell inside the range.
-	 * @param startRow	the row index of the first cell inside the range.
-	 * @param endCol	the column index of the last cell inside the range.
-	 * @param endRow	the row index of the last cell inside the range.
+	 * @param startCol
+	 *            the column index of the first cell inside the range.
+	 * @param startRow
+	 *            the row index of the first cell inside the range.
+	 * @param endCol
+	 *            the column index of the last cell inside the range.
+	 * @param endRow
+	 *            the row index of the last cell inside the range.
 	 * @return the specified cell range.
-	 * @throws IndexOutOfBoundsException	if the cell position is out of table range
 	 */
-	public OdfTableCellRange getCellRangeByPosition(int startCol, int startRow, int endCol, int endRow) throws IndexOutOfBoundsException {
-
-		if (!isValidColumnIndexInTable(startCol) || !isValidRowIndexInTable(startRow)
-				|| !isValidColumnIndexInTable(endCol) || !isValidRowIndexInTable(endRow)) {
-			throw new IndexOutOfBoundsException();
-		}
+	public OdfTableCellRange getCellRangeByPosition(int startCol, int startRow,
+			int endCol, int endRow) {
+		// test whether cell position is out of table range and expand table
+		// automatically.
+		getCellByPosition(startCol, startRow);
+		getCellByPosition(endCol, endRow);
 		return new OdfTableCellRange(this, startCol, startRow, endCol, endRow);
 	}
 
 	/**
-	 * Return a range of cells within the specified range.
-	 * The range is specified by the cell address of the first cell 
-	 * and the cell address of the last cell.
+	 * Return a range of cells within the specified range. The range is
+	 * specified by the cell address of the first cell and the cell address of
+	 * the last cell. The table will be automatically expanded as need.
 	 * <p>
-	 * The cell address is constructed with a table name, a dot (.), 
-	 * an alphabetic value representing the column, and a numeric value representing the row. 
-	 * The table name can be omitted. For example: "$Sheet1.A1", "Sheet1.A1" and "A1" are all
-	 * valid cell address.
+	 * The cell address is constructed with a table name, a dot (.), an
+	 * alphabetic value representing the column, and a numeric value
+	 * representing the row. The table name can be omitted. For example:
+	 * "$Sheet1.A1", "Sheet1.A1" and "A1" are all valid cell address.
 	 * 
-	 * @param startAddress	the cell address of the first cell inside the range.
-	 * @param endAddress	the cell address of the last cell inside the range.
-	 * @return
-	 * 					the specified cell range.
+	 * @param startAddress
+	 *            the cell address of the first cell inside the range.
+	 * @param endAddress
+	 *            the cell address of the last cell inside the range.
+	 * @return the specified cell range.
 	 */
-	public OdfTableCellRange getCellRangeByPosition(String startAddress, String endAddress) {
-
-		return getCellRangeByPosition(getColIndexFromCellAddress(startAddress), getRowIndexFromCellAddress(startAddress),
-				getColIndexFromCellAddress(endAddress), getRowIndexFromCellAddress(endAddress));
+	public OdfTableCellRange getCellRangeByPosition(String startAddress,
+			String endAddress) {
+		return getCellRangeByPosition(getColIndexFromCellAddress(startAddress),
+				getRowIndexFromCellAddress(startAddress),
+				getColIndexFromCellAddress(endAddress),
+				getRowIndexFromCellAddress(endAddress));
 	}
 
 	/**
@@ -1597,68 +1670,33 @@ public class OdfTable {
 		return null;
 	}
 
-	/** 
-	 * Return a single cell that is positioned at the specified column and row.
+	/**
+	 * Return a single cell that is positioned at the specified column and row. 
+	 * The table will be automatically expanded as need.
 	 * 
-	 * @param colIndex	the column index of the cell.
-	 * @param rowIndex	the row index of the cell.
-	 * @return	the cell at the specified position
-	 * @throws IndexOutOfBoundsException if the column/row index is bigger than the column/row count
+	 * @param colIndex  the column index of the cell.
+	 * @param rowIndex  the row index of the cell.
+	 * @return the cell at the specified position
 	 */
-	public OdfTableCell getCellByPosition(int colIndex, int rowIndex) throws IndexOutOfBoundsException {
-		if (!isValidColumnIndexInTable(colIndex) || !isValidRowIndexInTable(rowIndex)) {
-			throw new IndexOutOfBoundsException();
+	public OdfTableCell getCellByPosition(int colIndex, int rowIndex) {
+		if (colIndex < 0 || rowIndex < 0) {
+			throw new IllegalArgumentException(
+					"colIndex and rowIndex should be nonnegative integer.");
 		}
-
-
+		// expand row as needed.
+		int lastRowIndex = getRowCount() - 1;
+		if (rowIndex > lastRowIndex) {
+			System.out.print("// expand row as needed.");
+			appendRows(rowIndex - lastRowIndex);
+		}
+		// expand column as needed.
+		int lastColumnIndex = getColumnCount() - 1;
+		if (colIndex > lastColumnIndex) {
+			System.out.print("// expand column  as needed.");
+			appendColumns(colIndex - lastColumnIndex);
+		}
 		OdfTableRow row = getRowByIndex(rowIndex);
 		return row.getCellByIndex(colIndex);
-	}
-
-	/**
-	 * Check if the given column is in this cell range.
-	 * 
-	 * @param colIndex	the given column index
-	 * @return true if the given column index is in the current cell range
-	 * 
-	 */
-	private boolean isValidColumnIndexInTable(int colIndex) {
-		if (colIndex < 0 || colIndex > (getColumnCount() - 1)) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	/**
-	 * Check if the given row is in this cell range.
-	 * @param rowIndex	the given row index
-	 * @return true if the given row index is in the current cell range
-	 * 
-	 */
-	private boolean isValidRowIndexInTable(int rowIndex) {
-		if (rowIndex < 0 || rowIndex > (getRowCount() - 1)) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	/**
-	 * Return a single cell that is positioned at the specified cell address.
-	 * <p>
-	 * The cell address is constructed with a table name, a dot (.), 
-	 * an alphabetic value representing the column, and a numeric value representing the row. 
-	 * The table name can be omitted. For example: "$Sheet1.A1", "Sheet1.A1" and "A1" are all
-	 * valid cell address.
-	 * 
-	 * @param address	the cell address of the cell.
-	 * @return the cell at the specified position.
-	 */
-	public OdfTableCell getCellByPosition(String address) {
-		//if the address also contain the table name,  but the table is not the maOwnerTable
-		//what should do? get the table then getcellByPosition?
-		return getCellByPosition(getColIndexFromCellAddress(address), getRowIndexFromCellAddress(address));
 	}
 
 	//return array of string contain 3 member
@@ -1697,6 +1735,23 @@ public class OdfTable {
 		}
 		return returnArray;
 
+	}
+
+	/**
+	 * Return a single cell that is positioned at the specified cell address.
+	 * The table can be automatically expanded as need.
+	 * <p>
+	 * The cell address is constructed with a table name, a dot (.), 
+	 * an alphabetic value representing the column, and a numeric value representing the row. 
+	 * The table name can be omitted. For example: "$Sheet1.A1", "Sheet1.A1" and "A1" are all
+	 * valid cell address.
+	 * 
+	 * @param address	the cell address of the cell.
+	 * @return the cell at the specified position.
+	 */
+	public OdfTableCell getCellByPosition(String address) {
+		return getCellByPosition(getColIndexFromCellAddress(address),
+				getRowIndexFromCellAddress(address));
 	}
 
 	//TODO: can put these two method to type.CellAddress

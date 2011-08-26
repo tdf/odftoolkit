@@ -303,12 +303,12 @@ public class OdfTableColumn {
 	}
 
 	/**
-	 * Get a cell with a specific index.
+	 * Get a cell with a specific index. The table will be automatically
+	 * expanded, when the given index is outside of the original table.
 	 * 
 	 * @param index
-	 * 					the cell index in this column
-	 * @return 
-	 * 					the cell object in the given cell index
+	 *            the cell index in this column
+	 * @return the cell object in the given cell index
 	 */
 	public OdfTableCell getCellByIndex(int index) {
 		return getTable().getCellByPosition(getColumnIndex(), index);
@@ -457,7 +457,6 @@ public class OdfTableColumn {
 			}
 		}
 		return result + mnRepeatedIndex;
-
 	}
 
 	/**
