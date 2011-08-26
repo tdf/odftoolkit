@@ -108,43 +108,72 @@ public class TableCellTest {
 	}
 
 	@Test
-	public void testGetSetHoriJustify() {
+	public void testGetSetHoriAlignment() {
 		int rowindex = 3, columnindex = 0;
 		OdfTable table = odsdoc.getTableByName("Sheet1");
 		OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
 
-		String align = fcell.getHorizontalJustify();
+		String align = fcell.getHorizontalAlignment();
 		Assert.assertEquals("center", align);
+		
+		fcell.setHorizontalAlignment(null);
+		String newAlign = fcell.getHorizontalAlignment();
+		Assert.assertEquals(null, newAlign);
 
-		fcell.setHorizontalJustify(null);
-		align = fcell.getHorizontalJustify();
-		// should be DEFAULT_HORIZONTAL_ALIGN "start"
-		Assert.assertEquals(align, "start");
-
-		fcell.setHorizontalJustify("start");
-		align = fcell.getHorizontalJustify();
+		fcell.setHorizontalAlignment("start");
+		align = fcell.getHorizontalAlignment();
 		Assert.assertEquals("start", align);
+
+		// "left" and "right" should be mapped as "start" and "end".
+		fcell.setHorizontalAlignment("left");
+		align = fcell.getHorizontalAlignment();
+		Assert.assertEquals("start", align);
+		fcell.setHorizontalAlignment("right");
+		align = fcell.getHorizontalAlignment();
+		Assert.assertEquals("end", align);
 		saveods();
+
+		OdfSpreadsheetDocument ods;
+		try {
+			ods = OdfSpreadsheetDocument.newSpreadsheetDocument();
+			OdfTable tbl = ods.getTableByName("Sheet1");
+			OdfTableCell cell = tbl.getCellByPosition(0, 0);
+			String horizonAlignment = cell.getHorizontalAlignment();
+			Assert.assertEquals(null, horizonAlignment);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test
-	public void testGetSetVertJustify() {
+	public void testGetSetVertAlignment() {
 		int rowindex = 3, columnindex = 0;
 		OdfTable table = odsdoc.getTableByName("Sheet1");
 		OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
 
-		String align = fcell.getVerticalJustify();
+		String align = fcell.getVerticalAlignment();
 		Assert.assertEquals("top", align);
 
-		// use default vetical align when set null
-		fcell.setVerticalJustify(null);
-		align = fcell.getVerticalJustify();
-		Assert.assertEquals("top", align);
+		fcell.setVerticalAlignment(null);
+		String newAlign = fcell.getVerticalAlignment();
+		Assert.assertEquals(null, newAlign);
 
-		fcell.setVerticalJustify("bottom");
-		align = fcell.getVerticalJustify();
+		fcell.setVerticalAlignment("bottom");
+		align = fcell.getVerticalAlignment();
 		Assert.assertEquals("bottom", align);
 		saveods();
+		OdfSpreadsheetDocument ods;
+		try {
+			ods = OdfSpreadsheetDocument.newSpreadsheetDocument();
+			OdfTable tbl = ods.getTableByName("Sheet1");
+			OdfTableCell cell = tbl.getCellByPosition(0, 0);
+			String verticalAlignment = cell.getVerticalAlignment();
+			Assert.assertEquals(null, verticalAlignment);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test
@@ -166,6 +195,18 @@ public class TableCellTest {
 		String valueType = fcell.getValueType();
 		Assert.assertEquals("date", valueType);
 		saveods();
+		
+		OdfSpreadsheetDocument ods;
+		try {
+			ods = OdfSpreadsheetDocument.newSpreadsheetDocument();
+			OdfTable tbl = ods.getTableByName("Sheet1");
+			OdfTableCell cell = tbl.getCellByPosition(0, 0);
+			valueType= cell.getValueType();
+			Assert.assertEquals(null, valueType);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test
@@ -829,7 +870,7 @@ public class TableCellTest {
 			bCell.setValueType("float");
 			String bformat = bCell.getFormatString();
 			Assert.assertEquals("#0.00", bformat);
-			Assert.assertEquals("end",bCell.getHorizontalJustify());
+			Assert.assertEquals("end", bCell.getHorizontalAlignment());
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();

@@ -45,6 +45,7 @@ import org.odftoolkit.odfdom.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.doc.text.OdfWhitespaceProcessor;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.attribute.fo.FoTextAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoWrapOptionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
@@ -81,46 +82,30 @@ public class OdfTableCell {
 	OdfTable mOwnerTable;
 	String msFormatString;
 	private static Logger mLog = Logger.getLogger(OdfTableCell.class.getName());
-	
 	/**
 	 * The default date format of table cell.
 	 */
 	private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
-	
 	/**
 	 * The default time format of table cell.
 	 */
 	private static final String DEFAULT_TIME_FORMAT = "'PT'HH'H'mm'M'ss'S'";
-	
 	/**
 	 * The default cell back color of table cell.
 	 */
-	private static final String DEFAULT_BACKGROUND_COLOR="#FFFFFF"; 
-	
-	/**
-	 * The default horizontal alignment of table cell.
-	 */
-	private static final String DEFAULT_HORIZONTAL_ALIGN="start"; 
-	
-	/**
-	 * The default vertical alignment of table cell.
-	 */
-	private static final String DEFAULT_VERTICAL_ALIGN="top"; 
-	
+	private static final String DEFAULT_BACKGROUND_COLOR = "#FFFFFF";
 	/**
 	 * The default column spanned number.
 	 */
-	private static final int DEFAULT_COLUMN_SPANNED_NUMBER=1;
-	
+	private static final int DEFAULT_COLUMN_SPANNED_NUMBER = 1;
 	/**
 	 * The default row spanned number.
 	 */
-	private static final int DEFAULT_ROW_SPANNED_NUMBER=1;
-	
+	private static final int DEFAULT_ROW_SPANNED_NUMBER = 1;
 	/**
 	 * The default columns repeated number.
 	 */
-	private static final int DEFAULT_COLUMNS_REPEATED_NUMBER=1;
+	private static final int DEFAULT_COLUMNS_REPEATED_NUMBER = 1;
 	TableTableCellElementBase mCellElement;
 
 	OdfTableCell(TableTableCellElementBase odfElement, int repeatedColIndex, int repeatedRowIndex) {
@@ -173,10 +158,11 @@ public class OdfTableCell {
 	 * Return the horizontal alignment setting of this cell.
 	 * <p>
 	 * The returned value can be "center", "end", "justify", "left", "right", or "start".
-	 * Note:"left" and "right" are deprecated.
-	 * @return the horizontal alignment setting
+	 * If no horizontal alignment is set, null will be returned.
+	 * 
+	 * @return the horizontal alignment setting. 
 	 */
-	public String getHorizontalJustify() {
+	public String getHorizontalAlignment() {
 		OdfStyleBase styleElement = getCellStyleElement();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties,
@@ -190,19 +176,28 @@ public class OdfTableCell {
 	 * Set the horizontal alignment setting of this cell.
 	 * <p>
 	 * The parameter can be "center", "end", "justify", "left", "right", or "start".
-	 * Note:"left" and "right" are deprecated.
-	 * @param horiJustify	the horizontal alignment setting.
-	 * If horiJustify is null, default horizontal align "center" will be set.
+	 * Actually, "left" will be interpreted as "start", while "right" will be interpreted as "end".
+	 * If argument is null, the explicit horizontal alignment setting is removed.
+	 * @param horizontalAlignment	the horizontal alignment setting.
+	 *        If argument is null, this method will do nothing.
 	 */
-	public void setHorizontalJustify(String horiJustify) {
-		if(horiJustify == null)
-			horiJustify = DEFAULT_HORIZONTAL_ALIGN;
+	public void setHorizontalAlignment(String horizontalAlignment) {
+		if (FoTextAlignAttribute.Value.LEFT.toString().equalsIgnoreCase(horizontalAlignment)) {
+			horizontalAlignment = FoTextAlignAttribute.Value.START.toString();
+		}
+		if (FoTextAlignAttribute.Value.RIGHT.toString().equalsIgnoreCase(horizontalAlignment)) {
+			horizontalAlignment = FoTextAlignAttribute.Value.END.toString();
+		}
 		splitRepeatedCells();
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
 		if (styleElement != null) {
-			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties,
-					OdfName.newName(OdfNamespaceNames.FO, "text-align"));
-			styleElement.setProperty(property, horiJustify);
+			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(
+					OdfNamespaceNames.FO, "text-align"));
+			if (horizontalAlignment != null) {
+				styleElement.setProperty(property, horizontalAlignment);
+			} else {
+				styleElement.removeProperty(property);
+			}
 		}
 	}
 
@@ -210,10 +205,10 @@ public class OdfTableCell {
 	 * Return the vertical alignment setting of this cell.
 	 * <p>
 	 * The returned value can be "auto", "automatic", "baseline", "bottom", "middle", or "top".
-	 * @return the vertical alignment setting of this cell
+	 * @return the vertical alignment setting of this cell. 
 	 * 
 	 */
-	public String getVerticalJustify() {
+	public String getVerticalAlignment() {
 		OdfStyleBase styleElement = getCellStyleElement();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
@@ -227,18 +222,21 @@ public class OdfTableCell {
 	 * Set the vertical alignment setting of this cell.
 	 * <p>
 	 * The parameter can be "auto", "automatic", "baseline", "bottom", "middle", or "top".
-	 * @param vertJustify	the vertical alignment setting.
-	 * If vertJustify is null, default vertical align "top" will be set.
+	 * If argument is null, the explicit vertical alignment setting is removed.
+	 * 
+	 * @param verticalAlignment	the vertical alignment setting.
 	 */
-	public void setVerticalJustify(String vertJustify) {
-		if(vertJustify == null)
-			vertJustify = DEFAULT_VERTICAL_ALIGN;
+	public void setVerticalAlignment(String verticalAlignment) {
 		splitRepeatedCells();
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
 		if (styleElement != null) {
-			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
-					OdfName.newName(OdfNamespaceNames.STYLE, "vertical-align"));
-			styleElement.setProperty(property, vertJustify);
+			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.newName(
+					OdfNamespaceNames.STYLE, "vertical-align"));
+			if (verticalAlignment != null) {
+				styleElement.setProperty(property, verticalAlignment);
+			} else {
+				styleElement.removeProperty(property);
+			}
 		}
 	}
 
@@ -500,10 +498,10 @@ public class OdfTableCell {
 	 * If input currency is null, an IllegalArgumentException will be thrown.
 	 */
 	public void setCurrencyCode(String currency) {
-		if ( currency == null ){
+		if (currency == null) {
 			throw new IllegalArgumentException(
 					"Currency code of cell should not be null.");
-		} 
+		}
 		splitRepeatedCells();
 		if (mCellElement.getOfficeValueTypeAttribute().equals(OfficeValueTypeAttribute.Value.CURRENCY.toString())) {
 			mCellElement.setOfficeCurrencyAttribute(currency);
@@ -518,7 +516,7 @@ public class OdfTableCell {
 
 	/**
 	 * Set the value type of this cell.
-	 * The parameter can be "boolean", "currency", "date", "float", "percentage", "string", "time", and "void".
+	 * The parameter can be "boolean", "currency", "date", "float", "percentage", "string" or "time".
 	 * <p>
 	 * If the parameter <code>type</code> is not a valid cell type, an IllegalArgumentException will be thrown.
 	 * 
@@ -526,8 +524,9 @@ public class OdfTableCell {
 	 * If input type is null, an IllegalArgumentException will be thrown.
 	 */
 	public void setValueType(String type) {
-		if( type == null)
+		if (type == null) {
 			throw new IllegalArgumentException("type shouldn't be null.");
+		}
 		String sType = type.toLowerCase();
 		OfficeValueTypeAttribute.Value value = OfficeValueTypeAttribute.Value.enumValueOf(sType);
 		if (value == null) {
@@ -539,7 +538,9 @@ public class OdfTableCell {
 
 	/**
 	 * Get the value type of this cell.
-	 * The returned value can be "boolean", "currency", "date", "float", "percentage", "string", "time", and "void".
+	 * The returned value can be "boolean", "currency", "date", "float", "percentage", "string" or "time".
+	 * If no value type is set, null will be returned.
+	 * 
 	 * @return the type of the cell
 	 */
 	public String getValueType() {
@@ -625,7 +626,7 @@ public class OdfTableCell {
 	 * If input currency is null, an IllegalArgumentException will be thrown.
 	 */
 	public void setCurrencyValue(double value, String currency) {
-		if ( currency == null ) {
+		if (currency == null) {
 			throw new IllegalArgumentException("currency shouldn't be null.");
 		}
 		splitRepeatedCells();
@@ -691,8 +692,7 @@ public class OdfTableCell {
 		removeContent();
 
 		OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
-		OdfTextParagraph para = new OdfTextParagraph((OdfFileDom) mCellElement
-				.getOwnerDocument());
+		OdfTextParagraph para = new OdfTextParagraph((OdfFileDom) mCellElement.getOwnerDocument());
 		textProcessor.append(para, content);
 
 		mCellElement.appendChild(para);
@@ -715,8 +715,9 @@ public class OdfTableCell {
 
 		OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
 		OdfTextParagraph para = new OdfTextParagraph((OdfFileDom) mCellElement.getOwnerDocument());
-		if((stylename != null) && (stylename.length() > 0) )
+		if ((stylename != null) && (stylename.length() > 0)) {
 			para.setStyleName(stylename);
+		}
 		textProcessor.append(para, content);
 
 		mCellElement.appendChild(para);
@@ -917,7 +918,7 @@ public class OdfTableCell {
 	 *            IllegalArgumentException exception will be thrown.
 	 */
 	public void setTimeValue(Calendar time) {
-		if(time==null){
+		if (time == null) {
 			throw new IllegalArgumentException("time shouldn't be null.");
 		}
 		splitRepeatedCells();
@@ -988,7 +989,7 @@ public class OdfTableCell {
 		}
 		return color;
 	}
-	
+
 	/**
 	 * Set the background color of this cell.
 	 * 
@@ -997,8 +998,8 @@ public class OdfTableCell {
 	 *            If cellBackgroundColor is null, default background color <code>Color.WHITE</code> will be set.
 	 */
 	public void setCellBackgroundColor(Color cellBackgroundColor) {
-		if(cellBackgroundColor==null){
-			cellBackgroundColor=Color.WHITE;
+		if (cellBackgroundColor == null) {
+			cellBackgroundColor = Color.WHITE;
 		}
 		splitRepeatedCells();
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
@@ -1008,7 +1009,7 @@ public class OdfTableCell {
 			styleElement.setProperty(bkColorProperty, cellBackgroundColor.toString());
 		}
 	}
-	
+
 	/**
 	 * Set the background color of this cell using string.
 	 * 
@@ -1017,9 +1018,9 @@ public class OdfTableCell {
 	 *            If cellBackgroundColor is null, default background color #FFFFFF will be set.
 	 */
 	public void setCellBackgroundColor(String cellBackgroundColor) {
-		if(!Color.isValid(cellBackgroundColor)){
+		if (!Color.isValid(cellBackgroundColor)) {
 			mLog.warning("Parameter is invalidate for datatype Color, default background color #FFFFFF will be set.");
-			cellBackgroundColor=DEFAULT_BACKGROUND_COLOR;
+			cellBackgroundColor = DEFAULT_BACKGROUND_COLOR;
 		}
 		splitRepeatedCells();
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
@@ -1104,7 +1105,7 @@ public class OdfTableCell {
 	 */
 	public void setColumnsRepeatedNumber(int repeatedNum) {
 		if (repeatedNum < 1) {
-			repeatedNum=DEFAULT_COLUMNS_REPEATED_NUMBER;
+			repeatedNum = DEFAULT_COLUMNS_REPEATED_NUMBER;
 		}
 		mCellElement.setTableNumberColumnsRepeatedAttribute(new Integer(repeatedNum));
 	}
@@ -1167,7 +1168,7 @@ public class OdfTableCell {
 	public void setFormula(String formula) {
 		if (formula == null) {
 			throw new IllegalArgumentException("formula shouldn't be null.");
-		} 
+		}
 		splitRepeatedCells();
 		mCellElement.setTableFormulaAttribute(formula);
 	}
@@ -1207,13 +1208,13 @@ public class OdfTableCell {
 	 * If input currencySymbol or format is null, an IllegalArgumentException will be thrown.
 	 */
 	public void setCurrencyFormat(String currencySymbol, String format) {
-		if ( currencySymbol == null ){
+		if (currencySymbol == null) {
 			throw new IllegalArgumentException(
 					"currencySymbol shouldn't be null.");
-		} 
-		if ( format == null ){
+		}
+		if (format == null) {
 			throw new IllegalArgumentException("format shouldn't be null.");
-		} 
+		}
 		splitRepeatedCells();
 		String type = mCellElement.getOfficeValueTypeAttribute();
 		OfficeValueTypeAttribute.Value typeValue = null;
@@ -1314,9 +1315,8 @@ public class OdfTableCell {
 			String timeStr = mCellElement.getOfficeTimeValueAttribute();
 			if (timeStr != null) {
 				Calendar time = getTimeValue();
-				setDisplayText((new SimpleDateFormat(formatStr)).format(time
-						.getTime()));
-			} 
+				setDisplayText((new SimpleDateFormat(formatStr)).format(time.getTime()));
+			}
 		} else if (typeValue == OfficeValueTypeAttribute.Value.PERCENTAGE) {
 			OdfNumberPercentageStyle dateStyle = new OdfNumberPercentageStyle(
 					(OdfFileDom) mCellElement.getOwnerDocument(),
@@ -1360,7 +1360,7 @@ public class OdfTableCell {
 			styleElement = ((OdfFileDom) mCellElement.getOwnerDocument()).getOdfDocument().getDocumentStyles().getStyle(styleName,
 					OdfStyleFamily.TableCell);
 		}
-		
+
 		if (styleElement == null) {
 			styleElement = mCellElement.getDocumentStyle();
 		}
@@ -1413,11 +1413,11 @@ public class OdfTableCell {
 			newStyle.setProperties(styleElement.getStylePropertiesDeep());
 			//copy attributes
 			NamedNodeMap attributes = styleElement.getAttributes();
-			for(int i=0;i<attributes.getLength();i++)
-			{
+			for (int i = 0; i < attributes.getLength(); i++) {
 				Node attr = attributes.item(i);
-				if (!attr.getNodeName().equals("style:name"))
+				if (!attr.getNodeName().equals("style:name")) {
 					newStyle.setAttributeNS(attr.getNamespaceURI(), attr.getNodeName(), attr.getNodeValue());
+				}
 			}//end of copying attributes
 			//mCellElement.getAutomaticStyles().appendChild(newStyle);
 			String newname = newStyle.getStyleNameAttribute();
