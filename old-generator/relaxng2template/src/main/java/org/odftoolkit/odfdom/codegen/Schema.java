@@ -271,7 +271,7 @@ public class Schema
                     else
                         styleFamily = "";
                     
-                    element = new Element( RngNode.getLocalName( tmpName ), elementName, styleFamily, element );
+                    element = new Element( RngNode.getLocalName( tmpName ), elementName, styleFamily, null );
                     Elements.put( elementName, element );
                     
                     Iterator< AttributeEntry > attributes = rngElement.getAttributes();
