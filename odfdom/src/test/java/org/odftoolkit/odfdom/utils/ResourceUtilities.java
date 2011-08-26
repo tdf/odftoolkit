@@ -45,7 +45,7 @@ public final class ResourceUtilities {
 		if(uri == null) {
 			throw new FileNotFoundException("Could not find the file '" + relativeFilePath + "'!");
 		}
-		return uri.getPath();
+		return uri.getPath().replace("%20", " ");
 	}
 
 	/** The relative path of the test file will be resolved and the absolute will be returned

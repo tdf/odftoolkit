@@ -507,7 +507,7 @@ abstract public class OdfElement extends ElementNSImpl {
 	/**
 	 * Accept an visitor instance to allow the visitor to do some operations.
 	 * Refer to visitor design pattern to get a better understanding.
-	 * @param obj	an instance of DefaultElementVisitor
+	 * @param visitor	an instance of DefaultElementVisitor
 	 */
 	public void accept(ElementVisitor visitor) {
 		visitor.visit(this);

@@ -25,24 +25,25 @@ import java.io.File;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**
  * Test class for template aspects of chart.
  */
 public class ChartTemplateTest {
 
-	private static final String TEST_CHART_TEMPLATE = "/chartTestTemplate.otc";
+	private static final String TEST_CHART_TEMPLATE = "chartTestTemplate.otc";
 
 	@Test
 	public void testLoadingAChartTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_CHART_TEMPLATE));
+		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_CHART_TEMPLATE));
 		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getMediaTypeString(),
 				document.getMediaTypeString());
 	}
 
 	@Test
 	public void testSavingAChartTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_CHART_TEMPLATE));
+		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_CHART_TEMPLATE));
 		File destination = File.createTempFile("odfdom-test", ".otc");
 		document.save(destination);
 

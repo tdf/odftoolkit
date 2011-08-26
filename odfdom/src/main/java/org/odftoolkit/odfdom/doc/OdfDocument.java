@@ -46,6 +46,7 @@ import javax.xml.xpath.XPathConstants;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfSchemaConstraint;
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
@@ -65,10 +66,12 @@ import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
-import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
+import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.odftoolkit.odfdom.type.Duration;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
 
 /** This abstract class is representing one of the possible ODF documents */
 public abstract class OdfDocument extends OdfSchemaDocument {
@@ -80,7 +83,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	private long documentOpeningTime;
 
 	// Using static factory instead of constructor
-	protected OdfDocument(OdfPackage pkg, String internalPath, OdfMediaType mediaType) {
+	protected OdfDocument(OdfPackage pkg, String internalPath, OdfMediaType mediaType) throws SAXException {
 		super(pkg, internalPath, mediaType.getMediaTypeString());
 		mMediaType = mediaType;
 		//set document opening time.
@@ -94,9 +97,9 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 		CHART("application/vnd.oasis.opendocument.chart", "odc"),
 		CHART_TEMPLATE("application/vnd.oasis.opendocument.chart-template", "otc"),
-		//  FORMULA("application/vnd.oasis.opendocument.formula", "odf"),
-		//  FORMULA_TEMPLATE("application/vnd.oasis.opendocument.formula-template", "otf"),
-		//	DATABASE_FRONT_END("application/vnd.oasis.opendocument.base", "odb"),
+		FORMULA("application/vnd.oasis.opendocument.formula", "odf"),
+		FORMULA_TEMPLATE("application/vnd.oasis.opendocument.formula-template", "otf"),
+		DATABASE_FRONT_END("application/vnd.oasis.opendocument.base", "odb"),
 		GRAPHICS("application/vnd.oasis.opendocument.graphics", "odg"),
 		GRAPHICS_TEMPLATE("application/vnd.oasis.opendocument.graphics-template", "otg"),
 		IMAGE("application/vnd.oasis.opendocument.image", "odi"),
@@ -146,7 +149,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 					odfMediaType = OdfMediaType.valueOf(mediaTypeShort);
 
 				} catch (IllegalArgumentException e) {
-					throw new IllegalArgumentException("Given mediaType '" + mediaType + "' is either not yet supported or not an ODF mediatype!");
+					throw new IllegalArgumentException("Given mediaType '" + mediaType + "' is not an ODF mediatype!");
 				}
 			}
 			return odfMediaType;
@@ -154,7 +157,10 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Loads an OpenDocument from the given resource. NOTE: Initial meta data will be added in this method.
+	 * Loads the ODF root document from the given Resource.
+	 * 
+	 * NOTE: Initial meta data (like the document creator) will be added in this method.
+	 * 
 	 * @param res a resource containing a package with a root document
 	 * @param odfMediaType the media type of the root document
 	 * @return the OpenDocument document
@@ -176,7 +182,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Loads an OdfDocument from the provided path.
+	 * Loads the ODF root document from the ODF package provided by its path.
 	 *
 	 * <p>OdfDocument relies on the file being available for read access over
 	 * the whole lifecycle of OdfDocument.</p>
@@ -187,16 +193,11 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	public static OdfDocument loadDocument(String documentPath) throws Exception {
-		OdfPackage pkg = OdfPackage.loadPackage(documentPath);
-		OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(pkg.getMediaTypeString());
-		if (odfMediaType == null) {
-			throw new IllegalArgumentException("Document contains incorrect ODF Mediatype '" + pkg.getMediaTypeString() + "'");
-		}
-		return newDocument(pkg, ROOT_DOCUMENT_PATH, odfMediaType);
+		return loadDocument(OdfPackage.loadPackage(documentPath));
 	}
 
 	/**
-	 * Creates an OdfDocument from the OpenDocument provided by a resource Stream.
+	 * Loads the ODF root document from the ODF package provided by a Stream.
 	 *
 	 * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
 	 * read access needed by OdfDocument, the InputStream is cached. This usually
@@ -213,10 +214,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Creates an OdfDocument from the OpenDocument provided by a File.
-	 *
-	 * <p>OdfDocument relies on the file being available for read access over
-	 * the whole lifecycle of OdfDocument.</p>
+	 * Loads the ODF root document from the ODF package provided as a File.
 	 *
 	 * @param file - a file representing the ODF document.
 	 * @return the document created from the given File
@@ -227,7 +225,8 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Creates an OdfDocument from the OpenDocument provided by an ODF package.
+	 * Loads the ODF root document from the ODF package.
+	 *
 	 * @param odfPackage - the ODF package containing the ODF document.
 	 * @return the root document of the given OdfPackage
 	 * @throws java.lang.Exception - if the ODF document could not be created.
@@ -237,17 +236,52 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	}
 
 	/**
+	 * Loads the root ODF document from the given packageStream.
+	 *
+	 * @param packageStream - an inputStream representing the ODF package
+	 * @param baseURI usually the URI is the URL defining the location of the package. Used by the ErrorHandler to define the source of validation exception.
+	 * @param errorHandler - SAX ErrorHandler used for ODF validation
+	 * @throws java.lang.Exception - if the package could not be created
+	 * @see #getErrorHandler
+	 */
+	public static OdfDocument loadDocument(InputStream packageStream, String baseURI, ErrorHandler errorHandler) throws Exception {
+		return loadDocument(OdfPackage.loadPackage(packageStream, baseURI, errorHandler), ROOT_DOCUMENT_PATH);
+	}
+
+	/**
+	 * Loads the root ODF document from the given pkgFile.
+	 *
+	 * @param pkgFile - the ODF Package. A baseURL is being generated based on its location.
+	 * @param errorHandler - SAX ErrorHandler used for ODF validation.
+	 * @throws java.lang.Exception - if the package could not be created
+	 * @see #getErrorHandler
+	 */
+	public static OdfDocument loadDocument(File pkgFile, ErrorHandler errorHandler) throws Exception {
+		return loadDocument(OdfPackage.loadPackage(pkgFile, errorHandler), ROOT_DOCUMENT_PATH);
+	}
+
+	/**
 	 * Creates an OdfDocument from the OpenDocument provided by an ODF package.
 	 * @param odfPackage - the ODF package containing the ODF document.
-	 * @param internalPath - the path to the ODF document relative to the package root.
+	 * @param internalPath - the path to the ODF document relative to the package root, or an empty String for the root document.
 	 * @return the root document of the given OdfPackage
 	 * @throws java.lang.Exception - if the ODF document could not be created.
 	 */
 	public static OdfDocument loadDocument(OdfPackage odfPackage, String internalPath) throws Exception {
 		String documentMediaType = odfPackage.getMediaTypeString(internalPath);
-		OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(documentMediaType);
+		OdfMediaType odfMediaType = null;
+		try {
+			odfMediaType = OdfMediaType.getOdfMediaType(documentMediaType);
+		} catch (IllegalArgumentException e) {
+			// the returned NULL will be taking care of afterwards
+		}
 		if (odfMediaType == null) {
-			throw new IllegalArgumentException("Document contains incorrect ODF Mediatype '" + odfPackage.getMediaTypeString() + "'");
+			ErrorHandler errorHandler = odfPackage.getErrorHandler();
+			OdfValidationException ve = new OdfValidationException(OdfSchemaConstraint.DOCUMENT_WITHOUT_ODF_MIMETYPE, internalPath, documentMediaType);
+			if (errorHandler != null) {				
+				errorHandler.fatalError(ve);
+			}
+			throw ve;
 		}
 		return newDocument(odfPackage, internalPath, odfMediaType);
 	}
@@ -291,7 +325,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 			default:
 				documentTemplate = null;
-				break;
+				throw new IllegalArgumentException("Given mediaType '" + odfMediaType.mMediaType + "' is not yet supported!");				
 		}
 		return loadTemplate(documentTemplate, odfMediaType);
 	}
@@ -303,7 +337,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * @return The ODF document, which mediatype dependends on the parameter or
 	 *	NULL if media type were not supported.
 	 */
-	private static OdfDocument newDocument(OdfPackage pkg, String internalPath, OdfMediaType odfMediaType) {
+	private static OdfDocument newDocument(OdfPackage pkg, String internalPath, OdfMediaType odfMediaType) throws SAXException {
 		OdfDocument newDoc = null;
 		switch (odfMediaType) {
 			case TEXT:
@@ -364,7 +398,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 			default:
 				newDoc = null;
-				break;
+				throw new IllegalArgumentException("Given mediaType '" + odfMediaType.mMediaType + "' is not yet supported!");
 		}
 		// returning null if MediaType is not supported
 		return newDoc;
@@ -383,7 +417,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 	/**
 	 * Method returns all embedded OdfPackageDocuments, which match a valid OdfMediaType,
-	 * of the current OdfPackageDocument.
+	 * of the current OdfPackageDocument. Note: The root document is not part of the returned collection.
 	 * @return a map with all embedded documents and their paths of the current OdfPackageDocument
 	 */
 	public Map<String, OdfDocument> loadSubDocuments() {
@@ -394,13 +428,13 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * Method returns all embedded OdfPackageDocuments of sthe current OdfPackageDocument matching the
 	 * according MediaType. This is done by matching the subfolder entries of the
 	 * manifest file with the given OdfMediaType.
-	 * @param mediaType media type which is used as a filter
+	 * @param desiredMediaType media type of the documents to be returned (used as a filter).
 	 * @return embedded documents of the current OdfPackageDocument matching the given media type
 	 */
-	public Map<String, OdfDocument> loadSubDocuments(OdfMediaType wantedMediaType) {
+	public Map<String, OdfDocument> loadSubDocuments(OdfMediaType desiredMediaType) {
 		String wantedMediaString = null;
-		if (wantedMediaType != null) {
-			wantedMediaString = wantedMediaType.getMediaTypeString();
+		if (desiredMediaType != null) {
+			wantedMediaString = desiredMediaType.getMediaTypeString();
 		}
 		Map<String, OdfDocument> embeddedObjectsMap = new HashMap<String, OdfDocument>();
 		// check manifest for current embedded OdfPackageDocuments
@@ -867,7 +901,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * Similar to OpenOffice.org, ODFDOM assumes that every Locale is related
 	 * to one of the three Unicodes Groups, either CJK, CTL or Western.
 	 * @param locale the UnicodeGroup is requested for
-	 * @returns the related UnicodeGroup
+	 * @return the related UnicodeGroup
 	 */
 	public static UnicodeGroup getUnicodeGroup(Locale locale) {
 		String language = locale.getLanguage();

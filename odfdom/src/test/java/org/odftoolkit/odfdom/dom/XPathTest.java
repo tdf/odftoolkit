@@ -74,7 +74,7 @@ public class XPathTest {
 	@Test
 	public void testXPathwithAlienNodes() throws Exception {
 		try {
-			OdfPresentationDocument odpWithSlides = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(SOURCE_FILE_1));
+			OdfPresentationDocument odpWithSlides = OdfPresentationDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE_FILE_1));
 			OdfFileDom contentDom = odpWithSlides.getContentDom();
 
 			XPath xpath = contentDom.getXPath();
@@ -143,8 +143,8 @@ public class XPathTest {
 	@Test
 	public void testCopyForeignSlide() {
 		try {
-			OdfPresentationDocument targetodp = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(SOURCE_FILE_1));
-			OdfPresentationDocument sourceodp = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(SOURCE_FILE_2));
+			OdfPresentationDocument targetodp = OdfPresentationDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE_FILE_1));
+			OdfPresentationDocument sourceodp = OdfPresentationDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE_FILE_2));
 
 			int slidecount = sourceodp.getSlideCount();
 			for (int i = 0; i < slidecount; i++) {
@@ -165,7 +165,7 @@ public class XPathTest {
 	@Test
 	public void testXPathIsMissingXLinkButItWillPassBecauseItTheSecondTestInThisUnitTest() throws Exception {
 		try {
-			OdfPresentationDocument odpWithSlides = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(SOURCE_FILE_1));
+			OdfPresentationDocument odpWithSlides = OdfPresentationDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE_FILE_1));
 			OdfFileDom contentDom = odpWithSlides.getContentDom();
 			XPath xpath = contentDom.getXPath();
 

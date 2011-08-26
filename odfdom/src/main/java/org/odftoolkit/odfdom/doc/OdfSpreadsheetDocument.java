@@ -28,6 +28,7 @@ import java.io.InputStream;
 import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.xml.sax.SAXException;
 
 /**
  * This class represents an empty ODF spreadsheet document.
@@ -98,7 +99,7 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 
 	/** To avoid data duplication a new document is only created, if not already opened.
 	 * A document is cached by this constructor using the internalpath as key. */
-	protected OdfSpreadsheetDocument(OdfPackage pkg, String internalPath, OdfSpreadsheetDocument.OdfMediaType odfMediaType) {
+	protected OdfSpreadsheetDocument(OdfPackage pkg, String internalPath, OdfSpreadsheetDocument.OdfMediaType odfMediaType) throws SAXException {
 		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
 

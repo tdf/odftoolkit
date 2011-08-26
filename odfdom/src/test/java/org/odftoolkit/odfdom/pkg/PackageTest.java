@@ -27,6 +27,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
@@ -49,8 +51,11 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
 import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.type.AnyURI;
+import org.odftoolkit.odfdom.utils.ErrorHandlerStub;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 public class PackageTest {
 
@@ -96,7 +101,6 @@ public class PackageTest {
 			}
 			entry = zinput.getNextEntry();
 		}
-
 	}
 
 	@Test
@@ -105,17 +109,30 @@ public class PackageTest {
 
 			// LOAD PACKAGE FORMULA
 			LOG.info("Loading an unsupported ODF Formula document as an ODF Package!");
-			OdfPackage formulaPackage = OdfPackage.loadPackage(ResourceUtilities.getTestResourceAsStream(ODF_FORMULAR_TEST_FILE));
+			OdfPackage formulaPackage = OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath(ODF_FORMULAR_TEST_FILE));
 			Assert.assertNotNull(formulaPackage);
 
 			// LOAD PACKAGE IMAGE
 			LOG.info("Loading an unsupported image file as an ODF Package!");
 			try {
 				// Exception is expected!
-				OdfPackage.loadPackage(ResourceUtilities.getTestResourceAsStream(IMAGE_TEST_FILE));
+				OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE));
 				Assert.fail();
-			} catch (IllegalArgumentException e) {
-				if (!e.getMessage().contains(" unzip the")) {
+			} catch (Exception e) {
+				if (!e.getMessage().contains(OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage().replace("%s", ""))) {
+					LOG.log(Level.SEVERE, null, e);
+					Assert.fail();
+				}
+			}
+
+			// LOAD PACKAGE IMAGE (WITH ERROR HANDLER)
+			LOG.info("Loading an unsupported image file as an ODF Package (with error handler)!");
+			try {
+				// Exception is expected by error handler!
+				OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE)), new DefaultHandler());
+				Assert.fail();
+			} catch (SAXException e) {
+				if (!e.getMessage().contains(OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage().replace("%s", ""))) {
 					LOG.log(Level.SEVERE, null, e);
 					Assert.fail();
 				}
@@ -195,6 +212,7 @@ public class PackageTest {
 		} catch (Exception e) {
 			Logger.getLogger(PackageTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
+			e.getLocalizedMessage();
 		}
 		return fileBytes;
 	}
@@ -221,5 +239,93 @@ public class PackageTest {
 			Assert.fail();
 		}
 
+	}
+
+	@Test
+	public void validationTestDefault() {
+		try {
+			// default no error handler: warnings and errors are not reported
+			OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath("testInvalidPkg1.odt"));
+			OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath("testInvalidPkg2.odt"));
+		} catch (Exception ex) {
+			LOG.log(Level.SEVERE, null, ex);
+			Assert.fail();
+		}
+
+		// default no error handler: fatal errors are reported
+		try {
+			OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath("testA.jpg"));
+			Assert.fail();
+		} catch (Exception e) {
+			if (!e.getMessage().contains(OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage().replace("%s", ""))) {
+				Assert.fail();
+			}
+		}
+	}
+
+	@Test
+	public void validationTest() {
+
+		// TESTDOC1: Expected ODF Warnings
+		Map expectedWarning1 = new HashMap();
+		expectedWarning1.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10);
+
+		// TESTDOC1: Expected ODF Errors
+		Map expectedErrors1 = new HashMap();
+		expectedErrors1.put(OdfPackageConstraint.MIMETYPE_NOT_FIRST_IN_PACKAGE, 1);
+		expectedErrors1.put(OdfPackageConstraint.MIMETYPE_IS_COMPRESSED, 1);
+		expectedErrors1.put(OdfPackageConstraint.MIMETYPE_HAS_EXTRA_FIELD, 1);
+		expectedErrors1.put(OdfPackageConstraint.MIMETYPE_DIFFERS_FROM_PACKAGE, 1);
+		expectedErrors1.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 1);
+		ErrorHandlerStub handler1 = new ErrorHandlerStub(expectedWarning1, expectedErrors1, null);
+
+
+		// TESTDOC2: Expected ODF Warnings
+		Map expectedWarning2 = new HashMap();
+		expectedWarning2.put(OdfPackageConstraint.MIMETYPE_NOT_IN_PACKAGE, 1);
+		expectedWarning2.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10);
+
+		// TESTDOC2: Expected ODF Errors
+		Map expectedErrors2 = new HashMap();
+		expectedErrors2.put(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, 1);
+		expectedErrors2.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 3);
+		ErrorHandlerStub handler2 = new ErrorHandlerStub(expectedWarning2, expectedErrors2, null);
+
+
+		// TESTDOC3: Expected ODF Errors
+		Map expectedErrors3 = new HashMap();
+		expectedErrors3.put(OdfPackageConstraint.MANIFEST_NOT_IN_PACKAGE, 1);
+		ErrorHandlerStub handler3 = new ErrorHandlerStub(null, expectedErrors3, null);
+
+
+		// TESTDOC4: Expected ODF FatalErrors
+		Map<ValidationConstraint, Integer> expectedFatalErrors4 = new HashMap<ValidationConstraint, Integer>();
+		// loading a graphic instead an ODF document
+		expectedFatalErrors4.put(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, 1);
+		ErrorHandlerStub handler4 = new ErrorHandlerStub(null, null, expectedFatalErrors4);
+
+		try {
+			OdfPackage pkg1 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath("testInvalidPkg1.odt")), handler1);
+			Assert.assertNotNull(pkg1);
+			OdfPackage pkg2 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath("testInvalidPkg2.odt")), handler2);
+			Assert.assertNotNull(pkg2);
+			OdfPackage pkg3 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath("testInvalidPkg3.odt")), handler3);
+			Assert.assertNotNull(pkg3);
+			try {
+				OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath("testA.jpg")), handler4);
+				Assert.fail();
+			} catch (Exception e) {
+				if (!e.getMessage().contains(OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage().replace("%s", ""))) {
+					Assert.fail();
+				}
+			}
+		} catch (Exception ex) {
+			LOG.log(Level.SEVERE, null, ex);
+			Assert.fail(ex.toString());
+		}
+		handler1.validate();
+		handler2.validate();
+		handler3.validate();
+		handler4.validate();
 	}
 }

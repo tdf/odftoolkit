@@ -101,7 +101,7 @@ public class OdfFileEntry {
 		}
     }
 
-	/** @returns the mediatype of the <manifest:file-entry>.
+	/** @return the mediatype of the &lt;manifest:file-entry&gt;.
 	 *  In case of not set NULL is returned */
     public String getMediaTypeString() {
         return mMediaType;
@@ -217,7 +217,7 @@ public class OdfFileEntry {
         mEncryptionData = encryptionData;
     }
 
-	/** @returns null if no encryption data had been set */
+	/** @return null if no encryption data had been set */
     public EncryptionData getEncryptionData() {
         return mEncryptionData;
     }

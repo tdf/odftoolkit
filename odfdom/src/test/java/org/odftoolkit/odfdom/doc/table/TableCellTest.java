@@ -60,9 +60,9 @@ public class TableCellTest {
 	@Before
 	public void setUp() {
 		try {
-			odsdoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(SAMPLE_SPREADSHEET
+			odsdoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath(SAMPLE_SPREADSHEET
 					+ ".ods"));
-			odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(SAMPLE_TEXT + ".odt"));
+			odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(SAMPLE_TEXT + ".odt"));
 
 		} catch (Exception e) {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -380,7 +380,7 @@ public class TableCellTest {
 
 	private void loadOutputSpreadsheet() {
 		try {
-			odsdoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(SAMPLE_SPREADSHEET
+			odsdoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath(SAMPLE_SPREADSHEET
 					+ "Output.ods"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -736,7 +736,7 @@ public class TableCellTest {
 	@Test
 	public void testGetStyleName() {
 		try {
-			odsstyle = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(SAMPLE_STYLE_SPREADSHEET
+			odsstyle = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath(SAMPLE_STYLE_SPREADSHEET
 					+ ".ods"));
 			int rowindex = 1, columnindex = 0;
 			OdfTable table = odsstyle.getTableByName("Sheet1");
@@ -780,7 +780,7 @@ public class TableCellTest {
 
 			// change setting is not inherited, so for new row, 
 			// the cell style name should be "Default".
-			odsstyle = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(SAMPLE_STYLE_SPREADSHEET
+			odsstyle = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath(SAMPLE_STYLE_SPREADSHEET
 					+ ".ods"));
 			rowindex = 1;
 			columnindex = 0;

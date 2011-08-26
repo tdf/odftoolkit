@@ -28,6 +28,7 @@ import java.io.InputStream;
 import org.odftoolkit.odfdom.dom.element.office.OfficeChartElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.xml.sax.SAXException;
 
 /**
  * This class represents an empty ODF document , which will be in general embedded
@@ -151,7 +152,7 @@ public class OdfChartDocument extends OdfDocument {
 	
 	/** To avoid data duplication a new document is only created, if not already opened.
 	 * A document is cached by this constructor using the internalpath as key. */
-	protected OdfChartDocument(OdfPackage pkg, String internalPath, OdfChartDocument.OdfMediaType odfMediaType) {
+	protected OdfChartDocument(OdfPackage pkg, String internalPath, OdfChartDocument.OdfMediaType odfMediaType) throws SAXException {
 		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
 

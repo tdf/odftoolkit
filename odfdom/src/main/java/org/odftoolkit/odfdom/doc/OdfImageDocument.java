@@ -28,6 +28,7 @@ import java.io.InputStream;
 import org.odftoolkit.odfdom.dom.element.office.OfficeImageElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.xml.sax.SAXException;
 
 /**
  * This class represents an ODF image document.
@@ -97,7 +98,7 @@ public class OdfImageDocument extends OdfDocument {
 
 	/** To avoid data duplication a new document is only created, if not already opened.
 	 * A document is cached by this constructor using the internalpath as key. */
-	protected OdfImageDocument(OdfPackage pkg, String internalPath, OdfImageDocument.OdfMediaType odfMediaType) {
+	protected OdfImageDocument(OdfPackage pkg, String internalPath, OdfImageDocument.OdfMediaType odfMediaType) throws SAXException {
 		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
 

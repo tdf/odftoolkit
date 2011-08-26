@@ -26,11 +26,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
+import org.xml.sax.SAXException;
 
 class ZipHelper {
 
@@ -47,17 +48,14 @@ class ZipHelper {
 		mZipFile = null;
 	}
 
-	public Map<String, ZipEntry> entries() throws IOException {
-		HashMap<String, ZipEntry> zipEntries = new HashMap<String, ZipEntry>();
-		ZipEntry zipEntry = null;
+	String entriesToMap(Map<String, ZipEntry> zipEntries) throws IOException, SAXException {
+		String first = null;
 		if (mZipFile != null) {
 			Enumeration<? extends ZipEntry> entries = mZipFile.entries();
-			if (!entries.hasMoreElements()) {
-				throw new IllegalArgumentException("Could not unzip the given ODF package!");
-			} else {
-				zipEntry = entries.nextElement();
+			if (entries.hasMoreElements()) {
+				ZipEntry zipEntry = entries.nextElement();
 				if (zipEntry != null) {
-					checkManifestFirst(zipEntry);
+					first = zipEntry.getName();
 					addZipEntry(zipEntry, zipEntries);
 					while (entries.hasMoreElements()) {
 						zipEntry = entries.nextElement();
@@ -70,45 +68,35 @@ class ZipHelper {
 			if (inputStream.available() == 0) {
 				throw new IllegalArgumentException("Could not unzip the given ODF package!");
 			} else {
-				zipEntry = inputStream.getNextEntry();
+				ZipEntry zipEntry = inputStream.getNextEntry();
 				if (zipEntry != null) {
-					checkManifestFirst(zipEntry);
+					first = zipEntry.getName();
 					addZipEntry(zipEntry, zipEntries);
 					while (zipEntry != null) {
 						addZipEntry(zipEntry, zipEntries);
-						zipEntry = inputStream.getNextEntry();
+						try {
+							zipEntry = inputStream.getNextEntry();
+						} catch (java.util.zip.ZipException e) {
+							// JDK 6 -- the try/catch is workaround for a specific JDK 5 only problem
+							if(!e.getMessage().contains("missing entry name") && !System.getProperty("Java.version").equals("1.5.0")){
+								Logger.getLogger(ZipHelper.class.getName()).info("ZIP ENTRY not found");
+								throw e;
+							}
+						}
 					}
 				}
 			}
 			inputStream.close();
 		}
-		return zipEntries;
-	}
-
-	private boolean checkManifestFirst(ZipEntry zipEntry) {
-		boolean isFirst = true;
-		String filePath = OdfPackage.normalizePath(zipEntry.getName());
-		// first file must be "mimetype", should not be added to zipentries
-		if (!filePath.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath()) && isFirst) {
-			//Logger.getLogger(ZipHelper.class.getName()).severe("INVALID ODF: The file 'mimetype' is not the first");
-			isFirst = false;
-		}
-		return isFirst;
+		return first;
 	}
 
 	private void addZipEntry(ZipEntry zipEntry, Map<String, ZipEntry> zipEntries) {
 		String filePath = OdfPackage.normalizePath(zipEntry.getName());
-//		// if resource is not the "mimetype" file
-//		if (!filePath.equals(OdfPackage.OdfFile.MANIFEST.getPath())) {
-//			// every resource aside the /META-INF/manifest.xml (and META-INF/ directory)
-//			if (!filePath.equals(OdfPackage.OdfFile.MANIFEST.getPath())
-//					&& !filePath.equals("META-INF/")) {
 		zipEntries.put(filePath, zipEntry);
-//			}
-//		}
 	}
 
-	public InputStream getInputStream(ZipEntry entry) throws IOException {
+	InputStream getInputStream(ZipEntry entry) throws IOException {
 		if (mZipFile != null) {
 			return mZipFile.getInputStream(entry);
 		} else {
@@ -140,7 +128,7 @@ class ZipHelper {
 
 	}
 
-	public void close() throws IOException {
+	void close() throws IOException {
 		if (mZipFile != null) {
 			mZipFile.close();
 		} else {

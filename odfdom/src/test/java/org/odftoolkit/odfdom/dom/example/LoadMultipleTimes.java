@@ -21,28 +21,80 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.dom.example;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 
-class LoadMultipleTimes {
-/**
-    final static int num = 50;
-    public static void main(String[] args) {
-        try {
-            long t = 0;
-            for (int i=0; i<num; i++) {
-                long t1 = System.currentTimeMillis();                
-                OdfDocument.loadDocument("src/test/resources/test1.odt");
-                long t2 = System.currentTimeMillis() - t1;
-                t = t + t2;
-                LOG.info("open in " + t2 + " milliseconds");
-                long f1 = Runtime.getRuntime().freeMemory();
-                Runtime.getRuntime().gc();
-                long f2 = Runtime.getRuntime().freeMemory();
-                LOG.info("freemem pre-gc: " + f1 + ", post-gc: " + f2 + ", delta: " + (f1 - f2) + ".");
-            }
-            LOG.info("opening " + num + " times took " + t + " milliseconds");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-	*/
+public class LoadMultipleTimes {
+
+	final static int num = 50;
+	private static final Logger LOG = Logger.getLogger(LoadMultipleTimes.class.getName());
+
+	@Test
+	@Ignore
+	/** A testdocument will be loaded and closed repeatedly and the memory will be logged.
+	 Loading is tested with and without disc memory usage */
+	public void testRepeatedLoading(){
+		System.setProperty("org.odftoolkit.odfdom.tmpfile.disable", "true");
+		repeatedLoading();
+		System.setProperty("org.odftoolkit.odfdom.tmpfile.disable", "false");
+		repeatedLoading();
+	}
+
+	// ToDO: Load instead the specification as extreme example (not neccessarily 50 times)
+	private void repeatedLoading() {
+		long t = 0;
+		for (int i = 0; i < num; i++) {
+			try {
+				long t1 = System.currentTimeMillis();
+				OdfDocument doc = OdfDocument.loadDocument("src/test/resources/test1.odt");
+				OdfContentDom dom1 = doc.getContentDom();
+				OdfStylesDom dom2 = doc.getStylesDom();
+				long t2 = System.currentTimeMillis() - t1;
+				t = t + t2;
+				LOG.info("Open in " + t2 + " milliseconds");
+				long f1 = Runtime.getRuntime().freeMemory();
+				doc.close();
+				Runtime.getRuntime().gc();
+				long f2 = Runtime.getRuntime().freeMemory();
+				LOG.info("Freemem pre-gc: " + f1 + ", post-gc: " + f2 + ", delta: " + (f1 - f2) + ".");
+			} catch (Exception ex) {
+				Logger.getLogger(LoadMultipleTimes.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+		LOG.info("Opening " + num + " times took " + t + " milliseconds");
+	}
+
+	@Test
+	@Ignore
+	/** The reference templates of the JAR will be loaded and saved. */
+	public void updateTemplates(){
+		try {
+			// ToDo: Load all files of the directory "src/main/resources/"
+			// ToDo: Set the Generator metadata tag in accordance of the pom.xml System property
+			OdfDocument doc = OdfDocument.loadDocument("src/main/resources/OdfChartDocument.odc");
+			doc.save("src/main/resources/OdfChartDocument.odc");
+
+			doc = OdfDocument.loadDocument("src/main/resources/OdfGraphicsDocument.odg");
+			doc.save("src/main/resources/OdfGraphicsDocument.odg");
+			
+			doc = OdfDocument.loadDocument("src/main/resources/OdfImageDocument.odi");
+			doc.save("src/main/resources/OdfImageDocument.odi");
+			
+			doc = OdfDocument.loadDocument("src/main/resources/OdfPresentationDocument.odp");
+			doc.save("src/main/resources/OdfPresentationDocument.odp");
+			
+			doc = OdfDocument.loadDocument("src/main/resources/OdfSpreadsheetDocument.ods");
+			doc.save("src/main/resources/OdfSpreadsheetDocument.ods");
+			
+			doc = OdfDocument.loadDocument("src/main/resources/OdfTextDocument.odt");
+			doc.save("src/main/resources/OdfTextDocument.odt");
+		} catch (Exception ex) {
+			Logger.getLogger(LoadMultipleTimes.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 }

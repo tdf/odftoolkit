@@ -62,6 +62,7 @@ import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  * This class represents an empty ODF presentation.
@@ -138,7 +139,7 @@ public class OdfPresentationDocument extends OdfDocument {
 
 	/** To avoid data duplication a new document is only created, if not already opened.
 	 * A document is cached by this constructor using the internalpath as key. */
-	protected OdfPresentationDocument(OdfPackage pkg, String internalPath, OdfPresentationDocument.OdfMediaType odfMediaType) {
+	protected OdfPresentationDocument(OdfPackage pkg, String internalPath, OdfPresentationDocument.OdfMediaType odfMediaType) throws SAXException {
 		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
 

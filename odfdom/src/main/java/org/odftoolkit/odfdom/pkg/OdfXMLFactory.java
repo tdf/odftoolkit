@@ -271,7 +271,7 @@ public class OdfXMLFactory {
 	/**
 	 * @param dom the XML DOM file where the node should be created on.
 	 * @param nodeClass being an XMLNode the Java class of the instance to be created.
-	 * @returns an object instance of the XML node class being provided (usally an attribute or element). */
+	 * @return an object instance of the XML node class being provided (usally an attribute or element). */
 	static Object getNodeFromClass(OdfFileDom dom, Class nodeClass) {
 		Object o = null;
 		try {

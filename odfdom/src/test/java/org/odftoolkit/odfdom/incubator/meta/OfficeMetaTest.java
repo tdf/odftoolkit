@@ -58,7 +58,7 @@ public class OfficeMetaTest {
 
 	@Before
 	public void setUp() throws Exception {
-		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(filename));
+		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(filename));
 		metadom = doc.getMetaDom();
 		fMetadata = new OdfOfficeMeta(metadom);
 	}
@@ -301,7 +301,7 @@ public class OfficeMetaTest {
 		doc.save(ResourceUtilities.newTestOutputFile("EmptyDocForMetaTest.odt"));
 
 		// read empty document meta
-		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("EmptyDocForMetaTest.odt"));
+		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath("EmptyDocForMetaTest.odt"));
 		metadom = doc.getMetaDom();
 		fMetadata = new OdfOfficeMeta(metadom);
 		//ToDO: automatic check of VERSION number ODFDOM/0.6.1$Build-TIMESTAMP
@@ -324,7 +324,7 @@ public class OfficeMetaTest {
 		textDoc.save(ResourceUtilities.newTestOutputFile("DocForMetaTest.odt"));
 		textDoc.close();
 		// read empty document meta
-		textDoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("DocForMetaTest.odt"));
+		textDoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath("DocForMetaTest.odt"));
 		OdfOfficeMeta meta = textDoc.getOfficeMetadata();
 		Assert.assertNotNull(meta.getGenerator());
 		Assert.assertNotNull(meta.getCreationDate());

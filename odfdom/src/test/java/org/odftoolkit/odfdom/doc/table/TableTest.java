@@ -54,7 +54,7 @@ public class TableTest {
 	@Before
 	public void setUp() {
 		try {
-			mOdsDoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(mOdsTestFileName + ".ods"));
+			mOdsDoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath(mOdsTestFileName + ".ods"));
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
@@ -63,7 +63,7 @@ public class TableTest {
 
 	private OdfTextDocument loadODTDocument(String name) {
 		try {
-			OdfTextDocument odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(name));
+			OdfTextDocument odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(name));
 			return odtdoc;
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
@@ -993,7 +993,7 @@ public class TableTest {
 	@Test
 	public void testGetCellAt() {
 		try {
-			OdfSpreadsheetDocument doc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("testGetCellAt.ods"));
+			OdfSpreadsheetDocument doc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath("testGetCellAt.ods"));
 			OdfTable odfTable = doc.getTableList().get(0);
 			OdfTableRow valueRows = odfTable.getRowByIndex(0);
 			for (int i = 0; i < 4; i++) {

@@ -74,7 +74,7 @@ public class EmbeddedDocumentTest {
 	@Test
 	public void testEmbedEmbeddedDocument() {
 		try {
-			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED));
+			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_EMBEDDED));
 			OdfDocument saveDoc = OdfTextDocument.newTextDocument();
 			Map<String, OdfDocument> subDocs = doc.loadSubDocuments();
 			List<String> subDocNames = new ArrayList<String>();
@@ -88,7 +88,7 @@ public class EmbeddedDocumentTest {
 			paths = saveDoc.getPackage().getInnerDocumentPaths("application/vnd.oasis.opendocument.presentation");
 			saveDoc.save(TEST_FILE_FOLDER + TEST_FILE_EMBEDDED_SAVE_OUT);
 			saveDoc.close();
-			saveDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED_SAVE_OUT));
+			saveDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_EMBEDDED_SAVE_OUT));
 			Map<String, OdfDocument> reloadedSubDocs = saveDoc.loadSubDocuments();
 			Assert.assertTrue(subDocs.size() == reloadedSubDocs.size());
 			for (String childDocPath : subDocs.keySet()) {
@@ -190,7 +190,7 @@ public class EmbeddedDocumentTest {
 	@Test
 	public void testSaveEmbeddedDocument() {
 		try {
-			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED));
+			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_EMBEDDED));
 			Map<String, OdfDocument> embeddedDocs = doc.loadSubDocuments();
 			for (String childDocPath : embeddedDocs.keySet()) {
 				OdfDocument childDoc = embeddedDocs.get(childDocPath);
@@ -199,8 +199,8 @@ public class EmbeddedDocumentTest {
 				//use '_' replace '/', because '/' is not the valid char in file path
 				embedFileName = embedFileName.replaceAll("/", "_") + "." + embedMediaType.getSuffix();
 				childDoc.save(TEST_FILE_FOLDER + embedFileName);
-				LOG.log(Level.INFO, "Save file : {0}", embedFileName);
-				OdfDocument embeddedDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(embedFileName));
+				LOG.log(Level.INFO, "Save file : {0}", TEST_FILE_FOLDER + embedFileName);
+				OdfDocument embeddedDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(embedFileName));
 				Assert.assertEquals(embeddedDoc.getMediaTypeString(), embedMediaType.getMediaTypeString());
 			}
 		} catch (Exception ex) {
@@ -221,7 +221,7 @@ public class EmbeddedDocumentTest {
 	@Test
 	public void testEmbedModifiedEmbeddedDocument() {
 		try {
-			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED));
+			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_EMBEDDED));
 			OdfDocument saveDoc = OdfTextDocument.newTextDocument();
 			OdfDocument embeddedDoc = doc.loadSubDocument("Object 1/");
 			//modify content of "Object 1"
@@ -240,7 +240,7 @@ public class EmbeddedDocumentTest {
 			saveDoc.save(TEST_FILE_FOLDER + TEST_FILE_MODIFIED_EMBEDDED);
 			saveDoc.close();
 			//reload TestModifiedEmbeddedDoc.odt
-			saveDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_MODIFIED_EMBEDDED));
+			saveDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_MODIFIED_EMBEDDED));
 			embeddedDoc = saveDoc.loadSubDocument(embedPath);
 			//check the content of "DocA" and modify it again
 			embedContentDom = embeddedDoc.getContentDom();
@@ -254,7 +254,7 @@ public class EmbeddedDocumentTest {
 			//save the "DocA" as the standalone document
 			embeddedDoc.save(TEST_FILE_FOLDER + TEST_FILE_MODIFIED_EMBEDDED_SAVE_STANDALONE);
 			//load the standalone document and check the content
-			OdfDocument standaloneDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_MODIFIED_EMBEDDED_SAVE_STANDALONE));
+			OdfDocument standaloneDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_MODIFIED_EMBEDDED_SAVE_STANDALONE));
 			embedContentDom = standaloneDoc.getContentDom();
 			header = (TextHElement) xpath.evaluate("//text:h[1]", embedContentDom, XPathConstants.NODE);
 			Assert.assertTrue(header.getTextContent().length() == 0);
@@ -271,7 +271,7 @@ public class EmbeddedDocumentTest {
 	@Test
 	public void testRemoveEmbeddedDocument() {
 		try {
-			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED));
+			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_EMBEDDED));
 			Map<String, OdfDocument> embeddedDocs = doc.loadSubDocuments();
 			List<String> subDocNames = new ArrayList<String>();
 			for (String childDocPath : embeddedDocs.keySet()) {
@@ -284,7 +284,7 @@ public class EmbeddedDocumentTest {
 			doc.close();
 			//check manifest entry for the embed document 
 			//the sub entry of the embed document such as the pictures of the document should also be removed
-			doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT));
+			doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT));
 			Map<String, OdfDocument> reloadedSubDocs = doc.loadSubDocuments();
 			Assert.assertTrue(0 == reloadedSubDocs.size());
 			Set<String> entries = doc.getPackage().getFileEntries();

@@ -248,8 +248,8 @@ public class OdfPackageDocument implements Closeable {
 	/**
 	 * Embed an OdfPackageDocument to the current OdfPackageDocument.
 	 * All the file entries of child document will be embedded as well to the current document package.
-	 * @param documentPath to the directory the ODF document should be inserted (relative to the root of this document).
-	 * @param sourceDocument the OdfPackageDocument to be embedded.
+	 * @param newDocument the OdfPackageDocument to be embedded.
+	 * @param documentPath to the directory the ODF document should be inserted (relative to the root of this document).	 
 	 */
 	public void insertDocument(OdfPackageDocument newDocument, String documentPath) {
 		newDocument.flushDoms();
@@ -259,7 +259,7 @@ public class OdfPackageDocument implements Closeable {
 
 	/** 
 	 * @param filePath path to the file relative to package root
-	 * @returns the typed DOM of the given file 
+	 * @return the typed DOM of the given file 
 	 */
 	public OdfFileDom getFileDom(String filePath) throws Exception {
 		String normalizeDocumentPath = getDocumentPath();

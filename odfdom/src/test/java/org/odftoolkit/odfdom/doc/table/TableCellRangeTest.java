@@ -47,8 +47,8 @@ public class TableCellRangeTest {
 	@Before
 	public void setUp() {
 		try {
-			odsdoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(filename + ".ods"));
-			odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(odtfilename + ".odt"));
+			odsdoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath(filename + ".ods"));
+			odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(odtfilename + ".odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -66,7 +66,7 @@ public class TableCellRangeTest {
 		Assert.assertEquals(cell.getDisplayText(), "cell1cell2");
 		saveodt("MergeTwoCell");
 		try {
-			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(odtfilename + "MergeTwoCell.odt"));
+			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(odtfilename + "MergeTwoCell.odt"));
 			OdfTable savedTable1 = saveddoc.getTableByName("Table1");
 			//get the cell range which the first cell is the covered cell.
 			//so the cell range will be enlarged
@@ -85,7 +85,7 @@ public class TableCellRangeTest {
 		}
 
 		try {
-			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(odtfilename + "MergeTwoCell.odt"));
+			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(odtfilename + "MergeTwoCell.odt"));
 			OdfTable savedTable1 = saveddoc.getTableByName("Table1");
 			//get the cell range which the first cell is the covered cell.
 			//so the cell range will be enlarged
@@ -126,7 +126,7 @@ public class TableCellRangeTest {
 		Assert.assertTrue(cell.getOwnerTableCell().equals(firstCell));
 		saveodt("MergeFirstColumn");
 		try {
-			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(odtfilename + "MergeFirstColumn.odt"));
+			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(odtfilename + "MergeFirstColumn.odt"));
 			OdfTable savedTable = saveddoc.getTableByName("Table1");
 			OdfTableCellRange firstTwoColumn = savedTable.getCellRangeByPosition(0, 0, 1, savedTable.getRowCount() - 1);
 			firstTwoColumn.merge();
@@ -164,7 +164,7 @@ public class TableCellRangeTest {
 
 		saveods("CellRangeName");
 		try {
-			OdfSpreadsheetDocument saveddos = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(filename + "CellRangeName.ods"));
+			OdfSpreadsheetDocument saveddos = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath(filename + "CellRangeName.ods"));
 			OdfTable savedSheet = saveddos.getTableByName("Sheet1");
 			OdfTableCellRange namedCellRange = savedSheet.getCellRangeByName("TimeCellRange");
 			OdfTableCell cell = namedCellRange.getCellByPosition("A1");

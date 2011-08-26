@@ -32,7 +32,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,6 +50,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfSchemaConstraint;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
@@ -57,6 +60,10 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
+import org.odftoolkit.odfdom.pkg.OdfPackageConstraint;
+import org.odftoolkit.odfdom.pkg.OdfValidationException;
+import org.odftoolkit.odfdom.pkg.ValidationConstraint;
+import org.odftoolkit.odfdom.utils.ErrorHandlerStub;
 import org.odftoolkit.odfdom.utils.NodeAction;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Node;
@@ -70,6 +77,7 @@ public class DocumentTest {
 	private static final String IMAGE_TEST_FILE = "testA.jpg";
 	private static final String GENERATED_INVALID_SPREADSHEET = "invalid.ods";
 	private static final String ZERO_BYTE_SPREADSHEET = "empty_file.ods";
+	private static final long PRESENTATION1_DOC_COUNT = 11;
 
 	public DocumentTest() {
 	}
@@ -82,7 +90,7 @@ public class DocumentTest {
 			LOG.info("Loading an supported ODF Spreadsheet document as an ODF Document!");
 			try {
 				// Should work!
-				OdfDocument ods = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(GENERATED_INVALID_SPREADSHEET));
+				OdfDocument ods = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(GENERATED_INVALID_SPREADSHEET));
 				Assert.assertNotNull(ods);
 			} catch (Exception e) {
 				LOG.log(Level.SEVERE, e.getMessage(), e);
@@ -93,11 +101,11 @@ public class DocumentTest {
 			// LOAD EMPTY DOCUMENT
 			LOG.info("Loading an empty document as an ODF Document!");
 			try {
-				// Should throw adequate error message!
-				OdfDocument ods = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(ZERO_BYTE_SPREADSHEET));
-				Assert.assertNull(ods);
+				// Should throw error!
+				OdfDocument ods = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(ZERO_BYTE_SPREADSHEET));
+				Assert.fail();
 			} catch (Exception e) {
-				if (!e.getMessage().contains("empty file")) {
+				if (!e.getMessage().contains("shall be a ZIP file")) {
 					LOG.log(Level.SEVERE, e.getMessage(), e);
 					Assert.fail();
 				}
@@ -107,10 +115,10 @@ public class DocumentTest {
 			LOG.info("Loading an unsupported ODF Formula document as an ODF Document!");
 			try {
 				// Exception is expected!
-				OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(ODF_FORMULAR_TEST_FILE));
+				OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(ODF_FORMULAR_TEST_FILE));
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
-				if (!e.getMessage().contains("is either not yet supported or not an ODF mediatype!")) {
+				if (!e.getMessage().contains("is not yet supported!")) {
 					LOG.log(Level.SEVERE, e.getMessage(), e);
 					Assert.fail();
 				}
@@ -120,15 +128,19 @@ public class DocumentTest {
 			LOG.info("Loading an unsupported image file as an ODF Document!");
 			try {
 				// Exception is expected!
-				OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(IMAGE_TEST_FILE));
+				OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE));
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
-				if (!e.getMessage().contains("unzip the")) {
+				if (!e.getMessage().contains("shall be a ZIP file")) {
+					LOG.log(Level.SEVERE, e.getMessage(), e);
+					Assert.fail();
+				}
+			} catch (OdfValidationException e) {
+				if (!e.getMessage().contains("shall be a ZIP file")) {
 					LOG.log(Level.SEVERE, e.getMessage(), e);
 					Assert.fail();
 				}
 			}
-
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
@@ -159,7 +171,7 @@ public class DocumentTest {
 	@Test
 	@Ignore
 	public void testDumpDom() {
-		try {			
+		try {
 			Assert.assertTrue(testXSLT("content") & testXSLT("styles"));
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
@@ -361,13 +373,12 @@ public class DocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testSetLocale() {
 		String filename = "testDefaultLanguage.odp";
 		try {
-			OdfPresentationDocument doc = OdfPresentationDocument
-					.newPresentationDocument();
+			OdfPresentationDocument doc = OdfPresentationDocument.newPresentationDocument();
 
 			Assert.assertNull(doc.getLocale(OdfDocument.UnicodeGroup.WESTERN));
 			Assert.assertNull(doc.getLocale(OdfDocument.UnicodeGroup.CJK));
@@ -385,21 +396,16 @@ public class DocumentTest {
 
 			doc.save(ResourceUtilities.newTestOutputFile(filename));
 
-			OdfPresentationDocument newDoc = OdfPresentationDocument
-					.loadDocument(ResourceUtilities
-							.getTestResourceAsStream(filename));
-			Assert.assertEquals(eng_can, newDoc
-					.getLocale(OdfDocument.UnicodeGroup.WESTERN));
-			Assert.assertEquals(chinese_china, newDoc
-					.getLocale(OdfDocument.UnicodeGroup.CJK));
-			Assert.assertEquals(ar_eg, newDoc
-					.getLocale(OdfDocument.UnicodeGroup.CTL));
+			OdfPresentationDocument newDoc = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(filename));
+			Assert.assertEquals(eng_can, newDoc.getLocale(OdfDocument.UnicodeGroup.WESTERN));
+			Assert.assertEquals(chinese_china, newDoc.getLocale(OdfDocument.UnicodeGroup.CJK));
+			Assert.assertEquals(ar_eg, newDoc.getLocale(OdfDocument.UnicodeGroup.CTL));
 
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-	}	
+	}
 
 	private static String inputStreamToString(InputStream in) throws IOException {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
@@ -418,5 +424,68 @@ public class DocumentTest {
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), "UTF8"));
 		out.append(dataString);
 		out.close();
+	}
+
+	@Test
+	public void validationTest() {
+		// TESTDOC1: Expected ODF Warnings
+		Map expectedWarning1 = new HashMap();
+		expectedWarning1.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10);
+
+		// TESTDOC1: Expected ODF Errors
+		Map expectedErrors1 = new HashMap();
+		expectedErrors1.put(OdfPackageConstraint.MIMETYPE_NOT_FIRST_IN_PACKAGE, 1);
+		expectedErrors1.put(OdfPackageConstraint.MIMETYPE_IS_COMPRESSED, 1);
+		expectedErrors1.put(OdfPackageConstraint.MIMETYPE_HAS_EXTRA_FIELD, 1);
+		expectedErrors1.put(OdfPackageConstraint.MIMETYPE_DIFFERS_FROM_PACKAGE, 1);
+		expectedErrors1.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 1);
+
+		// TESTDOC1: Expected ODF FatalErrors
+		Map<ValidationConstraint, Integer> expectedFatalErrors1 = new HashMap<ValidationConstraint, Integer>();
+		expectedFatalErrors1.put(OdfSchemaConstraint.DOCUMENT_WITHOUT_ODF_MIMETYPE, 1);
+
+		ErrorHandlerStub handler1 = new ErrorHandlerStub(expectedWarning1, expectedErrors1, expectedFatalErrors1);
+
+
+		// TESTDOC2: Expected ODF Warnings
+		Map expectedWarning2 = new HashMap();
+		expectedWarning2.put(OdfPackageConstraint.MIMETYPE_NOT_IN_PACKAGE, 1);
+		expectedWarning2.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10);
+
+		// TESTDOC2: Expected ODF Errors
+		Map expectedErrors2 = new HashMap();
+		expectedErrors2.put(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, 1);
+		expectedErrors2.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 3);
+		expectedErrors2.put(OdfSchemaConstraint.PACKAGE_SHALL_CONTAIN_CONTENT_OR_STYLES_XML, 1);
+		ErrorHandlerStub handler2 = new ErrorHandlerStub(expectedWarning2, expectedErrors2, null);
+
+		// TESTDOC3: Expected ODF Warnings
+		Map expectedWarning3 = new HashMap();
+		expectedWarning3.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 21);
+
+		// TESTDOC3: Expected ODF Errors
+		Map expectedErrors3 = new HashMap();
+		expectedErrors3.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 2);
+		expectedErrors3.put(OdfSchemaConstraint.PACKAGE_SHALL_CONTAIN_CONTENT_OR_STYLES_XML, 1);
+		ErrorHandlerStub handler3 = new ErrorHandlerStub(expectedWarning3, expectedErrors3, null);
+
+		try {
+			OdfDocument doc2 = OdfDocument.loadDocument(new File(ResourceUtilities.getAbsolutePath("testInvalidPkg2.odt")), handler2);
+			Assert.assertNotNull(doc2);
+			OdfDocument doc3 = OdfDocument.loadDocument(new File(ResourceUtilities.getAbsolutePath("performance/Presentation1.odp")), handler3);
+			Assert.assertNotNull(doc3);
+			Map subDocs = doc3.loadSubDocuments();
+			Assert.assertNotNull(subDocs);
+			Assert.assertEquals(PRESENTATION1_DOC_COUNT, subDocs.size());
+			OdfDocument.loadDocument(new File(ResourceUtilities.getAbsolutePath("testInvalidPkg1.odt")), handler1);
+			Assert.fail();
+		} catch (Exception e) {
+			if (!e.getMessage().contains("is invalid for the ODF XML Schema document")) {
+				Assert.fail();
+			}
+		}
+		handler1.validate();
+		handler2.validate();
+		handler3.validate();
 	}
 }

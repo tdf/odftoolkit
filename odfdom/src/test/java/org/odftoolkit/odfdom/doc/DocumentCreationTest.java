@@ -120,7 +120,7 @@ public class DocumentCreationTest {
 			/////////////////////////////////////
 
 			// loads the ODF document from the path
-			OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("TestEmpty_OdfTextDocument.odt"));
+			OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestEmpty_OdfTextDocument.odt"));
 
 			// get the ODF content as DOM tree representation
 			OdfFileDom odfContent = odfDoc.getContentDom();
@@ -163,7 +163,7 @@ public class DocumentCreationTest {
 
 			odtDoc1.insertDocument(OdfTextDocument.newTextDocument(), "Object1/");
 			odtDoc1.insertDocument(OdfTextDocument.newTextDocument(), "Object2/");
-			odtDoc1.insertDocument(OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("TestEmpty_OdfGraphicsDocument.odg")), "Object3");
+			odtDoc1.insertDocument(OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestEmpty_OdfGraphicsDocument.odg")), "Object3");
 			odtDoc1.insertDocument(OdfChartDocument.newChartDocument(), "Object4");
 			odtDoc1.insertDocument(OdfGraphicsDocument.newGraphicsDocument(), "Object5");
 			odtDoc1.insertDocument(OdfPresentationDocument.newPresentationDocument(), "Object6");
@@ -311,7 +311,6 @@ public class DocumentCreationTest {
 			Assert.assertEquals(spanTest.getTextContent(), TEST_SPAN_TEXT);
 
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
 			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
 		}
@@ -397,7 +396,6 @@ public class DocumentCreationTest {
 				}
 			}			
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
 			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
 		}

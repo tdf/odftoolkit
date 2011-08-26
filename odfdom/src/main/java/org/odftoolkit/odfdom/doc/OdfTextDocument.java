@@ -30,6 +30,7 @@ import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 /**
  * This class represents an empty ODF text document.
@@ -184,7 +185,7 @@ public class OdfTextDocument extends OdfDocument {
 	
 	/** To avoid data duplication a new document is only created, if not already opened.
 	 * A document is cached by this constructor using the internalpath as key. */
-	protected OdfTextDocument(OdfPackage pkg, String internalPath, OdfTextDocument.OdfMediaType odfMediaType) {
+	protected OdfTextDocument(OdfPackage pkg, String internalPath, OdfTextDocument.OdfMediaType odfMediaType) throws SAXException {
 		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
 

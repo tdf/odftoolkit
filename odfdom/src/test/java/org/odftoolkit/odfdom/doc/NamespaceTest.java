@@ -71,7 +71,7 @@ public class NamespaceTest {
 
             
             // Load document with ODF foreign attriute
-            OdfTextDocument docReloaded = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TARGET));
+            OdfTextDocument docReloaded = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
             OdfFileDom contentDomReloaded = docReloaded.getContentDom();
 
             // Postive test for XPath on ODF attributes

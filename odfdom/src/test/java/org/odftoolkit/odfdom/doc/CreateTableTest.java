@@ -46,7 +46,7 @@ public class CreateTableTest {
 	@Test
 	public void testCreateTable1() {
 		try {
-			OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("empty.odt")).getContentDom();
+			OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
 
 			// find the last paragraph
 			NodeList lst = doc.getElementsByTagNameNS(

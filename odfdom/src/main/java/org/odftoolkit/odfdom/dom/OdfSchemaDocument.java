@@ -33,7 +33,10 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
+import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.w3c.dom.Node;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
 
 /**
  * A document in ODF is from the package view a directory with a media type.
@@ -51,8 +54,19 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 	protected OdfSettingsDom mSettingsDom;
 	protected OdfOfficeStyles mDocumentStyles;
 
-	protected OdfSchemaDocument(OdfPackage pkg, String internalPath, String mediaTypeString) {
+	protected OdfSchemaDocument(OdfPackage pkg, String internalPath, String mediaTypeString) throws SAXException {
 		super(pkg, internalPath, mediaTypeString);
+		ErrorHandler errorHandler = pkg.getErrorHandler();
+		if (errorHandler != null) {
+			if (pkg.getFileEntry(internalPath + "content.xml") == null
+					&& pkg.getFileEntry(internalPath + "styles.xml") == null) {
+				try {
+					errorHandler.error(new OdfValidationException(OdfSchemaConstraint.PACKAGE_SHALL_CONTAIN_CONTENT_OR_STYLES_XML));
+				} catch (SAXException ex) {
+					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+		}
 	}
 
 	/**
