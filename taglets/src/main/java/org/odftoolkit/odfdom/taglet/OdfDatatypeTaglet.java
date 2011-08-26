@@ -42,28 +42,28 @@ public class OdfDatatypeTaglet implements Taglet {
 
 	private static final Logger LOG = Logger.getLogger(OdfDatatypeTaglet.class.getName());
 	private static final String NAME = "odf.datatype";
-	private static final String ODF_SPEC_PATH = "../../../../../../doc-files/OpenDocument-v1.2-part1-cd02-rev03.xhtml";
+	private static final String ODF_SPEC_PATH = "../../../../doc-files/OpenDocument-v1.2-part1-cd02-rev03.xhtml";
 	private static String mOdfSpecPath = null;
 
-    /* FINDING THE ABSOLUTE PATH TO THE ODF SPEC IN HTML:
-     * 1) Try to get the odfSpecPath from the Java System variable (ODF_SPEC_PATH)
-     * 2) Try to get the odfSpecPath from the environemnt variable (ODF_SPEC_PATH)
-     * 3) If both not worked, use the default path
-     **/
-    static {
-        mOdfSpecPath = System.getProperty("ODF_SPEC_PATH");
-        if (mOdfSpecPath == null) {
-            mOdfSpecPath = System.getenv("ODF_SPEC_PATH");
-            if (mOdfSpecPath == null) {
-                mOdfSpecPath = ODF_SPEC_PATH;
-                LOG.info("OdfSpecPath was set to " + mOdfSpecPath + " by class declaration.");
-            } else {
-                LOG.info("OdfSpecPath was set to " + mOdfSpecPath + " by environment property 'ODF_SPEC_PATH'.");
-            }
-        } else {
-            LOG.info("OdfSpecPath was set to " + mOdfSpecPath + " by Java System property 'ODF_SPEC_PATH'.");
-        }
-    }
+	/* FINDING THE ABSOLUTE PATH TO THE ODF SPEC IN HTML:
+	 * 1) Try to get the odfSpecPath from the Java System variable (ODF_SPEC_PATH)
+	 * 2) Try to get the odfSpecPath from the environemnt variable (ODF_SPEC_PATH)
+	 * 3) If both not worked, use the default path
+	 **/
+	static {
+		mOdfSpecPath = System.getProperty("ODF_SPEC_PATH");
+		if (mOdfSpecPath == null) {
+			mOdfSpecPath = System.getenv("ODF_SPEC_PATH");
+			if (mOdfSpecPath == null) {
+				mOdfSpecPath = ODF_SPEC_PATH;
+				LOG.info("OdfSpecPath was set to " + mOdfSpecPath + " by class declaration.");
+			} else {
+				LOG.info("OdfSpecPath was set to " + mOdfSpecPath + " by environment property 'ODF_SPEC_PATH'.");
+			}
+		} else {
+			LOG.info("OdfSpecPath was set to " + mOdfSpecPath + " by Java System property 'ODF_SPEC_PATH'.");
+		}
+	}
 
 	/**
 	 * @return the name of this custom tag.
@@ -147,8 +147,7 @@ public class OdfDatatypeTaglet implements Taglet {
 	 * @return the string representation of the custom tag
 	 */
 	public String toString(Tag tag) {
-		int pos = tag.text().lastIndexOf(":");
-		String fragmentIdentifier = "datatype-" + tag.text().substring(0, pos) + "_" + tag.text().substring(pos + 1);
+		String fragmentIdentifier = "datatype-" + tag.text();
 		return "<a href=\"" + mOdfSpecPath + "#" + fragmentIdentifier + "\">" + tag.text() + "</a>";
 	}
 
