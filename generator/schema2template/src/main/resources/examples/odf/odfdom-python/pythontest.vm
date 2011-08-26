@@ -1,0 +1,55 @@
+## Context:
+##
+## - All SortedSets are copies, so in-place ops like remove, add, etc. are allowed
+## - Do not use $set2 = $set1 if you want to change only one of these. 
+##   Use $set2 = util.copySet($set1) instead.
+##
+## String odfName: Name of current ODF element (at the time of template initialization)
+## SortedSet<String> odfElementNames: Names of all ODF elements
+## SortedSet<String> odfElementBaseNames: Names of all ODF base elements
+## SortedSet<String> odfAttributeNames: Names of all ODF attributes
+## NamespaceDictionars nsdict: Utility to translate between NamespaceURI and local Namespace:
+##    String nsdict.getLocalNamespace(String NamespaceURI)
+##    String nsdict.getNamespaceURI(String LocalNamespace)
+## Expressions util: Utility to get and transform Expression names:
+##               String util.extractLocalname(String name)
+##               String util.extractNamespace(String name)
+##               String util.getQName(Expression exp)
+##               String util.camelCase(String raw): some-text-fragment -> SomeTextFragment
+##               String util.javaCase(String raw): some-text-fragment -> someTextFragment
+##    SortedSet<String> util.emptySet()
+##    SortedSet<String> util.copySet(Set<String> original)
+## ExpressionViewByName nameView: Access to ODF element and attribute name hierarchy:
+##    SortedSet<String> nameView.getElementChildNames(String parentelementname)
+##    SortedSet<String> nameView.getElementParentNames(String elementchildname)
+##    SortedSet<String> nameView.getAttributeChildNames(String parentelementname)
+##    SortedSet<String> nameView.getAttributeParentNames(String attributechildname)
+##               String nameView.getElementRename(String elementname)
+##               String nameView.getElementBaseName(String elementname)
+##               String nameView.getElementsByBaseName(String basename)
+##    SortedSet<String> nameView.getElementStyleFamilies(String elementname)
+##
+# /usr/bin/python
+
+CHILD_ELEMENTS = {
+#foreach( $name in $odfElementNames )
+	'$name' : ( \
+#set($sortedChildren = ${nameView.getElementChildNames($name)})
+#foreach($childname in $sortedChildren)
+		'$childname', \
+#end
+),
+#end
+}
+
+CHILD_ATTRIBUTES = {
+#foreach( $name in $odfElementNames )
+	'$name' : ( \
+#set($sortedAttributes = ${nameView.getAttributeChildNames($name)})
+#foreach( $attrname in $sortedAttributes)
+		'$attrname', \
+#end
+),
+#end
+}
+
