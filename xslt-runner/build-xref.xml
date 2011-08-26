@@ -25,8 +25,8 @@
     <import file="nbproject/build-impl.xml"/>
     <import file="build-schemas.xml"/>
  
-    <property name="opendocument.v12.schema.xref" value="OpenDocument-xref-schema-v1.2${opendocument.v12.schema.state}.rng"/>
-    <property name="opendocument.v12.schema.dtype" value="OpenDocument-dtype-schema-v1.2${opendocument.v12.schema.state}.rng"/>
+    <property name="opendocument.v12.schema.xref" value="OpenDocument-xref-schema-v1.2${opendocument.v12.part1.schema.state}.rng"/>
+    <property name="opendocument.v12.schema.dtype" value="OpenDocument-dtype-schema-v1.2${opendocument.v12.part1.schema.state}.rng"/>
 
     <target name="add-v12-xref" depends="init,jar,-create-v12-xref-schema" 
             description="add cross references to ODF 1.2 specification.">

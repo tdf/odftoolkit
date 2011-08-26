@@ -29,11 +29,11 @@
     <property file="${build-schemas.basedir}/schema.properties"/>
     <property name="opendocument.v11.schema.manifest" value="OpenDocument-manifest-schema-v1.1.rng"/>
     <property name="opendocument.v11.schema.strict" value="OpenDocument-strict-schema-v1.1.rng"/>
-    <property name="opendocument.v12.schema" value="OpenDocument-v1.2${opendocument.v12.schema.state}-schema.rng"/>
+    <property name="opendocument.v12.schema" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-schema.rng"/>
     <property name="opendocument.v12.schema.manifest" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-manifest-schema.rng"/>
     <property name="opendocument.v12.schema.dsig" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-dsig-schema.rng"/>
-    <property name="opendocument.v12.ontology.part1" value="OpenDocument-v1.2${opendocument.v12.schema.state}-metadata.owl"/>
-    <property name="opendocument.v12.ontology.part3" value="OpenDocument-v1.2${opendocument.v12.schema.state}-package-metadata.owl"/>
+    <property name="opendocument.v12.ontology.part1" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-metadata.owl"/>
+    <property name="opendocument.v12.ontology.part3" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-package-metadata.owl"/>
        
 </project>
 
