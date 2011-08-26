@@ -68,19 +68,21 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
             OdfAutomaticStyles automatic_styles = getAutomaticStyles();
             if( automatic_styles != null )
             {
+                String sParentStyleName;
                 if( mAutomaticStyle == null )
                 {
                     mAutomaticStyle = automatic_styles.createStyle(getStyleFamily());
+                    sParentStyleName = getStyleName();
                 }
                 else
                 {
+                    sParentStyleName = mAutomaticStyle.getParentStyleName();
                     mAutomaticStyle.removeStyleUser(this);
                     mAutomaticStyle = automatic_styles.makeStyleUnique(mAutomaticStyle);
                 }
 
                 mAutomaticStyle.addStyleUser(this);
 
-                String sParentStyleName = getStyleName();
                 if( (sParentStyleName != null) && (sParentStyleName.length() != 0) )
                     mAutomaticStyle.setParentStyleName(sParentStyleName);
 
@@ -243,7 +245,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
     {
         return getDocumentStyle() != null;
     }
-    
+        
 /*
     public OdfStyle getAutomaticStyle() {
         if (mAutomaticStyle == null) {
@@ -257,7 +259,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
         return mAutomaticStyle;
     }
 */
-    
+
     /**
      * 
      * @return
@@ -275,19 +277,19 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
             if (docStyle == null) {
                 docStyle = mOdfDocument.getDocumentStyles().getStyle(mAutomaticStyle.getParentName());
             }
-            // copy local style to merged style             
+            // copy local style to merged style
             mAutomaticStyle.copyTo(merged, true,false);
         }
 
         // copy doc style to merged style
-        // copyTo only copies properties that are not already set at the 
+        // copyTo only copies properties that are not already set at the
         // target style
         if (docStyle != null) {
             docStyle.copyTo(merged, true,false);
         }
 
         return merged;
-    }    
+    }
 */
     /**
      * 
@@ -369,6 +371,49 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
     public void setProperty(OdfStyleProperty property, String value)
     {
         getOrCreateUnqiueAutomaticStyle().setProperty(property, value);
+    }
+
+    @Override
+    protected void onInsertNode()
+    {
+        super.onInsertNode();
+
+        String stylename = getStyleName();
+        if( stylename.length() != 0 )
+        {
+            if( mAutomaticStyle != null )
+            {
+                if( mAutomaticStyle.getName().equals( stylename ) )
+                    return;
+
+                mAutomaticStyle.removeStyleUser(this);
+                mAutomaticStyle = null;
+            }
+
+            OdfAutomaticStyles automatic_styles = getAutomaticStyles();
+            if( automatic_styles != null ) {
+                mAutomaticStyle = automatic_styles.getStyle(stylename, getStyleFamily());
+
+                if( mAutomaticStyle != null ) {
+                    mAutomaticStyle.addStyleUser(this);
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     */
+    @Override
+    protected void onRemoveNode()
+    {
+        super.onInsertNode();
+
+        if( this.mAutomaticStyle != null )
+        {
+            this.mAutomaticStyle.removeStyleUser(this);
+            this.mAutomaticStyle = null;
+        }
     }
 
     // todo: rename after get rid of deprecated getDocumentStyle()

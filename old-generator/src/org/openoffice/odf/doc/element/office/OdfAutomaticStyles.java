@@ -254,4 +254,22 @@ public class OdfAutomaticStyles extends OdfAutomaticStylesElement
         }
         return unique_name;
     }
+
+    /** this methods removes all automatic styles that are currently not used by any styleable element.
+     *  Todo: In the future this could also merge automatic styles with identical content.
+     */
+    public void optimize()
+    {
+        OdfStyle style = OdfElement.findFirstChildNode( OdfStyle.class, this );
+        while( style != null )
+        {
+            OdfStyle nextStyle = OdfElement.findNextChildNode(OdfStyle.class, style);
+            if( style.getStyleUserCount() < 1 )
+            {
+                this.removeChild(style);
+            }
+
+            style = nextStyle;            
+        }
+    }
 }

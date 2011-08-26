@@ -101,7 +101,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
     {
         if( mStyleUser == null )
             mStyleUser = new Vector< OdfStylableElement >();
-        
+
         mStyleUser.add(user);
     }
 
@@ -153,7 +153,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
     public void removeStyleUser( OdfStylableElement user )
     {
         if( mStyleUser != null )
-            mStyleUser.remove(user);        
+            mStyleUser.remove(user);
     }
     
     public int getStyleUserCount()

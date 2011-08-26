@@ -76,4 +76,19 @@ abstract public class OdfContainerElementBase extends OdfElement
         
         return ret;
     }
+
+    @Override
+    public Node replaceChild(Node newChild, Node oldChild) throws DOMException
+    {
+        Node ret = super.replaceChild(newChild, oldChild);
+
+        if( newChild instanceof OdfElement )
+            onOdfNodeInserted( (OdfElement) newChild, oldChild );
+
+        if( oldChild instanceof OdfElement )
+            onOdfNodeRemoved( (OdfElement) oldChild );
+
+        return ret;
+    }
+
 }

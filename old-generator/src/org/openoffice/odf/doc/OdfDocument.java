@@ -50,6 +50,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.xerces.dom.ParentNode;
+import org.openoffice.odf.doc.element.office.OdfAutomaticStyles;
 import org.openoffice.odf.doc.element.office.OdfBody;
 import org.openoffice.odf.doc.element.office.OdfMasterStyles;
 import org.openoffice.odf.doc.element.office.OdfStyles;
@@ -651,6 +652,7 @@ public abstract class OdfDocument {
      * @throws java.lang.Exception  if the document could not be saved
      */
     public void save(String path) throws Exception {
+        this.optimize();
         if (!isRootDocument() && mRootDocument != null) {
             mRootDocument.save(path);
         } else {
@@ -671,6 +673,7 @@ public abstract class OdfDocument {
      * @throws java.lang.Exception  if the document could not be saved
      */
     public void save(File file) throws Exception {
+        this.optimize();
         if (!isRootDocument() && mRootDocument != null) {
             mRootDocument.save(file);
         } else {
@@ -691,6 +694,7 @@ public abstract class OdfDocument {
      * @throws java.lang.Exception  if the document could not be saved
      */
     public void save(OutputStream out) throws Exception {
+        this.optimize();
         if (!isRootDocument() && mRootDocument != null) {
             mRootDocument.save(out);
         } else {
@@ -706,6 +710,7 @@ public abstract class OdfDocument {
 
     // TODO: add save function for all DOMs
     private void saveEmbeddedDoc() throws Exception {
+        this.optimize();
         if (mContentDom == null) {
             mPackage.insert(getContentStream(), getXMLFilePath(OdfXMLFile.CONTENT), getMediaType());
         } else {
@@ -718,6 +723,26 @@ public abstract class OdfDocument {
         }
     }
 
+    private void optimize() {
+        try {
+            OdfFileDom dom = this.getStylesDom();
+            if (dom != null) {
+                OdfAutomaticStyles auto_styles = dom.getAutomaticStyles();
+                if (auto_styles != null) {
+                    auto_styles.optimize();
+                }
+            }
+            dom = this.getContentDom();
+            if (dom != null) {
+                OdfAutomaticStyles auto_styles = dom.getAutomaticStyles();
+                if (auto_styles != null) {
+                    auto_styles.optimize();
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     private void insertDOMsToPkg() {
         try {
             if (getContentStream() != null) {

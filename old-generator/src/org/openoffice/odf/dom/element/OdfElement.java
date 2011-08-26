@@ -356,11 +356,68 @@ abstract public class OdfElement extends ElementNSImpl {
         {
             Node n1 = nodes1.get(i);
             Node n2 = nodes2.get(i);
-            String sn1 = n1.toString();
-            String sn2 = n2.toString();
             if( !n1.equals(n2) )
                 return false;
         }
         return true;
     }
+
+    protected void onRemoveNode( Node node )
+    {
+        Node child = node.getFirstChild();
+        while( child != null )
+        {
+            this.onRemoveNode( child );
+            child = child.getNextSibling();
+        }
+
+        if( OdfElement.class.isInstance( node ) )
+            ((OdfElement)node).onRemoveNode();
+    }
+
+    protected void onInsertNode( Node node )
+    {
+        Node child = node.getFirstChild();
+        while( child != null )
+        {
+            this.onInsertNode( child );
+            child = child.getNextSibling();
+        }
+
+        if( OdfElement.class.isInstance( node ) )
+            ((OdfElement)node).onInsertNode();
+    }
+
+    protected void onRemoveNode()
+    {
+    }
+
+    protected void onInsertNode()
+    {
+    }
+
+    @Override
+    public Node insertBefore(Node newChild, Node refChild) throws DOMException
+    {
+        onInsertNode(newChild);
+        return super.insertBefore(newChild, refChild);
+    }
+
+    @Override
+    public Node removeChild(Node oldChild) throws DOMException
+    {
+        onRemoveNode(oldChild);
+        return super.removeChild(oldChild);
+    }
+
+    @Override
+    public Node replaceChild(Node newChild, Node oldChild) throws DOMException
+    {
+        onInsertNode(newChild);
+        onRemoveNode(oldChild);
+        return super.replaceChild(newChild, oldChild);
+    }
+
+    
+
 }
