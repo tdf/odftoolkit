@@ -60,6 +60,11 @@
     <xsl:variable name="attribute-prefix" select="'attribute-'"/>
     <xsl:variable name="property-prefix" select="'property-'"/>
     <xsl:variable name="datatype-prefix" select="'datatype-'"/>
+
+    <xsl:variable name="attributes-heading" select="'General Attributes'"/>
+    <xsl:variable name="properties-heading" select="'Formatting Attributes'"/>
+    <xsl:variable name="datatypes-heading" select="'Other Datatypes'"/>
+
         
     <!-- ********************************* -->
     <!-- ** element anchors (element-*) ** -->
@@ -177,7 +182,7 @@
             <xsl:when test="starts-with($tag, '&lt;') and contains($tag,'&gt;')">
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
-                    <xsl:variable name="is-in-attributes" select="preceding::text:h[@text:outline-level='1']='General Attributes'"/>
+                    <xsl:variable name="is-in-attributes" select="preceding::text:h[@text:outline-level='1']=$attributes-heading"/>
                     <xsl:call-template name="create-element-ref-mark-start">
                          <xsl:with-param name="tag" select="$tag"/>
                          <xsl:with-param name="is-in-attributes" select="$is-in-attributes"/>
@@ -197,7 +202,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="attr-name" select="$tag"/>
-                <xsl:variable name="fp" select="preceding::text:h[@text:outline-level='1'][last()]='Formatting Attributes'"/>
+                <xsl:variable name="fp" select="preceding::text:h[@text:outline-level='1'][last()]=$properties-heading"/>
                 <xsl:if test="$check-xref-anchors">
                     <xsl:choose>
                         <xsl:when test="not(document($xref-schema-file)/rng:grammar/rng:element[(starts-with(@name,'style:') and contains(@name,'-properties'))=$fp]/rng:attribute[@name=$attr-name])">
@@ -231,8 +236,8 @@
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="text:reference-mark-start|text:reference-mark-end">
-        <xsl:if test="not($create-odf-references) or not(starts-with(@text:name,$attribute-prefix) or starts-with(@text:name,$property-prefix) or starts-with(@text:name,$element-prefix))">
+    <xsl:template match="text:h/text:reference-mark-start|text:h/text:reference-mark-end">
+        <xsl:if test="not($create-odf-references) or not(starts-with(@text:name,$attribute-prefix) or starts-with(@text:name,$property-prefix) or starts-with(@text:name,$element-prefix) or starts-with(@text:name,$datatype-prefix))">
             <xsl:copy>
                 <xsl:apply-templates select="@*|node()"/>
             </xsl:copy>
@@ -289,7 +294,21 @@
             </xsl:if>        
         </xsl:if>
     </xsl:template>
-    
+
+    <xsl:template match="text:h[@text:outline-level='3' and preceding::text:h[@text:outline-level='2'][last()]=$datatypes-heading]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:variable name="ref-name" select="concat($datatype-prefix,normalize-space(.))"/>
+            <xsl:if test="$create-odf-references">
+                <text:reference-mark-start text:name="{$ref-name}"/>
+            </xsl:if>
+            <xsl:apply-templates select="node()"/>
+            <xsl:if test="$create-odf-references">
+                <text:reference-mark-end text:name="{$ref-name}"/>
+            </xsl:if>
+        </xsl:copy>
+    </xsl:template>
+
     <!-- default: copy everything. -->
     <xsl:template match="@*|node()">
         <xsl:copy>
@@ -578,9 +597,9 @@
                         <xsl:value-of select="$attr-name"/>
                     </text:span>
                     <xsl:text> attribute has the data type </xsl:text>
-                    <text:span text:style-name="Datatype">
-                        <xsl:value-of select="$name"/>
-                    </text:span>
+                    <xsl:call-template name="print-datatype">
+                        <xsl:with-param name="name" select="$name"/>
+                    </xsl:call-template>
                     <xsl:text>.</xsl:text>
                 </text:p>
             </xsl:when>
@@ -709,9 +728,9 @@
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
             <xsl:text>four space separated values of type </xsl:text>
-            <text:span text:style-name="Datatype">
-                <xsl:value-of select="@name"/>
-            </text:span>
+            <xsl:call-template name="print-datatype">
+                <xsl:with-param name="name" select="@name"/>
+            </xsl:call-template>
             <xsl:text>.</xsl:text>
         </text:p>
     </xsl:template>
@@ -724,9 +743,9 @@
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
             <xsl:text>three space separated values of type </xsl:text>
-            <text:span text:style-name="Datatype">
-                <xsl:value-of select="@name"/>
-            </text:span>
+            <xsl:call-template name="print-datatype">
+                <xsl:with-param name="name" select="@name"/>
+            </xsl:call-template>
             <xsl:text>.</xsl:text>
         </text:p>
     </xsl:template>
@@ -825,9 +844,9 @@
         <xsl:choose>
             <xsl:when test="//text:p[.=concat($datatype-prefix,$name)]">
                 <xsl:text>values of type </xsl:text>
-                <text:span text:style-name="Datatype">
-                    <xsl:value-of select="$name"/>
-                </text:span>
+                <xsl:call-template name="print-datatype">
+                    <xsl:with-param name="name" select="$name"/>
+                </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates select="document($xref-schema-file)/rng:grammar/rng:define[@name=$name]/*" mode="attr-list-value">
@@ -880,9 +899,9 @@
         <xsl:choose>
             <xsl:when test="//text:p[.=concat($datatype-prefix,$name)]">
                 <xsl:text>a value of type </xsl:text>
-                <text:span text:style-name="Datatype">
-                    <xsl:value-of select="@name"/>
-                </text:span>
+                <xsl:call-template name="print-datatype">
+                    <xsl:with-param name="name" select="@name"/>
+                </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates select="document($xref-schema-file)/rng:grammar/rng:define[@name=$name]/*" mode="individual-value">
@@ -945,9 +964,9 @@
     <xsl:template match="rng:data[@type='double' and count(rng:param)=2]" mode="individual-value">
         <xsl:param name="attr-name"/>
         <xsl:text>a value of type </xsl:text>
-        <text:span text:style-name="Datatype">
-            <xsl:value-of select="@type"/>
-        </text:span>
+        <xsl:call-template name="print-datatype">
+            <xsl:with-param name="name" select="@type"/>
+        </xsl:call-template>
         <xsl:text> in the range [</xsl:text>
         <text:span text:style-name="Attribute_20_Value">
             <xsl:value-of select="rng:param[@name='minInclusive']"/>
@@ -973,6 +992,14 @@
         <xsl:text> attribute are </xsl:text>
     </xsl:template>
 
+    <xsl:template name="print-datatype">
+        <xsl:param name="name"/>
+        <text:span text:style-name="Datatype">
+            <xsl:value-of select="$name"/>
+        </text:span>
+        <xsl:text> </xsl:text><text:reference-ref text:ref-name="{concat($datatype-prefix,$name)}" text:reference-format="chapter">?</text:reference-ref>
+    </xsl:template>
+
 
     <xsl:template name="create-elem-parent-elem-list">
         <xsl:param name="elem-name" select="@name"/>
@@ -991,7 +1018,7 @@
                         <xsl:text> is usable with the following element: </xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text> is usable used with the following elements: </xsl:text>
+                        <xsl:text> is usable with the following elements: </xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
                 <!-- collect elements -->
