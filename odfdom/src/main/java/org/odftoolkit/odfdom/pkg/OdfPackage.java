@@ -90,6 +90,27 @@ import org.xml.sax.XMLReader;
  */
 public class OdfPackage {
 
+    /**
+     * This class solely exists to clean up after a package object has been
+     * removed by garbage collector. Finalizable classes are said to have
+     * slow garbage collection, so we don't make the whole OdfPackage
+     * finalizable.
+     */
+    static private class OdfFinalizablePackage {
+        File mTempDirForDeletion;
+
+        OdfFinalizablePackage(File tempDir) {
+            mTempDirForDeletion = tempDir;
+        }
+
+        @Override
+        protected void finalize() {
+            if (mTempDirForDeletion != null) {
+                TempDir.deleteTempOdfDirectory(mTempDirForDeletion);
+            }
+        }
+    }
+
     private Logger mLog = Logger.getLogger(OdfPackage.class.getName());
 
     public enum OdfFile {
@@ -117,6 +138,7 @@ public class OdfPackage {
     // temp Dir for this ODFpackage (2DO: temp dir handling will be removed most likely)
     private File mTempDirParent;
     private File mTempDir;
+    private OdfFinalizablePackage mFinalize;
 
     // some well known streams inside ODF packages    
     private String mMediaType;
@@ -387,6 +409,10 @@ public class OdfPackage {
         }
         FileOutputStream fos = new FileOutputStream(odfFile);
         save(fos, baseURI);
+        if (baseURI.equals(mBaseURI)) {
+            mZipFile.close();
+            this.initialize(odfFile);
+        }
     }
 
     public void save(OutputStream odfStream) throws Exception {
@@ -1375,13 +1401,13 @@ public class OdfPackage {
     }
 
     /**
-     * get Temp Directory
+     * get Temp Directory. Create new temp directory on demand and register it
+     * for removal by garbage collector
      */
-    private File getTempDir()
-            throws Exception {
-
+    private File getTempDir() throws Exception {
         if (mTempDir == null) {
             mTempDir = TempDir.newTempOdfDirectory("ODF", mTempDirParent);
+            mFinalize = new OdfFinalizablePackage(mTempDir);
         }
         return mTempDir;
     }
