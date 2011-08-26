@@ -69,6 +69,7 @@
     <!-- ********************************* -->
     <!-- ** element anchors (element-*) ** -->
     <!-- ********************************* -->
+
     <xsl:template match="text:p[starts-with(.,$element-prefix)]">        
         <!-- Remove anchor paragraph if $keep-xref-anchors is false -->
         <xsl:if test="$keep-xref-anchors">
@@ -147,6 +148,18 @@
             <xsl:call-template name="check-element-list">
                 <xsl:with-param name="element-list" select="concat('_',$remainder)"/>
             </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- ************************************* -->
+    <!-- ** datatype anchors (datatype-*) ** -->
+    <!-- ************************************* -->
+    <xsl:template match="text:p[starts-with(.,$datatype-prefix)]">
+        <!-- Remove anchor paragraph if $keep-xref-anchors is false -->
+        <xsl:if test="$keep-xref-anchors">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|node()"/>
+            </xsl:copy>
         </xsl:if>
     </xsl:template>
 
@@ -252,6 +265,7 @@
         
         <xsl:if test="$check-xref-anchors">
             <xsl:choose>
+                <xsl:when test="$element-name='dsig:document-signatures' or $element-name='xmldsig:Signature'"/>
                 <xsl:when test="not(document($xref-schema-file)/rng:grammar/rng:element[@name=$element-name])">
                     <xsl:message>Heading: &quot;<xsl:value-of select="."/>&quot;: No element definition found in schema for element &quot;<xsl:value-of select="$element-name"/>&quot;.</xsl:message>
                 </xsl:when>
@@ -344,6 +358,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>   
+
 
     <!-- select all <element> nodes in the file or in included files -->
     <xsl:template match="rng:attribute">
@@ -711,6 +726,33 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+    <xsl:template match="rng:data" mode="attr-value">
+        <xsl:param name="attr-name"/>
+        <xsl:variable name="type" select="@type"/>
+        <xsl:call-template name="new-line"/>
+        <xsl:choose>
+            <!-- A plain data type is only valid if there is a datatype-* in the
+                 specification text and if there isn't a same named define -->
+            <xsl:when test="//text:p[.=concat($datatype-prefix,$type)] and not(document($xref-schema-file)/rng:grammar/rng:define[@name=$type])">
+                <text:p text:style-name="Attribute_20_Value_20_List">
+                    <xsl:text>The </xsl:text>
+                    <text:span text:style-name="Attribute">
+                        <xsl:value-of select="$attr-name"/>
+                    </text:span>
+                    <xsl:text> attribute has the data type </xsl:text>
+                    <xsl:call-template name="print-datatype">
+                        <xsl:with-param name="name" select="$type"/>
+                    </xsl:call-template>
+                    <xsl:text>.</xsl:text>
+                </text:p>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message>*** Attribute <xsl:value-of select="$attr-name"/>: Unrecognized value element: <xsl:value-of select="name(.)"/></xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
 
     <xsl:template match="rng:choice" mode="attr-value">
         <xsl:param name="attr-name"/>
