@@ -202,7 +202,7 @@
 				<site>
 					<id>odfdom</id>
 					<name>ODFDOM Java Toolkit Project</name>
-					<url>dav:https://odftoolkit.org/website/odfdom/${project.version}</url>
+					<url>dav:https://odftoolkit.org/website/odfdom/${project.version}/javadoc-taglets</url>
 				</site>
 			</distributionManagement>
 		</profile>
