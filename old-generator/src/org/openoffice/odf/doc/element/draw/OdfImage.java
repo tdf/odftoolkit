@@ -90,34 +90,14 @@ public class OdfImage extends OdfImageElement {
      * 
      */
     public String insertImage(URI imageUri) throws Exception {
-        String imageRef = imageUri.toString();
-
-        InputStream is = null;
-        String packagePath = null;
-        try {
-            if (imageUri.isAbsolute()) {
-                // if the URI is absolute it can be converted to URL
-                is = imageUri.toURL().openStream();
-            } else if (imageRef.contains(COLON)) {
-                // if the URI string representation has a protocol create URL
-                is = new URL(imageUri.toString()).openStream();
-            } else {
-                // otherwise create a file class to open the stream
-                is = new File(imageRef).toURL().openStream();
-            }
-            if (imageRef.contains(SLASH)) {
-                imageRef = imageRef.substring(imageRef.lastIndexOf(SLASH) + 1, imageRef.length());
-            }
-            packagePath = OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + imageRef;
-            packagePath = mOdfDocument.getDocumentPackagePath() + packagePath;
-            // TODOD URI ENCODING
-            //String packagePathDecoded = packagePath.replaceAll(" ", "%20");
-            String mediaType = OdfFileEntry.getMediaType(imageRef);
-            insertImage(is, packagePath, mediaType);
-        } catch (IOException ex) {
-            Logger.getLogger(OdfImage.class.getName()).log(Level.SEVERE, "Could not receive image from URL!", ex);
-            packagePath = null;
+        String imageRef = imageUri.toString();        
+        if (imageRef.contains(SLASH)) {
+            imageRef = imageRef.substring(imageRef.lastIndexOf(SLASH) + 1, imageRef.length());
         }
+        String packagePath = OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + imageRef;
+        packagePath = mOdfDocument.getDocumentPackagePath() + packagePath;
+        String mediaType = OdfFileEntry.getMediaType(imageRef);            
+        mOdfPackage.insert(imageUri, packagePath, mediaType);
         return packagePath;
     }
 
