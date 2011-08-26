@@ -32,6 +32,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,7 +46,6 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
@@ -359,6 +359,45 @@ public class DocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+	
+	@Test
+	public void testSetLocale() {
+		String filename = "testDefaultLanguage.odp";
+		try {
+			OdfPresentationDocument doc = OdfPresentationDocument
+					.newPresentationDocument();
+
+			Assert.assertNull(doc.getLocale(OdfDocument.ScriptType.WESTERN));
+			Assert.assertNull(doc.getLocale(OdfDocument.ScriptType.CJK));
+			Assert.assertNull(doc.getLocale(OdfDocument.ScriptType.CTL));
+
+			Locale eng_can = new Locale(Locale.ENGLISH.getLanguage(),
+					Locale.CANADA.getCountry());
+			Locale chinese_china = new Locale(Locale.CHINESE.getLanguage(),
+					Locale.CHINA.getCountry());
+			Locale ar_eg = new Locale("ar", "eg");
+
+			doc.setLocale(eng_can);
+			doc.setLocale(chinese_china);
+			doc.setLocale(ar_eg);
+
+			doc.save(ResourceUtilities.newTestOutputFile(filename));
+
+			OdfPresentationDocument newDoc = OdfPresentationDocument
+					.loadDocument(ResourceUtilities
+							.getTestResourceAsStream(filename));
+			Assert.assertEquals(eng_can, newDoc
+					.getLocale(OdfDocument.ScriptType.WESTERN));
+			Assert.assertEquals(chinese_china, newDoc
+					.getLocale(OdfDocument.ScriptType.CJK));
+			Assert.assertEquals(ar_eg, newDoc
+					.getLocale(OdfDocument.ScriptType.CTL));
+
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+	}	
 
 	private static String inputStreamToString(InputStream in) throws IOException {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));

@@ -34,7 +34,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
@@ -56,27 +59,27 @@ import org.odftoolkit.odfdom.pkg.OdfAttribute;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.doc.OdfDocument.ScriptType;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfMetaDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
-import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentContentElement;
-import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentMetaElement;
-import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentSettingsElement;
-import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentStylesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.style.props.OdfTextProperties;
 import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
 import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfDefaultStyle;
 import org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
@@ -1472,4 +1475,313 @@ public abstract class OdfDocument extends OdfPackageDocument {
 			}
 		}
 	}
+
+	// /////////////////
+	// Following is the implementation of locale settings
+	// ////////////////
+
+	/**
+	 * <p>
+	 * Unicode characters are in general divided by office applications into
+	 * three different types:
+	 * 
+	 * <p>
+	 * 1) There is CJK: the Chinese, Japanese and Korean script (also old
+	 * Vietnamese belong to this group). See
+	 * http://en.wikipedia.org/wiki/CJK_characters
+	 * 
+	 * <p>
+	 * 2) There is CTL: Complex Text Layout, which uses BIDI algorithms and/or
+	 * glyph modules. See http://en.wikipedia.org/wiki/Complex_Text_Layout
+	 * 
+	 * <p>
+	 * 3) And there is all the rest, which was once called by MS Western.
+	 */
+	public enum ScriptType {
+		/**
+		 * Western language
+		 */
+		WESTERN,
+		/**
+		 * Chinese, Japanese and Korean
+		 */
+		CJK,
+		/**
+		 * Complex Text Layout language
+		 */
+		CTL;
+
+	}
+
+	private final static HashSet<String> CJKLanguage = new HashSet<String>();
+	private final static HashSet<String> CTLLanguage = new HashSet<String>();
+	{
+		CJKLanguage.add("zh"); // LANGUAGE_CHINES
+		CJKLanguage.add("ja"); // LANGUAGE_JAPANESE
+		CJKLanguage.add("ko"); // LANGUAGE_KOREANE
+
+		CTLLanguage.add("am"); // LANGUAGE_AMHARIC_ETHIOPIA
+		CTLLanguage.add("ar"); // LANGUAGE_ARABIC_SAUDI_ARABIA
+		CTLLanguage.add("as"); // LANGUAGE_ASSAMESE
+		CTLLanguage.add("bn"); // LANGUAGE_BENGALI
+		CTLLanguage.add("bo"); // LANGUAGE_TIBETAN
+		CTLLanguage.add("brx");// LANGUAGE_USER_BODO_INDIA
+		CTLLanguage.add("dgo");// LANGUAGE_USER_DOGRI_INDIA
+		CTLLanguage.add("dv"); // LANGUAGE_DHIVEHI
+		CTLLanguage.add("dz"); // LANGUAGE_DZONGKHA
+		CTLLanguage.add("fa"); // LANGUAGE_FARSI
+		CTLLanguage.add("gu"); // LANGUAGE_GUJARATI
+		CTLLanguage.add("he"); // LANGUAGE_HEBREW
+		CTLLanguage.add("hi"); // LANGUAGE_HINDI
+		CTLLanguage.add("km"); // LANGUAGE_KHMER
+		CTLLanguage.add("kn"); // LANGUAGE_KANNADA
+		CTLLanguage.add("ks"); // LANGUAGE_KASHMIRI
+		CTLLanguage.add("ku"); // LANGUAGE_USER_KURDISH_IRAQ
+		CTLLanguage.add("lo"); // LANGUAGE_LAO
+		CTLLanguage.add("mai");// LANGUAGE_USER_MAITHILI_INDIA
+		CTLLanguage.add("ml"); // LANGUAGE_MALAYALAM
+		CTLLanguage.add("mn"); // LANGUAGE_MONGOLIAN_MONGOLIAN
+		CTLLanguage.add("mni");// LANGUAGE_MANIPURI
+		CTLLanguage.add("mr"); // LANGUAGE_MARATHI
+		CTLLanguage.add("my"); // LANGUAGE_BURMESE
+		CTLLanguage.add("ne"); // LANGUAGE_NEPALI
+		CTLLanguage.add("or"); // LANGUAGE_ORIYA
+		CTLLanguage.add("pa"); // LANGUAGE_PUNJABI
+		CTLLanguage.add("sa"); // LANGUAGE_SANSKRIT
+		CTLLanguage.add("sd"); // LANGUAGE_SINDHI
+		CTLLanguage.add("si"); // LANGUAGE_SINHALESE_SRI_LANKA
+		CTLLanguage.add("syr");// LANGUAGE_SYRIAC
+		CTLLanguage.add("ta"); // LANGUAGE_TAMIL
+		CTLLanguage.add("te"); // LANGUAGE_TELUGU
+		CTLLanguage.add("th"); // LANGUAGE_THAI
+		CTLLanguage.add("ug"); // LANGUAGE_UIGHUR_CHINA
+		CTLLanguage.add("ur"); // LANGUAGE_URDU
+		CTLLanguage.add("yi"); // LANGUAGE_YIDDISH
+	}
+
+	/**
+	 * <p>
+	 * Set a locale information.
+	 * <p>
+	 * The locale information will affect the language and country setting of
+	 * the document. Thus the font settings, the spell checkings and etc will be
+	 * affected.
+	 * 
+	 * @param locale
+	 *            - an instance of Locale
+	 */
+	public void setLocale(Locale locale) {
+		setLocale(locale, getScriptType(locale));
+	}
+
+	private ScriptType getScriptType(Locale locale) {
+		String language = locale.getLanguage();
+		if (CJKLanguage.contains(language))
+			return ScriptType.CJK;
+		if (CTLLanguage.contains(language))
+			return ScriptType.CTL;
+		return ScriptType.WESTERN;
+
+	}
+
+	/**
+	 * <p>
+	 * Set a locale of a specific script type.
+	 * <p>
+	 * If the locale is not belone to the script type, nothing will happen.
+	 * 
+	 * @param locale
+	 *            - Locale information
+	 * @param scriptType
+	 *            - The script type
+	 */
+	public void setLocale(Locale locale, ScriptType scriptType) {
+		try {
+			switch (scriptType) {
+			case WESTERN:
+				setWesternLanguage(locale);
+				break;
+			case CJK:
+				setDefaultAsianLanguage(locale);
+				break;
+			case CTL:
+				setDefaultComplexLanguage(locale);
+				break;
+			}
+		} catch (Exception e) {
+			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE,
+					"Failed to set locale", e);
+		}
+	}
+
+	/**
+	 * <p>
+	 * Get a locale information of a specific script type.
+	 * 
+	 * @param scriptType
+	 *            - The script type
+	 * @return the Locale information
+	 */
+	public Locale getLocale(ScriptType scriptType) {
+		try {
+			switch (scriptType) {
+			case WESTERN:
+				return getDefaultLanguageByProperty(OdfTextProperties.Country,
+						OdfTextProperties.Language);
+			case CJK:
+				return getDefaultLanguageByProperty(
+						OdfTextProperties.CountryAsian,
+						OdfTextProperties.LanguageAsian);
+			case CTL:
+				return getDefaultLanguageByProperty(
+						OdfTextProperties.CountryComplex,
+						OdfTextProperties.LanguageComplex);
+			}
+		} catch (Exception e) {
+			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE,
+					"Failed to get locale", e);
+		}
+		return null;
+	}
+
+	/**
+	 * This method will set the default language and country information of the
+	 * document, based on the parameter of the Locale information.
+	 * 
+	 * @param locale
+	 *            - an instance of Locale that the default language and country
+	 *            will be set to.
+	 * @throws Exception
+	 */
+	private void setWesternLanguage(Locale locale) throws Exception {
+		if (getScriptType(locale) != ScriptType.WESTERN)
+			return;
+
+		OdfOfficeStyles styles = getStylesDom().getOfficeStyles();
+		Iterable<OdfDefaultStyle> defaultStyles = styles.getDefaultStyles();
+		if (defaultStyles != null) {
+			Iterator<OdfDefaultStyle> itera = defaultStyles.iterator();
+			while (itera.hasNext()) {
+				OdfDefaultStyle style = itera.next();
+				if (style.getFamily().getProperties().contains(
+						OdfTextProperties.Language)) {
+					style.setProperty(OdfTextProperties.Language, locale
+							.getLanguage());
+					style.setProperty(OdfTextProperties.Country, locale
+							.getCountry());
+				}
+			}
+		}
+	}
+
+	private Locale getDefaultLanguageByProperty(OdfStyleProperty countryProp,
+			OdfStyleProperty languageProp) throws Exception {
+		String lang = null, ctry = null;
+
+		OdfOfficeStyles styles = getStylesDom().getOfficeStyles();
+
+		// get language and country setting from default style setting for
+		// paragraph
+		OdfDefaultStyle defaultStyle = styles
+				.getDefaultStyle(OdfStyleFamily.Paragraph);
+		if (defaultStyle != null) {
+			if (defaultStyle.hasProperty(countryProp)
+					&& defaultStyle.hasProperty(languageProp)) {
+				ctry = defaultStyle.getProperty(countryProp);
+				lang = defaultStyle.getProperty(languageProp);
+				return new Locale(lang, ctry);
+			}
+		}
+		// if no default style setting for paragraph
+		// get language and country setting from other default style settings
+		Iterable<OdfDefaultStyle> defaultStyles = styles.getDefaultStyles();
+		Iterator<OdfDefaultStyle> itera = defaultStyles.iterator();
+		while (itera.hasNext()) {
+			OdfDefaultStyle style = itera.next();
+			if (style.hasProperty(countryProp)
+					&& style.hasProperty(languageProp)) {
+				ctry = style.getProperty(countryProp);
+				lang = style.getProperty(languageProp);
+				return new Locale(lang, ctry);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * This method will return an instance of Locale, which presents the default
+	 * language and country information settings in this document.
+	 * 
+	 * @return an instance of Locale that the default language and country is
+	 *         set to.
+	 */
+
+	/**
+	 * This method will set the default Asian language and country information
+	 * of the document, based on the parameter of the Locale information. If the
+	 * Locale instance is not set a Asian language (Chinese, Traditional
+	 * Chinese, Japanese and Korean, nothing will take effect.
+	 * 
+	 * @param locale
+	 *            - an instance of Locale that the default Asian language and
+	 *            country will be set to.
+	 * @throws Exception
+	 */
+	private void setDefaultAsianLanguage(Locale locale) throws Exception {
+		if (getScriptType(locale) != ScriptType.CJK)
+			return;
+		String user_language = locale.getLanguage();
+		if (!user_language.equals(Locale.CHINESE.getLanguage())
+				&& !user_language.equals(Locale.TRADITIONAL_CHINESE
+						.getLanguage())
+				&& !user_language.equals(Locale.JAPANESE.getLanguage())
+				&& !user_language.equals(Locale.KOREAN.getLanguage()))
+			return;
+
+		OdfOfficeStyles styles = getStylesDom().getOfficeStyles();
+		Iterable<OdfDefaultStyle> defaultStyles = styles.getDefaultStyles();
+		if (defaultStyles != null) {
+			Iterator<OdfDefaultStyle> itera = defaultStyles.iterator();
+			while (itera.hasNext()) {
+				OdfDefaultStyle style = itera.next();
+				if (style.getFamily().getProperties().contains(
+						OdfTextProperties.LanguageAsian)) {
+					style.setProperty(OdfTextProperties.LanguageAsian, locale
+							.getLanguage());
+					style.setProperty(OdfTextProperties.CountryAsian, locale
+							.getCountry());
+				}
+			}
+		}
+	}
+
+	/**
+	 * This method will set the default complex language and country information
+	 * of the document, based on the parameter of the Locale information.
+	 * 
+	 * @param locale
+	 *            - an instance of Locale that the default complex language and
+	 *            country will be set to.
+	 * @throws Exception
+	 */
+	private void setDefaultComplexLanguage(Locale locale) throws Exception {
+		if (getScriptType(locale) != ScriptType.CTL)
+			return;
+		OdfOfficeStyles styles = getStylesDom().getOfficeStyles();
+		Iterable<OdfDefaultStyle> defaultStyles = styles.getDefaultStyles();
+		if (defaultStyles != null) {
+			Iterator<OdfDefaultStyle> itera = defaultStyles.iterator();
+			while (itera.hasNext()) {
+				OdfDefaultStyle style = itera.next();
+				if (style.getFamily().getProperties().contains(
+						OdfTextProperties.LanguageComplex)) {
+					style.setProperty(OdfTextProperties.LanguageComplex, locale
+							.getLanguage());
+					style.setProperty(OdfTextProperties.CountryComplex, locale
+							.getCountry());
+				}
+			}
+		}
+	}
+
 }
