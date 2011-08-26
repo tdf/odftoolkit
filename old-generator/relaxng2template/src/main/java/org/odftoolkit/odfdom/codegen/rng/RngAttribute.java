@@ -51,11 +51,16 @@ public class RngAttribute extends RngNode
         Handler = handler;
     }
 
+    public String getName()
+    {
+    	return Name;
+    }
+    
     public String getDefaultValue()
     {
         return DefaultValue;
     }
-    
+     
     public String getType()
     {
         if( Type == null )

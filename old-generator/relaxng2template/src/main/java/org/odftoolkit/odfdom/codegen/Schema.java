@@ -24,6 +24,7 @@ package org.odftoolkit.odfdom.codegen;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -434,9 +435,11 @@ public class Schema
 						groupAttribute.add(entry.Attribute);
 					}
 				}
+
 				if(requiredAttribute.size()>0){
 					groupAttribute.addAll(requiredAttribute);
-				}				
+				}
+					            
 				tmpattributes.add(groupAttribute);
 				j++;
 			}
@@ -446,12 +449,26 @@ public class Schema
             	tmpattributes.add(requiredAttribute);
             }
             
+            
 			Iterator<Vector<RngAttribute>> itOut = tmpattributes.iterator();
 			String strTypes ="";
 			while (itOut.hasNext()) {
 				Vector<Attribute> combAttributes = new Vector<Attribute>();
 				Vector<RngAttribute> outRngAttribute = (Vector<RngAttribute>) itOut.next();
-				Iterator<RngAttribute> itIn = outRngAttribute.iterator();
+	            //sort attributes
+	            Object [] arr = outRngAttribute.toArray();
+	            Arrays.sort(arr,new Comparator() {
+	                  public int compare(Object arg0, Object arg1) {
+	                    Object key1 = ((RngAttribute)arg0).getName();
+	                    Object key2 = ((RngAttribute)arg1).getName();
+	                    return ((Comparable) key1).compareTo(key2);
+	                  }});
+	            Vector< RngAttribute > v = new Vector< RngAttribute >();
+	            for(int m=0; m<arr.length; m++){
+	            	v.add((RngAttribute) arr[m]);
+	            }
+				
+				Iterator<RngAttribute> itIn = v.iterator();
 				while (itIn.hasNext()) {
 					RngAttribute inAttribute = itIn.next();
 					Iterator<String> attributeNames = inAttribute.getNames();
@@ -540,12 +557,11 @@ public class Schema
 				boolean isExist = false;
 				while(strIter.hasNext()){
 					Attribute strAttr = strIter.next();
-					if(strAttr.getValueType().equals("String") || strAttr.getValueType().equals("Double") || strAttr.getValueType().equals("javax.xml.datatype.XMLGregorianCalendar")){
-						strType = strType+strAttr.getValueType();
+					if(strAttr.getQName().equals("table:date-start")||strAttr.getQName().equals("table:date-end")){
+						strType = strType + strAttr.getValueType();
 					}else{
-						strType=strType+strAttr.getQName();
-					}
-					
+						strType = strType + strAttr.getQName();
+					}					
 				}
 				
 				StringTokenizer tokens = new StringTokenizer(strTypes, ";" );
