@@ -692,12 +692,16 @@
                     <xsl:with-param name="attr-name" select="$attr-name"/>
                 </xsl:apply-templates>
             </xsl:when>
+            <xsl:when test="$attr-name='text:reference-format'">
+                <xsl:apply-templates select="ancestor::rng:grammar/rng:element/rng:attribute[@name=$attr-name]/*" mode="attr-value">
+                    <xsl:with-param name="attr-name" select="$attr-name"/>
+                </xsl:apply-templates>
+            </xsl:when>
             <xsl:when test="ancestor::rng:grammar/rng:element[((starts-with(@name,'style:') and contains(@name,'-properties'))=$fp) and (not($element-list) or contains($element-list,concat('_',$element-prefix,@name,'_'))) and count(rng:attribute[@name=$attr-name])>1]">
                 <xsl:message>Attribute <xsl:value-of select="$attr-name"/>: Multiple attribute definitions do exist for at least one element.</xsl:message>
             </xsl:when>
             <xsl:when test="$attr-name='xlink:show' or
-                            $attr-name='xlink:actuate' or
-                            $attr-name='text:reference-format'">
+                            $attr-name='xlink:actuate'">
                 <xsl:message>Attribute <xsl:value-of select="$attr-name"/>: No type info added (type too complex).</xsl:message>
             </xsl:when>
             <xsl:when test="not($element-list)">
@@ -815,6 +819,102 @@
         </text:p>
     </xsl:template>
 
+    <xsl:template match="rng:attribute[@name='text:reference-format']/rng:choice" mode="attr-value">
+        <xsl:param name="attr-name"/>
+        <xsl:call-template name="new-line"/>
+        <text:p text:style-name="Attribute_20_Value_20_List">
+            <xsl:variable name="elem-name" select="ancestor::rng:element/@name"/>
+        <xsl:text>For </xsl:text>
+        <text:span text:style-name="Element"><xsl:text>&lt;</xsl:text><xsl:value-of select="$elem-name"/><xsl:text>&gt;</xsl:text></text:span><xsl:text> </xsl:text><text:reference-ref text:ref-name="{concat($element-prefix,$elem-name)}" text:reference-format="chapter">?</text:reference-ref>
+        <xsl:text> elements, the values of the </xsl:text>
+        <text:span text:style-name="Attribute">
+             <xsl:value-of select="$attr-name"/>
+        </text:span>
+        <xsl:if test="*[not(self::rng:value or self::rng:ref)]"><xsl:message>*** Attribute <xsl:value-of select="$attr-name"/>: unexpected child elements</xsl:message></xsl:if>
+        <xsl:text> attribute are </xsl:text>
+            <xsl:variable name="has-values" select="count(rng:value)>0"/>
+            <xsl:for-each select="rng:ref">
+                <xsl:variable name="name" select="@name"/>
+                <xsl:if test="document($xref-schema-file)/rng:grammar/rng:define[@name=$name]/*[not(self::rng:choice)]"><xsl:message>*** Attribute <xsl:value-of select="$attr-name"/>: unexpected child elements in referenced define</xsl:message></xsl:if>
+                <xsl:for-each select="document($xref-schema-file)/rng:grammar/rng:define[@name=$name]/rng:choice/*">
+                    <xsl:choose>
+                        <xsl:when test="position() = 1"/>
+                        <xsl:when test="not($has-values) and position() = last()">
+                            <xsl:text> or </xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>, </xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:apply-templates select="." mode="individual-value">
+                        <xsl:with-param name="attr-name" select="$attr-name"/>
+                    </xsl:apply-templates>
+                </xsl:for-each>
+            </xsl:for-each>
+            <xsl:for-each select="rng:value">
+                <xsl:choose>
+                    <xsl:when test="position() = last()">
+                        <xsl:text> or </xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>, </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:apply-templates select="." mode="individual-value">
+                    <xsl:with-param name="attr-name" select="$attr-name"/>
+                </xsl:apply-templates>
+            </xsl:for-each>
+            <xsl:text>.</xsl:text>
+        </text:p>
+    </xsl:template>
+
+    <xsl:template match="rng:choice[rng:list[rng:oneOrMore and count(*)=1] and count(*)=count(rng:value)+1]" mode="attr-value">
+        <xsl:param name="attr-name"/>
+        <xsl:call-template name="new-line"/>
+        <text:p text:style-name="Attribute_20_Value_20_List">
+            <xsl:call-template name="print-the-values">
+                <xsl:with-param name="attr-name" select="$attr-name"/>
+            </xsl:call-template>
+            <xsl:for-each select="rng:value">
+                <xsl:apply-templates select="." mode="individual-value">
+                    <xsl:with-param name="attr-name" select="$attr-name"/>
+                </xsl:apply-templates>
+                <xsl:text>, </xsl:text>
+            </xsl:for-each>
+            <xsl:text> or white space separated non-empty lists of </xsl:text>
+            <xsl:apply-templates select="rng:list/rng:oneOrMore/*" mode="attr-list-value">
+                <xsl:with-param name="attr-name" select="$attr-name"/>
+            </xsl:apply-templates>
+            <xsl:text>.</xsl:text>
+            <xsl:text>.</xsl:text>
+        </text:p>
+    </xsl:template>
+
+    <xsl:template match="rng:choice[rng:list[count(*)=2 and count(rng:choice)=2] and count(*)=count(rng:value)+1]" mode="attr-value">
+        <xsl:param name="attr-name"/>
+        <xsl:call-template name="new-line"/>
+        <text:p text:style-name="Attribute_20_Value_20_List">
+            <xsl:call-template name="print-the-values">
+                <xsl:with-param name="attr-name" select="$attr-name"/>
+            </xsl:call-template>
+            <xsl:for-each select="rng:value">
+                <xsl:apply-templates select="." mode="individual-value">
+                    <xsl:with-param name="attr-name" select="$attr-name"/>
+                </xsl:apply-templates>
+                <xsl:text>, </xsl:text>
+            </xsl:for-each>
+            <xsl:text>or two white space separated values. The first of these values </xsl:text>
+            <xsl:apply-templates select="rng:list/*[1]" mode="single-attr-list-value">
+                <xsl:with-param name="attr-name" select="$attr-name"/>
+            </xsl:apply-templates>
+            <xsl:text>. The second of these values </xsl:text>
+            <xsl:apply-templates select="rng:list/*[2]" mode="single-attr-list-value">
+                <xsl:with-param name="attr-name" select="$attr-name"/>
+            </xsl:apply-templates>
+            <xsl:text>.</xsl:text>
+        </text:p>
+    </xsl:template>
+
     <xsl:template match="rng:value" mode="attr-value">
         <xsl:param name="attr-name"/>
         <xsl:if test="not(starts-with($attr-name,'xlink:'))">
@@ -840,7 +940,7 @@
             <xsl:call-template name="print-the-values">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
-            <xsl:text>space separated possibly empty lists of </xsl:text>
+            <xsl:text>white space separated possibly empty lists of </xsl:text>
             <xsl:apply-templates select="*/*" mode="attr-list-value">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:apply-templates>
@@ -855,7 +955,7 @@
             <xsl:call-template name="print-the-values">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
-            <xsl:text>space separated non-empty lists of </xsl:text>
+            <xsl:text>white space separated non-empty lists of </xsl:text>
             <xsl:apply-templates select="*/*" mode="attr-list-value">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:apply-templates>
@@ -863,18 +963,19 @@
         </text:p>
     </xsl:template>
 
-    <xsl:template match="rng:list[count(*)=2 and count(rng:ref)=2]" mode="attr-value">
+    <xsl:template match="rng:list[count(*)=2 and count(rng:ref|rng:choice)=2]" mode="attr-value">
         <xsl:param name="attr-name"/>
         <xsl:call-template name="new-line"/>
         <text:p text:style-name="Attribute_20_Value_20_List">
-            <xsl:call-template name="print-the-values">
+            <xsl:call-template name="print-the-attribute-has">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
-            <xsl:apply-templates select="rng:ref[1]" mode="individual-value">
+            <xsl:text>two white space separated values. The first value </xsl:text>
+            <xsl:apply-templates select="*[1]" mode="single-attr-list-value">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:apply-templates>
-            <xsl:text> followed by </xsl:text>
-            <xsl:apply-templates select="rng:ref[2]" mode="individual-value">
+            <xsl:text>. The second value </xsl:text>
+            <xsl:apply-templates select="*[2]" mode="single-attr-list-value">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:apply-templates>
             <xsl:text>.</xsl:text>
@@ -885,32 +986,15 @@
         <xsl:param name="attr-name"/>
         <xsl:call-template name="new-line"/>
         <text:p text:style-name="Attribute_20_Value_20_List">
-            <xsl:call-template name="print-the-values">
+            <xsl:call-template name="print-the-attribute-has">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
-            <xsl:apply-templates select="*[1]" mode="attr-list-value">
+            <xsl:text>one or two white space separated values. The first values </xsl:text>
+            <xsl:apply-templates select="*[1]" mode="single-attr-list-value">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:apply-templates>
-            <xsl:text> optionally followed by </xsl:text>
-            <xsl:apply-templates select="rng:optional/*" mode="individual-value">
-                <xsl:with-param name="attr-name" select="$attr-name"/>
-            </xsl:apply-templates>
-            <xsl:text>.</xsl:text>
-        </text:p>
-    </xsl:template>
-
-    <xsl:template match="rng:list[count(*)=2 and count(rng:choice)=1 and count(rng:ref)=1]" mode="attr-value">
-        <xsl:param name="attr-name"/>
-        <xsl:call-template name="new-line"/>
-        <text:p text:style-name="Attribute_20_Value_20_List">
-            <xsl:call-template name="print-the-values">
-                <xsl:with-param name="attr-name" select="$attr-name"/>
-            </xsl:call-template>
-            <xsl:apply-templates select="*[1]" mode="attr-list-value">
-                <xsl:with-param name="attr-name" select="$attr-name"/>
-            </xsl:apply-templates>
-            <xsl:text> followed by </xsl:text>
-            <xsl:apply-templates select="*[2]" mode="individual-value">
+            <xsl:text>. The second value </xsl:text>
+            <xsl:apply-templates select="rng:optional/*" mode="single-attr-list-value">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:apply-templates>
             <xsl:text>.</xsl:text>
@@ -924,7 +1008,7 @@
             <xsl:call-template name="print-the-values">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
-            <xsl:text>four space separated values of type </xsl:text>
+            <xsl:text>four white space separated values of type </xsl:text>
             <xsl:call-template name="print-datatype">
                 <xsl:with-param name="name" select="'integer'"/>
                 <xsl:with-param name="attr-name" select="$attr-name"/>
@@ -940,7 +1024,7 @@
             <xsl:call-template name="print-the-values">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
-            <xsl:text>three space separated values of type </xsl:text>
+            <xsl:text>three white space separated values of type </xsl:text>
             <xsl:call-template name="print-datatype">
                 <xsl:with-param name="name" select="'positiveLength'"/>
                 <xsl:with-param name="attr-name" select="$attr-name"/>
@@ -949,10 +1033,39 @@
         </text:p>
     </xsl:template>
 
+    <xsl:template match="rng:element[@name='style:background-image']/rng:attribute[@name='style:position']/rng:choice" mode="attr-value">
+        <xsl:param name="attr-name"/>
+        <xsl:if test="not(count(rng:list)=2)">
+            <xsl:message>Unexpected content <xsl:value-of select="$attr-name"/></xsl:message>
+        </xsl:if>
+        <xsl:call-template name="new-line"/>
+        <text:p text:style-name="Attribute_20_Value_20_List">
+            <xsl:call-template name="print-the-values">
+                <xsl:with-param name="attr-name" select="$attr-name"/>
+            </xsl:call-template>
+            <xsl:for-each select="rng:value">
+                <xsl:apply-templates select="." mode="individual-value">
+                    <xsl:with-param name="attr-name" select="$attr-name"/>
+                </xsl:apply-templates>
+                <xsl:text>, </xsl:text>
+            </xsl:for-each>
+            <xsl:text>or two white space separated values, that may appear in any order. One of these values </xsl:text>
+            <xsl:apply-templates select="rng:list[1]/rng:ref[1]" mode="single-attr-list-value">
+                <xsl:with-param name="attr-name" select="$attr-name"/>
+            </xsl:apply-templates>
+            <xsl:text>. The other value </xsl:text>
+            <xsl:apply-templates select="rng:list[1]/rng:ref[2]" mode="single-attr-list-value">
+                <xsl:with-param name="attr-name" select="$attr-name"/>
+            </xsl:apply-templates>
+            <xsl:text>.</xsl:text>
+        </text:p>
+    </xsl:template>
+
+
     <xsl:template match="rng:attribute[@name='style:mirror']/rng:choice" mode="attr-value">
         <xsl:param name="attr-name"/>
         <xsl:if test="not(count(*)=5 and count(rng:value)=2 and count(rng:ref[@name='horizontal-mirror'])=1 and count(rng:list)=2)">
-            <xsl:message> Unexpected content <xsl:value-of select="$attr-name"/></xsl:message>
+            <xsl:message>Unexpected content <xsl:value-of select="$attr-name"/></xsl:message>
         </xsl:if>
         <xsl:call-template name="new-line"/>
         <text:p text:style-name="Attribute_20_Value_20_List">
@@ -960,25 +1073,19 @@
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
             <xsl:for-each select="rng:value|ancestor::rng:grammar/rng:element/rng:define[@name='horizontal-mirror']/rng:choice/rng:value">
-                <xsl:choose>
-                    <xsl:when test="position() = 1"/>
-                    <xsl:otherwise>
-                        <xsl:text>, </xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
                 <xsl:apply-templates select="." mode="individual-value">
                     <xsl:with-param name="attr-name" select="$attr-name"/>
                 </xsl:apply-templates>
+                <xsl:text>, </xsl:text>
             </xsl:for-each>
-            <xsl:text>, </xsl:text>
-            <xsl:apply-templates select="rng:list[1]" mode="individual-value">
+            <xsl:text>or two white space separated values, that may appear in any order. One of these values is always </xsl:text>
+            <xsl:apply-templates select="rng:list[1]/rng:value" mode="individual-value">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:apply-templates>
-            <xsl:text> or </xsl:text>
-            <xsl:apply-templates select="rng:list[2]" mode="individual-value">
+            <xsl:text>. The other value </xsl:text>
+            <xsl:apply-templates select="rng:list[1]/rng:ref" mode="single-attr-list-value">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:apply-templates>
-
             <xsl:text>.</xsl:text>
         </text:p>
     </xsl:template>
@@ -993,7 +1100,7 @@
             <xsl:call-template name="print-the-values">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
-            <xsl:text>one, two or three space separated </xsl:text>
+            <xsl:text>one, two or three white space separated </xsl:text>
             <xsl:apply-templates select="rng:ref" mode="attr-list-value">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:apply-templates>
@@ -1102,6 +1209,80 @@
         <xsl:message>*** Attribute <xsl:value-of select="$attr-name"/>: Unrecognized value element in list: <xsl:value-of select="name(.)"/></xsl:message>
     </xsl:template>
 
+    <xsl:template match="rng:ref" mode="single-attr-list-value">
+        <xsl:param name="attr-name"/>
+        <xsl:variable name="name" select="@name"/>
+        <xsl:choose>
+            <xsl:when test="//text:p[.=concat($datatype-prefix,$name)]">
+                <xsl:text>is of type </xsl:text>
+                <xsl:call-template name="print-datatype">
+                    <xsl:with-param name="name" select="@name"/>
+                    <xsl:with-param name="attr-name" select="$attr-name"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="document($xref-schema-file)/rng:grammar/rng:define[@name=$name]/*" mode="single-attr-list-value">
+                    <xsl:with-param name="attr-name" select="$attr-name"/>
+                </xsl:apply-templates>
+            </xsl:otherwise>
+         </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="rng:data[(@type='double' or @type='decimal') and count(rng:param)=2 and rng:param[@name='minInclusive'] and rng:param[@name='maxInclusive']]" mode="single-attr-list-value">
+        <xsl:param name="attr-name"/>
+        <xsl:text>is </xsl:text>
+        <xsl:apply-templates select="self::*" mode="individual-value">
+            <xsl:with-param name="attr-name" select="$attr-name"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xsl:template match="rng:choice[count(*)=count(rng:value)]" mode="single-attr-list-value">
+        <xsl:param name="attr-name"/>
+        <xsl:text>is one of: </xsl:text>
+        <xsl:for-each select="*">
+            <xsl:choose>
+                <xsl:when test="position() = 1"/>
+                <xsl:when test="position() = last()">
+                    <xsl:text> or </xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>, </xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:apply-templates select="." mode="individual-value">
+                <xsl:with-param name="attr-name" select="$attr-name"/>
+            </xsl:apply-templates>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template match="rng:choice[rng:ref[@name='percent'] and count(*)=(count(rng:value)+1)]" mode="single-attr-list-value">
+        <xsl:param name="attr-name"/>
+        <xsl:text>is of type </xsl:text>
+        <xsl:call-template name="print-datatype">
+            <xsl:with-param name="name" select="'percent'"/>
+            <xsl:with-param name="attr-name" select="$attr-name"/>
+        </xsl:call-template>
+        <xsl:text>, or is one of: </xsl:text>
+        <xsl:for-each select="rng:value">
+            <xsl:choose>
+                <xsl:when test="position() = 1"/>
+                <xsl:when test="position() = last()">
+                    <xsl:text> or </xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>, </xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:apply-templates select="." mode="individual-value">
+                <xsl:with-param name="attr-name" select="$attr-name"/>
+            </xsl:apply-templates>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template match="*" mode="single-attr-list-value">
+        <xsl:param name="attr-name"/>
+        <xsl:message>*** Attribute <xsl:value-of select="$attr-name"/>: Unrecognized value element in fixed-length list: <xsl:value-of select="name(.)"/></xsl:message>
+    </xsl:template>
 
     <xsl:template match="rng:value" mode="individual-value">
         <xsl:param name="attr-name"/>
@@ -1133,56 +1314,6 @@
             </xsl:otherwise>
          </xsl:choose>
     </xsl:template>
-
-    <xsl:template match="rng:choice" mode="individual-value">
-        <xsl:param name="attr-name"/>
-        <xsl:text>one of these values: </xsl:text>
-        <xsl:for-each select="*">
-            <xsl:choose>
-                <xsl:when test="position() = 1"/>
-                <xsl:when test="position() = last()">
-                    <xsl:text> or </xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:text>, </xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
-            <xsl:apply-templates select="." mode="individual-value">
-                <xsl:with-param name="attr-name" select="$attr-name"/>
-            </xsl:apply-templates>
-        </xsl:for-each>
-    </xsl:template>
-
-    <xsl:template match="rng:list[rng:oneOrMore and count(*)=1]" mode="individual-value">
-        <xsl:param name="attr-name"/>
-        <xsl:text>a non-empty space separated list of </xsl:text>
-        <xsl:apply-templates select="*/*" mode="attr-list-value">
-             <xsl:with-param name="attr-name" select="$attr-name"/>
-        </xsl:apply-templates>
-    </xsl:template>
-
-    <xsl:template match="rng:list[count(*)=2 and (count(rng:ref) + count(rng:choice))=2]" mode="individual-value">
-        <xsl:param name="attr-name"/>
-        <xsl:apply-templates select="*[1]" mode="individual-value">
-                <xsl:with-param name="attr-name" select="$attr-name"/>
-            </xsl:apply-templates>
-        <xsl:text> followed by </xsl:text>
-        <xsl:apply-templates select="*[2]" mode="individual-value">
-                <xsl:with-param name="attr-name" select="$attr-name"/>
-            </xsl:apply-templates>
-    </xsl:template>
-
-    <xsl:template match="rng:list[count(*)=2 and (count(rng:ref) + count(rng:value))=2]" mode="individual-value">
-        <xsl:param name="attr-name"/>
-        <xsl:apply-templates select="*[1]" mode="individual-value">
-                <xsl:with-param name="attr-name" select="$attr-name"/>
-            </xsl:apply-templates>
-        <xsl:text> followed by </xsl:text>
-        <xsl:apply-templates select="*[2]" mode="individual-value">
-                <xsl:with-param name="attr-name" select="$attr-name"/>
-            </xsl:apply-templates>
-    </xsl:template>
-
 
     <xsl:template match="rng:data[(@type='double' or @type='decimal') and count(rng:param)=2 and rng:param[@name='minInclusive'] and rng:param[@name='maxInclusive']]" mode="individual-value">
         <xsl:param name="attr-name"/>
@@ -1224,6 +1355,15 @@
              <xsl:value-of select="$attr-name"/>
         </text:span>
         <xsl:text> attribute are </xsl:text>
+    </xsl:template>
+
+    <xsl:template name="print-the-attribute-has">
+        <xsl:param name="attr-name"/>
+        <xsl:text>The </xsl:text>
+        <text:span text:style-name="Attribute">
+             <xsl:value-of select="$attr-name"/>
+        </text:span>
+        <xsl:text> attribute has </xsl:text>
     </xsl:template>
 
     <xsl:template name="print-datatype">
