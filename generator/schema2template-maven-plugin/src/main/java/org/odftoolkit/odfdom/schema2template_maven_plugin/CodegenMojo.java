@@ -79,42 +79,43 @@ public class CodegenMojo extends AbstractMojo {
 	 * @goal codegen
 	 */
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		getLog().info("Schema2template code generation.");
-		if (configFile == null) {
-			getLog().error("Please set configure file patch.");
-			throw new MojoFailureException("Please set configure file patch.");
-		}
-		if (odf12SchemaFile == null) {
-			getLog().error("Please set odf1.2 schema file patch.");
-			throw new MojoFailureException("Please set schema file patch.");
-		}
-		if (odf11SchemaFile == null) {
-			getLog().error("Please set odf1.1 schema file patch.");
-			throw new MojoFailureException("Please set schema file patch.");
-		}
-		String targetRootPath = targetRoot.getAbsolutePath();
-		if (targetRootPath == null) {
-			getLog().error("Please set generation code root patch.");
-			throw new MojoFailureException("Please set generation code root patch.");
-		}
-		String resourceRootPath = resourceRoot.getAbsolutePath();
-		if (resourceRootPath == null) {
-			getLog().error("Please set templates root patch.");
-			throw new MojoFailureException("Please set templates root patch.");
-		}
-		getLog().debug("Template Files Directory " + resourceRootPath);
-		getLog().debug("Generation Code Files Root Directory " + targetRootPath);
-		getLog().debug("ODF1.2 Schema File " + odf12SchemaFile);
-		getLog().debug("ODF1.1 Schema File " + odf11SchemaFile);
-		getLog().debug("Config File " + configFile);
 		try {
+			getLog().info("Schema2template code generation.");
+			if (configFile == null) {
+				getLog().error("Please set configure file patch.");
+				throw new MojoFailureException("Please set configure file patch.");
+			}
+			if (odf12SchemaFile == null) {
+				getLog().error("Please set odf1.2 schema file patch.");
+				throw new MojoFailureException("Please set schema file patch.");
+			}
+			if (odf11SchemaFile == null) {
+				getLog().error("Please set odf1.1 schema file patch.");
+				throw new MojoFailureException("Please set schema file patch.");
+			}
+			String targetRootPath = targetRoot.getAbsolutePath();
+			if (targetRootPath == null) {
+				getLog().error("Please set generation code root patch.");
+				throw new MojoFailureException("Please set generation code root patch.");
+			}
+			String resourceRootPath = resourceRoot.getAbsolutePath();
+			if (resourceRootPath == null) {
+				getLog().error("Please set templates root patch.");
+				throw new MojoFailureException("Please set templates root patch.");
+			}
+			getLog().debug("Template Files Directory " + resourceRootPath);
+			getLog().debug("Generation Code Files Root Directory " + targetRootPath);
+			getLog().debug("ODF1.2 Schema File " + odf12SchemaFile);
+			getLog().debug("ODF1.1 Schema File " + odf11SchemaFile);
+			getLog().debug("Config File " + configFile);
 			OdfCodegen codeGen = new OdfCodegen(resourceRootPath, targetRootPath, odf12SchemaFile, odf11SchemaFile, configFile);
 			codeGen.start();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception ex) {
 			getLog().error("Failed to parse template.");
+			getLog().error(ex);
 			String msg = "Failed to execute ODF schema2template example";
-			throw new MojoFailureException(e, msg, msg);
+			throw new MojoFailureException(ex, msg, msg);
 		}
+
 	}
 }
