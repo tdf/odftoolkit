@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.svg;
 
 public enum OdfStrokeLinecapType
 {
-              SQUARE( "square" ), ROUND( "round" ), BUTT( "butt" );
+              SQUARE( "square" ), BUTT( "butt" ), ROUND( "round" );
 
     private String m_aValue;
 

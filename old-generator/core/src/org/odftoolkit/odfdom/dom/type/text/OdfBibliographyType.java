@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfBibliographyType
 {
-              PHDTHESIS( "phdthesis" ), CONFERENCE( "conference" ), INPROCEEDINGS( "inproceedings" ), PROCEEDINGS( "proceedings" ), BOOK( "book" ), INCOLLECTION( "incollection" ), EMAIL( "email" ), ARTICLE( "article" ), BOOKLET( "booklet" ), MANUAL( "manual" ), JOURNAL( "journal" ), MISC( "misc" ), MASTERSTHESIS( "mastersthesis" ), WWW( "www" ), UNPUBLISHED( "unpublished" ), CUSTOM5( "custom5" ), CUSTOM4( "custom4" ), INBOOK( "inbook" ), TECHREPORT( "techreport" ), CUSTOM3( "custom3" ), CUSTOM2( "custom2" ), CUSTOM1( "custom1" );
+              WWW( "www" ), PROCEEDINGS( "proceedings" ), INBOOK( "inbook" ), MANUAL( "manual" ), CUSTOM1( "custom1" ), CUSTOM4( "custom4" ), CONFERENCE( "conference" ), MISC( "misc" ), MASTERSTHESIS( "mastersthesis" ), CUSTOM3( "custom3" ), BOOKLET( "booklet" ), CUSTOM5( "custom5" ), CUSTOM2( "custom2" ), TECHREPORT( "techreport" ), INCOLLECTION( "incollection" ), ARTICLE( "article" ), JOURNAL( "journal" ), BOOK( "book" ), EMAIL( "email" ), INPROCEEDINGS( "inproceedings" ), PHDTHESIS( "phdthesis" ), UNPUBLISHED( "unpublished" );
 
     private String m_aValue;
 

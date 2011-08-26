@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfSymbolNameType
 {
-              X( "x" ), HOURGLASS( "hourglass" ), SQUARE( "square" ), HORIZONTAL_BAR( "horizontal-bar" ), DIAMOND( "diamond" ), ARROW_RIGHT( "arrow-right" ), VERTICAL_BAR( "vertical-bar" ), ARROW_DOWN( "arrow-down" ), CIRCLE( "circle" ), ARROW_LEFT( "arrow-left" ), STAR( "star" ), BOW_TIE( "bow-tie" ), ASTERISK( "asterisk" ), ARROW_UP( "arrow-up" ), PLUS( "plus" );
+              ARROW_UP( "arrow-up" ), ARROW_RIGHT( "arrow-right" ), HORIZONTAL_BAR( "horizontal-bar" ), ARROW_DOWN( "arrow-down" ), ARROW_LEFT( "arrow-left" ), VERTICAL_BAR( "vertical-bar" ), DIAMOND( "diamond" ), HOURGLASS( "hourglass" ), ASTERISK( "asterisk" ), SQUARE( "square" ), STAR( "star" ), BOW_TIE( "bow-tie" ), CIRCLE( "circle" ), PLUS( "plus" ), X( "x" );
 
     private String m_aValue;
 

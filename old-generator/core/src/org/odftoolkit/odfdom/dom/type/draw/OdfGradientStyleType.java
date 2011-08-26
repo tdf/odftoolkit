@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfGradientStyleType
 {
-              SQUARE( "square" ), ELLIPSOID( "ellipsoid" ), RADIAL( "radial" ), LINEAR( "linear" ), RECTANGULAR( "rectangular" ), AXIAL( "axial" );
+              ELLIPSOID( "ellipsoid" ), SQUARE( "square" ), RECTANGULAR( "rectangular" ), LINEAR( "linear" ), RADIAL( "radial" ), AXIAL( "axial" );
 
     private String m_aValue;
 

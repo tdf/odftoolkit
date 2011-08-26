@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.presentation;
 
 public enum OdfSourceType
 {
-              FIXED( "fixed" ), CURRENT_DATE( "current-date" );
+              CURRENT_DATE( "current-date" ), FIXED( "fixed" );
 
     private String m_aValue;
 

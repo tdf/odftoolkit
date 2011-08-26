@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfDataType
 {
-              NUMBER( "number" ), TEXT( "text" );
+              TEXT( "text" ), NUMBER( "number" );
 
     private String m_aValue;
 

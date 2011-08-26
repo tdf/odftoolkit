@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfVerticalPosType
 {
-              FROM_TOP( "from-top" ), TOP( "top" ), MIDDLE( "middle" ), BELOW( "below" ), BOTTOM( "bottom" );
+              MIDDLE( "middle" ), TOP( "top" ), BOTTOM( "bottom" ), BELOW( "below" ), FROM_TOP( "from-top" );
 
     private String m_aValue;
 

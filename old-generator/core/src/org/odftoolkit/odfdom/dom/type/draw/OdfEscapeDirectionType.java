@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfEscapeDirectionType
 {
-              UP( "up" ), RIGHT( "right" ), DOWN( "down" ), LEFT( "left" ), AUTO( "auto" ), HORIZONTAL( "horizontal" ), VERTICAL( "vertical" );
+              RIGHT( "right" ), HORIZONTAL( "horizontal" ), LEFT( "left" ), UP( "up" ), AUTO( "auto" ), VERTICAL( "vertical" ), DOWN( "down" );
 
     private String m_aValue;
 

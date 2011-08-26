@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfMeasureVerticalAlignType
 {
-              ABOVE( "above" ), BELOW( "below" ), AUTOMATIC( "automatic" ), CENTER( "center" );
+              ABOVE( "above" ), CENTER( "center" ), BELOW( "below" ), AUTOMATIC( "automatic" );
 
     private String m_aValue;
 

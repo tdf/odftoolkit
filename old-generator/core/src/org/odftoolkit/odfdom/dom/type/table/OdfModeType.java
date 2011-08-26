@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfModeType
 {
-              COPY_RESULTS_ONLY( "copy-results-only" ), COPY_ALL( "copy-all" );
+              COPY_ALL( "copy-all" ), COPY_RESULTS_ONLY( "copy-results-only" );
 
     private String m_aValue;
 

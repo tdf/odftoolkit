@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfTextPathModeType
 {
-              SHAPE( "shape" ), PATH( "path" ), NORMAL( "normal" );
+              SHAPE( "shape" ), NORMAL( "normal" ), PATH( "path" );
 
     private String m_aValue;
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfKindType
 {
-              SECTION( "section" ), CUT( "cut" ), ARC( "arc" ), FULL( "full" );
+              SECTION( "section" ), FULL( "full" ), CUT( "cut" ), ARC( "arc" );
 
     private String m_aValue;
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.office;
 
 public enum OdfConversionModeType
 {
-              INTO_ENGLISH_NUMBER( "into-english-number" ), KEEP_TEXT( "keep-text" ), INTO_DEFAULT_STYLE_DATA_STYLE( "into-default-style-data-style" );
+              INTO_DEFAULT_STYLE_DATA_STYLE( "into-default-style-data-style" ), KEEP_TEXT( "keep-text" ), INTO_ENGLISH_NUMBER( "into-english-number" );
 
     private String m_aValue;
 

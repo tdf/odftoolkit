@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.fo;
 
 public enum OdfBreakBeforeType
 {
-              AUTO( "auto" ), COLUMN( "column" ), PAGE( "page" );
+              PAGE( "page" ), COLUMN( "column" ), AUTO( "auto" );
 
     private String m_aValue;
 

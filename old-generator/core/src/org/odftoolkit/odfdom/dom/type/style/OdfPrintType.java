@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfPrintType
 {
-              ZERO_VALUES( "zero-values" ), OBJECTS( "objects" ), ANNOTATIONS( "annotations" ), GRID( "grid" ), FORMULAS( "formulas" ), DRAWINGS( "drawings" ), CHARTS( "charts" ), HEADERS( "headers" );
+              GRID( "grid" ), OBJECTS( "objects" ), HEADERS( "headers" ), ZERO_VALUES( "zero-values" ), FORMULAS( "formulas" ), DRAWINGS( "drawings" ), CHARTS( "charts" ), ANNOTATIONS( "annotations" );
 
     private String m_aValue;
 

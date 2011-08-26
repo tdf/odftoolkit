@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfTextareaHorizontalAlignType
 {
-              RIGHT( "right" ), LEFT( "left" ), JUSTIFY( "justify" ), CENTER( "center" );
+              RIGHT( "right" ), LEFT( "left" ), CENTER( "center" ), JUSTIFY( "justify" );
 
     private String m_aValue;
 

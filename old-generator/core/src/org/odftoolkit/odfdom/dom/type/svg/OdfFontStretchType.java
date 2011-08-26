@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.svg;
 
 public enum OdfFontStretchType
 {
-              EXTRA_EXPANDED( "extra-expanded" ), EXPANDED( "expanded" ), SEMI_CONDENSED( "semi-condensed" ), NORMAL( "normal" ), SEMI_EXPANDED( "semi-expanded" ), EXTRA_CONDENSED( "extra-condensed" ), ULTRA_EXPANDED( "ultra-expanded" ), CONDENSED( "condensed" ), ULTRA_CONDENSED( "ultra-condensed" );
+              ULTRA_EXPANDED( "ultra-expanded" ), ULTRA_CONDENSED( "ultra-condensed" ), EXPANDED( "expanded" ), CONDENSED( "condensed" ), NORMAL( "normal" ), SEMI_CONDENSED( "semi-condensed" ), EXTRA_CONDENSED( "extra-condensed" ), SEMI_EXPANDED( "semi-expanded" ), EXTRA_EXPANDED( "extra-expanded" );
 
     private String m_aValue;
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.dr3d;
 
 public enum OdfNormalsDirectionType
 {
-              NORMAL( "normal" ), INVERSE( "inverse" );
+              INVERSE( "inverse" ), NORMAL( "normal" );
 
     private String m_aValue;
 

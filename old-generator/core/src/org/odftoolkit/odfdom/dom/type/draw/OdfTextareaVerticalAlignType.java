@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfTextareaVerticalAlignType
 {
-              TOP( "top" ), MIDDLE( "middle" ), BOTTOM( "bottom" ), JUSTIFY( "justify" );
+              MIDDLE( "middle" ), TOP( "top" ), BOTTOM( "bottom" ), JUSTIFY( "justify" );
 
     private String m_aValue;
 

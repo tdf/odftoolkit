@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfDataLabelNumberType
 {
-              NONE( "none" ), VALUE_AND_PERCENTAGE( "value-and-percentage" ), VALUE( "value" ), PERCENTAGE( "percentage" );
+              VALUE( "value" ), NONE( "none" ), VALUE_AND_PERCENTAGE( "value-and-percentage" ), PERCENTAGE( "percentage" );
 
     private String m_aValue;
 

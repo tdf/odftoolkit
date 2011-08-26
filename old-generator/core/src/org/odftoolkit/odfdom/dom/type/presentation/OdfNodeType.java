@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.presentation;
 
 public enum OdfNodeType
 {
-              WITH_PREVIOUS( "with-previous" ), MAIN_SEQUENCE( "main-sequence" ), INTERACTIVE_SEQUENCE( "interactive-sequence" ), TIMING_ROOT( "timing-root" ), ON_CLICK( "on-click" ), DEFAULT( "default" ), AFTER_PREVIOUS( "after-previous" );
+              WITH_PREVIOUS( "with-previous" ), MAIN_SEQUENCE( "main-sequence" ), TIMING_ROOT( "timing-root" ), DEFAULT( "default" ), AFTER_PREVIOUS( "after-previous" ), ON_CLICK( "on-click" ), INTERACTIVE_SEQUENCE( "interactive-sequence" );
 
     private String m_aValue;
 

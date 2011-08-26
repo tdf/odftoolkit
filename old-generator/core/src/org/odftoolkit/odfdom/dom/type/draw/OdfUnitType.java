@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfUnitType
 {
-              MI( "mi" ), KM( "km" ), FT( "ft" ), M( "m" ), PT( "pt" ), PC( "pc" ), AUTOMATIC( "automatic" ), INCH( "inch" ), CM( "cm" ), MM( "mm" );
+              KM( "km" ), M( "m" ), INCH( "inch" ), MI( "mi" ), MM( "mm" ), PT( "pt" ), FT( "ft" ), PC( "pc" ), CM( "cm" ), AUTOMATIC( "automatic" );
 
     private String m_aValue;
 

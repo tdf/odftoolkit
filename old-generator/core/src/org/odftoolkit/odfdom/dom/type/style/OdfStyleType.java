@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfStyleType
 {
-              DOT_DASHED( "dot-dashed" ), NONE( "none" ), DOTTED( "dotted" ), DASHED( "dashed" ), SOLID( "solid" );
+              DOTTED( "dotted" ), NONE( "none" ), SOLID( "solid" ), DASHED( "dashed" ), DOT_DASHED( "dot-dashed" );
 
     private String m_aValue;
 

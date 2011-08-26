@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.dr3d;
 
 public enum OdfTextureModeType
 {
-              BLEND( "blend" ), MODULATE( "modulate" ), REPLACE( "replace" );
+              BLEND( "blend" ), REPLACE( "replace" ), MODULATE( "modulate" );
 
     private String m_aValue;
 

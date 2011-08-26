@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfValueFormulaDisplayType
 {
-              FORMULA( "formula" ), VALUE( "value" );
+              VALUE( "value" ), FORMULA( "formula" );
 
     private String m_aValue;
 

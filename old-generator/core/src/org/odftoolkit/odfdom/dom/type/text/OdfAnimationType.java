@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfAnimationType
 {
-              SLIDE( "slide" ), NONE( "none" ), SCROLL( "scroll" ), ALTERNATE( "alternate" );
+              ALTERNATE( "alternate" ), NONE( "none" ), SLIDE( "slide" ), SCROLL( "scroll" );
 
     private String m_aValue;
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.presentation;
 
 public enum OdfEffectType
 {
-              DISSOLVE( "dissolve" ), MOVE( "move" ), LINES( "lines" ), LASER( "laser" ), NONE( "none" ), STRETCH( "stretch" ), HIDE( "hide" ), WAVYLINE( "wavyline" ), OPEN( "open" ), CLOSE( "close" ), MOVE_SHORT( "move-short" ), STRIPES( "stripes" ), RANDOM( "random" ), ROTATE( "rotate" ), APPEAR( "appear" ), FADE( "fade" ), CHECKERBOARD( "checkerboard" );
+              MOVE_SHORT( "move-short" ), STRIPES( "stripes" ), LINES( "lines" ), NONE( "none" ), CLOSE( "close" ), FADE( "fade" ), WAVYLINE( "wavyline" ), LASER( "laser" ), DISSOLVE( "dissolve" ), HIDE( "hide" ), ROTATE( "rotate" ), OPEN( "open" ), STRETCH( "stretch" ), APPEAR( "appear" ), CHECKERBOARD( "checkerboard" ), MOVE( "move" ), RANDOM( "random" );
 
     private String m_aValue;
 

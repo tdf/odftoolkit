@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfParagraphVerticalAlignType
 {
-              TOP( "top" ), MIDDLE( "middle" ), BASELINE( "baseline" ), AUTO( "auto" ), BOTTOM( "bottom" );
+              MIDDLE( "middle" ), TOP( "top" ), BASELINE( "baseline" ), BOTTOM( "bottom" ), AUTO( "auto" );
 
     private String m_aValue;
 

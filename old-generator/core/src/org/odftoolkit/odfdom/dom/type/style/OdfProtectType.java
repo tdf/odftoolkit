@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfProtectType
 {
-              SIZE( "size" ), NONE( "none" ), POSITION( "position" ), CONTENT( "content" );
+              NONE( "none" ), POSITION( "position" ), CONTENT( "content" ), SIZE( "size" );
 
     private String m_aValue;
 

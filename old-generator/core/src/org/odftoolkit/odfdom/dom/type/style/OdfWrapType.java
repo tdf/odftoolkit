@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfWrapType
 {
-              RIGHT( "right" ), RUN_THROUGH( "run-through" ), BIGGEST( "biggest" ), LEFT( "left" ), NONE( "none" ), PARALLEL( "parallel" ), DYNAMIC( "dynamic" );
+              DYNAMIC( "dynamic" ), PARALLEL( "parallel" ), RIGHT( "right" ), RUN_THROUGH( "run-through" ), BIGGEST( "biggest" ), NONE( "none" ), LEFT( "left" );
 
     private String m_aValue;
 

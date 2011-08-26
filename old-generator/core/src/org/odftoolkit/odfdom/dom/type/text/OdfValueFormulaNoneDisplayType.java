@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfValueFormulaNoneDisplayType
 {
-              FORMULA( "formula" ), NONE( "none" ), VALUE( "value" );
+              VALUE( "value" ), NONE( "none" ), FORMULA( "formula" );
 
     private String m_aValue;
 

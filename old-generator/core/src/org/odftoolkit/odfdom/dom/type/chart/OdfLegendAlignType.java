@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfLegendAlignType
 {
-              END( "end" ), START( "start" ), CENTER( "center" );
+              START( "start" ), END( "end" ), CENTER( "center" );
 
     private String m_aValue;
 

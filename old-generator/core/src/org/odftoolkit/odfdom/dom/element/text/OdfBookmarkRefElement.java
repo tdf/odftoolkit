@@ -31,7 +31,7 @@ import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.text.OdfBookmarkReferenceFormatType;
+import org.odftoolkit.odfdom.dom.type.text.OdfReferenceFormatType;
 
 ;
 
@@ -72,18 +72,18 @@ public abstract class OdfBookmarkRefElement extends OdfElement
     /**
      * Get value of attribute "text:reference-format".
      */
-    public OdfBookmarkReferenceFormatType getReferenceFormat()
+    public OdfReferenceFormatType getReferenceFormat()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "reference-format" ) );
-        return OdfBookmarkReferenceFormatType.enumValueOf( aStringVal);
+        return OdfReferenceFormatType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "text:reference-format".
      */
-    public void setReferenceFormat( OdfBookmarkReferenceFormatType _aReferenceFormat )
+    public void setReferenceFormat( OdfReferenceFormatType _aReferenceFormat )
     {                    
-        String aStringVal = OdfBookmarkReferenceFormatType.toString( _aReferenceFormat );
+        String aStringVal = OdfReferenceFormatType.toString( _aReferenceFormat );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "reference-format" ), aStringVal );
     }
 

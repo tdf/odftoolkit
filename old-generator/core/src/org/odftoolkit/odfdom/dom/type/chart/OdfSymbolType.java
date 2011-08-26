@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfSymbolType
 {
-              NAMED_SYMBOL( "named-symbol" ), IMAGE( "image" ), NONE( "none" ), AUTOMATIC( "automatic" );
+              NONE( "none" ), IMAGE( "image" ), NAMED_SYMBOL( "named-symbol" ), AUTOMATIC( "automatic" );
 
     private String m_aValue;
 

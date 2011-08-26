@@ -52,7 +52,6 @@ public class OdfElementFactory {
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfExecuteMacro.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfExecuteMacro.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.table.OdfTrackedChanges.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.table.OdfTrackedChanges.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfPrintTime.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfPrintTime.class);
-        m_elementTypes.put(org.odftoolkit.odfdom.pkg.manifest.Manifest.ELEMENT_NAME, org.odftoolkit.odfdom.pkg.manifest.Manifest.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfAuthorInitials.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfAuthorInitials.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.chart.OdfCategories.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.chart.OdfCategories.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfBookmarkEnd.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfBookmarkEnd.class);
@@ -236,8 +235,8 @@ public class OdfElementFactory {
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.db.OdfTableIncludeFilter.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.db.OdfTableIncludeFilter.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfListStyle.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfListStyle.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfIndexEntryLinkEnd.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfIndexEntryLinkEnd.class);
-        m_elementTypes.put(org.odftoolkit.odfdom.doc.element.chart.OdfStockRangeLine.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.chart.OdfStockRangeLine.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfUserFieldDecl.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfUserFieldDecl.class);
+        m_elementTypes.put(org.odftoolkit.odfdom.doc.element.chart.OdfStockRangeLine.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.chart.OdfStockRangeLine.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.anim.OdfParam.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.anim.OdfParam.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.presentation.OdfPlaceholder.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.presentation.OdfPlaceholder.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfPlaceholder.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfPlaceholder.class);
@@ -269,8 +268,8 @@ public class OdfElementFactory {
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfObjectIndex.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfObjectIndex.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfSheetName.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfSheetName.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfIndexSourceStyles.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfIndexSourceStyles.class);
-        m_elementTypes.put(org.odftoolkit.odfdom.doc.element.chart.OdfStockGainMarker.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.chart.OdfStockGainMarker.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.draw.OdfFrame.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.draw.OdfFrame.class);
+        m_elementTypes.put(org.odftoolkit.odfdom.doc.element.chart.OdfStockGainMarker.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.chart.OdfStockGainMarker.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfSection.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfSection.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.db.OdfColumn.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.db.OdfColumn.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.draw.OdfImageMap.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.draw.OdfImageMap.class);
@@ -321,7 +320,6 @@ public class OdfElementFactory {
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.form.OdfProperty.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.form.OdfProperty.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfVariableInput.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfVariableInput.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.table.OdfTableHeaderRows.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.table.OdfTableHeaderRows.class);
-        m_elementTypes.put(org.odftoolkit.odfdom.pkg.manifest.FileEntry.ELEMENT_NAME, org.odftoolkit.odfdom.pkg.manifest.FileEntry.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.presentation.OdfHeaderDecl.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.presentation.OdfHeaderDecl.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.office.OdfBody.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.office.OdfBody.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.draw.OdfConnector.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.draw.OdfConnector.class);
@@ -352,7 +350,6 @@ public class OdfElementFactory {
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfSenderPhoneWork.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfSenderPhoneWork.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.table.OdfSortBy.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.table.OdfSortBy.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.style.OdfPresentationPageLayout.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.style.OdfPresentationPageLayout.class);
-        m_elementTypes.put(org.odftoolkit.odfdom.pkg.manifest.EncryptionData.ELEMENT_NAME, org.odftoolkit.odfdom.pkg.manifest.EncryptionData.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.table.OdfDependencies.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.table.OdfDependencies.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.dc.OdfSubject.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.dc.OdfSubject.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.draw.OdfOpacity.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.draw.OdfOpacity.class);
@@ -408,8 +405,8 @@ public class OdfElementFactory {
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfRuby.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfRuby.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.number.OdfBoolean.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.number.OdfBoolean.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.form.OdfButton.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.form.OdfButton.class);
-        m_elementTypes.put(org.odftoolkit.odfdom.doc.element.chart.OdfRegressionCurve.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.chart.OdfRegressionCurve.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfList.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfList.class);
+        m_elementTypes.put(org.odftoolkit.odfdom.doc.element.chart.OdfRegressionCurve.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.chart.OdfRegressionCurve.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.table.OdfLabelRanges.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.table.OdfLabelRanges.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfSenderCompany.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfSenderCompany.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.xforms.OdfModel.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.xforms.OdfModel.class);
@@ -462,7 +459,6 @@ public class OdfElementFactory {
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfVariableGet.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfVariableGet.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfTab.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfTab.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.table.OdfSubtotalRules.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.table.OdfSubtotalRules.class);
-        m_elementTypes.put(org.odftoolkit.odfdom.pkg.manifest.KeyDerivation.ELEMENT_NAME, org.odftoolkit.odfdom.pkg.manifest.KeyDerivation.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.table.OdfCellAddress.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.table.OdfCellAddress.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.style.OdfChartProperties.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.style.OdfChartProperties.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.presentation.OdfFooterDecl.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.presentation.OdfFooterDecl.class);
@@ -515,7 +511,6 @@ public class OdfElementFactory {
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.db.OdfTableTypeFilter.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.db.OdfTableTypeFilter.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfAlphabeticalIndexSource.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfAlphabeticalIndexSource.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.style.OdfHeader.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.style.OdfHeader.class);
-        m_elementTypes.put(org.odftoolkit.odfdom.pkg.manifest.Algorithm.ELEMENT_NAME, org.odftoolkit.odfdom.pkg.manifest.Algorithm.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.style.OdfTabStops.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.style.OdfTabStops.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.text.OdfUserFieldGet.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.text.OdfUserFieldGet.class);
         m_elementTypes.put(org.odftoolkit.odfdom.doc.element.draw.OdfGroup.ELEMENT_NAME, org.odftoolkit.odfdom.doc.element.draw.OdfGroup.class);

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfKindType
 {
-              GAP( "gap" ), VALUE( "value" ), UNIT( "unit" );
+              VALUE( "value" ), UNIT( "unit" ), GAP( "gap" );
 
     private String m_aValue;
 

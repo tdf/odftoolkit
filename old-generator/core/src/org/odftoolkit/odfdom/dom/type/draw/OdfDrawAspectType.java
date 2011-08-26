@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfDrawAspectType
 {
-              PRINT_VIEW( "print-view" ), THUMBNAIL( "thumbnail" ), ICON( "icon" ), CONTENT( "content" );
+              THUMBNAIL( "thumbnail" ), PRINT_VIEW( "print-view" ), ICON( "icon" ), CONTENT( "content" );
 
     private String m_aValue;
 

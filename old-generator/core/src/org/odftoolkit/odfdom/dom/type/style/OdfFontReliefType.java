@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfFontReliefType
 {
-              NONE( "none" ), ENGRAVED( "engraved" ), EMBOSSED( "embossed" );
+              ENGRAVED( "engraved" ), NONE( "none" ), EMBOSSED( "embossed" );
 
     private String m_aValue;
 

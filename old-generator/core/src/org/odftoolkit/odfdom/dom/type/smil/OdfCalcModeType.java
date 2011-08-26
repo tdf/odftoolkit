@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.smil;
 
 public enum OdfCalcModeType
 {
-              PACED( "paced" ), SPLINE( "spline" ), DISCRETE( "discrete" ), LINEAR( "linear" );
+              SPLINE( "spline" ), PACED( "paced" ), LINEAR( "linear" ), DISCRETE( "discrete" );
 
     private String m_aValue;
 

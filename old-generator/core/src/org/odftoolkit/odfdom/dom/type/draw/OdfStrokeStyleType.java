@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfStrokeStyleType
 {
-              RECT( "rect" ), ROUND( "round" );
+              ROUND( "round" ), RECT( "rect" );
 
     private String m_aValue;
 

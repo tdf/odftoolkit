@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.fo;
 
 public enum OdfTextTransformType
 {
-              CAPITALIZE( "capitalize" ), NONE( "none" ), LOWERCASE( "lowercase" ), UPPERCASE( "uppercase" );
+              UPPERCASE( "uppercase" ), NONE( "none" ), CAPITALIZE( "capitalize" ), LOWERCASE( "lowercase" );
 
     private String m_aValue;
 

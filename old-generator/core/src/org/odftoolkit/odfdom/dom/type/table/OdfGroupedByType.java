@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfGroupedByType
 {
-              YEARS( "years" ), HOURS( "hours" ), QUARTERS( "quarters" ), SECONDS( "seconds" ), DAYS( "days" ), MINUTES( "minutes" ), MONTHS( "months" );
+              DAYS( "days" ), MONTHS( "months" ), QUARTERS( "quarters" ), SECONDS( "seconds" ), YEARS( "years" ), HOURS( "hours" ), MINUTES( "minutes" );
 
     private String m_aValue;
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfTextAlignSourceType
 {
-              VALUE_TYPE( "value-type" ), FIX( "fix" );
+              FIX( "fix" ), VALUE_TYPE( "value-type" );
 
     private String m_aValue;
 

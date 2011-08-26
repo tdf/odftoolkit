@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.smil;
 
 public enum OdfRestartDefaultType
 {
-              ALWAYS( "always" ), INHERIT( "inherit" ), WHENNOTACTIVE( "whenNotActive" ), NEVER( "never" );
+              NEVER( "never" ), ALWAYS( "always" ), WHENNOTACTIVE( "whenNotActive" ), INHERIT( "inherit" );
 
     private String m_aValue;
 

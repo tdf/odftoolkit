@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfIndexScopeType
 {
-              CHAPTER( "chapter" ), DOCUMENT( "document" );
+              DOCUMENT( "document" ), CHAPTER( "chapter" );
 
     private String m_aValue;
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfColorModeType
 {
-              MONO( "mono" ), STANDARD( "standard" ), WATERMARK( "watermark" ), GREYSCALE( "greyscale" );
+              GREYSCALE( "greyscale" ), MONO( "mono" ), WATERMARK( "watermark" ), STANDARD( "standard" );
 
     private String m_aValue;
 

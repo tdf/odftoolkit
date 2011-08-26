@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfWrapInfluenceOnPositionType
 {
-              ITERATIVE( "iterative" ), ONCE_CONCURRENT( "once-concurrent" ), ONCE_SUCCESSIVE( "once-successive" );
+              ONCE_SUCCESSIVE( "once-successive" ), ONCE_CONCURRENT( "once-concurrent" ), ITERATIVE( "iterative" );
 
     private String m_aValue;
 

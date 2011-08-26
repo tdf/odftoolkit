@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfCaptionEscapeDirectionType
 {
-              AUTO( "auto" ), HORIZONTAL( "horizontal" ), VERTICAL( "vertical" );
+              HORIZONTAL( "horizontal" ), AUTO( "auto" ), VERTICAL( "vertical" );
 
     private String m_aValue;
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.form;
 
 public enum OdfListLinkageType
 {
-              SELECTION( "selection" ), SELECTION_INDEXES( "selection-indexes" );
+              SELECTION_INDEXES( "selection-indexes" ), SELECTION( "selection" );
 
     private String m_aValue;
 

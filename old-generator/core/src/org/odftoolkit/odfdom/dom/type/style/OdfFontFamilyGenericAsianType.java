@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfFontFamilyGenericAsianType
 {
-              SCRIPT( "script" ), ROMAN( "roman" ), DECORATIVE( "decorative" ), SYSTEM( "system" ), MODERN( "modern" ), SWISS( "swiss" );
+              MODERN( "modern" ), SWISS( "swiss" ), SCRIPT( "script" ), ROMAN( "roman" ), DECORATIVE( "decorative" ), SYSTEM( "system" );
 
     private String m_aValue;
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.form;
 
 public enum OdfStateType
 {
-              CHECKED( "checked" ), UNKNOWN( "unknown" ), UNCHECKED( "unchecked" );
+              UNKNOWN( "unknown" ), CHECKED( "checked" ), UNCHECKED( "unchecked" );
 
     private String m_aValue;
 

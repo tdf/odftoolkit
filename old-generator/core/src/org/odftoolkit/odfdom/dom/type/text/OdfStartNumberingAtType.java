@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfStartNumberingAtType
 {
-              PAGE( "page" ), CHAPTER( "chapter" ), DOCUMENT( "document" );
+              PAGE( "page" ), DOCUMENT( "document" ), CHAPTER( "chapter" );
 
     private String m_aValue;
 

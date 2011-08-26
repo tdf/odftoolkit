@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.svg;
 
 public enum OdfType
 {
-              SKEWY( "skewY" ), SKEWX( "skewX" ), TRANSLATE( "translate" ), ROTATE( "rotate" ), SCALE( "scale" );
+              SKEWX( "skewX" ), SCALE( "scale" ), TRANSLATE( "translate" ), SKEWY( "skewY" ), ROTATE( "rotate" );
 
     private String m_aValue;
 

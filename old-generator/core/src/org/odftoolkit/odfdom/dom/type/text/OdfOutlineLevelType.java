@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfOutlineLevelType
 {
-              SEPARATOR( "separator" ), _1( "1" ), _2( "2" ), _3( "3" );
+              _3( "3" ), SEPARATOR( "separator" ), _2( "2" ), _1( "1" );
 
     private String m_aValue;
 

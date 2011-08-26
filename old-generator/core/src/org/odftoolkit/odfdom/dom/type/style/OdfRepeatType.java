@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfRepeatType
 {
-              REPEAT( "repeat" ), STRETCH( "stretch" ), NO_REPEAT( "no-repeat" );
+              NO_REPEAT( "no-repeat" ), STRETCH( "stretch" ), REPEAT( "repeat" );
 
     private String m_aValue;
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfLegendExpansionType
 {
-              CUSTOM( "custom" ), HIGH( "high" ), WIDE( "wide" ), BALANCED( "balanced" );
+              HIGH( "high" ), BALANCED( "balanced" ), WIDE( "wide" ), CUSTOM( "custom" );
 
     private String m_aValue;
 

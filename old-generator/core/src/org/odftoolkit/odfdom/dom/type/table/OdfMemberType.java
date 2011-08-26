@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfMemberType
 {
-              NEXT( "next" ), PREVIOUS( "previous" ), NAMED( "named" );
+              NAMED( "named" ), PREVIOUS( "previous" ), NEXT( "next" );
 
     private String m_aValue;
 

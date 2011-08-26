@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.office;
 
 public enum OdfValueMaybeVoidType
 {
-              CURRENCY( "currency" ), FLOAT( "float" ), DATE( "date" ), BOOLEAN( "boolean" ), VOID( "void" ), STRING( "string" ), PERCENTAGE( "percentage" ), TIME( "time" );
+              STRING( "string" ), VOID( "void" ), TIME( "time" ), CURRENCY( "currency" ), FLOAT( "float" ), DATE( "date" ), BOOLEAN( "boolean" ), PERCENTAGE( "percentage" );
 
     private String m_aValue;
 

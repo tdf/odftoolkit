@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfOverflowBehaviorType
 {
-              AUTO_CREATE_NEW_FRAME( "auto-create-new-frame" ), CLIP( "clip" );
+              CLIP( "clip" ), AUTO_CREATE_NEW_FRAME( "auto-create-new-frame" );
 
     private String m_aValue;
 

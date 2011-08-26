@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.dr3d;
 
 public enum OdfProjectionType
 {
-              PERSPECTIVE( "perspective" ), PARALLEL( "parallel" );
+              PARALLEL( "parallel" ), PERSPECTIVE( "perspective" );
 
     private String m_aValue;
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfLineBreakType
 {
-              STRICT( "strict" ), NORMAL( "normal" );
+              NORMAL( "normal" ), STRICT( "strict" );
 
     private String m_aValue;
 

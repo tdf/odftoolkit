@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfSheetObjectType
 {
-              ROW( "row" ), TABLE( "table" ), COLUMN( "column" );
+              TABLE( "table" ), ROW( "row" ), COLUMN( "column" );
 
     private String m_aValue;
 

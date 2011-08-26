@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfScriptType
 {
-              IGNORE( "ignore" ), ASIAN( "asian" ), LATIN( "latin" ), COMPLEX( "complex" );
+              COMPLEX( "complex" ), ASIAN( "asian" ), IGNORE( "ignore" ), LATIN( "latin" );
 
     private String m_aValue;
 

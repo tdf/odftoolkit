@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfGluePointType
 {
-              NONE( "none" ), SEGMENTS( "segments" ), RECTANGLE( "rectangle" );
+              RECTANGLE( "rectangle" ), NONE( "none" ), SEGMENTS( "segments" );
 
     private String m_aValue;
 

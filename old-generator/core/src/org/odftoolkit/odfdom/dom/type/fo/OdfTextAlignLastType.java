@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.fo;
 
 public enum OdfTextAlignLastType
 {
-              JUSTIFY( "justify" ), START( "start" ), CENTER( "center" );
+              START( "start" ), CENTER( "center" ), JUSTIFY( "justify" );
 
     private String m_aValue;
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.smil;
 
 public enum OdfFillDefaultType
 {
-              INHERIT( "inherit" ), AUTO( "auto" ), TRANSITION( "transition" ), HOLD( "hold" ), FREEZE( "freeze" ), REMOVE( "remove" );
+              FREEZE( "freeze" ), TRANSITION( "transition" ), AUTO( "auto" ), REMOVE( "remove" ), INHERIT( "inherit" ), HOLD( "hold" );
 
     private String m_aValue;
 

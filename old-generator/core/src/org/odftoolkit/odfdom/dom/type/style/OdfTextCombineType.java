@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfTextCombineType
 {
-              LETTERS( "letters" ), LINES( "lines" ), NONE( "none" );
+              LINES( "lines" ), LETTERS( "letters" ), NONE( "none" );
 
     private String m_aValue;
 

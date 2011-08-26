@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfFontPitchType
 {
-              VARIABLE( "variable" ), FIXED( "fixed" );
+              FIXED( "fixed" ), VARIABLE( "variable" );
 
     private String m_aValue;
 

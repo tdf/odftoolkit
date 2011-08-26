@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfCaptionAngleType
 {
-              FIXED( "fixed" ), FREE( "free" );
+              FREE( "free" ), FIXED( "fixed" );
 
     private String m_aValue;
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.number;
 
 public enum OdfTransliterationStyleType
 {
-              MEDIUM( "medium" ), LONG( "long" ), SHORT( "short" );
+              MEDIUM( "medium" ), SHORT( "short" ), LONG( "long" );
 
     private String m_aValue;
 

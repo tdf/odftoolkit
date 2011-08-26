@@ -46,9 +46,8 @@ public class OdfNamespace implements Comparable, NamespaceContext {
 
         PRESENTATION("presentation", "urn:oasis:names:tc:opendocument:xmlns:presentation:1.0"),
         TABLE("table", "urn:oasis:names:tc:opendocument:xmlns:table:1.0"),
-        FORM("form", "urn:oasis:names:tc:opendocument:xmlns:form:1.0"),
-        MANIFEST("manifest", "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"),
         SCRIPT("script", "urn:oasis:names:tc:opendocument:xmlns:script:1.0"),
+        FORM("form", "urn:oasis:names:tc:opendocument:xmlns:form:1.0"),
         CHART("chart", "urn:oasis:names:tc:opendocument:xmlns:chart:1.0"),
         SMIL("smil", "urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0"),
         MATH("math", "http://www.w3.org/1998/Math/MathML"),
@@ -216,9 +215,8 @@ public class OdfNamespace implements Comparable, NamespaceContext {
     // 2DO: move Namespaceconstants into OdfName.. (?)
     public static final OdfNamespace PRESENTATION = get("presentation", "urn:oasis:names:tc:opendocument:xmlns:presentation:1.0");
     public static final OdfNamespace TABLE = get("table", "urn:oasis:names:tc:opendocument:xmlns:table:1.0");
-    public static final OdfNamespace FORM = get("form", "urn:oasis:names:tc:opendocument:xmlns:form:1.0");
-    public static final OdfNamespace MANIFEST = get("manifest", "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0");
     public static final OdfNamespace SCRIPT = get("script", "urn:oasis:names:tc:opendocument:xmlns:script:1.0");
+    public static final OdfNamespace FORM = get("form", "urn:oasis:names:tc:opendocument:xmlns:form:1.0");
     public static final OdfNamespace CHART = get("chart", "urn:oasis:names:tc:opendocument:xmlns:chart:1.0");
     public static final OdfNamespace SMIL = get("smil", "urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0");
     public static final OdfNamespace MATH = get("math", "http://www.w3.org/1998/Math/MathML");
@@ -240,6 +238,7 @@ public class OdfNamespace implements Comparable, NamespaceContext {
     public static final OdfNamespace DB = get("db", "urn:oasis:names:tc:opendocument:xmlns:database:1.0");
     public static final OdfNamespace DC = get("dc", "http://purl.org/dc/elements/1.1/");
     public static final OdfNamespace ANIM = get("anim", "urn:oasis:names:tc:opendocument:xmlns:animation:1.0");
+
     public static final OdfNamespace XML = get("xml", "http://www.w3.org/XML/1998/namespace" );
     
     public String getNamespaceURI(String prefix) {

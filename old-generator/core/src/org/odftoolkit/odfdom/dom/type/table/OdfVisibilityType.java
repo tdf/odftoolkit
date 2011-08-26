@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfVisibilityType
 {
-              COLLAPSE( "collapse" ), FILTER( "filter" ), VISIBLE( "visible" );
+              FILTER( "filter" ), COLLAPSE( "collapse" ), VISIBLE( "visible" );
 
     private String m_aValue;
 

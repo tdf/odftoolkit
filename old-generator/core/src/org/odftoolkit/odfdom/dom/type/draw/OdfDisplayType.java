@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfDisplayType
 {
-              PRINTER( "printer" ), ALWAYS( "always" ), NONE( "none" ), SCREEN( "screen" );
+              NONE( "none" ), ALWAYS( "always" ), SCREEN( "screen" ), PRINTER( "printer" );
 
     private String m_aValue;
 

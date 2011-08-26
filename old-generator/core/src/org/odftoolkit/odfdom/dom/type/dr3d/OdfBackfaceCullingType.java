@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.dr3d;
 
 public enum OdfBackfaceCullingType
 {
-              DISABLED( "disabled" ), ENABLED( "enabled" );
+              ENABLED( "enabled" ), DISABLED( "disabled" );
 
     private String m_aValue;
 

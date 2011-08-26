@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.office;
 
 public enum OdfValueType
 {
-              CURRENCY( "currency" ), FLOAT( "float" ), DATE( "date" ), BOOLEAN( "boolean" ), STRING( "string" ), PERCENTAGE( "percentage" ), TIME( "time" );
+              STRING( "string" ), TIME( "time" ), CURRENCY( "currency" ), FLOAT( "float" ), DATE( "date" ), BOOLEAN( "boolean" ), PERCENTAGE( "percentage" );
 
     private String m_aValue;
 

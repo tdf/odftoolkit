@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.smil;
 
 public enum OdfFadeColorType
 {
-              FORWARD( "forward" ), REVERSE( "reverse" );
+              REVERSE( "reverse" ), FORWARD( "forward" );
 
     private String m_aValue;
 

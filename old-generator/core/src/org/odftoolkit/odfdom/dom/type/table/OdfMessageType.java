@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfMessageType
 {
-              WARNING( "warning" ), INFORMATION( "information" ), STOP( "stop" );
+              STOP( "stop" ), WARNING( "warning" ), INFORMATION( "information" );
 
     private String m_aValue;
 

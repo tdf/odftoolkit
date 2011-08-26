@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfFieldReferenceType
 {
-              MEMBER_DIFFERENCE( "member-difference" ), MEMBER_PERCENTAGE_DIFFERENCE( "member-percentage-difference" ), ROW_PERCENTAGE( "row-percentage" ), MEMBER_PERCENTAGE( "member-percentage" ), NONE( "none" ), COLUMN_PERCENTAGE( "column-percentage" ), TOTAL_PERCENTAGE( "total-percentage" ), INDEX( "index" ), RUNNING_TOTAL( "running-total" );
+              INDEX( "index" ), MEMBER_PERCENTAGE( "member-percentage" ), COLUMN_PERCENTAGE( "column-percentage" ), MEMBER_DIFFERENCE( "member-difference" ), NONE( "none" ), ROW_PERCENTAGE( "row-percentage" ), TOTAL_PERCENTAGE( "total-percentage" ), RUNNING_TOTAL( "running-total" ), MEMBER_PERCENTAGE_DIFFERENCE( "member-percentage-difference" );
 
     private String m_aValue;
 

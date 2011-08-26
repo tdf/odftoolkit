@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfPositionType
 {
-              TOP( "top" ), RIGHT( "right" ), LEFT( "left" ), BOTTOM( "bottom" ), CENTER( "center" );
+              RIGHT( "right" ), TOP( "top" ), LEFT( "left" ), BOTTOM( "bottom" ), CENTER( "center" );
 
     private String m_aValue;
 

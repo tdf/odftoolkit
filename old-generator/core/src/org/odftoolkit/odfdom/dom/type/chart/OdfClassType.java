@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfClassType
 {
-              MAJOR( "major" ), MINOR( "minor" );
+              MINOR( "minor" ), MAJOR( "major" );
 
     private String m_aValue;
 

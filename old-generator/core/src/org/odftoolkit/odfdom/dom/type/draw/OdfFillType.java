@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfFillType
 {
-              GRADIENT( "gradient" ), HATCH( "hatch" ), NONE( "none" ), BITMAP( "bitmap" ), SOLID( "solid" );
+              BITMAP( "bitmap" ), HATCH( "hatch" ), NONE( "none" ), SOLID( "solid" ), GRADIENT( "gradient" );
 
     private String m_aValue;
 

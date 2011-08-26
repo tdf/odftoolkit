@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfMirrorType
 {
-              NONE( "none" ), HORIZONTAL_ON_EVEN( "horizontal-on-even" ), HORIZONTAL( "horizontal" ), HORIZONTAL_ON_ODD( "horizontal-on-odd" ), VERTICAL( "vertical" );
+              NONE( "none" ), HORIZONTAL( "horizontal" ), HORIZONTAL_ON_ODD( "horizontal-on-odd" ), HORIZONTAL_ON_EVEN( "horizontal-on-even" ), VERTICAL( "vertical" );
 
     private String m_aValue;
 

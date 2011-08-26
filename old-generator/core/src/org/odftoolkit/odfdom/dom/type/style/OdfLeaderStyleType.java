@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfLeaderStyleType
 {
-              NONE( "none" ), WAVE( "wave" ), DOTTED( "dotted" ), DOT_DOT_DASH( "dot-dot-dash" ), DASH( "dash" ), SOLID( "solid" ), DOT_DASH( "dot-dash" ), LONG_DASH( "long-dash" );
+              DOT_DOT_DASH( "dot-dot-dash" ), DOTTED( "dotted" ), NONE( "none" ), DASH( "dash" ), SOLID( "solid" ), WAVE( "wave" ), DOT_DASH( "dot-dash" ), LONG_DASH( "long-dash" );
 
     private String m_aValue;
 

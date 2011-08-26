@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.svg;
 
 public enum OdfSpreadMethodType
 {
-              REFLECT( "reflect" ), REPEAT( "repeat" ), PAD( "pad" );
+              PAD( "pad" ), REFLECT( "reflect" ), REPEAT( "repeat" );
 
     private String m_aValue;
 

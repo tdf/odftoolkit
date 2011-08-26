@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.dr3d;
 
 public enum OdfTextureKindType
 {
-              INTENSITY( "intensity" ), LUMINANCE( "luminance" ), COLOR( "color" );
+              COLOR( "color" ), LUMINANCE( "luminance" ), INTENSITY( "intensity" );
 
     private String m_aValue;
 

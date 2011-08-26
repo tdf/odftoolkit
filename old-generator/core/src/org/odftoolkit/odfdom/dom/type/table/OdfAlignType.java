@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfAlignType
 {
-              MARGINS( "margins" ), RIGHT( "right" ), LEFT( "left" ), CENTER( "center" );
+              RIGHT( "right" ), LEFT( "left" ), MARGINS( "margins" ), CENTER( "center" );
 
     private String m_aValue;
 

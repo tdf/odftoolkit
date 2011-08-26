@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfFootnotesPositionType
 {
-              SECTION( "section" ), PAGE( "page" ), DOCUMENT( "document" ), TEXT( "text" );
+              SECTION( "section" ), TEXT( "text" ), PAGE( "page" ), DOCUMENT( "document" );
 
     private String m_aValue;
 

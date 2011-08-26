@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfMeasureAlignType
 {
-              RIGHT_OUTSIDE( "right-outside" ), INSIDE( "inside" ), AUTOMATIC( "automatic" ), LEFT_OUTSIDE( "left-outside" );
+              INSIDE( "inside" ), RIGHT_OUTSIDE( "right-outside" ), LEFT_OUTSIDE( "left-outside" ), AUTOMATIC( "automatic" );
 
     private String m_aValue;
 

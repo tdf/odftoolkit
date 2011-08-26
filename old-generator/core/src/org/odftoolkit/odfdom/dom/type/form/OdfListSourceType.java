@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.form;
 
 public enum OdfListSourceType
 {
-              VALUE_LIST( "value-list" ), TABLE( "table" ), QUERY( "query" ), SQL_PASS_THROUGH( "sql-pass-through" ), SQL( "sql" ), TABLE_FIELDS( "table-fields" );
+              TABLE( "table" ), QUERY( "query" ), VALUE_LIST( "value-list" ), SQL_PASS_THROUGH( "sql-pass-through" ), SQL( "sql" ), TABLE_FIELDS( "table-fields" );
 
     private String m_aValue;
 

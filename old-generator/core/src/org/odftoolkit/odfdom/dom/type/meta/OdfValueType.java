@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.meta;
 
 public enum OdfValueType
 {
-              FLOAT( "float" ), DATE( "date" ), BOOLEAN( "boolean" ), STRING( "string" ), TIME( "time" );
+              STRING( "string" ), TIME( "time" ), FLOAT( "float" ), DATE( "date" ), BOOLEAN( "boolean" );
 
     private String m_aValue;
 

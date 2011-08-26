@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.config;
 
 public enum OdfType
 {
-              DATETIME( "datetime" ), DOUBLE( "double" ), LONG( "long" ), BOOLEAN( "boolean" ), STRING( "string" ), INT( "int" ), BASE64BINARY( "base64Binary" ), SHORT( "short" );
+              DOUBLE( "double" ), STRING( "string" ), DATETIME( "datetime" ), SHORT( "short" ), INT( "int" ), BASE64BINARY( "base64Binary" ), BOOLEAN( "boolean" ), LONG( "long" );
 
     private String m_aValue;
 

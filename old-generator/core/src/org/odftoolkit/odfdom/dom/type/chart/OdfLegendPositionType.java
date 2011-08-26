@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfLegendPositionType
 {
-              TOP( "top" ), TOP_START( "top-start" ), END( "end" ), TOP_END( "top-end" ), BOTTOM( "bottom" ), START( "start" ), BOTTOM_END( "bottom-end" ), BOTTOM_START( "bottom-start" );
+              BOTTOM_START( "bottom-start" ), TOP( "top" ), TOP_END( "top-end" ), START( "start" ), END( "end" ), BOTTOM( "bottom" ), BOTTOM_END( "bottom-end" ), TOP_START( "top-start" );
 
     private String m_aValue;
 

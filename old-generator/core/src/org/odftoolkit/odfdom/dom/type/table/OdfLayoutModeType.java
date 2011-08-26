@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfLayoutModeType
 {
-              OUTLINE_SUBTOTALS_BOTTOM( "outline-subtotals-bottom" ), OUTLINE_SUBTOTALS_TOP( "outline-subtotals-top" ), TABULAR_LAYOUT( "tabular-layout" );
+              TABULAR_LAYOUT( "tabular-layout" ), OUTLINE_SUBTOTALS_TOP( "outline-subtotals-top" ), OUTLINE_SUBTOTALS_BOTTOM( "outline-subtotals-bottom" );
 
     private String m_aValue;
 

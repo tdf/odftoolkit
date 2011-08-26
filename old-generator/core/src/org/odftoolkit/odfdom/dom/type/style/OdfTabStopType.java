@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfTabStopType
 {
-              RIGHT( "right" ), LEFT( "left" ), CHAR( "char" ), CENTER( "center" );
+              RIGHT( "right" ), CHAR( "char" ), LEFT( "left" ), CENTER( "center" );
 
     private String m_aValue;
 

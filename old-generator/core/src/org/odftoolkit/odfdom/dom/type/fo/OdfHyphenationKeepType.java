@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.fo;
 
 public enum OdfHyphenationKeepType
 {
-              AUTO( "auto" ), PAGE( "page" );
+              PAGE( "page" ), AUTO( "auto" );
 
     private String m_aValue;
 

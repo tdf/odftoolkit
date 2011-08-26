@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfPageNumberSelectType
 {
-              CURRENT( "current" ), NEXT( "next" ), PREVIOUS( "previous" );
+              CURRENT( "current" ), PREVIOUS( "previous" ), NEXT( "next" );
 
     private String m_aValue;
 

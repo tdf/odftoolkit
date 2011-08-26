@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfNameType
 {
-              TRACE_ERRORS( "trace-errors" ), TRACE_PRECEDENTS( "trace-precedents" ), TRACE_DEPENDENTS( "trace-dependents" ), REMOVE_DEPENDENTS( "remove-dependents" ), REMOVE_PRECEDENTS( "remove-precedents" );
+              REMOVE_PRECEDENTS( "remove-precedents" ), TRACE_PRECEDENTS( "trace-precedents" ), TRACE_ERRORS( "trace-errors" ), TRACE_DEPENDENTS( "trace-dependents" ), REMOVE_DEPENDENTS( "remove-dependents" );
 
     private String m_aValue;
 

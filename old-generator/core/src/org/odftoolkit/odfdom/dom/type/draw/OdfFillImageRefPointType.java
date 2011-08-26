@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfFillImageRefPointType
 {
-              TOP( "top" ), RIGHT( "right" ), LEFT( "left" ), BOTTOM( "bottom" ), BOTTOM_LEFT( "bottom-left" ), TOP_RIGHT( "top-right" ), TOP_LEFT( "top-left" ), BOTTOM_RIGHT( "bottom-right" ), CENTER( "center" );
+              RIGHT( "right" ), TOP( "top" ), LEFT( "left" ), BOTTOM_LEFT( "bottom-left" ), BOTTOM( "bottom" ), CENTER( "center" ), BOTTOM_RIGHT( "bottom-right" ), TOP_RIGHT( "top-right" ), TOP_LEFT( "top-left" );
 
     private String m_aValue;
 

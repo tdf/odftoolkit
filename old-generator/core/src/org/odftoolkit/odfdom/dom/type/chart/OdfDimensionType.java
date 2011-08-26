@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfDimensionType
 {
-              X( "x" ), Y( "y" ), Z( "z" );
+              Z( "z" ), Y( "y" ), X( "x" );
 
     private String m_aValue;
 

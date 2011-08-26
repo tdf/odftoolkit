@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfConditionSourceType
 {
-              SELF( "self" ), CELL_RANGE( "cell-range" );
+              CELL_RANGE( "cell-range" ), SELF( "self" );
 
     private String m_aValue;
 

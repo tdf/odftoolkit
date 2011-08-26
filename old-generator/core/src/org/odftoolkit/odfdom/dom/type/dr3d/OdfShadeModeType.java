@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.dr3d;
 
 public enum OdfShadeModeType
 {
-              PHONG( "phong" ), GOURAUD( "gouraud" ), FLAT( "flat" ), DRAFT( "draft" );
+              DRAFT( "draft" ), PHONG( "phong" ), GOURAUD( "gouraud" ), FLAT( "flat" );
 
     private String m_aValue;
 

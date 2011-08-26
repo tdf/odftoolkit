@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.db;
 
 public enum OdfUpdateRuleType
 {
-              NO_ACTION( "no-action" ), RESTRICT( "restrict" ), SET_DEFAULT( "set-default" ), SET_NULL( "set-null" ), CASCADE( "cascade" );
+              RESTRICT( "restrict" ), NO_ACTION( "no-action" ), SET_NULL( "set-null" ), SET_DEFAULT( "set-default" ), CASCADE( "cascade" );
 
     private String m_aValue;
 

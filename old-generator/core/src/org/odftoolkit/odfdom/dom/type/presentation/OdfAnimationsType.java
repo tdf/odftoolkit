@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.presentation;
 
 public enum OdfAnimationsType
 {
-              DISABLED( "disabled" ), ENABLED( "enabled" );
+              ENABLED( "enabled" ), DISABLED( "disabled" );
 
     private String m_aValue;
 

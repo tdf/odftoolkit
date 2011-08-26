@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfAnchorType
 {
-              AS_CHAR( "as-char" ), CHAR( "char" ), PAGE( "page" ), PARAGRAPH( "paragraph" ), FRAME( "frame" );
+              FRAME( "frame" ), AS_CHAR( "as-char" ), CHAR( "char" ), PAGE( "page" ), PARAGRAPH( "paragraph" );
 
     private String m_aValue;
 

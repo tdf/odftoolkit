@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfTextEmphasizeType
 {
-              DISC( "disc" ), DOT( "dot" ), CIRCLE( "circle" ), ACCENT( "accent" ), ABOVE( "above" ), NONE( "none" ), BELOW( "below" );
+              ACCENT( "accent" ), ABOVE( "above" ), NONE( "none" ), BELOW( "below" ), CIRCLE( "circle" ), DISC( "disc" ), DOT( "dot" );
 
     private String m_aValue;
 
