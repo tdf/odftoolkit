@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<math:math>".
  */
 public abstract class OdfMathElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5940264130972149109L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.MATH, "math" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.MATH, "math" );
 
     public OdfMathElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
