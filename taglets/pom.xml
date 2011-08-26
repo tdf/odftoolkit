@@ -6,8 +6,73 @@
 	<version>0.7-SNAPSHOT</version>
 	<name>ODF Custom Javadoc Taglets</name>
 	<packaging>jar</packaging>
+	<repositories>
+<!-- we get wagon-svn from here -->
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Repository for Maven</name>
+			<url>http://download.java.net/maven/2/</url>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+<!-- the odfdom interim repositories in svn -->
+		<repository>
+			<id>odfdom-snapshots</id>
+			<name>ODFDOM Snapshot</name>
+			<url>http://odftoolkit.org/svn/odfdom~maven2/snapshot/</url>
+			<releases>
+				<enabled>false</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>odfdom-releases</id>
+			<name>ODFDOM Release</name>
+			<url>http://odftoolkit.org/svn/odfdom~maven2/release/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>odfdom-releases</id>
+			<name>ODFDOM Release</name>
+			<url>svn:https://odftoolkit.org/svn/odfdom~maven2/release/</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+		<snapshotRepository>
+			<id>odfdom-snapshots</id>
+			<name>ODFDOM Snapshot</name>
+			<url>svn:https://odftoolkit.org/svn/odfdom~maven2/snapshot/</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
 	<build>
 		<defaultGoal>install</defaultGoal>
+		<extensions>
+			<extension>
+				<groupId>org.jvnet.wagon-svn</groupId>
+				<artifactId>wagon-svn</artifactId>
+				<version>1.9</version>
+			</extension>
+		</extensions>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
