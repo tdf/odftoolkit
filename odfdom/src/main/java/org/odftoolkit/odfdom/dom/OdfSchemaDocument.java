@@ -55,6 +55,14 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 	protected OdfSettingsDom mSettingsDom;
 	protected OdfOfficeStyles mDocumentStyles;
 
+	/**
+	 * Creates a new OdfSchemaDocument.
+	 * 
+	 * @param pkg - the ODF Package that contains the document. A baseURL is being generated based on its location.
+	 * @param internalPath - the directory path within the package from where the document should be loaded.
+	 * @param mediaTypeString
+	 *      - media type of stream. If unknown null can be used.
+	 */
 	protected OdfSchemaDocument(OdfPackage pkg, String internalPath, String mediaTypeString)  {
 		super(pkg, internalPath, mediaTypeString);
 		ErrorHandler errorHandler = pkg.getErrorHandler();
@@ -91,9 +99,13 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 	 */
 	public static enum OdfXMLFile {
 
+		/** The XML file containing the content of an ODF document as specified by the ODF 1.2 specification part 1. */
 		CONTENT("content.xml"),
+		/** The XML file containing a predifined set of metadata related to an ODF document as specified by the ODF 1.2 specification part 1. */
 		META("meta.xml"),
+		/** The XML file containing the settings of an ODF document as specified by the ODF 1.2 specification part 1. */
 		SETTINGS("settings.xml"),
+		/** The XML file containing the styles of an ODF document as specified by the ODF 1.2 specification part 1. */
 		STYLES("styles.xml");
 		private final String mFileName;
 
