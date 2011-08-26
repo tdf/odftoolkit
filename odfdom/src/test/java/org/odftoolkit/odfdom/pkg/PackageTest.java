@@ -30,6 +30,9 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
@@ -37,8 +40,13 @@ import javax.xml.transform.stream.StreamResult;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfPresentationDocument;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
+import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
+import org.odftoolkit.odfdom.doc.draw.OdfDrawPage;
+import org.odftoolkit.odfdom.doc.office.OdfOfficePresentation;
 import org.odftoolkit.odfdom.type.AnyURI;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.xml.sax.InputSource;
@@ -56,10 +64,36 @@ public class PackageTest {
 	private static final String SIMPLE_ODT = "test2.odt";
 	private static final String ODF_FORMULAR_TEST_FILE = "SimpleFormula.odf";
 	private static final String IMAGE_TEST_FILE = "test.jpg";
+	private static final String IMAGE_PRESENTATION="imageCompressed.odp";
 
 	public PackageTest() {
 	}
 
+	@Test
+	public void testNotCompressImages() throws Exception {
+	    //create test presentation
+	         OdfPresentationDocument odp=OdfPresentationDocument.newPresentationDocument();
+		 OdfOfficePresentation officePresentation=odp.getContentRoot();
+	    	   OdfDrawPage page = (OdfDrawPage) officePresentation.newDrawPageElement(null);
+		   OdfDrawFrame frame = (OdfDrawFrame) page.newDrawFrameElement();
+		   OdfDrawImage image= (OdfDrawImage) frame.newDrawImageElement();
+		   image.newImage(ResourceUtilities.getURI(IMAGE_TEST_FILE));
+	        odp.save(ResourceUtilities.newTestOutputFile(IMAGE_PRESENTATION));
+	     
+	    //test if the image is not compressed
+	        ZipInputStream zinput=new ZipInputStream(ResourceUtilities.getTestResourceAsStream(IMAGE_PRESENTATION));
+	        ZipEntry entry=zinput.getNextEntry();
+	        while(entry!=null) {
+	            String entryName=entry.getName();
+	            if(entryName.endsWith(".jpg")) {
+	                File f=new File(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE));
+	                Assert.assertEquals(ZipEntry.STORED, entry.getMethod());
+	                Assert.assertEquals(f.length(), entry.getSize());
+	            }
+	            entry=zinput.getNextEntry();
+	        }
+	        
+	}
 	@Test
 	public void loadPackage() {
 		try {
