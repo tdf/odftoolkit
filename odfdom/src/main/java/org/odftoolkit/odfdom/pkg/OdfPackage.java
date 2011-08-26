@@ -119,6 +119,7 @@ public class OdfPackage implements Closeable {
 	private HashMap<String, Document> mPkgDoms;
 	private HashMap<String, byte[]> mMemoryFileCache;
 	private ErrorHandler mErrorHandler;
+        private String mManifestVersion;
 
 	/* Commonly used files within the ODF Package */
 	public enum OdfFile {
@@ -1408,7 +1409,11 @@ public class OdfPackage implements Closeable {
 		} else {
 			StringBuilder buf = new StringBuilder();
 			buf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-			buf.append("<manifest:manifest xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\" manifest:version=\"1.2\">\n");
+			buf.append("<manifest:manifest xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\"");
+                        if(mManifestVersion != null){
+                            buf.append(" manifest:version=\"" + mManifestVersion + "\"");
+                        }
+                        buf.append(" >\n");
 			Iterator<String> it = new TreeSet<String>(mManifestEntries.keySet()).iterator();
 			while (it.hasNext()) {
 				String key = it.next();
@@ -2033,4 +2038,15 @@ public class OdfPackage implements Closeable {
 			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
+
+        /** @param odfVersion parsed from the manifest */
+        void setManifestVersion(String odfVersion){
+            mManifestVersion = odfVersion;
+        }
+
+        /** @return the ODF version found in the manifest. 
+         * Meant to be used to reuse when the manifest is recreated */
+        String getManifestVersion(){
+            return mManifestVersion;
+        }
 }

@@ -80,6 +80,7 @@ class OdfManifestSaxHandler implements ContentHandler {
 	public void startElement(String namespaceURI, String localName,
 			String qName, Attributes atts) throws SAXException {
 		Map<String, OdfFileEntry> entries = mPackage.getManifestEntries();
+
 		if (localName.equals("file-entry")) {
 			String path = atts.getValue("manifest:full-path");
 			if (path.equals(EMPTY_STRING)) {
@@ -134,7 +135,10 @@ class OdfManifestSaxHandler implements ContentHandler {
 			if (_currentEncryptionData != null) {
 				_currentEncryptionData.setKeyDerivation(keyDerivation);
 			}
-		}
+		}else if (localName.equals("manifest")) {
+                     mPackage.setManifestVersion(atts.getValue("manifest:version"));
+                }
+
 	}
 
 	/**
