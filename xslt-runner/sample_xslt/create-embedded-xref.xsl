@@ -31,6 +31,7 @@
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"                
                 xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"                
                 xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
+                xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
                 xmlns="http://relaxng.org/ns/structure/1.0" 
                 exclude-result-prefixes="rng xsl a"
                 version="1.0">    
@@ -56,6 +57,11 @@
     <xsl:variable name="create-odf-references" select="true()"/>
     <xsl:variable name="create-cardinality-info" select="false()"/>
 
+    <xsl:variable name="keep-annotations" select="false()"/>
+
+    <xsl:variable name="keep-todos" select="false()"/>
+
+
     <xsl:variable name="element-prefix" select="'element-'"/>
     <xsl:variable name="attribute-prefix" select="'attribute-'"/>
     <xsl:variable name="property-prefix" select="'property-'"/>
@@ -69,7 +75,6 @@
     <!-- ********************************* -->
     <!-- ** element anchors (element-*) ** -->
     <!-- ********************************* -->
-
     <xsl:template match="text:p[starts-with(.,$element-prefix)]">        
         <!-- Remove anchor paragraph if $keep-xref-anchors is false -->
         <xsl:if test="$keep-xref-anchors">
@@ -118,6 +123,9 @@
             </xsl:if>
         </xsl:variable>
         <xsl:if test="$check-xref-anchors and $has-elements">
+            <xsl:if test="not(preceding::text:h[1]/@text:outline-level='3')">
+                <xsl:message>*** Attribute <xsl:value-of select="$attr-name"/>: Element list <xsl:value-of select="$element-list"/> for attribute on outline level 3</xsl:message>
+            </xsl:if>
             <xsl:call-template name="check-element-list">
                 <xsl:with-param name="element-list" select="$element-list"/>
             </xsl:call-template>
@@ -151,9 +159,9 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- ************************************* -->
+    <!-- *********************************** -->
     <!-- ** datatype anchors (datatype-*) ** -->
-    <!-- ************************************* -->
+    <!-- *********************************** -->
     <xsl:template match="text:p[starts-with(.,$datatype-prefix)]">
         <!-- Remove anchor paragraph if $keep-xref-anchors is false -->
         <xsl:if test="$keep-xref-anchors">
@@ -166,6 +174,17 @@
     <!-- ************************* -->
     <!-- ** existing references ** -->
     <!-- ************************* -->
+    <xsl:template match="text:h/text:reference-mark-start|text:h/text:reference-mark-end">
+        <xsl:if test="not($create-odf-references) or not(starts-with(@text:name,$attribute-prefix) or starts-with(@text:name,$property-prefix) or starts-with(@text:name,$element-prefix) or starts-with(@text:name,$datatype-prefix))">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|node()"/>
+            </xsl:copy>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- ******************************* -->
+    <!-- ** existing cross references ** -->
+    <!-- ******************************* -->
     <xsl:template match="text:p[@text:style-name='Attribute_20_List' or @text:style-name='Child_20_Element_20_List' or @text:style-name='Parent_20_Element_20_List' or @text:style-name='Attribute_20_Value_20_List']">
         <!-- Remove them if $keep-attr-elem-xrefs is false -->
         <xsl:if test="$keep-attr-elem-xrefs">
@@ -174,6 +193,18 @@
             </xsl:copy>
         </xsl:if>
     </xsl:template>
+
+    <xsl:key name="style" match="style:style[@style:family='paragraph']" use="@style:name"/>
+
+    <xsl:template match="text:p[@text:style-name='TODO' or key('style',@text:style-name)/@style:parent-style-name='TODO']">
+        <!-- Remove them if $keep-attr-elem-xrefs is false -->
+        <xsl:if test="$keep-todos">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|node()"/>
+            </xsl:copy>
+        </xsl:if>
+    </xsl:template>
+
 
     <!-- ****************************************** -->
     <!-- ** Headings for elements and attributes ** -->
@@ -190,21 +221,37 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <!-- create ODF ref-mark elements if it is a avlid element or attribute name -->
+        <!-- create ODF ref-mark elements if it is a valid element or attribute name -->
         <xsl:choose>
             <xsl:when test="starts-with($tag, '&lt;') and contains($tag,'&gt;')">
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
-                    <xsl:variable name="is-in-attributes" select="preceding::text:h[@text:outline-level='1']=$attributes-heading"/>
-                    <xsl:call-template name="create-element-ref-mark-start">
-                         <xsl:with-param name="tag" select="$tag"/>
-                         <xsl:with-param name="is-in-attributes" select="$is-in-attributes"/>
-                    </xsl:call-template>
-                    <xsl:apply-templates select="node()"/>
-                    <xsl:call-template name="create-element-ref-mark-end">
-                         <xsl:with-param name="tag" select="$tag"/>
-                         <xsl:with-param name="is-in-attributes" select="$is-in-attributes"/>
-                    </xsl:call-template>
+                    <xsl:choose>
+                        <xsl:when test="preceding::text:h[@text:outline-level='1']=$attributes-heading">
+                            <xsl:variable name="fp" select="preceding::text:h[@text:outline-level='1'][last()]=$properties-heading"/>
+                            <xsl:variable name="attr-name" select="normalize-space(preceding::text:h[@text:outline-level='2'][last()])"/>
+                            <xsl:call-template name="create-element-ref-mark-start">
+                                 <xsl:with-param name="tag" select="$tag"/>
+                                 <xsl:with-param name="attr-name" select="$attr-name"/>
+                                 <xsl:with-param name="fp" select="$fp"/>
+                            </xsl:call-template>
+                            <xsl:apply-templates select="node()"/>
+                            <xsl:call-template name="create-element-ref-mark-end">
+                                 <xsl:with-param name="tag" select="$tag"/>
+                                 <xsl:with-param name="attr-name" select="$attr-name"/>
+                                 <xsl:with-param name="fp" select="$fp"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:call-template name="create-element-ref-mark-start">
+                                 <xsl:with-param name="tag" select="$tag"/>
+                            </xsl:call-template>
+                            <xsl:apply-templates select="node()"/>
+                            <xsl:call-template name="create-element-ref-mark-end">
+                                 <xsl:with-param name="tag" select="$tag"/>
+                            </xsl:call-template>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:copy>
             </xsl:when>
             <xsl:when test="starts-with($tag, 'odf:') or starts-with($tag, 'pkg:')">
@@ -248,18 +295,79 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
-    <xsl:template match="text:h/text:reference-mark-start|text:h/text:reference-mark-end">
-        <xsl:if test="not($create-odf-references) or not(starts-with(@text:name,$attribute-prefix) or starts-with(@text:name,$property-prefix) or starts-with(@text:name,$element-prefix) or starts-with(@text:name,$datatype-prefix))">
+
+    <!-- **************************** -->
+    <!-- ** Headings for datatypes ** -->
+    <!-- **************************** -->
+    <xsl:template match="text:h[@text:outline-level='3' and preceding::text:h[@text:outline-level='2'][last()]=$datatypes-heading]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:variable name="ref-name" select="concat($datatype-prefix,normalize-space(.))"/>
+            <xsl:if test="$create-odf-references">
+                <text:reference-mark-start text:name="{$ref-name}"/>
+            </xsl:if>
+            <xsl:apply-templates select="node()"/>
+            <xsl:if test="$create-odf-references">
+                <text:reference-mark-end text:name="{$ref-name}"/>
+            </xsl:if>
+        </xsl:copy>
+    </xsl:template>
+
+    <!-- ***************************************** -->
+    <!-- ** Bibliograophy: Normative References ** -->
+    <!-- ***************************************** -->
+    <xsl:key name="bib-entry" match="text:bibliography-mark" use="@text:identifier"/>
+
+    <xsl:template match="text:bibliography[@text:name='NormativeReferences']/text:index-body/text:p">
+        <xsl:variable name="id" select="substring(substring-before(.,']'),2)"/>
+        <xsl:if test="not(key('bib-entry',$id)/@text:custom5) or key('bib-entry',$id)/@text:custom5 != 'informative'">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|node()"/>
+            </xsl:copy>
+            <xsl:message>Bibliographic entry [<xsl:value-of select="$id"/>] is normative.</xsl:message>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- ********************************************* -->
+    <!-- ** Bibliograophy: Non Normative References ** -->
+    <!-- ********************************************* -->
+    <xsl:template match="text:bibliography[@text:name='NonNormativeReferences']/text:index-body/text:p">
+        <xsl:variable name="id" select="substring(substring-before(.,']'),2)"/>
+        <xsl:if test="key('bib-entry',$id)/@text:custom5 = 'informative'">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|node()"/>
+            </xsl:copy>
+            <xsl:message>Bibliographic entry [<xsl:value-of select="$id"/>] is non normative.</xsl:message>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- ********************************** -->
+    <!-- ** Formula: Annotation sections ** -->
+    <!-- ********************************** -->
+    <xsl:template match="text:section[(@text:display='condition' and @text:condition='ooow:Note==0') or @text:display='none']">
+        <!-- Ignore sections that are hidable by the "Note" condition -->
+        <xsl:if test="$keep-annotations">
             <xsl:copy>
                 <xsl:apply-templates select="@*|node()"/>
             </xsl:copy>
         </xsl:if>
     </xsl:template>
-    
+
+    <xsl:template match="text:hidden-text[@text:condition='ooow:Note==0']">
+        <!-- Ignore hidden text fields that are hidable by the "Note" condition -->
+        <xsl:if test="$keep-annotations">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|node()"/>
+            </xsl:copy>
+        </xsl:if>
+    </xsl:template>
+
+
+
     <xsl:template name="create-element-ref-mark-start">
         <xsl:param name="tag"/>
-        <xsl:param name="is-in-attributes"/>
+        <xsl:param name="attr-name" select="''"/>
+        <xsl:param name="fp" select="false()"/>
         <xsl:variable name="element-name" select="substring-after(substring-before($tag,'&gt;'),'&lt;')"/>
         <xsl:variable name="remainder" select="substring-after($tag,'&gt;')"/>
         
@@ -278,8 +386,11 @@
         <xsl:if test="$create-odf-references">
             <xsl:variable name="ref-name">
                 <xsl:choose>
-                    <xsl:when test="$is-in-attributes">
-                        <xsl:value-of select="concat($attribute-prefix,preceding::text:h[@text:outline-level='2'][last()],'_',$element-prefix,$element-name)"/>
+                    <xsl:when test="string-length($attr-name)>0 and $fp">
+                        <xsl:value-of select="concat($property-prefix,$attr-name,'_',$element-prefix,$element-name)"/>
+                    </xsl:when>
+                    <xsl:when test="string-length($attr-name)>0">
+                        <xsl:value-of select="concat($attribute-prefix,$attr-name,'_',$element-prefix,$element-name)"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="concat($element-prefix,$element-name)"/>
@@ -292,29 +403,35 @@
         <xsl:if test="contains($remainder,'&lt;') and contains(substring-after($remainder,'&lt;'),'&gt;')">
             <xsl:call-template name="create-element-ref-mark-start">
                 <xsl:with-param name="tag" select="$remainder"/>
-                <xsl:with-param name="is-in-attributes" select="$is-in-attributes"/>
+                <xsl:with-param name="attr-name" select="$attr-name"/>
+                <xsl:with-param name="fp" select="$fp"/>
             </xsl:call-template>
         </xsl:if>        
     </xsl:template>
     
     <xsl:template name="create-element-ref-mark-end">
         <xsl:param name="tag"/>
-        <xsl:param name="is-in-attributes"/>
+        <xsl:param name="attr-name" select="''"/>
+        <xsl:param name="fp" select="false()"/>
         <xsl:variable name="element-name" select="substring-after(substring-before($tag,'&gt;'),'&lt;')"/>
         <xsl:variable name="remainder" select="substring-after($tag,'&gt;')"/>
 
         <xsl:if test="contains($remainder,'&lt;') and contains(substring-after($remainder,'&lt;'),'&gt;')">
             <xsl:call-template name="create-element-ref-mark-end">
                 <xsl:with-param name="tag" select="$remainder"/>
-                <xsl:with-param name="is-in-attributes" select="$is-in-attributes"/>
+                <xsl:with-param name="attr-name" select="$attr-name"/>
+                <xsl:with-param name="fp" select="$fp"/>
             </xsl:call-template>
         </xsl:if>
 
         <xsl:if test="$create-odf-references">
             <xsl:variable name="ref-name">
                 <xsl:choose>
-                    <xsl:when test="$is-in-attributes">
-                        <xsl:value-of select="concat($attribute-prefix,preceding::text:h[@text:outline-level='2'][last()],'_',$element-prefix,$element-name)"/>
+                    <xsl:when test="string-length($attr-name)>0 and $fp">
+                        <xsl:value-of select="concat($property-prefix,$attr-name,'_',$element-prefix,$element-name)"/>
+                    </xsl:when>
+                    <xsl:when test="string-length($attr-name)>0">
+                        <xsl:value-of select="concat($attribute-prefix,$attr-name,'_',$element-prefix,$element-name)"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="concat($element-prefix,$element-name)"/>
@@ -325,19 +442,6 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="text:h[@text:outline-level='3' and preceding::text:h[@text:outline-level='2'][last()]=$datatypes-heading]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:variable name="ref-name" select="concat($datatype-prefix,normalize-space(.))"/>
-            <xsl:if test="$create-odf-references">
-                <text:reference-mark-start text:name="{$ref-name}"/>
-            </xsl:if>
-            <xsl:apply-templates select="node()"/>
-            <xsl:if test="$create-odf-references">
-                <text:reference-mark-end text:name="{$ref-name}"/>
-            </xsl:if>
-        </xsl:copy>
-    </xsl:template>
 
     <!-- default: copy everything. -->
     <xsl:template match="@*|node()">
@@ -397,11 +501,12 @@
         <xsl:variable name="count" select="count(rng:attribute)"/>
         <xsl:variable name="fp" select="starts-with(@name,'style:') and contains(@name,'-properties')"/>
         <xsl:call-template name="new-line"/>
+        <xsl:variable name="elem-name" select="@name"/>
         <text:p text:style-name="Attribute_20_List">
             <xsl:text>The </xsl:text>
             <text:span text:style-name="Element">
                 <xsl:text>&lt;</xsl:text>
-                <xsl:value-of select="@name"/>
+                <xsl:value-of select="$elem-name"/>
                 <xsl:text>&gt;</xsl:text>
             </text:span>
             <xsl:text> element </xsl:text>
@@ -447,8 +552,11 @@
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:if>
+                            <xsl:variable name="aname" select="@name"/>
                             <xsl:variable name="ref-name">
                                 <xsl:choose>
+                                    <xsl:when test="$fp and //text:p[starts-with(.,concat($property-prefix,$aname,'_')) and contains(concat(normalize-space(.),'_'),concat($element-prefix,$elem-name,'_'))]"><xsl:value-of select="concat($property-prefix,$aname,'_',$element-prefix,$elem-name)"/></xsl:when>
+                                    <xsl:when test="not($fp) and //text:p[starts-with(.,concat($attribute-prefix,$aname,'_')) and contains(concat(normalize-space(.),'_'),concat($element-prefix,$elem-name,'_'))]"><xsl:value-of select="concat($attribute-prefix,$aname,'_',$element-prefix,$elem-name)"/></xsl:when>
                                     <xsl:when test="$fp"><xsl:value-of select="concat($property-prefix,@name)"/></xsl:when>
                                     <xsl:otherwise><xsl:value-of select="concat($attribute-prefix,@name)"/></xsl:otherwise>
                                 </xsl:choose>
@@ -568,7 +676,7 @@
                         <xsl:text> element has text content.</xsl:text>
                     </text:p>
                 </xsl:when>
-                <xsl:when test="rng:text[@condition='zeroOrMore/choice']">
+                <xsl:when test="rng:text[@condition='zeroOrMore/choice'or @condition='zeroOrMore/choice/choice']">
                     <xsl:call-template name="new-line"/>
                     <text:p text:style-name="Child_20_Element_20_List">
                         <xsl:text>The </xsl:text>
@@ -676,7 +784,7 @@
                             $attr-name='table:member-type' or 
                             ($attr-name='table:orientation' and contains($element-list,'table:data-pilot-field'))or 
                             $attr-name='table:sort-mode' or
-                            ($attr-name='text:display' and (contains($element-list,'text:section') or contains($element-list,'style:text-properties'))) or
+                            ($attr-name='text:display' and ($fp or contains($element-list,'text:section'))) or
                             $attr-name='chart:symbol-type'">
                 <xsl:apply-templates select="ancestor::rng:grammar/rng:element[((starts-with(@name,'style:') and contains(@name,'-properties'))=$fp) and (not($element-list) or contains($element-list,concat('_',$element-prefix,@name,'_'))) and rng:attribute[@name=$attr-name]][1]" mode="merge-attr-value">
                     <xsl:with-param name="attr-name" select="$attr-name"/>
