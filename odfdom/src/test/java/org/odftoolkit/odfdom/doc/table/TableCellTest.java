@@ -268,25 +268,36 @@ public class TableCellTest {
 		int rowindex = 2, columnindex = 0;
 		OdfTable table = odsdoc.getTableByName("Sheet1");
 		OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
-		fcell.setCellBackColor(null);
+		fcell.setCellBackgroundColor("#FFFFFF");
 		saveods();
 		// reload
 		loadOutputSpreadsheet();
 		table = odsdoc.getTableByName("Sheet1");
 		fcell = table.getCellByPosition(columnindex, rowindex);
-		// set color as DEFAULT_BACK_COLOR #FFFFFF
-		Assert.assertEquals("#FFFFFF", fcell.getCellBackColor().toString());
+		// set color as DEFAULT_BACKGROUND_COLOR #FFFFFF
+		Assert.assertEquals("#FFFFFF", fcell.getCellBackgroundColorString());
 
 		Color expectedColor = Color.valueOf("#000000");
-		fcell.setCellBackColor(expectedColor);
+		fcell.setCellBackgroundColor(expectedColor);
 		saveods();
 		// reload
 		loadOutputSpreadsheet();
 		table = odsdoc.getTableByName("Sheet1");
 		fcell = table.getCellByPosition(columnindex, rowindex);
-		Assert.assertEquals(expectedColor.toString(), fcell.getCellBackColor()
+		Assert.assertEquals(expectedColor.toString(), fcell.getCellBackgroundColor()
 				.toString());
-
+		
+		OdfSpreadsheetDocument ods;
+		try {
+			ods = OdfSpreadsheetDocument.newSpreadsheetDocument();
+			OdfTable tbl = ods.getTableByName("Sheet1");
+			OdfTableCell cell = tbl.getCellByPosition(0, 0);
+			Color actualBackColor = cell.getCellBackgroundColor();
+			Assert.assertEquals("#FFFFFF", actualBackColor.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test

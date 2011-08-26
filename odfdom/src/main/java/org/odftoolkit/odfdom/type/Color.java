@@ -25,6 +25,12 @@ package org.odftoolkit.odfdom.type;
  * This class represents the in OpenDocument format used data type {@odf.datatype color}
  */
 public class Color implements OdfDataType {
+	
+	/**
+	 * The color white.
+	 */
+	public static final Color WHITE = new Color("#FFFFFF");
+
 	private String mColor;
 
 	/**

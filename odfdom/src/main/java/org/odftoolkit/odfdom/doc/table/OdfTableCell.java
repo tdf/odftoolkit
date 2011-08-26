@@ -94,7 +94,7 @@ public class OdfTableCell {
 	/**
 	 * The default cell back color of table cell.
 	 */
-	private static final String DEFAULT_BACK_COLOR="#FFFFFF"; 
+	private static final String DEFAULT_BACKGROUND_COLOR="#FFFFFF"; 
 	
 	/**
 	 * The default horizontal alignment of table cell.
@@ -196,7 +196,7 @@ public class OdfTableCell {
 	public void setHorizontalJustify(String horiJustify) {
 		if(horiJustify == null)
 			horiJustify = DEFAULT_HORIZONTAL_ALIGN;
-		doPrepare();
+		splitRepeatedCells();
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties,
@@ -232,7 +232,7 @@ public class OdfTableCell {
 	public void setVerticalJustify(String vertJustify) {
 		if(vertJustify == null)
 			vertJustify = DEFAULT_VERTICAL_ALIGN;
-		doPrepare();
+		splitRepeatedCells();
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
@@ -265,7 +265,7 @@ public class OdfTableCell {
 	 * @param isTextWrapped	whether the cell content can be wrapped or not
 	 */
 	public void setTextWrapped(boolean isTextWrapped) {
-		doPrepare();
+		splitRepeatedCells();
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
 		if (styleElement != null) {
 			OdfStyleProperty property = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
@@ -503,7 +503,7 @@ public class OdfTableCell {
 			throw new IllegalArgumentException(
 					"Currency code of cell should not be null.");
 		} 
-		doPrepare();
+		splitRepeatedCells();
 		if (mCellElement.getOfficeValueTypeAttribute().equals(OfficeValueTypeAttribute.Value.CURRENCY.toString())) {
 			mCellElement.setOfficeCurrencyAttribute(currency);
 		} else {
@@ -627,7 +627,7 @@ public class OdfTableCell {
 		if ( currency == null ) {
 			throw new IllegalArgumentException("currency shouldn't be null.");
 		}
-		doPrepare();
+		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.CURRENCY);
 		mCellElement.setOfficeValueAttribute(new Double(value));
 		mCellElement.setOfficeCurrencyAttribute(currency);
@@ -657,7 +657,7 @@ public class OdfTableCell {
 	 * @param value	the value that will be set
 	 */
 	public void setPercentageValue(double value) {
-		doPrepare();
+		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.PERCENTAGE);
 		mCellElement.setOfficeValueAttribute(new Double(value));
 	}
@@ -728,7 +728,7 @@ public class OdfTableCell {
 	 * @param value	the double value that will be set
 	 */
 	public void setDoubleValue(double value) {
-		doPrepare();
+		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.FLOAT);
 		mCellElement.setOfficeValueAttribute(new Double(value));
 		setDisplayText(value + "");
@@ -758,7 +758,7 @@ public class OdfTableCell {
 	 * @param value	the value of boolean type
 	 */
 	public void setBooleanValue(boolean value) {
-		doPrepare();
+		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.BOOLEAN);
 		mCellElement.setOfficeBooleanValueAttribute(new Boolean(value));
 		setDisplayText(value + "");
@@ -798,7 +798,7 @@ public class OdfTableCell {
 		if (date == null) {
 			throw new IllegalArgumentException("date shouldn't be null.");
 		}
-		doPrepare();
+		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.DATE);
 		SimpleDateFormat simpleFormat = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
 		String svalue = simpleFormat.format(date.getTime());
@@ -817,20 +817,16 @@ public class OdfTableCell {
 		if (str == null) {
 			str = "";
 		}
-		doPrepare();
+		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.STRING);
 		mCellElement.setOfficeStringValueAttribute(str);
 		setDisplayText(str);
 	}
 
 	//Note: if you want to change the cell
-	//doPrepare must be called first in order to 
+	//splitRepeatedCells must be called first in order to 
 	//1. update parent row if the row is the repeated rows.
 	//2. update the cell itself if the cell is the column repeated cells.
-	private void doPrepare() {
-		splitRepeatedCells();
-	}
-
 	void splitRepeatedCells() {
 		OdfTable table = getTable();
 		//1.if the parent row is the repeated row
@@ -923,7 +919,7 @@ public class OdfTableCell {
 		if(time==null){
 			throw new IllegalArgumentException("time shouldn't be null.");
 		}
-		doPrepare();
+		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.TIME);
 		SimpleDateFormat simpleFormat = new SimpleDateFormat(DEFAULT_TIME_FORMAT);
 		String svalue = simpleFormat.format(time.getTime());
@@ -947,41 +943,89 @@ public class OdfTableCell {
 	/**
 	 * Get the background color of this cell.
 	 * <p>
-	 * If no back ground color is set, null will be returned.
+	 * If no background color is set, default background color "#FFFFFF" will be returned.
 	 * 
 	 * @return the background color of this cell 
 	 */
-	public Color getCellBackColor() {
-
-		Color color = null;
+	public Color getCellBackgroundColor() {
+		Color color = Color.WHITE;
 		OdfStyleBase styleElement = getCellStyleElement();
 		if (styleElement != null) {
 			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
 					OdfName.newName(OdfNamespaceNames.FO, "background-color"));
 			String property = styleElement.getProperty(bkColorProperty);
-
-			color = new Color(property);
+			if (property != null) {
+				try {
+					color = new Color(property);
+				} catch (Exception e) {
+					// use default background color White
+					color = Color.WHITE;
+					mLog.warning(e.getMessage());
+				}
+			}
 		}
 		return color;
 	}
 
 	/**
-	 * Set the back ground color of this cell.
+	 * Get the background color string of this cell.
+	 * <p>
+	 * If no background color is set, default background color "#FFFFFF" will be returned.
 	 * 
-	 * @param cellBackColor
-	 *            the background color that need to set. 
-	 *            If cellBackColor is null, default back color #FFFFFF will be set.
+	 * @return the background color of this cell 
 	 */
-	public void setCellBackColor(Color cellBackColor) {
-		if(cellBackColor==null){
-			cellBackColor=Color.valueOf(DEFAULT_BACK_COLOR);
+	public String getCellBackgroundColorString() {
+		String color = DEFAULT_BACKGROUND_COLOR;
+		OdfStyleBase styleElement = getCellStyleElement();
+		if (styleElement != null) {
+			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
+					OdfName.newName(OdfNamespaceNames.FO, "background-color"));
+			String property = styleElement.getProperty(bkColorProperty);
+			if (Color.isValid(property)) {
+				color = property;
+			}
 		}
-		doPrepare();
+		return color;
+	}
+	
+	/**
+	 * Set the background color of this cell.
+	 * 
+	 * @param cellBackgroundColor
+	 *            the background color that need to set. 
+	 *            If cellBackgroundColor is null, default background color <code>Color.WHITE</code> will be set.
+	 */
+	public void setCellBackgroundColor(Color cellBackgroundColor) {
+		if(cellBackgroundColor==null){
+			cellBackgroundColor=Color.WHITE;
+		}
+		splitRepeatedCells();
 		OdfStyleBase styleElement = getCellStyleElementForWrite();
 		if (styleElement != null) {
 			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
 					OdfName.newName(OdfNamespaceNames.FO, "background-color"));
-			styleElement.setProperty(bkColorProperty, cellBackColor.toString());
+			styleElement.setProperty(bkColorProperty, cellBackgroundColor.toString());
+		}
+	}
+	
+	/**
+	 * Set the background color of this cell using string.
+	 * 
+	 * @param cellBackgroundColor
+	 *            the background color that need to set. 
+	 *            If cellBackgroundColor is null, default background color #FFFFFF will be set.
+	 */
+	public void setCellBackgroundColor(String cellBackgroundColor) {
+		if(!Color.isValid(cellBackgroundColor)){
+			mLog.warning("Parameter is invalidate for datatype Color, default background color #FFFFFF will be set.");
+			cellBackgroundColor=DEFAULT_BACKGROUND_COLOR;
+		}
+		splitRepeatedCells();
+		OdfStyleBase styleElement = getCellStyleElementForWrite();
+		if (styleElement != null) {
+			OdfStyleProperty bkColorProperty = OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties,
+					OdfName.newName(OdfNamespaceNames.FO, "background-color"));
+			styleElement.setProperty(bkColorProperty, cellBackgroundColor);
 		}
 	}
 
@@ -1042,7 +1086,7 @@ public class OdfTableCell {
 		if (spannedNum < 1) {
 			spannedNum = DEFAULT_COLUMN_SPANNED_NUMBER;
 		}
-		doPrepare();
+		splitRepeatedCells();
 		if (mCellElement instanceof TableTableCellElement) {
 			((TableTableCellElement) mCellElement).setTableNumberColumnsSpannedAttribute(new Integer(spannedNum));
 		} else {
@@ -1076,7 +1120,7 @@ public class OdfTableCell {
 		if (spannedNum < 1) {
 			spannedNum = DEFAULT_ROW_SPANNED_NUMBER;
 		}
-		doPrepare();
+		splitRepeatedCells();
 		if (mCellElement instanceof TableTableCellElement) {
 			((TableTableCellElement) mCellElement).setTableNumberRowsSpannedAttribute(new Integer(spannedNum));
 		} else {
@@ -1123,7 +1167,7 @@ public class OdfTableCell {
 		if (formula == null) {
 			throw new IllegalArgumentException("formula shouldn't be null.");
 		} 
-		doPrepare();
+		splitRepeatedCells();
 		mCellElement.setTableFormulaAttribute(formula);
 	}
 
@@ -1169,7 +1213,7 @@ public class OdfTableCell {
 		if ( format == null ){
 			throw new IllegalArgumentException("format shouldn't be null.");
 		} 
-		doPrepare();
+		splitRepeatedCells();
 		String type = mCellElement.getOfficeValueTypeAttribute();
 		OfficeValueTypeAttribute.Value typeValue = null;
 		msFormatString = format;
@@ -1229,7 +1273,7 @@ public class OdfTableCell {
 		if (formatStr == null) {
 			throw new IllegalArgumentException("formatStr shouldn't be null.");
 		}
-		doPrepare();
+		splitRepeatedCells();
 		String type = mCellElement.getOfficeValueTypeAttribute();
 		OfficeValueTypeAttribute.Value typeValue = null;
 		msFormatString = formatStr;
@@ -1495,7 +1539,7 @@ public class OdfTableCell {
 	 * Remove all the text content of cell.
 	 */
 	public void removeTextContent() {
-		doPrepare();
+		splitRepeatedCells();
 		//delete text:p child element
 		Node node = mCellElement.getFirstChild();
 		while (node != null) {
@@ -1513,7 +1557,7 @@ public class OdfTableCell {
 	 * Remove all the content of the cell.
 	 */
 	public void removeContent() {
-		doPrepare();
+		splitRepeatedCells();
 		Node node = mCellElement.getFirstChild();
 		while (node != null) {
 			Node nextNode = node.getNextSibling();
@@ -1528,7 +1572,7 @@ public class OdfTableCell {
 	 * @param fromCell	another cell whose content will be appended to this cell
 	 */
 	void appendContentFrom(OdfTableCell fromCell) {
-		doPrepare();
+		splitRepeatedCells();
 		OdfWhitespaceProcessor textProcess = new OdfWhitespaceProcessor();
 		TableTableCellElementBase cell = fromCell.getOdfElement();
 		Node node = cell.getFirstChild();
