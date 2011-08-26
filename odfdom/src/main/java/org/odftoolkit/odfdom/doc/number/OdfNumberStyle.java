@@ -159,6 +159,9 @@ public class OdfNumberStyle extends NumberNumberStyleElement {
 				if (pos < numberSpec.length()) {
 					number.setNumberDecimalPlacesAttribute(numberSpec.length() - (pos + 1));
 				}
+				if (pos == numberSpec.length()) {
+					number.setNumberDecimalPlacesAttribute(0);
+				}
 				this.appendChild(number);
 
 				emitText(postMatch);

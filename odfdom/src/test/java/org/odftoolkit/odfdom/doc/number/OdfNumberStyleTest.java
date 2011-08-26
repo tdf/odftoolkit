@@ -28,6 +28,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.style.OdfStyleMap;
@@ -101,6 +102,17 @@ public class OdfNumberStyleTest {
 				"#0:after",
 				"before:#0:after"
 		};
+		int[] expectedNumberDecimalPlaces = {
+				0,
+				0,
+				0,
+				0,
+				0,
+				2,
+				0,
+				0,
+				0
+		};
 		/*
 		 * Expected elements.
          * t -- <number:text> with following text
@@ -148,6 +160,9 @@ public class OdfNumberStyleTest {
 				}
 				node = node.getNextSibling();
 				Assert.assertEquals(expectedFormat[i], instance.getFormat());
+				//reproduce bug 180
+				OdfNumber number = OdfElement.findFirstChildNode(OdfNumber.class, instance);
+				Assert.assertEquals(expectedNumberDecimalPlaces[i], number.getNumberDecimalPlacesAttribute().intValue());
 			}
 		}
 	}
