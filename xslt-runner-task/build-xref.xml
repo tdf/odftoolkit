@@ -46,10 +46,30 @@
                  force="${force}">
             <param name="xref-schema-file" expression="${xref-schema-file}"/>
             <param name="add-xrefs" expression="true"/>
-            <param name="keep-anchors" expression="false"/>
+            <param name="keep-anchors" expression="true"/>
         </odfxslt>
     </target>
-    
+
+    <target name="add-v12-model" depends="init,jar,create-v12-normalized-schema"
+            description="Add cross references to ODF 1.2 specification.">
+        <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+        <property name="xref-schema-file" location="${build.dir}/schema/normalized/${opendocument.v12.schema.xref}"/>
+        <property name="target-file" value="${dist.dir}/normalized/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"/>
+        <condition property="force">
+            <not>
+                <uptodate srcfile="${xref-schema-file}" targetfile="${target-file}"/>
+            </not>
+        </condition>
+        <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-embedded-model.xsl"
+                 in="${opendocument.v12.spec-source.main}"
+                 out="${target-file}"
+                 force="${force}">
+            <param name="xref-schema-file" expression="${xref-schema-file}"/>
+            <param name="add-xrefs" expression="true"/>
+            <param name="keep-anchors" expression="true"/>
+        </odfxslt>
+    </target>
+
     <target name="remove-v12-xref" depends="init,jar,-create-v12-xref-schema" 
             description="Remove cross references to ODF 1.2 specification.">
         <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
@@ -125,25 +145,55 @@
     
     
     <target name="-create-v12-xref-schema" depends="init,-get-v12-schemas">
+        <condition property="force">
+            <not>
+                <uptodate srcfile="${v12.schema.dir}/${opendocument.v12.schema}" targetfile="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
+            </not>
+        </condition>
         <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl" 
-                    in="${v12.schema.dir}/${opendocument.v12.schema.strict}" 
-                    out="${build.dir}/schema/flat/${opendocument.v12.schema.xref}">  
+                    in="${v12.schema.dir}/${opendocument.v12.schema}" 
+                    out="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"
+                    force="${force}">  
             <param name="incl-conditions" expression="true"/>
             <param name="incl-default-values" expression="true"/>
-            <param name="incl-types" expression="false"/>
+            <param name="incl-types" expression="true"/>
             <param name="incl-elements" expression="true"/>
         </xslt>
     </target>
-    
+
+    <target name="create-v12-normalized-schema" depends="init,-get-v12-schemas" description="any">
+        <condition property="force">
+            <not>
+                <uptodate srcfile="${v12.schema.dir}/${opendocument.v12.schema}" targetfile="${build.dir}/schema/normalized/${opendocument.v12.schema.xref}"/>
+            </not>
+        </condition>
+        <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl"
+                    in="${v12.schema.dir}/${opendocument.v12.schema}"
+                    out="${build.dir}/schema/normalized/${opendocument.v12.schema.xref}"
+                    force="${force}">
+            <param name="incl-content-model" expression="true"/>
+            <param name="incl-conditions" expression="false"/>
+            <param name="incl-default-values" expression="false"/>
+            <param name="incl-types" expression="true"/>
+            <param name="incl-elements" expression="true"/>
+        </xslt>
+    </target>
+
     <target name="-create-v12-dtype-schema" depends="init,-get-v12-schemas">
+        <condition property="force">
+            <not>
+                <uptodate srcfile="${v12.schema.dir}/${opendocument.v12.schema}" targetfile="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}"/>
+            </not>
+        </condition>
         <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl" 
                     in="${v12.schema.dir}/${opendocument.v12.schema.strict}" 
-                    out="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}">  
+                    out="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}"
+                    force="${force}">  
             <param name="incl-conditions" expression="false"/>
             <param name="incl-default-values" expression="true"/>
             <param name="incl-types" expression="true"/>
             <param name="incl-elements" expression="false"/>
         </xslt>
     </target>
-    
+
 </project>
