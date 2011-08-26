@@ -27,7 +27,7 @@ import java.util.Iterator;
 class TempDirDeleter extends Thread {
     private static TempDirDeleter deleterThread=null;
 
-    private ArrayList dirList = new ArrayList();
+    private ArrayList<File> dirList = new ArrayList<File>();
 
     static TempDirDeleter getInstance() {
         if ( deleterThread==null ) {

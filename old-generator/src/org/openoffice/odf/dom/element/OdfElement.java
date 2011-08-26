@@ -154,6 +154,7 @@ abstract public class OdfElement extends ElementNSImpl {
      * @param parentNode is the parent O of the children to be found.
      * @return the first child node of the given parentNode that is a clazz or null if none is found.
      */
+    @SuppressWarnings("unchecked")
     static public <T extends OdfElement> T findFirstChildNode( Class<T> clazz, Node parentNode )
     {
         if( parentNode != null && parentNode instanceof ParentNode )
@@ -178,6 +179,7 @@ abstract public class OdfElement extends ElementNSImpl {
      * @param refNode the reference node of the siblings to be found.
      * @return the first sibbling of the given reference node that is a clazz or null if none is found.
      */
+    @SuppressWarnings("unchecked")
     static public <T extends OdfElement> T findNextChildNode( Class<T> clazz, Node refNode )
     {
         if( refNode != null )
@@ -201,6 +203,7 @@ abstract public class OdfElement extends ElementNSImpl {
      * @param refNode the reference node which siblings are to be searched.
      * @return the first previous sibbling of the given reference node that is a clazz or null if none is found.
      */
+    @SuppressWarnings("unchecked")
     static public <T extends OdfElement> T findPreviousChildNode( Class<T> clazz, Node refNode )
     {
         if( refNode != null )
