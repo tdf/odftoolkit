@@ -1853,7 +1853,7 @@ public class OdfPackage implements Closeable {
 			String errMsg = "The internalPath given by parameter is NULL!";
 			Logger.getLogger(OdfPackage.class.getName()).severe(errMsg);
 			throw new IllegalArgumentException(errMsg);
-		} else if (!isExternalReference(path)) {
+		} else if (!mightBeExternalReference(path)) {
 			if (path.equals(EMPTY_STRING)) {
 				path = SLASH;
 			} else {
@@ -1872,6 +1872,20 @@ public class OdfPackage implements Closeable {
 			}
 		}
 		return path;
+	}
+
+	/** Normalizes both directory and file path */
+	private static boolean mightBeExternalReference(String internalPath) {
+		boolean isExternalReference = false;
+		// if the fileReference is a external relative documentURL..
+		if (internalPath.startsWith(DOUBLE_DOT)
+				|| // or absolute documentURL AND not root document
+				internalPath.startsWith(SLASH) && !internalPath.equals(SLASH)
+				|| // or absolute IRI
+				internalPath.contains(COLON)) {
+			isExternalReference = true;
+		}
+		return isExternalReference;
 	}
 
 	/** Resolving the directory replacements (ie. "/../" and "/./") with a slash "/" */
@@ -1927,21 +1941,16 @@ public class OdfPackage implements Closeable {
 	 * Checks if the given reference is a reference, which points outside the
 	 * ODF package
 	 *
-	 * @param fileRef
+	 * @param internalPath
 	 *            the file reference to be checked
 	 * @return true if the reference is an package external reference
 	 */
-	private static boolean isExternalReference(String fileRef) {
-		boolean isExternalReference = false;
-		// if the fileReference is a external relative documentURL..
-		if (fileRef.startsWith(DOUBLE_DOT)
-				|| // or absolute documentURL AND not root document
-				fileRef.startsWith(SLASH) && !fileRef.equals(SLASH)
-				|| // or absolute IRI
-				fileRef.contains(COLON)) {
-			isExternalReference = true;
+	public static boolean isExternalReference(String internalPath) {
+		if(mightBeExternalReference(internalPath)){
+			return true;
+		}else{
+			return mightBeExternalReference(normalizePath(internalPath));
 		}
-		return isExternalReference;
 	}
 
 	/**
