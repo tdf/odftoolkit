@@ -54,51 +54,48 @@ public class OdfHelper {
 
 	private static final Logger LOG = Logger.getLogger(OdfHelper.class.getName());
 	public static final Boolean DEBUG = Boolean.FALSE;
-
 	/** Expresses the amount of elements in ODF 1.1. There are some issues in the schema that have to be fixed before the full number can be returned by MSV:
-		Reference table-table-template is never used, therefore several elements are not taking into account::
-		"table:body"
-		"table:even-columns"
-		"table:even-rows"
-		"table:first-column"
-		"table:first-row"
-		"table:last-column"
-		"table:last-row"
-		"table:odd-columns"
-		"table:odd-rows"
-		"table:table-template"
-	 NOTE: Ignoring the '*' there can be 525 elements parsed, but with fixed schema it should be 535. */
+	Reference table-table-template is never used, therefore several elements are not taking into account::
+	"table:body"
+	"table:even-columns"
+	"table:even-rows"
+	"table:first-column"
+	"table:first-row"
+	"table:last-column"
+	"table:last-row"
+	"table:odd-columns"
+	"table:odd-rows"
+	"table:table-template"
+	NOTE: Ignoring the '*' there can be 525 elements parsed, but with fixed schema it should be 535. */
 	public static final int ODF11_ELEMENT_NUMBER = 525; //ToDo: 535 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or attribute declaration
 	public static final int ODF12_ELEMENT_NUMBER = 598;
-	
 	/** Expresses the amount of attributes in ODF 1.1. There are some issues in the schema that have to be fixed before the full number can be returned by MSV:
-		Following references are never used, therefore its attribute is not taking into account::
-			draw-glue-points-attlist	with "draw:escape-direction"
-			office-process-content		with "office:process-content" (DEPRECATED in ODF1.2 only on foreign elements)
+	Following references are never used, therefore its attribute is not taking into account::
+	draw-glue-points-attlist	with "draw:escape-direction"
+	office-process-content		with "office:process-content" (DEPRECATED in ODF1.2 only on foreign elements)
 
-		Following attributes are member of the not referenced element "table:table-template":
-			"text:first-row-end-column"
-			"text:first-row-start-column"
-			"text:last-row-end-column"
-			"text:last-row-start-column"
-			"text:paragraph-style-name"
+	Following attributes are member of the not referenced element "table:table-template":
+	"text:first-row-end-column"
+	"text:first-row-start-column"
+	"text:last-row-end-column"
+	"text:last-row-start-column"
+	"text:paragraph-style-name"
 
-	 NOTE: Ignoring the '*' there can be 1162 elements parsed, but with fixed schema it should be 1169. */
+	NOTE: Ignoring the '*' there can be 1162 elements parsed, but with fixed schema it should be 1169. */
 	public static final int ODF11_ATTRIBUTE_NUMBER = 1162; //ToDo: 1169 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or attribute declaration
 	public static final int ODF12_ATTRIBUTE_NUMBER = 1300; //in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie. @office:process-content)
 	public static String odfResourceDir;
 	public static String outputRoot;
 	public static final String INPUT_ROOT = "target" + File.separator + "classes" + File.separator
-				+ "examples" + File.separator + "odf";
+			+ "examples" + File.separator + "odf";
 	public static final String TEST_INPUT_ROOT = "target" + File.separator + "test-classes" + File.separator
-				+ "examples" + File.separator + "odf";
-
+			+ "examples" + File.separator + "odf";
 	public static final String ODF10_RNG_FILE_NAME = "OpenDocument-strict-schema-v1.0-os.rng";
 	public static final String ODF11_RNG_FILE_NAME = "OpenDocument-strict-schema-v1.1.rng";
 	public static final String ODF12_RNG_FILE_NAME = "OpenDocument-v1.2-csprd03-schema.rng";
-	public  static String odf12RngFile;
-	public  static String odf11RngFile;
-	public  static String odf10RngFile;
+	public static String odf12RngFile;
+	public static String odf11RngFile;
+	public static String odf10RngFile;
 	private static String mConfigFile;
 	private static final String OUTPUT_FILES_TEMPLATE = "output-files.vm";
 	private static final String OUTPUT_FILES = "target" + File.separator + "output-files.xml";
@@ -106,6 +103,8 @@ public class OdfHelper {
 	private static XMLModel mOdf11SchemaModel;
 	private static OdfModel mOdfModel;
 	private static SourceCodeModel mJavaModel;
+	private static Expression mOdf12Root;
+	private static Expression mOdf11Root;
 
 	public OdfHelper(String resourceRoot, String targetRoot, String odf12SchemaFile, String odf11SchemaFile, String configFile) {
 		odfResourceDir = resourceRoot;
@@ -116,7 +115,7 @@ public class OdfHelper {
 	}
 
 	static {
-		odfResourceDir = INPUT_ROOT;
+		odfResourceDir = INPUT_ROOT + File.separator + "odfdom-java";
 		odf12RngFile = INPUT_ROOT + File.separator + ODF12_RNG_FILE_NAME;
 		odf11RngFile = INPUT_ROOT + File.separator + ODF11_RNG_FILE_NAME;
 		odf10RngFile = INPUT_ROOT + File.separator + ODF10_RNG_FILE_NAME;
@@ -124,12 +123,24 @@ public class OdfHelper {
 		outputRoot = "target";
 	}
 
+	public void start() throws Exception{
+		LOG.info("Starting code generation:");
+		initialize();
+		fillTemplates(odfResourceDir, mOdf12Root);
+	}
+	
 	public static void main(String[] args) throws Exception {
+		initialize();
+		fillTemplates(odfResourceDir + File.separator + "odf-reference", mOdf12Root);
+		fillTemplates(odfResourceDir + File.separator + "odfdom-java", mOdf12Root);
+		fillTemplates(odfResourceDir + File.separator + "odfdom-python", mOdf12Root);
+	}
 
+	private static void initialize() throws Exception{
 		// calling MSV to parse the ODF 1.2 RelaxNG, returning a tree
-		Expression odf12Root = loadSchema(new File(odf12RngFile));
+		mOdf12Root = loadSchema(new File(odf12RngFile));
 		// calling MSV to parse the ODF 1.1 RelaxNG, returning a tree
-		Expression odf11Root = loadSchema(new File(odf11RngFile));
+		mOdf11Root = loadSchema(new File(odf11RngFile));
 
 		// Read config.xml 2DO WHAT IS ODFDOM GENERATOR CONFIG FILE
 		// Manual added Java specific info - Base class for inheritance
@@ -141,15 +152,11 @@ public class OdfHelper {
 		Map<String, OdfModel.AttributeDefaults> attributeDefaultMap = new HashMap<String, OdfModel.AttributeDefaults>();
 		OdfConfigFileHandler.readConfigFile(new File(mConfigFile), elementToBaseNameMap, attributeDefaultMap, elementStyleFamiliesMap, datatypeValueAndConversionMap);
 
-		mOdf12SchemaModel = new XMLModel(odf12Root);
-		mOdf11SchemaModel = new XMLModel(odf11Root);
+		mOdf12SchemaModel = new XMLModel(mOdf12Root);
+		mOdf11SchemaModel = new XMLModel(mOdf11Root);
 		mOdfModel = new OdfModel(elementStyleFamiliesMap, attributeDefaultMap);
 		// Needed for the base classes - common attributes are being moved into the base classes
 		mJavaModel = new SourceCodeModel(mOdf12SchemaModel, mOdfModel, elementToBaseNameMap, datatypeValueAndConversionMap);
-
-		fillTemplates(odfResourceDir + File.separator + "odf-reference", odf12Root);
-//		fillTemplates(odfResourceDir + File.separator+ "odfdom-java", odf12Root);
-//		fillTemplates(odfResourceDir + File.separator + "odfdom-python", odf12Root);
 	}
 
 	private static void fillTemplates(String sourceDir, Expression root) throws Exception {

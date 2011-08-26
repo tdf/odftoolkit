@@ -27,7 +27,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
-import schema2template.example.odf.OdfCodegen;
+import schema2template.example.odf.OdfHelper;
 
 /**
  * Generate Java code for ODFDOM.
@@ -108,7 +108,7 @@ public class CodegenMojo extends AbstractMojo {
 			getLog().debug("ODF1.2 Schema File " + odf12SchemaFile);
 			getLog().debug("ODF1.1 Schema File " + odf11SchemaFile);
 			getLog().debug("Config File " + configFile);
-			OdfCodegen codeGen = new OdfCodegen(resourceRootPath, targetRootPath, odf12SchemaFile, odf11SchemaFile, configFile);
+			OdfHelper codeGen = new OdfHelper(resourceRootPath, targetRootPath, odf12SchemaFile, odf11SchemaFile, configFile);
 			codeGen.start();
 		} catch (Exception ex) {
 			getLog().error("Failed to parse template.");
