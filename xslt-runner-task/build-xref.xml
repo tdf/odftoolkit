@@ -34,11 +34,18 @@
             description="Add cross references to ODF 1.2 specification.">
         <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
         <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
+        <property name="target-file" value="${dist.dir}/xref/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"/>
+        <condition property="force">
+            <not>
+                <uptodate srcfile="${xref-schema-file}" targetfile="${target-file}"/>
+            </not>
+        </condition>
         <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-embedded-xref.xsl"
                  in="${opendocument.v12.spec-source.main}"
-                 out="${dist.dir}/xref/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"
-                 force="false">
+                 out="${target-file}"
+                 force="${force}">
             <param name="xref-schema-file" expression="${xref-schema-file}"/>
+            <param name="add-xrefs" expression="true"/>
             <param name="keep-anchors" expression="true"/>
         </odfxslt>
     </target>
@@ -47,10 +54,16 @@
             description="Remove cross references to ODF 1.2 specification.">
         <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
         <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
+        <property name="target-file" value="${dist.dir}/no-xref/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"/>
+        <condition property="force">
+            <not>
+                <uptodate srcfile="${xref-schema-file}" targetfile="${target-file}"/>
+            </not>
+        </condition>
         <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-embedded-xref.xsl"
                  in="${opendocument.v12.spec-source.main}"
-                 out="${dist.dir}/no-xref/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"
-                 force="false">
+                 out="${target-file}"
+                 force="${force}">
             <param name="xref-schema-file" expression="${xref-schema-file}"/>
             <param name="add-xrefs" expression="false"/>
             <param name="keep-anchors" expression="true"/>
@@ -89,7 +102,7 @@
         <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl" 
                     in="${v12.schema.dir}/${opendocument.v12.schema.strict}" 
                     out="${build.dir}/schema/flat/${opendocument.v12.schema.xref}">  
-            <param name="incl-conditions" expression="false"/>
+            <param name="incl-conditions" expression="true"/>
             <param name="incl-default-values" expression="true"/>
             <param name="incl-types" expression="false"/>
             <param name="incl-elements" expression="true"/>
