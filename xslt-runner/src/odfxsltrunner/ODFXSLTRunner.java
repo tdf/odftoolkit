@@ -199,7 +199,7 @@ public class ODFXSLTRunner {
             {
                 aLogger.setName( aOutputFile.getAbsolutePath(), aPathInPackage );                
                 aOutputStream = 
-                    aOutputPkg.insert(aPathInPackage, aMediaType );
+                    aOutputPkg.insertOutputStream(aPathInPackage, aMediaType );
                 aOutputResult = new StreamResult( aOutputStream );
             }
         }
