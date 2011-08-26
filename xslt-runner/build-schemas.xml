@@ -22,19 +22,62 @@
 -->
 
 <project name="build-schemas" default="default" basedir=".">
-    <description>Prepares ODF schemas for use within this project.</description>
-    <dirname property="build-schemas.basedir" file="${ant.file.build-schemas}"/>
+    <description>Prepares ODF schema and specification location properties for use within this project.</description>
 
-    <!--property file="${build-schemas.basedir}/schema.user.properties"/-->
+    <dirname property="build-schemas.basedir" file="${ant.file.build-schemas}"/>
+    <property file="${build-schemas.basedir}/schema.user.properties" prefix="user"/>
     <property file="${build-schemas.basedir}/schema.properties"/>
-    <property name="opendocument.v11.schema.manifest" value="OpenDocument-manifest-schema-v1.1.rng"/>
-    <property name="opendocument.v11.schema.strict" value="OpenDocument-strict-schema-v1.1.rng"/>
-    <property name="opendocument.v12.schema" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-schema.rng"/>
-    <property name="opendocument.v12.schema.manifest" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-manifest-schema.rng"/>
-    <property name="opendocument.v12.schema.dsig" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-dsig-schema.rng"/>
-    <property name="opendocument.v12.ontology.part1" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-metadata.owl"/>
-    <property name="opendocument.v12.ontology.part3" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-package-metadata.owl"/>
-       
+
+    <target name="-init-schema-props">
+        <!-- Set schema properties from schema.user.properties file if they are not set in private.properties already -->
+        <condition property="opendocument.v12.part1.schema.dir" value="${user.opendocument.v12.part1.schema.dir}">
+            <not>
+                <isset property="opendocument.v12.part1.schema.dir"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.part3.schema.dir" value="${user.opendocument.v12.part3.schema.dir}">
+            <not>
+                <isset property="opendocument.v12.part3.schema.dir"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.part0.spec-source" value="${user.opendocument.v12.part0.spec-source}">
+            <not>
+                <isset property="opendocument.v12.part0.spec-source"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.part1.spec-source" value="${user.opendocument.v12.part1.spec-source}">
+            <not>
+                <isset property="opendocument.v12.part1.spec-source"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.part2.spec-source" value="${user.opendocument.v12.part2.spec-source}">
+            <not>
+                <isset property="opendocument.v12.part2.spec-source"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.part3.spec-source" value="${user.opendocument.v12.part3.spec-source}">
+            <not>
+                <isset property="opendocument.v12.part3.spec-source"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.product.dir" value="${user.opendocument.v12.product.dir}">
+            <not>
+                <isset property="opendocument.v12.product.dir"/>
+            </not>
+        </condition>
+
+        <!-- Some basic document names -->
+        <property name="opendocument.v12.schema" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-schema.rng"/>
+        <property name="opendocument.v12.schema.manifest" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-manifest-schema.rng"/>
+        <property name="opendocument.v12.schema.dsig" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-dsig-schema.rng"/>
+        <property name="opendocument.v12.ontology.part1" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-metadata.owl"/>
+        <property name="opendocument.v12.ontology.part3" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-package-metadata.owl"/>
+
+        <property name="opendocument.v12.schema.xref" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-xref-schema.rng"/>
+        <property name="opendocument.v12.schema.dtype" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-dtype-schema.rng"/>
+        <property name="opendocument.v12.manifest-schema.xref" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-xref-manifest-schema.rng"/>
+    </target>
+
 </project>
 
 
