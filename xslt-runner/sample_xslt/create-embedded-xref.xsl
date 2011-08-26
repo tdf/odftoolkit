@@ -592,6 +592,7 @@
                         <xsl:text> element has content of data type </xsl:text>
                         <xsl:call-template name="print-datatype">
                             <xsl:with-param name="name" select="rng:data/@type|rng:ref/@name"/>
+                            <xsl:with-param name="elem-name" select="@name"/>
                         </xsl:call-template>
                         <xsl:text>.</xsl:text>
                     </text:p>
@@ -731,16 +732,27 @@
                     <xsl:text> attribute has the data type </xsl:text>
                     <xsl:call-template name="print-datatype">
                         <xsl:with-param name="name" select="$name"/>
+                        <xsl:with-param name="attr-name" select="$attr-name"/>
                     </xsl:call-template>
                     <xsl:text>.</xsl:text>
                 </text:p>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:apply-templates select="document($xref-schema-file)/rng:grammar/rng:define[@name=$name]/*" mode="attr-value">
+                <xsl:apply-templates select="document($xref-schema-file)/rng:grammar/rng:define[@name=$name]" mode="attr-value">
                     <xsl:with-param name="attr-name" select="$attr-name"/>
                 </xsl:apply-templates>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="rng:define" mode="attr-value">
+        <xsl:param name="attr-name"/>
+        <xsl:if test="count(*)>1">
+            <xsl:message>*** Attribute <xsl:value-of select="$attr-name"/>: Referenced define <xsl:value-of select="@name"/> has multiple child elements.</xsl:message>
+        </xsl:if>
+        <xsl:apply-templates select="*" mode="attr-value">
+            <xsl:with-param name="attr-name" select="$attr-name"/>
+        </xsl:apply-templates>
     </xsl:template>
 
     <xsl:template match="rng:data" mode="attr-value">
@@ -759,6 +771,7 @@
                     <xsl:text> attribute has the data type </xsl:text>
                     <xsl:call-template name="print-datatype">
                         <xsl:with-param name="name" select="$type"/>
+                        <xsl:with-param name="attr-name" select="$attr-name"/>
                     </xsl:call-template>
                     <xsl:text>.</xsl:text>
                 </text:p>
@@ -769,6 +782,13 @@
         </xsl:choose>
     </xsl:template>
 
+    <xsl:template match="rng:choice[count(*)=1]" mode="attr-value">
+        <xsl:param name="attr-name"/>
+        <xsl:message>*** Attribute <xsl:value-of select="$attr-name"/>: &lt;choice&gt; with only one child element.</xsl:message>
+        <xsl:apply-templates select="*" mode="attr-value">
+            <xsl:with-param name="attr-name" select="$attr-name"/>
+        </xsl:apply-templates>
+    </xsl:template>
 
     <xsl:template match="rng:choice" mode="attr-value">
         <xsl:param name="attr-name"/>
@@ -813,7 +833,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="rng:list[rng:zeroOrMore]" mode="attr-value">
+    <xsl:template match="rng:list[rng:zeroOrMore and count(*)=1]" mode="attr-value">
         <xsl:param name="attr-name"/>
         <xsl:call-template name="new-line"/>
         <text:p text:style-name="Attribute_20_Value_20_List">
@@ -828,7 +848,7 @@
         </text:p>
     </xsl:template>
 
-    <xsl:template match="rng:list[rng:oneOrMore]" mode="attr-value">
+    <xsl:template match="rng:list[rng:oneOrMore and count(*)=1]" mode="attr-value">
         <xsl:param name="attr-name"/>
         <xsl:call-template name="new-line"/>
         <text:p text:style-name="Attribute_20_Value_20_List">
@@ -906,7 +926,8 @@
             </xsl:call-template>
             <xsl:text>four space separated values of type </xsl:text>
             <xsl:call-template name="print-datatype">
-                <xsl:with-param name="name" select="@name"/>
+                <xsl:with-param name="name" select="'integer'"/>
+                <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
             <xsl:text>.</xsl:text>
         </text:p>
@@ -921,7 +942,8 @@
             </xsl:call-template>
             <xsl:text>three space separated values of type </xsl:text>
             <xsl:call-template name="print-datatype">
-                <xsl:with-param name="name" select="@name"/>
+                <xsl:with-param name="name" select="'positiveLength'"/>
+                <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
             <xsl:text>.</xsl:text>
         </text:p>
@@ -989,6 +1011,7 @@
             <xsl:text> attribute has values of type </xsl:text>
             <xsl:call-template name="print-datatype">
                 <xsl:with-param name="name" select="@type"/>
+                <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
             <xsl:text> in the range [</xsl:text>
             <text:span text:style-name="Attribute_20_Value">
@@ -1044,6 +1067,7 @@
                 <xsl:text>values of type </xsl:text>
                 <xsl:call-template name="print-datatype">
                     <xsl:with-param name="name" select="$name"/>
+                    <xsl:with-param name="attr-name" select="$attr-name"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -1099,6 +1123,7 @@
                 <xsl:text>a value of type </xsl:text>
                 <xsl:call-template name="print-datatype">
                     <xsl:with-param name="name" select="@name"/>
+                    <xsl:with-param name="attr-name" select="$attr-name"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -1159,11 +1184,12 @@
     </xsl:template>
 
 
-    <xsl:template match="rng:data[(@type='double' or @type='decimal') and count(rng:param)=2]" mode="individual-value">
+    <xsl:template match="rng:data[(@type='double' or @type='decimal') and count(rng:param)=2 and rng:param[@name='minInclusive'] and rng:param[@name='maxInclusive']]" mode="individual-value">
         <xsl:param name="attr-name"/>
         <xsl:text>a value of type </xsl:text>
         <xsl:call-template name="print-datatype">
             <xsl:with-param name="name" select="@type"/>
+            <xsl:with-param name="attr-name" select="$attr-name"/>
         </xsl:call-template>
         <xsl:text> in the range [</xsl:text>
         <text:span text:style-name="Attribute_20_Value">
@@ -1176,12 +1202,12 @@
         <xsl:text>]</xsl:text>
     </xsl:template>
 
-    <xsl:template match="rng:data[@type='decimal' and count(rng:param)=1]" mode="individual-value">
-        <xsl:if test="not(rng:param[@name='minInclusive']='0.0')"></xsl:if>
+    <xsl:template match="rng:data[@type='decimal' and count(rng:param)=1 and rng:param[@name='minInclusive']='0.0']" mode="individual-value">
         <xsl:param name="attr-name"/>
         <xsl:text>a non negative value of type </xsl:text>
         <xsl:call-template name="print-datatype">
             <xsl:with-param name="name" select="@type"/>
+            <xsl:with-param name="attr-name" select="$attr-name"/>
         </xsl:call-template>
     </xsl:template>
 
@@ -1202,6 +1228,10 @@
 
     <xsl:template name="print-datatype">
         <xsl:param name="name"/>
+        <xsl:param name="attr-name" select="'[unknown]'"/>
+        <xsl:if test="string-length($name)=0">
+            <xsl:message>*** Attribute <xsl:value-of select="$attr-name"/>: Empty datatype name.</xsl:message>
+        </xsl:if>
         <text:span text:style-name="Datatype">
             <xsl:value-of select="$name"/>
         </text:span>
