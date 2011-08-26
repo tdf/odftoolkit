@@ -28,6 +28,7 @@ import org.odftoolkit.odfdom.doc.OdfElementFactory;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
+import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
@@ -69,26 +70,26 @@ public class OdfFileDom extends DocumentImpl {
 		return mPackagePath;
 	}
 
-    /**
-     * Retrieves the ODF root element.
-     *
-     * @return The <code>OdfElement</code> being the root of the document.
-     */
-    public OdfElement getRootElement() {
-        return (OdfElement) getDocumentElement();
-    }
-    
-    /**
-     * Create ODF element with namespace uri and qname
-     * 
-     * @param nsuri The namespace uri
-     * @param qname The element qname
-     * 
-     */
+	/**
+	 * Retrieves the ODF root element.
+	 *
+	 * @return The <code>OdfElement</code> being the root of the document.
+	 */
+	public OdfElement getRootElement() {
+		return (OdfElement) getDocumentElement();
+	}
+
+	/**
+	 * Create ODF element with namespace uri and qname
+	 *
+	 * @param nsuri The namespace uri
+	 * @param qname The element qname
+	 *
+	 */
 	public OdfElement createElementNS(String nsuri, String qname) throws DOMException {
 		return createElementNS(OdfName.get(nsuri, qname));
 	}
-    
+
 	/**
 	 * Create ODF element with ODF name
 	 * @param name The <code>OdfName</code>
@@ -110,7 +111,7 @@ public class OdfFileDom extends DocumentImpl {
 	public OdfAttribute createAttributeNS(String nsuri, String qname) throws DOMException {
 		return createAttributeNS(OdfName.get(nsuri, qname));
 	}
-    
+
 	/**
 	 * Create the ODF attribute with ODF name
 	 * @param name The <code>OdfName</code>
@@ -133,6 +134,17 @@ public class OdfFileDom extends DocumentImpl {
 			}
 			return null;
 		}
+	}
+
+	/**
+	 * @return the style:office-styles element of this dom. May return null
+	 *         if there is not yet such element in this dom.
+	 *
+	 * @see getOrCreateAutomaticStyles()
+	 *
+	 */
+	public OdfOfficeStyles getOfficeStyles() {
+		return OdfElement.findFirstChildNode(OdfOfficeStyles.class, getFirstChild());
 	}
 
 	/**
