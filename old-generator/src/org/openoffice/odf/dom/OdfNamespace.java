@@ -63,6 +63,7 @@ public class OdfNamespace implements Comparable, NamespaceContext {
         STYLE("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0"),
         PRESENTATION("presentation", "urn:oasis:names:tc:opendocument:xmlns:presentation:1.0"),
         XLINK("xlink", "http://www.w3.org/1999/xlink"),
+        XML("xml", "http://www.w3.org/XML/1998/namespace" ),
         CONFIG("config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0"),
         CHART("chart", "urn:oasis:names:tc:opendocument:xmlns:chart:1.0"),
         FO("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
@@ -227,6 +228,7 @@ public class OdfNamespace implements Comparable, NamespaceContext {
     public static final OdfNamespace STYLE = get("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
     public static final OdfNamespace PRESENTATION = get("presentation", "urn:oasis:names:tc:opendocument:xmlns:presentation:1.0");
     public static final OdfNamespace XLINK = get("xlink", "http://www.w3.org/1999/xlink");
+    public static final OdfNamespace XML = get("xml", "http://www.w3.org/XML/1998/namespace" );
     public static final OdfNamespace CONFIG = get("config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0");
     public static final OdfNamespace CHART = get("chart", "urn:oasis:names:tc:opendocument:xmlns:chart:1.0");
     public static final OdfNamespace FO = get("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
