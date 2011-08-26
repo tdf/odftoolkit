@@ -578,7 +578,12 @@ public class OdfTableCell {
 	 */
 	public double getCurrencyValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.CURRENCY) {
-			return mCellElement.getOfficeValueAttribute().doubleValue();
+			Double officeValueAttribute = mCellElement.getOfficeValueAttribute();
+			if (officeValueAttribute != null) {
+				return officeValueAttribute.doubleValue();
+			} else {
+				return 0.0;
+			}
 		} else {
 			throw new IllegalArgumentException();
 		}

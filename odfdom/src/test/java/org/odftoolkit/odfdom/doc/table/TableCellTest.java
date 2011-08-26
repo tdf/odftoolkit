@@ -455,6 +455,12 @@ public class TableCellTest {
 		int rowindex = 5, columnindex = 5;
 		OdfTable table = odsdoc.getTableByName("Sheet1");
 		OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
+		//reproduce bug 193
+		fcell.setValueType("currency");
+		fcell.setCurrencyFormat("$", "#,##0.00");
+		double actualValue=fcell.getCurrencyValue();
+		Assert.assertEquals(0.0, actualValue);
+		
 		double expected = 100.00;
 		boolean illegalArgumentFlag = false;
 		try {
