@@ -131,6 +131,8 @@
 
         <element name="style:style" base="style"/>
         <element name="style:default-style" base="style"/>
+        <element name="style:footer-style" base="style"/>
+        <element name="style:header-style" base="style"/>
         <element name="style:page-layout" base="style"/>
         <element name="text:outline-level-style" base="style"/>
         <element name="text:list-style" base="style"/>
