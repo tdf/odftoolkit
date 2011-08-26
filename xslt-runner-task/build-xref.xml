@@ -20,7 +20,7 @@
   limitations under the License.
 
 -->
-<project name="odfxsltrunnertask" default="default" basedir=".">
+<project name="odfxsltrunnertask-samples" default="default" basedir=".">
     <description>Builds, tests, and runs the project odfxsltrunnertask.</description>
     <import file="nbproject/build-impl.xml"/>
 
@@ -31,11 +31,69 @@
     <property name="opendocument.v12.schema.dtype" value="OpenDocument-dtype-schema-v1.2${opendocument.v12.schema.state}.rng"/>
     <property name="opendocument.v12.manifest-schema.xref" value="OpenDocument-xref-manifest-schema-v1.2${opendocument.v12.part3.schema.state}.rng"/>
 
-    <target name="add-v12-part1-xref" depends="init,jar,-create-v12-xref-schema"
+    <target name="add-v12-part0-xref-product" depends="init,jar"
+            description="Add cross references to ODF 1.2 specification.">
+        <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+        <property name="target-file" value="${dist.dir}/xref/OpenDocument-v1.2-part0${opendocument.v12.part0.state.target}.odt"/>
+        <dirname property="part1.spec-source.dir" file="${opendocument.v12.part1.spec-source}"/>
+        <dirname property="part2.spec-source.dir" file="${opendocument.v12.part2.spec-source}"/>
+        <dirname property="part3.spec-source.dir" file="${opendocument.v12.part3.spec-source}"/>
+        <unzip src="${part1.spec-source.dir}/OpenDocument-v1.2-part1${opendocument.v12.part1.state.target}.odt" dest="${build.dir}/part1">
+            <patternset>
+                <include name="content.xml"/>
+            </patternset>
+        </unzip>
+        <unzip src="${part2.spec-source.dir}/OpenDocument-v1.2-part2${opendocument.v12.part2.state.target}.odt" dest="${build.dir}/part2">
+            <patternset>
+                <include name="content.xml"/>
+            </patternset>
+        </unzip>
+        <unzip src="${part3.spec-source.dir}/OpenDocument-v1.2-part3${opendocument.v12.part3.state.target}.odt" dest="${build.dir}/part3">
+            <patternset>
+                <include name="content.xml"/>
+            </patternset>
+        </unzip>
+        <property name="part1-dir" location="${build.dir}/part1"/>
+        <property name="part2-dir" location="${build.dir}/part2"/>
+        <property name="part3-dir" location="${build.dir}/part3"/>
+
+        <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-embedded-xref.xsl"
+                 in="${opendocument.v12.part0.spec-source}"
+                 out="${target-file}"
+                 force="true">
+            <param name="add-xrefs" expression="false"/>
+            <param name="keep-anchors" expression="false"/>
+            <param name="toc-hyperlink-mode" expression="adapt"/>
+            <param name="part1-content-path" expression="${part1-dir}/content.xml"/>
+            <param name="part2-content-path" expression="${part2-dir}/content.xml"/>
+            <param name="part3-content-path" expression="${part3-dir}/content.xml"/>
+            <param name="part1-toc-rel-path" expression="OpenDocument-v1.2-part1${opendocument.v12.part1.state.target}.odt"/>
+            <param name="part2-toc-rel-path" expression="OpenDocument-v1.2-part2${opendocument.v12.part2.state.target}.odt"/>
+            <param name="part3-toc-rel-path" expression="OpenDocument-v1.2-part3${opendocument.v12.part3.state.target}.odt"/>
+        </odfxslt>
+    </target>
+
+
+    <target name="add-v12-part1-xref-editor-revision" depends="init,jar,-create-v12-xref-schema"
+            description="Add cross references to ODF 1.2 specification.">
+        <antcall target="-add-v12-part1-xref">
+            <param name="target-file" value="${dist.dir}/xref/OpenDocument-v1.2-part1${opendocument.v12.part1.state.target}-editor-revision.odt"/>
+            <param name="keep-anchors" value="true"/>
+        </antcall>
+    </target>
+
+    <target name="add-v12-part1-xref-product" depends="init,jar,-create-v12-xref-schema"
+            description="Add cross references to ODF 1.2 specification.">
+        <antcall target="-add-v12-part1-xref">
+            <param name="target-file" value="${dist.dir}/xref/OpenDocument-v1.2-part1${opendocument.v12.part1.state.target}.odt"/>
+            <param name="keep-anchors" value="false"/>
+        </antcall>
+    </target>
+
+    <target name="-add-v12-part1-xref" depends="init,jar,-create-v12-xref-schema"
             description="Add cross references to ODF 1.2 specification.">
         <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
         <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
-        <property name="target-file" value="${dist.dir}/xref/OpenDocument-v1.2-part1${opendocument.v12.part1.state.target}.odt"/>
         <condition property="force">
             <not>
                 <uptodate srcfile="${xref-schema-file}" targetfile="${target-file}"/>
@@ -47,15 +105,45 @@
                  force="${force}">
             <param name="xref-schema-file" expression="${xref-schema-file}"/>
             <param name="add-xrefs" expression="true"/>
+            <param name="keep-anchors" expression="${keep-anchors}"/>
+        </odfxslt>
+    </target>
+
+    <target name="add-v12-part2-xref-product" depends="init,jar"
+            description="Add cross references to ODF 1.2 specification.">
+        <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+        <property name="target-file" value="${dist.dir}/xref/OpenDocument-v1.2-part2${opendocument.v12.part2.state.target}.odt"/>
+        <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-embedded-xref.xsl"
+                 in="${opendocument.v12.part2.spec-source}"
+                 out="${target-file}"
+                 force="false">
+            <param name="add-xrefs" expression="true"/>
             <param name="keep-anchors" expression="false"/>
         </odfxslt>
     </target>
 
-    <target name="add-v12-part3-xref" depends="init,jar,-create-v12-manifest-xref-schema"
+    <target name="add-v12-part3-xref-editor-revision" depends="init,jar,-create-v12-manifest-xref-schema"
+            description="Add cross references to ODF 1.2 specification.">
+        <antcall target="-add-v12-part3-xref">
+            <param name="target-file" value="${dist.dir}/xref/OpenDocument-v1.2-part3${opendocument.v12.part3.state.target}-editor-revision.odt"/>
+            <param name="keep-anchors" value="true"/>
+        </antcall>
+    </target>
+
+    <target name="add-v12-part3-xref-product" depends="init,jar,-create-v12-manifest-xref-schema"
+            description="Add cross references to ODF 1.2 specification.">
+        <antcall target="-add-v12-part3-xref">
+            <param name="target-file" value="${dist.dir}/xref/OpenDocument-v1.2-part3${opendocument.v12.part3.state.target}.odt"/>
+            <param name="keep-anchors" value="false"/>
+        </antcall>
+    </target>
+
+
+    <target name="-add-v12-part3-xref" depends="init,jar,-create-v12-manifest-xref-schema"
             description="Add cross references to ODF 1.2 specification.">
         <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
         <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.manifest-schema.xref}"/>
-        <property name="target-file" value="${dist.dir}/xref/OpenDocument-part3-v1.2${opendocument.v12.part3.state.target}.odt"/>
+        <property name="target-file" value="${dist.dir}/xref/OpenDocument-v1.2-part3${opendocument.v12.part3.state.target}.odt"/>
         <condition property="force">
             <not>
                 <uptodate srcfile="${xref-schema-file}" targetfile="${target-file}"/>
@@ -67,7 +155,7 @@
                  force="${force}">
             <param name="xref-schema-file" expression="${xref-schema-file}"/>
             <param name="add-xrefs" expression="true"/>
-            <param name="keep-anchors" expression="true"/>
+            <param name="keep-anchors" expression="${keep anchors}"/>
         </odfxslt>
     </target>
 
@@ -86,7 +174,7 @@
                  force="${force}">
             <param name="xref-schema-file" expression="${xref-schema-file}"/>
             <param name="add-xrefs" expression="false"/>
-            <param name="keep-anchors" expression="true"/>
+            <param name="keep-anchors" expression="false"/>
         </odfxslt>
     </target>
     
@@ -132,7 +220,7 @@
             <param name="xref-schema-file" expression="${xref-schema-file}"/>
         </odfxslt>
     </target>
-        
+
     <target name="-create-v12-xref-schema" depends="init">
         <condition property="force">
             <not>
