@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -71,7 +72,6 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public abstract class OdfDocument {
     // Static parts of file references
-	
     private static final String TWO_DOTS = "..";
     private static final String SLASH = "/";
     private static final String COLON = ":";
@@ -212,14 +212,15 @@ public abstract class OdfDocument {
     /**
      * Loads an OpenDocument from the given resource
      * @param res a resource containing the document
+     * @param useTempFile a flag to indicate whether or not to use temporary files
      * @return the OpenDocument document
      * @throws java.lang.Exception - if the document could not be created.
      */
-    static protected OdfDocument loadTemplate(Resource res) throws Exception {
+    static protected OdfDocument loadTemplate(Resource res, boolean useTempFile) throws Exception {
         InputStream in = res.createInputStream();
         OdfPackage pkg = null;
         try {
-            pkg = OdfPackage.loadPackage(in);            
+            pkg = OdfPackage.loadPackage(in, useTempFile);            
         } finally {
             in.close();
         }
@@ -247,6 +248,23 @@ public abstract class OdfDocument {
     }
 
     /**
+     * Loads an OdfDocument from the provided path.
+     *
+     * @param path - the path from where the document can be loaded
+     * @param useTempFile - a flag to indicate whether or not to use temporary files
+     * @return the OpenDocument from the given path
+     * @throws java.lang.Exception - if the document could not be created.
+     */
+    public static OdfDocument loadDocument(String path, boolean useTempFile) throws Exception {
+        OdfPackage pkg = OdfPackage.loadPackage(path,useTempFile);          
+        OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(pkg.getMediaType());
+        if (odfMediaType == null) {
+            throw new IllegalArgumentException("Document contains incorrect ODF Mediatype '" + pkg.getMediaType() + "'");
+        }        
+        return createDocument(odfMediaType, pkg);        
+    }
+
+    /**
      * Creates an OdfDocument from the OpenDocument provided by a resource Stream.
      *
      * @param inStream - the InputStream of the ODF document.
@@ -255,6 +273,19 @@ public abstract class OdfDocument {
      */
     public static OdfDocument loadDocument(InputStream inStream) throws Exception {
         return loadDocument(OdfPackage.loadPackage(inStream));
+    }
+
+    /**
+     * Creates an OdfDocument from the OpenDocument provided by a resource Stream.
+     *
+     * @param inStream - the InputStream of the ODF document.
+     * @param useTempFile - the flag to indicate whether temporary files are used or not.
+     * @return the document created from the given InputStream
+     * @throws java.lang.Exception - if the document could not be created.
+     * @author Daisy
+     */
+    public static OdfDocument loadDocument(InputStream inStream, boolean useTempFile) throws Exception {
+        return loadDocument(OdfPackage.loadPackage(inStream, useTempFile));
     }
 
     /**
@@ -268,6 +299,18 @@ public abstract class OdfDocument {
         return loadDocument(OdfPackage.loadPackage(file));
     }
 
+    /**
+     * Creates an OdfDocument from the OpenDocument provided by a File.
+     *
+     * @param file - a file representing the ODF document.
+     * @param useTempFile - a flag to indicate whether or not to use temporary files.
+     * @return the document created from the given File
+     * @throws java.lang.Exception - if the document could not be created.
+     */
+    public static OdfDocument loadDocument(File file, boolean useTempFile) throws Exception {
+        return loadDocument(OdfPackage.loadPackage(file, useTempFile));
+    }
+    
     /**
      * Creates an OdfDocument from the OpenDocument provided by an ODF package.
      * @param odfPackage - the ODF package containing the ODF document.

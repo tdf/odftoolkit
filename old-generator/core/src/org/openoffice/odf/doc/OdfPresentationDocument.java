@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -39,7 +40,17 @@ public class OdfPresentationDocument extends OdfDocument {
      * @throws java.lang.Exception - if the document could not be created
      */
     public static OdfPresentationDocument createPresentationDocument() throws Exception {
-        return (OdfPresentationDocument) OdfDocument.loadTemplate(EMPTY_PRESENTATION_DOCUMENT_RESOURCE);
+        return (OdfPresentationDocument) OdfDocument.loadTemplate(EMPTY_PRESENTATION_DOCUMENT_RESOURCE, true);
+    }    
+    
+    /**
+     * Creates an empty presentation document.
+     * @param useTempFile - determine whether to use temporary files
+     * @return ODF presentation document based on a default template
+     * @throws java.lang.Exception - if the document could not be created
+     */
+    public static OdfPresentationDocument createPresentationDocument(boolean useTempFile) throws Exception {
+        return (OdfPresentationDocument) OdfDocument.loadTemplate(EMPTY_PRESENTATION_DOCUMENT_RESOURCE, useTempFile);
     }    
     
     // Using static factory instead of constructor

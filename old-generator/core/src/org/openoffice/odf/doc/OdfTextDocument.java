@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -40,9 +41,19 @@ public class OdfTextDocument extends OdfDocument {
      * @throws java.lang.Exception - if the document could not be created
      */
     public static OdfTextDocument createTextDocument() throws Exception {
-        return (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
+        return (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE, true);
     }
 
+    /**
+     * Creates an empty text document.
+     * @param useTempFile - determine whether to use temporary files
+     * @return ODF text document based on a default template
+     * @throws java.lang.Exception - if the document could not be created
+     */
+    public static OdfTextDocument createTextDocument(boolean useTempFile) throws Exception {
+        return (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE, useTempFile);
+    }
+    
     // Using static factory instead of constructor
     protected OdfTextDocument() {};
     

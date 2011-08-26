@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -51,6 +52,7 @@ import java.util.zip.CRC32;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
+import java.util.zip.ZipInputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -130,6 +132,8 @@ public class OdfPackage {
     private HashMap<String, OdfFileEntry> mManifestEntries;
     private String mBaseURI;
     private Resolver mResolver;
+    // use temporary files whether or not
+    private boolean mUseTempFile; 
 
     /**
      * Creates an OdfPackage from the OpenDocument provided by a filePath.
@@ -138,18 +142,43 @@ public class OdfPackage {
      * @throws java.lang.Exception - if the package could not be created
      */
     private OdfPackage(String odfPath) throws Exception {
+    	this.mUseTempFile = true;
         initialize(new File(odfPath), false);
     }
 
+    /**
+     * Creates an OdfPackage from the OpenDocument provided by a filePath.
+     *
+     * @param odfPath - the path to the ODF document.
+     * @param useTempFile - a flag to indicate whether or not to use temporary files.
+     * @throws java.lang.Exception - if the package could not be created
+     */
+    private OdfPackage(String odfPath, boolean useTempFile) throws Exception {
+    	this.mUseTempFile = useTempFile;
+        initialize(new File(odfPath), false);
+    }
+    
     /**
      * Creates an OdfPackage from the OpenDocument provided by a File.    
      * @param odfFile - a file representing the ODF document
      * @throws java.lang.Exception - if the package could not be created
      */
     private OdfPackage(File odfFile) throws Exception {
+    	this.mUseTempFile = true;
         initialize(odfFile, false);
     }
 
+    /**
+     * Creates an OdfPackage from the OpenDocument provided by a File.    
+     * @param odfFile - a file representing the ODF document
+     * @param useTempFile - a flag to indicate whether or not to use temporary files.
+     * @throws java.lang.Exception - if the package could not be created
+     */
+    private OdfPackage(File odfFile, boolean useTempFile) throws Exception {
+    	this.mUseTempFile = useTempFile;
+        initialize(odfFile, false);
+    }
+    
     /**
      * Creates an OdfPackage from the OpenDocument provided by a InputStream.
      *
@@ -157,9 +186,22 @@ public class OdfPackage {
      * @throws java.lang.Exception - if the package could not be created
      */
     private OdfPackage(InputStream odfStream) throws Exception {
+    	this.mUseTempFile = true;
         initialize();
-        File tempFile = TempDir.saveStreamToTempDir(odfStream, getTempDir());
-        initialize(tempFile, true);
+        initialize(odfStream, true);
+    }
+
+    /**
+     * Creates an OdfPackage from the OpenDocument provided by a InputStream with a temporary files used flag
+     *
+     * @param odfStream - an inputStream representing the ODF package
+     * @param useTempFile - a flag to indicate whether or not to use temporary files.
+     * @throws java.lang.Exception - if the package could not be created
+     */
+    private OdfPackage(InputStream odfStream, boolean useTempFile) throws Exception {
+    	this.mUseTempFile = useTempFile;
+        initialize();
+        initialize(odfStream, useTempFile);
     }
 
     /**
@@ -174,6 +216,18 @@ public class OdfPackage {
     }
 
     /**
+     * Loads an OdfPackage from the given filePath.
+     *
+     * @param odfPath - the filePath to the ODF package
+     * @param useTempFile - a flag to indicate whether or not to use temporary files.
+     * @return the OpenDocument document represented as an OdfPackage
+     * @throws java.lang.Exception - if the package could not be loaded
+     */
+    public static OdfPackage loadPackage(String odfPath, boolean useTempFile) throws Exception {
+        return new OdfPackage(odfPath, useTempFile);
+    }
+    
+    /**
      * Loads an OdfPackage from the OpenDocument provided by a File.
      *
      * @param odfFile - a File to loadPackage content from
@@ -182,6 +236,18 @@ public class OdfPackage {
      */
     public static OdfPackage loadPackage(File odfFile) throws Exception {
         return new OdfPackage(odfFile);
+    }
+
+    /**
+     * Loads an OdfPackage from the OpenDocument provided by a File.
+     *
+     * @param odfFile - a File to loadPackage content from
+     * @param useTempFile - a flag to indicate whether or not to use temporary files.
+     * @return the OpenDocument document represented as an OdfPackage
+     * @throws java.lang.Exception - if the package could not be loaded
+     */
+    public static OdfPackage loadPackage(File odfFile, boolean useTempFile) throws Exception {
+        return new OdfPackage(odfFile, useTempFile);
     }
 
     /**
@@ -195,6 +261,19 @@ public class OdfPackage {
         return new OdfPackage(odfStream);
     }
 
+    /**
+     * Creates an OdfPackage from the OpenDocument provided by a InputStream with a temporary files used flag.
+     *
+     * @param odfStream - an inputStream representing the ODF package
+     * @param useTempFile - a flag to indicate whether or not to use temporary files.
+     * @return the OpenDocument document represented as an OdfPackage
+     * @throws java.lang.Exception - if the package could not be loaded
+     * @author Daisy
+     */
+    public static OdfPackage loadPackage(InputStream odfStream, boolean useTempFile) throws Exception {
+        return new OdfPackage(odfStream, useTempFile);
+    }
+    
     private void initialize(File odfFile, boolean isInitialized) throws Exception {
         // only temp Files copied from an InputStream should already be initialized
         if (!isInitialized) {
@@ -212,11 +291,15 @@ public class OdfPackage {
                     insert(zipEntry, (byte[]) null);
                 } else {
                     OutputStream os = null;
-                    if (zipEntry.getName().endsWith(".xml") || zipEntry.getName().equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
-                        os = new StoreContentOutputStream(zipEntry);
-                    } else {
-                        os = new StoreTempOutputStream(zipEntry);
+                    if (mUseTempFile)
+                    {
+	                    if (zipEntry.getName().endsWith(".xml") || zipEntry.getName().equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
+	                        os = new StoreContentOutputStream(zipEntry);
+	                    } else {
+	                        os = new StoreTempOutputStream(zipEntry);
+	                    }
                     }
+                    else os = new StoreContentOutputStream(zipEntry);
                     if (os != null) {
                         byte[] buf = new byte[4096];
                         int r = 0;
@@ -235,6 +318,56 @@ public class OdfPackage {
         }
     }
 
+    /**
+     * Read the odfStream into memory using temporary files if the temp flag is set
+     * 
+     * @param odfStream
+     * @param isInitialized
+     * @throws Exception
+     * @author Daisy
+     */
+    private void initialize(InputStream odfStream, boolean isInitialized) throws Exception {
+        // only temporary Files copied from an InputStream should already be initialized
+        if (!isInitialized) {
+            initialize();
+        }
+
+        ZipInputStream zipStream = new ZipInputStream(odfStream); 
+        try {
+            ZipEntry zipEntry;
+            zipEntry = zipStream.getNextEntry();
+            while (zipEntry!=null) {
+                if (zipEntry.isDirectory()) {
+                    insert(zipEntry, (byte[]) null);
+                } else {
+                    OutputStream os = null;
+                    if (mUseTempFile)
+                    {
+	                    if (zipEntry.getName().endsWith(".xml") || zipEntry.getName().equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
+	                        os = new StoreContentOutputStream(zipEntry);
+	                    } else {
+	                        os = new StoreTempOutputStream(zipEntry);
+	                    }
+                    }
+                    else os = new StoreContentOutputStream(zipEntry);
+                    if (os != null) {
+                        byte[] buf = new byte[4096];
+                        int r = 0;
+                        while ((r = zipStream.read(buf, 0, 4096)) > -1) {
+                            os.write(buf, 0, r);
+                        }
+                        os.close();
+                    }
+                }
+                zipEntry = zipStream.getNextEntry();
+            }
+            parseManifest();
+//          decryptAll();
+        } finally {
+        	zipStream.close();
+        }
+    }
+    
     /**
      * Set the baseURI for this ODF package. NOTE: Should only be set during saving the package.
      */
@@ -850,17 +983,20 @@ public class OdfPackage {
             }
             byte[] data = baos.toByteArray();
             insert(data, packagePath, mediaType);
-            // image should not be stored in memory but on disc
-            if ((!packagePath.endsWith(".xml")) && (!packagePath.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath()))) {
-                // insertOutputStream to filesystem
-                File tempFile = new File(getTempDir(), packagePath);
-                File parent = tempFile.getParentFile();
-                parent.mkdirs();
-                OutputStream fos = new BufferedOutputStream(new FileOutputStream(tempFile));
-                fos.write(data);
-                fos.close();
-                mTempFiles.put(packagePath, tempFile);
-                mContentStreams.remove(packagePath);
+            if (mUseTempFile) //Remove temporary dependencies
+            {
+	            // image should not be stored in memory but on disc
+	            if ((!packagePath.endsWith(".xml")) && (!packagePath.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath()))) {
+	                // insertOutputStream to filesystem
+	                File tempFile = new File(getTempDir(), packagePath);
+	                File parent = tempFile.getParentFile();
+	                parent.mkdirs();
+	                OutputStream fos = new BufferedOutputStream(new FileOutputStream(tempFile));
+	                fos.write(data);
+	                fos.close();
+	                mTempFiles.put(packagePath, tempFile);
+	                mContentStreams.remove(packagePath);
+	            }
             }
 
         }

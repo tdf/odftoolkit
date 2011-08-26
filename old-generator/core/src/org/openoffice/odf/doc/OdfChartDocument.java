@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -40,7 +41,19 @@ public class OdfChartDocument extends OdfDocument {
      * @throws java.lang.Exception - if the document could not be created
      */
     public static OdfChartDocument createChartDocument() throws Exception {
-        return (OdfChartDocument) OdfDocument.loadTemplate(EMPTY_CHART_DOCUMENT_RESOURCE);        
+        return (OdfChartDocument) OdfDocument.loadTemplate(EMPTY_CHART_DOCUMENT_RESOURCE, true);        
+    }       
+    
+    /**
+     * Creates an empty charts document.
+     * useTempFile is used to determine whether to use temporary files.
+     * *  <br/><em>Note: ODF Chart documents are (with OOo 3.0) only used as embedded document and not used stand-alone.</em>
+     * @param useTempFile - determine whether to use temporary files
+     * @return ODF charts document based on a default template
+     * @throws java.lang.Exception - if the document could not be created
+     */
+    public static OdfChartDocument createChartDocument(boolean useTempFile) throws Exception {
+        return (OdfChartDocument) OdfDocument.loadTemplate(EMPTY_CHART_DOCUMENT_RESOURCE, useTempFile);        
     }       
     
     // Using static factory instead of constructor    
