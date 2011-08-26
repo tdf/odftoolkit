@@ -127,11 +127,6 @@ public abstract class OdfConsolidationElement extends OdfElement
     public OdfUseLabelsType getUseLabels()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-labels" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "none";
-        }
-
         return OdfUseLabelsType.enumValueOf( aStringVal);
     }
 

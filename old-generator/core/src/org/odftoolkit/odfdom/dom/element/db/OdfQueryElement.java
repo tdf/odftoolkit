@@ -88,11 +88,6 @@ public abstract class OdfQueryElement extends OdfElement
     public Boolean getEscapeProcessing()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "escape-processing" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

@@ -67,11 +67,6 @@ public abstract class OdfTableRowElement extends OdfStylableElement
     public Integer getNumberRowsRepeated()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "number-rows-repeated" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1";
-        }
-
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 
@@ -128,11 +123,6 @@ public abstract class OdfTableRowElement extends OdfStylableElement
     public OdfVisibilityType getVisibility()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "visibility" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "visible";
-        }
-
         return OdfVisibilityType.enumValueOf( aStringVal);
     }
 

@@ -139,11 +139,6 @@ public abstract class OdfFilterConditionElement extends OdfElement
     public OdfDataType getDataType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "data-type" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "text";
-        }
-
         return OdfDataType.enumValueOf( aStringVal);
     }
 

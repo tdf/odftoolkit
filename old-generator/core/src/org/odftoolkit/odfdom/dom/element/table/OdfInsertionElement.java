@@ -110,11 +110,6 @@ public abstract class OdfInsertionElement extends OdfElement
     public Integer getCount()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "count" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1";
-        }
-
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 
@@ -167,11 +162,6 @@ public abstract class OdfInsertionElement extends OdfElement
     public OdfAcceptanceStateType getAcceptanceState()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "acceptance-state" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "pending";
-        }
-
         return OdfAcceptanceStateType.enumValueOf( aStringVal);
     }
 

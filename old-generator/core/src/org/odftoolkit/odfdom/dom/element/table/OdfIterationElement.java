@@ -64,11 +64,6 @@ public abstract class OdfIterationElement extends OdfElement
     public OdfStatusType getStatus()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "status" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "disable";
-        }
-
         return OdfStatusType.enumValueOf( aStringVal);
     }
 
@@ -87,11 +82,6 @@ public abstract class OdfIterationElement extends OdfElement
     public Integer getSteps()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "steps" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "100";
-        }
-
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 
@@ -110,11 +100,6 @@ public abstract class OdfIterationElement extends OdfElement
     public Double getMaximumDifference()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "maximum-difference" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0.001";
-        }
-
         return Double.valueOf( aStringVal);
     }
 

@@ -64,11 +64,6 @@ public abstract class OdfEquationElement extends OdfElement
     public Boolean getAutomaticContent()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "automatic-content" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -105,11 +100,6 @@ public abstract class OdfEquationElement extends OdfElement
     public Boolean getDisplayEquation()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "display-equation" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

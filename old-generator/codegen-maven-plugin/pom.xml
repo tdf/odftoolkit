@@ -4,15 +4,9 @@
     <groupId>org.odftoolkit</groupId>
     <artifactId>maven-codegen-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>0.7-SNAPSHOT</version>
+    <version>0.6-SNAPSHOT</version>
     <name>ODFDOM Code Generation Maven2 Plugin</name>
     <url>http://odftoolkit.org</url>
-    <parent>
-      <groupId>org.odftoolkit</groupId>
-      <artifactId>odfdom-parent</artifactId>
-      <version>0.7-SNAPSHOT</version>
-      <relativePath>../parent/pom.xml</relativePath>
-    </parent>
 
     <build>
       <defaultGoal>install</defaultGoal>

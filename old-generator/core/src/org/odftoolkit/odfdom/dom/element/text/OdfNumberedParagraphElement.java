@@ -91,11 +91,6 @@ public abstract class OdfNumberedParagraphElement extends OdfStylableElement
     public Integer getLevel()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "level" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1";
-        }
-
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 

@@ -89,11 +89,6 @@ public abstract class OdfPageLayoutElement extends OdfStyleBase
     public OdfPageUsageType getPageUsage()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "page-usage" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "all";
-        }
-
         return OdfPageUsageType.enumValueOf( aStringVal);
     }
 

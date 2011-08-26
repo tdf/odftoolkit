@@ -122,11 +122,6 @@ public abstract class OdfContentValidationElement extends OdfElement
     public Boolean getAllowEmptyCell()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "allow-empty-cell" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -145,11 +140,6 @@ public abstract class OdfContentValidationElement extends OdfElement
     public OdfDisplayListType getDisplayList()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "display-list" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "unsorted";
-        }
-
         return OdfDisplayListType.enumValueOf( aStringVal);
     }
 

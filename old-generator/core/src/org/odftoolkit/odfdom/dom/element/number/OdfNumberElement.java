@@ -79,11 +79,6 @@ public abstract class OdfNumberElement extends OdfElement
     public Double getDisplayFactor()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "display-factor" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1";
-        }
-
         return Double.valueOf( aStringVal);
     }
 

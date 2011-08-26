@@ -81,11 +81,6 @@ public abstract class OdfFormsElement extends OdfElement
     public Boolean getApplyDesignMode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "apply-design-mode" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

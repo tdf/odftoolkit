@@ -172,11 +172,6 @@ public abstract class OdfPlotAreaElement extends OdfStylableElement
     public OdfDataSourceHasLabelsType getDataSourceHasLabels()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "data-source-has-labels" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "none";
-        }
-
         return OdfDataSourceHasLabelsType.enumValueOf( aStringVal);
     }
 

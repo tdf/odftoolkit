@@ -105,11 +105,6 @@ public abstract class OdfLayerElement extends OdfElement
     public OdfDisplayType getDisplay()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "display" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "always";
-        }
-
         return OdfDisplayType.enumValueOf( aStringVal);
     }
 

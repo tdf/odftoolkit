@@ -154,11 +154,6 @@ public abstract class OdfDataPilotFieldElement extends OdfElement
     public Integer getUsedHierarchy()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "used-hierarchy" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "-1";
-        }
-
         return Integer.valueOf( aStringVal);
     }
 

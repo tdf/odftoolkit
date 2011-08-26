@@ -86,11 +86,6 @@ public abstract class OdfIndexEntryChapterElement extends OdfStylableElement
     public OdfIndexEntryChapterDisplayType getDisplay()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "display" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "number";
-        }
-
         return OdfIndexEntryChapterDisplayType.enumValueOf( aStringVal);
     }
 

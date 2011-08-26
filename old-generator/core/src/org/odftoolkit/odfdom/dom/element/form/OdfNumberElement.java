@@ -266,11 +266,6 @@ public abstract class OdfNumberElement extends OdfElement
     public Boolean getPrintable()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "printable" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -307,11 +302,6 @@ public abstract class OdfNumberElement extends OdfElement
     public Integer getTabIndex()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-index" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0";
-        }
-
         return OdfNonNegativeInteger.valueOf( aStringVal);
     }
 
@@ -330,11 +320,6 @@ public abstract class OdfNumberElement extends OdfElement
     public Boolean getTabStop()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-stop" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -457,11 +442,6 @@ public abstract class OdfNumberElement extends OdfElement
     public Duration getDelayForRepeat()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "delay-for-repeat" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "PT0.050S";
-        }
-
         return OdfDuration.valueOf( aStringVal);
     }
 

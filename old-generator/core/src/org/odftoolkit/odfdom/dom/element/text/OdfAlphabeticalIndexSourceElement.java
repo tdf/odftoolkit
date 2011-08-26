@@ -65,11 +65,6 @@ public abstract class OdfAlphabeticalIndexSourceElement extends OdfElement
     public OdfIndexScopeType getIndexScope()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "index-scope" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "document";
-        }
-
         return OdfIndexScopeType.enumValueOf( aStringVal);
     }
 
@@ -88,11 +83,6 @@ public abstract class OdfAlphabeticalIndexSourceElement extends OdfElement
     public Boolean getRelativeTabStopPosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "relative-tab-stop-position" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -165,11 +155,6 @@ public abstract class OdfAlphabeticalIndexSourceElement extends OdfElement
     public Boolean getCombineEntries()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "combine-entries" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -206,11 +191,6 @@ public abstract class OdfAlphabeticalIndexSourceElement extends OdfElement
     public Boolean getCombineEntriesWithPp()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "combine-entries-with-pp" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

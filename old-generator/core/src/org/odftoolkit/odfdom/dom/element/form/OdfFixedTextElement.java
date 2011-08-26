@@ -204,11 +204,6 @@ public abstract class OdfFixedTextElement extends OdfElement
     public Boolean getPrintable()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "printable" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

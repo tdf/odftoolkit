@@ -261,6 +261,7 @@ public class DocumentCreationTest {
 
         } catch (Exception ex) {
             Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
         }
     }
 

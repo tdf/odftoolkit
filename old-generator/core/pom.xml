@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.odftoolkit</groupId>
   <artifactId>odfdom-core</artifactId>
-  <version>0.7-SNAPSHOT</version>
+  <version>0.6-SNAPSHOT</version>
   <name>ODFDOM Core</name>
   <parent>
     <groupId>org.odftoolkit</groupId>
     <artifactId>odfdom-parent</artifactId>
-    <version>0.7-SNAPSHOT</version>
+    <version>0.6-SNAPSHOT</version>
     <relativePath>../parent/pom.xml</relativePath>
   </parent>
 
@@ -18,38 +18,6 @@
   </scm>
 
   <build>
-    <plugins>
-      <plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
-	    <artifactId>maven-antrun-plugin</artifactId>
-	    <inherited>false</inherited>
-	    <dependencies>
-	      <dependency>
-		<groupId>ant</groupId>
-		<artifactId>ant-nodeps</artifactId>
-		<version>1.6.5</version>
-	      </dependency>
-	      <dependency>
-		<groupId>ant</groupId>
-		<artifactId>ant-trax</artifactId>
-		<version>1.6.5</version>
-	      </dependency>
-	    </dependencies>
-	    <executions>
-	      <execution>
-		<phase>test-compile</phase>
-		<configuration>
-		  <tasks>
-		    <mkdir dir="build/test" />
-		  </tasks>
-		</configuration>
-		<goals>
-		  <goal>run</goal>
-		</goals>
-	      </execution>
-	    </executions>
-      </plugin>
-    </plugins>
   </build>
   <profiles>
     <profile>
@@ -68,7 +36,7 @@
 		<goals><goal>codegen</goal></goals>
 		<configuration>
 		  <sourceRoot>${basedir}/src</sourceRoot>
-		  <schemaFile>${basedir}/../schema/OpenDocument-schema-v1.2-cd01.rng</schemaFile>
+		  <schemaFile>${basedir}/../schema/OpenDocument-strict-schema-v1.1.rng</schemaFile>
 		  <configFile>${basedir}/../codegen/config.xml</configFile>
 		  <templateFile>${basedir}/../codegen/javacodetemplate.xml</templateFile>
 		</configuration>
@@ -76,12 +44,11 @@
 	    </executions>
 	    <configuration>
 	      <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
-	      <schemaFile>${basedir}/../schema/OpenDocument-schema-v1.2-cd01.rng</schemaFile>
+	      <schemaFile>${basedir}/../schema/OpenDocument-strict-schema-v1.1.rng</schemaFile>
 	      <configFile>${basedir}/../codegen/config.xml</configFile>
 	      <templateFile>${basedir}/../codegen/javacodetemplate.xml</templateFile>
 	    </configuration>
 	  </plugin>
-	
 	</plugins>
       </build>
     </profile>

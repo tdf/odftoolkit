@@ -65,11 +65,6 @@ public abstract class OdfGridElement extends OdfStylableElement
     public OdfClassType getChartClass()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "class" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "major";
-        }
-
         return OdfClassType.enumValueOf( aStringVal);
     }
 

@@ -129,11 +129,6 @@ public abstract class OdfDriverSettingsElement extends OdfElement
     public Boolean getIsFirstRowHeaderLine()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "is-first-row-header-line" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -152,11 +147,6 @@ public abstract class OdfDriverSettingsElement extends OdfElement
     public Boolean getParameterNameSubstitution()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "parameter-name-substitution" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

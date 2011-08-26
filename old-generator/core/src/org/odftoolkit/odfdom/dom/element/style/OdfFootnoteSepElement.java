@@ -133,11 +133,6 @@ public abstract class OdfFootnoteSepElement extends OdfElement
     public OdfAdjustmentType getAdjustment()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "adjustment" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "left";
-        }
-
         return OdfAdjustmentType.enumValueOf( aStringVal);
     }
 

@@ -111,11 +111,6 @@ public abstract class OdfAnimatemotionElement extends OdfElement
     public OdfCalcmodeType getCalcmode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "calcMode" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "paced";
-        }
-
         return OdfCalcmodeType.enumValueOf( aStringVal);
     }
 
@@ -382,11 +377,6 @@ public abstract class OdfAnimatemotionElement extends OdfElement
     public OdfRestartType getRestart()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restart" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "default";
-        }
-
         return OdfRestartType.enumValueOf( aStringVal);
     }
 
@@ -405,11 +395,6 @@ public abstract class OdfAnimatemotionElement extends OdfElement
     public OdfRestartdefaultType getRestartdefault()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restartDefault" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "inherit";
-        }
-
         return OdfRestartdefaultType.enumValueOf( aStringVal);
     }
 
@@ -464,11 +449,6 @@ public abstract class OdfAnimatemotionElement extends OdfElement
     public Double getAccelerate()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "accelerate" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0.0";
-        }
-
         return Double.valueOf( aStringVal);
     }
 
@@ -487,11 +467,6 @@ public abstract class OdfAnimatemotionElement extends OdfElement
     public Double getDecelerate()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "decelerate" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0.0";
-        }
-
         return Double.valueOf( aStringVal);
     }
 

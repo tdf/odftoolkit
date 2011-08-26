@@ -262,11 +262,6 @@ public abstract class OdfTableElement extends OdfStylableElement
     public String getProtectionKeyDigestAlgorithm()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "protection-key-digest-algorithm" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "http://www.w3.org/2000/09/xmldsig#sha1";
-        }
-
         return OdfAnyURI.valueOf( aStringVal);
     }
 
@@ -285,11 +280,6 @@ public abstract class OdfTableElement extends OdfStylableElement
     public Boolean getPrint()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "print" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

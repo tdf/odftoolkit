@@ -63,11 +63,6 @@ public abstract class OdfQuarterElement extends OdfElement
     public OdfStyleType getStyle()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "style" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "short";
-        }
-
         return OdfStyleType.enumValueOf( aStringVal);
     }
 

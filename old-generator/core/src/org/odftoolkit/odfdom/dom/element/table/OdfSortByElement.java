@@ -87,14 +87,8 @@ public abstract class OdfSortByElement extends OdfElement
      * Get value of attribute "table:data-type".
      */
     public String getDataType()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "data-type" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "automatic";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "data-type" ) );
     }
 
     /**
@@ -111,11 +105,6 @@ public abstract class OdfSortByElement extends OdfElement
     public OdfOrderType getOrder()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "order" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "ascending";
-        }
-
         return OdfOrderType.enumValueOf( aStringVal);
     }
 

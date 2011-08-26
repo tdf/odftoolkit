@@ -186,14 +186,8 @@ public abstract class OdfBooleanStyleElement extends OdfElement
      * Get value of attribute "number:transliteration-format".
      */
     public String getTransliterationFormat()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "transliteration-format" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "transliteration-format" ) );
     }
 
     /**
@@ -242,11 +236,6 @@ public abstract class OdfBooleanStyleElement extends OdfElement
     public OdfTransliterationStyleType getTransliterationStyle()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "transliteration-style" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "short";
-        }
-
         return OdfTransliterationStyleType.enumValueOf( aStringVal);
     }
 

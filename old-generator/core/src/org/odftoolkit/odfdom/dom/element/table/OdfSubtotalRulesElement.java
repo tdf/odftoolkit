@@ -63,11 +63,6 @@ public abstract class OdfSubtotalRulesElement extends OdfElement
     public Boolean getBindStylesToContent()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "bind-styles-to-content" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

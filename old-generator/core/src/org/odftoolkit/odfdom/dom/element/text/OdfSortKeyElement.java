@@ -89,11 +89,6 @@ public abstract class OdfSortKeyElement extends OdfElement
     public Boolean getSortAscending()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "sort-ascending" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

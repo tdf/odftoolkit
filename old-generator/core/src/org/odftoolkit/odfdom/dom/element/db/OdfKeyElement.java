@@ -122,11 +122,6 @@ public abstract class OdfKeyElement extends OdfElement
     public OdfUpdateRuleType getUpdateRule()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "update-rule" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "no-action";
-        }
-
         return OdfUpdateRuleType.enumValueOf( aStringVal);
     }
 
@@ -145,11 +140,6 @@ public abstract class OdfKeyElement extends OdfElement
     public OdfDeleteRuleType getDeleteRule()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "delete-rule" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "no-action";
-        }
-
         return OdfDeleteRuleType.enumValueOf( aStringVal);
     }
 

@@ -72,11 +72,6 @@ public abstract class OdfColumnSepElement extends OdfElement
     public OdfStyleType getStyle()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "style" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "solid";
-        }
-
         return OdfStyleType.enumValueOf( aStringVal);
     }
 
@@ -111,11 +106,6 @@ public abstract class OdfColumnSepElement extends OdfElement
     public Double getHeight()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "height" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "100%";
-        }
-
         return OdfPercent.valueOf( aStringVal);
     }
 
@@ -134,11 +124,6 @@ public abstract class OdfColumnSepElement extends OdfElement
     public OdfVerticalAlignType getVerticalAlign()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "vertical-align" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "top";
-        }
-
         return OdfVerticalAlignType.enumValueOf( aStringVal);
     }
 
@@ -155,14 +140,8 @@ public abstract class OdfColumnSepElement extends OdfElement
      * Get value of attribute "style:color".
      */
     public String getColor()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "color" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "#000000";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "color" ) );
     }
 
     /**

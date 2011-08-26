@@ -83,11 +83,6 @@ public abstract class OdfTableOfContentSourceElement extends OdfElement
     public Boolean getUseOutlineLevel()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "use-outline-level" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

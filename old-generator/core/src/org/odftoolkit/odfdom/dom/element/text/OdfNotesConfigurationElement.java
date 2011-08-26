@@ -165,11 +165,6 @@ public abstract class OdfNotesConfigurationElement extends OdfElement
     public Integer getStartValue()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "start-value" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1";
-        }
-
         return OdfNonNegativeInteger.valueOf( aStringVal);
     }
 

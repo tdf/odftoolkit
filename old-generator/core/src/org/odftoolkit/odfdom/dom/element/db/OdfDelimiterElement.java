@@ -60,14 +60,8 @@ public abstract class OdfDelimiterElement extends OdfElement
      * Get value of attribute "db:field".
      */
     public String getField()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "field" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = ";";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.DB, "field" ) );
     }
 
     /**
@@ -82,14 +76,8 @@ public abstract class OdfDelimiterElement extends OdfElement
      * Get value of attribute "db:string".
      */
     public String getString()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "string" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "\"";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.DB, "string" ) );
     }
 
     /**
@@ -104,14 +92,8 @@ public abstract class OdfDelimiterElement extends OdfElement
      * Get value of attribute "db:decimal".
      */
     public String getDecimal()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "decimal" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = ".";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.DB, "decimal" ) );
     }
 
     /**
@@ -126,14 +108,8 @@ public abstract class OdfDelimiterElement extends OdfElement
      * Get value of attribute "db:thousand".
      */
     public String getThousand()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "thousand" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = ",";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.DB, "thousand" ) );
     }
 
     /**

@@ -63,11 +63,6 @@ public abstract class OdfHeaderLeftElement extends OdfElement
     public Boolean getDisplay()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "display" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

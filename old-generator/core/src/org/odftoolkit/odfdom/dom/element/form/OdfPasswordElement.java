@@ -192,11 +192,6 @@ public abstract class OdfPasswordElement extends OdfElement
     public Boolean getPrintable()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "printable" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -215,11 +210,6 @@ public abstract class OdfPasswordElement extends OdfElement
     public Integer getTabIndex()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-index" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0";
-        }
-
         return OdfNonNegativeInteger.valueOf( aStringVal);
     }
 
@@ -238,11 +228,6 @@ public abstract class OdfPasswordElement extends OdfElement
     public Boolean getTabStop()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-stop" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -327,14 +312,8 @@ public abstract class OdfPasswordElement extends OdfElement
      * Get value of attribute "form:echo-char".
      */
     public String getEchoChar()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "echo-char" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "*";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.FORM, "echo-char" ) );
     }
 
     /**

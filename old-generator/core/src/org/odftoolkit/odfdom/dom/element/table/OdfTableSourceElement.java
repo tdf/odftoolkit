@@ -66,11 +66,6 @@ public abstract class OdfTableSourceElement extends OdfElement
     public OdfModeType getMode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "mode" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "copy-all";
-        }
-
         return OdfModeType.enumValueOf( aStringVal);
     }
 
