@@ -27,6 +27,8 @@
 
     <!--property file="${build-schemas.basedir}/schema.user.properties"/-->
     <property file="${build-schemas.basedir}/schema.properties"/>
+    <property name="opendocument.v11.schema.manifest" value="OpenDocument-manifest-schema-v1.1.rng"/>
+    <property name="opendocument.v11.schema.strict" value="OpenDocument-strict-schema-v1.1.rng"/>
     <property name="opendocument.v12.schema" value="OpenDocument-schema-v1.2${opendocument.v12.schema.state}.rng"/>
     <property name="opendocument.v12.schema.manifest" value="OpenDocument-manifest-schema-v1.2${opendocument.v12.part3.schema.state}.rng"/>
     <property name="opendocument.v12.schema.dsig" value="OpenDocument-dsig-schema-v1.2${opendocument.v12.part3.schema.state}.rng"/>
