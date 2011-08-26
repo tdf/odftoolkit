@@ -526,7 +526,7 @@
 				</property>
 			</activation>
 			<build>
-				<defaultGoal>integration-test</defaultGoal>
+				<defaultGoal>verify</defaultGoal>
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
@@ -550,6 +550,14 @@
 								</configuration>
 							</execution>
 						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<!-- Explizit version required for fix on systemPropertyVariables -->
+						<version>2.5</version>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
 					</plugin>
 					<plugin>
 						<artifactId>maven-compiler-plugin</artifactId>

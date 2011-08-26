@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.OdfFileDom;
@@ -19,6 +21,7 @@ import org.junit.Test;
 
 public class PerformanceIT {
 
+	private static final Logger LOG = Logger.getLogger(PerformanceIT.class.getName());
 	private static String TEST_FILE_FOLDER;
 	private static String[] TEST_FILE_NAME;
 	//private static final String timesheetTemplate = "timesheetTemplate.ods";
@@ -71,8 +74,8 @@ public class PerformanceIT {
 			// 2. Save to spreadsheet
 			writeToLog();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(PerformanceIT.class.getName()).log(Level.SEVERE, null, e);
+
 		}
 	}
 
@@ -106,7 +109,7 @@ public class PerformanceIT {
 	private void readFileList(String folder) {
 		String filename;
 
-		System.out.println("[PerformaceTest] Reading test documents from " + folder);
+		LOG.log(Level.INFO, "[PerformaceTest] Reading test documents from {0}", folder);
 		File myFolder = new File(folder);
 		if (!myFolder.isDirectory()) {
 			return;
@@ -120,10 +123,10 @@ public class PerformanceIT {
 				myList.add(filename);
 			}
 			//TEST_FILE_NAME[i]=files[i].getName();
-			//System.out.println("name="+TEST_FILE_NAME[i]);
+			//LOG.info("name="+TEST_FILE_NAME[i]);
 		}
 
-		System.out.println("[PerformaceTest] " + myList.size() + " test files are loaded");
+		LOG.log(Level.INFO, "[PerformaceTest] {0} test files are loaded", myList.size());
 		if (myList.size() > 0) {
 			TEST_FILE_NAME = (String[]) myList.toArray(new String[1]);
 		}
@@ -174,9 +177,9 @@ public class PerformanceIT {
 		updateTableCells(memorydoc, "Memory footprint", memoryfootprint, memorylabel);
 
 		timedoc.save(time_spreadsheet);
-		System.out.println("[PerformaceTest] Test results are written to " + time_spreadsheet);
+		LOG.log(Level.INFO, "[PerformaceTest] Test results are written to {0}", time_spreadsheet);
 		memorydoc.save(memory_spreadsheet);
-		System.out.println("[PerformaceTest] Test results are written to " + memory_spreadsheet);
+		LOG.log(Level.INFO, "[PerformaceTest] Test results are written to {0}", memory_spreadsheet);
 	}
 
 	private void updateTableCells(OdfDocument odfdoc, String tablename,
@@ -265,8 +268,7 @@ public class PerformanceIT {
 				j++;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		}
 	}
 
@@ -277,6 +279,7 @@ public class PerformanceIT {
 
 		for (int j = 0; j < TEST_FILE_NAME.length; j++) {
 			filename = TEST_FILE_FOLDER + TEST_FILE_NAME[j];
+			LOG.log(Level.INFO, "filename:{0}", filename);
 			doc = OdfDocument.loadDocument(filename);
 			dom = doc.getContentDom();
 			doc.save(filename);
