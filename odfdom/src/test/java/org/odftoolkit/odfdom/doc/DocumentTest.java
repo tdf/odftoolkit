@@ -452,8 +452,9 @@ public class DocumentTest {
 		Map expectedErrors3 = new HashMap();
 		expectedErrors3.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 2);
 		expectedErrors3.put(OdfSchemaConstraint.DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML, 1);
+		expectedErrors3.put(OdfPackageConstraint.MANIFEST_WITH_EMPTY_PATH, 1);
 		ErrorHandlerStub handler3 = new ErrorHandlerStub(expectedWarning3, expectedErrors3, null);
-		handler3.setTestFilePath("performance/Presentation1.odp");
+		handler3.setTestFilePath("performance/Presentation1_INVALID.odp");
 
 
 		// TESTDOC1: Expected ODF Warnings

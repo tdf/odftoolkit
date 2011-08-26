@@ -250,8 +250,8 @@
 			<name>Svante</name>
 			<email>svanteschubert AT odftoolkit.org</email>
 			<url>http://odftoolkit.org/people/7-Svante-Schubert</url>
-			<organization>Sun Microsystems Inc.</organization>
-			<organizationUrl>http://www.sun.com/</organizationUrl>
+			<organization>Oracle Inc.</organization>
+			<organizationUrl>http://www.oracle.com/</organizationUrl>
 			<roles>
 				<role>ODFDOM working group chair</role>
 				<role>architect</role>
@@ -261,6 +261,18 @@
 			<properties>
 				<picUrl>http://asset-1.odftoolkit.org/attachments/images/person/SvanteSchubert-2_small.jpg</picUrl>
 			</properties>
+		</developer>
+		<developer>
+			<id>Devin</id>
+			<name>Han Biao</name>
+			<email>devin AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/748-Devin</url>
+			<organization>IBM</organization>
+			<organizationUrl>http://www.ibm.com/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
 		</developer>
 		<developer>
 			<id>Daisy</id>
@@ -290,19 +302,99 @@
 			<timezone>+8</timezone>
 		</developer>
 		<developer>
-			<id>devin</id>
-			<name>Han Biao</name>
-			<email>devin AT odftoolkit.org</email>
-			<url>http://odftoolkit.org/people/748-Devin</url>
-			<organization>IBM</organization>
-			<organizationUrl>http://www.ibm.com/</organizationUrl>
+			<id>FrankMeies</id>
+			<name>Frank</name>
+			<email>FrankMeies AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/332-FrankMeies</url>
+			<organization>Oracle Inc.</organization>
+			<organizationUrl>http://www.oracle.com/</organizationUrl>
 			<roles>
 				<role>developer</role>
 			</roles>
-			<timezone>+8</timezone>
+			<timezone>+1</timezone>
+			<properties>
+				<picUrl>http://asset-1.odftoolkit.org/attachments/images/person/FrankMeies.jpg</picUrl>
+			</properties>
+		</developer>
+		<developer>
+			<id>lars_behrmann</id>
+			<name>Lars</name>
+			<email>lars_behrmann AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/6-Lars-Behrmann</url>
+			<organization>Oracle Inc.</organization>
+			<organizationUrl>http://www.oracle.com/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+			<properties>
+				<picUrl>http://asset-2.odftoolkit.org/attachments/images/person/lars_behrmann_small.png</picUrl>
+			</properties>
+		</developer>
+		<developer>
+			<id>steffeng</id>
+			<name>Steffen</name>
+			<email>steffeng AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/418-steffeng</url>
+			<organization>Oracle Inc.</organization>
+			<organizationUrl>http://www.oracle.com/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>hans-peter</id>
+			<name>Hans-Peter</name>
+			<email>hans-peter AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/463-hans-peter</url>
+			<organization>Oracle Inc.</organization>
+			<organizationUrl>http://www.oracle.com/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>bei</id>
+			<name>Bernd</name>
+			<email>bei AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/16-Bernd-Eilers</url>
+			<organization>Oracle Inc.</organization>
+			<organizationUrl>http://www.oracle.com/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+			<properties>
+				<picUrl>http://asset-0.odftoolkit.org/attachments/images/person/bei.JPG</picUrl>
+			</properties>
+		</developer>
+		<developer>
+			<id>mst</id>
+			<name>Michael</name>
+			<email>mst AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/768-Michael-Stahl</url>
+			<organization>Oracle Inc.</organization>
+			<organizationUrl>http://www.oracle.com/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>clippka</id>
+			<name>Christian</name>
+			<email>clippka AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/259-clippka</url>
+			<organization>Oracle Inc.</organization>
+			<organizationUrl>http://www.oracle.com/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
 		</developer>
 	</developers>
-
 
 	<!-- Environment Settings -->
 	<issueManagement>

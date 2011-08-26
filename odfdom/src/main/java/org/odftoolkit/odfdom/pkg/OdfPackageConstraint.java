@@ -44,11 +44,13 @@ public enum OdfPackageConstraint implements ValidationConstraint {
 	/** A file shall not be listed in the \"/META-INF/manifest.xml\" file as it does not exist in the ODF package. */
 	MANIFEST_LISTS_NONEXISTENT_FILE("The file '%2$s' shall not be listed in the '" + OdfFile.MANIFEST.getPath() + "' file as it does not exist in the ODF package%1$s!"),
 	/** A file shall be listed in the \"/META-INF/manifest.xml\" file as it exists in the ODF package. */
-	MANIFEST_DOES_NOT_LIST_FILE("The file '%2$s' shall be listed in the '" + OdfFile.MANIFEST.getPath() + "' file as it exists in the ODF package%1$s!"),
+	MANIFEST_DOES_NOT_LIST_FILE("The file '%2$s' shall be listed in the '" + OdfFile.MANIFEST.getPath() + "' file as it exists in the ODF package%1$s!"),	
 	/** The ODF package contains a \"mediatype\" file, which content differs from the mediatype of the root document!" */
 	MIMETYPE_DIFFERS_FROM_PACKAGE("The ODF package%1$s contains a '" + OdfFile.MEDIA_TYPE.getPath() + "' file containing '%2$s', which differs from the mediatype of the root document '%3$s'!"),
 	/** The ODF package contains a \"mediatype\" file, but no mediatype its root document in the \"/META-INF/manifest.xml\" file of ODF package! */
 	MIMETYPE_WITHOUT_MANIFEST_MEDIATYPE("The ODF package%1$s contains a '" + OdfFile.MEDIA_TYPE.getPath() + "' file containing '%2$s', but no mediatype for its root document in its '" + OdfFile.MANIFEST.getPath() + "'!"),
+	/** The root document shall be listed in the \"/META-INF/manifest.xml\" file using a '/' as path within the ODF package. */
+	MANIFEST_WITH_EMPTY_PATH("The root document shall be listed in the '" + OdfFile.MANIFEST.getPath() + "' file using a '/' as path within the ODF package%1$s!"),
 	/** There shall be no extra field for the \"mediatype\" file of ODF package. */
 	MIMETYPE_HAS_EXTRA_FIELD("There shall be no extra field for the '" + OdfFile.MEDIA_TYPE.getPath() + "' file of ODF package%1$s!"),
 	/** The file \"mediatype\" shall not be compressed in the ODF package. */

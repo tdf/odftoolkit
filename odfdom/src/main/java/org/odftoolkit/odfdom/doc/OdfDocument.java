@@ -423,7 +423,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 		}
 		Map<String, OdfDocument> embeddedObjectsMap = new HashMap<String, OdfDocument>();
 		// check manifest for current embedded OdfPackageDocuments
-		Set<String> manifestEntries = mPackage.getFileEntries();
+		Set<String> manifestEntries = mPackage.getFilePaths();
 		for (String path : manifestEntries) {
 			// any directory that is not the root document "/"
 			if (path.length() > 1 && path.endsWith(SLASH)) {

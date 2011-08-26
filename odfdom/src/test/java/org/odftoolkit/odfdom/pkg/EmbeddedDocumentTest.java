@@ -55,7 +55,7 @@ public class EmbeddedDocumentTest {
 
 	private static final Logger LOG = Logger.getLogger(EmbeddedDocumentTest.class.getName());
 	private static final String TEST_FILE_FOLDER = ResourceUtilities.getTestOutputFolder();
-	private static final String TEST_FILE_EMBEDDED = "Presentation1.odp";
+	private static final String TEST_FILE_EMBEDDED = "performance/Presentation1_INVALID.odp";
 	private static final String TEST_FILE_EMBEDDED_SAVE_OUT = "SaveEmbeddedDoc.odt";
 	private static final String TEST_FILE_EMBEDDED_SIDEBYSIDE_SAVE_OUT = "SaveEmbeddedDocSideBySide.odt";
 	private static final String TEST_FILE_EMBEDDED_INCLUDED_SAVE_OUT = "SaveEmbeddedDocIncluded.odt";
@@ -148,9 +148,13 @@ public class EmbeddedDocumentTest {
 	}
 
 	/**
-	 * The document B is embedded to document A 
-	 * and the directory path of A and B are absolute from the package
-	 * DOCA/ and DOCA/DOCB/
+	 * 1) A new sub document text document DOCA/ is inserted into a new text document
+	 * 2) A picture is being added to the subdocument (ie. /DOCA/Pictures/testA.jpg)
+	 * 3) A new sub document spreadsheet document is inserted into the first (ie. /DOCA/DOCB)
+	 * 4) In the last paragraph of /DOCA a frame with a reference to the subdocument DOCB is added
+	 * 5) A picture is being added to the second subdocument (ie. /DOCA/DOCB/Pictures/testB.jpg)
+	 * 6) The spreadsheetname of DOCB is set to "NewTable"
+	 * 7) DOCA/ is saved in a document for its own	 
 	 */
 	@Test
 	public void testembeddedDocumentWithSubPath() {
@@ -214,9 +218,9 @@ public class EmbeddedDocumentTest {
 	}
 
 	/**
-	 * There are two document, one is Presentation1.odp 
+	 * There are two document, one is Presentation1_INVALID.odp
 	 * another is a new text document TestModifiedEmbeddedDoc.odt
-	 * Presentation1.odp contains an embed document named "Object 1/", add one paragraph to Object 1
+	 * Presentation1_INVALID.odp contains an embed document named "Object 1/", add one paragraph to Object 1
 	 * then embed "Object 1" to the new text document, and save this text document
 	 * reload TestModifiedEmbeddedDoc.odt, then get and modify embed document "DocA" and save it to a standalone document
 	 * load the saved standalone document, and check the content of it
@@ -291,7 +295,7 @@ public class EmbeddedDocumentTest {
 			doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT));
 			Map<String, OdfDocument> reloadedSubDocs = doc.loadSubDocuments();
 			Assert.assertTrue(0 == reloadedSubDocs.size());
-			Set<String> entries = doc.getPackage().getFileEntries();
+			Set<String> entries = doc.getPackage().getFilePaths();
 			Iterator<String> entryIter = null;
 			for (int i = 0; i < subDocNames.size(); i++) {
 				entryIter = entries.iterator();

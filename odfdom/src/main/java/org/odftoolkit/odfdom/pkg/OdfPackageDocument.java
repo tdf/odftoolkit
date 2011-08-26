@@ -204,12 +204,12 @@ public class OdfPackageDocument implements Closeable {
 	 * @return the documentPath after normalization.
 	 */
 	protected static String normalizeDocumentPath(String documentPath) {
-		String normalizeDirectoryPath = OdfPackage.normalizeDirectoryPath(documentPath);
+		String dirPath = OdfPackage.normalizeDirectoryPath(documentPath);
 		//package path should not start with '/'.
-		if (normalizeDirectoryPath.startsWith(SLASH)) {
-			normalizeDirectoryPath = normalizeDirectoryPath.substring(1);
+		if (dirPath.startsWith(SLASH) && !dirPath.equals(SLASH)) {
+			dirPath = dirPath.substring(1);
 		}
-		return normalizeDirectoryPath;
+		return dirPath;
 	}
 
 	/**

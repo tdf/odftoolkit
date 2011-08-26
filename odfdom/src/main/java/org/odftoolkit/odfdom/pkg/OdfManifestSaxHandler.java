@@ -37,6 +37,7 @@ class OdfManifestSaxHandler implements ContentHandler {
 	private OdfFileEntry _currentFileEntry;
 	private EncryptionData _currentEncryptionData;
 	private OdfPackage mPackage;
+	private static final String EMPTY_STRING = "";
 
 	public OdfManifestSaxHandler(OdfPackage pkg) {
 		mPackage = pkg;
@@ -80,14 +81,19 @@ class OdfManifestSaxHandler implements ContentHandler {
 			String qName, Attributes atts) throws SAXException {
 		Map<String, OdfFileEntry> entries = mPackage.getManifestEntries();
 		if (localName.equals("file-entry")) {
-			String path = OdfPackage.normalizePath(atts.getValue("manifest:full-path"));
+			String path = atts.getValue("manifest:full-path");
+			if (path.equals(EMPTY_STRING)) {
+				if(mPackage.getErrorHandler() != null){
+					mPackage.logValidationError(OdfPackageConstraint.MANIFEST_WITH_EMPTY_PATH, mPackage.getBaseURI());
+				}
+			} 
+			path = OdfPackage.normalizePath(path);
 			_currentFileEntry = entries.get(path);
 			if (_currentFileEntry == null) {
 				_currentFileEntry = new OdfFileEntry();
 			}
 			if (path != null) {
-				entries.put(OdfPackage.normalizePath(path),
-						_currentFileEntry);
+				entries.put(path, _currentFileEntry);
 			}
 			_currentFileEntry.setPath(atts.getValue("manifest:full-path"));
 			_currentFileEntry.setMediaTypeString(atts.getValue("manifest:media-type"));

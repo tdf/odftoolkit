@@ -111,7 +111,7 @@ public class OdfPackage implements Closeable {
 	private Resolver mResolver;
 	private Map<String, ZipEntry> mZipEntries;
 	private HashMap<String, ZipEntry> mOriginalZipEntries;
-	private Map<String, OdfFileEntry> mFileEntries;
+	private Map<String, OdfFileEntry> mManifestEntries;
 	// All opened documents from the same package are cached (including the root document)
 	private Map<String, OdfPackageDocument> mPkgDocuments;
 	// Three different incarnations of a package file/data
@@ -157,7 +157,7 @@ public class OdfPackage implements Closeable {
 		mPkgDocuments = new HashMap<String, OdfPackageDocument>();
 		mPkgDoms = new HashMap<String, Document>();
 		mMemoryFileCache = new HashMap<String, byte[]>();
-		mFileEntries = new HashMap<String, OdfFileEntry>();
+		mManifestEntries = new HashMap<String, OdfFileEntry>();
 		// specify whether validation should be enabled and what SAX ErrorHandler should be used.		
 		if (mErrorHandler == null) {
 			String errorHandlerProperty = System.getProperty("org.odftoolkit.odfdom.validation");
@@ -367,7 +367,7 @@ public class OdfPackage implements Closeable {
 	/** Validates if all file entries exist in the ZIP and vice versa */
 	private void validateManifest() {
 		Set zipPaths = mZipEntries.keySet();
-		Set manifestPaths = mFileEntries.keySet();
+		Set manifestPaths = mManifestEntries.keySet();
 		Set<String> sharedPaths = new HashSet<String>(zipPaths);
 		sharedPaths.retainAll(manifestPaths);
 
@@ -386,7 +386,7 @@ public class OdfPackage implements Closeable {
 			}
 		}
 		if (sharedPaths.size() < manifestPaths.size()) {
-			Set<String> zipPathSubset = new HashSet<String>(mFileEntries.keySet());
+			Set<String> zipPathSubset = new HashSet<String>(mManifestEntries.keySet());
 			zipPathSubset.removeAll(sharedPaths);
 			// removing root directory
 			zipPathSubset.remove(SLASH);
@@ -397,12 +397,11 @@ public class OdfPackage implements Closeable {
 				String manifestOnlyPath = manifestOnlyPaths.next();
 				// assumption: all directories end with slash
 				if (manifestOnlyPath.endsWith(SLASH)) {
-
 					removeDirectory(manifestOnlyPath);
 				} else {
 					// if it is a nonexistent file
 					logValidationError(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, getBaseURI(), manifestOnlyPath);
-					mFileEntries.remove(manifestOnlyPath);
+					mManifestEntries.remove(manifestOnlyPath);
 				}
 			}
 		}
@@ -422,10 +421,10 @@ public class OdfPackage implements Closeable {
 		if (path.endsWith(SLASH)) {
 			// Check if it is a sub-document?
 			// Our assumption: it is a document if it has a mimetype...
-			String dirMimeType = mFileEntries.get(path).getMediaTypeString();
+			String dirMimeType = mManifestEntries.get(path).getMediaTypeString();
 			if (dirMimeType == null || EMPTY_STRING.equals(dirMimeType)) {
 				logValidationWarning(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, getBaseURI(), path);
-				mFileEntries.remove(path);
+				mManifestEntries.remove(path);
 			}
 		}
 	}
@@ -490,7 +489,7 @@ public class OdfPackage implements Closeable {
 
 	/** @returns the media type of the root document from the manifest.xml */
 	private String getMediaTypeFromManifest() {
-		OdfFileEntry rootDocumentEntry = mFileEntries.get(SLASH);
+		OdfFileEntry rootDocumentEntry = mManifestEntries.get(SLASH);
 		if (rootDocumentEntry != null) {
 			return rootDocumentEntry.getMediaTypeString();
 		} else {
@@ -632,13 +631,16 @@ public class OdfPackage implements Closeable {
 	 *		path relative to the package root, where the document should be removed.
 	 */
 	public void removeDocument(String internalPath) {
+		// Note: the EMPTY String for rrot path will be exchanged to a SLASH
+		internalPath = normalizeDirectoryPath(internalPath);
 		try {
 			// get all files of the package
-			Set<String> allPackageFileNames = getFileEntries();
+			Set<String> allPackageFileNames = getFilePaths();
 
 			// If the document is the root document
 			// the "/" representing the root document is outside the manifest.xml in the API an empty path
-			if (internalPath.equals(OdfPackageDocument.ROOT_DOCUMENT_PATH)) {
+			// still normalizeDirectoryPath() already exchanged the EMPTY_STRING to SLASH
+			if (internalPath.equals(SLASH)) {
 				for (String entryName : allPackageFileNames) {
 					remove(entryName);
 				}
@@ -736,17 +738,16 @@ public class OdfPackage implements Closeable {
 	 */
 	public OdfFileEntry getFileEntry(String internalPath) {
 		internalPath = normalizeFilePath(internalPath);
-		return getManifestEntries().get(internalPath);
+		return mManifestEntries.get(internalPath);
 	}
 
 	/**
 	 * Get a OdfFileEntries from the manifest file (i.e. /META/manifest.xml")
-	 * 
-	 * @return The manifest file entries will be returned.
+	 *
+	 * @return The paths of the manifest file entries will be returned.
 	 */
-	// ToDo: When moved to Manifest, after generation, the method might be renamed "Entries" to "Paths" as well
-	public Set<String> getFileEntries() {
-		return getManifestEntries().keySet();
+	public Set<String> getFilePaths() {
+		return mManifestEntries.keySet();
 	}
 
 	/**
@@ -759,7 +760,7 @@ public class OdfPackage implements Closeable {
 	 */
 	public boolean contains(String internalPath) {
 		internalPath = normalizeFilePath(internalPath);
-		return mFileEntries.containsKey(internalPath);
+		return mManifestEntries.containsKey(internalPath);
 	}
 
 	/**
@@ -812,18 +813,18 @@ public class OdfPackage implements Closeable {
 	private void save(OutputStream odfStream, String baseURL) {
 		try {
 			mBaseURI = baseURL;
-			OdfFileEntry rootEntry = getManifestEntries().get(SLASH);
+			OdfFileEntry rootEntry = mManifestEntries.get(SLASH);
 			if (rootEntry == null) {
 				rootEntry = new OdfFileEntry(SLASH, mMediaType);
-				getManifestEntries().put(SLASH, rootEntry);
+				mManifestEntries.put(SLASH, rootEntry);
 			} else {
 				rootEntry.setMediaTypeString(mMediaType);
 			}
 			ZipOutputStream zos = new ZipOutputStream(odfStream);
 
 			// remove mediatype path and use it as first
-			this.mFileEntries.remove(OdfFile.MEDIA_TYPE.getPath());
-			Iterator<String> it = mFileEntries.keySet().iterator();
+			this.mManifestEntries.remove(OdfFile.MEDIA_TYPE.getPath());
+			Iterator<String> it = mManifestEntries.keySet().iterator();
 			String path = null;
 			boolean isFirstFile = true;
 			CRC32 crc = new CRC32();
@@ -919,7 +920,6 @@ public class OdfPackage implements Closeable {
 		return result;
 	}
 
-
 	/**
 	 * Close the OdfPackage after it is no longer needed. Even after saving it
 	 * is still necessary to close the package to have again full access about
@@ -943,7 +943,7 @@ public class OdfPackage implements Closeable {
 		mZipEntries = null;
 		mPkgDoms = null;
 		mMemoryFileCache = null;
-		mFileEntries = null;
+		mManifestEntries = null;
 		mBaseURI = null;
 		mResolver = null;
 	}
@@ -956,7 +956,7 @@ public class OdfPackage implements Closeable {
 		try {
 			ZipEntry entry = null;
 			// loading the MANIFEST once from the ZIP, as it will never be cached, just once read
-			// during load (now) and on save serialized from file status (ie. mFileEntries)
+			// during load (now) and on save serialized from file status (ie. mManifestEntries)
 			if ((entry = mZipEntries.get(OdfPackage.OdfFile.MANIFEST.internalPath)) != null) {
 				is = mZipFile.getInputStream(entry);
 			}
@@ -1020,9 +1020,9 @@ public class OdfPackage implements Closeable {
 				// it is a directory, if there are more token
 				if (tok.hasMoreTokens()) {
 					path = path + directory + SLASH;
-					OdfFileEntry fileEntry = mFileEntries.get(path);
+					OdfFileEntry fileEntry = mManifestEntries.get(path);
 					if (fileEntry == null) {
-						mFileEntries.put(path, new OdfFileEntry(path, null));
+						mManifestEntries.put(path, new OdfFileEntry(path, null));
 					}
 				}
 			}
@@ -1063,6 +1063,7 @@ public class OdfPackage implements Closeable {
 	 * @param internalPath path to the directory the ODF document should be inserted (relative to ODF package root).
 	 */
 	public void insertDocument(OdfPackageDocument sourceDocument, String internalPath) {
+		internalPath = normalizeDirectoryPath(internalPath);
 		// opened DOM of descendant Documents will be flashed to the their pkg
 		flushDoms(sourceDocument);
 
@@ -1075,6 +1076,12 @@ public class OdfPackage implements Closeable {
 		}
 		//insert to package and add it to the Manifest
 		internalPath = sourceDocument.setDocumentPath(internalPath);
+		String documentDirectory = null;
+		if(internalPath.equals(SLASH)){
+			documentDirectory = EMPTY_STRING;
+		}else{
+			documentDirectory = internalPath;
+		}
 		Set<String> entryNameList = entryMapToCopy.keySet();
 		for (String entryName : entryNameList) {
 			OdfFileEntry entry = entryMapToCopy.get(entryName);
@@ -1084,12 +1091,12 @@ public class OdfPackage implements Closeable {
 					if (entryName.endsWith(SLASH)) {
 						// insert directory
 						if (entryName.equals(SLASH)) {
-							insert((byte[]) null, internalPath, sourceDocument.getMediaTypeString());
+							insert((byte[]) null, documentDirectory, sourceDocument.getMediaTypeString());
 						} else {
-							insert((byte[]) null, internalPath + entry.getPath(), entry.getMediaTypeString());
+							insert((byte[]) null, documentDirectory + entry.getPath(), entry.getMediaTypeString());
 						}
 					} else {
-						String packagePath = internalPath + entry.getPath();
+						String packagePath = documentDirectory + entry.getPath();
 						insert(sourceDocument.getPackage().getInputStream(entryName), packagePath, entry.getMediaTypeString());
 					}
 				} catch (Exception ex) {
@@ -1099,7 +1106,7 @@ public class OdfPackage implements Closeable {
 		}
 		//make sure the media type of embedded Document is right set.
 		OdfFileEntry embedDocumentRootEntry = new OdfFileEntry(internalPath, sourceDocument.getMediaTypeString());
-		getManifestEntries().put(internalPath, embedDocumentRootEntry);
+		mManifestEntries.put(internalPath, embedDocumentRootEntry);
 		// the new document will be attached to its new package (it has been inserted to)
 		sourceDocument.setPackage(this);
 		cacheDocument(sourceDocument, internalPath);
@@ -1138,7 +1145,7 @@ public class OdfPackage implements Closeable {
 		directory = normalizeDirectoryPath(directory);
 		Map<String, OdfFileEntry> subEntries = new HashMap<String, OdfFileEntry>();
 		Map<String, OdfFileEntry> allEntries = getManifestEntries();
-		Set<String> rootEntryNameSet = getFileEntries();
+		Set<String> rootEntryNameSet = getFilePaths();
 		for (String entryName : rootEntryNameSet) {
 			if (entryName.startsWith(directory)) {
 				String newEntryName = entryName.substring(directory.length());
@@ -1185,7 +1192,7 @@ public class OdfPackage implements Closeable {
 	 */
 	Set<String> getDocumentPaths(String mediaTypeString, String subDirectory) {
 		Set<String> innerDocuments = new HashSet<String>();
-		Set<String> packageFilePaths = getFileEntries();
+		Set<String> packageFilePaths = getFilePaths();
 		// check manifest for current embedded OdfPackageDocuments
 		for (String filePath : packageFilePaths) {
 			// check if a subdirectory was the criteria and if the files are beyond the given subdirectory
@@ -1213,15 +1220,16 @@ public class OdfPackage implements Closeable {
 	private OdfFileEntry ensureFileEntryExistence(String internalPath) {
 		// if it is NOT the resource "/META-INF/manifest.xml"
 		OdfFileEntry fileEntry = null;
-		if (!OdfPackage.OdfFile.MANIFEST.internalPath.equals(internalPath)) {
-			if (mFileEntries == null) {
-				mFileEntries = new HashMap<String, OdfFileEntry>();
+		if (!OdfPackage.OdfFile.MANIFEST.internalPath.equals(internalPath) ||
+			!internalPath.equals(EMPTY_STRING)) {
+			if (mManifestEntries == null) {
+				mManifestEntries = new HashMap<String, OdfFileEntry>();
 			}
-			fileEntry = mFileEntries.get(internalPath);
+			fileEntry = mManifestEntries.get(internalPath);
 			// for every new file entry
 			if (fileEntry == null) {
 				fileEntry = new OdfFileEntry(internalPath);
-				mFileEntries.put(internalPath, fileEntry);
+				mManifestEntries.put(internalPath, fileEntry);
 				// creates recursive file entries for all sub directories
 				createSubEntries(internalPath);
 			}
@@ -1385,7 +1393,7 @@ public class OdfPackage implements Closeable {
 
 	// changed to package access as the manifest interiors are an implementation detail
 	Map<String, OdfFileEntry> getManifestEntries() {
-		return mFileEntries;
+		return mManifestEntries;
 	}
 
 	/**
@@ -1395,17 +1403,17 @@ public class OdfPackage implements Closeable {
 	 * @return the /META-INF/manifest.xml as a String
 	 */
 	public String getManifestAsString() {
-		if (mFileEntries == null) {
+		if (mManifestEntries == null) {
 			return null;
 		} else {
 			StringBuilder buf = new StringBuilder();
 			buf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 			buf.append("<manifest:manifest xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\" manifest:version=\"1.2\">\n");
-			Iterator<String> it = new TreeSet<String>(mFileEntries.keySet()).iterator();
+			Iterator<String> it = new TreeSet<String>(mManifestEntries.keySet()).iterator();
 			while (it.hasNext()) {
 				String key = it.next();
 				String s = null;
-				OdfFileEntry fileEntry = mFileEntries.get(key);
+				OdfFileEntry fileEntry = mManifestEntries.get(key);
 				if (fileEntry != null) {
 					s = fileEntry.getPath();
 					// only directories with a mimetype (documents) will be written into the manifest.xml
@@ -1509,7 +1517,7 @@ public class OdfPackage implements Closeable {
 			}
 			// if the file is "/META-INF/manifest.xml"
 		} else if (internalPath.equals(OdfPackage.OdfFile.MANIFEST.internalPath)) {
-			if (mFileEntries == null) {
+			if (mManifestEntries == null) {
 				// manifest was not present
 				return null;
 			}
@@ -1528,7 +1536,7 @@ public class OdfPackage implements Closeable {
 			data = flushDom(mPkgDoms.get(internalPath));
 			mMemoryFileCache.put(internalPath, data);
 			// if the path's file was cached to memory (second high priority)
-		} else if (mFileEntries.containsKey(internalPath)
+		} else if (mManifestEntries.containsKey(internalPath)
 				&& mMemoryFileCache.get(internalPath) != null) {
 			data = mMemoryFileCache.get(internalPath);
 
@@ -1754,8 +1762,8 @@ public class OdfPackage implements Closeable {
 		if (mZipEntries != null && mZipEntries.containsKey(internalPath)) {
 			mZipEntries.remove(internalPath);
 		}
-		if (mFileEntries != null && mFileEntries.containsKey(internalPath)) {
-			mFileEntries.remove(internalPath);
+		if (mManifestEntries != null && mManifestEntries.containsKey(internalPath)) {
+			mManifestEntries.remove(internalPath);
 		}
 	}
 
@@ -1944,9 +1952,9 @@ public class OdfPackage implements Closeable {
 	 * @return true if the reference is an package external reference
 	 */
 	public static boolean isExternalReference(String internalPath) {
-		if(mightBeExternalReference(internalPath)){
+		if (mightBeExternalReference(internalPath)) {
 			return true;
-		}else{
+		} else {
 			return mightBeExternalReference(normalizePath(internalPath));
 		}
 	}
@@ -1982,7 +1990,7 @@ public class OdfPackage implements Closeable {
 		return mErrorHandler;
 	}
 
-	private void logValidationWarning(ValidationConstraint constraint, String baseURI, Object... o) {
+	void logValidationWarning(ValidationConstraint constraint, String baseURI, Object... o) {
 		try {
 			int varCount = 0;
 			if (o != null) {
@@ -2004,7 +2012,7 @@ public class OdfPackage implements Closeable {
 		}
 	}
 
-	private void logValidationError(ValidationConstraint constraint, String baseURI, Object... o) {
+	void logValidationError(ValidationConstraint constraint, String baseURI, Object... o) {
 		try {
 			int varCount = 0;
 			if (o != null) {
