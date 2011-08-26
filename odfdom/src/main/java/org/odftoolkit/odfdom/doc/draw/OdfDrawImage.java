@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.type.Length.Unit;
 public class OdfDrawImage extends DrawImageElement
 {
 
-	private URI mImageURI;
+    private URI mImageURI;
     // OdfPackage necessary to adapt the manifest referencing the image
     private OdfPackage mOdfPackage;
     private static final String SLASH = "/";
@@ -89,6 +89,33 @@ public class OdfDrawImage extends DrawImageElement
         }
     }
 
+    /* Helper method */
+    private String getPackagePath(String imageRef) {
+        if (imageRef.contains(SLASH)) {
+            imageRef = imageRef.substring(imageRef.lastIndexOf(SLASH) + 1, imageRef.length());
+        }
+        String packagePath = OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + imageRef;
+        return packagePath = mOdfDocument.getDocumentPackagePath() + packagePath;
+    }
+
+    /* Helper method */
+    private void configureInsertedImage(String packagePath) throws Exception {
+        // Set path to image attribute
+        setImagePath(packagePath);
+        // Set mandatory attribute xlink:type
+        setXlinkTypeAttribute("simple");
+        // A draw:image is always embedded in a draw:frame
+        InputStream is = mOdfPackage.getInputStream(packagePath);
+        OdfDrawFrame odfFrame = (OdfDrawFrame) this.getParentNode();
+        if (odfFrame != null) {
+            BufferedImage image = ImageIO.read(is);
+            int height = image.getHeight(null);
+            int width = image.getWidth(null);
+            odfFrame.setSvgHeightAttribute(Length.mapToUnit(String.valueOf(height) + "px", Unit.CENTIMETER));
+            odfFrame.setSvgWidthAttribute(Length.mapToUnit(String.valueOf(width) + "px", Unit.CENTIMETER));
+        }
+    }
+
     /**
      * Inserts the image file from the URI to the ODF package named similar as in the URI.
      * The manifest is adapted using the media type according to the suffix. Existing images are replaced.
@@ -112,44 +139,25 @@ public class OdfDrawImage extends DrawImageElement
             imageRef = imageUri.toString();
         }
         String mediaType = OdfFileEntry.getMediaType(imageRef);
-        // A draw:image is always embedded in a draw:frame
-        OdfDrawFrame odfFrame = (OdfDrawFrame) this.getParentNode();
-        if (odfFrame != null) {
-            InputStream is = url.openConnection().getInputStream();
-            BufferedImage image = ImageIO.read(is);
-            int height = image.getHeight(null);
-            int width = image.getWidth(null);
-            odfFrame.setSvgHeightAttribute(Length.mapToUnit(String.valueOf(height) + "px", Unit.CENTIMETER));
-            odfFrame.setSvgWidthAttribute(Length.mapToUnit(String.valueOf(width) + "px", Unit.CENTIMETER));
-        }
         String packagePath = getPackagePath(imageRef);
-        setImagePath(packagePath);
         mOdfPackage.insert(imageUri, packagePath, mediaType);
+        configureInsertedImage(packagePath);
         return packagePath;
     }
 
-    private String getPackagePath(String imageRef) {
-        if (imageRef.contains(SLASH)) {
-            imageRef = imageRef.substring(imageRef.lastIndexOf(SLASH) + 1, imageRef.length());
-        }
-        String packagePath = OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + imageRef;
-        return packagePath = mOdfDocument.getDocumentPackagePath() + packagePath;
-    }
-    
     /**
-     * 
+     *
      * Inserts the image file from the stream to the ODF package named similar as in the provided path..
-     * The manifest is adapted using given media type. Existing images are replaced. 
+     * The manifest is adapted using given media type. Existing images are replaced.
      * @param is            InputStream to be added to the ODF package
      * @param packagePath   Internal path of the image in the package
-     * @param mediaType     The mediaType of the image. 
+     * @param mediaType     The mediaType of the image.
      *                      Can be obtained by the OdfFileEntry class findMediaType(String fileRef).
      * @throws Exception    If the given stream could not be added to the ODF package at the packagePatch
      */
     public void insertImage(InputStream is, String packagePath, String mediaType) throws Exception {
-            //setImageUri(new URI(URITransformer.encodePath(packagePath).toString()));
-            setImagePath(packagePath);
-            mOdfPackage.insert(is, packagePath, mediaType);
+        mOdfPackage.insert(is, packagePath, mediaType);
+        configureInsertedImage(packagePath);
     }
 
 }
