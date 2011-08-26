@@ -23,6 +23,15 @@
 <project name="odfxsltrunnertask" default="default" basedir=".">
     <description>Builds, tests, and runs the project odfxsltrunnertask.</description>
     <import file="nbproject/build-impl.xml"/>
-    
+
+    <target name="-post-jar" depends="init">
+        <copy todir="${dist.dir}">
+            <filelist dir="." files="LICENSE.txt README.txt" />
+        </copy>
+        <delete file="${dist.dir}/README.TXT"/>
+        <zip destfile="${dist.dir}/odfxsltrunnertask.zip" update="true">
+            <zipfileset dir="${dist.dir}" includes="*.jar,*.txt"/>
+        </zip>
+    </target>
     
 </project>
