@@ -5,7 +5,7 @@
 	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>odfdom-java</artifactId>
-	<version>0.9-SNAPSHOT</version>
+	<version>0.8.6</version>
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
