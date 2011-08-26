@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class StyleVerticalRelAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "vertical-rel" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "vertical-rel" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:vertical-rel}.
@@ -136,8 +136,7 @@ public class StyleVerticalRelAttribute extends OdfAttribute {
 	 */
 	@Override
 	public String getValue(){
-		try{
-			return Value.enumValueOf(super.getValue()).toString();		
+		try{return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of style:vertical-rel is not valid");

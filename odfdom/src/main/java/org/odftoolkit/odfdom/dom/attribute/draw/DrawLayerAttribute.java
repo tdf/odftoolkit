@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DrawLayerAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "layer" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "layer" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:layer}.

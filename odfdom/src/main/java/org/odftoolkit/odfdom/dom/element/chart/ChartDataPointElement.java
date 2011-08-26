@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  */
 public abstract class ChartDataPointElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "data-point" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "data-point" );
 
 
 	/**
@@ -54,7 +54,7 @@ public abstract class ChartDataPointElement extends OdfStylableElement
 	 */
 	public ChartDataPointElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.newName(OdfNamespaceNames.CHART, "style-name" )	);
 	}
 
 	/**
@@ -76,7 +76,7 @@ public abstract class ChartDataPointElement extends OdfStylableElement
 	 */
 	public Integer getChartRepeatedAttribute()
 	{
-		ChartRepeatedAttribute attr = (ChartRepeatedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "repeated" ) );
+		ChartRepeatedAttribute attr = (ChartRepeatedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "repeated" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -103,7 +103,7 @@ public abstract class ChartDataPointElement extends OdfStylableElement
 	 */
 	public String getChartStyleNameAttribute()
 	{
-		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "style-name" ) );
+		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public abstract class ChartDataPointElement extends OdfStylableElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

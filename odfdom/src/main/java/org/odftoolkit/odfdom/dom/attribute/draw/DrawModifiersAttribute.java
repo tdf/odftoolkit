@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DrawModifiersAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "modifiers" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "modifiers" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:modifiers}.

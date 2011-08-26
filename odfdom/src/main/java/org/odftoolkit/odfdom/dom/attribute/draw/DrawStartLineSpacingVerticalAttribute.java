@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DrawStartLineSpacingVerticalAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "start-line-spacing-vertical" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "start-line-spacing-vertical" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:start-line-spacing-vertical}.

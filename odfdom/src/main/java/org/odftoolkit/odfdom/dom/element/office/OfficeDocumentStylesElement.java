@@ -72,7 +72,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
  */
 public abstract class OfficeDocumentStylesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "document-styles" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "document-styles" );
 
 
 	/**
@@ -113,7 +113,7 @@ public abstract class OfficeDocumentStylesElement extends OdfElement
 	 */
 	public String getOfficeVersionAttribute()
 	{
-		OfficeVersionAttribute attr = (OfficeVersionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "version" ) );
+		OfficeVersionAttribute attr = (OfficeVersionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "version" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public abstract class OfficeDocumentStylesElement extends OdfElement
 	 */
 	public String getGrddlTransformationAttribute()
 	{
-		GrddlTransformationAttribute attr = (GrddlTransformationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.GRDDL), "transformation" ) );
+		GrddlTransformationAttribute attr = (GrddlTransformationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.GRDDL), "transformation" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

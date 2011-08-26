@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbDataSourceSettingTypeAttribute;
  */
 public abstract class DbDataSourceSettingElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "data-source-setting" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "data-source-setting" );
 
 
 	/**
@@ -86,7 +86,7 @@ public abstract class DbDataSourceSettingElement extends OdfElement
 	 */
 	public Boolean getDbDataSourceSettingIsListAttribute()
 	{
-		DbDataSourceSettingIsListAttribute attr = (DbDataSourceSettingIsListAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "data-source-setting-is-list" ) );
+		DbDataSourceSettingIsListAttribute attr = (DbDataSourceSettingIsListAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "data-source-setting-is-list" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -113,7 +113,7 @@ public abstract class DbDataSourceSettingElement extends OdfElement
 	 */
 	public String getDbDataSourceSettingNameAttribute()
 	{
-		DbDataSourceSettingNameAttribute attr = (DbDataSourceSettingNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "data-source-setting-name" ) );
+		DbDataSourceSettingNameAttribute attr = (DbDataSourceSettingNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "data-source-setting-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public abstract class DbDataSourceSettingElement extends OdfElement
 	 */
 	public String getDbDataSourceSettingTypeAttribute()
 	{
-		DbDataSourceSettingTypeAttribute attr = (DbDataSourceSettingTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "data-source-setting-type" ) );
+		DbDataSourceSettingTypeAttribute attr = (DbDataSourceSettingTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "data-source-setting-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

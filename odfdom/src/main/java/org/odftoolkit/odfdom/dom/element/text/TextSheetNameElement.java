@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public abstract class TextSheetNameElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "sheet-name" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "sheet-name" );
 
 
 	/**

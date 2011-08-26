@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class OfficeDdeApplicationAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "dde-application" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.OFFICE, "dde-application" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute office:dde-application}.

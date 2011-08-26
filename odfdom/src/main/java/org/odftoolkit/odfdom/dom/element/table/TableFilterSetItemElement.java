@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableValueAttribute;
  */
 public abstract class TableFilterSetItemElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "filter-set-item" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "filter-set-item" );
 
 
 	/**
@@ -81,7 +81,7 @@ public abstract class TableFilterSetItemElement extends OdfElement
 	 */
 	public String getTableValueAttribute()
 	{
-		TableValueAttribute attr = (TableValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "value" ) );
+		TableValueAttribute attr = (TableValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "value" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class FormNavigationModeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "navigation-mode" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FORM, "navigation-mode" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute form:navigation-mode}.
@@ -136,8 +136,7 @@ public class FormNavigationModeAttribute extends OdfAttribute {
 	 */
 	@Override
 	public String getValue(){
-		try{
-			return Value.enumValueOf(super.getValue()).toString();		
+		try{return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of form:navigation-mode is not valid");

@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DbReferencedTableNameAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "referenced-table-name" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DB, "referenced-table-name" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute db:referenced-table-name}.

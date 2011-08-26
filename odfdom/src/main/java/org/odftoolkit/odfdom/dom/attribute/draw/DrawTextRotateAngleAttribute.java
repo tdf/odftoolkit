@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class DrawTextRotateAngleAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "text-rotate-angle" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "text-rotate-angle" );
 	public static final String DEFAULT_VALUE = "0";
 
 	/**

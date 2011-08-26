@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class PresentationShowAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "show" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.PRESENTATION, "show" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute presentation:show}.

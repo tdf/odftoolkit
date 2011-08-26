@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableExecuteAttribute;
  */
 public abstract class TableErrorMacroElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "error-macro" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "error-macro" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class TableErrorMacroElement extends OdfElement
 	 */
 	public Boolean getTableExecuteAttribute()
 	{
-		TableExecuteAttribute attr = (TableExecuteAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "execute" ) );
+		TableExecuteAttribute attr = (TableExecuteAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "execute" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

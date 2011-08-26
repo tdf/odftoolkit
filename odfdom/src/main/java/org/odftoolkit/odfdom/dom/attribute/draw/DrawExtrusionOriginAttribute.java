@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class DrawExtrusionOriginAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "extrusion-origin" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "extrusion-origin" );
 	public static final String DEFAULT_VALUE = "0.5 -0.5";
 
 	/**

@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  */
 public abstract class ChartLegendElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "legend" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "legend" );
 
 
 	/**
@@ -59,7 +59,7 @@ public abstract class ChartLegendElement extends OdfStylableElement
 	 */
 	public ChartLegendElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Chart, OdfName.newName(OdfNamespaceNames.CHART, "style-name" )	);
 	}
 
 	/**
@@ -94,7 +94,7 @@ public abstract class ChartLegendElement extends OdfStylableElement
 	 */
 	public String getChartLegendPositionAttribute()
 	{
-		ChartLegendPositionAttribute attr = (ChartLegendPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "legend-position" ) );
+		ChartLegendPositionAttribute attr = (ChartLegendPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "legend-position" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -121,7 +121,7 @@ public abstract class ChartLegendElement extends OdfStylableElement
 	 */
 	public String getChartLegendAlignAttribute()
 	{
-		ChartLegendAlignAttribute attr = (ChartLegendAlignAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "legend-align" ) );
+		ChartLegendAlignAttribute attr = (ChartLegendAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "legend-align" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -148,7 +148,7 @@ public abstract class ChartLegendElement extends OdfStylableElement
 	 */
 	public String getSvgXAttribute()
 	{
-		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "x" ) );
+		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -175,7 +175,7 @@ public abstract class ChartLegendElement extends OdfStylableElement
 	 */
 	public String getSvgYAttribute()
 	{
-		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "y" ) );
+		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -202,7 +202,7 @@ public abstract class ChartLegendElement extends OdfStylableElement
 	 */
 	public String getStyleLegendExpansionAttribute()
 	{
-		StyleLegendExpansionAttribute attr = (StyleLegendExpansionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "legend-expansion" ) );
+		StyleLegendExpansionAttribute attr = (StyleLegendExpansionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "legend-expansion" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -229,7 +229,7 @@ public abstract class ChartLegendElement extends OdfStylableElement
 	 */
 	public Double getStyleLegendExpansionAspectRatioAttribute()
 	{
-		StyleLegendExpansionAspectRatioAttribute attr = (StyleLegendExpansionAspectRatioAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "legend-expansion-aspect-ratio" ) );
+		StyleLegendExpansionAspectRatioAttribute attr = (StyleLegendExpansionAspectRatioAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "legend-expansion-aspect-ratio" ) );
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
@@ -256,7 +256,7 @@ public abstract class ChartLegendElement extends OdfStylableElement
 	 */
 	public String getChartStyleNameAttribute()
 	{
-		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "style-name" ) );
+		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CHART), "style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

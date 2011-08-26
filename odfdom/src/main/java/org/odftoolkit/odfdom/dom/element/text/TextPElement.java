@@ -63,7 +63,7 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationDateTimeElemen
  */
 public abstract class TextPElement extends TextParagraphElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "p" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "p" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class TextPElement extends TextParagraphElementBase
 	 */
 	public TextPElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Paragraph, OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Paragraph, OdfName.newName(OdfNamespaceNames.TEXT, "style-name" )	);
 	}
 
 	/**

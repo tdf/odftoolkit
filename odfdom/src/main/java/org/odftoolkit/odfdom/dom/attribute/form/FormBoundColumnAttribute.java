@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class FormBoundColumnAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "bound-column" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FORM, "bound-column" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute form:bound-column}.

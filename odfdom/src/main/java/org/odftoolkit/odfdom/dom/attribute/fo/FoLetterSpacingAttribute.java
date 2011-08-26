@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class FoLetterSpacingAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "letter-spacing" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FO, "letter-spacing" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute fo:letter-spacing}.

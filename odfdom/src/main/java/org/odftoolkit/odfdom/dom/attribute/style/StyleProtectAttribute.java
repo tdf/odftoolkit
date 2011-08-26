@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleSectionPropertiesElement;
  */
 public class StyleProtectAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "protect" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "protect" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:protect}.
@@ -129,7 +129,7 @@ public class StyleProtectAttribute extends OdfAttribute {
 				if( parentElement instanceof StyleGraphicPropertiesElement ){
 					super.setValue(attrValue);
 				}else if( parentElement instanceof StyleSectionPropertiesElement ){
-					super.setValue(Boolean.toString(Boolean.parseBoolean(attrValue)));
+					super.setValue(attrValue);
 				}			
 			} catch (NullPointerException e) {
 				// TODO: validation handling/logging
@@ -156,7 +156,8 @@ public class StyleProtectAttribute extends OdfAttribute {
 				if( parentElement instanceof StyleGraphicPropertiesElement ){
 					return super.getValue();
 				}else if( parentElement instanceof StyleSectionPropertiesElement ){
-					return String.valueOf(Boolean.parseBoolean(super.getValue()));
+					
+					return super.getValue();
 				}			
 			} catch (IllegalArgumentException e) {
 				// TODO: validation handling/logging

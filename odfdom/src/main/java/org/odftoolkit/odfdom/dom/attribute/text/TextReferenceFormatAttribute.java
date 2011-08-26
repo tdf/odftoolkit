@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextSequenceRefElement;
  */
 public class TextReferenceFormatAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "reference-format" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "reference-format" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:reference-format}.
@@ -160,7 +160,7 @@ public class TextReferenceFormatAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof TextBookmarkRefElement ){
-					return TextBookmarkRefElement.TextReferenceFormatAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof TextNoteRefElement ){
 					return TextNoteRefElement.TextReferenceFormatAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof TextReferenceRefElement ){

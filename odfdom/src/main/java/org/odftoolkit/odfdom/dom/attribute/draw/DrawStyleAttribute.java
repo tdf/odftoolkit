@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawStrokeDashElement;
  */
 public class DrawStyleAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "style" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "style" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:style}.
@@ -160,7 +160,7 @@ public class DrawStyleAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof DrawGradientElement ){
-					return DrawGradientElement.DrawStyleAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof DrawHatchElement ){
 					return DrawHatchElement.DrawStyleAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof DrawOpacityElement ){

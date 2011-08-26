@@ -682,6 +682,8 @@ public class %{attributeclassname} extends OdfAttribute {
 	 * @return Returns the &lt;code&gt;%{returntype}&lt;/code&gt; value of the attribute
 	 */
 	public %{returntype} %{returntype}Value(){
+		<!-- NOTE: no bug77 is fitting here, there have to be a better source generation for the
+		case were double or string might be the attribute value for the future, e.g. svg:stroke-opacity -->
 		String value = super.getValue();
 		try {</code>
             <if test = "valuetype != conversiontype"><code>
@@ -752,7 +754,9 @@ public class %{attributeclassname} extends OdfAttribute {
             		</if>
 					<if test="returntype != 'String'">
             		<code>
-					super.setValue(%{valuetype}.toString(%{valuetype}.parse%{identifier(returntype)}(attrValue)));</code>
+					super.setValue(attrValue);</code>
+						<!--bug77
+					super.setValue(%{valuetype}.toString(%{valuetype}.parse%{identifier(returntype)}(attrValue)));</code>-->
             		<else>
             		<code>
 					super.setValue(attrValue);</code>
@@ -773,8 +777,11 @@ public class %{attributeclassname} extends OdfAttribute {
             	  </if>
 					<if test="returntype != 'String'">
             	<code>
+			super.setValue(attrValue);</code>
+					<!--2DO - improvement with bug77
 			super.setValue(%{valuetype}.toString(%{valuetype}.parse%{identifier(returntype)}(attrValue)));</code>
-            		<else>
+            		-->
+					<else>
             	<code>
 			super.setValue(attrValue);</code>
             		</else>
@@ -796,8 +803,11 @@ public class %{attributeclassname} extends OdfAttribute {
 					//2DO: need validate value against %{local_name(conversiontype)}</code>
             		</if>
 					<if test="returntype != 'String'">
-            		<code>
-					super.setValue(%{valuetype}.toString(%{valuetype}.parse%{identifier(returntype)}(attrValue)));</code>
+            		<!--bug77
+					<code>
+					super.setValue(%{valuetype}.toString(%{valuetype}.parse%{identifier(returntype)}(attrValue)));-->
+					<code>
+					super.setValue(attrValue);</code>
             		<else>
             		<code>
 					super.setValue(attrValue);</code>
@@ -884,16 +894,23 @@ public class %{attributeclassname} extends OdfAttribute {
 				
 				<if test="returntype = 'enum'">
 					<code>
+					return super.getValue();</code>
+						<!-- bug77
 					return %{elementclassname}.%{attributevaluename}.enumValueOf(super.getValue()).toString();</code>
+					-->
 				<else>
 					<if test = "valuetype != conversiontype or hasdelimiter(valuetype, ';')">
             		<code>
 					//2DO: need validate value against %{local_name(conversiontype)}</code>
             		</if>
 					<if test="returntype != 'String'">
-            		<code>
-					return String.valueOf(%{valuetype}.parse%{identifier(returntype)}(super.getValue()));</code>
-            		<else>
+					<code>
+					return super.getValue();</code>
+												<!-- bug77
+					<code>return String.valueOf(%{valuetype}.parse%{identifier(returntype)}(super.getValue()));</code>
+            		-->
+
+					<else>
             		<code>
 					return super.getValue();</code>
             		</else>
@@ -904,16 +921,19 @@ public class %{attributeclassname} extends OdfAttribute {
 				}</code>
 			<else><!-- has only one value set-->
 				<if test="returntype = 'enum'">
-					<code>
-			return Value.enumValueOf(super.getValue()).toString();</code>
+					<code><!-- bug77
+			return Value.enumValueOf(super.getValue()).toString();-->return super.getValue();</code>
 				<else>
 					<if test = "valuetype != conversiontype or hasdelimiter(valuetype, ';')">
             		<code>
 			//2DO: need validate value against %{local_name(conversiontype)}</code>
             		</if>
 					<if test="returntype != 'String'">
-            		<code>
-			return String.valueOf(%{valuetype}.parse%{identifier(returntype)}(super.getValue()));</code>
+            		<!-- bug77
+					<code>
+			return String.valueOf(%{valuetype}.parse%{identifier(returntype)}(super.getValue()));-->
+					<code>
+			return super.getValue();</code>
             		<else>
             		<code>
 			return super.getValue();</code>
@@ -937,7 +957,9 @@ public class %{attributeclassname} extends OdfAttribute {
             		</if>
 					<if test="returntype != 'String'">
             		<code>
-					return String.valueOf(%{valuetype}.parse%{identifier(returntype)}(super.getValue()));</code>
+					<!--bug77
+					return String.valueOf(%{valuetype}.parse%{identifier(returntype)}(super.getValue()));</code>-->
+					return super.getValue();</code>
             		<else>
             		<code>
 					return super.getValue();</code>
@@ -1103,7 +1125,7 @@ public class %{attributeclassname} extends OdfAttribute {
             <if test="elementstylefamily!='draw:graphic,presentation:presentation'">
                 <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStylableElement"/>
                 <else>
-                    <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStyleablePresentationElement"/>
+                    <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement"/>
                 </else>
             </if>
         </else>
@@ -1191,7 +1213,7 @@ public abstract class %{local_name(classname)} extends %{local_name(baseclassnam
                 <if test="elementstylefamily!='draw:graphic,presentation:presentation'">
                     <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStylableElement"/>
                     <else>
-                        <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStyleablePresentationElement"/>
+                        <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement"/>
                     </else>
                 </if>                
             </else>

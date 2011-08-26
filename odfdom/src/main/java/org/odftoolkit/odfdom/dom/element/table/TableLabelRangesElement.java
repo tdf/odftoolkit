@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public abstract class TableLabelRangesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "label-ranges" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "label-ranges" );
 
 
 	/**

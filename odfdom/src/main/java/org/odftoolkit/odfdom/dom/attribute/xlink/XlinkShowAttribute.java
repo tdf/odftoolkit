@@ -60,7 +60,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextSectionSourceElement;
  */
 public class XlinkShowAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "show" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.XLINK, "show" );
 	public static final String DEFAULT_VALUE_EMBED = Value.EMBED.toString();
 	public static final String DEFAULT_VALUE_NONE = Value.NONE.toString();
 	public static final String DEFAULT_VALUE_REPLACE = Value.REPLACE.toString();
@@ -214,7 +214,7 @@ public class XlinkShowAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof DbComponentElement ){
-					return DbComponentElement.XlinkShowAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof DbConnectionResourceElement ){
 					return DbConnectionResourceElement.XlinkShowAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof DrawAElement ){

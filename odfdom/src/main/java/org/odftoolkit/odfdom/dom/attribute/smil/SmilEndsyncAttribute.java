@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class SmilEndsyncAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "endsync" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.SMIL, "endsync" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute smil:endsync}.

@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public abstract class StyleTabStopsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "tab-stops" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "tab-stops" );
 
 
 	/**

@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TablePageBreaksOnGroupChangeAtt
  */
 public abstract class TableSubtotalRulesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "subtotal-rules" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "subtotal-rules" );
 
 	public static final String  DEFAULT_VALUE_TABLE_CASESENSITIVE_ATTRIBUTE = TableCaseSensitiveAttribute.DEFAULT_VALUE_FALSE;
 
@@ -76,7 +76,7 @@ public abstract class TableSubtotalRulesElement extends OdfElement
 	 */
 	public Boolean getTableBindStylesToContentAttribute()
 	{
-		TableBindStylesToContentAttribute attr = (TableBindStylesToContentAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "bind-styles-to-content" ) );
+		TableBindStylesToContentAttribute attr = (TableBindStylesToContentAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "bind-styles-to-content" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -103,7 +103,7 @@ public abstract class TableSubtotalRulesElement extends OdfElement
 	 */
 	public String getTableCaseSensitiveAttribute()
 	{
-		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "case-sensitive" ) );
+		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "case-sensitive" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public abstract class TableSubtotalRulesElement extends OdfElement
 	 */
 	public Boolean getTablePageBreaksOnGroupChangeAttribute()
 	{
-		TablePageBreaksOnGroupChangeAttribute attr = (TablePageBreaksOnGroupChangeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "page-breaks-on-group-change" ) );
+		TablePageBreaksOnGroupChangeAttribute attr = (TablePageBreaksOnGroupChangeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "page-breaks-on-group-change" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

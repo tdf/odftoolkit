@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class FoBreakAfterAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "break-after" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FO, "break-after" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute fo:break-after}.
@@ -136,8 +136,7 @@ public class FoBreakAfterAttribute extends OdfAttribute {
 	 */
 	@Override
 	public String getValue(){
-		try{
-			return Value.enumValueOf(super.getValue()).toString();		
+		try{return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of fo:break-after is not valid");

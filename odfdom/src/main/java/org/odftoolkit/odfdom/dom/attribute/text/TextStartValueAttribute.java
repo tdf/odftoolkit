@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextOutlineLevelStyleElement;
  */
 public class TextStartValueAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "start-value" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "start-value" );
 	public static final String DEFAULT_VALUE = "1";
 
 	/**
@@ -86,22 +86,22 @@ public class TextStartValueAttribute extends OdfAttribute {
 			try {
 				if( parentElement instanceof TextHElement ){
 					//2DO: need validate value against NonNegativeInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextListItemElement ){
 					//2DO: need validate value against NonNegativeInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextListLevelStyleNumberElement ){
 					//2DO: need validate value against PositiveInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextNotesConfigurationElement ){
 					//2DO: need validate value against NonNegativeInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextNumberedParagraphElement ){
 					//2DO: need validate value against NonNegativeInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextOutlineLevelStyleElement ){
 					//2DO: need validate value against PositiveInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}			
 			} catch (NullPointerException e) {
 				// TODO: validation handling/logging
@@ -127,22 +127,27 @@ public class TextStartValueAttribute extends OdfAttribute {
 			try {
 				if( parentElement instanceof TextHElement ){
 					//2DO: need validate value against NonNegativeInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					return super.getValue();
 				}else if( parentElement instanceof TextListItemElement ){
 					//2DO: need validate value against NonNegativeInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextListLevelStyleNumberElement ){
 					//2DO: need validate value against PositiveInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextNotesConfigurationElement ){
 					//2DO: need validate value against NonNegativeInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextNumberedParagraphElement ){
 					//2DO: need validate value against NonNegativeInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextOutlineLevelStyleElement ){
 					//2DO: need validate value against PositiveInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}			
 			} catch (IllegalArgumentException e) {
 				// TODO: validation handling/logging

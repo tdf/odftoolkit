@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class Dr3dTextureFilterAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "texture-filter" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DR3D, "texture-filter" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute dr3d:texture-filter}.
@@ -136,8 +136,7 @@ public class Dr3dTextureFilterAttribute extends OdfAttribute {
 	 */
 	@Override
 	public String getValue(){
-		try{
-			return Value.enumValueOf(super.getValue()).toString();		
+		try{return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of dr3d:texture-filter is not valid");

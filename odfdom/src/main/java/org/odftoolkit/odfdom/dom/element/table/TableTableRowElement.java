@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
  */
 public abstract class TableTableRowElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "table-row" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-row" );
 
 
 	/**
@@ -56,7 +56,7 @@ public abstract class TableTableRowElement extends OdfStylableElement
 	 */
 	public TableTableRowElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableRow, OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableRow, OdfName.newName(OdfNamespaceNames.TABLE, "style-name" )	);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public abstract class TableTableRowElement extends OdfStylableElement
 	 */
 	public Integer getTableNumberRowsRepeatedAttribute()
 	{
-		TableNumberRowsRepeatedAttribute attr = (TableNumberRowsRepeatedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "number-rows-repeated" ) );
+		TableNumberRowsRepeatedAttribute attr = (TableNumberRowsRepeatedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "number-rows-repeated" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -105,7 +105,7 @@ public abstract class TableTableRowElement extends OdfStylableElement
 	 */
 	public String getTableStyleNameAttribute()
 	{
-		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "style-name" ) );
+		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -132,7 +132,7 @@ public abstract class TableTableRowElement extends OdfStylableElement
 	 */
 	public String getTableDefaultCellStyleNameAttribute()
 	{
-		TableDefaultCellStyleNameAttribute attr = (TableDefaultCellStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "default-cell-style-name" ) );
+		TableDefaultCellStyleNameAttribute attr = (TableDefaultCellStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "default-cell-style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -159,7 +159,7 @@ public abstract class TableTableRowElement extends OdfStylableElement
 	 */
 	public String getTableVisibilityAttribute()
 	{
-		TableVisibilityAttribute attr = (TableVisibilityAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "visibility" ) );
+		TableVisibilityAttribute attr = (TableVisibilityAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "visibility" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -186,7 +186,7 @@ public abstract class TableTableRowElement extends OdfStylableElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

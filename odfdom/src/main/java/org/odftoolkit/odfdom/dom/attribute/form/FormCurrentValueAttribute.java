@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.element.form.FormTimeElement;
  */
 public class FormCurrentValueAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "current-value" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FORM, "current-value" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute form:current-value}.
@@ -95,7 +95,7 @@ public class FormCurrentValueAttribute extends OdfAttribute {
 				}else if( parentElement instanceof FormFormattedTextElement ){
 					super.setValue(attrValue);
 				}else if( parentElement instanceof FormNumberElement ){
-					super.setValue(Double.toString(Double.parseDouble(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof FormTextElement ){
 					super.setValue(attrValue);
 				}else if( parentElement instanceof FormTextareaElement ){
@@ -136,7 +136,8 @@ public class FormCurrentValueAttribute extends OdfAttribute {
 				}else if( parentElement instanceof FormFormattedTextElement ){
 					return super.getValue();
 				}else if( parentElement instanceof FormNumberElement ){
-					return String.valueOf(Double.parseDouble(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof FormTextElement ){
 					return super.getValue();
 				}else if( parentElement instanceof FormTextareaElement ){

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextSortAscendingAttribute;
  */
 public abstract class TextSortKeyElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "sort-key" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "sort-key" );
 
 
 	/**
@@ -83,7 +83,7 @@ public abstract class TextSortKeyElement extends OdfElement
 	 */
 	public String getTextKeyAttribute()
 	{
-		TextKeyAttribute attr = (TextKeyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "key" ) );
+		TextKeyAttribute attr = (TextKeyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "key" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public abstract class TextSortKeyElement extends OdfElement
 	 */
 	public Boolean getTextSortAscendingAttribute()
 	{
-		TextSortAscendingAttribute attr = (TextSortAscendingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "sort-ascending" ) );
+		TextSortAscendingAttribute attr = (TextSortAscendingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "sort-ascending" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

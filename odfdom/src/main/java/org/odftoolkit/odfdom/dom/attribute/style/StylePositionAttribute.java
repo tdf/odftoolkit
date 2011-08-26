@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextIndexEntryTabStopElement;
  */
 public class StylePositionAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "position" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "position" );
 	public static final String DEFAULT_VALUE = "center";
 
 	/**

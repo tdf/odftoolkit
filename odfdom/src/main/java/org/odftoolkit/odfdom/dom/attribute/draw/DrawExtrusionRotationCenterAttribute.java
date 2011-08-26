@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DrawExtrusionRotationCenterAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "extrusion-rotation-center" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "extrusion-rotation-center" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:extrusion-rotation-center}.

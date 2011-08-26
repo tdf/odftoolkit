@@ -77,7 +77,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextUserIndexEntryTemplateElement;
  */
 public class TextStyleNameAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "style-name" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:style-name}.

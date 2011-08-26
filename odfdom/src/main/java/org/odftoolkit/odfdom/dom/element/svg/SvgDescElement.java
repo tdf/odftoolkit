@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public abstract class SvgDescElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "desc" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SVG, "desc" );
 
 
 	/**

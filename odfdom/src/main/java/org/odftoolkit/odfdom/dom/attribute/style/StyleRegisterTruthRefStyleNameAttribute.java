@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class StyleRegisterTruthRefStyleNameAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "register-truth-ref-style-name" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "register-truth-ref-style-name" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:register-truth-ref-style-name}.

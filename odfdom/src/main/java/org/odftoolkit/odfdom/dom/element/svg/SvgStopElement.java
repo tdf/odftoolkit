@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgStopOpacityAttribute;
  */
 public abstract class SvgStopElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "stop" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SVG, "stop" );
 
 
 	/**
@@ -84,7 +84,7 @@ public abstract class SvgStopElement extends OdfElement
 	 */
 	public String getSvgOffsetAttribute()
 	{
-		SvgOffsetAttribute attr = (SvgOffsetAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "offset" ) );
+		SvgOffsetAttribute attr = (SvgOffsetAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "offset" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -111,7 +111,7 @@ public abstract class SvgStopElement extends OdfElement
 	 */
 	public String getSvgStopColorAttribute()
 	{
-		SvgStopColorAttribute attr = (SvgStopColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "stop-color" ) );
+		SvgStopColorAttribute attr = (SvgStopColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stop-color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -138,7 +138,7 @@ public abstract class SvgStopElement extends OdfElement
 	 */
 	public Double getSvgStopOpacityAttribute()
 	{
-		SvgStopOpacityAttribute attr = (SvgStopOpacityAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "stop-opacity" ) );
+		SvgStopOpacityAttribute attr = (SvgStopOpacityAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "stop-opacity" ) );
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}

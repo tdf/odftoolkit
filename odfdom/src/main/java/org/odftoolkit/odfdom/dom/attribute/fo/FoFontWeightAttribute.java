@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class FoFontWeightAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-weight" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FO, "font-weight" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute fo:font-weight}.
@@ -136,8 +136,7 @@ public class FoFontWeightAttribute extends OdfAttribute {
 	 */
 	@Override
 	public String getValue(){
-		try{
-			return Value.enumValueOf(super.getValue()).toString();		
+		try{return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of fo:font-weight is not valid");

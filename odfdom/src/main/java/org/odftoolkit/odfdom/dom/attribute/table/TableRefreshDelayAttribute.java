@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableSourceElement;
  */
 public class TableRefreshDelayAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "refresh-delay" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "refresh-delay" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:refresh-delay}.
@@ -84,7 +84,7 @@ public class TableRefreshDelayAttribute extends OdfAttribute {
 					//2DO: need validate value against DurationType
 					super.setValue(attrValue);
 				}else if( parentElement instanceof TableDatabaseRangeElement ){
-					super.setValue(Boolean.toString(Boolean.parseBoolean(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TableTableSourceElement ){
 					//2DO: need validate value against DurationType
 					super.setValue(attrValue);
@@ -115,7 +115,8 @@ public class TableRefreshDelayAttribute extends OdfAttribute {
 					//2DO: need validate value against DurationType
 					return super.getValue();
 				}else if( parentElement instanceof TableDatabaseRangeElement ){
-					return String.valueOf(Boolean.parseBoolean(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TableTableSourceElement ){
 					//2DO: need validate value against DurationType
 					return super.getValue();

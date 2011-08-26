@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  */
 public abstract class TableContentValidationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "content-validation" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "content-validation" );
 
 
 	/**
@@ -86,7 +86,7 @@ public abstract class TableContentValidationElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "name" ) );
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public abstract class TableContentValidationElement extends OdfElement
 	 */
 	public String getTableConditionAttribute()
 	{
-		TableConditionAttribute attr = (TableConditionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "condition" ) );
+		TableConditionAttribute attr = (TableConditionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "condition" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public abstract class TableContentValidationElement extends OdfElement
 	 */
 	public String getTableBaseCellAddressAttribute()
 	{
-		TableBaseCellAddressAttribute attr = (TableBaseCellAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "base-cell-address" ) );
+		TableBaseCellAddressAttribute attr = (TableBaseCellAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "base-cell-address" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -167,7 +167,7 @@ public abstract class TableContentValidationElement extends OdfElement
 	 */
 	public Boolean getTableAllowEmptyCellAttribute()
 	{
-		TableAllowEmptyCellAttribute attr = (TableAllowEmptyCellAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "allow-empty-cell" ) );
+		TableAllowEmptyCellAttribute attr = (TableAllowEmptyCellAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "allow-empty-cell" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -194,7 +194,7 @@ public abstract class TableContentValidationElement extends OdfElement
 	 */
 	public String getTableDisplayListAttribute()
 	{
-		TableDisplayListAttribute attr = (TableDisplayListAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display-list" ) );
+		TableDisplayListAttribute attr = (TableDisplayListAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display-list" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

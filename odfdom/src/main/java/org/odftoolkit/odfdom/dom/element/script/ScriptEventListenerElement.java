@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
  */
 public abstract class ScriptEventListenerElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SCRIPT), "event-listener" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SCRIPT, "event-listener" );
 
 	/**
 	 * The value set of {@odf.attribute xlink:actuate}.
@@ -128,7 +128,7 @@ public abstract class ScriptEventListenerElement extends OdfElement
 	 */
 	public String getScriptEventNameAttribute()
 	{
-		ScriptEventNameAttribute attr = (ScriptEventNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SCRIPT), "event-name" ) );
+		ScriptEventNameAttribute attr = (ScriptEventNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SCRIPT), "event-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -155,7 +155,7 @@ public abstract class ScriptEventListenerElement extends OdfElement
 	 */
 	public String getScriptLanguageAttribute()
 	{
-		ScriptLanguageAttribute attr = (ScriptLanguageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SCRIPT), "language" ) );
+		ScriptLanguageAttribute attr = (ScriptLanguageAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SCRIPT), "language" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -182,7 +182,7 @@ public abstract class ScriptEventListenerElement extends OdfElement
 	 */
 	public String getScriptMacroNameAttribute()
 	{
-		ScriptMacroNameAttribute attr = (ScriptMacroNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SCRIPT), "macro-name" ) );
+		ScriptMacroNameAttribute attr = (ScriptMacroNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SCRIPT), "macro-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -209,7 +209,7 @@ public abstract class ScriptEventListenerElement extends OdfElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "type" ) );
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -236,7 +236,7 @@ public abstract class ScriptEventListenerElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -263,7 +263,7 @@ public abstract class ScriptEventListenerElement extends OdfElement
 	 */
 	public String getXlinkActuateAttribute()
 	{
-		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "actuate" ) );
+		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

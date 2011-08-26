@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DbDefaultCellStyleNameAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "default-cell-style-name" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DB, "default-cell-style-name" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute db:default-cell-style-name}.

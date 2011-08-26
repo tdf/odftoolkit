@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class OfficeStringValueAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "string-value" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.OFFICE, "string-value" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute office:string-value}.

@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class SmilSubtypeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "subtype" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.SMIL, "subtype" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute smil:subtype}.

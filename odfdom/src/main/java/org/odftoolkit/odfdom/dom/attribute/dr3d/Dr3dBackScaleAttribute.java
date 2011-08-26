@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class Dr3dBackScaleAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "back-scale" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DR3D, "back-scale" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute dr3d:back-scale}.

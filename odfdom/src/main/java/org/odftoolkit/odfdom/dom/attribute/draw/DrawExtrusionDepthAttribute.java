@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class DrawExtrusionDepthAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "extrusion-depth" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "extrusion-depth" );
 	public static final String DEFAULT_VALUE = "36pt 0";
 
 	/**

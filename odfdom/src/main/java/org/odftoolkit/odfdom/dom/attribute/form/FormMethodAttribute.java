@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class FormMethodAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "method" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FORM, "method" );
 	public static final String DEFAULT_VALUE = "get";
 
 	/**

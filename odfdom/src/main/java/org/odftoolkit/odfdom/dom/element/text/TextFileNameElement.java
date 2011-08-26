@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextFixedAttribute;
  */
 public abstract class TextFileNameElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "file-name" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "file-name" );
 
 	/**
 	 * The value set of {@odf.attribute text:display}.
@@ -106,7 +106,7 @@ public abstract class TextFileNameElement extends OdfElement
 	 */
 	public String getTextDisplayAttribute()
 	{
-		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "display" ) );
+		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -133,7 +133,7 @@ public abstract class TextFileNameElement extends OdfElement
 	 */
 	public Boolean getTextFixedAttribute()
 	{
-		TextFixedAttribute attr = (TextFixedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "fixed" ) );
+		TextFixedAttribute attr = (TextFixedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "fixed" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

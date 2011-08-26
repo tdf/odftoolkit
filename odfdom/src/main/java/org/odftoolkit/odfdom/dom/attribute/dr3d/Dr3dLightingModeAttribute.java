@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
  */
 public class Dr3dLightingModeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "lighting-mode" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DR3D, "lighting-mode" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute dr3d:lighting-mode}.
@@ -128,9 +128,9 @@ public class Dr3dLightingModeAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof ChartPlotAreaElement ){
-					super.setValue(Boolean.toString(Boolean.parseBoolean(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof Dr3dSceneElement ){
-					super.setValue(Boolean.toString(Boolean.parseBoolean(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof StyleGraphicPropertiesElement ){
 					super.setValue(StyleGraphicPropertiesElement.Dr3dLightingModeAttributeValue.enumValueOf(attrValue).toString());
 				}			
@@ -157,9 +157,10 @@ public class Dr3dLightingModeAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof ChartPlotAreaElement ){
-					return String.valueOf(Boolean.parseBoolean(super.getValue()));
+					return super.getValue();
 				}else if( parentElement instanceof Dr3dSceneElement ){
-					return String.valueOf(Boolean.parseBoolean(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof StyleGraphicPropertiesElement ){
 					return StyleGraphicPropertiesElement.Dr3dLightingModeAttributeValue.enumValueOf(super.getValue()).toString();
 				}			

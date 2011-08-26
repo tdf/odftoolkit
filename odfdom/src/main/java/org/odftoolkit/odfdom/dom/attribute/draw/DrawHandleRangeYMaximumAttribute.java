@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DrawHandleRangeYMaximumAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "handle-range-y-maximum" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "handle-range-y-maximum" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:handle-range-y-maximum}.

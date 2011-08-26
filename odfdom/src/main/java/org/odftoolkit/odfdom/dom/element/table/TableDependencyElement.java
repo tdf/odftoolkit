@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableIdAttribute;
  */
 public abstract class TableDependencyElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "dependency" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "dependency" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class TableDependencyElement extends OdfElement
 	 */
 	public String getTableIdAttribute()
 	{
-		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "id" ) );
+		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

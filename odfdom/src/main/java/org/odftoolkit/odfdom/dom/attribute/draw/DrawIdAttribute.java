@@ -63,7 +63,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
  */
 public class DrawIdAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "id" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "id" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:id}.
@@ -142,7 +142,7 @@ public class DrawIdAttribute extends OdfAttribute {
 					super.setValue(attrValue);
 				}else if( parentElement instanceof DrawGluePointElement ){
 					//2DO: need validate value against NonNegativeInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof DrawLineElement ){
 					//2DO: need validate value against NCName
 					super.setValue(attrValue);
@@ -237,7 +237,8 @@ public class DrawIdAttribute extends OdfAttribute {
 					return super.getValue();
 				}else if( parentElement instanceof DrawGluePointElement ){
 					//2DO: need validate value against NonNegativeInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof DrawLineElement ){
 					//2DO: need validate value against NCName
 					return super.getValue();

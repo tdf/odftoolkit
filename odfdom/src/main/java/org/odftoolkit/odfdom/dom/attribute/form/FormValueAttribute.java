@@ -55,7 +55,7 @@ import org.odftoolkit.odfdom.dom.element.form.FormValueRangeElement;
  */
 public class FormValueAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "value" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FORM, "value" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute form:value}.
@@ -111,7 +111,7 @@ public class FormValueAttribute extends OdfAttribute {
 				}else if( parentElement instanceof FormImageElement ){
 					super.setValue(attrValue);
 				}else if( parentElement instanceof FormNumberElement ){
-					super.setValue(Double.toString(Double.parseDouble(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof FormOptionElement ){
 					super.setValue(attrValue);
 				}else if( parentElement instanceof FormPasswordElement ){
@@ -168,7 +168,8 @@ public class FormValueAttribute extends OdfAttribute {
 				}else if( parentElement instanceof FormImageElement ){
 					return super.getValue();
 				}else if( parentElement instanceof FormNumberElement ){
-					return String.valueOf(Double.parseDouble(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof FormOptionElement ){
 					return super.getValue();
 				}else if( parentElement instanceof FormPasswordElement ){

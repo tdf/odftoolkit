@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class FoEndIndentAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "end-indent" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FO, "end-indent" );
 	public static final String DEFAULT_VALUE = "0cm";
 
 	/**

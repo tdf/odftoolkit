@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableEndPositionAttribute;
  */
 public abstract class TableMovementCutOffElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "movement-cut-off" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "movement-cut-off" );
 
 
 	/**
@@ -88,7 +88,7 @@ public abstract class TableMovementCutOffElement extends OdfElement
 	 */
 	public Integer getTablePositionAttribute()
 	{
-		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "position" ) );
+		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "position" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -115,7 +115,7 @@ public abstract class TableMovementCutOffElement extends OdfElement
 	 */
 	public Integer getTableStartPositionAttribute()
 	{
-		TableStartPositionAttribute attr = (TableStartPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "start-position" ) );
+		TableStartPositionAttribute attr = (TableStartPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "start-position" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -142,7 +142,7 @@ public abstract class TableMovementCutOffElement extends OdfElement
 	 */
 	public Integer getTableEndPositionAttribute()
 	{
-		TableEndPositionAttribute attr = (TableEndPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "end-position" ) );
+		TableEndPositionAttribute attr = (TableEndPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "end-position" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

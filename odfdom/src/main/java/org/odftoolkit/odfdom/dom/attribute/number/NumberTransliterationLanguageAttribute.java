@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class NumberTransliterationLanguageAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "transliteration-language" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.NUMBER, "transliteration-language" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute number:transliteration-language}.

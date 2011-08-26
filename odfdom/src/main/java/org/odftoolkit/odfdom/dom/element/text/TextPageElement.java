@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextMasterPageNameAttribute;
  */
 public abstract class TextPageElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "page" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "page" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class TextPageElement extends OdfElement
 	 */
 	public String getTextMasterPageNameAttribute()
 	{
-		TextMasterPageNameAttribute attr = (TextMasterPageNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "master-page-name" ) );
+		TextMasterPageNameAttribute attr = (TextMasterPageNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "master-page-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

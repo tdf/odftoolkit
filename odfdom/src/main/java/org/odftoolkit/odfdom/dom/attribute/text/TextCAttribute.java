@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class TextCAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "c" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "c" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:c}.
@@ -79,6 +79,7 @@ public class TextCAttribute extends OdfAttribute {
 	 * @return Returns the <code>int</code> value of the attribute
 	 */
 	public int intValue(){
+		
 		String value = super.getValue();
 		try {
         	//2DO: need validate value against NonNegativeInteger
@@ -96,7 +97,7 @@ public class TextCAttribute extends OdfAttribute {
 	public void setValue(String attrValue) {
 		try{
 			//2DO: need validate value against NonNegativeInteger
-			super.setValue(Integer.toString(Integer.parseInt(attrValue)));	
+			super.setValue(attrValue);	
 		}  catch (NullPointerException e) {
 			// TODO: validation handling/logging
 			throw new IllegalArgumentException(e);
@@ -113,7 +114,7 @@ public class TextCAttribute extends OdfAttribute {
 	public String getValue(){
 		try{
 			//2DO: need validate value against NonNegativeInteger
-			return String.valueOf(Integer.parseInt(super.getValue()));		
+			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of text:c is not valid");

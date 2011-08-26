@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeNameAttribute;
  */
 public abstract class OfficeAnnotationEndElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "annotation-end" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "annotation-end" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class OfficeAnnotationEndElement extends OdfElement
 	 */
 	public String getOfficeNameAttribute()
 	{
-		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "name" ) );
+		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

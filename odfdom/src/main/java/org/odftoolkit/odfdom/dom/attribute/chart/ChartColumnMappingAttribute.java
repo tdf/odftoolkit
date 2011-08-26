@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class ChartColumnMappingAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "column-mapping" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.CHART, "column-mapping" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute chart:column-mapping}.

@@ -96,7 +96,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
  */
 public abstract class StyleParagraphPropertiesElement extends OdfStylePropertiesBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "paragraph-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "paragraph-properties" );
 
 	/**
 	 * The value set of {@odf.attribute style:vertical-align}.
@@ -152,111 +152,111 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	}
 
     public final static OdfStyleProperty LineHeight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "line-height"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "line-height"));
     public final static OdfStyleProperty LineHeightAtLeast = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "line-height-at-least"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "line-height-at-least"));
     public final static OdfStyleProperty LineSpacing = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "line-spacing"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "line-spacing"));
     public final static OdfStyleProperty FontIndependentLineSpacing = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-independent-line-spacing"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-independent-line-spacing"));
     public final static OdfStyleProperty TextAlign = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-align"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "text-align"));
     public final static OdfStyleProperty TextAlignLast = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-align-last"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "text-align-last"));
     public final static OdfStyleProperty JustifySingleWord = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "justify-single-word"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "justify-single-word"));
     public final static OdfStyleProperty KeepTogether = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "keep-together"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "keep-together"));
     public final static OdfStyleProperty Widows = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "widows"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "widows"));
     public final static OdfStyleProperty Orphans = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "orphans"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "orphans"));
     public final static OdfStyleProperty TabStopDistance = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "tab-stop-distance"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "tab-stop-distance"));
     public final static OdfStyleProperty HyphenationKeep = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenation-keep"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "hyphenation-keep"));
     public final static OdfStyleProperty HyphenationLadderCount = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenation-ladder-count"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "hyphenation-ladder-count"));
     public final static OdfStyleProperty RegisterTrue = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "register-true"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "register-true"));
     public final static OdfStyleProperty MarginLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "margin-left"));
     public final static OdfStyleProperty MarginRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "margin-right"));
     public final static OdfStyleProperty TextIndent = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-indent"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "text-indent"));
     public final static OdfStyleProperty AutoTextIndent = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "auto-text-indent"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "auto-text-indent"));
     public final static OdfStyleProperty MarginTop = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-top"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "margin-top"));
     public final static OdfStyleProperty MarginBottom = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-bottom"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "margin-bottom"));
     public final static OdfStyleProperty Margin = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "margin"));
     public final static OdfStyleProperty BreakBefore = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "break-before"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "break-before"));
     public final static OdfStyleProperty BreakAfter = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "break-after"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "break-after"));
     public final static OdfStyleProperty BackgroundColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "background-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "background-color"));
     public final static OdfStyleProperty Border = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "border"));
     public final static OdfStyleProperty BorderTop = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border-top"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "border-top"));
     public final static OdfStyleProperty BorderBottom = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border-bottom"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "border-bottom"));
     public final static OdfStyleProperty BorderLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "border-left"));
     public final static OdfStyleProperty BorderRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "border-right"));
     public final static OdfStyleProperty BorderLineWidth = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "border-line-width"));
     public final static OdfStyleProperty BorderLineWidthTop = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-top"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "border-line-width-top"));
     public final static OdfStyleProperty BorderLineWidthBottom = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-bottom"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "border-line-width-bottom"));
     public final static OdfStyleProperty BorderLineWidthLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "border-line-width-left"));
     public final static OdfStyleProperty BorderLineWidthRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "border-line-width-right"));
     public final static OdfStyleProperty JoinBorder = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "join-border"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "join-border"));
     public final static OdfStyleProperty Padding = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "padding"));
     public final static OdfStyleProperty PaddingTop = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding-top"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "padding-top"));
     public final static OdfStyleProperty PaddingBottom = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding-bottom"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "padding-bottom"));
     public final static OdfStyleProperty PaddingLeft = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding-left"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "padding-left"));
     public final static OdfStyleProperty PaddingRight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding-right"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "padding-right"));
     public final static OdfStyleProperty Shadow = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "shadow"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "shadow"));
     public final static OdfStyleProperty KeepWithNext = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "keep-with-next"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.FO, "keep-with-next"));
     public final static OdfStyleProperty NumberLines = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "number-lines"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.TEXT, "number-lines"));
     public final static OdfStyleProperty LineNumber = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "line-number"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.TEXT, "line-number"));
     public final static OdfStyleProperty TextAutospace = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-autospace"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-autospace"));
     public final static OdfStyleProperty PunctuationWrap = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "punctuation-wrap"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "punctuation-wrap"));
     public final static OdfStyleProperty LineBreak = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "line-break"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "line-break"));
     public final static OdfStyleProperty VerticalAlign = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "vertical-align"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "vertical-align"));
     public final static OdfStyleProperty WritingMode = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "writing-mode"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "writing-mode"));
     public final static OdfStyleProperty WritingModeAutomatic = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "writing-mode-automatic"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "writing-mode-automatic"));
     public final static OdfStyleProperty SnapToLayoutGrid = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "snap-to-layout-grid"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "snap-to-layout-grid"));
     public final static OdfStyleProperty PageNumber = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "page-number"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "page-number"));
     public final static OdfStyleProperty BackgroundTransparency = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "background-transparency"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.newName(OdfNamespaceNames.STYLE, "background-transparency"));
 
 
 	/**
@@ -266,7 +266,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoLineHeightAttribute()
 	{
-		FoLineHeightAttribute attr = (FoLineHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "line-height" ) );
+		FoLineHeightAttribute attr = (FoLineHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "line-height" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -293,7 +293,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleLineHeightAtLeastAttribute()
 	{
-		StyleLineHeightAtLeastAttribute attr = (StyleLineHeightAtLeastAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "line-height-at-least" ) );
+		StyleLineHeightAtLeastAttribute attr = (StyleLineHeightAtLeastAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "line-height-at-least" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -320,7 +320,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleLineSpacingAttribute()
 	{
-		StyleLineSpacingAttribute attr = (StyleLineSpacingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "line-spacing" ) );
+		StyleLineSpacingAttribute attr = (StyleLineSpacingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "line-spacing" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -347,7 +347,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public Boolean getStyleFontIndependentLineSpacingAttribute()
 	{
-		StyleFontIndependentLineSpacingAttribute attr = (StyleFontIndependentLineSpacingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-independent-line-spacing" ) );
+		StyleFontIndependentLineSpacingAttribute attr = (StyleFontIndependentLineSpacingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-independent-line-spacing" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -374,7 +374,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoTextAlignAttribute()
 	{
-		FoTextAlignAttribute attr = (FoTextAlignAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-align" ) );
+		FoTextAlignAttribute attr = (FoTextAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "text-align" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -401,7 +401,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoTextAlignLastAttribute()
 	{
-		FoTextAlignLastAttribute attr = (FoTextAlignLastAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-align-last" ) );
+		FoTextAlignLastAttribute attr = (FoTextAlignLastAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "text-align-last" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -428,7 +428,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public Boolean getStyleJustifySingleWordAttribute()
 	{
-		StyleJustifySingleWordAttribute attr = (StyleJustifySingleWordAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "justify-single-word" ) );
+		StyleJustifySingleWordAttribute attr = (StyleJustifySingleWordAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "justify-single-word" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -455,7 +455,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoKeepTogetherAttribute()
 	{
-		FoKeepTogetherAttribute attr = (FoKeepTogetherAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "keep-together" ) );
+		FoKeepTogetherAttribute attr = (FoKeepTogetherAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "keep-together" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -482,7 +482,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public Integer getFoWidowsAttribute()
 	{
-		FoWidowsAttribute attr = (FoWidowsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "widows" ) );
+		FoWidowsAttribute attr = (FoWidowsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "widows" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -509,7 +509,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public Integer getFoOrphansAttribute()
 	{
-		FoOrphansAttribute attr = (FoOrphansAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "orphans" ) );
+		FoOrphansAttribute attr = (FoOrphansAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "orphans" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -536,7 +536,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleTabStopDistanceAttribute()
 	{
-		StyleTabStopDistanceAttribute attr = (StyleTabStopDistanceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "tab-stop-distance" ) );
+		StyleTabStopDistanceAttribute attr = (StyleTabStopDistanceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "tab-stop-distance" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -563,7 +563,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoHyphenationKeepAttribute()
 	{
-		FoHyphenationKeepAttribute attr = (FoHyphenationKeepAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenation-keep" ) );
+		FoHyphenationKeepAttribute attr = (FoHyphenationKeepAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "hyphenation-keep" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -590,7 +590,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoHyphenationLadderCountAttribute()
 	{
-		FoHyphenationLadderCountAttribute attr = (FoHyphenationLadderCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenation-ladder-count" ) );
+		FoHyphenationLadderCountAttribute attr = (FoHyphenationLadderCountAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "hyphenation-ladder-count" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -617,7 +617,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public Boolean getStyleRegisterTrueAttribute()
 	{
-		StyleRegisterTrueAttribute attr = (StyleRegisterTrueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "register-true" ) );
+		StyleRegisterTrueAttribute attr = (StyleRegisterTrueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "register-true" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -644,7 +644,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoMarginLeftAttribute()
 	{
-		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-left" ) );
+		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-left" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -671,7 +671,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoMarginRightAttribute()
 	{
-		FoMarginRightAttribute attr = (FoMarginRightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-right" ) );
+		FoMarginRightAttribute attr = (FoMarginRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-right" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -698,7 +698,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoTextIndentAttribute()
 	{
-		FoTextIndentAttribute attr = (FoTextIndentAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-indent" ) );
+		FoTextIndentAttribute attr = (FoTextIndentAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "text-indent" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -725,7 +725,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public Boolean getStyleAutoTextIndentAttribute()
 	{
-		StyleAutoTextIndentAttribute attr = (StyleAutoTextIndentAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "auto-text-indent" ) );
+		StyleAutoTextIndentAttribute attr = (StyleAutoTextIndentAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "auto-text-indent" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -752,7 +752,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoMarginTopAttribute()
 	{
-		FoMarginTopAttribute attr = (FoMarginTopAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-top" ) );
+		FoMarginTopAttribute attr = (FoMarginTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-top" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -779,7 +779,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoMarginBottomAttribute()
 	{
-		FoMarginBottomAttribute attr = (FoMarginBottomAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-bottom" ) );
+		FoMarginBottomAttribute attr = (FoMarginBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-bottom" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -806,7 +806,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoMarginAttribute()
 	{
-		FoMarginAttribute attr = (FoMarginAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin" ) );
+		FoMarginAttribute attr = (FoMarginAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -833,7 +833,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoBreakBeforeAttribute()
 	{
-		FoBreakBeforeAttribute attr = (FoBreakBeforeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "break-before" ) );
+		FoBreakBeforeAttribute attr = (FoBreakBeforeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-before" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -860,7 +860,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoBreakAfterAttribute()
 	{
-		FoBreakAfterAttribute attr = (FoBreakAfterAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "break-after" ) );
+		FoBreakAfterAttribute attr = (FoBreakAfterAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-after" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -887,7 +887,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoBackgroundColorAttribute()
 	{
-		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "background-color" ) );
+		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -914,7 +914,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoBorderAttribute()
 	{
-		FoBorderAttribute attr = (FoBorderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border" ) );
+		FoBorderAttribute attr = (FoBorderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -941,7 +941,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoBorderTopAttribute()
 	{
-		FoBorderTopAttribute attr = (FoBorderTopAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border-top" ) );
+		FoBorderTopAttribute attr = (FoBorderTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-top" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -968,7 +968,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoBorderBottomAttribute()
 	{
-		FoBorderBottomAttribute attr = (FoBorderBottomAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border-bottom" ) );
+		FoBorderBottomAttribute attr = (FoBorderBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-bottom" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -995,7 +995,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoBorderLeftAttribute()
 	{
-		FoBorderLeftAttribute attr = (FoBorderLeftAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border-left" ) );
+		FoBorderLeftAttribute attr = (FoBorderLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-left" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1022,7 +1022,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoBorderRightAttribute()
 	{
-		FoBorderRightAttribute attr = (FoBorderRightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border-right" ) );
+		FoBorderRightAttribute attr = (FoBorderRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "border-right" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1049,7 +1049,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleBorderLineWidthAttribute()
 	{
-		StyleBorderLineWidthAttribute attr = (StyleBorderLineWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width" ) );
+		StyleBorderLineWidthAttribute attr = (StyleBorderLineWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1076,7 +1076,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleBorderLineWidthTopAttribute()
 	{
-		StyleBorderLineWidthTopAttribute attr = (StyleBorderLineWidthTopAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-top" ) );
+		StyleBorderLineWidthTopAttribute attr = (StyleBorderLineWidthTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-top" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1103,7 +1103,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleBorderLineWidthBottomAttribute()
 	{
-		StyleBorderLineWidthBottomAttribute attr = (StyleBorderLineWidthBottomAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-bottom" ) );
+		StyleBorderLineWidthBottomAttribute attr = (StyleBorderLineWidthBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-bottom" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1130,7 +1130,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleBorderLineWidthLeftAttribute()
 	{
-		StyleBorderLineWidthLeftAttribute attr = (StyleBorderLineWidthLeftAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-left" ) );
+		StyleBorderLineWidthLeftAttribute attr = (StyleBorderLineWidthLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-left" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1157,7 +1157,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleBorderLineWidthRightAttribute()
 	{
-		StyleBorderLineWidthRightAttribute attr = (StyleBorderLineWidthRightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-right" ) );
+		StyleBorderLineWidthRightAttribute attr = (StyleBorderLineWidthRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "border-line-width-right" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1184,7 +1184,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public Boolean getStyleJoinBorderAttribute()
 	{
-		StyleJoinBorderAttribute attr = (StyleJoinBorderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "join-border" ) );
+		StyleJoinBorderAttribute attr = (StyleJoinBorderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "join-border" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1211,7 +1211,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoPaddingAttribute()
 	{
-		FoPaddingAttribute attr = (FoPaddingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding" ) );
+		FoPaddingAttribute attr = (FoPaddingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1238,7 +1238,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoPaddingTopAttribute()
 	{
-		FoPaddingTopAttribute attr = (FoPaddingTopAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding-top" ) );
+		FoPaddingTopAttribute attr = (FoPaddingTopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-top" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1265,7 +1265,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoPaddingBottomAttribute()
 	{
-		FoPaddingBottomAttribute attr = (FoPaddingBottomAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding-bottom" ) );
+		FoPaddingBottomAttribute attr = (FoPaddingBottomAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-bottom" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1292,7 +1292,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoPaddingLeftAttribute()
 	{
-		FoPaddingLeftAttribute attr = (FoPaddingLeftAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding-left" ) );
+		FoPaddingLeftAttribute attr = (FoPaddingLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-left" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1319,7 +1319,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoPaddingRightAttribute()
 	{
-		FoPaddingRightAttribute attr = (FoPaddingRightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding-right" ) );
+		FoPaddingRightAttribute attr = (FoPaddingRightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "padding-right" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1346,7 +1346,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleShadowAttribute()
 	{
-		StyleShadowAttribute attr = (StyleShadowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "shadow" ) );
+		StyleShadowAttribute attr = (StyleShadowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "shadow" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1373,7 +1373,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getFoKeepWithNextAttribute()
 	{
-		FoKeepWithNextAttribute attr = (FoKeepWithNextAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "keep-with-next" ) );
+		FoKeepWithNextAttribute attr = (FoKeepWithNextAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "keep-with-next" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1400,7 +1400,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public Boolean getTextNumberLinesAttribute()
 	{
-		TextNumberLinesAttribute attr = (TextNumberLinesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "number-lines" ) );
+		TextNumberLinesAttribute attr = (TextNumberLinesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "number-lines" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1427,7 +1427,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public Integer getTextLineNumberAttribute()
 	{
-		TextLineNumberAttribute attr = (TextLineNumberAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "line-number" ) );
+		TextLineNumberAttribute attr = (TextLineNumberAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "line-number" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -1454,7 +1454,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleTextAutospaceAttribute()
 	{
-		StyleTextAutospaceAttribute attr = (StyleTextAutospaceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-autospace" ) );
+		StyleTextAutospaceAttribute attr = (StyleTextAutospaceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-autospace" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1481,7 +1481,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStylePunctuationWrapAttribute()
 	{
-		StylePunctuationWrapAttribute attr = (StylePunctuationWrapAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "punctuation-wrap" ) );
+		StylePunctuationWrapAttribute attr = (StylePunctuationWrapAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "punctuation-wrap" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1508,7 +1508,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleLineBreakAttribute()
 	{
-		StyleLineBreakAttribute attr = (StyleLineBreakAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "line-break" ) );
+		StyleLineBreakAttribute attr = (StyleLineBreakAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "line-break" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1535,7 +1535,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleVerticalAlignAttribute()
 	{
-		StyleVerticalAlignAttribute attr = (StyleVerticalAlignAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "vertical-align" ) );
+		StyleVerticalAlignAttribute attr = (StyleVerticalAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "vertical-align" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1562,7 +1562,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleWritingModeAttribute()
 	{
-		StyleWritingModeAttribute attr = (StyleWritingModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "writing-mode" ) );
+		StyleWritingModeAttribute attr = (StyleWritingModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1589,7 +1589,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public Boolean getStyleWritingModeAutomaticAttribute()
 	{
-		StyleWritingModeAutomaticAttribute attr = (StyleWritingModeAutomaticAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "writing-mode-automatic" ) );
+		StyleWritingModeAutomaticAttribute attr = (StyleWritingModeAutomaticAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "writing-mode-automatic" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1616,7 +1616,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public Boolean getStyleSnapToLayoutGridAttribute()
 	{
-		StyleSnapToLayoutGridAttribute attr = (StyleSnapToLayoutGridAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "snap-to-layout-grid" ) );
+		StyleSnapToLayoutGridAttribute attr = (StyleSnapToLayoutGridAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "snap-to-layout-grid" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -1643,7 +1643,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStylePageNumberAttribute()
 	{
-		StylePageNumberAttribute attr = (StylePageNumberAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "page-number" ) );
+		StylePageNumberAttribute attr = (StylePageNumberAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "page-number" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1670,7 +1670,7 @@ public abstract class StyleParagraphPropertiesElement extends OdfStyleProperties
 	 */
 	public String getStyleBackgroundTransparencyAttribute()
 	{
-		StyleBackgroundTransparencyAttribute attr = (StyleBackgroundTransparencyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "background-transparency" ) );
+		StyleBackgroundTransparencyAttribute attr = (StyleBackgroundTransparencyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "background-transparency" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

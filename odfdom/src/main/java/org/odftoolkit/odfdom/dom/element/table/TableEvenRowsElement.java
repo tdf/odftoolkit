@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableParagraphStyleNameAttribut
  */
 public abstract class TableEvenRowsElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "even-rows" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "even-rows" );
 
 
 	/**
@@ -53,7 +53,7 @@ public abstract class TableEvenRowsElement extends OdfStylableElement
 	 */
 	public TableEvenRowsElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.newName(OdfNamespaceNames.TABLE, "style-name" )	);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public abstract class TableEvenRowsElement extends OdfStylableElement
 	 */
 	public String getTableStyleNameAttribute()
 	{
-		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "style-name" ) );
+		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -111,7 +111,7 @@ public abstract class TableEvenRowsElement extends OdfStylableElement
 	 */
 	public String getTableParagraphStyleNameAttribute()
 	{
-		TableParagraphStyleNameAttribute attr = (TableParagraphStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "paragraph-style-name" ) );
+		TableParagraphStyleNameAttribute attr = (TableParagraphStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "paragraph-style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

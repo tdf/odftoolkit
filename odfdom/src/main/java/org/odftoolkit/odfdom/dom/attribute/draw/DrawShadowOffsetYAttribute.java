@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DrawShadowOffsetYAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "shadow-offset-y" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "shadow-offset-y" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:shadow-offset-y}.

@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class ChartAngleOffsetAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "angle-offset" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.CHART, "angle-offset" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute chart:angle-offset}.

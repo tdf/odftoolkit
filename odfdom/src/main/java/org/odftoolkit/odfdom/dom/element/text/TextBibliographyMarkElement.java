@@ -72,7 +72,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextIssnAttribute;
  */
 public abstract class TextBibliographyMarkElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "bibliography-mark" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "bibliography-mark" );
 
 
 	/**
@@ -175,7 +175,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextBibliographyTypeAttribute()
 	{
-		TextBibliographyTypeAttribute attr = (TextBibliographyTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "bibliography-type" ) );
+		TextBibliographyTypeAttribute attr = (TextBibliographyTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "bibliography-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -202,7 +202,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextIdentifierAttribute()
 	{
-		TextIdentifierAttribute attr = (TextIdentifierAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "identifier" ) );
+		TextIdentifierAttribute attr = (TextIdentifierAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "identifier" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -229,7 +229,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextAddressAttribute()
 	{
-		TextAddressAttribute attr = (TextAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "address" ) );
+		TextAddressAttribute attr = (TextAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "address" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -256,7 +256,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextAnnoteAttribute()
 	{
-		TextAnnoteAttribute attr = (TextAnnoteAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "annote" ) );
+		TextAnnoteAttribute attr = (TextAnnoteAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "annote" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -283,7 +283,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextAuthorAttribute()
 	{
-		TextAuthorAttribute attr = (TextAuthorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "author" ) );
+		TextAuthorAttribute attr = (TextAuthorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "author" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -310,7 +310,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextBooktitleAttribute()
 	{
-		TextBooktitleAttribute attr = (TextBooktitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "booktitle" ) );
+		TextBooktitleAttribute attr = (TextBooktitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "booktitle" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -337,7 +337,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextChapterAttribute()
 	{
-		TextChapterAttribute attr = (TextChapterAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "chapter" ) );
+		TextChapterAttribute attr = (TextChapterAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "chapter" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -364,7 +364,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextEditionAttribute()
 	{
-		TextEditionAttribute attr = (TextEditionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "edition" ) );
+		TextEditionAttribute attr = (TextEditionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "edition" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -391,7 +391,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextEditorAttribute()
 	{
-		TextEditorAttribute attr = (TextEditorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "editor" ) );
+		TextEditorAttribute attr = (TextEditorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "editor" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -418,7 +418,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextHowpublishedAttribute()
 	{
-		TextHowpublishedAttribute attr = (TextHowpublishedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "howpublished" ) );
+		TextHowpublishedAttribute attr = (TextHowpublishedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "howpublished" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -445,7 +445,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextInstitutionAttribute()
 	{
-		TextInstitutionAttribute attr = (TextInstitutionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "institution" ) );
+		TextInstitutionAttribute attr = (TextInstitutionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "institution" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -472,7 +472,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextJournalAttribute()
 	{
-		TextJournalAttribute attr = (TextJournalAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "journal" ) );
+		TextJournalAttribute attr = (TextJournalAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "journal" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -499,7 +499,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextMonthAttribute()
 	{
-		TextMonthAttribute attr = (TextMonthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "month" ) );
+		TextMonthAttribute attr = (TextMonthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "month" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -526,7 +526,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextNoteAttribute()
 	{
-		TextNoteAttribute attr = (TextNoteAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "note" ) );
+		TextNoteAttribute attr = (TextNoteAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "note" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -553,7 +553,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextNumberAttribute()
 	{
-		TextNumberAttribute attr = (TextNumberAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "number" ) );
+		TextNumberAttribute attr = (TextNumberAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "number" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -580,7 +580,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextOrganizationsAttribute()
 	{
-		TextOrganizationsAttribute attr = (TextOrganizationsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "organizations" ) );
+		TextOrganizationsAttribute attr = (TextOrganizationsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "organizations" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -607,7 +607,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextPagesAttribute()
 	{
-		TextPagesAttribute attr = (TextPagesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "pages" ) );
+		TextPagesAttribute attr = (TextPagesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "pages" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -634,7 +634,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextPublisherAttribute()
 	{
-		TextPublisherAttribute attr = (TextPublisherAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "publisher" ) );
+		TextPublisherAttribute attr = (TextPublisherAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "publisher" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -661,7 +661,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextSchoolAttribute()
 	{
-		TextSchoolAttribute attr = (TextSchoolAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "school" ) );
+		TextSchoolAttribute attr = (TextSchoolAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "school" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -688,7 +688,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextSeriesAttribute()
 	{
-		TextSeriesAttribute attr = (TextSeriesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "series" ) );
+		TextSeriesAttribute attr = (TextSeriesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "series" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -715,7 +715,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextTitleAttribute()
 	{
-		TextTitleAttribute attr = (TextTitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "title" ) );
+		TextTitleAttribute attr = (TextTitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "title" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -742,7 +742,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextReportTypeAttribute()
 	{
-		TextReportTypeAttribute attr = (TextReportTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "report-type" ) );
+		TextReportTypeAttribute attr = (TextReportTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "report-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -769,7 +769,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextVolumeAttribute()
 	{
-		TextVolumeAttribute attr = (TextVolumeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "volume" ) );
+		TextVolumeAttribute attr = (TextVolumeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "volume" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -796,7 +796,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextYearAttribute()
 	{
-		TextYearAttribute attr = (TextYearAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "year" ) );
+		TextYearAttribute attr = (TextYearAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "year" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -823,7 +823,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextUrlAttribute()
 	{
-		TextUrlAttribute attr = (TextUrlAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "url" ) );
+		TextUrlAttribute attr = (TextUrlAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "url" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -850,7 +850,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextCustom1Attribute()
 	{
-		TextCustom1Attribute attr = (TextCustom1Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "custom1" ) );
+		TextCustom1Attribute attr = (TextCustom1Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "custom1" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -877,7 +877,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextCustom2Attribute()
 	{
-		TextCustom2Attribute attr = (TextCustom2Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "custom2" ) );
+		TextCustom2Attribute attr = (TextCustom2Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "custom2" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -904,7 +904,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextCustom3Attribute()
 	{
-		TextCustom3Attribute attr = (TextCustom3Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "custom3" ) );
+		TextCustom3Attribute attr = (TextCustom3Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "custom3" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -931,7 +931,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextCustom4Attribute()
 	{
-		TextCustom4Attribute attr = (TextCustom4Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "custom4" ) );
+		TextCustom4Attribute attr = (TextCustom4Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "custom4" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -958,7 +958,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextCustom5Attribute()
 	{
-		TextCustom5Attribute attr = (TextCustom5Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "custom5" ) );
+		TextCustom5Attribute attr = (TextCustom5Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "custom5" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -985,7 +985,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextIsbnAttribute()
 	{
-		TextIsbnAttribute attr = (TextIsbnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "isbn" ) );
+		TextIsbnAttribute attr = (TextIsbnAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "isbn" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1012,7 +1012,7 @@ public abstract class TextBibliographyMarkElement extends OdfElement
 	 */
 	public String getTextIssnAttribute()
 	{
-		TextIssnAttribute attr = (TextIssnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "issn" ) );
+		TextIssnAttribute attr = (TextIssnAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "issn" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

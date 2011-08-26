@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class TextStringValuePhoneticAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "string-value-phonetic" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "string-value-phonetic" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:string-value-phonetic}.

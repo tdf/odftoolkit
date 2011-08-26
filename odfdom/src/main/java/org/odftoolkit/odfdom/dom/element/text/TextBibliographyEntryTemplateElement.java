@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
  */
 public abstract class TextBibliographyEntryTemplateElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "bibliography-entry-template" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "bibliography-entry-template" );
 
 
 	/**
@@ -53,7 +53,7 @@ public abstract class TextBibliographyEntryTemplateElement extends OdfStylableEl
 	 */
 	public TextBibliographyEntryTemplateElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Paragraph, OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Paragraph, OdfName.newName(OdfNamespaceNames.TEXT, "style-name" )	);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public abstract class TextBibliographyEntryTemplateElement extends OdfStylableEl
 	 */
 	public String getTextBibliographyTypeAttribute()
 	{
-		TextBibliographyTypeAttribute attr = (TextBibliographyTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "bibliography-type" ) );
+		TextBibliographyTypeAttribute attr = (TextBibliographyTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "bibliography-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public abstract class TextBibliographyEntryTemplateElement extends OdfStylableEl
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" ) );
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class DrawExtrusionSecondLightDirectionAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "extrusion-second-light-direction" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "extrusion-second-light-direction" );
 	public static final String DEFAULT_VALUE = "(-5 0 1)";
 
 	/**

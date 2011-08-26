@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeAutomaticUpdateAttribute
  */
 public abstract class OfficeDdeSourceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "dde-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "dde-source" );
 
 
 	/**
@@ -91,7 +91,7 @@ public abstract class OfficeDdeSourceElement extends OdfElement
 	 */
 	public String getOfficeNameAttribute()
 	{
-		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "name" ) );
+		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -118,7 +118,7 @@ public abstract class OfficeDdeSourceElement extends OdfElement
 	 */
 	public String getOfficeConversionModeAttribute()
 	{
-		OfficeConversionModeAttribute attr = (OfficeConversionModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "conversion-mode" ) );
+		OfficeConversionModeAttribute attr = (OfficeConversionModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "conversion-mode" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -145,7 +145,7 @@ public abstract class OfficeDdeSourceElement extends OdfElement
 	 */
 	public String getOfficeDdeApplicationAttribute()
 	{
-		OfficeDdeApplicationAttribute attr = (OfficeDdeApplicationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "dde-application" ) );
+		OfficeDdeApplicationAttribute attr = (OfficeDdeApplicationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "dde-application" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -172,7 +172,7 @@ public abstract class OfficeDdeSourceElement extends OdfElement
 	 */
 	public String getOfficeDdeTopicAttribute()
 	{
-		OfficeDdeTopicAttribute attr = (OfficeDdeTopicAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "dde-topic" ) );
+		OfficeDdeTopicAttribute attr = (OfficeDdeTopicAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "dde-topic" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -199,7 +199,7 @@ public abstract class OfficeDdeSourceElement extends OdfElement
 	 */
 	public String getOfficeDdeItemAttribute()
 	{
-		OfficeDdeItemAttribute attr = (OfficeDdeItemAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "dde-item" ) );
+		OfficeDdeItemAttribute attr = (OfficeDdeItemAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "dde-item" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -226,7 +226,7 @@ public abstract class OfficeDdeSourceElement extends OdfElement
 	 */
 	public Boolean getOfficeAutomaticUpdateAttribute()
 	{
-		OfficeAutomaticUpdateAttribute attr = (OfficeAutomaticUpdateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "automatic-update" ) );
+		OfficeAutomaticUpdateAttribute attr = (OfficeAutomaticUpdateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "automatic-update" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

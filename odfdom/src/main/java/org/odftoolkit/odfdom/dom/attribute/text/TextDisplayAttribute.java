@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextVariableSetElement;
  */
 public class TextDisplayAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "display" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "display" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:display}.
@@ -184,7 +184,7 @@ public class TextDisplayAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof StyleTextPropertiesElement ){
-					return StyleTextPropertiesElement.TextDisplayAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof TextChapterElement ){
 					return TextChapterElement.TextDisplayAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof TextExpressionElement ){

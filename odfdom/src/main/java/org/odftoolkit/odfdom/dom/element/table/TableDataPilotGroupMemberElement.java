@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
  */
 public abstract class TableDataPilotGroupMemberElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-pilot-group-member" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-group-member" );
 
 
 	/**
@@ -81,7 +81,7 @@ public abstract class TableDataPilotGroupMemberElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "name" ) );
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

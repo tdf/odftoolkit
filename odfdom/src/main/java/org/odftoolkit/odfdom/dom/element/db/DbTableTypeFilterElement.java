@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public abstract class DbTableTypeFilterElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "table-type-filter" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "table-type-filter" );
 
 
 	/**

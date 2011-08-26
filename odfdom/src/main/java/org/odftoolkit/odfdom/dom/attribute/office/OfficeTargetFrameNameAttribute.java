@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class OfficeTargetFrameNameAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "target-frame-name" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.OFFICE, "target-frame-name" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute office:target-frame-name}.

@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class ChartOverlapAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "overlap" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.CHART, "overlap" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute chart:overlap}.
@@ -78,6 +78,7 @@ public class ChartOverlapAttribute extends OdfAttribute {
 	 * @return Returns the <code>int</code> value of the attribute
 	 */
 	public int intValue(){
+		
 		String value = super.getValue();
 		try {
 			return Integer.parseInt(value);
@@ -93,7 +94,7 @@ public class ChartOverlapAttribute extends OdfAttribute {
 	@Override
 	public void setValue(String attrValue) {
 		try{
-			super.setValue(Integer.toString(Integer.parseInt(attrValue)));	
+			super.setValue(attrValue);	
 		}  catch (NullPointerException e) {
 			// TODO: validation handling/logging
 			throw new IllegalArgumentException(e);
@@ -109,7 +110,7 @@ public class ChartOverlapAttribute extends OdfAttribute {
 	@Override
 	public String getValue(){
 		try{
-			return String.valueOf(Integer.parseInt(super.getValue()));		
+			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of chart:overlap is not valid");

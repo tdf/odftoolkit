@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class Dr3dEndAngleAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "end-angle" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DR3D, "end-angle" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute dr3d:end-angle}.

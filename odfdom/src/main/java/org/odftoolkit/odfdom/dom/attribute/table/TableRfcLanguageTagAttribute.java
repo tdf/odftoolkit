@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class TableRfcLanguageTagAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "rfc-language-tag" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "rfc-language-tag" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:rfc-language-tag}.

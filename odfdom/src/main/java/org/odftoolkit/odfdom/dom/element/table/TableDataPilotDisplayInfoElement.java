@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayMemberModeAttribute
  */
 public abstract class TableDataPilotDisplayInfoElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-pilot-display-info" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-display-info" );
 
 
 	/**
@@ -91,7 +91,7 @@ public abstract class TableDataPilotDisplayInfoElement extends OdfElement
 	 */
 	public Boolean getTableEnabledAttribute()
 	{
-		TableEnabledAttribute attr = (TableEnabledAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "enabled" ) );
+		TableEnabledAttribute attr = (TableEnabledAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "enabled" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -118,7 +118,7 @@ public abstract class TableDataPilotDisplayInfoElement extends OdfElement
 	 */
 	public String getTableDataFieldAttribute()
 	{
-		TableDataFieldAttribute attr = (TableDataFieldAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-field" ) );
+		TableDataFieldAttribute attr = (TableDataFieldAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-field" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -145,7 +145,7 @@ public abstract class TableDataPilotDisplayInfoElement extends OdfElement
 	 */
 	public Integer getTableMemberCountAttribute()
 	{
-		TableMemberCountAttribute attr = (TableMemberCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "member-count" ) );
+		TableMemberCountAttribute attr = (TableMemberCountAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "member-count" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -172,7 +172,7 @@ public abstract class TableDataPilotDisplayInfoElement extends OdfElement
 	 */
 	public String getTableDisplayMemberModeAttribute()
 	{
-		TableDisplayMemberModeAttribute attr = (TableDisplayMemberModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display-member-mode" ) );
+		TableDisplayMemberModeAttribute attr = (TableDisplayMemberModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display-member-mode" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

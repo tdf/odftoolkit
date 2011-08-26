@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class OfficeDateValueAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "date-value" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.OFFICE, "date-value" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute office:date-value}.

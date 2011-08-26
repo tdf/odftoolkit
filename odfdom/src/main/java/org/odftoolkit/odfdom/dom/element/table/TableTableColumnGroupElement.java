@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayAttribute;
  */
 public abstract class TableTableColumnGroupElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "table-column-group" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-column-group" );
 
 	public static final String  DEFAULT_VALUE_TABLE_DISPLAY_ATTRIBUTE = TableDisplayAttribute.DEFAULT_VALUE_TRUE;
 
@@ -74,7 +74,7 @@ public abstract class TableTableColumnGroupElement extends OdfElement
 	 */
 	public Boolean getTableDisplayAttribute()
 	{
-		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display" ) );
+		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

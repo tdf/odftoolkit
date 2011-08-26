@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbTypeAttribute;
  */
 public abstract class DbTableDefinitionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "table-definition" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "table-definition" );
 
 
 	/**
@@ -85,7 +85,7 @@ public abstract class DbTableDefinitionElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "name" ) );
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public abstract class DbTableDefinitionElement extends OdfElement
 	 */
 	public String getDbCatalogNameAttribute()
 	{
-		DbCatalogNameAttribute attr = (DbCatalogNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "catalog-name" ) );
+		DbCatalogNameAttribute attr = (DbCatalogNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "catalog-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public abstract class DbTableDefinitionElement extends OdfElement
 	 */
 	public String getDbSchemaNameAttribute()
 	{
-		DbSchemaNameAttribute attr = (DbSchemaNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "schema-name" ) );
+		DbSchemaNameAttribute attr = (DbSchemaNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "schema-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -166,7 +166,7 @@ public abstract class DbTableDefinitionElement extends OdfElement
 	 */
 	public String getDbTypeAttribute()
 	{
-		DbTypeAttribute attr = (DbTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "type" ) );
+		DbTypeAttribute attr = (DbTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

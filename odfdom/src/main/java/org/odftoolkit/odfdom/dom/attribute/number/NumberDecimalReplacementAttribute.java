@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class NumberDecimalReplacementAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "decimal-replacement" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.NUMBER, "decimal-replacement" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute number:decimal-replacement}.

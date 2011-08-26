@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class StyleLayoutGridBaseWidthAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-base-width" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "layout-grid-base-width" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:layout-grid-base-width}.

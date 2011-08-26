@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableShowDetailsAttribute;
  */
 public abstract class TableDataPilotMemberElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-pilot-member" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-member" );
 
 
 	/**
@@ -83,7 +83,7 @@ public abstract class TableDataPilotMemberElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "name" ) );
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public abstract class TableDataPilotMemberElement extends OdfElement
 	 */
 	public Boolean getTableDisplayAttribute()
 	{
-		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display" ) );
+		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -137,7 +137,7 @@ public abstract class TableDataPilotMemberElement extends OdfElement
 	 */
 	public Boolean getTableShowDetailsAttribute()
 	{
-		TableShowDetailsAttribute attr = (TableShowDetailsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "show-details" ) );
+		TableShowDetailsAttribute attr = (TableShowDetailsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "show-details" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

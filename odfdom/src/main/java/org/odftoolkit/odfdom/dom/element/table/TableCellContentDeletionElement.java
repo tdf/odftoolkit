@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableIdAttribute;
  */
 public abstract class TableCellContentDeletionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "cell-content-deletion" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "cell-content-deletion" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class TableCellContentDeletionElement extends OdfElement
 	 */
 	public String getTableIdAttribute()
 	{
-		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "id" ) );
+		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

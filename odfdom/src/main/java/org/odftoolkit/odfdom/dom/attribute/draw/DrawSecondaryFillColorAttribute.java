@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DrawSecondaryFillColorAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "secondary-fill-color" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "secondary-fill-color" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:secondary-fill-color}.

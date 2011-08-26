@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  */
 public abstract class TableHelpMessageElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "help-message" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "help-message" );
 
 	public static final String  DEFAULT_VALUE_TABLE_DISPLAY_ATTRIBUTE = TableDisplayAttribute.DEFAULT_VALUE_FALSE;
 
@@ -76,7 +76,7 @@ public abstract class TableHelpMessageElement extends OdfElement
 	 */
 	public String getTableTitleAttribute()
 	{
-		TableTitleAttribute attr = (TableTitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "title" ) );
+		TableTitleAttribute attr = (TableTitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "title" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -103,7 +103,7 @@ public abstract class TableHelpMessageElement extends OdfElement
 	 */
 	public Boolean getTableDisplayAttribute()
 	{
-		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display" ) );
+		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

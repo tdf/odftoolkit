@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DbRowRetrievingStatementAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "row-retrieving-statement" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DB, "row-retrieving-statement" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute db:row-retrieving-statement}.

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableSortGroupsElement;
  */
 public class TableDataTypeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-type" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "data-type" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:data-type}.
@@ -159,7 +159,7 @@ public class TableDataTypeAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof TableFilterConditionElement ){
-					return TableFilterConditionElement.TableDataTypeAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof TableSortByElement ){
 					//2DO: need validate value against string;enum
 					return super.getValue();

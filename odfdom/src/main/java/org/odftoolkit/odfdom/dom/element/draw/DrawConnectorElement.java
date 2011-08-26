@@ -60,7 +60,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
  */
 public abstract class DrawConnectorElement extends DrawShapeElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "connector" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "connector" );
 
 	/**
 	 * The value set of {@odf.attribute draw:type}.
@@ -133,7 +133,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getDrawTypeAttribute()
 	{
-		DrawTypeAttribute attr = (DrawTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "type" ) );
+		DrawTypeAttribute attr = (DrawTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -160,7 +160,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getSvgX1Attribute()
 	{
-		SvgX1Attribute attr = (SvgX1Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "x1" ) );
+		SvgX1Attribute attr = (SvgX1Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x1" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -187,7 +187,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getSvgY1Attribute()
 	{
-		SvgY1Attribute attr = (SvgY1Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "y1" ) );
+		SvgY1Attribute attr = (SvgY1Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y1" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -214,7 +214,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getDrawStartShapeAttribute()
 	{
-		DrawStartShapeAttribute attr = (DrawStartShapeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "start-shape" ) );
+		DrawStartShapeAttribute attr = (DrawStartShapeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start-shape" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -241,7 +241,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public Integer getDrawStartGluePointAttribute()
 	{
-		DrawStartGluePointAttribute attr = (DrawStartGluePointAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "start-glue-point" ) );
+		DrawStartGluePointAttribute attr = (DrawStartGluePointAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start-glue-point" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -268,7 +268,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getSvgX2Attribute()
 	{
-		SvgX2Attribute attr = (SvgX2Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "x2" ) );
+		SvgX2Attribute attr = (SvgX2Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x2" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -295,7 +295,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getSvgY2Attribute()
 	{
-		SvgY2Attribute attr = (SvgY2Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "y2" ) );
+		SvgY2Attribute attr = (SvgY2Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y2" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -322,7 +322,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getDrawEndShapeAttribute()
 	{
-		DrawEndShapeAttribute attr = (DrawEndShapeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "end-shape" ) );
+		DrawEndShapeAttribute attr = (DrawEndShapeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end-shape" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -349,7 +349,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public Integer getDrawEndGluePointAttribute()
 	{
-		DrawEndGluePointAttribute attr = (DrawEndGluePointAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "end-glue-point" ) );
+		DrawEndGluePointAttribute attr = (DrawEndGluePointAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end-glue-point" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -376,7 +376,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getDrawLineSkewAttribute()
 	{
-		DrawLineSkewAttribute attr = (DrawLineSkewAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "line-skew" ) );
+		DrawLineSkewAttribute attr = (DrawLineSkewAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "line-skew" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -403,7 +403,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getSvgDAttribute()
 	{
-		SvgDAttribute attr = (SvgDAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "d" ) );
+		SvgDAttribute attr = (SvgDAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "d" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -430,7 +430,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getDrawLayerAttribute()
 	{
-		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "layer" ) );
+		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "layer" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -457,7 +457,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getDrawTransformAttribute()
 	{
-		DrawTransformAttribute attr = (DrawTransformAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "transform" ) );
+		DrawTransformAttribute attr = (DrawTransformAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "transform" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -484,7 +484,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getDrawTextStyleNameAttribute()
 	{
-		DrawTextStyleNameAttribute attr = (DrawTextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "text-style-name" ) );
+		DrawTextStyleNameAttribute attr = (DrawTextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "text-style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -511,7 +511,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getDrawCaptionIdAttribute()
 	{
-		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "caption-id" ) );
+		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -538,7 +538,7 @@ public abstract class DrawConnectorElement extends DrawShapeElementBase
 	 */
 	public String getSvgViewBoxAttribute()
 	{
-		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "viewBox" ) );
+		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "viewBox" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

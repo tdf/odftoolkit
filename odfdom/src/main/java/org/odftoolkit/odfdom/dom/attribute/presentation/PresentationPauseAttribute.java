@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class PresentationPauseAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "pause" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.PRESENTATION, "pause" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute presentation:pause}.

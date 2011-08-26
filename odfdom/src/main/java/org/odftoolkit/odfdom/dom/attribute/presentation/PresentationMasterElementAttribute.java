@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class PresentationMasterElementAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "master-element" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.PRESENTATION, "master-element" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute presentation:master-element}.

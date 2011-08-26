@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class SmilRepeatCountAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "repeatCount" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.SMIL, "repeatCount" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute smil:repeatCount}.

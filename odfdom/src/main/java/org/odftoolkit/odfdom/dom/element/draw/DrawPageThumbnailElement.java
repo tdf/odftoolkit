@@ -52,7 +52,7 @@ import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
  */
 public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "page-thumbnail" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "page-thumbnail" );
 
 
 	/**
@@ -84,7 +84,7 @@ public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
 	 */
 	public Integer getDrawPageNumberAttribute()
 	{
-		DrawPageNumberAttribute attr = (DrawPageNumberAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "page-number" ) );
+		DrawPageNumberAttribute attr = (DrawPageNumberAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "page-number" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -111,7 +111,7 @@ public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
 	 */
 	public String getSvgXAttribute()
 	{
-		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "x" ) );
+		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "x" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -138,7 +138,7 @@ public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
 	 */
 	public String getSvgYAttribute()
 	{
-		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "y" ) );
+		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "y" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -165,7 +165,7 @@ public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
 	 */
 	public String getSvgWidthAttribute()
 	{
-		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "width" ) );
+		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "width" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -192,7 +192,7 @@ public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
 	 */
 	public String getSvgHeightAttribute()
 	{
-		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "height" ) );
+		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "height" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -219,7 +219,7 @@ public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
 	 */
 	public String getPresentationClassAttribute()
 	{
-		PresentationClassAttribute attr = (PresentationClassAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "class" ) );
+		PresentationClassAttribute attr = (PresentationClassAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "class" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -246,7 +246,7 @@ public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
 	 */
 	public Boolean getPresentationPlaceholderAttribute()
 	{
-		PresentationPlaceholderAttribute attr = (PresentationPlaceholderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "placeholder" ) );
+		PresentationPlaceholderAttribute attr = (PresentationPlaceholderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "placeholder" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -273,7 +273,7 @@ public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
 	 */
 	public Boolean getPresentationUserTransformedAttribute()
 	{
-		PresentationUserTransformedAttribute attr = (PresentationUserTransformedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "user-transformed" ) );
+		PresentationUserTransformedAttribute attr = (PresentationUserTransformedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "user-transformed" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -300,7 +300,7 @@ public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
 	 */
 	public String getDrawLayerAttribute()
 	{
-		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "layer" ) );
+		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "layer" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -327,7 +327,7 @@ public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
 	 */
 	public String getDrawTransformAttribute()
 	{
-		DrawTransformAttribute attr = (DrawTransformAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "transform" ) );
+		DrawTransformAttribute attr = (DrawTransformAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "transform" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -354,7 +354,7 @@ public abstract class DrawPageThumbnailElement extends DrawShapeElementBase
 	 */
 	public String getDrawCaptionIdAttribute()
 	{
-		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "caption-id" ) );
+		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "caption-id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

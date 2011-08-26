@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoColumnGapAttribute;
  */
 public abstract class StyleColumnsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "columns" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "columns" );
 
 
 	/**
@@ -83,7 +83,7 @@ public abstract class StyleColumnsElement extends OdfElement
 	 */
 	public Integer getFoColumnCountAttribute()
 	{
-		FoColumnCountAttribute attr = (FoColumnCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "column-count" ) );
+		FoColumnCountAttribute attr = (FoColumnCountAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "column-count" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -110,7 +110,7 @@ public abstract class StyleColumnsElement extends OdfElement
 	 */
 	public String getFoColumnGapAttribute()
 	{
-		FoColumnGapAttribute attr = (FoColumnGapAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "column-gap" ) );
+		FoColumnGapAttribute attr = (FoColumnGapAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "column-gap" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

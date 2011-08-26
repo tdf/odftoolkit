@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextIsHiddenAttribute;
  */
 public abstract class TextHiddenParagraphElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "hidden-paragraph" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "hidden-paragraph" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class TextHiddenParagraphElement extends OdfElement
 	 */
 	public String getTextConditionAttribute()
 	{
-		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "condition" ) );
+		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "condition" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -109,7 +109,7 @@ public abstract class TextHiddenParagraphElement extends OdfElement
 	 */
 	public Boolean getTextIsHiddenAttribute()
 	{
-		TextIsHiddenAttribute attr = (TextIsHiddenAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "is-hidden" ) );
+		TextIsHiddenAttribute attr = (TextIsHiddenAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "is-hidden" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class ChartThreeDimensionalAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "three-dimensional" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.CHART, "three-dimensional" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute chart:three-dimensional}.
@@ -78,6 +78,7 @@ public class ChartThreeDimensionalAttribute extends OdfAttribute {
 	 * @return Returns the <code>boolean</code> value of the attribute
 	 */
 	public boolean booleanValue(){
+		
 		String value = super.getValue();
 		try {
 			return Boolean.parseBoolean(value);
@@ -93,7 +94,7 @@ public class ChartThreeDimensionalAttribute extends OdfAttribute {
 	@Override
 	public void setValue(String attrValue) {
 		try{
-			super.setValue(Boolean.toString(Boolean.parseBoolean(attrValue)));	
+			super.setValue(attrValue);	
 		}  catch (NullPointerException e) {
 			// TODO: validation handling/logging
 			throw new IllegalArgumentException(e);
@@ -109,7 +110,7 @@ public class ChartThreeDimensionalAttribute extends OdfAttribute {
 	@Override
 	public String getValue(){
 		try{
-			return String.valueOf(Boolean.parseBoolean(super.getValue()));		
+			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of chart:three-dimensional is not valid");

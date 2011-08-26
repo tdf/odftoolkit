@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeDdeSourceElement;
  */
 public abstract class TableDdeLinkElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "dde-link" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "dde-link" );
 
 
 	/**

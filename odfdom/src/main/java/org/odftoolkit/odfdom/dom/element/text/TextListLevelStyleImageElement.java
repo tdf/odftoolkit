@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
  */
 public abstract class TextListLevelStyleImageElement extends TextListLevelStyleElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "list-level-style-image" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "list-level-style-image" );
 
 	/**
 	 * The value set of {@odf.attribute xlink:show}.
@@ -156,7 +156,7 @@ public abstract class TextListLevelStyleImageElement extends TextListLevelStyleE
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "type" ) );
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -183,7 +183,7 @@ public abstract class TextListLevelStyleImageElement extends TextListLevelStyleE
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -210,7 +210,7 @@ public abstract class TextListLevelStyleImageElement extends TextListLevelStyleE
 	 */
 	public String getXlinkShowAttribute()
 	{
-		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "show" ) );
+		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "show" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -237,7 +237,7 @@ public abstract class TextListLevelStyleImageElement extends TextListLevelStyleE
 	 */
 	public String getXlinkActuateAttribute()
 	{
-		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "actuate" ) );
+		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -54,7 +54,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableDdeLinksElement;
  */
 public abstract class OfficeChartElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "chart" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "chart" );
 
 
 	/**

@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbLoginTimeoutAttribute;
  */
 public abstract class DbLoginElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "login" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "login" );
 
 
 	/**
@@ -76,7 +76,7 @@ public abstract class DbLoginElement extends OdfElement
 	 */
 	public String getDbUserNameAttribute()
 	{
-		DbUserNameAttribute attr = (DbUserNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "user-name" ) );
+		DbUserNameAttribute attr = (DbUserNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "user-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -103,7 +103,7 @@ public abstract class DbLoginElement extends OdfElement
 	 */
 	public Boolean getDbUseSystemUserAttribute()
 	{
-		DbUseSystemUserAttribute attr = (DbUseSystemUserAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "use-system-user" ) );
+		DbUseSystemUserAttribute attr = (DbUseSystemUserAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "use-system-user" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -130,7 +130,7 @@ public abstract class DbLoginElement extends OdfElement
 	 */
 	public Boolean getDbIsPasswordRequiredAttribute()
 	{
-		DbIsPasswordRequiredAttribute attr = (DbIsPasswordRequiredAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "is-password-required" ) );
+		DbIsPasswordRequiredAttribute attr = (DbIsPasswordRequiredAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-password-required" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -157,7 +157,7 @@ public abstract class DbLoginElement extends OdfElement
 	 */
 	public Integer getDbLoginTimeoutAttribute()
 	{
-		DbLoginTimeoutAttribute attr = (DbLoginTimeoutAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "login-timeout" ) );
+		DbLoginTimeoutAttribute attr = (DbLoginTimeoutAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "login-timeout" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

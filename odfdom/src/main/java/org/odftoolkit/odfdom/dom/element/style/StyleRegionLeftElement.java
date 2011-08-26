@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  */
 public abstract class StyleRegionLeftElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "region-left" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "region-left" );
 
 
 	/**

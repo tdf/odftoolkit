@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeChangeInfoElement;
  */
 public abstract class TextInsertionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "insertion" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "insertion" );
 
 
 	/**

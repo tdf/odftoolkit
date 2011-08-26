@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class TableSourceCellRangeAddressesAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "source-cell-range-addresses" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "source-cell-range-addresses" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:source-cell-range-addresses}.

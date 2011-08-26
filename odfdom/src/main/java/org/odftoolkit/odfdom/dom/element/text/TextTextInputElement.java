@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDescriptionAttribute;
  */
 public abstract class TextTextInputElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "text-input" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "text-input" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class TextTextInputElement extends OdfElement
 	 */
 	public String getTextDescriptionAttribute()
 	{
-		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "description" ) );
+		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "description" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -50,7 +50,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableRefreshDelayAttribute;
  */
 public abstract class TableDatabaseRangeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "database-range" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "database-range" );
 
 
 	/**
@@ -91,7 +91,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "name" ) );
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -118,7 +118,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	 */
 	public Boolean getTableIsSelectionAttribute()
 	{
-		TableIsSelectionAttribute attr = (TableIsSelectionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "is-selection" ) );
+		TableIsSelectionAttribute attr = (TableIsSelectionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "is-selection" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -145,7 +145,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	 */
 	public Boolean getTableOnUpdateKeepStylesAttribute()
 	{
-		TableOnUpdateKeepStylesAttribute attr = (TableOnUpdateKeepStylesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "on-update-keep-styles" ) );
+		TableOnUpdateKeepStylesAttribute attr = (TableOnUpdateKeepStylesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "on-update-keep-styles" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -172,7 +172,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	 */
 	public Boolean getTableOnUpdateKeepSizeAttribute()
 	{
-		TableOnUpdateKeepSizeAttribute attr = (TableOnUpdateKeepSizeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "on-update-keep-size" ) );
+		TableOnUpdateKeepSizeAttribute attr = (TableOnUpdateKeepSizeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "on-update-keep-size" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -199,7 +199,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	 */
 	public Boolean getTableHasPersistentDataAttribute()
 	{
-		TableHasPersistentDataAttribute attr = (TableHasPersistentDataAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "has-persistent-data" ) );
+		TableHasPersistentDataAttribute attr = (TableHasPersistentDataAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "has-persistent-data" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -226,7 +226,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	 */
 	public String getTableOrientationAttribute()
 	{
-		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "orientation" ) );
+		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "orientation" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -253,7 +253,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	 */
 	public Boolean getTableContainsHeaderAttribute()
 	{
-		TableContainsHeaderAttribute attr = (TableContainsHeaderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "contains-header" ) );
+		TableContainsHeaderAttribute attr = (TableContainsHeaderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "contains-header" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -280,7 +280,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	 */
 	public Boolean getTableDisplayFilterButtonsAttribute()
 	{
-		TableDisplayFilterButtonsAttribute attr = (TableDisplayFilterButtonsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display-filter-buttons" ) );
+		TableDisplayFilterButtonsAttribute attr = (TableDisplayFilterButtonsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display-filter-buttons" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -307,7 +307,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	 */
 	public String getTableTargetRangeAddressAttribute()
 	{
-		TableTargetRangeAddressAttribute attr = (TableTargetRangeAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "target-range-address" ) );
+		TableTargetRangeAddressAttribute attr = (TableTargetRangeAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "target-range-address" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -334,7 +334,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	 */
 	public String getTableRefreshDelayAttribute()
 	{
-		TableRefreshDelayAttribute attr = (TableRefreshDelayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "refresh-delay" ) );
+		TableRefreshDelayAttribute attr = (TableRefreshDelayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "refresh-delay" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

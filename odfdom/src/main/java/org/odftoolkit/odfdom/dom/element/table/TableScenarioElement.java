@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableProtectedAttribute;
  */
 public abstract class TableScenarioElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "scenario" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "scenario" );
 
 
 	/**
@@ -92,7 +92,7 @@ public abstract class TableScenarioElement extends OdfElement
 	 */
 	public String getTableScenarioRangesAttribute()
 	{
-		TableScenarioRangesAttribute attr = (TableScenarioRangesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "scenario-ranges" ) );
+		TableScenarioRangesAttribute attr = (TableScenarioRangesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "scenario-ranges" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -119,7 +119,7 @@ public abstract class TableScenarioElement extends OdfElement
 	 */
 	public Boolean getTableIsActiveAttribute()
 	{
-		TableIsActiveAttribute attr = (TableIsActiveAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "is-active" ) );
+		TableIsActiveAttribute attr = (TableIsActiveAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "is-active" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -146,7 +146,7 @@ public abstract class TableScenarioElement extends OdfElement
 	 */
 	public Boolean getTableDisplayBorderAttribute()
 	{
-		TableDisplayBorderAttribute attr = (TableDisplayBorderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display-border" ) );
+		TableDisplayBorderAttribute attr = (TableDisplayBorderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display-border" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -173,7 +173,7 @@ public abstract class TableScenarioElement extends OdfElement
 	 */
 	public String getTableBorderColorAttribute()
 	{
-		TableBorderColorAttribute attr = (TableBorderColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "border-color" ) );
+		TableBorderColorAttribute attr = (TableBorderColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "border-color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -200,7 +200,7 @@ public abstract class TableScenarioElement extends OdfElement
 	 */
 	public Boolean getTableCopyBackAttribute()
 	{
-		TableCopyBackAttribute attr = (TableCopyBackAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "copy-back" ) );
+		TableCopyBackAttribute attr = (TableCopyBackAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "copy-back" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -227,7 +227,7 @@ public abstract class TableScenarioElement extends OdfElement
 	 */
 	public Boolean getTableCopyStylesAttribute()
 	{
-		TableCopyStylesAttribute attr = (TableCopyStylesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "copy-styles" ) );
+		TableCopyStylesAttribute attr = (TableCopyStylesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "copy-styles" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -254,7 +254,7 @@ public abstract class TableScenarioElement extends OdfElement
 	 */
 	public Boolean getTableCopyFormulasAttribute()
 	{
-		TableCopyFormulasAttribute attr = (TableCopyFormulasAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "copy-formulas" ) );
+		TableCopyFormulasAttribute attr = (TableCopyFormulasAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "copy-formulas" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -281,7 +281,7 @@ public abstract class TableScenarioElement extends OdfElement
 	 */
 	public String getTableCommentAttribute()
 	{
-		TableCommentAttribute attr = (TableCommentAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "comment" ) );
+		TableCommentAttribute attr = (TableCommentAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "comment" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -308,7 +308,7 @@ public abstract class TableScenarioElement extends OdfElement
 	 */
 	public Boolean getTableProtectedAttribute()
 	{
-		TableProtectedAttribute attr = (TableProtectedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "protected" ) );
+		TableProtectedAttribute attr = (TableProtectedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protected" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

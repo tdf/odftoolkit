@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DrawStartLineSpacingHorizontalAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "start-line-spacing-horizontal" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "start-line-spacing-horizontal" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:start-line-spacing-horizontal}.

@@ -58,7 +58,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableDdeLinksElement;
  */
 public abstract class OfficePresentationElement extends OdfContainerElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "presentation" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "presentation" );
 
 
 	/**

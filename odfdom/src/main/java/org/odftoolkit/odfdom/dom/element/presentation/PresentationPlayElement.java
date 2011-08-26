@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationSpeedAttribu
  */
 public abstract class PresentationPlayElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "play" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "play" );
 
 
 	/**
@@ -83,7 +83,7 @@ public abstract class PresentationPlayElement extends OdfElement
 	 */
 	public String getDrawShapeIdAttribute()
 	{
-		DrawShapeIdAttribute attr = (DrawShapeIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "shape-id" ) );
+		DrawShapeIdAttribute attr = (DrawShapeIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shape-id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public abstract class PresentationPlayElement extends OdfElement
 	 */
 	public String getPresentationSpeedAttribute()
 	{
-		PresentationSpeedAttribute attr = (PresentationSpeedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "speed" ) );
+		PresentationSpeedAttribute attr = (PresentationSpeedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "speed" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.anim.AnimValueAttribute;
  */
 public abstract class AnimParamElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "param" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.ANIM, "param" );
 
 
 	/**
@@ -85,7 +85,7 @@ public abstract class AnimParamElement extends OdfElement
 	 */
 	public String getAnimNameAttribute()
 	{
-		AnimNameAttribute attr = (AnimNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "name" ) );
+		AnimNameAttribute attr = (AnimNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public abstract class AnimParamElement extends OdfElement
 	 */
 	public String getAnimValueAttribute()
 	{
-		AnimValueAttribute attr = (AnimValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "value" ) );
+		AnimValueAttribute attr = (AnimValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.ANIM), "value" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

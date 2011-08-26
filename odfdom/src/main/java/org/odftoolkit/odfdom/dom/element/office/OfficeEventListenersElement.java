@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationEventListenerE
  */
 public abstract class OfficeEventListenersElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "event-listeners" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "event-listeners" );
 
 
 	/**

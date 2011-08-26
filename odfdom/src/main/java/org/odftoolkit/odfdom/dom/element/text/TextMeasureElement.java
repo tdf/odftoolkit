@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextKindAttribute;
  */
 public abstract class TextMeasureElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "measure" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "measure" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class TextMeasureElement extends OdfElement
 	 */
 	public String getTextKindAttribute()
 	{
-		TextKindAttribute attr = (TextKindAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "kind" ) );
+		TextKindAttribute attr = (TextKindAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "kind" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

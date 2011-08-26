@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class TableProtectionKeyDigestAlgorithmAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "protection-key-digest-algorithm" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "protection-key-digest-algorithm" );
 	public static final String DEFAULT_VALUE = "http://www.w3.org/2000/09/xmldsig#sha1";
 
 	/**

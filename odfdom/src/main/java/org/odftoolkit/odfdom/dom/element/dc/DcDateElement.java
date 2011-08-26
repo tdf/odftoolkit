@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public abstract class DcDateElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DC), "date" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DC, "date" );
 
 
 	/**

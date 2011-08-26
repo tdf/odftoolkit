@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
  */
 public class DrawOpacityAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "opacity" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "opacity" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:opacity}.

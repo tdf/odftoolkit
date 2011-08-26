@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.db.DbTableDefinitionElement;
  */
 public class DbTypeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "type" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DB, "type" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute db:type}.
@@ -158,7 +158,7 @@ public class DbTypeAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof DbKeyElement ){
-					return DbKeyElement.DbTypeAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof DbServerDatabaseElement ){
 					//2DO: need validate value against NamespacedToken
 					return super.getValue();

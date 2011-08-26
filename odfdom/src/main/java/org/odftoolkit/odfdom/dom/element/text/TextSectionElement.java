@@ -69,7 +69,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  */
 public abstract class TextSectionElement extends OdfStylableElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "section" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "section" );
 
 	/**
 	 * The value set of {@odf.attribute text:display}.
@@ -111,7 +111,7 @@ public abstract class TextSectionElement extends OdfStylableElement
 	 */
 	public TextSectionElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Section, OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.Section, OdfName.newName(OdfNamespaceNames.TEXT, "style-name" )	);
 	}
 
 	/**
@@ -144,7 +144,7 @@ public abstract class TextSectionElement extends OdfStylableElement
 	 */
 	public String getTextStyleNameAttribute()
 	{
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" ) );
+		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -171,7 +171,7 @@ public abstract class TextSectionElement extends OdfStylableElement
 	 */
 	public String getTextNameAttribute()
 	{
-		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "name" ) );
+		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -198,7 +198,7 @@ public abstract class TextSectionElement extends OdfStylableElement
 	 */
 	public Boolean getTextProtectedAttribute()
 	{
-		TextProtectedAttribute attr = (TextProtectedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "protected" ) );
+		TextProtectedAttribute attr = (TextProtectedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "protected" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -225,7 +225,7 @@ public abstract class TextSectionElement extends OdfStylableElement
 	 */
 	public String getTextProtectionKeyAttribute()
 	{
-		TextProtectionKeyAttribute attr = (TextProtectionKeyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "protection-key" ) );
+		TextProtectionKeyAttribute attr = (TextProtectionKeyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "protection-key" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -252,7 +252,7 @@ public abstract class TextSectionElement extends OdfStylableElement
 	 */
 	public String getTextProtectionKeyDigestAlgorithmAttribute()
 	{
-		TextProtectionKeyDigestAlgorithmAttribute attr = (TextProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "protection-key-digest-algorithm" ) );
+		TextProtectionKeyDigestAlgorithmAttribute attr = (TextProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "protection-key-digest-algorithm" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -279,7 +279,7 @@ public abstract class TextSectionElement extends OdfStylableElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -306,7 +306,7 @@ public abstract class TextSectionElement extends OdfStylableElement
 	 */
 	public String getTextDisplayAttribute()
 	{
-		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "display" ) );
+		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -333,7 +333,7 @@ public abstract class TextSectionElement extends OdfStylableElement
 	 */
 	public String getTextConditionAttribute()
 	{
-		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "condition" ) );
+		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "condition" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawFormulaAttribute;
  */
 public abstract class DrawEquationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "equation" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "equation" );
 
 
 	/**
@@ -74,7 +74,7 @@ public abstract class DrawEquationElement extends OdfElement
 	 */
 	public String getDrawNameAttribute()
 	{
-		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "name" ) );
+		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -101,7 +101,7 @@ public abstract class DrawEquationElement extends OdfElement
 	 */
 	public String getDrawFormulaAttribute()
 	{
-		DrawFormulaAttribute attr = (DrawFormulaAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "formula" ) );
+		DrawFormulaAttribute attr = (DrawFormulaAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "formula" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

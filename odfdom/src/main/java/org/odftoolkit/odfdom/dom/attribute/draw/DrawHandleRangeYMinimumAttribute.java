@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DrawHandleRangeYMinimumAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "handle-range-y-minimum" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "handle-range-y-minimum" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:handle-range-y-minimum}.

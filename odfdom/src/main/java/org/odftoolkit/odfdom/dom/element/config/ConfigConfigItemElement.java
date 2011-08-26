@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.config.ConfigTypeAttribute;
  */
 public abstract class ConfigConfigItemElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.CONFIG), "config-item" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CONFIG, "config-item" );
 
 
 	/**
@@ -85,7 +85,7 @@ public abstract class ConfigConfigItemElement extends OdfElement
 	 */
 	public String getConfigNameAttribute()
 	{
-		ConfigNameAttribute attr = (ConfigNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CONFIG), "name" ) );
+		ConfigNameAttribute attr = (ConfigNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CONFIG), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public abstract class ConfigConfigItemElement extends OdfElement
 	 */
 	public String getConfigTypeAttribute()
 	{
-		ConfigTypeAttribute attr = (ConfigTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CONFIG), "type" ) );
+		ConfigTypeAttribute attr = (ConfigTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CONFIG), "type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

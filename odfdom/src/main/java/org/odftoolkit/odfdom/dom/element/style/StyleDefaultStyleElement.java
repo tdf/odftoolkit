@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleFamilyAttribute;
  */
 public abstract class StyleDefaultStyleElement extends OdfStyleBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "default-style" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "default-style" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class StyleDefaultStyleElement extends OdfStyleBase
 	 */
 	public String getStyleFamilyAttribute()
 	{
-		StyleFamilyAttribute attr = (StyleFamilyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "family" ) );
+		StyleFamilyAttribute attr = (StyleFamilyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "family" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

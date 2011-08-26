@@ -50,7 +50,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextUserIndexMarkStartElement;
  */
 public class TextIdAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "id" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "id" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:id}.

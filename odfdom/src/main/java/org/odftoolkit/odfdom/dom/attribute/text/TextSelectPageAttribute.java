@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPageNumberElement;
  */
 public class TextSelectPageAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "select-page" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "select-page" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:select-page}.
@@ -154,7 +154,7 @@ public class TextSelectPageAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof TextPageContinuationElement ){
-					return TextPageContinuationElement.TextSelectPageAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof TextPageNumberElement ){
 					return TextPageNumberElement.TextSelectPageAttributeValue.enumValueOf(super.getValue()).toString();
 				}			

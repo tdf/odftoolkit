@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleFontFaceElement;
  */
 public abstract class OfficeFontFaceDeclsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "font-face-decls" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "font-face-decls" );
 
 
 	/**

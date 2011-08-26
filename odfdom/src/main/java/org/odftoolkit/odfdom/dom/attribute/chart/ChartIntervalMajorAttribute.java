@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class ChartIntervalMajorAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "interval-major" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.CHART, "interval-major" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute chart:interval-major}.
@@ -78,6 +78,7 @@ public class ChartIntervalMajorAttribute extends OdfAttribute {
 	 * @return Returns the <code>double</code> value of the attribute
 	 */
 	public double doubleValue(){
+		
 		String value = super.getValue();
 		try {
 			return Double.parseDouble(value);
@@ -93,7 +94,7 @@ public class ChartIntervalMajorAttribute extends OdfAttribute {
 	@Override
 	public void setValue(String attrValue) {
 		try{
-			super.setValue(Double.toString(Double.parseDouble(attrValue)));	
+			super.setValue(attrValue);	
 		}  catch (NullPointerException e) {
 			// TODO: validation handling/logging
 			throw new IllegalArgumentException(e);
@@ -109,7 +110,7 @@ public class ChartIntervalMajorAttribute extends OdfAttribute {
 	@Override
 	public String getValue(){
 		try{
-			return String.valueOf(Double.parseDouble(super.getValue()));		
+			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of chart:interval-major is not valid");

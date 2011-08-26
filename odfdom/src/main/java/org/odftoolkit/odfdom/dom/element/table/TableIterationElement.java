@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableMaximumDifferenceAttribute
  */
 public abstract class TableIterationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "iteration" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "iteration" );
 
 
 	/**
@@ -75,7 +75,7 @@ public abstract class TableIterationElement extends OdfElement
 	 */
 	public String getTableStatusAttribute()
 	{
-		TableStatusAttribute attr = (TableStatusAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "status" ) );
+		TableStatusAttribute attr = (TableStatusAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "status" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -102,7 +102,7 @@ public abstract class TableIterationElement extends OdfElement
 	 */
 	public Integer getTableStepsAttribute()
 	{
-		TableStepsAttribute attr = (TableStepsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "steps" ) );
+		TableStepsAttribute attr = (TableStepsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "steps" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -129,7 +129,7 @@ public abstract class TableIterationElement extends OdfElement
 	 */
 	public Double getTableMaximumDifferenceAttribute()
 	{
-		TableMaximumDifferenceAttribute attr = (TableMaximumDifferenceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "maximum-difference" ) );
+		TableMaximumDifferenceAttribute attr = (TableMaximumDifferenceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "maximum-difference" ) );
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}

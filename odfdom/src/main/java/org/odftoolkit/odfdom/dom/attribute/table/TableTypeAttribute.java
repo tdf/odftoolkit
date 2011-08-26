@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableInsertionElement;
  */
 public class TableTypeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "type" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "type" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:type}.
@@ -157,7 +157,7 @@ public class TableTypeAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof TableDataPilotFieldReferenceElement ){
-					return TableDataPilotFieldReferenceElement.TableTypeAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof TableDeletionElement ){
 					return TableDeletionElement.TableTypeAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof TableInsertionElement ){

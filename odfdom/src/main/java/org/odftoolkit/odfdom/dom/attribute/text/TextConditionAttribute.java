@@ -46,7 +46,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
  */
 public class TextConditionAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "condition" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "condition" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:condition}.
@@ -174,7 +174,7 @@ public class TextConditionAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof StyleTextPropertiesElement ){
-					return StyleTextPropertiesElement.TextConditionAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof TextConditionalTextElement ){
 					//2DO: need validate value against Formula
 					return super.getValue();

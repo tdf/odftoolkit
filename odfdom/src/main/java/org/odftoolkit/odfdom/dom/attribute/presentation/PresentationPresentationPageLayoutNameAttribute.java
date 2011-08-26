@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class PresentationPresentationPageLayoutNameAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "presentation-page-layout-name" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.PRESENTATION, "presentation-page-layout-name" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute presentation:presentation-page-layout-name}.

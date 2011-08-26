@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.element.svg.SvgRadialGradientElement;
  */
 public class SvgCxAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "cx" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.SVG, "cx" );
 	public static final String DEFAULT_VALUE = "50%";
 
 	/**

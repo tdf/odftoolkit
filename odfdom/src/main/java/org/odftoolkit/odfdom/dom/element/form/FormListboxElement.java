@@ -62,7 +62,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
  */
 public abstract class FormListboxElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "listbox" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "listbox" );
 
 
 	/**
@@ -105,7 +105,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getFormNameAttribute()
 	{
-		FormNameAttribute attr = (FormNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "name" ) );
+		FormNameAttribute attr = (FormNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -132,7 +132,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getFormControlImplementationAttribute()
 	{
-		FormControlImplementationAttribute attr = (FormControlImplementationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "control-implementation" ) );
+		FormControlImplementationAttribute attr = (FormControlImplementationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "control-implementation" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -159,7 +159,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getFormIdAttribute()
 	{
-		FormIdAttribute attr = (FormIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "id" ) );
+		FormIdAttribute attr = (FormIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -186,7 +186,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getXmlIdAttribute()
 	{
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
+		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -213,7 +213,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getXformsBindAttribute()
 	{
-		XformsBindAttribute attr = (XformsBindAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XFORMS), "bind" ) );
+		XformsBindAttribute attr = (XformsBindAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XFORMS), "bind" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -240,7 +240,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public Boolean getFormDisabledAttribute()
 	{
-		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "disabled" ) );
+		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "disabled" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -267,7 +267,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public Boolean getFormDropdownAttribute()
 	{
-		FormDropdownAttribute attr = (FormDropdownAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "dropdown" ) );
+		FormDropdownAttribute attr = (FormDropdownAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "dropdown" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -294,7 +294,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public Boolean getFormPrintableAttribute()
 	{
-		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "printable" ) );
+		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "printable" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -321,7 +321,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public Integer getFormSizeAttribute()
 	{
-		FormSizeAttribute attr = (FormSizeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "size" ) );
+		FormSizeAttribute attr = (FormSizeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "size" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -348,7 +348,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public Integer getFormTabIndexAttribute()
 	{
-		FormTabIndexAttribute attr = (FormTabIndexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "tab-index" ) );
+		FormTabIndexAttribute attr = (FormTabIndexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "tab-index" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -375,7 +375,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public Boolean getFormTabStopAttribute()
 	{
-		FormTabStopAttribute attr = (FormTabStopAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "tab-stop" ) );
+		FormTabStopAttribute attr = (FormTabStopAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "tab-stop" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -402,7 +402,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getFormTitleAttribute()
 	{
-		FormTitleAttribute attr = (FormTitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "title" ) );
+		FormTitleAttribute attr = (FormTitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "title" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -429,7 +429,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getFormBoundColumnAttribute()
 	{
-		FormBoundColumnAttribute attr = (FormBoundColumnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "bound-column" ) );
+		FormBoundColumnAttribute attr = (FormBoundColumnAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "bound-column" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -456,7 +456,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getFormDataFieldAttribute()
 	{
-		FormDataFieldAttribute attr = (FormDataFieldAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "data-field" ) );
+		FormDataFieldAttribute attr = (FormDataFieldAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "data-field" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -483,7 +483,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getFormListSourceAttribute()
 	{
-		FormListSourceAttribute attr = (FormListSourceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "list-source" ) );
+		FormListSourceAttribute attr = (FormListSourceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "list-source" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -510,7 +510,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getFormListSourceTypeAttribute()
 	{
-		FormListSourceTypeAttribute attr = (FormListSourceTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "list-source-type" ) );
+		FormListSourceTypeAttribute attr = (FormListSourceTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "list-source-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -537,7 +537,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getFormLinkedCellAttribute()
 	{
-		FormLinkedCellAttribute attr = (FormLinkedCellAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "linked-cell" ) );
+		FormLinkedCellAttribute attr = (FormLinkedCellAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "linked-cell" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -564,7 +564,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getFormListLinkageTypeAttribute()
 	{
-		FormListLinkageTypeAttribute attr = (FormListLinkageTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "list-linkage-type" ) );
+		FormListLinkageTypeAttribute attr = (FormListLinkageTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "list-linkage-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -591,7 +591,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getFormSourceCellRangeAttribute()
 	{
-		FormSourceCellRangeAttribute attr = (FormSourceCellRangeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "source-cell-range" ) );
+		FormSourceCellRangeAttribute attr = (FormSourceCellRangeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "source-cell-range" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -618,7 +618,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public Boolean getFormMultipleAttribute()
 	{
-		FormMultipleAttribute attr = (FormMultipleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "multiple" ) );
+		FormMultipleAttribute attr = (FormMultipleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "multiple" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -645,7 +645,7 @@ public abstract class FormListboxElement extends OdfElement
 	 */
 	public String getFormXformsListSourceAttribute()
 	{
-		FormXformsListSourceAttribute attr = (FormXformsListSourceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "xforms-list-source" ) );
+		FormXformsListSourceAttribute attr = (FormXformsListSourceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "xforms-list-source" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

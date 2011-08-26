@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeStringValueAttribute;
  */
 public abstract class FormListValueElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "list-value" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "list-value" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class FormListValueElement extends OdfElement
 	 */
 	public String getOfficeStringValueAttribute()
 	{
-		OfficeStringValueAttribute attr = (OfficeStringValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "string-value" ) );
+		OfficeStringValueAttribute attr = (OfficeStringValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "string-value" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

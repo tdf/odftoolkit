@@ -126,7 +126,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
  */
 public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "text-properties" );
 
 	/**
 	 * The value set of {@odf.attribute text:display}.
@@ -214,173 +214,173 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	}
 
     public final static OdfStyleProperty FontVariant = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-variant"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "font-variant"));
     public final static OdfStyleProperty TextTransform = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-transform"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "text-transform"));
     public final static OdfStyleProperty Color = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "color"));
     public final static OdfStyleProperty UseWindowFontColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "use-window-font-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "use-window-font-color"));
     public final static OdfStyleProperty TextOutline = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-outline"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-outline"));
     public final static OdfStyleProperty TextLineThroughType = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-type"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-line-through-type"));
     public final static OdfStyleProperty TextLineThroughStyle = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-style"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-line-through-style"));
     public final static OdfStyleProperty TextLineThroughWidth = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-line-through-width"));
     public final static OdfStyleProperty TextLineThroughColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-line-through-color"));
     public final static OdfStyleProperty TextLineThroughText = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-text"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-line-through-text"));
     public final static OdfStyleProperty TextLineThroughTextStyle = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-text-style"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-line-through-text-style"));
     public final static OdfStyleProperty TextPosition = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-position"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-position"));
     public final static OdfStyleProperty FontName = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-name"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-name"));
     public final static OdfStyleProperty FontNameAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-name-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-name-asian"));
     public final static OdfStyleProperty FontNameComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-name-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-name-complex"));
     public final static OdfStyleProperty FontFamily = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-family"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "font-family"));
     public final static OdfStyleProperty FontFamilyAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-family-asian"));
     public final static OdfStyleProperty FontFamilyComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-family-complex"));
     public final static OdfStyleProperty FontFamilyGeneric = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-generic"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-family-generic"));
     public final static OdfStyleProperty FontFamilyGenericAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-generic-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-family-generic-asian"));
     public final static OdfStyleProperty FontFamilyGenericComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-generic-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-family-generic-complex"));
     public final static OdfStyleProperty FontStyleName = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-name"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-style-name"));
     public final static OdfStyleProperty FontStyleNameAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-name-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-style-name-asian"));
     public final static OdfStyleProperty FontStyleNameComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-name-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-style-name-complex"));
     public final static OdfStyleProperty FontPitch = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-pitch"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-pitch"));
     public final static OdfStyleProperty FontPitchAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-pitch-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-pitch-asian"));
     public final static OdfStyleProperty FontPitchComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-pitch-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-pitch-complex"));
     public final static OdfStyleProperty FontCharset = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-charset"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-charset"));
     public final static OdfStyleProperty FontCharsetAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-charset-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-charset-asian"));
     public final static OdfStyleProperty FontCharsetComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-charset-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-charset-complex"));
     public final static OdfStyleProperty FontSize = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-size"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "font-size"));
     public final static OdfStyleProperty FontSizeAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-size-asian"));
     public final static OdfStyleProperty FontSizeComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-size-complex"));
     public final static OdfStyleProperty FontSizeRel = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-rel"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-size-rel"));
     public final static OdfStyleProperty FontSizeRelAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-rel-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-size-rel-asian"));
     public final static OdfStyleProperty FontSizeRelComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-rel-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-size-rel-complex"));
     public final static OdfStyleProperty ScriptType = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "script-type"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "script-type"));
     public final static OdfStyleProperty LetterSpacing = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "letter-spacing"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "letter-spacing"));
     public final static OdfStyleProperty Language = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "language"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "language"));
     public final static OdfStyleProperty LanguageAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "language-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "language-asian"));
     public final static OdfStyleProperty LanguageComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "language-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "language-complex"));
     public final static OdfStyleProperty Country = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "country"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "country"));
     public final static OdfStyleProperty CountryAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "country-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "country-asian"));
     public final static OdfStyleProperty CountryComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "country-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "country-complex"));
     public final static OdfStyleProperty Script = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "script"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "script"));
     public final static OdfStyleProperty ScriptAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "script-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "script-asian"));
     public final static OdfStyleProperty ScriptComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "script-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "script-complex"));
     public final static OdfStyleProperty RfcLanguageTag = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "rfc-language-tag"));
     public final static OdfStyleProperty RfcLanguageTagAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "rfc-language-tag-asian"));
     public final static OdfStyleProperty RfcLanguageTagComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "rfc-language-tag-complex"));
     public final static OdfStyleProperty FontStyle = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-style"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "font-style"));
     public final static OdfStyleProperty FontStyleAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-style-asian"));
     public final static OdfStyleProperty FontStyleComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-style-complex"));
     public final static OdfStyleProperty FontRelief = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-relief"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-relief"));
     public final static OdfStyleProperty TextShadow = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-shadow"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "text-shadow"));
     public final static OdfStyleProperty TextUnderlineType = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-type"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-underline-type"));
     public final static OdfStyleProperty TextUnderlineStyle = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-style"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-underline-style"));
     public final static OdfStyleProperty TextUnderlineWidth = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-underline-width"));
     public final static OdfStyleProperty TextUnderlineColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-underline-color"));
     public final static OdfStyleProperty TextOverlineType = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-type"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-overline-type"));
     public final static OdfStyleProperty TextOverlineStyle = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-style"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-overline-style"));
     public final static OdfStyleProperty TextOverlineWidth = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-width"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-overline-width"));
     public final static OdfStyleProperty TextOverlineColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-overline-color"));
     public final static OdfStyleProperty TextOverlineMode = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-mode"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-overline-mode"));
     public final static OdfStyleProperty FontWeight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-weight"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "font-weight"));
     public final static OdfStyleProperty FontWeightAsian = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-weight-asian"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-weight-asian"));
     public final static OdfStyleProperty FontWeightComplex = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-weight-complex"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "font-weight-complex"));
     public final static OdfStyleProperty TextUnderlineMode = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-mode"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-underline-mode"));
     public final static OdfStyleProperty TextLineThroughMode = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-mode"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-line-through-mode"));
     public final static OdfStyleProperty LetterKerning = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "letter-kerning"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "letter-kerning"));
     public final static OdfStyleProperty TextBlinking = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-blinking"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-blinking"));
     public final static OdfStyleProperty BackgroundColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "background-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "background-color"));
     public final static OdfStyleProperty TextCombine = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-combine"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-combine"));
     public final static OdfStyleProperty TextCombineStartChar = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-combine-start-char"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-combine-start-char"));
     public final static OdfStyleProperty TextCombineEndChar = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-combine-end-char"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-combine-end-char"));
     public final static OdfStyleProperty TextEmphasize = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-emphasize"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-emphasize"));
     public final static OdfStyleProperty TextScale = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-scale"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-scale"));
     public final static OdfStyleProperty TextRotationAngle = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-rotation-angle"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-rotation-angle"));
     public final static OdfStyleProperty TextRotationScale = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-rotation-scale"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.STYLE, "text-rotation-scale"));
     public final static OdfStyleProperty Hyphenate = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenate"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "hyphenate"));
     public final static OdfStyleProperty HyphenationRemainCharCount = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenation-remain-char-count"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "hyphenation-remain-char-count"));
     public final static OdfStyleProperty HyphenationPushCharCount = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenation-push-char-count"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.FO, "hyphenation-push-char-count"));
     public final static OdfStyleProperty Display = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "display"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.TEXT, "display"));
     public final static OdfStyleProperty Condition = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "condition"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfNamespaceNames.TEXT, "condition"));
 	/**
 	 * Initialization of the mandatory attributes of {@link  StyleTextPropertiesElement}
 	 *
@@ -399,7 +399,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoFontVariantAttribute()
 	{
-		FoFontVariantAttribute attr = (FoFontVariantAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-variant" ) );
+		FoFontVariantAttribute attr = (FoFontVariantAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "font-variant" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -426,7 +426,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoTextTransformAttribute()
 	{
-		FoTextTransformAttribute attr = (FoTextTransformAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-transform" ) );
+		FoTextTransformAttribute attr = (FoTextTransformAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "text-transform" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -453,7 +453,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoColorAttribute()
 	{
-		FoColorAttribute attr = (FoColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "color" ) );
+		FoColorAttribute attr = (FoColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -480,7 +480,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleUseWindowFontColorAttribute()
 	{
-		StyleUseWindowFontColorAttribute attr = (StyleUseWindowFontColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "use-window-font-color" ) );
+		StyleUseWindowFontColorAttribute attr = (StyleUseWindowFontColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "use-window-font-color" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -507,7 +507,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleTextOutlineAttribute()
 	{
-		StyleTextOutlineAttribute attr = (StyleTextOutlineAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-outline" ) );
+		StyleTextOutlineAttribute attr = (StyleTextOutlineAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-outline" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -534,7 +534,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextLineThroughTypeAttribute()
 	{
-		StyleTextLineThroughTypeAttribute attr = (StyleTextLineThroughTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-type" ) );
+		StyleTextLineThroughTypeAttribute attr = (StyleTextLineThroughTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-line-through-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -561,7 +561,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextLineThroughStyleAttribute()
 	{
-		StyleTextLineThroughStyleAttribute attr = (StyleTextLineThroughStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-style" ) );
+		StyleTextLineThroughStyleAttribute attr = (StyleTextLineThroughStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-line-through-style" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -588,7 +588,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextLineThroughWidthAttribute()
 	{
-		StyleTextLineThroughWidthAttribute attr = (StyleTextLineThroughWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-width" ) );
+		StyleTextLineThroughWidthAttribute attr = (StyleTextLineThroughWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-line-through-width" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -615,7 +615,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextLineThroughColorAttribute()
 	{
-		StyleTextLineThroughColorAttribute attr = (StyleTextLineThroughColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-color" ) );
+		StyleTextLineThroughColorAttribute attr = (StyleTextLineThroughColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-line-through-color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -642,7 +642,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextLineThroughTextAttribute()
 	{
-		StyleTextLineThroughTextAttribute attr = (StyleTextLineThroughTextAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-text" ) );
+		StyleTextLineThroughTextAttribute attr = (StyleTextLineThroughTextAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-line-through-text" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -669,7 +669,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextLineThroughTextStyleAttribute()
 	{
-		StyleTextLineThroughTextStyleAttribute attr = (StyleTextLineThroughTextStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-text-style" ) );
+		StyleTextLineThroughTextStyleAttribute attr = (StyleTextLineThroughTextStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-line-through-text-style" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -696,7 +696,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextPositionAttribute()
 	{
-		StyleTextPositionAttribute attr = (StyleTextPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-position" ) );
+		StyleTextPositionAttribute attr = (StyleTextPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-position" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -723,7 +723,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontNameAttribute()
 	{
-		StyleFontNameAttribute attr = (StyleFontNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-name" ) );
+		StyleFontNameAttribute attr = (StyleFontNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -750,7 +750,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontNameAsianAttribute()
 	{
-		StyleFontNameAsianAttribute attr = (StyleFontNameAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-name-asian" ) );
+		StyleFontNameAsianAttribute attr = (StyleFontNameAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-name-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -777,7 +777,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontNameComplexAttribute()
 	{
-		StyleFontNameComplexAttribute attr = (StyleFontNameComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-name-complex" ) );
+		StyleFontNameComplexAttribute attr = (StyleFontNameComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-name-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -804,7 +804,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoFontFamilyAttribute()
 	{
-		FoFontFamilyAttribute attr = (FoFontFamilyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-family" ) );
+		FoFontFamilyAttribute attr = (FoFontFamilyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "font-family" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -831,7 +831,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontFamilyAsianAttribute()
 	{
-		StyleFontFamilyAsianAttribute attr = (StyleFontFamilyAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-asian" ) );
+		StyleFontFamilyAsianAttribute attr = (StyleFontFamilyAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-family-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -858,7 +858,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontFamilyComplexAttribute()
 	{
-		StyleFontFamilyComplexAttribute attr = (StyleFontFamilyComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-complex" ) );
+		StyleFontFamilyComplexAttribute attr = (StyleFontFamilyComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-family-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -885,7 +885,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontFamilyGenericAttribute()
 	{
-		StyleFontFamilyGenericAttribute attr = (StyleFontFamilyGenericAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-generic" ) );
+		StyleFontFamilyGenericAttribute attr = (StyleFontFamilyGenericAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-family-generic" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -912,7 +912,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontFamilyGenericAsianAttribute()
 	{
-		StyleFontFamilyGenericAsianAttribute attr = (StyleFontFamilyGenericAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-generic-asian" ) );
+		StyleFontFamilyGenericAsianAttribute attr = (StyleFontFamilyGenericAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-family-generic-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -939,7 +939,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontFamilyGenericComplexAttribute()
 	{
-		StyleFontFamilyGenericComplexAttribute attr = (StyleFontFamilyGenericComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-generic-complex" ) );
+		StyleFontFamilyGenericComplexAttribute attr = (StyleFontFamilyGenericComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-family-generic-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -966,7 +966,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontStyleNameAttribute()
 	{
-		StyleFontStyleNameAttribute attr = (StyleFontStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-name" ) );
+		StyleFontStyleNameAttribute attr = (StyleFontStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -993,7 +993,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontStyleNameAsianAttribute()
 	{
-		StyleFontStyleNameAsianAttribute attr = (StyleFontStyleNameAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-name-asian" ) );
+		StyleFontStyleNameAsianAttribute attr = (StyleFontStyleNameAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-style-name-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1020,7 +1020,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontStyleNameComplexAttribute()
 	{
-		StyleFontStyleNameComplexAttribute attr = (StyleFontStyleNameComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-name-complex" ) );
+		StyleFontStyleNameComplexAttribute attr = (StyleFontStyleNameComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-style-name-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1047,7 +1047,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontPitchAttribute()
 	{
-		StyleFontPitchAttribute attr = (StyleFontPitchAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-pitch" ) );
+		StyleFontPitchAttribute attr = (StyleFontPitchAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-pitch" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1074,7 +1074,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontPitchAsianAttribute()
 	{
-		StyleFontPitchAsianAttribute attr = (StyleFontPitchAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-pitch-asian" ) );
+		StyleFontPitchAsianAttribute attr = (StyleFontPitchAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-pitch-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1101,7 +1101,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontPitchComplexAttribute()
 	{
-		StyleFontPitchComplexAttribute attr = (StyleFontPitchComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-pitch-complex" ) );
+		StyleFontPitchComplexAttribute attr = (StyleFontPitchComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-pitch-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1128,7 +1128,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontCharsetAttribute()
 	{
-		StyleFontCharsetAttribute attr = (StyleFontCharsetAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-charset" ) );
+		StyleFontCharsetAttribute attr = (StyleFontCharsetAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-charset" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1155,7 +1155,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontCharsetAsianAttribute()
 	{
-		StyleFontCharsetAsianAttribute attr = (StyleFontCharsetAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-charset-asian" ) );
+		StyleFontCharsetAsianAttribute attr = (StyleFontCharsetAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-charset-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1182,7 +1182,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontCharsetComplexAttribute()
 	{
-		StyleFontCharsetComplexAttribute attr = (StyleFontCharsetComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-charset-complex" ) );
+		StyleFontCharsetComplexAttribute attr = (StyleFontCharsetComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-charset-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1209,7 +1209,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoFontSizeAttribute()
 	{
-		FoFontSizeAttribute attr = (FoFontSizeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-size" ) );
+		FoFontSizeAttribute attr = (FoFontSizeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "font-size" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1236,7 +1236,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontSizeAsianAttribute()
 	{
-		StyleFontSizeAsianAttribute attr = (StyleFontSizeAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-asian" ) );
+		StyleFontSizeAsianAttribute attr = (StyleFontSizeAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-size-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1263,7 +1263,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontSizeComplexAttribute()
 	{
-		StyleFontSizeComplexAttribute attr = (StyleFontSizeComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-complex" ) );
+		StyleFontSizeComplexAttribute attr = (StyleFontSizeComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-size-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1290,7 +1290,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontSizeRelAttribute()
 	{
-		StyleFontSizeRelAttribute attr = (StyleFontSizeRelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-rel" ) );
+		StyleFontSizeRelAttribute attr = (StyleFontSizeRelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-size-rel" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1317,7 +1317,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontSizeRelAsianAttribute()
 	{
-		StyleFontSizeRelAsianAttribute attr = (StyleFontSizeRelAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-rel-asian" ) );
+		StyleFontSizeRelAsianAttribute attr = (StyleFontSizeRelAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-size-rel-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1344,7 +1344,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontSizeRelComplexAttribute()
 	{
-		StyleFontSizeRelComplexAttribute attr = (StyleFontSizeRelComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-rel-complex" ) );
+		StyleFontSizeRelComplexAttribute attr = (StyleFontSizeRelComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-size-rel-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1371,7 +1371,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleScriptTypeAttribute()
 	{
-		StyleScriptTypeAttribute attr = (StyleScriptTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "script-type" ) );
+		StyleScriptTypeAttribute attr = (StyleScriptTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "script-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1398,7 +1398,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoLetterSpacingAttribute()
 	{
-		FoLetterSpacingAttribute attr = (FoLetterSpacingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "letter-spacing" ) );
+		FoLetterSpacingAttribute attr = (FoLetterSpacingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "letter-spacing" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1425,7 +1425,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoLanguageAttribute()
 	{
-		FoLanguageAttribute attr = (FoLanguageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "language" ) );
+		FoLanguageAttribute attr = (FoLanguageAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "language" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1452,7 +1452,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleLanguageAsianAttribute()
 	{
-		StyleLanguageAsianAttribute attr = (StyleLanguageAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "language-asian" ) );
+		StyleLanguageAsianAttribute attr = (StyleLanguageAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "language-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1479,7 +1479,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleLanguageComplexAttribute()
 	{
-		StyleLanguageComplexAttribute attr = (StyleLanguageComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "language-complex" ) );
+		StyleLanguageComplexAttribute attr = (StyleLanguageComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "language-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1506,7 +1506,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoCountryAttribute()
 	{
-		FoCountryAttribute attr = (FoCountryAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "country" ) );
+		FoCountryAttribute attr = (FoCountryAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "country" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1533,7 +1533,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleCountryAsianAttribute()
 	{
-		StyleCountryAsianAttribute attr = (StyleCountryAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "country-asian" ) );
+		StyleCountryAsianAttribute attr = (StyleCountryAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "country-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1560,7 +1560,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleCountryComplexAttribute()
 	{
-		StyleCountryComplexAttribute attr = (StyleCountryComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "country-complex" ) );
+		StyleCountryComplexAttribute attr = (StyleCountryComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "country-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1587,7 +1587,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoScriptAttribute()
 	{
-		FoScriptAttribute attr = (FoScriptAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "script" ) );
+		FoScriptAttribute attr = (FoScriptAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "script" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1614,7 +1614,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleScriptAsianAttribute()
 	{
-		StyleScriptAsianAttribute attr = (StyleScriptAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "script-asian" ) );
+		StyleScriptAsianAttribute attr = (StyleScriptAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "script-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1641,7 +1641,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleScriptComplexAttribute()
 	{
-		StyleScriptComplexAttribute attr = (StyleScriptComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "script-complex" ) );
+		StyleScriptComplexAttribute attr = (StyleScriptComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "script-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1668,7 +1668,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRfcLanguageTagAttribute()
 	{
-		StyleRfcLanguageTagAttribute attr = (StyleRfcLanguageTagAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag" ) );
+		StyleRfcLanguageTagAttribute attr = (StyleRfcLanguageTagAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rfc-language-tag" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1695,7 +1695,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRfcLanguageTagAsianAttribute()
 	{
-		StyleRfcLanguageTagAsianAttribute attr = (StyleRfcLanguageTagAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag-asian" ) );
+		StyleRfcLanguageTagAsianAttribute attr = (StyleRfcLanguageTagAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rfc-language-tag-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1722,7 +1722,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRfcLanguageTagComplexAttribute()
 	{
-		StyleRfcLanguageTagComplexAttribute attr = (StyleRfcLanguageTagComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag-complex" ) );
+		StyleRfcLanguageTagComplexAttribute attr = (StyleRfcLanguageTagComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rfc-language-tag-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1749,7 +1749,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoFontStyleAttribute()
 	{
-		FoFontStyleAttribute attr = (FoFontStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-style" ) );
+		FoFontStyleAttribute attr = (FoFontStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "font-style" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1776,7 +1776,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontStyleAsianAttribute()
 	{
-		StyleFontStyleAsianAttribute attr = (StyleFontStyleAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-asian" ) );
+		StyleFontStyleAsianAttribute attr = (StyleFontStyleAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-style-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1803,7 +1803,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontStyleComplexAttribute()
 	{
-		StyleFontStyleComplexAttribute attr = (StyleFontStyleComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-complex" ) );
+		StyleFontStyleComplexAttribute attr = (StyleFontStyleComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-style-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1830,7 +1830,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontReliefAttribute()
 	{
-		StyleFontReliefAttribute attr = (StyleFontReliefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-relief" ) );
+		StyleFontReliefAttribute attr = (StyleFontReliefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-relief" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1857,7 +1857,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoTextShadowAttribute()
 	{
-		FoTextShadowAttribute attr = (FoTextShadowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-shadow" ) );
+		FoTextShadowAttribute attr = (FoTextShadowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "text-shadow" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1884,7 +1884,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextUnderlineTypeAttribute()
 	{
-		StyleTextUnderlineTypeAttribute attr = (StyleTextUnderlineTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-type" ) );
+		StyleTextUnderlineTypeAttribute attr = (StyleTextUnderlineTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-underline-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1911,7 +1911,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextUnderlineStyleAttribute()
 	{
-		StyleTextUnderlineStyleAttribute attr = (StyleTextUnderlineStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-style" ) );
+		StyleTextUnderlineStyleAttribute attr = (StyleTextUnderlineStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-underline-style" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1938,7 +1938,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextUnderlineWidthAttribute()
 	{
-		StyleTextUnderlineWidthAttribute attr = (StyleTextUnderlineWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-width" ) );
+		StyleTextUnderlineWidthAttribute attr = (StyleTextUnderlineWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-underline-width" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1965,7 +1965,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextUnderlineColorAttribute()
 	{
-		StyleTextUnderlineColorAttribute attr = (StyleTextUnderlineColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-color" ) );
+		StyleTextUnderlineColorAttribute attr = (StyleTextUnderlineColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-underline-color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -1992,7 +1992,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextOverlineTypeAttribute()
 	{
-		StyleTextOverlineTypeAttribute attr = (StyleTextOverlineTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-type" ) );
+		StyleTextOverlineTypeAttribute attr = (StyleTextOverlineTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-overline-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2019,7 +2019,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextOverlineStyleAttribute()
 	{
-		StyleTextOverlineStyleAttribute attr = (StyleTextOverlineStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-style" ) );
+		StyleTextOverlineStyleAttribute attr = (StyleTextOverlineStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-overline-style" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2046,7 +2046,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextOverlineWidthAttribute()
 	{
-		StyleTextOverlineWidthAttribute attr = (StyleTextOverlineWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-width" ) );
+		StyleTextOverlineWidthAttribute attr = (StyleTextOverlineWidthAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-overline-width" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2073,7 +2073,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextOverlineColorAttribute()
 	{
-		StyleTextOverlineColorAttribute attr = (StyleTextOverlineColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-color" ) );
+		StyleTextOverlineColorAttribute attr = (StyleTextOverlineColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-overline-color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2100,7 +2100,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextOverlineModeAttribute()
 	{
-		StyleTextOverlineModeAttribute attr = (StyleTextOverlineModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-mode" ) );
+		StyleTextOverlineModeAttribute attr = (StyleTextOverlineModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-overline-mode" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2127,7 +2127,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoFontWeightAttribute()
 	{
-		FoFontWeightAttribute attr = (FoFontWeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-weight" ) );
+		FoFontWeightAttribute attr = (FoFontWeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "font-weight" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2154,7 +2154,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontWeightAsianAttribute()
 	{
-		StyleFontWeightAsianAttribute attr = (StyleFontWeightAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-weight-asian" ) );
+		StyleFontWeightAsianAttribute attr = (StyleFontWeightAsianAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-weight-asian" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2181,7 +2181,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleFontWeightComplexAttribute()
 	{
-		StyleFontWeightComplexAttribute attr = (StyleFontWeightComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-weight-complex" ) );
+		StyleFontWeightComplexAttribute attr = (StyleFontWeightComplexAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "font-weight-complex" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2208,7 +2208,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextUnderlineModeAttribute()
 	{
-		StyleTextUnderlineModeAttribute attr = (StyleTextUnderlineModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-mode" ) );
+		StyleTextUnderlineModeAttribute attr = (StyleTextUnderlineModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-underline-mode" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2235,7 +2235,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextLineThroughModeAttribute()
 	{
-		StyleTextLineThroughModeAttribute attr = (StyleTextLineThroughModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-mode" ) );
+		StyleTextLineThroughModeAttribute attr = (StyleTextLineThroughModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-line-through-mode" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2262,7 +2262,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleLetterKerningAttribute()
 	{
-		StyleLetterKerningAttribute attr = (StyleLetterKerningAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "letter-kerning" ) );
+		StyleLetterKerningAttribute attr = (StyleLetterKerningAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "letter-kerning" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -2289,7 +2289,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getStyleTextBlinkingAttribute()
 	{
-		StyleTextBlinkingAttribute attr = (StyleTextBlinkingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-blinking" ) );
+		StyleTextBlinkingAttribute attr = (StyleTextBlinkingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-blinking" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -2316,7 +2316,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getFoBackgroundColorAttribute()
 	{
-		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "background-color" ) );
+		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2343,7 +2343,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextCombineAttribute()
 	{
-		StyleTextCombineAttribute attr = (StyleTextCombineAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-combine" ) );
+		StyleTextCombineAttribute attr = (StyleTextCombineAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-combine" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2370,7 +2370,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextCombineStartCharAttribute()
 	{
-		StyleTextCombineStartCharAttribute attr = (StyleTextCombineStartCharAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-combine-start-char" ) );
+		StyleTextCombineStartCharAttribute attr = (StyleTextCombineStartCharAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-combine-start-char" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2397,7 +2397,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextCombineEndCharAttribute()
 	{
-		StyleTextCombineEndCharAttribute attr = (StyleTextCombineEndCharAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-combine-end-char" ) );
+		StyleTextCombineEndCharAttribute attr = (StyleTextCombineEndCharAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-combine-end-char" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2424,7 +2424,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextEmphasizeAttribute()
 	{
-		StyleTextEmphasizeAttribute attr = (StyleTextEmphasizeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-emphasize" ) );
+		StyleTextEmphasizeAttribute attr = (StyleTextEmphasizeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-emphasize" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2451,7 +2451,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextScaleAttribute()
 	{
-		StyleTextScaleAttribute attr = (StyleTextScaleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-scale" ) );
+		StyleTextScaleAttribute attr = (StyleTextScaleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-scale" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2478,7 +2478,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextRotationAngleAttribute()
 	{
-		StyleTextRotationAngleAttribute attr = (StyleTextRotationAngleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-rotation-angle" ) );
+		StyleTextRotationAngleAttribute attr = (StyleTextRotationAngleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-rotation-angle" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2505,7 +2505,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleTextRotationScaleAttribute()
 	{
-		StyleTextRotationScaleAttribute attr = (StyleTextRotationScaleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-rotation-scale" ) );
+		StyleTextRotationScaleAttribute attr = (StyleTextRotationScaleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "text-rotation-scale" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2532,7 +2532,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Boolean getFoHyphenateAttribute()
 	{
-		FoHyphenateAttribute attr = (FoHyphenateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenate" ) );
+		FoHyphenateAttribute attr = (FoHyphenateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "hyphenate" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -2559,7 +2559,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Integer getFoHyphenationRemainCharCountAttribute()
 	{
-		FoHyphenationRemainCharCountAttribute attr = (FoHyphenationRemainCharCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenation-remain-char-count" ) );
+		FoHyphenationRemainCharCountAttribute attr = (FoHyphenationRemainCharCountAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "hyphenation-remain-char-count" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -2586,7 +2586,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public Integer getFoHyphenationPushCharCountAttribute()
 	{
-		FoHyphenationPushCharCountAttribute attr = (FoHyphenationPushCharCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenation-push-char-count" ) );
+		FoHyphenationPushCharCountAttribute attr = (FoHyphenationPushCharCountAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "hyphenation-push-char-count" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -2613,7 +2613,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getTextDisplayAttribute()
 	{
-		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "display" ) );
+		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -2640,7 +2640,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getTextConditionAttribute()
 	{
-		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "condition" ) );
+		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "condition" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

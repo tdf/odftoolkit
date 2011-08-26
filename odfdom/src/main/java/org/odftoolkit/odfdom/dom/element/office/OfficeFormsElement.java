@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.element.xforms.XformsModelElement;
  */
 public abstract class OfficeFormsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "forms" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "forms" );
 
 
 	/**
@@ -76,7 +76,7 @@ public abstract class OfficeFormsElement extends OdfElement
 	 */
 	public Boolean getFormAutomaticFocusAttribute()
 	{
-		FormAutomaticFocusAttribute attr = (FormAutomaticFocusAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "automatic-focus" ) );
+		FormAutomaticFocusAttribute attr = (FormAutomaticFocusAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "automatic-focus" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -103,7 +103,7 @@ public abstract class OfficeFormsElement extends OdfElement
 	 */
 	public Boolean getFormApplyDesignModeAttribute()
 	{
-		FormApplyDesignModeAttribute attr = (FormApplyDesignModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "apply-design-mode" ) );
+		FormApplyDesignModeAttribute attr = (FormApplyDesignModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "apply-design-mode" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

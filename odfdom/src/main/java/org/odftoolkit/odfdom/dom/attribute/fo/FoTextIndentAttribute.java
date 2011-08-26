@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
  */
 public class FoTextIndentAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-indent" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FO, "text-indent" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute fo:text-indent}.

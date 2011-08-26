@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableParseSqlStatementAttribute
  */
 public abstract class TableDatabaseSourceSqlElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "database-source-sql" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "database-source-sql" );
 
 
 	/**
@@ -86,7 +86,7 @@ public abstract class TableDatabaseSourceSqlElement extends OdfElement
 	 */
 	public String getTableDatabaseNameAttribute()
 	{
-		TableDatabaseNameAttribute attr = (TableDatabaseNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "database-name" ) );
+		TableDatabaseNameAttribute attr = (TableDatabaseNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "database-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public abstract class TableDatabaseSourceSqlElement extends OdfElement
 	 */
 	public String getTableSqlStatementAttribute()
 	{
-		TableSqlStatementAttribute attr = (TableSqlStatementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "sql-statement" ) );
+		TableSqlStatementAttribute attr = (TableSqlStatementAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "sql-statement" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public abstract class TableDatabaseSourceSqlElement extends OdfElement
 	 */
 	public Boolean getTableParseSqlStatementAttribute()
 	{
-		TableParseSqlStatementAttribute attr = (TableParseSqlStatementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "parse-sql-statement" ) );
+		TableParseSqlStatementAttribute attr = (TableParseSqlStatementAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "parse-sql-statement" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

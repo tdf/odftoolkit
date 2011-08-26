@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class AnimIterateTypeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "iterate-type" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.ANIM, "iterate-type" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute anim:iterate-type}.

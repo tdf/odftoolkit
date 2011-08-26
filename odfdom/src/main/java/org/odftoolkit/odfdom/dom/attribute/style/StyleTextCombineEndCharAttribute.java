@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class StyleTextCombineEndCharAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-combine-end-char" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "text-combine-end-char" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:text-combine-end-char}.

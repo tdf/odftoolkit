@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public abstract class MetaEditingCyclesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "editing-cycles" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "editing-cycles" );
 
 
 	/**

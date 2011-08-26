@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawColorAttribute;
  */
 public abstract class PresentationDimElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "dim" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "dim" );
 
 
 	/**
@@ -85,7 +85,7 @@ public abstract class PresentationDimElement extends OdfElement
 	 */
 	public String getDrawShapeIdAttribute()
 	{
-		DrawShapeIdAttribute attr = (DrawShapeIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "shape-id" ) );
+		DrawShapeIdAttribute attr = (DrawShapeIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "shape-id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public abstract class PresentationDimElement extends OdfElement
 	 */
 	public String getDrawColorAttribute()
 	{
-		DrawColorAttribute attr = (DrawColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "color" ) );
+		DrawColorAttribute attr = (DrawColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

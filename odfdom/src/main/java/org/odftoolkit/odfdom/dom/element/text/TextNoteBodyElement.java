@@ -59,7 +59,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  */
 public abstract class TextNoteBodyElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "note-body" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "note-body" );
 
 
 	/**

@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class SmilAccelerateAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "accelerate" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.SMIL, "accelerate" );
 	public static final String DEFAULT_VALUE = "0.0";
 
 	/**
@@ -81,6 +81,7 @@ public class SmilAccelerateAttribute extends OdfAttribute {
 	 * @return Returns the <code>double</code> value of the attribute
 	 */
 	public double doubleValue(){
+		
 		String value = super.getValue();
 		try {
         	//2DO: need validate value against ZeroToOneDecimal
@@ -98,7 +99,7 @@ public class SmilAccelerateAttribute extends OdfAttribute {
 	public void setValue(String attrValue) {
 		try{
 			//2DO: need validate value against ZeroToOneDecimal
-			super.setValue(Double.toString(Double.parseDouble(attrValue)));	
+			super.setValue(attrValue);	
 		}  catch (NullPointerException e) {
 			// TODO: validation handling/logging
 			throw new IllegalArgumentException(e);
@@ -115,7 +116,7 @@ public class SmilAccelerateAttribute extends OdfAttribute {
 	public String getValue(){
 		try{
 			//2DO: need validate value against ZeroToOneDecimal
-			return String.valueOf(Double.parseDouble(super.getValue()));		
+			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of smil:accelerate is not valid");

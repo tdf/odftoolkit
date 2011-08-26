@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
  */
 public class StyleVerticalAlignAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "vertical-align" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "vertical-align" );
 	public static final String DEFAULT_VALUE = "top";
 
 	/**
@@ -158,7 +158,7 @@ public class StyleVerticalAlignAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof StyleColumnSepElement ){
-					return StyleColumnSepElement.StyleVerticalAlignAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof StyleParagraphPropertiesElement ){
 					return StyleParagraphPropertiesElement.StyleVerticalAlignAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof StyleTableCellPropertiesElement ){

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawValueAttribute;
  */
 public abstract class DrawParamElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "param" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "param" );
 
 
 	/**
@@ -74,7 +74,7 @@ public abstract class DrawParamElement extends OdfElement
 	 */
 	public String getDrawNameAttribute()
 	{
-		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "name" ) );
+		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -101,7 +101,7 @@ public abstract class DrawParamElement extends OdfElement
 	 */
 	public String getDrawValueAttribute()
 	{
-		DrawValueAttribute attr = (DrawValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "value" ) );
+		DrawValueAttribute attr = (DrawValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "value" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

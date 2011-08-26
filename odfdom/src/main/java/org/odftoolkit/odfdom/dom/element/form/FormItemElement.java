@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.form.FormLabelAttribute;
  */
 public abstract class FormItemElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "item" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "item" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class FormItemElement extends OdfElement
 	 */
 	public String getFormLabelAttribute()
 	{
-		FormLabelAttribute attr = (FormLabelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "label" ) );
+		FormLabelAttribute attr = (FormLabelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "label" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

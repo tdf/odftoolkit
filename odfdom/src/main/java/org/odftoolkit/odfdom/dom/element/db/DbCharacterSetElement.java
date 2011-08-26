@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbEncodingAttribute;
  */
 public abstract class DbCharacterSetElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "character-set" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "character-set" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class DbCharacterSetElement extends OdfElement
 	 */
 	public String getDbEncodingAttribute()
 	{
-		DbEncodingAttribute attr = (DbEncodingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "encoding" ) );
+		DbEncodingAttribute attr = (DbEncodingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "encoding" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

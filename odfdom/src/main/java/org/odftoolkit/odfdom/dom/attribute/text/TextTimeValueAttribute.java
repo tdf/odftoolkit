@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextTimeElement;
  */
 public class TextTimeValueAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "time-value" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "time-value" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:time-value}.

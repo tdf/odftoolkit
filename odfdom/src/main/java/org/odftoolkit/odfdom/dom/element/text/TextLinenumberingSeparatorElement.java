@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextIncrementAttribute;
  */
 public abstract class TextLinenumberingSeparatorElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "linenumbering-separator" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "linenumbering-separator" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class TextLinenumberingSeparatorElement extends OdfElement
 	 */
 	public Integer getTextIncrementAttribute()
 	{
-		TextIncrementAttribute attr = (TextIncrementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "increment" ) );
+		TextIncrementAttribute attr = (TextIncrementAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "increment" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextCAttribute;
  */
 public abstract class TextSElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "s" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "s" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class TextSElement extends OdfElement
 	 */
 	public Integer getTextCAttribute()
 	{
-		TextCAttribute attr = (TextCAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "c" ) );
+		TextCAttribute attr = (TextCAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "c" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

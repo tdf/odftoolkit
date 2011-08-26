@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DbPrecisionAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "precision" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DB, "precision" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute db:precision}.
@@ -79,6 +79,7 @@ public class DbPrecisionAttribute extends OdfAttribute {
 	 * @return Returns the <code>int</code> value of the attribute
 	 */
 	public int intValue(){
+		
 		String value = super.getValue();
 		try {
         	//2DO: need validate value against PositiveInteger
@@ -96,7 +97,7 @@ public class DbPrecisionAttribute extends OdfAttribute {
 	public void setValue(String attrValue) {
 		try{
 			//2DO: need validate value against PositiveInteger
-			super.setValue(Integer.toString(Integer.parseInt(attrValue)));	
+			super.setValue(attrValue);	
 		}  catch (NullPointerException e) {
 			// TODO: validation handling/logging
 			throw new IllegalArgumentException(e);
@@ -113,7 +114,7 @@ public class DbPrecisionAttribute extends OdfAttribute {
 	public String getValue(){
 		try{
 			//2DO: need validate value against PositiveInteger
-			return String.valueOf(Integer.parseInt(super.getValue()));		
+			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of db:precision is not valid");

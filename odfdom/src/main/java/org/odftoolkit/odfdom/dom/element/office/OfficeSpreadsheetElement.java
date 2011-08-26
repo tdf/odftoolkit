@@ -58,7 +58,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableDdeLinksElement;
  */
 public abstract class OfficeSpreadsheetElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "spreadsheet" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "spreadsheet" );
 
 
 	/**
@@ -90,7 +90,7 @@ public abstract class OfficeSpreadsheetElement extends OdfElement
 	 */
 	public Boolean getTableStructureProtectedAttribute()
 	{
-		TableStructureProtectedAttribute attr = (TableStructureProtectedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "structure-protected" ) );
+		TableStructureProtectedAttribute attr = (TableStructureProtectedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "structure-protected" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -117,7 +117,7 @@ public abstract class OfficeSpreadsheetElement extends OdfElement
 	 */
 	public String getTableProtectionKeyAttribute()
 	{
-		TableProtectionKeyAttribute attr = (TableProtectionKeyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "protection-key" ) );
+		TableProtectionKeyAttribute attr = (TableProtectionKeyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protection-key" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -144,7 +144,7 @@ public abstract class OfficeSpreadsheetElement extends OdfElement
 	 */
 	public String getTableProtectionKeyDigestAlgorithmAttribute()
 	{
-		TableProtectionKeyDigestAlgorithmAttribute attr = (TableProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "protection-key-digest-algorithm" ) );
+		TableProtectionKeyDigestAlgorithmAttribute attr = (TableProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "protection-key-digest-algorithm" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class TextBulletRelativeSizeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "bullet-relative-size" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "bullet-relative-size" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:bullet-relative-size}.

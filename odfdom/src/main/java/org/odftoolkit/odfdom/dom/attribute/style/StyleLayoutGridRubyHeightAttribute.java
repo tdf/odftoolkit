@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class StyleLayoutGridRubyHeightAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-ruby-height" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "layout-grid-ruby-height" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:layout-grid-ruby-height}.

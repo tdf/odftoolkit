@@ -49,7 +49,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextSortAlgorithmAttribute;
  */
 public abstract class TextBibliographyConfigurationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "bibliography-configuration" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "bibliography-configuration" );
 
 
 	/**
@@ -81,7 +81,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getTextPrefixAttribute()
 	{
-		TextPrefixAttribute attr = (TextPrefixAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "prefix" ) );
+		TextPrefixAttribute attr = (TextPrefixAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "prefix" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -108,7 +108,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getTextSuffixAttribute()
 	{
-		TextSuffixAttribute attr = (TextSuffixAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "suffix" ) );
+		TextSuffixAttribute attr = (TextSuffixAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "suffix" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -135,7 +135,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public Boolean getTextNumberedEntriesAttribute()
 	{
-		TextNumberedEntriesAttribute attr = (TextNumberedEntriesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "numbered-entries" ) );
+		TextNumberedEntriesAttribute attr = (TextNumberedEntriesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "numbered-entries" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -162,7 +162,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public Boolean getTextSortByPositionAttribute()
 	{
-		TextSortByPositionAttribute attr = (TextSortByPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "sort-by-position" ) );
+		TextSortByPositionAttribute attr = (TextSortByPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "sort-by-position" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -189,7 +189,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getFoLanguageAttribute()
 	{
-		FoLanguageAttribute attr = (FoLanguageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "language" ) );
+		FoLanguageAttribute attr = (FoLanguageAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "language" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -216,7 +216,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getFoCountryAttribute()
 	{
-		FoCountryAttribute attr = (FoCountryAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "country" ) );
+		FoCountryAttribute attr = (FoCountryAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "country" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -243,7 +243,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getFoScriptAttribute()
 	{
-		FoScriptAttribute attr = (FoScriptAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "script" ) );
+		FoScriptAttribute attr = (FoScriptAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "script" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -270,7 +270,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getStyleRfcLanguageTagAttribute()
 	{
-		StyleRfcLanguageTagAttribute attr = (StyleRfcLanguageTagAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag" ) );
+		StyleRfcLanguageTagAttribute attr = (StyleRfcLanguageTagAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "rfc-language-tag" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -297,7 +297,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	 */
 	public String getTextSortAlgorithmAttribute()
 	{
-		TextSortAlgorithmAttribute attr = (TextSortAlgorithmAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "sort-algorithm" ) );
+		TextSortAlgorithmAttribute attr = (TextSortAlgorithmAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "sort-algorithm" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

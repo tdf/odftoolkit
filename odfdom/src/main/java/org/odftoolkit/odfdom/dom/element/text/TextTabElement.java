@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextTabRefAttribute;
  */
 public abstract class TextTabElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "tab" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "tab" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class TextTabElement extends OdfElement
 	 */
 	public Integer getTextTabRefAttribute()
 	{
-		TextTabRefAttribute attr = (TextTabRefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "tab-ref" ) );
+		TextTabRefAttribute attr = (TextTabRefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "tab-ref" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

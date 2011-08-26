@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class StyleRfcLanguageTagAsianAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag-asian" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "rfc-language-tag-asian" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:rfc-language-tag-asian}.

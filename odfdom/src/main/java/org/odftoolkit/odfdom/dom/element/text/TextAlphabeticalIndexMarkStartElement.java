@@ -47,7 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextMainEntryAttribute;
  */
 public abstract class TextAlphabeticalIndexMarkStartElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "alphabetical-index-mark-start" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "alphabetical-index-mark-start" );
 
 
 	/**
@@ -87,7 +87,7 @@ public abstract class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextIdAttribute()
 	{
-		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "id" ) );
+		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -114,7 +114,7 @@ public abstract class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextKey1Attribute()
 	{
-		TextKey1Attribute attr = (TextKey1Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "key1" ) );
+		TextKey1Attribute attr = (TextKey1Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "key1" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -141,7 +141,7 @@ public abstract class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextKey2Attribute()
 	{
-		TextKey2Attribute attr = (TextKey2Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "key2" ) );
+		TextKey2Attribute attr = (TextKey2Attribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "key2" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -168,7 +168,7 @@ public abstract class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextStringValuePhoneticAttribute()
 	{
-		TextStringValuePhoneticAttribute attr = (TextStringValuePhoneticAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "string-value-phonetic" ) );
+		TextStringValuePhoneticAttribute attr = (TextStringValuePhoneticAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "string-value-phonetic" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -195,7 +195,7 @@ public abstract class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextKey1PhoneticAttribute()
 	{
-		TextKey1PhoneticAttribute attr = (TextKey1PhoneticAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "key1-phonetic" ) );
+		TextKey1PhoneticAttribute attr = (TextKey1PhoneticAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "key1-phonetic" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -222,7 +222,7 @@ public abstract class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public String getTextKey2PhoneticAttribute()
 	{
-		TextKey2PhoneticAttribute attr = (TextKey2PhoneticAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "key2-phonetic" ) );
+		TextKey2PhoneticAttribute attr = (TextKey2PhoneticAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "key2-phonetic" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -249,7 +249,7 @@ public abstract class TextAlphabeticalIndexMarkStartElement extends OdfElement
 	 */
 	public Boolean getTextMainEntryAttribute()
 	{
-		TextMainEntryAttribute attr = (TextMainEntryAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "main-entry" ) );
+		TextMainEntryAttribute attr = (TextMainEntryAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "main-entry" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

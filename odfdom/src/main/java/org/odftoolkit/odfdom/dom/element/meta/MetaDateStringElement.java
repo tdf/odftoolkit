@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public abstract class MetaDateStringElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "date-string" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.META, "date-string" );
 
 
 	/**

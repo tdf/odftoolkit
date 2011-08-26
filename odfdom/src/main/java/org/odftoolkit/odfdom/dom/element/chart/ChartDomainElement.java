@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableCellRangeAddressAttribute;
  */
 public abstract class ChartDomainElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "domain" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CHART, "domain" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class ChartDomainElement extends OdfElement
 	 */
 	public String getTableCellRangeAddressAttribute()
 	{
-		TableCellRangeAddressAttribute attr = (TableCellRangeAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "cell-range-address" ) );
+		TableCellRangeAddressAttribute attr = (TableCellRangeAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "cell-range-address" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

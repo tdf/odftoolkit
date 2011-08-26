@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextPageAdjustAttribute;
  */
 public abstract class TextPageVariableSetElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "page-variable-set" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "page-variable-set" );
 
 
 	/**
@@ -74,7 +74,7 @@ public abstract class TextPageVariableSetElement extends OdfElement
 	 */
 	public Boolean getTextActiveAttribute()
 	{
-		TextActiveAttribute attr = (TextActiveAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "active" ) );
+		TextActiveAttribute attr = (TextActiveAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "active" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -101,7 +101,7 @@ public abstract class TextPageVariableSetElement extends OdfElement
 	 */
 	public Integer getTextPageAdjustAttribute()
 	{
-		TextPageAdjustAttribute attr = (TextPageAdjustAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "page-adjust" ) );
+		TextPageAdjustAttribute attr = (TextPageAdjustAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "page-adjust" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

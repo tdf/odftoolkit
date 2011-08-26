@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class FoHyphenationLadderCountAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenation-ladder-count" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FO, "hyphenation-ladder-count" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute fo:hyphenation-ladder-count}.

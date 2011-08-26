@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
  */
 public abstract class TextBookmarkEndElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "bookmark-end" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "bookmark-end" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class TextBookmarkEndElement extends OdfElement
 	 */
 	public String getTextNameAttribute()
 	{
-		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "name" ) );
+		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

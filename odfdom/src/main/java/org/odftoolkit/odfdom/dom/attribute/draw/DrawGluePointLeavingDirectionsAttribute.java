@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DrawGluePointLeavingDirectionsAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "glue-point-leaving-directions" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "glue-point-leaving-directions" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:glue-point-leaving-directions}.

@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class DrawExtrusionAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "extrusion" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "extrusion" );
 	public static final String DEFAULT_VALUE = "false";
 
 	/**
@@ -80,6 +80,7 @@ public class DrawExtrusionAttribute extends OdfAttribute {
 	 * @return Returns the <code>boolean</code> value of the attribute
 	 */
 	public boolean booleanValue(){
+		
 		String value = super.getValue();
 		try {
 			return Boolean.parseBoolean(value);
@@ -95,7 +96,7 @@ public class DrawExtrusionAttribute extends OdfAttribute {
 	@Override
 	public void setValue(String attrValue) {
 		try{
-			super.setValue(Boolean.toString(Boolean.parseBoolean(attrValue)));	
+			super.setValue(attrValue);	
 		}  catch (NullPointerException e) {
 			// TODO: validation handling/logging
 			throw new IllegalArgumentException(e);
@@ -111,7 +112,7 @@ public class DrawExtrusionAttribute extends OdfAttribute {
 	@Override
 	public String getValue(){
 		try{
-			return String.valueOf(Boolean.parseBoolean(super.getValue()));		
+			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of draw:extrusion is not valid");

@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableTypeAttribute;
  */
 public abstract class TableDataPilotFieldReferenceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-pilot-field-reference" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-field-reference" );
 
 	/**
 	 * The value set of {@odf.attribute table:type}.
@@ -122,7 +122,7 @@ public abstract class TableDataPilotFieldReferenceElement extends OdfElement
 	 */
 	public String getTableFieldNameAttribute()
 	{
-		TableFieldNameAttribute attr = (TableFieldNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "field-name" ) );
+		TableFieldNameAttribute attr = (TableFieldNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "field-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -149,7 +149,7 @@ public abstract class TableDataPilotFieldReferenceElement extends OdfElement
 	 */
 	public String getTableMemberTypeAttribute()
 	{
-		TableMemberTypeAttribute attr = (TableMemberTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "member-type" ) );
+		TableMemberTypeAttribute attr = (TableMemberTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "member-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -176,7 +176,7 @@ public abstract class TableDataPilotFieldReferenceElement extends OdfElement
 	 */
 	public String getTableMemberNameAttribute()
 	{
-		TableMemberNameAttribute attr = (TableMemberNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "member-name" ) );
+		TableMemberNameAttribute attr = (TableMemberNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "member-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -203,7 +203,7 @@ public abstract class TableDataPilotFieldReferenceElement extends OdfElement
 	 */
 	public String getTableTypeAttribute()
 	{
-		TableTypeAttribute attr = (TableTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "type" ) );
+		TableTypeAttribute attr = (TableTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

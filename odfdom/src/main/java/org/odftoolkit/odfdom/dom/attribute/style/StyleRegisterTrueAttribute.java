@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class StyleRegisterTrueAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "register-true" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "register-true" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:register-true}.
@@ -78,6 +78,7 @@ public class StyleRegisterTrueAttribute extends OdfAttribute {
 	 * @return Returns the <code>boolean</code> value of the attribute
 	 */
 	public boolean booleanValue(){
+		
 		String value = super.getValue();
 		try {
 			return Boolean.parseBoolean(value);
@@ -93,7 +94,7 @@ public class StyleRegisterTrueAttribute extends OdfAttribute {
 	@Override
 	public void setValue(String attrValue) {
 		try{
-			super.setValue(Boolean.toString(Boolean.parseBoolean(attrValue)));	
+			super.setValue(attrValue);	
 		}  catch (NullPointerException e) {
 			// TODO: validation handling/logging
 			throw new IllegalArgumentException(e);
@@ -109,7 +110,7 @@ public class StyleRegisterTrueAttribute extends OdfAttribute {
 	@Override
 	public String getValue(){
 		try{
-			return String.valueOf(Boolean.parseBoolean(super.getValue()));		
+			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of style:register-true is not valid");

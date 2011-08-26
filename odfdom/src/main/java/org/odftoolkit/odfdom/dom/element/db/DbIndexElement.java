@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbIsClusteredAttribute;
  */
 public abstract class DbIndexElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "index" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "index" );
 
 
 	/**
@@ -85,7 +85,7 @@ public abstract class DbIndexElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "name" ) );
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public abstract class DbIndexElement extends OdfElement
 	 */
 	public String getDbCatalogNameAttribute()
 	{
-		DbCatalogNameAttribute attr = (DbCatalogNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "catalog-name" ) );
+		DbCatalogNameAttribute attr = (DbCatalogNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "catalog-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public abstract class DbIndexElement extends OdfElement
 	 */
 	public Boolean getDbIsUniqueAttribute()
 	{
-		DbIsUniqueAttribute attr = (DbIsUniqueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "is-unique" ) );
+		DbIsUniqueAttribute attr = (DbIsUniqueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-unique" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -166,7 +166,7 @@ public abstract class DbIndexElement extends OdfElement
 	 */
 	public Boolean getDbIsClusteredAttribute()
 	{
-		DbIsClusteredAttribute attr = (DbIsClusteredAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "is-clustered" ) );
+		DbIsClusteredAttribute attr = (DbIsClusteredAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-clustered" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

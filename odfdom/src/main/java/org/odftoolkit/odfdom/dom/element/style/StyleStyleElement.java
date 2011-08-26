@@ -53,7 +53,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleFamilyAttribute;
  */
 public abstract class StyleStyleElement extends OdfStyleBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "style" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "style" );
 
 
 	/**
@@ -95,7 +95,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public String getStyleNameAttribute()
 	{
-		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "name" ) );
+		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -122,7 +122,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public String getStyleDisplayNameAttribute()
 	{
-		StyleDisplayNameAttribute attr = (StyleDisplayNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "display-name" ) );
+		StyleDisplayNameAttribute attr = (StyleDisplayNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "display-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -149,7 +149,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public String getStyleParentStyleNameAttribute()
 	{
-		StyleParentStyleNameAttribute attr = (StyleParentStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "parent-style-name" ) );
+		StyleParentStyleNameAttribute attr = (StyleParentStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "parent-style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -176,7 +176,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public String getStyleNextStyleNameAttribute()
 	{
-		StyleNextStyleNameAttribute attr = (StyleNextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "next-style-name" ) );
+		StyleNextStyleNameAttribute attr = (StyleNextStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "next-style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -203,7 +203,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public Integer getStyleListLevelAttribute()
 	{
-		StyleListLevelAttribute attr = (StyleListLevelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "list-level" ) );
+		StyleListLevelAttribute attr = (StyleListLevelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "list-level" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -230,7 +230,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public String getStyleListStyleNameAttribute()
 	{
-		StyleListStyleNameAttribute attr = (StyleListStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "list-style-name" ) );
+		StyleListStyleNameAttribute attr = (StyleListStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "list-style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -257,7 +257,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public String getStyleMasterPageNameAttribute()
 	{
-		StyleMasterPageNameAttribute attr = (StyleMasterPageNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "master-page-name" ) );
+		StyleMasterPageNameAttribute attr = (StyleMasterPageNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "master-page-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -284,7 +284,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public Boolean getStyleAutoUpdateAttribute()
 	{
-		StyleAutoUpdateAttribute attr = (StyleAutoUpdateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "auto-update" ) );
+		StyleAutoUpdateAttribute attr = (StyleAutoUpdateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "auto-update" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -311,7 +311,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public String getStyleDataStyleNameAttribute()
 	{
-		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "data-style-name" ) );
+		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -338,7 +338,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public String getStylePercentageDataStyleNameAttribute()
 	{
-		StylePercentageDataStyleNameAttribute attr = (StylePercentageDataStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "percentage-data-style-name" ) );
+		StylePercentageDataStyleNameAttribute attr = (StylePercentageDataStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "percentage-data-style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -365,7 +365,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public String getStyleClassAttribute()
 	{
-		StyleClassAttribute attr = (StyleClassAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "class" ) );
+		StyleClassAttribute attr = (StyleClassAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "class" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -392,7 +392,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public Integer getStyleDefaultOutlineLevelAttribute()
 	{
-		StyleDefaultOutlineLevelAttribute attr = (StyleDefaultOutlineLevelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "default-outline-level" ) );
+		StyleDefaultOutlineLevelAttribute attr = (StyleDefaultOutlineLevelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "default-outline-level" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -419,7 +419,7 @@ public abstract class StyleStyleElement extends OdfStyleBase
 	 */
 	public String getStyleFamilyAttribute()
 	{
-		StyleFamilyAttribute attr = (StyleFamilyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "family" ) );
+		StyleFamilyAttribute attr = (StyleFamilyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "family" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

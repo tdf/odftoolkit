@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextLabelAttribute;
  */
 public abstract class TextNoteCitationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "note-citation" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "note-citation" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class TextNoteCitationElement extends OdfElement
 	 */
 	public String getTextLabelAttribute()
 	{
-		TextLabelAttribute attr = (TextLabelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "label" ) );
+		TextLabelAttribute attr = (TextLabelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "label" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

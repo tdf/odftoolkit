@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public abstract class DcDescriptionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DC), "description" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DC, "description" );
 
 
 	/**

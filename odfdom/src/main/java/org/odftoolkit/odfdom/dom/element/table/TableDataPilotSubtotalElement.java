@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableFunctionAttribute;
  */
 public abstract class TableDataPilotSubtotalElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-pilot-subtotal" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-subtotal" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class TableDataPilotSubtotalElement extends OdfElement
 	 */
 	public String getTableFunctionAttribute()
 	{
-		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "function" ) );
+		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "function" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

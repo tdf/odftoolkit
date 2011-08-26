@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleRubyAlignAttribute;
  */
 public abstract class StyleRubyPropertiesElement extends OdfStylePropertiesBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "ruby-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "ruby-properties" );
 
 
 	/**
@@ -68,9 +68,9 @@ public abstract class StyleRubyPropertiesElement extends OdfStylePropertiesBase
 	}
 
     public final static OdfStyleProperty RubyPosition = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "ruby-position"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.newName(OdfNamespaceNames.STYLE, "ruby-position"));
     public final static OdfStyleProperty RubyAlign = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "ruby-align"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.newName(OdfNamespaceNames.STYLE, "ruby-align"));
 
 
 	/**
@@ -80,7 +80,7 @@ public abstract class StyleRubyPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRubyPositionAttribute()
 	{
-		StyleRubyPositionAttribute attr = (StyleRubyPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "ruby-position" ) );
+		StyleRubyPositionAttribute attr = (StyleRubyPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "ruby-position" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -107,7 +107,7 @@ public abstract class StyleRubyPropertiesElement extends OdfStylePropertiesBase
 	 */
 	public String getStyleRubyAlignAttribute()
 	{
-		StyleRubyAlignAttribute attr = (StyleRubyAlignAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "ruby-align" ) );
+		StyleRubyAlignAttribute attr = (StyleRubyAlignAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "ruby-align" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

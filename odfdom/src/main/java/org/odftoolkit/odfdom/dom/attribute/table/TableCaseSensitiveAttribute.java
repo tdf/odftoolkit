@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableSubtotalRulesElement;
  */
 public class TableCaseSensitiveAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "case-sensitive" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "case-sensitive" );
 	public static final String DEFAULT_VALUE_FALSE = "false";
 	public static final String DEFAULT_VALUE_TRUE = "true";
 
@@ -84,13 +84,13 @@ public class TableCaseSensitiveAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof TableCalculationSettingsElement ){
-					super.setValue(Boolean.toString(Boolean.parseBoolean(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TableFilterConditionElement ){
 					super.setValue(attrValue);
 				}else if( parentElement instanceof TableSortElement ){
-					super.setValue(Boolean.toString(Boolean.parseBoolean(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TableSubtotalRulesElement ){
-					super.setValue(Boolean.toString(Boolean.parseBoolean(attrValue)));
+					super.setValue(attrValue);
 				}			
 			} catch (NullPointerException e) {
 				// TODO: validation handling/logging
@@ -115,13 +115,15 @@ public class TableCaseSensitiveAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof TableCalculationSettingsElement ){
-					return String.valueOf(Boolean.parseBoolean(super.getValue()));
+					return super.getValue();
 				}else if( parentElement instanceof TableFilterConditionElement ){
 					return super.getValue();
 				}else if( parentElement instanceof TableSortElement ){
-					return String.valueOf(Boolean.parseBoolean(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TableSubtotalRulesElement ){
-					return String.valueOf(Boolean.parseBoolean(super.getValue()));
+					
+					return super.getValue();
 				}			
 			} catch (IllegalArgumentException e) {
 				// TODO: validation handling/logging

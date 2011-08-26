@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableQueryNameAttribute;
  */
 public abstract class TableDatabaseSourceQueryElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "database-source-query" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "database-source-query" );
 
 
 	/**
@@ -85,7 +85,7 @@ public abstract class TableDatabaseSourceQueryElement extends OdfElement
 	 */
 	public String getTableDatabaseNameAttribute()
 	{
-		TableDatabaseNameAttribute attr = (TableDatabaseNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "database-name" ) );
+		TableDatabaseNameAttribute attr = (TableDatabaseNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "database-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public abstract class TableDatabaseSourceQueryElement extends OdfElement
 	 */
 	public String getTableQueryNameAttribute()
 	{
-		TableQueryNameAttribute attr = (TableQueryNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "query-name" ) );
+		TableQueryNameAttribute attr = (TableQueryNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "query-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

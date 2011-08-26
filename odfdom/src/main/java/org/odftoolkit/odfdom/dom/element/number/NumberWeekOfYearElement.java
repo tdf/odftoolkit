@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberCalendarAttribute;
  */
 public abstract class NumberWeekOfYearElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "week-of-year" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "week-of-year" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class NumberWeekOfYearElement extends OdfElement
 	 */
 	public String getNumberCalendarAttribute()
 	{
-		NumberCalendarAttribute attr = (NumberCalendarAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "calendar" ) );
+		NumberCalendarAttribute attr = (NumberCalendarAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "calendar" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

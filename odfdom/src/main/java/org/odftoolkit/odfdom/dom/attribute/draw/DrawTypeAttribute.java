@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawEnhancedGeometryElement;
  */
 public class DrawTypeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "type" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "type" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:type}.
@@ -155,7 +155,7 @@ public class DrawTypeAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof DrawConnectorElement ){
-					return DrawConnectorElement.DrawTypeAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof DrawEnhancedGeometryElement ){
 					//2DO: need validate value against string;enum
 					return super.getValue();

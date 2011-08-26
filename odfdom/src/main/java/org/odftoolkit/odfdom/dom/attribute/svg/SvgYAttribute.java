@@ -67,7 +67,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
  */
 public class SvgYAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "y" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.SVG, "y" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute svg:y}.

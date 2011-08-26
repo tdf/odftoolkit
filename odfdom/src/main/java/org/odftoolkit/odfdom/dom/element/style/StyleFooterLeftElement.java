@@ -60,7 +60,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextIndexTitleElement;
  */
 public abstract class StyleFooterLeftElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "footer-left" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "footer-left" );
 
 
 	/**
@@ -92,7 +92,7 @@ public abstract class StyleFooterLeftElement extends OdfElement
 	 */
 	public Boolean getStyleDisplayAttribute()
 	{
-		StyleDisplayAttribute attr = (StyleDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "display" ) );
+		StyleDisplayAttribute attr = (StyleDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "display" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

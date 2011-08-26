@@ -62,7 +62,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleImageElement;
  */
 public class XlinkActuateAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "actuate" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.XLINK, "actuate" );
 	public static final String DEFAULT_VALUE_ONLOAD = Value.ONLOAD.toString();
 	public static final String DEFAULT_VALUE_ONREQUEST = Value.ONREQUEST.toString();
 
@@ -219,7 +219,7 @@ public class XlinkActuateAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof DbComponentElement ){
-					return DbComponentElement.XlinkActuateAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof DbConnectionResourceElement ){
 					return DbConnectionResourceElement.XlinkActuateAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof DrawAElement ){

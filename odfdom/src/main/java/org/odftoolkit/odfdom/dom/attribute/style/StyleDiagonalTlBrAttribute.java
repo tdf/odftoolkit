@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class StyleDiagonalTlBrAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "diagonal-tl-br" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "diagonal-tl-br" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:diagonal-tl-br}.

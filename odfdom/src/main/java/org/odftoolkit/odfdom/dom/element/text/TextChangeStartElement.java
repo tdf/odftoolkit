@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextChangeIdAttribute;
  */
 public abstract class TextChangeStartElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "change-start" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "change-start" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class TextChangeStartElement extends OdfElement
 	 */
 	public String getTextChangeIdAttribute()
 	{
-		TextChangeIdAttribute attr = (TextChangeIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "change-id" ) );
+		TextChangeIdAttribute attr = (TextChangeIdAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "change-id" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

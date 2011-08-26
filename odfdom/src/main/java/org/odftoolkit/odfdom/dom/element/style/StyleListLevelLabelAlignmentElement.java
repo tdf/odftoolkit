@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoMarginLeftAttribute;
  */
 public abstract class StyleListLevelLabelAlignmentElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "list-level-label-alignment" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "list-level-label-alignment" );
 
 
 	/**
@@ -85,7 +85,7 @@ public abstract class StyleListLevelLabelAlignmentElement extends OdfElement
 	 */
 	public String getTextLabelFollowedByAttribute()
 	{
-		TextLabelFollowedByAttribute attr = (TextLabelFollowedByAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "label-followed-by" ) );
+		TextLabelFollowedByAttribute attr = (TextLabelFollowedByAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "label-followed-by" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public abstract class StyleListLevelLabelAlignmentElement extends OdfElement
 	 */
 	public String getTextListTabStopPositionAttribute()
 	{
-		TextListTabStopPositionAttribute attr = (TextListTabStopPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "list-tab-stop-position" ) );
+		TextListTabStopPositionAttribute attr = (TextListTabStopPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "list-tab-stop-position" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public abstract class StyleListLevelLabelAlignmentElement extends OdfElement
 	 */
 	public String getFoTextIndentAttribute()
 	{
-		FoTextIndentAttribute attr = (FoTextIndentAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-indent" ) );
+		FoTextIndentAttribute attr = (FoTextIndentAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "text-indent" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -166,7 +166,7 @@ public abstract class StyleListLevelLabelAlignmentElement extends OdfElement
 	 */
 	public String getFoMarginLeftAttribute()
 	{
-		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-left" ) );
+		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "margin-left" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

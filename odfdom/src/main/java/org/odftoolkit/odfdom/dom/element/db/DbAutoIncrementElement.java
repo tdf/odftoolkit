@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbRowRetrievingStatementAttribute;
  */
 public abstract class DbAutoIncrementElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "auto-increment" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "auto-increment" );
 
 
 	/**
@@ -74,7 +74,7 @@ public abstract class DbAutoIncrementElement extends OdfElement
 	 */
 	public String getDbAdditionalColumnStatementAttribute()
 	{
-		DbAdditionalColumnStatementAttribute attr = (DbAdditionalColumnStatementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "additional-column-statement" ) );
+		DbAdditionalColumnStatementAttribute attr = (DbAdditionalColumnStatementAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "additional-column-statement" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -101,7 +101,7 @@ public abstract class DbAutoIncrementElement extends OdfElement
 	 */
 	public String getDbRowRetrievingStatementAttribute()
 	{
-		DbRowRetrievingStatementAttribute attr = (DbRowRetrievingStatementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "row-retrieving-statement" ) );
+		DbRowRetrievingStatementAttribute attr = (DbRowRetrievingStatementAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "row-retrieving-statement" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

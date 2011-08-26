@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
  */
 public abstract class FormConnectionResourceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "connection-resource" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "connection-resource" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class FormConnectionResourceElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

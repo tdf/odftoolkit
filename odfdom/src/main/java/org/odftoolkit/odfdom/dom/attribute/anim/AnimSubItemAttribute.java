@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class AnimSubItemAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "sub-item" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.ANIM, "sub-item" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute anim:sub-item}.

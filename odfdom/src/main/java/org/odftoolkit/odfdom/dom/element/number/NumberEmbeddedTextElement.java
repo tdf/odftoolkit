@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberPositionAttribute;
  */
 public abstract class NumberEmbeddedTextElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "embedded-text" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "embedded-text" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class NumberEmbeddedTextElement extends OdfElement
 	 */
 	public Integer getNumberPositionAttribute()
 	{
-		NumberPositionAttribute attr = (NumberPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "position" ) );
+		NumberPositionAttribute attr = (NumberPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "position" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

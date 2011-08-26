@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbApplyCommandAttribute;
  */
 public abstract class DbOrderStatementElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "order-statement" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "order-statement" );
 
 
 	/**
@@ -83,7 +83,7 @@ public abstract class DbOrderStatementElement extends OdfElement
 	 */
 	public String getDbCommandAttribute()
 	{
-		DbCommandAttribute attr = (DbCommandAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "command" ) );
+		DbCommandAttribute attr = (DbCommandAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "command" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public abstract class DbOrderStatementElement extends OdfElement
 	 */
 	public Boolean getDbApplyCommandAttribute()
 	{
-		DbApplyCommandAttribute attr = (DbApplyCommandAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "apply-command" ) );
+		DbApplyCommandAttribute attr = (DbApplyCommandAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "apply-command" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

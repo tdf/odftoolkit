@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
  */
 public abstract class PresentationDateTimeDeclElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "date-time-decl" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "date-time-decl" );
 
 
 	/**
@@ -86,7 +86,7 @@ public abstract class PresentationDateTimeDeclElement extends OdfElement
 	 */
 	public String getPresentationNameAttribute()
 	{
-		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "name" ) );
+		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public abstract class PresentationDateTimeDeclElement extends OdfElement
 	 */
 	public String getPresentationSourceAttribute()
 	{
-		PresentationSourceAttribute attr = (PresentationSourceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "source" ) );
+		PresentationSourceAttribute attr = (PresentationSourceAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "source" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -140,7 +140,7 @@ public abstract class PresentationDateTimeDeclElement extends OdfElement
 	 */
 	public String getStyleDataStyleNameAttribute()
 	{
-		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "data-style-name" ) );
+		StyleDataStyleNameAttribute attr = (StyleDataStyleNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "data-style-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -40,6 +40,7 @@ import org.odftoolkit.odfdom.doc.text.OdfTextListStyle;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
@@ -306,6 +307,13 @@ public class DocumentTest {
             OdfStyle styleNode = odt.getContentDom().getAutomaticStyles().getStyle("T1", OdfStyleFamily.Text);
             StyleTextPropertiesElement props = OdfElement.findFirstChildNode(StyleTextPropertiesElement.class, styleNode);
             Assert.assertFalse(props.hasAttribute("style:text-underline-style"));
+            odt.save(ResourceUtilities.newTestOutputFile("saving-is-possible2.odt"));
+
+            // Test3: New ODF 1.2 attribute node should exist
+            OdfStyle styleNode2 = odt.getStylesDom().getOfficeStyles().getStyle("bug77", OdfStyleFamily.Graphic);
+            StyleGraphicPropertiesElement propsGrapicElement = OdfElement.findFirstChildNode(StyleGraphicPropertiesElement.class, styleNode2);
+            Assert.assertTrue("Could not find the attribute svg:opac-capicity. Workaround bug77 did not succeeded!", propsGrapicElement.hasAttribute("svg:stroke-opacity"));
+            odt.save(ResourceUtilities.newTestOutputFile("saving-is-possible.odt"));
         }
         catch (Exception e) {
             e.printStackTrace();

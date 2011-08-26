@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbIsAscendingAttribute;
  */
 public abstract class DbIndexColumnElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "index-column" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "index-column" );
 
 
 	/**
@@ -83,7 +83,7 @@ public abstract class DbIndexColumnElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "name" ) );
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public abstract class DbIndexColumnElement extends OdfElement
 	 */
 	public Boolean getDbIsAscendingAttribute()
 	{
-		DbIsAscendingAttribute attr = (DbIsAscendingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "is-ascending" ) );
+		DbIsAscendingAttribute attr = (DbIsAscendingAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-ascending" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

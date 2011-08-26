@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.chart.ChartSeriesElement;
  */
 public class ChartClassAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "class" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.CHART, "class" );
 	public static final String DEFAULT_VALUE = "major";
 
 	/**

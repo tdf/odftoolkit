@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextStringValueAttribute;
  */
 public abstract class TextPageContinuationElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "page-continuation" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "page-continuation" );
 
 	/**
 	 * The value set of {@odf.attribute text:select-page}.
@@ -114,7 +114,7 @@ public abstract class TextPageContinuationElement extends OdfElement
 	 */
 	public String getTextSelectPageAttribute()
 	{
-		TextSelectPageAttribute attr = (TextSelectPageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "select-page" ) );
+		TextSelectPageAttribute attr = (TextSelectPageAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "select-page" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -141,7 +141,7 @@ public abstract class TextPageContinuationElement extends OdfElement
 	 */
 	public String getTextStringValueAttribute()
 	{
-		TextStringValueAttribute attr = (TextStringValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "string-value" ) );
+		TextStringValueAttribute attr = (TextStringValueAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "string-value" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

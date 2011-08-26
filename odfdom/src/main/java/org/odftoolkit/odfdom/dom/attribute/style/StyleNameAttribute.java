@@ -53,7 +53,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextOutlineStyleElement;
  */
 public class StyleNameAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "name" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "name" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:name}.

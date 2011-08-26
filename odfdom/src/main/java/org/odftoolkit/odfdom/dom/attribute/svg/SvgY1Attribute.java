@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.element.svg.SvgLinearGradientElement;
  */
 public class SvgY1Attribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "y1" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.SVG, "y1" );
 	public static final String DEFAULT_VALUE = "0%";
 
 	/**

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextReferenceFormatAttribute;
  */
 public abstract class TextBookmarkRefElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "bookmark-ref" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "bookmark-ref" );
 
 	/**
 	 * The value set of {@odf.attribute text:reference-format}.
@@ -106,7 +106,7 @@ public abstract class TextBookmarkRefElement extends OdfElement
 	 */
 	public String getTextRefNameAttribute()
 	{
-		TextRefNameAttribute attr = (TextRefNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "ref-name" ) );
+		TextRefNameAttribute attr = (TextRefNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "ref-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -133,7 +133,7 @@ public abstract class TextBookmarkRefElement extends OdfElement
 	 */
 	public String getTextReferenceFormatAttribute()
 	{
-		TextReferenceFormatAttribute attr = (TextReferenceFormatAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "reference-format" ) );
+		TextReferenceFormatAttribute attr = (TextReferenceFormatAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "reference-format" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

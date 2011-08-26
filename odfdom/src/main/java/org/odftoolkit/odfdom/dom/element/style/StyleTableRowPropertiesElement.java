@@ -50,7 +50,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
  */
 public abstract class StyleTableRowPropertiesElement extends OdfStylePropertiesBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "table-row-properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "table-row-properties" );
 
 
 	/**
@@ -74,19 +74,19 @@ public abstract class StyleTableRowPropertiesElement extends OdfStylePropertiesB
 	}
 
     public final static OdfStyleProperty RowHeight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "row-height"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespaceNames.STYLE, "row-height"));
     public final static OdfStyleProperty MinRowHeight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "min-row-height"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespaceNames.STYLE, "min-row-height"));
     public final static OdfStyleProperty UseOptimalRowHeight = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "use-optimal-row-height"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespaceNames.STYLE, "use-optimal-row-height"));
     public final static OdfStyleProperty BackgroundColor = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "background-color"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespaceNames.FO, "background-color"));
     public final static OdfStyleProperty BreakBefore = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "break-before"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespaceNames.FO, "break-before"));
     public final static OdfStyleProperty BreakAfter = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "break-after"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespaceNames.FO, "break-after"));
     public final static OdfStyleProperty KeepTogether = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "keep-together"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableRowProperties, OdfName.newName(OdfNamespaceNames.FO, "keep-together"));
 
 
 	/**
@@ -96,7 +96,7 @@ public abstract class StyleTableRowPropertiesElement extends OdfStylePropertiesB
 	 */
 	public String getStyleRowHeightAttribute()
 	{
-		StyleRowHeightAttribute attr = (StyleRowHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "row-height" ) );
+		StyleRowHeightAttribute attr = (StyleRowHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "row-height" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -123,7 +123,7 @@ public abstract class StyleTableRowPropertiesElement extends OdfStylePropertiesB
 	 */
 	public String getStyleMinRowHeightAttribute()
 	{
-		StyleMinRowHeightAttribute attr = (StyleMinRowHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "min-row-height" ) );
+		StyleMinRowHeightAttribute attr = (StyleMinRowHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "min-row-height" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -150,7 +150,7 @@ public abstract class StyleTableRowPropertiesElement extends OdfStylePropertiesB
 	 */
 	public Boolean getStyleUseOptimalRowHeightAttribute()
 	{
-		StyleUseOptimalRowHeightAttribute attr = (StyleUseOptimalRowHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "use-optimal-row-height" ) );
+		StyleUseOptimalRowHeightAttribute attr = (StyleUseOptimalRowHeightAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.STYLE), "use-optimal-row-height" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -177,7 +177,7 @@ public abstract class StyleTableRowPropertiesElement extends OdfStylePropertiesB
 	 */
 	public String getFoBackgroundColorAttribute()
 	{
-		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "background-color" ) );
+		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "background-color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -204,7 +204,7 @@ public abstract class StyleTableRowPropertiesElement extends OdfStylePropertiesB
 	 */
 	public String getFoBreakBeforeAttribute()
 	{
-		FoBreakBeforeAttribute attr = (FoBreakBeforeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "break-before" ) );
+		FoBreakBeforeAttribute attr = (FoBreakBeforeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-before" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -231,7 +231,7 @@ public abstract class StyleTableRowPropertiesElement extends OdfStylePropertiesB
 	 */
 	public String getFoBreakAfterAttribute()
 	{
-		FoBreakAfterAttribute attr = (FoBreakAfterAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "break-after" ) );
+		FoBreakAfterAttribute attr = (FoBreakAfterAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "break-after" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -258,7 +258,7 @@ public abstract class StyleTableRowPropertiesElement extends OdfStylePropertiesB
 	 */
 	public String getFoKeepTogetherAttribute()
 	{
-		FoKeepTogetherAttribute attr = (FoKeepTogetherAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "keep-together" ) );
+		FoKeepTogetherAttribute attr = (FoKeepTogetherAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FO), "keep-together" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

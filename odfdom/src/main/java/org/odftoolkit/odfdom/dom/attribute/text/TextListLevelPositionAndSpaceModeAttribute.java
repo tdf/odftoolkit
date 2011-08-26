@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class TextListLevelPositionAndSpaceModeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "list-level-position-and-space-mode" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "list-level-position-and-space-mode" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:list-level-position-and-space-mode}.
@@ -136,8 +136,7 @@ public class TextListLevelPositionAndSpaceModeAttribute extends OdfAttribute {
 	 */
 	@Override
 	public String getValue(){
-		try{
-			return Value.enumValueOf(super.getValue()).toString();		
+		try{return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of text:list-level-position-and-space-mode is not valid");

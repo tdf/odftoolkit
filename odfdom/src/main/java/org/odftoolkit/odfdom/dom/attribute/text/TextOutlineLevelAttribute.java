@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextUserIndexMarkStartElement;
  */
 public class TextOutlineLevelAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "outline-level" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "outline-level" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:outline-level}.
@@ -140,37 +140,37 @@ public class TextOutlineLevelAttribute extends OdfAttribute {
 					super.setValue(TextAlphabeticalIndexEntryTemplateElement.TextOutlineLevelAttributeValue.enumValueOf(attrValue).toString());
 				}else if( parentElement instanceof TextChapterElement ){
 					//2DO: need validate value against NonNegativeInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextHElement ){
 					//2DO: need validate value against PositiveInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextIndexEntryChapterElement ){
 					//2DO: need validate value against PositiveInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextIndexSourceStylesElement ){
 					//2DO: need validate value against PositiveInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextTableOfContentEntryTemplateElement ){
 					//2DO: need validate value against PositiveInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextTableOfContentSourceElement ){
 					//2DO: need validate value against PositiveInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextTocMarkElement ){
 					//2DO: need validate value against PositiveInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextTocMarkStartElement ){
 					//2DO: need validate value against PositiveInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextUserIndexEntryTemplateElement ){
 					//2DO: need validate value against PositiveInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextUserIndexMarkElement ){
 					//2DO: need validate value against PositiveInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof TextUserIndexMarkStartElement ){
 					//2DO: need validate value against PositiveInteger
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}			
 			} catch (NullPointerException e) {
 				// TODO: validation handling/logging
@@ -195,40 +195,51 @@ public class TextOutlineLevelAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof TextAlphabeticalIndexEntryTemplateElement ){
-					return TextAlphabeticalIndexEntryTemplateElement.TextOutlineLevelAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof TextChapterElement ){
 					//2DO: need validate value against NonNegativeInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextHElement ){
 					//2DO: need validate value against PositiveInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextIndexEntryChapterElement ){
 					//2DO: need validate value against PositiveInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextIndexSourceStylesElement ){
 					//2DO: need validate value against PositiveInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextTableOfContentEntryTemplateElement ){
 					//2DO: need validate value against PositiveInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextTableOfContentSourceElement ){
 					//2DO: need validate value against PositiveInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextTocMarkElement ){
 					//2DO: need validate value against PositiveInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextTocMarkStartElement ){
 					//2DO: need validate value against PositiveInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextUserIndexEntryTemplateElement ){
 					//2DO: need validate value against PositiveInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextUserIndexMarkElement ){
 					//2DO: need validate value against PositiveInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof TextUserIndexMarkStartElement ){
 					//2DO: need validate value against PositiveInteger
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}			
 			} catch (IllegalArgumentException e) {
 				// TODO: validation handling/logging

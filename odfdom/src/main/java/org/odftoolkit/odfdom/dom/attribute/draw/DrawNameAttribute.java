@@ -68,7 +68,7 @@ import org.odftoolkit.odfdom.dom.element.svg.SvgRadialGradientElement;
  */
 public class DrawNameAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "name" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "name" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:name}.

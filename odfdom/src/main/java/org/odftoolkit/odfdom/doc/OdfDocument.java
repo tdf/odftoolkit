@@ -1139,6 +1139,7 @@ public abstract class OdfDocument {
 				} else {
 					// don't exit because of invalid attribute values
 					try {
+						// set Value in the attribute to allow validation in the attribute
 						attr.setValue(attributes.getValue(i));
 					} // if we detect an attribute with invalid value: remove attribute node
 					catch (IllegalArgumentException e) {

@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextTrackChangesAttribute;
  */
 public abstract class TextTrackedChangesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "tracked-changes" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "tracked-changes" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class TextTrackedChangesElement extends OdfElement
 	 */
 	public Boolean getTextTrackChangesAttribute()
 	{
-		TextTrackChangesAttribute attr = (TextTrackChangesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "track-changes" ) );
+		TextTrackChangesAttribute attr = (TextTrackChangesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "track-changes" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

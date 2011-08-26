@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableShowEmptyAttribute;
  */
 public abstract class TableDataPilotLevelElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-pilot-level" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "data-pilot-level" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class TableDataPilotLevelElement extends OdfElement
 	 */
 	public Boolean getTableShowEmptyAttribute()
 	{
-		TableShowEmptyAttribute attr = (TableShowEmptyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "show-empty" ) );
+		TableShowEmptyAttribute attr = (TableShowEmptyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "show-empty" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

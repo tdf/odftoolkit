@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class DrawPathStretchpointYAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "path-stretchpoint-y" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "path-stretchpoint-y" );
 	public static final String DEFAULT_VALUE = "0";
 
 	/**
@@ -80,6 +80,7 @@ public class DrawPathStretchpointYAttribute extends OdfAttribute {
 	 * @return Returns the <code>double</code> value of the attribute
 	 */
 	public double doubleValue(){
+		
 		String value = super.getValue();
 		try {
 			return Double.parseDouble(value);
@@ -95,7 +96,7 @@ public class DrawPathStretchpointYAttribute extends OdfAttribute {
 	@Override
 	public void setValue(String attrValue) {
 		try{
-			super.setValue(Double.toString(Double.parseDouble(attrValue)));	
+			super.setValue(attrValue);	
 		}  catch (NullPointerException e) {
 			// TODO: validation handling/logging
 			throw new IllegalArgumentException(e);
@@ -111,7 +112,7 @@ public class DrawPathStretchpointYAttribute extends OdfAttribute {
 	@Override
 	public String getValue(){
 		try{
-			return String.valueOf(Double.parseDouble(super.getValue()));		
+			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of draw:path-stretchpoint-y is not valid");

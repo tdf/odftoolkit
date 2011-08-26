@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbRelatedColumnNameAttribute;
  */
 public abstract class DbKeyColumnElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "key-column" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "key-column" );
 
 
 	/**
@@ -74,7 +74,7 @@ public abstract class DbKeyColumnElement extends OdfElement
 	 */
 	public String getDbNameAttribute()
 	{
-		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "name" ) );
+		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -101,7 +101,7 @@ public abstract class DbKeyColumnElement extends OdfElement
 	 */
 	public String getDbRelatedColumnNameAttribute()
 	{
-		DbRelatedColumnNameAttribute attr = (DbRelatedColumnNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "related-column-name" ) );
+		DbRelatedColumnNameAttribute attr = (DbRelatedColumnNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "related-column-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawRectElement;
  */
 public class SvgRxAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "rx" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.SVG, "rx" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute svg:rx}.

@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableBaseCellAddressAttribute;
  */
 public abstract class TableNamedExpressionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "named-expression" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "named-expression" );
 
 
 	/**
@@ -85,7 +85,7 @@ public abstract class TableNamedExpressionElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "name" ) );
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public abstract class TableNamedExpressionElement extends OdfElement
 	 */
 	public String getTableExpressionAttribute()
 	{
-		TableExpressionAttribute attr = (TableExpressionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "expression" ) );
+		TableExpressionAttribute attr = (TableExpressionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "expression" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public abstract class TableNamedExpressionElement extends OdfElement
 	 */
 	public String getTableBaseCellAddressAttribute()
 	{
-		TableBaseCellAddressAttribute attr = (TableBaseCellAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "base-cell-address" ) );
+		TableBaseCellAddressAttribute attr = (TableBaseCellAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "base-cell-address" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

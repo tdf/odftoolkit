@@ -45,7 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableLastRowEndColumnAttribute;
  */
 public abstract class TableTableTemplateElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "table-template" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-template" );
 
 
 	/**
@@ -93,7 +93,7 @@ public abstract class TableTableTemplateElement extends OdfElement
 	 */
 	public String getTableNameAttribute()
 	{
-		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "name" ) );
+		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -120,7 +120,7 @@ public abstract class TableTableTemplateElement extends OdfElement
 	 */
 	public String getTableFirstRowStartColumnAttribute()
 	{
-		TableFirstRowStartColumnAttribute attr = (TableFirstRowStartColumnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "first-row-start-column" ) );
+		TableFirstRowStartColumnAttribute attr = (TableFirstRowStartColumnAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "first-row-start-column" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -147,7 +147,7 @@ public abstract class TableTableTemplateElement extends OdfElement
 	 */
 	public String getTableFirstRowEndColumnAttribute()
 	{
-		TableFirstRowEndColumnAttribute attr = (TableFirstRowEndColumnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "first-row-end-column" ) );
+		TableFirstRowEndColumnAttribute attr = (TableFirstRowEndColumnAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "first-row-end-column" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -174,7 +174,7 @@ public abstract class TableTableTemplateElement extends OdfElement
 	 */
 	public String getTableLastRowStartColumnAttribute()
 	{
-		TableLastRowStartColumnAttribute attr = (TableLastRowStartColumnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "last-row-start-column" ) );
+		TableLastRowStartColumnAttribute attr = (TableLastRowStartColumnAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "last-row-start-column" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -201,7 +201,7 @@ public abstract class TableTableTemplateElement extends OdfElement
 	 */
 	public String getTableLastRowEndColumnAttribute()
 	{
-		TableLastRowEndColumnAttribute attr = (TableLastRowEndColumnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "last-row-end-column" ) );
+		TableLastRowEndColumnAttribute attr = (TableLastRowEndColumnAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "last-row-end-column" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

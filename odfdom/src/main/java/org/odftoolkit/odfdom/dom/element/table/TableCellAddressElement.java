@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableTableAttribute;
  */
 public abstract class TableCellAddressElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "cell-address" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "cell-address" );
 
 
 	/**
@@ -88,7 +88,7 @@ public abstract class TableCellAddressElement extends OdfElement
 	 */
 	public Integer getTableColumnAttribute()
 	{
-		TableColumnAttribute attr = (TableColumnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "column" ) );
+		TableColumnAttribute attr = (TableColumnAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "column" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -115,7 +115,7 @@ public abstract class TableCellAddressElement extends OdfElement
 	 */
 	public Integer getTableRowAttribute()
 	{
-		TableRowAttribute attr = (TableRowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "row" ) );
+		TableRowAttribute attr = (TableRowAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "row" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -142,7 +142,7 @@ public abstract class TableCellAddressElement extends OdfElement
 	 */
 	public Integer getTableTableAttribute()
 	{
-		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "table" ) );
+		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "table" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}

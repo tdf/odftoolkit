@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableTrackChangesAttribute;
  */
 public abstract class TableTrackedChangesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "tracked-changes" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "tracked-changes" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class TableTrackedChangesElement extends OdfElement
 	 */
 	public Boolean getTableTrackChangesAttribute()
 	{
-		TableTrackChangesAttribute attr = (TableTrackChangesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "track-changes" ) );
+		TableTrackChangesAttribute attr = (TableTrackChangesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "track-changes" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

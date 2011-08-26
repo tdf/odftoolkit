@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public class PresentationShowEndOfPresentationSlideAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "show-end-of-presentation-slide" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.PRESENTATION, "show-end-of-presentation-slide" );
 	public static final String DEFAULT_VALUE = "true";
 
 	/**
@@ -80,6 +80,7 @@ public class PresentationShowEndOfPresentationSlideAttribute extends OdfAttribut
 	 * @return Returns the <code>boolean</code> value of the attribute
 	 */
 	public boolean booleanValue(){
+		
 		String value = super.getValue();
 		try {
 			return Boolean.parseBoolean(value);
@@ -95,7 +96,7 @@ public class PresentationShowEndOfPresentationSlideAttribute extends OdfAttribut
 	@Override
 	public void setValue(String attrValue) {
 		try{
-			super.setValue(Boolean.toString(Boolean.parseBoolean(attrValue)));	
+			super.setValue(attrValue);	
 		}  catch (NullPointerException e) {
 			// TODO: validation handling/logging
 			throw new IllegalArgumentException(e);
@@ -111,7 +112,7 @@ public class PresentationShowEndOfPresentationSlideAttribute extends OdfAttribut
 	@Override
 	public String getValue(){
 		try{
-			return String.valueOf(Boolean.parseBoolean(super.getValue()));		
+			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of presentation:show-end-of-presentation-slide is not valid");

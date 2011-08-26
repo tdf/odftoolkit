@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableRefreshDelayAttribute;
  */
 public abstract class TableTableSourceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "table-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-source" );
 
 	/**
 	 * The value set of {@odf.attribute xlink:actuate}.
@@ -124,7 +124,7 @@ public abstract class TableTableSourceElement extends OdfElement
 	 */
 	public String getTableModeAttribute()
 	{
-		TableModeAttribute attr = (TableModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "mode" ) );
+		TableModeAttribute attr = (TableModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "mode" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -151,7 +151,7 @@ public abstract class TableTableSourceElement extends OdfElement
 	 */
 	public String getTableTableNameAttribute()
 	{
-		TableTableNameAttribute attr = (TableTableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "table-name" ) );
+		TableTableNameAttribute attr = (TableTableNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "table-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -178,7 +178,7 @@ public abstract class TableTableSourceElement extends OdfElement
 	 */
 	public String getXlinkTypeAttribute()
 	{
-		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "type" ) );
+		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -205,7 +205,7 @@ public abstract class TableTableSourceElement extends OdfElement
 	 */
 	public String getXlinkHrefAttribute()
 	{
-		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "href" ) );
+		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "href" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -232,7 +232,7 @@ public abstract class TableTableSourceElement extends OdfElement
 	 */
 	public String getXlinkActuateAttribute()
 	{
-		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "actuate" ) );
+		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.XLINK), "actuate" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -259,7 +259,7 @@ public abstract class TableTableSourceElement extends OdfElement
 	 */
 	public String getTableFilterNameAttribute()
 	{
-		TableFilterNameAttribute attr = (TableFilterNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "filter-name" ) );
+		TableFilterNameAttribute attr = (TableFilterNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "filter-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -286,7 +286,7 @@ public abstract class TableTableSourceElement extends OdfElement
 	 */
 	public String getTableFilterOptionsAttribute()
 	{
-		TableFilterOptionsAttribute attr = (TableFilterOptionsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "filter-options" ) );
+		TableFilterOptionsAttribute attr = (TableFilterOptionsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "filter-options" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -313,7 +313,7 @@ public abstract class TableTableSourceElement extends OdfElement
 	 */
 	public String getTableRefreshDelayAttribute()
 	{
-		TableRefreshDelayAttribute attr = (TableRefreshDelayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "refresh-delay" ) );
+		TableRefreshDelayAttribute attr = (TableRefreshDelayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "refresh-delay" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

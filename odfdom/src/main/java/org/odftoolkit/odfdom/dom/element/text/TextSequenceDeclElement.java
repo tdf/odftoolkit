@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextSeparationCharacterAttribute
  */
 public abstract class TextSequenceDeclElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "sequence-decl" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "sequence-decl" );
 
 
 	/**
@@ -86,7 +86,7 @@ public abstract class TextSequenceDeclElement extends OdfElement
 	 */
 	public String getTextNameAttribute()
 	{
-		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "name" ) );
+		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -113,7 +113,7 @@ public abstract class TextSequenceDeclElement extends OdfElement
 	 */
 	public Integer getTextDisplayOutlineLevelAttribute()
 	{
-		TextDisplayOutlineLevelAttribute attr = (TextDisplayOutlineLevelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "display-outline-level" ) );
+		TextDisplayOutlineLevelAttribute attr = (TextDisplayOutlineLevelAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "display-outline-level" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -140,7 +140,7 @@ public abstract class TextSequenceDeclElement extends OdfElement
 	 */
 	public String getTextSeparationCharacterAttribute()
 	{
-		TextSeparationCharacterAttribute attr = (TextSeparationCharacterAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "separation-character" ) );
+		TextSeparationCharacterAttribute attr = (TextSeparationCharacterAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "separation-character" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

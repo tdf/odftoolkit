@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableOrientationAttribute;
  */
 public abstract class TableLabelRangeElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "label-range" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "label-range" );
 
 
 	/**
@@ -88,7 +88,7 @@ public abstract class TableLabelRangeElement extends OdfElement
 	 */
 	public String getTableLabelCellRangeAddressAttribute()
 	{
-		TableLabelCellRangeAddressAttribute attr = (TableLabelCellRangeAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "label-cell-range-address" ) );
+		TableLabelCellRangeAddressAttribute attr = (TableLabelCellRangeAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "label-cell-range-address" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -115,7 +115,7 @@ public abstract class TableLabelRangeElement extends OdfElement
 	 */
 	public String getTableDataCellRangeAddressAttribute()
 	{
-		TableDataCellRangeAddressAttribute attr = (TableDataCellRangeAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-cell-range-address" ) );
+		TableDataCellRangeAddressAttribute attr = (TableDataCellRangeAddressAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "data-cell-range-address" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -142,7 +142,7 @@ public abstract class TableLabelRangeElement extends OdfElement
 	 */
 	public String getTableOrientationAttribute()
 	{
-		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "orientation" ) );
+		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "orientation" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

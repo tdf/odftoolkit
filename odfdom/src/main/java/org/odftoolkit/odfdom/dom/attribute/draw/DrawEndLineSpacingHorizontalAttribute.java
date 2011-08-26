@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class DrawEndLineSpacingHorizontalAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "end-line-spacing-horizontal" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "end-line-spacing-horizontal" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:end-line-spacing-horizontal}.

@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDescriptionAttribute;
  */
 public abstract class TextPlaceholderElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "placeholder" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "placeholder" );
 
 
 	/**
@@ -83,7 +83,7 @@ public abstract class TextPlaceholderElement extends OdfElement
 	 */
 	public String getTextPlaceholderTypeAttribute()
 	{
-		TextPlaceholderTypeAttribute attr = (TextPlaceholderTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "placeholder-type" ) );
+		TextPlaceholderTypeAttribute attr = (TextPlaceholderTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "placeholder-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -110,7 +110,7 @@ public abstract class TextPlaceholderElement extends OdfElement
 	 */
 	public String getTextDescriptionAttribute()
 	{
-		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "description" ) );
+		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "description" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

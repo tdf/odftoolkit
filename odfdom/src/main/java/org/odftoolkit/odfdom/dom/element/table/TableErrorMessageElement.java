@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  */
 public abstract class TableErrorMessageElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "error-message" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "error-message" );
 
 	public static final String  DEFAULT_VALUE_TABLE_DISPLAY_ATTRIBUTE = TableDisplayAttribute.DEFAULT_VALUE_FALSE;
 
@@ -77,7 +77,7 @@ public abstract class TableErrorMessageElement extends OdfElement
 	 */
 	public String getTableTitleAttribute()
 	{
-		TableTitleAttribute attr = (TableTitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "title" ) );
+		TableTitleAttribute attr = (TableTitleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "title" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -104,7 +104,7 @@ public abstract class TableErrorMessageElement extends OdfElement
 	 */
 	public Boolean getTableDisplayAttribute()
 	{
-		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display" ) );
+		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "display" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -131,7 +131,7 @@ public abstract class TableErrorMessageElement extends OdfElement
 	 */
 	public String getTableMessageTypeAttribute()
 	{
-		TableMessageTypeAttribute attr = (TableMessageTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "message-type" ) );
+		TableMessageTypeAttribute attr = (TableMessageTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TABLE), "message-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

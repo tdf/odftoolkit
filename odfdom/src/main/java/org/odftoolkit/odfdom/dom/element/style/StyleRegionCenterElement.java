@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
  */
 public abstract class StyleRegionCenterElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "region-center" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.STYLE, "region-center" );
 
 
 	/**

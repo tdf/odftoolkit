@@ -50,7 +50,7 @@ import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutElement;
  */
 public abstract class OfficeAutomaticStylesElement extends OdfContainerElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "automatic-styles" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "automatic-styles" );
 
 
 	/**

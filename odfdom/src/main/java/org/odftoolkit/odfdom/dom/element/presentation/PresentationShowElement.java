@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationPagesAttribu
  */
 public abstract class PresentationShowElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "show" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "show" );
 
 
 	/**
@@ -85,7 +85,7 @@ public abstract class PresentationShowElement extends OdfElement
 	 */
 	public String getPresentationNameAttribute()
 	{
-		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "name" ) );
+		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public abstract class PresentationShowElement extends OdfElement
 	 */
 	public String getPresentationPagesAttribute()
 	{
-		PresentationPagesAttribute attr = (PresentationPagesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "pages" ) );
+		PresentationPagesAttribute attr = (PresentationPagesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "pages" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

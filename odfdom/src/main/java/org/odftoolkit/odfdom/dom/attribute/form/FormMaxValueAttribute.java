@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.element.form.FormValueRangeElement;
  */
 public class FormMaxValueAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "max-value" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FORM, "max-value" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute form:max-value}.
@@ -88,12 +88,12 @@ public class FormMaxValueAttribute extends OdfAttribute {
 				}else if( parentElement instanceof FormFormattedTextElement ){
 					super.setValue(attrValue);
 				}else if( parentElement instanceof FormNumberElement ){
-					super.setValue(Double.toString(Double.parseDouble(attrValue)));
+					super.setValue(attrValue);
 				}else if( parentElement instanceof FormTimeElement ){
 					//2DO: need validate value against Time
 					super.setValue(attrValue);
 				}else if( parentElement instanceof FormValueRangeElement ){
-					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
+					super.setValue(attrValue);
 				}			
 			} catch (NullPointerException e) {
 				// TODO: validation handling/logging
@@ -123,12 +123,14 @@ public class FormMaxValueAttribute extends OdfAttribute {
 				}else if( parentElement instanceof FormFormattedTextElement ){
 					return super.getValue();
 				}else if( parentElement instanceof FormNumberElement ){
-					return String.valueOf(Double.parseDouble(super.getValue()));
+					
+					return super.getValue();
 				}else if( parentElement instanceof FormTimeElement ){
 					//2DO: need validate value against Time
 					return super.getValue();
 				}else if( parentElement instanceof FormValueRangeElement ){
-					return String.valueOf(Integer.parseInt(super.getValue()));
+					
+					return super.getValue();
 				}			
 			} catch (IllegalArgumentException e) {
 				// TODO: validation handling/logging

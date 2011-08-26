@@ -50,7 +50,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextIndexNameAttribute;
  */
 public abstract class TextUserIndexSourceElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "user-index-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "user-index-source" );
 
 
 	/**
@@ -91,7 +91,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	 */
 	public String getTextIndexScopeAttribute()
 	{
-		TextIndexScopeAttribute attr = (TextIndexScopeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "index-scope" ) );
+		TextIndexScopeAttribute attr = (TextIndexScopeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "index-scope" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -118,7 +118,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextRelativeTabStopPositionAttribute()
 	{
-		TextRelativeTabStopPositionAttribute attr = (TextRelativeTabStopPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "relative-tab-stop-position" ) );
+		TextRelativeTabStopPositionAttribute attr = (TextRelativeTabStopPositionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "relative-tab-stop-position" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -145,7 +145,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextUseIndexMarksAttribute()
 	{
-		TextUseIndexMarksAttribute attr = (TextUseIndexMarksAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-index-marks" ) );
+		TextUseIndexMarksAttribute attr = (TextUseIndexMarksAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-index-marks" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -172,7 +172,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextUseIndexSourceStylesAttribute()
 	{
-		TextUseIndexSourceStylesAttribute attr = (TextUseIndexSourceStylesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-index-source-styles" ) );
+		TextUseIndexSourceStylesAttribute attr = (TextUseIndexSourceStylesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-index-source-styles" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -199,7 +199,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextUseGraphicsAttribute()
 	{
-		TextUseGraphicsAttribute attr = (TextUseGraphicsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-graphics" ) );
+		TextUseGraphicsAttribute attr = (TextUseGraphicsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-graphics" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -226,7 +226,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextUseTablesAttribute()
 	{
-		TextUseTablesAttribute attr = (TextUseTablesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-tables" ) );
+		TextUseTablesAttribute attr = (TextUseTablesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-tables" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -253,7 +253,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextUseFloatingFramesAttribute()
 	{
-		TextUseFloatingFramesAttribute attr = (TextUseFloatingFramesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-floating-frames" ) );
+		TextUseFloatingFramesAttribute attr = (TextUseFloatingFramesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-floating-frames" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -280,7 +280,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextUseObjectsAttribute()
 	{
-		TextUseObjectsAttribute attr = (TextUseObjectsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-objects" ) );
+		TextUseObjectsAttribute attr = (TextUseObjectsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-objects" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -307,7 +307,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	 */
 	public Boolean getTextCopyOutlineLevelsAttribute()
 	{
-		TextCopyOutlineLevelsAttribute attr = (TextCopyOutlineLevelsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "copy-outline-levels" ) );
+		TextCopyOutlineLevelsAttribute attr = (TextCopyOutlineLevelsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "copy-outline-levels" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -334,7 +334,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	 */
 	public String getTextIndexNameAttribute()
 	{
-		TextIndexNameAttribute attr = (TextIndexNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "index-name" ) );
+		TextIndexNameAttribute attr = (TextIndexNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "index-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

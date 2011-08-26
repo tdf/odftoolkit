@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
  */
 public abstract class FormListPropertyElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "list-property" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.FORM, "list-property" );
 
 	/**
 	 * The value set of {@odf.attribute office:value-type}.
@@ -116,7 +116,7 @@ public abstract class FormListPropertyElement extends OdfElement
 	 */
 	public String getFormPropertyNameAttribute()
 	{
-		FormPropertyNameAttribute attr = (FormPropertyNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "property-name" ) );
+		FormPropertyNameAttribute attr = (FormPropertyNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.FORM), "property-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -143,7 +143,7 @@ public abstract class FormListPropertyElement extends OdfElement
 	 */
 	public String getOfficeValueTypeAttribute()
 	{
-		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "value-type" ) );
+		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.OFFICE), "value-type" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

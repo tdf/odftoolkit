@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextVariableSetElement;
  */
 public class OfficeValueTypeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "value-type" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.OFFICE, "value-type" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute office:value-type}.
@@ -186,7 +186,7 @@ public class OfficeValueTypeAttribute extends OdfAttribute {
 		if( parentElement != null ){
 			try {
 				if( parentElement instanceof DbColumnElement ){
-					return DbColumnElement.OfficeValueTypeAttributeValue.enumValueOf(super.getValue()).toString();
+					return super.getValue();
 				}else if( parentElement instanceof DbColumnDefinitionElement ){
 					return DbColumnDefinitionElement.OfficeValueTypeAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof FormListPropertyElement ){

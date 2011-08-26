@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.config.ConfigNameAttribute;
  */
 public abstract class ConfigConfigItemMapIndexedElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.CONFIG), "config-item-map-indexed" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.CONFIG, "config-item-map-indexed" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class ConfigConfigItemMapIndexedElement extends OdfElement
 	 */
 	public String getConfigNameAttribute()
 	{
-		ConfigNameAttribute attr = (ConfigNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CONFIG), "name" ) );
+		ConfigNameAttribute attr = (ConfigNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.CONFIG), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

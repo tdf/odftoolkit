@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
  */
 public abstract class OfficeMasterStylesElement extends OdfContainerElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "master-styles" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "master-styles" );
 
 
 	/**

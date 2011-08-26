@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberCalendarAttribute;
  */
 public abstract class NumberMonthElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "month" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "month" );
 
 
 	/**
@@ -76,7 +76,7 @@ public abstract class NumberMonthElement extends OdfElement
 	 */
 	public Boolean getNumberTextualAttribute()
 	{
-		NumberTextualAttribute attr = (NumberTextualAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "textual" ) );
+		NumberTextualAttribute attr = (NumberTextualAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "textual" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -103,7 +103,7 @@ public abstract class NumberMonthElement extends OdfElement
 	 */
 	public Boolean getNumberPossessiveFormAttribute()
 	{
-		NumberPossessiveFormAttribute attr = (NumberPossessiveFormAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "possessive-form" ) );
+		NumberPossessiveFormAttribute attr = (NumberPossessiveFormAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "possessive-form" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -130,7 +130,7 @@ public abstract class NumberMonthElement extends OdfElement
 	 */
 	public String getNumberStyleAttribute()
 	{
-		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "style" ) );
+		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "style" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public abstract class NumberMonthElement extends OdfElement
 	 */
 	public String getNumberCalendarAttribute()
 	{
-		NumberCalendarAttribute attr = (NumberCalendarAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "calendar" ) );
+		NumberCalendarAttribute attr = (NumberCalendarAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "calendar" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

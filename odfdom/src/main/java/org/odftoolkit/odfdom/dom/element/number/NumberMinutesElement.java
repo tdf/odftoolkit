@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberStyleAttribute;
  */
 public abstract class NumberMinutesElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "minutes" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.NUMBER, "minutes" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class NumberMinutesElement extends OdfElement
 	 */
 	public String getNumberStyleAttribute()
 	{
-		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "style" ) );
+		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.NUMBER), "style" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

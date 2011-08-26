@@ -52,7 +52,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
  */
 public class TableNameAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "name" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "name" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:name}.

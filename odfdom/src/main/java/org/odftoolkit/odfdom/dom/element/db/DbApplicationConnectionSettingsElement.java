@@ -48,7 +48,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbSuppressVersionColumnsAttribute;
  */
 public abstract class DbApplicationConnectionSettingsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "application-connection-settings" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "application-connection-settings" );
 
 
 	/**
@@ -80,7 +80,7 @@ public abstract class DbApplicationConnectionSettingsElement extends OdfElement
 	 */
 	public Boolean getDbIsTableNameLengthLimitedAttribute()
 	{
-		DbIsTableNameLengthLimitedAttribute attr = (DbIsTableNameLengthLimitedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "is-table-name-length-limited" ) );
+		DbIsTableNameLengthLimitedAttribute attr = (DbIsTableNameLengthLimitedAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "is-table-name-length-limited" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -107,7 +107,7 @@ public abstract class DbApplicationConnectionSettingsElement extends OdfElement
 	 */
 	public Boolean getDbEnableSql92CheckAttribute()
 	{
-		DbEnableSql92CheckAttribute attr = (DbEnableSql92CheckAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "enable-sql92-check" ) );
+		DbEnableSql92CheckAttribute attr = (DbEnableSql92CheckAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "enable-sql92-check" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -134,7 +134,7 @@ public abstract class DbApplicationConnectionSettingsElement extends OdfElement
 	 */
 	public Boolean getDbAppendTableAliasNameAttribute()
 	{
-		DbAppendTableAliasNameAttribute attr = (DbAppendTableAliasNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "append-table-alias-name" ) );
+		DbAppendTableAliasNameAttribute attr = (DbAppendTableAliasNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "append-table-alias-name" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -161,7 +161,7 @@ public abstract class DbApplicationConnectionSettingsElement extends OdfElement
 	 */
 	public Boolean getDbIgnoreDriverPrivilegesAttribute()
 	{
-		DbIgnoreDriverPrivilegesAttribute attr = (DbIgnoreDriverPrivilegesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "ignore-driver-privileges" ) );
+		DbIgnoreDriverPrivilegesAttribute attr = (DbIgnoreDriverPrivilegesAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "ignore-driver-privileges" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -188,7 +188,7 @@ public abstract class DbApplicationConnectionSettingsElement extends OdfElement
 	 */
 	public String getDbBooleanComparisonModeAttribute()
 	{
-		DbBooleanComparisonModeAttribute attr = (DbBooleanComparisonModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "boolean-comparison-mode" ) );
+		DbBooleanComparisonModeAttribute attr = (DbBooleanComparisonModeAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "boolean-comparison-mode" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -215,7 +215,7 @@ public abstract class DbApplicationConnectionSettingsElement extends OdfElement
 	 */
 	public Boolean getDbUseCatalogAttribute()
 	{
-		DbUseCatalogAttribute attr = (DbUseCatalogAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "use-catalog" ) );
+		DbUseCatalogAttribute attr = (DbUseCatalogAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "use-catalog" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -242,7 +242,7 @@ public abstract class DbApplicationConnectionSettingsElement extends OdfElement
 	 */
 	public Integer getDbMaxRowCountAttribute()
 	{
-		DbMaxRowCountAttribute attr = (DbMaxRowCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "max-row-count" ) );
+		DbMaxRowCountAttribute attr = (DbMaxRowCountAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "max-row-count" ) );
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
@@ -269,7 +269,7 @@ public abstract class DbApplicationConnectionSettingsElement extends OdfElement
 	 */
 	public Boolean getDbSuppressVersionColumnsAttribute()
 	{
-		DbSuppressVersionColumnsAttribute attr = (DbSuppressVersionColumnsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "suppress-version-columns" ) );
+		DbSuppressVersionColumnsAttribute attr = (DbSuppressVersionColumnsAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "suppress-version-columns" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

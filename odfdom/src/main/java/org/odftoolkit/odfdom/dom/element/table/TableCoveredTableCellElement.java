@@ -72,7 +72,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
  */
 public abstract class TableCoveredTableCellElement extends TableTableCellElementBase
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "covered-table-cell" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class TableCoveredTableCellElement extends TableTableCellElement
 	 */
 	public TableCoveredTableCellElement( OdfFileDom ownerDoc )
 	{
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "style-name" )	);
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.newName(OdfNamespaceNames.TABLE, "style-name" )	);
 	}
 
 	/**

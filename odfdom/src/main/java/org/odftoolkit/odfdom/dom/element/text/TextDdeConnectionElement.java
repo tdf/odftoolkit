@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextConnectionNameAttribute;
  */
 public abstract class TextDdeConnectionElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "dde-connection" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TEXT, "dde-connection" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class TextDdeConnectionElement extends OdfElement
 	 */
 	public String getTextConnectionNameAttribute()
 	{
-		TextConnectionNameAttribute attr = (TextConnectionNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "connection-name" ) );
+		TextConnectionNameAttribute attr = (TextConnectionNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "connection-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

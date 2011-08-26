@@ -51,7 +51,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawEndIntensityAttribute;
  */
 public abstract class DrawGradientElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "gradient" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "gradient" );
 
 	/**
 	 * The value set of {@odf.attribute draw:style}.
@@ -123,7 +123,7 @@ public abstract class DrawGradientElement extends OdfElement
 	 */
 	public String getDrawNameAttribute()
 	{
-		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "name" ) );
+		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -150,7 +150,7 @@ public abstract class DrawGradientElement extends OdfElement
 	 */
 	public String getDrawDisplayNameAttribute()
 	{
-		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "display-name" ) );
+		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "display-name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -177,7 +177,7 @@ public abstract class DrawGradientElement extends OdfElement
 	 */
 	public String getDrawStyleAttribute()
 	{
-		DrawStyleAttribute attr = (DrawStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "style" ) );
+		DrawStyleAttribute attr = (DrawStyleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "style" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -204,7 +204,7 @@ public abstract class DrawGradientElement extends OdfElement
 	 */
 	public String getDrawCxAttribute()
 	{
-		DrawCxAttribute attr = (DrawCxAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "cx" ) );
+		DrawCxAttribute attr = (DrawCxAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "cx" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -231,7 +231,7 @@ public abstract class DrawGradientElement extends OdfElement
 	 */
 	public String getDrawCyAttribute()
 	{
-		DrawCyAttribute attr = (DrawCyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "cy" ) );
+		DrawCyAttribute attr = (DrawCyAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "cy" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -258,7 +258,7 @@ public abstract class DrawGradientElement extends OdfElement
 	 */
 	public String getDrawAngleAttribute()
 	{
-		DrawAngleAttribute attr = (DrawAngleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "angle" ) );
+		DrawAngleAttribute attr = (DrawAngleAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "angle" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -285,7 +285,7 @@ public abstract class DrawGradientElement extends OdfElement
 	 */
 	public String getDrawBorderAttribute()
 	{
-		DrawBorderAttribute attr = (DrawBorderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "border" ) );
+		DrawBorderAttribute attr = (DrawBorderAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "border" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -312,7 +312,7 @@ public abstract class DrawGradientElement extends OdfElement
 	 */
 	public String getDrawStartColorAttribute()
 	{
-		DrawStartColorAttribute attr = (DrawStartColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "start-color" ) );
+		DrawStartColorAttribute attr = (DrawStartColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start-color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -339,7 +339,7 @@ public abstract class DrawGradientElement extends OdfElement
 	 */
 	public String getDrawEndColorAttribute()
 	{
-		DrawEndColorAttribute attr = (DrawEndColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "end-color" ) );
+		DrawEndColorAttribute attr = (DrawEndColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end-color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -366,7 +366,7 @@ public abstract class DrawGradientElement extends OdfElement
 	 */
 	public String getDrawStartIntensityAttribute()
 	{
-		DrawStartIntensityAttribute attr = (DrawStartIntensityAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "start-intensity" ) );
+		DrawStartIntensityAttribute attr = (DrawStartIntensityAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "start-intensity" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -393,7 +393,7 @@ public abstract class DrawGradientElement extends OdfElement
 	 */
 	public String getDrawEndIntensityAttribute()
 	{
-		DrawEndIntensityAttribute attr = (DrawEndIntensityAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "end-intensity" ) );
+		DrawEndIntensityAttribute attr = (DrawEndIntensityAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DRAW), "end-intensity" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

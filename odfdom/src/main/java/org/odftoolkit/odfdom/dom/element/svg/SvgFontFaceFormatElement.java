@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgStringAttribute;
  */
 public abstract class SvgFontFaceFormatElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "font-face-format" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.SVG, "font-face-format" );
 
 
 	/**
@@ -73,7 +73,7 @@ public abstract class SvgFontFaceFormatElement extends OdfElement
 	 */
 	public String getSvgStringAttribute()
 	{
-		SvgStringAttribute attr = (SvgStringAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "string" ) );
+		SvgStringAttribute attr = (SvgStringAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.SVG), "string" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class StyleWrapDynamicThresholdAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "wrap-dynamic-threshold" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "wrap-dynamic-threshold" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:wrap-dynamic-threshold}.

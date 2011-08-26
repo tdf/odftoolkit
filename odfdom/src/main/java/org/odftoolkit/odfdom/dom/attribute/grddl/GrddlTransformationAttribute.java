@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class GrddlTransformationAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.GRDDL), "transformation" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.GRDDL, "transformation" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute grddl:transformation}.

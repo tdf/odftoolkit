@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dSpecularAttribute;
  */
 public abstract class Dr3dLightElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "light" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DR3D, "light" );
 
 
 	/**
@@ -85,7 +85,7 @@ public abstract class Dr3dLightElement extends OdfElement
 	 */
 	public String getDr3dDiffuseColorAttribute()
 	{
-		Dr3dDiffuseColorAttribute attr = (Dr3dDiffuseColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "diffuse-color" ) );
+		Dr3dDiffuseColorAttribute attr = (Dr3dDiffuseColorAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "diffuse-color" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -112,7 +112,7 @@ public abstract class Dr3dLightElement extends OdfElement
 	 */
 	public String getDr3dDirectionAttribute()
 	{
-		Dr3dDirectionAttribute attr = (Dr3dDirectionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "direction" ) );
+		Dr3dDirectionAttribute attr = (Dr3dDirectionAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "direction" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -139,7 +139,7 @@ public abstract class Dr3dLightElement extends OdfElement
 	 */
 	public Boolean getDr3dEnabledAttribute()
 	{
-		Dr3dEnabledAttribute attr = (Dr3dEnabledAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "enabled" ) );
+		Dr3dEnabledAttribute attr = (Dr3dEnabledAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "enabled" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -166,7 +166,7 @@ public abstract class Dr3dLightElement extends OdfElement
 	 */
 	public Boolean getDr3dSpecularAttribute()
 	{
-		Dr3dSpecularAttribute attr = (Dr3dSpecularAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "specular" ) );
+		Dr3dSpecularAttribute attr = (Dr3dSpecularAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DR3D), "specular" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

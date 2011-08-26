@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbThousandAttribute;
  */
 public abstract class DbDelimiterElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "delimiter" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DB, "delimiter" );
 
 
 	/**
@@ -76,7 +76,7 @@ public abstract class DbDelimiterElement extends OdfElement
 	 */
 	public String getDbFieldAttribute()
 	{
-		DbFieldAttribute attr = (DbFieldAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "field" ) );
+		DbFieldAttribute attr = (DbFieldAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "field" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -103,7 +103,7 @@ public abstract class DbDelimiterElement extends OdfElement
 	 */
 	public String getDbStringAttribute()
 	{
-		DbStringAttribute attr = (DbStringAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "string" ) );
+		DbStringAttribute attr = (DbStringAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "string" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -130,7 +130,7 @@ public abstract class DbDelimiterElement extends OdfElement
 	 */
 	public String getDbDecimalAttribute()
 	{
-		DbDecimalAttribute attr = (DbDecimalAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "decimal" ) );
+		DbDecimalAttribute attr = (DbDecimalAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "decimal" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
@@ -157,7 +157,7 @@ public abstract class DbDelimiterElement extends OdfElement
 	 */
 	public String getDbThousandAttribute()
 	{
-		DbThousandAttribute attr = (DbThousandAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "thousand" ) );
+		DbThousandAttribute attr = (DbThousandAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.DB), "thousand" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}

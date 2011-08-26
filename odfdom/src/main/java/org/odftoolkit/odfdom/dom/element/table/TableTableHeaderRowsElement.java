@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextSoftPageBreakElement;
  */
 public abstract class TableTableHeaderRowsElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "table-header-rows" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "table-header-rows" );
 
 
 	/**

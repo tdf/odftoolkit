@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateMotionElement;
  */
 public class SmilCalcModeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "calcMode" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.SMIL, "calcMode" );
 	public static final String DEFAULT_VALUE_DISCRETE = Value.DISCRETE.toString();
 	public static final String DEFAULT_VALUE_PACED = Value.PACED.toString();
 
@@ -142,8 +142,7 @@ public class SmilCalcModeAttribute extends OdfAttribute {
 	 */
 	@Override
 	public String getValue(){
-		try{
-			return Value.enumValueOf(super.getValue()).toString();		
+		try{return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw new NumberFormatException("the value of smil:calcMode is not valid");

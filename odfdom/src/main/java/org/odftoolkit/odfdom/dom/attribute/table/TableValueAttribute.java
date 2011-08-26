@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableFilterSetItemElement;
  */
 public class TableValueAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "value" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "value" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:value}.

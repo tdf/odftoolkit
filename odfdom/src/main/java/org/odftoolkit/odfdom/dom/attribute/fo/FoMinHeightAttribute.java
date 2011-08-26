@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleHeaderFooterPropertiesElemen
  */
 public class FoMinHeightAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "min-height" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.FO, "min-height" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute fo:min-height}.

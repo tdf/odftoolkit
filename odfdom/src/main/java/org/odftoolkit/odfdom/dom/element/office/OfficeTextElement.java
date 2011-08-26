@@ -91,7 +91,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableDdeLinksElement;
  */
 public abstract class OfficeTextElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "text" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.OFFICE, "text" );
 
 
 	/**
@@ -123,7 +123,7 @@ public abstract class OfficeTextElement extends OdfElement
 	 */
 	public Boolean getTextGlobalAttribute()
 	{
-		TextGlobalAttribute attr = (TextGlobalAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "global" ) );
+		TextGlobalAttribute attr = (TextGlobalAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "global" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
@@ -150,7 +150,7 @@ public abstract class OfficeTextElement extends OdfElement
 	 */
 	public Boolean getTextUseSoftPageBreaksAttribute()
 	{
-		TextUseSoftPageBreaksAttribute attr = (TextUseSoftPageBreaksAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-soft-page-breaks" ) );
+		TextUseSoftPageBreaksAttribute attr = (TextUseSoftPageBreaksAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.TEXT), "use-soft-page-breaks" ) );
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}

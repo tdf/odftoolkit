@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
  */
 public class StyleNumberWrappedParagraphsAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "number-wrapped-paragraphs" );
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.STYLE, "number-wrapped-paragraphs" );
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute style:number-wrapped-paragraphs}.

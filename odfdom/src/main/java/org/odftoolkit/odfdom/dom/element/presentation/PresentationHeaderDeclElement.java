@@ -41,7 +41,7 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationNameAttribut
  */
 public abstract class PresentationHeaderDeclElement extends OdfElement
 {        
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "header-decl" );
+    public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.PRESENTATION, "header-decl" );
 
 
 	/**
@@ -82,7 +82,7 @@ public abstract class PresentationHeaderDeclElement extends OdfElement
 	 */
 	public String getPresentationNameAttribute()
 	{
-		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "name" ) );
+		PresentationNameAttribute attr = (PresentationNameAttribute) getOdfAttribute( OdfName.newName( OdfNamespace.newNamespace(OdfNamespaceNames.PRESENTATION), "name" ) );
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
