@@ -58,7 +58,7 @@ public class DocumentCreationTest {
     private static final String TEST_FILE_FOLDER = "test/resources/";
     private static final String TEST_FILE_EMBEDDED = TEST_FILE_FOLDER + "testEmbeddedDoc.odt";
     private static final String TEST_PIC = TEST_FILE_FOLDER + "test.jpg";
-    private static final String TEST_SPAN_TEXT = " hello my darling!!!";
+    private static final String TEST_SPAN_TEXT = " Find Nemo!!!";
     private static final String TEST_FILE_ACCESS_EMBEDDED = "build/test/TestAccess_EmbeddedDocument.odt";
     private static final String TEST_FILE_EMBEDDED_EMBEDDED = "build/test/TestAccess_EmbeddedinEmbedded.odt";
     private static final String TEST_FILE_SAVE_EMBEDDED = TEST_FILE_FOLDER + "testSaveEmbeddedDoc.odt";
@@ -89,7 +89,7 @@ public class DocumentCreationTest {
             OdfGraphicsDocument odgDoc1 = OdfGraphicsDocument.createGraphicsDocument();
             OdfGraphicsDocument odgDoc2 = OdfGraphicsDocument.createGraphicsDocument();
             contentDom = odgDoc2.getContentDom();
-            odgDoc1.save("build\\test\\TestEmpty_OdfGraphicsDocument.odg");
+            odgDoc1.save("build/test/TestEmpty_OdfGraphicsDocument.odg");
 
             OdfSpreadsheetDocument odsDoc1 = OdfSpreadsheetDocument.createSpreadsheetDocument();
             OdfSpreadsheetDocument odsDoc2 = OdfSpreadsheetDocument.createSpreadsheetDocument();
