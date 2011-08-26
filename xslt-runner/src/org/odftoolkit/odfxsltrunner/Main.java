@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
- * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
- * 
+ *
+ * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -53,7 +53,7 @@ public class Main {
         int aInputMode = ODFXSLTRunner.INPUT_MODE_PACKAGE;
         int aOutputMode = ODFXSLTRunner.OUTPUT_MODE_COPY_INPUT_PACKAGE;
         Vector<XSLTParameter> aParams = null;
-        Vector<String> aExportFileNames = null;
+        Vector<String> aExtractFileNames = null;
         int nLogLevel = CommandLineLogger.ERROR;
         
         boolean bCommandLineValid = true;
@@ -116,9 +116,9 @@ public class Main {
             {
                 if( aArgIter.hasNext() )
                 {
-                    if( aExportFileNames == null )
-                        aExportFileNames = new Vector<String>();
-                    aExportFileNames.add( aArgIter.next() );
+                    if( aExtractFileNames == null )
+                        aExtractFileNames = new Vector<String>();
+                    aExtractFileNames.add( aArgIter.next() );
                 }
                 else
                     bCommandLineValid = false;
@@ -189,7 +189,7 @@ public class Main {
         {
             ODFXSLTRunner aRunner = new ODFXSLTRunner();
             Logger aLogger = new CommandLineLogger( aLogStream!=null ? aLogStream : System.err, nLogLevel );
-            bError = aRunner.runXSLT( aStyleSheetName, aParams, aInputName, aInputMode, aOutputName, aOutputMode, aPath, aTransformerFactoryClass, aExportFileNames, aLogger  );
+            bError = aRunner.runXSLT( aStyleSheetName, aParams, aInputName, aInputMode, aOutputName, aOutputMode, aPath, aTransformerFactoryClass, aExtractFileNames, aLogger  );
         }
         catch( Exception e )
         {
@@ -209,18 +209,21 @@ public class Main {
         System.out.println( "       odfxsltrunner <style sheet> [-v] [-f <factory>] {-x <export path>} [-p <path in package>] [-l log file] -o <input package> <output file> {<param>=<value>}");
         System.out.println( "       odfxsltrunner <style sheet> [-v] [-f <factory>] [-p <path in package>] [-l log file] -i <input file> <output package> {<param>=<value>}");
         System.out.println();
-        System.out.println( "If no option except -p is specified, the transformation <style sheet> is applied to <path in package> of <input package>, <path in package> is replaced with the result of the transformation, and the full package is stored as <output package>." );
-        System.out.println( "-p: Apply style sheet to <path in package>; default is content.xml" );
-        System.out.println( "-f: XSLT Transformer factory to use." );
+        System.out.println( "If no option except -p is specified, the transformation <style sheet> is applied to the file <path in package> contained in the ODF  package <input package>, <path in package> is replaced with the result of the transformation, and the full package is stored as <output package>." );
         System.out.println();
-        System.out.println( "-r: Don't store result as a new package but replace input package <package>" );
-        System.out.println( "-i: Input file is a plain XML file" );
-        System.out.println( "-l: Write messages into <log file> instead of stderr" );
+        System.out.println( "-t: Store result of transformation in the file <path in package> of existing an existing ODF package <output package>" );
+        System.out.println( "-r: Don't store result as a new ODF package but replace input ODF package <package>" );
+        System.out.println( "-i: Input file <input file> is a plain XML file" );
         System.out.println( "-o: Store result of tranformation as plain XML file in <output file>" );
-        System.out.println( "-t: Store result of transformation in <path in package> of existing <output package>" );
-        System.out.println( "-x: Copy specified file or directory from in <input package> to the directory of the <output file>. This option may be specified multiple times" );
+        System.out.println();
+        System.out.println( "-l: Write messages into file <log file> instead of stderr" );
+        System.out.println( "-p: Apply style sheet to <path in package>; default is content.xml" );
+        System.out.println( "-f: Use XSLT Transformer factory <factory>" );
+        System.out.println();
+        System.out.println( "-x: Extract specified file or directory <export path> from ODF package <input package> to the directory of the <output file>; this option may be specified multiple times" );
         System.out.println( "-v: Verbose output" );
-        System.out.println( "<param>=<value> specifes an XSLT parameter" );
+        System.out.println();
+        System.out.println( "<param>=<value>: Specifies an parameter/value pair that is passed to the XSL transformation; multiple paramater/vlaue pairs may be specified" );
     }
 
 }

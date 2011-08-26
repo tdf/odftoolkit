@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
- * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
- * 
+ *
+ * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -38,6 +38,13 @@ class ODFURIResolver implements URIResolver
     private OdfPackage m_aPackage;
 
 
+    /** Creates a new instance of ODFURIResolver
+     *
+     * @param aPackage the package in which the to be resolved URIs are included
+     * @param aPackageBase the package base URI
+     * @param aFileEntryPath the path of the file within the package in which the to be resolved URIs are included
+     * @param aLogger the logger for error messages
+     */
     public ODFURIResolver( OdfPackage aPackage, String aPackageBase, String aFileEntryPath, Logger aLogger )
     {
         m_aPackage = aPackage;
@@ -46,7 +53,11 @@ class ODFURIResolver implements URIResolver
         m_aLogger = aLogger;
     }
     
-
+    /** resolve an URI
+     *
+     * @param aHRef the URI to be resolved
+     * @param aBase the base URI that is provied by the XSLT transformation
+     */
     public Source resolve(String aHRef, String aBase) throws TransformerException
     {
         if( aBase.startsWith(m_aPackageBase) &&
@@ -56,7 +67,7 @@ class ODFURIResolver implements URIResolver
             {
                 try
                 {
-                    return new StreamSource(m_aPackage.getInputStream(m_aFileEntryPath));
+                    return new StreamSource(m_aPackage.getInputStream(m_aFileEntryPath), m_aPackageBase + '/' + m_aFileEntryPath );
                 }
                 catch (Exception ex)
                 {
@@ -111,8 +122,9 @@ class ODFURIResolver implements URIResolver
                     aHRefBuffer.insert(0, aFileEntryBuffer.toString());
                     try
                     {
-                        m_aLogger.logInfo( "Resolving " +  aHRef + " to package file entry " + aHRefBuffer.toString() );
-                        return new StreamSource(m_aPackage.getInputStream(aHRefBuffer.toString()));
+                        String aFileEntryPath = aHRefBuffer.toString();
+                        m_aLogger.logInfo( "Resolving " +  aHRef + " to package file entry " + aFileEntryPath );
+                        return new StreamSource(m_aPackage.getInputStream(aFileEntryPath), m_aPackageBase + '/' + aFileEntryPath);
                     }
                     catch (Exception ex)
                     {

@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
- * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
- * 
+ *
+ * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -91,7 +91,9 @@ public class ODFXSLTRunner {
      * the output package.
      */
     public static final int OUTPUT_MODE_TEMPLATE_PACKAGE = 4;
-    
+
+    private static final int FILE_COPY_BUFFER_SIZE = 4096;
+
     /**
      * Create new instance of ODFXSLTRunner.
      */
@@ -108,6 +110,8 @@ public class ODFXSLTRunner {
      * @param aInputMode Input mode
      * @param aOutputFile Path of the output file
      * @param aOutputMode Output mode
+     * @param aTransformerFactoryClassName XSLT transformer factory to use
+     * @param aExtractFileNames A list of files or directory that shell be extracted from the package
      * @param aPathInPackage Path within the package. Default is "content.xml"
      * @param aLogger Logger object
      * 
@@ -118,14 +122,14 @@ public class ODFXSLTRunner {
                      String aOutputFile, int aOutputMode,
                      String aPathInPackage,
                      String aTransformerFactoryClassName, 
-                     List<String> aExportFileNames,
+                     List<String> aExtractFileNames,
                      Logger aLogger )
     {
         return runXSLT( new File( aStyleSheet ), aParams,
                         new File( aInputFile), aInputMode,
                         aOutputFile != null ? new File(aOutputFile) : null, aOutputMode,
                         aPathInPackage, aTransformerFactoryClassName,
-                        aExportFileNames, aLogger );
+                        aExtractFileNames, aLogger );
     }
     
     
@@ -139,6 +143,8 @@ public class ODFXSLTRunner {
      * @param aOutputFile Output file
      * @param aOutputMode Output mode
      * @param aPathInPackage Path within the package. Default is "content.xml"
+     * @param aTransformerFactoryClassName XSLT transformer factory to use
+     * @param aExtractFileNames A list of files or directory that shell be extracted from the package
      * @param aLogger Logger object
      *
      * @return true if an error occured.
@@ -148,7 +154,7 @@ public class ODFXSLTRunner {
                      File aOutputFile, int aOutputMode,
                      String aPathInPackage,
                      String aTransformerFactoryClassName, 
-                     List<String> aExportFileNames,
+                     List<String> aExtractFileNames,
                      Logger aLogger )
     {
         boolean bError = false;
@@ -187,11 +193,13 @@ public class ODFXSLTRunner {
         OdfPackage aOutputPkg = null;
         OutputStream aOutputStream = null;
         aLogger.setName( aOutputFile != null ? aOutputFile.getAbsolutePath() : "(none)" );
+        boolean bMkOutputDirs = false;
         try
         {
             switch( aOutputMode )
             {
                 case OUTPUT_MODE_FILE:
+                    bMkOutputDirs = true;
                     aOutputResult = new StreamResult( aOutputFile );
                     break;
                 case OUTPUT_MODE_STDOUT:
@@ -202,6 +210,7 @@ public class ODFXSLTRunner {
                     aOutputFile = aInputFile;
                     break;
                 case OUTPUT_MODE_COPY_INPUT_PACKAGE:
+                    bMkOutputDirs = true;
                     aOutputPkg = aInputPkg;
                     break;
                 case OUTPUT_MODE_TEMPLATE_PACKAGE:
@@ -221,6 +230,14 @@ public class ODFXSLTRunner {
             aLogger.logFatalError(e.getMessage());
             return true;
         }
+
+        if( bMkOutputDirs )
+        {
+            File aOutputDir = aOutputFile.getParentFile();
+            if( aOutputDir != null )
+                aOutputDir.mkdirs();
+        }
+
         String aOutputName = aLogger.getName();
 
         aLogger.setName( aStyleSheetFile.getAbsolutePath() );
@@ -238,10 +255,10 @@ public class ODFXSLTRunner {
                 aOutputStream.close();
             if( !bError && aOutputPkg != null )
                 aOutputPkg.save(aOutputFile);
-            if( aOutputMode == OUTPUT_MODE_FILE && aExportFileNames != null && aInputPkg != null )
+            if( aOutputMode == OUTPUT_MODE_FILE && aExtractFileNames != null && aInputPkg != null )
             {
-                File aExportDir = aOutputFile.getParentFile();
-                copyExportFiles( aInputPkg, aExportDir, aExportFileNames, aLogger );
+                File aTargetDir = aOutputFile.getParentFile();
+                extractFiles( aInputPkg, aTargetDir, aExtractFileNames, aLogger );
             }
         }
         catch( Exception e )
@@ -327,9 +344,9 @@ public class ODFXSLTRunner {
         return false;
     }
 
-    private boolean copyExportFiles( OdfPackage aInputPkg,
-                                     File aExportDir,
-                                     List<String> aExportFileNames,
+    private boolean extractFiles( OdfPackage aInputPkg,
+                                     File aTargetDir,
+                                     List<String> aExtractFileNames,
                                      Logger aLogger )
     {
         Set<String> aInputPkgEntries = aInputPkg.getFileEntries();
@@ -339,32 +356,32 @@ public class ODFXSLTRunner {
         {
             String aInputFileName = aInputPkgEntryIter.next();
 
-            Iterator<String> aExportFileNameIter = aExportFileNames.iterator();
-            while( aExportFileNameIter.hasNext() )
+            Iterator<String> aExtractFileNameIter = aExtractFileNames.iterator();
+            while( aExtractFileNameIter.hasNext() )
             {
-                String aExportFileName = aExportFileNameIter.next();
+                String aExtractFileName = aExtractFileNameIter.next();
                 if( !aInputFileName.endsWith("/") &&
-                    (aInputFileName.equals(aExportFileName) ||
-                    (aExportFileName.endsWith("/") ? aInputFileName.startsWith(aExportFileName)
-                                                   : aInputFileName.startsWith(aExportFileName+"/")) ) )
+                    (aInputFileName.equals(aExtractFileName) ||
+                    (aExtractFileName.endsWith("/") ? aInputFileName.startsWith(aExtractFileName)
+                                                   : aInputFileName.startsWith(aExtractFileName+"/")) ) )
                 {
                     try
                     {
-                        File aExportFile = new File( aExportDir, aInputFileName );
-                        File aExportFileDir = aExportFile.getParentFile();
-                        if( aExportFileDir != null )
-                            aExportFileDir.mkdirs();
+                        File aTargetFile = new File( aTargetDir, aInputFileName );
+                        File aTargetFileDir = aTargetFile.getParentFile();
+                        if( aTargetFileDir != null )
+                            aTargetFileDir.mkdirs();
 
-                        aLogger.logInfo( "Copying file " +  aInputFileName + " to " + aExportFile.getAbsolutePath() );
+                        aLogger.logInfo( "Extracting file " +  aInputFileName + " to " + aTargetFile.getAbsolutePath() );
                         InputStream aInputStream = aInputPkg.getInputStream(aInputFileName);
-                        OutputStream aExportStream = new FileOutputStream( aExportFile );
-                        byte[] buf = new byte[4096];
-                        int r = 0;
-                        while ((r = aInputStream.read(buf, 0, 4096)) > -1)
+                        OutputStream aTargetStream = new FileOutputStream( aTargetFile );
+                        byte[] aBuffer = new byte[FILE_COPY_BUFFER_SIZE];
+                        int n = 0;
+                        while ((n = aInputStream.read(aBuffer, 0, FILE_COPY_BUFFER_SIZE)) > -1)
                         {
-                            aExportStream.write(buf, 0, r);
+                            aTargetStream.write(aBuffer, 0, n);
                         }
-                        aExportStream.close();
+                        aTargetStream.close();
                         aInputStream.close();
                     }
                     catch(java.lang.Exception e)
