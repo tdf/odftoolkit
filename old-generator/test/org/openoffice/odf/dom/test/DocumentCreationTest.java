@@ -106,9 +106,22 @@ public class DocumentCreationTest {
             contentDom = odcDoc2.getContentDom();
             odcDoc1.save("build/test/TestEmpty_OdfChartDocument.odc");
 
-            /////////////////////////////
-            // WIKI EXAMPLE BUILD TEST //          
-            /////////////////////////////
+            /////////////////////////////////////////
+            // ODFDOM PACKAGE LAYER - WIKI EXAMPLE //          
+            /////////////////////////////////////////
+            
+            // loads the ODF document package from the path
+            OdfPackage pkg = OdfPackage.loadPackage("build/test/TestEmpty_OdfTextDocument.odt");
+
+            // loads the images from the URLs and inserts the image in the package, adapting the manifest
+            pkg.insert(new URI("test/resources/test.jpg"), "Pictures/test.jpg");
+            pkg.insert(new URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"), "someweiredname/tableandfruits.jpg");
+            pkg.save("build/test/odfdom-wiki-package.odt");
+
+            
+            /////////////////////////////////////
+            // ODFDOM XML LAYER - WIKI EXAMPLE //          
+            /////////////////////////////////////
             
             // loads the ODF document from the path
              OdfDocument odfDoc = OdfDocument.loadDocument("build/test/TestEmpty_OdfTextDocument.odt");
@@ -133,16 +146,13 @@ public class DocumentCreationTest {
             OdfFrame odfFrame =  (OdfFrame) OdfElementFactory.createOdfElement(odfContent, OdfFrame.ELEMENT_NAME);
             para.appendChild(odfFrame);
             OdfImage odfImage = (OdfImage) OdfElementFactory.createOdfElement(odfContent, OdfImage.ELEMENT_NAME);
-            odfImage.insertImage(new URI("test/resources/test.jpg"));
+            odfImage.insertImage(new URI("test/resources/test.jpg"));                        
             odfFrame.appendChild(odfImage);
-            odfDoc.save("build/test/wiki.odt");
-
-            // loads the ODF document package from the path
-            OdfPackage pkg = OdfPackage.loadPackage("build/test/TestEmpty_OdfTextDocument.odt");
-
-            // loads the image from the URL and inserts the image in the package, adapting the manifest
-            pkg.insert(new URI("test/resources/test.jpg"), "someweiredname/myHoliday.png");
-            pkg.save("build/test/wiki.zip");
+            
+            OdfImage odfImage2 = (OdfImage) OdfElementFactory.createOdfElement(odfContent, OdfImage.ELEMENT_NAME);
+            odfImage2.insertImage(new URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"));                        
+            odfFrame.appendChild(odfImage2);
+            odfDoc.save("build/test/odfdom-wiki-dom.odt");
 
         } catch (Exception e) {
             e.printStackTrace();
