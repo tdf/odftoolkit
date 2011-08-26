@@ -243,13 +243,13 @@ public class OdfTable {
 	}
 
 	/**
-	 * Get the width of the table (in 1/100th mm).
+	 * Get the width of the table (in Millimeter).
 	 * <p>
 	 * Throw an UnsupportedOperationException if the 
 	 * table is part of a spreadsheet document that does not have an attribute of table width,
 	 * because that spreadsheet doesn't have an attribute of table width.
 	 * 
-	 * @return the width of the current table (in 1/100th mm).
+	 * @return the width of the current table (in Millimeter).
 	 * <p>
 	 * An UnsupportedOperationException will be thrown if the table is in the spreadsheet document.
 	 */
@@ -264,13 +264,13 @@ public class OdfTable {
 	}
 
 	/**
-	 * Set the width of the table (in 1/100th mm).
+	 * Set the width of the table (in Millimeter).
 	 * <p>
 	 * Throw an UnsupportedOperationException if the 
 	 * table is part of a spreadsheet document that does not allow to change the table size,
 	 * because spreadsheet is not allow user to set the table size.
 	 * 
-	 * @param width	the width that need to set (in 1/100th mm).
+	 * @param width	the width that need to set (in Millimeter).
 	 * <p>
 	 * An UnsupportedOperationException will be thrown if the table is in the spreadsheet document.
 	 */
@@ -586,7 +586,6 @@ public class OdfTable {
 	 * @return a new instance of <code>OdfTable</code>
 	 */
 	public static OdfTable newTable(OdfDocument document, String[] rowLabel, String[] columnLabel, double[][] data) {
-		//fix bug121
 		int rowNumber = DEFAULT_ROW_COUNT;
 		int columnNumber = DEFAULT_COLUMN_COUNT;
 		if (data != null) {
@@ -635,7 +634,6 @@ public class OdfTable {
 							cell.setStringValue("");
 						}
 					} else {//data
-						//fix bug121
 						if ((data != null) && (i >= rowHeaders) && (j >= columnHeaders)) {
 							cell.setDoubleValue(data[i - rowHeaders][j - columnHeaders]);
 						}
@@ -671,7 +669,6 @@ public class OdfTable {
 	 * @return a new instance of <code>OdfTable</code>
 	 */
 	public static OdfTable newTable(OdfDocument document, String[] rowLabel, String[] columnLabel, String[][] data) {
-		//fix bug121 
 		int rowNumber = DEFAULT_ROW_COUNT;
 		int columnNumber = DEFAULT_COLUMN_COUNT;
 		if (data != null) {
@@ -720,7 +717,6 @@ public class OdfTable {
 							cell.setStringValue("");
 						}
 					} else {
-						//fix bug121
 						if ((data != null) && (i >= rowHeaders) && (j >= columnHeaders)) {
 							cell.setStringValue(data[i - rowHeaders][j - columnHeaders]);
 						}
@@ -884,14 +880,12 @@ public class OdfTable {
 
 			newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(),
 					OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
-			//newColumn.setTableNumberColumnsRepeatedAttribute(1);
 			newColumn.setStyleName(columnStylename);
 			mTableElement.insertBefore(newColumn, positonElement);
 		} else { //has column, append a same column as the last one.
 			TableTableColumnElement refColumn = columnList.get(columnList.size() - 1).getOdfElement();
 			newColumn = (TableTableColumnElement) refColumn.cloneNode(true);
 			newColumn.setTableNumberColumnsRepeatedAttribute(1);//chagne to remove attribute
-			//newColumn.re
 			mTableElement.insertBefore(newColumn, positonElement);
 		}
 
@@ -995,7 +989,6 @@ public class OdfTable {
 				TableCoveredTableCellElement aCellEle = (TableCoveredTableCellElement) refCell.getOdfElement();
 				if (coveredLength >= 1) {
 					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) aCellEle.cloneNode(true);
-					//newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getNamespaceUri(), "number-columns-repeated");
 					aRow.appendChild(newCellEle);
 					coveredLength -= newCellEle.getTableNumberColumnsRepeatedAttribute();
 				} else {
@@ -1026,8 +1019,6 @@ public class OdfTable {
 		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "boolean-value");
 		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "string-value");
 		newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "formula");
-		//newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getNamespaceUri(), "number-rows-spanned");
-		//newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getNamespaceUri(), "number-columns-repeated");
 		Node n = newCellEle.getFirstChild();
 		while (n != null) {
 			Node m = n.getNextSibling();
@@ -1089,14 +1080,9 @@ public class OdfTable {
 		int iRowCount = getRowCount();
 		for (int i = iRowCount - 1; i >= 0;) {
 			OdfTableRow row = getRowByIndex(i);
-			//row.insertCellByIndex((int)nIndex, (int) nCount);
 			OdfTableCell refCell = row.getCellByIndex(index - 1);
 			OdfTableCell positionCell = null;
 			positionCell = row.getCellByIndex(index);
-//			for(int j=0;j<nCount;j++)
-//			{
-//				positionCell = row.insertCellBefore(refCell, positionCell);
-//			}
 			row.insertCellBefore(refCell, positionCell, clmCount);
 			i = i - row.getRowsRepeatedNumber();
 		}
@@ -1148,10 +1134,8 @@ public class OdfTable {
 		}
 
 		//1. remove cell
-		//for(int i=getRowCount()-1;i>=0;i--)
 		for (int i = 0; i < getRowCount(); i++) {
 			OdfTableRow aRow = getRowByIndex(i);
-			//aRow.removeCellByIndex(nIndex, nCount);
 			aRow.removeCellByIndex(startindex, clmCount);
 		}
 
@@ -1384,7 +1368,6 @@ public class OdfTable {
 
 	private OdfTableRow getHeaderRowByIndex(TableTableHeaderRowsElement headers, int nIndex) {
 		int result = 0;
-		//TableTableRowElement rowEle=null;
 		OdfTableRow row = null;
 		for (Node n : new DomNodeList(headers.getChildNodes())) {
 			if (n instanceof TableTableRowElement) {
@@ -1400,7 +1383,6 @@ public class OdfTable {
 
 	private OdfTableColumn getHeaderColumnByIndex(TableTableHeaderColumnsElement headers, int nIndex) {
 		int result = 0;
-		//TableTableColumnElement colEle=null;
 		OdfTableColumn col = null;
 		for (Node n : new DomNodeList(headers.getChildNodes())) {
 			if (n instanceof TableTableColumnElement) {
@@ -1478,9 +1460,6 @@ public class OdfTable {
 			int repeatedAttr = firstRow.getRowsRepeatedNumber();
 			if (repeatedAttr == 1) {
 				TableTableRowElement rowEle = OdfElement.findNextChildNode(TableTableRowElement.class, firstRow.getOdfElement());
-				//modifySpanNumberOfUpperRow(firstRow);
-				//mTableElement.removeChild(firstRow.getOdfElement()); error. the rows parent is not table
-				//firstRow.getOdfElement().getParentNode().removeChild(firstRow.getOdfElement());
 				firstRow.removeAllCellsRelationship();
 				firstRow.getOdfElement().getParentNode().removeChild(firstRow.getOdfElement());
 				updateRowRepository(firstRow.getOdfElement(), firstRow.mnRepeatedIndex, null, 0);
@@ -1833,13 +1812,6 @@ public class OdfTable {
 
 	//the parameter is the column/row index in the ownerTable,rather than in the cell range
 	boolean isCoveredCellInOwnerTable(List<CellCoverInfo> coverList, int nCol, int nRow) {
-
-//		FTableCell cell = getCellByPosition(nCol, nRow);
-//		if(cell.getOdfElement() instanceof TableCoveredTableCellElement)
-//			//covered cell
-//			return true;
-//		else if(cell.getOdfElement() instanceof TableTableCellElement)
-//		{
 		CellCoverInfo info;
 		for (int m = 0; m < coverList.size(); m++) {
 			info = coverList.get(m);
@@ -1853,7 +1825,6 @@ public class OdfTable {
 				return true;
 			}
 		}
-//		}
 		return false;
 	}
 
@@ -1942,7 +1913,6 @@ public class OdfTable {
 								int colNum = getColumnCount();
 								for (int j = 0; j < colNum; j++) {
 									OdfTableCell cell = row.getCellByIndex(j);
-//									cell.mnRepeatedRowIndex = i - 1;
 									updateCellList.add(cell);
 								}
 								row.mnRepeatedIndex = i - 1;
@@ -1981,8 +1951,6 @@ public class OdfTable {
 									cell.mnRepeatedRowIndex--;
 								}
 							}
-							///
-
 						} else {
 							oldRow.maRowElement = null;
 						}
@@ -2031,16 +1999,12 @@ public class OdfTable {
 									&& (cell.mnRepeatedColIndex > oldRepeatColIndex)) {
 								cell.mnRepeatedColIndex--;
 							}
-//							if( (cell.mnRepeatedColIndex == oldRepeatColIndex) 
-//									&& (cell.mnRepeatedRowIndex > oldRepeatRowIndex ) )
-//								cell.mnRepeatedRowIndex--;
 						}
 					}
 					oldList.remove(oldCell);
 					if (oldList.size() == 0) {
 						mCellRepository.remove(oldElement);
 					}
-					//oldList.add(oldRepeatIndex, null);
 					if (newElement != null) {
 						oldCell.mCellElement = newElement;
 						oldCell.mnRepeatedColIndex = newRepeatColIndex;
@@ -2063,7 +2027,6 @@ public class OdfTable {
 							}
 							if (!bReplaced) {
 								list.add(oldCell);
-								//System.out.println("should not contains");
 							}
 						} else {
 							list = new Vector<OdfTableCell>();

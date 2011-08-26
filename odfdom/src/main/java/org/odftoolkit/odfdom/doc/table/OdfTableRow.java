@@ -138,10 +138,10 @@ public class OdfTableRow {
 	}
 
 	/**
-	 * Return the height of the row (in 1/100th mm).
+	 * Return the height of the row (in Millimeter).
 	 * <p>
 	 * Return the minimal height, if the row height is not set, 
-	 * @return the height of the current row (in 1/100th mm).
+	 * @return the height of the current row (in Millimeter).
 	 */
 	public long getHeight() {
 		String sHeight = maRowElement.getProperty(OdfTableRowProperties.RowHeight);
@@ -155,9 +155,9 @@ public class OdfTableRow {
 	}
 
 	/**
-	 * Set the height/minimal height of the row (in 1/100th mm) according to the second parameter.
+	 * Set the height/minimal height of the row (in Millimeter) according to the second parameter.
 	 * @param height
-	 * 				the height/minimal height that will be set to the row (in 1/100th mm).
+	 * 				the height/minimal height that will be set to the row (in Millimeter).
 	 * @param isMinHeight
 	 * 				if it is true, the row can fit the height to the text, vice versa.
 	 */
@@ -183,10 +183,8 @@ public class OdfTableRow {
 			Node refElement = maRowElement;
 			Node oldRowElement = maRowElement;
 			for (int i = repeateNum - 1; i >= 0; i--) {
-				//OdfTableRow newRow = (OdfTableRow) maRowElement.cloneNode(true);
 				TableTableRowElement newRow = (TableTableRowElement) maRowElement.cloneNode(true);
 				newRow.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-rows-repeated");
-//				newRow.removeAttributeNS(OdfNamespace.get(OdfNamespaceNames.TABLE).toString(), "style-name" );
 				tableEle.insertBefore(newRow, refElement);
 				refElement = newRow;
 				if (repeatedRowIndex == i) {
@@ -223,40 +221,11 @@ public class OdfTableRow {
 		maRowElement.setProperty(OdfTableRowProperties.UseOptimalRowHeight, String.valueOf(isUseOptimalHeight));
 	}
 
-//	/**
-//	 * return if the row is visible
-//	 * @return 
-//	 * 			true if the row is visible
-//	 * 			vice versa
-//	 */
-//	public boolean isVisible()
-//	{
-//		return mbVisible;
-//	}
-//	
-//	/**
-//	 * set if the row is visible
-//	 * @param bVisible
-//	 * 					the flag that indicate row is visible or not
-//	 */
-//	public void setVisible(boolean bVisible)
-//	{
-//		mbVisible = bVisible;
-//	}
-//	
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.odfdom.doc.feature.Feature#delete()
-	 */
-//	public void delete() {
-//		// TODO Auto-generated method stub
-//		
-//	}
 	/**
 	 * Return an instance of <code>TableTableRowElement</code> which represents this feature.
 	 * @return an instance of <code>TableTableRowElement</code>
 	 */
 	public TableTableRowElement getOdfElement() {
-		// TODO Auto-generated method stub
 		return maRowElement;
 	}
 
@@ -320,10 +289,6 @@ public class OdfTableRow {
 		return realCells.size();
 	}
 
-	//@Override
-//    public OdfTable getTable() {
-//        maRowElement.getAncestorAs(TableTableElement.class);
-//    }
 	/**
 	 * Return the previous row of the current row.
 	 *
@@ -435,82 +400,6 @@ public class OdfTableRow {
 			}
 		}
 	}
-
-//    /**
-//	 * Populate a row with strings.
-//	 * the text content of the row will be replaced
-//	 * If the <code>cellStyleList</code> or
-//	 * <code>paraStyleList</code> is shorter than the <code>stringList</code>,
-//	 * the values will be recycled. Thus, if you want all the cells to have
-//	 * the same cell style, just put one item in <code>cellStyleList</code>.
-//	 * 
-//	 * If the <code>stringList</code> is shorter than the cell count of this row,
-//	 * the spared table cell will remain the original text content
-//	 * if larger, only the cell count number of values has been put in this row.
-//	 * note: the cell count here is the normal cell count(does not contain covered cell) 
-//	 * in the current row, rather than the column number
-//	 * 
-//	 * @param valueList a <code>List&lt;String&gt;</code> containing
-//	 * cell values.
-//	 * @param cellStyleList a <code>List&lt;String&gt;</code> containing
-//	 * cell style names.
-//	 * @param paraStyleList a <code>List&lt;String&gt;</code> containing
-//	 * paragraph style names.
-//	 */
-//	public void populateStrings(List<String> valueList,
-//		List<String> cellStyleList,	List<String> paraStyleList)
-//	{
-//		OdfTable table = getTable();
-//		int styleIndex = 0;
-//		int paraIndex = 0;
-//		int cellIndex = -1;
-//		OdfTableCell existCell;
-//		int rowIndex = getRowIndex();
-//		try {
-//			List<CellCoverInfo> coverList = table.getCellCoverInfos(0, 0, table.getColumnCount(), table.getRowCount());
-//			for (int i=0;i<valueList.size();i++)
-//			{
-//				if(cellIndex < getCellCount()){
-//					while(true){
-//						cellIndex++;
-//						if(!table.isCoveredCellInOwnerTable(coverList,cellIndex,rowIndex))
-//							break;
-//					}
-//				
-//					existCell = table.getCellByPosition(i, rowIndex);
-//					int repeatedNum = existCell.getColumnsRepeatedNumber();
-//					if(repeatedNum > 1){
-//						//....split repeated cell
-//						TableTableCellElementBase cell = (TableTableCellElementBase)existCell.getOdfElement().cloneNode(true);
-//						if(repeatedNum > 2)
-//							cell.setTableNumberColumnsRepeatedAttribute(repeatedNum - 1);
-//						TableTableCellElementBase nextCell = (TableTableCellElementBase)existCell.getOdfElement().getNextSibling();
-//						if(nextCell != null)
-//							maRowElement.insertBefore(cell, nextCell);
-//						else
-//							maRowElement.appendChild(cell);
-//					}
-//					existCell = getCellByIndex(i);
-//					TableTableCellElementBase existCellElement = existCell.getOdfElement();
-//					existCell.setDisplayText(valueList.get(i));
-//					existCellElement.setTableStyleNameAttribute(cellStyleList.get(styleIndex));
-//				}else{
-//					// stringList is larger than the cell count of this row
-//					//split column to valueList.size() - i
-////				
-//					break;
-//				}
-//				
-//				/* advance style indices, wrapping around if necessary */
-//				styleIndex = (styleIndex + 1) % cellStyleList.size();
-//				paraIndex = (paraIndex + 1) % paraStyleList.size();
-//			}
-//			
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
 	/**
 	 * Set the default cell style to this row.
 	 * <p>
@@ -600,7 +489,6 @@ public class OdfTableRow {
 			nextCell = getCellByIndex(getCellCount() - 1);
 		}
 		for (int i = index + count; i > index; i--) {
-			//OdfTableCell newCell = new OdfTableCell((OdfFileDom)maRowElement.getOwnerDocument());
 			TableTableCellElement newCell = (TableTableCellElement) OdfXMLFactory.newOdfElement((OdfFileDom) maRowElement.getOwnerDocument(),
 					OdfName.newName(OdfNamespaceNames.TABLE, "table-cell"));
 			newCell.setTableStyleNameAttribute(preCell.getStyleName());
@@ -649,7 +537,6 @@ public class OdfTableRow {
 	void insertCellBefore(OdfTableCell refCell, OdfTableCell positionCell, int count) {
 		splitRepeatedRows();
 		OdfTable ownerTable = getTable();
-		//OdfTableCell newCell=null;
 
 		if (positionCell == null) {
 			if (refCell.isCoveredElement()) {
@@ -702,14 +589,10 @@ public class OdfTableRow {
 					TableTableCellElement newCellEle = (TableTableCellElement) coverRefCellEle.cloneNode(true);
 					cleanCell(newCellEle);
 					insertCellElementBefore(getOdfElement(), positionCell.getOdfElement(), newCellEle, count);
-					//getOdfElement().insertBefore(newCellEle, positionCell.getOdfElement());
-					//newCell = ownerTable.getCellInstance(newCellEle, 0, 0);
 				} else { //the second and other cover line
 					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) refCell.getOdfElement().cloneNode(true);
 					newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-columns-repeated");
 					insertCellElementBefore(getOdfElement(), positionCell.getOdfElement(), newCellEle, count);
-					//getOdfElement().insertBefore(newCellEle, positionCell.getOdfElement());
-					//newCell = ownerTable.getCellInstance(newCellEle, 0, 0);
 				}
 			} else if ((refCell.getOdfElement() == positionCell.getOdfElement())
 					&& (refCell.getColumnsRepeatedNumber() > 1)) //repeated number
@@ -721,16 +604,12 @@ public class OdfTableRow {
 							refCell.getOdfElement(), i + count, refCell.mnRepeatedRowIndex);
 				}
 				refCell.getOdfElement().setTableNumberColumnsRepeatedAttribute(repeatNum + count);
-				//newCell = ownerTable.getCellInstance(refCell.getOdfElement(), refCell.mnRepeatedColIndex+1, refCell.mnRepeatedRowIndex );
 			} else {
 				TableTableCellElement newCellEle = (TableTableCellElement) refCell.getOdfElement().cloneNode(true);
 				cleanCell(newCellEle);
 				insertCellElementBefore(getOdfElement(), positionCell.getOdfElement(), newCellEle, count);
-				//getOdfElement().insertBefore(newCellEle,positionCell.getOdfElement());
-				//newCell = ownerTable.getCellInstance(newCellEle, 0, 0);
 			}
 		}
-		//return newCell;
 	}
 
 	/**
@@ -842,7 +721,6 @@ public class OdfTableRow {
 	}
 
 	private void reviseStyleFromLastColumnToMedium(OdfTableCell oldLastCell) {
-		//int length = getColumnNumber();
 		TableTableElement tableElement = getTableElement();
 		OdfStyle leftbottomStyle = tableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
 		OdfTable.setLeftBottomBorderStylesProperties(leftbottomStyle);
@@ -859,7 +737,6 @@ public class OdfTableRow {
 	}
 
 	private void reviseStyleFromMediumColumnToLast(OdfTableCell newLastCell) {
-		//int length = getColumnNumber();
 		TableTableElement tableElement = getTableElement();
 		OdfStyle rightbottomStyle = tableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
 		OdfTable.setRightBottomBorderStylesProperties(rightbottomStyle);
@@ -872,21 +749,6 @@ public class OdfTableRow {
 		} else {
 			newLastCell.getOdfElement().setStyleName(rightbottomStyle.getStyleNameAttribute());
 		}
-//		for(int i=0;i<length;)
-//		{
-//			
-//			FTableCell cell = newLastClm.getCellByIndex(i);
-//			if (cell.isCoveredElement())
-//			{
-//				i=i+cell.getColumnsRepeatedNumber();
-//				continue;
-//			}
-//			if (i==0)
-//				cell.getOdfElement().setStyleName(righttopStyle.getStyleNameAttribute());
-//			else
-//				cell.getOdfElement().setStyleName(rightbottomStyle.getStyleNameAttribute());
-//			i=i+cell.getColumnsRepeatedNumber();
-//		}
 	}
 
 	/**
@@ -968,10 +830,8 @@ public class OdfTableRow {
 
 					table.updateRepositoryWhenCellElementChanged(startRow, endRow, startClm, endClm, newCellEle);
 				}
-				//getOdfElement().removeChild(cell.getOdfElement());
 			}
 			i += cell.getColumnSpannedNumber();
 		}
-
 	}
 }

@@ -52,7 +52,6 @@ import org.w3c.dom.Node;
  */
 public class OdfTableColumn {
 
-	//boolean mbVisible;
 	TableTableColumnElement maColumnElement;
 	int mnRepeatedIndex;
 	private XPath xpath;
@@ -137,10 +136,9 @@ public class OdfTableColumn {
 	}
 
 	/**
-	 * Get the width of the column (in 1/100th mm).
+	 * Get the width of the column (in Millimeter).
 	 * 
-	 * @return
-	 * 			the width of the current column (in 1/100th mm).
+	 * @return the width of the current column (in Millimeter).
 	 */
 	public long getWidth() {
 		String sWidth = maColumnElement.getProperty(OdfTableColumnProperties.ColumnWidth);
@@ -151,12 +149,11 @@ public class OdfTableColumn {
 	}
 
 	/**
-	 * Set the width of the column (in 1/100th mm).
+	 * Set the width of the column (in Millimeter).
 	 * @param width
-	 * 				the width that will be set to the column (in 1/100th mm).
+	 * 				the width that will be set to the column (in Millimeter).
 	 */
 	public void setWidth(long width) {
-		//long originalWidth = getWidth();
 		String sWidthMM = String.valueOf(width) + Unit.MILLIMETER.abbr();
 		String sWidthIN = PositiveLength.mapToUnit(sWidthMM, Unit.INCH);
 
@@ -196,11 +193,8 @@ public class OdfTableColumn {
 			String originalWidth = maColumnElement.getProperty(OdfTableColumnProperties.ColumnWidth);
 			String originalRelWidth = maColumnElement.getProperty(OdfTableColumnProperties.RelColumnWidth);
 			for (int i = repeateNum - 1; i >= 0; i--) {
-				//OdfTableColumn newColumn = new OdfTableColumn((OdfFileDom)maColumnElement.getOwnerDocument());
 				TableTableColumnElement newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement((OdfFileDom) maColumnElement.getOwnerDocument(),
 						OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
-//				OdfTableColumn newColumn = (OdfTableColumn) maColumnElement.cloneNode(true);
-//				newColumn.removeAttributeNS(OdfNamespace.get(OdfNamespaceNames.TABLE).toString(), "number-columns-repeated" );
 				newColumn.setProperty(OdfTableColumnProperties.ColumnWidth, originalWidth);
 				newColumn.setProperty(OdfTableColumnProperties.RelColumnWidth, originalRelWidth);
 				tableEle.insertBefore(newColumn, refElement);
@@ -254,42 +248,13 @@ public class OdfTableColumn {
 	public void setUseOptimalWidth(boolean isUseOptimalWidth) {
 		maColumnElement.setProperty(OdfTableColumnProperties.UseOptimalColumnWidth, String.valueOf(isUseOptimalWidth));
 	}
-
-//	/**
-//	 * return if the column is visible
-//	 * @return 
-//	 * 			true if the column is visible
-//	 * 			vice versa
-//	 */
-//	public boolean isVisible()
-//	{
-//		return mbVisible;
-//	}
-//	
-//	/**
-//	 * set if the column is visible
-//	 * @param bVisible
-//	 * 					the flag that indicate column is visible or not
-//	 */
-//	public void setVisible(boolean bVisible)
-//	{
-//		mbVisible = bVisible;
-//	}
-//	
-	/* (non-Javadoc)
-	 * @see org.odftoolkit.odfdom.doc.feature.Feature#delete()
-	 */
-//	public void delete() {
-//		// TODO Auto-generated method stub
-//		
-//	}
+	
 	/**
 	 * Return an instance of <code>TableTableColumnElement</code> which represents this feature.
 	 * 
 	 * @return an instance of <code>TableTableColumnElement</code>
 	 */
 	public TableTableColumnElement getOdfElement() {
-		// TODO Auto-generated method stub
 		return maColumnElement;
 	}
 
@@ -433,7 +398,6 @@ public class OdfTableColumn {
 					if (m instanceof TableTableColumnElement) {
 						columnEle = (TableTableColumnElement) m;
 						if (columnEle == getOdfElement()) {
-							//break;
 							return result + mnRepeatedIndex;
 						}
 						if (columnEle.getTableNumberColumnsRepeatedAttribute() == null) {
