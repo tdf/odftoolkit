@@ -76,6 +76,7 @@ public class OdfTable {
 	TableTableElement mTableElement;
 	protected OdfDocument mDocument;
 	protected boolean mIsSpreadsheet;
+	protected boolean mIsCellStyleInheritance = true;
 	private static final int DEFAULT_ROW_COUNT = 2;
 	private static final int DEFAULT_COLUMN_COUNT = 5;
 	private static final double DEFAULT_TABLE_WIDTH = 6;
@@ -835,10 +836,19 @@ public class OdfTable {
 	}
 
 	/**
-	 * Append a row to the end of the table.
-	 * The style of new row is same with the last row in the table.
+	 * Append a row to the end of the table. The style of new row is same with
+	 * the last row in the table.
+	 * <p>
+	 * Since ODFDOM 8.5 automatic table expansion is supported. Whenever a cell
+	 * outside the current table is addressed the table is instantly expanded.
+	 * Method <code>getCellByPosition</code> can randomly access any cell, no
+	 * matter it in or out of the table original range.
 	 * 
 	 * @return a new appended row
+	 * @see #appendRows(int)
+	 * @see #getRowByIndex(int)
+	 * @see #getCellByPosition(int, int)
+	 * @see #getCellByPosition(String)
 	 */
 	public OdfTableRow appendRow() {
 		int columnCount = getColumnCount();
@@ -858,13 +868,26 @@ public class OdfTable {
 	}
 
 	/**
-	 * Append a specific number of rows to the end of the table.
-	 * The style of new rows are same with the last row in the table.
+	 * Append a specific number of rows to the end of the table. The style of
+	 * new rows are same with the last row in the table. 
+	 * <p>
+	 * Since ODFDOM 8.5 automatic table expansion is supported. Whenever a cell
+	 * outside the current table is addressed the table is instantly expanded.
+	 * Method <code>getCellByPosition</code> can randomly access any cell, no
+	 * matter it in or out of the table original range.
 	 * 
-	 * @param rowCount	is the number of rows to be appended.
+	 * @param rowCount  is the number of rows to be appended.
 	 * @return a list of new appended rows
+	 * @see #appendRow()
+	 * @see #getRowByIndex(int)
+	 * @see #getCellByPosition(int, int)
+	 * @see #getCellByPosition(String)
 	 */
 	public List<OdfTableRow> appendRows(int rowCount) {
+		return appendRows(rowCount, false);
+	}
+
+	List<OdfTableRow> appendRows(int rowCount, boolean isCleanStyle) {
 		List<OdfTableRow> resultList = new ArrayList<OdfTableRow>();
 		if (rowCount <= 0) {
 			return resultList;
@@ -874,16 +897,36 @@ public class OdfTable {
 		if (rowCount == 1) {
 			return resultList;
 		}
-		List<OdfTableRow> list = insertRowsBefore((getRowCount() - 1), (rowCount - 1));
+		List<OdfTableRow> list = insertRowsBefore((getRowCount() - 1),
+				(rowCount - 1));
 		resultList.addAll(list);
+		if (isCleanStyle) {
+			// clean style name
+			for (OdfTableRow row : resultList) {
+				for (int i = 0; i < row.getCellCount(); i++) {
+					TableTableCellElement cellElement = (TableTableCellElement) (row
+							.getCellByIndex(i).mCellElement);
+					cellElement.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "style-name");
+				}
+			}
+		}
 		return resultList;
 	}
 
 	/**
-	 * Append a column to the right of the table.
-	 * The style of new column is same with the rightmost column in the table.
+	 * Append a column at the end of the table. The style of new column is
+	 * same with the last column in the table.
+	 * <p>
+	 * Since ODFDOM 8.5 automatic table expansion is supported. Whenever a cell
+	 * outside the current table is addressed the table is instantly expanded.
+	 * Method <code>getCellByPosition</code> can randomly access any cell, no
+	 * matter it in or out of the table original range.
 	 * 
 	 * @return a new appended column
+	 * @see #appendColumns(int)
+	 * @see #getColumnByIndex(int)
+	 * @see #getCellByPosition(int, int)
+	 * @see #getCellByPosition(String)
 	 */
 	public OdfTableColumn appendColumn() {
 		List<OdfTableColumn> columnList = getColumnList();
@@ -929,24 +972,47 @@ public class OdfTable {
 	}
 
 	/**
-	 * Append a specific number of columns to the right of the table.
-	 * The style of new columns are same with the rightmost column in the table.
+	 * Append a specific number of columns to the right of the table. The style
+	 * of new columns are same with the rightmost column in the table. 
+	 * <p>
+	 * Since ODFDOM 8.5 automatic table expansion is supported. Whenever a cell
+	 * outside the current table is addressed the table is instantly expanded.
+	 * Method <code>getCellByPosition</code> can randomly access any cell, no
+	 * matter it in or out of the table original range.
 	 * 
-	 * @param clmCount	is the number of columns to be appended.
+	 * @param columnCount is the number of columns to be appended.
 	 * @return a list of new appended columns
+	 * @see #appendColumn()
+	 * @see #getColumnByIndex(int)
+	 * @see #getCellByPosition(int, int)
+	 * @see #getCellByPosition(String)
 	 */
-	public List<OdfTableColumn> appendColumns(int clmCount) {
+	public List<OdfTableColumn> appendColumns(int columnCount) {
+		return appendColumns(columnCount, false);
+	}
+
+	List<OdfTableColumn> appendColumns(int columnCount, boolean isCleanStyle) {
 		List<OdfTableColumn> resultList = new ArrayList<OdfTableColumn>();
-		if (clmCount <= 0) {
+		if (columnCount <= 0) {
 			return resultList;
 		}
 		OdfTableColumn firstClm = appendColumn();
 		resultList.add(firstClm);
-		if (clmCount == 1) {
+		if (columnCount == 1) {
 			return resultList;
 		}
-		List<OdfTableColumn> list = insertColumnsBefore((getColumnCount() - 1), (clmCount - 1));
+		List<OdfTableColumn> list = insertColumnsBefore((getColumnCount() - 1), (columnCount - 1));
 		resultList.addAll(list);
+		// clean style name
+		if(isCleanStyle){
+			for (OdfTableColumn column : resultList) {
+				for (int i = 0; i < column.getCellCount(); i++) {
+					TableTableCellElement cellElement = (TableTableCellElement) (column
+							.getCellByIndex(i).mCellElement);
+					cellElement.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "style-name");
+				}
+			}
+		}		
 		return resultList;
 	}
 
@@ -1049,6 +1115,9 @@ public class OdfTable {
 		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "string-value");
 		newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "formula");
 		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "value-type");
+		if(!isCellStyleInheritance()){
+			newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "style-name");
+		}
 		Node n = newCellEle.getFirstChild();
 		while (n != null) {
 			Node m = n.getNextSibling();
@@ -1074,10 +1143,10 @@ public class OdfTable {
 	 * Insert a specific number of columns before the column whose index is <code>index</code>.
 	 * 
 	 * @param index	is the index of the column to insert before.
-	 * @param clmCount	is the number of columns to insert.
+	 * @param columnCount	is the number of columns to insert.
 	 * @return a list of new inserted columns
 	 */
-	public List<OdfTableColumn> insertColumnsBefore(int index, int clmCount) {
+	public List<OdfTableColumn> insertColumnsBefore(int index, int columnCount) {
 		OdfTableColumn refColumn, positionCol;
 		ArrayList<OdfTableColumn> list = new ArrayList<OdfTableColumn>();
 		int columncount = getColumnCount();
@@ -1090,17 +1159,17 @@ public class OdfTable {
 			int iRowCount = getRowCount();
 			for (int i = 0; i < iRowCount; i++) {
 				OdfTableRow row = getRowByIndex(i);
-				row.insertCellByIndex(index, clmCount);
+				row.insertCellByIndex(index, columnCount);
 			}
 
 			refColumn = getColumnByIndex(index);
 			positionCol = refColumn;
 
 			TableTableColumnElement newColumnEle = (TableTableColumnElement) refColumn.getOdfElement().cloneNode(true);
-			newColumnEle.setTableNumberColumnsRepeatedAttribute(new Integer(clmCount));
+			newColumnEle.setTableNumberColumnsRepeatedAttribute(new Integer(columnCount));
 			mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
 
-			for (int i = 0; i < clmCount; i++) {
+			for (int i = 0; i < columnCount; i++) {
 				list.add(getColumnInstance(newColumnEle, i));
 			}
 			return list;
@@ -1113,7 +1182,7 @@ public class OdfTable {
 			OdfTableCell refCell = row.getCellByIndex(index - 1);
 			OdfTableCell positionCell = null;
 			positionCell = row.getCellByIndex(index);
-			row.insertCellBefore(refCell, positionCell, clmCount);
+			row.insertCellBefore(refCell, positionCell, columnCount);
 			i = i - row.getRowsRepeatedNumber();
 		}
 
@@ -1123,21 +1192,21 @@ public class OdfTable {
 		if (refColumn.getOdfElement() == positionCol.getOdfElement()) {
 			TableTableColumnElement column = refColumn.getOdfElement();
 			int repeatedCount = getColumnInstance(column, 0).getColumnsRepeatedNumber();
-			getColumnInstance(column, 0).setColumnsRepeatedNumber((repeatedCount + clmCount));
+			getColumnInstance(column, 0).setColumnsRepeatedNumber((repeatedCount + columnCount));
 			TableTableColumnElement columnEle = positionCol.getOdfElement();
 			OdfTableColumn startCol = getColumnInstance(positionCol.getOdfElement(), 0);
-			for (int i = repeatedCount + clmCount - 1; i >= clmCount + (index - startCol.getColumnIndex()); i--) {
-				updateColumnRepository(columnEle, i - clmCount, columnEle, i);
+			for (int i = repeatedCount + columnCount - 1; i >= columnCount + (index - startCol.getColumnIndex()); i--) {
+				updateColumnRepository(columnEle, i - columnCount, columnEle, i);
 			}
-			for (int i = 0; i < clmCount; i++) {
+			for (int i = 0; i < columnCount; i++) {
 				list.add(getColumnInstance(column, refColumn.mnRepeatedIndex + 1 + i));
 			}
 		} else {
 			TableTableColumnElement newColumnEle = (TableTableColumnElement) refColumn.getOdfElement().cloneNode(true);
-			newColumnEle.setTableNumberColumnsRepeatedAttribute(new Integer(clmCount));
+			newColumnEle.setTableNumberColumnsRepeatedAttribute(new Integer(columnCount));
 			mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
 
-			for (int i = 0; i < clmCount; i++) {
+			for (int i = 0; i < columnCount; i++) {
 				list.add(getColumnInstance(newColumnEle, i));
 			}
 		}
@@ -1155,10 +1224,12 @@ public class OdfTable {
 	 */
 	public void removeColumnsByIndex(int startIndex, int deleteColCount) {
 		//0. verify the index
-		if(deleteColCount <= 0)
+		if(deleteColCount <= 0) {
 			return;
-		if(startIndex < 0)
+		}
+		if(startIndex < 0) {
 			throw new IllegalArgumentException("startIndex of the deleted columns should not be negative");
+		}
 		int colCount = getColumnCount();
 		if (startIndex >= colCount) {
 			throw new IndexOutOfBoundsException("Start column index is out of bound");
@@ -1216,7 +1287,9 @@ public class OdfTable {
 	}
 
 	private void reviseStyleFromMediumRowToTopRow(OdfTableRow newTopRow) {
-		if (mIsSpreadsheet) return;
+		if (mIsSpreadsheet) {
+			return;
+		}
 		int length = getColumnCount();
 		
 		for (int i = 0; i < length;) {
@@ -1474,10 +1547,12 @@ public class OdfTable {
 	public void removeRowsByIndex(int startIndex, int deleteRowCount) {
 		boolean deleted = false;
 		//0. verify the index
-		if(deleteRowCount <= 0)
+		if(deleteRowCount <= 0) {
 			return;
-		if(startIndex < 0)
+		}
+		if(startIndex < 0) {
 			throw new IllegalArgumentException("startIndex of the deleted rows should not be negative");
+		}
 		int rowCount = getRowCount();
 		if (startIndex >= rowCount) {
 			throw new IndexOutOfBoundsException("Start index out of bound");
@@ -1618,7 +1693,89 @@ public class OdfTable {
 	public void setProtected(boolean isProtected) {
 		mTableElement.setTableProtectedAttribute(isProtected);
 	}
+	
+	/**
+	 * Return true if cell style is inherited when a new cell is added to the
+	 * table.
+	 * <p>
+	 * The default setting is inherited. In this condition, the style of new
+	 * column is same with the previous column before the inserted position,
+	 * while the style of new row is same with the last row before the inserted
+	 * position.
+	 * <p>
+	 * This feature setting will influence <code>appendRow()</code>,
+	 * <code>appendColumn()</code>, <code>appendRows()</code>,
+	 * <code>appendColumns()</code>, <code>insertRowsBefore()</code> and
+	 * <code>insertColumnsBefore()</code>.
+	 * <p>
+	 * For <code>getCellByPosition()</code>,
+	 * <code>getCellRangeByPosition()</code>, <code>getCellRangeByName()</code>,
+	 * <code>getRowByIndex()</code> and <code>getColumnByIndex()</code>, if need
+	 * automatically expand cells, it will return empty cell(s) without any
+	 * style settings. So inheritance setting have no effect on them.
+	 * 
+	 * @return true if cell style is inherited when a new cell is added to the
+	 *         table.
+	 * 
+	 * @see #setCellStyleInheritance(boolean)
+	 * @see #appendColumn()
+	 * @see #appendColumns(int)
+	 * @see #appendRow()
+	 * @see #appendRows(int)
+	 * @see #insertColumnsBefore(int, int)
+	 * @see #insertRowsBefore(int, int)
+	 * @see #getCellByPosition(int, int)
+	 * @see #getCellByPosition(String)
+	 * @see #getCellRangeByPosition(int, int, int, int)
+	 * @see #getCellRangeByPosition(String, String)
+	 * @see #getCellRangeByName(String)
+	 * @see #getColumnByIndex(int)
+	 * @see #getRowByIndex(int)
+	 */
+	protected boolean isCellStyleInheritance() {
+		return mIsCellStyleInheritance;
+	}
 
+	/**
+	 * This method allows users to set whether cell style is inherited or not
+	 * when a new cell is added to the table. Of course, the default setting is
+	 * inherited. In this condition, the style of new column is same with the
+	 * previous column before the inserted position, while the style of new row
+	 * is same with the last row before the inserted position.
+	 * <p>
+	 * This feature setting will influence <code>appendRow()</code>,
+	 * <code>appendColumn()</code>, <code>appendRows()</code>,
+	 * <code>appendColumns()</code>, <code>insertRowsBefore()</code> and
+	 * <code>insertColumnsBefore()</code>.
+	 * <p>
+	 * For <code>getCellByPosition()</code>,
+	 * <code>getCellRangeByPosition()</code>, <code>getCellRangeByName()</code>,
+	 * <code>getRowByIndex()</code> and <code>getColumnByIndex()</code>, if need
+	 * automatically expand cells, it will return empty cell(s) without any
+	 * style settings. So inheritance setting have no effect on them.
+	 * 
+	 * @param isEnabled
+	 *            if<code>isEnabled</code> is true, cell style will be inherited
+	 *            by new cell.
+	 *            
+	 * @see #isCellStyleInheritance()
+	 * @see #appendColumn()
+	 * @see #appendColumns(int)
+	 * @see #appendRow()
+	 * @see #appendRows(int)
+	 * @see #insertColumnsBefore(int, int)
+	 * @see #insertRowsBefore(int, int)
+	 * @see #getCellByPosition(int, int)
+	 * @see #getCellByPosition(String)
+	 * @see #getCellRangeByPosition(int, int, int, int)
+	 * @see #getCellRangeByPosition(String, String)
+	 * @see #getCellRangeByName(String)
+	 * @see #getColumnByIndex(int)
+	 * @see #getRowByIndex(int)
+	 */
+	protected void setCellStyleInheritance(boolean	isEnabled) {
+		mIsCellStyleInheritance=isEnabled;
+	}
 	////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * Return a range of cells within the specified range. The table will be
@@ -1712,12 +1869,14 @@ public class OdfTable {
 		// expand row as needed.
 		int lastRowIndex = getRowCount() - 1;
 		if (rowIndex > lastRowIndex) {
-			appendRows(rowIndex - lastRowIndex);
+			//need clean cell style.
+			appendRows((rowIndex - lastRowIndex), true);
 		}
 		// expand column as needed.
 		int lastColumnIndex = getColumnCount() - 1;
 		if (colIndex > lastColumnIndex) {
-			appendColumns(colIndex - lastColumnIndex);
+			//need clean cell style.
+			appendColumns((colIndex - lastColumnIndex), true);
 		}
 		OdfTableRow row = getRowByIndex(rowIndex);
 		return row.getCellByIndex(colIndex);

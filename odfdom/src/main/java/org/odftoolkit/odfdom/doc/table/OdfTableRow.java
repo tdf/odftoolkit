@@ -245,7 +245,8 @@ public class OdfTableRow {
 		// expand column as needed.
 		int lastColumnIndex = table.getColumnCount() - 1;
 		if (index > lastColumnIndex) {
-			table.appendColumns(index - lastColumnIndex);
+			//need clean cell style.
+			table.appendColumns((index - lastColumnIndex), true);
 		}
 		for (Node n : new DomNodeList(maRowElement.getChildNodes())) {
 			if (n instanceof TableTableCellElementBase) {
@@ -709,6 +710,9 @@ public class OdfTableRow {
 		newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "formula");
 		newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-columns-repeated");
 		newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "number-columns-spanned");
+		if(!getTable().isCellStyleInheritance()){
+			newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "style-name");
+		}
 		Node n = newCellEle.getFirstChild();
 		while (n != null) {
 			Node m = n.getNextSibling();
@@ -725,22 +729,25 @@ public class OdfTableRow {
 		if (getTable().mIsSpreadsheet) return;
 		
 		OdfStyle styleEle = oldLastCell.getCellStyleElementForWrite();
-		if (oldLastCell.getRowIndex() == 0) {
-			OdfTable.setLeftTopBorderStyleProperties(styleEle);
-		} else {
-			OdfTable.setLeftBottomBorderStylesProperties(styleEle);
+		if (styleEle != null) {
+			if (oldLastCell.getRowIndex() == 0) {
+				OdfTable.setLeftTopBorderStyleProperties(styleEle);
+			} else {
+				OdfTable.setLeftBottomBorderStylesProperties(styleEle);
+			}
 		}
-
 	}
 
 	private void reviseStyleFromMediumColumnToLast(OdfTableCell newLastCell) {
 		if (getTable().mIsSpreadsheet) return;
 		
 		OdfStyle styleEle = newLastCell.getCellStyleElementForWrite();
-		if (newLastCell.getRowIndex() == 0) {
-			OdfTable.setRightTopBorderStyleProperties(styleEle);
-		} else {
-			OdfTable.setRightBottomBorderStylesProperties(styleEle);
+		if (styleEle != null) {
+			if (newLastCell.getRowIndex() == 0) {
+				OdfTable.setRightTopBorderStyleProperties(styleEle);
+			} else {
+				OdfTable.setRightBottomBorderStylesProperties(styleEle);
+			}
 		}
 	}
 

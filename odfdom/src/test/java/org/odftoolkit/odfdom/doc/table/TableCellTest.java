@@ -51,8 +51,9 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 public class TableCellTest {
 
 	final static String SAMPLE_SPREADSHEET = "TestSpreadsheetTable";
+	final static String SAMPLE_STYLE_SPREADSHEET = "TestSpreadsheetStyleTable";
 	final static String SAMPLE_TEXT = "TestTextTable";
-	OdfSpreadsheetDocument odsdoc;
+	OdfSpreadsheetDocument odsdoc, odsstyle;
 	OdfTextDocument odtdoc;
 	OdfTable odsTable, odtTable;
 
@@ -717,15 +718,121 @@ public class TableCellTest {
 		Assert.assertEquals(expected, fcell.getFormula());
 	}
 
+	/**
+	 * This test case is used to check whether the new created cell uses correct
+	 * style settings.</br>
+	 * ODFDOM allows users to set if cell styles are inherited or not whenever a
+	 * new cell is added to the table. The default setting is using inheritance.
+	 * In this condition, the style of new column is same with the
+	 * last column before the inserted position, while the style of new row
+	 * is same with the last row before the inserted position.<br/>
+	 * This feature setting will influence <code>appendRow()</code>,
+	 * <code>appendColumn()</code>, <code>appendRows()</code>,
+	 * <code>appendColumns()</code>, <code>insertRowsBefore()</code> and
+	 * <code>insertColumnsBefore()</code>. In default setting condition, the
+	 * style name of new created cells after these methods called should be
+	 * "ce1" which is inherited from preceding cell. <br/>
+	 * But after setting cell style inheritance false, these new created cells'
+	 * style name should be "Default", which is not inherited from preceding
+	 * one.<br/>
+	 * For <code>getCellByPosition()</code>,
+	 * <code>getCellRangeByPosition()</code>, <code>getCellRangeByName()</code>,
+	 * <code>getRowByIndex()</code> and <code>getColumnByIndex()</code>, if need
+	 * automatically expand cells, it will return empty cell(s) without any
+	 * style settings. Inheritance setting have no effect on them, so for cells
+	 * which created after these methods are called, should have "Default" style
+	 * name.
+	 */
 	@Test
 	public void testGetStyleName() {
-		int rowindex = 2, columnindex = 0;
-		OdfTable table = odsdoc.getTableByName("Sheet1");
-		OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
-		String expected = "ce2";
-		fcell.getStyleName();
-
-		Assert.assertEquals(expected, fcell.getStyleName());
+		try{
+			odsstyle = (OdfSpreadsheetDocument) OdfSpreadsheetDocument
+			.loadDocument(ResourceUtilities.getTestResourceAsStream(SAMPLE_STYLE_SPREADSHEET 
+							+ ".ods"));
+			int rowindex = 1, columnindex = 0;
+			OdfTable table = odsstyle.getTableByName("Sheet1");
+			OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
+			String expected = "ce1";
+			Assert.assertEquals(expected, fcell.getStyleName());
+			// the default setting is inherited, so for new row, 
+			// the cell style name should be "ce1".
+			//test appendColumn
+			table.appendColumn();
+			int columnCount=table.getColumnCount();
+			fcell = table.getCellByPosition(columnCount-1, rowindex);
+			Assert.assertEquals(expected, fcell.getStyleName());
+			//test appendRow
+			table.appendRow();
+			int rowCount=table.getRowCount();
+			fcell = table.getCellByPosition(columnindex, rowCount-1);
+			Assert.assertEquals(expected, fcell.getStyleName());
+			//test insertRowsBefore
+			table.insertRowsBefore(rowindex + 1, 1);
+			fcell = table.getCellByPosition(columnindex, rowindex + 1);
+			Assert.assertEquals(expected, fcell.getStyleName());
+			//test insertColumnsBefore
+			table.insertColumnsBefore(columnindex + 1, 1);
+			fcell = table.getCellByPosition(columnindex + 1, rowindex);
+			Assert.assertEquals(expected, fcell.getStyleName());
+			//test appendColumns
+			table.appendColumns(2);
+			columnCount=table.getColumnCount();
+			fcell = table.getCellByPosition(columnCount-1, rowindex);
+			Assert.assertEquals(expected, fcell.getStyleName());
+			//test appendRows
+			table.appendRows(2);
+			rowCount=table.getRowCount();
+			fcell = table.getCellByPosition(columnindex, rowCount-1);
+			Assert.assertEquals(expected, fcell.getStyleName());
+			// for getCellByPosition the return cell style should be "Default".
+			fcell = table.getCellByPosition(table.getColumnCount()+1, table.getRowCount()+1);
+			Assert.assertEquals("Default", fcell.getStyleName());
+			odsstyle.close();
+			
+			// change setting is not inherited, so for new row, 
+			// the cell style name should be "Default".
+			odsstyle = (OdfSpreadsheetDocument) OdfSpreadsheetDocument
+			.loadDocument(ResourceUtilities.getTestResourceAsStream(SAMPLE_STYLE_SPREADSHEET 
+							+ ".ods"));
+			rowindex = 1;
+			columnindex = 0;
+			table = odsstyle.getTableByName("Sheet1");
+			table.setCellStyleInheritance(false);
+			expected = "Default";
+			table.appendColumn();
+			columnCount=table.getColumnCount();
+			fcell = table.getCellByPosition(columnCount-1, rowindex);
+			Assert.assertEquals(expected, fcell.getStyleName());
+			//test appendRow
+			table.appendRow();
+			rowCount=table.getRowCount();
+			fcell = table.getCellByPosition(columnindex, rowCount-1);
+			Assert.assertEquals(expected, fcell.getStyleName());
+			//test insertRowsBefore
+			table.insertRowsBefore(rowindex + 1, 1);
+			fcell = table.getCellByPosition(columnindex, rowindex + 1);
+			Assert.assertEquals(expected, fcell.getStyleName());
+			//test insertColumnsBefore
+			table.insertColumnsBefore(columnindex + 1, 1);
+			fcell = table.getCellByPosition(columnindex + 1, rowindex);
+			//Assert.assertEquals(expected, fcell.getStyleName());
+			//test appendColumns
+			table.appendColumns(2);
+			columnCount=table.getColumnCount();
+			fcell = table.getCellByPosition(columnCount-1, rowindex);
+			Assert.assertEquals(expected, fcell.getStyleName());
+			//test appendRows
+			table.appendRows(2);
+			rowCount=table.getRowCount();
+			fcell = table.getCellByPosition(columnindex, rowCount-1);
+			Assert.assertEquals(expected, fcell.getStyleName());
+			// for getCellByPosition the return cell style should be "Default".
+			fcell = table.getCellByPosition(table.getColumnCount(), table.getRowCount());
+			Assert.assertEquals("Default", fcell.getStyleName());
+			odsstyle.close();
+		}catch(Exception e){
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test
