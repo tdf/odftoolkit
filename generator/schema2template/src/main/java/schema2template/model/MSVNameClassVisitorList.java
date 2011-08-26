@@ -34,6 +34,16 @@ import java.util.List;
 
 /**
  * Returns the Name(s) of an Expression (or more precisely: of its Nameclass) in a List of Strings.
+ * A list instead of a single name is necessary as there might be multiple names for a single element definition.
+ * For instance in ODF 1.2:
+ * <code>
+		<element>
+			<choice>
+				<name>text:reference-ref</name>
+				<name>text:bookmark-ref</name>
+			</choice>
+ </code>
+
  *
  * <p>Convention: "*" will be returned as the wildcard for "any name"</p>
  *

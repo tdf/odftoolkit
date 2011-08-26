@@ -108,6 +108,7 @@ public class PathPrinter {
                 }
                 String name = type.toString();
                 String qname = "";
+				// NameClassAndExpression is an MSV class for abstract named expressions (ie. attributes and elements)
                 if (step instanceof NameClassAndExpression) {
                     List<String> names = (List<String>) ((NameClassAndExpression) step).getNameClass().visit(nameVisitor);
                     if (names != null) {

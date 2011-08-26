@@ -23,9 +23,7 @@ package schema2template.example.odf;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
@@ -42,6 +40,10 @@ import schema2template.model.XMLModel;
 
 import com.sun.msv.grammar.Expression;
 import com.sun.msv.reader.trex.ng.RELAXNGReader;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+import schema2template.model.MSVExpressionIterator;
 
 /**
  * Three ODF examples in one:
@@ -52,22 +54,21 @@ import com.sun.msv.reader.trex.ng.RELAXNGReader;
  */
 public class OdfCodegen {
 
-	private static final Logger mLog = Logger.getLogger(OdfCodegen.class.getName());
+	private static final Logger LOG = Logger.getLogger(OdfCodegen.class.getName());
 	private final String odfResourceDir;
 	private final String sourceCodeRoot;
 	public static final String ODF11_RNG_FILE_NAME = "OpenDocument-schema-v1.1.rng";
-	public static final String ODF12_RNG_FILE_NAME = "OpenDocument-v1.2-cd05-schema.rng";
+	public static final String ODF12_RNG_FILE_NAME = "OpenDocument-v1.2-cd05-rev02-schema.rng";
 	private final String odf12RngFile;
 	private final String odf11RngFile;
 	private final String configFile;
-	private static final String OUTPUT_FILES_TEMPLATE="output-files.vm";
+	private static final String OUTPUT_FILES_TEMPLATE = "output-files.vm";
 	private static final String OUTPUT_FILES = "target" + File.separator + "output-files.xml";
+	private static final String OUTPUT_DUMP = "target" + File.separator + "output-dump.txt";
 	private XMLModel mOdf12SchemaModel;
 	private XMLModel mOdf11SchemaModel;
 	private OdfModel mOdfModel;
 	private SourceCodeModel mJavaModel;
-	
-
 
 	public OdfCodegen(String resourceRoot, String targetRoot, String odf12SchemaFile, String odf11SchemaFile, String configFile) {
 		this.odfResourceDir = resourceRoot;
@@ -101,6 +102,11 @@ public class OdfCodegen {
 	public void start() throws Exception {
 		// calling MSV to parse the ODF 1.2 RelaxNG, returning a tree
 		Expression odf12Root = loadSchema(new File(odf12RngFile));
+		String odf12Dump = dumpSchema(odf12Root);
+		LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP);
+		PrintWriter out = new PrintWriter(new FileWriter(OUTPUT_DUMP));
+		out.print(odf12Dump);
+		out.close();
 
 		// calling MSV to parse the ODF 1.1 RelaxNG, returning a tree
 		Expression odf11Root = loadSchema(new File(odf11RngFile));
@@ -108,7 +114,7 @@ public class OdfCodegen {
 		// Read config.xml 2DO WHAT IS ODFDOM GENERATOR CONFIG FILE
 		// Manual added Java specific info - Base class for inheritance
 		Map<String, String> elementToBaseNameMap = new HashMap<String, String>();
-		// Manual added ODF specific info - style family mapping 
+		// Manual added ODF specific info - style family mapping
 		Map<String, List<String>> elementStyleFamiliesMap = new HashMap<String, List<String>>();
 		// 2DO - still existent? -- Manual added Java specific info - mapping ODF datatype to Java datatype  -> {odfValueType, javaConversionClassName}
 		Map<String, String[]> datatypeValueAndConversionMap = new HashMap<String, String[]>();
@@ -135,13 +141,12 @@ public class OdfCodegen {
 
 		// Create output-files.xml
 		createOutputFileList(ve, root);
-		mLog.info("DONE.\n");
-
+		LOG.info("DONE.\n");
 
 		// Process output-files.xml, create output files
-		mLog.fine("Processing output files... ");
+		LOG.fine("Processing output files... ");
 		processFileList(ve, root);
-		mLog.fine("DONE.\n");
+		LOG.fine("DONE.\n");
 	}
 
 	/**
@@ -167,6 +172,10 @@ public class OdfCodegen {
 		return root;
 	}
 
+	public String dumpSchema(Expression rootExpression) throws Exception {
+		return MSVExpressionIterator.dumpSchema(rootExpression);
+	}
+
 	private VelocityContext getContext(String contextStr, String param) {
 		VelocityContext context = new VelocityContext();
 		context.put("model", mOdf12SchemaModel);
@@ -180,8 +189,8 @@ public class OdfCodegen {
 
 	private void createOutputFileList(VelocityEngine ve, Expression root) throws Exception {
 		VelocityContext context = getContext(null, null);
-		File parentPatch=new File(OUTPUT_FILES).getParentFile();
-		if(!parentPatch.exists()){
+		File parentPatch = new File(OUTPUT_FILES).getParentFile();
+		if (!parentPatch.exists()) {
 			parentPatch.mkdirs();
 		}
 		FileWriter listout = new FileWriter(new File(OUTPUT_FILES));
@@ -205,7 +214,7 @@ public class OdfCodegen {
 			try {
 				parent.mkdirs();
 			} catch (Exception e) {
-				mLog.log(Level.WARNING, "Could not create parent directory {0}", parent.getAbsolutePath());
+				LOG.log(Level.WARNING, "Could not create parent directory {0}", parent.getAbsolutePath());
 			}
 		}
 	}
@@ -219,7 +228,7 @@ public class OdfCodegen {
 				case PATH:
 					break;
 				case FILE:
-					mLog.log(Level.INFO, "Processing line{0}: Generating file {1}\n", new Object[]{f.getLineNumber(), generateFilename(f.getAttribute("path"))});
+					LOG.log(Level.INFO, "Processing line{0}: Generating file {1}\n", new Object[]{f.getLineNumber(), generateFilename(f.getAttribute("path"))});
 					String odfContextStr = f.getAttribute("context");
 					String param = f.getAttribute("param");
 					VelocityContext context = getContext(odfContextStr, param);

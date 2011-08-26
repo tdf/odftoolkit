@@ -239,8 +239,10 @@ public class XMLModel {
     }
 
     /**
-     * Maybe not used anymore: Get first word out of a String containing delimiters like "-:/ _.,"
+     * Assist method for camel-case adaptions or namespace extraction.
+	 * Maybe not used anymore: Get first word out of a String containing delimiters like "-:/ _.,"
      *
+	 *
      * @param raw input String
      * @return filtered output String
      */

@@ -86,7 +86,7 @@ public class MSVExpressionVisitorChildren implements ExpressionVisitor {
     }
 
     public List<Expression> onList(ListExp exp) {
-        return empty;
+        return child(exp.exp);
     }
 
     public List<Expression> onMixed(MixedExp exp) {

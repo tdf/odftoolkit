@@ -63,7 +63,7 @@ public class MSVExpressionVisitorType implements ExpressionVisitor {
 
     @Override
     public MSVExpressionType onConcur(ConcurExp arg0) {
-        return MSVExpressionType.CHONCUR;
+        return MSVExpressionType.CONCUR;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class MSVExpressionVisitorType implements ExpressionVisitor {
 
     @Override
     public MSVExpressionType onInterleave(InterleaveExp arg0) {
-        return MSVExpressionType.INTERLAVE;
+        return MSVExpressionType.INTERLEAVE;
     }
 
     @Override
