@@ -28,7 +28,6 @@ import java.util.regex.Pattern;
 
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.doc.text.OdfWhitespaceProcessor;
@@ -212,7 +211,6 @@ public class TextNavigation extends Navigation {
 				Pattern pattern = Pattern.compile(mPatternText);
 				Matcher matcher = pattern.matcher(content);
 				while (matcher.find()) {
-					System.out.println(matcher.group());
 					// here just consider \n\r\t occupy one char
 					mCurrentIndex = matcher.start();
 					int eIndex = matcher.end();
