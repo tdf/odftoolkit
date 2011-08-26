@@ -229,45 +229,45 @@ public class StyleTest {
         }
     }
 
-    /**
-     * Tes included to reproduce bug29
-     *
-     */
-    @Test
-    public void testAutomaticStyleRename() {
-        try {
-            OdfDocument doc = OdfTextDocument.newTextDocument();
-            OdfFileDom dom = doc.getContentDom();
-
-            OdfOfficeAutomaticStyles autoStyles = new OdfOfficeAutomaticStyles(dom);
-            OdfStyle paraStyle = autoStyles.newStyle(OdfStyleFamily.Paragraph);
-
-            paraStyle.setStyleNameAttribute("newName");
-            OdfStyle newStyle = autoStyles.getStyle("newName", OdfStyleFamily.Paragraph);
-
-            Assert.assertNotNull(newStyle);
-            Assert.assertSame(paraStyle, newStyle);
-
-            autoStyles.optimize();
-            newStyle = autoStyles.getStyle("newName", OdfStyleFamily.Paragraph);
-            // unused style removed
-            Assert.assertNull(newStyle);
-
-            // new style created
-            OdfStyle style = autoStyles.newStyle(OdfStyleFamily.Paragraph);
-            style.setStyleNameAttribute("newName1");
-            OdfStyle style2 = autoStyles.newStyle(OdfStyleFamily.Paragraph);
-            style2.setStyleNameAttribute("newName2");
-
-            autoStyles.removeChild(style2);
-            OdfStyle style3 = autoStyles.getStyle("newName1", OdfStyleFamily.Paragraph);
-            // assert the correct style was removed
-            Assert.assertNotNull(style3);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
-        }
-    }
+//    /**
+//     * Test included to reproduce bug29, which was rolled back due to performance problems!!
+//     *
+//     */
+//    @Test
+//    public void testAutomaticStyleRename() {
+//        try {
+//            OdfDocument doc = OdfTextDocument.newTextDocument();
+//            OdfFileDom dom = doc.getContentDom();
+//
+//            OdfOfficeAutomaticStyles autoStyles = new OdfOfficeAutomaticStyles(dom);
+//            OdfStyle paraStyle = autoStyles.newStyle(OdfStyleFamily.Paragraph);
+//
+//            paraStyle.setStyleNameAttribute("newName");
+//            OdfStyle newStyle = autoStyles.getStyle("newName", OdfStyleFamily.Paragraph);
+//
+//            Assert.assertNotNull(newStyle);
+//            Assert.assertSame(paraStyle, newStyle);
+//
+//            autoStyles.optimize();
+//            newStyle = autoStyles.getStyle("newName", OdfStyleFamily.Paragraph);
+//            // unused style removed
+//            Assert.assertNull(newStyle);
+//
+//            // new style created
+//            OdfStyle style = autoStyles.newStyle(OdfStyleFamily.Paragraph);
+//            style.setStyleNameAttribute("newName1");
+//            OdfStyle style2 = autoStyles.newStyle(OdfStyleFamily.Paragraph);
+//            style2.setStyleNameAttribute("newName2");
+//
+//            autoStyles.removeChild(style2);
+//            OdfStyle style3 = autoStyles.getStyle("newName1", OdfStyleFamily.Paragraph);
+//            // assert the correct style was removed
+//            Assert.assertNotNull(style3);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
+//        }
+//    }
 
     /**
      * Setting style property on an automatic style, which occurs on multiple
