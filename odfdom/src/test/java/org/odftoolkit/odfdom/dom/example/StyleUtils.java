@@ -31,7 +31,7 @@ import org.w3c.dom.Node;
  *
  * @author j
  */
-public class StyleUtils {
+class StyleUtils {
 
   
     /**
@@ -44,7 +44,7 @@ public class StyleUtils {
      * @param propertyName for example OdfTextProperties.FontName
      * @return proterty the value of the property, for example "Thorndale"
      */
-    public static String findActualStylePropertyValueForNode(Node node, OdfStyleProperty propertyName) {
+    static String findActualStylePropertyValueForNode(Node node, OdfStyleProperty propertyName) {
       Node nodeWithStyle = node;
 
       while (nodeWithStyle!=null && !(nodeWithStyle instanceof OdfStylableElement)) {

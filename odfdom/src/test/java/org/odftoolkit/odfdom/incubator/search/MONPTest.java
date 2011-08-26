@@ -30,7 +30,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 /**
  * Test ReplaceWith method for class org.odftoolkit.odfdom.incubator.search.TextSelection 
  */
-public class TestMONP {
+public class MONPTest {
 
 	public static final String TEXT_FILE = "navigationtest.odt";
 	public static final String SAVE_FILE = "testsave1.odt";

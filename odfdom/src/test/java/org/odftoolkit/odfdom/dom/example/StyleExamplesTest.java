@@ -46,10 +46,10 @@ import org.w3c.dom.Node;
  *
  * @author j
  */
-public class StyleExamples {
+public class StyleExamplesTest {
 
     private static String TEST_FILE = "test2.odt";
-    private Logger mLog = Logger.getLogger(StyleExamples.class.getName());
+    private Logger mLog = Logger.getLogger(StyleExamplesTest.class.getName());
 
     static class DumpPropertyAndText extends NodeAction<ArrayList<String>> {
 
@@ -69,7 +69,7 @@ public class StyleExamples {
                 return;
             }
 
-            Logger logger = Logger.getLogger(StyleExamples.class.getName());
+            Logger logger = Logger.getLogger(StyleExamplesTest.class.getName());
             logger.finest(textNode.getParentNode().toString());
 
             String teksto = textNode.getTextContent().trim();

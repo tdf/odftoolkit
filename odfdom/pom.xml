@@ -45,7 +45,7 @@
 					<archive>
 						<index>true</index>
 						<manifest>
-							<mainClass>org.odftoolkit.odfdom.Version</mainClass>
+							<mainClass>org.odftoolkit.odfdom.JarManifest</mainClass>
 						</manifest>
 						<manifestEntries>
 							<version>${project.version}</version>
@@ -54,12 +54,12 @@
 							<manifestSection>
 								<name>ODFDOM</name>
 								<manifestEntries>
-									<Application-Name>odfdom</Application-Name>
-									<Application-Version>${project.version}</Application-Version>
-									<Application-Website>http://odftoolkit.org</Application-Website>
-									<Built-By>${user.name}</Built-By>
-									<Built-Date>${build.timestamp}</Built-Date>
-									<Supported-Odf-Version>1.2</Supported-Odf-Version>
+									<ODFDOM-Name>odfdom</ODFDOM-Name>
+									<ODFDOM-Version>${project.version}</ODFDOM-Version>
+									<ODFDOM-Website>http://odftoolkit.org</ODFDOM-Website>
+									<ODFDOM-Built-By>${user.name}</ODFDOM-Built-By>
+									<ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
+									<ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
 								</manifestEntries>
 							</manifestSection>
 						</manifestSections>
@@ -78,9 +78,6 @@
 						<odfdom.version>${project.version}</odfdom.version>
 						<odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
 					</systemPropertyVariables>
-					<excludes>
-						<exclude>**/integrationtest/**</exclude>
-					</excludes>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -140,6 +137,24 @@
 					</instrumentation>
 				</configuration>
 			</plugin>
+			
+			<!-- Reporting integration test results -->
+			<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-failsafe-plugin</artifactId>
+        		<version>2.5</version>
+        		<reportSets>
+          			<reportSet>
+            			<id>integration-tests</id>
+            			<reports>
+              				<report>report-only</report>
+            			</reports>
+            			<configuration>
+              				<outputName>failsafe-report</outputName>
+            			</configuration>
+        			</reportSet>
+        		</reportSets>
+      		</plugin>
 		</plugins>
 	</reporting>
 
@@ -515,35 +530,23 @@
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>2.5</version>
 						<executions>
 							<execution>
-								<id>surefire-it</id>
+								<id>failsafe-it</id>
 								<phase>integration-test</phase>
 								<goals>
-									<goal>test</goal>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
 								</goals>
 								<configuration>
-									<excludes>
-										<exclude>none</exclude>
-									</excludes>
-									<includes>
-										<include>**/integrationtest/**</include>
-									</includes>
-									<systemProperties>
-										<property>
-											<name>testresourcefolder</name>
-											<value>performance</value>
-										</property>
-										<property>
-											<name>executetimes</name>
-											<value>1</value>
-										</property>
-										<property>
-											<name>testflag</name>
-											<value>test</value>
-										</property>
-									</systemProperties>
+									<classesDirectory>${basedir}/target/odfdom.jar</classesDirectory>
+									<systemPropertyVariables>
+										<testresourcefolder>performance</testresourcefolder>
+										<executetimes>1</executetimes>
+										<testflag>test</testflag>
+									</systemPropertyVariables>
 								</configuration>
 							</execution>
 						</executions>

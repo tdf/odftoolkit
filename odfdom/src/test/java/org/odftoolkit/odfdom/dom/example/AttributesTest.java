@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  *
  * @author hs234750
  */
-public class Attributes {
+public class AttributesTest {
 
     @Test
     public void testSetValue() throws Exception {

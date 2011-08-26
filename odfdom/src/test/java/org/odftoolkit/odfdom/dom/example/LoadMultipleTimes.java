@@ -21,11 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.dom.example;
 
-import org.odftoolkit.odfdom.doc.OdfDocument;
 
-
-public class LoadMultipleTimes {
-    
+class LoadMultipleTimes {
+/**
     final static int num = 50;
     public static void main(String[] args) {
         try {
@@ -46,4 +44,5 @@ public class LoadMultipleTimes {
             e.printStackTrace();
         }
     }
+	*/
 }

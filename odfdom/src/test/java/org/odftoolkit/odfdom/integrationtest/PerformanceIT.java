@@ -17,7 +17,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
 import org.w3c.dom.NodeList;
 import org.junit.Test;
 
-public class PerformanceTest {
+public class PerformanceIT {
 
 	private static String TEST_FILE_FOLDER;
 	private static String[] TEST_FILE_NAME;
@@ -34,8 +34,8 @@ public class PerformanceTest {
 	private int count = 1;
 	private String testTag = "new test";
 
-	public PerformanceTest() {
-		TEST_FILE_FOLDER = PerformanceTest.class.getClassLoader().getResource("").getPath()
+	public PerformanceIT() {
+		TEST_FILE_FOLDER = PerformanceIT.class.getClassLoader().getResource("").getPath()
 				+ System.getProperty("testresourcefolder")
 				+ File.separatorChar;
 
@@ -53,7 +53,7 @@ public class PerformanceTest {
 	}
 
 	private String getOutputPath() {
-		File rootpath = new File(PerformanceTest.class.getClassLoader().getResource("").getPath());
+		File rootpath = new File(PerformanceIT.class.getClassLoader().getResource("").getPath());
 		File parent = rootpath.getParentFile();
 		File outputpath = new File(parent, "performance-reports");
 		if (!outputpath.exists()) {

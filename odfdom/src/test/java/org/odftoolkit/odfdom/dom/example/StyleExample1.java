@@ -22,10 +22,10 @@
 package org.odftoolkit.odfdom.dom.example;
 
 
-public class StyleExample1 {
-    
-    public static void main(String[] args) {
+class StyleExample1 {
 /* todo: refactor            
+    public static void main(String[] args) {
+
         try {
             OdfDocument odfdoc = OdfDocument.OdfDocument("test/resources/test1.odt");
             System.out.println("parsed document.");
@@ -63,6 +63,6 @@ public class StyleExample1 {
         } catch (Exception e) {
             e.printStackTrace();
         }
- */
-    }
+
+    } */
 }
