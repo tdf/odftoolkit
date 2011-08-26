@@ -31,7 +31,7 @@ import javax.xml.xpath.XPathFactory;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.doc.OdfElementFactory;
+import org.odftoolkit.odfdom.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
@@ -197,7 +197,7 @@ public class OdfTableColumn {
 			String originalRelWidth = maColumnElement.getProperty(OdfTableColumnProperties.RelColumnWidth);
 			for (int i = repeateNum - 1; i >= 0; i--) {
 				//OdfTableColumn newColumn = new OdfTableColumn((OdfFileDom)maColumnElement.getOwnerDocument());
-				TableTableColumnElement newColumn = (TableTableColumnElement) OdfElementFactory.newOdfElement((OdfFileDom) maColumnElement.getOwnerDocument(),
+				TableTableColumnElement newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement((OdfFileDom) maColumnElement.getOwnerDocument(),
 						OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
 //				OdfTableColumn newColumn = (OdfTableColumn) maColumnElement.cloneNode(true);
 //				newColumn.removeAttributeNS(OdfNamespace.get(OdfNamespaceNames.TABLE).toString(), "number-columns-repeated" );

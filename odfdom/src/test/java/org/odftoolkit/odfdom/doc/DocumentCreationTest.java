@@ -21,6 +21,7 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import org.odftoolkit.odfdom.OdfXMLFactory;
 import org.odftoolkit.odfdom.OdfFileDom;
 import java.util.List;
 import java.util.logging.Level;
@@ -138,13 +139,13 @@ public class DocumentCreationTest {
             // FUTURE USAGE: para.createDrawFrame().createDrawImage("/myweb.org/images/myHoliday.png", "/Pictures/myHoliday.png");
             //             Child access methods are still not part of the v0.6.x releases
             // CURRENT USAGE:
-            OdfDrawFrame odfFrame =  (OdfDrawFrame) OdfElementFactory.newOdfElement(odfContent, DrawFrameElement.ELEMENT_NAME);
+            OdfDrawFrame odfFrame =  (OdfDrawFrame) OdfXMLFactory.newOdfElement(odfContent, DrawFrameElement.ELEMENT_NAME);
             para.appendChild(odfFrame);
-            OdfDrawImage odfImage = (OdfDrawImage) OdfElementFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
+            OdfDrawImage odfImage = (OdfDrawImage) OdfXMLFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
             odfFrame.appendChild(odfImage);
             odfImage.newImage(ResourceUtilities.getURI(TEST_PIC));
             
-            OdfDrawImage odfImage2 = (OdfDrawImage) OdfElementFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
+            OdfDrawImage odfImage2 = (OdfDrawImage) OdfXMLFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
             odfFrame.appendChild(odfImage2);
 			//Deactivated as test fail, when test machine is not online (painful for offline work)
             //odfImage2.newImage(new URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"));

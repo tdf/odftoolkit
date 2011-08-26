@@ -24,6 +24,8 @@ package org.odftoolkit.odfdom;
 import java.util.ArrayList;
 import org.apache.xerces.dom.ElementNSImpl;
 import org.apache.xerces.dom.ParentNode;
+import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.w3c.dom.DOMException;
@@ -302,7 +304,7 @@ abstract public class OdfElement extends ElementNSImpl {
 
 	@Override
 	public Node cloneNode(boolean deep) {
-		OdfElement cloneElement = ((OdfFileDom) this.ownerDocument).createElementNS(getOdfName());
+        OdfElement cloneElement = ((OdfFileDom) this.ownerDocument).newOdfElement(this.getClass());
 
 		if (attributes != null) {
 			for (int i = 0; i < attributes.getLength(); i++) {

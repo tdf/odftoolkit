@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.doc.OdfElementFactory;
+import org.odftoolkit.odfdom.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
 import org.odftoolkit.odfdom.doc.office.OdfOfficePresentation;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeSpreadsheet;
@@ -191,7 +191,7 @@ public class OdfTableCellRange {
 							//change the normal cell to be the covered cell
 							TableTableCellElement firstColumnCell = (TableTableCellElement) cellBase.getOdfElement();
 							//OdfCoveredTableCell coveredCell = new OdfCoveredTableCell((OdfFileDom)firstColumnCell.getOwnerDocument());
-							TableCoveredTableCellElement coveredCell = (TableCoveredTableCellElement) OdfElementFactory.newOdfElement(
+							TableCoveredTableCellElement coveredCell = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
 									(OdfFileDom) firstColumnCell.getOwnerDocument(),
 									OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell"));
 							OdfTableRow parentRow = cellBase.getTableRow();
@@ -234,7 +234,7 @@ public class OdfTableCellRange {
 							//change the normal cell to be the covered cell
 							TableTableCellElement firstRowCell = (TableTableCellElement) cellBase.getOdfElement();
 							//OdfCoveredTableCell coveredCell = new OdfCoveredTableCell((OdfFileDom)firstRowCell.getOwnerDocument());
-							TableCoveredTableCellElement coveredCell = (TableCoveredTableCellElement) OdfElementFactory.newOdfElement(
+							TableCoveredTableCellElement coveredCell = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
 									(OdfFileDom) firstRowCell.getOwnerDocument(),
 									OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell"));
 							OdfTableRow parentRow = cellBase.getTableRow();
@@ -266,7 +266,7 @@ public class OdfTableCellRange {
 						if (cellBase.getOdfElement() instanceof TableTableCellElement) {
 							//change the normal cell to be the covered cell
 							TableTableCellElement cell = (TableTableCellElement) cellBase.getOdfElement();
-							TableCoveredTableCellElement coveredCell = (TableCoveredTableCellElement) OdfElementFactory.newOdfElement(
+							TableCoveredTableCellElement coveredCell = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
 									(OdfFileDom) cell.getOwnerDocument(),
 									OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell"));
 
@@ -534,7 +534,7 @@ public class OdfTableCellRange {
 					&& (cur instanceof OdfOfficeText || cur instanceof OdfOfficeSpreadsheet || cur instanceof OdfOfficePresentation)) {
 				//create name range element
 				//OdfTableNamedExpressions nameExpress = new OdfTableNamedExpressions(contentDom);
-				TableNamedExpressionsElement nameExpress = (TableNamedExpressionsElement) OdfElementFactory.newOdfElement(
+				TableNamedExpressionsElement nameExpress = (TableNamedExpressionsElement) OdfXMLFactory.newOdfElement(
 						contentDom,
 						OdfName.newName(OdfNamespaceNames.TABLE, "named-expressions"));
 				String startCellRange = "$" + maOwnerTable.getTableName() + "." + maOwnerTable.getAbsoluteCellAddress(mnStartColumn, mnStartRow);

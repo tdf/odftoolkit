@@ -19,12 +19,9 @@
  * limitations under the License.
  *
  ************************************************************************/
-
 //2DO: Move into tooling package?
 package org.odftoolkit.odfdom;
 
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
@@ -32,72 +29,66 @@ import org.w3c.dom.Node;
  * base class for elements that want to be notified when OdfElement child
  * nodes are removed or inserted.
  */
-abstract public class OdfContainerElementBase extends OdfElement
-{
-    /**
+abstract public class OdfContainerElementBase extends OdfElement {
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6944696143015713668L;
 
 	/** Creates a new instance of OdfElement */
-    public OdfContainerElementBase(OdfFileDom ownerDocument,
-            String namespaceURI,
-            String qualifiedName) throws DOMException {
-        super(ownerDocument, namespaceURI, qualifiedName);
-    }
-
-    /** Creates a new instance of OdfElement */
-    public OdfContainerElementBase(OdfFileDom ownerDocument, 
-            OdfName aName) throws DOMException {
-        super(ownerDocument, aName.getUri(), aName.getQName());
-    }    
-    
-    /** override this method to get notified about element insertion
-     */
-    protected void onOdfNodeInserted(OdfElement node, Node refChild) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public OdfContainerElementBase(OdfFileDom ownerDocument,
+			String namespaceURI,
+			String qualifiedName) throws DOMException {
+		super(ownerDocument, namespaceURI, qualifiedName);
 	}
-            
-    /** override this method to get notified about element insertion
-     */
-    protected void onOdfNodeRemoved(OdfElement node) {
+
+	/** Creates a new instance of OdfElement */
+	public OdfContainerElementBase(OdfFileDom ownerDocument,
+			OdfName aName) throws DOMException {
+		super(ownerDocument, aName.getUri(), aName.getQName());
+	}
+
+	/** override this method to get notified about element insertion
+	 */
+	protected void onOdfNodeInserted(OdfElement node, Node refChild) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-    @Override
-    public Node insertBefore(Node newChild, Node refChild) throws DOMException
-    {
-        Node ret = super.insertBefore(newChild, refChild);
+	/** override this method to get notified about element insertion
+	 */
+	protected void onOdfNodeRemoved(OdfElement node) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 
-        if( newChild instanceof OdfElement )
-            onOdfNodeInserted( (OdfElement) newChild, refChild );
-        
-        return ret;
-    }
+	@Override
+	public Node insertBefore(Node newChild, Node refChild) throws DOMException {
+		Node ret = super.insertBefore(newChild, refChild);
+		if (newChild instanceof OdfElement) {
+			onOdfNodeInserted((OdfElement) newChild, refChild);
+		}
+		return ret;
+	}
 
-    @Override
-    public Node removeChild(Node oldChild) throws DOMException
-    {
-        Node ret = super.removeChild(oldChild);
-        
-        if( oldChild instanceof OdfElement )
-            onOdfNodeRemoved( (OdfElement) oldChild );
-        
-        return ret;
-    }
+	@Override
+	public Node removeChild(Node oldChild) throws DOMException {
+		Node ret = super.removeChild(oldChild);
+		if (oldChild instanceof OdfElement) {
+			onOdfNodeRemoved((OdfElement) oldChild);
+		}
+		return ret;
+	}
 
-    @Override
-    public Node replaceChild(Node newChild, Node oldChild) throws DOMException
-    {
-        Node ret = super.replaceChild(newChild, oldChild);
+	@Override
+	public Node replaceChild(Node newChild, Node oldChild) throws DOMException {
+		Node ret = super.replaceChild(newChild, oldChild);
 
-        if( newChild instanceof OdfElement )
-            onOdfNodeInserted( (OdfElement) newChild, oldChild );
-
-        if( oldChild instanceof OdfElement )
-            onOdfNodeRemoved( (OdfElement) oldChild );
-
-        return ret;
-    }
-
+		if (newChild instanceof OdfElement) {
+			onOdfNodeInserted((OdfElement) newChild, oldChild);
+		}
+		if (oldChild instanceof OdfElement) {
+			onOdfNodeRemoved((OdfElement) oldChild);
+		}
+		return ret;
+	}
 }

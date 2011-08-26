@@ -29,7 +29,7 @@ public class OdfName implements Comparable<OdfName> {
 
 	private OdfNamespace mNS;
 	private String mLocalName;
-	private String mExpandedName; // e.g. {nsURI}localName
+	private String mExpandedName; // i.e. {nsURI}localName
 	private static HashMap<String, OdfName> mOdfNames = new HashMap<String, OdfName>();
 
 	private OdfName(OdfNamespace ns, String localname, String expandedName) {
@@ -40,11 +40,41 @@ public class OdfName implements Comparable<OdfName> {
 
 	/** Returns the OdfName for the given namespace and name.
 	 *  Creates a new one, if the OdfName was not asked before.
+	 * @param name of the XML node
+	 * @return the OdfName for the given OdfNamesapce and name.
+	 */
+	public static OdfName newName(String name) {
+		return createName(null, name);
+	}
+
+	/** Returns the OdfName for the given namespace and name.
+	 *  Creates a new one, if the OdfName was not asked before.
 	 * @param odfNamespace
 	 * @param name of the XML node. Can be both local or qualified name.
 	 * @return the OdfName for the given OdfNamesapce and name.
 	 */
 	public static OdfName newName(OdfNamespace odfNamespace, String name) {
+		return createName(odfNamespace, name);
+	}
+
+	/** Returns the OdfName for the given namespace and name.
+	 *  Creates a new one, if the OdfName was not asked before.
+	 * @param namespaceNamed a named XML node - even without namespace.
+	 * @param name of the XML node. Can be both local or qualified name.
+	 * @return the OdfName for the given OdfNamesapce and name.
+	 */
+	public static OdfName newName(NamespaceName namespaceNamed, String name) {
+		return createName(OdfNamespace.newNamespace(namespaceNamed), name);
+	}
+
+	public static OdfName newName(String uri, String qname) {
+		String prefix = OdfNamespace.getPrefixPart(qname);
+		String localName = OdfNamespace.getLocalPart(qname);
+		OdfNamespace ns = OdfNamespace.newNamespace(prefix, uri);
+		return createName(ns, localName);
+	}
+
+	private static OdfName createName(OdfNamespace odfNamespace, String name) {
 		int i = 0;
 		if ((i = name.indexOf(':')) >= 0) {
 			name = name.substring(i + 1);
@@ -73,23 +103,6 @@ public class OdfName implements Comparable<OdfName> {
 		}
 	}
 
-	/** Returns the OdfName for the given namespace and name.
-	 *  Creates a new one, if the OdfName was not asked before.
-	 * @param namespaceNamed a named XML node - even without namespace.
-	 * @param name of the XML node. Can be both local or qualified name.
-	 * @return the OdfName for the given OdfNamesapce and name.
-	 */
-	public static OdfName newName(NamespaceName namespaceNamed, String name) {
-		return newName(OdfNamespace.newNamespace(namespaceNamed), name);
-	}
-
-	public static OdfName newName(String uri, String qname) {
-		String prefix = OdfNamespace.getPrefixPart(qname);
-		String localName = OdfNamespace.getLocalPart(qname);
-		OdfNamespace ns = OdfNamespace.newNamespace(prefix, uri);
-		return newName(ns, localName);
-	}
-
 	/** 
 	 * @return the XML Namespace URI, for <text:p> it would be urn:oasis:names:tc:opendocument:xmlns:text:1.0
 	 */
@@ -109,7 +122,18 @@ public class OdfName implements Comparable<OdfName> {
 	}
 
 	/**
-	 * @return the XML QName, the qualified name e.g. for <text:p> it is text:p-
+	 * @return the XML prefix, for <text:p> it would be text.
+	 */
+	public String getPrefix() {
+		String prefix = null;
+		if (mNS != null) {
+			prefix = mNS.getPrefix();
+		}
+		return prefix;
+	}
+
+	/**
+	 * @return the XML QName, the qualified name e.g. for <text:p> it is text:p.
 	 */
 	public String getQName() {
 		if (mNS != null) {

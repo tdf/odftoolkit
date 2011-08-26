@@ -21,10 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom;
 
-import org.odftoolkit.odfdom.doc.*;
 import java.lang.reflect.Field;
 import org.apache.xerces.dom.DocumentImpl;
-import org.odftoolkit.odfdom.doc.OdfElementFactory;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
@@ -82,10 +81,23 @@ public class OdfFileDom extends DocumentImpl {
 	/**
 	 * Create ODF element with namespace uri and qname
 	 *
+	 * @param name The element name
+	 *
+	 */
+	@Override
+	public OdfElement createElement(String name) throws DOMException {
+		return createElementNS(OdfName.newName(name));
+	}
+
+
+	/**
+	 * Create ODF element with namespace uri and qname
+	 *
 	 * @param nsuri The namespace uri
 	 * @param qname The element qname
 	 *
 	 */
+	@Override
 	public OdfElement createElementNS(String nsuri, String qname) throws DOMException {
 		return createElementNS(OdfName.newName(nsuri, qname));
 	}
@@ -97,7 +109,19 @@ public class OdfFileDom extends DocumentImpl {
 	 * @throws DOMException
 	 */
 	public OdfElement createElementNS(OdfName name) throws DOMException {
-		return OdfElementFactory.newOdfElement(this, name);
+		return OdfXMLFactory.newOdfElement(this, name);
+	}
+
+	/**
+	 * Create the ODF attribute with its name
+	 *
+	 * @param name  the attribute qname
+	 * @return The <code>OdfAttribute</code>
+	 * @throws  DOMException
+	 */
+	@Override
+	public OdfAttribute createAttribute(String name) throws DOMException {
+		return createAttributeNS(OdfName.newName(name));
 	}
 
 	/**
@@ -120,11 +144,12 @@ public class OdfFileDom extends DocumentImpl {
 	 * @throws DOMException
 	 */
 	public OdfAttribute createAttributeNS(OdfName name) throws DOMException {
-		return OdfElementFactory.newOdfAttribute(this, name);
+		return OdfXMLFactory.newOdfAttribute(this, name);
 	}
 
 	@SuppressWarnings("unchecked")
 	public <T extends OdfElement> T newOdfElement(Class<T> clazz) {
+		//return (T) OdfXMLFactory.getNodeFromClass(this, clazz);
 		try {
 			Field fname = clazz.getField("ELEMENT_NAME");
 			OdfName name = (OdfName) fname.get(null);

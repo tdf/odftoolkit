@@ -19,33 +19,46 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.odftoolkit.odfdom.pkg.element;
+package org.odftoolkit.odfdom;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.doc.*;
-import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.OdfElement;
 import org.w3c.dom.DOMException;
 
 /**
- * Temporary class until every ODF class is mapped
+ * Any attribute within the ODF package that is listed in the ODF schema.
+ * Note: Existence does not imply invalid ODF, as even namespace attributes are not
+ * listed and mapped to an OdfAlienAttribute.
  */
-public class OdfAlienElement extends OdfElement {
+public class OdfAlienAttribute extends OdfAttribute {
 
-    /**
-	 * 
+	private static final long serialVersionUID = 4210521398191729448L;
+
+	/**
+	 * Creates an alien attribute on the XML file
+	 *
+	 * @param ownerDocument the DOM of the XML file within the ODF package
+	 * @param name of the XML attribute to be created
+	 * @throws DOMException thrown for any problem during attribute creation
 	 */
-	private static final long serialVersionUID = 6693153432396354134L;
 
-	public OdfAlienElement(OdfFileDom ownerDocument,
+	public OdfAlienAttribute(OdfFileDom ownerDocument,
             OdfName name) throws DOMException {
         super(ownerDocument, name.getUri(), name.getQName());
-        ELEMENT_NAME = name;
+        ATTRIBUTE_NAME = name;
     }
-    public final OdfName ELEMENT_NAME;
+    public final OdfName ATTRIBUTE_NAME;
 
     @Override
 	public OdfName getOdfName() {
-        return ELEMENT_NAME;
+        return ATTRIBUTE_NAME;
     }
+
+	@Override
+	public String getDefault() {
+		return null;
+	}
+
+	@Override
+	public boolean hasDefault() {
+		return false;
+	}
 }

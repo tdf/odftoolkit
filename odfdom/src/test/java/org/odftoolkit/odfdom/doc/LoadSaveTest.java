@@ -25,14 +25,19 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class LoadSaveTest {
 
-    private static final String SOURCE = "empty.odt";
+    private static final String SOURCE = "not-only-odf.odt";
     private static final String TARGET = "loadsavetest.odt";
+	private static final String FOREIGN_ATTRIBUTE_NAME = "foreignAttribute";
+	private static final String FOREIGN_ATTRIBUTE_VALUE = "foreignAttributeValue";
+	private static final String FOREIGN_ELEMENT_TEXT = "foreignText";
 
     public LoadSaveTest() {
     }
@@ -58,8 +63,21 @@ public class LoadSaveTest {
             lst = odfContent.getElementsByTagNameNS(OdfNamespaceNames.TEXT.getUri(), "p");
             node = lst.item(0);
             String newText = node.getTextContent();
-
             Assert.assertTrue(newText.equals(oldText));
+
+			node = lst.item(1);
+			//check foreign attribute without namespace
+			Element foreignElement = (Element) node.getChildNodes().item(0);
+            String foreignText = foreignElement.getTextContent();
+            Assert.assertTrue(foreignText.equals(FOREIGN_ELEMENT_TEXT));
+
+			//check foreign element without namespace
+			Attr foreignAttr = (Attr) node.getAttributes().getNamedItem(FOREIGN_ATTRIBUTE_NAME);
+			String foreignAttrValue = foreignAttr.getValue();
+            Assert.assertTrue(foreignAttrValue.equals(FOREIGN_ATTRIBUTE_VALUE));
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());

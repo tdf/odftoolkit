@@ -32,7 +32,7 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.doc.OdfElementFactory;
+import org.odftoolkit.odfdom.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
@@ -332,7 +332,7 @@ public class OdfTable {
 		OdfFileDom dom = document.getContentDom();
 		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
 		//1. create table element
-		TableTableElement newTEle = (TableTableElement) OdfElementFactory.newOdfElement(dom,
+		TableTableElement newTEle = (TableTableElement) OdfXMLFactory.newOdfElement(dom,
 				OdfName.newName(OdfNamespaceNames.TABLE, "table"));
 		String tablename = getUniqueTableName(document);
 		newTEle.setTableNameAttribute(tablename);
@@ -353,15 +353,15 @@ public class OdfTable {
 		columnStyle.setProperty(OdfStyleTableColumnProperties.RelColumnWidth, Math.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
 		// 2.1 create header column elements
 		if (headerColumnNumber > 0) {
-			TableTableHeaderColumnsElement headercolumns = (TableTableHeaderColumnsElement) OdfElementFactory.newOdfElement(dom, OdfName.newName(OdfNamespaceNames.TABLE, "table-header-columns"));
-			TableTableColumnElement headercolumn = (TableTableColumnElement) OdfElementFactory.newOdfElement(dom, OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
+			TableTableHeaderColumnsElement headercolumns = (TableTableHeaderColumnsElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(OdfNamespaceNames.TABLE, "table-header-columns"));
+			TableTableColumnElement headercolumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
 			headercolumn.setTableNumberColumnsRepeatedAttribute(headerColumnNumber);
 			headercolumns.appendChild(headercolumn);
 			newTEle.appendChild(headercolumns);
 			headercolumn.setStyleName(columnStylename);
 		}
 		//2.2 create common column elements
-		TableTableColumnElement columns = (TableTableColumnElement) OdfElementFactory.newOdfElement(dom,
+		TableTableColumnElement columns = (TableTableColumnElement) OdfXMLFactory.newOdfElement(dom,
 				OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
 		columns.setTableNumberColumnsRepeatedAttribute(numCols - headerColumnNumber);
 		columns.setStyleName(columnStylename);
@@ -390,15 +390,15 @@ public class OdfTable {
 		setRightBottomBorderStylesProperties(rightbottomStyle);
 
 		//3.1 create header row elements
-		TableTableHeaderRowsElement headerrows = (TableTableHeaderRowsElement) OdfElementFactory.newOdfElement(dom,
+		TableTableHeaderRowsElement headerrows = (TableTableHeaderRowsElement) OdfXMLFactory.newOdfElement(dom,
 				OdfName.newName(OdfNamespaceNames.TABLE, "table-header-rows"));
 		for (int i = 0; i < headerRowNumber; i++) {
-			TableTableRowElement aRow = (TableTableRowElement) OdfElementFactory.newOdfElement(dom,
+			TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom,
 					OdfName.newName(OdfNamespaceNames.TABLE, "table-row"));
 			for (int j = 0; j < numCols; j++) {
-				TableTableCellElement aCell = (TableTableCellElement) OdfElementFactory.newOdfElement(dom,
+				TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
 						OdfName.newName(OdfNamespaceNames.TABLE, "table-cell"));
-				TextPElement aParagraph = (TextPElement) OdfElementFactory.newOdfElement(dom,
+				TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
 						OdfName.newName(OdfNamespaceNames.TEXT, "p"));
 				aCell.appendChild(aParagraph);
 				if ((j + 1 == numCols) && (i == 0)) {
@@ -418,12 +418,12 @@ public class OdfTable {
 
 		//3.2 create common row elements
 		for (int i = headerRowNumber; i < numRows; i++) {
-			TableTableRowElement aRow = (TableTableRowElement) OdfElementFactory.newOdfElement(dom,
+			TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom,
 					OdfName.newName(OdfNamespaceNames.TABLE, "table-row"));
 			for (int j = 0; j < numCols; j++) {
-				TableTableCellElement aCell = (TableTableCellElement) OdfElementFactory.newOdfElement(dom,
+				TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
 						OdfName.newName(OdfNamespaceNames.TABLE, "table-cell"));
-				TextPElement aParagraph = (TextPElement) OdfElementFactory.newOdfElement(dom,
+				TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
 						OdfName.newName(OdfNamespaceNames.TEXT, "p"));
 				aCell.appendChild(aParagraph);
 				if ((j + 1 == numCols) && (i == 0)) {
@@ -789,12 +789,12 @@ public class OdfTable {
 		setRightTopBorderStyleProperties(righttopStyle);
 
 		//3.1 create header row elements
-		TableTableRowElement aRow = (TableTableRowElement) OdfElementFactory.newOdfElement(dom,
+		TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom,
 				OdfName.newName(OdfNamespaceNames.TABLE, "table-row"));
 		for (int j = 0; j < columnCount; j++) {
-			TableTableCellElement aCell = (TableTableCellElement) OdfElementFactory.newOdfElement(dom,
+			TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
 					OdfName.newName(OdfNamespaceNames.TABLE, "table-cell"));
-			TextPElement aParagraph = (TextPElement) OdfElementFactory.newOdfElement(dom,
+			TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
 					OdfName.newName(OdfNamespaceNames.TEXT, "p"));
 			aCell.appendChild(aParagraph);
 			if (j + 1 == columnCount) {
@@ -877,7 +877,7 @@ public class OdfTable {
 			columnStyle.setProperty(OdfStyleTableColumnProperties.ColumnWidth, DEFAULT_TABLE_WIDTH + "in");
 			columnStyle.setProperty(OdfStyleTableColumnProperties.RelColumnWidth, DEFAULT_REL_TABLE_WIDTH + "*");
 
-			newColumn = (TableTableColumnElement) OdfElementFactory.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(),
+			newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(),
 					OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
 			//newColumn.setTableNumberColumnsRepeatedAttribute(1);
 			newColumn.setStyleName(columnStylename);
@@ -962,7 +962,7 @@ public class OdfTable {
 	private OdfTableRow insertRowBefore(OdfTableRow refRow, OdfTableRow positionRow) //only insert one Row
 	{
 		int columnCount = getColumnCount();
-		TableTableRowElement aRow = (TableTableRowElement) OdfElementFactory.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(),
+		TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement((OdfFileDom) mTableElement.getOwnerDocument(),
 				OdfName.newName(OdfNamespaceNames.TABLE, "table-row"));
 		int coveredLength = 0, coveredHeigth = 0;
 		for (int i = 0; i < columnCount;) {
@@ -977,7 +977,7 @@ public class OdfTable {
 					aRow.appendChild(newCellEle);
 				} else { //cover more rows
 					aCellEle.setTableNumberRowsSpannedAttribute(coveredHeigth + 1);
-					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfElementFactory.newOdfElement(
+					TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
 							(OdfFileDom) mTableElement.getOwnerDocument(),
 							OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell"));
 					newCellEle.setTableNumberColumnsRepeatedAttribute(refCell.getColumnsRepeatedNumber());
@@ -1133,7 +1133,6 @@ public class OdfTable {
 	 * 				is the number of columns to delete.
 	 */
 	public void removeColumnsByIndex(int startindex, int clmCount) {
-		//System.out.println(getTableName());
 		//0. verify the index
 		int columncount = getColumnCount();
 		if (startindex >= columncount) {
@@ -1686,13 +1685,11 @@ public class OdfTable {
 		// expand row as needed.
 		int lastRowIndex = getRowCount() - 1;
 		if (rowIndex > lastRowIndex) {
-			System.out.print("// expand row as needed.");
 			appendRows(rowIndex - lastRowIndex);
 		}
 		// expand column as needed.
 		int lastColumnIndex = getColumnCount() - 1;
 		if (colIndex > lastColumnIndex) {
-			System.out.print("// expand column  as needed.");
 			appendColumns(colIndex - lastColumnIndex);
 		}
 		OdfTableRow row = getRowByIndex(rowIndex);

@@ -1164,6 +1164,7 @@ public abstract class OdfDocument {
 	private class Handler extends DefaultHandler {
 		// the empty document to which nodes will be added
 
+		private static final String EMPTY_STRING = "";
 		private OdfFileDom mDocument;
 		private Node m_root;
 		// the context node
@@ -1200,9 +1201,23 @@ public abstract class OdfDocument {
 		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 			flushTextNode();
 			// if there is a specilized handler on the stack, dispatch the event
-			Element element = mDocument.createElementNS(uri, qName);
+			Element element = null;
+			if (uri.equals(EMPTY_STRING) || qName.equals(EMPTY_STRING)) {
+				element = mDocument.createElement(localName);
+			} else {
+				element = mDocument.createElementNS(uri, qName);
+			}
+			String attrPrefix = null;
+			String attrURL = null;
+			OdfAttribute attr = null;
 			for (int i = 0; i < attributes.getLength(); i++) {
-				OdfAttribute attr = mDocument.createAttributeNS(attributes.getURI(i), attributes.getQName(i));
+				attrURL = attributes.getURI(i);
+				attrPrefix = attributes.getQName(i);
+				if (attrURL.equals(EMPTY_STRING) || attrPrefix.equals(EMPTY_STRING)) {
+					attr = mDocument.createAttribute(attributes.getLocalName(i));
+				} else {
+					attr = mDocument.createAttributeNS(attrURL, attrPrefix);
+				}
 				element.setAttributeNodeNS(attr);
 				if (attr instanceof OfficeVersionAttribute) {
 					// write out not the original value, but the version of this odf version

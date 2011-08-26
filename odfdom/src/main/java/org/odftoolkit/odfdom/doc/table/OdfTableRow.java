@@ -32,7 +32,7 @@ import javax.xml.xpath.XPathExpressionException;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
-import org.odftoolkit.odfdom.doc.OdfElementFactory;
+import org.odftoolkit.odfdom.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
@@ -601,7 +601,7 @@ public class OdfTableRow {
 		}
 		for (int i = index + count; i > index; i--) {
 			//OdfTableCell newCell = new OdfTableCell((OdfFileDom)maRowElement.getOwnerDocument());
-			TableTableCellElement newCell = (TableTableCellElement) OdfElementFactory.newOdfElement((OdfFileDom) maRowElement.getOwnerDocument(),
+			TableTableCellElement newCell = (TableTableCellElement) OdfXMLFactory.newOdfElement((OdfFileDom) maRowElement.getOwnerDocument(),
 					OdfName.newName(OdfNamespaceNames.TABLE, "table-cell"));
 			newCell.setTableStyleNameAttribute(preCell.getStyleName());
 			maRowElement.insertBefore(newCell, nextCell.getOdfElement());
@@ -688,7 +688,7 @@ public class OdfTableRow {
 					coverRefCellEle = (TableTableCellElement) refCell.getOdfElement();
 					coverRefCell = refCell;
 				}
-				TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfElementFactory.newOdfElement(
+				TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
 						(OdfFileDom) ownerTable.getOdfElement().getOwnerDocument(),
 						OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell"));
 				insertCellElementBefore(getOdfElement(), positionCell.getOdfElement(), newCellEle, count);
@@ -777,7 +777,7 @@ public class OdfTableRow {
 					coverRefCellEle = (TableTableCellElement) refCell.getOdfElement();
 					coverRefCell = refCell;
 				}
-				TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfElementFactory.newOdfElement(
+				TableCoveredTableCellElement newCellEle = (TableCoveredTableCellElement) OdfXMLFactory.newOdfElement(
 						(OdfFileDom) ownerTable.getOdfElement().getOwnerDocument(),
 						OdfName.newName(OdfNamespaceNames.TABLE, "covered-table-cell"));
 				getOdfElement().insertBefore(newCellEle, positionCell.getOdfElement());
