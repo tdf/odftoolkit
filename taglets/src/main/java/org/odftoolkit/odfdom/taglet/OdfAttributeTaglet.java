@@ -42,7 +42,7 @@ public class OdfAttributeTaglet implements Taglet {
 	
 	private static final Logger LOG = Logger.getLogger(OdfAttributeTaglet.class.getName());
 	private static final String NAME = "odf.attribute";
-	private static final String ODF_SPEC_PATH = "../../../../../../doc-files/OpenDocument-v1.2-draft.xhtml";
+	private static final String ODF_SPEC_PATH = "../../../../../../doc-files/OpenDocument-v1.2-part-1-cd02-rev02.xhtml";
 	private static String mOdfSpecPath = null;
 
 	    /* FINDING THE ABSOLUTE PATH TO THE ODF SPEC IN HTML:
