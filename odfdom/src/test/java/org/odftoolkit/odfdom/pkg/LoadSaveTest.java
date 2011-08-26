@@ -52,7 +52,7 @@ public class LoadSaveTest {
             OdfPackageDocument odfDocument = OdfPackageDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE));
             Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
             String baseURI = odfDocument.getPackage().getBaseURI();
-            Assert.assertEquals(ResourceUtilities.getURI(SOURCE).toString(), baseURI);
+            Assert.assertTrue(ResourceUtilities.getURI(SOURCE).toString().compareToIgnoreCase(baseURI) == 0);
 
             Document odfContent = odfDocument.getFileDom("content.xml");
             NodeList lst = odfContent.getElementsByTagNameNS("urn:oasis:names:tc:opendocument:xmlns:text:1.0", "p");
