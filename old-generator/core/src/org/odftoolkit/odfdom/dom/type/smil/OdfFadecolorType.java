@@ -26,31 +26,30 @@
  */    
 package org.odftoolkit.odfdom.dom.type.smil;
 
-public enum OdfFadecolorType
+public enum OdfFadeColorType
 {
-              REVERSE( "reverse" ), FORWARD( "forward" );
+              FORWARD( "forward" ), REVERSE( "reverse" );
 
     private String m_aValue;
 
-    OdfFadecolorType( String _aValue )
+    OdfFadeColorType( String _aValue )
     {
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }
 
-    public static String toString( OdfFadecolorType _aEnum )
+    public static String toString( OdfFadeColorType _aEnum )
     {
         return _aEnum.toString();
     }
 
-    public static OdfFadecolorType enumValueOf( String _aString )
+    public static OdfFadeColorType enumValueOf( String _aString )
     {
-        for( OdfFadecolorType aIter : values() )
+        for( OdfFadeColorType aIter : values() )
         {
             if( _aString.equals( aIter.toString() ) )
             {

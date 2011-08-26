@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.smil;
 
 public enum OdfEndsyncType
 {
-              LAST( "last" ), MEDIA( "media" ), ALL( "all" ), FIRST( "first" );
+              ALL( "all" ), MEDIA( "media" ), FIRST( "first" ), LAST( "last" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfEndsyncType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

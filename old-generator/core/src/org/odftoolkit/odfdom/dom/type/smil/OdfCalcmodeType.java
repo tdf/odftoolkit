@@ -26,31 +26,30 @@
  */    
 package org.odftoolkit.odfdom.dom.type.smil;
 
-public enum OdfCalcmodeType
+public enum OdfCalcModeType
 {
-              SPLINE( "spline" ), PACED( "paced" ), LINEAR( "linear" ), DISCRETE( "discrete" );
+              PACED( "paced" ), SPLINE( "spline" ), DISCRETE( "discrete" ), LINEAR( "linear" );
 
     private String m_aValue;
 
-    OdfCalcmodeType( String _aValue )
+    OdfCalcModeType( String _aValue )
     {
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }
 
-    public static String toString( OdfCalcmodeType _aEnum )
+    public static String toString( OdfCalcModeType _aEnum )
     {
         return _aEnum.toString();
     }
 
-    public static OdfCalcmodeType enumValueOf( String _aString )
+    public static OdfCalcModeType enumValueOf( String _aString )
     {
-        for( OdfCalcmodeType aIter : values() )
+        for( OdfCalcModeType aIter : values() )
         {
             if( _aString.equals( aIter.toString() ) )
             {

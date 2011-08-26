@@ -26,31 +26,30 @@
  */    
 package org.odftoolkit.odfdom.dom.type.smil;
 
-public enum OdfFilldefaultType
+public enum OdfFillDefaultType
 {
-              FREEZE( "freeze" ), TRANSITION( "transition" ), AUTO( "auto" ), REMOVE( "remove" ), INHERIT( "inherit" ), HOLD( "hold" );
+              INHERIT( "inherit" ), AUTO( "auto" ), TRANSITION( "transition" ), HOLD( "hold" ), FREEZE( "freeze" ), REMOVE( "remove" );
 
     private String m_aValue;
 
-    OdfFilldefaultType( String _aValue )
+    OdfFillDefaultType( String _aValue )
     {
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }
 
-    public static String toString( OdfFilldefaultType _aEnum )
+    public static String toString( OdfFillDefaultType _aEnum )
     {
         return _aEnum.toString();
     }
 
-    public static OdfFilldefaultType enumValueOf( String _aString )
+    public static OdfFillDefaultType enumValueOf( String _aString )
     {
-        for( OdfFilldefaultType aIter : values() )
+        for( OdfFillDefaultType aIter : values() )
         {
             if( _aString.equals( aIter.toString() ) )
             {

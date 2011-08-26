@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.smil;
 
 public enum OdfDirectionType
 {
-              REVERSE( "reverse" ), FORWARD( "forward" );
+              FORWARD( "forward" ), REVERSE( "reverse" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfDirectionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

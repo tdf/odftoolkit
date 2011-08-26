@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.smil;
 
 public enum OdfFillType
 {
-              FREEZE( "freeze" ), TRANSITION( "transition" ), DEFAULT( "default" ), AUTO( "auto" ), REMOVE( "remove" ), HOLD( "hold" );
+              TRANSITION( "transition" ), AUTO( "auto" ), HOLD( "hold" ), FREEZE( "freeze" ), REMOVE( "remove" ), DEFAULT( "default" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfFillType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }
