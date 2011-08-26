@@ -1,0 +1,36 @@
+package org.odftoolkit.odfdom.dom;
+
+import org.odftoolkit.odfdom.dom.attribute.text.TextCAttribute;
+import org.odftoolkit.odfdom.pkg.AttributeVisitor;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+##
+#foreach ($attribute in ${model.getAttributes().withoutMultiples()})
+#if ($attribute != "*")
+#set ($NS = ${attribute.getNamespace()})
+#set($classname = "${model.camelCase($attribute)}Attribute")
+import org.odftoolkit.odfdom.dom.attribute.${NS}.${classname};
+#end
+#end
+##
+public abstract class DefaultAttributeVisitor implements AttributeVisitor {
+
+	/* (non-Javadoc)
+	 * @see org.odftoolkit.odfdom.pkg.AttributeVisitor\#visit(org.odftoolkit.odfdom.pkg.OdfAttribute)
+	 */
+	@Override
+	abstract public void visit(OdfAttribute attribute);
+
+#foreach ($attribute in ${model.getAttributes().withoutMultiples()})
+#if ($attribute != "*")
+#set ($NS = ${attribute.getNamespace()})
+#set ($classname = "${model.camelCase($attribute)}Attribute")
+	/**
+	 * A method to visit "${attribute.getQName()}" attribute
+	 * @param attr - an instance of $classname
+	 */
+	public void visit($classname attr) {
+		visit((OdfAttribute) attr);
+	}
+#end
+#end
+}

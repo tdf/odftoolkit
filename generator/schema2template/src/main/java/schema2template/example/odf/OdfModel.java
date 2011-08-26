@@ -23,9 +23,11 @@ package schema2template.example.odf;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import schema2template.model.QNamed;
@@ -63,6 +65,17 @@ public class OdfModel {
             }
             return retval;
         }
+        
+        public Set<String> getDefaults() {
+        	Set<String> defaults=new HashSet<String>();
+        	for(String elementname : elementDefault.keySet()){
+        		String retval = elementDefault.get(elementname);
+        		if(retval!=null){
+        			defaults.add(retval);
+        		}
+        	}
+            return defaults;
+        }
     }
 
     Map<String, List<String>> mNameToFamiliesMap;
@@ -95,7 +108,7 @@ public class OdfModel {
     public List<QNamed> getStyleFamilies(QNamed element) {
         List<QNamed> retval = new ArrayList<QNamed>();
         for (String family : mNameToFamiliesMap.get(element.getQName())) {
-            retval.add(new QNameValue(family));
+            retval.add(new QNameValue(family)); 
         }
         return retval;
     }
@@ -130,5 +143,18 @@ public class OdfModel {
         }
         return defaults.getDefault(parentelement.getQName());
     }
-
+    
+    /**
+     * Get default values of ODF attribute.
+     *
+     * @param attribute Attribute
+     * @return Default values for attribute
+     */
+    public Set<String> getDefaultAttributeValues(QNamed attribute) {
+        AttributeDefaults defaults = mNameToDefaultsMap.get(attribute.getQName());
+        if (defaults == null) {
+            return null;
+        }
+        return defaults.getDefaults();
+    }
 }

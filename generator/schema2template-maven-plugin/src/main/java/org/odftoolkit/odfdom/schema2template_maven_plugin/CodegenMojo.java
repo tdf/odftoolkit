@@ -31,9 +31,9 @@ import schema2template.example.odf.OdfCodegen;
 
 /**
  * Generate Java code for ODFDOM.
- * @goal Schema2template
+ * @goal codegen
  * @phase generate-sources
- * @description Schema2template tool
+ * @description ODFDOM Code Generator
  * @requiresDependencyResolution compile
  */
 public class CodegenMojo extends AbstractMojo {
@@ -42,22 +42,32 @@ public class CodegenMojo extends AbstractMojo {
 	 * @parameter
 	 * @required
 	 */
-	String sourceRoot;
+	File resourceRoot;
+	
 	/**
 	 * @parameter
 	 * @required
 	 */
-	File schemaFile;
+	String odf12SchemaFile;
+	
 	/**
 	 * @parameter
 	 * @required
 	 */
-	File configFile;
+	String odf11SchemaFile;
+	
 	/**
 	 * @parameter
 	 * @required
 	 */
-	File templateFile;
+	String configFile;
+	
+	/**
+	 * @parameter
+	 * @required
+	 */
+	File targetRoot;
+	
 	/**
 	 * @parameter expression="${project}"
 	 * @required
@@ -70,51 +80,41 @@ public class CodegenMojo extends AbstractMojo {
 	 */
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Schema2template code generation.");
-		getLog().debug("Config file " + configFile.getAbsolutePath());
-		getLog().debug("Schema file " + schemaFile.getAbsolutePath());
-		getLog().debug("TemplateFile " + templateFile.getAbsolutePath());
+		if (configFile == null) {
+			getLog().error("Please set configure file patch.");
+			throw new MojoFailureException("Please set configure file patch.");
+		}
+		if (odf12SchemaFile == null) {
+			getLog().error("Please set odf1.2 schema file patch.");
+			throw new MojoFailureException("Please set schema file patch.");
+		}
+		if (odf11SchemaFile == null) {
+			getLog().error("Please set odf1.1 schema file patch.");
+			throw new MojoFailureException("Please set schema file patch.");
+		}
+		String targetRootPath = targetRoot.getAbsolutePath();
+		if (targetRootPath == null) {
+			getLog().error("Please set generation code root patch.");
+			throw new MojoFailureException("Please set generation code root patch.");
+		}
+		String resourceRootPath = resourceRoot.getAbsolutePath();
+		if (resourceRootPath == null) {
+			getLog().error("Please set templates root patch.");
+			throw new MojoFailureException("Please set templates root patch.");
+		}
+		getLog().debug("Template Files Directory " + resourceRootPath);
+		getLog().debug("Generation Code Files Root Directory " + targetRootPath);
+		getLog().debug("ODF1.2 Schema File " + odf12SchemaFile);
+		getLog().debug("ODF1.1 Schema File " + odf11SchemaFile);
+		getLog().debug("Config File " + configFile);
 		try {
-			OdfCodegen.main(null);
+			OdfCodegen codeGen = new OdfCodegen(resourceRootPath, targetRootPath, odf12SchemaFile, odf11SchemaFile, configFile);
+			codeGen.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 			getLog().error("Failed to parse template.");
 			String msg = "Failed to execute ODF schema2template example";
 			throw new MojoFailureException(e, msg, msg);
 		}
-		//OdfCodeGen xThis = new OdfCodeGen(sourceRoot);
-//         if (xThis.parseConfig(configFile.getAbsolutePath()) ) {
-//             if (xThis.parseSchema(schemaFile.getAbsolutePath())) {
-//                 if (xThis.parseTemplate(templateFile.getAbsolutePath())) {
-//                     if (!xThis.executeTemplate(xThis.getTemplate())) {
-//                    	 getLog().error("Failed to execute template.");
-//                    	 throw new MojoFailureException("Failed to execute template.");
-//                     }
-//                 } else {
-//                	 getLog().error("Failed to parse template.");
-//                	 throw new MojoFailureException("Failed to parse template.");
-//                 }
-//             } else {
-//            	 getLog().error("Failed to parse schema.");
-//            	 throw new MojoFailureException("Failed to parse schema.");
-//             }
-//         } else {
-//        	 getLog().error("Failed to parse config.");
-//        	 throw new MojoFailureException("Failed to parse config.");
-//         }
-//         getLog().info("Schema2template complete.");
-//
-//         if (project != null) {
-//             boolean alreadyInSourceRoots = false;
-//             for (Object sr : project.getCompileSourceRoots()) {
-//            	 String srs = (String) sr;
-//            	 if (srs.equals(sourceRoot)) {
-//            		 alreadyInSourceRoots = true;
-//            	 }
-//             }
-//             if (!alreadyInSourceRoots) {
-//            	 getLog().info("Adding " + sourceRoot + " to project source roots.");
-//            	 project.addCompileSourceRoot(sourceRoot);
-//             }
-//         }
 	}
 }

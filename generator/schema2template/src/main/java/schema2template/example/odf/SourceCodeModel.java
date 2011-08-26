@@ -206,5 +206,19 @@ public class SourceCodeModel {
         String retval = tuple[1];
         return (retval == null) ? "" : retval;
     }
-
+    
+    /**
+     * Use in templates: Get Java conversion class for datatype used in schema.
+     *
+     * @param datatypename Source code datatypename
+     * @return name of source code conversion class for this datatype
+     */
+    public String getConversiontype(String datatypename) {
+        String[] tuple = mDatatypeValueAndConversionMap.get(datatypename);
+        if (tuple == null) {
+            return "";
+        }
+        String retval = tuple[1];
+        return (retval == null) ? "" : retval;
+    }
 }

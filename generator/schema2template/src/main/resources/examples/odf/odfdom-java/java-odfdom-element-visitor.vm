@@ -1,0 +1,38 @@
+package org.odftoolkit.odfdom.dom;
+
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+##
+#foreach ($element in ${model.getElements().withoutMultiples()})
+#if ($element != "*")
+#set ($NS = ${element.getNamespace()})
+#set ($classname = "${model.camelCase($element)}Element")
+import org.odftoolkit.odfdom.dom.element.${NS}.${classname};
+#end
+#end
+##
+
+/**
+ * A default visitor for DOM layer elements.
+ * <p> It implements the interface of DomVisitor in package layer.</p>
+ * <p> It provides element process method for some special elements. </p>
+ *
+ */
+public abstract class DefaultElementVisitor implements ElementVisitor {
+
+	@Override
+	abstract public void visit(OdfElement element);
+#foreach ($element in ${model.getElements().withoutMultiples()})
+#if ($element != "*")
+#set ($NS = ${element.getNamespace()})
+#set ($classname = "${model.camelCase($element)}Element")
+	/**
+	 * A method to visit "${element.getQName()}" elements
+	 * @param ele - an instance of $classname
+	 */
+	public void visit($classname ele) {
+		visit((OdfElement) ele);
+	}
+#end
+#end
+}

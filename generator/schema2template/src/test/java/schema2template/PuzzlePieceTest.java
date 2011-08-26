@@ -38,7 +38,9 @@ public class PuzzlePieceTest {
 	private static final Logger LOG = Logger.getLogger(PuzzlePieceTest.class.getName());
 	private static final int ODF11_ELEMENT_NUMBER = 507;
 	private static final int ODF11_ATTRIBUTE_NUMBER = 840;
-
+	private static final String ODF_RESOURCE_DIR = "target" + File.separator + "classes"
+	+ File.separator + "examples" + File.separator + "odf";
+	private static final String ODF11_RNG_FILE ="OpenDocument-schema-v1.1.rng";
 	private Expression mRoot;
 	private static final Boolean DEBUG = Boolean.FALSE;
 

@@ -1,0 +1,17 @@
+## Template	to create the list of artefacts	which are to be	generated
+##
+## Documentation of	template development can be	found in local file
+## TemplateHelp.html.
+##
+##
+#include('copyright.txt')
+// !!! GENERATED SOURCE	CODE !!!
+package	org.odftoolkit.odfdom.dom.style.props;
+public enum	OdfStylePropertiesSet {
+#foreach ($styleelement	in ${model.getElements().withoutMultiples()})
+#if	($styleelement.getNamespace() == "style" && ${styleelement.getLocalName().endsWith("properties")})
+	// style-${styleelement.getLocalName()}-attlist
+	${model.camelCase($styleelement.getLocalName())},
+#end
+#end
+}

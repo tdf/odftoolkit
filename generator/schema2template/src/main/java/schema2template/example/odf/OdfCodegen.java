@@ -21,8 +21,6 @@
  ************************************************************************/
 package schema2template.example.odf;
 
-import com.sun.msv.grammar.Expression;
-import com.sun.msv.reader.trex.ng.RELAXNGReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
@@ -32,12 +30,18 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.xml.parsers.SAXParserFactory;
+
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+
 import schema2template.OutputFileListEntry;
 import schema2template.OutputFileListHandler;
 import schema2template.model.XMLModel;
+
+import com.sun.msv.grammar.Expression;
+import com.sun.msv.reader.trex.ng.RELAXNGReader;
 
 /**
  * Three ODF examples in one:
@@ -49,22 +53,44 @@ import schema2template.model.XMLModel;
 public class OdfCodegen {
 
 	private static final Logger mLog = Logger.getLogger(OdfCodegen.class.getName());
-	public static final String ODF_RESOURCE_DIR = "target"
-			+ File.separator + "classes"
-			+ File.separator + "examples"
-			+ File.separator + "odf";
+	private final String odfResourceDir;
+	private final String sourceCodeRoot;
 	//public static final String ODF12_RNG_FILE = "OpenDocument-v1.2-cd05-schema.rng";
-	public static final String ODF12_RNG_FILE = "OpenDocument-schema-v1.2-cd04.rng";
-	
-	public static final String ODF11_RNG_FILE = "OpenDocument-schema-v1.1.rng";
-	private static final String CONFIG_FILE = "config.xml";
-	private static final String OUTPUT_FILES_TEMPLATE = "output-files.vm";
-	private static final String OUTPUT_FILES = "output-files.xml";
+	private final String odf12RngFile;
+	private final String odf11RngFile;
+	private final String configFile;
+	private static final String OUTPUT_FILES_TEMPLATE="output-files.vm";
+	private static final String OUTPUT_FILES = "target" + File.separator + "output-files.xml";
 	private XMLModel mOdf12SchemaModel;
 	private XMLModel mOdf11SchemaModel;
 	private OdfModel mOdfModel;
 	private SourceCodeModel mJavaModel;
 	
+
+
+	public OdfCodegen(String resourceRoot, String targetRoot, String odf12SchemaFile, String odf11SchemaFile, String configFile) {
+		this.odfResourceDir = resourceRoot;
+		this.sourceCodeRoot = targetRoot;
+		this.odf12RngFile = odf12SchemaFile;
+		this.odf11RngFile = odf11SchemaFile;
+		this.configFile = configFile;
+	}
+
+	public OdfCodegen() {
+		odfResourceDir = "target" + File.separator + "classes" + File.separator
+				+ "examples" + File.separator + "odf" + File.separator
+				+ "odfdom-java";
+		odf12RngFile = "target" + File.separator + "classes" + File.separator
+				+ "examples" + File.separator + "odf" + File.separator
+				+ "OpenDocument-schema-v1.2-cd04.rng";
+		odf11RngFile = "target" + File.separator + "classes" + File.separator
+				+ "examples" + File.separator + "odf" + File.separator
+				+ "OpenDocument-schema-v1.1.rng";
+		configFile = "target" + File.separator + "classes" + File.separator
+				+ "examples" + File.separator + "odf" + File.separator
+				+ "config.xml";
+		sourceCodeRoot = odfResourceDir;
+	}
 
 	public static void main(String[] args) throws Exception {
 		new OdfCodegen().start();
@@ -73,10 +99,10 @@ public class OdfCodegen {
 	// todo: schema compare scenario
 	public void start() throws Exception {
 		// calling MSV to parse the ODF 1.2 RelaxNG, returning a tree
-		Expression odf12Root = loadSchema(new File(ODF_RESOURCE_DIR + File.separator + ODF12_RNG_FILE));
+		Expression odf12Root = loadSchema(new File(odf12RngFile));
 
 		// calling MSV to parse the ODF 1.1 RelaxNG, returning a tree
-		Expression odf11Root = loadSchema(new File(ODF_RESOURCE_DIR + File.separator + ODF11_RNG_FILE));
+		Expression odf11Root = loadSchema(new File(odf11RngFile));
 
 		// Read config.xml 2DO WHAT IS ODFDOM GENERATOR CONFIG FILE
 		// Manual added Java specific info - Base class for inheritance
@@ -86,7 +112,7 @@ public class OdfCodegen {
 		// 2DO - still existent? -- Manual added Java specific info - mapping ODF datatype to Java datatype  -> {odfValueType, javaConversionClassName}
 		Map<String, String[]> datatypeValueAndConversionMap = new HashMap<String, String[]>();
 		Map<String, OdfModel.AttributeDefaults> attributeDefaultMap = new HashMap<String, OdfModel.AttributeDefaults>();
-		OdfConfigFileHandler.readConfigFile(new File(ODF_RESOURCE_DIR + File.separator + CONFIG_FILE), elementToBaseNameMap, attributeDefaultMap, elementStyleFamiliesMap, datatypeValueAndConversionMap);
+		OdfConfigFileHandler.readConfigFile(new File(configFile), elementToBaseNameMap, attributeDefaultMap, elementStyleFamiliesMap, datatypeValueAndConversionMap);
 
 		mOdf12SchemaModel = new XMLModel(odf12Root);
 		mOdf11SchemaModel = new XMLModel(odf11Root);
@@ -95,7 +121,7 @@ public class OdfCodegen {
 		mJavaModel = new SourceCodeModel(mOdf12SchemaModel, mOdfModel, elementToBaseNameMap, datatypeValueAndConversionMap);
 
 		//ToDo Svante: fillTemplates(ODF_RESOURCE_DIR + File.separator + "odf-reference", odf12Root);
-		fillTemplates(ODF_RESOURCE_DIR + File.separator + "odfdom-java", odf12Root);
+		fillTemplates(odfResourceDir, odf12Root);
 		//ToDo Svante: fillTemplates(ODF_RESOURCE_DIR + File.separator + "odfdom-python", odf12Root);
 	}
 
@@ -107,13 +133,13 @@ public class OdfCodegen {
 		ve.init();
 
 		// Create output-files.xml
-		createOutputFileList(ve, sourceDir, root);
+		createOutputFileList(ve, root);
 		mLog.info("DONE.\n");
 
 
 		// Process output-files.xml, create output files
 		mLog.fine("Processing output files... ");
-		processFileList(ve, sourceDir, root);
+		processFileList(ve, root);
 		mLog.fine("DONE.\n");
 	}
 
@@ -127,7 +153,6 @@ public class OdfCodegen {
 	public Expression loadSchema(File rngFile) throws Exception {
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		factory.setNamespaceAware(true);
-
 		// Parsing the Schema with MSV
 		Expression root = RELAXNGReader.parse(
 				rngFile.getAbsolutePath(),
@@ -152,10 +177,13 @@ public class OdfCodegen {
 		return context;
 	}
 
-	private void createOutputFileList(VelocityEngine ve, String sourceDir, Expression root) throws Exception {
+	private void createOutputFileList(VelocityEngine ve, Expression root) throws Exception {
 		VelocityContext context = getContext(null, null);
-
-		FileWriter listout = new FileWriter(new File(sourceDir + File.separator + OUTPUT_FILES));
+		File parentPatch=new File(OUTPUT_FILES).getParentFile();
+		if(!parentPatch.exists()){
+			parentPatch.mkdirs();
+		}
+		FileWriter listout = new FileWriter(new File(OUTPUT_FILES));
 		String encoding = "utf-8";
 		ve.mergeTemplate(OUTPUT_FILES_TEMPLATE, encoding, context, listout);
 		listout.close();
@@ -181,8 +209,8 @@ public class OdfCodegen {
 		}
 	}
 
-	public void processFileList(VelocityEngine ve, String sourceDir, Expression root) throws Exception {
-		File outputFiles = new File(sourceDir + File.separator + OUTPUT_FILES);
+	public void processFileList(VelocityEngine ve, Expression root) throws Exception {
+		File outputFiles = new File(OUTPUT_FILES);
 		List<OutputFileListEntry> fl = OutputFileListHandler.readFileListFile(outputFiles);
 
 		for (OutputFileListEntry f : fl) {
@@ -198,7 +226,7 @@ public class OdfCodegen {
 						throw new RuntimeException("Error in output-files.xml, line " + f.getLineNumber() + ": no or invalid odf-scope");
 					}
 
-					File out = new File(sourceDir + generateFilename(f.getAttribute("path"))).getCanonicalFile();
+					File out = new File(sourceCodeRoot + generateFilename(f.getAttribute("path"))).getCanonicalFile();
 					ensureParentFolders(out);
 					FileWriter fileout = new FileWriter(out);
 					String encoding = "utf-8";

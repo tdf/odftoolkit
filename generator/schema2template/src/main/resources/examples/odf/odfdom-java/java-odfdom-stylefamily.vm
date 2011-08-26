@@ -20,76 +20,78 @@ import java.util.Map;
 import java.util.HashMap;
 ##
 #foreach ($styleelement in ${model.getElements().withoutMultiples()})
-#if ( $styleelement.getNamespace() == "style" && ${styleelement.getLocalName().endsWith("properties")} )
+#if ($styleelement.getNamespace() == "style" && ${styleelement.getLocalName().endsWith("properties")})
 import org.odftoolkit.odfdom.dom.element.style.${model.camelCase($styleelement)}Element;
 #end
 #end
 
 public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 
-    private String m_name;
+	private String m_name;
 //    private Class m_styleClass;
-    private Set<OdfStyleProperty> m_properties = new TreeSet<OdfStyleProperty>();
-    private static Map<String, OdfStyleFamily> m_familyByName = new HashMap<String, OdfStyleFamily>();
+	private Set<OdfStyleProperty> m_properties = new TreeSet<OdfStyleProperty>();
+	private static Map<String, OdfStyleFamily> m_familyByName = new HashMap<String, OdfStyleFamily>();
 
-    public static OdfStyleFamily getByName(String name) {
-        return m_familyByName.get(name);
-    }
+	public static OdfStyleFamily getByName(String name) {
+		return m_familyByName.get(name);
+	}
 
-    private OdfStyleFamily(String name /*, Class styleClass*/, OdfStyleProperty[] props) {
-        m_name = name;
+	private OdfStyleFamily(String name /*, Class styleClass*/, OdfStyleProperty[] props) {
+		m_name = name;
 //        m_styleClass = styleClass;
-        for (OdfStyleProperty prop : props) {
-            m_properties.add(prop);
-        }
-        m_familyByName.put(name, this);
-    }
+		for (OdfStyleProperty prop : props) {
+			m_properties.add(prop);
+		}
+		m_familyByName.put(name, this);
+	}
 
-    public String getQName() {
-        return m_name;
-    }
+	public String getName() {
+		return m_name;
+	}
 
-    public int compareTo(OdfStyleFamily o) {
-        return m_name.compareTo(o.toString());
-    }  
+	public int compareTo(OdfStyleFamily o) {
+		return m_name.compareTo(o.toString());
+	}
 
-    public static OdfStyleFamily valueOf( String name )
-    {
-        OdfStyleFamily family = getByName(name);
-        if( family == null )
-            family = new OdfStyleFamily(name,  new OdfStyleProperty[]{ null } );
-        
-        return family;
-    }
-    
-    public static String toString( OdfStyleFamily family )
-    {
-        if( family != null )
-            return family.toString();
-        else
-            return new String();
-    }
-    
-    @Override
-    public String toString() {
-        return m_name;
-    }
+	public static OdfStyleFamily valueOf(String name) {
+		OdfStyleFamily family = getByName(name);
+		if (family == null)
+			family = new OdfStyleFamily(name,  new OdfStyleProperty[]{ null });
 
-    public Set<OdfStyleProperty> getProperties() {
-        return m_properties;
-    }
+		return family;
+	}
+
+	public static String toString(OdfStyleFamily family) {
+		if (family != null)
+			return family.toString();
+		else
+			return new String();
+	}
+
+	@Override
+	public String toString() {
+		return m_name;
+	}
+
+	public Set<OdfStyleProperty> getProperties() {
+		return m_properties;
+	}
 
 #foreach ($family in ${odfmodel.getStyleFamilies()})
-    public final static OdfStyleFamily ${model.camelCase($model.extractLocalname($family))} = new OdfStyleFamily("${model.extractLocalname($family)}",
-            new OdfStyleProperty[]{
+	public final static OdfStyleFamily ${model.camelCase($model.extractLocalname($family))} = new OdfStyleFamily("${model.extractLocalname($family)}",
+			new OdfStyleProperty[]{
 #foreach ($styleelement in ${model.getElements().withoutMultiples()})
-#if ( $styleelement.getNamespace() == "style" && ${styleelement.getLocalName().endsWith("properties")} )
+#if ($styleelement.getNamespace() == "style" && ${styleelement.getLocalName().endsWith("properties")})
 #foreach ($property in ${styleelement.withMultiples().getAttributes()})
-	${model.camelCase($styleelement)}Element.${model.camelCase($property)},
+#set($propertyName = ${property.getLocalName()})
+#if (${styleelement.getLocalName()}=="graphic-properties" && $propertyName =="shadow")
+#set($propertyName = ${property.getQName()})
+#end
+	${model.camelCase($styleelement)}Element.${model.camelCase($propertyName)},
 #end
 #end
 #end
-    });
+	});
 
 #end
 }
