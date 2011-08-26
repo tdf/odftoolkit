@@ -33,6 +33,13 @@
 	<!-- Build Settings -->
 	<build>
 		<finalName>odfdom</finalName>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>1.0-beta-7</version>
+			</extension>
+		</extensions>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -489,6 +496,13 @@
 					</plugin>
 				</plugins>
 			</build>
+			<distributionManagement>
+				<site>
+					<id>odfdom</id>
+					<name>ODFDOM Java Toolkit Project</name>
+					<url>dav:https://odftoolkit.org/website/odfdom/${project.version}</url>
+				</site>
+			</distributionManagement>
 		</profile>
 	</profiles>
 </project>

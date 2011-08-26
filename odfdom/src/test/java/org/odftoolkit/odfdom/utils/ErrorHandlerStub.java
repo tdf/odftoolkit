@@ -130,12 +130,12 @@ public class ErrorHandlerStub implements ErrorHandler {
 		}
 	}
 
-	/** @param the path of the test file */
+	/** @param testFilePath the path of the test file */
 	public void setTestFilePath(String testFilePath) {
 		mTestFilePath = testFilePath;
 	}
 
-	/** @returns the path of the test file */
+	/** @return the path of the test file */
 	public String getTestFilePath() {
 		return mTestFilePath;
 	}

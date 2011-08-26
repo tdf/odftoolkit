@@ -562,7 +562,7 @@ public class OdfPackage implements Closeable {
 		OdfPackageDocument doc = getCachedDocument(internalPath);
 		if (doc == null) {
 			String mediaTypeString = getMediaTypeString();
-			// ToDo: Remove dependency by facotory issue ??? (to be written)
+			// ToDo: Remove dependency by factory - issue ??? (to be written)
 			OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(mediaTypeString);
 			if (odfMediaType == null) {
 				doc = new OdfPackageDocument(this, internalPath, mediaTypeString);
@@ -710,7 +710,6 @@ public class OdfPackage implements Closeable {
 	 * @return the mediaType string of this ODF package
 	 */
 	public String getMediaTypeString() {
-		// ToDo: (Issue 219 - PackageRefactoring) --PackageRefactoring - Have to be the same mimetype as the root document
 		return mMediaType;
 	}
 
