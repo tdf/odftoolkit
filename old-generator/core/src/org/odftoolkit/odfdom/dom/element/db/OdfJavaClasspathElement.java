@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:java-classpath>".
  */
 public abstract class OdfJavaClasspathElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4380288508054475475L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "java-classpath" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "java-classpath" );
 
     public OdfJavaClasspathElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

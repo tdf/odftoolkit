@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:table-setting>".
  */
 public abstract class OdfTableSettingElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3504548663055851908L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-setting" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-setting" );
 
     public OdfTableSettingElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -98,4 +94,24 @@ public abstract class OdfTableSettingElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.DB, "show-deleted" ), aStringVal );
     }
 
+    /**
+    * Create child element "db:delimiter".
+    */
+    public OdfDelimiterElement createDelimiterElement()
+    {
+        OdfDelimiterElement  _nDelimiter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDelimiterElement.class);
+        this.appendChild( _nDelimiter);
+        return  _nDelimiter;
+    }                   
+               
+    /**
+    * Create child element "db:character-set".
+    */
+    public OdfCharacterSetElement createCharacterSetElement()
+    {
+        OdfCharacterSetElement  _nCharacterSet = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCharacterSetElement.class);
+        this.appendChild( _nCharacterSet);
+        return  _nCharacterSet;
+    }                   
+               
 }

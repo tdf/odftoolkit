@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:login>".
  */
 public abstract class OdfLoginElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6195443469778249389L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "login" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "login" );
 
     public OdfLoginElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

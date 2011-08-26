@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:order-statement>".
  */
 public abstract class OdfOrderStatementElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7238555979267755457L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "order-statement" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "order-statement" );
 
     public OdfOrderStatementElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

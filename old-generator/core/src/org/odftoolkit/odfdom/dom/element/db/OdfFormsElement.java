@@ -32,28 +32,46 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:forms>".
  */
 public abstract class OdfFormsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3621033161799425992L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "forms" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "forms" );
 
     public OdfFormsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:component".
+    */
+    public OdfComponentElement createComponentElement(String   _aName)
+    {
+        OdfComponentElement  _nComponent = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfComponentElement.class);
+        _nComponent.setName( _aName);
+        this.appendChild( _nComponent);
+        return  _nComponent;      
+    }
+    
+    /**
+    * Create child element "db:component-collection".
+    */
+    public OdfComponentCollectionElement createComponentCollectionElement(String   _aName)
+    {
+        OdfComponentCollectionElement  _nComponentCollection = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfComponentCollectionElement.class);
+        _nComponentCollection.setName( _aName);
+        this.appendChild( _nComponentCollection);
+        return  _nComponentCollection;      
+    }
+    
 }

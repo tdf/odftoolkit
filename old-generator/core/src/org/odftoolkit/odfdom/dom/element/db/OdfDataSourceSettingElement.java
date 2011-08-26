@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.db.OdfDataSourceSettingType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:data-source-setting>".
  */
 public abstract class OdfDataSourceSettingElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1208408949954803822L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "data-source-setting" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "data-source-setting" );
 
     public OdfDataSourceSettingElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -118,4 +114,14 @@ public abstract class OdfDataSourceSettingElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.DB, "data-source-setting-type" ), aStringVal );
     }
 
+    /**
+    * Create child element "db:data-source-setting-value".
+    */
+    public OdfDataSourceSettingValueElement createDataSourceSettingValueElement()
+    {
+        OdfDataSourceSettingValueElement  _nDataSourceSettingValue = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataSourceSettingValueElement.class);
+        this.appendChild( _nDataSourceSettingValue);
+        return  _nDataSourceSettingValue;
+    }                   
+               
 }

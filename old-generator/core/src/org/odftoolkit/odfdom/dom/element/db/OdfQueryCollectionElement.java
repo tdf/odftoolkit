@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:query-collection>".
  */
 public abstract class OdfQueryCollectionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6910311803399870656L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "query-collection" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "query-collection" );
 
     public OdfQueryCollectionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -111,4 +107,27 @@ public abstract class OdfQueryCollectionElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.DB, "description" ), _aDescription );
     }
 
+    /**
+    * Create child element "db:query".
+    */
+    public OdfQueryElement createQueryElement(String   _aCommand, String   _aName)
+    {
+        OdfQueryElement  _nQuery = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfQueryElement.class);
+        _nQuery.setCommand( _aCommand);
+        _nQuery.setName( _aName);
+        this.appendChild( _nQuery);
+        return  _nQuery;      
+    }
+    
+    /**
+    * Create child element "db:query-collection".
+    */
+    public OdfQueryCollectionElement createQueryCollectionElement(String   _aName)
+    {
+        OdfQueryCollectionElement  _nQueryCollection = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfQueryCollectionElement.class);
+        _nQueryCollection.setName( _aName);
+        this.appendChild( _nQueryCollection);
+        return  _nQueryCollection;      
+    }
+    
 }

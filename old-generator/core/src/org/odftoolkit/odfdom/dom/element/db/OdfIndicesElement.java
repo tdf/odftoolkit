@@ -32,28 +32,35 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:indices>".
  */
 public abstract class OdfIndicesElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3551751162281159574L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "indices" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "indices" );
 
     public OdfIndicesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:index".
+    */
+    public OdfIndexElement createIndexElement(String   _aName)
+    {
+        OdfIndexElement  _nIndex = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexElement.class);
+        _nIndex.setName( _aName);
+        this.appendChild( _nIndex);
+        return  _nIndex;      
+    }
+    
 }

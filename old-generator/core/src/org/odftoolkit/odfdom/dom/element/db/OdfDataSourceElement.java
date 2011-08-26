@@ -32,28 +32,54 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:data-source>".
  */
 public abstract class OdfDataSourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4249512307261566868L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "data-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "data-source" );
 
     public OdfDataSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:connection-data".
+    */
+    public OdfConnectionDataElement createConnectionDataElement()
+    {
+        OdfConnectionDataElement  _nConnectionData = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConnectionDataElement.class);
+        this.appendChild( _nConnectionData);
+        return  _nConnectionData;
+    }                   
+               
+    /**
+    * Create child element "db:driver-settings".
+    */
+    public OdfDriverSettingsElement createDriverSettingsElement()
+    {
+        OdfDriverSettingsElement  _nDriverSettings = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDriverSettingsElement.class);
+        this.appendChild( _nDriverSettings);
+        return  _nDriverSettings;
+    }                   
+               
+    /**
+    * Create child element "db:application-connection-settings".
+    */
+    public OdfApplicationConnectionSettingsElement createApplicationConnectionSettingsElement()
+    {
+        OdfApplicationConnectionSettingsElement  _nApplicationConnectionSettings = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfApplicationConnectionSettingsElement.class);
+        this.appendChild( _nApplicationConnectionSettings);
+        return  _nApplicationConnectionSettings;
+    }                   
+               
 }

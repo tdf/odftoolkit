@@ -32,28 +32,36 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:index-columns>".
  */
 public abstract class OdfIndexColumnsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 307098004711808801L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "index-columns" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "index-columns" );
 
     public OdfIndexColumnsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:index-column".
+    */
+    public OdfIndexColumnElement createIndexColumnElement(String   _aName, Boolean   _aIsAscending)
+    {
+        OdfIndexColumnElement  _nIndexColumn = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexColumnElement.class);
+        _nIndexColumn.setName( _aName);
+        _nIndexColumn.setIsAscending( _aIsAscending);
+        this.appendChild( _nIndexColumn);
+        return  _nIndexColumn;      
+    }
+    
 }

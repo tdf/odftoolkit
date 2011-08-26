@@ -32,28 +32,47 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:database-description>".
  */
 public abstract class OdfDatabaseDescriptionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2440288453625084897L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "database-description" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "database-description" );
 
     public OdfDatabaseDescriptionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:file-based-database".
+    */
+    public OdfFileBasedDatabaseElement createFileBasedDatabaseElement(String   _aHref, String   _aMediaType)
+    {
+        OdfFileBasedDatabaseElement  _nFileBasedDatabase = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFileBasedDatabaseElement.class);
+        _nFileBasedDatabase.setHref( _aHref);
+        _nFileBasedDatabase.setMediaType( _aMediaType);
+        this.appendChild( _nFileBasedDatabase);
+        return  _nFileBasedDatabase;      
+    }
+    
+    /**
+    * Create child element "db:server-database".
+    */
+    public OdfServerDatabaseElement createServerDatabaseElement(String   _aType)
+    {
+        OdfServerDatabaseElement  _nServerDatabase = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfServerDatabaseElement.class);
+        _nServerDatabase.setType( _aType);
+        this.appendChild( _nServerDatabase);
+        return  _nServerDatabase;      
+    }
+    
 }

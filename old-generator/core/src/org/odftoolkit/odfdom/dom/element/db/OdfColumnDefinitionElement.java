@@ -41,25 +41,21 @@ import org.odftoolkit.odfdom.dom.type.OdfDate;
 import javax.xml.datatype.Duration;
 import org.odftoolkit.odfdom.dom.type.OdfDuration;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:column-definition>".
  */
 public abstract class OdfColumnDefinitionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -9102291038399493575L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "column-definition" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "column-definition" );
 
     public OdfColumnDefinitionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -109,8 +105,7 @@ public abstract class OdfColumnDefinitionElement extends OdfElement
     /**
      * Get value of attribute "db:type-name".
      */
-    @Override
-	public String getTypeName()
+    public String getTypeName()
     {
         return getOdfAttribute( OdfName.get( OdfNamespace.DB, "type-name" ) );
     }

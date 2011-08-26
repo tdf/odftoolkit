@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:index>".
  */
 public abstract class OdfIndexElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5531148548378991752L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "index" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "index" );
 
     public OdfIndexElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -132,4 +128,14 @@ public abstract class OdfIndexElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.DB, "is-clustered" ), aStringVal );
     }
 
+    /**
+    * Create child element "db:index-columns".
+    */
+    public OdfIndexColumnsElement createIndexColumnsElement()
+    {
+        OdfIndexColumnsElement  _nIndexColumns = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexColumnsElement.class);
+        this.appendChild( _nIndexColumns);
+        return  _nIndexColumns;
+    }                   
+               
 }

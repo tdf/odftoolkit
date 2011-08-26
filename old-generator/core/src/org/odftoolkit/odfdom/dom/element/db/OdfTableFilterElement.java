@@ -32,28 +32,44 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:table-filter>".
  */
 public abstract class OdfTableFilterElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2361813516478747609L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-filter" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-filter" );
 
     public OdfTableFilterElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:table-include-filter".
+    */
+    public OdfTableIncludeFilterElement createTableIncludeFilterElement()
+    {
+        OdfTableIncludeFilterElement  _nTableIncludeFilter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableIncludeFilterElement.class);
+        this.appendChild( _nTableIncludeFilter);
+        return  _nTableIncludeFilter;
+    }                   
+               
+    /**
+    * Create child element "db:table-exclude-filter".
+    */
+    public OdfTableExcludeFilterElement createTableExcludeFilterElement()
+    {
+        OdfTableExcludeFilterElement  _nTableExcludeFilter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableExcludeFilterElement.class);
+        this.appendChild( _nTableExcludeFilter);
+        return  _nTableExcludeFilter;
+    }                   
+               
 }

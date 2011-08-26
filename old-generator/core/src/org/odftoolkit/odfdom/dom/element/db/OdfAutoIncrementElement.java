@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:auto-increment>".
  */
 public abstract class OdfAutoIncrementElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4646883243903145130L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "auto-increment" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "auto-increment" );
 
     public OdfAutoIncrementElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

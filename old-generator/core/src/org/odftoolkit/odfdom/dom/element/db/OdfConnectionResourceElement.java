@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:connection-resource>".
  */
 public abstract class OdfConnectionResourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3781992131782015728L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "connection-resource" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "connection-resource" );
 
     public OdfConnectionResourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

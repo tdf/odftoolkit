@@ -32,28 +32,34 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:key-columns>".
  */
 public abstract class OdfKeyColumnsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4709272749499974675L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "key-columns" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "key-columns" );
 
     public OdfKeyColumnsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:key-column".
+    */
+    public OdfKeyColumnElement createKeyColumnElement()
+    {
+        OdfKeyColumnElement  _nKeyColumn = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfKeyColumnElement.class);
+        this.appendChild( _nKeyColumn);
+        return  _nKeyColumn;
+    }                   
+               
 }

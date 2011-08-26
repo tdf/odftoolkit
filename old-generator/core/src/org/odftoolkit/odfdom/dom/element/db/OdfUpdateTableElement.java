@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:update-table>".
  */
 public abstract class OdfUpdateTableElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8342293068786588598L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "update-table" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "update-table" );
 
     public OdfUpdateTableElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

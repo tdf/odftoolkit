@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:key-column>".
  */
 public abstract class OdfKeyColumnElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1929743988391403399L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "key-column" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "key-column" );
 
     public OdfKeyColumnElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

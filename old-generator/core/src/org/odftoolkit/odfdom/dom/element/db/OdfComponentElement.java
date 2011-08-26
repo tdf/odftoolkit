@@ -34,25 +34,22 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfDocumentElement;
+import org.odftoolkit.odfdom.dom.element.math.OdfMathElement;
 
 /**
  * ODF DOM Element implementation for element "<db:component>".
  */
 public abstract class OdfComponentElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -644927018170245791L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "component" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "component" );
 
     public OdfComponentElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -152,4 +149,26 @@ public abstract class OdfComponentElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.DB, "description" ), _aDescription );
     }
 
+    /**
+    * Create child element "office:document".
+    */
+    public OdfDocumentElement createDocumentElement(String   _aMimetype, String   _aVersion)
+    {
+        OdfDocumentElement  _nDocument = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDocumentElement.class);
+        _nDocument.setMimetype( _aMimetype);
+        _nDocument.setVersion( _aVersion);
+        this.appendChild( _nDocument);
+        return  _nDocument;      
+    }
+    
+    /**
+    * Create child element "math:math".
+    */
+    public OdfMathElement createMathElement()
+    {
+        OdfMathElement  _nMath = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfMathElement.class);
+        this.appendChild( _nMath);
+        return  _nMath;      
+    }
+    
 }

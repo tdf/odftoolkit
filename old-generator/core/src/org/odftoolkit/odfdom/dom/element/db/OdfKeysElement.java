@@ -32,28 +32,35 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.type.db.OdfType;
 
 /**
  * ODF DOM Element implementation for element "<db:keys>".
  */
 public abstract class OdfKeysElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3848160682590456126L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "keys" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "keys" );
 
     public OdfKeysElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:key".
+    */
+    public OdfKeyElement createKeyElement(OdfType   _aType)
+    {
+        OdfKeyElement  _nKey = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfKeyElement.class);
+        _nKey.setType( _aType);
+        this.appendChild( _nKey);
+        return  _nKey;      
+    }
+    
 }

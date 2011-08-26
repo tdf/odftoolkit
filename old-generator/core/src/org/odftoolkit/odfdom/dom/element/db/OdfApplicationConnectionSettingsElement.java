@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.db.OdfBooleanComparisonModeType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:application-connection-settings>".
  */
 public abstract class OdfApplicationConnectionSettingsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1166983791589419905L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "application-connection-settings" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "application-connection-settings" );
 
     public OdfApplicationConnectionSettingsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -227,4 +223,34 @@ public abstract class OdfApplicationConnectionSettingsElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.DB, "suppress-version-columns" ), aStringVal );
     }
 
+    /**
+    * Create child element "db:table-filter".
+    */
+    public OdfTableFilterElement createTableFilterElement()
+    {
+        OdfTableFilterElement  _nTableFilter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableFilterElement.class);
+        this.appendChild( _nTableFilter);
+        return  _nTableFilter;
+    }                   
+               
+    /**
+    * Create child element "db:table-type-filter".
+    */
+    public OdfTableTypeFilterElement createTableTypeFilterElement()
+    {
+        OdfTableTypeFilterElement  _nTableTypeFilter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableTypeFilterElement.class);
+        this.appendChild( _nTableTypeFilter);
+        return  _nTableTypeFilter;
+    }                   
+               
+    /**
+    * Create child element "db:data-source-settings".
+    */
+    public OdfDataSourceSettingsElement createDataSourceSettingsElement()
+    {
+        OdfDataSourceSettingsElement  _nDataSourceSettings = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataSourceSettingsElement.class);
+        this.appendChild( _nDataSourceSettings);
+        return  _nDataSourceSettings;
+    }                   
+               
 }

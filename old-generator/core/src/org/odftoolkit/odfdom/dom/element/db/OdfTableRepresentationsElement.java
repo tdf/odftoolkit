@@ -32,28 +32,35 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:table-representations>".
  */
 public abstract class OdfTableRepresentationsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3941493240520933380L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-representations" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-representations" );
 
     public OdfTableRepresentationsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:table-representation".
+    */
+    public OdfTableRepresentationElement createTableRepresentationElement(String   _aName)
+    {
+        OdfTableRepresentationElement  _nTableRepresentation = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableRepresentationElement.class);
+        _nTableRepresentation.setName( _aName);
+        this.appendChild( _nTableRepresentation);
+        return  _nTableRepresentation;      
+    }
+    
 }

@@ -32,28 +32,34 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:table-exclude-filter>".
  */
 public abstract class OdfTableExcludeFilterElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5239818892700152478L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-exclude-filter" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-exclude-filter" );
 
     public OdfTableExcludeFilterElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:table-filter-pattern".
+    */
+    public OdfTableFilterPatternElement createTableFilterPatternElement()
+    {
+        OdfTableFilterPatternElement  _nTableFilterPattern = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableFilterPatternElement.class);
+        this.appendChild( _nTableFilterPattern);
+        return  _nTableFilterPattern;
+    }                   
+               
 }

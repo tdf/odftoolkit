@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.db.OdfType;
 import org.odftoolkit.odfdom.dom.type.db.OdfUpdateRuleType;
 import org.odftoolkit.odfdom.dom.type.db.OdfDeleteRuleType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:key>".
  */
 public abstract class OdfKeyElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5949876771998826956L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "key" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "key" );
 
     public OdfKeyElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -162,4 +158,14 @@ public abstract class OdfKeyElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.DB, "delete-rule" ), aStringVal );
     }
 
+    /**
+    * Create child element "db:key-columns".
+    */
+    public OdfKeyColumnsElement createKeyColumnsElement()
+    {
+        OdfKeyColumnsElement  _nKeyColumns = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfKeyColumnsElement.class);
+        this.appendChild( _nKeyColumns);
+        return  _nKeyColumns;
+    }                   
+               
 }

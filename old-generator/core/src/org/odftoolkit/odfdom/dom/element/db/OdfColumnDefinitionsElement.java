@@ -32,28 +32,35 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:column-definitions>".
  */
 public abstract class OdfColumnDefinitionsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3651126382935601683L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "column-definitions" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "column-definitions" );
 
     public OdfColumnDefinitionsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:column-definition".
+    */
+    public OdfColumnDefinitionElement createColumnDefinitionElement(String   _aName)
+    {
+        OdfColumnDefinitionElement  _nColumnDefinition = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfColumnDefinitionElement.class);
+        _nColumnDefinition.setName( _aName);
+        this.appendChild( _nColumnDefinition);
+        return  _nColumnDefinition;      
+    }
+    
 }

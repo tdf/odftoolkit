@@ -32,28 +32,36 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.type.db.OdfDataSourceSettingType;
 
 /**
  * ODF DOM Element implementation for element "<db:data-source-settings>".
  */
 public abstract class OdfDataSourceSettingsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3501876404958755021L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "data-source-settings" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "data-source-settings" );
 
     public OdfDataSourceSettingsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:data-source-setting".
+    */
+    public OdfDataSourceSettingElement createDataSourceSettingElement(String   _aDataSourceSettingName, OdfDataSourceSettingType   _aDataSourceSettingType)
+    {
+        OdfDataSourceSettingElement  _nDataSourceSetting = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataSourceSettingElement.class);
+        _nDataSourceSetting.setDataSourceSettingName( _aDataSourceSettingName);
+        _nDataSourceSetting.setDataSourceSettingType( _aDataSourceSettingType);
+        this.appendChild( _nDataSourceSetting);
+        return  _nDataSourceSetting;      
+    }
+    
 }

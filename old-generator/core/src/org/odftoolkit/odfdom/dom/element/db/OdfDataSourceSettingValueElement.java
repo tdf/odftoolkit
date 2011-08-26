@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:data-source-setting-value>".
  */
 public abstract class OdfDataSourceSettingValueElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3383688516950601207L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "data-source-setting-value" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "data-source-setting-value" );
 
     public OdfDataSourceSettingValueElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

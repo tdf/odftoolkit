@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:filter-statement>".
  */
 public abstract class OdfFilterStatementElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4306699099307607112L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "filter-statement" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "filter-statement" );
 
     public OdfFilterStatementElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

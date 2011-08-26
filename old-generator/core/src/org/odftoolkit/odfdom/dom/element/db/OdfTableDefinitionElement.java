@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:table-definition>".
  */
 public abstract class OdfTableDefinitionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2146641908259962167L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-definition" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-definition" );
 
     public OdfTableDefinitionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -127,4 +123,34 @@ public abstract class OdfTableDefinitionElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.DB, "type" ), _aType );
     }
 
+    /**
+    * Create child element "db:column-definitions".
+    */
+    public OdfColumnDefinitionsElement createColumnDefinitionsElement()
+    {
+        OdfColumnDefinitionsElement  _nColumnDefinitions = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfColumnDefinitionsElement.class);
+        this.appendChild( _nColumnDefinitions);
+        return  _nColumnDefinitions;
+    }                   
+               
+    /**
+    * Create child element "db:keys".
+    */
+    public OdfKeysElement createKeysElement()
+    {
+        OdfKeysElement  _nKeys = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfKeysElement.class);
+        this.appendChild( _nKeys);
+        return  _nKeys;
+    }                   
+               
+    /**
+    * Create child element "db:indices".
+    */
+    public OdfIndicesElement createIndicesElement()
+    {
+        OdfIndicesElement  _nIndices = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndicesElement.class);
+        this.appendChild( _nIndices);
+        return  _nIndices;
+    }                   
+               
 }

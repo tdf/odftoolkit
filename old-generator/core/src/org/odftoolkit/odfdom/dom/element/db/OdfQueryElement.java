@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:query>".
  */
 public abstract class OdfQueryElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4926865242208771412L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "query" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "query" );
 
     public OdfQueryElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -189,4 +185,47 @@ public abstract class OdfQueryElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.DB, "default-row-style-name" ), aStringVal );
     }
 
+    /**
+    * Create child element "db:order-statement".
+    */
+    public OdfOrderStatementElement createOrderStatementElement(String   _aCommand)
+    {
+        OdfOrderStatementElement  _nOrderStatement = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfOrderStatementElement.class);
+        _nOrderStatement.setCommand( _aCommand);
+        this.appendChild( _nOrderStatement);
+        return  _nOrderStatement;      
+    }
+    
+    /**
+    * Create child element "db:filter-statement".
+    */
+    public OdfFilterStatementElement createFilterStatementElement(String   _aCommand)
+    {
+        OdfFilterStatementElement  _nFilterStatement = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFilterStatementElement.class);
+        _nFilterStatement.setCommand( _aCommand);
+        this.appendChild( _nFilterStatement);
+        return  _nFilterStatement;      
+    }
+    
+    /**
+    * Create child element "db:columns".
+    */
+    public OdfColumnsElement createColumnsElement()
+    {
+        OdfColumnsElement  _nColumns = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfColumnsElement.class);
+        this.appendChild( _nColumns);
+        return  _nColumns;
+    }                   
+               
+    /**
+    * Create child element "db:update-table".
+    */
+    public OdfUpdateTableElement createUpdateTableElement(String   _aName)
+    {
+        OdfUpdateTableElement  _nUpdateTable = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfUpdateTableElement.class);
+        _nUpdateTable.setName( _aName);
+        this.appendChild( _nUpdateTable);
+        return  _nUpdateTable;      
+    }
+    
 }

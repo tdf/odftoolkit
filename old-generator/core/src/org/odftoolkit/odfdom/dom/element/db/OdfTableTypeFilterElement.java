@@ -32,28 +32,34 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:table-type-filter>".
  */
 public abstract class OdfTableTypeFilterElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4693748344965738465L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-type-filter" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "table-type-filter" );
 
     public OdfTableTypeFilterElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:table-type".
+    */
+    public OdfTableTypeElement createTableTypeElement()
+    {
+        OdfTableTypeElement  _nTableType = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableTypeElement.class);
+        this.appendChild( _nTableType);
+        return  _nTableType;
+    }                   
+               
 }

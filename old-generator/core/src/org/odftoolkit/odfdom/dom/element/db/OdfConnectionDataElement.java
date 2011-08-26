@@ -32,28 +32,65 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:connection-data>".
  */
 public abstract class OdfConnectionDataElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5571785161537651420L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "connection-data" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "connection-data" );
 
     public OdfConnectionDataElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "db:database-description".
+    */
+    public OdfDatabaseDescriptionElement createDatabaseDescriptionElement()
+    {
+        OdfDatabaseDescriptionElement  _nDatabaseDescription = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDatabaseDescriptionElement.class);
+        this.appendChild( _nDatabaseDescription);
+        return  _nDatabaseDescription;
+    }                   
+               
+    /**
+    * Create child element "db:connection-resource".
+    */
+    public OdfConnectionResourceElement createConnectionResourceElement(String   _aHref)
+    {
+        OdfConnectionResourceElement  _nConnectionResource = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConnectionResourceElement.class);
+        _nConnectionResource.setHref( _aHref);
+        this.appendChild( _nConnectionResource);
+        return  _nConnectionResource;      
+    }
+    
+    /**
+    * Create child element "db:compound-database".
+    */
+    public OdfCompoundDatabaseElement createCompoundDatabaseElement()
+    {
+        OdfCompoundDatabaseElement  _nCompoundDatabase = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCompoundDatabaseElement.class);
+        this.appendChild( _nCompoundDatabase);
+        return  _nCompoundDatabase;
+    }                   
+               
+    /**
+    * Create child element "db:login".
+    */
+    public OdfLoginElement createLoginElement()
+    {
+        OdfLoginElement  _nLogin = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLoginElement.class);
+        this.appendChild( _nLogin);
+        return  _nLogin;
+    }                   
+               
 }

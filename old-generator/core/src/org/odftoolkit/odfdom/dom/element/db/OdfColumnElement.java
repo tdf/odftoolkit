@@ -39,25 +39,21 @@ import org.odftoolkit.odfdom.dom.type.OdfDate;
 import javax.xml.datatype.Duration;
 import org.odftoolkit.odfdom.dom.type.OdfDuration;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<db:column>".
  */
 public abstract class OdfColumnElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -342348245116077513L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "column" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DB, "column" );
 
     public OdfColumnElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
