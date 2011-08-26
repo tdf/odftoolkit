@@ -46,7 +46,7 @@
                  force="${force}">
             <param name="xref-schema-file" expression="${xref-schema-file}"/>
             <param name="add-xrefs" expression="true"/>
-            <param name="keep-anchors" expression="true"/>
+            <param name="keep-anchors" expression="false"/>
         </odfxslt>
     </target>
     
@@ -97,6 +97,14 @@
             out="${dist.dir}/attr-xref/odf-attribute-xref.ods"
             template="true"/>
     </target>
+    
+    <target name="publish-v12-schema" depends="init,-get-v12-schemas"
+            description="Create an official ODF schema from a working schema">
+        <xslt style="${project.odfxsltrunner}/sample_xslt/publish-schema.xsl" 
+                    in="${v12.schema.dir}/${opendocument.v12.schema}" 
+                    out="${dist.dir}/oasis/${opendocument.v12.schema}"/>  
+    </target>
+    
     
     <target name="-create-v12-xref-schema" depends="init,-get-v12-schemas">
         <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl" 
