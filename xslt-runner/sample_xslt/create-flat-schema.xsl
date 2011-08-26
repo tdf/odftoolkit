@@ -231,6 +231,17 @@
         <xsl:comment><xsl:value-of select="@name"/></xsl:comment>
         <!-- match <define> with same name in the current file and within
              included files. -->
+        <xsl:variable name="name" select="@name"/>        
+        <xsl:apply-templates 
+            select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]/*|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
+            mode="collect-attrs">
+                <xsl:with-param name="condition" select="$condition"/>
+        </xsl:apply-templates>
+        <xsl:comment>/<xsl:value-of select="@name"/></xsl:comment>
+    </xsl:template>
+    
+    <xsl:template match="rng:define" mode="collect-attrs">
+        <xsl:param name="condition" select=""/>
         <xsl:variable name="new-condition">
             <xsl:choose>
                 <xsl:when test="$include-conditions and @combine and string-length($condition) > 0">
@@ -244,22 +255,9 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="name" select="@name"/>        
-        <xsl:apply-templates 
-            select="/rng:grammar/rng:define[@name=$name]/*|/rng:grammar/rng:include/rng:define[@name=$name]/*|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]/*"
-            mode="collect-attrs">
-                <xsl:with-param name="condition" select="$new-condition"/>
-        </xsl:apply-templates>
-        <xsl:comment>/<xsl:value-of select="@name"/></xsl:comment>
-    </xsl:template>
-    
-    <xsl:template match="rng:define" mode="collect-attrs">
-        <xsl:param name="condition" select=""/>
-        <xsl:variable name="name" select="@name"/>
         <xsl:apply-templates  select="*" mode="collect-attrs">
-            <xsl:with-param name="condition" select="$condition"/>
+            <xsl:with-param name="condition" select="$new-condition"/>
         </xsl:apply-templates>
-        
     </xsl:template>
     
     <!-- match conditions and lists -->
@@ -283,7 +281,11 @@
         </xsl:apply-templates>
     </xsl:template>
         
-    <xsl:template match="rng:text|rng:empty" mode="collect-attrs"/>
+    <xsl:template match="rng:text" mode="collect-attrs">
+        <text/>
+    </xsl:template>
+
+    <xsl:template match="rng:empty" mode="collect-attrs"/>
     
     <!-- match all other elements and ignore them -->
     <xsl:template match="*" mode="collect-attrs">
