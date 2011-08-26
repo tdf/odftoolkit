@@ -134,6 +134,6 @@ public class OdfImage extends OdfImageElement {
     public void insertImage(InputStream is, String packagePath, String mediaType) throws Exception {
             //setImageUri(new URI(URITransformer.encodePath(packagePath).toString()));
             setImagePath(packagePath);
-            mOdfPackage.insert(is, packagePath, mediaType, null);
+            mOdfPackage.insert(is, packagePath, mediaType);
     }
 }

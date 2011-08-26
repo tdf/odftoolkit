@@ -37,6 +37,7 @@ import org.openoffice.odf.doc.OdfGraphicsDocument;
 import org.openoffice.odf.doc.OdfPresentationDocument;
 import org.openoffice.odf.doc.OdfSpreadsheetDocument;
 import org.openoffice.odf.doc.OdfTextDocument;
+import org.openoffice.odf.doc.element.OdfElementFactory;
 import org.openoffice.odf.doc.element.draw.OdfFrame;
 import org.openoffice.odf.doc.element.draw.OdfImage;
 import org.openoffice.odf.doc.element.draw.OdfObject;
@@ -50,6 +51,7 @@ import org.openoffice.odf.dom.element.text.OdfParagraphElement;
 import org.openoffice.odf.dom.element.text.OdfSpanElement;
 import org.openoffice.odf.dom.style.OdfStyleFamily;
 import org.openoffice.odf.dom.type.text.OdfAnchorType;
+import org.openoffice.odf.pkg.OdfPackage;
 
 public class DocumentCreationTest {
 
@@ -103,7 +105,45 @@ public class DocumentCreationTest {
             OdfChartDocument odcDoc2 = OdfChartDocument.createChartDocument();
             contentDom = odcDoc2.getContentDom();
             odcDoc1.save("build/test/TestEmpty_OdfChartDocument.odc");
+
+            /////////////////////////////
+            // WIKI EXAMPLE BUILD TEST //          
+            /////////////////////////////
             
+            // loads the ODF document from the path
+             OdfDocument odfDoc = OdfDocument.loadDocument("build/test/TestEmpty_OdfTextDocument.odt");
+
+            // get the ODF content as DOM tree representation
+            OdfFileDom odfContent = odfDoc.getContentDom();
+
+            //// W3C XPath initialization ''(JDK5 functionality)''  - XPath is the path within the XML file
+            //// (Find XPath examples here: http://www.w3.org/TR/xpath#path-abbrev)
+            XPath xpath2 = XPathFactory.newInstance().newXPath();
+            xpath2.setNamespaceContext(new OdfNamespace());
+
+            // receiving the first paragraph "//text:p[1]" ''(JDK5 functionality)''
+            OdfParagraphElement para = (OdfParagraphElement) xpath2.evaluate("//text:p[1]", odfContent, XPathConstants.NODE);
+
+            // adding an image - expecting the user to know that 
+            // an image consists always of a 'draw:image' and a 'draw:frame' parent
+
+            // FUTURE USAGE: para.createDrawFrame().createDrawImage("/myweb.org/images/myHoliday.png", "/Pictures/myHoliday.png");
+            //             Child access methods are still not part of the v0.6.x releases
+            // CURRENT USAGE:
+            OdfFrame odfFrame =  (OdfFrame) OdfElementFactory.createOdfElement(odfContent, OdfFrame.ELEMENT_NAME);
+            para.appendChild(odfFrame);
+            OdfImage odfImage = (OdfImage) OdfElementFactory.createOdfElement(odfContent, OdfImage.ELEMENT_NAME);
+            odfImage.insertImage(new URI("test/resources/test.jpg"));
+            odfFrame.appendChild(odfImage);
+            odfDoc.save("build/test/wiki.odt");
+
+            // loads the ODF document package from the path
+            OdfPackage pkg = OdfPackage.loadPackage("build/test/TestEmpty_OdfTextDocument.odt");
+
+            // loads the image from the URL and inserts the image in the package, adapting the manifest
+            pkg.insert(new URI("test/resources/test.jpg"), "someweiredname/myHoliday.png");
+            pkg.save("build/test/wiki.zip");
+
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");

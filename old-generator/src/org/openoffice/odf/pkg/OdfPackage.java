@@ -111,7 +111,7 @@ public class OdfPackage {
     private static final String TWO_DOTS = "..";
     private static final String SLASH = "/";
     private static final String COLON = ":";
-    private static final String EMPTY_STRING = "";
+    private static final String EMPTY_STRING = "";    
 
     // temp Dir for this ODFpackage (2DO: temp dir handling will be removed most likely)
     private static File mTempDirParent = null;
@@ -181,7 +181,7 @@ public class OdfPackage {
     public static OdfPackage loadPackage(File file) throws Exception {
         return new OdfPackage(file);
     }
-        
+
     /**
      * Creates an OdfPackage from the OpenDocument provided by a InputStream.
      *
@@ -191,7 +191,7 @@ public class OdfPackage {
      */
     public static OdfPackage loadPackage(InputStream packageStream) throws Exception {
         return new OdfPackage(packageStream);
-    }    
+    }
 
     private void initialize(File f, boolean isInitialized) throws Exception {
         // only temp Files copied from an InputStream should already be initialized
@@ -569,7 +569,7 @@ public class OdfPackage {
         // More details at http://xerces.apache.org/xerces2-j/features.html#namespace-prefixes
         xmlReader.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
         // More details at http://xerces.apache.org/xerces2-j/features.html#xmlns-uris
-        xmlReader.setFeature("http://xml.org/sax/features/xmlns-uris", true);     
+        xmlReader.setFeature("http://xml.org/sax/features/xmlns-uris", true);
 
         String uri = mBaseURI + OdfPackage.OdfFile.MANIFEST.filePath;
         xmlReader.setEntityResolver(getEntityResolver());
@@ -616,7 +616,7 @@ public class OdfPackage {
         if ((path.length() < 1) || (path.charAt(path.length() - 1) != '/')) {
             path = path + SLASH;
         }
-        insert((byte[]) null, path, null, null);
+        insert((byte[]) null, path, null);
 
     }
 
@@ -761,18 +761,53 @@ public class OdfPackage {
 
     /**
      * Inserts InputStream into an OdfPackage. An existing file will be replaced.
-     * @param is - the stream of the file to be inserted into the package.
-     * @param mediaType - media type of stream
-     * @param path - relative filePath where the DOM tree should be inserted as XML file     
-     * @param embeddedObjectMediaType - media type of the document to be embedded, otherwise null
+     * @param sourceURI - the source URI to the file to be inserted into the package.
+     * @param packagePath - relative filePath where the tree should be inserted as XML file          
      * @throws java.lang.Exception In case the file could not be saved
      */
-    public void insert(InputStream is, String path, String mediaType, String embeddedObjectMediaType)
+    public void insert(URI sourceURI, String packagePath) throws Exception {
+        insert(sourceURI, packagePath, null);
+    }
+    
+    /**
+     * Inserts InputStream into an OdfPackage. An existing file will be replaced.
+     * @param sourceURI - the source URI to the file to be inserted into the package.
+     * @param mediaType - media type of stream. Set to null if unknown
+     * @param packagePath - relative filePath where the tree should be inserted as XML file          
+     * @throws java.lang.Exception In case the file could not be saved
+     */
+    public void insert(URI sourceURI, String packagePath, String mediaType) throws Exception {
+        String sourceRef = sourceURI.toString();
+        InputStream is = null;
+        if (sourceURI.isAbsolute()) {
+            // if the URI is absolute it can be converted to URL
+            is = sourceURI.toURL().openStream();
+        } else if (sourceRef.contains(COLON)) {
+            // if the URI string representation has a protocol create URL
+            is = new URL(sourceURI.toString()).openStream();
+        } else {
+            // otherwise create a file class to open the stream
+            is = new File(sourceRef).toURL().openStream();
+        }
+        if (sourceRef.contains(SLASH)) {
+            sourceRef = sourceRef.substring(sourceRef.lastIndexOf(SLASH) + 1, sourceRef.length());
+        }
+        insert(is, packagePath, mediaType);
+    }
+
+    /**
+     * Inserts InputStream into an OdfPackage. An existing file will be replaced.
+     * @param is - the stream of the file to be inserted into the package.
+     * @param mediaType - media type of stream. Set to null if unknown
+     * @param packagePath - relative filePath where the tree should be inserted as XML file          
+     * @throws java.lang.Exception In case the file could not be saved
+     */
+    public void insert(InputStream is, String packagePath, String mediaType)
             throws Exception {
-        path = ensureValidPackagePath(path);
+        packagePath = ensureValidPackagePath(packagePath);
 
         if (is == null) {
-            insert((byte[]) null, path, mediaType, embeddedObjectMediaType);
+            insert((byte[]) null, packagePath, mediaType);
         } else {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             BufferedInputStream bis = new BufferedInputStream(is);
@@ -782,18 +817,18 @@ public class OdfPackage {
                 baos.write(buf, 0, r);
             }
             byte[] data = baos.toByteArray();
-            insert(data, path, mediaType, embeddedObjectMediaType);
+            insert(data, packagePath, mediaType);
             // image should not be stored in memory but on disc
-            if ((!path.endsWith(".xml")) && (!path.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath()))) {
-                // insert to filesystem
-                File tempFile = new File(getTempDir(), path);
+            if ((!packagePath.endsWith(".xml")) && (!packagePath.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath()))) {
+                // insertOutputStream to filesystem
+                File tempFile = new File(getTempDir(), packagePath);
                 File parent = tempFile.getParentFile();
                 parent.mkdirs();
                 OutputStream fos = new BufferedOutputStream(new FileOutputStream(tempFile));
                 fos.write(data);
                 fos.close();
-                mTempFiles.put(path, tempFile);
-                mContentStreams.remove(path);
+                mTempFiles.put(packagePath, tempFile);
+                mContentStreams.remove(packagePath);
             }
 
         }
@@ -801,18 +836,17 @@ public class OdfPackage {
 
     /**
      * Insert byte array into OdfPackage. An existing file will be replaced.
-     * @param data - data of the file stream to be stored in package
-     * @param mediaType - media type of stream
-     * @param filePath - relative filePath where the DOM tree should be inserted as XML file     
-     * @param embeddedObjectMediaType 
+     * @param fileBytes - data of the file stream to be stored in package
+     * @param mediaType - media type of stream. Set to null if unknown
+     * @param fileDestPath - relative filePath where the DOM tree should be inserted as XML file     
      * @throws java.lang.Exception when the DOM tree could not be inserted
      */
-    public void insert(byte[] data, String filePath, String mediaType, String embeddedObjectMediaType) throws Exception {
-        filePath = ensureValidPackagePath(filePath);
+    public void insert(byte[] fileBytes, String fileDestPath, String mediaType) throws Exception {
+        fileDestPath = ensureValidPackagePath(fileDestPath);
 
         String d = EMPTY_STRING;
         //2DO: Test tokenizer for whitespaces..
-        StringTokenizer tok = new StringTokenizer(filePath, SLASH);
+        StringTokenizer tok = new StringTokenizer(fileDestPath, SLASH);
         {
             while (tok.hasMoreTokens()) {
                 String s = tok.nextToken();
@@ -829,7 +863,7 @@ public class OdfPackage {
                         if (!OdfPackage.OdfFile.MANIFEST.filePath.equals(d)) {
                             if (mediaType != null) {
                                 if (mManifestEntries.get(d) == null) {
-                                    OdfFileEntry fileEntry = new OdfFileEntry(d, embeddedObjectMediaType);
+                                    OdfFileEntry fileEntry = new OdfFileEntry(d, mediaType);
                                     mManifestEntries.put(d, fileEntry);
                                     if (!mManifestList.contains(d)) {
                                         mManifestList.add(d);
@@ -841,50 +875,47 @@ public class OdfPackage {
                 }
             }
         }
-
-
         try {
-            if (OdfPackage.OdfFile.MEDIA_TYPE.getPath().equals(filePath)) {
+            if (OdfPackage.OdfFile.MEDIA_TYPE.getPath().equals(fileDestPath)) {
                 try {
-                    setMediaType(new String(data, "UTF-8"));
-                } catch (UnsupportedEncodingException use) {
+                    setMediaType(new String(fileBytes, "UTF-8"));
+                } catch (UnsupportedEncodingException useEx) {
+                    mLog.log(Level.WARNING, "ODF file could not be created as string!", useEx);
                 }
                 return;
             }
-            if (data == null) {
-                mContentStreams.remove(filePath);
+            if (fileBytes == null) {
+                mContentStreams.remove(fileDestPath);
             } else {
-                mContentStreams.put(filePath, data);
+                mContentStreams.put(fileDestPath, fileBytes);
             }
-            if (!mPackageEntries.contains(filePath)) {
-                mPackageEntries.add(filePath);
+            if (!mPackageEntries.contains(fileDestPath)) {
+                mPackageEntries.add(fileDestPath);
             }
-            if (!OdfPackage.OdfFile.MANIFEST.filePath.equals(filePath)) {
+            if (!OdfPackage.OdfFile.MANIFEST.filePath.equals(fileDestPath)) {
                 if (mediaType != null) {
-                    if (mManifestEntries.get(filePath) == null) {
-                        OdfFileEntry fileEntry = new OdfFileEntry(filePath, mediaType);
-                        mManifestEntries.put(filePath, fileEntry);
-                        if (!mManifestList.contains(filePath)) {
-                            mManifestList.add(filePath);
+                    if (mManifestEntries.get(fileDestPath) == null) {
+                        OdfFileEntry fileEntry = new OdfFileEntry(fileDestPath, mediaType);
+                        mManifestEntries.put(fileDestPath, fileEntry);
+                        if (!mManifestList.contains(fileDestPath)) {
+                            mManifestList.add(fileDestPath);
                         }
                     }
                 }
             } else {
                 parseManifest();
             }
-            ZipEntry ze = mZipEntries.get(filePath);
+            ZipEntry ze = mZipEntries.get(fileDestPath);
             if (ze != null) {
-                ze = new ZipEntry(filePath);
+                ze = new ZipEntry(fileDestPath);
                 ze.setMethod(ZipEntry.DEFLATED);
-                mZipEntries.put(filePath, ze);
+                mZipEntries.put(fileDestPath, ze);
             }
             // 2DO Svante: No dependency to layer above!
-            if (filePath.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath()) || filePath.equals(OdfDocument.OdfXMLFile.META.getFileName())) {
+            if (fileDestPath.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath()) || fileDestPath.equals(OdfDocument.OdfXMLFile.META.getFileName())) {
                 ze.setMethod(ZipEntry.STORED);
             }
-
-            entryUpdate(filePath);
-
+            entryUpdate(fileDestPath);
         } catch (SAXException se) {
             throw new Exception("SAXException:" + se.getMessage());
         } catch (ParserConfigurationException pce) {
@@ -1176,18 +1207,19 @@ public class OdfPackage {
      * @return outputstream for the data of the file to be stored in package
      * @throws java.lang.Exception when the DOM tree could not be inserted
      */
-    public OutputStream insert(String filePath) throws Exception {
-        return insert(filePath, null);
+    public OutputStream insertOutputStream(String filePath) throws Exception {
+        return insertOutputStream(filePath, null);
     }
 
     /**
-     * Insert the OutputStream for into OdfPackage. An existing file will be replaced.   
+     * Insert the OutputStream - to be filled after method - when stream is closed into OdfPackage. 
+     * An existing file will be replaced.   
      * @param filePath - relative filePath where the DOM tree should be inserted as XML file     
      * @param mediaType - media type of stream
      * @return outputstream for the data of the file to be stored in package
      * @throws java.lang.Exception when the DOM tree could not be inserted
      */
-    public OutputStream insert(String filePath, String mediaType) throws Exception {
+    public OutputStream insertOutputStream(String filePath, String mediaType) throws Exception {
         filePath = ensureValidPackagePath(filePath);
         final String fPath = filePath;
         final OdfFileEntry fFileEntry = getFileEntry(filePath);
@@ -1200,9 +1232,9 @@ public class OdfPackage {
                 try {
                     byte[] data = this.toByteArray();
                     if (fMediaType == null || fMediaType.length() == 0) {
-                        insert(data, fPath, fFileEntry == null ? null : fFileEntry.getMediaType(), null);
+                        insert(data, fPath, fFileEntry == null ? null : fFileEntry.getMediaType());
                     } else {
-                        insert(data, fPath, fMediaType, null);
+                        insert(data, fPath, fMediaType);
                     }
                     super.close();
                 } catch (Exception ex) {

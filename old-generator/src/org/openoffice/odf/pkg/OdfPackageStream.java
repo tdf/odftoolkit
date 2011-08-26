@@ -56,7 +56,7 @@ class OdfPackageStream extends StreamSource {
     
     public OutputStream getOutputStream() throws Exception {
         if (bClosed) throw new IOException("stream already closed");
-        outputStream = pkg.insert(name);
+        outputStream = pkg.insertOutputStream(name);
         return outputStream;
     }
         

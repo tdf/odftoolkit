@@ -403,7 +403,7 @@ public abstract class OdfDocument {
         for (OdfXMLFile odfFile : OdfXMLFile.values()) {
             try {
                 if (newOdfDocument.mPackage.getInputStream(odfFile.mFileName) != null) {
-                    mPackage.insert(newOdfDocument.mPackage.getInputStream(odfFile.mFileName), newOdfDocument.getXMLFilePath(odfFile), TEXT_XML_MEDIA_TYPE, newOdfDocument.mPackage.getMediaType());
+                    mPackage.insert(newOdfDocument.mPackage.getInputStream(odfFile.mFileName), newOdfDocument.getXMLFilePath(odfFile), newOdfDocument.mPackage.getMediaType());
                 }
             } catch (Exception ex) {
                 Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
@@ -707,12 +707,12 @@ public abstract class OdfDocument {
     // TODO: add save function for all DOMs
     private void saveEmbeddedDoc() throws Exception {
         if (mContentDom == null) {
-            mPackage.insert(getContentStream(), getXMLFilePath(OdfXMLFile.CONTENT), mPackage.getMediaType(), getMediaType());
+            mPackage.insert(getContentStream(), getXMLFilePath(OdfXMLFile.CONTENT), getMediaType());
         } else {
             mPackage.insert(getContentDom(), getXMLFilePath(OdfXMLFile.CONTENT));
         }
         if (mStylesDom == null) {
-            mPackage.insert(getStylesStream(), getXMLFilePath(OdfXMLFile.STYLES), mPackage.getMediaType(), getMediaType());
+            mPackage.insert(getStylesStream(), getXMLFilePath(OdfXMLFile.STYLES), getMediaType());
         } else {
             mPackage.insert(getStylesDom(), getXMLFilePath(OdfXMLFile.STYLES));
         }

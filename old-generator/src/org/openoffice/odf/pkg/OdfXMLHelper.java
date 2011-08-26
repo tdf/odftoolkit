@@ -369,7 +369,7 @@ public class OdfXMLHelper {
         } else {
             try {
                 byte[] data = baos.toByteArray();
-                pkg.insert(data, path, "text/xml", null);
+                pkg.insert(data, path, "text/xml");
             } catch (Exception ex) {
                 Logger.getLogger(OdfXMLHelper.class.getName()).log(Level.SEVERE, null, ex);
             }
