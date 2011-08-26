@@ -1665,6 +1665,7 @@ public class OdfTable {
 				if (!Character.isLetter(cell.charAt(i))) {
 					returnArray[1] = cell.substring(0, i);
 					returnArray[2] = cell.substring(i);
+					break;
 				}
 			}
 		}
