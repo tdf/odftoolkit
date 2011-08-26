@@ -83,7 +83,10 @@
             xmlns:xforms="http://www.w3.org/2002/xforms"
             xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
             xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"
-            xmlns:smil="urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0">
+            xmlns:smil="urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0"
+            xmlns:db="urn:oasis:names:tc:opendocument:xmlns:database:1.0"
+            xmlns:grddl="http://www.w3.org/2003/g/data-view#"
+            xmlns:xhtml="http://www.w3.org/1999/xhtml">
             <xsl:for-each select="//rng:start|document(//rng:include/@href)//rng:start">
                 <start>
                     <xsl:apply-templates mode="collect-attrs"/>
@@ -117,6 +120,18 @@
                     </xsl:when>
                 </xsl:choose>
             </xsl:for-each>
+
+            <xsl:if test="$include-types">
+                <xsl:for-each select="//rng:define|document(//rng:include/@href)//rng:define">
+                    <xsl:variable name="name" select="@name"/>
+                    <xsl:if test="//rng:attribute//rng:ref[@name=$name]|document(//rng:include/@href)//rng:attribute//rng:ref[@name=$name]">
+                        <define name="{@name}">
+                            <xsl:apply-templates mode="collect-type"/>
+                        </define>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:if>
+
         </rng:grammar>
     </xsl:template>
     
@@ -231,12 +246,12 @@
         <xsl:comment><xsl:value-of select="@name"/></xsl:comment>
         <!-- match <define> with same name in the current file and within
              included files. -->
-        <xsl:variable name="name" select="@name"/>        
-        <xsl:apply-templates 
+        <xsl:variable name="name" select="@name"/>
+                    <xsl:apply-templates
             select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]/*|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
-            mode="collect-attrs">
-                <xsl:with-param name="condition" select="$condition"/>
-        </xsl:apply-templates>
+                        mode="collect-attrs">
+                            <xsl:with-param name="condition" select="$condition"/>
+                    </xsl:apply-templates>
         <xsl:comment>/<xsl:value-of select="@name"/></xsl:comment>
     </xsl:template>
     
@@ -276,9 +291,9 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:apply-templates mode="collect-attrs">
-            <xsl:with-param name="condition" select="$new-condition"/>
-        </xsl:apply-templates>
+                    <xsl:apply-templates mode="collect-attrs">
+                        <xsl:with-param name="condition" select="$new-condition"/>
+                    </xsl:apply-templates>
     </xsl:template>
         
     <xsl:template match="rng:text" mode="collect-attrs">
@@ -296,33 +311,48 @@
         <!-- xsl:message>Ignored <xsl:value-of select="."/></xsl:message -->
     </xsl:template>
         
-        <!-- ********************* -->
-        <!-- ** attribute types ** -->
-        <!-- ********************* -->
-        
-        <!-- match <ref> elements -->
-        <xsl:template match="rng:ref" mode="collect-type">
-            <!-- references are assumed to be type names -->
-            <ref name="{@name}"/>
-        </xsl:template>
-        
-        <!-- match <data> elements -->
-        <xsl:template match="rng:data" mode="collect-type">
-            <!-- data types are data types -->
-            <data type="{@type}"/>
-        </xsl:template>
-        
-        <!-- match elements that get copied -->
-        <xsl:template match="rng:choice|rng:list|rng:group|rng:oneOrMore|rng:zeroOrMore|rng:empty|rng:text" mode="collect-type">
-            <xsl:copy><xsl:apply-templates mode="collect-type"/></xsl:copy>
-        </xsl:template>
-        
-        <!-- match <value> elements -->
-        <xsl:template match="rng:value" mode="collect-type">
+    <!-- ********************* -->
+    <!-- ** attribute types ** -->
+    <!-- ********************* -->
+
+    <!-- match <ref> elements -->
+    <xsl:template match="rng:ref" mode="collect-type">
+        <!-- references are assumed to be type names -->
+        <ref name="{@name}"/>
+    </xsl:template>
+
+    <!-- match <data> elements -->
+    <xsl:template match="rng:data" mode="collect-type">
+        <!-- data types are data types -->
+        <data type="{@type}">
+            <xsl:apply-templates mode="collect-type"/>
+        </data>
+    </xsl:template>
+
+    <!-- ignore name choices -->
+
+    <xsl:template match="rng:choice[rng:name]" mode="collect-type"/>
+
+    <!-- match elements that get copied -->
+    <xsl:template match="rng:choice|rng:list|rng:group|rng:oneOrMore|rng:zeroOrMore|rng:empty|rng:text|rng:optional" mode="collect-type">
+        <xsl:copy><xsl:apply-templates mode="collect-type"/></xsl:copy>
+    </xsl:template>
+
+    <!-- match <value> elements -->
+    <xsl:template match="rng:param" mode="collect-type">
+        <param name="{@name}"><xsl:value-of select="."/></param>
+    </xsl:template>
+
+    <!-- match <value> elements -->
+    <xsl:template match="rng:value" mode="collect-type">
         <value><xsl:value-of select="."/></value>
     </xsl:template>
     
     <!-- match everything else and ignore it -->
-    <xsl:template match="*|text()" mode="collect-type"/>
-    
+    <xsl:template match="*" mode="collect-type">
+        <xsl:message>Ignored element &lt;<xsl:value-of select="name(.)"/>&gt; while collecting type information, content: <xsl:value-of select="."/>, parent: <xsl:value-of select="name(..)"/>, grandparent: <xsl:value-of select="name(../..)"/>, define name: <xsl:value-of select="ancestor::rng:define[1]/@name"/></xsl:message>
+    </xsl:template>
+
+    <xsl:template match="text()" mode="collect-type"/>
+
 </xsl:stylesheet>
