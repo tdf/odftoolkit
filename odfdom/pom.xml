@@ -142,6 +142,18 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
 					<descriptorRefs>
@@ -231,7 +243,15 @@
 
 	<!-- More Project Information -->
 	<name>ODFDOM</name>
-	<description>OpenDocument Format (ODF) library</description>
+	<description>ODFDOM is an OpenDocument Format (ODF) framework. Its purpose
+		is to provide an easy common way to create, access and
+		manipulate ODF files, without requiring detailed knowledge of
+		the ODF specification. It is designed to provide the ODF
+		developer community with an easy lightwork programming API
+		portable to any object-oriented language.
+
+		The current reference implementation is written in Java.
+	</description>
 	<url>http://odftoolkit.org/projects/odfdom/pages/Home</url>
 	<inceptionYear>2008</inceptionYear>
 	<licenses>
@@ -536,18 +556,6 @@
 							</systemPropertyVariables>
 							<skip>true</skip>
 						</configuration>
-					</plugin>
-					<plugin>
-						<artifactId>maven-source-plugin</artifactId>
-						<version>2.1.2</version>
-						<executions>
-							<execution>
-								<id>attach-sources</id>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
 					</plugin>
 				</plugins>
 			</build>
