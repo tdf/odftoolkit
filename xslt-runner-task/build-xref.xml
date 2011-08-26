@@ -24,12 +24,32 @@
     <description>Builds, tests, and runs the project odfxsltrunnertask.</description>
     <import file="nbproject/build-impl.xml"/>
 
-    <property file="ant.properties"/>
-    <import file="${project.odfxsltrunner}/build-schemas.xml"/>
-    
-    <property name="opendocument.v12.schema.xref" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-xref-schema.rng"/>
-    <property name="opendocument.v12.schema.dtype" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-dtype-schema.rng"/>
-    <property name="opendocument.v12.manifest-schema.xref" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-xref-manifest-schema.rng"/>
+    <property file="ant.properties" prefix="user"/>
+    <import file="${user.project.odfxsltrunner}/build-schemas.xml"/>
+
+    <target name="-post-init" depends="-init-schema-props"
+            description="Initialize schema properties">
+        <condition property="reference.odf2xhtml.xsl" value="${user.reference.odf2xhtml.xsl}">
+            <not>
+                <isset property="reference.odf2xhtml.xsl"/>
+            </not>
+        </condition>
+        <condition property="reference.saxon.jar" value="${user.reference.saxon.jar}">
+            <not>
+                <isset property="reference.saxon.jar"/>
+            </not>
+        </condition>
+        <condition property="exec.xmllint" value="${user.exec.xmllint}">
+            <not>
+                <isset property="exec.xmllint"/>
+            </not>
+        </condition>
+        <condition property="exec.xmllint.path" value="${user.exec.xmllint.path}">
+            <not>
+                <isset property="exec.xmllint.path"/>
+            </not>
+        </condition>
+    </target>
 
     <target name="add-v12-all-parts-xref-product" depends="add-v12-part1-xref-product,add-v12-part2-xref-product,add-v12-part3-xref-product"
             description="Add cross references to ODF 1.2 specification (all parts)."/>
@@ -77,11 +97,23 @@
             <param name="keep-anchors" expression="false"/>
             <param name="toc-hyperlink-mode" expression="adapt"/>
             <param name="part1-content-path" expression="jar:file:${opendocument.v12.product.dir}/${part1.spec-target.noext}.odt!/content.xml"/>
-            <param name="part2-content-path" expression="jar:file:${opendocument.v12.product.dir}/${part1.spec-target.noext}.odt!/content.xml"/>
-            <param name="part3-content-path" expression="jar:file:${opendocument.v12.product.dir}/${part1.spec-target.noext}.odt!/content.xml"/>
+            <param name="part2-content-path" expression="jar:file:${opendocument.v12.product.dir}/${part2.spec-target.noext}.odt!/content.xml"/>
+            <param name="part3-content-path" expression="jar:file:${opendocument.v12.product.dir}/${part3.spec-target.noext}.odt!/content.xml"/>
             <param name="part1-toc-rel-path" expression="${part1.spec-target.noext}.odt"/>
             <param name="part2-toc-rel-path" expression="${part2.spec-target.noext}.odt"/>
             <param name="part3-toc-rel-path" expression="${part3.spec-target.noext}.odt"/>
+        </odfxslt>
+    </target>
+
+    <target name="update-rel-paths v12-part0-xref-product" depends="init,jar"
+            description="Add cross references to ODF 1.2 part 0 specification.">
+        <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+        <property name="target-file" value="${dist.dir}/xref/OpenDocument-v1.2${opendocument.v12.part0.state.target}.odt"/>
+        <odfxslt style="${project.odfxsltrunner}/sample_xslt/update-toc-rel-paths.xsl"
+                 in="${opendocument.v12.product.dir}/OpenDocument-v1.2${opendocument.v12.part0.state.target}-orig.odt"
+                 out="${target-file}">
+            <param name="state-old" expression="-csd06-rev02"/>
+            <param name="state-new" expression="${opendocument.v12.part0.state.target}"/>
         </odfxslt>
     </target>
 
@@ -240,7 +272,7 @@
     <target name="create-v12-html-zip" depends="create-v12-part0-html,create-v12-part1-html,create-v12-part2-html,create-v12-part3-html"
             description="Create XHTML versions of all ODF 1.2 parts and zip them.">
         <zip destfile="${dist.dir}/OpenDocument-v1.2${state.target}.html.zip">
-            <zipfileset dir="${dist.dir}/html"/>
+            <zipfileset dir="${dist.dir}/html${state.target}"/>
         </zip>
     </target>
 
@@ -283,41 +315,34 @@
     <target name="-create-v12-html" depends="-create-v12-nomath,-create-v12-html-transform,-create-v12-html-postprocess,-create-v12-html-copy-images"/>
 
     <target name="-create-v12-html-transform" depends="init">
-        <property name="html-image-list" value="${build.dir}/OpenDocument-v1.2${state.target}${part}-image-list.txt"/>
         <condition property="html-source" value="${dist.dir}/nomath/OpenDocument-v1.2${state.target}${part}-nomath.odt" else="${opendocument.v12.product.dir}/OpenDocument-v1.2${state.target}${part}.odt">
             <isset property="contains-math-objects"/>
         </condition>
-        <condition property="html-target" value="${build.dir}/html/OpenDocument-v1.2${state.target}${part}.html" else="${dist.dir}/html/OpenDocument-v1.2${state.target}${part}.html">
+        <condition property="html-target" value="${build.dir}/html${state.target}/OpenDocument-v1.2${state.target}${part}.html" else="${dist.dir}/html${state.target}/OpenDocument-v1.2${state.target}${part}.html">
             <isset property="postprocess-style"/>
         </condition>
-        <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
-        <odfxslt style="${project.odf2xhtml}/export/xhtml/opendoc2xhtml.xsl"
+        <taskdef name="odfxslt-saxon" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}:${reference.saxon.jar}"/>
+        <odfxslt-saxon style="${reference.odf2xhtml.xsl}"
                  in="${html-source}"
                  outfile="${html-target}"
                  force="false">
                  <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-        </odfxslt>
-        <xslt in="${html-target}"
-             out="${html-image-list}"
-             style="${project.odfxsltrunner}/sample_xslt/create-html-img-list.xsl"/>
-        <unzip src="${html-source}" dest="${dist.dir}/html">
-            <patternset includesfile="${html-image-list}"/>
-        </unzip>
+        </odfxslt-saxon>
     </target>
 
     <target name="-create-v12-html-postprocess" depends="init" if="postprocess-style">
         <xslt style="${postprocess-style}"
-                 in="${build.dir}/html/OpenDocument-v1.2${state.target}${part}.html"
-                 out="${dist.dir}/html/OpenDocument-v1.2${state.target}${part}.html"
+                 in="${build.dir}/html${state.target}/OpenDocument-v1.2${state.target}${part}.html"
+                 out="${dist.dir}/html${state.target}/OpenDocument-v1.2${state.target}${part}.html"
                  force="false"/>
     </target>
 
     <target name="-create-v12-html-copy-images" depends="init">
         <property name="html-image-list" value="${build.dir}/OpenDocument-v1.2${state.target}${part}-image-list.txt"/>
-        <xslt in="${dist.dir}/html/OpenDocument-v1.2${state.target}${part}.html"
+        <xslt in="${dist.dir}/html${state.target}/OpenDocument-v1.2${state.target}${part}.html"
              out="${html-image-list}"
              style="${project.odfxsltrunner}/sample_xslt/create-html-img-list.xsl"/>
-        <unzip src="${html-source}" dest="${dist.dir}/html">
+        <unzip src="${html-source}" dest="${dist.dir}/html${state.target}">
             <patternset includesfile="${html-image-list}"/>
         </unzip>
     </target>
@@ -358,7 +383,8 @@
 
     <target name="-create-v12-ooo-xhtml" depends="-create-v12-ooo-xhtml-check" if="ooo-xhtml.notuptodate">
         <!-- Create xhtml file from OOo HTML output file -->
-        <exec executable="xmllint">
+        <exec executable="${exec.xmllint}">
+            <env key="PATH" path="${exec.xmllint.path}"/>
             <arg value="--html"/>
             <arg value="--xmlout"/>
             <arg value="--dropdtd"/>
@@ -369,7 +395,7 @@
     </target>
 
     <target name="-create-v12-ooo-xhtml-check" depends="init" if="contains-math-objects">
-        <property name="ooo-html.dir" location="${opendocument.v12.product.dir}/ooo-html"/>
+        <property name="ooo-html.dir" location="${opendocument.v12.product.dir}/ooo-html${state.target}"/>
         <property name="ooo-html" value="${ooo-html.dir}/OpenDocument-v1.2${state.target}${part}.html"/>
         <property name="ooo-xhtml" location="${build.dir}/OpenDocument-v1.2${state.target}${part}-ooo.html"/>
         <condition property="ooo-html.exists">
