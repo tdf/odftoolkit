@@ -455,6 +455,29 @@
         </xsl:if>
     </xsl:template>
 
+    <!-- ******************************* -->
+    <!-- ** Default values ** -->
+    <!-- ******************************* -->
+    <xsl:template match="text:p[@text:style-name='Default_20_Value']">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+		<xsl:if test="not(text:span[@text:style-name='Attribute_20_Value' or @text:style-name='Attribute_20_Value_20_Instance'])">
+			<xsl:variable name="attr-name">
+				<xsl:choose>
+					<xsl:when test="text:span[@text:style-name='Attribute']">
+						<xsl:value-of select="text:span[@text:style-name='Attribute']"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="normalize-space(preceding::text:h[@text:outline-level='2'][last()])"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
+			<xsl:message>*** <xsl:value-of select="$attr-name"/>: Missing default value in default value definition.</xsl:message>
+		</xsl:if>
+	</xsl:template>
+
+
     <!-- *************************** -->
     <!-- ** Bookmarks in headings ** -->
     <!-- *************************** -->
@@ -742,9 +765,9 @@
         <xsl:choose>
             <xsl:when test="starts-with(.,'Test Case') or normalize-space(.)=''"/>
             <xsl:when test="$style-name='Rationale' or $style-name='Offset_20_Note' or $style-name='TODO'"/>
-            <xsl:when test="//style:style[@style:name=$style-name and @style:family='paragraph' and @style:parent-style-name='Rationale']"/>
-            <xsl:when test="//style:style[@style:name=$style-name and @style:family='paragraph' and @style:parent-style-name='Offset_20_Note']"/>
-            <xsl:when test="//style:style[@style:name=$style-name and @style:family='paragraph' and @style:parent-style-name='TODO']"/>
+            <xsl:when test="/office:document-content/office:automatic-styles/style:style[@style:name=$style-name and @style:family='paragraph' and @style:parent-style-name='Rationale']"/>
+            <xsl:when test="/office:document-content/office:automatic-styles/style:style[@style:name=$style-name and @style:family='paragraph' and @style:parent-style-name='Offset_20_Note']"/>
+            <xsl:when test="/office:document-content/office:automatic-styles/style:style[@style:name=$style-name and @style:family='paragraph' and @style:parent-style-name='TODO']"/>
             <xsl:when test="ancestor::text:section[@text:name='SectionTestCases']"/>
             <xsl:when test="ancestor::text:tracked-changes"/>
             <xsl:otherwise>
@@ -865,26 +888,22 @@
         <xsl:call-template name="create-elem-root-elem-list"/>
         <xsl:call-template name="create-elem-parent-elem-list"/>
         <xsl:choose>
-            <xsl:when test="@name='office:script'">
-                <xsl:call-template name="create-attr-list"/>
-                <text:p text:style-name="Child_20_Element_20_List">
-                    <xsl:text>The </xsl:text>
-                    <text:span text:style-name="Element">
-                        <xsl:text>&lt;</xsl:text>
-                        <xsl:value-of select="@name"/>
-                        <xsl:text>&gt;</xsl:text>
-                    </text:span>
-                    <xsl:text> element has mixed content where arbitrary child elements are permitted.</xsl:text>
-                </text:p>
-            </xsl:when>
-            <xsl:when test="@name='manifest:algorithm'">
-                <xsl:call-template name="create-attr-list"/>
-                <xsl:message>Element <xsl:value-of select="@name"/>: No child element info added (element may have any content).</xsl:message>
-            </xsl:when>
             <xsl:when test="rng:element/rng:anyName">
-                <!-- arbitrary content -->
-                <xsl:message>Element <xsl:value-of select="@name"/>: No attribute and child element info added (element may have any content).</xsl:message>
-            </xsl:when>
+				<xsl:if test="rng:attribute[@name]">
+					<xsl:call-template name="create-attr-list"/>
+				</xsl:if>
+				<xsl:if test="rng:element[contains(@condition,'mixed')]">
+					<text:p text:style-name="Child_20_Element_20_List">
+						<xsl:text>The </xsl:text>
+						<text:span text:style-name="Element">
+							<xsl:text>&lt;</xsl:text>
+							<xsl:value-of select="@name"/>
+							<xsl:text>&gt;</xsl:text>
+						</text:span>
+						<xsl:text> element has mixed content where arbitrary child elements are permitted.</xsl:text>
+					</text:p>
+				</xsl:if>
+			</xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="create-attr-list"/>
                 <xsl:call-template name="create-child-elem-list"/>

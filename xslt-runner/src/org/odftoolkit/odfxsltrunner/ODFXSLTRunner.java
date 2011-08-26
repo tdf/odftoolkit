@@ -160,7 +160,7 @@ public class ODFXSLTRunner {
         boolean bError = false;
         URIResolver aURIResolver = null;
 
-        Source aInputSource = null;
+        InputSource aInputSource = null;
         OdfPackage aInputPkg = null;
         String aMediaType ="text/xml";
         aLogger.setName( aInputFile.getAbsolutePath() );
@@ -168,13 +168,14 @@ public class ODFXSLTRunner {
         {
             if( INPUT_MODE_FILE == aInputMode )
             {
-                aInputSource = new StreamSource( aInputFile );
+                aInputSource = new InputSource( new FileInputStream(aInputFile) );
             }
             else
             {
                 aInputPkg = OdfPackage.loadPackage( aInputFile );
                 aLogger.setName( aInputFile.getAbsolutePath(), aPathInPackage );
-                aInputSource = new StreamSource( aInputPkg.getInputStream(aPathInPackage), aInputFile.toURI().toString() + '/' + aPathInPackage );
+                aInputSource = new InputSource( aInputPkg.getInputStream(aPathInPackage) );
+                aInputSource.setSystemId( aInputFile.toURI().toString() + '/' + aPathInPackage );
                 OdfFileEntry aFileEntry =  aInputPkg.getFileEntry(aPathInPackage);
                 if( aFileEntry != null )
                     aMediaType = aFileEntry.getMediaTypeString();
@@ -273,7 +274,7 @@ public class ODFXSLTRunner {
     
     private boolean runXSLT( File aStyleSheetFile, 
                      List<XSLTParameter> aParams,
-                     Source aInputSource, Result aOutputTarget,
+                     InputSource aInputInputSource, Result aOutputTarget,
                      String aTransformerFactoryClassName,
                      URIResolver aURIResolver,
                      Logger aLogger )
@@ -292,10 +293,12 @@ public class ODFXSLTRunner {
         InputSource aStyleSheetInputSource = new InputSource(aStyleSheetInputStream);
         aStyleSheetInputSource.setSystemId(aStyleSheetFile.getAbsolutePath());
         
-        XMLReader aXMLReader = null;
+        XMLReader aStyleSheetXMLReader = null;
+        XMLReader aInputXMLReader = null;
         try
         {
-            aXMLReader = XMLReaderFactory.createXMLReader();
+            aStyleSheetXMLReader = XMLReaderFactory.createXMLReader();
+            aInputXMLReader = XMLReaderFactory.createXMLReader();
         }
         catch( SAXException e )
         {
@@ -303,9 +306,12 @@ public class ODFXSLTRunner {
             return true;            
         }
         
-        aXMLReader.setErrorHandler(new SAXErrorHandler(aLogger));
+        aStyleSheetXMLReader.setErrorHandler(new SAXErrorHandler(aLogger));
+        aInputXMLReader.setErrorHandler(new SAXErrorHandler(aLogger));
+        aInputXMLReader.setEntityResolver(new ODFEntityResolver(aLogger));
         
-        Source aSource = new SAXSource( aXMLReader, aStyleSheetInputSource );
+        Source aStyleSheetSource = new SAXSource( aStyleSheetXMLReader, aStyleSheetInputSource );
+        Source aInputSource = new SAXSource( aInputXMLReader, aInputInputSource );
 
         if( aTransformerFactoryClassName!=null )
             aLogger.logInfo( "Requesting transformer factory class: " + aTransformerFactoryClassName );
@@ -318,7 +324,7 @@ public class ODFXSLTRunner {
         
         try
         {
-            Transformer aTransformer = aFactory.newTransformer(aSource);
+            Transformer aTransformer = aFactory.newTransformer(aStyleSheetSource);
             
             if( aParams != null )
             {

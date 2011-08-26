@@ -31,6 +31,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+				xmlns:dc="http://purl.org/dc/elements/1.1/"
                 xmlns="http://relaxng.org/ns/structure/1.0" version="1.0">
     <xsl:output method="xml" indent="yes"/>
 
@@ -93,7 +94,7 @@
             xmlns:db="urn:oasis:names:tc:opendocument:xmlns:database:1.0"
             xmlns:grddl="http://www.w3.org/2003/g/data-view#"
             xmlns:xhtml="http://www.w3.org/1999/xhtml">
-            <xsl:for-each select="//rng:start|document(//rng:include/@href)//rng:start">
+            <xsl:for-each select="rng:start|document(rng:include/@href)/rng:grammar/rng:start">
                 <start>
                     <xsl:apply-templates mode="collect-content"/>
                 </start>
@@ -128,16 +129,16 @@
             </xsl:for-each>
 
             <xsl:if test="$include-types">
-                <xsl:for-each select="//rng:define|document(//rng:include/@href)//rng:define">
+                <xsl:for-each select="/rng:grammar/rng:define|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define">
                     <xsl:variable name="name" select="@name"/>
-                    <xsl:if test="//rng:attribute//rng:ref[@name=$name]|document(//rng:include/@href)//rng:attribute//rng:ref[@name=$name]">
+                    <xsl:if test="//rng:attribute//rng:ref[@name=$name]|document(/rng:grammar/rng:include/@href)//rng:attribute//rng:ref[@name=$name]">
                         <xsl:if test="not(preceding-sibling::rng:define[@name = $name])">
-                            <xsl:variable name="count" select="count(//rng:define[@name = $name]|document(//rng:include/@href)//rng:define[@name = $name])"/>
+                            <xsl:variable name="count" select="count(/rng:grammar/rng:define[@name = $name]|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name = $name])"/>
                             <define name="{@name}">
                                 <xsl:choose>
                                     <xsl:when test="$count>1">
                                         <choice>
-                                            <xsl:apply-templates select="//rng:define[@name = $name]/*|document(//rng:include/@href)//rng:define[@name = $name]/*" mode="collect-type"/>
+                                            <xsl:apply-templates select="/rng:grammar/rng:define[@name = $name]/*|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name = $name]/*" mode="collect-type"/>
                                         </choice>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -398,7 +399,13 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-        
+
+	<!-- Turn dc:description into a comment -->
+    <xsl:template match="dc:description" mode="collect-content">
+        <xsl:param name="condition-attr"/>
+        <xsl:comment><xsl:value-of select="."/></xsl:comment>
+    </xsl:template>
+
     <!-- match all other elements and ignore them -->
     <xsl:template match="*" mode="collect-content">
         <xsl:param name="condition-attr"/>
@@ -447,7 +454,13 @@
     <xsl:template match="rng:value" mode="collect-type">
         <value><xsl:value-of select="."/></value>
     </xsl:template>
-    
+
+	<!-- Turn dc:description into a comment -->
+    <xsl:template match="dc:description" mode="collect-type">
+        <xsl:param name="condition-attr"/>
+        <xsl:comment><xsl:value-of select="."/></xsl:comment>
+    </xsl:template>
+
     <!-- match everything else and ignore it -->
     <xsl:template match="*" mode="collect-type">
         <xsl:message>Ignored element &lt;<xsl:value-of select="name(.)"/>&gt; while collecting type information, content: <xsl:value-of select="."/>, parent: <xsl:value-of select="name(..)"/>, grandparent: <xsl:value-of select="name(../..)"/>, define name: <xsl:value-of select="ancestor::rng:define[1]/@name"/></xsl:message>
