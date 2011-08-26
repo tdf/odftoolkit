@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.odftoolkit</groupId>
     <artifactId>relaxng2template</artifactId>
-    <version>0.7.5</version>
+    <version>0.8-SNAPSHOT</version>
     <name>ODFDOM Code Generator</name>
     <parent>
         <groupId>org.odftoolkit</groupId>
         <artifactId>odfdom-codegen</artifactId>
-        <version>0.7.5</version>
+        <version>0.8-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <build>
