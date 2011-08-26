@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.office.OdfValueMaybeVoidType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<form:list-property>".
  */
 public abstract class OdfListPropertyElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4455137011481921868L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "list-property" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "list-property" );
 
     public OdfListPropertyElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

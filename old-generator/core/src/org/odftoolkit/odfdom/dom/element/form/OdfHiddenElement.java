@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfEventListenersElement;
 
 /**
  * ODF DOM Element implementation for element "<form:hidden>".
  */
 public abstract class OdfHiddenElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6877065842150845825L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "hidden" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "hidden" );
 
     public OdfHiddenElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -163,4 +159,24 @@ public abstract class OdfHiddenElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.FORM, "value" ), _aValue );
     }
 
+    /**
+    * Create child element "form:properties".
+    */
+    public OdfPropertiesElement createPropertiesElement()
+    {
+        OdfPropertiesElement  _nProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPropertiesElement.class);
+        this.appendChild( _nProperties);
+        return  _nProperties;
+    }                   
+               
+    /**
+    * Create child element "office:event-listeners".
+    */
+    public OdfEventListenersElement createEventListenersElement()
+    {
+        OdfEventListenersElement  _nEventListeners = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEventListenersElement.class);
+        this.appendChild( _nEventListeners);
+        return  _nEventListeners;
+    }                   
+               
 }

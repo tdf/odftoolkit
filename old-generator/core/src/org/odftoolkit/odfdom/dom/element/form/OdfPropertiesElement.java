@@ -32,28 +32,49 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.type.office.OdfValueMaybeVoidType;
+import org.odftoolkit.odfdom.dom.type.office.OdfValueMaybeVoidType;
 
 /**
  * ODF DOM Element implementation for element "<form:properties>".
  */
 public abstract class OdfPropertiesElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4995202607289977012L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "properties" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "properties" );
 
     public OdfPropertiesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "form:property".
+    */
+    public OdfPropertyElement createPropertyElement(String   _aPropertyName, OdfValueMaybeVoidType   _aValueType)
+    {
+        OdfPropertyElement  _nProperty = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPropertyElement.class);
+        _nProperty.setPropertyName( _aPropertyName);
+        _nProperty.setValueType( _aValueType);
+        this.appendChild( _nProperty);
+        return  _nProperty;      
+    }
+    
+    /**
+    * Create child element "form:list-property".
+    */
+    public OdfListPropertyElement createListPropertyElement(String   _aPropertyName, OdfValueMaybeVoidType   _aValueType)
+    {
+        OdfListPropertyElement  _nListProperty = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListPropertyElement.class);
+        _nListProperty.setPropertyName( _aPropertyName);
+        _nListProperty.setValueType( _aValueType);
+        this.appendChild( _nListProperty);
+        return  _nListProperty;      
+    }
+    
 }

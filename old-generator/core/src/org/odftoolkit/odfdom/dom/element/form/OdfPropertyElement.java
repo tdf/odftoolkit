@@ -38,25 +38,21 @@ import javax.xml.datatype.Duration;
 import org.odftoolkit.odfdom.dom.type.OdfDuration;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<form:property>".
  */
 public abstract class OdfPropertyElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8331740344085875427L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "property" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "property" );
 
     public OdfPropertyElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

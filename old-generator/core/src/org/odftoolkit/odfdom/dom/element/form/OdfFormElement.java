@@ -38,25 +38,22 @@ import org.odftoolkit.odfdom.dom.type.form.OdfCommandType;
 import org.odftoolkit.odfdom.dom.type.form.OdfNavigationModeType;
 import org.odftoolkit.odfdom.dom.type.form.OdfTabCycleType;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfEventListenersElement;
+import org.odftoolkit.odfdom.dom.type.form.OdfImagePositionType;
 
 /**
  * ODF DOM Element implementation for element "<form:form>".
  */
 public abstract class OdfFormElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6361736565154315288L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "form" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "form" );
 
     public OdfFormElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -466,4 +463,288 @@ public abstract class OdfFormElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-cycle" ), aStringVal );
     }
 
+    /**
+    * Create child element "form:properties".
+    */
+    public OdfPropertiesElement createPropertiesElement()
+    {
+        OdfPropertiesElement  _nProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPropertiesElement.class);
+        this.appendChild( _nProperties);
+        return  _nProperties;
+    }                   
+               
+    /**
+    * Create child element "office:event-listeners".
+    */
+    public OdfEventListenersElement createEventListenersElement()
+    {
+        OdfEventListenersElement  _nEventListeners = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEventListenersElement.class);
+        this.appendChild( _nEventListeners);
+        return  _nEventListeners;
+    }                   
+               
+    /**
+    * Create child element "form:text".
+    */
+    public OdfTextElement createTextElement()
+    {
+        OdfTextElement  _nText = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextElement.class);
+        this.appendChild( _nText);
+        return  _nText;
+    }                   
+               
+    /**
+    * Create child element "form:textarea".
+    */
+    public OdfTextareaElement createTextareaElement()
+    {
+        OdfTextareaElement  _nTextarea = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextareaElement.class);
+        this.appendChild( _nTextarea);
+        return  _nTextarea;
+    }                   
+               
+    /**
+    * Create child element "form:formatted-text".
+    */
+    public OdfFormattedTextElement createFormattedTextElement()
+    {
+        OdfFormattedTextElement  _nFormattedText = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFormattedTextElement.class);
+        this.appendChild( _nFormattedText);
+        return  _nFormattedText;
+    }                   
+               
+    /**
+    * Create child element "form:number".
+    */
+    public OdfNumberElement createNumberElement()
+    {
+        OdfNumberElement  _nNumber = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNumberElement.class);
+        this.appendChild( _nNumber);
+        return  _nNumber;
+    }                   
+               
+    /**
+    * Create child element "form:date".
+    */
+    public OdfDateElement createDateElement()
+    {
+        OdfDateElement  _nDate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDateElement.class);
+        this.appendChild( _nDate);
+        return  _nDate;
+    }                   
+               
+    /**
+    * Create child element "form:time".
+    */
+    public OdfTimeElement createTimeElement()
+    {
+        OdfTimeElement  _nTime = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTimeElement.class);
+        this.appendChild( _nTime);
+        return  _nTime;
+    }                   
+               
+    /**
+    * Create child element "form:combobox".
+    */
+    public OdfComboboxElement createComboboxElement()
+    {
+        OdfComboboxElement  _nCombobox = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfComboboxElement.class);
+        this.appendChild( _nCombobox);
+        return  _nCombobox;
+    }                   
+               
+    /**
+    * Create child element "form:listbox".
+    */
+    public OdfListboxElement createListboxElement()
+    {
+        OdfListboxElement  _nListbox = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListboxElement.class);
+        this.appendChild( _nListbox);
+        return  _nListbox;
+    }                   
+               
+    /**
+    * Create child element "form:checkbox".
+    */
+    public OdfCheckboxElement createCheckboxElement()
+    {
+        OdfCheckboxElement  _nCheckbox = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCheckboxElement.class);
+        this.appendChild( _nCheckbox);
+        return  _nCheckbox;      
+    }
+    
+    /**
+    * Create child element "form:checkbox".
+    */
+    public OdfCheckboxElement createCheckboxElement(OdfImagePositionType   _aImagePosition)
+    {
+        OdfCheckboxElement  _nCheckbox = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCheckboxElement.class);
+        _nCheckbox.setImagePosition( _aImagePosition);
+        this.appendChild( _nCheckbox);
+        return  _nCheckbox;      
+    }
+    
+    /**
+    * Create child element "form:password".
+    */
+    public OdfPasswordElement createPasswordElement()
+    {
+        OdfPasswordElement  _nPassword = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPasswordElement.class);
+        this.appendChild( _nPassword);
+        return  _nPassword;
+    }                   
+               
+    /**
+    * Create child element "form:file".
+    */
+    public OdfFileElement createFileElement()
+    {
+        OdfFileElement  _nFile = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFileElement.class);
+        this.appendChild( _nFile);
+        return  _nFile;
+    }                   
+               
+    /**
+    * Create child element "form:fixed-text".
+    */
+    public OdfFixedTextElement createFixedTextElement()
+    {
+        OdfFixedTextElement  _nFixedText = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFixedTextElement.class);
+        this.appendChild( _nFixedText);
+        return  _nFixedText;
+    }                   
+               
+    /**
+    * Create child element "form:button".
+    */
+    public OdfButtonElement createButtonElement()
+    {
+        OdfButtonElement  _nButton = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfButtonElement.class);
+        this.appendChild( _nButton);
+        return  _nButton;      
+    }
+    
+    /**
+    * Create child element "form:button".
+    */
+    public OdfButtonElement createButtonElement(OdfImagePositionType   _aImagePosition)
+    {
+        OdfButtonElement  _nButton = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfButtonElement.class);
+        _nButton.setImagePosition( _aImagePosition);
+        this.appendChild( _nButton);
+        return  _nButton;      
+    }
+    
+    /**
+    * Create child element "form:image".
+    */
+    public OdfImageElement createImageElement()
+    {
+        OdfImageElement  _nImage = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfImageElement.class);
+        this.appendChild( _nImage);
+        return  _nImage;
+    }                   
+               
+    /**
+    * Create child element "form:radio".
+    */
+    public OdfRadioElement createRadioElement()
+    {
+        OdfRadioElement  _nRadio = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRadioElement.class);
+        this.appendChild( _nRadio);
+        return  _nRadio;      
+    }
+    
+    /**
+    * Create child element "form:radio".
+    */
+    public OdfRadioElement createRadioElement(OdfImagePositionType   _aImagePosition)
+    {
+        OdfRadioElement  _nRadio = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRadioElement.class);
+        _nRadio.setImagePosition( _aImagePosition);
+        this.appendChild( _nRadio);
+        return  _nRadio;      
+    }
+    
+    /**
+    * Create child element "form:frame".
+    */
+    public OdfFrameElement createFrameElement()
+    {
+        OdfFrameElement  _nFrame = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFrameElement.class);
+        this.appendChild( _nFrame);
+        return  _nFrame;
+    }                   
+               
+    /**
+    * Create child element "form:image-frame".
+    */
+    public OdfImageFrameElement createImageFrameElement()
+    {
+        OdfImageFrameElement  _nImageFrame = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfImageFrameElement.class);
+        this.appendChild( _nImageFrame);
+        return  _nImageFrame;
+    }                   
+               
+    /**
+    * Create child element "form:hidden".
+    */
+    public OdfHiddenElement createHiddenElement()
+    {
+        OdfHiddenElement  _nHidden = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHiddenElement.class);
+        this.appendChild( _nHidden);
+        return  _nHidden;
+    }                   
+               
+    /**
+    * Create child element "form:grid".
+    */
+    public OdfGridElement createGridElement()
+    {
+        OdfGridElement  _nGrid = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfGridElement.class);
+        this.appendChild( _nGrid);
+        return  _nGrid;
+    }                   
+               
+    /**
+    * Create child element "form:value-range".
+    */
+    public OdfValueRangeElement createValueRangeElement()
+    {
+        OdfValueRangeElement  _nValueRange = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfValueRangeElement.class);
+        this.appendChild( _nValueRange);
+        return  _nValueRange;
+    }                   
+               
+    /**
+    * Create child element "form:generic-control".
+    */
+    public OdfGenericControlElement createGenericControlElement()
+    {
+        OdfGenericControlElement  _nGenericControl = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfGenericControlElement.class);
+        this.appendChild( _nGenericControl);
+        return  _nGenericControl;
+    }                   
+               
+    /**
+    * Create child element "form:form".
+    */
+    public OdfFormElement createFormElement()
+    {
+        OdfFormElement  _nForm = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFormElement.class);
+        this.appendChild( _nForm);
+        return  _nForm;
+    }                   
+               
+    /**
+    * Create child element "form:connection-resource".
+    */
+    public OdfConnectionResourceElement createConnectionResourceElement(String   _aHref)
+    {
+        OdfConnectionResourceElement  _nConnectionResource = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConnectionResourceElement.class);
+        _nConnectionResource.setHref( _aHref);
+        this.appendChild( _nConnectionResource);
+        return  _nConnectionResource;      
+    }
+    
 }

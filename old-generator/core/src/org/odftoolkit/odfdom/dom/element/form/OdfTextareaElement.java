@@ -36,25 +36,22 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfEventListenersElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 
 /**
  * ODF DOM Element implementation for element "<form:textarea>".
  */
 public abstract class OdfTextareaElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8909747387531889015L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "textarea" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "textarea" );
 
     public OdfTextareaElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -373,4 +370,34 @@ public abstract class OdfTextareaElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.FORM, "linked-cell" ), aStringVal );
     }
 
+    /**
+    * Create child element "form:properties".
+    */
+    public OdfPropertiesElement createPropertiesElement()
+    {
+        OdfPropertiesElement  _nProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPropertiesElement.class);
+        this.appendChild( _nProperties);
+        return  _nProperties;
+    }                   
+               
+    /**
+    * Create child element "office:event-listeners".
+    */
+    public OdfEventListenersElement createEventListenersElement()
+    {
+        OdfEventListenersElement  _nEventListeners = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEventListenersElement.class);
+        this.appendChild( _nEventListeners);
+        return  _nEventListeners;
+    }                   
+               
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
 }

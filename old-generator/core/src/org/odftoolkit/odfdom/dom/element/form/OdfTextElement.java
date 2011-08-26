@@ -36,25 +36,21 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfEventListenersElement;
 
 /**
  * ODF DOM Element implementation for element "<form:text>".
  */
 public abstract class OdfTextElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7583181301536941680L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "text" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "text" );
 
     public OdfTextElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -373,4 +369,24 @@ public abstract class OdfTextElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.FORM, "linked-cell" ), aStringVal );
     }
 
+    /**
+    * Create child element "form:properties".
+    */
+    public OdfPropertiesElement createPropertiesElement()
+    {
+        OdfPropertiesElement  _nProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPropertiesElement.class);
+        this.appendChild( _nProperties);
+        return  _nProperties;
+    }                   
+               
+    /**
+    * Create child element "office:event-listeners".
+    */
+    public OdfEventListenersElement createEventListenersElement()
+    {
+        OdfEventListenersElement  _nEventListeners = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEventListenersElement.class);
+        this.appendChild( _nEventListeners);
+        return  _nEventListeners;
+    }                   
+               
 }

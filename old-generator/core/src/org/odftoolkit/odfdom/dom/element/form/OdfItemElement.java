@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<form:item>".
  */
 public abstract class OdfItemElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1946189344190818386L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "item" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "item" );
 
     public OdfItemElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

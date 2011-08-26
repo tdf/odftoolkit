@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfEventListenersElement;
 
 /**
  * ODF DOM Element implementation for element "<form:image-frame>".
  */
 public abstract class OdfImageFrameElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 9096795902689356874L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "image-frame" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "image-frame" );
 
     public OdfImageFrameElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -258,4 +254,24 @@ public abstract class OdfImageFrameElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.FORM, "data-field" ), _aDataField );
     }
 
+    /**
+    * Create child element "form:properties".
+    */
+    public OdfPropertiesElement createPropertiesElement()
+    {
+        OdfPropertiesElement  _nProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPropertiesElement.class);
+        this.appendChild( _nProperties);
+        return  _nProperties;
+    }                   
+               
+    /**
+    * Create child element "office:event-listeners".
+    */
+    public OdfEventListenersElement createEventListenersElement()
+    {
+        OdfEventListenersElement  _nEventListeners = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEventListenersElement.class);
+        this.appendChild( _nEventListeners);
+        return  _nEventListeners;
+    }                   
+               
 }

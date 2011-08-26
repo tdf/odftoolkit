@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<form:option>".
  */
 public abstract class OdfOptionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7124134486739203199L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "option" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "option" );
 
     public OdfOptionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

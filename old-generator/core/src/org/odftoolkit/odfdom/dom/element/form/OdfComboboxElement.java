@@ -37,25 +37,21 @@ import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.form.OdfListSourceType;
 import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfEventListenersElement;
 
 /**
  * ODF DOM Element implementation for element "<form:combobox>".
  */
 public abstract class OdfComboboxElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1491871766812847631L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "combobox" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.FORM, "combobox" );
 
     public OdfComboboxElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -478,4 +474,34 @@ public abstract class OdfComboboxElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.FORM, "auto-complete" ), aStringVal );
     }
 
+    /**
+    * Create child element "form:properties".
+    */
+    public OdfPropertiesElement createPropertiesElement()
+    {
+        OdfPropertiesElement  _nProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPropertiesElement.class);
+        this.appendChild( _nProperties);
+        return  _nProperties;
+    }                   
+               
+    /**
+    * Create child element "office:event-listeners".
+    */
+    public OdfEventListenersElement createEventListenersElement()
+    {
+        OdfEventListenersElement  _nEventListeners = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEventListenersElement.class);
+        this.appendChild( _nEventListeners);
+        return  _nEventListeners;
+    }                   
+               
+    /**
+    * Create child element "form:item".
+    */
+    public OdfItemElement createItemElement()
+    {
+        OdfItemElement  _nItem = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfItemElement.class);
+        this.appendChild( _nItem);
+        return  _nItem;
+    }                   
+               
 }
