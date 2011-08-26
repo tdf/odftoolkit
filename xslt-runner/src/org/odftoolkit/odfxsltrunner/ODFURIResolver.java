@@ -52,7 +52,7 @@ class ODFURIResolver implements URIResolver
         m_aFileEntryPath = aFileEntryPath;
         m_aLogger = aLogger;
     }
-    
+
     /** resolve an URI
      *
      * @param aHRef the URI to be resolved

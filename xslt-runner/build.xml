@@ -81,7 +81,16 @@
     Notice that the overridden target depends on the jar target and not only on 
     the compile target as the regular run target does. Again, for a list of available 
     properties which you can use, check the target you are overriding in the
-    nbproject/build-impl.xml file. 
-
+    nbproject/build-impl.xml file.
+    
     -->
+
+    <target name="-post-jar" depends="init">
+        <copy todir="${dist.dir}">
+            <filelist dir="." files="LICENSE.txt README.txt" />
+        </copy>
+        <delete file="${dist.dir}/README.TXT"/>
+        <delete dir="${dist.dir}/lib"/>
+    </target>
+
 </project>

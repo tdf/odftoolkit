@@ -35,6 +35,8 @@ import java.util.Vector;
  */
 public class Main {
 
+    private static final String VERSION="1.1.0";
+
     /** Creates a new instance of Main */
     public Main() {
     }
@@ -204,6 +206,9 @@ public class Main {
     
     private static void printUsage()
     {
+        System.out.print("odfxsltrunner v");
+        System.out.println( VERSION );
+        System.out.println();
         System.out.println( "usage: odfxsltrunner <style sheet> [-v] [-f <factory>] [-p <path in package>] [-l log file] [-t] <input package> <output package> {<param>=<value>}");
         System.out.println( "       odfxsltrunner <style sheet> [-v] [-f <factory>] [-p <path in package>] [-l log file] -r <package> {<param>=<value>}");
         System.out.println( "       odfxsltrunner <style sheet> [-v] [-f <factory>] {-x <export path>} [-p <path in package>] [-l log file] -o <input package> <output file> {<param>=<value>}");
