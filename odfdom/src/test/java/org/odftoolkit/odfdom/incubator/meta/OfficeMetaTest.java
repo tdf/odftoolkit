@@ -49,7 +49,7 @@ public class OfficeMetaTest {
 	private String subject = "dcsubject";
 	private List<String> keywords = new ArrayList<String>();
 	private String initialCreator = "creator";
-	private String dccreator = "persia c";
+	private String dccreator = System.getProperty("user.name");
 	private String printedBy = "persia p";
 	private String language = "Chinese";
 	private Integer editingCycles = new Integer(4);
@@ -212,7 +212,7 @@ public class OfficeMetaTest {
 
 	@Test
 	public void testGetEditingCycles() {
-		Assert.assertEquals(editingCycles, fMetadata.getEditingCycles());
+		Assert.assertNotNull(fMetadata.getEditingCycles());
 	}
 
 	@Test
@@ -222,7 +222,7 @@ public class OfficeMetaTest {
 
 	@Test
 	public void testGetEditingDuration() {
-		Assert.assertEquals(editingDuration.toString(), fMetadata.getEditingDuration().toString());
+		Assert.assertNotNull(fMetadata.getEditingDuration());
 	}
 
 	@Test
@@ -306,20 +306,33 @@ public class OfficeMetaTest {
 		fMetadata = new OdfOfficeMeta(metadom);
 		//ToDO: automatic check of VERSION number ODFDOM/0.6.1$Build-TIMESTAMP
 		//Assert.assertTrue(fMetadata.getGenerator().startsWith(generator));
-		Assert.assertEquals(fMetadata.getGenerator(), generator);
+		//ToDO: http://odftoolkit.org/bugzilla/show_bug.cgi?id=171
+		// Assert.assertEquals(fMetadata.getGenerator(), generator);
 		Assert.assertNull(fMetadata.getTitle());
 		Assert.assertNull(fMetadata.getDescription());
 		Assert.assertNull(fMetadata.getSubject());
 		Assert.assertNull(fMetadata.getKeywords());
-		Assert.assertNull(fMetadata.getInitialCreator());
-		Assert.assertNull(fMetadata.getCreator());
 		Assert.assertNull(fMetadata.getPrintedBy());
-		Assert.assertNull(fMetadata.getLanguage());
-		Assert.assertNull(fMetadata.getEditingCycles());
-		Assert.assertNull(fMetadata.getEditingDuration());
-		Assert.assertNull(fMetadata.getCreationDate());
 		Assert.assertNull(fMetadata.getPrintDate());
-		Assert.assertNull(fMetadata.getDcdate());
 		Assert.assertNotNull(fMetadata.getUserDefinedDataNames());
+	}
+	
+	@Test
+	public void testReadDocumentMeta() throws Exception {
+		// create a new empty document
+		OdfTextDocument textDoc = OdfTextDocument.newTextDocument();
+		textDoc.save(ResourceUtilities.newTestOutputFile("DocForMetaTest.odt"));
+		textDoc.close();
+		// read empty document meta
+		textDoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("DocForMetaTest.odt"));
+		OdfOfficeMeta meta = textDoc.getOfficeMetadata();
+		Assert.assertNotNull(meta.getGenerator());
+		Assert.assertNotNull(meta.getCreationDate());
+		Assert.assertNotNull(meta.getCreator());
+		Assert.assertNotNull(meta.getDcdate());
+		Assert.assertTrue(meta.getEditingCycles()>0);
+		Assert.assertNotNull(meta.getEditingDuration());
+		Assert.assertNotNull(meta.getLanguage());
+		textDoc.close();
 	}
 }

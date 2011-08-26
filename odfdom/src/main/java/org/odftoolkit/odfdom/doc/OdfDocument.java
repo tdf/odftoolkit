@@ -33,12 +33,16 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.Source;
@@ -48,6 +52,7 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
+
 import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
@@ -71,6 +76,7 @@ import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
+import org.odftoolkit.odfdom.type.Duration;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -97,11 +103,14 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	private OdfOfficeMeta mOfficeMeta;
 	private StringBuilder mCharsForTextNode = new StringBuilder();
 	private XPath mXPath;
-
+	private long documentOpeningTime;
+	
 	// Using static factory instead of constructor
 	protected OdfDocument(OdfPackage pkg, String internalPath, OdfMediaType mediaType) {
 		super(pkg, internalPath, mediaType.getMediaTypeString());
 		mMediaType = mediaType;
+		//set document opening time.
+		documentOpeningTime = System.currentTimeMillis();
 	}
 
 	/**
@@ -194,7 +203,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	}
 
 	/**
-	 * Loads an OpenDocument from the given resource
+	 * Loads an OpenDocument from the given resource. NOTE: Initial meta data will be added in this method.
 	 * @param res a resource containing a package with a root document
 	 * @param odfMediaType the media type of the root document
 	 * @return the OpenDocument document
@@ -209,7 +218,10 @@ public abstract class OdfDocument extends OdfPackageDocument {
 		} finally {
 			in.close();
 		}
-		return newDocument(pkg, ROOT_DOCUMENT_PATH, odfMediaType);
+		OdfDocument newDocument = newDocument(pkg, ROOT_DOCUMENT_PATH, odfMediaType);
+		//add initial meta data to new document.
+		initializeMetaData(newDocument);
+		return newDocument;
 	}
 
 	/**
@@ -318,7 +330,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 				documentTemplate = null;
 				break;
 		}
-		return OdfDocument.loadTemplate(documentTemplate, odfMediaType);
+		return loadTemplate(documentTemplate, odfMediaType);
 	}
 
 	/**
@@ -654,12 +666,15 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	 * Get the meta data feature instance of the current document
 	 * 
 	 * @return the meta data feature instance which represent 
-	 * <code>office:meta</code> in the meta.xml
-	 * @throws Exception if the file meta DOM could not be created.
+	 * <code>office:meta</code> in the meta.xml	 
 	 */
-	public OdfOfficeMeta getOfficeMetadata() throws Exception {
+	public OdfOfficeMeta getOfficeMetadata() {
 		if (mOfficeMeta == null) {
-			mOfficeMeta = new OdfOfficeMeta(getMetaDom());
+			try {
+				mOfficeMeta = new OdfOfficeMeta(getMetaDom());
+			} catch (Exception ex) {
+				Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		}
 		return mOfficeMeta;
 	}
@@ -703,14 +718,14 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	public void save(OutputStream out) throws Exception {
 		//2DO FLUSH AND SAVE IN PACKAGE
 		flushDescendantDOMsToPkg(this);
+		updateMetaData();
 		if (!isRootDocument()) {
 			OdfDocument newDoc = loadDocumentFromTemplate(getOdfMediaType());
 			newDoc.insertDocument(this, ROOT_DOCUMENT_PATH);
+			newDoc.updateMetaData();
 			newDoc.mPackage.save(out);
 			// ToDo: (Issue 219 - PackageRefactoring) - Return the document, when not closing!
 			// Should we close the sources now? User will never receive the open package!
-
-
 		} else {
 			//2DO MOVE CACHE TO PACKAGE
 //			// the root document only have to flush the DOM of all open child documents
@@ -742,9 +757,11 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	public void save(File file) throws Exception {
 		//2DO FLUSH AND SAVE IN PACKAGE
 		flushDescendantDOMsToPkg(this);
+		updateMetaData();
 		if (!isRootDocument()) {
 			OdfDocument newDoc = loadDocumentFromTemplate(getOdfMediaType());
 			newDoc.insertDocument(this, ROOT_DOCUMENT_PATH);
+			newDoc.updateMetaData();
 			newDoc.mPackage.save(file);
 			// ToDo: (Issue 219 - PackageRefactoring) - Return the document, when not closing!
 			// Should we close the sources now? User will never receive the open package!
@@ -1303,8 +1320,6 @@ public abstract class OdfDocument extends OdfPackageDocument {
 	 */
 	public List<OdfTable> getTableList() {
 		List<OdfTable> tableList = new ArrayList<OdfTable>();
-
-
 		try {
 			OdfElement root = getContentDom().getRootElement();
 			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
@@ -1323,5 +1338,77 @@ public abstract class OdfDocument extends OdfPackageDocument {
 		}
 		return tableList;
 
+	}
+	
+	/**
+	 * Meta data about the document will be initialized.
+	 * Following metadata data is being added:
+	 * <ul>
+	 * <li>The initial creator name will be the Java user.name System property.</li>
+	 * <li>The date and time when this document was created using the current data.</li>
+	 * <li>The number of times this document has been edited.</li>
+	 * <li>The default language will be the Java user.language System property.</li>
+	 * </ul>
+	 * @param newDoc  the OdfDocument object which need to initialize meta data.
+	 * 
+	 * TODO:This method will be moved to OdfMetadata class. 
+	 *      see http://odftoolkit.org/bugzilla/show_bug.cgi?id=204
+	 */
+	private static void initializeMetaData(OdfDocument newDoc) {
+		OdfOfficeMeta metaData = newDoc.getOfficeMetadata();
+		// add initial-creator info.
+		String creator = System.getProperty("user.name");
+		metaData.setInitialCreator(creator);
+		// add creation-date info.
+		Calendar calendar = Calendar.getInstance();
+		metaData.setCreationDate(calendar);
+		// add editing-cycles info.
+		metaData.setEditingCycles(0);
+		// add language info.
+		String language = System.getProperty("user.language");
+		if (language != null) {
+			metaData.setLanguage(language);
+		}
+	}
+
+	/**
+	 * Update document meta data in the ODF document. Following metadata data is
+	 * being updated:
+	 * <ul>
+	 * <li>The name of the person who last modified this document will be the Java user.name System property</li>
+	 * <li>The date and time when the document was last modified using current data</li>
+	 * <li>The number of times this document has been edited is incremented by 1</li>
+	 * <li>The total time spent editing this document</li>
+	 * </ul>
+	 * 
+	 * TODO:This method will be moved to OdfMetadata class. 
+	 *      see http://odftoolkit.org/bugzilla/show_bug.cgi?id=204
+	 */
+	private void updateMetaData() {
+		if (mMetaDom != null) {
+			OdfOfficeMeta metaData = getOfficeMetadata();
+			String creator = System.getProperty("user.name");
+			// update creator info.
+			metaData.setCreator(creator);
+			// update date info.
+			Calendar calendar = Calendar.getInstance();
+			metaData.setDcdate(calendar);
+			// update editing-cycles info.
+			Integer cycle = metaData.getEditingCycles();
+			if (cycle != null) {
+				metaData.setEditingCycles(++cycle);
+			} else {
+				metaData.setEditingCycles(1);
+			}
+			// update editing-duration info.
+			long editingDuration = calendar.getTimeInMillis() - documentOpeningTime;
+			try {
+				DatatypeFactory aFactory = DatatypeFactory.newInstance();
+				metaData.setEditingDuration(new Duration(aFactory.newDurationDayTime(editingDuration)));
+			} catch (DatatypeConfigurationException e) {
+				Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE,
+						"editing duration update fail as DatatypeFactory can not be instanced", e);
+			}
+		}
 	}
 }

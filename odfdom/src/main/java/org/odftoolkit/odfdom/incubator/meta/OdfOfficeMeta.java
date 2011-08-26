@@ -20,7 +20,6 @@
  * limitations under the License.
  *
  ************************************************************************/
-
 package org.odftoolkit.odfdom.incubator.meta;
 
 import java.text.SimpleDateFormat;
@@ -70,10 +69,8 @@ public class OdfOfficeMeta {
 	 * @param metaDom	the file DOM element of meta.xml
 	 */
 	public OdfOfficeMeta(OdfFileDom metaDom) {
-		OfficeDocumentMetaElement metaEle = OdfElement.findFirstChildNode(
-				OfficeDocumentMetaElement.class, metaDom);
-		mOfficeMetaElement = OdfElement.findFirstChildNode(
-				OfficeMetaElement.class, metaEle);
+		OfficeDocumentMetaElement metaEle = OdfElement.findFirstChildNode(OfficeDocumentMetaElement.class, metaDom);
+		mOfficeMetaElement = OdfElement.findFirstChildNode(OfficeMetaElement.class, metaEle);
 	}
 
 	/**
@@ -277,8 +274,7 @@ public class OdfOfficeMeta {
 		}
 		// add new
 		for (int i = 0; i < keyList.size(); i++) {
-			MetaKeywordElement keywordElement = mOfficeMetaElement
-					.newMetaKeywordElement();
+			MetaKeywordElement keywordElement = mOfficeMetaElement.newMetaKeywordElement();
 			keywordElement.setTextContent(keyList.get(i));
 		}
 
@@ -292,8 +288,7 @@ public class OdfOfficeMeta {
 	 *            meta:keyword}.
 	 */
 	public void addKeyword(String keyword) {
-		MetaKeywordElement keywordElement = mOfficeMetaElement
-				.newMetaKeywordElement();
+		MetaKeywordElement keywordElement = mOfficeMetaElement.newMetaKeywordElement();
 		keywordElement.setTextContent(keyword);
 	}
 
@@ -342,14 +337,16 @@ public class OdfOfficeMeta {
 		MetaUserDefinedElement definedEle = OdfElement.findFirstChildNode(
 				MetaUserDefinedElement.class, mOfficeMetaElement);
 		if (definedEle != null) {
-			if (definedEle.getMetaNameAttribute().equals(name))
+			if (definedEle.getMetaNameAttribute().equals(name)) {
 				return definedEle;
+			}
 			MetaUserDefinedElement definedNext;
 			while ((definedNext = OdfElement.findNextChildNode(
 					MetaUserDefinedElement.class, definedEle)) != null) {
 
-				if (definedNext.getMetaNameAttribute().equals(name))
+				if (definedNext.getMetaNameAttribute().equals(name)) {
 					return definedNext;
+				}
 
 				definedEle = definedNext;
 			}
@@ -484,9 +481,8 @@ public class OdfOfficeMeta {
 	 * <code>null</code>, if the element is not set.
 	 */
 	public String getInitialCreator() {
-		MetaInitialCreatorElement iniCreatorEle = OdfElement
-				.findFirstChildNode(MetaInitialCreatorElement.class,
-						mOfficeMetaElement);
+		MetaInitialCreatorElement iniCreatorEle = OdfElement.findFirstChildNode(MetaInitialCreatorElement.class,
+				mOfficeMetaElement);
 		if (iniCreatorEle != null) {
 			return iniCreatorEle.getTextContent();
 		}
@@ -501,9 +497,8 @@ public class OdfOfficeMeta {
 	 * @param initialCreator set the specified initial creator
 	 */
 	public void setInitialCreator(String initialCreator) {
-		MetaInitialCreatorElement iniCreatorEle = OdfElement
-				.findFirstChildNode(MetaInitialCreatorElement.class,
-						mOfficeMetaElement);
+		MetaInitialCreatorElement iniCreatorEle = OdfElement.findFirstChildNode(MetaInitialCreatorElement.class,
+				mOfficeMetaElement);
 		if (iniCreatorEle == null) {
 			iniCreatorEle = mOfficeMetaElement.newMetaInitialCreatorElement();
 		}
@@ -588,9 +583,8 @@ public class OdfOfficeMeta {
 	 * <code>null</code>, if element is not set
 	 */
 	public Calendar getCreationDate() {
-		MetaCreationDateElement creationDateEle = OdfElement
-				.findFirstChildNode(MetaCreationDateElement.class,
-						mOfficeMetaElement);
+		MetaCreationDateElement creationDateEle = OdfElement.findFirstChildNode(MetaCreationDateElement.class,
+				mOfficeMetaElement);
 		if (creationDateEle != null) {
 			return stringToCalendar(creationDateEle.getTextContent());
 		}
@@ -605,9 +599,8 @@ public class OdfOfficeMeta {
 	 * @param creationDate	the date and time need to set
 	 */
 	public void setCreationDate(Calendar creationDate) {
-		MetaCreationDateElement creationDateEle = OdfElement
-				.findFirstChildNode(MetaCreationDateElement.class,
-						mOfficeMetaElement);
+		MetaCreationDateElement creationDateEle = OdfElement.findFirstChildNode(MetaCreationDateElement.class,
+				mOfficeMetaElement);
 		if (creationDateEle == null) {
 			creationDateEle = mOfficeMetaElement.newMetaCreationDateElement();
 		}
@@ -724,9 +717,8 @@ public class OdfOfficeMeta {
 	 * <code>null</code>, if the element is not set.
 	 */
 	public Integer getEditingCycles() {
-		MetaEditingCyclesElement editingCyclesEle = OdfElement
-				.findFirstChildNode(MetaEditingCyclesElement.class,
-						mOfficeMetaElement);
+		MetaEditingCyclesElement editingCyclesEle = OdfElement.findFirstChildNode(MetaEditingCyclesElement.class,
+				mOfficeMetaElement);
 		if (editingCyclesEle != null) {
 			return Integer.valueOf(editingCyclesEle.getTextContent());
 		}
@@ -741,9 +733,8 @@ public class OdfOfficeMeta {
 	 * @param editingCycles	set the specified edit times
 	 */
 	public void setEditingCycles(Integer editingCycles) {
-		MetaEditingCyclesElement editingCyclesEle = OdfElement
-				.findFirstChildNode(MetaEditingCyclesElement.class,
-						mOfficeMetaElement);
+		MetaEditingCyclesElement editingCyclesEle = OdfElement.findFirstChildNode(MetaEditingCyclesElement.class,
+				mOfficeMetaElement);
 		if (editingCyclesEle == null) {
 			editingCyclesEle = mOfficeMetaElement.newMetaEditingCyclesElement();
 		}
@@ -760,9 +751,8 @@ public class OdfOfficeMeta {
 	 * <code>null</code>, if the element is not set.
 	 */
 	public Duration getEditingDuration() {
-		MetaEditingDurationElement editiingDurationEle = OdfElement
-				.findFirstChildNode(MetaEditingDurationElement.class,
-						mOfficeMetaElement);
+		MetaEditingDurationElement editiingDurationEle = OdfElement.findFirstChildNode(MetaEditingDurationElement.class,
+				mOfficeMetaElement);
 		if (editiingDurationEle != null) {
 			return Duration.valueOf(editiingDurationEle.getTextContent());
 		}
@@ -777,12 +767,10 @@ public class OdfOfficeMeta {
 	 * @param editingDuration the time need to set
 	 */
 	public void setEditingDuration(Duration editingDuration) {
-		MetaEditingDurationElement editiingDurationEle = OdfElement
-				.findFirstChildNode(MetaEditingDurationElement.class,
-						mOfficeMetaElement);
+		MetaEditingDurationElement editiingDurationEle = OdfElement.findFirstChildNode(MetaEditingDurationElement.class,
+				mOfficeMetaElement);
 		if (editiingDurationEle == null) {
-			editiingDurationEle = mOfficeMetaElement
-					.newMetaEditingDurationElement();
+			editiingDurationEle = mOfficeMetaElement.newMetaEditingDurationElement();
 		}
 		editiingDurationEle.setTextContent(editingDuration.toString());
 
@@ -798,10 +786,11 @@ public class OdfOfficeMeta {
 	 */
 	public OdfMetaDocumentStatistic getDocumentStatistic() {
 		MetaDocumentStatisticElement element = getDocumentStatisticElement();
-		if (element != null)
+		if (element != null) {
 			return new OdfMetaDocumentStatistic(element);
-		else
+		} else {
 			return null;
+		}
 	}
 
 	/**
@@ -907,8 +896,6 @@ public class OdfOfficeMeta {
 	 * @return the String format(yyyy-MM-dd'T'HH:mm:ss) of Calendar.
 	 */
 	private String calendarToString(Calendar calendar) {
-		return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(calendar
-				.getTime());
+		return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(calendar.getTime());
 	}
-
 }
