@@ -76,9 +76,9 @@
             <param name="add-xrefs" expression="false"/>
             <param name="keep-anchors" expression="false"/>
             <param name="toc-hyperlink-mode" expression="adapt"/>
-            <param name="part1-content-path" expression="${part1-dir}/content.xml"/>
-            <param name="part2-content-path" expression="${part2-dir}/content.xml"/>
-            <param name="part3-content-path" expression="${part3-dir}/content.xml"/>
+            <param name="part1-content-path" expression="jar:file:${opendocument.v12.product.dir}/${part1.spec-target.noext}.odt!/content.xml"/>
+            <param name="part2-content-path" expression="jar:file:${opendocument.v12.product.dir}/${part1.spec-target.noext}.odt!/content.xml"/>
+            <param name="part3-content-path" expression="jar:file:${opendocument.v12.product.dir}/${part1.spec-target.noext}.odt!/content.xml"/>
             <param name="part1-toc-rel-path" expression="${part1.spec-target.noext}.odt"/>
             <param name="part2-toc-rel-path" expression="${part2.spec-target.noext}.odt"/>
             <param name="part3-toc-rel-path" expression="${part3.spec-target.noext}.odt"/>
@@ -339,13 +339,13 @@
             </not>
         </condition>
         <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
-        <odfxslt style="${project.odfxsltrunner}/sample_xslt/replace-mathml-objects.xsl"
+        <odfxslt style="${project.odfxsltrunner}/sample_xslt/replace-objects.xsl"
                  in="${opendocument.v12.product.dir}/OpenDocument-v1.2${state.target}${part}.odt"
                  out="${target-file}"
                  force="${force}">
             <param name="ref-html" expression="${ooo-xhtml}"/>
         </odfxslt>
-        <odfxslt style="${project.odfxsltrunner}/sample_xslt/replace-mathml-objects-list.xsl"
+        <odfxslt style="${project.odfxsltrunner}/sample_xslt/replace-objects-list.xsl"
                  in="${opendocument.v12.product.dir}/OpenDocument-v1.2${state.target}${part}.odt"
                  outfile="${image-list}"
                  force="${force}">
