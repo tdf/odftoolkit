@@ -46,82 +46,66 @@ import com.sun.msv.grammar.ValueExp;
  */
 public class MSVExpressionVisitorType implements ExpressionVisitor {
 
-    @Override
     public MSVExpressionType onAnyString() {
         return MSVExpressionType.STRING;
     }
 
-    @Override
     public MSVExpressionType onAttribute(AttributeExp arg0) {
         return MSVExpressionType.ATTRIBUTE;
     }
 
-    @Override
     public MSVExpressionType onChoice(ChoiceExp arg0) {
         return MSVExpressionType.CHOICE;
     }
 
-    @Override
     public MSVExpressionType onConcur(ConcurExp arg0) {
         return MSVExpressionType.CONCUR;
     }
 
-    @Override
     public MSVExpressionType onData(DataExp arg0) {
         return MSVExpressionType.DATA;
     }
 
-    @Override
     public MSVExpressionType onElement(ElementExp arg0) {
         return MSVExpressionType.ELEMENT;
     }
 
-    @Override
     public MSVExpressionType onEpsilon() {
         return MSVExpressionType.EPSILON;
     }
 
-    @Override
     public MSVExpressionType onInterleave(InterleaveExp arg0) {
         return MSVExpressionType.INTERLEAVE;
     }
 
-    @Override
     public MSVExpressionType onList(ListExp arg0) {
         return MSVExpressionType.LIST;
     }
 
-    @Override
     public MSVExpressionType onMixed(MixedExp arg0) {
         return MSVExpressionType.MIXED;
     }
 
-    @Override
     public MSVExpressionType onNullSet() {
         return MSVExpressionType.NULLSET;
     }
 
-    @Override
     public MSVExpressionType onOneOrMore(OneOrMoreExp arg0) {
         return MSVExpressionType.ONEOREMORE;
     }
 
-    @Override
     public MSVExpressionType onOther(OtherExp arg0) {
         return MSVExpressionType.OTHER;
     }
 
-    @Override
     public MSVExpressionType onRef(ReferenceExp arg0) {
         return MSVExpressionType.REF;
     }
 
-    @Override
     public MSVExpressionType onSequence(SequenceExp arg0) {
         return MSVExpressionType.SEQUENCE;
     }
 
-    @Override
     public MSVExpressionType onValue(ValueExp arg0) {
         return MSVExpressionType.VALUE;
     }

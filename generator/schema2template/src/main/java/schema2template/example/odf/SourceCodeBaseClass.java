@@ -45,37 +45,30 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass>, QNa
         mOdfmodel = odfmodel;
     }
 
-    @Override
     public int compareTo(SourceCodeBaseClass o) {
         return mBasename.compareTo(o.mBasename);
     }
 
-    @Override
     public boolean equals(Object o) {
         return (o instanceof SourceCodeBaseClass && ((SourceCodeBaseClass) o).mBasename.equals(mBasename));
     }
 
-    @Override
     public int hashCode() {
         return mBasename.hashCode();
     }
 
-    @Override
     public String getLocalName() {
         return XMLModel.extractLocalname(mBasename);
     }
 
-    @Override
     public String getQName() {
         return mBasename;
     }
 
-    @Override
     public String getNamespace() {
         return XMLModel.extractNamespace(mBasename);
     }
 
-    @Override
     public String toString() {
         return getQName();
     }

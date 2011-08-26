@@ -56,12 +56,10 @@ public class MSVNameClassVisitorList implements NameClassVisitor {
 
     private static NamespaceDictionary nsdict = NamespaceDictionary.getStandardDictionary();
 
-    @Override
     public List<String> onAnyName(AnyNameClass arg0) {
         return single("*");
     }
 
-    @Override
     public List<String> onChoice(ChoiceNameClass arg0) {
         List<String> retval = new ArrayList<String>();
         retval.addAll((List<String>) arg0.nc1.visit(this));
@@ -69,22 +67,18 @@ public class MSVNameClassVisitorList implements NameClassVisitor {
         return retval;
     }
 
-    @Override
     public List<String> onDifference(DifferenceNameClass arg0) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
     public List<String> onNot(NotNameClass arg0) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
     public List<String> onNsName(NamespaceNameClass arg0) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
     public List<String> onSimple(SimpleNameClass arg0) {
         return single(simplify(arg0.namespaceURI, arg0.localName));
     }

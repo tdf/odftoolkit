@@ -108,7 +108,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	 * @param b Another object
 	 * @return Whether both objects equal
 	 */
-	@Override
 	public boolean equals(Object b) {
 		if (b instanceof PuzzlePiece) {
 			PuzzlePiece d = (PuzzlePiece) b;
@@ -122,7 +121,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	/**
 	 * Uses the wrapped MSV Expression for the hashCode. MSV Expressions are numbered consecutively by a distinct Hash Code.
 	 */
-	@Override
 	public int hashCode() {
 		return mExpression.hashCode();
 	}
@@ -134,7 +132,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	 * @param o Other Object
 	 * @return Comparison
 	 */
-	@Override
 	public int compareTo(PuzzlePiece o) {
 		int retval = mName.compareTo(o.mName);
 		if (retval != 0) {
@@ -196,17 +193,14 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	 *
 	 * @return The tag name
 	 */
-	@Override
 	public String getQName() {
 		return mName;
 	}
 
-	@Override
 	public String getLocalName() {
 		return XMLModel.extractLocalname(mName);
 	}
 
-	@Override
 	public String getNamespace() {
 		return XMLModel.extractNamespace(mName);
 	}
@@ -216,7 +210,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	 *
 	 * <p>Template Usage: Just use $aDefinition as you would use a string variable.</p>
 	 */
-	@Override
 	public String toString() {
 		return getQName();
 	}
@@ -226,7 +219,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	 *
 	 * @return The ExpressionType of this PuzzlePiece
 	 */
-	@Override
 	public MSVExpressionType getType() {
 		return (MSVExpressionType) mExpression.visit(TYPE_VISITOR);
 	}
@@ -243,12 +235,10 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	/**
 	 * Determines whether this Element can have a text node as child
 	 */
-	@Override
 	public boolean canHaveText() {
 		return mCanHaveText;
 	}
 
-	@Override
 	public boolean isSingleton(PuzzleComponent child) {
 		for (PuzzlePiece element : child.getCollection()) {
 			if (mMultipleChildExpressions.contains(element.getExpression())) {
@@ -261,7 +251,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 		return true;
 	}
 
-	@Override
 	public Collection<PuzzlePiece> getCollection() {
 		return Collections.singletonList(this);
 	}
@@ -298,7 +287,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	 *
 	 * @return The parent Definitions
 	 */
-	@Override
 	public PuzzlePieceSet getParents() {
 		return mParents;
 	}
@@ -308,12 +296,10 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	 *
 	 * @return The child Definitions of type ELEMENT
 	 */
-	@Override
 	public PuzzlePieceSet getChildElements() {
 		return mChildElements;
 	}
 
-	@Override
 	public boolean isMandatory(QNamedPuzzleComponent child) {
 		switch (child.getType()) {
 			case ATTRIBUTE:
@@ -335,7 +321,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	 *
 	 * @return The child Definitions of type ATTRIBUTE
 	 */
-	@Override
 	public PuzzlePieceSet getAttributes() {
 		return mAttributes;
 	}
@@ -345,7 +330,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	 *
 	 * @return The constant values
 	 */
-	@Override
 	public PuzzlePieceSet getValues() {
 		return mValues;
 	}
@@ -355,7 +339,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	 *
 	 * @return The datatypes
 	 */
-	@Override
 	public PuzzlePieceSet getDatatypes() {
 		return mDatatypes;
 	}

@@ -177,7 +177,6 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
 		return returnValue;
 	}
 
-	@Override
 	public boolean hasNext() {
 		return (mCurrentExpression != null) ? true : false;
 	}
@@ -243,7 +242,6 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
 		return isNew;
 	}
 
-	@Override
 	public Expression next() {
 		if (mCurrentExpression == null) {
 			return null;
@@ -260,7 +258,6 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
 	}
 
 	// Unsupported
-	@Override
 	public void remove() {
 		throw new UnsupportedOperationException("Not supported.");
 

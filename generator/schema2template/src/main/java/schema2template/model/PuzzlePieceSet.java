@@ -78,12 +78,10 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
         }
     }
 
-    @Override
     public boolean equals(Object o) {
         return (o instanceof PuzzlePieceSet && ((PuzzlePieceSet) o).mDefinitions.equals(mDefinitions)) ? true : false;
     }
 
-    @Override
     public int hashCode() {
         return mDefinitions.hashCode();
     }
@@ -256,7 +254,6 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
      *
      * @return The tag name
      */
-    @Override
     public String getQName() {
         assertMultiples("get name");
         return first().getQName();
@@ -266,7 +263,6 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
      * Gets the type of the Definitions - provided that this PuzzlePieceSet
      * is not empty and all Definitions have the same type and name. Throws Exception otherwise.
      */
-    @Override
     public MSVExpressionType getType() {
         assertMultiples("get type");
         return first().getType();
@@ -276,7 +272,6 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
      * Determines whether the Definitions can have text - provided that this PuzzlePieceSet
      * is not empty and all Definitions have the same type and name. Throws Exception otherwise.
      */
-    @Override
     public boolean canHaveText() {
         assertMultiples("determine text availability");
         for (PuzzlePiece def : this) {
@@ -287,7 +282,6 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
         return false;
     }
 
-    @Override
     public boolean isSingleton(PuzzleComponent child) {
         for (PuzzlePiece def : this) {
             if (!def.isSingleton(child)) {
@@ -297,12 +291,10 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
         return true;
     }
 
-    @Override
     public String getLocalName() {
         return XMLModel.extractLocalname(getQName());
     }
 
-    @Override
     public String getNamespace() {
         return XMLModel.extractNamespace(getQName());
     }
@@ -312,7 +304,6 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
      *
      * <p>Template Usage: Just use $aDefinitionSet as you would use a string variable</p>
      */
-    @Override
     public String toString() {
         return getQName();
     }
@@ -323,73 +314,60 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
  * -----------------------------------------------------
  */
 
-    @Override
     public boolean add(PuzzlePiece e) {
         assertNotImmutable();
         return mDefinitions.add(e);
     }
 
-    @Override
     public boolean addAll(Collection<? extends PuzzlePiece> c) {
         assertNotImmutable();
         return mDefinitions.addAll(c);
     }
 
-    @Override
     public void clear() {
         assertNotImmutable();
         mDefinitions.clear();
     }
 
-    @Override
     public boolean contains(Object o) {
         return (o instanceof PuzzlePiece) ? mDefinitions.contains((PuzzlePiece) o) : false;
     }
 
-    @Override
     public boolean containsAll(Collection<?> c) {
         return mDefinitions.containsAll(c);
     }
 
-    @Override
     public boolean isEmpty() {
         return mDefinitions.isEmpty();
     }
 
-    @Override
     public Iterator<PuzzlePiece> iterator() {
         return mDefinitions.iterator();
     }
 
-    @Override
     public boolean remove(Object o) {
         assertNotImmutable();
         return (o instanceof PuzzlePiece) ? mDefinitions.remove((PuzzlePiece) o) : false;
     }
 
-    @Override
     public boolean removeAll(Collection<?> c) {
         assertNotImmutable();
         return mDefinitions.removeAll(c);
     }
 
-    @Override
     public boolean retainAll(Collection<?> c) {
         assertNotImmutable();
         return mDefinitions.retainAll(c);
     }
 
-    @Override
     public int size() {
         return mDefinitions.size();
     }
 
-    @Override
     public Object[] toArray() {
         return mDefinitions.toArray();
     }
 
-    @Override
     public <T> T[] toArray(T[] a) {
         return mDefinitions.toArray(a);
     }
@@ -400,7 +378,6 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
  * -----------------------------------------------------
  */
 
-    @Override
     public PuzzlePieceSet getChildElements() {
         PuzzlePieceSet retval = new PuzzlePieceSet();
         for (PuzzlePiece def : this) {
@@ -409,7 +386,6 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
         return retval;
     }
 
-    @Override
     public boolean isMandatory(QNamedPuzzleComponent child) {
         for (PuzzlePiece def : this) {
             if (def.isMandatory(child)) {
@@ -419,12 +395,10 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
         return false;
     }
 
-    @Override
     public Collection<PuzzlePiece> getCollection() {
         return mDefinitions;
     }
 
-    @Override
     public PuzzlePieceSet getAttributes() {
         PuzzlePieceSet retval = new PuzzlePieceSet();
         for (PuzzlePiece def : this) {
@@ -433,7 +407,6 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
         return retval;
     }
 
-    @Override
     public PuzzlePieceSet getDatatypes() {
         PuzzlePieceSet retval = new PuzzlePieceSet();
         for (PuzzlePiece def : this) {
@@ -442,7 +415,6 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
         return retval;
     }
 
-    @Override
     public PuzzlePieceSet getParents() {
         PuzzlePieceSet retval = new PuzzlePieceSet();
         for (PuzzlePiece def : this) {
@@ -452,7 +424,6 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
     }
 
 
-    @Override
     public PuzzlePieceSet getValues() {
         PuzzlePieceSet retval = new PuzzlePieceSet();
         for (PuzzlePiece def : this) {

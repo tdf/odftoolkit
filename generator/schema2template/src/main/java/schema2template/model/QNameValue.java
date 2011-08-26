@@ -41,32 +41,26 @@ public class QNameValue implements QNamed, Comparable<QNameValue> {
         mName = name;
     }
 
-    @Override
     public boolean equals(Object o) {
         return (o instanceof QNameValue) ? ((QNameValue) o).mName.equals(mName) : false;
     }
 
-    @Override
     public int hashCode() {
         return mName.hashCode();
     }
 
-    @Override
     public String getLocalName() {
         return XMLModel.extractLocalname(mName);
     }
 
-    @Override
     public String getQName() {
         return mName;
     }
 
-    @Override
     public String getNamespace() {
         return XMLModel.extractNamespace(mName);
     }
 
-    @Override
     public int compareTo(QNameValue o) {
         return this.mName.compareTo(o.mName);
     }
