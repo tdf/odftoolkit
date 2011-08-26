@@ -23,7 +23,9 @@ package org.odftoolkit.odfdom.doc.table;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,22 +33,34 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
+import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleFooterStyleElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleHeaderFooterPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleHeaderStyleElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
+import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutElement;
+import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderColumnsElement;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class TableTest {
 
-	final String mOdsTestFileName = "TestSpreadsheetTable";
-	final String mOdtTestFileName = "TestTextTable";
+	final static String mOdsTestFileName = "TestSpreadsheetTable";
+	final static String mOdtTestFileName = "TestTextTable";
 	OdfSpreadsheetDocument mOdsDoc;
 	OdfTextDocument mOdtDoc;
 	TableTableElement mOdsTable, mOdtTable;
@@ -96,19 +110,15 @@ public class TableTest {
 	@Test
 	public void testNewTableWithArrayData() {
 		try {
+			OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.newSpreadsheetDocument();
+
 			// reproduce bug 121
 			int rowCount = 10, columnCount = 4;
-			String[] rowLabels = new String[rowCount];
-			for (int i = 0; i < rowCount; i++) {
-				rowLabels[i] = "RowHeader" + i;
-			}
-			String[] columnLabels = new String[columnCount];
-			for (int i = 0; i < columnCount; i++) {
-				columnLabels[i] = "ColumnHeader" + i;
-			}
+			String[] rowLabels = getTestTableRowLabel(rowCount);
+			String[] columnLabels = getTestTableColumnLabel(columnCount);
 			double[][] doubleArray = null;
 			String[][] stringArray = null;
-			OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.newSpreadsheetDocument();
+
 			OdfTable table1 = OdfTable.newTable(spreadsheet, null, null,
 					doubleArray);
 			Assert.assertEquals(0, table1.getHeaderColumnCount());
@@ -144,12 +154,7 @@ public class TableTest {
 			// column count should be DEFAULT_COLUMN_COUNT+1 6
 			Assert.assertEquals(6, table1.getColumnCount());
 
-			doubleArray = new double[rowCount][columnCount];
-			for (int i = 0; i < rowCount; i++) {
-				for (int j = 0; j < columnCount; j++) {
-					doubleArray[i][j] = Math.random();
-				}
-			}
+			doubleArray = getTestTableDataDouble(rowCount, columnCount);
 			table1 = OdfTable.newTable(spreadsheet, null, null, doubleArray);
 			Assert.assertEquals(0, table1.getHeaderColumnCount());
 			Assert.assertEquals(0, table1.getHeaderRowCount());
@@ -369,7 +374,7 @@ public class TableTest {
 		try {
 			document = OdfTextDocument.newTextDocument();
 			document.newParagraph("Empty table:");
-			OdfTable table = createEmptyTable(document);			
+			OdfTable table = createEmptyTable(document);
 			table.setTableName(tablename);
 			Assert.assertEquals(tablename, table.getTableName());
 
@@ -380,11 +385,11 @@ public class TableTest {
 			Assert.assertNotNull(table);
 			String tablename2 = table.getTableName();
 			Assert.assertEquals(tablename, tablename2);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			Assert.fail(e.getMessage());
 		}
-		
-		try{
+
+		try {
 			//new another table with the same name
 			//an exception will be thrown
 			OdfTable table2 = OdfTable.newTable(document);
@@ -392,7 +397,7 @@ public class TableTest {
 			document.save(ResourceUtilities.newTestOutputFile("TestGetSetName.odt"));
 			Assert.fail("should not save the tables with the same table name.");
 		} catch (Exception e) {
-			if(! e.getMessage().startsWith("The table name is duplicate")) {
+			if (!e.getMessage().startsWith("The table name is duplicate")) {
 				Assert.fail(e.getMessage());
 			}
 		}
@@ -818,8 +823,7 @@ public class TableTest {
 	}
 
 	@Test
-	public void testGetCellWithAutoExtend()
-	{
+	public void testGetCellWithAutoExtend() {
 		OdfSpreadsheetDocument ods;
 		try {
 			ods = OdfSpreadsheetDocument.newSpreadsheetDocument();
@@ -834,7 +838,7 @@ public class TableTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testGetCellRangeByPosition() {
 		testNewTable();
@@ -1005,6 +1009,161 @@ public class TableTest {
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 		}
+	}
+
+	private String[] getTestTableRowLabel(int rowCount) {
+		String[] rowLabels = new String[rowCount];
+		for (int i = 0; i < rowCount; i++) {
+			rowLabels[i] = "RowHeader" + i;
+		}
+		return rowLabels;
+	}
+
+	private String[] getTestTableColumnLabel(int columnCount) {
+		String[] columnLabels = new String[columnCount];
+		for (int i = 0; i < columnCount; i++) {
+			columnLabels[i] = "columnHeader" + i;
+		}
+		return columnLabels;
+
+	}
+
+	private double[][] getTestTableDataDouble(int rowCount, int columnCount) {
+		double[][] doubleArray = new double[rowCount][columnCount];
+		for (int i = 0; i < rowCount; i++) {
+			for (int j = 0; j < columnCount; j++) {
+				doubleArray[i][j] = i * j;
+			}
+		}
+		return doubleArray;
+	}
+
+	// Bug 294 Enable Tables to be inserted in Header Footer
+	@Test
+	public void testTableInHeaderFooter() {
+		try {
+			OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(mOdtTestFileName + ".odt"));
+			Map<String, StyleMasterPageElement> masterPages1 = odfDoc.getMasterPages();
+			StyleMasterPageElement masterPage1 = masterPages1.get("Standard");
+			Assert.assertNotNull(masterPage1);
+			int rowCount = 4;
+			int columnCount = 5;
+			OdfTable.newTable(masterPage1.newStyleHeaderElement(), getTestTableRowLabel(rowCount), getTestTableRowLabel(columnCount), getTestTableDataDouble(rowCount, columnCount));
+			OdfTable.newTable(masterPage1.newStyleFooterElement(), getTestTableRowLabel(rowCount), getTestTableRowLabel(columnCount), getTestTableDataDouble(rowCount, columnCount));
+
+			// ToDo: Should be added as test when header/footer styles are supported in ODFDOM
+//			HashMap<String, String> pageProps1 = getPageStyleProps(odfDoc, masterPage1);
+//			HashMap<String, String> footerProps1 = getFooterStyleProps(odfDoc, masterPage1);
+//			HashMap<String, String> headerProps1 = getHeaderStyleProps(odfDoc, masterPage1);
+
+			odfDoc.save(ResourceUtilities.newTestOutputFile("TestHeaderFooter.odt"));
+			odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestHeaderFooter.odt"));
+			Map<String, StyleMasterPageElement> masterPages2 = odfDoc.getMasterPages();
+			StyleMasterPageElement masterPage2 = masterPages2.get("Standard");
+
+				// Test if the new footer exists
+			StyleHeaderElement headerContentRoot2 = OdfElement.findFirstChildNode(StyleHeaderElement.class, masterPage2);
+			Assert.assertNotNull(headerContentRoot2);
+			StyleFooterElement footerContentRoot2 = OdfElement.findFirstChildNode(StyleFooterElement.class, masterPage2);
+			Assert.assertNotNull(footerContentRoot2);
+			
+		} catch (Exception ex) {
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
+
+	private Map<String, StyleMasterPageElement> getMasterPages(OdfDocument doc) throws Exception {
+	
+		OdfStylesDom stylesDoc = doc.getStylesDom();
+		OfficeMasterStylesElement masterStyles = OdfElement.findFirstChildNode(OfficeMasterStylesElement.class, stylesDoc.getRootElement());
+		Map<String, StyleMasterPageElement> masterPages = null;
+		if (masterStyles != null) {
+			NodeList lstMasterPages = stylesDoc.getElementsByTagNameNS(OdfDocumentNamespace.STYLE.getUri(), "master-page");
+			if (lstMasterPages != null && lstMasterPages.getLength() > 0) {
+				masterPages = new HashMap<String, StyleMasterPageElement>();
+				for (int i = 0; i < lstMasterPages.getLength(); i++) {
+					StyleMasterPageElement masterPage = (StyleMasterPageElement) lstMasterPages.item(i); //Take the node from the list
+					// ODFDOM ToDo?: Drop Attribute Suffix for methods returning String values and NOT Attributes
+					// ODFDOM ToDo?: Why is a method with Attirbute ending returng the value? BETTER: Drop the suffix?
+					String styleName = masterPage.getStyleNameAttribute();
+					masterPages.put(styleName, masterPage);
+				}
+			}
+		}
+		return masterPages;
+	}
+
+	// ODFDOM ToDo: http://odftoolkit.org/bugzilla/show_bug.cgi?id=293
+	// 293 - Adding optional Maps to generated ODF sources for indexed ODF elements
+	// Method To be moved on StyleMasterPageElement
+	private HashMap<String, String> getPageStyleProps(OdfDocument odfDoc, StyleMasterPageElement masterPage) throws Exception {
+		StylePageLayoutElement pageLayout = getMasterPageLayout(odfDoc, masterPage);
+
+		// ToDo: Access methods for MasterPage children NOT available!! & drop prefix/suffix
+		StylePageLayoutPropertiesElement pagePropsElement = OdfElement.findFirstChildNode(StylePageLayoutPropertiesElement.class, pageLayout);
+		Assert.assertNotNull(pagePropsElement);
+
+		// fill map with header attributes name/values
+		HashMap<String, String> pageProps = new HashMap<String, String>();
+		NamedNodeMap pageAttrs = pagePropsElement.getAttributes();
+		for (int i = 0; i < pageAttrs.getLength(); i++) {
+			pageProps.put(pageAttrs.item(i).getNamespaceURI() + pageAttrs.item(i).getLocalName(), pageAttrs.item(i).getNodeValue());
+		}
+		return pageProps;
+	}
+
+	// ODFDOM ToDo: http://odftoolkit.org/bugzilla/show_bug.cgi?id=293
+	// 293 - Adding optional Maps to generated ODF sources for indexed ODF elements
+	// Method To be moved on StyleMasterPageElement
+	private HashMap<String, String> getHeaderStyleProps(OdfDocument odfDoc, StyleMasterPageElement masterPage) throws Exception {
+		StylePageLayoutElement pageLayout = getMasterPageLayout(odfDoc, masterPage);
+		// ToDo: Combine a GETTER for header Properties in one method
+		StyleHeaderStyleElement headerStyle = OdfElement.findFirstChildNode(StyleHeaderStyleElement.class, pageLayout);
+		Assert.assertNotNull(headerStyle);
+		StyleHeaderFooterPropertiesElement headerStyleProps = OdfElement.findFirstChildNode(StyleHeaderFooterPropertiesElement.class, headerStyle);
+		Assert.assertNotNull(headerStyleProps);
+		// fill map with header attributes name/values
+		HashMap<String, String> headerProps = new HashMap<String, String>();
+		NamedNodeMap headerAttrs = headerStyleProps.getAttributes();
+		for (int i = 0; i < headerAttrs.getLength(); i++) {
+			headerProps.put(headerAttrs.item(i).getNamespaceURI() + headerAttrs.item(i).getLocalName(), headerAttrs.item(i).getNodeValue());
+		}
+		return headerProps;
+	}
+
+	// ODFDOM ToDo: http://odftoolkit.org/bugzilla/show_bug.cgi?id=293
+	// 293 - Adding optional Maps to generated ODF sources for indexed ODF elements
+	// Method To be moved on StyleMasterPageElement
+	private HashMap<String, String> getFooterStyleProps(OdfDocument odfDoc, StyleMasterPageElement masterPage) throws Exception {
+		StylePageLayoutElement pageLayout = getMasterPageLayout(odfDoc, masterPage);
+		// ODFDOM ToDo: Combine a GETTER for footer Properties in one method
+		StyleFooterStyleElement footerStyle = OdfElement.findFirstChildNode(StyleFooterStyleElement.class, pageLayout);
+		Assert.assertNotNull(footerStyle);
+		StyleHeaderFooterPropertiesElement footerStyleProps = OdfElement.findFirstChildNode(StyleHeaderFooterPropertiesElement.class, footerStyle);
+		Assert.assertNotNull(footerStyleProps);
+
+		// fill map with header attributes name/values
+		HashMap<String, String> footerProps = new HashMap<String, String>();
+		NamedNodeMap footerAttrs = footerStyleProps.getAttributes();
+		for (int i = 0; i < footerAttrs.getLength(); i++) {
+			footerProps.put(footerAttrs.item(i).getNamespaceURI() + footerAttrs.item(i).getLocalName(), footerAttrs.item(i).getNodeValue());
+		}
+		return footerProps;
+	}
+
+	// ODFDOM ToDo: http://odftoolkit.org/bugzilla/show_bug.cgi?id=292
+	// 292 - Usability: Generated ODF classes shall provide getter to element children
+	// Method should be generated per se
+	private StylePageLayoutElement getMasterPageLayout(OdfDocument odfDoc, StyleMasterPageElement masterPage) throws Exception {
+		// ODFDOM ToDo: Drop StylePageLayout as convenient and move those functions to convenient DOM part
+		// ODFDOM ToDo: Drop "Odf" Prefix, Drop Styles Prefix
+		// ODFDOM ToDo: Add methods to dedicated generated classes? (e.g. OfficeAutomaticStylesElement ?) BEST -- fill into a existing Java tempalte?
+		String pageLayoutName = masterPage.getStylePageLayoutNameAttribute();
+		Assert.assertNotNull(pageLayoutName);
+		StylePageLayoutElement pageLayout = odfDoc.getStylesDom().getAutomaticStyles().getPageLayout(pageLayoutName);
+		Assert.assertNotNull(pageLayout);
+		return pageLayout;
 	}
 
 	private void testAppendRow(TableTableElement table) {

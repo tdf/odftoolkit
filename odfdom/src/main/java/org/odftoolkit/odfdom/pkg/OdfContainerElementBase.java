@@ -28,14 +28,12 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
 /**
- * base class for elements that want to be notified when OdfElement child
- * nodes are removed or inserted.
+ * Overwriting the DOM methods for element access, whenever a new ODF element was added triggering
+ * <code>onOdfNodeInserted</code> and when removed a <code>onOdfNodeRemoved.</code>.
+ * Yet not overriding all DOM access methods, esp. not the access on key attributes, eg. @style-name.
  */
 abstract public class OdfContainerElementBase extends OdfElement {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6944696143015713668L;
 	// moved to this class as only used for style handling
 	protected OdfPackageDocument mPackageDocument;

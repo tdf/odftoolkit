@@ -39,8 +39,9 @@ import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
-import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
@@ -60,6 +61,7 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfTableProperties;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.type.Length.Unit;
 import org.w3c.dom.DOMException;
@@ -336,9 +338,8 @@ public class OdfTable {
 		style.setProperty(StyleTableCellPropertiesElement.BorderBottom, "0.0007in solid #000000");
 	}
 
-	private static TableTableElement createTable(OdfDocument document, int numRows, int numCols, int headerRowNumber, int headerColumnNumber) throws Exception {
+	private static TableTableElement createTable(OdfElement parent, int numRows, int numCols, int headerRowNumber, int headerColumnNumber) throws Exception {
 		
-		boolean isSpreadsheet = document instanceof OdfSpreadsheetDocument;
 		
 		// check arguments
 		if (numRows < 1 || numCols < 1 || headerRowNumber < 0
@@ -347,12 +348,18 @@ public class OdfTable {
 			throw new IllegalArgumentException("Can not create table with the given parameters:\n"
 					+ "Rows " + numRows + ", Columns " + numCols + ", HeaderRows " + headerRowNumber + ", HeaderColumns " + headerColumnNumber);
 		}
-		OdfContentDom dom = document.getContentDom();
-		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
+		OdfFileDom dom = (OdfFileDom) parent.getOwnerDocument();
+		OdfOfficeAutomaticStyles styles = null;
+		if(dom instanceof OdfContentDom){
+			styles = ((OdfContentDom) dom).getAutomaticStyles();
+		}else if(dom instanceof OdfStylesDom){
+			styles = ((OdfStylesDom) dom).getAutomaticStyles();
+		}
+		
 		//1. create table element
 		TableTableElement newTEle = (TableTableElement) OdfXMLFactory.newOdfElement(dom,
 				OdfName.newName(OdfDocumentNamespace.TABLE, "table"));
-		String tablename = getUniqueTableName(document);
+		String tablename = getUniqueTableName(parent);
 		newTEle.setTableNameAttribute(tablename);
 		//create style
 		OdfStyle tableStyle = styles.newStyle(OdfStyleFamily.Table);
@@ -387,7 +394,8 @@ public class OdfTable {
 		//3. create row elements
 		//3.0 create 4 kinds of styles
 		OdfStyle lefttopStyle=null,leftbottomStyle=null,righttopStyle=null,rightbottomStyle=null;
-		
+
+		OdfPackageDocument document = dom.getDocument();
 		if (!document.getMediaTypeString().equals(OdfMediaType.SPREADSHEET.getMediaTypeString())) {
 			lefttopStyle = styles.newStyle(OdfStyleFamily.TableCell);
 			setLeftTopBorderStyleProperties(lefttopStyle);
@@ -416,7 +424,7 @@ public class OdfTable {
 					TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
 							OdfName.newName(OdfDocumentNamespace.TEXT, "p"));
 					aCell.appendChild(aParagraph);
-					if (!isSpreadsheet) {
+					if (!(document instanceof OdfSpreadsheetDocument)) {
 						if ((j + 1 == numCols) && (i == 0)) {
 							aCell.setStyleName(righttopStyle.getStyleNameAttribute());
 						} else if (i == 0) {
@@ -444,7 +452,7 @@ public class OdfTable {
 				TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
 						OdfName.newName(OdfDocumentNamespace.TEXT, "p"));
 				aCell.appendChild(aParagraph);
-				if (!isSpreadsheet) {
+				if (!(document instanceof OdfSpreadsheetDocument)) {
 					if ((j + 1 == numCols) && (i == 0)) {
 						aCell.setStyleName(righttopStyle.getStyleNameAttribute());
 					} else if (i == 0) {
@@ -463,29 +471,42 @@ public class OdfTable {
 		return newTEle;
 	}
 
+
+//	/**
+//	 * The given table will be appended at the end of the given document.
+//	 *
+//	 * @param document	the ODF document that contains this feature
+//	 * @return the created <code>OdfTable</code> feature instance
+//	 */
+//	public static void appendTable(TableTableElement table, OdfDocument document) {
+//		try {
+//			OdfElement contentRoot = document.getContentRoot();
+//			contentRoot.appendChild(table);
+//		} catch (DOMException e) {
+//			Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+//		} catch (Exception e) {
+//			Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+//		}
+//	}
+
+
 	/**
 	 * Construct the <code>OdfTable</code> feature.
 	 * The default column count is 5.
 	 * The default row count is 2.
 	 * <p>
-	 * The table will be inserted at the end of the document.
+	 * The table will be inserted at the end of the document the parent element belongs to.
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
 	 * <p>
 	 * If the document is a text document, cell borders will be created by default.
 	 * 
-	 * @param document	the ODF document that contains this feature 
+	 * @param tableParent the ODF element the new table will be appended to
 	 * @return the created <code>OdfTable</code> feature instance
 	 */
-	public static OdfTable newTable(OdfDocument document) {
+	public static OdfTable newTable(OdfElement tableParent) {
 		try {
-			TableTableElement newTEle = createTable(document, DEFAULT_ROW_COUNT, DEFAULT_COLUMN_COUNT, 0, 0);
-
-			//4. append to the end of document
-			OdfElement root = document.getContentDom().getRootElement();
-			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-			typedContent.appendChild(newTEle);
-
+			TableTableElement newTEle = createTable(tableParent, DEFAULT_ROW_COUNT, DEFAULT_COLUMN_COUNT, 0, 0);
+			tableParent.appendChild(newTEle);
 			return OdfTable.getInstance(newTEle);
 
 		} catch (DOMException e) {
@@ -497,8 +518,31 @@ public class OdfTable {
 		return null;
 	}
 
-	private static String getUniqueTableName(OdfDocument document) {
-		List<OdfTable> tableList = document.getTableList();
+	/**
+	 * Construct the <code>OdfTable</code> feature.
+	 * The default column count is 5.
+	 * The default row count is 2.
+	 * <p>
+	 * The table will be inserted at the end of the given document.
+	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * <p>
+	 * If the document is a text document, cell borders will be created by default.
+ 	 * @param document	the ODF document that contains this feature
+	 * @return the created <code>OdfTable</code> feature instance
+	 */
+	public static OdfTable newTable(OdfDocument document) {
+		OdfTable table = null;
+		try {
+			table = newTable(document.getContentRoot());
+		} catch (Exception ex) {
+			Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return table;
+	}
+
+	private static String getUniqueTableName(OdfElement tableParent) {
+		OdfFileDom dom = (OdfFileDom) tableParent.getOwnerDocument();
+		List<TableTableElement> tableList = ((OdfSchemaDocument) dom.getDocument()).getTables();
 		boolean notUnique = true;
 
 		String tablename = "Table" + (tableList.size() + 1);
@@ -506,7 +550,7 @@ public class OdfTable {
 		while (notUnique) {
 			notUnique = false;
 			for (int i = 0; i < tableList.size(); i++) {
-				if (tableList.get(i).getTableName().equalsIgnoreCase(tablename)) {
+				if (tableList.get(i).getTableNameAttribute().equalsIgnoreCase(tablename)) {
 					notUnique = true;
 					break;
 				}
@@ -517,7 +561,6 @@ public class OdfTable {
 		}
 
 		return tablename;
-
 	}
 
 	/**
@@ -529,20 +572,15 @@ public class OdfTable {
 	 * <p>
 	 * If the document is a text document, cell borders will be created by default.
 	 * 
-	 * @param document	the ODF document that contains this feature 
+	 * @param tableParent	the ODF element the new table will be appended to
 	 * @param numRows	the row number
 	 * @param numCols	the column number
 	 * @return a new instance of <code>OdfTable</code>
 	 */
-	public static OdfTable newTable(OdfDocument document, int numRows, int numCols) {
+	public static OdfTable newTable(OdfElement tableParent, int numRows, int numCols) {
 		try {
-			TableTableElement newTEle = createTable(document, numRows, numCols, 0, 0);
-
-			//4. append to the end of document
-			OdfElement root = document.getContentDom().getRootElement();
-			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-			typedContent.appendChild(newTEle);
+			TableTableElement newTEle = createTable(tableParent, numRows, numCols, 0, 0);
+			tableParent.appendChild(newTEle);
 
 			return OdfTable.getInstance(newTEle);
 		
@@ -553,31 +591,50 @@ public class OdfTable {
 		return null;
 	}
 
+
 	/**
 	 * Construct the <code>OdfTable</code> feature
-	 * with a specified row number, column number, header row number, header column number.
+	 * with a specified row number and column number.
 	 * <p>
 	 * The table will be inserted at the end of the document.
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
 	 * <p>
 	 * If the document is a text document, cell borders will be created by default.
+	 *
+	 * @param document	the ODF document that contains this feature
+	 * @param numRows	the row number
+	 * @param numCols	the column number
+	 * @return a new instance of <code>OdfTable</code>
+	 */
+	public static OdfTable newTable(OdfDocument document, int numRows, int numCols) {
+			OdfTable table = null;
+		try {
+			table = newTable(document.getContentRoot(), numRows, numCols);
+		} catch (Exception ex) {
+			Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return table;
+	}
+
+	/**
+	 * Construct the <code>OdfTable</code> feature
+	 * with a specified row number, column number, header row number, header column number.
+	 * <p>
+	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * <p>
+	 * If the document is a text document, cell borders will be created by default.
 	 * 
-	 * @param document	the ODF document that contains this feature 
+	 * @param tableParent the ODF element the new table will be appended to
 	 * @param numRows	the row number
 	 * @param numCols	the column number
 	 * @param headerRowNumber	the header row number
 	 * @param headerColumnNumber	the header column number
 	 * @return a new instance of <code>OdfTable</code>
 	 * */
-	public static OdfTable newTable(OdfDocument document, int numRows, int numCols, int headerRowNumber, int headerColumnNumber) {
+	public static OdfTable newTable(OdfElement tableParent, int numRows, int numCols, int headerRowNumber, int headerColumnNumber) {
 		try {
-			TableTableElement newTEle = createTable(document, numRows, numCols, headerRowNumber, headerColumnNumber);
-
-			//4. append to the end of document
-			OdfElement root = document.getContentDom().getRootElement();
-			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-			typedContent.appendChild(newTEle);
+			TableTableElement newTEle = createTable(tableParent, numRows, numCols, headerRowNumber, headerColumnNumber);
+			tableParent.appendChild(newTEle);
 
 			return OdfTable.getInstance(newTEle);
 
@@ -599,14 +656,41 @@ public class OdfTable {
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
 	 * <p>
 	 * If the document is a text document, cell borders will be created by default.
-	 * 
+	 *
 	 * @param document	the ODF document that contains this feature
+	 * @param numRows	the row number
+	 * @param numCols	the column number
+	 * @param headerRowNumber	the header row number
+	 * @param headerColumnNumber	the header column number
+	 * @return a new instance of <code>OdfTable</code>
+	 */
+	public static OdfTable newTable(OdfDocument document, int numRows, int numCols, int headerRowNumber, int headerColumnNumber) {
+		OdfTable table = null;
+		try {
+			table = newTable(document.getContentRoot(), numRows, numCols, headerRowNumber, headerColumnNumber);
+		} catch (Exception ex) {
+			Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return table;
+	}
+
+	/**
+	 * Construct the OdfTable feature
+	 * with a specified 2 dimension array as the data of this table.
+	 * The value type of each cell is float.
+	 * <p>
+	 * The table will be inserted at the end of the document.
+	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * <p>
+	 * If the document is a text document, cell borders will be created by default.
+	 * 
+	 * @param tableParent	the ODF document that contains this feature
 	 * @param rowLabel	set as the header row, it can be null if no header row needed
 	 * @param columnLabel	set as the header column, it can be null if no header column needed
 	 * @param data	the two dimension array of double as the data of this table
 	 * @return a new instance of <code>OdfTable</code>
 	 */
-	public static OdfTable newTable(OdfDocument document, String[] rowLabel, String[] columnLabel, double[][] data) {
+	public static OdfTable newTable(OdfElement tableParent, String[] rowLabel, String[] columnLabel, double[][] data) {
 		int rowNumber = DEFAULT_ROW_COUNT;
 		int columnNumber = DEFAULT_COLUMN_COUNT;
 		if (data != null) {
@@ -623,13 +707,8 @@ public class OdfTable {
 		}
 
 		try {
-			TableTableElement newTEle = createTable(document, rowNumber + rowHeaders, columnNumber + columnHeaders, rowHeaders, columnHeaders);
-
-			//4. append to the end of document
-			OdfElement root = document.getContentDom().getRootElement();
-			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-			typedContent.appendChild(newTEle);
+			TableTableElement newTEle = createTable(tableParent, rowNumber + rowHeaders, columnNumber + columnHeaders, rowHeaders, columnHeaders);
+			tableParent.appendChild(newTEle);
 
 			OdfTable table = OdfTable.getInstance(newTEle);
 			List<OdfTableRow> rowList = table.getRowList();
@@ -661,16 +740,40 @@ public class OdfTable {
 					}
 				}
 			}
-
 			return table;
-
 		} catch (DOMException e) {
 			Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		} catch (Exception e) {
 			Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
-
 		return null;
+	}
+
+
+	/**
+	 * Construct the OdfTable feature
+	 * with a specified 2 dimension array as the data of this table.
+	 * The value type of each cell is float.
+	 * <p>
+	 * The table will be inserted at the end of the document.
+	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * <p>
+	 * If the document is a text document, cell borders will be created by default.
+	 *
+	 * @param document	the ODF document that contains this feature
+	 * @param rowLabel	set as the header row, it can be null if no header row needed
+	 * @param columnLabel	set as the header column, it can be null if no header column needed
+	 * @param data	the two dimension array of double as the data of this table
+	 * @return a new instance of <code>OdfTable</code>
+	 */
+	public static OdfTable newTable(OdfDocument document, String[] rowLabel, String[] columnLabel, double[][] data) {
+		OdfTable table = null;
+		try {
+			table = newTable(document.getContentRoot(), rowLabel, columnLabel, data);
+		} catch (Exception ex) {
+			Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return table;
 	}
 
 	/**
@@ -683,13 +786,13 @@ public class OdfTable {
 	 * <p>
 	 * If the document is a text document, cell borders will be created by default.
 	 * 
-	 * @param document	the ODF document that contains this feature
+	 * @param tableParent the ODF element the new table will be appended to
 	 * @param rowLabel	set as the header row, it can be null if no header row needed
 	 * @param columnLabel	set as the header column, it can be null if no header column needed
 	 * @param data	the two dimension array of string as the data of this table
 	 * @return a new instance of <code>OdfTable</code>
 	 */
-	public static OdfTable newTable(OdfDocument document, String[] rowLabel, String[] columnLabel, String[][] data) {
+	public static OdfTable newTable(OdfElement tableParent, String[] rowLabel, String[] columnLabel, String[][] data) {
 		int rowNumber = DEFAULT_ROW_COUNT;
 		int columnNumber = DEFAULT_COLUMN_COUNT;
 		if (data != null) {
@@ -706,13 +809,8 @@ public class OdfTable {
 		}
 
 		try {
-			TableTableElement newTEle = createTable(document, rowNumber + rowHeaders, columnNumber + columnHeaders, rowHeaders, columnHeaders);
-
-			//4. append to the end of document
-			OdfElement root = document.getContentDom().getRootElement();
-			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-			typedContent.appendChild(newTEle);
+			TableTableElement newTEle = createTable(tableParent, rowNumber + rowHeaders, columnNumber + columnHeaders, rowHeaders, columnHeaders);
+			tableParent.appendChild(newTEle);
 
 			OdfTable table = OdfTable.getInstance(newTEle);
 			List<OdfTableRow> rowList = table.getRowList();
@@ -754,6 +852,33 @@ public class OdfTable {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Construct the OdfTable feature
+	 * with a specified 2 dimension array as the data of this table.
+	 * The value type of each cell is string.
+	 * <p>
+	 * The table will be inserted at the end of the document.
+	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * <p>
+	 * If the document is a text document, cell borders will be created by default.
+	 *
+	 * @param document	the ODF document that contains this feature
+	 * @param rowLabel	set as the header row, it can be null if no header row needed
+	 * @param columnLabel	set as the header column, it can be null if no header column needed
+	 * @param data	the two dimension array of string as the data of this table
+	 * @return a new instance of <code>OdfTable</code>
+	 */
+	public static OdfTable newTable(OdfDocument document, String[] rowLabel, String[] columnLabel, String[][] data) {
+
+		OdfTable table = null;
+		try {
+			table = newTable(document.getContentRoot(), rowLabel, columnLabel, data);
+		} catch (Exception ex) {
+			Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return table;
 	}
 
 	/**

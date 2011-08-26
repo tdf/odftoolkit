@@ -61,7 +61,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- *
+ * 
  */
 abstract public class OdfStyleBase extends OdfContainerElementBase implements OdfStylePropertySet, Comparable {
 
@@ -507,10 +507,10 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
      * @param obj - the reference object with which to compare2.
      * @return true if this object is the same as the obj argument; false otherwise.
      */
-    @Override
-    public boolean equals(Object obj) {
+	@Override
+	public boolean equals(Object obj) {
         return obj != null ? compareTo(obj) == 0 : false;
-    }
+	}
 
     @Override
     public int hashCode() {

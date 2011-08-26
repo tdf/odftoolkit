@@ -18,12 +18,10 @@
  * limitations under the License.
  *
  */
-
 package org.odftoolkit.odfdom.dom.element;
 
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.w3c.dom.Attr;
@@ -53,14 +51,14 @@ import org.w3c.dom.Attr;
  * from the new master page.
  */
 abstract public class OdfStyleableShapeElement extends OdfStylableElement {
-    private static final long serialVersionUID = 3604813885619852184L;
-    private static OdfName PresStyleAttrName = OdfName.newName( OdfDocumentNamespace.PRESENTATION, "style-name");
-    private static OdfName DrawStyleAttrName = OdfName.newName(	OdfDocumentNamespace.DRAW, "style-name");
-    
-    public OdfStyleableShapeElement(OdfFileDom ownerDocument, OdfName name)
-    {
-        super( ownerDocument, name, OdfStyleFamily.Graphic, DrawStyleAttrName );
-    }
+
+	private static final long serialVersionUID = 3604813885619852184L;
+	private static OdfName PresStyleAttrName = OdfName.newName(OdfDocumentNamespace.PRESENTATION, "style-name");
+	private static OdfName DrawStyleAttrName = OdfName.newName(OdfDocumentNamespace.DRAW, "style-name");
+
+	public OdfStyleableShapeElement(OdfFileDom ownerDocument, OdfName name) {
+		super(ownerDocument, name, OdfStyleFamily.Graphic, DrawStyleAttrName);
+	}
 
 	/**
 	 * When the style-name prefix is changed between draw: and presentation:
@@ -69,38 +67,31 @@ abstract public class OdfStyleableShapeElement extends OdfStylableElement {
 	 * @param uri the namespace uri of the attribute to be changed
 	 * @param localname of the attribute to be changed
 	 */
-    protected void adjustStyleNameAttrib(String uri, String localname)
-    {
-        if( DrawStyleAttrName.equals( uri, localname ) )
-        {
-            mStyleNameAttrib = DrawStyleAttrName;
-            mFamily = OdfStyleFamily.Graphic;
-        }
-        else if( PresStyleAttrName.equals(uri,localname ) )
-        {
-            mStyleNameAttrib = PresStyleAttrName;
-            mFamily = OdfStyleFamily.Presentation;
-        }
-    }
+	protected void adjustStyleNameAttrib(String uri, String localname) {
+		if (DrawStyleAttrName.equals(uri, localname)) {
+			mStyleNameAttrib = DrawStyleAttrName;
+			mFamily = OdfStyleFamily.Graphic;
+		} else if (PresStyleAttrName.equals(uri, localname)) {
+			mStyleNameAttrib = PresStyleAttrName;
+			mFamily = OdfStyleFamily.Presentation;
+		}
+	}
 
-    @Override
-    public void setAttributeNS(String uri, String localname, String value)
-    {    
-        if( (value != null) && (value.length() != 0) )
-        {
-            adjustStyleNameAttrib(uri, localname);
-        }
-        
-        super.setAttributeNS(uri, localname, value);
-    }
+	@Override
+	public void setAttributeNS(String uri, String localname, String value) {
+		if ((value != null) && (value.length() != 0)) {
+			adjustStyleNameAttrib(uri, localname);
+		}
 
-    @Override
-    public Attr setAttributeNodeNS(Attr newAttr)
-    {
-        String uri = newAttr.getNamespaceURI();
-        String localname = newAttr.getName();
-        adjustStyleNameAttrib(uri, localname);
-        return super.setAttributeNodeNS(newAttr);
-    }
+		super.setAttributeNS(uri, localname, value);
+	}
+
+	@Override
+	public Attr setAttributeNodeNS(Attr newAttr) {
+		String uri = newAttr.getNamespaceURI();
+		String localname = newAttr.getName();
+		adjustStyleNameAttrib(uri, localname);
+		return super.setAttributeNodeNS(newAttr);
+	}
 }
 

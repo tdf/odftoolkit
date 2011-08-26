@@ -28,12 +28,13 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.w3c.dom.DOMException;
 
 /**
- *
+ * Base class for those ODF element having several ODF style attributes.
+ * NOTE: We call style attribute commonly style properties.
  */
 abstract public class OdfStylePropertiesBase extends OdfElement
 {
     /**
-	 * 
+	 * Base class for all ODF elements having style attributes (we call properties).
 	 */
 	private static final long serialVersionUID = -6575728390842696683L;
 
@@ -54,7 +55,5 @@ abstract public class OdfStylePropertiesBase extends OdfElement
     public int hashCode()
     {
         return getOdfName().hashCode() + 7;
-    }
-
-    
+    }    
 }

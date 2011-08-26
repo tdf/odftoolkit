@@ -23,11 +23,18 @@
 package org.odftoolkit.odfdom.dom;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.zip.ZipEntry;
 
 
+import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.pkg.OdfElement;
@@ -35,7 +42,9 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
@@ -63,12 +72,11 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 	 * @param mediaTypeString
 	 *      - media type of stream. If unknown null can be used.
 	 */
-	protected OdfSchemaDocument(OdfPackage pkg, String internalPath, String mediaTypeString)  {
+	protected OdfSchemaDocument(OdfPackage pkg, String internalPath, String mediaTypeString) {
 		super(pkg, internalPath, mediaTypeString);
 		ErrorHandler errorHandler = pkg.getErrorHandler();
 		if (errorHandler != null) {
-			if (pkg.getFileEntry(internalPath + "content.xml") == null
-					&& pkg.getFileEntry(internalPath + "styles.xml") == null) {
+			if (pkg.getFileEntry(internalPath + "content.xml") == null && pkg.getFileEntry(internalPath + "styles.xml") == null) {
 				try {
 					String baseURI = pkg.getBaseURI();
 					if (baseURI == null) {
@@ -289,6 +297,73 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 			}
 		}
 		return mDocumentStyles;
+	}
+
+	/**
+	 * Return a list of table features in this document.
+	 * @return a list of table features in this document.
+	 */
+	// ToDo: Instead of a method to receive all possible feature/components on the document, there might be a generic or one each element?
+	public List<TableTableElement> getTables() {
+		List<TableTableElement> tableList = new ArrayList<TableTableElement>();
+		try {
+			// find tables from content.xml
+			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, getContentDom().getRootElement());
+			OdfElement contentRoot = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
+			tableList = fillTableList(contentRoot, tableList);
+			
+			// find tables from styles.xml (header & footer)
+			Map<String, StyleMasterPageElement> masterPages = getMasterPages();
+			StyleMasterPageElement defaultMasterPage = masterPages.get("Standard");
+			if (defaultMasterPage != null) {
+				tableList = fillTableList(defaultMasterPage, tableList);
+			}
+		} catch (Exception ex) {
+			Logger.getLogger(OdfSchemaDocument.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return tableList;
+	}
+
+	// Only tables being on root level are being considered
+	private List<TableTableElement> fillTableList(Element startElement, List<TableTableElement> tableList) {
+		NodeList childList = startElement.getChildNodes();
+		for (int i = 0;
+				i < childList.getLength();
+				i++) {
+			Node childNode = childList.item(i);
+			if (childNode instanceof Element) {
+				if(childNode instanceof TableTableElement){
+					tableList.add((TableTableElement) childList.item(i));
+				}else{
+					fillTableList((Element) childNode, tableList);
+				}
+			}
+		}
+		return tableList;
+	}
+
+	/** ToDo: Instead of adding all elements using an index to the document, we might add a pattern to the code generation
+	to create a HashMap either on demand (whenever such a structure is required from the user) or by default
+	@Deprecated: This method will be moved to the generated sources as soon code generation was improved! */
+	public Map<String, StyleMasterPageElement> getMasterPages() throws Exception {
+
+		// get original values:
+		OdfStylesDom stylesDoc = getStylesDom();
+		OfficeMasterStylesElement masterStyles = OdfElement.findFirstChildNode(OfficeMasterStylesElement.class, stylesDoc.getRootElement());
+		Map<String, StyleMasterPageElement> masterPages = null;
+		if (masterStyles != null) {
+			NodeList lstMasterPages = stylesDoc.getElementsByTagNameNS(OdfDocumentNamespace.STYLE.getUri(), "master-page");
+			if (lstMasterPages != null && lstMasterPages.getLength() > 0) {
+				masterPages = new HashMap();
+				for (int i = 0; i < lstMasterPages.getLength(); i++) {
+					StyleMasterPageElement masterPage = (StyleMasterPageElement) lstMasterPages.item(i); //Take the node from the list
+					//ToDo: Drop Attribute Suffix for methods returning String values and NOT Attributes
+					String styleName = masterPage.getStyleNameAttribute();
+					masterPages.put(styleName, masterPage);
+				}
+			}
+		}
+		return masterPages;
 	}
 
 	/**

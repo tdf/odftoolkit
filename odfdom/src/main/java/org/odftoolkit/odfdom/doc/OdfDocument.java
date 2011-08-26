@@ -477,8 +477,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 		if (mOfficeMeta == null) {
 			try {
 				OdfMetaDom metaDom = getMetaDom();
-				if(metaDom == null){
-					
+				if (metaDom == null) {
 					metaDom = new OdfMetaDom(this, OdfSchemaDocument.OdfXMLFile.META.getFileName());
 				}
 				mOfficeMeta = new OdfOfficeMeta(metaDom);
@@ -614,8 +613,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 	@Override
 	public String toString() {
-		return "\n" + getMediaTypeString() + " - ID: " + this.hashCode() + " "
-				+ getPackage().getBaseURI();
+		return "\n" + getMediaTypeString() + " - ID: " + this.hashCode() + " " + getPackage().getBaseURI();
 	}
 
 	/**
@@ -687,25 +685,19 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * @return a list of table features in this document.
 	 */
 	public List<OdfTable> getTableList() {
-		List<OdfTable> tableList = new ArrayList<OdfTable>();
+		List<OdfTable> tableList = null;
 		try {
-			OdfElement root = getContentDom().getRootElement();
-			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, root);
-			OdfElement typedContent = OdfElement.findFirstChildNode(
-					OdfElement.class, officeBody);
-			NodeList childList = typedContent.getChildNodes();
+			List<TableTableElement> tableElementList = getTables();
+			tableList = new ArrayList<OdfTable>(tableElementList.size());
 			for (int i = 0;
-					i < childList.getLength();
+					i < tableElementList.size();
 					i++) {
-				if (childList.item(i) instanceof TableTableElement) {
-					tableList.add(OdfTable.getInstance((TableTableElement) childList.item(i)));
-				}
+				tableList.add(OdfTable.getInstance(tableElementList.get(i)));
 			}
 		} catch (Exception e) {
 			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, e);
 		}
 		return tableList;
-
 	}
 
 	/**
@@ -952,8 +944,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 		// paragraph
 		OdfDefaultStyle defaultStyle = styles.getDefaultStyle(OdfStyleFamily.Paragraph);
 		if (defaultStyle != null) {
-			if (defaultStyle.hasProperty(countryProp)
-					&& defaultStyle.hasProperty(languageProp)) {
+			if (defaultStyle.hasProperty(countryProp) && defaultStyle.hasProperty(languageProp)) {
 				ctry = defaultStyle.getProperty(countryProp);
 				lang = defaultStyle.getProperty(languageProp);
 				return new Locale(lang, ctry);
@@ -965,8 +956,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 		Iterator<OdfDefaultStyle> itera = defaultStyles.iterator();
 		while (itera.hasNext()) {
 			OdfDefaultStyle style = itera.next();
-			if (style.hasProperty(countryProp)
-					&& style.hasProperty(languageProp)) {
+			if (style.hasProperty(countryProp) && style.hasProperty(languageProp)) {
 				ctry = style.getProperty(countryProp);
 				lang = style.getProperty(languageProp);
 				return new Locale(lang, ctry);
