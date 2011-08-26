@@ -5,7 +5,7 @@
 	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>odfdom-java</artifactId>
-	<version>0.8.8-SNAPSHOT</version>
+	<version>0.8.7</version>
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -575,39 +575,37 @@
 		 https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
 		 https://issues.sonatype.org/browse/OSSRH-960
 		 -->
-		<profile>
-			<id>release</id>
-			<activation>
-				<property>
-					<name>performRelease</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.1</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-								<configuration>
-									<useAgent>true</useAgent>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
 			<distributionManagement>
 				<site>
 					<id>odfdom</id>
 					<name>ODFDOM Java Toolkit Project</name>
-					<url>dav:https://odftoolkit.org/website/odfdom/${project.version}</url>
+					<url>dav:https://odftoolkit.org/website/odfdom/${project.version}/odfdom</url>
 				</site>
 			</distributionManagement>
 		</profile>
