@@ -26,6 +26,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
@@ -55,12 +57,10 @@ public class TextStyleNavigation extends Navigation {
 	private OdfTextDocument mTextDocument;
 	private TextSelection mCurrentSelectedItem;
 	private int mCurrentIndex;
-	HashMap<String, Map<OdfStyleProperty, String>> mFamilyProps;
-	Map<OdfStyleProperty, String> mProps;
-	String mText;
+	private Map<OdfStyleProperty, String> mProps;
+	private String mText;
 	private Node mPhNode;
 	private int mIndex;
-	private String mNodeText;
 	private Node mNode;
 
 	/**
@@ -83,21 +83,20 @@ public class TextStyleNavigation extends Navigation {
 
 			try {
 				mNode = getNextMatchElement((Node) mTextDocument.getContentRoot());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (Exception ex) {
+				Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, null, ex);
+				ex.printStackTrace();
 			}
 		} else {
 			try {
 				mNode = getNextMatchElement(mNode);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (Exception ex) {
+				Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, null, ex);
+				ex.printStackTrace();
 			}
 		}
 		if (mNode != null) {
 			element = (OdfElement) getPHElement(mNode);
-			mNodeText = mNode.getNodeValue();
 			TextSelection item = new TextSelection(mText, element, mCurrentIndex);
 			return item;
 		}
@@ -123,7 +122,6 @@ public class TextStyleNavigation extends Navigation {
 	 */
 	@Override
 	public Selection getCurrentItem() {
-		// TODO Auto-generated method stub
 		Selection.SelectionManager.registerItem(mCurrentSelectedItem);
 		return mCurrentSelectedItem;
 	}
@@ -289,7 +287,7 @@ public class TextStyleNavigation extends Navigation {
 			}
 
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
+			Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, null, e1);
 			e1.printStackTrace();
 		}
 		return styleNames;

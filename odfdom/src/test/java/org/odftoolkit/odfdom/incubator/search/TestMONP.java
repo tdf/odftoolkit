@@ -28,16 +28,18 @@ import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**
- * @author Daisy
- * 
+ * Test ReplaceWith method for class org.odftoolkit.odfdom.incubator.search.TextSelection 
  */
 public class TestMONP {
 
 	public static final String TEXT_FILE = "navigationtest.odt";
 	public static final String SAVE_FILE = "testsave1.odt";
 
+	/**
+	 * replace all the "mnop" occurance in navigationtest.odt with the word "success"
+	 */
 	@Test
-	public void testGotoNext() {
+	public void testReplaceWith() {
 
 		try {
 			OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getTestResource(TEXT_FILE));
@@ -48,7 +50,6 @@ public class TestMONP {
 			while (search.hasNext()) {
 				TextSelection item = (TextSelection) search.getCurrentItem();
 				try {
-					// System.out.println(item);
 					item.replaceWith("success");
 					i++;
 					// item.addHref(new URL("http://www.oracle.com"));
@@ -59,8 +60,8 @@ public class TestMONP {
 			Assert.assertTrue(18 == i);
 			doc.save(ResourceUtilities.createTestResource(SAVE_FILE));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 }

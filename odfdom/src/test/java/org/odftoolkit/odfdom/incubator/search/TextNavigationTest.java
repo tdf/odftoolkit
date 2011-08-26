@@ -33,6 +33,9 @@ import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.doc.text.OdfWhitespaceProcessor;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
+/**
+ * Test the method of class org.odftoolkit.odfdom.incubator.search.TextNavigation 
+ */
 public class TextNavigationTest {
 
 	public static final String TEXT_FILE = "TestTextSelection.odt";
@@ -53,7 +56,7 @@ public class TextNavigationTest {
 			doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getTestResource(TEXT_FILE));
 		} catch (Exception e) {
 			e.printStackTrace();
-			Assert.fail(e.getMessage());
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -61,6 +64,9 @@ public class TextNavigationTest {
 	public void tearDown() {
 	}
 
+	/**
+	 * Test getCurrentItem method of org.odftoolkit.odfdom.incubator.search.TextNavigation
+	 */
 	@Test
 	public void testGotoNext() {
 
@@ -75,6 +81,9 @@ public class TextNavigationTest {
 
 	}
 
+	/**
+	 * Test getNextMatchElement method of org.odftoolkit.odfdom.incubator.search.TextNavigation
+	 */
 	@Test
 	public void testGetNextMatchElement() {
 
@@ -105,8 +114,8 @@ public class TextNavigationTest {
 			Assert.assertEquals("Hello delete this word delete ha delete  oyeah", textProcessor.getText(match5));
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 
 	}

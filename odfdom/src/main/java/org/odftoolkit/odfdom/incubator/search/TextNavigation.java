@@ -21,11 +21,14 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.incubator.search;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.doc.text.OdfWhitespaceProcessor;
@@ -40,13 +43,13 @@ import org.w3c.dom.NodeList;
  */
 public class TextNavigation extends Navigation {
 
-	private String matchedElementName = "text:p,text:h";
-	private String patternText;
-	private OdfTextDocument textDocument;
-	private TextSelection currentSelectedItem;
-	private String currentText;
-	private int currentIndex;
-	private boolean finishFindInHeaderFooter;
+	private String mMatchedElementName = "text:p,text:h";
+	private String mPatternText;
+	private OdfTextDocument mTextDocument;
+	private TextSelection mCurrentSelectedItem;
+	private String mCurrentText;
+	private int mCurrentIndex;
+	private boolean mbFinishFindInHeaderFooter;
 
 	/**
 	 * Construct TextNavigation with matched condition and navigation scope
@@ -54,10 +57,10 @@ public class TextNavigation extends Navigation {
 	 * @param doc	the navigation scope
 	 */
 	public TextNavigation(String pattern, OdfTextDocument doc) {
-		this.patternText = pattern;
-		textDocument = doc;
-		currentSelectedItem = null;
-		finishFindInHeaderFooter = false;
+		this.mPatternText = pattern;
+		mTextDocument = doc;
+		mCurrentSelectedItem = null;
+		mbFinishFindInHeaderFooter = false;
 	}
 
 	//the matched text might exist in header/footer
@@ -72,24 +75,23 @@ public class TextNavigation extends Navigation {
 			OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
 			String content = textProcessor.getText(containerElement);
 
-			//int nextIndex = content.indexOf(text, index+selected.getText().length());
 			int nextIndex = -1;
-			Pattern pattern = Pattern.compile(patternText);
+			Pattern pattern = Pattern.compile(mPatternText);
 			Matcher matcher = pattern.matcher(content);
 			//start from the end index of the selected item
 			if (matcher.find(index + selected.getText().length())) {
 				// here just consider \n\r\t occupy one char
 				nextIndex = matcher.start();
 				int eIndex = matcher.end();
-				currentText = content.substring(nextIndex, eIndex);
+				mCurrentText = content.substring(nextIndex, eIndex);
 			}
 			if (nextIndex != -1) {
-				TextSelection item = new TextSelection(currentText, selected.getContainerElement(), nextIndex);
+				TextSelection item = new TextSelection(mCurrentText, selected.getContainerElement(), nextIndex);
 				return item;
 			}
 		}
 		try {
-			styledom = textDocument.getStylesDom();
+			styledom = mTextDocument.getStylesDom();
 			NodeList list = styledom.getElementsByTagName("office:master-styles");
 			if (styledom == null) {
 				return null;
@@ -107,41 +109,41 @@ public class TextNavigation extends Navigation {
 			}
 
 			if (element != null) {
-				TextSelection item = new TextSelection(currentText, element, currentIndex);
+				TextSelection item = new TextSelection(mCurrentText, element, mCurrentIndex);
 				return item;
 			} else {
 				return null;
 			}
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception ex) {
+			Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, null, ex);
+			ex.printStackTrace();
 		}
 		return null;
 	}
 
 	//found the next selection start from the 'selected' TextSelection
 	private TextSelection findnext(TextSelection selected) {
-		if (!finishFindInHeaderFooter) {
+		if (!mbFinishFindInHeaderFooter) {
 			TextSelection styleselected = findInHeaderFooter(selected);
 			if (styleselected != null) {
 				return styleselected;
 			}
 			selected = null;
-			finishFindInHeaderFooter = true;
+			mbFinishFindInHeaderFooter = true;
 		}
 
 		if (selected == null) {
 			OdfElement element = null;
 			try {
-				element = (OdfElement) getNextMatchElement((Node) textDocument.getContentRoot());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				element = (OdfElement) getNextMatchElement((Node) mTextDocument.getContentRoot());
+			} catch (Exception ex) {
+				Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, null, ex);
+				ex.printStackTrace();
 
 			}
 			if (element != null) {
-				return new TextSelection(currentText, element, currentIndex);
+				return new TextSelection(mCurrentText, element, mCurrentIndex);
 			} else {
 				return null;
 			}
@@ -152,24 +154,23 @@ public class TextNavigation extends Navigation {
 		OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
 		String content = textProcessor.getText(containerElement);
 
-		//int nextIndex = content.indexOf(currentText, index+selected.getText().length());
 		int nextIndex = -1;
-		Pattern pattern = Pattern.compile(patternText);
+		Pattern pattern = Pattern.compile(mPatternText);
 		Matcher matcher = pattern.matcher(content);
 		//start from the end index of the selected item
 		if (matcher.find(index + selected.getText().length())) {
 			// here just consider \n\r\t occupy one char
 			nextIndex = matcher.start();
 			int eIndex = matcher.end();
-			currentText = content.substring(nextIndex, eIndex);
+			mCurrentText = content.substring(nextIndex, eIndex);
 		}
 		if (nextIndex != -1) {
-			TextSelection item = new TextSelection(currentText, selected.getContainerElement(), nextIndex);
+			TextSelection item = new TextSelection(mCurrentText, selected.getContainerElement(), nextIndex);
 			return item;
 		} else {
 			OdfElement element = (OdfElement) getNextMatchElement((Node) containerElement);
 			if (element != null) {
-				TextSelection item = new TextSelection(currentText, element, currentIndex);
+				TextSelection item = new TextSelection(mCurrentText, element, mCurrentIndex);
 				return item;
 			} else {
 				return null;
@@ -182,9 +183,8 @@ public class TextNavigation extends Navigation {
 	 */
 	@Override
 	public Selection getCurrentItem() {
-		// TODO Auto-generated method stub
-		Selection.SelectionManager.registerItem(currentSelectedItem);
-		return currentSelectedItem;
+		Selection.SelectionManager.registerItem(mCurrentSelectedItem);
+		return mCurrentSelectedItem;
 	}
 
 	/* (non-Javadoc)
@@ -192,8 +192,8 @@ public class TextNavigation extends Navigation {
 	 */
 	@Override
 	public boolean hasNext() {
-		currentSelectedItem = findnext(currentSelectedItem);
-		return (currentSelectedItem != null);
+		mCurrentSelectedItem = findnext(mCurrentSelectedItem);
+		return (mCurrentSelectedItem != null);
 	}
 
 	/**
@@ -204,25 +204,19 @@ public class TextNavigation extends Navigation {
 	 */
 	@Override
 	public boolean match(Node element) {
-		// TODO Auto-generated method stub
 		if (element instanceof OdfElement) {
-			if (matchedElementName.indexOf(element.getNodeName()) != -1) {
+			if (mMatchedElementName.indexOf(element.getNodeName()) != -1) {
 				OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
 				String content = textProcessor.getText(element);
-//				int index = content.indexOf(text);
-//				if (index!=-1)
-//				{
-//					currentIndex = index;
-//					return true;
-//				}
-				Pattern pattern = Pattern.compile(patternText);
+
+				Pattern pattern = Pattern.compile(mPatternText);
 				Matcher matcher = pattern.matcher(content);
 				while (matcher.find()) {
 					System.out.println(matcher.group());
 					// here just consider \n\r\t occupy one char
-					currentIndex = matcher.start();
+					mCurrentIndex = matcher.start();
 					int eIndex = matcher.end();
-					currentText = content.substring(currentIndex, eIndex);
+					mCurrentText = content.substring(mCurrentIndex, eIndex);
 					return true;
 				}
 			}

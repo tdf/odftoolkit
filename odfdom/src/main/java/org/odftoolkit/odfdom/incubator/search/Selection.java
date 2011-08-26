@@ -34,10 +34,8 @@ import org.odftoolkit.odfdom.OdfElement;
  */
 public abstract class Selection {
 
-	OdfElement mElement;
-	boolean mIsCut = false;
-	Selection mPreviousSelection;
-	int mIndex;
+	private OdfElement mElement;
+	private int mIndex;
 
 	/**
 	 * get the container mElement of this selection

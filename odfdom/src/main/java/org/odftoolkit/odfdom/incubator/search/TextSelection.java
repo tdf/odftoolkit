@@ -663,50 +663,7 @@ public class TextSelection extends Selection {
 			node = nextNode;
 		}
 	}
-//	private void optimize(Node pNode) {
-//		int spaceCount;
-//		boolean needRemove = false;
-//		Node node = pNode.getFirstChild();
-//		while (node != null)
-//		{
-//			Node nextNode = node.getNextSibling();
-//			if (node.getNodeType() == Node.TEXT_NODE)
-//			{
-//				if (node.getNodeValue().length() == 0)
-//					needRemove = true;
-//			}
-//			else if (node.getNodeType() == Node.ELEMENT_NODE)
-//			{
-//				if (node.getLocalName().equals("s")) // text:s
-//				{
-//					try
-//					{
-//						spaceCount = Integer.parseInt(
-//							((Element) node).getAttributeNS(
-//							OdfNamespaceNames.TEXT.getNamespaceUri(), "c"));
-//					}
-//					catch(Exception e)
-//					{
-//						spaceCount = 1;
-//					}
-//					if(spaceCount <= 0)
-//						needRemove = true;
-//				}
-//				else if (node.getLocalName().equals("line-break") ||
-//						node.getLocalName().equals("tab"))
-//				{
-//					needRemove = false;
-//				}
-//				else
-//				{
-//					optimize(node);
-//				}
-//			}
-//			if(needRemove)
-//				node.getParentNode().removeChild(node);
-//			node = nextNode;
-//		}
-//	}
+	
 	/*
 	 * apply the styleMap to the toElement
 	 * reserve the style property of toElement if it is also exist in styleMap

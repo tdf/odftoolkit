@@ -37,6 +37,9 @@ import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
+/**
+ * Test the method of class org.odftoolkit.odfdom.incubator.search.TextStyleNavigation 
+ */
 public class TextStyleNavigationTest {
 
 	public static final String TEXT_FILE = "TestStyleSelection.odt";
@@ -71,7 +74,7 @@ public class TextStyleNavigationTest {
 					.getTestResource(TEXT_FILE));
 		} catch (Exception e) {
 			e.printStackTrace();
-			Assert.fail(e.getMessage());
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -79,7 +82,9 @@ public class TextStyleNavigationTest {
 	public void tearDown() {
 	}
 
-
+	/**
+	 * Test pasteAtFrontOf method of org.odftoolkit.odfdom.incubator.search.TextStyleNavigation
+	 */
 	@Test
 	public void testPasteAtFrontOf()  {
 
@@ -106,8 +111,8 @@ public class TextStyleNavigationTest {
 	            try {
 					itemstyle.pasteAtFrontOf(itemtext);
 				} catch (InvalidNavigationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
+					Assert.fail(e.getMessage());
 				}
 				System.out.println(itemtext);
 			}
@@ -123,11 +128,14 @@ public class TextStyleNavigationTest {
 		try {
 			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_PAST_FRONT));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
     
+	/**
+	 * Test pasteAtEndOf method of org.odftoolkit.odfdom.incubator.search.TextStyleNavigation
+	 */
 	@Test
 	public void testPasteAtEndOf()  {
         
@@ -151,8 +159,7 @@ public class TextStyleNavigationTest {
 	            try {
 					itemstyle.pasteAtEndOf(itemtext);
 				} catch (InvalidNavigationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Assert.fail(e.getMessage());
 				}
 				System.out.println(itemtext);
 			}
@@ -169,11 +176,14 @@ public class TextStyleNavigationTest {
 		try {
 			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_PAST_END));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 	
+	/**
+	 * Test cut method of org.odftoolkit.odfdom.incubator.search.TextStyleNavigation
+	 */
 	@Test
 	public void testCut() {
 
@@ -198,11 +208,14 @@ public class TextStyleNavigationTest {
 		try {
 			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_DELETE));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
+	/**
+	 * Test applyStyle method of org.odftoolkit.odfdom.incubator.search.TextStyleNavigation
+	 */
 	@Test
 	public void testApplyStyle()
 	{
@@ -219,8 +232,8 @@ public class TextStyleNavigationTest {
 			style.setProperty(OdfStyleTextProperties.FontWeight, "bold");
 			style.setStyleFamilyAttribute("text");
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			Assert.fail("Failed with " + e1.getClass().getName() + ": '" + e1.getMessage() + "'");
 		}
 
 		int i = 0;
@@ -248,8 +261,8 @@ public class TextStyleNavigationTest {
 		try {
 			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_STYLE));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 }

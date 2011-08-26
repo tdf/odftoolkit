@@ -40,6 +40,9 @@ import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
+/**
+ * Test the method of class org.odftoolkit.odfdom.incubator.search.TextSelection
+ */
 public class TextSelectionTest {
 
 	public static final String TEXT_FILE = "TestTextSelection.odt";
@@ -69,7 +72,7 @@ public class TextSelectionTest {
 			contentDOM = doc.getContentDom();
 		} catch (Exception e) {
 			e.printStackTrace();
-			Assert.fail(e.getMessage());
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -77,6 +80,10 @@ public class TextSelectionTest {
 	public void tearDown() {
 	}
 
+	/**
+	 * Test cut method of org.odftoolkit.odfdom.incubator.search.TextSelection
+	 * delete all the 'delete' word
+	 */
 	@Test
 	public void testCut() {
 		search = null;
@@ -113,11 +120,15 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_DELETE));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
+	/**
+	 * Test pasteAtFrontOf method of org.odftoolkit.odfdom.incubator.search.TextSelection
+	 * copy the first 'change' word in the front of all the 'delete' word
+	 */
 	@Test
 	public void testPasteAtFrontOf() {
 		search = null;
@@ -136,7 +147,6 @@ public class TextSelectionTest {
 			try {
 				sel.pasteAtFrontOf(item);
 			} catch (InvalidNavigationException e) {
-				// TODO Auto-generated catch block
 				Assert.fail(e.getMessage());
 			}
 		}
@@ -151,12 +161,16 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_COPYTO));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 
 	}
 
+	/**
+	 * Test pasteAtEndOf method of org.odftoolkit.odfdom.incubator.search.TextSelection
+	 * copy the first 'change' word at the end of all the 'delete' word
+	 */
 	@Test
 	public void testPasteAtEndOf() {
 		search = null;
@@ -175,7 +189,6 @@ public class TextSelectionTest {
 			try {
 				sel.pasteAtEndOf(item);
 			} catch (InvalidNavigationException e) {
-				// TODO Auto-generated catch block
 				Assert.fail(e.getMessage());
 			}
 		}
@@ -189,12 +202,16 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_COPYTO1));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 
 	}
 
+	/**
+	 * Test applyStyle method of org.odftoolkit.odfdom.incubator.search.TextSelection
+	 * append "T4" style for all the 'delete' word, 'T4' in the original document is the 'bold' style
+	 */
 	@Test
 	public void testApplyStyle() {
 		search = null;
@@ -203,7 +220,7 @@ public class TextSelectionTest {
 		try {
 			autoStyles = doc.getContentDom().getAutomaticStyles();
 		} catch (Exception e1) {
-			Assert.fail(e1.getMessage());
+			Assert.fail("Failed with " + e1.getClass().getName() + ": '" + e1.getMessage() + "'");
 		}
 		//T4 is the bold style for text
 		OdfStyleBase style = autoStyles.getStyle("T4", OdfStyleFamily.Text);
@@ -221,11 +238,15 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_STYLE));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
+	/**
+	 * Test replaceWith method of org.odftoolkit.odfdom.incubator.search.TextSelection
+	 * replace all the 'ODFDOM' with 'Odf Toolkit'
+	 */
 	@Test
 	public void testReplacewith() {
 		search = null;
@@ -272,11 +293,15 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_REPLACE));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
+	/**
+	 * Test addHref method of org.odftoolkit.odfdom.incubator.search.TextSelection
+	 * add href "http://www.ibm.com" for all the 'delete' word
+	 */
 	@Test
 	public void testAddHref() {
 		search = null;
@@ -289,20 +314,25 @@ public class TextSelectionTest {
 			} catch (InvalidNavigationException e) {
 				Assert.fail(e.getMessage());
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				Assert.fail(e.getMessage());
+				Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 			}
 		}
 
 		try {
 			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_HREF));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 
 	}
 
+	/**
+	 * Test search pattern of org.odftoolkit.odfdom.incubator.search.TextSelection
+	 * search a snippet of text match the pattern "<%([^>]*)%>", and extract the content 
+	 * between "<%" and "%>"
+	 */
 	@Test
 	public void testCutPattern() {
 		search = new TextNavigation("<%([^>]*)%>", doc);
@@ -321,8 +351,8 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.createTestResource(SAVE_FILE_DELETE_PATTERN));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 }
