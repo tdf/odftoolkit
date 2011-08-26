@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.codegen.CodeGen;
 public class CodegenMojo extends AbstractMojo {
 	
    /**
-     * @parameter default-value="${project.build.directory}/generated/src/main/java"
+     * @parameter 
      * @required
      */
     String sourceRoot;
@@ -66,24 +66,50 @@ public class CodegenMojo extends AbstractMojo {
      * @required
      */
     MavenProject project;
-
+    
 	/* (non-Javadoc)
 	 * @see org.apache.maven.plugin.Mojo#execute()
 	 */
 	public void execute() throws MojoExecutionException, MojoFailureException {
+		getLog().info("Relaxng2template code generation.");
+		getLog().debug("Config file " + configFile.getAbsolutePath());
+		getLog().debug("Schema file " + schemaFile.getAbsolutePath());
+		getLog().debug("templateFile " + templateFile.getAbsolutePath());
 		 CodeGen xThis = new CodeGen(sourceRoot);
 
-         if( xThis.parseConfig(configFile.getAbsolutePath()) ) {
-             if( xThis.parseSchema(schemaFile.getAbsolutePath())) {
-                 if( xThis.parseTemplate(templateFile.getAbsolutePath())) {
-                     if(!xThis.executeTemplate(xThis.getTemplate())) {
-                    	 throw new MojoFailureException("Codegen failed.");
+         if (xThis.parseConfig(configFile.getAbsolutePath()) ) {
+             if (xThis.parseSchema(schemaFile.getAbsolutePath())) {
+                 if (xThis.parseTemplate(templateFile.getAbsolutePath())) {
+                     if (!xThis.executeTemplate(xThis.getTemplate())) {
+                    	 getLog().error("Failed to execute template.");
+                    	 throw new MojoFailureException("Failed to execute template.");
                      }
+                 } else {
+                	 getLog().error("Failed to parse template.");
+                	 throw new MojoFailureException("Failed to parse template.");
                  }
+             } else {
+            	 getLog().error("Failed to parse schema.");
+            	 throw new MojoFailureException("Failed to parse schema.");
              }
+         } else {
+        	 getLog().error("Failed to parse config.");
+        	 throw new MojoFailureException("Failed to parse config.");
          }
-         if (project != null && sourceRoot != null) {
-             project.addCompileSourceRoot(sourceRoot);
+         getLog().info("Codegen complete.");
+         
+         if (project != null) {
+             boolean alreadyInSourceRoots = false;
+             for (Object sr : project.getCompileSourceRoots()) {
+            	 String srs = (String) sr;
+            	 if (srs.equals(sourceRoot)) {
+            		 alreadyInSourceRoots = true;
+            	 }
+             }
+             if (!alreadyInSourceRoots) {
+            	 getLog().info("Adding " + sourceRoot + " to project source roots.");
+            	 project.addCompileSourceRoot(sourceRoot);
+             }
          }
 	}
 }
