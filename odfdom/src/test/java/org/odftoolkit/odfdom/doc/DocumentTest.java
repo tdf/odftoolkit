@@ -65,7 +65,7 @@ public class DocumentTest {
 	@Test
 	public void loadDocument() {
 		try {
-
+System.setProperty("org.odftoolkit.odfdom.tmpfile.disable", "true");
 			// LOAD INVALID GENERATED SPREADSHEET DOCUMENT
 			mLog.info("Loading an supported ODF Spreadsheet document as an ODF Document!");
 			try {
@@ -85,7 +85,7 @@ public class DocumentTest {
 				OdfDocument ods = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(ZERO_BYTE_SPREADSHEET));
 				Assert.assertNull(ods);
 			} catch (Exception e) {
-				if (!e.getMessage().contains("The empty file")) {
+				if (!e.getMessage().contains("empty file")) {
 					e.printStackTrace();
 					Assert.fail();
 				}
@@ -111,7 +111,7 @@ public class DocumentTest {
 				OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(IMAGE_TEST_FILE));
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
-				if (!e.getMessage().contains("Could not unzip the file")) {
+				if (!e.getMessage().contains("unzip the file")) {
 					e.printStackTrace();
 					Assert.fail();
 				}

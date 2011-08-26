@@ -82,6 +82,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public abstract class OdfDocument {
 	// Static parts of file references
 
+	//private Logger mLog = Logger.getLogger(OdfDocument.class.getName());
 	private static final String TWO_DOTS = "..";
 	private static final String SLASH = "/";
 	private static final String COLON = ":";
@@ -149,14 +150,18 @@ public abstract class OdfDocument {
 		}
 
 		public static OdfMediaType getOdfMediaType(String mediaType) {
-			String mediaTypeShort = mediaType.substring(mediaType.lastIndexOf(".") + 1, mediaType.length());
-			mediaTypeShort = mediaTypeShort.replace('-', '_').toUpperCase();
-			try {
-				OdfMediaType odfMediaType = OdfMediaType.valueOf(mediaTypeShort);
-				return odfMediaType;
-			} catch (IllegalArgumentException e) {
-				throw new IllegalArgumentException("Given mediaType '" + mediaType + "' is either not yet supported or not an ODF mediatype!");
+			OdfMediaType odfMediaType = null;
+			if (mediaType != null) {
+				String mediaTypeShort = mediaType.substring(mediaType.lastIndexOf(".") + 1, mediaType.length());
+				mediaTypeShort = mediaTypeShort.replace('-', '_').toUpperCase();
+				try {
+					odfMediaType = OdfMediaType.valueOf(mediaTypeShort);
+
+				} catch (IllegalArgumentException e) {
+					throw new IllegalArgumentException("Given mediaType '" + mediaType + "' is either not yet supported or not an ODF mediatype!");
+				}
 			}
+			return odfMediaType;
 		}
 
 		@Override
