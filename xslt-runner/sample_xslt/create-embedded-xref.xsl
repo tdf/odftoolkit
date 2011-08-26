@@ -46,6 +46,7 @@
     <xsl:param name="add-xrefs" select="'true'"/>
     
     <xsl:variable name="add-attr-elem-xrefs" select="$add-xrefs='true'"/>
+    <xsl:variable name="add-text-info" select="$add-xrefs='true'"/>
     <xsl:variable name="keep-attr-elem-xrefs" select="false()"/>
     
     <xsl:variable name="add-xref-anchors" select="false()"/>
@@ -53,6 +54,7 @@
     <xsl:variable name="check-xref-anchors" select="true()"/>
 
     <xsl:variable name="create-odf-references" select="true()"/>
+    <xsl:variable name="create-cardinality-info" select="false()"/>
 
     <xsl:variable name="element-prefix" select="'element-'"/>
     <xsl:variable name="attribute-prefix" select="'attribute-'"/>
@@ -288,6 +290,7 @@
         <xsl:call-template name="create-elem-parent-elem-list"/>
         <xsl:call-template name="create-attr-list"/>
         <xsl:call-template name="create-child-elem-list"/>
+        <xsl:call-template name="create-text-info"/>
     </xsl:template>   
 
     <!-- select all <element> nodes in the file or in included files -->
@@ -336,7 +339,25 @@
                                     <xsl:text>, </xsl:text>
                                 </xsl:otherwise>
                             </xsl:choose>
-                            <text:span text:style-name="Attribute"><xsl:value-of select="@name"/></text:span><xsl:text> </xsl:text><text:reference-ref text:ref-name="{concat($attribute-prefix,$name)}" text:reference-format="chapter">?</text:reference-ref>
+                            <text:span text:style-name="Attribute"><xsl:value-of select="@name"/></text:span>
+                            <xsl:if test="$create-cardinality-info">
+                                <xsl:choose>
+                                    <xsl:when test="not(@condition) or @condition='' or @condition='interleave' or @condition='interleave/interleave'">
+                                        <!-- mandatory: no hint -->
+                                    </xsl:when>
+                                    <xsl:when test="contains(@condition,'optional') and not(contains(@condition,'group') or contains(@condition,'choice'))">
+                                        <xsl:text>(?)</xsl:text>
+                                    </xsl:when>
+                                    <xsl:when test="@condition='zeroOrMore'">
+                                        <xsl:text>(?)</xsl:text>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:message>Attribute <xsl:value-of select="@name"/>: Complex cardinality: <xsl:value-of select="@condition"/></xsl:message>
+                                        <xsl:text>(!)</xsl:text>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:if>
+                            <xsl:text> </xsl:text><text:reference-ref text:ref-name="{concat($attribute-prefix,$name)}" text:reference-format="chapter">?</text:reference-ref>
                         </xsl:if>
                     </xsl:for-each>
                 </xsl:when>
@@ -393,6 +414,21 @@
             </xsl:choose>
             <xsl:text>.</xsl:text>
         </text:p>
+    </xsl:template>
+
+    <xsl:template name="create-text-info">
+        <xsl:if test="rng:text and $add-text-info">
+            <xsl:call-template name="new-line"/>
+            <text:p text:style-name="Child_20_Element_20_List">
+                <xsl:text>The </xsl:text>
+                <text:span text:style-name="Element">
+                    <xsl:text>&lt;</xsl:text>
+                    <xsl:value-of select="@name"/>
+                    <xsl:text>&gt;</xsl:text>
+                </text:span>
+                <xsl:text> element may have text content.</xsl:text>
+            </text:p>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template name="create-attr-parent-elem-list">
