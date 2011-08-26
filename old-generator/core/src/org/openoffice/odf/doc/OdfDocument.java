@@ -72,7 +72,6 @@ import org.xml.sax.helpers.DefaultHandler;
 public abstract class OdfDocument {
     // Static parts of file references
 	
-	//test hg
     private static final String TWO_DOTS = "..";
     private static final String SLASH = "/";
     private static final String COLON = ":";
