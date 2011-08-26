@@ -119,6 +119,7 @@ public class StyleProtectAttribute extends OdfAttribute {
     
 	/**
 	 * @param attrValue The <code>String</code> value of the attribute.
+	 * @throws IllegalArgumentException If the provided attribute value is invalid
 	 */
 	@Override
 	public void setValue(String attrValue) {
@@ -130,7 +131,11 @@ public class StyleProtectAttribute extends OdfAttribute {
 				}else if( parentElement instanceof StyleSectionPropertiesElement ){
 					super.setValue(Boolean.toString(Boolean.parseBoolean(attrValue)));
 				}			
-			} catch (IllegalArgumentException e) {
+			} catch (NullPointerException e) {
+				// TODO: validation handling/logging
+				throw new IllegalArgumentException(e);
+			}
+			  catch (IllegalArgumentException e) {
 				// TODO: validation handling/logging
 				throw (e);
 			}

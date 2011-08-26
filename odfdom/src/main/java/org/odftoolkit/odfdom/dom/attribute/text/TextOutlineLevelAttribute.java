@@ -129,6 +129,7 @@ public class TextOutlineLevelAttribute extends OdfAttribute {
     
 	/**
 	 * @param attrValue The <code>String</code> value of the attribute.
+	 * @throws IllegalArgumentException If the provided attribute value is invalid
 	 */
 	@Override
 	public void setValue(String attrValue) {
@@ -171,7 +172,11 @@ public class TextOutlineLevelAttribute extends OdfAttribute {
 					//2DO: need validate value against PositiveInteger
 					super.setValue(Integer.toString(Integer.parseInt(attrValue)));
 				}			
-			} catch (IllegalArgumentException e) {
+			} catch (NullPointerException e) {
+				// TODO: validation handling/logging
+				throw new IllegalArgumentException(e);
+			}
+			  catch (IllegalArgumentException e) {
 				// TODO: validation handling/logging
 				throw (e);
 			}

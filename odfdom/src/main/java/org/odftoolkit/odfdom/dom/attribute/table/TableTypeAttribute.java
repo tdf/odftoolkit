@@ -120,6 +120,7 @@ public class TableTypeAttribute extends OdfAttribute {
     
 	/**
 	 * @param attrValue The <code>String</code> value of the attribute.
+	 * @throws IllegalArgumentException If the provided attribute value is invalid
 	 */
 	@Override
 	public void setValue(String attrValue) {
@@ -133,7 +134,11 @@ public class TableTypeAttribute extends OdfAttribute {
 				}else if( parentElement instanceof TableInsertionElement ){
 					super.setValue(TableInsertionElement.TableTypeAttributeValue.enumValueOf(attrValue).toString());
 				}			
-			} catch (IllegalArgumentException e) {
+			} catch (NullPointerException e) {
+				// TODO: validation handling/logging
+				throw new IllegalArgumentException(e);
+			}
+			  catch (IllegalArgumentException e) {
 				// TODO: validation handling/logging
 				throw (e);
 			}

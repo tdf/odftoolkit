@@ -143,6 +143,7 @@ public class XlinkActuateAttribute extends OdfAttribute {
     
 	/**
 	 * @param attrValue The <code>String</code> value of the attribute.
+	 * @throws IllegalArgumentException If the provided attribute value is invalid
 	 */
 	@Override
 	public void setValue(String attrValue) {
@@ -198,7 +199,11 @@ public class XlinkActuateAttribute extends OdfAttribute {
 				}else if( parentElement instanceof TextListLevelStyleImageElement ){
 					super.setValue(TextListLevelStyleImageElement.XlinkActuateAttributeValue.enumValueOf(attrValue).toString());
 				}			
-			} catch (IllegalArgumentException e) {
+			} catch (NullPointerException e) {
+				// TODO: validation handling/logging
+				throw new IllegalArgumentException(e);
+			}
+			  catch (IllegalArgumentException e) {
 				// TODO: validation handling/logging
 				throw (e);
 			}

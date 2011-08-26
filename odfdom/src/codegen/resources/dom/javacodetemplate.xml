@@ -700,6 +700,7 @@ public class %{attributeclassname} extends OdfAttribute {
     <code>
 	/**
 	 * @param attrValue The &lt;code&gt;String&lt;/code&gt; value of the attribute.
+	 * @throws IllegalArgumentException If the provided attribute value is invalid
 	 */
 	@Override
 	public void setValue(String attrValue) {</code>
@@ -812,7 +813,11 @@ public class %{attributeclassname} extends OdfAttribute {
 	</foreach>
 	<if test="hasmultivaluesets">
 <code>			
-			} catch (IllegalArgumentException e) {
+			} catch (NullPointerException e) {
+				// TODO: validation handling/logging
+				throw new IllegalArgumentException(e);
+			}
+			  catch (IllegalArgumentException e) {
 				// TODO: validation handling/logging
 				throw (e);
 			}
@@ -821,7 +826,10 @@ public class %{attributeclassname} extends OdfAttribute {
 			super.setValue(attrValue);
 		}</code>
 	<else>
-	<code>		
+	<code>	
+		}  catch (NullPointerException e) {
+			// TODO: validation handling/logging
+			throw new IllegalArgumentException(e);
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
 			throw (e);
