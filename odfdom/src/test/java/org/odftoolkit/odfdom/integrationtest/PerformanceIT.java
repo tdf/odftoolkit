@@ -3,6 +3,7 @@ package org.odftoolkit.odfdom.integrationtest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,31 +39,36 @@ public class PerformanceIT {
 	private String testTag = "new test";
 
 	public PerformanceIT() {
-		TEST_FILE_FOLDER = PerformanceIT.class.getClassLoader().getResource("").getPath()
-				+ System.getProperty("testresourcefolder")
-				+ File.separatorChar;
-
-		testTag = System.getProperty("testflag");
-		String executeTimesTest = System.getProperty("executetimes");
-		if (executeTimesTest != null) {
-			count = Integer.parseInt(executeTimesTest);
+		try {
+			TEST_FILE_FOLDER = PerformanceIT.class.getClassLoader().getResource("").toURI().getPath() + System.getProperty("testresourcefolder") + File.separatorChar;
+			testTag = System.getProperty("testflag");
+			String executeTimesTest = System.getProperty("executetimes");
+			if (executeTimesTest != null) {
+				count = Integer.parseInt(executeTimesTest);
+			}
+			REPORT_FILE_FOLDER = getOutputPath() + File.separatorChar;
+			memory_spreadsheet = REPORT_FILE_FOLDER + "memorylog.ods";
+			time_spreadsheet = REPORT_FILE_FOLDER + "timelog.ods";
+		} catch (URISyntaxException ex) {
+			Logger.getLogger(PerformanceIT.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
-		REPORT_FILE_FOLDER = getOutputPath() + File.separatorChar;
-
-		memory_spreadsheet = REPORT_FILE_FOLDER + "memorylog.ods";
-		time_spreadsheet = REPORT_FILE_FOLDER + "timelog.ods";
 
 	}
 
 	private String getOutputPath() {
-		File rootpath = new File(PerformanceIT.class.getClassLoader().getResource("").getPath());
-		File parent = rootpath.getParentFile();
-		File outputpath = new File(parent, "performance-reports");
-		if (!outputpath.exists()) {
-			outputpath.mkdir();
+		String path = null;
+		try {
+			File rootpath = new File(PerformanceIT.class.getClassLoader().getResource("").toURI().getPath());
+			File parent = rootpath.getParentFile();
+			File outputpath = new File(parent, "performance-reports");
+			if (!outputpath.exists()) {
+				outputpath.mkdir();
+			}
+			path = outputpath.getPath();
+		} catch (URISyntaxException ex) {
+			Logger.getLogger(PerformanceIT.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return outputpath.getPath();
+		return path;
 	}
 
 	@Test

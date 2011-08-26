@@ -35,7 +35,7 @@ public class OdfDrawImageTest {
 		OdfTextParagraph para = (OdfTextParagraph) odt.getContentRoot().newTextPElement();
 		OdfDrawFrame frame = (OdfDrawFrame) para.newDrawFrameElement();
 		OdfDrawImage image = (OdfDrawImage) frame.newDrawImageElement();
-		String packagePath = image.newImage(new URI("file:" + ResourceUtilities.getAbsolutePath("testA.jpg")));
+		String packagePath = image.newImage(ResourceUtilities.getURI("testA.jpg"));
 		assertEquals(image.getXlinkTypeAttribute(), "simple");
 		LOG.info(frame.getSvgWidthAttribute());
 		LOG.info(frame.getSvgHeightAttribute());
