@@ -55,7 +55,7 @@ public class OdfPackageDocument implements Closeable {
 			mPackage = pkg;
 			mDocumentPathInPackage = internalPath;
 			this.setMediaTypeString(mediaTypeString);
-			pkg.insertPackageDocument(this, internalPath);
+			pkg.cacheDocument(this, internalPath);
 		} else {
 			throw new IllegalArgumentException("No Package provided for new document!");
 		}
@@ -74,7 +74,7 @@ public class OdfPackageDocument implements Closeable {
 	 */
 	public static OdfPackageDocument loadDocument(String path) throws Exception {
 		OdfPackage pkg = OdfPackage.loadPackage(path);
-		return pkg.loadPackageDocument(ROOT_DOCUMENT_PATH);
+		return pkg.loadDocument(ROOT_DOCUMENT_PATH);
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class OdfPackageDocument implements Closeable {
 	public OdfPackageDocument loadSubDocument(String documentPath) {
 		String internalPath = this.getDocumentPath() + documentPath;
 		internalPath = OdfPackage.normalizeDirectoryPath(internalPath);
-		return mPackage.loadPackageDocument(internalPath);
+		return mPackage.loadDocument(internalPath);
 	}
 
 	/**
@@ -128,8 +128,7 @@ public class OdfPackageDocument implements Closeable {
 	 * Set the relative path for an embedded ODF document.
 	 * @param path to directory of the embedded ODF document (relative to ODF package root).
 	 */
-	// ToDo: (Issue 219 - PackageRefactoring) -- remove public
-	public String setDocumentPath(String path) {
+	String setDocumentPath(String path) {
 		mDocumentPathInPackage = normalizeDocumentPath(path);
 		return mDocumentPathInPackage;
 	}
@@ -148,8 +147,10 @@ public class OdfPackageDocument implements Closeable {
 	 *
 	 * @param internDocumentPath path to the directory of the embedded ODF document (always relative to the package path of the current document).
 	 */
-	public void removeEmbeddedDocument(String internDocumentPath) {
-		mPackage.removePackageDocument(internDocumentPath);
+	public void removeDocument(String internDocumentPath) {
+		//219 - FIXME+Test: This have to be relative to package root
+		//  mPackage.removeDocument(mDocumentPathInPackage + internDocumentPath);
+		mPackage.removeDocument(internDocumentPath);
 	}
 
 	public boolean isRootDocument() {
@@ -242,7 +243,7 @@ public class OdfPackageDocument implements Closeable {
 
 	/** Flush the existing DOM to the document to get in advantage of the recent changes from the DOM */
 	protected void flushDoms() {
-		mPackage.flushDecendentDoms(this);
+		mPackage.flushDoms(this);
 	}
 
 	/**
@@ -253,7 +254,7 @@ public class OdfPackageDocument implements Closeable {
 	 */
 	public void insertDocument(OdfPackageDocument newDocument, String documentPath) {
 		newDocument.flushDoms();
-		//FixMe: mPackage.insertDocument(newDocument, mDocumentPathInPackage + documentPath);
+		//219 - FIXME+Test:  mPackage.insertDocument(newDocument, mDocumentPathInPackage + documentPath);
 		mPackage.insertDocument(newDocument, documentPath);
 	}
 

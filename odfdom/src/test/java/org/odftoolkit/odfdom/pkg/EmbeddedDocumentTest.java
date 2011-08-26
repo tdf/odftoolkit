@@ -84,8 +84,11 @@ public class EmbeddedDocumentTest {
 				saveDoc.insertDocument(childDoc, embeddedDocPath);
 				subDocNames.add(embeddedDocPath);
 			}
-			Set<String> paths = saveDoc.getPackage().getInnerDocumentPaths();
-			paths = saveDoc.getPackage().getInnerDocumentPaths("application/vnd.oasis.opendocument.presentation");
+			Set<String> paths = saveDoc.getPackage().getDocumentPaths();
+			int docCount = paths.size();
+			paths = saveDoc.getPackage().getDocumentPaths("application/vnd.oasis.opendocument.presentation");
+			int presentationDocCount = paths.size();
+			Assert.assertTrue(docCount > presentationDocCount);
 			saveDoc.save(TEST_FILE_FOLDER + TEST_FILE_EMBEDDED_SAVE_OUT);
 			saveDoc.close();
 			saveDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_EMBEDDED_SAVE_OUT));
@@ -278,7 +281,7 @@ public class EmbeddedDocumentTest {
 				OdfDocument childDoc = embeddedDocs.get(childDocPath);
 				String embedFileName = childDoc.getDocumentPath();
 				subDocNames.add(embedFileName);
-				childDoc.removeEmbeddedDocument(embedFileName);
+				childDoc.removeDocument(embedFileName);
 			}
 			doc.save(TEST_FILE_FOLDER + TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT);
 			doc.close();
