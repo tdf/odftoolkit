@@ -99,7 +99,7 @@ public class TextCombineEntriesAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "true";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

@@ -120,7 +120,7 @@ public class PresentationPresetClassAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "custom";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

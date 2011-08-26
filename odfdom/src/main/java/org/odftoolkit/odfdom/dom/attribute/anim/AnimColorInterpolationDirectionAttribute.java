@@ -120,7 +120,7 @@ public class AnimColorInterpolationDirectionAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "clockwise";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

@@ -120,7 +120,7 @@ public class StyleVerticalAlignAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "top";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

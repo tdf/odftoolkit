@@ -79,7 +79,7 @@ public class DbEncodingAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "utf-8";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

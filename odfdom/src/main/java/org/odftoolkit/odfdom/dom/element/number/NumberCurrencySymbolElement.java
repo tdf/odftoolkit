@@ -27,9 +27,11 @@
 package org.odftoolkit.odfdom.dom.element.number;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberCountryAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberLanguageAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberRfcLanguageTagAttribute;
@@ -157,12 +159,21 @@ public class NumberCurrencySymbolElement extends OdfElement {
 		attr.setValue(numberScriptValue);
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 	/**
 	 * Add text content. Only elements which are allowed to have text content offer this method.
 	 */
-	 public void newTextNode(String content) {
+	public void newTextNode(String content) {
 		if (content != null && !content.equals("")) {
 			this.appendChild(this.getOwnerDocument().createTextNode(content));
 		}
-	 }
+	}
 }

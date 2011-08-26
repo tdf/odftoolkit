@@ -120,7 +120,7 @@ public class Dr3dShadeModeAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "flat";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

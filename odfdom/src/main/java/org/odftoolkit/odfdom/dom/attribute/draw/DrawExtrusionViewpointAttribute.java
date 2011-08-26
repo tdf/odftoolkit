@@ -79,7 +79,7 @@ public class DrawExtrusionViewpointAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "3.5cm -3.5cm 25cm";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

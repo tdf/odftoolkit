@@ -27,9 +27,11 @@
 package org.odftoolkit.odfdom.dom.element.db;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.db.DbIsAscendingAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbNameAttribute;
 
@@ -109,4 +111,13 @@ public class DbIndexColumnElement extends OdfElement {
 		attr.setValue(dbNameValue);
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 }

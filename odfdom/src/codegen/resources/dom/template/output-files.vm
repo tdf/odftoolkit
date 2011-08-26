@@ -7,8 +7,8 @@
 <filelist>
 	<file path="org/odftoolkit/odfdom/dom/style/OdfStyleFamily.java" template="java-odfdom-stylefamily.vm" />
 	<file path="org/odftoolkit/odfdom/dom/style/props/OdfStylePropertiesSet.java" template="java-odfdom-styleset.vm" />
-####<file path="org/odftoolkit/odfdom/dom/DefaultElementVisitor.java" template="java-odfdom-element-visitor.vm" />
-####<file path="org/odftoolkit/odfdom/dom/DefaultAttributeVisitor.java" template="java-odfdom-attribute-visitor.vm" />
+	<file path="org/odftoolkit/odfdom/dom/DefaultElementVisitor.java" template="java-odfdom-element-visitor.vm" />
+####<file path="org/odftoolkit/odfdom/pkg/DefaultAttributeVisitor.java" template="java-odfdom-attribute-visitor.vm" />
 ##
 #foreach ($element in ${model.getElements().withoutMultiples()})
 #if ($element != "*")

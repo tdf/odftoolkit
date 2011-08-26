@@ -120,7 +120,7 @@ public class TableMessageTypeAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "stop";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

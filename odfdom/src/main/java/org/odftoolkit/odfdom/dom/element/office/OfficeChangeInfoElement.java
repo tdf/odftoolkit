@@ -27,9 +27,11 @@
 package org.odftoolkit.odfdom.dom.element.office;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
@@ -97,4 +99,13 @@ public class OfficeChangeInfoElement extends OdfElement {
 		return textP;
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 }

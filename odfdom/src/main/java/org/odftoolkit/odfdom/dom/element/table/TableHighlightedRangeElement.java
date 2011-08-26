@@ -27,9 +27,11 @@
 package org.odftoolkit.odfdom.dom.element.table;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.table.TableCellRangeAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableContainsErrorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDirectionAttribute;
@@ -157,4 +159,13 @@ public class TableHighlightedRangeElement extends OdfElement {
 		attr.setBooleanValue(tableMarkedInvalidValue.booleanValue());
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 }

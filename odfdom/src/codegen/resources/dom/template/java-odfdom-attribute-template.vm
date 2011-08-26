@@ -94,9 +94,9 @@ public class $classname extends OdfAttribute {
 #foreach ($defaultValue in $defaultValueSet)
 #set ($constant = $model.constantCase($defaultValue))
 #if (($defaultValue=="true" or $defaultValue=="false") and $enum == false)
-	public static final String DEFAULT_VALUE_${model.escapeKeyword($constant)}= "$defaultValue";
+	public static final String DEFAULT_VALUE_${model.escapeKeyword($constant)} = "$defaultValue";
 #else
-	public static final String DEFAULT_VALUE_${model.escapeKeyword($constant)}=	Value.${model.escapeKeyword($constant)}.toString();
+	public static final String DEFAULT_VALUE_${model.escapeKeyword($constant)} = Value.${model.escapeKeyword($constant)}.toString();
 #end
 #end
 #else
@@ -298,12 +298,13 @@ public class $classname extends OdfAttribute {
 #foreach ($parent in ${attribute.getParents().withoutMultiples()})
 #if ($odfmodel.getDefaultAttributeValue($attribute, $parent))
 			if (parentElement instanceof ${model.camelCase($parent)}Element) {
-				defaultValue = "${model.escapeLiteral($odfmodel.getDefaultAttributeValue($attribute, $parent))}";
+#set ($constant = ${model.constantCase($odfmodel.getDefaultAttributeValue($attribute, $parent))})
+				defaultValue = DEFAULT_VALUE_${model.escapeKeyword($constant)};
 			}
 #end
 #end
 #else
-			defaultValue = "${model.escapeLiteral($uniqueDefaultValue)}";
+			defaultValue=DEFAULT_VALUE;
 #end
 		}
 		return defaultValue;

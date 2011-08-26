@@ -27,9 +27,11 @@
 package org.odftoolkit.odfdom.dom.element.table;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.table.TableBorderColorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableCommentAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableCopyBackAttribute;
@@ -286,4 +288,13 @@ public class TableScenarioElement extends OdfElement {
 		attr.setValue(tableScenarioRangesValue);
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 }

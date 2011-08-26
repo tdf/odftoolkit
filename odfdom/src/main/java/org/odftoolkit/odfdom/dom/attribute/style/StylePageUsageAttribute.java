@@ -120,7 +120,7 @@ public class StylePageUsageAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "all";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

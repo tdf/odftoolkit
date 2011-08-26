@@ -79,7 +79,7 @@ public class DrawExtrusionDepthAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "36pt 0";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

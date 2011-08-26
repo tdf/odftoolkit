@@ -27,9 +27,11 @@
 package org.odftoolkit.odfdom.dom.element.text;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoCountryAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoLanguageAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoScriptAttribute;
@@ -295,4 +297,13 @@ public class TextBibliographyConfigurationElement extends OdfElement {
 		return textSortKey;
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 }

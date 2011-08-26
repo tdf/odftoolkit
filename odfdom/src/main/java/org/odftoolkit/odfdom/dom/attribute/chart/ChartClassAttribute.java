@@ -120,7 +120,7 @@ public class ChartClassAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "major";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

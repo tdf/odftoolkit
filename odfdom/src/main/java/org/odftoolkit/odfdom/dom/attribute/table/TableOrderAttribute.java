@@ -120,7 +120,7 @@ public class TableOrderAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "ascending";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

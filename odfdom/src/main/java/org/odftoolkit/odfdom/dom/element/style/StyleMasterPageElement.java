@@ -29,9 +29,11 @@ package org.odftoolkit.odfdom.dom.element.style;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateColorElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateMotionElement;
@@ -698,4 +700,13 @@ public class StyleMasterPageElement extends OdfStylableElement {
 		return styleHeaderLeft;
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 }

@@ -35,9 +35,7 @@ import org.w3c.dom.Text;
 
 abstract public class OdfElement extends ElementNSImpl {
 
-
 	private static final long serialVersionUID = -4939293285696678939L;
-
 
 	/** Creates a new instance of OdfElement */
 	public OdfElement(OdfFileDom ownerDocument, String namespaceURI,
@@ -296,7 +294,7 @@ abstract public class OdfElement extends ElementNSImpl {
 
 	@Override
 	public Node cloneNode(boolean deep) {
-        OdfElement cloneElement = ((OdfFileDom) this.ownerDocument).newOdfElement(this.getClass());
+		OdfElement cloneElement = ((OdfFileDom) this.ownerDocument).newOdfElement(this.getClass());
 
 		if (attributes != null) {
 			for (int i = 0; i < attributes.getLength(); i++) {
@@ -504,5 +502,14 @@ abstract public class OdfElement extends ElementNSImpl {
 		onInsertNode(newChild);
 		onRemoveNode(oldChild);
 		return super.replaceChild(newChild, oldChild);
+	}
+
+	/**
+	 * Accept an visitor instance to allow the visitor to do some operations.
+	 * Refer to visitor design pattern to get a better understanding.
+	 * @param obj	an instance of DefaultElementVisitor
+	 */
+	public void accept(ElementVisitor visitor) {
+		visitor.visit(this);
 	}
 }

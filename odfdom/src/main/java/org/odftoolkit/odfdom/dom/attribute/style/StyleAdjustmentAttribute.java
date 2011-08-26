@@ -120,7 +120,7 @@ public class StyleAdjustmentAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "left";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

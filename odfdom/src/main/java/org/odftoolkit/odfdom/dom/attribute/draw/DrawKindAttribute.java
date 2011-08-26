@@ -120,7 +120,7 @@ public class DrawKindAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "full";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

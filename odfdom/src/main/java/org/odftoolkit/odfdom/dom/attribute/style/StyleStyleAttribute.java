@@ -120,7 +120,7 @@ public class StyleStyleAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "solid";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

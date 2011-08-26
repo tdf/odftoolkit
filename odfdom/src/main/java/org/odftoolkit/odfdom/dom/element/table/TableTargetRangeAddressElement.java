@@ -27,9 +27,11 @@
 package org.odftoolkit.odfdom.dom.element.table;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.table.TableColumnAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableEndColumnAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableEndRowAttribute;
@@ -282,4 +284,13 @@ public class TableTargetRangeAddressElement extends OdfElement {
 		attr.setIntValue(tableTableValue.intValue());
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 }

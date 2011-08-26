@@ -42,8 +42,8 @@ import org.odftoolkit.odfdom.dom.element.table.TableSortGroupsElement;
 public class TableDataTypeAttribute extends OdfAttribute {
 
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "data-type");
-	public static final String DEFAULT_VALUE_TEXT=	Value.TEXT.toString();
-	public static final String DEFAULT_VALUE_AUTOMATIC=	Value.AUTOMATIC.toString();
+	public static final String DEFAULT_VALUE_TEXT = Value.TEXT.toString();
+	public static final String DEFAULT_VALUE_AUTOMATIC = Value.AUTOMATIC.toString();
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:data-type}.
@@ -125,13 +125,13 @@ public class TableDataTypeAttribute extends OdfAttribute {
 		String defaultValue = null;
 		if (parentElement != null) {
 			if (parentElement instanceof TableFilterConditionElement) {
-				defaultValue = "text";
+				defaultValue = DEFAULT_VALUE_TEXT;
 			}
 			if (parentElement instanceof TableSortByElement) {
-				defaultValue = "automatic";
+				defaultValue = DEFAULT_VALUE_AUTOMATIC;
 			}
 			if (parentElement instanceof TableSortGroupsElement) {
-				defaultValue = "automatic";
+				defaultValue = DEFAULT_VALUE_AUTOMATIC;
 			}
 		}
 		return defaultValue;

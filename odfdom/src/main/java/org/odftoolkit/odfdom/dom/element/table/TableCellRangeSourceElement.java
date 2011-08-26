@@ -27,9 +27,11 @@
 package org.odftoolkit.odfdom.dom.element.table;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.table.TableFilterNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableFilterOptionsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableLastColumnSpannedAttribute;
@@ -292,4 +294,13 @@ public class TableCellRangeSourceElement extends OdfElement {
 		attr.setValue(xlinkTypeValue);
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 }

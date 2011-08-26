@@ -120,7 +120,7 @@ public class DbBooleanComparisonModeAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "equal-integer";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

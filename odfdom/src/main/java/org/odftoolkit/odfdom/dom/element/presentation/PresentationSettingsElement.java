@@ -27,9 +27,11 @@
 package org.odftoolkit.odfdom.dom.element.presentation;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationAnimationsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationEndlessAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationForceManualAttribute;
@@ -422,4 +424,13 @@ public class PresentationSettingsElement extends OdfElement {
 		return presentationShow;
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 }

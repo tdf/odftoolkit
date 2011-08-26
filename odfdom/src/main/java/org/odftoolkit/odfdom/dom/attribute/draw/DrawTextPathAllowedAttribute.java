@@ -99,7 +99,7 @@ public class DrawTextPathAllowedAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "false";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

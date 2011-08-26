@@ -120,7 +120,7 @@ public class DrawTextPathModeAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "normal";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

@@ -120,7 +120,7 @@ public class DrawGluePointTypeAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "none";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

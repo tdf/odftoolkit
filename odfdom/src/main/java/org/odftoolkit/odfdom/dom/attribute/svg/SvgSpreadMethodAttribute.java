@@ -120,7 +120,7 @@ public class SvgSpreadMethodAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "pad";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

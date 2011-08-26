@@ -120,7 +120,7 @@ public class DrawTextPathScaleAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "path";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

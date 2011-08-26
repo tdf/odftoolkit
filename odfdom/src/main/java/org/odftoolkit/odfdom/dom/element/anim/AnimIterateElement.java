@@ -27,9 +27,11 @@
 package org.odftoolkit.odfdom.dom.element.anim;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.anim.AnimIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.anim.AnimIterateIntervalAttribute;
 import org.odftoolkit.odfdom.dom.attribute.anim.AnimIterateTypeAttribute;
@@ -819,4 +821,13 @@ public class AnimIterateElement extends OdfElement {
 		return animTransitionFilter;
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 }

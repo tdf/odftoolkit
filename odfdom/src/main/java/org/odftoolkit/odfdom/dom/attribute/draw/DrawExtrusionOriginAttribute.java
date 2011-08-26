@@ -79,7 +79,7 @@ public class DrawExtrusionOriginAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "0.5 -0.5";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

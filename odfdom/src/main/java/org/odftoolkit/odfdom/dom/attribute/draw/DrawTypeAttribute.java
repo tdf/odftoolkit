@@ -41,8 +41,8 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawEnhancedGeometryElement;
 public class DrawTypeAttribute extends OdfAttribute {
 
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.DRAW, "type");
-	public static final String DEFAULT_VALUE_STANDARD=	Value.STANDARD.toString();
-	public static final String DEFAULT_VALUE_NON_PRIMITIVE=	Value.NON_PRIMITIVE.toString();
+	public static final String DEFAULT_VALUE_STANDARD = Value.STANDARD.toString();
+	public static final String DEFAULT_VALUE_NON_PRIMITIVE = Value.NON_PRIMITIVE.toString();
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:type}.
@@ -124,10 +124,10 @@ public class DrawTypeAttribute extends OdfAttribute {
 		String defaultValue = null;
 		if (parentElement != null) {
 			if (parentElement instanceof DrawConnectorElement) {
-				defaultValue = "standard";
+				defaultValue = DEFAULT_VALUE_STANDARD;
 			}
 			if (parentElement instanceof DrawEnhancedGeometryElement) {
-				defaultValue = "non-primitive";
+				defaultValue = DEFAULT_VALUE_NON_PRIMITIVE;
 			}
 		}
 		return defaultValue;

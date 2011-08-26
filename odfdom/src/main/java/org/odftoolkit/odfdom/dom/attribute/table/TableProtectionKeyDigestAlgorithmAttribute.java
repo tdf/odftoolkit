@@ -79,7 +79,7 @@ public class TableProtectionKeyDigestAlgorithmAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "http://www.w3.org/2000/09/xmldsig#sha1";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

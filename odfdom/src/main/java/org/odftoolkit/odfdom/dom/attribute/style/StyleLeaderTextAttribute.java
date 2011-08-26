@@ -79,7 +79,7 @@ public class StyleLeaderTextAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = " ";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

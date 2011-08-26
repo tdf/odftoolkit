@@ -120,7 +120,7 @@ public class StyleRepeatAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "repeat";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

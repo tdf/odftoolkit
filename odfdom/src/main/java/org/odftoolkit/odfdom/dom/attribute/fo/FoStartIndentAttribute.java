@@ -79,7 +79,7 @@ public class FoStartIndentAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "0cm";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

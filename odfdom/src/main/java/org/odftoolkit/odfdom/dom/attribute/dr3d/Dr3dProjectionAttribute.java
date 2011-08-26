@@ -120,7 +120,7 @@ public class Dr3dProjectionAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "parallel";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

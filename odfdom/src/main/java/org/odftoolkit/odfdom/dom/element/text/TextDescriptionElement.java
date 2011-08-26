@@ -27,9 +27,11 @@
 package org.odftoolkit.odfdom.dom.element.text;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.text.TextFixedAttribute;
 
 /**
@@ -82,12 +84,21 @@ public class TextDescriptionElement extends OdfElement {
 		attr.setBooleanValue(textFixedValue.booleanValue());
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 	/**
 	 * Add text content. Only elements which are allowed to have text content offer this method.
 	 */
-	 public void newTextNode(String content) {
+	public void newTextNode(String content) {
 		if (content != null && !content.equals("")) {
 			this.appendChild(this.getOwnerDocument().createTextNode(content));
 		}
-	 }
+	}
 }

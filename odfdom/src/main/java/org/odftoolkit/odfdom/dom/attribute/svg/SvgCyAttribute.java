@@ -79,7 +79,7 @@ public class SvgCyAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "50%";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

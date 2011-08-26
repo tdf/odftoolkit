@@ -120,7 +120,7 @@ public class TableEmbeddedNumberBehaviorAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "alpha-numeric";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

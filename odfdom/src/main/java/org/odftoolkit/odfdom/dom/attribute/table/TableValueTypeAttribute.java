@@ -120,7 +120,7 @@ public class TableValueTypeAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "date";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

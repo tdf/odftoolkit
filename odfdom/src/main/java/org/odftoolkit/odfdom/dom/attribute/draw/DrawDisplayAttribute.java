@@ -120,7 +120,7 @@ public class DrawDisplayAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "always";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

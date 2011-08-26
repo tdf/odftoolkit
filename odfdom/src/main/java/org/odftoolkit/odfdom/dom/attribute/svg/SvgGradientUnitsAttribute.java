@@ -120,7 +120,7 @@ public class SvgGradientUnitsAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "objectBoundingBox";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

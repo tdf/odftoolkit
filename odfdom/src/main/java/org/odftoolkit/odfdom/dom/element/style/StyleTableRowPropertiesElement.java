@@ -29,9 +29,11 @@ package org.odftoolkit.odfdom.dom.element.style;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoBackgroundColorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoBreakAfterAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoBreakBeforeAttribute;
@@ -269,4 +271,13 @@ public class StyleTableRowPropertiesElement extends OdfStylePropertiesBase {
 		return styleBackgroundImage;
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 }

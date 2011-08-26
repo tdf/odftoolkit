@@ -79,7 +79,7 @@ public class DrawExtrusionFirstLightDirectionAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "(5 0 1)";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}

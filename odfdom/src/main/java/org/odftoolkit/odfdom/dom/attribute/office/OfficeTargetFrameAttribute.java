@@ -120,7 +120,7 @@ public class OfficeTargetFrameAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		String defaultValue = null;
 		if (parentElement != null) {
-			defaultValue = "_blank";
+			defaultValue=DEFAULT_VALUE;
 		}
 		return defaultValue;
 	}
