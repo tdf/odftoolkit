@@ -831,7 +831,7 @@ public class OdfPackage {
 
 		mManifestPathList = new LinkedList<String>();
 
-		SAXParserFactory factory = SAXParserFactory.newInstance();
+		SAXParserFactory factory = new org.apache.xerces.jaxp.SAXParserFactoryImpl();
 		factory.setNamespaceAware(true);
 		factory.setValidating(false);
 		try {

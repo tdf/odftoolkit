@@ -1091,7 +1091,7 @@ public abstract class OdfDocument extends OdfPackageDocument {
 
 	private OdfFileDom getFileDom(OdfXMLFile file) throws Exception {
 		// create sax parser
-		SAXParserFactory saxFactory = SAXParserFactory.newInstance();
+		SAXParserFactory saxFactory = new org.apache.xerces.jaxp.SAXParserFactoryImpl();
 		saxFactory.setNamespaceAware(true);
 		saxFactory.setValidating(false);
 		SAXParser parser = saxFactory.newSAXParser();
