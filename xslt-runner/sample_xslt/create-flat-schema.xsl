@@ -53,7 +53,7 @@
     
     <xsl:variable name="include-default-values" select="$incl-default-values = 'true'"/>
     <xsl:variable name="include-types" select="$incl-types = 'true'"/>
-    <xsl:variable name="include-conditions" select="$incl-conditions = 'true'"/>
+    <xsl:variable name="include-condition-attr" select="$incl-conditions = 'true'"/>
     <xsl:variable name="include-elements" select="$incl-elements = 'true'"/>
     
     <!-- ********** -->
@@ -89,7 +89,7 @@
             xmlns:xhtml="http://www.w3.org/1999/xhtml">
             <xsl:for-each select="//rng:start|document(//rng:include/@href)//rng:start">
                 <start>
-                    <xsl:apply-templates mode="collect-attrs"/>
+                    <xsl:apply-templates mode="collect-content"/>
                 </start>
             </xsl:for-each>
             <!-- select all <element> nodes in the file or in included files -->
@@ -100,9 +100,9 @@
                         <xsl:if test="not(preceding::rng:element[@name=$name])">
                             <xsl:comment>*** &lt;<xsl:value-of select="@name"/>&gt; ***</xsl:comment>
                             <element name="{@name}">
-                                <!-- collect attributes -->
+                                <!-- collect content -->
                                 <xsl:for-each select="//rng:element[@name=$name]|document(//rng:include/@href)//rng:element[@name=$name]">
-                                    <xsl:apply-templates mode="collect-attrs"/>
+                                    <xsl:apply-templates mode="collect-content"/>
                                 </xsl:for-each>
                             </element>
                         </xsl:if>
@@ -112,9 +112,9 @@
                         <xsl:for-each select="rng:choice/rng:name">
                             <xsl:comment>*** &lt;<xsl:value-of select="."/>&gt; ***</xsl:comment>
                             <element name="{.}">
-                                <!-- collect attributes -->
+                                <!-- collect content -->
                                 <xsl:apply-templates select="$element/*" 
-                                                     mode="collect-attrs"/>
+                                                     mode="collect-content"/>
                             </element>
                         </xsl:for-each>    
                     </xsl:when>
@@ -141,15 +141,15 @@
     <!-- **************** -->
 
     <!-- match <attribute> elements that have a name attribute -->
-    <xsl:template match="rng:attribute[@name]" mode="collect-attrs">
-        <xsl:param name="condition" select=""/>
+    <xsl:template match="rng:attribute[@name]" mode="collect-content">
+        <xsl:param name="condition-attr" select=""/>
         <attribute name="{@name}">
             <xsl:if test="$include-default-values">
                 <xsl:apply-templates select="@a:defaultValue"/>
             </xsl:if>
-            <xsl:if test="$condition">
+            <xsl:if test="$condition-attr">
                 <xsl:attribute name="condition">
-                    <xsl:value-of select="$condition"/>
+                    <xsl:value-of select="$condition-attr"/>
                 </xsl:attribute>
             </xsl:if>
             <!-- collect attribute type -->
@@ -160,8 +160,8 @@
     </xsl:template>
     
     <!-- match <attribute> elements that have a <name> descendent -->
-    <xsl:template match="rng:attribute[rng:choice/rng:name]" mode="collect-attrs">
-        <xsl:param name="condition" select=""/>
+    <xsl:template match="rng:attribute[rng:choice/rng:name]" mode="collect-content">
+        <xsl:param name="condition-attr" select=""/>
         <xsl:variable name="attribute" select="."/>
         <xsl:for-each select="rng:choice/rng:name">
             <attribute name="{.}">
@@ -169,9 +169,9 @@
                 <xsl:if test="$include-default-values">
                     <xsl:apply-templates select="$attribute/@a:defaultValue"/>
                 </xsl:if>
-                <xsl:if test="$condition">
+                <xsl:if test="$condition-attr">
                     <xsl:attribute name="condition">
-                        <xsl:value-of select="$condition"/>
+                        <xsl:value-of select="$condition-attr"/>
                     </xsl:attribute>
                 </xsl:if>
                 <xsl:if test="$include-types">
@@ -183,7 +183,7 @@
     </xsl:template>
 
     <!-- ignore attribute definitions with any name -->
-    <xsl:template match="rng:attribute[rng:anyName]" mode="collect-attrs"/>
+    <xsl:template match="rng:attribute[rng:anyName]" mode="collect-content"/>
 
     <!-- match @a:default-value" -->
     <xsl:template match="@a:defaultValue">
@@ -197,13 +197,13 @@
     <!-- ************** -->
 
     <!-- match <element> elements that have a name attribute -->
-    <xsl:template match="rng:element[@name]" mode="collect-attrs">
-        <xsl:param name="condition" select=""/>
+    <xsl:template match="rng:element[@name]" mode="collect-content">
+        <xsl:param name="condition-attr" select=""/>
         <xsl:if test="$include-elements">
             <element name="{@name}">
-                <xsl:if test="$condition">
+                <xsl:if test="$condition-attr">
                     <xsl:attribute name="condition">
-                        <xsl:value-of select="$condition"/>
+                        <xsl:value-of select="$condition-attr"/>
                     </xsl:attribute>
                 </xsl:if>
             </element>
@@ -211,14 +211,14 @@
     </xsl:template>
     
     <!-- match <element> elements that have a <name> descendent -->
-    <xsl:template match="rng:element[rng:choice/rng:name]" mode="collect-attrs">
-        <xsl:param name="condition" select=""/>
+    <xsl:template match="rng:element[rng:choice/rng:name]" mode="collect-content">
+        <xsl:param name="condition-attr" select=""/>
         <xsl:if test="$include-elements">
             <xsl:for-each select="rng:choice/rng:name">
                 <element name="{.}">
-                    <xsl:if test="$condition">
+                    <xsl:if test="$condition-attr">
                         <xsl:attribute name="condition">
-                            <xsl:value-of select="$condition"/>
+                            <xsl:value-of select="$condition-attr"/>
                         </xsl:attribute>
                     </xsl:if>
                 </element>
@@ -227,13 +227,13 @@
     </xsl:template>
 
     <!-- ignore attribute definitions with any name -->
-    <xsl:template match="rng:element[rng:anyName]" mode="collect-attrs"/>
+    <xsl:template match="rng:element[rng:anyName]" mode="collect-content"/>
 
     <!-- ignore name elements (they are covered by the fore-each loop already) -->
-    <xsl:template match="rng:name" mode="collect-attrs"/>
+    <xsl:template match="rng:name" mode="collect-content"/>
 
     <!-- ignore data elements (they may only occure in elements here) -->
-    <xsl:template match="rng:data" mode="collect-attrs"/>
+    <xsl:template match="rng:data" mode="collect-content"/>
     
     
     <!-- ************* -->
@@ -241,73 +241,73 @@
     <!-- ************* -->
         
     <!--match <ref> elements -->
-    <xsl:template match="rng:ref" mode="collect-attrs">
-        <xsl:param name="condition" select=""/>
+    <xsl:template match="rng:ref" mode="collect-content">
+        <xsl:param name="condition-attr" select=""/>
         <xsl:comment><xsl:value-of select="@name"/></xsl:comment>
         <!-- match <define> with same name in the current file and within
              included files. -->
         <xsl:variable name="name" select="@name"/>
                     <xsl:apply-templates
             select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]/*|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
-                        mode="collect-attrs">
-                            <xsl:with-param name="condition" select="$condition"/>
+                        mode="collect-content">
+                            <xsl:with-param name="condition-attr" select="$condition-attr"/>
                     </xsl:apply-templates>
         <xsl:comment>/<xsl:value-of select="@name"/></xsl:comment>
     </xsl:template>
     
-    <xsl:template match="rng:define" mode="collect-attrs">
-        <xsl:param name="condition" select=""/>
+    <xsl:template match="rng:define" mode="collect-content">
+        <xsl:param name="condition-attr" select=""/>
         <xsl:variable name="new-condition">
             <xsl:choose>
-                <xsl:when test="$include-conditions and @combine and string-length($condition) > 0">
-                    <xsl:value-of select="concat($condition, '/', @combine)"/>
+                <xsl:when test="$include-condition-attr and @combine and string-length($condition-attr) > 0">
+                    <xsl:value-of select="concat($condition-attr, '/', @combine)"/>
                 </xsl:when>
-                <xsl:when test="$include-conditions and @combine">
+                <xsl:when test="$include-condition-attr and @combine">
                     <xsl:value-of select="concat(@combine)"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="$condition"/>
+                    <xsl:value-of select="$condition-attr"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:apply-templates  select="*" mode="collect-attrs">
-            <xsl:with-param name="condition" select="$new-condition"/>
+        <xsl:apply-templates  select="*" mode="collect-content">
+            <xsl:with-param name="condition-attr" select="$new-condition"/>
         </xsl:apply-templates>
     </xsl:template>
     
     <!-- match conditions and lists -->
-    <xsl:template match="rng:interleave|rng:mixed|rng:optional|rng:choice|rng:group|rng:zeroOrMore|rng:oneOrMore" mode="collect-attrs">
-        <xsl:param name="condition" select=""/>
+    <xsl:template match="rng:interleave|rng:mixed|rng:optional|rng:choice|rng:group|rng:zeroOrMore|rng:oneOrMore" mode="collect-content">
+        <xsl:param name="condition-attr" select=""/>
         <xsl:variable name="new-condition">
             <xsl:choose>
-                <xsl:when test="$include-conditions and string-length($condition) > 0">
-                    <xsl:value-of select="concat($condition, '/', name(.))"/>
+                <xsl:when test="$include-condition-attr and string-length($condition-attr) > 0">
+                    <xsl:value-of select="concat($condition-attr, '/', name(.))"/>
                 </xsl:when>
-                <xsl:when test="$include-conditions">
+                <xsl:when test="$include-condition-attr">
                     <xsl:value-of select="concat(name(.))"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="$condition"/>
+                    <xsl:value-of select="$condition-attr"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-                    <xsl:apply-templates mode="collect-attrs">
-                        <xsl:with-param name="condition" select="$new-condition"/>
+                    <xsl:apply-templates mode="collect-content">
+                        <xsl:with-param name="condition-attr" select="$new-condition"/>
                     </xsl:apply-templates>
     </xsl:template>
         
-    <xsl:template match="rng:text" mode="collect-attrs">
+    <xsl:template match="rng:text" mode="collect-content">
         <text/>
     </xsl:template>
 
-    <xsl:template match="rng:empty" mode="collect-attrs"/>
+    <xsl:template match="rng:empty" mode="collect-content"/>
     
     <!-- match all other elements and ignore them -->
-    <xsl:template match="*" mode="collect-attrs">
+    <xsl:template match="*" mode="collect-content">
         <xsl:message>Ignored element &lt;<xsl:value-of select="name(.)"/>&gt;, content: <xsl:value-of select="."/>, parent: <xsl:value-of select="name(..)"/>, grandparent: <xsl:value-of select="name(../..)"/>, define name: <xsl:value-of select="ancestor::rng:define[1]/@name"/></xsl:message>
     </xsl:template>
 
-    <xsl:template match="text()" mode="collect-attrs">
+    <xsl:template match="text()" mode="collect-content">
         <!-- xsl:message>Ignored <xsl:value-of select="."/></xsl:message -->
     </xsl:template>
         
