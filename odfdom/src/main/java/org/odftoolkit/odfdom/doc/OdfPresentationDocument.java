@@ -40,8 +40,6 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfNamespace;
-import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.doc.OdfPresentationDocument;
 import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -1287,7 +1285,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
 
 			DrawFrameElement frame1 = page.newDrawFrameElement();
-			frame1.setProperty(StyleGraphicPropertiesElement.Shadow, "true");
+			frame1.setProperty(StyleGraphicPropertiesElement.StyleShadow, "true");
 			frame1.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
 			frame1.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
 			frame1.setPresentationStyleNameAttribute(frame1.getStyleName());
@@ -1318,7 +1316,7 @@ public class OdfPresentationDocument extends OdfDocument {
 
 
 			DrawFrameElement frame1 = page.newDrawFrameElement();
-			frame1.setProperty(StyleGraphicPropertiesElement.Shadow, "true");
+			frame1.setProperty(StyleGraphicPropertiesElement.StyleShadow, "true");
 			frame1.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
 			frame1.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
 			frame1.setPresentationStyleNameAttribute(frame1.getStyleName());

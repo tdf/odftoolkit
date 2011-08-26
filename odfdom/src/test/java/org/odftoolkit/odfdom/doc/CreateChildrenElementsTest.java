@@ -150,7 +150,7 @@ public class CreateChildrenElementsTest {
 
 			TableTableRowElement tr = table.newTableTableRowElement();
 
-			TableTableCellElement td1 = tr.newTableTableCellElement();
+			TableTableCellElement td1 = tr.newTableTableCellElement(0,"void");
 
 			TextPElement p1 = td1.newTextPElement();
 			p1.appendChild(contentDom.createTextNode("content 1"));
@@ -191,7 +191,7 @@ public class CreateChildrenElementsTest {
 
 			TextListItemElement listItem = contentDom.newOdfElement(TextListItemElement.class);
 			//create children elements
-			TextHElement heading = listItem.newTextHElement("1");
+			TextHElement heading = listItem.newTextHElement(1);
 			TextListElement list = listItem.newTextListElement();
 			TextPElement paragraph = listItem.newTextPElement();
 			TextSoftPageBreakElement softPageBreak = listItem.newTextSoftPageBreakElement();
@@ -278,11 +278,11 @@ public class CreateChildrenElementsTest {
 			OdfDocument textDoc = OdfTextDocument.newTextDocument();
 
 			OdfOfficeStyles styles = textDoc.getOrCreateDocumentStyles();
-			StyleDefaultStyleElement def = styles.newStyleDefaultStyleElement();
+			StyleDefaultStyleElement def = styles.newStyleDefaultStyleElement("text");
 			def.setStyleFamilyAttribute(OdfStyleFamily.Paragraph.toString());
 			def.setProperty(StyleTextPropertiesElement.TextUnderlineColor, "#00FF00");
 
-			StyleStyleElement parent = styles.newStyleStyleElement("TheParent");
+			StyleStyleElement parent = styles.newStyleStyleElement("text","TheParent");
 			parent.setStyleFamilyAttribute(OdfStyleFamily.Paragraph.toString());
 
 			parent.setProperty(StyleTextPropertiesElement.FontSize, "17pt");
@@ -315,7 +315,7 @@ public class CreateChildrenElementsTest {
 
 			TextListItemElement listItem = contentDom.newOdfElement(TextListItemElement.class);
 			//create children elements
-			TextHElement heading = listItem.newTextHElement("1");
+			TextHElement heading = listItem.newTextHElement(1);
 			TextListElement list = listItem.newTextListElement();
 			TextPElement paragraph = listItem.newTextPElement();
 			TextSoftPageBreakElement softPageBreak = listItem.newTextSoftPageBreakElement();
@@ -396,7 +396,7 @@ public class CreateChildrenElementsTest {
 		try {
 			OdfTextDocument doc = OdfTextDocument.newTextDocument();
 			OfficeTextElement text = doc.getContentRoot();
-			FormFormElement form = text.newFormFormElement();
+			FormFormElement form = text.newOfficeFormsElement().newFormFormElement();
 			form.setFormNameAttribute("NewFrom");
 			OdfContentDom contentDom = doc.getContentDom();
 			XPath xpath = contentDom.getXPath();

@@ -368,8 +368,8 @@
 				<plugins>
 					<plugin>
 						<groupId>org.odftoolkit</groupId>
-						<artifactId>maven-codegen-plugin</artifactId>
-						<version>0.8</version>
+						<artifactId>schema2template-maven-plugin</artifactId>
+						<version>0.8.6-SNAPSHOT</version>
 						<executions>
 							<execution>
 								<id>dom</id>
@@ -379,10 +379,11 @@
 								</goals>
 								<!-- DOM LAYER CONFIGURATION -->
 								<configuration>
-									<sourceRoot>${basedir}/src/main/java</sourceRoot>
-									<schemaFile>${basedir}/src/codegen/resources/dom/OpenDocument-schema-v1.2-cd04.rng</schemaFile>
+									<targetRoot>${basedir}/src/main/java/</targetRoot>
+									<resourceRoot>${basedir}/src/codegen/resources/dom/template</resourceRoot>
+									<odf12SchemaFile>${basedir}/src/codegen/resources/dom/OpenDocument-v1.2-cd05-schema.rng</odf12SchemaFile>
+									<odf11SchemaFile>${basedir}/src/codegen/resources/dom/OpenDocument-schema-v1.1.rng</odf11SchemaFile>
 									<configFile>${basedir}/src/codegen/resources/dom/config.xml</configFile>
-									<templateFile>${basedir}/src/codegen/resources/dom/javacodetemplate.xml</templateFile>
 								</configuration>
 							</execution>
 						</executions>

@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import org.apache.xerces.dom.ElementNSImpl;
 import org.apache.xerces.dom.ParentNode;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -183,7 +182,7 @@ abstract public class OdfElement extends ElementNSImpl {
 	}
 
 	/**
-	 * Retrieves an ODF attribute by <code>OdfNamespace</code>, and local name.
+	 * Retrieves an ODF attribute by <code>NamespaceName</code>, and local name.
 	 * 
 	 * @param namespace
 	 *            The namespace of the ODF attribute.
@@ -192,8 +191,8 @@ abstract public class OdfElement extends ElementNSImpl {
 	 * @return The <code>OdfAttribute</code> or <code>null</code> if the
 	 *         attribute does not exist.
 	 */
-	public OdfAttribute getOdfAttribute(OdfNamespace namespace, String localname) {
-		return (OdfAttribute) getAttributeNodeNS(namespace.toString(),
+	public OdfAttribute getOdfAttribute(NamespaceName namespace, String localname) {
+		return (OdfAttribute) getAttributeNodeNS(namespace.getUri(),
 				localname);
 	}
 
