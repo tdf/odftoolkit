@@ -21,6 +21,7 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.io.File;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -28,6 +29,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
@@ -36,8 +38,8 @@ import org.odftoolkit.odfdom.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.doc.text.OdfTextListStyle;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeText;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.attribute.style.StyleTextUnderlineStyleAttribute;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
@@ -221,4 +223,26 @@ public class DocumentTest {
 	        }
         }
     }
+
+    @Test
+    public void testParsingOfInvalidAttribute() {
+        try {
+            // file with invalid value for enum text-underline-style
+            File testfile = ResourceUtilities.createTestResource("InvalidUnderlineAttribute.odt");
+            
+            // Test1: Loading shouldn't fail just because of one invalid attribute
+            OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(testfile);
+            Assert.assertNotNull(odt);
+
+            // Test2: invalid attribute node should have been be removed
+            OdfStyle styleNode = odt.getContentDom().getAutomaticStyles().getStyle("T1", OdfStyleFamily.Text);
+            StyleTextPropertiesElement props = OdfElement.findFirstChildNode(StyleTextPropertiesElement.class, styleNode);
+            Assert.assertFalse(props.hasAttribute("style:text-underline-style"));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail(e.getMessage());
+        }
+    }
+
 }

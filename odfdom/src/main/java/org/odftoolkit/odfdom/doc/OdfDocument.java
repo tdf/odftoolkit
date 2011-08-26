@@ -1098,10 +1098,15 @@ public abstract class OdfDocument {
                     attr.setValue(OfficeVersionAttribute.Value._1_2.toString());
                 }
                 else {
-                    attr.setValue( attributes.getValue(i));
+                    // don't exit because of invalid attribute values
+                    try {
+                        attr.setValue( attributes.getValue(i));
+                    }
+                    // if we detect an attribute with invalid value: remove attribute node
+                    catch (IllegalArgumentException e) {
+                        element.removeAttributeNode(attr);
+                    }
                 }
-               /* element.setAttributeNS(attributes.getURI(i),
-                        attributes.getQName(i), attributes.getValue(i));*/
             }
             // add the new element as a child of the current context node
             mNode.appendChild(element);
