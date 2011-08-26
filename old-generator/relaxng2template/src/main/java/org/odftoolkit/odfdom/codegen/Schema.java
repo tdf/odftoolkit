@@ -597,6 +597,9 @@ public class Schema
                     if( (config.Rename.length() != 0) )
                         attr.setName( config.Rename );
                     
+                    if( (config.DefaultValue.length() != 0) )
+                        attr.setDefaultValue( config.DefaultValue );
+                    
                     //rename subattributes
 					Iterator<Vector<Attribute>> subAttrs = element.getSubAttributes().iterator();
 					while (subAttrs.hasNext()) {

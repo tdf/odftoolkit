@@ -54,6 +54,7 @@ public class Config extends DefaultHandler
         public String Element;
         public String TypeName;            
         public String Rename;
+        public String DefaultValue;
     }
     
     public class DataTypeConfig
@@ -142,6 +143,7 @@ public class Config extends DefaultHandler
             config.TypeName = forceString( attributes.getValue("type-name") );
             config.Element = forceString( attributes.getValue("element") );
             config.Rename = forceString(  attributes.getValue("rename") );
+            config.DefaultValue = forceString(  attributes.getValue("defaultValue") );
             AttributeConfigs.add( config);
         }
     }           

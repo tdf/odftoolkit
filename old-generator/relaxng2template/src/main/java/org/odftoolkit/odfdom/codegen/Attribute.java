@@ -56,6 +56,11 @@ public class Attribute
         Optional = optional;
     }
 
+    public void setDefaultValue(String defaultValue)
+    {
+    	DefaultValue = defaultValue;
+    }
+    
     public String getDefaultValue()
     {
         return DefaultValue;
