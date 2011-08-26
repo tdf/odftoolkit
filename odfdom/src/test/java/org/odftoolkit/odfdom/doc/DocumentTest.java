@@ -60,6 +60,7 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfPackageConstraint;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.odftoolkit.odfdom.pkg.ValidationConstraint;
@@ -428,6 +429,33 @@ public class DocumentTest {
 
 	@Test
 	public void validationTest() {
+		// TESTDOC2: Expected ODF Warnings
+		Map expectedWarning2 = new HashMap();
+		expectedWarning2.put(OdfPackageConstraint.MIMETYPE_NOT_IN_PACKAGE, 1);
+		expectedWarning2.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10);
+
+		// TESTDOC2: Expected ODF Errors
+		Map expectedErrors2 = new HashMap();
+		expectedErrors2.put(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, 1);
+		expectedErrors2.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 3);
+		expectedErrors2.put(OdfSchemaConstraint.DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML, 1);
+		expectedErrors2.put(OdfSchemaConstraint.PACKAGE_SHALL_CONTAIN_MIMETYPE, 1);
+		ErrorHandlerStub handler2 = new ErrorHandlerStub(expectedWarning2, expectedErrors2, null);
+		handler2.setTestFilePath("testInvalidPkg2.odt");
+
+
+		// TESTDOC3: Expected ODF Warnings
+		Map expectedWarning3 = new HashMap();
+		expectedWarning3.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 21);
+
+		// TESTDOC3: Expected ODF Errors
+		Map expectedErrors3 = new HashMap();
+		expectedErrors3.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 2);
+		expectedErrors3.put(OdfSchemaConstraint.DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML, 1);
+		ErrorHandlerStub handler3 = new ErrorHandlerStub(expectedWarning3, expectedErrors3, null);
+		handler3.setTestFilePath("performance/Presentation1.odp");
+
+
 		// TESTDOC1: Expected ODF Warnings
 		Map expectedWarning1 = new HashMap();
 		expectedWarning1.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10);
@@ -445,39 +473,24 @@ public class DocumentTest {
 		expectedFatalErrors1.put(OdfSchemaConstraint.DOCUMENT_WITHOUT_ODF_MIMETYPE, 1);
 
 		ErrorHandlerStub handler1 = new ErrorHandlerStub(expectedWarning1, expectedErrors1, expectedFatalErrors1);
-
-
-		// TESTDOC2: Expected ODF Warnings
-		Map expectedWarning2 = new HashMap();
-		expectedWarning2.put(OdfPackageConstraint.MIMETYPE_NOT_IN_PACKAGE, 1);
-		expectedWarning2.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10);
-
-		// TESTDOC2: Expected ODF Errors
-		Map expectedErrors2 = new HashMap();
-		expectedErrors2.put(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, 1);
-		expectedErrors2.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 3);
-		expectedErrors2.put(OdfSchemaConstraint.PACKAGE_SHALL_CONTAIN_CONTENT_OR_STYLES_XML, 1);
-		ErrorHandlerStub handler2 = new ErrorHandlerStub(expectedWarning2, expectedErrors2, null);
-
-		// TESTDOC3: Expected ODF Warnings
-		Map expectedWarning3 = new HashMap();
-		expectedWarning3.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 21);
-
-		// TESTDOC3: Expected ODF Errors
-		Map expectedErrors3 = new HashMap();
-		expectedErrors3.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 2);
-		expectedErrors3.put(OdfSchemaConstraint.PACKAGE_SHALL_CONTAIN_CONTENT_OR_STYLES_XML, 1);
-		ErrorHandlerStub handler3 = new ErrorHandlerStub(expectedWarning3, expectedErrors3, null);
-
+		handler1.setTestFilePath("testInvalidPkg1.odt");
 		try {
-			OdfDocument doc2 = OdfDocument.loadDocument(new File(ResourceUtilities.getAbsolutePath("testInvalidPkg2.odt")), handler2);
+			// First Test / Handler2
+			OdfPackage pkg2 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler2.getTestFilePath())), handler2);
+			OdfDocument doc2 = OdfDocument.loadDocument(pkg2);
 			Assert.assertNotNull(doc2);
-			OdfDocument doc3 = OdfDocument.loadDocument(new File(ResourceUtilities.getAbsolutePath("performance/Presentation1.odp")), handler3);
+
+			// Second Test / Handler3
+			OdfPackage pkg3 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler3.getTestFilePath())), handler3);
+			OdfDocument doc3 = OdfDocument.loadDocument(pkg3);
 			Assert.assertNotNull(doc3);
 			Map subDocs = doc3.loadSubDocuments();
 			Assert.assertNotNull(subDocs);
 			Assert.assertEquals(PRESENTATION1_DOC_COUNT, subDocs.size());
-			OdfDocument.loadDocument(new File(ResourceUtilities.getAbsolutePath("testInvalidPkg1.odt")), handler1);
+
+			// Third Test / Handler1
+			OdfPackage pkg1 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler1.getTestFilePath())), handler1);
+			OdfDocument.loadDocument(pkg1);
 			Assert.fail();
 		} catch (Exception e) {
 			if (!e.getMessage().contains("is invalid for the ODF XML Schema document")) {

@@ -24,6 +24,7 @@ package org.odftoolkit.odfdom.doc;
 import java.io.File;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
@@ -35,6 +36,7 @@ public class ChartTemplateTest {
 	private static final String TEST_CHART_TEMPLATE = "chartTestTemplate.otc";
 
 	@Test
+	@Ignore
 	public void testLoadingAChartTemplate() throws Exception {
 		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_CHART_TEMPLATE));
 		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getMediaTypeString(),

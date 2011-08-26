@@ -41,7 +41,7 @@ public class OdfSettingsDom extends OdfFileDom {
 	 * @param odfDocument   the document the XML files belongs to
 	 * @param packagePath   the internal package path to the XML file
 	 */
-	public OdfSettingsDom(OdfPackageDocument odfDocument, String packagePath) {
+	public OdfSettingsDom(OdfSchemaDocument odfDocument, String packagePath) {
 		super(odfDocument, packagePath);
 	}
 

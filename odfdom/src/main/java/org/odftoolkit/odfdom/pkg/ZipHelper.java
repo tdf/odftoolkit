@@ -27,35 +27,40 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
 class ZipHelper {
 
 	private ZipFile mZipFile = null;
 	private byte[] mZipBuffer = null;
+	private OdfPackage mPackage = null;
 
-	public ZipHelper(ZipFile zipFile) {
+	public ZipHelper(OdfPackage pkg, ZipFile zipFile) {
 		mZipFile = zipFile;
 		mZipBuffer = null;
+		mPackage = pkg;
 	}
 
-	public ZipHelper(byte[] buffer) {
+	public ZipHelper(OdfPackage pkg, byte[] buffer) {
 		mZipBuffer = buffer;
 		mZipFile = null;
+		mPackage = pkg;
 	}
 
 	String entriesToMap(Map<String, ZipEntry> zipEntries) throws IOException, SAXException {
-		String first = null;
+		String firstEntryName = null;
 		if (mZipFile != null) {
 			Enumeration<? extends ZipEntry> entries = mZipFile.entries();
 			if (entries.hasMoreElements()) {
 				ZipEntry zipEntry = entries.nextElement();
 				if (zipEntry != null) {
-					first = zipEntry.getName();
+					firstEntryName = zipEntry.getName();
 					addZipEntry(zipEntry, zipEntries);
 					while (entries.hasMoreElements()) {
 						zipEntry = entries.nextElement();
@@ -70,7 +75,7 @@ class ZipHelper {
 			} else {
 				ZipEntry zipEntry = inputStream.getNextEntry();
 				if (zipEntry != null) {
-					first = zipEntry.getName();
+					firstEntryName = zipEntry.getName();
 					addZipEntry(zipEntry, zipEntries);
 					while (zipEntry != null) {
 						addZipEntry(zipEntry, zipEntries);
@@ -78,7 +83,7 @@ class ZipHelper {
 							zipEntry = inputStream.getNextEntry();
 						} catch (java.util.zip.ZipException e) {
 							// JDK 6 -- the try/catch is workaround for a specific JDK 5 only problem
-							if(!e.getMessage().contains("missing entry name") && !System.getProperty("Java.version").equals("1.5.0")){
+							if (!e.getMessage().contains("missing entry name") && !System.getProperty("Java.version").equals("1.5.0")) {
 								Logger.getLogger(ZipHelper.class.getName()).info("ZIP ENTRY not found");
 								throw e;
 							}
@@ -88,11 +93,22 @@ class ZipHelper {
 			}
 			inputStream.close();
 		}
-		return first;
+		return firstEntryName;
 	}
 
 	private void addZipEntry(ZipEntry zipEntry, Map<String, ZipEntry> zipEntries) {
 		String filePath = OdfPackage.normalizePath(zipEntry.getName());
+		ErrorHandler errorHandler = mPackage.getErrorHandler();
+		if (errorHandler != null) {
+			try {
+				int zipMethod = zipEntry.getMethod();
+				if (zipMethod != ZipEntry.STORED && zipMethod != ZipEntry.DEFLATED) {
+					mPackage.getErrorHandler().error(new OdfValidationException(OdfPackageConstraint.PACKAGE_ENTRY_USING_INVALID_COMPRESSION, mPackage.getBaseURI(), filePath));
+				}
+			} catch (SAXException ex) {
+				Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
 		zipEntries.put(filePath, zipEntry);
 	}
 

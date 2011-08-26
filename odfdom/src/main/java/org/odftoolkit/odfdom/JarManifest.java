@@ -139,7 +139,7 @@ public class JarManifest {
 
     /**
      * Return the date when ODFDOM had been build
-     * @return the date of the build
+     * @return the date of the build formated as "yyyy-MM-dd'T'HH:mm:ss".
      */
     public static String getOdfdomBuildDate() {
         return ODFDOM_BUILD_DATE;

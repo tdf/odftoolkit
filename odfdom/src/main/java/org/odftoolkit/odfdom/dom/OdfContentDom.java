@@ -42,7 +42,7 @@ public class OdfContentDom extends OdfFileDom {
 	 * @param odfDocument   the document the XML files belongs to
 	 * @param packagePath   the internal package path to the XML file
 	 */
-	public OdfContentDom(OdfPackageDocument odfDocument, String packagePath) {
+	public OdfContentDom(OdfSchemaDocument odfDocument, String packagePath) {
 		super(odfDocument, packagePath);
 	}
 

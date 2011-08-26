@@ -490,7 +490,7 @@ public class OdfPresentationDocument extends OdfDocument {
 						} else {
 							//note: if refObjPath is a directory, it must end with '/'
 							fileEntry = getPackage().getFileEntry(refObjPath + "/");
-							removeDocument(refObjPath);
+							removeEmbeddedDocument(refObjPath);
 						}
 					}
 				}

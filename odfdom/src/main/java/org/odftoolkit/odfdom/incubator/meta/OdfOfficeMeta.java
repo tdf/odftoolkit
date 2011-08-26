@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
+import org.odftoolkit.odfdom.dom.OdfMetaDom;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
@@ -62,15 +62,16 @@ import org.odftoolkit.odfdom.type.Duration;
 public class OdfOfficeMeta {
 
 	private OfficeMetaElement mOfficeMetaElement;
+	private boolean mAutomaticUpdate = true;
 
 	/**
 	 * Constructor of <code>OdfOfficeMeta</code> feature.
-	 * 
+	 *
 	 * @param metaDom	the file DOM element of meta.xml
 	 */
 	public OdfOfficeMeta(OdfFileDom metaDom) {
-		OfficeDocumentMetaElement metaEle = OdfElement.findFirstChildNode(OfficeDocumentMetaElement.class, metaDom);
-		mOfficeMetaElement = OdfElement.findFirstChildNode(OfficeMetaElement.class, metaEle);
+			OfficeDocumentMetaElement metaEle = OdfElement.findFirstChildNode(OfficeDocumentMetaElement.class, metaDom);
+			mOfficeMetaElement = OdfElement.findFirstChildNode(OfficeMetaElement.class, metaEle);
 	}
 
 	/**
@@ -106,15 +107,21 @@ public class OdfOfficeMeta {
 	 * <code>MetaGeneratorElement</code> , See {@odf.element
 	 * meta:generator}.
 	 * 
-	 * @param generator	set the specified document generator
+	 * @param generator	set the specified document generator. NULL will remove the element from the meta.xml.
 	 */
 	public void setGenerator(String generator) {
-		MetaGeneratorElement metaGenerator = OdfElement.findFirstChildNode(
+		MetaGeneratorElement metaGeneratorEle = OdfElement.findFirstChildNode(
 				MetaGeneratorElement.class, mOfficeMetaElement);
-		if (metaGenerator == null) {
-			metaGenerator = mOfficeMetaElement.newMetaGeneratorElement();
+		if (generator == null) {
+			if (metaGeneratorEle != null) {
+				mOfficeMetaElement.removeChild(metaGeneratorEle);
+			}
+		} else {
+			if (metaGeneratorEle == null) {
+				metaGeneratorEle = mOfficeMetaElement.newMetaGeneratorElement();
+			}
+			metaGeneratorEle.setTextContent(generator);
 		}
-		metaGenerator.setTextContent(generator);
 	}
 
 	/**
@@ -139,15 +146,21 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>DcTitleElement</code> , See {@odf.element dc:title}.
 	 * 
-	 * @param title set the specified document title
+	 * @param title set the specified document title. NULL will remove the element from the meta.xml.
 	 */
 	public void setTitle(String title) {
 		DcTitleElement titleEle = OdfElement.findFirstChildNode(
 				DcTitleElement.class, mOfficeMetaElement);
-		if (titleEle == null) {
-			titleEle = mOfficeMetaElement.newDcTitleElement();
+		if (title == null) {
+			if (titleEle != null) {
+				mOfficeMetaElement.removeChild(titleEle);
+			}
+		} else {
+			if (titleEle == null) {
+				titleEle = mOfficeMetaElement.newDcTitleElement();
+			}
+			titleEle.setTextContent(title);
 		}
-		titleEle.setTextContent(title);
 	}
 
 	/**
@@ -173,15 +186,21 @@ public class OdfOfficeMeta {
 	 * <code>DcDescriptionElement</code> , See {@odf.element
 	 * dc:description}.
 	 * 
-	 * @param description set the specified document description
+	 * @param description set the specified document description. NULL will remove the element from the meta.xml.
 	 */
 	public void setDescription(String description) {
 		DcDescriptionElement descEle = OdfElement.findFirstChildNode(
 				DcDescriptionElement.class, mOfficeMetaElement);
-		if (descEle == null) {
-			descEle = mOfficeMetaElement.newDcDescriptionElement();
+		if (description == null) {
+			if (descEle != null) {
+				mOfficeMetaElement.removeChild(descEle);
+			}
+		} else {
+			if (descEle == null) {
+				descEle = mOfficeMetaElement.newDcDescriptionElement();
+			}
+			descEle.setTextContent(description);
 		}
-		descEle.setTextContent(description);
 	}
 
 	/**
@@ -207,15 +226,21 @@ public class OdfOfficeMeta {
 	 * <code>DcSubjectElement</code> , See {@odf.element
 	 * dc:subject}.
 	 * 
-	 * @param subject set the specified document subject
+	 * @param subject set the specified document subject. NULL will remove the element from the meta.xml.
 	 */
 	public void setSubject(String subject) {
 		DcSubjectElement subjectEle = OdfElement.findFirstChildNode(
 				DcSubjectElement.class, mOfficeMetaElement);
-		if (subjectEle == null) {
-			subjectEle = mOfficeMetaElement.newDcSubjectElement();
+		if (subject == null) {
+			if (subjectEle != null) {
+				mOfficeMetaElement.removeChild(subjectEle);
+			}
+		} else {
+			if (subjectEle == null) {
+				subjectEle = mOfficeMetaElement.newDcSubjectElement();
+			}
+			subjectEle.setTextContent(subject);
 		}
-		subjectEle.setTextContent(subject);
 	}
 
 	/**
@@ -420,7 +445,6 @@ public class OdfOfficeMeta {
 		if (definedElement != null) {
 			definedElement.setTextContent(value);
 		}
-
 	}
 
 	/**
@@ -494,15 +518,21 @@ public class OdfOfficeMeta {
 	 * <code>MetaInitialCreatorElement</code> , See {@odf.element
 	 * meta:initial-creator}.
 	 * 
-	 * @param initialCreator set the specified initial creator
+	 * @param initialCreator set the specified initial creator. NULL will remove the element from the meta.xml.
 	 */
 	public void setInitialCreator(String initialCreator) {
-		MetaInitialCreatorElement iniCreatorEle = OdfElement.findFirstChildNode(MetaInitialCreatorElement.class,
+		MetaInitialCreatorElement initialCreatorEle = OdfElement.findFirstChildNode(MetaInitialCreatorElement.class,
 				mOfficeMetaElement);
-		if (iniCreatorEle == null) {
-			iniCreatorEle = mOfficeMetaElement.newMetaInitialCreatorElement();
+		if (initialCreator == null) {
+			if (initialCreatorEle != null) {
+				mOfficeMetaElement.removeChild(initialCreatorEle);
+			}
+		} else {
+			if (initialCreatorEle == null) {
+				initialCreatorEle = mOfficeMetaElement.newMetaInitialCreatorElement();
+			}
+			initialCreatorEle.setTextContent(initialCreator);
 		}
-		iniCreatorEle.setTextContent(initialCreator);
 	}
 
 	/**
@@ -528,15 +558,21 @@ public class OdfOfficeMeta {
 	 * <code>DcCreatorElement</code> , See {@odf.element
 	 * dc:creator}.
 	 * 
-	 * @param creator set the specified creator
+	 * @param creator set the specified creator. NULL will remove the element from the meta.xml.
 	 */
 	public void setCreator(String creator) {
 		DcCreatorElement creatorEle = OdfElement.findFirstChildNode(
 				DcCreatorElement.class, mOfficeMetaElement);
-		if (creatorEle == null) {
-			creatorEle = mOfficeMetaElement.newDcCreatorElement();
+		if (creator == null) {
+			if (creatorEle != null) {
+				mOfficeMetaElement.removeChild(creatorEle);
+			}
+		} else {
+			if (creatorEle == null) {
+				creatorEle = mOfficeMetaElement.newDcCreatorElement();
+			}
+			creatorEle.setTextContent(creator);
 		}
-		creatorEle.setTextContent(creator);
 	}
 
 	/**
@@ -562,15 +598,21 @@ public class OdfOfficeMeta {
 	 * <code>MetaPrintedByElement</code> , See {@odf.element
 	 * meta:printed-by}.
 	 * 
-	 * @param printedBy	the name need to set for the last person who printed the current document
+	 * @param printedBy	the name need to set for the last person who printed the current document. NULL will remove the element from the meta.xml.
 	 */
 	public void setPrintedBy(String printedBy) {
 		MetaPrintedByElement printedByEle = OdfElement.findFirstChildNode(
 				MetaPrintedByElement.class, mOfficeMetaElement);
-		if (printedByEle == null) {
-			printedByEle = mOfficeMetaElement.newMetaPrintedByElement();
+		if (printedBy == null) {
+			if (printedByEle != null) {
+				mOfficeMetaElement.removeChild(printedByEle);
+			}
+		} else {
+			if (printedByEle == null) {
+				printedByEle = mOfficeMetaElement.newMetaPrintedByElement();
+			}
+			printedByEle.setTextContent(printedBy);
 		}
-		printedByEle.setTextContent(printedBy);
 	}
 
 	/**
@@ -596,15 +638,21 @@ public class OdfOfficeMeta {
 	 * <code>MetaCreationDateElement</code> , See {@odf.element
 	 * meta:creation-date}.
 	 * 
-	 * @param creationDate	the date and time need to set
+	 * @param creationDate	the date and time need to set. NULL will remove the element from the meta.xml.
 	 */
 	public void setCreationDate(Calendar creationDate) {
 		MetaCreationDateElement creationDateEle = OdfElement.findFirstChildNode(MetaCreationDateElement.class,
 				mOfficeMetaElement);
-		if (creationDateEle == null) {
-			creationDateEle = mOfficeMetaElement.newMetaCreationDateElement();
+		if (creationDate == null) {
+			if (creationDateEle != null) {
+				mOfficeMetaElement.removeChild(creationDateEle);
+			}
+		} else {
+			if (creationDateEle == null) {
+				creationDateEle = mOfficeMetaElement.newMetaCreationDateElement();
+			}
+			creationDateEle.setTextContent(calendarToString(creationDate));
 		}
-		creationDateEle.setTextContent(calendarToString(creationDate));
 	}
 
 	/**
@@ -615,7 +663,7 @@ public class OdfOfficeMeta {
 	 * <p>
 	 * <code>null</code>, if the element is not set.
 	 */
-	public Calendar getDcdate() {
+	public Calendar getDate() {
 		DcDateElement dcDateEle = OdfElement.findFirstChildNode(
 				DcDateElement.class, mOfficeMetaElement);
 		if (dcDateEle != null) {
@@ -628,15 +676,21 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>DcDateElement</code> , See {@odf.element dc:date}.
 	 * 
-	 * @param dcdate	the date and time need to set
+	 * @param dcdate	the date and time need to set. NULL will remove the element from the meta.xml.
 	 */
-	public void setDcdate(Calendar dcdate) {
+	public void setDate(Calendar date) {
 		DcDateElement dcDateEle = OdfElement.findFirstChildNode(
 				DcDateElement.class, mOfficeMetaElement);
-		if (dcDateEle == null) {
-			dcDateEle = mOfficeMetaElement.newDcDateElement();
+		if (date == null) {
+			if (dcDateEle != null) {
+				mOfficeMetaElement.removeChild(dcDateEle);
+			}
+		} else {
+			if (dcDateEle == null) {
+				dcDateEle = mOfficeMetaElement.newDcDateElement();
+			}
+			dcDateEle.setTextContent(calendarToString(date));
 		}
-		dcDateEle.setTextContent(calendarToString(dcdate));
 	}
 
 	/**
@@ -662,15 +716,21 @@ public class OdfOfficeMeta {
 	 * <code>MetaPrintDateElement</code> , See {@odf.element
 	 * meta:print-date}.
 	 * 
-	 * @param printDate	the date and time need to set
+	 * @param printDate	the date and time need to set. NULL will remove the element from the meta.xml.
 	 */
 	public void setPrintDate(Calendar printDate) {
 		MetaPrintDateElement printDateEle = OdfElement.findFirstChildNode(
 				MetaPrintDateElement.class, mOfficeMetaElement);
-		if (printDateEle == null) {
-			printDateEle = mOfficeMetaElement.newMetaPrintDateElement();
+		if (printDate == null) {
+			if (printDateEle != null) {
+				mOfficeMetaElement.removeChild(printDateEle);
+			}
+		} else {
+			if (printDateEle == null) {
+				printDateEle = mOfficeMetaElement.newMetaPrintDateElement();
+			}
+			printDateEle.setTextContent(calendarToString(printDate));
 		}
-		printDateEle.setTextContent(calendarToString(printDate));
 	}
 
 	/**
@@ -696,15 +756,21 @@ public class OdfOfficeMeta {
 	 * <code>DcLanguageElement</code> , See {@odf.element
 	 * dc:language}.
 	 * 
-	 * @param language the default language need to set fo the current document
+	 * @param language the default language need to set fo the current document. NULL will remove the element from the meta.xml.
 	 */
 	public void setLanguage(String language) {
 		DcLanguageElement languageEle = OdfElement.findFirstChildNode(
 				DcLanguageElement.class, mOfficeMetaElement);
-		if (languageEle == null) {
-			languageEle = mOfficeMetaElement.newDcLanguageElement();
+		if (language == null) {
+			if (languageEle != null) {
+				mOfficeMetaElement.removeChild(languageEle);
+			}
+		} else {
+			if (languageEle == null) {
+				languageEle = mOfficeMetaElement.newDcLanguageElement();
+			}
+			languageEle.setTextContent(language);
 		}
-		languageEle.setTextContent(language);
 	}
 
 	/**
@@ -730,15 +796,21 @@ public class OdfOfficeMeta {
 	 * <code>MetaEditingCyclesElement</code> , See {@odf.element
 	 * meta:editing-cycles}.
 	 * 
-	 * @param editingCycles	set the specified edit times
+	 * @param editingCycles	set the specified edit times. NULL will remove the element from the meta.xml.
 	 */
 	public void setEditingCycles(Integer editingCycles) {
 		MetaEditingCyclesElement editingCyclesEle = OdfElement.findFirstChildNode(MetaEditingCyclesElement.class,
 				mOfficeMetaElement);
-		if (editingCyclesEle == null) {
-			editingCyclesEle = mOfficeMetaElement.newMetaEditingCyclesElement();
+		if (editingCycles == null) {
+			if (editingCyclesEle != null) {
+				mOfficeMetaElement.removeChild(editingCyclesEle);
+			}
+		} else {
+			if (editingCyclesEle == null) {
+				editingCyclesEle = mOfficeMetaElement.newMetaEditingCyclesElement();
+			}
+			editingCyclesEle.setTextContent(String.valueOf(editingCycles));
 		}
-		editingCyclesEle.setTextContent(String.valueOf(editingCycles));
 	}
 
 	/**
@@ -764,16 +836,21 @@ public class OdfOfficeMeta {
 	 * <code>MetaEditingDurationElement</code> , See {@odf.element
 	 *  meta:editing-duration}.
 	 * 
-	 * @param editingDuration the time need to set
+	 * @param editingDuration the time need to set. NULL will remove the element from the meta.xml.
 	 */
 	public void setEditingDuration(Duration editingDuration) {
-		MetaEditingDurationElement editiingDurationEle = OdfElement.findFirstChildNode(MetaEditingDurationElement.class,
+		MetaEditingDurationElement editingDurationEle = OdfElement.findFirstChildNode(MetaEditingDurationElement.class,
 				mOfficeMetaElement);
-		if (editiingDurationEle == null) {
-			editiingDurationEle = mOfficeMetaElement.newMetaEditingDurationElement();
+		if (editingDuration == null) {
+			if (editingDurationEle != null) {
+				mOfficeMetaElement.removeChild(editingDurationEle);
+			}
+		} else {
+			if (editingDurationEle == null) {
+				editingDurationEle = mOfficeMetaElement.newMetaEditingDurationElement();
+			}
+			editingDurationEle.setTextContent(editingDuration.toString());
 		}
-		editiingDurationEle.setTextContent(editingDuration.toString());
-
 	}
 
 	/**
@@ -897,5 +974,27 @@ public class OdfOfficeMeta {
 	 */
 	private String calendarToString(Calendar calendar) {
 		return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(calendar.getTime());
+	}
+
+	/**@param enableAutomaticUpdate If the automatic update of metadata is enabled, metadata such as last modified data is set during saving the document.
+	The default is <code>true</code>, disabling the default allows to load and save a document without changing any data.
+	 */
+	public void setAutomaticUpdate(boolean enableAutomaticUpdate) {
+		mAutomaticUpdate = enableAutomaticUpdate;
+	}
+
+	/**@return If the automatic update of metadata is enabled, metadata such as last modified data is set during saving the document.
+	The default is <code>true</code>, disabling the default allows to load and save a document without changing any data. */
+	public boolean hasAutomaticUpdate() {
+		return mAutomaticUpdate;
+	}
+
+	@Override
+	public String toString() {
+		if (mOfficeMetaElement != null) {
+			return mOfficeMetaElement.toString();
+		} else {
+			return null;
+		}
 	}
 }

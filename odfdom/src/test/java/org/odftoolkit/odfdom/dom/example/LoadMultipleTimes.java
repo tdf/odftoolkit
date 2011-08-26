@@ -37,8 +37,8 @@ public class LoadMultipleTimes {
 	@Test
 	@Ignore
 	/** A testdocument will be loaded and closed repeatedly and the memory will be logged.
-	 Loading is tested with and without disc memory usage */
-	public void testRepeatedLoading(){
+	Loading is tested with and without disc memory usage */
+	public void testRepeatedLoading() {
 		System.setProperty("org.odftoolkit.odfdom.tmpfile.disable", "true");
 		repeatedLoading();
 		System.setProperty("org.odftoolkit.odfdom.tmpfile.disable", "false");
@@ -67,34 +67,5 @@ public class LoadMultipleTimes {
 			}
 		}
 		LOG.info("Opening " + num + " times took " + t + " milliseconds");
-	}
-
-	@Test
-	@Ignore
-	/** The reference templates of the JAR will be loaded and saved. */
-	public void updateTemplates(){
-		try {
-			// ToDo: Load all files of the directory "src/main/resources/"
-			// ToDo: Set the Generator metadata tag in accordance of the pom.xml System property
-			OdfDocument doc = OdfDocument.loadDocument("src/main/resources/OdfChartDocument.odc");
-			doc.save("src/main/resources/OdfChartDocument.odc");
-
-			doc = OdfDocument.loadDocument("src/main/resources/OdfGraphicsDocument.odg");
-			doc.save("src/main/resources/OdfGraphicsDocument.odg");
-			
-			doc = OdfDocument.loadDocument("src/main/resources/OdfImageDocument.odi");
-			doc.save("src/main/resources/OdfImageDocument.odi");
-			
-			doc = OdfDocument.loadDocument("src/main/resources/OdfPresentationDocument.odp");
-			doc.save("src/main/resources/OdfPresentationDocument.odp");
-			
-			doc = OdfDocument.loadDocument("src/main/resources/OdfSpreadsheetDocument.ods");
-			doc.save("src/main/resources/OdfSpreadsheetDocument.ods");
-			
-			doc = OdfDocument.loadDocument("src/main/resources/OdfTextDocument.odt");
-			doc.save("src/main/resources/OdfTextDocument.odt");
-		} catch (Exception ex) {
-			Logger.getLogger(LoadMultipleTimes.class.getName()).log(Level.SEVERE, null, ex);
-		}
 	}
 }

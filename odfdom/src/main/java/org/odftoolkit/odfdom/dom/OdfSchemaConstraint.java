@@ -36,7 +36,10 @@ public enum OdfSchemaConstraint implements ValidationConstraint {
 	/** A ODF mimetype is invalid for the ODF XML Schema document. */
 	DOCUMENT_WITHOUT_ODF_MIMETYPE("The ODF mimetype '%2$s' is invalid for the ODF XML Schema document%1$s!"),
 	/** At least \'content.xml' or 'styles.xml' have to be contained in the ODF XML Schema package.*/
-	PACKAGE_SHALL_CONTAIN_CONTENT_OR_STYLES_XML("At least 'content.xml' or 'styles.xml' have to be contained in the ODF XML Schema package%1$s!");
+	DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML("At least 'content.xml' or 'styles.xml' have to be contained in the ODF XML Schema package%1$s!"),
+	/** The 'mimetype' file have to be contained in the ODF XML Schema package.*/
+	PACKAGE_SHALL_CONTAIN_MIMETYPE("The 'mimetype' file have to be contained in the ODF XML Schema package%1$s!");
+
 	private final String mMessage;
 
 	/**

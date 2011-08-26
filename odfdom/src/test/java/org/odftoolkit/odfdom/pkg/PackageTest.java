@@ -119,7 +119,8 @@ public class PackageTest {
 				OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE));
 				Assert.fail();
 			} catch (Exception e) {
-				if (!e.getMessage().contains(OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage().replace("%s", ""))) {
+				String errorMsg = OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage();
+				if (!e.getMessage().endsWith(errorMsg.substring(errorMsg.indexOf("%1$s") + 4))) {
 					LOG.log(Level.SEVERE, null, e);
 					Assert.fail();
 				}
@@ -132,7 +133,8 @@ public class PackageTest {
 				OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE)), new DefaultHandler());
 				Assert.fail();
 			} catch (SAXException e) {
-				if (!e.getMessage().contains(OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage().replace("%s", ""))) {
+				String errorMsg = OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage();
+				if (!e.getMessage().endsWith(errorMsg.substring(errorMsg.indexOf("%1$s") + 4))) {
 					LOG.log(Level.SEVERE, null, e);
 					Assert.fail();
 				}
@@ -257,7 +259,8 @@ public class PackageTest {
 			OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath("testA.jpg"));
 			Assert.fail();
 		} catch (Exception e) {
-			if (!e.getMessage().contains(OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage().replace("%s", ""))) {
+			String errorMsg = OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage();
+			if (!e.getMessage().endsWith(errorMsg.substring(errorMsg.indexOf("%1$s") + 4))) {
 				Assert.fail();
 			}
 		}
@@ -278,6 +281,7 @@ public class PackageTest {
 		expectedErrors1.put(OdfPackageConstraint.MIMETYPE_DIFFERS_FROM_PACKAGE, 1);
 		expectedErrors1.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 1);
 		ErrorHandlerStub handler1 = new ErrorHandlerStub(expectedWarning1, expectedErrors1, null);
+		handler1.setTestFilePath("testInvalidPkg1.odt");
 
 
 		// TESTDOC2: Expected ODF Warnings
@@ -290,12 +294,16 @@ public class PackageTest {
 		expectedErrors2.put(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, 1);
 		expectedErrors2.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 3);
 		ErrorHandlerStub handler2 = new ErrorHandlerStub(expectedWarning2, expectedErrors2, null);
+		handler2.setTestFilePath("testInvalidPkg2.odt");
 
 
+		// TESTDOC3 DESCRIPTION - only mimetype file in package
 		// TESTDOC3: Expected ODF Errors
 		Map expectedErrors3 = new HashMap();
 		expectedErrors3.put(OdfPackageConstraint.MANIFEST_NOT_IN_PACKAGE, 1);
+		expectedErrors3.put(OdfPackageConstraint.MIMETYPE_WITHOUT_MANIFEST_MEDIATYPE, 1);
 		ErrorHandlerStub handler3 = new ErrorHandlerStub(null, expectedErrors3, null);
+		handler3.setTestFilePath("testInvalidPkg3.odt");
 
 
 		// TESTDOC4: Expected ODF FatalErrors
@@ -305,17 +313,18 @@ public class PackageTest {
 		ErrorHandlerStub handler4 = new ErrorHandlerStub(null, null, expectedFatalErrors4);
 
 		try {
-			OdfPackage pkg1 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath("testInvalidPkg1.odt")), handler1);
+			OdfPackage pkg1 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler1.getTestFilePath())), handler1);
 			Assert.assertNotNull(pkg1);
-			OdfPackage pkg2 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath("testInvalidPkg2.odt")), handler2);
+			OdfPackage pkg2 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler2.getTestFilePath())), handler2);
 			Assert.assertNotNull(pkg2);
-			OdfPackage pkg3 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath("testInvalidPkg3.odt")), handler3);
+			OdfPackage pkg3 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler3.getTestFilePath())), handler3);
 			Assert.assertNotNull(pkg3);
 			try {
 				OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath("testA.jpg")), handler4);
 				Assert.fail();
 			} catch (Exception e) {
-				if (!e.getMessage().contains(OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage().replace("%s", ""))) {
+				String errorMsg = OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage();
+				if (!e.getMessage().endsWith(errorMsg.substring(errorMsg.indexOf("%1$s") + 4))) {
 					Assert.fail();
 				}
 			}

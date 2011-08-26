@@ -25,6 +25,7 @@ package org.odftoolkit.odfdom.dom;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.ZipEntry;
 
 
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
@@ -54,14 +55,30 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 	protected OdfSettingsDom mSettingsDom;
 	protected OdfOfficeStyles mDocumentStyles;
 
-	protected OdfSchemaDocument(OdfPackage pkg, String internalPath, String mediaTypeString) throws SAXException {
+	protected OdfSchemaDocument(OdfPackage pkg, String internalPath, String mediaTypeString)  {
 		super(pkg, internalPath, mediaTypeString);
 		ErrorHandler errorHandler = pkg.getErrorHandler();
 		if (errorHandler != null) {
 			if (pkg.getFileEntry(internalPath + "content.xml") == null
 					&& pkg.getFileEntry(internalPath + "styles.xml") == null) {
 				try {
-					errorHandler.error(new OdfValidationException(OdfSchemaConstraint.PACKAGE_SHALL_CONTAIN_CONTENT_OR_STYLES_XML));
+					String baseURI = pkg.getBaseURI();
+					if (baseURI == null) {
+						baseURI = internalPath;
+					} else {
+						if (!internalPath.equals(ROOT_DOCUMENT_PATH)) {
+							baseURI = "/" + internalPath;
+						}
+					}
+					errorHandler.error(new OdfValidationException(OdfSchemaConstraint.DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML, baseURI));
+				} catch (SAXException ex) {
+					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+			InputStream mimetypeStream = pkg.getInputStream(OdfPackage.OdfFile.MEDIA_TYPE.getPath(), true);
+			if (internalPath.equals(ROOT_DOCUMENT_PATH) && mimetypeStream == null) {
+				try {
+					errorHandler.error(new OdfValidationException(OdfSchemaConstraint.PACKAGE_SHALL_CONTAIN_MIMETYPE, pkg.getBaseURI()));
 				} catch (SAXException ex) {
 					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 				}

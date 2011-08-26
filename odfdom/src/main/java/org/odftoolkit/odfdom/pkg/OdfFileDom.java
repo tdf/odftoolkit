@@ -42,6 +42,7 @@ import java.util.logging.Logger;
 import javax.xml.XMLConstants;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfMetaDom;
+import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
@@ -106,13 +107,13 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 		if (existingDom == null) {
 			// bug ??? - register OdfFileDom to this class
 			if (packagePath.equals("content.xml") || packagePath.endsWith("/content.xml")) {
-				newFileDom = new OdfContentDom(packageDocument, packagePath);
+				newFileDom = new OdfContentDom((OdfSchemaDocument) packageDocument, packagePath);
 			} else if (packagePath.equals("styles.xml") || packagePath.endsWith("/styles.xml")) {
-				newFileDom = new OdfStylesDom(packageDocument, packagePath);
+				newFileDom = new OdfStylesDom((OdfSchemaDocument) packageDocument, packagePath);
 			} else if (packagePath.equals("meta.xml") || packagePath.endsWith("/meta.xml")) {
-				newFileDom = new OdfMetaDom(packageDocument, packagePath);
+				newFileDom = new OdfMetaDom((OdfSchemaDocument) packageDocument, packagePath);
 			} else if (packagePath.equals("settings.xml") || packagePath.endsWith("/settings.xml")) {
-				newFileDom = new OdfSettingsDom(packageDocument, packagePath);
+				newFileDom = new OdfSettingsDom((OdfSchemaDocument) packageDocument, packagePath);
 			} else {
 				newFileDom = new OdfFileDom(packageDocument, packagePath);
 			}

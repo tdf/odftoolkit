@@ -40,9 +40,10 @@ public class ErrorHandlerStub implements ErrorHandler {
 
 	private static final Logger LOG = Logger.getLogger(ErrorHandlerStub.class.getName());
 	/** Map which returns the number of defects for each given ValidationConstraint */
-	Map<ValidationConstraint, Integer> mExpectedWarning;
-	Map<ValidationConstraint, Integer> mExpectedError;
-	Map<ValidationConstraint, Integer> mExpectedFatalError;
+	private Map<ValidationConstraint, Integer> mExpectedWarning;
+	private Map<ValidationConstraint, Integer> mExpectedError;
+	private Map<ValidationConstraint, Integer> mExpectedFatalError;
+	private String mTestFilePath = null;
 
 	/** @param expectedW Excpected Warnings - a Map relating a certain ValidationConstraint to the number of occurances */
 	/** @param expectedE Excpected Errors	- a Map relating a certain ValidationConstraint to the number of occurances */
@@ -109,23 +110,33 @@ public class ErrorHandlerStub implements ErrorHandler {
 		}
 	}
 
-	private void logMissingConstraint(ValidationConstraint constraint, String level, int problemOccurance) {
+	private void logMissingConstraint(ValidationConstraint constraint, String errorLevel, int problemOccurance) {
 		if (constraint instanceof OdfPackageConstraint) {
 			OdfPackageConstraint pkgConstraint = (OdfPackageConstraint) constraint;
-			Assert.fail(problemOccurance + "time(s) missing in the document the expected ODF 1.2 Package " + level + " for " + pkgConstraint.name());
+			Assert.fail(problemOccurance + "x time(s) was in " + getTestFilePath() + " not thrown the ODF 1.2 Package " + errorLevel + " '" + pkgConstraint.name() + "'!");
 		} else {
 			OdfSchemaConstraint schemaConstraint = (OdfSchemaConstraint) constraint;
-			Assert.fail(problemOccurance + "time(s) missing in the document the expected ODF 1.2 Schema error for " + schemaConstraint.name());
+			Assert.fail(problemOccurance + "x time(s) was in " + getTestFilePath() + " not thrown the ODF 1.2 Schema " + errorLevel + " '" + schemaConstraint.name() + "'!");
 		}
 	}
 
-	private void logUnexpectedConstraint(ValidationConstraint constraint, String level, int problemOccurance) {
+	private void logUnexpectedConstraint(ValidationConstraint constraint, String errorLevel, int problemOccurance) {
 		if (constraint instanceof OdfPackageConstraint) {
 			OdfPackageConstraint pkgConstraint = (OdfPackageConstraint) constraint;
-			Assert.fail(problemOccurance + "time(s) unexpected a new ODF 1.2 Package " + level + " for " + pkgConstraint.name());
+			Assert.fail(problemOccurance + "x time(s) in " + getTestFilePath() + " a new ODF 1.2 Package " + errorLevel + " '" + pkgConstraint.name() + "' was unexpected thrown!");
 		} else {
 			OdfSchemaConstraint schemaConstraint = (OdfSchemaConstraint) constraint;
-			Assert.fail(problemOccurance + "time(s) unexpected a new ODF 1.2 Schema error for " + schemaConstraint.name());
+			Assert.fail(problemOccurance + "x time(s) in " + getTestFilePath() + " a new ODF 1.2 Schema " + errorLevel + " '" + schemaConstraint.name() + "' was unexpected thrown!");
 		}
+	}
+
+	/** @param the path of the test file */
+	public void setTestFilePath(String testFilePath) {
+		mTestFilePath = testFilePath;
+	}
+
+	/** @returns the path of the test file */
+	public String getTestFilePath() {
+		return mTestFilePath;
 	}
 }

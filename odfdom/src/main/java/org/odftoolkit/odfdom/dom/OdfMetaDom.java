@@ -25,9 +25,9 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentMetaElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeMetaElement;
 import org.odftoolkit.odfdom.pkg.NamespaceName;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 
 /**
  * The DOM repesentation of the ODF meta.xml file of an ODF document.
@@ -42,8 +42,15 @@ public class OdfMetaDom extends OdfFileDom {
 	 * @param odfDocument   the document the XML files belongs to
 	 * @param packagePath   the internal package path to the XML file
 	 */
-	public OdfMetaDom(OdfPackageDocument odfDocument, String packagePath) {
+	public OdfMetaDom(OdfSchemaDocument odfDocument, String packagePath) {
 		super(odfDocument, packagePath);
+		OfficeDocumentMetaElement rootElement = this.getRootElement();
+		if(rootElement == null){		
+			rootElement = new OfficeDocumentMetaElement(this);
+			this.appendChild(rootElement);
+			OfficeMetaElement officeMetaElement = new OfficeMetaElement(this);
+			rootElement.appendChild(officeMetaElement);
+		}
 	}
 
 	/** Might be used to initialize specific XML Namespace prefixes/URIs for this XML file*/
@@ -70,7 +77,7 @@ public class OdfMetaDom extends OdfFileDom {
 	 * @return The root element <office:document-meta> of the meta.xml file as <code>OfficeDocumentMetaElement</code>.
 	 */
 	@Override
-	public OfficeDocumentMetaElement getRootElement() {
+	public final OfficeDocumentMetaElement getRootElement() {
 		return (OfficeDocumentMetaElement) getDocumentElement();
 	}
 

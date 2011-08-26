@@ -82,22 +82,22 @@ public class OdfValidationException extends SAXParseException {
 		}
 		switch (varCount) {
 			case 0:
-				formattedString = String.format(constraint.getMessage(), sourcePath == null ? NO_SOURCE : SOURCE_PREFIX + sourcePath + SOURCE_SUFFIX);
+				formattedString = String.format(constraint.getMessage(), sourcePath == null || sourcePath.equals(NO_SOURCE) ? NO_SOURCE : SOURCE_PREFIX + sourcePath + SOURCE_SUFFIX);
 				break;
 			case 1:
-				formattedString = String.format(constraint.getMessage(), sourcePath == null ? NO_SOURCE : SOURCE_PREFIX + sourcePath + SOURCE_SUFFIX, messageParameters[0]);
+				formattedString = String.format(constraint.getMessage(), sourcePath == null || sourcePath.equals(NO_SOURCE) ? NO_SOURCE : SOURCE_PREFIX + sourcePath + SOURCE_SUFFIX, messageParameters[0]);
 				break;
 			case 2:
-				formattedString = String.format(constraint.getMessage(), sourcePath == null ? NO_SOURCE : SOURCE_PREFIX + sourcePath + SOURCE_SUFFIX, messageParameters[0], messageParameters[1]);
+				formattedString = String.format(constraint.getMessage(), sourcePath == null || sourcePath.equals(NO_SOURCE) ? NO_SOURCE : SOURCE_PREFIX + sourcePath + SOURCE_SUFFIX, messageParameters[0], messageParameters[1]);
 				break;
 			case 3:
-				formattedString = String.format(constraint.getMessage(), sourcePath == null ? NO_SOURCE : SOURCE_PREFIX + sourcePath + SOURCE_SUFFIX, messageParameters[0], messageParameters[1], messageParameters[2]);
+				formattedString = String.format(constraint.getMessage(), sourcePath == null || sourcePath.equals(NO_SOURCE) ? NO_SOURCE : SOURCE_PREFIX + sourcePath + SOURCE_SUFFIX, messageParameters[0], messageParameters[1], messageParameters[2]);
 				break;
 			case 4:
-				formattedString = String.format(constraint.getMessage(), sourcePath == null ? NO_SOURCE : SOURCE_PREFIX + sourcePath + SOURCE_SUFFIX, messageParameters[0], messageParameters[1], messageParameters[2], messageParameters[3]);
+				formattedString = String.format(constraint.getMessage(), sourcePath == null || sourcePath.equals(NO_SOURCE) ? NO_SOURCE : SOURCE_PREFIX + sourcePath + SOURCE_SUFFIX, messageParameters[0], messageParameters[1], messageParameters[2], messageParameters[3]);
 				break;
 			case 5:
-				formattedString = String.format(constraint.getMessage(), sourcePath == null ? NO_SOURCE : SOURCE_PREFIX + sourcePath + SOURCE_SUFFIX, messageParameters[0], messageParameters[1], messageParameters[2], messageParameters[3], messageParameters[4]);
+				formattedString = String.format(constraint.getMessage(), sourcePath == null || sourcePath.equals(NO_SOURCE) ? NO_SOURCE : SOURCE_PREFIX + sourcePath + SOURCE_SUFFIX, messageParameters[0], messageParameters[1], messageParameters[2], messageParameters[3], messageParameters[4]);
 				break;
 		}
 		return formattedString;

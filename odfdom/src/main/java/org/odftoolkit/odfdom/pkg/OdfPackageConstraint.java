@@ -33,6 +33,8 @@ public enum OdfPackageConstraint implements ValidationConstraint {
 	// NOTE FOLLOWING CODE CONVENTION:
 	// The first parameter is ALWAYS the source path. The OdfValidationException adds a preceding whitespace in case the source is not null.
 
+	/** In case a ZIP entry is using neither STORED and DEFLATED as compression method.*/
+	PACKAGE_ENTRY_USING_INVALID_COMPRESSION("The compression method of the ZIP entry '%2$s' is not allowed within the%1$s ODF package file!"),
 	/** The ODF package shall contain the \"/META-INF/manifest.xml\" file. */
 	MANIFEST_NOT_IN_PACKAGE("The ODF package%1$s shall contain the '" + OdfFile.MANIFEST.getPath() + "' file!"),
 	/** A directory is not a sub-document and should not be listed in the \"/META-INF/manifest.xml\" file of ODF package. */
@@ -44,7 +46,9 @@ public enum OdfPackageConstraint implements ValidationConstraint {
 	/** A file shall be listed in the \"/META-INF/manifest.xml\" file as it exists in the ODF package. */
 	MANIFEST_DOES_NOT_LIST_FILE("The file '%2$s' shall be listed in the '" + OdfFile.MANIFEST.getPath() + "' file as it exists in the ODF package%1$s!"),
 	/** The ODF package contains a \"mediatype\" file, which content differs from the mediatype of the root document!" */
-	MIMETYPE_DIFFERS_FROM_PACKAGE("The ODF package%s contains a '" + OdfFile.MEDIA_TYPE.getPath() + "' file containing '%2$s', which differs from the mediatype of the root document '%3$s'!"),
+	MIMETYPE_DIFFERS_FROM_PACKAGE("The ODF package%1$s contains a '" + OdfFile.MEDIA_TYPE.getPath() + "' file containing '%2$s', which differs from the mediatype of the root document '%3$s'!"),
+	/** The ODF package contains a \"mediatype\" file, but no mediatype its root document in the \"/META-INF/manifest.xml\" file of ODF package! */
+	MIMETYPE_WITHOUT_MANIFEST_MEDIATYPE("The ODF package%1$s contains a '" + OdfFile.MEDIA_TYPE.getPath() + "' file containing '%2$s', but no mediatype for its root document in its '" + OdfFile.MANIFEST.getPath() + "'!"),
 	/** There shall be no extra field for the \"mediatype\" file of ODF package. */
 	MIMETYPE_HAS_EXTRA_FIELD("There shall be no extra field for the '" + OdfFile.MEDIA_TYPE.getPath() + "' file of ODF package%1$s!"),
 	/** The file \"mediatype\" shall not be compressed in the ODF package. */
@@ -52,9 +56,9 @@ public enum OdfPackageConstraint implements ValidationConstraint {
 	/** The file \"mediatype\" is not the first file in the ODF package. */
 	MIMETYPE_NOT_FIRST_IN_PACKAGE("The file '" + OdfFile.MEDIA_TYPE.getPath() + "' is not the first file in the ODF package%1$s!"),
 	/** The ODF package contains no \"mediatype\" file. */
-	MIMETYPE_NOT_IN_PACKAGE("The ODF package%s contains no '" + OdfFile.MEDIA_TYPE.getPath() + "' file!"),
+	MIMETYPE_NOT_IN_PACKAGE("The ODF package%1$s contains no '" + OdfFile.MEDIA_TYPE.getPath() + "' file!"),
 	/** The ODF package shall be a ZIP file. */
-	PACKAGE_IS_NO_ZIP("The ODF package%s shall be a ZIP file!");
+	PACKAGE_IS_NO_ZIP("The ODF package%1$s shall be a ZIP file!");
 	private final String mMessage;
 
 	/**

@@ -25,7 +25,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentContentElement;

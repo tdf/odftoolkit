@@ -21,40 +21,46 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.incubator.meta;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute.Value;
+import org.odftoolkit.odfdom.dom.example.LoadMultipleTimes;
 import org.odftoolkit.odfdom.type.Duration;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class OfficeMetaTest {
 
+	private static final Logger LOG = Logger.getLogger(OfficeMetaTest.class.getName());
 	private String filename = "metaTest.odt";
 	private OdfTextDocument doc;
 	private OdfFileDom metadom;
 	private OdfOfficeMeta fMetadata;
-	private String generator = "ODFDOM/" + System.getProperty("odfdom.version");
+	private static final String generator = "ODFDOM/SNAPSHOT-TEST";
 	private String dctitle = "dctitle";
 	private String dcdescription = "dcdescription";
 	private String subject = "dcsubject";
 	private List<String> keywords = new ArrayList<String>();
 	private String initialCreator = "creator";
-	private String dccreator = System.getProperty("user.name");
+	private String dccreator = "Mr. fictionalTestUser";
 	private String printedBy = "persia p";
-	private String language = "Chinese";
+	private String language = "EN_us";
 	private Integer editingCycles = new Integer(4);
 	private Duration editingDuration = Duration.valueOf("P49DT11H8M9S");
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+	private SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
 	@Before
 	public void setUp() throws Exception {
@@ -68,6 +74,64 @@ public class OfficeMetaTest {
 		doc.save(ResourceUtilities.getAbsolutePath(filename));
 		doc = null;
 		metadom = null;
+	}
+
+	@Test
+	public void updateTemplates() {
+		// Adapt all files with latest XML changes automatically
+		loadSaveDirFiles("target/classes/"); // all template files to be bundled within the JAR
+		// The following is only necessary, when the templates in the source repository should be adapted, e.g. before a release
+		// loadSaveDirFiles("src/main/resources/");
+	}
+
+	/** The reference templates of the JAR will be loaded and saved. */
+	private void loadSaveDirFiles(String targetDirectory) {
+		try {
+			LOG.log(Level.INFO, "Loading/saving resources from the directory: ''{0}''!", targetDirectory);
+			File resDir = new File(targetDirectory);
+			File[] resFiles = resDir.listFiles();
+			boolean validTest = true;
+			for (File odfFile : resFiles) {
+				if (!odfFile.isDirectory() && odfFile.getName().startsWith("Odf")) {
+					OdfDocument odfDoc = OdfDocument.loadDocument(odfFile);
+					String version = System.getProperty("odfdom.version");
+					OdfOfficeMeta meta = odfDoc.getOfficeMetadata();
+					meta.setAutomaticUpdate(false);
+					meta.setCreator(null);
+					meta.setCreationDate(null);
+					meta.setDate(null);
+					meta.setDescription(null);
+					meta.setEditingCycles(null);
+					meta.setEditingDuration(null);
+					meta.setLanguage(null);
+					meta.setPrintDate(null);
+					meta.setPrintedBy(null);
+					meta.setSubject(null);
+					meta.setTitle(null);
+					meta.removeUserDefinedDataByName("Info 1");
+					meta.removeUserDefinedDataByName("Info 2");
+					meta.removeUserDefinedDataByName("Info 3");
+					meta.removeUserDefinedDataByName("Info 4");
+					String timeStamp = mSimpleDateFormat.format(Calendar.getInstance().getTime());
+					if (version != null) {
+						if (version.endsWith("SNAPSHOT")) {
+							version = version + "(" + timeStamp + ")";
+						}
+						meta.setGenerator("ODFDOM/" + version);
+					} else {
+						meta.setGenerator("ODFDOM/SNAPSHOT(" + timeStamp + ")");
+						validTest = false;
+					}
+					LOG.log(Level.INFO, "Updating the resource {0}", odfFile.getPath());
+					odfDoc.save(odfFile.getPath());
+				}
+			}
+			Assert.assertTrue("No meta:generator could be set as the System property 'odfdom.version' set by the Maven pom.xml was not found!", validTest);
+
+			//ToDO: Add validation test afterwards..
+		} catch (Exception ex) {
+			Logger.getLogger(LoadMultipleTimes.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 
 	@Test
@@ -162,22 +226,22 @@ public class OfficeMetaTest {
 		// fMetadata.getCreationDate().clear(Calendar.MILLISECOND);
 		//Assert.assertEquals(0,creationDate.compareTo(fMetadata.getCreationDate
 		// ()));
-		String expected = sdf.format(creationDate.getTime());
-		String actual = sdf.format(fMetadata.getCreationDate().getTime());
+		String expected = mSimpleDateFormat.format(creationDate.getTime());
+		String actual = mSimpleDateFormat.format(fMetadata.getCreationDate().getTime());
 		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testSetDcDate() throws Exception {
 		Calendar dcDate = Calendar.getInstance();
-		fMetadata.setDcdate(dcDate);
+		fMetadata.setDate(dcDate);
 		tearDown();
 		setUp();
 		// dcDate.clear(Calendar.MILLISECOND);
-		// fMetadata.getDcdate().clear(Calendar.MILLISECOND);
-		// Assert.assertEquals(0,dcDate.compareTo(fMetadata.getDcdate()));
-		String expected = sdf.format(dcDate.getTime());
-		String actual = sdf.format(fMetadata.getDcdate().getTime());
+		// fMetadata.getDate().clear(Calendar.MILLISECOND);
+		// Assert.assertEquals(0,dcDate.compareTo(fMetadata.getDate()));
+		String expected = mSimpleDateFormat.format(dcDate.getTime());
+		String actual = mSimpleDateFormat.format(fMetadata.getDate().getTime());
 		Assert.assertEquals(expected, actual);
 	}
 
@@ -190,8 +254,8 @@ public class OfficeMetaTest {
 		// printDate.clear(Calendar.MILLISECOND);
 		// fMetadata.getPrintDate().clear(Calendar.MILLISECOND);
 		// Assert.assertEquals(0,printDate.compareTo(fMetadata.getPrintDate()));
-		String expected = sdf.format(printDate.getTime());
-		String actual = sdf.format(fMetadata.getPrintDate().getTime());
+		String expected = mSimpleDateFormat.format(printDate.getTime());
+		String actual = mSimpleDateFormat.format(fMetadata.getPrintDate().getTime());
 		Assert.assertEquals(expected, actual);
 	}
 
@@ -246,12 +310,16 @@ public class OfficeMetaTest {
 	@Test
 	public void testSetAndGetUserdefinedData() throws Exception {
 		// remove if there is userdefined data
-		List<String> names = new ArrayList<String>();
+		List<String> names;
 		names = fMetadata.getUserDefinedDataNames();
-		for (String name : names) {
-			fMetadata.removeUserDefinedDataByName(name);
+		if (names == null) {
+			names = new ArrayList<String>();
+		} else {
+			for (String name : names) {
+				fMetadata.removeUserDefinedDataByName(name);
+			}
+			names.clear();
 		}
-		names.clear();
 		names.add("weather");
 		names.add("mood");
 		names.add("late");
@@ -304,7 +372,6 @@ public class OfficeMetaTest {
 		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath("EmptyDocForMetaTest.odt"));
 		metadom = doc.getMetaDom();
 		fMetadata = new OdfOfficeMeta(metadom);
-		//ToDO: automatic check of VERSION number ODFDOM/0.6.1$Build-TIMESTAMP
 		//Assert.assertTrue(fMetadata.getGenerator().startsWith(generator));
 		//ToDO: http://odftoolkit.org/bugzilla/show_bug.cgi?id=171
 		// Assert.assertEquals(fMetadata.getGenerator(), generator);
@@ -314,13 +381,13 @@ public class OfficeMetaTest {
 		Assert.assertNull(fMetadata.getKeywords());
 		Assert.assertNull(fMetadata.getPrintedBy());
 		Assert.assertNull(fMetadata.getPrintDate());
-		Assert.assertNotNull(fMetadata.getUserDefinedDataNames());
+		Assert.assertNull(fMetadata.getUserDefinedDataNames());
 	}
-	
+
 	@Test
 	public void testReadDocumentMeta() throws Exception {
 		// create a new empty document
-		OdfTextDocument textDoc = OdfTextDocument.newTextDocument();
+		OdfTextDocument textDoc = OdfTextDocument.newTextDocument(); // activiating metadata updates
 		textDoc.save(ResourceUtilities.newTestOutputFile("DocForMetaTest.odt"));
 		textDoc.close();
 		// read empty document meta
@@ -328,11 +395,11 @@ public class OfficeMetaTest {
 		OdfOfficeMeta meta = textDoc.getOfficeMetadata();
 		Assert.assertNotNull(meta.getGenerator());
 		Assert.assertNotNull(meta.getCreationDate());
-		Assert.assertNotNull(meta.getCreator());
-		Assert.assertNotNull(meta.getDcdate());
-		Assert.assertTrue(meta.getEditingCycles()>0);
+		Assert.assertNull(meta.getCreator());
+		Assert.assertNotNull(meta.getDate());
+		Assert.assertTrue(meta.getEditingCycles() > 0);
 		Assert.assertNotNull(meta.getEditingDuration());
-		Assert.assertNotNull(meta.getLanguage());
+		Assert.assertNull(meta.getLanguage());
 		textDoc.close();
 	}
 }

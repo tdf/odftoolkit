@@ -37,6 +37,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -46,6 +48,7 @@ import javax.xml.xpath.XPathConstants;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfMetaDom;
 import org.odftoolkit.odfdom.dom.OdfSchemaConstraint;
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
@@ -81,6 +84,9 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	private OdfMediaType mMediaType;
 	private OdfOfficeMeta mOfficeMeta;
 	private long documentOpeningTime;
+	private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
+	private static final String EMPTY_STRING = "";
+	private Calendar mCreationDate;
 
 	// Using static factory instead of constructor
 	protected OdfDocument(OdfPackage pkg, String internalPath, OdfMediaType mediaType) throws SAXException {
@@ -159,7 +165,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	/**
 	 * Loads the ODF root document from the given Resource.
 	 * 
-	 * NOTE: Initial meta data (like the document creator) will be added in this method.
+	 * NOTE: Initial meta data (like the document creation time) will be added in this method.
 	 * 
 	 * @param res a resource containing a package with a root document
 	 * @param odfMediaType the media type of the root document
@@ -176,8 +182,8 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 			in.close();
 		}
 		OdfDocument newDocument = newDocument(pkg, ROOT_DOCUMENT_PATH, odfMediaType);
-		//add initial meta data to new document.
-		initializeMetaData(newDocument);
+		//add creation time, the metadata have to be explicitly set
+		newDocument.mCreationDate = Calendar.getInstance();
 		return newDocument;
 	}
 
@@ -236,31 +242,6 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Loads the root ODF document from the given packageStream.
-	 *
-	 * @param packageStream - an inputStream representing the ODF package
-	 * @param baseURI usually the URI is the URL defining the location of the package. Used by the ErrorHandler to define the source of validation exception.
-	 * @param errorHandler - SAX ErrorHandler used for ODF validation
-	 * @throws java.lang.Exception - if the package could not be created
-	 * @see #getErrorHandler
-	 */
-	public static OdfDocument loadDocument(InputStream packageStream, String baseURI, ErrorHandler errorHandler) throws Exception {
-		return loadDocument(OdfPackage.loadPackage(packageStream, baseURI, errorHandler), ROOT_DOCUMENT_PATH);
-	}
-
-	/**
-	 * Loads the root ODF document from the given pkgFile.
-	 *
-	 * @param pkgFile - the ODF Package. A baseURL is being generated based on its location.
-	 * @param errorHandler - SAX ErrorHandler used for ODF validation.
-	 * @throws java.lang.Exception - if the package could not be created
-	 * @see #getErrorHandler
-	 */
-	public static OdfDocument loadDocument(File pkgFile, ErrorHandler errorHandler) throws Exception {
-		return loadDocument(OdfPackage.loadPackage(pkgFile, errorHandler), ROOT_DOCUMENT_PATH);
-	}
-
-	/**
 	 * Creates an OdfDocument from the OpenDocument provided by an ODF package.
 	 * @param odfPackage - the ODF package containing the ODF document.
 	 * @param internalPath - the path to the ODF document relative to the package root, or an empty String for the root document.
@@ -277,8 +258,12 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 		}
 		if (odfMediaType == null) {
 			ErrorHandler errorHandler = odfPackage.getErrorHandler();
+			Matcher matcherCTRL = CONTROL_CHAR_PATTERN.matcher(documentMediaType);
+			if (matcherCTRL.find()) {
+				documentMediaType = matcherCTRL.replaceAll(EMPTY_STRING);
+			}
 			OdfValidationException ve = new OdfValidationException(OdfSchemaConstraint.DOCUMENT_WITHOUT_ODF_MIMETYPE, internalPath, documentMediaType);
-			if (errorHandler != null) {				
+			if (errorHandler != null) {
 				errorHandler.fatalError(ve);
 			}
 			throw ve;
@@ -325,7 +310,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 			default:
 				documentTemplate = null;
-				throw new IllegalArgumentException("Given mediaType '" + odfMediaType.mMediaType + "' is not yet supported!");				
+				throw new IllegalArgumentException("Given mediaType '" + odfMediaType.mMediaType + "' is not yet supported!");
 		}
 		return loadTemplate(documentTemplate, odfMediaType);
 	}
@@ -450,13 +435,13 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 						// test if the desired mediatype matches the current
 						if (entryMediaType.equals(wantedMediaString)) {
 							path = normalizeDocumentPath(path);
-							embeddedObjectsMap.put(path, (OdfDocument) mPackage.loadDocument(path));
+							embeddedObjectsMap.put(path, (OdfDocument) mPackage.loadPackageDocument(path));
 						}
 					} else {
 						// test if any ODF mediatype matches the current
 						for (OdfMediaType mediaType : OdfMediaType.values()) {
 							if (entryMediaType.equals(mediaType.getMediaTypeString())) {
-								embeddedObjectsMap.put(path, (OdfDocument) mPackage.loadDocument(path));
+								embeddedObjectsMap.put(path, (OdfDocument) mPackage.loadPackageDocument(path));
 							}
 						}
 					}
@@ -491,7 +476,12 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	public OdfOfficeMeta getOfficeMetadata() {
 		if (mOfficeMeta == null) {
 			try {
-				mOfficeMeta = new OdfOfficeMeta(getMetaDom());
+				OdfMetaDom metaDom = getMetaDom();
+				if(metaDom == null){
+					
+					metaDom = new OdfMetaDom(this, OdfSchemaDocument.OdfXMLFile.META.getFileName());
+				}
+				mOfficeMeta = new OdfOfficeMeta(metaDom);
 			} catch (Exception ex) {
 				Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
 			}
@@ -719,37 +709,6 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Meta data about the document will be initialized.
-	 * Following metadata data is being added:
-	 * <ul>
-	 * <li>The initial creator name will be the Java user.name System property.</li>
-	 * <li>The date and time when this document was created using the current data.</li>
-	 * <li>The number of times this document has been edited.</li>
-	 * <li>The default language will be the Java user.language System property.</li>
-	 * </ul>
-	 * @param newDoc  the OdfDocument object which need to initialize meta data.
-	 * 
-	 * TODO:This method will be moved to OdfMetadata class. 
-	 *      see http://odftoolkit.org/bugzilla/show_bug.cgi?id=204
-	 */
-	private static void initializeMetaData(OdfDocument newDoc) {
-		OdfOfficeMeta metaData = newDoc.getOfficeMetadata();
-		// add initial-creator info.
-		String creator = System.getProperty("user.name");
-		metaData.setInitialCreator(creator);
-		// add creation-date info.
-		Calendar calendar = Calendar.getInstance();
-		metaData.setCreationDate(calendar);
-		// add editing-cycles info.
-		metaData.setEditingCycles(0);
-		// add language info.
-		String language = System.getProperty("user.language");
-		if (language != null) {
-			metaData.setLanguage(language);
-		}
-	}
-
-	/**
 	 * Update document meta data in the ODF document. Following metadata data is
 	 * being updated:
 	 * <ul>
@@ -765,22 +724,26 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * @throws IllegalArgumentException 
 	 */
 	private void updateMetaData() throws IllegalArgumentException, Exception {
-		if (mMetaDom != null) {
+		if (getOfficeMetadata().hasAutomaticUpdate()) {
 			OdfOfficeMeta metaData = getOfficeMetadata();
-			String creator = System.getProperty("user.name");
-			// update creator info.
-			metaData.setCreator(creator);
-			// update date info.
+
+			// set creation date´
+			if (mCreationDate != null) {
+				getOfficeMetadata().setCreationDate(mCreationDate);
+			}
+
+			// update late modfied date
 			Calendar calendar = Calendar.getInstance();
-			metaData.setDcdate(calendar);
-			// update editing-cycles info.
+			metaData.setDate(calendar);
+
+			// update editing-cycles
 			Integer cycle = metaData.getEditingCycles();
 			if (cycle != null) {
 				metaData.setEditingCycles(++cycle);
 			} else {
 				metaData.setEditingCycles(1);
 			}
-			// update editing-duration info.
+			// update editing-duration
 			long editingDuration = calendar.getTimeInMillis() - documentOpeningTime;
 			editingDuration = (editingDuration < 1) ? 1 : editingDuration;
 			try {

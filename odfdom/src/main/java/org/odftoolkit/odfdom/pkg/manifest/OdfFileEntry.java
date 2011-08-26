@@ -29,10 +29,11 @@ public class OdfFileEntry {
 
 //    private Logger mLog = Logger.getLogger(OdfFileEntry.class.getName());    
     private String mPath;
-    private String mMediaType;
+    private String mMediaType = EMPTY_STRING;
     private int mSize = -1;
     private EncryptionData mEncryptionData;    // The following static attributes are used for JDK 5 media type detection
     private static Map<String, String> MEDIA_TYPE_MAP = null;
+	private static final String EMPTY_STRING = "";
     private static final String DEFAULT_TYPE = "application/octet-stream";
     private static final String APPLICATION_POSTSCRIPT = "application/postscript";
     private static final String APPLICATION_RTF = "application/rtf";
@@ -74,12 +75,20 @@ public class OdfFileEntry {
 	 *	Use <code>null</code> for no mediaType */
     public OdfFileEntry(String path, String mediaType) {
         mPath = path;
-        mMediaType = mediaType;
+		if(mediaType == null){
+			mediaType = EMPTY_STRING;
+		}else{
+			mMediaType = mediaType;
+		}
     }
 
     public OdfFileEntry(String path, String mediaType, int size) {
         mPath = path;
-        mMediaType = mediaType;
+		if(mediaType == null){
+			mediaType = EMPTY_STRING;
+		}else{
+			mMediaType = mediaType;
+		}
         mSize = size;
     }
 
@@ -92,17 +101,17 @@ public class OdfFileEntry {
     }
 
 	/** @param mediaType of the file.
-	 *	Use <code>null</code> or an empty string to unset the mediaType */
+	 *	Use <code>null</code> or an empty string to unset the mediaType to an empty string. */
     public void setMediaTypeString(String mediaType) {
-		if(mediaType != null && mediaType.equals("")){
-			mediaType = null;
+		if(mediaType == null){
+			mediaType = EMPTY_STRING;
 		}else{
 			mMediaType = mediaType;
 		}
     }
 
-	/** @return the mediatype of the &lt;manifest:file-entry&gt;.
-	 *  In case of not set NULL is returned */
+	/** @return the mediatype of the mandatory &lt;manifest:file-entry&gt; attribute.
+	 *  If no mediatype exists an empty string is returned*/
     public String getMediaTypeString() {
         return mMediaType;
     }

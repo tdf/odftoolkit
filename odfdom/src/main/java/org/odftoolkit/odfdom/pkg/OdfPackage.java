@@ -94,11 +94,16 @@ public class OdfPackage implements Closeable {
 	private static final String DOT = ".";
 	private static final String SLASH = "/";
 	private static final String COLON = ":";
+	private static final String ENCODED_APOSTROPHE = "&apos;";
+	private static final String ENCODED_QUOTATION = "&quot;";
 	private static final String EMPTY_STRING = "";
 	private static final String XML_MEDIA_TYPE = "text/xml";
-	// Patterns to be used in RegEx expressions
+	// Search patterns to be used in RegEx expressions
 	private static final Pattern BACK_SLASH_PATTERN = Pattern.compile("\\\\");
 	private static final Pattern DOUBLE_SLASH_PATTERN = Pattern.compile("//");
+	private static final Pattern QUOTATION_PATTERN = Pattern.compile("\"");
+	private static final Pattern APOSTROPHE_PATTERN = Pattern.compile("'");
+	private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
 	private static Set<String> mCompressedFileTypes;
 	// temp Dir for this ODFpackage 
 	// (ToDo: (Issue 219 - PackageRefactoring) --temp dir handling will be removed most likely)
@@ -111,6 +116,7 @@ public class OdfPackage implements Closeable {
 	private ZipHelper mZipFile;
 	private Resolver mResolver;
 	private Map<String, ZipEntry> mZipEntries;
+	private HashMap<String, ZipEntry> mOriginalZipEntries;
 	private Map<String, OdfFileEntry> mFileEntries;
 	// All opened documents from the same package are cached (including the root document)
 	private Map<String, OdfPackageDocument> mPkgDocuments;
@@ -176,7 +182,7 @@ public class OdfPackage implements Closeable {
 		String userPropTempEnable = System.getProperty("org.odftoolkit.odfdom.tmpfile.disable");
 		if ((userPropTempEnable != null) && (userPropTempEnable.equalsIgnoreCase("true"))) {
 			mUseTempFile = false;
-			Logger.getLogger(OdfPackage.class.getName()).fine("Temporary disc file usage is disabled!");
+			Logger.getLogger(OdfPackage.class.getName()).info("Temporary disc file usage is disabled!");
 		} else {
 			mUseTempFile = true;
 		}
@@ -187,13 +193,13 @@ public class OdfPackage implements Closeable {
 			if (errorHandlerProperty != null) {
 				if (errorHandlerProperty.equalsIgnoreCase("true")) {
 					mErrorHandler = new DefaultErrorHandler();
-					Logger.getLogger(OdfPackage.class.getName()).fine("Activated validation with default ErrorHandler!");
+					Logger.getLogger(OdfPackage.class.getName()).info("Activated validation with default ErrorHandler!");
 				} else {
 					try {
 						Class cl = Class.forName(errorHandlerProperty);
 						Constructor ctor = cl.getDeclaredConstructor(new Class[]{});
 						mErrorHandler = (ErrorHandler) ctor.newInstance();
-						Logger.getLogger(OdfPackage.class.getName()).log(Level.FINE, "Activated validation with ErrorHandler:''{0}''!", errorHandlerProperty);
+						Logger.getLogger(OdfPackage.class.getName()).log(Level.INFO, "Activated validation with ErrorHandler:''{0}''!", errorHandlerProperty);
 					} catch (Exception ex) {
 						Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, "Could not initiate validation with the given ErrorHandler: '" + errorHandlerProperty + "'", ex);
 					}
@@ -304,7 +310,9 @@ public class OdfPackage implements Closeable {
 	 * the whole lifecycle of OdfPackage.</p>
 	 *
 	 * @param packageStream - an inputStream representing the ODF package
-	 * @param baseURI usually the URI is the URL defining the location of the document. Used by the ErrorHandler to define the source of validation exception.
+	 * @param baseURI allows to explicitly set the base URI from the document, As the URL can not be derived from a stream.
+	 * In addition it is possible to set the baseURI to any arbitrary URI, e.g. an URN.
+	 * One usage of the baseURI to describe the source of validation exception thrown by the ErrorHandler.
 	 * @param errorHandler - SAX ErrorHandler used for ODF validation
 	 * @throws java.lang.Exception - if the package could not be created
 	 * @see #getErrorHandler
@@ -334,13 +342,13 @@ public class OdfPackage implements Closeable {
 		byte[] mTempByteBuf = tempBuf.toByteArray();
 		tempBuf.close();
 		if (mTempByteBuf.length < 3) {
-			OdfValidationException ve = new OdfValidationException(OdfPackageConstraint.PACKAGE_IS_NO_ZIP);
+			OdfValidationException ve = new OdfValidationException(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, getBaseURI());
 			if (mErrorHandler != null) {
 				mErrorHandler.fatalError(ve);
 			}
 			throw new IllegalArgumentException(ve);
 		}
-		mZipFile = new ZipHelper(mTempByteBuf);
+		mZipFile = new ZipHelper(this, mTempByteBuf);
 		readZip();
 	}
 
@@ -357,14 +365,14 @@ public class OdfPackage implements Closeable {
 			}
 		}
 		try {
-			mZipFile = new ZipHelper(new ZipFile(pkgFile));
+			mZipFile = new ZipHelper(this, new ZipFile(pkgFile));
 		} catch (Exception e) {
 			OdfValidationException ve = null;
 			if (e.getMessage().contains("error in opening zip")) {
 				// if it is a ZIP exception, the exception will be not overtaken
-				ve = new OdfValidationException(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, pkgFile.getPath());
+				ve = new OdfValidationException(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, getBaseURI());
 			} else {
-				ve = new OdfValidationException(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, pkgFile.getPath(), e);
+				ve = new OdfValidationException(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, getBaseURI(), e);
 			}
 			if (mErrorHandler != null) {
 				mErrorHandler.fatalError(ve);
@@ -376,9 +384,9 @@ public class OdfPackage implements Closeable {
 
 	private void readZip() throws SAXException, IOException {
 		mZipEntries = new HashMap<String, ZipEntry>();
-		String first = mZipFile.entriesToMap(mZipEntries);
+		String firstEntryName = mZipFile.entriesToMap(mZipEntries);
 		if (mZipEntries.isEmpty()) {
-			OdfValidationException ve = new OdfValidationException(OdfPackageConstraint.PACKAGE_IS_NO_ZIP);
+			OdfValidationException ve = new OdfValidationException(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, getBaseURI());
 			if (mErrorHandler != null) {
 				mErrorHandler.fatalError(ve);
 
@@ -389,9 +397,11 @@ public class OdfPackage implements Closeable {
 			parseManifest();
 
 			// initialize the package media type
-			initializeMediaType(first);
+			initializeMediaType(firstEntryName);
 
 			// ToDo: Remove all META-INF/* files from the fileEntries of Manifest
+			mOriginalZipEntries = new HashMap<String, ZipEntry>();
+			mOriginalZipEntries.putAll(mZipEntries);
 			mZipEntries.remove(OdfPackage.OdfFile.MEDIA_TYPE.getPath());
 			mZipEntries.remove(OdfPackage.OdfFile.MANIFEST.getPath());
 			mZipEntries.remove("META-INF/");
@@ -411,11 +421,7 @@ public class OdfPackage implements Closeable {
 					while (iter.hasNext()) {
 						filePath = (String) iter.next();
 						if (!filePath.endsWith(SLASH)) { // not for directories!
-							try {
-								mErrorHandler.error(new OdfValidationException(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, documentURL, filePath));
-							} catch (SAXException ex) {
-								Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-							}
+							logValidationError(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, documentURL, filePath);
 						}
 					}
 				}
@@ -435,11 +441,7 @@ public class OdfPackage implements Closeable {
 							removeDirectory(manifestOnlyPath);
 						} else {
 							// if it is a nonexistent file
-							try {
-								mErrorHandler.error(new OdfValidationException(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, getBaseURI(), manifestOnlyPath));
-							} catch (SAXException ex) {
-								Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-							}
+							logValidationError(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, getBaseURI(), manifestOnlyPath);
 							mFileEntries.remove(manifestOnlyPath);
 						}
 					}
@@ -475,93 +477,67 @@ public class OdfPackage implements Closeable {
 			// assumption: if it has a mimetype...
 			String dirMimeType = mFileEntries.get(path).getMediaTypeString();
 			if (dirMimeType == null || EMPTY_STRING.equals(dirMimeType)) {
-				try {
-					mErrorHandler.warning(new OdfValidationException(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, getBaseURI(), path));
-				} catch (SAXException ex) {
-					Logger.getLogger(OdfPackage.class.getName()).log(Level.WARNING, null, ex);
-				}
+				logValidationWarning(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, getBaseURI(), path);
 				mFileEntries.remove(path);
 			}
 		}
 	}
 
 	/** Reads the uncompressed "mimetype" file, which contains the package media/mimte type*/
-	private void initializeMediaType(String first) {
-
+	private void initializeMediaType(String firstEntryName) {
 		ZipEntry mimetypeEntry = mZipEntries.get(OdfPackage.OdfFile.MEDIA_TYPE.getPath());
 		if (mimetypeEntry != null) {
 			if (mErrorHandler != null) {
-				if (mimetypeEntry.getMethod() != ZipEntry.STORED) {
-					try {
-						String documentURL = getBaseURI();
-						mErrorHandler.error(new OdfValidationException(OdfPackageConstraint.MIMETYPE_IS_COMPRESSED, documentURL));
-					} catch (SAXException ex) {
-						Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-					}
-				}
-				if (mimetypeEntry.getExtra() != null) {
-					try {
-						mErrorHandler.error(new OdfValidationException(OdfPackageConstraint.MIMETYPE_HAS_EXTRA_FIELD, getBaseURI()));
-					} catch (SAXException ex) {
-						Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-					}
-				}
-				if (!OdfFile.MEDIA_TYPE.getPath().equals(first)) {
-					try {
-						mErrorHandler.error(new OdfValidationException(OdfPackageConstraint.MIMETYPE_NOT_FIRST_IN_PACKAGE));
-					} catch (SAXException ex) {
-						Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-					}
-				}
+				validateMimeTypeEntry(mimetypeEntry, firstEntryName);
 			}
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			try {
-				// get the String value of the mediatype file stream
-				StreamHelper.transformStream(mZipFile.getInputStream(mimetypeEntry), out);
-				String fileMediaType = new String(out.toByteArray(), 0, out.size(), "UTF-8");
-				String rootDocumentMediaType = getMediaTypeFromManifest();
-				if (rootDocumentMediaType != null && !rootDocumentMediaType.equals(EMPTY_STRING)) {
-					if (fileMediaType != null) {
-						// if both media-type exist the optional one from the file has precedence
-						mMediaType = fileMediaType;
-						if (mErrorHandler != null) {
-							if (!fileMediaType.equals(rootDocumentMediaType)) {
-								try {
-									mErrorHandler.error(new OdfValidationException(OdfPackageConstraint.MIMETYPE_DIFFERS_FROM_PACKAGE, getBaseURI(), mMediaType.replaceAll("\\p{Cntrl}", "").substring(0, 128), rootDocumentMediaType));
-								} catch (SAXException ex) {
-									Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-								}
-							}
+			// get mediatype value of the root document/package from the mediatype file stream
+			String entryMediaType = getMediaTypeFromEntry(mimetypeEntry);
+			// get mediatype value of the root document/package from the manifest.xml
+			String manifestMediaType = getMediaTypeFromManifest();
+			// if a valid mediatype was set by the "mimetype" file
+			if (entryMediaType != null && !entryMediaType.equals(EMPTY_STRING)) {
+				// the root document's mediatype is taken from the "mimetype" file
+				mMediaType = entryMediaType;
+				if (mErrorHandler != null) {
+					// if the "mediatype" does exist, the "/META-INF/manifest.xml" have to contain a MIMETYPE for the root document);
+					if (manifestMediaType != null && !manifestMediaType.equals(EMPTY_STRING)) {
+						// if the two media-types are inconsistent
+						if (!entryMediaType.equals(manifestMediaType)) {
+							logValidationError(OdfPackageConstraint.MIMETYPE_DIFFERS_FROM_PACKAGE, getBaseURI(), CONTROL_CHAR_PATTERN.matcher(mMediaType).replaceAll(EMPTY_STRING), manifestMediaType);
 						}
-					} else {
-						// if not mimetype file exists, the root document mediaType from the manifest.xml is taken
-						mMediaType = rootDocumentMediaType;
+					} else { // if "mimetype" file exists, there have to be a mimetype in the manifest.xml for the root document (see ODF 1.2 part 3)
+						logValidationError(OdfPackageConstraint.MIMETYPE_WITHOUT_MANIFEST_MEDIATYPE, getBaseURI(), CONTROL_CHAR_PATTERN.matcher(mMediaType).replaceAll(EMPTY_STRING), manifestMediaType);
 					}
-				} // if the MANIFEST exists, but does not contain a media type for the root document
-			} catch (Exception ex) {
-				Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-			} finally {
-				if (out != null) {
-					try {
-						out.close();
-					} catch (IOException ex) {
-						Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-					}
+				}
+			} else { // if there is no media-type was set by the "mimetype" file
+				// try as fall-back the mediatype of the root document from the manifest.xml
+				if (manifestMediaType != null && !manifestMediaType.equals(EMPTY_STRING)) {
+					// and used as fall-back for the mediatype of the package
+					mMediaType = manifestMediaType;
 				}
 			}
 		} else {
-			String rootDocumentMediaType = getMediaTypeFromManifest();
-			if (rootDocumentMediaType != null && !rootDocumentMediaType.equals(EMPTY_STRING)) {
+			String manifestMediaType = getMediaTypeFromManifest();
+			if (manifestMediaType != null && !manifestMediaType.equals(EMPTY_STRING)) {
 				// if not mimetype file exists, the root document mediaType from the manifest.xml is taken
-				mMediaType = rootDocumentMediaType;
+				mMediaType = manifestMediaType;
 			}
 			if (mErrorHandler != null) {
-				try {
-					mErrorHandler.warning(new OdfValidationException(OdfPackageConstraint.MIMETYPE_NOT_IN_PACKAGE));
-				} catch (SAXException ex) {
-					Logger.getLogger(OdfPackage.class.getName()).log(Level.WARNING, null, ex);
-				}
+				logValidationWarning(OdfPackageConstraint.MIMETYPE_NOT_IN_PACKAGE, getBaseURI());
 			}
+		}
+	}
+
+	private void validateMimeTypeEntry(ZipEntry mimetypeEntry, String firstEntryName) {
+
+		if (mimetypeEntry.getMethod() != ZipEntry.STORED) {
+			logValidationError(OdfPackageConstraint.MIMETYPE_IS_COMPRESSED, getBaseURI());
+		}
+		if (mimetypeEntry.getExtra() != null) {
+			logValidationError(OdfPackageConstraint.MIMETYPE_HAS_EXTRA_FIELD, getBaseURI());
+		}
+		if (!OdfFile.MEDIA_TYPE.getPath().equals(firstEntryName)) {
+			logValidationError(OdfPackageConstraint.MIMETYPE_NOT_FIRST_IN_PACKAGE, getBaseURI());
 		}
 	}
 
@@ -573,6 +549,28 @@ public class OdfPackage implements Closeable {
 		} else {
 			return null;
 		}
+	}
+
+	/** @returns the media type of the root document from the manifest.xml */
+	private String getMediaTypeFromEntry(ZipEntry mimetypeEntry) {
+		String entryMediaType = null;
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		try {
+			StreamHelper.transformStream(mZipFile.getInputStream(mimetypeEntry), out);
+			entryMediaType = new String(out.toByteArray(), 0, out.size(), "UTF-8");
+		} catch (Exception ex) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (IOException ex) {
+					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+				}
+				out = null;
+			}
+		}
+		return entryMediaType;
 	}
 
 	private File newTempSourceFile(InputStream odfStream) throws Exception {
@@ -593,7 +591,7 @@ public class OdfPackage implements Closeable {
 	 * @param internalPath
 	 *		path relative to the package root, where the document should be inserted.
 	 */
-	void cacheDocument(OdfPackageDocument doc, String internalPath) {
+	public void insertPackageDocument(OdfPackageDocument doc, String internalPath) {
 		internalPath = normalizeDirectoryPath(internalPath);
 		updateFileEntry(ensureFileEntryExistence(internalPath), doc.getMediaTypeString());
 		mPkgDocuments.put(internalPath, doc);
@@ -609,10 +607,9 @@ public class OdfPackage implements Closeable {
 	}
 
 	/**
-	 * Get the URI, where this ODF package is stored.
-	 * 
-	 * @return the URI to the ODF package. Returns null if package is not stored
-	 *         yet.
+	 * @return The URI to the ODF package, usually the URL, where this ODF package is located.
+	 * If the package has not URI NULL is returned.
+	 * This is the case if the package was new created without an URI and not saved before.
 	 */
 	public String getBaseURI() {
 		return mBaseURI;
@@ -625,8 +622,8 @@ public class OdfPackage implements Closeable {
 	 * @return The ODF document, which mediatype dependends on the parameter or
 	 *	NULL if media type were not supported.
 	 */
-	public OdfPackageDocument loadDocument(String internalPath) {
-		OdfPackageDocument doc = getCachedDocument(internalPath);
+	public OdfPackageDocument loadPackageDocument(String internalPath) {
+		OdfPackageDocument doc = getCachedPackageDocument(internalPath);
 		if (doc == null) {
 			String mediaTypeString = getMediaTypeString();
 			// ToDo: Remove dependency by facotory issue ??? (to be written)
@@ -651,14 +648,12 @@ public class OdfPackage implements Closeable {
 	}
 
 	/**
-	 * @deprecated This method is only added temporary as workaround for the IBM fork using different DOC classes.
-	 * Until the registering of DOC documents to the PKG layer has been finished.
 	 * @param internalPath
 	 *		path relative to the package root, where the document should be inserted.
 	 * @return an already open OdfPackageDocument via its path, otherwise NULL.
 	 */
 	@Deprecated
-	public OdfPackageDocument getCachedDocument(String internalPath) {
+	public OdfPackageDocument getCachedPackageDocument(String internalPath) {
 		internalPath = normalizeDirectoryPath(internalPath);
 		return mPkgDocuments.get(internalPath);
 	}
@@ -697,7 +692,7 @@ public class OdfPackage implements Closeable {
 	 * @param internalPath
 	 *		path relative to the package root, where the document should be removed.
 	 */
-	public void removeDocument(String internalPath) {
+	public void removePackageDocument(String internalPath) {
 		try {
 			// get all files of the package
 			Set<String> allPackageFileNames = getFileEntries();
@@ -912,8 +907,7 @@ public class OdfPackage implements Closeable {
 					} else {
 						path = it.next();
 						// not interested to reuse previous mediaType nor manifest from ZIP
-						if (!path.equals(SLASH) && !path.equals(OdfPackage.OdfFile.MANIFEST.getPath())
-								&& !path.equals("META-INF/")
+						if (!path.endsWith(SLASH) && !path.equals(OdfPackage.OdfFile.MANIFEST.getPath())
 								&& !path.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
 							data = getBytes(path);
 							createZipEntry(path, data, zos, modTime, crc);
@@ -1001,6 +995,7 @@ public class OdfPackage implements Closeable {
 			ZipEntry nextElement = mZipEntries.get(entries.next());
 			String entryPath = nextElement.getName();
 			getBytes(entryPath);
+
 		}
 	}
 
@@ -1049,7 +1044,7 @@ public class OdfPackage implements Closeable {
 				is = mZipFile.getInputStream(entry);
 			}
 			if (is == null) {
-				mErrorHandler.error(new OdfValidationException(OdfPackageConstraint.MANIFEST_NOT_IN_PACKAGE, getBaseURI()));
+				logValidationError(OdfPackageConstraint.MANIFEST_NOT_IN_PACKAGE, getBaseURI());
 				return;
 			}
 			XMLReader xmlReader = getXMLReader();
@@ -1059,13 +1054,9 @@ public class OdfPackage implements Closeable {
 			String uri = mBaseURI + SLASH + OdfPackage.OdfFile.MANIFEST.packagePath;
 			ins.setSystemId(uri);
 			xmlReader.parse(ins);
-			// ToDo: manifest.xml will be held in the future as DOM, it now its being generated each save()
+			// ToDo: manifest.xml will be held in the future as DOM, now its being generated for each save()
 			mMemoryFileCache.remove(OdfPackage.OdfFile.MANIFEST.packagePath);
-		} catch (ParserConfigurationException ex) {
-			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (SAXException ex) {
-			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (IOException ex) {
+		} catch (Exception ex) {
 			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			try {
@@ -1158,7 +1149,7 @@ public class OdfPackage implements Closeable {
 	 */
 	public void insertDocument(OdfPackageDocument sourceDocument, String internalPath) {
 		// opened DOM of descendant Documents will be flashed to the their pkg
-		flushDoms(sourceDocument);
+		flushDecendentDoms(sourceDocument);
 
 		// Gets the OdfDocument's manifest entry info, no matter it is a independent document or an embeddedDocument.
 		Map<String, OdfFileEntry> entryMapToCopy;
@@ -1196,7 +1187,7 @@ public class OdfPackage implements Closeable {
 		getManifestEntries().put(internalPath, embedDocumentRootEntry);
 		// the new document will be attached to its new package (it has been inserted to)
 		sourceDocument.setPackage(this);
-		cacheDocument(sourceDocument, internalPath);
+		this.insertPackageDocument(sourceDocument, internalPath);
 	}
 
 	/** 
@@ -1205,7 +1196,7 @@ public class OdfPackage implements Closeable {
 	 *
 	 * @param parentDocument the document, which XML files shall be serialized
 	 */
-	void flushDoms(OdfPackageDocument parentDocument) {
+	void flushDecendentDoms(OdfPackageDocument parentDocument) {
 		OdfPackage pkg = parentDocument.getPackage();
 		if (parentDocument.isRootDocument()) {
 			// for every parsed XML file (DOM)
@@ -1256,8 +1247,8 @@ public class OdfPackage implements Closeable {
 	 *
 	 * @return A set of paths of all documents of the package, including the root document.
 	 */
-	public Set<String> getDocumentPaths() {
-		return getDocumentPaths(null, null);
+	public Set<String> getInnerDocumentPaths() {
+		return getInnerDocumentPaths(null, null);
 	}
 
 	/**
@@ -1266,8 +1257,8 @@ public class OdfPackage implements Closeable {
 	 * @param mediaTypeString limits the desired set of document paths to documents of the given mediaType
 	 * @return A set of paths of all documents of the package, including the root document, that match the given parameter.
 	 */
-	public Set<String> getDocumentPaths(String mediaTypeString) {
-		return getDocumentPaths(mediaTypeString, null);
+	public Set<String> getInnerDocumentPaths(String mediaTypeString) {
+		return getInnerDocumentPaths(null, null);
 	}
 
 	/**
@@ -1277,7 +1268,7 @@ public class OdfPackage implements Closeable {
 	 * @param subDirectory limits the desired set document paths to those documents below of this subdirectory
 	 * @return A set of paths of all documents of the package, including the root document, that match the given parameter.
 	 */
-	Set<String> getDocumentPaths(String mediaTypeString, String subDirectory) {
+	Set<String> getInnerDocumentPaths(String mediaTypeString, String subDirectory) {
 		Set<String> innerDocuments = new HashSet<String>();
 		Set<String> packageFilePaths = getFileEntries();
 		// check manifest for current embedded OdfPackageDocuments
@@ -1509,78 +1500,79 @@ public class OdfPackage implements Closeable {
 		} else {
 			StringBuilder buf = new StringBuilder();
 			buf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-			buf.append("<manifest:manifest xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\">\n");
+			buf.append("<manifest:manifest xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\" manifest:version=\"1.2\">\n");
 			Iterator<String> it = new TreeSet<String>(mFileEntries.keySet()).iterator();
 			while (it.hasNext()) {
 				String key = it.next();
 				String s = null;
 				OdfFileEntry fileEntry = mFileEntries.get(key);
 				if (fileEntry != null) {
-					buf.append(" <manifest:file-entry");
 					s = fileEntry.getPath();
-					if (s != null) {
-						buf.append(" manifest:full-path=\"");
-						buf.append(encodeXMLAttributes(s));
-						buf.append("\"");
+					// only directories with a mimetype (documents) will be written into the manifest.xml
+					if (s != null && !s.endsWith(SLASH) || !fileEntry.getMediaTypeString().equals(EMPTY_STRING)) {
+						buf.append(" <manifest:file-entry");
+						if (s != null) {
+							buf.append(" manifest:full-path=\"");
+							buf.append(encodeXMLAttributes(s));
+							buf.append("\"");
 
-					}
-					s = fileEntry.getMediaTypeString();
-					if (s != null) {
+						}
+						s = fileEntry.getMediaTypeString();
 						buf.append(" manifest:media-type=\"");
 						buf.append(encodeXMLAttributes(s));
 						buf.append("\"");
-					}
 
-					int i = fileEntry.getSize();
-					if (i > 0) {
-						buf.append(" manifest:size=\"");
-						buf.append(i);
-						buf.append("\"");
-					}
-					EncryptionData enc = fileEntry.getEncryptionData();
-					if (enc != null) {
-						buf.append(">\n");
-						buf.append("  <manifest:encryption-data>\n");
-						Algorithm alg = enc.getAlgorithm();
-						if (alg != null) {
-							buf.append("   <manifest:algorithm");
-							s = alg.getName();
-							if (s != null) {
-								buf.append(" manifest:algorithm-name=\"");
-								buf.append(encodeXMLAttributes(s));
-								buf.append("\"");
+						int i = fileEntry.getSize();
+						if (i > 0) {
+							buf.append(" manifest:size=\"");
+							buf.append(i);
+							buf.append("\"");
+						}
+						EncryptionData enc = fileEntry.getEncryptionData();
+						if (enc != null) {
+							buf.append(">\n");
+							buf.append("  <manifest:encryption-data>\n");
+							Algorithm alg = enc.getAlgorithm();
+							if (alg != null) {
+								buf.append("   <manifest:algorithm");
+								s = alg.getName();
+								if (s != null) {
+									buf.append(" manifest:algorithm-name=\"");
+									buf.append(encodeXMLAttributes(s));
+									buf.append("\"");
+								}
+								s = alg.getInitializationVector();
+								if (s != null) {
+									buf.append(" manifest:initialization-vector=\"");
+									buf.append(encodeXMLAttributes(s));
+									buf.append("\"");
+								}
+								buf.append("/>\n");
 							}
-							s = alg.getInitializationVector();
-							if (s != null) {
-								buf.append(" manifest:initialization-vector=\"");
-								buf.append(encodeXMLAttributes(s));
-								buf.append("\"");
+							KeyDerivation keyDerivation = enc.getKeyDerivation();
+							if (keyDerivation != null) {
+								buf.append("   <manifest:key-derivation");
+								s = keyDerivation.getName();
+								if (s != null) {
+									buf.append(" manifest:key-derivation-name=\"");
+									buf.append(encodeXMLAttributes(s));
+									buf.append("\"");
+								}
+								s = keyDerivation.getSalt();
+								if (s != null) {
+									buf.append(" manifest:salt=\"");
+									buf.append(encodeXMLAttributes(s));
+									buf.append("\"");
+								}
+								buf.append(" manifest:iteration-count=\"");
+								buf.append(keyDerivation.getIterationCount());
+								buf.append("\"/>\n");
 							}
+							buf.append("  </manifest:encryption-data>\n");
+							buf.append(" </<manifest:file-entry>\n");
+						} else {
 							buf.append("/>\n");
 						}
-						KeyDerivation keyDerivation = enc.getKeyDerivation();
-						if (keyDerivation != null) {
-							buf.append("   <manifest:key-derivation");
-							s = keyDerivation.getName();
-							if (s != null) {
-								buf.append(" manifest:key-derivation-name=\"");
-								buf.append(encodeXMLAttributes(s));
-								buf.append("\"");
-							}
-							s = keyDerivation.getSalt();
-							if (s != null) {
-								buf.append(" manifest:salt=\"");
-								buf.append(encodeXMLAttributes(s));
-								buf.append("\"");
-							}
-							buf.append(" manifest:iteration-count=\"");
-							buf.append(keyDerivation.getIterationCount());
-							buf.append("\"/>\n");
-						}
-						buf.append("  </manifest:encryption-data>\n");
-						buf.append(" </<manifest:file-entry>\n");
-					} else {
-						buf.append("/>\n");
 					}
 				}
 			}
@@ -1635,6 +1627,7 @@ public class OdfPackage implements Closeable {
 		} else if (mPkgDoms.get(packagePath) != null) {
 			data = flushDom(mPkgDoms.get(packagePath));
 			mMemoryFileCache.put(packagePath, data);
+
 			// if the path's file was cached to memory (second high priority)
 		} else if (mFileEntries.containsKey(packagePath)
 				&& mMemoryFileCache.get(packagePath) != null) {
@@ -1697,8 +1690,8 @@ public class OdfPackage implements Closeable {
 		return data;
 	}
 
-	// Serializes a DOM tree into a byte array.
-	// Providing the counterpart of the generic Namespace handling of OdfFileDom.
+	/** Serializes a DOM tree into a byte array.
+	Providing the counterpart of the generic Namespace handling of OdfFileDom */
 	private byte[] flushDom(Document dom) {
 		// if it is one of our DOM files we may flush all collected namespaces to the root element
 		if (dom instanceof OdfFileDom) {
@@ -1722,7 +1715,8 @@ public class OdfPackage implements Closeable {
 	}
 
 	/**
-	 * Get subcontent as InputStream
+	 * Get the latest version of package content as InputStream, as it would be saved.
+	 * This might not be the original version once loaded from the package.
 	 * 
 	 * @param packagePath
 	 *            of the desired stream.
@@ -1746,6 +1740,34 @@ public class OdfPackage implements Closeable {
 			return bais;
 		}
 		return null;
+	}
+
+	/**
+	 * Get the latest version of package content as InputStream, as it would be saved.
+	 * This might not be the original version once loaded from the package.
+	 *
+	 * @param packagePath
+	 *            of the desired stream.
+	 * @param useOriginal true uses the stream as loaded from the ZIP.
+	 *				False will return even modified file content as a stream.
+	 * @return Inputstream of the ODF file within the package for the given
+	 *         path.
+	 */
+	public InputStream getInputStream(String packagePath, boolean useOriginal) {
+		InputStream stream = null;
+		if (useOriginal) {
+			ZipEntry entry = mOriginalZipEntries.get(packagePath);
+			if (entry != null) {
+				try {
+					stream = mZipFile.getInputStream(entry);
+				} catch (IOException ex) {
+					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+		} else {
+			stream = getInputStream(packagePath);
+		}
+		return stream;
 	}
 
 	/**
@@ -1849,8 +1871,7 @@ public class OdfPackage implements Closeable {
 		return baos;
 	}
 
-	/** Removes a singel file from the package.
-	 * @param path of the file relative to the package root
+	/** Removes the singel given file
 	 */
 	public void remove(String packagePath) {
 		packagePath = normalizePath(packagePath);
@@ -1882,8 +1903,8 @@ public class OdfPackage implements Closeable {
 	 * Encoded XML Attributes
 	 */
 	private String encodeXMLAttributes(String s) {
-		String r = s.replaceAll("\"", "&quot;");
-		r = r.replaceAll("'", "&apos;");
+		String r = QUOTATION_PATTERN.matcher(s).replaceAll(ENCODED_QUOTATION);
+		r = APOSTROPHE_PATTERN.matcher(r).replaceAll(ENCODED_APOSTROPHE);
 		return r;
 	}
 
@@ -2112,5 +2133,49 @@ public class OdfPackage implements Closeable {
 	 */
 	public ErrorHandler getErrorHandler() {
 		return mErrorHandler;
+	}
+
+	private void logValidationWarning(ValidationConstraint constraint, String baseURI, Object... o) {
+		try {
+			int varCount = 0;
+			if (o != null) {
+				varCount = o.length;
+			}
+			switch (varCount) {
+				case 0:
+					mErrorHandler.warning(new OdfValidationException(constraint, baseURI, o));
+					break;
+				case 1:
+					mErrorHandler.warning(new OdfValidationException(constraint, baseURI, o[0]));
+					break;
+				case 2:
+					mErrorHandler.warning(new OdfValidationException(constraint, baseURI, o[0], o[1]));
+					break;
+			}
+		} catch (SAXException ex) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.WARNING, null, ex);
+		}
+	}
+
+	private void logValidationError(ValidationConstraint constraint, String baseURI, Object... o) {
+		try {
+			int varCount = 0;
+			if (o != null) {
+				varCount = o.length;
+			}
+			switch (varCount) {
+				case 0:
+					mErrorHandler.error(new OdfValidationException(constraint, baseURI, o));
+					break;
+				case 1:
+					mErrorHandler.error(new OdfValidationException(constraint, baseURI, o[0]));
+					break;
+				case 2:
+					mErrorHandler.error(new OdfValidationException(constraint, baseURI, o[0], o[1]));
+					break;
+			}
+		} catch (SAXException ex) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 }
