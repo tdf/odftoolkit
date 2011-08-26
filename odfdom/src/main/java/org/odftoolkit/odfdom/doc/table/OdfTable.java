@@ -72,7 +72,6 @@ public class OdfTable {
 
 	TableTableElement mTableElement;
 	OdfDocument mDocument;
-	String mTableName;
 	boolean mIsProtected;
 	private static final int DEFAULT_ROW_COUNT = 2;
 	private static final int DEFAULT_COLUMN_COUNT = 5;
@@ -449,6 +448,7 @@ public class OdfTable {
 	 * The default row count is 2.
 	 * <p>
 	 * The table will be inserted at the end of the document.
+	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
 	 * 
 	 * @param document	the ODF document that contains this feature 
 	 * @return the created <code>OdfTable</code> feature instance
@@ -504,6 +504,7 @@ public class OdfTable {
 	 * with a specified row number and column number.
 	 * <p>
 	 * The table will be inserted at the end of the document.
+	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
 	 * 
 	 * @param document	the ODF document that contains this feature 
 	 * @param numRows	the row number
@@ -538,6 +539,7 @@ public class OdfTable {
 	 * with a specified row number, column number, header row number, header column number.
 	 * <p>
 	 * The table will be inserted at the end of the document.
+	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
 	 * 
 	 * @param document	the ODF document that contains this feature 
 	 * @param numRows	the row number
@@ -575,6 +577,7 @@ public class OdfTable {
 	 * The value type of each cell is float.
 	 * <p>
 	 * The table will be inserted at the end of the document.
+	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
 	 * 
 	 * @param document	the ODF document that contains this feature
 	 * @param rowLabel	set as the header row, it can be null if no header row needed
@@ -659,6 +662,8 @@ public class OdfTable {
 	 * The value type of each cell is string.
 	 * <p>
 	 * The table will be inserted at the end of the document.
+	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * 
 	 * @param document	the ODF document that contains this feature
 	 * @param rowLabel	set as the header row, it can be null if no header row needed
 	 * @param columnLabel	set as the header column, it can be null if no header column needed
@@ -1565,8 +1570,20 @@ public class OdfTable {
 	 * Set the table name.
 	 * 
 	 * @param tableName the table name
+	 * @throws IllegalArgumentException if the tableName is duplicate with one of tables in the current document
 	 */
 	public void setTableName(String tableName) {
+		//check if the table name is already exist 
+		OdfDocument doc = ((OdfFileDom) mTableElement.getOwnerDocument()).getOdfDocument();
+		List<OdfTable> tableList = doc.getTableList();
+		for(int i=0;i<tableList.size();i++){
+			OdfTable table = tableList.get(i);
+			if(tableName.equals(table.getTableName())){
+				if(table != this) {
+					throw new IllegalArgumentException("The table name is duplicate with one of tables in the current document.");
+				}
+			}	
+		}		
 		mTableElement.setTableNameAttribute(tableName);
 	}
 

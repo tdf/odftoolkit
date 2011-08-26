@@ -361,23 +361,37 @@ public class TableTest {
 
 	@Test
 	public void testGetSetTablename() {
-		String tablename = "MyTable";
+		String tablename = "My Table";
+		OdfTextDocument document = null;
 		try {
-			OdfTextDocument document = OdfTextDocument.newTextDocument();
+			document = OdfTextDocument.newTextDocument();
 			document.newParagraph("Empty table:");
-			OdfTable table = createEmptyTable(document);
+			OdfTable table = createEmptyTable(document);			
 			table.setTableName(tablename);
 			Assert.assertEquals(tablename, table.getTableName());
 
 			document.save(ResourceUtilities.newTestOutputFile("TestGetSetName.odt"));
+			document.close();
 			document = loadODTDocument("TestGetSetName.odt");
 			table = document.getTableByName(tablename);
 			Assert.assertNotNull(table);
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String tablename2 = table.getTableName();
+			Assert.assertEquals(tablename, tablename2);
+		}catch (Exception e) {
 			Assert.fail(e.getMessage());
+		}
+		
+		try{
+			//new another table with the same name
+			//an exception will be thrown
+			OdfTable table2 = OdfTable.newTable(document);
+			table2.setTableName(tablename);
+			document.save(ResourceUtilities.newTestOutputFile("TestGetSetName.odt"));
+			Assert.fail("should not save the tables with the same table name.");
+		} catch (Exception e) {
+			if(! e.getMessage().startsWith("The table name is duplicate")) {
+				Assert.fail(e.getMessage());
+			}
 		}
 	}
 
