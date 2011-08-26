@@ -288,7 +288,7 @@ public class XMLModel {
     }
 
     /**
-     * (Java) Keyword may not start with a number, so escape it
+     * (Java) member variable may not start with a number, so escape it
      * @param in raw input
      * @return filtered output, starting with a literal
      */

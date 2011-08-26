@@ -178,7 +178,7 @@ public class SourceCodeModel {
      * @param objectType like "Boolean"
      * @return simpleType like "boolean"
      */
-    public String getSimpleType(String objectType) {
+    public String getPrimitiveType(String objectType) {
         if (objectType.equals("Boolean")) {
             return "boolean";
         }

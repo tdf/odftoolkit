@@ -54,7 +54,7 @@ public class OdfTemplateAPICoverageTest {
         assertTrue(methods.contains("getBaseclasses",0));
         assertTrue(methods.contains("getBaseclassOf",1));
         assertTrue(methods.contains("getConversiontype",1));
-        assertTrue(methods.contains("getSimpleType",1));
+        assertTrue(methods.contains("getPrimitiveType",1));
         assertTrue(methods.contains("getValuetype",1));
         assertTrue(methods.contains("getValuetypes",1));
 

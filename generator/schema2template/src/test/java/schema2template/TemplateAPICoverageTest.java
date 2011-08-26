@@ -33,7 +33,9 @@ import schema2template.model.QNamedPuzzleComponent;
 import schema2template.model.XMLModel;
 import static org.junit.Assert.*;
 
+/** Regression test to make sure that API used by templates still exists */
 public class TemplateAPICoverageTest {
+
 
     public TemplateAPICoverageTest() {
     }

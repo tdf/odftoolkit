@@ -359,22 +359,23 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
      * can only be made immutable by the caller after this method run.
      *
      * @param root MSV root Expression
-     * @param emptyElementSet empty Set. Will be filled with Definitions of Type.ELEMENT
-     * @param emptyAttributeSet empty Set. Will be filled with Definitions of Type.ATTRIBUTE
+     * @param newElementSet empty Set. Will be filled with Definitions of Type.ELEMENT
+     * @param newAttributeSet empty Set. Will be filled with Definitions of Type.ATTRIBUTE
      */
-    public static void extractPuzzlePieces(Expression root, PuzzlePieceSet emptyElementSet, PuzzlePieceSet emptyAttributeSet) {
-        extractTypedPuzzlePieces(root, emptyElementSet, ElementExp.class);
-        extractTypedPuzzlePieces(root, emptyAttributeSet, AttributeExp.class);
-        configureProperties(emptyElementSet, emptyAttributeSet);
-        reduceDatatypes(emptyAttributeSet);
-        reduceValues(emptyAttributeSet);
-        reduceAttributes(emptyElementSet, emptyAttributeSet);
-        makePuzzlePiecesImmutable(emptyElementSet);
-        makePuzzlePiecesImmutable(emptyAttributeSet);
+    public static void extractPuzzlePieces(Expression root, PuzzlePieceSet newElementSet, PuzzlePieceSet newAttributeSet) {
+		// e.g. the newElementSet is the set to iterate later in the template
+        extractTypedPuzzlePieces(root, newElementSet, ElementExp.class);
+        extractTypedPuzzlePieces(root, newAttributeSet, AttributeExp.class);
+        configureProperties(newElementSet, newAttributeSet);
+        reduceDatatypes(newAttributeSet);
+        reduceValues(newAttributeSet);
+        reduceAttributes(newElementSet, newAttributeSet);
+        makePuzzlePiecesImmutable(newElementSet);
+        makePuzzlePiecesImmutable(newAttributeSet);
     }
 
     // Extracts all Definitions of Type [ATTRIBUTE, ELEMENT] from MSV tree.
-    private static void extractTypedPuzzlePieces(Expression root, PuzzlePieceSet setToBeFilled, Class superclass) {
+    private static <T extends Expression> void extractTypedPuzzlePieces(Expression root, PuzzlePieceSet setToBeFilled, Class<T> superclass) {
         MSVExpressionIterator iter = new MSVExpressionIterator(root, superclass);
         HashMap<String, List<PuzzlePiece>> multipleMap = new HashMap<String, List<PuzzlePiece>>();
 

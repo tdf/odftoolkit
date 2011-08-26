@@ -24,6 +24,7 @@ package schema2template;
 import com.sun.msv.grammar.Expression;
 import com.sun.msv.reader.trex.ng.RELAXNGReader;
 import java.io.File;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.SAXParserFactory;
 import org.junit.Test;
@@ -34,7 +35,10 @@ import org.junit.Assert;
 
 public class PuzzlePieceTest {
 
-	private Logger mLog = Logger.getLogger(PuzzlePieceTest.class.getName());
+	private static final Logger LOG = Logger.getLogger(PuzzlePieceTest.class.getName());
+	private static final int ODF11_ELEMENT_NUMBER = 507;
+	private static final int ODF11_ATTRIBUTE_NUMBER = 840;
+
 	private Expression mRoot;
 	private static final Boolean DEBUG = Boolean.FALSE;
 
@@ -76,23 +80,23 @@ public class PuzzlePieceTest {
 	/** Routine to compare the expected number of either attributes or elements with the found amount */
 	private void checkFoundNumber(PuzzlePieceSet puzzlePieceSet, int expectedAmount, String nodeName) {
 		if (expectedAmount == puzzlePieceSet.size()) {
-			mLog.info("The expected amount of " + nodeName + "s could be found");
+			LOG.log(Level.INFO, "The expected amount of {0}s could be found", nodeName);
 			if(DEBUG){
 			int i = 0;
 			for (PuzzlePiece piece : puzzlePieceSet) {
-				mLog.info(piece.getQName() + " was " + nodeName + " #" + ++i);
+				LOG.info(piece.getQName() + " was " + nodeName + " #" + ++i);
 			}
-			mLog.info("++++++++++++");
+			LOG.info("++++++++++++");
 			}
 		} else {
 			String errorMsg = "Instead of " + expectedAmount
 					+ " there were " + puzzlePieceSet.size() + " " + nodeName + "s found";
-			mLog.severe(errorMsg);
+			LOG.severe(errorMsg);
 			int i = 0;
 			for (PuzzlePiece piece : puzzlePieceSet) {
-				mLog.severe(piece.getQName() + " was " + nodeName + " #" + ++i);
+				LOG.severe(piece.getQName() + " was " + nodeName + " #" + ++i);
 			}
-			mLog.info("********************");
+			LOG.info("********************");
 			Assert.fail(errorMsg);
 		}
 	}
