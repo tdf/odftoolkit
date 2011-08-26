@@ -98,6 +98,24 @@
             template="true"/>
     </target>
     
+    <target name="check-v12-completeness" depends="init,-create-v12-xref-schema" 
+            description="Check completeness of ODF 1.2 specification.">
+        <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+        <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
+        <property name="check-log-file" location="${dist.dir}/OpenDocument-v1.2${opendocument.v12.schema.state.target}-check.log"/>
+        <condition property="force">
+            <not>
+                <uptodate srcfile="${xref-schema-file}" targetfile="${check-log-file}"/>
+            </not>
+        </condition>
+        <odfxslt style="${project.odfxsltrunner}/sample_xslt/check-completeness.xsl"
+            in="${opendocument.v12.spec-source.main}"
+            outfile="${check-log-file}"
+            force="${force}">
+            <param name="xref-schema-file" expression="${xref-schema-file}"/>
+        </odfxslt>
+    </target>
+        
     <target name="publish-v12-schema" depends="init,-get-v12-schemas"
             description="Create an official ODF schema from a working schema">
         <xslt style="${project.odfxsltrunner}/sample_xslt/publish-schema.xsl" 
