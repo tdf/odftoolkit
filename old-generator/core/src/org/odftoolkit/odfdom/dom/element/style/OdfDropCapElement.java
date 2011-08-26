@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
@@ -60,11 +60,6 @@ public abstract class OdfDropCapElement extends OdfStylableElement
     public Integer getStyleLength()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "length" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1";
-        }
-
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 
@@ -83,11 +78,6 @@ public abstract class OdfDropCapElement extends OdfStylableElement
     public Integer getLines()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "lines" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1";
-        }
-
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 
@@ -104,14 +94,8 @@ public abstract class OdfDropCapElement extends OdfStylableElement
      * Get value of attribute "style:distance".
      */
     public String getDistance()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "distance" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0cm";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "distance" ) );
     }
 
     /**

@@ -27,15 +27,15 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
-import org.odftoolkit.odfdom.dom.type.OdfId;
-import org.odftoolkit.odfdom.dom.type.OdfPercent;
-import org.odftoolkit.odfdom.dom.type.OdfPresentationClasses;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfPercent;
+import org.odftoolkit.odfdom.dom.type.OdfId;
+import org.odftoolkit.odfdom.dom.type.OdfPresentationClasses;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
 
 /**

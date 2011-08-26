@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
 
 
 /**

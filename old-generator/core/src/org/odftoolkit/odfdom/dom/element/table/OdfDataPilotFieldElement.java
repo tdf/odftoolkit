@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfOrientationType;
 
@@ -149,11 +149,6 @@ public abstract class OdfDataPilotFieldElement extends OdfElement
     public Integer getUsedHierarchy()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "used-hierarchy" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "-1";
-        }
-
         return Integer.valueOf( aStringVal);
     }
 

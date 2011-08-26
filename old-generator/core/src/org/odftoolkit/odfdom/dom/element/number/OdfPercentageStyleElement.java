@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.number.OdfTransliterationStyleType;
 
 
@@ -112,6 +112,38 @@ public abstract class OdfPercentageStyleElement extends OdfElement
     }
 
     /**
+     * Get value of attribute "number:script".
+     */
+    public String getScript()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "script" ) );
+    }
+
+    /**
+     * Set value of attribute "number:script".
+     */
+    public void setScript( String _aScript )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "script" ), _aScript );
+    }
+
+    /**
+     * Get value of attribute "number:rfc-language-tag".
+     */
+    public String getRfcLanguageTag()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "rfc-language-tag" ) );
+    }
+
+    /**
+     * Set value of attribute "number:rfc-language-tag".
+     */
+    public void setRfcLanguageTag( String _aRfcLanguageTag )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "rfc-language-tag" ), _aRfcLanguageTag );
+    }
+
+    /**
      * Get value of attribute "number:title".
      */
     public String getTitle()
@@ -149,14 +181,8 @@ public abstract class OdfPercentageStyleElement extends OdfElement
      * Get value of attribute "number:transliteration-format".
      */
     public String getTransliterationFormat()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "transliteration-format" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "transliteration-format" ) );
     }
 
     /**
@@ -205,11 +231,6 @@ public abstract class OdfPercentageStyleElement extends OdfElement
     public OdfTransliterationStyleType getTransliterationStyle()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "transliteration-style" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "short";
-        }
-
         return OdfTransliterationStyleType.enumValueOf( aStringVal);
     }
 

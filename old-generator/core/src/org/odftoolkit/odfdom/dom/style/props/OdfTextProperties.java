@@ -171,4 +171,27 @@ public interface OdfTextProperties {
         OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "use-window-font-color"));
     public final static OdfStyleProperty Display = 
         OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.TEXT, "display"));
+    public final static OdfStyleProperty Script = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.FO, "script"));
+    public final static OdfStyleProperty ScriptAsian = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "script-asian"));
+    public final static OdfStyleProperty ScriptComplex = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "script-complex"));
+    public final static OdfStyleProperty RfcLanguageTag = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "rfc-language-tag"));
+    public final static OdfStyleProperty RfcLanguageTagAsian = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "rfc-language-tag-asian"));
+    public final static OdfStyleProperty RfcLanguageTagComplex = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "rfc-language-tag-complex"));
+    public final static OdfStyleProperty TextOverlineType = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "text-overline-type"));
+    public final static OdfStyleProperty TextOverlineStyle = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "text-overline-style"));
+    public final static OdfStyleProperty TextOverlineWidth = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "text-overline-width"));
+    public final static OdfStyleProperty TextOverlineColor = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "text-overline-color"));
+    public final static OdfStyleProperty TextOverlineMode = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "text-overline-mode"));
+
 }

@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
-import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
 
 /**
@@ -132,12 +132,16 @@ public abstract class OdfPageLayoutPropertiesElement extends OdfStylePropertiesB
         OdfStyleProperty.get(OdfStylePropertiesSet.PageLayoutProperties, OdfName.get(OdfNamespace.STYLE, "writing-mode"));
     public final static OdfStyleProperty LayoutGridMode = 
         OdfStyleProperty.get(OdfStylePropertiesSet.PageLayoutProperties, OdfName.get(OdfNamespace.STYLE, "layout-grid-mode"));
+    public final static OdfStyleProperty LayoutGridStandardMode = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.PageLayoutProperties, OdfName.get(OdfNamespace.STYLE, "layout-grid-standard-mode"));
     public final static OdfStyleProperty LayoutGridBaseHeight = 
         OdfStyleProperty.get(OdfStylePropertiesSet.PageLayoutProperties, OdfName.get(OdfNamespace.STYLE, "layout-grid-base-height"));
     public final static OdfStyleProperty LayoutGridRubyHeight = 
         OdfStyleProperty.get(OdfStylePropertiesSet.PageLayoutProperties, OdfName.get(OdfNamespace.STYLE, "layout-grid-ruby-height"));
     public final static OdfStyleProperty LayoutGridLines = 
         OdfStyleProperty.get(OdfStylePropertiesSet.PageLayoutProperties, OdfName.get(OdfNamespace.STYLE, "layout-grid-lines"));
+    public final static OdfStyleProperty LayoutGridBaseWidth = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.PageLayoutProperties, OdfName.get(OdfNamespace.STYLE, "layout-grid-base-width"));
     public final static OdfStyleProperty LayoutGridColor = 
         OdfStyleProperty.get(OdfStylePropertiesSet.PageLayoutProperties, OdfName.get(OdfNamespace.STYLE, "layout-grid-color"));
     public final static OdfStyleProperty LayoutGridRubyBelow = 
@@ -146,5 +150,7 @@ public abstract class OdfPageLayoutPropertiesElement extends OdfStylePropertiesB
         OdfStyleProperty.get(OdfStylePropertiesSet.PageLayoutProperties, OdfName.get(OdfNamespace.STYLE, "layout-grid-print"));
     public final static OdfStyleProperty LayoutGridDisplay = 
         OdfStyleProperty.get(OdfStylePropertiesSet.PageLayoutProperties, OdfName.get(OdfNamespace.STYLE, "layout-grid-display"));
+    public final static OdfStyleProperty LayoutGridSnapTo = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.PageLayoutProperties, OdfName.get(OdfNamespace.STYLE, "layout-grid-snap-to"));
 
 }

@@ -27,13 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfPercent;
-import org.odftoolkit.odfdom.dom.type.style.OdfAdjustmentType;
 import org.odftoolkit.odfdom.dom.type.style.OdfLineStyleType;
+import org.odftoolkit.odfdom.dom.type.style.OdfAdjustmentType;
 
 
 /**
@@ -128,11 +128,6 @@ public abstract class OdfFootnoteSepElement extends OdfElement
     public OdfAdjustmentType getAdjustment()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "adjustment" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "left";
-        }
-
         return OdfAdjustmentType.enumValueOf( aStringVal);
     }
 

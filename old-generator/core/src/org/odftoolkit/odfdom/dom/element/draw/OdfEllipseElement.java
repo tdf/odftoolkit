@@ -27,13 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.type.OdfId;
-import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.draw.OdfKindType;
+import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
 /**
@@ -92,11 +92,6 @@ public abstract class OdfEllipseElement extends OdfShapeElementBase
     public OdfKindType getKind()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "kind" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "full";
-        }
-
         return OdfKindType.enumValueOf( aStringVal);
     }
 
@@ -112,37 +107,33 @@ public abstract class OdfEllipseElement extends OdfShapeElementBase
     /**
      * Get value of attribute "draw:start-angle".
      */
-    public Double getStartAngle()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "start-angle" ) );
-        return Double.valueOf( aStringVal);
+    public String getStartAngle()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "start-angle" ) );
     }
 
     /**
      * Set value of attribute "draw:start-angle".
      */
-    public void setStartAngle( Double _aStartAngle )
-    {                    
-        String aStringVal = Double.toString( _aStartAngle );
-        setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "start-angle" ), aStringVal );
+    public void setStartAngle( String _aStartAngle )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "start-angle" ), _aStartAngle );
     }
 
     /**
      * Get value of attribute "draw:end-angle".
      */
-    public Double getEndAngle()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "end-angle" ) );
-        return Double.valueOf( aStringVal);
+    public String getEndAngle()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "end-angle" ) );
     }
 
     /**
      * Set value of attribute "draw:end-angle".
      */
-    public void setEndAngle( Double _aEndAngle )
-    {                    
-        String aStringVal = Double.toString( _aEndAngle );
-        setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "end-angle" ), aStringVal );
+    public void setEndAngle( String _aEndAngle )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "end-angle" ), _aEndAngle );
     }
 
     /**

@@ -27,11 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
+import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
 /**
@@ -68,6 +70,42 @@ public abstract class OdfListItemElement extends OdfElement
     {                    
         String aStringVal = OdfNonNegativeInteger.toString( _aStartValue );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "start-value" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "text:style-override".
+     */
+    public String getStyleOverride()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-override" ) );
+        return OdfStyleName.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "text:style-override".
+     */
+    public void setStyleOverride( String _aStyleOverride )
+    {                    
+        String aStringVal = OdfStyleName.toString( _aStyleOverride );
+        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-override" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
 }

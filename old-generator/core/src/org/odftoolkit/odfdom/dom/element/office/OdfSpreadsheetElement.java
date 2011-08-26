@@ -27,11 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.office;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
 
 /**
@@ -84,6 +85,24 @@ public abstract class OdfSpreadsheetElement extends OdfElement
     public void setProtectionKey( String _aProtectionKey )
     {
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "protection-key" ), _aProtectionKey );
+    }
+
+    /**
+     * Get value of attribute "table:protection-key-digest-algorithm".
+     */
+    public String getProtectionKeyDigestAlgorithm()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "protection-key-digest-algorithm" ) );
+        return OdfAnyURI.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "table:protection-key-digest-algorithm".
+     */
+    public void setProtectionKeyDigestAlgorithm( String _aProtectionKeyDigestAlgorithm )
+    {                    
+        String aStringVal = OdfAnyURI.toString( _aProtectionKeyDigestAlgorithm );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "protection-key-digest-algorithm" ), aStringVal );
     }
 
 }

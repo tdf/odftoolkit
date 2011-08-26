@@ -27,16 +27,15 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfNonNegativeLength;
+import org.odftoolkit.odfdom.dom.type.style.OdfTabStopType;
+import org.odftoolkit.odfdom.dom.type.style.OdfLeaderType;
+import org.odftoolkit.odfdom.dom.type.style.OdfLeaderStyleType;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
-import org.odftoolkit.odfdom.dom.type.style.OdfLeaderStyleType;
-import org.odftoolkit.odfdom.dom.type.style.OdfLeaderType;
-import org.odftoolkit.odfdom.dom.type.style.OdfTabStopType;
 
 
 /**
@@ -68,18 +67,16 @@ public abstract class OdfTabStopElement extends OdfElement
      * Get value of attribute "style:position".
      */
     public String getPosition()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "position" ) );
-        return OdfNonNegativeLength.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "position" ) );
     }
 
     /**
      * Set value of attribute "style:position".
      */
     public void setPosition( String _aPosition )
-    {                    
-        String aStringVal = OdfNonNegativeLength.toString( _aPosition );
-        setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "position" ), aStringVal );
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "position" ), _aPosition );
     }
 
     /**
@@ -88,11 +85,6 @@ public abstract class OdfTabStopElement extends OdfElement
     public OdfTabStopType getType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "type" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "left";
-        }
-
         return OdfTabStopType.enumValueOf( aStringVal);
     }
 
@@ -195,14 +187,8 @@ public abstract class OdfTabStopElement extends OdfElement
      * Get value of attribute "style:leader-text".
      */
     public String getLeaderText()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "leader-text" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = " ";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "leader-text" ) );
     }
 
     /**

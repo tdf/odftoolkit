@@ -27,13 +27,15 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
+import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
 /**
@@ -127,6 +129,42 @@ public abstract class OdfBibliographyElement extends OdfStylableElement
     public void setProtectionKey( String _aProtectionKey )
     {
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "protection-key" ), _aProtectionKey );
+    }
+
+    /**
+     * Get value of attribute "text:protection-key-digest-algorithm".
+     */
+    public String getProtectionKeyDigestAlgorithm()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "protection-key-digest-algorithm" ) );
+        return OdfAnyURI.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "text:protection-key-digest-algorithm".
+     */
+    public void setProtectionKeyDigestAlgorithm( String _aProtectionKeyDigestAlgorithm )
+    {                    
+        String aStringVal = OdfAnyURI.toString( _aProtectionKeyDigestAlgorithm );
+        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "protection-key-digest-algorithm" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
 }

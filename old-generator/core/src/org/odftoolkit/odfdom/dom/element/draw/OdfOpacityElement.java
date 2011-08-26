@@ -27,13 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfPercent;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.draw.OdfGradientStyleType;
+import org.odftoolkit.odfdom.dom.type.OdfPercent;
 
 
 /**
@@ -152,19 +152,17 @@ public abstract class OdfOpacityElement extends OdfElement
     /**
      * Get value of attribute "draw:angle".
      */
-    public Integer getAngle()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "angle" ) );
-        return Integer.valueOf( aStringVal);
+    public String getAngle()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "angle" ) );
     }
 
     /**
      * Set value of attribute "draw:angle".
      */
-    public void setAngle( Integer _aAngle )
-    {                    
-        String aStringVal = Integer.toString( _aAngle );
-        setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "angle" ), aStringVal );
+    public void setAngle( String _aAngle )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "angle" ), _aAngle );
     }
 
     /**

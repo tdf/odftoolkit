@@ -27,13 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeLength;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
 /**
@@ -70,6 +70,42 @@ public abstract class OdfRectElement extends OdfShapeElementBase
     {                    
         String aStringVal = OdfNonNegativeLength.toString( _aCornerRadius );
         setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "corner-radius" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "svg:rx".
+     */
+    public String getRx()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "rx" ) );
+        return OdfNonNegativeLength.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "svg:rx".
+     */
+    public void setRx( String _aRx )
+    {                    
+        String aStringVal = OdfNonNegativeLength.toString( _aRx );
+        setOdfAttribute( OdfName.get( OdfNamespace.SVG, "rx" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "svg:ry".
+     */
+    public String getRy()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "ry" ) );
+        return OdfNonNegativeLength.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "svg:ry".
+     */
+    public void setRy( String _aRy )
+    {                    
+        String aStringVal = OdfNonNegativeLength.toString( _aRy );
+        setOdfAttribute( OdfName.get( OdfNamespace.SVG, "ry" ), aStringVal );
     }
 
     /**

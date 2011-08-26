@@ -27,14 +27,15 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.table.OdfVisibilityType;
+import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
 /**
@@ -61,11 +62,6 @@ public abstract class OdfTableColumnElement extends OdfStylableElement
     public Integer getNumberColumnsRepeated()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "number-columns-repeated" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1";
-        }
-
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 
@@ -102,11 +98,6 @@ public abstract class OdfTableColumnElement extends OdfStylableElement
     public OdfVisibilityType getVisibility()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "visibility" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "visible";
-        }
-
         return OdfVisibilityType.enumValueOf( aStringVal);
     }
 
@@ -135,6 +126,24 @@ public abstract class OdfTableColumnElement extends OdfStylableElement
     {                    
         String aStringVal = OdfStyleName.toString( _aDefaultCellStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "default-cell-style-name" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
 }

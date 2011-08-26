@@ -27,16 +27,16 @@
 
 package org.odftoolkit.odfdom.dom.element.dr3d;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStyleablePresentationElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.type.OdfId;
+import org.odftoolkit.odfdom.dom.element.OdfStyleablePresentationElement;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
+import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
-import org.odftoolkit.odfdom.dom.type.OdfStyleNames;
 import java.util.List;
+import org.odftoolkit.odfdom.dom.type.OdfStyleNames;
 
 
 /**
@@ -110,19 +110,35 @@ public abstract class OdfSphereElement extends OdfStyleablePresentationElement
     /**
      * Get value of attribute "draw:id".
      */
-    public String getId()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "id" ) );
-        return OdfId.valueOf( aStringVal);
+    public String getDrawid()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "id" ) );
     }
 
     /**
      * Set value of attribute "draw:id".
      */
-    public void setId( String _aId )
+    public void setDrawid( String _aDrawid )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "id" ), _aDrawid );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
     {                    
-        String aStringVal = OdfId.toString( _aId );
-        setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "id" ), aStringVal );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
     /**

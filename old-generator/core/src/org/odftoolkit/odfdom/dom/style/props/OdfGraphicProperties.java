@@ -330,4 +330,13 @@ public interface OdfGraphicProperties {
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.TEXT, "animation-steps"));
     public final static OdfStyleProperty AnimationStopInside = 
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.TEXT, "animation-stop-inside"));
+    public final static OdfStyleProperty StrokeLinecap = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.SVG, "stroke-linecap"));
+    public final static OdfStyleProperty ShrinkToFit = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.DRAW, "shrink-to-fit"));
+    public final static OdfStyleProperty BackgroundTransparency = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.STYLE, "background-transparency"));
+    public final static OdfStyleProperty DrawAspect = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.DRAW, "draw-aspect"));
+
 }

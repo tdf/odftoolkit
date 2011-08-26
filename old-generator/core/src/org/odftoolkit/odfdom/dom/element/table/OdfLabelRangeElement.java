@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.table.OdfOrientationType;
+import org.odftoolkit.odfdom.dom.type.table.OdfLabelOrientationType;
 
 
 /**
@@ -54,7 +54,7 @@ public abstract class OdfLabelRangeElement extends OdfElement
     /**
      * Initialize mandatory attributes.
      */
-    public void init(String _aLabelCellRangeAddress, String _aDataCellRangeAddress, OdfOrientationType _aOrientation)
+    public void init(String _aLabelCellRangeAddress, String _aDataCellRangeAddress, OdfLabelOrientationType _aOrientation)
     {
         setLabelCellRangeAddress( _aLabelCellRangeAddress );
         setDataCellRangeAddress( _aDataCellRangeAddress );
@@ -96,18 +96,18 @@ public abstract class OdfLabelRangeElement extends OdfElement
     /**
      * Get value of attribute "table:orientation".
      */
-    public OdfOrientationType getOrientation()
+    public OdfLabelOrientationType getOrientation()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "orientation" ) );
-        return OdfOrientationType.enumValueOf( aStringVal);
+        return OdfLabelOrientationType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "table:orientation".
      */
-    public void setOrientation( OdfOrientationType _aOrientation )
+    public void setOrientation( OdfLabelOrientationType _aOrientation )
     {                    
-        String aStringVal = OdfOrientationType.toString( _aOrientation );
+        String aStringVal = OdfLabelOrientationType.toString( _aOrientation );
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "orientation" ), aStringVal );
     }
 

@@ -93,4 +93,7 @@ public interface OdfTableCellProperties {
         OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.STYLE, "text-align-source"));
     public final static OdfStyleProperty VerticalAlign = 
         OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.STYLE, "vertical-align"));
+    public final static OdfStyleProperty WritingMode = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.STYLE, "writing-mode"));
+
 }

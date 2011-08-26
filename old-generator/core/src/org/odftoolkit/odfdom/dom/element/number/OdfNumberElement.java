@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
@@ -74,11 +74,6 @@ public abstract class OdfNumberElement extends OdfElement
     public Double getDisplayFactor()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "display-factor" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1";
-        }
-
         return Double.valueOf( aStringVal);
     }
 

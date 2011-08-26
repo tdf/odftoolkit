@@ -27,14 +27,14 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
-import org.odftoolkit.odfdom.dom.type.OdfDuration;
 import org.odftoolkit.odfdom.dom.type.table.OdfModeType;
+import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 import javax.xml.datatype.Duration;
+import org.odftoolkit.odfdom.dom.type.OdfDuration;
 
 
 /**
@@ -61,11 +61,6 @@ public abstract class OdfTableSourceElement extends OdfElement
     public OdfModeType getMode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "mode" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "copy-all";
-        }
-
         return OdfModeType.enumValueOf( aStringVal);
     }
 

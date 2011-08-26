@@ -27,22 +27,22 @@
 
 package org.odftoolkit.odfdom.dom.element.anim;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
-import org.odftoolkit.odfdom.dom.type.OdfDuration;
-import org.odftoolkit.odfdom.dom.type.OdfId;
-import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfNodeType;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfPresetClassType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfEndsyncType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
+import org.odftoolkit.odfdom.dom.type.OdfId;
+import javax.xml.datatype.Duration;
+import org.odftoolkit.odfdom.dom.type.OdfDuration;
+import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.smil.OdfRestartType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfRestartdefaultType;
-import javax.xml.datatype.Duration;
+import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.type.smil.OdfEndsyncType;
 
 
 /**
@@ -69,11 +69,6 @@ public abstract class OdfIterateElement extends OdfElement
     public OdfNodeType getPresentationNode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "node-type" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "default";
-        }
-
         return OdfNodeType.enumValueOf( aStringVal);
     }
 
@@ -124,11 +119,6 @@ public abstract class OdfIterateElement extends OdfElement
     public OdfPresetClassType getPresetClass()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "preset-class" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "custom";
-        }
-
         return OdfPresetClassType.enumValueOf( aStringVal);
     }
 
@@ -179,18 +169,34 @@ public abstract class OdfIterateElement extends OdfElement
      * Get value of attribute "anim:id".
      */
     public String getId()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.ANIM, "id" ) );
-        return OdfId.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.ANIM, "id" ) );
     }
 
     /**
      * Set value of attribute "anim:id".
      */
     public void setId( String _aId )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.ANIM, "id" ), _aId );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
     {                    
-        String aStringVal = OdfId.toString( _aId );
-        setOdfAttribute( OdfName.get( OdfNamespace.ANIM, "id" ), aStringVal );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
     /**
@@ -349,11 +355,6 @@ public abstract class OdfIterateElement extends OdfElement
     public OdfRestartType getRestart()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restart" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "default";
-        }
-
         return OdfRestartType.enumValueOf( aStringVal);
     }
 
@@ -372,11 +373,6 @@ public abstract class OdfIterateElement extends OdfElement
     public OdfRestartdefaultType getRestartdefault()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restartDefault" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "inherit";
-        }
-
         return OdfRestartdefaultType.enumValueOf( aStringVal);
     }
 
@@ -431,11 +427,6 @@ public abstract class OdfIterateElement extends OdfElement
     public Double getAccelerate()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "accelerate" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0.0";
-        }
-
         return Double.valueOf( aStringVal);
     }
 
@@ -454,11 +445,6 @@ public abstract class OdfIterateElement extends OdfElement
     public Double getDecelerate()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "decelerate" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0.0";
-        }
-
         return Double.valueOf( aStringVal);
     }
 

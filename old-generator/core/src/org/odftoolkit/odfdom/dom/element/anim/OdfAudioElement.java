@@ -27,15 +27,19 @@
 
 package org.odftoolkit.odfdom.dom.element.anim;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
-import org.odftoolkit.odfdom.dom.type.OdfId;
-import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfNodeType;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfPresetClassType;
+import org.odftoolkit.odfdom.dom.type.OdfId;
+import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
+import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
+import org.odftoolkit.odfdom.dom.type.smil.OdfRestartType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfRestartdefaultType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
 
 
 /**
@@ -62,11 +66,6 @@ public abstract class OdfAudioElement extends OdfElement
     public OdfNodeType getPresentationNode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "node-type" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "default";
-        }
-
         return OdfNodeType.enumValueOf( aStringVal);
     }
 
@@ -117,11 +116,6 @@ public abstract class OdfAudioElement extends OdfElement
     public OdfPresetClassType getPresetClass()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "preset-class" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "custom";
-        }
-
         return OdfPresetClassType.enumValueOf( aStringVal);
     }
 
@@ -172,18 +166,34 @@ public abstract class OdfAudioElement extends OdfElement
      * Get value of attribute "anim:id".
      */
     public String getId()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.ANIM, "id" ) );
-        return OdfId.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.ANIM, "id" ) );
     }
 
     /**
      * Set value of attribute "anim:id".
      */
     public void setId( String _aId )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.ANIM, "id" ), _aId );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
     {                    
-        String aStringVal = OdfId.toString( _aId );
-        setOdfAttribute( OdfName.get( OdfNamespace.ANIM, "id" ), aStringVal );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
     /**
@@ -302,6 +312,78 @@ public abstract class OdfAudioElement extends OdfElement
     {                    
         String aStringVal = OdfNonNegativeInteger.toString( _aRepeatcount );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatCount" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "smil:restart".
+     */
+    public OdfRestartType getRestart()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restart" ) );
+        return OdfRestartType.enumValueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "smil:restart".
+     */
+    public void setRestart( OdfRestartType _aRestart )
+    {                    
+        String aStringVal = OdfRestartType.toString( _aRestart );
+        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restart" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "smil:restartDefault".
+     */
+    public OdfRestartdefaultType getRestartdefault()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restartDefault" ) );
+        return OdfRestartdefaultType.enumValueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "smil:restartDefault".
+     */
+    public void setRestartdefault( OdfRestartdefaultType _aRestartdefault )
+    {                    
+        String aStringVal = OdfRestartdefaultType.toString( _aRestartdefault );
+        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restartDefault" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "smil:fill".
+     */
+    public OdfFillType getFill()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "fill" ) );
+        return OdfFillType.enumValueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "smil:fill".
+     */
+    public void setFill( OdfFillType _aFill )
+    {                    
+        String aStringVal = OdfFillType.toString( _aFill );
+        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "fill" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "smil:fillDefault".
+     */
+    public OdfFilldefaultType getFilldefault()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "fillDefault" ) );
+        return OdfFilldefaultType.enumValueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "smil:fillDefault".
+     */
+    public void setFilldefault( OdfFilldefaultType _aFilldefault )
+    {                    
+        String aStringVal = OdfFilldefaultType.toString( _aFilldefault );
+        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "fillDefault" ), aStringVal );
     }
 
 }

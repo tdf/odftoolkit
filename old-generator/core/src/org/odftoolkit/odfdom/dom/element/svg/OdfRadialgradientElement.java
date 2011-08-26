@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.svg;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.svg.OdfSpreadmethodType;
+import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
 
 /**
@@ -64,14 +64,8 @@ public abstract class OdfRadialgradientElement extends OdfElement
      * Get value of attribute "svg:gradientUnits".
      */
     public String getGradientunits()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "gradientUnits" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "objectBoundingBox";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.SVG, "gradientUnits" ) );
     }
 
     /**
@@ -104,11 +98,6 @@ public abstract class OdfRadialgradientElement extends OdfElement
     public OdfSpreadmethodType getSpreadmethod()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "spreadMethod" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "pad";
-        }
-
         return OdfSpreadmethodType.enumValueOf( aStringVal);
     }
 
@@ -159,14 +148,8 @@ public abstract class OdfRadialgradientElement extends OdfElement
      * Get value of attribute "svg:cx".
      */
     public String getCx()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "cx" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "50%";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.SVG, "cx" ) );
     }
 
     /**
@@ -181,14 +164,8 @@ public abstract class OdfRadialgradientElement extends OdfElement
      * Get value of attribute "svg:cy".
      */
     public String getCy()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "cy" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "50%";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.SVG, "cy" ) );
     }
 
     /**
@@ -203,14 +180,8 @@ public abstract class OdfRadialgradientElement extends OdfElement
      * Get value of attribute "svg:r".
      */
     public String getR()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "r" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "50%";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.SVG, "r" ) );
     }
 
     /**

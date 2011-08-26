@@ -27,14 +27,16 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
-import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
+import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
+import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
 /**
@@ -90,6 +92,130 @@ public abstract class OdfTableElement extends OdfStylableElement
     }
 
     /**
+     * Get value of attribute "table:template-name".
+     */
+    public String getTemplateName()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "template-name" ) );
+    }
+
+    /**
+     * Set value of attribute "table:template-name".
+     */
+    public void setTemplateName( String _aTemplateName )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "template-name" ), _aTemplateName );
+    }
+
+    /**
+     * Get value of attribute "table:use-first-row-styles".
+     */
+    public Boolean getUseFirstRowStyles()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-first-row-styles" ) );
+        return OdfBoolean.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "table:use-first-row-styles".
+     */
+    public void setUseFirstRowStyles( Boolean _aUseFirstRowStyles )
+    {                    
+        String aStringVal = OdfBoolean.toString( _aUseFirstRowStyles );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-first-row-styles" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "table:use-last-row-styles".
+     */
+    public Boolean getUseLastRowStyles()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-last-row-styles" ) );
+        return OdfBoolean.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "table:use-last-row-styles".
+     */
+    public void setUseLastRowStyles( Boolean _aUseLastRowStyles )
+    {                    
+        String aStringVal = OdfBoolean.toString( _aUseLastRowStyles );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-last-row-styles" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "table:use-first-column-styles".
+     */
+    public Boolean getUseFirstColumnStyles()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-first-column-styles" ) );
+        return OdfBoolean.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "table:use-first-column-styles".
+     */
+    public void setUseFirstColumnStyles( Boolean _aUseFirstColumnStyles )
+    {                    
+        String aStringVal = OdfBoolean.toString( _aUseFirstColumnStyles );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-first-column-styles" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "table:use-last-column-styles".
+     */
+    public Boolean getUseLastColumnStyles()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-last-column-styles" ) );
+        return OdfBoolean.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "table:use-last-column-styles".
+     */
+    public void setUseLastColumnStyles( Boolean _aUseLastColumnStyles )
+    {                    
+        String aStringVal = OdfBoolean.toString( _aUseLastColumnStyles );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-last-column-styles" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "table:use-banding-rows-styles".
+     */
+    public Boolean getUseBandingRowsStyles()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-banding-rows-styles" ) );
+        return OdfBoolean.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "table:use-banding-rows-styles".
+     */
+    public void setUseBandingRowsStyles( Boolean _aUseBandingRowsStyles )
+    {                    
+        String aStringVal = OdfBoolean.toString( _aUseBandingRowsStyles );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-banding-rows-styles" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "table:use-banding-columns-styles".
+     */
+    public Boolean getUseBandingColumnsStyles()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-banding-columns-styles" ) );
+        return OdfBoolean.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "table:use-banding-columns-styles".
+     */
+    public void setUseBandingColumnsStyles( Boolean _aUseBandingColumnsStyles )
+    {                    
+        String aStringVal = OdfBoolean.toString( _aUseBandingColumnsStyles );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-banding-columns-styles" ), aStringVal );
+    }
+
+    /**
      * Get value of attribute "table:protected".
      */
     public Boolean getProtected()
@@ -124,16 +250,29 @@ public abstract class OdfTableElement extends OdfStylableElement
     }
 
     /**
+     * Get value of attribute "table:protection-key-digest-algorithm".
+     */
+    public String getProtectionKeyDigestAlgorithm()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "protection-key-digest-algorithm" ) );
+        return OdfAnyURI.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "table:protection-key-digest-algorithm".
+     */
+    public void setProtectionKeyDigestAlgorithm( String _aProtectionKeyDigestAlgorithm )
+    {                    
+        String aStringVal = OdfAnyURI.toString( _aProtectionKeyDigestAlgorithm );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "protection-key-digest-algorithm" ), aStringVal );
+    }
+
+    /**
      * Get value of attribute "table:print".
      */
     public Boolean getPrint()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "print" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -162,6 +301,24 @@ public abstract class OdfTableElement extends OdfStylableElement
     {                    
         String aStringVal = OdfCellRangeAddressList.toString( _aPrintRanges );
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "print-ranges" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
     /**

@@ -27,10 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
 
 /**
@@ -50,5 +51,30 @@ public abstract class OdfOutlineStyleElement extends OdfElement
         return ELEMENT_NAME;
     }
 
+    /**
+     * Initialize mandatory attributes.
+     */
+    public void init(String _aName)
+    {
+        setName( _aName );
+    }
+
+    /**
+     * Get value of attribute "style:name".
+     */
+    public String getName()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "name" ) );
+        return OdfStyleName.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "style:name".
+     */
+    public void setName( String _aName )
+    {                    
+        String aStringVal = OdfStyleName.toString( _aName );
+        setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "name" ), aStringVal );
+    }
 
 }

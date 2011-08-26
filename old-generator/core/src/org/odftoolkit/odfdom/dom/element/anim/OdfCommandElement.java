@@ -27,13 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.anim;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfNodeType;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfPresetClassType;
+import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
 /**
@@ -67,11 +67,6 @@ public abstract class OdfCommandElement extends OdfElement
     public OdfNodeType getPresentationNode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "node-type" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "default";
-        }
-
         return OdfNodeType.enumValueOf( aStringVal);
     }
 
@@ -122,11 +117,6 @@ public abstract class OdfCommandElement extends OdfElement
     public OdfPresetClassType getPresetClass()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "preset-class" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "custom";
-        }
-
         return OdfPresetClassType.enumValueOf( aStringVal);
     }
 
@@ -177,18 +167,34 @@ public abstract class OdfCommandElement extends OdfElement
      * Get value of attribute "anim:id".
      */
     public String getId()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.ANIM, "id" ) );
-        return OdfId.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.ANIM, "id" ) );
     }
 
     /**
      * Set value of attribute "anim:id".
      */
     public void setId( String _aId )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.ANIM, "id" ), _aId );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
     {                    
-        String aStringVal = OdfId.toString( _aId );
-        setOdfAttribute( OdfName.get( OdfNamespace.ANIM, "id" ), aStringVal );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
     /**

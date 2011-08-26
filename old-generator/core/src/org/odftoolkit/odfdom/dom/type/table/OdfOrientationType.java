@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfOrientationType
 {
-              ROW( "row" ), COLUMN( "column" );
+              ROW( "row" ), HIDDEN( "hidden" ), PAGE( "page" ), DATA( "data" ), COLUMN( "column" );
 
     private String m_aValue;
 

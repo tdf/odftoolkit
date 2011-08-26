@@ -27,15 +27,15 @@
 
 package org.odftoolkit.odfdom.dom.element.presentation;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import javax.xml.datatype.Duration;
 import org.odftoolkit.odfdom.dom.type.OdfDuration;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfAnimationsType;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfTransitionOnClickType;
-import javax.xml.datatype.Duration;
 
 
 /**
@@ -94,11 +94,6 @@ public abstract class OdfSettingsElement extends OdfElement
     public Boolean getFullScreen()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "full-screen" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -189,11 +184,6 @@ public abstract class OdfSettingsElement extends OdfElement
     public Boolean getMouseVisible()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "mouse-visible" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -248,11 +238,6 @@ public abstract class OdfSettingsElement extends OdfElement
     public OdfAnimationsType getAnimations()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "animations" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "enabled";
-        }
-
         return OdfAnimationsType.enumValueOf( aStringVal);
     }
 
@@ -271,11 +256,6 @@ public abstract class OdfSettingsElement extends OdfElement
     public OdfTransitionOnClickType getTransitionOnClick()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "transition-on-click" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "enabled";
-        }
-
         return OdfTransitionOnClickType.enumValueOf( aStringVal);
     }
 
@@ -312,11 +292,6 @@ public abstract class OdfSettingsElement extends OdfElement
     public Boolean getShowEndOfPresentationSlide()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "show-end-of-presentation-slide" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

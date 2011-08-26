@@ -27,13 +27,14 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.text.OdfIndexEntryChapterDisplayType;
+import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 
 
 /**
@@ -78,11 +79,6 @@ public abstract class OdfIndexEntryChapterElement extends OdfStylableElement
     public OdfIndexEntryChapterDisplayType getDisplay()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "display" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "number";
-        }
-
         return OdfIndexEntryChapterDisplayType.enumValueOf( aStringVal);
     }
 
@@ -93,6 +89,24 @@ public abstract class OdfIndexEntryChapterElement extends OdfStylableElement
     {                    
         String aStringVal = OdfIndexEntryChapterDisplayType.toString( _aDisplay );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "display" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "text:outline-level".
+     */
+    public Integer getOutlineLevel()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "outline-level" ) );
+        return OdfPositiveInteger.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "text:outline-level".
+     */
+    public void setOutlineLevel( Integer _aOutlineLevel )
+    {                    
+        String aStringVal = OdfPositiveInteger.toString( _aOutlineLevel );
+        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "outline-level" ), aStringVal );
     }
 
 }

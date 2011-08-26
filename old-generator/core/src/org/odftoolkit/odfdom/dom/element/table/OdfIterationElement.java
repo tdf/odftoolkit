@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.table.OdfStatusType;
+import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 
 
 /**
@@ -59,11 +59,6 @@ public abstract class OdfIterationElement extends OdfElement
     public OdfStatusType getStatus()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "status" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "disable";
-        }
-
         return OdfStatusType.enumValueOf( aStringVal);
     }
 
@@ -82,11 +77,6 @@ public abstract class OdfIterationElement extends OdfElement
     public Integer getSteps()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "steps" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "100";
-        }
-
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 
@@ -105,11 +95,6 @@ public abstract class OdfIterationElement extends OdfElement
     public Double getMaximumDifference()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "maximum-difference" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0.001";
-        }
-
         return Double.valueOf( aStringVal);
     }
 

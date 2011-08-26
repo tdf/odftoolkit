@@ -27,18 +27,20 @@
 
 package org.odftoolkit.odfdom.dom.element.form;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfId;
-import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.form.OdfButtonType;
-import org.odftoolkit.odfdom.dom.type.form.OdfImageAlignType;
-import org.odftoolkit.odfdom.dom.type.form.OdfImagePositionType;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
+import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.office.OdfTargetFrameNameType;
+import org.odftoolkit.odfdom.dom.type.form.OdfImagePositionType;
+import org.odftoolkit.odfdom.dom.type.form.OdfImageAlignType;
+import javax.xml.datatype.Duration;
+import org.odftoolkit.odfdom.dom.type.OdfDuration;
 
 
 /**
@@ -61,9 +63,10 @@ public abstract class OdfButtonElement extends OdfElement
     /**
      * Initialize mandatory attributes.
      */
-    public void init(String _aId)
+    public void init(String _aId, String _aXmlid)
     {
         setId( _aId );
+        setXmlid( _aXmlid );
     }
 
     /**
@@ -102,18 +105,34 @@ public abstract class OdfButtonElement extends OdfElement
      * Get value of attribute "form:id".
      */
     public String getId()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "id" ) );
-        return OdfId.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.FORM, "id" ) );
     }
 
     /**
      * Set value of attribute "form:id".
      */
     public void setId( String _aId )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "id" ), _aId );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
     {                    
-        String aStringVal = OdfId.toString( _aId );
-        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "id" ), aStringVal );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
     /**
@@ -138,11 +157,6 @@ public abstract class OdfButtonElement extends OdfElement
     public OdfButtonType getButtonType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "button-type" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "push";
-        }
-
         return OdfButtonType.enumValueOf( aStringVal);
     }
 
@@ -213,11 +227,6 @@ public abstract class OdfButtonElement extends OdfElement
     public Boolean getPrintable()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "printable" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -236,11 +245,6 @@ public abstract class OdfButtonElement extends OdfElement
     public Integer getTabIndex()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-index" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0";
-        }
-
         return OdfNonNegativeInteger.valueOf( aStringVal);
     }
 
@@ -259,11 +263,6 @@ public abstract class OdfButtonElement extends OdfElement
     public Boolean getTabStop()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-stop" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -282,11 +281,6 @@ public abstract class OdfButtonElement extends OdfElement
     public OdfTargetFrameNameType getTargetFrame()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "target-frame" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "_blank";
-        }
-
         return OdfTargetFrameNameType.enumValueOf( aStringVal);
     }
 
@@ -355,11 +349,6 @@ public abstract class OdfButtonElement extends OdfElement
     public OdfImagePositionType getImagePosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "image-position" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "center";
-        }
-
         return OdfImagePositionType.enumValueOf( aStringVal);
     }
 
@@ -378,11 +367,6 @@ public abstract class OdfButtonElement extends OdfElement
     public OdfImageAlignType getImageAlign()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "image-align" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "center";
-        }
-
         return OdfImageAlignType.enumValueOf( aStringVal);
     }
 
@@ -393,6 +377,42 @@ public abstract class OdfButtonElement extends OdfElement
     {                    
         String aStringVal = OdfImageAlignType.toString( _aImageAlign );
         setOdfAttribute( OdfName.get( OdfNamespace.FORM, "image-align" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "form:repeat".
+     */
+    public Boolean getRepeat()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "repeat" ) );
+        return OdfBoolean.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "form:repeat".
+     */
+    public void setRepeat( Boolean _aRepeat )
+    {                    
+        String aStringVal = OdfBoolean.toString( _aRepeat );
+        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "repeat" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "form:delay-for-repeat".
+     */
+    public Duration getDelayForRepeat()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "delay-for-repeat" ) );
+        return OdfDuration.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "form:delay-for-repeat".
+     */
+    public void setDelayForRepeat( Duration _aDelayForRepeat )
+    {                    
+        String aStringVal = OdfDuration.toString( _aDelayForRepeat );
+        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "delay-for-repeat" ), aStringVal );
     }
 
     /**

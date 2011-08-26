@@ -27,12 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.draw.OdfAlignType;
+import org.odftoolkit.odfdom.dom.type.draw.OdfEscapeDirectionType;
 
 
 /**
@@ -55,17 +56,18 @@ public abstract class OdfGluePointElement extends OdfElement
     /**
      * Initialize mandatory attributes.
      */
-    public void init(Integer _aId, String _aX, String _aY)
+    public void init(Integer _aDrawid, String _aX, String _aY, OdfEscapeDirectionType _aEscapeDirection)
     {
-        setId( _aId );
+        setDrawid( _aDrawid );
         setX( _aX );
         setY( _aY );
+        setEscapeDirection( _aEscapeDirection );
     }
 
     /**
      * Get value of attribute "draw:id".
      */
-    public Integer getId()
+    public Integer getDrawid()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "id" ) );
         return OdfNonNegativeInteger.valueOf( aStringVal);
@@ -74,9 +76,9 @@ public abstract class OdfGluePointElement extends OdfElement
     /**
      * Set value of attribute "draw:id".
      */
-    public void setId( Integer _aId )
+    public void setDrawid( Integer _aDrawid )
     {                    
-        String aStringVal = OdfNonNegativeInteger.toString( _aId );
+        String aStringVal = OdfNonNegativeInteger.toString( _aDrawid );
         setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "id" ), aStringVal );
     }
 
@@ -128,6 +130,24 @@ public abstract class OdfGluePointElement extends OdfElement
     {                    
         String aStringVal = OdfAlignType.toString( _aAlign );
         setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "align" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "draw:escape-direction".
+     */
+    public OdfEscapeDirectionType getEscapeDirection()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "escape-direction" ) );
+        return OdfEscapeDirectionType.enumValueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "draw:escape-direction".
+     */
+    public void setEscapeDirection( OdfEscapeDirectionType _aEscapeDirection )
+    {                    
+        String aStringVal = OdfEscapeDirectionType.toString( _aEscapeDirection );
+        setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "escape-direction" ), aStringVal );
     }
 
 }

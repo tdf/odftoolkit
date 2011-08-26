@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
 
 /**
@@ -66,11 +66,6 @@ public abstract class OdfUserIndexSourceElement extends OdfElement
     public OdfIndexScopeType getIndexScope()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "index-scope" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "document";
-        }
-
         return OdfIndexScopeType.enumValueOf( aStringVal);
     }
 
@@ -89,11 +84,6 @@ public abstract class OdfUserIndexSourceElement extends OdfElement
     public Boolean getRelativeTabStopPosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "relative-tab-stop-position" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -104,22 +94,6 @@ public abstract class OdfUserIndexSourceElement extends OdfElement
     {                    
         String aStringVal = OdfBoolean.toString( _aRelativeTabStopPosition );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "relative-tab-stop-position" ), aStringVal );
-    }
-
-    /**
-     * Get value of attribute "text:index-name".
-     */
-    public String getIndexName()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "index-name" ) );
-    }
-
-    /**
-     * Set value of attribute "text:index-name".
-     */
-    public void setIndexName( String _aIndexName )
-    {
-        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "index-name" ), _aIndexName );
     }
 
     /**
@@ -138,6 +112,24 @@ public abstract class OdfUserIndexSourceElement extends OdfElement
     {                    
         String aStringVal = OdfBoolean.toString( _aUseIndexMarks );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "use-index-marks" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "text:use-index-source-styles".
+     */
+    public Boolean getUseIndexSourceStyles()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "use-index-source-styles" ) );
+        return OdfBoolean.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "text:use-index-source-styles".
+     */
+    public void setUseIndexSourceStyles( Boolean _aUseIndexSourceStyles )
+    {                    
+        String aStringVal = OdfBoolean.toString( _aUseIndexSourceStyles );
+        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "use-index-source-styles" ), aStringVal );
     }
 
     /**
@@ -228,6 +220,22 @@ public abstract class OdfUserIndexSourceElement extends OdfElement
     {                    
         String aStringVal = OdfBoolean.toString( _aCopyOutlineLevels );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "copy-outline-levels" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "text:index-name".
+     */
+    public String getIndexName()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "index-name" ) );
+    }
+
+    /**
+     * Set value of attribute "text:index-name".
+     */
+    public void setIndexName( String _aIndexName )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "index-name" ), _aIndexName );
     }
 
 }

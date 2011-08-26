@@ -27,10 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.chart;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
 
 
 /**
@@ -55,16 +56,18 @@ public abstract class OdfCategoriesElement extends OdfElement
      * Get value of attribute "table:cell-range-address".
      */
     public String getCellRangeAddress()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "cell-range-address" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "cell-range-address" ) );
+        return OdfCellRangeAddressList.valueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "table:cell-range-address".
      */
     public void setCellRangeAddress( String _aCellRangeAddress )
-    {
-        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "cell-range-address" ), _aCellRangeAddress );
+    {                    
+        String aStringVal = OdfCellRangeAddressList.toString( _aCellRangeAddress );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "cell-range-address" ), aStringVal );
     }
 
 }

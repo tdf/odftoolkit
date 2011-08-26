@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.table.OdfOrderType;
 import org.odftoolkit.odfdom.dom.type.table.OdfSortModeType;
+import org.odftoolkit.odfdom.dom.type.table.OdfOrderType;
 
 
 /**

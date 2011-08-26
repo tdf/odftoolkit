@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
-import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
 
 /**
@@ -78,6 +78,8 @@ public abstract class OdfGraphicPropertiesElement extends OdfStylePropertiesBase
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.SVG, "stroke-opacity"));
     public final static OdfStyleProperty StrokeLinejoin = 
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.DRAW, "stroke-linejoin"));
+    public final static OdfStyleProperty StrokeLinecap = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.SVG, "stroke-linecap"));
     public final static OdfStyleProperty SymbolColor = 
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.DRAW, "symbol-color"));
     public final static OdfStyleProperty Animation = 
@@ -108,6 +110,8 @@ public abstract class OdfGraphicPropertiesElement extends OdfStylePropertiesBase
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.DRAW, "textarea-horizontal-align"));
     public final static OdfStyleProperty WrapOption = 
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.FO, "wrap-option"));
+    public final static OdfStyleProperty ShrinkToFit = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.DRAW, "shrink-to-fit"));
     public final static OdfStyleProperty ColorMode = 
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.DRAW, "color-mode"));
     public final static OdfStyleProperty ColorInversion = 
@@ -312,6 +316,8 @@ public abstract class OdfGraphicPropertiesElement extends OdfStylePropertiesBase
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.STYLE, "shadow"));
     public final static OdfStyleProperty BackgroundColor = 
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.FO, "background-color"));
+    public final static OdfStyleProperty BackgroundTransparency = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.STYLE, "background-transparency"));
     public final static OdfStyleProperty Editable = 
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.STYLE, "editable"));
     public final static OdfStyleProperty Wrap = 
@@ -354,6 +360,8 @@ public abstract class OdfGraphicPropertiesElement extends OdfStylePropertiesBase
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.DRAW, "visible-area-width"));
     public final static OdfStyleProperty VisibleAreaHeight = 
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.DRAW, "visible-area-height"));
+    public final static OdfStyleProperty DrawAspect = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.DRAW, "draw-aspect"));
     public final static OdfStyleProperty OleDrawAspect = 
         OdfStyleProperty.get(OdfStylePropertiesSet.GraphicProperties, OdfName.get(OdfNamespace.DRAW, "ole-draw-aspect"));
     public final static OdfStyleProperty Fill = 

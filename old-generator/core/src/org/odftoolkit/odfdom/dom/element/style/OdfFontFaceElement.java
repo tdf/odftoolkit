@@ -27,16 +27,16 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.style.OdfFontFamilyGenericType;
-import org.odftoolkit.odfdom.dom.type.style.OdfFontPitchType;
-import org.odftoolkit.odfdom.dom.type.svg.OdfFontStretchType;
 import org.odftoolkit.odfdom.dom.type.svg.OdfFontStyleType;
 import org.odftoolkit.odfdom.dom.type.svg.OdfFontVariantType;
 import org.odftoolkit.odfdom.dom.type.svg.OdfFontWeightType;
+import org.odftoolkit.odfdom.dom.type.svg.OdfFontStretchType;
+import org.odftoolkit.odfdom.dom.type.style.OdfFontFamilyGenericType;
+import org.odftoolkit.odfdom.dom.type.style.OdfFontPitchType;
 
 
 /**

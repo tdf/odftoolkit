@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.presentation;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfSpeedType;
@@ -84,11 +84,6 @@ public abstract class OdfPlayElement extends OdfElement
     public OdfSpeedType getSpeed()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "speed" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "medium";
-        }
-
         return OdfSpeedType.enumValueOf( aStringVal);
     }
 

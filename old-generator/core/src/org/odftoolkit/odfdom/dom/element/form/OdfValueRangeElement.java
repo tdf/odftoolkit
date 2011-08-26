@@ -27,17 +27,18 @@
 
 package org.odftoolkit.odfdom.dom.element.form;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
-import org.odftoolkit.odfdom.dom.type.OdfDuration;
 import org.odftoolkit.odfdom.dom.type.OdfId;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
+import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
+import javax.xml.datatype.Duration;
+import org.odftoolkit.odfdom.dom.type.OdfDuration;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.form.OdfOrientationType;
-import javax.xml.datatype.Duration;
 
 
 /**
@@ -60,9 +61,10 @@ public abstract class OdfValueRangeElement extends OdfElement
     /**
      * Initialize mandatory attributes.
      */
-    public void init(String _aId)
+    public void init(String _aId, String _aXmlid)
     {
         setId( _aId );
+        setXmlid( _aXmlid );
     }
 
     /**
@@ -101,18 +103,34 @@ public abstract class OdfValueRangeElement extends OdfElement
      * Get value of attribute "form:id".
      */
     public String getId()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "id" ) );
-        return OdfId.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.FORM, "id" ) );
     }
 
     /**
      * Set value of attribute "form:id".
      */
     public void setId( String _aId )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "id" ), _aId );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
     {                    
-        String aStringVal = OdfId.toString( _aId );
-        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "id" ), aStringVal );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
     /**
@@ -155,11 +173,6 @@ public abstract class OdfValueRangeElement extends OdfElement
     public Boolean getPrintable()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "printable" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -178,11 +191,6 @@ public abstract class OdfValueRangeElement extends OdfElement
     public Integer getTabIndex()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-index" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0";
-        }
-
         return OdfNonNegativeInteger.valueOf( aStringVal);
     }
 
@@ -201,11 +209,6 @@ public abstract class OdfValueRangeElement extends OdfElement
     public Boolean getTabStop()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-stop" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -251,35 +254,93 @@ public abstract class OdfValueRangeElement extends OdfElement
     }
 
     /**
+     * Get value of attribute "form:linked-cell".
+     */
+    public String getLinkedCell()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "linked-cell" ) );
+        return OdfCellAddress.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "form:linked-cell".
+     */
+    public void setLinkedCell( String _aLinkedCell )
+    {                    
+        String aStringVal = OdfCellAddress.toString( _aLinkedCell );
+        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "linked-cell" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "form:repeat".
+     */
+    public Boolean getRepeat()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "repeat" ) );
+        return OdfBoolean.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "form:repeat".
+     */
+    public void setRepeat( Boolean _aRepeat )
+    {                    
+        String aStringVal = OdfBoolean.toString( _aRepeat );
+        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "repeat" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "form:delay-for-repeat".
+     */
+    public Duration getDelayForRepeat()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "delay-for-repeat" ) );
+        return OdfDuration.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "form:delay-for-repeat".
+     */
+    public void setDelayForRepeat( Duration _aDelayForRepeat )
+    {                    
+        String aStringVal = OdfDuration.toString( _aDelayForRepeat );
+        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "delay-for-repeat" ), aStringVal );
+    }
+
+    /**
      * Get value of attribute "form:max-value".
      */
-    public String getMaxValue()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.FORM, "max-value" ) );
+    public Integer getMaxValue()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "max-value" ) );
+        return Integer.valueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "form:max-value".
      */
-    public void setMaxValue( String _aMaxValue )
-    {
-        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "max-value" ), _aMaxValue );
+    public void setMaxValue( Integer _aMaxValue )
+    {                    
+        String aStringVal = Integer.toString( _aMaxValue );
+        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "max-value" ), aStringVal );
     }
 
     /**
      * Get value of attribute "form:min-value".
      */
-    public String getMinValue()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.FORM, "min-value" ) );
+    public Integer getMinValue()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "min-value" ) );
+        return Integer.valueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "form:min-value".
      */
-    public void setMinValue( String _aMinValue )
-    {
-        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "min-value" ), _aMinValue );
+    public void setMinValue( Integer _aMinValue )
+    {                    
+        String aStringVal = Integer.toString( _aMinValue );
+        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "min-value" ), aStringVal );
     }
 
     /**
@@ -316,24 +377,6 @@ public abstract class OdfValueRangeElement extends OdfElement
     {                    
         String aStringVal = OdfPositiveInteger.toString( _aPageStepSize );
         setOdfAttribute( OdfName.get( OdfNamespace.FORM, "page-step-size" ), aStringVal );
-    }
-
-    /**
-     * Get value of attribute "form:delay-for-repeat".
-     */
-    public Duration getDelayForRepeat()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "delay-for-repeat" ) );
-        return OdfDuration.valueOf( aStringVal);
-    }
-
-    /**
-     * Set value of attribute "form:delay-for-repeat".
-     */
-    public void setDelayForRepeat( Duration _aDelayForRepeat )
-    {                    
-        String aStringVal = OdfDuration.toString( _aDelayForRepeat );
-        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "delay-for-repeat" ), aStringVal );
     }
 
     /**

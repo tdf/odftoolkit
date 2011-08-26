@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfGlyphOrientationVerticalType
 {
-              _0( "0" ), AUTO( "auto" );
+              _0GRAD( "0grad" ), _0DEG( "0deg" ), _0( "0" ), _0RAD( "0rad" ), AUTO( "auto" );
 
     private String m_aValue;
 

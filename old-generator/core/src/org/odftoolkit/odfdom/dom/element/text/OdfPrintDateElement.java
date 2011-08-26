@@ -27,14 +27,14 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
-import org.odftoolkit.odfdom.dom.type.OdfDate;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import javax.xml.datatype.XMLGregorianCalendar;
+import org.odftoolkit.odfdom.dom.type.OdfDate;
 
 
 /**

@@ -27,13 +27,14 @@
 
 package org.odftoolkit.odfdom.dom.element.form;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfId;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
+import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
 
 
 /**
@@ -56,9 +57,10 @@ public abstract class OdfPasswordElement extends OdfElement
     /**
      * Initialize mandatory attributes.
      */
-    public void init(String _aId)
+    public void init(String _aId, String _aXmlid)
     {
         setId( _aId );
+        setXmlid( _aXmlid );
     }
 
     /**
@@ -97,18 +99,34 @@ public abstract class OdfPasswordElement extends OdfElement
      * Get value of attribute "form:id".
      */
     public String getId()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "id" ) );
-        return OdfId.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.FORM, "id" ) );
     }
 
     /**
      * Set value of attribute "form:id".
      */
     public void setId( String _aId )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "id" ), _aId );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
     {                    
-        String aStringVal = OdfId.toString( _aId );
-        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "id" ), aStringVal );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
     /**
@@ -169,11 +187,6 @@ public abstract class OdfPasswordElement extends OdfElement
     public Boolean getPrintable()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "printable" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -192,11 +205,6 @@ public abstract class OdfPasswordElement extends OdfElement
     public Integer getTabIndex()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-index" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0";
-        }
-
         return OdfNonNegativeInteger.valueOf( aStringVal);
     }
 
@@ -215,11 +223,6 @@ public abstract class OdfPasswordElement extends OdfElement
     public Boolean getTabStop()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-stop" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -283,17 +286,29 @@ public abstract class OdfPasswordElement extends OdfElement
     }
 
     /**
+     * Get value of attribute "form:linked-cell".
+     */
+    public String getLinkedCell()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "linked-cell" ) );
+        return OdfCellAddress.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "form:linked-cell".
+     */
+    public void setLinkedCell( String _aLinkedCell )
+    {                    
+        String aStringVal = OdfCellAddress.toString( _aLinkedCell );
+        setOdfAttribute( OdfName.get( OdfNamespace.FORM, "linked-cell" ), aStringVal );
+    }
+
+    /**
      * Get value of attribute "form:echo-char".
      */
     public String getEchoChar()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "echo-char" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "*";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.FORM, "echo-char" ) );
     }
 
     /**

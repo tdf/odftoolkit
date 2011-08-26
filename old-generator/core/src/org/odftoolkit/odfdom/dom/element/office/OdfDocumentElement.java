@@ -27,10 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.office;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
 
 /**
@@ -53,9 +54,10 @@ public abstract class OdfDocumentElement extends OdfElement
     /**
      * Initialize mandatory attributes.
      */
-    public void init(String _aMimetype)
+    public void init(String _aMimetype, String _aVersion)
     {
         setMimetype( _aMimetype );
+        setVersion( _aVersion );
     }
 
     /**
@@ -88,6 +90,24 @@ public abstract class OdfDocumentElement extends OdfElement
     public void setVersion( String _aVersion )
     {
         setOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "version" ), _aVersion );
+    }
+
+    /**
+     * Get value of attribute "grddl:transformation".
+     */
+    public String getTransformation()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.GRDDL, "transformation" ) );
+        return OdfAnyURI.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "grddl:transformation".
+     */
+    public void setTransformation( String _aTransformation )
+    {                    
+        String aStringVal = OdfAnyURI.toString( _aTransformation );
+        setOdfAttribute( OdfName.get( OdfNamespace.GRDDL, "transformation" ), aStringVal );
     }
 
 }

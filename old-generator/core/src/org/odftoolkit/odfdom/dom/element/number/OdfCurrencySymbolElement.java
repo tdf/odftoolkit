@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
 
@@ -81,6 +81,38 @@ public abstract class OdfCurrencySymbolElement extends OdfElement
     public void setCountry( String _aCountry )
     {
         setOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "country" ), _aCountry );
+    }
+
+    /**
+     * Get value of attribute "number:script".
+     */
+    public String getScript()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "script" ) );
+    }
+
+    /**
+     * Set value of attribute "number:script".
+     */
+    public void setScript( String _aScript )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "script" ), _aScript );
+    }
+
+    /**
+     * Get value of attribute "number:rfc-language-tag".
+     */
+    public String getRfcLanguageTag()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "rfc-language-tag" ) );
+    }
+
+    /**
+     * Set value of attribute "number:rfc-language-tag".
+     */
+    public void setRfcLanguageTag( String _aRfcLanguageTag )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "rfc-language-tag" ), _aRfcLanguageTag );
     }
 
 }

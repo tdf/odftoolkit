@@ -144,13 +144,23 @@
                 <else>
 <code>                    
         String aStringVal = getOdfAttribute( OdfName.get( %{namespace}, "%{local_name(attributeqname)}" ) );</code>
-<if test="defaultvalue">
+<if test=" defaultvalue = '&quot;' ">
+<code>
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "\%{defaultvalue}";
+        }
+</code>   
+	<else>
+		<if test="defaultvalue">
 <code>
         if( aStringVal.length()==0 )
         {
             aStringVal = "%{defaultvalue}";
         }
-</code>   
+</code> 			
+		</if>
+	</else>
 </if>        
 <code>
         return %{local_name(conversiontype)}.%{valueoffunc}( aStringVal);
@@ -580,10 +590,20 @@ public class %{local_name(classname)} implements Comparable, NamespaceContext {
 
     static private enum OOoNamespace {
 </code>
+<!-- add XML namespace in OdfNameSpace.java if it is not exist-->
+	<set testHasXMLNS = "false"/>
     <foreach type="namespace" seperator=","><code>
-        %{toupper(namespaceprefix)}("%{namespaceprefix}", "%{namespaceuri}")</code>                
+        %{toupper(namespaceprefix)}("%{namespaceprefix}", "%{namespaceuri}")</code>  
+        <if test = "namespaceprefix = 'XML'">
+        	<set testHasXMLNS="true"/>
+        </if>                           
     </foreach>
-<code>;
+    <if test = "not testHasXMLNS">
+    <code>,
+    	XML("xml", "http://www.w3.org/XML/1998/namespace" );
+    </code>
+    </if>
+<code>
         private String mPrefix;
         private String mNamespaceUri;
 
@@ -731,6 +751,12 @@ public class %{local_name(classname)} implements Comparable, NamespaceContext {
 <code>    public static final OdfNamespace %{toupper(namespaceprefix)} = get("%{namespaceprefix}", "%{namespaceuri}");
 </code>
     </foreach>
+<!-- add XML namespace in OdfNameSpace.java if it is not exist-->
+    <if test = "not testHasXMLNS">
+    <code>
+    public static final OdfNamespace XML = get("xml", "http://www.w3.org/XML/1998/namespace" );
+    </code>
+    </if>
 <code>
     public String getNamespaceURI(String prefix) {
         return namesspacesByPrefix.get(prefix);

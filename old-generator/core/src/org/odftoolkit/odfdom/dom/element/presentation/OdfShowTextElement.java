@@ -27,17 +27,17 @@
 
 package org.odftoolkit.odfdom.dom.element.presentation;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfDuration;
 import org.odftoolkit.odfdom.dom.type.OdfId;
-import org.odftoolkit.odfdom.dom.type.OdfPercent;
-import org.odftoolkit.odfdom.dom.type.presentation.OdfDirectionType;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfEffectType;
+import org.odftoolkit.odfdom.dom.type.presentation.OdfDirectionType;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfSpeedType;
 import javax.xml.datatype.Duration;
+import org.odftoolkit.odfdom.dom.type.OdfDuration;
+import org.odftoolkit.odfdom.dom.type.OdfPercent;
 
 
 /**
@@ -89,11 +89,6 @@ public abstract class OdfShowTextElement extends OdfElement
     public OdfEffectType getEffect()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "effect" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "none";
-        }
-
         return OdfEffectType.enumValueOf( aStringVal);
     }
 
@@ -112,11 +107,6 @@ public abstract class OdfShowTextElement extends OdfElement
     public OdfDirectionType getDirection()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "direction" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "none";
-        }
-
         return OdfDirectionType.enumValueOf( aStringVal);
     }
 
@@ -135,11 +125,6 @@ public abstract class OdfShowTextElement extends OdfElement
     public OdfSpeedType getSpeed()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "speed" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "medium";
-        }
-
         return OdfSpeedType.enumValueOf( aStringVal);
     }
 
@@ -176,11 +161,6 @@ public abstract class OdfShowTextElement extends OdfElement
     public Double getStartScale()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "start-scale" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "100%";
-        }
-
         return OdfPercent.valueOf( aStringVal);
     }
 

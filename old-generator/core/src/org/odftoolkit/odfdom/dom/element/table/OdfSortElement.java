@@ -27,11 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.type.table.OdfEmbeddedNumberBehaviorType;
 
 
 /**
@@ -58,11 +59,6 @@ public abstract class OdfSortElement extends OdfElement
     public Boolean getBindStylesToContent()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "bind-styles-to-content" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -142,6 +138,38 @@ public abstract class OdfSortElement extends OdfElement
     }
 
     /**
+     * Get value of attribute "table:script".
+     */
+    public String getScript()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "script" ) );
+    }
+
+    /**
+     * Set value of attribute "table:script".
+     */
+    public void setScript( String _aScript )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "script" ), _aScript );
+    }
+
+    /**
+     * Get value of attribute "table:rfc-language-tag".
+     */
+    public String getRfcLanguageTag()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "rfc-language-tag" ) );
+    }
+
+    /**
+     * Set value of attribute "table:rfc-language-tag".
+     */
+    public void setRfcLanguageTag( String _aRfcLanguageTag )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "rfc-language-tag" ), _aRfcLanguageTag );
+    }
+
+    /**
      * Get value of attribute "table:algorithm".
      */
     public String getAlgorithm()
@@ -155,6 +183,24 @@ public abstract class OdfSortElement extends OdfElement
     public void setAlgorithm( String _aAlgorithm )
     {
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "algorithm" ), _aAlgorithm );
+    }
+
+    /**
+     * Get value of attribute "table:embedded-number-behavior".
+     */
+    public OdfEmbeddedNumberBehaviorType getEmbeddedNumberBehavior()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "embedded-number-behavior" ) );
+        return OdfEmbeddedNumberBehaviorType.enumValueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "table:embedded-number-behavior".
+     */
+    public void setEmbeddedNumberBehavior( OdfEmbeddedNumberBehaviorType _aEmbeddedNumberBehavior )
+    {                    
+        String aStringVal = OdfEmbeddedNumberBehaviorType.toString( _aEmbeddedNumberBehavior );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "embedded-number-behavior" ), aStringVal );
     }
 
 }

@@ -3,6 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -104,9 +105,12 @@ public class OdfTableRow extends OdfTableRowElement {
 
         if (aNode instanceof OdfTableCell) {
             OdfTableCell td = (OdfTableCell) aNode;
-
-            int nColSpan = td.getNumberColumnsSpanned();
-            int nColRepeat = td.getNumberColumnsRepeated();
+            //modified for setting the default value of cell.
+            Integer colSpan = td.getNumberColumnsSpanned();
+            int nColSpan = (colSpan == null)?1:colSpan.intValue();
+            Integer colRepeat = td.getNumberColumnsRepeated();
+            int nColRepeat = (colRepeat == null)?1:colRepeat.intValue();
+            //end modified
             int nStartCol = mCurrentNumberOfColumns; // optimization
             //int nStartCol = td.getColumnIndex();
             int nColAdd = Math.max(nColSpan, nColRepeat);

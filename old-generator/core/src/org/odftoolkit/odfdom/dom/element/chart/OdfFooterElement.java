@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.chart;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
 
@@ -60,7 +60,7 @@ public abstract class OdfFooterElement extends OdfStylableElement
     public String getCellRange()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "cell-range" ) );
-        return OdfCellAddress.valueOf( aStringVal);
+        return OdfCellRangeAddressList.valueOf( aStringVal);
     }
 
     /**
@@ -68,7 +68,7 @@ public abstract class OdfFooterElement extends OdfStylableElement
      */
     public void setCellRange( String _aCellRange )
     {                    
-        String aStringVal = OdfCellAddress.toString( _aCellRange );
+        String aStringVal = OdfCellRangeAddressList.toString( _aCellRange );
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "cell-range" ), aStringVal );
     }
 

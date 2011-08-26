@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
-import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
 
 /**
@@ -140,6 +140,18 @@ public abstract class OdfTextPropertiesElement extends OdfStylePropertiesBase
         OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "country-asian"));
     public final static OdfStyleProperty CountryComplex = 
         OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "country-complex"));
+    public final static OdfStyleProperty Script = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.FO, "script"));
+    public final static OdfStyleProperty ScriptAsian = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "script-asian"));
+    public final static OdfStyleProperty ScriptComplex = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "script-complex"));
+    public final static OdfStyleProperty RfcLanguageTag = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "rfc-language-tag"));
+    public final static OdfStyleProperty RfcLanguageTagAsian = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "rfc-language-tag-asian"));
+    public final static OdfStyleProperty RfcLanguageTagComplex = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "rfc-language-tag-complex"));
     public final static OdfStyleProperty FontStyle = 
         OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.FO, "font-style"));
     public final static OdfStyleProperty FontStyleAsian = 
@@ -158,6 +170,16 @@ public abstract class OdfTextPropertiesElement extends OdfStylePropertiesBase
         OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "text-underline-width"));
     public final static OdfStyleProperty TextUnderlineColor = 
         OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "text-underline-color"));
+    public final static OdfStyleProperty TextOverlineType = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "text-overline-type"));
+    public final static OdfStyleProperty TextOverlineStyle = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "text-overline-style"));
+    public final static OdfStyleProperty TextOverlineWidth = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "text-overline-width"));
+    public final static OdfStyleProperty TextOverlineColor = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "text-overline-color"));
+    public final static OdfStyleProperty TextOverlineMode = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.STYLE, "text-overline-mode"));
     public final static OdfStyleProperty FontWeight = 
         OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.get(OdfNamespace.FO, "font-weight"));
     public final static OdfStyleProperty FontWeightAsian = 

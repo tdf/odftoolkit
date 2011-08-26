@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.text.OdfNoteClassType;
 import org.odftoolkit.odfdom.dom.type.text.OdfReferenceFormatType;
+import org.odftoolkit.odfdom.dom.type.text.OdfNoteClassType;
 
 
 /**
@@ -77,24 +77,6 @@ public abstract class OdfNoteRefElement extends OdfElement
     }
 
     /**
-     * Get value of attribute "text:note-class".
-     */
-    public OdfNoteClassType getNoteClass()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "note-class" ) );
-        return OdfNoteClassType.enumValueOf( aStringVal);
-    }
-
-    /**
-     * Set value of attribute "text:note-class".
-     */
-    public void setNoteClass( OdfNoteClassType _aNoteClass )
-    {                    
-        String aStringVal = OdfNoteClassType.toString( _aNoteClass );
-        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "note-class" ), aStringVal );
-    }
-
-    /**
      * Get value of attribute "text:reference-format".
      */
     public OdfReferenceFormatType getReferenceFormat()
@@ -110,6 +92,24 @@ public abstract class OdfNoteRefElement extends OdfElement
     {                    
         String aStringVal = OdfReferenceFormatType.toString( _aReferenceFormat );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "reference-format" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "text:note-class".
+     */
+    public OdfNoteClassType getNoteClass()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "note-class" ) );
+        return OdfNoteClassType.enumValueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "text:note-class".
+     */
+    public void setNoteClass( OdfNoteClassType _aNoteClass )
+    {                    
+        String aStringVal = OdfNoteClassType.toString( _aNoteClass );
+        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "note-class" ), aStringVal );
     }
 
 }

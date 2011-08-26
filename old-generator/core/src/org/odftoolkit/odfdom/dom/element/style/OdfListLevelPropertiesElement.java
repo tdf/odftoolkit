@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
-import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
 
 /**
@@ -72,5 +72,7 @@ public abstract class OdfListLevelPropertiesElement extends OdfStylePropertiesBa
         OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.STYLE, "vertical-pos"));
     public final static OdfStyleProperty Y = 
         OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.SVG, "y"));
+    public final static OdfStyleProperty ListLevelPositionAndSpaceMode = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.TEXT, "list-level-position-and-space-mode"));
 
 }

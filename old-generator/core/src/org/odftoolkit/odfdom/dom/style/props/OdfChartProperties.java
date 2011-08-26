@@ -126,4 +126,35 @@ public interface OdfChartProperties {
         OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.STYLE, "rotation-angle"));
     public final static OdfStyleProperty LineBreak = 
         OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.TEXT, "line-break"));
+    public final static OdfStyleProperty RightAngledAxes = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "right-angled-axes"));
+    public final static OdfStyleProperty SortByXValues = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "sort-by-x-values"));
+    public final static OdfStyleProperty GroupBarsPerAxis = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "group-bars-per-axis"));
+    public final static OdfStyleProperty AngleOffset = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "angle-offset"));
+    public final static OdfStyleProperty HoleSize = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "hole-size"));
+    public final static OdfStyleProperty TreatEmptyCells = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "treat-empty-cells"));
+    public final static OdfStyleProperty ReverseDirection = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "reverse-direction"));
+    public final static OdfStyleProperty LabelPosition = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "label-position"));
+    public final static OdfStyleProperty LabelPositionNegative = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "label-position-negative"));
+    public final static OdfStyleProperty AutoPosition = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "auto-position"));
+    public final static OdfStyleProperty AutoSize = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "auto-size"));
+    public final static OdfStyleProperty AxisPosition = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "axis-position"));
+    public final static OdfStyleProperty AxisLabelPosition = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "axis-label-position"));
+    public final static OdfStyleProperty TickMarkPosition = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "tick-mark-position"));
+    public final static OdfStyleProperty IncludeHiddenCells = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.get(OdfNamespace.CHART, "include-hidden-cells"));
+
 }

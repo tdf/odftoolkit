@@ -46,4 +46,7 @@ public interface OdfListLevelProperties {
         OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.TEXT, "min-label-width"));
     public final static OdfStyleProperty SpaceBefore = 
         OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.TEXT, "space-before"));
+    public final static OdfStyleProperty ListLevelPositionAndSpaceMode = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.ListLevelProperties, OdfName.get(OdfNamespace.TEXT, "list-level-position-and-space-mode"));
+
 }

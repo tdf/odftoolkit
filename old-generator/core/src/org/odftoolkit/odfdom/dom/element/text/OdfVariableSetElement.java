@@ -27,18 +27,18 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
-import org.odftoolkit.odfdom.dom.type.OdfDate;
-import org.odftoolkit.odfdom.dom.type.OdfDuration;
-import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.office.OdfValueType;
-import org.odftoolkit.odfdom.dom.type.text.OdfValueNoneDisplayType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import org.odftoolkit.odfdom.dom.type.OdfDate;
 import javax.xml.datatype.Duration;
+import org.odftoolkit.odfdom.dom.type.OdfDuration;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.type.text.OdfValueNoneDisplayType;
+import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
 
 /**

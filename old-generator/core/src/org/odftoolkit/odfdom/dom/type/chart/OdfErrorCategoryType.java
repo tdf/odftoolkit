@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfErrorCategoryType
 {
-              NONE( "none" ), STANDARD_DEVIATION( "standard-deviation" ), VARIANCE( "variance" ), ERROR_MARGIN( "error-margin" ), CONSTANT( "constant" ), PERCENTAGE( "percentage" );
+              CELL_RANGE( "cell-range" ), NONE( "none" ), STANDARD_ERROR( "standard-error" ), STANDARD_DEVIATION( "standard-deviation" ), VARIANCE( "variance" ), ERROR_MARGIN( "error-margin" ), CONSTANT( "constant" ), PERCENTAGE( "percentage" );
 
     private String m_aValue;
 

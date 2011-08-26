@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.table.OdfAcceptanceStateType;
 import org.odftoolkit.odfdom.dom.type.table.OdfSheetObjectType;
+import org.odftoolkit.odfdom.dom.type.table.OdfAcceptanceStateType;
 
 
 /**
@@ -156,11 +156,6 @@ public abstract class OdfDeletionElement extends OdfElement
     public OdfAcceptanceStateType getAcceptanceState()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "acceptance-state" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "pending";
-        }
-
         return OdfAcceptanceStateType.enumValueOf( aStringVal);
     }
 

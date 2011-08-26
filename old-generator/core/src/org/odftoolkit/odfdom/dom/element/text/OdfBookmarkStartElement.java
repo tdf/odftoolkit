@@ -27,10 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.dom.type.OdfId;
+import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
 
 /**
@@ -72,6 +74,90 @@ public abstract class OdfBookmarkStartElement extends OdfElement
     public void setName( String _aName )
     {
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "name" ), _aName );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "xhtml:about".
+     */
+    public String getAbout()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XHTML, "about" ) );
+        return OdfAnyURI.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xhtml:about".
+     */
+    public void setAbout( String _aAbout )
+    {                    
+        String aStringVal = OdfAnyURI.toString( _aAbout );
+        setOdfAttribute( OdfName.get( OdfNamespace.XHTML, "about" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "xhtml:property".
+     */
+    public String getProperty()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.XHTML, "property" ) );
+    }
+
+    /**
+     * Set value of attribute "xhtml:property".
+     */
+    public void setProperty( String _aProperty )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.XHTML, "property" ), _aProperty );
+    }
+
+    /**
+     * Get value of attribute "xhtml:datatype".
+     */
+    public String getDatatype()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.XHTML, "datatype" ) );
+    }
+
+    /**
+     * Set value of attribute "xhtml:datatype".
+     */
+    public void setDatatype( String _aDatatype )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.XHTML, "datatype" ), _aDatatype );
+    }
+
+    /**
+     * Get value of attribute "xhtml:content".
+     */
+    public String getContent()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.XHTML, "content" ) );
+    }
+
+    /**
+     * Set value of attribute "xhtml:content".
+     */
+    public void setContent( String _aContent )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.XHTML, "content" ), _aContent );
     }
 
 }

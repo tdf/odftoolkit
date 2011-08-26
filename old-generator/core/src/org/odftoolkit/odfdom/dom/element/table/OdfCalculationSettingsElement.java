@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
@@ -59,11 +59,6 @@ public abstract class OdfCalculationSettingsElement extends OdfElement
     public Boolean getCaseSensitive()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "case-sensitive" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -100,11 +95,6 @@ public abstract class OdfCalculationSettingsElement extends OdfElement
     public Boolean getSearchCriteriaMustApplyToWholeCell()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "search-criteria-must-apply-to-whole-cell" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -123,11 +113,6 @@ public abstract class OdfCalculationSettingsElement extends OdfElement
     public Boolean getAutomaticFindLabels()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "automatic-find-labels" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -146,11 +131,6 @@ public abstract class OdfCalculationSettingsElement extends OdfElement
     public Boolean getUseRegularExpressions()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-regular-expressions" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -164,16 +144,29 @@ public abstract class OdfCalculationSettingsElement extends OdfElement
     }
 
     /**
+     * Get value of attribute "table:use-wildcards".
+     */
+    public Boolean getUseWildcards()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-wildcards" ) );
+        return OdfBoolean.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "table:use-wildcards".
+     */
+    public void setUseWildcards( Boolean _aUseWildcards )
+    {                    
+        String aStringVal = OdfBoolean.toString( _aUseWildcards );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-wildcards" ), aStringVal );
+    }
+
+    /**
      * Get value of attribute "table:null-year".
      */
     public Integer getNullYear()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "null-year" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1930";
-        }
-
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 

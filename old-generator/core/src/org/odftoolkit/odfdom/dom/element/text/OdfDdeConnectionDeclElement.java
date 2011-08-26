@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
@@ -132,11 +132,6 @@ public abstract class OdfDdeConnectionDeclElement extends OdfElement
     public Boolean getAutomaticUpdate()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "automatic-update" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

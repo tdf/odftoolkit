@@ -27,20 +27,20 @@
 
 package org.odftoolkit.odfdom.dom.element.anim;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfId;
-import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
-import org.odftoolkit.odfdom.dom.type.smil.OdfAccumulateType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfAdditiveType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfCalcmodeType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
+import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.smil.OdfRestartType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfRestartdefaultType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.type.smil.OdfAccumulateType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfAdditiveType;
 
 
 /**
@@ -204,11 +204,6 @@ public abstract class OdfAnimateElement extends OdfElement
     public OdfCalcmodeType getCalcmode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "calcMode" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "discrete";
-        }
-
         return OdfCalcmodeType.enumValueOf( aStringVal);
     }
 
@@ -341,11 +336,6 @@ public abstract class OdfAnimateElement extends OdfElement
     public OdfRestartType getRestart()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restart" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "default";
-        }
-
         return OdfRestartType.enumValueOf( aStringVal);
     }
 
@@ -364,11 +354,6 @@ public abstract class OdfAnimateElement extends OdfElement
     public OdfRestartdefaultType getRestartdefault()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restartDefault" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "inherit";
-        }
-
         return OdfRestartdefaultType.enumValueOf( aStringVal);
     }
 
@@ -423,11 +408,6 @@ public abstract class OdfAnimateElement extends OdfElement
     public Double getAccelerate()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "accelerate" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0.0";
-        }
-
         return Double.valueOf( aStringVal);
     }
 
@@ -446,11 +426,6 @@ public abstract class OdfAnimateElement extends OdfElement
     public Double getDecelerate()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "decelerate" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0.0";
-        }
-
         return Double.valueOf( aStringVal);
     }
 

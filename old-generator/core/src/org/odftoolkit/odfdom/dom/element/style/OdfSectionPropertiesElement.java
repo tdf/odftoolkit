@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
-import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
 
 /**
@@ -60,6 +60,8 @@ public abstract class OdfSectionPropertiesElement extends OdfStylePropertiesBase
         OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.FO, "margin-right"));
     public final static OdfStyleProperty Protect = 
         OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.STYLE, "protect"));
+    public final static OdfStyleProperty Editable = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.STYLE, "editable"));
     public final static OdfStyleProperty DontBalanceTextColumns = 
         OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.TEXT, "dont-balance-text-columns"));
     public final static OdfStyleProperty WritingMode = 

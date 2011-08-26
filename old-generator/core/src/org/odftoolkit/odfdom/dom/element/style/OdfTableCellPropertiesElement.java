@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
-import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
 
 /**
@@ -60,6 +60,8 @@ public abstract class OdfTableCellPropertiesElement extends OdfStylePropertiesBa
         OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.STYLE, "direction"));
     public final static OdfStyleProperty GlyphOrientationVertical = 
         OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.STYLE, "glyph-orientation-vertical"));
+    public final static OdfStyleProperty WritingMode = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.STYLE, "writing-mode"));
     public final static OdfStyleProperty Shadow = 
         OdfStyleProperty.get(OdfStylePropertiesSet.TableCellProperties, OdfName.get(OdfNamespace.STYLE, "shadow"));
     public final static OdfStyleProperty BackgroundColor = 

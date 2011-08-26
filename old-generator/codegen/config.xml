@@ -4,6 +4,7 @@
   DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
 
   Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+  Copyright 2009 IBM. All rights reserved.
 
   Use is subject to license terms.
 
@@ -212,11 +213,17 @@
         <attribute name="text:display" element="text:chapter" type-name="text:chapter-display"/>
         <attribute name="text:display" element="text:index-entry-chapter" type-name="text:index-entry-chapter-display"/>
         <attribute name="text:reference-format" element="text:sequence-ref" type-name="text:sequence-reference-format"/>
-        <attribute name="text:reference-format" element="text:bookmark-ref" type-name="text:reference-format"/>
+        <attribute name="text:reference-format" element="text:bookmark-ref" type-name="text:bookmark-reference-format"/>
         <attribute name="text:reference-format" element="text:reference-ref" type-name="text:reference-format"/>
         <attribute name="text:reference-format" element="text:note-ref" type-name="text:reference-format"/>
         <attribute name="text:select-page" element="text:page-continuation" type-name="text:page-contiuation-select"/>
         <attribute name="text:select-page" element="text:page-number" type-name="text:page-number-select"/>
+		<attribute name="table:orientation" element="table:label-range" type-name="table:label-orientation"/>
+		<attribute name="table:orientation" element="table:database-range" type-name="table:database-orientation"/>
+		<attribute name="table:orientation" element="table:data-pilot-field" type-name="table:orientation"/>
+		<attribute name="style:vertical-align" element="style:paragraph-properties" type-name="style:paragraph-vertical-align"/>
+		<attribute name="style:vertical-align" element="style:table-cell-properties" type-name="style:cell-vertical-align"/>
+		<attribute name="style:vertical-align" element="style:column-sep" type-name="style:vertical-align"/>
 
      <!-- rename attributes to avoid overinging base class methods with name that equals attribute get or set method-->
         <attribute name="presentation:node-type" rename="presentation:presentation-node"/>
@@ -253,6 +260,8 @@
         <!-- rename attributes where one element has two attributes with the same local name -->
         <attribute name="dr3d:shadow" rename="dr3d:shadow3d"/>
         <attribute name="draw:shadow" rename="draw:shadow-draw"/>
+        <attribute name="xml:id" rename="xml:xmlid"/>
+        <attribute name="draw:id" rename="draw:drawid"/>
 
     </attributes>
 </config>

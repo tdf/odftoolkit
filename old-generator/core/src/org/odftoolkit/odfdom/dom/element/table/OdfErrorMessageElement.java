@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.table.OdfMessageType;
@@ -93,11 +93,6 @@ public abstract class OdfErrorMessageElement extends OdfElement
     public OdfMessageType getMessageType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "message-type" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "stop";
-        }
-
         return OdfMessageType.enumValueOf( aStringVal);
     }
 

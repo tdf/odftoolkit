@@ -27,14 +27,14 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.type.draw.OdfType;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
-import org.odftoolkit.odfdom.dom.type.draw.OdfType;
 
 
 /**
@@ -54,6 +54,13 @@ public abstract class OdfConnectorElement extends OdfShapeElementBase
         return ELEMENT_NAME;
     }
 
+    /**
+     * Initialize mandatory attributes.
+     */
+    public void init(Integer _aViewbox)
+    {
+        setViewbox( _aViewbox );
+    }
 
     /**
      * Get value of attribute "draw:type".
@@ -61,11 +68,6 @@ public abstract class OdfConnectorElement extends OdfShapeElementBase
     public OdfType getType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "type" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "standard";
-        }
-
         return OdfType.enumValueOf( aStringVal);
     }
 
@@ -231,6 +233,22 @@ public abstract class OdfConnectorElement extends OdfShapeElementBase
     }
 
     /**
+     * Get value of attribute "svg:d".
+     */
+    public String getD()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.SVG, "d" ) );
+    }
+
+    /**
+     * Set value of attribute "svg:d".
+     */
+    public void setD( String _aD )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.SVG, "d" ), _aD );
+    }
+
+    /**
      * Get value of attribute "draw:layer".
      */
     public String getLayer()
@@ -296,6 +314,24 @@ public abstract class OdfConnectorElement extends OdfShapeElementBase
     {                    
         String aStringVal = OdfId.toString( _aCaptionId );
         setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "caption-id" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "svg:viewBox".
+     */
+    public Integer getViewbox()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "viewBox" ) );
+        return Integer.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "svg:viewBox".
+     */
+    public void setViewbox( Integer _aViewbox )
+    {                    
+        String aStringVal = Integer.toString( _aViewbox );
+        setOdfAttribute( OdfName.get( OdfNamespace.SVG, "viewBox" ), aStringVal );
     }
 
 }

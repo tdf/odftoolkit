@@ -27,14 +27,14 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
-import org.odftoolkit.odfdom.dom.type.OdfPercent;
-import org.odftoolkit.odfdom.dom.type.style.OdfPositionType;
 import org.odftoolkit.odfdom.dom.type.style.OdfRepeatType;
+import org.odftoolkit.odfdom.dom.type.style.OdfPositionType;
+import org.odftoolkit.odfdom.dom.type.OdfPercent;
+import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
 
 /**
@@ -68,11 +68,6 @@ public abstract class OdfBackgroundImageElement extends OdfElement
     public OdfRepeatType getRepeat()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "repeat" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "repeat";
-        }
-
         return OdfRepeatType.enumValueOf( aStringVal);
     }
 
@@ -91,11 +86,6 @@ public abstract class OdfBackgroundImageElement extends OdfElement
     public OdfPositionType getPosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "position" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "center";
-        }
-
         return OdfPositionType.enumValueOf( aStringVal);
     }
 

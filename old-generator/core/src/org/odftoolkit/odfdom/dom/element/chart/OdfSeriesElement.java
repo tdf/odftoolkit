@@ -27,13 +27,14 @@
 
 package org.odftoolkit.odfdom.dom.element.chart;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
 /**
@@ -58,16 +59,18 @@ public abstract class OdfSeriesElement extends OdfStylableElement
      * Get value of attribute "chart:values-cell-range-address".
      */
     public String getValuesCellRangeAddress()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.CHART, "values-cell-range-address" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "values-cell-range-address" ) );
+        return OdfCellRangeAddressList.valueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "chart:values-cell-range-address".
      */
     public void setValuesCellRangeAddress( String _aValuesCellRangeAddress )
-    {
-        setOdfAttribute( OdfName.get( OdfNamespace.CHART, "values-cell-range-address" ), _aValuesCellRangeAddress );
+    {                    
+        String aStringVal = OdfCellRangeAddressList.toString( _aValuesCellRangeAddress );
+        setOdfAttribute( OdfName.get( OdfNamespace.CHART, "values-cell-range-address" ), aStringVal );
     }
 
     /**
@@ -76,7 +79,7 @@ public abstract class OdfSeriesElement extends OdfStylableElement
     public String getLabelCellAddress()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "label-cell-address" ) );
-        return OdfCellAddress.valueOf( aStringVal);
+        return OdfCellRangeAddressList.valueOf( aStringVal);
     }
 
     /**
@@ -84,7 +87,7 @@ public abstract class OdfSeriesElement extends OdfStylableElement
      */
     public void setLabelCellAddress( String _aLabelCellAddress )
     {                    
-        String aStringVal = OdfCellAddress.toString( _aLabelCellAddress );
+        String aStringVal = OdfCellRangeAddressList.toString( _aLabelCellAddress );
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "label-cell-address" ), aStringVal );
     }
 
@@ -136,6 +139,24 @@ public abstract class OdfSeriesElement extends OdfStylableElement
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
 }

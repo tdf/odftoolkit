@@ -27,13 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.text.OdfCaptionSequenceFormatType;
-import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
 
 
 /**
@@ -60,11 +60,6 @@ public abstract class OdfTableIndexSourceElement extends OdfElement
     public OdfIndexScopeType getIndexScope()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "index-scope" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "document";
-        }
-
         return OdfIndexScopeType.enumValueOf( aStringVal);
     }
 
@@ -83,11 +78,6 @@ public abstract class OdfTableIndexSourceElement extends OdfElement
     public Boolean getRelativeTabStopPosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "relative-tab-stop-position" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -106,11 +96,6 @@ public abstract class OdfTableIndexSourceElement extends OdfElement
     public Boolean getUseCaption()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "use-caption" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

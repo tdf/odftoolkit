@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
 
 /**
@@ -59,11 +59,6 @@ public abstract class OdfObjectIndexSourceElement extends OdfElement
     public OdfIndexScopeType getIndexScope()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "index-scope" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "document";
-        }
-
         return OdfIndexScopeType.enumValueOf( aStringVal);
     }
 
@@ -82,11 +77,6 @@ public abstract class OdfObjectIndexSourceElement extends OdfElement
     public Boolean getRelativeTabStopPosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "relative-tab-stop-position" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

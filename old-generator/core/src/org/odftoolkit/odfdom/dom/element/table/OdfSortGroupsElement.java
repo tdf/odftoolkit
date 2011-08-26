@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfOrderType;
 
@@ -56,14 +56,8 @@ public abstract class OdfSortGroupsElement extends OdfElement
      * Get value of attribute "table:data-type".
      */
     public String getDataType()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "data-type" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "automatic";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "data-type" ) );
     }
 
     /**
@@ -80,11 +74,6 @@ public abstract class OdfSortGroupsElement extends OdfElement
     public OdfOrderType getOrder()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "order" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "ascending";
-        }
-
         return OdfOrderType.enumValueOf( aStringVal);
     }
 

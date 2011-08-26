@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
 
@@ -78,14 +78,8 @@ public abstract class OdfColumnElement extends OdfElement
      * Get value of attribute "fo:start-indent".
      */
     public String getStartIndent()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FO, "start-indent" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0cm";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.FO, "start-indent" ) );
     }
 
     /**
@@ -100,14 +94,8 @@ public abstract class OdfColumnElement extends OdfElement
      * Get value of attribute "fo:end-indent".
      */
     public String getEndIndent()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FO, "end-indent" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0cm";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.FO, "end-indent" ) );
     }
 
     /**
@@ -122,14 +110,8 @@ public abstract class OdfColumnElement extends OdfElement
      * Get value of attribute "fo:space-before".
      */
     public String getSpaceBefore()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FO, "space-before" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0cm";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.FO, "space-before" ) );
     }
 
     /**
@@ -144,14 +126,8 @@ public abstract class OdfColumnElement extends OdfElement
      * Get value of attribute "fo:space-after".
      */
     public String getSpaceAfter()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FO, "space-after" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0cm";
-        }
-
-        return String.valueOf( aStringVal);
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.FO, "space-after" ) );
     }
 
     /**

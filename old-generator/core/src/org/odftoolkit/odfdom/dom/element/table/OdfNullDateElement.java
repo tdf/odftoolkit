@@ -27,13 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfDate;
 import org.odftoolkit.odfdom.dom.type.table.OdfValueType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import org.odftoolkit.odfdom.dom.type.OdfDate;
 
 
 /**
@@ -60,11 +60,6 @@ public abstract class OdfNullDateElement extends OdfElement
     public OdfValueType getValueType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "value-type" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "date";
-        }
-
         return OdfValueType.enumValueOf( aStringVal);
     }
 
@@ -83,11 +78,6 @@ public abstract class OdfNullDateElement extends OdfElement
     public XMLGregorianCalendar getDateValue()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "date-value" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1899-12-30";
-        }
-
         return OdfDate.valueOf( aStringVal);
     }
 

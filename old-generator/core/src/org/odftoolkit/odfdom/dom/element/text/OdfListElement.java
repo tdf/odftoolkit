@@ -27,12 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
 /**
@@ -87,6 +88,42 @@ public abstract class OdfListElement extends OdfElement
     {                    
         String aStringVal = OdfBoolean.toString( _aContinueNumbering );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "continue-numbering" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "text:continue-list".
+     */
+    public String getContinueList()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "continue-list" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "text:continue-list".
+     */
+    public void setContinueList( String _aContinueList )
+    {                    
+        String aStringVal = OdfId.toString( _aContinueList );
+        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "continue-list" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
 }

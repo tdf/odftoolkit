@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.draw.OdfHatchStyleType;
@@ -148,19 +148,17 @@ public abstract class OdfHatchElement extends OdfElement
     /**
      * Get value of attribute "draw:rotation".
      */
-    public Integer getRotation()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "rotation" ) );
-        return Integer.valueOf( aStringVal);
+    public String getRotation()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "rotation" ) );
     }
 
     /**
      * Set value of attribute "draw:rotation".
      */
-    public void setRotation( Integer _aRotation )
-    {                    
-        String aStringVal = Integer.toString( _aRotation );
-        setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "rotation" ), aStringVal );
+    public void setRotation( String _aRotation )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.DRAW, "rotation" ), _aRotation );
     }
 
 }

@@ -27,16 +27,16 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
-import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
-import org.odftoolkit.odfdom.dom.type.OdfNonNegativeLength;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.text.OdfNumberPositionType;
+import org.odftoolkit.odfdom.dom.type.OdfNonNegativeLength;
 
 
 /**
@@ -63,11 +63,6 @@ public abstract class OdfLinenumberingConfigurationElement extends OdfStylableEl
     public Boolean getNumberLines()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "number-lines" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -156,11 +151,6 @@ public abstract class OdfLinenumberingConfigurationElement extends OdfStylableEl
     public OdfNumberPositionType getNumberPosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "number-position" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "left";
-        }
-
         return OdfNumberPositionType.enumValueOf( aStringVal);
     }
 
@@ -197,11 +187,6 @@ public abstract class OdfLinenumberingConfigurationElement extends OdfStylableEl
     public Boolean getCountEmptyLines()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "count-empty-lines" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

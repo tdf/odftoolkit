@@ -27,17 +27,18 @@
 
 package org.odftoolkit.odfdom.dom.element.chart;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
-import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
 import org.odftoolkit.odfdom.dom.type.chart.OdfDataSourceHasLabelsType;
 import org.odftoolkit.odfdom.dom.type.dr3d.OdfProjectionType;
 import org.odftoolkit.odfdom.dom.type.dr3d.OdfShadeModeType;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
 /**
@@ -144,16 +145,18 @@ public abstract class OdfPlotAreaElement extends OdfStylableElement
      * Get value of attribute "table:cell-range-address".
      */
     public String getCellRangeAddress()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "cell-range-address" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "cell-range-address" ) );
+        return OdfCellRangeAddressList.valueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "table:cell-range-address".
      */
     public void setCellRangeAddress( String _aCellRangeAddress )
-    {
-        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "cell-range-address" ), _aCellRangeAddress );
+    {                    
+        String aStringVal = OdfCellRangeAddressList.toString( _aCellRangeAddress );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "cell-range-address" ), aStringVal );
     }
 
     /**
@@ -162,11 +165,6 @@ public abstract class OdfPlotAreaElement extends OdfStylableElement
     public OdfDataSourceHasLabelsType getDataSourceHasLabels()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "data-source-has-labels" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "none";
-        }
-
         return OdfDataSourceHasLabelsType.enumValueOf( aStringVal);
     }
 
@@ -280,19 +278,17 @@ public abstract class OdfPlotAreaElement extends OdfStylableElement
     /**
      * Get value of attribute "dr3d:shadow-slant".
      */
-    public Integer getShadowSlant()
-    {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DR3D, "shadow-slant" ) );
-        return OdfNonNegativeInteger.valueOf( aStringVal);
+    public String getShadowSlant()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.DR3D, "shadow-slant" ) );
     }
 
     /**
      * Set value of attribute "dr3d:shadow-slant".
      */
-    public void setShadowSlant( Integer _aShadowSlant )
-    {                    
-        String aStringVal = OdfNonNegativeInteger.toString( _aShadowSlant );
-        setOdfAttribute( OdfName.get( OdfNamespace.DR3D, "shadow-slant" ), aStringVal );
+    public void setShadowSlant( String _aShadowSlant )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.DR3D, "shadow-slant" ), _aShadowSlant );
     }
 
     /**
@@ -361,6 +357,24 @@ public abstract class OdfPlotAreaElement extends OdfStylableElement
     public void setTransform( String _aTransform )
     {
         setOdfAttribute( OdfName.get( OdfNamespace.DR3D, "transform" ), _aTransform );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
 }

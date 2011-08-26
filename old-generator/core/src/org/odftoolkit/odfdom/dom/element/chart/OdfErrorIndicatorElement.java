@@ -27,12 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.chart;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.chart.OdfDimensionType;
 
 
 /**
@@ -52,6 +53,13 @@ public abstract class OdfErrorIndicatorElement extends OdfStylableElement
         return ELEMENT_NAME;
     }
 
+    /**
+     * Initialize mandatory attributes.
+     */
+    public void init(OdfDimensionType _aDimension)
+    {
+        setDimension( _aDimension );
+    }
 
     /**
      * Get value of attribute "chart:style-name".
@@ -69,6 +77,56 @@ public abstract class OdfErrorIndicatorElement extends OdfStylableElement
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.CHART, "style-name" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "chart:dimension".
+     */
+    public OdfDimensionType getDimension()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "dimension" ) );
+        return OdfDimensionType.enumValueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "chart:dimension".
+     */
+    public void setDimension( OdfDimensionType _aDimension )
+    {                    
+        String aStringVal = OdfDimensionType.toString( _aDimension );
+        setOdfAttribute( OdfName.get( OdfNamespace.CHART, "dimension" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "chart:error-lower-range".
+     */
+    public String getErrorLowerRange()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.CHART, "error-lower-range" ) );
+    }
+
+    /**
+     * Set value of attribute "chart:error-lower-range".
+     */
+    public void setErrorLowerRange( String _aErrorLowerRange )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.CHART, "error-lower-range" ), _aErrorLowerRange );
+    }
+
+    /**
+     * Get value of attribute "chart:error-upper-range".
+     */
+    public String getErrorUpperRange()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.CHART, "error-upper-range" ) );
+    }
+
+    /**
+     * Set value of attribute "chart:error-upper-range".
+     */
+    public void setErrorUpperRange( String _aErrorUpperRange )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.CHART, "error-upper-range" ), _aErrorUpperRange );
     }
 
 }

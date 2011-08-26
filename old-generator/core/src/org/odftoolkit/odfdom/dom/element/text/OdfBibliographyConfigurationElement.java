@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
@@ -108,11 +108,6 @@ public abstract class OdfBibliographyConfigurationElement extends OdfElement
     public Boolean getSortByPosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "sort-by-position" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -155,6 +150,38 @@ public abstract class OdfBibliographyConfigurationElement extends OdfElement
     public void setCountry( String _aCountry )
     {
         setOdfAttribute( OdfName.get( OdfNamespace.FO, "country" ), _aCountry );
+    }
+
+    /**
+     * Get value of attribute "fo:script".
+     */
+    public String getScript()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.FO, "script" ) );
+    }
+
+    /**
+     * Set value of attribute "fo:script".
+     */
+    public void setScript( String _aScript )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.FO, "script" ), _aScript );
+    }
+
+    /**
+     * Get value of attribute "style:rfc-language-tag".
+     */
+    public String getRfcLanguageTag()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "rfc-language-tag" ) );
+    }
+
+    /**
+     * Set value of attribute "style:rfc-language-tag".
+     */
+    public void setRfcLanguageTag( String _aRfcLanguageTag )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "rfc-language-tag" ), _aRfcLanguageTag );
     }
 
     /**

@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
-import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
 
 /**
@@ -100,8 +100,6 @@ public abstract class OdfParagraphPropertiesElement extends OdfStylePropertiesBa
         OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get(OdfNamespace.FO, "break-after"));
     public final static OdfStyleProperty BackgroundColor = 
         OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get(OdfNamespace.FO, "background-color"));
-    public final static OdfStyleProperty JoinBorder = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get(OdfNamespace.STYLE, "join-border"));
     public final static OdfStyleProperty Border = 
         OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get(OdfNamespace.FO, "border"));
     public final static OdfStyleProperty BorderTop = 
@@ -122,6 +120,8 @@ public abstract class OdfParagraphPropertiesElement extends OdfStylePropertiesBa
         OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get(OdfNamespace.STYLE, "border-line-width-left"));
     public final static OdfStyleProperty BorderLineWidthRight = 
         OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get(OdfNamespace.STYLE, "border-line-width-right"));
+    public final static OdfStyleProperty JoinBorder = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get(OdfNamespace.STYLE, "join-border"));
     public final static OdfStyleProperty Padding = 
         OdfStyleProperty.get(OdfStylePropertiesSet.ParagraphProperties, OdfName.get(OdfNamespace.FO, "padding"));
     public final static OdfStyleProperty PaddingTop = 

@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.office;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.draw.OdfShapeElementBase;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.element.draw.OdfShapeElementBase;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeLength;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
@@ -71,6 +71,22 @@ public abstract class OdfAnnotationElement extends OdfShapeElementBase
     {                    
         String aStringVal = OdfBoolean.toString( _aDisplay );
         setOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "display" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "office:name".
+     */
+    public String getName()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "name" ) );
+    }
+
+    /**
+     * Set value of attribute "office:name".
+     */
+    public void setName( String _aName )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "name" ), _aName );
     }
 
     /**

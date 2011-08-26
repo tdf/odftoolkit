@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.number.OdfStyleType;
 
@@ -58,11 +58,6 @@ public abstract class OdfSecondsElement extends OdfElement
     public OdfStyleType getStyle()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "style" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "short";
-        }
-
         return OdfStyleType.enumValueOf( aStringVal);
     }
 
@@ -81,11 +76,6 @@ public abstract class OdfSecondsElement extends OdfElement
     public Integer getDecimalPlaces()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "decimal-places" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "0";
-        }
-
         return Integer.valueOf( aStringVal);
     }
 

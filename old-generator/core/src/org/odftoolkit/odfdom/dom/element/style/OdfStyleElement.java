@@ -27,14 +27,14 @@
 
 package org.odftoolkit.odfdom.dom.element.style;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
-import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 
 
 /**
@@ -134,6 +134,24 @@ public abstract class OdfStyleElement extends OdfStyleBase
     }
 
     /**
+     * Get value of attribute "style:list-level".
+     */
+    public Integer getListLevel()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "list-level" ) );
+        return OdfPositiveInteger.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "style:list-level".
+     */
+    public void setListLevel( Integer _aListLevel )
+    {                    
+        String aStringVal = OdfPositiveInteger.toString( _aListLevel );
+        setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "list-level" ), aStringVal );
+    }
+
+    /**
      * Get value of attribute "style:list-style-name".
      */
     public String getListStyleName()
@@ -203,6 +221,24 @@ public abstract class OdfStyleElement extends OdfStyleBase
     {                    
         String aStringVal = OdfStyleName.toString( _aDataStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "data-style-name" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "style:percentage-data-style-name".
+     */
+    public String getPercentageDataStyleName()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "percentage-data-style-name" ) );
+        return OdfStyleName.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "style:percentage-data-style-name".
+     */
+    public void setPercentageDataStyleName( String _aPercentageDataStyleName )
+    {                    
+        String aStringVal = OdfStyleName.toString( _aPercentageDataStyleName );
+        setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "percentage-data-style-name" ), aStringVal );
     }
 
     /**

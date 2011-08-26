@@ -27,11 +27,11 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
 
@@ -55,46 +55,45 @@ public abstract class OdfEvenColumnsElement extends OdfStylableElement
     /**
      * Initialize mandatory attributes.
      */
-    public void init(String _aStyleName, String _aParagraphStyleName)
+    public void init(String _aStyleName)
     {
         setStyleName( _aStyleName );
-        setParagraphStyleName( _aParagraphStyleName );
     }
 
     /**
-     * Get value of attribute "text:style-name".
+     * Get value of attribute "table:style-name".
      */
     public String getStyleName()
     {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
     }
 
     /**
-     * Set value of attribute "text:style-name".
+     * Set value of attribute "table:style-name".
      */
     public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
-        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "style-name" ), aStringVal );
     }
 
     /**
-     * Get value of attribute "text:paragraph-style-name".
+     * Get value of attribute "table:paragraph-style-name".
      */
     public String getParagraphStyleName()
     {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "paragraph-style-name" ) );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "paragraph-style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
     }
 
     /**
-     * Set value of attribute "text:paragraph-style-name".
+     * Set value of attribute "table:paragraph-style-name".
      */
     public void setParagraphStyleName( String _aParagraphStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aParagraphStyleName );
-        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "paragraph-style-name" ), aStringVal );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "paragraph-style-name" ), aStringVal );
     }
 
 }

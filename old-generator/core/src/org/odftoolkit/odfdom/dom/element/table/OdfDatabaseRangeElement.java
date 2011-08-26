@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
-import org.odftoolkit.odfdom.dom.type.table.OdfOrientationType;
+import org.odftoolkit.odfdom.dom.type.table.OdfDatabaseOrientationType;
 
 
 /**
@@ -118,11 +118,6 @@ public abstract class OdfDatabaseRangeElement extends OdfElement
     public Boolean getOnUpdateKeepSize()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "on-update-keep-size" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -141,11 +136,6 @@ public abstract class OdfDatabaseRangeElement extends OdfElement
     public Boolean getHasPersistentData()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "has-persistent-data" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -161,23 +151,18 @@ public abstract class OdfDatabaseRangeElement extends OdfElement
     /**
      * Get value of attribute "table:orientation".
      */
-    public OdfOrientationType getOrientation()
+    public OdfDatabaseOrientationType getOrientation()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "orientation" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "row";
-        }
-
-        return OdfOrientationType.enumValueOf( aStringVal);
+        return OdfDatabaseOrientationType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "table:orientation".
      */
-    public void setOrientation( OdfOrientationType _aOrientation )
+    public void setOrientation( OdfDatabaseOrientationType _aOrientation )
     {                    
-        String aStringVal = OdfOrientationType.toString( _aOrientation );
+        String aStringVal = OdfDatabaseOrientationType.toString( _aOrientation );
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "orientation" ), aStringVal );
     }
 
@@ -187,11 +172,6 @@ public abstract class OdfDatabaseRangeElement extends OdfElement
     public Boolean getContainsHeader()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "contains-header" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

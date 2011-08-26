@@ -27,13 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
-import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
 
 
 /**
@@ -60,11 +60,6 @@ public abstract class OdfAlphabeticalIndexSourceElement extends OdfElement
     public OdfIndexScopeType getIndexScope()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "index-scope" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "document";
-        }
-
         return OdfIndexScopeType.enumValueOf( aStringVal);
     }
 
@@ -83,11 +78,6 @@ public abstract class OdfAlphabeticalIndexSourceElement extends OdfElement
     public Boolean getRelativeTabStopPosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "relative-tab-stop-position" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -160,11 +150,6 @@ public abstract class OdfAlphabeticalIndexSourceElement extends OdfElement
     public Boolean getCombineEntries()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "combine-entries" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -201,11 +186,6 @@ public abstract class OdfAlphabeticalIndexSourceElement extends OdfElement
     public Boolean getCombineEntriesWithPp()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "combine-entries-with-pp" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -302,6 +282,38 @@ public abstract class OdfAlphabeticalIndexSourceElement extends OdfElement
     public void setCountry( String _aCountry )
     {
         setOdfAttribute( OdfName.get( OdfNamespace.FO, "country" ), _aCountry );
+    }
+
+    /**
+     * Get value of attribute "fo:script".
+     */
+    public String getScript()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.FO, "script" ) );
+    }
+
+    /**
+     * Set value of attribute "fo:script".
+     */
+    public void setScript( String _aScript )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.FO, "script" ), _aScript );
+    }
+
+    /**
+     * Get value of attribute "style:rfc-language-tag".
+     */
+    public String getRfcLanguageTag()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "rfc-language-tag" ) );
+    }
+
+    /**
+     * Set value of attribute "style:rfc-language-tag".
+     */
+    public void setRfcLanguageTag( String _aRfcLanguageTag )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "rfc-language-tag" ), _aRfcLanguageTag );
     }
 
     /**

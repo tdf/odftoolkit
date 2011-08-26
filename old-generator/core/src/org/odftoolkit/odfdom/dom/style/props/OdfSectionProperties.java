@@ -39,4 +39,7 @@ public interface OdfSectionProperties {
         OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.STYLE, "writing-mode"));
     public final static OdfStyleProperty DontBalanceTextColumns = 
         OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.TEXT, "dont-balance-text-columns"));
+    public final static OdfStyleProperty Editable = 
+    	OdfStyleProperty.get(OdfStylePropertiesSet.SectionProperties, OdfName.get(OdfNamespace.STYLE, "editable"));
+
 }

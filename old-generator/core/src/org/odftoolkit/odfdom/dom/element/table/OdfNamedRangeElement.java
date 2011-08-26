@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
 import org.odftoolkit.odfdom.dom.type.table.OdfRangeUsableAsType;
@@ -117,11 +117,6 @@ public abstract class OdfNamedRangeElement extends OdfElement
     public OdfRangeUsableAsType getRangeUsableAs()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "range-usable-as" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "none";
-        }
-
         return OdfRangeUsableAsType.enumValueOf( aStringVal);
     }
 

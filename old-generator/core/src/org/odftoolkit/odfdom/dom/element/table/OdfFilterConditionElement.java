@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.table.OdfDataType;
@@ -134,11 +134,6 @@ public abstract class OdfFilterConditionElement extends OdfElement
     public OdfDataType getDataType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "data-type" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "text";
-        }
-
         return OdfDataType.enumValueOf( aStringVal);
     }
 

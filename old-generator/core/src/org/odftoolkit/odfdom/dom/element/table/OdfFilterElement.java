@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.table.OdfConditionSourceType;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
 
 /**
@@ -75,11 +75,6 @@ public abstract class OdfFilterElement extends OdfElement
     public OdfConditionSourceType getConditionSource()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "condition-source" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "self";
-        }
-
         return OdfConditionSourceType.enumValueOf( aStringVal);
     }
 
@@ -114,11 +109,6 @@ public abstract class OdfFilterElement extends OdfElement
     public Boolean getDisplayDuplicates()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "display-duplicates" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 

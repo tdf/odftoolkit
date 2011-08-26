@@ -27,12 +27,12 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.table.OdfDisplayListType;
 
 
@@ -117,11 +117,6 @@ public abstract class OdfContentValidationElement extends OdfElement
     public Boolean getAllowEmptyCell()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "allow-empty-cell" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "true";
-        }
-
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -140,11 +135,6 @@ public abstract class OdfContentValidationElement extends OdfElement
     public OdfDisplayListType getDisplayList()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "display-list" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "unsorted";
-        }
-
         return OdfDisplayListType.enumValueOf( aStringVal);
     }
 

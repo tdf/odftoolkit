@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfRowOrColumnType;
 
@@ -64,91 +64,91 @@ public abstract class OdfTableTemplateElement extends OdfElement
     }
 
     /**
-     * Get value of attribute "text:name".
+     * Get value of attribute "table:name".
      */
     public String getName()
     {
-        return getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "name" ) );
+        return getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "name" ) );
     }
 
     /**
-     * Set value of attribute "text:name".
+     * Set value of attribute "table:name".
      */
     public void setName( String _aName )
     {
-        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "name" ), _aName );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "name" ), _aName );
     }
 
     /**
-     * Get value of attribute "text:first-row-start-column".
+     * Get value of attribute "table:first-row-start-column".
      */
     public OdfRowOrColumnType getFirstRowStartColumn()
     {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "first-row-start-column" ) );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "first-row-start-column" ) );
         return OdfRowOrColumnType.enumValueOf( aStringVal);
     }
 
     /**
-     * Set value of attribute "text:first-row-start-column".
+     * Set value of attribute "table:first-row-start-column".
      */
     public void setFirstRowStartColumn( OdfRowOrColumnType _aFirstRowStartColumn )
     {                    
         String aStringVal = OdfRowOrColumnType.toString( _aFirstRowStartColumn );
-        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "first-row-start-column" ), aStringVal );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "first-row-start-column" ), aStringVal );
     }
 
     /**
-     * Get value of attribute "text:first-row-end-column".
+     * Get value of attribute "table:first-row-end-column".
      */
     public OdfRowOrColumnType getFirstRowEndColumn()
     {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "first-row-end-column" ) );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "first-row-end-column" ) );
         return OdfRowOrColumnType.enumValueOf( aStringVal);
     }
 
     /**
-     * Set value of attribute "text:first-row-end-column".
+     * Set value of attribute "table:first-row-end-column".
      */
     public void setFirstRowEndColumn( OdfRowOrColumnType _aFirstRowEndColumn )
     {                    
         String aStringVal = OdfRowOrColumnType.toString( _aFirstRowEndColumn );
-        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "first-row-end-column" ), aStringVal );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "first-row-end-column" ), aStringVal );
     }
 
     /**
-     * Get value of attribute "text:last-row-start-column".
+     * Get value of attribute "table:last-row-start-column".
      */
     public OdfRowOrColumnType getLastRowStartColumn()
     {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "last-row-start-column" ) );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "last-row-start-column" ) );
         return OdfRowOrColumnType.enumValueOf( aStringVal);
     }
 
     /**
-     * Set value of attribute "text:last-row-start-column".
+     * Set value of attribute "table:last-row-start-column".
      */
     public void setLastRowStartColumn( OdfRowOrColumnType _aLastRowStartColumn )
     {                    
         String aStringVal = OdfRowOrColumnType.toString( _aLastRowStartColumn );
-        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "last-row-start-column" ), aStringVal );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "last-row-start-column" ), aStringVal );
     }
 
     /**
-     * Get value of attribute "text:last-row-end-column".
+     * Get value of attribute "table:last-row-end-column".
      */
     public OdfRowOrColumnType getLastRowEndColumn()
     {                    
-        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "last-row-end-column" ) );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "last-row-end-column" ) );
         return OdfRowOrColumnType.enumValueOf( aStringVal);
     }
 
     /**
-     * Set value of attribute "text:last-row-end-column".
+     * Set value of attribute "table:last-row-end-column".
      */
     public void setLastRowEndColumn( OdfRowOrColumnType _aLastRowEndColumn )
     {                    
         String aStringVal = OdfRowOrColumnType.toString( _aLastRowEndColumn );
-        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "last-row-end-column" ), aStringVal );
+        setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "last-row-end-column" ), aStringVal );
     }
 
 }

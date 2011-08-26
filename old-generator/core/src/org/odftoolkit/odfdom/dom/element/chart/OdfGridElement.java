@@ -27,13 +27,13 @@
 
 package org.odftoolkit.odfdom.dom.element.chart;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.chart.OdfClassType;
+import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
 
 /**
@@ -60,11 +60,6 @@ public abstract class OdfGridElement extends OdfStylableElement
     public OdfClassType getChartClass()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.CHART, "class" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "major";
-        }
-
         return OdfClassType.enumValueOf( aStringVal);
     }
 

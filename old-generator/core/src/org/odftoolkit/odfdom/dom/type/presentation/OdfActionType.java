@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.presentation;
 
 public enum OdfActionType
 {
-              PREVIOUS_PAGE( "previous-page" ), STOP( "stop" ), NONE( "none" ), FIRST_PAGE( "first-page" ), VERB( "verb" ), LAST_PAGE( "last-page" ), SOUND( "sound" ), NEXT_PAGE( "next-page" ), SHOW( "show" ), EXECUTE( "execute" ), FADE_OUT( "fade-out" ), HIDE( "hide" );
+              PREVIOUS_PAGE( "previous-page" ), NONE( "none" ), FIRST_PAGE( "first-page" ), LAST_PAGE( "last-page" ), VERB( "verb" ), LAST_VISITED_PAGE( "last-visited-page" ), SOUND( "sound" ), HIDE( "hide" ), STOP( "stop" ), NEXT_PAGE( "next-page" ), EXECUTE( "execute" ), SHOW( "show" ), FADE_OUT( "fade-out" );
 
     private String m_aValue;
 

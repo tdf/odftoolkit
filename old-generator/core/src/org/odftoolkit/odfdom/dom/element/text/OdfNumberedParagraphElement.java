@@ -27,15 +27,16 @@
 
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.type.OdfBoolean;
-import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
+import org.odftoolkit.odfdom.dom.type.OdfBoolean;
+import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
+import org.odftoolkit.odfdom.dom.type.OdfId;
 
 
 /**
@@ -55,6 +56,29 @@ public abstract class OdfNumberedParagraphElement extends OdfStylableElement
         return ELEMENT_NAME;
     }
 
+    /**
+     * Initialize mandatory attributes.
+     */
+    public void init(String _aListId)
+    {
+        setListId( _aListId );
+    }
+
+    /**
+     * Get value of attribute "text:list-id".
+     */
+    public String getListId()
+    {
+        return getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "list-id" ) );
+    }
+
+    /**
+     * Set value of attribute "text:list-id".
+     */
+    public void setListId( String _aListId )
+    {
+        setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "list-id" ), _aListId );
+    }
 
     /**
      * Get value of attribute "text:level".
@@ -62,11 +86,6 @@ public abstract class OdfNumberedParagraphElement extends OdfStylableElement
     public Integer getLevel()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "level" ) );
-        if( aStringVal.length()==0 )
-        {
-            aStringVal = "1";
-        }
-
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 
@@ -131,6 +150,24 @@ public abstract class OdfNumberedParagraphElement extends OdfStylableElement
     {                    
         String aStringVal = OdfNonNegativeInteger.toString( _aStartValue );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "start-value" ), aStringVal );
+    }
+
+    /**
+     * Get value of attribute "xml:id".
+     */
+    public String getXmlid()
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ) );
+        return OdfId.valueOf( aStringVal);
+    }
+
+    /**
+     * Set value of attribute "xml:id".
+     */
+    public void setXmlid( String _aXmlid )
+    {                    
+        String aStringVal = OdfId.toString( _aXmlid );
+        setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
 }

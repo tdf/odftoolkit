@@ -27,9 +27,9 @@
 
 package org.odftoolkit.odfdom.dom.element.meta;
 
-import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 
@@ -215,75 +215,75 @@ public abstract class OdfDocumentStatisticElement extends OdfElement
     }
 
     /**
-     * Get value of attribute "frame-count".
+     * Get value of attribute "meta:frame-count".
      */
     public Integer getFrameCount()
     {                    
-        String aStringVal = getOdfAttribute( OdfName.get( "", "frame-count" ) );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.META, "frame-count" ) );
         return OdfNonNegativeInteger.valueOf( aStringVal);
     }
 
     /**
-     * Set value of attribute "frame-count".
+     * Set value of attribute "meta:frame-count".
      */
     public void setFrameCount( Integer _aFrameCount )
     {                    
         String aStringVal = OdfNonNegativeInteger.toString( _aFrameCount );
-        setOdfAttribute( OdfName.get( "", "frame-count" ), aStringVal );
+        setOdfAttribute( OdfName.get( OdfNamespace.META, "frame-count" ), aStringVal );
     }
 
     /**
-     * Get value of attribute "sentence-count".
+     * Get value of attribute "meta:sentence-count".
      */
     public Integer getSentenceCount()
     {                    
-        String aStringVal = getOdfAttribute( OdfName.get( "", "sentence-count" ) );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.META, "sentence-count" ) );
         return OdfNonNegativeInteger.valueOf( aStringVal);
     }
 
     /**
-     * Set value of attribute "sentence-count".
+     * Set value of attribute "meta:sentence-count".
      */
     public void setSentenceCount( Integer _aSentenceCount )
     {                    
         String aStringVal = OdfNonNegativeInteger.toString( _aSentenceCount );
-        setOdfAttribute( OdfName.get( "", "sentence-count" ), aStringVal );
+        setOdfAttribute( OdfName.get( OdfNamespace.META, "sentence-count" ), aStringVal );
     }
 
     /**
-     * Get value of attribute "syllable-count".
+     * Get value of attribute "meta:syllable-count".
      */
     public Integer getSyllableCount()
     {                    
-        String aStringVal = getOdfAttribute( OdfName.get( "", "syllable-count" ) );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.META, "syllable-count" ) );
         return OdfNonNegativeInteger.valueOf( aStringVal);
     }
 
     /**
-     * Set value of attribute "syllable-count".
+     * Set value of attribute "meta:syllable-count".
      */
     public void setSyllableCount( Integer _aSyllableCount )
     {                    
         String aStringVal = OdfNonNegativeInteger.toString( _aSyllableCount );
-        setOdfAttribute( OdfName.get( "", "syllable-count" ), aStringVal );
+        setOdfAttribute( OdfName.get( OdfNamespace.META, "syllable-count" ), aStringVal );
     }
 
     /**
-     * Get value of attribute "non-whitespace-character-count".
+     * Get value of attribute "meta:non-whitespace-character-count".
      */
     public Integer getNonWhitespaceCharacterCount()
     {                    
-        String aStringVal = getOdfAttribute( OdfName.get( "", "non-whitespace-character-count" ) );
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.META, "non-whitespace-character-count" ) );
         return OdfNonNegativeInteger.valueOf( aStringVal);
     }
 
     /**
-     * Set value of attribute "non-whitespace-character-count".
+     * Set value of attribute "meta:non-whitespace-character-count".
      */
     public void setNonWhitespaceCharacterCount( Integer _aNonWhitespaceCharacterCount )
     {                    
         String aStringVal = OdfNonNegativeInteger.toString( _aNonWhitespaceCharacterCount );
-        setOdfAttribute( OdfName.get( "", "non-whitespace-character-count" ), aStringVal );
+        setOdfAttribute( OdfName.get( OdfNamespace.META, "non-whitespace-character-count" ), aStringVal );
     }
 
     /**
