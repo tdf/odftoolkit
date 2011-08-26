@@ -54,7 +54,6 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -105,11 +104,6 @@ public class OdfPackage implements Closeable {
 	private static final Pattern APOSTROPHE_PATTERN = Pattern.compile("'");
 	private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
 	private static Set<String> mCompressedFileTypes;
-	// temp Dir for this ODFpackage 
-	// (ToDo: (Issue 219 - PackageRefactoring) --temp dir handling will be removed most likely)
-	private boolean mUseTempFile;
-	private File mTempDirParent;
-	private File mTempDir;
 	// some well known streams inside ODF packages
 	private String mMediaType;
 	private String mBaseURI;
@@ -121,12 +115,9 @@ public class OdfPackage implements Closeable {
 	// All opened documents from the same package are cached (including the root document)
 	private Map<String, OdfPackageDocument> mPkgDocuments;
 	// Three different incarnations of a package file/data
-	// save() will check 1) mPkgDoms, 2) if not check mMemoryFileCache, 3) if not check mDiscFileCache
+	// save() will check 1) mPkgDoms, 2) if not check mMemoryFileCache
 	private HashMap<String, Document> mPkgDoms;
 	private HashMap<String, byte[]> mMemoryFileCache;
-	private Map<String, File> mDiscFileCache;
-	// only used indirectly for its finalizer (garbage collection)
-	private OdfFinalizablePackage mFinalize;
 	private ErrorHandler mErrorHandler;
 
 	public enum OdfFile {
@@ -157,36 +148,15 @@ public class OdfPackage implements Closeable {
 	}
 
 	/**
-	 * Creates the ODFPackage as an empty Package. For setting a specific temp
-	 * directory, set the System variable org.odftoolkit.odfdom.tmpdir:<br>
-	 * <code>System.setProperty("org.odftoolkit.odfdom.tmpdir");</code>
+	 * Creates the ODFPackage as an empty Package.
 	 */
 	private OdfPackage() {
 		mMediaType = null;
 		mResolver = null;
-		mTempDir = null;
-		mTempDirParent = null;
 		mPkgDocuments = new HashMap<String, OdfPackageDocument>();
 		mPkgDoms = new HashMap<String, Document>();
 		mMemoryFileCache = new HashMap<String, byte[]>();
-		mDiscFileCache = new HashMap<String, File>();
 		mFileEntries = new HashMap<String, OdfFileEntry>();
-
-		// get a temp directory for everything
-		String userPropDir = System.getProperty("org.odftoolkit.odfdom.tmpdir");
-		if (userPropDir != null) {
-			mTempDirParent = new File(userPropDir);
-		}
-
-		// specify whether temporary files are able to used.
-		String userPropTempEnable = System.getProperty("org.odftoolkit.odfdom.tmpfile.disable");
-		if ((userPropTempEnable != null) && (userPropTempEnable.equalsIgnoreCase("true"))) {
-			mUseTempFile = false;
-			Logger.getLogger(OdfPackage.class.getName()).info("Temporary disc file usage is disabled!");
-		} else {
-			mUseTempFile = true;
-		}
-
 		// specify whether validation should be enabled and what SAX ErrorHandler should be used.		
 		if (mErrorHandler == null) {
 			String errorHandlerProperty = System.getProperty("org.odftoolkit.odfdom.validation");
@@ -335,7 +305,7 @@ public class OdfPackage implements Closeable {
 		return new OdfPackage(new FileInputStream(pkgFile), getBaseURLFromFile(pkgFile), errorHandler);
 	}
 
-	// Initialize using memory instead temporary disc
+	// Initialize using memory
 	private void initializeZip(InputStream odfStream) throws Exception {
 		ByteArrayOutputStream tempBuf = new ByteArrayOutputStream();
 		StreamHelper.transformStream(odfStream, tempBuf);
@@ -352,36 +322,6 @@ public class OdfPackage implements Closeable {
 		readZip();
 	}
 
-	// Initialize using temporary directory on hard disc
-	private void initializeZip(File pkgFile) throws Exception {
-		mBaseURI = getBaseURLFromFile(pkgFile);
-
-		if (mTempDirParent == null) {
-			// getParentFile() returns already java.io.tmpdir when package is an
-			// odfStream
-			mTempDirParent = pkgFile.getAbsoluteFile().getParentFile();
-			if (!mTempDirParent.canWrite()) {
-				mTempDirParent = null; // java.io.tmpdir will be used implicitly
-			}
-		}
-		try {
-			mZipFile = new ZipHelper(this, new ZipFile(pkgFile));
-		} catch (Exception e) {
-			OdfValidationException ve = null;
-			if (e.getMessage().contains("error in opening zip")) {
-				// if it is a ZIP exception, the exception will be not overtaken
-				ve = new OdfValidationException(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, getBaseURI());
-			} else {
-				ve = new OdfValidationException(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, getBaseURI(), e);
-			}
-			if (mErrorHandler != null) {
-				mErrorHandler.fatalError(ve);
-			}
-			throw new IllegalArgumentException(ve);
-		}
-		readZip();
-	}
-
 	private void readZip() throws SAXException, IOException {
 		mZipEntries = new HashMap<String, ZipEntry>();
 		String firstEntryName = mZipFile.entriesToMap(mZipEntries);
@@ -389,7 +329,6 @@ public class OdfPackage implements Closeable {
 			OdfValidationException ve = new OdfValidationException(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, getBaseURI());
 			if (mErrorHandler != null) {
 				mErrorHandler.fatalError(ve);
-
 			}
 			throw new IllegalArgumentException(ve);
 		} else {
@@ -406,54 +345,7 @@ public class OdfPackage implements Closeable {
 			mZipEntries.remove(OdfPackage.OdfFile.MANIFEST.getPath());
 			mZipEntries.remove("META-INF/");
 			if (mErrorHandler != null) {
-				Set zipPaths = mZipEntries.keySet();
-				Set manifestPaths = mFileEntries.keySet();
-				Set<String> sharedPaths = new HashSet<String>(zipPaths);
-				sharedPaths.retainAll(manifestPaths);
-
-				if (sharedPaths.size() < zipPaths.size()) {
-					Set<String> zipPathSuperset = new HashSet<String>(mZipEntries.keySet());
-					zipPathSuperset.removeAll(sharedPaths);
-					Set sortedSet = new TreeSet<String>(zipPathSuperset);
-					Iterator iter = sortedSet.iterator();
-					String documentURL = getBaseURI();
-					String filePath;
-					while (iter.hasNext()) {
-						filePath = (String) iter.next();
-						if (!filePath.endsWith(SLASH)) { // not for directories!
-							logValidationError(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, documentURL, filePath);
-						}
-					}
-				}
-				if (sharedPaths.size() < manifestPaths.size()) {
-					Set<String> zipPathSubset = new HashSet<String>(mFileEntries.keySet());
-					zipPathSubset.removeAll(sharedPaths);
-					// removing root directory
-					zipPathSubset.remove(SLASH);
-
-					// No directory are listed in a ZIP removing all directory with content
-					Iterator<String> manifestOnlyPaths = zipPathSubset.iterator();
-					while (manifestOnlyPaths.hasNext()) {
-						String manifestOnlyPath = manifestOnlyPaths.next();
-						// assumption: all directories end with slash
-						if (manifestOnlyPath.endsWith(SLASH)) {
-
-							removeDirectory(manifestOnlyPath);
-						} else {
-							// if it is a nonexistent file
-							logValidationError(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, getBaseURI(), manifestOnlyPath);
-							mFileEntries.remove(manifestOnlyPath);
-						}
-					}
-				}
-				Iterator<String> sharedPathsIter = sharedPaths.iterator();
-				while (sharedPathsIter.hasNext()) {
-					String sharedPath = sharedPathsIter.next();
-					// assumption: all directories end with slash
-					if (sharedPath.endsWith(SLASH)) {
-						removeDirectory(sharedPath);
-					}
-				}
+				validateManifest();
 			}
 			Iterator<String> zipPaths = mZipEntries.keySet().iterator();
 			while (zipPaths.hasNext()) {
@@ -471,6 +363,60 @@ public class OdfPackage implements Closeable {
 		}
 	}
 
+	/** Validates if all file entries exist in the ZIP and vice versa */
+	private void validateManifest() {
+		Set zipPaths = mZipEntries.keySet();
+		Set manifestPaths = mFileEntries.keySet();
+		Set<String> sharedPaths = new HashSet<String>(zipPaths);
+		sharedPaths.retainAll(manifestPaths);
+
+		if (sharedPaths.size() < zipPaths.size()) {
+			Set<String> zipPathSuperset = new HashSet<String>(mZipEntries.keySet());
+			zipPathSuperset.removeAll(sharedPaths);
+			Set sortedSet = new TreeSet<String>(zipPathSuperset);
+			Iterator iter = sortedSet.iterator();
+			String documentURL = getBaseURI();
+			String filePath;
+			while (iter.hasNext()) {
+				filePath = (String) iter.next();
+				if (!filePath.endsWith(SLASH)) { // not for directories!
+					logValidationError(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, documentURL, filePath);
+				}
+			}
+		}
+		if (sharedPaths.size() < manifestPaths.size()) {
+			Set<String> zipPathSubset = new HashSet<String>(mFileEntries.keySet());
+			zipPathSubset.removeAll(sharedPaths);
+			// removing root directory
+			zipPathSubset.remove(SLASH);
+
+			// No directory are listed in a ZIP removing all directory with content
+			Iterator<String> manifestOnlyPaths = zipPathSubset.iterator();
+			while (manifestOnlyPaths.hasNext()) {
+				String manifestOnlyPath = manifestOnlyPaths.next();
+				// assumption: all directories end with slash
+				if (manifestOnlyPath.endsWith(SLASH)) {
+
+					removeDirectory(manifestOnlyPath);
+				} else {
+					// if it is a nonexistent file
+					logValidationError(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, getBaseURI(), manifestOnlyPath);
+					mFileEntries.remove(manifestOnlyPath);
+				}
+			}
+		}
+		// remove none document directories
+		Iterator<String> sharedPathsIter = sharedPaths.iterator();
+		while (sharedPathsIter.hasNext()) {
+			String sharedPath = sharedPathsIter.next();
+			// assumption: all directories end with slash
+			if (sharedPath.endsWith(SLASH)) {
+				removeDirectory(sharedPath);
+			}
+		}
+	}
+
+	/** Removes directories without a mimetype (all none documents) */
 	private void removeDirectory(String path) {
 		if (path.endsWith(SLASH)) {
 			// is it a sub-document?
@@ -571,16 +517,6 @@ public class OdfPackage implements Closeable {
 			}
 		}
 		return entryMediaType;
-	}
-
-	private File newTempSourceFile(InputStream odfStream) throws Exception {
-		//	the type of file is uncertain therefore we use .tmp
-		File pkgFile = new File(getTempDir(), "theFile.tmp");
-		//	 copy stream to temp file
-		FileOutputStream os = new FileOutputStream(pkgFile);
-		StreamHelper.transformStream(odfStream, os);
-		os.close();
-		return pkgFile;
 	}
 
 	/**
@@ -1007,9 +943,6 @@ public class OdfPackage implements Closeable {
 	 * document has no effect.
 	 */
 	public void close() {
-		if (mTempDir != null) {
-			TempDir.deleteTempOdfDirectory(mTempDir);
-		}
 		if (mZipFile != null) {
 			try {
 				mZipFile.close();
@@ -1025,7 +958,6 @@ public class OdfPackage implements Closeable {
 		mZipEntries = null;
 		mPkgDoms = null;
 		mMemoryFileCache = null;
-		mDiscFileCache = null;
 		mFileEntries = null;
 		mBaseURI = null;
 		mResolver = null;
@@ -1137,8 +1069,6 @@ public class OdfPackage implements Closeable {
 		updateFileEntry(ensureFileEntryExistence(packagePath), mediaType);
 		// remove byte array version of new DOM
 		mMemoryFileCache.remove(packagePath);
-		// remove temp file version of new DOM
-		mDiscFileCache.remove(packagePath);
 	}
 
 	/**
@@ -1434,19 +1364,6 @@ public class OdfPackage implements Closeable {
 			StreamHelper.transformStream(bis, baos);
 			byte[] data = baos.toByteArray();
 			insert(data, packagePath, mediaType);
-			// image should not be stored in memory but on disc
-			if ((!packagePath.endsWith(".xml"))
-					&& (!packagePath.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) && mUseTempFile) {
-				// insertOutputStream to filesystem
-				File tempFile = new File(getTempDir(), packagePath);
-				File parent = tempFile.getParentFile();
-				parent.mkdirs();
-				OutputStream fos = new BufferedOutputStream(new FileOutputStream(tempFile));
-				fos.write(data);
-				fos.close();
-				mDiscFileCache.put(packagePath, tempFile);
-				mMemoryFileCache.remove(packagePath);
-			}
 		}
 	}
 
@@ -1634,30 +1551,6 @@ public class OdfPackage implements Closeable {
 			data = mMemoryFileCache.get(packagePath);
 
 			// if the path's file was cached to disc (lowest priority)
-		} else if (mDiscFileCache.get(packagePath) != null) {
-			InputStream is = null;
-			ByteArrayOutputStream os = null;
-			try {
-				os = new ByteArrayOutputStream();
-				is = new BufferedInputStream(new FileInputStream(mDiscFileCache.get(packagePath)));
-				StreamHelper.transformStream(is, os);
-				is.close();
-				os.close();
-				data = os.toByteArray();
-			} catch (IOException ex) {
-				Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-			} finally {
-				try {
-					if (is != null) {
-						is.close();
-					}
-					if (os != null) {
-						os.close();
-					}
-				} catch (IOException ex) {
-					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-				}
-			}
 		}
 		// if not available, check if file exists in ZIP
 		if (data == null) {
@@ -1878,25 +1771,9 @@ public class OdfPackage implements Closeable {
 		if (mZipEntries != null && mZipEntries.containsKey(packagePath)) {
 			mZipEntries.remove(packagePath);
 		}
-		if (mDiscFileCache != null && mDiscFileCache.containsKey(packagePath)) {
-			File file = mDiscFileCache.remove(packagePath);
-			file.delete();
-		}
 		if (mFileEntries != null && mFileEntries.containsKey(packagePath)) {
 			mFileEntries.remove(packagePath);
 		}
-	}
-
-	/**
-	 * Get Temp Directory. Create new temp directory on demand and register it
-	 * for removal by garbage collector
-	 */
-	private File getTempDir() throws Exception {
-		if (mTempDir == null) {
-			mTempDir = TempDir.newTempOdfDirectory("ODF", mTempDirParent);
-			mFinalize = new OdfFinalizablePackage(mTempDir);
-		}
-		return mTempDir;
 	}
 
 	/**
@@ -2080,28 +1957,6 @@ public class OdfPackage implements Closeable {
 			isExternalReference = true;
 		}
 		return isExternalReference;
-	}
-
-	/**
-	 * This class solely exists to clean up after a package object has been
-	 * removed by garbage collector. Finalizable classes are said to have slow
-	 * garbage collection, so we don't make the whole OdfPackage finalizable.
-	 */
-	private static class OdfFinalizablePackage {
-
-		File mTempDirForDeletion;
-
-		OdfFinalizablePackage(File tempDir) {
-			mTempDirForDeletion = tempDir;
-		}
-
-		@Override
-		protected void finalize() throws Throwable {
-			super.finalize();
-			if (mTempDirForDeletion != null) {
-				TempDir.deleteTempOdfDirectory(mTempDirForDeletion);
-			}
-		}
 	}
 
 	/**

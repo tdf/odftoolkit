@@ -69,6 +69,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextSoftPageBreakElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTableIndexElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTableOfContentElement;
 import org.odftoolkit.odfdom.dom.element.text.TextUserIndexElement;
+import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:covered-table-cell}.
@@ -94,6 +95,32 @@ public class TableCoveredTableCellElement extends TableTableCellElementBase {
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
+	}
+
+	/**
+	 * Receives the value of the ODFDOM attribute representation <code>OfficeValueTypeAttribute</code> , See {@odf.attribute office:value-type}
+	 *
+	 * Attribute is mandatory.
+	 *
+	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 */
+	public String getOfficeValueTypeAttribute() {
+		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "value-type");
+		if (attr != null) {
+			return String.valueOf(attr.getValue());
+		}
+		return null;
+	}
+
+	/**
+	 * Sets the value of ODFDOM attribute representation <code>OfficeValueTypeAttribute</code> , See {@odf.attribute office:value-type}
+	 *
+	 * @param officeValueTypeValue   The type is <code>String</code>
+	 */
+	public void setOfficeValueTypeAttribute(String officeValueTypeValue) {
+		OfficeValueTypeAttribute attr = new OfficeValueTypeAttribute((OdfFileDom) this.ownerDocument);
+		setOdfAttribute(attr);
+		attr.setValue(officeValueTypeValue);
 	}
 
 	/**

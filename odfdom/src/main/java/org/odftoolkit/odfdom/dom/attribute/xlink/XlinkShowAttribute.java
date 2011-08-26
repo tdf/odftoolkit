@@ -52,9 +52,9 @@ import org.odftoolkit.odfdom.dom.element.text.TextSectionSourceElement;
 public class XlinkShowAttribute extends OdfAttribute {
 
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.XLINK, "show");
-	public static final String DEFAULT_VALUE_REPLACE = Value.REPLACE.toString();
-	public static final String DEFAULT_VALUE_NONE = Value.NONE.toString();
 	public static final String DEFAULT_VALUE_EMBED = Value.EMBED.toString();
+	public static final String DEFAULT_VALUE_NONE = Value.NONE.toString();
+	public static final String DEFAULT_VALUE_REPLACE = Value.REPLACE.toString();
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute xlink:show}.

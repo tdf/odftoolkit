@@ -676,7 +676,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>DcDateElement</code> , See {@odf.element dc:date}.
 	 * 
-	 * @param dcdate	the date and time need to set. NULL will remove the element from the meta.xml.
+	 * @param date	the date and time need to set. NULL will remove the element from the meta.xml.
 	 */
 	public void setDate(Calendar date) {
 		DcDateElement dcDateEle = OdfElement.findFirstChildNode(
