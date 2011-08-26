@@ -20,9 +20,9 @@ import java.util.Map;
 import java.util.HashMap;
 ##
 #foreach ($styleelement in ${model.getElements().withoutMultiples()})
-	#if ( $styleelement.getNamespace() == "style" && ${styleelement.getLocalName().endsWith("properties")} )
+#if ( $styleelement.getNamespace() == "style" && ${styleelement.getLocalName().endsWith("properties")} )
 import org.odftoolkit.odfdom.dom.element.style.${model.camelCase($styleelement)}Element;
-	#end
+#end
 #end
 
 public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
@@ -82,13 +82,13 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 #foreach ($family in ${odfmodel.getStyleFamilies()})
     public final static OdfStyleFamily ${model.camelCase($model.extractLocalname($family))} = new OdfStyleFamily("${model.extractLocalname($family)}",
             new OdfStyleProperty[]{
-	#foreach ($styleelement in ${model.getElements().withoutMultiples()})
-		#if ( $styleelement.getNamespace() == "style" && ${styleelement.getLocalName().endsWith("properties")} )
-			#foreach ($property in ${styleelement.withMultiples().getAttributes()})
+#foreach ($styleelement in ${model.getElements().withoutMultiples()})
+#if ( $styleelement.getNamespace() == "style" && ${styleelement.getLocalName().endsWith("properties")} )
+#foreach ($property in ${styleelement.withMultiples().getAttributes()})
 	${model.camelCase($styleelement)}Element.${model.camelCase($property)},
-			#end
-		#end
-	#end
+#end
+#end
+#end
     });
 
 #end

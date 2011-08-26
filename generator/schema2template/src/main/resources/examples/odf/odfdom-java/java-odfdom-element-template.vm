@@ -14,41 +14,62 @@
 ##
 ## Determine whether element is stylable. Set base class OdfElement, OdfStylableElement, or...
 #if ($odfmodel.isStylable($element))
-    #set ($stylable = true)
-    #set ($baseclassname = "OdfStylableElement")
-    #set ($firstfamily = ${model.camelCase($model.extractLocalname($odfmodel.getStyleFamilies($element).get(0)))})
-    #else
-        #set ($stylable = false)
-        #set ($baseclassname = "OdfElement")
+#set ($stylable = true)
+#set ($baseclassname = "OdfStylableElement")
+#set ($baseHasMandatoryAttr = false)
+#set ($firstfamily = ${model.camelCase($model.extractLocalname($odfmodel.getStyleFamilies($element).get(0)))})
+#else
+#set ($stylable = false)
+#set ($baseclassname = "OdfElement")
+#set ($baseHasMandatoryAttr = false)
 #end
 ##
 ## ...or configured base class
 #if (${javamodel.getBaseclassOf($element)})
-    #set ($base = ${javamodel.getBaseclassOf($element)})
-    ## Configured manually generated base class?
-    #if ($base == "container")
-        #set ($_specialbase = true)
-        #set ($baseclassname = "OdfContainerElementBase")
-        #set ($baseimport = "org.odftoolkit.odfdom.$baseclassname")
-    #end
-    #if ($base == "style")
-        #set ($_specialbase = true)
-        #set ($baseclassname = "OdfStyleBase")
-        #set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseclassname")
-    #end
-    #if ($base == "styleproperties")
-        #set ($_specialbase = true)
-        #set ($baseclassname = "OdfStylePropertiesBase")
-        #set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseclassname")
-    #end
-    ## Configured automatic generated base class. If so, remove all attributes defined in base class
-    #if (!$_specialbase)
-        #set ($baseclassname = "${model.camelCase($base)}ElementBase" )
-        #if ($base.getNamespace() != $NS)
-            #set ($baseimport = "org.odftoolkit.odfdom.dom.element.${base.getNamespace()}.$baseclassname")
-        #end
-        #set ($attributes = $attributes.without($base.getBaseAttributes())) 
-    #end
+#set ($base = ${javamodel.getBaseclassOf($element)})
+## Configured manually generated base class?
+#if ($base == "container")
+#set ($_specialbase = true)
+#set ($baseclassname = "OdfContainerElementBase")
+#set ($baseimport = "org.odftoolkit.odfdom.$baseclassname")
+#set ($baseHasMandatoryAttr = false)
+#end
+#if ($base == "style")
+#set ($_specialbase = true)
+#set ($baseclassname = "OdfStyleBase")
+#set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseclassname")
+#set ($baseHasMandatoryAttr = false)
+#end
+#if ($base == "styleproperties")
+#set ($_specialbase = true)
+#set ($baseclassname = "OdfStylePropertiesBase")
+#set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseclassname")
+#set ($baseHasMandatoryAttr = false)
+#end
+## Configured automatic generated base class. If so, remove all attributes defined in base class
+#if (!$_specialbase)
+#set ($baseclassname = "${model.camelCase($base)}ElementBase" )
+#if ($base.getNamespace() != $NS)
+#set ($baseimport = "org.odftoolkit.odfdom.dom.element.${base.getNamespace()}.$baseclassname")
+#end
+#set ($attributes = $attributes.without($base.getBaseAttributes()))
+#set ($baseElement = ${model.getElement($base.getQName())})
+#set ($bAttributes = ${baseElement.getAttributes().withoutMultiples()})
+#foreach ($bAttribute in $bAttributes)
+#if (${baseElement.isMandatory($bAttribute)})
+#set ($baseHasMandatoryAttr = true)
+#end
+#end
+#end
+#end
+##
+## Test if this element has mandatory (non optional) attributes
+#set ($hasMandatoryAttr = false)
+#foreach ($attribute in $attributes)
+#if (${element.isMandatory($attribute)})
+#set ($hasMandatoryAttr = true)
+#set ($mandatoryAttr = $attribute)
+#end
 #end
 ##
 ## Begin Code
@@ -68,7 +89,7 @@ package org.odftoolkit.odfdom.dom.element.${NS};
 #if ($stylable)
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-	#else
+#else
 import org.odftoolkit.odfdom.pkg.OdfElement;
 #end
 #if ($base == "styleproperties")
@@ -80,25 +101,25 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 #foreach ($child in $children)
-	#if ($child == "*")
-		#set ($anychild = true)
-		#else
-			#set($childNS = ${child.getNamespace()})
-			#set($childClassname = "${model.camelCase($child)}Element")
-			#if ($childNS != $NS)
+#if ($child == "*")
+#set ($anychild = true)
+#else
+#set ($childNS = ${child.getNamespace()})
+#set ($childClassname = "${model.camelCase($child)}Element")
+#if ($childNS != $NS)
 import org.odftoolkit.odfdom.dom.element.${childNS}.$childClassname;
-			#end
-	#end
+#end
+#end
 #end
 ##
 #foreach ($child in $attributes)
-	#if ($child == "*")
-		#set ($anyattribute = true)
-		#else
-			#set($childNS = ${child.getNamespace()})
-			#set($childClassname = "${model.camelCase($child)}Attribute")
+#if ($child == "*")
+#set ($anyattribute = true)
+#else
+#set ($childNS = ${child.getNamespace()})
+#set ($childClassname = "${model.camelCase($child)}Attribute")
 import org.odftoolkit.odfdom.dom.attribute.${childNS}.$childClassname;
-	#end
+#end
 #end
 ##
 ## If there is a base class which is not in the current package
@@ -121,10 +142,86 @@ import ${baseimport};
  * This class can have any org.w3c.dom.Attribute attribute.
 #end
  */
-public abstract class $classname extends $baseclassname {
+public class $classname extends $baseclassname {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.${NS.toUpperCase()}, "${element.getLocalName()}");
-	
+## Define default value for the attribute which has several default values dependent on the owner element.
+#foreach ($attribute in $attributes)
+#set ($defaultValue="")
+#foreach ($parent in ${attribute.getParents().withoutMultiples()} )
+#if (${odfmodel.getDefaultAttributeValue($attribute, $parent)} )
+#set ($defaultValue="${model.escapeLiteral($odfmodel.getDefaultAttributeValue($attribute, $parent))}")
+#end
+#end
+#if (${defaultValue}!="")
+#set ($values = ${attribute.getValues().withoutMultiples()})
+#set ($enum = false)
+#if ($values.size() > 0)
+#set ($enum = true)
+#if(${values.size()}== 2)
+#if(${values.contains('true')}||${values.contains('false')})
+#set ($enum = false)
+#end
+#end
+#end
+#set ($defaultName = "DEFAULT_VALUE_${attribute.getNamespace().toUpperCase()}_${attribute.getLocalName().toUpperCase()}_ATTRIBUTE")
+#set ($enumName = "${model.camelCase($attribute)}Attribute")
+#if ($enum)
+	public static final String  $defaultName = ${enumName}.Value.${defaultValue.toUpperCase()}.toString();
+#else
+	public static final String  $defaultName = ${enumName}.DEFAULT_VALUE_${attribute.getNamespace().toUpperCase()}_${attribute.getLocalName().toUpperCase()};
+#end
+#end
+#end
+## Define enum value for the attribute which has several value sets dependent on the owner element.
+#foreach ($attribute in $attributes)
+#set ($values = ${attribute.getValues().withoutMultiples()})
+#set ($enum = false)
+#if ($values.size() > 0)
+#set ($enum = true)
+#if(${values.size()}== 2)
+#if(${values.contains('true')}||${values.contains('false')})
+#set ($enum = false)
+#end
+#end
+#end
+#if($enum)
+#set ($enumName = "${model.camelCase($attribute)}Attribute")
+	/**
+	 * The value set of {@odf.attribute ${attribute.getQName()}}.
+	 */
+	 public enum ${enumName}Value {
+#set ($separator="")
+		#foreach($value in $values)
+#if (${value.toString().length()} == 1)
+#set ($constant = $value)
+#else
+#set ($constant = $model.constantCase($value))
+#end
+${separator}${model.escapeKeyword($constant)}("${model.escapeLiteral($value)}")#set ($separator=", ")
+#end;              
+		private String mValue;
+	 	
+		${enumName}Value( String value ){
+			mValue = value;
+		}
+		
+		@Override
+		public String toString(){
+			return mValue;
+		}
+		
+		public static ${enumName}Value enumValueOf(String value){
+	        for(${enumName}Value aIter : values()){
+	            if(value.equals(aIter.toString())){
+	                return aIter;
+	            }
+	        }
+	        return null;
+	    }
+	}
+#end
+#end
 	/**
 	 * Create the instance of <code>$classname</code> 
 	 *
@@ -132,17 +229,17 @@ public abstract class $classname extends $baseclassname {
 	 */
 	public $classname( OdfFileDom ownerDoc )
 	{
-#if ($stylable)
-		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.${firstfamily}, OdfName.get( OdfNamespace.get(OdfNamespaceNames.${NS.toUpperCase()}), "style-name" ));
-		#else
+#if ($stylable && ($context!="draw:graphic" && $context!="presentation:presentation"))
+		super( ownerDoc, ELEMENT_NAME, OdfStyleFamily.${firstfamily}, OdfName.newName(OdfDocumentNamespace.${NS.toUpperCase()}, "style-name" ));
+#else
 		super( ownerDoc, ELEMENT_NAME );
 #end
 	}
-
+	
 	/**
 	 * Get the element name 
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element ${odfName}}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element ${context}}.
 	 */
 	public OdfName getOdfName()
 	{
@@ -153,63 +250,85 @@ public abstract class $classname extends $baseclassname {
 ##  Only for base = styleproperties
 ## ---------------------------------------------------
 #if ($base == "styleproperties" )
-	#foreach ($attribute in $attributes)
-		#if ($attribute != "*")
- public final static OdfStyleProperty ${model.camelCase($attribute)} = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.${model.camelCase($element.getLocalName())}, OdfName.get( OdfNamespace.get(OdfNamespaceNames.${model.firstWord($element).toUpperCase()}), "${attribute.getLocalName()}"));
+#foreach ($attribute in $attributes)
+#if ($attribute != "*")
+	public final static OdfStyleProperty ${model.camelCase($attribute)} = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.${model.camelCase($element.getLocalName())}, OdfName.newName(OdfDocumentNamespace.${model.firstWord($element).toUpperCase()}, "${attribute.getLocalName()}"));
 	
-		#end
-	#end
 #end
+#end
+#end
+##
+## ---------------------------------------------------
+##  Add init method if this element or the base 
+##  element has mandatory attributes
+##  TODO: NO caller use this method.
+## ---------------------------------------------------
 ##
 ## ---------------------------------------------------
 ##  Attribute getters and setters
 ## ---------------------------------------------------
-##
-#foreach ( $attr in $attributes )
-	#if ($attr != "*")
-		#set($attribute = ${attr.withMultiples()})
-		#set($aNS = ${attribute.getNamespace()} )
-		#set($aClassname = "${model.camelCase($attribute)}Attribute" )
-		#set($aParam = "${model.javaCase($attribute)}Value" )
+##		 
+#foreach ($attr in $attributes)
+#set ($valueObject = "String")
+#set ($simpleValue = "")
+#set ($dataTypes = ${attr.getDatatypes().withoutMultiples()})
+#set ($valueTypes = ${javamodel.getValuetypes($dataTypes)})
+#if (${valueTypes.size()} == 1 && ${valueTypes.get(0)} && ${valueTypes.get(0)} != "String" )
+#set ($valueObject = ${valueTypes.get(0)})
+#set ($simpleValue = ${javamodel.getPrimitiveType($valueObject)})
+#end
+#if ($attr != "*")
+#set ($attribute = ${attr.withMultiples()})
+#set ($aNS = ${attribute.getNamespace()} )
+#set ($aClassname = "${model.camelCase($attribute)}Attribute" )
+#set ($aParam = "${model.javaCase($attribute)}Value" )
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>$aClassname</code> , See {@odf.attribute ${attribute.getQName()}}
 	 *
-		#if ( ${element.isMandatory($attribute)} )
+#if ( ${element.isMandatory($attribute)} )
 	 * Attribute is mandatory.
 	 *
-		#end
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+#end
+	 * @return - the <code>$valueObject</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String get${aClassname}() {
-		$aClassname attr = ($aClassname) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.${aNS.toUpperCase()}), "${attribute.getLocalName()}" ) );
+	public $valueObject get${aClassname}() {
+		$aClassname attr = ($aClassname) getOdfAttribute(OdfNamespace.newNamespace(OdfDocumentNamespace.${aNS.toUpperCase()}), "${attribute.getLocalName()}");
 		if( attr != null ){
-			return attr.getValue();
+#if($simpleValue!="")
+			return ${valueObject}.valueOf(attr.${simpleValue}Value());
+#else
+			return ${valueObject}.valueOf(attr.getValue());
+#end
 		}
-		#if ( $odfmodel.getDefaultAttributeValue($attribute, $element) )
-		return "${model.escapeLiteral($odfmodel.getDefaultAttributeValue($attribute, $element))}";
-			#else
+#if ($odfmodel.getDefaultAttributeValue($attribute, $element))
+#set ($defaultValue = ${model.escapeLiteral($odfmodel.getDefaultAttributeValue($attribute, $element))})
+#if($valueObject == "String")
+		return $defaultValue;
+#else
+		return $valueObject.valueOf($defaultValue);
+#end
+#else
 		return null;
-		#end
+#end
 	}
-
+	
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>$aClassname</code> , See {@odf.attribute ${attribute.getQName()}}
 	 *
-		#if ( ${element.isMandatory($attribute)} )
-	 * Attribute is mandatory.
-	 *
-		#end
-	 * @param $aParam   The type is <code>String</code>
+	 * @param $aParam   The type is <code>$valueObject</code>
 	 */
-	public void set${aClassname}( String $aParam )
+	public void set${aClassname}($valueObject $aParam)
 	{
 		$aClassname attr =  new ${aClassname}( (OdfFileDom)this.ownerDocument );
 		setOdfAttribute( attr );
-		attr.setValue( $aParam );
+#if($valueObject == "String")
+		attr.set${valueObject}Value( $aParam );
+#else
+		attr.set${valueObject}Value( $aParam.${simpleValue}Value() );
+#end
 	}
-
-	#end
+#end
 #end
 
 ##
@@ -218,23 +337,23 @@ public abstract class $classname extends $baseclassname {
 ## ---------------------------------------------------
 ##
 #foreach( $ch in $children )
-	#if ($ch != "*")
-		#set($child = ${ch.withMultiples()})
-		#set($cClassname = "${model.camelCase($child)}Element" )
-		#set($cVar = ${model.javaCase($child)} )
+#if ($ch != "*")
+#set ($child = ${ch.withMultiples()})
+#set ($cClassname = "${model.camelCase($child)}Element" )
+#set ($cVar = ${model.javaCase($child)} )
 	/**
 	 * Create child element {@odf.element ${child}}.
 	 *
-	 ## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
-	 ## but we can compare by name
-		#if ( !$oldelement || !${oldelement.getChildElements().containsName($child)} )
+## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
+## but we can compare by name
+#if ( !$oldelement || !${oldelement.getChildElements().containsName($child)} )
 	 * Child element is new in Odf 1.2
 	 *
-		#end
-		#if ( ${element.isMandatory($child)} )
+#end
+#if ( ${element.isMandatory($child)} )
 	 * Child element is mandatory.
 	 *
-		#end
+#end
 	 * @return the element {@odf.element ${child}}
 	 */
 	public $cClassname new${cClassname}() {
@@ -243,14 +362,13 @@ public abstract class $classname extends $baseclassname {
 		return $cVar;
 	}
 	
-	#end
 #end
-
-##
+#end
 ##
 ## -----------------------------------------------------
 ##  New: newTextNode
 ## -----------------------------------------------------
+##
 #if ( $element.canHaveText() )
 	/**
 	 * Add text content. Only elements which are allowed to have text content offer this method.
