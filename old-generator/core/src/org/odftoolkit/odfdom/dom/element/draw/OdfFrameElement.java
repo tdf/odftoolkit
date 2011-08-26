@@ -436,11 +436,11 @@ public abstract class OdfFrameElement extends OdfShapeElementBase
     /**
     * Create child element "draw:contour-polygon".
     */
-    public OdfContourPolygonElement createContourPolygonElement(Boolean   _aRecreateOnEdit, Integer   _aViewbox, String   _aPoints)
+    public OdfContourPolygonElement createContourPolygonElement(Boolean   _aRecreateOnEdit, Integer   _aViewBox, String   _aPoints)
     {
         OdfContourPolygonElement  _nContourPolygon = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfContourPolygonElement.class);
         _nContourPolygon.setRecreateOnEdit( _aRecreateOnEdit);
-        _nContourPolygon.setViewbox( _aViewbox);
+        _nContourPolygon.setViewBox( _aViewBox);
         _nContourPolygon.setPoints( _aPoints);
         this.appendChild( _nContourPolygon);
         return  _nContourPolygon;      
@@ -449,11 +449,11 @@ public abstract class OdfFrameElement extends OdfShapeElementBase
     /**
     * Create child element "draw:contour-path".
     */
-    public OdfContourPathElement createContourPathElement(Boolean   _aRecreateOnEdit, Integer   _aViewbox, String   _aD)
+    public OdfContourPathElement createContourPathElement(Boolean   _aRecreateOnEdit, Integer   _aViewBox, String   _aD)
     {
         OdfContourPathElement  _nContourPath = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfContourPathElement.class);
         _nContourPath.setRecreateOnEdit( _aRecreateOnEdit);
-        _nContourPath.setViewbox( _aViewbox);
+        _nContourPath.setViewBox( _aViewBox);
         _nContourPath.setD( _aD);
         this.appendChild( _nContourPath);
         return  _nContourPath;      

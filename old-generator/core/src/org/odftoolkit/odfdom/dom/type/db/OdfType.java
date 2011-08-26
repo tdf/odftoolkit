@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.db;
 
 public enum OdfType
 {
-              PRIMARY( "primary" ), UNIQUE( "unique" ), FOREIGN( "foreign" );
+              FOREIGN( "foreign" ), PRIMARY( "primary" ), UNIQUE( "unique" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

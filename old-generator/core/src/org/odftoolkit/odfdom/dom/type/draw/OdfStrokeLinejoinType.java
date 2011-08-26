@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfStrokeLinejoinType
 {
-              MIDDLE( "middle" ), NONE( "none" ), ROUND( "round" ), MITER( "miter" ), BEVEL( "bevel" );
+              MIDDLE( "middle" ), BEVEL( "bevel" ), ROUND( "round" ), MITER( "miter" ), NONE( "none" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfStrokeLinejoinType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

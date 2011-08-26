@@ -55,10 +55,10 @@ public abstract class OdfContourPolygonElement extends OdfElement
     /**
      * Initialize mandatory attributes.
      */
-    public void init(Boolean _aRecreateOnEdit, Integer _aViewbox, String _aPoints)
+    public void init(Boolean _aRecreateOnEdit, Integer _aViewBox, String _aPoints)
     {
         setRecreateOnEdit( _aRecreateOnEdit );
-        setViewbox( _aViewbox );
+        setViewBox( _aViewBox );
         setPoints( _aPoints );
     }
 
@@ -115,7 +115,7 @@ public abstract class OdfContourPolygonElement extends OdfElement
     /**
      * Get value of attribute "svg:viewBox".
      */
-    public Integer getViewbox()
+    public Integer getViewBox()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "viewBox" ) );
         return Integer.valueOf( aStringVal);
@@ -124,9 +124,9 @@ public abstract class OdfContourPolygonElement extends OdfElement
     /**
      * Set value of attribute "svg:viewBox".
      */
-    public void setViewbox( Integer _aViewbox )
+    public void setViewBox( Integer _aViewBox )
     {                    
-        String aStringVal = Integer.toString( _aViewbox );
+        String aStringVal = Integer.toString( _aViewBox );
         setOdfAttribute( OdfName.get( OdfNamespace.SVG, "viewBox" ), aStringVal );
     }
 

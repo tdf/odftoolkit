@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfDataType
 {
-              TEXT( "text" ), NUMBER( "number" );
+              NUMBER( "number" ), TEXT( "text" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfDataType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

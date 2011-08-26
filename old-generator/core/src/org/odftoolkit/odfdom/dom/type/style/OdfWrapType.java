@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfWrapType
 {
-              DYNAMIC( "dynamic" ), PARALLEL( "parallel" ), RIGHT( "right" ), RUN_THROUGH( "run-through" ), BIGGEST( "biggest" ), NONE( "none" ), LEFT( "left" );
+              RIGHT( "right" ), RUN_THROUGH( "run-through" ), BIGGEST( "biggest" ), LEFT( "left" ), NONE( "none" ), PARALLEL( "parallel" ), DYNAMIC( "dynamic" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfWrapType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

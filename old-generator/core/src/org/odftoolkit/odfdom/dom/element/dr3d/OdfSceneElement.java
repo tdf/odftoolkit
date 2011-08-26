@@ -619,11 +619,11 @@ public abstract class OdfSceneElement extends OdfStyleablePresentationElement
     /**
     * Create child element "dr3d:extrude".
     */
-    public OdfExtrudeElement createExtrudeElement(String   _aD, Integer   _aViewbox)
+    public OdfExtrudeElement createExtrudeElement(String   _aD, Integer   _aViewBox)
     {
         OdfExtrudeElement  _nExtrude = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfExtrudeElement.class);
         _nExtrude.setD( _aD);
-        _nExtrude.setViewbox( _aViewbox);
+        _nExtrude.setViewBox( _aViewBox);
         this.appendChild( _nExtrude);
         return  _nExtrude;      
     }
@@ -641,10 +641,10 @@ public abstract class OdfSceneElement extends OdfStyleablePresentationElement
     /**
     * Create child element "dr3d:rotate".
     */
-    public OdfRotateElement createRotateElement(Integer   _aViewbox, String   _aD)
+    public OdfRotateElement createRotateElement(Integer   _aViewBox, String   _aD)
     {
         OdfRotateElement  _nRotate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRotateElement.class);
-        _nRotate.setViewbox( _aViewbox);
+        _nRotate.setViewBox( _aViewBox);
         _nRotate.setD( _aD);
         this.appendChild( _nRotate);
         return  _nRotate;      

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.fo;
 
 public enum OdfBreakAfterType
 {
-              PAGE( "page" ), COLUMN( "column" ), AUTO( "auto" );
+              AUTO( "auto" ), COLUMN( "column" ), PAGE( "page" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfBreakAfterType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

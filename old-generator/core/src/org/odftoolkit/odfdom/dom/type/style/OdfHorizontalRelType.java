@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfHorizontalRelType
 {
-              FRAME_START_MARGIN( "frame-start-margin" ), FRAME_END_MARGIN( "frame-end-margin" ), PARAGRAPH_CONTENT( "paragraph-content" ), PAGE_START_MARGIN( "page-start-margin" ), PARAGRAPH( "paragraph" ), FRAME( "frame" ), CHAR( "char" ), PARAGRAPH_END_MARGIN( "paragraph-end-margin" ), PARAGRAPH_START_MARGIN( "paragraph-start-margin" ), PAGE_END_MARGIN( "page-end-margin" ), PAGE( "page" ), PAGE_CONTENT( "page-content" ), FRAME_CONTENT( "frame-content" );
+              PARAGRAPH_END_MARGIN( "paragraph-end-margin" ), PARAGRAPH_START_MARGIN( "paragraph-start-margin" ), PAGE( "page" ), PAGE_END_MARGIN( "page-end-margin" ), FRAME( "frame" ), FRAME_END_MARGIN( "frame-end-margin" ), PAGE_CONTENT( "page-content" ), PAGE_START_MARGIN( "page-start-margin" ), FRAME_CONTENT( "frame-content" ), FRAME_START_MARGIN( "frame-start-margin" ), PARAGRAPH_CONTENT( "paragraph-content" ), CHAR( "char" ), PARAGRAPH( "paragraph" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfHorizontalRelType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

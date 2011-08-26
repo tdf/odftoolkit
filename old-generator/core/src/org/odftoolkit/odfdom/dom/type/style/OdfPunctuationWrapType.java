@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfPunctuationWrapType
 {
-              HANGING( "hanging" ), SIMPLE( "simple" );
+              SIMPLE( "simple" ), HANGING( "hanging" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfPunctuationWrapType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

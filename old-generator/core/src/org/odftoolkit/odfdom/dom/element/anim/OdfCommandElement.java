@@ -259,7 +259,7 @@ public abstract class OdfCommandElement extends OdfElement
     /**
      * Get value of attribute "smil:targetElement".
      */
-    public String getTargetelement()
+    public String getTargetElement()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "targetElement" ) );
         return OdfId.valueOf( aStringVal);
@@ -268,9 +268,9 @@ public abstract class OdfCommandElement extends OdfElement
     /**
      * Set value of attribute "smil:targetElement".
      */
-    public void setTargetelement( String _aTargetelement )
+    public void setTargetElement( String _aTargetElement )
     {                    
-        String aStringVal = OdfId.toString( _aTargetelement );
+        String aStringVal = OdfId.toString( _aTargetElement );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "targetElement" ), aStringVal );
     }
 

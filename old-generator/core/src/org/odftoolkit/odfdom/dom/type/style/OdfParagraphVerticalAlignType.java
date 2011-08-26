@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfParagraphVerticalAlignType
 {
-              MIDDLE( "middle" ), TOP( "top" ), BASELINE( "baseline" ), BOTTOM( "bottom" ), AUTO( "auto" );
+              TOP( "top" ), MIDDLE( "middle" ), BASELINE( "baseline" ), AUTO( "auto" ), BOTTOM( "bottom" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfParagraphVerticalAlignType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

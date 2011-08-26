@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfTickMarkPositionType
 {
-              AT_LABELS( "at-labels" ), AT_AXIS( "at-axis" ), AT_LABELS_AND_AXIS( "at-labels-and-axis" );
+              AT_AXIS( "at-axis" ), AT_LABELS_AND_AXIS( "at-labels-and-axis" ), AT_LABELS( "at-labels" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTickMarkPositionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

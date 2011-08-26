@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfFontReliefType
 {
-              ENGRAVED( "engraved" ), NONE( "none" ), EMBOSSED( "embossed" );
+              NONE( "none" ), ENGRAVED( "engraved" ), EMBOSSED( "embossed" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfFontReliefType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

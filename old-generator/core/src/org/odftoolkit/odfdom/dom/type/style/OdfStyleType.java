@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfStyleType
 {
-              DOTTED( "dotted" ), NONE( "none" ), SOLID( "solid" ), DASHED( "dashed" ), DOT_DASHED( "dot-dashed" );
+              DOT_DASHED( "dot-dashed" ), NONE( "none" ), DOTTED( "dotted" ), DASHED( "dashed" ), SOLID( "solid" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfStyleType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

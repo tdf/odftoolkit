@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.form;
 
 public enum OdfNavigationModeType
 {
-              CURRENT( "current" ), NONE( "none" ), PARENT( "parent" );
+              PARENT( "parent" ), NONE( "none" ), CURRENT( "current" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfNavigationModeType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

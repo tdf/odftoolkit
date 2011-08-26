@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfRunThroughType
 {
-              BACKGROUND( "background" ), FOREGROUND( "foreground" );
+              FOREGROUND( "foreground" ), BACKGROUND( "background" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfRunThroughType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

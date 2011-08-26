@@ -1173,7 +1173,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
         OdfDrawingPagePropertiesElement.TransitionType,
         OdfDrawingPagePropertiesElement.Visibility,
         OdfDrawingPagePropertiesElement.Direction,
-        OdfDrawingPagePropertiesElement.Fadecolor,
+        OdfDrawingPagePropertiesElement.FadeColor,
         OdfDrawingPagePropertiesElement.Subtype
     ,
              });

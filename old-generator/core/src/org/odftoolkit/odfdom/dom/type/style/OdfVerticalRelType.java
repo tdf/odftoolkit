@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfVerticalRelType
 {
-              FRAME( "frame" ), CHAR( "char" ), TEXT( "text" ), BASELINE( "baseline" ), PAGE_CONTENT( "page-content" ), PAGE( "page" ), LINE( "line" ), PARAGRAPH_CONTENT( "paragraph-content" ), FRAME_CONTENT( "frame-content" ), PARAGRAPH( "paragraph" );
+              BASELINE( "baseline" ), LINE( "line" ), PAGE_CONTENT( "page-content" ), PARAGRAPH_CONTENT( "paragraph-content" ), FRAME_CONTENT( "frame-content" ), CHAR( "char" ), PAGE( "page" ), PARAGRAPH( "paragraph" ), FRAME( "frame" ), TEXT( "text" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfVerticalRelType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfPageUsageType
 {
-              RIGHT( "right" ), LEFT( "left" ), ALL( "all" ), MIRRORED( "mirrored" );
+              ALL( "all" ), RIGHT( "right" ), LEFT( "left" ), MIRRORED( "mirrored" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfPageUsageType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

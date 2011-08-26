@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfFileNameDisplayType
 {
-              FULL( "full" ), NAME_AND_EXTENSION( "name-and-extension" ), PATH( "path" ), NAME( "name" );
+              NAME_AND_EXTENSION( "name-and-extension" ), PATH( "path" ), NAME( "name" ), FULL( "full" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfFileNameDisplayType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

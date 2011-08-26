@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfTextCombineType
 {
-              LINES( "lines" ), LETTERS( "letters" ), NONE( "none" );
+              LETTERS( "letters" ), LINES( "lines" ), NONE( "none" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTextCombineType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

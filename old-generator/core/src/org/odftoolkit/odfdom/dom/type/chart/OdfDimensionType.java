@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfDimensionType
 {
-              Z( "z" ), Y( "y" ), X( "x" );
+              X( "x" ), Y( "y" ), Z( "z" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfDimensionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

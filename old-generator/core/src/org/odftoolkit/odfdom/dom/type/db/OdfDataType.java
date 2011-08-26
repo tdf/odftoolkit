@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.db;
 
 public enum OdfDataType
 {
-              SQLNULL( "sqlnull" ), BIGINT( "bigint" ), NUMERIC( "numeric" ), TIME( "time" ), CLOB( "clob" ), STRUCT( "struct" ), DISTINCT( "distinct" ), DATE( "date" ), BOOLEAN( "boolean" ), DECIMAL( "decimal" ), DOUBLE( "double" ), OBJECT( "object" ), CHAR( "char" ), LONGVARBINARY( "longvarbinary" ), FLOAT( "float" ), REAL( "real" ), BIT( "bit" ), TIMESTMP( "timestmp" ), VARBINARY( "varbinary" ), BLOB( "blob" ), OTHER( "other" ), VARCHAR( "varchar" ), INTEGER( "integer" ), ARRAY( "array" ), REF( "ref" ), SMALLINT( "smallint" ), LONGVARCHAR( "longvarchar" ), TINYINT( "tinyint" ), BINARY( "binary" );
+              ARRAY( "array" ), SMALLINT( "smallint" ), VARBINARY( "varbinary" ), LONGVARBINARY( "longvarbinary" ), REF( "ref" ), BIT( "bit" ), BLOB( "blob" ), DECIMAL( "decimal" ), DOUBLE( "double" ), TIMESTMP( "timestmp" ), INTEGER( "integer" ), BIGINT( "bigint" ), VARCHAR( "varchar" ), BOOLEAN( "boolean" ), STRUCT( "struct" ), TIME( "time" ), REAL( "real" ), DISTINCT( "distinct" ), FLOAT( "float" ), DATE( "date" ), TINYINT( "tinyint" ), OBJECT( "object" ), CLOB( "clob" ), LONGVARCHAR( "longvarchar" ), CHAR( "char" ), NUMERIC( "numeric" ), OTHER( "other" ), BINARY( "binary" ), SQLNULL( "sqlnull" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfDataType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

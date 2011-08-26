@@ -35,13 +35,13 @@ import org.odftoolkit.odfdom.dom.type.OdfId;
 import org.odftoolkit.odfdom.dom.type.smil.OdfAccumulateType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfAdditiveType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfDirectionType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfFadecolorType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfFadeColorType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfModeType;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.smil.OdfRestartType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfRestartdefaultType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfRestartDefaultType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfFillDefaultType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
 ;
@@ -49,11 +49,11 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 /**
  * ODF DOM Element implementation for element "<anim:transitionFilter>".
  */
-public abstract class OdfTransitionfilterElement extends OdfElement
+public abstract class OdfTransitionFilterElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "transitionFilter" );
 
-    public OdfTransitionfilterElement( OdfFileDom _aOwnerDoc )
+    public OdfTransitionFilterElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
@@ -74,7 +74,7 @@ public abstract class OdfTransitionfilterElement extends OdfElement
     /**
      * Get value of attribute "smil:targetElement".
      */
-    public String getTargetelement()
+    public String getTargetElement()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "targetElement" ) );
         return OdfId.valueOf( aStringVal);
@@ -83,9 +83,9 @@ public abstract class OdfTransitionfilterElement extends OdfElement
     /**
      * Set value of attribute "smil:targetElement".
      */
-    public void setTargetelement( String _aTargetelement )
+    public void setTargetElement( String _aTargetElement )
     {                    
-        String aStringVal = OdfId.toString( _aTargetelement );
+        String aStringVal = OdfId.toString( _aTargetElement );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "targetElement" ), aStringVal );
     }
 
@@ -279,18 +279,18 @@ public abstract class OdfTransitionfilterElement extends OdfElement
     /**
      * Get value of attribute "smil:fadeColor".
      */
-    public OdfFadecolorType getFadecolor()
+    public OdfFadeColorType getFadeColor()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "fadeColor" ) );
-        return OdfFadecolorType.enumValueOf( aStringVal);
+        return OdfFadeColorType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "smil:fadeColor".
      */
-    public void setFadecolor( OdfFadecolorType _aFadecolor )
+    public void setFadeColor( OdfFadeColorType _aFadeColor )
     {                    
-        String aStringVal = OdfFadecolorType.toString( _aFadecolor );
+        String aStringVal = OdfFadeColorType.toString( _aFadeColor );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "fadeColor" ), aStringVal );
     }
 
@@ -368,7 +368,7 @@ public abstract class OdfTransitionfilterElement extends OdfElement
     /**
      * Get value of attribute "smil:repeatDur".
      */
-    public String getRepeatdur()
+    public String getRepeatDur()
     {
         return getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatDur" ) );
     }
@@ -376,15 +376,15 @@ public abstract class OdfTransitionfilterElement extends OdfElement
     /**
      * Set value of attribute "smil:repeatDur".
      */
-    public void setRepeatdur( String _aRepeatdur )
+    public void setRepeatDur( String _aRepeatDur )
     {
-        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatDur" ), _aRepeatdur );
+        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatDur" ), _aRepeatDur );
     }
 
     /**
      * Get value of attribute "smil:repeatCount".
      */
-    public Integer getRepeatcount()
+    public Integer getRepeatCount()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatCount" ) );
         return OdfNonNegativeInteger.valueOf( aStringVal);
@@ -393,9 +393,9 @@ public abstract class OdfTransitionfilterElement extends OdfElement
     /**
      * Set value of attribute "smil:repeatCount".
      */
-    public void setRepeatcount( Integer _aRepeatcount )
+    public void setRepeatCount( Integer _aRepeatCount )
     {                    
-        String aStringVal = OdfNonNegativeInteger.toString( _aRepeatcount );
+        String aStringVal = OdfNonNegativeInteger.toString( _aRepeatCount );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatCount" ), aStringVal );
     }
 
@@ -425,7 +425,7 @@ public abstract class OdfTransitionfilterElement extends OdfElement
     /**
      * Get value of attribute "smil:restartDefault".
      */
-    public OdfRestartdefaultType getRestartdefault()
+    public OdfRestartDefaultType getRestartDefault()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restartDefault" ) );
         if( aStringVal.length()==0 )
@@ -433,15 +433,15 @@ public abstract class OdfTransitionfilterElement extends OdfElement
             aStringVal = "inherit";
         }
 
-        return OdfRestartdefaultType.enumValueOf( aStringVal);
+        return OdfRestartDefaultType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "smil:restartDefault".
      */
-    public void setRestartdefault( OdfRestartdefaultType _aRestartdefault )
+    public void setRestartDefault( OdfRestartDefaultType _aRestartDefault )
     {                    
-        String aStringVal = OdfRestartdefaultType.toString( _aRestartdefault );
+        String aStringVal = OdfRestartDefaultType.toString( _aRestartDefault );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restartDefault" ), aStringVal );
     }
 
@@ -466,18 +466,18 @@ public abstract class OdfTransitionfilterElement extends OdfElement
     /**
      * Get value of attribute "smil:fillDefault".
      */
-    public OdfFilldefaultType getFilldefault()
+    public OdfFillDefaultType getFillDefault()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "fillDefault" ) );
-        return OdfFilldefaultType.enumValueOf( aStringVal);
+        return OdfFillDefaultType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "smil:fillDefault".
      */
-    public void setFilldefault( OdfFilldefaultType _aFilldefault )
+    public void setFillDefault( OdfFillDefaultType _aFillDefault )
     {                    
-        String aStringVal = OdfFilldefaultType.toString( _aFilldefault );
+        String aStringVal = OdfFillDefaultType.toString( _aFillDefault );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "fillDefault" ), aStringVal );
     }
 
@@ -530,7 +530,7 @@ public abstract class OdfTransitionfilterElement extends OdfElement
     /**
      * Get value of attribute "smil:autoReverse".
      */
-    public Boolean getAutoreverse()
+    public Boolean getAutoReverse()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "autoReverse" ) );
         return OdfBoolean.valueOf( aStringVal);
@@ -539,9 +539,9 @@ public abstract class OdfTransitionfilterElement extends OdfElement
     /**
      * Set value of attribute "smil:autoReverse".
      */
-    public void setAutoreverse( Boolean _aAutoreverse )
+    public void setAutoReverse( Boolean _aAutoReverse )
     {                    
-        String aStringVal = OdfBoolean.toString( _aAutoreverse );
+        String aStringVal = OdfBoolean.toString( _aAutoReverse );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "autoReverse" ), aStringVal );
     }
 

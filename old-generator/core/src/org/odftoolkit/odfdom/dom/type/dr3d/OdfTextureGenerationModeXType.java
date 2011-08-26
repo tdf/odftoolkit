@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.dr3d;
 
 public enum OdfTextureGenerationModeXType
 {
-              PARALLEL( "parallel" ), OBJECT( "object" ), SPHERE( "sphere" );
+              OBJECT( "object" ), SPHERE( "sphere" ), PARALLEL( "parallel" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTextureGenerationModeXType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

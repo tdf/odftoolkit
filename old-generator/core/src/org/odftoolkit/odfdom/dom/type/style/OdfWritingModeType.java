@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfWritingModeType
 {
-              TB( "tb" ), RL_TB( "rl-tb" ), LR_TB( "lr-tb" ), TB_LR( "tb-lr" ), PAGE( "page" ), TB_RL( "tb-rl" ), RL( "rl" ), LR( "lr" );
+              TB_LR( "tb-lr" ), LR_TB( "lr-tb" ), TB_RL( "tb-rl" ), PAGE( "page" ), RL( "rl" ), LR( "lr" ), TB( "tb" ), RL_TB( "rl-tb" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfWritingModeType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

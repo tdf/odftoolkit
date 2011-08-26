@@ -38,9 +38,9 @@ import javax.xml.datatype.Duration;
 import org.odftoolkit.odfdom.dom.type.OdfDuration;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.smil.OdfRestartType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfRestartdefaultType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfRestartDefaultType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfFillDefaultType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.smil.OdfEndsyncType;
 
@@ -214,7 +214,7 @@ public abstract class OdfIterateElement extends OdfElement
     /**
      * Get value of attribute "smil:targetElement".
      */
-    public String getTargetelement()
+    public String getTargetElement()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "targetElement" ) );
         return OdfId.valueOf( aStringVal);
@@ -223,9 +223,9 @@ public abstract class OdfIterateElement extends OdfElement
     /**
      * Set value of attribute "smil:targetElement".
      */
-    public void setTargetelement( String _aTargetelement )
+    public void setTargetElement( String _aTargetElement )
     {                    
-        String aStringVal = OdfId.toString( _aTargetelement );
+        String aStringVal = OdfId.toString( _aTargetElement );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "targetElement" ), aStringVal );
     }
 
@@ -330,7 +330,7 @@ public abstract class OdfIterateElement extends OdfElement
     /**
      * Get value of attribute "smil:repeatDur".
      */
-    public String getRepeatdur()
+    public String getRepeatDur()
     {
         return getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatDur" ) );
     }
@@ -338,15 +338,15 @@ public abstract class OdfIterateElement extends OdfElement
     /**
      * Set value of attribute "smil:repeatDur".
      */
-    public void setRepeatdur( String _aRepeatdur )
+    public void setRepeatDur( String _aRepeatDur )
     {
-        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatDur" ), _aRepeatdur );
+        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatDur" ), _aRepeatDur );
     }
 
     /**
      * Get value of attribute "smil:repeatCount".
      */
-    public Integer getRepeatcount()
+    public Integer getRepeatCount()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatCount" ) );
         return OdfNonNegativeInteger.valueOf( aStringVal);
@@ -355,9 +355,9 @@ public abstract class OdfIterateElement extends OdfElement
     /**
      * Set value of attribute "smil:repeatCount".
      */
-    public void setRepeatcount( Integer _aRepeatcount )
+    public void setRepeatCount( Integer _aRepeatCount )
     {                    
-        String aStringVal = OdfNonNegativeInteger.toString( _aRepeatcount );
+        String aStringVal = OdfNonNegativeInteger.toString( _aRepeatCount );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatCount" ), aStringVal );
     }
 
@@ -387,7 +387,7 @@ public abstract class OdfIterateElement extends OdfElement
     /**
      * Get value of attribute "smil:restartDefault".
      */
-    public OdfRestartdefaultType getRestartdefault()
+    public OdfRestartDefaultType getRestartDefault()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restartDefault" ) );
         if( aStringVal.length()==0 )
@@ -395,15 +395,15 @@ public abstract class OdfIterateElement extends OdfElement
             aStringVal = "inherit";
         }
 
-        return OdfRestartdefaultType.enumValueOf( aStringVal);
+        return OdfRestartDefaultType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "smil:restartDefault".
      */
-    public void setRestartdefault( OdfRestartdefaultType _aRestartdefault )
+    public void setRestartDefault( OdfRestartDefaultType _aRestartDefault )
     {                    
-        String aStringVal = OdfRestartdefaultType.toString( _aRestartdefault );
+        String aStringVal = OdfRestartDefaultType.toString( _aRestartDefault );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restartDefault" ), aStringVal );
     }
 
@@ -428,18 +428,18 @@ public abstract class OdfIterateElement extends OdfElement
     /**
      * Get value of attribute "smil:fillDefault".
      */
-    public OdfFilldefaultType getFilldefault()
+    public OdfFillDefaultType getFillDefault()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "fillDefault" ) );
-        return OdfFilldefaultType.enumValueOf( aStringVal);
+        return OdfFillDefaultType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "smil:fillDefault".
      */
-    public void setFilldefault( OdfFilldefaultType _aFilldefault )
+    public void setFillDefault( OdfFillDefaultType _aFillDefault )
     {                    
-        String aStringVal = OdfFilldefaultType.toString( _aFilldefault );
+        String aStringVal = OdfFillDefaultType.toString( _aFillDefault );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "fillDefault" ), aStringVal );
     }
 
@@ -492,7 +492,7 @@ public abstract class OdfIterateElement extends OdfElement
     /**
      * Get value of attribute "smil:autoReverse".
      */
-    public Boolean getAutoreverse()
+    public Boolean getAutoReverse()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "autoReverse" ) );
         return OdfBoolean.valueOf( aStringVal);
@@ -501,9 +501,9 @@ public abstract class OdfIterateElement extends OdfElement
     /**
      * Set value of attribute "smil:autoReverse".
      */
-    public void setAutoreverse( Boolean _aAutoreverse )
+    public void setAutoReverse( Boolean _aAutoReverse )
     {                    
-        String aStringVal = OdfBoolean.toString( _aAutoreverse );
+        String aStringVal = OdfBoolean.toString( _aAutoReverse );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "autoReverse" ), aStringVal );
     }
 
@@ -528,10 +528,10 @@ public abstract class OdfIterateElement extends OdfElement
     /**
     * Create child element "anim:animate".
     */
-    public OdfAnimateElement createAnimateElement(String   _aAttributename)
+    public OdfAnimateElement createAnimateElement(String   _aAttributeName)
     {
         OdfAnimateElement  _nAnimate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimateElement.class);
-        _nAnimate.setAttributename( _aAttributename);
+        _nAnimate.setAttributeName( _aAttributeName);
         this.appendChild( _nAnimate);
         return  _nAnimate;      
     }
@@ -539,10 +539,10 @@ public abstract class OdfIterateElement extends OdfElement
     /**
     * Create child element "anim:set".
     */
-    public OdfSetElement createSetElement(String   _aAttributename)
+    public OdfSetElement createSetElement(String   _aAttributeName)
     {
         OdfSetElement  _nSet = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSetElement.class);
-        _nSet.setAttributename( _aAttributename);
+        _nSet.setAttributeName( _aAttributeName);
         this.appendChild( _nSet);
         return  _nSet;      
     }
@@ -550,46 +550,46 @@ public abstract class OdfIterateElement extends OdfElement
     /**
     * Create child element "anim:animateMotion".
     */
-    public OdfAnimatemotionElement createAnimatemotionElement(String   _aAttributename)
+    public OdfAnimateMotionElement createAnimateMotionElement(String   _aAttributeName)
     {
-        OdfAnimatemotionElement  _nAnimatemotion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimatemotionElement.class);
-        _nAnimatemotion.setAttributename( _aAttributename);
-        this.appendChild( _nAnimatemotion);
-        return  _nAnimatemotion;      
+        OdfAnimateMotionElement  _nAnimateMotion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimateMotionElement.class);
+        _nAnimateMotion.setAttributeName( _aAttributeName);
+        this.appendChild( _nAnimateMotion);
+        return  _nAnimateMotion;      
     }
     
     /**
     * Create child element "anim:animateColor".
     */
-    public OdfAnimatecolorElement createAnimatecolorElement(String   _aAttributename)
+    public OdfAnimateColorElement createAnimateColorElement(String   _aAttributeName)
     {
-        OdfAnimatecolorElement  _nAnimatecolor = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimatecolorElement.class);
-        _nAnimatecolor.setAttributename( _aAttributename);
-        this.appendChild( _nAnimatecolor);
-        return  _nAnimatecolor;      
+        OdfAnimateColorElement  _nAnimateColor = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimateColorElement.class);
+        _nAnimateColor.setAttributeName( _aAttributeName);
+        this.appendChild( _nAnimateColor);
+        return  _nAnimateColor;      
     }
     
     /**
     * Create child element "anim:animateTransform".
     */
-    public OdfAnimatetransformElement createAnimatetransformElement(String   _aAttributename, OdfType   _aType)
+    public OdfAnimateTransformElement createAnimateTransformElement(String   _aAttributeName, OdfType   _aType)
     {
-        OdfAnimatetransformElement  _nAnimatetransform = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimatetransformElement.class);
-        _nAnimatetransform.setAttributename( _aAttributename);
-        _nAnimatetransform.setType( _aType);
-        this.appendChild( _nAnimatetransform);
-        return  _nAnimatetransform;      
+        OdfAnimateTransformElement  _nAnimateTransform = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimateTransformElement.class);
+        _nAnimateTransform.setAttributeName( _aAttributeName);
+        _nAnimateTransform.setType( _aType);
+        this.appendChild( _nAnimateTransform);
+        return  _nAnimateTransform;      
     }
     
     /**
     * Create child element "anim:transitionFilter".
     */
-    public OdfTransitionfilterElement createTransitionfilterElement(String   _aType)
+    public OdfTransitionFilterElement createTransitionFilterElement(String   _aType)
     {
-        OdfTransitionfilterElement  _nTransitionfilter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTransitionfilterElement.class);
-        _nTransitionfilter.setType( _aType);
-        this.appendChild( _nTransitionfilter);
-        return  _nTransitionfilter;      
+        OdfTransitionFilterElement  _nTransitionFilter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTransitionFilterElement.class);
+        _nTransitionFilter.setType( _aType);
+        this.appendChild( _nTransitionFilter);
+        return  _nTransitionFilter;      
     }
     
     /**

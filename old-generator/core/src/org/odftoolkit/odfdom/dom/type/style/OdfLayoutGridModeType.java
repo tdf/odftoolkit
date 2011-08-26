@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfLayoutGridModeType
 {
-              NONE( "none" ), BOTH( "both" ), LINE( "line" );
+              LINE( "line" ), NONE( "none" ), BOTH( "both" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfLayoutGridModeType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

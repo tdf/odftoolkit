@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfTemplateNameDisplayType
 {
-              TITLE( "title" ), FULL( "full" ), NAME_AND_EXTENSION( "name-and-extension" ), PATH( "path" ), AREA( "area" ), NAME( "name" );
+              NAME_AND_EXTENSION( "name-and-extension" ), PATH( "path" ), NAME( "name" ), FULL( "full" ), AREA( "area" ), TITLE( "title" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTemplateNameDisplayType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -55,11 +55,11 @@ import org.odftoolkit.odfdom.dom.element.dr3d.OdfSceneElement;
 import org.odftoolkit.odfdom.dom.element.draw.OdfCustomShapeElement;
 import org.odftoolkit.odfdom.dom.element.anim.OdfAnimateElement;
 import org.odftoolkit.odfdom.dom.element.anim.OdfSetElement;
-import org.odftoolkit.odfdom.dom.element.anim.OdfAnimatemotionElement;
-import org.odftoolkit.odfdom.dom.element.anim.OdfAnimatecolorElement;
-import org.odftoolkit.odfdom.dom.element.anim.OdfAnimatetransformElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfAnimateMotionElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfAnimateColorElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfAnimateTransformElement;
 import org.odftoolkit.odfdom.dom.type.svg.OdfType;
-import org.odftoolkit.odfdom.dom.element.anim.OdfTransitionfilterElement;
+import org.odftoolkit.odfdom.dom.element.anim.OdfTransitionFilterElement;
 import org.odftoolkit.odfdom.dom.element.anim.OdfParElement;
 import org.odftoolkit.odfdom.dom.element.anim.OdfSeqElement;
 import org.odftoolkit.odfdom.dom.element.anim.OdfIterateElement;
@@ -289,11 +289,11 @@ public abstract class OdfMasterPageElement extends OdfStylableElement
     /**
     * Create child element "draw:polyline".
     */
-    public OdfPolylineElement createPolylineElement(String   _aPoints, Integer   _aViewbox)
+    public OdfPolylineElement createPolylineElement(String   _aPoints, Integer   _aViewBox)
     {
         OdfPolylineElement  _nPolyline = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPolylineElement.class);
         _nPolyline.setPoints( _aPoints);
-        _nPolyline.setViewbox( _aViewbox);
+        _nPolyline.setViewBox( _aViewBox);
         this.appendChild( _nPolyline);
         return  _nPolyline;      
     }
@@ -301,11 +301,11 @@ public abstract class OdfMasterPageElement extends OdfStylableElement
     /**
     * Create child element "draw:polygon".
     */
-    public OdfPolygonElement createPolygonElement(String   _aPoints, Integer   _aViewbox)
+    public OdfPolygonElement createPolygonElement(String   _aPoints, Integer   _aViewBox)
     {
         OdfPolygonElement  _nPolygon = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPolygonElement.class);
         _nPolygon.setPoints( _aPoints);
-        _nPolygon.setViewbox( _aViewbox);
+        _nPolygon.setViewBox( _aViewBox);
         this.appendChild( _nPolygon);
         return  _nPolygon;      
     }
@@ -337,11 +337,11 @@ public abstract class OdfMasterPageElement extends OdfStylableElement
     /**
     * Create child element "draw:path".
     */
-    public OdfPathElement createPathElement(String   _aD, Integer   _aViewbox)
+    public OdfPathElement createPathElement(String   _aD, Integer   _aViewBox)
     {
         OdfPathElement  _nPath = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPathElement.class);
         _nPath.setD( _aD);
-        _nPath.setViewbox( _aViewbox);
+        _nPath.setViewBox( _aViewBox);
         this.appendChild( _nPath);
         return  _nPath;      
     }
@@ -423,10 +423,10 @@ public abstract class OdfMasterPageElement extends OdfStylableElement
     /**
     * Create child element "draw:connector".
     */
-    public OdfConnectorElement createConnectorElement(Integer   _aViewbox)
+    public OdfConnectorElement createConnectorElement(Integer   _aViewBox)
     {
         OdfConnectorElement  _nConnector = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConnectorElement.class);
-        _nConnector.setViewbox( _aViewbox);
+        _nConnector.setViewBox( _aViewBox);
         this.appendChild( _nConnector);
         return  _nConnector;      
     }
@@ -476,10 +476,10 @@ public abstract class OdfMasterPageElement extends OdfStylableElement
     /**
     * Create child element "anim:animate".
     */
-    public OdfAnimateElement createAnimateElement(String   _aAttributename)
+    public OdfAnimateElement createAnimateElement(String   _aAttributeName)
     {
         OdfAnimateElement  _nAnimate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimateElement.class);
-        _nAnimate.setAttributename( _aAttributename);
+        _nAnimate.setAttributeName( _aAttributeName);
         this.appendChild( _nAnimate);
         return  _nAnimate;      
     }
@@ -487,10 +487,10 @@ public abstract class OdfMasterPageElement extends OdfStylableElement
     /**
     * Create child element "anim:set".
     */
-    public OdfSetElement createSetElement(String   _aAttributename)
+    public OdfSetElement createSetElement(String   _aAttributeName)
     {
         OdfSetElement  _nSet = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSetElement.class);
-        _nSet.setAttributename( _aAttributename);
+        _nSet.setAttributeName( _aAttributeName);
         this.appendChild( _nSet);
         return  _nSet;      
     }
@@ -498,46 +498,46 @@ public abstract class OdfMasterPageElement extends OdfStylableElement
     /**
     * Create child element "anim:animateMotion".
     */
-    public OdfAnimatemotionElement createAnimatemotionElement(String   _aAttributename)
+    public OdfAnimateMotionElement createAnimateMotionElement(String   _aAttributeName)
     {
-        OdfAnimatemotionElement  _nAnimatemotion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimatemotionElement.class);
-        _nAnimatemotion.setAttributename( _aAttributename);
-        this.appendChild( _nAnimatemotion);
-        return  _nAnimatemotion;      
+        OdfAnimateMotionElement  _nAnimateMotion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimateMotionElement.class);
+        _nAnimateMotion.setAttributeName( _aAttributeName);
+        this.appendChild( _nAnimateMotion);
+        return  _nAnimateMotion;      
     }
     
     /**
     * Create child element "anim:animateColor".
     */
-    public OdfAnimatecolorElement createAnimatecolorElement(String   _aAttributename)
+    public OdfAnimateColorElement createAnimateColorElement(String   _aAttributeName)
     {
-        OdfAnimatecolorElement  _nAnimatecolor = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimatecolorElement.class);
-        _nAnimatecolor.setAttributename( _aAttributename);
-        this.appendChild( _nAnimatecolor);
-        return  _nAnimatecolor;      
+        OdfAnimateColorElement  _nAnimateColor = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimateColorElement.class);
+        _nAnimateColor.setAttributeName( _aAttributeName);
+        this.appendChild( _nAnimateColor);
+        return  _nAnimateColor;      
     }
     
     /**
     * Create child element "anim:animateTransform".
     */
-    public OdfAnimatetransformElement createAnimatetransformElement(String   _aAttributename, OdfType   _aType)
+    public OdfAnimateTransformElement createAnimateTransformElement(String   _aAttributeName, OdfType   _aType)
     {
-        OdfAnimatetransformElement  _nAnimatetransform = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimatetransformElement.class);
-        _nAnimatetransform.setAttributename( _aAttributename);
-        _nAnimatetransform.setType( _aType);
-        this.appendChild( _nAnimatetransform);
-        return  _nAnimatetransform;      
+        OdfAnimateTransformElement  _nAnimateTransform = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimateTransformElement.class);
+        _nAnimateTransform.setAttributeName( _aAttributeName);
+        _nAnimateTransform.setType( _aType);
+        this.appendChild( _nAnimateTransform);
+        return  _nAnimateTransform;      
     }
     
     /**
     * Create child element "anim:transitionFilter".
     */
-    public OdfTransitionfilterElement createTransitionfilterElement(String   _aType)
+    public OdfTransitionFilterElement createTransitionFilterElement(String   _aType)
     {
-        OdfTransitionfilterElement  _nTransitionfilter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTransitionfilterElement.class);
-        _nTransitionfilter.setType( _aType);
-        this.appendChild( _nTransitionfilter);
-        return  _nTransitionfilter;      
+        OdfTransitionFilterElement  _nTransitionFilter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTransitionFilterElement.class);
+        _nTransitionFilter.setType( _aType);
+        this.appendChild( _nTransitionFilter);
+        return  _nTransitionFilter;      
     }
     
     /**

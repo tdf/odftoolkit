@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfScriptType
 {
-              COMPLEX( "complex" ), ASIAN( "asian" ), IGNORE( "ignore" ), LATIN( "latin" );
+              IGNORE( "ignore" ), ASIAN( "asian" ), LATIN( "latin" ), COMPLEX( "complex" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfScriptType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfCaptionAngleType
 {
-              FREE( "free" ), FIXED( "fixed" );
+              FIXED( "fixed" ), FREE( "free" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfCaptionAngleType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

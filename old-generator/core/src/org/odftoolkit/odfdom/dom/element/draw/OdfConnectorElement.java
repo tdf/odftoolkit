@@ -63,9 +63,9 @@ public abstract class OdfConnectorElement extends OdfShapeElementBase
     /**
      * Initialize mandatory attributes.
      */
-    public void init(Integer _aViewbox)
+    public void init(Integer _aViewBox)
     {
-        setViewbox( _aViewbox );
+        setViewBox( _aViewBox );
     }
 
     /**
@@ -330,7 +330,7 @@ public abstract class OdfConnectorElement extends OdfShapeElementBase
     /**
      * Get value of attribute "svg:viewBox".
      */
-    public Integer getViewbox()
+    public Integer getViewBox()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "viewBox" ) );
         return Integer.valueOf( aStringVal);
@@ -339,9 +339,9 @@ public abstract class OdfConnectorElement extends OdfShapeElementBase
     /**
      * Set value of attribute "svg:viewBox".
      */
-    public void setViewbox( Integer _aViewbox )
+    public void setViewBox( Integer _aViewBox )
     {                    
-        String aStringVal = Integer.toString( _aViewbox );
+        String aStringVal = Integer.toString( _aViewBox );
         setOdfAttribute( OdfName.get( OdfNamespace.SVG, "viewBox" ), aStringVal );
     }
 

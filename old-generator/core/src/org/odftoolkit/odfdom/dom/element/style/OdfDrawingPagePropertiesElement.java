@@ -99,7 +99,7 @@ public abstract class OdfDrawingPagePropertiesElement extends OdfStyleProperties
         OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.get(OdfNamespace.SMIL, "subtype"));
     public final static OdfStyleProperty Direction = 
         OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.get(OdfNamespace.SMIL, "direction"));
-    public final static OdfStyleProperty Fadecolor = 
+    public final static OdfStyleProperty FadeColor = 
         OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.get(OdfNamespace.SMIL, "fadeColor"));
     public final static OdfStyleProperty Duration = 
         OdfStyleProperty.get(OdfStylePropertiesSet.DrawingPageProperties, OdfName.get(OdfNamespace.PRESENTATION, "duration"));

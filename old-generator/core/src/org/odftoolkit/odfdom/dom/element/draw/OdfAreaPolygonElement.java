@@ -59,13 +59,13 @@ public abstract class OdfAreaPolygonElement extends OdfElement
     /**
      * Initialize mandatory attributes.
      */
-    public void init(String _aX, String _aY, String _aWidth, String _aHeight, Integer _aViewbox, String _aPoints)
+    public void init(String _aX, String _aY, String _aWidth, String _aHeight, Integer _aViewBox, String _aPoints)
     {
         setX( _aX );
         setY( _aY );
         setWidth( _aWidth );
         setHeight( _aHeight );
-        setViewbox( _aViewbox );
+        setViewBox( _aViewBox );
         setPoints( _aPoints );
     }
 
@@ -223,7 +223,7 @@ public abstract class OdfAreaPolygonElement extends OdfElement
     /**
      * Get value of attribute "svg:viewBox".
      */
-    public Integer getViewbox()
+    public Integer getViewBox()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "viewBox" ) );
         return Integer.valueOf( aStringVal);
@@ -232,9 +232,9 @@ public abstract class OdfAreaPolygonElement extends OdfElement
     /**
      * Set value of attribute "svg:viewBox".
      */
-    public void setViewbox( Integer _aViewbox )
+    public void setViewBox( Integer _aViewBox )
     {                    
-        String aStringVal = Integer.toString( _aViewbox );
+        String aStringVal = Integer.toString( _aViewBox );
         setOdfAttribute( OdfName.get( OdfNamespace.SVG, "viewBox" ), aStringVal );
     }
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfIndexEntryChapterDisplayType
 {
-              PLAIN_NUMBER_AND_NAME( "plain-number-and-name" ), NUMBER_AND_NAME( "number-and-name" ), PLAIN_NUMBER( "plain-number" ), NAME( "name" ), NUMBER( "number" );
+              NUMBER( "number" ), PLAIN_NUMBER_AND_NAME( "plain-number-and-name" ), PLAIN_NUMBER( "plain-number" ), NAME( "name" ), NUMBER_AND_NAME( "number-and-name" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfIndexEntryChapterDisplayType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

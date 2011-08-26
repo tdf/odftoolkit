@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfConditionSourceType
 {
-              CELL_RANGE( "cell-range" ), SELF( "self" );
+              SELF( "self" ), CELL_RANGE( "cell-range" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfConditionSourceType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

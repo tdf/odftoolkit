@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfRangeUsableAsType
 {
-              FILTER( "filter" ), PRINT_RANGE( "print-range" ), NONE( "none" ), REPEAT_ROW( "repeat-row" ), REPEAT_COLUMN( "repeat-column" );
+              REPEAT_ROW( "repeat-row" ), FILTER( "filter" ), PRINT_RANGE( "print-range" ), NONE( "none" ), REPEAT_COLUMN( "repeat-column" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfRangeUsableAsType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

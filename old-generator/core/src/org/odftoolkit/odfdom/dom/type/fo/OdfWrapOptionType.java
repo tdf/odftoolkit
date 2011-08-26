@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.fo;
 
 public enum OdfWrapOptionType
 {
-              WRAP( "wrap" ), NO_WRAP( "no-wrap" );
+              NO_WRAP( "no-wrap" ), WRAP( "wrap" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfWrapOptionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

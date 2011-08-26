@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.db;
 
 public enum OdfBooleanComparisonModeType
 {
-              IS_BOOLEAN( "is-boolean" ), EQUAL_USE_ONLY_ZERO( "equal-use-only-zero" ), EQUAL_BOOLEAN( "equal-boolean" ), EQUAL_INTEGER( "equal-integer" );
+              EQUAL_USE_ONLY_ZERO( "equal-use-only-zero" ), EQUAL_BOOLEAN( "equal-boolean" ), EQUAL_INTEGER( "equal-integer" ), IS_BOOLEAN( "is-boolean" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfBooleanComparisonModeType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

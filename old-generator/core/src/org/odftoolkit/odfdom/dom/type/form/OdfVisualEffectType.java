@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.form;
 
 public enum OdfVisualEffectType
 {
-              _3D( "3d" ), FLAT( "flat" );
+              FLAT( "flat" ), _3D( "3d" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfVisualEffectType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

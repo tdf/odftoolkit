@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfStrokeType
 {
-              NONE( "none" ), SOLID( "solid" ), DASH( "dash" );
+              NONE( "none" ), DASH( "dash" ), SOLID( "solid" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfStrokeType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

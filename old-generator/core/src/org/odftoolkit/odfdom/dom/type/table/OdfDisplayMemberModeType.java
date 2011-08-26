@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfDisplayMemberModeType
 {
-              FROM_BOTTOM( "from-bottom" ), FROM_TOP( "from-top" );
+              FROM_TOP( "from-top" ), FROM_BOTTOM( "from-bottom" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfDisplayMemberModeType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

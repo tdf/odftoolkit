@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.office;
 
 public enum OdfTargetFrameNameType
 {
-              _SELF( "_self" ), _BLANK( "_blank" ), _PARENT( "_parent" ), _TOP( "_top" );
+              _PARENT( "_parent" ), _SELF( "_self" ), _TOP( "_top" ), _BLANK( "_blank" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTargetFrameNameType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

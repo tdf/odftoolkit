@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.fo;
 
 public enum OdfFontWeightType
 {
-              _200( "200" ), _700( "700" ), _900( "900" ), _800( "800" ), _500( "500" ), BOLD( "bold" ), NORMAL( "normal" ), _600( "600" ), _100( "100" ), _400( "400" ), _300( "300" );
+              _500( "500" ), _100( "100" ), _900( "900" ), _400( "400" ), NORMAL( "normal" ), _800( "800" ), _200( "200" ), _700( "700" ), _300( "300" ), BOLD( "bold" ), _600( "600" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfFontWeightType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

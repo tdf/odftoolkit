@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfModeType
 {
-              COPY_ALL( "copy-all" ), COPY_RESULTS_ONLY( "copy-results-only" );
+              COPY_RESULTS_ONLY( "copy-results-only" ), COPY_ALL( "copy-all" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfModeType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

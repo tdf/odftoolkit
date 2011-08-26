@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.presentation;
 
 public enum OdfTransitionOnClickType
 {
-              ENABLED( "enabled" ), DISABLED( "disabled" );
+              DISABLED( "disabled" ), ENABLED( "enabled" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTransitionOnClickType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

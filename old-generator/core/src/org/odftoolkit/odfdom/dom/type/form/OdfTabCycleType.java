@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.form;
 
 public enum OdfTabCycleType
 {
-              CURRENT( "current" ), RECORDS( "records" ), PAGE( "page" );
+              RECORDS( "records" ), CURRENT( "current" ), PAGE( "page" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTabCycleType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

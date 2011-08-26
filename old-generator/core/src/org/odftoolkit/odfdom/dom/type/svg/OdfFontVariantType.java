@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.svg;
 
 public enum OdfFontVariantType
 {
-              SMALL_CAPS( "small-caps" ), NORMAL( "normal" );
+              NORMAL( "normal" ), SMALL_CAPS( "small-caps" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfFontVariantType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

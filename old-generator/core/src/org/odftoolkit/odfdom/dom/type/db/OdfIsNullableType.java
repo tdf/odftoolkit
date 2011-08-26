@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.db;
 
 public enum OdfIsNullableType
 {
-              NO_NULLS( "no-nulls" ), NULLABLE( "nullable" );
+              NULLABLE( "nullable" ), NO_NULLS( "no-nulls" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfIsNullableType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

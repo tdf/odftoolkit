@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfSequenceReferenceFormatType
 {
-              VALUE( "value" ), TEXT( "text" ), DIRECTION( "direction" ), PAGE( "page" ), CATEGORY_AND_VALUE( "category-and-value" ), CAPTION( "caption" ), CHAPTER( "chapter" );
+              CAPTION( "caption" ), VALUE( "value" ), DIRECTION( "direction" ), PAGE( "page" ), CATEGORY_AND_VALUE( "category-and-value" ), TEXT( "text" ), CHAPTER( "chapter" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfSequenceReferenceFormatType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

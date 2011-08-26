@@ -202,11 +202,11 @@ public abstract class OdfNotesElement extends OdfStylableElement
     /**
     * Create child element "draw:polyline".
     */
-    public OdfPolylineElement createPolylineElement(String   _aPoints, Integer   _aViewbox)
+    public OdfPolylineElement createPolylineElement(String   _aPoints, Integer   _aViewBox)
     {
         OdfPolylineElement  _nPolyline = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPolylineElement.class);
         _nPolyline.setPoints( _aPoints);
-        _nPolyline.setViewbox( _aViewbox);
+        _nPolyline.setViewBox( _aViewBox);
         this.appendChild( _nPolyline);
         return  _nPolyline;      
     }
@@ -214,11 +214,11 @@ public abstract class OdfNotesElement extends OdfStylableElement
     /**
     * Create child element "draw:polygon".
     */
-    public OdfPolygonElement createPolygonElement(String   _aPoints, Integer   _aViewbox)
+    public OdfPolygonElement createPolygonElement(String   _aPoints, Integer   _aViewBox)
     {
         OdfPolygonElement  _nPolygon = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPolygonElement.class);
         _nPolygon.setPoints( _aPoints);
-        _nPolygon.setViewbox( _aViewbox);
+        _nPolygon.setViewBox( _aViewBox);
         this.appendChild( _nPolygon);
         return  _nPolygon;      
     }
@@ -250,11 +250,11 @@ public abstract class OdfNotesElement extends OdfStylableElement
     /**
     * Create child element "draw:path".
     */
-    public OdfPathElement createPathElement(String   _aD, Integer   _aViewbox)
+    public OdfPathElement createPathElement(String   _aD, Integer   _aViewBox)
     {
         OdfPathElement  _nPath = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPathElement.class);
         _nPath.setD( _aD);
-        _nPath.setViewbox( _aViewbox);
+        _nPath.setViewBox( _aViewBox);
         this.appendChild( _nPath);
         return  _nPath;      
     }
@@ -336,10 +336,10 @@ public abstract class OdfNotesElement extends OdfStylableElement
     /**
     * Create child element "draw:connector".
     */
-    public OdfConnectorElement createConnectorElement(Integer   _aViewbox)
+    public OdfConnectorElement createConnectorElement(Integer   _aViewBox)
     {
         OdfConnectorElement  _nConnector = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConnectorElement.class);
-        _nConnector.setViewbox( _aViewbox);
+        _nConnector.setViewBox( _aViewBox);
         this.appendChild( _nConnector);
         return  _nConnector;      
     }

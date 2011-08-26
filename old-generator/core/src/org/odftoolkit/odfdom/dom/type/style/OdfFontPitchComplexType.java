@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfFontPitchComplexType
 {
-              FIXED( "fixed" ), VARIABLE( "variable" );
+              VARIABLE( "variable" ), FIXED( "fixed" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfFontPitchComplexType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

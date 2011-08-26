@@ -31,7 +31,7 @@ import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.svg.OdfSpreadmethodType;
+import org.odftoolkit.odfdom.dom.type.svg.OdfSpreadMethodType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
 ;
@@ -39,11 +39,11 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 /**
  * ODF DOM Element implementation for element "<svg:linearGradient>".
  */
-public abstract class OdfLineargradientElement extends OdfElement
+public abstract class OdfLinearGradientElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SVG, "linearGradient" );
 
-    public OdfLineargradientElement( OdfFileDom _aOwnerDoc )
+    public OdfLinearGradientElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
@@ -64,7 +64,7 @@ public abstract class OdfLineargradientElement extends OdfElement
     /**
      * Get value of attribute "svg:gradientUnits".
      */
-    public String getGradientunits()
+    public String getGradientUnits()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "gradientUnits" ) );
         if( aStringVal.length()==0 )
@@ -78,15 +78,15 @@ public abstract class OdfLineargradientElement extends OdfElement
     /**
      * Set value of attribute "svg:gradientUnits".
      */
-    public void setGradientunits( String _aGradientunits )
+    public void setGradientUnits( String _aGradientUnits )
     {
-        setOdfAttribute( OdfName.get( OdfNamespace.SVG, "gradientUnits" ), _aGradientunits );
+        setOdfAttribute( OdfName.get( OdfNamespace.SVG, "gradientUnits" ), _aGradientUnits );
     }
 
     /**
      * Get value of attribute "svg:gradientTransform".
      */
-    public String getGradienttransform()
+    public String getGradientTransform()
     {
         return getOdfAttribute( OdfName.get( OdfNamespace.SVG, "gradientTransform" ) );
     }
@@ -94,15 +94,15 @@ public abstract class OdfLineargradientElement extends OdfElement
     /**
      * Set value of attribute "svg:gradientTransform".
      */
-    public void setGradienttransform( String _aGradienttransform )
+    public void setGradientTransform( String _aGradientTransform )
     {
-        setOdfAttribute( OdfName.get( OdfNamespace.SVG, "gradientTransform" ), _aGradienttransform );
+        setOdfAttribute( OdfName.get( OdfNamespace.SVG, "gradientTransform" ), _aGradientTransform );
     }
 
     /**
      * Get value of attribute "svg:spreadMethod".
      */
-    public OdfSpreadmethodType getSpreadmethod()
+    public OdfSpreadMethodType getSpreadMethod()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "spreadMethod" ) );
         if( aStringVal.length()==0 )
@@ -110,15 +110,15 @@ public abstract class OdfLineargradientElement extends OdfElement
             aStringVal = "pad";
         }
 
-        return OdfSpreadmethodType.enumValueOf( aStringVal);
+        return OdfSpreadMethodType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "svg:spreadMethod".
      */
-    public void setSpreadmethod( OdfSpreadmethodType _aSpreadmethod )
+    public void setSpreadMethod( OdfSpreadMethodType _aSpreadMethod )
     {                    
-        String aStringVal = OdfSpreadmethodType.toString( _aSpreadmethod );
+        String aStringVal = OdfSpreadMethodType.toString( _aSpreadMethod );
         setOdfAttribute( OdfName.get( OdfNamespace.SVG, "spreadMethod" ), aStringVal );
     }
 

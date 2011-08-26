@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfCellProtectType
 {
-              NONE( "none" ), HIDDEN_AND_PROTECTED( "hidden-and-protected" ), FORMULA_HIDDEN( "formula-hidden" ), PROTECTED( "protected" );
+              FORMULA_HIDDEN( "formula-hidden" ), NONE( "none" ), HIDDEN_AND_PROTECTED( "hidden-and-protected" ), PROTECTED( "protected" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfCellProtectType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.presentation;
 
 public enum OdfPresetClassType
 {
-              OLE_ACTION( "ole-action" ), MEDIA_CALL( "media-call" ), EMPHASIS( "emphasis" ), EXIT( "exit" ), ENTRANCE( "entrance" ), CUSTOM( "custom" ), MOTION_PATH( "motion-path" );
+              CUSTOM( "custom" ), EXIT( "exit" ), ENTRANCE( "entrance" ), EMPHASIS( "emphasis" ), MOTION_PATH( "motion-path" ), MEDIA_CALL( "media-call" ), OLE_ACTION( "ole-action" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfPresetClassType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

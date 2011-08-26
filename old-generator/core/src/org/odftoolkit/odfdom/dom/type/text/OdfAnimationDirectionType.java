@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfAnimationDirectionType
 {
-              RIGHT( "right" ), LEFT( "left" ), UP( "up" ), DOWN( "down" );
+              UP( "up" ), RIGHT( "right" ), DOWN( "down" ), LEFT( "left" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfAnimationDirectionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

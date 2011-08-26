@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfSortModeType
 {
-              NONE( "none" ), MANUAL( "manual" ), DATA( "data" ), NAME( "name" );
+              NONE( "none" ), DATA( "data" ), NAME( "name" ), MANUAL( "manual" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfSortModeType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

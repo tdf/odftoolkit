@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfLayoutModeType
 {
-              TABULAR_LAYOUT( "tabular-layout" ), OUTLINE_SUBTOTALS_TOP( "outline-subtotals-top" ), OUTLINE_SUBTOTALS_BOTTOM( "outline-subtotals-bottom" );
+              OUTLINE_SUBTOTALS_BOTTOM( "outline-subtotals-bottom" ), OUTLINE_SUBTOTALS_TOP( "outline-subtotals-top" ), TABULAR_LAYOUT( "tabular-layout" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfLayoutModeType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

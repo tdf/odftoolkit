@@ -82,14 +82,14 @@ public abstract class OdfImageMapElement extends OdfElement
     /**
     * Create child element "draw:area-polygon".
     */
-    public OdfAreaPolygonElement createAreaPolygonElement(String   _aX, String   _aY, String   _aWidth, String   _aHeight, Integer   _aViewbox, String   _aPoints)
+    public OdfAreaPolygonElement createAreaPolygonElement(String   _aX, String   _aY, String   _aWidth, String   _aHeight, Integer   _aViewBox, String   _aPoints)
     {
         OdfAreaPolygonElement  _nAreaPolygon = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAreaPolygonElement.class);
         _nAreaPolygon.setX( _aX);
         _nAreaPolygon.setY( _aY);
         _nAreaPolygon.setWidth( _aWidth);
         _nAreaPolygon.setHeight( _aHeight);
-        _nAreaPolygon.setViewbox( _aViewbox);
+        _nAreaPolygon.setViewBox( _aViewBox);
         _nAreaPolygon.setPoints( _aPoints);
         this.appendChild( _nAreaPolygon);
         return  _nAreaPolygon;      

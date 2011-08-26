@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfTextUnderlineStyleType
 {
-              DOT_DOT_DASH( "dot-dot-dash" ), DOTTED( "dotted" ), NONE( "none" ), DASH( "dash" ), SOLID( "solid" ), WAVE( "wave" ), DOT_DASH( "dot-dash" ), LONG_DASH( "long-dash" );
+              NONE( "none" ), WAVE( "wave" ), DOTTED( "dotted" ), DOT_DOT_DASH( "dot-dot-dash" ), DASH( "dash" ), SOLID( "solid" ), DOT_DASH( "dot-dash" ), LONG_DASH( "long-dash" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTextUnderlineStyleType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

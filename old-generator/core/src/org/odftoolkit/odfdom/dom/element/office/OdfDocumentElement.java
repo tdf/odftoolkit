@@ -73,8 +73,8 @@ import org.odftoolkit.odfdom.dom.element.text.OdfBibliographyConfigurationElemen
 import org.odftoolkit.odfdom.dom.element.text.OdfLinenumberingConfigurationElement;
 import org.odftoolkit.odfdom.dom.element.draw.OdfGradientElement;
 import org.odftoolkit.odfdom.dom.type.draw.OdfGradientStyleType;
-import org.odftoolkit.odfdom.dom.element.svg.OdfLineargradientElement;
-import org.odftoolkit.odfdom.dom.element.svg.OdfRadialgradientElement;
+import org.odftoolkit.odfdom.dom.element.svg.OdfLinearGradientElement;
+import org.odftoolkit.odfdom.dom.element.svg.OdfRadialGradientElement;
 import org.odftoolkit.odfdom.dom.element.draw.OdfHatchElement;
 import org.odftoolkit.odfdom.dom.type.draw.OdfHatchStyleType;
 import org.odftoolkit.odfdom.dom.element.draw.OdfFillImageElement;
@@ -576,23 +576,23 @@ public abstract class OdfDocumentElement extends OdfElement
     /**
     * Create child element "svg:linearGradient".
     */
-    public OdfLineargradientElement createLineargradientElement(String   _aName)
+    public OdfLinearGradientElement createLinearGradientElement(String   _aName)
     {
-        OdfLineargradientElement  _nLineargradient = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLineargradientElement.class);
-        _nLineargradient.setName( _aName);
-        this.appendChild( _nLineargradient);
-        return  _nLineargradient;      
+        OdfLinearGradientElement  _nLinearGradient = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLinearGradientElement.class);
+        _nLinearGradient.setName( _aName);
+        this.appendChild( _nLinearGradient);
+        return  _nLinearGradient;      
     }
     
     /**
     * Create child element "svg:radialGradient".
     */
-    public OdfRadialgradientElement createRadialgradientElement(String   _aName)
+    public OdfRadialGradientElement createRadialGradientElement(String   _aName)
     {
-        OdfRadialgradientElement  _nRadialgradient = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRadialgradientElement.class);
-        _nRadialgradient.setName( _aName);
-        this.appendChild( _nRadialgradient);
-        return  _nRadialgradient;      
+        OdfRadialGradientElement  _nRadialGradient = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRadialGradientElement.class);
+        _nRadialGradient.setName( _aName);
+        this.appendChild( _nRadialGradient);
+        return  _nRadialGradient;      
     }
     
     /**
@@ -622,11 +622,11 @@ public abstract class OdfDocumentElement extends OdfElement
     /**
     * Create child element "draw:marker".
     */
-    public OdfMarkerElement createMarkerElement(String   _aName, Integer   _aViewbox, String   _aD)
+    public OdfMarkerElement createMarkerElement(String   _aName, Integer   _aViewBox, String   _aD)
     {
         OdfMarkerElement  _nMarker = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfMarkerElement.class);
         _nMarker.setName( _aName);
-        _nMarker.setViewbox( _aViewbox);
+        _nMarker.setViewBox( _aViewBox);
         _nMarker.setD( _aD);
         this.appendChild( _nMarker);
         return  _nMarker;      

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.db;
 
 public enum OdfDataSourceSettingType
 {
-              DOUBLE( "double" ), STRING( "string" ), SHORT( "short" ), INT( "int" ), BOOLEAN( "boolean" ), LONG( "long" );
+              DOUBLE( "double" ), LONG( "long" ), BOOLEAN( "boolean" ), STRING( "string" ), INT( "int" ), SHORT( "short" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfDataSourceSettingType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

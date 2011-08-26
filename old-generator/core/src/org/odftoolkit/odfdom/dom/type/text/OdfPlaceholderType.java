@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfPlaceholderType
 {
-              TABLE( "table" ), OBJECT( "object" ), TEXT( "text" ), TEXT_BOX( "text-box" ), IMAGE( "image" );
+              OBJECT( "object" ), TABLE( "table" ), IMAGE( "image" ), TEXT_BOX( "text-box" ), TEXT( "text" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfPlaceholderType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

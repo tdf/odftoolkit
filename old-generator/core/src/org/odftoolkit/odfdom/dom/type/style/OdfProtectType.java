@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfProtectType
 {
-              NONE( "none" ), POSITION( "position" ), CONTENT( "content" ), SIZE( "size" );
+              SIZE( "size" ), NONE( "none" ), POSITION( "position" ), CONTENT( "content" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfProtectType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

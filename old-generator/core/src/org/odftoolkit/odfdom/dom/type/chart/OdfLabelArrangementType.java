@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfLabelArrangementType
 {
-              STAGGER_EVEN( "stagger-even" ), SIDE_BY_SIDE( "side-by-side" ), STAGGER_ODD( "stagger-odd" );
+              STAGGER_EVEN( "stagger-even" ), STAGGER_ODD( "stagger-odd" ), SIDE_BY_SIDE( "side-by-side" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfLabelArrangementType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.form;
 
 public enum OdfImagePositionType
 {
-              TOP( "top" ), START( "start" ), END( "end" ), BOTTOM( "bottom" ), CENTER( "center" );
+              TOP( "top" ), END( "end" ), BOTTOM( "bottom" ), START( "start" ), CENTER( "center" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfImagePositionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.svg;
 
 public enum OdfFillRuleType
 {
-              EVENODD( "evenodd" ), NONZERO( "nonzero" );
+              NONZERO( "nonzero" ), EVENODD( "evenodd" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfFillRuleType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

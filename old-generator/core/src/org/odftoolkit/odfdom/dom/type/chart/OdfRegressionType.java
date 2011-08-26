@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfRegressionType
 {
-              NONE( "none" ), POWER( "power" ), LOGARITHMIC( "logarithmic" ), EXPONENTIAL( "exponential" ), LINEAR( "linear" );
+              POWER( "power" ), NONE( "none" ), EXPONENTIAL( "exponential" ), LOGARITHMIC( "logarithmic" ), LINEAR( "linear" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfRegressionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -84,7 +84,7 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     /**
      * Get value of attribute "svg:viewBox".
      */
-    public Integer getViewbox()
+    public Integer getViewBox()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "viewBox" ) );
         return Integer.valueOf( aStringVal);
@@ -93,9 +93,9 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     /**
      * Set value of attribute "svg:viewBox".
      */
-    public void setViewbox( Integer _aViewbox )
+    public void setViewBox( Integer _aViewBox )
     {                    
-        String aStringVal = Integer.toString( _aViewbox );
+        String aStringVal = Integer.toString( _aViewBox );
         setOdfAttribute( OdfName.get( OdfNamespace.SVG, "viewBox" ), aStringVal );
     }
 

@@ -37,8 +37,7 @@ public enum OdfLabelFollowedByType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

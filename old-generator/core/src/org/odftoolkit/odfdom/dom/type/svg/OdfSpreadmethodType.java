@@ -26,31 +26,30 @@
  */    
 package org.odftoolkit.odfdom.dom.type.svg;
 
-public enum OdfSpreadmethodType
+public enum OdfSpreadMethodType
 {
-              PAD( "pad" ), REFLECT( "reflect" ), REPEAT( "repeat" );
+              REFLECT( "reflect" ), REPEAT( "repeat" ), PAD( "pad" );
 
     private String m_aValue;
 
-    OdfSpreadmethodType( String _aValue )
+    OdfSpreadMethodType( String _aValue )
     {
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }
 
-    public static String toString( OdfSpreadmethodType _aEnum )
+    public static String toString( OdfSpreadMethodType _aEnum )
     {
         return _aEnum.toString();
     }
 
-    public static OdfSpreadmethodType enumValueOf( String _aString )
+    public static OdfSpreadMethodType enumValueOf( String _aString )
     {
-        for( OdfSpreadmethodType aIter : values() )
+        for( OdfSpreadMethodType aIter : values() )
         {
             if( _aString.equals( aIter.toString() ) )
             {

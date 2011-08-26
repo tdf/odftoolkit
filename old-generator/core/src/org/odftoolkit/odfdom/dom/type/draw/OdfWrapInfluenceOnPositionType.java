@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfWrapInfluenceOnPositionType
 {
-              ONCE_SUCCESSIVE( "once-successive" ), ONCE_CONCURRENT( "once-concurrent" ), ITERATIVE( "iterative" );
+              ITERATIVE( "iterative" ), ONCE_CONCURRENT( "once-concurrent" ), ONCE_SUCCESSIVE( "once-successive" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfWrapInfluenceOnPositionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

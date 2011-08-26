@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfDirectionType
 {
-              FROM_SAME_TABLE( "from-same-table" ), FROM_ANOTHER_TABLE( "from-another-table" ), TO_ANOTHER_TABLE( "to-another-table" );
+              TO_ANOTHER_TABLE( "to-another-table" ), FROM_SAME_TABLE( "from-same-table" ), FROM_ANOTHER_TABLE( "from-another-table" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfDirectionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

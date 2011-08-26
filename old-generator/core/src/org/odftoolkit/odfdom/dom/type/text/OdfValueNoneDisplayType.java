@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfValueNoneDisplayType
 {
-              VALUE( "value" ), NONE( "none" );
+              NONE( "none" ), VALUE( "value" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfValueNoneDisplayType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfDrawAspectType
 {
-              THUMBNAIL( "thumbnail" ), PRINT_VIEW( "print-view" ), ICON( "icon" ), CONTENT( "content" );
+              PRINT_VIEW( "print-view" ), THUMBNAIL( "thumbnail" ), ICON( "icon" ), CONTENT( "content" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfDrawAspectType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

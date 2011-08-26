@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfKeyType
 {
-              ISSN( "issn" ), VOLUME( "volume" ), TITLE( "title" ), CUSTOM4( "custom4" ), ADDRESS( "address" ), BOOKTITLE( "booktitle" ), PUBLISHER( "publisher" ), CUSTOM3( "custom3" ), REPORT_TYPE( "report-type" ), CUSTOM5( "custom5" ), CUSTOM2( "custom2" ), EDITION( "edition" ), BIBLIOGRAPHY_TYPE( "bibliography-type" ), URL( "url" ), SERIES( "series" ), SCHOOL( "school" ), NUMBER( "number" ), MONTH( "month" ), ORGANIZATIONS( "organizations" ), CUSTOM1( "custom1" ), HOWPUBLISHED( "howpublished" ), ANNOTE( "annote" ), ISBN( "isbn" ), NOTE( "note" ), EDITOR( "editor" ), CHAPTER( "chapter" ), YEAR( "year" ), PAGES( "pages" ), INSTITUTION( "institution" ), JOURNAL( "journal" ), IDENTIFIER( "identifier" ), AUTHOR( "author" );
+              ANNOTE( "annote" ), IDENTIFIER( "identifier" ), VOLUME( "volume" ), MONTH( "month" ), ADDRESS( "address" ), SCHOOL( "school" ), EDITOR( "editor" ), URL( "url" ), NUMBER( "number" ), PAGES( "pages" ), ORGANIZATIONS( "organizations" ), INSTITUTION( "institution" ), NOTE( "note" ), YEAR( "year" ), REPORT_TYPE( "report-type" ), ISBN( "isbn" ), TITLE( "title" ), CHAPTER( "chapter" ), AUTHOR( "author" ), JOURNAL( "journal" ), PUBLISHER( "publisher" ), BOOKTITLE( "booktitle" ), BIBLIOGRAPHY_TYPE( "bibliography-type" ), HOWPUBLISHED( "howpublished" ), CUSTOM5( "custom5" ), ISSN( "issn" ), CUSTOM4( "custom4" ), CUSTOM3( "custom3" ), SERIES( "series" ), EDITION( "edition" ), CUSTOM2( "custom2" ), CUSTOM1( "custom1" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfKeyType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

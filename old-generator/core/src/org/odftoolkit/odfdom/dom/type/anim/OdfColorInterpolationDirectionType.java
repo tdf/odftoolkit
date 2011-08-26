@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.anim;
 
 public enum OdfColorInterpolationDirectionType
 {
-              CLOCKWISE( "clockwise" ), COUNTER_CLOCKWISE( "counter-clockwise" );
+              COUNTER_CLOCKWISE( "counter-clockwise" ), CLOCKWISE( "clockwise" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfColorInterpolationDirectionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfTreatEmptyCellsType
 {
-              IGNORE( "ignore" ), USE_ZERO( "use-zero" ), LEAVE_GAP( "leave-gap" );
+              IGNORE( "ignore" ), LEAVE_GAP( "leave-gap" ), USE_ZERO( "use-zero" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTreatEmptyCellsType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

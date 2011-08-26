@@ -32,12 +32,12 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfId;
-import org.odftoolkit.odfdom.dom.type.smil.OdfCalcmodeType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfCalcModeType;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.smil.OdfRestartType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfRestartdefaultType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfRestartDefaultType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
-import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
+import org.odftoolkit.odfdom.dom.type.smil.OdfFillDefaultType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.smil.OdfAccumulateType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfAdditiveType;
@@ -64,15 +64,15 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Initialize mandatory attributes.
      */
-    public void init(String _aAttributename)
+    public void init(String _aAttributeName)
     {
-        setAttributename( _aAttributename );
+        setAttributeName( _aAttributeName );
     }
 
     /**
      * Get value of attribute "smil:targetElement".
      */
-    public String getTargetelement()
+    public String getTargetElement()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "targetElement" ) );
         return OdfId.valueOf( aStringVal);
@@ -81,9 +81,9 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Set value of attribute "smil:targetElement".
      */
-    public void setTargetelement( String _aTargetelement )
+    public void setTargetElement( String _aTargetElement )
     {                    
-        String aStringVal = OdfId.toString( _aTargetelement );
+        String aStringVal = OdfId.toString( _aTargetElement );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "targetElement" ), aStringVal );
     }
 
@@ -106,7 +106,7 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Get value of attribute "smil:attributeName".
      */
-    public String getAttributename()
+    public String getAttributeName()
     {
         return getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "attributeName" ) );
     }
@@ -114,9 +114,9 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Set value of attribute "smil:attributeName".
      */
-    public void setAttributename( String _aAttributename )
+    public void setAttributeName( String _aAttributeName )
     {
-        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "attributeName" ), _aAttributename );
+        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "attributeName" ), _aAttributeName );
     }
 
     /**
@@ -202,7 +202,7 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Get value of attribute "smil:calcMode".
      */
-    public OdfCalcmodeType getCalcmode()
+    public OdfCalcModeType getCalcMode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "calcMode" ) );
         if( aStringVal.length()==0 )
@@ -210,22 +210,22 @@ public abstract class OdfAnimateElement extends OdfElement
             aStringVal = "discrete";
         }
 
-        return OdfCalcmodeType.enumValueOf( aStringVal);
+        return OdfCalcModeType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "smil:calcMode".
      */
-    public void setCalcmode( OdfCalcmodeType _aCalcmode )
+    public void setCalcMode( OdfCalcModeType _aCalcMode )
     {                    
-        String aStringVal = OdfCalcmodeType.toString( _aCalcmode );
+        String aStringVal = OdfCalcModeType.toString( _aCalcMode );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "calcMode" ), aStringVal );
     }
 
     /**
      * Get value of attribute "smil:keyTimes".
      */
-    public String getKeytimes()
+    public String getKeyTimes()
     {
         return getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "keyTimes" ) );
     }
@@ -233,15 +233,15 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Set value of attribute "smil:keyTimes".
      */
-    public void setKeytimes( String _aKeytimes )
+    public void setKeyTimes( String _aKeyTimes )
     {
-        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "keyTimes" ), _aKeytimes );
+        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "keyTimes" ), _aKeyTimes );
     }
 
     /**
      * Get value of attribute "smil:keySplines".
      */
-    public String getKeysplines()
+    public String getKeySplines()
     {
         return getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "keySplines" ) );
     }
@@ -249,9 +249,9 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Set value of attribute "smil:keySplines".
      */
-    public void setKeysplines( String _aKeysplines )
+    public void setKeySplines( String _aKeySplines )
     {
-        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "keySplines" ), _aKeysplines );
+        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "keySplines" ), _aKeySplines );
     }
 
     /**
@@ -305,7 +305,7 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Get value of attribute "smil:repeatDur".
      */
-    public String getRepeatdur()
+    public String getRepeatDur()
     {
         return getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatDur" ) );
     }
@@ -313,15 +313,15 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Set value of attribute "smil:repeatDur".
      */
-    public void setRepeatdur( String _aRepeatdur )
+    public void setRepeatDur( String _aRepeatDur )
     {
-        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatDur" ), _aRepeatdur );
+        setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatDur" ), _aRepeatDur );
     }
 
     /**
      * Get value of attribute "smil:repeatCount".
      */
-    public Integer getRepeatcount()
+    public Integer getRepeatCount()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatCount" ) );
         return OdfNonNegativeInteger.valueOf( aStringVal);
@@ -330,9 +330,9 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Set value of attribute "smil:repeatCount".
      */
-    public void setRepeatcount( Integer _aRepeatcount )
+    public void setRepeatCount( Integer _aRepeatCount )
     {                    
-        String aStringVal = OdfNonNegativeInteger.toString( _aRepeatcount );
+        String aStringVal = OdfNonNegativeInteger.toString( _aRepeatCount );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "repeatCount" ), aStringVal );
     }
 
@@ -362,7 +362,7 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Get value of attribute "smil:restartDefault".
      */
-    public OdfRestartdefaultType getRestartdefault()
+    public OdfRestartDefaultType getRestartDefault()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restartDefault" ) );
         if( aStringVal.length()==0 )
@@ -370,15 +370,15 @@ public abstract class OdfAnimateElement extends OdfElement
             aStringVal = "inherit";
         }
 
-        return OdfRestartdefaultType.enumValueOf( aStringVal);
+        return OdfRestartDefaultType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "smil:restartDefault".
      */
-    public void setRestartdefault( OdfRestartdefaultType _aRestartdefault )
+    public void setRestartDefault( OdfRestartDefaultType _aRestartDefault )
     {                    
-        String aStringVal = OdfRestartdefaultType.toString( _aRestartdefault );
+        String aStringVal = OdfRestartDefaultType.toString( _aRestartDefault );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "restartDefault" ), aStringVal );
     }
 
@@ -403,18 +403,18 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Get value of attribute "smil:fillDefault".
      */
-    public OdfFilldefaultType getFilldefault()
+    public OdfFillDefaultType getFillDefault()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "fillDefault" ) );
-        return OdfFilldefaultType.enumValueOf( aStringVal);
+        return OdfFillDefaultType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "smil:fillDefault".
      */
-    public void setFilldefault( OdfFilldefaultType _aFilldefault )
+    public void setFillDefault( OdfFillDefaultType _aFillDefault )
     {                    
-        String aStringVal = OdfFilldefaultType.toString( _aFilldefault );
+        String aStringVal = OdfFillDefaultType.toString( _aFillDefault );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "fillDefault" ), aStringVal );
     }
 
@@ -467,7 +467,7 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Get value of attribute "smil:autoReverse".
      */
-    public Boolean getAutoreverse()
+    public Boolean getAutoReverse()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SMIL, "autoReverse" ) );
         return OdfBoolean.valueOf( aStringVal);
@@ -476,9 +476,9 @@ public abstract class OdfAnimateElement extends OdfElement
     /**
      * Set value of attribute "smil:autoReverse".
      */
-    public void setAutoreverse( Boolean _aAutoreverse )
+    public void setAutoReverse( Boolean _aAutoReverse )
     {                    
-        String aStringVal = OdfBoolean.toString( _aAutoreverse );
+        String aStringVal = OdfBoolean.toString( _aAutoReverse );
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "autoReverse" ), aStringVal );
     }
 

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfValueType
 {
-              STRING( "string" ), TIME( "time" ), CURRENCY( "currency" ), FLOAT( "float" ), DATE( "date" ), BOOLEAN( "boolean" ), PERCENTAGE( "percentage" );
+              CURRENCY( "currency" ), FLOAT( "float" ), DATE( "date" ), BOOLEAN( "boolean" ), STRING( "string" ), PERCENTAGE( "percentage" ), TIME( "time" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfValueType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

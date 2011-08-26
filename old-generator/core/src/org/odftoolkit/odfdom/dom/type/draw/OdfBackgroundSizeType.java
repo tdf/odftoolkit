@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfBackgroundSizeType
 {
-              FULL( "full" ), BORDER( "border" );
+              BORDER( "border" ), FULL( "full" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfBackgroundSizeType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

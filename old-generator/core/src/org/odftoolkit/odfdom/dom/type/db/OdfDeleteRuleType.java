@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.db;
 
 public enum OdfDeleteRuleType
 {
-              RESTRICT( "restrict" ), NO_ACTION( "no-action" ), SET_NULL( "set-null" ), SET_DEFAULT( "set-default" ), CASCADE( "cascade" );
+              NO_ACTION( "no-action" ), RESTRICT( "restrict" ), SET_DEFAULT( "set-default" ), SET_NULL( "set-null" ), CASCADE( "cascade" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfDeleteRuleType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

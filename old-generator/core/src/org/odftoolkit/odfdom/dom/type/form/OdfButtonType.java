@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.form;
 
 public enum OdfButtonType
 {
-              SUBMIT( "submit" ), PUSH( "push" ), RESET( "reset" ), URL( "url" );
+              URL( "url" ), PUSH( "push" ), RESET( "reset" ), SUBMIT( "submit" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfButtonType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

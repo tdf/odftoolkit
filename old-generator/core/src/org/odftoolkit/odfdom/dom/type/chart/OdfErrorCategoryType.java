@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfErrorCategoryType
 {
-              CELL_RANGE( "cell-range" ), NONE( "none" ), STANDARD_ERROR( "standard-error" ), STANDARD_DEVIATION( "standard-deviation" ), VARIANCE( "variance" ), ERROR_MARGIN( "error-margin" ), CONSTANT( "constant" ), PERCENTAGE( "percentage" );
+              STANDARD_ERROR( "standard-error" ), ERROR_MARGIN( "error-margin" ), STANDARD_DEVIATION( "standard-deviation" ), VARIANCE( "variance" ), NONE( "none" ), CELL_RANGE( "cell-range" ), PERCENTAGE( "percentage" ), CONSTANT( "constant" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfErrorCategoryType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

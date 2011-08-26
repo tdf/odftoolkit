@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfCaptionSequenceFormatType
 {
-              TEXT( "text" ), CATEGORY_AND_VALUE( "category-and-value" ), CAPTION( "caption" );
+              CAPTION( "caption" ), CATEGORY_AND_VALUE( "category-and-value" ), TEXT( "text" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfCaptionSequenceFormatType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

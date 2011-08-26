@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfTextAutospaceType
 {
-              NONE( "none" ), IDEOGRAPH_ALPHA( "ideograph-alpha" );
+              IDEOGRAPH_ALPHA( "ideograph-alpha" ), NONE( "none" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTextAutospaceType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

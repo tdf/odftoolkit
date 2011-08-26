@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfSolidType
 {
-              CYLINDER( "cylinder" ), PYRAMID( "pyramid" ), CONE( "cone" ), CUBOID( "cuboid" );
+              CUBOID( "cuboid" ), CONE( "cone" ), CYLINDER( "cylinder" ), PYRAMID( "pyramid" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfSolidType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.presentation;
 
 public enum OdfTransitionType
 {
-              MANUAL( "manual" ), SEMI_AUTOMATIC( "semi-automatic" ), AUTOMATIC( "automatic" );
+              AUTOMATIC( "automatic" ), SEMI_AUTOMATIC( "semi-automatic" ), MANUAL( "manual" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTransitionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

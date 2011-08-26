@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfAxisLabelPositionType
 {
-              NEAR_AXIS( "near-axis" ), NEAR_AXIS_OTHER_SIDE( "near-axis-other-side" ), OUTSIDE_START( "outside-start" ), OUTSIDE_END( "outside-end" );
+              NEAR_AXIS_OTHER_SIDE( "near-axis-other-side" ), OUTSIDE_END( "outside-end" ), OUTSIDE_START( "outside-start" ), NEAR_AXIS( "near-axis" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfAxisLabelPositionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

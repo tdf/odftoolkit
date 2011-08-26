@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfLabelPositionType
 {
-              RIGHT( "right" ), INSIDE( "inside" ), TOP( "top" ), TOP_RIGHT( "top-right" ), LEFT( "left" ), OUTSIDE( "outside" ), BOTTOM_LEFT( "bottom-left" ), BOTTOM( "bottom" ), AVOID_OVERLAP( "avoid-overlap" ), CENTER( "center" ), NEAR_ORIGIN( "near-origin" ), BOTTOM_RIGHT( "bottom-right" ), TOP_LEFT( "top-left" );
+              TOP( "top" ), OUTSIDE( "outside" ), RIGHT( "right" ), AVOID_OVERLAP( "avoid-overlap" ), LEFT( "left" ), TOP_RIGHT( "top-right" ), BOTTOM( "bottom" ), BOTTOM_LEFT( "bottom-left" ), TOP_LEFT( "top-left" ), INSIDE( "inside" ), CENTER( "center" ), BOTTOM_RIGHT( "bottom-right" ), NEAR_ORIGIN( "near-origin" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfLabelPositionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

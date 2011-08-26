@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.draw;
 
 public enum OdfCaptionType
 {
-              STRAIGHT_LINE( "straight-line" ), ANGLED_LINE( "angled-line" ), ANGLED_CONNECTOR_LINE( "angled-connector-line" );
+              STRAIGHT_LINE( "straight-line" ), ANGLED_CONNECTOR_LINE( "angled-connector-line" ), ANGLED_LINE( "angled-line" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfCaptionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

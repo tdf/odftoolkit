@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfSheetObjectType
 {
-              TABLE( "table" ), ROW( "row" ), COLUMN( "column" );
+              ROW( "row" ), TABLE( "table" ), COLUMN( "column" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfSheetObjectType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

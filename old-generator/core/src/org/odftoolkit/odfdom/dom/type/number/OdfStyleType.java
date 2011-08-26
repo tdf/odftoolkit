@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.number;
 
 public enum OdfStyleType
 {
-              SHORT( "short" ), LONG( "long" );
+              LONG( "long" ), SHORT( "short" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfStyleType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

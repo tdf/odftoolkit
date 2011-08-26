@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfHorizontalPosType
 {
-              RIGHT( "right" ), INSIDE( "inside" ), FROM_LEFT( "from-left" ), OUTSIDE( "outside" ), LEFT( "left" ), CENTER( "center" ), FROM_INSIDE( "from-inside" );
+              OUTSIDE( "outside" ), RIGHT( "right" ), LEFT( "left" ), INSIDE( "inside" ), FROM_LEFT( "from-left" ), FROM_INSIDE( "from-inside" ), CENTER( "center" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfHorizontalPosType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

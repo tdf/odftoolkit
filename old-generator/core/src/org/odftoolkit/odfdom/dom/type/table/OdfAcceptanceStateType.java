@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfAcceptanceStateType
 {
-              PENDING( "pending" ), ACCEPTED( "accepted" ), REJECTED( "rejected" );
+              PENDING( "pending" ), REJECTED( "rejected" ), ACCEPTED( "accepted" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfAcceptanceStateType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.chart;
 
 public enum OdfInterpolationType
 {
-              CUBIC_SPLINE( "cubic-spline" ), B_SPLINE( "b-spline" ), NONE( "none" );
+              B_SPLINE( "b-spline" ), NONE( "none" ), CUBIC_SPLINE( "cubic-spline" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfInterpolationType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

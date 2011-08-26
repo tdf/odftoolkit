@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.text;
 
 public enum OdfNumberPositionType
 {
-              RIGHT( "right" ), INNER( "inner" ), LEFT( "left" ), OUTER( "outer" );
+              RIGHT( "right" ), LEFT( "left" ), INNER( "inner" ), OUTER( "outer" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfNumberPositionType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

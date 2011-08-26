@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.table;
 
 public enum OdfAlignType
 {
-              RIGHT( "right" ), LEFT( "left" ), MARGINS( "margins" ), CENTER( "center" );
+              MARGINS( "margins" ), RIGHT( "right" ), LEFT( "left" ), CENTER( "center" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfAlignType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.fo;
 
 public enum OdfTextAlignLastType
 {
-              START( "start" ), CENTER( "center" ), JUSTIFY( "justify" );
+              JUSTIFY( "justify" ), START( "start" ), CENTER( "center" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTextAlignLastType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

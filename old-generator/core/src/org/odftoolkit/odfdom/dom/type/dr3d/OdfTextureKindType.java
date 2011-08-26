@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.dr3d;
 
 public enum OdfTextureKindType
 {
-              COLOR( "color" ), LUMINANCE( "luminance" ), INTENSITY( "intensity" );
+              INTENSITY( "intensity" ), LUMINANCE( "luminance" ), COLOR( "color" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfTextureKindType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }

@@ -28,7 +28,7 @@ package org.odftoolkit.odfdom.dom.type.style;
 
 public enum OdfRubyAlignType
 {
-              RIGHT( "right" ), DISTRIBUTE_SPACE( "distribute-space" ), LEFT( "left" ), CENTER( "center" ), DISTRIBUTE_LETTER( "distribute-letter" );
+              RIGHT( "right" ), LEFT( "left" ), DISTRIBUTE_LETTER( "distribute-letter" ), DISTRIBUTE_SPACE( "distribute-space" ), CENTER( "center" );
 
     private String m_aValue;
 
@@ -37,8 +37,7 @@ public enum OdfRubyAlignType
         m_aValue = _aValue;
     }
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return m_aValue;
     }
