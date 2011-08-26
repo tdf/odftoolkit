@@ -94,6 +94,11 @@ public abstract class OdfShowTextElement extends OdfElement
     public OdfEffectType getEffect()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "effect" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "none";
+        }
+
         return OdfEffectType.enumValueOf( aStringVal);
     }
 
@@ -112,6 +117,11 @@ public abstract class OdfShowTextElement extends OdfElement
     public OdfDirectionType getDirection()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "direction" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "none";
+        }
+
         return OdfDirectionType.enumValueOf( aStringVal);
     }
 
@@ -130,6 +140,11 @@ public abstract class OdfShowTextElement extends OdfElement
     public OdfSpeedType getSpeed()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "speed" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "medium";
+        }
+
         return OdfSpeedType.enumValueOf( aStringVal);
     }
 
@@ -166,6 +181,11 @@ public abstract class OdfShowTextElement extends OdfElement
     public Double getStartScale()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "start-scale" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "100%";
+        }
+
         return OdfPercent.valueOf( aStringVal);
     }
 

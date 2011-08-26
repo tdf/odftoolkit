@@ -144,6 +144,11 @@ public abstract class OdfTableOfContentElement extends OdfStylableElement
     public String getProtectionKeyDigestAlgorithm()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "protection-key-digest-algorithm" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "http://www.w3.org/2000/09/xmldsig#sha1";
+        }
+
         return OdfAnyURI.valueOf( aStringVal);
     }
 

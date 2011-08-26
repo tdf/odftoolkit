@@ -123,6 +123,11 @@ public abstract class OdfDatabaseRangeElement extends OdfElement
     public Boolean getOnUpdateKeepSize()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "on-update-keep-size" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -141,6 +146,11 @@ public abstract class OdfDatabaseRangeElement extends OdfElement
     public Boolean getHasPersistentData()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "has-persistent-data" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -159,6 +169,11 @@ public abstract class OdfDatabaseRangeElement extends OdfElement
     public OdfDatabaseOrientationType getOrientation()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "orientation" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "row";
+        }
+
         return OdfDatabaseOrientationType.enumValueOf( aStringVal);
     }
 
@@ -177,6 +192,11 @@ public abstract class OdfDatabaseRangeElement extends OdfElement
     public Boolean getContainsHeader()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "contains-header" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

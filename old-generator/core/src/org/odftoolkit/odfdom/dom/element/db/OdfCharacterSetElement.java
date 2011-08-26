@@ -60,8 +60,14 @@ public abstract class OdfCharacterSetElement extends OdfElement
      * Get value of attribute "db:encoding".
      */
     public String getEncoding()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.DB, "encoding" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "encoding" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "utf-8";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**

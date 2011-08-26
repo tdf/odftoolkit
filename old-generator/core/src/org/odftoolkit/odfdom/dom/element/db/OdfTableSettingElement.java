@@ -63,6 +63,11 @@ public abstract class OdfTableSettingElement extends OdfElement
     public Boolean getIsFirstRowHeaderLine()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "is-first-row-header-line" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

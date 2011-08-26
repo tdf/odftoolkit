@@ -120,6 +120,11 @@ public abstract class OdfFormElement extends OdfElement
     public OdfTargetFrameNameType getTargetFrame()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "target-frame" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "_blank";
+        }
+
         return OdfTargetFrameNameType.enumValueOf( aStringVal);
     }
 
@@ -136,8 +141,14 @@ public abstract class OdfFormElement extends OdfElement
      * Get value of attribute "form:method".
      */
     public String getMethod()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.FORM, "method" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "method" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "get";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -152,8 +163,14 @@ public abstract class OdfFormElement extends OdfElement
      * Get value of attribute "form:enctype".
      */
     public String getEnctype()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.FORM, "enctype" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "enctype" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "application/x-www-form-urlencoded";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -170,6 +187,11 @@ public abstract class OdfFormElement extends OdfElement
     public Boolean getAllowDeletes()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "allow-deletes" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -188,6 +210,11 @@ public abstract class OdfFormElement extends OdfElement
     public Boolean getAllowInserts()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "allow-inserts" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -206,6 +233,11 @@ public abstract class OdfFormElement extends OdfElement
     public Boolean getAllowUpdates()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "allow-updates" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -242,6 +274,11 @@ public abstract class OdfFormElement extends OdfElement
     public OdfCommandType getCommandType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "command-type" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "command";
+        }
+
         return OdfCommandType.enumValueOf( aStringVal);
     }
 
@@ -326,6 +363,11 @@ public abstract class OdfFormElement extends OdfElement
     public Boolean getEscapeProcessing()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "escape-processing" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

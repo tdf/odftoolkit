@@ -21,10 +21,7 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.dom.test;
 
-import java.io.File;
-
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
@@ -47,12 +44,6 @@ public class TableTest {
     public TableTest() {
     }
     
-    @Before
-    public void createTestDirectory() throws Exception {
-    	File testFile = new File(TEST_FILE_SAVE_2TABLES_OUT);
-    	testFile.getParentFile().mkdirs();
-    }
-
     @Test
     public void testTable() {
         try {

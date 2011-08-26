@@ -105,6 +105,11 @@ public abstract class OdfDataPilotTableElement extends OdfElement
     public OdfGrandTotalType getGrandTotal()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "grand-total" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "both";
+        }
+
         return OdfGrandTotalType.enumValueOf( aStringVal);
     }
 
@@ -193,6 +198,11 @@ public abstract class OdfDataPilotTableElement extends OdfElement
     public Boolean getShowFilterButton()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "show-filter-button" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -211,6 +221,11 @@ public abstract class OdfDataPilotTableElement extends OdfElement
     public Boolean getDrillDownOnDoubleClick()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "drill-down-on-double-click" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

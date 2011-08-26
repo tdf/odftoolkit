@@ -158,6 +158,11 @@ public abstract class OdfImageElement extends OdfElement
     public OdfButtonType getButtonType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "button-type" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "push";
+        }
+
         return OdfButtonType.enumValueOf( aStringVal);
     }
 
@@ -212,6 +217,11 @@ public abstract class OdfImageElement extends OdfElement
     public Boolean getPrintable()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "printable" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -230,6 +240,11 @@ public abstract class OdfImageElement extends OdfElement
     public Integer getTabIndex()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-index" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0";
+        }
+
         return OdfNonNegativeInteger.valueOf( aStringVal);
     }
 
@@ -248,6 +263,11 @@ public abstract class OdfImageElement extends OdfElement
     public Boolean getTabStop()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FORM, "tab-stop" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -266,6 +286,11 @@ public abstract class OdfImageElement extends OdfElement
     public OdfTargetFrameNameType getTargetFrame()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "target-frame" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "_blank";
+        }
+
         return OdfTargetFrameNameType.enumValueOf( aStringVal);
     }
 

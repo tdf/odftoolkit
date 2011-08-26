@@ -69,8 +69,14 @@ public abstract class OdfLineargradientElement extends OdfElement
      * Get value of attribute "svg:gradientUnits".
      */
     public String getGradientunits()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.SVG, "gradientUnits" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "gradientUnits" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "objectBoundingBox";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -103,6 +109,11 @@ public abstract class OdfLineargradientElement extends OdfElement
     public OdfSpreadmethodType getSpreadmethod()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "spreadMethod" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "pad";
+        }
+
         return OdfSpreadmethodType.enumValueOf( aStringVal);
     }
 
@@ -153,8 +164,14 @@ public abstract class OdfLineargradientElement extends OdfElement
      * Get value of attribute "svg:x1".
      */
     public String getX1()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.SVG, "x1" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "x1" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0%";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -169,8 +186,14 @@ public abstract class OdfLineargradientElement extends OdfElement
      * Get value of attribute "svg:y1".
      */
     public String getY1()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.SVG, "y1" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "y1" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0%";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -185,8 +208,14 @@ public abstract class OdfLineargradientElement extends OdfElement
      * Get value of attribute "svg:x2".
      */
     public String getX2()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.SVG, "x2" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "x2" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "100%";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -201,8 +230,14 @@ public abstract class OdfLineargradientElement extends OdfElement
      * Get value of attribute "svg:y2".
      */
     public String getY2()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.SVG, "y2" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.SVG, "y2" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "100%";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**

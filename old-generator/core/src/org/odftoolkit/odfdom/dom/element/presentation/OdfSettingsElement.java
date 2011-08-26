@@ -99,6 +99,11 @@ public abstract class OdfSettingsElement extends OdfElement
     public Boolean getFullScreen()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "full-screen" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -189,6 +194,11 @@ public abstract class OdfSettingsElement extends OdfElement
     public Boolean getMouseVisible()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "mouse-visible" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -243,6 +253,11 @@ public abstract class OdfSettingsElement extends OdfElement
     public OdfAnimationsType getAnimations()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "animations" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "enabled";
+        }
+
         return OdfAnimationsType.enumValueOf( aStringVal);
     }
 
@@ -261,6 +276,11 @@ public abstract class OdfSettingsElement extends OdfElement
     public OdfTransitionOnClickType getTransitionOnClick()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "transition-on-click" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "enabled";
+        }
+
         return OdfTransitionOnClickType.enumValueOf( aStringVal);
     }
 
@@ -297,6 +317,11 @@ public abstract class OdfSettingsElement extends OdfElement
     public Boolean getShowEndOfPresentationSlide()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "show-end-of-presentation-slide" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

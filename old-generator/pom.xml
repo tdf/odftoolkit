@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.odftoolkit</groupId>
   <artifactId>odfdom</artifactId>
-  <version>0.6-SNAPSHOT</version>
+  <version>0.7-SNAPSHOT</version>
   <name>odfdom</name>
   <packaging>pom</packaging>
 
@@ -11,6 +11,19 @@
     <connection>scm:hg:http://http://odftoolkit.org/hg/odfdom~developer</connection>
     <developerConnection>scm:hg:https://odftoolkit.org/hg/odfdom~developer</developerConnection>
   </scm>
+
+<!-- for now, we deploy to local files, until other arrangements are made -->
+  <distributionManagement>
+    <repository>
+      <id>local-release-files</id>
+      <url>${odfdom.release}</url>
+    </repository>
+    <snapshotRepository>
+      <id>local-snapshot-files</id>
+      <name>Local Snapshot</name>
+    <url>${odfdom.snapshot}</url>
+  </snapshotRepository>
+  </distributionManagement>
 
   <prerequisites>
     <maven>2.0.8</maven>
@@ -24,6 +37,7 @@
     <module>codegen</module>
     <module>codegen-maven-plugin</module>
     <module>core</module>
+    <module>maven-performancetest-plugin</module>
 
   </modules>
   <build>

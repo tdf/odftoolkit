@@ -63,6 +63,11 @@ public abstract class OdfTrackedChangesElement extends OdfElement
     public Boolean getTrackChanges()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "track-changes" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

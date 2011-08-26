@@ -63,6 +63,11 @@ public abstract class OdfTableRowGroupElement extends OdfElement
     public Boolean getDisplay()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "display" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

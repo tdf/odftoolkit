@@ -98,6 +98,11 @@ public abstract class OdfErrorMessageElement extends OdfElement
     public OdfMessageType getMessageType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "message-type" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "stop";
+        }
+
         return OdfMessageType.enumValueOf( aStringVal);
     }
 

@@ -64,6 +64,11 @@ public abstract class OdfSortElement extends OdfElement
     public Boolean getBindStylesToContent()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "bind-styles-to-content" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -196,6 +201,11 @@ public abstract class OdfSortElement extends OdfElement
     public OdfEmbeddedNumberBehaviorType getEmbeddedNumberBehavior()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "embedded-number-behavior" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "alpha-numeric";
+        }
+
         return OdfEmbeddedNumberBehaviorType.enumValueOf( aStringVal);
     }
 

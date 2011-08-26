@@ -89,6 +89,11 @@ public abstract class OdfPlayElement extends OdfElement
     public OdfSpeedType getSpeed()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "speed" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "medium";
+        }
+
         return OdfSpeedType.enumValueOf( aStringVal);
     }
 
