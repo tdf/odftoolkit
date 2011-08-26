@@ -177,7 +177,7 @@ public class ODFXSLTRunner {
                 aInputSource = new StreamSource( aInputPkg.getInputStream(aPathInPackage), aInputFile.toURI().toString() + '/' + aPathInPackage );
                 OdfFileEntry aFileEntry =  aInputPkg.getFileEntry(aPathInPackage);
                 if( aFileEntry != null )
-                    aMediaType = aFileEntry.getMediaType();
+                    aMediaType = aFileEntry.getMediaTypeString();
                 aURIResolver =
                     new ODFURIResolver( aInputPkg, aInputFile.toURI().toString(), aPathInPackage, aLogger );
             }
@@ -349,7 +349,7 @@ public class ODFXSLTRunner {
                                      List<String> aExtractFileNames,
                                      Logger aLogger )
     {
-        Set<String> aInputPkgEntries = aInputPkg.getFileEntries();
+        Set<String> aInputPkgEntries = aInputPkg.getFilePaths();
 
         Iterator<String> aInputPkgEntryIter = aInputPkgEntries.iterator();
         while( aInputPkgEntryIter.hasNext() )
