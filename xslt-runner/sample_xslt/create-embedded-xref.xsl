@@ -177,7 +177,7 @@
             <xsl:when test="starts-with($tag, '&lt;') and contains($tag,'&gt;')">
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
-                    <xsl:variable name="is-in-attributes" select="preceding::text:h[@text:outline-level='1']='Attributes'"/>
+                    <xsl:variable name="is-in-attributes" select="preceding::text:h[@text:outline-level='1']='General Attributes'"/>
                     <xsl:call-template name="create-element-ref-mark-start">
                          <xsl:with-param name="tag" select="$tag"/>
                          <xsl:with-param name="is-in-attributes" select="$is-in-attributes"/>
@@ -197,7 +197,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="attr-name" select="$tag"/>
-                <xsl:variable name="fp" select="preceding::text:h[@text:outline-level='1'][last()]='Formatting Properties'"/>
+                <xsl:variable name="fp" select="preceding::text:h[@text:outline-level='1'][last()]='Formatting Attributes'"/>
                 <xsl:if test="$check-xref-anchors">
                     <xsl:choose>
                         <xsl:when test="not(document($xref-schema-file)/rng:grammar/rng:element[(starts-with(@name,'style:') and contains(@name,'-properties'))=$fp]/rng:attribute[@name=$attr-name])">
@@ -339,10 +339,10 @@
                 <xsl:when test="$count > 0">
                     <xsl:choose>
                         <xsl:when test="$count = 1">
-                            <xsl:text> may have the following attribute: </xsl:text>
+                            <xsl:text> has the following attribute: </xsl:text>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:text> may have the following attributes: </xsl:text>
+                            <xsl:text> has the following attributes: </xsl:text>
                         </xsl:otherwise>
                     </xsl:choose>
                     <!-- collect attributes -->
@@ -410,10 +410,10 @@
                 <xsl:when test="$count > 0">
                     <xsl:choose>
                         <xsl:when test="$count = 1">
-                            <xsl:text> may have the following child element: </xsl:text>
+                            <xsl:text> has the following child element: </xsl:text>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:text> may have the following child elements: </xsl:text>
+                            <xsl:text> has the following child elements: </xsl:text>
                         </xsl:otherwise>
                     </xsl:choose>
                     <!-- collect elements -->
@@ -452,7 +452,7 @@
                     <xsl:value-of select="@name"/>
                     <xsl:text>&gt;</xsl:text>
                 </text:span>
-                <xsl:text> element may have text content.</xsl:text>
+                <xsl:text> element has text content.</xsl:text>
             </text:p>
         </xsl:if>
     </xsl:template>
@@ -475,10 +475,10 @@
             <xsl:text> attribute </xsl:text>
             <xsl:choose>
                 <xsl:when test="$count = 1">
-                    <xsl:text> may be used with the following element: </xsl:text>
+                    <xsl:text> is usable with the following element: </xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:text> may be used with the following elements: </xsl:text>
+                    <xsl:text> is usable with the following elements: </xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
             <!-- collect elements -->
@@ -988,10 +988,10 @@
                 <xsl:text> element </xsl:text>
                 <xsl:choose>
                     <xsl:when test="$count = 1">
-                        <xsl:text> may be used with the following element: </xsl:text>
+                        <xsl:text> is usable with the following element: </xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text> may be used with the following elements: </xsl:text>
+                        <xsl:text> is usable used with the following elements: </xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
                 <!-- collect elements -->
