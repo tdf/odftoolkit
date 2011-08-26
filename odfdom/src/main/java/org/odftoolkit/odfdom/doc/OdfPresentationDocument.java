@@ -22,6 +22,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.util.Collection;
+import java.util.EnumSet;
+
 import org.odftoolkit.odfdom.doc.office.OdfOfficePresentation;
 
 /**
@@ -33,45 +36,75 @@ import org.odftoolkit.odfdom.doc.office.OdfOfficePresentation;
  */
 public class OdfPresentationDocument extends OdfDocument {
 
-    private static String EMPTY_PRESENTATION_DOCUMENT_PATH = "/OdfPresentationDocument.odp";
-    private static Resource EMPTY_PRESENTATION_DOCUMENT_RESOURCE = new Resource(EMPTY_PRESENTATION_DOCUMENT_PATH);
+	private static String EMPTY_PRESENTATION_DOCUMENT_PATH = "/OdfPresentationDocument.odp";
+	private static Resource EMPTY_PRESENTATION_DOCUMENT_RESOURCE = new Resource(EMPTY_PRESENTATION_DOCUMENT_PATH);
 
-    /**
-     * Creates an empty presentation document.
-     * @return ODF presentation document based on a default template
-     * @throws java.lang.Exception - if the document could not be created
-     */
-    public static OdfPresentationDocument newPresentationDocument() throws Exception {
-        return (OdfPresentationDocument) OdfDocument.loadTemplate(EMPTY_PRESENTATION_DOCUMENT_RESOURCE);
-    }    
-    
-    // Using static factory instead of constructor
-    protected OdfPresentationDocument(){};
-    
-    /**
-     * Get the media type
-     * 
-     * @return the mediaTYPE string of this package
-     */
-    @Override
-    public String getMediaType() {
-        return OdfDocument.OdfMediaType.PRESENTATION.toString();
-    }
+	/**
+	 * This enum contains all possible media types of OdfPresentationDocument
+	 * documents.
+	 */
+	public enum SupportedType {
 
-    /**
-     * Get the content root of a presentation document.
-     *
-     * @return content root, representing the office:presentation tag
-     * @throws Exception if the file DOM could not be created.
-     */
-    public OdfOfficePresentation getContentRoot() throws Exception {
-        return super.getContentRoot(OdfOfficePresentation.class);
-    }
+		PRESENTATION(OdfMediaType.PRESENTATION),
+		PRESENTATION_TEMPLATE(OdfMediaType.PRESENTATION_TEMPLATE);
+		private final OdfMediaType mMediaType;
 
-    private static final String TO_STRING_METHOD_TOKEN = "\n" + OdfDocument.OdfMediaType.PRESENTATION + " - ID: ";
+		SupportedType(OdfMediaType mediaType) {
+			this.mMediaType = mediaType;
+		}
 
-    @Override
-    public String toString() {
-        return TO_STRING_METHOD_TOKEN + this.hashCode() + " " + getPackage().getBaseURI();
-    }
+		public OdfMediaType getOdfMediaType() {
+			return mMediaType;
+		}
+
+		@Override
+		public String toString() {
+			return mMediaType.toString();
+		}
+	}
+
+	/**
+	 * Creates an empty presentation document.
+	 * @return ODF presentation document based on a default template
+	 * @throws java.lang.Exception - if the document could not be created
+	 */
+	public static OdfPresentationDocument newPresentationDocument() throws Exception {
+		return (OdfPresentationDocument) OdfDocument.loadTemplate(EMPTY_PRESENTATION_DOCUMENT_RESOURCE);
+	}
+
+	/**
+	 * Creates an empty presentation template.
+	 * @return ODF presentation template based on a default
+	 * @throws Exception - if the template could not be created
+	 */
+	public static OdfPresentationDocument newPresentationTemplateDocument() throws Exception {
+		OdfPresentationDocument doc = (OdfPresentationDocument) OdfDocument.loadTemplate(EMPTY_PRESENTATION_DOCUMENT_RESOURCE);
+		doc.changeMode(SupportedType.PRESENTATION_TEMPLATE);
+		return doc;
+	}
+
+	// Using static factory instead of constructor
+	protected OdfPresentationDocument() {
+	}
+
+	/**
+	 * Get the content root of a presentation document.
+	 *
+	 * @return content root, representing the office:presentation tag
+	 * @throws Exception if the file DOM could not be created.
+	 */
+	public OdfOfficePresentation getContentRoot() throws Exception {
+		return super.getContentRoot(OdfOfficePresentation.class);
+	}
+
+	/**
+	 * Switches this instance to the given type. This method can be used to e.g. convert
+	 * a document instance to a template and vice versa. If the type is not supported by
+	 * the concrete document instance an IllegalArgumentException is raised.
+	 * @param type
+	 */
+	public void changeMode(SupportedType type) {
+		setMediaType(type.getOdfMediaType());
+		getPackage().setMediaType(type.toString());
+	}
 }

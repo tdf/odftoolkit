@@ -58,7 +58,6 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
-import org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
@@ -70,6 +69,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -92,6 +92,7 @@ public abstract class OdfDocument {
 	private static final String COLON = ":";
 	private static final String EMPTY_STRING = "";
 	private String mDocumentPathInPackage = EMPTY_STRING;
+
 	/**
 	 * This enum contains all possible standardized XML ODF files of the OpenDocument document.
 	 */
@@ -121,21 +122,21 @@ public abstract class OdfDocument {
 	public enum OdfMediaType {
 
 		CHART("application/vnd.oasis.opendocument.chart", "odc"),
-		//        CHART_TEMPLATE("application/vnd.oasis.opendocument.chart-template", "otc"),
+		CHART_TEMPLATE("application/vnd.oasis.opendocument.chart-template", "otc"),
 		//        FORMULA("application/vnd.oasis.opendocument.formula", "odf"),
 		//        FORMULA_TEMPLATE("application/vnd.oasis.opendocument.formula-template", "otf"),
 		GRAPHICS("application/vnd.oasis.opendocument.graphics", "odg"),
-		//        GRAPHICS_TEMPLATE("application/vnd.oasis.opendocument.graphics-template", "otg"),
+		GRAPHICS_TEMPLATE("application/vnd.oasis.opendocument.graphics-template", "otg"),
 		//        IMAGE("application/vnd.oasis.opendocument.image", "odi"),
 		//        IMAGE_TEMPLATE("application/vnd.oasis.opendocument.image-template", "oti"),
 		PRESENTATION("application/vnd.oasis.opendocument.presentation", "odp"),
-		//        PRESENTATION_TEMPLATE("application/vnd.oasis.opendocument.presentation-template", "otp"),
+		PRESENTATION_TEMPLATE("application/vnd.oasis.opendocument.presentation-template", "otp"),
 		SPREADSHEET("application/vnd.oasis.opendocument.spreadsheet", "ods"),
-		//        SPREADSHEET_TEMPLATE("application/vnd.oasis.opendocument.spreadsheet-template", "ots"),
-		TEXT("application/vnd.oasis.opendocument.text", "odt");
-		//        TEXT_MASTER("application/vnd.oasis.opendocument.text-master", "odm"),
-		//        TEXT_TEMPLATE("application/vnd.oasis.opendocument.text-template", "ott"),
-		//        TEXT_WEB("application/vnd.oasis.opendocument.text-web", "oth");
+		SPREADSHEET_TEMPLATE("application/vnd.oasis.opendocument.spreadsheet-template", "ots"),
+		TEXT("application/vnd.oasis.opendocument.text", "odt"),
+		TEXT_MASTER("application/vnd.oasis.opendocument.text-master", "odm"),
+		TEXT_TEMPLATE("application/vnd.oasis.opendocument.text-template", "ott"),
+		TEXT_WEB("application/vnd.oasis.opendocument.text-web", "oth");
 		private final String mMediaType;
 		private final String mSuffix;
 
@@ -182,15 +183,26 @@ public abstract class OdfDocument {
 	 */
 	private static OdfDocument newDocument(OdfMediaType odfMediaType, OdfPackage pkg) {
 		OdfDocument newDoc = null;
-		if (odfMediaType.equals(OdfMediaType.TEXT)) {
+		if (odfMediaType == OdfMediaType.TEXT
+				|| odfMediaType == OdfMediaType.TEXT_MASTER
+				|| odfMediaType == OdfMediaType.TEXT_TEMPLATE
+				|| odfMediaType == OdfMediaType.TEXT_WEB) {
 			newDoc = new OdfTextDocument();
-		} else if (odfMediaType.equals(OdfMediaType.SPREADSHEET)) {
+
+		} else if (odfMediaType == OdfMediaType.SPREADSHEET
+				|| odfMediaType == OdfMediaType.SPREADSHEET_TEMPLATE) {
 			newDoc = new OdfSpreadsheetDocument();
-		} else if (odfMediaType.equals(OdfMediaType.PRESENTATION)) {
+
+		} else if (odfMediaType == OdfMediaType.PRESENTATION
+				|| odfMediaType == OdfMediaType.PRESENTATION_TEMPLATE) {
 			newDoc = new OdfPresentationDocument();
-		} else if (odfMediaType.equals(OdfMediaType.GRAPHICS)) {
+
+		} else if (odfMediaType == OdfMediaType.GRAPHICS
+				|| odfMediaType == OdfMediaType.GRAPHICS_TEMPLATE) {
 			newDoc = new OdfGraphicsDocument();
-		} else if (odfMediaType.equals(OdfMediaType.CHART)) {
+
+		} else if (odfMediaType == OdfMediaType.CHART
+				|| odfMediaType == OdfMediaType.CHART_TEMPLATE) {
 			newDoc = new OdfChartDocument();
 		} else {
 			// if MediaType is not supported
@@ -332,14 +344,28 @@ public abstract class OdfDocument {
 		OdfDocument newDoc = null;
 		if (odfMediaType.equals(OdfMediaType.TEXT)) {
 			newDoc = OdfTextDocument.newTextDocument();
+		} else if (odfMediaType.equals(OdfMediaType.TEXT_MASTER)) {
+			newDoc = OdfTextDocument.newTextMasterDocument();
+		} else if (odfMediaType.equals(OdfMediaType.TEXT_TEMPLATE)) {
+			newDoc = OdfTextDocument.newTextTemplateDocument();
+		} else if (odfMediaType.equals(OdfMediaType.TEXT_WEB)) {
+			newDoc = OdfTextDocument.newTextWebDocument();
 		} else if (odfMediaType.equals(OdfMediaType.SPREADSHEET)) {
 			newDoc = OdfSpreadsheetDocument.newSpreadsheetDocument();
+		} else if (odfMediaType.equals(OdfMediaType.SPREADSHEET_TEMPLATE)) {
+			newDoc = OdfSpreadsheetDocument.newSpreadsheetTemplateDocument();
 		} else if (odfMediaType.equals(OdfMediaType.PRESENTATION)) {
 			newDoc = OdfPresentationDocument.newPresentationDocument();
+		} else if (odfMediaType.equals(OdfMediaType.PRESENTATION_TEMPLATE)) {
+			newDoc = OdfPresentationDocument.newPresentationTemplateDocument();
 		} else if (odfMediaType.equals(OdfMediaType.GRAPHICS)) {
 			newDoc = OdfGraphicsDocument.newGraphicsDocument();
+		} else if (odfMediaType.equals(OdfMediaType.GRAPHICS_TEMPLATE)) {
+			newDoc = OdfGraphicsDocument.newGraphicsTemplateDocument();
 		} else if (odfMediaType.equals(OdfMediaType.CHART)) {
 			newDoc = OdfChartDocument.newChartDocument();
+		} else if (odfMediaType.equals(OdfMediaType.CHART_TEMPLATE)) {
+			newDoc = OdfChartDocument.newChartTemplateDocument();
 		}
 		newDoc.setDocumentPathInPackage(pkgPathToChildDocument);
 		if (newDoc.isRootDocument()) {
@@ -671,7 +697,7 @@ public abstract class OdfDocument {
 		}
 		return mStylesDom;
 	}
-	
+
 	/**
 	 * Return the ODF type-based content DOM of the meta.xml
 	 * 
@@ -853,7 +879,7 @@ public abstract class OdfDocument {
 			if (getStylesStream() != null) {
 				mPackage.insert(getStylesDom(), getXMLFilePath(OdfXMLFile.STYLES), null);
 			}
-			if(getMetaStream()!=null) {
+			if (getMetaStream() != null) {
 				mPackage.insert(getMetaDom(), getXMLFilePath(OdfXMLFile.META), null);
 			}
 		} catch (Exception ex) {
@@ -1227,11 +1253,11 @@ public abstract class OdfDocument {
 			return super.resolveEntity(publicId, systemId);
 		}
 	}
-	private static final String TO_STRING_METHOD_TOKEN = "\nID: ";
 
 	@Override
 	public String toString() {
-		return TO_STRING_METHOD_TOKEN + this.hashCode() + " " + mPackage.getBaseURI();
+		return "\n" + getMediaType() + " - ID: " + this.hashCode() + " "
+				+ getPackage().getBaseURI();
 	}
 	private XPath xpath;
 
@@ -1314,27 +1340,25 @@ public abstract class OdfDocument {
 			mRootDocument.mCachedDocuments.remove(pathToObject);
 		}
 	}
-	
+
 	/**
 	 * Return an instance of table feature with the specific table name.
 	 * @param name of the table beeing searched for.
 	 * @return an instance of table feature with the specific table name.
 	 */
-	public OdfTable getTableByName(String name)
-	{
+	public OdfTable getTableByName(String name) {
 		try {
 			OdfElement root = getContentDom().getRootElement();
 			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-			
+
 			NodeList childList = typedContent.getChildNodes();
-			for(int i=0;i<childList.getLength();i++)
-			{
-				if (childList.item(i) instanceof TableTableElement)
-				{
+			for (int i = 0; i < childList.getLength(); i++) {
+				if (childList.item(i) instanceof TableTableElement) {
 					TableTableElement table = (TableTableElement) childList.item(i);
-					if (table.getOdfAttributeValue(OdfName.newName(OdfNamespaceNames.TABLE,"name")).equals(name))
+					if (table.getOdfAttributeValue(OdfName.newName(OdfNamespaceNames.TABLE, "name")).equals(name)) {
 						return OdfTable.getInstance(table);
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -1343,23 +1367,20 @@ public abstract class OdfDocument {
 		}
 		return null;
 	}
-	
-	
+
 	/**
 	 * Return a list of table features in this document.
 	 * @return a list of table features in this document.
 	 */
-	public List<OdfTable> getTableList()
-	{
+	public List<OdfTable> getTableList() {
 		List<OdfTable> tableList = new ArrayList<OdfTable>();
 		try {
 			OdfElement root = getContentDom().getRootElement();
 			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-			
+
 			NodeList childList = typedContent.getChildNodes();
-			for(int i=0;i<childList.getLength();i++)
-			{
+			for (int i = 0; i < childList.getLength(); i++) {
 				if (childList.item(i) instanceof TableTableElement) {
 					tableList.add(OdfTable.getInstance((TableTableElement) childList.item(i)));
 				}
@@ -1370,5 +1391,4 @@ public abstract class OdfDocument {
 		}
 		return tableList;
 	}
-	
 }

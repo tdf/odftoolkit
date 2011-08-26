@@ -24,7 +24,6 @@ package org.odftoolkit.odfdom.doc;
 
 import org.odftoolkit.odfdom.doc.office.OdfOfficeSpreadsheet;
 
-
 /**
  * This class represents an empty ODF spreadsheet file.
  * Note: The way of receiving a new empty OdfSpreadsheetDocument will probably change. 
@@ -34,46 +33,74 @@ import org.odftoolkit.odfdom.doc.office.OdfOfficeSpreadsheet;
  */
 public class OdfSpreadsheetDocument extends OdfDocument {
 
-    private static String EMPTY_SPREADSHEET_DOCUMENT_PATH = "/OdfSpreadsheetDocument.ods";
-    private static Resource EMPTY_SPREADSHEET_DOCUMENT_RESOURCE
-                    = new Resource(EMPTY_SPREADSHEET_DOCUMENT_PATH);
-    
-    /**
-     * Creates an empty spreadsheet document.
-     * @return ODF spreadsheet document based on a default template* 
-     * @throws java.lang.Exception - if the document could not be created
-     */
-    public static OdfSpreadsheetDocument newSpreadsheetDocument() throws Exception {
-        return (OdfSpreadsheetDocument) OdfDocument.loadTemplate(EMPTY_SPREADSHEET_DOCUMENT_RESOURCE);
-    }
-    
-    // Using static factory instead of constructor
-    protected OdfSpreadsheetDocument(){};
-    
-    /**
-     * Get the media type
-     * 
-     * @return the mediaTYPE string of this package
-     */
-    @Override
-    public String getMediaType() {
-        return OdfDocument.OdfMediaType.SPREADSHEET.toString();
-    }
+	private static String EMPTY_SPREADSHEET_DOCUMENT_PATH = "/OdfSpreadsheetDocument.ods";
+	private static Resource EMPTY_SPREADSHEET_DOCUMENT_RESOURCE = new Resource(EMPTY_SPREADSHEET_DOCUMENT_PATH);
 
-    /**
-     * Get the content root of a spreadsheet document.
-     *
-     * @return content root, representing the office:spreadsheet tag
-     * @throws Exception if the file DOM could not be created.
-     */
-    public OdfOfficeSpreadsheet getContentRoot() throws Exception {
-    	return super.getContentRoot(OdfOfficeSpreadsheet.class);
-    }
+	/**
+	 * This enum contains all possible media types of OdfSpreadsheetDocument
+	 * documents.
+	 */
+	public enum SupportedType {
 
-    private static final String TO_STRING_METHOD_TOKEN = "\n" + OdfDocument.OdfMediaType.SPREADSHEET + " - ID: ";
+		SPREADSHEET(OdfMediaType.SPREADSHEET),
+		SPREADSHEET_TEMPLATE(OdfMediaType.SPREADSHEET_TEMPLATE);
+		private final OdfMediaType mMediaType;
 
-    @Override
-    public String toString() {
-        return TO_STRING_METHOD_TOKEN + this.hashCode() + " " + getPackage().getBaseURI();
-    }
+		SupportedType(OdfMediaType mediaType) {
+			this.mMediaType = mediaType;
+		}
+
+		public OdfMediaType getOdfMediaType() {
+			return mMediaType;
+		}
+
+		@Override
+		public String toString() {
+			return mMediaType.toString();
+		}
+	}
+
+	/**
+	 * Creates an empty spreadsheet document.
+	 * @return ODF spreadsheet document based on a default template*
+	 * @throws java.lang.Exception - if the document could not be created
+	 */
+	public static OdfSpreadsheetDocument newSpreadsheetDocument() throws Exception {
+		return (OdfSpreadsheetDocument) OdfDocument.loadTemplate(EMPTY_SPREADSHEET_DOCUMENT_RESOURCE);
+	}
+
+	/**
+	 * Creates an empty spreadsheet template.
+	 * @return ODF spreadsheet template based on a default
+	 * @throws java.lang.Exception - if the template could not be created
+	 */
+	public static OdfSpreadsheetDocument newSpreadsheetTemplateDocument() throws Exception {
+		OdfSpreadsheetDocument doc = (OdfSpreadsheetDocument) OdfDocument.loadTemplate(EMPTY_SPREADSHEET_DOCUMENT_RESOURCE);
+		doc.changeMode(SupportedType.SPREADSHEET_TEMPLATE);
+		return doc;
+	}
+
+	// Using static factory instead of constructor
+	protected OdfSpreadsheetDocument() {
+	}
+
+	/**
+	 * Get the content root of a spreadsheet document.
+	 *
+	 * @return content root, representing the office:spreadsheet tag
+	 * @throws Exception if the file DOM could not be created.
+	 */
+	public OdfOfficeSpreadsheet getContentRoot() throws Exception {
+		return super.getContentRoot(OdfOfficeSpreadsheet.class);
+	}
+
+	/**
+	 * Switches this instance to the given type. This method can be used to e.g. convert
+	 * a document instance to a template and vice versa. 
+	 * @param type
+	 */
+	public void changeMode(SupportedType type) {
+		setMediaType(type.getOdfMediaType());
+		getPackage().setMediaType(type.toString());
+	}
 }

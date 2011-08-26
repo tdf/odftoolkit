@@ -39,6 +39,32 @@ public class OdfTextDocument extends OdfDocument {
 	private static Resource EMPTY_TEXT_DOCUMENT_RESOURCE = new Resource(EMPTY_TEXT_DOCUMENT_PATH);
 
 	/**
+	 * This enum contains all possible media types of OdfSpreadsheetDocument
+	 * documents.
+	 */
+	public enum SupportedType {
+
+		TEXT(OdfMediaType.TEXT),
+		TEXT_TEMPLATE(OdfMediaType.TEXT_TEMPLATE),
+		TEXT_MASTER(OdfMediaType.TEXT_MASTER),
+		TEXT_WEB(OdfMediaType.TEXT_WEB);
+		private final OdfMediaType mMediaType;
+
+		SupportedType(OdfMediaType mediaType) {
+			this.mMediaType = mediaType;
+		}
+
+		public OdfMediaType getOdfMediaType() {
+			return mMediaType;
+		}
+
+		@Override
+		public String toString() {
+			return mMediaType.toString();
+		}
+	}
+
+	/**
 	 * Creates an empty text document.
 	 * @return ODF text document based on a default template
 	 * @throws java.lang.Exception - if the document could not be created
@@ -47,20 +73,41 @@ public class OdfTextDocument extends OdfDocument {
 		return (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
 	}
 
-	// Using static factory instead of constructor
-	protected OdfTextDocument() {
+	/**
+	 * Creates an empty text template.
+	 * @return ODF text template based on a default
+	 * @throws java.lang.Exception - if the template could not be created
+	 */
+	public static OdfTextDocument newTextTemplateDocument() throws Exception {
+		OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
+		doc.changeMode(SupportedType.TEXT_TEMPLATE);
+		return doc;
 	}
 
-	;
+	/**
+	 * Creates an empty text master document.
+	 * @return ODF text master based on a default
+	 * @throws java.lang.Exception - if the document could not be created
+	 */
+	public static OdfTextDocument newTextMasterDocument() throws Exception {
+		OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
+		doc.changeMode(SupportedType.TEXT_MASTER);
+		return doc;
+	}
 
 	/**
-	 * Get the media type
-	 *
-	 * @return the mediaTYPE string of this package
+	 * Creates an empty text web.
+	 * @return ODF text web based on a default
+	 * @throws java.lang.Exception - if the document could not be created
 	 */
-	@Override
-	public String getMediaType() {
-		return OdfDocument.OdfMediaType.TEXT.toString();
+	public static OdfTextDocument newTextWebDocument() throws Exception {
+		OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
+		doc.changeMode(SupportedType.TEXT_WEB);
+		return doc;
+	}
+
+	// Using static factory instead of constructor
+	protected OdfTextDocument() {
 	}
 
 	/**
@@ -118,10 +165,14 @@ public class OdfTextDocument extends OdfDocument {
 		para.addContent(text);
 		return para;
 	}
-	private static final String TO_STRING_METHOD_TOKEN = "\n" + OdfDocument.OdfMediaType.TEXT + " - ID: ";
 
-	@Override
-	public String toString() {
-		return TO_STRING_METHOD_TOKEN + this.hashCode() + " " + getPackage().getBaseURI();
+	/**
+	 * Switches this instance to the given type. This method can be used to e.g.
+	 * convert a document instance to a template and vice versa. 	 * 
+	 * @param type
+	 */
+	public void changeMode(SupportedType type) {
+		setMediaType(type.getOdfMediaType());
+		getPackage().setMediaType(type.toString());
 	}
 }

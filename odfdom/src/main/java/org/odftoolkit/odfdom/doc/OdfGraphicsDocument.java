@@ -33,46 +33,73 @@ import org.odftoolkit.odfdom.doc.office.OdfOfficeDrawing;
  */
 public class OdfGraphicsDocument extends OdfDocument {
 
-    private static String EMPTY_GRAPHICS_DOCUMENT_PATH = "/OdfGraphicsDocument.odg";
-    private static Resource EMPTY_GRAPHICS_DOCUMENT_RESOURCE = new Resource(EMPTY_GRAPHICS_DOCUMENT_PATH);
+	private static String EMPTY_GRAPHICS_DOCUMENT_PATH = "/OdfGraphicsDocument.odg";
+	private static Resource EMPTY_GRAPHICS_DOCUMENT_RESOURCE = new Resource(EMPTY_GRAPHICS_DOCUMENT_PATH);
 
+	/**
+	 * This enum contains all possible media types of OdfGraphicsDocument documents.
+	 */
+	public enum SupportedType {
 
-    /**
-     * Creates an empty graphics document.
-     * @return ODF graphics document based on a default template
-     * @throws java.lang.Exception - if the document could not be created
-     */
-    public static OdfGraphicsDocument newGraphicsDocument() throws Exception {
-        return (OdfGraphicsDocument) OdfDocument.loadTemplate(EMPTY_GRAPHICS_DOCUMENT_RESOURCE);
-    }      
+		GRAPHICS(OdfMediaType.GRAPHICS),
+		GRAPHICS_TEMPLATE(OdfMediaType.GRAPHICS_TEMPLATE);
+		private final OdfMediaType mMediaType;
 
-    // Using static factory instead of constructor    
-    protected OdfGraphicsDocument(){};
-    
-    /**
-     * Get the media type
-     * 
-     * @return the mediaTYPE string of this package
-     */
-    @Override
-    public String getMediaType() {
-        return OdfDocument.OdfMediaType.GRAPHICS.toString();
-    }
+		SupportedType(OdfMediaType mediaType) {
+			this.mMediaType = mediaType;
+		}
 
-    /**
-     * Get the content root of a graphics document.
-     *
-     * @return content root, representing the office:drawing tag
-     * @throws Exception if the file DOM could not be created.
-     */
-    public OdfOfficeDrawing getContentRoot() throws Exception {
-        return super.getContentRoot(OdfOfficeDrawing.class);
-    }
+		public OdfMediaType getOdfMediaType() {
+			return mMediaType;
+		}
 
-    private static final String TO_STRING_METHOD_TOKEN = "\n" + OdfDocument.OdfMediaType.GRAPHICS + " - ID: ";
+		@Override
+		public String toString() {
+			return mMediaType.toString();
+		}
+	}
 
-    @Override
-    public String toString() {
-        return TO_STRING_METHOD_TOKEN + this.hashCode() + " " + getPackage().getBaseURI();
-    }
+	/**
+	 * Creates an empty graphics document.
+	 * @return ODF graphics document based on a default template
+	 * @throws java.lang.Exception - if the document could not be created
+	 */
+	public static OdfGraphicsDocument newGraphicsDocument() throws Exception {
+		return (OdfGraphicsDocument) OdfDocument.loadTemplate(EMPTY_GRAPHICS_DOCUMENT_RESOURCE);
+	}
+
+	/**
+	 * Creates an empty graphics template.
+	 * @return ODF graphics template based on a default
+	 * @throws java.lang.Exception - if the template could not be created
+	 */
+	public static OdfGraphicsDocument newGraphicsTemplateDocument() throws Exception {
+		OdfGraphicsDocument doc = (OdfGraphicsDocument) OdfDocument.loadTemplate(EMPTY_GRAPHICS_DOCUMENT_RESOURCE);
+		doc.changeMode(SupportedType.GRAPHICS_TEMPLATE);
+		return doc;
+	}
+
+	// Using static factory instead of constructor
+	protected OdfGraphicsDocument() {
+	}
+
+	/**
+	 * Get the content root of a graphics document.
+	 *
+	 * @return content root, representing the office:drawing tag
+	 * @throws Exception if the file DOM could not be created.
+	 */
+	public OdfOfficeDrawing getContentRoot() throws Exception {
+		return super.getContentRoot(OdfOfficeDrawing.class);
+	}
+
+	/**
+	 * Switches this instance to the given type. This method can be used to e.g. convert
+	 * a document instance to a template and vice versa.
+	 * @param type
+	 */
+	public void changeMode(SupportedType type) {
+		setMediaType(type.getOdfMediaType());
+		getPackage().setMediaType(type.toString());
+	}
 }
