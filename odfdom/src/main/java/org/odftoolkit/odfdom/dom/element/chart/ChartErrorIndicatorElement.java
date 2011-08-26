@@ -35,8 +35,6 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartDimensionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.chart.ChartErrorLowerRangeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.chart.ChartErrorUpperRangeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
 
 /**
@@ -89,54 +87,6 @@ public class ChartErrorIndicatorElement extends OdfStylableElement {
 		ChartDimensionAttribute attr = new ChartDimensionAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(chartDimensionValue);
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>ChartErrorLowerRangeAttribute</code> , See {@odf.attribute chart:error-lower-range}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getChartErrorLowerRangeAttribute() {
-		ChartErrorLowerRangeAttribute attr = (ChartErrorLowerRangeAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "error-lower-range");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>ChartErrorLowerRangeAttribute</code> , See {@odf.attribute chart:error-lower-range}
-	 *
-	 * @param chartErrorLowerRangeValue   The type is <code>String</code>
-	 */
-	public void setChartErrorLowerRangeAttribute(String chartErrorLowerRangeValue) {
-		ChartErrorLowerRangeAttribute attr = new ChartErrorLowerRangeAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setValue(chartErrorLowerRangeValue);
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>ChartErrorUpperRangeAttribute</code> , See {@odf.attribute chart:error-upper-range}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getChartErrorUpperRangeAttribute() {
-		ChartErrorUpperRangeAttribute attr = (ChartErrorUpperRangeAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "error-upper-range");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>ChartErrorUpperRangeAttribute</code> , See {@odf.attribute chart:error-upper-range}
-	 *
-	 * @param chartErrorUpperRangeValue   The type is <code>String</code>
-	 */
-	public void setChartErrorUpperRangeAttribute(String chartErrorUpperRangeValue) {
-		ChartErrorUpperRangeAttribute attr = new ChartErrorUpperRangeAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setValue(chartErrorUpperRangeValue);
 	}
 
 	/**

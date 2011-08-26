@@ -67,6 +67,47 @@ public class TextOutlineLevelAttribute extends OdfAttribute {
 	}
 
 	/**
+	 * The value set of {@odf.attribute text:outline-level}.
+	 */
+	public enum Value {
+		_1("1"), _2("2"), _3("3"), SEPARATOR("separator") ;
+
+		private String mValue;
+
+		Value(String value) {
+			mValue = value;
+		}
+
+		@Override
+		public String toString() {
+			return mValue;
+		}
+
+		public static Value enumValueOf(String value) {
+			for(Value aIter : values()) {
+				if (value.equals(aIter.toString())) {
+				return aIter;
+				}
+			}
+			return null;
+		}
+	}
+
+	/**
+	 * @param attrValue The <code>Enum</code> value of the attribute.
+	 */
+	public void setEnumValue(Value attrValue) {
+		setValue(attrValue.toString());
+	}
+
+	/**
+	 * @return Returns the <code>Enum</code> value of the attribute
+	 */
+	public Value getEnumValue() {
+		return Value.enumValueOf(this.getValue());
+	}
+
+	/**
 	 * @param value The <code>int</code> value of the attribute.
 	 */
 	public void setIntValue(int value) {

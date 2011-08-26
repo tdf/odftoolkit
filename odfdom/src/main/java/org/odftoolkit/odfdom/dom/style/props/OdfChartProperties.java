@@ -56,6 +56,8 @@ public interface OdfChartProperties {
 		OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.newName(OdfDocumentNamespace.CHART, "error-lower-indicator"));
 	public final static OdfStyleProperty ErrorLowerLimit =
 		OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.newName(OdfDocumentNamespace.CHART, "error-lower-limit"));
+	public final static OdfStyleProperty ErrorLowerRange =
+		OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.newName(OdfDocumentNamespace.CHART, "error-lower-range"));
 	public final static OdfStyleProperty ErrorMargin =
 		OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.newName(OdfDocumentNamespace.CHART, "error-margin"));
 	public final static OdfStyleProperty ErrorPercentage =
@@ -64,6 +66,8 @@ public interface OdfChartProperties {
 		OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.newName(OdfDocumentNamespace.CHART, "error-upper-indicator"));
 	public final static OdfStyleProperty ErrorUpperLimit =
 		OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.newName(OdfDocumentNamespace.CHART, "error-upper-limit"));
+	public final static OdfStyleProperty ErrorUpperRange =
+		OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.newName(OdfDocumentNamespace.CHART, "error-upper-range"));
 	public final static OdfStyleProperty GapWidth =
 		OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.newName(OdfDocumentNamespace.CHART, "gap-width"));
 	public final static OdfStyleProperty GroupBarsPerAxis =

@@ -51,6 +51,7 @@ import org.odftoolkit.odfdom.dom.element.style.StylePresentationPageLayoutElemen
 import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgLinearGradientElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgRadialGradientElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
 import org.odftoolkit.odfdom.dom.element.text.TextBibliographyConfigurationElement;
 import org.odftoolkit.odfdom.dom.element.text.TextLinenumberingConfigurationElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
@@ -341,6 +342,29 @@ public class OfficeStylesElement extends OdfContainerElementBase {
 		svgRadialGradient.setDrawNameAttribute(drawNameValue);
 		this.appendChild(svgRadialGradient);
 		return svgRadialGradient;
+	}
+
+	/**
+	 * Create child element {@odf.element table:table-template}.
+	 *
+	 * @param tableFirstRowEndColumnValue  the <code>String</code> value of <code>TableFirstRowEndColumnAttribute</code>, see {@odf.attribute  table:first-row-end-column} at specification
+	 * @param tableFirstRowStartColumnValue  the <code>String</code> value of <code>TableFirstRowStartColumnAttribute</code>, see {@odf.attribute  table:first-row-start-column} at specification
+	 * @param tableLastRowEndColumnValue  the <code>String</code> value of <code>TableLastRowEndColumnAttribute</code>, see {@odf.attribute  table:last-row-end-column} at specification
+	 * @param tableLastRowStartColumnValue  the <code>String</code> value of <code>TableLastRowStartColumnAttribute</code>, see {@odf.attribute  table:last-row-start-column} at specification
+	 * @param tableNameValue  the <code>String</code> value of <code>TableNameAttribute</code>, see {@odf.attribute  table:name} at specification
+	 * Child element is new in Odf 1.2
+	 *
+	 * @return the element {@odf.element table:table-template}
+	 */
+	 public TableTableTemplateElement newTableTableTemplateElement(String tableFirstRowEndColumnValue, String tableFirstRowStartColumnValue, String tableLastRowEndColumnValue, String tableLastRowStartColumnValue, String tableNameValue) {
+		TableTableTemplateElement tableTableTemplate = ((OdfFileDom) this.ownerDocument).newOdfElement(TableTableTemplateElement.class);
+		tableTableTemplate.setTableFirstRowEndColumnAttribute(tableFirstRowEndColumnValue);
+		tableTableTemplate.setTableFirstRowStartColumnAttribute(tableFirstRowStartColumnValue);
+		tableTableTemplate.setTableLastRowEndColumnAttribute(tableLastRowEndColumnValue);
+		tableTableTemplate.setTableLastRowStartColumnAttribute(tableLastRowStartColumnValue);
+		tableTableTemplate.setTableNameAttribute(tableNameValue);
+		this.appendChild(tableTableTemplate);
+		return tableTableTemplate;
 	}
 
 	/**

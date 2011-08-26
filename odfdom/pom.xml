@@ -26,7 +26,6 @@
 
 	<!-- Build Settings -->
 	<build>
-		<defaultGoal>install</defaultGoal>
 		<finalName>odfdom</finalName>
 		<plugins>
 			<plugin>
@@ -369,7 +368,7 @@
 					<plugin>
 						<groupId>org.odftoolkit</groupId>
 						<artifactId>schema2template-maven-plugin</artifactId>
-						<version>0.8.6-SNAPSHOT</version>
+						<version>0.8.7-SNAPSHOT</version>
 						<executions>
 							<execution>
 								<id>dom</id>
@@ -381,7 +380,7 @@
 								<configuration>
 									<targetRoot>${basedir}/src/main/java/</targetRoot>
 									<resourceRoot>${basedir}/src/codegen/resources/dom/template</resourceRoot>
-									<odf12SchemaFile>${basedir}/src/codegen/resources/dom/OpenDocument-v1.2-cd05-schema.rng</odf12SchemaFile>
+									<odf12SchemaFile>${basedir}/src/codegen/resources/dom/OpenDocument-v1.2-cd05-rev02-schema.rng</odf12SchemaFile>
 									<odf11SchemaFile>${basedir}/src/codegen/resources/dom/OpenDocument-schema-v1.1.rng</odf11SchemaFile>
 									<configFile>${basedir}/src/codegen/resources/dom/config.xml</configFile>
 								</configuration>

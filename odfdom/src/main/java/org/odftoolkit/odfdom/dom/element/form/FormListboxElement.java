@@ -564,6 +564,8 @@ public class FormListboxElement extends OdfElement {
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>XmlIdAttribute</code> , See {@odf.attribute xml:id}
 	 *
+	 * Attribute is mandatory.
+	 *
 	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
 	public String getXmlIdAttribute() {

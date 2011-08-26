@@ -87,10 +87,12 @@ public class TextTrackedChangesElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element text:changed-region}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element text:changed-region}
 	 */
-	public TextChangedRegionElement newTextChangedRegionElement() {
+	 public TextChangedRegionElement newTextChangedRegionElement(String xmlIdValue) {
 		TextChangedRegionElement textChangedRegion = ((OdfFileDom) this.ownerDocument).newOdfElement(TextChangedRegionElement.class);
+		textChangedRegion.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(textChangedRegion);
 		return textChangedRegion;
 	}

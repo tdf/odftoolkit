@@ -639,11 +639,13 @@ public class FormFormElement extends OdfElement {
 	 * Create child element {@odf.element form:button}.
 	 *
 	 * @param formImagePositionValue  the <code>String</code> value of <code>FormImagePositionAttribute</code>, see {@odf.attribute  form:image-position} at specification
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:button}
 	 */
-	 public FormButtonElement newFormButtonElement(String formImagePositionValue) {
+	 public FormButtonElement newFormButtonElement(String formImagePositionValue, String xmlIdValue) {
 		FormButtonElement formButton = ((OdfFileDom) this.ownerDocument).newOdfElement(FormButtonElement.class);
 		formButton.setFormImagePositionAttribute(formImagePositionValue);
+		formButton.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formButton);
 		return formButton;
 	}
@@ -652,11 +654,13 @@ public class FormFormElement extends OdfElement {
 	 * Create child element {@odf.element form:checkbox}.
 	 *
 	 * @param formImagePositionValue  the <code>String</code> value of <code>FormImagePositionAttribute</code>, see {@odf.attribute  form:image-position} at specification
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:checkbox}
 	 */
-	 public FormCheckboxElement newFormCheckboxElement(String formImagePositionValue) {
+	 public FormCheckboxElement newFormCheckboxElement(String formImagePositionValue, String xmlIdValue) {
 		FormCheckboxElement formCheckbox = ((OdfFileDom) this.ownerDocument).newOdfElement(FormCheckboxElement.class);
 		formCheckbox.setFormImagePositionAttribute(formImagePositionValue);
+		formCheckbox.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formCheckbox);
 		return formCheckbox;
 	}
@@ -664,10 +668,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:combobox}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:combobox}
 	 */
-	public FormComboboxElement newFormComboboxElement() {
+	 public FormComboboxElement newFormComboboxElement(String xmlIdValue) {
 		FormComboboxElement formCombobox = ((OdfFileDom) this.ownerDocument).newOdfElement(FormComboboxElement.class);
+		formCombobox.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formCombobox);
 		return formCombobox;
 	}
@@ -688,10 +694,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:date}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:date}
 	 */
-	public FormDateElement newFormDateElement() {
+	 public FormDateElement newFormDateElement(String xmlIdValue) {
 		FormDateElement formDate = ((OdfFileDom) this.ownerDocument).newOdfElement(FormDateElement.class);
+		formDate.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formDate);
 		return formDate;
 	}
@@ -699,10 +707,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:file}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:file}
 	 */
-	public FormFileElement newFormFileElement() {
+	 public FormFileElement newFormFileElement(String xmlIdValue) {
 		FormFileElement formFile = ((OdfFileDom) this.ownerDocument).newOdfElement(FormFileElement.class);
+		formFile.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formFile);
 		return formFile;
 	}
@@ -710,10 +720,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:fixed-text}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:fixed-text}
 	 */
-	public FormFixedTextElement newFormFixedTextElement() {
+	 public FormFixedTextElement newFormFixedTextElement(String xmlIdValue) {
 		FormFixedTextElement formFixedText = ((OdfFileDom) this.ownerDocument).newOdfElement(FormFixedTextElement.class);
+		formFixedText.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formFixedText);
 		return formFixedText;
 	}
@@ -732,10 +744,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:formatted-text}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:formatted-text}
 	 */
-	public FormFormattedTextElement newFormFormattedTextElement() {
+	 public FormFormattedTextElement newFormFormattedTextElement(String xmlIdValue) {
 		FormFormattedTextElement formFormattedText = ((OdfFileDom) this.ownerDocument).newOdfElement(FormFormattedTextElement.class);
+		formFormattedText.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formFormattedText);
 		return formFormattedText;
 	}
@@ -743,10 +757,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:frame}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:frame}
 	 */
-	public FormFrameElement newFormFrameElement() {
+	 public FormFrameElement newFormFrameElement(String xmlIdValue) {
 		FormFrameElement formFrame = ((OdfFileDom) this.ownerDocument).newOdfElement(FormFrameElement.class);
+		formFrame.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formFrame);
 		return formFrame;
 	}
@@ -754,10 +770,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:generic-control}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:generic-control}
 	 */
-	public FormGenericControlElement newFormGenericControlElement() {
+	 public FormGenericControlElement newFormGenericControlElement(String xmlIdValue) {
 		FormGenericControlElement formGenericControl = ((OdfFileDom) this.ownerDocument).newOdfElement(FormGenericControlElement.class);
+		formGenericControl.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formGenericControl);
 		return formGenericControl;
 	}
@@ -765,10 +783,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:grid}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:grid}
 	 */
-	public FormGridElement newFormGridElement() {
+	 public FormGridElement newFormGridElement(String xmlIdValue) {
 		FormGridElement formGrid = ((OdfFileDom) this.ownerDocument).newOdfElement(FormGridElement.class);
+		formGrid.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formGrid);
 		return formGrid;
 	}
@@ -776,10 +796,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:hidden}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:hidden}
 	 */
-	public FormHiddenElement newFormHiddenElement() {
+	 public FormHiddenElement newFormHiddenElement(String xmlIdValue) {
 		FormHiddenElement formHidden = ((OdfFileDom) this.ownerDocument).newOdfElement(FormHiddenElement.class);
+		formHidden.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formHidden);
 		return formHidden;
 	}
@@ -787,10 +809,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:image}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:image}
 	 */
-	public FormImageElement newFormImageElement() {
+	 public FormImageElement newFormImageElement(String xmlIdValue) {
 		FormImageElement formImage = ((OdfFileDom) this.ownerDocument).newOdfElement(FormImageElement.class);
+		formImage.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formImage);
 		return formImage;
 	}
@@ -798,10 +822,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:image-frame}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:image-frame}
 	 */
-	public FormImageFrameElement newFormImageFrameElement() {
+	 public FormImageFrameElement newFormImageFrameElement(String xmlIdValue) {
 		FormImageFrameElement formImageFrame = ((OdfFileDom) this.ownerDocument).newOdfElement(FormImageFrameElement.class);
+		formImageFrame.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formImageFrame);
 		return formImageFrame;
 	}
@@ -809,10 +835,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:listbox}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:listbox}
 	 */
-	public FormListboxElement newFormListboxElement() {
+	 public FormListboxElement newFormListboxElement(String xmlIdValue) {
 		FormListboxElement formListbox = ((OdfFileDom) this.ownerDocument).newOdfElement(FormListboxElement.class);
+		formListbox.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formListbox);
 		return formListbox;
 	}
@@ -820,10 +848,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:number}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:number}
 	 */
-	public FormNumberElement newFormNumberElement() {
+	 public FormNumberElement newFormNumberElement(String xmlIdValue) {
 		FormNumberElement formNumber = ((OdfFileDom) this.ownerDocument).newOdfElement(FormNumberElement.class);
+		formNumber.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formNumber);
 		return formNumber;
 	}
@@ -831,10 +861,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:password}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:password}
 	 */
-	public FormPasswordElement newFormPasswordElement() {
+	 public FormPasswordElement newFormPasswordElement(String xmlIdValue) {
 		FormPasswordElement formPassword = ((OdfFileDom) this.ownerDocument).newOdfElement(FormPasswordElement.class);
+		formPassword.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formPassword);
 		return formPassword;
 	}
@@ -854,11 +886,13 @@ public class FormFormElement extends OdfElement {
 	 * Create child element {@odf.element form:radio}.
 	 *
 	 * @param formImagePositionValue  the <code>String</code> value of <code>FormImagePositionAttribute</code>, see {@odf.attribute  form:image-position} at specification
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:radio}
 	 */
-	 public FormRadioElement newFormRadioElement(String formImagePositionValue) {
+	 public FormRadioElement newFormRadioElement(String formImagePositionValue, String xmlIdValue) {
 		FormRadioElement formRadio = ((OdfFileDom) this.ownerDocument).newOdfElement(FormRadioElement.class);
 		formRadio.setFormImagePositionAttribute(formImagePositionValue);
+		formRadio.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formRadio);
 		return formRadio;
 	}
@@ -866,10 +900,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:text}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:text}
 	 */
-	public FormTextElement newFormTextElement() {
+	 public FormTextElement newFormTextElement(String xmlIdValue) {
 		FormTextElement formText = ((OdfFileDom) this.ownerDocument).newOdfElement(FormTextElement.class);
+		formText.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formText);
 		return formText;
 	}
@@ -877,10 +913,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:textarea}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:textarea}
 	 */
-	public FormTextareaElement newFormTextareaElement() {
+	 public FormTextareaElement newFormTextareaElement(String xmlIdValue) {
 		FormTextareaElement formTextarea = ((OdfFileDom) this.ownerDocument).newOdfElement(FormTextareaElement.class);
+		formTextarea.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formTextarea);
 		return formTextarea;
 	}
@@ -888,10 +926,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:time}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:time}
 	 */
-	public FormTimeElement newFormTimeElement() {
+	 public FormTimeElement newFormTimeElement(String xmlIdValue) {
 		FormTimeElement formTime = ((OdfFileDom) this.ownerDocument).newOdfElement(FormTimeElement.class);
+		formTime.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formTime);
 		return formTime;
 	}
@@ -899,10 +939,12 @@ public class FormFormElement extends OdfElement {
 	/**
 	 * Create child element {@odf.element form:value-range}.
 	 *
+	 * @param xmlIdValue  the <code>String</code> value of <code>XmlIdAttribute</code>, see {@odf.attribute  xml:id} at specification
 	 * @return the element {@odf.element form:value-range}
 	 */
-	public FormValueRangeElement newFormValueRangeElement() {
+	 public FormValueRangeElement newFormValueRangeElement(String xmlIdValue) {
 		FormValueRangeElement formValueRange = ((OdfFileDom) this.ownerDocument).newOdfElement(FormValueRangeElement.class);
+		formValueRange.setXmlIdAttribute(xmlIdValue);
 		this.appendChild(formValueRange);
 		return formValueRange;
 	}
