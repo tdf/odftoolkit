@@ -47,12 +47,6 @@ public class TableTest {
     public TableTest() {
     }
     
-    @Before
-    public void createTestDirectory() throws Exception {
-    	File testFile = new File(TEST_FILE_SAVE_2TABLES_OUT);
-    	testFile.getParentFile().mkdirs();
-    }
-
     @Test
     public void testTable() {
         try {

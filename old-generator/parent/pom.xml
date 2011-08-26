@@ -3,12 +3,12 @@
   <parent>
     <groupId>org.odftoolkit</groupId>
     <artifactId>odfdom</artifactId>
-    <version>0.6-SNAPSHOT</version>
+    <version>0.7-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.odftoolkit</groupId>
   <artifactId>odfdom-parent</artifactId>
-  <version>0.6-SNAPSHOT</version>
+  <version>0.7-SNAPSHOT</version>
   <name>ODFDOM Parent</name>
   <url>http://msv.java.net</url>
   <packaging>pom</packaging>
