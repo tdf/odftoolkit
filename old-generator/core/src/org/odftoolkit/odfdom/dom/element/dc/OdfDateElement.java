@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<dc:date>".
  */
 public abstract class OdfDateElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5272383307184370619L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DC, "date" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DC, "date" );
 
     public OdfDateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

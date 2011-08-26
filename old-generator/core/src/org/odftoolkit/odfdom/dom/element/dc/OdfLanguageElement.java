@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<dc:language>".
  */
 public abstract class OdfLanguageElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2556612451945091108L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DC, "language" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.DC, "language" );
 
     public OdfLanguageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
