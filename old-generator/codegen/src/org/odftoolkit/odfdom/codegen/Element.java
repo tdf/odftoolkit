@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import org.odftoolkit.odfdom.codegen.rng.RngAttribute;
-import org.odftoolkit.odfdom.codegen.rng.RngElement;
 
 /**
  *

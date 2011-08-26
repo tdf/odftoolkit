@@ -25,8 +25,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Vector;
 
-import org.odftoolkit.odfdom.codegen.rng.RngAttribute;
-
 /**
  *
  * @author cl93746

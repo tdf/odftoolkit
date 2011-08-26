@@ -36,16 +36,15 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 /**
- *
- * @author cl93746
+ * Code generator class.
  */
 public class CodeGen implements IFunctionSupplier
 {
-    private Context Context;
-    private Config Config;
-    private CodeTemplate Template;
-    private String TargetPath;
-    private Schema Schema;
+    private Context context;
+    private Config config;
+    private CodeTemplate template;
+    private String targetPath;
+    private Schema schema;
 
     public static void main(String[] args)
     {       
@@ -68,7 +67,7 @@ public class CodeGen implements IFunctionSupplier
                 {
                     if( xThis.parseTemplate(templatePath) )
                     {
-                        if( xThis.executeTemplate(xThis.Template) )
+                        if( xThis.executeTemplate(xThis.template) )
                             System.exit(0);
                     }
                 }
@@ -77,17 +76,17 @@ public class CodeGen implements IFunctionSupplier
         System.exit(1);
     }
     
-    private CodeGen( String targetPath )
+    public CodeGen( String targetPath )
     {
-        TargetPath = targetPath;
-        Context = new Context(this);
+        this.targetPath = targetPath;
+        context = new Context(this);
     }
 
-    private boolean parseConfig( String path )
+    public boolean parseConfig( String path )
     {
         try
         {
-            Config = Config.parse(path);            
+            config = Config.parse(path);            
             return true;
         }
         catch( Exception ex )
@@ -97,17 +96,17 @@ public class CodeGen implements IFunctionSupplier
         return false;
     }
     
-    private boolean parseSchema( String path )
+    public boolean parseSchema( String path )
     {
-        Schema = new Schema(Config);
-        return Schema.parseSchema(path);
+        schema = new Schema(config);
+        return schema.parseSchema(path);
     }
      
-    private boolean parseTemplate( String path )
+    public boolean parseTemplate( String path )
     {
         try
         {
-            Template = CodeTemplate.parse(path);            
+            template = CodeTemplate.parse(path);            
             return true;
         }
         catch( Exception ex )
@@ -117,7 +116,7 @@ public class CodeGen implements IFunctionSupplier
         return false;
     }
     
-    private boolean executeTemplate( CodeTemplate template )
+    public boolean executeTemplate( CodeTemplate template )
     {
         try
         {
@@ -164,7 +163,7 @@ public class CodeGen implements IFunctionSupplier
             if( test == null )
                 throw new IOException( new String( "if element needs an attribute 'test'"));
             
-            if( ExpressionParser.evaluateBoolean(test, Context ) )
+            if( ExpressionParser.evaluateBoolean(test, context ) )
             {
                 if( !executeTemplateChildNodes(node) )
                     return false;                
@@ -203,7 +202,7 @@ public class CodeGen implements IFunctionSupplier
             while( iter.hasNext() )
             {
                 Entry< String, String > attr = iter.next();
-                Context.setVariable( attr.getKey(), decodeTemplateString( attr.getValue() ) );
+                context.setVariable( attr.getKey(), decodeTemplateString( attr.getValue() ) );
             }
         }
         else if( node.getLocalName().equals(TemplateNode.REF_ELEMENT) )
@@ -214,7 +213,7 @@ public class CodeGen implements IFunctionSupplier
                 System.err.println("error: <ref> must have attribute 'name'!");
                 return false;
             }
-            TemplateNode define = Template.getDefine(name);
+            TemplateNode define = template.getDefine(name);
             
             if( define == null )
             {
@@ -261,7 +260,7 @@ public class CodeGen implements IFunctionSupplier
     {
         if( sep != null && !first )
         {
-            PrintWriter file = Context.getCurrentFile();
+            PrintWriter file = context.getCurrentFile();
             if( file != null )
                 file.print(sep);
         }
@@ -272,7 +271,7 @@ public class CodeGen implements IFunctionSupplier
     {
         String type = node.getAttribute(TemplateNode.TYPE_ATTRIBUTE);
         String sep = node.getAttribute("seperator");
-        if( ((sep != null) && (sep.length() == 0)) || (Context.getCurrentFile() == null) )
+        if( ((sep != null) && (sep.length() == 0)) || (context.getCurrentFile() == null) )
             sep = null;
 
         boolean first = true;
@@ -280,7 +279,7 @@ public class CodeGen implements IFunctionSupplier
         if( type.equals("element") || type.equals("baseelement") )
         {
             boolean baseElements = type.equals("baseelement");
-            Iterator< Element > iter = baseElements ? Schema.getBaseElements() : Schema.getElements();
+            Iterator< Element > iter = baseElements ? schema.getBaseElements() : schema.getElements();
             while( iter.hasNext() )
             {
                 first = printSeperator( sep, first );
@@ -291,7 +290,7 @@ public class CodeGen implements IFunctionSupplier
         }
         else if( type.equals("attribute") )
         {
-            Element element = Context.getCurrentElement();
+            Element element = context.getCurrentElement();
             if( element == null )
             {
                 System.err.println("error: foreach attribute needs a current element!" );
@@ -308,7 +307,7 @@ public class CodeGen implements IFunctionSupplier
         }
         else if( type.equals("value") )
         {
-            Attribute attr = Context.getCurrentAttribute();
+            Attribute attr = context.getCurrentAttribute();
             if( attr == null )
             {
                 System.err.println("error: foreach values needs a current attribute!" );
@@ -320,9 +319,9 @@ public class CodeGen implements IFunctionSupplier
             {
                 first = printSeperator( sep, first );
                 
-                Context.pushVariable( "value", iter.next() );
+                context.pushVariable( "value", iter.next() );
                 boolean ret = executeTemplateChildNodes(node);               
-                Context.popVariable( "value" );
+                context.popVariable( "value" );
                 
                 if( !ret )
                     return false;                
@@ -330,19 +329,19 @@ public class CodeGen implements IFunctionSupplier
         }
         else if( type.equals("namespace") )
         {
-            HashMap< String, String > namespaces = Schema.getNamespaces();
+            HashMap< String, String > namespaces = schema.getNamespaces();
             Iterator<Entry<String, String>> iter = namespaces.entrySet().iterator();
             while( iter.hasNext() )
             {
                 first = printSeperator( sep, first );
 
                 Entry<String, String> entry = iter.next();
-                Context.pushVariable("namespaceprefix", entry.getKey());
-                Context.pushVariable("namespaceuri", entry.getValue());
+                context.pushVariable("namespaceprefix", entry.getKey());
+                context.pushVariable("namespaceuri", entry.getValue());
                 
                 boolean ret = executeTemplateChildNodes(node);
-                Context.popVariable("namespaceprefix");
-                Context.popVariable("namespaceuri");
+                context.popVariable("namespaceprefix");
+                context.popVariable("namespaceuri");
 
                 if( !ret )
                     return false;                
@@ -363,7 +362,7 @@ public class CodeGen implements IFunctionSupplier
         
         if( type.equals("attribute") )
         {
-            Element element = Context.getCurrentElement();
+            Element element = context.getCurrentElement();
             if( element == null )
             {
                 System.err.println("error: select attribute needs a current element!" );
@@ -381,7 +380,7 @@ public class CodeGen implements IFunctionSupplier
         else if( type.equals("element") || type.equals("baseelement" ) )
         {
             boolean baseElement = type.equals("baseelement" );
-            Element element = Schema.getElement( name, baseElement );
+            Element element = schema.getElement( name, baseElement );
             if( element == null )
             {
                 System.err.println("error: selected element \"" + name + "\" not found in schema!" );
@@ -399,39 +398,39 @@ public class CodeGen implements IFunctionSupplier
     
     public boolean selectElement( TemplateNode node, Element element, boolean baseElement ) throws IOException
     {               
-        Context.pushElement(element);
+        context.pushElement(element);
 
         String baseName = new String();
-        ElementConfig ec = Config.getConfigForElement(element.getQName());
+        ElementConfig ec = config.getConfigForElement(element.getQName());
         if( (ec != null) && (ec.Base != null) && (ec.Base.length() != 0) )
         {
             if( ec.Base.indexOf( ':' ) == -1 )
                 baseName = ec.Base;
             else                    
-                baseName = Schema.getBaseElement(ec.Base).getQName();
+                baseName = schema.getBaseElement(ec.Base).getQName();
         }
 
-        Context.pushVariable( "elementbasename", baseName );
+        context.pushVariable( "elementbasename", baseName );
 
         boolean ret = executeTemplateChildNodes(node);
 
-        Context.popVariable( "elementbasename" );
-        Context.popElement();
+        context.popVariable( "elementbasename" );
+        context.popElement();
 
         return ret;
     }
     
     public boolean selectAttribute( TemplateNode node, Attribute attr ) throws IOException
     {
-        Context.pushAttribute(attr);                
+        context.pushAttribute(attr);                
         boolean ret = executeTemplateChildNodes(node);
-        Context.popAttribute();
+        context.popAttribute();
         return ret;
     }
     
     private boolean executeCodeNode( TemplateNode node ) throws IOException
     {
-        PrintWriter file = Context.getCurrentFile();
+        PrintWriter file = context.getCurrentFile();
         if( file != null )
         {
             file.print( decodeTemplateString( node.Characters ) );
@@ -451,16 +450,16 @@ public class CodeGen implements IFunctionSupplier
         if (file == null)
             return false;
         
-        Context.pushFile( file );
+        context.pushFile( file );
         executeTemplateChildNodes( fileNode );        
-        Context.popFile();
+        context.popFile();
         file.close();
         return true;
     }
           
     private String getPath( String subpath )
     {
-        StringBuffer out = new StringBuffer( TargetPath );
+        StringBuffer out = new StringBuffer( targetPath );
         if( out.charAt(out.length()-1) != File.separatorChar )
             out.append( File.separatorChar );
         
@@ -477,7 +476,7 @@ public class CodeGen implements IFunctionSupplier
     
     private String evaluateExpression( String var ) throws IOException    
     {
-        return ExpressionParser.evaluate(var, Context);
+        return ExpressionParser.evaluate(var, context);
     }
     
     public String function(String func, Vector<String> params) throws IOException
@@ -619,7 +618,7 @@ public class CodeGen implements IFunctionSupplier
         int i = 0;
         while( left > 0 )
         {
-            String debug = in.substring(i);
+            //String debug = in.substring(i);
             switch( in.charAt(i) )
             {
                 case '%':
@@ -807,4 +806,12 @@ public class CodeGen implements IFunctionSupplier
         
         return name.toString();
     }
+
+	public void setTemplate(CodeTemplate template) {
+		this.template = template;
+	}
+
+	public CodeTemplate getTemplate() {
+		return template;
+	}
 }
