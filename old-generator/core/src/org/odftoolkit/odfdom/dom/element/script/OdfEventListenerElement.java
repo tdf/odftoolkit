@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<script:event-listener>".
  */
 public abstract class OdfEventListenerElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2756620129442892169L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SCRIPT, "event-listener" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.SCRIPT, "event-listener" );
 
     public OdfEventListenerElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
