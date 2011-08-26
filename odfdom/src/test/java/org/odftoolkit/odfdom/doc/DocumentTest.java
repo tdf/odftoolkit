@@ -46,11 +46,13 @@ import javax.xml.transform.stream.StreamResult;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfSchemaConstraint;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
@@ -229,7 +231,7 @@ public class DocumentTest {
 		try {
 			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
 
-			OdfFileDom stylesDom = odfdoc.getStylesDom();
+			OdfStylesDom stylesDom = odfdoc.getStylesDom();
 			Assert.assertNotNull(stylesDom);
 
 			// test styles.xml:styles
@@ -275,7 +277,7 @@ public class DocumentTest {
 		try {
 			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
 
-			OdfFileDom contentDom = odfdoc.getContentDom();
+			OdfContentDom contentDom = odfdoc.getContentDom();
 
 			// test content.xml:automatic-styles
 			OdfOfficeAutomaticStyles autoStyles = contentDom.getAutomaticStyles();
@@ -327,20 +329,26 @@ public class DocumentTest {
 	}
 
 	private void testStyle(OdfStyle testStyle) throws Exception {
-		OdfFileDom dom = (OdfFileDom) testStyle.getOwnerDocument();
+		OdfFileDom fileDom = (OdfFileDom) testStyle.getOwnerDocument();
+		OdfOfficeAutomaticStyles autoStyles = null;
 		if (testStyle.getStyleParentStyleNameAttribute() != null) {
-			OdfStyle parentStyle = dom.getAutomaticStyles().getStyle(testStyle.getStyleParentStyleNameAttribute(), testStyle.getFamily());
+			if (fileDom instanceof OdfContentDom) {
+				autoStyles = ((OdfContentDom) fileDom).getAutomaticStyles();
+			} else if (fileDom instanceof OdfStylesDom) {
+				autoStyles = ((OdfStylesDom) fileDom).getAutomaticStyles();
+			}
+			OdfStyle parentStyle = autoStyles.getStyle(testStyle.getStyleParentStyleNameAttribute(), testStyle.getFamily());
 			if (parentStyle == null) {
-				parentStyle = ((OdfDocument) dom.getDocument()).getDocumentStyles().getStyle(testStyle.getStyleParentStyleNameAttribute(), testStyle.getFamily());
+				parentStyle = ((OdfDocument) fileDom.getDocument()).getDocumentStyles().getStyle(testStyle.getStyleParentStyleNameAttribute(), testStyle.getFamily());
 			}
 
 			Assert.assertNotNull(parentStyle);
 		}
 		if (testStyle.hasOdfAttribute(OdfName.newName(OdfDocumentNamespace.STYLE, "list-style-name"))) {
 			if (testStyle.getStyleListStyleNameAttribute() != null) {
-				OdfTextListStyle listStyle = dom.getAutomaticStyles().getListStyle(testStyle.getStyleListStyleNameAttribute());
+				OdfTextListStyle listStyle = autoStyles.getListStyle(testStyle.getStyleListStyleNameAttribute());
 				if (listStyle == null) {
-					listStyle = ((OdfDocument) dom.getDocument()).getDocumentStyles().getListStyle(testStyle.getStyleListStyleNameAttribute());
+					listStyle = ((OdfDocument) fileDom.getDocument()).getDocumentStyles().getListStyle(testStyle.getStyleListStyleNameAttribute());
 				}
 
 				Assert.assertNotNull(listStyle);

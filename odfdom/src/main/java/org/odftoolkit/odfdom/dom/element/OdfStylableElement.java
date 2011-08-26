@@ -25,7 +25,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.OdfStylePropertySet;
@@ -110,7 +112,12 @@ abstract public class OdfStylableElement extends OdfElement implements
 	public OdfOfficeAutomaticStyles getAutomaticStyles() {
 		OdfFileDom fileDom = (OdfFileDom) this.ownerDocument;
 		if (fileDom != null) {
-			return fileDom.getAutomaticStyles();
+			if(fileDom instanceof OdfContentDom){
+				return ((OdfContentDom) fileDom).getAutomaticStyles();
+			}else if(fileDom instanceof OdfStylesDom){
+				return ((OdfStylesDom) fileDom).getAutomaticStyles();
+			}else
+			return null;
 		} else {
 			return null;
 		}

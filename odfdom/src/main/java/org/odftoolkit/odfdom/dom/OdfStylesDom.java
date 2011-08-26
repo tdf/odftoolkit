@@ -24,10 +24,15 @@ package org.odftoolkit.odfdom.dom;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 
+import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentStylesElement;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.pkg.NamespaceName;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
+import org.w3c.dom.Node;
 
 /**
  * The DOM repesentation of the ODF styles.xml file of an ODF document.
@@ -91,5 +96,60 @@ public class OdfStylesDom extends OdfFileDom {
 			}
 		}
 		return mXPath;
+	}
+
+
+	// ToDo bug 72 - STYLE REFACTORING - THE FOLLOWING METHODS WILL BE RE/MOVED
+	// As Package layer should not refer to DOM/DOC layer and DOM files should not
+	// handle automatic styles the upcoming DOM Document should capsulate this.
+	/**
+	 * @return the style:office-styles element of this dom. May return null
+	 *         if there is not yet such element in this dom.
+	 *
+	 * @see #getOrCreateAutomaticStyles()
+	 *
+	 */
+	public OdfOfficeStyles getOfficeStyles() {
+		return OdfElement.findFirstChildNode(OdfOfficeStyles.class, getFirstChild());
+	}
+
+	/**
+	 * Retrieve the ODF AutomaticStyles
+	 *
+	 * @return the {@odf.element style:automatic-styles} element of this dom. May return null
+	 *         if there is not yet such element in this dom.
+	 *
+	 * @see #getOrCreateAutomaticStyles()
+	 *
+	 */
+	public OdfOfficeAutomaticStyles getAutomaticStyles() {
+		return OdfElement.findFirstChildNode(OdfOfficeAutomaticStyles.class, getFirstChild());
+	}
+
+	/**
+	 * @return the {@odf.element style:automatic-styles} element of this dom. If it does not
+	 *         yet exists, a new one is inserted into the dom and returned.
+	 *
+	 */
+	public OdfOfficeAutomaticStyles getOrCreateAutomaticStyles() {
+
+		OdfOfficeAutomaticStyles automaticStyles = getAutomaticStyles();
+		if (automaticStyles == null) {
+			automaticStyles = newOdfElement(OdfOfficeAutomaticStyles.class);
+
+			Node parent = getFirstChild();
+
+			// try to insert before body or before master-styles element
+			OdfElement sibling = OdfElement.findFirstChildNode(OfficeBodyElement.class, parent);
+			if (sibling == null) {
+				sibling = OdfElement.findFirstChildNode(OdfOfficeMasterStyles.class, parent);
+			}
+			if (sibling == null) {
+				parent.appendChild(automaticStyles);
+			} else {
+				parent.insertBefore(automaticStyles, sibling);
+			}
+		}
+		return automaticStyles;
 	}
 }

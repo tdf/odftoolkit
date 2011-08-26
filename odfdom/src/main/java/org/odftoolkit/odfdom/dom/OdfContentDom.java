@@ -24,9 +24,14 @@ package org.odftoolkit.odfdom.dom;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 
+import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentContentElement;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.pkg.NamespaceName;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.w3c.dom.Node;
 
 /**
  * The DOM repesentation of the ODF content.xml file of an ODF document.
@@ -86,5 +91,45 @@ public class OdfContentDom extends OdfFileDom {
 			mXPath.setNamespaceContext(this);
 		}
 		return mXPath;
+	}
+
+	/**
+	 * Retrieve the ODF AutomaticStyles
+	 *
+	 * @return the {@odf.element style:automatic-styles} element of this dom. May return null
+	 *         if there is not yet such element in this dom.
+	 *
+	 * @see #getOrCreateAutomaticStyles()
+	 *
+	 */
+	public OdfOfficeAutomaticStyles getAutomaticStyles() {
+		return OdfElement.findFirstChildNode(OdfOfficeAutomaticStyles.class, getFirstChild());
+	}
+
+	/**
+	 * @return the {@odf.element style:automatic-styles} element of this dom. If it does not
+	 *         yet exists, a new one is inserted into the dom and returned.
+	 *
+	 */
+	public OdfOfficeAutomaticStyles getOrCreateAutomaticStyles() {
+
+		OdfOfficeAutomaticStyles automaticStyles = getAutomaticStyles();
+		if (automaticStyles == null) {
+			automaticStyles = newOdfElement(OdfOfficeAutomaticStyles.class);
+
+			Node parent = getFirstChild();
+
+			// try to insert before body or before master-styles element
+			OdfElement sibling = OdfElement.findFirstChildNode(OfficeBodyElement.class, parent);
+			if (sibling == null) {
+				sibling = OdfElement.findFirstChildNode(OdfOfficeMasterStyles.class, parent);
+			}
+			if (sibling == null) {
+				parent.appendChild(automaticStyles);
+			} else {
+				parent.insertBefore(automaticStyles, sibling);
+			}
+		}
+		return automaticStyles;
 	}
 }

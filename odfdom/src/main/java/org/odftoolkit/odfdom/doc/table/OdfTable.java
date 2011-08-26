@@ -37,6 +37,7 @@ import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
@@ -346,7 +347,7 @@ public class OdfTable {
 			throw new IllegalArgumentException("Can not create table with the given parameters:\n"
 					+ "Rows " + numRows + ", Columns " + numCols + ", HeaderRows " + headerRowNumber + ", HeaderColumns " + headerColumnNumber);
 		}
-		OdfFileDom dom = document.getContentDom();
+		OdfContentDom dom = document.getContentDom();
 		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
 		//1. create table element
 		TableTableElement newTEle = (TableTableElement) OdfXMLFactory.newOdfElement(dom,

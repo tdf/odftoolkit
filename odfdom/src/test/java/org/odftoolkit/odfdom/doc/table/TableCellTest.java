@@ -33,9 +33,10 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
@@ -990,8 +991,8 @@ public class TableCellTest {
 	@Test
 	public void testSetDefaultCellStyle() {
 		OdfSpreadsheetDocument outputDocument;
-		OdfFileDom contentDom; // the document object model for content.xml
-		OdfFileDom stylesDom; // the document object model for styles.xml
+		OdfContentDom contentDom; // the document object model for content.xml
+		OdfStylesDom stylesDom; // the document object model for styles.xml
 		// the office:automatic-styles element in content.xml
 		OdfOfficeAutomaticStyles contentAutoStyles;
 		// the office:styles element in styles.xml
