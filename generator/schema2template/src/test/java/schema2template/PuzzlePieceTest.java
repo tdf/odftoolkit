@@ -136,12 +136,19 @@ public class PuzzlePieceTest {
 	@Test
 	public void testExtractPuzzlePieces() {
 		try {
-			PuzzlePieceSet allElements = new PuzzlePieceSet();
-			PuzzlePieceSet allAttributes = new PuzzlePieceSet();
-			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF11(), allElements, allAttributes);
+			PuzzlePieceSet allElements_ODF11 = new PuzzlePieceSet();
+			PuzzlePieceSet allAttributes_ODF11 = new PuzzlePieceSet();
+			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF11(), allElements_ODF11, allAttributes_ODF11);
 			// There is a difference of one wildcard "*" representing anyElement/anyAttribute
-			checkFoundNumber(allElements.withoutMultiples(), ODF11_ELEMENT_NUMBER + 1, "element");
-			checkFoundNumber(allAttributes.withoutMultiples(), ODF11_ATTRIBUTE_NUMBER + 1, "attribute");
+			checkFoundNumber(allElements_ODF11.withoutMultiples(), ODF11_ELEMENT_NUMBER + 1, "element");
+			checkFoundNumber(allAttributes_ODF11.withoutMultiples(), ODF11_ATTRIBUTE_NUMBER + 1, "attribute");
+
+			PuzzlePieceSet allElements_ODF12 = new PuzzlePieceSet();
+			PuzzlePieceSet allAttributes_ODF12 = new PuzzlePieceSet();
+			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF12(), allElements_ODF12, allAttributes_ODF12);
+			// There is a difference of one wildcard "*" representing anyElement/anyAttribute
+			checkFoundNumber(allElements_ODF12.withoutMultiples(), ODF12_ELEMENT_NUMBER + 1, "element");
+			checkFoundNumber(allAttributes_ODF12.withoutMultiples(), ODF12_ATTRIBUTE_NUMBER + 1, "attribute");
 		} catch (Exception ex) {
 			Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
 			Assert.fail(ex.toString());

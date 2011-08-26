@@ -69,11 +69,12 @@ public class OdfHelper {
 		"table:table-template"
 	 NOTE: Ignoring the '*' there can be 525 elements parsed, but with fixed schema it should be 535. */
 	public static final int ODF11_ELEMENT_NUMBER = 525; //ToDo: 535 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or attribute declaration
-
+	public static final int ODF12_ELEMENT_NUMBER = 598;
+	
 	/** Expresses the amount of attributes in ODF 1.1. There are some issues in the schema that have to be fixed before the full number can be returned by MSV:
 		Following references are never used, therefore its attribute is not taking into account::
 			draw-glue-points-attlist	with "draw:escape-direction"
-			office-process-content		with "office:process-content"
+			office-process-content		with "office:process-content" (DEPRECATED in ODF1.2 only on foreign elements)
 
 		Following attributes are member of the not referenced element "table:table-template":
 			"text:first-row-end-column"
@@ -84,7 +85,7 @@ public class OdfHelper {
 
 	 NOTE: Ignoring the '*' there can be 1162 elements parsed, but with fixed schema it should be 1169. */
 	public static final int ODF11_ATTRIBUTE_NUMBER = 1162; //ToDo: 1169 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or attribute declaration
-
+	public static final int ODF12_ATTRIBUTE_NUMBER = 1300; //in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie. @office:process-content)
 	public static String odfResourceDir;
 	public static String outputRoot;
 	public static final String INPUT_ROOT = "target" + File.separator + "classes" + File.separator
