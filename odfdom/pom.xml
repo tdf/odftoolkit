@@ -173,7 +173,7 @@
 					<plugin>
 						<groupId>org.odftoolkit</groupId>
 						<artifactId>maven-codegen-plugin</artifactId>
-						<version>0.7-SNAPSHOT</version>
+						<version>0.8-SNAPSHOT</version>
 						<executions>
 							<execution>
 								<id>dom</id>
@@ -206,7 +206,7 @@
                     <plugin>
                         <groupId>org.odftoolkit</groupId>
                         <artifactId>maven-codegen-plugin</artifactId>
-                        <version>0.7-SNAPSHOT</version>
+                        <version>0.8-SNAPSHOT</version>
                         <executions>
                             <execution>
                                 <id>pkg</id>
@@ -418,7 +418,7 @@
 					<tagletArtifact>
 						<groupId>org.odftoolkit</groupId>
 						<artifactId>taglets</artifactId>
-						<version>0.7-SNAPSHOT</version>
+						<version>0.8-SNAPSHOT</version>
 					</tagletArtifact>
 				</configuration>
 			</plugin>
