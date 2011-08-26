@@ -1,0 +1,27 @@
+[patterns]
+**.html = native
+**.java = native
+**.rng = native
+**.txt = native
+**.vm = native
+**.xml = native
+**.xsl = native
+**.jpeg = BIN
+**.png = BIN
+**.odc = BIN
+**.otc = BIN
+**.odf = BIN
+**.otf = BIN
+**.odb = BIN
+**.odg = BIN
+**.otg = BIN
+**.odi = BIN
+**.oti = BIN
+**.odp = BIN
+**.otp = BIN
+**.ods = BIN
+**.ots = BIN
+**.odt = BIN
+**.ott = BIN
+**.odm = BIN
+**.oth = BIN
