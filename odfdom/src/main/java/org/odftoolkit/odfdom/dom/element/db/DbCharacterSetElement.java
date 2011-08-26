@@ -75,7 +75,7 @@ public abstract class DbCharacterSetElement extends OdfElement
 	{
 		DbEncodingAttribute attr = (DbEncodingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "encoding" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DbEncodingAttribute.DEFAULT_VALUE;
 	}

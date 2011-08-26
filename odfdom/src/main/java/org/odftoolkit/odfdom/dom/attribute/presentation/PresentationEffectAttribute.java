@@ -32,11 +32,6 @@ import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.dom.element.presentation.PresentationEventListenerElement;
-import org.odftoolkit.odfdom.dom.element.presentation.PresentationHideShapeElement;
-import org.odftoolkit.odfdom.dom.element.presentation.PresentationHideTextElement;
-import org.odftoolkit.odfdom.dom.element.presentation.PresentationShowShapeElement;
-import org.odftoolkit.odfdom.dom.element.presentation.PresentationShowTextElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute presentation:effect}.
@@ -165,7 +160,7 @@ public class PresentationEffectAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if presentation:effect has an element parent 
+	 * @return <code>true</code> if {@odf.attribute presentation:effect} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

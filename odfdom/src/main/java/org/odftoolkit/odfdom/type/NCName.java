@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'NCName'
+ * This class represents the in OpenDocument format used data type {@odf.datatype NCName}
  */
 public class NCName implements OdfDataType {
 
@@ -72,11 +72,11 @@ public class NCName implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String instance is a valid NCName data type
+	 * check if the specified String instance is a valid {@odf.datatype NCName} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for NCName data type false
+	 * @return true if the value of argument is valid for {@odf.datatype NCName} data type false
 	 *         otherwise
 	 */
 	public static boolean isValid(String stringValue) {

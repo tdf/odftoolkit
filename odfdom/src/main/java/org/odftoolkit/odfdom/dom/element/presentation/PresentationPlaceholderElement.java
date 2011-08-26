@@ -92,7 +92,7 @@ public abstract class PresentationPlaceholderElement extends OdfElement
 	{
 		PresentationObjectAttribute attr = (PresentationObjectAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "object" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -119,7 +119,7 @@ public abstract class PresentationPlaceholderElement extends OdfElement
 	{
 		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "x" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -146,7 +146,7 @@ public abstract class PresentationPlaceholderElement extends OdfElement
 	{
 		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "y" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -173,7 +173,7 @@ public abstract class PresentationPlaceholderElement extends OdfElement
 	{
 		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -200,7 +200,7 @@ public abstract class PresentationPlaceholderElement extends OdfElement
 	{
 		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "height" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

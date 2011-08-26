@@ -31,7 +31,6 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawLayerAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawTransformAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawTextStyleNameAttribute;
@@ -49,16 +48,8 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawCopyOfAttribute;
 
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawEscapeDirectionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawIdAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgXAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
 import org.odftoolkit.odfdom.dom.element.svg.SvgTitleElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawPointsAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawRecreateOnEditAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:frame}.
@@ -100,7 +91,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "layer" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -127,7 +118,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		DrawTransformAttribute attr = (DrawTransformAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "transform" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -154,7 +145,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		DrawTextStyleNameAttribute attr = (DrawTextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "text-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -181,7 +172,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "x" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -208,7 +199,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "y" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -235,7 +226,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -262,7 +253,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "height" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -289,7 +280,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		StyleRelWidthAttribute attr = (StyleRelWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rel-width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -316,7 +307,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		StyleRelHeightAttribute attr = (StyleRelHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rel-height" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -343,7 +334,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "caption-id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -370,7 +361,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		PresentationClassAttribute attr = (PresentationClassAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "class" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -397,7 +388,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		PresentationPlaceholderAttribute attr = (PresentationPlaceholderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "placeholder" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -424,7 +415,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		PresentationUserTransformedAttribute attr = (PresentationUserTransformedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "user-transformed" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -451,7 +442,7 @@ public abstract class DrawFrameElement extends DrawShapeElementBase
 	{
 		DrawCopyOfAttribute attr = (DrawCopyOfAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "copy-of" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

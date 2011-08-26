@@ -85,7 +85,7 @@ public abstract class TextPlaceholderElement extends OdfElement
 	{
 		TextPlaceholderTypeAttribute attr = (TextPlaceholderTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "placeholder-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -112,7 +112,7 @@ public abstract class TextPlaceholderElement extends OdfElement
 	{
 		TextDescriptionAttribute attr = (TextDescriptionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "description" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

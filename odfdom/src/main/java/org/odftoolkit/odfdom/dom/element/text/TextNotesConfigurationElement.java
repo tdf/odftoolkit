@@ -95,7 +95,7 @@ public abstract class TextNotesConfigurationElement extends OdfElement
 	{
 		TextNoteClassAttribute attr = (TextNoteClassAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "note-class" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -122,7 +122,7 @@ public abstract class TextNotesConfigurationElement extends OdfElement
 	{
 		TextCitationStyleNameAttribute attr = (TextCitationStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "citation-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -149,7 +149,7 @@ public abstract class TextNotesConfigurationElement extends OdfElement
 	{
 		TextCitationBodyStyleNameAttribute attr = (TextCitationBodyStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "citation-body-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -176,7 +176,7 @@ public abstract class TextNotesConfigurationElement extends OdfElement
 	{
 		TextDefaultStyleNameAttribute attr = (TextDefaultStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "default-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -203,7 +203,7 @@ public abstract class TextNotesConfigurationElement extends OdfElement
 	{
 		TextMasterPageNameAttribute attr = (TextMasterPageNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "master-page-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -230,7 +230,7 @@ public abstract class TextNotesConfigurationElement extends OdfElement
 	{
 		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "start-value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TextStartValueAttribute.DEFAULT_VALUE;
 	}
@@ -257,7 +257,7 @@ public abstract class TextNotesConfigurationElement extends OdfElement
 	{
 		StyleNumPrefixAttribute attr = (StyleNumPrefixAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-prefix" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -284,7 +284,7 @@ public abstract class TextNotesConfigurationElement extends OdfElement
 	{
 		StyleNumSuffixAttribute attr = (StyleNumSuffixAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-suffix" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -311,7 +311,7 @@ public abstract class TextNotesConfigurationElement extends OdfElement
 	{
 		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-format" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -338,7 +338,7 @@ public abstract class TextNotesConfigurationElement extends OdfElement
 	{
 		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-letter-sync" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -365,7 +365,7 @@ public abstract class TextNotesConfigurationElement extends OdfElement
 	{
 		TextStartNumberingAtAttribute attr = (TextStartNumberingAtAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "start-numbering-at" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -392,7 +392,7 @@ public abstract class TextNotesConfigurationElement extends OdfElement
 	{
 		TextFootnotesPositionAttribute attr = (TextFootnotesPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "footnotes-position" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

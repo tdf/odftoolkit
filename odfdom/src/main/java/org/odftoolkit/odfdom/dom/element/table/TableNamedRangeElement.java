@@ -87,7 +87,7 @@ public abstract class TableNamedRangeElement extends OdfElement
 	{
 		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -114,7 +114,7 @@ public abstract class TableNamedRangeElement extends OdfElement
 	{
 		TableCellRangeAddressAttribute attr = (TableCellRangeAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "cell-range-address" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -141,7 +141,7 @@ public abstract class TableNamedRangeElement extends OdfElement
 	{
 		TableBaseCellAddressAttribute attr = (TableBaseCellAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "base-cell-address" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -168,7 +168,7 @@ public abstract class TableNamedRangeElement extends OdfElement
 	{
 		TableRangeUsableAsAttribute attr = (TableRangeUsableAsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "range-usable-as" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TableRangeUsableAsAttribute.DEFAULT_VALUE;
 	}

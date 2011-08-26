@@ -78,7 +78,7 @@ public abstract class ChartDataPointElement extends OdfStylableElement
 	{
 		ChartRepeatedAttribute attr = (ChartRepeatedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "repeated" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -105,7 +105,7 @@ public abstract class ChartDataPointElement extends OdfStylableElement
 	{
 		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -132,7 +132,7 @@ public abstract class ChartDataPointElement extends OdfStylableElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.grddl.GrddlTransformationAttribute;
 
 import org.odftoolkit.odfdom.dom.element.config.ConfigConfigItemSetElement;
-import org.odftoolkit.odfdom.dom.attribute.config.ConfigNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:document-settings}.
@@ -87,7 +86,7 @@ public abstract class OfficeDocumentSettingsElement extends OdfElement
 	{
 		OfficeVersionAttribute attr = (OfficeVersionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "version" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -114,7 +113,7 @@ public abstract class OfficeDocumentSettingsElement extends OdfElement
 	{
 		GrddlTransformationAttribute attr = (GrddlTransformationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.GRDDL), "transformation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

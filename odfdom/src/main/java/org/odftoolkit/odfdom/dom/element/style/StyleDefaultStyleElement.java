@@ -34,11 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleFamilyAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
-import org.odftoolkit.odfdom.dom.attribute.chart.ChartSymbolTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.chart.ChartSymbolNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:default-style}.
@@ -89,7 +84,7 @@ public abstract class StyleDefaultStyleElement extends OdfStyleBase
 	{
 		StyleFamilyAttribute attr = (StyleFamilyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "family" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

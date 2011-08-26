@@ -136,7 +136,7 @@ public abstract class DrawAreaPolygonElement extends OdfElement
 	{
 		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return XlinkTypeAttribute.DEFAULT_VALUE;
 	}
@@ -163,7 +163,7 @@ public abstract class DrawAreaPolygonElement extends OdfElement
 	{
 		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "href" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -190,7 +190,7 @@ public abstract class DrawAreaPolygonElement extends OdfElement
 	{
 		OfficeTargetFrameNameAttribute attr = (OfficeTargetFrameNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "target-frame-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -217,7 +217,7 @@ public abstract class DrawAreaPolygonElement extends OdfElement
 	{
 		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "show" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -244,7 +244,7 @@ public abstract class DrawAreaPolygonElement extends OdfElement
 	{
 		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -271,7 +271,7 @@ public abstract class DrawAreaPolygonElement extends OdfElement
 	{
 		DrawNohrefAttribute attr = (DrawNohrefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "nohref" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -298,7 +298,7 @@ public abstract class DrawAreaPolygonElement extends OdfElement
 	{
 		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "x" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -325,7 +325,7 @@ public abstract class DrawAreaPolygonElement extends OdfElement
 	{
 		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "y" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -352,7 +352,7 @@ public abstract class DrawAreaPolygonElement extends OdfElement
 	{
 		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -379,7 +379,7 @@ public abstract class DrawAreaPolygonElement extends OdfElement
 	{
 		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "height" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -406,7 +406,7 @@ public abstract class DrawAreaPolygonElement extends OdfElement
 	{
 		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "viewBox" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -433,7 +433,7 @@ public abstract class DrawAreaPolygonElement extends OdfElement
 	{
 		DrawPointsAttribute attr = (DrawPointsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "points" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

@@ -24,7 +24,7 @@ package org.odftoolkit.odfdom.type;
 import org.apache.xerces.impl.dv.util.Base64;
 
 /**
- * This class represents the in OpenDocument format used data type 'base64Binary'
+ * This class represents the in OpenDocument format used data type {@odf.datatype base64Binary}
  */
 public class Base64Binary implements OdfDataType {
 
@@ -90,11 +90,11 @@ public class Base64Binary implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String is a valid Base64Binary data type
+	 * check if the specified String is a valid {@odf.datatype base64Binary} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for Base64Binary data type
+	 * @return true if the value of argument is valid for {@odf.datatype base64Binary} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

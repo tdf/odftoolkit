@@ -401,7 +401,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoFontVariantAttribute attr = (FoFontVariantAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-variant" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -428,7 +428,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoTextTransformAttribute attr = (FoTextTransformAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-transform" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -455,7 +455,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoColorAttribute attr = (FoColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -482,7 +482,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleUseWindowFontColorAttribute attr = (StyleUseWindowFontColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "use-window-font-color" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -509,7 +509,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextOutlineAttribute attr = (StyleTextOutlineAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-outline" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -536,7 +536,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextLineThroughTypeAttribute attr = (StyleTextLineThroughTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -563,7 +563,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextLineThroughStyleAttribute attr = (StyleTextLineThroughStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -590,7 +590,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextLineThroughWidthAttribute attr = (StyleTextLineThroughWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -617,7 +617,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextLineThroughColorAttribute attr = (StyleTextLineThroughColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -644,7 +644,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextLineThroughTextAttribute attr = (StyleTextLineThroughTextAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-text" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -671,7 +671,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextLineThroughTextStyleAttribute attr = (StyleTextLineThroughTextStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-text-style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -698,7 +698,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextPositionAttribute attr = (StyleTextPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-position" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -725,7 +725,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontNameAttribute attr = (StyleFontNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -752,7 +752,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontNameAsianAttribute attr = (StyleFontNameAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-name-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -779,7 +779,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontNameComplexAttribute attr = (StyleFontNameComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-name-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -806,7 +806,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoFontFamilyAttribute attr = (FoFontFamilyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-family" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -833,7 +833,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontFamilyAsianAttribute attr = (StyleFontFamilyAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -860,7 +860,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontFamilyComplexAttribute attr = (StyleFontFamilyComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -887,7 +887,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontFamilyGenericAttribute attr = (StyleFontFamilyGenericAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-generic" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -914,7 +914,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontFamilyGenericAsianAttribute attr = (StyleFontFamilyGenericAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-generic-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -941,7 +941,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontFamilyGenericComplexAttribute attr = (StyleFontFamilyGenericComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-generic-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -968,7 +968,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontStyleNameAttribute attr = (StyleFontStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -995,7 +995,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontStyleNameAsianAttribute attr = (StyleFontStyleNameAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-name-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1022,7 +1022,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontStyleNameComplexAttribute attr = (StyleFontStyleNameComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-name-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1049,7 +1049,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontPitchAttribute attr = (StyleFontPitchAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-pitch" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1076,7 +1076,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontPitchAsianAttribute attr = (StyleFontPitchAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-pitch-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1103,7 +1103,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontPitchComplexAttribute attr = (StyleFontPitchComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-pitch-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1130,7 +1130,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontCharsetAttribute attr = (StyleFontCharsetAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-charset" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1157,7 +1157,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontCharsetAsianAttribute attr = (StyleFontCharsetAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-charset-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1184,7 +1184,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontCharsetComplexAttribute attr = (StyleFontCharsetComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-charset-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1211,7 +1211,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoFontSizeAttribute attr = (FoFontSizeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-size" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1238,7 +1238,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontSizeAsianAttribute attr = (StyleFontSizeAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1265,7 +1265,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontSizeComplexAttribute attr = (StyleFontSizeComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1292,7 +1292,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontSizeRelAttribute attr = (StyleFontSizeRelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-rel" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1319,7 +1319,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontSizeRelAsianAttribute attr = (StyleFontSizeRelAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-rel-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1346,7 +1346,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontSizeRelComplexAttribute attr = (StyleFontSizeRelComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-size-rel-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1373,7 +1373,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleScriptTypeAttribute attr = (StyleScriptTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "script-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1400,7 +1400,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoLetterSpacingAttribute attr = (FoLetterSpacingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "letter-spacing" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1427,7 +1427,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoLanguageAttribute attr = (FoLanguageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "language" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1454,7 +1454,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleLanguageAsianAttribute attr = (StyleLanguageAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "language-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1481,7 +1481,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleLanguageComplexAttribute attr = (StyleLanguageComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "language-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1508,7 +1508,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoCountryAttribute attr = (FoCountryAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "country" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1535,7 +1535,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleCountryAsianAttribute attr = (StyleCountryAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "country-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1562,7 +1562,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleCountryComplexAttribute attr = (StyleCountryComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "country-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1589,7 +1589,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoScriptAttribute attr = (FoScriptAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "script" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1616,7 +1616,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleScriptAsianAttribute attr = (StyleScriptAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "script-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1643,7 +1643,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleScriptComplexAttribute attr = (StyleScriptComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "script-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1670,7 +1670,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleRfcLanguageTagAttribute attr = (StyleRfcLanguageTagAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1697,7 +1697,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleRfcLanguageTagAsianAttribute attr = (StyleRfcLanguageTagAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1724,7 +1724,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleRfcLanguageTagComplexAttribute attr = (StyleRfcLanguageTagComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1751,7 +1751,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoFontStyleAttribute attr = (FoFontStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1778,7 +1778,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontStyleAsianAttribute attr = (StyleFontStyleAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1805,7 +1805,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontStyleComplexAttribute attr = (StyleFontStyleComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-style-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1832,7 +1832,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontReliefAttribute attr = (StyleFontReliefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-relief" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1859,7 +1859,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoTextShadowAttribute attr = (FoTextShadowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-shadow" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1886,7 +1886,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextUnderlineTypeAttribute attr = (StyleTextUnderlineTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1913,7 +1913,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextUnderlineStyleAttribute attr = (StyleTextUnderlineStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1940,7 +1940,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextUnderlineWidthAttribute attr = (StyleTextUnderlineWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1967,7 +1967,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextUnderlineColorAttribute attr = (StyleTextUnderlineColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1994,7 +1994,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextOverlineTypeAttribute attr = (StyleTextOverlineTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2021,7 +2021,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextOverlineStyleAttribute attr = (StyleTextOverlineStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2048,7 +2048,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextOverlineWidthAttribute attr = (StyleTextOverlineWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2075,7 +2075,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextOverlineColorAttribute attr = (StyleTextOverlineColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2102,7 +2102,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextOverlineModeAttribute attr = (StyleTextOverlineModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-overline-mode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2129,7 +2129,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoFontWeightAttribute attr = (FoFontWeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "font-weight" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2156,7 +2156,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontWeightAsianAttribute attr = (StyleFontWeightAsianAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-weight-asian" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2183,7 +2183,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleFontWeightComplexAttribute attr = (StyleFontWeightComplexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-weight-complex" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2210,7 +2210,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextUnderlineModeAttribute attr = (StyleTextUnderlineModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-underline-mode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2237,7 +2237,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextLineThroughModeAttribute attr = (StyleTextLineThroughModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-line-through-mode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2264,7 +2264,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleLetterKerningAttribute attr = (StyleLetterKerningAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "letter-kerning" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -2291,7 +2291,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextBlinkingAttribute attr = (StyleTextBlinkingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-blinking" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -2318,7 +2318,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "background-color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2345,7 +2345,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextCombineAttribute attr = (StyleTextCombineAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-combine" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2372,7 +2372,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextCombineStartCharAttribute attr = (StyleTextCombineStartCharAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-combine-start-char" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2399,7 +2399,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextCombineEndCharAttribute attr = (StyleTextCombineEndCharAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-combine-end-char" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2426,7 +2426,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextEmphasizeAttribute attr = (StyleTextEmphasizeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-emphasize" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2453,7 +2453,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextScaleAttribute attr = (StyleTextScaleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-scale" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2480,7 +2480,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextRotationAngleAttribute attr = (StyleTextRotationAngleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-rotation-angle" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2507,7 +2507,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		StyleTextRotationScaleAttribute attr = (StyleTextRotationScaleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "text-rotation-scale" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2534,7 +2534,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoHyphenateAttribute attr = (FoHyphenateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenate" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -2561,7 +2561,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoHyphenationRemainCharCountAttribute attr = (FoHyphenationRemainCharCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenation-remain-char-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -2588,7 +2588,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		FoHyphenationPushCharCountAttribute attr = (FoHyphenationPushCharCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "hyphenation-push-char-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -2615,7 +2615,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "display" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -2642,7 +2642,7 @@ public abstract class StyleTextPropertiesElement extends OdfStylePropertiesBase
 	{
 		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "condition" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

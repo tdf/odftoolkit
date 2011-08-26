@@ -121,7 +121,7 @@ public abstract class DrawHatchElement extends OdfElement
 	{
 		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -148,7 +148,7 @@ public abstract class DrawHatchElement extends OdfElement
 	{
 		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "display-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -175,7 +175,7 @@ public abstract class DrawHatchElement extends OdfElement
 	{
 		DrawStyleAttribute attr = (DrawStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -202,7 +202,7 @@ public abstract class DrawHatchElement extends OdfElement
 	{
 		DrawColorAttribute attr = (DrawColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -229,7 +229,7 @@ public abstract class DrawHatchElement extends OdfElement
 	{
 		DrawDistanceAttribute attr = (DrawDistanceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "distance" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -256,7 +256,7 @@ public abstract class DrawHatchElement extends OdfElement
 	{
 		DrawRotationAttribute attr = (DrawRotationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "rotation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

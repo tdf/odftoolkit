@@ -88,7 +88,7 @@ public abstract class TextScriptElement extends OdfElement
 	{
 		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return XlinkTypeAttribute.DEFAULT_VALUE;
 	}
@@ -115,7 +115,7 @@ public abstract class TextScriptElement extends OdfElement
 	{
 		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "href" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -142,7 +142,7 @@ public abstract class TextScriptElement extends OdfElement
 	{
 		ScriptLanguageAttribute attr = (ScriptLanguageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SCRIPT), "language" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberDecimalPlacesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinIntegerDigitsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberGroupingAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.number.NumberPositionAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element number:number}.
@@ -80,7 +79,7 @@ public abstract class NumberNumberElement extends OdfElement
 	{
 		NumberDecimalReplacementAttribute attr = (NumberDecimalReplacementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "decimal-replacement" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -107,7 +106,7 @@ public abstract class NumberNumberElement extends OdfElement
 	{
 		NumberDisplayFactorAttribute attr = (NumberDisplayFactorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "display-factor" ) );
 		if( attr != null ){
-		 	return Double.valueOf( attr.getDoubleValue() );
+			return Double.valueOf( attr.doubleValue() );
 		}
 		return Double.valueOf( NumberDisplayFactorAttribute.DEFAULT_VALUE );
 	}
@@ -134,7 +133,7 @@ public abstract class NumberNumberElement extends OdfElement
 	{
 		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "decimal-places" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -161,7 +160,7 @@ public abstract class NumberNumberElement extends OdfElement
 	{
 		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "min-integer-digits" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -188,7 +187,7 @@ public abstract class NumberNumberElement extends OdfElement
 	{
 		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "grouping" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( NumberGroupingAttribute.DEFAULT_VALUE );
 	}

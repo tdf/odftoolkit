@@ -108,7 +108,7 @@ public abstract class TableSourceRangeAddressElement extends OdfElement
 	{
 		TableColumnAttribute attr = (TableColumnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "column" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -135,7 +135,7 @@ public abstract class TableSourceRangeAddressElement extends OdfElement
 	{
 		TableRowAttribute attr = (TableRowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "row" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -162,7 +162,7 @@ public abstract class TableSourceRangeAddressElement extends OdfElement
 	{
 		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "table" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -189,7 +189,7 @@ public abstract class TableSourceRangeAddressElement extends OdfElement
 	{
 		TableStartColumnAttribute attr = (TableStartColumnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "start-column" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -216,7 +216,7 @@ public abstract class TableSourceRangeAddressElement extends OdfElement
 	{
 		TableStartRowAttribute attr = (TableStartRowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "start-row" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -243,7 +243,7 @@ public abstract class TableSourceRangeAddressElement extends OdfElement
 	{
 		TableStartTableAttribute attr = (TableStartTableAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "start-table" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -270,7 +270,7 @@ public abstract class TableSourceRangeAddressElement extends OdfElement
 	{
 		TableEndColumnAttribute attr = (TableEndColumnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "end-column" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -297,7 +297,7 @@ public abstract class TableSourceRangeAddressElement extends OdfElement
 	{
 		TableEndRowAttribute attr = (TableEndRowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "end-row" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -324,7 +324,7 @@ public abstract class TableSourceRangeAddressElement extends OdfElement
 	{
 		TableEndTableAttribute attr = (TableEndTableAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "end-table" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

@@ -75,7 +75,7 @@ public abstract class SvgFontFaceFormatElement extends OdfElement
 	{
 		SvgStringAttribute attr = (SvgStringAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "string" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

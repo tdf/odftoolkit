@@ -23,7 +23,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'positiveInteger'
+ * This class represents the in OpenDocument format used data type {@odf.datatype positiveInteger}
  */
 public class PositiveInteger implements OdfDataType {
 
@@ -81,12 +81,12 @@ public class PositiveInteger implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified Integer instance is a valid PositiveInteger data
+	 * check if the specified Integer instance is a valid {@odf.datatype positiveInteger} data
 	 * type
 	 *
 	 * @param integerValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for PositiveInteger data
+	 * @return true if the value of argument is valid for {@odf.datatype positiveInteger} data
 	 *         type false otherwise
 	 */
 	public static boolean isValid(Integer integerValue) {

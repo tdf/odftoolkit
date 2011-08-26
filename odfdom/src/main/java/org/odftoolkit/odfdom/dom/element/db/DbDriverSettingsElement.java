@@ -80,7 +80,7 @@ public abstract class DbDriverSettingsElement extends OdfElement
 	{
 		DbJavaDriverClassAttribute attr = (DbJavaDriverClassAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "java-driver-class" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -107,7 +107,7 @@ public abstract class DbDriverSettingsElement extends OdfElement
 	{
 		DbShowDeletedAttribute attr = (DbShowDeletedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "show-deleted" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( DbShowDeletedAttribute.DEFAULT_VALUE );
 	}
@@ -134,7 +134,7 @@ public abstract class DbDriverSettingsElement extends OdfElement
 	{
 		DbSystemDriverSettingsAttribute attr = (DbSystemDriverSettingsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "system-driver-settings" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -161,7 +161,7 @@ public abstract class DbDriverSettingsElement extends OdfElement
 	{
 		DbBaseDnAttribute attr = (DbBaseDnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "base-dn" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -188,7 +188,7 @@ public abstract class DbDriverSettingsElement extends OdfElement
 	{
 		DbIsFirstRowHeaderLineAttribute attr = (DbIsFirstRowHeaderLineAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "is-first-row-header-line" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( DbIsFirstRowHeaderLineAttribute.DEFAULT_VALUE );
 	}
@@ -215,7 +215,7 @@ public abstract class DbDriverSettingsElement extends OdfElement
 	{
 		DbParameterNameSubstitutionAttribute attr = (DbParameterNameSubstitutionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "parameter-name-substitution" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( DbParameterNameSubstitutionAttribute.DEFAULT_VALUE );
 	}

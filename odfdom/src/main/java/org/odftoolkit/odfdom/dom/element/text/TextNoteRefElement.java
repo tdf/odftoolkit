@@ -118,7 +118,7 @@ public abstract class TextNoteRefElement extends OdfElement
 	{
 		TextRefNameAttribute attr = (TextRefNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "ref-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -145,7 +145,7 @@ public abstract class TextNoteRefElement extends OdfElement
 	{
 		TextReferenceFormatAttribute attr = (TextReferenceFormatAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "reference-format" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -172,7 +172,7 @@ public abstract class TextNoteRefElement extends OdfElement
 	{
 		TextNoteClassAttribute attr = (TextNoteClassAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "note-class" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

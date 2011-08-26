@@ -89,7 +89,7 @@ public abstract class TextBookmarkStartElement extends OdfElement
 	{
 		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -116,7 +116,7 @@ public abstract class TextBookmarkStartElement extends OdfElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -143,7 +143,7 @@ public abstract class TextBookmarkStartElement extends OdfElement
 	{
 		XhtmlAboutAttribute attr = (XhtmlAboutAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XHTML), "about" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -170,7 +170,7 @@ public abstract class TextBookmarkStartElement extends OdfElement
 	{
 		XhtmlPropertyAttribute attr = (XhtmlPropertyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XHTML), "property" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -197,7 +197,7 @@ public abstract class TextBookmarkStartElement extends OdfElement
 	{
 		XhtmlDatatypeAttribute attr = (XhtmlDatatypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XHTML), "datatype" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -224,7 +224,7 @@ public abstract class TextBookmarkStartElement extends OdfElement
 	{
 		XhtmlContentAttribute attr = (XhtmlContentAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XHTML), "content" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

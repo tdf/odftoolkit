@@ -83,7 +83,7 @@ public abstract class TextUserIndexMarkEndElement extends OdfElement
 	{
 		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

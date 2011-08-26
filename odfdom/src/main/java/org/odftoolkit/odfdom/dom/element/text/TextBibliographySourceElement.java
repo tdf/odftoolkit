@@ -33,8 +33,6 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 
-import org.odftoolkit.odfdom.dom.attribute.text.TextBibliographyTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:bibliography-source}.

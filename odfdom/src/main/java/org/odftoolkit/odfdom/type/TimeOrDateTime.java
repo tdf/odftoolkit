@@ -28,7 +28,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
- * This class represents the in OpenDocument format used data type 'timeOrDateTime'
+ * This class represents the in OpenDocument format used data type {@odf.datatype timeOrDateTime}
  */
 public class TimeOrDateTime implements OdfDataType {
 
@@ -97,11 +97,11 @@ public class TimeOrDateTime implements OdfDataType {
 
 	/**
 	 * check if the specified XMLGregorianCalendar instance is a valid
-	 * TimeOrDateTime data type
+	 * {@odf.datatype timeOrDateTime} data type
 	 *
 	 * @param timeOrDateTime
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for TimeOrDateTime data
+	 * @return true if the value of argument is valid for {@odf.datatype timeOrDateTime} data
 	 *         type false otherwise
 	 */
 	public static boolean isValid(XMLGregorianCalendar timeOrDateTime) {

@@ -92,7 +92,7 @@ public abstract class TableConsolidationElement extends OdfElement
 	{
 		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "function" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -119,7 +119,7 @@ public abstract class TableConsolidationElement extends OdfElement
 	{
 		TableSourceCellRangeAddressesAttribute attr = (TableSourceCellRangeAddressesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "source-cell-range-addresses" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -146,7 +146,7 @@ public abstract class TableConsolidationElement extends OdfElement
 	{
 		TableTargetCellAddressAttribute attr = (TableTargetCellAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "target-cell-address" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -173,7 +173,7 @@ public abstract class TableConsolidationElement extends OdfElement
 	{
 		TableUseLabelsAttribute attr = (TableUseLabelsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "use-labels" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TableUseLabelsAttribute.DEFAULT_VALUE;
 	}
@@ -200,7 +200,7 @@ public abstract class TableConsolidationElement extends OdfElement
 	{
 		TableLinkToSourceDataAttribute attr = (TableLinkToSourceDataAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "link-to-source-data" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableLinkToSourceDataAttribute.DEFAULT_VALUE );
 	}

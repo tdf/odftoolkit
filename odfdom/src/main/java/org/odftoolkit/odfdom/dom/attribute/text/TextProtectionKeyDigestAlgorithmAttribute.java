@@ -32,15 +32,6 @@ import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.dom.element.text.TextAlphabeticalIndexElement;
-import org.odftoolkit.odfdom.dom.element.text.TextBibliographyElement;
-import org.odftoolkit.odfdom.dom.element.text.TextIllustrationIndexElement;
-import org.odftoolkit.odfdom.dom.element.text.TextIndexTitleElement;
-import org.odftoolkit.odfdom.dom.element.text.TextObjectIndexElement;
-import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
-import org.odftoolkit.odfdom.dom.element.text.TextTableIndexElement;
-import org.odftoolkit.odfdom.dom.element.text.TextTableOfContentElement;
-import org.odftoolkit.odfdom.dom.element.text.TextUserIndexElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute text:protection-key-digest-algorithm}.
@@ -124,7 +115,7 @@ public class TextProtectionKeyDigestAlgorithmAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if text:protection-key-digest-algorithm has an element parent 
+	 * @return <code>true</code> if {@odf.attribute text:protection-key-digest-algorithm} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

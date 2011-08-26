@@ -88,7 +88,7 @@ public abstract class TextUserIndexMarkElement extends OdfElement
 	{
 		TextStringValueAttribute attr = (TextStringValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "string-value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -115,7 +115,7 @@ public abstract class TextUserIndexMarkElement extends OdfElement
 	{
 		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "outline-level" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -142,7 +142,7 @@ public abstract class TextUserIndexMarkElement extends OdfElement
 	{
 		TextIndexNameAttribute attr = (TextIndexNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "index-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

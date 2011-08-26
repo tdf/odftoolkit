@@ -90,7 +90,7 @@ public abstract class TextAlphabeticalIndexElement extends OdfStylableElement
 	{
 		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -117,7 +117,7 @@ public abstract class TextAlphabeticalIndexElement extends OdfStylableElement
 	{
 		TextNameAttribute attr = (TextNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -144,7 +144,7 @@ public abstract class TextAlphabeticalIndexElement extends OdfStylableElement
 	{
 		TextProtectedAttribute attr = (TextProtectedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "protected" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -171,7 +171,7 @@ public abstract class TextAlphabeticalIndexElement extends OdfStylableElement
 	{
 		TextProtectionKeyAttribute attr = (TextProtectionKeyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "protection-key" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -198,7 +198,7 @@ public abstract class TextAlphabeticalIndexElement extends OdfStylableElement
 	{
 		TextProtectionKeyDigestAlgorithmAttribute attr = (TextProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "protection-key-digest-algorithm" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TextProtectionKeyDigestAlgorithmAttribute.DEFAULT_VALUE;
 	}
@@ -225,7 +225,7 @@ public abstract class TextAlphabeticalIndexElement extends OdfStylableElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

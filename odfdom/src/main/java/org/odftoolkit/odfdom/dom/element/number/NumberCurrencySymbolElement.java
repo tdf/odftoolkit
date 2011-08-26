@@ -78,7 +78,7 @@ public abstract class NumberCurrencySymbolElement extends OdfElement
 	{
 		NumberLanguageAttribute attr = (NumberLanguageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "language" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -105,7 +105,7 @@ public abstract class NumberCurrencySymbolElement extends OdfElement
 	{
 		NumberCountryAttribute attr = (NumberCountryAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "country" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -132,7 +132,7 @@ public abstract class NumberCurrencySymbolElement extends OdfElement
 	{
 		NumberScriptAttribute attr = (NumberScriptAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "script" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -159,7 +159,7 @@ public abstract class NumberCurrencySymbolElement extends OdfElement
 	{
 		NumberRfcLanguageTagAttribute attr = (NumberRfcLanguageTagAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "rfc-language-tag" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

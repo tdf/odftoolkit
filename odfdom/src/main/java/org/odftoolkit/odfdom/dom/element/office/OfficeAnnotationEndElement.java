@@ -84,7 +84,7 @@ public abstract class OfficeAnnotationEndElement extends OdfElement
 	{
 		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

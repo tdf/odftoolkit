@@ -84,7 +84,7 @@ public abstract class OfficeScriptElement extends OdfElement
 	{
 		ScriptLanguageAttribute attr = (ScriptLanguageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SCRIPT), "language" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

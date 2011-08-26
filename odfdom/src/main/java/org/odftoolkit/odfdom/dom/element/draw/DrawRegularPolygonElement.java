@@ -31,7 +31,6 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawConcaveAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawSharpnessAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawCornersAttribute;
@@ -47,10 +46,6 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawCaptionIdAttribute;
 import org.odftoolkit.odfdom.dom.element.svg.SvgTitleElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawEscapeDirectionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawIdAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgXAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 
@@ -107,7 +102,7 @@ public abstract class DrawRegularPolygonElement extends DrawShapeElementBase
 	{
 		DrawConcaveAttribute attr = (DrawConcaveAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "concave" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -134,7 +129,7 @@ public abstract class DrawRegularPolygonElement extends DrawShapeElementBase
 	{
 		DrawSharpnessAttribute attr = (DrawSharpnessAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "sharpness" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -161,7 +156,7 @@ public abstract class DrawRegularPolygonElement extends DrawShapeElementBase
 	{
 		DrawCornersAttribute attr = (DrawCornersAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "corners" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -188,7 +183,7 @@ public abstract class DrawRegularPolygonElement extends DrawShapeElementBase
 	{
 		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "x" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -215,7 +210,7 @@ public abstract class DrawRegularPolygonElement extends DrawShapeElementBase
 	{
 		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "y" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -242,7 +237,7 @@ public abstract class DrawRegularPolygonElement extends DrawShapeElementBase
 	{
 		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -269,7 +264,7 @@ public abstract class DrawRegularPolygonElement extends DrawShapeElementBase
 	{
 		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "height" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -296,7 +291,7 @@ public abstract class DrawRegularPolygonElement extends DrawShapeElementBase
 	{
 		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "layer" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -323,7 +318,7 @@ public abstract class DrawRegularPolygonElement extends DrawShapeElementBase
 	{
 		DrawTransformAttribute attr = (DrawTransformAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "transform" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -350,7 +345,7 @@ public abstract class DrawRegularPolygonElement extends DrawShapeElementBase
 	{
 		DrawTextStyleNameAttribute attr = (DrawTextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "text-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -377,7 +372,7 @@ public abstract class DrawRegularPolygonElement extends DrawShapeElementBase
 	{
 		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "caption-id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

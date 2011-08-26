@@ -36,31 +36,15 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleDisplayAttribute;
 
 import org.odftoolkit.odfdom.dom.element.text.TextChangedRegionElement;
 import org.odftoolkit.odfdom.dom.element.text.TextVariableDeclElement;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextSequenceDeclElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayOutlineLevelAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextUserFieldDeclElement;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDateValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeTimeValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeBooleanValueAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextDdeConnectionDeclElement;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeApplicationAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeItemAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeTopicAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeNameAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextAlphabeticalIndexAutoMarkFileElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextHElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextTableOfContentElement;
 import org.odftoolkit.odfdom.dom.element.text.TextIllustrationIndexElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTableIndexElement;
@@ -110,7 +94,7 @@ public abstract class StyleHeaderElement extends OdfElement
 	{
 		StyleDisplayAttribute attr = (StyleDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "display" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( StyleDisplayAttribute.DEFAULT_VALUE );
 	}

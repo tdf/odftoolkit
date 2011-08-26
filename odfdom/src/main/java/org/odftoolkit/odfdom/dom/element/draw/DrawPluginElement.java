@@ -157,7 +157,7 @@ public abstract class DrawPluginElement extends OdfElement
 	{
 		DrawMimeTypeAttribute attr = (DrawMimeTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "mime-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -184,7 +184,7 @@ public abstract class DrawPluginElement extends OdfElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -211,7 +211,7 @@ public abstract class DrawPluginElement extends OdfElement
 	{
 		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return XlinkTypeAttribute.DEFAULT_VALUE;
 	}
@@ -238,7 +238,7 @@ public abstract class DrawPluginElement extends OdfElement
 	{
 		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "href" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -265,7 +265,7 @@ public abstract class DrawPluginElement extends OdfElement
 	{
 		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "show" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DEFAULT_VALUE_XLINK_SHOW_ATTRIBUTE;
 	}
@@ -292,7 +292,7 @@ public abstract class DrawPluginElement extends OdfElement
 	{
 		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "actuate" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DEFAULT_VALUE_XLINK_ACTUATE_ATTRIBUTE;
 	}

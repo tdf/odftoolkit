@@ -80,7 +80,7 @@ public abstract class TableTableRowElement extends OdfStylableElement
 	{
 		TableNumberRowsRepeatedAttribute attr = (TableNumberRowsRepeatedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "number-rows-repeated" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return Integer.valueOf( TableNumberRowsRepeatedAttribute.DEFAULT_VALUE );
 	}
@@ -107,7 +107,7 @@ public abstract class TableTableRowElement extends OdfStylableElement
 	{
 		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -134,7 +134,7 @@ public abstract class TableTableRowElement extends OdfStylableElement
 	{
 		TableDefaultCellStyleNameAttribute attr = (TableDefaultCellStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "default-cell-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -161,7 +161,7 @@ public abstract class TableTableRowElement extends OdfStylableElement
 	{
 		TableVisibilityAttribute attr = (TableVisibilityAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "visibility" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TableVisibilityAttribute.DEFAULT_VALUE;
 	}
@@ -188,7 +188,7 @@ public abstract class TableTableRowElement extends OdfStylableElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

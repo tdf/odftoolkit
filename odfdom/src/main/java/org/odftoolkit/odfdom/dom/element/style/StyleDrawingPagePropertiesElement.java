@@ -70,8 +70,6 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationDisplayPageN
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationDisplayDateTimeAttribute;
 
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationSoundElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:drawing-page-properties}.
@@ -181,7 +179,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawFillAttribute attr = (DrawFillAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "fill" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -208,7 +206,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawFillColorAttribute attr = (DrawFillColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "fill-color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -235,7 +233,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawSecondaryFillColorAttribute attr = (DrawSecondaryFillColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "secondary-fill-color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -262,7 +260,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawFillGradientNameAttribute attr = (DrawFillGradientNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "fill-gradient-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -289,7 +287,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawGradientStepCountAttribute attr = (DrawGradientStepCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "gradient-step-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -316,7 +314,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawFillHatchNameAttribute attr = (DrawFillHatchNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "fill-hatch-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -343,7 +341,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawFillHatchSolidAttribute attr = (DrawFillHatchSolidAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "fill-hatch-solid" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -370,7 +368,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawFillImageNameAttribute attr = (DrawFillImageNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "fill-image-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -397,7 +395,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		StyleRepeatAttribute attr = (StyleRepeatAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "repeat" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -424,7 +422,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawFillImageWidthAttribute attr = (DrawFillImageWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "fill-image-width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -451,7 +449,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawFillImageHeightAttribute attr = (DrawFillImageHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "fill-image-height" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -478,7 +476,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawFillImageRefPointXAttribute attr = (DrawFillImageRefPointXAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "fill-image-ref-point-x" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -505,7 +503,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawFillImageRefPointYAttribute attr = (DrawFillImageRefPointYAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "fill-image-ref-point-y" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -532,7 +530,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawFillImageRefPointAttribute attr = (DrawFillImageRefPointAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "fill-image-ref-point" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -559,7 +557,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawTileRepeatOffsetAttribute attr = (DrawTileRepeatOffsetAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "tile-repeat-offset" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -586,7 +584,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawOpacityAttribute attr = (DrawOpacityAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "opacity" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -613,7 +611,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawOpacityNameAttribute attr = (DrawOpacityNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "opacity-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -640,7 +638,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		SvgFillRuleAttribute attr = (SvgFillRuleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "fill-rule" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -667,7 +665,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		PresentationTransitionTypeAttribute attr = (PresentationTransitionTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "transition-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -694,7 +692,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		PresentationTransitionStyleAttribute attr = (PresentationTransitionStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "transition-style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -721,7 +719,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		PresentationTransitionSpeedAttribute attr = (PresentationTransitionSpeedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "transition-speed" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -748,7 +746,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		SmilTypeAttribute attr = (SmilTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -775,7 +773,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		SmilSubtypeAttribute attr = (SmilSubtypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "subtype" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -802,7 +800,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		SmilDirectionAttribute attr = (SmilDirectionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "direction" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -829,7 +827,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		SmilFadeColorAttribute attr = (SmilFadeColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "fadeColor" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -856,7 +854,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		PresentationDurationAttribute attr = (PresentationDurationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "duration" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -883,7 +881,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		PresentationVisibilityAttribute attr = (PresentationVisibilityAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "visibility" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -910,7 +908,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		DrawBackgroundSizeAttribute attr = (DrawBackgroundSizeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "background-size" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -937,7 +935,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		PresentationBackgroundObjectsVisibleAttribute attr = (PresentationBackgroundObjectsVisibleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "background-objects-visible" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -964,7 +962,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		PresentationBackgroundVisibleAttribute attr = (PresentationBackgroundVisibleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "background-visible" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -991,7 +989,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		PresentationDisplayHeaderAttribute attr = (PresentationDisplayHeaderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "display-header" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -1018,7 +1016,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		PresentationDisplayFooterAttribute attr = (PresentationDisplayFooterAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "display-footer" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -1045,7 +1043,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		PresentationDisplayPageNumberAttribute attr = (PresentationDisplayPageNumberAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "display-page-number" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -1072,7 +1070,7 @@ public abstract class StyleDrawingPagePropertiesElement extends OdfStyleProperti
 	{
 		PresentationDisplayDateTimeAttribute attr = (PresentationDisplayDateTimeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "display-date-time" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}

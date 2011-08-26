@@ -33,8 +33,6 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 
-import org.odftoolkit.odfdom.dom.attribute.db.DbDataSourceSettingNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.db.DbDataSourceSettingTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:data-source-settings}.

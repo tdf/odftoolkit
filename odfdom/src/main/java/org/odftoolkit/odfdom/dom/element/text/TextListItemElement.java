@@ -36,8 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextStartValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleOverrideAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:list-item}.
@@ -79,7 +77,7 @@ public abstract class TextListItemElement extends OdfElement
 	{
 		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "start-value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -106,7 +104,7 @@ public abstract class TextListItemElement extends OdfElement
 	{
 		TextStyleOverrideAttribute attr = (TextStyleOverrideAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-override" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -133,7 +131,7 @@ public abstract class TextListItemElement extends OdfElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

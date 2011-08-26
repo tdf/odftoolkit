@@ -111,7 +111,7 @@ public abstract class TextPageNumberElement extends OdfElement
 	{
 		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-format" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -138,7 +138,7 @@ public abstract class TextPageNumberElement extends OdfElement
 	{
 		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-letter-sync" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -165,7 +165,7 @@ public abstract class TextPageNumberElement extends OdfElement
 	{
 		TextFixedAttribute attr = (TextFixedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "fixed" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -192,7 +192,7 @@ public abstract class TextPageNumberElement extends OdfElement
 	{
 		TextPageAdjustAttribute attr = (TextPageAdjustAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "page-adjust" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -219,7 +219,7 @@ public abstract class TextPageNumberElement extends OdfElement
 	{
 		TextSelectPageAttribute attr = (TextSelectPageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "select-page" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

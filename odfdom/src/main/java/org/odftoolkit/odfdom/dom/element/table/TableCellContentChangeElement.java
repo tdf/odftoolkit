@@ -36,9 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAcceptanceStateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableRejectingChangeIdAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.table.TableColumnAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableRowAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableTableAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeChangeInfoElement;
 
 /**
@@ -90,7 +87,7 @@ public abstract class TableCellContentChangeElement extends OdfElement
 	{
 		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -117,7 +114,7 @@ public abstract class TableCellContentChangeElement extends OdfElement
 	{
 		TableAcceptanceStateAttribute attr = (TableAcceptanceStateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "acceptance-state" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TableAcceptanceStateAttribute.DEFAULT_VALUE;
 	}
@@ -144,7 +141,7 @@ public abstract class TableCellContentChangeElement extends OdfElement
 	{
 		TableRejectingChangeIdAttribute attr = (TableRejectingChangeIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "rejecting-change-id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

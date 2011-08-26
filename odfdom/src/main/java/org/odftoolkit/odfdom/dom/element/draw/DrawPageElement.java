@@ -48,35 +48,19 @@ import org.odftoolkit.odfdom.dom.element.svg.SvgTitleElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
 import org.odftoolkit.odfdom.dom.element.form.FormFormElement;
 import org.odftoolkit.odfdom.dom.element.xforms.XformsModelElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX2Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY2Attribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawPointsAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawConcaveAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawCornersAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawControlAttribute;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationAnimationsElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateElement;
-import org.odftoolkit.odfdom.dom.attribute.smil.SmilAttributeNameAttribute;
 import org.odftoolkit.odfdom.dom.element.anim.AnimSetElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateMotionElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateColorElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateTransformElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.anim.AnimTransitionFilterElement;
-import org.odftoolkit.odfdom.dom.attribute.smil.SmilTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.anim.AnimParElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimSeqElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimIterateElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAudioElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimCommandElement;
-import org.odftoolkit.odfdom.dom.attribute.anim.AnimCommandAttribute;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
 
 /**
@@ -128,7 +112,7 @@ public abstract class DrawPageElement extends OdfStylableElement
 	{
 		PresentationUseHeaderNameAttribute attr = (PresentationUseHeaderNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "use-header-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -155,7 +139,7 @@ public abstract class DrawPageElement extends OdfStylableElement
 	{
 		PresentationUseFooterNameAttribute attr = (PresentationUseFooterNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "use-footer-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -182,7 +166,7 @@ public abstract class DrawPageElement extends OdfStylableElement
 	{
 		PresentationUseDateTimeNameAttribute attr = (PresentationUseDateTimeNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "use-date-time-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -209,7 +193,7 @@ public abstract class DrawPageElement extends OdfStylableElement
 	{
 		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -236,7 +220,7 @@ public abstract class DrawPageElement extends OdfStylableElement
 	{
 		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -263,7 +247,7 @@ public abstract class DrawPageElement extends OdfStylableElement
 	{
 		DrawMasterPageNameAttribute attr = (DrawMasterPageNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "master-page-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -290,7 +274,7 @@ public abstract class DrawPageElement extends OdfStylableElement
 	{
 		PresentationPresentationPageLayoutNameAttribute attr = (PresentationPresentationPageLayoutNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "presentation-page-layout-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -317,7 +301,7 @@ public abstract class DrawPageElement extends OdfStylableElement
 	{
 		DrawIdAttribute attr = (DrawIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -344,7 +328,7 @@ public abstract class DrawPageElement extends OdfStylableElement
 	{
 		DrawNavOrderAttribute attr = (DrawNavOrderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "nav-order" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -371,7 +355,7 @@ public abstract class DrawPageElement extends OdfStylableElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

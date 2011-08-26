@@ -76,7 +76,7 @@ public abstract class DrawParamElement extends OdfElement
 	{
 		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -103,7 +103,7 @@ public abstract class DrawParamElement extends OdfElement
 	{
 		DrawValueAttribute attr = (DrawValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

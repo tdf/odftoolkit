@@ -43,7 +43,6 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgRAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgFxAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgFyAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgOffsetAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element svg:radialGradient}.
@@ -93,7 +92,7 @@ public abstract class SvgRadialGradientElement extends OdfElement
 	{
 		SvgGradientUnitsAttribute attr = (SvgGradientUnitsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "gradientUnits" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return SvgGradientUnitsAttribute.DEFAULT_VALUE;
 	}
@@ -120,7 +119,7 @@ public abstract class SvgRadialGradientElement extends OdfElement
 	{
 		SvgGradientTransformAttribute attr = (SvgGradientTransformAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "gradientTransform" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -147,7 +146,7 @@ public abstract class SvgRadialGradientElement extends OdfElement
 	{
 		SvgSpreadMethodAttribute attr = (SvgSpreadMethodAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "spreadMethod" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return SvgSpreadMethodAttribute.DEFAULT_VALUE;
 	}
@@ -174,7 +173,7 @@ public abstract class SvgRadialGradientElement extends OdfElement
 	{
 		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -201,7 +200,7 @@ public abstract class SvgRadialGradientElement extends OdfElement
 	{
 		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "display-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -228,7 +227,7 @@ public abstract class SvgRadialGradientElement extends OdfElement
 	{
 		SvgCxAttribute attr = (SvgCxAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "cx" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return SvgCxAttribute.DEFAULT_VALUE;
 	}
@@ -255,7 +254,7 @@ public abstract class SvgRadialGradientElement extends OdfElement
 	{
 		SvgCyAttribute attr = (SvgCyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "cy" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return SvgCyAttribute.DEFAULT_VALUE;
 	}
@@ -282,7 +281,7 @@ public abstract class SvgRadialGradientElement extends OdfElement
 	{
 		SvgRAttribute attr = (SvgRAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "r" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return SvgRAttribute.DEFAULT_VALUE;
 	}
@@ -309,7 +308,7 @@ public abstract class SvgRadialGradientElement extends OdfElement
 	{
 		SvgFxAttribute attr = (SvgFxAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "fx" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -336,7 +335,7 @@ public abstract class SvgRadialGradientElement extends OdfElement
 	{
 		SvgFyAttribute attr = (SvgFyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "fy" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

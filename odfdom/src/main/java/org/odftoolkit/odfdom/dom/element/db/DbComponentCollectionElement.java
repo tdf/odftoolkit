@@ -36,8 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbTitleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbDescriptionAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.db.DbNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.db.DbNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:component-collection}.
@@ -88,7 +86,7 @@ public abstract class DbComponentCollectionElement extends OdfElement
 	{
 		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -115,7 +113,7 @@ public abstract class DbComponentCollectionElement extends OdfElement
 	{
 		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "title" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -142,7 +140,7 @@ public abstract class DbComponentCollectionElement extends OdfElement
 	{
 		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "description" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

@@ -84,7 +84,7 @@ public abstract class NumberEmbeddedTextElement extends OdfElement
 	{
 		NumberPositionAttribute attr = (NumberPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "position" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

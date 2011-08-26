@@ -32,16 +32,6 @@ import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateElement;
-import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateColorElement;
-import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateMotionElement;
-import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateTransformElement;
-import org.odftoolkit.odfdom.dom.element.anim.AnimAudioElement;
-import org.odftoolkit.odfdom.dom.element.anim.AnimIterateElement;
-import org.odftoolkit.odfdom.dom.element.anim.AnimParElement;
-import org.odftoolkit.odfdom.dom.element.anim.AnimSeqElement;
-import org.odftoolkit.odfdom.dom.element.anim.AnimSetElement;
-import org.odftoolkit.odfdom.dom.element.anim.AnimTransitionFilterElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute smil:restart}.
@@ -170,7 +160,7 @@ public class SmilRestartAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if smil:restart has an element parent 
+	 * @return <code>true</code> if {@odf.attribute smil:restart} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

@@ -89,7 +89,7 @@ public abstract class TableHighlightedRangeElement extends OdfElement
 	{
 		TableCellRangeAddressAttribute attr = (TableCellRangeAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "cell-range-address" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -116,7 +116,7 @@ public abstract class TableHighlightedRangeElement extends OdfElement
 	{
 		TableDirectionAttribute attr = (TableDirectionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "direction" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -143,7 +143,7 @@ public abstract class TableHighlightedRangeElement extends OdfElement
 	{
 		TableContainsErrorAttribute attr = (TableContainsErrorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "contains-error" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableContainsErrorAttribute.DEFAULT_VALUE );
 	}
@@ -170,7 +170,7 @@ public abstract class TableHighlightedRangeElement extends OdfElement
 	{
 		TableMarkedInvalidAttribute attr = (TableMarkedInvalidAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "marked-invalid" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}

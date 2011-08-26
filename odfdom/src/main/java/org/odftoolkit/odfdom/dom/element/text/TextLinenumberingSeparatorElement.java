@@ -75,7 +75,7 @@ public abstract class TextLinenumberingSeparatorElement extends OdfElement
 	{
 		TextIncrementAttribute attr = (TextIncrementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "increment" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

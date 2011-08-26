@@ -84,7 +84,7 @@ public abstract class TextPageElement extends OdfElement
 	{
 		TextMasterPageNameAttribute attr = (TextMasterPageNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "master-page-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

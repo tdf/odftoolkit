@@ -87,7 +87,7 @@ public abstract class ConfigConfigItemElement extends OdfElement
 	{
 		ConfigNameAttribute attr = (ConfigNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CONFIG), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -114,7 +114,7 @@ public abstract class ConfigConfigItemElement extends OdfElement
 	{
 		ConfigTypeAttribute attr = (ConfigTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CONFIG), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

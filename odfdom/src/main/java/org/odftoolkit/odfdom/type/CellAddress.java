@@ -23,7 +23,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'cellAddress'
+ * This class represents the in OpenDocument format used data type {@odf.datatype cellAddress}
  */
 public class CellAddress implements OdfDataType {
 
@@ -71,11 +71,11 @@ public class CellAddress implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String is a valid CellAddress data type
+	 * check if the specified String is a valid {@odf.datatype cellAddress} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for CellAddress data type
+	 * @return true if the value of argument is valid for {@odf.datatype cellAddress} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

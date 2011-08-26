@@ -85,7 +85,7 @@ public abstract class PresentationPlayElement extends OdfElement
 	{
 		DrawShapeIdAttribute attr = (DrawShapeIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "shape-id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -112,7 +112,7 @@ public abstract class PresentationPlayElement extends OdfElement
 	{
 		PresentationSpeedAttribute attr = (PresentationSpeedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "speed" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return PresentationSpeedAttribute.DEFAULT_VALUE;
 	}

@@ -96,7 +96,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		PresentationNodeTypeAttribute attr = (PresentationNodeTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "node-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return PresentationNodeTypeAttribute.DEFAULT_VALUE;
 	}
@@ -123,7 +123,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		PresentationPresetIdAttribute attr = (PresentationPresetIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "preset-id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -150,7 +150,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		PresentationPresetSubTypeAttribute attr = (PresentationPresetSubTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "preset-sub-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -177,7 +177,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		PresentationPresetClassAttribute attr = (PresentationPresetClassAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "preset-class" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return PresentationPresetClassAttribute.DEFAULT_VALUE;
 	}
@@ -204,7 +204,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		PresentationMasterElementAttribute attr = (PresentationMasterElementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "master-element" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -231,7 +231,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		PresentationGroupIdAttribute attr = (PresentationGroupIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "group-id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -258,7 +258,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		AnimIdAttribute attr = (AnimIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -285,7 +285,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -312,7 +312,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		AnimCommandAttribute attr = (AnimCommandAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "command" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -339,7 +339,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		SmilBeginAttribute attr = (SmilBeginAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "begin" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -366,7 +366,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		SmilEndAttribute attr = (SmilEndAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "end" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -393,7 +393,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		SmilTargetElementAttribute attr = (SmilTargetElementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "targetElement" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -420,7 +420,7 @@ public abstract class AnimCommandElement extends OdfElement
 	{
 		AnimSubItemAttribute attr = (AnimSubItemAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "sub-item" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

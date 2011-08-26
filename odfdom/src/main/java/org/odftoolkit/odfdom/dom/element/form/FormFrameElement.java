@@ -96,7 +96,7 @@ public abstract class FormFrameElement extends OdfElement
 	{
 		FormNameAttribute attr = (FormNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -123,7 +123,7 @@ public abstract class FormFrameElement extends OdfElement
 	{
 		FormControlImplementationAttribute attr = (FormControlImplementationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "control-implementation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -150,7 +150,7 @@ public abstract class FormFrameElement extends OdfElement
 	{
 		FormIdAttribute attr = (FormIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -177,7 +177,7 @@ public abstract class FormFrameElement extends OdfElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -204,7 +204,7 @@ public abstract class FormFrameElement extends OdfElement
 	{
 		XformsBindAttribute attr = (XformsBindAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XFORMS), "bind" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -231,7 +231,7 @@ public abstract class FormFrameElement extends OdfElement
 	{
 		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "disabled" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( FormDisabledAttribute.DEFAULT_VALUE );
 	}
@@ -258,7 +258,7 @@ public abstract class FormFrameElement extends OdfElement
 	{
 		FormForAttribute attr = (FormForAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "for" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -285,7 +285,7 @@ public abstract class FormFrameElement extends OdfElement
 	{
 		FormLabelAttribute attr = (FormLabelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "label" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -312,7 +312,7 @@ public abstract class FormFrameElement extends OdfElement
 	{
 		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "printable" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( FormPrintableAttribute.DEFAULT_VALUE );
 	}
@@ -339,7 +339,7 @@ public abstract class FormFrameElement extends OdfElement
 	{
 		FormTitleAttribute attr = (FormTitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "title" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

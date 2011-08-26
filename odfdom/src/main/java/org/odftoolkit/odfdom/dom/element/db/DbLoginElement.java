@@ -78,7 +78,7 @@ public abstract class DbLoginElement extends OdfElement
 	{
 		DbUserNameAttribute attr = (DbUserNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "user-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -105,7 +105,7 @@ public abstract class DbLoginElement extends OdfElement
 	{
 		DbUseSystemUserAttribute attr = (DbUseSystemUserAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "use-system-user" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -132,7 +132,7 @@ public abstract class DbLoginElement extends OdfElement
 	{
 		DbIsPasswordRequiredAttribute attr = (DbIsPasswordRequiredAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "is-password-required" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( DbIsPasswordRequiredAttribute.DEFAULT_VALUE );
 	}
@@ -159,7 +159,7 @@ public abstract class DbLoginElement extends OdfElement
 	{
 		DbLoginTimeoutAttribute attr = (DbLoginTimeoutAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "login-timeout" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

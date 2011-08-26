@@ -36,11 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDisplayNameAttribute;
 
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationPlaceholderElement;
-import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationObjectAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgHeightAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgWidthAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgXAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:presentation-page-layout}.
@@ -90,7 +85,7 @@ public abstract class StylePresentationPageLayoutElement extends OdfElement
 	{
 		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -117,7 +112,7 @@ public abstract class StylePresentationPageLayoutElement extends OdfElement
 	{
 		StyleDisplayNameAttribute attr = (StyleDisplayNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "display-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

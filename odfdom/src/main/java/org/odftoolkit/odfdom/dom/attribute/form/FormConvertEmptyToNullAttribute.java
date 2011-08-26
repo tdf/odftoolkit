@@ -32,14 +32,6 @@ import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.dom.element.form.FormComboboxElement;
-import org.odftoolkit.odfdom.dom.element.form.FormDateElement;
-import org.odftoolkit.odfdom.dom.element.form.FormFormattedTextElement;
-import org.odftoolkit.odfdom.dom.element.form.FormNumberElement;
-import org.odftoolkit.odfdom.dom.element.form.FormPasswordElement;
-import org.odftoolkit.odfdom.dom.element.form.FormTextElement;
-import org.odftoolkit.odfdom.dom.element.form.FormTextareaElement;
-import org.odftoolkit.odfdom.dom.element.form.FormTimeElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute form:convert-empty-to-null}.
@@ -87,7 +79,7 @@ public class FormConvertEmptyToNullAttribute extends OdfAttribute {
 	/**
 	 * @return Returns the <code>boolean</code> value of the attribute
 	 */
-	public boolean getBooleanValue(){
+	public boolean booleanValue(){
 		String value = super.getValue();
 		try {
 			return Boolean.parseBoolean(value);
@@ -140,7 +132,7 @@ public class FormConvertEmptyToNullAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if form:convert-empty-to-null has an element parent 
+	 * @return <code>true</code> if {@odf.attribute form:convert-empty-to-null} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

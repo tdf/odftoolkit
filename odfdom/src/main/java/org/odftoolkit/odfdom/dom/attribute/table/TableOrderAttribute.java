@@ -32,9 +32,6 @@ import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.dom.element.table.TableDataPilotSortInfoElement;
-import org.odftoolkit.odfdom.dom.element.table.TableSortByElement;
-import org.odftoolkit.odfdom.dom.element.table.TableSortGroupsElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute table:order}.
@@ -163,7 +160,7 @@ public class TableOrderAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if table:order has an element parent 
+	 * @return <code>true</code> if {@odf.attribute table:order} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

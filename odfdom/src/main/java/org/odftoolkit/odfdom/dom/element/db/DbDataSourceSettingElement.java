@@ -88,7 +88,7 @@ public abstract class DbDataSourceSettingElement extends OdfElement
 	{
 		DbDataSourceSettingIsListAttribute attr = (DbDataSourceSettingIsListAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "data-source-setting-is-list" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -115,7 +115,7 @@ public abstract class DbDataSourceSettingElement extends OdfElement
 	{
 		DbDataSourceSettingNameAttribute attr = (DbDataSourceSettingNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "data-source-setting-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -142,7 +142,7 @@ public abstract class DbDataSourceSettingElement extends OdfElement
 	{
 		DbDataSourceSettingTypeAttribute attr = (DbDataSourceSettingTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "data-source-setting-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

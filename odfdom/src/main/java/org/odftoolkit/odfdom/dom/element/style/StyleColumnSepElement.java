@@ -119,7 +119,7 @@ public abstract class StyleColumnSepElement extends OdfElement
 	{
 		StyleStyleAttribute attr = (StyleStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return StyleStyleAttribute.DEFAULT_VALUE;
 	}
@@ -146,7 +146,7 @@ public abstract class StyleColumnSepElement extends OdfElement
 	{
 		StyleWidthAttribute attr = (StyleWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -173,7 +173,7 @@ public abstract class StyleColumnSepElement extends OdfElement
 	{
 		StyleHeightAttribute attr = (StyleHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "height" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return StyleHeightAttribute.DEFAULT_VALUE;
 	}
@@ -200,7 +200,7 @@ public abstract class StyleColumnSepElement extends OdfElement
 	{
 		StyleVerticalAlignAttribute attr = (StyleVerticalAlignAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "vertical-align" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return StyleVerticalAlignAttribute.DEFAULT_VALUE;
 	}
@@ -227,7 +227,7 @@ public abstract class StyleColumnSepElement extends OdfElement
 	{
 		StyleColorAttribute attr = (StyleColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return StyleColorAttribute.DEFAULT_VALUE;
 	}

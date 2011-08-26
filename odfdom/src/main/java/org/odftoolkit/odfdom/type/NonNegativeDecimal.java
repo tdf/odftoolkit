@@ -1,5 +1,7 @@
 package org.odftoolkit.odfdom.type;
-
+/**
+ * This class represents the in OpenDocument format used data type {@odf.datatype nonNegativeDecimal}
+ */
 public class NonNegativeDecimal implements OdfDataType {
 	private double mN;
 
@@ -56,12 +58,12 @@ public class NonNegativeDecimal implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified Double instance is a valid NonNegativeDecimal data
+	 * check if the specified Double instance is a valid {@odf.datatype nonNegativeDecimal} data
 	 * type
 	 * 
 	 * @param doubleValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for NonNegativeDecimal
+	 * @return true if the value of argument is valid for {@odf.datatype nonNegativeDecimal}
 	 *         data type false otherwise
 	 */
 	public static boolean isValid(Double doubleValue) {

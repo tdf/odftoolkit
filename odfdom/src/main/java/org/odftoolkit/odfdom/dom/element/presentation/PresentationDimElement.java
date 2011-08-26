@@ -35,8 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawShapeIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawColorAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element presentation:dim}.
@@ -89,7 +87,7 @@ public abstract class PresentationDimElement extends OdfElement
 	{
 		DrawShapeIdAttribute attr = (DrawShapeIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "shape-id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -116,7 +114,7 @@ public abstract class PresentationDimElement extends OdfElement
 	{
 		DrawColorAttribute attr = (DrawColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

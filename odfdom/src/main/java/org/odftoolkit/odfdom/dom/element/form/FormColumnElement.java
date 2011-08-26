@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.form.FormControlImplementationAttribu
 import org.odftoolkit.odfdom.dom.attribute.form.FormLabelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.form.FormTextStyleNameAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.form.FormImagePositionAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element form:column}.
@@ -79,7 +78,7 @@ public abstract class FormColumnElement extends OdfElement
 	{
 		FormNameAttribute attr = (FormNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -106,7 +105,7 @@ public abstract class FormColumnElement extends OdfElement
 	{
 		FormControlImplementationAttribute attr = (FormControlImplementationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "control-implementation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -133,7 +132,7 @@ public abstract class FormColumnElement extends OdfElement
 	{
 		FormLabelAttribute attr = (FormLabelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "label" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -160,7 +159,7 @@ public abstract class FormColumnElement extends OdfElement
 	{
 		FormTextStyleNameAttribute attr = (FormTextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "text-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

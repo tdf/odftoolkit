@@ -44,8 +44,6 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationVerbAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element presentation:event-listener}.
@@ -164,7 +162,7 @@ public abstract class PresentationEventListenerElement extends OdfElement
 	{
 		ScriptEventNameAttribute attr = (ScriptEventNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SCRIPT), "event-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -191,7 +189,7 @@ public abstract class PresentationEventListenerElement extends OdfElement
 	{
 		PresentationActionAttribute attr = (PresentationActionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "action" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -218,7 +216,7 @@ public abstract class PresentationEventListenerElement extends OdfElement
 	{
 		PresentationEffectAttribute attr = (PresentationEffectAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "effect" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return PresentationEffectAttribute.DEFAULT_VALUE;
 	}
@@ -245,7 +243,7 @@ public abstract class PresentationEventListenerElement extends OdfElement
 	{
 		PresentationDirectionAttribute attr = (PresentationDirectionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "direction" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return PresentationDirectionAttribute.DEFAULT_VALUE;
 	}
@@ -272,7 +270,7 @@ public abstract class PresentationEventListenerElement extends OdfElement
 	{
 		PresentationSpeedAttribute attr = (PresentationSpeedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "speed" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return PresentationSpeedAttribute.DEFAULT_VALUE;
 	}
@@ -299,7 +297,7 @@ public abstract class PresentationEventListenerElement extends OdfElement
 	{
 		PresentationStartScaleAttribute attr = (PresentationStartScaleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "start-scale" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return PresentationStartScaleAttribute.DEFAULT_VALUE;
 	}
@@ -326,7 +324,7 @@ public abstract class PresentationEventListenerElement extends OdfElement
 	{
 		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return XlinkTypeAttribute.DEFAULT_VALUE;
 	}
@@ -353,7 +351,7 @@ public abstract class PresentationEventListenerElement extends OdfElement
 	{
 		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "href" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -380,7 +378,7 @@ public abstract class PresentationEventListenerElement extends OdfElement
 	{
 		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "show" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DEFAULT_VALUE_XLINK_SHOW_ATTRIBUTE;
 	}
@@ -407,7 +405,7 @@ public abstract class PresentationEventListenerElement extends OdfElement
 	{
 		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "actuate" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DEFAULT_VALUE_XLINK_ACTUATE_ATTRIBUTE;
 	}
@@ -434,7 +432,7 @@ public abstract class PresentationEventListenerElement extends OdfElement
 	{
 		PresentationVerbAttribute attr = (PresentationVerbAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "verb" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

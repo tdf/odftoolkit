@@ -44,28 +44,14 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextVisitedStyleNameAttribute;
 
 import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextNoteClassAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationEndElement;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeNameAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRectElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLineElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX2Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY2Attribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPolylineElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawPointsAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPolygonElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRegularPolygonElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawConcaveAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawCornersAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPathElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCircleElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawEllipseElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawGElement;
@@ -75,31 +61,9 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawMeasureElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCaptionElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawConnectorElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawControlElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawControlAttribute;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCustomShapeElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextSelectPageAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDateValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeTimeValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeBooleanValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextColumnNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextTableNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextPlaceholderTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextStringValueIfFalseAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextStringValueIfTrueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextStringValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextConnectionNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextKindAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextIdAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextIndexNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextBibliographyTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationHeaderElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationFooterElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationDateTimeElement;
@@ -220,7 +184,7 @@ public abstract class TextAElement extends OdfStylableElement
 	{
 		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -247,7 +211,7 @@ public abstract class TextAElement extends OdfStylableElement
 	{
 		OfficeTitleAttribute attr = (OfficeTitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "title" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -274,7 +238,7 @@ public abstract class TextAElement extends OdfStylableElement
 	{
 		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return XlinkTypeAttribute.DEFAULT_VALUE;
 	}
@@ -301,7 +265,7 @@ public abstract class TextAElement extends OdfStylableElement
 	{
 		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "href" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -328,7 +292,7 @@ public abstract class TextAElement extends OdfStylableElement
 	{
 		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "actuate" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DEFAULT_VALUE_XLINK_ACTUATE_ATTRIBUTE;
 	}
@@ -355,7 +319,7 @@ public abstract class TextAElement extends OdfStylableElement
 	{
 		OfficeTargetFrameNameAttribute attr = (OfficeTargetFrameNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "target-frame-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -382,7 +346,7 @@ public abstract class TextAElement extends OdfStylableElement
 	{
 		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "show" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -409,7 +373,7 @@ public abstract class TextAElement extends OdfStylableElement
 	{
 		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -436,7 +400,7 @@ public abstract class TextAElement extends OdfStylableElement
 	{
 		TextVisitedStyleNameAttribute attr = (TextVisitedStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "visited-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

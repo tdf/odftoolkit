@@ -1,5 +1,8 @@
 package org.odftoolkit.odfdom.type;
 
+/**
+ * This class represents the in OpenDocument format used data type {@odf.datatype signedZeroToHundredPercent}
+ */
 public class SignedZeroToHundredPercent implements OdfDataType{
 	private double mN;
 
@@ -59,11 +62,11 @@ public class SignedZeroToHundredPercent implements OdfDataType{
 	}
 
 	/**
-	 * check if the specified Double instance is a valid SignedZeroToHundredPercent data type
+	 * check if the specified Double instance is a valid {@odf.datatype signedZeroToHundredPercent} data type
 	 *
 	 * @param doubleValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for SignedZeroToHundredPercent data type
+	 * @return true if the value of argument is valid for {@odf.datatype signedZeroToHundredPercent} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(Double doubleValue) {
@@ -76,11 +79,11 @@ public class SignedZeroToHundredPercent implements OdfDataType{
 	}
 	
 	/**
-	 * check if the specified String instance is a valid SignedZeroToHundredPercent data type
+	 * check if the specified String instance is a valid {@odf.datatype 'signedZeroToHundredPercent'} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for SignedZeroToHundredPercent data type
+	 * @return true if the value of argument is valid for {@odf.datatype 'signedZeroToHundredPercent'} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

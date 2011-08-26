@@ -91,7 +91,7 @@ public abstract class StyleTabStopElement extends OdfElement
 	{
 		StylePositionAttribute attr = (StylePositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "position" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -118,7 +118,7 @@ public abstract class StyleTabStopElement extends OdfElement
 	{
 		StyleTypeAttribute attr = (StyleTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return StyleTypeAttribute.DEFAULT_VALUE;
 	}
@@ -145,7 +145,7 @@ public abstract class StyleTabStopElement extends OdfElement
 	{
 		StyleCharAttribute attr = (StyleCharAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "char" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -172,7 +172,7 @@ public abstract class StyleTabStopElement extends OdfElement
 	{
 		StyleLeaderTypeAttribute attr = (StyleLeaderTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "leader-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -199,7 +199,7 @@ public abstract class StyleTabStopElement extends OdfElement
 	{
 		StyleLeaderStyleAttribute attr = (StyleLeaderStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "leader-style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -226,7 +226,7 @@ public abstract class StyleTabStopElement extends OdfElement
 	{
 		StyleLeaderWidthAttribute attr = (StyleLeaderWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "leader-width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -253,7 +253,7 @@ public abstract class StyleTabStopElement extends OdfElement
 	{
 		StyleLeaderColorAttribute attr = (StyleLeaderColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "leader-color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -280,7 +280,7 @@ public abstract class StyleTabStopElement extends OdfElement
 	{
 		StyleLeaderTextAttribute attr = (StyleLeaderTextAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "leader-text" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return StyleLeaderTextAttribute.DEFAULT_VALUE;
 	}
@@ -307,7 +307,7 @@ public abstract class StyleTabStopElement extends OdfElement
 	{
 		StyleLeaderTextStyleAttribute attr = (StyleLeaderTextStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "leader-text-style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

@@ -43,19 +43,10 @@ import org.odftoolkit.odfdom.dom.element.form.FormFormElement;
 import org.odftoolkit.odfdom.dom.element.xforms.XformsModelElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRectElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLineElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX2Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY2Attribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPolylineElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawPointsAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPolygonElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRegularPolygonElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawConcaveAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawCornersAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPathElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCircleElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawEllipseElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawGElement;
@@ -65,12 +56,9 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawMeasureElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCaptionElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawConnectorElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawControlElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawControlAttribute;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCustomShapeElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element presentation:notes}.
@@ -112,7 +100,7 @@ public abstract class PresentationNotesElement extends OdfStylableElement
 	{
 		PresentationUseHeaderNameAttribute attr = (PresentationUseHeaderNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "use-header-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -139,7 +127,7 @@ public abstract class PresentationNotesElement extends OdfStylableElement
 	{
 		PresentationUseFooterNameAttribute attr = (PresentationUseFooterNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "use-footer-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -166,7 +154,7 @@ public abstract class PresentationNotesElement extends OdfStylableElement
 	{
 		PresentationUseDateTimeNameAttribute attr = (PresentationUseDateTimeNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "use-date-time-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -193,7 +181,7 @@ public abstract class PresentationNotesElement extends OdfStylableElement
 	{
 		StylePageLayoutNameAttribute attr = (StylePageLayoutNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "page-layout-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -220,7 +208,7 @@ public abstract class PresentationNotesElement extends OdfStylableElement
 	{
 		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

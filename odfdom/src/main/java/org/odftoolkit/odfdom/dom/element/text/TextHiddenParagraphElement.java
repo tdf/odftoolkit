@@ -84,7 +84,7 @@ public abstract class TextHiddenParagraphElement extends OdfElement
 	{
 		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "condition" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -111,7 +111,7 @@ public abstract class TextHiddenParagraphElement extends OdfElement
 	{
 		TextIsHiddenAttribute attr = (TextIsHiddenAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "is-hidden" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}

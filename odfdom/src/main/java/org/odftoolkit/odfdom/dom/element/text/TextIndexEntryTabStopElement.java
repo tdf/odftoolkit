@@ -79,7 +79,7 @@ public abstract class TextIndexEntryTabStopElement extends OdfStylableElement
 	{
 		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -106,7 +106,7 @@ public abstract class TextIndexEntryTabStopElement extends OdfStylableElement
 	{
 		StyleLeaderCharAttribute attr = (StyleLeaderCharAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "leader-char" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -133,7 +133,7 @@ public abstract class TextIndexEntryTabStopElement extends OdfStylableElement
 	{
 		StyleTypeAttribute attr = (StyleTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -160,7 +160,7 @@ public abstract class TextIndexEntryTabStopElement extends OdfStylableElement
 	{
 		StylePositionAttribute attr = (StylePositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "position" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

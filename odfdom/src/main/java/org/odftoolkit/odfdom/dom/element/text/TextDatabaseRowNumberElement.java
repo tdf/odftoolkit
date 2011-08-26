@@ -40,7 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNumLetterSyncAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextValueAttribute;
 
 import org.odftoolkit.odfdom.dom.element.form.FormConnectionResourceElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:database-row-number}.
@@ -91,7 +90,7 @@ public abstract class TextDatabaseRowNumberElement extends OdfElement
 	{
 		TextTableNameAttribute attr = (TextTableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "table-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -118,7 +117,7 @@ public abstract class TextDatabaseRowNumberElement extends OdfElement
 	{
 		TextTableTypeAttribute attr = (TextTableTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "table-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -145,7 +144,7 @@ public abstract class TextDatabaseRowNumberElement extends OdfElement
 	{
 		TextDatabaseNameAttribute attr = (TextDatabaseNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "database-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -172,7 +171,7 @@ public abstract class TextDatabaseRowNumberElement extends OdfElement
 	{
 		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-format" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -199,7 +198,7 @@ public abstract class TextDatabaseRowNumberElement extends OdfElement
 	{
 		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-letter-sync" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -226,7 +225,7 @@ public abstract class TextDatabaseRowNumberElement extends OdfElement
 	{
 		TextValueAttribute attr = (TextValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "value" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

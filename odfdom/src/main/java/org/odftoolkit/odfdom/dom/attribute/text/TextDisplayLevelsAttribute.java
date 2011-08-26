@@ -32,8 +32,6 @@ import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleNumberElement;
-import org.odftoolkit.odfdom.dom.element.text.TextOutlineLevelStyleElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute text:display-levels}.
@@ -82,7 +80,7 @@ public class TextDisplayLevelsAttribute extends OdfAttribute {
 	/**
 	 * @return Returns the <code>int</code> value of the attribute
 	 */
-	public int getIntValue(){
+	public int intValue(){
 		String value = super.getValue();
 		try {
         	//2DO: need validate value against PositiveInteger
@@ -138,7 +136,7 @@ public class TextDisplayLevelsAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if text:display-levels has an element parent 
+	 * @return <code>true</code> if {@odf.attribute text:display-levels} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

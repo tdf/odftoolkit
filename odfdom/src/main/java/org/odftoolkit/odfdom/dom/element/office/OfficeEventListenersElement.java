@@ -34,13 +34,7 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 
 import org.odftoolkit.odfdom.dom.element.script.ScriptEventListenerElement;
-import org.odftoolkit.odfdom.dom.attribute.script.ScriptEventNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.script.ScriptLanguageAttribute;
-import org.odftoolkit.odfdom.dom.attribute.script.ScriptMacroNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationEventListenerElement;
-import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationActionAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:event-listeners}.

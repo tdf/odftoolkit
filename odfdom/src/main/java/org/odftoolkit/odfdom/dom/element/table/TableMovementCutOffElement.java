@@ -90,7 +90,7 @@ public abstract class TableMovementCutOffElement extends OdfElement
 	{
 		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "position" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -117,7 +117,7 @@ public abstract class TableMovementCutOffElement extends OdfElement
 	{
 		TableStartPositionAttribute attr = (TableStartPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "start-position" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -144,7 +144,7 @@ public abstract class TableMovementCutOffElement extends OdfElement
 	{
 		TableEndPositionAttribute attr = (TableEndPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "end-position" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

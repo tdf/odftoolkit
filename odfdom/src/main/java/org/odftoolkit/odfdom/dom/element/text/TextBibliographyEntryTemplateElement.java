@@ -36,10 +36,6 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextBibliographyTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.style.StyleTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.style.StylePositionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextBibliographyDataFieldAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:bibliography-entry-template}.
@@ -91,7 +87,7 @@ public abstract class TextBibliographyEntryTemplateElement extends OdfStylableEl
 	{
 		TextBibliographyTypeAttribute attr = (TextBibliographyTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "bibliography-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -118,7 +114,7 @@ public abstract class TextBibliographyEntryTemplateElement extends OdfStylableEl
 	{
 		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

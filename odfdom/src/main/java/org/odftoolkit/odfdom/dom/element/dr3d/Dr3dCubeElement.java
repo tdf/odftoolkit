@@ -31,7 +31,6 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStyleablePresentationElement;
 import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dMinEdgeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dMaxEdgeAttribute;
@@ -86,7 +85,7 @@ public abstract class Dr3dCubeElement extends OdfStyleablePresentationElement
 	{
 		Dr3dMinEdgeAttribute attr = (Dr3dMinEdgeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "min-edge" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -113,7 +112,7 @@ public abstract class Dr3dCubeElement extends OdfStyleablePresentationElement
 	{
 		Dr3dMaxEdgeAttribute attr = (Dr3dMaxEdgeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "max-edge" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -140,7 +139,7 @@ public abstract class Dr3dCubeElement extends OdfStyleablePresentationElement
 	{
 		DrawZIndexAttribute attr = (DrawZIndexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "z-index" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -167,7 +166,7 @@ public abstract class Dr3dCubeElement extends OdfStyleablePresentationElement
 	{
 		DrawIdAttribute attr = (DrawIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -194,7 +193,7 @@ public abstract class Dr3dCubeElement extends OdfStyleablePresentationElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -221,7 +220,7 @@ public abstract class Dr3dCubeElement extends OdfStyleablePresentationElement
 	{
 		DrawLayerAttribute attr = (DrawLayerAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "layer" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -248,7 +247,7 @@ public abstract class Dr3dCubeElement extends OdfStyleablePresentationElement
 	{
 		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -275,7 +274,7 @@ public abstract class Dr3dCubeElement extends OdfStyleablePresentationElement
 	{
 		DrawClassNamesAttribute attr = (DrawClassNamesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "class-names" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -302,7 +301,7 @@ public abstract class Dr3dCubeElement extends OdfStyleablePresentationElement
 	{
 		PresentationStyleNameAttribute attr = (PresentationStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -329,7 +328,7 @@ public abstract class Dr3dCubeElement extends OdfStyleablePresentationElement
 	{
 		PresentationClassNamesAttribute attr = (PresentationClassNamesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "class-names" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -356,7 +355,7 @@ public abstract class Dr3dCubeElement extends OdfStyleablePresentationElement
 	{
 		Dr3dTransformAttribute attr = (Dr3dTransformAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "transform" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

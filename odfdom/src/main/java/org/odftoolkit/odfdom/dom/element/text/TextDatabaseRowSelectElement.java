@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextRowNumberAttribute;
 
 import org.odftoolkit.odfdom.dom.element.form.FormConnectionResourceElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:database-row-select}.
@@ -90,7 +89,7 @@ public abstract class TextDatabaseRowSelectElement extends OdfElement
 	{
 		TextTableNameAttribute attr = (TextTableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "table-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -117,7 +116,7 @@ public abstract class TextDatabaseRowSelectElement extends OdfElement
 	{
 		TextTableTypeAttribute attr = (TextTableTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "table-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -144,7 +143,7 @@ public abstract class TextDatabaseRowSelectElement extends OdfElement
 	{
 		TextDatabaseNameAttribute attr = (TextDatabaseNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "database-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -171,7 +170,7 @@ public abstract class TextDatabaseRowSelectElement extends OdfElement
 	{
 		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "condition" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -198,7 +197,7 @@ public abstract class TextDatabaseRowSelectElement extends OdfElement
 	{
 		TextRowNumberAttribute attr = (TextRowNumberAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "row-number" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

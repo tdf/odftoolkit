@@ -40,9 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.db.DbDescriptionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbDefaultRowStyleNameAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.db.DbCommandAttribute;
-import org.odftoolkit.odfdom.dom.attribute.db.DbCommandAttribute;
-import org.odftoolkit.odfdom.dom.attribute.db.DbNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:query}.
@@ -95,7 +92,7 @@ public abstract class DbQueryElement extends OdfElement
 	{
 		DbCommandAttribute attr = (DbCommandAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "command" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -122,7 +119,7 @@ public abstract class DbQueryElement extends OdfElement
 	{
 		DbEscapeProcessingAttribute attr = (DbEscapeProcessingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "escape-processing" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( DbEscapeProcessingAttribute.DEFAULT_VALUE );
 	}
@@ -149,7 +146,7 @@ public abstract class DbQueryElement extends OdfElement
 	{
 		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -176,7 +173,7 @@ public abstract class DbQueryElement extends OdfElement
 	{
 		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "title" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -203,7 +200,7 @@ public abstract class DbQueryElement extends OdfElement
 	{
 		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "description" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -230,7 +227,7 @@ public abstract class DbQueryElement extends OdfElement
 	{
 		DbStyleNameAttribute attr = (DbStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -257,7 +254,7 @@ public abstract class DbQueryElement extends OdfElement
 	{
 		DbDefaultRowStyleNameAttribute attr = (DbDefaultRowStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "default-row-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

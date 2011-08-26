@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextTableTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextDatabaseNameAttribute;
 
 import org.odftoolkit.odfdom.dom.element.form.FormConnectionResourceElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:database-name}.
@@ -88,7 +87,7 @@ public abstract class TextDatabaseNameElement extends OdfElement
 	{
 		TextTableNameAttribute attr = (TextTableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "table-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -115,7 +114,7 @@ public abstract class TextDatabaseNameElement extends OdfElement
 	{
 		TextTableTypeAttribute attr = (TextTableTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "table-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -142,7 +141,7 @@ public abstract class TextDatabaseNameElement extends OdfElement
 	{
 		TextDatabaseNameAttribute attr = (TextDatabaseNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "database-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

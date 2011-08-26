@@ -24,8 +24,8 @@ package org.odftoolkit.odfdom.type;
 import java.net.URI;
 
 /**
- * This class represents the in OpenDocument format used data type 'URIorSafeCURIE' This value type
- * stores either an anyURI or a SafeCURIE
+ * This class represents the in OpenDocument format used data type {@odf.datatype URIorSafeCURIE}
+ *  This value type stores either an anyURI or a SafeCURIE
  */
 public class URIorSafeCURIE implements OdfDataType {
 
@@ -157,12 +157,12 @@ public class URIorSafeCURIE implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified XMLGregorianCalendar instance is a valid
+	 * check if the specified XMLGregorianCalendar {@odf.datatype URIorSafeCURIE} is a valid
 	 * URIorSafeCURIE data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for URIorSafeCURIE data
+	 * @return true if the value of argument is valid for {@odf.datatype URIorSafeCURIE} data
 	 *         type false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

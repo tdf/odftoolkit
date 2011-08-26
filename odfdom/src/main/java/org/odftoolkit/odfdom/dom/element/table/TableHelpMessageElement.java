@@ -78,7 +78,7 @@ public abstract class TableHelpMessageElement extends OdfElement
 	{
 		TableTitleAttribute attr = (TableTitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "title" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -105,7 +105,7 @@ public abstract class TableHelpMessageElement extends OdfElement
 	{
 		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( DEFAULT_VALUE_TABLE_DISPLAY_ATTRIBUTE );
 	}

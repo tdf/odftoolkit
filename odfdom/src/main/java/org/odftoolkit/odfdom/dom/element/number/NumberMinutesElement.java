@@ -75,7 +75,7 @@ public abstract class NumberMinutesElement extends OdfElement
 	{
 		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

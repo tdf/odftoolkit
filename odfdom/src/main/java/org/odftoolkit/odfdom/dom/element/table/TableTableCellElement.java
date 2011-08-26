@@ -37,22 +37,12 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableNumberRowsSpannedAttribute
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberMatrixColumnsSpannedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberMatrixRowsSpannedAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.table.TableLastColumnSpannedAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableLastRowSpannedAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.odftoolkit.odfdom.dom.element.text.TextHElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextNumberedParagraphElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextListIdAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextSoftPageBreakElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTableOfContentElement;
 import org.odftoolkit.odfdom.dom.element.text.TextIllustrationIndexElement;
@@ -63,19 +53,10 @@ import org.odftoolkit.odfdom.dom.element.text.TextAlphabeticalIndexElement;
 import org.odftoolkit.odfdom.dom.element.text.TextBibliographyElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRectElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLineElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX2Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY2Attribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPolylineElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawPointsAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPolygonElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRegularPolygonElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawConcaveAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawCornersAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPathElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCircleElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawEllipseElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawGElement;
@@ -85,7 +66,6 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawMeasureElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCaptionElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawConnectorElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawControlElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawControlAttribute;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCustomShapeElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
@@ -130,7 +110,7 @@ public abstract class TableTableCellElement extends TableTableCellElementBase
 	{
 		TableNumberColumnsSpannedAttribute attr = (TableNumberColumnsSpannedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "number-columns-spanned" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return Integer.valueOf( TableNumberColumnsSpannedAttribute.DEFAULT_VALUE );
 	}
@@ -157,7 +137,7 @@ public abstract class TableTableCellElement extends TableTableCellElementBase
 	{
 		TableNumberRowsSpannedAttribute attr = (TableNumberRowsSpannedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "number-rows-spanned" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return Integer.valueOf( TableNumberRowsSpannedAttribute.DEFAULT_VALUE );
 	}
@@ -184,7 +164,7 @@ public abstract class TableTableCellElement extends TableTableCellElementBase
 	{
 		TableNumberMatrixColumnsSpannedAttribute attr = (TableNumberMatrixColumnsSpannedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "number-matrix-columns-spanned" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -211,7 +191,7 @@ public abstract class TableTableCellElement extends TableTableCellElementBase
 	{
 		TableNumberMatrixRowsSpannedAttribute attr = (TableNumberMatrixRowsSpannedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "number-matrix-rows-spanned" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

@@ -145,7 +145,7 @@ public abstract class MetaAutoReloadElement extends OdfElement
 	{
 		XlinkTypeAttribute attr = (XlinkTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return XlinkTypeAttribute.DEFAULT_VALUE;
 	}
@@ -172,7 +172,7 @@ public abstract class MetaAutoReloadElement extends OdfElement
 	{
 		XlinkHrefAttribute attr = (XlinkHrefAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "href" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -199,7 +199,7 @@ public abstract class MetaAutoReloadElement extends OdfElement
 	{
 		XlinkShowAttribute attr = (XlinkShowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "show" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DEFAULT_VALUE_XLINK_SHOW_ATTRIBUTE;
 	}
@@ -226,7 +226,7 @@ public abstract class MetaAutoReloadElement extends OdfElement
 	{
 		XlinkActuateAttribute attr = (XlinkActuateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XLINK), "actuate" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DEFAULT_VALUE_XLINK_ACTUATE_ATTRIBUTE;
 	}
@@ -253,7 +253,7 @@ public abstract class MetaAutoReloadElement extends OdfElement
 	{
 		MetaDelayAttribute attr = (MetaDelayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "delay" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

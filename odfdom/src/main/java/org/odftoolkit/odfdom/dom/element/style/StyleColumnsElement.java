@@ -35,9 +35,6 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoColumnCountAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoColumnGapAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.style.StyleWidthAttribute;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleWidthAttribute;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleRelWidthAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:columns}.
@@ -88,7 +85,7 @@ public abstract class StyleColumnsElement extends OdfElement
 	{
 		FoColumnCountAttribute attr = (FoColumnCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "column-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -115,7 +112,7 @@ public abstract class StyleColumnsElement extends OdfElement
 	{
 		FoColumnGapAttribute attr = (FoColumnGapAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "column-gap" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

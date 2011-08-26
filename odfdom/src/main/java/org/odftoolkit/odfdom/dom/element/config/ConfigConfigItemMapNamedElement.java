@@ -84,7 +84,7 @@ public abstract class ConfigConfigItemMapNamedElement extends OdfElement
 	{
 		ConfigNameAttribute attr = (ConfigNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CONFIG), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

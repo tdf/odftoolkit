@@ -31,30 +31,13 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawCaptionIdAttribute;
 
 import org.odftoolkit.odfdom.dom.element.svg.SvgTitleElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawEscapeDirectionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawIdAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgXAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX2Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY2Attribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawPointsAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawConcaveAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawCornersAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawControlAttribute;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:g}.
@@ -96,7 +79,7 @@ public abstract class DrawGElement extends DrawShapeElementBase
 	{
 		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "y" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -123,7 +106,7 @@ public abstract class DrawGElement extends DrawShapeElementBase
 	{
 		DrawCaptionIdAttribute attr = (DrawCaptionIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "caption-id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

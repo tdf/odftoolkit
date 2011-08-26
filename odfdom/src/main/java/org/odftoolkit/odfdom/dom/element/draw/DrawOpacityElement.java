@@ -123,7 +123,7 @@ public abstract class DrawOpacityElement extends OdfElement
 	{
 		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -150,7 +150,7 @@ public abstract class DrawOpacityElement extends OdfElement
 	{
 		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "display-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -177,7 +177,7 @@ public abstract class DrawOpacityElement extends OdfElement
 	{
 		DrawStyleAttribute attr = (DrawStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -204,7 +204,7 @@ public abstract class DrawOpacityElement extends OdfElement
 	{
 		DrawCxAttribute attr = (DrawCxAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "cx" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -231,7 +231,7 @@ public abstract class DrawOpacityElement extends OdfElement
 	{
 		DrawCyAttribute attr = (DrawCyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "cy" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -258,7 +258,7 @@ public abstract class DrawOpacityElement extends OdfElement
 	{
 		DrawAngleAttribute attr = (DrawAngleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "angle" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -285,7 +285,7 @@ public abstract class DrawOpacityElement extends OdfElement
 	{
 		DrawBorderAttribute attr = (DrawBorderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "border" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -312,7 +312,7 @@ public abstract class DrawOpacityElement extends OdfElement
 	{
 		DrawStartAttribute attr = (DrawStartAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "start" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -339,7 +339,7 @@ public abstract class DrawOpacityElement extends OdfElement
 	{
 		DrawEndAttribute attr = (DrawEndAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "end" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

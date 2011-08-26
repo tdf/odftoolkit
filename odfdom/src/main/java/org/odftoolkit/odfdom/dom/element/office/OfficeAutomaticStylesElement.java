@@ -34,7 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfContainerElementBase;
 
 import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberCurrencyStyleElement;

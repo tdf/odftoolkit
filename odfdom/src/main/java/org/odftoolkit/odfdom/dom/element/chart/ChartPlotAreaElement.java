@@ -54,8 +54,6 @@ import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dTransformAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dLightElement;
-import org.odftoolkit.odfdom.dom.attribute.dr3d.Dr3dDirectionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.chart.ChartDimensionAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element chart:plot-area}.
@@ -97,7 +95,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		SvgXAttribute attr = (SvgXAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "x" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -124,7 +122,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		SvgYAttribute attr = (SvgYAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "y" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -151,7 +149,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -178,7 +176,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "height" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -205,7 +203,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		ChartStyleNameAttribute attr = (ChartStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -232,7 +230,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		TableCellRangeAddressAttribute attr = (TableCellRangeAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "cell-range-address" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -259,7 +257,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		ChartDataSourceHasLabelsAttribute attr = (ChartDataSourceHasLabelsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CHART), "data-source-has-labels" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return ChartDataSourceHasLabelsAttribute.DEFAULT_VALUE;
 	}
@@ -286,7 +284,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		Dr3dVrpAttribute attr = (Dr3dVrpAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "vrp" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -313,7 +311,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		Dr3dVpnAttribute attr = (Dr3dVpnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "vpn" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -340,7 +338,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		Dr3dVupAttribute attr = (Dr3dVupAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "vup" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -367,7 +365,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		Dr3dProjectionAttribute attr = (Dr3dProjectionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "projection" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -394,7 +392,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		Dr3dDistanceAttribute attr = (Dr3dDistanceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "distance" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -421,7 +419,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		Dr3dFocalLengthAttribute attr = (Dr3dFocalLengthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "focal-length" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -448,7 +446,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		Dr3dShadowSlantAttribute attr = (Dr3dShadowSlantAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "shadow-slant" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -475,7 +473,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		Dr3dShadeModeAttribute attr = (Dr3dShadeModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "shade-mode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -502,7 +500,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		Dr3dAmbientColorAttribute attr = (Dr3dAmbientColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "ambient-color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -529,7 +527,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		Dr3dLightingModeAttribute attr = (Dr3dLightingModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "lighting-mode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -556,7 +554,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		Dr3dTransformAttribute attr = (Dr3dTransformAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DR3D), "transform" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -583,7 +581,7 @@ public abstract class ChartPlotAreaElement extends OdfStylableElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

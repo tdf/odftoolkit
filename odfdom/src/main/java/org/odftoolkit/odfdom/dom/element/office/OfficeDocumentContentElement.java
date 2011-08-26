@@ -35,10 +35,7 @@ import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.grddl.GrddlTransformationAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.script.ScriptLanguageAttribute;
-import org.odftoolkit.odfdom.dom.attribute.script.ScriptLanguageAttribute;
 import org.odftoolkit.odfdom.dom.element.style.StyleFontFaceElement;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberStyleElement;
@@ -99,7 +96,7 @@ public abstract class OfficeDocumentContentElement extends OdfElement
 	{
 		OfficeVersionAttribute attr = (OfficeVersionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "version" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -126,7 +123,7 @@ public abstract class OfficeDocumentContentElement extends OdfElement
 	{
 		GrddlTransformationAttribute attr = (GrddlTransformationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.GRDDL), "transformation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

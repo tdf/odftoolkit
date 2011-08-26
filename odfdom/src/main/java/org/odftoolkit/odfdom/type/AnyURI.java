@@ -28,7 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This class represents the in OpenDocument format used data type 'anyURI'
+ * This class represents the in OpenDocument format used data type {@odf.datatype anyURI} 
  */
 public class AnyURI implements OdfDataType {
 
@@ -102,11 +102,11 @@ public class AnyURI implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified URI instance is a valid AnyURI data type
+	 * check if the specified URI instance is a valid {@odf.datatype anyURI} data type
 	 *
 	 * @param uri
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for AnyURI data type false
+	 * @return true if the value of argument is valid for {@odf.datatype anyURI} data type false
 	 *         otherwise
 	 */
 	public static boolean isValid(URI uri) {

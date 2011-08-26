@@ -86,8 +86,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleLayoutGridDisplayAttribute
 import org.odftoolkit.odfdom.dom.attribute.style.StyleLayoutGridSnapToAttribute;
 
 import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleWidthAttribute;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleRelWidthAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:page-layout-properties}.
@@ -229,7 +227,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoPageWidthAttribute attr = (FoPageWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "page-width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -256,7 +254,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoPageHeightAttribute attr = (FoPageHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "page-height" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -283,7 +281,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-format" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -310,7 +308,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-letter-sync" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -337,7 +335,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleNumPrefixAttribute attr = (StyleNumPrefixAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-prefix" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -364,7 +362,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleNumSuffixAttribute attr = (StyleNumSuffixAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-suffix" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -391,7 +389,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StylePaperTrayNameAttribute attr = (StylePaperTrayNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "paper-tray-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -418,7 +416,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StylePrintOrientationAttribute attr = (StylePrintOrientationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "print-orientation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -445,7 +443,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-left" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -472,7 +470,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoMarginRightAttribute attr = (FoMarginRightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-right" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -499,7 +497,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoMarginTopAttribute attr = (FoMarginTopAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-top" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -526,7 +524,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoMarginBottomAttribute attr = (FoMarginBottomAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-bottom" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -553,7 +551,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoMarginAttribute attr = (FoMarginAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -580,7 +578,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoBorderAttribute attr = (FoBorderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -607,7 +605,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoBorderTopAttribute attr = (FoBorderTopAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border-top" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -634,7 +632,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoBorderBottomAttribute attr = (FoBorderBottomAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border-bottom" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -661,7 +659,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoBorderLeftAttribute attr = (FoBorderLeftAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border-left" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -688,7 +686,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoBorderRightAttribute attr = (FoBorderRightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "border-right" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -715,7 +713,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleBorderLineWidthAttribute attr = (StyleBorderLineWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -742,7 +740,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleBorderLineWidthTopAttribute attr = (StyleBorderLineWidthTopAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-top" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -769,7 +767,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleBorderLineWidthBottomAttribute attr = (StyleBorderLineWidthBottomAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-bottom" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -796,7 +794,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleBorderLineWidthLeftAttribute attr = (StyleBorderLineWidthLeftAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-left" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -823,7 +821,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleBorderLineWidthRightAttribute attr = (StyleBorderLineWidthRightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "border-line-width-right" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -850,7 +848,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoPaddingAttribute attr = (FoPaddingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -877,7 +875,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoPaddingTopAttribute attr = (FoPaddingTopAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding-top" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -904,7 +902,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoPaddingBottomAttribute attr = (FoPaddingBottomAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding-bottom" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -931,7 +929,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoPaddingLeftAttribute attr = (FoPaddingLeftAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding-left" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -958,7 +956,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoPaddingRightAttribute attr = (FoPaddingRightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "padding-right" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -985,7 +983,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleShadowAttribute attr = (StyleShadowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "shadow" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1012,7 +1010,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "background-color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1039,7 +1037,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleRegisterTruthRefStyleNameAttribute attr = (StyleRegisterTruthRefStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "register-truth-ref-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1066,7 +1064,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StylePrintAttribute attr = (StylePrintAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "print" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1093,7 +1091,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StylePrintPageOrderAttribute attr = (StylePrintPageOrderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "print-page-order" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1120,7 +1118,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleFirstPageNumberAttribute attr = (StyleFirstPageNumberAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "first-page-number" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1147,7 +1145,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleScaleToAttribute attr = (StyleScaleToAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "scale-to" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1174,7 +1172,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleScaleToPagesAttribute attr = (StyleScaleToPagesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "scale-to-pages" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -1201,7 +1199,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleTableCenteringAttribute attr = (StyleTableCenteringAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "table-centering" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1228,7 +1226,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleFootnoteMaxHeightAttribute attr = (StyleFootnoteMaxHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "footnote-max-height" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1255,7 +1253,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleWritingModeAttribute attr = (StyleWritingModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "writing-mode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1282,7 +1280,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleLayoutGridModeAttribute attr = (StyleLayoutGridModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-mode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1309,7 +1307,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleLayoutGridStandardModeAttribute attr = (StyleLayoutGridStandardModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-standard-mode" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -1336,7 +1334,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleLayoutGridBaseHeightAttribute attr = (StyleLayoutGridBaseHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-base-height" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1363,7 +1361,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleLayoutGridRubyHeightAttribute attr = (StyleLayoutGridRubyHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-ruby-height" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1390,7 +1388,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleLayoutGridLinesAttribute attr = (StyleLayoutGridLinesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-lines" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -1417,7 +1415,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleLayoutGridBaseWidthAttribute attr = (StyleLayoutGridBaseWidthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-base-width" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1444,7 +1442,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleLayoutGridColorAttribute attr = (StyleLayoutGridColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1471,7 +1469,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleLayoutGridRubyBelowAttribute attr = (StyleLayoutGridRubyBelowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-ruby-below" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -1498,7 +1496,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleLayoutGridPrintAttribute attr = (StyleLayoutGridPrintAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-print" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -1525,7 +1523,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleLayoutGridDisplayAttribute attr = (StyleLayoutGridDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-display" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -1552,7 +1550,7 @@ public abstract class StylePageLayoutPropertiesElement extends OdfStylePropertie
 	{
 		StyleLayoutGridSnapToAttribute attr = (StyleLayoutGridSnapToAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "layout-grid-snap-to" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}

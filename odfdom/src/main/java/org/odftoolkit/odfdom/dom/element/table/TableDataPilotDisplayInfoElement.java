@@ -93,7 +93,7 @@ public abstract class TableDataPilotDisplayInfoElement extends OdfElement
 	{
 		TableEnabledAttribute attr = (TableEnabledAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "enabled" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -120,7 +120,7 @@ public abstract class TableDataPilotDisplayInfoElement extends OdfElement
 	{
 		TableDataFieldAttribute attr = (TableDataFieldAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-field" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -147,7 +147,7 @@ public abstract class TableDataPilotDisplayInfoElement extends OdfElement
 	{
 		TableMemberCountAttribute attr = (TableMemberCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "member-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -174,7 +174,7 @@ public abstract class TableDataPilotDisplayInfoElement extends OdfElement
 	{
 		TableDisplayMemberModeAttribute attr = (TableDisplayMemberModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display-member-mode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

@@ -43,11 +43,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayFilterButtonsAttrib
 import org.odftoolkit.odfdom.dom.attribute.table.TableTargetRangeAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableRefreshDelayAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.table.TableDatabaseNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableSqlStatementAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableDatabaseNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableQueryNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableDatabaseTableNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:database-range}.
@@ -98,7 +93,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	{
 		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -125,7 +120,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	{
 		TableIsSelectionAttribute attr = (TableIsSelectionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "is-selection" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableIsSelectionAttribute.DEFAULT_VALUE );
 	}
@@ -152,7 +147,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	{
 		TableOnUpdateKeepStylesAttribute attr = (TableOnUpdateKeepStylesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "on-update-keep-styles" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableOnUpdateKeepStylesAttribute.DEFAULT_VALUE );
 	}
@@ -179,7 +174,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	{
 		TableOnUpdateKeepSizeAttribute attr = (TableOnUpdateKeepSizeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "on-update-keep-size" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableOnUpdateKeepSizeAttribute.DEFAULT_VALUE );
 	}
@@ -206,7 +201,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	{
 		TableHasPersistentDataAttribute attr = (TableHasPersistentDataAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "has-persistent-data" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableHasPersistentDataAttribute.DEFAULT_VALUE );
 	}
@@ -233,7 +228,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	{
 		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "orientation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -260,7 +255,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	{
 		TableContainsHeaderAttribute attr = (TableContainsHeaderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "contains-header" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableContainsHeaderAttribute.DEFAULT_VALUE );
 	}
@@ -287,7 +282,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	{
 		TableDisplayFilterButtonsAttribute attr = (TableDisplayFilterButtonsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display-filter-buttons" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableDisplayFilterButtonsAttribute.DEFAULT_VALUE );
 	}
@@ -314,7 +309,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	{
 		TableTargetRangeAddressAttribute attr = (TableTargetRangeAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "target-range-address" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -341,7 +336,7 @@ public abstract class TableDatabaseRangeElement extends OdfElement
 	{
 		TableRefreshDelayAttribute attr = (TableRefreshDelayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "refresh-delay" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

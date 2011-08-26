@@ -76,7 +76,7 @@ public abstract class DbTableSettingElement extends OdfElement
 	{
 		DbIsFirstRowHeaderLineAttribute attr = (DbIsFirstRowHeaderLineAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "is-first-row-header-line" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( DbIsFirstRowHeaderLineAttribute.DEFAULT_VALUE );
 	}
@@ -103,7 +103,7 @@ public abstract class DbTableSettingElement extends OdfElement
 	{
 		DbShowDeletedAttribute attr = (DbShowDeletedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "show-deleted" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( DbShowDeletedAttribute.DEFAULT_VALUE );
 	}

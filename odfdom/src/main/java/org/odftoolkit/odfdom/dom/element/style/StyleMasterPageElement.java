@@ -42,22 +42,12 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNextStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLayerSetElement;
 import org.odftoolkit.odfdom.dom.element.form.FormFormElement;
 import org.odftoolkit.odfdom.dom.element.xforms.XformsModelElement;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRectElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLineElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX2Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY2Attribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPolylineElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawPointsAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPolygonElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRegularPolygonElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawConcaveAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawCornersAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPathElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCircleElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawEllipseElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawGElement;
@@ -67,27 +57,20 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawMeasureElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCaptionElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawConnectorElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawControlElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawControlAttribute;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCustomShapeElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateElement;
-import org.odftoolkit.odfdom.dom.attribute.smil.SmilAttributeNameAttribute;
 import org.odftoolkit.odfdom.dom.element.anim.AnimSetElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateMotionElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateColorElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateTransformElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.anim.AnimTransitionFilterElement;
-import org.odftoolkit.odfdom.dom.attribute.smil.SmilTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.anim.AnimParElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimSeqElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimIterateElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAudioElement;
 import org.odftoolkit.odfdom.dom.element.anim.AnimCommandElement;
-import org.odftoolkit.odfdom.dom.attribute.anim.AnimCommandAttribute;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
 
 /**
@@ -140,7 +123,7 @@ public abstract class StyleMasterPageElement extends OdfStylableElement
 	{
 		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -167,7 +150,7 @@ public abstract class StyleMasterPageElement extends OdfStylableElement
 	{
 		StyleDisplayNameAttribute attr = (StyleDisplayNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "display-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -194,7 +177,7 @@ public abstract class StyleMasterPageElement extends OdfStylableElement
 	{
 		StylePageLayoutNameAttribute attr = (StylePageLayoutNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "page-layout-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -221,7 +204,7 @@ public abstract class StyleMasterPageElement extends OdfStylableElement
 	{
 		DrawStyleNameAttribute attr = (DrawStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -248,7 +231,7 @@ public abstract class StyleMasterPageElement extends OdfStylableElement
 	{
 		StyleNextStyleNameAttribute attr = (StyleNextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "next-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

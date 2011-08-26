@@ -90,7 +90,7 @@ public abstract class TextConditionalTextElement extends OdfElement
 	{
 		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "condition" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -117,7 +117,7 @@ public abstract class TextConditionalTextElement extends OdfElement
 	{
 		TextStringValueIfTrueAttribute attr = (TextStringValueIfTrueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "string-value-if-true" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -144,7 +144,7 @@ public abstract class TextConditionalTextElement extends OdfElement
 	{
 		TextStringValueIfFalseAttribute attr = (TextStringValueIfFalseAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "string-value-if-false" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -171,7 +171,7 @@ public abstract class TextConditionalTextElement extends OdfElement
 	{
 		TextCurrentValueAttribute attr = (TextCurrentValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "current-value" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}

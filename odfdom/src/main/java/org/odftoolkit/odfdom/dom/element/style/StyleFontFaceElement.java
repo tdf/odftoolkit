@@ -73,8 +73,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleFontCharsetAttribute;
 
 import org.odftoolkit.odfdom.dom.element.svg.SvgFontFaceSrcElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgDefinitionSrcElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:font-face}.
@@ -124,7 +122,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgFontFamilyAttribute attr = (SvgFontFamilyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "font-family" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -151,7 +149,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgFontStyleAttribute attr = (SvgFontStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "font-style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -178,7 +176,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgFontVariantAttribute attr = (SvgFontVariantAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "font-variant" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -205,7 +203,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgFontWeightAttribute attr = (SvgFontWeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "font-weight" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -232,7 +230,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgFontStretchAttribute attr = (SvgFontStretchAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "font-stretch" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -259,7 +257,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgFontSizeAttribute attr = (SvgFontSizeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "font-size" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -286,7 +284,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgUnicodeRangeAttribute attr = (SvgUnicodeRangeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "unicode-range" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -313,7 +311,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgUnitsPerEmAttribute attr = (SvgUnitsPerEmAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "units-per-em" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -340,7 +338,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgPanose1Attribute attr = (SvgPanose1Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "panose-1" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -367,7 +365,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgStemvAttribute attr = (SvgStemvAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "stemv" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -394,7 +392,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgStemhAttribute attr = (SvgStemhAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "stemh" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -421,7 +419,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgSlopeAttribute attr = (SvgSlopeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "slope" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -448,7 +446,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgCapHeightAttribute attr = (SvgCapHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "cap-height" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -475,7 +473,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgXHeightAttribute attr = (SvgXHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "x-height" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -502,7 +500,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgAccentHeightAttribute attr = (SvgAccentHeightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "accent-height" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -529,7 +527,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgAscentAttribute attr = (SvgAscentAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "ascent" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -556,7 +554,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgDescentAttribute attr = (SvgDescentAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "descent" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -583,7 +581,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgWidthsAttribute attr = (SvgWidthsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "widths" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -610,7 +608,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgBboxAttribute attr = (SvgBboxAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "bbox" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -637,7 +635,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgIdeographicAttribute attr = (SvgIdeographicAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "ideographic" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -664,7 +662,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgAlphabeticAttribute attr = (SvgAlphabeticAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "alphabetic" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -691,7 +689,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgMathematicalAttribute attr = (SvgMathematicalAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "mathematical" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -718,7 +716,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgHangingAttribute attr = (SvgHangingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "hanging" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -745,7 +743,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgVIdeographicAttribute attr = (SvgVIdeographicAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "v-ideographic" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -772,7 +770,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgVAlphabeticAttribute attr = (SvgVAlphabeticAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "v-alphabetic" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -799,7 +797,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgVMathematicalAttribute attr = (SvgVMathematicalAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "v-mathematical" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -826,7 +824,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgVHangingAttribute attr = (SvgVHangingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "v-hanging" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -853,7 +851,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgUnderlinePositionAttribute attr = (SvgUnderlinePositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "underline-position" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -880,7 +878,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgUnderlineThicknessAttribute attr = (SvgUnderlineThicknessAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "underline-thickness" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -907,7 +905,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgStrikethroughPositionAttribute attr = (SvgStrikethroughPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "strikethrough-position" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -934,7 +932,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgStrikethroughThicknessAttribute attr = (SvgStrikethroughThicknessAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "strikethrough-thickness" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -961,7 +959,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgOverlinePositionAttribute attr = (SvgOverlinePositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "overline-position" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -988,7 +986,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		SvgOverlineThicknessAttribute attr = (SvgOverlineThicknessAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SVG), "overline-thickness" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -1015,7 +1013,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1042,7 +1040,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		StyleFontAdornmentsAttribute attr = (StyleFontAdornmentsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-adornments" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1069,7 +1067,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		StyleFontFamilyGenericAttribute attr = (StyleFontFamilyGenericAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-family-generic" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1096,7 +1094,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		StyleFontPitchAttribute attr = (StyleFontPitchAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-pitch" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -1123,7 +1121,7 @@ public abstract class StyleFontFaceElement extends OdfElement
 	{
 		StyleFontCharsetAttribute attr = (StyleFontCharsetAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "font-charset" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

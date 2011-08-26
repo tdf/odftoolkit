@@ -33,9 +33,6 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 
-import org.odftoolkit.odfdom.dom.attribute.table.TableFieldNumberAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableOperatorAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableValueAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:filter-and}.

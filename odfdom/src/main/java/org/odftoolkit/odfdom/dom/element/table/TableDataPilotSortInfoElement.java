@@ -90,7 +90,7 @@ public abstract class TableDataPilotSortInfoElement extends OdfElement
 	{
 		TableSortModeAttribute attr = (TableSortModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "sort-mode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -117,7 +117,7 @@ public abstract class TableDataPilotSortInfoElement extends OdfElement
 	{
 		TableDataFieldAttribute attr = (TableDataFieldAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-field" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -144,7 +144,7 @@ public abstract class TableDataPilotSortInfoElement extends OdfElement
 	{
 		TableOrderAttribute attr = (TableOrderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "order" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

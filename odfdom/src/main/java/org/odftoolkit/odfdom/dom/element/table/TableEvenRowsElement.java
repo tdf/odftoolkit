@@ -86,7 +86,7 @@ public abstract class TableEvenRowsElement extends OdfStylableElement
 	{
 		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -113,7 +113,7 @@ public abstract class TableEvenRowsElement extends OdfStylableElement
 	{
 		TableParagraphStyleNameAttribute attr = (TableParagraphStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "paragraph-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

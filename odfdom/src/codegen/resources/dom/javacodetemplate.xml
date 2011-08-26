@@ -309,8 +309,16 @@
 	public %{attributetype} get%{attributeclassname}Attribute()
 	{
 		%{attributeclassname}Attribute attr = (%{attributeclassname}Attribute) getOdfAttribute( OdfName.get( %{namespace}, "%{local_name(attributeqname)}" ) );
-		if( attr != null ){
-		 	return %{attributetype}.valueOf( attr.get%{identifier(methodtype)}Value() );
+		if( attr != null ){</code>
+	<if test="methodtype!=''">
+		<code>
+			return %{attributetype}.valueOf( attr.%{methodtype}Value() );</code>
+	<else>
+		<code>
+			return %{attributetype}.valueOf( attr.getValue() );</code>
+	</else>
+	</if>
+	<code>
 		}
 </code>
 	<if test="defaultvalue!=''">
@@ -375,7 +383,7 @@ import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 </code>
-<if test="elementstylefamily!=''">
+<if test="(elementstylefamily != '') and (elementstylefamily != 'draw:graphic,presentation:presentation')">
 <code>import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 </code>
 </if>
@@ -506,11 +514,13 @@ import org.odftoolkit.odfdom.OdfAttribute;
 <if test="hasmultivaluesets or hasdefaultvalue">
 <code>import org.odftoolkit.odfdom.OdfElement;
 </code>
+</if>
 <foreach type="attribute">
+<if test="(hasmultidefaultvalues and defaultvalue!='') or hasmultivaluesets">
 <code>import org.odftoolkit.odfdom.dom.element.%{prefix(ownerelementqname)}.%{identifier(prefix(ownerelementqname))}%{identifier(local_name(ownerelementqname))}Element;
 </code>
-</foreach>
 </if>
+</foreach>
 <code>     
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute %{attributeqname}}.
@@ -671,7 +681,7 @@ public class %{attributeclassname} extends OdfAttribute {
 	/**
 	 * @return Returns the &lt;code&gt;%{returntype}&lt;/code&gt; value of the attribute
 	 */
-	public %{returntype} get%{identifier(returntype)}Value(){
+	public %{returntype} %{returntype}Value(){
 		String value = super.getValue();
 		try {</code>
             <if test = "valuetype != conversiontype"><code>
@@ -1002,7 +1012,7 @@ public class %{attributeclassname} extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return &lt;code&gt;true&lt;/code&gt; if %{attributeqname} has an element parent 
+	 * @return &lt;code&gt;true&lt;/code&gt; if {@odf.attribute %{attributeqname}} has an element parent 
 	 *         otherwise return &lt;code&gt;false&lt;/code&gt; as undefined.
 	 */
 	@Override
@@ -1027,7 +1037,7 @@ public class %{attributeclassname} extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return &lt;code&gt;true&lt;/code&gt; if %{attributeqname} has an element parent 
+	 * @return &lt;code&gt;true&lt;/code&gt; if {@odf.attribute %{attributeqname}} has an element parent 
 	 *         otherwise return &lt;code&gt;false&lt;/code&gt; as undefined.
 	 */
 	@Override
@@ -1244,7 +1254,7 @@ package %{prefix(classname)};
                </if>
            </if>
            <set import="" />
-           <subattribute>
+           <!--subattribute>
                <group>
                   <set import="" />
       			  <set attributeclassname="%{identifier(prefix(attributeqname))}%{identifier(attributename)}Attribute"/>
@@ -1261,7 +1271,7 @@ package %{prefix(classname)};
                            </if>
                    </if>
                </group>
-           </subattribute>
+           </subattribute-->
       </children>
       <if test ="imports =''">
            <set allimport=""/>

@@ -43,10 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDontBalanceTextColumnsAttrib
 import org.odftoolkit.odfdom.dom.attribute.style.StyleWritingModeAttribute;
 
 import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleWidthAttribute;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleRelWidthAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextNotesConfigurationElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextNoteClassAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:section-properties}.
@@ -102,7 +99,7 @@ public abstract class StyleSectionPropertiesElement extends OdfStylePropertiesBa
 	{
 		FoBackgroundColorAttribute attr = (FoBackgroundColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "background-color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -129,7 +126,7 @@ public abstract class StyleSectionPropertiesElement extends OdfStylePropertiesBa
 	{
 		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-left" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -156,7 +153,7 @@ public abstract class StyleSectionPropertiesElement extends OdfStylePropertiesBa
 	{
 		FoMarginRightAttribute attr = (FoMarginRightAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-right" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -183,7 +180,7 @@ public abstract class StyleSectionPropertiesElement extends OdfStylePropertiesBa
 	{
 		StyleProtectAttribute attr = (StyleProtectAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "protect" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -210,7 +207,7 @@ public abstract class StyleSectionPropertiesElement extends OdfStylePropertiesBa
 	{
 		StyleEditableAttribute attr = (StyleEditableAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "editable" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -237,7 +234,7 @@ public abstract class StyleSectionPropertiesElement extends OdfStylePropertiesBa
 	{
 		TextDontBalanceTextColumnsAttribute attr = (TextDontBalanceTextColumnsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "dont-balance-text-columns" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -264,7 +261,7 @@ public abstract class StyleSectionPropertiesElement extends OdfStylePropertiesBa
 	{
 		StyleWritingModeAttribute attr = (StyleWritingModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "writing-mode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

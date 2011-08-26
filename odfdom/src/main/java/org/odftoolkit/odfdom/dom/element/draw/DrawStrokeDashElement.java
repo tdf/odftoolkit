@@ -122,7 +122,7 @@ public abstract class DrawStrokeDashElement extends OdfElement
 	{
 		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -149,7 +149,7 @@ public abstract class DrawStrokeDashElement extends OdfElement
 	{
 		DrawDisplayNameAttribute attr = (DrawDisplayNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "display-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -176,7 +176,7 @@ public abstract class DrawStrokeDashElement extends OdfElement
 	{
 		DrawStyleAttribute attr = (DrawStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -203,7 +203,7 @@ public abstract class DrawStrokeDashElement extends OdfElement
 	{
 		DrawDots1Attribute attr = (DrawDots1Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "dots1" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -230,7 +230,7 @@ public abstract class DrawStrokeDashElement extends OdfElement
 	{
 		DrawDots1LengthAttribute attr = (DrawDots1LengthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "dots1-length" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -257,7 +257,7 @@ public abstract class DrawStrokeDashElement extends OdfElement
 	{
 		DrawDots2Attribute attr = (DrawDots2Attribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "dots2" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -284,7 +284,7 @@ public abstract class DrawStrokeDashElement extends OdfElement
 	{
 		DrawDots2LengthAttribute attr = (DrawDots2LengthAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "dots2-length" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -311,7 +311,7 @@ public abstract class DrawStrokeDashElement extends OdfElement
 	{
 		DrawDistanceAttribute attr = (DrawDistanceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "distance" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

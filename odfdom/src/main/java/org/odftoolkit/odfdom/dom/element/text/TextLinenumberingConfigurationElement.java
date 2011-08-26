@@ -85,7 +85,7 @@ public abstract class TextLinenumberingConfigurationElement extends OdfStylableE
 	{
 		TextNumberLinesAttribute attr = (TextNumberLinesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "number-lines" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextNumberLinesAttribute.DEFAULT_VALUE );
 	}
@@ -112,7 +112,7 @@ public abstract class TextLinenumberingConfigurationElement extends OdfStylableE
 	{
 		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-format" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -139,7 +139,7 @@ public abstract class TextLinenumberingConfigurationElement extends OdfStylableE
 	{
 		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-letter-sync" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -166,7 +166,7 @@ public abstract class TextLinenumberingConfigurationElement extends OdfStylableE
 	{
 		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -193,7 +193,7 @@ public abstract class TextLinenumberingConfigurationElement extends OdfStylableE
 	{
 		TextIncrementAttribute attr = (TextIncrementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "increment" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -220,7 +220,7 @@ public abstract class TextLinenumberingConfigurationElement extends OdfStylableE
 	{
 		TextNumberPositionAttribute attr = (TextNumberPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "number-position" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TextNumberPositionAttribute.DEFAULT_VALUE;
 	}
@@ -247,7 +247,7 @@ public abstract class TextLinenumberingConfigurationElement extends OdfStylableE
 	{
 		TextOffsetAttribute attr = (TextOffsetAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "offset" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -274,7 +274,7 @@ public abstract class TextLinenumberingConfigurationElement extends OdfStylableE
 	{
 		TextCountEmptyLinesAttribute attr = (TextCountEmptyLinesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "count-empty-lines" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextCountEmptyLinesAttribute.DEFAULT_VALUE );
 	}
@@ -301,7 +301,7 @@ public abstract class TextLinenumberingConfigurationElement extends OdfStylableE
 	{
 		TextCountInTextBoxesAttribute attr = (TextCountInTextBoxesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "count-in-text-boxes" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextCountInTextBoxesAttribute.DEFAULT_VALUE );
 	}
@@ -328,7 +328,7 @@ public abstract class TextLinenumberingConfigurationElement extends OdfStylableE
 	{
 		TextRestartOnPageAttribute attr = (TextRestartOnPageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "restart-on-page" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextRestartOnPageAttribute.DEFAULT_VALUE );
 	}

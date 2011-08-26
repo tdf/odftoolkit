@@ -154,7 +154,7 @@ public class TextCaptionSequenceFormatAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if text:caption-sequence-format has an element parent 
+	 * @return <code>true</code> if {@odf.attribute text:caption-sequence-format} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

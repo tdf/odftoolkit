@@ -107,7 +107,7 @@ public class StyleDiagonalTlBrWidthsAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if style:diagonal-tl-br-widths has an element parent 
+	 * @return <code>true</code> if {@odf.attribute style:diagonal-tl-br-widths} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

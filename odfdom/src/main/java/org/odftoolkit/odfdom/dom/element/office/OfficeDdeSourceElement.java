@@ -93,7 +93,7 @@ public abstract class OfficeDdeSourceElement extends OdfElement
 	{
 		OfficeNameAttribute attr = (OfficeNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -120,7 +120,7 @@ public abstract class OfficeDdeSourceElement extends OdfElement
 	{
 		OfficeConversionModeAttribute attr = (OfficeConversionModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "conversion-mode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return OfficeConversionModeAttribute.DEFAULT_VALUE;
 	}
@@ -147,7 +147,7 @@ public abstract class OfficeDdeSourceElement extends OdfElement
 	{
 		OfficeDdeApplicationAttribute attr = (OfficeDdeApplicationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "dde-application" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -174,7 +174,7 @@ public abstract class OfficeDdeSourceElement extends OdfElement
 	{
 		OfficeDdeTopicAttribute attr = (OfficeDdeTopicAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "dde-topic" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -201,7 +201,7 @@ public abstract class OfficeDdeSourceElement extends OdfElement
 	{
 		OfficeDdeItemAttribute attr = (OfficeDdeItemAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "dde-item" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -228,7 +228,7 @@ public abstract class OfficeDdeSourceElement extends OdfElement
 	{
 		OfficeAutomaticUpdateAttribute attr = (OfficeAutomaticUpdateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "automatic-update" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( OfficeAutomaticUpdateAttribute.DEFAULT_VALUE );
 	}

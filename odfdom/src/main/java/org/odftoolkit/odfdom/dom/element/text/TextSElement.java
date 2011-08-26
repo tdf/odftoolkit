@@ -75,7 +75,7 @@ public abstract class TextSElement extends OdfElement
 	{
 		TextCAttribute attr = (TextCAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "c" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

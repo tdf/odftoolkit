@@ -29,7 +29,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
 /**
- * This class represents the in OpenDocument format used data type 'duration'
+ * This class represents the in OpenDocument format used data type {@odf.datatype duration}
  */
 public class Duration implements OdfFieldDataType, OdfDataType {
 
@@ -106,11 +106,11 @@ public class Duration implements OdfFieldDataType, OdfDataType {
 	}
 
 	/**
-	 * check if the specified Duration instance is a valid Duration data type
+	 * check if the specified Duration instance is a valid {@odf.datatype duration} data type
 	 *
 	 * @param duration  the value to be tested
 	 *
-	 * @return true if the value of argument is valid for Duration data type
+	 * @return true if the value of argument is valid for {@odf.datatype duration} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(javax.xml.datatype.Duration duration) {

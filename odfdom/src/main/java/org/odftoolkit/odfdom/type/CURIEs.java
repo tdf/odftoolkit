@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * This class represents the in OpenDocument format used data type 'CURIEs'
+ * This class represents the in OpenDocument format used data type {@odf.datatype CURIEs}
  */
 public class CURIEs implements OdfDataType {
 
@@ -103,11 +103,11 @@ public class CURIEs implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String is a valid CURIEs data type
+	 * check if the specified String is a valid {@odf.datatype CURIEs} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for CURIEs data type false
+	 * @return true if the value of argument is valid for {@odf.datatype CURIEs} data type false
 	 *         otherwise
 	 */
 	public static boolean isValid(String stringValue) {

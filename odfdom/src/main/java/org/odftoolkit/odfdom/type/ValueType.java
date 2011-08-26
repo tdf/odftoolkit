@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'valueType'
+ * This class represents the in OpenDocument format used data type {@odf.datatype valueType}
  * 
  */
 public enum ValueType implements OdfDataType {
@@ -72,11 +72,11 @@ public enum ValueType implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String is a valid ValueType data type
+	 * check if the specified String is a valid {@odf.datatype valueType} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for ValueType data type
+	 * @return true if the value of argument is valid for {@odf.datatype valueType} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

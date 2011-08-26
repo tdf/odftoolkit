@@ -39,8 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextBulletRelativeSizeAttribute;
 
 import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:list-level-style-bullet}.
@@ -93,7 +91,7 @@ public abstract class TextListLevelStyleBulletElement extends TextListLevelStyle
 	{
 		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -120,7 +118,7 @@ public abstract class TextListLevelStyleBulletElement extends TextListLevelStyle
 	{
 		TextBulletCharAttribute attr = (TextBulletCharAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "bullet-char" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -147,7 +145,7 @@ public abstract class TextListLevelStyleBulletElement extends TextListLevelStyle
 	{
 		StyleNumPrefixAttribute attr = (StyleNumPrefixAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-prefix" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -174,7 +172,7 @@ public abstract class TextListLevelStyleBulletElement extends TextListLevelStyle
 	{
 		StyleNumSuffixAttribute attr = (StyleNumSuffixAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-suffix" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -201,7 +199,7 @@ public abstract class TextListLevelStyleBulletElement extends TextListLevelStyle
 	{
 		TextBulletRelativeSizeAttribute attr = (TextBulletRelativeSizeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "bullet-relative-size" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

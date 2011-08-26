@@ -88,7 +88,7 @@ public abstract class TableContentValidationElement extends OdfElement
 	{
 		TableNameAttribute attr = (TableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -115,7 +115,7 @@ public abstract class TableContentValidationElement extends OdfElement
 	{
 		TableConditionAttribute attr = (TableConditionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "condition" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -142,7 +142,7 @@ public abstract class TableContentValidationElement extends OdfElement
 	{
 		TableBaseCellAddressAttribute attr = (TableBaseCellAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "base-cell-address" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -169,7 +169,7 @@ public abstract class TableContentValidationElement extends OdfElement
 	{
 		TableAllowEmptyCellAttribute attr = (TableAllowEmptyCellAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "allow-empty-cell" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableAllowEmptyCellAttribute.DEFAULT_VALUE );
 	}
@@ -196,7 +196,7 @@ public abstract class TableContentValidationElement extends OdfElement
 	{
 		TableDisplayListAttribute attr = (TableDisplayListAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display-list" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TableDisplayListAttribute.DEFAULT_VALUE;
 	}

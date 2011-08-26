@@ -47,11 +47,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberAutomaticOrderAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberFormatSourceAttribute;
 
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
 import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleApplyStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleConditionAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element number:date-style}.
@@ -101,7 +97,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -128,7 +124,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		NumberLanguageAttribute attr = (NumberLanguageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "language" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -155,7 +151,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		NumberCountryAttribute attr = (NumberCountryAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "country" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -182,7 +178,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		NumberScriptAttribute attr = (NumberScriptAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "script" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -209,7 +205,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		NumberRfcLanguageTagAttribute attr = (NumberRfcLanguageTagAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "rfc-language-tag" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -236,7 +232,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		NumberTitleAttribute attr = (NumberTitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "title" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -263,7 +259,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		StyleVolatileAttribute attr = (StyleVolatileAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "volatile" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -290,7 +286,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		NumberTransliterationFormatAttribute attr = (NumberTransliterationFormatAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "transliteration-format" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return NumberTransliterationFormatAttribute.DEFAULT_VALUE;
 	}
@@ -317,7 +313,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		NumberTransliterationLanguageAttribute attr = (NumberTransliterationLanguageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "transliteration-language" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -344,7 +340,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		NumberTransliterationCountryAttribute attr = (NumberTransliterationCountryAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "transliteration-country" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -371,7 +367,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		NumberTransliterationStyleAttribute attr = (NumberTransliterationStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "transliteration-style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return NumberTransliterationStyleAttribute.DEFAULT_VALUE;
 	}
@@ -398,7 +394,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		NumberAutomaticOrderAttribute attr = (NumberAutomaticOrderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "automatic-order" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( NumberAutomaticOrderAttribute.DEFAULT_VALUE );
 	}
@@ -425,7 +421,7 @@ public abstract class NumberDateStyleElement extends OdfElement
 	{
 		NumberFormatSourceAttribute attr = (NumberFormatSourceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "format-source" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return NumberFormatSourceAttribute.DEFAULT_VALUE;
 	}

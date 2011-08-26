@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'color'
+ * This class represents the in OpenDocument format used data type {@odf.datatype color}
  */
 public class Color implements OdfDataType {
 	private String mColor;
@@ -67,11 +67,11 @@ public class Color implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String is a valid Color data type
+	 * check if the specified String is a valid {@odf.datatype color}  data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for Color data type false
+	 * @return true if the value of argument is valid for {@odf.datatype color} data type false
 	 *         otherwise
 	 */
 	public static boolean isValid(String stringValue) {

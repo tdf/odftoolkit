@@ -34,16 +34,9 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfContainerElementBase;
 
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.style.StylePageLayoutNameAttribute;
 import org.odftoolkit.odfdom.dom.element.style.StyleHandoutMasterElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLayerSetElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
-import org.odftoolkit.odfdom.dom.attribute.table.TableFirstRowEndColumnAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableFirstRowStartColumnAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableLastRowEndColumnAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableLastRowStartColumnAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:master-styles}.

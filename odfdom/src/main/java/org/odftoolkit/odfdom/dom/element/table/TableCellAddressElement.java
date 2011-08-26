@@ -90,7 +90,7 @@ public abstract class TableCellAddressElement extends OdfElement
 	{
 		TableColumnAttribute attr = (TableColumnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "column" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -117,7 +117,7 @@ public abstract class TableCellAddressElement extends OdfElement
 	{
 		TableRowAttribute attr = (TableRowAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "row" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -144,7 +144,7 @@ public abstract class TableCellAddressElement extends OdfElement
 	{
 		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "table" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

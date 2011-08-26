@@ -38,23 +38,10 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableProtectionKeyDigestAlgorit
 
 import org.odftoolkit.odfdom.dom.element.table.TableTrackedChangesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextVariableDeclElement;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextSequenceDeclElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayOutlineLevelAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextUserFieldDeclElement;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDateValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeTimeValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeBooleanValueAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextDdeConnectionDeclElement;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeApplicationAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeItemAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeTopicAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeNameAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextAlphabeticalIndexAutoMarkFileElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.table.TableCalculationSettingsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableContentValidationsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableLabelRangesElement;
@@ -63,9 +50,6 @@ import org.odftoolkit.odfdom.dom.element.table.TableNamedExpressionsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableDatabaseRangesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableDataPilotTablesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableConsolidationElement;
-import org.odftoolkit.odfdom.dom.attribute.table.TableFunctionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableSourceCellRangeAddressesAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableTargetCellAddressAttribute;
 import org.odftoolkit.odfdom.dom.element.table.TableDdeLinksElement;
 
 /**
@@ -108,7 +92,7 @@ public abstract class OfficeSpreadsheetElement extends OdfElement
 	{
 		TableStructureProtectedAttribute attr = (TableStructureProtectedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "structure-protected" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableStructureProtectedAttribute.DEFAULT_VALUE );
 	}
@@ -135,7 +119,7 @@ public abstract class OfficeSpreadsheetElement extends OdfElement
 	{
 		TableProtectionKeyAttribute attr = (TableProtectionKeyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "protection-key" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -162,7 +146,7 @@ public abstract class OfficeSpreadsheetElement extends OdfElement
 	{
 		TableProtectionKeyDigestAlgorithmAttribute attr = (TableProtectionKeyDigestAlgorithmAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "protection-key-digest-algorithm" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TableProtectionKeyDigestAlgorithmAttribute.DEFAULT_VALUE;
 	}

@@ -23,7 +23,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'percent'
+ * This class represents the in OpenDocument format used data type {@odf.datatype percent}
  */
 public class Percent implements OdfFieldDataType, OdfDataType {
 
@@ -83,11 +83,11 @@ public class Percent implements OdfFieldDataType, OdfDataType {
 	}
 
 	/**
-	 * check if the specified Double instance is a valid Percent data type
+	 * check if the specified Double instance is a valid {@odf.datatype percent} data type
 	 *
 	 * @param doubleValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for Percent data type
+	 * @return true if the value of argument is valid for {@odf.datatype percent} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(Double doubleValue) {
@@ -99,11 +99,11 @@ public class Percent implements OdfFieldDataType, OdfDataType {
 	}
 	
 	/**
-	 * check if the specified String instance is a valid Percent data type
+	 * check if the specified String instance is a valid {@odf.datatype percent} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for Percent data type
+	 * @return true if the value of argument is valid for {@odf.datatype percent} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

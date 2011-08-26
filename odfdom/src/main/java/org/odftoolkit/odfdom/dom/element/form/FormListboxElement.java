@@ -107,7 +107,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormNameAttribute attr = (FormNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -134,7 +134,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormControlImplementationAttribute attr = (FormControlImplementationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "control-implementation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -161,7 +161,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormIdAttribute attr = (FormIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -188,7 +188,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -215,7 +215,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		XformsBindAttribute attr = (XformsBindAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XFORMS), "bind" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -242,7 +242,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "disabled" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( FormDisabledAttribute.DEFAULT_VALUE );
 	}
@@ -269,7 +269,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormDropdownAttribute attr = (FormDropdownAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "dropdown" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( FormDropdownAttribute.DEFAULT_VALUE );
 	}
@@ -296,7 +296,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "printable" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( FormPrintableAttribute.DEFAULT_VALUE );
 	}
@@ -323,7 +323,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormSizeAttribute attr = (FormSizeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "size" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -350,7 +350,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormTabIndexAttribute attr = (FormTabIndexAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "tab-index" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return Integer.valueOf( FormTabIndexAttribute.DEFAULT_VALUE );
 	}
@@ -377,7 +377,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormTabStopAttribute attr = (FormTabStopAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "tab-stop" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( FormTabStopAttribute.DEFAULT_VALUE );
 	}
@@ -404,7 +404,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormTitleAttribute attr = (FormTitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "title" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -431,7 +431,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormBoundColumnAttribute attr = (FormBoundColumnAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "bound-column" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -458,7 +458,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormDataFieldAttribute attr = (FormDataFieldAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "data-field" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -485,7 +485,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormListSourceAttribute attr = (FormListSourceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "list-source" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -512,7 +512,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormListSourceTypeAttribute attr = (FormListSourceTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "list-source-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -539,7 +539,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormLinkedCellAttribute attr = (FormLinkedCellAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "linked-cell" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -566,7 +566,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormListLinkageTypeAttribute attr = (FormListLinkageTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "list-linkage-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -593,7 +593,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormSourceCellRangeAttribute attr = (FormSourceCellRangeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "source-cell-range" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -620,7 +620,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormMultipleAttribute attr = (FormMultipleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "multiple" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( FormMultipleAttribute.DEFAULT_VALUE );
 	}
@@ -647,7 +647,7 @@ public abstract class FormListboxElement extends OdfElement
 	{
 		FormXformsListSourceAttribute attr = (FormXformsListSourceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "xforms-list-source" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

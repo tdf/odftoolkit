@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'SafeCURIE'
+ * This class represents the in OpenDocument format used data type {@odf.datatype SafeCURIE}
  */
 public class SafeCURIE implements OdfDataType {
 
@@ -67,11 +67,11 @@ public class SafeCURIE implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String is a valid SafeCURIE data type
+	 * check if the specified String is a valid {@odf.datatype SafeCURIE} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for SafeCURIE data type
+	 * @return true if the value of argument is valid for {@odf.datatype SafeCURIE} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

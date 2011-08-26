@@ -75,7 +75,7 @@ public abstract class TextNoteCitationElement extends OdfElement
 	{
 		TextLabelAttribute attr = (TextLabelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "label" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

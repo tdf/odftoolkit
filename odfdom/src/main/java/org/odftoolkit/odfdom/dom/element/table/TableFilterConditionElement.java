@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableOperatorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableCaseSensitiveAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDataTypeAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.table.TableValueAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:filter-condition}.
@@ -125,7 +124,7 @@ public abstract class TableFilterConditionElement extends OdfElement
 	{
 		TableFieldNumberAttribute attr = (TableFieldNumberAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "field-number" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -152,7 +151,7 @@ public abstract class TableFilterConditionElement extends OdfElement
 	{
 		TableValueAttribute attr = (TableValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -179,7 +178,7 @@ public abstract class TableFilterConditionElement extends OdfElement
 	{
 		TableOperatorAttribute attr = (TableOperatorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "operator" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -206,7 +205,7 @@ public abstract class TableFilterConditionElement extends OdfElement
 	{
 		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "case-sensitive" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DEFAULT_VALUE_TABLE_CASESENSITIVE_ATTRIBUTE;
 	}
@@ -233,7 +232,7 @@ public abstract class TableFilterConditionElement extends OdfElement
 	{
 		TableDataTypeAttribute attr = (TableDataTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

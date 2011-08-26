@@ -78,7 +78,7 @@ public abstract class DbDelimiterElement extends OdfElement
 	{
 		DbFieldAttribute attr = (DbFieldAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "field" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DbFieldAttribute.DEFAULT_VALUE;
 	}
@@ -105,7 +105,7 @@ public abstract class DbDelimiterElement extends OdfElement
 	{
 		DbStringAttribute attr = (DbStringAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "string" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DbStringAttribute.DEFAULT_VALUE;
 	}
@@ -132,7 +132,7 @@ public abstract class DbDelimiterElement extends OdfElement
 	{
 		DbDecimalAttribute attr = (DbDecimalAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "decimal" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DbDecimalAttribute.DEFAULT_VALUE;
 	}
@@ -159,7 +159,7 @@ public abstract class DbDelimiterElement extends OdfElement
 	{
 		DbThousandAttribute attr = (DbThousandAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "thousand" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DbThousandAttribute.DEFAULT_VALUE;
 	}

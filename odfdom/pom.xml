@@ -414,6 +414,9 @@
 						<taglet>
 							<tagletClass>org.odftoolkit.odfdom.taglet.OdfAttributeTaglet</tagletClass>
 						</taglet>
+						<taglet>
+							<tagletClass>org.odftoolkit.odfdom.taglet.OdfDatatypeTaglet</tagletClass>
+						</taglet>
 					</taglets>
 					<tagletArtifact>
 						<groupId>org.odftoolkit</groupId>

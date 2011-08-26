@@ -33,10 +33,6 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 
-import org.odftoolkit.odfdom.dom.attribute.db.DbMediaTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.db.DbTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element db:database-description}.

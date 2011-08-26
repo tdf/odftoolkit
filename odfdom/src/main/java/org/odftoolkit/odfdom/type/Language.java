@@ -23,7 +23,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'language'
+ * This class represents the in OpenDocument format used data type {@odf.datatype language}
  */
 public class Language implements OdfDataType {
 
@@ -72,11 +72,11 @@ public class Language implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String instance is a valid Language data type
+	 * check if the specified String instance is a valid {@odf.datatype language} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for Language data type
+	 * @return true if the value of argument is valid for {@odf.datatype language} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

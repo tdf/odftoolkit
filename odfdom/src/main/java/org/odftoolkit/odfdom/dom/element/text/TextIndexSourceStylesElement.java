@@ -34,7 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:index-source-styles}.
@@ -84,7 +83,7 @@ public abstract class TextIndexSourceStylesElement extends OdfElement
 	{
 		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "outline-level" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

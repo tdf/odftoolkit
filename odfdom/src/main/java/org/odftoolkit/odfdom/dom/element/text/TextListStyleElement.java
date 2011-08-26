@@ -36,9 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDisplayNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextConsecutiveNumberingAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.style.StyleNumFormatAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextLevelAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextBulletCharAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:list-style}.
@@ -88,7 +85,7 @@ public abstract class TextListStyleElement extends OdfStyleBase
 	{
 		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -115,7 +112,7 @@ public abstract class TextListStyleElement extends OdfStyleBase
 	{
 		StyleDisplayNameAttribute attr = (StyleDisplayNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "display-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -142,7 +139,7 @@ public abstract class TextListStyleElement extends OdfStyleBase
 	{
 		TextConsecutiveNumberingAttribute attr = (TextConsecutiveNumberingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "consecutive-numbering" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextConsecutiveNumberingAttribute.DEFAULT_VALUE );
 	}

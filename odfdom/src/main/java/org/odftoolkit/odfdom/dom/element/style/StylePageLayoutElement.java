@@ -84,7 +84,7 @@ public abstract class StylePageLayoutElement extends OdfStyleBase
 	{
 		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -111,7 +111,7 @@ public abstract class StylePageLayoutElement extends OdfStyleBase
 	{
 		StylePageUsageAttribute attr = (StylePageUsageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "page-usage" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return StylePageUsageAttribute.DEFAULT_VALUE;
 	}

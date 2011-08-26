@@ -23,7 +23,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'nonNegativeInteger'
+ * This class represents the in OpenDocument format used data type {@odf.datatype nonNegativeInteger}
  */
 public class NonNegativeInteger implements OdfDataType {
 
@@ -80,12 +80,12 @@ public class NonNegativeInteger implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified Integer instance is a valid NonNegativeInteger
+	 * check if the specified Integer instance is a valid {@odf.datatype nonNegativeInteger}
 	 * data type
 	 *
 	 * @param integerValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for NonNegativeInteger
+	 * @return true if the value of argument is valid for {@odf.datatype nonNegativeInteger}
 	 *         data type false otherwise
 	 */
 	public static boolean isValid(Integer integerValue) {

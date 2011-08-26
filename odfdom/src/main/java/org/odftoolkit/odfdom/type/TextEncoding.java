@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'textEncoding'
+ * This class represents the in OpenDocument format used data type {@odf.datatype textEncoding}
  */
 public class TextEncoding implements OdfDataType {
 
@@ -68,11 +68,11 @@ public class TextEncoding implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String instance is a valid TextEncoding data type
+	 * check if the specified String instance is a valid {@odf.datatype textEncoding} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for TextEncoding data type
+	 * @return true if the value of argument is valid for {@odf.datatype textEncoding} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

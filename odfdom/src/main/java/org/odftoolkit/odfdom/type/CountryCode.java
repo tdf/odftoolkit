@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'countryCode'
+ * This class represents the in OpenDocument format used data type {@odf.datatype countryCode}
  */
 public class CountryCode implements OdfDataType {
 
@@ -72,11 +72,11 @@ public class CountryCode implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String is a valid CountryCode data type
+	 * check if the specified String is a valid {@odf.datatype countryCode} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for CountryCode data type
+	 * @return true if the value of argument is valid for {@odf.datatype countryCode} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

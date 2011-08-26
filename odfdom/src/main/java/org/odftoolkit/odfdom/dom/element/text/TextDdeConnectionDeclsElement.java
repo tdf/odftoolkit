@@ -33,10 +33,6 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeApplicationAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeItemAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeTopicAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:dde-connection-decls}.

@@ -47,8 +47,6 @@ import org.odftoolkit.odfdom.dom.element.meta.MetaCreationDateElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaPrintDateElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaTemplateElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.meta.MetaAutoReloadElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaHyperlinkBehaviourElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcLanguageElement;
@@ -56,8 +54,6 @@ import org.odftoolkit.odfdom.dom.element.meta.MetaEditingCyclesElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaEditingDurationElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaDocumentStatisticElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaUserDefinedElement;
-import org.odftoolkit.odfdom.dom.attribute.meta.MetaNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:document-meta}.
@@ -108,7 +104,7 @@ public abstract class OfficeDocumentMetaElement extends OdfElement
 	{
 		OfficeVersionAttribute attr = (OfficeVersionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "version" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -135,7 +131,7 @@ public abstract class OfficeDocumentMetaElement extends OdfElement
 	{
 		GrddlTransformationAttribute attr = (GrddlTransformationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.GRDDL), "transformation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

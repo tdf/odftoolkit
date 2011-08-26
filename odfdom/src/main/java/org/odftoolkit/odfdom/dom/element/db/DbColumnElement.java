@@ -128,7 +128,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		DbVisibleAttribute attr = (DbVisibleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "visible" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( DbVisibleAttribute.DEFAULT_VALUE );
 	}
@@ -155,7 +155,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		DbStyleNameAttribute attr = (DbStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -182,7 +182,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		DbDefaultCellStyleNameAttribute attr = (DbDefaultCellStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "default-cell-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -209,7 +209,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -236,7 +236,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		DbTitleAttribute attr = (DbTitleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "title" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -263,7 +263,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		DbDescriptionAttribute attr = (DbDescriptionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "description" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -290,7 +290,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "value-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -317,7 +317,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		OfficeValueAttribute attr = (OfficeValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "value" ) );
 		if( attr != null ){
-		 	return Double.valueOf( attr.getDoubleValue() );
+			return Double.valueOf( attr.doubleValue() );
 		}
 		return null;
 	}
@@ -344,7 +344,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		OfficeCurrencyAttribute attr = (OfficeCurrencyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "currency" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -371,7 +371,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		OfficeDateValueAttribute attr = (OfficeDateValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "date-value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -398,7 +398,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		OfficeTimeValueAttribute attr = (OfficeTimeValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "time-value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -425,7 +425,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		OfficeBooleanValueAttribute attr = (OfficeBooleanValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "boolean-value" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -452,7 +452,7 @@ public abstract class DbColumnElement extends OdfElement
 	{
 		OfficeStringValueAttribute attr = (OfficeStringValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "string-value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

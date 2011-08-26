@@ -78,7 +78,7 @@ public abstract class NumberMonthElement extends OdfElement
 	{
 		NumberTextualAttribute attr = (NumberTextualAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "textual" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( NumberTextualAttribute.DEFAULT_VALUE );
 	}
@@ -105,7 +105,7 @@ public abstract class NumberMonthElement extends OdfElement
 	{
 		NumberPossessiveFormAttribute attr = (NumberPossessiveFormAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "possessive-form" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -132,7 +132,7 @@ public abstract class NumberMonthElement extends OdfElement
 	{
 		NumberStyleAttribute attr = (NumberStyleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "style" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -159,7 +159,7 @@ public abstract class NumberMonthElement extends OdfElement
 	{
 		NumberCalendarAttribute attr = (NumberCalendarAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "calendar" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

@@ -27,7 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * This class represents the in OpenDocument format used data type 'cellRangeAddressList'
+ * This class represents the in OpenDocument format used data type {@odf.datatype cellRangeAddressList}
  */
 public class CellRangeAddressList implements OdfDataType {
 
@@ -103,9 +103,9 @@ public class CellRangeAddressList implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String is a valid CellRangeAddressList data type
+	 * check if the specified String is a valid {@odf.datatype cellRangeAddressList} data type
 	 * @param stringValue the value to be tested
-	 * @return true if the value of argument is valid for CellRangeAddressList data type
+	 * @return true if the value of argument is valid for {@odf.datatype cellRangeAddressList} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

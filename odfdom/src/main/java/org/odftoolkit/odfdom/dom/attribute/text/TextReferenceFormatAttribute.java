@@ -32,7 +32,7 @@ import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.dom.element.text.TextReferenceRefElement;
+import org.odftoolkit.odfdom.dom.element.text.TextBookmarkRefElement;
 import org.odftoolkit.odfdom.dom.element.text.TextNoteRefElement;
 import org.odftoolkit.odfdom.dom.element.text.TextReferenceRefElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSequenceRefElement;
@@ -127,8 +127,8 @@ public class TextReferenceFormatAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		if( parentElement != null ){
 			try {
-				if( parentElement instanceof TextReferenceRefElement ){
-					super.setValue(TextReferenceRefElement.TextReferenceFormatAttributeValue.enumValueOf(attrValue).toString());
+				if( parentElement instanceof TextBookmarkRefElement ){
+					super.setValue(TextBookmarkRefElement.TextReferenceFormatAttributeValue.enumValueOf(attrValue).toString());
 				}else if( parentElement instanceof TextNoteRefElement ){
 					super.setValue(TextNoteRefElement.TextReferenceFormatAttributeValue.enumValueOf(attrValue).toString());
 				}else if( parentElement instanceof TextReferenceRefElement ){
@@ -154,8 +154,8 @@ public class TextReferenceFormatAttribute extends OdfAttribute {
 		OdfElement parentElement = (OdfElement)getOwnerElement();
 		if( parentElement != null ){
 			try {
-				if( parentElement instanceof TextReferenceRefElement ){
-					return TextReferenceRefElement.TextReferenceFormatAttributeValue.enumValueOf(super.getValue()).toString();
+				if( parentElement instanceof TextBookmarkRefElement ){
+					return TextBookmarkRefElement.TextReferenceFormatAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof TextNoteRefElement ){
 					return TextNoteRefElement.TextReferenceFormatAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof TextReferenceRefElement ){
@@ -188,7 +188,7 @@ public class TextReferenceFormatAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if text:reference-format has an element parent 
+	 * @return <code>true</code> if {@odf.attribute text:reference-format} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

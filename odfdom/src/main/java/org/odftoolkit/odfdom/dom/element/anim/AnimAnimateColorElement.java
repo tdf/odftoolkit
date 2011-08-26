@@ -111,7 +111,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilTargetElementAttribute attr = (SmilTargetElementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "targetElement" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -138,7 +138,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		AnimSubItemAttribute attr = (AnimSubItemAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "sub-item" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -165,7 +165,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilAttributeNameAttribute attr = (SmilAttributeNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "attributeName" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -192,7 +192,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilAccumulateAttribute attr = (SmilAccumulateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "accumulate" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -219,7 +219,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilAdditiveAttribute attr = (SmilAdditiveAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "additive" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -246,7 +246,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilValuesAttribute attr = (SmilValuesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "values" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -273,7 +273,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		AnimFormulaAttribute attr = (AnimFormulaAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "formula" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -300,7 +300,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilToAttribute attr = (SmilToAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "to" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -327,7 +327,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilFromAttribute attr = (SmilFromAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "from" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -354,7 +354,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilByAttribute attr = (SmilByAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "by" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -381,7 +381,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilCalcModeAttribute attr = (SmilCalcModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "calcMode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DEFAULT_VALUE_SMIL_CALCMODE_ATTRIBUTE;
 	}
@@ -408,7 +408,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilKeyTimesAttribute attr = (SmilKeyTimesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "keyTimes" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -435,7 +435,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilKeySplinesAttribute attr = (SmilKeySplinesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "keySplines" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -462,7 +462,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		AnimColorInterpolationAttribute attr = (AnimColorInterpolationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "color-interpolation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return AnimColorInterpolationAttribute.DEFAULT_VALUE;
 	}
@@ -489,7 +489,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		AnimColorInterpolationDirectionAttribute attr = (AnimColorInterpolationDirectionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "color-interpolation-direction" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return AnimColorInterpolationDirectionAttribute.DEFAULT_VALUE;
 	}
@@ -516,7 +516,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilBeginAttribute attr = (SmilBeginAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "begin" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -543,7 +543,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilEndAttribute attr = (SmilEndAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "end" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -570,7 +570,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilDurAttribute attr = (SmilDurAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "dur" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -597,7 +597,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilRepeatDurAttribute attr = (SmilRepeatDurAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "repeatDur" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -624,7 +624,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilRepeatCountAttribute attr = (SmilRepeatCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "repeatCount" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -651,7 +651,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilRestartAttribute attr = (SmilRestartAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "restart" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return SmilRestartAttribute.DEFAULT_VALUE;
 	}
@@ -678,7 +678,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilRestartDefaultAttribute attr = (SmilRestartDefaultAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "restartDefault" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return SmilRestartDefaultAttribute.DEFAULT_VALUE;
 	}
@@ -705,7 +705,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilFillAttribute attr = (SmilFillAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "fill" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -732,7 +732,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilFillDefaultAttribute attr = (SmilFillDefaultAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "fillDefault" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -759,7 +759,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilAccelerateAttribute attr = (SmilAccelerateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "accelerate" ) );
 		if( attr != null ){
-		 	return Double.valueOf( attr.getDoubleValue() );
+			return Double.valueOf( attr.doubleValue() );
 		}
 		return Double.valueOf( SmilAccelerateAttribute.DEFAULT_VALUE );
 	}
@@ -786,7 +786,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilDecelerateAttribute attr = (SmilDecelerateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "decelerate" ) );
 		if( attr != null ){
-		 	return Double.valueOf( attr.getDoubleValue() );
+			return Double.valueOf( attr.doubleValue() );
 		}
 		return Double.valueOf( SmilDecelerateAttribute.DEFAULT_VALUE );
 	}
@@ -813,7 +813,7 @@ public abstract class AnimAnimateColorElement extends OdfElement
 	{
 		SmilAutoReverseAttribute attr = (SmilAutoReverseAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "autoReverse" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( SmilAutoReverseAttribute.DEFAULT_VALUE );
 	}

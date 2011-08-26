@@ -49,8 +49,6 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoScriptAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleRfcLanguageTagAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextSortAlgorithmAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:alphabetical-index-source}.
@@ -92,7 +90,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		TextIndexScopeAttribute attr = (TextIndexScopeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "index-scope" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TextIndexScopeAttribute.DEFAULT_VALUE;
 	}
@@ -119,7 +117,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		TextRelativeTabStopPositionAttribute attr = (TextRelativeTabStopPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "relative-tab-stop-position" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextRelativeTabStopPositionAttribute.DEFAULT_VALUE );
 	}
@@ -146,7 +144,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		TextIgnoreCaseAttribute attr = (TextIgnoreCaseAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "ignore-case" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextIgnoreCaseAttribute.DEFAULT_VALUE );
 	}
@@ -173,7 +171,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		TextMainEntryStyleNameAttribute attr = (TextMainEntryStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "main-entry-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -200,7 +198,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		TextAlphabeticalSeparatorsAttribute attr = (TextAlphabeticalSeparatorsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "alphabetical-separators" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextAlphabeticalSeparatorsAttribute.DEFAULT_VALUE );
 	}
@@ -227,7 +225,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		TextCombineEntriesAttribute attr = (TextCombineEntriesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "combine-entries" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextCombineEntriesAttribute.DEFAULT_VALUE );
 	}
@@ -254,7 +252,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		TextCombineEntriesWithDashAttribute attr = (TextCombineEntriesWithDashAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "combine-entries-with-dash" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextCombineEntriesWithDashAttribute.DEFAULT_VALUE );
 	}
@@ -281,7 +279,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		TextCombineEntriesWithPpAttribute attr = (TextCombineEntriesWithPpAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "combine-entries-with-pp" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextCombineEntriesWithPpAttribute.DEFAULT_VALUE );
 	}
@@ -308,7 +306,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		TextUseKeysAsEntriesAttribute attr = (TextUseKeysAsEntriesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-keys-as-entries" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextUseKeysAsEntriesAttribute.DEFAULT_VALUE );
 	}
@@ -335,7 +333,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		TextCapitalizeEntriesAttribute attr = (TextCapitalizeEntriesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "capitalize-entries" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextCapitalizeEntriesAttribute.DEFAULT_VALUE );
 	}
@@ -362,7 +360,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		TextCommaSeparatedAttribute attr = (TextCommaSeparatedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "comma-separated" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextCommaSeparatedAttribute.DEFAULT_VALUE );
 	}
@@ -389,7 +387,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		FoLanguageAttribute attr = (FoLanguageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "language" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -416,7 +414,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		FoCountryAttribute attr = (FoCountryAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "country" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -443,7 +441,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		FoScriptAttribute attr = (FoScriptAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "script" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -470,7 +468,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		StyleRfcLanguageTagAttribute attr = (StyleRfcLanguageTagAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -497,7 +495,7 @@ public abstract class TextAlphabeticalIndexSourceElement extends OdfElement
 	{
 		TextSortAlgorithmAttribute attr = (TextSortAlgorithmAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "sort-algorithm" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

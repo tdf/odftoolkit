@@ -39,36 +39,19 @@ import org.odftoolkit.odfdom.dom.element.form.FormFormElement;
 import org.odftoolkit.odfdom.dom.element.xforms.XformsModelElement;
 import org.odftoolkit.odfdom.dom.element.text.TextChangedRegionElement;
 import org.odftoolkit.odfdom.dom.element.text.TextVariableDeclElement;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextSequenceDeclElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayOutlineLevelAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextUserFieldDeclElement;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDateValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeTimeValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeBooleanValueAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextDdeConnectionDeclElement;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeApplicationAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeItemAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeTopicAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeNameAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextAlphabeticalIndexAutoMarkFileElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.table.TableCalculationSettingsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableContentValidationsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableLabelRangesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextHElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextNumberedParagraphElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextListIdAttribute;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextSoftPageBreakElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTableOfContentElement;
 import org.odftoolkit.odfdom.dom.element.text.TextIllustrationIndexElement;
@@ -79,19 +62,10 @@ import org.odftoolkit.odfdom.dom.element.text.TextAlphabeticalIndexElement;
 import org.odftoolkit.odfdom.dom.element.text.TextBibliographyElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRectElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLineElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgX2Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY1Attribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgY2Attribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPolylineElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawPointsAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPolygonElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRegularPolygonElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawConcaveAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawCornersAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPathElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCircleElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawEllipseElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawGElement;
@@ -101,7 +75,6 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawMeasureElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCaptionElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawConnectorElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawControlElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawControlAttribute;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCustomShapeElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
@@ -110,9 +83,6 @@ import org.odftoolkit.odfdom.dom.element.table.TableNamedExpressionsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableDatabaseRangesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableDataPilotTablesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableConsolidationElement;
-import org.odftoolkit.odfdom.dom.attribute.table.TableFunctionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableSourceCellRangeAddressesAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableTargetCellAddressAttribute;
 import org.odftoolkit.odfdom.dom.element.table.TableDdeLinksElement;
 
 /**
@@ -155,7 +125,7 @@ public abstract class OfficeTextElement extends OdfElement
 	{
 		TextGlobalAttribute attr = (TextGlobalAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "global" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextGlobalAttribute.DEFAULT_VALUE );
 	}
@@ -182,7 +152,7 @@ public abstract class OfficeTextElement extends OdfElement
 	{
 		TextUseSoftPageBreaksAttribute attr = (TextUseSoftPageBreaksAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-soft-page-breaks" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextUseSoftPageBreaksAttribute.DEFAULT_VALUE );
 	}

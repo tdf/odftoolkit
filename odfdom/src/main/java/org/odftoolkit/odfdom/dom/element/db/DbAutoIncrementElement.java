@@ -76,7 +76,7 @@ public abstract class DbAutoIncrementElement extends OdfElement
 	{
 		DbAdditionalColumnStatementAttribute attr = (DbAdditionalColumnStatementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "additional-column-statement" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -103,7 +103,7 @@ public abstract class DbAutoIncrementElement extends OdfElement
 	{
 		DbRowRetrievingStatementAttribute attr = (DbRowRetrievingStatementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "row-retrieving-statement" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

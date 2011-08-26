@@ -110,7 +110,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		TableNumberColumnsRepeatedAttribute attr = (TableNumberColumnsRepeatedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "number-columns-repeated" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return Integer.valueOf( TableNumberColumnsRepeatedAttribute.DEFAULT_VALUE );
 	}
@@ -137,7 +137,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		TableStyleNameAttribute attr = (TableStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -164,7 +164,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		TableContentValidationNameAttribute attr = (TableContentValidationNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "content-validation-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -191,7 +191,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		TableFormulaAttribute attr = (TableFormulaAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "formula" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -218,7 +218,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "value-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -245,7 +245,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		OfficeValueAttribute attr = (OfficeValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "value" ) );
 		if( attr != null ){
-		 	return Double.valueOf( attr.getDoubleValue() );
+			return Double.valueOf( attr.doubleValue() );
 		}
 		return null;
 	}
@@ -272,7 +272,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		OfficeCurrencyAttribute attr = (OfficeCurrencyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "currency" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -299,7 +299,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		OfficeDateValueAttribute attr = (OfficeDateValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "date-value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -326,7 +326,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		OfficeTimeValueAttribute attr = (OfficeTimeValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "time-value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -353,7 +353,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		OfficeBooleanValueAttribute attr = (OfficeBooleanValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "boolean-value" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -380,7 +380,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		OfficeStringValueAttribute attr = (OfficeStringValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "string-value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -407,7 +407,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		TableProtectAttribute attr = (TableProtectAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "protect" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableProtectAttribute.DEFAULT_VALUE );
 	}
@@ -434,7 +434,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		TableProtectedAttribute attr = (TableProtectedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "protected" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -461,7 +461,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -488,7 +488,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		XhtmlAboutAttribute attr = (XhtmlAboutAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XHTML), "about" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -515,7 +515,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		XhtmlPropertyAttribute attr = (XhtmlPropertyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XHTML), "property" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -542,7 +542,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		XhtmlDatatypeAttribute attr = (XhtmlDatatypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XHTML), "datatype" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -569,7 +569,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 	{
 		XhtmlContentAttribute attr = (XhtmlContentAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XHTML), "content" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

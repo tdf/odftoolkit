@@ -48,8 +48,6 @@ import org.odftoolkit.odfdom.dom.element.meta.MetaCreationDateElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaPrintDateElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaTemplateElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.meta.MetaAutoReloadElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaHyperlinkBehaviourElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcLanguageElement;
@@ -57,13 +55,8 @@ import org.odftoolkit.odfdom.dom.element.meta.MetaEditingCyclesElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaEditingDurationElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaDocumentStatisticElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaUserDefinedElement;
-import org.odftoolkit.odfdom.dom.attribute.meta.MetaNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.config.ConfigConfigItemSetElement;
-import org.odftoolkit.odfdom.dom.attribute.config.ConfigNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.script.ScriptLanguageAttribute;
 import org.odftoolkit.odfdom.dom.element.style.StyleFontFaceElement;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberStyleElement;
@@ -77,33 +70,22 @@ import org.odftoolkit.odfdom.dom.element.style.StyleDefaultStyleElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleDefaultPageLayoutElement;
 import org.odftoolkit.odfdom.dom.element.text.TextOutlineStyleElement;
 import org.odftoolkit.odfdom.dom.element.text.TextNotesConfigurationElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextNoteClassAttribute;
 import org.odftoolkit.odfdom.dom.element.text.TextBibliographyConfigurationElement;
 import org.odftoolkit.odfdom.dom.element.text.TextLinenumberingConfigurationElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawGradientElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawStyleAttribute;
 import org.odftoolkit.odfdom.dom.element.svg.SvgLinearGradientElement;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawNameAttribute;
 import org.odftoolkit.odfdom.dom.element.svg.SvgRadialGradientElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawHatchElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFillImageElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawMarkerElement;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawStrokeDashElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawOpacityElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePresentationPageLayoutElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
-import org.odftoolkit.odfdom.dom.attribute.style.StylePageLayoutNameAttribute;
 import org.odftoolkit.odfdom.dom.element.style.StyleHandoutMasterElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLayerSetElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
-import org.odftoolkit.odfdom.dom.attribute.table.TableFirstRowEndColumnAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableFirstRowStartColumnAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableLastRowEndColumnAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableLastRowStartColumnAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:document}.
@@ -156,7 +138,7 @@ public abstract class OfficeDocumentElement extends OdfElement
 	{
 		OfficeMimetypeAttribute attr = (OfficeMimetypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "mimetype" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -183,7 +165,7 @@ public abstract class OfficeDocumentElement extends OdfElement
 	{
 		OfficeVersionAttribute attr = (OfficeVersionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.OFFICE), "version" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -210,7 +192,7 @@ public abstract class OfficeDocumentElement extends OdfElement
 	{
 		GrddlTransformationAttribute attr = (GrddlTransformationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.GRDDL), "transformation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

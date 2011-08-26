@@ -26,7 +26,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
- * This class represents the in OpenDocument format used data type 'date'
+ * This class represents the in OpenDocument format used data type {@odf.datatype date}
  * Details of the type can be found in the <a href="http://www.w3.org/TR/xmlschema-2/#date">W3C XML Schema specification</a>.
  */
 public class Date implements OdfFieldDataType, OdfDataType {
@@ -93,12 +93,12 @@ public class Date implements OdfFieldDataType, OdfDataType {
 	}
 
 	/**
-	 * check if the specified XMLGregorianCalendar instance is a valid Date data
+	 * check if the specified XMLGregorianCalendar instance is a valid {@odf.datatype date} data
 	 * type
 	 *
 	 * @param date
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for Date data type false
+	 * @return true if the value of argument is valid for {@odf.datatype date} data type false
 	 *         otherwise
 	 */
 	public static boolean isValid(XMLGregorianCalendar date) {

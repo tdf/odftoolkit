@@ -89,7 +89,7 @@ public abstract class DbServerDatabaseElement extends OdfElement
 	{
 		DbTypeAttribute attr = (DbTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -116,7 +116,7 @@ public abstract class DbServerDatabaseElement extends OdfElement
 	{
 		DbHostnameAttribute attr = (DbHostnameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "hostname" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -143,7 +143,7 @@ public abstract class DbServerDatabaseElement extends OdfElement
 	{
 		DbPortAttribute attr = (DbPortAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "port" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -170,7 +170,7 @@ public abstract class DbServerDatabaseElement extends OdfElement
 	{
 		DbLocalSocketAttribute attr = (DbLocalSocketAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "local-socket" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -197,7 +197,7 @@ public abstract class DbServerDatabaseElement extends OdfElement
 	{
 		DbDatabaseNameAttribute attr = (DbDatabaseNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "database-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

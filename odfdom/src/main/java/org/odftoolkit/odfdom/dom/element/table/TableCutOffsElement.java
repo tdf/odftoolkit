@@ -33,11 +33,6 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 
-import org.odftoolkit.odfdom.dom.attribute.table.TablePositionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableEndPositionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableStartPositionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableIdAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TablePositionAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:cut-offs}.

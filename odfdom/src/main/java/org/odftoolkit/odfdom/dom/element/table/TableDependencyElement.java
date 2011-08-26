@@ -84,7 +84,7 @@ public abstract class TableDependencyElement extends OdfElement
 	{
 		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

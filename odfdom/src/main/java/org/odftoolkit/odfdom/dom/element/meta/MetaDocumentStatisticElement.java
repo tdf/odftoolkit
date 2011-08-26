@@ -89,7 +89,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaPageCountAttribute attr = (MetaPageCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "page-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -116,7 +116,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaTableCountAttribute attr = (MetaTableCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "table-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -143,7 +143,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaDrawCountAttribute attr = (MetaDrawCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "draw-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -170,7 +170,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaImageCountAttribute attr = (MetaImageCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "image-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -197,7 +197,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaOleObjectCountAttribute attr = (MetaOleObjectCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "ole-object-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -224,7 +224,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaObjectCountAttribute attr = (MetaObjectCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "object-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -251,7 +251,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaParagraphCountAttribute attr = (MetaParagraphCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "paragraph-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -278,7 +278,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaWordCountAttribute attr = (MetaWordCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "word-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -305,7 +305,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaCharacterCountAttribute attr = (MetaCharacterCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "character-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -332,7 +332,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaFrameCountAttribute attr = (MetaFrameCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "frame-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -359,7 +359,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaSentenceCountAttribute attr = (MetaSentenceCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "sentence-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -386,7 +386,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaSyllableCountAttribute attr = (MetaSyllableCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "syllable-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -413,7 +413,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaNonWhitespaceCharacterCountAttribute attr = (MetaNonWhitespaceCharacterCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "non-whitespace-character-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -440,7 +440,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaRowCountAttribute attr = (MetaRowCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "row-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -467,7 +467,7 @@ public abstract class MetaDocumentStatisticElement extends OdfElement
 	{
 		MetaCellCountAttribute attr = (MetaCellCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "cell-count" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

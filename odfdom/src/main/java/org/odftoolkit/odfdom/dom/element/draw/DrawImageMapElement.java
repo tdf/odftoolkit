@@ -33,16 +33,6 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgHeightAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgWidthAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgXAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgCxAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgCyAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgRAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawPointsAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgHeightAttribute;
-import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:image-map}.

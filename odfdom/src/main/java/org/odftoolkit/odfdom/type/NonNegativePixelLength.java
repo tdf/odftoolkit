@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'nonNegativePixelLength'
+ * This class represents the in OpenDocument format used data type {@odf.datatype nonNegativePixelLength}
  */
 public class NonNegativePixelLength extends Length {
 
@@ -68,12 +68,12 @@ public class NonNegativePixelLength extends Length {
 	}
 
 	/**
-	 * check if the specified String instance is a valid NonNegativePixelLength
+	 * check if the specified String instance is a valid {@odf.datatype nonNegativePixelLength}
 	 * data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for NonNegativePixelLength
+	 * @return true if the value of argument is valid for {@odf.datatype nonNegativePixelLength}
 	 *         data type false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

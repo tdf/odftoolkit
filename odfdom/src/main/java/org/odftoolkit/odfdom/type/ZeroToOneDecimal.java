@@ -1,5 +1,8 @@
 package org.odftoolkit.odfdom.type;
 
+/**
+ * This class represents the in OpenDocument format used data type {@odf.datatype zeroToOneDecimal}
+ */
 public class ZeroToOneDecimal implements OdfDataType{
 	private double mN;
 	
@@ -52,11 +55,11 @@ public class ZeroToOneDecimal implements OdfDataType{
 	}
 
 	/**
-	 * check if the specified Double instance is a valid ZeroToOneDecimal data type
+	 * check if the specified Double instance is a valid {@odf.datatype zeroToOneDecimal} data type
 	 *
 	 * @param doubleValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for ZeroToOneDecimal data type
+	 * @return true if the value of argument is valid for {@odf.datatype zeroToOneDecimal} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(Double doubleValue) {

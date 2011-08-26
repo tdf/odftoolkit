@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'relativeLength'
+ * This class represents the in OpenDocument format used data type {@odf.datatype relativeLength}
  */
 public class RelativeLength implements OdfDataType {
 
@@ -68,12 +68,12 @@ public class RelativeLength implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String instance is a valid RelativeLength data
+	 * check if the specified String instance is a valid {@odf.datatype relativeLength} data
 	 * type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for RelativeLength data
+	 * @return true if the value of argument is valid for {@odf.datatype relativeLength} data
 	 *         type false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

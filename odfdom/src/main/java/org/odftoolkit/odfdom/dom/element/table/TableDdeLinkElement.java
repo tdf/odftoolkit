@@ -34,9 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 
 import org.odftoolkit.odfdom.dom.element.office.OfficeDdeSourceElement;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeApplicationAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeItemAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDdeTopicAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:dde-link}.

@@ -27,7 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * This class represents the in OpenDocument format used data type 'idRefs'
+ * This class represents the in OpenDocument format used data type {@odf.datatype IDREFS}
  */
 public class IDREFS implements OdfDataType {
 
@@ -105,11 +105,11 @@ public class IDREFS implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String instance is a valid IDREFS data type
+	 * check if the specified String instance is a valid {@odf.datatype IDREFS} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for IDREFS data type false
+	 * @return true if the value of argument is valid for {@odf.datatype IDREFS} data type false
 	 *         otherwise
 	 */
 	public static boolean isValid(String stringValue) {

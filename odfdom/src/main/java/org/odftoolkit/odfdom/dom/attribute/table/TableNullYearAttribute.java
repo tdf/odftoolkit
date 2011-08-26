@@ -32,7 +32,6 @@ import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.dom.element.table.TableCalculationSettingsElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute table:null-year}.
@@ -81,7 +80,7 @@ public class TableNullYearAttribute extends OdfAttribute {
 	/**
 	 * @return Returns the <code>int</code> value of the attribute
 	 */
-	public int getIntValue(){
+	public int intValue(){
 		String value = super.getValue();
 		try {
         	//2DO: need validate value against PositiveInteger
@@ -137,7 +136,7 @@ public class TableNullYearAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if table:null-year has an element parent 
+	 * @return <code>true</code> if {@odf.attribute table:null-year} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

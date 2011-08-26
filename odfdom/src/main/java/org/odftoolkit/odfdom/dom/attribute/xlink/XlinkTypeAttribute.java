@@ -32,38 +32,6 @@ import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.dom.element.chart.ChartChartElement;
-import org.odftoolkit.odfdom.dom.element.db.DbComponentElement;
-import org.odftoolkit.odfdom.dom.element.db.DbConnectionResourceElement;
-import org.odftoolkit.odfdom.dom.element.db.DbFileBasedDatabaseElement;
-import org.odftoolkit.odfdom.dom.element.db.DbJavaClasspathElement;
-import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
-import org.odftoolkit.odfdom.dom.element.draw.DrawAppletElement;
-import org.odftoolkit.odfdom.dom.element.draw.DrawAreaCircleElement;
-import org.odftoolkit.odfdom.dom.element.draw.DrawAreaPolygonElement;
-import org.odftoolkit.odfdom.dom.element.draw.DrawAreaRectangleElement;
-import org.odftoolkit.odfdom.dom.element.draw.DrawFillImageElement;
-import org.odftoolkit.odfdom.dom.element.draw.DrawFloatingFrameElement;
-import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
-import org.odftoolkit.odfdom.dom.element.draw.DrawObjectElement;
-import org.odftoolkit.odfdom.dom.element.draw.DrawObjectOleElement;
-import org.odftoolkit.odfdom.dom.element.draw.DrawPluginElement;
-import org.odftoolkit.odfdom.dom.element.form.FormFormElement;
-import org.odftoolkit.odfdom.dom.element.meta.MetaAutoReloadElement;
-import org.odftoolkit.odfdom.dom.element.meta.MetaTemplateElement;
-import org.odftoolkit.odfdom.dom.element.presentation.PresentationEventListenerElement;
-import org.odftoolkit.odfdom.dom.element.presentation.PresentationSoundElement;
-import org.odftoolkit.odfdom.dom.element.script.ScriptEventListenerElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleBackgroundImageElement;
-import org.odftoolkit.odfdom.dom.element.svg.SvgDefinitionSrcElement;
-import org.odftoolkit.odfdom.dom.element.svg.SvgFontFaceUriElement;
-import org.odftoolkit.odfdom.dom.element.table.TableCellRangeSourceElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableSourceElement;
-import org.odftoolkit.odfdom.dom.element.text.TextAElement;
-import org.odftoolkit.odfdom.dom.element.text.TextAlphabeticalIndexAutoMarkFileElement;
-import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleImageElement;
-import org.odftoolkit.odfdom.dom.element.text.TextScriptElement;
-import org.odftoolkit.odfdom.dom.element.text.TextSectionSourceElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute xlink:type}.
@@ -192,7 +160,7 @@ public class XlinkTypeAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if xlink:type has an element parent 
+	 * @return <code>true</code> if {@odf.attribute xlink:type} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

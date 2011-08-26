@@ -34,9 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableIdAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.table.TableColumnAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableRowAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableTableAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:cell-content-deletion}.
@@ -78,7 +75,7 @@ public abstract class TableCellContentDeletionElement extends OdfElement
 	{
 		TableIdAttribute attr = (TableIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

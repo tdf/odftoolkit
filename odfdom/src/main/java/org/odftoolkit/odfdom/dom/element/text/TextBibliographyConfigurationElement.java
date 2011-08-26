@@ -42,7 +42,6 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoScriptAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleRfcLanguageTagAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextSortAlgorithmAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.text.TextKeyAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:bibliography-configuration}.
@@ -84,7 +83,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	{
 		TextPrefixAttribute attr = (TextPrefixAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "prefix" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -111,7 +110,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	{
 		TextSuffixAttribute attr = (TextSuffixAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "suffix" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -138,7 +137,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	{
 		TextNumberedEntriesAttribute attr = (TextNumberedEntriesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "numbered-entries" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextNumberedEntriesAttribute.DEFAULT_VALUE );
 	}
@@ -165,7 +164,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	{
 		TextSortByPositionAttribute attr = (TextSortByPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "sort-by-position" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextSortByPositionAttribute.DEFAULT_VALUE );
 	}
@@ -192,7 +191,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	{
 		FoLanguageAttribute attr = (FoLanguageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "language" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -219,7 +218,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	{
 		FoCountryAttribute attr = (FoCountryAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "country" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -246,7 +245,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	{
 		FoScriptAttribute attr = (FoScriptAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "script" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -273,7 +272,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	{
 		StyleRfcLanguageTagAttribute attr = (StyleRfcLanguageTagAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "rfc-language-tag" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -300,7 +299,7 @@ public abstract class TextBibliographyConfigurationElement extends OdfElement
 	{
 		TextSortAlgorithmAttribute attr = (TextSortAlgorithmAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "sort-algorithm" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

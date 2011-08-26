@@ -34,9 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.config.ConfigNameAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.config.ConfigNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.config.ConfigTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.config.ConfigNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element config:config-item-set}.
@@ -87,7 +84,7 @@ public abstract class ConfigConfigItemSetElement extends OdfElement
 	{
 		ConfigNameAttribute attr = (ConfigNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.CONFIG), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextUseCaptionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextCaptionSequenceNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextCaptionSequenceFormatAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:illustration-index-source}.
@@ -80,7 +79,7 @@ public abstract class TextIllustrationIndexSourceElement extends OdfElement
 	{
 		TextIndexScopeAttribute attr = (TextIndexScopeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "index-scope" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TextIndexScopeAttribute.DEFAULT_VALUE;
 	}
@@ -107,7 +106,7 @@ public abstract class TextIllustrationIndexSourceElement extends OdfElement
 	{
 		TextRelativeTabStopPositionAttribute attr = (TextRelativeTabStopPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "relative-tab-stop-position" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextRelativeTabStopPositionAttribute.DEFAULT_VALUE );
 	}
@@ -134,7 +133,7 @@ public abstract class TextIllustrationIndexSourceElement extends OdfElement
 	{
 		TextUseCaptionAttribute attr = (TextUseCaptionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-caption" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextUseCaptionAttribute.DEFAULT_VALUE );
 	}
@@ -161,7 +160,7 @@ public abstract class TextIllustrationIndexSourceElement extends OdfElement
 	{
 		TextCaptionSequenceNameAttribute attr = (TextCaptionSequenceNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "caption-sequence-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -188,7 +187,7 @@ public abstract class TextIllustrationIndexSourceElement extends OdfElement
 	{
 		TextCaptionSequenceFormatAttribute attr = (TextCaptionSequenceFormatAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "caption-sequence-format" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

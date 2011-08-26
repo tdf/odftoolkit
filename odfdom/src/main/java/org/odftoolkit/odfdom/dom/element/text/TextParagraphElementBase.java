@@ -69,7 +69,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement
 	{
 		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -96,7 +96,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement
 	{
 		TextClassNamesAttribute attr = (TextClassNamesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "class-names" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -123,7 +123,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement
 	{
 		TextCondStyleNameAttribute attr = (TextCondStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "cond-style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -150,7 +150,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement
 	{
 		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -177,7 +177,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement
 	{
 		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XML), "id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -204,7 +204,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement
 	{
 		XhtmlAboutAttribute attr = (XhtmlAboutAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XHTML), "about" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -231,7 +231,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement
 	{
 		XhtmlPropertyAttribute attr = (XhtmlPropertyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XHTML), "property" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -258,7 +258,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement
 	{
 		XhtmlDatatypeAttribute attr = (XhtmlDatatypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XHTML), "datatype" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -285,7 +285,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement
 	{
 		XhtmlContentAttribute attr = (XhtmlContentAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.XHTML), "content" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

@@ -41,8 +41,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextStartValueAttribute;
 
 import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:list-level-style-number}.
@@ -95,7 +93,7 @@ public abstract class TextListLevelStyleNumberElement extends TextListLevelStyle
 	{
 		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -122,7 +120,7 @@ public abstract class TextListLevelStyleNumberElement extends TextListLevelStyle
 	{
 		StyleNumFormatAttribute attr = (StyleNumFormatAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-format" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -149,7 +147,7 @@ public abstract class TextListLevelStyleNumberElement extends TextListLevelStyle
 	{
 		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-letter-sync" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -176,7 +174,7 @@ public abstract class TextListLevelStyleNumberElement extends TextListLevelStyle
 	{
 		StyleNumPrefixAttribute attr = (StyleNumPrefixAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-prefix" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -203,7 +201,7 @@ public abstract class TextListLevelStyleNumberElement extends TextListLevelStyle
 	{
 		StyleNumSuffixAttribute attr = (StyleNumSuffixAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "num-suffix" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -230,7 +228,7 @@ public abstract class TextListLevelStyleNumberElement extends TextListLevelStyle
 	{
 		TextDisplayLevelsAttribute attr = (TextDisplayLevelsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "display-levels" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return Integer.valueOf( TextDisplayLevelsAttribute.DEFAULT_VALUE );
 	}
@@ -257,7 +255,7 @@ public abstract class TextListLevelStyleNumberElement extends TextListLevelStyle
 	{
 		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "start-value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TextStartValueAttribute.DEFAULT_VALUE;
 	}

@@ -39,18 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableIsDataLayoutFieldAttribute
 import org.odftoolkit.odfdom.dom.attribute.table.TableFunctionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableUsedHierarchyAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.table.TableFieldNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableMemberTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableFieldNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableMemberNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableDateStartAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableGroupedByAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableSourceFieldNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableStepAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableStartAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableDateEndAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableEndAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-field}.
@@ -105,7 +93,7 @@ public abstract class TableDataPilotFieldElement extends OdfElement
 	{
 		TableSourceFieldNameAttribute attr = (TableSourceFieldNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "source-field-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -132,7 +120,7 @@ public abstract class TableDataPilotFieldElement extends OdfElement
 	{
 		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "orientation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -159,7 +147,7 @@ public abstract class TableDataPilotFieldElement extends OdfElement
 	{
 		TableSelectedPageAttribute attr = (TableSelectedPageAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "selected-page" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -186,7 +174,7 @@ public abstract class TableDataPilotFieldElement extends OdfElement
 	{
 		TableIsDataLayoutFieldAttribute attr = (TableIsDataLayoutFieldAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "is-data-layout-field" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TableIsDataLayoutFieldAttribute.DEFAULT_VALUE;
 	}
@@ -213,7 +201,7 @@ public abstract class TableDataPilotFieldElement extends OdfElement
 	{
 		TableFunctionAttribute attr = (TableFunctionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "function" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -240,7 +228,7 @@ public abstract class TableDataPilotFieldElement extends OdfElement
 	{
 		TableUsedHierarchyAttribute attr = (TableUsedHierarchyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "used-hierarchy" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return Integer.valueOf( TableUsedHierarchyAttribute.DEFAULT_VALUE );
 	}
@@ -261,7 +249,7 @@ public abstract class TableDataPilotFieldElement extends OdfElement
 	 * Create child element {@odf.element table:data-pilot-level}.
 	 *
 	 * @return   return  the element {@odf.element table:data-pilot-level}
-	 * DifferentQName table:end
+	 * DifferentQName 
 	 */
 	public TableDataPilotLevelElement newTableDataPilotLevelElement()
 	{

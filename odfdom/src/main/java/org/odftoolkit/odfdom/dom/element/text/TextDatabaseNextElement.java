@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDatabaseNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
 
 import org.odftoolkit.odfdom.dom.element.form.FormConnectionResourceElement;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:database-next}.
@@ -89,7 +88,7 @@ public abstract class TextDatabaseNextElement extends OdfElement
 	{
 		TextTableNameAttribute attr = (TextTableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "table-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -116,7 +115,7 @@ public abstract class TextDatabaseNextElement extends OdfElement
 	{
 		TextTableTypeAttribute attr = (TextTableTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "table-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -143,7 +142,7 @@ public abstract class TextDatabaseNextElement extends OdfElement
 	{
 		TextDatabaseNameAttribute attr = (TextDatabaseNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "database-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -170,7 +169,7 @@ public abstract class TextDatabaseNextElement extends OdfElement
 	{
 		TextConditionAttribute attr = (TextConditionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "condition" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

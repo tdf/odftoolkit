@@ -43,9 +43,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextUseObjectsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextCopyOutlineLevelsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextIndexNameAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:user-index-source}.
@@ -96,7 +93,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	{
 		TextIndexScopeAttribute attr = (TextIndexScopeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "index-scope" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TextIndexScopeAttribute.DEFAULT_VALUE;
 	}
@@ -123,7 +120,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	{
 		TextRelativeTabStopPositionAttribute attr = (TextRelativeTabStopPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "relative-tab-stop-position" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextRelativeTabStopPositionAttribute.DEFAULT_VALUE );
 	}
@@ -150,7 +147,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	{
 		TextUseIndexMarksAttribute attr = (TextUseIndexMarksAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-index-marks" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextUseIndexMarksAttribute.DEFAULT_VALUE );
 	}
@@ -177,7 +174,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	{
 		TextUseIndexSourceStylesAttribute attr = (TextUseIndexSourceStylesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-index-source-styles" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextUseIndexSourceStylesAttribute.DEFAULT_VALUE );
 	}
@@ -204,7 +201,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	{
 		TextUseGraphicsAttribute attr = (TextUseGraphicsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-graphics" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextUseGraphicsAttribute.DEFAULT_VALUE );
 	}
@@ -231,7 +228,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	{
 		TextUseTablesAttribute attr = (TextUseTablesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-tables" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextUseTablesAttribute.DEFAULT_VALUE );
 	}
@@ -258,7 +255,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	{
 		TextUseFloatingFramesAttribute attr = (TextUseFloatingFramesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-floating-frames" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextUseFloatingFramesAttribute.DEFAULT_VALUE );
 	}
@@ -285,7 +282,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	{
 		TextUseObjectsAttribute attr = (TextUseObjectsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "use-objects" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextUseObjectsAttribute.DEFAULT_VALUE );
 	}
@@ -312,7 +309,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	{
 		TextCopyOutlineLevelsAttribute attr = (TextCopyOutlineLevelsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "copy-outline-levels" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextCopyOutlineLevelsAttribute.DEFAULT_VALUE );
 	}
@@ -339,7 +336,7 @@ public abstract class TextUserIndexSourceElement extends OdfElement
 	{
 		TextIndexNameAttribute attr = (TextIndexNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "index-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

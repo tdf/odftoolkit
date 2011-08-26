@@ -87,7 +87,7 @@ public abstract class DrawLayerElement extends OdfElement
 	{
 		DrawNameAttribute attr = (DrawNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -114,7 +114,7 @@ public abstract class DrawLayerElement extends OdfElement
 	{
 		DrawProtectedAttribute attr = (DrawProtectedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "protected" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( DrawProtectedAttribute.DEFAULT_VALUE );
 	}
@@ -141,7 +141,7 @@ public abstract class DrawLayerElement extends OdfElement
 	{
 		DrawDisplayAttribute attr = (DrawDisplayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "display" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DrawDisplayAttribute.DEFAULT_VALUE;
 	}

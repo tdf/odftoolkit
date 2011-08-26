@@ -34,15 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableShowEmptyAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.table.TableDataFieldAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayMemberModeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableEnabledAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableMemberCountAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableOrderAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableSortModeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableDataFieldAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableAddEmptyLinesAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableLayoutModeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-level}.
@@ -84,7 +75,7 @@ public abstract class TableDataPilotLevelElement extends OdfElement
 	{
 		TableShowEmptyAttribute attr = (TableShowEmptyAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "show-empty" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}

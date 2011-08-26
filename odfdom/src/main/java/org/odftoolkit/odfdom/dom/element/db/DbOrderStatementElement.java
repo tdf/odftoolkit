@@ -85,7 +85,7 @@ public abstract class DbOrderStatementElement extends OdfElement
 	{
 		DbCommandAttribute attr = (DbCommandAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "command" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -112,7 +112,7 @@ public abstract class DbOrderStatementElement extends OdfElement
 	{
 		DbApplyCommandAttribute attr = (DbApplyCommandAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "apply-command" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( DbApplyCommandAttribute.DEFAULT_VALUE );
 	}

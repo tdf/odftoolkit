@@ -23,7 +23,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'IDREF'
+ * This class represents the in OpenDocument format used data type {@odf.datatype IDREF}
  */
 public class IDREF implements OdfDataType {
 
@@ -72,11 +72,11 @@ public class IDREF implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String instance is a valid IDREF data type
+	 * check if the specified String instance is a valid {@odf.datatype IDREF} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for IDREF data type false
+	 * @return true if the value of argument is valid for {@odf.datatype IDREF} data type false
 	 *         otherwise
 	 */
 	public static boolean isValid(String stringValue) {

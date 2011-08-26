@@ -37,9 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableConditionSourceAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableConditionSourceRangeAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayDuplicatesAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.table.TableFieldNumberAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableOperatorAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableValueAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:filter}.
@@ -81,7 +78,7 @@ public abstract class TableFilterElement extends OdfElement
 	{
 		TableTargetRangeAddressAttribute attr = (TableTargetRangeAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "target-range-address" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -108,7 +105,7 @@ public abstract class TableFilterElement extends OdfElement
 	{
 		TableConditionSourceAttribute attr = (TableConditionSourceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "condition-source" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TableConditionSourceAttribute.DEFAULT_VALUE;
 	}
@@ -135,7 +132,7 @@ public abstract class TableFilterElement extends OdfElement
 	{
 		TableConditionSourceRangeAddressAttribute attr = (TableConditionSourceRangeAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "condition-source-range-address" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -162,7 +159,7 @@ public abstract class TableFilterElement extends OdfElement
 	{
 		TableDisplayDuplicatesAttribute attr = (TableDisplayDuplicatesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display-duplicates" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableDisplayDuplicatesAttribute.DEFAULT_VALUE );
 	}

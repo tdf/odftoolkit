@@ -34,8 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableGroupByFieldNumberAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.table.TableFieldNumberAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableFunctionAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:subtotal-rule}.
@@ -86,7 +84,7 @@ public abstract class TableSubtotalRuleElement extends OdfElement
 	{
 		TableGroupByFieldNumberAttribute attr = (TableGroupByFieldNumberAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "group-by-field-number" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}

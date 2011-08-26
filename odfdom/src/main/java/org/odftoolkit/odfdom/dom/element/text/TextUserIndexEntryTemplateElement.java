@@ -36,9 +36,6 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.style.StyleTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.style.StylePositionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:user-index-entry-template}.
@@ -89,7 +86,7 @@ public abstract class TextUserIndexEntryTemplateElement extends OdfStylableEleme
 	{
 		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "outline-level" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -116,7 +113,7 @@ public abstract class TextUserIndexEntryTemplateElement extends OdfStylableEleme
 	{
 		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "style-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

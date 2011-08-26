@@ -87,7 +87,7 @@ public abstract class StyleListLevelLabelAlignmentElement extends OdfElement
 	{
 		TextLabelFollowedByAttribute attr = (TextLabelFollowedByAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "label-followed-by" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -114,7 +114,7 @@ public abstract class StyleListLevelLabelAlignmentElement extends OdfElement
 	{
 		TextListTabStopPositionAttribute attr = (TextListTabStopPositionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "list-tab-stop-position" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -141,7 +141,7 @@ public abstract class StyleListLevelLabelAlignmentElement extends OdfElement
 	{
 		FoTextIndentAttribute attr = (FoTextIndentAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "text-indent" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -168,7 +168,7 @@ public abstract class StyleListLevelLabelAlignmentElement extends OdfElement
 	{
 		FoMarginLeftAttribute attr = (FoMarginLeftAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FO), "margin-left" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

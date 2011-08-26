@@ -87,7 +87,7 @@ public abstract class MetaUserDefinedElement extends OdfElement
 	{
 		MetaNameAttribute attr = (MetaNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -114,7 +114,7 @@ public abstract class MetaUserDefinedElement extends OdfElement
 	{
 		MetaValueTypeAttribute attr = (MetaValueTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.META), "value-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

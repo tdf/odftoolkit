@@ -119,7 +119,7 @@ public abstract class DbKeyElement extends OdfElement
 	{
 		DbNameAttribute attr = (DbNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -146,7 +146,7 @@ public abstract class DbKeyElement extends OdfElement
 	{
 		DbTypeAttribute attr = (DbTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -173,7 +173,7 @@ public abstract class DbKeyElement extends OdfElement
 	{
 		DbReferencedTableNameAttribute attr = (DbReferencedTableNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "referenced-table-name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -200,7 +200,7 @@ public abstract class DbKeyElement extends OdfElement
 	{
 		DbUpdateRuleAttribute attr = (DbUpdateRuleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "update-rule" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DbUpdateRuleAttribute.DEFAULT_VALUE;
 	}
@@ -227,7 +227,7 @@ public abstract class DbKeyElement extends OdfElement
 	{
 		DbDeleteRuleAttribute attr = (DbDeleteRuleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "delete-rule" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return DbDeleteRuleAttribute.DEFAULT_VALUE;
 	}

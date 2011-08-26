@@ -77,7 +77,7 @@ public abstract class TableIterationElement extends OdfElement
 	{
 		TableStatusAttribute attr = (TableStatusAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "status" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TableStatusAttribute.DEFAULT_VALUE;
 	}
@@ -104,7 +104,7 @@ public abstract class TableIterationElement extends OdfElement
 	{
 		TableStepsAttribute attr = (TableStepsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "steps" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return Integer.valueOf( TableStepsAttribute.DEFAULT_VALUE );
 	}
@@ -131,7 +131,7 @@ public abstract class TableIterationElement extends OdfElement
 	{
 		TableMaximumDifferenceAttribute attr = (TableMaximumDifferenceAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "maximum-difference" ) );
 		if( attr != null ){
-		 	return Double.valueOf( attr.getDoubleValue() );
+			return Double.valueOf( attr.doubleValue() );
 		}
 		return Double.valueOf( TableMaximumDifferenceAttribute.DEFAULT_VALUE );
 	}

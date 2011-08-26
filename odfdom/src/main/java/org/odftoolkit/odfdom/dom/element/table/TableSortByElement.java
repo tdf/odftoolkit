@@ -86,7 +86,7 @@ public abstract class TableSortByElement extends OdfElement
 	{
 		TableFieldNumberAttribute attr = (TableFieldNumberAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "field-number" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -113,7 +113,7 @@ public abstract class TableSortByElement extends OdfElement
 	{
 		TableDataTypeAttribute attr = (TableDataTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -140,7 +140,7 @@ public abstract class TableSortByElement extends OdfElement
 	{
 		TableOrderAttribute attr = (TableOrderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "order" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return TableOrderAttribute.DEFAULT_VALUE;
 	}

@@ -75,7 +75,7 @@ public abstract class TextTrackedChangesElement extends OdfElement
 	{
 		TextTrackChangesAttribute attr = (TextTrackChangesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TEXT), "track-changes" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TextTrackChangesAttribute.DEFAULT_VALUE );
 	}

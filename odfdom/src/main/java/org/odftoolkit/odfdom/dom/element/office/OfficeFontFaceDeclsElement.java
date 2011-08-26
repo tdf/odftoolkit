@@ -34,7 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 
 import org.odftoolkit.odfdom.dom.element.style.StyleFontFaceElement;
-import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:font-face-decls}.

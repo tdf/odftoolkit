@@ -94,7 +94,7 @@ public abstract class TableScenarioElement extends OdfElement
 	{
 		TableScenarioRangesAttribute attr = (TableScenarioRangesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "scenario-ranges" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -121,7 +121,7 @@ public abstract class TableScenarioElement extends OdfElement
 	{
 		TableIsActiveAttribute attr = (TableIsActiveAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "is-active" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}
@@ -148,7 +148,7 @@ public abstract class TableScenarioElement extends OdfElement
 	{
 		TableDisplayBorderAttribute attr = (TableDisplayBorderAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "display-border" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableDisplayBorderAttribute.DEFAULT_VALUE );
 	}
@@ -175,7 +175,7 @@ public abstract class TableScenarioElement extends OdfElement
 	{
 		TableBorderColorAttribute attr = (TableBorderColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "border-color" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -202,7 +202,7 @@ public abstract class TableScenarioElement extends OdfElement
 	{
 		TableCopyBackAttribute attr = (TableCopyBackAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "copy-back" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableCopyBackAttribute.DEFAULT_VALUE );
 	}
@@ -229,7 +229,7 @@ public abstract class TableScenarioElement extends OdfElement
 	{
 		TableCopyStylesAttribute attr = (TableCopyStylesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "copy-styles" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableCopyStylesAttribute.DEFAULT_VALUE );
 	}
@@ -256,7 +256,7 @@ public abstract class TableScenarioElement extends OdfElement
 	{
 		TableCopyFormulasAttribute attr = (TableCopyFormulasAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "copy-formulas" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableCopyFormulasAttribute.DEFAULT_VALUE );
 	}
@@ -283,7 +283,7 @@ public abstract class TableScenarioElement extends OdfElement
 	{
 		TableCommentAttribute attr = (TableCommentAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "comment" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -310,7 +310,7 @@ public abstract class TableScenarioElement extends OdfElement
 	{
 		TableProtectedAttribute attr = (TableProtectedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "protected" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return null;
 	}

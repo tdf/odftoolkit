@@ -79,7 +79,7 @@ public abstract class NumberFractionElement extends OdfElement
 	{
 		NumberMinNumeratorDigitsAttribute attr = (NumberMinNumeratorDigitsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "min-numerator-digits" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -106,7 +106,7 @@ public abstract class NumberFractionElement extends OdfElement
 	{
 		NumberMinDenominatorDigitsAttribute attr = (NumberMinDenominatorDigitsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "min-denominator-digits" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -133,7 +133,7 @@ public abstract class NumberFractionElement extends OdfElement
 	{
 		NumberDenominatorValueAttribute attr = (NumberDenominatorValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "denominator-value" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -160,7 +160,7 @@ public abstract class NumberFractionElement extends OdfElement
 	{
 		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "min-integer-digits" ) );
 		if( attr != null ){
-		 	return Integer.valueOf( attr.getIntValue() );
+			return Integer.valueOf( attr.intValue() );
 		}
 		return null;
 	}
@@ -187,7 +187,7 @@ public abstract class NumberFractionElement extends OdfElement
 	{
 		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.NUMBER), "grouping" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( NumberGroupingAttribute.DEFAULT_VALUE );
 	}

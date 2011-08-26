@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'scriptCode'
+ * This class represents the in OpenDocument format used data type {@odf.datatype scriptCode}
  */
 public class ScriptCode implements OdfDataType {
 
@@ -74,11 +74,11 @@ public class ScriptCode implements OdfDataType {
     }
 
     /**
-     * check if the specified String instance is a valid ScriptCode data type
+     * check if the specified String instance is a valid {@odf.datatype scriptCode} data type
      *
      * @param stringValue
      *            the value to be tested
-     * @return true if the value of argument is valid for ScriptCode data type
+     * @return true if the value of argument is valid for {@odf.datatype scriptCode} data type
      *         false otherwise
      */
     public static boolean isValid(String stringValue) {

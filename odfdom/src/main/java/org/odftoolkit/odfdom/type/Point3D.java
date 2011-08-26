@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'point3D'
+ * This class represents the in OpenDocument format used data type {@odf.datatype point3D}
  */
 public class Point3D implements OdfDataType {
 
@@ -67,11 +67,11 @@ public class Point3D implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String instance is a valid Point3D data type
+	 * check if the specified String instance is a valid {@odf.datatype point3D} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for Point3D data type
+	 * @return true if the value of argument is valid for {@odf.datatype point3D} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

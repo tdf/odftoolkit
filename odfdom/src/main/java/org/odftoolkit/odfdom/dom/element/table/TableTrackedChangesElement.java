@@ -34,10 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTrackChangesAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.table.TableIdAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableIdAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TablePositionAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:tracked-changes}.
@@ -79,7 +75,7 @@ public abstract class TableTrackedChangesElement extends OdfElement
 	{
 		TableTrackChangesAttribute attr = (TableTrackChangesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "track-changes" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( TableTrackChangesAttribute.DEFAULT_VALUE );
 	}

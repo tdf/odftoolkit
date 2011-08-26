@@ -33,12 +33,6 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeDateValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeTimeValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeBooleanValueAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:user-field-decls}.

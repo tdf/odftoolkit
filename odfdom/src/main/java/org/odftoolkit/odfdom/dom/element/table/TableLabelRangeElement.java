@@ -90,7 +90,7 @@ public abstract class TableLabelRangeElement extends OdfElement
 	{
 		TableLabelCellRangeAddressAttribute attr = (TableLabelCellRangeAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "label-cell-range-address" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -117,7 +117,7 @@ public abstract class TableLabelRangeElement extends OdfElement
 	{
 		TableDataCellRangeAddressAttribute attr = (TableDataCellRangeAddressAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "data-cell-range-address" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -144,7 +144,7 @@ public abstract class TableLabelRangeElement extends OdfElement
 	{
 		TableOrientationAttribute attr = (TableOrientationAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.TABLE), "orientation" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

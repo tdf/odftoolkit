@@ -78,7 +78,7 @@ public abstract class FormOptionElement extends OdfElement
 	{
 		FormCurrentSelectedAttribute attr = (FormCurrentSelectedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "current-selected" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( FormCurrentSelectedAttribute.DEFAULT_VALUE );
 	}
@@ -105,7 +105,7 @@ public abstract class FormOptionElement extends OdfElement
 	{
 		FormSelectedAttribute attr = (FormSelectedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "selected" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( FormSelectedAttribute.DEFAULT_VALUE );
 	}
@@ -132,7 +132,7 @@ public abstract class FormOptionElement extends OdfElement
 	{
 		FormLabelAttribute attr = (FormLabelAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "label" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -159,7 +159,7 @@ public abstract class FormOptionElement extends OdfElement
 	{
 		FormValueAttribute attr = (FormValueAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.FORM), "value" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

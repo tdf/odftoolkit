@@ -25,7 +25,7 @@ package org.odftoolkit.odfdom.type;
 import java.util.logging.Logger;
 
 /**
- * This class represents the in OpenDocument format used data type 'length'
+ * This class represents the in OpenDocument format used data type {@odf.datatype length}
  */
 public class Length implements OdfDataType {
 
@@ -84,11 +84,11 @@ public class Length implements OdfDataType {
 	}
 
 	/**
-	 * Check if the specified String instance is a valid Length data type
+	 * Check if the specified String instance is a valid {@odf.datatype length} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for Length data type false
+	 * @return true if the value of argument is valid for {@odf.datatype length} data type false
 	 *         otherwise
 	 */
 	public static boolean isValid(String stringValue) {

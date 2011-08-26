@@ -23,7 +23,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'coordinate'
+ * This class represents the in OpenDocument format used data type {@odf.datatype coordinate}
  */
 public class Coordinate extends Length {
 

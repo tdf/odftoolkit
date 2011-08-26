@@ -34,8 +34,6 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.style.StyleNumFormatAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextLevelAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:outline-style}.
@@ -85,7 +83,7 @@ public abstract class TextOutlineStyleElement extends OdfElement
 	{
 		StyleNameAttribute attr = (StyleNameAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.STYLE), "name" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

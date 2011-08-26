@@ -40,8 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationDelayAttribu
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationStartScaleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationPathIdAttribute;
 
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element presentation:show-text}.
@@ -92,7 +90,7 @@ public abstract class PresentationShowTextElement extends OdfElement
 	{
 		DrawShapeIdAttribute attr = (DrawShapeIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "shape-id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -119,7 +117,7 @@ public abstract class PresentationShowTextElement extends OdfElement
 	{
 		PresentationEffectAttribute attr = (PresentationEffectAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "effect" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return PresentationEffectAttribute.DEFAULT_VALUE;
 	}
@@ -146,7 +144,7 @@ public abstract class PresentationShowTextElement extends OdfElement
 	{
 		PresentationDirectionAttribute attr = (PresentationDirectionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "direction" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return PresentationDirectionAttribute.DEFAULT_VALUE;
 	}
@@ -173,7 +171,7 @@ public abstract class PresentationShowTextElement extends OdfElement
 	{
 		PresentationSpeedAttribute attr = (PresentationSpeedAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "speed" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return PresentationSpeedAttribute.DEFAULT_VALUE;
 	}
@@ -200,7 +198,7 @@ public abstract class PresentationShowTextElement extends OdfElement
 	{
 		PresentationDelayAttribute attr = (PresentationDelayAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "delay" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -227,7 +225,7 @@ public abstract class PresentationShowTextElement extends OdfElement
 	{
 		PresentationStartScaleAttribute attr = (PresentationStartScaleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "start-scale" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return PresentationStartScaleAttribute.DEFAULT_VALUE;
 	}
@@ -254,7 +252,7 @@ public abstract class PresentationShowTextElement extends OdfElement
 	{
 		PresentationPathIdAttribute attr = (PresentationPathIdAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.PRESENTATION), "path-id" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}

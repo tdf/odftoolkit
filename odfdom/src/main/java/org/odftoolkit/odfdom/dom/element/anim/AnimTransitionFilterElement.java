@@ -110,7 +110,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilTargetElementAttribute attr = (SmilTargetElementAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "targetElement" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -137,7 +137,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		AnimSubItemAttribute attr = (AnimSubItemAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "sub-item" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -164,7 +164,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilAccumulateAttribute attr = (SmilAccumulateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "accumulate" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -191,7 +191,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilAdditiveAttribute attr = (SmilAdditiveAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "additive" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -218,7 +218,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilValuesAttribute attr = (SmilValuesAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "values" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -245,7 +245,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		AnimFormulaAttribute attr = (AnimFormulaAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.ANIM), "formula" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -272,7 +272,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilToAttribute attr = (SmilToAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "to" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -299,7 +299,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilFromAttribute attr = (SmilFromAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "from" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -326,7 +326,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilByAttribute attr = (SmilByAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "by" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -353,7 +353,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilCalcModeAttribute attr = (SmilCalcModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "calcMode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -380,7 +380,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilTypeAttribute attr = (SmilTypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "type" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -407,7 +407,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilSubtypeAttribute attr = (SmilSubtypeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "subtype" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -434,7 +434,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilDirectionAttribute attr = (SmilDirectionAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "direction" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return SmilDirectionAttribute.DEFAULT_VALUE;
 	}
@@ -461,7 +461,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilFadeColorAttribute attr = (SmilFadeColorAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "fadeColor" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -488,7 +488,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilModeAttribute attr = (SmilModeAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "mode" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return SmilModeAttribute.DEFAULT_VALUE;
 	}
@@ -515,7 +515,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilBeginAttribute attr = (SmilBeginAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "begin" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -542,7 +542,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilEndAttribute attr = (SmilEndAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "end" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -569,7 +569,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilDurAttribute attr = (SmilDurAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "dur" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -596,7 +596,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilRepeatDurAttribute attr = (SmilRepeatDurAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "repeatDur" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -623,7 +623,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilRepeatCountAttribute attr = (SmilRepeatCountAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "repeatCount" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -650,7 +650,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilRestartAttribute attr = (SmilRestartAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "restart" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return SmilRestartAttribute.DEFAULT_VALUE;
 	}
@@ -677,7 +677,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilRestartDefaultAttribute attr = (SmilRestartDefaultAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "restartDefault" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return SmilRestartDefaultAttribute.DEFAULT_VALUE;
 	}
@@ -704,7 +704,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilFillAttribute attr = (SmilFillAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "fill" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -731,7 +731,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilFillDefaultAttribute attr = (SmilFillDefaultAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "fillDefault" ) );
 		if( attr != null ){
-		 	return String.valueOf( attr.getValue() );
+			return String.valueOf( attr.getValue() );
 		}
 		return null;
 	}
@@ -758,7 +758,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilAccelerateAttribute attr = (SmilAccelerateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "accelerate" ) );
 		if( attr != null ){
-		 	return Double.valueOf( attr.getDoubleValue() );
+			return Double.valueOf( attr.doubleValue() );
 		}
 		return Double.valueOf( SmilAccelerateAttribute.DEFAULT_VALUE );
 	}
@@ -785,7 +785,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilDecelerateAttribute attr = (SmilDecelerateAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "decelerate" ) );
 		if( attr != null ){
-		 	return Double.valueOf( attr.getDoubleValue() );
+			return Double.valueOf( attr.doubleValue() );
 		}
 		return Double.valueOf( SmilDecelerateAttribute.DEFAULT_VALUE );
 	}
@@ -812,7 +812,7 @@ public abstract class AnimTransitionFilterElement extends OdfElement
 	{
 		SmilAutoReverseAttribute attr = (SmilAutoReverseAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.SMIL), "autoReverse" ) );
 		if( attr != null ){
-		 	return Boolean.valueOf( attr.getBooleanValue() );
+			return Boolean.valueOf( attr.booleanValue() );
 		}
 		return Boolean.valueOf( SmilAutoReverseAttribute.DEFAULT_VALUE );
 	}

@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- * This class represents the in OpenDocument format used data type 'styleNameRef'
+ * This class represents the in OpenDocument format used data type {@odf.datatype styleNameRef}
  */
 public class StyleNameRef implements OdfDataType {
 
@@ -77,11 +77,11 @@ public class StyleNameRef implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String is a valid StyleNameRef data type
+	 * check if the specified String is a valid {@odf.datatype styleNameRef} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for StyleNameRef data type
+	 * @return true if the value of argument is valid for {@odf.datatype styleNameRef} data type
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

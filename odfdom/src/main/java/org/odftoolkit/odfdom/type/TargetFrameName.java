@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 /**
- *This class represents the in OpenDocument format used data type 'targetFrameName'
+ *This class represents the in OpenDocument format used data type {@odf.datatype targetFrameName}
  * 
  */
 public enum TargetFrameName implements OdfDataType {
@@ -72,11 +72,11 @@ public enum TargetFrameName implements OdfDataType {
 	}
 
 	/**
-	 * check if the specified String is a valid TargetFrameName data type
+	 * check if the specified String is a valid {@odf.datatype targetFrameName} data type
 	 *
 	 * @param stringValue
 	 *            the value to be tested
-	 * @return true if the value of argument is valid for TargetFrameName data
+	 * @return true if the value of argument is valid for {@odf.datatype targetFrameName} data
 	 *         type false otherwise
 	 */
 	public static boolean isValid(String stringValue) {

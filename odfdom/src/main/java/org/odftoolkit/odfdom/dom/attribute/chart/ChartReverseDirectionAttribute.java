@@ -77,7 +77,7 @@ public class ChartReverseDirectionAttribute extends OdfAttribute {
 	/**
 	 * @return Returns the <code>boolean</code> value of the attribute
 	 */
-	public boolean getBooleanValue(){
+	public boolean booleanValue(){
 		String value = super.getValue();
 		try {
 			return Boolean.parseBoolean(value);
@@ -126,7 +126,7 @@ public class ChartReverseDirectionAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if chart:reverse-direction has an element parent 
+	 * @return <code>true</code> if {@odf.attribute chart:reverse-direction} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

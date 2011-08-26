@@ -107,7 +107,7 @@ public class TextCustom2Attribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
-	 * @return <code>true</code> if text:custom2 has an element parent 
+	 * @return <code>true</code> if {@odf.attribute text:custom2} has an element parent 
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override
