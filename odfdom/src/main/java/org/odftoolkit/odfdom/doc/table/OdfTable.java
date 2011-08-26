@@ -896,7 +896,19 @@ public class OdfTable {
 		if (positonElement.getParentNode() instanceof TableTableHeaderRowsElement) {
 			positonElement = (OdfElement) positonElement.getParentNode();
 		}
+		
+		//Moved before column elements inserted
+		//insert cells firstly
+		//Or else, wrong column number will be gotten in updateCellRepository, which will cause a NPE.
+		//insertCellBefore()->splitRepeatedRows()->updateRowRepository()->updateCellRepository() 
+		List<OdfTableRow> rowList = getRowList();
+		for (int i = 0; i < rowList.size();) {
+			OdfTableRow row1 = rowList.get(i);
+			row1.insertCellBefore(row1.getCellByIndex(columnCount - 1), null);
+			i = i + row1.getRowsRepeatedNumber();
+		}		
 
+		//insert columns secondly
 		if (columnList.size() == 0) //no column, create a new column
 		{
 			OdfStyle columnStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableColumn);
@@ -915,13 +927,6 @@ public class OdfTable {
 			mTableElement.insertBefore(newColumn, positonElement);
 		}
 
-		//insert cells
-		List<OdfTableRow> rowList = getRowList();
-		for (int i = 0; i < rowList.size();) {
-			OdfTableRow row1 = rowList.get(i);
-			row1.insertCellBefore(row1.getCellByIndex(columnCount - 1), null);
-			i = i + row1.getRowsRepeatedNumber();
-		}
 		return getColumnInstance(newColumn, 0);
 	}
 

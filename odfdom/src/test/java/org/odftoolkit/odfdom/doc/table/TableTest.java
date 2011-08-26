@@ -24,6 +24,8 @@ package org.odftoolkit.odfdom.doc.table;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 import org.w3c.dom.Node;
@@ -53,8 +55,8 @@ public class TableTest {
 		try {
 			mOdsDoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(mOdsTestFileName + ".ods"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 	}
 
@@ -63,8 +65,8 @@ public class TableTest {
 			OdfTextDocument odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(name));
 			return odtdoc;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 		return null;
 	}
@@ -85,7 +87,7 @@ public class TableTest {
 
 			document.save(ResourceUtilities.newTestOutputFile("CreateTableCase.odt"));
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -179,7 +181,7 @@ public class TableTest {
 			Assert.assertEquals(rowCount + 1, table1.getRowCount());
 			Assert.assertEquals(columnCount + 1, table1.getColumnCount());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -203,7 +205,7 @@ public class TableTest {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -319,8 +321,8 @@ public class TableTest {
 			tableList = mOdtDoc.getTableList();
 			Assert.assertEquals(count - 1, tableList.size());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 	}
 
@@ -337,8 +339,8 @@ public class TableTest {
 			document.save(ResourceUtilities.newTestOutputFile("TestSetGetWidth.odt"));
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 	}
 
@@ -546,8 +548,7 @@ public class TableTest {
 			Assert.assertEquals("", columns.get(0).getCellByIndex(0).getStringValue());
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
 
@@ -595,8 +596,7 @@ public class TableTest {
 
 			Assert.assertEquals("", rows.get(0).getCellByIndex(0).getStringValue());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -800,7 +800,7 @@ public class TableTest {
 		cell = table.getCellByPosition("K4");
 		Assert.assertNotNull(cell);
 		cell.setBooleanValue(true);
-		Assert.assertEquals(new Boolean(true), cell.getBooleanValue());
+		Assert.assertEquals(Boolean.TRUE, cell.getBooleanValue());
 		cell = table.getCellByPosition("D10");
 		Assert.assertNotNull(cell);
 		Calendar cal = Calendar.getInstance();
@@ -816,6 +816,24 @@ public class TableTest {
 		Assert.assertEquals("stringM15", cell.getStringValue());
 	}
 
+	@Test
+	public void testGetCellWithAutoExtend()
+	{
+		OdfSpreadsheetDocument ods;
+		try {
+			ods = OdfSpreadsheetDocument.newSpreadsheetDocument();
+			OdfTable tbl = ods.getTableByName("Sheet1");
+			tbl.setTableName("Tests");
+			OdfTableCell cell = tbl.getCellByPosition(5, 5);
+			Assert.assertNotNull(cell);
+			Assert.assertEquals(6, tbl.getRowCount());
+			Assert.assertEquals(6, tbl.getColumnCount());
+		} catch (Exception e) {
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+	
 	@Test
 	public void testGetCellRangeByPosition() {
 		testNewTable();
@@ -905,8 +923,8 @@ public class TableTest {
 			saveodt(mOdtTestFileName + "Out.odt");
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 	}
 
@@ -984,8 +1002,7 @@ public class TableTest {
 				Assert.assertEquals(1, value);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 
@@ -994,7 +1011,6 @@ public class TableTest {
 		int count = fTable.getRowCount();
 		fTable.appendRow();
 		int newcount = fTable.getRowCount();
-
 		Assert.assertEquals(count + 1, newcount);
 	}
 
@@ -1002,8 +1018,8 @@ public class TableTest {
 		try {
 			mOdsDoc.save(ResourceUtilities.newTestOutputFile(mOdsTestFileName + "Output.ods"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 	}
 
@@ -1011,8 +1027,8 @@ public class TableTest {
 		try {
 			mOdtDoc.save(ResourceUtilities.newTestOutputFile(filename));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
 		}
 	}
 }
