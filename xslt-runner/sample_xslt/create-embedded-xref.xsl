@@ -183,6 +183,12 @@
                     </xsl:call-template>
                 </xsl:copy>
             </xsl:when>
+            <xsl:when test="starts-with($tag, 'odf:') or starts-with($tag, 'pkg:')">
+                <!-- OWL -->
+                <xsl:copy>
+                    <xsl:apply-templates select="@*|node()"/>
+                </xsl:copy>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="attr-name" select="$tag"/>
                 <xsl:if test="$check-xref-anchors">
