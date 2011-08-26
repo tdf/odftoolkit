@@ -62,7 +62,7 @@
     <!-- 'none': remove hyperlinks -->
     <!-- 'adapt': add relative URI to the documents -->
     <!-- '': do not adapt hyperlinks -->
-    <xsl:param name="toc-hyperlink-mode" select="''"/>
+    <xsl:param name="toc-hyperlink-mode" select="'adapt'"/>
     
     <xsl:variable name="add-attr-elem-xrefs" select="$add-xrefs='true'"/>
     <xsl:variable name="add-text-info" select="$add-xrefs='true'"/>
