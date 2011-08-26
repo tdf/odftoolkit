@@ -41,25 +41,21 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfRestartdefaultType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
 
+;
 
 /**
- * ODF DOM Element implementation for element "&lt;anim:audio>".
+ * ODF DOM Element implementation for element "<anim:audio>".
  */
 public abstract class OdfAudioElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4334090272152937317L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "audio" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "audio" );
 
     public OdfAudioElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

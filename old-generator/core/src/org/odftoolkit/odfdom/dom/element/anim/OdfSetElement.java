@@ -41,25 +41,21 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.smil.OdfAccumulateType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfAdditiveType;
 
+;
 
 /**
- * ODF DOM Element implementation for element "&lt;anim:set>".
+ * ODF DOM Element implementation for element "<anim:set>".
  */
 public abstract class OdfSetElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5744844505233786869L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "set" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "set" );
 
     public OdfSetElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

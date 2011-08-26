@@ -42,25 +42,21 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
- * ODF DOM Element implementation for element "&lt;anim:animateTransform>".
+ * ODF DOM Element implementation for element "<anim:animateTransform>".
  */
 public abstract class OdfAnimatetransformElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5967346968061824345L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "animateTransform" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "animateTransform" );
 
     public OdfAnimatetransformElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

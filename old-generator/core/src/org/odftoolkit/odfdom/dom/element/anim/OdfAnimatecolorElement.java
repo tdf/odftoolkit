@@ -44,6 +44,7 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<anim:animateColor>".

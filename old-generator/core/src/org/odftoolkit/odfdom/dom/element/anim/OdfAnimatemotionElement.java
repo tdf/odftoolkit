@@ -42,25 +42,21 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
- * ODF DOM Element implementation for element "&lt;anim:animateMotion>".
+ * ODF DOM Element implementation for element "<anim:animateMotion>".
  */
 public abstract class OdfAnimatemotionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6923317160295252697L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "animateMotion" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "animateMotion" );
 
     public OdfAnimatemotionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

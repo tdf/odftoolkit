@@ -44,25 +44,21 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfFillType;
 import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
- * ODF DOM Element implementation for element "&lt;anim:transitionFilter>".
+ * ODF DOM Element implementation for element "<anim:transitionFilter>".
  */
 public abstract class OdfTransitionfilterElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6794613989102611711L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "transitionFilter" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "transitionFilter" );
 
     public OdfTransitionfilterElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

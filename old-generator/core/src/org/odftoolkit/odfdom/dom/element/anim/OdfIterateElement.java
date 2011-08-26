@@ -44,25 +44,22 @@ import org.odftoolkit.odfdom.dom.type.smil.OdfFilldefaultType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.smil.OdfEndsyncType;
 
+import org.odftoolkit.odfdom.dom.type.svg.OdfType;
+import org.odftoolkit.odfdom.dom.type.svg.OdfType;
 
 /**
- * ODF DOM Element implementation for element "&lt;anim:iterate>".
+ * ODF DOM Element implementation for element "<anim:iterate>".
  */
 public abstract class OdfIterateElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2388032723455294386L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "iterate" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "iterate" );
 
     public OdfIterateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -528,4 +525,122 @@ public abstract class OdfIterateElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.SMIL, "endsync" ), aStringVal );
     }
 
+    /**
+    * Create child element "anim:animate".
+    */
+    public OdfAnimateElement createAnimateElement(String   _aAttributename)
+    {
+        OdfAnimateElement  _nAnimate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimateElement.class);
+        _nAnimate.setAttributename( _aAttributename);
+        this.appendChild( _nAnimate);
+        return  _nAnimate;      
+    }
+    
+    /**
+    * Create child element "anim:set".
+    */
+    public OdfSetElement createSetElement(String   _aAttributename)
+    {
+        OdfSetElement  _nSet = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSetElement.class);
+        _nSet.setAttributename( _aAttributename);
+        this.appendChild( _nSet);
+        return  _nSet;      
+    }
+    
+    /**
+    * Create child element "anim:animateMotion".
+    */
+    public OdfAnimatemotionElement createAnimatemotionElement(String   _aAttributename)
+    {
+        OdfAnimatemotionElement  _nAnimatemotion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimatemotionElement.class);
+        _nAnimatemotion.setAttributename( _aAttributename);
+        this.appendChild( _nAnimatemotion);
+        return  _nAnimatemotion;      
+    }
+    
+    /**
+    * Create child element "anim:animateColor".
+    */
+    public OdfAnimatecolorElement createAnimatecolorElement(String   _aAttributename)
+    {
+        OdfAnimatecolorElement  _nAnimatecolor = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimatecolorElement.class);
+        _nAnimatecolor.setAttributename( _aAttributename);
+        this.appendChild( _nAnimatecolor);
+        return  _nAnimatecolor;      
+    }
+    
+    /**
+    * Create child element "anim:animateTransform".
+    */
+    public OdfAnimatetransformElement createAnimatetransformElement(String   _aAttributename, OdfType   _aType)
+    {
+        OdfAnimatetransformElement  _nAnimatetransform = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAnimatetransformElement.class);
+        _nAnimatetransform.setAttributename( _aAttributename);
+        _nAnimatetransform.setType( _aType);
+        this.appendChild( _nAnimatetransform);
+        return  _nAnimatetransform;      
+    }
+    
+    /**
+    * Create child element "anim:transitionFilter".
+    */
+    public OdfTransitionfilterElement createTransitionfilterElement(String   _aType)
+    {
+        OdfTransitionfilterElement  _nTransitionfilter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTransitionfilterElement.class);
+        _nTransitionfilter.setType( _aType);
+        this.appendChild( _nTransitionfilter);
+        return  _nTransitionfilter;      
+    }
+    
+    /**
+    * Create child element "anim:par".
+    */
+    public OdfParElement createParElement()
+    {
+        OdfParElement  _nPar = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParElement.class);
+        this.appendChild( _nPar);
+        return  _nPar;
+    }                   
+               
+    /**
+    * Create child element "anim:seq".
+    */
+    public OdfSeqElement createSeqElement()
+    {
+        OdfSeqElement  _nSeq = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSeqElement.class);
+        this.appendChild( _nSeq);
+        return  _nSeq;
+    }                   
+               
+    /**
+    * Create child element "anim:iterate".
+    */
+    public OdfIterateElement createIterateElement()
+    {
+        OdfIterateElement  _nIterate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIterateElement.class);
+        this.appendChild( _nIterate);
+        return  _nIterate;
+    }                   
+               
+    /**
+    * Create child element "anim:audio".
+    */
+    public OdfAudioElement createAudioElement()
+    {
+        OdfAudioElement  _nAudio = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAudioElement.class);
+        this.appendChild( _nAudio);
+        return  _nAudio;
+    }                   
+               
+    /**
+    * Create child element "anim:command".
+    */
+    public OdfCommandElement createCommandElement(String   _aCommand)
+    {
+        OdfCommandElement  _nCommand = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCommandElement.class);
+        _nCommand.setCommand( _aCommand);
+        this.appendChild( _nCommand);
+        return  _nCommand;      
+    }
+    
 }

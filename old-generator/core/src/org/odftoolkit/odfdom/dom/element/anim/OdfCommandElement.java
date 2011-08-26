@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.presentation.OdfNodeType;
 import org.odftoolkit.odfdom.dom.type.presentation.OdfPresetClassType;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
- * ODF DOM Element implementation for element "&lt;anim:command>".
+ * ODF DOM Element implementation for element "<anim:command>".
  */
 public abstract class OdfCommandElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3798509024023860405L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "command" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.ANIM, "command" );
 
     public OdfCommandElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
