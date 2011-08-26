@@ -19,23 +19,24 @@
  * limitations under the License.
  *
  ************************************************************************/
-
 package org.odftoolkit.odfdom.doc;
 
 import java.io.InputStream;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.presentation.OdfPresentationNotes;
+import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.draw.DrawObjectElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
 import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
-import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
-import org.odftoolkit.odfdom.doc.presentation.OdfPresentationNotes;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
@@ -46,6 +47,7 @@ import org.w3c.dom.NodeList;
  */
 public class SlideTest {
 
+	private static final Logger LOG = Logger.getLogger(SlideTest.class.getName());
 	OdfPresentationDocument doc;
 	OdfPresentationDocument doc2;
 	final String TEST_PRESENTATION_FILE_MAIN = "Presentation1.odp";
@@ -54,14 +56,13 @@ public class SlideTest {
 	final String TEST_SLIDE_STYLE_NAME1 = "SlideTest1.odp";
 	final String TEST_SLIDE_STYLE_NAME2 = "SlideTest2.odp";
 	final String TEST_SLIDE_STYLE_NAME3 = "SlideTest3.odp";
-	
+
 	/**
 	 * Initialize the test case.
 	 */
-	public SlideTest(){
-		
+	public SlideTest() {
 	}
-	
+
 	/**
 	 * Test case for get presentation slide, including get the slide count, get
 	 * the slide at the specified position or with the specified name, and get
@@ -86,40 +87,40 @@ public class SlideTest {
 	 * 1)can not catch Exception because it is only used to catch the exception thrown by getContentRoot()
 	 */
 	@Test
-	public void testGetSlide(){
+	public void testGetSlide() {
 		try {
-			doc = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			int slideCount = doc.getSlideCount();
-			Assert.assertTrue( 10 == slideCount);
+			Assert.assertTrue(10 == slideCount);
 			OdfSlide page2 = doc.getSlideByIndex(2);
 			Assert.assertTrue(2 == page2.getSlideIndex());
 			OdfSlide slide3 = doc.getSlideByName("Slide 3");
 			Assert.assertNull(slide3);
 			slide3 = doc.getSlideByName("page3");
 			Assert.assertEquals(page2, slide3);
-			Iterator<OdfSlide> slideIter= doc.getSlides();
+			Iterator<OdfSlide> slideIter = doc.getSlides();
 			int i = 0;
-			while(slideIter.hasNext()){
+			while (slideIter.hasNext()) {
 				OdfSlide slide = slideIter.next();
 				Assert.assertTrue(i == slide.getSlideIndex());
-				String name = "page" + (i + 1);  
+				String name = "page" + (i + 1);
 				Assert.assertTrue(name.equals(slide.getSlideName()));
 				i++;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
-		
+
 		OdfSlide slidesNoName = doc.getSlideByName(null);
 		Assert.assertNull(slidesNoName);
 		OdfSlide nullSlide = doc.getSlideByIndex(20);
 		Assert.assertNull(nullSlide);
 		nullSlide = doc.getSlideByIndex(-1);
 		Assert.assertNull(nullSlide);
-		
+
 	}
-	
+
 	/**
 	 * Test case for get/set slide name to make sure the name is unique in the whole presentation document.
 	 * If the loaded presentation document is not valid that contain the same slide name,
@@ -135,48 +136,48 @@ public class SlideTest {
 	 * 3)Using OdfDrawPage.setSlideName() to give the slide 1 with the new name.
 	 */
 	@Test
-	public void testSlideName(){
+	public void testSlideName() {
 		try {
-			doc = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			OfficePresentationElement contentRoot = doc.getContentRoot();
 			NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "page");
-			DrawPageElement slideEle4 = (DrawPageElement)slideNodes.item(4);
+			DrawPageElement slideEle4 = (DrawPageElement) slideNodes.item(4);
 			Assert.assertEquals(slideEle4.getDrawNameAttribute(), "page5");
-			DrawPageElement slideEle8 = (DrawPageElement)slideNodes.item(8);
+			DrawPageElement slideEle8 = (DrawPageElement) slideNodes.item(8);
 			slideEle8.setDrawNameAttribute("page5");
 			OdfSlide slide7 = doc.getSlideByIndex(7);
-			DrawPageElement slideEle7 = (DrawPageElement)slideNodes.item(7);
+			DrawPageElement slideEle7 = (DrawPageElement) slideNodes.item(7);
 			slideEle7.removeAttributeNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "name");
-			
+
 			OdfSlide slide4 = doc.getSlideByIndex(4);
 			Assert.assertTrue(slide4.getSlideName().equals("page5"));
 			OdfSlide slide8 = doc.getSlideByIndex(8);
 			Assert.assertFalse(slide8.getSlideName().equals("page5"));
-			
+
 			Assert.assertTrue(slide7.getSlideName().startsWith("page8"));
 			OdfPresentationNotes note7 = slide7.getNotesPage();
 			note7.addText("This is slide at index" + slide7.getSlideIndex() + " named " + slide7.getSlideName());
-	
+
 			OdfSlide slide1 = doc.getSlideByIndex(1);
 			slide1.setSlideName("haha");
 			slide1.setSlideName("page1");
-			
+
 		} catch (IllegalArgumentException ile) {
 			OdfSlide slide1 = doc.getSlideByIndex(1);
 			Assert.assertTrue("the given name page1 is duplicate with the previous slide", slide1.getSlideName().equals("haha"));
-		}catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
-		
-		try{
-			doc.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX+"SlideName.odp"));
-		}catch (Exception e) {
-			e.printStackTrace();
+
+		try {
+			doc.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX + "SlideName.odp"));
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	/**
 	 * Test case for delete presentation slide, including delete slide at the
 	 * specified position or with the specified name.
@@ -200,9 +201,9 @@ public class SlideTest {
 	 * they will all be removed from the package.
 	 */
 	@Test
-	public void testDeleteSlide(){
+	public void testDeleteSlide() {
 		try {
-			doc = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			OdfSlide slide2 = doc.getSlideByIndex(2);
 			OdfSlide slide3 = doc.getSlideByIndex(3);
 			//this slide contains an embed document, remove this slide will also remove the embed document
@@ -233,29 +234,29 @@ public class SlideTest {
 			Assert.assertNull(imageStream3);
 			//slide at index 2 at doc2 contains one image, but it also referred by other slides
 			//so the image of this slide will not be removed
-			doc2 = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
+			doc2 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
 			nImageCnt = OdfDrawImage.getImageCount(doc2);
 			doc2.deleteSlideByIndex(2);
 			Assert.assertTrue(OdfDrawImage.getImageCount(doc2) == (nImageCnt - 1));
 			imageStream1 = doc2.getPackage().getInputStream(IMAGE_NAME_1);
 			Assert.assertNotNull(imageStream1);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
-		
-		try{
+
+		try {
 			doc.deleteSlideByIndex(20);
 			Assert.assertTrue(false);
-		}catch(IndexOutOfBoundsException iobe){
+		} catch (IndexOutOfBoundsException iobe) {
 			Assert.assertTrue("slide index is out of bounds", true);
 		}
-		
-		try{
-			doc.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX+"Delete.odp"));
-			doc2.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX+"Delete2.odp"));
-		}catch (Exception e) {
-			e.printStackTrace();
+
+		try {
+			doc.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX + "Delete.odp"));
+			doc2.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX + "Delete2.odp"));
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -278,9 +279,9 @@ public class SlideTest {
 	 * and add the placeholder on the slide according to the slide template parameter.
 	 */
 	@Test
-	public void testNewSlide(){
+	public void testNewSlide() {
 		try {
-			doc = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			OdfSlide slide5 = doc.getSlideByIndex(5);
 			OdfSlide newSlide1 = doc.newSlide(2, "Slide 2 new", OdfSlide.SlideLayout.BLANK);
 			Assert.assertTrue(2 == newSlide1.getSlideIndex());
@@ -289,27 +290,27 @@ public class SlideTest {
 			Assert.assertTrue(7 == slide5.getSlideIndex());
 			doc.newSlide(3, OdfSlide.SlideLayout.TITLE_PLUS_TEXT.toString(), OdfSlide.SlideLayout.enumValueOf("title_text"));
 			OdfSlide newSlide4 = doc.newSlide(4, null, OdfSlide.SlideLayout.TITLE_PLUS_2_TEXT_BLOCK);
-			Assert.assertTrue(newSlide4.getOdfElement().getDrawNameAttribute()!=null);
+			Assert.assertTrue(newSlide4.getOdfElement().getDrawNameAttribute() != null);
 			OdfSlide.SlideLayout outlineType = OdfSlide.SlideLayout.TITLE_OUTLINE;
-			doc.newSlide(14,OdfSlide. SlideLayout.toString(outlineType), outlineType);
+			doc.newSlide(14, OdfSlide.SlideLayout.toString(outlineType), outlineType);
 			doc.newSlide(15, "Default", null);
 			int count = doc.getSlideCount();
 			Assert.assertTrue(16 == count);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
-		
-		try{
+
+		try {
 			doc.newSlide(20, "Slide 20 new", OdfSlide.SlideLayout.BLANK);
-		}catch(IndexOutOfBoundsException iobe){
+		} catch (IndexOutOfBoundsException iobe) {
 			Assert.assertTrue("slide index is out of bounds", true);
 		}
-		
-		try{
-			doc.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX+"New.odp"));
-		}catch (Exception e) {
-			e.printStackTrace();
+
+		try {
+			doc.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX + "New.odp"));
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -335,59 +336,59 @@ public class SlideTest {
 	 * the notes page have to change the "draw:page-number" value.
 	 */
 	@Test
-	public void testMoveAndCopySlide(){
+	public void testMoveAndCopySlide() {
 		try {
-			doc = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			OdfSlide lastSlide = doc.getSlideByIndex(9);
 			OdfSlide firstSlide = doc.getSlideByIndex(0);
-			
+
 			OdfSlide copyFirstToLastSlide = doc.copySlide(0, 10, firstSlide.getSlideName() + "(copy)");
-			Assert.assertTrue(10 ==  copyFirstToLastSlide.getSlideIndex());
-			
+			Assert.assertTrue(10 == copyFirstToLastSlide.getSlideIndex());
+
 			OdfSlide copyLastToFirstSlide = doc.copySlide(9, 0, lastSlide.getSlideName() + "(copy)");
-			Assert.assertTrue(0 ==  copyLastToFirstSlide.getSlideIndex());
-			
+			Assert.assertTrue(0 == copyLastToFirstSlide.getSlideIndex());
+
 			doc.moveSlide(11, 0);
 			doc.moveSlide(1, 12);
 			Assert.assertTrue(1 == firstSlide.getSlideIndex());
 			Assert.assertTrue(10 == lastSlide.getSlideIndex());
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
-		
-		try{
+
+		try {
 			doc.moveSlide(20, 0);
-		}catch(IndexOutOfBoundsException iobe){
+		} catch (IndexOutOfBoundsException iobe) {
 			Assert.assertTrue("slide index is out of bounds", true);
 		}
-		
-		try{
+
+		try {
 			doc.moveSlide(-1, 0);
-		}catch(IndexOutOfBoundsException iobe){
+		} catch (IndexOutOfBoundsException iobe) {
 			Assert.assertTrue("slide index is out of bounds", true);
 		}
-		
-		try{
+
+		try {
 			doc.copySlide(20, 0, "outofbounds");
-		}catch(IndexOutOfBoundsException iobe){
+		} catch (IndexOutOfBoundsException iobe) {
 			Assert.assertTrue("slide index is out of bounds", true);
 		}
-		
-		try{
+
+		try {
 			doc.copySlide(-1, 0, "outofbounds");
-		}catch(IndexOutOfBoundsException iobe){
+		} catch (IndexOutOfBoundsException iobe) {
 			Assert.assertTrue("slide index is out of bounds", true);
 		}
-		
-		try{
-			doc.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX+"MoveAndCopy.odp"));
-		}catch (Exception e) {
-			e.printStackTrace();
+
+		try {
+			doc.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX + "MoveAndCopy.odp"));
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	/**
 	 * Test case for copy a slide which comes from the other presentation
 	 * to the specified position of the current presentation.
@@ -412,11 +413,11 @@ public class SlideTest {
 	 * the name definition element and reference element must be renamed then insert to the dest document.
 	 */
 	@Test
-	public void testCopyForeignSlide(){
+	public void testCopyForeignSlide() {
 		try {
-			doc = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
-			doc2 = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
-		
+			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc2 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
+
 			// copy slide at index 2 of doc to the index 2 of doc2
 			int nEmbedDoc = doc2.getEmbeddedDocuments().size();
 			String embedDocName = "Object 3/";
@@ -439,25 +440,25 @@ public class SlideTest {
 			Assert.assertNotNull(doc2.getPackage().getFileEntry(BULLET_IMAGE_NAME));
 			Assert.assertFalse(newPage1.getSlideName().equals(newPage2.getSlideName()));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
-		try{
+		try {
 			doc2.copyForeignSlide(200, doc, 0);
-		}catch(IndexOutOfBoundsException iobe){
+		} catch (IndexOutOfBoundsException iobe) {
 			Assert.assertTrue("slide index is out of bounds", true);
 		}
-		
-		try{
+
+		try {
 			doc2.copyForeignSlide(-1, doc, 0);
-		}catch(IndexOutOfBoundsException iobe){
+		} catch (IndexOutOfBoundsException iobe) {
 			Assert.assertTrue("slide index is out of bounds", true);
 		}
-		
-		try{
-			doc2.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX+"CopyForeignSlide2.odp"));
-		}catch (Exception e) {
-			e.printStackTrace();
+
+		try {
+			doc2.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX + "CopyForeignSlide2.odp"));
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -480,10 +481,10 @@ public class SlideTest {
 	 * because compare the odf element content and the image stream might cost much time.
 	 */
 	@Test
-	public void testAppendPresentation(){
+	public void testAppendPresentation() {
 		try {
-			doc = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
-			doc2 = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
+			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc2 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
 			int slideCount = doc.getSlideCount();
 			int slideCount2 = doc2.getSlideCount();
 			//doc, doc2 both have the embed document named "Object 2"
@@ -501,35 +502,36 @@ public class SlideTest {
 			DrawPageElement slideEle = slide.getOdfElement();
 			NodeList objectList = slideEle.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfNamespaceNames.DRAW).toString(), "object");
 			Assert.assertTrue(objectList.getLength() == 2);
-			DrawObjectElement object1 = (DrawObjectElement)objectList.item(0);
+			DrawObjectElement object1 = (DrawObjectElement) objectList.item(0);
 			String linkPath = object1.getXlinkHrefAttribute();
 			Assert.assertTrue(linkPath.startsWith("./Object 2") && !linkPath.equals("./Object 2"));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
-		
-		try{
-			doc2.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX+"Merge2.odp"));
-		}catch (Exception e) {
-			e.printStackTrace();
+
+		try {
+			doc2.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX + "Merge2.odp"));
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	@Test
-	public void testAnotherMergeDoc(){
+	public void testAnotherMergeDoc() {
 		try {
-			doc = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
-			doc2 = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
+			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc2 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
 			doc.appendPresentation(doc2);
 			Assert.assertTrue(doc.getSlideCount() == 110);
-			doc.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX+"Merge1.odp"));
+			doc.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX + "Merge1.odp"));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
+
 	/**
 	 * Test case for merge the three presentation document
 	 * <p>
@@ -541,14 +543,14 @@ public class SlideTest {
 	 * This test case is used to show that the style name can be renamed if they define the different style.
 	 */
 	@Test
-	public void testCopyThreeDoc(){
+	public void testCopyThreeDoc() {
 		try {
 			//testdoc1 contain "dp1" for draw page style
-			OdfPresentationDocument testdoc1 = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_SLIDE_STYLE_NAME1));
+			OdfPresentationDocument testdoc1 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_SLIDE_STYLE_NAME1));
 			//testdoc1 contain "dp1" for draw page style
-			OdfPresentationDocument testdoc2 = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_SLIDE_STYLE_NAME2));
+			OdfPresentationDocument testdoc2 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_SLIDE_STYLE_NAME2));
 			//testdoc1 contain "dp1" for draw page style
-			OdfPresentationDocument testdoc3 = (OdfPresentationDocument)OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_SLIDE_STYLE_NAME3));
+			OdfPresentationDocument testdoc3 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_SLIDE_STYLE_NAME3));
 			testdoc1.copyForeignSlide(1, testdoc2, 0);
 			testdoc1.copyForeignSlide(2, testdoc3, 0);
 			//after copy foreign slide, the each slide should has its own draw page style
@@ -558,14 +560,14 @@ public class SlideTest {
 			String slideStyle1 = slide1.getDrawStyleNameAttribute();
 			String slideStyle2 = slide2.getDrawStyleNameAttribute();
 			String slideStyle3 = slide3.getDrawStyleNameAttribute();
-			System.out.println(slideStyle1);
-			System.out.println(slideStyle2);
-			System.out.println(slideStyle3);
+			LOG.info(slideStyle1);
+			LOG.info(slideStyle2);
+			LOG.info(slideStyle3);
 			Assert.assertNotSame(slideStyle1, slideStyle2);
 			Assert.assertNotSame(slideStyle2, slideStyle3);
-			testdoc1.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX+"CopyThreeDoc.odp"));
+			testdoc1.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX + "CopyThreeDoc.odp"));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}

@@ -21,6 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfElement;
@@ -59,7 +62,7 @@ public class ListTest {
                 Assert.assertEquals(lvl1, lvl2);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+        	Logger.getLogger(ListTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
     }

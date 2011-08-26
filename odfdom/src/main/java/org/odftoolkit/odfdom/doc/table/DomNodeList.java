@@ -23,6 +23,7 @@
 package org.odftoolkit.odfdom.doc.table;
 
 import java.util.AbstractList;
+
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 

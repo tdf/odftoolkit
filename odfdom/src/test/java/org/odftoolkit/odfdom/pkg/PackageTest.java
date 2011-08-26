@@ -217,7 +217,7 @@ public class PackageTest {
 				Assert.fail(errorMsg);
 			}
 		} catch (Throwable t) {
-			t.printStackTrace();
+			Logger.getLogger(PackageTest.class.getName()).log(Level.SEVERE, t.getMessage(), t);
 			Assert.fail();
 		}
 

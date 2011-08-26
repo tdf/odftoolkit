@@ -21,6 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
@@ -73,7 +76,7 @@ public class DefaultStylesTest {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(DefaultStylesTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
 

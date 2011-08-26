@@ -21,6 +21,7 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.util.Iterator;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.xpath.XPath;
@@ -30,7 +31,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
+import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationClassAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFillImageElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawGradientElement;
@@ -38,7 +39,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawHatchElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawMarkerElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
@@ -58,7 +59,7 @@ public class PresentationTest {
 		try {
 			odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("presentation.odp"));
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -81,7 +82,7 @@ public class PresentationTest {
 			Assert.assertEquals(page, odpdoc.getSlideByIndex(2));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -111,7 +112,7 @@ public class PresentationTest {
 			// test layerset
 			Assert.assertNotNull(officeMasterStyles.getLayerSet());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -143,7 +144,7 @@ public class PresentationTest {
 			Assert.assertNotNull(style_iter);
 			Assert.assertTrue(style_iter.hasNext());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -169,7 +170,7 @@ public class PresentationTest {
 			f.setPresentationClassAttribute(PresentationClassAttribute.Value.GRAPHIC.toString());
 			Logger.getLogger(DocumentCreationTest.class.getName()).info(f.getPresentationClassAttribute());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -194,7 +195,7 @@ public class PresentationTest {
 //			elementsWithStyleCount = elementsWithStyle.getLength();
 //			Assert.assertTrue("Last part of bug51 still to be fixed..!!", styleUserCount == elementsWithStyleCount);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}

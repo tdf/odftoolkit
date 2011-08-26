@@ -22,6 +22,9 @@
 
 package org.odftoolkit.odfdom.doc.text;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -41,6 +44,7 @@ import org.w3c.dom.Node;
  * @author J David Eisenberg
  */
 public class OdfListTest {
+	private static final Logger LOG = Logger.getLogger(OdfListTest.class.getName());
     OdfTextDocument doc;
 	OdfFileDom dom;
 	OdfOfficeAutomaticStyles documentStyles;
@@ -101,7 +105,7 @@ public class OdfListTest {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+        	LOG.log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
     }
@@ -116,7 +120,7 @@ public class OdfListTest {
 	 */
 	@Test
 	public void testOdfList() {
-		System.out.println("odfList constructor");
+		LOG.info("odfList constructor");
 		String styleName = "lstyle";
 
 		OdfTextList instance = new OdfTextList(dom,

@@ -22,7 +22,11 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.xml.xpath.XPath;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
@@ -84,7 +88,7 @@ public class NamespaceTest {
             Assert.assertTrue(resElement2 != null);
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+        	Logger.getLogger(NamespaceTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
         }
     }

@@ -21,6 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
@@ -51,7 +54,7 @@ public class ElementTest {
             Assert.assertNotNull(p1clone);
             Assert.assertEquals(p1clone.getProperty(StyleTextPropertiesElement.FontSize), p1.getProperty(StyleTextPropertiesElement.FontSize));
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(ElementTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
         }
     }
@@ -80,7 +83,7 @@ public class ElementTest {
             Assert.assertFalse(p1.equals(null));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(ElementTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
         }
     }

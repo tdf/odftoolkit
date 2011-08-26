@@ -23,6 +23,8 @@ package org.odftoolkit.odfdom.incubator.search;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -71,7 +73,7 @@ public class TextSelectionTest {
 			doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
 			contentDOM = doc.getContentDom();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -120,7 +122,7 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_DELETE));
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -161,7 +163,7 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_COPYTO));
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 
@@ -202,7 +204,7 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_COPYTO1));
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 
@@ -238,7 +240,7 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_STYLE));
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -293,7 +295,7 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_REPLACE));
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -308,7 +310,7 @@ public class TextSelectionTest {
 		search = new TextNavigation("^delete", doc);
 		while (search.hasNext()) {
 			TextSelection item = (TextSelection) search.getCurrentItem();
-			// System.out.println(item);
+			// LOG.info(item);
 			try {
 				item.addHref(new URL("http://www.ibm.com"));
 			} catch (InvalidNavigationException e) {
@@ -322,7 +324,7 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_HREF));
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 
@@ -351,7 +353,7 @@ public class TextSelectionTest {
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_DELETE_PATTERN));
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}

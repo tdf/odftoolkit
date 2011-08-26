@@ -22,18 +22,21 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.doc.table.OdfTableCell;
 import org.odftoolkit.odfdom.doc.table.OdfTableRow;
-import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -67,7 +70,7 @@ public class TableTest {
 			}
 			Assert.assertTrue(tscount > 0);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -89,7 +92,7 @@ public class TableTest {
 				Assert.assertTrue(table == OdfTableCell.getInstance(td).getTable());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}

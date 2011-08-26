@@ -22,6 +22,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.number;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -45,7 +48,7 @@ import org.w3c.dom.NodeList;
 public class OdfCurrencyStyleTest {
 	OdfSpreadsheetDocument doc;
 	OdfFileDom dom;
-
+	private static final Logger LOG = Logger.getLogger(OdfCurrencyStyleTest.class.getName());
     public OdfCurrencyStyleTest() {
     }
 
@@ -66,7 +69,7 @@ public class OdfCurrencyStyleTest {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+        	LOG.log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
     }
@@ -113,7 +116,7 @@ public class OdfCurrencyStyleTest {
 			{"tcr", "n12T", "t ", "c$", "tUS"} //cr#,##0.00 $US
 		};
 
-		System.out.println("buildFromFormat");
+		LOG.info("buildFromFormat");
 		OdfNumberCurrencyStyle instance = null;
 		Node node;
 		char expectedType;
@@ -121,7 +124,7 @@ public class OdfCurrencyStyleTest {
 
 		for (int i = 0; i < formatTest.length; i++)
 		{
-			System.out.println("Currency format: " + formatTest[i]);
+			LOG.info("Currency format: " + formatTest[i]);
 			instance = new OdfNumberCurrencyStyle(dom,
 				currencySymbol[i], formatTest[i], "fstyle");
 			Assert.assertNotNull(instance);
@@ -226,7 +229,7 @@ public class OdfCurrencyStyleTest {
 	 */
 	@Test
 	public void testGetCurrencySymbolElement() {
-		System.out.println("getCurrencySymbolElement");
+		LOG.info("getCurrencySymbolElement");
 		OdfNumberCurrencyStyle instance = new OdfNumberCurrencyStyle(dom,
 			"$", "$#,##0.00", "cstyle");
 		NumberCurrencySymbolElement expResult = new NumberCurrencySymbolElement(dom);
@@ -241,7 +244,7 @@ public class OdfCurrencyStyleTest {
 	 */
 	@Test
 	public void testSetCurrencyLocale_String_String() {
-		System.out.println("setCurrencyLocale");
+		LOG.info("setCurrencyLocale");
 		String language = "ko";
 		String country = "KR";
 		OdfNumberCurrencyStyle instance = new OdfNumberCurrencyStyle(dom,
@@ -262,7 +265,7 @@ public class OdfCurrencyStyleTest {
 	 */
 	@Test
 	public void testSetCurrencyLocale_String() {
-		System.out.println("setCurrencyLocale");
+		LOG.info("setCurrencyLocale");
 		String locale = "ko-KR";
 		String language = "ko";
 		String country = "KR";
@@ -300,7 +303,7 @@ public class OdfCurrencyStyleTest {
 		Node node;
 		StyleMapElement mapNode;
 
-		System.out.println("setMapPositive");
+		LOG.info("setMapPositive");
 		String mapName = "positiveMap";
 		OdfNumberCurrencyStyle instance = new OdfNumberCurrencyStyle(dom,
 				"$", "#0", "fstyle");
@@ -321,7 +324,7 @@ public class OdfCurrencyStyleTest {
 		Node node;
 		StyleMapElement mapNode;
 
-		System.out.println("setMapNegative");
+		LOG.info("setMapNegative");
 		String mapName = "negativeMap";
 		OdfNumberCurrencyStyle instance = new OdfNumberCurrencyStyle(dom,
 				"$", "#0", "fstyle");

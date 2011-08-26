@@ -97,7 +97,7 @@ public class ImageTest {
 			doc.save(ResourceUtilities.getTestOutput("add-images-by-uri.odt"));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -164,7 +164,7 @@ public class ImageTest {
 			doc1.save(ResourceUtilities.newTestOutputFile("removeimages.odt"));
 
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
 		}
 
@@ -191,7 +191,7 @@ public class ImageTest {
 			doc.save(ResourceUtilities.newTestOutputFile("removeAllImages.odt"));
 
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
 		}
 	}

@@ -21,6 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.incubator.search;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
@@ -60,7 +63,7 @@ public class MONPTest {
 			Assert.assertTrue(18 == i);
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE));
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(MONPTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}

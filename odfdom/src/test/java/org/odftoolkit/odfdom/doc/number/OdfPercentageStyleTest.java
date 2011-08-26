@@ -22,6 +22,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.number;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -39,7 +42,7 @@ import org.w3c.dom.Node;
  *
  */
 public class OdfPercentageStyleTest {
-
+	private static final Logger LOG = Logger.getLogger(OdfPercentageStyleTest.class.getName());
 	OdfSpreadsheetDocument doc;
 	OdfFileDom dom;
 
@@ -63,7 +66,7 @@ public class OdfPercentageStyleTest {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+        	LOG.log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
     }
@@ -102,12 +105,12 @@ public class OdfPercentageStyleTest {
 				"before:#0%:after"
 		};
 
-		System.out.println("buildFromFormat");
+		LOG.info("buildFromFormat");
 		OdfNumberPercentageStyle instance = null;
 
 		for (int i = 0; i < formatTest.length; i++)
 		{
-			System.out.println("Number format: " + formatTest[i]);
+			LOG.info("Number format: " + formatTest[i]);
 			instance = new OdfNumberPercentageStyle(dom,
 				formatTest[i], "fstyle");
 			Assert.assertNotNull(instance);
@@ -124,7 +127,7 @@ public class OdfPercentageStyleTest {
 		Node node;
 		StyleMapElement mapNode;
 
-		System.out.println("setMapPositive");
+		LOG.info("setMapPositive");
 		String mapName = "positiveMap";
 		OdfNumberPercentageStyle instance = new OdfNumberPercentageStyle(dom,
 				"#0", "fstyle");
@@ -145,7 +148,7 @@ public class OdfPercentageStyleTest {
 		Node node;
 		StyleMapElement mapNode;
 
-		System.out.println("setMapNegative");
+		LOG.info("setMapNegative");
 		String mapName = "negativeMap";
 		OdfNumberPercentageStyle instance = new OdfNumberPercentageStyle(dom,
 				"#0", "fstyle");

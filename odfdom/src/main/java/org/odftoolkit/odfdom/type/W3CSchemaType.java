@@ -23,6 +23,7 @@ package org.odftoolkit.odfdom.type;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.apache.xerces.impl.dv.InvalidDatatypeValueException;
 import org.apache.xerces.impl.dv.SchemaDVFactory;
 import org.apache.xerces.impl.dv.ValidatedInfo;
@@ -33,8 +34,6 @@ import org.apache.xerces.impl.validation.ValidationState;
 In general it takes advantage of already existing underlying parser functionality and encapsulates it */
 class W3CSchemaType {
 	// validate the content by the dataType which is defined in XML schema
-
-	private static final Logger LOG = Logger.getLogger(W3CSchemaType.class.getName());
 
 	static boolean isValid(String dataType, String content) {
 		boolean isValid = false;
@@ -49,7 +48,7 @@ class W3CSchemaType {
 			}
 		} catch (InvalidDatatypeValueException e) {
 			isValid = false;
-			LOG.log(Level.FINE, content + "is not of datatype " + dataType + "!", e);
+			Logger.getLogger(W3CSchemaType.class.getName()).log(Level.FINE, content + "is not of datatype " + dataType + "!", e);
 		}
 		return isValid;
 	}

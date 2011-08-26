@@ -22,6 +22,8 @@
 package org.odftoolkit.odfdom.incubator.search;
 
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -41,6 +43,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
  */
 public class TextStyleNavigationTest {
 
+	private static final Logger LOG = Logger.getLogger(TextStyleNavigationTest.class.getName());
 	public static final String TEXT_FILE = "TestStyleSelection.odt";
 	public static final String SAVE_FILE_PAST_FRONT = "TextStyleSelectionResultInsertFront.odt";
 	public static final String SAVE_FILE_PAST_END = "TextStyleSelectionResultInsertEnd.odt";
@@ -51,13 +54,12 @@ public class TextStyleNavigationTest {
 	public static final String SAVE_FILE_COPYTO1 = "TextStyleSelectionResultCopyTo1.odt";
 	public static final String SAVE_FILE_CUT_FOOTERHEADER = "TextStyleSelectionResultCutFooterHeader.odt";
 	public static final String SAVE_FILE_APPLY_FOOTERHEADER = "TextStyleSelectionResultApplyFooterHeader.odt";
-	
 	OdfTextDocument doc;
 	TextStyleNavigation search1;
 	TextNavigation search2;
 	TextNavigation search3;
 	TextStyleNavigation search4;
-	
+
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 	}
@@ -69,10 +71,9 @@ public class TextStyleNavigationTest {
 	@Before
 	public void setUp() {
 		try {
-			doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities
-					.getAbsolutePath(TEXT_FILE));
+			doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -85,101 +86,98 @@ public class TextStyleNavigationTest {
 	 * Test pasteAtFrontOf method of org.odftoolkit.odfdom.incubator.search.TextStyleNavigation
 	 */
 	@Test
-	public void testPasteAtFrontOf()  {
+	public void testPasteAtFrontOf() {
 
 		//search the text of specified style, then insert it before specified text (delete)
 		search1 = null;
 		TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<OdfStyleProperty, String>();
 		searchProps.put(StyleTextPropertiesElement.FontName, "Times New Roman1");
-		searchProps.put(StyleTextPropertiesElement.FontSize, "16pt");		
+		searchProps.put(StyleTextPropertiesElement.FontSize, "16pt");
 		search1 = new TextStyleNavigation(searchProps, doc);
-	    search2 = new TextNavigation("delete", doc);
-	    search3 = new TextNavigation("Roman16 Romanl16delete", doc);
-	    
-	    TextSelection itemstyle = null;
-		if(search1.hasNext()){
+		search2 = new TextNavigation("delete", doc);
+		search3 = new TextNavigation("Roman16 Romanl16delete", doc);
+
+		TextSelection itemstyle = null;
+		if (search1.hasNext()) {
 			itemstyle = (TextSelection) search1.getCurrentItem();
-			System.out.println(itemstyle);
+			LOG.info(itemstyle.toString());
 		}
-		int i=0;
-		if(itemstyle != null){
-			while (search2.hasNext())
-			{
+		int i = 0;
+		if (itemstyle != null) {
+			while (search2.hasNext()) {
 				i++;
 				TextSelection itemtext = (TextSelection) search2.getCurrentItem();
-	            try {
+				try {
 					itemstyle.pasteAtFrontOf(itemtext);
 				} catch (InvalidNavigationException e) {
-					e.printStackTrace();
+					LOG.log(Level.SEVERE, e.getMessage(), e);
 					Assert.fail(e.getMessage());
 				}
-				System.out.println(itemtext);
+				LOG.info(itemtext.toString());
 			}
 		}
-		
-        int j = 0;
-		while (search3.hasNext())
-		{
+
+		int j = 0;
+		while (search3.hasNext()) {
 			j++;
 		}
-		Assert.assertTrue(i==j);
-		
+		Assert.assertTrue(i == j);
+
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_PAST_FRONT));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-    
+
 	/**
 	 * Test pasteAtEndOf method of org.odftoolkit.odfdom.incubator.search.TextStyleNavigation
 	 */
 	@Test
-	public void testPasteAtEndOf()  {
-        
+	public void testPasteAtEndOf() {
+
 		//search the text of specified style, then insert it after specified text (delete)
 		TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<OdfStyleProperty, String>();
 		searchProps.put(StyleTextPropertiesElement.FontName, "Times New Roman1");
-		searchProps.put(StyleTextPropertiesElement.FontSize, "16pt");		
+		searchProps.put(StyleTextPropertiesElement.FontSize, "16pt");
 		search1 = new TextStyleNavigation(searchProps, doc);
-	    search2 = new TextNavigation("delete", doc);
-	    search3 = new TextNavigation("deleteRoman16 Romanl16", doc);
-	    TextSelection itemstyle = null;
-		if(search1.hasNext()){
+		search2 = new TextNavigation("delete", doc);
+		search3 = new TextNavigation("deleteRoman16 Romanl16", doc);
+		TextSelection itemstyle = null;
+		if (search1.hasNext()) {
 			itemstyle = (TextSelection) search1.getCurrentItem();
-			System.out.println(itemstyle);
+			LOG.info(itemstyle.toString());
 		}
 		int i = 0;
-		if(itemstyle != null){
-		    while (search2.hasNext()){
-		    	i++;
+		if (itemstyle != null) {
+			while (search2.hasNext()) {
+				i++;
 				TextSelection itemtext = (TextSelection) search2.getCurrentItem();
-	            try {
+				try {
 					itemstyle.pasteAtEndOf(itemtext);
 				} catch (InvalidNavigationException e) {
 					Assert.fail(e.getMessage());
 				}
-				System.out.println(itemtext);
+				LOG.info(itemtext.toString());
 			}
 		}
-		
-        int j = 0;
-		while (search3.hasNext())
-		{
+
+		int j = 0;
+		while (search3.hasNext()) {
 			j++;
 		}
-		
-		Assert.assertTrue(i==j);
-		
+
+		Assert.assertTrue(i == j);
+
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_PAST_END));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	/**
 	 * Test cut method of org.odftoolkit.odfdom.incubator.search.TextStyleNavigation
 	 */
@@ -189,10 +187,10 @@ public class TextStyleNavigationTest {
 		//delete all text with specified style
 		TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<OdfStyleProperty, String>();
 		searchProps.put(StyleTextPropertiesElement.FontName, "Century1");
-		searchProps.put(StyleTextPropertiesElement.FontSize, "22pt");	
+		searchProps.put(StyleTextPropertiesElement.FontSize, "22pt");
 		search1 = new TextStyleNavigation(searchProps, doc);
 		search2 = new TextNavigation("Century22", doc);
-		
+
 		while (search1.hasNext()) {
 			TextSelection item = (TextSelection) search1.getCurrentItem();
 			try {
@@ -201,13 +199,13 @@ public class TextStyleNavigationTest {
 				Assert.fail(e.getMessage());
 			}
 		}
-		
+
 		Assert.assertFalse(search2.hasNext());
-		
+
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_DELETE));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -216,12 +214,11 @@ public class TextStyleNavigationTest {
 	 * Test applyStyle method of org.odftoolkit.odfdom.incubator.search.TextStyleNavigation
 	 */
 	@Test
-	public void testApplyStyle()
-	{
-        //select the text specified style and apply the text with new style.
+	public void testApplyStyle() {
+		//select the text specified style and apply the text with new style.
 		TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<OdfStyleProperty, String>();
 		searchProps.put(StyleTextPropertiesElement.FontName, "Arial");
-		searchProps.put(StyleTextPropertiesElement.FontSize, "12pt");	
+		searchProps.put(StyleTextPropertiesElement.FontSize, "12pt");
 		search1 = new TextStyleNavigation(searchProps, doc);
 
 		OdfStyle style = null;
@@ -231,7 +228,7 @@ public class TextStyleNavigationTest {
 			style.setProperty(StyleTextPropertiesElement.FontWeight, "bold");
 			style.setStyleFamilyAttribute("text");
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			LOG.log(Level.SEVERE, e1.getMessage(), e1);
 			Assert.fail("Failed with " + e1.getClass().getName() + ": '" + e1.getMessage() + "'");
 		}
 
@@ -239,28 +236,28 @@ public class TextStyleNavigationTest {
 		while (search1.hasNext()) {
 			i++;
 			TextSelection item = (TextSelection) search1.getCurrentItem();
-			// System.out.println(item);
+			// LOG.info(item);
 			try {
 				item.applyStyle(style);
 			} catch (InvalidNavigationException e) {
 				Assert.fail(e.getMessage());
 			}
 		}
-		
+
 		TreeMap<OdfStyleProperty, String> chgProps = new TreeMap<OdfStyleProperty, String>();
 		chgProps.put(StyleTextPropertiesElement.FontSize, "23pt");
-		chgProps.put(StyleTextPropertiesElement.FontWeight, "bold");	
+		chgProps.put(StyleTextPropertiesElement.FontWeight, "bold");
 		search4 = new TextStyleNavigation(chgProps, doc);
-		int j =0;
-		while(search4.hasNext()){
+		int j = 0;
+		while (search4.hasNext()) {
 			j++;
 		}
-		Assert.assertTrue(i==j);
-		
+		Assert.assertTrue(i == j);
+
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_STYLE));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}

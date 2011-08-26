@@ -21,11 +21,14 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
+import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -47,7 +50,7 @@ public class FrameTest {
 
 			Assert.assertEquals(fe.getProperty(StyleGraphicPropertiesElement.VerticalPos), "top");
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(FrameTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}

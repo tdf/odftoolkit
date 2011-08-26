@@ -21,10 +21,13 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.OdfXMLFactory;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.OdfXMLFactory;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
@@ -77,7 +80,7 @@ public class FactoryManipulationTest {
             OdfXMLFactory.setOdfElementClass(TextSpanElement.ELEMENT_NAME, org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan.class);
             
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(FactoryManipulationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
     }

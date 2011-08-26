@@ -115,8 +115,7 @@ public class TextNavigation extends Navigation {
 			}
 
 		} catch (Exception ex) {
-			Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, null, ex);
-			ex.printStackTrace();
+			Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 		}
 		return null;
 	}
@@ -137,8 +136,7 @@ public class TextNavigation extends Navigation {
 			try {
 				element = (OdfElement) getNextMatchElement((Node) mTextDocument.getContentRoot());
 			} catch (Exception ex) {
-				Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, null, ex);
-				ex.printStackTrace();
+				Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 
 			}
 			if (element != null) {

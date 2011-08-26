@@ -21,10 +21,10 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
-import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.OdfName;
+import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 
 public class MyOwnPrivateSpanClass_3 extends OdfElement {
 

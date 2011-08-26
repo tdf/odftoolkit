@@ -21,6 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.incubator.search;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -38,6 +41,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
  */
 public class TextNavigationTest {
 
+	private static final Logger LOG = Logger.getLogger(TextNavigationTest.class.getName());
 	public static final String TEXT_FILE = "TestTextSelection.odt";
 	OdfTextDocument doc;
 	TextNavigation search;
@@ -55,7 +59,7 @@ public class TextNavigationTest {
 		try {
 			doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -76,7 +80,7 @@ public class TextNavigationTest {
 
 		while (search.hasNext()) {
 			TextSelection item = (TextSelection) search.getCurrentItem();
-			System.out.println(item);
+			LOG.info(item.toString());
 		}
 
 	}
@@ -114,7 +118,7 @@ public class TextNavigationTest {
 			Assert.assertEquals("Hello delete this word delete true delete  indeed", textProcessor.getText(match5));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 

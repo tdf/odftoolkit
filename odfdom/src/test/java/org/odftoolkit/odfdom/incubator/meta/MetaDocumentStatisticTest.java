@@ -30,8 +30,6 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.element.meta.MetaDocumentStatisticElement;
-import org.odftoolkit.odfdom.incubator.meta.OdfMetaDocumentStatistic;
-import org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class MetaDocumentStatisticTest {

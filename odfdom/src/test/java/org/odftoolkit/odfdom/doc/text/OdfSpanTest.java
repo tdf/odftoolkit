@@ -23,17 +23,18 @@
 package org.odftoolkit.odfdom.doc.text;
 
 
-import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
-import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.OdfFileDom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.Assert;
-
+import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 import org.w3c.dom.Node;
 
 /**
@@ -41,6 +42,7 @@ import org.w3c.dom.Node;
  * @author instructor
  */
 public class OdfSpanTest {
+	private static final Logger LOG = Logger.getLogger(OdfSpanTest.class.getName());
     OdfTextDocument doc;
 	OdfFileDom dom;
 
@@ -64,7 +66,7 @@ public class OdfSpanTest {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+        	LOG.log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
     }
@@ -78,7 +80,7 @@ public class OdfSpanTest {
 	 */
 	@Test
 	public void testAddContent() {
-		System.out.println("addContent");
+		LOG.info("addContent");
 		String content = "span content";
 		OdfTextSpan instance = new OdfTextSpan(dom);
 		Node node;
@@ -95,7 +97,7 @@ public class OdfSpanTest {
 	 */
 	@Test
 	public void testAddContentWhitespace() {
-		System.out.println("text:span addContentWhitespace");
+		LOG.info("text:span addContentWhitespace");
 		String content = "span\tcontent";
 		String part1 = "span";
 		String part2 = "content";
@@ -122,7 +124,7 @@ public class OdfSpanTest {
 	 */
 	@Test
 	public void testAddStyledContent() {
-		System.out.println("addStyleContent");
+		LOG.info("addStyleContent");
 		String content = "span content";
 		String styleName = "testStyle";
 		OdfTextSpan instance = new OdfTextSpan(dom);
@@ -141,7 +143,7 @@ public class OdfSpanTest {
 	 */
 	@Test
 	public void testAddStyledContentWhitespace() {
-		System.out.println("text:span addStyledContentWhitespace");
+		LOG.info("text:span addStyledContentWhitespace");
 		String content = "span\ncontent";
 		String styleName = "testStyle";
 		String part1 = "span";

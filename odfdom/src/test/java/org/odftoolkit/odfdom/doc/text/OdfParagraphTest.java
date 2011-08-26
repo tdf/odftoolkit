@@ -23,6 +23,9 @@
 package org.odftoolkit.odfdom.doc.text;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -42,6 +45,7 @@ import org.w3c.dom.Node;
  * @author instructor
  */
 public class OdfParagraphTest {
+	private static final Logger LOG = Logger.getLogger(OdfParagraphTest.class.getName());
     OdfTextDocument doc;
 	OdfFileDom dom;
 
@@ -65,7 +69,7 @@ public class OdfParagraphTest {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+        	LOG.log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
     }
@@ -79,7 +83,7 @@ public class OdfParagraphTest {
 	 */
 	@Test
 	public void testAddContent() {
-		System.out.println("addContent");
+		LOG.info("addContent");
 		String content = "paragraph content";
 		OdfTextParagraph instance = new OdfTextParagraph(dom);
 		Node node;
@@ -96,7 +100,7 @@ public class OdfParagraphTest {
 	 */
 	@Test
 	public void testAddContentWhitespace() {
-		System.out.println("text:p addContentWhitespace");
+		LOG.info("text:p addContentWhitespace");
 		String content = "a\tb";
 		String part1 = "a";
 		String part2 = "b";
@@ -124,7 +128,7 @@ public class OdfParagraphTest {
 	 */
 	@Test
 	public void testAddStyledContent() {
-		System.out.println("addStyleContent");
+		LOG.info("addStyleContent");
 		String content = "paragraph content";
 		String styleName = "testStyle";
 		OdfTextParagraph instance = new OdfTextParagraph(dom);
@@ -143,7 +147,7 @@ public class OdfParagraphTest {
 	 */
 	@Test
 	public void testAddStyledContentWhitespace() {
-		System.out.println("text:p addStyledContentWhitespace");
+		LOG.info("text:p addStyledContentWhitespace");
 		String content = "a\nb";
 		String part1 = "a";
 		String part2 = "b";
@@ -173,7 +177,7 @@ public class OdfParagraphTest {
 	 */
 	@Test
 	public void testAddStyledSpan() {
-		System.out.println("addStyleSpan");
+		LOG.info("addStyleSpan");
 		String content = "heading content";
 		String spanContent = "span content";
 		String styleName = "testStyle";
@@ -211,7 +215,7 @@ public class OdfParagraphTest {
 	 */
 	@Test
 	public void testAddStyledSpanWhitespace() {
-		System.out.println("text:p addStyledSpanWhitespace");
+		LOG.info("text:p addStyledSpanWhitespace");
 		String content = "heading content";
 		String spanContent = "span    content";  // four blanks
 		String part1 = "span ";

@@ -21,16 +21,19 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleTabStopElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTabStopsElement;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -71,7 +74,7 @@ public class UnknownPropertiesTest {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(UnknownPropertiesTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
     }

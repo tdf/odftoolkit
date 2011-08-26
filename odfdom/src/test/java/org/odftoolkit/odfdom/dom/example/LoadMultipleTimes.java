@@ -33,13 +33,13 @@ class LoadMultipleTimes {
                 OdfDocument.loadDocument("src/test/resources/test1.odt");
                 long t2 = System.currentTimeMillis() - t1;
                 t = t + t2;
-                System.out.println("open in " + t2 + " milliseconds");
+                LOG.info("open in " + t2 + " milliseconds");
                 long f1 = Runtime.getRuntime().freeMemory();
                 Runtime.getRuntime().gc();
                 long f2 = Runtime.getRuntime().freeMemory();
-                System.out.println("freemem pre-gc: " + f1 + ", post-gc: " + f2 + ", delta: " + (f1 - f2) + ".");
+                LOG.info("freemem pre-gc: " + f1 + ", post-gc: " + f2 + ", delta: " + (f1 - f2) + ".");
             }
-            System.out.println("opening " + num + " times took " + t + " milliseconds");
+            LOG.info("opening " + num + " times took " + t + " milliseconds");
         } catch (Exception e) {
             e.printStackTrace();
         }

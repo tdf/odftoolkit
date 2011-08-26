@@ -22,6 +22,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.number;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -41,6 +44,7 @@ import org.w3c.dom.Node;
  * @author J David Eisenberg
  */
 public class OdfDateStyleTest {
+	private static final Logger LOG = Logger.getLogger(OdfDateStyleTest.class.getName());
 	OdfSpreadsheetDocument doc;
 	OdfFileDom dom;
 
@@ -64,7 +68,7 @@ public class OdfDateStyleTest {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+        	Logger.getLogger(OdfDateStyleTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
     }
@@ -137,12 +141,12 @@ s 	Second in minute     55
 				"E-am-pm"} // "dd-MM-yyyy hh:mm:ss a"
 		};
 
-        System.out.println("buildFromFormat");
+        LOG.info("buildFromFormat");
         OdfNumberDateStyle instance = null;
 
         for (i = 0; i < formatTest.length; i++)
 		{
-			System.out.println("Date format: " + formatTest[i]);
+			LOG.info("Date format: " + formatTest[i]);
 			instance = new OdfNumberDateStyle(dom,
 				formatTest[i], "fstyle");
 			Assert.assertNotNull(instance.getFirstChild());

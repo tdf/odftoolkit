@@ -23,23 +23,24 @@
 package org.odftoolkit.odfdom.doc.text;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleElementBase;
+import org.odftoolkit.odfdom.dom.style.props.OdfListLevelProperties;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextHeading;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListLevelStyleBullet;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListLevelStyleNumber;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
-import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleElementBase;
-import org.odftoolkit.odfdom.dom.style.props.OdfListLevelProperties;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.Assert;
-
 import org.w3c.dom.Node;
 
 /**
@@ -47,6 +48,7 @@ import org.w3c.dom.Node;
  * @author J David Eisenberg
  */
 public class OdfListStyleTest {
+	private static final Logger LOG = Logger.getLogger(OdfListStyleTest.class.getName());
     OdfTextDocument doc;
 	OdfFileDom dom;
 	OdfOfficeAutomaticStyles documentStyles;
@@ -99,7 +101,7 @@ public class OdfListStyleTest {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+        	LOG.log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
     }
@@ -112,12 +114,12 @@ public class OdfListStyleTest {
     public void testBuildFromFormat() {
 		int i;
 		
-        System.out.println("createListStyle");
+        LOG.info("createListStyle");
         OdfTextListStyle instance = null;
 
         for (i = 0; i < listSpecTest.length; i++)
 		{
-			System.out.println("List Format: " + listSpecTest[i]);
+			LOG.info("List Format: " + listSpecTest[i]);
 			instance = new OdfTextListStyle(dom, "list" + i,
 				listSpecTest[i], delim[i], "1cm", show[i]);
 
@@ -132,7 +134,7 @@ public class OdfListStyleTest {
 	 */
 	@Test
 	public void testAddContent() {
-		System.out.println("addContent");
+		LOG.info("addContent");
 		String content = "heading content";
 		OdfTextHeading instance = new OdfTextHeading(dom);
 		Node node;

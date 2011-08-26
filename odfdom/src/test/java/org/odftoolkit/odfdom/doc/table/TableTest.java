@@ -28,7 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import junit.framework.Assert;
-import org.w3c.dom.Node;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfElement;
@@ -40,6 +40,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderColumnsElement;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class TableTest {

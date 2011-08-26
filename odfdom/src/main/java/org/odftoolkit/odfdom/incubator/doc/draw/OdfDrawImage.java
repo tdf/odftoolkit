@@ -187,8 +187,7 @@ public class OdfDrawImage extends DrawImageElement {
 				return imageList;
 			}
 		} catch (Exception ex) {
-			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
-			ex.printStackTrace();
+			Logger.getLogger(OdfDrawImage.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 		}
 		return imageList;
 	}
@@ -275,8 +274,7 @@ public class OdfDrawImage extends DrawImageElement {
 			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getUri(), "image");
 			return imageNodes.getLength();
 		} catch (Exception ex) {
-			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
-			ex.printStackTrace();
+			Logger.getLogger(OdfDrawImage.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 		}
 		return 0;
 	}
@@ -296,8 +294,7 @@ public class OdfDrawImage extends DrawImageElement {
 				imageList.add(image);
 			}
 		} catch (Exception ex) {
-			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
-			ex.printStackTrace();
+			Logger.getLogger(OdfDrawImage.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 		}
 		return imageList;
 	}

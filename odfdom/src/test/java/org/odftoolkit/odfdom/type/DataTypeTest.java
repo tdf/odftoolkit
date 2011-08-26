@@ -1,24 +1,24 @@
 /************************************************************************
-*
-* DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
-*
-* Copyright 2009 IBM. All rights reserved.
-*
-* Use is subject to license terms.
-*
-* Licensed under the Apache License, Version 2.0 (the "License"); you may not
-* use this file except in compliance with the License. You may obtain a copy
-* of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
-* obtain a copy of the License at http://odftoolkit.org/docs/license.txt
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-* WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-************************************************************************/
+ *
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
+ *
+ * Copyright 2009 IBM. All rights reserved.
+ *
+ * Use is subject to license terms.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
+ * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
 import java.net.URI;
@@ -26,6 +26,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.datatype.DatatypeFactory;
 
@@ -35,6 +37,8 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.type.Length.Unit;
 
 public class DataTypeTest {
+
+	private static final Logger LOG = Logger.getLogger(DataTypeTest.class.getName());
 
 	@Test
 	public void testDataType() {
@@ -46,14 +50,14 @@ public class DataTypeTest {
 			uri = new URI(URITransformer.encodePath("http://www.sina.com"));
 			Assert.assertTrue(AnyURI.isValid(uri));
 		} catch (URISyntaxException e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 
 		// Base64Binary
 		Base64Binary base64Binary = Base64Binary.valueOf("GVCC9H6p8LeqecY96ggY680uoZA=");
 		byte[] bytes = base64Binary.getBytes();
-		System.out.println("bytes:" + bytes.length);
+		LOG.info("bytes:" + bytes.length);
 		Assert.assertTrue(Base64Binary.isValid("KWy1spZbKcHOunnKMB6dVA=="));
 
 		// CellAddress
@@ -86,7 +90,7 @@ public class DataTypeTest {
 			String hexColor = Color.toSixDigitHexRGB("rgb(123,214,23)");
 			Assert.assertTrue(Color.isValid(hexColor));
 			java.awt.Color awtColor = Color.mapColorToAWTColor(color);
-			Assert.assertEquals(new java.awt.Color(0xff00ff),awtColor);
+			Assert.assertEquals(new java.awt.Color(0xff00ff), awtColor);
 			try {
 				color = new Color(255, 0, 255);
 				Assert.assertEquals("#ff00ff", color.toString());
@@ -111,7 +115,7 @@ public class DataTypeTest {
 				Assert.fail(ie.getMessage());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 		}
 		// DateOrDateTime
 		DateTime time1 = DateTime.valueOf("2007-09-28T22:01:13");
@@ -127,7 +131,7 @@ public class DataTypeTest {
 
 		DatatypeFactory aFactory = new org.apache.xerces.jaxp.datatype.DatatypeFactoryImpl();
 		GregorianCalendar calendar = new GregorianCalendar();
-		System.out.println(aFactory.newXMLGregorianCalendar(calendar).toString());
+		LOG.info(aFactory.newXMLGregorianCalendar(calendar).toString());
 		DateOrDateTime time3 = new DateOrDateTime(aFactory.newXMLGregorianCalendar(calendar));
 		Assert.assertNotNull(time3.getXMLGregorianCalendar());
 
@@ -169,7 +173,6 @@ public class DataTypeTest {
 		Assert.assertTrue(PositiveLength.isValid("0.01pt"));
 		Assert.assertTrue(NonNegativeLength.isValid("0.00pt"));
 		Assert.assertFalse(NonNegativeLength.isValid("-0.00pt"));
-		
 		@SuppressWarnings("static-access")
 		int mmValue = length.parseInt(length.toString(), Unit.MILLIMETER);
 

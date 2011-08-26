@@ -21,6 +21,7 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.io.File;
+
 import org.junit.Assert;
 import org.junit.Test;
 

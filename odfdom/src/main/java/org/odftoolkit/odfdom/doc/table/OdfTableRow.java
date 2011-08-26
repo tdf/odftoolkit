@@ -24,6 +24,7 @@ package org.odftoolkit.odfdom.doc.table;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.xpath.XPathConstants;
@@ -34,7 +35,6 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
@@ -49,6 +49,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfTableRowProperties;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.type.Length.Unit;
 import org.w3c.dom.Node;
@@ -65,7 +66,6 @@ public class OdfTableRow {
 	int mnRepeatedIndex;
 	int mRowsRepeatedNumber = -1;
 	private static final String DEFAULT_HEIGHT = "0.30in";
-	static private Logger mLog = Logger.getLogger(OdfTableRow.class.getName());
 
 	/**
 	 * Construct the <code>OdfTableRow</code> feature.
@@ -103,7 +103,7 @@ public class OdfTableRow {
 
 		OdfTableRow row = table.getRowInstance(rowElement, 0);
 		if (row.getRowsRepeatedNumber() > 1) {
-			mLog.warning("the row has the repeated row number, and puzzled about get which repeated index of the row,"
+			Logger.getLogger(OdfTableRow.class.getName()).log(Level.WARNING, "the row has the repeated row number, and puzzled about get which repeated index of the row,"
 					+ "here just return the first row of the repeated rows.");
 		}
 		return row;
@@ -340,7 +340,7 @@ public class OdfTableRow {
 						aPrevNode = aPrevNode.getPreviousSibling();
 					}
 				} catch (XPathExpressionException e) {
-					e.printStackTrace();
+					Logger.getLogger(OdfTableRow.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 				}
 			}
 		}
@@ -395,7 +395,7 @@ public class OdfTableRow {
 						aNextNode = aNextNode.getNextSibling();
 					}
 				} catch (XPathExpressionException e) {
-					e.printStackTrace();
+					Logger.getLogger(OdfTableRow.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 				}
 			}
 		}

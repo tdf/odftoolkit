@@ -25,11 +25,11 @@ package org.odftoolkit.odfdom.incubator.doc.text;
 import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListItemElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleElementBase;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.w3c.dom.Node;
 
 /**

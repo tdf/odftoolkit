@@ -23,6 +23,9 @@ package org.odftoolkit.odfdom.doc;
 
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
@@ -54,7 +57,7 @@ public class StyleManipulationTest {
             
             Assert.assertTrue(marginLeft != null && marginLeft.equals("4711"));
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(StyleManipulationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }        
     }

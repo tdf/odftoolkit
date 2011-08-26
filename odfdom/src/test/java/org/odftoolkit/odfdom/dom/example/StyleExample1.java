@@ -28,29 +28,29 @@ class StyleExample1 {
 
         try {
             OdfDocument odfdoc = OdfDocument.OdfDocument("test/resources/test1.odt");
-            System.out.println("parsed document.");
+            LOG.info("parsed document.");
             
             OdfElement e = (OdfElement) odfdoc.getContentDom().getDocumentElement();
             NodeAction dumpStyles = new NodeAction() {
                 protected void apply(Node node, Object arg, int depth) {
                     String indent = new String();
                     for (int i=0; i<depth; i++) indent += "  ";
-                    System.out.print(indent + node.getNodeName());
+                    LOG.info(indent + node.getNodeName());
                     if (node.getNodeType() == Node.TEXT_NODE) {
-                        System.out.print(": " + node.getNodeValue());
+                        LOG.info(": " + node.getNodeValue());
                     }
-                    System.out.println();
+                    LOG.info();
                     if (node instanceof OdfStylableElement) {
                         try {
-                            System.out.println(indent + "-style info...");
+                            LOG.info(indent + "-style info...");
                             OdfStylableElement se = (OdfStylableElement) node;
                             OdfStyle ds = se.getDocumentStyle();
                             OdfStyle ls = se.getAutomaticStyle();
                             if (ls != null) {
-                                System.out.println(indent + "-OdfLocalStyle: " + ls);
+                                LOG.info(indent + "-OdfLocalStyle: " + ls);
                             }
                             if (ds != null) {
-                                System.out.println(indent + "-OdfDocumentStyle: " + ds);
+                                LOG.info(indent + "-OdfDocumentStyle: " + ds);
                             }
                         } catch (Exception ex) {
                             Logger.getLogger(StyleExample1.class.getName()).log(Level.SEVERE, null, ex);

@@ -26,6 +26,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
@@ -66,8 +68,7 @@ public class TableCellTest {
 							.getTestResourceAsStream(SAMPLE_TEXT + ".odt"));
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+        	Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -77,8 +78,7 @@ public class TableCellTest {
 					+ "Output.ods"));
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -87,8 +87,7 @@ public class TableCellTest {
 			odtdoc.save(ResourceUtilities.newTestOutputFile(SAMPLE_TEXT
 					+ "Output.odt"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -141,7 +140,7 @@ public class TableCellTest {
 			String horizonAlignment = cell.getHorizontalAlignment();
 			Assert.assertEquals(null, horizonAlignment);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -171,7 +170,7 @@ public class TableCellTest {
 			String verticalAlignment = cell.getVerticalAlignment();
 			Assert.assertEquals(null, verticalAlignment);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -204,7 +203,7 @@ public class TableCellTest {
 			valueType= cell.getValueType();
 			Assert.assertEquals(null, valueType);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -293,7 +292,7 @@ public class TableCellTest {
 			cell.setTimeValue(currenttime);
 			cell.setFormatString("HH:mm:ss");
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 		saveods();
@@ -319,7 +318,7 @@ public class TableCellTest {
 			cell.setFormatString("0.00");
 			Assert.assertEquals("float", cell.getValueType());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 		try {
@@ -336,7 +335,7 @@ public class TableCellTest {
 			cell.setFormatString("###.0%");
 			Assert.assertEquals("percentage", cell.getValueType());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 		try {
@@ -354,7 +353,7 @@ public class TableCellTest {
 			cell.setFormatString("yyyy.MM.dd");
 			Assert.assertEquals("date", cell.getValueType());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 		try {
@@ -377,7 +376,7 @@ public class TableCellTest {
 			cell.setFormatString("HH:mm:ss");
 			Assert.assertEquals("time", cell.getValueType());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -389,8 +388,7 @@ public class TableCellTest {
 							.getTestResourceAsStream(SAMPLE_SPREADSHEET
 									+ "Output.ods"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -426,7 +424,7 @@ public class TableCellTest {
 			Color actualBackColor = cell.getCellBackgroundColor();
 			Assert.assertEquals("#ffffff", actualBackColor.toString());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -952,7 +950,7 @@ public class TableCellTest {
 			Assert.assertEquals("#0.00", bformat);
 			Assert.assertEquals("end", bCell.getHorizontalAlignment());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail();
 		}
 	}

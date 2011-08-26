@@ -33,7 +33,6 @@ import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfXMLFactory;
-import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnGroupElement;
@@ -42,6 +41,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderColumnsElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfTableColumnProperties;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.type.Length.Unit;
 import org.w3c.dom.Node;
@@ -57,7 +57,6 @@ public class OdfTableColumn {
 	int mnRepeatedIndex;
 	private XPath xpath;
 	private static final String DEFAULT_WIDTH = "0in";
-	private static final Logger LOG = Logger.getLogger(OdfTableColumn.class.getName());
 
 	/**
 	 * Construct the <code>OdfTableColumn</code> feature.
@@ -101,7 +100,7 @@ public class OdfTableColumn {
 
 		OdfTableColumn column = table.getColumnInstance(colElement, 0);
 		if (column.getColumnsRepeatedNumber() > 1) {
-			LOG.warning("the column has the repeated column number, and puzzled about get which repeated index of the column,"
+			Logger.getLogger(OdfTableColumn.class.getName()).log(Level.WARNING, "the column has the repeated column number, and puzzled about get which repeated index of the column,"
 					+ "here just return the first column of the repeated columns.");
 		}
 		return column;
@@ -328,7 +327,7 @@ public class OdfTableColumn {
 						aPrevNode = aPrevNode.getPreviousSibling();
 					}
 				} catch (XPathExpressionException e) {
-					LOG.log(Level.SEVERE, null, e);
+					Logger.getLogger(OdfTableColumn.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 				}
 			}
 		}
@@ -378,7 +377,7 @@ public class OdfTableColumn {
 						aNextNode = aNextNode.getNextSibling();
 					}
 				} catch (XPathExpressionException e) {
-					LOG.log(Level.SEVERE, null, e);
+					Logger.getLogger(OdfTableColumn.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 				}
 			}
 		}

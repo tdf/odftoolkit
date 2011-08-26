@@ -22,16 +22,13 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfXMLFactory;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
-import org.odftoolkit.odfdom.incubator.doc.style.OdfDefaultStyle;
-import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleBackgroundImageElement;
@@ -43,6 +40,11 @@ import org.odftoolkit.odfdom.dom.element.style.StyleTabStopsElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfDefaultStyle;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
@@ -138,7 +140,7 @@ public class StyleTest {
             Assert.assertTrue(style2.compareTo(style1) < 0);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(StyleTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
         }
     }
@@ -198,7 +200,7 @@ public class StyleTest {
             Assert.assertTrue(style1 == style2);
             Assert.assertTrue(style1.getStyleUserCount() == 2);
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(StyleTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
         }
     }
@@ -225,7 +227,7 @@ public class StyleTest {
             Assert.assertEquals("#00FF00", child.getProperty(StyleTextPropertiesElement.TextUnderlineColor));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(StyleTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
         }
     }
@@ -265,7 +267,7 @@ public class StyleTest {
 //            // assert the correct style was removed
 //            Assert.assertNotNull(style3);
 //        } catch (Exception ex) {
-//            ex.printStackTrace();
+//            Logger.getLogger(StyleTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 //            Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
 //        }
 //    }
@@ -286,7 +288,7 @@ public class StyleTest {
             OdfTextParagraph p = (OdfTextParagraph)lst.item(0);
             p.setProperty(StyleTextPropertiesElement.FontSize, "17pt");
         } catch (Exception ex) {
-            ex.printStackTrace();
+        	Logger.getLogger(StyleTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
         }
     }

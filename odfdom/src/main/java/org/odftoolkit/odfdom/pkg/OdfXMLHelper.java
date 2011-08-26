@@ -21,34 +21,35 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.pkg;
 
-import java.io.IOException;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.parsers.SAXParserFactory;
-import javax.xml.parsers.SAXParser;
+
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.Templates;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
+import javax.xml.transform.Templates;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.dom.DOMResult;
-import org.xml.sax.XMLReader;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
-import org.xml.sax.InputSource;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 public class OdfXMLHelper {
 
@@ -337,8 +338,7 @@ public class OdfXMLHelper {
 
 			transformer.transform(source, result);
 		} catch (Exception ex) {
-			Logger.getLogger(OdfXMLHelper.class.getName()).log(Level.SEVERE, null, ex);
-			ex.printStackTrace();
+			Logger.getLogger(OdfXMLHelper.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 		}
 	}
 

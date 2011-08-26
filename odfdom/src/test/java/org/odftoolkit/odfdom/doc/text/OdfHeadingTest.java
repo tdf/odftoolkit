@@ -19,20 +19,19 @@
  * limitations under the License.
  *
  ************************************************************************/
-
 package org.odftoolkit.odfdom.doc.text;
 
-
-import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.OdfFileDom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.Assert;
-
+import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextHeading;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
@@ -44,11 +43,13 @@ import org.w3c.dom.Node;
  * @author instructor
  */
 public class OdfHeadingTest {
-    OdfTextDocument doc;
+
+	private static final Logger LOG = Logger.getLogger(OdfHeadingTest.class.getName());
+	OdfTextDocument doc;
 	OdfFileDom dom;
 
-    public OdfHeadingTest() {
-    }
+	public OdfHeadingTest() {
+	}
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
@@ -58,30 +59,27 @@ public class OdfHeadingTest {
 	public static void tearDownClass() throws Exception {
 	}
 
-    @Before
-    public void setUp() {
-        try
-        {
-            doc = OdfTextDocument.newTextDocument();
+	@Before
+	public void setUp() {
+		try {
+			doc = OdfTextDocument.newTextDocument();
 			dom = doc.getContentDom();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            Assert.fail(e.getMessage());
-        }
-    }
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+	}
 
-    @After
-    public void tearDown() {
-    }
+	@After
+	public void tearDown() {
+	}
 
 	/**
 	 * Test of addContent method, of class OdfHeading.
 	 */
 	@Test
 	public void testAddContent() {
-		System.out.println("addContent");
+		LOG.info("addContent");
 		String content = "heading content";
 		OdfTextHeading instance = new OdfTextHeading(dom);
 		Node node;
@@ -93,12 +91,12 @@ public class OdfHeadingTest {
 		Assert.assertEquals(content, node.getTextContent());
 	}
 
-    	/**
+	/**
 	 * Test of addContentWhitespace method, of class OdfTextH.
 	 */
 	@Test
 	public void testAddContentWhitespace() {
-		System.out.println("text:h addContentWhitespace");
+		LOG.info("text:h addContentWhitespace");
 		String content = "a\tb";
 		String part1 = "a";
 		String part2 = "b";
@@ -113,7 +111,7 @@ public class OdfHeadingTest {
 		node = node.getNextSibling();
 		Assert.assertEquals(Node.ELEMENT_NODE, node.getNodeType());
 		Assert.assertEquals(OdfNamespaceNames.TEXT.getUri(),
-			node.getNamespaceURI());
+				node.getNamespaceURI());
 		Assert.assertEquals("tab", node.getLocalName());
 		node = node.getNextSibling();
 		Assert.assertNotNull(node);
@@ -126,7 +124,7 @@ public class OdfHeadingTest {
 	 */
 	@Test
 	public void testAddStyledContent() {
-		System.out.println("addStyleContent");
+		LOG.info("addStyleContent");
 		String content = "heading content";
 		String styleName = "testStyle";
 		OdfTextHeading instance = new OdfTextHeading(dom);
@@ -145,7 +143,7 @@ public class OdfHeadingTest {
 	 */
 	@Test
 	public void testAddStyledContentWhitespace() {
-		System.out.println("text:h addStyledContentWhitespace");
+		LOG.info("text:h addStyledContentWhitespace");
 		String content = "a\nb";
 		String part1 = "a";
 		String part2 = "b";
@@ -162,7 +160,7 @@ public class OdfHeadingTest {
 		node = node.getNextSibling();
 		Assert.assertEquals(Node.ELEMENT_NODE, node.getNodeType());
 		Assert.assertEquals(OdfNamespaceNames.TEXT.getUri(),
-			node.getNamespaceURI());
+				node.getNamespaceURI());
 		Assert.assertEquals("line-break", node.getLocalName());
 		node = node.getNextSibling();
 		Assert.assertNotNull(node);
@@ -175,7 +173,7 @@ public class OdfHeadingTest {
 	 */
 	@Test
 	public void testAddStyledSpan() {
-		System.out.println("addStyleSpan");
+		LOG.info("addStyleSpan");
 		String content = "heading content";
 		String spanContent = "span content";
 		String styleName = "testStyle";
@@ -185,7 +183,7 @@ public class OdfHeadingTest {
 		Node node;
 		Assert.assertNotNull(instance);
 		instance.addStyledContent(styleName, content).addStyledSpan(
-			spanStyleName, spanContent);
+				spanStyleName, spanContent);
 
 		// first item should be text
 		node = instance.getFirstChild();
@@ -214,7 +212,7 @@ public class OdfHeadingTest {
 	 */
 	@Test
 	public void testAddStyledSpanWhitespace() {
-		System.out.println("text:h addStyledSpanWhitespace");
+		LOG.info("text:h addStyledSpanWhitespace");
 		String content = "heading content";
 		String spanContent = "span    content";  // four blanks
 		String part1 = "span ";
@@ -227,7 +225,7 @@ public class OdfHeadingTest {
 		Node node;
 		Assert.assertNotNull(instance);
 		instance.addStyledContent(styleName, content).addStyledSpanWhitespace(
-			spanStyleName, spanContent);
+				spanStyleName, spanContent);
 
 		// first item should be text
 		node = instance.getFirstChild();
@@ -255,12 +253,11 @@ public class OdfHeadingTest {
 		Assert.assertEquals("s", node.getLocalName());
 		element = (Element) node;
 		Assert.assertEquals("3", element.getAttributeNS(
-			OdfNamespaceNames.TEXT.getUri(), "c"));
+				OdfNamespaceNames.TEXT.getUri(), "c"));
 
 		node = node.getNextSibling();
 		Assert.assertNotNull(node);
 		Assert.assertEquals(Node.TEXT_NODE, node.getNodeType());
 		Assert.assertEquals(part2, node.getTextContent());
 	}
-
 }

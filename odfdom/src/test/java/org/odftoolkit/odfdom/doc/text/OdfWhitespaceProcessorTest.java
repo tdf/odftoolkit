@@ -22,6 +22,9 @@
 
 package org.odftoolkit.odfdom.doc.text;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -43,7 +46,7 @@ import org.w3c.dom.Node;
  * @author J David Eisenberg
  */
 public class OdfWhitespaceProcessorTest {
-
+	private static final Logger LOG = Logger.getLogger(OdfWhitespaceProcessorTest.class.getName());
 	OdfTextDocument doc;
 	OdfFileDom dom;
 	String[] plainText = { "nospace", "one space", "two  spaces",
@@ -78,7 +81,7 @@ public class OdfWhitespaceProcessorTest {
 			doc = OdfTextDocument.newTextDocument();
 			dom = doc.getContentDom();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -92,7 +95,7 @@ public class OdfWhitespaceProcessorTest {
 	 */
 	@Test
 	public void testAppend() {
-		System.out.println("append");
+		LOG.info("append");
 		Element element = null;
 		OdfWhitespaceProcessor instance = new OdfWhitespaceProcessor();
 		int i;
@@ -136,7 +139,7 @@ public class OdfWhitespaceProcessorTest {
 	 */
 	@Test
 	public void testGetText() {
-		System.out.println("getText");
+		LOG.info("getText");
 		Node element = null;
 		OdfWhitespaceProcessor instance = new OdfWhitespaceProcessor();
 		int i;
@@ -179,7 +182,7 @@ public class OdfWhitespaceProcessorTest {
 	 */
 	@Test
 	public void testAppendText() {
-		System.out.println("appendText");
+		LOG.info("appendText");
 		Element element = null;
 		int i;
 		for (i = 0; i < plainText.length; i++) {

@@ -22,6 +22,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc.number;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -42,7 +45,7 @@ import org.w3c.dom.Node;
  * @author J David Eisenberg
  */
 public class OdfNumberStyleTest {
-
+	private static final Logger LOG = Logger.getLogger(OdfNumberStyleTest.class.getName());
 	OdfSpreadsheetDocument doc;
 	OdfFileDom dom;
 
@@ -66,7 +69,7 @@ public class OdfNumberStyleTest {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+        	Logger.getLogger(OdfNumberStyleTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
     }
@@ -132,7 +135,7 @@ public class OdfNumberStyleTest {
 			{ "n10F", "t:after" },
 			{ "tbefore:", "n10F", "t:after"},
 		};
-		System.out.println("buildFromFormat");
+		LOG.info("buildFromFormat");
 		OdfNumberStyle instance = null;
 		char expectedType;
         String expectedValue;
@@ -140,7 +143,7 @@ public class OdfNumberStyleTest {
 
 		for (int i = 0; i < formatTest.length; i++)
 		{
-			System.out.println("Number format: " + formatTest[i]);
+			LOG.info("Number format: " + formatTest[i]);
 			instance = new OdfNumberStyle(dom,
 				formatTest[i], "fstyle");
 			Assert.assertNotNull(instance);
@@ -235,7 +238,7 @@ public class OdfNumberStyleTest {
 		Node node;
 		StyleMapElement mapNode;
 
-		System.out.println("setMapPositive");
+		LOG.info("setMapPositive");
 		String mapName = "positiveMap";
 		OdfNumberStyle instance = new OdfNumberStyle(dom,
 				"#0", "fstyle");
@@ -256,7 +259,7 @@ public class OdfNumberStyleTest {
 		Node node;
 		StyleMapElement mapNode;
 
-		System.out.println("setMapNegative");
+		LOG.info("setMapNegative");
 		String mapName = "negativeMap";
 		OdfNumberStyle instance = new OdfNumberStyle(dom,
 				"#0", "fstyle");

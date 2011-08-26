@@ -26,8 +26,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.odftoolkit.odfdom.OdfElement;
 
+import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfXMLFactory;
@@ -47,7 +47,6 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
  */
 public class OdfTableCellRange {
 
-	private static final Logger LOG = Logger.getLogger(OdfTableCellRange.class.getName());
 	private int mnStartRow;
 	private int mnStartColumn;
 	private int mnEndRow;
@@ -294,7 +293,7 @@ public class OdfTableCellRange {
 								firstCell.appendContentFrom(cellBase);
 								cellBase.removeContent();
 							} catch (Exception e) {
-								LOG.log(Level.SEVERE, null, e);
+								Logger.getLogger(OdfTableCellRange.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 							}
 						}
 					}

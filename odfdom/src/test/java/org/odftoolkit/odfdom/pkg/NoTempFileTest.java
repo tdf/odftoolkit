@@ -22,12 +22,13 @@
 package org.odftoolkit.odfdom.pkg;
 
 import java.io.FileInputStream;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import org.junit.After;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,7 +56,7 @@ public class NoTempFileTest {
 			String userPropTempEnable = System.getProperty("org.odftoolkit.odfdom.tmpfile.disable");
 			mLog.info("The test property org.odftoolkit.odfdom.tmpfile.disable is set to '" + userPropTempEnable + "'.");
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(NoTempFileTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -75,7 +76,7 @@ public class NoTempFileTest {
 			Assert.assertEquals(5551, bytes.length);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(NoTempFileTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -117,7 +118,7 @@ public class NoTempFileTest {
 			DrawImageElement imageobj = (DrawImageElement) frameobj.getFirstChild();
 			Assert.assertEquals("Pictures/myHoliday.jpg", imageobj.getXlinkHrefAttribute());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(NoTempFileTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -128,7 +129,7 @@ public class NoTempFileTest {
 			String userPropTempEnable = System.getProperty("org.odftoolkit.odfdom.tmpfile.disable");
 			mLog.info("The test property org.odftoolkit.odfdom.tmpfile.disable is set to '" + userPropTempEnable + "'.");
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(NoTempFileTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}

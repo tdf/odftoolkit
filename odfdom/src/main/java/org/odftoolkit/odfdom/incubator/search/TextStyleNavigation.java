@@ -84,15 +84,13 @@ public class TextStyleNavigation extends Navigation {
 			try {
 				mNode = getNextMatchElement((Node) mTextDocument.getContentRoot());
 			} catch (Exception ex) {
-				Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, null, ex);
-				ex.printStackTrace();
+				Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 			}
 		} else {
 			try {
 				mNode = getNextMatchElement(mNode);
 			} catch (Exception ex) {
-				Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, null, ex);
-				ex.printStackTrace();
+				Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 			}
 		}
 		if (mNode != null) {
@@ -287,8 +285,7 @@ public class TextStyleNavigation extends Navigation {
 			}
 
 		} catch (Exception e1) {
-			Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, null, e1);
-			e1.printStackTrace();
+			Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, e1.getMessage(), e1);
 		}
 		return styleNames;
 	}

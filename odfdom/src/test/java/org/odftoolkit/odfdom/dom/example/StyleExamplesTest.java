@@ -51,141 +51,140 @@ import org.w3c.dom.Node;
  */
 public class StyleExamplesTest {
 
-    private static String TEST_FILE = "test2.odt";
-    private static final Logger LOG = Logger.getLogger(StyleExamplesTest.class.getName());
+	private static String TEST_FILE = "test2.odt";
+	private static final Logger LOG = Logger.getLogger(StyleExamplesTest.class.getName());
 
-    static class DumpPropertyAndText extends NodeAction<ArrayList<String>> {
+	static class DumpPropertyAndText extends NodeAction<ArrayList<String>> {
 
-        OdfStyleProperty desiredProperty; // = OdfTextProperties.FontName;
+		OdfStyleProperty desiredProperty; // = OdfTextProperties.FontName;
 
-        public DumpPropertyAndText(OdfStyleProperty desiredProperty) {
-            this.desiredProperty = desiredProperty;
-        }
+		public DumpPropertyAndText(OdfStyleProperty desiredProperty) {
+			this.desiredProperty = desiredProperty;
+		}
 
-        @Override
+		@Override
 		protected void apply(Node textNode, ArrayList<String> fontAndText, int depth) {
 
-            if (textNode.getNodeType() != Node.TEXT_NODE) {
-                return;
-            }
-            if (textNode.hasChildNodes()) {
-                return;
-            }
+			if (textNode.getNodeType() != Node.TEXT_NODE) {
+				return;
+			}
+			if (textNode.hasChildNodes()) {
+				return;
+			}
 
-            Logger logger = Logger.getLogger(StyleExamplesTest.class.getName());
-            logger.finest(textNode.getParentNode().toString());
+			LOG.finest(textNode.getParentNode().toString());
 
-            String teksto = textNode.getTextContent().trim();
-            if (teksto.length() == 0) {
-                return;
-            }
+			String teksto = textNode.getTextContent().trim();
+			if (teksto.length() == 0) {
+				return;
+			}
 
-            String font = StyleUtils.findActualStylePropertyValueForNode(textNode, desiredProperty);
+			String font = StyleUtils.findActualStylePropertyValueForNode(textNode, desiredProperty);
 
-            logger.log(Level.FINEST, "{0}: {1}", new Object[]{font, teksto});
-            fontAndText.add(font + ": " + teksto);
-        }
-    }
+			LOG.log(Level.FINEST, "{0}: {1}", new Object[]{font, teksto});
+			fontAndText.add(font + ": " + teksto);
+		}
+	}
 
-    @Test
-    public void displayActualFontForEachTextNode() throws Exception {
-        OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+	@Test
+	public void displayActualFontForEachTextNode() throws Exception {
+		OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
 
-        OdfElement documentRoot = (OdfElement) odfDocument.getContentDom().getDocumentElement();
+		OdfElement documentRoot = (OdfElement) odfDocument.getContentDom().getDocumentElement();
 
-        ArrayList<String> fontAndText = new ArrayList<String>();
+		ArrayList<String> fontAndText = new ArrayList<String>();
 
-        DumpPropertyAndText dumpFontAndText = new DumpPropertyAndText(StyleTextPropertiesElement.FontName);
-        dumpFontAndText.performAction(documentRoot, fontAndText);
+		DumpPropertyAndText dumpFontAndText = new DumpPropertyAndText(StyleTextPropertiesElement.FontName);
+		dumpFontAndText.performAction(documentRoot, fontAndText);
 
-        Assert.assertEquals("Thorndale: Hello", fontAndText.get(0));
-        Assert.assertEquals("Thorndale: world", fontAndText.get(1));
-        Assert.assertEquals("Thorndale: absatz", fontAndText.get(2));
-        Assert.assertEquals("Cumberland: z", fontAndText.get(3));
-        Assert.assertEquals("Cumberland: we", fontAndText.get(4));
-        Assert.assertEquals("Cumberland: i", fontAndText.get(5));
-        Assert.assertEquals("Thorndale: Absatz", fontAndText.get(6));
-        Assert.assertEquals("Thorndale: drei", fontAndText.get(7));
-        Assert.assertEquals("Thorndale: num 1", fontAndText.get(8));
-        Assert.assertEquals("Thorndale: num 2", fontAndText.get(9));
-        Assert.assertEquals("Thorndale: bullet1", fontAndText.get(10));
-        Assert.assertEquals("Thorndale: bullet2", fontAndText.get(11));
-    }
+		Assert.assertEquals("Thorndale: Hello", fontAndText.get(0));
+		Assert.assertEquals("Thorndale: world", fontAndText.get(1));
+		Assert.assertEquals("Thorndale: absatz", fontAndText.get(2));
+		Assert.assertEquals("Cumberland: z", fontAndText.get(3));
+		Assert.assertEquals("Cumberland: we", fontAndText.get(4));
+		Assert.assertEquals("Cumberland: i", fontAndText.get(5));
+		Assert.assertEquals("Thorndale: Absatz", fontAndText.get(6));
+		Assert.assertEquals("Thorndale: drei", fontAndText.get(7));
+		Assert.assertEquals("Thorndale: num 1", fontAndText.get(8));
+		Assert.assertEquals("Thorndale: num 2", fontAndText.get(9));
+		Assert.assertEquals("Thorndale: bullet1", fontAndText.get(10));
+		Assert.assertEquals("Thorndale: bullet2", fontAndText.get(11));
+	}
 
-    @Test
-    @SuppressWarnings("unchecked")
-    public void dumpAllStyles() throws Exception {
-        if (LOG.isLoggable(INFO)) {
-            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
-            LOG.info("Parsed document.");
+	@Test
+	@SuppressWarnings("unchecked")
+	public void dumpAllStyles() throws Exception {
+		if (LOG.isLoggable(INFO)) {
+			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+			LOG.info("Parsed document.");
 
-            OdfElement e = (OdfElement) odfdoc.getContentDom().getDocumentElement();
-            NodeAction dumpStyles = new NodeAction() {
+			OdfElement e = (OdfElement) odfdoc.getContentDom().getDocumentElement();
+			NodeAction dumpStyles = new NodeAction() {
 
-                @Override
+				@Override
 				protected void apply(Node node, Object arg, int depth) {
-                    String indent = new String();
-                    for (int i = 0; i < depth; i++) {
-                        indent += "  ";
-                    }
-                    if (node.getNodeType() == Node.TEXT_NODE) {
-                        LOG.log(INFO, "{0}{1}", new Object[]{indent, node.getNodeName()});
-                        LOG.log(INFO, ": {0}\n", node.getNodeValue());
-                    }
-                    if (node instanceof OdfStylableElement) {
-                        try {
-                            //LOG.info(indent + "-style info...");
-                            OdfStylableElement se = (OdfStylableElement) node;
-                            OdfStyleBase as = se.getAutomaticStyle();
-                            OdfStyle ds = se.getDocumentStyle();
-                            if (as != null) {
-                                LOG.log(INFO, "{0}-AutomaticStyle: {1}", new Object[]{indent, as});
-                            }
-                            if (ds != null) {
-                                LOG.log(INFO, "{0}-OdfDocumentStyle: {1}", new Object[]{indent, ds});
-                            }
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                }
-            };
-            dumpStyles.performAction(e, null);
-        }
-    }
+					String indent = new String();
+					for (int i = 0; i < depth; i++) {
+						indent += "  ";
+					}
+					if (node.getNodeType() == Node.TEXT_NODE) {
+						LOG.log(INFO, "{0}{1}", new Object[]{indent, node.getNodeName()});
+						LOG.log(INFO, ": {0}\n", node.getNodeValue());
+					}
+					if (node instanceof OdfStylableElement) {
+						try {
+							//LOG.info(indent + "-style info...");
+							OdfStylableElement se = (OdfStylableElement) node;
+							OdfStyleBase as = se.getAutomaticStyle();
+							OdfStyle ds = se.getDocumentStyle();
+							if (as != null) {
+								LOG.log(INFO, "{0}-AutomaticStyle: {1}", new Object[]{indent, as});
+							}
+							if (ds != null) {
+								LOG.log(INFO, "{0}-OdfDocumentStyle: {1}", new Object[]{indent, ds});
+							}
+						} catch (Exception ex) {
+							LOG.log(Level.SEVERE, ex.getMessage(), ex);
+						}
+					}
+				}
+			};
+			dumpStyles.performAction(e, null);
+		}
+	}
 
-    @Test
-    public void testDefaultStyles() {
-        try {
-            OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+	@Test
+	public void testDefaultStyles() {
+		try {
+			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
 
-            doc.getDocumentStyles();
-            OdfDefaultStyle oDSG = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Graphic);
-            Assert.assertEquals(oDSG.getFamilyName(), OdfStyleFamily.Graphic.getName());
-            String prop1 = oDSG.getProperty(StyleGraphicPropertiesElement.ShadowOffsetX);
-            Assert.assertEquals(prop1, "0.1181in");
+			doc.getDocumentStyles();
+			OdfDefaultStyle oDSG = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Graphic);
+			Assert.assertEquals(oDSG.getFamilyName(), OdfStyleFamily.Graphic.getName());
+			String prop1 = oDSG.getProperty(StyleGraphicPropertiesElement.ShadowOffsetX);
+			Assert.assertEquals(prop1, "0.1181in");
 
-            OdfDefaultStyle oDSP = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Paragraph);
-            Assert.assertEquals(oDSP.getFamilyName(), OdfStyleFamily.Paragraph.getName());
-            String prop2 = oDSP.getProperty(StyleTextPropertiesElement.FontName);
-            Assert.assertEquals(prop2, "Thorndale");
-            String prop3 = oDSP.getProperty(StyleTextPropertiesElement.LetterKerning);
-            Assert.assertEquals(prop3, "true");
+			OdfDefaultStyle oDSP = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Paragraph);
+			Assert.assertEquals(oDSP.getFamilyName(), OdfStyleFamily.Paragraph.getName());
+			String prop2 = oDSP.getProperty(StyleTextPropertiesElement.FontName);
+			Assert.assertEquals(prop2, "Thorndale");
+			String prop3 = oDSP.getProperty(StyleTextPropertiesElement.LetterKerning);
+			Assert.assertEquals(prop3, "true");
 
-            OdfDefaultStyle oDST = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Table);
-            Assert.assertEquals(oDST.getFamilyName(), OdfStyleFamily.Table.getName());
-            String prop4 = oDST.getProperty(StyleTablePropertiesElement.BorderModel);
-            Assert.assertEquals(prop4, "collapsing");
+			OdfDefaultStyle oDST = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Table);
+			Assert.assertEquals(oDST.getFamilyName(), OdfStyleFamily.Table.getName());
+			String prop4 = oDST.getProperty(StyleTablePropertiesElement.BorderModel);
+			Assert.assertEquals(prop4, "collapsing");
 
 
-            OdfDefaultStyle oDSTR = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.TableRow);
-            Assert.assertEquals(oDSTR.getFamilyName(), OdfStyleFamily.TableRow.getName());
-            String prop5 = oDSTR.getProperty(StyleTableRowPropertiesElement.KeepTogether);
-            Assert.assertEquals(prop5, "auto");
+			OdfDefaultStyle oDSTR = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.TableRow);
+			Assert.assertEquals(oDSTR.getFamilyName(), OdfStyleFamily.TableRow.getName());
+			String prop5 = oDSTR.getProperty(StyleTableRowPropertiesElement.KeepTogether);
+			Assert.assertEquals(prop5, "auto");
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail(e.getMessage());
-        }
-    }
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+	}
 }

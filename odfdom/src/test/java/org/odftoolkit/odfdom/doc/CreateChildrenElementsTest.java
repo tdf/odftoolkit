@@ -22,6 +22,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
@@ -94,7 +97,7 @@ public class CreateChildrenElementsTest {
 			odfdoc.save(ResourceUtilities.newTestOutputFile("CreatChildrenForPresentationTest.odp"));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -133,7 +136,7 @@ public class CreateChildrenElementsTest {
 			doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForChartTest.odt"));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -176,7 +179,7 @@ public class CreateChildrenElementsTest {
 			doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreateChildrenForTableTest.odt"));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -226,7 +229,7 @@ public class CreateChildrenElementsTest {
 			doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForTextTable.odt"));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -272,7 +275,7 @@ public class CreateChildrenElementsTest {
 			doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForGraphic.odg"));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -299,7 +302,7 @@ public class CreateChildrenElementsTest {
 			doc.getContentDom().getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForStyles.odt"));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -351,7 +354,7 @@ public class CreateChildrenElementsTest {
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 
 	}
@@ -391,7 +394,7 @@ public class CreateChildrenElementsTest {
 			doc.getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForSpreadsheet.ods"));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -408,7 +411,7 @@ public class CreateChildrenElementsTest {
 			doc.getContentDom().getOdfDocument().save(ResourceUtilities.newTestOutputFile("CreatChildrenForForm.odt"));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -434,7 +437,7 @@ public class CreateChildrenElementsTest {
 			odfdoc.save(ResourceUtilities.newTestOutputFile("CreatChildrenForAnimateTest.odp"));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(CreateChildrenElementsTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}

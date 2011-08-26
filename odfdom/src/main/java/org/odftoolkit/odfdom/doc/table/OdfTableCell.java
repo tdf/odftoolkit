@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.OdfElement;
@@ -81,7 +82,6 @@ public class OdfTableCell {
 	int mnRepeatedRowIndex;
 	OdfTable mOwnerTable;
 	String msFormatString;
-	private static Logger mLog = Logger.getLogger(OdfTableCell.class.getName());
 	/**
 	 * The default date format of table cell.
 	 */
@@ -144,12 +144,12 @@ public class OdfTableCell {
 		int rowRepeatedNum = cell.getTableRow().getRowsRepeatedNumber();
 		if (colRepeatedNum > 1 && rowRepeatedNum > 1) {
 			if (colRepeatedNum > 1) {
-				mLog.warning("the cell has the repeated column number, and puzzled about get which repeated column index of the cell,");
+				Logger.getLogger(OdfTableCell.class.getName()).log(Level.WARNING, "the cell has the repeated column number, and puzzled about get which repeated column index of the cell,");
 			}
 			if (rowRepeatedNum > 1) {
-				mLog.warning("the row contains the current cell has the repeated row number, and puzzled about get which repeated row index of the cell,");
+				Logger.getLogger(OdfTableCell.class.getName()).log(Level.WARNING, "the row contains the current cell has the repeated row number, and puzzled about get which repeated row index of the cell,");
 			}
-			mLog.warning("here just return the first cell that the repeated column index is 0 and repeated row index is 0, too.");
+			Logger.getLogger(OdfTableCell.class.getName()).log(Level.WARNING, "here just return the first cell that the repeated column index is 0 and repeated row index is 0, too.");
 		}
 		return cell;
 	}
@@ -916,8 +916,7 @@ public class OdfTableCell {
 		try {
 			simpleDate = simpleFormat.parse(value);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(OdfTableCell.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			return null;
 		}
 		return simpleDate;
@@ -943,7 +942,7 @@ public class OdfTableCell {
 				} catch (Exception e) {
 					// use default background color White
 					color = Color.WHITE;
-					mLog.warning(e.getMessage());
+					Logger.getLogger(OdfTableCell.class.getName()).log(Level.WARNING, e.getMessage());
 				}
 			}
 		}
@@ -1002,7 +1001,7 @@ public class OdfTableCell {
 	 */
 	public void setCellBackgroundColor(String cellBackgroundColor) {
 		if (!Color.isValid(cellBackgroundColor)) {
-			mLog.warning("Parameter is invalid for datatype Color, default background color #FFFFFF will be set.");
+			Logger.getLogger(OdfTableCell.class.getName()).log(Level.WARNING, "Parameter is invalid for datatype Color, default background color #FFFFFF will be set.");
 			cellBackgroundColor = DEFAULT_BACKGROUND_COLOR;
 		}
 		splitRepeatedCells();

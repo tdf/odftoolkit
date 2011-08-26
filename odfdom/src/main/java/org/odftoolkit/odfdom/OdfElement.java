@@ -22,10 +22,9 @@
 package org.odftoolkit.odfdom;
 
 import java.util.ArrayList;
+
 import org.apache.xerces.dom.ElementNSImpl;
 import org.apache.xerces.dom.ParentNode;
-import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.w3c.dom.DOMException;

@@ -22,6 +22,8 @@
 package org.odftoolkit.odfdom.doc.table;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 
@@ -30,10 +32,10 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
-import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
 import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
+import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.incubator.search.TextNavigation;
 import org.odftoolkit.odfdom.incubator.search.TextSelection;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
@@ -51,9 +53,8 @@ public class TableRowColumnTest {
 		try {
 			odsdoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(filename+".ods"));
 	    	odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(odtfilename+".odt"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {        	
+			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 	
@@ -191,8 +192,7 @@ public class TableRowColumnTest {
 		try {
 			odsdoc.save(ResourceUtilities.newTestOutputFile(filename+name+".ods"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 	
@@ -201,8 +201,7 @@ public class TableRowColumnTest {
 		try {
 			odtdoc.save(ResourceUtilities.newTestOutputFile(odtfilename+name+".odt"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 }
