@@ -24,8 +24,14 @@ package org.odftoolkit.odfdom.codegen;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 import java.util.Vector;
 
@@ -452,12 +458,24 @@ public class CodeGen implements IFunctionSupplier
         else if( type.equals("namespace") )
         {
             HashMap< String, String > namespaces = schema.getNamespaces();
-            Iterator<Entry<String, String>> iter = namespaces.entrySet().iterator();
-            while( iter.hasNext() )
+        	
+            Set set = namespaces.entrySet();
+
+            Map.Entry<String, String> [] entries = (Map.Entry[]) set.toArray(new Map.Entry[set.size()]);
+
+            Arrays.sort(entries, new Comparator() {
+              public int compare(Object arg0, Object arg1) {
+                Object key1 = ((Map.Entry) arg0).getKey();
+                Object key2 = ((Map.Entry) arg1).getKey();
+                return ((Comparable) key1).compareTo(key2);
+              }});
+
+ 
+            for(int i=0;i<entries.length; i++ )
             {
                 first = printSeperator( sep, first );
 
-                Entry<String, String> entry = iter.next();
+                Entry<String, String> entry = entries[i];
                 context.pushVariable("namespaceprefix", entry.getKey());
                 context.pushVariable("namespaceuri", entry.getValue());
                 

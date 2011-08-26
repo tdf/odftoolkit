@@ -21,8 +21,13 @@
 
 package org.odftoolkit.odfdom.codegen;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -82,8 +87,14 @@ public class Schema
     }
 
     public Iterator<Element> getElements()
-    {
-        return Elements.values().iterator();
+    {          	
+    	Object[]  keys = Elements.keySet().toArray();
+        Arrays.sort(keys);
+        List<Element> values = new ArrayList<Element>();        
+        for(int i=0; i< keys.length; i++){
+        	values.add(Elements.get(keys[i].toString()));
+        }
+    	return values.iterator();
     }
 
     public Iterator<String> getDataTypes()
