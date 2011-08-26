@@ -157,16 +157,24 @@
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
                     <xsl:variable name="ref-name" select="concat($attribute-prefix,$attr-name)"/>
-                    <xsl:if test="$create-odf-references and not(text:reference-mark[@text:name=$ref-name] or text:reference-mark-start[@text:name=$ref-name])">
+                    <xsl:if test="$create-odf-references">
                         <text:reference-mark-start text:name="{$ref-name}"/>
                     </xsl:if>
                     <xsl:apply-templates select="node()"/>
-                    <xsl:if test="$create-odf-references and not(text:reference-mark[@text:name=$ref-name] or text:reference-mark-start[@text:name=$ref-name])">
+                    <xsl:if test="$create-odf-references">
                         <text:reference-mark-end text:name="{$ref-name}"/>
                     </xsl:if>
                 </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="text:reference-mark-start|text:reference-mark-end">
+        <xsl:if test="not($create-odf-references) or not(starts-with(@text:name,$attribute-prefix) or starts-with(@text:name,$element-prefix))">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|node()"/>
+            </xsl:copy>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template name="create-element-ref-mark-start">
@@ -187,9 +195,7 @@
 
         <xsl:if test="$create-odf-references">
             <xsl:variable name="ref-name" select="concat($element-prefix,$element-name)"/>
-            <xsl:if test="not(text:reference-mark[@text:name=$ref-name] or text:reference-mark-start[@text:name=$ref-name])">
-                <text:reference-mark-start text:name="{$ref-name}"/>
-            </xsl:if>
+            <text:reference-mark-start text:name="{$ref-name}"/>
         </xsl:if>
         
         <xsl:if test="contains($remainder,'&lt;') and contains(substring-after($remainder,'&lt;'),'&gt;')">
@@ -212,9 +218,7 @@
 
         <xsl:if test="$create-odf-references">
             <xsl:variable name="ref-name" select="concat($element-prefix,$element-name)"/>
-            <xsl:if test="not(text:reference-mark[@text:name=$ref-name] or text:reference-mark-start[@text:name=$ref-name])">
-                <text:reference-mark-end text:name="{$ref-name}"/>
-            </xsl:if>
+            <text:reference-mark-end text:name="{$ref-name}"/>
         </xsl:if>        
     </xsl:template>
     
