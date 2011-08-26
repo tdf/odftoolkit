@@ -3,9 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>taglets</artifactId>
-	<version>0.8.5-SNAPSHOT</version>
+	<version>0.8.5</version>
 	<name>ODF Custom Javadoc Taglets</name>
 	<packaging>jar</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<repositories>
 <!-- we get wagon-svn from here -->
 		<repository>

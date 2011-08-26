@@ -38,13 +38,13 @@ import com.sun.tools.doclets.Taglet;
  *  In case nothing is been a default path within the JavaDoc doc-files directory is being used.
  *
  *  For example the taglet <code>{@odf.element text:span}</code> would be resolved without variable settings to
- *  <code>JAVA_DOC_BASE/doc-files/OpenDocument-v1.2-draft.xhtml#element-text_span</code>.
+ *  <code>JAVA_DOC_BASE/doc-files/OpenDocument-v1.2-cd05-part1.html#element-text_span</code>.
  */
  public class OdfElementTaglet implements Taglet {
  
 	 private static final Logger LOG = Logger.getLogger(OdfElementTaglet.class.getName());
 	 private static final String NAME = "odf.element";
-	 private static final String ODF_SPEC_PATH = "../../../../../../doc-files/OpenDocument-v1.2-part1-cd04.xhtml";
+	 private static final String ODF_SPEC_PATH = "../../../../../../doc-files/OpenDocument-v1.2-cd05-part1.html";
 	 private static String mOdfSpecPath = null;
 	  
      /* FINDING THE ABSOLUTE PATH TO THE ODF SPEC IN HTML:
