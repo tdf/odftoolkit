@@ -41,8 +41,11 @@ import schema2template.model.MSVExpressionIterator;
 public class PuzzlePieceTest {
 
 	private static final Logger LOG = Logger.getLogger(PuzzlePieceTest.class.getName());
+	private static final String OUTPUT_DUMP_ODF10 = "target" + File.separator + "odf10-msvtree.dump";
 	private static final String OUTPUT_DUMP_ODF11 = "target" + File.separator + "odf11-msvtree.dump";
 	private static final String OUTPUT_DUMP_ODF12 = "target" + File.separator + "odf12-msvtree.dump";
+	private static final String OUTPUT_REF_ODF10 = TEST_INPUT_ROOT + File.separator + "odf10-msvtree.ref";
+	private static final String OUTPUT_REF_ODF11 = TEST_INPUT_ROOT + File.separator + "odf11-msvtree.ref";
 	private static final String OUTPUT_REF_ODF12 = TEST_INPUT_ROOT + File.separator + "odf12-msvtree.ref";
 
 
@@ -55,6 +58,13 @@ public class PuzzlePieceTest {
 	@Test
 	public void testMSVExpressionTree() {
 		try {
+			Expression odf10Root = OdfHelper.loadSchemaODF10();
+			String odf10Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf10Root);
+			LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF10);
+			PrintWriter out0 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF10));
+			out0.print(odf10Dump);
+			out0.close();
+
 			Expression odf11Root = OdfHelper.loadSchemaODF11();
 			String odf11Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf11Root);
 			LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF11);
@@ -68,8 +78,30 @@ public class PuzzlePieceTest {
 			PrintWriter out2 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF12));
 			out2.print(odf12Dump);
 			out2.close();
+
+			String odf10Ref = readFileAsString(OUTPUT_REF_ODF10);
+			if(!odf10Ref.equals(odf10Dump)){
+				String errorMsg = "There is a difference between the expected outcome of the parsed ODF 1.0 tree.\n"
+					+ "Please compare the output:\n\t'" + OUTPUT_DUMP_ODF10 + "'\nwith the reference\n\t'" + odf10RngFile;
+				LOG.severe(errorMsg);
+				Assert.fail(errorMsg);
+			}
+
+			String odf11Ref = readFileAsString(OUTPUT_REF_ODF11);
+			if(!odf11Ref.equals(odf11Dump)){
+				String errorMsg = "There is a difference between the expected outcome of the parsed ODF 1.1 tree.\n"
+					+ "Please compare the output:\n\t'" + OUTPUT_DUMP_ODF11 + "'\nwith the reference\n\t'" + odf11RngFile;
+				LOG.severe(errorMsg);
+				Assert.fail(errorMsg);
+			}
+
 			String odf12Ref = readFileAsString(OUTPUT_REF_ODF12);
-			Assert.assertTrue(odf12Ref.equals(odf12Dump));
+			if(!odf12Ref.equals(odf12Dump)){
+				String errorMsg = "There is a difference between the expected outcome of the parsed ODF 1.2 tree.\n"
+					+ "Please compare the output:\n\t'" + OUTPUT_DUMP_ODF12 + "'\nwith the reference\n\t'" + odf12RngFile;
+				LOG.severe(errorMsg);
+				Assert.fail(errorMsg);
+			}
 		} catch (Exception ex) {
 			Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
 			Assert.fail(ex.toString());
@@ -107,8 +139,9 @@ public class PuzzlePieceTest {
 			PuzzlePieceSet allElements = new PuzzlePieceSet();
 			PuzzlePieceSet allAttributes = new PuzzlePieceSet();
 			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF11(), allElements, allAttributes);
-			checkFoundNumber(allElements.withoutMultiples(), ODF11_ELEMENT_NUMBER, "element");
-			checkFoundNumber(allAttributes.withoutMultiples(), ODF11_ATTRIBUTE_NUMBER, "attribute");
+			// There is a difference of one wildcard "*" representing anyElement/anyAttribute
+			checkFoundNumber(allElements.withoutMultiples(), ODF11_ELEMENT_NUMBER + 1, "element");
+			checkFoundNumber(allAttributes.withoutMultiples(), ODF11_ATTRIBUTE_NUMBER + 1, "attribute");
 		} catch (Exception ex) {
 			Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
 			Assert.fail(ex.toString());

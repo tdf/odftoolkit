@@ -179,22 +179,22 @@
 18: DATA 'nonNegativeInteger',
 16: EPSILON
 15: CHOICE
-16: ATTRIBUTE "",
+16: ATTRIBUTE "frame-count",
 17: REF 'nonNegativeInteger',
 18: DATA 'nonNegativeInteger',
 16: EPSILON
 15: CHOICE
-16: ATTRIBUTE "",
+16: ATTRIBUTE "sentence-count",
 17: REF 'nonNegativeInteger',
 18: DATA 'nonNegativeInteger',
 16: EPSILON
 15: CHOICE
-16: ATTRIBUTE "",
+16: ATTRIBUTE "syllable-count",
 17: REF 'nonNegativeInteger',
 18: DATA 'nonNegativeInteger',
 16: EPSILON
 15: CHOICE
-16: ATTRIBUTE "",
+16: ATTRIBUTE "non-whitespace-character-count",
 17: REF 'nonNegativeInteger',
 18: DATA 'nonNegativeInteger',
 16: EPSILON

@@ -55,8 +55,36 @@ public class OdfHelper {
 	private static final Logger LOG = Logger.getLogger(OdfHelper.class.getName());
 	public static final Boolean DEBUG = Boolean.FALSE;
 
-	public static final int ODF11_ELEMENT_NUMBER = 507;   // ToDO: 526  by Schema and UltraEdit
-	public static final int ODF11_ATTRIBUTE_NUMBER = 840; // ToDO: 1137 by Schema and UltraEdit
+	/** Expresses the amount of elements in ODF 1.1. There are some issues in the schema that have to be fixed before the full number can be returned by MSV:
+		Reference table-table-template is never used, therefore several elements are not taking into account::
+		"table:body"
+		"table:even-columns"
+		"table:even-rows"
+		"table:first-column"
+		"table:first-row"
+		"table:last-column"
+		"table:last-row"
+		"table:odd-columns"
+		"table:odd-rows"
+		"table:table-template"
+	 NOTE: Ignoring the '*' there can be 525 elements parsed, but with fixed schema it should be 535. */
+	public static final int ODF11_ELEMENT_NUMBER = 525; //ToDo: 535 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or attribute declaration
+
+	/** Expresses the amount of attributes in ODF 1.1. There are some issues in the schema that have to be fixed before the full number can be returned by MSV:
+		Following references are never used, therefore its attribute is not taking into account::
+			draw-glue-points-attlist	with "draw:escape-direction"
+			office-process-content		with "office:process-content"
+
+		Following attributes are member of the not referenced element "table:table-template":
+			"text:first-row-end-column"
+			"text:first-row-start-column"
+			"text:last-row-end-column"
+			"text:last-row-start-column"
+			"text:paragraph-style-name"
+
+	 NOTE: Ignoring the '*' there can be 1162 elements parsed, but with fixed schema it should be 1169. */
+	public static final int ODF11_ATTRIBUTE_NUMBER = 1162; //ToDo: 1169 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or attribute declaration
+
 	public static String odfResourceDir;
 	public static String outputRoot;
 	public static final String INPUT_ROOT = "target" + File.separator + "classes" + File.separator
@@ -64,10 +92,12 @@ public class OdfHelper {
 	public static final String TEST_INPUT_ROOT = "target" + File.separator + "test-classes" + File.separator
 				+ "examples" + File.separator + "odf";
 
+	public static final String ODF10_RNG_FILE_NAME = "OpenDocument-strict-schema-v1.0-os.rng";
 	public static final String ODF11_RNG_FILE_NAME = "OpenDocument-strict-schema-v1.1.rng";
 	public static final String ODF12_RNG_FILE_NAME = "OpenDocument-v1.2-csprd03-schema.rng";
-	private static String odf12RngFile;
-	private static String odf11RngFile;
+	public  static String odf12RngFile;
+	public  static String odf11RngFile;
+	public  static String odf10RngFile;
 	private static String mConfigFile;
 	private static final String OUTPUT_FILES_TEMPLATE = "output-files.vm";
 	private static final String OUTPUT_FILES = "target" + File.separator + "output-files.xml";
@@ -88,6 +118,7 @@ public class OdfHelper {
 		odfResourceDir = INPUT_ROOT;
 		odf12RngFile = INPUT_ROOT + File.separator + ODF12_RNG_FILE_NAME;
 		odf11RngFile = INPUT_ROOT + File.separator + ODF11_RNG_FILE_NAME;
+		odf10RngFile = INPUT_ROOT + File.separator + ODF10_RNG_FILE_NAME;
 		mConfigFile = INPUT_ROOT + File.separator + "config.xml";
 		outputRoot = "target";
 	}
@@ -135,6 +166,16 @@ public class OdfHelper {
 		LOG.fine("Processing output files... ");
 		processFileList(ve, root);
 		LOG.fine("DONE.\n");
+	}
+
+	/**
+	 * Load and parse the ODF 1.0 Schema.
+	 *
+	 * @return MSV Expression Tree of ODF 1.0 RelaxNG schema (more specific: The tree's MSV root expression)
+	 * @throws Exception
+	 */
+	public static Expression loadSchemaODF10() throws Exception {
+		return loadSchema(new File(odf10RngFile));
 	}
 
 	/**

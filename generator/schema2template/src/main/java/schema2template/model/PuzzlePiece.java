@@ -404,7 +404,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 				if (name.length() == 0) {
 					throw new RuntimeException("Unnamed ELEMENT or ATTRIBUTE expression.");
 				}
-
 				// Create and store new definition
 				PuzzlePiece newDefinition = new PuzzlePiece(exp, name);
 
