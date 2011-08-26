@@ -1,91 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>taglets</artifactId>
-	<version>0.9-SNAPSHOT</version>
-	<name>ODF Custom Javadoc Taglets</name>
+	<version>0.8.7-SNAPSHOT</version>
 	<packaging>jar</packaging>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>5</version>
+	</parent>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<repositories>
-<!-- we get wagon-svn from here -->
-		<repository>
-			<id>maven2-repository.dev.java.net</id>
-			<name>Java.net Repository for Maven</name>
-			<url>http://download.java.net/maven/2/</url>
-			<snapshots>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</repository>
-<!-- the odfdom interim repositories in svn -->
-		<repository>
-			<id>odfdom-snapshots</id>
-			<name>ODFDOM Snapshot</name>
-			<url>http://odftoolkit.org/svn/odfdom~maven2/snapshot/</url>
-			<releases>
-				<enabled>false</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>odfdom-releases</id>
-			<name>ODFDOM Release</name>
-			<url>http://odftoolkit.org/svn/odfdom~maven2/release/</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</repository>
-	</repositories>
-	<distributionManagement>
-		<repository>
-			<id>odfdom-releases</id>
-			<name>ODFDOM Release</name>
-			<url>svn:https://odftoolkit.org/svn/odfdom~maven2/release/</url>
-			<uniqueVersion>false</uniqueVersion>
-		</repository>
-		<snapshotRepository>
-			<id>odfdom-snapshots</id>
-			<name>ODFDOM Snapshot</name>
-			<url>svn:https://odftoolkit.org/svn/odfdom~maven2/snapshot/</url>
-			<uniqueVersion>false</uniqueVersion>
-		</snapshotRepository>
-	</distributionManagement>
+
+	<!-- Build Settings -->
 	<build>
-		<defaultGoal>install</defaultGoal>
-		<extensions>
-			<extension>
-				<groupId>org.jvnet.wagon-svn</groupId>
-				<artifactId>wagon-svn</artifactId>
-				<version>1.9</version>
-			</extension>
-		</extensions>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	 <!-- More Project Information -->
+	<name>ODF Custom Javadoc Taglets</name>
+	<description>Javadoc taglets for odfdom-java</description>
+	<url>http://odftoolkit.org/projects/odfdom/pages/Home</url>
+	<inceptionYear>2008</inceptionYear>
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	<organization>
+		<name>ODF Toolkit Project</name>
+		<url>http://odftoolkit.org/</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>svanteschubert</id>
+			<name>Svante</name>
+			<email>svanteschubert AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/7-Svante-Schubert</url>
+			<organization>Sun Microsystems Inc.</organization>
+			<organizationUrl>http://www.sun.com/</organizationUrl>
+			<roles>
+				<role>ODFDOM working group chair</role>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+			<properties>
+				<picUrl>http://asset-1.odftoolkit.org/attachments/images/person/SvanteSchubert-2_small.jpg</picUrl>
+			</properties>
+		</developer>
+		<developer>
+			<id>Daisy</id>
+			<name>Ying Chun Guo</name>
+			<email>Daisy AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/274-Ying-Chun-Guo</url>
+			<organization>IBM</organization>
+			<organizationUrl>http://www.ibm.com/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+			<properties>
+				<picUrl>http://asset-2.odftoolkit.org/attachments/images/person/Daisy.jpg</picUrl>
+			</properties>
+		</developer>
+		<developer>
+			<id>weihuaWang</id>
+			<name>Wei Hua Wang</name>
+			<email>weihuaWang AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/297-weihuaWang</url>
+			<organization>IBM</organization>
+			<organizationUrl>http://www.ibm.com/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+		<developer>
+			<id>devin</id>
+			<name>Han Biao</name>
+			<email>devin AT odftoolkit.org</email>
+			<url>http://odftoolkit.org/people/748-Devin</url>
+			<organization>IBM</organization>
+			<organizationUrl>http://www.ibm.com/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~taglets</connection>
+		<developerConnection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~taglets</developerConnection>
+		<url>http://odftoolkit.org/projects/odfdom/sources/taglets/show</url>
+	</scm>
 	<profiles>
 		<profile>
 			<id>tools.jar</id>
@@ -104,6 +142,56 @@
 					<systemPath>${java.home}/../lib/tools.jar</systemPath>
 				</dependency>
 			</dependencies>
+		</profile>
+		<profile>
+			<id>release</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>2.1</version>
+						<configuration>
+							<!-- Workaround for http://jira.codehaus.org/browse/MGPG-9 -->
+							<mavenExecutorId>forked-path</mavenExecutorId>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.1</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<useAgent>true</useAgent>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.1.2</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 </project>
