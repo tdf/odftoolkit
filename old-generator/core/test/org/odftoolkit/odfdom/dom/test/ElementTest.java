@@ -19,18 +19,18 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.OdfTextDocument;
-import org.openoffice.odf.doc.element.office.OdfStyles;
-import org.openoffice.odf.doc.element.style.OdfStyle;
-import org.openoffice.odf.doc.element.style.OdfTextProperties;
-import org.openoffice.odf.doc.element.text.OdfListStyle;
-import org.openoffice.odf.dom.element.text.OdfListLevelStyleNumberElement;
-import org.openoffice.odf.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.doc.element.office.OdfStyles;
+import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
+import org.odftoolkit.odfdom.doc.element.style.OdfTextProperties;
+import org.odftoolkit.odfdom.doc.element.text.OdfListStyle;
+import org.odftoolkit.odfdom.dom.element.text.OdfListLevelStyleNumberElement;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 
 public class ElementTest {
 

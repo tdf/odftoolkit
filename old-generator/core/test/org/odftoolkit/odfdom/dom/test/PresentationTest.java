@@ -19,24 +19,24 @@
  *
  */
 
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
 import java.util.Iterator;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.element.draw.OdfFillImage;
-import org.openoffice.odf.doc.element.draw.OdfGradient;
-import org.openoffice.odf.doc.element.draw.OdfHatch;
-import org.openoffice.odf.doc.element.draw.OdfMarker;
-import org.openoffice.odf.doc.element.draw.OdfPage;
-import org.openoffice.odf.doc.element.office.OdfMasterStyles;
-import org.openoffice.odf.doc.element.office.OdfPresentation;
-import org.openoffice.odf.doc.element.office.OdfStyles;
-import org.openoffice.odf.doc.element.style.OdfMasterPage;
-import org.openoffice.odf.doc.element.style.OdfStyle;
-import org.openoffice.odf.dom.element.OdfElement;
-import org.openoffice.odf.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.element.draw.OdfFillImage;
+import org.odftoolkit.odfdom.doc.element.draw.OdfGradient;
+import org.odftoolkit.odfdom.doc.element.draw.OdfHatch;
+import org.odftoolkit.odfdom.doc.element.draw.OdfMarker;
+import org.odftoolkit.odfdom.doc.element.draw.OdfPage;
+import org.odftoolkit.odfdom.doc.element.office.OdfMasterStyles;
+import org.odftoolkit.odfdom.doc.element.office.OdfPresentation;
+import org.odftoolkit.odfdom.doc.element.office.OdfStyles;
+import org.odftoolkit.odfdom.doc.element.style.OdfMasterPage;
+import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
+import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 

@@ -20,7 +20,7 @@
  *
  ************************************************************************/
 
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
 import java.io.FileInputStream;
 import java.util.logging.Level;
@@ -32,14 +32,14 @@ import javax.xml.xpath.XPathFactory;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.OdfFileDom;
-import org.openoffice.odf.dom.OdfNamespace;
-import org.openoffice.odf.dom.element.draw.OdfFrameElement;
-import org.openoffice.odf.dom.element.draw.OdfImageElement;
-import org.openoffice.odf.dom.element.text.OdfParagraphElement;
-import org.openoffice.odf.pkg.OdfPackage;
-import org.openoffice.odf.pkg.manifest.OdfFileEntry;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.element.draw.OdfFrameElement;
+import org.odftoolkit.odfdom.dom.element.draw.OdfImageElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 
 public class NoTempFileTest {
 

@@ -1,5 +1,4 @@
-/************************************************************************
- *
+/*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
@@ -18,16 +17,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- ************************************************************************/
-package org.openoffice.odf.dom.test;
+ */
 
-import org.openoffice.odf.doc.OdfFileDom;
-import org.openoffice.odf.doc.element.text.OdfSpan;
+package org.odftoolkit.odfdom.dom.test;
 
-public class MyOwnPrivateSpanClass_1 extends OdfSpan {
+import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.dom.element.text.OdfSpanElement;
+
+
+public class MyOwnPrivateSpanClass_2 extends OdfSpanElement {
 
     /** Creates a new instance of this class */
-    public MyOwnPrivateSpanClass_1(OdfFileDom ownerDoc) {
+    public MyOwnPrivateSpanClass_2(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }
 }

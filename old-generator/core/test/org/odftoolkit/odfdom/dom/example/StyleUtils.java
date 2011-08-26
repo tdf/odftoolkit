@@ -20,10 +20,10 @@
  *
  ************************************************************************/
 
-package org.openoffice.odf.dom.example;
+package org.odftoolkit.odfdom.dom.example;
 
-import org.openoffice.odf.dom.element.OdfStylableElement;
-import org.openoffice.odf.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.w3c.dom.Node;
 
 

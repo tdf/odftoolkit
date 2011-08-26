@@ -19,15 +19,15 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.dom.OdfNamespace;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.element.style.*;
-import org.openoffice.odf.dom.style.OdfStyleFamily;
-import org.openoffice.odf.dom.style.props.OdfStylePropertiesSet;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.element.style.*;
+import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 
 /**
  * Tests if default styles are parsed correctly into

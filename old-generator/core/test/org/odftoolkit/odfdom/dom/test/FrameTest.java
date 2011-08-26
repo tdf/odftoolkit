@@ -19,32 +19,36 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test.example;
+package org.odftoolkit.odfdom.dom.test;
 
-import org.openoffice.odf.doc.OdfDocument;
+import org.junit.Assert;
+import org.junit.Test;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.element.draw.OdfFrame;
+import org.odftoolkit.odfdom.doc.element.style.OdfGraphicProperties;
+import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+public class FrameTest {
 
-public class LoadMultipleTimes {
-    
-    final static int num = 50;
-    public static void main(String[] args) {
-        OdfDocument doc = null;
-        try {
-            long t = 0;
-            for (int i=0; i<num; i++) {
-                long t1 = System.currentTimeMillis();                
-                doc = OdfDocument.loadDocument("test/resources/test1.odt");
-                long t2 = System.currentTimeMillis() - t1;
-                t = t + t2;
-                System.out.println("open in " + t2 + " milliseconds");
-                long f1 = Runtime.getRuntime().freeMemory();
-                Runtime.getRuntime().gc();
-                long f2 = Runtime.getRuntime().freeMemory();
-                System.out.println("freemem pre-gc: " + f1 + ", post-gc: " + f2 + ", delta: " + (f1 - f2) + ".");
-            }
-            System.out.println("opening " + num + " times took " + t + " milliseconds");
+    public FrameTest() {
+    }
+
+    @Test
+    public void testFrame() {
+        try {            
+            OdfDocument odfdoc = OdfDocument.loadDocument("test/resources/frame.odt");
+            NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespace.DRAW.getUri(), "frame");
+            Assert.assertEquals( lst.getLength(), (int)1 );
+            Node node = lst.item(0);
+            Assert.assertTrue(node instanceof OdfFrame);
+            OdfFrame fe = (OdfFrame) lst.item(0);
+
+            Assert.assertEquals( fe.getProperty(OdfGraphicProperties.VerticalPos), "top");            
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.fail(e.getMessage());
         }
     }
 }

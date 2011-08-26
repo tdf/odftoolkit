@@ -19,15 +19,16 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test.example;
+package org.odftoolkit.odfdom.dom.test.example;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.dom.util.NodeAction;
-import org.openoffice.odf.dom.element.OdfElement;
-import org.openoffice.odf.dom.element.OdfStylableElement;
-import org.openoffice.odf.doc.element.style.OdfStyle;
+
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
+import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.dom.util.NodeAction;
 import org.w3c.dom.Node;
 
 

@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -32,20 +32,20 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.dom.OdfNamespace;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.OdfFileDom;
-import org.openoffice.odf.doc.element.office.OdfAutomaticStyles;
-import org.openoffice.odf.doc.element.office.OdfStyles;
-import org.openoffice.odf.doc.element.style.OdfPageLayout;
-import org.openoffice.odf.doc.element.style.OdfPageLayoutProperties;
-import org.openoffice.odf.dom.util.NodeAction;
-import org.openoffice.odf.dom.element.OdfElement;
-import org.openoffice.odf.dom.element.OdfStylableElement;
-import org.openoffice.odf.doc.element.style.OdfStyle;
-import org.openoffice.odf.doc.element.style.OdfTextProperties;
-import org.openoffice.odf.doc.element.text.OdfListStyle;
-import org.openoffice.odf.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.doc.element.office.OdfAutomaticStyles;
+import org.odftoolkit.odfdom.doc.element.office.OdfStyles;
+import org.odftoolkit.odfdom.doc.element.style.OdfPageLayout;
+import org.odftoolkit.odfdom.doc.element.style.OdfPageLayoutProperties;
+import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
+import org.odftoolkit.odfdom.doc.element.style.OdfTextProperties;
+import org.odftoolkit.odfdom.doc.element.text.OdfListStyle;
+import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.util.NodeAction;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;

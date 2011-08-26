@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -27,11 +27,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.dom.OdfNamespace;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.element.draw.OdfImage;
-import org.openoffice.odf.dom.util.NodeAction;
-import org.openoffice.odf.pkg.OdfPackage;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.element.draw.OdfImage;
+import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.util.NodeAction;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.w3c.dom.Node;
 
 public class ImageTest {

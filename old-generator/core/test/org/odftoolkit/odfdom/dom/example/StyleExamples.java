@@ -19,26 +19,26 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.example;
+package org.odftoolkit.odfdom.dom.example;
 
 import java.util.ArrayList;
 import static java.util.logging.Level.INFO;
 import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.element.style.OdfDefaultStyle;
-import org.openoffice.odf.doc.element.style.OdfGraphicProperties;
-import org.openoffice.odf.doc.element.style.OdfStyle;
-import org.openoffice.odf.doc.element.style.OdfTableProperties;
-import org.openoffice.odf.doc.element.style.OdfTableRowProperties;
-import org.openoffice.odf.doc.element.style.OdfTextProperties;
-import org.openoffice.odf.dom.element.OdfElement;
-import org.openoffice.odf.dom.element.OdfStylableElement;
-import org.openoffice.odf.dom.element.OdfStyleBase;
-import org.openoffice.odf.dom.style.OdfStyleFamily;
-import org.openoffice.odf.dom.style.props.OdfStyleProperty;
-import org.openoffice.odf.dom.util.NodeAction;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.element.style.OdfDefaultStyle;
+import org.odftoolkit.odfdom.doc.element.style.OdfGraphicProperties;
+import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
+import org.odftoolkit.odfdom.doc.element.style.OdfTableProperties;
+import org.odftoolkit.odfdom.doc.element.style.OdfTableRowProperties;
+import org.odftoolkit.odfdom.doc.element.style.OdfTextProperties;
+import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.util.NodeAction;
 import org.w3c.dom.Node;
 
 /**

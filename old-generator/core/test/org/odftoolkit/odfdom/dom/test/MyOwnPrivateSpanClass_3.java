@@ -19,30 +19,25 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
-import org.openoffice.odf.dom.OdfName;
-import org.openoffice.odf.dom.OdfNamespace;
-import org.openoffice.odf.doc.OdfFileDom;
-import org.openoffice.odf.dom.element.OdfElement;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfName;
+import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.element.OdfElement;
 
-/**
- * ODF DOM Element implementation for element "<text:userdefined>".
- */
-public class MyOwnPrivateOdfElement extends OdfElement
-{
-    /**
-     * 
+public class MyOwnPrivateSpanClass_3 extends OdfElement {
+
+    public static final OdfName ELEMENT_NAME = OdfName.get(OdfNamespace.TEXT, "span");
+
+    /** Creates a new instance of OdfParagraphElementImpl
      */
-    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "userdefined" );
-
-    public MyOwnPrivateOdfElement( OdfFileDom _aOwnerDoc )
-    {
-        super( _aOwnerDoc, ELEMENT_NAME );
+    public MyOwnPrivateSpanClass_3(OdfFileDom ownerDoc) {
+        super(ownerDoc, ELEMENT_NAME);
     }
 
-    public OdfName getOdfName()
-    {
+    @Override
+    public OdfName getOdfName() {
         return ELEMENT_NAME;
     }
-};
+}

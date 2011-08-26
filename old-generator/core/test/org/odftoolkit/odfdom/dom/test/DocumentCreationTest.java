@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
 import java.net.URI;
 import java.util.List;
@@ -30,28 +30,28 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.doc.OdfChartDocument;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.OdfFileDom;
-import org.openoffice.odf.doc.OdfGraphicsDocument;
-import org.openoffice.odf.doc.OdfPresentationDocument;
-import org.openoffice.odf.doc.OdfSpreadsheetDocument;
-import org.openoffice.odf.doc.OdfTextDocument;
-import org.openoffice.odf.doc.element.OdfElementFactory;
-import org.openoffice.odf.doc.element.draw.OdfFrame;
-import org.openoffice.odf.doc.element.draw.OdfImage;
-import org.openoffice.odf.doc.element.draw.OdfObject;
-import org.openoffice.odf.doc.element.office.OdfAutomaticStyles;
-import org.openoffice.odf.doc.element.style.OdfParagraphProperties;
-import org.openoffice.odf.doc.element.style.OdfStyle;
-import org.openoffice.odf.doc.element.style.OdfTextProperties;
-import org.openoffice.odf.doc.element.text.OdfSpan;
-import org.openoffice.odf.dom.OdfNamespace;
-import org.openoffice.odf.dom.element.text.OdfParagraphElement;
-import org.openoffice.odf.dom.element.text.OdfSpanElement;
-import org.openoffice.odf.dom.style.OdfStyleFamily;
-import org.openoffice.odf.dom.type.text.OdfAnchorType;
-import org.openoffice.odf.pkg.OdfPackage;
+import org.odftoolkit.odfdom.doc.OdfChartDocument;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.doc.OdfGraphicsDocument;
+import org.odftoolkit.odfdom.doc.OdfPresentationDocument;
+import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.doc.element.OdfElementFactory;
+import org.odftoolkit.odfdom.doc.element.draw.OdfFrame;
+import org.odftoolkit.odfdom.doc.element.draw.OdfImage;
+import org.odftoolkit.odfdom.doc.element.draw.OdfObject;
+import org.odftoolkit.odfdom.doc.element.office.OdfAutomaticStyles;
+import org.odftoolkit.odfdom.doc.element.style.OdfParagraphProperties;
+import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
+import org.odftoolkit.odfdom.doc.element.style.OdfTextProperties;
+import org.odftoolkit.odfdom.doc.element.text.OdfSpan;
+import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfSpanElement;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.type.text.OdfAnchorType;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
 
 public class DocumentCreationTest {
 

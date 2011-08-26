@@ -19,33 +19,44 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.dom.OdfNamespace;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.element.draw.OdfFrame;
-import org.openoffice.odf.doc.element.style.OdfGraphicProperties;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class FrameTest {
+public class LoadSaveTest {
 
-    public FrameTest() {
+    private static final String SOURCE = "test/resources/empty.odt";
+    private static final String TARGET = "build/test/loadsavetest.odt";
+
+    public LoadSaveTest() {
     }
 
     @Test
-    public void testFrame() {
-        try {            
-            OdfDocument odfdoc = OdfDocument.loadDocument("test/resources/frame.odt");
-            NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespace.DRAW.getUri(), "frame");
-            Assert.assertEquals( lst.getLength(), (int)1 );
-            Node node = lst.item(0);
-            Assert.assertTrue(node instanceof OdfFrame);
-            OdfFrame fe = (OdfFrame) lst.item(0);
+    public void testLoadSave() {
+        try {
+            OdfDocument odfDocument = OdfDocument.loadDocument(SOURCE);
 
-            Assert.assertEquals( fe.getProperty(OdfGraphicProperties.VerticalPos), "top");            
+            Document odfContent = odfDocument.getContentDom();
+            NodeList lst = odfContent.getElementsByTagNameNS(OdfNamespace.TEXT.getUri(), "p");
+            Node node = lst.item(0);
+            String oldText = "Changed!!!";
+            node.setTextContent(oldText);
+
+            odfDocument.save(TARGET);
+            odfDocument = OdfDocument.loadDocument(TARGET);
+
+            odfContent = odfDocument.getContentDom();
+            lst = odfContent.getElementsByTagNameNS(OdfNamespace.TEXT.getUri(), "p");
+            node = lst.item(0);
+            String newText = node.getTextContent();
+
+            Assert.assertTrue(newText.equals(oldText));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());

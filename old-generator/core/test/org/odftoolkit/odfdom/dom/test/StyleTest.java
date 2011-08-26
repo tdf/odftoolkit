@@ -19,24 +19,24 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.dom.OdfNamespace;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.OdfTextDocument;
-import org.openoffice.odf.doc.element.office.OdfStyles;
-import org.openoffice.odf.doc.element.style.OdfDefaultStyle;
-import org.openoffice.odf.doc.element.text.OdfParagraph;
-import org.openoffice.odf.doc.element.style.OdfParagraphProperties;
-import org.openoffice.odf.doc.element.style.OdfStyle;
-import org.openoffice.odf.dom.style.OdfStyleFamily;
-import org.openoffice.odf.dom.style.props.OdfStyleProperty;
-import org.openoffice.odf.doc.element.style.OdfTextProperties;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.doc.element.office.OdfStyles;
+import org.odftoolkit.odfdom.doc.element.style.OdfDefaultStyle;
+import org.odftoolkit.odfdom.doc.element.style.OdfParagraphProperties;
+import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
+import org.odftoolkit.odfdom.doc.element.style.OdfTextProperties;
+import org.odftoolkit.odfdom.doc.element.text.OdfParagraph;
+import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 
 public class StyleTest {
 

@@ -19,18 +19,18 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.OdfFileDom;
-import org.openoffice.odf.doc.element.text.OdfParagraph;
-import org.openoffice.odf.doc.element.table.OdfTable;
-import org.openoffice.odf.doc.element.table.OdfTableCell;
-import org.openoffice.odf.doc.element.table.OdfTableRow;
-import org.openoffice.odf.doc.element.style.OdfTableColumnProperties;
-import org.openoffice.odf.doc.element.style.OdfTableProperties;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.doc.element.style.OdfTableColumnProperties;
+import org.odftoolkit.odfdom.doc.element.style.OdfTableProperties;
+import org.odftoolkit.odfdom.doc.element.table.OdfTable;
+import org.odftoolkit.odfdom.doc.element.table.OdfTableCell;
+import org.odftoolkit.odfdom.doc.element.table.OdfTableRow;
+import org.odftoolkit.odfdom.doc.element.text.OdfParagraph;
 import org.w3c.dom.NodeList;
 
 public class CreateTableTest {

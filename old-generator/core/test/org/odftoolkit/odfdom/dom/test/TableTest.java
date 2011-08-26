@@ -19,20 +19,20 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
 import java.io.File;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.dom.OdfNamespace;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.OdfFileDom;
-import org.openoffice.odf.doc.OdfSpreadsheetDocument;
-import org.openoffice.odf.doc.element.style.OdfStyle;
-import org.openoffice.odf.doc.element.table.OdfTable;
-import org.openoffice.odf.doc.element.table.OdfTableCell;
-import org.openoffice.odf.doc.element.table.OdfTableRow;
-import org.openoffice.odf.doc.element.text.OdfParagraph;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
+import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
+import org.odftoolkit.odfdom.doc.element.table.OdfTable;
+import org.odftoolkit.odfdom.doc.element.table.OdfTableCell;
+import org.odftoolkit.odfdom.doc.element.table.OdfTableRow;
+import org.odftoolkit.odfdom.doc.element.text.OdfParagraph;
+import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

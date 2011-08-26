@@ -19,19 +19,19 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.doc.element.style.OdfTabStop;
-import org.openoffice.odf.doc.element.style.OdfTabStops;
-import org.openoffice.odf.doc.element.text.OdfParagraph;
-import org.openoffice.odf.dom.OdfNamespace;
-import org.openoffice.odf.dom.element.OdfElement;
-import org.openoffice.odf.dom.element.OdfStyleBase;
-import org.openoffice.odf.dom.element.OdfStylePropertiesBase;
-import org.openoffice.odf.dom.style.props.OdfStylePropertiesSet;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.element.style.OdfTabStop;
+import org.odftoolkit.odfdom.doc.element.style.OdfTabStops;
+import org.odftoolkit.odfdom.doc.element.text.OdfParagraph;
+import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
+import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

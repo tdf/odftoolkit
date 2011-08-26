@@ -19,47 +19,43 @@
  * limitations under the License.
  *
  ************************************************************************/
-package org.openoffice.odf.dom.test;
+package org.odftoolkit.odfdom.dom.test;
+
+
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.openoffice.odf.doc.OdfDocument;
-import org.openoffice.odf.dom.OdfNamespace;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.element.office.OdfStyles;
+import org.odftoolkit.odfdom.doc.element.style.OdfParagraphProperties;
+import org.odftoolkit.odfdom.doc.element.style.OdfStyle;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 
-public class LoadSaveTest {
+public class StyleManipulationTest {
 
     private static final String SOURCE = "test/resources/empty.odt";
-    private static final String TARGET = "build/test/loadsavetest.odt";
-
-    public LoadSaveTest() {
-    }
+    private static final String TARGET = "build/test/stylemanipulationtest.odt";
+    
+    public StyleManipulationTest() {}
 
     @Test
     public void testLoadSave() {
         try {
             OdfDocument odfDocument = OdfDocument.loadDocument(SOURCE);
-
-            Document odfContent = odfDocument.getContentDom();
-            NodeList lst = odfContent.getElementsByTagNameNS(OdfNamespace.TEXT.getUri(), "p");
-            Node node = lst.item(0);
-            String oldText = "Changed!!!";
-            node.setTextContent(oldText);
-
+            OdfStyles styles = odfDocument.getDocumentStyles();
+            Assert.assertNotNull(styles);
+            OdfStyle standardStyle = styles.getStyle("Standard", OdfStyleFamily.Paragraph);
+            standardStyle.setProperty(OdfParagraphProperties.MarginLeft, "4711");
             odfDocument.save(TARGET);
             odfDocument = OdfDocument.loadDocument(TARGET);
-
-            odfContent = odfDocument.getContentDom();
-            lst = odfContent.getElementsByTagNameNS(OdfNamespace.TEXT.getUri(), "p");
-            node = lst.item(0);
-            String newText = node.getTextContent();
-
-            Assert.assertTrue(newText.equals(oldText));
+            styles = odfDocument.getDocumentStyles();
+            standardStyle = styles.getStyle("Standard", OdfStyleFamily.Paragraph);
+            String marginLeft = standardStyle.getProperty(OdfParagraphProperties.MarginLeft);
+            
+            Assert.assertTrue(marginLeft != null && marginLeft.equals("4711"));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
-        }
+        }        
     }
 }
