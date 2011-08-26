@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
- * Copyright 2008 IBM, Inc. All rights reserved.
+ * Copyright 2009 IBM. All rights reserved.
  * 
  * Use is subject to license terms.
  * 
@@ -18,25 +18,60 @@
  * limitations under the License.
  *
  */
-package org.odftoolkit.doctag;
+package org.odftoolkit.odfdom.taglet;
 
 import java.util.Map;
+import java.util.logging.Logger;
 
 import com.sun.javadoc.Tag;
 import com.sun.tools.doclets.Taglet;
 
 
-
-public class AttributeNameTaglet implements Taglet {
-	
-	 private static final String NAME = "attributeName";
-
-	    /**
-	     * Return the name of this custom tag.
-	     */
-	    public String getName() {
-	        return NAME;
-	    }
+/**
+ *	This class implements a custom taglet to the map the ODF element to the
+ *  declaration of the ODF element in the OpenDocument specification.
+ *
+ *  The position of the OpenDocument specification in HTML can be provided using
+ *  an environment variable or java system property, while the system property overrides
+ *  the environment variable.
+ *  In case nothing is been a default path within the JavaDoc doc-files directory is being used.
+ *
+ *  For example the taglet <code>{@odf.element text:span}</code> would be resolved without variable settings to
+ *  <code>JAVA_DOC_BASE/doc-files/OpenDocument-v1.2-draft.xhtml#element-text_span</code>.
+ */
+ public class OdfElementTaglet implements Taglet {
+ 
+	 private static final Logger LOG = Logger.getLogger(OdfElementTaglet.class.getName());
+	 private static final String NAME = "odf.element";
+	 private static final String ODF_SPEC_PATH = "../../../../../../doc-files/OpenDocument-v1.2-draft.xhtml";
+	 private static String mOdfSpecPath = null;
+	  
+     /* FINDING THE ABSOLUTE PATH TO THE ODF SPEC IN HTML:
+      * 1) Try to get the odfSpecPath from the Java System variable (ODF_SPEC_PATH)
+      * 2) Try to get the odfSpecPath from the environemnt variable (ODF_SPEC_PATH)
+      * 3) If both not worked, use the default path
+      **/
+     static {
+         mOdfSpecPath = System.getProperty("ODF_SPEC_PATH");
+         if (mOdfSpecPath == null) {
+             mOdfSpecPath = System.getenv("ODF_SPEC_PATH");
+             if (mOdfSpecPath == null) {
+                 mOdfSpecPath = ODF_SPEC_PATH;
+                 LOG.info("OdfSpecPath was set to " + mOdfSpecPath + " by class declaration.");
+             } else {
+                 LOG.info("OdfSpecPath was set to " + mOdfSpecPath + " by environment property 'ODF_SPEC_PATH'.");
+             }
+         } else {
+             LOG.info("OdfSpecPath was set to " + mOdfSpecPath + " by Java System property 'ODF_SPEC_PATH'.");
+         }
+     }
+	     
+		/**
+		  * Return the name of this custom tag.
+		  */
+		public String getName() {
+		    return NAME;
+		}
 	    
 	    /**
 	     * @return true since this tag can be used in a field
@@ -98,13 +133,13 @@ public class AttributeNameTaglet implements Taglet {
 	     * Register this Taglet.
 	     * @param tagletMap  the map to register this tag to.
 	     */
-	    public static void register(Map tagletMap) {
-	       AttributeNameTaglet tag = new AttributeNameTaglet();
-	       Taglet t = (Taglet) tagletMap.get(tag.getName());
-	       if (t != null) {
-	           tagletMap.remove(tag.getName());
-	       }
-	       tagletMap.put(tag.getName(), tag);
+	    public static void register(Map<String, Taglet> tagletMap) {
+	    	OdfElementTaglet tag = new OdfElementTaglet();
+	           Taglet t = tagletMap.get(tag.getName());
+	           if (t != null) {
+	                tagletMap.remove(tag.getName());
+	            }
+	            tagletMap.put(tag.getName(), tag);
 	    }
 
 	    /**
@@ -113,12 +148,9 @@ public class AttributeNameTaglet implements Taglet {
 	     * @param tag he <code>Tag</code> representation of this custom tag.
 	     */
 	    public String toString(Tag tag) {
-			int pos = tag.text().lastIndexOf(":");
-			String link = "attribute-" + tag.text().substring(0, pos) + "_"
-					+ tag.text().substring(pos + 1);
-			String address = System.getenv("specificationurl");
-			return "<a href=\"" + address + "#" + link + "\">" + tag.text()
-					+ "</a>";		
+		    int pos = tag.text().lastIndexOf(":");
+		    String fragmentIdentifier = "element-" + tag.text().substring(0, pos) + "_" + tag.text().substring(pos + 1);
+		    return "<a href=\"" + mOdfSpecPath + "#" + fragmentIdentifier + "\">" + tag.text() + "</a>";
 	    }
 	    
 	    /**
