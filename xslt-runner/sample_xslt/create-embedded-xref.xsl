@@ -275,8 +275,17 @@
             </xsl:choose>
         </xsl:if>
 
-        <xsl:if test="$create-odf-references and not($is-in-attributes)">
-            <xsl:variable name="ref-name" select="concat($element-prefix,$element-name)"/>
+        <xsl:if test="$create-odf-references">
+            <xsl:variable name="ref-name">
+                <xsl:choose>
+                    <xsl:when test="$is-in-attributes">
+                        <xsl:value-of select="concat($attribute-prefix,preceding::text:h[@text:outline-level='2'][last()],'_',$element-prefix,$element-name)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat($element-prefix,$element-name)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
             <text:reference-mark-start text:name="{$ref-name}"/>
         </xsl:if>
         
@@ -291,21 +300,28 @@
     <xsl:template name="create-element-ref-mark-end">
         <xsl:param name="tag"/>
         <xsl:param name="is-in-attributes"/>
-        <xsl:if test="not($is-in-attributes)">
-            <xsl:variable name="element-name" select="substring-after(substring-before($tag,'&gt;'),'&lt;')"/>
-            <xsl:variable name="remainder" select="substring-after($tag,'&gt;')"/>
+        <xsl:variable name="element-name" select="substring-after(substring-before($tag,'&gt;'),'&lt;')"/>
+        <xsl:variable name="remainder" select="substring-after($tag,'&gt;')"/>
 
-            <xsl:if test="contains($remainder,'&lt;') and contains(substring-after($remainder,'&lt;'),'&gt;')">
-                <xsl:call-template name="create-element-ref-mark-end">
-                    <xsl:with-param name="tag" select="$remainder"/>
-                    <xsl:with-param name="is-in-attributes" select="$is-in-attributes"/>
-                </xsl:call-template>
-            </xsl:if>
+        <xsl:if test="contains($remainder,'&lt;') and contains(substring-after($remainder,'&lt;'),'&gt;')">
+            <xsl:call-template name="create-element-ref-mark-end">
+                <xsl:with-param name="tag" select="$remainder"/>
+                <xsl:with-param name="is-in-attributes" select="$is-in-attributes"/>
+            </xsl:call-template>
+        </xsl:if>
 
-            <xsl:if test="$create-odf-references">
-                <xsl:variable name="ref-name" select="concat($element-prefix,$element-name)"/>
-                <text:reference-mark-end text:name="{$ref-name}"/>
-            </xsl:if>        
+        <xsl:if test="$create-odf-references">
+            <xsl:variable name="ref-name">
+                <xsl:choose>
+                    <xsl:when test="$is-in-attributes">
+                        <xsl:value-of select="concat($attribute-prefix,preceding::text:h[@text:outline-level='2'][last()],'_',$element-prefix,$element-name)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat($element-prefix,$element-name)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <text:reference-mark-end text:name="{$ref-name}"/>
         </xsl:if>
     </xsl:template>
 
