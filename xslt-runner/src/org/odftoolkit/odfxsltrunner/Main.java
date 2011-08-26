@@ -49,9 +49,11 @@ public class Main {
         String aOutputName = null;
         String aPath = "content.xml";
         String aLogFileName = null;
+        String aTransformerFactoryClass = null;
         int aInputMode = ODFXSLTRunner.INPUT_MODE_PACKAGE;
         int aOutputMode = ODFXSLTRunner.OUTPUT_MODE_COPY_INPUT_PACKAGE;
         Vector<XSLTParameter> aParams = null;
+        Vector<String> aExportFileNames = null;
         int nLogLevel = CommandLineLogger.ERROR;
         
         boolean bCommandLineValid = true;
@@ -60,7 +62,14 @@ public class Main {
         while( aArgIter.hasNext() && bCommandLineValid )
         {
             String aArg = aArgIter.next();
-            if( aArg.equals("-i") )
+            if( aArg.equals("-f") )
+            {
+                if( aArgIter.hasNext() )
+                    aTransformerFactoryClass = aArgIter.next();
+                else
+                    bCommandLineValid = false;
+            }
+            else if( aArg.equals("-i") )
             {
                 aInputMode = ODFXSLTRunner.INPUT_MODE_FILE;
             }
@@ -102,6 +111,17 @@ public class Main {
             else if( aArg.equals("-v") )
             {
                 nLogLevel = CommandLineLogger.INFO;
+            }
+            else if( aArg.equals("-x") )
+            {
+                if( aArgIter.hasNext() )
+                {
+                    if( aExportFileNames == null )
+                        aExportFileNames = new Vector<String>();
+                    aExportFileNames.add( aArgIter.next() );
+                }
+                else
+                    bCommandLineValid = false;
             }
             else if( aArg.startsWith("-") )
             {
@@ -169,7 +189,7 @@ public class Main {
         {
             ODFXSLTRunner aRunner = new ODFXSLTRunner();
             Logger aLogger = new CommandLineLogger( aLogStream!=null ? aLogStream : System.err, nLogLevel );
-            bError = aRunner.runXSLT( aStyleSheetName, aParams, aInputName, aInputMode, aOutputName, aOutputMode, aPath, null, aLogger  );
+            bError = aRunner.runXSLT( aStyleSheetName, aParams, aInputName, aInputMode, aOutputName, aOutputMode, aPath, aTransformerFactoryClass, aExportFileNames, aLogger  );
         }
         catch( Exception e )
         {
@@ -184,20 +204,23 @@ public class Main {
     
     private static void printUsage()
     {
-        System.out.println( "usage: odfxsltrunner <style sheet> [-v] [-p <path in package>] [-l log file] [-t] <input package> <output package>");
-        System.out.println( "       odfxsltrunner <style sheet> [-v] [-p <path in package>] [-l log file] -r <package>");
-        System.out.println( "       odfxsltrunner <style sheet> [-v] [-p <path in package>] [-l log file] -o <input package> <output file>");
-        System.out.println( "       odfxsltrunner <style sheet> [-v] [-p <path in package>] [-l log file] -i <input file> <output package>");
+        System.out.println( "usage: odfxsltrunner <style sheet> [-v] [-f <factory>] [-p <path in package>] [-l log file] [-t] <input package> <output package> {<param>=<value>}");
+        System.out.println( "       odfxsltrunner <style sheet> [-v] [-f <factory>] [-p <path in package>] [-l log file] -r <package> {<param>=<value>}");
+        System.out.println( "       odfxsltrunner <style sheet> [-v] [-f <factory>] {-x <export path>} [-p <path in package>] [-l log file] -o <input package> <output file> {<param>=<value>}");
+        System.out.println( "       odfxsltrunner <style sheet> [-v] [-f <factory>] [-p <path in package>] [-l log file] -i <input file> <output package> {<param>=<value>}");
         System.out.println();
         System.out.println( "If no option except -p is specified, the transformation <style sheet> is applied to <path in package> of <input package>, <path in package> is replaced with the result of the transformation, and the full package is stored as <output package>." );
         System.out.println( "-p: Apply style sheet to <path in package>; default is content.xml" );
+        System.out.println( "-f: XSLT Transformer factory to use." );
         System.out.println();
         System.out.println( "-r: Don't store result as a new package but replace input package <package>" );
         System.out.println( "-i: Input file is a plain XML file" );
         System.out.println( "-l: Write messages into <log file> instead of stderr" );
         System.out.println( "-o: Store result of tranformation as plain XML file in <output file>" );
         System.out.println( "-t: Store result of transformation in <path in package> of existing <output package>" );
+        System.out.println( "-x: Copy specified file or directory from in <input package> to the directory of the <output file>. This option may be specified multiple times" );
         System.out.println( "-v: Verbose output" );
+        System.out.println( "<param>=<value> specifes an XSLT parameter" );
     }
 
 }

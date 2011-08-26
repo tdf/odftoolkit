@@ -25,16 +25,19 @@ package org.odftoolkit.odfxsltrunner;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.URIResolver;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -114,12 +117,15 @@ public class ODFXSLTRunner {
                      String aInputFile, int aInputMode,
                      String aOutputFile, int aOutputMode,
                      String aPathInPackage,
-                     String aTransformerFactoryClassName, Logger aLogger )
+                     String aTransformerFactoryClassName, 
+                     List<String> aExportFileNames,
+                     Logger aLogger )
     {
         return runXSLT( new File( aStyleSheet ), aParams,
                         new File( aInputFile), aInputMode,
                         aOutputFile != null ? new File(aOutputFile) : null, aOutputMode,
-                        aPathInPackage, aTransformerFactoryClassName, aLogger );
+                        aPathInPackage, aTransformerFactoryClassName,
+                        aExportFileNames, aLogger );
     }
     
     
@@ -141,9 +147,12 @@ public class ODFXSLTRunner {
                      File aInputFile, int aInputMode,
                      File aOutputFile, int aOutputMode,
                      String aPathInPackage,
-                     String aTransformerFactoryClassName, Logger aLogger )
+                     String aTransformerFactoryClassName, 
+                     List<String> aExportFileNames,
+                     Logger aLogger )
     {
         boolean bError = false;
+        URIResolver aURIResolver = null;
 
         Source aInputSource = null;
         OdfPackage aInputPkg = null;
@@ -159,10 +168,12 @@ public class ODFXSLTRunner {
             {
                 aInputPkg = OdfPackage.loadPackage( aInputFile );
                 aLogger.setName( aInputFile.getAbsolutePath(), aPathInPackage );
-                aInputSource = new StreamSource( aInputPkg.getInputStream(aPathInPackage));
+                aInputSource = new StreamSource( aInputPkg.getInputStream(aPathInPackage), aInputFile.toURI().toString() + '/' + aPathInPackage );
                 OdfFileEntry aFileEntry =  aInputPkg.getFileEntry(aPathInPackage);
                 if( aFileEntry != null )
                     aMediaType = aFileEntry.getMediaType();
+                aURIResolver =
+                    new ODFURIResolver( aInputPkg, aInputFile.toURI().toString(), aPathInPackage, aLogger );
             }
         }
         catch( Exception e )
@@ -215,7 +226,7 @@ public class ODFXSLTRunner {
         aLogger.setName( aStyleSheetFile.getAbsolutePath() );
         aLogger.logInfo( "Applying stylesheet to '" + aInputName + "'");
         bError = runXSLT( aStyleSheetFile, aParams, aInputSource, aOutputResult, 
-                          aTransformerFactoryClassName, aLogger );
+                          aTransformerFactoryClassName, aURIResolver, aLogger );
         if( bError )
             return true;
         
@@ -227,6 +238,11 @@ public class ODFXSLTRunner {
                 aOutputStream.close();
             if( !bError && aOutputPkg != null )
                 aOutputPkg.save(aOutputFile);
+            if( aOutputMode == OUTPUT_MODE_FILE && aExportFileNames != null && aInputPkg != null )
+            {
+                File aExportDir = aOutputFile.getParentFile();
+                copyExportFiles( aInputPkg, aExportDir, aExportFileNames, aLogger );
+            }
         }
         catch( Exception e )
         {
@@ -242,6 +258,7 @@ public class ODFXSLTRunner {
                      List<XSLTParameter> aParams,
                      Source aInputSource, Result aOutputTarget,
                      String aTransformerFactoryClassName,
+                     URIResolver aURIResolver,
                      Logger aLogger )
     {
         InputStream aStyleSheetInputStream = null;
@@ -273,10 +290,13 @@ public class ODFXSLTRunner {
         
         Source aSource = new SAXSource( aXMLReader, aStyleSheetInputSource );
 
+        if( aTransformerFactoryClassName!=null )
+            aLogger.logInfo( "Requesting transformer factory class: " + aTransformerFactoryClassName );
         TransformerFactory aFactory =
                 aTransformerFactoryClassName==null ? TransformerFactory.newInstance()
                     : TransformerFactory.newInstance( aTransformerFactoryClassName, null );
         ErrorListener aErrorListener = new TransformerErrorListener( aLogger );
+        aLogger.logInfo( "Using transformer factory class: " + aFactory.getClass().getName() );
         aFactory.setErrorListener(aErrorListener);
         
         try
@@ -294,7 +314,8 @@ public class ODFXSLTRunner {
                 }
             }
             aTransformer.setErrorListener(aErrorListener);
-//            aTransformer.setURIResolver(new ODFURIResolver( aFactory.getURIResolver(), aLogger ));
+            if( aURIResolver != null )
+                aTransformer.setURIResolver(aURIResolver);
             aTransformer.transform(aInputSource, aOutputTarget);
         }
         catch( TransformerException e )
@@ -303,6 +324,57 @@ public class ODFXSLTRunner {
             return true;
         }
 
+        return false;
+    }
+
+    private boolean copyExportFiles( OdfPackage aInputPkg,
+                                     File aExportDir,
+                                     List<String> aExportFileNames,
+                                     Logger aLogger )
+    {
+        Set<String> aInputPkgEntries = aInputPkg.getFileEntries();
+
+        Iterator<String> aInputPkgEntryIter = aInputPkgEntries.iterator();
+        while( aInputPkgEntryIter.hasNext() )
+        {
+            String aInputFileName = aInputPkgEntryIter.next();
+
+            Iterator<String> aExportFileNameIter = aExportFileNames.iterator();
+            while( aExportFileNameIter.hasNext() )
+            {
+                String aExportFileName = aExportFileNameIter.next();
+                if( !aInputFileName.endsWith("/") &&
+                    (aInputFileName.equals(aExportFileName) ||
+                    (aExportFileName.endsWith("/") ? aInputFileName.startsWith(aExportFileName)
+                                                   : aInputFileName.startsWith(aExportFileName+"/")) ) )
+                {
+                    try
+                    {
+                        File aExportFile = new File( aExportDir, aInputFileName );
+                        File aExportFileDir = aExportFile.getParentFile();
+                        if( aExportFileDir != null )
+                            aExportFileDir.mkdirs();
+
+                        aLogger.logInfo( "Copying file " +  aInputFileName + " to " + aExportFile.getAbsolutePath() );
+                        InputStream aInputStream = aInputPkg.getInputStream(aInputFileName);
+                        OutputStream aExportStream = new FileOutputStream( aExportFile );
+                        byte[] buf = new byte[4096];
+                        int r = 0;
+                        while ((r = aInputStream.read(buf, 0, 4096)) > -1)
+                        {
+                            aExportStream.write(buf, 0, r);
+                        }
+                        aExportStream.close();
+                        aInputStream.close();
+                    }
+                    catch(java.lang.Exception e)
+                    {
+                        aLogger.logError(e.getMessage());
+                    }
+                    break;
+                }
+            }
+        }
         return false;
     }
 }
