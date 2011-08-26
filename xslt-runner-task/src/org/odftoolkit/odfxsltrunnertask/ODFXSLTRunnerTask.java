@@ -20,7 +20,7 @@
  *
  ************************************************************************/
 
-package odfxsltrunnertask;
+package org.odftoolkit.odfxsltrunnertask;
 
 // IMPORTANT! You need to compile this class against ant.jar.
 // The easiest way to do this is to add ${ant.core.lib} to your project's classpath.
@@ -30,9 +30,9 @@ package odfxsltrunnertask;
 import java.io.File;
 import java.util.Iterator;
 import java.util.Vector;
-import odfxsltrunner.Logger;
-import odfxsltrunner.ODFXSLTRunner;
-import odfxsltrunner.XSLTParameter;
+import org.odftoolkit.odfxsltrunner.Logger;
+import org.odftoolkit.odfxsltrunner.ODFXSLTRunner;
+import org.odftoolkit.odfxsltrunner.XSLTParameter;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 

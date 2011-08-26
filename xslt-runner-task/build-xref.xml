@@ -29,19 +29,40 @@
     
     <property name="opendocument.v12.schema.xref" value="OpenDocument-xref-schema-v1.2${opendocument.v12.schema.state}.rng"/>
     <property name="opendocument.v12.schema.dtype" value="OpenDocument-dtype-schema-v1.2${opendocument.v12.schema.state}.rng"/>
+    <property name="opendocument.v12.manifest-schema.xref" value="OpenDocument-xref-manifest-schema-v1.2${opendocument.v12.part3.schema.state}.rng"/>
 
-    <target name="add-v12-xref" depends="init,jar,-create-v12-xref-schema" 
+    <target name="add-v12-part1-xref" depends="init,jar,-create-v12-xref-schema"
             description="Add cross references to ODF 1.2 specification.">
-        <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+        <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
         <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
-        <property name="target-file" value="${dist.dir}/xref/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"/>
+        <property name="target-file" value="${dist.dir}/xref/OpenDocument-v1.2-part1${opendocument.v12.part1.state.target}.odt"/>
         <condition property="force">
             <not>
                 <uptodate srcfile="${xref-schema-file}" targetfile="${target-file}"/>
             </not>
         </condition>
         <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-embedded-xref.xsl"
-                 in="${opendocument.v12.spec-source.main}"
+                 in="${opendocument.v12.part1.spec-source}"
+                 out="${target-file}"
+                 force="${force}">
+            <param name="xref-schema-file" expression="${xref-schema-file}"/>
+            <param name="add-xrefs" expression="true"/>
+            <param name="keep-anchors" expression="false"/>
+        </odfxslt>
+    </target>
+
+    <target name="add-v12-part3-xref" depends="init,jar,-create-v12-manifest-xref-schema"
+            description="Add cross references to ODF 1.2 specification.">
+        <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+        <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.manifest-schema.xref}"/>
+        <property name="target-file" value="${dist.dir}/xref/OpenDocument-part3-v1.2${opendocument.v12.part3.state.target}.odt"/>
+        <condition property="force">
+            <not>
+                <uptodate srcfile="${xref-schema-file}" targetfile="${target-file}"/>
+            </not>
+        </condition>
+        <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-embedded-xref.xsl"
+                 in="${opendocument.v12.part3.spec-source}"
                  out="${target-file}"
                  force="${force}">
             <param name="xref-schema-file" expression="${xref-schema-file}"/>
@@ -50,38 +71,17 @@
         </odfxslt>
     </target>
 
-    <target name="add-v12-model" depends="init,jar,create-v12-normalized-schema"
-            description="Add cross references to ODF 1.2 specification.">
-        <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
-        <property name="xref-schema-file" location="${build.dir}/schema/normalized/${opendocument.v12.schema.xref}"/>
-        <property name="target-file" value="${dist.dir}/normalized/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"/>
-        <condition property="force">
-            <not>
-                <uptodate srcfile="${xref-schema-file}" targetfile="${target-file}"/>
-            </not>
-        </condition>
-        <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-embedded-model.xsl"
-                 in="${opendocument.v12.spec-source.main}"
-                 out="${target-file}"
-                 force="${force}">
-            <param name="xref-schema-file" expression="${xref-schema-file}"/>
-            <param name="add-xrefs" expression="true"/>
-            <param name="keep-anchors" expression="true"/>
-        </odfxslt>
-    </target>
-
-    <target name="remove-v12-xref" depends="init,jar,-create-v12-xref-schema" 
-            description="Remove cross references to ODF 1.2 specification.">
-        <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+    <target name="remove-v12-xref" depends="init,jar,-create-v12-xref-schema">
+        <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
         <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
-        <property name="target-file" value="${dist.dir}/no-xref/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"/>
+        <property name="target-file" value="${dist.dir}/no-xref/OpenDocument-v1.2${opendocument.v12.part1.state.target}.odt"/>
         <condition property="force">
             <not>
                 <uptodate srcfile="${xref-schema-file}" targetfile="${target-file}"/>
             </not>
         </condition>
         <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-embedded-xref.xsl"
-                 in="${opendocument.v12.spec-source.main}"
+                 in="${opendocument.v12.part1.spec-source}"
                  out="${target-file}"
                  force="${force}">
             <param name="xref-schema-file" expression="${xref-schema-file}"/>
@@ -90,27 +90,25 @@
         </odfxslt>
     </target>
     
-    <target name="add-v12-default-values" depends="init,-create-v12-xref-schema" 
-            description="Add default values to the ODF 1.2 specification.">
-        <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+    <target name="add-v12-default-values" depends="init,-create-v12-xref-schema">
+        <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
         <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
-        <property name="target-file" value="${dist.dir}/default-values/OpenDocument-v1.2${opendocument.v12.schema.state.target}.odt"/>
+        <property name="target-file" value="${dist.dir}/default-values/OpenDocument-v1.2${opendocument.v12.part1.state.target}.odt"/>
         <condition property="force">
             <not>
                 <uptodate srcfile="${xref-schema-file}" targetfile="${target-file}"/>
             </not>
         </condition>
         <odfxslt style="${project.odfxsltrunner}/sample_xslt/add-default-values.xsl"
-            in="${opendocument.v12.spec-source.main}"
+            in="${opendocument.v12.part1.spec-source}"
             out="${target-file}"
             force="${force}">
             <param name="xref-schema-file" expression="${xref-schema-file}"/>
         </odfxslt>
     </target>
 
-    <target name="create-v12-attribute-xref-ods" depends="init,jar,-create-v12-dtype-schema" 
-            description="Creates cross reference document from ODF 1.2 schema.">
-        <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+    <target name="create-v12-attribute-xref-ods" depends="init,jar,-create-v12-dtype-schema">
+        <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
         <copy file="${project.odfxsltrunner}/misc/odf-attribute-xref.ods" todir="${dist.dir}/attr-xref"/>
         <odfxslt style="${project.odfxsltrunner}/sample_xslt/create-attribute-xref.xsl"
             infile="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}"
@@ -118,40 +116,31 @@
             template="true"/>
     </target>
     
-    <target name="check-v12-completeness" depends="init,-create-v12-xref-schema" 
-            description="Check completeness of ODF 1.2 specification.">
-        <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
+    <target name="check-v12-part1-completeness" depends="init,-create-v12-xref-schema">
+        <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${dist.jar}:${reference.odfxsltrunner.jar}"/>
         <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
-        <property name="check-log-file" location="${dist.dir}/OpenDocument-v1.2${opendocument.v12.schema.state.target}-check.log"/>
+        <property name="check-log-file" location="${dist.dir}/OpenDocument-v1.2${opendocument.v12.part1.state.target}-check.log"/>
         <condition property="force">
             <not>
                 <uptodate srcfile="${xref-schema-file}" targetfile="${check-log-file}"/>
             </not>
         </condition>
         <odfxslt style="${project.odfxsltrunner}/sample_xslt/check-completeness.xsl"
-            in="${opendocument.v12.spec-source.main}"
+            in="${opendocument.v12.part1.spec-source}"
             outfile="${check-log-file}"
             force="${force}">
             <param name="xref-schema-file" expression="${xref-schema-file}"/>
         </odfxslt>
     </target>
         
-    <target name="publish-v12-schema" depends="init,-get-v12-schemas"
-            description="Create an official ODF schema from a working schema">
-        <xslt style="${project.odfxsltrunner}/sample_xslt/publish-schema.xsl" 
-                    in="${v12.schema.dir}/${opendocument.v12.schema}" 
-                    out="${dist.dir}/oasis/${opendocument.v12.schema}"/>  
-    </target>
-    
-    
-    <target name="-create-v12-xref-schema" depends="init,-get-v12-schemas">
+    <target name="-create-v12-xref-schema" depends="init">
         <condition property="force">
             <not>
-                <uptodate srcfile="${v12.schema.dir}/${opendocument.v12.schema}" targetfile="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
+                <uptodate srcfile="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}" targetfile="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
             </not>
         </condition>
         <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl" 
-                    in="${v12.schema.dir}/${opendocument.v12.schema}" 
+                    in="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}"
                     out="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"
                     force="${force}">  
             <param name="incl-conditions" expression="true"/>
@@ -161,14 +150,31 @@
         </xslt>
     </target>
 
-    <target name="create-v12-normalized-schema" depends="init,-get-v12-schemas" description="any">
+    <target name="-create-v12-manifest-xref-schema" depends="init">
         <condition property="force">
             <not>
-                <uptodate srcfile="${v12.schema.dir}/${opendocument.v12.schema}" targetfile="${build.dir}/schema/normalized/${opendocument.v12.schema.xref}"/>
+                <uptodate srcfile="${opendocument.v12.part3.schema.dir}/${opendocument.v12.schema.manifest}" targetfile="${build.dir}/schema/flat/${opendocument.v12.manifest-schema.xref}"/>
             </not>
         </condition>
         <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl"
-                    in="${v12.schema.dir}/${opendocument.v12.schema}"
+                    in="${opendocument.v12.part3.schema.dir}/${opendocument.v12.schema.manifest}"
+                    out="${build.dir}/schema/flat/${opendocument.v12.manifest-schema.xref}"
+                    force="${force}">
+            <param name="incl-conditions" expression="true"/>
+            <param name="incl-default-values" expression="true"/>
+            <param name="incl-types" expression="true"/>
+            <param name="incl-elements" expression="true"/>
+        </xslt>
+    </target>
+
+    <target name="create-v12-normalized-schema" depends="init">
+        <condition property="force">
+            <not>
+                <uptodate srcfile="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}" targetfile="${build.dir}/schema/normalized/${opendocument.v12.schema.xref}"/>
+            </not>
+        </condition>
+        <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl"
+                    in="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}"
                     out="${build.dir}/schema/normalized/${opendocument.v12.schema.xref}"
                     force="${force}">
             <param name="incl-content-model" expression="true"/>
@@ -179,14 +185,14 @@
         </xslt>
     </target>
 
-    <target name="-create-v12-dtype-schema" depends="init,-get-v12-schemas">
+    <target name="-create-v12-dtype-schema" depends="init">
         <condition property="force">
             <not>
-                <uptodate srcfile="${v12.schema.dir}/${opendocument.v12.schema}" targetfile="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}"/>
+                <uptodate srcfile="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}" targetfile="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}"/>
             </not>
         </condition>
         <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl" 
-                    in="${v12.schema.dir}/${opendocument.v12.schema.strict}" 
+                    in="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}"
                     out="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}"
                     force="${force}">  
             <param name="incl-conditions" expression="false"/>

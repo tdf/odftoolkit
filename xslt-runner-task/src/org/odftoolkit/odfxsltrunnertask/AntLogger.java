@@ -20,9 +20,9 @@
  *
  ************************************************************************/
 
-package odfxsltrunnertask;
+package org.odftoolkit.odfxsltrunnertask;
 
-import odfxsltrunner.Logger;
+import org.odftoolkit.odfxsltrunner.Logger;
 import org.apache.tools.ant.Project;
 
 class AntLogger extends Logger 
