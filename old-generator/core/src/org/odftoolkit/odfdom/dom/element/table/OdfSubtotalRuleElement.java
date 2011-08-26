@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:subtotal-rule>".
  */
 public abstract class OdfSubtotalRuleElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1266183102826538102L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "subtotal-rule" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "subtotal-rule" );
 
     public OdfSubtotalRuleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -82,4 +78,16 @@ public abstract class OdfSubtotalRuleElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "group-by-field-number" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:subtotal-field".
+    */
+    public OdfSubtotalFieldElement createSubtotalFieldElement(Integer   _aFieldNumber, String   _aFunction)
+    {
+        OdfSubtotalFieldElement  _nSubtotalField = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSubtotalFieldElement.class);
+        _nSubtotalField.setFieldNumber( _aFieldNumber);
+        _nSubtotalField.setFunction( _aFunction);
+        this.appendChild( _nSubtotalField);
+        return  _nSubtotalField;      
+    }
+    
 }

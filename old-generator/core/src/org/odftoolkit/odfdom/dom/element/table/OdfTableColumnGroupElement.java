@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:table-column-group>".
  */
 public abstract class OdfTableColumnGroupElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6768654739102374749L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-column-group" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-column-group" );
 
     public OdfTableColumnGroupElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -80,4 +76,44 @@ public abstract class OdfTableColumnGroupElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "display" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:table-column-group".
+    */
+    public OdfTableColumnGroupElement createTableColumnGroupElement()
+    {
+        OdfTableColumnGroupElement  _nTableColumnGroup = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableColumnGroupElement.class);
+        this.appendChild( _nTableColumnGroup);
+        return  _nTableColumnGroup;
+    }                   
+               
+    /**
+    * Create child element "table:table-columns".
+    */
+    public OdfTableColumnsElement createTableColumnsElement()
+    {
+        OdfTableColumnsElement  _nTableColumns = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableColumnsElement.class);
+        this.appendChild( _nTableColumns);
+        return  _nTableColumns;
+    }                   
+               
+    /**
+    * Create child element "table:table-column".
+    */
+    public OdfTableColumnElement createTableColumnElement()
+    {
+        OdfTableColumnElement  _nTableColumn = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableColumnElement.class);
+        this.appendChild( _nTableColumn);
+        return  _nTableColumn;
+    }                   
+               
+    /**
+    * Create child element "table:table-header-columns".
+    */
+    public OdfTableHeaderColumnsElement createTableHeaderColumnsElement()
+    {
+        OdfTableHeaderColumnsElement  _nTableHeaderColumns = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableHeaderColumnsElement.class);
+        this.appendChild( _nTableHeaderColumns);
+        return  _nTableHeaderColumns;
+    }                   
+               
 }

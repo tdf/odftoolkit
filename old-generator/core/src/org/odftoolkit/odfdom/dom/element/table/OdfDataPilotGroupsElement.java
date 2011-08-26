@@ -35,25 +35,21 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.odftoolkit.odfdom.dom.type.OdfDate;
 import org.odftoolkit.odfdom.dom.type.table.OdfGroupedByType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:data-pilot-groups>".
  */
 public abstract class OdfDataPilotGroupsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8884234377545008882L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-groups" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-groups" );
 
     public OdfDataPilotGroupsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -196,4 +192,15 @@ public abstract class OdfDataPilotGroupsElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "grouped-by" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:data-pilot-group".
+    */
+    public OdfDataPilotGroupElement createDataPilotGroupElement(String   _aName)
+    {
+        OdfDataPilotGroupElement  _nDataPilotGroup = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotGroupElement.class);
+        _nDataPilotGroup.setName( _aName);
+        this.appendChild( _nDataPilotGroup);
+        return  _nDataPilotGroup;      
+    }
+    
 }

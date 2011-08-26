@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.table.OdfDisplayListType;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfEventListenersElement;
 
 /**
  * ODF DOM Element implementation for element "<table:content-validation>".
  */
 public abstract class OdfContentValidationElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8651468756565765112L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "content-validation" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "content-validation" );
 
     public OdfContentValidationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -162,4 +158,44 @@ public abstract class OdfContentValidationElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "display-list" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:help-message".
+    */
+    public OdfHelpMessageElement createHelpMessageElement()
+    {
+        OdfHelpMessageElement  _nHelpMessage = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHelpMessageElement.class);
+        this.appendChild( _nHelpMessage);
+        return  _nHelpMessage;
+    }                   
+               
+    /**
+    * Create child element "table:error-message".
+    */
+    public OdfErrorMessageElement createErrorMessageElement()
+    {
+        OdfErrorMessageElement  _nErrorMessage = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfErrorMessageElement.class);
+        this.appendChild( _nErrorMessage);
+        return  _nErrorMessage;
+    }                   
+               
+    /**
+    * Create child element "table:error-macro".
+    */
+    public OdfErrorMacroElement createErrorMacroElement()
+    {
+        OdfErrorMacroElement  _nErrorMacro = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfErrorMacroElement.class);
+        this.appendChild( _nErrorMacro);
+        return  _nErrorMacro;
+    }                   
+               
+    /**
+    * Create child element "office:event-listeners".
+    */
+    public OdfEventListenersElement createEventListenersElement()
+    {
+        OdfEventListenersElement  _nEventListeners = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEventListenersElement.class);
+        this.appendChild( _nEventListeners);
+        return  _nEventListeners;
+    }                   
+               
 }

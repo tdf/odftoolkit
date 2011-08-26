@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfLayoutModeType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:data-pilot-layout-info>".
  */
 public abstract class OdfDataPilotLayoutInfoElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5697590672147501813L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-layout-info" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-layout-info" );
 
     public OdfDataPilotLayoutInfoElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

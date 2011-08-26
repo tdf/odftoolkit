@@ -32,28 +32,34 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:dde-links>".
  */
 public abstract class OdfDdeLinksElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -180725951886761781L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "dde-links" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "dde-links" );
 
     public OdfDdeLinksElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "table:dde-link".
+    */
+    public OdfDdeLinkElement createDdeLinkElement()
+    {
+        OdfDdeLinkElement  _nDdeLink = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDdeLinkElement.class);
+        this.appendChild( _nDdeLink);
+        return  _nDdeLink;
+    }                   
+               
 }

@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfAcceptanceStateType;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfChangeInfoElement;
 
 /**
  * ODF DOM Element implementation for element "<table:movement>".
  */
 public abstract class OdfMovementElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2576706773681937021L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "movement" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "movement" );
 
     public OdfMovementElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -119,4 +115,54 @@ public abstract class OdfMovementElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "rejecting-change-id" ), _aRejectingChangeId );
     }
 
+    /**
+    * Create child element "table:source-range-address".
+    */
+    public OdfSourceRangeAddressElement createSourceRangeAddressElement()
+    {
+        OdfSourceRangeAddressElement  _nSourceRangeAddress = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSourceRangeAddressElement.class);
+        this.appendChild( _nSourceRangeAddress);
+        return  _nSourceRangeAddress;
+    }                   
+               
+    /**
+    * Create child element "table:target-range-address".
+    */
+    public OdfTargetRangeAddressElement createTargetRangeAddressElement()
+    {
+        OdfTargetRangeAddressElement  _nTargetRangeAddress = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTargetRangeAddressElement.class);
+        this.appendChild( _nTargetRangeAddress);
+        return  _nTargetRangeAddress;
+    }                   
+               
+    /**
+    * Create child element "office:change-info".
+    */
+    public OdfChangeInfoElement createChangeInfoElement()
+    {
+        OdfChangeInfoElement  _nChangeInfo = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfChangeInfoElement.class);
+        this.appendChild( _nChangeInfo);
+        return  _nChangeInfo;
+    }                   
+               
+    /**
+    * Create child element "table:dependencies".
+    */
+    public OdfDependenciesElement createDependenciesElement()
+    {
+        OdfDependenciesElement  _nDependencies = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDependenciesElement.class);
+        this.appendChild( _nDependencies);
+        return  _nDependencies;
+    }                   
+               
+    /**
+    * Create child element "table:deletions".
+    */
+    public OdfDeletionsElement createDeletionsElement()
+    {
+        OdfDeletionsElement  _nDeletions = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDeletionsElement.class);
+        this.appendChild( _nDeletions);
+        return  _nDeletions;
+    }                   
+               
 }

@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfSortModeType;
 import org.odftoolkit.odfdom.dom.type.table.OdfOrderType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:data-pilot-sort-info>".
  */
 public abstract class OdfDataPilotSortInfoElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6718118868907866406L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-sort-info" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-sort-info" );
 
     public OdfDataPilotSortInfoElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

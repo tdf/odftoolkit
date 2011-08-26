@@ -32,28 +32,35 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:data-pilot-subtotals>".
  */
 public abstract class OdfDataPilotSubtotalsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 400351872599185826L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-subtotals" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-subtotals" );
 
     public OdfDataPilotSubtotalsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "table:data-pilot-subtotal".
+    */
+    public OdfDataPilotSubtotalElement createDataPilotSubtotalElement(String   _aFunction)
+    {
+        OdfDataPilotSubtotalElement  _nDataPilotSubtotal = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotSubtotalElement.class);
+        _nDataPilotSubtotal.setFunction( _aFunction);
+        this.appendChild( _nDataPilotSubtotal);
+        return  _nDataPilotSubtotal;      
+    }
+    
 }

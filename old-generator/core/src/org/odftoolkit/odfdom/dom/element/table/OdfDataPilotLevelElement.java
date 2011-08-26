@@ -33,25 +33,25 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+import org.odftoolkit.odfdom.dom.type.table.OdfDisplayMemberModeType;
+import org.odftoolkit.odfdom.dom.type.table.OdfDisplayMemberModeType;
+import org.odftoolkit.odfdom.dom.type.table.OdfOrderType;
+import org.odftoolkit.odfdom.dom.type.table.OdfSortModeType;
+import org.odftoolkit.odfdom.dom.type.table.OdfLayoutModeType;
 
 /**
  * ODF DOM Element implementation for element "<table:data-pilot-level>".
  */
 public abstract class OdfDataPilotLevelElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3992777536373913437L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-level" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-level" );
 
     public OdfDataPilotLevelElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -75,4 +75,75 @@ public abstract class OdfDataPilotLevelElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "show-empty" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:data-pilot-subtotals".
+    */
+    public OdfDataPilotSubtotalsElement createDataPilotSubtotalsElement()
+    {
+        OdfDataPilotSubtotalsElement  _nDataPilotSubtotals = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotSubtotalsElement.class);
+        this.appendChild( _nDataPilotSubtotals);
+        return  _nDataPilotSubtotals;
+    }                   
+               
+    /**
+    * Create child element "table:data-pilot-members".
+    */
+    public OdfDataPilotMembersElement createDataPilotMembersElement()
+    {
+        OdfDataPilotMembersElement  _nDataPilotMembers = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotMembersElement.class);
+        this.appendChild( _nDataPilotMembers);
+        return  _nDataPilotMembers;
+    }                   
+               
+    /**
+    * Create child element "table:data-pilot-display-info".
+    */
+    public OdfDataPilotDisplayInfoElement createDataPilotDisplayInfoElement(Boolean   _aEnabled, String   _aDataField, Integer   _aMemberCount, OdfDisplayMemberModeType   _aDisplayMemberMode)
+    {
+        OdfDataPilotDisplayInfoElement  _nDataPilotDisplayInfo = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotDisplayInfoElement.class);
+        _nDataPilotDisplayInfo.setEnabled( _aEnabled);
+        _nDataPilotDisplayInfo.setDataField( _aDataField);
+        _nDataPilotDisplayInfo.setMemberCount( _aMemberCount);
+        _nDataPilotDisplayInfo.setDisplayMemberMode( _aDisplayMemberMode);
+        this.appendChild( _nDataPilotDisplayInfo);
+        return  _nDataPilotDisplayInfo;      
+    }
+    
+    /**
+    * Create child element "table:data-pilot-sort-info".
+    */
+    public OdfDataPilotSortInfoElement createDataPilotSortInfoElement(OdfOrderType   _aOrder, OdfSortModeType   _aSortMode)
+    {
+        OdfDataPilotSortInfoElement  _nDataPilotSortInfo = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotSortInfoElement.class);
+        _nDataPilotSortInfo.setOrder( _aOrder);
+        _nDataPilotSortInfo.setSortMode( _aSortMode);
+        this.appendChild( _nDataPilotSortInfo);
+        return  _nDataPilotSortInfo;      
+    }
+    
+    /**
+    * Create child element "table:data-pilot-sort-info".
+    */
+    public OdfDataPilotSortInfoElement createDataPilotSortInfoElement(OdfSortModeType   _aSortMode, String   _aDataField, OdfOrderType   _aOrder)
+    {
+        OdfDataPilotSortInfoElement  _nDataPilotSortInfo = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotSortInfoElement.class);
+        _nDataPilotSortInfo.setSortMode( _aSortMode);
+        _nDataPilotSortInfo.setDataField( _aDataField);
+        _nDataPilotSortInfo.setOrder( _aOrder);
+        this.appendChild( _nDataPilotSortInfo);
+        return  _nDataPilotSortInfo;      
+    }
+    
+    /**
+    * Create child element "table:data-pilot-layout-info".
+    */
+    public OdfDataPilotLayoutInfoElement createDataPilotLayoutInfoElement(OdfLayoutModeType   _aLayoutMode, Boolean   _aAddEmptyLines)
+    {
+        OdfDataPilotLayoutInfoElement  _nDataPilotLayoutInfo = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotLayoutInfoElement.class);
+        _nDataPilotLayoutInfo.setLayoutMode( _aLayoutMode);
+        _nDataPilotLayoutInfo.setAddEmptyLines( _aAddEmptyLines);
+        this.appendChild( _nDataPilotLayoutInfo);
+        return  _nDataPilotLayoutInfo;      
+    }
+    
 }

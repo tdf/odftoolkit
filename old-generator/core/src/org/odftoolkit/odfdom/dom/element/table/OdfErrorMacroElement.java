@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:error-macro>".
  */
 public abstract class OdfErrorMacroElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 805673151449607715L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "error-macro" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "error-macro" );
 
     public OdfErrorMacroElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

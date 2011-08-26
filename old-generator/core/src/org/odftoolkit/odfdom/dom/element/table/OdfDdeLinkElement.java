@@ -32,28 +32,47 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfDdeSourceElement;
 
 /**
  * ODF DOM Element implementation for element "<table:dde-link>".
  */
 public abstract class OdfDdeLinkElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8998966067700686992L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "dde-link" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "dde-link" );
 
     public OdfDdeLinkElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "office:dde-source".
+    */
+    public OdfDdeSourceElement createDdeSourceElement(String   _aDdeApplication, String   _aDdeTopic, String   _aDdeItem)
+    {
+        OdfDdeSourceElement  _nDdeSource = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDdeSourceElement.class);
+        _nDdeSource.setDdeApplication( _aDdeApplication);
+        _nDdeSource.setDdeTopic( _aDdeTopic);
+        _nDdeSource.setDdeItem( _aDdeItem);
+        this.appendChild( _nDdeSource);
+        return  _nDdeSource;      
+    }
+    
+    /**
+    * Create child element "table:table".
+    */
+    public OdfTableElement createTableElement()
+    {
+        OdfTableElement  _nTable = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableElement.class);
+        this.appendChild( _nTable);
+        return  _nTable;
+    }                   
+               
 }

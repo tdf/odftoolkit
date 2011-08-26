@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.table.OdfSheetObjectType;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.table.OdfAcceptanceStateType;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfChangeInfoElement;
 
 /**
  * ODF DOM Element implementation for element "<table:insertion>".
  */
 public abstract class OdfInsertionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1356231672738942614L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "insertion" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "insertion" );
 
     public OdfInsertionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -200,4 +196,34 @@ public abstract class OdfInsertionElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "rejecting-change-id" ), _aRejectingChangeId );
     }
 
+    /**
+    * Create child element "office:change-info".
+    */
+    public OdfChangeInfoElement createChangeInfoElement()
+    {
+        OdfChangeInfoElement  _nChangeInfo = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfChangeInfoElement.class);
+        this.appendChild( _nChangeInfo);
+        return  _nChangeInfo;
+    }                   
+               
+    /**
+    * Create child element "table:dependencies".
+    */
+    public OdfDependenciesElement createDependenciesElement()
+    {
+        OdfDependenciesElement  _nDependencies = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDependenciesElement.class);
+        this.appendChild( _nDependencies);
+        return  _nDependencies;
+    }                   
+               
+    /**
+    * Create child element "table:deletions".
+    */
+    public OdfDeletionsElement createDeletionsElement()
+    {
+        OdfDeletionsElement  _nDeletions = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDeletionsElement.class);
+        this.appendChild( _nDeletions);
+        return  _nDeletions;
+    }                   
+               
 }

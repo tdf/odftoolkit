@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.table.OdfValueType;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.odftoolkit.odfdom.dom.type.OdfDate;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:null-date>".
  */
 public abstract class OdfNullDateElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7770998670866134356L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "null-date" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "null-date" );
 
     public OdfNullDateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

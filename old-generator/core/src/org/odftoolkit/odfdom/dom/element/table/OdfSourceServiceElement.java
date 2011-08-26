@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:source-service>".
  */
 public abstract class OdfSourceServiceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3303410644404659301L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "source-service" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "source-service" );
 
     public OdfSourceServiceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

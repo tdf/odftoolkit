@@ -40,25 +40,21 @@ import org.odftoolkit.odfdom.dom.type.OdfDate;
 import javax.xml.datatype.Duration;
 import org.odftoolkit.odfdom.dom.type.OdfDuration;
 
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 
 /**
  * ODF DOM Element implementation for element "<table:change-track-table-cell>".
  */
 public abstract class OdfChangeTrackTableCellElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 9135702330233578574L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "change-track-table-cell" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "change-track-table-cell" );
 
     public OdfChangeTrackTableCellElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -274,4 +270,14 @@ public abstract class OdfChangeTrackTableCellElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "string-value" ), _aStringValue );
     }
 
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
 }

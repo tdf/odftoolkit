@@ -32,28 +32,35 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:content-validations>".
  */
 public abstract class OdfContentValidationsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5673653688691351014L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "content-validations" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "content-validations" );
 
     public OdfContentValidationsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "table:content-validation".
+    */
+    public OdfContentValidationElement createContentValidationElement(String   _aName)
+    {
+        OdfContentValidationElement  _nContentValidation = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfContentValidationElement.class);
+        _nContentValidation.setName( _aName);
+        this.appendChild( _nContentValidation);
+        return  _nContentValidation;      
+    }
+    
 }

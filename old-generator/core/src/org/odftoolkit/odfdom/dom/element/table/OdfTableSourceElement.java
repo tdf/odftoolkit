@@ -36,25 +36,21 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 import javax.xml.datatype.Duration;
 import org.odftoolkit.odfdom.dom.type.OdfDuration;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:table-source>".
  */
 public abstract class OdfTableSourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3142776190193505741L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-source" );
 
     public OdfTableSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

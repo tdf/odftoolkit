@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfOrderType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:sort-groups>".
  */
 public abstract class OdfSortGroupsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1801910755616229263L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "sort-groups" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "sort-groups" );
 
     public OdfSortGroupsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfStatusType;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:iteration>".
  */
 public abstract class OdfIterationElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -314414872468453798L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "iteration" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "iteration" );
 
     public OdfIterationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:source-range-address>".
  */
 public abstract class OdfSourceRangeAddressElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6304301965376778244L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "source-range-address" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "source-range-address" );
 
     public OdfSourceRangeAddressElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

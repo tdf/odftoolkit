@@ -32,28 +32,46 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.type.table.OdfNameType;
 
 /**
  * ODF DOM Element implementation for element "<table:detective>".
  */
 public abstract class OdfDetectiveElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8727044577136149651L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "detective" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "detective" );
 
     public OdfDetectiveElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "table:highlighted-range".
+    */
+    public OdfHighlightedRangeElement createHighlightedRangeElement()
+    {
+        OdfHighlightedRangeElement  _nHighlightedRange = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHighlightedRangeElement.class);
+        this.appendChild( _nHighlightedRange);
+        return  _nHighlightedRange;
+    }                   
+               
+    /**
+    * Create child element "table:operation".
+    */
+    public OdfOperationElement createOperationElement(OdfNameType   _aName, Integer   _aIndex)
+    {
+        OdfOperationElement  _nOperation = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfOperationElement.class);
+        _nOperation.setName( _aName);
+        _nOperation.setIndex( _aIndex);
+        this.appendChild( _nOperation);
+        return  _nOperation;      
+    }
+    
 }

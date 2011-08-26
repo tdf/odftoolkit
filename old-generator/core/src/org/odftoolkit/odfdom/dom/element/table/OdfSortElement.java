@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.table.OdfEmbeddedNumberBehaviorType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:sort>".
  */
 public abstract class OdfSortElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6174494538779647817L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "sort" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "sort" );
 
     public OdfSortElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -218,4 +214,15 @@ public abstract class OdfSortElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "embedded-number-behavior" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:sort-by".
+    */
+    public OdfSortByElement createSortByElement(Integer   _aFieldNumber)
+    {
+        OdfSortByElement  _nSortBy = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSortByElement.class);
+        _nSortBy.setFieldNumber( _aFieldNumber);
+        this.appendChild( _nSortBy);
+        return  _nSortBy;      
+    }
+    
 }

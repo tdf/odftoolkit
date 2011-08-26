@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfDirectionType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:highlighted-range>".
  */
 public abstract class OdfHighlightedRangeElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5371200912510736302L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "highlighted-range" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "highlighted-range" );
 
     public OdfHighlightedRangeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

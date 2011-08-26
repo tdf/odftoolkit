@@ -32,28 +32,47 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:filter-or>".
  */
 public abstract class OdfFilterOrElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7014160342106222807L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "filter-or" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "filter-or" );
 
     public OdfFilterOrElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "table:filter-and".
+    */
+    public OdfFilterAndElement createFilterAndElement()
+    {
+        OdfFilterAndElement  _nFilterAnd = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFilterAndElement.class);
+        this.appendChild( _nFilterAnd);
+        return  _nFilterAnd;
+    }                   
+               
+    /**
+    * Create child element "table:filter-condition".
+    */
+    public OdfFilterConditionElement createFilterConditionElement(Integer   _aFieldNumber, String   _aValue, String   _aOperator)
+    {
+        OdfFilterConditionElement  _nFilterCondition = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFilterConditionElement.class);
+        _nFilterCondition.setFieldNumber( _aFieldNumber);
+        _nFilterCondition.setValue( _aValue);
+        _nFilterCondition.setOperator( _aOperator);
+        this.appendChild( _nFilterCondition);
+        return  _nFilterCondition;      
+    }
+    
 }

@@ -35,25 +35,22 @@ import org.odftoolkit.odfdom.dom.type.table.OdfGrandTotalType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
 
+import org.odftoolkit.odfdom.dom.type.table.OdfOrientationType;
+import org.odftoolkit.odfdom.dom.type.table.OdfOrientationType;
 
 /**
  * ODF DOM Element implementation for element "<table:data-pilot-table>".
  */
 public abstract class OdfDataPilotTableElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8185219132088830266L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-table" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-table" );
 
     public OdfDataPilotTableElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -238,4 +235,89 @@ public abstract class OdfDataPilotTableElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "drill-down-on-double-click" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:database-source-sql".
+    */
+    public OdfDatabaseSourceSqlElement createDatabaseSourceSqlElement(String   _aDatabaseName, String   _aSqlStatement)
+    {
+        OdfDatabaseSourceSqlElement  _nDatabaseSourceSql = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDatabaseSourceSqlElement.class);
+        _nDatabaseSourceSql.setDatabaseName( _aDatabaseName);
+        _nDatabaseSourceSql.setSqlStatement( _aSqlStatement);
+        this.appendChild( _nDatabaseSourceSql);
+        return  _nDatabaseSourceSql;      
+    }
+    
+    /**
+    * Create child element "table:database-source-query".
+    */
+    public OdfDatabaseSourceQueryElement createDatabaseSourceQueryElement(String   _aDatabaseName, String   _aQueryName)
+    {
+        OdfDatabaseSourceQueryElement  _nDatabaseSourceQuery = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDatabaseSourceQueryElement.class);
+        _nDatabaseSourceQuery.setDatabaseName( _aDatabaseName);
+        _nDatabaseSourceQuery.setQueryName( _aQueryName);
+        this.appendChild( _nDatabaseSourceQuery);
+        return  _nDatabaseSourceQuery;      
+    }
+    
+    /**
+    * Create child element "table:database-source-table".
+    */
+    public OdfDatabaseSourceTableElement createDatabaseSourceTableElement(String   _aDatabaseName, String   _aDatabaseTableName)
+    {
+        OdfDatabaseSourceTableElement  _nDatabaseSourceTable = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDatabaseSourceTableElement.class);
+        _nDatabaseSourceTable.setDatabaseName( _aDatabaseName);
+        _nDatabaseSourceTable.setDatabaseTableName( _aDatabaseTableName);
+        this.appendChild( _nDatabaseSourceTable);
+        return  _nDatabaseSourceTable;      
+    }
+    
+    /**
+    * Create child element "table:source-service".
+    */
+    public OdfSourceServiceElement createSourceServiceElement(String   _aName, String   _aSourceName, String   _aObjectName)
+    {
+        OdfSourceServiceElement  _nSourceService = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSourceServiceElement.class);
+        _nSourceService.setName( _aName);
+        _nSourceService.setSourceName( _aSourceName);
+        _nSourceService.setObjectName( _aObjectName);
+        this.appendChild( _nSourceService);
+        return  _nSourceService;      
+    }
+    
+    /**
+    * Create child element "table:source-cell-range".
+    */
+    public OdfSourceCellRangeElement createSourceCellRangeElement(String   _aCellRangeAddress)
+    {
+        OdfSourceCellRangeElement  _nSourceCellRange = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSourceCellRangeElement.class);
+        _nSourceCellRange.setCellRangeAddress( _aCellRangeAddress);
+        this.appendChild( _nSourceCellRange);
+        return  _nSourceCellRange;      
+    }
+    
+    /**
+    * Create child element "table:data-pilot-field".
+    */
+    public OdfDataPilotFieldElement createDataPilotFieldElement(String   _aSourceFieldName, OdfOrientationType   _aOrientation)
+    {
+        OdfDataPilotFieldElement  _nDataPilotField = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotFieldElement.class);
+        _nDataPilotField.setSourceFieldName( _aSourceFieldName);
+        _nDataPilotField.setOrientation( _aOrientation);
+        this.appendChild( _nDataPilotField);
+        return  _nDataPilotField;      
+    }
+    
+    /**
+    * Create child element "table:data-pilot-field".
+    */
+    public OdfDataPilotFieldElement createDataPilotFieldElement(OdfOrientationType   _aOrientation, String   _aSelectedPage, String   _aSourceFieldName)
+    {
+        OdfDataPilotFieldElement  _nDataPilotField = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotFieldElement.class);
+        _nDataPilotField.setOrientation( _aOrientation);
+        _nDataPilotField.setSelectedPage( _aSelectedPage);
+        _nDataPilotField.setSourceFieldName( _aSourceFieldName);
+        this.appendChild( _nDataPilotField);
+        return  _nDataPilotField;      
+    }
+    
 }

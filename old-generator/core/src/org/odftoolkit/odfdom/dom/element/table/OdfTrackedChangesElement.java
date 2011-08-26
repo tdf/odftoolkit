@@ -33,25 +33,22 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+import org.odftoolkit.odfdom.dom.type.table.OdfSheetObjectType;
+import org.odftoolkit.odfdom.dom.type.table.OdfSheetObjectType;
 
 /**
  * ODF DOM Element implementation for element "<table:tracked-changes>".
  */
 public abstract class OdfTrackedChangesElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4190115786465410577L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "tracked-changes" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "tracked-changes" );
 
     public OdfTrackedChangesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -75,4 +72,52 @@ public abstract class OdfTrackedChangesElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "track-changes" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:cell-content-change".
+    */
+    public OdfCellContentChangeElement createCellContentChangeElement(String   _aId)
+    {
+        OdfCellContentChangeElement  _nCellContentChange = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCellContentChangeElement.class);
+        _nCellContentChange.setId( _aId);
+        this.appendChild( _nCellContentChange);
+        return  _nCellContentChange;      
+    }
+    
+    /**
+    * Create child element "table:insertion".
+    */
+    public OdfInsertionElement createInsertionElement(OdfSheetObjectType   _aType, Integer   _aPosition, String   _aId)
+    {
+        OdfInsertionElement  _nInsertion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfInsertionElement.class);
+        _nInsertion.setType( _aType);
+        _nInsertion.setPosition( _aPosition);
+        _nInsertion.setId( _aId);
+        this.appendChild( _nInsertion);
+        return  _nInsertion;      
+    }
+    
+    /**
+    * Create child element "table:deletion".
+    */
+    public OdfDeletionElement createDeletionElement(OdfSheetObjectType   _aType, Integer   _aPosition, String   _aId)
+    {
+        OdfDeletionElement  _nDeletion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDeletionElement.class);
+        _nDeletion.setType( _aType);
+        _nDeletion.setPosition( _aPosition);
+        _nDeletion.setId( _aId);
+        this.appendChild( _nDeletion);
+        return  _nDeletion;      
+    }
+    
+    /**
+    * Create child element "table:movement".
+    */
+    public OdfMovementElement createMovementElement(String   _aId)
+    {
+        OdfMovementElement  _nMovement = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfMovementElement.class);
+        _nMovement.setId( _aId);
+        this.appendChild( _nMovement);
+        return  _nMovement;      
+    }
+    
 }

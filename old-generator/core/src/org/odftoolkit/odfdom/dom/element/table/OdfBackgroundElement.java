@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:background>".
  */
 public abstract class OdfBackgroundElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5261800543526414681L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "background" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "background" );
 
     public OdfBackgroundElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

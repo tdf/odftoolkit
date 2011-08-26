@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.table.OdfOrderType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:sort-by>".
  */
 public abstract class OdfSortByElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 108840462194711615L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "sort-by" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "sort-by" );
 
     public OdfSortByElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

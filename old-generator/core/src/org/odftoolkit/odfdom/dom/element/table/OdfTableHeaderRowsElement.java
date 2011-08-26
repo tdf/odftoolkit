@@ -32,28 +32,44 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.text.OdfSoftPageBreakElement;
 
 /**
  * ODF DOM Element implementation for element "<table:table-header-rows>".
  */
 public abstract class OdfTableHeaderRowsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3164099033059537788L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-header-rows" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-header-rows" );
 
     public OdfTableHeaderRowsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "text:soft-page-break".
+    */
+    public OdfSoftPageBreakElement createSoftPageBreakElement()
+    {
+        OdfSoftPageBreakElement  _nSoftPageBreak = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSoftPageBreakElement.class);
+        this.appendChild( _nSoftPageBreak);
+        return  _nSoftPageBreak;
+    }                   
+               
+    /**
+    * Create child element "table:table-row".
+    */
+    public OdfTableRowElement createTableRowElement()
+    {
+        OdfTableRowElement  _nTableRow = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableRowElement.class);
+        this.appendChild( _nTableRow);
+        return  _nTableRow;
+    }                   
+               
 }

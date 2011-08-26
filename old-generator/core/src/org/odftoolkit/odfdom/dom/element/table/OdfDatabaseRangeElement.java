@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.table.OdfDatabaseOrientationType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:database-range>".
  */
 public abstract class OdfDatabaseRangeElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -9130674120189517663L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "database-range" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "database-range" );
 
     public OdfDatabaseRangeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -261,4 +257,70 @@ public abstract class OdfDatabaseRangeElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "refresh-delay" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:database-source-sql".
+    */
+    public OdfDatabaseSourceSqlElement createDatabaseSourceSqlElement(String   _aDatabaseName, String   _aSqlStatement)
+    {
+        OdfDatabaseSourceSqlElement  _nDatabaseSourceSql = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDatabaseSourceSqlElement.class);
+        _nDatabaseSourceSql.setDatabaseName( _aDatabaseName);
+        _nDatabaseSourceSql.setSqlStatement( _aSqlStatement);
+        this.appendChild( _nDatabaseSourceSql);
+        return  _nDatabaseSourceSql;      
+    }
+    
+    /**
+    * Create child element "table:database-source-query".
+    */
+    public OdfDatabaseSourceQueryElement createDatabaseSourceQueryElement(String   _aDatabaseName, String   _aQueryName)
+    {
+        OdfDatabaseSourceQueryElement  _nDatabaseSourceQuery = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDatabaseSourceQueryElement.class);
+        _nDatabaseSourceQuery.setDatabaseName( _aDatabaseName);
+        _nDatabaseSourceQuery.setQueryName( _aQueryName);
+        this.appendChild( _nDatabaseSourceQuery);
+        return  _nDatabaseSourceQuery;      
+    }
+    
+    /**
+    * Create child element "table:database-source-table".
+    */
+    public OdfDatabaseSourceTableElement createDatabaseSourceTableElement(String   _aDatabaseName, String   _aDatabaseTableName)
+    {
+        OdfDatabaseSourceTableElement  _nDatabaseSourceTable = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDatabaseSourceTableElement.class);
+        _nDatabaseSourceTable.setDatabaseName( _aDatabaseName);
+        _nDatabaseSourceTable.setDatabaseTableName( _aDatabaseTableName);
+        this.appendChild( _nDatabaseSourceTable);
+        return  _nDatabaseSourceTable;      
+    }
+    
+    /**
+    * Create child element "table:filter".
+    */
+    public OdfFilterElement createFilterElement()
+    {
+        OdfFilterElement  _nFilter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFilterElement.class);
+        this.appendChild( _nFilter);
+        return  _nFilter;
+    }                   
+               
+    /**
+    * Create child element "table:sort".
+    */
+    public OdfSortElement createSortElement()
+    {
+        OdfSortElement  _nSort = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSortElement.class);
+        this.appendChild( _nSort);
+        return  _nSort;
+    }                   
+               
+    /**
+    * Create child element "table:subtotal-rules".
+    */
+    public OdfSubtotalRulesElement createSubtotalRulesElement()
+    {
+        OdfSubtotalRulesElement  _nSubtotalRules = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSubtotalRulesElement.class);
+        this.appendChild( _nSubtotalRules);
+        return  _nSubtotalRules;
+    }                   
+               
 }

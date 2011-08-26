@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:cell-content-deletion>".
  */
 public abstract class OdfCellContentDeletionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6720658783331115006L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "cell-content-deletion" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "cell-content-deletion" );
 
     public OdfCellContentDeletionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -72,4 +68,27 @@ public abstract class OdfCellContentDeletionElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "id" ), _aId );
     }
 
+    /**
+    * Create child element "table:cell-address".
+    */
+    public OdfCellAddressElement createCellAddressElement(Integer   _aColumn, Integer   _aRow, Integer   _aTable)
+    {
+        OdfCellAddressElement  _nCellAddress = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCellAddressElement.class);
+        _nCellAddress.setColumn( _aColumn);
+        _nCellAddress.setRow( _aRow);
+        _nCellAddress.setTable( _aTable);
+        this.appendChild( _nCellAddress);
+        return  _nCellAddress;      
+    }
+    
+    /**
+    * Create child element "table:change-track-table-cell".
+    */
+    public OdfChangeTrackTableCellElement createChangeTrackTableCellElement()
+    {
+        OdfChangeTrackTableCellElement  _nChangeTrackTableCell = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfChangeTrackTableCellElement.class);
+        this.appendChild( _nChangeTrackTableCell);
+        return  _nChangeTrackTableCell;
+    }                   
+               
 }

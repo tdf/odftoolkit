@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:calculation-settings>".
  */
 public abstract class OdfCalculationSettingsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3445960828328250785L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "calculation-settings" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "calculation-settings" );
 
     public OdfCalculationSettingsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -209,4 +205,24 @@ public abstract class OdfCalculationSettingsElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "null-year" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:null-date".
+    */
+    public OdfNullDateElement createNullDateElement()
+    {
+        OdfNullDateElement  _nNullDate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNullDateElement.class);
+        this.appendChild( _nNullDate);
+        return  _nNullDate;
+    }                   
+               
+    /**
+    * Create child element "table:iteration".
+    */
+    public OdfIterationElement createIterationElement()
+    {
+        OdfIterationElement  _nIteration = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIterationElement.class);
+        this.appendChild( _nIteration);
+        return  _nIteration;
+    }                   
+               
 }

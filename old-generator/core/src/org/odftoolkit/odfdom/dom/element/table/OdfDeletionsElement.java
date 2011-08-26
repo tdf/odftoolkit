@@ -32,28 +32,44 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:deletions>".
  */
 public abstract class OdfDeletionsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1073255299243193682L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "deletions" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "deletions" );
 
     public OdfDeletionsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "table:cell-content-deletion".
+    */
+    public OdfCellContentDeletionElement createCellContentDeletionElement()
+    {
+        OdfCellContentDeletionElement  _nCellContentDeletion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCellContentDeletionElement.class);
+        this.appendChild( _nCellContentDeletion);
+        return  _nCellContentDeletion;
+    }                   
+               
+    /**
+    * Create child element "table:change-deletion".
+    */
+    public OdfChangeDeletionElement createChangeDeletionElement()
+    {
+        OdfChangeDeletionElement  _nChangeDeletion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfChangeDeletionElement.class);
+        this.appendChild( _nChangeDeletion);
+        return  _nChangeDeletion;
+    }                   
+               
 }

@@ -47,12 +47,7 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
  */
 public abstract class OdfTableCellElementBase extends OdfStylableElement
 {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2066224478187416741L;
-
-	public OdfTableCellElementBase( OdfFileDom _aOwnerDoc ,OdfName _elementName ,OdfStyleFamily _styleFamily ,OdfName _styleAttrName )
+    public OdfTableCellElementBase( OdfFileDom _aOwnerDoc ,OdfName _elementName ,OdfStyleFamily _styleFamily ,OdfName _styleAttrName )
     {
         super( _aOwnerDoc, _elementName, _styleFamily, _styleAttrName );
     }
@@ -89,8 +84,7 @@ public abstract class OdfTableCellElementBase extends OdfStylableElement
     /**
      * Get value of attribute "table:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -99,8 +93,7 @@ public abstract class OdfTableCellElementBase extends OdfStylableElement
     /**
      * Set value of attribute "table:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "style-name" ), aStringVal );

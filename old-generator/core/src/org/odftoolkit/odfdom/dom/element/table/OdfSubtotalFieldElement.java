@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:subtotal-field>".
  */
 public abstract class OdfSubtotalFieldElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3007836177225373735L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "subtotal-field" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "subtotal-field" );
 
     public OdfSubtotalFieldElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

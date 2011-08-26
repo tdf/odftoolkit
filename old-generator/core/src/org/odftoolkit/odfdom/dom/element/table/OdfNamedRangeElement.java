@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
 import org.odftoolkit.odfdom.dom.type.table.OdfRangeUsableAsType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:named-range>".
  */
 public abstract class OdfNamedRangeElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7894549420665114969L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "named-range" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "named-range" );
 
     public OdfNamedRangeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

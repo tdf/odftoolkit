@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:data-pilot-group>".
  */
 public abstract class OdfDataPilotGroupElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 181149692287303133L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-group" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-group" );
 
     public OdfDataPilotGroupElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -79,4 +75,15 @@ public abstract class OdfDataPilotGroupElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "name" ), _aName );
     }
 
+    /**
+    * Create child element "table:data-pilot-group-member".
+    */
+    public OdfDataPilotGroupMemberElement createDataPilotGroupMemberElement(String   _aName)
+    {
+        OdfDataPilotGroupMemberElement  _nDataPilotGroupMember = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotGroupMemberElement.class);
+        _nDataPilotGroupMember.setName( _aName);
+        this.appendChild( _nDataPilotGroupMember);
+        return  _nDataPilotGroupMember;      
+    }
+    
 }

@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfLabelOrientationType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:label-range>".
  */
 public abstract class OdfLabelRangeElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6716333030406505460L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "label-range" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "label-range" );
 
     public OdfLabelRangeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

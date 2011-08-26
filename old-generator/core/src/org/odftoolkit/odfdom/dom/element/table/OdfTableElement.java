@@ -38,25 +38,24 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfDdeSourceElement;
+import org.odftoolkit.odfdom.dom.element.form.OdfFormElement;
+import org.odftoolkit.odfdom.dom.element.xforms.OdfModelElement;
+import org.odftoolkit.odfdom.dom.element.text.OdfSoftPageBreakElement;
 
 /**
  * ODF DOM Element implementation for element "<table:table>".
  */
 public abstract class OdfTableElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4378982012858344889L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table" );
 
     public OdfTableElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Table, OdfName.get( OdfNamespace.TABLE, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -81,8 +80,7 @@ public abstract class OdfTableElement extends OdfStylableElement
     /**
      * Get value of attribute "table:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -91,8 +89,7 @@ public abstract class OdfTableElement extends OdfStylableElement
     /**
      * Set value of attribute "table:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "style-name" ), aStringVal );
@@ -356,4 +353,180 @@ public abstract class OdfTableElement extends OdfStylableElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "is-sub-table" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:title".
+    */
+    public OdfTitleElement createTitleElement()
+    {
+        OdfTitleElement  _nTitle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTitleElement.class);
+        this.appendChild( _nTitle);
+        return  _nTitle;
+    }                   
+               
+    /**
+    * Create child element "table:desc".
+    */
+    public OdfDescElement createDescElement()
+    {
+        OdfDescElement  _nDesc = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDescElement.class);
+        this.appendChild( _nDesc);
+        return  _nDesc;
+    }                   
+               
+    /**
+    * Create child element "table:table-source".
+    */
+    public OdfTableSourceElement createTableSourceElement(String   _aHref)
+    {
+        OdfTableSourceElement  _nTableSource = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableSourceElement.class);
+        _nTableSource.setHref( _aHref);
+        this.appendChild( _nTableSource);
+        return  _nTableSource;      
+    }
+    
+    /**
+    * Create child element "office:dde-source".
+    */
+    public OdfDdeSourceElement createDdeSourceElement(String   _aDdeApplication, String   _aDdeTopic, String   _aDdeItem)
+    {
+        OdfDdeSourceElement  _nDdeSource = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDdeSourceElement.class);
+        _nDdeSource.setDdeApplication( _aDdeApplication);
+        _nDdeSource.setDdeTopic( _aDdeTopic);
+        _nDdeSource.setDdeItem( _aDdeItem);
+        this.appendChild( _nDdeSource);
+        return  _nDdeSource;      
+    }
+    
+    /**
+    * Create child element "table:scenario".
+    */
+    public OdfScenarioElement createScenarioElement(String   _aScenarioRanges, Boolean   _aIsActive)
+    {
+        OdfScenarioElement  _nScenario = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfScenarioElement.class);
+        _nScenario.setScenarioRanges( _aScenarioRanges);
+        _nScenario.setIsActive( _aIsActive);
+        this.appendChild( _nScenario);
+        return  _nScenario;      
+    }
+    
+    /**
+    * Create child element "form:form".
+    */
+    public OdfFormElement createFormElement()
+    {
+        OdfFormElement  _nForm = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFormElement.class);
+        this.appendChild( _nForm);
+        return  _nForm;
+    }                   
+               
+    /**
+    * Create child element "xforms:model".
+    */
+    public OdfModelElement createModelElement()
+    {
+        OdfModelElement  _nModel = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfModelElement.class);
+        this.appendChild( _nModel);
+        return  _nModel;
+    }                   
+               
+    /**
+    * Create child element "table:shapes".
+    */
+    public OdfShapesElement createShapesElement()
+    {
+        OdfShapesElement  _nShapes = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfShapesElement.class);
+        this.appendChild( _nShapes);
+        return  _nShapes;
+    }                   
+               
+    /**
+    * Create child element "table:table-column-group".
+    */
+    public OdfTableColumnGroupElement createTableColumnGroupElement()
+    {
+        OdfTableColumnGroupElement  _nTableColumnGroup = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableColumnGroupElement.class);
+        this.appendChild( _nTableColumnGroup);
+        return  _nTableColumnGroup;
+    }                   
+               
+    /**
+    * Create child element "table:table-columns".
+    */
+    public OdfTableColumnsElement createTableColumnsElement()
+    {
+        OdfTableColumnsElement  _nTableColumns = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableColumnsElement.class);
+        this.appendChild( _nTableColumns);
+        return  _nTableColumns;
+    }                   
+               
+    /**
+    * Create child element "table:table-column".
+    */
+    public OdfTableColumnElement createTableColumnElement()
+    {
+        OdfTableColumnElement  _nTableColumn = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableColumnElement.class);
+        this.appendChild( _nTableColumn);
+        return  _nTableColumn;
+    }                   
+               
+    /**
+    * Create child element "table:table-header-columns".
+    */
+    public OdfTableHeaderColumnsElement createTableHeaderColumnsElement()
+    {
+        OdfTableHeaderColumnsElement  _nTableHeaderColumns = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableHeaderColumnsElement.class);
+        this.appendChild( _nTableHeaderColumns);
+        return  _nTableHeaderColumns;
+    }                   
+               
+    /**
+    * Create child element "table:table-row-group".
+    */
+    public OdfTableRowGroupElement createTableRowGroupElement()
+    {
+        OdfTableRowGroupElement  _nTableRowGroup = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableRowGroupElement.class);
+        this.appendChild( _nTableRowGroup);
+        return  _nTableRowGroup;
+    }                   
+               
+    /**
+    * Create child element "table:table-rows".
+    */
+    public OdfTableRowsElement createTableRowsElement()
+    {
+        OdfTableRowsElement  _nTableRows = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableRowsElement.class);
+        this.appendChild( _nTableRows);
+        return  _nTableRows;
+    }                   
+               
+    /**
+    * Create child element "text:soft-page-break".
+    */
+    public OdfSoftPageBreakElement createSoftPageBreakElement()
+    {
+        OdfSoftPageBreakElement  _nSoftPageBreak = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSoftPageBreakElement.class);
+        this.appendChild( _nSoftPageBreak);
+        return  _nSoftPageBreak;
+    }                   
+               
+    /**
+    * Create child element "table:table-row".
+    */
+    public OdfTableRowElement createTableRowElement()
+    {
+        OdfTableRowElement  _nTableRow = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableRowElement.class);
+        this.appendChild( _nTableRow);
+        return  _nTableRow;
+    }                   
+               
+    /**
+    * Create child element "table:table-header-rows".
+    */
+    public OdfTableHeaderRowsElement createTableHeaderRowsElement()
+    {
+        OdfTableHeaderRowsElement  _nTableHeaderRows = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableHeaderRowsElement.class);
+        this.appendChild( _nTableHeaderRows);
+        return  _nTableHeaderRows;
+    }                   
+               
 }

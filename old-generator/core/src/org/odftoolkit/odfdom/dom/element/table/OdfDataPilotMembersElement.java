@@ -32,28 +32,35 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:data-pilot-members>".
  */
 public abstract class OdfDataPilotMembersElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2072120962718010519L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-members" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-members" );
 
     public OdfDataPilotMembersElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "table:data-pilot-member".
+    */
+    public OdfDataPilotMemberElement createDataPilotMemberElement(String   _aName)
+    {
+        OdfDataPilotMemberElement  _nDataPilotMember = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotMemberElement.class);
+        _nDataPilotMember.setName( _aName);
+        this.appendChild( _nDataPilotMember);
+        return  _nDataPilotMember;      
+    }
+    
 }

@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfNameType;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:operation>".
  */
 public abstract class OdfOperationElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4597495812407642400L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "operation" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "operation" );
 
     public OdfOperationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

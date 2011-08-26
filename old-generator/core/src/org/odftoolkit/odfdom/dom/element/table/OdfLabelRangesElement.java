@@ -32,28 +32,37 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.type.table.OdfLabelOrientationType;
 
 /**
  * ODF DOM Element implementation for element "<table:label-ranges>".
  */
 public abstract class OdfLabelRangesElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2588597301463969725L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "label-ranges" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "label-ranges" );
 
     public OdfLabelRangesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "table:label-range".
+    */
+    public OdfLabelRangeElement createLabelRangeElement(String   _aLabelCellRangeAddress, String   _aDataCellRangeAddress, OdfLabelOrientationType   _aOrientation)
+    {
+        OdfLabelRangeElement  _nLabelRange = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLabelRangeElement.class);
+        _nLabelRange.setLabelCellRangeAddress( _aLabelCellRangeAddress);
+        _nLabelRange.setDataCellRangeAddress( _aDataCellRangeAddress);
+        _nLabelRange.setOrientation( _aOrientation);
+        this.appendChild( _nLabelRange);
+        return  _nLabelRange;      
+    }
+    
 }

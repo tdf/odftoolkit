@@ -32,28 +32,59 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:cut-offs>".
  */
 public abstract class OdfCutOffsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8371690871976981414L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "cut-offs" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "cut-offs" );
 
     public OdfCutOffsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "table:movement-cut-off".
+    */
+    public OdfMovementCutOffElement createMovementCutOffElement(Integer   _aPosition)
+    {
+        OdfMovementCutOffElement  _nMovementCutOff = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfMovementCutOffElement.class);
+        _nMovementCutOff.setPosition( _aPosition);
+        this.appendChild( _nMovementCutOff);
+        return  _nMovementCutOff;      
+    }
+    
+    /**
+    * Create child element "table:movement-cut-off".
+    */
+    public OdfMovementCutOffElement createMovementCutOffElement(Integer   _aStartPosition, Integer   _aEndPosition)
+    {
+        OdfMovementCutOffElement  _nMovementCutOff = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfMovementCutOffElement.class);
+        _nMovementCutOff.setStartPosition( _aStartPosition);
+        _nMovementCutOff.setEndPosition( _aEndPosition);
+        this.appendChild( _nMovementCutOff);
+        return  _nMovementCutOff;      
+    }
+    
+    /**
+    * Create child element "table:insertion-cut-off".
+    */
+    public OdfInsertionCutOffElement createInsertionCutOffElement(String   _aId, Integer   _aPosition)
+    {
+        OdfInsertionCutOffElement  _nInsertionCutOff = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfInsertionCutOffElement.class);
+        _nInsertionCutOff.setId( _aId);
+        _nInsertionCutOff.setPosition( _aPosition);
+        this.appendChild( _nInsertionCutOff);
+        return  _nInsertionCutOff;      
+    }
+    
 }

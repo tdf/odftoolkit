@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfAcceptanceStateType;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfChangeInfoElement;
 
 /**
  * ODF DOM Element implementation for element "<table:cell-content-change>".
  */
 public abstract class OdfCellContentChangeElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7545291458829009943L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "cell-content-change" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "cell-content-change" );
 
     public OdfCellContentChangeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -119,4 +115,57 @@ public abstract class OdfCellContentChangeElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "rejecting-change-id" ), _aRejectingChangeId );
     }
 
+    /**
+    * Create child element "table:cell-address".
+    */
+    public OdfCellAddressElement createCellAddressElement(Integer   _aColumn, Integer   _aRow, Integer   _aTable)
+    {
+        OdfCellAddressElement  _nCellAddress = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCellAddressElement.class);
+        _nCellAddress.setColumn( _aColumn);
+        _nCellAddress.setRow( _aRow);
+        _nCellAddress.setTable( _aTable);
+        this.appendChild( _nCellAddress);
+        return  _nCellAddress;      
+    }
+    
+    /**
+    * Create child element "office:change-info".
+    */
+    public OdfChangeInfoElement createChangeInfoElement()
+    {
+        OdfChangeInfoElement  _nChangeInfo = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfChangeInfoElement.class);
+        this.appendChild( _nChangeInfo);
+        return  _nChangeInfo;
+    }                   
+               
+    /**
+    * Create child element "table:dependencies".
+    */
+    public OdfDependenciesElement createDependenciesElement()
+    {
+        OdfDependenciesElement  _nDependencies = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDependenciesElement.class);
+        this.appendChild( _nDependencies);
+        return  _nDependencies;
+    }                   
+               
+    /**
+    * Create child element "table:deletions".
+    */
+    public OdfDeletionsElement createDeletionsElement()
+    {
+        OdfDeletionsElement  _nDeletions = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDeletionsElement.class);
+        this.appendChild( _nDeletions);
+        return  _nDeletions;
+    }                   
+               
+    /**
+    * Create child element "table:previous".
+    */
+    public OdfPreviousElement createPreviousElement()
+    {
+        OdfPreviousElement  _nPrevious = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPreviousElement.class);
+        this.appendChild( _nPrevious);
+        return  _nPrevious;
+    }                   
+               
 }

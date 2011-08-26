@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfCellRangeAddressList;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:scenario>".
  */
 public abstract class OdfScenarioElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 724929968941927275L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "scenario" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "scenario" );
 
     public OdfScenarioElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

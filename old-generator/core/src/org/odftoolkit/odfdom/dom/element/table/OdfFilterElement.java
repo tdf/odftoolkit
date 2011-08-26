@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfConditionSourceType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:filter>".
  */
 public abstract class OdfFilterElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7872202353192224524L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "filter" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "filter" );
 
     public OdfFilterElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -136,4 +132,37 @@ public abstract class OdfFilterElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "display-duplicates" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:filter-condition".
+    */
+    public OdfFilterConditionElement createFilterConditionElement(Integer   _aFieldNumber, String   _aValue, String   _aOperator)
+    {
+        OdfFilterConditionElement  _nFilterCondition = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFilterConditionElement.class);
+        _nFilterCondition.setFieldNumber( _aFieldNumber);
+        _nFilterCondition.setValue( _aValue);
+        _nFilterCondition.setOperator( _aOperator);
+        this.appendChild( _nFilterCondition);
+        return  _nFilterCondition;      
+    }
+    
+    /**
+    * Create child element "table:filter-and".
+    */
+    public OdfFilterAndElement createFilterAndElement()
+    {
+        OdfFilterAndElement  _nFilterAnd = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFilterAndElement.class);
+        this.appendChild( _nFilterAnd);
+        return  _nFilterAnd;
+    }                   
+               
+    /**
+    * Create child element "table:filter-or".
+    */
+    public OdfFilterOrElement createFilterOrElement()
+    {
+        OdfFilterOrElement  _nFilterOr = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFilterOrElement.class);
+        this.appendChild( _nFilterOr);
+        return  _nFilterOr;
+    }                   
+               
 }

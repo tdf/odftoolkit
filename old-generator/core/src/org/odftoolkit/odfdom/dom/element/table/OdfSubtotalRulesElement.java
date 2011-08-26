@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:subtotal-rules>".
  */
 public abstract class OdfSubtotalRulesElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 9133895850627361443L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "subtotal-rules" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "subtotal-rules" );
 
     public OdfSubtotalRulesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -116,4 +112,25 @@ public abstract class OdfSubtotalRulesElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "page-breaks-on-group-change" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:sort-groups".
+    */
+    public OdfSortGroupsElement createSortGroupsElement()
+    {
+        OdfSortGroupsElement  _nSortGroups = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSortGroupsElement.class);
+        this.appendChild( _nSortGroups);
+        return  _nSortGroups;
+    }                   
+               
+    /**
+    * Create child element "table:subtotal-rule".
+    */
+    public OdfSubtotalRuleElement createSubtotalRuleElement(Integer   _aGroupByFieldNumber)
+    {
+        OdfSubtotalRuleElement  _nSubtotalRule = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSubtotalRuleElement.class);
+        _nSubtotalRule.setGroupByFieldNumber( _aGroupByFieldNumber);
+        this.appendChild( _nSubtotalRule);
+        return  _nSubtotalRule;      
+    }
+    
 }

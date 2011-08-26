@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.table.OdfMessageType;
 
+import org.odftoolkit.odfdom.dom.element.text.OdfParagraphElement;
 
 /**
  * ODF DOM Element implementation for element "<table:error-message>".
  */
 public abstract class OdfErrorMessageElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 646473265630538443L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "error-message" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "error-message" );
 
     public OdfErrorMessageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -115,4 +111,14 @@ public abstract class OdfErrorMessageElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "message-type" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
 }

@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:database-source-query>".
  */
 public abstract class OdfDatabaseSourceQueryElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2659732331066568L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "database-source-query" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "database-source-query" );
 
     public OdfDatabaseSourceQueryElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

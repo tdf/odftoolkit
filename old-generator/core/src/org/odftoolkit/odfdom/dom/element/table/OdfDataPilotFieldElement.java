@@ -33,25 +33,25 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfOrientationType;
 
+import org.odftoolkit.odfdom.dom.type.table.OdfFieldReferenceType;
+import org.odftoolkit.odfdom.dom.type.table.OdfMemberType;
+import org.odftoolkit.odfdom.dom.type.table.OdfFieldReferenceType;
+import org.odftoolkit.odfdom.dom.type.table.OdfGroupedByType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * ODF DOM Element implementation for element "<table:data-pilot-field>".
  */
 public abstract class OdfDataPilotFieldElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4948137429938287066L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-field" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "data-pilot-field" );
 
     public OdfDataPilotFieldElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -171,4 +171,69 @@ public abstract class OdfDataPilotFieldElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "used-hierarchy" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:data-pilot-level".
+    */
+    public OdfDataPilotLevelElement createDataPilotLevelElement()
+    {
+        OdfDataPilotLevelElement  _nDataPilotLevel = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotLevelElement.class);
+        this.appendChild( _nDataPilotLevel);
+        return  _nDataPilotLevel;
+    }                   
+               
+    /**
+    * Create child element "table:data-pilot-field-reference".
+    */
+    public OdfDataPilotFieldReferenceElement createDataPilotFieldReferenceElement(String   _aFieldName, OdfFieldReferenceType   _aType, OdfMemberType   _aMemberType)
+    {
+        OdfDataPilotFieldReferenceElement  _nDataPilotFieldReference = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotFieldReferenceElement.class);
+        _nDataPilotFieldReference.setFieldName( _aFieldName);
+        _nDataPilotFieldReference.setType( _aType);
+        _nDataPilotFieldReference.setMemberType( _aMemberType);
+        this.appendChild( _nDataPilotFieldReference);
+        return  _nDataPilotFieldReference;      
+    }
+    
+    /**
+    * Create child element "table:data-pilot-field-reference".
+    */
+    public OdfDataPilotFieldReferenceElement createDataPilotFieldReferenceElement(OdfMemberType   _aMemberType, String   _aMemberName, String   _aFieldName, OdfFieldReferenceType   _aType)
+    {
+        OdfDataPilotFieldReferenceElement  _nDataPilotFieldReference = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotFieldReferenceElement.class);
+        _nDataPilotFieldReference.setMemberType( _aMemberType);
+        _nDataPilotFieldReference.setMemberName( _aMemberName);
+        _nDataPilotFieldReference.setFieldName( _aFieldName);
+        _nDataPilotFieldReference.setType( _aType);
+        this.appendChild( _nDataPilotFieldReference);
+        return  _nDataPilotFieldReference;      
+    }
+    
+    /**
+    * Create child element "table:data-pilot-groups".
+    */
+    public OdfDataPilotGroupsElement createDataPilotGroupsElement(String   _aSourceFieldName, Double   _aStep, OdfGroupedByType   _aGroupedBy, XMLGregorianCalendar   _aDateStart)
+    {
+        OdfDataPilotGroupsElement  _nDataPilotGroups = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotGroupsElement.class);
+        _nDataPilotGroups.setSourceFieldName( _aSourceFieldName);
+        _nDataPilotGroups.setStep( _aStep);
+        _nDataPilotGroups.setGroupedBy( _aGroupedBy);
+        _nDataPilotGroups.setDateStart( _aDateStart);
+        this.appendChild( _nDataPilotGroups);
+        return  _nDataPilotGroups;      
+    }
+    
+    /**
+    * Create child element "table:data-pilot-groups".
+    */
+    public OdfDataPilotGroupsElement createDataPilotGroupsElement(String   _aSourceFieldName, Double   _aStep, OdfGroupedByType   _aGroupedBy, Double   _aStart)
+    {
+        OdfDataPilotGroupsElement  _nDataPilotGroups = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDataPilotGroupsElement.class);
+        _nDataPilotGroups.setSourceFieldName( _aSourceFieldName);
+        _nDataPilotGroups.setStep( _aStep);
+        _nDataPilotGroups.setGroupedBy( _aGroupedBy);
+        _nDataPilotGroups.setStart( _aStart);
+        this.appendChild( _nDataPilotGroups);
+        return  _nDataPilotGroups;      
+    }
+    
 }

@@ -32,28 +32,35 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:database-ranges>".
  */
 public abstract class OdfDatabaseRangesElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2109147095402857639L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "database-ranges" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "database-ranges" );
 
     public OdfDatabaseRangesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "table:database-range".
+    */
+    public OdfDatabaseRangeElement createDatabaseRangeElement(String   _aTargetRangeAddress)
+    {
+        OdfDatabaseRangeElement  _nDatabaseRange = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDatabaseRangeElement.class);
+        _nDatabaseRange.setTargetRangeAddress( _aTargetRangeAddress);
+        this.appendChild( _nDatabaseRange);
+        return  _nDatabaseRange;      
+    }
+    
 }

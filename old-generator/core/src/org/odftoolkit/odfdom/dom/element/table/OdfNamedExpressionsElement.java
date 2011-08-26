@@ -32,28 +32,48 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:named-expressions>".
  */
 public abstract class OdfNamedExpressionsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5647514229534888500L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "named-expressions" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "named-expressions" );
 
     public OdfNamedExpressionsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "table:named-range".
+    */
+    public OdfNamedRangeElement createNamedRangeElement(String   _aName, String   _aCellRangeAddress)
+    {
+        OdfNamedRangeElement  _nNamedRange = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNamedRangeElement.class);
+        _nNamedRange.setName( _aName);
+        _nNamedRange.setCellRangeAddress( _aCellRangeAddress);
+        this.appendChild( _nNamedRange);
+        return  _nNamedRange;      
+    }
+    
+    /**
+    * Create child element "table:named-expression".
+    */
+    public OdfNamedExpressionElement createNamedExpressionElement(String   _aName, String   _aExpression)
+    {
+        OdfNamedExpressionElement  _nNamedExpression = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNamedExpressionElement.class);
+        _nNamedExpression.setName( _aName);
+        _nNamedExpression.setExpression( _aExpression);
+        this.appendChild( _nNamedExpression);
+        return  _nNamedExpression;      
+    }
+    
 }

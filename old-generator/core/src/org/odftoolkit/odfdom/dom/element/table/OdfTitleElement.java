@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:title>".
  */
 public abstract class OdfTitleElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2483372184103037189L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "title" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "title" );
 
     public OdfTitleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

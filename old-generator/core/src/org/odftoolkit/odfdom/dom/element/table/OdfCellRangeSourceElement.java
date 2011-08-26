@@ -36,25 +36,21 @@ import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 import javax.xml.datatype.Duration;
 import org.odftoolkit.odfdom.dom.type.OdfDuration;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:cell-range-source>".
  */
 public abstract class OdfCellRangeSourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1468109987809696175L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "cell-range-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "cell-range-source" );
 
     public OdfCellRangeSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

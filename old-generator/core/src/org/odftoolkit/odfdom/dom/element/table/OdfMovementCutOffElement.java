@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:movement-cut-off>".
  */
 public abstract class OdfMovementCutOffElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1042182289068402448L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "movement-cut-off" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "movement-cut-off" );
 
     public OdfMovementCutOffElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

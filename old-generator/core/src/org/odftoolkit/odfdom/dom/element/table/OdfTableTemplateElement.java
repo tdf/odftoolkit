@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.table.OdfRowOrColumnType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:table-template>".
  */
 public abstract class OdfTableTemplateElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4765650086195403411L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-template" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-template" );
 
     public OdfTableTemplateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -156,4 +152,114 @@ public abstract class OdfTableTemplateElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "last-row-end-column" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:first-row".
+    */
+    public OdfFirstRowElement createFirstRowElement(String   _aStyleName)
+    {
+        OdfFirstRowElement  _nFirstRow = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFirstRowElement.class);
+        _nFirstRow.setStyleName( _aStyleName);
+        this.appendChild( _nFirstRow);
+        return  _nFirstRow;      
+    }
+    
+    /**
+    * Create child element "table:last-row".
+    */
+    public OdfLastRowElement createLastRowElement(String   _aStyleName)
+    {
+        OdfLastRowElement  _nLastRow = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLastRowElement.class);
+        _nLastRow.setStyleName( _aStyleName);
+        this.appendChild( _nLastRow);
+        return  _nLastRow;      
+    }
+    
+    /**
+    * Create child element "table:first-column".
+    */
+    public OdfFirstColumnElement createFirstColumnElement(String   _aStyleName)
+    {
+        OdfFirstColumnElement  _nFirstColumn = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFirstColumnElement.class);
+        _nFirstColumn.setStyleName( _aStyleName);
+        this.appendChild( _nFirstColumn);
+        return  _nFirstColumn;      
+    }
+    
+    /**
+    * Create child element "table:last-column".
+    */
+    public OdfLastColumnElement createLastColumnElement(String   _aStyleName)
+    {
+        OdfLastColumnElement  _nLastColumn = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLastColumnElement.class);
+        _nLastColumn.setStyleName( _aStyleName);
+        this.appendChild( _nLastColumn);
+        return  _nLastColumn;      
+    }
+    
+    /**
+    * Create child element "table:body".
+    */
+    public OdfBodyElement createBodyElement(String   _aStyleName)
+    {
+        OdfBodyElement  _nBody = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBodyElement.class);
+        _nBody.setStyleName( _aStyleName);
+        this.appendChild( _nBody);
+        return  _nBody;      
+    }
+    
+    /**
+    * Create child element "table:even-rows".
+    */
+    public OdfEvenRowsElement createEvenRowsElement(String   _aStyleName)
+    {
+        OdfEvenRowsElement  _nEvenRows = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEvenRowsElement.class);
+        _nEvenRows.setStyleName( _aStyleName);
+        this.appendChild( _nEvenRows);
+        return  _nEvenRows;      
+    }
+    
+    /**
+    * Create child element "table:odd-rows".
+    */
+    public OdfOddRowsElement createOddRowsElement(String   _aStyleName)
+    {
+        OdfOddRowsElement  _nOddRows = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfOddRowsElement.class);
+        _nOddRows.setStyleName( _aStyleName);
+        this.appendChild( _nOddRows);
+        return  _nOddRows;      
+    }
+    
+    /**
+    * Create child element "table:even-columns".
+    */
+    public OdfEvenColumnsElement createEvenColumnsElement(String   _aStyleName)
+    {
+        OdfEvenColumnsElement  _nEvenColumns = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEvenColumnsElement.class);
+        _nEvenColumns.setStyleName( _aStyleName);
+        this.appendChild( _nEvenColumns);
+        return  _nEvenColumns;      
+    }
+    
+    /**
+    * Create child element "table:odd-columns".
+    */
+    public OdfOddColumnsElement createOddColumnsElement(String   _aStyleName)
+    {
+        OdfOddColumnsElement  _nOddColumns = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfOddColumnsElement.class);
+        _nOddColumns.setStyleName( _aStyleName);
+        this.appendChild( _nOddColumns);
+        return  _nOddColumns;      
+    }
+    
+    /**
+    * Create child element "table:background".
+    */
+    public OdfBackgroundElement createBackgroundElement(String   _aStyleName)
+    {
+        OdfBackgroundElement  _nBackground = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBackgroundElement.class);
+        _nBackground.setStyleName( _aStyleName);
+        this.appendChild( _nBackground);
+        return  _nBackground;      
+    }
+    
 }

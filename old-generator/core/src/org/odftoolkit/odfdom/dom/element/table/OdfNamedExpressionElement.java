@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfCellAddress;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:named-expression>".
  */
 public abstract class OdfNamedExpressionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3993198834778439819L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "named-expression" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "named-expression" );
 
     public OdfNamedExpressionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

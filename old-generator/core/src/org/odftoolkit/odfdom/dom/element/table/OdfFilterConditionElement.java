@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.table.OdfDataType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:filter-condition>".
  */
 public abstract class OdfFilterConditionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5685734831202519588L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "filter-condition" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "filter-condition" );
 
     public OdfFilterConditionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -156,4 +152,15 @@ public abstract class OdfFilterConditionElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "data-type" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:filter-set-item".
+    */
+    public OdfFilterSetItemElement createFilterSetItemElement(String   _aValue)
+    {
+        OdfFilterSetItemElement  _nFilterSetItem = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFilterSetItemElement.class);
+        _nFilterSetItem.setValue( _aValue);
+        this.appendChild( _nFilterSetItem);
+        return  _nFilterSetItem;      
+    }
+    
 }

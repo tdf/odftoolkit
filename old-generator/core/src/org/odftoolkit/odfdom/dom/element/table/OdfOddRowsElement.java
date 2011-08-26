@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:odd-rows>".
  */
 public abstract class OdfOddRowsElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7697921239913935777L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "odd-rows" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "odd-rows" );
 
     public OdfOddRowsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.TableCell, OdfName.get( OdfNamespace.TABLE, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -68,8 +64,7 @@ public abstract class OdfOddRowsElement extends OdfStylableElement
     /**
      * Get value of attribute "table:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -78,8 +73,7 @@ public abstract class OdfOddRowsElement extends OdfStylableElement
     /**
      * Set value of attribute "table:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "style-name" ), aStringVal );

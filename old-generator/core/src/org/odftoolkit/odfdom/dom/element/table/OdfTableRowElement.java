@@ -37,25 +37,21 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.table.OdfVisibilityType;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<table:table-row>".
  */
 public abstract class OdfTableRowElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3326882532810983030L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-row" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TABLE, "table-row" );
 
     public OdfTableRowElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.TableRow, OdfName.get( OdfNamespace.TABLE, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -87,8 +83,7 @@ public abstract class OdfTableRowElement extends OdfStylableElement
     /**
      * Get value of attribute "table:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -97,8 +92,7 @@ public abstract class OdfTableRowElement extends OdfStylableElement
     /**
      * Set value of attribute "table:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TABLE, "style-name" ), aStringVal );
@@ -163,4 +157,24 @@ public abstract class OdfTableRowElement extends OdfStylableElement
         setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
+    /**
+    * Create child element "table:table-cell".
+    */
+    public OdfTableCellElement createTableCellElement()
+    {
+        OdfTableCellElement  _nTableCell = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableCellElement.class);
+        this.appendChild( _nTableCell);
+        return  _nTableCell;
+    }                   
+               
+    /**
+    * Create child element "table:covered-table-cell".
+    */
+    public OdfCoveredTableCellElement createCoveredTableCellElement()
+    {
+        OdfCoveredTableCellElement  _nCoveredTableCell = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfCoveredTableCellElement.class);
+        this.appendChild( _nCoveredTableCell);
+        return  _nCoveredTableCell;
+    }                   
+               
 }
