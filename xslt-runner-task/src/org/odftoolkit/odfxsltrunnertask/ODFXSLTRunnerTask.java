@@ -286,7 +286,7 @@ public class ODFXSLTRunnerTask extends Task {
         {
             ODFXSLTRunner aRunner = new ODFXSLTRunner();
             Logger aLogger = new AntLogger( getProject() );
-            bError = aRunner.runXSLT( m_aStyleSheet, m_aParams, m_aInput, m_aInputMode, m_aOutput, m_aOutputMode, m_aPath, m_aProcessor, aLogger  );
+            bError = aRunner.runXSLT( m_aStyleSheet, m_aParams, m_aInput, m_aInputMode, m_aOutput, m_aOutputMode, m_aPath, m_aProcessor, null, aLogger  );
         }
         catch( Exception e )
         {
