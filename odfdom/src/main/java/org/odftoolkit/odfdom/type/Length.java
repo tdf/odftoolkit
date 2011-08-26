@@ -23,6 +23,7 @@
 package org.odftoolkit.odfdom.type;
 
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype length}
@@ -68,7 +69,8 @@ public class Length implements OdfDataType {
 		}
 	}
 	private String mLengthString = null;
-
+	private static final Pattern lengthPattern = Pattern.compile("^-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc)|(px))$");
+	
 	/**
 	 * Construct Length by the parsing the given string
 	 *
@@ -77,8 +79,8 @@ public class Length implements OdfDataType {
 	 * @throws NumberFormatException if the given argument is not a valid Length
 	 */
 	public Length(String length) throws NumberFormatException {
-		if ((length == null) || (!length.matches("^-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc)|(px))$"))) {
-			throw new NumberFormatException("parameter is invalidate for datatype Length");
+		if (!isValid(length)) {
+			throw new NumberFormatException("parameter is invalid for datatype Length");
 		}
 		mLengthString = length;
 	}
@@ -92,7 +94,7 @@ public class Length implements OdfDataType {
 	 *         otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc)|(px))$"))) {
+		if ((stringValue == null) || (!lengthPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

@@ -21,13 +21,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype scriptCode}
  */
 public class ScriptCode implements OdfDataType {
 
     private String mScriptCode;
-
+    private static final Pattern scriptCodePattern = Pattern.compile("^[A-Za-z0-9]{1,8}$");
+	
     /**
      * Construct ScriptCode by the parsing the given string
      *
@@ -36,7 +39,7 @@ public class ScriptCode implements OdfDataType {
      * @throws IllegalArgumentException if the given argument is not a valid ScriptCode
      */
     public ScriptCode(String scriptCode) throws IllegalArgumentException {
-        if ((scriptCode == null) || (!scriptCode.matches("^[A-Za-z0-9]{1,8}$"))) {
+        if (!isValid(scriptCode)) {
             throw new IllegalArgumentException(
                     "parameter can not be null for ScriptCode");
         }
@@ -44,7 +47,7 @@ public class ScriptCode implements OdfDataType {
         // http://www.w3.org/TR/xmlschema-2/#token
         if (!W3CSchemaType.isValid("token", scriptCode)) {
             throw new IllegalArgumentException(
-                    "parameter is invalidate for datatype ScriptCode");
+                    "parameter is invalid for datatype ScriptCode");
         }
         mScriptCode = scriptCode;
     }
@@ -82,7 +85,7 @@ public class ScriptCode implements OdfDataType {
      *         false otherwise
      */
     public static boolean isValid(String stringValue) {
-        if (stringValue == null || !stringValue.matches("^[A-Za-z0-9]{1,8}$")) {
+        if (stringValue == null || !scriptCodePattern.matcher(stringValue).matches()) {
             return false;
         } else {
             return W3CSchemaType.isValid("token", stringValue);

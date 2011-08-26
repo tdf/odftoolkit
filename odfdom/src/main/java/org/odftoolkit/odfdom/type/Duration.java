@@ -50,7 +50,7 @@ public class Duration implements OdfFieldDataType, OdfDataType {
 		// http://www.w3.org/TR/xmlschema-2/#duration
 		if (!W3CSchemaType.isValid("duration", duration.toString())) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype duration");
+					"parameter is invalid for datatype duration");
 		}
 		mDurationType = duration;
 	}
@@ -90,9 +90,9 @@ public class Duration implements OdfFieldDataType, OdfDataType {
 			return null;
 		} catch (IllegalArgumentException ex2) {
 			Logger.getLogger(Duration.class.getName()).log(Level.SEVERE,
-					"parameter is invalidate for datatype Duration", ex2);
+					"parameter is invalid for datatype Duration", ex2);
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype Duration");
+					"parameter is invalid for datatype Duration");
 		}
 	}
 

@@ -21,13 +21,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype clipShape}
  */
 public class ClipShape implements OdfDataType {
 
 	private String mClipShape;
-
+	private static final Pattern clipShapePattern = Pattern.compile("^rect\\([ ]*((-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc)))|(auto))([ ]*,[ ]*((-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc))))|(auto)){3}[ ]*\\)$");
+	
 	/**
 	 * Construct ClipShape by the parsing the given string
 	 *
@@ -36,9 +39,9 @@ public class ClipShape implements OdfDataType {
 	 * @throws IllegalArgumentException if the given argument is not a valid ClipShape
 	 */
 	public ClipShape(String clipShape) throws IllegalArgumentException {
-		if ((clipShape == null) || (!clipShape.matches("^rect\\([ ]*((-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc)))|(auto))([ ]*,[ ]*((-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc))))|(auto)){3}[ ]*\\)$"))) {
+		if (!isValid(clipShape)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype ClipShape");
+					"parameter is invalid for datatype ClipShape");
 		}
 		mClipShape = clipShape;
 	}
@@ -76,8 +79,8 @@ public class ClipShape implements OdfDataType {
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^rect\\([ ]*((-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc)))|(auto))([ ]*,[ ]*((-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc))))|(auto)){3}[ ]*\\)$"))) {
-			return false;
+		if ((stringValue == null) || (!clipShapePattern.matcher(stringValue).matches())) {
+				return false;
 		} else {
 			return true;
 		}

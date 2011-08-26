@@ -314,18 +314,18 @@ public class TableCellTest {
 	}
 
 	@Test
-	public void testGetSetCellBackColor() throws Exception {
+	public void testGetSetCellBackgroundColor() throws Exception {
 		int rowindex = 2, columnindex = 0;
 		OdfTable table = odsdoc.getTableByName("Sheet1");
 		OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
-		fcell.setCellBackgroundColor("#FFFFFF");
+		fcell.setCellBackgroundColor("#ffffff");
 		saveods();
 		// reload
 		loadOutputSpreadsheet();
 		table = odsdoc.getTableByName("Sheet1");
 		fcell = table.getCellByPosition(columnindex, rowindex);
 		// set color as DEFAULT_BACKGROUND_COLOR #FFFFFF
-		Assert.assertEquals("#FFFFFF", fcell.getCellBackgroundColorString());
+		Assert.assertEquals("#ffffff", fcell.getCellBackgroundColorString());
 
 		Color expectedColor = Color.valueOf("#000000");
 		fcell.setCellBackgroundColor(expectedColor);
@@ -343,7 +343,7 @@ public class TableCellTest {
 			OdfTable tbl = ods.getTableByName("Sheet1");
 			OdfTableCell cell = tbl.getCellByPosition(0, 0);
 			Color actualBackColor = cell.getCellBackgroundColor();
-			Assert.assertEquals("#FFFFFF", actualBackColor.toString());
+			Assert.assertEquals("#ffffff", actualBackColor.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());

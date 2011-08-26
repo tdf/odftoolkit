@@ -15,7 +15,7 @@ public class ZeroToOneDecimal implements OdfDataType{
 	 */
 	public ZeroToOneDecimal(double n) throws IllegalArgumentException {
 		if( n > 1 || n < 0)
-			throw new IllegalArgumentException("parameter is invalidate for datatype ZeroToOneDecimal");
+			throw new IllegalArgumentException("parameter is invalid for datatype ZeroToOneDecimal");
 		mN = n;
 	}
 

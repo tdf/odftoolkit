@@ -153,7 +153,6 @@ class URITransformer {
 	 */
 	protected static BitSet safeCharacters;
 
-
 	static {
 		safeCharacters = new BitSet(256);
 		int i;
@@ -564,4 +563,3 @@ class URITransformer {
 	private URITransformer() {
 	}
 }
-

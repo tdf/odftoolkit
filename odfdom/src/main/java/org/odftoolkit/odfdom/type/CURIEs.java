@@ -77,7 +77,7 @@ public class CURIEs implements OdfDataType {
 			throws IllegalArgumentException {
 		if ((stringValue == null) || (stringValue.length() == 0)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype CURIEs");
+					"parameter is invalid for datatype CURIEs");
 		}
 
 		List<CURIE> aRet = new ArrayList<CURIE>();

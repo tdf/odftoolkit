@@ -49,7 +49,7 @@ public class Date implements OdfFieldDataType, OdfDataType {
 		// validate 'date' type which is defined in W3C schema
 		// see http://www.w3.org/TR/xmlschema-2/#date
 		if (!W3CSchemaType.isValid("date", date.toXMLFormat())) {
-			throw new IllegalArgumentException("parameter is invalidate for datatype date");
+			throw new IllegalArgumentException("parameter is invalid for datatype date");
 		}
 		mDate = date;
 	}

@@ -22,13 +22,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype percent}
  */
 public class Percent implements OdfFieldDataType, OdfDataType {
 
 	private double mN;
-
+	private static final Pattern percentPattern = Pattern.compile("^-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)%$");
+	
 	/**
 	 * Allocates a Percent object representing the n argument
 	 *
@@ -69,7 +72,7 @@ public class Percent implements OdfFieldDataType, OdfDataType {
 		if (n != -1) {
 			return new Percent(Double.valueOf(stringValue.substring(0, n)).doubleValue() / 100);
 		} else {
-			throw new IllegalArgumentException("parameter is invalidate for datatype Percent");
+			throw new IllegalArgumentException("parameter is invalid for datatype Percent");
 		}
 	}
 
@@ -107,7 +110,7 @@ public class Percent implements OdfFieldDataType, OdfDataType {
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)%$"))) {
+		if ((stringValue == null) || (!percentPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

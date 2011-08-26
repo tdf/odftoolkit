@@ -22,12 +22,15 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype nonNegativeLength}
  */
 public class NonNegativeLength extends Length {
 
 
+	private static final Pattern nonNegativeLengthPattern = Pattern.compile("^?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc)|(px))$");
 	/**
 	 * Construct NonNegativeLength by the parsing the given string
 	 *
@@ -37,9 +40,9 @@ public class NonNegativeLength extends Length {
 	 */
 	public NonNegativeLength(String length) throws NumberFormatException {
 		super(length);
-		if ((length == null) || (!length.matches("^?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc)|(px))$"))) {
+		if (!isValid(length)){
 			throw new NumberFormatException(
-					"parameter is invalidate for datatype NonNegativeLength");
+					"parameter is invalid for datatype NonNegativeLength");
 		}
 	}
 
@@ -67,7 +70,7 @@ public class NonNegativeLength extends Length {
 	 *         type false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc)|(px))$"))) {
+		if ((stringValue == null) || (!nonNegativeLengthPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

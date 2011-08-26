@@ -39,7 +39,7 @@ public class PositiveInteger implements OdfDataType {
 	public PositiveInteger(int n) throws NumberFormatException {
 		if (n < 1) {
 			throw new NumberFormatException(
-					"parameter is invalidate for datatype PositiveInteger");
+					"parameter is invalid for datatype PositiveInteger");
 		}
 		mN = n;
 	}

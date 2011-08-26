@@ -22,13 +22,15 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype cellAddress}
  */
 public class CellAddress implements OdfDataType {
 
 	private String mCellAddress;
-
+	private static final Pattern cellAddressPattern = Pattern.compile("^(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+\\$?[0-9]+$");
 	/**
 	 * Construct CellAddress by the parsing the given string
 	 *
@@ -37,9 +39,9 @@ public class CellAddress implements OdfDataType {
 	 * @throws IllegalArgumentException if the given argument is not a valid CellAddress
 	 */
 	public CellAddress(String cellAddress) throws IllegalArgumentException {
-		if ((cellAddress == null) || (!cellAddress.matches("^(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+\\$?[0-9]+$"))) {
+		if (!isValid(cellAddress)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype CellAddress");
+					"parameter is invalid for datatype CellAddress");
 		}
 		mCellAddress = cellAddress;
 	}
@@ -79,7 +81,7 @@ public class CellAddress implements OdfDataType {
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+\\$?[0-9]+$"))) {
+		if ((stringValue == null) || (!cellAddressPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

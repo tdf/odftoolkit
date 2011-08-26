@@ -43,7 +43,7 @@ public class NCName implements OdfDataType {
 		// http://www.w3.org/TR/xmlschema-2/#NCName
 		if (!W3CSchemaType.isValid("NCName", name)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype NCName");
+					"parameter is invalid for datatype NCName");
 		}
 		mName = name;
 	}

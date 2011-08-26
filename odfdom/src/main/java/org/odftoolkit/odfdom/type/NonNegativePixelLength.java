@@ -21,12 +21,15 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype nonNegativePixelLength}
  */
 public class NonNegativePixelLength extends Length {
 
 	private String mLength;
+	private static final Pattern pixelLengthPattern = Pattern.compile("^([0-9]+(\\.[0-9]*)?|\\.[0-9]+)(px)$");
 
 	/**
 	 * Construct NonNegativePixelLength by the parsing the given string
@@ -37,8 +40,8 @@ public class NonNegativePixelLength extends Length {
 	 */
 	public NonNegativePixelLength(String pixelLength) throws NumberFormatException {
 		super(pixelLength);
-		if ((pixelLength == null) || (!pixelLength.matches("^([0-9]+(\\.[0-9]*)?|\\.[0-9]+)(px)$"))) {
-			throw new NumberFormatException("parameter is invalidate for datatype NonNegativePixelLength");
+		if (!isValid(pixelLength)) {
+			throw new NumberFormatException("parameter is invalid for datatype NonNegativePixelLength");
 		}
 	}
 
@@ -77,7 +80,7 @@ public class NonNegativePixelLength extends Length {
 	 *         data type false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^([0-9]+(\\.[0-9]*)?|\\.[0-9]+)(px)$"))) {
+		if ((stringValue == null) || (!pixelLengthPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

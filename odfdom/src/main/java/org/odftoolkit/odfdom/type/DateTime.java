@@ -49,7 +49,7 @@ public class DateTime implements OdfDataType {
 		// validate 'dateTime' type which is defined in W3C schema
 		// http://www.w3.org/TR/xmlschema-2/#dateTime
 		if (!W3CSchemaType.isValid("dateTime", dateTime.toXMLFormat())) {
-			throw new IllegalArgumentException("parameter is invalidate for datatype dateTime");
+			throw new IllegalArgumentException("parameter is invalid for datatype dateTime");
 		}
 		mDateTime = dateTime;
 	}
@@ -79,9 +79,9 @@ public class DateTime implements OdfDataType {
 			return new DateTime(aFactory.newXMLGregorianCalendar(stringValue));
 		} catch (IllegalArgumentException ex) {
 			Logger.getLogger(DateTime.class.getName()).log(Level.SEVERE,
-					"parameter is invalidate for datatype DateTime", ex);
+					"parameter is invalid for datatype DateTime", ex);
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype DateTime");
+					"parameter is invalid for datatype DateTime");
 		}
 	}
 

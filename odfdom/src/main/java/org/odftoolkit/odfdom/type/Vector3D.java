@@ -21,13 +21,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype vector3D}
  */
 public class Vector3D implements OdfDataType {
 
 	private String mVector3D;
-
+	private static final Pattern vector3DPattern = Pattern.compile("^\\([ ]*-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)([ ]+-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)){2}[ ]*\\)$");
+	
 	/**
 	 * Construct Vector3D by the parsing the given string
 	 *
@@ -35,8 +38,8 @@ public class Vector3D implements OdfDataType {
 	 *            The String to be parsed into Vector3D
 	 */
 	public Vector3D(String vector3D) {
-		if ((vector3D == null) || (!vector3D.matches("^\\([ ]*-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)([ ]+-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)){2}[ ]*\\)$"))) {
-			throw new IllegalArgumentException("parameter is invalidate for datatype Vector3D");
+		if (!isValid(vector3D)) {
+			throw new IllegalArgumentException("parameter is invalid for datatype Vector3D");
 		}
 		mVector3D = vector3D;
 	}
@@ -72,7 +75,7 @@ public class Vector3D implements OdfDataType {
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^\\([ ]*-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)([ ]+-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)){2}[ ]*\\)$"))) {
+		if ((stringValue == null) || (!vector3DPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

@@ -38,7 +38,7 @@ public class NonNegativeInteger implements OdfDataType {
 	 */
 	public NonNegativeInteger(int n) throws NumberFormatException {
 		if (n < 0) {
-			throw new NumberFormatException("parameter is invalidate for datatype NonNegativeInteger");
+			throw new NumberFormatException("parameter is invalid for datatype NonNegativeInteger");
 		}
 		mN = n;
 	}

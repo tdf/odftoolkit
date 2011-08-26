@@ -43,7 +43,7 @@ public class IDREF implements OdfDataType {
 		// validate 'IDREF' type which is defined in W3C schema
 		// http://www.w3.org/TR/xmlschema-2/#IDREF
 		if (!W3CSchemaType.isValid("IDREF", idRef)) {
-			throw new IllegalArgumentException("parameter is invalidate for datatype IDREF");
+			throw new IllegalArgumentException("parameter is invalid for datatype IDREF");
 
 		}
 		mIdRef = idRef;

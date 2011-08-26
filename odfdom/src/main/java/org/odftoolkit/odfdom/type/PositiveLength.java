@@ -21,11 +21,14 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype positiveLength}
  */
 public class PositiveLength extends Length {
-
+	private static final Pattern positiveLengthPattern = Pattern.compile("^([0-9]*[1-9][0-9]*(\\.[0-9]*)?|0+\\.[0-9]*[1-9][0-9]*|\\.[0-9]*[1-9][0-9]*)((cm)|(mm)|(in)|(pt)|(pc)|(px))$");
+	
 	/**
 	 * Construct PositiveLength by the parsing the given string
 	 *
@@ -35,9 +38,9 @@ public class PositiveLength extends Length {
 	 */
 	public PositiveLength(String length) throws NumberFormatException {
 		super(length);
-		if ((length == null) || (!length.matches("^([0-9]*[1-9][0-9]*(\\.[0-9]*)?|0+\\.[0-9]*[1-9][0-9]*|\\.[0-9]*[1-9][0-9]*)((cm)|(mm)|(in)|(pt)|(pc)|(px))$"))) {
+		if (!isValid(length)) {
 			throw new NumberFormatException(
-					"parameter is invalidate for datatype PositiveLength");
+					"parameter is invalid for datatype PositiveLength");
 		}
 	}
 
@@ -65,7 +68,7 @@ public class PositiveLength extends Length {
 	 *         type false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^([0-9]*[1-9][0-9]*(\\.[0-9]*)?|0+\\.[0-9]*[1-9][0-9]*|\\.[0-9]*[1-9][0-9]*)((cm)|(mm)|(in)|(pt)|(pc)|(px))$"))) {
+		if ((stringValue == null) || (!positiveLengthPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

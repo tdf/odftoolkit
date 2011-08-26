@@ -77,7 +77,7 @@ public class StyleNameRefs implements OdfDataType {
 	 */
 	public static StyleNameRefs valueOf(String stringValue) throws IllegalArgumentException {
 		if (stringValue == null) {
-			throw new IllegalArgumentException("parameter is invalidate for datatype StyleNameRefs");
+			throw new IllegalArgumentException("parameter is invalid for datatype StyleNameRefs");
 		}
 
 		List<StyleName> aRet = new ArrayList<StyleName>();

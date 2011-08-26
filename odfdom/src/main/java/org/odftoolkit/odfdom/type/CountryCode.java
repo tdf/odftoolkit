@@ -21,13 +21,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype countryCode}
  */
 public class CountryCode implements OdfDataType {
 
 	private String mCountryCode;
-
+	private static final Pattern countryCodePattern = Pattern.compile("^[A-Za-z0-9]{1,8}$");
+	
 	/**
 	 * Construct CountryCode by the parsing the given string
 	 *
@@ -36,13 +39,13 @@ public class CountryCode implements OdfDataType {
 	 * @throws IllegalArgumentException if the given argument is not a valid CountryCode
 	 */
 	public CountryCode(String countryCode) throws IllegalArgumentException {
-		if ((countryCode == null) || (!countryCode.matches("^[A-Za-z0-9]{1,8}$"))) {
-			throw new IllegalArgumentException("parameter is invalidate for datatype CountryCode");
+		if (!isValid(countryCode)) {
+			throw new IllegalArgumentException("parameter is invalid for datatype CountryCode");
 		}
 		// validate 'token' type which is defined in W3C schema
 		// http://www.w3.org/TR/xmlschema-2/#token
 		if (!W3CSchemaType.isValid("token", countryCode)) {
-			throw new IllegalArgumentException("parameter is invalidate for datatype CountryCode");
+			throw new IllegalArgumentException("parameter is invalid for datatype CountryCode");
 		}
 		mCountryCode = countryCode;
 	}
@@ -80,7 +83,7 @@ public class CountryCode implements OdfDataType {
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if (stringValue == null || !stringValue.matches("^[A-Za-z0-9]{1,8}$")) {
+		if (stringValue == null || !countryCodePattern.matcher(stringValue).matches()) {
 			return false;
 		} else {
 			return W3CSchemaType.isValid("token", stringValue);

@@ -21,13 +21,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype namespacedToken}
  */
 public class NamespacedToken implements OdfDataType {
 
 	private String mNamespacedToken;
-
+	private static final Pattern namespacedTokenPattern = Pattern.compile("^[0-9a-zA-Z_]+:[0-9a-zA-Z._\\-]+$");
+	
 	/**
 	 * Construct NamespacedToken by the parsing the given string
 	 *
@@ -36,9 +39,9 @@ public class NamespacedToken implements OdfDataType {
 	 * @throws IllegalArgumentException if the given argument is not a valid NamespacedToken
 	 */
 	public NamespacedToken(String namespacedToken) throws IllegalArgumentException {
-		if ((namespacedToken == null) || (!namespacedToken.matches("^[0-9a-zA-Z_]+:[0-9a-zA-Z._\\-]+$"))) {
+		if (!isValid(namespacedToken)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype NamespacedToken");
+					"parameter is invalid for datatype NamespacedToken");
 		}
 		mNamespacedToken = namespacedToken;
 	}
@@ -78,7 +81,7 @@ public class NamespacedToken implements OdfDataType {
 	 *         type false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^[0-9a-zA-Z_]+:[0-9a-zA-Z._\\-]+$"))) {
+		if ((stringValue == null) || (!namespacedTokenPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

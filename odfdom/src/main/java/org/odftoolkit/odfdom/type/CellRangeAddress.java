@@ -22,13 +22,18 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype cellRangeAddress}
  */
 public class CellRangeAddress implements OdfDataType {
 
 	private String mCellRangeAddress;
-
+	private static final Pattern cellRangeAddressPattern1 = Pattern.compile("^(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+\\$?[0-9]+(:(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+\\$?[0-9]+)?$");
+	private static final Pattern cellRangeAddressPattern2 = Pattern.compile("^(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[0-9]+:(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[0-9]+$");
+	private static final Pattern cellRangeAddressPattern3 = Pattern.compile("^(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+:(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+$");
+	
 	/**
 	 * Construct CellRangeAddress by the parsing the given string
 	 *
@@ -38,9 +43,9 @@ public class CellRangeAddress implements OdfDataType {
 	 */
 	public CellRangeAddress(String cellRangeAddress)
 			throws IllegalArgumentException {
-		if ((cellRangeAddress == null) || (!(cellRangeAddress.matches("^(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+\\$?[0-9]+(:(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+\\$?[0-9]+)?$") || cellRangeAddress.matches("^(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[0-9]+:(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[0-9]+$") || cellRangeAddress.matches("^(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+:(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+$")))) {
+		if (!isValid(cellRangeAddress)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype CellRangeAddress");
+					"parameter is invalid for datatype CellRangeAddress");
 		}
 		mCellRangeAddress = cellRangeAddress;
 	}
@@ -80,8 +85,8 @@ public class CellRangeAddress implements OdfDataType {
 	 *         type false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!(stringValue.matches("^(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+\\$?[0-9]+(:(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+\\$?[0-9]+)?$") || stringValue.matches("^(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[0-9]+:(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[0-9]+$") || stringValue.matches("^(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+:(\\$?([^\\. ']+|'([^']|'')+'))?\\.\\$?[A-Z]+$")))) {
-			return false;
+		if ((stringValue == null) || (!(cellRangeAddressPattern1.matcher(stringValue).matches() || cellRangeAddressPattern2.matcher(stringValue).matches() ||cellRangeAddressPattern3.matcher(stringValue).matches()))) {
+				return false;
 		} else {
 			return true;
 		}

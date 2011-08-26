@@ -21,13 +21,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype SafeCURIE}
  */
 public class SafeCURIE implements OdfDataType {
 
 	private String mCURIE;
-
+	private static final Pattern safeCURIEPattern = Pattern.compile("^\\[(([\\i-[:]][\\c-[:]]*)?:)?.+\\]$");
+	
 	/**
 	 * Construct SafeCURIE by the parsing the given string
 	 *
@@ -36,9 +39,9 @@ public class SafeCURIE implements OdfDataType {
 	 * @throws IllegalArgumentException if the given argument is not a valid SafeCURIE
 	 */
 	public SafeCURIE(String curie) throws IllegalArgumentException {
-		if ((curie == null) || (!curie.matches("^\\[(([\\i-[:]][\\c-[:]]*)?:)?.+\\]$") || curie.length() < 3)) {
+		if (!isValid(curie)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype SafeCURIE");
+					"parameter is invalid for datatype SafeCURIE");
 		}
 		mCURIE = curie;
 	}
@@ -75,7 +78,7 @@ public class SafeCURIE implements OdfDataType {
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^\\[(([\\i-[:]][\\c-[:]]*)?:)?.+\\]$") || stringValue.length() < 3)) {
+		if ((stringValue == null) || (!safeCURIEPattern.matcher(stringValue).matches() || stringValue.length() < 3)) {
 			return false;
 		} else {
 			return true;

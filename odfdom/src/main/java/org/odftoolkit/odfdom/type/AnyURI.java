@@ -50,9 +50,9 @@ public class AnyURI implements OdfDataType {
 		// validate 'anyURI' type which is defined in W3C schema
 		// http://www.w3.org/TR/xmlschema-2/#anyURI
 		if (!W3CSchemaType.isValid("anyURI", URITransformer.decodePath(uri.toString()))) {
-			Logger.getLogger(AnyURI.class.getName()).log(Level.SEVERE, "parameter is invalidate for datatype AnyURI");
+			Logger.getLogger(AnyURI.class.getName()).log(Level.SEVERE, "parameter is invalid for datatype AnyURI");
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype anyURI");
+					"parameter is invalid for datatype anyURI");
 		}
 		mURI = uri;
 	}
@@ -86,9 +86,9 @@ public class AnyURI implements OdfDataType {
 			return new AnyURI(uri);
 		} catch (URISyntaxException ex) {
 			Logger.getLogger(AnyURI.class.getName()).log(Level.SEVERE,
-					"parameter is invalidate for datatype anyURI", ex);
+					"parameter is invalid for datatype anyURI", ex);
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype anyURI");
+					"parameter is invalid for datatype anyURI");
 		}
 	}
 

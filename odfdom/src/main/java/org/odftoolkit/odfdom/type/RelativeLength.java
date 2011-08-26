@@ -21,13 +21,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype relativeLength}
  */
 public class RelativeLength implements OdfDataType {
 
 	private String mLength;
-
+	private static final Pattern relativeLengthPattern = Pattern.compile("^[0-9]+\\*$");
+	
 	/**
 	 * Construct RelativeLength by the parsing the given string
 	 *
@@ -36,9 +39,9 @@ public class RelativeLength implements OdfDataType {
 	 * @throws NumberFormatException if the given argument is not a valid RelativeLength
 	 */
 	public RelativeLength(String length) throws NumberFormatException {
-		if ((length == null) || (!length.matches("^[0-9]+\\*$"))) {
+		if (!isValid(length)) {
 			throw new NumberFormatException(
-					"parameter is invalidate for datatype RelativeLength");
+					"parameter is invalid for datatype RelativeLength");
 		}
 		mLength = length;
 	}
@@ -77,7 +80,7 @@ public class RelativeLength implements OdfDataType {
 	 *         type false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^[0-9]+\\*$"))) {
+		if ((stringValue == null) || (!relativeLengthPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

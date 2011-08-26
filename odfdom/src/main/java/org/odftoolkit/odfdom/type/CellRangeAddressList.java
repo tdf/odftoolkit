@@ -78,7 +78,7 @@ public class CellRangeAddressList implements OdfDataType {
 	public static CellRangeAddressList valueOf(String stringValue)
 			throws IllegalArgumentException {
 		if (stringValue == null) {
-			throw new IllegalArgumentException("parameter is invalidate for datatype CellRangeAddressList");
+			throw new IllegalArgumentException("parameter is invalid for datatype CellRangeAddressList");
 		}
 
 		List<CellRangeAddress> aRet = new ArrayList<CellRangeAddress>();

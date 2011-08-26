@@ -48,7 +48,7 @@ public class DateOrDateTime implements OdfDataType {
 			mDateOrDateTime = dateOrDateTime;
 		} else {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype DateOrDateTime");
+					"parameter is invalid for datatype DateOrDateTime");
 		}
 	}
 
@@ -78,9 +78,9 @@ public class DateOrDateTime implements OdfDataType {
 			return new DateOrDateTime(aFactory.newXMLGregorianCalendar(stringValue));
 		} catch (IllegalArgumentException ex) {
 			Logger.getLogger(DateOrDateTime.class.getName()).log(Level.SEVERE,
-					"parameter is invalidate for datatype DateOrDateTime", ex);
+					"parameter is invalid for datatype DateOrDateTime", ex);
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype DateOrDateTime");
+					"parameter is invalid for datatype DateOrDateTime");
 		}
 	}
 

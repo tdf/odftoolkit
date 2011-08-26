@@ -1,11 +1,14 @@
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype signedZeroToHundredPercent}
  */
 public class SignedZeroToHundredPercent implements OdfDataType{
 	private double mN;
-
+	private static final Pattern signedZeroToHundredPercentPattern = Pattern.compile("^-?([0-9]?[0-9](\\.[0-9]*)?|100(\\.0*)?|\\.[0-9]+)%$");
+	
 	/**
 	 * Allocates a SignedZeroToHundredPercent object representing the n argument
 	 *
@@ -15,7 +18,7 @@ public class SignedZeroToHundredPercent implements OdfDataType{
 	 */
 	public SignedZeroToHundredPercent(double n) throws IllegalArgumentException {
 		if( n > 1 || n < -1)
-			throw new IllegalArgumentException("parameter is invalidate for datatype SignedZeroToHundredPercent");
+			throw new IllegalArgumentException("parameter is invalid for datatype SignedZeroToHundredPercent");
 		mN = n;
 	}
 
@@ -48,7 +51,7 @@ public class SignedZeroToHundredPercent implements OdfDataType{
 		if (n != -1) {
 			return new SignedZeroToHundredPercent(Double.valueOf(stringValue.substring(0, n)).doubleValue() / 100);
 		} else {
-			throw new IllegalArgumentException("parameter is invalidate for datatype SignedZeroToHundredPercent");
+			throw new IllegalArgumentException("parameter is invalid for datatype SignedZeroToHundredPercent");
 		}
 	}
 
@@ -87,7 +90,7 @@ public class SignedZeroToHundredPercent implements OdfDataType{
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^-?([0-9]?[0-9](\\.[0-9]*)?|100(\\.0*)?|\\.[0-9]+)%$"))) {
+		if ((stringValue == null) || (!signedZeroToHundredPercentPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

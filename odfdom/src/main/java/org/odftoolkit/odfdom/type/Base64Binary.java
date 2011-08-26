@@ -47,7 +47,7 @@ public class Base64Binary implements OdfDataType {
 		// validate 'base64Binary' type which is defined in W3C schema
 		// http://www.w3.org/TR/xmlschema-2/#base64Binary
 		if (!W3CSchemaType.isValid("base64Binary", Base64.encode(bytes))) {
-			throw new NumberFormatException("parameter is invalidate for datatype base64Binary");
+			throw new NumberFormatException("parameter is invalid for datatype base64Binary");
 		}
 		mByteList = bytes;
 	}

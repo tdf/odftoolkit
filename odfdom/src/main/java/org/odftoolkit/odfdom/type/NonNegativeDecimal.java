@@ -16,7 +16,7 @@ public class NonNegativeDecimal implements OdfDataType {
 	public NonNegativeDecimal(double n) throws IllegalArgumentException {
 		if (n < 0)
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype NonNegativeDecimal");
+					"parameter is invalid for datatype NonNegativeDecimal");
 		mN = n;
 	}
 

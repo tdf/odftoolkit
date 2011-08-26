@@ -21,12 +21,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype point3D}
  */
 public class Point3D implements OdfDataType {
 
 	private String mPoint3D;
+	private static final Pattern point3DPattern = Pattern.compile("^\\([ ]*-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc))([ ]+-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc))){2}[ ]*\\)$");
+	
 
 	/**
 	 * Construct Point3D by the parsing the given string
@@ -36,8 +40,8 @@ public class Point3D implements OdfDataType {
 	 * @throws IllegalArgumentException if the given argument is not a valid Point3D
 	 */
 	public Point3D(String point3D) throws IllegalArgumentException {
-		if ((point3D == null) || (!point3D.matches("^\\([ ]*-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc))([ ]+-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc))){2}[ ]*\\)$"))) {
-			throw new IllegalArgumentException("parameter is invalidate for datatype Point3D");
+		if (!isValid(point3D)) {
+			throw new IllegalArgumentException("parameter is invalid for datatype Point3D");
 		}
 		mPoint3D = point3D;
 	}
@@ -75,7 +79,7 @@ public class Point3D implements OdfDataType {
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^\\([ ]*-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc))([ ]+-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)((cm)|(mm)|(in)|(pt)|(pc))){2}[ ]*\\)$"))) {
+		if ((stringValue == null) || (!point3DPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

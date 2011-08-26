@@ -1,11 +1,14 @@
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype zeroToHundredPercent}
  */
 public class ZeroToHundredPercent implements OdfDataType{
 	private double mN;
-
+	private static final Pattern zeroToHundredPercentPattern = Pattern.compile("^([0-9]?[0-9](\\.[0-9]*)?|100(\\.0*)?|\\.[0-9]+)%$");
+	
 	/**
 	 * Allocates a ZeroToHundredPercent object representing the n argument
 	 *
@@ -15,7 +18,7 @@ public class ZeroToHundredPercent implements OdfDataType{
 	 */
 	public ZeroToHundredPercent(double n) throws IllegalArgumentException {
 		if( n > 1 || n < 0)
-			throw new IllegalArgumentException("parameter is invalidate for datatype ZeroToHundredPercent");
+			throw new IllegalArgumentException("parameter is invalid for datatype ZeroToHundredPercent");
 		mN = n;
 	}
 
@@ -48,7 +51,7 @@ public class ZeroToHundredPercent implements OdfDataType{
 		if (n != -1) {
 			return new ZeroToHundredPercent(Double.valueOf(stringValue.substring(0, n)).doubleValue() / 100);
 		} else {
-			throw new IllegalArgumentException("parameter is invalidate for datatype ZeroToHundredPercent");
+			throw new IllegalArgumentException("parameter is invalid for datatype ZeroToHundredPercent");
 		}
 	}
 
@@ -87,7 +90,7 @@ public class ZeroToHundredPercent implements OdfDataType{
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^([0-9]?[0-9](\\.[0-9]*)?|100(\\.0*)?|\\.[0-9]+)%$"))) {
+		if ((stringValue == null) || (!zeroToHundredPercentPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

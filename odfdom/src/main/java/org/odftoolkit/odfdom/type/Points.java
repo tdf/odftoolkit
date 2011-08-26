@@ -21,13 +21,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype points}
  */
 public class Points implements OdfDataType {
 
 	private String mPoints;
-
+	private static final Pattern pointsPattern = Pattern.compile("^-?[0-9]+,-?[0-9]+([ ]+-?[0-9]+,-?[0-9]+)*$");
+	
 	/**
 	 * Construct Points by the parsing the given string
 	 *
@@ -36,9 +39,9 @@ public class Points implements OdfDataType {
 	 * @throws IllegalArgumentException if the given argument is not a valid Pointes
 	 */
 	public Points(String points) throws IllegalArgumentException {
-		if ((points == null) || (!points.matches("^-?[0-9]+,-?[0-9]+([ ]+-?[0-9]+,-?[0-9]+)*$"))) {
+		if (!isValid(points)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype Points");
+					"parameter is invalid for datatype Points");
 		}
 		mPoints = points;
 	}
@@ -74,7 +77,7 @@ public class Points implements OdfDataType {
 	 *         otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^-?[0-9]+,-?[0-9]+([ ]+-?[0-9]+,-?[0-9]+)*$"))) {
+		if ((stringValue == null) || (!pointsPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

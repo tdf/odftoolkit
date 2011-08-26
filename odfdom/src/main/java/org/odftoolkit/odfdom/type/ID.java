@@ -43,7 +43,7 @@ public class ID implements OdfDataType {
 		// validate 'ID' type which is defined in W3C schema
 		// http://www.w3.org/TR/xmlschema-2/#ID
 		if (!W3CSchemaType.isValid("ID", id)) {
-			throw new IllegalArgumentException("parameter is invalidate for datatype ID");
+			throw new IllegalArgumentException("parameter is invalid for datatype ID");
 		}
 		mId = id;
 	}

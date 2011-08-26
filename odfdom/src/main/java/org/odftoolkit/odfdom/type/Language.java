@@ -42,7 +42,7 @@ public class Language implements OdfDataType {
 		}
 		if (!W3CSchemaType.isValid("language", language)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype Language");
+					"parameter is invalid for datatype Language");
 		}
 		mLanguage = language;
 	}

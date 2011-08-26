@@ -52,7 +52,7 @@ public class Time implements OdfDataType {
 		// http://www.w3.org/TR/xmlschema-2/#time
 		if (!W3CSchemaType.isValid("time", time.toXMLFormat())) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype Time");
+					"parameter is invalid for datatype Time");
 		}
 		mTime = time;
 	}
@@ -81,9 +81,9 @@ public class Time implements OdfDataType {
 			return new Time(aFactory.newXMLGregorianCalendar(stringValue));
 		} catch (IllegalArgumentException ex) {
 			Logger.getLogger(Time.class.getName()).log(Level.SEVERE,
-					"parameter is invalidate for datatype Time", ex);
+					"parameter is invalid for datatype Time", ex);
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype Time");
+					"parameter is invalid for datatype Time");
 		}
 	}
 

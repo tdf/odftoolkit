@@ -22,6 +22,7 @@
 package org.odftoolkit.odfdom.type;
 
 import java.net.URI;
+import java.util.regex.Pattern;
 
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype URIorSafeCURIE}
@@ -31,7 +32,8 @@ public class URIorSafeCURIE implements OdfDataType {
 
 	private String mURIorSafeCURIE;
 	private Object mValue;
-
+	private static final Pattern uRIorSafeCURIEPattern = Pattern.compile("^\\[(([\\i-[:]][\\c-[:]]*)?:)?.+\\]$");
+	
 	/**
 	 * Construct URIorSafeCURIE without the initialized value
 	 */
@@ -143,14 +145,14 @@ public class URIorSafeCURIE implements OdfDataType {
 			throw new IllegalArgumentException("parameter can not be null for URIorSafeCURIE");
 		}
 		URIorSafeCURIE aRet = new URIorSafeCURIE();
-		if ((stringValue.matches("^\\[(([\\i-[:]][\\c-[:]]*)?:)?.+\\]$")) && (stringValue.length() >= 3)) {
+		if ((uRIorSafeCURIEPattern.matcher(stringValue).matches()) && (stringValue.length() >= 3)) {
 			aRet.setSafeCURIE(stringValue);
 		} else {
 			AnyURI aAnyURI = AnyURI.valueOf(stringValue);
 			if (aAnyURI != null) {
 				aRet.setAnyURI(aAnyURI.getURI());
 			} else {
-				throw new IllegalArgumentException("parameter is invalidate for datatype URIorSafeCURIE");
+				throw new IllegalArgumentException("parameter is invalid for datatype URIorSafeCURIE");
 			}
 		}
 		return aRet;

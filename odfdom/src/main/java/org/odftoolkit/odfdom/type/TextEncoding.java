@@ -21,13 +21,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype textEncoding}
  */
 public class TextEncoding implements OdfDataType {
 
 	private String mTextEncoding;
-
+	private static final Pattern textEncodingPattern = Pattern.compile("^[A-Za-z][A-Za-z0-9._\\-]*$");
+	
 	/**
 	 * Construct TextEncoding by the parsing the given string
 	 *
@@ -36,9 +39,9 @@ public class TextEncoding implements OdfDataType {
 	 * @throws IllegalArgumentException if the given argument is not a valid TextEncoding
 	 */
 	public TextEncoding(String textEncoding) throws IllegalArgumentException {
-		if ((textEncoding == null) || (!textEncoding.matches("^[A-Za-z][A-Za-z0-9._\\-]*$"))) {
+		if (!isValid(textEncoding)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype TextEncoding");
+					"parameter is invalid for datatype TextEncoding");
 		}
 		mTextEncoding = textEncoding;
 	}
@@ -76,7 +79,7 @@ public class TextEncoding implements OdfDataType {
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if ((stringValue == null) || (!stringValue.matches("^[A-Za-z][A-Za-z0-9._\\-]*$"))) {
+		if ((stringValue == null) || (!textEncodingPattern.matcher(stringValue).matches())) {
 			return false;
 		} else {
 			return true;

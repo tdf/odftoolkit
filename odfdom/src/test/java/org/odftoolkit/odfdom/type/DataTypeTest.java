@@ -81,10 +81,38 @@ public class DataTypeTest {
 		}
 
 		// Color
-		Color color = new Color("#ff00ff");
-		String hexColor = Color.mapColorFromRgbToHex("rgb(123,214,23)");
-		Assert.assertTrue(Color.isValid(hexColor));
-
+		try {
+			Color color = new Color("#ff00ff");
+			String hexColor = Color.toSixDigitHexRGB("rgb(123,214,23)");
+			Assert.assertTrue(Color.isValid(hexColor));
+			java.awt.Color awtColor = Color.mapColorToAWTColor(color);
+			Assert.assertEquals(new java.awt.Color(0xff00ff),awtColor);
+			try {
+				color = new Color(255, 0, 255);
+				Assert.assertEquals("#ff00ff", color.toString());
+				color = new Color(new java.awt.Color(255, 0, 255));
+				Assert.assertEquals("#ff00ff", color.toString());
+				color = new Color(1.0f, 0.0f, 1.0f);
+				Assert.assertEquals("#ff00ff", color.toString());
+				color = new Color("#f0f");
+				Assert.assertEquals("#ff00ff", color.toString());
+				Assert.assertEquals("#ff00ff", Color.FUCHSIA.toString());
+			} catch (IllegalArgumentException ie) {
+				Assert.fail(ie.getMessage());
+			}
+			try {
+				Assert.assertEquals("#ff0000", Color.toSixDigitHexRGB("rgb(255,0,0)"));
+				Assert.assertEquals("#ff0000", Color.toSixDigitHexRGB("rgb(300,0,0)"));
+				Assert.assertEquals("#ff0000", Color.toSixDigitHexRGB("rgb(110%, 0%, 0%)"));
+				Assert.assertEquals("#ff00ff", Color.toSixDigitHexRGB("fuchsia"));
+				Assert.assertEquals("#ff0000", Color.toSixDigitHexRGB("#ff0000"));
+				Assert.assertEquals("#ff0000", Color.toSixDigitHexRGB("#f00"));
+			} catch (IllegalArgumentException ie) {
+				Assert.fail(ie.getMessage());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		// DateOrDateTime
 		DateTime time1 = DateTime.valueOf("2007-09-28T22:01:13");
 		Assert.assertNotNull(time1);

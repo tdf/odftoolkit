@@ -79,7 +79,7 @@ public class IDREFS implements OdfDataType {
 			throws IllegalArgumentException {
 		if ((stringValue == null) || (stringValue.length() == 0)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype IDREFS");
+					"parameter is invalid for datatype IDREFS");
 		}
 
 		List<IDREF> aRet = new ArrayList<IDREF>();

@@ -178,8 +178,8 @@ public class OdfTableCell {
 	 * The parameter can be "center", "end", "justify", "left", "right", or "start".
 	 * Actually, "left" will be interpreted as "start", while "right" will be interpreted as "end".
 	 * If argument is null, the explicit horizontal alignment setting is removed.
+	 * 
 	 * @param horizontalAlignment	the horizontal alignment setting.
-	 *        If argument is null, this method will do nothing.
 	 */
 	public void setHorizontalAlignment(String horizontalAlignment) {
 		if (FoTextAlignAttribute.Value.LEFT.toString().equalsIgnoreCase(horizontalAlignment)) {
@@ -205,8 +205,8 @@ public class OdfTableCell {
 	 * Return the vertical alignment setting of this cell.
 	 * <p>
 	 * The returned value can be "auto", "automatic", "baseline", "bottom", "middle", or "top".
-	 * @return the vertical alignment setting of this cell. 
 	 * 
+	 * @return the vertical alignment setting of this cell. 
 	 */
 	public String getVerticalAlignment() {
 		OdfStyleBase styleElement = getCellStyleElement();
@@ -1011,15 +1011,17 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Set the background color of this cell using string.
+	 * Set the background color of this cell using string. The string must be a valid argument for 
+	 * constructing {@link org.odftoolkit.odfdom.type.Color <code>org.odftoolkit.odfdom.type.Color</code>}. 
 	 * 
 	 * @param cellBackgroundColor
 	 *            the background color that need to set. 
 	 *            If cellBackgroundColor is null, default background color #FFFFFF will be set.
+	 * @see org.odftoolkit.odfdom.type.Color
 	 */
 	public void setCellBackgroundColor(String cellBackgroundColor) {
 		if (!Color.isValid(cellBackgroundColor)) {
-			mLog.warning("Parameter is invalidate for datatype Color, default background color #FFFFFF will be set.");
+			mLog.warning("Parameter is invalid for datatype Color, default background color #FFFFFF will be set.");
 			cellBackgroundColor = DEFAULT_BACKGROUND_COLOR;
 		}
 		splitRepeatedCells();

@@ -22,13 +22,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.type;
 
+import java.util.regex.Pattern;
+
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype languageCode}
  */
 public class LanguageCode implements OdfDataType {
 
 	private String mLanguageCode;
-
+	private static final Pattern languageCodePattern = Pattern.compile("^[A-Za-z]{1,8}$");
+	
 	/**
 	 * Construct LanguageCode by the parsing the given string
 	 *
@@ -36,16 +39,16 @@ public class LanguageCode implements OdfDataType {
 	 * @throws IllegalArgumentException if the given argument is not a valid langageCode
 	 */
 	public LanguageCode(String languageCode) throws IllegalArgumentException {
-		if ((languageCode == null) || (!languageCode.matches("^[A-Za-z]{1,8}$"))) {
+		if (!isValid(languageCode)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype LanguageCode");
+					"parameter is invalid for datatype LanguageCode");
 		}
 
 		// validate 'LanguageCode' type which is defined in W3C schema
 		// http://www.w3.org/TR/xmlschema-2/#token
 		if (!W3CSchemaType.isValid("token", languageCode)) {
 			throw new IllegalArgumentException(
-					"parameter is invalidate for datatype LanguageCode");
+					"parameter is invalid for datatype LanguageCode");
 		}
 		mLanguageCode = languageCode;
 	}
@@ -83,7 +86,7 @@ public class LanguageCode implements OdfDataType {
 	 *         false otherwise
 	 */
 	public static boolean isValid(String stringValue) {
-		if (stringValue == null || !stringValue.matches("^[A-Za-z]{1,8}$")) {
+		if (stringValue == null || !languageCodePattern.matcher(stringValue).matches()) {
 			return true;
 		} else {
 			return W3CSchemaType.isValid("token", stringValue);
