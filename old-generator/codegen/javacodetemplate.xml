@@ -473,6 +473,8 @@ public abstract class %{local_name(classname)} extends %{local_name(baseclassnam
     <!-- test if this element has mandatory (non optional) attributes -->
     <ref name="check_for_non_optional_attributes"/>
     <set hasMandatoryAttr="%{ret}"/>
+    <set packagename = "%{prefix(elementqname)}" />
+    <set currentname = "%{elementname}" />
 
     <!-- now check if base element has mandatory (non optional) attributes -->
     <set baseHasMandatoryAttr="false"/>
@@ -492,6 +494,80 @@ package %{prefix(classname)};
 
 </code>
       <ref name="element-import-section"/>
+      
+      <!-- now set the imports for child elements and attributes -->
+     <set imports=""/>
+     <set import="" />  
+       <children type="element">
+            <if test = "currentname != elementname">
+               <if test="prefix(elementqname) != packagename and elementname !='hyperlink' and elementname !='measure' and elementqname !='presentation:event-listener' ">
+                  <set import="org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}Element"/>
+               </if>
+           </if>
+           <if test="not contains(imports,import,';')">
+               <if test="import !=''">
+                <if test="imports =''">
+                   <set imports="import %{import}"/>
+                   <else>
+                      <set imports="%{imports};%{import}"/>
+                   </else>
+                </if>
+               </if>
+           </if>
+           <set import="" />
+           <subattribute>
+               <group>
+                  <set import="" />
+                  <if test = "valuetype != conversiontype and attributeqname !='style:num-format'">" >
+                       <if test=" valuetype = 'enum'">
+                             <if test="not endswith(conversiontype,'type')">
+                                      <set import="org.odftoolkit.odfdom.dom.type.%{prefix(conversiontype)}.Odf%{identifier(conversiontype)}Type"/>
+                                   <else>
+                                        <set import="org.odftoolkit.odfdom.dom.type.%{prefix(conversiontype)}.Odf%{identifier(conversiontype)}"/>
+                                   </else>
+                             </if>
+                       </if>
+                       <if test="local_name(valuetype) ='Duration' or local_name(valuetype) = 'XMLGregorianCalendar' ">
+                             <set import="%{valuetype}" />
+                       </if>
+                       <if test=" valuetype ='String' and (identifier(attributename)='ValueType' or identifier(attributename)='Type' or identifier(attributename)='Orientation' or identifier(attributename)='SortMode') ">
+                                <set import="org.odftoolkit.odfdom.dom.type.%{prefix(attributeqname)}.Odf%{identifier(conversiontype)}Type"/>
+                       </if>
+ 
+                       <else>
+                            <if test=" valuetype ='String' and identifier(attributename)='ValueType'">
+                                <set import="org.odftoolkit.odfdom.dom.type.%{prefix(attributeqname)}.Odf%{identifier(attributename)}"/>
+                            </if>
+                            <if test=" valuetype ='String' and identifier(attributename)='LegendExpansion'">
+                                <set import="org.odftoolkit.odfdom.dom.type.%{prefix(attributeqname)}.Odf%{identifier(attributename)}Type"/>
+                            </if>
+                            <if test="local_name(valuetype) ='OdfPresentationClasses'">
+                                <set import="%{valuetype}" />
+                            </if>
+                       </else>                       
+                  </if>
+                  <if test="not contains(imports,import,';')">
+                          <if test="import !=''">
+                            <if test="imports =''">
+                                <set imports="import %{import}"/>
+                            <else>
+                                 <set imports="%{imports};%{import}"/>
+                             </else>
+                             </if>
+                           </if>
+                   </if>
+               </group>
+           </subattribute>
+      </children>
+      <if test ="imports =''">
+           <set allimport=""/>
+         <else>
+           <set allimport="%{imports}"/>
+           <set allimport="%{replace(';',';\nimport ',allimport)}" />
+        </else>
+       </if><code>
+%{allimport};</code>
+      
       <code>
 
 /**
@@ -558,6 +634,126 @@ public abstract class %{local_name(classname)} extends %{local_name(baseclassnam
             </foreach>
 </else>
 </if>
+
+<!-- add create child elements method  -->
+      <set selements="" />
+      <set hasparameters="false" />
+      <children type="element">
+          <set hasparameters="false" />
+            <subattribute>
+             <set hasparameters="true" />
+              <if test="elementname='hyperlink'or elementname='measure' or elementqname ='presentation:event-listener'">
+                     <set childname="org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}Element"/>
+            <code>
+    /**
+    * Create child element "%{elementqname}".
+    */
+    public %{childname} create%{prefix(elementqname)}%{identifier(elementname)}Element(</code>
+                   <else>
+                     <set childname = "Odf%{identifier(elementname)}Element" />
+                                 <code>
+    /**
+    * Create child element "%{elementqname}".
+    */
+    public %{childname} create%{identifier(elementname)}Element(</code>
+                   </else>
+              </if>
+
+               <set parameters = ""/>
+               <set sep="" />
+               <group>
+                  <set hasparameters="true" />
+                  <if test="valuetype != conversiontype " >
+                       <if test="valuetype ='enum' and attributeqname != 'style:num-format'">
+                             <if test="not endswith(conversiontype,'type') ">
+                                    <set parameter="Odf%{identifier(conversiontype)}Type   _a%{identifier(attributename)}"/>
+                                 <else>
+                                   <set parameter="Odf%{identifier(conversiontype)}   _a%{identifier(attributename)}"/>
+                                 </else>
+                             </if>
+                             <else>
+                               <if test="attributeqname ='style:num-format'">
+                                   <set parameter="String   _a%{identifier(attributename)}"/>
+                                </if>                             
+                             </else>                      
+                       </if>
+                       <if test=" valuetype ='Integer' or valuetype ='Boolean' or valuetype='String'">
+                                <set parameter="%{valuetype}   _a%{identifier(attributename)}"/>
+                       </if>
+                       <if test=" valuetype='javax.xml.datatype.Duration' or valuetype ='javax.xml.datatype.XMLGregorianCalendar' ">
+                                <set parameter="%{local_name(valuetype)}   _a%{identifier(attributename)}"/>
+                       </if>
+                       <if test=" valuetype ='String' and (identifier(attributename)='ValueType' or identifier(attributename)='Display')">
+                                <set parameter="Odf%{identifier(conversiontype)}Type   _a%{identifier(attributename)}"/>
+                       </if>
+                        <if test=" valuetype ='String' and identifier(attributename)='LegendExpansion' ">
+                                <set parameter="Odf%{identifier(attributename)}Type   _a%{identifier(attributename)}"/>
+                        </if>
+                        <if test=" valuetype ='String' and attributename ='style:num-format' ">
+                                <set parameter="String   _a%{identifier(attributename)}"/>
+                        </if>
+                        <if test=" valuetype ='String' and (identifier(attributename)='Type' or identifier(attributename)='Orientation' or identifier(attributename)='SortMode')">
+                                <set parameter="Odf%{identifier(conversiontype)}Type   _a%{identifier(attributename)}"/>
+                        </if>
+                       <else>
+                            <set parameter="%{local_name(valuetype)}   _a%{identifier(attributename)}" />
+                            <if test=" valuetype ='String' and (identifier(attributename)='ValueType' or identifier(attributename)='MemberType') ">
+                                <set parameter="Odf%{identifier(attributename)}   _a%{identifier(attributename)}"/>
+                            </if>
+                             <if test=" valuetype ='String' and (identifier(attributename)='LegendExpansion' or identifier(attributename)='SortMode')">
+                                <set parameter="Odf%{identifier(attributename)}Type   _a%{identifier(attributename)}"/>
+                             </if>
+                             <if test=" valuetype ='String' and identifier(attributename)='Concave' ">
+                                  <set parameter="Boolean   _a%{identifier(attributename)}"/>
+                             </if>
+                       </else>
+                  </if>
+                  <set parameters="%{parameters}%{sep}%{parameter}" /> 
+                  <set sep=", "/> 
+               </group>
+               <code>%{parameters})
+    {
+        %{childname}  _n%{identifier(elementname)} = ((OdfFileDom)this.ownerDocument).createOdfElement(%{childname}.class);</code>
+            <group>
+            <ref name="convertenumvaluetype"/>
+            <if test="elementbasename = 'styleproperties' or attributeqname ='chart:class'" >
+               <else><code>
+        _n%{identifier(elementname)}.set%{identifier(attributename)}( _a%{identifier(attributename)});</code>
+               </else>
+            </if>
+            </group><code>
+        this.appendChild( _n%{identifier(elementname)});
+        return  _n%{identifier(elementname)};      
+    }
+    </code>
+            </subattribute>
+            <if test="hasparameters='false'" >
+                 <set selement="%{elementqname}"/>
+                 <if test="not contains(selements,selement,';')">
+  
+                   <if test="elementname='hyperlink'or elementname='measure' or elementqname ='presentation:event-listener'">
+                         <set childname="org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}Element"/>
+                     <else>
+                         <set childname = "Odf%{identifier(elementname)}Element" />
+                     </else>
+                   </if>
+                
+               <code>
+    /**
+    * Create child element "%{elementqname}".
+    */
+    public %{childname} create%{identifier(elementname)}Element()
+    {
+        %{childname}  _n%{identifier(elementname)} = ((OdfFileDom)this.ownerDocument).createOdfElement(%{childname}.class);
+        this.appendChild( _n%{identifier(elementname)});
+        return  _n%{identifier(elementname)};
+    }                   
+               </code>
+                                  <set selements="%{selements};%{selement}" />
+
+                </if>
+            </if>
+      </children>
       <code>
 }
 </code>
