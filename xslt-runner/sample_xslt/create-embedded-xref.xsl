@@ -81,11 +81,13 @@
 
     <xsl:variable name="convert-bookmarks-and-hyperlinks" select="true()"/>
 
+    <xsl:variable name="bib-messages" select="false()"/>
 
     <xsl:variable name="element-prefix" select="'element-'"/>
     <xsl:variable name="attribute-prefix" select="'attribute-'"/>
     <xsl:variable name="property-prefix" select="'property-'"/>
     <xsl:variable name="datatype-prefix" select="'datatype-'"/>
+    <xsl:variable name="value-prefix" select="'value:'"/>
     <xsl:variable name="function-prefix" select="'anchor:'"/>
     <xsl:variable name="toc-prefix" select="'toc-'"/>
 
@@ -175,9 +177,17 @@
         </xsl:if>
         <xsl:variable name="remainder" select="substring-after($list,'_')"/>
         <xsl:if test="$remainder">
-            <xsl:call-template name="check-element-list">
-                <xsl:with-param name="element-list" select="concat('_',$remainder)"/>
-            </xsl:call-template>
+            <xsl:choose>
+                <xsl:when test="starts-with($remainder,$element-prefix)">
+                    <xsl:call-template name="check-element-list">
+                        <xsl:with-param name="element-list" select="concat('_',$remainder)"/>
+                    </xsl:call-template>
+                </xsl:when>
+                <xsl:when test="starts-with($remainder,$value-prefix)"/>
+                <xsl:otherwise>
+                    <xsl:message>XRef &quot;<xsl:value-of select="."/>&quot;: Illegal token &quot;<xsl:value-of select="$remainder"/>&quot;.</xsl:message>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
     </xsl:template>
 
@@ -205,7 +215,7 @@
         </xsl:if>
         <xsl:variable name="function-name" 
                       select="translate(substring-after(normalize-space(.),':'),'abcdefghijklmnopqrstuvwxyz“”','ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;&quot;')"/>
-        <xsl:if test="not(//text:h[translate(normalize-space(.),'abcdefghijklmnopqrstuvwxyz “”','ABCDEFGHIJKLMNOPQRSTUVWXYZ-&quot;&quot;')=$function-name])">
+        <xsl:if test="not(/office:document-content/office:body/office:text/text:h[translate(normalize-space(.),'abcdefghijklmnopqrstuvwxyz “”','ABCDEFGHIJKLMNOPQRSTUVWXYZ-&quot;&quot;')=$function-name])">
             <xsl:message>*** XRef &quot;<xsl:value-of select="."/>&quot;: No heading found for anchor.</xsl:message>
         </xsl:if>
     </xsl:template>
@@ -241,7 +251,7 @@
             <xsl:message terminate="yes" >*** No content path set for <xsl:value-of select="$part"/></xsl:message>
         </xsl:if>
         <text:section text:name="{normalize-space(.)}" text:protected="true">
-            <xsl:apply-templates select="document($content-path)//text:table-of-content/text:index-body/*" mode="insert-toc">
+            <xsl:apply-templates select="document($content-path)/office:document-content/office:body/office:text/text:table-of-content/text:index-body/*" mode="insert-toc">
                 <xsl:with-param name="part" select="$part"/>
             </xsl:apply-templates>
         </text:section>
@@ -249,15 +259,59 @@
 
     <xsl:template match="text:p" mode="insert-toc">
         <xsl:param name="part"/>
-        <xsl:copy>
+        <text:p>
             <xsl:apply-templates select="@*" mode="insert-toc">
                 <xsl:with-param name="part" select="$part"/>
             </xsl:apply-templates>
             <xsl:attribute name="text:style-name"><xsl:value-of select="concat($part,'-',@text:style-name)"/></xsl:attribute>
-            <xsl:apply-templates select="node()" mode="insert-toc">
-                <xsl:with-param name="part" select="$part"/>
-            </xsl:apply-templates>
-        </xsl:copy>
+            <xsl:choose>
+                <xsl:when test="text:a or $toc-hyperlink-mode='none'">
+                    <xsl:apply-templates select="node()" mode="insert-toc">
+                        <xsl:with-param name="part" select="$part"/>
+                    </xsl:apply-templates>
+                </xsl:when>
+                <xsl:otherwise>
+                    <text:a xlink:type="simple">
+                        <xsl:attribute name="xlink:href">
+                            <xsl:variable name="appendix">
+                                <xsl:choose>
+                                    <xsl:when test="starts-with(.,'Appendix')">
+                                        <xsl:value-of select="substring-before(substring(.,10),'. ')"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="substring-before(.,'. ')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:variable>
+                            <xsl:variable name="target" select="concat('#Appendix_',translate($appendix,'.','_'))"/>
+                            <xsl:variable name="doc">
+                                <xsl:choose>
+                                    <xsl:when test="$toc-hyperlink-mode='adapt'">
+                                        <xsl:call-template name="get-doc">
+                                            <xsl:with-param name="part" select="$part"/>
+                                        </xsl:call-template>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="''"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:variable>
+                            <xsl:choose>
+                                <xsl:when test="$doc!=''">
+                                    <xsl:value-of select="concat('../',$doc,$target)"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$target"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                        <xsl:apply-templates select="node()" mode="insert-toc">
+                            <xsl:with-param name="part" select="$part"/>
+                        </xsl:apply-templates>
+                    </text:a>
+                </xsl:otherwise>
+            </xsl:choose>
+        </text:p>
     </xsl:template>
 
 
@@ -271,25 +325,14 @@
             </xsl:when>
             <xsl:when test="$toc-hyperlink-mode='adapt'">
                 <xsl:variable name="doc">
-                    <xsl:choose>
-                        <xsl:when test="$part='part1'">
-                            <xsl:value-of select="$part1-toc-rel-path"/>
-                        </xsl:when>
-                        <xsl:when test="$part='part2'">
-                            <xsl:value-of select="$part2-toc-rel-path"/>
-                        </xsl:when>
-                        <xsl:when test="$part='part3'">
-                            <xsl:value-of select="$part3-toc-rel-path"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:message terminate="yes">*** Invalid part sepcified for toc: <xsl:value-of select="$part"/></xsl:message>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:call-template name="get-doc">
+                        <xsl:with-param name="part" select="$part"/>
+                    </xsl:call-template>
                 </xsl:variable>
                 <text:a xlink:type="simple">
                     <xsl:attribute name="xlink:href">
                         <xsl:choose>
-                            <xsl:when test="$doc=''">
+                            <xsl:when test="$doc!=''">
                                 <xsl:value-of select="concat('../',$doc,@xlink:href)"/>
                             </xsl:when>
                             <xsl:otherwise>
@@ -308,6 +351,24 @@
                         <xsl:with-param name="part" select="$part"/>
                     </xsl:apply-templates>
                 </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="get-doc">
+        <xsl:param name="part"/>
+        <xsl:choose>
+            <xsl:when test="$part='part1'">
+                <xsl:value-of select="$part1-toc-rel-path"/>
+            </xsl:when>
+            <xsl:when test="$part='part2'">
+                <xsl:value-of select="$part2-toc-rel-path"/>
+            </xsl:when>
+            <xsl:when test="$part='part3'">
+                <xsl:value-of select="$part3-toc-rel-path"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message terminate="yes">*** Invalid part sepcified for toc: <xsl:value-of select="$part"/></xsl:message>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -348,13 +409,13 @@
     <xsl:template name="copy-toc-auto-styles">
         <xsl:param name="part"/>
         <xsl:param name="content-path"/>
-        <xsl:for-each select="document($content-path)//office:automatic-styles/style:style[@style:family='paragraph']">
-            <xsl:if test="ancestor::office:document-content//text:table-of-content/text:index-body/text:p[@text:style-name=current()/@style:name]">
-                <xsl:copy>
+        <xsl:for-each select="document($content-path)/office:document-content/office:automatic-styles/style:style[@style:family='paragraph']">
+            <xsl:if test="ancestor::office:document-content/office:body/office:text/text:table-of-content/text:index-body/text:p[@text:style-name=current()/@style:name]">
+                <style:style>
                     <xsl:apply-templates select="@*"/>
                     <xsl:attribute name="style:name"><xsl:value-of select="concat($part,'-',@style:name)"/></xsl:attribute>
                     <xsl:apply-templates select="node()"/>
-                </xsl:copy>
+                </style:style>
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
@@ -535,10 +596,10 @@
                         <xsl:when test="not(document($xref-schema-file)/rng:grammar/rng:element[(starts-with(@name,'style:') and contains(@name,'-properties'))=$fp]/rng:attribute[@name=$attr-name])">
                             <xsl:message>Heading &quot;<xsl:value-of select="."/>&quot;: No attribute definition found in schema for &quot;<xsl:value-of select="$attr-name"/>&quot;<xsl:if test="$fp"> (property)</xsl:if>.</xsl:message>
                         </xsl:when>
-                        <xsl:when test="$fp and not(//text:p[starts-with(.,$property-prefix) and (normalize-space(.)=concat($property-prefix,$attr-name) or starts-with(.,concat($property-prefix,$attr-name,'_')))])">
+                        <xsl:when test="$fp and not(/office:document-content/office:body/office:text/text:p[starts-with(.,$property-prefix) and (normalize-space(.)=concat($property-prefix,$attr-name) or starts-with(.,concat($property-prefix,$attr-name,'_')))])">
                             <xsl:message>Heading &quot;<xsl:value-of select="."/>&quot;: No attribute xref found for &quot;<xsl:value-of select="$attr-name"/>&quot; (property).</xsl:message>
                         </xsl:when>
-                        <xsl:when test="not($fp) and not(//text:p[starts-with(.,$attribute-prefix) and (normalize-space(.)=concat($attribute-prefix,$attr-name) or starts-with(.,concat($attribute-prefix,$attr-name,'_')))])">
+                        <xsl:when test="not($fp) and not(/office:document-content/office:body/office:text/text:p[starts-with(.,$attribute-prefix) and (normalize-space(.)=concat($attribute-prefix,$attr-name) or starts-with(.,concat($attribute-prefix,$attr-name,'_')))])">
                             <xsl:message>Heading &quot;<xsl:value-of select="."/>&quot;: No attribute xref found for &quot;<xsl:value-of select="$attr-name"/>&quot;.</xsl:message>
                         </xsl:when>
                     </xsl:choose>
@@ -588,10 +649,14 @@
     <xsl:template match="text:bibliography[@text:name='NormativeReferences']/text:index-body/text:p">
         <xsl:variable name="id" select="substring(substring-before(.,']'),2)"/>
         <xsl:if test="not(key('bib-entry',$id)/@text:custom5) or key('bib-entry',$id)/@text:custom5 != 'informative'">
-            <xsl:copy>
-                <xsl:apply-templates select="@*|node()"/>
+<!--            <xsl:copy>
+                <xsl:apply-templates select="@*|node()" mode="bib"/>
             </xsl:copy>
-            <xsl:message>Bibliographic entry [<xsl:value-of select="$id"/>] is normative.</xsl:message>
+            -->
+            <xsl:call-template name="bib-entry"/>
+            <xsl:if test="$bib-messages">
+                <xsl:message>Bibliographic entry [<xsl:value-of select="$id"/>] is normative.</xsl:message>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 
@@ -601,11 +666,57 @@
     <xsl:template match="text:bibliography[@text:name='NonNormativeReferences']/text:index-body/text:p">
         <xsl:variable name="id" select="substring(substring-before(.,']'),2)"/>
         <xsl:if test="key('bib-entry',$id)/@text:custom5 = 'informative'">
-            <xsl:copy>
-                <xsl:apply-templates select="@*|node()"/>
-            </xsl:copy>
-            <xsl:message>Bibliographic entry [<xsl:value-of select="$id"/>] is non normative.</xsl:message>
+<!--            <xsl:copy>
+                <xsl:apply-templates select="@*|node()" mode="bib"/>
+            </xsl:copy>-->
+            <xsl:call-template name="bib-entry"/>
+            <xsl:if test="$bib-messages">
+                <xsl:message>Bibliographic entry [<xsl:value-of select="$id"/>] is non normative.</xsl:message>
+            </xsl:if>
         </xsl:if>
+    </xsl:template>
+
+    <xsl:template name="bib-entry">
+        <xsl:copy>
+            <xsl:apply-templates select="@*" mode="bib"/>
+            <xsl:for-each select="node()">
+                <xsl:choose>
+                    <xsl:when test="self::text() and contains(.,'http://')">
+                        <xsl:variable name="before" select="substring-before(.,'http://')"/>
+                        <xsl:variable name="tmp" select="substring(.,string-length($before)+1)"/>
+                        <xsl:variable name="url">
+                            <xsl:choose>
+                                <xsl:when test="contains($tmp,',')">
+                                    <xsl:value-of select="substring-before($tmp,',')"/>
+                                </xsl:when>
+                                <xsl:when test="substring($tmp,string-length($tmp))='.'">
+                                    <xsl:value-of select="substring($tmp,1,string-length($tmp)-1)"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$tmp"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <xsl:variable name="after" select ="substring($tmp,string-length($url)+1)"/>
+                        <xsl:value-of select="$before"/>
+                        <text:a xlink:type="simple" xlink:href="{$url}"><xsl:value-of select="$url"/></text:a>
+                        <xsl:value-of select="$after"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:copy>
+                            <xsl:apply-templates select="@*|node()"/>
+                        </xsl:copy>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>
+        </xsl:copy>
+    </xsl:template>
+
+
+    <xsl:template match="@*|node()" mode="bib">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()" mode="bib"/>
+        </xsl:copy>
     </xsl:template>
 
     <!-- ********************************** -->
@@ -619,6 +730,14 @@
             </xsl:copy>
         </xsl:if>
     </xsl:template>
+
+    <xsl:template match="text:section">
+        <xsl:message>Text sextions are not supported: <xsl_value-of select="@text:namd"/></xsl:message>
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+    </xsl:template>
+
 
     <xsl:template match="text:hidden-text[@text:condition='ooow:Note==0']">
         <!-- Ignore hidden text fields that are hidable by the "Note" condition -->
@@ -644,7 +763,7 @@
                 <xsl:when test="not(document($xref-schema-file)/rng:grammar/rng:element[@name=$element-name])">
                     <xsl:message>Heading: &quot;<xsl:value-of select="."/>&quot;: No element definition found in schema for element &quot;<xsl:value-of select="$element-name"/>&quot;.</xsl:message>
                 </xsl:when>
-                <xsl:when test="not(//text:p[starts-with(.,$element-prefix) and normalize-space(.)=concat($element-prefix,$element-name)])">
+                <xsl:when test="not(/office:document-content/office:body/office:text/text:p[starts-with(.,$element-prefix) and normalize-space(.)=concat($element-prefix,$element-name)])">
                     <xsl:message>Heading &quot;<xsl:value-of select="."/>&quot;: No element xref found for element &quot;<xsl:value-of select="$element-name"/>&quot;.</xsl:message>
                 </xsl:when>
             </xsl:choose>
@@ -734,9 +853,13 @@
                     <xsl:text> element has mixed content where arbitrary child elements are permitted.</xsl:text>
                 </text:p>
             </xsl:when>
+            <xsl:when test="@name='manifest:algorithm'">
+                <xsl:call-template name="create-attr-list"/>
+                <xsl:message>Element <xsl:value-of select="@name"/>: No child element info added (element may have any content).</xsl:message>
+            </xsl:when>
             <xsl:when test="rng:element/rng:anyName">
                 <!-- arbitrary content -->
-                <xsl:message>Element <xsl:value-of select="@name"/>: No child element info added (element may have any content).</xsl:message>
+                <xsl:message>Element <xsl:value-of select="@name"/>: No attribute and child element info added (element may have any content).</xsl:message>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="create-attr-list"/>
@@ -822,8 +945,8 @@
                             <xsl:variable name="aname" select="@name"/>
                             <xsl:variable name="ref-name">
                                 <xsl:choose>
-                                    <xsl:when test="$fp and //text:p[starts-with(.,concat($property-prefix,$aname,'_')) and contains(concat(normalize-space(.),'_'),concat($element-prefix,$elem-name,'_'))]"><xsl:value-of select="concat($property-prefix,$aname,'_',$element-prefix,$elem-name)"/></xsl:when>
-                                    <xsl:when test="not($fp) and //text:p[starts-with(.,concat($attribute-prefix,$aname,'_')) and contains(concat(normalize-space(.),'_'),concat($element-prefix,$elem-name,'_'))]"><xsl:value-of select="concat($attribute-prefix,$aname,'_',$element-prefix,$elem-name)"/></xsl:when>
+                                    <xsl:when test="$fp and /office:document-content/office:body/office:text/text:p[starts-with(.,concat($property-prefix,$aname,'_')) and contains(concat(normalize-space(.),'_'),concat($element-prefix,$elem-name,'_'))]"><xsl:value-of select="concat($property-prefix,$aname,'_',$element-prefix,$elem-name)"/></xsl:when>
+                                    <xsl:when test="not($fp) and /office:document-content/office:body/office:text/text:p[starts-with(.,concat($attribute-prefix,$aname,'_')) and contains(concat(normalize-space(.),'_'),concat($element-prefix,$elem-name,'_'))]"><xsl:value-of select="concat($attribute-prefix,$aname,'_',$element-prefix,$elem-name)"/></xsl:when>
                                     <xsl:when test="$fp"><xsl:value-of select="concat($property-prefix,@name)"/></xsl:when>
                                     <xsl:otherwise><xsl:value-of select="concat($attribute-prefix,@name)"/></xsl:otherwise>
                                 </xsl:choose>
@@ -898,7 +1021,7 @@
                             <xsl:value-of select="@name"/>
                             <xsl:text>&gt;</xsl:text>
                         </text:span>
-                        <xsl:text> element has text content. Text content is only permitted if a </xsl:text>
+                        <xsl:text> element has character data content. Character data content is only permitted if a </xsl:text>
                         <text:span text:style-name="Attribute"><xsl:text>xlink:href</xsl:text></text:span>
                         <xsl:text> attribute is not present.</xsl:text>
                     </text:p>
@@ -911,7 +1034,7 @@
                             <xsl:value-of select="@name"/>
                             <xsl:text>&gt;</xsl:text>
                         </text:span>
-                        <xsl:text> element has text content, or depending on the value of the </xsl:text>
+                        <xsl:text> element has character data content, or depending on the value of the </xsl:text>
                         <text:span text:style-name="Attribute"><xsl:text>meta:value-type</xsl:text></text:span>
                         <xsl:text> attribute content of type </xsl:text>
                         <xsl:for-each select="rng:ref|rng:data">
@@ -940,7 +1063,7 @@
                             <xsl:value-of select="@name"/>
                             <xsl:text>&gt;</xsl:text>
                         </text:span>
-                        <xsl:text> element has text content.</xsl:text>
+                        <xsl:text> element has character data content.</xsl:text>
                     </text:p>
                 </xsl:when>
                 <xsl:when test="rng:text[@condition='zeroOrMore/choice'or @condition='zeroOrMore/choice/choice']">
@@ -1102,7 +1225,7 @@
         <xsl:variable name="name" select="@name"/>
         <xsl:call-template name="new-line"/>
         <xsl:choose>
-            <xsl:when test="//text:p[.=concat($datatype-prefix,$name)]">
+            <xsl:when test="/office:document-content/office:body/office:text/text:p[.=concat($datatype-prefix,$name)]">
                 <text:p text:style-name="Attribute_20_Value_20_List">
                     <xsl:text>The </xsl:text>
                     <text:span text:style-name="Attribute">
@@ -1141,7 +1264,7 @@
         <xsl:choose>
             <!-- A plain data type is only valid if there is a datatype-* in the
                  specification text and if there isn't a same named define -->
-            <xsl:when test="//text:p[.=concat($datatype-prefix,$type)] and not(document($xref-schema-file)/rng:grammar/rng:define[@name=$type])">
+            <xsl:when test="/office:document-content/office:body/office:text/text:p[.=concat($datatype-prefix,$type)] and not(document($xref-schema-file)/rng:grammar/rng:define[@name=$type])">
                 <text:p text:style-name="Attribute_20_Value_20_List">
                     <xsl:text>The </xsl:text>
                     <text:span text:style-name="Attribute">
@@ -1312,14 +1435,14 @@
         <xsl:param name="attr-name"/>
         <xsl:call-template name="new-line"/>
         <text:p text:style-name="Attribute_20_Value_20_List">
-            <xsl:call-template name="print-the-values">
+            <xsl:call-template name="print-the-value-is">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
-            <xsl:text>white space separated possibly empty lists of </xsl:text>
+            <xsl:text>a white space separated lists of </xsl:text>
             <xsl:apply-templates select="*/*" mode="attr-list-value">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:apply-templates>
-            <xsl:text>.</xsl:text>
+            <xsl:text>, including the empty list.</xsl:text>
         </text:p>
     </xsl:template>
 
@@ -1327,10 +1450,10 @@
         <xsl:param name="attr-name"/>
         <xsl:call-template name="new-line"/>
         <text:p text:style-name="Attribute_20_Value_20_List">
-            <xsl:call-template name="print-the-values">
+            <xsl:call-template name="print-the-value-is">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:call-template>
-            <xsl:text>white space separated non-empty lists of </xsl:text>
+            <xsl:text>a white space separated non-empty lists of </xsl:text>
             <xsl:apply-templates select="*/*" mode="attr-list-value">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:apply-templates>
@@ -1545,7 +1668,7 @@
         <xsl:param name="attr-name"/>
         <xsl:variable name="name" select="@name"/>
         <xsl:choose>
-            <xsl:when test="//text:p[.=concat($datatype-prefix,$name)]">
+            <xsl:when test="/office:document-content/office:body/office:text/text:p[.=concat($datatype-prefix,$name)]">
                 <xsl:text>values of type </xsl:text>
                 <xsl:call-template name="print-datatype">
                     <xsl:with-param name="name" select="$name"/>
@@ -1588,7 +1711,7 @@
         <xsl:param name="attr-name"/>
         <xsl:variable name="name" select="@name"/>
         <xsl:choose>
-            <xsl:when test="//text:p[.=concat($datatype-prefix,$name)]">
+            <xsl:when test="/office:document-content/office:body/office:text/text:p[.=concat($datatype-prefix,$name)]">
                 <xsl:text>is of type </xsl:text>
                 <xsl:call-template name="print-datatype">
                     <xsl:with-param name="name" select="@name"/>
@@ -1675,7 +1798,7 @@
         <xsl:param name="attr-name"/>
         <xsl:variable name="name" select="@name"/>
         <xsl:choose>
-            <xsl:when test="//text:p[.=concat($datatype-prefix,$name)]">
+            <xsl:when test="/office:document-content/office:body/office:text/text:p[.=concat($datatype-prefix,$name)]">
                 <xsl:text>a value of type </xsl:text>
                 <xsl:call-template name="print-datatype">
                     <xsl:with-param name="name" select="@name"/>
@@ -1732,6 +1855,15 @@
         <xsl:text> attribute are </xsl:text>
     </xsl:template>
 
+    <xsl:template name="print-the-value-is">
+        <xsl:param name="attr-name"/>
+        <xsl:text>The value of the </xsl:text>
+        <text:span text:style-name="Attribute">
+             <xsl:value-of select="$attr-name"/>
+        </text:span>
+        <xsl:text> attribute is </xsl:text>
+    </xsl:template>
+
     <xsl:template name="print-the-attribute-has">
         <xsl:param name="attr-name"/>
         <xsl:text>The </xsl:text>
@@ -1768,10 +1900,10 @@
                 <xsl:text> element </xsl:text>
                 <xsl:choose>
                     <xsl:when test="$count = 1">
-                        <xsl:text> is usable with the following element: </xsl:text>
+                        <xsl:text> is usable within the following element: </xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text> is usable with the following elements: </xsl:text>
+                        <xsl:text> is usable within the following elements: </xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
                 <!-- collect elements -->
