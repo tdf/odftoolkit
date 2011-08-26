@@ -60,7 +60,6 @@ public class PathPrinter {
     MSVExpressionInformation mInfo;
     public final static String ODF_RESOURCE_DIR = "target" + File.separator + "classes"
 	+ File.separator + "examples" + File.separator + "odf";
-    public final static String ODF12_RNG_FILE = "OpenDocument-schema-v1.2-cd04.rng";
 
     PathPrinter(PuzzlePiece parent) {
         mParent = parent;
@@ -154,7 +153,7 @@ public class PathPrinter {
     }
 
     public static void main(String[] args) throws Exception {
-        Expression root = parseOdfSchema(new File(ODF_RESOURCE_DIR + File.separator + ODF12_RNG_FILE));
+        Expression root = parseOdfSchema(new File(ODF_RESOURCE_DIR + File.separator + OdfCodegen.ODF12_RNG_FILE_NAME));
         PuzzlePieceSet elements = new PuzzlePieceSet();
         PuzzlePieceSet attributes = new PuzzlePieceSet();
         PuzzlePiece.extractPuzzlePieces(root, elements, attributes);

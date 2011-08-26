@@ -55,7 +55,8 @@ public class OdfCodegen {
 	private static final Logger mLog = Logger.getLogger(OdfCodegen.class.getName());
 	private final String odfResourceDir;
 	private final String sourceCodeRoot;
-	//public static final String ODF12_RNG_FILE = "OpenDocument-v1.2-cd05-schema.rng";
+	public static final String ODF11_RNG_FILE_NAME = "OpenDocument-schema-v1.1.rng";
+	public static final String ODF12_RNG_FILE_NAME = "OpenDocument-v1.2-cd05-schema.rng";
 	private final String odf12RngFile;
 	private final String odf11RngFile;
 	private final String configFile;
@@ -82,10 +83,10 @@ public class OdfCodegen {
 				+ "odfdom-java";
 		odf12RngFile = "target" + File.separator + "classes" + File.separator
 				+ "examples" + File.separator + "odf" + File.separator
-				+ "OpenDocument-schema-v1.2-cd04.rng";
+				+ ODF12_RNG_FILE_NAME;
 		odf11RngFile = "target" + File.separator + "classes" + File.separator
 				+ "examples" + File.separator + "odf" + File.separator
-				+ "OpenDocument-schema-v1.1.rng";
+				+ ODF11_RNG_FILE_NAME;
 		configFile = "target" + File.separator + "classes" + File.separator
 				+ "examples" + File.separator + "odf" + File.separator
 				+ "config.xml";

@@ -5,7 +5,7 @@
 	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>schema2template</artifactId>
-	<version>0.8.6-SNAPSHOT</version>
+	<version>0.8.7-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
@@ -76,7 +76,7 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<!-- Explizit version required for fix on systemPropertyVariables -->
-				<version>2.5</version>
+				<version>2.6</version>
 				<configuration>
 					<systemPropertyVariables>
 						<odfdom.version>${project.version}</odfdom.version>
@@ -259,13 +259,13 @@
 			<id>odfdom-releases</id>
 			<name>ODFDOM Release</name>
 			<url>svn:https://odftoolkit.org/svn/odfdom~maven2/release/</url>
-			<uniqueVersion>false</uniqueVersion>
+			<uniqueVersion>true</uniqueVersion>
 		</repository>
 		<snapshotRepository>
 			<id>schema2template-snapshots</id>
 			<name>schema2template Snapshot</name>
 			<url>svn:https://odftoolkit.org/svn/odfdom~maven2/snapshot/</url>
-			<uniqueVersion>false</uniqueVersion>
+			<uniqueVersion>true</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
