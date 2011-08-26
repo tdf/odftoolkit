@@ -68,7 +68,7 @@ public class PuzzlePieceTest {
 	public void testExtractPuzzlePieces() {
 		PuzzlePieceSet allElements = new PuzzlePieceSet();
 		PuzzlePieceSet allAttributes = new PuzzlePieceSet();
-		PuzzlePiece.extractDefinitions(mRoot, allElements, allAttributes);
+		PuzzlePiece.extractPuzzlePieces(mRoot, allElements, allAttributes);
 		checkFoundNumber(allElements, ODF11_ELEMENT_NUMBER, "element");
 		checkFoundNumber(allAttributes, ODF11_ATTRIBUTE_NUMBER, "attribute");
 	}

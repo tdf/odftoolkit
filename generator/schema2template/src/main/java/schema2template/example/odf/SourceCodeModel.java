@@ -139,7 +139,7 @@ public class SourceCodeModel {
      * Use in templates: Get Source code value type for datatype used in schema
      *
      * @param datatype
-     * @return
+     * @return source code value type
      */
     public String getValuetype(QNamed datatype) {
         String datatypename = datatype.getQName();

@@ -362,19 +362,19 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
      * @param emptyElementSet empty Set. Will be filled with Definitions of Type.ELEMENT
      * @param emptyAttributeSet empty Set. Will be filled with Definitions of Type.ATTRIBUTE
      */
-    public static void extractDefinitions(Expression root, PuzzlePieceSet emptyElementSet, PuzzlePieceSet emptyAttributeSet) {
-        extractTypedDefinitions(root, emptyElementSet, ElementExp.class);
-        extractTypedDefinitions(root, emptyAttributeSet, AttributeExp.class);
+    public static void extractPuzzlePieces(Expression root, PuzzlePieceSet emptyElementSet, PuzzlePieceSet emptyAttributeSet) {
+        extractTypedPuzzlePieces(root, emptyElementSet, ElementExp.class);
+        extractTypedPuzzlePieces(root, emptyAttributeSet, AttributeExp.class);
         configureProperties(emptyElementSet, emptyAttributeSet);
         reduceDatatypes(emptyAttributeSet);
         reduceValues(emptyAttributeSet);
         reduceAttributes(emptyElementSet, emptyAttributeSet);
-        makeDefinitionsImmutable(emptyElementSet);
-        makeDefinitionsImmutable(emptyAttributeSet);
+        makePuzzlePiecesImmutable(emptyElementSet);
+        makePuzzlePiecesImmutable(emptyAttributeSet);
     }
 
     // Extracts all Definitions of Type [ATTRIBUTE, ELEMENT] from MSV tree.
-    private static void extractTypedDefinitions(Expression root, PuzzlePieceSet setToBeFilled, Class superclass) {
+    private static void extractTypedPuzzlePieces(Expression root, PuzzlePieceSet setToBeFilled, Class superclass) {
         MSVExpressionIterator iter = new MSVExpressionIterator(root, superclass);
         HashMap<String, List<PuzzlePiece>> multipleMap = new HashMap<String, List<PuzzlePiece>>();
 
@@ -574,14 +574,12 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
                 }
             }
 
-            // ExpressionInformation attributeInfo = new ExpressionInformation(def.getExpression());
-            // def.... = attributeInfo...()
         }
 
     }
 
     // Makes all Definitions unmodifiable
-    private static void makeDefinitionsImmutable(PuzzlePieceSet defs) {
+    private static void makePuzzlePiecesImmutable(PuzzlePieceSet defs) {
         Iterator<PuzzlePiece> iter = defs.iterator();
         while (iter.hasNext()) {
             PuzzlePiece def = iter.next();

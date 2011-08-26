@@ -48,7 +48,7 @@ public class XMLModel {
      * @param root MSV root Expression
      */
     public XMLModel(Expression root) {
-        PuzzlePiece.extractDefinitions(root, mElements, mAttributes);
+        PuzzlePiece.extractPuzzlePieces(root, mElements, mAttributes);
         mElements.makeImmutable();
         mAttributes.makeImmutable();
         mNameElementMap = createMap(mElements);

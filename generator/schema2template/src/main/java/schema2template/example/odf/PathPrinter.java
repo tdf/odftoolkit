@@ -154,7 +154,7 @@ public class PathPrinter {
         Expression root = parseOdfSchema(new File(OdfCodegen.ODF_RESOURCE_DIR + File.separator + OdfCodegen.ODF12_RNG_FILE));
         PuzzlePieceSet elements = new PuzzlePieceSet();
         PuzzlePieceSet attributes = new PuzzlePieceSet();
-        PuzzlePiece.extractDefinitions(root, elements, attributes);
+        PuzzlePiece.extractPuzzlePieces(root, elements, attributes);
         Map<String, SortedSet<PuzzlePiece>> nameToDefinition = createDefinitionMap(new TreeSet<PuzzlePiece>(elements));
 
         System.out.println("Print all paths from parent element (e.g. \"text:p\") to direct child element (e.g. \"text:span\")");

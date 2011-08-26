@@ -36,6 +36,8 @@ public class OdfTemplateAPICoverageTest {
      * Test coverage: Test existense of methods made for template usage.
      * If you rename a method, this test will fail to show that all templates
      * using this method have to be adapted.
+     *
+     * The input parameter count of each method will be tested for additional safety.
      */
     @Test
     public void testOdfCoverage() {
