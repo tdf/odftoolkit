@@ -50,19 +50,17 @@ import org.w3c.dom.Node;
  */
 public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
 
- 
     private static final long serialVersionUID = -2925910664631016175L;
-
     // styles that are only in OdfAutomaticStyles
     private HashMap<String, OdfStylePageLayout> mPageLayouts;
     // styles that are common for OdfStyles and OdfAutomaticStyles
     private OdfStylesBase mStylesBaseImpl;
 
     public OdfOfficeAutomaticStyles(OdfFileDom ownerDoc) {
-        super(ownerDoc);
-        mStylesBaseImpl = new OdfStylesBase();
+	super(ownerDoc);
+	mStylesBaseImpl = new OdfStylesBase();
     }
-    
+
     /**
      * Create an <code>OdfStyle</code> element with style family
      * 
@@ -70,15 +68,15 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return an <code>OdfStyle</code> element 
      */
     public OdfStyle newStyle(OdfStyleFamily styleFamily) {
-        OdfFileDom dom = (OdfFileDom) this.ownerDocument;
-        OdfStyle newStyle = dom.newOdfElement(OdfStyle.class);
-        newStyle.setStyleFamilyAttribute(styleFamily.getName());
+	OdfFileDom dom = (OdfFileDom) this.ownerDocument;
+	OdfStyle newStyle = dom.newOdfElement(OdfStyle.class);
+	newStyle.setStyleFamilyAttribute(styleFamily.getName());
 
-        newStyle.setStyleNameAttribute(newUniqueStyleName(styleFamily));
+	newStyle.setStyleNameAttribute(newUniqueStyleName(styleFamily));
 
-        this.appendChild(newStyle);
+	this.appendChild(newStyle);
 
-        return newStyle;
+	return newStyle;
     }
 
     /**
@@ -87,14 +85,14 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return an <code>OdfTextListStyle</code> element 
      */
     public OdfTextListStyle newListStyle() {
-        OdfFileDom dom = (OdfFileDom) this.ownerDocument;
-        OdfTextListStyle newStyle = dom.newOdfElement(OdfTextListStyle.class);
+	OdfFileDom dom = (OdfFileDom) this.ownerDocument;
+	OdfTextListStyle newStyle = dom.newOdfElement(OdfTextListStyle.class);
 
-        newStyle.setStyleNameAttribute(newUniqueStyleName(OdfStyleFamily.List));
+	newStyle.setStyleNameAttribute(newUniqueStyleName(OdfStyleFamily.List));
 
-        this.appendChild(newStyle);
+	this.appendChild(newStyle);
 
-        return newStyle;
+	return newStyle;
     }
 
     /** Returns the <code>OdfStylePageLayout</code> element with the given name.
@@ -103,11 +101,11 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return the page layout or null if there is no such page layout
      */
     public OdfStylePageLayout getPageLayout(String name) {
-        if (mPageLayouts != null) {
-            return mPageLayouts.get(name);
-        } else {
-            return null;
-        }
+	if (mPageLayouts != null) {
+	    return mPageLayouts.get(name);
+	} else {
+	    return null;
+	}
     }
 
     /** 
@@ -118,7 +116,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return the style or null if there is no such style
      */
     public OdfStyle getStyle(String name, OdfStyleFamily familyType) {
-        return mStylesBaseImpl.getStyle(name, familyType);
+	return mStylesBaseImpl.getStyle(name, familyType);
     }
 
     /** 
@@ -128,7 +126,16 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return an iterator for all <code>OdfStyleStyle</code> elements for the given family
      */
     public Iterable<OdfStyle> getStylesForFamily(OdfStyleFamily familyType) {
-        return mStylesBaseImpl.getStylesForFamily(familyType);
+	return mStylesBaseImpl.getStylesForFamily(familyType);
+    }
+
+    /** 
+     * Returns an iterator for all <code>OdfStyleStyle</code> elements.
+     *
+     * @return an iterator for all <code>OdfStyleStyle</code> elements
+     */
+    public Iterable<OdfStyle> getAllStyles() {
+	return mStylesBaseImpl.getAllOdfStyles();
     }
 
     /** 
@@ -138,7 +145,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return the list style or null if there is no such list style
      */
     public OdfTextListStyle getListStyle(String name) {
-        return mStylesBaseImpl.getListStyle(name);
+	return mStylesBaseImpl.getListStyle(name);
     }
 
     /** 
@@ -147,7 +154,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return an iterator for all <code>OdfTextListStyle</code> elements
      */
     public Iterable<OdfTextListStyle> getListStyles() {
-        return mStylesBaseImpl.getListStyles();
+	return mStylesBaseImpl.getListStyles();
     }
 
     /** 
@@ -157,7 +164,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return the number style or null if there is no such number style
      */
     public OdfNumberStyle getNumberStyle(String name) {
-        return mStylesBaseImpl.getNumberStyle(name);
+	return mStylesBaseImpl.getNumberStyle(name);
     }
 
     /** 
@@ -166,7 +173,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return an iterator for all <code>OdfNumberNumberStyle</code> elements
      */
     public Iterable<OdfNumberStyle> getNumberStyles() {
-        return mStylesBaseImpl.getNumberStyles();
+	return mStylesBaseImpl.getNumberStyles();
     }
 
     /** 
@@ -176,7 +183,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return the date style or null if there is no such date style
      */
     public OdfNumberDateStyle getDateStyle(String name) {
-        return mStylesBaseImpl.getDateStyle(name);
+	return mStylesBaseImpl.getDateStyle(name);
     }
 
     /** 
@@ -185,7 +192,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return an iterator for all <code>OdfNumberDateStyle</code> elements
      */
     public Iterable<OdfNumberDateStyle> getDateStyles() {
-        return mStylesBaseImpl.getDateStyles();
+	return mStylesBaseImpl.getDateStyles();
     }
 
     /** 
@@ -195,7 +202,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return the percentage style null if there is no such percentage style
      */
     public OdfNumberPercentageStyle getPercentageStyle(String name) {
-        return mStylesBaseImpl.getPercentageStyle(name);
+	return mStylesBaseImpl.getPercentageStyle(name);
     }
 
     /** 
@@ -204,7 +211,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return an iterator for all <code>OdfNumberPercentageStyle</code> elements
      */
     public Iterable<OdfNumberPercentageStyle> getPercentageStyles() {
-        return mStylesBaseImpl.getPercentageStyles();
+	return mStylesBaseImpl.getPercentageStyles();
     }
 
     /** 
@@ -214,7 +221,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return the currency style null if there is no such currency style
      */
     public OdfNumberCurrencyStyle getCurrencyStyle(String name) {
-        return mStylesBaseImpl.getCurrencyStyle(name);
+	return mStylesBaseImpl.getCurrencyStyle(name);
     }
 
     /** 
@@ -223,7 +230,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return an iterator for all <code>OdfNumberCurrencyStyle</code> elements
      */
     public Iterable<OdfNumberCurrencyStyle> getCurrencyStyles() {
-        return mStylesBaseImpl.getCurrencyStyles();
+	return mStylesBaseImpl.getCurrencyStyles();
     }
 
     /** 
@@ -233,7 +240,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return the time style null if there is no such time style
      */
     public OdfNumberTimeStyle getTimeStyle(String name) {
-        return mStylesBaseImpl.getTimeStyle(name);
+	return mStylesBaseImpl.getTimeStyle(name);
     }
 
     /** 
@@ -242,7 +249,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return an iterator for all <code>OdfNumberTimeStyle</code> elements
      */
     public Iterable<OdfNumberTimeStyle> getTimeStyles() {
-        return mStylesBaseImpl.getTimeStyles();
+	return mStylesBaseImpl.getTimeStyles();
     }
 
     /** 
@@ -252,7 +259,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return the boolean style null if there is no such boolean style
      */
     public OdfNumberBooleanStyle getBooleanStyle(String name) {
-        return mStylesBaseImpl.getBooleanStyle(name);
+	return mStylesBaseImpl.getBooleanStyle(name);
     }
 
     /** 
@@ -261,7 +268,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return an iterator for all <code>OdfNumberBooleanStyle</code> elements
      */
     public Iterable<OdfNumberBooleanStyle> getBooleanStyles() {
-        return mStylesBaseImpl.getBooleanStyles();
+	return mStylesBaseImpl.getBooleanStyles();
     }
 
     /** 
@@ -271,7 +278,7 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return the text style null if there is no such text style
      */
     public OdfNumberTextStyle getTextStyle(String name) {
-        return mStylesBaseImpl.getTextStyle(name);
+	return mStylesBaseImpl.getTextStyle(name);
     }
 
     /** 
@@ -280,33 +287,33 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return an iterator for all <code>OdfNumberTextStyle</code> elements
      */
     public Iterable<OdfNumberTextStyle> getTextStyles() {
-        return mStylesBaseImpl.getTextStyles();
+	return mStylesBaseImpl.getTextStyles();
     }
 
     @Override
     protected void onOdfNodeInserted(OdfElement node, Node refNode) {
-        if (node instanceof OdfStylePageLayout) {
-            OdfStylePageLayout pageLayout = (OdfStylePageLayout) node;
-            if (mPageLayouts == null) {
-                mPageLayouts = new HashMap<String, OdfStylePageLayout>();
-            }
+	if (node instanceof OdfStylePageLayout) {
+	    OdfStylePageLayout pageLayout = (OdfStylePageLayout) node;
+	    if (mPageLayouts == null) {
+		mPageLayouts = new HashMap<String, OdfStylePageLayout>();
+	    }
 
-            mPageLayouts.put(pageLayout.getStyleNameAttribute(), pageLayout);
-        } else {
-            mStylesBaseImpl.onOdfNodeInserted(node, refNode);
-        }
+	    mPageLayouts.put(pageLayout.getStyleNameAttribute(), pageLayout);
+	} else {
+	    mStylesBaseImpl.onOdfNodeInserted(node, refNode);
+	}
     }
 
     @Override
     protected void onOdfNodeRemoved(OdfElement node) {
-        if (node instanceof OdfStylePageLayout) {
-            if (mPageLayouts != null) {
-                OdfStylePageLayout pageLayout = (OdfStylePageLayout) node;
-                mPageLayouts.remove(pageLayout.getStyleNameAttribute());
-            }
-        } else {
-            mStylesBaseImpl.onOdfNodeRemoved(node);
-        }
+	if (node instanceof OdfStylePageLayout) {
+	    if (mPageLayouts != null) {
+		OdfStylePageLayout pageLayout = (OdfStylePageLayout) node;
+		mPageLayouts.remove(pageLayout.getStyleNameAttribute());
+	    }
+	} else {
+	    mStylesBaseImpl.onOdfNodeRemoved(node);
+	}
     }
 
     /** 
@@ -315,47 +322,47 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * be removed.
      */
     public void optimize() {
-        Iterator<OdfStyle> iter = mStylesBaseImpl.getAllOdfStyles().iterator();
-        SortedSet<OdfStyle> stylesSet = new TreeSet<OdfStyle>();
-        while (iter.hasNext()) {
-            OdfStyle cur = iter.next();
+	Iterator<OdfStyle> iter = mStylesBaseImpl.getAllOdfStyles().iterator();
+	SortedSet<OdfStyle> stylesSet = new TreeSet<OdfStyle>();
+	while (iter.hasNext()) {
+	    OdfStyle cur = iter.next();
 
-            // skip styles which are not in use:
-            if(cur.getStyleUserCount() < 1){
-                continue;
-            }
+	    // skip styles which are not in use:
+	    if (cur.getStyleUserCount() < 1) {
+		continue;
+	    }
 
-            SortedSet<OdfStyle> tail = stylesSet.tailSet(cur);
-            OdfStyle found = tail.size() > 0 ? tail.first() : null;
-            if (found != null && found.equals(cur)) {
-                // cur already in set. Replace all usages of cur by found:
-                Iterator<OdfStylableElement> styleUsersIter = cur.getStyleUsers().iterator();
-                ArrayList<OdfStylableElement> styleUsers = new ArrayList<OdfStylableElement>();
-                while (styleUsersIter.hasNext()) {
-                    styleUsers.add(styleUsersIter.next());
-                }
-                styleUsersIter = styleUsers.iterator();
-                while (styleUsersIter.hasNext()) {
-                    OdfStylableElement elem = styleUsersIter.next();
-                    OdfStyle autoStyle = elem.getAutomaticStyle();
-                    if (autoStyle != null) {
-                        elem.setStyleName(found.getStyleNameAttribute());
-                    }
-                }
-            } else {
-                stylesSet.add(cur);
-            }
-        }
+	    SortedSet<OdfStyle> tail = stylesSet.tailSet(cur);
+	    OdfStyle found = tail.size() > 0 ? tail.first() : null;
+	    if (found != null && found.equals(cur)) {
+		// cur already in set. Replace all usages of cur by found:
+		Iterator<OdfStylableElement> styleUsersIter = cur.getStyleUsers().iterator();
+		ArrayList<OdfStylableElement> styleUsers = new ArrayList<OdfStylableElement>();
+		while (styleUsersIter.hasNext()) {
+		    styleUsers.add(styleUsersIter.next());
+		}
+		styleUsersIter = styleUsers.iterator();
+		while (styleUsersIter.hasNext()) {
+		    OdfStylableElement elem = styleUsersIter.next();
+		    OdfStyle autoStyle = elem.getAutomaticStyle();
+		    if (autoStyle != null) {
+			elem.setStyleName(found.getStyleNameAttribute());
+		    }
+		}
+	    } else {
+		stylesSet.add(cur);
+	    }
+	}
 
-        OdfStyle style = OdfElement.findFirstChildNode(OdfStyle.class, this);
-        while (style != null) {
-            OdfStyle nextStyle = OdfElement.findNextChildNode(OdfStyle.class, style);
-            if (style.getStyleUserCount() < 1) {
-                this.removeChild(style);
-            }
+	OdfStyle style = OdfElement.findFirstChildNode(OdfStyle.class, this);
+	while (style != null) {
+	    OdfStyle nextStyle = OdfElement.findNextChildNode(OdfStyle.class, style);
+	    if (style.getStyleUserCount() < 1) {
+		this.removeChild(style);
+	    }
 
-            style = nextStyle;
-        }
+	    style = nextStyle;
+	}
     }
 
     /**
@@ -365,34 +372,34 @@ public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
      * @return an <code>OdfStyle</code> element
      */
     public OdfStyle makeStyleUnique(OdfStyle referenceStyle) {
-        OdfStyle newStyle = null;
+	OdfStyle newStyle = null;
 
-        if (referenceStyle.getOwnerDocument() != this.getOwnerDocument()) {
-            // import style from a different dom
-            newStyle = (OdfStyle) this.getOwnerDocument().importNode(referenceStyle, true);
-        } else {
-            // just clone
-            newStyle = (OdfStyle) referenceStyle.cloneNode(true);
-        }
+	if (referenceStyle.getOwnerDocument() != this.getOwnerDocument()) {
+	    // import style from a different dom
+	    newStyle = (OdfStyle) this.getOwnerDocument().importNode(referenceStyle, true);
+	} else {
+	    // just clone
+	    newStyle = (OdfStyle) referenceStyle.cloneNode(true);
+	}
 
-        newStyle.setStyleNameAttribute( newUniqueStyleName(newStyle.getFamily()));
-        appendChild(newStyle);
+	newStyle.setStyleNameAttribute(newUniqueStyleName(newStyle.getFamily()));
+	appendChild(newStyle);
 
-        return newStyle;
+	return newStyle;
     }
 
     private String newUniqueStyleName(OdfStyleFamily styleFamily) {
-        String unique_name;
+	String unique_name;
 
-        if (styleFamily.equals(OdfStyleFamily.List)) {
-            do {
-                unique_name = String.format("l%06x", (int) (Math.random() * 0xffffff));
-            } while (getListStyle(unique_name) != null);
-        } else {
-            do {
-                unique_name = String.format("a%06x", (int) (Math.random() * 0xffffff));
-            } while (getStyle(unique_name, styleFamily) != null);
-        }
-        return unique_name;
+	if (styleFamily.equals(OdfStyleFamily.List)) {
+	    do {
+		unique_name = String.format("l%06x", (int) (Math.random() * 0xffffff));
+	    } while (getListStyle(unique_name) != null);
+	} else {
+	    do {
+		unique_name = String.format("a%06x", (int) (Math.random() * 0xffffff));
+	    } while (getStyle(unique_name, styleFamily) != null);
+	}
+	return unique_name;
     }
 }
