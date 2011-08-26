@@ -33,6 +33,7 @@ import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
@@ -76,12 +77,12 @@ public class OfficeMetaTest {
 		metadom = null;
 	}
 
-	@Test
+	@Test	
 	public void updateTemplates() {
+		// The following is only necessary, when the templates in the source repository should be adapted, e.g. before a release
+		loadSaveDirFiles("src/main/resources/");
 		// Adapt all files with latest XML changes automatically
 		loadSaveDirFiles("target/classes/"); // all template files to be bundled within the JAR
-		// The following is only necessary, when the templates in the source repository should be adapted, e.g. before a release
-		// loadSaveDirFiles("src/main/resources/");
 	}
 
 	/** The reference templates of the JAR will be loaded and saved. */
@@ -92,7 +93,7 @@ public class OfficeMetaTest {
 			File[] resFiles = resDir.listFiles();
 			boolean validTest = true;
 			for (File odfFile : resFiles) {
-				if (!odfFile.isDirectory() && odfFile.getName().startsWith("Odf")) {
+				if (!odfFile.isDirectory() ) { //&& odfFile.getName().startsWith("Odf")
 					OdfDocument odfDoc = OdfDocument.loadDocument(odfFile);
 					String version = System.getProperty("odfdom.version");
 					OdfOfficeMeta meta = odfDoc.getOfficeMetadata();

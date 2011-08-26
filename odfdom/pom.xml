@@ -5,7 +5,7 @@
 	<!-- The Basics -->
 	<groupId>org.odftoolkit</groupId>
 	<artifactId>odfdom-java</artifactId>
-	<version>0.8.7-SNAPSHOT</version>
+	<version>0.8.7</version>
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -107,8 +107,8 @@
 				<version>2.7</version>
 				<configuration>
 					<doctitle>ODFDOM</doctitle>
-					<minmemory>512m</minmemory>
-					<maxmemory>1024m</maxmemory>
+					<minmemory>1024m</minmemory>
+					<maxmemory>2048m</maxmemory>
 					<links>
 						<link>http://download.oracle.com/javase/6/docs/api/</link>
 						<link>http://xerces.apache.org/xerces-j/apiDocs/</link>
@@ -180,8 +180,8 @@
 				<version>2.7</version>
 				<configuration>
 					<doctitle>ODFDOM</doctitle>
-					<minmemory>512m</minmemory>
-					<maxmemory>1024m</maxmemory>
+					<minmemory>1024m</minmemory>
+					<maxmemory>2048m</maxmemory>
 					<links>
 						<link>http://download.oracle.com/javase/6/docs/api/</link>
 						<link>http://xerces.apache.org/xerces-j/apiDocs/</link>
