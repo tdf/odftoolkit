@@ -34,6 +34,7 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
+import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
 import org.odftoolkit.odfdom.doc.style.OdfStyle;
@@ -63,7 +64,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * OdfTable represents the table feature in an ODF document.
+ * OdfTable represents the table feature in ODF spreadsheet and text documents.
  * <p>
  * OdfTable provides methods to get/add/delete/modify table column/row/cell.
  *
@@ -71,8 +72,8 @@ import org.w3c.dom.NodeList;
 public class OdfTable {
 
 	TableTableElement mTableElement;
-	OdfDocument mDocument;
-	boolean mIsProtected;
+	protected OdfDocument mDocument;
+	protected boolean mIsSpreadsheet;
 	private static final int DEFAULT_ROW_COUNT = 2;
 	private static final int DEFAULT_COLUMN_COUNT = 5;
 	private static final double DEFAULT_TABLE_WIDTH = 6;
@@ -90,6 +91,10 @@ public class OdfTable {
 
 	private OdfTable(TableTableElement table) {
 		mTableElement = table;
+		mDocument = ((OdfFileDom)(table.getOwnerDocument())).getOdfDocument();
+		if (mDocument instanceof OdfSpreadsheetDocument)
+			mIsSpreadsheet = true;
+		else mIsSpreadsheet = false;
 	}
 
 	/**
@@ -321,6 +326,9 @@ public class OdfTable {
 	}
 
 	private static TableTableElement createTable(OdfDocument document, int numRows, int numCols, int headerRowNumber, int headerColumnNumber) throws Exception {
+		
+		boolean isSpreadsheet = document instanceof OdfSpreadsheetDocument;
+		
 		// check arguments
 		if (numRows < 1 || numCols < 1 || headerRowNumber < 0
 				|| headerColumnNumber < 0 || headerRowNumber > numRows
@@ -337,16 +345,15 @@ public class OdfTable {
 		newTEle.setTableNameAttribute(tablename);
 		//create style
 		OdfStyle tableStyle = styles.newStyle(OdfStyleFamily.Table);
-		tableStyle.setStyleNameAttribute(tablename);
+		String stylename = tableStyle.getStyleNameAttribute();
 		tableStyle.setProperty(OdfStyleTableProperties.Width, DEFAULT_TABLE_WIDTH + "in");
 		tableStyle.setProperty(OdfStyleTableProperties.Align, DEFAULT_TABLE_ALIGN);
-		newTEle.setStyleName(tablename);
+		newTEle.setStyleName(stylename);
 
 		// 2. create column elements
 		// 2.0 create column style
-		String columnStylename = tablename + ".A";
 		OdfStyle columnStyle = styles.newStyle(OdfStyleFamily.TableColumn);
-		columnStyle.setStyleNameAttribute(columnStylename);
+		String columnStylename = columnStyle.getStyleNameAttribute();
 		columnStyle.setProperty(OdfStyleTableColumnProperties.ColumnWidth,
 				new DecimalFormat("000.0000").format(DEFAULT_TABLE_WIDTH / numCols) + "in");
 		columnStyle.setProperty(OdfStyleTableColumnProperties.RelColumnWidth, Math.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
@@ -368,52 +375,53 @@ public class OdfTable {
 
 		//3. create row elements
 		//3.0 create 4 kinds of styles
-		OdfStyle lefttopStyle = styles.newStyle(OdfStyleFamily.TableCell);
-		String lefttopStylename = tablename + ".A1";
-		lefttopStyle.setStyleNameAttribute(lefttopStylename);
-		setLeftTopBorderStyleProperties(lefttopStyle);
-
-		OdfStyle leftbottomStyle = styles.newStyle(OdfStyleFamily.TableCell);
-		String leftbottomStylename = tablename + ".A2";
-		leftbottomStyle.setStyleNameAttribute(leftbottomStylename);
-		setLeftBottomBorderStylesProperties(leftbottomStyle);
-
-		OdfStyle righttopStyle = styles.newStyle(OdfStyleFamily.TableCell);
-		String righttopStylename = tablename + ".B1";
-		righttopStyle.setStyleNameAttribute(righttopStylename);
-		setRightTopBorderStyleProperties(righttopStyle);
-
-		OdfStyle rightbottomStyle = styles.newStyle(OdfStyleFamily.TableCell);
-		String rightbottomStylename = tablename + ".B2";
-		rightbottomStyle.setStyleNameAttribute(rightbottomStylename);
-		setRightBottomBorderStylesProperties(rightbottomStyle);
+		OdfStyle lefttopStyle=null,leftbottomStyle=null,righttopStyle=null,rightbottomStyle=null;
+		
+		if (!document.getMediaType().equals(OdfMediaType.SPREADSHEET.toString())) {
+			lefttopStyle = styles.newStyle(OdfStyleFamily.TableCell);
+			setLeftTopBorderStyleProperties(lefttopStyle);
+	
+			leftbottomStyle = styles.newStyle(OdfStyleFamily.TableCell);
+			setLeftBottomBorderStylesProperties(leftbottomStyle);
+	
+			righttopStyle = styles.newStyle(OdfStyleFamily.TableCell);
+			setRightTopBorderStyleProperties(righttopStyle);
+	
+			rightbottomStyle = styles.newStyle(OdfStyleFamily.TableCell);
+			setRightBottomBorderStylesProperties(rightbottomStyle);
+		}
 
 		//3.1 create header row elements
-		TableTableHeaderRowsElement headerrows = (TableTableHeaderRowsElement) OdfXMLFactory.newOdfElement(dom,
-				OdfName.newName(OdfNamespaceNames.TABLE, "table-header-rows"));
-		for (int i = 0; i < headerRowNumber; i++) {
-			TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom,
-					OdfName.newName(OdfNamespaceNames.TABLE, "table-row"));
-			for (int j = 0; j < numCols; j++) {
-				TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
-						OdfName.newName(OdfNamespaceNames.TABLE, "table-cell"));
-				TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
-						OdfName.newName(OdfNamespaceNames.TEXT, "p"));
-				aCell.appendChild(aParagraph);
-				if ((j + 1 == numCols) && (i == 0)) {
-					aCell.setStyleName(righttopStylename);
-				} else if (i == 0) {
-					aCell.setStyleName(lefttopStylename);
-				} else if ((j + 1 == numCols) && (i > 0)) {
-					aCell.setStyleName(rightbottomStylename);
-				} else {
-					aCell.setStyleName(leftbottomStylename);
+		if( headerRowNumber > 0)
+		{
+			TableTableHeaderRowsElement headerrows = (TableTableHeaderRowsElement) OdfXMLFactory.newOdfElement(dom,
+					OdfName.newName(OdfNamespaceNames.TABLE, "table-header-rows"));
+			for (int i = 0; i < headerRowNumber; i++) {
+				TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom,
+						OdfName.newName(OdfNamespaceNames.TABLE, "table-row"));
+				for (int j = 0; j < numCols; j++) {
+					TableTableCellElement aCell = (TableTableCellElement) OdfXMLFactory.newOdfElement(dom,
+							OdfName.newName(OdfNamespaceNames.TABLE, "table-cell"));
+					TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
+							OdfName.newName(OdfNamespaceNames.TEXT, "p"));
+					aCell.appendChild(aParagraph);
+					if (!isSpreadsheet) {
+						if ((j + 1 == numCols) && (i == 0)) {
+							aCell.setStyleName(righttopStyle.getStyleNameAttribute());
+						} else if (i == 0) {
+							aCell.setStyleName(lefttopStyle.getStyleNameAttribute());
+						} else if ((j + 1 == numCols) && (i > 0)) {
+							aCell.setStyleName(rightbottomStyle.getStyleNameAttribute());
+						} else {
+							aCell.setStyleName(leftbottomStyle.getStyleNameAttribute());
+						}
+					}
+					aRow.appendChild(aCell);
 				}
-				aRow.appendChild(aCell);
+				headerrows.appendChild(aRow);
 			}
-			headerrows.appendChild(aRow);
+			newTEle.appendChild(headerrows);
 		}
-		newTEle.appendChild(headerrows);
 
 		//3.2 create common row elements
 		for (int i = headerRowNumber; i < numRows; i++) {
@@ -425,14 +433,16 @@ public class OdfTable {
 				TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
 						OdfName.newName(OdfNamespaceNames.TEXT, "p"));
 				aCell.appendChild(aParagraph);
-				if ((j + 1 == numCols) && (i == 0)) {
-					aCell.setStyleName(righttopStylename);
-				} else if (i == 0) {
-					aCell.setStyleName(lefttopStylename);
-				} else if ((j + 1 == numCols) && (i > 0)) {
-					aCell.setStyleName(rightbottomStylename);
-				} else {
-					aCell.setStyleName(leftbottomStylename);
+				if (!isSpreadsheet) {
+					if ((j + 1 == numCols) && (i == 0)) {
+						aCell.setStyleName(righttopStyle.getStyleNameAttribute());
+					} else if (i == 0) {
+						aCell.setStyleName(lefttopStyle.getStyleNameAttribute());
+					} else if ((j + 1 == numCols) && (i > 0)) {
+						aCell.setStyleName(rightbottomStyle.getStyleNameAttribute());
+					} else {
+						aCell.setStyleName(leftbottomStyle.getStyleNameAttribute());
+					}
 				}
 				aRow.appendChild(aCell);
 			}
@@ -449,6 +459,8 @@ public class OdfTable {
 	 * <p>
 	 * The table will be inserted at the end of the document.
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * <p>
+	 * If the document is a text document, cell borders will be created by default.
 	 * 
 	 * @param document	the ODF document that contains this feature 
 	 * @return the created <code>OdfTable</code> feature instance
@@ -505,6 +517,8 @@ public class OdfTable {
 	 * <p>
 	 * The table will be inserted at the end of the document.
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * <p>
+	 * If the document is a text document, cell borders will be created by default.
 	 * 
 	 * @param document	the ODF document that contains this feature 
 	 * @param numRows	the row number
@@ -540,6 +554,8 @@ public class OdfTable {
 	 * <p>
 	 * The table will be inserted at the end of the document.
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * <p>
+	 * If the document is a text document, cell borders will be created by default.
 	 * 
 	 * @param document	the ODF document that contains this feature 
 	 * @param numRows	the row number
@@ -578,6 +594,8 @@ public class OdfTable {
 	 * <p>
 	 * The table will be inserted at the end of the document.
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * <p>
+	 * If the document is a text document, cell borders will be created by default.
 	 * 
 	 * @param document	the ODF document that contains this feature
 	 * @param rowLabel	set as the header row, it can be null if no header row needed
@@ -661,6 +679,8 @@ public class OdfTable {
 	 * <p>
 	 * The table will be inserted at the end of the document.
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
+	 * <p>
+	 * If the document is a text document, cell borders will be created by default.
 	 * 
 	 * @param document	the ODF document that contains this feature
 	 * @param rowLabel	set as the header row, it can be null if no header row needed
@@ -783,11 +803,15 @@ public class OdfTable {
 		OdfFileDom dom = (OdfFileDom) mTableElement.getOwnerDocument();
 		//3. create row elements
 		//3.0 create 4 kinds of styles
-		OdfStyle lefttopStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-		setLeftTopBorderStyleProperties(lefttopStyle);
-
-		OdfStyle righttopStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-		setRightTopBorderStyleProperties(righttopStyle);
+		OdfStyle lefttopStyle=null,righttopStyle=null;
+		
+		if (!mIsSpreadsheet) {
+			lefttopStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
+			setLeftTopBorderStyleProperties(lefttopStyle);
+	
+			righttopStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
+			setRightTopBorderStyleProperties(righttopStyle);
+		}
 
 		//3.1 create header row elements
 		TableTableRowElement aRow = (TableTableRowElement) OdfXMLFactory.newOdfElement(dom,
@@ -798,10 +822,12 @@ public class OdfTable {
 			TextPElement aParagraph = (TextPElement) OdfXMLFactory.newOdfElement(dom,
 					OdfName.newName(OdfNamespaceNames.TEXT, "p"));
 			aCell.appendChild(aParagraph);
-			if (j + 1 == columnCount) {
-				aCell.setStyleName(righttopStyle.getStyleNameAttribute());
-			} else {
-				aCell.setStyleName(lefttopStyle.getStyleNameAttribute());
+			if (!mIsSpreadsheet) {
+				if (j + 1 == columnCount) {
+					aCell.setStyleName(righttopStyle.getStyleNameAttribute());
+				} else {
+					aCell.setStyleName(lefttopStyle.getStyleNameAttribute());
+				}
 			}
 			aRow.appendChild(aCell);
 		}
@@ -872,9 +898,8 @@ public class OdfTable {
 
 		if (columnList.size() == 0) //no column, create a new column
 		{
-			String columnStylename = getTableName() + ".A";
 			OdfStyle columnStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableColumn);
-			columnStyle.setStyleNameAttribute(columnStylename);
+			String columnStylename = columnStyle.getStyleNameAttribute();
 			columnStyle.setProperty(OdfStyleTableColumnProperties.ColumnWidth, DEFAULT_TABLE_WIDTH + "in");
 			columnStyle.setProperty(OdfStyleTableColumnProperties.RelColumnWidth, DEFAULT_REL_TABLE_WIDTH + "*");
 
@@ -1019,6 +1044,7 @@ public class OdfTable {
 		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "boolean-value");
 		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "string-value");
 		newCellEle.removeAttributeNS(OdfNamespaceNames.TABLE.getUri(), "formula");
+		newCellEle.removeAttributeNS(OdfNamespaceNames.OFFICE.getUri(), "value-type");
 		Node n = newCellEle.getFirstChild();
 		while (n != null) {
 			Node m = n.getNextSibling();
@@ -1162,12 +1188,8 @@ public class OdfTable {
 	}
 
 	private void reviseStyleFromTopRowToMediumRow(OdfTableRow oldTopRow) {
+		if (mIsSpreadsheet) return;
 		int length = getColumnCount();
-		OdfStyle leftbottomStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-		setLeftBottomBorderStylesProperties(leftbottomStyle);
-
-		OdfStyle rightbottomStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-		setRightBottomBorderStylesProperties(rightbottomStyle);
 
 		for (int i = 0; i < length;) {
 			OdfTableCell cell = oldTopRow.getCellByIndex(i);
@@ -1175,33 +1197,31 @@ public class OdfTable {
 				i = i + cell.getColumnsRepeatedNumber();
 				continue;
 			}
+			OdfStyle styleEle = cell.getCellStyleElementForWrite();
 			if (i < length - 1) {
-				cell.getOdfElement().setStyleName(leftbottomStyle.getStyleNameAttribute());
+				setLeftBottomBorderStylesProperties(styleEle);
 			} else {
-				cell.getOdfElement().setStyleName(rightbottomStyle.getStyleNameAttribute());
+				setRightBottomBorderStylesProperties(styleEle);
 			}
 			i = i + cell.getColumnsRepeatedNumber();
 		}
 	}
 
 	private void reviseStyleFromMediumRowToTopRow(OdfTableRow newTopRow) {
+		if (mIsSpreadsheet) return;
 		int length = getColumnCount();
-		OdfStyle lefttopStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-		setLeftTopBorderStyleProperties(lefttopStyle);
-
-		OdfStyle righttopStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-		setRightTopBorderStyleProperties(righttopStyle);
-
+		
 		for (int i = 0; i < length;) {
 			OdfTableCell cell = newTopRow.getCellByIndex(i);
 			if (cell.isCoveredElement()) {
 				i = i + cell.getColumnsRepeatedNumber();
 				continue;
 			}
+			OdfStyle styleEle = cell.getCellStyleElementForWrite();
 			if (i < length - 1) {
-				cell.getOdfElement().setStyleName(lefttopStyle.getStyleNameAttribute());
+				setLeftTopBorderStyleProperties(styleEle);
 			} else {
-				cell.getOdfElement().setStyleName(righttopStyle.getStyleNameAttribute());
+				setRightTopBorderStyleProperties(styleEle);
 			}
 			i = i + cell.getColumnsRepeatedNumber();
 		}

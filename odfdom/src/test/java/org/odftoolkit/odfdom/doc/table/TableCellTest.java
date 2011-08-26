@@ -25,15 +25,24 @@ import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.doc.number.OdfNumberDateStyle;
+import org.odftoolkit.odfdom.doc.number.OdfNumberStyle;
+import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.doc.style.OdfStyleParagraphProperties;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
@@ -762,6 +771,68 @@ public class TableCellTest {
 		for (int i = 1; i <= 3; i++) {
 			OdfTableCell newcell = table.getCellByPosition("J" + i);
 			Assert.assertEquals(formats[i - 1], newcell.getFormatString());
+		}
+	}
+	
+	@Test
+	public void testSetDefaultCellStyle() {
+		OdfSpreadsheetDocument outputDocument;
+		OdfFileDom contentDom; // the document object model for content.xml
+		OdfFileDom stylesDom; // the document object model for styles.xml
+		// the office:automatic-styles element in content.xml
+		OdfOfficeAutomaticStyles contentAutoStyles;
+		// the office:styles element in styles.xml
+		OdfOfficeStyles stylesOfficeStyles;
+		OdfStyle style;
+		String noaaDateStyleName;
+		String noaaTempStyleName;
+
+		try {
+			outputDocument = OdfSpreadsheetDocument.newSpreadsheetDocument();
+			contentDom = outputDocument.getContentDom();
+			contentAutoStyles = contentDom.getOrCreateAutomaticStyles();
+
+			OdfNumberDateStyle dateStyle = new OdfNumberDateStyle(contentDom,
+					"yyyy-MM-dd", "numberDateStyle", null);
+	        OdfNumberStyle numberStyle = new OdfNumberStyle(contentDom,
+	                "#0.00", "numberTemperatureStyle");
+
+			contentAutoStyles.appendChild(dateStyle);
+			contentAutoStyles.appendChild(numberStyle);
+
+			style = contentAutoStyles.newStyle(OdfStyleFamily.TableCell);
+			noaaDateStyleName = style.getStyleNameAttribute();
+			style.setStyleDataStyleNameAttribute("numberDateStyle");
+
+			// and for time cells
+	        style = contentAutoStyles.newStyle(OdfStyleFamily.TableCell);
+	        noaaTempStyleName = style.getStyleNameAttribute();
+	        style.setStyleDataStyleNameAttribute("numberTemperatureStyle");
+	        style.setProperty(OdfStyleParagraphProperties.TextAlign, "end");
+
+			OdfTable table = OdfTable.newTable(outputDocument);
+			List<OdfTableColumn> columns = table.insertColumnsBefore(0, 3);
+			OdfTableColumn column = columns.get(0);
+			column.setDefaultCellStyle(
+					contentAutoStyles.getStyle(noaaDateStyleName,
+							OdfStyleFamily.TableCell));
+			OdfTableCell aCell = column.getCellByIndex(0);
+			aCell.setValueType("date");
+			String format = aCell.getFormatString();
+			Assert.assertEquals("yyyy-MM-dd", format);
+
+			List<OdfTableRow> rows = table.insertRowsBefore(0, 1);
+			OdfTableRow row = rows.get(0);
+			row.setDefaultCellStyle(contentAutoStyles.getStyle(noaaTempStyleName,
+					OdfStyleFamily.TableCell));
+			OdfTableCell bCell = row.getCellByIndex(0);
+			bCell.setValueType("float");
+			String bformat = bCell.getFormatString();
+			Assert.assertEquals("#0.00", bformat);
+			Assert.assertEquals("end",bCell.getHorizontalJustify());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
 		}
 	}
 }

@@ -427,10 +427,16 @@ public class OdfTableColumn {
 	 * Set the default cell style to this column.
 	 * <p>
 	 * The style should already exist in this document.
+	 * <p>
+	 * This method is not recommended for text document cases. 
+	 * These is a style assigned to each cell in tables under text documents.
+	 * So setting the default cell style to a column may not work.
+	 * 
 	 * @param style
 	 * 			the cell style of the document
 	 */
 	public void setDefaultCellStyle(OdfStyle style) {
+		splitRepeatedColumns();
 		OdfStyle defaultStyle = getDefaultCellStyle();
 		if (defaultStyle != null) {
 			defaultStyle.removeStyleUser(maColumnElement);

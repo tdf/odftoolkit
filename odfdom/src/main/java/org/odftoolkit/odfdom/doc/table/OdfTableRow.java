@@ -408,6 +408,7 @@ public class OdfTableRow {
 	 * 			the cell style of the document
 	 */
 	public void setDefaultCellStyle(OdfStyle style) {
+		splitRepeatedRows();
 		OdfStyle defaultStyle = getDefaultCellStyle();
 		if (defaultStyle != null) {
 			defaultStyle.removeStyleUser(maRowElement);
@@ -721,33 +722,25 @@ public class OdfTableRow {
 	}
 
 	private void reviseStyleFromLastColumnToMedium(OdfTableCell oldLastCell) {
-		TableTableElement tableElement = getTableElement();
-		OdfStyle leftbottomStyle = tableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-		OdfTable.setLeftBottomBorderStylesProperties(leftbottomStyle);
-
-		OdfStyle lefttopStyle = tableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-		OdfTable.setLeftTopBorderStyleProperties(lefttopStyle);
-
+		if (getTable().mIsSpreadsheet) return;
+		
+		OdfStyle styleEle = oldLastCell.getCellStyleElementForWrite();
 		if (oldLastCell.getRowIndex() == 0) {
-			oldLastCell.getOdfElement().setStyleName(lefttopStyle.getStyleNameAttribute());
+			OdfTable.setLeftTopBorderStyleProperties(styleEle);
 		} else {
-			oldLastCell.getOdfElement().setStyleName(leftbottomStyle.getStyleNameAttribute());
+			OdfTable.setLeftBottomBorderStylesProperties(styleEle);
 		}
 
 	}
 
 	private void reviseStyleFromMediumColumnToLast(OdfTableCell newLastCell) {
-		TableTableElement tableElement = getTableElement();
-		OdfStyle rightbottomStyle = tableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-		OdfTable.setRightBottomBorderStylesProperties(rightbottomStyle);
-
-		OdfStyle righttopStyle = tableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
-		OdfTable.setRightTopBorderStyleProperties(righttopStyle);
-
+		if (getTable().mIsSpreadsheet) return;
+		
+		OdfStyle styleEle = newLastCell.getCellStyleElementForWrite();
 		if (newLastCell.getRowIndex() == 0) {
-			newLastCell.getOdfElement().setStyleName(righttopStyle.getStyleNameAttribute());
+			OdfTable.setRightTopBorderStyleProperties(styleEle);
 		} else {
-			newLastCell.getOdfElement().setStyleName(rightbottomStyle.getStyleNameAttribute());
+			OdfTable.setRightBottomBorderStylesProperties(styleEle);
 		}
 	}
 

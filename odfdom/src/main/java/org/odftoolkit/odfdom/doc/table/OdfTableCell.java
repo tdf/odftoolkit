@@ -64,6 +64,7 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.type.Color;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 /**
@@ -1339,7 +1340,7 @@ public class OdfTableCell {
 		}
 	}
 
-	private OdfStyle getCellStyleElement() {
+	protected OdfStyle getCellStyleElement() {
 		String styleName = mCellElement.getStyleName();
 		if (styleName == null || (styleName.equals(""))) {	//search in row
 			OdfTableRow aRow = getTableRow();
@@ -1376,7 +1377,7 @@ public class OdfTableCell {
 		return styleElement;
 	}
 
-	private OdfStyle getCellStyleElementForWrite() {
+	protected OdfStyle getCellStyleElementForWrite() {
 		boolean copy = false;
 		String styleName = mCellElement.getStyleName();
 		if (styleName == null || (styleName.equals(""))) {	//search in row
@@ -1393,7 +1394,8 @@ public class OdfTableCell {
 			return null;
 		}
 
-		OdfStyle styleElement = mCellElement.getAutomaticStyles().getStyle(styleName, mCellElement.getStyleFamily());
+		OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
+		OdfStyle styleElement = styles.getStyle(styleName, mCellElement.getStyleFamily());
 
 		if (styleElement == null) {
 			styleElement = ((OdfFileDom) mCellElement.getOwnerDocument()).getOdfDocument().
@@ -1409,6 +1411,15 @@ public class OdfTableCell {
 		{
 			OdfStyle newStyle = mCellElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
 			newStyle.setProperties(styleElement.getStylePropertiesDeep());
+			//copy attributes
+			NamedNodeMap attributes = styleElement.getAttributes();
+			for(int i=0;i<attributes.getLength();i++)
+			{
+				Node attr = attributes.item(i);
+				if (!attr.getNodeName().equals("style:name"))
+					newStyle.setAttributeNS(attr.getNamespaceURI(), attr.getNodeName(), attr.getNodeValue());
+			}//end of copying attributes
+			//mCellElement.getAutomaticStyles().appendChild(newStyle);
 			String newname = newStyle.getStyleNameAttribute();
 			mCellElement.setStyleName(newname);
 			return newStyle;
@@ -1430,7 +1441,7 @@ public class OdfTableCell {
 		String unique_name;
 		OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
 		do {
-			unique_name = String.format("a%06x", (int) (Math.random() * 0xffffff));
+			unique_name = String.format("n%06x", (int) (Math.random() * 0xffffff));
 		} while (styles.getNumberStyle(unique_name) != null);
 		return unique_name;
 	}
@@ -1439,7 +1450,7 @@ public class OdfTableCell {
 		String unique_name;
 		OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
 		do {
-			unique_name = String.format("a%06x", (int) (Math.random() * 0xffffff));
+			unique_name = String.format("d%06x", (int) (Math.random() * 0xffffff));
 		} while (styles.getDateStyle(unique_name) != null);
 		return unique_name;
 	}
@@ -1448,7 +1459,7 @@ public class OdfTableCell {
 		String unique_name;
 		OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
 		do {
-			unique_name = String.format("a%06x", (int) (Math.random() * 0xffffff));
+			unique_name = String.format("p%06x", (int) (Math.random() * 0xffffff));
 		} while (styles.getPercentageStyle(unique_name) != null);
 		return unique_name;
 	}
@@ -1465,7 +1476,7 @@ public class OdfTableCell {
 		String unique_name;
 		OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
 		do {
-			unique_name = String.format("a%06x", (int) (Math.random() * 0xffffff));
+			unique_name = String.format("c%06x", (int) (Math.random() * 0xffffff));
 		} while (styles.getCurrencyStyle(unique_name) != null);
 		return unique_name;
 	}
