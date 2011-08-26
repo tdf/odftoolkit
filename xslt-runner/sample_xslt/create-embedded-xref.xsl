@@ -321,8 +321,27 @@
         <xsl:call-template name="create-elem-root-elem-list"/>
         <xsl:call-template name="create-elem-parent-elem-list"/>
         <xsl:call-template name="create-attr-list"/>
-        <xsl:call-template name="create-child-elem-list"/>
-        <xsl:call-template name="create-text-info"/>
+        <xsl:choose>
+            <xsl:when test="@name='office:script'">
+                <text:p text:style-name="Child_20_Element_20_List">
+                    <xsl:text>The </xsl:text>
+                    <text:span text:style-name="Element">
+                        <xsl:text>&lt;</xsl:text>
+                        <xsl:value-of select="@name"/>
+                        <xsl:text>&gt;</xsl:text>
+                    </text:span>
+                    <xsl:text> element has mixed content where arbitrary child elements are permitted.</xsl:text>
+                </text:p>
+            </xsl:when>
+            <xsl:when test="rng:element/rng:anyName">
+                <!-- arbitrary content -->
+                <xsl:message>Element <xsl:value-of select="@name"/>: No child element info added (element may have any content).</xsl:message>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="create-child-elem-list"/>
+                <xsl:call-template name="create-text-info"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>   
 
     <!-- select all <element> nodes in the file or in included files -->
@@ -415,7 +434,7 @@
     </xsl:template>
 
     <xsl:template name="create-child-elem-list">
-        <xsl:variable name="count" select="count(rng:element)"/>
+        <xsl:variable name="count" select="count(rng:element[@name])"/>
         <xsl:call-template name="new-line"/>
         <text:p text:style-name="Child_20_Element_20_List">
             <xsl:text>The </xsl:text>
@@ -462,17 +481,93 @@
     </xsl:template>
 
     <xsl:template name="create-text-info">
-        <xsl:if test="rng:text and $add-text-info">
-            <xsl:call-template name="new-line"/>
-            <text:p text:style-name="Child_20_Element_20_List">
-                <xsl:text>The </xsl:text>
-                <text:span text:style-name="Element">
-                    <xsl:text>&lt;</xsl:text>
-                    <xsl:value-of select="@name"/>
-                    <xsl:text>&gt;</xsl:text>
-                </text:span>
-                <xsl:text> element has text content.</xsl:text>
-            </text:p>
+        <xsl:if test="$add-text-info">
+            <xsl:choose>
+                <xsl:when test="@name='text:script'">
+                    <text:p text:style-name="Child_20_Element_20_List">
+                        <xsl:text>The </xsl:text>
+                        <text:span text:style-name="Element">
+                            <xsl:text>&lt;</xsl:text>
+                            <xsl:value-of select="@name"/>
+                            <xsl:text>&gt;</xsl:text>
+                        </text:span>
+                        <xsl:text> element has text content. Text content is only permitted if a </xsl:text>
+                        <text:span text:style-name="Attribute"><xsl:text>xlink:href</xsl:text></text:span>
+                        <xsl:text> attribute is not present.</xsl:text>
+                    </text:p>
+                </xsl:when>
+                <xsl:when test="@name='meta:user-defined'">
+                    <text:p text:style-name="Child_20_Element_20_List">
+                        <xsl:text>The </xsl:text>
+                        <text:span text:style-name="Element">
+                            <xsl:text>&lt;</xsl:text>
+                            <xsl:value-of select="@name"/>
+                            <xsl:text>&gt;</xsl:text>
+                        </text:span>
+                        <xsl:text> element has text content, or depending on the value of the </xsl:text>
+                        <text:span text:style-name="Attribute"><xsl:text>meta:value-type</xsl:text></text:span>
+                        <xsl:text> attribute content of type </xsl:text>
+                        <xsl:for-each select="rng:ref|rng:data">
+                            <xsl:choose>
+                                <xsl:when test="position() = 1"/>
+                                <xsl:when test="position() = last()">
+                                    <xsl:text> or </xsl:text>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:text>, </xsl:text>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:call-template name="print-datatype">
+                                <xsl:with-param name="name" select="@type|@name"/>
+                            </xsl:call-template>
+                        </xsl:for-each>
+                        <xsl:text>.</xsl:text>
+                    </text:p>
+                </xsl:when>
+                <xsl:when test="rng:text[not(@condition) or (@condition='interleave/interleave' and not(.//*))]">
+                    <xsl:call-template name="new-line"/>
+                    <text:p text:style-name="Child_20_Element_20_List">
+                        <xsl:text>The </xsl:text>
+                        <text:span text:style-name="Element">
+                            <xsl:text>&lt;</xsl:text>
+                            <xsl:value-of select="@name"/>
+                            <xsl:text>&gt;</xsl:text>
+                        </text:span>
+                        <xsl:text> element has text content.</xsl:text>
+                    </text:p>
+                </xsl:when>
+                <xsl:when test="rng:text[@condition='zeroOrMore/choice']">
+                    <xsl:call-template name="new-line"/>
+                    <text:p text:style-name="Child_20_Element_20_List">
+                        <xsl:text>The </xsl:text>
+                        <text:span text:style-name="Element">
+                            <xsl:text>&lt;</xsl:text>
+                            <xsl:value-of select="@name"/>
+                            <xsl:text>&gt;</xsl:text>
+                        </text:span>
+                        <xsl:text> element has mixed content.</xsl:text>
+                    </text:p>
+                </xsl:when>
+                <xsl:when test="rng:ref[not(@condition)]|rng:data[not(@condition)]">
+                    <xsl:call-template name="new-line"/>
+                    <text:p text:style-name="Child_20_Element_20_List">
+                        <xsl:text>The </xsl:text>
+                        <text:span text:style-name="Element">
+                            <xsl:text>&lt;</xsl:text>
+                            <xsl:value-of select="@name"/>
+                            <xsl:text>&gt;</xsl:text>
+                        </text:span>
+                        <xsl:text> element has content of data type </xsl:text>
+                        <xsl:call-template name="print-datatype">
+                            <xsl:with-param name="name" select="rng:data/@type|rng:ref/@name"/>
+                        </xsl:call-template>
+                        <xsl:text>.</xsl:text>
+                    </text:p>
+                </xsl:when>
+                <xsl:when test="rng:text|rng:ref|rng:data">
+                     <xsl:message>Element <xsl:value-of select="@name"/>: complex condition for text: <xsl:value-of select="rng:text/@condition"/></xsl:message>
+                </xsl:when>
+            </xsl:choose>
         </xsl:if>
     </xsl:template>
     
@@ -752,7 +847,6 @@
 
     <xsl:template match="rng:attribute[@name='style:mirror']/rng:choice" mode="attr-value">
         <xsl:param name="attr-name"/>
-        <xsl:message>+++ special processing <xsl:value-of select="$attr-name"/></xsl:message>
         <xsl:if test="not(count(*)=5 and count(rng:value)=2 and count(rng:ref[@name='horizontal-mirror'])=1 and count(rng:list)=2)">
             <xsl:message> Unexpected content <xsl:value-of select="$attr-name"/></xsl:message>
         </xsl:if>
@@ -772,6 +866,7 @@
                     <xsl:with-param name="attr-name" select="$attr-name"/>
                 </xsl:apply-templates>
             </xsl:for-each>
+            <xsl:text>, </xsl:text>
             <xsl:apply-templates select="rng:list[1]" mode="individual-value">
                 <xsl:with-param name="attr-name" select="$attr-name"/>
             </xsl:apply-templates>
@@ -786,7 +881,6 @@
 
     <xsl:template match="rng:attribute[@name='draw:line-skew']/rng:list" mode="attr-value">
         <xsl:param name="attr-name"/>
-        <xsl:message>+++ special processing <xsl:value-of select="$attr-name"/></xsl:message>
         <xsl:if test="not(count(*)=2 and count(rng:ref[@name='length'])=1 and count(rng:optional)=1 and count(rng:optional/*)=2)">
             <xsl:message> Unexpected content <xsl:value-of select="$attr-name"/></xsl:message>
         </xsl:if>

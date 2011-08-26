@@ -233,14 +233,49 @@
     </xsl:template>
 
     <!-- ignore attribute definitions with any name -->
-    <xsl:template match="rng:element[rng:anyName]" mode="collect-content"/>
+    <xsl:template match="rng:element[rng:anyName]" mode="collect-content">
+        <xsl:param name="condition-attr" select=""/>
+        <element>
+            <xsl:if test="$condition-attr">
+                <xsl:attribute name="condition">
+                    <xsl:value-of select="$condition-attr"/>
+                </xsl:attribute>
+            </xsl:if>
+            <anyName/>
+        </element>
+    </xsl:template>
 
     <!-- ignore name elements (they are covered by the fore-each loop already) -->
     <xsl:template match="rng:name" mode="collect-content"/>
 
     <!-- ignore data elements (they may only occure in elements here) -->
-    <xsl:template match="rng:data" mode="collect-content"/>
+    <xsl:template match="rng:data" mode="collect-content">
+        <xsl:param name="condition-attr" select=""/>
+        <data type="{@type}">
+            <xsl:if test="$condition-attr">
+                <xsl:attribute name="condition">
+                    <xsl:value-of select="$condition-attr"/>
+                </xsl:attribute>
+            </xsl:if>
+        </data>
+    </xsl:template>
     
+    <xsl:template match="rng:text" mode="collect-content">
+        <xsl:param name="condition-attr" select=""/>
+        <text>
+            <xsl:if test="$condition-attr">
+                <xsl:attribute name="condition">
+                    <xsl:value-of select="$condition-attr"/>
+                </xsl:attribute>
+            </xsl:if>
+        </text>
+    </xsl:template>
+
+    <xsl:template match="rng:empty" mode="collect-content">
+        <xsl:if test="$include-content-model">
+            <empty/>
+        </xsl:if>
+    </xsl:template>
     
     <!-- ************* -->
     <!-- ** control ** -->
@@ -262,7 +297,7 @@
                     <xsl:when test="$combine">
                         <xsl:element name="{$combine}">
                             <xsl:apply-templates
-                                select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]/*|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
+                                select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
                                 mode="collect-content">
                                 <xsl:with-param name="condition-attr" select="$condition-attr"/>
                             </xsl:apply-templates>
@@ -270,16 +305,26 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:apply-templates
-                            select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]/*|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
+                            select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
                             mode="collect-content">
                             <xsl:with-param name="condition-attr" select="$condition-attr"/>
                         </xsl:apply-templates>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
+            <xsl:when test="@name='boolean'">
+                <!-- Booleans are no XSD datatype, but should not be expanded -->
+                <ref name="boolean">
+                    <xsl:if test="$condition-attr">
+                        <xsl:attribute name="condition">
+                            <xsl:value-of select="$condition-attr"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                </ref>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates
-                    select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]/*|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
+                    select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
                     mode="collect-content">
                     <xsl:with-param name="condition-attr" select="$condition-attr"/>
                 </xsl:apply-templates>
@@ -342,23 +387,16 @@
         </xsl:choose>
     </xsl:template>
         
-    <xsl:template match="rng:text" mode="collect-content">
-        <text/>
-    </xsl:template>
-
-    <xsl:template match="rng:empty" mode="collect-content">
-        <xsl:if test="$include-content-model">
-            <empty/>
-        </xsl:if>
-    </xsl:template>
-    
     <!-- match all other elements and ignore them -->
     <xsl:template match="*" mode="collect-content">
-        <xsl:message>Ignored element &lt;<xsl:value-of select="name(.)"/>&gt;, content: <xsl:value-of select="."/>, parent: <xsl:value-of select="name(..)"/>, grandparent: <xsl:value-of select="name(../..)"/>, define name: <xsl:value-of select="ancestor::rng:define[1]/@name"/></xsl:message>
+        <xsl:param name="condition-attr" select=""/>
+        <xsl:message>Ignored element &lt;<xsl:value-of select="name(.)"/>&gt;, content: <xsl:value-of select="."/>, parent: <xsl:value-of select="name(..)"/>, grandparent: <xsl:value-of select="name(../..)"/>, define name: <xsl:value-of select="ancestor::rng:define[1]/@name"/>, condition: <xsl:value-of select="$condition-attr"/></xsl:message>
     </xsl:template>
 
     <xsl:template match="text()" mode="collect-content">
-        <!-- xsl:message>Ignored <xsl:value-of select="."/></xsl:message -->
+        <xsl:if test="string-length(normalize-space(.))>0">
+            <xsl:message>Ignored <xsl:value-of select="."/></xsl:message>
+        </xsl:if>
     </xsl:template>
         
     <!-- ********************* -->
