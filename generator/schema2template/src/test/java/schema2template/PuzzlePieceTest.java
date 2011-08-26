@@ -47,6 +47,9 @@ public class PuzzlePieceTest {
 	private static final String OUTPUT_REF_ODF10 = TEST_INPUT_ROOT + File.separator + "odf10-msvtree.ref";
 	private static final String OUTPUT_REF_ODF11 = TEST_INPUT_ROOT + File.separator + "odf11-msvtree.ref";
 	private static final String OUTPUT_REF_ODF12 = TEST_INPUT_ROOT + File.separator + "odf12-msvtree.ref";
+	private static final int ODF12_ELEMENT_DUPLICATES = 7;
+	private static final int ODF12_ATTRIBUTE_DUPLICATES = 134;
+
 
 
 	/**
@@ -149,6 +152,42 @@ public class PuzzlePieceTest {
 			// There is a difference of one wildcard "*" representing anyElement/anyAttribute
 			checkFoundNumber(allElements_ODF12.withoutMultiples(), ODF12_ELEMENT_NUMBER + 1, "element");
 			checkFoundNumber(allAttributes_ODF12.withoutMultiples(), ODF12_ATTRIBUTE_NUMBER + 1, "attribute");
+		} catch (Exception ex) {
+			Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
+			Assert.fail(ex.toString());
+		}
+	}
+
+	/**
+	 * Test: Create PuzzlePiece elements and attributes with ODF Spec 1.1 (old version, won't be changed, so
+	 * it's a good base for a test).
+	 *
+	 * <p>This test uses the ODF example, but it's meant to test the general ability to correctly
+	 * extract PuzzlePieces out of a XML schema</p>
+	 */
+	@Test
+	public void testExtractPuzzlePiecesWithDuplicates() {
+		try {
+			PuzzlePieceSet allElements_ODF12 = new PuzzlePieceSet();
+			PuzzlePieceSet allAttributes_ODF12 = new PuzzlePieceSet();
+			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF12(), allElements_ODF12, allAttributes_ODF12);
+			// There is a difference of one wildcard "*" representing anyElement/anyAttribute
+
+			int foundElementDuplicates = allElements_ODF12.size() - (ODF12_ELEMENT_NUMBER + 1);
+			int foundAttributeDuplicates = allAttributes_ODF12.size() - (ODF12_ATTRIBUTE_NUMBER + 1);
+
+			if(ODF12_ELEMENT_DUPLICATES != foundElementDuplicates){
+				String errorMsg = "There is a difference between the expected outcome of duplicates for ODF 1.2 elements.\n"
+					+ "Expected: '" + ODF12_ELEMENT_DUPLICATES + "'\tfound:'" + foundElementDuplicates;
+				LOG.severe(errorMsg);
+				Assert.fail(errorMsg);
+			}
+			if(ODF12_ATTRIBUTE_DUPLICATES != foundAttributeDuplicates){
+				String errorMsg = "There is a difference between the expected outcome of duplicates for ODF 1.2 elements.\n"
+					+ "Expected: '" + ODF12_ATTRIBUTE_DUPLICATES + "'\tfound:'" + foundAttributeDuplicates;
+				LOG.severe(errorMsg);
+				Assert.fail(errorMsg);
+			}
 		} catch (Exception ex) {
 			Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
 			Assert.fail(ex.toString());
