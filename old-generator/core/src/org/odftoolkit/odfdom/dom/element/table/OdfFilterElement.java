@@ -80,6 +80,11 @@ public abstract class OdfFilterElement extends OdfElement
     public OdfConditionSourceType getConditionSource()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "condition-source" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "self";
+        }
+
         return OdfConditionSourceType.enumValueOf( aStringVal);
     }
 
@@ -114,6 +119,11 @@ public abstract class OdfFilterElement extends OdfElement
     public Boolean getDisplayDuplicates()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "display-duplicates" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

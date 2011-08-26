@@ -67,6 +67,11 @@ public abstract class OdfTableColumnElement extends OdfStylableElement
     public Integer getNumberColumnsRepeated()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "number-columns-repeated" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "1";
+        }
+
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 
@@ -105,6 +110,11 @@ public abstract class OdfTableColumnElement extends OdfStylableElement
     public OdfVisibilityType getVisibility()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "visibility" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "visible";
+        }
+
         return OdfVisibilityType.enumValueOf( aStringVal);
     }
 

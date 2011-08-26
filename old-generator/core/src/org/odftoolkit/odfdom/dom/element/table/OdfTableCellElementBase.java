@@ -69,6 +69,11 @@ public abstract class OdfTableCellElementBase extends OdfStylableElement
     public Integer getNumberColumnsRepeated()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "number-columns-repeated" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "1";
+        }
+
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 

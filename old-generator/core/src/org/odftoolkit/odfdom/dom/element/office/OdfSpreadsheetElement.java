@@ -98,6 +98,11 @@ public abstract class OdfSpreadsheetElement extends OdfElement
     public String getProtectionKeyDigestAlgorithm()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "protection-key-digest-algorithm" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "http://www.w3.org/2000/09/xmldsig#sha1";
+        }
+
         return OdfAnyURI.valueOf( aStringVal);
     }
 

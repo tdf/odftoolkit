@@ -96,6 +96,11 @@ public abstract class OdfEllipseElement extends OdfShapeElementBase
     public OdfKindType getKind()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "kind" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "full";
+        }
+
         return OdfKindType.enumValueOf( aStringVal);
     }
 

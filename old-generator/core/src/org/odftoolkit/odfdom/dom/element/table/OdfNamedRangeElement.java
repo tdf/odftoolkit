@@ -122,6 +122,11 @@ public abstract class OdfNamedRangeElement extends OdfElement
     public OdfRangeUsableAsType getRangeUsableAs()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "range-usable-as" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "none";
+        }
+
         return OdfRangeUsableAsType.enumValueOf( aStringVal);
     }
 

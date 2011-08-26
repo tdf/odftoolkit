@@ -73,6 +73,11 @@ public abstract class OdfTimeStyleElement extends OdfElement
     public Boolean getTruncateOnOverflow()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "truncate-on-overflow" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -205,8 +210,14 @@ public abstract class OdfTimeStyleElement extends OdfElement
      * Get value of attribute "number:transliteration-format".
      */
     public String getTransliterationFormat()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "transliteration-format" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "transliteration-format" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "1";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -255,6 +266,11 @@ public abstract class OdfTimeStyleElement extends OdfElement
     public OdfTransliterationStyleType getTransliterationStyle()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "transliteration-style" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "short";
+        }
+
         return OdfTransliterationStyleType.enumValueOf( aStringVal);
     }
 
@@ -273,6 +289,11 @@ public abstract class OdfTimeStyleElement extends OdfElement
     public OdfFormatSourceType getFormatSource()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "format-source" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "fixed";
+        }
+
         return OdfFormatSourceType.enumValueOf( aStringVal);
     }
 

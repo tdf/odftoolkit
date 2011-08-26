@@ -68,6 +68,11 @@ public abstract class OdfLinenumberingConfigurationElement extends OdfStylableEl
     public Boolean getNumberLines()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "number-lines" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -158,6 +163,11 @@ public abstract class OdfLinenumberingConfigurationElement extends OdfStylableEl
     public OdfNumberPositionType getNumberPosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "number-position" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "left";
+        }
+
         return OdfNumberPositionType.enumValueOf( aStringVal);
     }
 
@@ -194,6 +204,11 @@ public abstract class OdfLinenumberingConfigurationElement extends OdfStylableEl
     public Boolean getCountEmptyLines()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "count-empty-lines" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

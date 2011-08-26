@@ -90,6 +90,11 @@ public abstract class OdfTabStopElement extends OdfElement
     public OdfTabStopType getType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "type" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "left";
+        }
+
         return OdfTabStopType.enumValueOf( aStringVal);
     }
 
@@ -192,8 +197,14 @@ public abstract class OdfTabStopElement extends OdfElement
      * Get value of attribute "style:leader-text".
      */
     public String getLeaderText()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "leader-text" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "leader-text" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = " ";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**

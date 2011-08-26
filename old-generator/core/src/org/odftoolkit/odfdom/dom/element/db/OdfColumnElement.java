@@ -76,6 +76,11 @@ public abstract class OdfColumnElement extends OdfElement
     public Boolean getVisible()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "visible" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

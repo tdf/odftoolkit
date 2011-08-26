@@ -64,6 +64,11 @@ public abstract class OdfCalculationSettingsElement extends OdfElement
     public Boolean getCaseSensitive()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "case-sensitive" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -100,6 +105,11 @@ public abstract class OdfCalculationSettingsElement extends OdfElement
     public Boolean getSearchCriteriaMustApplyToWholeCell()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "search-criteria-must-apply-to-whole-cell" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -118,6 +128,11 @@ public abstract class OdfCalculationSettingsElement extends OdfElement
     public Boolean getAutomaticFindLabels()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "automatic-find-labels" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -136,6 +151,11 @@ public abstract class OdfCalculationSettingsElement extends OdfElement
     public Boolean getUseRegularExpressions()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "use-regular-expressions" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -172,6 +192,11 @@ public abstract class OdfCalculationSettingsElement extends OdfElement
     public Integer getNullYear()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "null-year" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "1930";
+        }
+
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 

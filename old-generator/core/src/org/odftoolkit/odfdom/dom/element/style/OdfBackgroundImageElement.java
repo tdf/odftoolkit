@@ -73,6 +73,11 @@ public abstract class OdfBackgroundImageElement extends OdfElement
     public OdfRepeatType getRepeat()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "repeat" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "repeat";
+        }
+
         return OdfRepeatType.enumValueOf( aStringVal);
     }
 
@@ -91,6 +96,11 @@ public abstract class OdfBackgroundImageElement extends OdfElement
     public OdfPositionType getPosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.STYLE, "position" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "center";
+        }
+
         return OdfPositionType.enumValueOf( aStringVal);
     }
 

@@ -113,6 +113,11 @@ public abstract class OdfBibliographyConfigurationElement extends OdfElement
     public Boolean getSortByPosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "sort-by-position" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

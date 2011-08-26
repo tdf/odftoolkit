@@ -64,6 +64,11 @@ public abstract class OdfApplicationConnectionSettingsElement extends OdfElement
     public Boolean getIsTableNameLengthLimited()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "is-table-name-length-limited" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -100,6 +105,11 @@ public abstract class OdfApplicationConnectionSettingsElement extends OdfElement
     public Boolean getAppendTableAliasName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "append-table-alias-name" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -118,6 +128,11 @@ public abstract class OdfApplicationConnectionSettingsElement extends OdfElement
     public Boolean getIgnoreDriverPrivileges()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "ignore-driver-privileges" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -136,6 +151,11 @@ public abstract class OdfApplicationConnectionSettingsElement extends OdfElement
     public OdfBooleanComparisonModeType getBooleanComparisonMode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "boolean-comparison-mode" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "equal-integer";
+        }
+
         return OdfBooleanComparisonModeType.enumValueOf( aStringVal);
     }
 
@@ -190,6 +210,11 @@ public abstract class OdfApplicationConnectionSettingsElement extends OdfElement
     public Boolean getSuppressVersionColumns()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DB, "suppress-version-columns" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

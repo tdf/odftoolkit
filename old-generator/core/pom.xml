@@ -68,7 +68,7 @@
 		<goals><goal>codegen</goal></goals>
 		<configuration>
 		  <sourceRoot>${basedir}/src</sourceRoot>
-		  <schemaFile>${basedir}/../schema/OpenDocument-strict-schema-v1.1.rng</schemaFile>
+		  <schemaFile>${basedir}/../schema/OpenDocument-schema-v1.2-cd01.rng</schemaFile>
 		  <configFile>${basedir}/../codegen/config.xml</configFile>
 		  <templateFile>${basedir}/../codegen/javacodetemplate.xml</templateFile>
 		</configuration>
@@ -76,7 +76,7 @@
 	    </executions>
 	    <configuration>
 	      <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
-	      <schemaFile>${basedir}/../schema/OpenDocument-strict-schema-v1.1.rng</schemaFile>
+	      <schemaFile>${basedir}/../schema/OpenDocument-schema-v1.2-cd01.rng</schemaFile>
 	      <configFile>${basedir}/../codegen/config.xml</configFile>
 	      <templateFile>${basedir}/../codegen/javacodetemplate.xml</templateFile>
 	    </configuration>

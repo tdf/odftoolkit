@@ -83,8 +83,14 @@ public abstract class OdfColumnElement extends OdfElement
      * Get value of attribute "fo:start-indent".
      */
     public String getStartIndent()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.FO, "start-indent" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FO, "start-indent" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0cm";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -99,8 +105,14 @@ public abstract class OdfColumnElement extends OdfElement
      * Get value of attribute "fo:end-indent".
      */
     public String getEndIndent()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.FO, "end-indent" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FO, "end-indent" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0cm";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -115,8 +127,14 @@ public abstract class OdfColumnElement extends OdfElement
      * Get value of attribute "fo:space-before".
      */
     public String getSpaceBefore()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.FO, "space-before" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FO, "space-before" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0cm";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -131,8 +149,14 @@ public abstract class OdfColumnElement extends OdfElement
      * Get value of attribute "fo:space-after".
      */
     public String getSpaceAfter()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.FO, "space-after" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.FO, "space-after" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0cm";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**

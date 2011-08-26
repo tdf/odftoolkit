@@ -89,6 +89,11 @@ public abstract class OdfDdeSourceElement extends OdfElement
     public OdfConversionModeType getConversionMode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "conversion-mode" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "into-default-style-data-style";
+        }
+
         return OdfConversionModeType.enumValueOf( aStringVal);
     }
 
@@ -155,6 +160,11 @@ public abstract class OdfDdeSourceElement extends OdfElement
     public Boolean getAutomaticUpdate()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.OFFICE, "automatic-update" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

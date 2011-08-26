@@ -106,7 +106,7 @@
    <target name="gen-odf-dom-source" depends="init"
            description="Generate ODF DOM source code.">
      <java jar="${dist.dir}/ODFDOMCodeGenerator.jar" failonerror="true" fork="true">
-         <arg value="../schema/OpenDocument-schema-v1.2-cd01-rev01.rng"/>
+         <arg value="../schema/OpenDocument-schema-v1.2-cd01.rng"/>
          <arg value="../codegen/config.xml"/>
          <arg value="../codegen/javacodetemplate.xml"/>
          <arg value="${src.dir}"/>

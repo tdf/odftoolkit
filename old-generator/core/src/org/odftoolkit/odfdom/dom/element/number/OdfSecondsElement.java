@@ -63,6 +63,11 @@ public abstract class OdfSecondsElement extends OdfElement
     public OdfStyleType getStyle()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "style" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "short";
+        }
+
         return OdfStyleType.enumValueOf( aStringVal);
     }
 
@@ -81,6 +86,11 @@ public abstract class OdfSecondsElement extends OdfElement
     public Integer getDecimalPlaces()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.NUMBER, "decimal-places" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0";
+        }
+
         return Integer.valueOf( aStringVal);
     }
 

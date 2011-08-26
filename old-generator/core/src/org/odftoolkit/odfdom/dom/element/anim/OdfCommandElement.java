@@ -72,6 +72,11 @@ public abstract class OdfCommandElement extends OdfElement
     public OdfNodeType getPresentationNode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "node-type" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "default";
+        }
+
         return OdfNodeType.enumValueOf( aStringVal);
     }
 
@@ -122,6 +127,11 @@ public abstract class OdfCommandElement extends OdfElement
     public OdfPresetClassType getPresetClass()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.PRESENTATION, "preset-class" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "custom";
+        }
+
         return OdfPresetClassType.enumValueOf( aStringVal);
     }
 

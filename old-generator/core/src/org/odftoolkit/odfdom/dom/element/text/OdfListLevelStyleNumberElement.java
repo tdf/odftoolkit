@@ -156,6 +156,11 @@ public abstract class OdfListLevelStyleNumberElement extends OdfListLevelStyleEl
     public Integer getDisplayLevels()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "display-levels" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "1";
+        }
+
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 
@@ -174,6 +179,11 @@ public abstract class OdfListLevelStyleNumberElement extends OdfListLevelStyleEl
     public Integer getStartValue()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "start-value" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "1";
+        }
+
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 

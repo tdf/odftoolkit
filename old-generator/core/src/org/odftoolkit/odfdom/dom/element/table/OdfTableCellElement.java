@@ -63,6 +63,11 @@ public abstract class OdfTableCellElement extends OdfTableCellElementBase
     public Integer getNumberColumnsSpanned()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "number-columns-spanned" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "1";
+        }
+
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 
@@ -81,6 +86,11 @@ public abstract class OdfTableCellElement extends OdfTableCellElementBase
     public Integer getNumberRowsSpanned()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "number-rows-spanned" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "1";
+        }
+
         return OdfPositiveInteger.valueOf( aStringVal);
     }
 

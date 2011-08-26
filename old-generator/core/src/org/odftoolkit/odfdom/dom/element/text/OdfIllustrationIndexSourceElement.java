@@ -65,6 +65,11 @@ public abstract class OdfIllustrationIndexSourceElement extends OdfElement
     public OdfIndexScopeType getIndexScope()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "index-scope" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "document";
+        }
+
         return OdfIndexScopeType.enumValueOf( aStringVal);
     }
 
@@ -83,6 +88,11 @@ public abstract class OdfIllustrationIndexSourceElement extends OdfElement
     public Boolean getRelativeTabStopPosition()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "relative-tab-stop-position" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -101,6 +111,11 @@ public abstract class OdfIllustrationIndexSourceElement extends OdfElement
     public Boolean getUseCaption()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "use-caption" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 

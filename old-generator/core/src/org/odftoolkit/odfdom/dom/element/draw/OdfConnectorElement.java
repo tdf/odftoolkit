@@ -72,6 +72,11 @@ public abstract class OdfConnectorElement extends OdfShapeElementBase
     public OdfType getType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "type" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "standard";
+        }
+
         return OdfType.enumValueOf( aStringVal);
     }
 

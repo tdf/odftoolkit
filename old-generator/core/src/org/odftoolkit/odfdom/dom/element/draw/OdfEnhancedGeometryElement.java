@@ -67,8 +67,14 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
      * Get value of attribute "draw:type".
      */
     public String getType()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "type" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "type" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "non-primitive";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -137,8 +143,14 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
      * Get value of attribute "draw:text-rotate-angle".
      */
     public String getTextRotateAngle()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "text-rotate-angle" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "text-rotate-angle" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -227,6 +239,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Double getExtrusionBrightness()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-brightness" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "33%";
+        }
+
         return OdfPercent.valueOf( aStringVal);
     }
 
@@ -243,8 +260,14 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
      * Get value of attribute "draw:extrusion-depth".
      */
     public String getExtrusionDepth()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-depth" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-depth" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "36pt 0";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -261,6 +284,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Double getExtrusionDiffusion()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-diffusion" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0%";
+        }
+
         return OdfPercent.valueOf( aStringVal);
     }
 
@@ -279,6 +307,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Integer getExtrusionNumberOfLineSegments()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-number-of-line-segments" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "30";
+        }
+
         return Integer.valueOf( aStringVal);
     }
 
@@ -297,6 +330,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Boolean getExtrusionLightFace()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-light-face" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -315,6 +353,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Boolean getExtrusionFirstLightHarsh()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-first-light-harsh" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -333,6 +376,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Boolean getExtrusionSecondLightHarsh()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-second-light-harsh" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -351,6 +399,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Double getExtrusionFirstLightLevel()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-first-light-level" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "66%";
+        }
+
         return OdfPercent.valueOf( aStringVal);
     }
 
@@ -369,6 +422,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Double getExtrusionSecondLightLevel()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-second-light-level" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "66%";
+        }
+
         return OdfPercent.valueOf( aStringVal);
     }
 
@@ -385,8 +443,14 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
      * Get value of attribute "draw:extrusion-first-light-direction".
      */
     public String getExtrusionFirstLightDirection()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-first-light-direction" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-first-light-direction" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "(5 0 1)";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -401,8 +465,14 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
      * Get value of attribute "draw:extrusion-second-light-direction".
      */
     public String getExtrusionSecondLightDirection()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-second-light-direction" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-second-light-direction" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "(-5 0 1)";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -437,6 +507,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public OdfShadeModeType getShadeMode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DR3D, "shade-mode" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "flat";
+        }
+
         return OdfShadeModeType.enumValueOf( aStringVal);
     }
 
@@ -453,8 +528,14 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
      * Get value of attribute "draw:extrusion-rotation-angle".
      */
     public String getExtrusionRotationAngle()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-rotation-angle" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-rotation-angle" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0 0";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -487,6 +568,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Double getExtrusionShininess()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-shininess" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "50%";
+        }
+
         return OdfPercent.valueOf( aStringVal);
     }
 
@@ -505,6 +591,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Double getExtrusionSkew()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-skew" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "50 45";
+        }
+
         return Double.valueOf( aStringVal);
     }
 
@@ -523,6 +614,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Double getExtrusionSpecularity()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-specularity" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0%";
+        }
+
         return OdfPercent.valueOf( aStringVal);
     }
 
@@ -541,6 +637,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public OdfProjectionType getProjection()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DR3D, "projection" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "parallel";
+        }
+
         return OdfProjectionType.enumValueOf( aStringVal);
     }
 
@@ -557,8 +658,14 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
      * Get value of attribute "draw:extrusion-viewpoint".
      */
     public String getExtrusionViewpoint()
-    {
-        return getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-viewpoint" ) );
+    {                    
+        String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-viewpoint" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "3.5cm -3.5cm 25cm";
+        }
+
+        return String.valueOf( aStringVal);
     }
 
     /**
@@ -575,6 +682,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Double getExtrusionOrigin()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "extrusion-origin" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0.5 -0.5";
+        }
+
         return Double.valueOf( aStringVal);
     }
 
@@ -627,6 +739,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Double getPathStretchpointX()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "path-stretchpoint-x" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0";
+        }
+
         return Double.valueOf( aStringVal);
     }
 
@@ -645,6 +762,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public Double getPathStretchpointY()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "path-stretchpoint-y" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "0";
+        }
+
         return Double.valueOf( aStringVal);
     }
 
@@ -695,6 +817,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public OdfGluePointType getGluePointType()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "glue-point-type" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "none";
+        }
+
         return OdfGluePointType.enumValueOf( aStringVal);
     }
 
@@ -747,6 +874,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public OdfTextPathModeType getTextPathMode()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "text-path-mode" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "normal";
+        }
+
         return OdfTextPathModeType.enumValueOf( aStringVal);
     }
 
@@ -765,6 +897,11 @@ public abstract class OdfEnhancedGeometryElement extends OdfElement
     public OdfTextPathScaleType getTextPathScale()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.DRAW, "text-path-scale" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "path";
+        }
+
         return OdfTextPathScaleType.enumValueOf( aStringVal);
     }
 

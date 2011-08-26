@@ -108,6 +108,11 @@ public abstract class OdfScenarioElement extends OdfElement
     public Boolean getDisplayBorder()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "display-border" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -142,6 +147,11 @@ public abstract class OdfScenarioElement extends OdfElement
     public Boolean getCopyBack()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "copy-back" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -160,6 +170,11 @@ public abstract class OdfScenarioElement extends OdfElement
     public Boolean getCopyStyles()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "copy-styles" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
@@ -178,6 +193,11 @@ public abstract class OdfScenarioElement extends OdfElement
     public Boolean getCopyFormulas()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TABLE, "copy-formulas" ) );
+        if( aStringVal.length()==0 )
+        {
+            aStringVal = "true";
+        }
+
         return OdfBoolean.valueOf( aStringVal);
     }
 
