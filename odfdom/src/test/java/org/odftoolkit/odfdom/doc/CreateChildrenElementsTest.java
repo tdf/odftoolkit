@@ -31,7 +31,6 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.chart.OdfChart;
 import org.odftoolkit.odfdom.doc.chart.OdfChartPlotArea;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawPage;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeDocumentContent;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeSpreadsheet;
@@ -84,10 +83,8 @@ public class CreateChildrenElementsTest {
 	@Test
 	public void testCreatChildrenForPresentation() {
 		try {
-
-			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("presentation.odp"));
-
-			OfficePresentationElement presentation = OdfElement.findFirstChildNode(OfficePresentationElement.class, odfdoc.getOfficeBody());
+			OdfPresentationDocument odfdoc = (OdfPresentationDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("presentation.odp"));
+			OfficePresentationElement presentation = odfdoc.getContentRoot();
 			Assert.assertNotNull(presentation);
 
 			DrawPageElement page = presentation.newDrawPageElement("NewPage");
@@ -317,8 +314,8 @@ public class CreateChildrenElementsTest {
 	public void testCreatChildrenForEmbeddedDoc() {
 		try {
 			OdfDocument document = OdfTextDocument.newTextDocument();
-			document.embedDocument("Object1/", OdfTextDocument.newTextDocument());
-			OdfDocument embeddedObject1 = document.getEmbeddedDocument("Object1/");
+			document.insertDocument(OdfTextDocument.newTextDocument(), "Object1/");
+			OdfDocument embeddedObject1 = (OdfDocument) document.getEmbeddedDocument("Object1/");
 			OdfFileDom doc = embeddedObject1.getContentDom();
 			// find the last paragraph
 			NodeList lst = doc.getElementsByTagNameNS(
@@ -408,9 +405,8 @@ public class CreateChildrenElementsTest {
 	@Test
 	public void testCreatChildrenForForm() {
 		try {
-			OdfDocument doc = OdfTextDocument.newTextDocument();
-			OdfOfficeBody body = doc.getOfficeBody();
-			OfficeTextElement text = body.newOfficeTextElement();
+			OdfTextDocument doc = OdfTextDocument.newTextDocument();
+			OfficeTextElement text = doc.getContentRoot();
 			FormFormElement form = text.newFormFormElement();
 			form.setFormNameAttribute("NewFrom");
 			FormFormElement formTest = (FormFormElement) xpath.evaluate("//form:form[last()]", doc.getContentDom(), XPathConstants.NODE);
@@ -426,10 +422,8 @@ public class CreateChildrenElementsTest {
 	@Test
 	public void testCreatChildrenForAnimation() {
 		try {
-
-			OdfDocument odfdoc = OdfPresentationDocument.newPresentationDocument();
-
-			OfficePresentationElement presentation = OdfElement.findFirstChildNode(OfficePresentationElement.class, odfdoc.getOfficeBody());
+			OdfPresentationDocument odfdoc = OdfPresentationDocument.newPresentationDocument();
+			OfficePresentationElement presentation = odfdoc.getContentRoot();
 			Assert.assertNotNull(presentation);
 
 			DrawPageElement page = presentation.newDrawPageElement("NewPage");

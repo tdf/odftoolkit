@@ -52,6 +52,8 @@ import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationNotesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePresentationPageLayoutElement;
+import org.odftoolkit.odfdom.pkg.MediaType;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -62,14 +64,14 @@ import org.w3c.dom.NodeList;
  */
 public class OdfPresentationDocument extends OdfDocument {
 
-	private static String EMPTY_PRESENTATION_DOCUMENT_PATH = "/OdfPresentationDocument.odp";
-	private static Resource EMPTY_PRESENTATION_DOCUMENT_RESOURCE = new Resource(EMPTY_PRESENTATION_DOCUMENT_PATH);
+	private static final String EMPTY_PRESENTATION_DOCUMENT_PATH = "/OdfPresentationDocument.odp";
+	static final Resource EMPTY_PRESENTATION_DOCUMENT_RESOURCE = new Resource(EMPTY_PRESENTATION_DOCUMENT_PATH);
 
 	/**
 	 * This enum contains all possible media types of OdfPresentationDocument
 	 * documents.
 	 */
-	public enum OdfMediaType {
+	public enum OdfMediaType implements MediaType {
 
 		PRESENTATION(OdfDocument.OdfMediaType.PRESENTATION),
 		PRESENTATION_TEMPLATE(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE);
@@ -77,14 +79,6 @@ public class OdfPresentationDocument extends OdfDocument {
 
 		OdfMediaType(OdfDocument.OdfMediaType mediaType) {
 			this.mMediaType = mediaType;
-		}
-
-		@Override
-		/**
-		 * @return the mediatype of this document
-		 */
-		public String toString() {
-			return mMediaType.toString();
 		}
 
 		/**
@@ -97,8 +91,8 @@ public class OdfPresentationDocument extends OdfDocument {
 		/**
 		 * @return the mediatype of this document
 		 */
-		public String getName() {
-			return mMediaType.getName();
+		public String getMediaTypeString() {
+			return mMediaType.getMediaTypeString();
 		}
 
 		/**
@@ -124,7 +118,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the document could not be created
 	 */
 	public static OdfPresentationDocument newPresentationDocument() throws Exception {
-		return (OdfPresentationDocument) OdfDocument.loadTemplate(EMPTY_PRESENTATION_DOCUMENT_RESOURCE);
+		return (OdfPresentationDocument) OdfDocument.loadTemplate(EMPTY_PRESENTATION_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.PRESENTATION);
 	}
 
 	/**
@@ -133,35 +127,37 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * @throws Exception - if the template could not be created
 	 */
 	public static OdfPresentationDocument newPresentationTemplateDocument() throws Exception {
-		OdfPresentationDocument doc = (OdfPresentationDocument) OdfDocument.loadTemplate(EMPTY_PRESENTATION_DOCUMENT_RESOURCE);
+		OdfPresentationDocument doc = (OdfPresentationDocument) OdfDocument.loadTemplate(EMPTY_PRESENTATION_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE);
 		doc.changeMode(OdfMediaType.PRESENTATION_TEMPLATE);
 		return doc;
 	}
 
 	// Using static factory instead of constructor
-	protected OdfPresentationDocument() {
+	protected OdfPresentationDocument(OdfPackage pkg, String internalPath, OdfPresentationDocument.OdfMediaType odfMediaType) {
+		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
-
 	/**
 	 * Get the content root of a presentation document.
 	 *
 	 * @return content root, representing the office:presentation tag
 	 * @throws Exception if the file DOM could not be created.
 	 */
+	@Override
 	public OfficePresentationElement getContentRoot() throws Exception {
 		return super.getContentRoot(OfficePresentationElement.class);
 	}
 
 	/**
-	 * Switches this instance to the given type. This method can be used to e.g. convert
-	 * a document instance to a template and vice versa. If the type is not supported by
-	 * the concrete document instance an IllegalArgumentException is raised.
-	 * @param type
+	 * Switches this instance to the given type. This method can be used to e.g.
+	 * convert a document instance to a template and vice versa.
+	 * Changes take affect in the package when saving the document.
+	 *
+	 * @param type the compatible ODF mediatype.
 	 */
 	public void changeMode(OdfMediaType type) {
-		setMediaType(type.getOdfMediaType());
-		getPackage().setMediaType(type.toString());
+		setOdfMediaType(type.mMediaType);
 	}
+	
 	private boolean hasCheckSlideName = false;
 	//if the copy foreign slide for several times, 
 	//the same style might be copied for several times with the different name
@@ -424,7 +420,7 @@ public class OdfPresentationDocument extends OdfDocument {
 						} else {
 							//note: if refObjPath is a directory, it must end with '/'
 							fileEntry = getPackage().getFileEntry(refObjPath + "/");
-							RemoveEmbedDocument(refObjPath);
+							removeEmbeddedDocument(refObjPath);
 						}
 					}
 				}
@@ -687,12 +683,12 @@ public class OdfPresentationDocument extends OdfDocument {
 					}
 					InputStream is = srcDoc.getPackage().getInputStream(refObjPath);
 					if (is != null) {
-						String mediaType = srcDoc.getPackage().getFileEntry(refObjPath).getMediaType();
+						String mediaType = srcDoc.getPackage().getFileEntry(refObjPath).getMediaTypeString();
 						getPackage().insert(is, newObjPath, mediaType);
 					} else {
 						OdfDocument embedDoc = srcDoc.getEmbeddedDocument(refObjPath);
 						if (embedDoc != null) {
-							embedDocument(newObjPath, embedDoc);
+							insertDocument(embedDoc, newObjPath);
 						}
 					}
 				}
@@ -832,7 +828,7 @@ public class OdfPresentationDocument extends OdfDocument {
 				if ((isAppended != null) && isAppended.booleanValue() == true) {
 					continue;
 				} else {
-					styleAppendMap.put(newStyleName, new Boolean(true));
+					styleAppendMap.put(newStyleName, true);
 				}
 				OdfElement cloneForeignStyleElement = (OdfElement) cloneForeignElement(cloneStyleElement, dom, true);
 				String styleElePath = getElementPath(styleElement);
@@ -1197,7 +1193,7 @@ public class OdfPresentationDocument extends OdfDocument {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 
@@ -1215,14 +1211,14 @@ public class OdfPresentationDocument extends OdfDocument {
 		if (slideLayout.toString().equals(OdfDrawPage.SlideLayout.TITLE_ONLY.toString())) {
 			layoutName = "AL1T" + makeUniqueName();
 			try {
-				StylePresentationPageLayoutElement layout = (StylePresentationPageLayoutElement) styles.newStylePresentationPageLayoutElement(layoutName);
+				StylePresentationPageLayoutElement layout = styles.newStylePresentationPageLayoutElement(layoutName);
 				layout.newPresentationPlaceholderElement("title", "2.058cm", "1.743cm", "23.91cm", "3.507cm");
 			} catch (Exception e1) {
 				Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e1);
 			}
 			page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
 
-			DrawFrameElement frame1 = (DrawFrameElement) page.newDrawFrameElement();
+			DrawFrameElement frame1 = page.newDrawFrameElement();
 			frame1.setProperty(StyleGraphicPropertiesElement.Shadow, "true");
 			frame1.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
 			frame1.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
@@ -1234,7 +1230,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			frame1.setSvgXAttribute("1.35cm");
 			frame1.setSvgYAttribute("0.717cm");
 			frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
-			frame1.setPresentationPlaceholderAttribute(new Boolean(true));
+			frame1.setPresentationPlaceholderAttribute(true);
 			frame1.newDrawTextBoxElement();
 		} else if (slideLayout.toString().equals(OdfDrawPage.SlideLayout.TITLE_OUTLINE.toString())) {
 			layoutName = makeUniqueName();
@@ -1243,7 +1239,7 @@ public class OdfPresentationDocument extends OdfDocument {
 				if (styles == null) {
 					styles = super.getStylesDom().newOdfElement(OdfOfficeStyles.class);
 				}
-				StylePresentationPageLayoutElement layout = (StylePresentationPageLayoutElement) styles.newStylePresentationPageLayoutElement(layoutName);
+				StylePresentationPageLayoutElement layout = styles.newStylePresentationPageLayoutElement(layoutName);
 				layout.newPresentationPlaceholderElement("title", "2.058cm", "1.743cm", "23.91cm", "3.507cm");
 				layout.newPresentationPlaceholderElement("outline", "2.058cm", "1.743cm", "23.91cm", "3.507cm");
 
@@ -1253,7 +1249,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
 
 
-			DrawFrameElement frame1 = (DrawFrameElement) page.newDrawFrameElement();
+			DrawFrameElement frame1 = page.newDrawFrameElement();
 			frame1.setProperty(StyleGraphicPropertiesElement.Shadow, "true");
 			frame1.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
 			frame1.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
@@ -1265,9 +1261,9 @@ public class OdfPresentationDocument extends OdfDocument {
 			frame1.setSvgXAttribute("1.35cm");
 			frame1.setSvgYAttribute("0.717cm");
 			frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
-			frame1.setPresentationPlaceholderAttribute(new Boolean(true));
+			frame1.setPresentationPlaceholderAttribute(true);
 			frame1.newDrawTextBoxElement();
-			DrawFrameElement frame2 = (DrawFrameElement) page.newDrawFrameElement();
+			DrawFrameElement frame2 = page.newDrawFrameElement();
 
 			frame2.setProperty(StyleGraphicPropertiesElement.FillColor, "#ffffff");
 			frame2.setProperty(StyleGraphicPropertiesElement.MinHeight, "13.114");
@@ -1279,7 +1275,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			frame2.setSvgXAttribute("1.35cm");
 			frame2.setSvgYAttribute("4.337cm");
 			frame2.setPresentationClassAttribute(PresentationClassAttribute.Value.OUTLINE.toString());
-			frame2.setPresentationPlaceholderAttribute(new Boolean(true));
+			frame2.setPresentationPlaceholderAttribute(true);
 			frame2.newDrawTextBoxElement();
 		} else if (slideLayout.toString().equals(OdfDrawPage.SlideLayout.TITLE_PLUS_TEXT.toString())) {
 			layoutName = makeUniqueName();
@@ -1288,7 +1284,7 @@ public class OdfPresentationDocument extends OdfDocument {
 				if (styles == null) {
 					styles = super.getStylesDom().newOdfElement(OdfOfficeStyles.class);
 				}
-				StylePresentationPageLayoutElement layout = (StylePresentationPageLayoutElement) styles.newStylePresentationPageLayoutElement(layoutName);
+				StylePresentationPageLayoutElement layout = styles.newStylePresentationPageLayoutElement(layoutName);
 				layout.newPresentationPlaceholderElement("title", "2.058cm", "1.743cm", "23.91cm", "1.743cm");
 				layout.newPresentationPlaceholderElement("subtitle", "2.058cm", "5.838cm", "23.91cm", "13.23cm");
 
@@ -1297,7 +1293,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			}
 			page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
 
-			DrawFrameElement frame1 = (DrawFrameElement) page.newDrawFrameElement();
+			DrawFrameElement frame1 = page.newDrawFrameElement();
 			frame1.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
 			frame1.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
 			frame1.setPresentationStyleNameAttribute(frame1.getStyleName());
@@ -1308,9 +1304,9 @@ public class OdfPresentationDocument extends OdfDocument {
 			frame1.setSvgXAttribute("1.35cm");
 			frame1.setSvgYAttribute("0.717cm");
 			frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
-			frame1.setPresentationPlaceholderAttribute(new Boolean(true));
+			frame1.setPresentationPlaceholderAttribute(true);
 			frame1.newDrawTextBoxElement();
-			DrawFrameElement frame2 = (DrawFrameElement) page.newDrawFrameElement();
+			DrawFrameElement frame2 = page.newDrawFrameElement();
 			frame2.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
 			frame2.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
 			frame2.setPresentationStyleNameAttribute(frame2.getStyleName());
@@ -1321,7 +1317,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			frame2.setSvgXAttribute("1.35cm");
 			frame2.setSvgYAttribute("4.712cm");
 			frame2.setPresentationClassAttribute(PresentationClassAttribute.Value.SUBTITLE.toString());
-			frame2.setPresentationPlaceholderAttribute(new Boolean(true));
+			frame2.setPresentationPlaceholderAttribute(true);
 			frame2.newDrawTextBoxElement();
 
 		} else if (slideLayout.toString().equals(OdfDrawPage.SlideLayout.TITLE_PLUS_2_TEXT_BLOCK.toString())) {
@@ -1332,7 +1328,7 @@ public class OdfPresentationDocument extends OdfDocument {
 				if (styles == null) {
 					styles = super.getStylesDom().newOdfElement(OdfOfficeStyles.class);
 				}
-				StylePresentationPageLayoutElement layout = (StylePresentationPageLayoutElement) styles.newStylePresentationPageLayoutElement(layoutName);
+				StylePresentationPageLayoutElement layout = styles.newStylePresentationPageLayoutElement(layoutName);
 				layout.newPresentationPlaceholderElement("outline", "2.058cm", "1.743cm", "23.91cm", "1.743cm");
 				layout.newPresentationPlaceholderElement("outline", "1.35cm", "4.212cm", "11.857cm", "11.629cm");
 				layout.newPresentationPlaceholderElement("outline", "4.212cm", "13.8cm", "11.857cm", "11.629cm");
@@ -1341,7 +1337,7 @@ public class OdfPresentationDocument extends OdfDocument {
 				Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e1);
 			}
 
-			DrawFrameElement frame1 = (DrawFrameElement) page.newDrawFrameElement();
+			DrawFrameElement frame1 = page.newDrawFrameElement();
 			frame1.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
 			frame1.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
 			frame1.setPresentationStyleNameAttribute(frame1.getStyleName());
@@ -1352,9 +1348,9 @@ public class OdfPresentationDocument extends OdfDocument {
 			frame1.setSvgXAttribute("1.35cm");
 			frame1.setSvgYAttribute("0.717cm");
 			frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
-			frame1.setPresentationPlaceholderAttribute(new Boolean(true));
+			frame1.setPresentationPlaceholderAttribute(true);
 			frame1.newDrawTextBoxElement();
-			DrawFrameElement frame2 = (DrawFrameElement) page.newDrawFrameElement();
+			DrawFrameElement frame2 = page.newDrawFrameElement();
 			frame2.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
 			frame2.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
 			frame2.setPresentationStyleNameAttribute(frame2.getStyleName());
@@ -1365,9 +1361,9 @@ public class OdfPresentationDocument extends OdfDocument {
 			frame2.setSvgXAttribute("1.35cm");
 			frame2.setSvgYAttribute("4.212cm");
 			frame2.setPresentationClassAttribute(PresentationClassAttribute.Value.OUTLINE.toString());
-			frame2.setPresentationPlaceholderAttribute(new Boolean(true));
+			frame2.setPresentationPlaceholderAttribute(true);
 			frame2.newDrawTextBoxElement();
-			DrawFrameElement frame3 = (DrawFrameElement) page.newDrawFrameElement();
+			DrawFrameElement frame3 = page.newDrawFrameElement();
 			frame3.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
 			frame3.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
 			frame3.setPresentationStyleNameAttribute(frame3.getStyleName());
@@ -1378,7 +1374,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			frame3.setSvgXAttribute("13.8cm");
 			frame3.setSvgYAttribute("4.212cm");
 			frame3.setPresentationClassAttribute(PresentationClassAttribute.Value.OUTLINE.toString());
-			frame3.setPresentationPlaceholderAttribute(new Boolean(true));
+			frame3.setPresentationPlaceholderAttribute(true);
 			frame3.newDrawTextBoxElement();
 
 			page.setPresentationPresentationPageLayoutNameAttribute(layoutName);

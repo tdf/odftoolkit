@@ -97,7 +97,7 @@ public class OdfDrawImage extends DrawImageElement {
 	}
 
 	/* Helper method */
-	private String getPackagePath(String imageRef) {
+	private String getImagePackagePath(String imageRef) {
 		if (imageRef.contains(SLASH)) {
 			imageRef = imageRef.substring(imageRef.lastIndexOf(SLASH) + 1, imageRef.length());
 		}
@@ -138,12 +138,12 @@ public class OdfDrawImage extends DrawImageElement {
 	public String newImage(URI imageUri) throws Exception {
 		String imageRef = null;
 		if (!imageUri.isAbsolute()) {
-			imageRef = System.getProperty("user.dir") + '/' + imageUri.toString();			
+			imageRef = System.getProperty("user.dir") + '/' + imageUri.toString();
 		} else {
 			imageRef = imageUri.toString();
 		}
-		String mediaType = OdfFileEntry.getMediaType(imageRef);
-		String packagePath = getPackagePath(imageRef);
+		String mediaType = OdfFileEntry.getMediaTypeString(imageRef);
+		String packagePath = getImagePackagePath(imageRef);
 		mOdfPackage.insert(imageUri, packagePath, mediaType);
 		configureInsertedImage(packagePath);
 		return packagePath;

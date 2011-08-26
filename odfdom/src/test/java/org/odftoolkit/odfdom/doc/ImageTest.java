@@ -87,9 +87,7 @@ public class ImageTest {
 				}
 			};
 			addImages.performAction(doc.getContentDom().getDocumentElement(),
-					null);
-			String svante = ResourceUtilities.getTestOutput("add-images-by-uri.odt");
-			
+					null);			
 			doc.save(ResourceUtilities.getTestOutput("add-images-by-uri.odt"));
 
 		} catch (Exception e) {
@@ -125,7 +123,7 @@ public class ImageTest {
 	public void testImageInTextDocument() {
 		try {
 			OdfTextDocument doc = OdfTextDocument.newTextDocument();
-			String imagePath1 = doc.newImage(ResourceUtilities.getURI("test.jpg"));
+			String imagePath1 = doc.newImage(ResourceUtilities.getURI("testA.jpg"));
 			Assert.assertTrue(getImageCount(doc) == 1);
 			OdfDrawImage image = getImageByPath(doc, imagePath1).get(0);
 			Assert.assertTrue(image.getImageUri().toString().equals(imagePath1));

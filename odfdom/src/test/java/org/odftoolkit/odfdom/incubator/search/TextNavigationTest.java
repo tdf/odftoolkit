@@ -103,15 +103,15 @@ public class TextNavigationTest {
 
 			OdfElement thirdmatch = (OdfElement) search.getNextMatchElement(secondmatch);
 			Assert.assertNotNull(thirdmatch);
-			Assert.assertEquals("haha   delete", textProcessor.getText(thirdmatch));
+			Assert.assertEquals("indeed   delete", textProcessor.getText(thirdmatch));
 
 			OdfElement match4 = (OdfElement) search.getNextMatchElement(thirdmatch);
 			Assert.assertNotNull(match4);
-			Assert.assertEquals("different span in one single word delete haha", textProcessor.getText(match4));
+			Assert.assertEquals("different span in one single word delete indeed", textProcessor.getText(match4));
 
 			OdfElement match5 = (OdfElement) search.getNextMatchElement(match4);
 			Assert.assertNotNull(match5);
-			Assert.assertEquals("Hello delete this word delete ha delete  oyeah", textProcessor.getText(match5));
+			Assert.assertEquals("Hello delete this word delete true delete  indeed", textProcessor.getText(match5));
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -362,7 +362,7 @@ public class OdfXMLHelper {
 		Result result = null;
 		ByteArrayOutputStream baos = null;
 
-		if (pkg.hasDom(path)) {
+		if (pkg.isDomCached(path)) {
 			result = new DOMResult();
 		} else {
 			baos = new ByteArrayOutputStream();
@@ -371,7 +371,7 @@ public class OdfXMLHelper {
 
 		transform(pkg, path, templates, result);
 
-		if (pkg.hasDom(path)) {
+		if (pkg.isDomCached(path)) {
 			try {
 				pkg.insert((Document) ((DOMResult) result).getNode(), path, null);
 			} catch (Exception ex) {

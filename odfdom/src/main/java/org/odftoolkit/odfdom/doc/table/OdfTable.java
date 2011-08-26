@@ -390,7 +390,7 @@ public class OdfTable {
 		//3.0 create 4 kinds of styles
 		OdfStyle lefttopStyle=null,leftbottomStyle=null,righttopStyle=null,rightbottomStyle=null;
 		
-		if (!document.getMediaType().equals(OdfMediaType.SPREADSHEET.toString())) {
+		if (!document.getMediaTypeString().equals(OdfMediaType.SPREADSHEET.getMediaTypeString())) {
 			lefttopStyle = styles.newStyle(OdfStyleFamily.TableCell);
 			setLeftTopBorderStyleProperties(lefttopStyle);
 	

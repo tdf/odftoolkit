@@ -23,6 +23,8 @@
 package org.odftoolkit.odfdom.doc;
 
 import org.odftoolkit.odfdom.doc.office.OdfOfficeChart;
+import org.odftoolkit.odfdom.pkg.MediaType;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
 
 /**
  * This class represents an empty ODF document , which will be in general embedded
@@ -30,13 +32,13 @@ import org.odftoolkit.odfdom.doc.office.OdfOfficeChart;
  */
 public class OdfChartDocument extends OdfDocument {
 
-	private static String EMPTY_CHART_DOCUMENT_PATH = "/OdfChartDocument.odc";
-	private static Resource EMPTY_CHART_DOCUMENT_RESOURCE = new Resource(EMPTY_CHART_DOCUMENT_PATH);
+	private static final String EMPTY_CHART_DOCUMENT_PATH = "/OdfChartDocument.odc";
+	static final Resource EMPTY_CHART_DOCUMENT_RESOURCE = new Resource(EMPTY_CHART_DOCUMENT_PATH);
 
 	/**
 	 * This enum contains all possible media types of OdfChartDocument documents.
 	 */
-	public enum OdfMediaType {
+	public enum OdfMediaType implements MediaType {
 
 		CHART(OdfDocument.OdfMediaType.CHART),
 		CHART_TEMPLATE(OdfDocument.OdfMediaType.CHART_TEMPLATE);
@@ -46,26 +48,11 @@ public class OdfChartDocument extends OdfDocument {
 			this.mMediaType = mediaType;
 		}
 
-		@Override
 		/**
 		 * @return the mediatype of this document
 		 */
-		public String toString() {
-			return mMediaType.toString();
-		}
-
-		/**
-		 * @return the ODF mediatype of this document
-		 */
-		public OdfDocument.OdfMediaType getOdfMediaType() {
-			return mMediaType;
-		}
-
-		/**
-		 * @return the mediatype of this document
-		 */
-		public String getName() {
-			return mMediaType.getName();
+		public String getMediaTypeString() {
+			return mMediaType.getMediaTypeString();
 		}
 
 		/**
@@ -92,7 +79,7 @@ public class OdfChartDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the document could not be created
 	 */
 	public static OdfChartDocument newChartDocument() throws Exception {
-		return (OdfChartDocument) OdfDocument.loadTemplate(EMPTY_CHART_DOCUMENT_RESOURCE);
+		return (OdfChartDocument) OdfDocument.loadTemplate(EMPTY_CHART_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.CHART);
 	}
 
 	/**
@@ -102,13 +89,14 @@ public class OdfChartDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the template could not be created
 	 */
 	public static OdfChartDocument newChartTemplateDocument() throws Exception {
-		OdfChartDocument doc = (OdfChartDocument) OdfDocument.loadTemplate(EMPTY_CHART_DOCUMENT_RESOURCE);
+		OdfChartDocument doc = (OdfChartDocument) OdfDocument.loadTemplate(EMPTY_CHART_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.CHART_TEMPLATE);
 		doc.changeMode(OdfMediaType.CHART_TEMPLATE);
 		return doc;
 	}
 
 	// Using static factory instead of constructor
-	protected OdfChartDocument() {
+	protected OdfChartDocument(OdfPackage pkg, String internalPath, OdfChartDocument.OdfMediaType odfMediaType) {
+		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
 
 	/**
@@ -117,17 +105,18 @@ public class OdfChartDocument extends OdfDocument {
 	 * @return content root, representing the office:chart tag
 	 * @throws Exception if the file DOM could not be created.
 	 */
+	@Override
 	public OdfOfficeChart getContentRoot() throws Exception {
 		return super.getContentRoot(OdfOfficeChart.class);
 	}
 
 	/**
-	 * Switches this instance to the given type. This method can be used to e.g. convert
-	 * a document instance to a template and vice versa. 
-	 * @param type
+	 * Changes the document to the given mediatype.
+	 * This method can only be used to convert a document to a related mediatype, e.g. template.
+	 * 
+	 * @param mediaType the related ODF mimetype
 	 */
-	public void changeMode(OdfMediaType type) {
-		setMediaType(type.getOdfMediaType());
-		getPackage().setMediaType(type.toString());
+	public void changeMode(OdfMediaType mediaType) {
+		setOdfMediaType(mediaType.mMediaType);
 	}
 }

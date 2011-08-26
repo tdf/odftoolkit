@@ -55,7 +55,7 @@ public class DocumentTest {
 	private static final String TEST_FILE = "test2.odt";
 	private static final String TEST_FILE_WITHOUT_OPT = "no_size_opt.odt";
 	private static final String ODF_FORMULAR_TEST_FILE = "SimpleFormula.odf";
-	private static final String IMAGE_TEST_FILE = "test.jpg";
+	private static final String IMAGE_TEST_FILE = "testA.jpg";
 	private static final String GENERATED_INVALID_SPREADSHEET = "invalid.ods";
 	private static final String ZERO_BYTE_SPREADSHEET = "empty_file.ods";
 

@@ -33,14 +33,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.Source;
@@ -50,7 +48,6 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
-
 import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
@@ -70,7 +67,9 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta;
+import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -85,20 +84,30 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
 /** This abstract class is representing one of the possible ODF documents */
-public abstract class OdfDocument {
+public abstract class OdfDocument extends OdfPackageDocument {
 	// Static parts of file references
 
-	//private Logger mLog = Logger.getLogger(OdfDocument.class.getName());
-	private static final String TWO_DOTS = "..";
 	private static final String SLASH = "/";
-	private static final String COLON = ":";
-	private static final String EMPTY_STRING = "";
-	private String mDocumentPathInPackage = EMPTY_STRING;
+	private OdfMediaType mMediaType;
+	private OdfOfficeStyles mDocumentStyles;
+	private OdfFileDom mContentDom;
+	private OdfFileDom mStylesDom;
+	private OdfFileDom mMetaDom;
+	private OdfFileDom mSettingsDom;
+	private OdfOfficeMeta mOfficeMeta;
+	private StringBuilder mCharsForTextNode = new StringBuilder();
+	private XPath mXPath;
+
+	// Using static factory instead of constructor
+	protected OdfDocument(OdfPackage pkg, String internalPath, OdfMediaType mediaType) {
+		super(pkg, internalPath, mediaType.getMediaTypeString());
+		mMediaType = mediaType;
+	}
 
 	/**
 	 * This enum contains all possible standardized XML ODF files of the OpenDocument document.
 	 */
-	public enum OdfXMLFile {
+	public static enum OdfXMLFile {
 
 		CONTENT("content.xml"),
 		META("meta.xml"),
@@ -121,7 +130,7 @@ public abstract class OdfDocument {
 	/**
 	 * This enum contains all possible media types of OpenDocument documents.
 	 */
-	public enum OdfMediaType {
+	public enum OdfMediaType implements MediaType {
 
 		CHART("application/vnd.oasis.opendocument.chart", "odc"),
 		CHART_TEMPLATE("application/vnd.oasis.opendocument.chart-template", "otc"),
@@ -149,16 +158,9 @@ public abstract class OdfDocument {
 		}
 
 		/**
-		 * @return the ODF mediatype of this document
+		 * @return the mediatype String of this document
 		 */
-		public OdfMediaType getOdfMediaType() {
-			return this;
-		}
-
-		/**
-		 * @return the mediatype of this document
-		 */
-		public String getName() {
+		public String getMediaTypeString() {
 			return mMediaType;
 		}
 
@@ -177,6 +179,7 @@ public abstract class OdfDocument {
 		public static OdfMediaType getOdfMediaType(String mediaType) {
 			OdfMediaType odfMediaType = null;
 			if (mediaType != null) {
+
 				String mediaTypeShort = mediaType.substring(mediaType.lastIndexOf(".") + 1, mediaType.length());
 				mediaTypeShort = mediaTypeShort.replace('-', '_').toUpperCase();
 				try {
@@ -188,98 +191,17 @@ public abstract class OdfDocument {
 			}
 			return odfMediaType;
 		}
-
-		@Override
-		/**
-		 * @return the mediatype of this document
-		 */
-		public String toString() {
-			return mMediaType;
-		}
-	}
-
-	/**
-	 * Creates one of the ODF documents based a given mediatype.
-	 *
-	 * @param odfMediaType The ODF Mediatype of the ODF document to be created.
-	 * @return The ODF document, which mediatype dependends on the parameter or
-	 *	NULL if media type were not supported.
-	 */
-	private static OdfDocument newDocument(OdfMediaType odfMediaType, OdfPackage pkg) {
-		OdfDocument newDoc = null;
-		if (odfMediaType == OdfMediaType.TEXT
-				|| odfMediaType == OdfMediaType.TEXT_MASTER
-				|| odfMediaType == OdfMediaType.TEXT_TEMPLATE
-				|| odfMediaType == OdfMediaType.TEXT_WEB) {
-			newDoc = new OdfTextDocument();
-
-		} else if (odfMediaType == OdfMediaType.SPREADSHEET
-				|| odfMediaType == OdfMediaType.SPREADSHEET_TEMPLATE) {
-			newDoc = new OdfSpreadsheetDocument();
-
-		} else if (odfMediaType == OdfMediaType.PRESENTATION
-				|| odfMediaType == OdfMediaType.PRESENTATION_TEMPLATE) {
-			newDoc = new OdfPresentationDocument();
-
-		} else if (odfMediaType == OdfMediaType.GRAPHICS
-				|| odfMediaType == OdfMediaType.GRAPHICS_TEMPLATE) {
-			newDoc = new OdfGraphicsDocument();
-
-		} else if (odfMediaType == OdfMediaType.CHART
-				|| odfMediaType == OdfMediaType.CHART_TEMPLATE) {
-			newDoc = new OdfChartDocument();
-		} else if (odfMediaType == OdfMediaType.IMAGE
-				|| odfMediaType == OdfMediaType.IMAGE_TEMPLATE) {
-			newDoc = new OdfImageDocument();
-
-		} else {
-			// if MediaType is not supported
-			return null;
-		}
-		newDoc.setMediaType(odfMediaType);
-		newDoc.setPackage(pkg);
-		return newDoc;
-	}
-	private OdfMediaType mMediaType;
-	private OdfPackage mPackage;
-	private OdfOfficeStyles mDocumentStyles;
-	private OdfFileDom mContentDom;
-	private OdfFileDom mStylesDom;
-	private OdfFileDom mMetaDom;
-	private OdfOfficeMeta mOfficeMeta;
-	private StringBuilder mCharsForTextNode = new StringBuilder();
-//    private OdfFileDom mSettingsDom;
-//    private OdfFileDom mMetaDom;
-	private XPath mXPath;
-	private Map<String, OdfDocument> mCachedDocuments = new HashMap<String, OdfDocument>();
-	private OdfDocument mRootDocument;
-
-	static protected class Resource {
-
-		private String name;
-
-		public Resource(String name) {
-			this.name = name;
-		}
-
-		public InputStream createInputStream() {
-			InputStream in = OdfDocument.class.getResourceAsStream(this.name);
-			if (in == null) {
-				Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE,
-						"Could not find resource: " + this.name);
-			}
-			return in;
-		}
 	}
 
 	/**
 	 * Loads an OpenDocument from the given resource
-	 * @param res a resource containing the document
+	 * @param res a resource containing a package with a root document
+	 * @param odfMediaType the media type of the root document
 	 * @return the OpenDocument document
 	 *		  or NULL if the media type is not supported by ODFDOM.
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
-	static protected OdfDocument loadTemplate(Resource res) throws Exception {
+	static protected OdfDocument loadTemplate(Resource res, OdfMediaType odfMediaType) throws Exception {
 		InputStream in = res.createInputStream();
 		OdfPackage pkg = null;
 		try {
@@ -287,11 +209,7 @@ public abstract class OdfDocument {
 		} finally {
 			in.close();
 		}
-		OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(pkg.getMediaType());
-		if (odfMediaType == null) {
-			throw new IllegalArgumentException("Document contains incorrect ODF Mediatype '" + pkg.getMediaType() + "'");
-		}
-		return newDocument(odfMediaType, pkg);
+		return newDocument(pkg, ROOT_DOCUMENT_PATH, odfMediaType);
 	}
 
 	/**
@@ -300,18 +218,18 @@ public abstract class OdfDocument {
 	 * <p>OdfDocument relies on the file being available for read access over
 	 * the whole lifecycle of OdfDocument.</p>
 	 *
-	 * @param path - the path from where the document can be loaded
+	 * @param documentPath - the path from where the document can be loaded
 	 * @return the OpenDocument from the given path
 	 *		  or NULL if the media type is not supported by ODFDOM.
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
-	public static OdfDocument loadDocument(String path) throws Exception {
-		OdfPackage pkg = OdfPackage.loadPackage(path);
-		OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(pkg.getMediaType());
+	public static OdfDocument loadDocument(String documentPath) throws Exception {
+		OdfPackage pkg = OdfPackage.loadPackage(documentPath);
+		OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(pkg.getMediaTypeString());
 		if (odfMediaType == null) {
-			throw new IllegalArgumentException("Document contains incorrect ODF Mediatype '" + pkg.getMediaType() + "'");
+			throw new IllegalArgumentException("Document contains incorrect ODF Mediatype '" + pkg.getMediaTypeString() + "'");
 		}
-		return newDocument(odfMediaType, pkg);
+		return newDocument(pkg, ROOT_DOCUMENT_PATH, odfMediaType);
 	}
 
 	/**
@@ -319,7 +237,7 @@ public abstract class OdfDocument {
 	 *
 	 * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
 	 * read access needed by OdfDocument, the InputStream is cached. This usually
-	 * takes more time compared to the other loadDocument methods.
+	 * takes more time compared to the other createInternalDocument methods.
 	 * An advantage of caching is that there are no problems overwriting
 	 * an input file.</p>
 	 *
@@ -352,117 +270,215 @@ public abstract class OdfDocument {
 	 * @throws java.lang.Exception - if the ODF document could not be created.
 	 */
 	public static OdfDocument loadDocument(OdfPackage odfPackage) throws Exception {
-		OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(odfPackage.getMediaType());
+		OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(odfPackage.getMediaTypeString());
 		if (odfMediaType == null) {
-			throw new IllegalArgumentException("Document contains incorrect ODF Mediatype '" + odfPackage.getMediaType() + "'");
+			throw new IllegalArgumentException("Document contains incorrect ODF Mediatype '" + odfPackage.getMediaTypeString() + "'");
 		}
-		OdfDocument odfDocument = newDocument(odfMediaType, odfPackage);
-		odfDocument.setRootDocument(odfDocument);
-		return odfDocument;
+		return newDocument(odfPackage, ROOT_DOCUMENT_PATH, odfMediaType);
+	}
+
+	//return null if the media type can not be recognized.
+	private static OdfDocument loadDocumentFromTemplate(OdfMediaType odfMediaType) throws Exception {
+
+		final Resource documentTemplate;
+		switch (odfMediaType) {
+			case TEXT:
+			case TEXT_TEMPLATE:
+			case TEXT_MASTER:
+			case TEXT_WEB:
+				documentTemplate = OdfTextDocument.EMPTY_TEXT_DOCUMENT_RESOURCE;
+				break;
+
+			case SPREADSHEET:
+			case SPREADSHEET_TEMPLATE:
+				documentTemplate = OdfSpreadsheetDocument.EMPTY_SPREADSHEET_DOCUMENT_RESOURCE;
+				break;
+
+			case PRESENTATION:
+			case PRESENTATION_TEMPLATE:
+				documentTemplate = OdfPresentationDocument.EMPTY_PRESENTATION_DOCUMENT_RESOURCE;
+				break;
+
+			case GRAPHICS:
+			case GRAPHICS_TEMPLATE:
+				documentTemplate = OdfGraphicsDocument.EMPTY_GRAPHICS_DOCUMENT_RESOURCE;
+				break;
+
+			case CHART:
+			case CHART_TEMPLATE:
+				documentTemplate = OdfChartDocument.EMPTY_CHART_DOCUMENT_RESOURCE;
+				break;
+
+			case IMAGE:
+			case IMAGE_TEMPLATE:
+				documentTemplate = OdfImageDocument.EMPTY_IMAGE_DOCUMENT_RESOURCE;
+				break;
+
+			default:
+				documentTemplate = null;
+				break;
+		}
+		return OdfDocument.loadTemplate(documentTemplate, odfMediaType);
 	}
 
 	/**
-	 * Returns an OdfDocument from an embedded OdfDocument referenced by an internal path.
-	 * @param containerDocument the OdfDocument which contains the embedded OdfDocument.
-	 * @param pkgPathToChildDocument the path to the directory of the embedded ODF document (relative to ODF package root).
-	 * @throws java.lang.Exception - if the document could not be created
+	 * Creates one of the ODF documents based a given mediatype.
+	 *
+	 * @param odfMediaType The ODF Mediatype of the ODF document to be created.
+	 * @return The ODF document, which mediatype dependends on the parameter or
+	 *	NULL if media type were not supported.
 	 */
-	private static OdfDocument loadDocument(OdfDocument parentDocument, String pkgPathToChildDocument, String mediaType) throws Exception {
-		OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(mediaType);
+	private static OdfDocument newDocument(OdfPackage pkg, String internalDocumentPath, OdfMediaType odfMediaType) {
 		OdfDocument newDoc = null;
-		if (odfMediaType.equals(OdfMediaType.TEXT)) {
-			newDoc = OdfTextDocument.newTextDocument();
-		} else if (odfMediaType.equals(OdfMediaType.TEXT_MASTER)) {
-			newDoc = OdfTextDocument.newTextMasterDocument();
-		} else if (odfMediaType.equals(OdfMediaType.TEXT_TEMPLATE)) {
-			newDoc = OdfTextDocument.newTextTemplateDocument();
-		} else if (odfMediaType.equals(OdfMediaType.TEXT_WEB)) {
-			newDoc = OdfTextDocument.newTextWebDocument();
-		} else if (odfMediaType.equals(OdfMediaType.SPREADSHEET)) {
-			newDoc = OdfSpreadsheetDocument.newSpreadsheetDocument();
-		} else if (odfMediaType.equals(OdfMediaType.SPREADSHEET_TEMPLATE)) {
-			newDoc = OdfSpreadsheetDocument.newSpreadsheetTemplateDocument();
-		} else if (odfMediaType.equals(OdfMediaType.PRESENTATION)) {
-			newDoc = OdfPresentationDocument.newPresentationDocument();
-		} else if (odfMediaType.equals(OdfMediaType.PRESENTATION_TEMPLATE)) {
-			newDoc = OdfPresentationDocument.newPresentationTemplateDocument();
-		} else if (odfMediaType.equals(OdfMediaType.GRAPHICS)) {
-			newDoc = OdfGraphicsDocument.newGraphicsDocument();
-		} else if (odfMediaType.equals(OdfMediaType.GRAPHICS_TEMPLATE)) {
-			newDoc = OdfGraphicsDocument.newGraphicsTemplateDocument();
-		} else if (odfMediaType.equals(OdfMediaType.CHART)) {
-			newDoc = OdfChartDocument.newChartDocument();
-		} else if (odfMediaType.equals(OdfMediaType.CHART_TEMPLATE)) {
-			newDoc = OdfChartDocument.newChartTemplateDocument();
+		switch (odfMediaType) {
+			case TEXT:
+				newDoc = new OdfTextDocument(pkg, internalDocumentPath, OdfTextDocument.OdfMediaType.TEXT);
+				break;
+
+			case TEXT_TEMPLATE:
+				newDoc = new OdfTextDocument(pkg, internalDocumentPath, OdfTextDocument.OdfMediaType.TEXT_TEMPLATE);
+				break;
+
+			case TEXT_MASTER:
+				newDoc = new OdfTextDocument(pkg, internalDocumentPath, OdfTextDocument.OdfMediaType.TEXT_MASTER);
+				break;
+
+			case TEXT_WEB:
+				newDoc = new OdfTextDocument(pkg, internalDocumentPath, OdfTextDocument.OdfMediaType.TEXT_WEB);
+				break;
+
+			case SPREADSHEET:
+				newDoc = new OdfSpreadsheetDocument(pkg, internalDocumentPath, OdfSpreadsheetDocument.OdfMediaType.SPREADSHEET);
+				break;
+
+			case SPREADSHEET_TEMPLATE:
+				newDoc = new OdfSpreadsheetDocument(pkg, internalDocumentPath, OdfSpreadsheetDocument.OdfMediaType.SPREADSHEET_TEMPLATE);
+				break;
+
+			case PRESENTATION:
+				newDoc = new OdfPresentationDocument(pkg, internalDocumentPath, OdfPresentationDocument.OdfMediaType.PRESENTATION);
+				break;
+
+			case PRESENTATION_TEMPLATE:
+				newDoc = new OdfPresentationDocument(pkg, internalDocumentPath, OdfPresentationDocument.OdfMediaType.PRESENTATION_TEMPLATE);
+				break;
+
+			case GRAPHICS:
+				newDoc = new OdfGraphicsDocument(pkg, internalDocumentPath, OdfGraphicsDocument.OdfMediaType.GRAPHICS);
+				break;
+
+			case GRAPHICS_TEMPLATE:
+				newDoc = new OdfGraphicsDocument(pkg, internalDocumentPath, OdfGraphicsDocument.OdfMediaType.GRAPHICS_TEMPLATE);
+				break;
+
+			case CHART:
+				newDoc = new OdfChartDocument(pkg, internalDocumentPath, OdfChartDocument.OdfMediaType.CHART);
+				break;
+
+			case CHART_TEMPLATE:
+				newDoc = new OdfChartDocument(pkg, internalDocumentPath, OdfChartDocument.OdfMediaType.CHART_TEMPLATE);
+				break;
+
+			case IMAGE:
+				newDoc = new OdfImageDocument(pkg, internalDocumentPath, OdfImageDocument.OdfMediaType.IMAGE);
+				break;
+
+			case IMAGE_TEMPLATE:
+				newDoc = new OdfImageDocument(pkg, internalDocumentPath, OdfImageDocument.OdfMediaType.IMAGE_TEMPLATE);
+				break;
+
+			default:
+				newDoc = null;
+				break;
 		}
-		newDoc.setDocumentPathInPackage(pkgPathToChildDocument);
-		if (newDoc.isRootDocument()) {
-			newDoc.setRootDocument(newDoc);
-		} else {
-			newDoc.setRootDocument(parentDocument);
-		}
-		newDoc.setPackage(parentDocument.getPackage());
+		// returning null if MediaType is not supported
 		return newDoc;
 	}
 
 	/**
-	 * Sets the root OdfDocument that determines the mediatype of the package.
+	 * Returns an embedded OdfPackageDocument from the given package path.
 	 *
-	 * @param root the OdfDocument that has its file on the root level of the package
+	 * @param internalDocumentPath path to the directory of the embedded ODF document (relative to ODF package root).
+	 * @return an embedded OdfPackageDocument
 	 */
-	protected void setRootDocument(OdfDocument root) {
-		mRootDocument = root;
+	public OdfDocument getEmbeddedDocument(String internalDocumentPath) {
+
+		internalDocumentPath = normalizeDocumentPath(internalDocumentPath);
+		OdfDocument embeddedDocument = (OdfDocument) mPackage.getOpenPackageDocument(internalDocumentPath);
+		// if the document was not already loaded, fine mimetype and create a new instance
+		if (embeddedDocument == null) {
+			try {
+				OdfFileEntry entry = mPackage.getFileEntry(internalDocumentPath);
+				// if the document is not in the package, the return is NULL
+				if (entry != null) {
+					String mediaTypeOfEmbeddedDoc = entry.getMediaTypeString();
+					// if there is no mediaType, the return is NULL
+					if (mediaTypeOfEmbeddedDoc != null) {
+						return embeddedDocument = newDocument(mPackage, internalDocumentPath, OdfMediaType.getOdfMediaType(mediaTypeOfEmbeddedDoc));
+					}
+				}
+			} catch (Exception ex) {
+				Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+		return embeddedDocument;
 	}
 
 	/**
-	 * Retreives the root OdfDocument that determines the mediatype of the package.
-	 *
-	 * @return the OdfDocument that has its file on the root level of the package
+	 * Method returns all embedded OdfPackageDocuments, which match a valid OdfMediaType,
+	 * of the current OdfPackageDocument.
+	 * @return a list with all embedded documents of the current OdfPackageDocument
 	 */
-	protected OdfDocument getRootDocument() {
-		return mRootDocument;
+	// ToDo: (Issue 219 - PackageRefactoring) - Better return Path of Documents??
+	public List<OdfDocument> getEmbeddedDocuments() {
+		List<OdfDocument> embeddedObjects = new ArrayList<OdfDocument>();
+		// ToDo: (Issue 219 - PackageRefactoring) - Algorithm enhancement:
+		// Instead going through all the files for each mimetype, better
+		// Check all files, which have a mimetype if it is one of the desired, perhaps start with ODF prefix
+		for (OdfMediaType mediaType : OdfMediaType.values()) {
+			embeddedObjects.addAll(getEmbeddedDocuments(mediaType));
+		}
+		return embeddedObjects;
 	}
 
 	/**
-	 * Sets the OdfPackage that contains this OdfDocument.
-	 *
-	 * @param pkg the OdfPackage that contains this OdfDocument
+	 * Method returns all embedded OdfPackageDocuments of the current OdfPackageDocument matching the
+	 * according MediaType. This is done by matching the subfolder entries of the
+	 * manifest file with the given OdfMediaType.
+	 * @param mediaType media type which is used as a filter
+	 * @return embedded documents of the current OdfPackageDocument matching the given media type
 	 */
-	protected void setPackage(OdfPackage pkg) {
-		mPackage = pkg;
-	}
-
-	/**
-	 * Retreives the OdfPackage for this OdfDocument.
-	 *
-	 * @return the OdfPackage that contains this OdfDocument.
-	 */
-	public OdfPackage getPackage() {
-		return mPackage;
+	public List<OdfDocument> getEmbeddedDocuments(OdfMediaType mediaType) {
+		String mediaTypeString = mediaType.getMediaTypeString();
+		Set<String> manifestEntries = mPackage.getFileEntries();
+		List<OdfDocument> embeddedObjects = new ArrayList<OdfDocument>();
+		// check manifest for current embedded OdfPackageDocuments
+		for (String entry : manifestEntries) {
+			// with entry greater one the root document is not within
+			if (entry.length() > 1 && entry.endsWith(SLASH)) {
+				String entryMediaType = mPackage.getFileEntry(entry).getMediaTypeString();
+				if (entryMediaType.equals(mediaTypeString)) {
+					embeddedObjects.add(getEmbeddedDocument(entry));
+				}
+			}
+		}
+		return embeddedObjects;
 	}
 
 	/**
 	 * Sets the media type of the OdfDocument
 	 * @param odfMediaType media type to be set
 	 */
-	protected void setMediaType(OdfMediaType odfMediaType) {
+	protected void setOdfMediaType(OdfMediaType odfMediaType) {
 		mMediaType = odfMediaType;
+		super.setMediaTypeString(odfMediaType.getMediaTypeString());
 	}
 
 	/**
-	 * Set the relative path for an embedded ODF document.
-	 * @param path to directory of the embedded ODF document (relative to ODF package root).
+	 * Gets the media type of the OdfDocument
 	 */
-	private void setDocumentPathInPackage(String path) {
-		mDocumentPathInPackage = ensureValidPackagePath(path);
-	}
-
-	/**
-	 * Get the relative path for an embedded ODF document.
-	 * @return path to the directory of the embedded ODF document (relative to ODF package root).
-	 */
-	public String getDocumentPackagePath() {
-		return mDocumentPathInPackage;
+	protected OdfMediaType getOdfMediaType() {
+		return mMediaType;
 	}
 
 	/**
@@ -472,63 +488,6 @@ public abstract class OdfDocument {
 	 */
 	protected String getXMLFilePath(OdfXMLFile file) {
 		return getDocumentPackagePath() + file.mFileName;
-	}
-
-	/**
-	 * Add an OdfDocument as an embedded OdfDocument to the current OdfDocument
-	 * @param pkgPathToChildDocument path to the directory of the embedded ODF document (always relative to ODF package root).
-	 * @param newOdfDocument the OdfDocument to be embedded
-	 */
-	public void embedDocument(String pkgPathToChildDocument, OdfDocument newOdfDocument) {
-		newOdfDocument.insertDOMsToPkg();
-		// Gets the odfDocument's manifest entry info, no matter it is a independent document or an embedDocument.
-		HashMap<String, OdfFileEntry> copyEntryMap;
-		if (newOdfDocument.isRootDocument()) {
-			copyEntryMap = newOdfDocument.getPackage().getManifestEntries();
-		} else {
-			copyEntryMap = new HashMap<String, OdfFileEntry>();
-			String fileEntryPrefix = newOdfDocument.getDocumentPackagePath();
-			HashMap<String, OdfFileEntry> rootEntries = newOdfDocument.getRootDocument().getPackage().getManifestEntries();
-			Set<String> rootEntryNameSet = newOdfDocument.getRootDocument().getPackage().getFileEntries();
-			for (String entryName : rootEntryNameSet) {
-				if (entryName.startsWith(fileEntryPrefix)) {
-					String newEntryName = entryName.substring(fileEntryPrefix.length());
-					OdfFileEntry srcFileEntry=rootEntries.get(entryName);
-					OdfFileEntry newFileEntry=new OdfFileEntry();
-					newFileEntry.setEncryptionData(srcFileEntry.getEncryptionData());
-					newFileEntry.setMediaType(srcFileEntry.getMediaType());
-					newFileEntry.setPath(newEntryName);
-					newFileEntry.setSize(srcFileEntry.getSize());			
-					copyEntryMap.put(entryName, newFileEntry);
-				}
-			}
-		}
-		//reset mRootDocument
-		if (isRootDocument()) {
-			newOdfDocument.mRootDocument = this;
-		} else {
-			newOdfDocument.mRootDocument = this.mRootDocument;
-		}
-		//insert to package and add it to the Manifest
-		newOdfDocument.setDocumentPathInPackage(pkgPathToChildDocument);
-		Set<String> entryNameList = copyEntryMap.keySet();
-		for (String entryName : entryNameList) {
-			OdfFileEntry entry = copyEntryMap.get(entryName);
-			if (entry != null) {
-				try {
-					if (entryName.equalsIgnoreCase(SLASH)) {
-						mPackage.insert((byte[]) null, newOdfDocument.getDocumentPackagePath(), entry.getMediaType());
-                    } else {
-						mPackage.insert(newOdfDocument.getPackage().getInputStream(entryName),(newOdfDocument.getDocumentPackagePath() + entry.getPath()), entry.getMediaType());
-					}
-				} catch (Exception ex) {
-					Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
-				}
-			}
-		}
-		//make sure the embedDocument's media type is right set.
-		OdfFileEntry embedDocumentRootEntry = new OdfFileEntry(newOdfDocument.getDocumentPackagePath(), newOdfDocument.getMediaType());
-		mPackage.getManifestEntries().put(newOdfDocument.getDocumentPackagePath(), embedDocumentRootEntry);
 	}
 
 	/**
@@ -554,7 +513,7 @@ public abstract class OdfDocument {
 	/**
 	 * Gets the ODF settings.xml file as stream.
 	 *
-	 * @return - a stream of the ODF metadata 'setting.xml' file
+	 * @return - a stream of the ODF settings 'setting.xml' file
 	 * @throws java.lang.Exception - if the stream can not be extracted
 	 */
 	public InputStream getSettingsStream() throws Exception {
@@ -577,102 +536,8 @@ public abstract class OdfDocument {
 	 */
 	public String getBaseURI() {
 		return mPackage.getBaseURI();
-	}
 
-	/**
-	 * Returns an embedded OdfDocument of the current OdfDocument matching to the internal package path
-	 * given as an parameter. Once loaded embedded OdfDocuments are cached for later use.
-	 *
-	 * @param pathToObject path to the directory of the embedded ODF document (relative to ODF package root).
-	 * @return an embedded OdfDocument
-	 */
-	public OdfDocument getEmbeddedDocument(String pathToObject) {
-		OdfDocument cachedDocument;
-		pathToObject = ensureValidPackagePath(pathToObject);
-		try {
-			OdfFileEntry entry = mPackage.getFileEntry(pathToObject);
-			//entry might be null if the odf package does not contain the specified path
-			if(entry != null){
-				String mediaTypeOfEmbeddedDoc = entry.getMediaType();
-				if (mediaTypeOfEmbeddedDoc != null) {
-					// look if OdfDocument was already created, if so return reference, otherwise create OdfDocument.OdfDocument
-					if ((cachedDocument = lookupDocumentCache(pathToObject)) != null) {
-						return cachedDocument;
-					} else {
-						OdfDocument newDoc = OdfDocument.loadDocument(this, pathToObject, mediaTypeOfEmbeddedDoc);
-						addToCache(newDoc.getDocumentPackagePath(), newDoc);
-						return newDoc;
-					}
-				}
-			}
-		} catch (Exception ex) {
-			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		return null;
-	}
 
-	/**
-	 * Method returns all embedded OdfDocuments of the current OdfDocument matching the
-	 * according MediaType. This is done by matching the subfolder entries of the
-	 * manifest file with the given OdfMediaType.
-	 * @param mediaType media type which is used as a filter
-	 * @return embedded documents of the current OdfDocument matching the given media type
-	 */
-	public List<OdfDocument> getEmbeddedDocuments(OdfMediaType mediaType) {
-		Set<String> manifestEntries = this.getPackage().getFileEntries();
-		List<OdfDocument> embeddedObjects = new ArrayList<OdfDocument>();
-		// check manifest for current embedded OdfDocuments
-		for (String entry : manifestEntries) {
-			if (entry.length() > 1 && entry.endsWith(SLASH)) {
-				String entryMediaType = getPackage().getFileEntry(entry).getMediaType();
-				if (entryMediaType.equals(mediaType.toString())) {
-					embeddedObjects.add(getEmbeddedDocument(entry));
-				}
-			}
-		}
-		return embeddedObjects;
-	}
-
-	/**
-	 * Method returns all embedded OdfDocuments, which match a valid OdfMediaType,
-	 * of the current OdfDocument.
-	 * @return a list with all embedded documents of the current odfDocument
-	 */
-	public List<OdfDocument> getEmbeddedDocuments() {
-		List<OdfDocument> embeddedObjects = new ArrayList<OdfDocument>();
-		for (OdfMediaType mediaType : OdfMediaType.values()) {
-			embeddedObjects.addAll(getEmbeddedDocuments(mediaType));
-		}
-		return embeddedObjects;
-	}
-
-	private OdfDocument lookupDocumentCache(String pathToObject) {
-		Map<String, OdfDocument> documentCache;
-		if (isRootDocument()) {
-			documentCache = mCachedDocuments;
-		} else {
-			documentCache = mRootDocument.mCachedDocuments;
-		}
-		if (documentCache != null && documentCache.containsKey(pathToObject)) {
-			return documentCache.get(pathToObject);
-		}
-		return null;
-	}
-
-	private void addToCache(String pathToObject, OdfDocument document) {
-		if (isRootDocument()) {
-			mCachedDocuments.put(pathToObject, document);
-		} else {
-			mRootDocument.mCachedDocuments.put(pathToObject, document);
-		}
-	}
-
-	private boolean isRootDocument() {
-		if (getDocumentPackagePath().equals(EMPTY_STRING)) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**
@@ -706,10 +571,8 @@ public abstract class OdfDocument {
 			try {
 				OdfFileDom stylesDom = getStylesDom();
 				Node parent = stylesDom != null ? stylesDom.getFirstChild() : null;
-
 				if (parent != null) {
 					mDocumentStyles = OdfElement.findFirstChildNode(OdfOfficeStyles.class, parent);
-
 					if (mDocumentStyles == null) {
 						mDocumentStyles = stylesDom.newOdfElement(OdfOfficeStyles.class);
 						parent.insertBefore(mDocumentStyles, parent.getFirstChild());
@@ -738,7 +601,7 @@ public abstract class OdfDocument {
 	}
 
 	/**
-	 * Return the ODF type-based content DOM of the current OdfDocument
+	 * Return the ODF type-based content DOM of the content.xml
 	 * @return ODF type-based content DOM
 	 * @throws Exception if content DOM could not be initialized
 	 */
@@ -750,7 +613,7 @@ public abstract class OdfDocument {
 	}
 
 	/**
-	 * Return the ODF type-based content DOM of the current OdfDocument
+	 * Return the ODF type-based styles DOM of the styles.xml
 	 * @return ODF type-based styles DOM
 	 * @throws Exception if styles DOM could not be initialized
 	 */
@@ -762,7 +625,7 @@ public abstract class OdfDocument {
 	}
 
 	/**
-	 * Return the ODF type-based content DOM of the meta.xml
+	 * Return the ODF type-based metadata DOM of the meta.xml
 	 * 
 	 * @return ODF type-based meta DOM
 	 * @throws Exception if meta DOM could not be initialized
@@ -772,6 +635,19 @@ public abstract class OdfDocument {
 			mMetaDom = getFileDom(OdfXMLFile.META);
 		}
 		return mMetaDom;
+	}
+
+	/**
+	 * Return the ODF type-based settings DOM of the settings.xml
+	 *
+	 * @return ODF type-based settings DOM
+	 * @throws Exception if settings DOM could not be initialized
+	 */
+	public OdfFileDom getSettingsDom() throws Exception {
+		if (mSettingsDom == null) {
+			mSettingsDom = getFileDom(OdfXMLFile.SETTINGS);
+		}
+		return mSettingsDom;
 	}
 
 	/**
@@ -789,63 +665,20 @@ public abstract class OdfDocument {
 	}
 
 	/**
-	 * Get the media type from document
-	 *
-	 * @return the mMediaType string of this package
-	 */
-	public String getMediaType() {
-		return mMediaType.getName();
-	}
-
-	/**
-	 * Save the document to given path.Delegate to the root document
-	 * and save possible embedded OdfDocuments.
+	 * Save the document to given path.
+	 * 
+	 * <p>When save the embedded document to a stand alone document,
+	 * all the file entries of the embedded document will be copied to a new document package.
+	 * If the embedded document is outside of the current document directory, 
+	 * you have to embed it to the sub directory and refresh the link of the embedded document.
+	 * You should reload it from the given path to get the saved embedded document.
+	 * 
 	 * @param path - the path to the file
 	 * @throws java.lang.Exception  if the document could not be saved
 	 */
 	public void save(String path) throws Exception {
-		this.optimize();
-		if (!isRootDocument() && mRootDocument != null) {
-			mRootDocument.save(path);
-		} else {
-			if (!mCachedDocuments.isEmpty()) {
-				for (String odfDocPath : mCachedDocuments.keySet()) {
-					mCachedDocuments.get(odfDocPath).saveEmbeddedDoc();
-				}
-			}
-			insertDOMsToPkg();
-			mPackage.save(path);
-		}
-	}
-
-	/**
-	 * Save the document to given file. Delegate to the root document
-	 * and save possible embedded OdfDocuments.
-	 *
-	 * <p>If the input file has been cached (this is the case when loading from an
-	 * InputStream), the input file can be overwritten.</p>
-	 *
-	 * <p>Otherwise it's allowed to overwrite the input file as long as
-	 * the same path name is used that was used for loading (no symbolic link
-	 * foo2.odt pointing to the loaded file foo1.odt, no network path X:\foo.odt
-	 * pointing to the loaded file D:\foo.odt).</p>
-	 *
-	 * @param file - the file to save the document
-	 * @throws java.lang.Exception  if the document could not be saved
-	 */
-	public void save(File file) throws Exception {
-		this.optimize();
-		if (!isRootDocument() && mRootDocument != null) {
-			mRootDocument.save(file);
-		} else {
-			if (!mCachedDocuments.isEmpty()) {
-				for (String odfDocPath : mCachedDocuments.keySet()) {
-					mCachedDocuments.get(odfDocPath).saveEmbeddedDoc();
-				}
-			}
-			insertDOMsToPkg();
-			mPackage.save(file);
-		}
+		File f = new File(path);
+		this.save(f);
 	}
 
 	/**
@@ -858,41 +691,65 @@ public abstract class OdfDocument {
 	 * <p>If not, the OutputStream may not point to the input file! Otherwise
 	 * this will result in unwanted behaviour and broken files.</p>
 	 *
+	 * <p>When save the embedded document to a stand alone document,
+	 * all the file entries of the embedded document will be copied to a new document package.
+	 * If the embedded document is outside of the current document directory,
+	 * you have to embed it to the sub directory and refresh the link of the embedded document.
+	 * you should reload it from the stream to get the saved embedded document.
+	 *
 	 * @param out - the OutputStream to write the file to
 	 * @throws java.lang.Exception  if the document could not be saved
 	 */
 	public void save(OutputStream out) throws Exception {
-		this.optimize();
-		if (!isRootDocument() && mRootDocument != null) {
-			mRootDocument.save(out);
+		//2DO FLUSH AND SAVE IN PACKAGE
+		flushDescendantDOMsToPkg(this);
+		if (!isRootDocument()) {
+			OdfDocument newDoc = loadDocumentFromTemplate(getOdfMediaType());
+			newDoc.insertDocument(this, ROOT_DOCUMENT_PATH);
+			newDoc.mPackage.save(out);
+			// ToDo: (Issue 219 - PackageRefactoring) - Return the document, when not closing!
+			// Should we close the sources now? User will never receive the open package!
+
+
 		} else {
-			if (!mCachedDocuments.isEmpty()) {
-				for (String odfDocPath : mCachedDocuments.keySet()) {
-					mCachedDocuments.get(odfDocPath).saveEmbeddedDoc();
-				}
-			}
-			insertDOMsToPkg();
+			//2DO MOVE CACHE TO PACKAGE
+//			// the root document only have to flush the DOM of all open child documents
+//			flushAllDOMs();
 			mPackage.save(out);
 		}
 	}
 
-	// TODO: add save function for all DOMs
-	private void saveEmbeddedDoc() throws Exception {
-		this.optimize();
-		if (mContentDom == null) {
-			mPackage.insert(getContentStream(), getXMLFilePath(OdfXMLFile.CONTENT), getMediaType());
+	/**
+	 * Save the document to a given file.
+	 *
+	 * <p>If the input file has been cached (this is the case when loading from an
+	 * InputStream), the input file can be overwritten.</p>
+	 *
+	 * <p>Otherwise it's allowed to overwrite the input file as long as
+	 * the same path name is used that was used for loading (no symbolic link
+	 * foo2.odt pointing to the loaded file foo1.odt, no network path X:\foo.odt
+	 * pointing to the loaded file D:\foo.odt).</p>
+	 * 
+	 * <p>When saving the embedded document to a stand alone document,
+	 * all files of the embedded document will be copied to a new document package.
+	 * If the embedded document is outside of the current document directory, 
+	 * you have to embed it to the sub directory and refresh the link of the embedded document.
+	 * You should reload it from the given file to get the saved embedded document.
+	 *
+	 * @param file - the file to save the document
+	 * @throws java.lang.Exception  if the document could not be saved
+	 */
+	public void save(File file) throws Exception {
+		//2DO FLUSH AND SAVE IN PACKAGE
+		flushDescendantDOMsToPkg(this);
+		if (!isRootDocument()) {
+			OdfDocument newDoc = loadDocumentFromTemplate(getOdfMediaType());
+			newDoc.insertDocument(this, ROOT_DOCUMENT_PATH);
+			newDoc.mPackage.save(file);
+			// ToDo: (Issue 219 - PackageRefactoring) - Return the document, when not closing!
+			// Should we close the sources now? User will never receive the open package!
 		} else {
-			mPackage.insert(getContentDom(), getXMLFilePath(OdfXMLFile.CONTENT), null);
-		}
-		if (mStylesDom == null) {
-			mPackage.insert(getStylesStream(), getXMLFilePath(OdfXMLFile.STYLES), getMediaType());
-		} else {
-			mPackage.insert(getStylesDom(), getXMLFilePath(OdfXMLFile.STYLES), null);
-		}
-		if (mMetaDom == null) {
-			mPackage.insert(getMetaStream(), getXMLFilePath(OdfXMLFile.META), getMediaType());
-		} else {
-			mPackage.insert(getMetaDom(), getXMLFilePath(OdfXMLFile.META), null);
+			this.mPackage.save(file);
 		}
 	}
 
@@ -904,7 +761,102 @@ public abstract class OdfDocument {
 	 * Note that this will not close any cached documents.
 	 */
 	public void close() {
+		// set all member variables explicit to null
+		mMediaType = null;
+		mDocumentStyles = null;
+		mContentDom = null;
+		mStylesDom = null;
+		mMetaDom = null;
+		mSettingsDom = null;
+		mOfficeMeta = null;
+		mCharsForTextNode = null;
+		mXPath = null;
 		mPackage.close();
+	}
+
+	//XML DOM from the memory are written to the package ZIP
+	private static void flushDOMsToPkg(OdfPackageDocument pkgDoc) {
+		OdfDocument doc = (OdfDocument) pkgDoc;
+//ToDo: (Issue 219 - PackageRefactoring) - Move flush as much as possible to OdfPackage, avoiding duplication of work
+		try {
+			if (doc.mContentDom != null) {
+				// currently commented because of bug 51:
+				// https://odftoolkit.org/bugzilla/show_bug.cgi?id=51
+				// doc.optimizeAutomaticStyles();
+				doc.mPackage.insert(doc.mContentDom, doc.getXMLFilePath(OdfXMLFile.CONTENT), "text/xml");
+			}
+			if (doc.mStylesDom != null) {
+				// currently commented because of bug 51:
+				// https://odftoolkit.org/bugzilla/show_bug.cgi?id=51
+				// doc.optimizeAutomaticStyles();
+				doc.mPackage.insert(doc.mStylesDom, doc.getXMLFilePath(OdfXMLFile.STYLES), "text/xml");
+			}
+			if (doc.mMetaDom != null) {
+				doc.mPackage.insert(doc.mMetaDom, doc.getXMLFilePath(OdfXMLFile.META), "text/xml");
+			}
+			if (doc.mSettingsDom != null) {
+				doc.mPackage.insert(doc.mSettingsDom, doc.getXMLFilePath(OdfXMLFile.SETTINGS), "text/xml");
+			}
+		} catch (Exception e) {
+			Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+	}
+
+	// flush the DOM of all descendant documents (children of the given document)
+	private void flushDescendantDOMsToPkg(OdfPackageDocument parentDocument) {
+		String baseDir = parentDocument.getDocumentPackagePath();
+		OdfPackage pkg = parentDocument.getPackage();
+		for (String odfDocPath : pkg.getOpenedPackageDocuments()) {
+			if (odfDocPath.startsWith(baseDir)) {
+				flushDOMsToPkg(pkg.getOpenPackageDocument(odfDocPath));
+			}
+		}
+	}
+
+	/**
+	 * Embed an OdfPackageDocument to the current OdfPackageDocument.
+	 * All the file entries of child document will be embedded as well to the current document package.
+	 * @param internDestinationPath path to the directory the ODF document should be inserted (relative to ODF package root).
+	 * @param sourceDocument the OdfPackageDocument to be embedded.
+	 */
+	public void insertDocument(OdfPackageDocument sourceDocument, String internDestinationPath) {
+
+		// opened DOM of descendant Documents will be flashed to the previous pkg
+		flushDescendantDOMsToPkg(sourceDocument);
+
+		// Gets the OdfDocument's manifest entry info, no matter it is a independent document or an embeddedDocument.
+		Map<String, OdfFileEntry> entryMapToCopy;
+		if (sourceDocument.isRootDocument()) {
+			entryMapToCopy = sourceDocument.getPackage().getManifestEntries();
+		} else {
+			entryMapToCopy = getEntriesOfChildren(sourceDocument.getPackage(), sourceDocument.getDocumentPackagePath());
+		}
+		//insert to package and add it to the Manifest
+		internDestinationPath = sourceDocument.setDocumentPackagePath(internDestinationPath);
+		Set<String> entryNameList = entryMapToCopy.keySet();
+		for (String entryName : entryNameList) {
+			OdfFileEntry entry = entryMapToCopy.get(entryName);
+			if (entry != null) {
+				try {
+					// if entry is a directory (e.g. an ODF document root)
+					if (entryName.endsWith(SLASH)) {
+						// insert directory
+						if (entryName.equals(SLASH)) {
+							mPackage.insert((byte[]) null, internDestinationPath, entry.getMediaTypeString());
+						} else {
+							mPackage.insert((byte[]) null, internDestinationPath + entry.getPath(), entry.getMediaTypeString());
+						}
+					} else {
+						mPackage.insert(sourceDocument.getPackage().getInputStream(entryName), (internDestinationPath + entry.getPath()), entry.getMediaTypeString());
+					}
+				} catch (Exception ex) {
+					Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+		}
+		//make sure the media type of embedded Document is right set.
+		OdfFileEntry embedDocumentRootEntry = new OdfFileEntry(internDestinationPath, sourceDocument.getMediaTypeString());
+		mPackage.getManifestEntries().put(internDestinationPath, embedDocumentRootEntry);
 	}
 
 	/**
@@ -913,41 +865,25 @@ public abstract class OdfDocument {
 	 */
 	// currently commented because of bug 51:
 	// https://odftoolkit.org/bugzilla/show_bug.cgi?id=51
-	private void optimize() {
+	private void optimizeAutomaticStyles() {
 //        try {
 //            OdfFileDom dom = this.getStylesDom();
 //            if (dom != null) {
 //                OdfOfficeAutomaticStyles auto_styles = dom.getAutomaticStyles();
 //                if (auto_styles != null) {
-//                    auto_styles.optimize();
+//                    auto_styles.optimizeAutomaticStyles();
 //                }
 //            }
 //            dom = this.getContentDom();
 //            if (dom != null) {
 //                OdfOfficeAutomaticStyles auto_styles = dom.getAutomaticStyles();
 //                if (auto_styles != null) {
-//                    auto_styles.optimize();
+//                    auto_styles.optimizeAutomaticStyles();
 //                }
 //            }
 //        } catch (Exception ex) {
 //            Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-	}
-
-	private void insertDOMsToPkg() {
-		try {
-			if (getContentStream() != null) {
-				mPackage.insert(getContentDom(), getXMLFilePath(OdfXMLFile.CONTENT), null);
-			}
-			if (getStylesStream() != null) {
-				mPackage.insert(getStylesDom(), getXMLFilePath(OdfXMLFile.STYLES), null);
-			}
-			if (getMetaStream() != null) {
-				mPackage.insert(getMetaDom(), getXMLFilePath(OdfXMLFile.META), null);
-			}
-		} catch (Exception ex) {
-			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
-		}
 	}
 	private Resolver mResolver;
 
@@ -974,20 +910,6 @@ public abstract class OdfDocument {
 	}
 
 	/**
-	 * @return the office:body element of this document
-	 */
-	public OdfOfficeBody getOfficeBody() {
-		try {
-			if (getContentDom() != null) {
-				return OdfElement.findFirstChildNode(OdfOfficeBody.class, getContentDom().getFirstChild());
-			}
-		} catch (Exception ex) {
-			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		return null;
-	}
-
-	/**
 	 * Get the content root of a document.
 	 *
 	 * You may prefer to use the getContentRoot methods of subclasses of
@@ -998,17 +920,34 @@ public abstract class OdfDocument {
 	 * @return the child element of office:body, e.g. office:text for text docs
 	 * @throws Exception if the file DOM could not be created.
 	 */
+	@SuppressWarnings("unchecked")
 	<T extends OdfElement> T getContentRoot(Class<T> clazz) throws Exception {
 		OdfElement contentRoot = getContentDom().getRootElement();
-		OdfOfficeBody contentBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, contentRoot);
+		OdfOfficeBody contentBody = OdfElement.findFirstChildNode(
+				OdfOfficeBody.class, contentRoot);
 		NodeList childs = contentBody.getChildNodes();
-		for (int i = 0; i < childs.getLength(); i++) {
+		for (int i = 0;
+				i < childs.getLength();
+				i++) {
 			Node cur = childs.item(i);
 			if ((cur != null) && clazz.isInstance(cur)) {
 				return (T) cur;
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Get the content root of a document.
+	 *
+	 * You may prefer to use the getContentRoot methods of subclasses of
+	 * OdfDocument.
+	 * 
+	 * @return the child element of office:body, e.g. office:text for text docs
+	 * @throws Exception if the file DOM could not be created.
+	 */
+	public OdfElement getContentRoot() throws Exception {
+		return getContentRoot(OdfElement.class);
 	}
 
 	/**
@@ -1178,71 +1117,23 @@ public abstract class OdfDocument {
 		return fileDom;
 	}
 
-	// TODO possible refactor - similar method in OdfPackage
-	private String ensureValidPackagePath(String filePath) {
-		if (filePath == null) {
-			String errMsg = "The path given by parameter is NULL!";
-			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, errMsg);
-			throw new IllegalArgumentException(errMsg);
-		} else if (filePath.equals(EMPTY_STRING)) {
-			String errMsg = "The path given by parameter is an empty string!";
-			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, errMsg);
-			throw new IllegalArgumentException(errMsg);
-		} else {
-			if (filePath.indexOf('\\') != -1) {
-				filePath = filePath.replace('\\', '/');
-			}
-			if (filePath.indexOf("//") != -1) {
-				filePath = filePath.replace("//", "/");
-			}
-			if (!filePath.endsWith("/")) {
-				filePath = filePath + "/";
-			}
-			if (isExternalReference(filePath)) {
-				String errMsg = "The path given by parameter '" + filePath + "' is not an internal ODF package path!";
-				Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, errMsg);
-				throw new IllegalArgumentException(errMsg);
-			}
-		}
-		return filePath;
-	}
-
-	/** Checks if the given reference is a reference, which points outside the ODF package
-	 * @param ref the file reference to be checked
-	 * @return true if the reference is an package external reference
-	 */
-	private static boolean isExternalReference(String ref) {
-		boolean isExternalReference = false;
-		// if the reference is a external relative filePath..
-		if (ref.startsWith(TWO_DOTS)
-				|| // or absolute filePath
-				ref.startsWith(SLASH)
-				|| // or absolute IRI
-				ref.contains(COLON)) {
-			isExternalReference = true;
-		}
-		return isExternalReference;
-	}
-
 	private class Handler extends DefaultHandler {
-		// the empty document to which nodes will be added
 
 		private static final String EMPTY_STRING = "";
+		// the empty XML file to which nodes will be added
 		private OdfFileDom mDocument;
-		private Node m_root;
 		// the context node
 		private Node mNode;        // a stack of sub handlers. handlers will be pushed on the stack whenever
 		// they are required and must pop themselves from the stack when done
 		private Stack<ContentHandler> mHandlerStack = new Stack<ContentHandler>();
 
-		Handler(Node root) {
-			m_root = root;
-			if (m_root instanceof OdfFileDom) {
-				mDocument = (OdfFileDom) m_root;
+		Handler(Node rootNode) {
+			if (rootNode instanceof OdfFileDom) {
+				mDocument = (OdfFileDom) rootNode;
 			} else {
-				mDocument = (OdfFileDom) m_root.getOwnerDocument();
+				mDocument = (OdfFileDom) rootNode.getOwnerDocument();
 			}
-			mNode = m_root;
+			mNode = rootNode;
 		}
 
 		@Override
@@ -1334,7 +1225,7 @@ public abstract class OdfDocument {
 
 	@Override
 	public String toString() {
-		return "\n" + getMediaType() + " - ID: " + this.hashCode() + " "
+		return "\n" + getMediaTypeString() + " - ID: " + this.hashCode() + " "
 				+ getPackage().getBaseURI();
 	}
 	private XPath xpath;
@@ -1373,50 +1264,11 @@ public abstract class OdfDocument {
 			}
 			OdfDrawImage image = (OdfDrawImage) drawFrame.newDrawImageElement();
 			String imagePath = image.newImage(imageUri);
-
 			return imagePath;
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
-
 		}
 		return null;
-
-	}
-
-	/**
-	 * remove an embedded Document from the current OdfDocument
-	 * @param pathToObject path to the directory of the embedded ODF document (always relative to ODF package root).
-	 */
-	public void RemoveEmbedDocument(String pathToObject) {
-		try {
-			// remove it from package and  Manifest
-			pathToObject = ensureValidPackagePath(pathToObject);
-			OdfDocument embedDocument = getEmbeddedDocument(pathToObject);
-			/*if (embedDocument.getContentStream() != null) {
-			mPackage.remove(embedDocument.getXMLFilePath(OdfXMLFile.CONTENT));
-			}
-			if (embedDocument.getStylesStream() != null) {
-			mPackage.remove(embedDocument.getXMLFilePath(OdfXMLFile.STYLES));
-			}*/
-
-			for (OdfXMLFile odfFile : OdfXMLFile.values()) {
-				mPackage.remove(embedDocument.getXMLFilePath(odfFile));
-			}
-			mPackage.remove(pathToObject);
-			//remove this embed document from cache
-			deleteCache(pathToObject);
-		} catch (Exception ex) {
-			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-
-	private void deleteCache(String pathToObject) {
-		if (isRootDocument()) {
-			mCachedDocuments.remove(pathToObject);
-		} else {
-			mRootDocument.mCachedDocuments.remove(pathToObject);
-		}
 	}
 
 	/**
@@ -1440,8 +1292,7 @@ public abstract class OdfDocument {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, e);
 		}
 		return null;
 	}
@@ -1452,21 +1303,25 @@ public abstract class OdfDocument {
 	 */
 	public List<OdfTable> getTableList() {
 		List<OdfTable> tableList = new ArrayList<OdfTable>();
+
+
 		try {
 			OdfElement root = getContentDom().getRootElement();
 			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
-			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-
+			OdfElement typedContent = OdfElement.findFirstChildNode(
+					OdfElement.class, officeBody);
 			NodeList childList = typedContent.getChildNodes();
-			for (int i = 0; i < childList.getLength(); i++) {
+			for (int i = 0;
+					i < childList.getLength();
+					i++) {
 				if (childList.item(i) instanceof TableTableElement) {
 					tableList.add(OdfTable.getInstance((TableTableElement) childList.item(i)));
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, e);
 		}
 		return tableList;
+
 	}
 }

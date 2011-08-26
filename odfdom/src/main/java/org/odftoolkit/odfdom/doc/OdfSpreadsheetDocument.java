@@ -23,6 +23,8 @@
 package org.odftoolkit.odfdom.doc;
 
 import org.odftoolkit.odfdom.doc.office.OdfOfficeSpreadsheet;
+import org.odftoolkit.odfdom.pkg.MediaType;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
 
 /**
  * This class represents an empty ODF spreadsheet document.
@@ -30,14 +32,14 @@ import org.odftoolkit.odfdom.doc.office.OdfOfficeSpreadsheet;
  */
 public class OdfSpreadsheetDocument extends OdfDocument {
 
-	private static String EMPTY_SPREADSHEET_DOCUMENT_PATH = "/OdfSpreadsheetDocument.ods";
-	private static Resource EMPTY_SPREADSHEET_DOCUMENT_RESOURCE = new Resource(EMPTY_SPREADSHEET_DOCUMENT_PATH);
+	private static final String EMPTY_SPREADSHEET_DOCUMENT_PATH = "/OdfSpreadsheetDocument.ods";
+	static final Resource EMPTY_SPREADSHEET_DOCUMENT_RESOURCE = new Resource(EMPTY_SPREADSHEET_DOCUMENT_PATH);
 
 	/**
 	 * This enum contains all possible media types of OdfSpreadsheetDocument
 	 * documents.
 	 */
-	public enum OdfMediaType {
+	public enum OdfMediaType implements MediaType {
 
 		SPREADSHEET(OdfDocument.OdfMediaType.SPREADSHEET),
 		SPREADSHEET_TEMPLATE(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE);
@@ -47,26 +49,11 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 			this.mMediaType = mediaType;
 		}
 
-		@Override
 		/**
 		 * @return the mediatype of this document
 		 */
-		public String toString() {
-			return mMediaType.toString();
-		}
-
-		/**
-		 * @return the ODF mediatype of this document
-		 */
-		public OdfDocument.OdfMediaType getOdfMediaType() {
-			return mMediaType;
-		}
-
-		/**
-		 * @return the mediatype of this document
-		 */
-		public String getName() {
-			return mMediaType.getName();
+		public String getMediaTypeString() {
+			return mMediaType.getMediaTypeString();
 		}
 
 		/**
@@ -92,7 +79,7 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the document could not be created
 	 */
 	public static OdfSpreadsheetDocument newSpreadsheetDocument() throws Exception {
-		return (OdfSpreadsheetDocument) OdfDocument.loadTemplate(EMPTY_SPREADSHEET_DOCUMENT_RESOURCE);
+		return (OdfSpreadsheetDocument) OdfDocument.loadTemplate(EMPTY_SPREADSHEET_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.SPREADSHEET);
 	}
 
 	/**
@@ -101,13 +88,14 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the template could not be created
 	 */
 	public static OdfSpreadsheetDocument newSpreadsheetTemplateDocument() throws Exception {
-		OdfSpreadsheetDocument doc = (OdfSpreadsheetDocument) OdfDocument.loadTemplate(EMPTY_SPREADSHEET_DOCUMENT_RESOURCE);
+		OdfSpreadsheetDocument doc = (OdfSpreadsheetDocument) OdfDocument.loadTemplate(EMPTY_SPREADSHEET_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE);
 		doc.changeMode(OdfMediaType.SPREADSHEET_TEMPLATE);
 		return doc;
 	}
 
 	// Using static factory instead of constructor
-	protected OdfSpreadsheetDocument() {
+	protected OdfSpreadsheetDocument(OdfPackage pkg, String internalPath, OdfSpreadsheetDocument.OdfMediaType odfMediaType) {
+		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
 
 	/**
@@ -116,17 +104,18 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 	 * @return content root, representing the office:spreadsheet tag
 	 * @throws Exception if the file DOM could not be created.
 	 */
+	@Override
 	public OdfOfficeSpreadsheet getContentRoot() throws Exception {
 		return super.getContentRoot(OdfOfficeSpreadsheet.class);
 	}
 
 	/**
-	 * Switches this instance to the given type. This method can be used to e.g. convert
-	 * a document instance to a template and vice versa. 
-	 * @param type
+	 * Changes the document to the given mediatype.
+	 * This method can only be used to convert a document to a related mediatype, e.g. template.
+	 *
+	 * @param mediaType the related ODF mimetype
 	 */
-	public void changeMode(OdfMediaType type) {
-		setMediaType(type.getOdfMediaType());
-		getPackage().setMediaType(type.toString());
+	public void changeMode(OdfMediaType mediaType) {
+		setOdfMediaType(mediaType.mMediaType);
 	}
 }

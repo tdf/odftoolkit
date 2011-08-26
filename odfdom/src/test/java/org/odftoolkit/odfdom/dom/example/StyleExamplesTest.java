@@ -22,6 +22,7 @@
 package org.odftoolkit.odfdom.dom.example;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 import static java.util.logging.Level.INFO;
 import java.util.logging.Logger;
 import org.junit.Assert;
@@ -49,7 +50,7 @@ import org.w3c.dom.Node;
 public class StyleExamplesTest {
 
     private static String TEST_FILE = "test2.odt";
-    private Logger mLog = Logger.getLogger(StyleExamplesTest.class.getName());
+    private static final Logger LOG = Logger.getLogger(StyleExamplesTest.class.getName());
 
     static class DumpPropertyAndText extends NodeAction<ArrayList<String>> {
 
@@ -79,7 +80,7 @@ public class StyleExamplesTest {
 
             String font = StyleUtils.findActualStylePropertyValueForNode(textNode, desiredProperty);
 
-            logger.finest(font + ": " + teksto);
+            logger.log(Level.FINEST, "{0}: {1}", new Object[]{font, teksto});
             fontAndText.add(font + ": " + teksto);
         }
     }
@@ -112,9 +113,9 @@ public class StyleExamplesTest {
     @Test
     @SuppressWarnings("unchecked")
     public void dumpAllStyles() throws Exception {
-        if (mLog.isLoggable(INFO)) {
+        if (LOG.isLoggable(INFO)) {
             OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
-            mLog.info("Parsed document.");
+            LOG.info("Parsed document.");
 
             OdfElement e = (OdfElement) odfdoc.getContentDom().getDocumentElement();
             NodeAction dumpStyles = new NodeAction() {
@@ -126,20 +127,20 @@ public class StyleExamplesTest {
                         indent += "  ";
                     }
                     if (node.getNodeType() == Node.TEXT_NODE) {
-                        mLog.info(indent + node.getNodeName());
-                        mLog.info(": " + node.getNodeValue() + "\n");
+                        LOG.log(INFO, "{0}{1}", new Object[]{indent, node.getNodeName()});
+                        LOG.log(INFO, ": {0}\n", node.getNodeValue());
                     }
                     if (node instanceof OdfStylableElement) {
                         try {
-                            //mLog.info(indent + "-style info...");
+                            //LOG.info(indent + "-style info...");
                             OdfStylableElement se = (OdfStylableElement) node;
                             OdfStyleBase as = se.getAutomaticStyle();
                             OdfStyle ds = se.getDocumentStyle();
                             if (as != null) {
-                                mLog.info(indent + "-AutomaticStyle: " + as);
+                                LOG.log(INFO, "{0}-AutomaticStyle: {1}", new Object[]{indent, as});
                             }
                             if (ds != null) {
-                                mLog.info(indent + "-OdfDocumentStyle: " + ds);
+                                LOG.log(INFO, "{0}-OdfDocumentStyle: {1}", new Object[]{indent, ds});
                             }
                         } catch (Exception ex) {
                             ex.printStackTrace();

@@ -35,7 +35,7 @@ public class PresentationTemplateTest {
 	@Test
 	public void testLoadingAPresentationTemplate() throws Exception {
 		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_PRESENTATION));
-		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getName(), document.getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
 	}
 
 	@Test
@@ -46,22 +46,22 @@ public class PresentationTemplateTest {
 
 		// load again
 		OdfDocument loadedDocument = OdfDocument.loadDocument(destination);
-		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getName(), loadedDocument.getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), loadedDocument.getMediaTypeString());
 	}
 
 	@Test
 	public void testNewPresentationTemplate() throws Exception {
 		OdfDocument document = OdfPresentationDocument.newPresentationTemplateDocument();
-		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getName(), document.getMediaType());
-		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getName(), document.getPackage().getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
+		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
 
 		File destination = File.createTempFile("odfdom-test", ".otp");
 		document.save(destination);
 
 		// load again
 		OdfDocument loadedDocument = OdfDocument.loadDocument(destination);
-		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getName(),
-				loadedDocument.getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(),
+				loadedDocument.getMediaTypeString());
 		Assert.assertTrue(document instanceof OdfPresentationDocument);
 	}
 
@@ -69,11 +69,11 @@ public class PresentationTemplateTest {
 	public void testSwitchingOdfPresentationDocument() throws Exception {
 		OdfPresentationDocument document = OdfPresentationDocument.newPresentationDocument();
 		document.changeMode(OdfPresentationDocument.OdfMediaType.PRESENTATION_TEMPLATE);
-		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getName(), document.getPackage().getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
 
 		document = OdfPresentationDocument.newPresentationTemplateDocument();
 		document.changeMode(OdfPresentationDocument.OdfMediaType.PRESENTATION);
-		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION.getName(),
-				document.getPackage().getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION.getMediaTypeString(),
+				document.getPackage().getMediaTypeString());
 	}
 }

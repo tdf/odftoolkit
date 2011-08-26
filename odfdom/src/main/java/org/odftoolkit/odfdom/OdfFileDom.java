@@ -46,6 +46,7 @@ public class OdfFileDom extends DocumentImpl {
 	 * @param odfDocument   the document the XML files belongs to
 	 * @param packagePath   the internal package path to the XML file
 	 */
+	// 2DO: Svante only getDom from package allowed bzw. OdfPackageDocument.getPackage()	
 	public OdfFileDom(OdfDocument odfDocument, String packagePath) {
 		mOdfDocument = odfDocument;
 		mPackagePath = packagePath;

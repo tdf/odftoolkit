@@ -23,6 +23,8 @@
 package org.odftoolkit.odfdom.doc;
 
 import org.odftoolkit.odfdom.doc.office.OdfOfficeImage;
+import org.odftoolkit.odfdom.pkg.MediaType;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
 
 /**
  * This class represents an ODF image document.
@@ -30,13 +32,13 @@ import org.odftoolkit.odfdom.doc.office.OdfOfficeImage;
  */
 public class OdfImageDocument extends OdfDocument {
 
-	private static String EMPTY_IMAGE_DOCUMENT_PATH = "/OdfImageDocument.odi";
-	private static Resource EMPTY_IMAGE_DOCUMENT_RESOURCE = new Resource(EMPTY_IMAGE_DOCUMENT_PATH);
+	private static final String EMPTY_IMAGE_DOCUMENT_PATH = "/OdfImageDocument.odi";
+	static final Resource EMPTY_IMAGE_DOCUMENT_RESOURCE = new Resource(EMPTY_IMAGE_DOCUMENT_PATH);
 
 	/**
 	 * This enum contains all possible media types of OdfImageDocument documents.
 	 */
-	public enum OdfMediaType {
+	public enum OdfMediaType implements MediaType {
 
 		IMAGE(OdfDocument.OdfMediaType.IMAGE),
 		IMAGE_TEMPLATE(OdfDocument.OdfMediaType.IMAGE_TEMPLATE);
@@ -46,26 +48,11 @@ public class OdfImageDocument extends OdfDocument {
 			this.mMediaType = mediaType;
 		}
 
-		@Override
 		/**
 		 * @return the mediatype of this document
 		 */
-		public String toString() {
-			return mMediaType.toString();
-		}
-
-		/**
-		 * @return the ODF mediatype of this document
-		 */
-		public OdfDocument.OdfMediaType getOdfMediaType() {
-			return mMediaType;
-		}
-
-		/**
-		 * @return the mediatype of this document
-		 */
-		public String getName() {
-			return mMediaType.getName();
+		public String getMediaTypeString() {
+			return mMediaType.getMediaTypeString();
 		}
 
 		/**
@@ -91,7 +78,7 @@ public class OdfImageDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the document could not be created
 	 */
 	public static OdfImageDocument newImageDocument() throws Exception {
-		return (OdfImageDocument) OdfDocument.loadTemplate(EMPTY_IMAGE_DOCUMENT_RESOURCE);
+		return (OdfImageDocument) OdfDocument.loadTemplate(EMPTY_IMAGE_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.IMAGE);
 	}
 
 	/**
@@ -100,32 +87,34 @@ public class OdfImageDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the template could not be created
 	 */
 	public static OdfImageDocument newImageTemplateDocument() throws Exception {
-		OdfImageDocument doc = (OdfImageDocument) OdfDocument.loadTemplate(EMPTY_IMAGE_DOCUMENT_RESOURCE);
+		OdfImageDocument doc = (OdfImageDocument) OdfDocument.loadTemplate(EMPTY_IMAGE_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.IMAGE_TEMPLATE);
 		doc.changeMode(OdfMediaType.IMAGE_TEMPLATE);
 		return doc;
 	}
 
 	// Using static factory instead of constructor
-	protected OdfImageDocument() {
+	protected OdfImageDocument(OdfPackage pkg, String internalPath, OdfImageDocument.OdfMediaType odfMediaType) {
+		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
 
 	/**
 	 * Get the content root of a image document.
 	 *
 	 * @return content root, representing the office:drawing tag
-	 * @throws Exception if the file DOM could not be created.
+	 * @throws OdfOfficeImageException if the file DOM could not be created.
 	 */
+	@Override
 	public OdfOfficeImage getContentRoot() throws Exception {
 		return super.getContentRoot(OdfOfficeImage.class);
 	}
 
 	/**
-	 * Switches this instance to the given type. This method can be used to e.g. convert
-	 * a document instance to a template and vice versa.
-	 * @param type
+	 * Changes the document to the given mediatype.
+	 * This method can only be used to convert a document to a related mediatype, e.g. template.
+	 *
+	 * @param mediaType the related ODF mimetype
 	 */
-	public void changeMode(OdfMediaType type) {
-		setMediaType(type.getOdfMediaType());
-		getPackage().setMediaType(type.toString());
+	public void changeMode(OdfMediaType mediaType) {
+		setOdfMediaType(mediaType.mMediaType);
 	}
 }

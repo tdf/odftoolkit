@@ -81,11 +81,11 @@ public class OdfFileEntry {
         return mPath;
     }
 
-    public void setMediaType(String mediaType) {
+    public void setMediaTypeString(String mediaType) {
         mMediaType = (mediaType == null ? "" : mediaType);
     }
 
-    public String getMediaType() {
+    public String getMediaTypeString() {
         return mMediaType;
     }
 
@@ -96,7 +96,7 @@ public class OdfFileEntry {
      * 
      * @return the mediaType string of the given file reference
      */
-    public static String getMediaType(String fileRef) {
+    public static String getMediaTypeString(String fileRef) {
         String mediaType = null;
         try {
             // use 'JavaBeans Activation Framework' if available (as library or as part of JDK 6)
@@ -107,13 +107,13 @@ public class OdfFileEntry {
             // otherwise (JDK 5 without library of 'JavaBeans Activation Framework')
             // use local fallback implementation
 //          mLog.fine("Using own mediatype handling as 'JavaBeans Activation Framework' not found: " +  e.getMessage());
-            mediaType = findMediaType(fileRef);
+            mediaType = findMediaTypeString(fileRef);
         }
         return mediaType;
     }
 
     /** Own mediatype functionality which can be removed as soon JDK 6 is base line */
-    private static String findMediaType(String fileRef) {
+    private static String findMediaTypeString(String fileRef) {
         String fileSuffix = null;
         String mediaType = null;
 
@@ -139,7 +139,7 @@ public class OdfFileEntry {
         }
         return mediaType;
     }
-    // initializes Map for suffix to media type mapping
+    // initializes Map for suffix to media type string mapping
     private static void initializeMediaTypeMap() {
         MEDIA_TYPE_MAP = new HashMap<String, String>(39);
         MEDIA_TYPE_MAP.put("ai", APPLICATION_POSTSCRIPT);

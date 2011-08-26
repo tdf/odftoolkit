@@ -36,8 +36,8 @@ public class ChartTemplateTest {
 	@Test
 	public void testLoadingAChartTemplate() throws Exception {
 		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_CHART_TEMPLATE));
-		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getName(),
-				document.getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getMediaTypeString(),
+				document.getMediaTypeString());
 	}
 
 	@Test
@@ -48,25 +48,25 @@ public class ChartTemplateTest {
 
 		// load again
 		OdfDocument loadedDocument = OdfDocument.loadDocument(destination);
-		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getName(),
-				loadedDocument.getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getMediaTypeString(),
+				loadedDocument.getMediaTypeString());
 	}
 
 	@Test
 	public void testNewChartTemplate() throws Exception {
 		OdfDocument document = OdfChartDocument.newChartTemplateDocument();
-		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getName(),
-				document.getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getMediaTypeString(),
+				document.getMediaTypeString());
 
-		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getName(),
-				document.getPackage().getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getMediaTypeString(),
+				document.getPackage().getMediaTypeString());
 		File destination = File.createTempFile("odfdom-test", ".otc");
 		document.save(destination);
 
 		// load again
 		OdfDocument loadedDocument = OdfDocument.loadDocument(destination);
-		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getName(),
-				loadedDocument.getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getMediaTypeString(),
+				loadedDocument.getMediaTypeString());
 		Assert.assertTrue(document instanceof OdfChartDocument);
 	}
 
@@ -74,23 +74,23 @@ public class ChartTemplateTest {
 	public void testSwitchingOdfChartDocument() throws Exception {
 		OdfChartDocument document = OdfChartDocument.newChartDocument();
 		document.changeMode(OdfChartDocument.OdfMediaType.CHART_TEMPLATE);
-		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getName(),
-				document.getPackage().getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getMediaTypeString(),
+				document.getPackage().getMediaTypeString());
 
 		document = OdfChartDocument.newChartTemplateDocument();
 		document.changeMode(OdfChartDocument.OdfMediaType.CHART);
-		Assert.assertEquals(OdfDocument.OdfMediaType.CHART.getName(), document.getPackage().getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.CHART.getMediaTypeString(), document.getPackage().getMediaTypeString());
 	}
 
 	@Test
 	public void testSwitchingOdfImageDocument() throws Exception {
 		OdfImageDocument document = OdfImageDocument.newImageDocument();
 		document.changeMode(OdfImageDocument.OdfMediaType.IMAGE_TEMPLATE);
-		Assert.assertEquals(OdfDocument.OdfMediaType.IMAGE_TEMPLATE.getName(),
-				document.getPackage().getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.IMAGE_TEMPLATE.getMediaTypeString(),
+				document.getPackage().getMediaTypeString());
 
 		document = OdfImageDocument.newImageTemplateDocument();
 		document.changeMode(OdfImageDocument.OdfMediaType.IMAGE);
-		Assert.assertEquals(OdfDocument.OdfMediaType.IMAGE.getName(), document.getPackage().getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.IMAGE.getMediaTypeString(), document.getPackage().getMediaTypeString());
 	}
 }

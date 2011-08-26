@@ -19,7 +19,6 @@
  * limitations under the License.
  *
  ************************************************************************/
-
 package org.odftoolkit.odfdom.pkg;
 
 import java.io.IOException;
@@ -35,48 +34,60 @@ import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
  * reflected when the output stream is closed
  *
  */
-class OdfPackageStream extends StreamSource {
-    
-    private OdfPackage pkg;
-    private String name;
-    private InputStream inputStream;
-    private OutputStream outputStream=null;
-    private boolean bClosed;
-    
-    public OdfPackageStream(OdfPackage pkg, String name) throws Exception {
+class OdfPackageStream extends StreamSource implements OdfPackageResource {
 
-        super(pkg.getInputStream(name), pkg.getBaseURI()+"/"+name);
-        this.pkg=pkg;
-        this.name=name;
-    }
-    
-    public boolean isOutput() {
-    // denote that the output stream has been requested
-        return outputStream!=null;
-    }
-    
-    public OutputStream getOutputStream() throws Exception {
-        if (bClosed) throw new IOException("stream already closed");
-        outputStream = pkg.insertOutputStream(name);
-        return outputStream;
-    }
-        
-    public OdfFileEntry geFileEntry() {
-        return pkg.getFileEntry(name);
-    }
+	private OdfPackage pkg;
+	private String name;
+	private InputStream inputStream;
+	private OutputStream outputStream = null;
+	private boolean bClosed;
 
-    public String getName() {
-        return name;
-    }
-    
-    public OdfPackage getPackage() {
-        return pkg;
-    }
+	public OdfPackageStream(OdfPackage pkg, String name) throws Exception {
 
-    void close() throws IOException {
-        bClosed = true;
-        inputStream.close();
-        outputStream.close();
-    }
-    
+		super(pkg.getInputStream(name), pkg.getBaseURI() + "/" + name);
+		this.pkg = pkg;
+		this.name = name;
+	}
+
+	public boolean isOutput() {
+		// denote that the output stream has been requested
+		return outputStream != null;
+	}
+
+	public OutputStream getOutputStream() throws Exception {
+		if (bClosed) {
+			throw new IOException("stream already closed");
+		}
+		outputStream = pkg.insertOutputStream(name);
+		return outputStream;
+	}
+
+	public OdfFileEntry geFileEntry() {
+		return pkg.getFileEntry(name);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public OdfPackage getPackage() {
+		return pkg;
+	}
+
+	/** If the OdfPackageStream is aligned to an OutputStream as well, this outputstream will be flushed */
+	public void flush() throws IOException {
+		if (outputStream != null) {
+			outputStream.flush();
+		}
+	}
+
+	public void close() throws IOException {
+		bClosed = true;
+		if (outputStream != null) {
+			outputStream.close();
+		}
+		if (inputStream != null) {
+			inputStream.close();
+		}
+	}
 }

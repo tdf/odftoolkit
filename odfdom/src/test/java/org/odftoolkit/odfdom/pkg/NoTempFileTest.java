@@ -44,7 +44,7 @@ public class NoTempFileTest {
 	private Logger mLog = Logger.getLogger(OdfPackage.class.getName());
 	private static final String TEST_FILE_FOLDER = ResourceUtilities.getTestOutputFolder();
 	private static final String Test_File = "image.odt";
-	private static String IMage = "test.jpg";
+	private static String IMage = "testA.jpg";
 	private static String New_File = "test3.odt";
 	private static String Test2File = "test2.odt";
 
@@ -69,7 +69,7 @@ public class NoTempFileTest {
 
 			OdfFileEntry imagefile = pkg.getFileEntry("Pictures/10000000000000B400000050FF285AE0.png");
 			Assert.assertNotNull(imagefile);
-			Assert.assertEquals("image/png", imagefile.getMediaType());
+			Assert.assertEquals("image/png", imagefile.getMediaTypeString());
 
 			byte[] bytes = pkg.getBytes("Pictures/10000000000000B400000050FF285AE0.png");
 			Assert.assertEquals(5551, bytes.length);

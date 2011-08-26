@@ -35,7 +35,7 @@ public class SpreadsheetTemplateTest {
 	@Test
 	public void testLoadingASpreadsheetTemplate() throws Exception {
 		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_SPREADSHEET_TEMPLATE));
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getName(), document.getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
 	}
 
 	@Test
@@ -46,21 +46,21 @@ public class SpreadsheetTemplateTest {
 
 		// load again
 		OdfDocument loadedDocument = OdfDocument.loadDocument(destination);
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getName(), loadedDocument.getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), loadedDocument.getMediaTypeString());
 	}
 
 	@Test
 	public void testNewSpreadsheetTemplate() throws Exception {
 		OdfDocument document = OdfSpreadsheetDocument.newSpreadsheetTemplateDocument();
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getName(), document.getMediaType());
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getName(), document.getPackage().getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
+		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
 		File destination = File.createTempFile("odfdom-test", ".ots");
 		document.save(destination);
 
 		// load again
 		OdfDocument loadedDocument = OdfDocument.loadDocument(destination);
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getName(),
-				loadedDocument.getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(),
+				loadedDocument.getMediaTypeString());
 		Assert.assertTrue(document instanceof OdfSpreadsheetDocument);
 	}
 
@@ -68,11 +68,11 @@ public class SpreadsheetTemplateTest {
 	public void testSwitchingOdfSpreadsheetDocument() throws Exception {
 		OdfSpreadsheetDocument document = OdfSpreadsheetDocument.newSpreadsheetDocument();
 		document.changeMode(OdfSpreadsheetDocument.OdfMediaType.SPREADSHEET_TEMPLATE);
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getName(), document.getPackage().getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
 
 		document = OdfSpreadsheetDocument.newSpreadsheetTemplateDocument();
 		document.changeMode(OdfSpreadsheetDocument.OdfMediaType.SPREADSHEET);
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET.getName(),
-				document.getPackage().getMediaType());
+		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET.getMediaTypeString(),
+				document.getPackage().getMediaTypeString());
 	}
 }

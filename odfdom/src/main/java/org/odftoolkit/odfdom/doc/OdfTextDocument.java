@@ -24,6 +24,8 @@ package org.odftoolkit.odfdom.doc;
 
 import org.odftoolkit.odfdom.doc.office.OdfOfficeText;
 import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.pkg.MediaType;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.w3c.dom.Node;
 
 /**
@@ -32,14 +34,14 @@ import org.w3c.dom.Node;
  */
 public class OdfTextDocument extends OdfDocument {
 
-	private static String EMPTY_TEXT_DOCUMENT_PATH = "/OdfTextDocument.odt";
-	private static Resource EMPTY_TEXT_DOCUMENT_RESOURCE = new Resource(EMPTY_TEXT_DOCUMENT_PATH);
+	private static final String EMPTY_TEXT_DOCUMENT_PATH = "/OdfTextDocument.odt";
+	static final Resource EMPTY_TEXT_DOCUMENT_RESOURCE = new Resource(EMPTY_TEXT_DOCUMENT_PATH);
 
 	/**
 	 * This enum contains all possible media types of OdfSpreadsheetDocument
 	 * documents.
 	 */
-	public enum OdfMediaType {
+	public enum OdfMediaType implements MediaType {
 
 		TEXT(OdfDocument.OdfMediaType.TEXT),
 		TEXT_TEMPLATE(OdfDocument.OdfMediaType.TEXT_TEMPLATE),
@@ -51,26 +53,11 @@ public class OdfTextDocument extends OdfDocument {
 			this.mMediaType = mediaType;
 		}
 
-		@Override
 		/**
 		 * @return the mediatype of this document
 		 */
-		public String toString() {
-			return mMediaType.toString();
-		}
-
-		/**
-		 * @return the ODF mediatype of this document
-		 */
-		public OdfDocument.OdfMediaType getOdfMediaType() {
-			return mMediaType;
-		}
-
-		/**
-		 * @return the mediatype of this document
-		 */
-		public String getName() {
-			return mMediaType.getName();
+		public String getMediaTypeString() {
+			return mMediaType.getMediaTypeString();
 		}
 
 		/**
@@ -96,8 +83,18 @@ public class OdfTextDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the document could not be created
 	 */
 	public static OdfTextDocument newTextDocument() throws Exception {
-		return (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
+		return (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.TEXT);
 	}
+
+	/**
+	 * Creates an empty text document.
+	 * @return ODF text document based on a default template
+	 * @throws java.lang.Exception - if the document could not be created
+	 */
+	public static OdfTextDocument newTextDocument(OdfTextDocument.OdfMediaType mimeType) throws Exception {
+		return (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.TEXT);
+	}
+
 
 	/**
 	 * Creates an empty text template.
@@ -105,9 +102,7 @@ public class OdfTextDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the template could not be created
 	 */
 	public static OdfTextDocument newTextTemplateDocument() throws Exception {
-		OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
-		doc.changeMode(OdfMediaType.TEXT_TEMPLATE);
-		return doc;
+		return  (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.TEXT_TEMPLATE);
 	}
 
 	/**
@@ -116,7 +111,7 @@ public class OdfTextDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the document could not be created
 	 */
 	public static OdfTextDocument newTextMasterDocument() throws Exception {
-		OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
+		OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.TEXT_MASTER);
 		doc.changeMode(OdfMediaType.TEXT_MASTER);
 		return doc;
 	}
@@ -127,13 +122,14 @@ public class OdfTextDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the document could not be created
 	 */
 	public static OdfTextDocument newTextWebDocument() throws Exception {
-		OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
+		OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.TEXT_WEB);
 		doc.changeMode(OdfMediaType.TEXT_WEB);
 		return doc;
 	}
 
 	// Using static factory instead of constructor
-	protected OdfTextDocument() {
+	protected OdfTextDocument(OdfPackage pkg, String internalPath, OdfTextDocument.OdfMediaType odfMediaType) {
+		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
 
 	/**
@@ -143,6 +139,7 @@ public class OdfTextDocument extends OdfDocument {
 	 * @return content root, representing the office:text tag
 	 * @throws Exception if the file DOM could not be created.
 	 */
+	@Override
 	public OdfOfficeText getContentRoot() throws Exception {
 		return super.getContentRoot(OdfOfficeText.class);
 	}
@@ -193,12 +190,12 @@ public class OdfTextDocument extends OdfDocument {
 	}
 
 	/**
-	 * Switches this instance to the given type. This method can be used to e.g.
-	 * convert a document instance to a template and vice versa. 	 * 
-	 * @param type
+	 * Changes the document to the given mediatype.
+	 * This method can only be used to convert a document to a related mediatype, e.g. template.
+	 *
+	 * @param mediaType the related ODF mimetype
 	 */
-	public void changeMode(OdfMediaType type) {
-		setMediaType(type.getOdfMediaType());
-		getPackage().setMediaType(type.toString());
+	public void changeMode(OdfMediaType mediaType) {
+		setOdfMediaType(mediaType.mMediaType);
 	}
 }

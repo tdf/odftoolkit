@@ -26,24 +26,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.odftoolkit.odfdom.OdfElement;
 
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
-import org.odftoolkit.odfdom.dom.element.office.OfficePresentationElement;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeSpreadsheet;
-import org.odftoolkit.odfdom.doc.office.OdfOfficeText;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableNamedExpressionsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableNamedRangeElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * OdfTableCellRange represent a rang of cells that are adjacent with each other
@@ -76,10 +71,11 @@ public class OdfTableCellRange {
 	 */
 	OdfTableCellRange(OdfTable table, int startColumn, int startRow, int endColumn, int endRow) {
 		maOwnerTable = table;
-		
+
 		OdfDocument doc = ((OdfFileDom) maOwnerTable.getOdfElement().getOwnerDocument()).getOdfDocument();
-		if (doc instanceof OdfSpreadsheetDocument)
+		if (doc instanceof OdfSpreadsheetDocument) {
 			mbSpreadsheet = true;
+		}
 
 		//the first cell is the covered cell, then the cell range should be enlarged
 		//so that it can contains the complete cell
@@ -390,27 +386,23 @@ public class OdfTableCellRange {
 	 * @param cellRangeName	the name that need to set
 	 */
 	public void setCellRangeName(String cellRangeName) {
-		OdfFileDom contentDom = ((OdfFileDom) maOwnerTable.getOdfElement().getOwnerDocument());
-		OdfOfficeBody contentBody = contentDom.getOdfDocument().getOfficeBody();
-		NodeList childs = contentBody.getChildNodes();
-		for (int i = 0; i < childs.getLength(); i++) {
-			Node cur = childs.item(i);
-			if ((cur != null)
-					&& (cur instanceof OdfOfficeText || cur instanceof OdfOfficeSpreadsheet || cur instanceof OfficePresentationElement)) {
-				//create name range element
-				//OdfTableNamedExpressions nameExpress = new OdfTableNamedExpressions(contentDom);
-				TableNamedExpressionsElement nameExpress = (TableNamedExpressionsElement) OdfXMLFactory.newOdfElement(
-						contentDom,
-						OdfName.newName(OdfNamespaceNames.TABLE, "named-expressions"));
-				String startCellRange = "$" + maOwnerTable.getTableName() + "." + maOwnerTable.getAbsoluteCellAddress(mnStartColumn, mnStartRow);
-				String endCellRange = "$" + maOwnerTable.getTableName() + "." + maOwnerTable.getAbsoluteCellAddress(mnEndColumn, mnEndRow);
-				TableNamedRangeElement nameRange = (TableNamedRangeElement) nameExpress.newTableNamedRangeElement(startCellRange + ":" + endCellRange, cellRangeName);
-				nameRange.setTableBaseCellAddressAttribute(endCellRange);
-				cur.appendChild(nameExpress);
-				break;
-			}
+		try {
+			OdfElement contentRoot = maOwnerTable.mDocument.getContentRoot();
+			//create name range element
+			OdfFileDom contentDom = ((OdfFileDom) maOwnerTable.getOdfElement().getOwnerDocument());
+			TableNamedExpressionsElement nameExpress = (TableNamedExpressionsElement) OdfXMLFactory.newOdfElement(
+					contentDom,
+					OdfName.newName(OdfNamespaceNames.TABLE, "named-expressions"));
+			String startCellRange = "$" + maOwnerTable.getTableName() + "." + maOwnerTable.getAbsoluteCellAddress(mnStartColumn, mnStartRow);
+			String endCellRange = "$" + maOwnerTable.getTableName() + "." + maOwnerTable.getAbsoluteCellAddress(mnEndColumn, mnEndRow);
+			TableNamedRangeElement nameRange = (TableNamedRangeElement) nameExpress.newTableNamedRangeElement(startCellRange + ":" + endCellRange, cellRangeName);
+			nameRange.setTableBaseCellAddressAttribute(endCellRange);
+			contentRoot.appendChild(nameExpress);
+			msCellRangeName = cellRangeName;
+		} catch (Exception ex) {
+			Logger.getLogger(OdfTableCellRange.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		msCellRangeName = cellRangeName;
+
 	}
 
 	/**
