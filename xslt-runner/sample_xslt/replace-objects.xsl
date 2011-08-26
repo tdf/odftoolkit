@@ -43,7 +43,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="text:tab">
+    <xsl:template match="text:tab[not(ancestor::text:index-body)]">
         <text:s text:c="4"/>
     </xsl:template>
 
