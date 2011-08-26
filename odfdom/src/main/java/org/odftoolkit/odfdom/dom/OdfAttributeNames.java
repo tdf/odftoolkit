@@ -161,7 +161,6 @@ public enum OdfAttributeNames {
 	DBISPASSWORDREQUIRED(org.odftoolkit.odfdom.dom.attribute.db.DbIsPasswordRequiredAttribute.ATTRIBUTE_NAME, org.odftoolkit.odfdom.dom.attribute.db.DbIsPasswordRequiredAttribute.class),
 	DBISTABLENAMELENGTHLIMITED(org.odftoolkit.odfdom.dom.attribute.db.DbIsTableNameLengthLimitedAttribute.ATTRIBUTE_NAME, org.odftoolkit.odfdom.dom.attribute.db.DbIsTableNameLengthLimitedAttribute.class),
 	DBISUNIQUE(org.odftoolkit.odfdom.dom.attribute.db.DbIsUniqueAttribute.ATTRIBUTE_NAME, org.odftoolkit.odfdom.dom.attribute.db.DbIsUniqueAttribute.class),
-	DBJAVADRIVERCLASS(org.odftoolkit.odfdom.dom.attribute.db.DbJavaDriverClassAttribute.ATTRIBUTE_NAME, org.odftoolkit.odfdom.dom.attribute.db.DbJavaDriverClassAttribute.class),
 	DBLOCALSOCKET(org.odftoolkit.odfdom.dom.attribute.db.DbLocalSocketAttribute.ATTRIBUTE_NAME, org.odftoolkit.odfdom.dom.attribute.db.DbLocalSocketAttribute.class),
 	DBLOGINTIMEOUT(org.odftoolkit.odfdom.dom.attribute.db.DbLoginTimeoutAttribute.ATTRIBUTE_NAME, org.odftoolkit.odfdom.dom.attribute.db.DbLoginTimeoutAttribute.class),
 	DBMAXROWCOUNT(org.odftoolkit.odfdom.dom.attribute.db.DbMaxRowCountAttribute.ATTRIBUTE_NAME, org.odftoolkit.odfdom.dom.attribute.db.DbMaxRowCountAttribute.class),

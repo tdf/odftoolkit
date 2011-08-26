@@ -34,7 +34,6 @@ import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.element.db.DbComponentElement;
 import org.odftoolkit.odfdom.dom.element.db.DbConnectionResourceElement;
-import org.odftoolkit.odfdom.dom.element.db.DbJavaClasspathElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAppletElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAreaCircleElement;
@@ -153,8 +152,6 @@ public class XlinkShowAttribute extends OdfAttribute {
 					super.setValue(DbComponentElement.XlinkShowAttributeValue.enumValueOf(attrValue).toString());
 				}else if( parentElement instanceof DbConnectionResourceElement ){
 					super.setValue(DbConnectionResourceElement.XlinkShowAttributeValue.enumValueOf(attrValue).toString());
-				}else if( parentElement instanceof DbJavaClasspathElement ){
-					super.setValue(DbJavaClasspathElement.XlinkShowAttributeValue.enumValueOf(attrValue).toString());
 				}else if( parentElement instanceof DrawAElement ){
 					super.setValue(DrawAElement.XlinkShowAttributeValue.enumValueOf(attrValue).toString());
 				}else if( parentElement instanceof DrawAppletElement ){
@@ -220,8 +217,6 @@ public class XlinkShowAttribute extends OdfAttribute {
 					return DbComponentElement.XlinkShowAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof DbConnectionResourceElement ){
 					return DbConnectionResourceElement.XlinkShowAttributeValue.enumValueOf(super.getValue()).toString();
-				}else if( parentElement instanceof DbJavaClasspathElement ){
-					return DbJavaClasspathElement.XlinkShowAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof DrawAElement ){
 					return DrawAElement.XlinkShowAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof DrawAppletElement ){
@@ -283,8 +278,6 @@ public class XlinkShowAttribute extends OdfAttribute {
 		String defaultValue = null;
 		if (parentElement != null) {
 			if( parentElement instanceof DbConnectionResourceElement ){
-				defaultValue = DEFAULT_VALUE_NONE;
-			}else if( parentElement instanceof DbJavaClasspathElement ){
 				defaultValue = DEFAULT_VALUE_NONE;
 			}else if( parentElement instanceof DrawAppletElement ){
 				defaultValue = DEFAULT_VALUE_EMBED;

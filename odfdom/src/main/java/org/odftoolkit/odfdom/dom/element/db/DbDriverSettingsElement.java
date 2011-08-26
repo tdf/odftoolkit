@@ -32,7 +32,6 @@ import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfElement;
-import org.odftoolkit.odfdom.dom.attribute.db.DbJavaDriverClassAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbShowDeletedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbSystemDriverSettingsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.db.DbBaseDnAttribute;
@@ -69,33 +68,6 @@ public abstract class DbDriverSettingsElement extends OdfElement
 		return ELEMENT_NAME;
 	}
 
-
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>DbJavaDriverClassAttribute</code> , See {@odf.attribute db:java-driver-class}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getDbJavaDriverClassAttribute()
-	{
-		DbJavaDriverClassAttribute attr = (DbJavaDriverClassAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DB), "java-driver-class" ) );
-		if( attr != null ){
-			return String.valueOf( attr.getValue() );
-		}
-		return null;
-	}
-		 
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>DbJavaDriverClassAttribute</code> , See {@odf.attribute db:java-driver-class}
-	 *
-	 * @param dbJavaDriverClassValue   The type is <code>String</code>
-	 */
-	public void setDbJavaDriverClassAttribute( String dbJavaDriverClassValue )
-	{
-		DbJavaDriverClassAttribute attr =  new DbJavaDriverClassAttribute( (OdfFileDom)this.ownerDocument );
-		setOdfAttribute( attr );
-		attr.setValue( dbJavaDriverClassValue );
-	}
 
 
 	/**

@@ -23,9 +23,7 @@ package org.odftoolkit.odfdom.doc;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
-import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
@@ -34,23 +32,23 @@ import org.w3c.dom.NodeList;
 
 public class FrameTest {
 
-    public FrameTest() {
-    }
+	public FrameTest() {
+	}
 
-    @Test
-    public void testFrame() {
-        try {            
-            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource("frame.odt"));
-            NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getNamespaceUri(), "frame");
-            Assert.assertEquals( lst.getLength(), 1 );
-            Node node = lst.item(0);
-            Assert.assertTrue(node instanceof OdfDrawFrame);
-            OdfDrawFrame fe = (OdfDrawFrame) lst.item(0);
+	@Test
+	public void testFrame() {
+		try {
+			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getTestResource("frame.odt"));
+			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfNamespaceNames.DRAW.getNamespaceUri(), "frame");
+			Assert.assertEquals(lst.getLength(), 1);
+			Node node = lst.item(0);
+			Assert.assertTrue(node instanceof OdfDrawFrame);
+			OdfDrawFrame fe = (OdfDrawFrame) lst.item(0);
 
-            Assert.assertEquals( fe.getProperty(StyleGraphicPropertiesElement.VerticalPos), "top");            
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail(e.getMessage());
-        }
-    }
+			Assert.assertEquals(fe.getProperty(StyleGraphicPropertiesElement.VerticalPos), "top");
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+	}
 }

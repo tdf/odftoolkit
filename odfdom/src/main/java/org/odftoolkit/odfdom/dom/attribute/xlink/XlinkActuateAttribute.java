@@ -34,7 +34,6 @@ import org.odftoolkit.odfdom.OdfAttribute;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.element.db.DbComponentElement;
 import org.odftoolkit.odfdom.dom.element.db.DbConnectionResourceElement;
-import org.odftoolkit.odfdom.dom.element.db.DbJavaClasspathElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAppletElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFillImageElement;
@@ -154,8 +153,6 @@ public class XlinkActuateAttribute extends OdfAttribute {
 					super.setValue(DbComponentElement.XlinkActuateAttributeValue.enumValueOf(attrValue).toString());
 				}else if( parentElement instanceof DbConnectionResourceElement ){
 					super.setValue(DbConnectionResourceElement.XlinkActuateAttributeValue.enumValueOf(attrValue).toString());
-				}else if( parentElement instanceof DbJavaClasspathElement ){
-					super.setValue(DbJavaClasspathElement.XlinkActuateAttributeValue.enumValueOf(attrValue).toString());
 				}else if( parentElement instanceof DrawAElement ){
 					super.setValue(DrawAElement.XlinkActuateAttributeValue.enumValueOf(attrValue).toString());
 				}else if( parentElement instanceof DrawAppletElement ){
@@ -225,8 +222,6 @@ public class XlinkActuateAttribute extends OdfAttribute {
 					return DbComponentElement.XlinkActuateAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof DbConnectionResourceElement ){
 					return DbConnectionResourceElement.XlinkActuateAttributeValue.enumValueOf(super.getValue()).toString();
-				}else if( parentElement instanceof DbJavaClasspathElement ){
-					return DbJavaClasspathElement.XlinkActuateAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof DrawAElement ){
 					return DrawAElement.XlinkActuateAttributeValue.enumValueOf(super.getValue()).toString();
 				}else if( parentElement instanceof DrawAppletElement ){
@@ -292,8 +287,6 @@ public class XlinkActuateAttribute extends OdfAttribute {
 		String defaultValue = null;
 		if (parentElement != null) {
 			if( parentElement instanceof DbConnectionResourceElement ){
-				defaultValue = DEFAULT_VALUE_ONREQUEST;
-			}else if( parentElement instanceof DbJavaClasspathElement ){
 				defaultValue = DEFAULT_VALUE_ONREQUEST;
 			}else if( parentElement instanceof DrawAElement ){
 				defaultValue = DEFAULT_VALUE_ONREQUEST;

@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public class OdfDrawImageTest {
 
     /**
-     * Test of insertImage method, of class OdfDrawImage.
+     * Test of newImage method, of class OdfDrawImage.
      */
     @Test
     public void testInsertImage_URI() throws Exception {
@@ -29,7 +29,7 @@ public class OdfDrawImageTest {
         OdfTextParagraph para = (OdfTextParagraph) odt.getContentRoot().newTextPElement();
         OdfDrawFrame frame = (OdfDrawFrame) para.newDrawFrameElement();
         OdfDrawImage image = (OdfDrawImage) frame.newDrawImageElement();
-        String packagePath = image.insertImage(new URI("file:" + ResourceUtilities.getTestResource("test.jpg")));
+        String packagePath = image.newImage(new URI("file:" + ResourceUtilities.getTestResource("test.jpg")));
         assertEquals(image.getXlinkTypeAttribute(), "simple");
         System.out.println(frame.getSvgWidthAttribute());
         System.out.println(frame.getSvgHeightAttribute());
@@ -39,7 +39,7 @@ public class OdfDrawImageTest {
     }
 
     /**
-     * Test of insertImage method, of class OdfDrawImage.
+     * Test of newImage method, of class OdfDrawImage.
      */
     @Test
     public void testInsertImage_InputStream() throws Exception {
@@ -50,7 +50,7 @@ public class OdfDrawImageTest {
         OdfDrawImage image = (OdfDrawImage) frame.newDrawImageElement();
         String packagePath = "Pictures/myChosenImageName.jpg";
         String mediaType = "image/jpeg";
-        image.insertImage(new FileInputStream(ResourceUtilities.getTestResource("test.jpg")), packagePath, mediaType);
+        image.newImage(new FileInputStream(ResourceUtilities.getTestResource("test.jpg")), packagePath, mediaType);
         assertEquals(image.getXlinkTypeAttribute(), "simple");
         assert(frame.getSvgWidthAttribute().startsWith("19.") && frame.getSvgWidthAttribute().endsWith("cm"));
         assert(frame.getSvgHeightAttribute().startsWith("6.") && frame.getSvgHeightAttribute().endsWith("cm"));

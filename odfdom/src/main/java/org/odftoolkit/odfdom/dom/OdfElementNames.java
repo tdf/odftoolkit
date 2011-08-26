@@ -100,7 +100,6 @@ public enum OdfElementNames {
 	DBINDEXCOLUMN(org.odftoolkit.odfdom.doc.db.OdfDbIndexColumn.ELEMENT_NAME, org.odftoolkit.odfdom.doc.db.OdfDbIndexColumn.class),
 	DBINDEXCOLUMNS(org.odftoolkit.odfdom.doc.db.OdfDbIndexColumns.ELEMENT_NAME, org.odftoolkit.odfdom.doc.db.OdfDbIndexColumns.class),
 	DBINDICES(org.odftoolkit.odfdom.doc.db.OdfDbIndices.ELEMENT_NAME, org.odftoolkit.odfdom.doc.db.OdfDbIndices.class),
-	DBJAVACLASSPATH(org.odftoolkit.odfdom.doc.db.OdfDbJavaClasspath.ELEMENT_NAME, org.odftoolkit.odfdom.doc.db.OdfDbJavaClasspath.class),
 	DBKEY(org.odftoolkit.odfdom.doc.db.OdfDbKey.ELEMENT_NAME, org.odftoolkit.odfdom.doc.db.OdfDbKey.class),
 	DBKEYCOLUMN(org.odftoolkit.odfdom.doc.db.OdfDbKeyColumn.ELEMENT_NAME, org.odftoolkit.odfdom.doc.db.OdfDbKeyColumn.class),
 	DBKEYCOLUMNS(org.odftoolkit.odfdom.doc.db.OdfDbKeyColumns.ELEMENT_NAME, org.odftoolkit.odfdom.doc.db.OdfDbKeyColumns.class),

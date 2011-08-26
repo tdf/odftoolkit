@@ -496,24 +496,6 @@ public abstract class TextAElement extends OdfStylableElement
 	}                   
                
 	/**
-	 * Create child element {@odf.element text:a}.
-	 *
-     * @param xlinkHrefAttributeValue  the <code>String</code> value of <code>XlinkHrefAttribute</code>, see {@odf.attribute  xlink:href} at specification
-	 * @param xlinkTypeAttributeValue  the <code>String</code> value of <code>XlinkTypeAttribute</code>, see {@odf.attribute  xlink:type} at specification
-	 * @return   return  the element {@odf.element text:a}
-	 * DifferentQName 
-	 */
-    
-	public TextAElement newTextAElement(String xlinkHrefAttributeValue, String xlinkTypeAttributeValue)
-	{
-		TextAElement  textA = ((OdfFileDom)this.ownerDocument).newOdfElement(TextAElement.class);
-		textA.setXlinkHrefAttribute( xlinkHrefAttributeValue );
-		textA.setXlinkTypeAttribute( xlinkTypeAttributeValue );
-		this.appendChild( textA);
-		return  textA;      
-	}
-    
-	/**
 	 * Create child element {@odf.element text:meta}.
 	 *
 	 * @return   return  the element {@odf.element text:meta}

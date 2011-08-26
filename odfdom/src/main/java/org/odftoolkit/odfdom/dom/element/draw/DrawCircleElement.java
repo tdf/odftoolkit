@@ -34,13 +34,13 @@ import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgRAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgCxAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgCyAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawKindAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawStartAngleAttribute;
-import org.odftoolkit.odfdom.dom.attribute.draw.DrawEndAngleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgXAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgWidthAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgHeightAttribute;
+import org.odftoolkit.odfdom.dom.attribute.draw.DrawKindAttribute;
+import org.odftoolkit.odfdom.dom.attribute.draw.DrawStartAngleAttribute;
+import org.odftoolkit.odfdom.dom.attribute.draw.DrawEndAngleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawLayerAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawTransformAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawTextStyleNameAttribute;
@@ -81,7 +81,17 @@ public abstract class DrawCircleElement extends DrawShapeElementBase
 		return ELEMENT_NAME;
 	}
 
-
+	/**
+	 * Initialization of the mandatory attributes of {@link  DrawCircleElement}
+	 *
+     * @param svgRAttributeValue  The mandatory attribute {@odf.attribute  svg:r}"
+     * @param svgCxAttributeValue  The mandatory attribute {@odf.attribute  svg:cx}"
+     * @param svgCyAttributeValue  The mandatory attribute {@odf.attribute  svg:cy}"
+     *
+	 */
+	public void init(String svgRAttributeValue, String svgCxAttributeValue, String svgCyAttributeValue)
+	{
+	}
 
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>SvgRAttribute</code> , See {@odf.attribute svg:r}
@@ -161,87 +171,6 @@ public abstract class DrawCircleElement extends DrawShapeElementBase
 		SvgCyAttribute attr =  new SvgCyAttribute( (OdfFileDom)this.ownerDocument );
 		setOdfAttribute( attr );
 		attr.setValue( svgCyValue );
-	}
-
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>DrawKindAttribute</code> , See {@odf.attribute draw:kind}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getDrawKindAttribute()
-	{
-		DrawKindAttribute attr = (DrawKindAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "kind" ) );
-		if( attr != null ){
-			return String.valueOf( attr.getValue() );
-		}
-		return DrawKindAttribute.DEFAULT_VALUE;
-	}
-		 
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>DrawKindAttribute</code> , See {@odf.attribute draw:kind}
-	 *
-	 * @param drawKindValue   The type is <code>String</code>
-	 */
-	public void setDrawKindAttribute( String drawKindValue )
-	{
-		DrawKindAttribute attr =  new DrawKindAttribute( (OdfFileDom)this.ownerDocument );
-		setOdfAttribute( attr );
-		attr.setValue( drawKindValue );
-	}
-
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>DrawStartAngleAttribute</code> , See {@odf.attribute draw:start-angle}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getDrawStartAngleAttribute()
-	{
-		DrawStartAngleAttribute attr = (DrawStartAngleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "start-angle" ) );
-		if( attr != null ){
-			return String.valueOf( attr.getValue() );
-		}
-		return null;
-	}
-		 
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>DrawStartAngleAttribute</code> , See {@odf.attribute draw:start-angle}
-	 *
-	 * @param drawStartAngleValue   The type is <code>String</code>
-	 */
-	public void setDrawStartAngleAttribute( String drawStartAngleValue )
-	{
-		DrawStartAngleAttribute attr =  new DrawStartAngleAttribute( (OdfFileDom)this.ownerDocument );
-		setOdfAttribute( attr );
-		attr.setValue( drawStartAngleValue );
-	}
-
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>DrawEndAngleAttribute</code> , See {@odf.attribute draw:end-angle}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getDrawEndAngleAttribute()
-	{
-		DrawEndAngleAttribute attr = (DrawEndAngleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "end-angle" ) );
-		if( attr != null ){
-			return String.valueOf( attr.getValue() );
-		}
-		return null;
-	}
-		 
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>DrawEndAngleAttribute</code> , See {@odf.attribute draw:end-angle}
-	 *
-	 * @param drawEndAngleValue   The type is <code>String</code>
-	 */
-	public void setDrawEndAngleAttribute( String drawEndAngleValue )
-	{
-		DrawEndAngleAttribute attr =  new DrawEndAngleAttribute( (OdfFileDom)this.ownerDocument );
-		setOdfAttribute( attr );
-		attr.setValue( drawEndAngleValue );
 	}
 
 
@@ -350,6 +279,87 @@ public abstract class DrawCircleElement extends DrawShapeElementBase
 		SvgHeightAttribute attr =  new SvgHeightAttribute( (OdfFileDom)this.ownerDocument );
 		setOdfAttribute( attr );
 		attr.setValue( svgHeightValue );
+	}
+
+
+	/**
+	 * Receives the value of the ODFDOM attribute representation <code>DrawKindAttribute</code> , See {@odf.attribute draw:kind}
+	 *
+	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 */
+	public String getDrawKindAttribute()
+	{
+		DrawKindAttribute attr = (DrawKindAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "kind" ) );
+		if( attr != null ){
+			return String.valueOf( attr.getValue() );
+		}
+		return DrawKindAttribute.DEFAULT_VALUE;
+	}
+		 
+	/**
+	 * Sets the value of ODFDOM attribute representation <code>DrawKindAttribute</code> , See {@odf.attribute draw:kind}
+	 *
+	 * @param drawKindValue   The type is <code>String</code>
+	 */
+	public void setDrawKindAttribute( String drawKindValue )
+	{
+		DrawKindAttribute attr =  new DrawKindAttribute( (OdfFileDom)this.ownerDocument );
+		setOdfAttribute( attr );
+		attr.setValue( drawKindValue );
+	}
+
+
+	/**
+	 * Receives the value of the ODFDOM attribute representation <code>DrawStartAngleAttribute</code> , See {@odf.attribute draw:start-angle}
+	 *
+	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 */
+	public String getDrawStartAngleAttribute()
+	{
+		DrawStartAngleAttribute attr = (DrawStartAngleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "start-angle" ) );
+		if( attr != null ){
+			return String.valueOf( attr.getValue() );
+		}
+		return null;
+	}
+		 
+	/**
+	 * Sets the value of ODFDOM attribute representation <code>DrawStartAngleAttribute</code> , See {@odf.attribute draw:start-angle}
+	 *
+	 * @param drawStartAngleValue   The type is <code>String</code>
+	 */
+	public void setDrawStartAngleAttribute( String drawStartAngleValue )
+	{
+		DrawStartAngleAttribute attr =  new DrawStartAngleAttribute( (OdfFileDom)this.ownerDocument );
+		setOdfAttribute( attr );
+		attr.setValue( drawStartAngleValue );
+	}
+
+
+	/**
+	 * Receives the value of the ODFDOM attribute representation <code>DrawEndAngleAttribute</code> , See {@odf.attribute draw:end-angle}
+	 *
+	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 */
+	public String getDrawEndAngleAttribute()
+	{
+		DrawEndAngleAttribute attr = (DrawEndAngleAttribute) getOdfAttribute( OdfName.get( OdfNamespace.get(OdfNamespaceNames.DRAW), "end-angle" ) );
+		if( attr != null ){
+			return String.valueOf( attr.getValue() );
+		}
+		return null;
+	}
+		 
+	/**
+	 * Sets the value of ODFDOM attribute representation <code>DrawEndAngleAttribute</code> , See {@odf.attribute draw:end-angle}
+	 *
+	 * @param drawEndAngleValue   The type is <code>String</code>
+	 */
+	public void setDrawEndAngleAttribute( String drawEndAngleValue )
+	{
+		DrawEndAngleAttribute attr =  new DrawEndAngleAttribute( (OdfFileDom)this.ownerDocument );
+		setOdfAttribute( attr );
+		attr.setValue( drawEndAngleValue );
 	}
 
 

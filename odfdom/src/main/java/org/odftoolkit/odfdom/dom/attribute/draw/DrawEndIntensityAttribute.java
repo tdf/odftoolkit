@@ -74,7 +74,7 @@ public class DrawEndIntensityAttribute extends OdfAttribute {
 	@Override
 	public void setValue(String attrValue) {
 		try{
-			//2DO: need validate value against Percent
+			//2DO: need validate value against ZeroToHundredPercent
 			super.setValue(attrValue);	
 		}  catch (NullPointerException e) {
 			// TODO: validation handling/logging
@@ -91,7 +91,7 @@ public class DrawEndIntensityAttribute extends OdfAttribute {
 	@Override
 	public String getValue(){
 		try{
-			//2DO: need validate value against Percent
+			//2DO: need validate value against ZeroToHundredPercent
 			return super.getValue();		
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging

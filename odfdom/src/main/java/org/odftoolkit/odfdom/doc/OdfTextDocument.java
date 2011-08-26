@@ -22,14 +22,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import java.net.URI;
-import org.odftoolkit.odfdom.OdfFileDom;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
-import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeText;
 import org.odftoolkit.odfdom.doc.text.OdfTextParagraph;
 import org.w3c.dom.Node;
-
 
 /**
  * This class represents an empty ODF text document file.
@@ -40,128 +35,93 @@ import org.w3c.dom.Node;
  */
 public class OdfTextDocument extends OdfDocument {
 
-    private static String EMPTY_TEXT_DOCUMENT_PATH = "/OdfTextDocument.odt";
-    private static Resource EMPTY_TEXT_DOCUMENT_RESOURCE = new Resource(EMPTY_TEXT_DOCUMENT_PATH);
-    
-    /**
-     * Creates an empty text document.
-     * @return ODF text document based on a default template
-     * @throws java.lang.Exception - if the document could not be created
-     */
-    public static OdfTextDocument newTextDocument() throws Exception {
-        return (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
-    }
+	private static String EMPTY_TEXT_DOCUMENT_PATH = "/OdfTextDocument.odt";
+	private static Resource EMPTY_TEXT_DOCUMENT_RESOURCE = new Resource(EMPTY_TEXT_DOCUMENT_PATH);
 
-    // Using static factory instead of constructor
-    protected OdfTextDocument() {};
-    
-    /**
-     * Get the media type
-     * 
-     * @return the mediaTYPE string of this package
-     */
-    @Override
-    public String getMediaType() {
-        return OdfDocument.OdfMediaType.TEXT.toString();
-    }
+	/**
+	 * Creates an empty text document.
+	 * @return ODF text document based on a default template
+	 * @throws java.lang.Exception - if the document could not be created
+	 */
+	public static OdfTextDocument newTextDocument() throws Exception {
+		return (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE);
+	}
 
-    /**
-     * Get the content root of a text document. Start here to get or create new
-     * elements of a text document like paragraphs, headings, tables or lists.
-     *
-     * @return content root, representing the office:text tag
-     * @throws Exception if the file DOM could not be created.
-     */
-    public OdfOfficeText getContentRoot() throws Exception {
-    	return super.getContentRoot(OdfOfficeText.class);
-    }
+	// Using static factory instead of constructor
+	protected OdfTextDocument() {
+	}
 
-    /**
-     * Append an image to a text document. If needed
-     * open a new paragraph.
-     *
-     * @param imageURL
-     * @return the inserted image
-     * @throws Exception if the file DOM could not be created or the image source could not be read.
-     */
-    public OdfDrawImage newImage(URI imageURL) throws Exception {
-        OdfFileDom odfDom = getContentDom();
-        OdfOfficeText odfText = getContentRoot();
-        Node n = odfText.getLastChild();
-        OdfTextParagraph para;
-        if (OdfTextParagraph.class.isInstance(n)) {
-            para = (OdfTextParagraph) n;
-        } else {
-            para = newParagraph();
-        }
+	;
 
-        // ODF KNOW-HOW: An image consists always of a <draw:frame> parent and an embedded <draw:image> child.
-        // Create the <draw:frame> ODF element.
-        OdfDrawFrame odfFrame = (OdfDrawFrame) OdfElementFactory.newOdfElement(odfDom, OdfDrawFrame.ELEMENT_NAME);
+	/**
+	 * Get the media type
+	 *
+	 * @return the mediaTYPE string of this package
+	 */
+	@Override
+	public String getMediaType() {
+		return OdfDocument.OdfMediaType.TEXT.toString();
+	}
 
-        // Add the created frame to the earlier found first paragraph.
-        para.appendChild(odfFrame);
+	/**
+	 * Get the content root of a text document. Start here to get or create new
+	 * elements of a text document like paragraphs, headings, tables or lists.
+	 *
+	 * @return content root, representing the office:text tag
+	 * @throws Exception if the file DOM could not be created.
+	 */
+	public OdfOfficeText getContentRoot() throws Exception {
+		return super.getContentRoot(OdfOfficeText.class);
+	}
 
-        // create the <draw:image> ODF element to view the similar image file
-        OdfDrawImage image = (OdfDrawImage) OdfElementFactory.newOdfElement(odfDom, OdfDrawImage.ELEMENT_NAME);
+	/**
+	 * Creates a new paragraph and append text
+	 *
+	 * @param text
+	 * @return the new paragraph
+	 * @throws Exception if the file DOM could not be created.
+	 */
+	public OdfTextParagraph newParagraph(String text) throws Exception {
+		OdfTextParagraph para = newParagraph();
+		para.addContent(text);
+		return para;
+	}
 
-        // Add the created image to the earlier created frame.
-        odfFrame.appendChild(image);
-        // NOTE: Loading the image (relativ to <LABROOT>/solution/solution1
-        // Adding the image to the package, getting the default
-        // size via AWT helper and setting the size at the draw:frame parent.
-        image.insertImage(imageURL);
-        return image;
-    }
+	/**
+	 * Creates a new paragraph
+	 *
+	 * @return The new paragraph
+	 * @throws Exception if the file DOM could not be created.
+	 */
+	public OdfTextParagraph newParagraph() throws Exception {
+		OdfOfficeText odfText = getContentRoot();
+		return (OdfTextParagraph) odfText.newTextPElement();
+	}
 
-    /**
-     * Creates a new paragraph and append text
-     *
-     * @param text
-     * @return the new paragraph
-     * @throws Exception if the file DOM could not be created.
-     */
-    public OdfTextParagraph newParagraph(String text) throws Exception {
-        OdfTextParagraph para = newParagraph();
-        para.addContent(text);
-        return para;
-    }
-
-    /**
-     * Creates a new paragraph
-     *
-     * @return The new paragraph
-     * @throws Exception if the file DOM could not be created.
-     */
-    public OdfTextParagraph newParagraph() throws Exception {
-        OdfOfficeText odfText = getContentRoot();
-        return (OdfTextParagraph) odfText.newTextPElement();
-    }
-
-    /**
-     * Append text to the end of a text document. 
+	/**
+	 * Append text to the end of a text document.
 	 * If there is no paragraph at the end of a document, a new one will be created.
-     *
-     * @param text initial text for the paragraph.
+	 *
+	 * @param text initial text for the paragraph.
 	 * @return The paragraph at the end of the text document, where the text has been added to.
 	 * @throws Exception if the file DOM could not be created.
-     */
-    public OdfTextParagraph addText(String text) throws Exception {
-        OdfOfficeText odfText = getContentRoot();
-        Node n = odfText.getLastChild();
-        OdfTextParagraph para;
-        if (OdfTextParagraph.class.isInstance(n)) {
-            para = (OdfTextParagraph) n;
-        } else {
-            para = newParagraph();
-        }
-        para.addContent(text);
+	 */
+	public OdfTextParagraph addText(String text) throws Exception {
+		OdfOfficeText odfText = getContentRoot();
+		Node n = odfText.getLastChild();
+		OdfTextParagraph para;
+		if (OdfTextParagraph.class.isInstance(n)) {
+			para = (OdfTextParagraph) n;
+		} else {
+			para = newParagraph();
+		}
+		para.addContent(text);
 		return para;
-    }
-    private static final String TO_STRING_METHOD_TOKEN = "\n" + OdfDocument.OdfMediaType.TEXT + " - ID: ";
+	}
+	private static final String TO_STRING_METHOD_TOKEN = "\n" + OdfDocument.OdfMediaType.TEXT + " - ID: ";
 
-    @Override
-    public String toString() {
-        return TO_STRING_METHOD_TOKEN + this.hashCode() + " " + getPackage().getBaseURI();
-    }
+	@Override
+	public String toString() {
+		return TO_STRING_METHOD_TOKEN + this.hashCode() + " " + getPackage().getBaseURI();
+	}
 }

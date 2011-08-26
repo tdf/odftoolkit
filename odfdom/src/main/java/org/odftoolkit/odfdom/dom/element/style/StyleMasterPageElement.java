@@ -340,22 +340,6 @@ public abstract class StyleMasterPageElement extends OdfStylableElement
 	}                   
                
 	/**
-	 * Create child element {@odf.element style:style}.
-	 *
-     * @param styleNameAttributeValue  the <code>String</code> value of <code>StyleNameAttribute</code>, see {@odf.attribute  style:name} at specification
-	 * @return   return  the element {@odf.element style:style}
-	 * DifferentQName 
-	 */
-    
-	public StyleStyleElement newStyleStyleElement(String styleNameAttributeValue)
-	{
-		StyleStyleElement  styleStyle = ((OdfFileDom)this.ownerDocument).newOdfElement(StyleStyleElement.class);
-		styleStyle.setStyleNameAttribute( styleNameAttributeValue );
-		this.appendChild( styleStyle);
-		return  styleStyle;      
-	}
-    
-	/**
 	 * Create child element {@odf.element draw:rect}.
 	 *
 	 * @return   return  the element {@odf.element draw:rect}

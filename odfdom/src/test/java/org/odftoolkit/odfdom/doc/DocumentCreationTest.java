@@ -140,12 +140,12 @@ public class DocumentCreationTest {
             para.appendChild(odfFrame);
             OdfDrawImage odfImage = (OdfDrawImage) OdfElementFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
             odfFrame.appendChild(odfImage);
-            odfImage.insertImage(ResourceUtilities.getTestResourceURI(TEST_PIC));
+            odfImage.newImage(ResourceUtilities.getTestResourceURI(TEST_PIC));
             
             OdfDrawImage odfImage2 = (OdfDrawImage) OdfElementFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
             odfFrame.appendChild(odfImage2);
 			//Deactivated as test fail, when test machine is not online (painful for offline work)
-            //odfImage2.insertImage(new URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"));
+            //odfImage2.newImage(new URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"));
             odfDoc.save(ResourceUtilities.createTestResource("odfdom-wiki-dom.odt"));
 
         } catch (Exception e) {
@@ -432,7 +432,7 @@ public class DocumentCreationTest {
             
         OdfDrawImage image = new OdfDrawImage(dom);
         drawFrame.appendChild(image);
-        image.insertImage(ResourceUtilities.getTestResourceURI(TEST_PIC));
+        image.newImage(ResourceUtilities.getTestResourceURI(TEST_PIC));
     }
 
     private void addFrameForEmbeddedDoc(OdfFileDom dom, TextPElement para,String path) {

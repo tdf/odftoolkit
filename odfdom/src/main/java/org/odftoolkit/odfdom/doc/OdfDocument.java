@@ -22,7 +22,6 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.OdfFileDom;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -49,16 +48,23 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
-import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.OdfAttribute;
+import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.OdfFileDom;
+import org.odftoolkit.odfdom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.draw.OdfDrawFrame;
+import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeBody;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeStyles;
-import org.odftoolkit.odfdom.OdfNamespace;
-import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
+import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
+import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -811,7 +817,7 @@ public abstract class OdfDocument {
 	}
 
 	/**
-	 * Get the content root of a spreadsheet document.
+	 * Get the content root of a document.
 	 *
 	 * You may prefer to use the getContentRoot methods of subclasses of
 	 * OdfDocument. Their return parameters are already casted to
@@ -1088,7 +1094,7 @@ public abstract class OdfDocument {
 			// if there is a specilized handler on the stack, dispatch the event
 			Element element = mDocument.createElementNS(uri, qName);
 			for (int i = 0; i < attributes.getLength(); i++) {
-				OdfAttribute attr = (OdfAttribute) mDocument.createAttributeNS(attributes.getURI(i), attributes.getQName(i));
+				OdfAttribute attr = mDocument.createAttributeNS(attributes.getURI(i), attributes.getQName(i));
 				element.setAttributeNodeNS(attr);
 				if (attr instanceof OfficeVersionAttribute) {
 					// write out not the original value, but the version of this odf version
@@ -1144,7 +1150,53 @@ public abstract class OdfDocument {
 	public String toString() {
 		return TO_STRING_METHOD_TOKEN + this.hashCode() + " " + mPackage.getBaseURI();
 	}
+	private XPath xpath;
 
+	/**
+	 * Insert an Image from the specified uri to the end of the OdfDocument.
+	 * @param imageUri The URI of the image that will be added to the document,
+	 * 				   add image stream to the package,
+	 *                 in the 'Pictures/' graphic directory with the same image file name as in the URI.
+	 *                 If the imageURI is relative first the user.dir is taken to make it absolute.
+	 * @return         Returns the internal package path of the image, which was created based on the given URI.
+	 * */
+	public String newImage(URI imageUri) {
+		if (xpath == null) {
+			xpath = XPathFactory.newInstance().newXPath();
+			xpath.setNamespaceContext(new OdfNamespace());
+		}
+		try {
+			OdfDrawFrame drawFrame = this.getContentDom().newOdfElement(OdfDrawFrame.class);
+
+			if (this instanceof OdfSpreadsheetDocument) {
+				TableTableCellElement lastCell = (TableTableCellElement) xpath.evaluate("//table:table-cell[last()]", this.getContentDom(), XPathConstants.NODE);
+				lastCell.appendChild(drawFrame);
+				drawFrame.removeAttribute("text:anchor-type");
+
+			} else if (this instanceof OdfTextDocument) {
+				TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", this.getContentDom(), XPathConstants.NODE);
+				if (lastPara == null) {
+					lastPara = ((OdfTextDocument) this).newParagraph();
+				}
+				lastPara.appendChild(drawFrame);
+				drawFrame.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PARAGRAPH.toString());
+			} else if (this instanceof OdfPresentationDocument) {
+				DrawPageElement lastPage = (DrawPageElement) xpath.evaluate("//draw:page[last()]", this.getContentDom(), XPathConstants.NODE);
+				lastPage.appendChild(drawFrame);
+			}
+			OdfDrawImage image = (OdfDrawImage) drawFrame.newDrawImageElement();
+			String imagePath = image.newImage(imageUri);
+
+			return imagePath;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+		return null;
+
+	}
+	
 	/**
 	 * remove an embedded Document from the current OdfDocument
 	 * @param pathToObject path to the directory of the embedded ODF document (always relative to ODF package root).
@@ -1179,4 +1231,5 @@ public abstract class OdfDocument {
 			mRootDocument.mCachedDocuments.remove(pathToObject);
 		}
 	}
+
 }

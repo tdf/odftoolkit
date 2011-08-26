@@ -72,7 +72,7 @@ public class StyleTextLineThroughWidthAttribute extends OdfAttribute {
 	 */
 	public enum Value {
 	 
-	 AUTO( "auto" ), BOLD( "bold" ), DASH( "dash" ), MEDIUM( "medium" ), NORMAL( "normal" ), THICK( "thick" ), THIN( "thin" );
+	 AUTO( "auto" ), BOLD( "bold" ), MEDIUM( "medium" ), NORMAL( "normal" ), THICK( "thick" ), THIN( "thin" );
               
 		private String mValue;
 

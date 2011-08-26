@@ -755,4 +755,17 @@ public abstract class TableTableElement extends OdfStylableElement
 		return  tableTableHeaderRows;
 	}                   
                
+	/**
+	 * Create child element {@odf.element table:named-expressions}.
+	 *
+	 * @return   return  the element {@odf.element table:named-expressions}
+	 * DifferentQName 
+	 */
+	public TableNamedExpressionsElement newTableNamedExpressionsElement()
+	{
+		TableNamedExpressionsElement  tableNamedExpressions = ((OdfFileDom)this.ownerDocument).newOdfElement(TableNamedExpressionsElement.class);
+		this.appendChild( tableNamedExpressions);
+		return  tableNamedExpressions;
+	}                   
+               
 }
