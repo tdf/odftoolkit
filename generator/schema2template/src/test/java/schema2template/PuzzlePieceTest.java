@@ -35,6 +35,7 @@ import org.junit.Test;
 import schema2template.model.PuzzlePiece;
 import schema2template.model.PuzzlePieceSet;
 import org.junit.Assert;
+import org.junit.Ignore;
 import schema2template.example.odf.OdfHelper;
 import schema2template.model.MSVExpressionIterator;
 
@@ -166,6 +167,7 @@ public class PuzzlePieceTest {
 	 * extract PuzzlePieces out of a XML schema</p>
 	 */
 	@Test
+	@Ignore
 	public void testExtractPuzzlePiecesWithDuplicates() {
 		try {
 			PuzzlePieceSet allElements_ODF12 = new PuzzlePieceSet();

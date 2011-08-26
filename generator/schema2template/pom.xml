@@ -49,7 +49,7 @@
 					<archive>
 						<index>true</index>
 						<manifest>
-							<mainClass>schema2template.example.odf.OdfCodegen</mainClass>
+							<mainClass>schema2template.example.odf.OdfHelper</mainClass>
 						</manifest>
 						<manifestEntries>
 							<version>${project.version}</version>
