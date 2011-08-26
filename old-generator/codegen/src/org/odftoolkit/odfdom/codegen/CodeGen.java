@@ -225,6 +225,22 @@ public class CodeGen implements IFunctionSupplier
                 return executeTemplateChildNodes( define );
             }                               
         }
+        //add for selecting chidren elements
+        else if( node.getLocalName().equals(TemplateNode.CHILDREN_ELEMENT))
+        {
+            if( !executeChildrenNode(node) )
+                return false;
+        }
+        else if( node.getLocalName().equals(TemplateNode.SUBATTRIBUTE_ELEMENT))
+        {
+            if( !executeSubAttributeNode(node) )
+                return false;
+        }
+        else if( node.getLocalName().equals(TemplateNode.GROUP_ELEMENT))
+        {
+            if( !executeAttributeGroupNode(node) )
+                return false;
+        }
         else
         {
             System.err.println("error: template uses unknown element <" + node.getLocalName() + ">!");
@@ -256,6 +272,112 @@ public class CodeGen implements IFunctionSupplier
         return true;
     }
 
+    private boolean executeChildrenNode( TemplateNode node ) throws IOException
+    {
+    	
+        String type = node.getAttribute(TemplateNode.TYPE_ATTRIBUTE);
+
+        String sep = node.getAttribute("seperator");
+        if( ((sep != null) && (sep.length() == 0)) || (context.getCurrentFile() == null) )
+            sep = null;
+        boolean first = true;
+
+        if( type.equals("element") )
+        {
+            Element element = context.getCurrentElement();
+            
+            if( element == null )
+            {
+                System.err.println("error: foreach attribute needs a current element!" );
+                return false;
+            }
+               
+            if (element.getSubElements().size() > 0) {
+
+				Iterator<Element> iter = element.getSubElements().iterator();
+                
+				while (iter.hasNext()) {
+					 
+					first = printSeperator( sep, first );
+					
+	                if( !selectElement( node, iter.next(), false ) )                                                    
+	                    return false;                
+			    }
+            }
+        }
+        else
+        {
+            System.err.println("error: unknown foreach type " + type );
+            return false;
+        }
+        return true;
+
+    }
+    
+    private boolean executeSubAttributeNode( TemplateNode node ) throws IOException
+    {
+    	
+    	    
+            Element element = context.getCurrentElement();
+                        
+            if( element == null )
+            {
+                System.err.println("error: foreach attribute needs a current element!" );
+                return false;
+            }
+                        
+            if (element.getSubAttributes().size() > 0) {
+
+				Iterator<Vector<Attribute>> iter = element.getSubAttributes().iterator();
+                
+				while (iter.hasNext()) {
+					Vector<Attribute> subAtt = (Vector<Attribute>)iter.next();
+					if( !selectSubAttribute( node, element,subAtt ))                                                  
+	                    return false;                
+			    }
+            }
+            
+            return true;
+
+    }
+    
+    private boolean executeAttributeGroupNode( TemplateNode node ) throws IOException
+    {
+    	
+            Element element = context.getCurrentElement();
+            
+            Vector<Attribute> group = context.getCurrentAttributeGroup();
+            
+            if( element == null )
+            {
+                System.err.println("error: foreach attribute needs a current element!" );
+                return false;
+            }
+               
+            if (group.size() > 0) {
+
+				Iterator<Attribute> iter = group.iterator();
+                
+				while (iter.hasNext()) {
+					 
+	                if( !selectAttribute( node, iter.next()) )                                                    
+	                    return false;                
+			    }
+            }
+            
+            return true;
+
+    }
+
+    public boolean selectSubAttribute( TemplateNode node, Element element, Vector<Attribute> attributeGroup) throws IOException
+    {
+    	context.pushElement(element);
+    	context.setCurrentAttributeGroup(attributeGroup);                
+        boolean ret = executeTemplateChildNodes(node);
+        context.popElement();
+        //Context.getCurrentAttributeGroup();
+        return ret;
+    }
     private boolean printSeperator( String sep, boolean first )
     {
         if( sep != null && !first )
