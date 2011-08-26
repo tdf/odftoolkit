@@ -62,6 +62,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
@@ -821,13 +822,20 @@ public abstract class OdfDocument {
      * OdfDocument. Their return parameters are already casted to
      * respective subclasses of OdfElement.
      *
+     * @param the type of the content root, depend on the document type
      * @return the child element of office:body, e.g. office:text for text docs
      * @throws Exception if the file DOM could not be created.
      */
-    public OdfElement getContentRoot() throws Exception {
+    <T extends OdfElement> T getContentRoot(Class<T> clazz) throws Exception {
         OdfElement contentRoot = getContentDom().getRootElement();
         OdfOfficeBody contentBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, contentRoot);
-        return (OdfElement) contentBody.getFirstChild();
+        NodeList childs = contentBody.getChildNodes();
+        for (int i = 0; i < childs.getLength(); i++) {
+            Node cur = childs.item(i);
+            if( (cur != null) && clazz.isInstance(cur) ) 
+            	return (T)cur;
+        }
+        return null;
     }
 
     /**

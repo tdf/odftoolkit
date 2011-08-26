@@ -72,9 +72,8 @@ public class OdfTextDocument extends OdfDocument {
      * @return content root, representing the office:text tag
      * @throws Exception if the file DOM could not be created.
      */
-    @Override
     public OdfOfficeText getContentRoot() throws Exception {
-        return (OdfOfficeText) super.getContentRoot();
+    	return super.getContentRoot(OdfOfficeText.class);
     }
 
     /**

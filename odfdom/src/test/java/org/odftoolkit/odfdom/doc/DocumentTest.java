@@ -36,6 +36,7 @@ import org.odftoolkit.odfdom.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.doc.text.OdfTextListStyle;
 import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.office.OdfOfficeText;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
@@ -47,6 +48,7 @@ import org.w3c.dom.Node;
 public class DocumentTest {
 
     private static final String TEST_FILE = "test2.odt";
+    private static final String TEST_FILE_WITHOUT_OPT = "no_size_opt.odt";
 
     public DocumentTest() {
     }
@@ -55,6 +57,17 @@ public class DocumentTest {
     public void testParser() {
         try {
             OdfDocument.loadDocument(ResourceUtilities.getTestResource(TEST_FILE));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testGetContentRoot() {
+        try {
+            OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getTestResource(TEST_FILE_WITHOUT_OPT));
+            Assert.assertNotNull(odt.getContentRoot());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());

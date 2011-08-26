@@ -22,6 +22,7 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import org.odftoolkit.odfdom.doc.office.OdfOfficeChart;
 /**
  * This class represents an empty ODF document file, which will be embedded
  * in an existing ODF document.
@@ -61,5 +62,15 @@ public class OdfChartDocument extends OdfDocument {
     @Override
     public String toString() {
         return TO_STRING_METHOD_TOKEN + this.hashCode() + " " + getPackage().getBaseURI();
+    }
+    
+    /**
+     * Get the content root of a chart document.
+     *
+     * @return content root, representing the office:chart tag
+     * @throws Exception if the file DOM could not be created.
+     */
+    public OdfOfficeChart getContentRoot() throws Exception {
+        return super.getContentRoot(OdfOfficeChart.class);
     }
 }

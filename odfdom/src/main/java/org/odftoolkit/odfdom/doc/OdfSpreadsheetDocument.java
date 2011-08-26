@@ -66,9 +66,8 @@ public class OdfSpreadsheetDocument extends OdfDocument {
      * @return content root, representing the office:spreadsheet tag
      * @throws Exception if the file DOM could not be created.
      */
-    @Override
     public OdfOfficeSpreadsheet getContentRoot() throws Exception {
-        return (OdfOfficeSpreadsheet) super.getContentRoot();
+    	return super.getContentRoot(OdfOfficeSpreadsheet.class);
     }
 
     private static final String TO_STRING_METHOD_TOKEN = "\n" + OdfDocument.OdfMediaType.SPREADSHEET + " - ID: ";

@@ -64,9 +64,8 @@ public class OdfPresentationDocument extends OdfDocument {
      * @return content root, representing the office:presentation tag
      * @throws Exception if the file DOM could not be created.
      */
-    @Override
     public OdfOfficePresentation getContentRoot() throws Exception {
-        return (OdfOfficePresentation) super.getContentRoot();
+        return super.getContentRoot(OdfOfficePresentation.class);
     }
 
     private static final String TO_STRING_METHOD_TOKEN = "\n" + OdfDocument.OdfMediaType.PRESENTATION + " - ID: ";
