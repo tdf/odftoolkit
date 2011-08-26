@@ -84,6 +84,11 @@
             xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
             xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"
             xmlns:smil="urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0">
+            <xsl:for-each select="//rng:start|document(//rng:include/@href)//rng:start">
+                <start>
+                    <xsl:apply-templates mode="collect-attrs"/>
+                </start>
+            </xsl:for-each>
             <!-- select all <element> nodes in the file or in included files -->
             <xsl:for-each select="//rng:element|document(//rng:include/@href)//rng:element">
                 <xsl:choose>
@@ -161,7 +166,10 @@
             </attribute>
         </xsl:for-each>    
     </xsl:template>
-    
+
+    <!-- ignore attribute definitions with any name -->
+    <xsl:template match="rng:attribute[rng:anyName]" mode="collect-attrs"/>
+
     <!-- match @a:default-value" -->
     <xsl:template match="@a:defaultValue">
         <xsl:attribute name="a:defaultValue">
@@ -203,6 +211,16 @@
         </xsl:if>
     </xsl:template>
 
+    <!-- ignore attribute definitions with any name -->
+    <xsl:template match="rng:element[rng:anyName]" mode="collect-attrs"/>
+
+    <!-- ignore name elements (they are covered by the fore-each loop already) -->
+    <xsl:template match="rng:name" mode="collect-attrs"/>
+
+    <!-- ignore data elements (they may only occure in elements here) -->
+    <xsl:template match="rng:data" mode="collect-attrs"/>
+    
+    
     <!-- ************* -->
     <!-- ** control ** -->
     <!-- ************* -->
@@ -215,10 +233,10 @@
              included files. -->
         <xsl:variable name="new-condition">
             <xsl:choose>
-                <xsl:when test="$include-conditions and @rng:combine and string-length($condition) > 0">
+                <xsl:when test="$include-conditions and @combine and string-length($condition) > 0">
                     <xsl:value-of select="concat($condition, '/', @combine)"/>
                 </xsl:when>
-                <xsl:when test="$include-conditions and @rng:combine">
+                <xsl:when test="$include-conditions and @combine">
                     <xsl:value-of select="concat(@combine)"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -245,7 +263,7 @@
     </xsl:template>
     
     <!-- match conditions and lists -->
-    <xsl:template match="rng:interleave|rng:optional|rng:choice|rng:group|rng:zeroOrMore|rng:oneOrMore" mode="collect-attrs">
+    <xsl:template match="rng:interleave|rng:mixed|rng:optional|rng:choice|rng:group|rng:zeroOrMore|rng:oneOrMore" mode="collect-attrs">
         <xsl:param name="condition" select=""/>
         <xsl:variable name="new-condition">
             <xsl:choose>
@@ -269,7 +287,7 @@
     
     <!-- match all other elements and ignore them -->
     <xsl:template match="*" mode="collect-attrs">
-        <xsl:message>Ignored <xsl:value-of select="name(.)"/></xsl:message>
+        <xsl:message>Ignored element &lt;<xsl:value-of select="name(.)"/>&gt;, content: <xsl:value-of select="."/>, parent: <xsl:value-of select="name(..)"/>, grandparent: <xsl:value-of select="name(../..)"/>, define name: <xsl:value-of select="ancestor::rng:define[1]/@name"/></xsl:message>
     </xsl:template>
 
     <xsl:template match="text()" mode="collect-attrs">
