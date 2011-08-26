@@ -90,16 +90,55 @@
             </xsl:copy>
         </xsl:if>
         <!-- Check attribute name -->
-        <xsl:variable name="attr-name" select="normalize-space(substring(., string-length($attribute-prefix)+1))"/>
+        <xsl:variable name="attr-name-raw" select="substring(normalize-space(.), string-length($attribute-prefix)+1)"/>
+        <xsl:variable name="has-elements" select="contains($attr-name-raw,'_')"/>
+        <xsl:variable name="attr-name">
+            <xsl:choose>
+                <xsl:when test="$has-elements">
+                    <xsl:value-of select="substring-before($attr-name-raw,'_')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$attr-name-raw"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="element-list">
+            <xsl:if test="$has-elements">
+                <xsl:value-of select="concat(substring($attr-name-raw,string-length($attr-name)+1),'_')"/>
+            </xsl:if>
+        </xsl:variable>
+        <xsl:if test="$check-xref-anchors and $has-elements">
+            <xsl:call-template name="check-element-list">
+                <xsl:with-param name="element-list" select="$element-list"/>
+            </xsl:call-template>
+        </xsl:if>
+        <!-- xsl:message><xsl:value-of select="$attr-name"/>/<xsl:value-of select="$attr-name-raw"/>/<xsl:value-of select="$has-elements"/>/<xsl:value-of select="$element-list"/></xsl:message -->
         <xsl:variable name="attr-defs" select="document($xref-schema-file)/rng:grammar/rng:element/rng:attribute[@name=$attr-name]"/>
         <xsl:if test="$check-xref-anchors and not($attr-defs)">
             <xsl:message>No attribute definition found in schema for xref &quot;<xsl:value-of select="."/>&quot;</xsl:message>
         </xsl:if>
         <!-- Add xrefs -->
         <xsl:if test="$add-attr-elem-xrefs">
-            <xsl:apply-templates select="$attr-defs"/>
+            <xsl:apply-templates select="$attr-defs">
+                <xsl:with-param name="element-list" select="$element-list"/>
+            </xsl:apply-templates>
         </xsl:if>
     </xsl:template>    
+    
+    <xsl:template name="check-element-list">
+        <xsl:param name="element-list"/>
+        <xsl:param name="list" select="substring($element-list,string-length($element-prefix)+2)"/>
+        <xsl:variable name="element-name" select="substring-before($list,'_')"/>
+        <xsl:if test="not(document($xref-schema-file)/rng:grammar/rng:element[@name=$element-name])">
+            <xsl:message>No element definition found in schema for xref &quot;<xsl:value-of select="."/>&quot;, value &quot;<xsl:value-of select="$element-name"/>&quot;</xsl:message>
+        </xsl:if>
+        <xsl:variable name="remainder" select="substring-after($list,'_')"/>
+        <xsl:if test="$remainder">
+            <xsl:call-template name="check-element-list">
+                <xsl:with-param name="element-list" select="$remainder"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
 
     <!-- ************************* -->
     <!-- ** existing references ** -->
@@ -133,12 +172,15 @@
             <xsl:when test="starts-with($tag, '&lt;') and contains($tag,'&gt;')">
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
+                    <xsl:variable name="is-in-attributes" select="preceding::text:h[@text:outline-level='1']='Attributes'"/>
                     <xsl:call-template name="create-element-ref-mark-start">
-                        <xsl:with-param name="tag" select="$tag"/>
+                         <xsl:with-param name="tag" select="$tag"/>
+                         <xsl:with-param name="is-in-attributes" select="$is-in-attributes"/>
                     </xsl:call-template>
                     <xsl:apply-templates select="node()"/>
                     <xsl:call-template name="create-element-ref-mark-end">
-                        <xsl:with-param name="tag" select="$tag"/>
+                         <xsl:with-param name="tag" select="$tag"/>
+                         <xsl:with-param name="is-in-attributes" select="$is-in-attributes"/>
                     </xsl:call-template>
                 </xsl:copy>
             </xsl:when>
@@ -149,7 +191,7 @@
                         <xsl:when test="not(document($xref-schema-file)/rng:grammar//rng:attribute[@name=$attr-name])">
                             <xsl:message>No attribute definition found in schema for heading &quot;<xsl:value-of select="."/>&quot;</xsl:message>
                         </xsl:when>
-                        <xsl:when test="not(//text:p[normalize-space(.)=concat($attribute-prefix,$attr-name)])">
+                        <xsl:when test="not(//text:p[starts-with(.,$attribute-prefix) and (normalize-space(.)=concat($attribute-prefix,$attr-name) or starts-with(.,concat($attribute-prefix,$attr-name,'_')))])">
                             <xsl:message>No attribute xref found for heading &quot;<xsl:value-of select="$tag"/>&quot;</xsl:message>
                         </xsl:when>
                     </xsl:choose>
@@ -179,6 +221,7 @@
     
     <xsl:template name="create-element-ref-mark-start">
         <xsl:param name="tag"/>
+        <xsl:param name="is-in-attributes"/>
         <xsl:variable name="element-name" select="substring-after(substring-before($tag,'&gt;'),'&lt;')"/>
         <xsl:variable name="remainder" select="substring-after($tag,'&gt;')"/>
         
@@ -187,13 +230,13 @@
                 <xsl:when test="not(document($xref-schema-file)/rng:grammar/rng:element[@name=$element-name])">
                     <xsl:message>No element definition found in schema for element &quot;<xsl:value-of select="$element-name"/>&quot; contained in heading &quot;<xsl:value-of select="."/>&quot;</xsl:message>
                 </xsl:when>
-                <xsl:when test="not(//text:p[normalize-space(.)=concat($element-prefix,$element-name)])">
+                <xsl:when test="not(//text:p[starts-with(.,$element-prefix) and normalize-space(.)=concat($element-prefix,$element-name)])">
                     <xsl:message>No element xref found for element &quot;<xsl:value-of select="$element-name"/>&quot; contained in heading &quot;<xsl:value-of select="."/>&quot;</xsl:message>
                 </xsl:when>
             </xsl:choose>
         </xsl:if>
 
-        <xsl:if test="$create-odf-references">
+        <xsl:if test="$create-odf-references and not($is-in-attributes)">
             <xsl:variable name="ref-name" select="concat($element-prefix,$element-name)"/>
             <text:reference-mark-start text:name="{$ref-name}"/>
         </xsl:if>
@@ -201,25 +244,30 @@
         <xsl:if test="contains($remainder,'&lt;') and contains(substring-after($remainder,'&lt;'),'&gt;')">
             <xsl:call-template name="create-element-ref-mark-start">
                 <xsl:with-param name="tag" select="$remainder"/>
+                <xsl:with-param name="is-in-attributes" select="$is-in-attributes"/>
             </xsl:call-template>
         </xsl:if>        
     </xsl:template>
     
     <xsl:template name="create-element-ref-mark-end">
         <xsl:param name="tag"/>
-        <xsl:variable name="element-name" select="substring-after(substring-before($tag,'&gt;'),'&lt;')"/>
-        <xsl:variable name="remainder" select="substring-after($tag,'&gt;')"/>
+        <xsl:param name="is-in-attributes"/>
+        <xsl:if test="not($is-in-attributes)">
+            <xsl:variable name="element-name" select="substring-after(substring-before($tag,'&gt;'),'&lt;')"/>
+            <xsl:variable name="remainder" select="substring-after($tag,'&gt;')"/>
 
-        <xsl:if test="contains($remainder,'&lt;') and contains(substring-after($remainder,'&lt;'),'&gt;')">
-            <xsl:call-template name="create-element-ref-mark-end">
-                <xsl:with-param name="tag" select="$remainder"/>
-            </xsl:call-template>
+            <xsl:if test="contains($remainder,'&lt;') and contains(substring-after($remainder,'&lt;'),'&gt;')">
+                <xsl:call-template name="create-element-ref-mark-end">
+                    <xsl:with-param name="tag" select="$remainder"/>
+                    <xsl:with-param name="is-in-attributes" select="$is-in-attributes"/>
+                </xsl:call-template>
+            </xsl:if>
+
+            <xsl:if test="$create-odf-references">
+                <xsl:variable name="ref-name" select="concat($element-prefix,$element-name)"/>
+                <text:reference-mark-end text:name="{$ref-name}"/>
+            </xsl:if>        
         </xsl:if>
-
-        <xsl:if test="$create-odf-references">
-            <xsl:variable name="ref-name" select="concat($element-prefix,$element-name)"/>
-            <text:reference-mark-end text:name="{$ref-name}"/>
-        </xsl:if>        
     </xsl:template>
     
     <!-- default: copy everything. -->
@@ -238,9 +286,13 @@
 
     <!-- select all <element> nodes in the file or in included files -->
     <xsl:template match="rng:attribute">
+        <xsl:param name="element-list"/>
         <xsl:variable name="name" select="@name"/>
+        <!-- <xsl:message><xsl:value-of select="$name"/>:<xsl:value-of select="concat('_',$element-prefix,../@name,'_')"/></xsl:message -->
         <xsl:if test="not(preceding::rng:attribute[@name=$name])">
-            <xsl:call-template name="create-attr-parent-elem-list"/>
+            <xsl:call-template name="create-attr-parent-elem-list">
+                <xsl:with-param name="element-list" select="$element-list"/>
+            </xsl:call-template>
         </xsl:if>
     </xsl:template>   
     
@@ -340,7 +392,9 @@
     
     <xsl:template name="create-attr-parent-elem-list">
         <xsl:param name="attr-name" select="@name"/>
-        <xsl:variable name="count" select="count(ancestor::rng:grammar/rng:element[rng:attribute[@name=$attr-name]])"/>
+        <xsl:param name="element-list"/>
+        <xsl:variable name="parents" select="ancestor::rng:grammar/rng:element[(not($element-list) or contains($element-list,concat('_',$element-prefix,@name,'_'))) and rng:attribute[@name=$attr-name]]"/>
+        <xsl:variable name="count" select="count($parents)"/>
         <xsl:call-template name="new-line"/>
         <text:p text:style-name="Parent_20_Element_20_List">
             <xsl:text>The </xsl:text>
@@ -357,7 +411,7 @@
                 </xsl:otherwise>
             </xsl:choose>
             <!-- collect elements -->
-            <xsl:for-each select="ancestor::rng:grammar/rng:element[rng:attribute[@name=$attr-name]]">
+            <xsl:for-each select="$parents">
                 <xsl:sort select="@name"/>
                 <xsl:variable name="name" select="@name"/>
                 <xsl:choose>
@@ -377,7 +431,8 @@
 
     <xsl:template name="create-elem-parent-elem-list">
         <xsl:param name="elem-name" select="@name"/>
-        <xsl:variable name="count" select="count(ancestor::rng:grammar/rng:element[rng:element[@name=$elem-name]])"/>
+        <xsl:variable name="parents" select="ancestor::rng:grammar/rng:element[rng:element[@name=$elem-name]]"/>
+        <xsl:variable name="count" select="count($parents)"/>
         <xsl:call-template name="new-line"/>
         <text:p text:style-name="Parent_20_Element_20_List">
             <xsl:text>The </xsl:text>
@@ -394,7 +449,7 @@
                 </xsl:otherwise>
             </xsl:choose>
             <!-- collect elements -->
-            <xsl:for-each select="ancestor::rng:grammar/rng:element[rng:element[@name=$elem-name]]">
+            <xsl:for-each select="$parents">
                 <xsl:sort select="@name"/>
                 <xsl:variable name="name" select="@name"/>
                 <xsl:choose>
