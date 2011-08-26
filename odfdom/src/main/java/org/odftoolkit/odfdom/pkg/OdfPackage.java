@@ -527,7 +527,7 @@ public class OdfPackage implements Closeable {
 	 * @param internalPath
 	 *		path relative to the package root, where the document should be inserted.
 	 */
-	public void insertPackageDocument(OdfPackageDocument doc, String internalPath) {
+	void cacheDocument(OdfPackageDocument doc, String internalPath) {
 		internalPath = normalizeDirectoryPath(internalPath);
 		updateFileEntry(ensureFileEntryExistence(internalPath), doc.getMediaTypeString());
 		mPkgDocuments.put(internalPath, doc);
@@ -558,8 +558,8 @@ public class OdfPackage implements Closeable {
 	 * @return The ODF document, which mediatype dependends on the parameter or
 	 *	NULL if media type were not supported.
 	 */
-	public OdfPackageDocument loadPackageDocument(String internalPath) {
-		OdfPackageDocument doc = getCachedPackageDocument(internalPath);
+	public OdfPackageDocument loadDocument(String internalPath) {
+		OdfPackageDocument doc = getCachedDocument(internalPath);
 		if (doc == null) {
 			String mediaTypeString = getMediaTypeString();
 			// ToDo: Remove dependency by facotory issue ??? (to be written)
@@ -584,12 +584,14 @@ public class OdfPackage implements Closeable {
 	}
 
 	/**
+	 * @deprecated This method is only added temporary as workaround for the IBM fork using different DOC classes.
+	 * Until the registering of DOC documents to the PKG layer has been finished.
 	 * @param internalPath
 	 *		path relative to the package root, where the document should be inserted.
 	 * @return an already open OdfPackageDocument via its path, otherwise NULL.
 	 */
 	@Deprecated
-	public OdfPackageDocument getCachedPackageDocument(String internalPath) {
+	public OdfPackageDocument getCachedDocument(String internalPath) {
 		internalPath = normalizeDirectoryPath(internalPath);
 		return mPkgDocuments.get(internalPath);
 	}
@@ -628,7 +630,7 @@ public class OdfPackage implements Closeable {
 	 * @param internalPath
 	 *		path relative to the package root, where the document should be removed.
 	 */
-	public void removePackageDocument(String internalPath) {
+	public void removeDocument(String internalPath) {
 		try {
 			// get all files of the package
 			Set<String> allPackageFileNames = getFileEntries();
@@ -931,7 +933,6 @@ public class OdfPackage implements Closeable {
 			ZipEntry nextElement = mZipEntries.get(entries.next());
 			String entryPath = nextElement.getName();
 			getBytes(entryPath);
-
 		}
 	}
 
@@ -1079,7 +1080,7 @@ public class OdfPackage implements Closeable {
 	 */
 	public void insertDocument(OdfPackageDocument sourceDocument, String internalPath) {
 		// opened DOM of descendant Documents will be flashed to the their pkg
-		flushDecendentDoms(sourceDocument);
+		flushDoms(sourceDocument);
 
 		// Gets the OdfDocument's manifest entry info, no matter it is a independent document or an embeddedDocument.
 		Map<String, OdfFileEntry> entryMapToCopy;
@@ -1117,7 +1118,7 @@ public class OdfPackage implements Closeable {
 		getManifestEntries().put(internalPath, embedDocumentRootEntry);
 		// the new document will be attached to its new package (it has been inserted to)
 		sourceDocument.setPackage(this);
-		this.insertPackageDocument(sourceDocument, internalPath);
+		cacheDocument(sourceDocument, internalPath);
 	}
 
 	/** 
@@ -1126,7 +1127,7 @@ public class OdfPackage implements Closeable {
 	 *
 	 * @param parentDocument the document, which XML files shall be serialized
 	 */
-	void flushDecendentDoms(OdfPackageDocument parentDocument) {
+	void flushDoms(OdfPackageDocument parentDocument) {
 		OdfPackage pkg = parentDocument.getPackage();
 		if (parentDocument.isRootDocument()) {
 			// for every parsed XML file (DOM)
@@ -1177,8 +1178,8 @@ public class OdfPackage implements Closeable {
 	 *
 	 * @return A set of paths of all documents of the package, including the root document.
 	 */
-	public Set<String> getInnerDocumentPaths() {
-		return getInnerDocumentPaths(null, null);
+	public Set<String> getDocumentPaths() {
+		return getDocumentPaths(null, null);
 	}
 
 	/**
@@ -1187,8 +1188,8 @@ public class OdfPackage implements Closeable {
 	 * @param mediaTypeString limits the desired set of document paths to documents of the given mediaType
 	 * @return A set of paths of all documents of the package, including the root document, that match the given parameter.
 	 */
-	public Set<String> getInnerDocumentPaths(String mediaTypeString) {
-		return getInnerDocumentPaths(null, null);
+	public Set<String> getDocumentPaths(String mediaTypeString) {
+		return getDocumentPaths(mediaTypeString, null);
 	}
 
 	/**
@@ -1198,7 +1199,7 @@ public class OdfPackage implements Closeable {
 	 * @param subDirectory limits the desired set document paths to those documents below of this subdirectory
 	 * @return A set of paths of all documents of the package, including the root document, that match the given parameter.
 	 */
-	Set<String> getInnerDocumentPaths(String mediaTypeString, String subDirectory) {
+	Set<String> getDocumentPaths(String mediaTypeString, String subDirectory) {
 		Set<String> innerDocuments = new HashSet<String>();
 		Set<String> packageFilePaths = getFileEntries();
 		// check manifest for current embedded OdfPackageDocuments
@@ -1544,7 +1545,6 @@ public class OdfPackage implements Closeable {
 		} else if (mPkgDoms.get(packagePath) != null) {
 			data = flushDom(mPkgDoms.get(packagePath));
 			mMemoryFileCache.put(packagePath, data);
-
 			// if the path's file was cached to memory (second high priority)
 		} else if (mFileEntries.containsKey(packagePath)
 				&& mMemoryFileCache.get(packagePath) != null) {
@@ -1583,8 +1583,8 @@ public class OdfPackage implements Closeable {
 		return data;
 	}
 
-	/** Serializes a DOM tree into a byte array.
-	Providing the counterpart of the generic Namespace handling of OdfFileDom */
+	// Serializes a DOM tree into a byte array.
+	// Providing the counterpart of the generic Namespace handling of OdfFileDom.
 	private byte[] flushDom(Document dom) {
 		// if it is one of our DOM files we may flush all collected namespaces to the root element
 		if (dom instanceof OdfFileDom) {
@@ -1764,7 +1764,8 @@ public class OdfPackage implements Closeable {
 		return baos;
 	}
 
-	/** Removes the singel given file
+	/** Removes a singel file from the package.
+	 * @param path of the file relative to the package root
 	 */
 	public void remove(String packagePath) {
 		packagePath = normalizePath(packagePath);

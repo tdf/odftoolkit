@@ -435,13 +435,13 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 						// test if the desired mediatype matches the current
 						if (entryMediaType.equals(wantedMediaString)) {
 							path = normalizeDocumentPath(path);
-							embeddedObjectsMap.put(path, (OdfDocument) mPackage.loadPackageDocument(path));
+							embeddedObjectsMap.put(path, (OdfDocument) mPackage.loadDocument(path));
 						}
 					} else {
 						// test if any ODF mediatype matches the current
 						for (OdfMediaType mediaType : OdfMediaType.values()) {
 							if (entryMediaType.equals(mediaType.getMediaTypeString())) {
-								embeddedObjectsMap.put(path, (OdfDocument) mPackage.loadPackageDocument(path));
+								embeddedObjectsMap.put(path, (OdfDocument) mPackage.loadDocument(path));
 							}
 						}
 					}
