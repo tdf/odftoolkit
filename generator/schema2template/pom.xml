@@ -34,7 +34,13 @@
 
 	<!-- Build Settings -->
 	<build>
-		<defaultGoal>install</defaultGoal>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>1.0-beta-7</version>
+			</extension>
+		</extensions>
 		<plugins>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -89,6 +95,13 @@
 			</plugin>
 		</plugins>
 	</build>
+	<distributionManagement>
+		<site>
+			<id>odfdom</id>
+			<name>ODFDOM Java Toolkit Project</name>
+			<url>dav:https://odftoolkit.org/website/odfdom/${project.version}/codegeneration/schema2template</url>
+		</site>
+	</distributionManagement>
 	<reporting>
 		<plugins>
 			<plugin>

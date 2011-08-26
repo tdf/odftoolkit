@@ -68,6 +68,13 @@
 			</plugin>
 		</plugins>
 	</build>
+	<distributionManagement>
+		<site>
+			<id>odfdom</id>
+			<name>ODFDOM Java Toolkit Project</name>
+			<url>dav:https://odftoolkit.org/website/odfdom/${project.version}/codegeneration/schema2template-maven-plugin</url>
+		</site>
+	</distributionManagement>	
 
 	<!-- More Project Information -->
 	<name>Schema2template Maven2 Plugin</name>

@@ -78,23 +78,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-				<executions>
-					<execution>
-						<id>single</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>			
 		</plugins>
 	</build>
 
@@ -222,7 +205,7 @@
 				<site>
 					<id>odfdom</id>
 					<name>ODFDOM Java Toolkit Project</name>
-					<url>dav:https://odftoolkit.org/website/odfdom/${project.version}</url>
+					<url>dav:https://odftoolkit.org/website/odfdom/${project.version}/codegeneration/schema2template-pom</url>
 				</site>
 			</distributionManagement>			
 		</profile>
