@@ -79,10 +79,10 @@ public class OdfPresentationNotes
 	 * @param text	the text that need to insert in the notes page
 	 */
 	public void addText(String text){
-		NodeList frameList = maNoteElement.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "frame");
+		NodeList frameList = maNoteElement.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "frame");
 		if(frameList.getLength() > 0){
 			DrawFrameElement frame = (DrawFrameElement)frameList.item(0);
-			NodeList textBoxList = frame.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "text-box");
+			NodeList textBoxList = frame.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "text-box");
 			if(textBoxList.getLength() > 0){
 				DrawTextBoxElement textBox = (DrawTextBoxElement)textBoxList.item(0);
 				TextPElement newPara = textBox.newTextPElement();

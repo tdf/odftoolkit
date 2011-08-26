@@ -114,15 +114,15 @@ public class XPathTest {
 			if (node instanceof OdfAlienElement) {
 				Assert.fail("The none OOO default prefix for office: was not exchanged!");
 			}
-			NodeList linkNodes = (NodeList) xpath.evaluate("//*[@xlink:href]", node, XPathConstants.NODESET);
+			NodeList linkNodes = (NodeList) xpath.evaluate(".//*[@xlink:href]", node, XPathConstants.NODESET);
 			Assert.assertNotNull(linkNodes);
 			// test if the identical namespace prefixes with different URI have been renamed correctly (earlier draw:element1/draw:element2).
-			String attributeWithDuplicatePrefix = (String) xpath.evaluate("//draw__1:element1/draw__2:element2/@draw__2:attribute2", node, XPathConstants.STRING);
+			String attributeWithDuplicatePrefix = (String) xpath.evaluate(".//draw__1:element1/draw__2:element2/@draw__2:attribute2", node, XPathConstants.STRING);
 			Assert.assertTrue(attributeWithDuplicatePrefix.equals("importantValue"));
 			Assert.assertEquals("urn:oasis:names:tc:opendocument:xmlns:office:1.0", xpath.getNamespaceContext().getNamespaceURI("office"));
 			Assert.assertEquals("http://www.w3.org/1999/xlink", xpath.getNamespaceContext().getNamespaceURI("xlink"));
 
-			String alienAttributeValue = (String) xpath.evaluate("//*/@foreign", node, XPathConstants.STRING);
+			String alienAttributeValue = (String) xpath.evaluate(".//*/@foreign", node, XPathConstants.STRING);
 			LOG.log(Level.INFO, "The value of the alien attribute is {0}, expected is ''alien:valueOfAlienAttribute''!", alienAttributeValue);
 			Assert.assertEquals("alien:valueOfAlienAttribute", alienAttributeValue);
 
@@ -168,7 +168,7 @@ public class XPathTest {
 			XPath xpath = contentDom.getXPath();
 
 			Node node = odpWithSlides.getContentDom().getRootElement();
-			NodeList linkNodes = (NodeList) xpath.evaluate("//*[@xlink:href]", node, XPathConstants.NODESET);
+			NodeList linkNodes = (NodeList) xpath.evaluate(".//*[@xlink:href]", node, XPathConstants.NODESET);
 			Assert.assertNotNull(linkNodes);
 			Assert.assertEquals("urn:oasis:names:tc:opendocument:xmlns:office:1.0", xpath.getNamespaceContext().getNamespaceURI("office"));
 			Assert.assertEquals("http://www.w3.org/1999/xlink", xpath.getNamespaceContext().getNamespaceURI("xlink"));

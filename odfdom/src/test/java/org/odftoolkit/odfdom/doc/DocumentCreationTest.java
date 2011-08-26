@@ -383,7 +383,7 @@ public class DocumentCreationTest {
 			NodeList linkNodes = (NodeList) xpath.evaluate("//*[@xlink:href]", testLoad.getContentDom(), XPathConstants.NODE);
 			for (int i = 0; i < linkNodes.getLength(); i++) {
 				OdfElement object = (OdfElement) linkNodes.item(i);
-				String refObjPath = object.getAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK).toString(), "href");
+				String refObjPath = object.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
 				Assert.assertTrue(refObjPath.equals("Pictures/" + TEST_PIC) || refObjPath.equals("./NewEmbedded"));
 			}
 			Assert.assertNotNull(testLoad.getPackage().getFileEntry("Pictures/" + TEST_PIC));

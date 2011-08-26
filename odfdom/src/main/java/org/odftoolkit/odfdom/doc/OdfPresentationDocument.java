@@ -245,7 +245,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 			return null;
 		}
-		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		if ((index >= slideNodes.getLength()) || (index < 0)) {
 			return null;
 		}
@@ -267,7 +267,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 			return 0;
 		}
-		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		return slideNodes.getLength();
 	}
 
@@ -296,7 +296,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 			return null;
 		}
-		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		for (int i = 0; i < slideNodes.getLength(); i++) {
 			DrawPageElement slideElement = (DrawPageElement) slideNodes.item(i);
 			OdfSlide slide = OdfSlide.getInstance(slideElement);
@@ -322,7 +322,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 			return;
 		}
-		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		for (int i = 0; i < slideNodes.getLength(); i++) {
 			DrawPageElement slideElement = (DrawPageElement) slideNodes.item(i);
 			String slideName = slideElement.getDrawNameAttribute();
@@ -350,7 +350,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			return null;
 		}
 		ArrayList<OdfSlide> slideList = new ArrayList<OdfSlide>();
-		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		for (int i = 0; i < slideNodes.getLength(); i++) {
 			DrawPageElement slideElement = (DrawPageElement) slideNodes.item(i);
 			slideList.add(OdfSlide.getInstance(slideElement));
@@ -375,7 +375,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 			return;
 		}
-		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+		NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		if ((index >= slideNodes.getLength()) || (index < 0)) {
 			throw new IndexOutOfBoundsException("the specified Index is out of slide count when call deleteSlideByIndex method.");
 		}
@@ -388,7 +388,7 @@ public class OdfPresentationDocument extends OdfDocument {
 		deleteStyleRef(slideElement);
 		//remove the current page element
 		contentRoot.removeChild(slideElement);
-		AdjustNotePageNumber(index);
+		adjustNotePageNumber(index);
 	}
 
 	private void deleteStyleRef(DrawPageElement slideEle) {
@@ -409,7 +409,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			//2.2. get the reference of each style which occurred in the current page
 			for (int i = 0; i < stylesList.getLength(); i++) {
 				OdfElement node = (OdfElement) stylesList.item(i);
-				String styleName = node.getAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE).toString(), "name");
+				String styleName = node.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "name");
 				if (styleName != null) {
 					//search the styleName contained at the current page element
 					NodeList styleNodes = (NodeList) xpath.evaluate("//*[@*='" + styleName + "']", contentDom, XPathConstants.NODESET);
@@ -458,7 +458,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			NodeList linkNodes = (NodeList) xpath.evaluate("//*[@xlink:href]", contentDom, XPathConstants.NODESET);
 			for (int i = 0; i < linkNodes.getLength(); i++) {
 				OdfElement object = (OdfElement) linkNodes.item(i);
-				String refObjPath = object.getAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK).toString(), "href");
+				String refObjPath = object.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
 				int relation = slideEle.compareDocumentPosition(object);
 				//if slide element contains the returned element which has the xlink:href reference
 				if ((relation & Node.DOCUMENT_POSITION_CONTAINED_BY) > 0 && refObjPath != null && refObjPath.length() > 0) {
@@ -514,7 +514,7 @@ public class OdfPresentationDocument extends OdfDocument {
 		deleteStyleRef(slideElement);
 		//remove the current page element
 		contentRoot.removeChild(slideElement);
-		AdjustNotePageNumber(0);
+		adjustNotePageNumber(0);
 	}
 
 	/**
@@ -539,7 +539,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 			return null;
 		}
-		NodeList slideList = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+		NodeList slideList = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		int slideCount = slideList.getLength();
 		if ((source < 0) || (source >= slideCount)
 				|| (dest < 0) || (dest > slideCount)) {
@@ -554,7 +554,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			DrawPageElement refSlide = (DrawPageElement) slideList.item(dest);
 			contentRoot.insertBefore(cloneSlideElement, refSlide);
 		}
-		AdjustNotePageNumber(Math.min(source, dest));
+		adjustNotePageNumber(Math.min(source, dest));
 		//in case that the appended new slide have the same name with the original slide
 		hasCheckSlideName = false;
 		checkAllSlideName();
@@ -578,7 +578,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 			return;
 		}
-		NodeList slideList = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+		NodeList slideList = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		int slideCount = slideList.getLength();
 		if ((source < 0) || (source >= slideCount)
 				|| (dest < 0) || (dest > slideCount)) {
@@ -591,7 +591,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			DrawPageElement refSlide = (DrawPageElement) slideList.item(dest);
 			contentRoot.insertBefore(sourceSlide, refSlide);
 		}
-		AdjustNotePageNumber(Math.min(source, dest));
+		adjustNotePageNumber(Math.min(source, dest));
 	}
 
 	/**
@@ -610,7 +610,7 @@ public class OdfPresentationDocument extends OdfDocument {
 		} catch (Exception e) {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 		}
-		NodeList slideList = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+		NodeList slideList = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		int slideNum = slideList.getLength();
 		//clone the srcContentRoot, and make a modification on this clone node.
 		OfficePresentationElement srcCloneContentRoot = (OfficePresentationElement) srcContentRoot.cloneNode(true);
@@ -624,7 +624,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			contentRoot.appendChild(cloneElement);
 			child = child.getNextSibling();
 		}
-		AdjustNotePageNumber(slideNum - 1);
+		adjustNotePageNumber(slideNum - 1);
 
 		//in case that the appended new slide have the same name with the original slide
 		hasCheckSlideName = false;
@@ -656,7 +656,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 			return null;
 		}
-		NodeList slideList = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+		NodeList slideList = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		int slideCount = slideList.getLength();
 		if ((destIndex < 0) || (destIndex > slideCount)) {
 			throw new IndexOutOfBoundsException("the specified Index is out of slide count when call copyForeignSlide method.");
@@ -678,7 +678,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			DrawPageElement refSlide = (DrawPageElement) slideList.item(destIndex);
 			contentRoot.insertBefore(cloneSlideElement, refSlide);
 		}
-		AdjustNotePageNumber(destIndex);
+		adjustNotePageNumber(destIndex);
 		//in case that the appended new slide have the same name with the original slide
 		hasCheckSlideName = false;
 		checkAllSlideName();
@@ -701,11 +701,11 @@ public class OdfPresentationDocument extends OdfDocument {
 			OdfPackageDocument srcDoc = fileDom.getDocument();
 			//new a map to put the original name and the rename string, in case that the same name might be referred by the slide several times.
 			HashMap<String, String> objectRenameMap = new HashMap<String, String>();
-			NodeList linkNodes = (NodeList) xpath.evaluate("//*[@xlink:href]", sourceCloneEle, XPathConstants.NODESET);
+			NodeList linkNodes = (NodeList) xpath.evaluate(".//*[@xlink:href]", sourceCloneEle, XPathConstants.NODESET);
 			for (int i = 0; i <= linkNodes.getLength(); i++) {
 				OdfElement object = null;
 				if (linkNodes.getLength() == i) {
-					if (sourceCloneEle.hasAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK).toString(), "href")) {
+					if (sourceCloneEle.hasAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href")) {
 						object = sourceCloneEle;
 					} else {
 						break;
@@ -713,7 +713,7 @@ public class OdfPresentationDocument extends OdfDocument {
 				} else {
 					object = (OdfElement) linkNodes.item(i);
 				}
-				String refObjPath = object.getAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK).toString(), "href");
+				String refObjPath = object.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
 				if (refObjPath != null && refObjPath.length() > 0) {
 					//the path of the object is start with "./"
 					boolean hasPrefix = false;
@@ -743,7 +743,7 @@ public class OdfPresentationDocument extends OdfDocument {
 							}
 							objectRenameMap.put(refObjPath, newObjPath);
 						}
-						object.setAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK).toString(), "xlink:href", hasPrefix ? (prefix + newObjPath) : newObjPath);
+						object.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href", hasPrefix ? (prefix + newObjPath) : newObjPath);
 					}
 					InputStream is = srcDoc.getPackage().getInputStream(refObjPath);
 					if (is != null) {
@@ -780,8 +780,8 @@ public class OdfPresentationDocument extends OdfDocument {
 			HashMap<OdfElement, OdfElement> appendStylesStyleList = new HashMap<OdfElement, OdfElement>();
 			getCopyStyleList(null, sourceCloneEle, styleQName, srcStyleDefNodeList, srcStylesStyleCloneEleList, appendStylesStyleList, true);
 			//1.3 rename, copy the referred style element to the corresponding position in the dom tree
-			InsertCollectedStyle(styleQName, srcContentStyleCloneEleList, getContentDom(), appendContentStyleList);
-			InsertCollectedStyle(styleQName, srcStylesStyleCloneEleList, getStylesDom(), appendStylesStyleList);
+			insertCollectedStyle(styleQName, srcContentStyleCloneEleList, getContentDom(), appendContentStyleList);
+			insertCollectedStyle(styleQName, srcStylesStyleCloneEleList, getStylesDom(), appendStylesStyleList);
 
 
 			//2. collect all the referred style element which has "draw:name" attribute 
@@ -807,7 +807,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			}
 			//2.2 rename, copy the referred style element to the corresponding position in the dom tree
 			//note: "draw:name" style element only exist in styles.dom
-			InsertCollectedStyle(styleQName, srcDrawStyleCloneEleList, getStylesDom(), appendDrawStyleList);
+			insertCollectedStyle(styleQName, srcDrawStyleCloneEleList, getStylesDom(), appendDrawStyleList);
 
 		} catch (Exception e) {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
@@ -818,7 +818,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	//1. modified the style name of the style definition element which has the same name with the source document
 	//2. As to the style definition which match 1) condition, modified the referred style name of the element which reference this style
 	//3. All the style which also contains other style reference, should be copied to the source document.
-	private void InsertCollectedStyle(String styleQName,
+	private void insertCollectedStyle(String styleQName,
 			HashMap<OdfElement, List<OdfElement>> srcStyleCloneEleList, OdfFileDom dom, HashMap<OdfElement, OdfElement> appendStyleList) {
 		try {
 			String stylePrefix = OdfNamespace.getPrefixPart(styleQName);
@@ -841,9 +841,8 @@ public class OdfPresentationDocument extends OdfDocument {
 				List<String> newStyleNameList = styleRenameMap.get(styleName);
 				// if the newStyleNameList != null, means that styleName exists in dest document
 				// and it has already been renamed
-				OdfElement destStyleElement = null;
 				if ((newStyleNameList != null)
-						|| ((destStyleElement = IsStyleNameExist(destStyleNodeList, styleName)) != null)) {
+						|| (isStyleNameExist(destStyleNodeList, styleName) != null)) {
 					String newStyleName = null;
 					if (newStyleNameList == null) {
 						newStyleNameList = new ArrayList<String>();
@@ -853,7 +852,7 @@ public class OdfPresentationDocument extends OdfDocument {
 					} else {
 						for (int i = 0; i < newStyleNameList.size(); i++) {
 							String styleNameIter = newStyleNameList.get(i);
-							OdfElement destStyleElementWithNewName = IsStyleNameExist(destStyleNodeList, styleNameIter);
+							OdfElement destStyleElementWithNewName = isStyleNameExist(destStyleNodeList, styleNameIter);
 							//check if the two style elements have the same content
 							//if not, the cloneStyleElement should rename, rather than reuse the new style name
 							cloneStyleElement.setAttributeNS(styleURI, styleQName, styleNameIter);
@@ -920,7 +919,6 @@ public class OdfPresentationDocument extends OdfDocument {
 	private void getCopyStyleList(OdfElement ele, OdfElement cloneEle, String styleQName, NodeList srcStyleNodeList,
 			HashMap<OdfElement, List<OdfElement>> copyStyleEleList, HashMap<OdfElement, OdfElement> appendStyleList, boolean loop) {
 		try {
-			String stylePrefix = OdfNamespace.getPrefixPart(styleQName);
 			String styleLocalName = OdfNamespace.getLocalPart(styleQName);
 			String styleURI = OdfDocumentNamespace.STYLE.getUri();
 			//OdfElement override the "toString" method
@@ -936,12 +934,12 @@ public class OdfPresentationDocument extends OdfDocument {
 						int lastSpaceIndex = subStr.lastIndexOf(' ');
 						String attrStr = subStr.substring(lastSpaceIndex + 1, index);
 						XPath xpath = ((OdfFileDom) cloneEle.getOwnerDocument()).getXPath();
-						NodeList styleRefNodes = (NodeList) xpath.evaluate("//*[@" + attrStr + "='" + styleName + "']", cloneEle, XPathConstants.NODESET);
+						NodeList styleRefNodes = (NodeList) xpath.evaluate(".//*[@" + attrStr + "='" + styleName + "']", cloneEle, XPathConstants.NODESET);
 						boolean isExist = false;
 						for (int j = 0; j <= styleRefNodes.getLength(); j++) {
 							OdfElement styleRefElement = null;
 							if (j == styleRefNodes.getLength()) {
-								isExist = IsStyleNameRefExist(cloneEle, styleName, false);
+								isExist = isStyleNameRefExist(cloneEle, styleName, false);
 								if (isExist) {
 									styleRefElement = cloneEle;
 								} else {
@@ -949,7 +947,7 @@ public class OdfPresentationDocument extends OdfDocument {
 								}
 							} else {
 								OdfElement tmpElement = (OdfElement) styleRefNodes.item(j);
-								if (IsStyleNameRefExist(tmpElement, styleName, false)) {
+								if (isStyleNameRefExist(tmpElement, styleName, false)) {
 									styleRefElement = tmpElement;
 								} else {
 									continue;
@@ -1072,7 +1070,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	}
 
 	//check if the element contains the referred styleName
-	private boolean IsStyleNameRefExist(Node element, String styleName, boolean deep) {
+	private boolean isStyleNameRefExist(Node element, String styleName, boolean deep) {
 		NamedNodeMap attributes = element.getAttributes();
 		if (attributes != null) {
 			for (int i = 0; i < attributes.getLength(); i++) {
@@ -1087,7 +1085,7 @@ public class OdfPresentationDocument extends OdfDocument {
 		if (deep) {
 			Node childNode = element.getFirstChild();
 			while (childNode != null) {
-				if (!IsStyleNameRefExist(childNode, styleName, true)) {
+				if (!isStyleNameRefExist(childNode, styleName, true)) {
 					childNode = childNode.getNextSibling();
 				} else {
 					return true;
@@ -1099,11 +1097,11 @@ public class OdfPresentationDocument extends OdfDocument {
 
 	//check if nodeList contains the node that "style:name" attribute has the same value with styleName
 	//Note: nodeList here is all the style definition list
-	private OdfElement IsStyleNameExist(NodeList nodeList,
+	private OdfElement isStyleNameExist(NodeList nodeList,
 			String styleName) {
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			OdfElement element = (OdfElement) nodeList.item(i);
-			String name = element.getAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE).toString(), "name");
+			String name = element.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "name");
 			if (name.equals(styleName)) //return true;
 			{
 				return element;
@@ -1190,7 +1188,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
 			return null;
 		}
-		NodeList slideList = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+		NodeList slideList = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 		int slideCount = slideList.getLength();
 		if ((index < 0) || (index > slideCount)) {
 			throw new IndexOutOfBoundsException("the specified Index is out of slide count when call newSlide method.");
@@ -1221,7 +1219,7 @@ public class OdfPresentationDocument extends OdfDocument {
 		}
 		setSlideLayout(newSlideElement, slideLayout);
 		//insert notes page
-		NodeList noteNodes = refStyleSlide.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION).toString(), "notes");
+		NodeList noteNodes = refStyleSlide.getElementsByTagNameNS(OdfDocumentNamespace.PRESENTATION.getUri(), "notes");
 		if (noteNodes.getLength() > 0) {
 			PresentationNotesElement notePage = (PresentationNotesElement) noteNodes.item(0);
 			PresentationNotesElement cloneNotePage = (PresentationNotesElement) notePage.cloneNode(true);
@@ -1231,7 +1229,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			DrawPageElement refSlide = (DrawPageElement) slideList.item(index);
 			contentRoot.insertBefore(newSlideElement, refSlide);
 		}
-		AdjustNotePageNumber(index);
+		adjustNotePageNumber(index);
 		//in case that the appended new slide have the same name with the original slide
 		hasCheckSlideName = false;
 		checkAllSlideName();
@@ -1242,16 +1240,16 @@ public class OdfPresentationDocument extends OdfDocument {
 	//note page refer the slide index in order to show the corresponding slide notes view
 	//this function is used to adjust note page referred slide index since startIndex
 	//when the slide at startIndex has been delete or insert
-	private void AdjustNotePageNumber(int startIndex) {
+	private void adjustNotePageNumber(int startIndex) {
 		try {
 			OfficePresentationElement contentRoot = getContentRoot();
-			NodeList slideList = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+			NodeList slideList = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 			for (int i = startIndex; i < getSlideCount(); i++) {
 				DrawPageElement page = (DrawPageElement) slideList.item(i);
-				NodeList noteNodes = page.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.PRESENTATION).toString(), "notes");
+				NodeList noteNodes = page.getElementsByTagNameNS(OdfDocumentNamespace.PRESENTATION.getUri(), "notes");
 				if (noteNodes.getLength() > 0) {
 					PresentationNotesElement notePage = (PresentationNotesElement) noteNodes.item(0);
-					NodeList thumbnailList = notePage.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page-thumbnail");
+					NodeList thumbnailList = notePage.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page-thumbnail");
 					if (thumbnailList.getLength() > 0) {
 						DrawPageThumbnailElement thumbnail = (DrawPageThumbnailElement) thumbnailList.item(0);
 						thumbnail.setDrawPageNumberAttribute(i + 1);

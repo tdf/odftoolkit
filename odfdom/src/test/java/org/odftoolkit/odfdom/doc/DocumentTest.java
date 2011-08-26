@@ -321,7 +321,7 @@ public class DocumentTest {
 
 			Assert.assertNotNull(parentStyle);
 		}
-		if (testStyle.hasOdfAttribute(OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "list-style-name"))) {
+		if (testStyle.hasOdfAttribute(OdfName.newName(OdfDocumentNamespace.STYLE, "list-style-name"))) {
 			if (testStyle.getStyleListStyleNameAttribute() != null) {
 				OdfTextListStyle listStyle = dom.getAutomaticStyles().getListStyle(testStyle.getStyleListStyleNameAttribute());
 				if (listStyle == null) {

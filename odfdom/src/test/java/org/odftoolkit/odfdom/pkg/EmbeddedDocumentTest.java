@@ -321,12 +321,12 @@ public class EmbeddedDocumentTest {
 	}
 
 	private void updateFrameForEmbeddedDoc(OdfFileDom dom, String originPath, String newPath) throws Exception {
-		NodeList objNodes = dom.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "object");
+		NodeList objNodes = dom.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "object");
 		for (int i = 0; i < objNodes.getLength(); i++) {
 			OdfElement object = (OdfElement) objNodes.item(i);
-			String refObjPath = object.getAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK).toString(), "href");
+			String refObjPath = object.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
 			if (refObjPath.equals(originPath)) {
-				object.setAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.XLINK).toString(), "href", newPath);
+				object.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href", newPath);
 			}
 		}
 	}

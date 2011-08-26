@@ -29,7 +29,6 @@ import java.util.logging.Logger;
 import junit.framework.Assert;
 
 import org.junit.Test;
-import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.doc.presentation.OdfPresentationNotes;
 import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -89,7 +88,7 @@ public class SlideTest {
 	@Test
 	public void testGetSlide() {
 		try {
-			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			int slideCount = doc.getSlideCount();
 			Assert.assertTrue(10 == slideCount);
 			OdfSlide page2 = doc.getSlideByIndex(2);
@@ -138,16 +137,16 @@ public class SlideTest {
 	@Test
 	public void testSlideName() {
 		try {
-			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			OfficePresentationElement contentRoot = doc.getContentRoot();
-			NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "page");
+			NodeList slideNodes = contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
 			DrawPageElement slideEle4 = (DrawPageElement) slideNodes.item(4);
 			Assert.assertEquals(slideEle4.getDrawNameAttribute(), "page5");
 			DrawPageElement slideEle8 = (DrawPageElement) slideNodes.item(8);
 			slideEle8.setDrawNameAttribute("page5");
 			OdfSlide slide7 = doc.getSlideByIndex(7);
 			DrawPageElement slideEle7 = (DrawPageElement) slideNodes.item(7);
-			slideEle7.removeAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "name");
+			slideEle7.removeAttributeNS(OdfDocumentNamespace.DRAW.getUri(), "name");
 
 			OdfSlide slide4 = doc.getSlideByIndex(4);
 			Assert.assertTrue(slide4.getSlideName().equals("page5"));
@@ -203,7 +202,7 @@ public class SlideTest {
 	@Test
 	public void testDeleteSlide() {
 		try {
-			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			OdfSlide slide2 = doc.getSlideByIndex(2);
 			OdfSlide slide3 = doc.getSlideByIndex(3);
 			//this slide contains an embed document, remove this slide will also remove the embed document
@@ -234,7 +233,7 @@ public class SlideTest {
 			Assert.assertNull(imageStream3);
 			//slide at index 2 at doc2 contains one image, but it also referred by other slides
 			//so the image of this slide will not be removed
-			doc2 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
+			doc2 = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
 			nImageCnt = OdfDrawImage.getImageCount(doc2);
 			doc2.deleteSlideByIndex(2);
 			Assert.assertTrue(OdfDrawImage.getImageCount(doc2) == (nImageCnt - 1));
@@ -281,7 +280,7 @@ public class SlideTest {
 	@Test
 	public void testNewSlide() {
 		try {
-			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			OdfSlide slide5 = doc.getSlideByIndex(5);
 			OdfSlide newSlide1 = doc.newSlide(2, "Slide 2 new", OdfSlide.SlideLayout.BLANK);
 			Assert.assertTrue(2 == newSlide1.getSlideIndex());
@@ -338,7 +337,7 @@ public class SlideTest {
 	@Test
 	public void testMoveAndCopySlide() {
 		try {
-			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
 			OdfSlide lastSlide = doc.getSlideByIndex(9);
 			OdfSlide firstSlide = doc.getSlideByIndex(0);
 
@@ -415,8 +414,8 @@ public class SlideTest {
 	@Test
 	public void testCopyForeignSlide() {
 		try {
-			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
-			doc2 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
+			doc = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc2 = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
 
 			// copy slide at index 2 of doc to the index 2 of doc2
 			int nEmbedDoc = doc2.getEmbeddedDocuments().size();
@@ -484,8 +483,8 @@ public class SlideTest {
 	@Test
 	public void testAppendPresentation() {
 		try {
-			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
-			doc2 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
+			doc = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc2 = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
 			int slideCount = doc.getSlideCount();
 			int slideCount2 = doc2.getSlideCount();
 			//doc, doc2 both have the embed document named "Object 2"
@@ -501,7 +500,7 @@ public class SlideTest {
 			//which is corresponding to the slide at index 3 of doc
 			OdfSlide slide = doc2.getSlideByIndex(103);
 			DrawPageElement slideEle = slide.getOdfElement();
-			NodeList objectList = slideEle.getElementsByTagNameNS(OdfNamespace.newNamespace(OdfDocumentNamespace.DRAW).toString(), "object");
+			NodeList objectList = slideEle.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "object");
 			Assert.assertTrue(objectList.getLength() == 2);
 			DrawObjectElement object1 = (DrawObjectElement) objectList.item(0);
 			String linkPath = object1.getXlinkHrefAttribute();
@@ -522,8 +521,8 @@ public class SlideTest {
 	@Test
 	public void testAnotherMergeDoc() {
 		try {
-			doc = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
-			doc2 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
+			doc = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_MAIN));
+			doc2 = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
 			doc.appendPresentation(doc2);
 			Assert.assertTrue(doc.getSlideCount() == 110);
 			doc.save(ResourceUtilities.newTestOutputFile(TEST_PRESENTATION_FILE_OUT_PREFIX + "Merge1.odp"));
@@ -547,11 +546,11 @@ public class SlideTest {
 	public void testCopyThreeDoc() {
 		try {
 			//testdoc1 contain "dp1" for draw page style
-			OdfPresentationDocument testdoc1 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_DOCUMENT1));
+			OdfPresentationDocument testdoc1 = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_DOCUMENT1));
 			//testdoc1 contain "dp1" for draw page style
-			OdfPresentationDocument testdoc2 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_DOCUMENT2));
+			OdfPresentationDocument testdoc2 = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_DOCUMENT2));
 			//testdoc1 contain "dp1" for draw page style
-			OdfPresentationDocument testdoc3 = (OdfPresentationDocument) OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_DOCUMENT3));
+			OdfPresentationDocument testdoc3 = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_DOCUMENT3));
 			testdoc1.copyForeignSlide(1, testdoc2, 0);
 			testdoc1.copyForeignSlide(2, testdoc3, 0);
 			//after copy foreign slide, the each slide should has its own draw page style

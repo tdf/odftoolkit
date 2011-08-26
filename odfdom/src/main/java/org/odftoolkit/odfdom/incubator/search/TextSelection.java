@@ -811,7 +811,7 @@ public class TextSelection extends Selection {
 			//change the parentNode to default style
 			//here we don't know the default style name, so here just
 			//remove the text:style-name attribute
-			pStyleNode.removeAttributeNS(OdfNamespace.newNamespace(OdfDocumentNamespace.TEXT).toString(), "style-name");
+			pStyleNode.removeAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "style-name");
 		}
 	}
 

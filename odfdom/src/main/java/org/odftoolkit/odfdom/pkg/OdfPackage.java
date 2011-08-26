@@ -2007,6 +2007,8 @@ public class OdfPackage {
 	 *  </ol>
 	 *
 	 * @throws IllegalArgumentException If the path is NULL, empty or an external path (e.g. starting with "../" is given).
+	 *  None relative URLs will NOT throw an exception.
+	 * @return the normalized path or the URL
 	 */
 	protected static String normalizeFilePath(String filePath) {
 		if (filePath.equals(EMPTY_STRING)) {
@@ -2045,11 +2047,7 @@ public class OdfPackage {
 			String errMsg = "The packagePath given by parameter is NULL!";
 			Logger.getLogger(OdfPackage.class.getName()).severe(errMsg);
 			throw new IllegalArgumentException(errMsg);
-		} else if (isExternalReference(path)) {
-			String errMsg = "The path given by parameter '" + path + "' is not an internal ODF package path!";
-			Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, errMsg);
-			throw new IllegalArgumentException(errMsg);
-		} else {
+		} else if (!isExternalReference(path)) {
 			if (path.indexOf('\\') != -1) {
 				path = path.replace('\\', '/');
 			}
@@ -2068,7 +2066,7 @@ public class OdfPackage {
 			// remove starting "./" unless it stands alone.
 			if (path.length() != 2 && path.startsWith("./")) {
 				path = path.substring(2);
-			}
+			}			
 		}
 		return path;
 	}

@@ -28,7 +28,7 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 
 public interface OdfRubyStyleProperties {
     public final static OdfStyleProperty RubyAlign = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "ruby-align"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.newName(OdfDocumentNamespace.STYLE, "ruby-align"));
     public final static OdfStyleProperty RubyPosition = 
-        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.newName(OdfNamespace.newNamespace(OdfDocumentNamespace.STYLE), "ruby-position"));
+        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.newName(OdfDocumentNamespace.STYLE, "ruby-position"));
 }
