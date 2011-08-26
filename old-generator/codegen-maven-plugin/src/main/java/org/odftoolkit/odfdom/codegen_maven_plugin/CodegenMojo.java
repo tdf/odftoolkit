@@ -37,7 +37,7 @@ import org.odftoolkit.odfdom.codegen.CodeGen;
 */
 public class CodegenMojo extends AbstractMojo {
 	
-	/**
+   /**
      * @parameter default-value="${project.build.directory}/generated/src/main/java"
      * @required
      */
