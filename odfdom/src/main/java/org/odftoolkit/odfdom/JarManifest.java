@@ -42,7 +42,6 @@ public class JarManifest {
     private static String ODFDOM_NAME;
     private static String ODFDOM_VERSION;
     private static String ODFDOM_WEBSITE;
-    private static String ODFDOM_BUILD_BY;
     private static String ODFDOM_BUILD_DATE;
     private static String ODFDOM_SUPPORTED_ODF_VERSION;
    
@@ -53,7 +52,6 @@ public class JarManifest {
             ODFDOM_NAME = attr.getValue("ODFDOM-Name");
             ODFDOM_VERSION = attr.getValue("ODFDOM-Version");
             ODFDOM_WEBSITE = attr.getValue("ODFDOM-Website");
-            ODFDOM_BUILD_BY = attr.getValue("ODFDOM-Built-By");
             ODFDOM_BUILD_DATE = attr.getValue("ODFDOM-Built-Date");
             ODFDOM_SUPPORTED_ODF_VERSION = attr.getValue("ODFDOM-Supported-Odf-Version");
         } catch (Exception e) {
@@ -127,14 +125,6 @@ public class JarManifest {
      */
     public static String getOdfdomWebsite() {
         return ODFDOM_WEBSITE;
-    }
-
-    /**
-     * Return the name of the one building the ODFDOM library (ie. odfdom.jar)
-     * @return the name of the ODFDOM library builder
-     */
-    public static String getOdfdomBuildResponsible() {
-        return ODFDOM_BUILD_BY;
     }
 
     /**

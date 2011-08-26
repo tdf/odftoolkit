@@ -72,9 +72,6 @@ public class JarManifestIT {
 			LOG.log(Level.INFO, "\nJarManifest.getBuildDate(): {0}", JarManifest.getOdfdomBuildDate());
 			Assert.assertNotNull(JarManifest.getOdfdomBuildDate());
 
-			LOG.log(Level.INFO, "\nJarManifest.getBuildResponsible(): {0}", JarManifest.getOdfdomBuildResponsible());
-			Assert.assertNotNull(JarManifest.getOdfdomBuildResponsible());
-
 			LOG.log(Level.INFO, "\nJarManifest.getSupportedOdfVersion(): {0}", JarManifest.getOdfdomSupportedOdfVersion());
 			Assert.assertNotNull(JarManifest.getOdfdomSupportedOdfVersion());
 

@@ -72,7 +72,6 @@
 									<ODFDOM-Name>odfdom</ODFDOM-Name>
 									<ODFDOM-Version>${project.version}</ODFDOM-Version>
 									<ODFDOM-Website>http://odftoolkit.org</ODFDOM-Website>
-									<ODFDOM-Built-By>${user.name}</ODFDOM-Built-By>
 									<ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
 									<ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
 								</manifestEntries>
