@@ -4,7 +4,8 @@
   DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
 
   Copyright 2008 Sun Microsystems, Inc. All rights reserved.
-
+  Copyright 2009 IBM. All rights reserved.
+  
   Use is subject to license terms.
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -93,9 +94,9 @@
 <define name="convertenumvaluetype">
     <if test="valuetype='enum'">
         <if test="not endswith(conversiontype,'type')">
-            <set valuetype="org.openoffice.odf.dom.type.%{prefix(conversiontype)}:Odf%{identifier(conversiontype)}Type"/>
+            <set valuetype="org.odftoolkit.odfdom.dom.type.%{prefix(conversiontype)}:Odf%{identifier(conversiontype)}Type"/>
             <else>
-                <set valuetype="org.openoffice.odf.dom.type.%{prefix(conversiontype)}:Odf%{identifier(conversiontype)}"/>
+                <set valuetype="org.odftoolkit.odfdom.dom.type.%{prefix(conversiontype)}:Odf%{identifier(conversiontype)}"/>
             </else>
          </if>
          <set conversiontype="%{valuetype}"/>
@@ -195,12 +196,12 @@
 </define>
 
 <define name="element-import-section">
-<code>import org.openoffice.odf.dom.OdfName;
-import org.openoffice.odf.dom.OdfNamespace;
-import org.openoffice.odf.doc.OdfFileDom;
+<code>import org.odftoolkit.odfdom.dom.OdfName;
+import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 </code>
 <if test="elementstylefamily!=''">
-<code>import org.openoffice.odf.dom.style.OdfStyleFamily;
+<code>import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 </code>
 </if>
 <!-- import base class, but only if it is in another package -->
@@ -234,8 +235,8 @@ import org.openoffice.odf.doc.OdfFileDom;
     </if>
   </foreach>
   <else>
-<code>import org.openoffice.odf.dom.style.props.OdfStyleProperty;
-import org.openoffice.odf.dom.style.props.OdfStylePropertiesSet;
+<code>import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 </code>
 </else>
   </if>
@@ -343,18 +344,18 @@ public enum %{enumclassname}
 <!-- create base element class files ===================================== -->
 <define name="gen_dom_base_elements">
   <foreach type="baseelement">
-    <set classname="org.openoffice.odf.dom.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}ElementBase"/>
+    <set classname="org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}ElementBase"/>
     <if test="not elementstylefamily">        
         <if test="elementbasename = 'container'">
-            <set baseclassname="org.openoffice.odf.dom.element.OdfContainerElementBase"/>
+            <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfContainerElementBase"/>
             <else>
                 <if test="elementbasename = 'style'">
-                    <set baseclassname="org.openoffice.odf.dom.element.OdfStyleBase"/>
+                    <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStyleBase"/>
                     <else>
                        <if test="elementbasename = 'styleproperties'">
-                          <set baseclassname="org.openoffice.odf.dom.element.OdfStylePropertiesBase"/>
+                          <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
                           <else>
-                              <set baseclassname="org.openoffice.odf.dom.element.OdfElement"/>
+                              <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfElement"/>
                           </else>
                        </if>
                      </else>
@@ -363,16 +364,16 @@ public enum %{enumclassname}
            </if>
         <else>
             <if test="elementstylefamily!='draw:graphic,presentation:presentation'">
-                <set baseclassname="org.openoffice.odf.dom.element.OdfStylableElement"/>
+                <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStylableElement"/>
                 <else>
-                    <set baseclassname="org.openoffice.odf.dom.element.OdfStyleablePresentationElement"/>
+                    <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStyleablePresentationElement"/>
                 </else>
             </if>
         </else>
     </if>
     <file path="%{prefix(classname)}" name="%{local_name(classname)}" extensions="java">      
       <ref name="header"/>
-<code>package org.openoffice.odf.dom.element.%{prefix(elementqname)};
+<code>package org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)};
 </code>
       <ref name="element-import-section"/>
       <code>
@@ -425,27 +426,27 @@ public abstract class %{local_name(classname)} extends %{local_name(baseclassnam
 <define name="get_baseclassname">
     <if test="not elementbasename">
         <if test="not elementstylefamily">        
-            <set baseclassname="org.openoffice.odf.dom.element.OdfElement"/>
+            <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfElement"/>
             <else>
                 <if test="elementstylefamily!='draw:graphic,presentation:presentation'">
-                    <set baseclassname="org.openoffice.odf.dom.element.OdfStylableElement"/>
+                    <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStylableElement"/>
                     <else>
-                        <set baseclassname="org.openoffice.odf.dom.element.OdfStyleablePresentationElement"/>
+                        <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStyleablePresentationElement"/>
                     </else>
                 </if>                
             </else>
         </if>
         <else>
             <if test="elementbasename = 'container'">
-                <set baseclassname="org.openoffice.odf.dom.element.OdfContainerElementBase"/>
+                <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfContainerElementBase"/>
             <else>
                 <if test="elementbasename = 'style'">
-                    <set baseclassname="org.openoffice.odf.dom.element.OdfStyleBase"/>
+                    <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStyleBase"/>
                     <else>
                        <if test="elementbasename = 'styleproperties'">
-                          <set baseclassname="org.openoffice.odf.dom.element.OdfStylePropertiesBase"/>
+                          <set baseclassname="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
                           <else>
-                            <set baseclassname="org.openoffice.odf.dom.element.%{prefix(elementbasename)}.Odf%{identifier(elementbasename)}ElementBase"/>
+                            <set baseclassname="org.odftoolkit.odfdom.dom.element.%{prefix(elementbasename)}.Odf%{identifier(elementbasename)}ElementBase"/>
                           </else>
                        </if>
                     </else>
@@ -472,7 +473,7 @@ public abstract class %{local_name(classname)} extends %{local_name(baseclassnam
       </select>
     </if>
 
-    <set classname="org.openoffice.odf.dom.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}Element"/>
+    <set classname="org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}Element"/>
     <ref name="get_baseclassname"/>
     <file path="%{prefix(classname)}" name="Odf%{identifier(elementname)}Element" extensions="java">
       <ref name="header"/>
@@ -556,7 +557,7 @@ public abstract class %{local_name(classname)} extends %{local_name(baseclassnam
 
 <!-- generate OdfNamespace java file -->
 <define name="gen_OdfNamespace">
-  <set classname="org.openoffice.odf.dom.OdfNamespace"/>
+  <set classname="org.odftoolkit.odfdom.dom.OdfNamespace"/>
   <file path="%{prefix(classname)}" name="%{local_name(classname)}" extensions="java">
       <ref name="header"/>
 <code>
@@ -754,14 +755,14 @@ public class %{local_name(classname)} implements Comparable, NamespaceContext {
 <!-- generate doc element java classes ===================================== -->
 <define name="gen_doc_elements">
 <foreach type="element">
-    <set classname="org.openoffice.org.doc.element.%{prefix(elementname)}.Odf%{identifier(elementname)}"/>
-    <set baseclassname="org.openoffice.org.dom.element.%{prefix(elementname)}.Odf%{identifier(elementname)}Element"/>
-    <file path="org/openoffice/odf/doc/element/%{prefix(elementqname)}" name="%{classname}" extensions="java">
+    <set classname="org.odftoolkit.odfdom.doc.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}"/>
+    <set baseclassname="org.odftoolkit.odfdom.dom.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}Element"/>
+    <file path="org/odftoolkit/odfdom/doc/element/%{prefix(elementqname)}" name="Odf%{identifier(elementname)}" extensions="java">
       <ref name="header"/>
       <code>
 package %{prefix(classname)};
 
-import org.openoffice.odf.doc.OdfFileDom;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
 import %{baseclassname};
 
 /**
@@ -779,19 +780,19 @@ public class %{local_name(classname)} extends %{local_name(baseclassname)}
 </foreach>
 </define>
 
-<!-- create org.openoffice.odf.doc.element.OdfElementFactory.java ========== -->
+<!-- create org.odftoolkit.odfdom.doc.element.OdfElementFactory.java ========== -->
 <define name="gen_OdfElementFactory">
-<file path="org/openoffice/odf/doc/element" name="OdfElementFactory" extensions="java">
+<file path="org/odftoolkit/odfdom/doc/element" name="OdfElementFactory" extensions="java">
 <ref name="header"/>
 <code>
-package org.openoffice.odf.doc.element;
+package org.odftoolkit.odfdom.doc.element;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
-import org.openoffice.odf.doc.OdfFileDom;
-import org.openoffice.odf.dom.element.OdfElement;
-import org.openoffice.odf.dom.OdfName;
+import org.odftoolkit.odfdom.doc.OdfFileDom;
+import org.odftoolkit.odfdom.dom.element.OdfElement;
+import org.odftoolkit.odfdom.dom.OdfName;
 import org.w3c.dom.DOMException;
 
 public class OdfElementFactory {
@@ -809,7 +810,7 @@ public class OdfElementFactory {
         m_elementTypes = new HashMap&lt;OdfName, Class&gt;();
 </code>
 <foreach type="element">
-<set classname="org.openoffice.odf.doc.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}"/>
+<set classname="org.odftoolkit.odfdom.doc.element.%{prefix(elementqname)}.Odf%{identifier(elementname)}"/>
 <!-- we must use the full qualified class name here as we have equal element names in different namespaces! -->
 <code>        m_elementTypes.put(%{classname}.ELEMENT_NAME, %{classname}.class);
 </code>

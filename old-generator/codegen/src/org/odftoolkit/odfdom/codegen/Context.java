@@ -19,7 +19,7 @@
  *
  */
 
-package org.openoffice.odf.codegen;
+package org.odftoolkit.odfdom.codegen;
 
 import java.io.File;
 import java.io.IOException;

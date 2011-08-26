@@ -19,7 +19,7 @@
  *
  */
 
-package org.openoffice.odf.codegen.rng;
+package org.odftoolkit.odfdom.codegen.rng;
 
 import org.xml.sax.Attributes;
 
@@ -27,24 +27,20 @@ import org.xml.sax.Attributes;
  *
  * @author cl93746
  */
-class RngReference extends RngNode
+public class RngData extends RngNode
 {
-    public static final String LOCAL_NAME = "ref";
-    private String Name;
+    public static String LOCAL_NAME = "data";
+    private String Type;
     
-    public RngReference(Attributes attributes)
+    RngData(Attributes attributes)
     {
-        super( LOCAL_NAME );
-        Name = attributes.getValue("name");
+        super(LOCAL_NAME);
         
+        Type = attributes.getValue("type");
     }
-
-    public String getName()
+    
+    public String getType()
     {
-        if( Name == null )
-            return new String("none?");
-         
-        return Name;
-    }
-
+        return Type;
+    }        
 }

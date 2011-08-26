@@ -19,129 +19,85 @@
  *
  */
 
-package org.openoffice.odf.codegen.rng;
+package org.odftoolkit.odfdom.codegen.rng;
 
 import java.util.Iterator;
 import java.util.Vector;
-import org.openoffice.odf.codegen.Config.DataTypeConfig;
 import org.xml.sax.Attributes;
 
 /**
  *
  * @author cl93746
  */
-public class RngAttribute extends RngNode
+public class RngElement extends RngNode
 {
-    public final static String TYPE_ENUM = "enum";
-    public final static String LOCAL_NAME = "attribute";
-
+    public static final String LOCAL_NAME = "element";
     private String Name;
-    private String DefaultValue;
     private RngHandler Handler;
-    private String Type;
-    private Vector< String > Values;
+    private Vector< AttributeEntry > Attributes;
     
-    RngAttribute( RngHandler handler, Attributes attributes)
+    public class AttributeEntry
+    {
+        public RngAttribute Attribute;
+        public boolean Optional;
+        
+        public AttributeEntry( RngAttribute attribute, boolean optional )
+        {
+            Attribute = attribute;
+            Optional = optional;
+        }
+    }
+
+    RngElement( RngHandler handler, Attributes attributes)
     {
         super(LOCAL_NAME);
 
-        Name = forceString(attributes.getValue("name"));
-        DefaultValue = forceString(attributes.getValue(XMLNS_A, "defaultValue"));
         Handler = handler;
+        Name = attributes.getValue("name");
     }
 
-    public String getDefaultValue()
+    public Iterator<AttributeEntry> getAttributes()
     {
-        return DefaultValue;
-    }
-    
-    public String getType()
-    {
-        if( Type == null )
+        if( Attributes == null )
         {
-            getType( this );
-                        
-            if( Type == null )
-            {
-                if( (Values != null) && !Values.isEmpty())
-                {
-                    Type = TYPE_ENUM;
-                }
-                else
-                {                
-                    Type = new String();
-                }
-            }
+            Attributes = new Vector< AttributeEntry >();
+            getAttributes( Attributes, this, false );
         }
-        
-        return Type;
+        return Attributes.iterator();
     }
     
-    public Iterator< String > getValues()
-    {        
-        if( Values == null )
-        {
-            Vector< String > temp = new Vector< String >();
-            return temp.iterator();
-        }
-        
-        return Values.iterator();
-    }
-    
-    private boolean getType( RngNode parent )
+    private void getAttributes( Vector< AttributeEntry > attributes, RngNode parent, boolean optional )
     {
         Iterator< RngNode > iter = parent.getChildren().iterator();
         while( iter.hasNext() )
         {
             RngNode child = iter.next();
-            if( child.getLocalName().equals( RngValue.LOCAL_NAME) )
+            if( child.getLocalName().equals( RngAttribute.LOCAL_NAME ) )
             {
-                if( Values == null )
-                    Values = new Vector< String >();
-                
-                Values.add(((RngValue)child).Value);
+                attributes.add(new AttributeEntry( (RngAttribute)child, optional ) );
             }
             else if( child.getLocalName().equals( RngReference.LOCAL_NAME) )
             {
-                // if this reference name is equal to a configured data-type, stop here
-                String defName = ((RngReference)child).getName();
-                if( Type == null )
-                {
-                    DataTypeConfig config = Handler.getConfiguration().getDataTypeConfiguration(defName);
-                    if( config != null )
-                        Type = defName;
-                }
-
-                Iterator< RngDefine > defineIter = Handler.getDefines( defName );
+                Iterator< RngDefine > defineIter = Handler.getDefines( ((RngReference)child).getName() );
                 while( defineIter.hasNext() )
-                {
-                    if( getType( defineIter.next() ) )
-                        return true;
-                }
+                    getAttributes( attributes, defineIter.next(), optional );
             }            
-            else if( child.getLocalName().equals( RngData.LOCAL_NAME ) )
-            {
-                if( Type == null )
-                    Type = ((RngData)child).getType();
-                return true;
-            }
             else if( child.getLocalName().equals( RngAttribute.LOCAL_NAME ) )
             {
-                continue; // skip names inside nested attributes
+                continue; // skip nested attributes, should be an error?
             }
             else if( child.getLocalName().equals( RngElement.LOCAL_NAME ) )
             {
-                continue; // skip names inside nested elements
+                continue; // skip nested elements, should be an error?
             }
             else
             {
-                if( getType( child ) )
-                    return true;
+                if( !optional )
+                    optional = child.getLocalName().equals("optional");
+                getAttributes( attributes, child, optional );
             }                
         }        
-        return false;
     }
-            
 
     public Iterator<String> getNames()
     {
@@ -152,7 +108,7 @@ public class RngAttribute extends RngNode
             getNames( names, this );
         return names.iterator();
     }
-
+    
     private void getNames( Vector< String > names, RngNode parent )
     {
         Iterator< RngNode > iter = parent.getChildren().iterator();
@@ -168,7 +124,7 @@ public class RngAttribute extends RngNode
                 Iterator< RngDefine > defineIter = Handler.getDefines( ((RngReference)child).getName() );
                 while( defineIter.hasNext() )
                     getNames( names, defineIter.next() );
-            }            
+            }
             else if( child.getLocalName().equals( RngAttribute.LOCAL_NAME ) )
             {
                 continue; // skip names inside nested attributes

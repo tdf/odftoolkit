@@ -19,7 +19,7 @@
  *
  */
 
-package org.openoffice.odf.codegen;
+package org.odftoolkit.odfdom.codegen;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,8 +28,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Vector;
-import org.openoffice.odf.codegen.CodeTemplate.TemplateNode;
-import org.openoffice.odf.codegen.Config.ElementConfig;
+
+import org.odftoolkit.odfdom.codegen.CodeTemplate.TemplateNode;
+import org.odftoolkit.odfdom.codegen.Config.ElementConfig;
+
 import java.io.IOException;
 import java.util.StringTokenizer;
 

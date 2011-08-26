@@ -19,85 +19,130 @@
  *
  */
 
-package org.openoffice.odf.codegen.rng;
+package org.odftoolkit.odfdom.codegen.rng;
 
 import java.util.Iterator;
 import java.util.Vector;
+
+import org.odftoolkit.odfdom.codegen.Config.DataTypeConfig;
 import org.xml.sax.Attributes;
 
 /**
  *
  * @author cl93746
  */
-public class RngElement extends RngNode
+public class RngAttribute extends RngNode
 {
-    public static final String LOCAL_NAME = "element";
-    private String Name;
-    private RngHandler Handler;
-    private Vector< AttributeEntry > Attributes;
-    
-    public class AttributeEntry
-    {
-        public RngAttribute Attribute;
-        public boolean Optional;
-        
-        public AttributeEntry( RngAttribute attribute, boolean optional )
-        {
-            Attribute = attribute;
-            Optional = optional;
-        }
-    }
+    public final static String TYPE_ENUM = "enum";
+    public final static String LOCAL_NAME = "attribute";
 
-    RngElement( RngHandler handler, Attributes attributes)
+    private String Name;
+    private String DefaultValue;
+    private RngHandler Handler;
+    private String Type;
+    private Vector< String > Values;
+    
+    RngAttribute( RngHandler handler, Attributes attributes)
     {
         super(LOCAL_NAME);
 
+        Name = forceString(attributes.getValue("name"));
+        DefaultValue = forceString(attributes.getValue(XMLNS_A, "defaultValue"));
         Handler = handler;
-        Name = attributes.getValue("name");
     }
 
-    public Iterator<AttributeEntry> getAttributes()
+    public String getDefaultValue()
     {
-        if( Attributes == null )
-        {
-            Attributes = new Vector< AttributeEntry >();
-            getAttributes( Attributes, this, false );
-        }
-        return Attributes.iterator();
+        return DefaultValue;
     }
     
-    private void getAttributes( Vector< AttributeEntry > attributes, RngNode parent, boolean optional )
+    public String getType()
+    {
+        if( Type == null )
+        {
+            getType( this );
+                        
+            if( Type == null )
+            {
+                if( (Values != null) && !Values.isEmpty())
+                {
+                    Type = TYPE_ENUM;
+                }
+                else
+                {                
+                    Type = new String();
+                }
+            }
+        }
+        
+        return Type;
+    }
+    
+    public Iterator< String > getValues()
+    {        
+        if( Values == null )
+        {
+            Vector< String > temp = new Vector< String >();
+            return temp.iterator();
+        }
+        
+        return Values.iterator();
+    }
+    
+    private boolean getType( RngNode parent )
     {
         Iterator< RngNode > iter = parent.getChildren().iterator();
         while( iter.hasNext() )
         {
             RngNode child = iter.next();
-            if( child.getLocalName().equals( RngAttribute.LOCAL_NAME ) )
+            if( child.getLocalName().equals( RngValue.LOCAL_NAME) )
             {
-                attributes.add(new AttributeEntry( (RngAttribute)child, optional ) );
+                if( Values == null )
+                    Values = new Vector< String >();
+                
+                Values.add(((RngValue)child).Value);
             }
             else if( child.getLocalName().equals( RngReference.LOCAL_NAME) )
             {
-                Iterator< RngDefine > defineIter = Handler.getDefines( ((RngReference)child).getName() );
+                // if this reference name is equal to a configured data-type, stop here
+                String defName = ((RngReference)child).getName();
+                if( Type == null )
+                {
+                    DataTypeConfig config = Handler.getConfiguration().getDataTypeConfiguration(defName);
+                    if( config != null )
+                        Type = defName;
+                }
+
+                Iterator< RngDefine > defineIter = Handler.getDefines( defName );
                 while( defineIter.hasNext() )
-                    getAttributes( attributes, defineIter.next(), optional );
+                {
+                    if( getType( defineIter.next() ) )
+                        return true;
+                }
             }            
+            else if( child.getLocalName().equals( RngData.LOCAL_NAME ) )
+            {
+                if( Type == null )
+                    Type = ((RngData)child).getType();
+                return true;
+            }
             else if( child.getLocalName().equals( RngAttribute.LOCAL_NAME ) )
             {
-                continue; // skip nested attributes, should be an error?
+                continue; // skip names inside nested attributes
             }
             else if( child.getLocalName().equals( RngElement.LOCAL_NAME ) )
             {
-                continue; // skip nested elements, should be an error?
+                continue; // skip names inside nested elements
             }
             else
             {
-                if( !optional )
-                    optional = child.getLocalName().equals("optional");
-                getAttributes( attributes, child, optional );
+                if( getType( child ) )
+                    return true;
             }                
         }        
+        return false;
     }
+            
 
     public Iterator<String> getNames()
     {
@@ -108,7 +153,7 @@ public class RngElement extends RngNode
             getNames( names, this );
         return names.iterator();
     }
-    
+
     private void getNames( Vector< String > names, RngNode parent )
     {
         Iterator< RngNode > iter = parent.getChildren().iterator();
@@ -124,7 +169,7 @@ public class RngElement extends RngNode
                 Iterator< RngDefine > defineIter = Handler.getDefines( ((RngReference)child).getName() );
                 while( defineIter.hasNext() )
                     getNames( names, defineIter.next() );
-            }
+            }            
             else if( child.getLocalName().equals( RngAttribute.LOCAL_NAME ) )
             {
                 continue; // skip names inside nested attributes

@@ -19,7 +19,7 @@
  *
  */
 
-package org.openoffice.odf.codegen.rng;
+package org.odftoolkit.odfdom.codegen.rng;
 
 import java.util.List;
 import java.util.Vector;

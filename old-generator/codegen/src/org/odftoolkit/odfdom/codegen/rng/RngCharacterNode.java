@@ -19,18 +19,18 @@
  *
  */
 
-package org.openoffice.odf.codegen.rng;
+package org.odftoolkit.odfdom.codegen.rng;
 
 /**
  *
  * @author cl93746
  */
-public class RngValue extends RngCharacterNode
+public class RngCharacterNode extends RngNode
 {
-    public static String LOCAL_NAME = "value";
-    
-    public RngValue()
+    public String Value;
+
+    public RngCharacterNode( String localName )
     {
-        super( LOCAL_NAME );
+        super( localName );
     }    
 }

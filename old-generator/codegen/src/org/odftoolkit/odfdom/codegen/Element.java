@@ -19,12 +19,13 @@
  *
  */
 
-package org.openoffice.odf.codegen;
+package org.odftoolkit.odfdom.codegen;
 
 import java.util.Iterator;
 import java.util.Vector;
-import org.openoffice.odf.codegen.rng.RngAttribute;
-import org.openoffice.odf.codegen.rng.RngElement;
+
+import org.odftoolkit.odfdom.codegen.rng.RngAttribute;
+import org.odftoolkit.odfdom.codegen.rng.RngElement;
 
 /**
  *

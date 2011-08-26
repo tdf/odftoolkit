@@ -19,19 +19,20 @@
  *
  */
 
-package org.openoffice.odf.codegen;
+package org.odftoolkit.odfdom.codegen;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
-import org.openoffice.odf.codegen.Config.AttributeConfig;
-import org.openoffice.odf.codegen.Config.DataTypeConfig;
-import org.openoffice.odf.codegen.Config.ElementConfig;
-import org.openoffice.odf.codegen.rng.RngAttribute;
-import org.openoffice.odf.codegen.rng.RngElement;
-import org.openoffice.odf.codegen.rng.RngElement.AttributeEntry;
-import org.openoffice.odf.codegen.rng.RngHandler;
-import org.openoffice.odf.codegen.rng.RngNode;
+
+import org.odftoolkit.odfdom.codegen.Config.AttributeConfig;
+import org.odftoolkit.odfdom.codegen.Config.DataTypeConfig;
+import org.odftoolkit.odfdom.codegen.Config.ElementConfig;
+import org.odftoolkit.odfdom.codegen.rng.RngAttribute;
+import org.odftoolkit.odfdom.codegen.rng.RngElement;
+import org.odftoolkit.odfdom.codegen.rng.RngHandler;
+import org.odftoolkit.odfdom.codegen.rng.RngNode;
+import org.odftoolkit.odfdom.codegen.rng.RngElement.AttributeEntry;
 
 /**
  *

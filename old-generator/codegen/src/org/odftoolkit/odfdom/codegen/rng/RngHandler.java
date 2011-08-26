@@ -19,7 +19,7 @@
  *
  */
 
-package org.openoffice.odf.codegen.rng;
+package org.odftoolkit.odfdom.codegen.rng;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +34,8 @@ import java.util.Stack;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.openoffice.odf.codegen.Config;
+
+import org.odftoolkit.odfdom.codegen.Config;
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 

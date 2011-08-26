@@ -19,18 +19,16 @@
  *
  */
 
-package org.openoffice.odf.codegen.rng;
+package org.odftoolkit.odfdom.codegen;
+
+import java.io.IOException;
+import java.util.Vector;
 
 /**
  *
- * @author cl93746
+ * @author Christian
  */
-public class RngCharacterNode extends RngNode
+public interface IFunctionSupplier
 {
-    public String Value;
-
-    public RngCharacterNode( String localName )
-    {
-        super( localName );
-    }    
+    public String function( String funcName, Vector< String > params ) throws IOException;
 }

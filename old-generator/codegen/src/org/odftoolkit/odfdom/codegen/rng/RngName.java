@@ -19,34 +19,18 @@
  *
  */
 
-package org.openoffice.odf.codegen.rng;
-
-import org.xml.sax.Attributes;
+package org.odftoolkit.odfdom.codegen.rng;
 
 /**
  *
  * @author cl93746
  */
-public class RngDefine extends RngNode
+public class RngName extends RngCharacterNode
 {
-    public static String LOCAL_NAME = "define";
-    private String Name;
-    private String Combine;
-    RngDefine(Attributes attributes)
-    {
-        super(LOCAL_NAME);
-        
-        Name = attributes.getValue("name");
-        Combine = attributes.getValue("combine");
-    }
+    public static final String LOCAL_NAME = "name";
     
-    public String getName()
+    public RngName()
     {
-        return Name;
+        super( LOCAL_NAME );
     }
-
-    public String getCombine()
-    {
-        return Combine;
-    }        
 }

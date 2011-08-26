@@ -19,7 +19,7 @@
  *
  */
 
-package org.openoffice.odf.codegen;
+package org.odftoolkit.odfdom.codegen;
 
 import java.io.IOException;
 import java.io.StreamTokenizer;
