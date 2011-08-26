@@ -105,7 +105,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 		// before creating a new dom, make sure that there no DOM opened for this file already
 		Document existingDom = packageDocument.getPackage().getCachedDom(packagePath);
 		if (existingDom == null) {
-			// ToDo: bug ??? - register OdfFileDom to this class
+			// ToDo: bug 264 - register OdfFileDom to this class
 			if (packagePath.equals("content.xml") || packagePath.endsWith("/content.xml")) {
 				newFileDom = new OdfContentDom((OdfSchemaDocument) packageDocument, packagePath);
 			} else if (packagePath.equals("styles.xml") || packagePath.endsWith("/styles.xml")) {
@@ -120,7 +120,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 		} else {
 			if (existingDom instanceof OdfFileDom) {
 				newFileDom = (OdfFileDom) existingDom;
-//ToDO: Issue 263 - Otherwise if NOT an OdfFileDom serialize old DOM AND CREATE A NEW ONE?!
+//ToDO: Issue 264 - Otherwise if NOT an OdfFileDom serialize old DOM AND CREATE A NEW ONE?!
 // Or shall we always reference to the dom, than we can not inherit from Document? Pro/Con?s
 //			}else{
 //				// Create an OdfFileDOM from an existing DOM

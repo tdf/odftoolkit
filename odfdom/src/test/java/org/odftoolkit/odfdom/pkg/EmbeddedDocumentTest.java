@@ -115,7 +115,7 @@ public class EmbeddedDocumentTest {
 			odtRootDoc.insertDocument(OdfTextDocument.newTextDocument(), "DOCA/");
 			OdfDocument docA = odtRootDoc.loadSubDocument("DOCA");
 			docA.newImage(ResourceUtilities.getURI(TEST_PIC));
-			docA.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "DOCB/");
+			docA.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "../DOCB/");
 			OdfFileDom contentA = docA.getContentDom();
 			XPath xpath = contentA.getXPath();
 			TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", contentA, XPathConstants.NODE);
@@ -129,7 +129,7 @@ public class EmbeddedDocumentTest {
 			updateFrameForEmbeddedDoc(contentA, "./DOCB", "DOCA/DOCB");
 			//if user want to save the docA with the side by side embedded document
 			//he has to insert it to the sub document of docA and update the xlink:href link
-			docA.insertDocument(docB, "DOCA/DOCB/");
+			docA.insertDocument(docB, "DOCB/");
 			//save
 			docA.save(TEST_FILE_FOLDER + TEST_FILE_EMBEDDED_SIDEBYSIDE_SAVE_OUT);
 			OdfDocument testLoad = OdfDocument.loadDocument(TEST_FILE_FOLDER + TEST_FILE_EMBEDDED_SIDEBYSIDE_SAVE_OUT);
@@ -159,7 +159,7 @@ public class EmbeddedDocumentTest {
 			odtDoc1.insertDocument(OdfTextDocument.newTextDocument(), "DOCA/");
 			OdfDocument docA = odtDoc1.loadSubDocument("DOCA");
 			docA.newImage(ResourceUtilities.getURI(TEST_PIC));
-			docA.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "DOCA/DOCB/");
+			docA.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "DOCB/");
 			OdfFileDom contentA = docA.getContentDom();
 			XPath xpath = contentA.getXPath();
 			TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", contentA, XPathConstants.NODE);
@@ -279,9 +279,10 @@ public class EmbeddedDocumentTest {
 			List<String> subDocNames = new ArrayList<String>();
 			for (String childDocPath : embeddedDocs.keySet()) {
 				OdfDocument childDoc = embeddedDocs.get(childDocPath);
+				Assert.assertNotNull(childDoc);
 				String embedFileName = childDoc.getDocumentPath();
 				subDocNames.add(embedFileName);
-				childDoc.removeDocument(embedFileName);
+				doc.removeDocument(embedFileName);
 			}
 			doc.save(TEST_FILE_FOLDER + TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT);
 			doc.close();

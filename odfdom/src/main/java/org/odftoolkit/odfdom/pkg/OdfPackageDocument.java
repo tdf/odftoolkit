@@ -161,9 +161,7 @@ public class OdfPackageDocument implements Closeable {
 	 * @param internDocumentPath path to the directory of the embedded ODF document (always relative to the package path of the current document).
 	 */
 	public void removeDocument(String internDocumentPath) {
-		//ToDo: 219 - FIXME+Test: This have to be relative to package root
-		//  mPackage.removeDocument(mDocumentPathInPackage + internDocumentPath);
-		mPackage.removeDocument(internDocumentPath);
+		mPackage.removeDocument(mDocumentPathInPackage + internDocumentPath);
 	}
 
 	/** @return true if the document is at the root level of the package */
@@ -268,8 +266,7 @@ public class OdfPackageDocument implements Closeable {
 	 */
 	public void insertDocument(OdfPackageDocument newDocument, String documentPath) {
 		newDocument.flushDoms();
-		//ToDo: 219 - FIXME+Test:  mPackage.insertDocument(newDocument, mDocumentPathInPackage + documentPath);
-		mPackage.insertDocument(newDocument, documentPath);
+		mPackage.insertDocument(newDocument, mDocumentPathInPackage + documentPath);
 	}
 
 	/** 

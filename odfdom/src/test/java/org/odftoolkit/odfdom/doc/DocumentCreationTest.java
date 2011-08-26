@@ -281,7 +281,7 @@ public class DocumentCreationTest {
 			// the document "Object 1/
 			OdfDocument embDoc = embDocs.get("Object 1/");
 			String pathOfSecondInnerDoc = "Object in Object1/";
-			embDoc.insertDocument(OdfTextDocument.newTextDocument(), embDoc.getDocumentPath() + pathOfSecondInnerDoc);
+			embDoc.insertDocument(OdfTextDocument.newTextDocument(), pathOfSecondInnerDoc);
 			OdfFileEntry fileEntry = embDoc.getPackage().getFileEntry(embDoc.getDocumentPath() + pathOfSecondInnerDoc);
 			Assert.assertNotNull(fileEntry);
 
@@ -370,7 +370,7 @@ public class DocumentCreationTest {
 					addImageToDocument(contentDom3, para2);
 					TextPElement para3 = (TextPElement) xpath.evaluate("//text:p[last()]", contentDom3, XPathConstants.NODE);
 					addFrameForEmbeddedDoc(contentDom3, para3, "NewEmbedded");
-					doc3.insertDocument(OdfTextDocument.newTextDocument(), doc3.getDocumentPath() + "/NewEmbedded/");
+					doc3.insertDocument(OdfTextDocument.newTextDocument(), "/NewEmbedded/");
 					OdfDocument doc4 = doc3.loadSubDocument("NewEmbedded");
 					Assert.assertNotNull(doc4);
 					OdfContentDom contentDom4 = doc4.getContentDom();
@@ -403,23 +403,23 @@ public class DocumentCreationTest {
 
 	@Test
 	/**
-	 * OdfDocument docA and docB are embedded Odfdocuments, a containing b!
-	 * But the relative package path hierachiy is opposite, meaning
-	 * OdfPackage/docB/docA
+	 * OdfDocument docA and docB are ODF subdocuments.
+	 * docA containing docB, like
+	 * OdfPackage/dummy/docA/docB
 	 */
 	public void testDocumentWithQueerPath() {
 		try {
 
 			OdfDocument containerDoc = OdfTextDocument.newTextDocument();
-			String pathToDocA = "docB/docA/";
+			String pathToDocA = "dummy/docA/";
 			String pathToDocB = "docB/";
 			containerDoc.insertDocument(OdfTextDocument.newTextDocument(), pathToDocA);
 			OdfDocument docA = containerDoc.loadSubDocument(pathToDocA);
 			Assert.assertNotNull(docA);
 			docA.insertDocument(OdfTextDocument.newTextDocument(), pathToDocB);
-			OdfDocument docB = containerDoc.loadSubDocument(pathToDocB);
+			OdfDocument docB = containerDoc.loadSubDocument(pathToDocA + pathToDocB);
 			Assert.assertNotNull(docB);
-
+			// only the document docB located at dummy/docA/docB will be saved
 			docB.save(TEST_FILE_SAVE_QUEER_PATH);
 
 		} catch (Exception ex) {
