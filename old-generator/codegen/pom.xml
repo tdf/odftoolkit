@@ -27,7 +27,7 @@
 	    <index>true</index>
 	  </archive>
 	  <manifest>
-	    <mainClass>org.openoffice.odf.codegen.CodeGen</mainClass>
+	    <mainClass>org.odftoolkit.odfdom.codegen.CodeGen</mainClass>
 	  </manifest>
 	</configuration>
       </plugin>
