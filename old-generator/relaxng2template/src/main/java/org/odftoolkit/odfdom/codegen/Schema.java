@@ -185,8 +185,8 @@ public class Schema
                         {
                             // todo: do a sorted compare for better results!
                             // compare enum values
-                            Iterator< String > i1 = attr.getValues();
-                            Iterator< String > i2 = compareAttr.getValues();
+                            Iterator< String > i1 = attr.getValues().iterator();
+                            Iterator< String > i2 = compareAttr.getValues().iterator();
                             while( i1.hasNext() && i2.hasNext() )
                             {
                                 if( !i1.next().equals(i2.next()) )

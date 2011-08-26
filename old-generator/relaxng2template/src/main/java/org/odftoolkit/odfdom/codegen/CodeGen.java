@@ -463,17 +463,25 @@ public class CodeGen implements IFunctionSupplier
             Attribute attr = context.getCurrentAttribute();
             if( attr != null )
             {
-            	Iterator< String > iter = attr.getValues();
-                while( iter.hasNext() )
-                {
-                    first = printSeperator( sep, first );
+            	Set<String> set = attr.getValues();
+            	String[] entries =  (String[])set.toArray(new String[set.size()]);
+
+                Arrays.sort(entries, new Comparator() {
+                  public int compare(Object arg0, Object arg1) {
+                    Object key1 = ((String)arg0);
+                    Object key2 = ((String) arg1);
+                    return ((Comparable) key1).compareTo(key2);
+                  }});
+
+                for(int i=0; i< entries.length ; i++){
+                	first = printSeperator( sep, first );
                     
-                    context.pushVariable( "value", iter.next() );
+                    context.pushVariable( "value", entries[i] );
                     boolean ret = executeTemplateChildNodes(node);               
                     context.popVariable( "value" );
                     
                     if( !ret )
-                        return false;                
+                        return false;
                 }
         	}else
             {
@@ -485,18 +493,25 @@ public class CodeGen implements IFunctionSupplier
             AttributeSet attrSet = context.getCurrentAttributeSet();
             if( attrSet != null){
             	boolean isValueSetType = type.equals("valueset");
-            	Iterator< String > iter = isValueSetType?attrSet.getValues():attrSet.getDefaultValues();
-            	while( iter.hasNext() )
-                {
-                    first = printSeperator( sep, first );
-                    
-                    context.pushVariable( "value", iter.next() );
-                    boolean ret = executeTemplateChildNodes(node);               
-                    context.popVariable( "value" );
-                    
-                    if( !ret )
-                        return false;                
-                }
+            	Set< String > set = isValueSetType?attrSet.getValues():attrSet.getDefaultValues();
+            	String[] entries =  (String[])set.toArray(new String[set.size()]);
+            	Arrays.sort(entries, new Comparator() {
+                    public int compare(Object arg0, Object arg1) {
+                      Object key1 = ((String)arg0);
+                      Object key2 = ((String) arg1);
+                      return ((Comparable) key1).compareTo(key2);
+                    }});
+
+                  for(int i=0; i< entries.length ; i++){
+                	  first = printSeperator( sep, first );
+                      
+                      context.pushVariable( "value", entries[i] );
+                      boolean ret = executeTemplateChildNodes(node);               
+                      context.popVariable( "value" );
+                      
+                      if( !ret )
+                          return false;  
+                  }
         	}else
             {
                 System.err.println("error: foreach valueset or defaultvalueset needs a current attributeset!" );

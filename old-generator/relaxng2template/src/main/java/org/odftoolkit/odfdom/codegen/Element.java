@@ -88,7 +88,7 @@ public class Element
         }
         else
         {            
-        	Iterator< String > iter = newAttr.getValues();
+        	Iterator< String > iter = newAttr.getValues().iterator();
             while( iter.hasNext() )
             {
             	mergeAttr.addValue(iter.next());

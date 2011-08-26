@@ -71,7 +71,7 @@ public class AttributeSet {
             //merge value sets if the newAttr is not boolean
             //because 'true' and 'false' should not be viewed as enum
             if(!newAttr.getValueType().equalsIgnoreCase("boolean"))
-            	addValueSet(newAttr.getValues());
+            	addValueSet(newAttr.getValues().iterator());
             if( !ValueType.equals(newAttr.getValueType()) || !ConversionType.equals(newAttr.getConversionType()) ){
             	//the contained attributes valuetype/conversiontype are different, this may due to the schema
 //            	System.err.println("warning: merging AttributeSet " + newAttr.getName() + ", original(" + ValueType + ", " + ConversionType + 
@@ -154,29 +154,29 @@ public class AttributeSet {
         return ConversionType;
     }
     
-    public Iterator< String > getValues()
+    public HashSet< String > getValues()
     {
         if( Values != null )
         {
-            return Values.iterator();
+            return Values;
         }
         else
         {
-            Vector< String > temp = new Vector< String >();
-            return temp.iterator();
+        	HashSet< String > temp = new HashSet< String >();
+            return temp;
         }
     }
     
-    public Iterator< String > getDefaultValues()
+    public HashSet< String > getDefaultValues()
     {
     	if( DefaultValues != null )
         {
-            return DefaultValues.iterator();
+            return DefaultValues;
         }
         else
         {
-            Vector< String > temp = new Vector< String >();
-            return temp.iterator();
+        	HashSet< String > temp = new HashSet< String >();
+            return temp;
         }
     }
 

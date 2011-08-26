@@ -113,16 +113,16 @@ public class Attribute
         ConversionType = type;
     }
     
-    public Iterator< String > getValues()
+    public HashSet< String > getValues()
     {
         if( Values != null )
         {
-            return Values.iterator();
+            return Values;
         }
         else
         {
-            Vector< String > temp = new Vector< String >();
-            return temp.iterator();
+            HashSet< String > temp = new HashSet< String >();
+            return temp;
         }
     }
     
