@@ -2,59 +2,138 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.odftoolkit</groupId>
-  <artifactId>odfdom-codegen</artifactId>
+  <artifactId>odfdom</artifactId>
   <version>0.7-SNAPSHOT</version>
-  <name>ODF Code Generation Tool</name>
+  <name>odfdom</name>
   <packaging>pom</packaging>
+
+  <scm>
+    <connection>scm:hg:http://http://odftoolkit.org/hg/odfdom~developer</connection>
+    <developerConnection>scm:hg:https://odftoolkit.org/hg/odfdom~developer</developerConnection>
+  </scm>
+
+<!-- for now, we deploy to local files, until other arrangements are made -->
+  <distributionManagement>
+    <repository>
+      <id>local-release-files</id>
+      <url>${odfdom.release}</url>
+    </repository>
+    <snapshotRepository>
+      <id>local-snapshot-files</id>
+      <name>Local Snapshot</name>
+    <url>${odfdom.snapshot}</url>
+  </snapshotRepository>
+  </distributionManagement>
+
   <prerequisites>
     <maven>2.0.8</maven>
   </prerequisites>
   <properties>
     <compiler.fork>false</compiler.fork>
   </properties>
+
   <modules>
-    <module>relaxng2template</module>
-    <module>codegen-maven-plugin</module>
+    <module>parent</module>
+    <module>maven-performancetest-plugin</module>
+    <module>core</module>
   </modules>
   <build>
     <defaultGoal>install</defaultGoal>
-    <extensions>
-      <extension>
-        <groupId>org.jvnet.wagon-svn</groupId>
-        <artifactId>wagon-svn</artifactId>
-        <version>RELEASE</version>
-      </extension>
-      <extension>
-	<groupId>org.apache.maven.wagon</groupId>
-	<artifactId>wagon-webdav</artifactId>
-	<version>1.0-beta-2</version>
-      </extension>
-    </extensions>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>1.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>1.4.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <configuration>
+	    <!-- what is the tag base? -->
+	    <useReleaseProfile>false</useReleaseProfile>
+            <preparationGoals>clean install</preparationGoals>
+            <goals>deploy</goals>
+            <arguments>-Prelease,deploy</arguments>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.5</version>
+          <configuration>
+            <attach>true</attach>
+            <source>1.5</source>
+            <quiet>true</quiet>
+            <javadocVersion>1.5</javadocVersion>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.4.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.0.2</version>
+          <configuration>
+            <source>1.5</source>
+            <target>1.5</target>
+            <maxmem>256M</maxmem>
+            <fork>${compiler.fork}</fork>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.2-beta-2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-eclipse-plugin</artifactId>
+          <version>2.5.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
-  <distributionManagement>
-    <repository>
-      <id>odfdom-releases</id>
-      <name>ODFDOM Release</name>
-      <url>svn:https://odftoolkit.org/svn/odfdom~maven2/release/</url>
-      <uniqueVersion>false</uniqueVersion>
-    </repository>
-    <snapshotRepository>
-      <id>odfdom-snapshots</id>
-      <name>ODFDOM Snapshot</name>
-      <url>svn:https://odftoolkit.org/svn/odfdom~maven2/snapshot/</url>
-      <uniqueVersion>false</uniqueVersion>
-    </snapshotRepository>
-  </distributionManagement>
-  <repositories>
-    <repository>
-      <id>maven2-repository.dev.java.net</id>
-      <name>Java.net Repository for Maven</name>
-      <url>http://download.java.net/maven/2/</url>
-    </repository>
-    <repository>
-      <id>odfdom-releases</id>
-      <name>ODFDOM Release</name>
-      <url>https://odftoolkit.org/svn/maven2/release</url>
-    </repository>
-  </repositories>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>

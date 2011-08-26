@@ -7,14 +7,6 @@
   <version>0.7-SNAPSHOT</version>
   <name>ODFDOM Code Generation Maven2 Plugin</name>
   <url>http://odftoolkit.org</url>
-
-    <parent>
-      <groupId>org.odftoolkit</groupId>
-      <artifactId>odfdom-codegen</artifactId>
-      <version>0.7-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent> 
-
   <build>
     <defaultGoal>install</defaultGoal>
     <plugins>

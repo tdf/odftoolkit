@@ -5,12 +5,10 @@
   <artifactId>relaxng2template</artifactId>
   <version>0.7-SNAPSHOT</version>
   <name>ODFDOM Code Generator</name>
-  <parent>
-    <groupId>org.odftoolkit</groupId>
-    <artifactId>odfdom-codegen</artifactId>
-    <version>0.7-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
-  </parent>
+  <scm>
+    <connection>scm:hg:${codegen.local.repo}/codegen</connection>
+    <developerConnection>scm:hg:${codegen.local.repo}/codegen</developerConnection>
+  </scm>
   <build>
     <defaultGoal>install</defaultGoal>
     <plugins>
