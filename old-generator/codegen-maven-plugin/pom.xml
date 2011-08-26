@@ -24,7 +24,7 @@
     <dependencies>
       <dependency>
 	<groupId>org.odftoolkit</groupId>
-	<artifactId>codegen</artifactId>
+	<artifactId>odfdom-codegen</artifactId>
 	<version>${project.version}</version>
       </dependency>
       <dependency>
