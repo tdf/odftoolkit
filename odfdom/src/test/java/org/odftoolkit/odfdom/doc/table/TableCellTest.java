@@ -282,7 +282,6 @@ public class TableCellTest {
 		Assert.assertEquals("200"
 				+ (new DecimalFormatSymbols()).getDecimalSeparator() + "00%",
 				displayvalue);
-		// reproduce bug 157
 		try {
 			OdfTableRow tablerow = table.getRowByIndex(6);
 			OdfTableCell cell = tablerow.getCellByIndex(3);
@@ -298,7 +297,89 @@ public class TableCellTest {
 			Assert.fail(e.getMessage());
 		}
 		saveods();
-
+		
+		//test value type adapt function.
+		OdfSpreadsheetDocument ods;
+		try {
+			ods = OdfSpreadsheetDocument.newSpreadsheetDocument();
+			OdfTable tbl = ods.getTableByName("Sheet1");
+			OdfTableCell cell;
+			for (int i = 1; i <= 10; i++) {
+				cell = tbl.getCellByPosition("A" + i);
+				cell.setDoubleValue(new Double(i));
+			}
+			cell = tbl.getCellByPosition("A11");
+			cell.setFormula("=sum(A1:A10)");
+			//contains '#' should be adapted as float.
+			cell.setFormatString("#,###");
+			Assert.assertEquals("float", cell.getValueType());
+			cell = tbl.getCellByPosition("A12");
+			cell.setFormula("=sum(A1:A10)");
+			//contains '0' should be adapted as float.
+			cell.setFormatString("0.00");
+			Assert.assertEquals("float", cell.getValueType());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+		try {
+			ods = OdfSpreadsheetDocument.newSpreadsheetDocument();
+			OdfTable tbl = ods.getTableByName("Sheet1");
+			OdfTableCell cell;
+			for (int i = 1; i <= 10; i++) {
+				cell = tbl.getCellByPosition("A" + i);
+				cell.setPercentageValue(0.1);
+			}
+			cell = tbl.getCellByPosition("A11");
+			cell.setFormula("=sum(A1:A10)");
+			//contains '%'should be adapted as percentage.
+			cell.setFormatString("###.0%");
+			Assert.assertEquals("percentage", cell.getValueType());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+		try {
+			ods = OdfSpreadsheetDocument.newSpreadsheetDocument();
+			OdfTable tbl = ods.getTableByName("Sheet1");
+			OdfTableCell cell;
+			for (int i = 1; i <= 10; i++) {
+				cell = tbl.getCellByPosition("A" + i);
+				cell.setDateValue(Calendar.getInstance());
+				cell.setFormatString("yyyy.MM.dd");
+			}
+			cell = tbl.getCellByPosition("A11");
+			cell.setFormula("=max(A1:A10)");
+			//contains 'y' 'M' 'd' should be adapted as date.
+			cell.setFormatString("yyyy.MM.dd");
+			Assert.assertEquals("date", cell.getValueType());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+		try {
+			ods = OdfSpreadsheetDocument.newSpreadsheetDocument();
+			OdfTable tbl = ods.getTableByName("Sheet1");
+			OdfTableCell cell;
+			for (int i = 1; i <= 10; i++) {
+				cell = tbl.getCellByPosition("A" + i);
+				cell.setTimeValue(Calendar.getInstance());
+				cell.setFormatString("yyyy.MM.dd HH:mm:ss");
+			}
+			cell = tbl.getCellByPosition("A11");
+			cell.setFormula("=max(A1:A10)");
+			//contains 'H' 'm' 's' should be adapted as time.
+			cell.setFormatString("yyyy.MM.dd HH:mm:ss");
+			Assert.assertEquals("time", cell.getValueType());
+			cell = tbl.getCellByPosition("A12");
+			cell.setFormula("=max(A1:A10)");
+			//contains 'H' 'm' 's' should be adapted as time.
+			cell.setFormatString("HH:mm:ss");
+			Assert.assertEquals("time", cell.getValueType());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	private void loadOutputSpreadsheet() {
@@ -516,11 +597,10 @@ public class TableCellTest {
 		int rowindex = 5, columnindex = 5;
 		OdfTable table = odsdoc.getTableByName("Sheet1");
 		OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
-		//reproduce bug 193
 		fcell.setValueType("currency");
 		fcell.setCurrencyFormat("$", "#,##0.00");
-		double actualValue=fcell.getCurrencyValue();
-		Assert.assertEquals(0.0, actualValue);
+		Double actualValue=fcell.getCurrencyValue();
+		Assert.assertNull(actualValue);
 		
 		double expected = 100.00;
 		boolean illegalArgumentFlag = false;
@@ -798,7 +878,7 @@ public class TableCellTest {
 		cell.setCurrencyFormat("$", formats[0]);
 
 		cell = table.getCellByPosition("J2");
-		cell.setCurrencyValue(32, "CNY");
+		cell.setCurrencyValue(new Double(32), "CNY");
 		cell.setCurrencyFormat("CNY", formats[1]);
 
 		cell = table.getCellByPosition("J3");

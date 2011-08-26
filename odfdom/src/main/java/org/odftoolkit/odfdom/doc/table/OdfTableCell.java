@@ -479,7 +479,7 @@ public class OdfTableCell {
 	 * 
 	 * @return the currency code
 	 * <p>
-	 * An IllegalArgumentException will be throw if the value type is not currency
+	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the value type is not "currency".
 	 */
 	public String getCurrencyCode() {
 		if (mCellElement.getOfficeValueTypeAttribute().equals(OfficeValueTypeAttribute.Value.CURRENCY.toString())) {
@@ -490,12 +490,10 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Set the currency code of this cell, for example, "USD", "EUR", "CNY", and etc. 
-	 * <p>
-	 * If the value type is not "currency", an IllegalArgumentException will be thrown.
+	 * Set the currency code of this cell, for example, "USD", "EUR", "CNY", and etc.
 	 * 
 	 * @param currency	the currency code that need to be set.
-	 * If input currency is null, an IllegalArgumentException will be thrown.
+	 * @throws IllegalArgumentException  If input <code>currency</code> is null, an IllegalArgumentException will be thrown.
 	 */
 	public void setCurrencyCode(String currency) {
 		if (currency == null) {
@@ -553,13 +551,13 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Get the value of this cell as double.
+	 * Get the double value of this cell as Double object.
 	 * <p>
-	 * Throw IllegalArgumentException if the cell type is not float.
+	 * Throw IllegalArgumentException if the cell type is not "float".
 	 * 
-	 * @return the double value of this cell
+	 * @return the double value of this cell as a Double object. If the cell value is empty, null will be returned.
 	 * <p>
-	 * An IllegalArgumentException will be thrown if the cell type is not float.
+	 * An IllegalArgumentException will be thrown if the cell type is not "float".
 	 */
 	public Double getDoubleValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.FLOAT) {
@@ -570,22 +568,16 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Get the value of this cell as double.
+	 * Get the currency value of this cell as Double object.
 	 * <p>
-	 * Throw IllegalArgumentException if the cell type is not currency.
+	 * Throw IllegalArgumentException if the cell type is not "currency".
 	 * 
-	 * @return the currency value of this cell as a double
-	 * <p>
-	 * An IllegalArgumentException will be thrown if the cell type is not currency.
+	 * @return the currency value of this cell as a Double object. If the cell value is empty, null will be returned.
+	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the cell type is not "currency".
 	 */
-	public double getCurrencyValue() {
+	public Double getCurrencyValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.CURRENCY) {
-			Double officeValueAttribute = mCellElement.getOfficeValueAttribute();
-			if (officeValueAttribute != null) {
-				return officeValueAttribute.doubleValue();
-			} else {
-				return 0.0;
-			}
+			return mCellElement.getOfficeValueAttribute();
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -594,8 +586,7 @@ public class OdfTableCell {
 	/**
 	 * Get the symbol of currency.
 	 * @return the currency symbol
-	 * <p>
-	 * An IllegalArgumentException will be thrown if the value type is not currency.
+	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the value type is not "currency".
 	 */
 	public String getCurrencySymbol() {
 		if (getTypeAttr() != OfficeValueTypeAttribute.Value.CURRENCY) {
@@ -613,55 +604,53 @@ public class OdfTableCell {
 				return dataStyle.getCurrencySymbolElement().getTextContent();
 			}
 		}
-
 		return null;
 	}
 
 	/**
-	 * Set the value and currency of the cell,
-	 * and set the value type as currency.
+	 * Set the value and currency of the cell, and set the value type as "currency". 
+	 * If<code>value</value> is null, the cell value will be removed.
 	 * 
-	 * @param value			the value that will be set 
+	 * @param value  the value that will be set 
 	 * @param currency	the currency that will be set.
-	 * If input currency is null, an IllegalArgumentException will be thrown.
+	 * @throws IllegalArgumentException  If input currency is null, an IllegalArgumentException will be thrown.
 	 */
-	public void setCurrencyValue(double value, String currency) {
+	public void setCurrencyValue(Double value, String currency) {
 		if (currency == null) {
 			throw new IllegalArgumentException("currency shouldn't be null.");
 		}
 		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.CURRENCY);
-		mCellElement.setOfficeValueAttribute(new Double(value));
+		mCellElement.setOfficeValueAttribute(value);
 		mCellElement.setOfficeCurrencyAttribute(currency);
 	}
 
 	/**
-	 * Get the cell value as double.
+	 * Get the cell percentage value as Double object.
 	 * <p>
-	 * Throw IllegalArgumentException if the cell type is not percentage.
+	 * Throw IllegalArgumentException if the cell type is not "percentage".
 	 * 
-	 * @return the double value of cell
-	 * <p>
-	 * An IllegalArgumentException will be thrown if the cell type is not percentage.
+	 * @return the percentage value of this cell as a Double object. If the cell value is empty, null will be returned.
+	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the cell type is not "percentage".
 	 */
-	public double getPercentageValue() {
+	public Double getPercentageValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.PERCENTAGE) {
-			return mCellElement.getOfficeValueAttribute().doubleValue();
+			return mCellElement.getOfficeValueAttribute();
 		} else {
 			throw new IllegalArgumentException();
 		}
 	}
 
 	/**
-	 * Set the cell value as a percentage value
-	 * and set the value type as percentage too.
+	 * Set the cell value as a percentage value and set the value type as percentage too.
+	 * If<code>value</value> is null, the cell value will be removed.
 	 * 
 	 * @param value	the value that will be set
 	 */
-	public void setPercentageValue(double value) {
+	public void setPercentageValue(Double value) {
 		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.PERCENTAGE);
-		mCellElement.setOfficeValueAttribute(new Double(value));
+		mCellElement.setOfficeValueAttribute(value);
 	}
 
 	/**
@@ -724,26 +713,24 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Set the cell value as a double
-	 * and set the value type to be float.
+	 * Set the cell value as a double and set the value type to be "float".
 	 * 
-	 * @param value	the double value that will be set
+	 * @param value	the double value that will be set. If<code>value</value> is null, the cell value will be removed.
 	 */
-	public void setDoubleValue(double value) {
+	public void setDoubleValue(Double value) {
 		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.FLOAT);
-		mCellElement.setOfficeValueAttribute(new Double(value));
+		mCellElement.setOfficeValueAttribute(value);
 		setDisplayText(value + "");
 	}
 
 	/**
-	 * Get the cell value as boolean.
+	 * Get the cell boolean value as Boolean object.
 	 * <p>
-	 * Throw IllegalArgumentException if the cell type is not boolean.
+	 * Throw IllegalArgumentException if the cell type is not "boolean".
 	 * 
-	 * @return the boolean value of cell
-	 * <p>
-	 * An IllegalArgumentException will be thrown if the cell type is not boolean.
+	 * @return the Boolean value of cell. If the cell value is empty, null will be returned.
+	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the cell type is not "boolean".
 	 */
 	public Boolean getBooleanValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.BOOLEAN) {
@@ -754,26 +741,24 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Set the cell value as a boolean
-	 * and set the value type to be boolean.
+	 * Set the cell value as a boolean and set the value type to be boolean. If<code>value</value> is null, the cell value will be removed.
 	 * 
 	 * @param value	the value of boolean type
 	 */
-	public void setBooleanValue(boolean value) {
+	public void setBooleanValue(Boolean value) {
 		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.BOOLEAN);
-		mCellElement.setOfficeBooleanValueAttribute(new Boolean(value));
+		mCellElement.setOfficeBooleanValueAttribute(value);
 		setDisplayText(value + "");
 	}
 
 	/**
-	 * Get the cell value as Calendar.
+	 * Get the cell date value as Calendar.
 	 * <p>
-	 * Throw IllegalArgumentException if the cell type is not date.
+	 * Throw IllegalArgumentException if the cell type is not "date".
 	 * 
 	 * @return the Calendar value of cell
-	 * <p>
-	 * An IllegalArgumentException will be thrown if the cell type is not date.
+	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown, if the cell type is not "date".
 	 */
 	public Calendar getDateValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.DATE) {
@@ -791,10 +776,9 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Set the cell value as a date,
-	 * and set the value type to be date.
+	 * Set the cell value as a date, and set the value type to be "date".
 	 * 
-	 * @param date	the value of calendar type
+	 * @param date	the value of {@link java.util.Calendar java.util.Calendar} type.
 	 */
 	public void setDateValue(Calendar date) {
 		if (date == null) {
@@ -809,8 +793,7 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Set the cell value as a string,
-	 * and set the value type to be string.
+	 * Set the cell value as a string, and set the value type to be string.
 	 * 
 	 * @param str	the value of string type. 
 	 * If input string is null, an empty string will be set.
@@ -887,13 +870,12 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Get the cell value as Calendar.
+	 * Get the cell value as {@link java.util.Calendar java.util.Calendar}.
 	 * <p>
-	 * Throw exception if the cell type is not time.
+	 * Throw exception if the cell type is not "time".
 	 * 
 	 * @return the Calendar value of cell
-	 * <p>
-	 * An IllegalArgumentException will be thrown if the cell type is not time.
+	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the cell type is not time.
 	 */
 	public Calendar getTimeValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.TIME) {
@@ -911,11 +893,10 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Set the cell value as a time and set the value type to be time too.
+	 * Set the cell value as a time and set the value type to be "time" too.
 	 * 
-	 * @param time
-	 *            the value of calendar type. If input time is null, an
-	 *            IllegalArgumentException exception will be thrown.
+	 * @param time  the value of {@link java.util.Calendar java.util.Calendar} type.
+	 * @throws IllegalArgumentException   If input time is null, an IllegalArgumentException exception will be thrown.
 	 */
 	public void setTimeValue(Calendar time) {
 		if (time == null) {
@@ -995,7 +976,7 @@ public class OdfTableCell {
 	 * 
 	 * @param cellBackgroundColor
 	 *            the background color that need to set. 
-	 *            If cellBackgroundColor is null, default background color <code>Color.WHITE</code> will be set.
+	 *            If <code>cellBackgroundColor</code> is null, default background color <code>Color.WHITE</code> will be set.
 	 */
 	public void setCellBackgroundColor(Color cellBackgroundColor) {
 		if (cellBackgroundColor == null) {
@@ -1165,7 +1146,7 @@ public class OdfTableCell {
 	 * It's just simply set as a formula attribute. See {@odf.attribute table:formula}
 	 * 
 	 * @param formula	the formula that need to be set.
-	 * If formula is null, an IllegalArgumentException will be thrown.
+	 * @throws IllegalArgumentException  if formula is null, an IllegalArgumentException will be thrown.
 	 */
 	public void setFormula(String formula) {
 		if (formula == null) {
@@ -1207,7 +1188,7 @@ public class OdfTableCell {
 	 * This function only works for currency.
 	 * @param currencySymbol	the currency symbol
 	 * @param format			overall format
-	 * If input currencySymbol or format is null, an IllegalArgumentException will be thrown.
+	 * @throws IllegalArgumentException  if input currencySymbol or format is null, an IllegalArgumentException will be thrown.
 	 */
 	public void setCurrencyFormat(String currencySymbol, String format) {
 		if (currencySymbol == null) {
@@ -1267,24 +1248,87 @@ public class OdfTableCell {
 	/**
 	 * Set the format string of the cell.
 	 * <p>
-	 * This function only works for float, date and percentage, otherwise an
-	 * {@link java.lang.IllegalArgumentException} will be thrown.
-
-	 * @param formatStr	the cell need be formatted as this specified format string
-	 * If input formatStr is null, an IllegalArgumentException will be thrown.
+	 * This function only works for float, date, time and percentage, otherwise an
+	 * {@link java.lang.IllegalArgumentException} will be thrown. 
+	 * <p>
+	 * For value type float and percentage, the <code>formatStr</code> must follow the encoding 
+	 * rule of {@link java.text.DecimalFormat <code>java.text.DecimalFormat</code>}.
+	 * For value type date and time, the <code>formatStr</code> must follow the encoding 
+	 * rule of {@link java.text.SimpleDateFormat <code>java.text.SimpleDateFormat</code>}.
+	 * <p>
+	 * Refer to {@link org.odftoolkit.odfdom.doc.table.OdfTableCell#setCurrencyFormat <code>setCurrencyFormat</code>} to set the format of currency.
+	 * <p>
+	 * If the cell value type is not set, the method will try to give it a value type, according 
+	 * to common ordination. The adapt order is: percentage-> time-> date-> float.
+	 * <blockquote>
+	 * <table border=0 cellspacing=3 cellpadding=0 summary="Chart showing ValueType, Distinguish Symbol
+	 * and Distinguish Priority.">
+	 *     <tr bgcolor="#ccccff">
+	 *          <th align=left>ValueType
+	 *          <th align=left>Distinguish Symbol
+	 *          <th align=left>Distinguish Priority
+	 *     <tr valign=top>
+	 *          <td>percentage
+	 *          <td>%
+	 *          <td>1
+	 *     <tr valign=top>
+	 *          <td>time
+	 *          <td>H, k, m, s, S
+	 *          <td>2
+	 *     <tr valign=top>
+	 *          <td>date
+	 *          <td>y, M, w, W, D, d, F, E, K, h
+	 *          <td>3
+	 *     <tr valign=top>
+	 *          <td>float
+	 *          <td>#, 0
+	 *          <td>4
+	 * </table>
+	 * </blockquote>
+	 * The adapt result may be inaccurate, so you'd better set value type before call this method. 
+	 * If adaptive failed, an {@link java.lang.UnsupportedOperationException} will be thrown.
+	 * <p>
+	 * @param formatStr	the cell need be formatted as this specified format string.
+	 * @throws IllegalArgumentException if <code>formatStr</code> is null or the cell value type is supported.
+	 * @throws UnsupportedOperationException if the adaptive failed, when cell value type is not set.
+	 * @see java.text.SimpleDateFormat
+	 * @see java.text.DecimalFormat
 	 */
 	public void setFormatString(String formatStr) {
 		if (formatStr == null) {
 			throw new IllegalArgumentException("formatStr shouldn't be null.");
 		}
-		splitRepeatedCells();
-		String type = mCellElement.getOfficeValueTypeAttribute();
+		String type = getValueType();
+		if (type == null) {
+			if (formatStr.contains("%")) {
+				setValueType("percentage");
+			} else if (formatStr.contains("H") || formatStr.contains("k")
+					|| formatStr.contains("m") || formatStr.contains("s")
+					|| formatStr.contains("S")) {
+				setValueType("time");
+			} else if (formatStr.contains("y") || formatStr.contains("M")
+					|| formatStr.contains("w") || formatStr.contains("W")
+					|| formatStr.contains("D") || formatStr.contains("d")
+					|| formatStr.contains("F") || formatStr.contains("E")
+					|| formatStr.contains("K") || formatStr.contains("h")) {
+				setValueType("date");
+			} else if (formatStr.contains("#") || formatStr.contains("0")) {
+				setValueType("float");
+			} else {
+				throw new UnsupportedOperationException("format string: "
+						+ formatStr
+						+ " can't be adapted to a possible value type.");
+			}
+			type = getValueType();
+		}
+		setCellFormatString(formatStr, type);
+	}
+
+	private void setCellFormatString(String formatStr, String type) {
 		OfficeValueTypeAttribute.Value typeValue = null;
 		msFormatString = formatStr;
-		if (type != null) {
-			typeValue = OfficeValueTypeAttribute.Value.enumValueOf(type);
-		}
-
+		splitRepeatedCells();
+		typeValue = OfficeValueTypeAttribute.Value.enumValueOf(type);
 		if (typeValue == OfficeValueTypeAttribute.Value.FLOAT) {
 			OdfNumberStyle numberStyle = new OdfNumberStyle(
 					(OdfFileDom) mCellElement.getOwnerDocument(),
