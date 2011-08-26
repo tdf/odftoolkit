@@ -43,9 +43,13 @@
     <xsl:param name="incl-types" select="'true'"/>
     
     <!-- The parameter 'incl-conditions' specifies whether elements -->
-    <!-- like <optional> shall be included -->
+    <!-- like <optional> shall be included as attributes -->
     <xsl:param name="incl-conditions" select="'true'"/>
-    
+
+    <!-- The parameter 'incl-content-model' specifies whether the -->
+    <!-- full content of elements shall be included in a normalizes fashion -->
+    <xsl:param name="incl-content-model" select="'true'"/>
+
     <!-- The parameter 'incl-elements' specifies whether child elements -->
     <!-- information shall be included -->
     <xsl:param name="incl-elements" select="'false'"/>
@@ -54,7 +58,9 @@
     <xsl:variable name="include-default-values" select="$incl-default-values = 'true'"/>
     <xsl:variable name="include-types" select="$incl-types = 'true'"/>
     <xsl:variable name="include-condition-attr" select="$incl-conditions = 'true'"/>
+    <xsl:variable name="include-content-model" select="$incl-content-model = 'false'"/>
     <xsl:variable name="include-elements" select="$incl-elements = 'true'"/>
+    <xsl:variable name="include-ref-comments" select="$incl-content-model != 'true'"/>
     
     <!-- ********** -->
     <!-- ** root ** -->
@@ -243,16 +249,45 @@
     <!--match <ref> elements -->
     <xsl:template match="rng:ref" mode="collect-content">
         <xsl:param name="condition-attr" select=""/>
-        <xsl:comment><xsl:value-of select="@name"/></xsl:comment>
+        <xsl:if test="$include-ref-comments">
+            <xsl:comment><xsl:value-of select="@name"/></xsl:comment>
+        </xsl:if>
         <!-- match <define> with same name in the current file and within
              included files. -->
         <xsl:variable name="name" select="@name"/>
-                    <xsl:apply-templates
-            select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]/*|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
-                        mode="collect-content">
+        <xsl:choose>
+            <xsl:when test="$include-content-model">
+                <xsl:variable name="combine" select="/rng:grammar/rng:define[@name=$name]/@combine|/rng:grammar/rng:include/rng:define[@name=$name]/@combine|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]/@combine"></xsl:variable>
+                <xsl:choose>
+                    <xsl:when test="$combine">
+                        <xsl:element name="{$combine}">
+                            <xsl:apply-templates
+                                select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]/*|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
+                                mode="collect-content">
+                                <xsl:with-param name="condition-attr" select="$condition-attr"/>
+                            </xsl:apply-templates>
+                        </xsl:element>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates
+                            select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]/*|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
+                            mode="collect-content">
                             <xsl:with-param name="condition-attr" select="$condition-attr"/>
-                    </xsl:apply-templates>
-        <xsl:comment>/<xsl:value-of select="@name"/></xsl:comment>
+                        </xsl:apply-templates>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates
+                    select="/rng:grammar/rng:define[@name=$name]|/rng:grammar/rng:include/rng:define[@name=$name]/*|document(/rng:grammar/rng:include/@href)/rng:grammar/rng:define[@name=$name]"
+                    mode="collect-content">
+                    <xsl:with-param name="condition-attr" select="$condition-attr"/>
+                </xsl:apply-templates>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="$include-ref-comments">
+            <xsl:comment>/<xsl:value-of select="@name"/></xsl:comment>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="rng:define" mode="collect-content">
@@ -291,16 +326,31 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="$include-content-model">
+                <xsl:copy>
                     <xsl:apply-templates mode="collect-content">
                         <xsl:with-param name="condition-attr" select="$new-condition"/>
                     </xsl:apply-templates>
+                </xsl:copy>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates mode="collect-content">
+                    <xsl:with-param name="condition-attr" select="$new-condition"/>
+                </xsl:apply-templates>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
         
     <xsl:template match="rng:text" mode="collect-content">
         <text/>
     </xsl:template>
 
-    <xsl:template match="rng:empty" mode="collect-content"/>
+    <xsl:template match="rng:empty" mode="collect-content">
+        <xsl:if test="$include-content-model">
+            <empty/>
+        </xsl:if>
+    </xsl:template>
     
     <!-- match all other elements and ignore them -->
     <xsl:template match="*" mode="collect-content">
