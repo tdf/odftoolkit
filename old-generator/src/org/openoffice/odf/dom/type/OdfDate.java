@@ -21,6 +21,7 @@
  ************************************************************************/
 package org.openoffice.odf.dom.type;
 
+import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -36,7 +37,11 @@ public class OdfDate {
         if( _aStringValue.length()==0 )
             return null;
         
-        DatatypeFactory aFactory = new org.apache.xerces.jaxp.datatype.DatatypeFactoryImpl();
-        return aFactory.newXMLGregorianCalendar(_aStringValue);
+        try {
+            DatatypeFactory aFactory = DatatypeFactory.newInstance();
+            return aFactory.newXMLGregorianCalendar(_aStringValue);
+        } catch (DatatypeConfigurationException ex) {
+            throw new IllegalArgumentException( ex );
+        }
     }
 }

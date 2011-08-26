@@ -46,9 +46,10 @@ public enum OdfStylePropertiesSet {
     TableRowProperties,
     // style-drawing-page-properties-attlist
     DrawingPageProperties,
+    //2DO: the last two are not beyond style:style
     // style-header-footer-properties-attlist
     HeaderFooterProperties,
     // style-page-layout-properties-attlist
     PageLayoutProperties
-        
+
 }

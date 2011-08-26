@@ -40,4 +40,6 @@ public class OdfTableCellProperties extends OdfTableCellPropertiesElement
     {
         super( _aOwnerDoc );
     }
+
+    
 }

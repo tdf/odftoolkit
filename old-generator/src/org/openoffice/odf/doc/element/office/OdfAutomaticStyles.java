@@ -29,7 +29,6 @@
 package org.openoffice.odf.doc.element.office;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Vector;
 import org.openoffice.odf.doc.OdfFileDom;
 import org.openoffice.odf.doc.element.style.OdfStyle;
@@ -55,10 +54,10 @@ public class OdfAutomaticStyles extends OdfAutomaticStylesElement
         super( _aOwnerDoc );
     }
 
-    public OdfStyleElement createStyle(OdfStyleFamily styleFamily)
+    public OdfStyle createStyle(OdfStyleFamily styleFamily)
     {
         OdfFileDom dom = (OdfFileDom)this.ownerDocument;
-        OdfStyleElement newStyle = dom.createOdfElement(OdfStyleElement.class);
+        OdfStyle newStyle = dom.createOdfElement(OdfStyle.class);
         newStyle.setFamily(styleFamily);
         
         newStyle.setName(createUniqueStyleName(styleFamily));
@@ -144,9 +143,21 @@ public class OdfAutomaticStyles extends OdfAutomaticStylesElement
             return null;
     }
 
-    public OdfStyleElement makeStyleUnique(OdfStyleElement referenceStyle)
+    public OdfStyle makeStyleUnique(OdfStyle referenceStyle)
     {
-        OdfStyleElement newStyle = (OdfStyleElement)referenceStyle.cloneNode(true);
+        OdfStyle newStyle = null;
+
+
+        if( referenceStyle.getOwnerDocument() != this.getOwnerDocument() )
+        {
+            // import style from a different dom
+            newStyle = (OdfStyle)this.getOwnerDocument().importNode(referenceStyle, true);
+        }
+        else
+        {
+            // just clone
+            newStyle = (OdfStyle)referenceStyle.cloneNode(true);
+        }
         
         newStyle.setName(createUniqueStyleName(newStyle.getFamily()));
         appendChild(newStyle);

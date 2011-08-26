@@ -23,7 +23,6 @@ package org.openoffice.odf.doc.element.table;
 
 import org.openoffice.odf.doc.OdfFileDom;
 import org.openoffice.odf.dom.element.table.OdfTableCellElement;
-import org.openoffice.odf.doc.element.style.OdfStyle;
 
 public class OdfTableCell extends OdfTableCellElement implements OdfTableCellBase {
 
@@ -46,9 +45,5 @@ public class OdfTableCell extends OdfTableCellElement implements OdfTableCellBas
 
     public OdfTable getTable() {
         return OdfTableCellBaseImpl.getTable(this);
-    }
-
-    public OdfStyle getTableColumnStyle() {
-        return OdfTableCellBaseImpl.getTableColumnStyle(this);
     }
 }

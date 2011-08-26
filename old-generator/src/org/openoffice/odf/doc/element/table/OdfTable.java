@@ -21,13 +21,15 @@
  ************************************************************************/
 package org.openoffice.odf.doc.element.table;
 
-import org.openoffice.odf.dom.element.table.OdfTableElement;
-import org.openoffice.odf.dom.util.DomNodeList;
-import org.openoffice.odf.doc.OdfFileDom;
 import java.util.ArrayList;
 import java.util.List;
+import org.openoffice.odf.doc.OdfFileDom;
+import org.openoffice.odf.dom.element.table.OdfTableColumnElement;
+import org.openoffice.odf.dom.element.table.OdfTableElement;
+import org.openoffice.odf.dom.util.DomNodeList;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
+
 
 public class OdfTable extends OdfTableElement {
 
@@ -55,7 +57,6 @@ public class OdfTable extends OdfTableElement {
     //@Override
     public int getTableColumnCount() {
         return mCurrentNumberOfColumns; // optimization
-    //return makeTableColumnList().size();
     }
 
     //@Override
@@ -64,8 +65,8 @@ public class OdfTable extends OdfTableElement {
     }
 
     //@Override
-    public OdfTableColumn addTableColumn(int repeat)
-    {
+    public OdfTableColumn addTableColumn(int repeat) {
+
         // find the last table coulmn element
         Node ref = getFirstChild();
         for (Node n : new DomNodeList(this.getChildNodes())) {
@@ -82,7 +83,6 @@ public class OdfTable extends OdfTableElement {
         } else {
             tce = (OdfTableColumn) appendChild(tce);
         }
-
         if (repeat > 1) {
             tce.setNumberColumnsRepeated(repeat);
         }

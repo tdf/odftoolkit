@@ -19,12 +19,17 @@
  * limitations under the License.
  *
  ************************************************************************/
+// !!! GENERATED SOURCE CODE !!!
+package org.openoffice.odf.dom.style.props;
 
-package org.openoffice.odf.dom.style;
+import org.openoffice.odf.dom.OdfName;
+import org.openoffice.odf.dom.OdfNamespace;
+import org.openoffice.odf.dom.style.props.OdfStylePropertiesSet;
 
-/**
- *
- */
-public interface OdfStyleUser
-{
+
+public interface OdfRubyStyleProperties {
+    public final static OdfStyleProperty RubyAlign = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.get(OdfNamespace.STYLE, "ruby-align"));
+    public final static OdfStyleProperty RubyPosition = 
+        OdfStyleProperty.get(OdfStylePropertiesSet.RubyProperties, OdfName.get(OdfNamespace.STYLE, "ruby-position"));
 }

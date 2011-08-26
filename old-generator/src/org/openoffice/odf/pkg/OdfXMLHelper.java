@@ -65,11 +65,11 @@ public class OdfXMLHelper {
     public XMLReader createXMLReader(OdfPackage pkg) 
         throws SAXException, ParserConfigurationException {
 
-        SAXParserFactory factory = new org.apache.xerces.jaxp.SAXParserFactoryImpl();
+        SAXParserFactory factory = SAXParserFactory.newInstance();
         factory.setNamespaceAware( true );
         factory.setValidating( false );
 
-        SAXParser parser = factory.newSAXParser();
+        SAXParser parser=factory.newSAXParser();
         XMLReader xmlReader=parser.getXMLReader();
         // More details at http://xerces.apache.org/xerces2-j/features.html#namespaces
         xmlReader.setFeature("http://xml.org/sax/features/namespaces", true);

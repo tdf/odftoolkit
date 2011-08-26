@@ -24,7 +24,7 @@ package org.openoffice.odf.dom.element;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.openoffice.odf.doc.*;
+import org.openoffice.odf.doc.OdfFileDom;
 import org.openoffice.odf.doc.element.office.OdfAutomaticStyles;
 import org.openoffice.odf.doc.element.office.OdfStyles;
 import org.openoffice.odf.doc.element.style.OdfStyle;
@@ -32,14 +32,14 @@ import org.openoffice.odf.dom.OdfName;
 import org.openoffice.odf.dom.element.style.OdfStyleElement;
 import org.openoffice.odf.dom.style.OdfStyleFamily;
 import org.openoffice.odf.dom.style.OdfStylePropertySet;
-import org.openoffice.odf.dom.style.OdfStyleUser;
 import org.openoffice.odf.dom.style.props.OdfStyleProperty;
 import org.w3c.dom.DOMException;
 
 // 2DO: change modifier public to package after refactoring
-abstract public class OdfStylableElement extends OdfElement implements OdfStylePropertySet, OdfStyleUser {
+abstract public class OdfStylableElement extends OdfElement implements OdfStylePropertySet  {
 
-    private OdfStyleElement mAutomaticStyle;    
+    // 2DO: Overall StyleRefactoring: DOM Layer reaches to upper layer here...
+    private OdfStyle mAutomaticStyle;    
     protected OdfStyleFamily mFamily;
     protected OdfName mStyleNameAttrib;
     
@@ -79,7 +79,12 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
                 }
 
                 mAutomaticStyle.addStyleUser(this);
-                setStyleName( mAutomaticStyle.getName() );                                
+
+                String sParentStyleName = getStyleName();
+                if( (sParentStyleName != null) && (sParentStyleName.length() != 0) )
+                    mAutomaticStyle.setParentStyleName(sParentStyleName);
+
+                setStyleName( mAutomaticStyle.getName() );
             }
         }
         return mAutomaticStyle;
@@ -113,7 +118,7 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
         // check if style has changed
         if( mStyleNameAttrib.equals(uri, name) )
         {
-            OdfStyleElement autoStyle = null;
+            OdfStyle autoStyle = null;
             
             // optimization: check if we already know this automatic style
             if( (mAutomaticStyle != null) && (mAutomaticStyle.getName().equals(value)) )
@@ -124,16 +129,19 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
             {
                 // register new automatic style
                 OdfAutomaticStyles automatic_styles = getAutomaticStyles();
-                if( automatic_styles != null )
-                    autoStyle = automatic_styles.getStyle(value, getStyleFamily() );
+                if( automatic_styles != null ) {
+                    autoStyle = automatic_styles.getStyle(value, getStyleFamily());
+                }
 
-                if( mAutomaticStyle != null)
+                if( mAutomaticStyle != null) {
                     mAutomaticStyle.removeStyleUser(this);
+                }
 
                 mAutomaticStyle = autoStyle;
                 
-                if( mAutomaticStyle != null )
+                if( mAutomaticStyle != null ) {
                     mAutomaticStyle.addStyleUser(this);
+                }
             }
         }
     }
@@ -154,14 +162,14 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
      */
     public void setStyleName(String name )
     {
-        setAttributeNS(mStyleNameAttrib.getUri(), mStyleNameAttrib.getQName(), name);
+        setAttributeNS(mStyleNameAttrib.getUri(), mStyleNameAttrib.getLocalName(), name);
     }
 
     /**
      * 
      * @return
      */
-    public OdfStyleBase getAutomaticStyle()
+    public OdfStyle getAutomaticStyle()
     {
         return mAutomaticStyle;
     }
@@ -180,31 +188,29 @@ abstract public class OdfStylableElement extends OdfElement implements OdfStyleP
         setStyleName(style.getName());
     }
 */
-    /* Only returns a DocumentStyle if there is no local style *
+    /* Only returns a DocumentStyle if there is no local style */
     public OdfStyle reuseDocumentStyle(String styleName) {
         OdfStyle style = null;
         if (styleName != null) {
-            style = mOdfDocument.getDocumentStyles().getStyle(styleName);
+            style = mOdfDocument.getDocumentStyles().getStyle(styleName, getStyleFamily() );
             if (style != null) {
                 setDocumentStyle(style);
             }
         }
         return style;
     }
-*/
 
-/*    
     public void setDocumentStyle(OdfStyle style) {
         // when there is a local style, the document style becomes the parent 
         // of the local style
         if (mAutomaticStyle != null) {
-            mAutomaticStyle.setParentName(style.getName());
+            mAutomaticStyle.setParentStyleName(style.getName());
         } else {
             setStyleName(style.getName());
         }
     }
-*/    
-//    protected static final String LOCAL_STYLE_PREFIX = "#local-style";
+
+    //    protected static final String LOCAL_STYLE_PREFIX = "#local-style";
 
 /*    
     public OdfStyle newDocumentStyle(String name) {

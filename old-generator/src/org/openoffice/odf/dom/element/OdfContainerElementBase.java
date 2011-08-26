@@ -20,6 +20,7 @@
  *
  ************************************************************************/
 
+//2DO: Move into tooling package?
 package org.openoffice.odf.dom.element;
 
 import org.openoffice.odf.doc.OdfFileDom;

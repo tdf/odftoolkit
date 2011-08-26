@@ -27,15 +27,28 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.Vector;
 import org.openoffice.odf.doc.OdfFileDom;
 import org.openoffice.odf.dom.OdfName;
 import org.openoffice.odf.dom.OdfNamespace;
-import org.openoffice.odf.dom.element.style.*;
+import org.openoffice.odf.doc.element.style.OdfParagraphProperties;
+import org.openoffice.odf.doc.element.style.OdfTextProperties;
+import org.openoffice.odf.dom.element.style.OdfChartPropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfDrawingPagePropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfGraphicPropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfHeaderFooterPropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfListLevelPropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfPageLayoutPropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfParagraphPropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfRubyPropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfSectionPropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfTableCellPropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfTableColumnPropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfTablePropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfTableRowPropertiesElement;
+import org.openoffice.odf.dom.element.style.OdfTextPropertiesElement;
 import org.openoffice.odf.dom.style.OdfStyleFamily;
 import org.openoffice.odf.dom.style.OdfStylePropertySet;
-import org.openoffice.odf.dom.style.OdfStyleUser;
 import org.openoffice.odf.dom.style.props.OdfStylePropertiesSet;
 import org.openoffice.odf.dom.style.props.OdfStyleProperty;
 import org.w3c.dom.DOMException;
@@ -48,7 +61,7 @@ import org.w3c.dom.NodeList;
 abstract public class OdfStyleBase extends OdfContainerElementBase implements OdfStylePropertySet
 {
     private HashMap< OdfStylePropertiesSet, OdfStylePropertiesBase > mPropertySetElementMap;
-    private Vector< OdfStyleUser > mStyleUser;
+    private Vector< OdfStylableElement > mStyleUser;
 
     static HashMap< OdfName, OdfStylePropertiesSet > mStylePropertiesElementToSetMap;
 
@@ -84,10 +97,10 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
         super(ownerDocument, aName.getUri(), aName.getQName());
     }           
     
-    public void addStyleUser( OdfStyleUser user )
+    public void addStyleUser( OdfStylableElement user )
     {
         if( mStyleUser == null )
-            mStyleUser = new Vector< OdfStyleUser >();
+            mStyleUser = new Vector< OdfStylableElement >();
         
         mStyleUser.add(user);
     }
@@ -137,7 +150,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
         return result;
     }
     
-    public void removeStyleUser( OdfStyleUser user )
+    public void removeStyleUser( OdfStylableElement user )
     {
         if( mStyleUser != null )
             mStyleUser.remove(user);        
@@ -175,13 +188,14 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
      * @return the style:*-properties element for the given set. If such element
      *         does not yet exist, it is created.
      */
+    
     public OdfStylePropertiesBase getOrCreatePropertiesElement(OdfStylePropertiesSet set)
     {
         OdfStylePropertiesBase properties = null;
-        
+
         if( mPropertySetElementMap != null )
             properties = mPropertySetElementMap.get(set);
-        
+
         if( properties == null )
         {
             for( Entry< OdfName, OdfStylePropertiesSet > entry : mStylePropertiesElementToSetMap.entrySet() )
@@ -189,14 +203,53 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
                 if( entry.getValue().equals(set))
                 {
                     properties = (OdfStylePropertiesBase)((OdfFileDom)this.ownerDocument).createElementNS( entry.getKey() );
-                    appendChild( properties );
+                    if( getFirstChild() == null )
+                    {
+                        appendChild( properties );
+                    }
+                    else
+                    {
+                        // make sure the properties elements are in the correct order
+                        Node beforeNode = null;
+                        if( set.equals( OdfStylePropertiesSet.GraphicProperties  ) )
+                        {
+                            beforeNode = OdfElement.findFirstChildNode( OdfParagraphProperties.class, this );
+                            if( beforeNode == null )
+                                beforeNode = OdfElement.findFirstChildNode( OdfTextProperties.class, this );
+                        }
+                        else if( set.equals( OdfStylePropertiesSet.ParagraphProperties  ) )
+                        {
+                            beforeNode = OdfElement.findFirstChildNode( OdfTextProperties.class, this );
+                        }
+                        else if( !set.equals( OdfStylePropertiesSet.TextProperties) )
+                        {
+                            beforeNode = getFirstChild();
+                        }
+
+                        if( beforeNode == null )
+                        {
+                            beforeNode = getFirstChild();
+                            // find first non properties node
+                            while( beforeNode != null )
+                            {
+                                if( beforeNode.getNodeType() == Node.ELEMENT_NODE)
+                                {
+                                    if( !(beforeNode instanceof OdfStylePropertiesBase ) )
+                                        break;
+                                }
+                                beforeNode = beforeNode.getNextSibling();
+                            }
+                        }
+
+                        insertBefore( properties, beforeNode);
+                    }
                     break;
                 }
             }
         }
 
         return properties;
-    }    
+    }
     
     /**
      * 
@@ -332,17 +385,45 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
         if( (attributes == null) || (compare.attributes == null) )
             return false;
 
-        if( attributes.getLength() != compare.attributes.getLength() )
+        int attr_count1 = attributes.getLength();
+        int attr_count2 = compare.attributes.getLength();
+
+        Vector< Node > attr1 = new Vector< Node >();
+        for( int i = 0; i < attr_count1; i++ )
+        {
+            Node node = attributes.item(i);
+            if( node.getNodeValue().length() == 0 )
+                continue;
+            attr1.add( node );
+        }
+
+        Vector< Node > attr2 = new Vector< Node >();
+        for( int i = 0; i < attr_count2; i++ )
+        {
+            Node node = compare.attributes.item(i);
+            if( node.getNodeValue().length() == 0 )
+                continue;
+            attr2.add( node );
+        }
+
+        if( attr1.size() != attr2.size() )
             return false;
 
-        for( int i = 0; i < attributes.getLength(); i++ )
+        for( int i = 0; i < attr1.size(); i++ )
         {
-            Node n1 = attributes.item(i);
+            Node n1 = attr1.get(i);
             if( n1.getLocalName().equals( "name") && n1.getNamespaceURI().equals( OdfNamespace.STYLE.getUri()) )
                 continue; // do not compare style names
 
-            Node n2 = compare.attributes.getNamedItemNS(n1.getNamespaceURI(), n1.getLocalName());
-            if( n2 == null )
+            Node n2 = null;
+            int j = 0;
+            for( j = 0; j < attr2.size(); j++ )
+            {
+                n2 = attr2.get(j);
+                if( n1.getLocalName().equals(n2.getLocalName()) && n1.getNamespaceURI().equals(n2.getNamespaceURI()) )
+                    break;
+            }
+            if( j == attr2.size() )
                 return false;
 
             if( !n1.getTextContent().equals( n2.getTextContent()))
@@ -352,12 +433,44 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
         // now compare child elements
         NodeList childs1 = this.getChildNodes();
         NodeList childs2 = compare.getChildNodes();
-        if( childs1.getLength() != childs2.getLength() )
+
+        int child_count1 = childs1.getLength();
+        int child_count2 = childs2.getLength();
+        if( (child_count1 == 0) && (child_count2 == 0 ))
+            return true;
+
+        Vector< Node > nodes1 = new Vector< Node >();
+        for( int i = 0; i < child_count1; i++ )
+        {
+            Node node = childs1.item(i);
+            if( node.getNodeType() == Node.TEXT_NODE )
+                if( node.getNodeValue().trim().length() == 0 )
+                    continue; // skip whitespace text nodes
+
+            nodes1.add( node );
+        }
+
+        Vector< Node > nodes2 = new Vector< Node >();
+        for( int i = 0; i < child_count2; i++ )
+        {
+            Node node = childs2.item(i);
+            if( node.getNodeType() == Node.TEXT_NODE )
+                if( node.getNodeValue().trim().length() == 0 )
+                    continue; // skip whitespace text nodes
+            
+            nodes2.add( node );
+        }
+
+        if( nodes1.size() != nodes2.size() )
             return false;
         
-        for( int i = 0; i < childs1.getLength(); i++ )
+        for( int i = 0; i < nodes1.size(); i++ )
         {
-            if( !childs1.item(i).isEqualNode(childs2.item(i)) )
+            Node n1 = nodes1.get(i);
+            Node n2 = nodes2.get(i);
+            String sn1 = n1.toString();
+            String sn2 = n2.toString();
+            if( !n1.equals(n2) )
                 return false;
         }
         return true;

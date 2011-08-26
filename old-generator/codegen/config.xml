@@ -224,6 +224,8 @@
         <attribute name="chart:class" rename="chart:chart-class"/>
         <attribute name="style:length" rename="style:style-length"/>
         <attribute name="style:class" rename="style:style-class"/>
+        <attribute name="text:prefix" rename="text:prefix-text"/>
+        <attribute name="text:suffix" rename="text:suffix-text"/>
 
      <!-- rename draw:style-name and presentation-style name as shape elements uses both of them -->
         <attribute name="presentation:style-name" rename="presentation:presentation-style-name"/>
@@ -250,7 +252,7 @@
         
         <!-- rename attributes where one element has two attributes with the same local name -->
         <attribute name="dr3d:shadow" rename="dr3d:shadow3d"/>
-        <attribute name="draw:shadow" rename="draw:draw-shadow"/>
+        <attribute name="draw:shadow" rename="draw:shadow-draw"/>
 
     </attributes>
 </config>

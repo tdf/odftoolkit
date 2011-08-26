@@ -23,7 +23,6 @@ package org.openoffice.odf.doc.element.table;
 
 import org.openoffice.odf.doc.OdfFileDom;
 import org.openoffice.odf.dom.element.table.OdfCoveredTableCellElement;
-import org.openoffice.odf.doc.element.style.OdfStyle;
 
 public class OdfCoveredTableCell extends OdfCoveredTableCellElement implements OdfTableCellBase {
 
@@ -31,7 +30,9 @@ public class OdfCoveredTableCell extends OdfCoveredTableCellElement implements O
     int m_nColSpan = 1;
     boolean m_bAutoGen = false;
 
-    /** Creates a new instance of this class */
+    /** Creates a new instance of this class
+     * @param ownerDoc
+     */
     public OdfCoveredTableCell(OdfFileDom ownerDoc) {
         super(ownerDoc);
     }
@@ -54,10 +55,6 @@ public class OdfCoveredTableCell extends OdfCoveredTableCellElement implements O
 
     public OdfTable getTable() {
         return OdfTableCellBaseImpl.getTable(this);
-    }
-
-    public OdfStyle getTableColumnStyle() {
-        return OdfTableCellBaseImpl.getTableColumnStyle(this);
     }
 
     public Integer getNumberColumnsSpanned() {

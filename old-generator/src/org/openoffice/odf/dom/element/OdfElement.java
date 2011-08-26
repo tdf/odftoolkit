@@ -21,15 +21,18 @@
  ************************************************************************/
 package org.openoffice.odf.dom.element;
 
+import java.util.Vector;
 import org.apache.xerces.dom.ElementNSImpl;
 import org.apache.xerces.dom.ParentNode;
 import org.openoffice.odf.doc.OdfDocument;
 import org.openoffice.odf.dom.OdfName;
 import org.openoffice.odf.doc.OdfFileDom;
+import org.openoffice.odf.dom.OdfNamespace;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 //2DO: Refactor public to package viewer, when inheritance is exchanged from OdfElement to specific Odf Element
@@ -240,18 +243,124 @@ abstract public class OdfElement extends ElementNSImpl {
         return cloneElement;
     }
     
+    /** indicates if some other object is equal to this one.
+     *
+     * @param obj - the reference object with which to compare.
+     * @return true if this object is the same as the obj argument; false otherwise.
+     */
     @Override
-    public boolean equals( Object obj )
+    public boolean equals(Object obj)
     {
         if( this == obj )
             return true;
-        
-        if( obj == null )
+
+        if( (obj == null) || !(obj instanceof OdfElement) )
             return false;
-        
-        if( !( obj instanceof Node) )
+
+        OdfElement compare = (OdfElement)obj;
+
+        // compare node name
+        if( !localName.equals( compare.localName ) )
+           return false;
+
+        if( !this.namespaceURI.equals( compare.namespaceURI ) )
             return false;
-        
-        return this.isEqualNode( (Node)obj);
+
+        // compare node attributes
+        if( attributes == compare.attributes )
+            return true;
+
+        if( (attributes == null) || (compare.attributes == null) )
+            return false;
+
+        int attr_count1 = attributes.getLength();
+        int attr_count2 = compare.attributes.getLength();
+
+        Vector< Node > attr1 = new Vector< Node >();
+        for( int i = 0; i < attr_count1; i++ )
+        {
+            Node node = attributes.item(i);
+            if( node.getNodeValue().length() == 0 )
+                continue;
+            attr1.add( node );
+        }
+
+        Vector< Node > attr2 = new Vector< Node >();
+        for( int i = 0; i < attr_count2; i++ )
+        {
+            Node node = compare.attributes.item(i);
+            if( node.getNodeValue().length() == 0 )
+                continue;
+            attr2.add( node );
+        }
+
+        if( attr1.size() != attr2.size() )
+            return false;
+
+        for( int i = 0; i < attr1.size(); i++ )
+        {
+            Node n1 = attr1.get(i);
+            if( n1.getLocalName().equals( "name") && n1.getNamespaceURI().equals( OdfNamespace.STYLE.getUri()) )
+                continue; // do not compare style names
+
+            Node n2 = null;
+            int j = 0;
+            for( j = 0; j < attr2.size(); j++ )
+            {
+                n2 = attr2.get(j);
+                if( n1.getLocalName().equals(n2.getLocalName()) && n1.getNamespaceURI().equals(n2.getNamespaceURI()) )
+                    break;
+            }
+            if( j == attr2.size() )
+                return false;
+
+            if( !n1.getTextContent().equals( n2.getTextContent()))
+                return false;
+        }
+
+        // now compare child elements
+        NodeList childs1 = this.getChildNodes();
+        NodeList childs2 = compare.getChildNodes();
+
+        int child_count1 = childs1.getLength();
+        int child_count2 = childs2.getLength();
+        if( (child_count1 == 0) && (child_count2 == 0 ))
+            return true;
+
+        Vector< Node > nodes1 = new Vector< Node >();
+        for( int i = 0; i < child_count1; i++ )
+        {
+            Node node = childs1.item(i);
+            if( node.getNodeType() == Node.TEXT_NODE )
+                if( node.getNodeValue().trim().length() == 0 )
+                    continue; // skip whitespace text nodes
+
+            nodes1.add( node );
+        }
+
+        Vector< Node > nodes2 = new Vector< Node >();
+        for( int i = 0; i < child_count2; i++ )
+        {
+            Node node = childs2.item(i);
+            if( node.getNodeType() == Node.TEXT_NODE )
+                if( node.getNodeValue().trim().length() == 0 )
+                    continue; // skip whitespace text nodes
+
+            nodes2.add( node );
+        }
+
+        if( nodes1.size() != nodes2.size() )
+            return false;
+
+        for( int i = 0; i < nodes1.size(); i++ )
+        {
+            Node n1 = nodes1.get(i);
+            Node n2 = nodes2.get(i);
+            String sn1 = n1.toString();
+            String sn2 = n2.toString();
+            if( !n1.equals(n2) )
+                return false;
+        }
+        return true;
     }
 }

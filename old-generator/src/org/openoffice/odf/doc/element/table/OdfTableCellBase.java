@@ -21,8 +21,6 @@
  ************************************************************************/
 package org.openoffice.odf.doc.element.table;
 
-import org.openoffice.odf.doc.element.style.OdfStyle;
-
 /**
  *
  *
@@ -36,8 +34,6 @@ public interface OdfTableCellBase {
     public OdfTableRow getTableRow();
 
     public OdfTable getTable();
-
-    public OdfStyle getTableColumnStyle();
 
     Integer getNumberColumnsSpanned();
 

@@ -22,9 +22,7 @@
 package org.openoffice.odf.doc.element.table;
 
 import org.openoffice.odf.dom.util.DomNodeList;
-import org.openoffice.odf.doc.element.style.OdfStyle;
 import org.openoffice.odf.dom.element.table.OdfTableCellElementBase;
-import org.openoffice.odf.dom.element.table.OdfTableColumnElement;
 import org.w3c.dom.Node;
 
 /**
@@ -54,17 +52,5 @@ class OdfTableCellBaseImpl {
     static public OdfTable getTable(OdfTableCellBase _aBase) {
         OdfTableRow row = _aBase.getTableRow();
         return row.getTable();
-    }
-
-    static public OdfStyle getTableColumnStyle(OdfTableCellBase _aBase) {
-        OdfStyle tcs = null;
-        OdfTableColumnElement col = _aBase.getTableColumn();
-        if (col != null)
-        {
-            tcs = (OdfStyle)col.getAutomaticStyle();
-            if( tcs == null )
-                tcs = col.getDocumentStyle();
-        }
-        return tcs;
     }
 }

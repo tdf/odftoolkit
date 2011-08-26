@@ -35,8 +35,11 @@ public class OdfPercent
 
     public static double valueOf( String value )
     {
+        if( (value == null) || (value.length() == 0) )
+            return 0.0;
+
         int n = value.indexOf( "%" );
-	if( n != -1 )
+    	if( n != -1 )
             return Double.valueOf( value.substring(0,n) ).doubleValue() / (double)100;
         else
             throw new IllegalArgumentException( "Illegal percentage value");

@@ -63,7 +63,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.xerces.dom.DOMXSImplementationSourceImpl;
 import org.openoffice.odf.doc.OdfDocument;
 import org.openoffice.odf.pkg.manifest.Algorithm;
 import org.openoffice.odf.pkg.manifest.EncryptionData;
@@ -404,9 +403,9 @@ public class OdfPackage {
             mPackageEntries.add(0, OdfFile.MEDIA_TYPE.getPath());
         }
 
-        Iterator<String> it = mPackageEntries.iterator();
+        Iterator it = mPackageEntries.iterator();
         while (it.hasNext()) {
-            String key = it.next();
+            String key = (String) it.next();
             byte[] data = getBytes(key);
 
             ZipEntry ze = mZipEntries.get(key);
@@ -752,9 +751,7 @@ public class OdfPackage {
 
         InputStream is = getInputStream(packagePath);
 
-        // We depend on Xerces. So we just go ahead and create a Xerces DBF, without
-        // forcing everything else to do so.
-        DocumentBuilderFactory factory = new org.apache.xerces.jaxp.DocumentBuilderFactoryImpl();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         factory.setValidating(false);
 
@@ -1017,9 +1014,9 @@ public class OdfPackage {
         buf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         buf.append("<manifest:manifest xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\">\n");
 
-        Iterator<String> it = mManifestList.iterator();
+        Iterator it = mManifestList.iterator();
         while (it.hasNext()) {
-            String key = it.next();
+            String key = (String) it.next();
             String s = null;
             OdfFileEntry fileEntry = mManifestEntries.get(key);
             if (fileEntry != null) {
@@ -1133,9 +1130,10 @@ public class OdfPackage {
             {
                 Document doc = mContentDoms.get(packagePath);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                
-                DOMXSImplementationSourceImpl dis = new org.apache.xerces.dom.DOMXSImplementationSourceImpl();
-                DOMImplementationLS impl = (DOMImplementationLS) dis.getDOMImplementation("LS");
+
+                DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
+
+                DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");
                 LSSerializer writer = impl.createLSSerializer();
 
                 LSOutput output = impl.createLSOutput();
