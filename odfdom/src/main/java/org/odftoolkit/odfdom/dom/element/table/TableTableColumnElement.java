@@ -82,7 +82,7 @@ public class TableTableColumnElement extends OdfStylableElement
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
-		return null;
+		return Integer.valueOf( TableNumberColumnsRepeatedAttribute.DEFAULT_VALUE );
 	}
 		 
 	/**

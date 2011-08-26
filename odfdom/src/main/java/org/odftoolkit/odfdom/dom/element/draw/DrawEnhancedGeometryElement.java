@@ -85,6 +85,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.DRAW, "enhanced-geometry" );
 
+	public static final String  DEFAULT_VALUE_DRAW_TYPE_ATTRIBUTE = DrawTypeAttribute.DEFAULT_VALUE_NONPRIMITIVE;
 
 	/**
 	 * Create the instance of <code>DrawEnhancedGeometryElement</code> 
@@ -119,7 +120,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
-		return null;
+		return DEFAULT_VALUE_DRAW_TYPE_ATTRIBUTE;
 	}
 		 
 	/**
@@ -983,7 +984,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
-		return Double.valueOf( DrawPathStretchpointXAttribute.DEFAULT_VALUE );
+		return null;
 	}
 		 
 	/**
@@ -1010,7 +1011,7 @@ public class DrawEnhancedGeometryElement extends OdfElement
 		if( attr != null ){
 			return Double.valueOf( attr.doubleValue() );
 		}
-		return Double.valueOf( DrawPathStretchpointYAttribute.DEFAULT_VALUE );
+		return null;
 	}
 		 
 	/**

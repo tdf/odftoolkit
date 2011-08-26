@@ -463,7 +463,7 @@ public class AnimTransitionFilterElement extends OdfElement
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
-		return null;
+		return SmilFadeColorAttribute.DEFAULT_VALUE;
 	}
 		 
 	/**

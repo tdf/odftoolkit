@@ -31,7 +31,6 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute chart:data-label-number}.
@@ -40,7 +39,6 @@ import org.odftoolkit.odfdom.OdfElement;
 public class ChartDataLabelNumberAttribute extends OdfAttribute {
 
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.CHART, "data-label-number" );
-	public static final String DEFAULT_VALUE = "none";
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute chart:data-label-number}.
@@ -144,22 +142,18 @@ public class ChartDataLabelNumberAttribute extends OdfAttribute {
 			throw new NumberFormatException("the value of chart:data-label-number is not valid");
 		}
 	}
+	
 	/**
-	 * Returns the default value of {@odf.attribute chart:data-label-number} dependent of its element name
+	 * Returns the default value of {@odf.attribute chart:data-label-number}.
 	 * 
-	 * @return the default value as <code>String</code>, 
+	 * @return the default value as <code>String</code> dependent of its element name
 	 *         return <code>null</code> if the default value does not exist
 	 */
 	@Override
 	public String getDefault() {
-		OdfElement parentElement = (OdfElement)getOwnerElement();
-		String defaultValue = null;
-		if (parentElement != null) {
-			defaultValue = DEFAULT_VALUE;			
-		}
-		return defaultValue;
+		return null;
 	}
-
+	
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
@@ -168,7 +162,7 @@ public class ChartDataLabelNumberAttribute extends OdfAttribute {
 	 */
 	@Override
 	public boolean hasDefault() {
-		return getOwnerElement() == null ? false : true;
+		return false;
 	}
 	
 	/**

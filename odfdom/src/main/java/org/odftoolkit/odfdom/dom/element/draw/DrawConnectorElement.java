@@ -94,6 +94,7 @@ public class DrawConnectorElement extends DrawShapeElementBase
 	        return null;
 	    }
 	}
+	public static final String  DEFAULT_VALUE_DRAW_TYPE_ATTRIBUTE = DrawTypeAttribute.Value.STANDARD.toString();
 
 	/**
 	 * Create the instance of <code>DrawConnectorElement</code> 
@@ -137,7 +138,7 @@ public class DrawConnectorElement extends DrawShapeElementBase
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
-		return null;
+		return DEFAULT_VALUE_DRAW_TYPE_ATTRIBUTE;
 	}
 		 
 	/**

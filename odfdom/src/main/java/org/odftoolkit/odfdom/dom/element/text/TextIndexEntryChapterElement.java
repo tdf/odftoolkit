@@ -139,7 +139,7 @@ public class TextIndexEntryChapterElement extends OdfStylableElement
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
-		return null;
+		return TextDisplayAttribute.DEFAULT_VALUE;
 	}
 		 
 	/**

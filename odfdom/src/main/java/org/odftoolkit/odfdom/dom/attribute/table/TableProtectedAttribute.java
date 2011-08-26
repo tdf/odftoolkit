@@ -31,6 +31,7 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
+import org.odftoolkit.odfdom.OdfElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute table:protected}.
@@ -39,6 +40,7 @@ import org.odftoolkit.odfdom.OdfAttribute;
 public class TableProtectedAttribute extends OdfAttribute {
 
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "protected" );
+	public static final String DEFAULT_VALUE = "false";
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:protected}.
@@ -116,18 +118,22 @@ public class TableProtectedAttribute extends OdfAttribute {
 			throw new NumberFormatException("the value of table:protected is not valid");
 		}
 	}
-	
 	/**
-	 * Returns the default value of {@odf.attribute table:protected}.
+	 * Returns the default value of {@odf.attribute table:protected} dependent of its element name
 	 * 
-	 * @return the default value as <code>String</code> dependent of its element name
+	 * @return the default value as <code>String</code>, 
 	 *         return <code>null</code> if the default value does not exist
 	 */
 	@Override
 	public String getDefault() {
-		return null;
+		OdfElement parentElement = (OdfElement)getOwnerElement();
+		String defaultValue = null;
+		if (parentElement != null) {
+			defaultValue = DEFAULT_VALUE;			
+		}
+		return defaultValue;
 	}
-	
+
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
@@ -136,7 +142,7 @@ public class TableProtectedAttribute extends OdfAttribute {
 	 */
 	@Override
 	public boolean hasDefault() {
-		return false;
+		return getOwnerElement() == null ? false : true;
 	}
 	
 	/**

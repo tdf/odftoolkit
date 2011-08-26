@@ -141,7 +141,7 @@ public class OdfFileDom extends DocumentImpl {
 	 * @return the style:office-styles element of this dom. May return null
 	 *         if there is not yet such element in this dom.
 	 *
-	 * @see getOrCreateAutomaticStyles()
+	 * @see #getOrCreateAutomaticStyles()
 	 *
 	 */
 	public OdfOfficeStyles getOfficeStyles() {

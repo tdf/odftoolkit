@@ -80,6 +80,7 @@ public class TableFilterConditionElement extends OdfElement
 	    }
 	}
 	public static final String  DEFAULT_VALUE_TABLE_CASESENSITIVE_ATTRIBUTE = TableCaseSensitiveAttribute.DEFAULT_VALUE_FALSE;
+	public static final String  DEFAULT_VALUE_TABLE_DATATYPE_ATTRIBUTE = TableDataTypeAttribute.Value.TEXT.toString();
 
 	/**
 	 * Create the instance of <code>TableFilterConditionElement</code> 
@@ -234,7 +235,7 @@ public class TableFilterConditionElement extends OdfElement
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
-		return null;
+		return DEFAULT_VALUE_TABLE_DATATYPE_ATTRIBUTE;
 	}
 		 
 	/**

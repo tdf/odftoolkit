@@ -52,6 +52,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextVariableSetElement;
 public class TextDisplayAttribute extends OdfAttribute {
 
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TEXT, "display" );
+	public static final String DEFAULT_VALUE = "number";
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:display}.
@@ -218,18 +219,22 @@ public class TextDisplayAttribute extends OdfAttribute {
 		}
 		return null;
 	}
-	
 	/**
-	 * Returns the default value of {@odf.attribute text:display}.
+	 * Returns the default value of {@odf.attribute text:display} dependent of its element name
 	 * 
-	 * @return the default value as <code>String</code> dependent of its element name
+	 * @return the default value as <code>String</code>, 
 	 *         return <code>null</code> if the default value does not exist
 	 */
 	@Override
 	public String getDefault() {
-		return null;
+		OdfElement parentElement = (OdfElement)getOwnerElement();
+		String defaultValue = null;
+		if (parentElement != null) {
+			defaultValue = DEFAULT_VALUE;			
+		}
+		return defaultValue;
 	}
-	
+
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
@@ -238,7 +243,7 @@ public class TextDisplayAttribute extends OdfAttribute {
 	 */
 	@Override
 	public boolean hasDefault() {
-		return false;
+		return getOwnerElement() == null ? false : true;
 	}
 	
 	/**

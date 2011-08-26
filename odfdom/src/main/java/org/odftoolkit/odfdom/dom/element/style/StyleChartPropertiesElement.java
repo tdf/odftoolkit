@@ -1477,7 +1477,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
-		return ChartDataLabelNumberAttribute.DEFAULT_VALUE;
+		return null;
 	}
 		 
 	/**
@@ -1612,7 +1612,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
-		return Boolean.valueOf( ChartVisibleAttribute.DEFAULT_VALUE );
+		return null;
 	}
 		 
 	/**
@@ -1639,7 +1639,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
-		return Boolean.valueOf( ChartAutoPositionAttribute.DEFAULT_VALUE );
+		return null;
 	}
 		 
 	/**
@@ -1666,7 +1666,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
-		return Boolean.valueOf( ChartAutoSizeAttribute.DEFAULT_VALUE );
+		return null;
 	}
 		 
 	/**
@@ -1720,7 +1720,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
-		return ChartErrorCategoryAttribute.DEFAULT_VALUE;
+		return null;
 	}
 		 
 	/**

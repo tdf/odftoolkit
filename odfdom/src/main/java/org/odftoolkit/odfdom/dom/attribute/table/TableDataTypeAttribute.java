@@ -43,6 +43,8 @@ import org.odftoolkit.odfdom.dom.element.table.TableSortGroupsElement;
 public class TableDataTypeAttribute extends OdfAttribute {
 
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.TABLE, "data-type" );
+	public static final String DEFAULT_VALUE_AUTOMATIC = Value.AUTOMATIC.toString();
+	public static final String DEFAULT_VALUE_TEXT = Value.TEXT.toString();
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:data-type}.
@@ -177,18 +179,28 @@ public class TableDataTypeAttribute extends OdfAttribute {
 		}
 		return null;
 	}
-	
 	/**
-	 * Returns the default value of {@odf.attribute table:data-type}.
+	 * Returns the default value of {@odf.attribute table:data-type} dependent of its element name
 	 * 
-	 * @return the default value as <code>String</code> dependent of its element name
+	 * @return the default value as <code>String</code>, 
 	 *         return <code>null</code> if the default value does not exist
 	 */
 	@Override
 	public String getDefault() {
-		return null;
+		OdfElement parentElement = (OdfElement)getOwnerElement();
+		String defaultValue = null;
+		if (parentElement != null) {
+			if( parentElement instanceof TableFilterConditionElement ){
+				defaultValue = DEFAULT_VALUE_TEXT;
+			}else if( parentElement instanceof TableSortByElement ){
+				defaultValue = DEFAULT_VALUE_AUTOMATIC;
+			}else if( parentElement instanceof TableSortGroupsElement ){
+				defaultValue = DEFAULT_VALUE_AUTOMATIC;
+			}			
+		}
+		return defaultValue;
 	}
-	
+
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
@@ -197,7 +209,7 @@ public class TableDataTypeAttribute extends OdfAttribute {
 	 */
 	@Override
 	public boolean hasDefault() {
-		return false;
+		return getOwnerElement() == null ? false : true;
 	}
 	
 	/**

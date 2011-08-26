@@ -44,6 +44,7 @@ public class TableSortGroupsElement extends OdfElement
 {        
     public static final OdfName ELEMENT_NAME = OdfName.newName(OdfNamespaceNames.TABLE, "sort-groups" );
 
+	public static final String  DEFAULT_VALUE_TABLE_DATATYPE_ATTRIBUTE = TableDataTypeAttribute.DEFAULT_VALUE_AUTOMATIC;
 
 	/**
 	 * Create the instance of <code>TableSortGroupsElement</code> 
@@ -78,7 +79,7 @@ public class TableSortGroupsElement extends OdfElement
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
-		return null;
+		return DEFAULT_VALUE_TABLE_DATATYPE_ATTRIBUTE;
 	}
 		 
 	/**

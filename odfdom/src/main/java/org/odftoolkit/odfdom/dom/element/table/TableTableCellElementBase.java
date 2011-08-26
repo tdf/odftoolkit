@@ -436,7 +436,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement
 		if( attr != null ){
 			return Boolean.valueOf( attr.booleanValue() );
 		}
-		return null;
+		return Boolean.valueOf( TableProtectedAttribute.DEFAULT_VALUE );
 	}
 		 
 	/**

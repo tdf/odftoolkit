@@ -230,7 +230,7 @@ public class TableDatabaseRangeElement extends OdfElement
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
-		return null;
+		return TableOrientationAttribute.DEFAULT_VALUE;
 	}
 		 
 	/**

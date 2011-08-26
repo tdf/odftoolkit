@@ -31,7 +31,6 @@ import org.odftoolkit.odfdom.OdfName;
 import org.odftoolkit.odfdom.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.odftoolkit.odfdom.OdfAttribute;
-import org.odftoolkit.odfdom.OdfElement;
      
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute draw:path-stretchpoint-x}.
@@ -40,7 +39,6 @@ import org.odftoolkit.odfdom.OdfElement;
 public class DrawPathStretchpointXAttribute extends OdfAttribute {
 
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DRAW, "path-stretchpoint-x" );
-	public static final String DEFAULT_VALUE = "0";
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute draw:path-stretchpoint-x}.
@@ -118,22 +116,18 @@ public class DrawPathStretchpointXAttribute extends OdfAttribute {
 			throw new NumberFormatException("the value of draw:path-stretchpoint-x is not valid");
 		}
 	}
+	
 	/**
-	 * Returns the default value of {@odf.attribute draw:path-stretchpoint-x} dependent of its element name
+	 * Returns the default value of {@odf.attribute draw:path-stretchpoint-x}.
 	 * 
-	 * @return the default value as <code>String</code>, 
+	 * @return the default value as <code>String</code> dependent of its element name
 	 *         return <code>null</code> if the default value does not exist
 	 */
 	@Override
 	public String getDefault() {
-		OdfElement parentElement = (OdfElement)getOwnerElement();
-		String defaultValue = null;
-		if (parentElement != null) {
-			defaultValue = DEFAULT_VALUE;			
-		}
-		return defaultValue;
+		return null;
 	}
-
+	
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 * 
@@ -142,7 +136,7 @@ public class DrawPathStretchpointXAttribute extends OdfAttribute {
 	 */
 	@Override
 	public boolean hasDefault() {
-		return getOwnerElement() == null ? false : true;
+		return false;
 	}
 	
 	/**

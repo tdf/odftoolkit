@@ -829,7 +829,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase
 		if( attr != null ){
 			return String.valueOf( attr.getValue() );
 		}
-		return null;
+		return SmilFadeColorAttribute.DEFAULT_VALUE;
 	}
 		 
 	/**

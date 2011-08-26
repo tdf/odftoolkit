@@ -40,7 +40,7 @@ import org.odftoolkit.odfdom.OdfElement;
 public class DbStringAttribute extends OdfAttribute {
 
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName( OdfNamespaceNames.DB, "string" );
-	public static final String DEFAULT_VALUE = "\"";
+	public static final String DEFAULT_VALUE = ".";
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute db:string}.

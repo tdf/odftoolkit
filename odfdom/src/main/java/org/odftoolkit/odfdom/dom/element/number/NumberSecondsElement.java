@@ -105,7 +105,7 @@ public class NumberSecondsElement extends OdfElement
 		if( attr != null ){
 			return Integer.valueOf( attr.intValue() );
 		}
-		return null;
+		return Integer.valueOf( NumberDecimalPlacesAttribute.DEFAULT_VALUE );
 	}
 		 
 	/**
