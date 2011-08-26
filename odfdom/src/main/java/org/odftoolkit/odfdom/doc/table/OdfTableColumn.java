@@ -165,8 +165,9 @@ public class OdfTableColumn {
 			index = index + 1;
 		}
 		OdfTableColumn column = null;
-		if( index < getTable().getColumnCount() )
+		if (index < getTable().getColumnCount()) {
 			column = getTable().getColumnByIndex(index);
+		}
 		if (column != null) {
 			long prevColumnRelWidth = column.getRelativeWidth();
 			if (prevColumnRelWidth != 0) {
@@ -194,8 +195,12 @@ public class OdfTableColumn {
 			for (int i = repeateNum - 1; i >= 0; i--) {
 				TableTableColumnElement newColumn = (TableTableColumnElement) OdfXMLFactory.newOdfElement((OdfFileDom) maColumnElement.getOwnerDocument(),
 						OdfName.newName(OdfDocumentNamespace.TABLE, "table-column"));
-				newColumn.setProperty(OdfTableColumnProperties.ColumnWidth, originalWidth);
-				newColumn.setProperty(OdfTableColumnProperties.RelColumnWidth, originalRelWidth);
+				if (originalWidth != null && originalWidth.length() > 0) {
+					newColumn.setProperty(OdfTableColumnProperties.ColumnWidth, originalWidth);
+				}
+				if (originalRelWidth != null && originalRelWidth.length() > 0) {
+					newColumn.setProperty(OdfTableColumnProperties.RelColumnWidth, originalRelWidth);
+				}
 				tableEle.insertBefore(newColumn, refElement);
 				refElement = newColumn;
 				if (repeatedColumnIndex == i) {
@@ -247,7 +252,7 @@ public class OdfTableColumn {
 	public void setUseOptimalWidth(boolean isUseOptimalWidth) {
 		maColumnElement.setProperty(OdfTableColumnProperties.UseOptimalColumnWidth, String.valueOf(isUseOptimalWidth));
 	}
-	
+
 	/**
 	 * Return an instance of <code>TableTableColumnElement</code> which represents this feature.
 	 * 
