@@ -6,30 +6,30 @@
 ##
 <filelist>
     <file path="OdfStyleFamily.java" template="java-odfdom-stylefamily.vm" />
-##
-#foreach ( $element in ${model.getElements().withoutMultiples()} )
-#if ($element != "*")
-##
-#set($classname = "${model.camelCase($element)}Element" )
-    <file path="element/${model.extractNamespace($element)}/${classname}.java" context="$element" template="java-odfdom-element-template.vm" />
-##
-#end
-#end
-##
-#foreach ( $base in $javamodel.getBaseclasses() )
-##
-#if ($base != "container" && $base != "style" && $base != "styleproperties" )
-#set($classname = "${model.camelCase($base)}ElementBase" )
-    <file path="element/${model.extractNamespace($base)}/${classname}.java" context="$base" template="java-odfdom-elementbase-template.vm" />
-#end
-##
-#end
-##
-#foreach ( $attribute in ${model.getAttributes().withoutMultiples()} )
-#if ($attribute != "*")
-##
-#set($classname = "${model.camelCase($attribute)}Attribute" )
-    <file path="attribute/${model.extractNamespace($attribute)}/${classname}.java" context="$attribute" template="java-odfdom-attribute-template.vm" />
-#end
-#end
+    ##
+    #foreach ( $element in ${model.getElements().withoutMultiples()} )
+        #if ($element != "*")
+            ##
+            #set($classname = "${model.camelCase($element)}Element" )
+            <file path="element/${model.extractNamespace($element)}/${classname}.java" context="$element" template="java-odfdom-element-template.vm" />
+            ##
+        #end
+    #end
+    ##
+    #foreach ( $base in $javamodel.getBaseclasses() )
+        ##
+        #if ($base != "container" && $base != "style" && $base != "styleproperties" )
+            #set($classname = "${model.camelCase($base)}ElementBase" )
+            <file path="element/${model.extractNamespace($base)}/${classname}.java" context="$base" template="java-odfdom-elementbase-template.vm" />
+        #end
+        ##
+    #end
+    ##
+    #foreach ( $attribute in ${model.getAttributes().withoutMultiples()} )
+        #if ($attribute != "*")
+            ##
+            #set($classname = "${model.camelCase($attribute)}Attribute" )
+            <file path="attribute/${model.extractNamespace($attribute)}/${classname}.java" context="$attribute" template="java-odfdom-attribute-template.vm" />
+        #end
+    #end
 </filelist>
