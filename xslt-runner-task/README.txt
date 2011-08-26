@@ -9,10 +9,10 @@
 *************************************************************
 
 
-About ODFDOM
--------------
+About ODF XSLT Runner Task
+--------------------------
 
-ODFXSLTRunnerTask is a task definition for Ant which allows to apply
+ODF XSLT Runner Task is a task definition for Ant which allows to apply
 XSLT stylesheets to ODF documents similar to Ant's build-in <xslt> task.
 It is based on ODFXSLTRunner.
 
