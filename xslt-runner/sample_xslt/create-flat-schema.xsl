@@ -131,9 +131,21 @@
                 <xsl:for-each select="//rng:define|document(//rng:include/@href)//rng:define">
                     <xsl:variable name="name" select="@name"/>
                     <xsl:if test="//rng:attribute//rng:ref[@name=$name]|document(//rng:include/@href)//rng:attribute//rng:ref[@name=$name]">
-                        <define name="{@name}">
-                            <xsl:apply-templates mode="collect-type"/>
-                        </define>
+                        <xsl:if test="not(preceding-sibling::rng:define[@name = $name])">
+                            <xsl:variable name="count" select="count(//rng:define[@name = $name]|document(//rng:include/@href)//rng:define[@name = $name])"/>
+                            <define name="{@name}">
+                                <xsl:choose>
+                                    <xsl:when test="$count>1">
+                                        <choice>
+                                            <xsl:apply-templates select="//rng:define[@name = $name]/*|document(//rng:include/@href)//rng:define[@name = $name]/*" mode="collect-type"/>
+                                        </choice>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:apply-templates mode="collect-type"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </define>
+                        </xsl:if>
                     </xsl:if>
                 </xsl:for-each>
             </xsl:if>
