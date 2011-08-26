@@ -19,47 +19,46 @@
  * limitations under the License.
  *
  ************************************************************************/
-
- 
 package org.odftoolkit.odfdom.incubator.doc.style;
 
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 
 /**
  * Convenient functionalty for the parent ODF OpenDocument element
- *
+ * 
  */
-public class OdfStyle extends StyleStyleElement
-{
+public class OdfStyle extends StyleStyleElement {
 
-	public OdfStyle( OdfFileDom ownerDoc )
-    {
-        super( ownerDoc );
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1114614579014922410L;
 
-    @Override
-    public OdfStyleBase getParentStyle()
-    {
-        String parent = this.getStyleParentStyleNameAttribute();
-        if( (parent != null) && ( parent.length() != 0 ) )
-        {
-            return mOdfDocument.getDocumentStyles().getStyle( parent, getFamily() );
-        }
-        else
-        {
-            return mOdfDocument.getDocumentStyles().getDefaultStyle(getFamily());
-        }
-    }
+	public OdfStyle(OdfFileDom ownerDoc) {
+		super(ownerDoc);
+	}
+
+	@Override
+	public OdfStyleBase getParentStyle() {
+		String parent = this.getStyleParentStyleNameAttribute();
+		if ((parent != null) && (parent.length() != 0)) {
+			return ((OdfSchemaDocument) mPackageDocument).getDocumentStyles().getStyle(parent, getFamily());
+		} else {
+			return ((OdfSchemaDocument) mPackageDocument).getDocumentStyles().getDefaultStyle(getFamily());
+		}
+	}
 
 	@Override
 	public OdfStyleFamily getFamily() {
 		String family = getStyleFamilyAttribute();
-		if(family!=null)
-		 return OdfStyleFamily.valueOf( family);
-		else 
+		if (family != null) {
+			return OdfStyleFamily.valueOf(family);
+		} else {
 			return null;
+		}
 	}
 }

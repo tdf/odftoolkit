@@ -10,10 +10,10 @@ import static org.junit.Assert.fail;
 import org.junit.Ignore;
 
 import org.junit.Test;
-import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 
 /** The test was deactivated. As an invalid value will no longer throw an exception and cause the removal of the attribute. */
 public class AttributesTest {
@@ -22,7 +22,7 @@ public class AttributesTest {
 	@Ignore
     public void testSetValue() throws Exception {
         OdfTextDocument odt = OdfTextDocument.newTextDocument();
-        OdfContentDom dom = odt.getContentDom();
+        OdfFileDom dom = odt.getContentDom();
         OdfStyle style1 = new OdfStyle(dom);
 
         // No exception should be thrown here

@@ -136,7 +136,8 @@ public class OdfPresentationDocument extends OdfDocument {
 		return doc;
 	}
 
-	// Using static factory instead of constructor
+	/** To avoid data duplication a new document is only created, if not already opened.
+	 * A document is cached by this constructor using the internalpath as key. */
 	protected OdfPresentationDocument(OdfPackage pkg, String internalPath, OdfPresentationDocument.OdfMediaType odfMediaType) {
 		super(pkg, internalPath, odfMediaType.mMediaType);
 	}
@@ -767,7 +768,7 @@ public class OdfPresentationDocument extends OdfDocument {
 						String mediaType = srcDoc.getPackage().getFileEntry(refObjPath).getMediaTypeString();
 						getPackage().insert(is, newObjPath, mediaType);
 					} else {
-						OdfDocument embedDoc = (OdfDocument) srcDoc.getEmbeddedDocument(refObjPath);
+						OdfDocument embedDoc = (OdfDocument) srcDoc.loadSubDocument(refObjPath);
 						if (embedDoc != null) {
 							insertDocument(embedDoc, newObjPath);
 						}

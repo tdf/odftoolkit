@@ -25,6 +25,7 @@ package org.odftoolkit.odfdom.pkg;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,14 +35,11 @@ import javax.xml.xpath.XPathConstants;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
-import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawObjectElement;
@@ -58,10 +56,10 @@ public class EmbeddedDocumentTest {
 	private static final Logger LOG = Logger.getLogger(EmbeddedDocumentTest.class.getName());
 	private static final String TEST_FILE_FOLDER = ResourceUtilities.getTestOutputFolder();
 	private static final String TEST_FILE_EMBEDDED = "Presentation1.odp";
-	private static final String TEST_FILE_EMBEDDED_SAVE_OUT = "SaveEmbededDoc.odt";
-	private static final String TEST_FILE_EMBEDDED_SIDEBYSIDE_SAVE_OUT = "SaveEmbededDocSideBySide.odt";
-	private static final String TEST_FILE_EMBEDDED_INCLUDED_SAVE_OUT = "SaveEmbededDocIncluded.odt";
-	private static final String TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT = "RemoveEmbededDoc.odt";
+	private static final String TEST_FILE_EMBEDDED_SAVE_OUT = "SaveEmbeddedDoc.odt";
+	private static final String TEST_FILE_EMBEDDED_SIDEBYSIDE_SAVE_OUT = "SaveEmbeddedDocSideBySide.odt";
+	private static final String TEST_FILE_EMBEDDED_INCLUDED_SAVE_OUT = "SaveEmbeddedDocIncluded.odt";
+	private static final String TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT = "RemoveEmbeddedDoc.odt";
 	private static final String TEST_FILE_MODIFIED_EMBEDDED = "TestModifiedEmbeddedDoc.odt";
 	private static final String TEST_FILE_MODIFIED_EMBEDDED_SAVE_STANDALONE = "SaveModifiedEmbeddedDocAlone.odt";
 	private static final String TEST_SPAN_TEXT = "Modify Header";
@@ -78,20 +76,23 @@ public class EmbeddedDocumentTest {
 		try {
 			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED));
 			OdfDocument saveDoc = OdfTextDocument.newTextDocument();
-			List<OdfDocument> embeddedDocs = doc.getEmbeddedDocuments();
-			List<String> embeddedDocNames = new ArrayList<String>();
-			for (OdfDocument childDoc : embeddedDocs) {
-				String embeddedDocName = childDoc.getDocumentPackagePath();
-				saveDoc.insertDocument(childDoc, embeddedDocName);
-				embeddedDocNames.add(embeddedDocName);
+			Map<String, OdfDocument> subDocs = doc.loadSubDocuments();
+			List<String> subDocNames = new ArrayList<String>();
+			for (String childDocPath : subDocs.keySet()) {
+				OdfDocument childDoc = subDocs.get(childDocPath);
+				String embeddedDocPath = childDoc.getDocumentPath();
+				saveDoc.insertDocument(childDoc, embeddedDocPath);
+				subDocNames.add(embeddedDocPath);
 			}
+			Set<String> paths = saveDoc.getPackage().getInnerDocumentPaths();
+			paths = saveDoc.getPackage().getInnerDocumentPaths("application/vnd.oasis.opendocument.presentation");
 			saveDoc.save(TEST_FILE_FOLDER + TEST_FILE_EMBEDDED_SAVE_OUT);
 			saveDoc.close();
 			saveDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED_SAVE_OUT));
-			List<OdfDocument> saveembeddedDocs = saveDoc.getEmbeddedDocuments();
-			Assert.assertTrue(embeddedDocs.size() == saveembeddedDocs.size());
-			for (int i = 0; i < embeddedDocs.size(); i++) {
-				Assert.assertEquals(embeddedDocs.get(i).getMediaTypeString(), saveembeddedDocs.get(i).getMediaTypeString());
+			Map<String, OdfDocument> reloadedSubDocs = saveDoc.loadSubDocuments();
+			Assert.assertTrue(subDocs.size() == reloadedSubDocs.size());
+			for (String childDocPath : subDocs.keySet()) {
+				Assert.assertEquals(subDocs.get(childDocPath).getMediaTypeString(), reloadedSubDocs.get(childDocPath).getMediaTypeString());
 			}
 		} catch (Exception ex) {
 			LOG.log(Level.SEVERE, null, ex);
@@ -107,22 +108,22 @@ public class EmbeddedDocumentTest {
 	@Test
 	public void testembeddedDocumentsLocatedSideBySide() {
 		try {
-			OdfTextDocument odtDoc1 = OdfTextDocument.newTextDocument();
-			odtDoc1.insertDocument(OdfTextDocument.newTextDocument(), "DOCA/");
-			OdfDocument docA = odtDoc1.getEmbeddedDocument("DOCA");
+			OdfTextDocument odtRootDoc = OdfTextDocument.newTextDocument();
+			odtRootDoc.insertDocument(OdfTextDocument.newTextDocument(), "DOCA/");
+			OdfDocument docA = odtRootDoc.loadSubDocument("DOCA");
 			docA.newImage(ResourceUtilities.getURI(TEST_PIC));
 			docA.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "DOCB/");
-			OdfContentDom contentA = docA.getContentDom();
+			OdfFileDom contentA = docA.getContentDom();
 			XPath xpath = contentA.getXPath();
 			TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", contentA, XPathConstants.NODE);
-			addFrameForEmbeddedDoc(contentA, lastPara, "../DOCB");
-			OdfDocument docB = odtDoc1.getEmbeddedDocument("DOCB/");
+			addFrameForEmbeddedDoc(contentA, lastPara, "DOCB");
+			OdfDocument docB = odtRootDoc.loadSubDocument("DOCB/");
 			Assert.assertNotNull(docB);
-			Assert.assertNull(odtDoc1.getEmbeddedDocument("DOCA/DOCB/"));
+			Assert.assertNull(odtRootDoc.loadSubDocument("DOCA/DOCB/"));
 			docB.newImage(ResourceUtilities.getURI(TEST_PIC_ANOTHER));
 			OdfTable table1 = docB.getTableList().get(0);
 			table1.setTableName("NewTable");
-			updateFrameForEmbeddedDoc(contentA, "../DOCB", "./DOCB");
+			updateFrameForEmbeddedDoc(contentA, "./DOCB", "DOCA/DOCB");
 			//if user want to save the docA with the side by side embedded document
 			//he has to insert it to the sub document of docA and update the xlink:href link
 			docA.insertDocument(docB, "DOCA/DOCB/");
@@ -131,11 +132,12 @@ public class EmbeddedDocumentTest {
 			OdfDocument testLoad = OdfDocument.loadDocument(TEST_FILE_FOLDER + TEST_FILE_EMBEDDED_SIDEBYSIDE_SAVE_OUT);
 			OdfFileEntry imageEntry = testLoad.getPackage().getFileEntry(OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC);
 			Assert.assertNotNull(imageEntry);
-			List<OdfDocument> embDocs = testLoad.getEmbeddedDocuments(OdfDocument.OdfMediaType.SPREADSHEET);
-			OdfDocument doc1 = embDocs.get(0);
-			imageEntry = doc1.getPackage().getFileEntry(doc1.getDocumentPackagePath() + OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC_ANOTHER);
-			Assert.assertNotNull(doc1.getTableByName("NewTable"));
-
+			Map<String, OdfDocument> embDocs = testLoad.loadSubDocuments(OdfDocument.OdfMediaType.SPREADSHEET);
+			for(String embedDocPath : embDocs.keySet()){
+				OdfDocument doc1 = embDocs.get(embedDocPath);
+				imageEntry = doc1.getPackage().getFileEntry(doc1.getDocumentPath() + OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC_ANOTHER);
+				Assert.assertNotNull(doc1.getTableByName("NewTable"));
+			}
 		} catch (Exception ex) {
 			LOG.log(Level.SEVERE, null, ex);
 			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
@@ -152,27 +154,29 @@ public class EmbeddedDocumentTest {
 		try {
 			OdfTextDocument odtDoc1 = OdfTextDocument.newTextDocument();
 			odtDoc1.insertDocument(OdfTextDocument.newTextDocument(), "DOCA/");
-			OdfDocument docA = odtDoc1.getEmbeddedDocument("DOCA");
+			OdfDocument docA = odtDoc1.loadSubDocument("DOCA");
 			docA.newImage(ResourceUtilities.getURI(TEST_PIC));
 			docA.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "DOCA/DOCB/");
-			OdfContentDom contentA = docA.getContentDom();
+			OdfFileDom contentA = docA.getContentDom();
 			XPath xpath = contentA.getXPath();
 			TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", contentA, XPathConstants.NODE);
 			addFrameForEmbeddedDoc(contentA, lastPara, "./DOCB");
-			OdfDocument docB = odtDoc1.getEmbeddedDocument("DOCA/DOCB/");
+			OdfDocument docB = odtDoc1.loadSubDocument("DOCA/DOCB/");
 			docB.newImage(ResourceUtilities.getURI(TEST_PIC_ANOTHER));
 			OdfTable table1 = docB.getTableList().get(0);
 			table1.setTableName("NewTable");
 			Assert.assertNotNull(docB);
-			Assert.assertNull(odtDoc1.getEmbeddedDocument("DOCB/"));
+			Assert.assertNull(odtDoc1.loadSubDocument("DOCB/"));
 			docA.save(TEST_FILE_FOLDER + TEST_FILE_EMBEDDED_INCLUDED_SAVE_OUT);
 			OdfDocument testLoad = OdfDocument.loadDocument(TEST_FILE_FOLDER + TEST_FILE_EMBEDDED_INCLUDED_SAVE_OUT);
 			OdfFileEntry imageEntry = testLoad.getPackage().getFileEntry(OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC);
 			Assert.assertNotNull(imageEntry);
-			List<OdfDocument> embDocs = testLoad.getEmbeddedDocuments(OdfDocument.OdfMediaType.SPREADSHEET);
-			OdfDocument doc1 = embDocs.get(0);
-			imageEntry = doc1.getPackage().getFileEntry(doc1.getDocumentPackagePath() + OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC_ANOTHER);
-			Assert.assertNotNull(doc1.getTableByName("NewTable"));
+			Map<String, OdfDocument> embDocs = testLoad.loadSubDocuments(OdfDocument.OdfMediaType.SPREADSHEET);
+			for (String childDocPath : embDocs.keySet()) {	
+				OdfDocument doc1 = embDocs.get(childDocPath);
+				imageEntry = doc1.getPackage().getFileEntry(doc1.getDocumentPath() + OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC_ANOTHER);
+				Assert.assertNotNull(doc1.getTableByName("NewTable"));
+			}
 		} catch (Exception ex) {
 			LOG.log(Level.SEVERE, null, ex);
 			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
@@ -187,11 +191,10 @@ public class EmbeddedDocumentTest {
 	public void testSaveEmbeddedDocument() {
 		try {
 			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED));
-			List<OdfDocument> embeddedDocs = doc.getEmbeddedDocuments();
-			for (OdfPackageDocument childPackageDoc : embeddedDocs) {
-				OdfDocument childDoc = (OdfDocument) childPackageDoc;
-				String embedFileName = childDoc.getDocumentPackagePath();
-
+			Map<String, OdfDocument> embeddedDocs = doc.loadSubDocuments();
+			for (String childDocPath : embeddedDocs.keySet()) {
+				OdfDocument childDoc = embeddedDocs.get(childDocPath);
+				String embedFileName = childDoc.getDocumentPath();
 				OdfMediaType embedMediaType = OdfMediaType.getOdfMediaType(childDoc.getMediaTypeString());
 				//use '_' replace '/', because '/' is not the valid char in file path
 				embedFileName = embedFileName.replaceAll("/", "_") + "." + embedMediaType.getSuffix();
@@ -220,9 +223,9 @@ public class EmbeddedDocumentTest {
 		try {
 			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED));
 			OdfDocument saveDoc = OdfTextDocument.newTextDocument();
-			OdfDocument embeddedDoc = doc.getEmbeddedDocument("Object 1/");
+			OdfDocument embeddedDoc = doc.loadSubDocument("Object 1/");
 			//modify content of "Object 1"
-			OdfContentDom embedContentDom = embeddedDoc.getContentDom();
+			OdfFileDom embedContentDom = embeddedDoc.getContentDom();
 			XPath xpath = embedContentDom.getXPath();
 			TextHElement header = (TextHElement) xpath.evaluate("//text:h[1]", embedContentDom, XPathConstants.NODE);
 			LOG.log(Level.INFO, "First para: {0}", header.getTextContent());
@@ -238,13 +241,14 @@ public class EmbeddedDocumentTest {
 			saveDoc.close();
 			//reload TestModifiedEmbeddedDoc.odt
 			saveDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_MODIFIED_EMBEDDED));
-			embeddedDoc = saveDoc.getEmbeddedDocument(embedPath);
+			embeddedDoc = saveDoc.loadSubDocument(embedPath);
 			//check the content of "DocA" and modify it again
 			embedContentDom = embeddedDoc.getContentDom();
 			header = (TextHElement) xpath.evaluate("//text:h[1]", embedContentDom, XPathConstants.NODE);
 			Assert.assertTrue(header.getTextContent().contains(TEST_SPAN_TEXT));
 			header.setTextContent("");
-			OdfFileEntry imageEntry = embeddedDoc.getPackage().getFileEntry(embeddedDoc.getDocumentPackagePath() + OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC);
+			String packagePath = embeddedDoc.getDocumentPath() + SLASH + OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC;
+			OdfFileEntry imageEntry = embeddedDoc.getPackage().getFileEntry(packagePath);
 			Assert.assertNotNull(imageEntry);
 			embeddedDoc.newImage(ResourceUtilities.getURI(TEST_PIC_ANOTHER));
 			//save the "DocA" as the standalone document
@@ -268,12 +272,12 @@ public class EmbeddedDocumentTest {
 	public void testRemoveEmbeddedDocument() {
 		try {
 			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_EMBEDDED));
-			List<OdfDocument> embeddedDocs = doc.getEmbeddedDocuments();
-			List<String> embeddedDocNames = new ArrayList<String>();
-			for (OdfPackageDocument childPackageDoc : embeddedDocs) {
-				OdfDocument childDoc = (OdfDocument) childPackageDoc;
-				String embedFileName = childDoc.getDocumentPackagePath();
-				embeddedDocNames.add(embedFileName);
+			Map<String, OdfDocument> embeddedDocs = doc.loadSubDocuments();
+			List<String> subDocNames = new ArrayList<String>();
+			for (String childDocPath : embeddedDocs.keySet()) {
+				OdfDocument childDoc = embeddedDocs.get(childDocPath);
+				String embedFileName = childDoc.getDocumentPath();
+				subDocNames.add(embedFileName);
 				childDoc.removeEmbeddedDocument(embedFileName);
 			}
 			doc.save(TEST_FILE_FOLDER + TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT);
@@ -281,13 +285,13 @@ public class EmbeddedDocumentTest {
 			//check manifest entry for the embed document 
 			//the sub entry of the embed document such as the pictures of the document should also be removed
 			doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT));
-			List<OdfDocument> saveembeddedDocs = doc.getEmbeddedDocuments();
-			Assert.assertTrue(0 == saveembeddedDocs.size());
+			Map<String, OdfDocument> reloadedSubDocs = doc.loadSubDocuments();
+			Assert.assertTrue(0 == reloadedSubDocs.size());
 			Set<String> entries = doc.getPackage().getFileEntries();
 			Iterator<String> entryIter = null;
-			for (int i = 0; i < embeddedDocNames.size(); i++) {
+			for (int i = 0; i < subDocNames.size(); i++) {
 				entryIter = entries.iterator();
-				String embeddedDocPath = embeddedDocNames.get(i);
+				String embeddedDocPath = subDocNames.get(i);
 				while (entryIter.hasNext()) {
 					String entry = entryIter.next();
 					Assert.assertFalse(entry.startsWith(embeddedDocPath));

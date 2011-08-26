@@ -32,6 +32,7 @@ import javax.xml.xpath.XPathConstants;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.pkg.OdfAlienElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfPresentationDocument;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Node;
@@ -74,9 +75,10 @@ public class XPathTest {
 	public void testXPathwithAlienNodes() throws Exception {
 		try {
 			OdfPresentationDocument odpWithSlides = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(SOURCE_FILE_1));
-			OdfContentDom contentDom = odpWithSlides.getContentDom();
+			OdfFileDom contentDom = odpWithSlides.getContentDom();
 
 			XPath xpath = contentDom.getXPath();
+			// Test scenario 1 - see comment above
 			Iterator<String> prefixes = contentDom.getPrefixes("urn:oasis:names:tc:opendocument:xmlns:office:1.0");
 			// The first prefix have to be "office"
 			String prefix = prefixes.next();
@@ -164,7 +166,7 @@ public class XPathTest {
 	public void testXPathIsMissingXLinkButItWillPassBecauseItTheSecondTestInThisUnitTest() throws Exception {
 		try {
 			OdfPresentationDocument odpWithSlides = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(SOURCE_FILE_1));
-			OdfContentDom contentDom = odpWithSlides.getContentDom();
+			OdfFileDom contentDom = odpWithSlides.getContentDom();
 			XPath xpath = contentDom.getXPath();
 
 			Node node = odpWithSlides.getContentDom().getRootElement();

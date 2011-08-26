@@ -22,6 +22,8 @@
 package org.odftoolkit.odfdom.incubator.doc.text;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 
 import org.odftoolkit.odfdom.doc.table.OdfTable;
@@ -49,50 +51,46 @@ import org.w3c.dom.NodeList;
 public class OdfEditableTextExtractor extends OdfTextExtractor {
 
 	OdfDocument mDocument = null;
-	OdfElement  mElement = null;
-	boolean		mIsDocumentExtractor = false;
-	
+	OdfElement mElement = null;
+	boolean mIsDocumentExtractor = false;
+
 	/**
 	 * Constructor with an ODF document as a parameter
 	 * @param doc the ODF document whose editable text would be extracted. 
 	 */
-	private OdfEditableTextExtractor(OdfDocument doc)
-	{
+	private OdfEditableTextExtractor(OdfDocument doc) {
 		mTextBuilder = new StringBuilder();
 		mDocument = doc;
 		mIsDocumentExtractor = true;
 	}
-	
+
 	/**
 	 * Constructor with an ODF element as parameter
 	 * @param element the ODF element whose editable text would be extracted. 
 	 */
-	private OdfEditableTextExtractor(OdfElement element)
-	{
+	private OdfEditableTextExtractor(OdfElement element) {
 		mTextBuilder = new StringBuilder();
 		mElement = element;
 		mIsDocumentExtractor = false;
 	}
-		
+
 	/**
 	 * An instance of OdfEditableTextExtractor will be created to 
 	 * extract the editable text content of an ODF element.
 	 * @param doc the ODF document whose text will be extracted.
 	 * @return An instance of OdfEditableTextExtractor
 	 */
-	public static OdfEditableTextExtractor newOdfEditableTextExtractor(OdfDocument doc)
-	{
+	public static OdfEditableTextExtractor newOdfEditableTextExtractor(OdfDocument doc) {
 		return new OdfEditableTextExtractor(doc);
 	}
-	
+
 	/**
 	 * An instance of OdfEditableTextExtractor will be created to 
 	 * extract the editable text content of an ODF element.
 	 * @param element the ODF element whose text will be extracted.
 	 * @return An instance of OdfEditableTextExtractor
 	 */
-	public static OdfEditableTextExtractor newOdfEditableTextExtractor(OdfElement element)
-	{
+	public static OdfEditableTextExtractor newOdfEditableTextExtractor(OdfElement element) {
 		return new OdfEditableTextExtractor(element);
 	}
 
@@ -102,12 +100,13 @@ public class OdfEditableTextExtractor extends OdfTextExtractor {
 	@Override
 	public void visit(DrawObjectElement element) {
 		String embedDocPath = element.getXlinkHrefAttribute();
-		OdfDocument embedDoc = ((OdfContentDom)element.getOwnerDocument()).getOdfDocument().getEmbeddedDocument(embedDocPath);
-		if (embedDoc != null)
-		try {
-			mTextBuilder.append(OdfEditableTextExtractor.newOdfEditableTextExtractor(embedDoc).getText());
-		} catch (Exception e) {
-			e.printStackTrace();
+		OdfDocument embedDoc = ((OdfDocument) (((OdfContentDom) element.getOwnerDocument()).getDocument())).loadSubDocument(embedDocPath);
+		if (embedDoc != null) {
+			try {
+				mTextBuilder.append(OdfEditableTextExtractor.newOdfEditableTextExtractor(embedDoc).getText());
+			} catch (Exception e) {
+				Logger.getLogger(OdfEditableTextExtractor.class.getName()).log(Level.SEVERE, null, e);
+			}
 		}
 	}
 
@@ -128,21 +127,18 @@ public class OdfEditableTextExtractor extends OdfTextExtractor {
 		mTextBuilder.append(link);
 		appendElementText(ele);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextTabElement)
 	 */
 	@Override
-	public void visit(TableTableElement ele)
-	{
+	public void visit(TableTableElement ele) {
 		OdfTable table = OdfTable.getInstance(ele);
 		List<OdfTableRow> rowlist = table.getRowList();
-		for (int i=0;i<rowlist.size();i++)
-		{
+		for (int i = 0; i < rowlist.size(); i++) {
 			OdfTableRow row = rowlist.get(i);
-			for(int j=0;j<row.getCellCount();j++)
-			{
-				mTextBuilder.append(row.getCellByIndex(j).getDisplayText()+TabChar);
+			for (int j = 0; j < row.getCellCount(); j++) {
+				mTextBuilder.append(row.getCellByIndex(j).getDisplayText()).append(TabChar);
 			}
 			mTextBuilder.append(NewLineChar);
 		}
@@ -153,52 +149,49 @@ public class OdfEditableTextExtractor extends OdfTextExtractor {
 	 * @return the editable text content as a string
 	 */
 	@Override
-	public String getText()
-	{
-		if (mIsDocumentExtractor)
-		{
+	public String getText() {
+		if (mIsDocumentExtractor) {
 			return getDocumentText();
-		}
-		else {
+		} else {
 			visit(mElement);
-			return mTextBuilder.toString();			
+			return mTextBuilder.toString();
 		}
 	}
-	
-	private String getDocumentText()
-	{
+
+	private String getDocumentText() {
 		StringBuilder builder = new StringBuilder();
 		try {
 			//Extract text from content.xml
 			OdfEditableTextExtractor contentDomExtractor = newOdfEditableTextExtractor(mDocument.getContentRoot());
 			builder.append(contentDomExtractor.getText());
-			
+
 			//Extract text from style.xml
 			OdfStylesDom styleDom = mDocument.getStylesDom();
-			if (styleDom!=null) {
+			if (styleDom != null) {
 				StyleMasterPageElement masterpage = null;
 				NodeList list = styleDom.getElementsByTagName("style:master-page");
 				if (list.getLength() > 0) {
 					masterpage = (StyleMasterPageElement) list.item(0);
 				}
-				if (masterpage!=null)
+				if (masterpage != null) {
 					builder.append(newOdfEditableTextExtractor(masterpage).getText());
+				}
 			}
-			
+
 			//Extract text from meta.xml
 			OdfMetaDom metaDom = mDocument.getMetaDom();
 			if (metaDom != null) {
 				OdfElement root = metaDom.getRootElement();
 				OfficeMetaElement officemeta = OdfElement.findFirstChildNode(OfficeMetaElement.class, root);
-				if (officemeta != null)
+				if (officemeta != null) {
 					builder.append(newOdfEditableTextExtractor(officemeta).getText());
+				}
 			}
-			
+
 			return builder.toString();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(OdfEditableTextExtractor.class.getName()).severe(e.getMessage());
 			return builder.toString();
 		}
 	}
-	
 }

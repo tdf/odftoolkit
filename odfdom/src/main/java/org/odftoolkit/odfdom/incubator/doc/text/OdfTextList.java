@@ -19,18 +19,17 @@
  * limitations under the License.
  *
  ************************************************************************/
-
 package org.odftoolkit.odfdom.incubator.doc.text;
 
 import java.util.logging.Logger;
 
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListItemElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleElementBase;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.w3c.dom.Node;
 
 /**
@@ -38,6 +37,7 @@ import org.w3c.dom.Node;
  * 
  */
 public class OdfTextList extends TextListElement {
+
 	/**
 	 * Creates a new instance of OdfList.
 	 * 
@@ -136,7 +136,7 @@ public class OdfTextList extends TextListElement {
 			}
 
 			if (style == null) {
-				OdfOfficeStyles styles = ((OdfDocument) fileDom.getDocument()).getDocumentStyles();
+				OdfOfficeStyles styles = ((OdfSchemaDocument) fileDom.getDocument()).getDocumentStyles();
 				if (styles != null) {
 					style = styles.getListStyle(listName);
 				}
@@ -196,8 +196,7 @@ public class OdfTextList extends TextListElement {
 	public OdfTextListStyle getOrCreateLocalListStyle() {
 		OdfTextListStyle listStyle = getListStyle();
 		if (listStyle == null) {
-			OdfOfficeAutomaticStyles autoStyles = ((OdfFileDom) this.ownerDocument)
-					.getOrCreateAutomaticStyles();
+			OdfOfficeAutomaticStyles autoStyles = ((OdfFileDom) this.ownerDocument).getOrCreateAutomaticStyles();
 			if (autoStyles != null) {
 				listStyle = autoStyles.newListStyle();
 			}
@@ -220,5 +219,4 @@ public class OdfTextList extends TextListElement {
 		}
 		return null;
 	}
-
 }

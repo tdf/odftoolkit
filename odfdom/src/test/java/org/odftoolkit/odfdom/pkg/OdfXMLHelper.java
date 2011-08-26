@@ -64,21 +64,8 @@ public class OdfXMLHelper {
 	 */
 	public XMLReader newXMLReader(OdfPackage pkg)
 			throws SAXException, ParserConfigurationException {
-
-		SAXParserFactory factory = new org.apache.xerces.jaxp.SAXParserFactoryImpl();
-		factory.setNamespaceAware(true);
-		factory.setValidating(false);
-
-		SAXParser parser = factory.newSAXParser();
-		XMLReader xmlReader = parser.getXMLReader();
-		// More details at http://xerces.apache.org/xerces2-j/features.html#namespaces
-		xmlReader.setFeature("http://xml.org/sax/features/namespaces", true);
-		// More details at http://xerces.apache.org/xerces2-j/features.html#namespace-prefixes
-		xmlReader.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
-		// More details at http://xerces.apache.org/xerces2-j/features.html#xmlns-uris
-		xmlReader.setFeature("http://xml.org/sax/features/xmlns-uris", true);
+		XMLReader xmlReader = pkg.getXMLReader();
 		xmlReader.setEntityResolver(pkg.getEntityResolver());
-
 		return xmlReader;
 	}
 
@@ -362,29 +349,29 @@ public class OdfXMLHelper {
 		Result result = null;
 		ByteArrayOutputStream baos = null;
 
-		if (pkg.isDomCached(path)) {
-			result = new DOMResult();
-		} else {
+//		if (pkg.isDomCached(path)) {
+//			result = new DOMResult();
+//		} else {
 			baos = new ByteArrayOutputStream();
 			result = new StreamResult(baos);
-		}
+//		}
 
 		transform(pkg, path, templates, result);
 
-		if (pkg.isDomCached(path)) {
-			try {
-				pkg.insert((Document) ((DOMResult) result).getNode(), path, null);
-			} catch (Exception ex) {
-				Logger.getLogger(OdfXMLHelper.class.getName()).log(Level.SEVERE, null, ex);
-			}
-		} else {
+//		if (pkg.isDomCached(path)) {
+//			try {
+//				pkg.insert((Document) ((DOMResult) result).getNode(), path, null);
+//			} catch (Exception ex) {
+//				Logger.getLogger(OdfXMLHelper.class.getName()).log(Level.SEVERE, null, ex);
+//			}
+//		} else {
 			try {
 				byte[] data = baos.toByteArray();
 				pkg.insert(data, path, "text/xml");
 			} catch (Exception ex) {
 				Logger.getLogger(OdfXMLHelper.class.getName()).log(Level.SEVERE, null, ex);
 			}
-		}
+//		}
 
 	}
 }

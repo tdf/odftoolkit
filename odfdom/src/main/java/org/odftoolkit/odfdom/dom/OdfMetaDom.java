@@ -23,10 +23,11 @@ package org.odftoolkit.odfdom.dom;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
+
+import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentMetaElement;
 import org.odftoolkit.odfdom.pkg.NamespaceName;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentMetaElement;
+import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 
 /**
  * The DOM repesentation of the ODF meta.xml file of an ODF document.
@@ -41,22 +42,28 @@ public class OdfMetaDom extends OdfFileDom {
 	 * @param odfDocument   the document the XML files belongs to
 	 * @param packagePath   the internal package path to the XML file
 	 */
-	public OdfMetaDom(OdfDocument odfDocument, String packagePath) {
+	public OdfMetaDom(OdfPackageDocument odfDocument, String packagePath) {
 		super(odfDocument, packagePath);
-		mPackageDocument = odfDocument;
+	}
+
+	/** Might be used to initialize specific XML Namespace prefixes/URIs for this XML file*/
+	@Override
+	protected void initialize() {
 		for (NamespaceName name : OdfDocumentNamespace.values()) {
-			mURIByPrefix.put(name.getPrefix(), name.getUri());
-			mPrefixByURI.put(name.getUri(), name.getPrefix());
+			mUriByPrefix.put(name.getPrefix(), name.getUri());
+			mPrefixByUri.put(name.getUri(), name.getPrefix());
 		}
+		super.initialize();
 	}
 
 	/**
 	 * Retrieves the Odf Document
-	 * 
+	 *
 	 * @return The <code>OdfDocument</code>
 	 */
-	public OdfDocument getOdfDocument() {
-		return (OdfDocument) mPackageDocument;
+	@Override
+	public OdfSchemaDocument getDocument() {
+		return (OdfSchemaDocument) mPackageDocument;
 	}
 
 	/**
@@ -79,8 +86,8 @@ public class OdfMetaDom extends OdfFileDom {
 			mXPath = XPathFactory.newInstance().newXPath();
 			mXPath.setNamespaceContext(this);
 			for (NamespaceName name : OdfDocumentNamespace.values()) {
-				mURIByPrefix.put(name.getPrefix(), name.getUri());
-				mPrefixByURI.put(name.getUri(), name.getPrefix());
+				mUriByPrefix.put(name.getPrefix(), name.getUri());
+				mPrefixByUri.put(name.getUri(), name.getPrefix());
 			}
 		}
 		return mXPath;

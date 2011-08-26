@@ -25,8 +25,6 @@ package org.odftoolkit.odfdom.doc;
 import java.io.File;
 import java.io.InputStream;
 
-import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
@@ -184,7 +182,8 @@ public class OdfTextDocument extends OdfDocument {
 		return (OdfTextDocument)OdfDocument.loadDocument(file);
 	}
 	
-	// Using static factory instead of constructor
+	/** To avoid data duplication a new document is only created, if not already opened.
+	 * A document is cached by this constructor using the internalpath as key. */
 	protected OdfTextDocument(OdfPackage pkg, String internalPath, OdfTextDocument.OdfMediaType odfMediaType) {
 		super(pkg, internalPath, odfMediaType.mMediaType);
 	}

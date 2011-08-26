@@ -21,6 +21,8 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.pkg;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import javax.xml.namespace.NamespaceContext;
 import java.lang.reflect.Field;
@@ -35,10 +37,19 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.XMLConstants;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfMetaDom;
+import org.odftoolkit.odfdom.dom.OdfSettingsDom;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
 
 /**
  * The DOM repesentation of an XML file within the ODF document.
@@ -48,10 +59,13 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 	private static final long serialVersionUID = 766167617530147000L;
 	protected String mPackagePath;
 	protected OdfPackageDocument mPackageDocument;
+	protected OdfPackage mPackage;
 	protected XPath mXPath;
-	protected Map<String, String> mURIByPrefix;
-	protected Map<String, String> mPrefixByURI;
-	protected Map<String, Set<String>> mDuplicatePrefixesByURI;
+	protected Map<String, String> mUriByPrefix;
+	protected Map<String, String> mPrefixByUri;
+	/** Contains only the duplicate prefix. 
+	 * The primary hold by mPrefixByUri still have to be added */
+	protected Map<String, Set<String>> mDuplicatePrefixesByUri;
 
 	/**
 	 * Creates the DOM representation of an XML file of an Odf document.
@@ -59,16 +73,84 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 	 * @param packageDocument   the document the XML files belongs to
 	 * @param packagePath   the internal package path to the XML file
 	 */
-	public OdfFileDom(OdfPackageDocument packageDocument, String packagePath) {
-		super();
-		mPackageDocument = packageDocument;
-		mPackagePath = packagePath;
-		mURIByPrefix = new HashMap<String, String>();
-		mPrefixByURI = new HashMap<String, String>();
-		mDuplicatePrefixesByURI = new HashMap<String, Set<String>>();
-		// Register every DOM to OdfPackage,
-		// so a package close might save this DOM (similar as OdfDocumentPackage)
-		//	mPackageDocument.mPackage.insert(this, packagePath, null);
+	protected OdfFileDom(OdfPackageDocument packageDocument, String packagePath) {
+		super(false);
+		if (packageDocument != null && packagePath != null) {
+
+			mPackageDocument = packageDocument;
+			mPackage = packageDocument.getPackage();
+			mPackagePath = packagePath;
+			mUriByPrefix = new HashMap<String, String>();
+			mPrefixByUri = new HashMap<String, String>();
+			mDuplicatePrefixesByUri = new HashMap<String, Set<String>>();
+			initialize();
+			// Register every DOM to OdfPackage,
+			// so a package close might save this DOM (similar as OdfDocumentPackage)
+			this.addDomToCache(mPackageDocument.mPackage, packagePath);
+		} else {
+			throw new IllegalArgumentException("Arguments are not allowed to be NULL for OdfFileDom constructor!");
+		}
+	}
+
+	/** Adds the document to the pool of open documents of the package.
+	A document of a certain path is opened only once to avoid data duplication.
+	 */
+	private void addDomToCache(OdfPackage pkg, String internalPath) {
+		pkg.cacheDom(this, internalPath);
+	}
+
+	public static OdfFileDom newFileDom(OdfPackageDocument packageDocument, String packagePath) {
+		OdfFileDom newFileDom = null;
+		// before creating a new dom, make sure that there no DOM opened for this file already
+		Document existingDom = packageDocument.getPackage().getCachedDom(packagePath);
+		if (existingDom == null) {
+			// bug ??? - register OdfFileDom to this class
+			if (packagePath.equals("content.xml") || packagePath.endsWith("/content.xml")) {
+				newFileDom = new OdfContentDom(packageDocument, packagePath);
+			} else if (packagePath.equals("styles.xml") || packagePath.endsWith("/styles.xml")) {
+				newFileDom = new OdfStylesDom(packageDocument, packagePath);
+			} else if (packagePath.equals("meta.xml") || packagePath.endsWith("/meta.xml")) {
+				newFileDom = new OdfMetaDom(packageDocument, packagePath);
+			} else if (packagePath.equals("settings.xml") || packagePath.endsWith("/settings.xml")) {
+				newFileDom = new OdfSettingsDom(packageDocument, packagePath);
+			} else {
+				newFileDom = new OdfFileDom(packageDocument, packagePath);
+			}
+		} else {
+			if (existingDom instanceof OdfFileDom) {
+				newFileDom = (OdfFileDom) existingDom;
+//2DO SVANTE WHEN NOT ODFDOM SERIALIZE OLD AND CREATE A NEW ONE!
+//			}else{
+//				// ein FileDOM mit existierendem DOM
+//				newFileDom =
+			}
+
+		}
+		return newFileDom;
+	}
+
+	protected void initialize() {
+		InputStream fileStream = null;
+		try {
+			fileStream = mPackage.getInputStream(mPackagePath);
+			if (fileStream != null) {
+				XMLReader xmlReader = mPackage.getXMLReader();
+				xmlReader.setContentHandler(new OdfFileSaxHandler(this));
+				InputSource xmlSource = new InputSource(fileStream);
+				xmlReader.parse(xmlSource);
+			}
+
+		} catch (Exception ex) {
+			Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			try {
+				if (fileStream != null) {
+					fileStream.close();
+				}
+			} catch (IOException ex) {
+				Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
 	}
 
 	/**
@@ -269,7 +351,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 	 */
 	public String getNamespaceURI(String prefix) {
 		String nsURI = null;
-		nsURI = mURIByPrefix.get(prefix);
+		nsURI = mUriByPrefix.get(prefix);
 		if (nsURI == null) {
 			nsURI = XMLConstants.NULL_NS_URI;
 		}
@@ -339,14 +421,14 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 	 *   <code>null</code>
 	 */
 	public String getPrefix(String namespaceURI) {
-		return mPrefixByURI.get(namespaceURI);
+		return mPrefixByUri.get(namespaceURI);
 	}
 
 	/**
 	 * <p>Get all prefixes bound to a Namespace URI in the current
 	 * scope. (the XML file)</p>
-	 * <p>Multiple prefixes bound to Namespace URI will be normalized to the first prefix defined.</p>
-	 * <p>To fulfill the <code>NamespaceContext</code> interface still an Iterator over String elements is returned, inlcuding a single prefix.</p>
+	 * <p>NOTE: Multiple prefixes bound to a similar Namespace URI will be normalized to the first prefix defined.
+	 * Still the namespace attributes exist in the XML as inner value prefixes might be used.</p>
 	 *
 	 * <p><strong>The <code>Iterator</code> is
 	 * <em>not</em> modifiable.  e.g. the
@@ -412,18 +494,18 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 	 *   <code>null</code>
 	 */
 	public Iterator<String> getPrefixes(String namespaceURI) {
-		Set<String> prefixes = mDuplicatePrefixesByURI.get(namespaceURI);
+		Set<String> prefixes = mDuplicatePrefixesByUri.get(namespaceURI);
 		if (prefixes == null) {
 			prefixes = new HashSet<String>();
-			mDuplicatePrefixesByURI.put(namespaceURI, prefixes);
+			mDuplicatePrefixesByUri.put(namespaceURI, prefixes);
 		}
-		prefixes.add(mPrefixByURI.get(namespaceURI));
+		prefixes.add(mPrefixByUri.get(namespaceURI));
 		return prefixes.iterator();
 	}
 
 	/** @return a map of namespaces, where the URI is the key and the prefix is the value */
-	Map<String, String> getNamespacesByURI() {
-		return mPrefixByURI;
+	Map<String, String> getMapNamespacePrefixByUri() {
+		return mPrefixByUri;
 	}
 
 	/** Adds a new Namespace to the DOM. Making the prefix usable with JDK <code>XPath</code>.
@@ -437,25 +519,24 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 	public OdfNamespace setNamespace(String prefix, String uri) {
 		//collision detection, when a new prefix/URI pair exists
 		OdfNamespace newNamespace = null;
-
 		//Scenario a) the URI already registered, use existing prefix
 		// but save all others for the getPrefixes function. There might be still some
 		// in attribute values using prefixes, that were not exchanged.
-		String existingPrefix = mPrefixByURI.get(uri);
+		String existingPrefix = mPrefixByUri.get(uri);
 		if (existingPrefix != null) {
 			//Use the existing prefix of the used URL, neglect the given
 			newNamespace = OdfNamespace.newNamespace(existingPrefix, uri);
 
 			//Add the new prefix to the duplicate prefix map for getPrefixes(String uri)
-			Set<String> prefixes = mDuplicatePrefixesByURI.get(uri);
+			Set<String> prefixes = mDuplicatePrefixesByUri.get(uri);
 			if (prefixes == null) {
 				prefixes = new HashSet<String>();
-				mDuplicatePrefixesByURI.put(uri, prefixes);
+				mDuplicatePrefixesByUri.put(uri, prefixes);
 			}
 			prefixes.add(prefix);
 		} else {
 			//Scenario b) the prefix already exists and the URI does not exist
-			String existingURI = mURIByPrefix.get(prefix);
+			String existingURI = mUriByPrefix.get(prefix);
 			if (existingURI != null && !existingURI.equals(uri)) {
 				//Change the prefix appending "__" plus counter.
 				int i = 1;
@@ -467,12 +548,12 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 					//users have to take care for their attribute values using namespace prefixes.
 					prefix = prefix + "__" + i;
 					i++;
-					existingURI = mURIByPrefix.get(prefix);
+					existingURI = mUriByPrefix.get(prefix);
 				} while (existingURI != null && !existingURI.equals(uri));
 			}
 			newNamespace = OdfNamespace.newNamespace(prefix, uri);
-			mPrefixByURI.put(uri, prefix);
-			mURIByPrefix.put(prefix, uri);
+			mPrefixByUri.put(uri, prefix);
+			mUriByPrefix.put(prefix, uri);
 		}
 		// if the file Dom is already associated to parsed XML add the new namespace to the root element
 		Element root = getRootElement();

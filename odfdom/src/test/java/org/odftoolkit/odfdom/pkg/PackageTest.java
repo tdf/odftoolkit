@@ -115,7 +115,7 @@ public class PackageTest {
 				OdfPackage.loadPackage(ResourceUtilities.getTestResourceAsStream(IMAGE_TEST_FILE));
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
-				if (!e.getMessage().contains(" unzip the file")) {
+				if (!e.getMessage().contains(" unzip the")) {
 					LOG.log(Level.SEVERE, null, e);
 					Assert.fail();
 				}
@@ -184,13 +184,13 @@ public class PackageTest {
 				// if the URI is absolute it can be converted to URL
 				fileStream = uri.toURL().openStream();
 			} else {
-				// otherwise create a file class to open the stream
+				// otherwise create a file class to open the transformStream
 				fileStream = new FileInputStream(uri.toString());
 				// TODO: error handling in this case! -> allow method insert(URI, ppath, mtype)?
 			}
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			BufferedInputStream bis = new BufferedInputStream(fileStream);
-			StreamHelper.stream(bis, baos);
+			StreamHelper.transformStream(bis, baos);
 			fileBytes = baos.toByteArray();
 		} catch (Exception e) {
 			Logger.getLogger(PackageTest.class.getName()).log(Level.SEVERE, null, e);

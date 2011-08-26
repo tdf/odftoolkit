@@ -27,7 +27,6 @@ import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
@@ -35,6 +34,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
@@ -46,7 +46,7 @@ public class CreateTableTest {
 	@Test
 	public void testCreateTable1() {
 		try {
-			OdfContentDom doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("empty.odt")).getContentDom();
+			OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("empty.odt")).getContentDom();
 
 			// find the last paragraph
 			NodeList lst = doc.getElementsByTagNameNS(

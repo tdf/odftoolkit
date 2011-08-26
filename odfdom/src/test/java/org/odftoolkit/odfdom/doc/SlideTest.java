@@ -206,12 +206,12 @@ public class SlideTest {
 			OdfSlide slide2 = doc.getSlideByIndex(2);
 			OdfSlide slide3 = doc.getSlideByIndex(3);
 			//this slide contains an embed document, remove this slide will also remove the embed document
-			int nEmbedDoc = doc.getEmbeddedDocuments().size();
+			int nEmbedDoc = doc.loadSubDocuments().size();
 			Assert.assertTrue(doc.deleteSlideByIndex(2));
 			//slide3 is no longer exist
 			Assert.assertTrue(-1 == slide2.getSlideIndex());
 			Assert.assertTrue(2 == slide3.getSlideIndex());
-			Assert.assertTrue(doc.getEmbeddedDocuments().size() == (nEmbedDoc - 1));
+			Assert.assertTrue(doc.loadSubDocuments().size() == (nEmbedDoc - 1));
 			Assert.assertTrue(doc.deleteSlideByName("page5"));
 			int count = doc.getSlideCount();
 			Assert.assertTrue(8 == count);
@@ -418,7 +418,7 @@ public class SlideTest {
 			doc2 = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE_ANOTHER));
 
 			// copy slide at index 2 of doc to the index 2 of doc2
-			int nEmbedDoc = doc2.getEmbeddedDocuments().size();
+			int nEmbedDoc = doc2.loadSubDocuments().size();
 			String embedDocName = "Object 3/";
 			OdfFileEntry fileEntry = doc2.getPackage().getFileEntry(embedDocName);
 			Assert.assertNull(fileEntry);
@@ -426,9 +426,10 @@ public class SlideTest {
 			Assert.assertTrue(2 == newPage1.getSlideIndex());
 			// slide at index 2 of doc contains an embedded document called
 			// "Object 3"
-			OdfDocument embedDoc = doc2.getEmbeddedDocument(embedDocName);
+			OdfDocument embedDoc = doc2.loadSubDocument(embedDocName);
 			Assert.assertNotNull(embedDoc);
-			Assert.assertTrue(doc2.getEmbeddedDocuments().size() == (nEmbedDoc + 1));
+			int size = doc2.loadSubDocuments().size();
+			Assert.assertTrue(size == (nEmbedDoc + 1));
 			// the copied slide also have an bitmap background, and the image bullet
 			// they should all be copied
 			String BACKGROUND_IMAGE_NAME = "Pictures/1000000000000C80000004009305DCA3.jpg";
@@ -491,8 +492,8 @@ public class SlideTest {
 			//with different content, so after appendPresentation,
 			//the embedded doc "Object 2" of doc will be renamed
 			String EMBEDDOC_NAME = "Object 2";
-			Assert.assertNotNull(doc.getEmbeddedDocument(EMBEDDOC_NAME));
-			Assert.assertNotNull(doc2.getEmbeddedDocument(EMBEDDOC_NAME));
+			Assert.assertNotNull(doc.loadSubDocument(EMBEDDOC_NAME));
+			Assert.assertNotNull(doc2.loadSubDocument(EMBEDDOC_NAME));
 			doc2.appendPresentation(doc);
 			Assert.assertTrue((slideCount + slideCount2) == doc2.getSlideCount());
 			//slide at index 3 of doc contains "Object 2", "Object 6"

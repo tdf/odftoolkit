@@ -31,6 +31,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class NamespaceTest {
@@ -45,7 +46,7 @@ public class NamespaceTest {
         try {
             OdfTextDocument doc = OdfTextDocument.newTextDocument();
 
-            OdfContentDom contentDom = doc.getContentDom();
+            OdfFileDom contentDom = doc.getContentDom();
             XPath xpath = contentDom.getXPath();
             
             // Postive test for XPath on ODF attributes
@@ -71,7 +72,7 @@ public class NamespaceTest {
             
             // Load document with ODF foreign attriute
             OdfTextDocument docReloaded = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TARGET));
-            OdfContentDom contentDomReloaded = docReloaded.getContentDom();
+            OdfFileDom contentDomReloaded = docReloaded.getContentDom();
 
             // Postive test for XPath on ODF attributes
             xpath = contentDomReloaded.getXPath();

@@ -29,6 +29,7 @@ import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentContentElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
@@ -53,9 +54,9 @@ public class LoadSaveTest {
 			Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
 			String baseURI = odfDocument.getBaseURI();
 			Assert.assertEquals(ResourceUtilities.getURI(SOURCE).toString(), baseURI);
-			OdfContentDom odfContent = odfDocument.getContentDom();
+			OdfFileDom odfContent = odfDocument.getContentDom();
 			String odf12 = OfficeVersionAttribute.Value._1_2.toString();
-			OfficeDocumentContentElement content = odfContent.getRootElement();
+			OfficeDocumentContentElement content = (OfficeDocumentContentElement) odfContent.getDocumentElement();
 			String version = content.getOfficeVersionAttribute();
 			Assert.assertFalse(version.equals(odf12));
 

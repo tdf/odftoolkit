@@ -36,8 +36,8 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
@@ -52,10 +52,11 @@ import org.w3c.dom.NodeList;
  */
 public class OdfDrawImage extends DrawImageElement {
 
+	private static final long serialVersionUID = 8409319888919451149L;
 	private URI mImageURI;
 	// OdfPackage necessary to adapt the manifest referencing the image
 	private OdfPackage mOdfPackage;
-	private OdfDocument mOdfDocument;
+	private OdfSchemaDocument mOdfSchemaDocument;
 	private static final String SLASH = "/";
 
 	/** Creates a new instance of this class
@@ -63,8 +64,8 @@ public class OdfDrawImage extends DrawImageElement {
 	 */
 	public OdfDrawImage(OdfFileDom ownerDoc) {
 		super(ownerDoc);
-		mOdfDocument = (OdfDocument) ownerDoc.getDocument();
-		mOdfPackage = mOdfDocument.getPackage();
+		mOdfSchemaDocument = (OdfSchemaDocument) ownerDoc.getDocument();
+		mOdfPackage = mOdfSchemaDocument.getPackage();
 	}
 
 	/**
@@ -89,7 +90,7 @@ public class OdfDrawImage extends DrawImageElement {
 	 */
 	public void setImagePath(String packagePath) {
 		try {			
-			packagePath = packagePath.replaceFirst(mOdfDocument.getDocumentPackagePath(), "");
+			packagePath = packagePath.replaceFirst(mOdfSchemaDocument.getDocumentPath(), "");
 			URI uri = new URI(AnyURI.encodePath(packagePath).toString());
 			this.setXlinkHrefAttribute(AnyURI.decodePath(uri.toString()));
 			mImageURI = uri;
@@ -104,7 +105,7 @@ public class OdfDrawImage extends DrawImageElement {
 			imageRef = imageRef.substring(imageRef.lastIndexOf(SLASH) + 1, imageRef.length());
 		}
 		String packagePath = OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + imageRef;
-		return packagePath = mOdfDocument.getDocumentPackagePath() + packagePath;
+		return packagePath = mOdfSchemaDocument.getDocumentPath() + packagePath;
 	}
 
 	/* Helper method */
@@ -173,7 +174,7 @@ public class OdfDrawImage extends DrawImageElement {
 	 * @return			an Image list that match the given image path
 	 *                  if no images is found under the given path, return an empty list.
 	 */
-	public static List<OdfDrawImage> getImageByPath(OdfDocument doc, String imagePath) {
+	public static List<OdfDrawImage> getImageByPath(OdfSchemaDocument doc, String imagePath) {
 		ArrayList<OdfDrawImage> imageList = new ArrayList<OdfDrawImage>();
 
 		try {
@@ -199,7 +200,7 @@ public class OdfDrawImage extends DrawImageElement {
 	 * @param doc the document the image should be deleted from
 	 * @param imagePath	the internal package path of the image.
 	 */
-	public static void deleteImageByPath(OdfDocument doc, String imagePath) {
+	public static void deleteImageByPath(OdfSchemaDocument doc, String imagePath) {
 		List<OdfDrawImage> imageList = getImageByPath(doc, imagePath);
 		if (imageList != null) {
 			Iterator<OdfDrawImage> it = imageList.iterator();
@@ -235,7 +236,7 @@ public class OdfDrawImage extends DrawImageElement {
 	 * @param doc the document the image should be deleted from
 	 * @param image  the image which need to be deleted
 	 */
-	public static void deleteImage(OdfDocument doc, OdfDrawImage image) {
+	public static void deleteImage(OdfSchemaDocument doc, OdfDrawImage image) {
 
 
 		// remove the inserted picture if it does not have reference any more
@@ -271,7 +272,7 @@ public class OdfDrawImage extends DrawImageElement {
 	 * @return			the number of image in this document
 	 *                  if no image is found, return zero
 	 */
-	public static int getImageCount(OdfDocument doc) {
+	public static int getImageCount(OdfSchemaDocument doc) {
 		try {
 			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "image");
 			return imageNodes.getLength();
@@ -287,7 +288,7 @@ public class OdfDrawImage extends DrawImageElement {
 	 * @return			an image list in this document
 	 *                  if no images is found, return an empty list.
 	 */
-	public static List<OdfDrawImage> getImages(OdfDocument doc) {
+	public static List<OdfDrawImage> getImages(OdfSchemaDocument doc) {
 		ArrayList<OdfDrawImage> imageList = new ArrayList<OdfDrawImage>();
 		try {
 			NodeList imageNodes = doc.getContentDom().getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "image");
@@ -306,7 +307,7 @@ public class OdfDrawImage extends DrawImageElement {
 	 * @param doc the document the image path set should be obtained from
 	 * @return			an image path set in this document
 	 */
-	public static Set<String> getImagePathSet(OdfDocument doc) {
+	public static Set<String> getImagePathSet(OdfSchemaDocument doc) {
 		Set<String> paths = new HashSet<String>();
 		List<OdfDrawImage> imageList = getImages(doc);
 		Iterator<OdfDrawImage> it = imageList.iterator();

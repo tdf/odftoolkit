@@ -29,9 +29,9 @@ public class OdfFileEntry {
 
 //    private Logger mLog = Logger.getLogger(OdfFileEntry.class.getName());    
     private String mPath;
-    private String mMediaType = "";
+    private String mMediaType;
     private int mSize = -1;
-    private EncryptionData _encryptionData;    // The following static attributes are used for JDK 5 media type detection
+    private EncryptionData mEncryptionData;    // The following static attributes are used for JDK 5 media type detection
     private static Map<String, String> MEDIA_TYPE_MAP = null;
     private static final String DEFAULT_TYPE = "application/octet-stream";
     private static final String APPLICATION_POSTSCRIPT = "application/postscript";
@@ -61,10 +61,20 @@ public class OdfFileEntry {
     public OdfFileEntry() {
     }
 
+	/**
+	 *  @param path the path of the <manifest:file-entry>
+	 *	Use <code>null</code> for no mediaType */
+    public OdfFileEntry(String path) {
+        mPath = path;
+    }
+
+	/** 
+	 *  @param path the path of the <manifest:file-entry>
+	 *  @param mediaType of the file.
+	 *	Use <code>null</code> for no mediaType */
     public OdfFileEntry(String path, String mediaType) {
         mPath = path;
-        mMediaType = (mediaType == null ? "" : mediaType);
-        mSize = 0;
+        mMediaType = mediaType;
     }
 
     public OdfFileEntry(String path, String mediaType, int size) {
@@ -81,10 +91,18 @@ public class OdfFileEntry {
         return mPath;
     }
 
+	/** @param mediaType of the file.
+	 *	Use <code>null</code> or an empty string to unset the mediaType */
     public void setMediaTypeString(String mediaType) {
-        mMediaType = (mediaType == null ? "" : mediaType);
+		if(mediaType != null && mediaType.equals("")){
+			mediaType = null;
+		}else{
+			mMediaType = mediaType;
+		}
     }
 
+	/** @returns the mediatype of the <manifest:file-entry>.
+	 *  In case of not set NULL is returned */
     public String getMediaTypeString() {
         return mMediaType;
     }
@@ -196,11 +214,12 @@ public class OdfFileEntry {
     }
 
     public void setEncryptionData(EncryptionData encryptionData) {
-        _encryptionData = encryptionData;
+        mEncryptionData = encryptionData;
     }
 
+	/** @returns null if no encryption data had been set */
     public EncryptionData getEncryptionData() {
-        return _encryptionData;
+        return mEncryptionData;
     }
 }
 

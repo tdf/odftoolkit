@@ -22,7 +22,7 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
-import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,11 +31,6 @@ import javax.xml.xpath.XPathConstants;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfNamespace;
-import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
-import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
@@ -51,8 +46,12 @@ import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
+import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
+import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
@@ -124,7 +123,7 @@ public class DocumentCreationTest {
 			OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("TestEmpty_OdfTextDocument.odt"));
 
 			// get the ODF content as DOM tree representation
-			OdfContentDom odfContent = odfDoc.getContentDom();
+			OdfFileDom odfContent = odfDoc.getContentDom();
 
 			//// W3C XPath initialization ''(JDK5 functionality)''  - XPath is the path within the XML file
 			//// (Find XPath examples here: http://www.w3.org/TR/xpath#path-abbrev)
@@ -169,56 +168,59 @@ public class DocumentCreationTest {
 			odtDoc1.insertDocument(OdfGraphicsDocument.newGraphicsDocument(), "Object5");
 			odtDoc1.insertDocument(OdfPresentationDocument.newPresentationDocument(), "Object6");
 
-			List<OdfDocument> embeddedDocs = odtDoc1.getEmbeddedDocuments();
+			Map<String, OdfDocument> embeddedDocs = odtDoc1.loadSubDocuments();
 			LOG.log(Level.INFO, "Embedded Document count: {0}", embeddedDocs.size());
+			odtDoc1.save(ResourceUtilities.newTestOutputFile("TestCreate_EmbeddedDocuments.odt"));
+
 			Assert.assertTrue(embeddedDocs.size() == 6);
 
-			List<OdfDocument> embeddedTextDocs = odtDoc1.getEmbeddedDocuments(OdfDocument.OdfMediaType.TEXT);
+			Map<String, OdfDocument> embeddedTextDocs = odtDoc1.loadSubDocuments(OdfDocument.OdfMediaType.TEXT);
 			LOG.log(Level.INFO, "Only Embedded Text Docs Size: {0}", embeddedTextDocs.size());
 			Assert.assertTrue(embeddedTextDocs.size() == 2);
 
-			List<OdfDocument> embeddedChartDocs = odtDoc1.getEmbeddedDocuments(OdfDocument.OdfMediaType.CHART);
+			Map<String, OdfDocument> embeddedChartDocs = odtDoc1.loadSubDocuments(OdfDocument.OdfMediaType.CHART);
 			LOG.log(Level.INFO, "Only Embedded Chart Docs Size: {0}", embeddedChartDocs.size());
 			Assert.assertTrue(embeddedChartDocs.size() == 1);
 
-			OdfDocument embeddedObject1 = odtDoc1.getEmbeddedDocument("Object1/");
-			LOG.log(Level.INFO, "Embedded Object1 path: {0}", embeddedObject1.getDocumentPackagePath());
+			OdfDocument embeddedObject1 = odtDoc1.loadSubDocument("Object1/");
+			LOG.log(Level.INFO, "Embedded Object1 path: {0}", embeddedObject1.getDocumentPath());
 			LOG.log(Level.INFO, "Embedded Object1 media-type: {0}", embeddedObject1.getMediaTypeString());
 			Assert.assertEquals(embeddedObject1.getMediaTypeString(), OdfDocument.OdfMediaType.TEXT.getMediaTypeString());
 
-			OdfDocument embeddedObject3 = odtDoc1.getEmbeddedDocument("Object3");
-			LOG.log(Level.INFO, "Embedded Object3 path: {0}", embeddedObject3.getDocumentPackagePath());
+			OdfDocument embeddedObject3 = odtDoc1.loadSubDocument("Object3");
+			LOG.log(Level.INFO, "Embedded Object3 path: {0}", embeddedObject3.getDocumentPath());
 			LOG.log(Level.INFO, "Embedded Object3 media-type: {0}", embeddedObject3.getMediaTypeString());
 			Assert.assertEquals(embeddedObject3.getMediaTypeString(), OdfDocument.OdfMediaType.GRAPHICS.getMediaTypeString());
 
-			OdfDocument embeddedObject6 = odtDoc1.getEmbeddedDocument("Object6/");
-			LOG.log(Level.INFO, "Embedded Object6 path: {0}", embeddedObject6.getDocumentPackagePath());
+			OdfDocument embeddedObject6 = odtDoc1.loadSubDocument("Object6/");
+			LOG.log(Level.INFO, "Embedded Object6 path: {0}", embeddedObject6.getDocumentPath());
 			LOG.log(Level.INFO, "Embedded Object6 media-type: {0}", embeddedObject6.getMediaTypeString());
 			Assert.assertEquals(embeddedObject6.getMediaTypeString(), OdfDocument.OdfMediaType.PRESENTATION.getMediaTypeString());
-
-			odtDoc1.save(ResourceUtilities.newTestOutputFile("TestCreate_EmbeddedDocuments.odt"));
 
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, null, e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
-
 	}
 
 	@Test
 	public void accessEmbeddedDocs() {
 		try {
 			OdfDocument docWithEmbeddedObjects = OdfDocument.loadDocument(TEST_FILE_EMBEDDED);
-			List<OdfDocument> embDocs = docWithEmbeddedObjects.getEmbeddedDocuments();
+			Map<String, OdfDocument> embDocs = docWithEmbeddedObjects.loadSubDocuments();
 			String pathToEmbeddedObject = "";
-			for (OdfPackageDocument embDoc : embDocs) {
-				LOG.log(Level.INFO, "Embedded file of {0} internal package path: {1} mediaType: {2}", new Object[]{TEST_FILE_EMBEDDED, embDoc.getDocumentPackagePath(), embDoc.getMediaTypeString()});
-				pathToEmbeddedObject = embDoc.getDocumentPackagePath();
+			for (String embDocPath : embDocs.keySet()) {
+				OdfPackageDocument embDoc = embDocs.get(embDocPath);
+				LOG.log(Level.INFO, "Embedded file of {0} internal package path: {1} mediaType: {2}", new Object[]{TEST_FILE_EMBEDDED, embDoc.getDocumentPath(), embDoc.getMediaTypeString()});
+				pathToEmbeddedObject = embDoc.getDocumentPath();
 			}
 
-			OdfDocument embDoc = docWithEmbeddedObjects.getEmbeddedDocument(pathToEmbeddedObject);
-			OdfFileDom contentDom = embDoc.getContentDom();
+			OdfDocument embDoc = docWithEmbeddedObjects.loadSubDocument(pathToEmbeddedObject);
+			OdfContentDom contentDom = embDoc.getContentDom();
 			XPath xpath = contentDom.getXPath();
+			// Make sure the embedded document is being loaded
+
+
 			// Add text element
 			TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", contentDom, XPathConstants.NODE);
 			LOG.log(Level.INFO, "First para: {0}", para.getTextContent());
@@ -248,7 +250,7 @@ public class DocumentCreationTest {
 			docWithEmbeddedObjects.save(TEST_FILE_ACCESS_EMBEDDED);
 
 			OdfDocument doc2 = OdfDocument.loadDocument(TEST_FILE_ACCESS_EMBEDDED);
-			OdfDocument embDoc2 = doc2.getEmbeddedDocument("Object 1/");
+			OdfDocument embDoc2 = doc2.loadSubDocument("Object 1/");
 			embDoc2.getStylesDom();
 			OdfStyle documentStyle2 = embDoc2.getDocumentStyles().getStyle("myStyle", OdfStyleFamily.Paragraph);
 			String prop2 = documentStyle2.getProperty(StyleTextPropertiesElement.FontWeight);
@@ -258,8 +260,8 @@ public class DocumentCreationTest {
 			Assert.assertEquals(spanTest.getTextContent(), TEST_SPAN_TEXT);
 
 		} catch (Exception ex) {
-			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
 			Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
+			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
 		}
 	}
 
@@ -267,48 +269,49 @@ public class DocumentCreationTest {
 	public void accessEmbeddedWithinEmbeddedDocs() {
 
 		try {
-			OdfDocument docWithEmbeddedObject = OdfDocument.loadDocument(TEST_FILE_EMBEDDED);
-
+			OdfDocument rootDocument = OdfDocument.loadDocument(TEST_FILE_EMBEDDED);
 			// Test DOM Access
-			docWithEmbeddedObject.getDocumentStyles();
-			docWithEmbeddedObject.getContentDom().getAutomaticStyles();
-			docWithEmbeddedObject.getStylesDom();
-			docWithEmbeddedObject.getContentDom();
+			Assert.assertNotNull(rootDocument.getDocumentStyles());
+			Assert.assertNotNull(rootDocument.getContentDom().getAutomaticStyles());
+			Assert.assertNotNull(rootDocument.getStylesDom());
+			Assert.assertNotNull(rootDocument.getContentDom());
 
-			List<OdfDocument> embDocs = docWithEmbeddedObject.getEmbeddedDocuments();
+			Map<String, OdfDocument> embDocs = rootDocument.loadSubDocuments();
 			int embDocsNumber = embDocs.size();
-			OdfDocument embDoc = embDocs.get(0);
-			String pathToDoc = embDoc.getDocumentPackagePath() + "Object in Object1/";
-			embDoc.insertDocument(OdfTextDocument.newTextDocument(), pathToDoc);
-			Assert.assertNotNull(embDoc.getPackage().getFileEntry(pathToDoc));
-			OdfFileDom contentDom = embDoc.getContentDom();
+			// the document "Object 1/
+			OdfDocument embDoc = embDocs.get("Object 1/");
+			String pathOfSecondInnerDoc = "Object in Object1/";
+			embDoc.insertDocument(OdfTextDocument.newTextDocument(), embDoc.getDocumentPath() + pathOfSecondInnerDoc);
+			OdfFileEntry fileEntry = embDoc.getPackage().getFileEntry(embDoc.getDocumentPath() + pathOfSecondInnerDoc);
+			Assert.assertNotNull(fileEntry);
 
+			// get "Object 1/content.xml"
+			OdfContentDom contentDom = embDoc.getContentDom();
 			XPath xpath = contentDom.getXPath();
 			TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", contentDom, XPathConstants.NODE);
 			addFrameForEmbeddedDoc(contentDom, lastPara, "Object in Object1");
-			// embDoc.save(ResourceUtilities.newTestOutputFile("111debug.odt"));
-
-			List<OdfDocument> emb_embDocs = embDoc.getEmbeddedDocuments();
-			Assert.assertEquals(embDocsNumber+1, emb_embDocs.size());
-			OdfDocument emb_embDoc = docWithEmbeddedObject.getEmbeddedDocument(pathToDoc);
+			Map<String, OdfDocument> emb_embDocs = embDoc.loadSubDocuments();
+			Assert.assertEquals(embDocsNumber + 1, emb_embDocs.size());
+			
+			OdfDocument emb_embDoc = rootDocument.loadSubDocument(embDoc.getDocumentPath()+ pathOfSecondInnerDoc);
 			contentDom = emb_embDoc.getContentDom();
-
 			TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", contentDom, XPathConstants.NODE);
 			OdfTextSpan spanElem = new OdfTextSpan(contentDom);
 			spanElem.setTextContent(TEST_SPAN_TEXT);
 			para.appendChild(spanElem);
 
 			// embDoc.save(ResourceUtilities.newTestOutputFile("222debug.odt"));
-			docWithEmbeddedObject.save(TEST_FILE_EMBEDDED_EMBEDDED);
+			rootDocument.save(TEST_FILE_EMBEDDED_EMBEDDED);
 
 			OdfDocument docWithdoubleEmbeddedDoc = OdfDocument.loadDocument(TEST_FILE_EMBEDDED_EMBEDDED);
-			OdfDocument doubleEmbeddedDoc = docWithdoubleEmbeddedDoc.getEmbeddedDocument("Object 1/Object in Object1");
+			OdfDocument doubleEmbeddedDoc =docWithdoubleEmbeddedDoc.loadSubDocument("Object 1/Object in Object1");
 
-			OdfFileDom dEDcontentDom = doubleEmbeddedDoc.getContentDom();
+			OdfContentDom dEDcontentDom = doubleEmbeddedDoc.getContentDom();
 			TextSpanElement spanTest = (TextSpanElement) xpath.evaluate("//text:span[last()]", dEDcontentDom, XPathConstants.NODE);
 			Assert.assertEquals(spanTest.getTextContent(), TEST_SPAN_TEXT);
 
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
 			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
 		}
@@ -319,13 +322,16 @@ public class DocumentCreationTest {
 		OdfDocument docWithEmbeddedObjects;
 		try {
 			docWithEmbeddedObjects = OdfDocument.loadDocument(TEST_FILE_EMBEDDED);
-			List<OdfDocument> embDocs = docWithEmbeddedObjects.getEmbeddedDocuments();
-			OdfDocument doc1 = embDocs.get(0);
-			OdfFileDom contentDom1 = doc1.getContentDom();
-			OdfDocument doc2 = doc1.getEmbeddedDocument("Object 1");
-			OdfFileDom contentDom2 = doc2.getContentDom();
-			Assert.assertEquals(doc2, doc1);
-			Assert.assertEquals(contentDom1, contentDom2);
+			Map<String, OdfDocument> embDocs = docWithEmbeddedObjects.loadSubDocuments();
+			for(String embDocPath : embDocs.keySet()){
+				OdfDocument doc1 = embDocs.get(embDocPath);
+				doc1.getDocumentPath();
+				OdfContentDom contentDom1 = doc1.getContentDom();
+				OdfDocument doc2 = doc1.loadSubDocument(".");
+				OdfContentDom contentDom2 = doc2.getContentDom();
+				Assert.assertEquals(doc2, doc1);
+				Assert.assertEquals(contentDom1, contentDom2);
+			}
 		} catch (Exception ex) {
 			Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
 			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
@@ -337,63 +343,61 @@ public class DocumentCreationTest {
 		OdfDocument docWithEmbeddedObjects;
 		try {
 			docWithEmbeddedObjects = OdfDocument.loadDocument(TEST_FILE_SAVE_EMBEDDED);
-			List<OdfDocument> embDocs = docWithEmbeddedObjects.getEmbeddedDocuments(OdfDocument.OdfMediaType.GRAPHICS);
+			Map<String, OdfDocument> embDocs = docWithEmbeddedObjects.loadSubDocuments(OdfDocument.OdfMediaType.GRAPHICS);
 			// Graphics Doc
-			OdfDocument doc1 = embDocs.get(0);
-			Assert.assertNotNull(doc1);
+			for(String eDocPath : embDocs.keySet()){
+				OdfDocument doc1 = embDocs.get(eDocPath);
+				Assert.assertNotNull(doc1);
+				OdfContentDom contentDom = doc1.getContentDom();
+				XPath xpath = contentDom.getXPath();
+				TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", contentDom, XPathConstants.NODE);
+				OdfTextSpan spanElem = new OdfTextSpan(contentDom);
+				spanElem.setTextContent(TEST_SPAN_TEXT);
+				para.appendChild(spanElem);
+				//save the embed document to a stand alone document
+				doc1.save(TEST_FILE_SAVE_EMBEDDED_OUT);
+				// Load test
+				OdfDocument loadedDoc = OdfDocument.loadDocument(TEST_FILE_SAVE_EMBEDDED_OUT);
+				OdfContentDom contentDom2 = loadedDoc.getContentDom();
+				OdfTextSpan span = (OdfTextSpan) xpath.evaluate("//text:span[last()]", contentDom2, XPathConstants.NODE);
+				Assert.assertEquals(span.getTextContent(), TEST_SPAN_TEXT);
+				Map<String, OdfDocument> embDocs3 = docWithEmbeddedObjects.loadSubDocuments(OdfDocument.OdfMediaType.TEXT);
+				for(String eDocPath3 : embDocs3.keySet()){
+					// Writer Doc
+					OdfDocument doc3 = embDocs3.get(eDocPath3);
+					Assert.assertNotNull(doc3);
+					OdfContentDom contentDom3 = doc3.getContentDom();
+					TextPElement para2 = (TextPElement) xpath.evaluate("//text:p[1]", contentDom3, XPathConstants.NODE);
+					addImageToDocument(contentDom3, para2);
+					TextPElement para3 = (TextPElement) xpath.evaluate("//text:p[last()]", contentDom3, XPathConstants.NODE);
+					addFrameForEmbeddedDoc(contentDom3, para3, "NewEmbedded");
+					doc3.insertDocument(OdfTextDocument.newTextDocument(), doc3.getDocumentPath() + "/NewEmbedded/");
+					OdfDocument doc4 = doc3.loadSubDocument("NewEmbedded");
+					Assert.assertNotNull(doc4);
+					OdfContentDom contentDom4 = doc4.getContentDom();
+					para = (TextPElement) xpath.evaluate("//text:p[1]",	contentDom4, XPathConstants.NODE);
+					spanElem = new OdfTextSpan(contentDom4);
+					spanElem.setTextContent(TEST_SPAN_TEXT);
+					para.appendChild(spanElem);
+					doc3.save(TEST_FILE_SAVE_EMBEDDED_OUT2);
 
-			OdfFileDom contentDom = doc1.getContentDom();
-			XPath xpath = contentDom.getXPath();
-			TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", contentDom, XPathConstants.NODE);
-			OdfTextSpan spanElem = new OdfTextSpan(contentDom);
-			spanElem.setTextContent(TEST_SPAN_TEXT);
-			para.appendChild(spanElem);
-			//save the embed document to a stand alone document
-			doc1.save(TEST_FILE_SAVE_EMBEDDED_OUT);
-
-			// Load test
-			OdfDocument loadedDoc = OdfDocument.loadDocument(TEST_FILE_SAVE_EMBEDDED_OUT);
-			OdfFileDom contentDom2 = loadedDoc.getContentDom();
-			OdfTextSpan span = (OdfTextSpan) xpath.evaluate("//text:span[last()]", contentDom2, XPathConstants.NODE);
-			Assert.assertEquals(span.getTextContent(), TEST_SPAN_TEXT);
-
-			List<OdfDocument> embDocs3 = docWithEmbeddedObjects.getEmbeddedDocuments(OdfDocument.OdfMediaType.TEXT);
-			// Writer Doc
-			OdfDocument doc3 = embDocs3.get(0);
-			Assert.assertNotNull(doc3);
-			OdfFileDom contentDom3 = doc3.getContentDom();
-			TextPElement para2 = (TextPElement) xpath.evaluate("//text:p[1]", contentDom3, XPathConstants.NODE);
-			addImageToDocument(contentDom3, para2);
-
-			TextPElement para3 = (TextPElement) xpath.evaluate("//text:p[last()]", contentDom3, XPathConstants.NODE);
-			addFrameForEmbeddedDoc(contentDom3, para3, "NewEmbedded");
-
-			doc3.insertDocument(OdfTextDocument.newTextDocument(), doc3.getDocumentPackagePath() + "/NewEmbedded/");
-			OdfDocument doc4 = doc3.getEmbeddedDocument("Object 1/NewEmbedded");
-			Assert.assertNotNull(doc4);
-			OdfFileDom contentDom4 = doc4.getContentDom();
-			para = (TextPElement) xpath.evaluate("//text:p[1]", contentDom4, XPathConstants.NODE);
-			spanElem = new OdfTextSpan(contentDom4);
-			spanElem.setTextContent(TEST_SPAN_TEXT);
-			para.appendChild(spanElem);
-
-			doc3.save(TEST_FILE_SAVE_EMBEDDED_OUT2);
-
-			OdfDocument testLoad = OdfDocument.loadDocument(TEST_FILE_SAVE_EMBEDDED_OUT2);
-			NodeList linkNodes = (NodeList) xpath.evaluate("//*[@xlink:href]", testLoad.getContentDom(), XPathConstants.NODE);
-			for (int i = 0; i < linkNodes.getLength(); i++) {
-				OdfElement object = (OdfElement) linkNodes.item(i);
-				String refObjPath = object.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
-				Assert.assertTrue(refObjPath.equals("Pictures/" + TEST_PIC) || refObjPath.equals("./NewEmbedded"));
-			}
-			Assert.assertNotNull(testLoad.getPackage().getFileEntry("Pictures/" + TEST_PIC));
-			OdfDocument embedDocOftestLoad = testLoad.getEmbeddedDocument("NewEmbedded/");
-			contentDom4 = embedDocOftestLoad.getContentDom();
-			OdfTextSpan span4 = (OdfTextSpan) xpath.evaluate("//text:span[last()]", contentDom4, XPathConstants.NODE);
-			Assert.assertNotNull(span4);
-			Assert.assertEquals(span4.getTextContent(), TEST_SPAN_TEXT);
-
+					OdfDocument testLoad = OdfDocument.loadDocument(TEST_FILE_SAVE_EMBEDDED_OUT2);
+					NodeList linkNodes = (NodeList) xpath.evaluate("//*[@xlink:href]", testLoad.getContentDom(), XPathConstants.NODE);
+					for (int i = 0; i < linkNodes.getLength(); i++) {
+						OdfElement object = (OdfElement) linkNodes.item(i);
+						String refObjPath = object.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
+						Assert.assertTrue(refObjPath.equals("Pictures/"	+ TEST_PIC)	|| refObjPath.equals("./NewEmbedded"));
+					}
+					Assert.assertNotNull(testLoad.getPackage().getFileEntry("Pictures/" + TEST_PIC));
+					OdfDocument embedDocOftestLoad = testLoad.loadSubDocument("NewEmbedded/");
+					contentDom4 = embedDocOftestLoad.getContentDom();
+					OdfTextSpan span4 = (OdfTextSpan) xpath.evaluate("//text:span[last()]", contentDom4, XPathConstants.NODE);
+					Assert.assertNotNull(span4);
+					Assert.assertEquals(span4.getTextContent(), TEST_SPAN_TEXT);
+				}
+			}			
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
 			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
 		}
@@ -412,10 +416,10 @@ public class DocumentCreationTest {
 			String pathToDocA = "docB/docA/";
 			String pathToDocB = "docB/";
 			containerDoc.insertDocument(OdfTextDocument.newTextDocument(), pathToDocA);
-			OdfDocument docA = containerDoc.getEmbeddedDocument(pathToDocA);
+			OdfDocument docA = containerDoc.loadSubDocument(pathToDocA);
 			Assert.assertNotNull(docA);
 			docA.insertDocument(OdfTextDocument.newTextDocument(), pathToDocB);
-			OdfDocument docB = containerDoc.getEmbeddedDocument(pathToDocB);
+			OdfDocument docB = containerDoc.loadSubDocument(pathToDocB);
 			Assert.assertNotNull(docB);
 
 			docB.save(TEST_FILE_SAVE_QUEER_PATH);
@@ -444,7 +448,7 @@ public class DocumentCreationTest {
 		}
 	}
 
-	private void addImageToDocument(OdfFileDom dom, TextPElement para) throws Exception {
+	private void addImageToDocument(OdfContentDom dom, TextPElement para) throws Exception {
 		OdfDrawFrame drawFrame = new OdfDrawFrame(dom);
 		drawFrame.setDrawNameAttribute("graphics1");
 		drawFrame.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PARAGRAPH.toString());
@@ -458,7 +462,7 @@ public class DocumentCreationTest {
 		image.newImage(ResourceUtilities.getURI(TEST_PIC));
 	}
 
-	private void addFrameForEmbeddedDoc(OdfFileDom dom, TextPElement para, String path) throws Exception {
+	private void addFrameForEmbeddedDoc(OdfContentDom dom, TextPElement para, String path) throws Exception {
 		OdfDrawFrame drawFrame = new OdfDrawFrame(dom);
 		drawFrame.setDrawNameAttribute(path);
 		drawFrame.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PARAGRAPH.toString());

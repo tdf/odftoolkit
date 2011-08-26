@@ -42,7 +42,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class NoTempFileTest {
 
-	private Logger mLog = Logger.getLogger(OdfPackage.class.getName());
+	private static final Logger LOG = Logger.getLogger(OdfPackage.class.getName());
 	private static final String TEST_FILE_FOLDER = ResourceUtilities.getTestOutputFolder();
 	private static final String Test_File = "image.odt";
 	private static String IMage = "testA.jpg";
@@ -54,7 +54,7 @@ public class NoTempFileTest {
 		try {
 			System.setProperty("org.odftoolkit.odfdom.tmpfile.disable", "true");
 			String userPropTempEnable = System.getProperty("org.odftoolkit.odfdom.tmpfile.disable");
-			mLog.info("The test property org.odftoolkit.odfdom.tmpfile.disable is set to '" + userPropTempEnable + "'.");
+			LOG.info("The test property org.odftoolkit.odfdom.tmpfile.disable is set to '" + userPropTempEnable + "'.");
 		} catch (Exception e) {
 			Logger.getLogger(NoTempFileTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
@@ -94,7 +94,7 @@ public class NoTempFileTest {
 			pkg.save(ResourceUtilities.newTestOutputFile(New_File));
 
 			OdfDocument doc = OdfDocument.loadDocument(TEST_FILE_FOLDER + New_File);
-			OdfContentDom contentDom = doc.getContentDom();
+			OdfFileDom contentDom = doc.getContentDom();
 
 			XPath xpath = contentDom.getXPath();
 			DrawFrameElement frame = contentDom.newOdfElement(DrawFrameElement.class);
@@ -127,7 +127,7 @@ public class NoTempFileTest {
 		try {
 			System.setProperty("org.odftoolkit.odfdom.tmpfile.disable", "false");
 			String userPropTempEnable = System.getProperty("org.odftoolkit.odfdom.tmpfile.disable");
-			mLog.info("The test property org.odftoolkit.odfdom.tmpfile.disable is set to '" + userPropTempEnable + "'.");
+			LOG.info("The test property org.odftoolkit.odfdom.tmpfile.disable is set to '" + userPropTempEnable + "'.");
 		} catch (Exception e) {
 			Logger.getLogger(NoTempFileTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());

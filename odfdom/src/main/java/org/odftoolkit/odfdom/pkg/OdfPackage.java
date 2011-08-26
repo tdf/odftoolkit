@@ -26,6 +26,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -35,58 +36,46 @@ import java.io.OutputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.JarURLConnection;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import javax.xml.transform.Source;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
-import javax.xml.transform.stream.StreamSource;
-
 import org.apache.xerces.dom.DOMXSImplementationSourceImpl;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.pkg.manifest.Algorithm;
 import org.odftoolkit.odfdom.pkg.manifest.EncryptionData;
 import org.odftoolkit.odfdom.pkg.manifest.KeyDerivation;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSOutput;
 import org.w3c.dom.ls.LSSerializer;
-import org.xml.sax.Attributes;
-import org.xml.sax.ContentHandler;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
-import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
@@ -94,32 +83,42 @@ import org.xml.sax.XMLReader;
  * OdfPackage represents the package view to an OpenDocument document. The
  * OdfPackage will be created from an ODF document and represents a copy of the
  * loaded document, where files can be inserted and deleted. The changes take
- * effect, when the OdfPackage is being made persistend by save().
+ * effect, when the OdfPackage is being made persisted by save().
  */
-public class OdfPackage {
+public class OdfPackage implements Closeable {
 
-	/**
-	 * This class solely exists to clean up after a package object has been
-	 * removed by garbage collector. Finalizable classes are said to have slow
-	 * garbage collection, so we don't make the whole OdfPackage finalizable.
-	 */
-	static private class OdfFinalizablePackage {
-
-		File mTempDirForDeletion;
-
-		OdfFinalizablePackage(File tempDir) {
-			mTempDirForDeletion = tempDir;
-		}
-
-		@Override
-		protected void finalize() throws Throwable {
-			super.finalize();
-			if (mTempDirForDeletion != null) {
-				TempDir.deleteTempOdfDirectory(mTempDirForDeletion);
-			}
-		}
-	}
-	private static final Pattern BACK_SLASH = Pattern.compile("\\\\");
+	// Static parts of file references
+	private static final String DOUBLE_DOT = "..";
+	private static final String DOT = ".";
+	private static final String SLASH = "/";
+	private static final String COLON = ":";
+	private static final String EMPTY_STRING = "";
+	private static final String XML_MEDIA_TYPE = "text/xml";
+	// Patterns to be used in RegEx expressions
+	private static final Pattern BACK_SLASH_PATTERN = Pattern.compile("\\\\");
+	private static final Pattern DOUBLE_SLASH_PATTERN = Pattern.compile("//");
+	private static Set<String> mCompressedFileTypes;
+	// temp Dir for this ODFpackage 
+	// (ToDo: (Issue 219 - PackageRefactoring) --temp dir handling will be removed most likely)
+	private boolean mUseTempFile;
+	private File mTempDirParent;
+	private File mTempDir;
+	// some well known streams inside ODF packages
+	private String mMediaType;
+	private String mBaseURI;
+	private ZipHelper mZipFile;
+	private Resolver mResolver;
+	private Map<String, ZipEntry> mZipEntries;
+	private Map<String, OdfFileEntry> mFileEntries;
+	// All opened documents from the same package are cached (including the root document)
+	private Map<String, OdfPackageDocument> mPkgDocuments;
+	// Three different incarnations of a package file/data
+	// save() will check 1) mPkgDoms, 2) if not check mMemoryFileCache, 3) if not check mDiscFileCache
+	private HashMap<String, Document> mPkgDoms;
+	private HashMap<String, byte[]> mMemoryFileCache;
+	private Map<String, File> mDiscFileCache;
+	// only used indirectly for its finalizer (garbage collection)
+	private OdfFinalizablePackage mFinalize;
 
 	public enum OdfFile {
 
@@ -136,7 +135,6 @@ public class OdfPackage {
 			return packagePath;
 		}
 	}
-	private static HashSet<String> mCompressedFileTypes;
 
 	static {
 		mCompressedFileTypes = new HashSet<String>();
@@ -145,36 +143,6 @@ public class OdfPackage {
 			"arj", "jar", "gz", "tar", "war", "mov", "avi"};
 		mCompressedFileTypes.addAll(Arrays.asList(typelist));
 	}
-	// Static parts of file references
-	private static final String TWO_DOTS = "..";
-	private static final String SLASH = "/";
-	private static final String COLON = ":";
-	private static final String EMPTY_STRING = "";
-	private static final String XML_MEDIA_TYPE = "text/xml";
-	// temp Dir for this ODFpackage (ToDo: (Issue 219 - PackageRefactoring) --temp dir handling will be removed most
-	// likely)
-	private File mTempDirParent;
-	private File mTempDir;
-	// only used indirectly for its finalizer (garbage collection)
-	private OdfFinalizablePackage mFinalize;
-	// some well known streams inside ODF packages
-	private String mMediaType;
-	private ZipHelper mZipFile;
-	private HashMap<String, ZipEntry> mZipEntries;
-	private boolean mUseTempFile;
-	// ToDo: (Issue 219 - PackageRefactoring) --Why do we hvae two LISTS for the package
-	private Set<String> mPackagePathSet;
-	private List<String> mManifestPathList;
-	private HashMap<String, OdfFileEntry> mManifestEntries;
-	private String mBaseURI;
-	private Resolver mResolver;
-	// All opened documents from the same package are cached (including the root document)
-	private HashMap<String, OdfPackageDocument> mPkgDocuments;
-	// Three different incarnations of a package file/data
-	// save() will check 1) mPkgDoms, 2) if not check mPkgData, 3) if not check mPkgTempFiles
-	private HashMap<String, Document> mPkgDoms;
-	private HashMap<String, byte[]> mPkgData;
-	private HashMap<String, File> mPkgTempFiles;
 
 	/**
 	 * Creates the ODFPackage as an empty Package. For setting a specific temp
@@ -186,13 +154,11 @@ public class OdfPackage {
 		mResolver = null;
 		mTempDir = null;
 		mTempDirParent = null;
-		mZipEntries = new HashMap<String, ZipEntry>();
 		mPkgDocuments = new HashMap<String, OdfPackageDocument>();
 		mPkgDoms = new HashMap<String, Document>();
-		mPkgData = new HashMap<String, byte[]>();
-		mPkgTempFiles = new HashMap<String, File>();
-		mPackagePathSet = new HashSet<String>();
-		mManifestPathList = new LinkedList<String>();
+		mMemoryFileCache = new HashMap<String, byte[]>();
+		mDiscFileCache = new HashMap<String, File>();
+		mFileEntries = new HashMap<String, OdfFileEntry>();
 
 		// get a temp directory for everything
 		String userPropDir = System.getProperty("org.odftoolkit.odfdom.tmpdir");
@@ -202,8 +168,7 @@ public class OdfPackage {
 
 		// specify whether temporary files are able to used.
 		String userPropTempEnable = System.getProperty("org.odftoolkit.odfdom.tmpfile.disable");
-		if ((userPropTempEnable != null)
-				&& (userPropTempEnable.equalsIgnoreCase("true"))) {
+		if ((userPropTempEnable != null) && (userPropTempEnable.equalsIgnoreCase("true"))) {
 			mUseTempFile = false;
 		} else {
 			mUseTempFile = true;
@@ -215,70 +180,100 @@ public class OdfPackage {
 	 * The path has to be a directory and will receive the MIME type of the OdfPackageDocument.
 	 *
 	 * @param doc the OdfPackageDocument to be inserted.
-	 * @param internalDocumentPath
+	 * @param internalPath
 	 *		path relative to the package root, where the document should be inserted.
 	 */
-	public void insertPackageDocument(OdfPackageDocument doc, String internalDocumentPath) {
-		try {
-			// the "/" representing the root document is outside the manifest.xml in the API an empty path
-			if (internalDocumentPath.equals(OdfPackageDocument.ROOT_DOCUMENT_PATH)) {
-				// add to Manifest entries
-				insertDirectories(SLASH, doc.getMediaTypeString());
+	public void insertPackageDocument(OdfPackageDocument doc, String internalPath) {
+		internalPath = normalizeDirectoryPath(internalPath);
+		updateFileEntry(newFileEntry(internalPath), doc.getMediaTypeString());
+		mPkgDocuments.put(internalPath, doc);
+	}
+
+	/**
+	 * Returns on ODF documents based a given mediatype.
+	 *
+	 * @param mediaTypeString The ODF Mediatype of the ODF document to be created.
+	 * @return The ODF document, which mediatype dependends on the parameter or
+	 *	NULL if media type were not supported.
+	 */
+	public OdfPackageDocument loadPackageDocument(String internalPath) {
+		OdfPackageDocument doc = getCachedPackageDocument(internalPath);
+		if (doc == null) {
+			String mediaTypeString = getMediaTypeString();
+			// ToDo: Remove dependency by facotory issue ??? (to be written)
+			OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(mediaTypeString);
+			if (odfMediaType == null) {
+				doc = new OdfPackageDocument(this, internalPath, mediaTypeString);
 			} else {
-				// add to Manifest entries
-				insertDirectories(internalDocumentPath, doc.getMediaTypeString());
-			}
-		} catch (Exception e) {
-			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, e);
-		}
-		mPkgDocuments.put(internalDocumentPath, doc);
-	}
-
-	/**
-	 * @param internalDocumentPath
-	 *		path relative to the package root, where the document should be inserted.
-	 * @return an already open OdfPackageDocument via its path, otherwise NULL.
-	 */
-	public OdfPackageDocument getOpenPackageDocument(String internalDocumentPath) {
-		return mPkgDocuments.get(internalDocumentPath);
-	}
-
-	/**
-	 * Method returns all open OdfPackageDocuments of the OdfPackage matching the
-	 * according MediaType.
-	 * 
-	 * @param mediaType media type which is used as a filter
-	 * @return already open documents of the current package matching the given media type
-	 */
-	public List<OdfPackageDocument> getOpenPackageDocuments(MediaType mediaType) {
-		String mediaTypeString = mediaType.getMediaTypeString();
-		Set<String> manifestEntries = getFileEntries();
-		List<OdfPackageDocument> embeddedObjects = new ArrayList<OdfPackageDocument>();
-		// check manifest for current embedded OdfPackageDocuments
-		for (String entry : manifestEntries) {
-			// with entry greater one the root document is not within
-			if (entry.length() > 1 && entry.endsWith(SLASH)) {
-				String entryMediaType = getFileEntry(entry).getMediaTypeString();
-				if (entryMediaType.equals(mediaTypeString)) {
-					embeddedObjects.add(getOpenPackageDocument(entry));
+				try {
+					String documentMediaType = getMediaTypeString(internalPath);
+					odfMediaType = OdfMediaType.getOdfMediaType(documentMediaType);
+					if (odfMediaType == null) {
+						return null;
+					}
+					// ToDo: Remove dependency by facotory issue ??? (to be written)
+					doc = OdfDocument.loadDocument(this, internalPath);
+				} catch (Exception ex) {
+					Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			}
 		}
-		return embeddedObjects;
+		return doc;
 	}
 
-	/** Removes a document from the package via its path. Independent if it was already opened or not.
-	 * @param internalDocumentPath
+	/**
+	 * @param internalPath
+	 *		path relative to the package root, where the document should be inserted.
+	 * @return an already open OdfPackageDocument via its path, otherwise NULL.
+	 */
+	@Deprecated
+	public OdfPackageDocument getCachedPackageDocument(String internalPath) {
+		internalPath = normalizeDirectoryPath(internalPath);
+		return mPkgDocuments.get(internalPath);
+	}
+
+	/**
+	 * @param dom
+	 *		the DOM tree that has been parsed and should be added to the cache.
+	 * @param internalPath
+	 *		path relative to the package root, where the XML of the DOM is located.
+	 * @return an already open OdfPackageDocument via its path, otherwise NULL.
+	 */
+	void cacheDom(Document dom, String internalPath) {
+		internalPath = normalizeFilePath(internalPath);
+		this.insert(dom, internalPath, null);
+	}
+
+	/**
+	 * @param internalPath
+	 *		path relative to the package root, where the document should be inserted.
+	 * @return an already open W3C XML Documenet via its path, otherwise NULL.
+	 */
+	Document getCachedDom(String internalPath) {
+		internalPath = normalizeFilePath(internalPath);
+		return this.mPkgDoms.get(internalPath);
+	}
+
+	/**
+	 * @return a map with all open W3C XML documents with their internal package path as key.
+	 */
+	Map<String, Document> getCachedDoms() {
+		return this.mPkgDoms;
+	}
+
+	/** 
+	 * Removes a document from the package via its path. Independent if it was already opened or not.
+	 * @param internalPath
 	 *		path relative to the package root, where the document should be removed.
 	 */
-	public void removePackageDocument(String internalDocumentPath) {
+	public void removePackageDocument(String internalPath) {
 		try {
 			// get all files of the package
 			Set<String> allPackageFileNames = getFileEntries();
 
 			// If the document is the root document
 			// the "/" representing the root document is outside the manifest.xml in the API an empty path
-			if (internalDocumentPath.equals(OdfPackageDocument.ROOT_DOCUMENT_PATH)) {
+			if (internalPath.equals(OdfPackageDocument.ROOT_DOCUMENT_PATH)) {
 				for (String entryName : allPackageFileNames) {
 					remove(entryName);
 				}
@@ -287,14 +282,14 @@ public class OdfPackage {
 				//remove all the stream of the directory, such as pictures
 				List<String> directoryEntryNames = new ArrayList<String>();
 				for (String entryName : allPackageFileNames) {
-					if (entryName.startsWith(internalDocumentPath)) {
+					if (entryName.startsWith(internalPath)) {
 						directoryEntryNames.add(entryName);
 					}
 				}
 				for (String entryName : directoryEntryNames) {
 					remove(entryName);
 				}
-				remove(internalDocumentPath);
+				remove(internalPath);
 			}
 		} catch (Exception ex) {
 			Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
@@ -303,7 +298,7 @@ public class OdfPackage {
 	}
 
 	/** @return all currently opened OdfPackageDocument of this OdfPackage */
-	public Set<String> getOpenedPackageDocuments() {
+	Set<String> getCachedPackageDocuments() {
 		return mPkgDocuments.keySet();
 	}
 
@@ -327,7 +322,7 @@ public class OdfPackage {
 	private OdfPackage(File odfFile) throws Exception {
 		this();
 		mBaseURI = getBaseURIFromFile(odfFile);
-		initialize(new FileInputStream(odfFile));
+		initializeZip(new FileInputStream(odfFile));
 	}
 
 	/**
@@ -348,9 +343,9 @@ public class OdfPackage {
 		this();
 		if (mUseTempFile) {
 			File tempFile = newTempSourceFile(odfStream);
-			initialize(tempFile);
+			initializeZip(tempFile);
 		} else {
-			initialize(odfStream);
+			initializeZip(odfStream);
 		}
 	}
 
@@ -411,47 +406,22 @@ public class OdfPackage {
 	}
 
 	// Initialize using memory instead temporary disc
-	private void initialize(InputStream odfStream) throws Exception {
+	private void initializeZip(InputStream odfStream) throws Exception {
 		ByteArrayOutputStream tempBuf = new ByteArrayOutputStream();
-		StreamHelper.stream(odfStream, tempBuf);
+		StreamHelper.transformStream(odfStream, tempBuf);
 		byte[] mTempByteBuf = tempBuf.toByteArray();
 		tempBuf.close();
-
 		if (mTempByteBuf.length < 3) {
 			throw new IllegalArgumentException(
 					"An empty file was tried to be opened as ODF package!");
 		}
-
 		mZipFile = new ZipHelper(mTempByteBuf);
-		Enumeration<? extends ZipEntry> entries = mZipFile.entries();
-		if (!entries.hasMoreElements()) {
-			throw new IllegalArgumentException(
-					"It was not possible to unzip the file!");
-		} else {
-			do {
-				ZipEntry zipEntry = entries.nextElement();
-				mZipEntries.put(zipEntry.getName(), zipEntry);
-				// ToDo: (Issue 219 - PackageRefactoring) --think about if the additional list mPackagePathSet is
-				// necessary -
-				// shouldn't everything be part of one of the other lists?
-				// mabe keep this as "master", rename it?
-				mPackagePathSet.add(zipEntry.getName());
-				if (zipEntry.getName().equals(
-						OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
-					ByteArrayOutputStream out = new ByteArrayOutputStream();
-					StreamHelper.stream(mZipFile.getInputStream(zipEntry), out);
-					try {
-						mMediaType = new String(out.toByteArray(), 0, out.size(), "UTF-8");
-					} catch (UnsupportedEncodingException ex) {
-						Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-					}
-				}
-			} while (entries.hasMoreElements());
-		}
+		mZipEntries = mZipFile.entries();
+		readZip();
 	}
 
 	// Initialize using temporary directory on hard disc
-	private void initialize(File odfFile) throws Exception {
+	private void initializeZip(File odfFile) throws Exception {
 		mBaseURI = getBaseURIFromFile(odfFile);
 
 		if (mTempDirParent == null) {
@@ -462,7 +432,6 @@ public class OdfPackage {
 				mTempDirParent = null; // java.io.tmpdir will be used implicitly
 			}
 		}
-
 		try {
 			mZipFile = new ZipHelper(new ZipFile(odfFile));
 		} catch (Exception e) {
@@ -470,28 +439,57 @@ public class OdfPackage {
 				throw new IllegalArgumentException("The empty file '"
 						+ odfFile.getPath() + "' is no ODF package!", e);
 			} else {
-				throw new IllegalArgumentException("Could not unzip the file "
+				throw new IllegalArgumentException("Could not unzip the given ODF package!"
 						+ odfFile.getPath(), e);
 			}
 		}
-		Enumeration<? extends ZipEntry> entries = mZipFile.entries();
+		mZipEntries = mZipFile.entries();
+		readZip();
+	}
 
-		while (entries.hasMoreElements()) {
-			ZipEntry zipEntry = entries.nextElement();
-			mZipEntries.put(zipEntry.getName(), zipEntry);
-			// ToDo: (Issue 219 - PackageRefactoring) --think about if the additional list mPackagePathSet is
-			// necessary -
-			// shouldn't everything be part of one of the other lists?
-			// mabe keep this as "master", rename it?
-			mPackagePathSet.add(zipEntry.getName());
-			if (zipEntry.getName().equals(
-					OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
-				ByteArrayOutputStream out = new ByteArrayOutputStream();
-				StreamHelper.stream(mZipFile.getInputStream(zipEntry), out);
+	private void readZip() {
+		if (mZipEntries.isEmpty()) {
+			throw new IllegalArgumentException("Could not unzip the given ODF package!");
+		} else {
+
+			// initialize the package media type
+			initializeMediaType(mZipEntries.get(OdfPackage.OdfFile.MEDIA_TYPE.getPath()));
+			mZipEntries.remove(OdfPackage.OdfFile.MEDIA_TYPE.getPath());
+
+			// initialize the files of the package (fileEnties of Manifest) 
+			parseManifest();
+			mZipEntries.remove(OdfPackage.OdfFile.MANIFEST.getPath());
+			mZipEntries.remove("META-INF/");
+
+			Iterator<String> zipPaths = mZipEntries.keySet().iterator();
+			while (zipPaths.hasNext()) {
+				String filePath = zipPaths.next();
+				// every resource aside the /META-INF/manifest.xml (and META-INF/ directory)
+				// and "mimetype" will be added as fileEntry
+				if (!filePath.equals(OdfPackage.OdfFile.MANIFEST.getPath())
+						&& !filePath.equals("META-INF/")
+						&& !filePath.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
+					// aside "mediatype" and "META-INF/manifest"
+					// add manifest entry as to be described by a <manifest:file-entry>
+					newFileEntry(filePath);
+				}
+			}
+		}
+	}
+
+	/** Reads the uncompressed "mimetype" file, which contains the package media/mimte type*/
+	private void initializeMediaType(ZipEntry zipEntry) {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		try {
+			StreamHelper.transformStream(mZipFile.getInputStream(zipEntry), out);
+			mMediaType = new String(out.toByteArray(), 0, out.size(), "UTF-8");
+		} catch (Exception ex) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			if (out != null) {
 				try {
-					mMediaType = new String(out.toByteArray(), 0, out.size(),
-							"UTF-8");
-				} catch (UnsupportedEncodingException ex) {
+					out.close();
+				} catch (IOException ex) {
 					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			}
@@ -503,7 +501,7 @@ public class OdfPackage {
 		File odfFile = new File(getTempDir(), "theFile.tmp");
 		//	 copy stream to temp file
 		FileOutputStream os = new FileOutputStream(odfFile);
-		StreamHelper.stream(odfStream, os);
+		StreamHelper.transformStream(odfStream, os);
 		os.close();
 		return odfFile;
 	}
@@ -527,9 +525,42 @@ public class OdfPackage {
 	}
 
 	/**
+	 * Get the media type of the ODF file or document (ie. a directory).
+	 * A directory with a mediatype can be loaded as <code>OdfPackageDocument</code>.
+	 *  Note: A directoy is represented by in the package as directory with media type
+	 * @param internalPath within the package of the file or document.
+	 * @return the mediaType for the resource of the given path	 
+	 */
+	public String getMediaTypeString(String internalPath) {
+		String mediaType = null;
+		if (internalPath != null) {
+			if (internalPath.equals(EMPTY_STRING) || internalPath.equals(SLASH)) {
+				return mMediaType;
+			} else {
+				mediaType = getMediaTypeFromEntry(normalizePath(internalPath));
+				// if no file was found, look for a normalized directory name
+				if (mediaType == null) {
+					mediaType = getMediaTypeFromEntry(normalizeDirectoryPath(internalPath));
+				}
+			}
+		}
+		return mediaType;
+	}
+
+	private String getMediaTypeFromEntry(String internalPath) {
+		OdfFileEntry entry = getFileEntry(internalPath);
+		// if the document is not in the package, the return is NULL
+		if (entry != null) {
+			return entry.getMediaTypeString();
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * Get the media type of the ODF package (equal to media type of ODF root
 	 * document)
-	 * 
+	 *
 	 * @return the mediaType string of this ODF package
 	 */
 	public String getMediaTypeString() {
@@ -546,9 +577,6 @@ public class OdfPackage {
 	 */
 	void setMediaTypeString(String mediaType) {
 		mMediaType = mediaType;
-		mPackagePathSet.remove(OdfPackage.OdfFile.MEDIA_TYPE.getPath());
-		mPackagePathSet.add(OdfPackage.OdfFile.MEDIA_TYPE.getPath());
-
 	}
 
 	/**
@@ -570,6 +598,7 @@ public class OdfPackage {
 	 * 
 	 * @return The manifest file entries will be returned.
 	 */
+	// 2DO: When moved to Manifest, after generation, the method might be renamed "Entries" to "Paths" as well
 	public Set<String> getFileEntries() {
 		return getManifestEntries().keySet();
 	}
@@ -584,12 +613,7 @@ public class OdfPackage {
 	 */
 	public boolean contains(String packagePath) {
 		packagePath = normalizeFilePath(packagePath);
-		return mPackagePathSet.contains(packagePath);
-		// ToDo: (Issue 219 - PackageRefactoring) --return true for later added stuff
-		// return (mPackagePathSet.contains(packagePath) &&
-		// (mPkgTempFiles.get(packagePath) != null ||
-		// mPkgData.get(packagePath)!=null) && getFileEntry(packagePath)
-		// != null);
+		return mFileEntries.containsKey(packagePath);
 	}
 
 	/**
@@ -615,7 +639,6 @@ public class OdfPackage {
 	 *             - if the package could not be saved
 	 */
 	public void save(File odfFile) throws Exception {
-
 		String baseURI = odfFile.getCanonicalFile().toURI().toString();
 		if (File.separatorChar == '\\') {
 			baseURI = baseURI.replaceAll("\\\\", SLASH);
@@ -650,53 +673,43 @@ public class OdfPackage {
 			OdfFileEntry rootEntry = getManifestEntries().get(SLASH);
 			if (rootEntry == null) {
 				rootEntry = new OdfFileEntry(SLASH, mMediaType);
-				mManifestPathList.add(0, rootEntry.getPath());
+				getManifestEntries().put(SLASH, rootEntry);
 			} else {
 				rootEntry.setMediaTypeString(mMediaType);
 			}
 			ZipOutputStream zos = new ZipOutputStream(odfStream);
-			long modTime = (new java.util.Date()).getTime();
+
 			// remove mediatype path and use it as first
-			mPackagePathSet.remove(OdfFile.MEDIA_TYPE.getPath());
-			Iterator<String> it = mPackagePathSet.iterator();
-			String key = null;
+			this.mFileEntries.remove(OdfFile.MEDIA_TYPE.getPath());
+			Iterator<String> it = mFileEntries.keySet().iterator();
+			String path = null;
 			boolean isFirstFile = true;
-			// ODF requires the "./mimetype" file to be at first in the package
+			CRC32 crc = new CRC32();
+			long modTime = (new java.util.Date()).getTime();
 			while (it.hasNext() || isFirstFile) {
 				try {
+					byte[] data = null;
+					// ODF requires the "mimetype" file to be at first in the package
 					if (isFirstFile) {
-						key = OdfFile.MEDIA_TYPE.getPath();
 						isFirstFile = false;
+						// create "mimetype" from current attribute value
+						data = mMediaType.getBytes("UTF-8");
+						createZipEntry(OdfFile.MEDIA_TYPE.getPath(), data, zos, modTime, crc);
+						// Create "META-INF/" directory
+						createZipEntry("META-INF/", null, zos, modTime, crc);
+						// Create "META-INF/manifest.xml" file
+						data = getBytes(OdfFile.MANIFEST.getPath());
+						createZipEntry(OdfFile.MANIFEST.getPath(), data, zos, modTime, crc);
 					} else {
-						key = it.next();
+						path = it.next();
+						// not interested to reuse previous mediaType nor manifest from ZIP
+						if (!path.equals(SLASH) && !path.equals(OdfPackage.OdfFile.MANIFEST.getPath())
+								&& !path.equals("META-INF/")
+								&& !path.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
+							data = getBytes(path);
+							createZipEntry(path, data, zos, modTime, crc);
+						}
 					}
-					byte[] data = getBytes(key);
-					ZipEntry ze = mZipEntries.get(key);
-					if (ze == null) {
-						ze = new ZipEntry(key);
-					}
-					ze.setTime(modTime);
-					if (fileNeedsCompression(key)) {
-						ze.setMethod(ZipEntry.STORED);
-					} else {
-						ze.setMethod(ZipEntry.DEFLATED);
-					}
-					CRC32 crc = new CRC32();
-					if (data != null) {
-						crc.update(data);
-						ze.setSize(data.length);
-					} else {
-						ze.setMethod(ZipEntry.STORED);
-						ze.setSize(0);
-					}
-					ze.setCrc(crc.getValue());
-					ze.setCompressedSize(-1);
-					zos.putNextEntry(ze);
-					if (data != null) {
-						zos.write(data, 0, data.length);
-					}
-					zos.closeEntry();
-					mZipEntries.put(key, ze);
 				} catch (IOException ex) {
 					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 				}
@@ -708,21 +721,58 @@ public class OdfPackage {
 		}
 	}
 
+	private void createZipEntry(String path, byte[] data, ZipOutputStream zos, long modTime, CRC32 crc) {
+		ZipEntry ze = null;
+		try {
+			ze = mZipEntries.get(path);
+			if (ze == null) {
+				ze = new ZipEntry(path);
+			}
+			ze.setTime(modTime);
+			if (fileNeedsCompression(path)) {
+				ze.setMethod(ZipEntry.DEFLATED);
+			} else {
+				ze.setMethod(ZipEntry.STORED);
+			}
+			crc.reset();
+			if (data != null) {
+				ze.setSize(data.length);
+				crc.update(data);
+				ze.setCrc(crc.getValue());
+			} else {
+				ze.setSize(0);
+				ze.setCrc(0);
+			}
+			ze.setCompressedSize(-1);
+			zos.putNextEntry(ze);
+			if (data != null) {
+				zos.write(data, 0, data.length);
+			}
+			zos.closeEntry();
+			mZipEntries.put(path, ze);
+		} catch (IOException ex) {
+
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
 	/**
 	 * Determines if a file have to be compressed.
 	 * @param filePath the file name
 	 * @return true if the file needs compression, false, otherwise
 	 */
 	private boolean fileNeedsCompression(String filePath) {
-		boolean result = false;
+		boolean result = true;
 
+		// ODF spec does not allow compression of "./mimetype" file
 		if (filePath.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
-			return true;
+			return false;
 		}
+		// see if the file was already compressed
 		if (filePath.lastIndexOf(".") > 0) {
-			String endWith = filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length());
-			if (mCompressedFileTypes.contains(endWith.toLowerCase())) {
-				result = true;
+			String suffix = filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length());
+			if (mCompressedFileTypes.contains(suffix.toLowerCase())) {
+				result = false;
 			}
 		}
 		return result;
@@ -742,6 +792,7 @@ public class OdfPackage {
 			ZipEntry nextElement = mZipEntries.get(entries.next());
 			String entryPath = nextElement.getName();
 			getBytes(entryPath);
+			
 		}
 	}
 
@@ -767,127 +818,91 @@ public class OdfPackage {
 		}
 		// release all stuff - this class is impossible to use afterwards
 		mZipFile = null;
-////		mTempDirParent = null;
-////		mTempDir = null;
 		mMediaType = null;
-		mPackagePathSet = null;
 		mZipEntries = null;
 		mPkgDoms = null;
-		mPkgData = null;
-		mPkgTempFiles = null;
-		mManifestPathList = null;
-		mManifestEntries = null;
+		mMemoryFileCache = null;
+		mDiscFileCache = null;
+		mFileEntries = null;
 		mBaseURI = null;
 		mResolver = null;
 	}
 
 	/**
-	 * Data was updated, update mZipEntry and OdfFileEntry as well
-	 */
-	private void entryUpdate(String packagePath) {
-
-		byte[] data = getBytes(packagePath);
-		int size = 0;
-		if (data == null) {
-			size = 0;
-		} else {
-			size = data.length;
-		}
-		OdfFileEntry fileEntry = getManifestEntries().get(packagePath);
-		ZipEntry zipEntry = mZipEntries.get(packagePath);
-		if (zipEntry == null) {
-			return;
-		}
-		if (fileEntry != null) {
-			if (XML_MEDIA_TYPE.equals(fileEntry.getMediaTypeString())) {
-				fileEntry.setSize(-1);
-			} else {
-				fileEntry.setSize(size);
-			}
-		}
-		zipEntry.setSize(size);
-		// create checksum from binaries
-		CRC32 crc = new CRC32();
-		if ((data != null) && size > 0) {
-			crc.update(data);
-		}
-		zipEntry.setCrc(crc.getValue());
-		zipEntry.setCompressedSize(-1);
-		long modTime = (new java.util.Date()).getTime();
-		zipEntry.setTime(modTime);
-
-	}
-
-	/**
 	 * Parse the Manifest file
 	 */
-	void parseManifest() throws Exception {
-
-		InputStream is = getInputStream(OdfPackage.OdfFile.MANIFEST.packagePath);
-		if (is == null) {
-			mManifestPathList = null;
-			mManifestEntries = null;
-			return;
-		}
-
-		mManifestPathList = new LinkedList<String>();
-
-		SAXParserFactory factory = new org.apache.xerces.jaxp.SAXParserFactoryImpl();
-		factory.setNamespaceAware(true);
-		factory.setValidating(false);
+	private void parseManifest() {
+		InputStream is = null;
 		try {
-			factory.setFeature(
-					"http://apache.org/xml/features/nonvalidating/load-external-dtd",
-					false);
+			ZipEntry entry = null;
+			// loading the MANIFEST once from the ZIP, as it will never be cached, just once read
+			// during load (now) and on save serialized from file status (ie. mFileEntries)
+			if ((entry = mZipEntries.get(OdfPackage.OdfFile.MANIFEST.packagePath)) != null) {
+				is = mZipFile.getInputStream(entry);
+			}
+			if (is == null) {
+				return;
+			}
+			XMLReader xmlReader = getXMLReader();
+			xmlReader.setEntityResolver(getEntityResolver());
+			xmlReader.setContentHandler(new OdfManifestSaxHandler(this));
+			InputSource ins = new InputSource(is);
+			String uri = mBaseURI + "/" + OdfPackage.OdfFile.MANIFEST.packagePath;
+			ins.setSystemId(uri);
+			xmlReader.parse(ins);
+			// ToDo: manifest.xml will be held in the future as DOM, it now its being generated each save()
+			mMemoryFileCache.remove(OdfPackage.OdfFile.MANIFEST.packagePath);
+		} catch (ParserConfigurationException ex) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (SAXException ex) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (IOException ex) {
+			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			try {
+				is.close();
+			} catch (IOException ex) {
+				Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+	}
+
+	XMLReader getXMLReader() throws ParserConfigurationException, SAXException {
+		// create sax parser
+		SAXParserFactory saxFactory = new org.apache.xerces.jaxp.SAXParserFactoryImpl();
+		saxFactory.setNamespaceAware(true);
+		saxFactory.setValidating(false);
+		try {
+			saxFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 		} catch (Exception ex) {
 			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
-		SAXParser parser = factory.newSAXParser();
+		SAXParser parser = saxFactory.newSAXParser();
 		XMLReader xmlReader = parser.getXMLReader();
-		// More details at
-		// http://xerces.apache.org/xerces2-j/features.html#namespaces
+		// More details at http://xerces.apache.org/xerces2-j/features.html#namespaces
 		xmlReader.setFeature("http://xml.org/sax/features/namespaces", true);
-		// More details at
-		// http://xerces.apache.org/xerces2-j/features.html#namespace-prefixes
-		xmlReader.setFeature("http://xml.org/sax/features/namespace-prefixes",
-				true);
-		// More details at
-		// http://xerces.apache.org/xerces2-j/features.html#xmlns-uris
+		// More details at http://xerces.apache.org/xerces2-j/features.html#namespace-prefixes
+		xmlReader.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
+		// More details at http://xerces.apache.org/xerces2-j/features.html#xmlns-uris
 		xmlReader.setFeature("http://xml.org/sax/features/xmlns-uris", true);
-
-		String uri = mBaseURI + "/" + OdfPackage.OdfFile.MANIFEST.packagePath;
-		xmlReader.setEntityResolver(getEntityResolver());
-		xmlReader.setContentHandler(new ManifestContentHandler());
-
-		InputSource ins = new InputSource(is);
-		ins.setSystemId(uri);
-
-		xmlReader.parse(ins);
-
-		mPkgData.remove(OdfPackage.OdfFile.MANIFEST.packagePath);
-		entryUpdate(OdfPackage.OdfFile.MANIFEST.packagePath);
+		return xmlReader;
 	}
 
-	private void insertDirectories(String packagePath, String mediaType) {
+	// Add the given path and all its subdirectories to the packagePath list
+	// to be written later to the manifest
+	private void createSubEntries(String packagePath) {
 		StringTokenizer tok = new StringTokenizer(packagePath, SLASH);
-		String path = EMPTY_STRING;
-		{
-			// As directory paths are always ending with SLASH
-			// it is a directory, if there are more token
+		if (tok.countTokens() > 1) {
+			String path = EMPTY_STRING;
 			while (tok.hasMoreTokens()) {
 				String directory = tok.nextToken();
+				// it is a directory, if there are more token
 				if (tok.hasMoreTokens()) {
 					path = path + directory + SLASH;
-					if (!mPackagePathSet.contains(path)) {
-						// it is only an intermediate directory
-						mPackagePathSet.add(path);
-						insertDirectory(path, null);
-					}
-				} else {
-					if (mediaType != null || !mPackagePathSet.contains(packagePath)) {
-						mPackagePathSet.add(packagePath);
-						insert((byte[]) null, packagePath, mediaType);
+					OdfFileEntry fileEntry = mFileEntries.get(path);
+					if (fileEntry == null) {
+						mFileEntries.put(path, new OdfFileEntry(path, null));
 					}
 				}
 			}
@@ -895,28 +910,12 @@ public class OdfPackage {
 	}
 
 	/**
-	 * add a directory to the OdfPackage
-	 */
-	private void insertDirectory(String packagePath, String mediaType) {
-		packagePath = normalizeFilePath(packagePath);
-
-		// If empty string OR not trailing SLASH
-		if ((packagePath.length() < 1)
-				|| (packagePath.charAt(packagePath.length() - 1) != '/')) {
-			packagePath = packagePath + SLASH;
-		}
-		insert((byte[]) null, packagePath, mediaType);
-
-	}
-
-	/**
 	 * Insert DOM tree into OdfPackage. An existing file will be replaced.
 	 *
 	 * @param fileDOM
-	 *            - XML DOM tree to be inserted as file. Null would remove the file from the package, not the directory it contains even if it was the last file.
+	 *            - XML DOM tree to be inserted as file. 
 	 * @param packagePath
-	 *            - relative filePath where the DOM tree should be inserted as
-	 *            XML file
+	 *            - relative filePath where the DOM tree should be inserted as XML file
 	 * @param mediaType
 	 *            - media type of stream. Set to null if unknown
 	 * @throws java.lang.Exception
@@ -932,87 +931,213 @@ public class OdfPackage {
 		} else {
 			mPkgDoms.put(packagePath, fileDOM);
 		}
-		addPathToZip(packagePath, mediaType);
+		updateFileEntry(newFileEntry(packagePath), mediaType);
 		// remove byte array version of new DOM
-		mPkgData.remove(packagePath);
+		mMemoryFileCache.remove(packagePath);
 		// remove temp file version of new DOM
-		mPkgTempFiles.remove(packagePath);
-	}
-
-	private void addPathToZip(String packagePath, String mediaType) {
-		if (!OdfPackage.OdfFile.MANIFEST.packagePath.equals(packagePath)) {
-			if (mManifestEntries == null) {
-				try {
-					parseManifest();
-				} catch (Exception e) {
-					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE,
-							"The package manifest.xml could not be parsed!", e);
-				}
-			}
-			if (mManifestEntries.get(packagePath) == null) {
-				OdfFileEntry fileEntry = new OdfFileEntry(packagePath,
-						mediaType);
-				mManifestEntries.put(packagePath, fileEntry);
-				mManifestPathList.add(packagePath);
-			} else if (mediaType != null) {
-				OdfFileEntry fileEntry = mManifestEntries.get(packagePath);
-				fileEntry.setMediaTypeString(mediaType);
-			}
-		} else {
-			// we take information from given META-INF/manifest.xml
-			try {
-				parseManifest();
-			} catch (Exception e) {
-				Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE,
-						"The package manifest.xml could not be parsed!", e);
-			}
-		}
-		// creates sub directories in the package for the given DOM
-		if (!mPackagePathSet.contains(packagePath)) {
-			insertDirectories(packagePath, mediaType);
-		}
-		// try to get the ZipEntry from our cache
-		ZipEntry ze = mZipEntries.get(packagePath);
-		if (ze == null) {
-			ze = new ZipEntry(packagePath);
-			ze.setMethod(ZipEntry.DEFLATED);
-			mZipEntries.put(packagePath, ze);
-		}
-		if (fileNeedsCompression(packagePath)) {
-			ze.setMethod(ZipEntry.STORED);
-		}
-		entryUpdate(packagePath);
+		mDiscFileCache.remove(packagePath);
 	}
 
 	/**
-	 * returns true if a DOM tree has been requested for given sub-content of
-	 * OdfPackage
-	 * 
-	 * @param packagePath
-	 *            - a path inside the OdfPackage eg to a content.xml stream
-	 * @return - wether the package class internally has a DOM representation
-	 *         for the given path
+	 * Embed an OdfPackageDocument to the current OdfPackage.
+	 * All the file entries of child document will be inserted.
+	 * @param internalPath path to the directory the ODF document should be inserted (relative to ODF package root).
+	 * @param sourceDocument the OdfPackageDocument to be embedded.
 	 */
-	boolean isDomCached(String packagePath) {
-		return (mPkgDoms.get(packagePath) != null);
+	public void insertDocument(OdfPackageDocument sourceDocument, String internalPath) {
+		// opened DOM of descendant Documents will be flashed to the their pkg
+		flushDecendentDoms(sourceDocument);
+
+		// Gets the OdfDocument's manifest entry info, no matter it is a independent document or an embeddedDocument.
+		Map<String, OdfFileEntry> entryMapToCopy;
+		if (sourceDocument.isRootDocument()) {
+			entryMapToCopy = sourceDocument.getPackage().getManifestEntries();
+		} else {
+			entryMapToCopy = sourceDocument.getPackage().getSubDirectoryEntries(sourceDocument.getDocumentPath());
+		}
+		//insert to package and add it to the Manifest
+		internalPath = sourceDocument.setDocumentPath(internalPath);
+		Set<String> entryNameList = entryMapToCopy.keySet();
+		for (String entryName : entryNameList) {
+			OdfFileEntry entry = entryMapToCopy.get(entryName);
+			if (entry != null) {
+				try {
+					// if entry is a directory (e.g. an ODF document root)
+					if (entryName.endsWith(SLASH)) {
+						// insert directory
+						if (entryName.equals(SLASH)) {
+							insert((byte[]) null, internalPath, sourceDocument.getMediaTypeString());
+						} else {
+							insert((byte[]) null, internalPath + entry.getPath(), entry.getMediaTypeString());
+						}
+					} else {
+						String packagePath = internalPath + entry.getPath();
+						insert(sourceDocument.getPackage().getInputStream(entryName), packagePath, entry.getMediaTypeString());
+					}
+				} catch (Exception ex) {
+					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+		}
+		//make sure the media type of embedded Document is right set.
+		OdfFileEntry embedDocumentRootEntry = new OdfFileEntry(internalPath, sourceDocument.getMediaTypeString());
+		getManifestEntries().put(internalPath, embedDocumentRootEntry);
+		// the new document will be attached to its new package (it has been inserted to)
+		sourceDocument.setPackage(this);
+		this.insertPackageDocument(sourceDocument, internalPath);
+	}
+
+	/** 
+	 * Insert all open DOMs of XML files beyond parent document to the package.
+	 * The XML files will be updated in the package after calling save.
+	 *
+	 * @param parentDocument the document, which XML files shall be serialized
+	 */
+	void flushDecendentDoms(OdfPackageDocument parentDocument) {
+		OdfPackage pkg = parentDocument.getPackage();
+		if (parentDocument.isRootDocument()) {
+			// for every parsed XML file (DOM)
+			for (String xmlFilePath : pkg.getCachedDoms().keySet()) {
+				// insert it to the package (serializing and caching it till final save)
+				pkg.insert(pkg.getCachedDom(xmlFilePath), xmlFilePath, "text/xml");
+			}
+		} else {
+			// if not root document, check ..
+			String parentDocumentPath = parentDocument.getDocumentPath();
+			// for every parsed XML file (DOM)
+			for (String xmlFilePath : pkg.getCachedDoms().keySet()) {
+				// if the file is within the given document
+				if (xmlFilePath.startsWith(parentDocumentPath)) {
+					// insert it to the package (serializing and caching it till final save)
+					pkg.insert(pkg.getCachedDom(xmlFilePath), xmlFilePath, "text/xml");
+				}
+			}
+		}
+	}
+
+	/** Get all the file entries from a sub directory */
+	private Map<String, OdfFileEntry> getSubDirectoryEntries(String directory) {
+		directory = normalizeDirectoryPath(directory);
+		Map<String, OdfFileEntry> subEntries = new HashMap<String, OdfFileEntry>();
+		Map<String, OdfFileEntry> allEntries = getManifestEntries();
+		Set<String> rootEntryNameSet = getFileEntries();
+		for (String entryName : rootEntryNameSet) {
+			if (entryName.startsWith(directory)) {
+				String newEntryName = entryName.substring(directory.length());
+				if (newEntryName.length() == 0) {
+					continue;
+				}
+				OdfFileEntry srcFileEntry = allEntries.get(entryName);
+				OdfFileEntry newFileEntry = new OdfFileEntry();
+				newFileEntry.setEncryptionData(srcFileEntry.getEncryptionData());
+				newFileEntry.setMediaTypeString(srcFileEntry.getMediaTypeString());
+				newFileEntry.setPath(newEntryName);
+				newFileEntry.setSize(srcFileEntry.getSize());
+				subEntries.put(entryName, newFileEntry);
+			}
+		}
+		return subEntries;
+	}
+
+	/**
+	 * Method returns the paths of all document within the package.
+	 *
+	 * @return A set of paths of all documents of the package, including the root document.
+	 */
+	public Set<String> getInnerDocumentPaths() {
+		return getInnerDocumentPaths(null, null);
+	}
+
+	/**
+	 * Method returns the paths of all document within the package matching the given criteria.
+	 *
+	 * @param mediaTypeString limits the desired set of document paths to documents of the given mediaType
+	 * @return A set of paths of all documents of the package, including the root document, that match the given parameter.
+	 */
+	public Set<String> getInnerDocumentPaths(String mediaTypeString) {
+		return getInnerDocumentPaths(null, null);
+	}
+
+	/**
+	 * Method returns the paths of all document within the package matching the given criteria.
+	 *
+	 * @param mediaTypeString limits the desired set of document paths to documents of the given mediaType
+	 * @param subDirectory limits the desired set document paths to those documents below of this subdirectory
+	 * @return A set of paths of all documents of the package, including the root document, that match the given parameter.
+	 */
+	Set<String> getInnerDocumentPaths(String mediaTypeString, String subDirectory) {
+		Set<String> innerDocuments = new HashSet<String>();
+		Set<String> packageFilePaths = getFileEntries();
+		// check manifest for current embedded OdfPackageDocuments
+		for (String filePath : packageFilePaths) {
+			// check if a subdirectory was the criteria and if the files are beyond the given subdirectory
+			if (subDirectory == null || filePath.startsWith(subDirectory) && !filePath.equals(subDirectory)) {
+				// with filePath is not empty and is a directory (ie. a potential document)
+				if (filePath.length() > 1 && filePath.endsWith(SLASH)) {
+					String fileMediaType = getFileEntry(filePath).getMediaTypeString();
+					if (fileMediaType != null && !fileMediaType.equals(EMPTY_STRING)) {
+						// check if a certain mediaType was the critera and was matched
+						if (mediaTypeString == null || mediaTypeString.equals(fileMediaType)) {
+							// only relative path is allowed as path
+							innerDocuments.add(filePath);
+						}
+					}
+				}
+			}
+		}
+		return innerDocuments;
+	}
+
+	/**
+	 * Adding a manifest:file-entry to be saved in manifest.xml. 
+	 * In addition, sub directories will be added as well to the manifest.
+	 */
+	private OdfFileEntry newFileEntry(String packagePath) {
+		// if it is NOT the resource "/META-INF/manifest.xml"
+		OdfFileEntry fileEntry = null;
+		if (!OdfPackage.OdfFile.MANIFEST.packagePath.equals(packagePath)) {
+			if (mFileEntries == null) {
+				mFileEntries = new HashMap<String, OdfFileEntry>();
+			}
+			fileEntry = mFileEntries.get(packagePath);
+			// for every new file entry
+			if (fileEntry == null) {
+				fileEntry = new OdfFileEntry(packagePath);
+				mFileEntries.put(packagePath, fileEntry);
+				// creates recursive file entries for all sub directories
+				createSubEntries(packagePath);
+			}
+		}
+		return fileEntry;
+	}
+
+	/**
+	 * update file entry setting.
+	 */
+	private void updateFileEntry(OdfFileEntry fileEntry, String mediaType) {
+		// overwrite previous settings
+		fileEntry.setMediaTypeString(mediaType);
+		// reset encryption data (ODFDOM does not support encryption yet)
+		fileEntry.setEncryptionData(null);
+		// reset size to be unset
+		fileEntry.setSize(-1);
 	}
 
 	/**
 	 * Gets org.w3c.dom.Document for XML file contained in package.
 	 * 
-	 * @param packagePath
-	 *            - a path inside the OdfPackage eg to a content.xml stream
+	 * @param packagePath to a file within the Odf Package (eg. content.xml)
 	 * @return an org.w3c.dom.Document
 	 * @throws SAXException
 	 * @throws ParserConfigurationException
-	 * @throws Exception
+	 * @throws IOException
 	 * @throws IllegalArgumentException
 	 * @throws TransformerConfigurationException
 	 * @throws TransformerException
 	 */
 	public Document getDom(String packagePath) throws SAXException,
-			ParserConfigurationException, Exception, IllegalArgumentException,
-			TransformerConfigurationException, TransformerException {
+			ParserConfigurationException, IllegalArgumentException,
+			TransformerConfigurationException, TransformerException, IOException {
 
 		Document doc = mPkgDoms.get(packagePath);
 		if (doc != null) {
@@ -1044,13 +1169,13 @@ public class OdfPackage {
 
 		if (doc != null) {
 			mPkgDoms.put(packagePath, doc);
-			// mPkgData.remove(packagePath);
+			// mMemoryFileCache.remove(packagePath);
 		}
 		return doc;
 	}
 
 	/**
-	 * Inserts InputStream into an OdfPackage. An existing file will be
+	 * Inserts an external file into an OdfPackage. An existing file will be
 	 * replaced.
 	 * 
 	 * @param sourceURI
@@ -1089,13 +1214,12 @@ public class OdfPackage {
 	 * @param packagePath
 	 *            - relative filePath where the tree should be inserted as XML
 	 *            file
-	 * @throws java.lang.Exception
-	 *             In case the file could not be saved
-	 */
-	public void insert(InputStream fileStream, String packagePath,
-			String mediaType) throws Exception {
-		packagePath = normalizeFilePath(packagePath);
+	 * @param mediaType
+	 *            - media type of stream. Set NULL if none
 
+	 */
+	public void insert(InputStream fileStream, String packagePath, String mediaType) throws Exception {
+		packagePath = normalizeFilePath(packagePath);
 		if (fileStream == null) {
 			//adding a simple directory without MIMETYPE
 			insert((byte[]) null, packagePath, mediaType);
@@ -1107,7 +1231,7 @@ public class OdfPackage {
 			} else {
 				bis = new BufferedInputStream(fileStream);
 			}
-			StreamHelper.stream(bis, baos);
+			StreamHelper.transformStream(bis, baos);
 			byte[] data = baos.toByteArray();
 			insert(data, packagePath, mediaType);
 			// image should not be stored in memory but on disc
@@ -1117,33 +1241,29 @@ public class OdfPackage {
 				File tempFile = new File(getTempDir(), packagePath);
 				File parent = tempFile.getParentFile();
 				parent.mkdirs();
-				OutputStream fos = new BufferedOutputStream(
-						new FileOutputStream(tempFile));
+				OutputStream fos = new BufferedOutputStream(new FileOutputStream(tempFile));
 				fos.write(data);
 				fos.close();
-				mPkgTempFiles.put(packagePath, tempFile);
-				mPkgData.remove(packagePath);
+				mDiscFileCache.put(packagePath, tempFile);
+				mMemoryFileCache.remove(packagePath);
 			}
-
 		}
 	}
 
 	/**
-	 * Insert byte array into OdfPackage. An existing file will be replaced.
-	 * 
+	 * Inserts a byte array into OdfPackage. An existing file will be replaced.
+	 * If the byte array is NULL a directory with the given mimetype will be created.
+	 *
 	 * @param fileBytes
-	 *            - data of the file stream to be stored in package
-	 * @param mediaType
-	 *            - media type of stream. Set to null if unknown
+	 *      - data of the file stream to be stored in package.
+	 *		If NULL a directory with the given mimetype will be created.
 	 * @param packagePath
-	 *            - relative filePath where the DOM tree should be inserted as
-	 *            XML file
-	 * @throws java.lang.Exception
-	 *             when the DOM tree could not be inserted
+	 *      - path of the file or directory relative to the package root.
+	 * @param mediaType
+	 *      - media type of stream. Set to null if unknown
 	 */
 	public void insert(byte[] fileBytes, String packagePath, String mediaType) {
 		packagePath = normalizeFilePath(packagePath);
-
 		if (OdfPackage.OdfFile.MEDIA_TYPE.getPath().equals(packagePath)) {
 			try {
 				setMediaTypeString(new String(fileBytes, "UTF-8"));
@@ -1154,53 +1274,18 @@ public class OdfPackage {
 			return;
 		}
 		if (fileBytes != null) {
-			mPkgData.put(packagePath, fileBytes);
-		}
-		addPathToZip(packagePath, mediaType);
-	}
-
-	private void insert(ZipEntry zipe, byte[] content) {
-		if (content != null) {
-			if (zipe.getName().equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
-				try {
-					mMediaType = new String(content, 0, content.length, "UTF-8");
-				} catch (UnsupportedEncodingException ex) {
-					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-				}
-			} else {
-				mPkgData.put(zipe.getName(), content);
+			mMemoryFileCache.put(packagePath, fileBytes);
+			// as DOM would overwrite data cache, any existing DOM cache will be deleted
+			if (mPkgDoms.containsKey(packagePath)) {
+				mPkgDoms.remove(packagePath);
 			}
 		}
-		if (!mPackagePathSet.contains(zipe.getName())) {
-			mPackagePathSet.add(zipe.getName());
-		}
-		mZipEntries.put(zipe.getName(), zipe);
+		updateFileEntry(newFileEntry(packagePath), mediaType);
 	}
 
-	private void insert(ZipEntry zipe, File file) {
-		if (file != null) {
-			mPkgTempFiles.put(zipe.getName(), file);
-		}
-		if (!mPackagePathSet.contains(zipe.getName())) {
-			mPackagePathSet.add(zipe.getName());
-		}
-		mZipEntries.put(zipe.getName(), zipe);
-	}
-
-	public Map<String, OdfFileEntry> getManifestEntries() {
-		if (mManifestEntries == null) {
-			try {
-				parseManifest();
-				if (mManifestEntries == null) {
-					return null;
-				}
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-			return mManifestEntries;
-		} else {
-			return mManifestEntries;
-		}
+	// changed to package access as the manifest interiors are an implementation detail
+	Map<String, OdfFileEntry> getManifestEntries() {
+		return mFileEntries;
 	}
 
 	/**
@@ -1210,161 +1295,151 @@ public class OdfPackage {
 	 * @return the /META-INF/manifest.xml as a String
 	 */
 	public String getManifestAsString() {
-		StringBuilder buf = new StringBuilder();
-
-		buf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		buf.append("<manifest:manifest xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\">\n");
-		if (mManifestEntries == null) {
-			try {
-				parseManifest();
-			} catch (Exception ex) {
-				Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-			}
-		}
-		Iterator<String> it = mManifestPathList.iterator();
-		while (it.hasNext()) {
-			String key = it.next();
-			String s = null;
-			OdfFileEntry fileEntry = mManifestEntries.get(key);
-			if (fileEntry != null) {
-				buf.append(" <manifest:file-entry");
-				s = fileEntry.getMediaTypeString();
-				if (s == null) {
-					s = EMPTY_STRING;
-				}
-				buf.append(" manifest:media-type=\"");
-				buf.append(encodeXMLAttributes(s));
-				buf.append("\"");
-				s = fileEntry.getPath();
-
-				if (s == null) {
-					s = EMPTY_STRING;
-				}
-				buf.append(" manifest:full-path=\"");
-				buf.append(encodeXMLAttributes(s));
-				buf.append("\"");
-				int i = fileEntry.getSize();
-				if (i > 0) {
-					buf.append(" manifest:size=\"");
-					buf.append(i);
-					buf.append("\"");
-				}
-				EncryptionData enc = fileEntry.getEncryptionData();
-
-				if (enc != null) {
-					buf.append(">\n");
-					buf.append("  <manifest:encryption-data>\n");
-					Algorithm alg = enc.getAlgorithm();
-					if (alg != null) {
-						buf.append("   <manifest:algorithm");
-						s = alg.getName();
-						if (s == null) {
-							s = EMPTY_STRING;
-						}
-						buf.append(" manifest:algorithm-name=\"");
+		if (mFileEntries == null) {
+			return null;
+		} else {
+			StringBuilder buf = new StringBuilder();
+			buf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+			buf.append("<manifest:manifest xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\">\n");
+			Iterator<String> it = new TreeSet<String>(mFileEntries.keySet()).iterator();
+			while (it.hasNext()) {
+				String key = it.next();
+				String s = null;
+				OdfFileEntry fileEntry = mFileEntries.get(key);
+				if (fileEntry != null) {
+					buf.append(" <manifest:file-entry");
+					s = fileEntry.getPath();
+					if (s != null) {
+						buf.append(" manifest:full-path=\"");
 						buf.append(encodeXMLAttributes(s));
 						buf.append("\"");
-						s = alg.getInitializationVector();
-						if (s == null) {
-							s = EMPTY_STRING;
-						}
-						buf.append(" manifest:initialization-vector=\"");
-						buf.append(encodeXMLAttributes(s));
-						buf.append("\"/>\n");
+
 					}
-					KeyDerivation keyDerivation = enc.getKeyDerivation();
-					if (keyDerivation != null) {
-						buf.append("   <manifest:key-derivation");
-						s = keyDerivation.getName();
-						if (s == null) {
-							s = EMPTY_STRING;
-						}
-						buf.append(" manifest:key-derivation-name=\"");
+					s = fileEntry.getMediaTypeString();
+					if (s != null) {
+						buf.append(" manifest:media-type=\"");
 						buf.append(encodeXMLAttributes(s));
 						buf.append("\"");
-						s = keyDerivation.getSalt();
-						if (s == null) {
-							s = EMPTY_STRING;
-						}
-						buf.append(" manifest:salt=\"");
-						buf.append(encodeXMLAttributes(s));
-						buf.append("\"");
-
-						buf.append(" manifest:iteration-count=\"");
-						buf.append(keyDerivation.getIterationCount());
-						buf.append("\"/>\n");
 					}
-					buf.append("  </manifest:encryption-data>\n");
-					buf.append(" </<manifest:file-entry>\n");
-				} else {
-					buf.append("/>\n");
+
+					int i = fileEntry.getSize();
+					if (i > 0) {
+						buf.append(" manifest:size=\"");
+						buf.append(i);
+						buf.append("\"");
+					}
+					EncryptionData enc = fileEntry.getEncryptionData();
+					if (enc != null) {
+						buf.append(">\n");
+						buf.append("  <manifest:encryption-data>\n");
+						Algorithm alg = enc.getAlgorithm();
+						if (alg != null) {
+							buf.append("   <manifest:algorithm");
+							s = alg.getName();
+							if (s != null) {
+								buf.append(" manifest:algorithm-name=\"");
+								buf.append(encodeXMLAttributes(s));
+								buf.append("\"");
+							}
+							s = alg.getInitializationVector();
+							if (s != null) {
+								buf.append(" manifest:initialization-vector=\"");
+								buf.append(encodeXMLAttributes(s));
+								buf.append("\"");
+							}
+							buf.append("/>\n");
+						}
+						KeyDerivation keyDerivation = enc.getKeyDerivation();
+						if (keyDerivation != null) {
+							buf.append("   <manifest:key-derivation");
+							s = keyDerivation.getName();
+							if (s != null) {
+								buf.append(" manifest:key-derivation-name=\"");
+								buf.append(encodeXMLAttributes(s));
+								buf.append("\"");
+							}
+							s = keyDerivation.getSalt();
+							if (s != null) {
+								buf.append(" manifest:salt=\"");
+								buf.append(encodeXMLAttributes(s));
+								buf.append("\"");
+							}
+							buf.append(" manifest:iteration-count=\"");
+							buf.append(keyDerivation.getIterationCount());
+							buf.append("\"/>\n");
+						}
+						buf.append("  </manifest:encryption-data>\n");
+						buf.append(" </<manifest:file-entry>\n");
+					} else {
+						buf.append("/>\n");
+					}
 				}
 			}
+			buf.append("</manifest:manifest>");
+			return buf.toString();
 		}
-		buf.append("</manifest:manifest>");
-
-		return buf.toString();
 	}
 
 	/**
 	 * Get package (sub-) content as byte array
 	 * 
-	 * @param packagePath
-	 *            relative filePath to the package content
+	 * @param packagePath relative filePath to the package content
 	 * @return the unzipped package content as byte array
 	 * @throws java.lang.Exception
 	 */
 	public byte[] getBytes(String packagePath) {
+		// if path is null or empty return null
+		if (packagePath == null || packagePath.equals(EMPTY_STRING)) {
+			return null;
+		}
 		packagePath = normalizeFilePath(packagePath);
 		byte[] data = null;
-
-		if (packagePath == null || packagePath.equals(EMPTY_STRING)) {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			save(baos, mBaseURI);
-			return baos.toByteArray();
-		}
+		// if the file is "mimetype"
 		if (packagePath.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
 			if (mMediaType == null) {
 				return null;
+			} else {
+				try {
+					data = mMediaType.getBytes("UTF-8");
+				} catch (UnsupportedEncodingException use) {
+					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, use);
+					return null;
+				}
 			}
-			try {
-				data = mMediaType.getBytes("UTF-8");
-			} catch (UnsupportedEncodingException use) {
-				Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, use);
+			// if the file is "/META-INF/manifest.xml"
+		} else if (packagePath.equals(OdfPackage.OdfFile.MANIFEST.packagePath)) {
+			if (mFileEntries == null) {
+				// manifest was not present
 				return null;
 			}
-		} else if (mPackagePathSet.contains(packagePath)
-				&& mPkgDoms.get(packagePath) != null) {
-			{
-				Document dom = mPkgDoms.get(packagePath);
-				if (dom instanceof OdfFileDom) {
-					OdfFileDom odfDom = (OdfFileDom) dom;
-					Map<String, String> nsByUri = odfDom.getNamespacesByURI();
-					OdfElement root = odfDom.getRootElement();
-					for (Entry<String, String> entry : nsByUri.entrySet()) {
-						root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:" + entry.getValue(), entry.getKey());
-					}
+			String s = getManifestAsString();
+			if (s == null) {
+				return null;
+			} else {
+				try {
+					data = s.getBytes("UTF-8");
+				} catch (UnsupportedEncodingException ex) {
+					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 				}
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-				DOMXSImplementationSourceImpl dis = new org.apache.xerces.dom.DOMXSImplementationSourceImpl();
-				DOMImplementationLS impl = (DOMImplementationLS) dis.getDOMImplementation("LS");
-				LSSerializer writer = impl.createLSSerializer();
-
-				LSOutput output = impl.createLSOutput();
-				output.setByteStream(baos);
-
-				writer.write(dom, output);
-				data = baos.toByteArray();
 			}
-		} else if (mPackagePathSet.contains(packagePath)
-				&& mPkgTempFiles.get(packagePath) != null) {
+			// if the path is already loaded as DOM (highest priority)
+		} else if (mPkgDoms.get(packagePath) != null) {
+			data = flushDom(mPkgDoms.get(packagePath));
+			mMemoryFileCache.put(packagePath, data);
+			
+			// if the path's file was cached to memory (second high priority)
+		} else if (mFileEntries.containsKey(packagePath)
+				&& mMemoryFileCache.get(packagePath) != null) {
+			data = mMemoryFileCache.get(packagePath);
+
+			// if the path's file was cached to disc (lowest priority)
+		} else if (mDiscFileCache.get(packagePath) != null) {
 			InputStream is = null;
 			ByteArrayOutputStream os = null;
 			try {
 				os = new ByteArrayOutputStream();
-				is = new BufferedInputStream(new FileInputStream(mPkgTempFiles.get(packagePath)));
-				StreamHelper.stream(is, os);
+				is = new BufferedInputStream(new FileInputStream(mDiscFileCache.get(packagePath)));
+				StreamHelper.transformStream(is, os);
 				is.close();
 				os.close();
 				data = os.toByteArray();
@@ -1382,27 +1457,9 @@ public class OdfPackage {
 					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			}
-		} else if (mPackagePathSet.contains(packagePath)
-				&& mPkgData.get(packagePath) != null) {
-			data = mPkgData.get(packagePath);
-		} else if (packagePath.equals(OdfPackage.OdfFile.MANIFEST.packagePath)) {
-			if (mManifestEntries == null) {
-				// manifest was not present
-				return null;
-			}
-			String s = getManifestAsString();
-			if (s == null) {
-				return null;
-			} else {
-				try {
-					data = s.getBytes("UTF-8");
-				} catch (UnsupportedEncodingException ex) {
-					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-				}
-			}
 		}
-
-		if (data == null) { // not yet stored data; retrieve it.
+		// if not available, check if file exists in ZIP
+		if (data == null) {
 			ZipEntry entry = null;
 			if ((entry = mZipEntries.get(packagePath)) != null) {
 				InputStream inputStream = null;
@@ -1410,14 +1467,11 @@ public class OdfPackage {
 					inputStream = mZipFile.getInputStream(entry);
 					if (inputStream != null) {
 						ByteArrayOutputStream out = new ByteArrayOutputStream();
-						StreamHelper.stream(inputStream, out);
+						StreamHelper.transformStream(inputStream, out);
 						data = out.toByteArray();
 						// store for further usage; do not care about manifest: that
 						// is handled exclusively
-						mPkgData.put(packagePath, data);
-						if (!mPackagePathSet.contains(packagePath)) {
-							mPackagePathSet.add(packagePath);
-						}
+						mMemoryFileCache.put(packagePath, data);
 					}
 				} catch (IOException ex) {
 					Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
@@ -1435,9 +1489,28 @@ public class OdfPackage {
 		return data;
 	}
 
-	private void addNamespaces(OdfFileDom dom) {
-		dom.getXPath().getNamespaceContext();
-		Element e = dom.getDocumentElement();
+	/** Serializes a DOM tree into a byte array.
+	 Providing the counterpart of the generic Namespace handling of OdfFileDom */
+	private byte[] flushDom(Document dom) {
+		// if it is one of our DOM files we may flush all collected namespaces to the root element
+		if (dom instanceof OdfFileDom) {
+			OdfFileDom odfDom = (OdfFileDom) dom;
+			Map<String, String> nsByUri = odfDom.getMapNamespacePrefixByUri();
+			OdfElement root = odfDom.getRootElement();
+			if (root != null) {
+				for (Entry<String, String> entry : nsByUri.entrySet()) {
+					root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:" + entry.getValue(), entry.getKey());
+				}
+			}
+		}
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		DOMXSImplementationSourceImpl dis = new org.apache.xerces.dom.DOMXSImplementationSourceImpl();
+		DOMImplementationLS impl = (DOMImplementationLS) dis.getDOMImplementation("LS");
+		LSSerializer writer = impl.createLSSerializer();
+		LSOutput output = impl.createLSOutput();
+		output.setByteStream(baos);
+		writer.write(dom, output);
+		return baos.toByteArray();
 	}
 
 	/**
@@ -1447,25 +1520,9 @@ public class OdfPackage {
 	 *            of the desired stream.
 	 * @return Inputstream of the ODF file within the package for the given
 	 *         path.
-	 * @throws Exception
 	 */
-	public InputStream getInputStream(String packagePath) throws Exception {
-
+	public InputStream getInputStream(String packagePath) {
 		packagePath = normalizeFilePath(packagePath);
-
-		if (packagePath.equals(OdfPackage.OdfFile.MANIFEST.packagePath)
-				&& (mManifestEntries == null)) {
-			ZipEntry entry = null;
-			if ((entry = mZipEntries.get(packagePath)) != null) {
-				return mZipFile.getInputStream(entry);
-			}
-		}
-
-		if (mPackagePathSet.contains(packagePath)
-				&& mPkgTempFiles.get(packagePath) != null) {
-			return new BufferedInputStream(new FileInputStream(mPkgTempFiles.get(packagePath)));
-		}
-
 		// else we always cache here and return a ByteArrayInputStream because
 		// if
 		// we would return ZipFile getInputStream(entry) we would not be
@@ -1475,7 +1532,6 @@ public class OdfPackage {
 		// styles.xml
 		// simultanously when using XSLT on OdfPackages we want to circumvent
 		// this limitation
-
 		byte[] data = getBytes(packagePath);
 		if (data != null && data.length != 0) {
 			ByteArrayInputStream bais = new ByteArrayInputStream(data);
@@ -1513,11 +1569,9 @@ public class OdfPackage {
 			@Override
 			public void run() {
 				try {
-					BufferedInputStream bis = new BufferedInputStream(is,
-							StreamHelper.PAGE_SIZE);
-					BufferedOutputStream bos = new BufferedOutputStream(os,
-							StreamHelper.PAGE_SIZE);
-					StreamHelper.stream(bis, bos);
+					BufferedInputStream bis = new BufferedInputStream(is, StreamHelper.PAGE_SIZE);
+					BufferedOutputStream bos = new BufferedOutputStream(os, StreamHelper.PAGE_SIZE);
+					StreamHelper.transformStream(bis, bos);
 					is.close();
 					os.close();
 				} catch (Exception ie) {
@@ -1588,25 +1642,18 @@ public class OdfPackage {
 	}
 
 	/** Removes the singel given file
-	ToDo: (Issue 219 - PackageRefactoring) --Also directory structures should be able to be removed (or copied & moved)
 	 */
 	public void remove(String packagePath) {
-		Map<String, OdfFileEntry> manifestEntries = getManifestEntries();
-		if (mManifestPathList != null && mManifestPathList.contains(packagePath)) {
-			mManifestPathList.remove(packagePath);
-		}
-		if (manifestEntries != null && manifestEntries.containsKey(packagePath)) {
-			manifestEntries.remove(packagePath);
-		}
+		packagePath = normalizePath(packagePath);
 		if (mZipEntries != null && mZipEntries.containsKey(packagePath)) {
 			mZipEntries.remove(packagePath);
 		}
-		if (mPkgTempFiles != null && mPkgTempFiles.containsKey(packagePath)) {
-			File file = mPkgTempFiles.remove(packagePath);
+		if (mDiscFileCache != null && mDiscFileCache.containsKey(packagePath)) {
+			File file = mDiscFileCache.remove(packagePath);
 			file.delete();
 		}
-		if (mPackagePathSet != null && mPackagePathSet.contains(packagePath)) {
-			mPackagePathSet.remove(packagePath);
+		if (mFileEntries != null && mFileEntries.containsKey(packagePath)) {
+			mFileEntries.remove(packagePath);
 		}
 	}
 
@@ -1631,268 +1678,6 @@ public class OdfPackage {
 		return r;
 	}
 
-	private class ManifestContentHandler implements ContentHandler {
-
-		private OdfFileEntry _currentFileEntry;
-		private EncryptionData _currentEncryptionData;
-
-		/**
-		 * Receive an object for locating the origin of SAX document events.
-		 */
-		public void setDocumentLocator(Locator locator) {
-		}
-
-		/**
-		 * Receive notification of the beginning of a document.
-		 */
-		public void startDocument() throws SAXException {
-			mManifestPathList = new LinkedList<String>();
-			mManifestEntries = new HashMap<String, OdfFileEntry>();
-		}
-
-		/**
-		 * Receive notification of the end of a document.
-		 */
-		public void endDocument() throws SAXException {
-		}
-
-		/**
-		 * Begin the scope of a prefix-URI Namespace mapping.
-		 */
-		public void startPrefixMapping(String prefix, String uri)
-				throws SAXException {
-		}
-
-		/**
-		 * End the scope of a prefix-URI mapping.
-		 */
-		public void endPrefixMapping(String prefix) throws SAXException {
-		}
-
-		/**
-		 * Receive notification of the beginning of an element.
-		 */
-		public void startElement(String namespaceURI, String localName,
-				String qName, Attributes atts) throws SAXException {
-
-			if (localName.equals("file-entry")) {
-				_currentFileEntry = new OdfFileEntry();
-				_currentFileEntry.setPath(atts.getValue("manifest:full-path"));
-				_currentFileEntry.setMediaTypeString(atts.getValue("manifest:media-type"));
-				if (atts.getValue("manifest:size") != null) {
-					try {
-						_currentFileEntry.setSize(Integer.parseInt(atts.getValue("manifest:size")));
-					} catch (NumberFormatException nfe) {
-						throw new SAXException("not a number: "
-								+ atts.getValue("manifest:size"));
-					}
-				}
-			} else if (localName.equals("encryption-data")) {
-				_currentEncryptionData = new EncryptionData();
-				if (_currentFileEntry != null) {
-					_currentEncryptionData.setChecksumType(atts.getValue("manifest:checksum-type"));
-					_currentEncryptionData.setChecksum(atts.getValue("manifest:checksum"));
-					_currentFileEntry.setEncryptionData(_currentEncryptionData);
-				}
-			} else if (localName.equals("algorithm")) {
-				Algorithm algorithm = new Algorithm();
-				algorithm.setName(atts.getValue("manifest:algorithm-name"));
-				algorithm.setInitializationVector(atts.getValue("manifest:initialization-vector"));
-				if (_currentEncryptionData != null) {
-					_currentEncryptionData.setAlgorithm(algorithm);
-				}
-			} else if (localName.equals("key-derivation")) {
-				KeyDerivation keyDerivation = new KeyDerivation();
-				keyDerivation.setName(atts.getValue("manifest:key-derivation-name"));
-				keyDerivation.setSalt(atts.getValue("manifest:salt"));
-				if (atts.getValue("manifest:iteration-count") != null) {
-					try {
-						keyDerivation.setIterationCount(Integer.parseInt(atts.getValue("manifest:iteration-count")));
-					} catch (NumberFormatException nfe) {
-						throw new SAXException("not a number: "
-								+ atts.getValue("manifest:iteration-count"));
-					}
-				}
-				if (_currentEncryptionData != null) {
-					_currentEncryptionData.setKeyDerivation(keyDerivation);
-				}
-			}
-
-		}
-
-		/**
-		 * Receive notification of the end of an element.
-		 */
-		public void endElement(String namespaceURI, String localName,
-				String qName) throws SAXException {
-			if (localName.equals("file-entry")) {
-				if (_currentFileEntry.getPath() != null) {
-					getManifestEntries().put(_currentFileEntry.getPath(),
-							_currentFileEntry);
-				}
-				mManifestPathList.add(_currentFileEntry.getPath());
-				_currentFileEntry = null;
-			} else if (localName.equals("encryption-data")) {
-				_currentEncryptionData = null;
-			}
-		}
-
-		/**
-		 * Receive notification of character data.
-		 */
-		public void characters(char[] ch, int start, int length)
-				throws SAXException {
-		}
-
-		/**
-		 * Receive notification of ignorable whitespace in element content.
-		 */
-		public void ignorableWhitespace(char[] ch, int start, int length)
-				throws SAXException {
-		}
-
-		/**
-		 * Receive notification of a processing instruction.
-		 */
-		public void processingInstruction(String target, String data)
-				throws SAXException {
-		}
-
-		/**
-		 * Receive notification of a skipped entity.
-		 */
-		public void skippedEntity(String name) throws SAXException {
-		}
-	}
-
-	/**
-	 * resolve external entities
-	 */
-	private class Resolver implements EntityResolver, URIResolver {
-
-		/**
-		 * Resolver constructor.
-		 */
-		public Resolver() {
-		}
-
-		/**
-		 * Allow the application to resolve external entities.
-		 * 
-		 * The Parser will call this method before opening any external entity
-		 * except the top-level document entity (including the external DTD
-		 * subset, external entities referenced within the DTD, and external
-		 * entities referenced within the document element): the application may
-		 * request that the parser resolve the entity itself, that it use an
-		 * alternative URI, or that it use an entirely different input source.
-		 */
-		public InputSource resolveEntity(String publicId, String systemId)
-				throws SAXException {
-
-			// This deactivates the attempt to loadPackage the Math DTD
-			if (publicId != null
-					&& publicId.startsWith("-//OpenOffice.org//DTD Modified W3C MathML")) {
-				return new InputSource(new ByteArrayInputStream(
-						"<?xml version='1.0' encoding='UTF-8'?>".getBytes()));
-			}
-			if (systemId != null) {
-				if ((mBaseURI != null) && systemId.startsWith(mBaseURI)) {
-					if (systemId.equals(mBaseURI)) {
-						InputStream in = null;
-						try {
-							in = getInputStream();
-						} catch (Exception e) {
-							throw new SAXException(e);
-						}
-						InputSource ins;
-						ins = new InputSource(in);
-
-						if (ins == null) {
-							return null;
-						}
-						ins.setSystemId(systemId);
-						return ins;
-					} else {
-						if (systemId.length() > mBaseURI.length() + 1) {
-							InputStream in = null;
-							try {
-								String path = systemId.substring(mBaseURI.length() + 1);
-								in = getInputStream(path);
-								InputSource ins = new InputSource(in);
-								ins.setSystemId(systemId);
-								return ins;
-							} catch (Exception ex) {
-								Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-							} finally {
-								try {
-									if (in != null) {
-										in.close();
-									}
-								} catch (IOException ex) {
-									Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-								}
-							}
-						}
-						return null;
-					}
-				} else if (systemId.startsWith("resource:/")) {
-					int i = systemId.indexOf('/');
-					if ((i > 0) && systemId.length() > i + 1) {
-						String res = systemId.substring(i + 1);
-						ClassLoader cl = OdfPackage.class.getClassLoader();
-						InputStream in = cl.getResourceAsStream(res);
-						if (in != null) {
-							InputSource ins = new InputSource(in);
-							ins.setSystemId(systemId);
-							return ins;
-						}
-					}
-					return null;
-				} else if (systemId.startsWith("jar:")) {
-					try {
-						URL url = new URL(systemId);
-						JarURLConnection jarConn = (JarURLConnection) url.openConnection();
-						InputSource ins = new InputSource(jarConn.getInputStream());
-						ins.setSystemId(systemId);
-						return ins;
-					} catch (IOException ex) {
-						Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
-					}
-				}
-			}
-			return null;
-		}
-
-		public Source resolve(String href, String base)
-				throws TransformerException {
-			try {
-				URI uri = null;
-				if (base != null) {
-					URI baseuri = new URI(base);
-					uri = baseuri.resolve(href);
-				} else {
-					uri = new URI(href);
-				}
-
-				InputSource ins = null;
-				try {
-					ins = resolveEntity(null, uri.toString());
-				} catch (Exception e) {
-					throw new TransformerException(e);
-				}
-				if (ins == null) {
-					return null;
-				}
-				InputStream in = ins.getByteStream();
-				StreamSource src = new StreamSource(in);
-				src.setSystemId(uri.toString());
-				return src;
-			} catch (URISyntaxException use) {
-				return null;
-			}
-		}
-	}
-
 	/**
 	 * Get EntityResolver to be used in XML Parsers which can resolve content
 	 * inside the OdfPackage
@@ -1901,7 +1686,7 @@ public class OdfPackage {
 	 */
 	public EntityResolver getEntityResolver() {
 		if (mResolver == null) {
-			mResolver = new Resolver();
+			mResolver = new Resolver(this);
 		}
 		return mResolver;
 	}
@@ -1914,88 +1699,15 @@ public class OdfPackage {
 	 */
 	public URIResolver getURIResolver() {
 		if (mResolver == null) {
-			mResolver = new Resolver();
+			mResolver = new Resolver(this);
 		}
 		return mResolver;
 	}
 
 	private static String getBaseURIFromFile(File file) throws Exception {
 		String baseURI = file.getCanonicalFile().toURI().toString();
-		baseURI = BACK_SLASH.matcher(baseURI).replaceAll("/");
+		baseURI = BACK_SLASH_PATTERN.matcher(baseURI).replaceAll("/");
 		return baseURI;
-	}
-
-	private class ZipHelper {
-
-		private ZipFile mZipFile = null;
-		private byte[] mZipBuffer = null;
-
-		public ZipHelper(ZipFile zipFile) {
-			mZipFile = zipFile;
-			mZipBuffer = null;
-		}
-
-		public ZipHelper(byte[] buffer) {
-			mZipBuffer = buffer;
-			mZipFile = null;
-		}
-
-		public Enumeration<? extends ZipEntry> entries() throws IOException {
-			if (mZipFile != null) {
-				return mZipFile.entries();
-			} else {
-				Vector<ZipEntry> list = new Vector<ZipEntry>();
-				ZipInputStream inputStream = new ZipInputStream(
-						new ByteArrayInputStream(mZipBuffer));
-				ZipEntry zipEntry = inputStream.getNextEntry();
-				while (zipEntry != null) {
-					list.add(zipEntry);
-					zipEntry = inputStream.getNextEntry();
-				}
-				inputStream.close();
-				return list.elements();
-			}
-		}
-
-		public InputStream getInputStream(ZipEntry entry) throws IOException {
-			if (mZipFile != null) {
-				return mZipFile.getInputStream(entry);
-			} else {
-				ZipInputStream inputStream = new ZipInputStream(
-						new ByteArrayInputStream(mZipBuffer));
-				ZipEntry zipEntry = inputStream.getNextEntry();
-				while (zipEntry != null) {
-					if (zipEntry.getName().equalsIgnoreCase(entry.getName())) {
-						return readAsInputStream(inputStream);
-					}
-					zipEntry = inputStream.getNextEntry();
-				}
-				return null;
-			}
-		}
-
-		private InputStream readAsInputStream(ZipInputStream inputStream)
-				throws IOException {
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-			if (outputStream != null) {
-				byte[] buf = new byte[4096];
-				int r = 0;
-				while ((r = inputStream.read(buf, 0, 4096)) > -1) {
-					outputStream.write(buf, 0, r);
-				}
-				inputStream.close();
-			}
-			return new ByteArrayInputStream(outputStream.toByteArray());
-
-		}
-
-		public void close() throws IOException {
-			if (mZipFile != null) {
-				mZipFile.close();
-			} else {
-				mZipBuffer = null;
-			}
-		}
 	}
 
 	/**
@@ -2010,7 +1722,7 @@ public class OdfPackage {
 	 *  None relative URLs will NOT throw an exception.
 	 * @return the normalized path or the URL
 	 */
-	protected static String normalizeFilePath(String filePath) {
+	static String normalizeFilePath(String filePath) {
 		if (filePath.equals(EMPTY_STRING)) {
 			String errMsg = "The packagePath given by parameter is an empty string!";
 			Logger.getLogger(OdfPackage.class.getName()).severe(errMsg);
@@ -2021,8 +1733,8 @@ public class OdfPackage {
 	}
 
 	/**
-	 * Ensures the given directory path is not null nor an external reference.
-	 * An empty path and "/" are both mapped to the root directory/document.
+	 * Ensures the given directory path is not null nor an external reference to resources outside the package.
+	 * An empty path and slash "/" are both mapped to the root directory/document.
 	 *
 	 * NOTE: Although ODF only refer the "/" as root,
 	 * the empty path aligns more adequate with the file system concept.
@@ -2031,44 +1743,92 @@ public class OdfPackage {
 	 * @see #normalizeFilePath(String)
 	 * In addition to the file path normalization a trailing slash will be used for directories.
 	 */
-	protected static String normalizeDirectoryPath(String directoryPath) {
+	static String normalizeDirectoryPath(String directoryPath) {
 		directoryPath = normalizePath(directoryPath);
-		// if not the root document - which is from ODF view a '/' and no trailing '/'
-		if (!directoryPath.equals(OdfPackageDocument.ROOT_DOCUMENT_PATH) && !directoryPath.endsWith("/")) {
+		// if not the root document - which is from ODF view a '/' and no
+		// trailing '/'
+		if (!directoryPath.equals(OdfPackageDocument.ROOT_DOCUMENT_PATH)
+				&& !directoryPath.endsWith(SLASH)) {
 			// add a trailing slash
-			directoryPath = directoryPath + "/";
+			directoryPath = directoryPath + SLASH;
 		}
 		return directoryPath;
 	}
 
 	/** Normalizes both directory and file path */
-	private static String normalizePath(String path) {
+	static String normalizePath(String path) {
 		if (path == null) {
 			String errMsg = "The packagePath given by parameter is NULL!";
 			Logger.getLogger(OdfPackage.class.getName()).severe(errMsg);
 			throw new IllegalArgumentException(errMsg);
 		} else if (!isExternalReference(path)) {
-			if (path.indexOf('\\') != -1) {
-				path = path.replace('\\', '/');
+			if (path.equals(EMPTY_STRING)) {
+				path = SLASH;
+			} else {
+				// exchange all backslash "\" with a slash "/"
+				if (path.indexOf('\\') != -1) {
+					path = BACK_SLASH_PATTERN.matcher(path).replaceAll(SLASH);
+				}
+				// exchange all double slash "//" with a slash "/"
+				while (path.indexOf("//") != -1) {
+					path = DOUBLE_SLASH_PATTERN.matcher(path).replaceAll(SLASH);
+				}
+				// if directory replacements (e.g. ..) exist, resolve and remove them
+				if (path.indexOf("/.") != -1 || path.indexOf("./") != -1) {
+					path = removeChangeDirectories(path);
+				}
 			}
-			// exchange all "/../" substrings with "/"
-			if (path.indexOf("/../") != -1) {
-				path = path.replace("/../", "/");
-			}
-			// exchange all "/./" substrings with "/"
-			if (path.indexOf("/./") != -1) {
-				path = path.replace("//", "/");
-			}
-			// exchange all "//" substrings with "/"
-			while (path.indexOf("//") != -1) {
-				path = path.replace("//", "/");
-			}
-			// remove starting "./" unless it stands alone.
-			if (path.length() != 2 && path.startsWith("./")) {
-				path = path.substring(2);
-			}			
 		}
 		return path;
+	}
+
+	/** Resolving the directory replacements (ie. "/../" and "/./") with a slash "/" */
+	private static String removeChangeDirectories(String path) {
+		boolean isDirectory = path.endsWith(SLASH);
+		StringTokenizer tokenizer = new StringTokenizer(path, "/");
+		int tokenCount = tokenizer.countTokens();
+		List<String> tokenList = new ArrayList<String>(tokenCount);
+		// add all paths to a list
+		while (tokenizer.hasMoreTokens()) {
+			String token = tokenizer.nextToken();
+			tokenList.add(token);
+		}
+		if (!isDirectory) {
+			String lastPath = tokenList.get(tokenCount - 1);
+			if (lastPath.equals(DOT) || lastPath.equals(DOUBLE_DOT)) {
+				isDirectory = true;
+			}
+		}
+		String currentToken;
+		int removeDirLevel = 0;
+		StringBuilder out = new StringBuilder();
+		// work on the list from back to front
+		for (int i = tokenCount - 1; i >= 0; i--) {
+			currentToken = tokenList.get(i);
+			// every ".." will remove an upcoming path
+			if (currentToken.equals(DOUBLE_DOT)) {
+				removeDirLevel++;
+			} else if (currentToken.equals(DOT)) {
+			} else {
+				// if a path have to be remove, neglect current path
+				if (removeDirLevel > 0) {
+					removeDirLevel--;
+				} else {
+					// add the path segment
+					out.insert(0, SLASH);
+					out.insert(0, currentToken);
+				}
+			}
+		}
+		if (removeDirLevel > 0) {
+			return EMPTY_STRING;
+		} else {
+			if (!isDirectory) {
+				// remove trailing slash /
+				out.deleteCharAt(out.length() - 1);
+			}
+			return out.toString();
+		}
 	}
 
 	/**
@@ -2082,7 +1842,7 @@ public class OdfPackage {
 	private static boolean isExternalReference(String fileRef) {
 		boolean isExternalReference = false;
 		// if the fileReference is a external relative filePath..
-		if (fileRef.startsWith(TWO_DOTS)
+		if (fileRef.startsWith(DOUBLE_DOT)
 				|| // or absolute filePath AND not root document
 				fileRef.startsWith(SLASH) && !fileRef.equals(SLASH)
 				|| // or absolute IRI
@@ -2090,5 +1850,27 @@ public class OdfPackage {
 			isExternalReference = true;
 		}
 		return isExternalReference;
+	}
+
+	/**
+	 * This class solely exists to clean up after a package object has been
+	 * removed by garbage collector. Finalizable classes are said to have slow
+	 * garbage collection, so we don't make the whole OdfPackage finalizable.
+	 */
+	private static class OdfFinalizablePackage {
+
+		File mTempDirForDeletion;
+
+		OdfFinalizablePackage(File tempDir) {
+			mTempDirForDeletion = tempDir;
+		}
+
+		@Override
+		protected void finalize() throws Throwable {
+			super.finalize();
+			if (mTempDirForDeletion != null) {
+				TempDir.deleteTempOdfDirectory(mTempDirForDeletion);
+			}
+		}
 	}
 }

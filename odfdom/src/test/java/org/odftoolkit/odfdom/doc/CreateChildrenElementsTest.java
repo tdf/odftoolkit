@@ -30,7 +30,6 @@ import javax.xml.xpath.XPathConstants;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.anim.AnimAnimateElement;
 import org.odftoolkit.odfdom.dom.element.chart.ChartChartElement;
@@ -62,6 +61,7 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextHeading;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextList;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
@@ -76,7 +76,7 @@ public class CreateChildrenElementsTest {
 
 			DrawPageElement page = presentation.newDrawPageElement("NewPage");
 
-			OdfContentDom contentDom = odfdoc.getContentDom();
+			OdfFileDom contentDom = odfdoc.getContentDom();
 			XPath xpath = contentDom.getXPath();
 			DrawPageElement presentationTest = (DrawPageElement) xpath.evaluate("//draw:page[last()]", contentDom, XPathConstants.NODE);
 
@@ -97,7 +97,7 @@ public class CreateChildrenElementsTest {
 	public void testCreatChildrenForChart() {
 		try {
 
-			OdfContentDom contentDom = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
+			OdfFileDom contentDom = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
 
 			// find the last paragraph
 			NodeList lst = contentDom.getElementsByTagNameNS(
@@ -136,7 +136,7 @@ public class CreateChildrenElementsTest {
 	@Test
 	public void testCreateChildrenForTable() {
 		try {
-			OdfContentDom contentDom = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
+			OdfFileDom contentDom = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
 
 			// find the last paragraph
 			NodeList lst = contentDom.getElementsByTagNameNS(
@@ -180,7 +180,7 @@ public class CreateChildrenElementsTest {
 	public void testCreatChildrenForText() {
 		try {
 
-			OdfContentDom contentDom = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
+			OdfFileDom contentDom = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
 
 			// find the last paragraph
 			NodeList lst = contentDom.getElementsByTagNameNS(
@@ -231,7 +231,7 @@ public class CreateChildrenElementsTest {
 		try {
 
 			OdfGraphicsDocument odgDoc1 = OdfGraphicsDocument.newGraphicsDocument();
-			OdfContentDom contentDom = odgDoc1.getContentDom();
+			OdfFileDom contentDom = odgDoc1.getContentDom();
 
 			NodeList lst = contentDom.getElementsByTagNameNS(
 					DrawPageElement.ELEMENT_NAME.getUri(),
@@ -304,8 +304,8 @@ public class CreateChildrenElementsTest {
 		try {
 			OdfDocument document = OdfTextDocument.newTextDocument();
 			document.insertDocument(OdfTextDocument.newTextDocument(), "Object1/");
-			OdfDocument embeddedObject1 = (OdfDocument) document.getEmbeddedDocument("Object1/");
-			OdfContentDom contentDom = embeddedObject1.getContentDom();
+			OdfDocument embeddedObject1 = (OdfDocument) document.loadSubDocument("Object1/");
+			OdfFileDom contentDom = embeddedObject1.getContentDom();
 			// find the last paragraph
 			NodeList lst = contentDom.getElementsByTagNameNS(
 					OdfTextParagraph.ELEMENT_NAME.getUri(),
@@ -356,7 +356,7 @@ public class CreateChildrenElementsTest {
 		try {
 
 			OdfSpreadsheetDocument odfSpreadSheet = OdfSpreadsheetDocument.newSpreadsheetDocument();
-			OdfContentDom contentDom = odfSpreadSheet.getContentDom();
+			OdfFileDom contentDom = odfSpreadSheet.getContentDom();
 
 			NodeList lst = contentDom.getElementsByTagNameNS(
 					OfficeSpreadsheetElement.ELEMENT_NAME.getUri(),
@@ -398,7 +398,7 @@ public class CreateChildrenElementsTest {
 			OfficeTextElement text = doc.getContentRoot();
 			FormFormElement form = text.newOfficeFormsElement().newFormFormElement();
 			form.setFormNameAttribute("NewFrom");
-			OdfContentDom contentDom = doc.getContentDom();
+			OdfFileDom contentDom = doc.getContentDom();
 			XPath xpath = contentDom.getXPath();
 			FormFormElement formTest = (FormFormElement) xpath.evaluate("//form:form[last()]", contentDom, XPathConstants.NODE);
 			Assert.assertEquals(formTest, form);
@@ -420,7 +420,7 @@ public class CreateChildrenElementsTest {
 			DrawPageElement page = presentation.newDrawPageElement("NewPage");
 
 			AnimAnimateElement anim = page.newAnimAnimateElement("new");
-			OdfContentDom contentDom = odfdoc.getContentDom();
+			OdfFileDom contentDom = odfdoc.getContentDom();
 			XPath xpath = contentDom.getXPath();
 			AnimAnimateElement animTest = (AnimAnimateElement) xpath.evaluate("//anim:animate[last()]", contentDom, XPathConstants.NODE);
 

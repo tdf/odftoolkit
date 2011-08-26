@@ -43,7 +43,7 @@ class StreamHelper {
      * does not close any stream; calling methods must take care of that.
      * @throws IOException when io error happens
      */
-    static void stream(InputStream in, OutputStream out) throws IOException {
+    static void transformStream(InputStream in, OutputStream out) throws IOException {
         StreamHelper s = new StreamHelper(in, out);
         s.stream();
     }

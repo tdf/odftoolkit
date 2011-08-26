@@ -22,8 +22,8 @@
 //2DO: Move into tooling package?
 package org.odftoolkit.odfdom.pkg;
 
-import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
@@ -38,14 +38,19 @@ abstract public class OdfContainerElementBase extends OdfElement {
 	 */
 	private static final long serialVersionUID = 6944696143015713668L;
 	// moved to this class as only used for style handling
-	protected OdfDocument mOdfDocument;
+	protected OdfPackageDocument mPackageDocument;
 
 	/** Creates a new instance of OdfElement */
 	public OdfContainerElementBase(OdfFileDom ownerDocument,
 			String namespaceURI,
 			String qualifiedName) throws DOMException {
 		super(ownerDocument, namespaceURI, qualifiedName);
-		mOdfDocument = (OdfDocument) ownerDocument.getDocument();
+		if (ownerDocument instanceof OdfContentDom) {
+			ownerDocument = (OdfContentDom) ownerDocument;
+		} else if (ownerDocument instanceof OdfStylesDom) {
+			ownerDocument = (OdfStylesDom) ownerDocument;
+		}
+		mPackageDocument = ownerDocument.getDocument();
 	}
 
 	/** Creates a new instance of OdfElement */

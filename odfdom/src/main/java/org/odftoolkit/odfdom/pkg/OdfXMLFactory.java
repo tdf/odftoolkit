@@ -27,7 +27,6 @@
  */
 package org.odftoolkit.odfdom.pkg;
 
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -215,8 +214,8 @@ public class OdfXMLFactory {
 				String newPrefix = adaptedName.getPrefix();
 				// in case the prefix was changed as it existed before
 				if (oldPrefix != null && !oldPrefix.equals(newPrefix)
-					// "_1" is the suffix added by OdfFileDom to an existing Namespace
-					&& newPrefix.indexOf("__") == -1) {
+						// "_1" is the suffix added by OdfFileDom to an existing Namespace
+						&& newPrefix.indexOf("__") == -1) {
 					// look up again if there is a class registered for this prefix
 					element = newOdfElement(dom, adaptedName);
 				} else {
@@ -255,7 +254,7 @@ public class OdfXMLFactory {
 					attr = (OdfAttribute) new OdfAlienAttribute(dom, name);
 					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.INFO, "None-ODF attribute created for {0}", adaptedName.getQName());
 				}
-			}else{
+			} else {
 				// create an alien attribute for namespace attribute "xmlns:*"
 				attr = (OdfAttribute) new OdfAlienAttribute(dom, name);
 			}
