@@ -49,6 +49,7 @@ public class ODFXSLTRunnerTask extends Task {
     private File m_aOutput = null;
     private File m_aOutputFile = null;
     private String m_aPath = "content.xml";
+    private String m_aProcessor = null;
     private Vector<XSLTParameter> m_aParams = null;
     boolean m_bForce = false;
     boolean m_bTemplate = false;
@@ -129,6 +130,17 @@ public class ODFXSLTRunnerTask extends Task {
     {
         m_bForce = bForce;
     }
+
+    /**
+     * Set processor.
+     *
+     * @param bForce
+     */
+    public void setProcessor( String aProcessor )
+    {
+        m_aProcessor = aProcessor;
+    }
+
 
     /**
      * Paramter class for nested <param> elements.
@@ -274,7 +286,7 @@ public class ODFXSLTRunnerTask extends Task {
         {
             ODFXSLTRunner aRunner = new ODFXSLTRunner();
             Logger aLogger = new AntLogger( getProject() );
-            bError = aRunner.runXSLT( m_aStyleSheet, m_aParams, m_aInput, m_aInputMode, m_aOutput, m_aOutputMode, m_aPath, aLogger  );
+            bError = aRunner.runXSLT( m_aStyleSheet, m_aParams, m_aInput, m_aInputMode, m_aOutput, m_aOutputMode, m_aPath, m_aProcessor, aLogger  );
         }
         catch( Exception e )
         {
