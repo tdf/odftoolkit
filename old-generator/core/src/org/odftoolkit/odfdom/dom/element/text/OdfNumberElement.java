@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:number>".
  */
 public abstract class OdfNumberElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1336843184489196207L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "number" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "number" );
 
     public OdfNumberElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

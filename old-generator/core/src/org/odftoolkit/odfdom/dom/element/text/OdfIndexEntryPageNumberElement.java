@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:index-entry-page-number>".
  */
 public abstract class OdfIndexEntryPageNumberElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3399353024013907498L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "index-entry-page-number" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "index-entry-page-number" );
 
     public OdfIndexEntryPageNumberElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Text, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -61,8 +57,7 @@ public abstract class OdfIndexEntryPageNumberElement extends OdfStylableElement
     /**
      * Get value of attribute "text:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -71,8 +66,7 @@ public abstract class OdfIndexEntryPageNumberElement extends OdfStylableElement
     /**
      * Set value of attribute "text:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );

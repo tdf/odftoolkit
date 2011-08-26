@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:user-index-source>".
  */
 public abstract class OdfUserIndexSourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4217835515723883195L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-index-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-index-source" );
 
     public OdfUserIndexSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -253,4 +249,37 @@ public abstract class OdfUserIndexSourceElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "index-name" ), _aIndexName );
     }
 
+    /**
+    * Create child element "text:index-title-template".
+    */
+    public OdfIndexTitleTemplateElement createIndexTitleTemplateElement()
+    {
+        OdfIndexTitleTemplateElement  _nIndexTitleTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexTitleTemplateElement.class);
+        this.appendChild( _nIndexTitleTemplate);
+        return  _nIndexTitleTemplate;
+    }                   
+               
+    /**
+    * Create child element "text:user-index-entry-template".
+    */
+    public OdfUserIndexEntryTemplateElement createUserIndexEntryTemplateElement(Integer   _aOutlineLevel, String   _aStyleName)
+    {
+        OdfUserIndexEntryTemplateElement  _nUserIndexEntryTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfUserIndexEntryTemplateElement.class);
+        _nUserIndexEntryTemplate.setOutlineLevel( _aOutlineLevel);
+        _nUserIndexEntryTemplate.setStyleName( _aStyleName);
+        this.appendChild( _nUserIndexEntryTemplate);
+        return  _nUserIndexEntryTemplate;      
+    }
+    
+    /**
+    * Create child element "text:index-source-styles".
+    */
+    public OdfIndexSourceStylesElement createIndexSourceStylesElement(Integer   _aOutlineLevel)
+    {
+        OdfIndexSourceStylesElement  _nIndexSourceStyles = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexSourceStylesElement.class);
+        _nIndexSourceStyles.setOutlineLevel( _aOutlineLevel);
+        this.appendChild( _nIndexSourceStyles);
+        return  _nIndexSourceStyles;      
+    }
+    
 }

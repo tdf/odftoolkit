@@ -36,25 +36,21 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.odftoolkit.odfdom.dom.type.OdfDate;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:modification-date>".
  */
 public abstract class OdfModificationDateElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2732470694812555774L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "modification-date" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "modification-date" );
 
     public OdfModificationDateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.text.OdfCaptionSequenceFormatType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:illustration-index-source>".
  */
 public abstract class OdfIllustrationIndexSourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4543793034039897642L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "illustration-index-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "illustration-index-source" );
 
     public OdfIllustrationIndexSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -162,4 +158,25 @@ public abstract class OdfIllustrationIndexSourceElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "caption-sequence-format" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:index-title-template".
+    */
+    public OdfIndexTitleTemplateElement createIndexTitleTemplateElement()
+    {
+        OdfIndexTitleTemplateElement  _nIndexTitleTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexTitleTemplateElement.class);
+        this.appendChild( _nIndexTitleTemplate);
+        return  _nIndexTitleTemplate;
+    }                   
+               
+    /**
+    * Create child element "text:illustration-index-entry-template".
+    */
+    public OdfIllustrationIndexEntryTemplateElement createIllustrationIndexEntryTemplateElement(String   _aStyleName)
+    {
+        OdfIllustrationIndexEntryTemplateElement  _nIllustrationIndexEntryTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIllustrationIndexEntryTemplateElement.class);
+        _nIllustrationIndexEntryTemplate.setStyleName( _aStyleName);
+        this.appendChild( _nIllustrationIndexEntryTemplate);
+        return  _nIllustrationIndexEntryTemplate;      
+    }
+    
 }

@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.text.OdfPageNumberSelectType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:page-number>".
  */
 public abstract class OdfPageNumberElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -733720894419782420L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-number" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-number" );
 
     public OdfPageNumberElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

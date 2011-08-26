@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfEventListenersElement;
 
 /**
  * ODF DOM Element implementation for element "<text:execute-macro>".
  */
 public abstract class OdfExecuteMacroElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3176012658427447495L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "execute-macro" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "execute-macro" );
 
     public OdfExecuteMacroElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -72,4 +68,14 @@ public abstract class OdfExecuteMacroElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "name" ), _aName );
     }
 
+    /**
+    * Create child element "office:event-listeners".
+    */
+    public OdfEventListenersElement createEventListenersElement()
+    {
+        OdfEventListenersElement  _nEventListeners = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfEventListenersElement.class);
+        this.appendChild( _nEventListeners);
+        return  _nEventListeners;
+    }                   
+               
 }

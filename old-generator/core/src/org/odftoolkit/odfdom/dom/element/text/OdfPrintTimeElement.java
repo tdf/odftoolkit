@@ -36,25 +36,21 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.odftoolkit.odfdom.dom.type.OdfDate;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:print-time>".
  */
 public abstract class OdfPrintTimeElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8079324839239812940L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "print-time" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "print-time" );
 
     public OdfPrintTimeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

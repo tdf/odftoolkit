@@ -32,28 +32,36 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:sequence-decls>".
  */
 public abstract class OdfSequenceDeclsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7947113455934177470L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sequence-decls" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sequence-decls" );
 
     public OdfSequenceDeclsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "text:sequence-decl".
+    */
+    public OdfSequenceDeclElement createSequenceDeclElement(String   _aName, Integer   _aDisplayOutlineLevel)
+    {
+        OdfSequenceDeclElement  _nSequenceDecl = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSequenceDeclElement.class);
+        _nSequenceDecl.setName( _aName);
+        _nSequenceDecl.setDisplayOutlineLevel( _aDisplayOutlineLevel);
+        this.appendChild( _nSequenceDecl);
+        return  _nSequenceDecl;      
+    }
+    
 }

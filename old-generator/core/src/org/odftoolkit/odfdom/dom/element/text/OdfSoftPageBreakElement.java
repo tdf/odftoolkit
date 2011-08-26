@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:soft-page-break>".
  */
 public abstract class OdfSoftPageBreakElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2371177339047275988L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "soft-page-break" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "soft-page-break" );
 
     public OdfSoftPageBreakElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

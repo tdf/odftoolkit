@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:table-of-content-source>".
  */
 public abstract class OdfTableOfContentSourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2777520307658642336L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-of-content-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-of-content-source" );
 
     public OdfTableOfContentSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -172,4 +168,37 @@ public abstract class OdfTableOfContentSourceElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "relative-tab-stop-position" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:index-title-template".
+    */
+    public OdfIndexTitleTemplateElement createIndexTitleTemplateElement()
+    {
+        OdfIndexTitleTemplateElement  _nIndexTitleTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexTitleTemplateElement.class);
+        this.appendChild( _nIndexTitleTemplate);
+        return  _nIndexTitleTemplate;
+    }                   
+               
+    /**
+    * Create child element "text:table-of-content-entry-template".
+    */
+    public OdfTableOfContentEntryTemplateElement createTableOfContentEntryTemplateElement(Integer   _aOutlineLevel, String   _aStyleName)
+    {
+        OdfTableOfContentEntryTemplateElement  _nTableOfContentEntryTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableOfContentEntryTemplateElement.class);
+        _nTableOfContentEntryTemplate.setOutlineLevel( _aOutlineLevel);
+        _nTableOfContentEntryTemplate.setStyleName( _aStyleName);
+        this.appendChild( _nTableOfContentEntryTemplate);
+        return  _nTableOfContentEntryTemplate;      
+    }
+    
+    /**
+    * Create child element "text:index-source-styles".
+    */
+    public OdfIndexSourceStylesElement createIndexSourceStylesElement(Integer   _aOutlineLevel)
+    {
+        OdfIndexSourceStylesElement  _nIndexSourceStyles = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexSourceStylesElement.class);
+        _nIndexSourceStyles.setOutlineLevel( _aOutlineLevel);
+        this.appendChild( _nIndexSourceStyles);
+        return  _nIndexSourceStyles;      
+    }
+    
 }

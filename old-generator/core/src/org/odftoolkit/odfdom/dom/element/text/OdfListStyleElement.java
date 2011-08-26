@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:list-style>".
  */
 public abstract class OdfListStyleElement extends OdfStyleBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -754831726388172400L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-style" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-style" );
 
     public OdfListStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -117,4 +113,51 @@ public abstract class OdfListStyleElement extends OdfStyleBase
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "consecutive-numbering" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:list-level-style-number".
+    */
+    public OdfListLevelStyleNumberElement createListLevelStyleNumberElement(Integer   _aLevel, String   _aNumFormat)
+    {
+        OdfListLevelStyleNumberElement  _nListLevelStyleNumber = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListLevelStyleNumberElement.class);
+        _nListLevelStyleNumber.setLevel( _aLevel);
+        _nListLevelStyleNumber.setNumFormat( _aNumFormat);
+        this.appendChild( _nListLevelStyleNumber);
+        return  _nListLevelStyleNumber;      
+    }
+    
+    /**
+    * Create child element "text:list-level-style-number".
+    */
+    public OdfListLevelStyleNumberElement createListLevelStyleNumberElement(String   _aNumFormat, Integer   _aLevel)
+    {
+        OdfListLevelStyleNumberElement  _nListLevelStyleNumber = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListLevelStyleNumberElement.class);
+        _nListLevelStyleNumber.setNumFormat( _aNumFormat);
+        _nListLevelStyleNumber.setLevel( _aLevel);
+        this.appendChild( _nListLevelStyleNumber);
+        return  _nListLevelStyleNumber;      
+    }
+    
+    /**
+    * Create child element "text:list-level-style-bullet".
+    */
+    public OdfListLevelStyleBulletElement createListLevelStyleBulletElement(Integer   _aLevel, String   _aBulletChar)
+    {
+        OdfListLevelStyleBulletElement  _nListLevelStyleBullet = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListLevelStyleBulletElement.class);
+        _nListLevelStyleBullet.setLevel( _aLevel);
+        _nListLevelStyleBullet.setBulletChar( _aBulletChar);
+        this.appendChild( _nListLevelStyleBullet);
+        return  _nListLevelStyleBullet;      
+    }
+    
+    /**
+    * Create child element "text:list-level-style-image".
+    */
+    public OdfListLevelStyleImageElement createListLevelStyleImageElement(Integer   _aLevel)
+    {
+        OdfListLevelStyleImageElement  _nListLevelStyleImage = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListLevelStyleImageElement.class);
+        _nListLevelStyleImage.setLevel( _aLevel);
+        this.appendChild( _nListLevelStyleImage);
+        return  _nListLevelStyleImage;      
+    }
+    
 }

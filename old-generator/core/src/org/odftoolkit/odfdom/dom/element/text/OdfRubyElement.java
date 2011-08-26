@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:ruby>".
  */
 public abstract class OdfRubyElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2076797347862742401L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "ruby" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "ruby" );
 
     public OdfRubyElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Ruby, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -61,8 +57,7 @@ public abstract class OdfRubyElement extends OdfStylableElement
     /**
      * Get value of attribute "text:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -71,11 +66,30 @@ public abstract class OdfRubyElement extends OdfStylableElement
     /**
      * Set value of attribute "text:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:ruby-base".
+    */
+    public OdfRubyBaseElement createRubyBaseElement()
+    {
+        OdfRubyBaseElement  _nRubyBase = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRubyBaseElement.class);
+        this.appendChild( _nRubyBase);
+        return  _nRubyBase;
+    }                   
+               
+    /**
+    * Create child element "text:ruby-text".
+    */
+    public OdfRubyTextElement createRubyTextElement()
+    {
+        OdfRubyTextElement  _nRubyText = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfRubyTextElement.class);
+        this.appendChild( _nRubyText);
+        return  _nRubyText;
+    }                   
+               
 }

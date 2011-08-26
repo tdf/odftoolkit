@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:changed-region>".
  */
 public abstract class OdfChangedRegionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4646341569106688340L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "changed-region" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "changed-region" );
 
     public OdfChangedRegionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -99,4 +95,34 @@ public abstract class OdfChangedRegionElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:insertion".
+    */
+    public OdfInsertionElement createInsertionElement()
+    {
+        OdfInsertionElement  _nInsertion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfInsertionElement.class);
+        this.appendChild( _nInsertion);
+        return  _nInsertion;
+    }                   
+               
+    /**
+    * Create child element "text:deletion".
+    */
+    public OdfDeletionElement createDeletionElement()
+    {
+        OdfDeletionElement  _nDeletion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDeletionElement.class);
+        this.appendChild( _nDeletion);
+        return  _nDeletion;
+    }                   
+               
+    /**
+    * Create child element "text:format-change".
+    */
+    public OdfFormatChangeElement createFormatChangeElement()
+    {
+        OdfFormatChangeElement  _nFormatChange = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfFormatChangeElement.class);
+        this.appendChild( _nFormatChange);
+        return  _nFormatChange;
+    }                   
+               
 }

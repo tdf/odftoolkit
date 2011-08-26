@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+import org.odftoolkit.odfdom.dom.type.text.OdfOutlineLevelType;
 
 /**
  * ODF DOM Element implementation for element "<text:alphabetical-index-source>".
  */
 public abstract class OdfAlphabeticalIndexSourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4251162583388638919L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "alphabetical-index-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "alphabetical-index-source" );
 
     public OdfAlphabeticalIndexSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -357,4 +353,26 @@ public abstract class OdfAlphabeticalIndexSourceElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "sort-algorithm" ), _aSortAlgorithm );
     }
 
+    /**
+    * Create child element "text:index-title-template".
+    */
+    public OdfIndexTitleTemplateElement createIndexTitleTemplateElement()
+    {
+        OdfIndexTitleTemplateElement  _nIndexTitleTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexTitleTemplateElement.class);
+        this.appendChild( _nIndexTitleTemplate);
+        return  _nIndexTitleTemplate;
+    }                   
+               
+    /**
+    * Create child element "text:alphabetical-index-entry-template".
+    */
+    public OdfAlphabeticalIndexEntryTemplateElement createAlphabeticalIndexEntryTemplateElement(OdfOutlineLevelType   _aOutlineLevel, String   _aStyleName)
+    {
+        OdfAlphabeticalIndexEntryTemplateElement  _nAlphabeticalIndexEntryTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAlphabeticalIndexEntryTemplateElement.class);
+        _nAlphabeticalIndexEntryTemplate.setOutlineLevel( _aOutlineLevel);
+        _nAlphabeticalIndexEntryTemplate.setStyleName( _aStyleName);
+        this.appendChild( _nAlphabeticalIndexEntryTemplate);
+        return  _nAlphabeticalIndexEntryTemplate;      
+    }
+    
 }

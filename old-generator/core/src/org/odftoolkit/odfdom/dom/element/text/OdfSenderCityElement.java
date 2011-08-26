@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:sender-city>".
  */
 public abstract class OdfSenderCityElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6244755586768508056L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sender-city" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sender-city" );
 
     public OdfSenderCityElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

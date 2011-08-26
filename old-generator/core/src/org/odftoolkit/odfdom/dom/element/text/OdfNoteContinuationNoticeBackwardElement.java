@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:note-continuation-notice-backward>".
  */
 public abstract class OdfNoteContinuationNoticeBackwardElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5331959182536304121L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "note-continuation-notice-backward" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "note-continuation-notice-backward" );
 
     public OdfNoteContinuationNoticeBackwardElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

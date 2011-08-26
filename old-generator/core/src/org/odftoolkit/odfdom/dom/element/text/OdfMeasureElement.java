@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfKindType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:measure>".
  */
 public abstract class OdfMeasureElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3768810327286681957L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "measure" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "measure" );
 
     public OdfMeasureElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

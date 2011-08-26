@@ -38,25 +38,21 @@ import javax.xml.datatype.Duration;
 import org.odftoolkit.odfdom.dom.type.OdfDuration;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:user-field-decl>".
  */
 public abstract class OdfUserFieldDeclElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2159254255056608489L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-field-decl" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-field-decl" );
 
     public OdfUserFieldDeclElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

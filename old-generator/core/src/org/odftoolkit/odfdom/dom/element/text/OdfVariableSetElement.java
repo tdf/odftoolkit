@@ -40,25 +40,21 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.text.OdfValueNoneDisplayType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:variable-set>".
  */
 public abstract class OdfVariableSetElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6164444486204199664L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-set" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-set" );
 
     public OdfVariableSetElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

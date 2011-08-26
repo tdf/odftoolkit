@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:sender-position>".
  */
 public abstract class OdfSenderPositionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1901325441639677583L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sender-position" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sender-position" );
 
     public OdfSenderPositionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

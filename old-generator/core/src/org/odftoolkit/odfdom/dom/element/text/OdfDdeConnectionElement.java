@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:dde-connection>".
  */
 public abstract class OdfDdeConnectionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4260436922425088527L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "dde-connection" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "dde-connection" );
 
     public OdfDdeConnectionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -35,25 +35,22 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+import org.odftoolkit.odfdom.dom.type.style.OdfIndexTabStopType;
+import org.odftoolkit.odfdom.dom.type.style.OdfIndexTabStopType;
 
 /**
  * ODF DOM Element implementation for element "<text:user-index-entry-template>".
  */
 public abstract class OdfUserIndexEntryTemplateElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8642469801576633118L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-index-entry-template" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-index-entry-template" );
 
     public OdfUserIndexEntryTemplateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Paragraph, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -88,8 +85,7 @@ public abstract class OdfUserIndexEntryTemplateElement extends OdfStylableElemen
     /**
      * Get value of attribute "text:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -98,11 +94,73 @@ public abstract class OdfUserIndexEntryTemplateElement extends OdfStylableElemen
     /**
      * Set value of attribute "text:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:index-entry-chapter".
+    */
+    public OdfIndexEntryChapterElement createIndexEntryChapterElement()
+    {
+        OdfIndexEntryChapterElement  _nIndexEntryChapter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryChapterElement.class);
+        this.appendChild( _nIndexEntryChapter);
+        return  _nIndexEntryChapter;
+    }                   
+               
+    /**
+    * Create child element "text:index-entry-page-number".
+    */
+    public OdfIndexEntryPageNumberElement createIndexEntryPageNumberElement()
+    {
+        OdfIndexEntryPageNumberElement  _nIndexEntryPageNumber = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryPageNumberElement.class);
+        this.appendChild( _nIndexEntryPageNumber);
+        return  _nIndexEntryPageNumber;
+    }                   
+               
+    /**
+    * Create child element "text:index-entry-text".
+    */
+    public OdfIndexEntryTextElement createIndexEntryTextElement()
+    {
+        OdfIndexEntryTextElement  _nIndexEntryText = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryTextElement.class);
+        this.appendChild( _nIndexEntryText);
+        return  _nIndexEntryText;
+    }                   
+               
+    /**
+    * Create child element "text:index-entry-span".
+    */
+    public OdfIndexEntrySpanElement createIndexEntrySpanElement()
+    {
+        OdfIndexEntrySpanElement  _nIndexEntrySpan = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntrySpanElement.class);
+        this.appendChild( _nIndexEntrySpan);
+        return  _nIndexEntrySpan;
+    }                   
+               
+    /**
+    * Create child element "text:index-entry-tab-stop".
+    */
+    public OdfIndexEntryTabStopElement createIndexEntryTabStopElement(OdfIndexTabStopType   _aType)
+    {
+        OdfIndexEntryTabStopElement  _nIndexEntryTabStop = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryTabStopElement.class);
+        _nIndexEntryTabStop.setType( _aType);
+        this.appendChild( _nIndexEntryTabStop);
+        return  _nIndexEntryTabStop;      
+    }
+    
+    /**
+    * Create child element "text:index-entry-tab-stop".
+    */
+    public OdfIndexEntryTabStopElement createIndexEntryTabStopElement(OdfIndexTabStopType   _aType, String   _aPosition)
+    {
+        OdfIndexEntryTabStopElement  _nIndexEntryTabStop = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryTabStopElement.class);
+        _nIndexEntryTabStop.setType( _aType);
+        _nIndexEntryTabStop.setPosition( _aPosition);
+        this.appendChild( _nIndexEntryTabStop);
+        return  _nIndexEntryTabStop;      
+    }
+    
 }

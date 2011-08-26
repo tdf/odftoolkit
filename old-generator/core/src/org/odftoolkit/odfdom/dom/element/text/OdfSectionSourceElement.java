@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:section-source>".
  */
 public abstract class OdfSectionSourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7525190097774783012L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "section-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "section-source" );
 
     public OdfSectionSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

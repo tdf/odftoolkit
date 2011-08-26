@@ -34,25 +34,22 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 
+import org.odftoolkit.odfdom.dom.element.style.OdfListLevelPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfTextPropertiesElement;
 
 /**
  * ODF DOM Element implementation for element "<text:list-level-style-number>".
  */
 public abstract class OdfListLevelStyleNumberElement extends OdfListLevelStyleElementBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6579831970338189444L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-level-style-number" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-level-style-number" );
 
     public OdfListLevelStyleNumberElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -196,4 +193,34 @@ public abstract class OdfListLevelStyleNumberElement extends OdfListLevelStyleEl
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "start-value" ), aStringVal );
     }
 
+    /**
+    * Create child element "style:list-level-properties".
+    */
+    public OdfListLevelPropertiesElement createListLevelPropertiesElement()
+    {
+        OdfListLevelPropertiesElement  _nListLevelProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListLevelPropertiesElement.class);
+        this.appendChild( _nListLevelProperties);
+        return  _nListLevelProperties;
+    }                   
+               
+    /**
+    * Create child element "style:text-properties".
+    */
+    public OdfTextPropertiesElement createTextPropertiesElement(String   _aDisplay)
+    {
+        OdfTextPropertiesElement  _nTextProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextPropertiesElement.class);
+        this.appendChild( _nTextProperties);
+        return  _nTextProperties;      
+    }
+    
+    /**
+    * Create child element "style:text-properties".
+    */
+    public OdfTextPropertiesElement createTextPropertiesElement(String   _aDisplay, String   _aCondition)
+    {
+        OdfTextPropertiesElement  _nTextProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTextPropertiesElement.class);
+        this.appendChild( _nTextProperties);
+        return  _nTextProperties;      
+    }
+    
 }

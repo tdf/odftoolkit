@@ -35,25 +35,22 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+import org.odftoolkit.odfdom.dom.type.style.OdfIndexTabStopType;
+import org.odftoolkit.odfdom.dom.type.style.OdfIndexTabStopType;
 
 /**
  * ODF DOM Element implementation for element "<text:table-of-content-entry-template>".
  */
 public abstract class OdfTableOfContentEntryTemplateElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2024051243387100870L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-of-content-entry-template" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-of-content-entry-template" );
 
     public OdfTableOfContentEntryTemplateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Paragraph, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -88,8 +85,7 @@ public abstract class OdfTableOfContentEntryTemplateElement extends OdfStylableE
     /**
      * Get value of attribute "text:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -98,11 +94,93 @@ public abstract class OdfTableOfContentEntryTemplateElement extends OdfStylableE
     /**
      * Set value of attribute "text:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:index-entry-chapter".
+    */
+    public OdfIndexEntryChapterElement createIndexEntryChapterElement()
+    {
+        OdfIndexEntryChapterElement  _nIndexEntryChapter = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryChapterElement.class);
+        this.appendChild( _nIndexEntryChapter);
+        return  _nIndexEntryChapter;
+    }                   
+               
+    /**
+    * Create child element "text:index-entry-page-number".
+    */
+    public OdfIndexEntryPageNumberElement createIndexEntryPageNumberElement()
+    {
+        OdfIndexEntryPageNumberElement  _nIndexEntryPageNumber = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryPageNumberElement.class);
+        this.appendChild( _nIndexEntryPageNumber);
+        return  _nIndexEntryPageNumber;
+    }                   
+               
+    /**
+    * Create child element "text:index-entry-text".
+    */
+    public OdfIndexEntryTextElement createIndexEntryTextElement()
+    {
+        OdfIndexEntryTextElement  _nIndexEntryText = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryTextElement.class);
+        this.appendChild( _nIndexEntryText);
+        return  _nIndexEntryText;
+    }                   
+               
+    /**
+    * Create child element "text:index-entry-span".
+    */
+    public OdfIndexEntrySpanElement createIndexEntrySpanElement()
+    {
+        OdfIndexEntrySpanElement  _nIndexEntrySpan = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntrySpanElement.class);
+        this.appendChild( _nIndexEntrySpan);
+        return  _nIndexEntrySpan;
+    }                   
+               
+    /**
+    * Create child element "text:index-entry-tab-stop".
+    */
+    public OdfIndexEntryTabStopElement createIndexEntryTabStopElement(OdfIndexTabStopType   _aType)
+    {
+        OdfIndexEntryTabStopElement  _nIndexEntryTabStop = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryTabStopElement.class);
+        _nIndexEntryTabStop.setType( _aType);
+        this.appendChild( _nIndexEntryTabStop);
+        return  _nIndexEntryTabStop;      
+    }
+    
+    /**
+    * Create child element "text:index-entry-tab-stop".
+    */
+    public OdfIndexEntryTabStopElement createIndexEntryTabStopElement(OdfIndexTabStopType   _aType, String   _aPosition)
+    {
+        OdfIndexEntryTabStopElement  _nIndexEntryTabStop = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryTabStopElement.class);
+        _nIndexEntryTabStop.setType( _aType);
+        _nIndexEntryTabStop.setPosition( _aPosition);
+        this.appendChild( _nIndexEntryTabStop);
+        return  _nIndexEntryTabStop;      
+    }
+    
+    /**
+    * Create child element "text:index-entry-link-start".
+    */
+    public OdfIndexEntryLinkStartElement createIndexEntryLinkStartElement()
+    {
+        OdfIndexEntryLinkStartElement  _nIndexEntryLinkStart = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryLinkStartElement.class);
+        this.appendChild( _nIndexEntryLinkStart);
+        return  _nIndexEntryLinkStart;
+    }                   
+               
+    /**
+    * Create child element "text:index-entry-link-end".
+    */
+    public OdfIndexEntryLinkEndElement createIndexEntryLinkEndElement()
+    {
+        OdfIndexEntryLinkEndElement  _nIndexEntryLinkEnd = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryLinkEndElement.class);
+        this.appendChild( _nIndexEntryLinkEnd);
+        return  _nIndexEntryLinkEnd;
+    }                   
+               
 }

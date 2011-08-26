@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfTableType;
 
+import org.odftoolkit.odfdom.dom.element.form.OdfConnectionResourceElement;
 
 /**
  * ODF DOM Element implementation for element "<text:database-next>".
  */
 public abstract class OdfDatabaseNextElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4242796232055941863L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "database-next" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "database-next" );
 
     public OdfDatabaseNextElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -130,4 +126,15 @@ public abstract class OdfDatabaseNextElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "condition" ), _aCondition );
     }
 
+    /**
+    * Create child element "form:connection-resource".
+    */
+    public OdfConnectionResourceElement createConnectionResourceElement(String   _aHref)
+    {
+        OdfConnectionResourceElement  _nConnectionResource = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConnectionResourceElement.class);
+        _nConnectionResource.setHref( _aHref);
+        this.appendChild( _nConnectionResource);
+        return  _nConnectionResource;      
+    }
+    
 }

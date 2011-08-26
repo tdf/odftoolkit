@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:change>".
  */
 public abstract class OdfChangeElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4420942725932265292L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "change" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "change" );
 
     public OdfChangeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfSequenceReferenceFormatType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:sequence-ref>".
  */
 public abstract class OdfSequenceRefElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3194536011463622865L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sequence-ref" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sequence-ref" );
 
     public OdfSequenceRefElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

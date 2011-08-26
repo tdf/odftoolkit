@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfPlaceholderType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:placeholder>".
  */
 public abstract class OdfPlaceholderElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5490159645934130619L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "placeholder" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "placeholder" );
 
     public OdfPlaceholderElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

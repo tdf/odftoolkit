@@ -37,25 +37,21 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:alphabetical-index>".
  */
 public abstract class OdfAlphabeticalIndexElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8052728460209384784L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "alphabetical-index" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "alphabetical-index" );
 
     public OdfAlphabeticalIndexElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Section, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -71,8 +67,7 @@ public abstract class OdfAlphabeticalIndexElement extends OdfStylableElement
     /**
      * Get value of attribute "text:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -81,8 +76,7 @@ public abstract class OdfAlphabeticalIndexElement extends OdfStylableElement
     /**
      * Set value of attribute "text:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );
@@ -179,4 +173,24 @@ public abstract class OdfAlphabeticalIndexElement extends OdfStylableElement
         setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:alphabetical-index-source".
+    */
+    public OdfAlphabeticalIndexSourceElement createAlphabeticalIndexSourceElement()
+    {
+        OdfAlphabeticalIndexSourceElement  _nAlphabeticalIndexSource = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfAlphabeticalIndexSourceElement.class);
+        this.appendChild( _nAlphabeticalIndexSource);
+        return  _nAlphabeticalIndexSource;
+    }                   
+               
+    /**
+    * Create child element "text:index-body".
+    */
+    public OdfIndexBodyElement createIndexBodyElement()
+    {
+        OdfIndexBodyElement  _nIndexBody = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexBodyElement.class);
+        this.appendChild( _nIndexBody);
+        return  _nIndexBody;
+    }                   
+               
 }

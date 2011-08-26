@@ -35,25 +35,23 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfBibliographyType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+import org.odftoolkit.odfdom.dom.type.style.OdfIndexTabStopType;
+import org.odftoolkit.odfdom.dom.type.style.OdfIndexTabStopType;
+import org.odftoolkit.odfdom.dom.type.text.OdfBibliographyDataFieldType;
 
 /**
  * ODF DOM Element implementation for element "<text:bibliography-entry-template>".
  */
 public abstract class OdfBibliographyEntryTemplateElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8533811095783391955L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bibliography-entry-template" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bibliography-entry-template" );
 
     public OdfBibliographyEntryTemplateElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Paragraph, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -88,8 +86,7 @@ public abstract class OdfBibliographyEntryTemplateElement extends OdfStylableEle
     /**
      * Get value of attribute "text:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -98,11 +95,54 @@ public abstract class OdfBibliographyEntryTemplateElement extends OdfStylableEle
     /**
      * Set value of attribute "text:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:index-entry-span".
+    */
+    public OdfIndexEntrySpanElement createIndexEntrySpanElement()
+    {
+        OdfIndexEntrySpanElement  _nIndexEntrySpan = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntrySpanElement.class);
+        this.appendChild( _nIndexEntrySpan);
+        return  _nIndexEntrySpan;
+    }                   
+               
+    /**
+    * Create child element "text:index-entry-tab-stop".
+    */
+    public OdfIndexEntryTabStopElement createIndexEntryTabStopElement(OdfIndexTabStopType   _aType)
+    {
+        OdfIndexEntryTabStopElement  _nIndexEntryTabStop = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryTabStopElement.class);
+        _nIndexEntryTabStop.setType( _aType);
+        this.appendChild( _nIndexEntryTabStop);
+        return  _nIndexEntryTabStop;      
+    }
+    
+    /**
+    * Create child element "text:index-entry-tab-stop".
+    */
+    public OdfIndexEntryTabStopElement createIndexEntryTabStopElement(OdfIndexTabStopType   _aType, String   _aPosition)
+    {
+        OdfIndexEntryTabStopElement  _nIndexEntryTabStop = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryTabStopElement.class);
+        _nIndexEntryTabStop.setType( _aType);
+        _nIndexEntryTabStop.setPosition( _aPosition);
+        this.appendChild( _nIndexEntryTabStop);
+        return  _nIndexEntryTabStop;      
+    }
+    
+    /**
+    * Create child element "text:index-entry-bibliography".
+    */
+    public OdfIndexEntryBibliographyElement createIndexEntryBibliographyElement(OdfBibliographyDataFieldType   _aBibliographyDataField)
+    {
+        OdfIndexEntryBibliographyElement  _nIndexEntryBibliography = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexEntryBibliographyElement.class);
+        _nIndexEntryBibliography.setBibliographyDataField( _aBibliographyDataField);
+        this.appendChild( _nIndexEntryBibliography);
+        return  _nIndexEntryBibliography;      
+    }
+    
 }

@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfTemplateNameDisplayType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:template-name>".
  */
 public abstract class OdfTemplateNameElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4524125961444494781L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "template-name" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "template-name" );
 
     public OdfTemplateNameElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

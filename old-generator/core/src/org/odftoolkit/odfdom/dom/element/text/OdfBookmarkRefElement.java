@@ -31,27 +31,23 @@ import org.odftoolkit.odfdom.dom.OdfName;
 import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
-import org.odftoolkit.odfdom.dom.type.text.OdfReferenceFormatType;
+import org.odftoolkit.odfdom.dom.type.text.OdfBookmarkReferenceFormatType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:bookmark-ref>".
  */
 public abstract class OdfBookmarkRefElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3260216685699754602L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bookmark-ref" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bookmark-ref" );
 
     public OdfBookmarkRefElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -76,18 +72,18 @@ public abstract class OdfBookmarkRefElement extends OdfElement
     /**
      * Get value of attribute "text:reference-format".
      */
-    public OdfReferenceFormatType getReferenceFormat()
+    public OdfBookmarkReferenceFormatType getReferenceFormat()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "reference-format" ) );
-        return OdfReferenceFormatType.enumValueOf( aStringVal);
+        return OdfBookmarkReferenceFormatType.enumValueOf( aStringVal);
     }
 
     /**
      * Set value of attribute "text:reference-format".
      */
-    public void setReferenceFormat( OdfReferenceFormatType _aReferenceFormat )
+    public void setReferenceFormat( OdfBookmarkReferenceFormatType _aReferenceFormat )
     {                    
-        String aStringVal = OdfReferenceFormatType.toString( _aReferenceFormat );
+        String aStringVal = OdfBookmarkReferenceFormatType.toString( _aReferenceFormat );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "reference-format" ), aStringVal );
     }
 

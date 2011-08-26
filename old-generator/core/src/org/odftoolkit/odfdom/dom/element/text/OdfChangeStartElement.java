@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:change-start>".
  */
 public abstract class OdfChangeStartElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8971196535136759272L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "change-start" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "change-start" );
 
     public OdfChangeStartElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfNoteClassType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:note>".
  */
 public abstract class OdfNoteElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -9002930192862945447L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "note" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "note" );
 
     public OdfNoteElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -98,4 +94,24 @@ public abstract class OdfNoteElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "id" ), _aId );
     }
 
+    /**
+    * Create child element "text:note-citation".
+    */
+    public OdfNoteCitationElement createNoteCitationElement()
+    {
+        OdfNoteCitationElement  _nNoteCitation = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNoteCitationElement.class);
+        this.appendChild( _nNoteCitation);
+        return  _nNoteCitation;
+    }                   
+               
+    /**
+    * Create child element "text:note-body".
+    */
+    public OdfNoteBodyElement createNoteBodyElement()
+    {
+        OdfNoteBodyElement  _nNoteBody = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNoteBodyElement.class);
+        this.appendChild( _nNoteBody);
+        return  _nNoteBody;
+    }                   
+               
 }

@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfFileNameDisplayType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:file-name>".
  */
 public abstract class OdfFileNameElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4311178232562835742L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "file-name" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "file-name" );
 
     public OdfFileNameElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

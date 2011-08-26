@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:list>".
  */
 public abstract class OdfListElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 9101128502861220455L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list" );
 
     public OdfListElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -131,4 +127,24 @@ public abstract class OdfListElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:list-header".
+    */
+    public OdfListHeaderElement createListHeaderElement()
+    {
+        OdfListHeaderElement  _nListHeader = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListHeaderElement.class);
+        this.appendChild( _nListHeader);
+        return  _nListHeader;
+    }                   
+               
+    /**
+    * Create child element "text:list-item".
+    */
+    public OdfListItemElement createListItemElement()
+    {
+        OdfListItemElement  _nListItem = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListItemElement.class);
+        this.appendChild( _nListItem);
+        return  _nListItem;
+    }                   
+               
 }

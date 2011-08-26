@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.office.OdfValueType;
 import org.odftoolkit.odfdom.dom.type.text.OdfValueNoneDisplayType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:variable-input>".
  */
 public abstract class OdfVariableInputElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6367309005775256626L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-input" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-input" );
 
     public OdfVariableInputElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfValueFormulaDisplayType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:variable-get>".
  */
 public abstract class OdfVariableGetElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4306984784710459388L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-get" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-get" );
 
     public OdfVariableGetElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

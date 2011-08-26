@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:toc-mark-end>".
  */
 public abstract class OdfTocMarkEndElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4973393610114144840L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "toc-mark-end" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "toc-mark-end" );
 
     public OdfTocMarkEndElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

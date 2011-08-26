@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:sender-phone-work>".
  */
 public abstract class OdfSenderPhoneWorkElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2309936226495458944L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sender-phone-work" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "sender-phone-work" );
 
     public OdfSenderPhoneWorkElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

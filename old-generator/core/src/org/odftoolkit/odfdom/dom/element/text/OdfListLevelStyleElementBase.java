@@ -37,12 +37,7 @@ import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
  */
 public abstract class OdfListLevelStyleElementBase extends OdfStyleBase
 {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8479052759877731058L;
-
-	public OdfListLevelStyleElementBase( OdfFileDom _aOwnerDoc, OdfName element_name )
+    public OdfListLevelStyleElementBase( OdfFileDom _aOwnerDoc, OdfName element_name )
     {
         super( _aOwnerDoc, element_name );
     }

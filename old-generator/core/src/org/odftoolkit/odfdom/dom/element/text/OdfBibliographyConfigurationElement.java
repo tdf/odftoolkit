@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+import org.odftoolkit.odfdom.dom.type.text.OdfKeyType;
 
 /**
  * ODF DOM Element implementation for element "<text:bibliography-configuration>".
  */
 public abstract class OdfBibliographyConfigurationElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 983736190111519816L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bibliography-configuration" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bibliography-configuration" );
 
     public OdfBibliographyConfigurationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -210,4 +206,15 @@ public abstract class OdfBibliographyConfigurationElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "sort-algorithm" ), _aSortAlgorithm );
     }
 
+    /**
+    * Create child element "text:sort-key".
+    */
+    public OdfSortKeyElement createSortKeyElement(OdfKeyType   _aKey)
+    {
+        OdfSortKeyElement  _nSortKey = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSortKeyElement.class);
+        _nSortKey.setKey( _aKey);
+        this.appendChild( _nSortKey);
+        return  _nSortKey;      
+    }
+    
 }

@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfTableType;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 
+import org.odftoolkit.odfdom.dom.element.form.OdfConnectionResourceElement;
 
 /**
  * ODF DOM Element implementation for element "<text:database-row-select>".
  */
 public abstract class OdfDatabaseRowSelectElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5573192537377951329L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "database-row-select" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "database-row-select" );
 
     public OdfDatabaseRowSelectElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -149,4 +145,15 @@ public abstract class OdfDatabaseRowSelectElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "row-number" ), aStringVal );
     }
 
+    /**
+    * Create child element "form:connection-resource".
+    */
+    public OdfConnectionResourceElement createConnectionResourceElement(String   _aHref)
+    {
+        OdfConnectionResourceElement  _nConnectionResource = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfConnectionResourceElement.class);
+        _nConnectionResource.setHref( _aHref);
+        this.appendChild( _nConnectionResource);
+        return  _nConnectionResource;      
+    }
+    
 }

@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:author-name>".
  */
 public abstract class OdfAuthorNameElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2327564808523999403L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "author-name" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "author-name" );
 
     public OdfAuthorNameElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.office.OdfValueType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:variable-decl>".
  */
 public abstract class OdfVariableDeclElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7090397525837319338L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-decl" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "variable-decl" );
 
     public OdfVariableDeclElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

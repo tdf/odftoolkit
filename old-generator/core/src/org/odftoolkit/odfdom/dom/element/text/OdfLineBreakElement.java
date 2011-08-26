@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:line-break>".
  */
 public abstract class OdfLineBreakElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6779432851572210976L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "line-break" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "line-break" );
 
     public OdfLineBreakElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:tracked-changes>".
  */
 public abstract class OdfTrackedChangesElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5478267779947630035L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "tracked-changes" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "tracked-changes" );
 
     public OdfTrackedChangesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -80,4 +76,14 @@ public abstract class OdfTrackedChangesElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "track-changes" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:changed-region".
+    */
+    public OdfChangedRegionElement createChangedRegionElement()
+    {
+        OdfChangedRegionElement  _nChangedRegion = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfChangedRegionElement.class);
+        this.appendChild( _nChangedRegion);
+        return  _nChangedRegion;
+    }                   
+               
 }

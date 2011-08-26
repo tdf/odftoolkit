@@ -36,25 +36,21 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.odftoolkit.odfdom.dom.type.OdfDate;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:creation-time>".
  */
 public abstract class OdfCreationTimeElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7835395032750165397L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "creation-time" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "creation-time" );
 
     public OdfCreationTimeElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

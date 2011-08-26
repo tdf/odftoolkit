@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:bookmark>".
  */
 public abstract class OdfBookmarkElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7579227474608133527L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bookmark" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bookmark" );
 
     public OdfBookmarkElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

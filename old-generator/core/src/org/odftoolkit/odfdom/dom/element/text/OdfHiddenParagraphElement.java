@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:hidden-paragraph>".
  */
 public abstract class OdfHiddenParagraphElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7768101820020189579L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "hidden-paragraph" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "hidden-paragraph" );
 
     public OdfHiddenParagraphElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

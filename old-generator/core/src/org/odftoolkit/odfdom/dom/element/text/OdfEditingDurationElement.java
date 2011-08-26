@@ -36,25 +36,21 @@ import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import javax.xml.datatype.Duration;
 import org.odftoolkit.odfdom.dom.type.OdfDuration;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:editing-duration>".
  */
 public abstract class OdfEditingDurationElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4534649844258053589L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "editing-duration" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "editing-duration" );
 
     public OdfEditingDurationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

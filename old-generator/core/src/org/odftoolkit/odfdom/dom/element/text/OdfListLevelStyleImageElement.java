@@ -32,25 +32,22 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfBinaryDataElement;
+import org.odftoolkit.odfdom.dom.element.style.OdfListLevelPropertiesElement;
 
 /**
  * ODF DOM Element implementation for element "<text:list-level-style-image>".
  */
 public abstract class OdfListLevelStyleImageElement extends OdfListLevelStyleElementBase
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4646982772586992017L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-level-style-image" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-level-style-image" );
 
     public OdfListLevelStyleImageElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -85,4 +82,24 @@ public abstract class OdfListLevelStyleImageElement extends OdfListLevelStyleEle
         setOdfAttribute( OdfName.get( OdfNamespace.XLINK, "actuate" ), "onLoad" );
     }
 
+    /**
+    * Create child element "office:binary-data".
+    */
+    public OdfBinaryDataElement createBinaryDataElement()
+    {
+        OdfBinaryDataElement  _nBinaryData = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBinaryDataElement.class);
+        this.appendChild( _nBinaryData);
+        return  _nBinaryData;
+    }                   
+               
+    /**
+    * Create child element "style:list-level-properties".
+    */
+    public OdfListLevelPropertiesElement createListLevelPropertiesElement()
+    {
+        OdfListLevelPropertiesElement  _nListLevelProperties = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListLevelPropertiesElement.class);
+        this.appendChild( _nListLevelProperties);
+        return  _nListLevelProperties;
+    }                   
+               
 }

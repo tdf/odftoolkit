@@ -32,28 +32,46 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.type.text.OdfBibliographyType;
 
 /**
  * ODF DOM Element implementation for element "<text:bibliography-source>".
  */
 public abstract class OdfBibliographySourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4577966097372299192L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bibliography-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "bibliography-source" );
 
     public OdfBibliographySourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "text:index-title-template".
+    */
+    public OdfIndexTitleTemplateElement createIndexTitleTemplateElement()
+    {
+        OdfIndexTitleTemplateElement  _nIndexTitleTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexTitleTemplateElement.class);
+        this.appendChild( _nIndexTitleTemplate);
+        return  _nIndexTitleTemplate;
+    }                   
+               
+    /**
+    * Create child element "text:bibliography-entry-template".
+    */
+    public OdfBibliographyEntryTemplateElement createBibliographyEntryTemplateElement(OdfBibliographyType   _aBibliographyType, String   _aStyleName)
+    {
+        OdfBibliographyEntryTemplateElement  _nBibliographyEntryTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfBibliographyEntryTemplateElement.class);
+        _nBibliographyEntryTemplate.setBibliographyType( _aBibliographyType);
+        _nBibliographyEntryTemplate.setStyleName( _aStyleName);
+        this.appendChild( _nBibliographyEntryTemplate);
+        return  _nBibliographyEntryTemplate;      
+    }
+    
 }

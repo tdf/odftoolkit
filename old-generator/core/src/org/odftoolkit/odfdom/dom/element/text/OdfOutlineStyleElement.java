@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:outline-style>".
  */
 public abstract class OdfOutlineStyleElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1284419782918524756L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "outline-style" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "outline-style" );
 
     public OdfOutlineStyleElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -82,4 +78,28 @@ public abstract class OdfOutlineStyleElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.STYLE, "name" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:outline-level-style".
+    */
+    public OdfOutlineLevelStyleElement createOutlineLevelStyleElement(Integer   _aLevel, String   _aNumFormat)
+    {
+        OdfOutlineLevelStyleElement  _nOutlineLevelStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfOutlineLevelStyleElement.class);
+        _nOutlineLevelStyle.setLevel( _aLevel);
+        _nOutlineLevelStyle.setNumFormat( _aNumFormat);
+        this.appendChild( _nOutlineLevelStyle);
+        return  _nOutlineLevelStyle;      
+    }
+    
+    /**
+    * Create child element "text:outline-level-style".
+    */
+    public OdfOutlineLevelStyleElement createOutlineLevelStyleElement(String   _aNumFormat, Integer   _aLevel)
+    {
+        OdfOutlineLevelStyleElement  _nOutlineLevelStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfOutlineLevelStyleElement.class);
+        _nOutlineLevelStyle.setNumFormat( _aNumFormat);
+        _nOutlineLevelStyle.setLevel( _aLevel);
+        this.appendChild( _nOutlineLevelStyle);
+        return  _nOutlineLevelStyle;      
+    }
+    
 }

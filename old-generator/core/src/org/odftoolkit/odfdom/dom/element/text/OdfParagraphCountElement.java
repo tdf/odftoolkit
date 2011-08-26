@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:paragraph-count>".
  */
 public abstract class OdfParagraphCountElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7257648306211688218L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "paragraph-count" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "paragraph-count" );
 
     public OdfParagraphCountElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

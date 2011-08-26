@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:page-variable-set>".
  */
 public abstract class OdfPageVariableSetElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6031723268953038241L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-variable-set" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-variable-set" );
 
     public OdfPageVariableSetElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

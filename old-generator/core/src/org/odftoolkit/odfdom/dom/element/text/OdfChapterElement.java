@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfChapterDisplayType;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:chapter>".
  */
 public abstract class OdfChapterElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7312244793947795480L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "chapter" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "chapter" );
 
     public OdfChapterElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

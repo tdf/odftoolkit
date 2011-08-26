@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfValueFormulaDisplayType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:table-formula>".
  */
 public abstract class OdfTableFormulaElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4233665438464681105L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-formula" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-formula" );
 
     public OdfTableFormulaElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

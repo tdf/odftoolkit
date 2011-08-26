@@ -32,28 +32,38 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:dde-connection-decls>".
  */
 public abstract class OdfDdeConnectionDeclsElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7648827101659237379L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "dde-connection-decls" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "dde-connection-decls" );
 
     public OdfDdeConnectionDeclsElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "text:dde-connection-decl".
+    */
+    public OdfDdeConnectionDeclElement createDdeConnectionDeclElement(String   _aName, String   _aDdeApplication, String   _aDdeTopic, String   _aDdeItem)
+    {
+        OdfDdeConnectionDeclElement  _nDdeConnectionDecl = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfDdeConnectionDeclElement.class);
+        _nDdeConnectionDecl.setName( _aName);
+        _nDdeConnectionDecl.setDdeApplication( _aDdeApplication);
+        _nDdeConnectionDecl.setDdeTopic( _aDdeTopic);
+        _nDdeConnectionDecl.setDdeItem( _aDdeItem);
+        this.appendChild( _nDdeConnectionDecl);
+        return  _nDdeConnectionDecl;      
+    }
+    
 }

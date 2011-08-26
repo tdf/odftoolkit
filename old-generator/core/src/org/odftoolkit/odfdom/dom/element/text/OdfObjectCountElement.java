@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:object-count>".
  */
 public abstract class OdfObjectCountElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -694292432543498473L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "object-count" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "object-count" );
 
     public OdfObjectCountElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

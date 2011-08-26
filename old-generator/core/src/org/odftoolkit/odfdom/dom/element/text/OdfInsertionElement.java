@@ -32,28 +32,34 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+import org.odftoolkit.odfdom.dom.element.office.OdfChangeInfoElement;
 
 /**
  * ODF DOM Element implementation for element "<text:insertion>".
  */
 public abstract class OdfInsertionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3219518276263555308L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "insertion" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "insertion" );
 
     public OdfInsertionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "office:change-info".
+    */
+    public OdfChangeInfoElement createChangeInfoElement()
+    {
+        OdfChangeInfoElement  _nChangeInfo = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfChangeInfoElement.class);
+        this.appendChild( _nChangeInfo);
+        return  _nChangeInfo;
+    }                   
+               
 }

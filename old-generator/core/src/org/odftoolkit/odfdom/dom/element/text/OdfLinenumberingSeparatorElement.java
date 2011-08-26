@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:linenumbering-separator>".
  */
 public abstract class OdfLinenumberingSeparatorElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -489245782647220734L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "linenumbering-separator" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "linenumbering-separator" );
 
     public OdfLinenumberingSeparatorElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

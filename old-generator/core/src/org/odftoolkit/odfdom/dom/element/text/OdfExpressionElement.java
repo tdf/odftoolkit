@@ -40,25 +40,21 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.text.OdfValueFormulaDisplayType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:expression>".
  */
 public abstract class OdfExpressionElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7314907507889014131L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "expression" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "expression" );
 
     public OdfExpressionElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

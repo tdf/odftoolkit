@@ -37,25 +37,21 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:user-index>".
  */
 public abstract class OdfUserIndexElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5795712000251936321L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-index" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-index" );
 
     public OdfUserIndexElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Section, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -71,8 +67,7 @@ public abstract class OdfUserIndexElement extends OdfStylableElement
     /**
      * Get value of attribute "text:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -81,8 +76,7 @@ public abstract class OdfUserIndexElement extends OdfStylableElement
     /**
      * Set value of attribute "text:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );
@@ -179,4 +173,25 @@ public abstract class OdfUserIndexElement extends OdfStylableElement
         setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:user-index-source".
+    */
+    public OdfUserIndexSourceElement createUserIndexSourceElement(String   _aIndexName)
+    {
+        OdfUserIndexSourceElement  _nUserIndexSource = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfUserIndexSourceElement.class);
+        _nUserIndexSource.setIndexName( _aIndexName);
+        this.appendChild( _nUserIndexSource);
+        return  _nUserIndexSource;      
+    }
+    
+    /**
+    * Create child element "text:index-body".
+    */
+    public OdfIndexBodyElement createIndexBodyElement()
+    {
+        OdfIndexBodyElement  _nIndexBody = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexBodyElement.class);
+        this.appendChild( _nIndexBody);
+        return  _nIndexBody;
+    }                   
+               
 }

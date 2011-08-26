@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfValueFormulaNoneDisplayType;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:user-field-get>".
  */
 public abstract class OdfUserFieldGetElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2390412194412771163L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-field-get" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "user-field-get" );
 
     public OdfUserFieldGetElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

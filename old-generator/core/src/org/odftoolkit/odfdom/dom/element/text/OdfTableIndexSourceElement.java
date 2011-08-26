@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.text.OdfCaptionSequenceFormatType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:table-index-source>".
  */
 public abstract class OdfTableIndexSourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 979022245355069156L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-index-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "table-index-source" );
 
     public OdfTableIndexSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -162,4 +158,25 @@ public abstract class OdfTableIndexSourceElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "caption-sequence-format" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:index-title-template".
+    */
+    public OdfIndexTitleTemplateElement createIndexTitleTemplateElement()
+    {
+        OdfIndexTitleTemplateElement  _nIndexTitleTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexTitleTemplateElement.class);
+        this.appendChild( _nIndexTitleTemplate);
+        return  _nIndexTitleTemplate;
+    }                   
+               
+    /**
+    * Create child element "text:table-index-entry-template".
+    */
+    public OdfTableIndexEntryTemplateElement createTableIndexEntryTemplateElement(String   _aStyleName)
+    {
+        OdfTableIndexEntryTemplateElement  _nTableIndexEntryTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfTableIndexEntryTemplateElement.class);
+        _nTableIndexEntryTemplate.setStyleName( _aStyleName);
+        this.appendChild( _nTableIndexEntryTemplate);
+        return  _nTableIndexEntryTemplate;      
+    }
+    
 }

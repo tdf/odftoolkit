@@ -38,25 +38,21 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.text.OdfStartNumberingAtType;
 import org.odftoolkit.odfdom.dom.type.text.OdfFootnotesPositionType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:notes-configuration>".
  */
 public abstract class OdfNotesConfigurationElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8120148674315734326L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "notes-configuration" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "notes-configuration" );
 
     public OdfNotesConfigurationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

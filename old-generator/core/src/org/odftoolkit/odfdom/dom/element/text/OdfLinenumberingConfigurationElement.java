@@ -38,25 +38,21 @@ import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.text.OdfNumberPositionType;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeLength;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:linenumbering-configuration>".
  */
 public abstract class OdfLinenumberingConfigurationElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7384227566649980929L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "linenumbering-configuration" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "linenumbering-configuration" );
 
     public OdfLinenumberingConfigurationElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Text, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -122,8 +118,7 @@ public abstract class OdfLinenumberingConfigurationElement extends OdfStylableEl
     /**
      * Get value of attribute "text:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -132,8 +127,7 @@ public abstract class OdfLinenumberingConfigurationElement extends OdfStylableEl
     /**
      * Set value of attribute "text:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );
@@ -257,4 +251,14 @@ public abstract class OdfLinenumberingConfigurationElement extends OdfStylableEl
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "restart-on-page" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:linenumbering-separator".
+    */
+    public OdfLinenumberingSeparatorElement createLinenumberingSeparatorElement()
+    {
+        OdfLinenumberingSeparatorElement  _nLinenumberingSeparator = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfLinenumberingSeparatorElement.class);
+        this.appendChild( _nLinenumberingSeparator);
+        return  _nLinenumberingSeparator;
+    }                   
+               
 }

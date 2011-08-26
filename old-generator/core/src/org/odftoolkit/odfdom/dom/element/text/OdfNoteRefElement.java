@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfReferenceFormatType;
 import org.odftoolkit.odfdom.dom.type.text.OdfNoteClassType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:note-ref>".
  */
 public abstract class OdfNoteRefElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8402205522034434585L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "note-ref" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "note-ref" );
 
     public OdfNoteRefElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

@@ -34,25 +34,21 @@ import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.text.OdfIndexScopeType;
 import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:object-index-source>".
  */
 public abstract class OdfObjectIndexSourceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3113984535653180225L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "object-index-source" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "object-index-source" );
 
     public OdfObjectIndexSourceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -194,4 +190,25 @@ public abstract class OdfObjectIndexSourceElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "use-other-objects" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:index-title-template".
+    */
+    public OdfIndexTitleTemplateElement createIndexTitleTemplateElement()
+    {
+        OdfIndexTitleTemplateElement  _nIndexTitleTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexTitleTemplateElement.class);
+        this.appendChild( _nIndexTitleTemplate);
+        return  _nIndexTitleTemplate;
+    }                   
+               
+    /**
+    * Create child element "text:object-index-entry-template".
+    */
+    public OdfObjectIndexEntryTemplateElement createObjectIndexEntryTemplateElement(String   _aStyleName)
+    {
+        OdfObjectIndexEntryTemplateElement  _nObjectIndexEntryTemplate = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfObjectIndexEntryTemplateElement.class);
+        _nObjectIndexEntryTemplate.setStyleName( _aStyleName);
+        this.appendChild( _nObjectIndexEntryTemplate);
+        return  _nObjectIndexEntryTemplate;      
+    }
+    
 }

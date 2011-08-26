@@ -32,25 +32,21 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:reference-mark-start>".
  */
 public abstract class OdfReferenceMarkStartElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3362862478923238718L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "reference-mark-start" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "reference-mark-start" );
 
     public OdfReferenceMarkStartElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

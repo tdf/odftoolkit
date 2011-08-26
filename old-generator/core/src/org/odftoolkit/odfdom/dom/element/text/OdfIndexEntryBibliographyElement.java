@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.text.OdfBibliographyDataFieldType;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:index-entry-bibliography>".
  */
 public abstract class OdfIndexEntryBibliographyElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1700470340842900079L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "index-entry-bibliography" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "index-entry-bibliography" );
 
     public OdfIndexEntryBibliographyElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Text, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -69,8 +65,7 @@ public abstract class OdfIndexEntryBibliographyElement extends OdfStylableElemen
     /**
      * Get value of attribute "text:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -79,8 +74,7 @@ public abstract class OdfIndexEntryBibliographyElement extends OdfStylableElemen
     /**
      * Set value of attribute "text:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );

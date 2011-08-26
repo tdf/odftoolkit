@@ -37,25 +37,21 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfAnyURI;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:illustration-index>".
  */
 public abstract class OdfIllustrationIndexElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5571740760342546516L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "illustration-index" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "illustration-index" );
 
     public OdfIllustrationIndexElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.Section, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -71,8 +67,7 @@ public abstract class OdfIllustrationIndexElement extends OdfStylableElement
     /**
      * Get value of attribute "text:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -81,8 +76,7 @@ public abstract class OdfIllustrationIndexElement extends OdfStylableElement
     /**
      * Set value of attribute "text:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );
@@ -179,4 +173,24 @@ public abstract class OdfIllustrationIndexElement extends OdfStylableElement
         setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:illustration-index-source".
+    */
+    public OdfIllustrationIndexSourceElement createIllustrationIndexSourceElement()
+    {
+        OdfIllustrationIndexSourceElement  _nIllustrationIndexSource = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIllustrationIndexSourceElement.class);
+        this.appendChild( _nIllustrationIndexSource);
+        return  _nIllustrationIndexSource;
+    }                   
+               
+    /**
+    * Create child element "text:index-body".
+    */
+    public OdfIndexBodyElement createIndexBodyElement()
+    {
+        OdfIndexBodyElement  _nIndexBody = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexBodyElement.class);
+        this.appendChild( _nIndexBody);
+        return  _nIndexBody;
+    }                   
+               
 }

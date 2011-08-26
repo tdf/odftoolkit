@@ -32,28 +32,35 @@ import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:page-sequence>".
  */
 public abstract class OdfPageSequenceElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6905295336142284368L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-sequence" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "page-sequence" );
 
     public OdfPageSequenceElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
 
 
+    /**
+    * Create child element "text:page".
+    */
+    public OdfPageElement createPageElement(String   _aMasterPageName)
+    {
+        OdfPageElement  _nPage = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfPageElement.class);
+        _nPage.setMasterPageName( _aMasterPageName);
+        this.appendChild( _nPage);
+        return  _nPage;      
+    }
+    
 }

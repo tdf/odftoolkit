@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:toc-mark-start>".
  */
 public abstract class OdfTocMarkStartElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2099103043880763667L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "toc-mark-start" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "toc-mark-start" );
 
     public OdfTocMarkStartElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }

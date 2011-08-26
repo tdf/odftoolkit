@@ -35,25 +35,21 @@ import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.OdfStyleName;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:list-item>".
  */
 public abstract class OdfListItemElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7073952030658367483L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-item" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "list-item" );
 
     public OdfListItemElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -113,4 +109,55 @@ public abstract class OdfListItemElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:number".
+    */
+    public OdfNumberElement createNumberElement()
+    {
+        OdfNumberElement  _nNumber = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNumberElement.class);
+        this.appendChild( _nNumber);
+        return  _nNumber;
+    }                   
+               
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
+    /**
+    * Create child element "text:h".
+    */
+    public OdfHeadingElement createHeadingElement(Integer   _aOutlineLevel)
+    {
+        OdfHeadingElement  _nHeading = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHeadingElement.class);
+        _nHeading.setOutlineLevel( _aOutlineLevel);
+        this.appendChild( _nHeading);
+        return  _nHeading;      
+    }
+    
+    /**
+    * Create child element "text:list".
+    */
+    public OdfListElement createListElement()
+    {
+        OdfListElement  _nList = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfListElement.class);
+        this.appendChild( _nList);
+        return  _nList;
+    }                   
+               
+    /**
+    * Create child element "text:soft-page-break".
+    */
+    public OdfSoftPageBreakElement createSoftPageBreakElement()
+    {
+        OdfSoftPageBreakElement  _nSoftPageBreak = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfSoftPageBreakElement.class);
+        this.appendChild( _nSoftPageBreak);
+        return  _nSoftPageBreak;
+    }                   
+               
 }

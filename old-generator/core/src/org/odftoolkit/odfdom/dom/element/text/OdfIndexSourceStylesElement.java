@@ -33,25 +33,21 @@ import org.odftoolkit.odfdom.doc.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.OdfElement;
 import org.odftoolkit.odfdom.dom.type.OdfPositiveInteger;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:index-source-styles>".
  */
 public abstract class OdfIndexSourceStylesElement extends OdfElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 554292075399968229L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "index-source-styles" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "index-source-styles" );
 
     public OdfIndexSourceStylesElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -82,4 +78,15 @@ public abstract class OdfIndexSourceStylesElement extends OdfElement
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "outline-level" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:index-source-style".
+    */
+    public OdfIndexSourceStyleElement createIndexSourceStyleElement(String   _aStyleName)
+    {
+        OdfIndexSourceStyleElement  _nIndexSourceStyle = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfIndexSourceStyleElement.class);
+        _nIndexSourceStyle.setStyleName( _aStyleName);
+        this.appendChild( _nIndexSourceStyle);
+        return  _nIndexSourceStyle;      
+    }
+    
 }

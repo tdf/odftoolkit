@@ -38,25 +38,21 @@ import org.odftoolkit.odfdom.dom.type.OdfBoolean;
 import org.odftoolkit.odfdom.dom.type.OdfNonNegativeInteger;
 import org.odftoolkit.odfdom.dom.type.OdfId;
 
+;
 
 /**
  * ODF DOM Element implementation for element "<text:numbered-paragraph>".
  */
 public abstract class OdfNumberedParagraphElement extends OdfStylableElement
 {        
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4560050920580840226L;
-	public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "numbered-paragraph" );
+    public static final OdfName ELEMENT_NAME = OdfName.get( OdfNamespace.TEXT, "numbered-paragraph" );
 
     public OdfNumberedParagraphElement( OdfFileDom _aOwnerDoc )
     {
         super( _aOwnerDoc, ELEMENT_NAME, OdfStyleFamily.List, OdfName.get( OdfNamespace.TEXT, "style-name" ) );
     }
 
-    @Override
-	public OdfName getOdfName()
+    public OdfName getOdfName()
     {
         return ELEMENT_NAME;
     }
@@ -111,8 +107,7 @@ public abstract class OdfNumberedParagraphElement extends OdfStylableElement
     /**
      * Get value of attribute "text:style-name".
      */
-    @Override
-	public String getStyleName()
+    public String getStyleName()
     {                    
         String aStringVal = getOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ) );
         return OdfStyleName.valueOf( aStringVal);
@@ -121,8 +116,7 @@ public abstract class OdfNumberedParagraphElement extends OdfStylableElement
     /**
      * Set value of attribute "text:style-name".
      */
-    @Override
-	public void setStyleName( String _aStyleName )
+    public void setStyleName( String _aStyleName )
     {                    
         String aStringVal = OdfStyleName.toString( _aStyleName );
         setOdfAttribute( OdfName.get( OdfNamespace.TEXT, "style-name" ), aStringVal );
@@ -182,4 +176,35 @@ public abstract class OdfNumberedParagraphElement extends OdfStylableElement
         setOdfAttribute( OdfName.get( OdfNamespace.XML, "id" ), aStringVal );
     }
 
+    /**
+    * Create child element "text:number".
+    */
+    public OdfNumberElement createNumberElement()
+    {
+        OdfNumberElement  _nNumber = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfNumberElement.class);
+        this.appendChild( _nNumber);
+        return  _nNumber;
+    }                   
+               
+    /**
+    * Create child element "text:p".
+    */
+    public OdfParagraphElement createParagraphElement()
+    {
+        OdfParagraphElement  _nParagraph = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfParagraphElement.class);
+        this.appendChild( _nParagraph);
+        return  _nParagraph;
+    }                   
+               
+    /**
+    * Create child element "text:h".
+    */
+    public OdfHeadingElement createHeadingElement(Integer   _aOutlineLevel)
+    {
+        OdfHeadingElement  _nHeading = ((OdfFileDom)this.ownerDocument).createOdfElement(OdfHeadingElement.class);
+        _nHeading.setOutlineLevel( _aOutlineLevel);
+        this.appendChild( _nHeading);
+        return  _nHeading;      
+    }
+    
 }
