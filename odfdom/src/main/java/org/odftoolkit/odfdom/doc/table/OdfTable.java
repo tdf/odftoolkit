@@ -338,25 +338,24 @@ public class OdfTable {
 		tableStyle.setProperty(OdfStyleTableProperties.Width, DEFAULT_TABLE_WIDTH + "in");
 		tableStyle.setProperty(OdfStyleTableProperties.Align, DEFAULT_TABLE_ALIGN);
 		newTEle.setStyleName(tablename);
-
-		//2. create column elements
-		//2.1 create header column elements
-		TableTableHeaderColumnsElement headercolumns = (TableTableHeaderColumnsElement) OdfElementFactory.newOdfElement(dom,
-				OdfName.newName(OdfNamespaceNames.TABLE, "table-header-columns"));
-		TableTableColumnElement headercolumn = (TableTableColumnElement) OdfElementFactory.newOdfElement(dom,
-				OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
-		headercolumn.setTableNumberColumnsRepeatedAttribute(headerColumnNumber);
-		headercolumns.appendChild(headercolumn);
-		newTEle.appendChild(headercolumns);
-
+		
+		// 2. create column elements
+		// 2.0 create column style
 		String columnStylename = tablename + ".A";
 		OdfStyle columnStyle = styles.newStyle(OdfStyleFamily.TableColumn);
 		columnStyle.setStyleNameAttribute(columnStylename);
 		columnStyle.setProperty(OdfStyleTableColumnProperties.ColumnWidth,
 				new DecimalFormat("000.0000").format(DEFAULT_TABLE_WIDTH / numCols) + "in");
 		columnStyle.setProperty(OdfStyleTableColumnProperties.RelColumnWidth, Math.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
-		headercolumn.setStyleName(columnStylename);
-
+		// 2.1 create header column elements
+		if (headerColumnNumber > 0) {
+			TableTableHeaderColumnsElement headercolumns = (TableTableHeaderColumnsElement) OdfElementFactory.newOdfElement(dom, OdfName.newName(OdfNamespaceNames.TABLE, "table-header-columns"));
+			TableTableColumnElement headercolumn = (TableTableColumnElement) OdfElementFactory.newOdfElement(dom, OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
+			headercolumn.setTableNumberColumnsRepeatedAttribute(headerColumnNumber);
+			headercolumns.appendChild(headercolumn);
+			newTEle.appendChild(headercolumns);
+			headercolumn.setStyleName(columnStylename);
+		}
 		//2.2 create common column elements
 		TableTableColumnElement columns = (TableTableColumnElement) OdfElementFactory.newOdfElement(dom,
 				OdfName.newName(OdfNamespaceNames.TABLE, "table-column"));
@@ -599,7 +598,7 @@ public class OdfTable {
 		try {
 			TableTableElement newTEle = createTable(document, rowNumber + rowHeaders, columnNumber + columnHeaders, rowHeaders, columnHeaders);
 
-			//append to the end of document
+			//4. append to the end of document
 			OdfElement root = document.getContentDom().getRootElement();
 			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
@@ -682,7 +681,7 @@ public class OdfTable {
 		try {
 			TableTableElement newTEle = createTable(document, rowNumber + rowHeaders, columnNumber + columnHeaders, rowHeaders, columnHeaders);
 
-			//append to the end of document
+			//4. append to the end of document
 			OdfElement root = document.getContentDom().getRootElement();
 			OdfOfficeBody officeBody = OdfElement.findFirstChildNode(OdfOfficeBody.class, root);
 			OdfElement typedContent = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
@@ -1440,11 +1439,13 @@ public class OdfTable {
 
 	private int getHeaderRowCount(TableTableHeaderRowsElement headers) {
 		int result = 0;
-		for (Node n : new DomNodeList(headers.getChildNodes())) {
-			if (n instanceof TableTableRowElement) {
-				result += ((TableTableRowElement) n).getTableNumberRowsRepeatedAttribute();
+		if(headers!=null){
+			for (Node n : new DomNodeList(headers.getChildNodes())) {
+				if (n instanceof TableTableRowElement) {
+					result += ((TableTableRowElement) n).getTableNumberRowsRepeatedAttribute();
+				}
 			}
-		}
+		}		
 		return result;
 	}
 
@@ -1461,9 +1462,12 @@ public class OdfTable {
 
 	private int getHeaderColumnCount(TableTableHeaderColumnsElement headers) {
 		int result = 0;
-		for (Node n : new DomNodeList(headers.getChildNodes())) {
-			if (n instanceof TableTableColumnElement) {
-				result += getColumnInstance(((TableTableColumnElement) n), 0).getColumnsRepeatedNumber();
+		if (headers != null) {
+			for (Node n : new DomNodeList(headers.getChildNodes())) {
+				if (n instanceof TableTableColumnElement) {
+					result += getColumnInstance(((TableTableColumnElement) n),
+							0).getColumnsRepeatedNumber();
+				}
 			}
 		}
 		return result;

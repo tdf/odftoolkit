@@ -24,14 +24,17 @@ package org.odftoolkit.odfdom.doc.table;
 import java.util.List;
 
 import junit.framework.Assert;
-
+import org.w3c.dom.Node;
 import org.junit.Before;
 import org.junit.Test;
+import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
+import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderColumnsElement;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
@@ -180,6 +183,32 @@ public class TableTest {
 		}
 	}
 
+	@Test
+	public void testNewTableWithoutHeaderColumn() {
+		try {
+			// reproduce bug 145
+			OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument
+					.newSpreadsheetDocument();
+			OdfTable sheet = OdfTable.newTable(spreadsheet, 3, 5);
+			TableTableHeaderColumnsElement headers = OdfElement
+					.findFirstChildNode(TableTableHeaderColumnsElement.class,
+							sheet.mTableElement);
+			if (headers != null) {
+				for (Node n : new DomNodeList(headers.getChildNodes())) {
+					if (n instanceof TableTableColumnElement) {
+						if (sheet.getColumnInstance(
+								((TableTableColumnElement) n), 0)
+								.getColumnsRepeatedNumber() == 0) {
+							Assert.fail("table:number-columns-repeated has the invalid value: '0'. It have to be a value matching the 'positiveInteger' type.");
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+	}
 	private OdfTable createEmptyTable(OdfTextDocument document) {
 		String tablename = "Table1";
 		int rownumber = 5;
