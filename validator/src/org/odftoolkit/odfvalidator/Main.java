@@ -38,7 +38,7 @@ import java.util.Vector;
  */
 public class Main {
 
-    private static final String VERSION="1.1.3";
+    private static final String VERSION="1.1.4";
     
     /** Creates a new instance of Main */
     public Main() {
