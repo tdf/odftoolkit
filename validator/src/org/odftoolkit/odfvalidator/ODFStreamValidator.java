@@ -59,4 +59,10 @@ public class ODFStreamValidator extends ODFRootPackageValidator {
         return m_aBaseURI;
     }
 
+    @Override
+    String getDocumentPath()
+    {
+        return ""; // this is the root document
+    }
+
 };

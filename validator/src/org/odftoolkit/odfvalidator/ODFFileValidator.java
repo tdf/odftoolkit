@@ -49,6 +49,12 @@ public class ODFFileValidator extends ODFRootPackageValidator {
         return m_aFile.getAbsolutePath();
     }
 
+    @Override
+    String getDocumentPath()
+    {
+        return ""; // this is the root document
+    }
+
     protected OdfPackage getPackage(ErrorHandler handler) throws Exception
     {
         return OdfPackage.loadPackage(m_aFile, handler);

@@ -71,18 +71,20 @@ public abstract class ODFPackageValidator {
         m_aConfigVersion = aVersion;
         m_aResult = new ODFValidationResult( aVersion, eMode );
     }
-    
-       
+
 
     abstract String getLoggerName();
-    
+
+    abstract String getDocumentPath();
+
     abstract OdfPackage getPackage( Logger aLogger );
-    
+
     abstract String getStreamName( String aEntry );
-    
+
     public boolean validate(PrintStream aOut) throws ODFValidatorException
     {
-        Logger aLogger = new Logger( getLoggerName(), "", aOut, m_nLogLevel);
+        Logger aLogger =
+            new Logger( getLoggerName(), getDocumentPath(), aOut, m_nLogLevel);
 
         boolean bHasErrors = false;
 

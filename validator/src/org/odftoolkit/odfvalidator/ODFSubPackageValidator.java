@@ -28,6 +28,7 @@ import org.odftoolkit.odfdom.pkg.OdfPackage;
 public class ODFSubPackageValidator extends ODFPackageValidator {
 
     private OdfPackage m_aPkg = null;
+    // this is the URI of the root package, not this subpackage!
     private String m_aBaseURI = null;
     private String m_aSubEntryName = null;
 
@@ -38,7 +39,7 @@ public class ODFSubPackageValidator extends ODFPackageValidator {
     {
         super( nLogLevel, eMode, aVersion, aFilter, aValidatorProvider);
         m_aPkg = aPkg;
-        m_aBaseURI = aBaseURI + "/" + aSubEntryName;
+        m_aBaseURI = aBaseURI;
         m_aSubEntryName = aSubEntryName;
         m_aResult.setMediaType(aMediaType);
         if( aFilter != null )
@@ -48,6 +49,11 @@ public class ODFSubPackageValidator extends ODFPackageValidator {
     @Override
     String getLoggerName() {
         return m_aBaseURI;
+    }
+
+    @Override
+    String getDocumentPath() {
+        return m_aSubEntryName;
     }
 
     OdfPackage getPackage( Logger aLogger ) 
