@@ -184,7 +184,7 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
             }
         }
 
-        String aMimetype=getPackage(aLogger).getMediaTypeString();
+        String aMimetype=getPackage(aLogger).getMediaType();
         if( (aMimetype == null) || aMimetype.length() == 0 ) {
             aLogger.logFatalError("file is not a zip file, or has no mimetype.");
             return true;
