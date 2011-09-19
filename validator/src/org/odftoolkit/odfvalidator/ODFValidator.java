@@ -280,14 +280,14 @@ public class ODFValidator implements ODFValidatorProvider {
     {
         if( m_aValidatorMap == null )
             m_aValidatorMap = new HashMap<String,Validator>();
-        
+
         Validator aValidator = m_aValidatorMap.get(aSchemaFileName);
         if( aValidator == null )
         {
             aValidator = createValidator( aOut, aSchemaFileName );
             m_aValidatorMap.put( aSchemaFileName, aValidator);
         }
-        
+
         return aValidator;
     }
     

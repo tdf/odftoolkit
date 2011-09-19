@@ -184,7 +184,7 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
         }
         // UGLY: do something that causes ODFDOM to parse the manifest, which
         // may cause m_ErrorHandler to be called
-        m_aPkg.getFileEntries();
+        m_aPkg.getFilePaths();
         // hack: just create logger again, too lazy to create a Pair class
         // and return it from validateMimetype...
         Logger aMimetypeLogger =
