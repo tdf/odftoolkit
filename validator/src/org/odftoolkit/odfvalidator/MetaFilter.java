@@ -22,7 +22,7 @@
 
 package org.odftoolkit.odfvalidator;
 
-import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.XMLFilterImpl;
@@ -33,8 +33,8 @@ class MetaFilter extends XMLFilterImpl {
     private String m_aGenerator = "";
     private boolean m_bRoot = true;
     
-    private static final String META_NAMESPACE_URI = OdfNamespace.META.toString();
-    private static final String OFFICE_NAMESPACE_URI = OdfNamespace.OFFICE.toString();
+    private static final String META_NAMESPACE_URI = OdfNamespaceNames.META.getNamespaceUri();
+    private static final String OFFICE_NAMESPACE_URI = OdfNamespaceNames.OFFICE.getNamespaceUri();
     private static final String GENERATOR = "generator";
     private static final String DOCUMENT_META = "document-meta";
 

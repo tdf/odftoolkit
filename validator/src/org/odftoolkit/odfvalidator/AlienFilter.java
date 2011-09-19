@@ -24,7 +24,7 @@ package org.odftoolkit.odfvalidator;
 
 import java.util.HashSet;
 import java.util.Vector;
-import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -32,7 +32,7 @@ import org.xml.sax.helpers.XMLFilterImpl;
 
 class AlienFilter extends XMLFilterImpl {
 
-    private static final String OFFICE_NAMESPACE_URI = OdfNamespace.OFFICE.toString();
+    private static final String OFFICE_NAMESPACE_URI = OdfNamespaceNames.OFFICE.getNamespaceUri();
     
     private static final String PROCESS_CONTENT = "process-content";
     private static final String TRUE_STRING = "true";
@@ -48,25 +48,25 @@ class AlienFilter extends XMLFilterImpl {
         m_aAlienElements = new Vector<Boolean>();
         
         m_aODFNamespaceSet = new HashSet<String>();
-        m_aODFNamespaceSet.add( OdfNamespace.OFFICE.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.STYLE.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.TEXT.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.TABLE.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.DRAW.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.FO.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.DC.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.META.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.NUMBER.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.SVG.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.CHART.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.DR3D.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.FORM.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.PRESENTATION.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.SMIL.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.CONFIG.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.SCRIPT.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.XLINK.toString() );
-        m_aODFNamespaceSet.add( OdfNamespace.XFORMS.toString() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.OFFICE.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.STYLE.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.TEXT.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.TABLE.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.DRAW.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.FO.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.DC.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.META.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.NUMBER.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.SVG.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.CHART.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.DR3D.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.FORM.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.PRESENTATION.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.SMIL.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.CONFIG.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.SCRIPT.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.XLINK.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.XFORMS.getNamespaceUri() );
         if( aVersion.equals("1.2"))
         {
             m_aODFNamespaceSet.add( "http://www.w3.org/1999/xhtml" );

@@ -22,7 +22,7 @@
 
 package org.odftoolkit.odfvalidator;
 
-import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.dom.OdfNamespaceNames;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -34,11 +34,11 @@ class ContentFilter extends NamespaceFilter {
     private static final String CD2_SMIL_NAMESPACE_URI = "http://www.w3.org/2001/SMIL20/";
     private static final String BASE_OFFICE_NAMESPACE_URI = "http://openoffice.org/2004/office";
     private static final String BASE_DB_NAMESPACE_URI = "http://openoffice.org/2004/database";
-    private static final String SVG_NAMESPACE_URI = OdfNamespace.SVG.toString();
-    private static final String XSL_NAMESPACE_URI = OdfNamespace.FO.toString();
-    private static final String SMIL_NAMESPACE_URI = OdfNamespace.SMIL.toString();
-    private static final String DRAW_NAMESPACE_URI = OdfNamespace.DRAW.toString();
-    private static final String OFFICE_NAMESPACE_URI = OdfNamespace.OFFICE.toString();;
+    private static final String SVG_NAMESPACE_URI = OdfNamespaceNames.SVG.getNamespaceUri();
+    private static final String XSL_NAMESPACE_URI = OdfNamespaceNames.FO.getNamespaceUri();
+    private static final String SMIL_NAMESPACE_URI = OdfNamespaceNames.SMIL.getNamespaceUri();
+    private static final String DRAW_NAMESPACE_URI = OdfNamespaceNames.DRAW.getNamespaceUri();
+    private static final String OFFICE_NAMESPACE_URI = OdfNamespaceNames.OFFICE.getNamespaceUri();
     private static final String DB_NAMESPACE_URI = "urn:oasis:names:tc:opendocument:xmlns:database:1.0";
     private static final String BASE_OFFICE_NAMESPACE_PREFIX = "office";
     private static final String POLYGON = "polygon";
