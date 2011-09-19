@@ -105,7 +105,7 @@ class ODFPackageErrorHandler implements ErrorHandler {
                 } else if (constraint instanceof OdfSchemaConstraint) {
                     switch (((OdfSchemaConstraint) constraint)) {
                         case DOCUMENT_WITHOUT_ODF_MIMETYPE:
-                        case PACKAGE_SHALL_CONTAIN_CONTENT_OR_STYLES_XML:
+                        case DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML:
                             manifestLogger.logError(e.getMessage());
                             bRet = true;
                             continue LOOP;

@@ -60,7 +60,7 @@ public class MetaInformation {
     {
         try
         {
-            InputStream aInStream = aDocFile.getInputStream(OdfPackage.OdfFile.MANIFEST.getPath());
+            InputStream aInStream = aDocFile.getInputStream(OdfPackage.OdfFile.MANIFEST.getPath(), true);
             Logger aLogger = new Logger(aDocFile.getBaseURI(),OdfPackage.OdfFile.MANIFEST.getPath(),m_aOut, Logger.LogLevel.INFO);
         
             getInformation( aInStream, aLogger );

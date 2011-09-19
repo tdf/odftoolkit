@@ -218,7 +218,7 @@ public abstract class ODFPackageValidator {
         InputStream aInStream = null;
         try
         {
-            aInStream = aPkg.getInputStream(aEntryName);
+            aInStream = aPkg.getInputStream(aEntryName, true);
         }
         catch( Exception e )
         {
@@ -338,7 +338,7 @@ public abstract class ODFPackageValidator {
         InputStream aInStream = null;
         try
         {
-            aInStream = getPackage(aLogger).getInputStream(aEntryName);
+            aInStream = getPackage(aLogger).getInputStream(aEntryName, true);
         }
         catch( Exception e )
         {
@@ -447,11 +447,11 @@ public abstract class ODFPackageValidator {
         try
         {
             OdfPackage aPkg = getPackage(aLogger);
-            aInStream = aPkg.getInputStream(getStreamName(OdfDocument.OdfXMLFile.META.getFileName()));
+            aInStream = aPkg.getInputStream(getStreamName(OdfDocument.OdfXMLFile.META.getFileName()), true);
             if( aInStream == null )
-                aInStream = aPkg.getInputStream(getStreamName(OdfDocument.OdfXMLFile.SETTINGS.getFileName()));
+                aInStream = aPkg.getInputStream(getStreamName(OdfDocument.OdfXMLFile.SETTINGS.getFileName()), true);
             if( aInStream == null )
-                aInStream = aPkg.getInputStream(getStreamName(OdfDocument.OdfXMLFile.CONTENT.getFileName()));
+                aInStream = aPkg.getInputStream(getStreamName(OdfDocument.OdfXMLFile.CONTENT.getFileName()), true);
             if (aInStream == null) { return null; }
         }
         catch( Exception e )
