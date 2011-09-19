@@ -24,6 +24,7 @@ package org.odftoolkit.odfvalidator;
 
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 
+
 public class ODFSubPackageValidator extends ODFPackageValidator {
 
     private OdfPackage m_aPkg = null;
@@ -31,14 +32,15 @@ public class ODFSubPackageValidator extends ODFPackageValidator {
     private String m_aSubEntryName = null;
 
     ODFSubPackageValidator( OdfPackage aPkg, String aBaseURI, String aSubEntryName, String aMediaType,
-                             int nLogLevel, int nMode, String aVersion,
+                             Logger.LogLevel nLogLevel, OdfValidatorMode eMode, OdfVersion aVersion,
                              SAXParseExceptionFilter aFilter, String aParentGenerator,
                              ODFValidatorProvider aValidatorProvider ) throws ODFValidatorException
     {
-        super( nLogLevel, nMode, aVersion, aMediaType, aFilter, aValidatorProvider );
+        super( nLogLevel, eMode, aVersion, aFilter, aValidatorProvider);
         m_aPkg = aPkg;
         m_aBaseURI = aBaseURI + "/" + aSubEntryName;
         m_aSubEntryName = aSubEntryName;
+        m_aResult.setMediaType(aMediaType);
         if( aFilter != null )
             aFilter.startPackage(aParentGenerator);  // take build id from main document as default (embedded objects can nevern be newer)
     }
@@ -48,11 +50,6 @@ public class ODFSubPackageValidator extends ODFPackageValidator {
         return m_aBaseURI;
     }
 
-    boolean isRootPackage()
-    {
-        return false;
-    }
-    
     OdfPackage getPackage( Logger aLogger ) 
     {
         return m_aPkg;

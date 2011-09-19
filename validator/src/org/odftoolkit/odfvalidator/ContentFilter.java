@@ -39,7 +39,7 @@ class ContentFilter extends NamespaceFilter {
     private static final String SMIL_NAMESPACE_URI = OdfNamespaceNames.SMIL.getNamespaceUri();
     private static final String DRAW_NAMESPACE_URI = OdfNamespaceNames.DRAW.getNamespaceUri();
     private static final String OFFICE_NAMESPACE_URI = OdfNamespaceNames.OFFICE.getNamespaceUri();
-    private static final String DB_NAMESPACE_URI = "urn:oasis:names:tc:opendocument:xmlns:database:1.0";
+    private static final String DB_NAMESPACE_URI = OdfNamespaceNames.DB.getNamespaceUri();
     private static final String BASE_OFFICE_NAMESPACE_PREFIX = "office";
     private static final String POLYGON = "polygon";
     private static final String CONTOUR_POLYGON = "contour-polygon";

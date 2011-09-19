@@ -38,7 +38,7 @@ import java.util.Vector;
  */
 public class Main {
 
-    private static final String VERSION="1.1.2";
+    private static final String VERSION="1.1.3";
     
     /** Creates a new instance of Main */
     public Main() {
@@ -59,10 +59,10 @@ public class Main {
         boolean bPrintHelp = false;
         boolean bPrintVersion = false;
         boolean bRecursive = false;
-        int nLogLevel = Logger.ERROR;
-        int nMode = ODFPackageValidator.VALIDATE;
+        Logger.LogLevel nLogLevel = Logger.LogLevel.ERROR;
+        OdfValidatorMode eMode = OdfValidatorMode.VALIDATE;
         List<String> aFileNames = new Vector<String>();
-        String aVersion = null;
+        OdfVersion aVersion = null;
 
         boolean bCommandLineValid = true;
         List<String> aArgList = Arrays.asList(aArgs);
@@ -72,7 +72,7 @@ public class Main {
             String aArg = aArgIter.next();
             if( aArg.equals("-c") )
             {
-                nMode = ODFPackageValidator.CHECK_CONFORMANCE;
+                eMode = OdfValidatorMode.CHECK_CONFORMANCE;
             }
             else if( aArg.equals("-d") )
             {
@@ -80,7 +80,7 @@ public class Main {
             }
             else if( aArg.equals("-e") )
             {
-                nMode = ODFPackageValidator.CHECK_EXTENDED_CONFORMANCE;
+                eMode = OdfValidatorMode.CHECK_EXTENDED_CONFORMANCE;
             }
             else if( aArg.equals("-f") )
             {
@@ -110,15 +110,15 @@ public class Main {
             }
             else if( aArg.equals("-s") )
             {
-                nMode = ODFPackageValidator.VALIDATE_STRICT;
+                eMode = OdfValidatorMode.VALIDATE_STRICT;
             }
             else if( aArg.equals("-v") )
             {
-                nLogLevel = Logger.INFO;
+                nLogLevel = Logger.LogLevel.INFO;
             }
             else if( aArg.equals("-w") )
             {
-                nLogLevel = Logger.WARNING;
+                nLogLevel = Logger.LogLevel.WARNING;
             }
             else if( aArg.equals("-x") )
             {
@@ -147,7 +147,7 @@ public class Main {
             }
             else if( aArg.equals("-1.0") || aArg.equals("-1.1") || aArg.equals("-1.2") )
             {
-                aVersion = aArg.substring(1);
+                aVersion = OdfVersion.valueOf( aArg.substring(1), false );
             }
             else if( aArg.startsWith("-") )
             {
@@ -239,11 +239,11 @@ public class Main {
 
             if( aConfigFileName != null )
             {
-                aValidator.validate(aOut, aConfig, nMode );
+                aValidator.validate(aOut, aConfig, eMode );
             }
             else
             {
-                aValidator.validate(aOut, aFileNames, aExcludeRegExp, nMode, bRecursive, aFilterFileName );
+                aValidator.validate(aOut, aFileNames, aExcludeRegExp, eMode, bRecursive, aFilterFileName );
             }
         }
         catch( ODFValidatorException e )

@@ -22,35 +22,18 @@
 
 package org.odftoolkit.odfvalidator;
 
-import java.io.File;
-import org.odftoolkit.odfdom.pkg.OdfPackage;
-
+import org.xml.sax.Attributes;
 
 /**
- * Validator for Files
+ * Listener interface for foreign elements and attributes that are detected while
+ * validating a stream.
+ *
+ * @author Michael Brauer
  */
-public class ODFFileValidator extends ODFRootPackageValidator {
+interface ForeignContentListener {
     
-    private File m_aFile = null;
+    void foreignElementDetected( String aUri, String aLocalName, String aQName, Attributes aAtts );
 
-        /** Creates a new instance of ODFFileValidator */
-    public ODFFileValidator( File aFile, Logger.LogLevel nLogLevel,
-                             OdfValidatorMode eMode, OdfVersion aVersion,
-                             SAXParseExceptionFilter aFilter,
-                             ODFValidatorProvider aValidatorProvider ) throws ODFValidatorException
-    {
-        super( nLogLevel, eMode, aVersion, aFilter, aValidatorProvider );
-        m_aFile = aFile;
-    }
-
-    protected String getLoggerName()
-    {
-        return m_aFile.getAbsolutePath();
-    }
+    void foreignAttributeDetected( String aUri, String aLocalName, String aQName, String aValue );
     
-    protected OdfPackage getPackage() throws Exception
-    {
-        return OdfPackage.loadPackage( m_aFile );
-    }
-
 }

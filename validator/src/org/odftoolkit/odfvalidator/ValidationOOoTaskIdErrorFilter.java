@@ -83,11 +83,13 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
             m_aFilterEntries = aFilterEntries;
         }
 
+        @Override
         public void characters(char[] aCh, int nStart, int nLength) throws SAXException {
             if( m_aEntry != null )
                 m_aEntry.m_aMessage += new String(aCh, nStart, nLength);
         }
 
+        @Override
         public void startElement(String aUri, String aLocalName, String aQName, Attributes aAttributes) throws SAXException {
             if( aQName.equals(FILTER_ENTRY) )
             {
@@ -103,6 +105,7 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
             }
         }
 
+        @Override
         public void endElement(String aUri, String aLocalName, String aQName) throws SAXException {
             if( aQName.equals(FILTER_ENTRY) )
             {
@@ -120,7 +123,7 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
         m_aFilterEntries = new HashMap<String,FilterEntry>();
         m_aTaskIdsReported = new HashSet<String>();
         SAXParser aParser = null;
-        Logger aLogger = new Logger( aFilterFile.getAbsolutePath(), "", aOut, Logger.ERROR );
+        Logger aLogger = new Logger( aFilterFile.getAbsolutePath(), "", aOut, Logger.LogLevel.ERROR );
         try
         {
             SAXParserFactory aParserFactory = SAXParserFactory.newInstance();

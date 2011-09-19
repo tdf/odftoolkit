@@ -43,7 +43,7 @@ public class ODFValidator implements ODFValidatorProvider {
     // Prefix used to distinguish internal resources from external ones
     
     // Loglevel
-    private int m_nLogLevel;
+    private Logger.LogLevel m_nLogLevel;
 
     // Validator provider
     private SchemaFactory m_aRNGSchemaFactory = null;
@@ -53,22 +53,22 @@ public class ODFValidator implements ODFValidatorProvider {
     protected Configuration m_aConfig = null;
     
     // User provided ODF version
-    protected String m_aVersion = null;
+    protected OdfVersion m_aVersion = null;
     
     // User provided preference for using Math DTD
     protected boolean m_bUseMathDTD = false;
 
     // Validatore and configuration cache
     private HashMap<String,Validator> m_aValidatorMap = null;
-    private HashMap<String,Configuration> m_aConfigurationMap = null;
+    private HashMap<OdfVersion,Configuration> m_aConfigurationMap = null;
 
     // Generator from last validateFile or validateStream call
     private String m_aGenerator = "";
 
     /** Creates a new instance of Validator */
     public ODFValidator( Configuration aConfig,
-                         int nLogLevel,
-                         String aVersion,
+                         Logger.LogLevel nLogLevel,
+                         OdfVersion aVersion,
                          boolean bUseMathDTD ) throws ODFValidatorException {
         
         m_nLogLevel = nLogLevel;
@@ -77,7 +77,7 @@ public class ODFValidator implements ODFValidatorProvider {
         m_bUseMathDTD = bUseMathDTD;
     }    
     
-    public boolean validate(PrintStream aOut, Configuration aConfig, int nMode ) throws ODFValidatorException
+    public boolean validate(PrintStream aOut, Configuration aConfig, OdfValidatorMode eMode ) throws ODFValidatorException
     {
         List<String> aFileNames = aConfig.getListPropety(Configuration.PATH);
         String aExcludeRegExp = aConfig.getProperty(Configuration.EXCLUDE);
@@ -85,12 +85,12 @@ public class ODFValidator implements ODFValidatorProvider {
         boolean bRecursive = aRecursive != null ? Boolean.valueOf(aRecursive) : false;
         String aFilterFileName = aConfig.getProperty(Configuration.FILTER);
 
-        return validate(aOut, aFileNames, aExcludeRegExp, nMode, bRecursive, aFilterFileName );
+        return validate(aOut, aFileNames, aExcludeRegExp, eMode, bRecursive, aFilterFileName );
     }
 
 
     public boolean validate(PrintStream aOut, List<String> aFileNames, String aExcludeRegExp, 
-                            int nMode, boolean bRecursive,                            
+                            OdfValidatorMode eMode, boolean bRecursive,
                             String aFilterFileName ) throws ODFValidatorException
     {
         boolean bRet = false;
@@ -105,22 +105,22 @@ public class ODFValidator implements ODFValidatorProvider {
         while( aIter.hasNext() )
         {
             File aFile = new File( aIter.next() );
-            bRet |= aFile.isDirectory() ? validateDir(aOut, aFile, aFileFilter, nMode, aFilter )
-                : validateFile(aOut, aFile, nMode, aFilter );
+            bRet |= aFile.isDirectory() ? validateDir(aOut, aFile, aFileFilter, eMode, aFilter )
+                : validateFile(aOut, aFile, eMode, aFilter );
         }
         
         return bRet;
     }
     
     public boolean validate(PrintStream aOut, InputStream aInputStream, String aBaseURI,
-                            int nMode,
+                            OdfValidatorMode eMode,
                             SAXParseExceptionFilter aFilter ) throws ODFValidatorException
     {
-        return validateStream( aOut, aInputStream, aBaseURI, nMode, aFilter );
+        return validateStream( aOut, aInputStream, aBaseURI, eMode, aFilter );
     }
     
 
-    private boolean validateDir(PrintStream aOut, final File aDir, FileFilter aFileFilter, int nMode, SAXParseExceptionFilter aFilter ) throws ODFValidatorException 
+    private boolean validateDir(PrintStream aOut, final File aDir, FileFilter aFileFilter, OdfValidatorMode eMode, SAXParseExceptionFilter aFilter ) throws ODFValidatorException
     {
         boolean bRet = true;
         File[] aFiles = aDir.listFiles( aFileFilter );
@@ -132,11 +132,11 @@ public class ODFValidator implements ODFValidatorProvider {
                 File aFile = aFiles[i];
                 if( aFile.isDirectory() )
                 {
-                    bRet |= validateDir(aOut, aFile, aFileFilter, nMode, aFilter );
+                    bRet |= validateDir(aOut, aFile, aFileFilter, eMode, aFilter );
                 }
                 else
                 {
-                    bRet |= validateFile(aOut, aFile, nMode, aFilter );
+                    bRet |= validateFile(aOut, aFile, eMode, aFilter );
                 }
             }
         }
@@ -148,10 +148,10 @@ public class ODFValidator implements ODFValidatorProvider {
      *
      * <p>After validation the getGenerator method can be called to get the generator of the validated file</p>
      */
-    public boolean validateFile(PrintStream aOut, File aDocFile, int nMode, SAXParseExceptionFilter aFilter ) throws ODFValidatorException
+    public boolean validateFile(PrintStream aOut, File aDocFile, OdfValidatorMode eMode, SAXParseExceptionFilter aFilter ) throws ODFValidatorException
     {
         ODFFileValidator aFileValidator = 
-            new ODFFileValidator( aDocFile, m_nLogLevel, nMode, m_aVersion, aFilter, this );
+            new ODFFileValidator( aDocFile, m_nLogLevel, eMode, m_aVersion, aFilter, this );
         
         boolean result=aFileValidator.validate(aOut);
 
@@ -165,11 +165,11 @@ public class ODFValidator implements ODFValidatorProvider {
      * <p>After validation the getGenerator method can be called to get the generator of the validated file</p>
      */
     public boolean validateStream(PrintStream aOut, InputStream aInputStream, String aBaseURI,
-                                  int nMode,
+                                  OdfValidatorMode eMode,
                                   SAXParseExceptionFilter aFilter ) throws ODFValidatorException
     {
         ODFStreamValidator aStreamValidator = 
-            new ODFStreamValidator( aInputStream, aBaseURI, m_nLogLevel, nMode, m_aVersion, aFilter, this );
+            new ODFStreamValidator( aInputStream, aBaseURI, m_nLogLevel, eMode, m_aVersion, aFilter, this );
 
         boolean result=aStreamValidator.validate(aOut);
         m_aGenerator=aStreamValidator.getGenerator();
@@ -177,27 +177,27 @@ public class ODFValidator implements ODFValidatorProvider {
         return result;
     }
 
-    public Validator getManifestValidator(PrintStream aOut, String aVersion) throws ODFValidatorException
+    public Validator getManifestValidator(PrintStream aOut, OdfVersion aVersion) throws ODFValidatorException
     {
         return getValidatorForSchema( aOut, getSchemaFileName(Configuration.MANIFEST_SCHEMA,aVersion));
     }
     
-    public Validator getValidator(PrintStream aOut, String aVersion) throws ODFValidatorException
+    public Validator getValidator(PrintStream aOut, OdfVersion aVersion) throws ODFValidatorException
     {
         return getValidatorForSchema( aOut, getSchemaFileName(Configuration.SCHEMA,aVersion));
     }
     
-    public Validator getStrictValidator(PrintStream aOut, String aVersion) throws ODFValidatorException
+    public Validator getStrictValidator(PrintStream aOut, OdfVersion aVersion) throws ODFValidatorException
     {
         return getValidatorForSchema( aOut, getSchemaFileName(Configuration.STRICT_SCHEMA,aVersion));
     }
     
-    public Validator getMathMLValidator(PrintStream aOut, String aVersion) throws ODFValidatorException
+    public Validator getMathMLValidator(PrintStream aOut, OdfVersion aVersion) throws ODFValidatorException
     {
         return getValidatorForSchema( aOut, getSchemaFileName(Configuration.MATHML2_SCHEMA,aVersion));
     }
     
-    public String getMathMLDTDSystemId( String aVersion ) throws ODFValidatorException
+    public String getMathMLDTDSystemId( OdfVersion aVersion ) throws ODFValidatorException
     {
         String aDTD = null;
         if( m_bUseMathDTD )
@@ -213,7 +213,7 @@ public class ODFValidator implements ODFValidatorProvider {
         return aDTD;
     }
     
-    public Validator getDSigValidator(PrintStream aOut, String aVersion) throws ODFValidatorException
+    public Validator getDSigValidator(PrintStream aOut, OdfVersion aVersion) throws ODFValidatorException
     {
         return getValidatorForSchema( aOut, getSchemaFileName(Configuration.DSIG_SCHEMA,aVersion));
     }
@@ -225,7 +225,7 @@ public class ODFValidator implements ODFValidatorProvider {
         m_aValidatorMap = null;
     }
 
-    private String getSchemaFileName( String aConfigName, String aVersion) throws ODFValidatorException
+    private String getSchemaFileName( String aConfigName, OdfVersion aVersion) throws ODFValidatorException
     {
         Configuration aConfig = 
             m_aConfig != null ? m_aConfig : getConfiguration( aVersion );
@@ -237,23 +237,23 @@ public class ODFValidator implements ODFValidatorProvider {
         return aFileName;
     }
 
-    private Configuration getConfiguration( String aVersion ) throws ODFValidatorException
+    private Configuration getConfiguration( OdfVersion aVersion ) throws ODFValidatorException
     {
         if( m_aConfigurationMap == null )
-            m_aConfigurationMap = new HashMap<String,Configuration>();
+            m_aConfigurationMap = new HashMap<OdfVersion,Configuration>();
         
         Configuration aConfig = m_aConfigurationMap.get(aVersion);
         if( aConfig == null)
         {
             String aConfigName = null;
-            if( aVersion == null || aVersion.equals("1.2") )
+            if( aVersion == null || aVersion==OdfVersion.V1_2 )
                 aConfigName = "/config/v12.properties";
-            else if( aVersion.equals("1.1") )
+            else if( aVersion==OdfVersion.V1_1 )
                 aConfigName = "/config/v11.properties";
-            else if( aVersion.equals("1.0") )
+            else if( aVersion==OdfVersion.V1_0 )
                 aConfigName = "/config/v10.properties";
             else
-                throw new ODFValidatorException( "unsupported ODF version: ".concat(aVersion) );
+                throw new ODFValidatorException( "unsupported ODF version: ".concat(aVersion.toString()) );
             
             InputStream aInStream = getClass().getResourceAsStream(aConfigName);
             if( aInStream == null )

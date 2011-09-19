@@ -26,17 +26,20 @@ import java.io.PrintStream;
 
 import org.xml.sax.SAXParseException;
 
-class Logger {
-    
-    static final int INFO = 2;
-    static final int WARNING = 1;
-    static final int ERROR = 0;
+public class Logger {
+
+    public enum LogLevel
+    {
+        ERROR,
+        WARNING,
+        INFO
+    };
     
     private String m_aFileName;
     private String m_aEntryName;
     private PrintStream m_aOut;
     private boolean m_bError;
-    private int m_nLevel;
+    private LogLevel m_nLevel;
     
     private static final String INFO_PREFIX = "Info:";
     private static final String WARNING_PREFIX = "Warning:";
@@ -44,7 +47,7 @@ class Logger {
     private static final String FATAL_PREFIX = "Fatal:";
     
     /** Creates a new instance of SchemaErrorHandler */
-    Logger( String aFileName, String aEntryName, PrintStream aOut , int nLevel) {
+    Logger( String aFileName, String aEntryName, PrintStream aOut , LogLevel nLevel) {
         m_aFileName = aFileName;
         m_aEntryName = aEntryName;
         m_aOut = aOut;
@@ -62,7 +65,7 @@ class Logger {
     }
 
     void logWarning(String aMsg) {
-        if( m_nLevel >= WARNING )
+        if( m_nLevel.compareTo(LogLevel.WARNING) >= 0 )
             logMessage( WARNING_PREFIX, aMsg );
     }
 
@@ -72,18 +75,18 @@ class Logger {
     }
 
     void logError(String aMsg) {
-        if( m_nLevel >= ERROR )
+        if( m_nLevel.compareTo(LogLevel.ERROR) >= 0 )
             logMessage( ERROR_PREFIX, aMsg );
         m_bError = true;
     }
 
     void logInfo(String aMsg, boolean bForceOutput) {
-        if( m_nLevel >= INFO || bForceOutput )
+        if( m_nLevel.compareTo(LogLevel.INFO) >= 0 || bForceOutput )
             logMessage( INFO_PREFIX, aMsg );
     }
     
     void logWarning(SAXParseException e) {
-        if( m_nLevel >= WARNING )
+        if( m_nLevel.compareTo(LogLevel.WARNING) >= 0 )
             logMessage( WARNING_PREFIX, e );
     }
 
@@ -93,7 +96,7 @@ class Logger {
     }
 
     void logError(SAXParseException e) {
-        if( m_nLevel >= ERROR )
+        if( m_nLevel.compareTo(LogLevel.ERROR) >= 0 )
             logMessage( ERROR_PREFIX, e );
         m_bError = true;
     }

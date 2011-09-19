@@ -24,7 +24,6 @@ package org.odftoolkit.odfvalidator;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Vector;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -42,12 +41,14 @@ class ManifestFilter extends NamespaceFilter {
     
     private Logger m_aLogger;
     
-    private String m_aMediaType = "";
-    private Vector<ManifestEntry> m_aSubDocs = new Vector<ManifestEntry>();
+    private ManifestListener m_aManifestListener = null;
+    private ManifestEntryListener m_aManifestEntryListener = null;
     
     /** Creates a new instance of KnownIssueFilter */
-    ManifestFilter( Logger aLogger ) {
+    ManifestFilter( Logger aLogger, ManifestListener aManifestListener, ManifestEntryListener aManifestEntryListener ) {
         m_aLogger = aLogger;
+        m_aManifestListener = aManifestListener;
+        m_aManifestEntryListener = aManifestEntryListener;
     }
 
     @Override
@@ -85,44 +86,21 @@ class ManifestFilter extends NamespaceFilter {
         super.startElement(aUri, aLocalName, aQName, aAtts);
         if( (aUri.equals(MANIFEST_NAMESPACE_URI) || aUri.equals(OOO_MANIFEST_NAMESPACE_URI)) && aLocalName.equals(FILE_ENTRY))
         {
+            String aFullPath = aAtts.getValue(aUri,FULL_PATH);
             String aMediaType = aAtts.getValue(aUri,MEDIA_TYPE);
-            if( aMediaType != null && isOpenDocumentMediaType(aMediaType))
+            if( aFullPath != null )
             {
-                String aFullPath = aAtts.getValue(aUri,FULL_PATH);
-                if( aFullPath != null )
+                if( aFullPath.equals("/") )
                 {
-                    if( aFullPath.equals("/") )
-                        m_aMediaType = aMediaType;
-                    else
-                        m_aSubDocs.add( new ManifestEntry(aFullPath,aMediaType));
+                    if( m_aManifestListener != null )
+                        m_aManifestListener.setMediaType( aMediaType );
+                }
+                else
+                {
+                    if( m_aManifestEntryListener != null )
+                        m_aManifestEntryListener.foundManifestEntry( new ManifestEntry(aFullPath,aMediaType) );
                 }
             }
         }
-    }
-    
-    private boolean isOpenDocumentMediaType( String aMediaType )
-    {
-        if( aMediaType.length() >14 && aMediaType.substring(12,14).equals("x-") )
-        {
-            String aNewMediaType = aMediaType.substring(0,12) + aMediaType.substring(14);
-            aMediaType = aNewMediaType;
-        }
-
-        return aMediaType.equals(ODFMediaTypes.TEXT_MEDIA_TYPE) ||
-                aMediaType.equals(ODFMediaTypes.GRAPHICS_MEDIA_TYPE) ||
-                aMediaType.equals(ODFMediaTypes.SPREADSHEET_MEDIA_TYPE) ||
-                aMediaType.equals(ODFMediaTypes.PRESENTATION_MEDIA_TYPE) ||
-                aMediaType.equals(ODFMediaTypes.FORMULA_MEDIA_TYPE) ||
-                aMediaType.equals(ODFMediaTypes.CHART_MEDIA_TYPE);
-    }
-    
-    String getMediaType()
-    { 
-        return m_aMediaType;
-    } 
-    
-    Vector<ManifestEntry> getSubDocuments()
-    {
-        return m_aSubDocs;
     }
 }

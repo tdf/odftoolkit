@@ -22,14 +22,47 @@
 
 package org.odftoolkit.odfvalidator;
 
-class ManifestEntry
+public class ManifestEntry
 {
-    String m_aFullPath;
-    String m_aMediaType;
+    private String m_aFullPath;
+    private String m_aMediaType;
     
     ManifestEntry(String aFullPath, String aMediaType)
     {
         m_aFullPath = aFullPath;
         m_aMediaType = aMediaType;
     }
+
+    String getFullPath()
+    {
+        return m_aFullPath;
+    }
+
+    String getMediaType()
+    {
+        return m_aMediaType;
+    }
+
+    boolean isOpenDocumentMediaType()
+    {
+        return m_aMediaType!=null && isOpenDocumentMediaType(m_aMediaType);
+    }
+
+    static boolean isOpenDocumentMediaType( String aMediaType )
+    {
+        if( aMediaType.length() >14 && aMediaType.substring(12,14).equals("x-") )
+        {
+            String aNewMediaType = aMediaType.substring(0,12) + aMediaType.substring(14);
+            aMediaType = aNewMediaType;
+        }
+
+        return aMediaType.equals(ODFMediaTypes.TEXT_MEDIA_TYPE) ||
+                aMediaType.equals(ODFMediaTypes.GRAPHICS_MEDIA_TYPE) ||
+                aMediaType.equals(ODFMediaTypes.SPREADSHEET_MEDIA_TYPE) ||
+                aMediaType.equals(ODFMediaTypes.PRESENTATION_MEDIA_TYPE) ||
+                aMediaType.equals(ODFMediaTypes.FORMULA_MEDIA_TYPE) ||
+                aMediaType.equals(ODFMediaTypes.CHART_MEDIA_TYPE);
+    }
+
+
 }

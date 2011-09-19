@@ -27,9 +27,10 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLFilter;
-import org.odftoolkit.odfdom.pkg.OdfPackage;
+
 
 public class MetaInformation {
 
@@ -60,7 +61,7 @@ public class MetaInformation {
         try
         {
             InputStream aInStream = aDocFile.getInputStream(OdfPackage.OdfFile.MANIFEST.getPath());
-            Logger aLogger = new Logger(aDocFile.getBaseURI(),OdfPackage.OdfFile.MANIFEST.getPath(),m_aOut, Logger.INFO);
+            Logger aLogger = new Logger(aDocFile.getBaseURI(),OdfPackage.OdfFile.MANIFEST.getPath(),m_aOut, Logger.LogLevel.INFO);
         
             getInformation( aInStream, aLogger );
         }

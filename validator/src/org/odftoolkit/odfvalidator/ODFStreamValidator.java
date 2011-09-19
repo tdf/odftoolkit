@@ -23,8 +23,9 @@
 package org.odftoolkit.odfvalidator;
 
 import java.io.InputStream;
-
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+
+
 
 /**
  * Validator for Streams
@@ -36,14 +37,14 @@ public class ODFStreamValidator extends ODFRootPackageValidator {
 
     ODFStreamValidator(InputStream aInputStream,
                               String aBaseURI,
-                              int nLogLevel, 
-                              int nMode,
-                              String aVersion,
+                              Logger.LogLevel nLogLevel,
+                              OdfValidatorMode eMode,
+                              OdfVersion aVersion,
                               SAXParseExceptionFilter aFilter,
                               ODFValidatorProvider aValidatorProvider ) 
         
         throws ODFValidatorException {
-        super(nLogLevel, nMode, aVersion, aFilter, aValidatorProvider );
+        super(nLogLevel, eMode, aVersion, aFilter, aValidatorProvider );
         
         m_aInputStream=aInputStream;
         m_aBaseURI=aBaseURI;

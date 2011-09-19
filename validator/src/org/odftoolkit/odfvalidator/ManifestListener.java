@@ -22,35 +22,8 @@
 
 package org.odftoolkit.odfvalidator;
 
-import java.io.File;
-import org.odftoolkit.odfdom.pkg.OdfPackage;
-
-
-/**
- * Validator for Files
- */
-public class ODFFileValidator extends ODFRootPackageValidator {
+interface ManifestListener {
     
-    private File m_aFile = null;
-
-        /** Creates a new instance of ODFFileValidator */
-    public ODFFileValidator( File aFile, Logger.LogLevel nLogLevel,
-                             OdfValidatorMode eMode, OdfVersion aVersion,
-                             SAXParseExceptionFilter aFilter,
-                             ODFValidatorProvider aValidatorProvider ) throws ODFValidatorException
-    {
-        super( nLogLevel, eMode, aVersion, aFilter, aValidatorProvider );
-        m_aFile = aFile;
-    }
-
-    protected String getLoggerName()
-    {
-        return m_aFile.getAbsolutePath();
-    }
+    void setMediaType( String aMediaType );
     
-    protected OdfPackage getPackage() throws Exception
-    {
-        return OdfPackage.loadPackage( m_aFile );
-    }
-
 }

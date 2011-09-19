@@ -30,22 +30,42 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.XMLFilterImpl;
 
-class AlienFilter extends XMLFilterImpl {
+class ForeignContentFilter extends XMLFilterImpl {
 
     private static final String OFFICE_NAMESPACE_URI = OdfNamespaceNames.OFFICE.getNamespaceUri();
-    
-    private static final String PROCESS_CONTENT = "process-content";
-    private static final String TRUE_STRING = "true";
-    
-    private static HashSet<String> m_aODFNamespaceSet = null;
-    private Vector<Boolean> m_aAlienElements = null;
+    private static final String TEXT_NAMESPACE_URI = OdfNamespaceNames.TEXT.getNamespaceUri();
 
+    private static final String H = "h";
+    private static final String P = "p";
+
+    private static final String PROCESS_CONTENT = "process-content";
+    private static final String TRUE = "true";
+
+    // Set of ODF namespace URIs
+    private static HashSet<String> m_aODFNamespaceSet = null;
+
+    // This list contains a boolean for all ancestor foreign elements.
+    // That boolean values specifies whether the element content is processed or not.
+    private Vector<Boolean> m_aAlienElementProcessContents = null;
+
+    // This list contains a boolean for all ancestor elements.
+    // That boolean values specifies whether the element is a text:h ot text:p
+    // element itself or has a text:h or text:p ancestor element.
+    private Vector<Boolean> m_aParagraphAncestorElements = null;
+
+    private ForeignContentListener m_aForeignContentListener = null;
+
+    private OdfVersion m_aVersion = null;
     private Logger m_aLogger;
 
     /** Creates a new instance of NamespaceFilter */
-    AlienFilter( Logger aLogger, String aVersion ) {
+    ForeignContentFilter( Logger aLogger, OdfVersion aVersion, ForeignContentListener aForeignContentListener ) {
         m_aLogger = aLogger;
-        m_aAlienElements = new Vector<Boolean>();
+        m_aVersion = aVersion;
+        m_aForeignContentListener = aForeignContentListener;
+
+        m_aAlienElementProcessContents = new Vector<Boolean>();
+        m_aParagraphAncestorElements = new Vector<Boolean>();
         
         m_aODFNamespaceSet = new HashSet<String>();
         m_aODFNamespaceSet.add( OdfNamespaceNames.OFFICE.getNamespaceUri() );
@@ -67,61 +87,80 @@ class AlienFilter extends XMLFilterImpl {
         m_aODFNamespaceSet.add( OdfNamespaceNames.SCRIPT.getNamespaceUri() );
         m_aODFNamespaceSet.add( OdfNamespaceNames.XLINK.getNamespaceUri() );
         m_aODFNamespaceSet.add( OdfNamespaceNames.XFORMS.getNamespaceUri() );
-        if( aVersion.equals("1.2"))
+        if( m_aVersion.compareTo( OdfVersion.V1_2 ) >= 0 )
         {
-            m_aODFNamespaceSet.add( "http://www.w3.org/1999/xhtml" );
-            m_aODFNamespaceSet.add( "http://www.w3.org/2003/g/data-view#" );
+            m_aODFNamespaceSet.add( OdfNamespaceNames.XHTML.getNamespaceUri() );
+            m_aODFNamespaceSet.add( OdfNamespaceNames.GRDDL.getNamespaceUri() );
+            m_aODFNamespaceSet.add( OdfNamespaceNames.DB.getNamespaceUri() );
+            m_aODFNamespaceSet.add( javax.xml.XMLConstants.XML_NS_URI );
         }
-
     }
-
 
 
     @Override
     public void endElement(String aUri, String aLocalName, String aQName) throws SAXException {
         if( isAlienNamespace(aUri) )
         {
-            m_aAlienElements.removeElementAt( m_aAlienElements.size()-1 );
+            m_aAlienElementProcessContents.removeElementAt( m_aAlienElementProcessContents.size()-1 );
         }
         else
         {
-            boolean bProcessContent = m_aAlienElements.isEmpty() ? true : m_aAlienElements.lastElement();
-            if( bProcessContent )
+            if( isProcessContent() )
                 super.endElement(aUri,aLocalName,aQName);
         }
     }
 
 
     @Override
-    public void startElement(String aUri, String aLocalName, String aQName, Attributes aAtts) throws SAXException {
-        Boolean bProcessContent = m_aAlienElements.isEmpty() ? true : m_aAlienElements.lastElement();
+    public void startElement(String aUri, String aLocalName, String aQName, Attributes aAtts) throws SAXException
+    {
+        boolean bProcessContent = isProcessContent();
         
         if( isAlienNamespace(aUri) )
         {
             if( bProcessContent )
             {
                 String aProcessContentValue = aAtts.getValue( OFFICE_NAMESPACE_URI, PROCESS_CONTENT );
-                bProcessContent = aProcessContentValue == null || aProcessContentValue.equals(TRUE_STRING);
+                if( m_aVersion.compareTo( OdfVersion.V1_2 ) >= 0 )
+                {
+                    bProcessContent = aProcessContentValue != null ? aProcessContentValue.equals(TRUE) : true;
+                }
+                else
+                {
+                    bProcessContent = aProcessContentValue == null || aProcessContentValue.equals(TRUE);
+                }
+
+                if( m_aForeignContentListener!= null )
+                    m_aForeignContentListener.foreignElementDetected(aUri, aLocalName, aQName, aAtts);
+                m_aLogger.logInfo( String.format("extension element <%s> found, element is ignored, element content is %s.",aQName,bProcessContent?"processed":"is ignored"), false);
             }
-            m_aAlienElements.addElement( bProcessContent );
-            m_aLogger.logInfo( String.format("element <%s> ignored, content is %s.",aQName,bProcessContent?"processed":"not processed"), false);            
+            m_aAlienElementProcessContents.addElement( bProcessContent );
         }
         else if( bProcessContent )
         {
             Attributes aOldAtts = aAtts;
+
             AttributesImpl aNewAtts = null;
             int i = aOldAtts.getLength();
             while( i>0 ) {
                 --i;
-                if ( isAlienNamespace( aOldAtts.getURI(i) ) ) {
+                String aAttrUri = aOldAtts.getURI(i);
+                if ( isAlienNamespace( aAttrUri ) ) {
                     if (aNewAtts == null) {
                         aNewAtts = new AttributesImpl(aOldAtts);
                         aAtts = aNewAtts;
                     }
-                    m_aLogger.logInfo( String.format("attribute '%s' of element <%s> ignored.",aAtts.getQName(i),aQName), false);            
+                    if( m_aForeignContentListener!= null )
+                        m_aForeignContentListener.foreignAttributeDetected(aAttrUri, aOldAtts.getLocalName(i), aOldAtts.getQName(i), aOldAtts.getValue(i));
+                    m_aLogger.logInfo( String.format("extension attribute '%s' of element <%s> found and ignored.",aAtts.getQName(i),aQName), false);
                     aNewAtts.removeAttribute(i);
                 }
             }
+
+            boolean bParagraphAncestor = hasParagraphAncestorElement();
+            bParagraphAncestor |= ((aLocalName.equals(P) || aLocalName.equals(H)) && aUri.equals(TEXT_NAMESPACE_URI));
+            m_aParagraphAncestorElements.add(bParagraphAncestor);
+
             super.startElement(aUri, aLocalName, aQName, aAtts);
         }
     }
@@ -133,12 +172,20 @@ class AlienFilter extends XMLFilterImpl {
         return !m_aODFNamespaceSet.contains(aUri);
     }
 
+    private boolean isProcessContent()
+    {
+        return m_aAlienElementProcessContents.isEmpty() ? true : m_aAlienElementProcessContents.lastElement();
+    }
+
+    private boolean hasParagraphAncestorElement()
+    {
+        return m_aParagraphAncestorElements.isEmpty() ? false : m_aParagraphAncestorElements.lastElement();
+    }
+
     @Override
     public void characters(char[] aChars, int nStart, int nLength) throws SAXException {
-        boolean bProcessContent = m_aAlienElements.isEmpty() ? true : m_aAlienElements.lastElement();
-        if( bProcessContent )
+        if( isProcessContent() )
             super.characters(aChars, nStart, nLength);
     }
-    
     
 }

@@ -26,17 +26,17 @@ import javax.xml.validation.Validator;
 import java.io.PrintStream;
 
 public interface ODFValidatorProvider {
-    Validator getValidator(PrintStream aOut, String aVersion ) throws ODFValidatorException;
+    Validator getValidator(PrintStream aOut, OdfVersion aVersion ) throws ODFValidatorException;
 
-    Validator getStrictValidator(PrintStream aOut, String aVersion) throws ODFValidatorException;
+    Validator getStrictValidator(PrintStream aOut, OdfVersion aVersion) throws ODFValidatorException;
     
-    Validator getManifestValidator(PrintStream aOut, String aVersion) throws ODFValidatorException;
+    Validator getManifestValidator(PrintStream aOut, OdfVersion aVersion) throws ODFValidatorException;
 
-    Validator getDSigValidator(PrintStream aOut, String aVersion) throws ODFValidatorException;
+    Validator getDSigValidator(PrintStream aOut, OdfVersion aVersion) throws ODFValidatorException;
 
-    Validator getMathMLValidator(PrintStream aOut, String aVersion) throws ODFValidatorException;
+    Validator getMathMLValidator(PrintStream aOut, OdfVersion aVersion) throws ODFValidatorException;
 
-    String getMathMLDTDSystemId( String aVersion ) throws ODFValidatorException;
+    String getMathMLDTDSystemId( OdfVersion aVersion ) throws ODFValidatorException;
         
     void resetValidatorProvider();
 }
