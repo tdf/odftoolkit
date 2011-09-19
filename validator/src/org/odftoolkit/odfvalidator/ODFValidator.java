@@ -59,7 +59,7 @@ public class ODFValidator implements ODFValidatorProvider {
     protected boolean m_bUseMathDTD = false;
 
     // Validatore and configuration cache
-    private HashMap<String,Validator> m_aValidatorMap = null;
+    private HashMap<String,Schema> m_aSchemaMap = null;
     private HashMap<OdfVersion,Configuration> m_aConfigurationMap = null;
 
     // Generator from last validateFile or validateStream call
@@ -222,7 +222,7 @@ public class ODFValidator implements ODFValidatorProvider {
     {
         m_aRNGSchemaFactory = null;
         m_aXSDSchemaFactory = null;
-        m_aValidatorMap = null;
+        m_aSchemaMap = null;
     }
 
     private String getSchemaFileName( String aConfigName, OdfVersion aVersion) throws ODFValidatorException
@@ -278,20 +278,20 @@ public class ODFValidator implements ODFValidatorProvider {
     
     private Validator getValidatorForSchema( PrintStream aOut, String aSchemaFileName ) throws ODFValidatorException
     {
-        if( m_aValidatorMap == null )
-            m_aValidatorMap = new HashMap<String,Validator>();
+        if( m_aSchemaMap == null )
+            m_aSchemaMap = new HashMap<String,Schema>();
 
-        Validator aValidator = m_aValidatorMap.get(aSchemaFileName);
-        if( aValidator == null )
+        Schema aSchema = m_aSchemaMap.get(aSchemaFileName);
+        if( aSchema == null )
         {
-            aValidator = createValidator( aOut, aSchemaFileName );
-            m_aValidatorMap.put( aSchemaFileName, aValidator);
+            aSchema = createSchema( aOut, aSchemaFileName );
+            m_aSchemaMap.put( aSchemaFileName, aSchema);
         }
 
-        return aValidator;
+        return aSchema.newValidator();
     }
     
-    private Validator createValidator(PrintStream aOut, String aSchemaFileName ) throws ODFValidatorException 
+    private Schema createSchema(PrintStream aOut, String aSchemaFileName ) throws ODFValidatorException
     {
         Logger aLogger = new Logger(aSchemaFileName, "", aOut, m_nLogLevel);
         
@@ -347,7 +347,7 @@ public class ODFValidator implements ODFValidatorProvider {
         }
 
         aLogger.logInfo( "parsed." , false);
-        return aSchema.newValidator();
+        return aSchema;
     }
 
     private SchemaFactory getSchemaFactory( String aSchemaLanguage ) throws ODFValidatorException
