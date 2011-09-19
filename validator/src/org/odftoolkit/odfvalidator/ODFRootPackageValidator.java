@@ -23,7 +23,6 @@
 package org.odftoolkit.odfvalidator;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.zip.ZipException;
