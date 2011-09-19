@@ -201,7 +201,7 @@
         </xslt >
     </target>
 
-    
+    <!--
     <target name="test" depends="jar" description="Test ODFValidator">
         <condition property="mathml.dtd.option" value="" else="-d">
             <istrue value="${use.mathml2.xsd}"/>
@@ -214,8 +214,12 @@
             <arg value="${testdocs.dir}"/>
         </java>
     </target>
-    
-    
+    -->
+
+    <!-- running the tests needs the built jar, so add a dependence here -->
+    <target name="-post-compile-test" depends="jar"/>
+    <target name="-post-compile-test-single" depends="jar"/>
+
 </project>
 
 
