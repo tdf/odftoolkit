@@ -108,7 +108,8 @@
                     in="${opendocument.v10.schema.dir}/${opendocument.v10.schema}" 
                     out="${build.classes.dir}/schema/odf10/${opendocument.v10.schema}"/>  
         <copy todir="${build.classes.dir}/schema/odf10">
-            <fileset dir="${opendocument.v10.schema.dir}" includes="*.rng" excludes="${opendocument.v10.schema}"/>
+            <fileset dir="${opendocument.v10.schema.dir}"
+                includes="${opendocument.v10.schema.strict},${opendocument.v10.schema.manifest}"/>
         </copy>
     </target>
 
@@ -117,7 +118,8 @@
                     in="${opendocument.v11.schema.dir}/${opendocument.v11.schema}" 
                     out="${build.classes.dir}/schema/odf11/${opendocument.v11.schema}"/>  
         <copy todir="${build.classes.dir}/schema/odf11">
-            <fileset dir="${opendocument.v11.schema.dir}" includes="*.rng" excludes="${opendocument.v11.schema}"/>
+            <fileset dir="${opendocument.v11.schema.dir}"
+                includes="${opendocument.v11.schema.strict},${opendocument.v11.schema.manifest}"/>
         </copy>
     </target>
 
