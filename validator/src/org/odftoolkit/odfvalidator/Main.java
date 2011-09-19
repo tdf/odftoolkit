@@ -271,13 +271,13 @@ public class Main {
         System.out.println( "-S: Use schema <schemafile> for validation" );
         System.out.println( "-V: Print version" );
         System.out.println( "-c: Check conformance (default for ODF 1.2 documents)" );
-        System.out.println( "-c: Check extended conformance (ODF 1.2 documents only)" );
+        System.out.println( "-e: Check extended conformance (ODF 1.2 documents only)" );
         System.out.println( "-d: Use MathML DTD rather than MathML2 schema for validation" );
         System.out.println( "-f: Use filterfile <filterfile>" );
         System.out.println( "-g: Show <odffiles> generators and exit" );
         System.out.println( "-h: Print this help and exit" );
         System.out.println( "-o: Store validation errors in <outputfile>" );
-        System.out.println( "-r: Process directory recursivly" );
+        System.out.println( "-r: Process directory recursively" );
         System.out.println( "-s: Validate against strict schema (ODF 1.2 documents only)" );
         System.out.println( "-v: Verbose output, including generator and warnings" );
         System.out.println( "-w: Print warnings" );
