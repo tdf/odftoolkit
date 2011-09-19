@@ -35,11 +35,11 @@ public class ODFFileValidator extends ODFRootPackageValidator {
 
         /** Creates a new instance of ODFFileValidator */
     public ODFFileValidator( File aFile, int nLogLevel, 
-                             int nMode,
+                             int nMode, String aVersion,
                              SAXParseExceptionFilter aFilter,
                              ODFValidatorProvider aValidatorProvider ) throws ODFValidatorException
     {
-        super( nLogLevel, nMode, aFilter, aValidatorProvider );
+        super( nLogLevel, nMode, aVersion, aFilter, aValidatorProvider );
         m_aFile = aFile;
     }
 

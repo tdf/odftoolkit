@@ -31,11 +31,11 @@ public class ODFSubPackageValidator extends ODFPackageValidator {
     private String m_aSubEntryName = null;
 
     ODFSubPackageValidator( OdfPackage aPkg, String aBaseURI, String aSubEntryName, String aMediaType,
-                             int nLogLevel, int nMode, 
+                             int nLogLevel, int nMode, String aVersion,
                              SAXParseExceptionFilter aFilter, String aParentGenerator,
                              ODFValidatorProvider aValidatorProvider ) throws ODFValidatorException
     {
-        super( nLogLevel, nMode, aMediaType, aFilter, aValidatorProvider );
+        super( nLogLevel, nMode, aVersion, aMediaType, aFilter, aValidatorProvider );
         m_aPkg = aPkg;
         m_aBaseURI = aBaseURI + "/" + aSubEntryName;
         m_aSubEntryName = aSubEntryName;

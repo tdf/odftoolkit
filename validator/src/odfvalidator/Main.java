@@ -38,7 +38,7 @@ import java.util.Vector;
  */
 public class Main {
 
-    private static final String VERSION="1.1.1";
+    private static final String VERSION="1.1.2";
     
     /** Creates a new instance of Main */
     public Main() {
@@ -77,6 +77,10 @@ public class Main {
             else if( aArg.equals("-d") )
             {
                 bUseMathDTD = true;
+            }
+            else if( aArg.equals("-e") )
+            {
+                nMode = ODFPackageValidator.CHECK_EXTENDED_CONFORMANCE;
             }
             else if( aArg.equals("-f") )
             {
@@ -151,7 +155,7 @@ public class Main {
                 System.out.println(": unknown option, use '-' for help");
                 return;
             }
-            else
+            else if( aArg.length()>0 )
             {
                 aFileNames.add( aArg );
             }
@@ -257,8 +261,8 @@ public class Main {
     private static void printUsage()
     {
         System.out.println( "usage: odfvalidator -g <odffiles>");
-        System.out.println( "       odfvalidator [-r] [-c|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] [-1.0|-1.1|-1.2] <odffiles>");
-        System.out.println( "       odfvalidator [-r] [-c|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] -S <schemafile> <odffiles>");
+        System.out.println( "       odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] [-1.0|-1.1|-1.2] <odffiles>");
+        System.out.println( "       odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] -S <schemafile> <odffiles>");
         System.out.println( "       odfvalidator [-c|-s] [-v|-w] [-d] [-o outputfile] -C <configfile>");
         System.out.println( "       odfvalidator -h");
         System.out.println( "       odfvalidator -V");
@@ -266,14 +270,15 @@ public class Main {
         System.out.println( "-C: Validate using configuration file <configfile>" );
         System.out.println( "-S: Use schema <schemafile> for validation" );
         System.out.println( "-V: Print version" );
-        System.out.println( "-c: Check conformance" );
+        System.out.println( "-c: Check conformance (default for ODF 1.2 documents)" );
+        System.out.println( "-c: Check extended conformance (ODF 1.2 documents only)" );
         System.out.println( "-d: Use MathML DTD rather than MathML2 schema for validation" );
         System.out.println( "-f: Use filterfile <filterfile>" );
         System.out.println( "-g: Show <odffiles> generators and exit" );
         System.out.println( "-h: Print this help and exit" );
         System.out.println( "-o: Store validation errors in <outputfile>" );
         System.out.println( "-r: Process directory recursivly" );
-        System.out.println( "-s: Validate against strict schema" );
+        System.out.println( "-s: Validate against strict schema (ODF 1.2 documents only)" );
         System.out.println( "-v: Verbose output, including generator and warnings" );
         System.out.println( "-w: Print warnings" );
         System.out.println( "-x: Exclude paths that match <regexp>" );

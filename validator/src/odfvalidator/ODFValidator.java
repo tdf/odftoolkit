@@ -151,7 +151,7 @@ public class ODFValidator implements ODFValidatorProvider {
     public boolean validateFile(PrintStream aOut, File aDocFile, int nMode, SAXParseExceptionFilter aFilter ) throws ODFValidatorException
     {
         ODFFileValidator aFileValidator = 
-            new ODFFileValidator( aDocFile, m_nLogLevel, nMode, aFilter, this );
+            new ODFFileValidator( aDocFile, m_nLogLevel, nMode, m_aVersion, aFilter, this );
         
         boolean result=aFileValidator.validate(aOut);
 
@@ -169,7 +169,7 @@ public class ODFValidator implements ODFValidatorProvider {
                                   SAXParseExceptionFilter aFilter ) throws ODFValidatorException
     {
         ODFStreamValidator aStreamValidator = 
-            new ODFStreamValidator( aInputStream, aBaseURI, m_nLogLevel, nMode, aFilter, this );
+            new ODFStreamValidator( aInputStream, aBaseURI, m_nLogLevel, nMode, m_aVersion, aFilter, this );
 
         boolean result=aStreamValidator.validate(aOut);
         m_aGenerator=aStreamValidator.getGenerator();
@@ -203,8 +203,7 @@ public class ODFValidator implements ODFValidatorProvider {
         if( m_bUseMathDTD )
         {
             Configuration aConfig = 
-                m_aConfig != null ? m_aConfig
-                                  : getConfiguration( m_aVersion != null ? m_aVersion : aVersion );
+                m_aConfig != null ? m_aConfig : getConfiguration( aVersion );
 
             aDTD = aConfig.getProperty(Configuration.MATHML_SCHEMA);
             if( m_aConfig == null && aDTD != null && aDTD.length() > 0  )
@@ -229,8 +228,7 @@ public class ODFValidator implements ODFValidatorProvider {
     private String getSchemaFileName( String aConfigName, String aVersion) throws ODFValidatorException
     {
         Configuration aConfig = 
-            m_aConfig != null ? m_aConfig
-                              : getConfiguration( m_aVersion != null ? m_aVersion : aVersion );
+            m_aConfig != null ? m_aConfig : getConfiguration( aVersion );
 
         String aFileName = aConfig.getProperty(aConfigName);
         if( m_aConfig == null && aFileName != null && aFileName.length() > 0  )

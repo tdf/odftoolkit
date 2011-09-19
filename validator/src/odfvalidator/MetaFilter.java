@@ -31,9 +31,12 @@ class MetaFilter extends XMLFilterImpl {
 
     private boolean m_bInGenerator = false;
     private String m_aGenerator = "";
+    private boolean m_bRoot = true;
     
     private static final String META_NAMESPACE_URI = OdfNamespace.META.toString();
+    private static final String OFFICE_NAMESPACE_URI = OdfNamespace.OFFICE.toString();
     private static final String GENERATOR = "generator";
+    private static final String DOCUMENT_META = "document-meta";
 
     private Logger m_aLogger;
     private MetaInformationListener m_aMetaListener;
@@ -45,6 +48,7 @@ class MetaFilter extends XMLFilterImpl {
         m_aMetaListener = aMetaListener;
     }
     
+    @Override
     public void characters(char[] aChars, int nStart, int nLength) throws SAXException {
         super.characters(aChars, nStart, nLength);
         
@@ -54,6 +58,7 @@ class MetaFilter extends XMLFilterImpl {
         }
     }
 
+    @Override
     public void endElement(String aUri, String aLocalName, String aQName) throws SAXException {
         super.endElement(aUri, aLocalName, aQName);
         
@@ -68,8 +73,16 @@ class MetaFilter extends XMLFilterImpl {
         }
     }
 
+    @Override
     public void startElement(String aUri, String aLocalName, String aQName, Attributes aAttributes) throws SAXException {
         super.startElement(aUri, aLocalName, aQName, aAttributes);
+
+        if( m_bRoot )
+        {
+            if( !(aUri.equals(OFFICE_NAMESPACE_URI) && aLocalName.equals(DOCUMENT_META)) )
+                m_aLogger.logError("Invalid root element: " + aQName );
+            m_bRoot = false;
+        }
                 
         if( aUri.equals(META_NAMESPACE_URI) && aLocalName.equals(GENERATOR) )
             m_bInGenerator = true;

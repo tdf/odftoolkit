@@ -40,6 +40,7 @@ class MathML20Filter extends XMLFilterImpl {
         m_aLogger = aLogger;
     }
 
+    @Override
     public InputSource resolveEntity(String aPublicId, String aSystemId) throws SAXException, IOException {
         // Ignore the external OOo MathML DTD
         

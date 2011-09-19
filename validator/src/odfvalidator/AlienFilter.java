@@ -43,7 +43,7 @@ class AlienFilter extends XMLFilterImpl {
     private Logger m_aLogger;
 
     /** Creates a new instance of NamespaceFilter */
-    AlienFilter( Logger aLogger ) {
+    AlienFilter( Logger aLogger, String aVersion ) {
         m_aLogger = aLogger;
         m_aAlienElements = new Vector<Boolean>();
         
@@ -63,10 +63,16 @@ class AlienFilter extends XMLFilterImpl {
         m_aODFNamespaceSet.add( OdfNamespace.FORM.toString() );
         m_aODFNamespaceSet.add( OdfNamespace.PRESENTATION.toString() );
         m_aODFNamespaceSet.add( OdfNamespace.SMIL.toString() );
-        m_aODFNamespaceSet.add( "urn:oasis:names:tc:opendocument:xmlns:config:1.0" );
+        m_aODFNamespaceSet.add( OdfNamespace.CONFIG.toString() );
         m_aODFNamespaceSet.add( OdfNamespace.SCRIPT.toString() );
         m_aODFNamespaceSet.add( OdfNamespace.XLINK.toString() );
         m_aODFNamespaceSet.add( OdfNamespace.XFORMS.toString() );
+        if( aVersion.equals("1.2"))
+        {
+            m_aODFNamespaceSet.add( "http://www.w3.org/1999/xhtml" );
+            m_aODFNamespaceSet.add( "http://www.w3.org/2003/g/data-view#" );
+        }
+
     }
 
 
@@ -127,6 +133,7 @@ class AlienFilter extends XMLFilterImpl {
         return !m_aODFNamespaceSet.contains(aUri);
     }
 
+    @Override
     public void characters(char[] aChars, int nStart, int nLength) throws SAXException {
         boolean bProcessContent = m_aAlienElements.isEmpty() ? true : m_aAlienElements.lastElement();
         if( bProcessContent )

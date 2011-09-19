@@ -29,8 +29,8 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator {
 
     private OdfPackage m_aPkg = null;
 
-    ODFRootPackageValidator(int nLogLevel, int nMode, SAXParseExceptionFilter aFilter, ODFValidatorProvider aValidatorProvider) {
-        super(nLogLevel, nMode, null, aFilter, aValidatorProvider);
+    ODFRootPackageValidator(int nLogLevel, int nMode, String aVersion, SAXParseExceptionFilter aFilter, ODFValidatorProvider aValidatorProvider) {
+        super(nLogLevel, nMode, aVersion, null, aFilter, aValidatorProvider);
     }
 
     abstract OdfPackage getPackage() throws Exception;

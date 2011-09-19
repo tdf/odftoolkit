@@ -47,10 +47,19 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public abstract class ODFPackageValidator implements MetaInformationListener {
 
-    static final int CHECK_CONFORMANCE = 0;
-    static final int VALIDATE = 1;
-    static final int VALIDATE_STRICT = 2;
-        
+    static final int CHECK_CONFORMANCE = 0; // all versions
+    static final int VALIDATE = 1;          // ODF 1.0 and 1.1 only
+    static final int VALIDATE_STRICT = 2;   // ODF 1.0 and 1.1 only
+    static final int CHECK_EXTENDED_CONFORMANCE = 3; // ODF 1.2 only
+
+    static final String ODF_VERSION_10 = "1.0";
+    static final String ODF_VERSION_11 = "1.1";
+    static final String ODF_VERSION_12 = "1.2";
+
+    static final String DOCUMENT_SETTINGS = "document-settings";
+    static final String DOCUMENT_STYLES = "document-styles";
+    static final String DOCUMENT_CONTENT = "document-content";
+
     private int m_nLogLevel;
     private int m_nMode = CHECK_CONFORMANCE;
     private SAXParseExceptionFilter m_aFilter = null;
@@ -58,19 +67,20 @@ public abstract class ODFPackageValidator implements MetaInformationListener {
     
     private String m_aMediaType = "";
     private String m_aGenerator = "";
-    private String m_aVersion = "";
+    private String m_aConfigVersion = "";
     private Vector<ManifestEntry> m_aSubDocs;
 
     private SAXParserFactory m_aSAXParserFactory = null;
 
 
-    ODFPackageValidator( int nLogLevel, int nMode, String aMediaType,
+    ODFPackageValidator( int nLogLevel, int nMode, String aVersion, String aMediaType,
                              SAXParseExceptionFilter aFilter,ODFValidatorProvider aValidatorProvider) {
         m_nLogLevel = nLogLevel;
         m_nMode = nMode;
         m_aFilter = aFilter;
         m_aValidatorProvider = aValidatorProvider;
         m_aMediaType = aMediaType;
+        m_aConfigVersion = aVersion;
     }
     
        
@@ -99,20 +109,21 @@ public abstract class ODFPackageValidator implements MetaInformationListener {
         
         try
         {
-            m_aVersion = getVersion( aLogger );
-            if( m_aVersion != null )
-                aLogger.logInfo( "ODF Version: " + m_aVersion, false );
+            String aDocVersion = getVersion( aLogger );
+            if( aDocVersion != null )
+                aLogger.logInfo( "ODF Version: " + aDocVersion, false );
+            String aVersion = m_aConfigVersion == null ? aDocVersion : m_aConfigVersion;
             
-            bHasErrors |= validateMeta(aOut, getStreamName( OdfDocument.OdfXMLFile.META.getFileName()), true );
+            bHasErrors |= validateMeta(aOut, getStreamName( OdfDocument.OdfXMLFile.META.getFileName()), aVersion, true );
             if( bRoot )
-                bHasErrors |= validateManifest(aOut  );
+                bHasErrors |= validateManifest(aOut, aVersion  );
             aLogger.logInfo( "Media Type: " + m_aMediaType , false);
-            bHasErrors |= validateEntry(aOut, getStreamName(OdfDocument.OdfXMLFile.SETTINGS.getFileName() ));
-            bHasErrors |= validateEntry(aOut, getStreamName( OdfDocument.OdfXMLFile.STYLES.getFileName() ));
+            bHasErrors |= validateEntry(aOut, getStreamName(OdfDocument.OdfXMLFile.SETTINGS.getFileName()), DOCUMENT_SETTINGS, aVersion);
+            bHasErrors |= validateEntry(aOut, getStreamName( OdfDocument.OdfXMLFile.STYLES.getFileName()), DOCUMENT_STYLES, aVersion );
             if( m_aMediaType.equals(ODFMediaTypes.FORMULA_MEDIA_TYPE))
-                bHasErrors |= validateMathML(aOut, getStreamName( OdfDocument.OdfXMLFile.CONTENT.getFileName() ) );
+                bHasErrors |= validateMathML(aOut, getStreamName( OdfDocument.OdfXMLFile.CONTENT.getFileName()), aVersion );
             else
-                bHasErrors |= validateEntry(aOut, getStreamName( OdfDocument.OdfXMLFile.CONTENT.getFileName() ) );
+                bHasErrors |= validateEntry(aOut, getStreamName( OdfDocument.OdfXMLFile.CONTENT.getFileName()), DOCUMENT_CONTENT, aVersion );
             
             if( bRoot )
             {
@@ -124,15 +135,17 @@ public abstract class ODFPackageValidator implements MetaInformationListener {
                         ManifestEntry aEntry = aIter.next();
                         ODFPackageValidator aPackageValidator = 
                             new ODFSubPackageValidator( aPkg, getLoggerName(), aEntry.m_aFullPath, aEntry.m_aMediaType,
-                                                  m_nLogLevel, m_nMode, m_aFilter, m_aGenerator, m_aValidatorProvider );
+                                                  m_nLogLevel, m_nMode, m_aConfigVersion, m_aFilter, m_aGenerator, m_aValidatorProvider );
                         bHasErrors |= aPackageValidator.validate(aOut);
                     }
                 }
 
-                bHasErrors |= validateDSig( aOut, OdfPackageExt.STREAMNAME_DOCUMENT_SIGNATURES );
-                bHasErrors |= validateDSig( aOut, OdfPackageExt.STREAMNAME_MACRO_SIGNATURES );
+                if( aVersion.equals(ODF_VERSION_12))
+                {
+                    bHasErrors |= validateDSig( aOut, OdfPackageExt.STREAMNAME_DOCUMENT_SIGNATURES, aVersion );
+                    bHasErrors |= validateDSig( aOut, OdfPackageExt.STREAMNAME_MACRO_SIGNATURES, aVersion );
+                }
             }
-
         }
         catch( ZipException e )
         {
@@ -158,41 +171,43 @@ public abstract class ODFPackageValidator implements MetaInformationListener {
         return bHasErrors || aLogger.hasError();
     }
     
-    protected boolean validateEntry(PrintStream aOut, String aEntryName ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
+    protected boolean validateEntry(PrintStream aOut, String aEntryName, String aLocalElementName, String aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
         Logger aLogger = new Logger(getLoggerName(),aEntryName,aOut, m_nLogLevel);
-        XMLFilter aFilter = new ContentFilter(aLogger);
-        if( m_nMode == CHECK_CONFORMANCE )
+        XMLFilter aFilter = new ContentFilter(aLogger, aLocalElementName );
+        if( (m_nMode == CHECK_CONFORMANCE && (aVersion.equals(ODF_VERSION_10) || aVersion.equals(ODF_VERSION_11))) ||
+            m_nMode == CHECK_EXTENDED_CONFORMANCE )
         {
-            XMLFilter aAlienFilter = new AlienFilter(aLogger);
+            XMLFilter aAlienFilter = new AlienFilter(aLogger,aVersion);
             aAlienFilter.setParent(aFilter);
             aFilter = aAlienFilter;
         }
-        Validator aValidator = m_nMode == VALIDATE_STRICT ? m_aValidatorProvider.getStrictValidator(aOut,m_aVersion)
-                                                          : m_aValidatorProvider.getValidator(aOut,m_aVersion);
+        Validator aValidator = m_nMode == VALIDATE_STRICT ? m_aValidatorProvider.getStrictValidator(aOut, aVersion)
+                                                          : m_aValidatorProvider.getValidator(aOut,aVersion);
         return validateEntry(aOut, aFilter, aValidator, aLogger, aEntryName );
     }
 
-    private boolean validateMeta(PrintStream aOut, String aEntryName , boolean bIsRoot) throws IOException, ZipException, IllegalStateException, ODFValidatorException
+    private boolean validateMeta(PrintStream aOut, String aEntryName, String aVersion, boolean bIsRoot) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
         Logger aLogger = new Logger(getLoggerName(),aEntryName,aOut, m_nLogLevel);
         XMLFilter aFilter = new MetaFilter(aLogger, this );
-        if( m_nMode == CHECK_CONFORMANCE )
+        if( (m_nMode == CHECK_CONFORMANCE && (aVersion.equals(ODF_VERSION_10) || aVersion.equals(ODF_VERSION_11))) ||
+            m_nMode == CHECK_EXTENDED_CONFORMANCE )
         {
-            XMLFilter aAlienFilter = new AlienFilter(aLogger);
+            XMLFilter aAlienFilter = new AlienFilter(aLogger,aVersion);
             aAlienFilter.setParent(aFilter);
             aFilter = aAlienFilter;
         }
 
-        Validator aValidator = m_nMode == VALIDATE_STRICT ? m_aValidatorProvider.getStrictValidator(aOut,m_aVersion)
-                                                          : m_aValidatorProvider.getValidator(aOut,m_aVersion);
+        Validator aValidator = m_nMode == VALIDATE_STRICT ? m_aValidatorProvider.getStrictValidator(aOut,aVersion)
+                                                          : m_aValidatorProvider.getValidator(aOut,aVersion);
         return validateEntry(aOut, aFilter, aValidator, aLogger, aEntryName );
     }
 
-    private boolean validateMathML(PrintStream aOut, String aEntryName ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
+    private boolean validateMathML(PrintStream aOut, String aEntryName, String aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
         Logger aLogger = new Logger(getLoggerName(),aEntryName,aOut, m_nLogLevel);
-        String aMathMLDTDSystemId = m_aValidatorProvider.getMathMLDTDSystemId(m_aVersion);
+        String aMathMLDTDSystemId = m_aValidatorProvider.getMathMLDTDSystemId(aVersion);
         if( aMathMLDTDSystemId != null )
         {
             // validate using DTD
@@ -210,12 +225,12 @@ public abstract class ODFPackageValidator implements MetaInformationListener {
         }
     }
     
-    private boolean validateManifest(PrintStream aOut ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
+    private boolean validateManifest(PrintStream aOut, String aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
         boolean bRet;
         Logger aLogger = new Logger(getLoggerName(),OdfPackage.OdfFile.MANIFEST.getPath(),aOut, m_nLogLevel);
         ManifestFilter aFilter = new ManifestFilter(aLogger);
-        Validator aManifestValidator = m_aValidatorProvider.getManifestValidator(aOut,m_aVersion);
+        Validator aManifestValidator = m_aValidatorProvider.getManifestValidator(aOut,aVersion);
         if( aManifestValidator != null )
         {
             bRet = validateEntry(aOut, aFilter, 
@@ -232,9 +247,9 @@ public abstract class ODFPackageValidator implements MetaInformationListener {
         return bRet;
     }
 
-    protected boolean validateDSig(PrintStream aOut, String aEntryName ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
+    protected boolean validateDSig(PrintStream aOut, String aEntryName, String aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
-        Validator aValidator=m_aValidatorProvider.getDSigValidator(aOut,m_aVersion);
+        Validator aValidator=m_aValidatorProvider.getDSigValidator(aOut,aVersion);
         Logger aLogger = new Logger(getLoggerName(),aEntryName,aOut, m_nLogLevel);
         if ( aValidator == null ) {
             aLogger.logWarning("Signature not validated because there is no Signature Validator configured for the selected Configuration");

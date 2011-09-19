@@ -48,10 +48,13 @@ class ContentFilter extends NamespaceFilter {
     private static final int MAX_POINTS_LEN = 2048;
         
     private Logger m_aLogger;
+    private String m_aLocalElementName;
+    private boolean m_bRoot = true;
     
     /** Creates a new instance of KnownIssueFilter */
-    ContentFilter( Logger aLogger ) {
+    ContentFilter( Logger aLogger, String aLocalElementName ) {
         m_aLogger = aLogger;
+        m_aLocalElementName = aLocalElementName;
     }
 
     String adaptNamespaceUri( String aUri, String aPrefix)
@@ -98,6 +101,12 @@ class ContentFilter extends NamespaceFilter {
             }
         }
         super.startElement(aUri, aLocalName, aQName, aAtts);
+        if( m_bRoot )
+        {
+            if( !(aUri.equals(OFFICE_NAMESPACE_URI) && aLocalName.equals(m_aLocalElementName)) )
+                m_aLogger.logError("Invalid root element: " + aQName );
+            m_bRoot = false;
+        }
     }
 
 }

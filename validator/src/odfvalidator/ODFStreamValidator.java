@@ -39,11 +39,12 @@ public class ODFStreamValidator extends ODFRootPackageValidator {
                               String aBaseURI,
                               int nLogLevel, 
                               int nMode,
+                              String aVersion,
                               SAXParseExceptionFilter aFilter,
                               ODFValidatorProvider aValidatorProvider ) 
         
         throws ODFValidatorException {
-        super(nLogLevel, nMode, aFilter, aValidatorProvider );
+        super(nLogLevel, nMode, aVersion, aFilter, aValidatorProvider );
         
         m_aInputStream=aInputStream;
         m_aBaseURI=aBaseURI;
