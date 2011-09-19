@@ -49,7 +49,7 @@ public class ODFValidationResult implements ManifestListener, MetaInformationLis
     }
 
     private String m_aGenerator = null;
-    private String m_aMediaType = null;
+    private String m_aMediaType = "";
 
     private HashMap<String,Long> m_aForeignElementMap = null;
     private HashMap<String,Long> m_aForeignAttributeMap = null;

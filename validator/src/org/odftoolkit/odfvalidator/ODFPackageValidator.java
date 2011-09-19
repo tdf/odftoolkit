@@ -450,6 +450,7 @@ public abstract class ODFPackageValidator {
                 aInStream = aPkg.getInputStream(getStreamName(OdfDocument.OdfXMLFile.SETTINGS.getFileName()));
             if( aInStream == null )
                 aInStream = aPkg.getInputStream(getStreamName(OdfDocument.OdfXMLFile.CONTENT.getFileName()));
+            if (aInStream == null) { return null; }
         }
         catch( Exception e )
         {

@@ -24,48 +24,37 @@ package org.odftoolkit.odfvalidator;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 import java.util.Vector;
-import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import javax.xml.validation.Validator;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.xml.sax.ErrorHandler;
 
 public abstract class ODFRootPackageValidator extends ODFPackageValidator implements ManifestEntryListener {
 
-    static final String s_Mimetype = "mimetype";
-
-    private List<ZipEntry> m_ZipEntries = null;
     private OdfPackage m_aPkg = null;
     private Vector<ManifestEntry> m_aSubDocs = null;
-
+    private ODFPackageErrorHandler m_ErrorHandler = null;
 
     ODFRootPackageValidator(Logger.LogLevel nLogLevel, OdfValidatorMode eMode, OdfVersion aVersion, SAXParseExceptionFilter aFilter, ODFValidatorProvider aValidatorProvider) {
         super(nLogLevel, eMode, aVersion, aFilter, aValidatorProvider);
     }
 
-    abstract List<ZipEntry> getZipEntries() throws Exception;
-
-    abstract OdfPackage getPackage() throws Exception;
-
-    List<ZipEntry> getZipEntries(Logger aLogger) {
-        if (m_ZipEntries == null) {
-            try {
-                m_ZipEntries = getZipEntries();
-            } catch (Exception e) {
-                aLogger.logFatalError(e.getMessage());
-            }
-        }
-        return m_ZipEntries;
-    }
+    abstract OdfPackage getPackage(ErrorHandler handler) throws Exception;
 
     OdfPackage getPackage(Logger aLogger) {
         if (m_aPkg == null) {
             try {
-                m_aPkg = getPackage();
+                m_ErrorHandler = new ODFPackageErrorHandler();
+                m_aPkg = getPackage(m_ErrorHandler);
+                // for additional mimetype checking, load root document
+                try {
+                    OdfDocument.loadDocument(m_aPkg, "");
+                } catch (Exception e) {
+                    // ignore -- the interesting stuff is passed to handler
+                }
             } catch (IOException e) {
                 if (e.getMessage().startsWith("only DEFLATED entries can have EXT descriptor")) {
                     aLogger.logFatalError("The document is encrypted. Validation of encrypted documents is not supported.");
@@ -147,50 +136,14 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
     private boolean validateMimetype(PrintStream aOut, OdfVersion aVersion)
     {
         Logger aLogger = new Logger(getLoggerName(),"MIMETYPE",aOut, m_nLogLevel);
-
-        List<ZipEntry> zipEntries = getZipEntries(aLogger);
-
-        if (zipEntries.size() == 0) {
-            aLogger.logFatalError("ZIP file is empty.");
-            return true;
-        }
-        // n.b.: mimetype is optional (only "should") in 1.1
-        ZipEntry mimetype = null;
-        for (int i = 0; i < zipEntries.size(); ++i) {
-            if (zipEntries.get(i).getName().equals(s_Mimetype)) {
-                mimetype = zipEntries.get(i);
-                if (i != 0) {
-                    aLogger.logWarning(s_Mimetype +
-                        " is not the first file in the ODF package.");
-                }
-            }
-        }
-        if (mimetype == null) {
-            String msg = "ODF package contains no " + s_Mimetype + ".";
-            if (aVersion == OdfVersion.V1_0 || aVersion == OdfVersion.V1_1) {
-                aLogger.logWarning(msg);
-            } else {
-                aLogger.logError(msg);
-                return true;
-            }
-        } else {
-            if (mimetype.getMethod() != ZipEntry.STORED) {
-                aLogger.logError(s_Mimetype + " is compressed.");
-                return true;
-            }
-            if (mimetype.getExtra() != null) {
-                aLogger.logError(s_Mimetype + " has extra field.");
-                return true;
-            }
-        }
+        boolean bHasErrors = false;
 
         String aMimetype=getPackage(aLogger).getMediaTypeString();
         if( (aMimetype == null) || aMimetype.length() == 0 ) {
             aLogger.logFatalError("file is not a zip file, or has no mimetype.");
-            return true;
-        }
-
-        if( !(aMimetype.equals(ODFMediaTypes.TEXT_MEDIA_TYPE)
+            bHasErrors = true;
+        } else if(
+            ! (aMimetype.equals(ODFMediaTypes.TEXT_MEDIA_TYPE)
             || aMimetype.equals(ODFMediaTypes.TEXT_TEMPLATE_MEDIA_TYPE)
             || aMimetype.equals(ODFMediaTypes.GRAPHICS_MEDIA_TYPE)
             || aMimetype.equals(ODFMediaTypes.GRAPHICS_TEMPLATE_MEDIA_TYPE)
@@ -204,67 +157,39 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
             || aMimetype.equals(ODFMediaTypes.FORMULA_MEDIA_TYPE)
             || aMimetype.equals(ODFMediaTypes.FORMULA_TEMPLATE_MEDIA_TYPE)
             || aMimetype.equals(ODFMediaTypes.TEXT_MASTER_MEDIA_TYPE)
-            || aMimetype.equals(ODFMediaTypes.TEXT_WEB_MEDIA_TYPE) ) ) {
+            || aMimetype.equals(ODFMediaTypes.TEXT_WEB_MEDIA_TYPE) ) )
+        {
                 aLogger.logInfo("mimetype is not an ODFMediaTypes mimetype.",false);
-                return true;
+                bHasErrors = true;
         }
 
-        /* TODO: not supported by ODFDOM
-        if ( aDocFile .isMimeTypeValid() ) {
-            aLogger.logInfo("no errors",false);
-        } else {
-            aLogger.logError("file is not the first file in the ODF package or is compressed.");
-            return true;
-        }
-        */
-
-        return false;
+        return bHasErrors;
     }
 
     private boolean validateManifest(PrintStream aOut, OdfVersion aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
         boolean bRet;
         Logger aLogger = new Logger(getLoggerName(),OdfPackage.OdfFile.MANIFEST.getPath(),aOut, m_nLogLevel);
-        Set<String> zipEntrySet = new HashSet<String>();
-        List<ZipEntry> entries = getZipEntries(aLogger);
-        for (ZipEntry entry : entries) {
-            String name = entry.getName();
-            // filter files that are not listed in manifest.xml and directories
-            if (!name.equals("mimetype") && !name.startsWith("META-INF/") &&
-                !name.endsWith("/")) {
-                    zipEntrySet.add(name);
-            }
-        }
-        ManifestFilter aFilter =
-            new ManifestFilter(aLogger, m_aResult, this, zipEntrySet);
+        ManifestFilter aFilter = new ManifestFilter(aLogger, m_aResult, this);
         Validator aManifestValidator = m_aValidatorProvider.getManifestValidator(aOut,aVersion);
         if( aManifestValidator != null )
         {
             bRet = validateEntry(aOut, aFilter,
                          aManifestValidator, aLogger, OdfPackage.OdfFile.MANIFEST.getPath() );
-            if (!zipEntrySet.isEmpty()) {
-                // seems to be allowed in 1.1
-                String msg = "no manifest entry for package entry: ";
-                if (aVersion == OdfVersion.V1_0 || aVersion == OdfVersion.V1_1) {
-                    for (String entry : zipEntrySet) {
-                        aLogger.logWarning(msg + entry);
-                    }
-                } else {
-                    bRet = true;
-                    for (String entry : zipEntrySet) {
-                        aLogger.logError(msg + entry);
-                    }
-                }
-            }
-            if (aFilter.hasInvalidManifestEntry()) {
-                bRet = true;
-            }
         }
         else
         {
             aLogger.logInfo( "Validation of " + OdfPackage.OdfFile.MANIFEST.getPath() + " skipped.", false);
             bRet = parseEntry(aOut, aFilter, aLogger, OdfPackage.OdfFile.MANIFEST.getPath() , false);
         }
+        // UGLY: do something that causes ODFDOM to parse the manifest, which
+        // may cause m_ErrorHandler to be called
+        m_aPkg.getFileEntries();
+        // hack: just create logger again, too lazy to create a Pair class
+        // and return it from validateMimetype...
+        Logger aMimetypeLogger =
+            new Logger(getLoggerName(),"MIMETYPE",aOut, m_nLogLevel);
+        bRet |= m_ErrorHandler.validate(aLogger, aMimetypeLogger, aVersion);
         return bRet;
     }
 
