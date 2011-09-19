@@ -23,27 +23,27 @@
 package org.odftoolkit.odfvalidator;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Vector;
 import java.util.zip.ZipException;
 import javax.xml.validation.Validator;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.xml.sax.ErrorHandler;
 
-public abstract class ODFRootPackageValidator extends ODFPackageValidator implements ManifestEntryListener {
+abstract class ODFRootPackageValidator extends ODFPackageValidator implements ManifestEntryListener {
 
     private OdfPackage m_aPkg = null;
-    private Vector<ManifestEntry> m_aSubDocs = null;
+    private ArrayList<ManifestEntry> m_aSubDocs = null;
     private ODFPackageErrorHandler m_ErrorHandler = null;
 
-    ODFRootPackageValidator(Logger.LogLevel nLogLevel, OdfValidatorMode eMode, OdfVersion aVersion, SAXParseExceptionFilter aFilter, ODFValidatorProvider aValidatorProvider) {
+    protected ODFRootPackageValidator(Logger.LogLevel nLogLevel, OdfValidatorMode eMode, OdfVersion aVersion, SAXParseExceptionFilter aFilter, ODFValidatorProvider aValidatorProvider) {
         super(nLogLevel, eMode, aVersion, aFilter, aValidatorProvider);
     }
 
-    abstract OdfPackage getPackage(ErrorHandler handler) throws Exception;
+    protected abstract OdfPackage getPackage(ErrorHandler handler) throws Exception;
 
-    OdfPackage getPackage(Logger aLogger) {
+    protected OdfPackage getPackage(Logger aLogger) {
         if (m_aPkg == null) {
             try {
                 m_ErrorHandler = new ODFPackageErrorHandler();
@@ -68,7 +68,7 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
         return m_aPkg;
     }
 
-    String getStreamName( String aEntry )
+    protected String getStreamName( String aEntry )
     {
         return aEntry;
     }
@@ -134,7 +134,7 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
         if( aManifestEntry.isOpenDocumentMediaType() )
         {
             if( m_aSubDocs == null )
-                m_aSubDocs = new Vector<ManifestEntry>();
+                m_aSubDocs = new ArrayList<ManifestEntry>();
             m_aSubDocs.add( aManifestEntry );
         }
     }

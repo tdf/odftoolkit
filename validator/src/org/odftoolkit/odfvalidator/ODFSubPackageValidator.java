@@ -25,7 +25,7 @@ package org.odftoolkit.odfvalidator;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 
 
-public class ODFSubPackageValidator extends ODFPackageValidator {
+class ODFSubPackageValidator extends ODFPackageValidator {
 
     private OdfPackage m_aPkg = null;
     // this is the URI of the root package, not this subpackage!
@@ -47,21 +47,21 @@ public class ODFSubPackageValidator extends ODFPackageValidator {
     }
 
     @Override
-    String getLoggerName() {
+    protected String getLoggerName() {
         return m_aBaseURI;
     }
 
     @Override
-    String getDocumentPath() {
+    protected String getDocumentPath() {
         return m_aSubEntryName;
     }
 
-    OdfPackage getPackage( Logger aLogger ) 
+    protected OdfPackage getPackage( Logger aLogger ) 
     {
         return m_aPkg;
     }
 
-    String getStreamName( String aEntry )
+    protected String getStreamName( String aEntry )
     {
         return m_aSubEntryName + aEntry;
     }

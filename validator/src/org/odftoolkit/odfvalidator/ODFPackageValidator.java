@@ -45,7 +45,7 @@ import org.xml.sax.helpers.DefaultHandler;
 /**
  * Validator for Files
  */
-public abstract class ODFPackageValidator {
+abstract class ODFPackageValidator {
 
     static final String DOCUMENT_SETTINGS = "document-settings";
     static final String DOCUMENT_STYLES = "document-styles";
@@ -62,7 +62,7 @@ public abstract class ODFPackageValidator {
     private SAXParserFactory m_aSAXParserFactory = null;
 
 
-    ODFPackageValidator( Logger.LogLevel nLogLevel, OdfValidatorMode eMode, OdfVersion aVersion,
+    protected ODFPackageValidator( Logger.LogLevel nLogLevel, OdfValidatorMode eMode, OdfVersion aVersion,
                              SAXParseExceptionFilter aFilter,ODFValidatorProvider aValidatorProvider) {
         m_nLogLevel = nLogLevel;
         m_eMode = eMode;
@@ -73,23 +73,23 @@ public abstract class ODFPackageValidator {
     }
 
 
-    abstract String getLoggerName();
+    protected abstract String getLoggerName();
 
-    abstract String getDocumentPath();
+    protected abstract String getDocumentPath();
 
-    abstract OdfPackage getPackage( Logger aLogger );
+    protected abstract OdfPackage getPackage( Logger aLogger );
 
-    abstract String getStreamName( String aEntry );
+    protected abstract String getStreamName( String aEntry );
 
 
-    public boolean validate(PrintStream aOut) throws ODFValidatorException
+    protected boolean validate(PrintStream aOut) throws ODFValidatorException
     {
         Logger aLogger =
             new Logger( getLoggerName(), getDocumentPath(), aOut, m_nLogLevel);
         return _validate( aLogger );
     }
 
-    public boolean validate(Logger aParentLogger) throws ODFValidatorException
+    protected boolean validate(Logger aParentLogger) throws ODFValidatorException
     {
         Logger aLogger =
             new Logger( getDocumentPath(), aParentLogger);

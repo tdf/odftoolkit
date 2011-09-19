@@ -50,16 +50,16 @@ public class ODFStreamValidator extends ODFRootPackageValidator {
         m_aBaseURI=aBaseURI;
     }
 
-    OdfPackage getPackage(ErrorHandler handler) throws Exception
+    protected OdfPackage getPackage(ErrorHandler handler) throws Exception
     {
         return OdfPackage.loadPackage(m_aInputStream, m_aBaseURI, handler);
     }
     
-    String getLoggerName() {
+    protected String getLoggerName() {
         return m_aBaseURI;
     }
 
-    @Override
+    protected @Override
     String getDocumentPath()
     {
         return ""; // this is the root document

@@ -50,7 +50,7 @@ public class ODFFileValidator extends ODFRootPackageValidator {
     }
 
     @Override
-    String getDocumentPath()
+    protected String getDocumentPath()
     {
         return ""; // this is the root document
     }
