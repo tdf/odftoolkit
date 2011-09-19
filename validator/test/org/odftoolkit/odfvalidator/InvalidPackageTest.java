@@ -33,14 +33,14 @@ import org.junit.Test;
 public class InvalidPackageTest {
     private String doValidation(String file, OdfVersion version) throws Exception
     {
-            ODFValidator validator = new ODFValidator(null, Logger.LogLevel.INFO, version, true);
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            PrintStream pout = new PrintStream(out);
-            InputStream is = getClass().getClassLoader().getResourceAsStream(file);
+        ODFValidator validator = new ODFValidator(null, Logger.LogLevel.INFO, version, true);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        PrintStream pout = new PrintStream(out);
+        InputStream is = getClass().getClassLoader().getResourceAsStream(file);
 //            validator.validateFile(pout, f, OdfValidatorMode.VALIDATE, null);
-            validator.validateStream(pout, is, file, OdfValidatorMode.VALIDATE, null);
+        validator.validateStream(pout, is, file, OdfValidatorMode.VALIDATE, null);
 //            System.err.println(out.toString());
-            return out.toString();
+        return out.toString();
     }
 
     @Test
@@ -87,7 +87,7 @@ public class InvalidPackageTest {
             t.printStackTrace();
             Assert.fail(t.toString());
         }
-        Assert.assertTrue(output.contains("testInvalidPkg2.odt/MIMETYPE:Error:The ODF package contains no 'mimetype' file"));
+        Assert.assertTrue(output.contains("testInvalidPkg2.odt/MIMETYPE:Error:The ODF package 'testInvalidPkg2.odt' contains no 'mimetype' file"));
         Assert.assertTrue(output.contains("testInvalidPkg2.odt/META-INF/manifest.xml:Error:The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
         Assert.assertTrue(output.contains("testInvalidPkg2.odt/META-INF/manifest.xml:Error:The file 'not_in_manifest' shall be listed in the 'META-INF/manifest.xml' file as it exists in the ODF package"));
         Assert.assertTrue(output.contains("testInvalidPkg2.odt:Info:validation errors found"));
@@ -103,7 +103,7 @@ public class InvalidPackageTest {
             t.printStackTrace();
             Assert.fail(t.toString());
         }
-        Assert.assertTrue(output.contains("testInvalidPkg2.odt/MIMETYPE:Warning:The ODF package contains no 'mimetype' file"));
+        Assert.assertTrue(output.contains("testInvalidPkg2.odt/MIMETYPE:Warning:The ODF package 'testInvalidPkg2.odt' contains no 'mimetype' file"));
         Assert.assertTrue(output.contains("testInvalidPkg2.odt/META-INF/manifest.xml:Error:The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
         Assert.assertTrue(output.contains("testInvalidPkg2.odt/META-INF/manifest.xml:Warning:The file 'not_in_manifest' shall be listed in the 'META-INF/manifest.xml' file as it exists in the ODF package"));
         Assert.assertTrue(output.contains("testInvalidPkg2.odt:Info:validation errors found"));
