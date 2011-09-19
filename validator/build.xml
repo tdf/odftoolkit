@@ -89,9 +89,11 @@
 
     <property file="schema.properties"/>
 
+    <property name="opendocument.v10.spec" value="OpenDocument-v1.0${opendocument.v10.schema.state}.odt"/>
     <property name="opendocument.v10.schema" value="OpenDocument-schema-v1.0${opendocument.v10.schema.state}.rng"/>
     <property name="opendocument.v10.schema.strict" value="OpenDocument-strict-schema-v1.0${opendocument.v10.schema.state}.rng"/>
     <property name="opendocument.v10.schema.manifest" value="OpenDocument-manifest-schema-v1.0${opendocument.v10.schema.state}.rng"/>
+    <property name="opendocument.v11.spec" value="OpenDocument-v1.1${opendocument.v11.schema.state}.odt"/>
     <property name="opendocument.v11.schema" value="OpenDocument-schema-v1.1${opendocument.v11.schema.state}.rng"/>
     <property name="opendocument.v11.schema.strict" value="OpenDocument-strict-schema-v1.1${opendocument.v11.schema.state}.rng"/>
     <property name="opendocument.v11.schema.manifest" value="OpenDocument-manifest-schema-v1.1${opendocument.v11.schema.state}.rng"/>
@@ -106,9 +108,19 @@
                 <isset property="opendocument.v10.schema.dir"/>
             </not>
         </condition>
+        <condition property="opendocument.v10.schema.extract" value="${user.opendocument.v10.schema.extract}">
+            <not>
+                <isset property="opendocument.v10.schema.extract"/>
+            </not>
+        </condition>
         <condition property="opendocument.v11.schema.dir" value="${user.opendocument.v11.schema.dir}">
             <not>
                 <isset property="opendocument.v11.schema.dir"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v11.schema.extract" value="${user.opendocument.v11.schema.extract}">
+            <not>
+                <isset property="opendocument.v11.schema.extract"/>
             </not>
         </condition>
         <condition property="opendocument.v12.schema.dir" value="${user.opendocument.v12.schema.dir}">
@@ -143,20 +155,62 @@
         </condition>
     </target>
 
-    <target name="-pre-jar" depends="init,-copy-v10-schema,-copy-v11-schema,-copy-v12-schema,-copy-mathml-schema,-copy-mathml2-schema,-create-v10-validator-config,-create-v11-validator-config,-create-v12-validator-config"/>
+    <target name="-pre-jar" depends="init,-copy-v10-schema,-extract-v10-schema,-copy-v11-schema,-extract-v11-schema,-copy-v12-schema,-copy-mathml-schema,-copy-mathml2-schema,-create-v10-validator-config,-create-v11-validator-config,-create-v12-validator-config"/>
        
-    <target name="-copy-v10-schema" depends="init">
+    <target name="-copy-v10-schema" depends="init" unless="opendocument.v10.schema.extract">
         <copy todir="${build.classes.dir}/schema/odf10">
             <fileset dir="${opendocument.v10.schema.dir}"
                 includes="${opendocument.v10.schema},${opendocument.v10.schema.strict},${opendocument.v10.schema.manifest}"/>
         </copy>
     </target>
 
-    <target name="-copy-v11-schema" depends="init">
+    <target name="-extract-v10-schema" depends="init" if="opendocument.v10.schema.extract">
+        <property file="ant.properties"/>
+        <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${reference.odfxsltrunner-task.jar}:${reference.odfxsltrunner.jar}"/>
+        <odfxslt in="${opendocument.v10.schema.dir}/${opendocument.v10.spec}"
+                 outfile="${build.classes.dir}/schema/odf10/${opendocument.v10.schema}"
+                 style="xslt/extract_schema.xsl">
+            <param name="mode" expression="schema"/>
+        </odfxslt>
+        <odfxslt in="${opendocument.v10.schema.dir}/${opendocument.v10.spec}"
+                 outfile="${build.classes.dir}/schema/odf10/${opendocument.v10.schema.strict}"
+                 style="xslt/extract_schema.xsl">
+            <param name="mode" expression="strict-schema"/>
+        </odfxslt>
+        <odfxslt in="${opendocument.v10.schema.dir}/${opendocument.v10.spec}"
+                 outfile="${build.classes.dir}/schema/odf10/${opendocument.v10.schema.manifest}"
+                 style="xslt/extract_schema.xsl">
+            <param name="mode" expression="manifest-schema"/>
+        </odfxslt>
+        <fixcrlf srcdir="${build.classes.dir}/schema/odf10" eol="lf"/>
+    </target>
+
+    <target name="-copy-v11-schema" depends="init" unless="opendocument.v11.schema.extract">
         <copy todir="${build.classes.dir}/schema/odf11">
             <fileset dir="${opendocument.v11.schema.dir}"
                 includes="${opendocument.v11.schema},${opendocument.v11.schema.strict},${opendocument.v11.schema.manifest}"/>
         </copy>
+    </target>
+
+    <target name="-extract-v11-schema" depends="init" if="opendocument.v11.schema.extract">
+        <property file="ant.properties"/>
+        <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${reference.odfxsltrunner-task.jar}:${reference.odfxsltrunner.jar}"/>
+        <odfxslt in="${opendocument.v11.schema.dir}/${opendocument.v11.spec}"
+                 outfile="${build.classes.dir}/schema/odf11/${opendocument.v11.schema}"
+                 style="xslt/extract_schema.xsl">
+            <param name="mode" expression="schema"/>
+        </odfxslt>
+        <odfxslt in="${opendocument.v11.schema.dir}/${opendocument.v11.spec}"
+                 outfile="${build.classes.dir}/schema/odf11/${opendocument.v11.schema.strict}"
+                 style="xslt/extract_schema.xsl">
+            <param name="mode" expression="strict-schema"/>
+        </odfxslt>
+        <odfxslt in="${opendocument.v11.schema.dir}/${opendocument.v11.spec}"
+                 outfile="${build.classes.dir}/schema/odf11/${opendocument.v11.schema.manifest}"
+                 style="xslt/extract_schema.xsl">
+            <param name="mode" expression="manifest-schema"/>
+        </odfxslt>
+        <fixcrlf srcdir="${build.classes.dir}/schema/odf11" eol="lf"/>
     </target>
 
     <target name="-copy-v12-schema" depends="init">
