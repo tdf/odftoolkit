@@ -96,10 +96,9 @@
     <property name="opendocument.v11.schema" value="OpenDocument-schema-v1.1${opendocument.v11.schema.state}.rng"/>
     <property name="opendocument.v11.schema.strict" value="OpenDocument-strict-schema-v1.1${opendocument.v11.schema.state}.rng"/>
     <property name="opendocument.v11.schema.manifest" value="OpenDocument-manifest-schema-v1.1${opendocument.v11.schema.state}.rng"/>
-    <property name="opendocument.v12.schema" value="OpenDocument-schema-v1.2${opendocument.v12.schema.state}.rng"/>
-    <property name="opendocument.v12.schema.strict" value="OpenDocument-strict-schema-v1.2${opendocument.v12.schema.state}.rng"/>
-    <property name="opendocument.v12.schema.manifest" value="OpenDocument-manifest-schema-v1.2${opendocument.v12.schema.state}.rng"/>
-    <property name="opendocument.v12.schema.dsig" value="OpenDocument-dsig-schema-v1.2${opendocument.v12.schema.state}.rng"/>
+    <property name="opendocument.v12.schema" value="OpenDocument-schema-v1.2${opendocument.v12.part1.schema.state}.rng"/>
+    <property name="opendocument.v12.schema.manifest" value="OpenDocument-manifest-schema-v1.2${opendocument.v12.part3.schema.state}.rng"/>
+    <property name="opendocument.v12.schema.dsig" value="OpenDocument-dsig-schema-v1.2${opendocument.v12.part3.schema.state}.rng"/>
 
     <target name="-pre-jar" depends="init,-copy-v10-schema,-copy-v11-schema,-copy-v12-schema,-copy-mathml-schema,-copy-mathml2-schema,-create-v10-validator-config,-create-v11-validator-config,-create-v12-validator-config"/>
 
@@ -122,17 +121,13 @@
         </copy>
     </target>
 
-    <target name="-copy-v12-schema" depends="init,-get-v12-schemas">
+    <target name="-copy-v12-schema" depends="init">
         <xslt style="xslt/fix_rng_for_msv.xsl" 
-                    in="${v12.schema.dir}/${opendocument.v12.schema}" 
+                    in="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}"
                     out="${build.classes.dir}/schema/odf12/${opendocument.v12.schema}"/>  
         <copy todir="${build.classes.dir}/schema/odf12">
-            <fileset dir="${v12.schema.dir}" includes="*.rng" excludes="${opendocument.v12.schema}"/>
+            <fileset dir="${opendocument.v12.part3.schema.dir}" includes="${opendocument.v12.schema.manifest},${opendocument.v12.schema.dsig}"/>
         </copy>
-    </target>
-
-    <target name="-get-v12-schemas" depends="init">
-        <property name="v12.schema.dir" value="${opendocument.v12.schema.dir}"/>
     </target>
 
     <target name="-copy-mathml-schema" depends="init">
@@ -173,7 +168,7 @@
         <antcall target="-create-validator-config">
             <param name="config.file" value="${build.classes.dir}/config/v12.properties"/>
             <param name="schema" value="schema/odf12/${opendocument.v12.schema}"/>
-            <param name="strict-schema" value="schema/odf12/${opendocument.v12.schema.strict}"/>
+            <param name="strict-schema" value="schema/odf12/${opendocument.v12.schema}"/>
             <param name="manifest-schema" value="schema/odf12/${opendocument.v12.schema.manifest}"/>
             <param name="dsig-schema" value="schema/odf12/${opendocument.v12.schema.dsig}"/>
             <param name="mathml-schema" value="schema/mathml/math.dtd"/>
@@ -212,8 +207,9 @@
             <istrue value="${use.mathml2.xsd}"/>
         </condition>
         <java jar="${dist.jar}" fork="true">
+            <sysproperty key="javax.xml.validation.SchemaFactory:http://relaxng.org/ns/structure/1.0" value="org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl"/>
+            <sysproperty key="org.iso_relax.verifier.VerifierFactoryLoader" value="com.sun.msv.verifier.jarv.FactoryLoaderImpl"/>
             <arg value="-v"/>
-            <arg value="-s"/>
             <arg value="${mathml.dtd.option}"/>
             <arg value="${testdocs.dir}"/>
         </java>
