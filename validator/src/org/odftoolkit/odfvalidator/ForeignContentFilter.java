@@ -32,8 +32,8 @@ import org.xml.sax.helpers.XMLFilterImpl;
 
 class ForeignContentFilter extends XMLFilterImpl {
 
-    private static final String OFFICE_NAMESPACE_URI = OdfNamespaceNames.OFFICE.getNamespaceUri();
-    private static final String TEXT_NAMESPACE_URI = OdfNamespaceNames.TEXT.getNamespaceUri();
+    private static final String OFFICE_NAMESPACE_URI = OdfNamespaceNames.OFFICE.getUri();
+    private static final String TEXT_NAMESPACE_URI = OdfNamespaceNames.TEXT.getUri();
 
     private static final String H = "h";
     private static final String P = "p";
@@ -68,30 +68,30 @@ class ForeignContentFilter extends XMLFilterImpl {
         m_aParagraphAncestorElements = new Vector<Boolean>();
         
         m_aODFNamespaceSet = new HashSet<String>();
-        m_aODFNamespaceSet.add( OdfNamespaceNames.OFFICE.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.STYLE.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.TEXT.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.TABLE.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.DRAW.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.FO.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.DC.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.META.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.NUMBER.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.SVG.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.CHART.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.DR3D.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.FORM.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.PRESENTATION.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.SMIL.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.CONFIG.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.SCRIPT.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.XLINK.getNamespaceUri() );
-        m_aODFNamespaceSet.add( OdfNamespaceNames.XFORMS.getNamespaceUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.OFFICE.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.STYLE.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.TEXT.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.TABLE.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.DRAW.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.FO.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.DC.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.META.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.NUMBER.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.SVG.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.CHART.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.DR3D.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.FORM.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.PRESENTATION.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.SMIL.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.CONFIG.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.SCRIPT.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.XLINK.getUri() );
+        m_aODFNamespaceSet.add( OdfNamespaceNames.XFORMS.getUri() );
         if( m_aVersion.compareTo( OdfVersion.V1_2 ) >= 0 )
         {
-            m_aODFNamespaceSet.add( OdfNamespaceNames.XHTML.getNamespaceUri() );
-            m_aODFNamespaceSet.add( OdfNamespaceNames.GRDDL.getNamespaceUri() );
-            m_aODFNamespaceSet.add( OdfNamespaceNames.DB.getNamespaceUri() );
+            m_aODFNamespaceSet.add( OdfNamespaceNames.XHTML.getUri() );
+            m_aODFNamespaceSet.add( OdfNamespaceNames.GRDDL.getUri() );
+            m_aODFNamespaceSet.add( OdfNamespaceNames.DB.getUri() );
             m_aODFNamespaceSet.add( javax.xml.XMLConstants.XML_NS_URI );
         }
     }

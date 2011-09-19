@@ -33,8 +33,8 @@ class MetaFilter extends XMLFilterImpl {
     private String m_aGenerator = "";
     private boolean m_bRoot = true;
     
-    private static final String META_NAMESPACE_URI = OdfNamespaceNames.META.getNamespaceUri();
-    private static final String OFFICE_NAMESPACE_URI = OdfNamespaceNames.OFFICE.getNamespaceUri();
+    private static final String META_NAMESPACE_URI = OdfNamespaceNames.META.getUri();
+    private static final String OFFICE_NAMESPACE_URI = OdfNamespaceNames.OFFICE.getUri();
     private static final String GENERATOR = "generator";
     private static final String DOCUMENT_META = "document-meta";
 
