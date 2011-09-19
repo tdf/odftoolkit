@@ -22,26 +22,12 @@
 
 package org.odftoolkit.odfvalidator;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
 import junit.framework.Assert;
 import org.junit.Test;
 
 /** Test some invalid packages.
  */
-public class InvalidPackageTest {
-    private String doValidation(String file, OdfVersion version) throws Exception
-    {
-        ODFValidator validator = new ODFValidator(null, Logger.LogLevel.INFO, version, true);
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        PrintStream pout = new PrintStream(out);
-        InputStream is = getClass().getClassLoader().getResourceAsStream(file);
-//            validator.validateFile(pout, f, OdfValidatorMode.VALIDATE, null);
-        validator.validateStream(pout, is, file, OdfValidatorMode.VALIDATE, null);
-//            System.err.println(out.toString());
-        return out.toString();
-    }
+public class InvalidPackageTest extends OdfValidatorTestBase {
 
     @Test
     public void validatePackage1() {
@@ -53,11 +39,11 @@ public class InvalidPackageTest {
             t.printStackTrace();
             Assert.fail(t.toString());
         }
-        Assert.assertTrue(output.contains("testInvalidPkg1.odt/MIMETYPE:Error:The file 'mimetype' is not the first file in the ODF package"));
-        Assert.assertTrue(output.contains("testInvalidPkg1.odt/MIMETYPE:Error:The file 'mimetype' shall not be compressed"));
-        Assert.assertTrue(output.contains("testInvalidPkg1.odt/MIMETYPE:Error:There shall be no extra field for the 'mimetype' file"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt/mimetype:Error:The file 'mimetype' is not the first file in the ODF package"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt/mimetype:Error:The file 'mimetype' shall not be compressed"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt/mimetype:Error:There shall be no extra field for the 'mimetype' file"));
         Assert.assertTrue(output.contains("testInvalidPkg1.odt/META-INF/manifest.xml:Error:The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
-        Assert.assertTrue(output.contains("testInvalidPkg1.odt:Info:validation errors found"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt:Info:7 errors, 10 warnings"));
     }
 
     @Test
@@ -70,11 +56,11 @@ public class InvalidPackageTest {
             t.printStackTrace();
             Assert.fail(t.toString());
         }
-        Assert.assertTrue(output.contains("testInvalidPkg1.odt/MIMETYPE:Warning:The file 'mimetype' is not the first file in the ODF package"));
-        Assert.assertTrue(output.contains("testInvalidPkg1.odt/MIMETYPE:Error:The file 'mimetype' shall not be compressed"));
-        Assert.assertTrue(output.contains("testInvalidPkg1.odt/MIMETYPE:Error:There shall be no extra field for the 'mimetype' file"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt/mimetype:Warning:The file 'mimetype' is not the first file in the ODF package"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt/mimetype:Error:The file 'mimetype' shall not be compressed"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt/mimetype:Error:There shall be no extra field for the 'mimetype' file"));
         Assert.assertTrue(output.contains("testInvalidPkg1.odt/META-INF/manifest.xml:Error:The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
-        Assert.assertTrue(output.contains("testInvalidPkg1.odt:Info:validation errors found"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt:Info:9 errors, 11 warnings"));
     }
 
     @Test
@@ -87,10 +73,10 @@ public class InvalidPackageTest {
             t.printStackTrace();
             Assert.fail(t.toString());
         }
-        Assert.assertTrue(output.contains("testInvalidPkg2.odt/MIMETYPE:Error:The ODF package 'testInvalidPkg2.odt' contains no 'mimetype' file"));
+        Assert.assertTrue(output.contains("testInvalidPkg2.odt/mimetype:Error:The ODF package 'testInvalidPkg2.odt' contains no 'mimetype' file"));
         Assert.assertTrue(output.contains("testInvalidPkg2.odt/META-INF/manifest.xml:Error:The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
         Assert.assertTrue(output.contains("testInvalidPkg2.odt/META-INF/manifest.xml:Error:The file 'not_in_manifest' shall be listed in the 'META-INF/manifest.xml' file as it exists in the ODF package"));
-        Assert.assertTrue(output.contains("testInvalidPkg2.odt:Info:validation errors found"));
+        Assert.assertTrue(output.contains("testInvalidPkg2.odt:Info:5 errors, 10 warnings"));
     }
 
     @Test
@@ -103,10 +89,10 @@ public class InvalidPackageTest {
             t.printStackTrace();
             Assert.fail(t.toString());
         }
-        Assert.assertTrue(output.contains("testInvalidPkg2.odt/MIMETYPE:Warning:The ODF package 'testInvalidPkg2.odt' contains no 'mimetype' file"));
+        Assert.assertTrue(output.contains("testInvalidPkg2.odt/mimetype:Warning:The ODF package 'testInvalidPkg2.odt' contains no 'mimetype' file"));
         Assert.assertTrue(output.contains("testInvalidPkg2.odt/META-INF/manifest.xml:Error:The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
         Assert.assertTrue(output.contains("testInvalidPkg2.odt/META-INF/manifest.xml:Warning:The file 'not_in_manifest' shall be listed in the 'META-INF/manifest.xml' file as it exists in the ODF package"));
-        Assert.assertTrue(output.contains("testInvalidPkg2.odt:Info:validation errors found"));
+        Assert.assertTrue(output.contains("testInvalidPkg2.odt:Info:6 errors, 12 warnings"));
     }
 
     @Test
@@ -120,7 +106,7 @@ public class InvalidPackageTest {
             Assert.fail(t.toString());
         }
         Assert.assertTrue(output.contains("Error:The ODF package 'testInvalidPkg3.odt' shall contain the 'META-INF/manifest.xml' file"));
-        Assert.assertTrue(output.contains("testInvalidPkg3.odt:Info:validation errors found"));
+        Assert.assertTrue(output.contains("testInvalidPkg3.odt:Info:3 errors, no warnings"));
     }
 
 }

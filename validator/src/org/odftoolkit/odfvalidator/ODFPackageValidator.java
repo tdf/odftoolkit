@@ -81,11 +81,24 @@ public abstract class ODFPackageValidator {
 
     abstract String getStreamName( String aEntry );
 
+
     public boolean validate(PrintStream aOut) throws ODFValidatorException
     {
         Logger aLogger =
             new Logger( getLoggerName(), getDocumentPath(), aOut, m_nLogLevel);
+        return _validate( aLogger );
+    }
 
+    public boolean validate(Logger aParentLogger) throws ODFValidatorException
+    {
+        Logger aLogger =
+            new Logger( getDocumentPath(), aParentLogger);
+        return _validate( aLogger );
+    }
+
+
+    private boolean _validate(Logger aLogger) throws ODFValidatorException
+    {
         boolean bHasErrors = false;
 
         OdfPackage aPkg = getPackage( aLogger );
@@ -99,17 +112,17 @@ public abstract class ODFPackageValidator {
                 aLogger.logInfo( "ODF Version: " + aDocVersion, false );
             OdfVersion aVersion = m_aConfigVersion == null ? OdfVersion.valueOf(aDocVersion,true) : m_aConfigVersion;
 
-            bHasErrors |= validatePre(aOut, aVersion);
+            bHasErrors |= validatePre(aLogger, aVersion);
             aLogger.logInfo( "Media Type: " + m_aResult.getMediaType(), false);
 
-            bHasErrors |= validateMeta(aOut, getStreamName( OdfDocument.OdfXMLFile.META.getFileName()), aVersion, true );
-            bHasErrors |= validateEntry(aOut, getStreamName(OdfDocument.OdfXMLFile.SETTINGS.getFileName()), DOCUMENT_SETTINGS, aVersion);
-            bHasErrors |= validateEntry(aOut, getStreamName( OdfDocument.OdfXMLFile.STYLES.getFileName()), DOCUMENT_STYLES, aVersion );
+            bHasErrors |= validateMeta(aLogger, getStreamName( OdfDocument.OdfXMLFile.META.getFileName()), aVersion, true );
+            bHasErrors |= validateEntry(aLogger, getStreamName(OdfDocument.OdfXMLFile.SETTINGS.getFileName()), DOCUMENT_SETTINGS, aVersion);
+            bHasErrors |= validateEntry(aLogger, getStreamName( OdfDocument.OdfXMLFile.STYLES.getFileName()), DOCUMENT_STYLES, aVersion );
             if( m_aResult.getMediaType().equals(ODFMediaTypes.FORMULA_MEDIA_TYPE))
-                bHasErrors |= validateMathML(aOut, getStreamName( OdfDocument.OdfXMLFile.CONTENT.getFileName()), aVersion );
+                bHasErrors |= validateMathML(aLogger, getStreamName( OdfDocument.OdfXMLFile.CONTENT.getFileName()), aVersion );
             else
-                bHasErrors |= validateEntry(aOut, getStreamName( OdfDocument.OdfXMLFile.CONTENT.getFileName()), DOCUMENT_CONTENT, aVersion );
-            bHasErrors |= validatePost(aOut, aLogger, aVersion);
+                bHasErrors |= validateEntry(aLogger, getStreamName( OdfDocument.OdfXMLFile.CONTENT.getFileName()), DOCUMENT_CONTENT, aVersion );
+            bHasErrors |= validatePost(aLogger, aVersion);
         }
         catch( ZipException e )
         {
@@ -125,12 +138,12 @@ public abstract class ODFPackageValidator {
         return bHasErrors || aLogger.hasError();
     }
 
-    protected boolean validatePre(PrintStream aOut, OdfVersion aVersion ) throws ODFValidatorException, IOException
+    protected boolean validatePre(Logger aLogger, OdfVersion aVersion ) throws ODFValidatorException, IOException
     {
         return false;
     }
 
-    protected boolean validatePost(PrintStream aOut, Logger aLogger, OdfVersion aVersion ) throws ODFValidatorException, IOException
+    protected boolean validatePost(Logger aLogger, OdfVersion aVersion ) throws ODFValidatorException, IOException
     {
         return false;
     }
@@ -139,9 +152,9 @@ public abstract class ODFPackageValidator {
     {
     }
 
-    protected boolean validateEntry(PrintStream aOut, String aEntryName, String aLocalElementName, OdfVersion aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
+    protected boolean validateEntry(Logger aParentLogger, String aEntryName, String aLocalElementName, OdfVersion aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
-        Logger aLogger = new Logger(getLoggerName(),aEntryName,aOut, m_nLogLevel);
+        Logger aLogger = new Logger(aEntryName,aParentLogger);
         XMLFilter aFilter = new ContentFilter(aLogger, aLocalElementName );
         if( (m_eMode == OdfValidatorMode.CHECK_CONFORMANCE && aVersion.compareTo(OdfVersion.V1_1) <= 0) ||
             m_eMode == OdfValidatorMode.CHECK_EXTENDED_CONFORMANCE )
@@ -150,14 +163,14 @@ public abstract class ODFPackageValidator {
             aAlienFilter.setParent(aFilter);
             aFilter = aAlienFilter;
         }
-        Validator aValidator = m_eMode == OdfValidatorMode.VALIDATE_STRICT ? m_aValidatorProvider.getStrictValidator(aOut, aVersion)
-                                                          : m_aValidatorProvider.getValidator(aOut,aVersion);
-        return validateEntry(aOut, aFilter, aValidator, aLogger, aEntryName );
+        Validator aValidator = m_eMode == OdfValidatorMode.VALIDATE_STRICT ? m_aValidatorProvider.getStrictValidator(aParentLogger.getOutputStream(), aVersion)
+                                                          : m_aValidatorProvider.getValidator(aParentLogger.getOutputStream(),aVersion);
+        return validateEntry(aFilter, aValidator, aLogger, aEntryName );
     }
 
-    private boolean validateMeta(PrintStream aOut, String aEntryName, OdfVersion aVersion, boolean bIsRoot) throws IOException, ZipException, IllegalStateException, ODFValidatorException
+    private boolean validateMeta(Logger aParentLogger, String aEntryName, OdfVersion aVersion, boolean bIsRoot) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
-        Logger aLogger = new Logger(getLoggerName(),aEntryName,aOut, m_nLogLevel);
+        Logger aLogger = new Logger(aEntryName,aParentLogger);
         XMLFilter aFilter = new MetaFilter(aLogger, m_aResult );
         if( (m_eMode == OdfValidatorMode.CHECK_CONFORMANCE && aVersion.compareTo(OdfVersion.V1_1) <= 0) ||
             m_eMode == OdfValidatorMode.CHECK_EXTENDED_CONFORMANCE )
@@ -167,46 +180,46 @@ public abstract class ODFPackageValidator {
             aFilter = aAlienFilter;
         }
 
-        Validator aValidator = m_eMode == OdfValidatorMode.VALIDATE_STRICT ? m_aValidatorProvider.getStrictValidator(aOut,aVersion)
-                                                          : m_aValidatorProvider.getValidator(aOut,aVersion);
-        return validateEntry(aOut, aFilter, aValidator, aLogger, aEntryName );
+        Validator aValidator = m_eMode == OdfValidatorMode.VALIDATE_STRICT ? m_aValidatorProvider.getStrictValidator(aParentLogger.getOutputStream(),aVersion)
+                                                          : m_aValidatorProvider.getValidator(aParentLogger.getOutputStream(),aVersion);
+        return validateEntry(aFilter, aValidator, aLogger, aEntryName );
     }
 
-    private boolean validateMathML(PrintStream aOut, String aEntryName, OdfVersion aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
+    private boolean validateMathML(Logger aParentLogger, String aEntryName, OdfVersion aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
-        Logger aLogger = new Logger(getLoggerName(),aEntryName,aOut, m_nLogLevel);
+        Logger aLogger = new Logger(aEntryName,aParentLogger);
         String aMathMLDTDSystemId = m_aValidatorProvider.getMathMLDTDSystemId(aVersion);
         if( aMathMLDTDSystemId != null )
         {
             // validate using DTD
-            return parseEntry(aOut, new MathML101Filter(aMathMLDTDSystemId, aLogger), aLogger, aEntryName, true);
+            return parseEntry(new MathML101Filter(aMathMLDTDSystemId, aLogger), aLogger, aEntryName, true);
         }
         else
         {
-            Validator aMathMLValidator = m_aValidatorProvider.getMathMLValidator(aOut,null);
+            Validator aMathMLValidator = m_aValidatorProvider.getMathMLValidator(aParentLogger.getOutputStream(),null);
             if( aMathMLValidator == null )
             {
                 aLogger.logInfo( "MathML schema is not available. Validation has been skipped.", false);
                 return false;
             }
-            return validateEntry( aOut, new MathML20Filter(aLogger), aMathMLValidator, aLogger, aEntryName );
+            return validateEntry( new MathML20Filter(aLogger), aMathMLValidator, aLogger, aEntryName );
         }
     }
     
 
-    protected boolean validateDSig(PrintStream aOut, String aEntryName, OdfVersion aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
+    protected boolean validateDSig(Logger aParentLogger, String aEntryName, OdfVersion aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
-        Validator aValidator=m_aValidatorProvider.getDSigValidator(aOut,aVersion);
-        Logger aLogger = new Logger(getLoggerName(),aEntryName,aOut, m_nLogLevel);
+        Validator aValidator=m_aValidatorProvider.getDSigValidator(aParentLogger.getOutputStream(),aVersion);
+        Logger aLogger = new Logger(aEntryName,aParentLogger);
         if ( aValidator == null ) {
             aLogger.logWarning("Signature not validated because there is no Signature Validator configured for the selected Configuration");
             return false;
         }
 
-        return validateEntry(aOut, new DSigFilter(aLogger), aValidator, aLogger, aEntryName );
+        return validateEntry(new DSigFilter(aLogger), aValidator, aLogger, aEntryName );
     }
 
-    protected boolean validateEntry(PrintStream aOut, XMLFilter aFilter,
+    protected boolean validateEntry(XMLFilter aFilter,
                            Validator aValidator, Logger aLogger,
                            String aEntryName ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
@@ -234,10 +247,10 @@ public abstract class ODFPackageValidator {
 
 
 
-        return aInStream != null ? validate(aOut, aInStream, aFilter, aValidator, aLogger ) : false;
+        return aInStream != null ? validate(aInStream, aFilter, aValidator, aLogger ) : false;
     }
     
-    private boolean validate(PrintStream aOut, InputStream aInStream,
+    private boolean validate(InputStream aInStream,
                       XMLFilter aFilter,
                       javax.xml.validation.Validator aValidator,
                       Logger aLogger ) throws ODFValidatorException
@@ -291,7 +304,7 @@ public abstract class ODFPackageValidator {
             aLogger.logFatalError(e.getMessage());
         }
         
-        aLogger.logInfo( aLogger.hasError() ? "validation errors found" : "no errors" , false);
+        aLogger.logSummaryInfo();
         if( m_aResult.hasForeignElements())
         {
             Set<String> aForeignElementURISet = m_aResult.getForeignElements().keySet();
@@ -326,7 +339,7 @@ public abstract class ODFPackageValidator {
         return aLogger.hasError();
     }
 
-    protected boolean parseEntry(PrintStream aOut, XMLFilter aFilter,
+    protected boolean parseEntry(XMLFilter aFilter,
                            Logger aLogger,
                            String aEntryName , boolean bValidating) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
@@ -345,13 +358,12 @@ public abstract class ODFPackageValidator {
             throw new ODFValidatorException( e );
         }
 
-        return aInStream != null ? parse(aOut, aInStream, aFilter, bValidating, aLogger ) : false;
+        return aInStream != null ? parse(aInStream, aFilter, bValidating, aLogger ) : false;
     }
 
-    private boolean parse(PrintStream aOut, InputStream aInStream, XMLFilter aFilter, boolean bValidating, Logger aLogger ) throws ODFValidatorException
+    private boolean parse(InputStream aInStream, XMLFilter aFilter, boolean bValidating, Logger aLogger ) throws ODFValidatorException
     {
         SAXParser aParser = getSAXParser(bValidating);
-        aLogger.setOutputStream(aOut);
         SchemaErrorHandler aErrorHandler = new SchemaErrorHandler( aLogger, m_aFilter );
 
         try
@@ -387,7 +399,7 @@ public abstract class ODFPackageValidator {
         }
         
         if( bValidating )
-            aLogger.logInfo( aLogger.hasError() ? "validation errors found" : "no errors" , false);            
+            aLogger.logSummaryInfo();
         return aLogger.hasError();
     }
 

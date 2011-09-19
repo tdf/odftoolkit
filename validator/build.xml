@@ -104,31 +104,23 @@
 
        
     <target name="-copy-v10-schema" depends="init">
-        <xslt style="xslt/fix_rng_for_msv.xsl" 
-                    in="${opendocument.v10.schema.dir}/${opendocument.v10.schema}" 
-                    out="${build.classes.dir}/schema/odf10/${opendocument.v10.schema}"/>  
         <copy todir="${build.classes.dir}/schema/odf10">
             <fileset dir="${opendocument.v10.schema.dir}"
-                includes="${opendocument.v10.schema.strict},${opendocument.v10.schema.manifest}"/>
+                includes="${opendocument.v10.schema},${opendocument.v10.schema.strict},${opendocument.v10.schema.manifest}"/>
         </copy>
     </target>
 
     <target name="-copy-v11-schema" depends="init">
-        <xslt style="xslt/fix_rng_for_msv.xsl" 
-                    in="${opendocument.v11.schema.dir}/${opendocument.v11.schema}" 
-                    out="${build.classes.dir}/schema/odf11/${opendocument.v11.schema}"/>  
         <copy todir="${build.classes.dir}/schema/odf11">
             <fileset dir="${opendocument.v11.schema.dir}"
-                includes="${opendocument.v11.schema.strict},${opendocument.v11.schema.manifest}"/>
+                includes="${opendocument.v11.schema},${opendocument.v11.schema.strict},${opendocument.v11.schema.manifest}"/>
         </copy>
     </target>
 
     <target name="-copy-v12-schema" depends="init">
-        <xslt style="xslt/fix_rng_for_msv.xsl" 
-                    in="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}"
-                    out="${build.classes.dir}/schema/odf12/${opendocument.v12.schema}"/>  
         <copy todir="${build.classes.dir}/schema/odf12">
-            <fileset dir="${opendocument.v12.part3.schema.dir}" includes="${opendocument.v12.schema.manifest},${opendocument.v12.schema.dsig}"/>
+            <fileset dir="${opendocument.v12.part3.schema.dir}" 
+                includes="${opendocument.v12.schema},${opendocument.v12.schema.manifest},${opendocument.v12.schema.dsig}"/>
         </copy>
     </target>
 

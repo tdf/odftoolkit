@@ -75,16 +75,28 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
     }
 
     @Override
-    protected boolean validatePre(PrintStream aOut, OdfVersion aVersion ) throws ODFValidatorException, IOException
+    protected boolean validatePre(Logger aLogger, OdfVersion aVersion ) throws ODFValidatorException, IOException
     {
-        boolean bErrorsFound = validateMimetype(aOut, aVersion);
-        bErrorsFound |= validateManifest(aOut, aVersion  );
+        Logger aManifestLogger = new Logger(OdfPackage.OdfFile.MANIFEST.getPath(),aLogger);
+        Logger aMimetypeLogger = new Logger("mimetype",aLogger);
+
+        // UGLY: do something that causes ODFDOM to parse the manifest, which
+        // may cause m_ErrorHandler to be called
+        m_aPkg.getFilePaths();
+        // hack: just create logger again, too lazy to create a Pair class
+        // and return it from validateMimetype...
+        boolean bErrorsFound = m_ErrorHandler.processErrors( aLogger, aManifestLogger,
+                                              aMimetypeLogger, aVersion);
+
+        bErrorsFound |= validateMimetype(aMimetypeLogger, aVersion);
+        bErrorsFound |= validateManifest(aManifestLogger, aVersion  );
+        aMimetypeLogger.logSummaryInfo();
 
         return bErrorsFound;
     }
 
     @Override
-    protected boolean validatePost(PrintStream aOut,Logger aLogger,OdfVersion aVersion ) throws ODFValidatorException, IOException
+    protected boolean validatePost(Logger aLogger,OdfVersion aVersion ) throws ODFValidatorException, IOException
     {
         boolean bHasErrors = false;
         if(m_aSubDocs != null )
@@ -96,14 +108,14 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
                 ODFPackageValidator aPackageValidator =
                     new ODFSubPackageValidator( getPackage(aLogger), getLoggerName(), aEntry.getFullPath(), aEntry.getMediaType(),
                                                   m_nLogLevel, m_eMode, m_aConfigVersion, m_aFilter, m_aResult.getGenerator(), m_aValidatorProvider );
-                bHasErrors |= aPackageValidator.validate(aOut);
+                bHasErrors |= aPackageValidator.validate(aLogger);
             }
         }
 
         if( aVersion.compareTo(OdfVersion.V1_2) >= 0 )
         {
-            bHasErrors |= validateDSig( aOut, OdfPackageExt.STREAMNAME_DOCUMENT_SIGNATURES, aVersion );
-            bHasErrors |= validateDSig( aOut, OdfPackageExt.STREAMNAME_MACRO_SIGNATURES, aVersion );
+            bHasErrors |= validateDSig( aLogger, OdfPackageExt.STREAMNAME_DOCUMENT_SIGNATURES, aVersion );
+            bHasErrors |= validateDSig( aLogger, OdfPackageExt.STREAMNAME_MACRO_SIGNATURES, aVersion );
         }
 
         return bHasErrors;
@@ -112,14 +124,9 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
     @Override
     protected void logSummary( boolean bHasErrors, Logger aLogger )
     {
-        if( bHasErrors || aLogger.hasError() )
-        {
-            aLogger.logInfo( "validation errors found" , true );
-            if( m_nLogLevel.compareTo(Logger.LogLevel.INFO) < 0 )
-                aLogger.logInfo( "Generator: " + m_aResult.getGenerator() , true );
-        }
-        else
-            aLogger.logInfo(  "no errors" , false);
+        aLogger.logSummaryInfo();
+        if( (bHasErrors || aLogger.hasError()) && m_nLogLevel.compareTo(Logger.LogLevel.INFO) < 0  )
+            aLogger.logInfo( "Generator: " + m_aResult.getGenerator() , true );
     }
 
 
@@ -133,9 +140,8 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
         }
     }
 
-    private boolean validateMimetype(PrintStream aOut, OdfVersion aVersion)
+    private boolean validateMimetype(Logger aLogger, OdfVersion aVersion)
     {
-        Logger aLogger = new Logger(getLoggerName(),"MIMETYPE",aOut, m_nLogLevel);
         boolean bHasErrors = false;
 
         String aMimetype=getPackage(aLogger).getMediaTypeString();
@@ -166,30 +172,21 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
         return bHasErrors;
     }
 
-    private boolean validateManifest(PrintStream aOut, OdfVersion aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
+    private boolean validateManifest(Logger aLogger, OdfVersion aVersion ) throws IOException, ZipException, IllegalStateException, ODFValidatorException
     {
         boolean bRet;
-        Logger aLogger = new Logger(getLoggerName(),OdfPackage.OdfFile.MANIFEST.getPath(),aOut, m_nLogLevel);
         ManifestFilter aFilter = new ManifestFilter(aLogger, m_aResult, this);
-        Validator aManifestValidator = m_aValidatorProvider.getManifestValidator(aOut,aVersion);
+        Validator aManifestValidator = m_aValidatorProvider.getManifestValidator(aLogger.getOutputStream(),aVersion);
         if( aManifestValidator != null )
         {
-            bRet = validateEntry(aOut, aFilter,
+            bRet = validateEntry(aFilter,
                          aManifestValidator, aLogger, OdfPackage.OdfFile.MANIFEST.getPath() );
         }
         else
         {
             aLogger.logInfo( "Validation of " + OdfPackage.OdfFile.MANIFEST.getPath() + " skipped.", false);
-            bRet = parseEntry(aOut, aFilter, aLogger, OdfPackage.OdfFile.MANIFEST.getPath() , false);
+            bRet = parseEntry(aFilter, aLogger, OdfPackage.OdfFile.MANIFEST.getPath() , false);
         }
-        // UGLY: do something that causes ODFDOM to parse the manifest, which
-        // may cause m_ErrorHandler to be called
-        m_aPkg.getFilePaths();
-        // hack: just create logger again, too lazy to create a Pair class
-        // and return it from validateMimetype...
-        Logger aMimetypeLogger =
-            new Logger(getLoggerName(),"MIMETYPE",aOut, m_nLogLevel);
-        bRet |= m_ErrorHandler.validate(aLogger, aMimetypeLogger, aVersion);
         return bRet;
     }
 

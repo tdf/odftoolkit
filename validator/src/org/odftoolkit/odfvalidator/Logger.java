@@ -38,21 +38,41 @@ public class Logger {
     private String m_aFileName;
     private String m_aEntryName;
     private PrintStream m_aOut;
-    private boolean m_bError;
+    private int m_nErrors;
+    private int m_nWarnings;
     private LogLevel m_nLevel;
+    private Logger m_aParentLogger;
     
     private static final String INFO_PREFIX = "Info:";
     private static final String WARNING_PREFIX = "Warning:";
     private static final String ERROR_PREFIX = "Error:";
     private static final String FATAL_PREFIX = "Fatal:";
     
-    /** Creates a new instance of SchemaErrorHandler */
+    /** Creates a new instance of Logger */
     Logger( String aFileName, String aEntryName, PrintStream aOut , LogLevel nLevel) {
         m_aFileName = aFileName;
         m_aEntryName = aEntryName;
         m_aOut = aOut;
         m_nLevel = nLevel;
-        m_bError = false;
+        m_nErrors = 0;
+        m_nWarnings = 0;
+        m_aParentLogger = null;
+    }
+
+    /** Creates a new instance of Logger */
+    Logger(  String aEntryName, Logger aParentLogger ) {
+        m_aFileName = aParentLogger.m_aFileName;
+        m_aEntryName = aEntryName;
+        m_aOut = aParentLogger.m_aOut;
+        m_nLevel = aParentLogger.m_nLevel;
+        m_nErrors = 0;
+        m_nWarnings = 0;
+        m_aParentLogger = aParentLogger;
+    }
+
+    public PrintStream getOutputStream()
+    {
+        return m_aOut;
     }
 
     public void setOutputStream(PrintStream aOut) {
@@ -61,23 +81,39 @@ public class Logger {
 
     boolean hasError()
     {
-        return m_bError;
+        return m_nErrors>0;
+    }
+
+    boolean hasWarning()
+    {
+        return m_nWarnings>0;
+    }
+
+    int getErrorCount()
+    {
+        return m_nErrors;
+    }
+
+    int getWarningCount()
+    {
+        return m_nWarnings;
     }
 
     void logWarning(String aMsg) {
         if( m_nLevel.compareTo(LogLevel.WARNING) >= 0 )
             logMessage( WARNING_PREFIX, aMsg );
+        incWarnings();
     }
 
     void logFatalError(String aMsg) {
         logMessage( FATAL_PREFIX, aMsg );
-        m_bError = true;
+        incErrors();
     }
 
     void logError(String aMsg) {
         if( m_nLevel.compareTo(LogLevel.ERROR) >= 0 )
             logMessage( ERROR_PREFIX, aMsg );
-        m_bError = true;
+        incErrors();
     }
 
     void logInfo(String aMsg, boolean bForceOutput) {
@@ -88,17 +124,23 @@ public class Logger {
     void logWarning(SAXParseException e) {
         if( m_nLevel.compareTo(LogLevel.WARNING) >= 0 )
             logMessage( WARNING_PREFIX, e );
+        incWarnings();
     }
 
     void logFatalError(SAXParseException e) {
         logMessage( FATAL_PREFIX, e );
-        m_bError = true;
+        incErrors();
     }
 
     void logError(SAXParseException e) {
         if( m_nLevel.compareTo(LogLevel.ERROR) >= 0 )
             logMessage( ERROR_PREFIX, e );
-        m_bError = true;
+        incErrors();
+    }
+
+    void logSummaryInfo()
+    {
+        logInfo( (hasError() ? getErrorCount() : "no") + " errors, " + (hasWarning() ? getWarningCount() : "no") + " warnings", false );
     }
         
     private void printFileEntryPrefix()
@@ -130,4 +172,19 @@ public class Logger {
         m_aOut.print( aPrefix );
         m_aOut.println( aMsg);
     }
+
+    private void incErrors()
+    {
+        ++m_nErrors;
+        if( m_aParentLogger != null )
+            m_aParentLogger.incErrors();
+    }
+
+    private void incWarnings()
+    {
+        ++m_nWarnings;
+        if( m_aParentLogger != null )
+            m_aParentLogger.incWarnings();
+    }
+
 }
