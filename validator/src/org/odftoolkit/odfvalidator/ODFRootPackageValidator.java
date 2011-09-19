@@ -24,14 +24,21 @@ package org.odftoolkit.odfvalidator;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.Vector;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import javax.xml.validation.Validator;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 
 public abstract class ODFRootPackageValidator extends ODFPackageValidator implements ManifestEntryListener {
 
+    static final String s_Mimetype = "mimetype";
+
+    private List<ZipEntry> m_ZipEntries = null;
     private OdfPackage m_aPkg = null;
     private Vector<ManifestEntry> m_aSubDocs = null;
 
@@ -40,8 +47,21 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
         super(nLogLevel, eMode, aVersion, aFilter, aValidatorProvider);
     }
 
+    abstract List<ZipEntry> getZipEntries() throws Exception;
+
     abstract OdfPackage getPackage() throws Exception;
-    
+
+    List<ZipEntry> getZipEntries(Logger aLogger) {
+        if (m_ZipEntries == null) {
+            try {
+                m_ZipEntries = getZipEntries();
+            } catch (Exception e) {
+                aLogger.logFatalError(e.getMessage());
+            }
+        }
+        return m_ZipEntries;
+    }
+
     OdfPackage getPackage(Logger aLogger) {
         if (m_aPkg == null) {
             try {
@@ -68,7 +88,7 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
     @Override
     protected boolean validatePre(PrintStream aOut, OdfVersion aVersion ) throws ODFValidatorException, IOException
     {
-        boolean bErrorsFound = validateMimetype( aOut );
+        boolean bErrorsFound = validateMimetype(aOut, aVersion);
         bErrorsFound |= validateManifest(aOut, aVersion  );
 
         return bErrorsFound;
@@ -124,9 +144,45 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
         }
     }
 
-    private boolean validateMimetype( PrintStream aOut )
+    private boolean validateMimetype(PrintStream aOut, OdfVersion aVersion)
     {
         Logger aLogger = new Logger(getLoggerName(),"MIMETYPE",aOut, m_nLogLevel);
+
+        List<ZipEntry> zipEntries = getZipEntries(aLogger);
+
+        if (zipEntries.size() == 0) {
+            aLogger.logFatalError("ZIP file is empty.");
+            return true;
+        }
+        // n.b.: mimetype is optional (only "should") in 1.1
+        ZipEntry mimetype = null;
+        for (int i = 0; i < zipEntries.size(); ++i) {
+            if (zipEntries.get(i).getName().equals(s_Mimetype)) {
+                mimetype = zipEntries.get(i);
+                if (i != 0) {
+                    aLogger.logWarning(s_Mimetype +
+                        " is not the first file in the ODF package.");
+                }
+            }
+        }
+        if (mimetype == null) {
+            String msg = "ODF package contains no " + s_Mimetype + ".";
+            if (aVersion == OdfVersion.V1_0 || aVersion == OdfVersion.V1_1) {
+                aLogger.logWarning(msg);
+            } else {
+                aLogger.logError(msg);
+                return true;
+            }
+        } else {
+            if (mimetype.getMethod() != ZipEntry.STORED) {
+                aLogger.logError(s_Mimetype + " is compressed.");
+                return true;
+            }
+            if (mimetype.getExtra() != null) {
+                aLogger.logError(s_Mimetype + " has extra field.");
+                return true;
+            }
+        }
 
         String aMimetype=getPackage(aLogger).getMediaType();
         if( (aMimetype == null) || aMimetype.length() == 0 ) {
@@ -169,12 +225,40 @@ public abstract class ODFRootPackageValidator extends ODFPackageValidator implem
     {
         boolean bRet;
         Logger aLogger = new Logger(getLoggerName(),OdfPackage.OdfFile.MANIFEST.getPath(),aOut, m_nLogLevel);
-        ManifestFilter aFilter = new ManifestFilter(aLogger,m_aResult, this);
+        Set<String> zipEntrySet = new HashSet<String>();
+        List<ZipEntry> entries = getZipEntries(aLogger);
+        for (ZipEntry entry : entries) {
+            String name = entry.getName();
+            // filter files that are not listed in manifest.xml and directories
+            if (!name.equals("mimetype") && !name.startsWith("META-INF/") &&
+                !name.endsWith("/")) {
+                    zipEntrySet.add(name);
+            }
+        }
+        ManifestFilter aFilter =
+            new ManifestFilter(aLogger, m_aResult, this, zipEntrySet);
         Validator aManifestValidator = m_aValidatorProvider.getManifestValidator(aOut,aVersion);
         if( aManifestValidator != null )
         {
             bRet = validateEntry(aOut, aFilter,
                          aManifestValidator, aLogger, OdfPackage.OdfFile.MANIFEST.getPath() );
+            if (!zipEntrySet.isEmpty()) {
+                // seems to be allowed in 1.1
+                String msg = "no manifest entry for package entry: ";
+                if (aVersion == OdfVersion.V1_0 || aVersion == OdfVersion.V1_1) {
+                    for (String entry : zipEntrySet) {
+                        aLogger.logWarning(msg + entry);
+                    }
+                } else {
+                    bRet = true;
+                    for (String entry : zipEntrySet) {
+                        aLogger.logError(msg + entry);
+                    }
+                }
+            }
+            if (aFilter.hasInvalidManifestEntry()) {
+                bRet = true;
+            }
         }
         else
         {

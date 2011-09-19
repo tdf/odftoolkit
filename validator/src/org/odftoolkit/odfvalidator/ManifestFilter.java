@@ -24,6 +24,7 @@ package org.odftoolkit.odfvalidator;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Set;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -40,16 +41,24 @@ class ManifestFilter extends NamespaceFilter {
     private static final String MEDIA_TYPE = "media-type";
     
     private Logger m_aLogger;
-    
+
+    private Set<String> m_ZipEntries = null;
+    private boolean m_bInvalidManifestEntry = false;
+
     private ManifestListener m_aManifestListener = null;
     private ManifestEntryListener m_aManifestEntryListener = null;
     
     /** Creates a new instance of KnownIssueFilter */
-    ManifestFilter( Logger aLogger, ManifestListener aManifestListener, ManifestEntryListener aManifestEntryListener ) {
+    ManifestFilter(Logger aLogger, ManifestListener aManifestListener,
+            ManifestEntryListener aManifestEntryListener, Set<String> zipEntries)
+    {
         m_aLogger = aLogger;
+        m_ZipEntries = zipEntries;
         m_aManifestListener = aManifestListener;
         m_aManifestEntryListener = aManifestEntryListener;
     }
+
+    public boolean hasInvalidManifestEntry() { return m_bInvalidManifestEntry; }
 
     @Override
     public InputSource resolveEntity(String aPublicId, String aSystemId) throws SAXException, IOException {
@@ -99,6 +108,10 @@ class ManifestFilter extends NamespaceFilter {
                 {
                     if( m_aManifestEntryListener != null )
                         m_aManifestEntryListener.foundManifestEntry( new ManifestEntry(aFullPath,aMediaType) );
+                }
+                if (!m_ZipEntries.remove(aFullPath) && !aFullPath.endsWith("/")) {
+                    m_aLogger.logError("manifest entry does not exist in package: " + aFullPath);
+                    m_bInvalidManifestEntry = true;
                 }
             }
         }

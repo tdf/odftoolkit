@@ -23,8 +23,9 @@
 package org.odftoolkit.odfvalidator;
 
 import java.io.InputStream;
+import java.util.List;
+import java.util.zip.ZipEntry;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
-
 
 
 /**
@@ -48,6 +49,10 @@ public class ODFStreamValidator extends ODFRootPackageValidator {
         
         m_aInputStream=aInputStream;
         m_aBaseURI=aBaseURI;
+    }
+
+    List<ZipEntry> getZipEntries() throws Exception {
+        throw new RuntimeException("not implemented");
     }
 
     OdfPackage getPackage() throws Exception

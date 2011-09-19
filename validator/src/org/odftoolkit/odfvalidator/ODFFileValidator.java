@@ -23,6 +23,11 @@
 package org.odftoolkit.odfvalidator;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 
 
@@ -47,7 +52,19 @@ public class ODFFileValidator extends ODFRootPackageValidator {
     {
         return m_aFile.getAbsolutePath();
     }
-    
+
+    List<ZipEntry> getZipEntries() throws Exception
+    {
+        ZipFile zip = new ZipFile(m_aFile);
+        List<ZipEntry> ret = new ArrayList<ZipEntry>();
+        Enumeration<? extends ZipEntry> entries = zip.entries();
+        while (entries.hasMoreElements()) {
+            ret.add(entries.nextElement());
+        }
+        zip.close();
+        return ret;
+    }
+
     protected OdfPackage getPackage() throws Exception
     {
         return OdfPackage.loadPackage( m_aFile );
