@@ -167,22 +167,23 @@
     <target name="-extract-v10-schema" depends="init" if="opendocument.v10.schema.extract">
         <property file="ant.properties"/>
         <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${reference.odfxsltrunner-task.jar}:${reference.odfxsltrunner.jar}"/>
+        <property name="v10.target.dir" value="${build.classes.dir}/schema/odf10"/>
         <odfxslt in="${opendocument.v10.schema.dir}/${opendocument.v10.spec}"
-                 outfile="${build.classes.dir}/schema/odf10/${opendocument.v10.schema}"
+                 outfile="${v10.target.dir}/${opendocument.v10.schema}"
                  style="xslt/extract_schema.xsl">
             <param name="mode" expression="schema"/>
         </odfxslt>
         <odfxslt in="${opendocument.v10.schema.dir}/${opendocument.v10.spec}"
-                 outfile="${build.classes.dir}/schema/odf10/${opendocument.v10.schema.strict}"
+                 outfile="${v10.target.dir}/${opendocument.v10.schema.strict}"
                  style="xslt/extract_schema.xsl">
             <param name="mode" expression="strict-schema"/>
         </odfxslt>
         <odfxslt in="${opendocument.v10.schema.dir}/${opendocument.v10.spec}"
-                 outfile="${build.classes.dir}/schema/odf10/${opendocument.v10.schema.manifest}"
+                 outfile="${v10.target.dir}/${opendocument.v10.schema.manifest}"
                  style="xslt/extract_schema.xsl">
             <param name="mode" expression="manifest-schema"/>
         </odfxslt>
-        <fixcrlf srcdir="${build.classes.dir}/schema/odf10" eol="lf"/>
+        <fixcrlf srcdir="${v10.target.dir}" eol="lf"/>
     </target>
 
     <target name="-copy-v11-schema" depends="init" unless="opendocument.v11.schema.extract">
@@ -195,22 +196,23 @@
     <target name="-extract-v11-schema" depends="init" if="opendocument.v11.schema.extract">
         <property file="ant.properties"/>
         <taskdef name="odfxslt" classname="org.odftoolkit.odfxsltrunnertask.ODFXSLTRunnerTask" classpath="${reference.odfxsltrunner-task.jar}:${reference.odfxsltrunner.jar}"/>
+        <property name="v11.target.dir" value="${build.classes.dir}/schema/odf11"/>
         <odfxslt in="${opendocument.v11.schema.dir}/${opendocument.v11.spec}"
-                 outfile="${build.classes.dir}/schema/odf11/${opendocument.v11.schema}"
+                 outfile="${v11.target.dir}/${opendocument.v11.schema}"
                  style="xslt/extract_schema.xsl">
             <param name="mode" expression="schema"/>
         </odfxslt>
         <odfxslt in="${opendocument.v11.schema.dir}/${opendocument.v11.spec}"
-                 outfile="${build.classes.dir}/schema/odf11/${opendocument.v11.schema.strict}"
+                 outfile="${v11.target.dir}/${opendocument.v11.schema.strict}"
                  style="xslt/extract_schema.xsl">
             <param name="mode" expression="strict-schema"/>
         </odfxslt>
         <odfxslt in="${opendocument.v11.schema.dir}/${opendocument.v11.spec}"
-                 outfile="${build.classes.dir}/schema/odf11/${opendocument.v11.schema.manifest}"
+                 outfile="${v11.target.dir}/${opendocument.v11.schema.manifest}"
                  style="xslt/extract_schema.xsl">
             <param name="mode" expression="manifest-schema"/>
         </odfxslt>
-        <fixcrlf srcdir="${build.classes.dir}/schema/odf11" eol="lf"/>
+        <fixcrlf srcdir="${v11.target.dir}" eol="lf"/>
     </target>
 
     <target name="-copy-v12-schema" depends="init">

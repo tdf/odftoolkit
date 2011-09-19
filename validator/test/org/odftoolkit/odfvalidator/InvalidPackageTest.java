@@ -60,7 +60,7 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
         Assert.assertTrue(output.contains("testInvalidPkg1.odt/mimetype:Error:The file 'mimetype' shall not be compressed"));
         Assert.assertTrue(output.contains("testInvalidPkg1.odt/mimetype:Error:There shall be no extra field for the 'mimetype' file"));
         Assert.assertTrue(output.contains("testInvalidPkg1.odt/META-INF/manifest.xml:Error:The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
-        Assert.assertTrue(output.contains("testInvalidPkg1.odt:Info:9 errors, 11 warnings"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt:Info:10 errors, 11 warnings"));
     }
 
     @Test
@@ -92,7 +92,7 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
         Assert.assertTrue(output.contains("testInvalidPkg2.odt/mimetype:Warning:The ODF package 'testInvalidPkg2.odt' contains no 'mimetype' file"));
         Assert.assertTrue(output.contains("testInvalidPkg2.odt/META-INF/manifest.xml:Error:The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
         Assert.assertTrue(output.contains("testInvalidPkg2.odt/META-INF/manifest.xml:Warning:The file 'not_in_manifest' shall be listed in the 'META-INF/manifest.xml' file as it exists in the ODF package"));
-        Assert.assertTrue(output.contains("testInvalidPkg2.odt:Info:6 errors, 12 warnings"));
+        Assert.assertTrue(output.contains("testInvalidPkg2.odt:Info:7 errors, 12 warnings"));
     }
 
     @Test

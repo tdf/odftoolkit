@@ -3,7 +3,7 @@
 
   DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
 
-  Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+  Copyright 2011 Oracle and/or its affiliates. All rights reserved.
 
   Use is subject to license terms.
 
@@ -37,9 +37,9 @@
     <!-- 'manifest-schema': Extracts the manifest schema -->
     <xsl:param name="mode" select="'schema'"/>
        
-    <!-- map mode paramater to style names -->
+    <!-- map mode parameter to style names -->
     <!-- which paragraph styles do we wish to extract? -->
-    <xsl:param name="style">
+    <xsl:variable name="extract-style-name">
         <xsl:choose>
             <xsl:when test="$mode='strict-schema'">
                 <xsl:value-of select="'RelaxNG_20_Strict'"/>
@@ -47,82 +47,34 @@
             <xsl:when test="$mode='manifest-schema'">
                 <xsl:value-of select="'RelaxNG_20_Manifest'"/>
             </xsl:when>
-            <xsl:when test="$mode='dsig-schema'">
-                <xsl:value-of select="'RelaxNG_20_DSig'"/>
-            </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="'RelaxNG'"/>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:param>    
-    <xsl:param name="style2">
-        <xsl:choose>
-            <xsl:when test="$mode='strict-schema'">
-                <xsl:value-of select="'Changed_20_Relax_20_NG_20_Strict'"/>
-            </xsl:when>            
-            <xsl:when test="$mode='manifest-schema'">
-                <xsl:value-of select="'Changed_20_Relax_20_NG_20_Manifest'"/>
-            </xsl:when>            
-            <xsl:when test="$mode='dsig-schema'">
-                <xsl:value-of select="'Changed_20_Relax_20_NG_20_DSig'"/>
-            </xsl:when>            
-            <xsl:otherwise>
-                <xsl:value-of select="'Changed_20_Relax_20_NG'"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:param>
-    <xsl:param name="style3">
-        <xsl:choose>
-            <xsl:when test="$mode='strict-schema'">
-                <xsl:value-of select="'RelaxNG_20_Strict_Linenumber_20_Correction'"/>
-            </xsl:when>
-            <xsl:when test="$mode='manifest-schema'">
-                <xsl:value-of select="'RelaxNG_20_Manifest_Linenumber_20_Correction'"/>
-            </xsl:when>
-            <xsl:when test="$mode='dsig-schema'">
-                <xsl:value-of select="'RelaxNG_20_DSig_20_Linenumber_20_Correction'"/>
-            </xsl:when>               
-            <xsl:otherwise>
-                <xsl:value-of select="'RelaxNG_20_Linenumber_20_Correction'"/>
-            </xsl:otherwise>
-        </xsl:choose>	  
-    </xsl:param>
-    <xsl:param name="style4">
-        <xsl:choose>
-            <xsl:when test="$mode='strict-schema'">
-                <xsl:value-of select="'RelaxNG_20_Strict_20_Start'"/>
-            </xsl:when>
-            <xsl:when test="$mode='manifest-schema'">
-                <xsl:value-of select="'RelaxNG_20_Manifest_20_Start'"/>
-            </xsl:when>
-            <xsl:when test="$mode='dsig-schema'">
-                <xsl:value-of select="'RelaxNG_20_DSig_20_Start'"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="'RelaxNG_20_Start'"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:param>    
+    </xsl:variable>
 
     <!-- define 'styles' key. It selects all style:style element with a certain name -->
     <xsl:key name="styles"
              match="style:style"
              use="@style:name" />
 
+    <!-- Look only at paragraphs -->
     <xsl:template match="office:document-content">
         <xsl:apply-templates select="office:body/office:text//text:p"/>
     </xsl:template>
 
-    <!-- analyze paragraphs -->
+    <!-- Analyze paragraphs -->
     <xsl:template match="text:p">
-        
         <!-- determine all parent styles of this paragraph; use key 'parents' -->
-        <xsl:variable name="parent-styles"
-                      select="@text:style-name |
-                      key('styles',@text:style-name)/@style:parent-style-name"/>
-        
+        <xsl:variable name="content-style-names" select="@text:style-name|key('styles',@text:style-name)/@style:parent-style-name"/>
+        <xsl:variable name="styles-style-names">
+            <xsl:for-each select="document('styles.xml',.)">
+                <xsl:value-of select="key('styles',$content-style-names)/@style:parent-style-name"/>
+            </xsl:for-each>
+        </xsl:variable>
+
         <!-- if schema parent style is found, generate output -->
-        <xsl:if test="$parent-styles = $style or $parent-styles = $style2 or $parent-styles = $style3 or $parent-styles = $style4">
+        <xsl:if test="$content-style-names = $extract-style-name or $styles-style-names = $extract-style-name">
             <xsl:apply-templates mode="output"/>
             <xsl:text>
 </xsl:text>
