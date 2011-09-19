@@ -87,7 +87,6 @@
 
     -->
 
-    <property file="schema.user.properties"/>
     <property file="schema.properties"/>
 
     <property name="opendocument.v10.schema" value="OpenDocument-schema-v1.0${opendocument.v10.schema.state}.rng"/>
@@ -100,8 +99,51 @@
     <property name="opendocument.v12.schema.manifest" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-manifest-schema.rng"/>
     <property name="opendocument.v12.schema.dsig" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-dsig-schema.rng"/>
 
-    <target name="-pre-jar" depends="init,-copy-v10-schema,-copy-v11-schema,-copy-v12-schema,-copy-mathml-schema,-copy-mathml2-schema,-create-v10-validator-config,-create-v11-validator-config,-create-v12-validator-config"/>
+    <property file="schema.user.properties" prefix="user"/>
+    <target name="-post-init" description="Initialize schema properties">
+        <condition property="opendocument.v10.schema.dir" value="${user.opendocument.v10.schema.dir}">
+            <not>
+                <isset property="opendocument.v10.schema.dir"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v11.schema.dir" value="${user.opendocument.v11.schema.dir}">
+            <not>
+                <isset property="opendocument.v11.schema.dir"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.schema.dir" value="${user.opendocument.v12.schema.dir}">
+            <not>
+                <isset property="opendocument.v12.schema.dir"/>
+            </not>
+        </condition>
+        <condition property="mathml.schema.dir" value="${user.mathml.schema.dir}">
+            <not>
+                <isset property="mathml.schema.dir"/>
+            </not>
+        </condition>
+        <condition property="mathml2.schema.dir" value="${user.mathml2.schema.dir}">
+            <not>
+                <isset property="mathml2.schema.dir"/>
+            </not>
+        </condition>
+        <condition property="use.mathml2.xsd" value="${user.use.mathml2.xsd}">
+            <not>
+                <isset property="use.mathml2.xsd"/>
+            </not>
+        </condition>
+        <condition property="testdocs.dir" value="${user.testdocs.dir}">
+            <not>
+                <isset property="testdocs.dir"/>
+            </not>
+        </condition>
+        <condition property="validator.warning.level" value="${user.validator.warning.level}">
+            <not>
+                <isset property="validator.warning.level"/>
+            </not>
+        </condition>
+    </target>
 
+    <target name="-pre-jar" depends="init,-copy-v10-schema,-copy-v11-schema,-copy-v12-schema,-copy-mathml-schema,-copy-mathml2-schema,-create-v10-validator-config,-create-v11-validator-config,-create-v12-validator-config"/>
        
     <target name="-copy-v10-schema" depends="init">
         <copy todir="${build.classes.dir}/schema/odf10">
@@ -119,7 +161,7 @@
 
     <target name="-copy-v12-schema" depends="init">
         <copy todir="${build.classes.dir}/schema/odf12">
-            <fileset dir="${opendocument.v12.part3.schema.dir}" 
+            <fileset dir="${opendocument.v12.schema.dir}" 
                 includes="${opendocument.v12.schema},${opendocument.v12.schema.manifest},${opendocument.v12.schema.dsig}"/>
         </copy>
     </target>
@@ -194,21 +236,6 @@
             <param name="filter" expression="${filter-param}"/>
         </xslt >
     </target>
-
-    <!--
-    <target name="test" depends="jar" description="Test ODFValidator">
-        <condition property="mathml.dtd.option" value="" else="-d">
-            <istrue value="${use.mathml2.xsd}"/>
-        </condition>
-        <java jar="${dist.jar}" fork="true">
-            <sysproperty key="javax.xml.validation.SchemaFactory:http://relaxng.org/ns/structure/1.0" value="org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl"/>
-            <sysproperty key="org.iso_relax.verifier.VerifierFactoryLoader" value="com.sun.msv.verifier.jarv.FactoryLoaderImpl"/>
-            <arg value="-v"/>
-            <arg value="${mathml.dtd.option}"/>
-            <arg value="${testdocs.dir}"/>
-        </java>
-    </target>
-    -->
 
     <!-- running the tests needs the built jar, so add a dependence here -->
     <target name="-post-compile-test" depends="jar"/>
