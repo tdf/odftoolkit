@@ -1,0 +1,79 @@
+#     This is the Mathematical Markup Language (MathML) 3.0, an XML
+#     application for describing mathematical notation and capturing
+#     both its structure and content.
+#
+#     Copyright 1998-2007 World Wide Web Consortium
+#        (Massachusetts Institute of Technology, Institut National de
+#         Recherche en Informatique et en Automatique, Keio University).
+#         All Rights Reserved.
+#
+#     Permission to use, copy, modify and distribute the RelaxNG schema for MathML3
+#     and its accompanying documentation for any purpose and without fee is
+#     hereby granted in perpetuity, provided that the above copyright notice
+#     and this paragraph appear in all copies.  The copyright holders make
+#     no representation about the suitability of the Schema for any purpose.
+#
+#     This file contains the arity checking rules for the symbols
+#     from the content dictionary 
+#     It is provided "as is" without expressed or implied warranty.
+#
+#     Revision:   $Id: specfun.rnc,v 1.1 2007/12/11 15:38:53 dcarlis Exp $
+
+cd.token.unary.class |= ln.token | sin.token | cos.token | tan.token | sec.token | csc.token | cot.token | sinh.token | cosh.token | tanh.token | sech.token | csch.token | coth.token | arcsin.token | arccos.token | arctan.token | arccosh.token | arccot.token | arccoth.token | arccsc.token | arccsch.token | arcsec.token | arcsech.token | arcsinh.token | arctanh.token | exp.token 
+cd.token.binary.class |=  log.token
+
+# the element definitions for the token elements
+exp.content = Token.type
+exp.token = element exp {exp.content}
+ln.content = Token.type
+ln.token = element ln {ln.content}
+log.content = Token.type
+log.token = element log {log.content}
+sin.content = Token.type
+sin.token = element sin {sin.content}
+cos.content = Token.type
+cos.token = element cos {cos.content}
+tan.content = Token.type
+tan.token = element tan {tan.content}
+sec.content = Token.type
+sec.token = element sec {sec.content}
+csc.content = Token.type
+csc.token = element csc {csc.content}
+cot.content = Token.type
+cot.token = element cot {cot.content}
+sinh.content = Token.type
+sinh.token = element sinh {sinh.content}
+cosh.content = Token.type
+cosh.token = element cosh {cosh.content}
+tanh.content = Token.type
+tanh.token = element tanh {tanh.content}
+sech.content = Token.type
+sech.token = element sech {sech.content}
+csch.content = Token.type
+csch.token = element csch {csch.content}
+coth.content = Token.type
+coth.token = element coth {coth.content}
+arcsin.content = Token.type
+arcsin.token = element arcsin {arcsin.content}
+arccos.content = Token.type
+arccos.token = element arccos {arccos.content}
+arctan.content = Token.type
+arctan.token = element arctan {arctan.content}
+arccosh.content = Token.type
+arccosh.token = element arccosh {arccosh.content}
+arccot.content = Token.type
+arccot.token = element arccot {arccot.content}
+arccoth.content = Token.type
+arccoth.token = element arccoth {arccoth.content}
+arccsc.content = Token.type
+arccsc.token = element arccsc {arccsc.content}
+arccsch.content = Token.type
+arccsch.token = element arccsch {arccsch.content}
+arcsec.content = Token.type
+arcsec.token = element arcsec {arcsec.content}
+arcsech.content = Token.type
+arcsech.token = element arcsech {arcsech.content}
+arcsinh.content = Token.type
+arcsinh.token = element arcsinh {arcsinh.content}
+arctanh.content = Token.type
+arctanh.token = element arctanh {arctanh.content}

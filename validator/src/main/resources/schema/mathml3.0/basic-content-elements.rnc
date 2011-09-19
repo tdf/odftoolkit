@@ -1,0 +1,49 @@
+#     This is the Mathematical Markup Language (MathML) 3.0, an XML
+#     application for describing mathematical notation and capturing
+#     both its structure and content.
+#
+#     Copyright 1998-2007 World Wide Web Consortium
+#        (Massachusetts Institute of Technology, Institut National de
+#         Recherche en Informatique et en Automatique, Keio University).
+#         All Rights Reserved.
+#
+#     Permission to use, copy, modify and distribute the RelaxNG schema for MathML3
+#     and its accompanying documentation for any purpose and without fee is
+#     hereby granted in perpetuity, provided that the above copyright notice
+#     and this paragraph appear in all copies.  The copyright holders make
+#     no representation about the suitability of the Schema for any purpose.
+#
+#     This file contains the arity checking rules for the symbols
+#     from the content dictionary 
+#     It is provided "as is" without expressed or implied warranty.
+#
+#     Revision:   $Id: basic-content-elements.rnc,v 1.1 2007/12/11 15:38:51 dcarlis Exp $
+
+cd.token.unary.class |= inverse.token | ident.token | domain.token | codomain.token | image.token | otherwise.token
+cd.token.binary.class |= interval.token | piece.token
+cd.token.nary.class |= compose.token | piecewise.token
+cd.binder.class |= lambda.token
+
+# the element definitions for the token elements
+interval.content = Token.type, attribute closure {MathMLtype}?
+interval.token = element interval {interval.content}
+inverse.content = Token.type
+inverse.token = element inverse {inverse.content}
+lambda.content = Token.type
+lambda.token = element lambda {lambda.content}
+compose.content = Token.type
+compose.token = element compose {compose.content}
+ident.content = Token.type
+ident.token = element ident {ident.content}
+domain.content = Token.type
+domain.token = element domain {domain.content}
+codomain.content = Token.type
+codomain.token = element codomain {codomain.content}
+image.content = Token.type
+image.token = element image {image.content}
+piecewise.content = Token.type,ContExp*
+piecewise.token = element piecewise {piecewise.content}
+piece.content = Token.type
+piece.token = element piece {piece.content}
+otherwise.content = Token.type
+otherwise.token = element otherwise {otherwise.content}

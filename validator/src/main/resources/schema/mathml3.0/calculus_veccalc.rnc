@@ -1,0 +1,49 @@
+#     This is the Mathematical Markup Language (MathML) 3.0, an XML
+#     application for describing mathematical notation and capturing
+#     both its structure and content.
+#
+#     Copyright 1998-2007 World Wide Web Consortium
+#        (Massachusetts Institute of Technology, Institut National de
+#         Recherche en Informatique et en Automatique, Keio University).
+#         All Rights Reserved.
+#
+#     Permission to use, copy, modify and distribute the RelaxNG schema for MathML3
+#     and its accompanying documentation for any purpose and without fee is
+#     hereby granted in perpetuity, provided that the above copyright notice
+#     and this paragraph appear in all copies.  The copyright holders make
+#     no representation about the suitability of the Schema for any purpose.
+#
+#     This file contains the arity checking rules for the symbols
+#     from the content dictionary 
+#     It is provided "as is" without expressed or implied warranty.
+#
+#     Revision:   $Id: calculus_veccalc.rnc,v 1.1 2007/12/11 15:38:51 dcarlis Exp $
+
+cd.token.unary.class |= int.token | diff.token | grad.token | curl.token | laplacian.token
+cd.token.binary.class |= defint.token | defintset.token
+cd.token.nary.class |= partialdiff.token
+cd.binder.class |= intalg.token | Diff.token
+
+# the element definitions for the token elements
+int.content = Token.type
+int.token = element int {int.content}
+defint.content = Token.type
+defint.token = element defint {defint.content}
+defintset.content = Token.type
+defintset.token = element defintset {defintset.content}
+intalg.content = Token.type
+intalg.token = element intalg {intalg.content}
+diff.content = Token.type
+diff.token = element diff {diff.content}
+Diff.content = Token.type
+Diff.token = element Diff {Diff.content}
+partialdiff.content = Token.type, attribute type {MathMLtype}?
+partialdiff.token = element partialdiff {partialdiff.content}
+divergence.content = Token.type
+divergence.token = element divergence {divergence.content}
+grad.content = Token.type
+grad.token = element grad {grad.content}
+curl.content = Token.type
+curl.token = element curl {curl.content}
+laplacian.content = Token.type
+laplacian.token = element laplacian {laplacian.content}
