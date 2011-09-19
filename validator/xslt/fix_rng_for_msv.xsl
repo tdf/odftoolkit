@@ -33,7 +33,8 @@
             <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>
     </xsl:template>
-   
+
+<!--
     <xsl:template match="rng:element/rng:ref[@name='string']">
         <text/>
     </xsl:template>
@@ -41,5 +42,6 @@
     <xsl:template match="rng:element/rng:choice/rng:group/rng:ref[@name='string']">
         <text/>
     </xsl:template>
+    -->
  
 </xsl:stylesheet>
