@@ -1,6 +1,0 @@
-[patterns]
-**.java = native
-**.txt = native
-**.html = native
-**.xsl = native
-**.rng = native
