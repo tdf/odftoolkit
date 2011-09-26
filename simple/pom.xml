@@ -177,7 +177,6 @@
             <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
-                <version>0.8-SNAPSHOT</version>
             </plugin>
         </plugins>
         <extensions>
