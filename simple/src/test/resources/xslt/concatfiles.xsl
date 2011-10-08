@@ -1,5 +1,5 @@
- <!-- 
-  Licensed to the Apache Software Foundation (ASF) under one
+<!-- 
+       Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
        distributed with this work for additional information
        regarding copyright ownership.  The ASF licenses this file
@@ -15,8 +15,7 @@
        KIND, either express or implied.  See the License for the
        specific language governing permissions and limitations
        under the License.
--->
-
+ -->
 <?xml version='1.0' encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="xml" encoding="UTF-8"/>
@@ -26,7 +25,7 @@
         this URL has to be added before the inner path.
         
         For instance sourceBaseURL might be:
-            file:/E:/cws/multiPkgFileTest/target/test-classes/test2.odt/
+            file:/E:/cws/multiPkgFileTest-ODFDOM/target/test-classes/test2.odt/
     -->
 	<xsl:param name="sourceBaseURL" select="'./'" />    
 
