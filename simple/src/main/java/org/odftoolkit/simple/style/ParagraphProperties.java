@@ -19,11 +19,18 @@ under the License.
 
 package org.odftoolkit.simple.style;
 
+import org.odftoolkit.odfdom.dom.attribute.fo.FoMarginBottomAttribute;
+import org.odftoolkit.odfdom.dom.attribute.fo.FoMarginLeftAttribute;
+import org.odftoolkit.odfdom.dom.attribute.fo.FoMarginRightAttribute;
+import org.odftoolkit.odfdom.dom.attribute.fo.FoMarginTopAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoTextAlignAttribute;
+import org.odftoolkit.odfdom.dom.attribute.fo.FoTextIndentAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
+import org.odftoolkit.odfdom.type.Length;
+import org.odftoolkit.odfdom.type.Length.Unit;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
 
 /**
@@ -38,6 +45,9 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
  * @since 0.3
  */
 public class ParagraphProperties {
+
+	// the default size as used for left-, right-margin and indention
+	private static final String  DEFAULT_LENGTH = "0in";
 
 	// fo:text-align
 
@@ -108,6 +118,178 @@ public class ParagraphProperties {
 	}
 
 	/**
+	 * Set the left margin of this <code>ParagraphProperties</code>
+	 * 
+	 * @param marginLeft
+	 *            the size of the left margin (in Millimeter)
+	 * @since 0.7
+	 */
+	public void setMarginLeft(double marginLeft) {
+		if (marginLeft == 0) {
+			mElement.removeAttribute(FoMarginLeftAttribute.ATTRIBUTE_NAME
+					.getQName());
+		} else {
+			mElement.setFoMarginLeftAttribute(getInchValue(marginLeft));
+		}
+	}
+
+	/**
+	 * Get the size of the left margin of this <code>ParagraphProperties</code>
+	 * 
+	 * @return the size of the left margin (in Millimeter)
+	 * @since 0.7
+	 */
+	public double getMarginLeft() {
+		// get the value
+		String valueString = mElement.getFoMarginLeftAttribute();
+		// check if a value was returned
+		if (valueString == null) {
+			// if not use the default length
+			valueString = DEFAULT_LENGTH;
+		}
+		// return the converted value
+		return Length.parseDouble(valueString, Unit.MILLIMETER);
+	}
+
+	/**
+	 * Set the right margin of this <code>ParagraphProperties</code>
+	 * 
+	 * @param marginRight
+	 *            the size of the right margin (in Millimeter)
+	 * @since 0.7
+	 */
+	public void setMarginRight(double marginRight) {
+		if (marginRight == 0) {
+			mElement.removeAttribute(FoMarginRightAttribute.ATTRIBUTE_NAME
+					.getQName());
+		} else {
+			mElement.setFoMarginRightAttribute(getInchValue(marginRight));
+		}
+	}
+
+	/**
+	 * Get the size of the right margin of this <code>ParagraphProperties</code>
+	 * 
+	 * @return the size of the right margin (in Millimeter)
+	 * @since 0.7
+	 */
+	public double getMarginRight() {
+		// get the value
+		String valueString = mElement.getFoMarginRightAttribute();
+		// check if a value was returned
+		if (valueString == null) {
+			// if not use the default length
+			valueString = DEFAULT_LENGTH;
+		}
+		// return the converted value
+		return Length.parseDouble(valueString, Unit.MILLIMETER);
+	}
+
+	/**
+	 * Set the top margin of this <code>ParagraphProperties</code>
+	 * 
+	 * @param marginTop
+	 *            the size of the right margin (in Millimeter)
+	 * @since 0.7
+	 */
+	public void setMarginTop(double marginTop) {
+		if (marginTop == 0) {
+			mElement.removeAttribute(FoMarginTopAttribute.ATTRIBUTE_NAME
+					.getQName());
+		} else {
+			mElement.setFoMarginTopAttribute(getInchValue(marginTop));
+		}
+	}
+
+	/**
+	 * Get the size of the top margin of this <code>ParagraphProperties</code>
+	 * 
+	 * @return the size of the top margin (in Millimeter)
+	 * @since 0.7
+	 */
+	public double getMarginTop() {
+		// get the value
+		String valueString = mElement.getFoMarginTopAttribute();
+		// check if a value was returned
+		if (valueString == null) {
+			// if not use the default length
+			valueString = DEFAULT_LENGTH;
+		}
+		// return the converted value
+		return Length.parseDouble(valueString, Unit.MILLIMETER);
+	}
+
+	/**
+	 * Set the bottom margin of this <code>ParagraphProperties</code>
+	 * 
+	 * @param marginBottom
+	 *            the size of the bottom margin (in Millimeter)
+	 * @since 0.7
+	 */
+	public void setMarginBottom(double marginBottom) {
+		if (marginBottom == 0) {
+			mElement.removeAttribute(FoMarginBottomAttribute.ATTRIBUTE_NAME
+					.getQName());
+		} else {
+			mElement.setFoMarginBottomAttribute(getInchValue(marginBottom));
+		}
+	}
+
+	/**
+	 * Get the size of the bottom margin of this
+	 * <code>ParagraphProperties</code>
+	 * 
+	 * @return the size of the bottom margin (in Millimeter)
+	 * @since 0.7
+	 */
+	public double getMarginBottom() {
+		// get the value
+		String valueString = mElement.getFoMarginBottomAttribute();
+		// check if a value was returned
+		if (valueString == null) {
+			// if not use the default length
+			valueString = DEFAULT_LENGTH;
+		}
+		// return the converted value
+		return Length.parseDouble(valueString, Unit.MILLIMETER);
+	}
+
+	/**
+	 * Set the text indention size of this <code>ParagraphProperties</code>
+	 * 
+	 * @param marginLeft
+	 *            the size of the text indention (in Millimeter)
+	 * @since 0.7
+	 */
+	public void setTextIndent(double textIndent) {
+		if (textIndent == 0) {
+			mElement.removeAttribute(FoTextIndentAttribute.ATTRIBUTE_NAME
+					.getQName());
+		} else {
+			mElement.setFoTextIndentAttribute(getInchValue(textIndent));
+		}
+	}
+
+	/**
+	 * Get the size of the text indention of this
+	 * <code>ParagraphProperties</code>
+	 * 
+	 * @return the size of the text indention (in Millimeter)
+	 * @since 0.7
+	 */
+	public double getTextIndent() {
+		// get the value
+		String valueString = mElement.getFoTextIndentAttribute();
+		// check if a value was returned
+		if (valueString == null) {
+			// if not use the default length
+			valueString = DEFAULT_LENGTH;
+		}
+		// return the converted value
+		return Length.parseDouble(valueString, Unit.MILLIMETER);
+	}
+
+	/**
 	 * Return an instance of
 	 * <code>ParagraphProperties</p> to represent the "style:paragraph-properties" in a style element.
 	 * <p>If there is no "style:paragraph-properties" defined in the style element, a new "style:paragraph-properties" element will be created.
@@ -138,5 +320,21 @@ public class ParagraphProperties {
 			return new ParagraphProperties((StyleParagraphPropertiesElement) properties);
 		else
 			return null;
+	}
+	
+	/**
+	 * Returns the provided Millimeter value as Inch value
+	 * 
+	 * @param value
+	 *          the value to set the attribute value to (in Millimeter)
+	 */
+	private static String getInchValue(double value) {
+		// build the string for mm
+		final String mmValueString = value + Unit.MILLIMETER.abbr();
+		// convert the length to inch
+		final String inchValueString = Length.mapToUnit(mmValueString, Unit.INCH);
+
+		// return the value
+		return inchValueString;
 	}
 }
