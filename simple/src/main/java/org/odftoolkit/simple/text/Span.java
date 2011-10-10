@@ -162,12 +162,12 @@ public class Span extends Component implements TextHyperlinkContainer {
 	public void setTextContent(String content) {
 		Paragraph.removeTextContentImpl(getOdfElement());
 		Node lastNode = getOdfElement().getLastChild();
-		if (lastNode.getNodeName() != null && lastNode.getNodeName().equals("text:a")) {
-			if (content != null && !content.equals(""))
+		if (content != null && !content.equals("")){
+			if (lastNode != null && lastNode.getNodeName() != null && lastNode.getNodeName().equals("text:a")) {
 				Paragraph.appendTextElements((TextAElement) lastNode, content, true);
-		} else {
-			if (content != null && !content.equals(""))
+			} else {
 				Paragraph.appendTextElements(getOdfElement(), content, true);
+			}
 		}
 		// remove empty hyperlink
 		Paragraph.removeEmptyHyperlink(getOdfElement());
