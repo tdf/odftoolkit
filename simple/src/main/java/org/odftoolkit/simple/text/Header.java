@@ -22,7 +22,9 @@ package org.odftoolkit.simple.text;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
@@ -109,7 +111,12 @@ public class Header extends Component implements TableContainer, VariableContain
 			TextPElement textEle = (TextPElement) nodeList.item(i);
 			String stylename = textEle.getStyleName();
 			OdfFileDom dom = (OdfFileDom) headerEle.getOwnerDocument();
-			OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
+			OdfOfficeAutomaticStyles styles = null;
+			if (dom instanceof OdfContentDom) {
+				styles = ((OdfContentDom) dom).getAutomaticStyles();
+			} else if (dom instanceof OdfStylesDom) {
+				styles = ((OdfStylesDom) dom).getAutomaticStyles();
+			}
 
 			OdfStyle newStyle = styles.newStyle(OdfStyleFamily.Paragraph);
 			OdfStyle style = styles.getStyle(stylename, OdfStyleFamily.Paragraph);
@@ -189,7 +196,12 @@ public class Header extends Component implements TableContainer, VariableContain
 		OdfFileDom dom = (OdfFileDom) getTableContainerElement().getOwnerDocument();
 		TableTableElement tableEle = table.getOdfElement();
 		String stylename = tableEle.getStyleName();
-		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
+		OdfOfficeAutomaticStyles styles = null;
+		if (dom instanceof OdfContentDom) {
+			styles = ((OdfContentDom) dom).getAutomaticStyles();
+		} else if (dom instanceof OdfStylesDom) {
+			styles = ((OdfStylesDom) dom).getAutomaticStyles();
+		}
 		OdfStyle tableStyle = styles.getStyle(stylename, OdfStyleFamily.Table);
 		tableStyle.setProperty(StyleTablePropertiesElement.Shadow, "none");
 		NodeList cells = tableEle.getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "table-cell");

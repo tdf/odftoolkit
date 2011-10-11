@@ -26,6 +26,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTimeElement;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberTimeStyle;
@@ -90,7 +92,12 @@ public class TimeField extends Field {
 			SimpleDateFormat newFormat = new SimpleDateFormat(formatString);
 			timeElement.setTextContent(newFormat.format(simpleDate));
 			OdfFileDom dom = (OdfFileDom) timeElement.getOwnerDocument();
-			OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
+			OdfOfficeAutomaticStyles styles = null;
+			if (dom instanceof OdfContentDom) {
+				styles = ((OdfContentDom) dom).getAutomaticStyles();
+			} else if (dom instanceof OdfStylesDom) {
+				styles = ((OdfStylesDom) dom).getAutomaticStyles();
+			}
 			OdfNumberTimeStyle dataStyle = styles.getTimeStyle(timeElement.getStyleDataStyleNameAttribute());
 			dataStyle.buildFromFormat(formatString);
 		} catch (ParseException e) {
@@ -122,7 +129,12 @@ public class TimeField extends Field {
 	// Create an <code>OdfNumberTimeStyle</code> element
 	private OdfNumberTimeStyle newTimeStyle() {
 		OdfFileDom dom = (OdfFileDom) timeElement.getOwnerDocument();
-		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
+		OdfOfficeAutomaticStyles styles = null;
+		if (dom instanceof OdfContentDom) {
+			styles = ((OdfContentDom) dom).getAutomaticStyles();
+		} else if (dom instanceof OdfStylesDom) {
+			styles = ((OdfStylesDom) dom).getAutomaticStyles();
+		}
 		OdfNumberTimeStyle newStyle = dom.newOdfElement(OdfNumberTimeStyle.class);
 		newStyle.setStyleNameAttribute(newUniqueStyleName(styles));
 		styles.appendChild(newStyle);

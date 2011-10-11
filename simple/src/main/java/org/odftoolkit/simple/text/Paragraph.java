@@ -25,7 +25,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
@@ -452,7 +454,12 @@ public class Paragraph extends Component implements TextboxContainer, TextHyperl
 		TextPElement notePElement = annotationElement.newTextPElement();
 		TextSpanElement noteSpanElement = notePElement.newTextSpanElement();
 		// set comment style
-		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
+		OdfOfficeAutomaticStyles styles = null;
+		if (dom instanceof OdfContentDom) {
+			styles = ((OdfContentDom) dom).getAutomaticStyles();
+		} else if (dom instanceof OdfStylesDom) {
+			styles = ((OdfStylesDom) dom).getAutomaticStyles();
+		}
 		OdfStyle textStyle = styles.newStyle(OdfStyleFamily.Text);
 		StyleTextPropertiesElement styleTextPropertiesElement = textStyle.newStyleTextPropertiesElement(null);
 		styleTextPropertiesElement.setStyleFontNameAttribute("Tahoma");

@@ -25,7 +25,9 @@ import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
@@ -355,7 +357,12 @@ public class TextSelection extends Selection {
 		TextPElement notePElement = annotationElement.newTextPElement();
 		TextSpanElement noteSpanElement = notePElement.newTextSpanElement();
 		// set comment style
-		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
+		OdfOfficeAutomaticStyles styles = null;
+		if (dom instanceof OdfContentDom) {
+			styles = ((OdfContentDom) dom).getAutomaticStyles();
+		} else if (dom instanceof OdfStylesDom) {
+			styles = ((OdfStylesDom) dom).getAutomaticStyles();
+		}
 		OdfStyle textStyle = styles.newStyle(OdfStyleFamily.Text);
 		StyleTextPropertiesElement styleTextPropertiesElement = textStyle.newStyleTextPropertiesElement(null);
 		styleTextPropertiesElement.setStyleFontNameAttribute("Tahoma");

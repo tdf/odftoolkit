@@ -31,7 +31,9 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
@@ -875,7 +877,12 @@ public class Table extends Component {
 					+ ", Columns " + numCols + ", HeaderRows " + headerRowNumber + ", HeaderColumns "
 					+ headerColumnNumber);
 		}
-		OdfOfficeAutomaticStyles styles = dom.getAutomaticStyles();
+		OdfOfficeAutomaticStyles styles = null;
+		if (dom instanceof OdfContentDom) {
+			styles = ((OdfContentDom) dom).getAutomaticStyles();
+		} else if (dom instanceof OdfStylesDom) {
+			styles = ((OdfStylesDom) dom).getAutomaticStyles();
+		}
 		// 1. create table element
 		TableTableElement newTEle = (TableTableElement) OdfXMLFactory.newOdfElement(dom, OdfName.newName(
 				OdfDocumentNamespace.TABLE, "table"));
