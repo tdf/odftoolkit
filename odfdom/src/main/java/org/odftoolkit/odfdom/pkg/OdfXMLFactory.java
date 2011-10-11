@@ -219,11 +219,11 @@ public class OdfXMLFactory {
 					element = newOdfElement(dom, adaptedName);
 				} else {
 					element = (OdfElement) new OdfAlienElement(dom, adaptedName);
-					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.INFO, "None-ODF element created for {0}", adaptedName.getQName());
+					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.FINE, "None-ODF element created for {0}", adaptedName.getQName());
 				}
 			} else {
 				element = (OdfElement) new OdfAlienElement(dom, name);
-				Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.INFO, "None-ODF element created for {0}", name.getQName());
+				Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.FINE, "None-ODF element created for {0}", name.getQName());
 			}
 		}
 		return element;
@@ -251,7 +251,7 @@ public class OdfXMLFactory {
 					attr = newOdfAttribute(dom, adaptedName);
 				} else {
 					attr = (OdfAttribute) new OdfAlienAttribute(dom, name);
-					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.INFO, "None-ODF attribute created for {0}", adaptedName.getQName());
+					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.FINE, "None-ODF attribute created for {0}", adaptedName.getQName());
 				}
 			} else {
 				// create an alien attribute for namespace attribute "xmlns:*"
