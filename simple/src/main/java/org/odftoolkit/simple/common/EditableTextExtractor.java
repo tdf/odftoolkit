@@ -236,7 +236,6 @@ public class EditableTextExtractor extends TextExtractor {
 			}
 			return builder.toString();
 		} catch (Exception e) {
-			e.printStackTrace();
 			Logger.getLogger(EditableTextExtractor.class.getName()).severe(e.getMessage());
 			return builder.toString();
 		}

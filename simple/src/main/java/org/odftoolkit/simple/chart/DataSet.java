@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
@@ -709,7 +711,7 @@ public class DataSet {
 				legendset = rowLabels;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE,	e.getMessage(), e);
 		}
 	}
 

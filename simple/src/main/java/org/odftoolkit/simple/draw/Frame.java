@@ -20,6 +20,8 @@ under the License.
 package org.odftoolkit.simple.draw;
 
 import java.net.URI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
@@ -195,7 +197,7 @@ public class Frame extends Component {
 					mElement.getSvgWidthAttribute(), mElement.getSvgHeightAttribute());
 			return rectange;
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(Frame.class.getName()).log(Level.FINE, e.getMessage(), e);
 			return null;
 		}
 	}
@@ -283,7 +285,7 @@ public class Frame extends Component {
 				parent.appendChild(aElement);
 			parent.insertBefore(aElement, brother);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 

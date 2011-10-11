@@ -1254,9 +1254,9 @@ public class Table extends Component {
 									}
 									tempi = tempi - cellElement.getTableNumberColumnsRepeatedAttribute();
 									i = i + cellElement.getTableNumberColumnsRepeatedAttribute();
-									if (!(cellElement instanceof TableCoveredTableCellElement) && (tempi > 0))
-										Logger.getLogger(Table.class.getName()).log(Level.INFO,
-												"Not covered cell was ignored");
+									if (!(cellElement instanceof TableCoveredTableCellElement) && (tempi > 0)){
+										Logger.getLogger(Table.class.getName()).log(Level.FINE,	"Not covered cell was ignored");
+									}
 									cellElement = (TableTableCellElementBase) (cellElement.getNextSibling());
 									// while ((cellElement != null) &&
 									// (cellElement instanceof
@@ -1333,9 +1333,9 @@ public class Table extends Component {
 									}
 								}
 								tempi = tempi - cellElement.getTableNumberColumnsRepeatedAttribute();
-								if (!(cellElement instanceof TableCoveredTableCellElement) && (tempi > 1))
-									Logger.getLogger(Table.class.getName()).log(Level.INFO,
-											"Not covered cell was ignored");
+								if (!(cellElement instanceof TableCoveredTableCellElement) && (tempi > 1)){
+									Logger.getLogger(Table.class.getName()).log(Level.FINE,	"Not covered cell was ignored");
+								}
 								cellElement = (TableTableCellElementBase) (cellElement.getNextSibling());
 							}
 						} else {
@@ -1885,7 +1885,7 @@ public class Table extends Component {
 		try {
 			automaticStyles = getOwnerDocument(container).getStylesDom().getAutomaticStyles();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(Table.class.getName()).log(Level.SEVERE,	e.getMessage(), e);
 		}
 		OdfStylePageLayout pageLayout = automaticStyles.getPageLayout("pm1");
 		if (pageLayout == null) {

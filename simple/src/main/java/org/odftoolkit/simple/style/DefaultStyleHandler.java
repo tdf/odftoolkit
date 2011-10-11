@@ -164,7 +164,7 @@ public class DefaultStyleHandler {
 	 */
 	public TextProperties getTextPropertiesForRead() {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.TextProperties)) {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.FINE,
 					"Text properties are not supported by style family: " + mOdfElement.getStyleFamily() + "!", "");
 			return null;
 		}
@@ -176,14 +176,14 @@ public class DefaultStyleHandler {
 
 		OdfStyleBase style = getStyleElementForRead();
 		if (style == null) {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO, "No style definition is found!", "");
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.FINE, "No style definition is found!", "");
 			return null;
 		}
 		mTextProperties = TextProperties.getTextProperties(style);
 		if (mTextProperties != null)
 			return mTextProperties;
 		else {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.FINE,
 					"No explicit text properties definition is found!", "");
 			return null;
 		}
@@ -204,7 +204,7 @@ public class DefaultStyleHandler {
 	 */
 	public TextProperties getTextPropertiesForWrite() {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.TextProperties)) {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.FINE,
 					"Text properties are not supported by style family: " + mOdfElement.getStyleFamily() + "!", "");
 			return null;
 		}
@@ -235,7 +235,7 @@ public class DefaultStyleHandler {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.TableCellProperties)) {
 			Logger.getLogger(CellStyleHandler.class.getName())
 					.log(
-							Level.INFO,
+							Level.FINE,
 							"TableCell properties are not supported by style family: " + mOdfElement.getStyleFamily()
 									+ "!", "");
 			return null;
@@ -248,14 +248,14 @@ public class DefaultStyleHandler {
 
 		OdfStyleBase style = getStyleElementForRead();
 		if (style == null) {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO, "No style definition is found!", "");
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.FINE, "No style definition is found!", "");
 			return null;
 		}
 		mTableCellProperties = TableCellProperties.getTableCellProperties(style);
 		if (mTableCellProperties != null)
 			return mTableCellProperties;
 		else {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.FINE,
 					"No explicit table cell properties definition is found!", "");
 			return null;
 		}
@@ -278,7 +278,7 @@ public class DefaultStyleHandler {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.TableCellProperties)) {
 			Logger.getLogger(CellStyleHandler.class.getName())
 					.log(
-							Level.INFO,
+							Level.FINE,
 							"TableCell properties are not supported by style family: " + mOdfElement.getStyleFamily()
 									+ "!", "");
 			return null;
@@ -310,7 +310,7 @@ public class DefaultStyleHandler {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.ParagraphProperties)) {
 			Logger.getLogger(CellStyleHandler.class.getName())
 					.log(
-							Level.INFO,
+							Level.FINE,
 							"Paragraph properties are not supported by style family: " + mOdfElement.getStyleFamily()
 									+ "!", "");
 			return null;
@@ -323,14 +323,14 @@ public class DefaultStyleHandler {
 
 		OdfStyleBase style = getStyleElementForRead();
 		if (style == null) {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO, "No style definition is found!", "");
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.FINE, "No style definition is found!", "");
 			return null;
 		}
 		mParagraphProperties = ParagraphProperties.getParagraphProperties(style);
 		if (mParagraphProperties != null)
 			return mParagraphProperties;
 		else {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.FINE,
 					"No explicit paragraph properties definition is found!", "");
 			return null;
 		}
@@ -353,7 +353,7 @@ public class DefaultStyleHandler {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.ParagraphProperties)) {
 			Logger.getLogger(CellStyleHandler.class.getName())
 					.log(
-							Level.INFO,
+							Level.FINE,
 							"Paragraph properties are not supported by style family: " + mOdfElement.getStyleFamily()
 									+ "!", "");
 			return null;
@@ -383,7 +383,7 @@ public class DefaultStyleHandler {
 	 */
 	public GraphicProperties getGraphicPropertiesForRead() {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.GraphicProperties)) {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.FINE,
 					"Graphics properties are not supported by style family: " + mOdfElement.getStyleFamily() + "!", "");
 			return null;
 		}
@@ -395,14 +395,14 @@ public class DefaultStyleHandler {
 
 		OdfStyleBase style = getStyleElementForRead();
 		if (style == null) {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO, "No style definition is found!", "");
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.FINE, "No style definition is found!", "");
 			return null;
 		}
 		mGraphicProperties = GraphicProperties.getGraphicProperties(style);
 		if (mGraphicProperties != null)
 			return mGraphicProperties;
 		else {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.FINE,
 					"No explicit graphic properties definition is found!", "");
 			return null;
 		}
@@ -423,7 +423,7 @@ public class DefaultStyleHandler {
 	 */
 	public GraphicProperties getGraphicPropertiesForWrite() {
 		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(OdfStylePropertiesSet.GraphicProperties)) {
-			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.INFO,
+			Logger.getLogger(CellStyleHandler.class.getName()).log(Level.FINE,
 					"Graphics properties are not supported by style family: " + mOdfElement.getStyleFamily() + "!", "");
 			return null;
 		}

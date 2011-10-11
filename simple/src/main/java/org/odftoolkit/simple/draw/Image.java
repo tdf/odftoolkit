@@ -197,7 +197,7 @@ public class Image extends Component {
 			return mImage;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(Image.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 
 		return null;
@@ -239,7 +239,7 @@ public class Image extends Component {
 			return mImage;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(Image.class.getName()).severe(e.getMessage());
 		}
 		return null;
 	}
@@ -341,7 +341,7 @@ public class Image extends Component {
 			String mediaType = OdfFileEntry.getMediaTypeString(imageRef);
 			mOwnerDocument.getPackage().insert(imageUri, packagePath, mediaType);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(Image.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -366,7 +366,7 @@ public class Image extends Component {
 				mImageURI = new URI(mImageElement.getXlinkHrefAttribute());
 			return mImageURI.toString();
 		} catch (URISyntaxException e) {
-			e.printStackTrace();
+			Logger.getLogger(Image.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 		return null;
 	}

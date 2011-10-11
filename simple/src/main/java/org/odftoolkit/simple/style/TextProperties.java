@@ -20,6 +20,8 @@ under the License.
 package org.odftoolkit.simple.style;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
@@ -997,7 +999,7 @@ public class TextProperties {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TextProperties.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 		return null;
 	}
@@ -1052,7 +1054,7 @@ public class TextProperties {
 			newfont.setSvgFontFamilyAttribute(aFamilyName);
 			return aFontName;
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(TextProperties.class.getName()).log(Level.SEVERE,	e.getMessage(), e);
 		}
 		return null;
 

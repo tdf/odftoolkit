@@ -21,6 +21,8 @@ package org.odftoolkit.simple.text;
 
 import java.net.URI;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.odftoolkit.odfdom.dom.element.text.TextAElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
@@ -90,7 +92,7 @@ public class Span extends Component implements TextHyperlinkContainer {
 			TextSpanElement element = textSelection.createSpanElement();
 			return Span.getInstanceof(element);
 		} catch (InvalidNavigationException e) {
-			e.printStackTrace();
+			Logger.getLogger(Span.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 		return null;
 	}
