@@ -382,7 +382,7 @@ public class OfficeMetaTest {
 		Assert.assertNull(fMetadata.getKeywords());
 		Assert.assertNull(fMetadata.getPrintedBy());
 		Assert.assertNull(fMetadata.getPrintDate());
-		Assert.assertNull(fMetadata.getUserDefinedDataNames());
+		Assert.assertNotNull(fMetadata.getUserDefinedDataNames());
 	}
 
 	@Test
@@ -396,7 +396,7 @@ public class OfficeMetaTest {
 		OdfOfficeMeta meta = textDoc.getOfficeMetadata();
 		Assert.assertNotNull(meta.getGenerator());
 		Assert.assertNotNull(meta.getCreationDate());
-		Assert.assertNull(meta.getCreator());
+		Assert.assertNotNull(meta.getCreator());
 		Assert.assertNotNull(meta.getDate());
 		Assert.assertTrue(meta.getEditingCycles() > 0);
 		Assert.assertNotNull(meta.getEditingDuration());

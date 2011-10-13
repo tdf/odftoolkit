@@ -164,13 +164,13 @@ public class OdfPackage implements Closeable {
 			if (errorHandlerProperty != null) {
 				if (errorHandlerProperty.equalsIgnoreCase("true")) {
 					mErrorHandler = new DefaultErrorHandler();
-					Logger.getLogger(OdfPackage.class.getName()).info("Activated validation with default ErrorHandler!");
+					Logger.getLogger(OdfPackage.class.getName()).fine("Activated validation with default ErrorHandler!");
 				} else {
 					try {
 						Class cl = Class.forName(errorHandlerProperty);
 						Constructor ctor = cl.getDeclaredConstructor(new Class[]{});
 						mErrorHandler = (ErrorHandler) ctor.newInstance();
-						Logger.getLogger(OdfPackage.class.getName()).log(Level.INFO, "Activated validation with ErrorHandler:''{0}''!", errorHandlerProperty);
+						Logger.getLogger(OdfPackage.class.getName()).log(Level.FINE, "Activated validation with ErrorHandler:''{0}''!", errorHandlerProperty);
 					} catch (Exception ex) {
 						Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, "Could not initiate validation with the given ErrorHandler: '" + errorHandlerProperty + "'", ex);
 					}
