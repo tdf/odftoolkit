@@ -24,7 +24,6 @@ package org.odftoolkit.odfdom.doc.presentation;
 
 import java.util.Hashtable;
 
-import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawTextBoxElement;
@@ -34,7 +33,8 @@ import org.w3c.dom.NodeList;
 
 /**
  * Convenient functionality for the parent ODF OpenDocument element
- *
+ * 
+ * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.presentation.Notes} in Simple API.
  */
 public class OdfPresentationNotes
 {

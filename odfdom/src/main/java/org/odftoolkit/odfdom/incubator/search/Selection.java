@@ -26,10 +26,11 @@ import java.util.Vector;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /**
- * Abstract class Selection describe one of the matched results 
- * The selection can be recognized by the container mElement, the start
- * mIndex of the text content of this mElement and the text content.
- *
+ * Abstract class Selection describe one of the matched results The selection
+ * can be recognized by the container mElement, the start mIndex of the text
+ * content of this mElement and the text content.
+ * 
+ * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.common.navigation.Selection} in Simple API.
  */
 public abstract class Selection {
 

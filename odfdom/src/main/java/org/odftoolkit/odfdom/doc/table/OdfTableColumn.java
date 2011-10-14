@@ -48,6 +48,8 @@ import org.w3c.dom.Node;
  * OdfTableColumn represents table column feature in ODF document.
  * <p>
  * OdfTableColumn provides methods to get table cells that belong to this table column.
+ * 
+ * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.table.Column} in Simple API.
  */
 public class OdfTableColumn {
 

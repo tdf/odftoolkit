@@ -26,6 +26,7 @@ import org.w3c.dom.Node;
  * Abstract class Navigation used to navigate the document
  * and find the matched element by the user defined conditions
  *
+ *@deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.common.navigation.Navigation} in Simple API.
  */
 public abstract class Navigation {
 

@@ -75,7 +75,11 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
-/** This abstract class is representing one of the possible ODF documents */
+/** 
+ * This abstract class is representing one of the possible ODF documents.
+ * 
+ * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.Document} in Simple API.
+ */
 public abstract class OdfDocument extends OdfSchemaDocument {
 	// Static parts of file references
 

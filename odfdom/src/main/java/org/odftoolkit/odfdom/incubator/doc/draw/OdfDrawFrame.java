@@ -29,6 +29,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 /**
  * Convenient functionalty for the parent ODF OpenDocument element
  *
+ * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.draw.Frame} in Simple API.
  */
 public class OdfDrawFrame extends DrawFrameElement
 {

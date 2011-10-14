@@ -59,6 +59,8 @@ import org.w3c.dom.Node;
  * OdfTableRow represents table row feature in ODF document.
  * <p>
  * OdfTableRow provides methods to get table cells that belong to this table row.
+ * 
+ * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.table.Row} in Simple API.
  */
 public class OdfTableRow {
 

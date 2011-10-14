@@ -21,20 +21,23 @@
 package org.odftoolkit.odfdom.incubator.search;
 
 /**
- * Thrown to indicate that the navigation operation  
- * can not be processed on selections
+ * Thrown to indicate that the navigation operation can not be processed on
+ * selections
+ * 
+ * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.common.navigation.InvalidNavigationException} in Simple API.
  */
 public class InvalidNavigationException extends Exception {
 
-    private static final long serialVersionUID = -6139894252732076102L;
+	private static final long serialVersionUID = -6139894252732076102L;
 
-    /**
-     * Constructs a <code>InvalidNavigateOperation</code> with the 
-     * specified detail message. 
-     *
-     * @param   msg   the detail message.
-     */
-    public InvalidNavigationException(String msg) {
-	super(msg);
-    }
+	/**
+	 * Constructs a <code>InvalidNavigateOperation</code> with the specified
+	 * detail message.
+	 * 
+	 * @param msg
+	 *            the detail message.
+	 */
+	public InvalidNavigationException(String msg) {
+		super(msg);
+	}
 }

@@ -26,9 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import org.odftoolkit.odfdom.dom.OdfMetaDom;
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
+
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDescriptionElement;
@@ -50,6 +48,8 @@ import org.odftoolkit.odfdom.dom.element.meta.MetaTemplateElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaUserDefinedElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentMetaElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMetaElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.type.Duration;
 
 /**
@@ -57,6 +57,7 @@ import org.odftoolkit.odfdom.type.Duration;
  * <p>
  * It provides convenient method to get meta data info.
  * 
+ * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.meta.Meta} in Simple API.
  */
 public class OdfOfficeMeta {
 

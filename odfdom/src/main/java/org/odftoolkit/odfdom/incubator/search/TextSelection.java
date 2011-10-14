@@ -26,7 +26,6 @@ import java.util.TreeMap;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
@@ -50,6 +49,7 @@ import org.w3c.dom.Node;
  *  OdfTextHeadingt), the start index of the text content of the container element and 
  *  the text content of this selection.
  * 
+ * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.common.navigation.TextSelection} in Simple API.
  */
 public class TextSelection extends Selection {
 

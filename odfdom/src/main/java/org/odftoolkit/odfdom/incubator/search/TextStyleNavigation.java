@@ -28,11 +28,6 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathFactory;
-
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
@@ -42,14 +37,17 @@ import org.odftoolkit.odfdom.incubator.doc.style.OdfDefaultStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextHeading;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * A derived Navigation class used for navigate the mText content
- * it is used to search the document and find the matched style properties
- * and would return TextSelection instance
+ * A derived Navigation class used for navigate the mText content it is used to
+ * search the document and find the matched style properties and would return
+ * TextSelection instance
+ * 
+ * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.common.navigation.TextStyleNavigation} in Simple API.
  */
 public class TextStyleNavigation extends Navigation {
 
