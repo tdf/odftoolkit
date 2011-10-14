@@ -314,7 +314,7 @@ public class OfficeMetaTest {
 		Assert.assertNull(fMetadata.getKeywords());
 		Assert.assertNull(fMetadata.getPrintedBy());
 		Assert.assertNull(fMetadata.getPrintDate());
-		Assert.assertNull(fMetadata.getUserDefinedDataNames());
+		Assert.assertNotNull(fMetadata.getUserDefinedDataNames());
 	}
 	
 	@Test
