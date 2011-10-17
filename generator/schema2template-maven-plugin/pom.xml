@@ -1,15 +1,39 @@
 <?xml version="1.0"?>
+
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>org.apache.odftoolkit</groupId>
+    <artifactId>schema2template-pom</artifactId>
+    <version>0.8.8-SNAPSHOT</version>
+  </parent>
+  
 	<!-- The Basics -->
-	<groupId>org.odftoolkit</groupId>
 	<artifactId>schema2template-maven-plugin</artifactId>
 	<version>0.8.8-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 	<dependencies>
 		<dependency>
-			<groupId>org.odftoolkit</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>schema2template</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -38,13 +62,8 @@
 			<version>2.0.7</version>
 		</dependency>
 	</dependencies>
-	<parent>
-		<groupId>org.odftoolkit</groupId>
-		<artifactId>schema2template-pom</artifactId>
-		<version>0.8.8-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
-	<properties>
+
+    <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -68,15 +87,19 @@
 			</plugin>
 		</plugins>
 	</build>
-	<distributionManagement>
+	<!-- <distributionManagement>
 		<site>
 			<id>odfdom</id>
 			<name>ODFDOM Java Toolkit Project</name>
 			<url>dav:https://odftoolkit.org/website/odfdom/${project.version}/codegeneration/schema2template-maven-plugin</url>
 		</site>
-	</distributionManagement>	
+	</distributionManagement> -->
 
 	<!-- More Project Information -->
-	<name>Schema2template Maven2 Plugin</name>
-	<url>http://odftoolkit.org</url>
+	<name>XML Schema to Template Mapping Tool: Maven2 Plugin</name>
+	<url>http://incubator.apache.org/odftoolkit/</url>
+	<organization>
+        <name>The Apache Software Foundation</name>
+        <url>http://www.apache.org/</url>
+    </organization>
 </project>

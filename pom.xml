@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+  <parent>
+    <groupId>org.apache</groupId>
+    <artifactId>apache</artifactId>
+    <version>10</version>
+  </parent>
+
+  <groupId>org.apache.odftoolkit</groupId>
+  <artifactId>odf-toolkit</artifactId>
+  <version>0.5-SNAPSHOT</version>
+  
+  <name>Apache ODF Toolkit</name>
+  <url>http://incubator.apache.org/odftoolkit/</url>
+  <organization>
+    <name>The Apache Software Foundation</name>
+    <url>http://www.apache.org/</url>
+  </organization>
+
+  <scm>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk</developerConnection>
+    <url>http://svn.apache.org/viewvc/incubator/odf/trunk</url>
+  </scm>
+  <issueManagement>
+	<system>jira</system>
+	<url>https://issues.apache.org/jira/browse/ODFTOOLKIT</url>
+  </issueManagement>
+  <mailingLists>
+	<mailingList>
+		<name>User List</name>
+		<post>odf-users@incubator.apache.org</post>
+		<subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
+		<unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
+		<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
+	</mailingList>
+	<mailingList>
+		<name>Developer List</name>
+		<post>odf-dev@incubator.apache.org</post>
+		<subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
+		<unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
+		<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
+	</mailingList>
+	<mailingList>
+		<name>Commits</name>
+		<subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
+		<unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
+		<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
+	</mailingList>
+  </mailingLists>
+ 
+
+  <modules>
+    <module>taglets</module>
+    <module>generator</module>
+    <module>xslt-runner</module>
+    <module>xslt-runner-task</module>
+    <module>odfdom</module>
+    <module>validator</module>
+    <module>simple</module>
+  </modules>
+  
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>.gitignore</exclude>
+                        <exclude>.git/**</exclude>
+                        <exclude>.idea/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>pedantic</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.rat</groupId>
+                        <artifactId>apache-rat-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>  
+</project>
+

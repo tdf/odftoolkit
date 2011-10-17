@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- The Basics -->
-	<groupId>org.odftoolkit</groupId>
+	<parent>
+    	<groupId>org.apache.odftoolkit</groupId>
+    	<artifactId>odf-toolkit</artifactId>
+    	<version>0.5-SNAPSHOT</version>
+	</parent>
+
 	<artifactId>taglets</artifactId>
 	<version>0.8.8-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>5</version>
-	</parent>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 
 	<!-- Build Settings -->
 	<build>
@@ -72,17 +87,17 @@
 					</execution>
 				</executions>
 			</plugin>
-                        <plugin>
-                                <groupId>org.apache.rat</groupId>
-                                <artifactId>apache-rat-plugin</artifactId>
-                        </plugin>
+            <plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+            </plugin>
 		</plugins>
 	</build>
 
 	 <!-- More Project Information -->
 	<name>ODF Custom Javadoc Taglets</name>
-	<description>Javadoc taglets for odfdom-java</description>
-	<url>http://odftoolkit.org/projects/odfdom/pages/Home</url>
+	<description>Javadoc taglets for ODFDOM</description>
+	<url>http://incubator.apache.org/odftoolkit/odfdom/index.html</url>
 	<inceptionYear>2008</inceptionYear>
 	<licenses>
 		<license>
@@ -91,17 +106,16 @@
 		</license>
 	</licenses>
 	<organization>
-		<name>ODF Toolkit Project</name>
-		<url>http://odftoolkit.org/</url>
+		<name>The Apache Software Foundation</name>
+    	<url>http://www.apache.org/</url>
 	</organization>
 	<developers>
 		<developer>
 			<id>svanteschubert</id>
 			<name>Svante</name>
-			<email>svanteschubert AT odftoolkit.org</email>
+			<email>svanteschubert AT apache.org</email>
 			<url>http://odftoolkit.org/people/7-Svante-Schubert</url>
-			<organization>Sun Microsystems Inc.</organization>
-			<organizationUrl>http://www.sun.com/</organizationUrl>
+			<organization>Individual</organization>
 			<roles>
 				<role>ODFDOM working group chair</role>
 				<role>architect</role>
@@ -113,9 +127,9 @@
 			</properties>
 		</developer>
 		<developer>
-			<id>Daisy</id>
+			<id>daisyguo</id>
 			<name>Ying Chun Guo</name>
-			<email>Daisy AT odftoolkit.org</email>
+			<email>daisyguo AT apache.org</email>
 			<url>http://odftoolkit.org/people/274-Ying-Chun-Guo</url>
 			<organization>IBM</organization>
 			<organizationUrl>http://www.ibm.com/</organizationUrl>
@@ -140,9 +154,9 @@
 			<timezone>+8</timezone>
 		</developer>
 		<developer>
-			<id>devin</id>
+			<id>devinhan</id>
 			<name>Han Biao</name>
-			<email>devin AT odftoolkit.org</email>
+			<email>devinhan AT apache.org</email>
 			<url>http://odftoolkit.org/people/748-Devin</url>
 			<organization>IBM</organization>
 			<organizationUrl>http://www.ibm.com/</organizationUrl>
@@ -152,11 +166,37 @@
 			<timezone>+8</timezone>
 		</developer>
 	</developers>
-	<scm>
-		<connection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~taglets</connection>
-		<developerConnection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~taglets</developerConnection>
-		<url>http://odftoolkit.org/projects/odfdom/sources/taglets/show</url>
-	</scm>
+	<issueManagement>
+        <system>JIRA</system>
+        <url>https://issues.apache.org/jira/browse/ODFTOOLKIT</url>
+    </issueManagement>
+	<mailingLists>
+		<mailingList>
+			<name>User List</name>
+			<post>odf-users@incubator.apache.org</post>
+			<subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
+			<unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
+			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
+		</mailingList>
+		<mailingList>
+			<name>Developer List</name>
+			<post>odf-dev@incubator.apache.org</post>
+			<subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
+			<unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
+			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
+		</mailingList>
+		<mailingList>
+			<name>Commits</name>
+			<subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
+			<unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
+			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
+		</mailingList>
+	</mailingLists>
+    <scm>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/taglets</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/taglets</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/trunk/taglets</url>
+    </scm>
 	<profiles>
 		<profile>
 			<id>tools.jar</id>
@@ -202,13 +242,13 @@
                     </plugin>
                 </plugins>
             </build>
-			<distributionManagement>
+			<!-- <distributionManagement>
 				<site>
 					<id>odfdom</id>
 					<name>ODFDOM Java Toolkit Project</name>
 					<url>dav:https://odftoolkit.org/website/odfdom/${project.version}/javadoc-taglets</url>
 				</site>
-			</distributionManagement>
+			</distributionManagement>-->
 		</profile>
 	</profiles>
 </project>

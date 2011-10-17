@@ -2,21 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- The Basics -->
-	<groupId>org.odftoolkit</groupId>
-	<artifactId>odfvalidator</artifactId>
-	<version>0.8.7</version>
-	<packaging>war</packaging>
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
+    <parent>
+		<groupId>org.apache.odftoolkit</groupId>
+		<artifactId>odf-toolkit</artifactId>
+		<version>0.5-SNAPSHOT</version>
 	</parent>
+
+	<artifactId>odfvalidator</artifactId>
+	<version>1.1.5-SNAPSHOT</version>
+	<packaging>war</packaging>
+
 	<dependencies>
 		<dependency>
-			<groupId>org.odftoolkit</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>odfdom-java</artifactId>
-			<version>0.8.7</version>
+			<version>0.8.8-SNAPSHOT</version>
 		</dependency>	
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -48,7 +48,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
-	 <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
+		<netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
 	</properties>
 
 	<!-- Build Settings -->
@@ -87,9 +87,9 @@
 							<manifestSection>
 								<name>odfvalidator</name>
 								<manifestEntries>
-									<ODFDOM-Name>odfdom</ODFDOM-Name>
+									<ODFDOM-Name>ODFDOM Validator</ODFDOM-Name>
 									<ODFDOM-Version>${project.version}</ODFDOM-Version>
-									<ODFDOM-Website>http://odftoolkit.org</ODFDOM-Website>
+									<ODFDOM-Website>http://incubator.apache.org/odftoolkit/conformance/ODFValidator.html</ODFDOM-Website>
 									<ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
 									<ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
 								</manifestEntries>
@@ -148,10 +148,18 @@
 					</execution>
 				</executions>
 			</plugin>
-                        <plugin>
-                                <groupId>org.apache.rat</groupId>
-                                <artifactId>apache-rat-plugin</artifactId>
-                        </plugin>
+            <plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>src/main/resources/schema/**</exclude>
+                        <exclude>src/main/resources/META-INF/services/org.iso_relax.verifier.VerifierFactoryLoader</exclude>
+                        <exclude>src/test/resources/testInvalidPkg3.odt</exclude>
+                        <exclude>src/codegen/resources/pkg/*.rng</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 	<reporting>
@@ -192,7 +200,8 @@
 
 	<!-- More Project Information -->
 	<name>ODF Validator</name>
-	<description>ODF Validator is a tool that validates OpenDocument files and checks them for certain conformance criteria.
+	<description>
+		ODF Validator is a tool that validates OpenDocument files and checks them for certain conformance criteria.
 	</description>
 	<url>http://incubator.apache.org/odftoolkit/conformance/ODFValidator.html</url>
 	<inceptionYear>2008</inceptionYear>
@@ -203,14 +212,14 @@
 		</license>
 	</licenses>
 	<organization>
-		<name>Apache Project</name>
-		<url>http://www.apache.org/</url>
+    	<name>The Apache Software Foundation</name>
+    	<url>http://www.apache.org/</url>
 	</organization>
 	<developers>
 		<developer>
 			<id>svanteschubert</id>
 			<name>Svante</name>
-			<email>svanteschubert AT odftoolkit.org</email>
+			<email>svanteschubert AT apache.org</email>
 			<url>http://odftoolkit.org/people/7-Svante-Schubert</url>
 			<roles>
 				<role>architect</role>
@@ -222,9 +231,9 @@
 			</properties>
 		</developer>
 		<developer>
-			<id>Devin</id>
+			<id>devinhan</id>
 			<name>Han Biao</name>
-			<email>devin AT odftoolkit.org</email>
+			<email>devinhan AT apache.org</email>
 			<url>http://odftoolkit.org/people/748-Devin</url>
 			<organization>IBM</organization>
 			<organizationUrl>http://www.ibm.com/</organizationUrl>
@@ -234,9 +243,9 @@
 			<timezone>+8</timezone>
 		</developer>
 		<developer>
-			<id>Daisy</id>
+			<id>daisyguo</id>
 			<name>Ying Chun Guo</name>
-			<email>Daisy AT odftoolkit.org</email>
+			<email>daisyguo AT apache.org</email>
 			<url>http://odftoolkit.org/people/274-Ying-Chun-Guo</url>
 			<organization>IBM</organization>
 			<organizationUrl>http://www.ibm.com/</organizationUrl>
@@ -331,35 +340,36 @@
 
 	<!-- Environment Settings -->
 	<issueManagement>
-		<system>Bugzilla</system>
-		<url>https://odftoolkit.org/bugzilla/enter_bug.cgi?product=odfdom</url>
-	</issueManagement>
+        <system>JIRA</system>
+        <url>https://issues.apache.org/jira/browse/ODFTOOLKIT</url>
+    </issueManagement>
 	<mailingLists>
-		<!-- To subscribe one of the mailing lists:
-			1) First become a member of the http://odftoolkit.org project
-			2) Second subscribe here: http://odftoolkit.org/projects/odfdom/lists -->
 		<mailingList>
-			<name>Dev List</name>
-			<archive>http://odftoolkit.org/projects/odfdom/lists/dev/archive</archive>
+			<name>User List</name>
+			<post>odf-users@incubator.apache.org</post>
+			<subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
+			<unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
+			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
 		</mailingList>
 		<mailingList>
-			<name>Users List</name>
-			<archive>http://odftoolkit.org/projects/odfdom/lists/users/archive</archive>
+			<name>Developer List</name>
+			<post>odf-dev@incubator.apache.org</post>
+			<subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
+			<unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
+			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
 		</mailingList>
 		<mailingList>
-			<name>Issues List</name>
-			<archive>http://odftoolkit.org/projects/odfdom/lists/issues/archive</archive>
-		</mailingList>
-		<mailingList>
-			<name>Commits List</name>
-			<archive>http://odftoolkit.org/projects/odfdom/lists/commits/archive</archive>
+			<name>Commits</name>
+			<subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
+			<unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
+			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
 		</mailingList>
 	</mailingLists>
-	<scm>
-		<connection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~developer</connection>
-		<developerConnection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~developer</developerConnection>
-		<url>http://odftoolkit.org/projects/odfdom/sources/developer/show</url>
-	</scm>
+    <scm>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/validator</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/validator</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/trunk/validator</url>
+    </scm>
 	<!-- Upload of JAVA DOC for SNAPSHOOTs
 	<distributionManagement>
 		<site>

@@ -2,17 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- The Basics -->
-	<groupId>org.odftoolkit</groupId>
+	<parent>
+    <groupId>org.apache.odftoolkit</groupId>
+    <artifactId>odf-toolkit</artifactId>
+    <version>0.5-SNAPSHOT</version>
+	</parent>
+  
 	<artifactId>odfdom-java</artifactId>
 	<version>0.8.8-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>5</version>
-	</parent>
+
 	<dependencies>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>taglets</artifactId>
+          <version>${project.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
@@ -71,7 +76,7 @@
 								<manifestEntries>
 									<ODFDOM-Name>odfdom</ODFDOM-Name>
 									<ODFDOM-Version>${project.version}</ODFDOM-Version>
-									<ODFDOM-Website>http://odftoolkit.org</ODFDOM-Website>
+									<ODFDOM-Website>http://incubator.apache.org/odftoolkit/odfdom/index.html</ODFDOM-Website>
 									<ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
 									<ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
 								</manifestEntries>
@@ -107,14 +112,14 @@
 				<version>2.7</version>
 				<configuration>
 					<doctitle>ODFDOM</doctitle>
-					<minmemory>1024m</minmemory>
-					<maxmemory>2048m</maxmemory>
+					<minmemory>512m</minmemory>
+					<maxmemory>1024m</maxmemory>
 					<links>
 						<link>http://download.oracle.com/javase/6/docs/api/</link>
 						<link>http://xerces.apache.org/xerces-j/apiDocs/</link>
 					</links>
 					<splitindex>true</splitindex>
-					<windowtitle>ODFDOM API v${project.version} - http://odftoolkit</windowtitle>
+					<windowtitle>ODFDOM API v${project.version} - http://incubator.apache.org/odftoolkit/</windowtitle>
 					<taglets>
 						<taglet>
 							<tagletClass>org.odftoolkit.odfdom.taglet.OdfElementTaglet</tagletClass>
@@ -127,9 +132,9 @@
 						</taglet>
 					</taglets>
 					<tagletArtifact>
-						<groupId>org.odftoolkit</groupId>
+						<groupId>${project.groupId}</groupId>
 						<artifactId>taglets</artifactId>
-						<version>0.8.7</version>
+						<version>${project.version}</version>
 					</tagletArtifact>
 				</configuration>
 				<executions>
@@ -173,6 +178,15 @@
             <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>src/main/resources/**</exclude>
+                        <exclude>src/test/resources/**</exclude>
+						<exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-cd05-part1.html</exclude>
+                        <exclude>src/codegen/resources/dom/*.rng</exclude>
+                        <exclude>src/codegen/resources/pkg/*.rng</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
 		</plugins>
 	</build>
@@ -184,14 +198,14 @@
 				<version>2.7</version>
 				<configuration>
 					<doctitle>ODFDOM</doctitle>
-					<minmemory>1024m</minmemory>
-					<maxmemory>2048m</maxmemory>
+                    <minmemory>512m</minmemory>
+                    <maxmemory>1024m</maxmemory>
 					<links>
 						<link>http://download.oracle.com/javase/6/docs/api/</link>
 						<link>http://xerces.apache.org/xerces-j/apiDocs/</link>
 					</links>
 					<splitindex>true</splitindex>
-					<windowtitle>ODFDOM API v${project.version} - http://odftoolkit</windowtitle>
+					<windowtitle>ODFDOM API v${project.version} - http://incubator.apache.org/odftoolkit/</windowtitle>
 					<taglets>
 						<taglet>
 							<tagletClass>org.odftoolkit.odfdom.taglet.OdfElementTaglet</tagletClass>
@@ -204,9 +218,9 @@
 						</taglet>
 					</taglets>
 					<tagletArtifact>
-						<groupId>org.odftoolkit</groupId>
+						<groupId>${project.groupId}</groupId>
 						<artifactId>taglets</artifactId>
-						<version>0.8.7</version>
+						<version>${project.version}</version>
 					</tagletArtifact>
 				</configuration>
 			</plugin>
@@ -247,7 +261,8 @@
 
 	<!-- More Project Information -->
 	<name>ODFDOM</name>
-	<description>ODFDOM is an OpenDocument Format (ODF) framework. Its purpose
+	<description>
+		ODFDOM is an OpenDocument Format (ODF) framework. Its purpose
 		is to provide an easy common way to create, access and
 		manipulate ODF files, without requiring detailed knowledge of
 		the ODF specification. It is designed to provide the ODF
@@ -256,8 +271,9 @@
 
 		The current reference implementation is written in Java.
 	</description>
-	<url>http://odftoolkit.org/projects/odfdom/pages/Home</url>
+	<url>http://incubator.apache.org/odftoolkit/odfdom/index.html</url>
 	<inceptionYear>2008</inceptionYear>
+	
 	<licenses>
 		<license>
 			<name>Apache 2</name>
@@ -265,17 +281,16 @@
 		</license>
 	</licenses>
 	<organization>
-		<name>ODF Toolkit Project</name>
-		<url>http://odftoolkit.org/</url>
-	</organization>
+        <name>The Apache Software Foundation</name>
+        <url>http://www.apache.org/</url>
+    </organization>
 	<developers>
 		<developer>
 			<id>svanteschubert</id>
 			<name>Svante</name>
-			<email>svanteschubert AT odftoolkit.org</email>
+			<email>svanteschubert AT apache.org</email>
 			<url>http://odftoolkit.org/people/7-Svante-Schubert</url>
-			<organization>Oracle Inc.</organization>
-			<organizationUrl>http://www.oracle.com/</organizationUrl>
+			<organization>Individual</organization>
 			<roles>
 				<role>ODFDOM working group chair</role>
 				<role>architect</role>
@@ -287,10 +302,9 @@
 			</properties>
 		</developer>
 		<developer>
-			<id>Devin</id>
+			<id>devinhan</id>
 			<name>Han Biao</name>
-			<email>devin AT odftoolkit.org</email>
-			<url>http://odftoolkit.org/people/748-Devin</url>
+			<email>devinhan AT apache.org</email>
 			<organization>IBM</organization>
 			<organizationUrl>http://www.ibm.com/</organizationUrl>
 			<roles>
@@ -299,9 +313,9 @@
 			<timezone>+8</timezone>
 		</developer>
 		<developer>
-			<id>Daisy</id>
+			<id>daisyguo</id>
 			<name>Ying Chun Guo</name>
-			<email>Daisy AT odftoolkit.org</email>
+			<email>daisyguo AT apache.org</email>
 			<url>http://odftoolkit.org/people/274-Ying-Chun-Guo</url>
 			<organization>IBM</organization>
 			<organizationUrl>http://www.ibm.com/</organizationUrl>
@@ -422,35 +436,36 @@
 
 	<!-- Environment Settings -->
 	<issueManagement>
-		<system>Bugzilla</system>
-		<url>https://odftoolkit.org/bugzilla/enter_bug.cgi?product=odfdom</url>
-	</issueManagement>
+        <system>JIRA</system>
+        <url>https://issues.apache.org/jira/browse/ODFTOOLKIT</url>
+    </issueManagement>
 	<mailingLists>
-		<!-- To subscribe one of the mailing lists:
-			1) First become a member of the http://odftoolkit.org project
-			2) Second subscribe here: http://odftoolkit.org/projects/odfdom/lists -->
 		<mailingList>
-			<name>Dev List</name>
-			<archive>http://odftoolkit.org/projects/odfdom/lists/dev/archive</archive>
+			<name>User List</name>
+			<post>odf-users@incubator.apache.org</post>
+			<subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
+			<unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
+			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
 		</mailingList>
 		<mailingList>
-			<name>Users List</name>
-			<archive>http://odftoolkit.org/projects/odfdom/lists/users/archive</archive>
+			<name>Developer List</name>
+			<post>odf-dev@incubator.apache.org</post>
+			<subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
+			<unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
+			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
 		</mailingList>
 		<mailingList>
-			<name>Issues List</name>
-			<archive>http://odftoolkit.org/projects/odfdom/lists/issues/archive</archive>
-		</mailingList>
-		<mailingList>
-			<name>Commits List</name>
-			<archive>http://odftoolkit.org/projects/odfdom/lists/commits/archive</archive>
+			<name>Commits</name>
+			<subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
+			<unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
+			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
 		</mailingList>
 	</mailingLists>
-	<scm>
-		<connection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~developer</connection>
-		<developerConnection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~developer</developerConnection>
-		<url>http://odftoolkit.org/projects/odfdom/sources/developer/show</url>
-	</scm>
+    <scm>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/odfdom</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/odfdom</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/trunk/odfdom</url>
+    </scm>
 	<!-- Upload of JAVA DOC for SNAPSHOOTs
 	<distributionManagement>
 		<site>
@@ -465,9 +480,9 @@
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.odftoolkit</groupId>
+						<groupId>${project.groupId}</groupId>
 						<artifactId>schema2template-maven-plugin</artifactId>
-						<version>0.8.7</version>
+						<version>${project.version}</version>
 						<executions>
 							<execution>
 								<id>dom</id>
@@ -521,7 +536,7 @@
 				</plugins>
 			</build>
 		</profile>
--->
+		-->
 		<profile>
 			<id>integration-test</id>
 			<activation>
@@ -572,7 +587,7 @@
 				</plugins>
 			</build>
 		</profile>
-    <!-- Profile for deploying to the Sonatype repository, which
+		<!-- Profile for deploying to the Sonatype repository, which
          requires GPG signatures 
 		 see
 		 https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
@@ -605,13 +620,13 @@
                     </plugin>
                 </plugins>
             </build>
-			<distributionManagement>
+			<!-- <distributionManagement>
 				<site>
 					<id>odfdom</id>
 					<name>ODFDOM Java Toolkit Project</name>
 					<url>dav:https://odftoolkit.org/website/odfdom/${project.version}/odfdom</url>
 				</site>
-			</distributionManagement>
+			</distributionManagement> -->
 		</profile>
 	</profiles>
 </project>

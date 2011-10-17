@@ -18,16 +18,28 @@
 -->
  <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.apache.odftoolkit</groupId>
-  <artifactId>xslt-runner</artifactId>
-  <version>1.2.0</version>
 
+  <parent>
+    <groupId>org.apache.odftoolkit</groupId>
+    <artifactId>odf-toolkit</artifactId>
+    <version>0.5-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>xslt-runner</artifactId>
+  <name>ODF XSLT-Runner</name>
+  <version>1.2.1-SNAPSHOT</version>
+  
+  <organization>
+    <name>The Apache Software Foundation</name>
+    <url>http://www.apache.org/</url>
+  </organization>
+  
   <dependencies>
-    <dependency>
-      <groupId>org.odftoolkit</groupId>
-      <artifactId>odfdom-java</artifactId>
-      <version>0.8.7</version>
-    </dependency>
+	<dependency>
+      <groupId>${project.groupId}</groupId>
+	  <artifactId>odfdom-java</artifactId>
+      <version>0.8.8-SNAPSHOT</version>
+	</dependency>	
   </dependencies>
 
   <!-- Build Settings -->
@@ -44,10 +56,17 @@
           <showDeprecation>true</showDeprecation>
         </configuration>
     </plugin>
-    <plugin>
-        <groupId>org.apache.rat</groupId>
-        <artifactId>apache-rat-plugin</artifactId>
-    </plugin>
+        <plugin>
+            <groupId>org.apache.rat</groupId>
+            <artifactId>apache-rat-plugin</artifactId>
+            <configuration>
+                <excludes>
+                    <exclude>manifest.mf</exclude>
+                    <exclude>misc/odf-attribute-xref.ods</exclude>
+                    <exclude>nbproject/**</exclude>
+                </excludes>
+            </configuration>
+        </plugin>
  </plugins>
 </build>
 </project>

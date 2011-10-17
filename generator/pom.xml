@@ -2,16 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>org.apache.odftoolkit</groupId>
+    <artifactId>odf-toolkit</artifactId>
+    <version>0.5-SNAPSHOT</version>
+  </parent>
+
 	<!-- The Basics -->
-	<groupId>org.odftoolkit</groupId>
 	<artifactId>schema2template-pom</artifactId>
 	<version>0.8.8-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>5</version>
-	</parent>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -62,7 +63,7 @@
 					<minmemory>512m</minmemory>
 					<maxmemory>1024m</maxmemory>
 					<splitindex>true</splitindex>
-					<windowtitle>Schema2template v${project.version} - http://odftoolkit</windowtitle>
+					<windowtitle>Schema2template v${project.version} - http://incubator.apache.org/odftoolkit/</windowtitle>
 					<links>
 						<link>http://download.oracle.com/javase/6/docs/api/</link>
 					</links>
@@ -78,6 +79,10 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+            </plugin>
 		</plugins>
 	</build>
 
@@ -89,7 +94,7 @@
     
 	<!-- More Project Information -->
 	<name>XML Schema to Template Mapping Tool: Parent POM</name>
-	<url>http://odftoolkit.org</url>
+	<url>http://incubator.apache.org/odftoolkit/odfdom/index.html</url>
 	<inceptionYear>2010</inceptionYear>
 	<licenses>
 		<license>
@@ -98,26 +103,21 @@
 		</license>
 	</licenses>
 	<organization>
-		<name>ODF Toolkit Project</name>
-		<url>http://odftoolkit.org/</url>
-	</organization>
+        <name>The Apache Software Foundation</name>
+        <url>http://www.apache.org/</url>
+    </organization>
 	<developers>
 		<developer>
 			<id>svanteschubert</id>
 			<name>Svante</name>
-			<email>svanteschubert AT odftoolkit.org</email>
-			<url>http://odftoolkit.org/people/7-Svante-Schubert</url>
-			<organization>Sun Microsystems Inc.</organization>
-			<organizationUrl>http://www.sun.com/</organizationUrl>
+			<email>svanteschubert AT apache.org</email>
+			<organization>Individual</organization>
 			<roles>
 				<role>ODFDOM working group chair</role>
 				<role>architect</role>
 				<role>developer</role>
 			</roles>
 			<timezone>+1</timezone>
-			<properties>
-				<picUrl>http://asset-1.odftoolkit.org/attachments/images/person/SvanteSchubert-2_small.jpg</picUrl>
-			</properties>
 		</developer>
 		<developer>
 			<id>hans-peter</id>
@@ -132,40 +132,51 @@
 			</roles>
 			<timezone>+1</timezone>
 		</developer>
+		<developer>
+            <id>devinhan</id>
+            <name>Han Biao</name>
+            <email>devinhan AT apache.org</email>
+            <organization>IBM</organization>
+            <organizationUrl>http://www.ibm.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
 	</developers>
 
-  <!-- Environment Settings -->
-	<issueManagement>
-		<system>Bugzilla</system>
-		<url>https://odftoolkit.org/bugzilla/enter_bug.cgi?product=odfdom</url>
-	</issueManagement>
+	<!-- Environment Settings -->
+    <issueManagement>
+        <system>JIRA</system>
+        <url>https://issues.apache.org/jira/browse/ODFTOOLKIT</url>
+    </issueManagement>
 	<mailingLists>
-    <!-- To subscribe one of the mailing lists:
-         1) First become a member of the http://odftoolkit.org project
-         2) Second subscribe here: http://odftoolkit.org/projects/odfdom/lists -->
 		<mailingList>
-			<name>Dev List</name>
-			<archive>http://odftoolkit.org/projects/odfdom/lists/dev/archive</archive>
+			<name>User List</name>
+			<post>odf-users@incubator.apache.org</post>
+			<subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
+			<unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
+			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
 		</mailingList>
 		<mailingList>
-			<name>Users List</name>
-			<archive>http://odftoolkit.org/projects/odfdom/lists/users/archive</archive>
+			<name>Developer List</name>
+			<post>odf-dev@incubator.apache.org</post>
+			<subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
+			<unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
+			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
 		</mailingList>
 		<mailingList>
-			<name>Issues List</name>
-			<archive>http://odftoolkit.org/projects/odfdom/lists/issues/archive</archive>
-		</mailingList>
-		<mailingList>
-			<name>Commits List</name>
-			<archive>http://odftoolkit.org/projects/odfdom/lists/commits/archive</archive>
+			<name>Commits</name>
+			<subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
+			<unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
+			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
 		</mailingList>
 	</mailingLists>
-
-	<scm>
-		<connection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~schema2template</connection>
-		<developerConnection>scm:hg:https://hg.odftoolkit.org/hg/odfdom~schema2template</developerConnection>
-		<url>http://odftoolkit.org/projects/odfdom/sources/schema2template/show</url>
-	</scm>
+    <scm>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/generator</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/generator</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/trunk/generator</url>
+    </scm>
 
 	<profiles>
     <!-- Profile for deploying to the Sonatype repository, which
@@ -201,13 +212,13 @@
 					</plugin>
 				</plugins>
 			</build>
-			<distributionManagement>
+			<!-- <distributionManagement>
 				<site>
 					<id>odfdom</id>
 					<name>ODFDOM Java Toolkit Project</name>
 					<url>dav:https://odftoolkit.org/website/odfdom/${project.version}/codegeneration/schema2template-pom</url>
 				</site>
-			</distributionManagement>			
+			</distributionManagement> -->		
 		</profile>
 	</profiles>
 </project>
