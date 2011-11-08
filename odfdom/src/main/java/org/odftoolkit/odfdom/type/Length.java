@@ -117,9 +117,9 @@ public class Length implements OdfDataType {
 					identifiedInput = true;
 					break;
 				}
-				if (!identifiedInput) {
-					throw new NumberFormatException("The input length " + length + " has no valid Unit!");
-				}
+			}
+			if (!identifiedInput) {
+				throw new NumberFormatException("The input length " + length + " has no valid Unit!");
 			}
 		}
 		return lengthUnit;
