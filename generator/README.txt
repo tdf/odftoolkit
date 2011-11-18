@@ -13,7 +13,7 @@ templates.
 
 The library is build upon two powerful open source tools:
 
-1) Sun's Multi Schema Validator (MSV)
+1) Oracle's Multi Schema Validator (MSV)
 Used to read arbitrary XML schema and map them to an internal RelaxNG 
 model.
 
@@ -42,8 +42,8 @@ Installation
 
 Just put the file odfdom.jar in your classpath. You will
 need Apache Velocity Engine and Sun's Multi Schema Validator (MSV) as well. Get it from
-   http://
-   http://
+   http://velocity.apache.org/
+   http://java.net/downloads/msv/releases/
 
 
 Documentation
