@@ -5,18 +5,18 @@
     <parent>
 		<groupId>org.apache.odftoolkit</groupId>
 		<artifactId>odf-toolkit</artifactId>
-		<version>0.5-SNAPSHOT</version>
+		<version>0.5-incubating-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>odfvalidator</artifactId>
-	<version>1.1.5-SNAPSHOT</version>
+	<version>1.1.5-incubating-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>odfdom-java</artifactId>
-			<version>0.8.8-SNAPSHOT</version>
+			<version>0.8.8-incubating-SNAPSHOT</version>
 		</dependency>	
 		<dependency>
 			<groupId>commons-fileupload</groupId>
