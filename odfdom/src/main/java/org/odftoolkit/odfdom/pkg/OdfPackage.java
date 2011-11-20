@@ -195,9 +195,35 @@ public class OdfPackage implements Closeable {
 	private OdfPackage(File pkgFile) throws Exception {
 		this();
 		mBaseURI = getBaseURLFromFile(pkgFile);
-		initializeZip(new FileInputStream(pkgFile));
+		InputStream packageStream = new FileInputStream(pkgFile);
+		initializeZip(packageStream);
+		packageStream.close();
 	}
 
+	/**
+	 * Creates an OdfPackage from the OpenDocument provided by a File.
+	 *
+	 * <p>
+	 * OdfPackage relies on the file being available for read access over the
+	 * whole lifecycle of OdfPackage.
+	 * </p>
+	 *
+	 * @param pkgFile a file representing the ODF document
+	 * @param baseURI defining the base URI of ODF package.
+	 * @param errorHandler - SAX ErrorHandler used for ODF validation
+	 * @throws java.lang.Exception - if the package could not be created
+	 * 
+	 * @see #getErrorHandler*
+	 */
+	private OdfPackage(File pkgFile, String baseURI, ErrorHandler errorHandler) throws Exception {
+		this();
+		mErrorHandler = errorHandler;
+		mBaseURI = baseURI;
+		InputStream packageStream = new FileInputStream(pkgFile);
+		initializeZip(packageStream);
+		packageStream.close();
+	}
+	
 	/**
 	 * Creates an OdfPackage from the OpenDocument provided by a InputStream.
 	 *
@@ -208,8 +234,8 @@ public class OdfPackage implements Closeable {
 	 * @param packageStream - an inputStream representing the ODF package
 	 * @param baseURI defining the base URI of ODF package.
 	 * @param errorHandler - SAX ErrorHandler used for ODF validation
-	 * @see #getErrorHandler
 	 * @throws java.lang.Exception - if the package could not be created
+	 * 
 	 * @see #getErrorHandler*
 	 */
 	private OdfPackage(InputStream packageStream, String baseURI, ErrorHandler errorHandler) throws Exception {
@@ -235,7 +261,7 @@ public class OdfPackage implements Closeable {
 	 */
 	public static OdfPackage loadPackage(String path) throws Exception {
 		File pkgFile = new File(path);
-		return new OdfPackage(new FileInputStream(pkgFile), getBaseURLFromFile(pkgFile), null);
+		return new OdfPackage(pkgFile, getBaseURLFromFile(pkgFile), null);
 	}
 
 	/**
@@ -251,7 +277,7 @@ public class OdfPackage implements Closeable {
 	 * @throws java.lang.Exception - if the package could not be loaded
 	 */
 	public static OdfPackage loadPackage(File pkgFile) throws Exception {
-		return new OdfPackage(new FileInputStream(pkgFile), getBaseURLFromFile(pkgFile), null);
+		return new OdfPackage(pkgFile, getBaseURLFromFile(pkgFile), null);
 	}
 
 	/**
@@ -303,7 +329,7 @@ public class OdfPackage implements Closeable {
 	 * @see #getErrorHandler
 	 */
 	public static OdfPackage loadPackage(File pkgFile, ErrorHandler errorHandler) throws Exception {
-		return new OdfPackage(new FileInputStream(pkgFile), getBaseURLFromFile(pkgFile), errorHandler);
+		return new OdfPackage(pkgFile, getBaseURLFromFile(pkgFile), errorHandler);
 	}
 
 	// Initialize using memory
