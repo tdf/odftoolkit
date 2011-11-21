@@ -3,19 +3,19 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
       <groupId>org.apache.odftoolkit</groupId>
-      <artifactId>odf-toolkit</artifactId>
-      <version>0.5-incubating-SNAPSHOT</version>
+      <artifactId>odftoolkit</artifactId>
+      <version>0.5-incubating-rc1</version>
     </parent>
 
     <artifactId>simple-odf</artifactId>
-	<version>0.7-incubating-SNAPSHOT</version>
+	<version>0.7-incubating-rc1</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
            <groupId>${project.groupId}</groupId>
            <artifactId>odfdom-java</artifactId>
-           <version>0.8.8-incubating-SNAPSHOT</version>
+           <version>0.8.8-incubating-rc1</version>
         </dependency>
         <dependency>
             <groupId>xerces</groupId>
@@ -36,7 +36,6 @@
     <!-- Build Settings -->
     <build>
         <defaultGoal>install</defaultGoal>
-        <finalName>simple-odf</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

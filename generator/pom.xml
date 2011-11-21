@@ -4,13 +4,13 @@
 
   <parent>
     <groupId>org.apache.odftoolkit</groupId>
-    <artifactId>odf-toolkit</artifactId>
-    <version>0.5-incubating-SNAPSHOT</version>
+    <artifactId>odftoolkit</artifactId>
+    <version>0.5-incubating-rc1</version>
   </parent>
 
 	<!-- The Basics -->
 	<artifactId>schema2template-pom</artifactId>
-	<version>0.8.8-incubating-SNAPSHOT</version>
+	<version>0.8.8-incubating-rc1</version>
 	<packaging>pom</packaging>
 
 	<properties>

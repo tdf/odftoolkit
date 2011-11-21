@@ -30,8 +30,8 @@
 	</parent>
 
 	<groupId>org.apache.odftoolkit</groupId>
-	<artifactId>odf-toolkit</artifactId>
-	<version>0.5-incubating-SNAPSHOT</version>
+	<artifactId>odftoolkit</artifactId>
+	<version>0.5-incubating-rc1</version>
 
 	<name>Apache ODF Toolkit</name>
 	<url>http://incubator.apache.org/odftoolkit/</url>
@@ -143,9 +143,27 @@
 								</configuration>
 							</execution>
 							<execution>
-								<id>source-release-assembly</id>
+								<id>bin</id>
+								<goals>
+									<goal>single</goal>
+								</goals>
+								<phase>package</phase>
 								<configuration>
-									<skipAssembly>true</skipAssembly>
+									<descriptors>
+										<descriptor>assemble/bin.xml</descriptor>
+									</descriptors>
+								</configuration>
+							</execution>
+							<execution>
+								<id>doc</id>
+								<goals>
+									<goal>single</goal>
+								</goals>
+								<phase>package</phase>
+								<configuration>
+									<descriptors>
+										<descriptor>assemble/doc.xml</descriptor>
+									</descriptors>
 								</configuration>
 							</execution>
 						</executions>
@@ -157,31 +175,9 @@
 								<goals>
 									<goal>run</goal>
 								</goals>
-								<phase>deploy</phase>
+								<phase>package</phase>
 								<configuration>
-									<tasks>
-										<mkdir dir="${basedir}/target/${project.version}" />
-										<copy todir="${basedir}/target/${project.version}" flatten="true">
-											<fileset dir="${basedir}">
-												<include name="CHANGES.txt" />
-												<include name="target/*-src.zip*" />
-											</fileset>
-										</copy>
-										<checksum algorithm="MD5" fileext=".md5">
-											<fileset dir="${basedir}/target/${project.version}">
-												<include name="*.zip" />
-												<include name="*.?ar" />
-											</fileset>
-										</checksum>
-										<checksum algorithm="SHA1" fileext=".sha">
-											<fileset dir="${basedir}/target/${project.version}">
-												<include name="*.zip" />
-												<include name="*.?ar" />
-											</fileset>
-										</checksum>
-										<checksum
-											file="${basedir}/target/${project.version}/odftoolkit-${project.version}-src.zip"
-											algorithm="SHA1" property="checksum" />
+									<tasks>										
 										<echo file="${basedir}/target/vote.txt">
 											From: ${username}@apache.org
 											To: odf-dev@incubator.apache.org

@@ -21,13 +21,13 @@
 
   <parent>
     <groupId>org.apache.odftoolkit</groupId>
-    <artifactId>odf-toolkit</artifactId>
-    <version>0.5-incubating-SNAPSHOT</version>
+    <artifactId>odftoolkit</artifactId>
+    <version>0.5-incubating-rc1</version>
   </parent>
 
   <artifactId>xslt-runner-task</artifactId>
   <name>ODF XSLT-Runner Ant Task</name>
-  <version>1.2.1-incubating-SNAPSHOT</version>
+  <version>1.2.1-incubating-rc1</version>
   
   <organization>
     <name>The Apache Software Foundation</name>
@@ -37,7 +37,7 @@
 	<dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>xslt-runner</artifactId>
-      <version>1.2.1-incubating-SNAPSHOT</version>
+      <version>1.2.1-incubating-rc1</version>
 	</dependency>	
     <dependency>
       <groupId>org.apache.ant</groupId>

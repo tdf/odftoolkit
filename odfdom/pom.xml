@@ -4,12 +4,12 @@
 
 	<parent>
     <groupId>org.apache.odftoolkit</groupId>
-    <artifactId>odf-toolkit</artifactId>
-    <version>0.5-incubating-SNAPSHOT</version>
+    <artifactId>odftoolkit</artifactId>
+    <version>0.5-incubating-rc1</version>
 	</parent>
   
 	<artifactId>odfdom-java</artifactId>
-	<version>0.8.8-incubating-SNAPSHOT</version>
+	<version>0.8.8-incubating-rc1</version>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -37,7 +37,6 @@
 
 	<!-- Build Settings -->
 	<build>
-		<finalName>odfdom</finalName>
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
@@ -560,7 +559,7 @@
 									<goal>verify</goal>
 								</goals>
 								<configuration>
-									<classesDirectory>${basedir}/target/odfdom.jar</classesDirectory>
+									<classesDirectory>${basedir}/target/odfdom*.jar</classesDirectory>
 									<systemPropertyVariables>
 										<testresourcefolder>performance</testresourcefolder>
 										<executetimes>1</executetimes>

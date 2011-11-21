@@ -32,14 +32,13 @@
         <include>README*</include>
         <include>LICENSE*</include>
         <include>NOTICE*</include>
+        <include>**/target/**.jar</include>
+        <include>**/target/**.war</include>
       </includes>
-    </fileSet>
-    <fileSet>
-      <directory>${project.build.directory}</directory>
-      <outputDirectory>/</outputDirectory>
-      <includes>
-        <include>*.jar</include>
-      </includes>
+      <excludes>
+        <exclude>**/target/**-javadoc.jar</exclude>
+        <exclude>**/target/**-sources.jar</exclude>
+      </excludes>
     </fileSet>
     <fileSet>
       <directory>${project.build.directory}/site</directory>

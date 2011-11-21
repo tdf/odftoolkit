@@ -42,6 +42,7 @@
       <excludes>
         <exclude>**/target/**</exclude>
         <exclude>**/.*/**</exclude>
+        <exclude>legal/**</exclude>
       </excludes>
     </fileSet>
   </fileSets>

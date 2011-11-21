@@ -4,19 +4,19 @@
 
     <parent>
 		<groupId>org.apache.odftoolkit</groupId>
-		<artifactId>odf-toolkit</artifactId>
-		<version>0.5-incubating-SNAPSHOT</version>
+		<artifactId>odftoolkit</artifactId>
+		<version>0.5-incubating-rc1</version>
 	</parent>
 
 	<artifactId>odfvalidator</artifactId>
-	<version>1.1.5-incubating-SNAPSHOT</version>
+	<version>1.1.5-incubating-rc1</version>
 	<packaging>war</packaging>
 
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>odfdom-java</artifactId>
-			<version>0.8.8-incubating-SNAPSHOT</version>
+			<version>0.8.8-incubating-rc1</version>
 		</dependency>	
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -53,7 +53,6 @@
 
 	<!-- Build Settings -->
 	<build>
-		<finalName>odfvalidator</finalName>
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
