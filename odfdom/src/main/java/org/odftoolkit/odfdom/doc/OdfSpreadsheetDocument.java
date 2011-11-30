@@ -32,7 +32,7 @@ import org.xml.sax.SAXException;
 /**
  * This class represents an empty ODF spreadsheet document.
  * 
- * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.SpreadsheetDocument} in Simple API.
+ * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.SpreadsheetDocument} in Simple API.
  */
 public class OdfSpreadsheetDocument extends OdfDocument {
 

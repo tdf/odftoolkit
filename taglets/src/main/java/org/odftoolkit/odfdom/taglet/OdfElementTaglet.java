@@ -37,7 +37,7 @@ import com.sun.tools.doclets.Taglet;
  *  the environment variable.
  *  In case nothing is been a default path within the JavaDoc doc-files directory is being used.
  *
- *  For example the taglet <code>{@odf.element text:span}</code> would be resolved without variable settings to
+ *  For example the taglet <code>{&#64;odf.element text:span}</code> would be resolved without variable settings to
  *  <code>JAVA_DOC_BASE/doc-files/OpenDocument-v1.2-cd05-part1.html#element-text_span</code>.
  */
  public class OdfElementTaglet implements Taglet {

@@ -257,7 +257,7 @@ public class ParagraphProperties {
 	/**
 	 * Set the text indention size of this <code>ParagraphProperties</code>
 	 * 
-	 * @param marginLeft
+	 * @param textIndent
 	 *            the size of the text indention (in Millimeter)
 	 * @since 0.7
 	 */

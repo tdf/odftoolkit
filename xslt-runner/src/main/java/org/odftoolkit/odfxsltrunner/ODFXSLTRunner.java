@@ -136,7 +136,7 @@ public class ODFXSLTRunner {
     /**
      * Apply a style sheeet.
      * 
-     * @param aStyleSheet Style sheet
+     * @param aStyleSheetFile Style sheet
      * @param aParams Parameters that are passed to the XSLT processor
      * @param aInputFile Input file
      * @param aInputMode Input mode

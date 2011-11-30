@@ -116,6 +116,7 @@
 					<links>
 						<link>http://download.oracle.com/javase/6/docs/api/</link>
 						<link>http://xerces.apache.org/xerces-j/apiDocs/</link>
+						<link>http://simple.odftoolkit.org/javadoc/</link>
 					</links>
 					<splitindex>true</splitindex>
 					<windowtitle>ODFDOM API v${project.version} - http://incubator.apache.org/odftoolkit/</windowtitle>

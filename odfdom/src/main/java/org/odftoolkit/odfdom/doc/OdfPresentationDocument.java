@@ -66,7 +66,7 @@ import org.xml.sax.SAXException;
 /**
  * This class represents an empty ODF presentation.
  * 
- * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.PresentationDocument} in Simple API.
+ * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.PresentationDocument} in Simple API.
  */
 public class OdfPresentationDocument extends OdfDocument {
 

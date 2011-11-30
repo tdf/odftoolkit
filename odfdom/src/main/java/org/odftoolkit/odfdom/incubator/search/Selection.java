@@ -30,7 +30,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
  * can be recognized by the container mElement, the start mIndex of the text
  * content of this mElement and the text content.
  * 
- * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.common.navigation.Selection} in Simple API.
+ * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.navigation.Selection} in Simple API.
  */
 public abstract class Selection {
 

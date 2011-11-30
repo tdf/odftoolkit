@@ -341,9 +341,16 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 		return tableList;
 	}
 
-	/** ToDo: Instead of adding all elements using an index to the document, we might add a pattern to the code generation
-	to create a HashMap either on demand (whenever such a structure is required from the user) or by default
-	@Deprecated: This method will be moved to the generated sources as soon code generation was improved! */
+	/**
+	 * ToDo: Instead of adding all elements using an index to the document, we
+	 * might add a pattern to the code generation to create a HashMap either on
+	 * demand (whenever such a structure is required from the user) or by
+	 * default
+	 * 
+	 * @deprecated This method will be moved to the generated sources as soon
+	 *              code generation was improved!
+	 * 
+	 */
 	public Map<String, StyleMasterPageElement> getMasterPages() throws Exception {
 
 		// get original values:

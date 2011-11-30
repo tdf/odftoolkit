@@ -44,7 +44,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
  * <p>
  * OdfTableCellRange provides methods to get/set/modify the properties of cell range.
  * 
- * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.table.CellRange} in Simple API.
+ * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.table.CellRange} in Simple API.
  */
 public class OdfTableCellRange {
 

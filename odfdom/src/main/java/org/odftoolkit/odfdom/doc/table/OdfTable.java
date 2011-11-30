@@ -72,7 +72,7 @@ import org.w3c.dom.NodeList;
  * <p>
  * OdfTable provides methods to get/add/delete/modify table column/row/cell.
  * 
- * @deprecated As of release 0.8.8, replaced by {@link #org.odftoolkit.simple.table.Table} in Simple API.
+ * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.table.Table} in Simple API.
  */
 public class OdfTable {
 
