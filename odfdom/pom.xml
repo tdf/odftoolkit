@@ -5,11 +5,11 @@
 	<parent>
     <groupId>org.apache.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.5-incubating-rc1</version>
+    <version>0.5-incubating-rc2</version>
 	</parent>
   
 	<artifactId>odfdom-java</artifactId>
-	<version>0.8.8-incubating-rc1</version>
+	<version>0.8.8-incubating-rc2</version>
 	<packaging>jar</packaging>
 
 	<dependencies>
