@@ -73,7 +73,7 @@
 			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
 		</mailingList>
 	</mailingLists>
-
+	
 	<modules>
 		<module>taglets</module>
 		<module>generator</module>
@@ -83,23 +83,7 @@
 		<module>validator</module>
 		<module>simple</module>
 	</modules>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.rat</groupId>
-				<artifactId>apache-rat-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>.gitignore</exclude>
-						<exclude>.git/**</exclude>
-						<exclude>.idea/**</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
+	
 	<profiles>
 		<profile>
 			<id>pedantic</id>
@@ -141,31 +125,19 @@
 										<descriptor>assemble/src.xml</descriptor>
 									</descriptors>
 								</configuration>
-							</execution>
+							</execution>	
 							<execution>
 								<id>bin</id>
 								<goals>
 									<goal>single</goal>
 								</goals>
-								<phase>package</phase>
+								<phase>install</phase>
 								<configuration>
 									<descriptors>
 										<descriptor>assemble/bin.xml</descriptor>
 									</descriptors>
 								</configuration>
-							</execution>
-							<execution>
-								<id>doc</id>
-								<goals>
-									<goal>single</goal>
-								</goals>
-								<phase>package</phase>
-								<configuration>
-									<descriptors>
-										<descriptor>assemble/doc.xml</descriptor>
-									</descriptors>
-								</configuration>
-							</execution>
+							</execution>							
 						</executions>
 					</plugin>
 					<plugin>
@@ -176,8 +148,43 @@
 									<goal>run</goal>
 								</goals>
 								<phase>package</phase>
-								<configuration>
-									<tasks>										
+                				<configuration>
+                					<tasks>
+                    					<mkdir dir="${basedir}/target/${project.version}" />
+                    					<copy todir="${basedir}/target/${project.version}" flatten="true">
+                      						<fileset dir="${basedir}">
+                        						<include name="*.txt" />
+        										<include name="KEYS" />        
+                        						<include name="target/*-src.zip" />
+                        						<include name="odfdom/target/*.jar" />
+                        						<include name="simple/target/*.jar" />
+                        						<include name="validator/target/*.?ar" />
+                        						<include name="xslt-runner/target/*.jar" />
+                        						<include name="xslt-runner-task/target/*.jar" />
+                        						<exclude name="**/target/**-javadoc.jar" />
+        										<exclude name="**/target/**-sources.jar" />
+                      						</fileset>
+                    					</copy>
+                    					<mkdir dir="${basedir}/target/${project.version}/docs"/>
+                    					<copy todir="${basedir}/target/${project.version}/docs" flatten="true">  
+                    						<fileset dir="${basedir}">                  					
+                        						<include name="odfdom/target/*-javadoc.jar" />
+                        						<include name="simple/target/*-javadoc.jar" />
+        									</fileset>
+                    					</copy>                    					
+                    					<checksum algorithm="MD5" fileext=".md5">
+                      						<fileset dir="${basedir}/target/${project.version}">
+                        						<include name="*.zip" />
+                        						<include name="*.?ar" />
+                      						</fileset>
+                    					</checksum>
+                    					<checksum algorithm="SHA1" fileext=".sha">
+                      						<fileset dir="${basedir}/target/${project.version}">
+                        						<include name="*.zip" />
+                        						<include name="*.?ar" />
+                      						</fileset>
+                    					</checksum>
+                    					<checksum file="target/${project.version}/odftoolkit-${project.version}-src.zip" algorithm="SHA1" property="checksum" />								
 										<echo file="${basedir}/target/vote.txt">
 											From: ${username}@apache.org
 											To: odf-dev@incubator.apache.org
@@ -185,8 +192,8 @@
 
 											A candidate for the ODF Toolkit ${project.version} release is available	at:
 
-											http://people.apache.org/~${username}/odftoolkit/${project.version}/
-
+											http://people.apache.org/~${username}/odftoolkit-release/odftoolkit-${project.version}/
+											
 											The release candidate is a zip archive of the sources in:
 
 											https://svn.apache.org/repos/asf/incubator/odf/tags/${project.version}/
@@ -211,7 +218,7 @@
 											A release vote template has been generated for you:	file://${basedir}/target/vote.txt
                     					</echo>
 										<echo/>
-									</tasks>
+									</tasks>                 				
 								</configuration>
 							</execution>
 						</executions>

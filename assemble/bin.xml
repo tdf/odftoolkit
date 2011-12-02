@@ -26,23 +26,12 @@
   </formats>
   <fileSets>
     <fileSet>
-      <directory>${project.basedir}</directory>
+      <directory>${project.basedir}/target/${project.version}/</directory>
       <outputDirectory>/</outputDirectory>
-      <includes>
-        <include>README*</include>
-        <include>LICENSE*</include>
-        <include>NOTICE*</include>
-        <include>**/target/**.jar</include>
-        <include>**/target/**.war</include>
-      </includes>
       <excludes>
-        <exclude>**/target/**-javadoc.jar</exclude>
-        <exclude>**/target/**-sources.jar</exclude>
+        <exclude>*.md5</exclude>
+        <exclude>*.sha</exclude>
       </excludes>
-    </fileSet>
-    <fileSet>
-      <directory>${project.build.directory}/site</directory>
-      <outputDirectory>docs</outputDirectory>
     </fileSet>
   </fileSets>
 </assembly>
