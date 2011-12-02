@@ -118,6 +118,7 @@
         <element name="style:drop-cap" family="text:text"/>
         <element name="text:linenumbering-configuration" family="text:text"/>
 
+		<!-- does not exist as element only as baseclass -->
         <element name="text:list-level-style" base="style"/>
         <element name="text:list-level-style-number" base="text:list-level-style"/>
         <element name="text:list-level-style-bullet" base="text:list-level-style"/>
@@ -131,8 +132,6 @@
 
         <element name="style:style" base="style"/>
         <element name="style:default-style" base="style"/>
-        <element name="style:footer-style" base="style"/>
-        <element name="style:header-style" base="style"/>
         <element name="style:page-layout" base="style"/>
         <element name="text:outline-level-style" base="style"/>
         <element name="text:list-style" base="style"/>

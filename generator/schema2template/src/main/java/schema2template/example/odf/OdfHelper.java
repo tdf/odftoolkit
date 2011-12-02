@@ -86,13 +86,12 @@ public class OdfHelper {
 	public static final int ODF12_ATTRIBUTE_NUMBER = 1300; //in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie. @office:process-content)
 	public static String odfResourceDir;
 	public static String outputRoot;
-	public static final String INPUT_ROOT = "target" + File.separator + "classes" + File.separator
-			+ "examples" + File.separator + "odf";
+	public static final String INPUT_ROOT = "target" + File.separator + "odf-schemas";
 	public static final String TEST_INPUT_ROOT = "target" + File.separator + "test-classes" + File.separator
 			+ "examples" + File.separator + "odf";
 	public static final String ODF10_RNG_FILE_NAME = "OpenDocument-strict-schema-v1.0-os.rng";
 	public static final String ODF11_RNG_FILE_NAME = "OpenDocument-strict-schema-v1.1.rng";
-	public static final String ODF12_RNG_FILE_NAME = "OpenDocument-v1.2-csprd03-schema.rng";
+	public static final String ODF12_RNG_FILE_NAME = "OpenDocument-v1.2-cs01-schema.rng";
 	public static String odf12RngFile;
 	public static String odf11RngFile;
 	public static String odf10RngFile;

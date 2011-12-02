@@ -61,6 +61,177 @@
 			</extension>
 		</extensions>
 		<plugins>
+		 	<plugin>
+      			<groupId>org.codehaus.mojo</groupId>
+      			<artifactId>wagon-maven-plugin</artifactId>
+      			<version>1.0-beta-3</version>
+      			<executions>
+      				<execution>
+          				<id>download-odf-schema-v1.2</id>
+          				<phase>generate-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://docs.oasis-open.org/office/v1.2</url>
+            				<fromFile>cos01/OpenDocument-v1.2-cos01-schemas.zip</fromFile>
+            				<toDir>${project.build.directory}/schemas/odf1.2</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-odf-manifest-schema-v1.1</id>
+          				<phase>generate-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://docs.oasis-open.org/office/v1.1</url>
+            				<fromFile>OS/OpenDocument-manifest-schema-v1.1.rng</fromFile>
+            				<toDir>src/main/resources/schema/odf1.1</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-odf-schema-v1.1</id>
+          				<phase>generate-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://docs.oasis-open.org/office/v1.1</url>
+            				<fromFile>OS/OpenDocument-schema-v1.1.rng</fromFile>
+            				<toDir>src/main/resources/schema/odf1.1</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-odf-strict-schema-v1.1</id>
+          				<phase>generate-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://docs.oasis-open.org/office/v1.1</url>
+            				<fromFile>OS/OpenDocument-strict-schema-v1.1.rng</fromFile>
+            				<toDir>src/main/resources/schema/odf1.1</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-odf-manifest-schema-v1.0</id>
+          				<phase>generate-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://oasis-open.org/committees/download.php/12570</url>
+            				<fromFile>OpenDocument-manifest-schema-v1.0-os.rng</fromFile>
+            				<toDir>src/main/resources/schema/odf1.0</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-odf-schema-v1.0</id>
+          				<phase>generate-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://www.oasis-open.org/committees/download.php/12571</url>
+            				<fromFile>OpenDocument-schema-v1.0-os.rng</fromFile>
+            				<toDir>src/main/resources/schema/odf1.0</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-odf-strict-schema-v1.0</id>
+          				<phase>generate-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://www.oasis-open.org/committees/download.php/12569</url>
+            				<fromFile>OpenDocument-strict-schema-v1.0-os.rng</fromFile>
+            				<toDir>src/main/resources/schema/odf1.0</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-mathml-schema-v3.0</id>
+          				<phase>generate-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://www.w3.org/Math/RelaxNG</url>
+            				<fromFile>mathml3-relaxng.zip</fromFile>
+            				<toDir>${project.build.directory}/schemas</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-mathml-schema-v2.0</id>
+          				<phase>generate-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://www.w3.org/Math/XMLSchema</url>
+            				<fromFile>mathml2.tgz</fromFile>
+            				<toDir>${project.build.directory}/schemas</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-mathml-schema-v1.01</id>
+          				<phase>generate-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://www.w3.org/pub/WWW/TR/REC-MathML</url>
+            				<fromFile>mmlents.zip</fromFile>
+            				<toDir>${project.build.directory}/schemas</toDir>
+          				</configuration>
+          			</execution>
+        		</executions>
+    		</plugin>
+    		<plugin>
+    			<groupId>org.apache.maven.plugins</groupId>
+    			<artifactId>maven-antrun-plugin</artifactId>
+    			<version>1.2</version>
+    			<executions>
+        			<execution>
+            			<id>unzip schema packages</id>
+            			<phase>generate-resources</phase>
+            			<configuration>
+                			<tasks>
+                    			<echo message="unzip odf 1.2 schemas" />
+                    			<unzip src="${project.build.directory}/schemas/odf1.2/OpenDocument-v1.2-cos01-schemas.zip" dest="src/main/resources/schema/odf1.2/" />
+                    			<echo message="unzip mathml 3.0 schemas" />
+                    			<unzip src="${project.build.directory}/schemas/mathml3-relaxng.zip" dest="src/main/resources/schema/" />
+                    			<move file="src/main/resources/schema/mathml3" tofile="src/main/resources/schema/mathml3.0"/>                    			
+                    			<echo message="untar mathml 2.0 schemas" />
+                    			<untar src="${project.build.directory}/schemas/mathml2.tgz" dest="src/main/resources/schema/"/>   
+                    			<move file="src/main/resources/schema/mathml2" tofile="src/main/resources/schema/mathml2.0"/>                 			
+                    			<echo message="unzip mathml 1.01 schemas" />
+                    			<unzip src="${project.build.directory}/schemas/mmlents.zip" dest="src/main/resources/schema/" />
+                    			<move file="src/main/resources/schema/mmlents" tofile="src/main/resources/schema/mathml1.01"/>
+                			</tasks>
+            			</configuration>
+            			<goals>
+                			<goal>run</goal>
+            			</goals>
+        			</execution>
+        			<execution>
+            			<id>clean schema files</id>
+            			<phase>clean</phase>
+            			<configuration>
+                			<tasks>
+                    			<echo message="remove schema files" />
+                    			<delete>
+ 									<fileset dir="src/main/resources/schema/" excludes="odf*.properties" defaultexcludes="false"/>
+								</delete>
+                			</tasks>
+            			</configuration>
+            			<goals>
+                			<goal>run</goal>
+            			</goals>
+        			</execution>
+    			</executions>
+			</plugin>  		
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
@@ -152,10 +323,8 @@
                 <artifactId>apache-rat-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>src/main/resources/schema/**</exclude>
                         <exclude>src/main/resources/META-INF/services/org.iso_relax.verifier.VerifierFactoryLoader</exclude>
                         <exclude>src/test/resources/testInvalidPkg3.odt</exclude>
-                        <exclude>src/codegen/resources/pkg/*.rng</exclude>
                     </excludes>
                 </configuration>
             </plugin>

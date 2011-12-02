@@ -116,11 +116,77 @@
                 <artifactId>apache-rat-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>src/main/resources/examples/odf/*.rng</exclude>
                         <exclude>src/test/resources/examples/odf/*.ref</exclude>
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+      			<groupId>org.codehaus.mojo</groupId>
+      			<artifactId>wagon-maven-plugin</artifactId>
+      			<version>1.0-beta-3</version>
+      			<executions>
+        			<execution>
+          				<id>download-odf-schema-v1.2</id>
+          				<phase>process-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://docs.oasis-open.org/office/v1.2</url>
+            				<fromFile>cs01/OpenDocument-v1.2-cs01-schema.rng</fromFile>
+            				<toDir>${project.build.directory}/odf-schemas</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-odf-schema-v1.1</id>
+          				<phase>process-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://docs.oasis-open.org/office/v1.1</url>
+            				<fromFile>OS/OpenDocument-schema-v1.1.rng</fromFile>
+            				<toDir>${project.build.directory}/odf-schemas</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-odf-strict-schema-v1.1</id>
+          				<phase>process-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://docs.oasis-open.org/office/v1.1</url>
+            				<fromFile>OS/OpenDocument-strict-schema-v1.1.rng</fromFile>
+            				<toDir>${project.build.directory}/odf-schemas</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-odf-schema-v1.0</id>
+          				<phase>process-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://www.oasis-open.org/committees/download.php/12571</url>
+            				<fromFile>OpenDocument-schema-v1.0-os.rng</fromFile>
+            				<toDir>${project.build.directory}/odf-schemas</toDir>
+          				</configuration>
+        			</execution>
+        			<execution>
+          				<id>download-odf-strict-schema-v1.0</id>
+          				<phase>process-resources</phase>
+          				<goals>
+            				<goal>download-single</goal>
+          				</goals>
+          				<configuration>
+            				<url>dav:http://www.oasis-open.org/committees/download.php/12569</url>
+            				<fromFile>OpenDocument-strict-schema-v1.0-os.rng</fromFile>
+            				<toDir>${project.build.directory}/odf-schemas</toDir>
+          				</configuration>
+        			</execution>
+      			</executions>
+    		</plugin>
 		</plugins>
 	</build>
 	<!-- <distributionManagement>

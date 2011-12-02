@@ -480,6 +480,49 @@
 			<build>
 				<plugins>
 					<plugin>
+      					<groupId>org.codehaus.mojo</groupId>
+      					<artifactId>wagon-maven-plugin</artifactId>
+      					<version>1.0-beta-3</version>
+      					<executions>
+      						<execution>
+          						<id>download-odf-schema-v1.2</id>
+          						<phase>validate</phase>
+          						<goals>
+            						<goal>download-single</goal>
+          						</goals>
+          						<configuration>
+            						<url>dav:http://docs.oasis-open.org/office/v1.2</url>
+            						<fromFile>cs01/OpenDocument-v1.2-cs01-schema.rng</fromFile>
+            						<toDir>${project.build.directory}/odf-schemas</toDir>
+          						</configuration>
+        					</execution>
+        					<execution>
+          						<id>download-odf-manifest-schema-v1.2</id>
+          						<phase>validate</phase>
+          						<goals>
+            						<goal>download-single</goal>
+          						</goals>
+          						<configuration>
+            						<url>dav:http://docs.oasis-open.org/office/v1.2</url>
+            						<fromFile>cs01/OpenDocument-v1.2-cs01-manifest-schema.rng</fromFile>
+            						<toDir>${project.build.directory}/odf-schemas</toDir>
+          						</configuration>
+        					</execution>
+        					<execution>
+          						<id>download-odf-schema-v1.1</id>
+          						<phase>validate</phase>
+          						<goals>
+            						<goal>download-single</goal>
+          						</goals>
+          						<configuration>
+            						<url>dav:http://docs.oasis-open.org/office/v1.1</url>
+            						<fromFile>OS/OpenDocument-schema-v1.1.rng</fromFile>
+            						<toDir>${project.build.directory}/odf-schemas</toDir>
+          						</configuration>
+        					</execution>
+        				</executions>
+    				</plugin>
+					<plugin>
 						<groupId>${project.groupId}</groupId>
 						<artifactId>schema2template-maven-plugin</artifactId>
 						<version>${project.version}</version>
@@ -494,8 +537,8 @@
 								<configuration>
 									<targetRoot>${basedir}/src/main/java/</targetRoot>
 									<resourceRoot>${basedir}/src/codegen/resources/dom/template</resourceRoot>
-									<odf12SchemaFile>${basedir}/src/codegen/resources/dom/OpenDocument-v1.2-cd05-rev02-schema.rng</odf12SchemaFile>
-									<odf11SchemaFile>${basedir}/src/codegen/resources/dom/OpenDocument-schema-v1.1.rng</odf11SchemaFile>
+									<odf12SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.2-cs01-schema.rng</odf12SchemaFile>
+									<odf11SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-schema-v1.1.rng</odf11SchemaFile>
 									<configFile>${basedir}/src/codegen/resources/dom/config.xml</configFile>
 								</configuration>
 							</execution>
