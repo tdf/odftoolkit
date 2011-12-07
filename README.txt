@@ -5,19 +5,19 @@
 		
 ====================================================================================
 
-ODF Toolkit is a set of Java modules that allow programmatic creation, scanning and 
-manipulation of OpenDocument Format (ISO/IEC 26300 == ODF) documents. Unlike other 
+The Apache ODF Toolkit (incuating) is a set of Java modules that allow programmatic creation, 
+scanning and manipulation of Open Document Format (ISO/IEC 26300 == ODF) documents. Unlike other 
 approaches which rely on runtime manipulation of heavy-weight editors via an 
 automation interface, the ODF Toolkit is lightweight and ideal for server use.
 It's an incubator project of the Apache Software Foundation <http://www.apache.org/>.
 
-ODF Toolkit owns 4 subcomponents:
+The ODF Toolkit consists of four subcomponents:
 
 1. ODFDOM (odfdom-java-*.jar) 
-	This is an OpenDocument Format (ODF) framework. Its purpose is to provide 
-	an easy common way to create, access and manipulate ODF files, without 
+	This is an Open Document Format (ODF) framework. Its purpose is to provide 
+	an easy, common way to create, access and manipulate ODF files, without 
 	requiring detailed knowledge of the ODF specification. It is designed to 
-	provide the ODF developer community with an easy lightwork programming API 
+	provide the ODF developer community with an easy, lightweight programming API 
 	portable to any object-oriented language.
 	
 2. Simple API (simple-odf-*.jar)
@@ -28,8 +28,8 @@ ODF Toolkit owns 4 subcomponents:
 	level abstraction of the lower-level ODFDOM API
 
 3. ODF Validator (odfvalidator-*.jar, odfvalidator-*.war)
-	This is a tool that validates OpenDocument Format (ODF) files and checks them
-	for certain conformance criteria. ODF Validator is available as an online 
+	This is a tool that validates Open Document Format (ODF) files and checks them
+	for conformance according to the ODF Standard. ODF Validator is available as an online 
 	service and as a command line tool. This page primarily describes the command 
 	line tool. Please visit web page:
 	   http://incubator.apache.org/odftoolkit/conformance/ODFValidator.html
@@ -39,13 +39,13 @@ ODF Toolkit owns 4 subcomponents:
 	ODF XSLT Runner is a small Java application that allows you to apply XSLT 
 	stylesheets to XML streams included in ODF packages without extracting them 
 	from the package. It can be used from the command line. A driver to use it 
-	within Ant build files, ODF XSLT Runner Task, is also available.
+	within an Ant build file, ODF XSLT Runner Task, is also available.
 
 
 Getting Started
 ===============
 
-ODF Toolkit is based on Java 5 and uses the Maven 2 <http://maven.apache.org/>
+The ODF Toolkit is based on Java 5 and uses the Maven 2 <http://maven.apache.org/>
 build system. To build ODF Toolkit, use the following command in this directory:
 
     mvn clean install
@@ -56,7 +56,7 @@ in your classpath directly.
 Documentation
 =============
 
-The Home Page of ODF Toolkit:
+The Home Page foir the ODF Toolkit:
     http://incubator.apache.org/odftoolkit/index.html
     
 ODFDOM Getting Start Guide:    
@@ -138,11 +138,4 @@ Issue Tracker
 If you encounter errors in ODF Toolkit or want to suggest an improvement or
 a new feature, please visit the ODF Toolkit issue tracker at
 https://issues.apache.org/jira/browse/ODFTOOLKIT. There you can also find the
-latest information on known issues and recent bug fixes and enhancements.
-
-
-
-
-
-    
-    
+latest information on known issues and recent bug fixes and enhancements.    
