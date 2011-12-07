@@ -50,13 +50,13 @@ build system. To build ODF Toolkit, use the following command in this directory:
 
     mvn clean install
 
-The simplest way to use these modules are just put the jar-with-dependencies files
+The simplest way to use these modules are just put the jars files
 in your classpath directly.
 
 Documentation
 =============
 
-The Home Page foir the ODF Toolkit:
+The Home Page for the ODF Toolkit:
     http://incubator.apache.org/odftoolkit/index.html
     
 ODFDOM Getting Start Guide:    

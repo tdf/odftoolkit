@@ -26,15 +26,13 @@
   </formats>
   <fileSets>
     <fileSet>
-      <directory>${project.basedir}</directory>
+      <directory>${project.basedir}/target/${project.version}-docs</directory>
       <outputDirectory>/</outputDirectory>
-      <includes>
-        <include>README*</include>
-        <include>LICENSE*</include>
-        <include>NOTICE*</include>        
-        <include>**/target/**-javadoc.jar</include>
-      </includes>
       <useDefaultExcludes>true</useDefaultExcludes>
+      <excludes>
+        <exclude>*.md5</exclude>
+        <exclude>*.sha</exclude>
+      </excludes>
     </fileSet>
   </fileSets>
 </assembly>

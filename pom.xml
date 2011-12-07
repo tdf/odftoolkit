@@ -31,7 +31,7 @@
 
 	<groupId>org.apache.odftoolkit</groupId>
 	<artifactId>odftoolkit</artifactId>
-	<version>0.5-incubating-rc2</version>
+	<version>0.5-incubating-rc3</version>
 
 	<name>Apache ODF Toolkit</name>
 	<url>http://incubator.apache.org/odftoolkit/</url>
@@ -125,7 +125,19 @@
 										<descriptor>assemble/src.xml</descriptor>
 									</descriptors>
 								</configuration>
-							</execution>	
+							</execution>
+							<execution>
+								<id>doc</id>
+								<goals>
+									<goal>single</goal>
+								</goals>
+								<phase>install</phase>
+								<configuration>
+									<descriptors>
+										<descriptor>assemble/doc.xml</descriptor>
+									</descriptors>
+								</configuration>
+							</execution>			
 							<execution>
 								<id>bin</id>
 								<goals>
@@ -150,12 +162,11 @@
 								<phase>package</phase>
                 				<configuration>
                 					<tasks>
-                    					<mkdir dir="${basedir}/target/${project.version}" />
-                    					<copy todir="${basedir}/target/${project.version}" flatten="true">
+                    					<mkdir dir="${basedir}/target/${project.version}-bin" />
+                    					<copy todir="${basedir}/target/${project.version}-bin" flatten="true">
                       						<fileset dir="${basedir}">
                         						<include name="*.txt" />
-        										<include name="KEYS" />        
-                        						<include name="target/*-src.zip" />
+        										<include name="KEYS" />      
                         						<include name="odfdom/target/*.jar" />
                         						<include name="simple/target/*.jar" />
                         						<include name="validator/target/*.?ar" />
@@ -163,28 +174,36 @@
                         						<include name="xslt-runner-task/target/*.jar" />
                         						<exclude name="**/target/**-javadoc.jar" />
         										<exclude name="**/target/**-sources.jar" />
+        										<exclude name="**/target/**-jar-with-dependencies.jar" />
                       						</fileset>
                     					</copy>
-                    					<mkdir dir="${basedir}/target/${project.version}/docs"/>
-                    					<copy todir="${basedir}/target/${project.version}/docs" flatten="true">  
-                    						<fileset dir="${basedir}">                  					
-                        						<include name="odfdom/target/*-javadoc.jar" />
-                        						<include name="simple/target/*-javadoc.jar" />
+                    					<mkdir dir="${basedir}/target/${project.version}-docs"/>
+                    					<copy todir="${basedir}/target/${project.version}-docs" flatten="true">  
+                    						<fileset dir="${basedir}">   
+                        						<include name="*.txt" />
+        										<include name="KEYS" />               					
+                        						<include name="**/target/*-javadoc.jar" />
         									</fileset>
                     					</copy>                    					
                     					<checksum algorithm="MD5" fileext=".md5">
-                      						<fileset dir="${basedir}/target/${project.version}">
+                      						<fileset dir="${basedir}/target/${project.version}-bin">
                         						<include name="*.zip" />
                         						<include name="*.?ar" />
+                      						</fileset>
+                      						<fileset dir="${basedir}/target/${project.version}-docs">
+                        						<include name="*.jar" />
                       						</fileset>
                     					</checksum>
                     					<checksum algorithm="SHA1" fileext=".sha">
-                      						<fileset dir="${basedir}/target/${project.version}">
+                      						<fileset dir="${basedir}/target/${project.version}-bin">
                         						<include name="*.zip" />
                         						<include name="*.?ar" />
                       						</fileset>
+                      						<fileset dir="${basedir}/target/${project.version}-docs">
+                        						<include name="*.jar" />
+                      						</fileset>
                     					</checksum>
-                    					<checksum file="target/${project.version}/odftoolkit-${project.version}-src.zip" algorithm="SHA1" property="checksum" />								
+                    					<checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA1" property="checksum" />								
 										<echo file="${basedir}/target/vote.txt">
 											From: ${username}@apache.org
 											To: odf-dev@incubator.apache.org

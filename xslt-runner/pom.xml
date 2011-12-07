@@ -22,12 +22,12 @@
   <parent>
     <groupId>org.apache.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.5-incubating-rc2</version>
+    <version>0.5-incubating-rc3</version>
   </parent>
 
   <artifactId>xslt-runner</artifactId>
   <name>ODF XSLT-Runner</name>
-  <version>1.2.1-incubating-rc2</version>
+  <version>1.2.1-incubating-rc3</version>
   
   <organization>
     <name>The Apache Software Foundation</name>
@@ -38,7 +38,7 @@
 	<dependency>
       <groupId>${project.groupId}</groupId>
 	  <artifactId>odfdom-java</artifactId>
-      <version>0.8.8-incubating-rc2</version>
+      <version>0.8.8-incubating-rc3</version>
 	</dependency>	
   </dependencies>
 

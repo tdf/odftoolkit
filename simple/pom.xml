@@ -4,18 +4,18 @@
     <parent>
       <groupId>org.apache.odftoolkit</groupId>
       <artifactId>odftoolkit</artifactId>
-      <version>0.5-incubating-rc2</version>
+      <version>0.5-incubating-rc3</version>
     </parent>
 
     <artifactId>simple-odf</artifactId>
-	<version>0.7-incubating-rc2</version>
+	<version>0.7-incubating-rc3</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
            <groupId>${project.groupId}</groupId>
            <artifactId>odfdom-java</artifactId>
-           <version>0.8.8-incubating-rc2</version>
+           <version>0.8.8-incubating-rc3</version>
         </dependency>
         <dependency>
             <groupId>xerces</groupId>
