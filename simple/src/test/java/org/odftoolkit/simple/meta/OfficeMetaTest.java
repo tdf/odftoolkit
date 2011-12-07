@@ -49,7 +49,7 @@ public class OfficeMetaTest {
 	private String initialCreator = "creator";
 	private String dccreator = System.getProperty("user.name");
 	private String printedBy = "persia p";
-	private String language = System.getProperty("user.name");
+	private String language = System.getProperty("user.language");
 	private Integer editingCycles = new Integer(4);
 	private Duration editingDuration = Duration.valueOf("P49DT11H8M9S");
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
