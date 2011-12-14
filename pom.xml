@@ -31,7 +31,7 @@
 
 	<groupId>org.apache.odftoolkit</groupId>
 	<artifactId>odftoolkit</artifactId>
-	<version>0.5-incubating-rc3</version>
+	<version>0.5-incubating</version>
 
 	<name>Apache ODF Toolkit</name>
 	<url>http://incubator.apache.org/odftoolkit/</url>
