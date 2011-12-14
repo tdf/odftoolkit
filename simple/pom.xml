@@ -8,7 +8,7 @@
     </parent>
 
     <artifactId>simple-odf</artifactId>
-	<version>0.7-incubating</version>
+    <version>0.7-incubating</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -287,34 +287,34 @@
             <timezone>+8</timezone>
         </developer>
     </developers>
-	
+    
     <!-- Environment Settings -->
     <issueManagement>
         <system>JIRA</system>
         <url>https://issues.apache.org/jira/browse/ODFTOOLKIT</url>
     </issueManagement>
-	<mailingLists>
-		<mailingList>
-			<name>User List</name>
-			<post>odf-users@incubator.apache.org</post>
-			<subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
-			<unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
-			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
-		</mailingList>
-		<mailingList>
-			<name>Developer List</name>
-			<post>odf-dev@incubator.apache.org</post>
-			<subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
-			<unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
-			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
-		</mailingList>
-		<mailingList>
-			<name>Commits</name>
-			<subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
-			<unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
-			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
-		</mailingList>
-	</mailingLists>
+    <mailingLists>
+        <mailingList>
+            <name>User List</name>
+            <post>odf-users@incubator.apache.org</post>
+            <subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
+            <unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
+        </mailingList>
+        <mailingList>
+            <name>Developer List</name>
+            <post>odf-dev@incubator.apache.org</post>
+            <subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
+            <unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
+        </mailingList>
+        <mailingList>
+            <name>Commits</name>
+            <subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
+            <unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
+        </mailingList>
+    </mailingLists>
     <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/simple</connection>
         <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/simple</developerConnection>

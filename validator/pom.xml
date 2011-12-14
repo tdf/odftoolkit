@@ -1,323 +1,323 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
     <parent>
-		<groupId>org.apache.odftoolkit</groupId>
-		<artifactId>odftoolkit</artifactId>
-		<version>0.5-incubating</version>
-	</parent>
+        <groupId>org.apache.odftoolkit</groupId>
+        <artifactId>odftoolkit</artifactId>
+        <version>0.5-incubating</version>
+    </parent>
 
-	<artifactId>odfvalidator</artifactId>
-	<version>1.1.5-incubating</version>
-	<packaging>war</packaging>
+    <artifactId>odfvalidator</artifactId>
+    <version>1.1.5-incubating</version>
+    <packaging>war</packaging>
 
-	<dependencies>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>odfdom-java</artifactId>
-			<version>0.8.8-incubating</version>
-		</dependency>	
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>net.java.dev.msv</groupId>
-			<artifactId>msv-core</artifactId>
-			<version>2011.1</version>
-		</dependency>		
-		<dependency>
-		  <groupId>org.iso_relax.verifier.jaxp.validation</groupId>
-		  <artifactId>isorelax-jaxp-bridge</artifactId>
-		  <version>1.0</version>
-		</dependency>				
-		<dependency>
-			<groupId>xerces</groupId>
-			<artifactId>xercesImpl</artifactId>
-			<version>2.9.1</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
-			<scope>test</scope>
-		</dependency>	
-	</dependencies>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
-		<netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
-	</properties>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>odfdom-java</artifactId>
+            <version>0.8.8-incubating</version>
+        </dependency>    
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.msv</groupId>
+            <artifactId>msv-core</artifactId>
+            <version>2011.1</version>
+        </dependency>        
+        <dependency>
+          <groupId>org.iso_relax.verifier.jaxp.validation</groupId>
+          <artifactId>isorelax-jaxp-bridge</artifactId>
+          <version>1.0</version>
+        </dependency>                
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>    
+    </dependencies>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
+        <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
+    </properties>
 
-	<!-- Build Settings -->
-	<build>
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-webdav-jackrabbit</artifactId>
-				<version>1.0-beta-7</version>
-			</extension>
-		</extensions>
-		<plugins>
-		 	<plugin>
-      			<groupId>org.codehaus.mojo</groupId>
-      			<artifactId>wagon-maven-plugin</artifactId>
-      			<version>1.0-beta-3</version>
-      			<executions>
-      				<execution>
-          				<id>download-odf-schema-v1.2</id>
-          				<phase>validate</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://docs.oasis-open.org/office/v1.2</url>
-            				<fromFile>cos01/OpenDocument-v1.2-cos01-schemas.zip</fromFile>
-            				<toDir>${project.build.directory}/schemas/odf1.2</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-odf-manifest-schema-v1.1</id>
-          				<phase>validate</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://docs.oasis-open.org/office/v1.1</url>
-            				<fromFile>OS/OpenDocument-manifest-schema-v1.1.rng</fromFile>
-            				<toDir>src/main/resources/schema/odf1.1</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-odf-schema-v1.1</id>
-          				<phase>validate</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://docs.oasis-open.org/office/v1.1</url>
-            				<fromFile>OS/OpenDocument-schema-v1.1.rng</fromFile>
-            				<toDir>src/main/resources/schema/odf1.1</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-odf-strict-schema-v1.1</id>
-          				<phase>validate</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://docs.oasis-open.org/office/v1.1</url>
-            				<fromFile>OS/OpenDocument-strict-schema-v1.1.rng</fromFile>
-            				<toDir>src/main/resources/schema/odf1.1</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-odf-manifest-schema-v1.0</id>
-          				<phase>validate</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://oasis-open.org/committees/download.php/12570</url>
-            				<fromFile>OpenDocument-manifest-schema-v1.0-os.rng</fromFile>
-            				<toDir>src/main/resources/schema/odf1.0</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-odf-schema-v1.0</id>
-          				<phase>validate</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://www.oasis-open.org/committees/download.php/12571</url>
-            				<fromFile>OpenDocument-schema-v1.0-os.rng</fromFile>
-            				<toDir>src/main/resources/schema/odf1.0</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-odf-strict-schema-v1.0</id>
-          				<phase>validate</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://www.oasis-open.org/committees/download.php/12569</url>
-            				<fromFile>OpenDocument-strict-schema-v1.0-os.rng</fromFile>
-            				<toDir>src/main/resources/schema/odf1.0</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-mathml-schema-v3.0</id>
-          				<phase>validate</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://www.w3.org/Math/RelaxNG</url>
-            				<fromFile>mathml3-relaxng.zip</fromFile>
-            				<toDir>${project.build.directory}/schemas</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-mathml-schema-v2.0</id>
-          				<phase>validate</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://www.w3.org/Math/XMLSchema</url>
-            				<fromFile>mathml2.tgz</fromFile>
-            				<toDir>${project.build.directory}/schemas</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-mathml-schema-v1.01</id>
-          				<phase>validate</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://www.w3.org/pub/WWW/TR/REC-MathML</url>
-            				<fromFile>mmlents.zip</fromFile>
-            				<toDir>${project.build.directory}/schemas</toDir>
-          				</configuration>
-          			</execution>
-        		</executions>
-    		</plugin>
-    		<plugin>
-    			<groupId>org.apache.maven.plugins</groupId>
-    			<artifactId>maven-antrun-plugin</artifactId>
-    			<version>1.2</version>
-    			<executions>
-        			<execution>
-            			<id>unzip schema packages</id>
-            			<phase>validate</phase>
-            			<configuration>
-            				<tasks>
-                    			<echo message="unzip odf 1.2 schemas" />
-                    			<unzip src="${project.build.directory}/schemas/odf1.2/OpenDocument-v1.2-cos01-schemas.zip" dest="src/main/resources/schema/odf1.2/" />
-                    			<echo message="unzip mathml 3.0 schemas" />
-                    			<unzip src="${project.build.directory}/schemas/mathml3-relaxng.zip" dest="src/main/resources/schema/" />
-                    			<move file="src/main/resources/schema/mathml3" tofile="src/main/resources/schema/mathml3.0"/>                    			
-                    			<echo message="untar mathml 2.0 schemas" />
-                    			<untar src="${project.build.directory}/schemas/mathml2.tgz" dest="src/main/resources/schema/"/>   
-                    			<move file="src/main/resources/schema/mathml2" tofile="src/main/resources/schema/mathml2.0"/>                 			
-                    			<echo message="unzip mathml 1.01 schemas" />
-                    			<unzip src="${project.build.directory}/schemas/mmlents.zip" dest="src/main/resources/schema/" />
-                    			<move file="src/main/resources/schema/mmlents" tofile="src/main/resources/schema/mathml1.01"/>
-                			</tasks>           			
-            			</configuration>
-            			<goals>
-                			<goal>run</goal>
-            			</goals>
-        			</execution>
-        			<execution>
-            			<id>clean schema files</id>
-            			<phase>clean</phase>
-            			<configuration>
-            				<tasks>
-                    			<echo message="remove schema files" />
-                    			<delete>
- 									<fileset dir="src/main/resources/schema/" excludes="odf*.properties" defaultexcludes="false"/>
-								</delete>
-                			</tasks>                				
-            			</configuration>
-            			<goals>
-                			<goal>run</goal>
-            			</goals>
-        			</execution>
-    			</executions>
-			</plugin>  		
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<meminitial>512m</meminitial>
-					<maxmem>1024m</maxmem>
-					<showDeprecation>true</showDeprecation>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.1</version>
-				<configuration>
-					<archive>
-						<index>true</index>
-						<manifestEntries>
-							<version>${project.version}</version>
-						</manifestEntries>
-						<manifestSections>
-							<manifestSection>
-								<name>odfvalidator</name>
-								<manifestEntries>
-									<ODFDOM-Name>ODFDOM Validator</ODFDOM-Name>
-									<ODFDOM-Version>${project.version}</ODFDOM-Version>
-									<ODFDOM-Website>http://incubator.apache.org/odftoolkit/conformance/ODFValidator.html</ODFDOM-Website>
-									<ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
-									<ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
-								</manifestEntries>
-							</manifestSection>
-						</manifestSections>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<!-- Workaround for http://jira.codehaus.org/browse/MGPG-9 -->
-					<mavenExecutorId>forked-path</mavenExecutorId>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<!-- Explizit version required for fix on systemPropertyVariables -->
-				<version>2.6</version>
-				<configuration>
-					<systemPropertyVariables>
-						<odfdom.version>${project.version}</odfdom.version>
-						<odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
-						<org.odftoolkit.odfdom.validation>org.odftoolkit.odfdom.pkg.DefaultErrorHandler</org.odftoolkit.odfdom.validation>
-					</systemPropertyVariables>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1.2</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-				<executions>
-					<execution>
-						<id>single</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+    <!-- Build Settings -->
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav-jackrabbit</artifactId>
+                <version>1.0-beta-7</version>
+            </extension>
+        </extensions>
+        <plugins>
+             <plugin>
+                  <groupId>org.codehaus.mojo</groupId>
+                  <artifactId>wagon-maven-plugin</artifactId>
+                  <version>1.0-beta-3</version>
+                  <executions>
+                      <execution>
+                          <id>download-odf-schema-v1.2</id>
+                          <phase>validate</phase>
+                          <goals>
+                            <goal>download-single</goal>
+                          </goals>
+                          <configuration>
+                            <url>dav:http://docs.oasis-open.org/office/v1.2</url>
+                            <fromFile>cos01/OpenDocument-v1.2-cos01-schemas.zip</fromFile>
+                            <toDir>${project.build.directory}/schemas/odf1.2</toDir>
+                          </configuration>
+                    </execution>
+                    <execution>
+                          <id>download-odf-manifest-schema-v1.1</id>
+                          <phase>validate</phase>
+                          <goals>
+                            <goal>download-single</goal>
+                          </goals>
+                          <configuration>
+                            <url>dav:http://docs.oasis-open.org/office/v1.1</url>
+                            <fromFile>OS/OpenDocument-manifest-schema-v1.1.rng</fromFile>
+                            <toDir>src/main/resources/schema/odf1.1</toDir>
+                          </configuration>
+                    </execution>
+                    <execution>
+                          <id>download-odf-schema-v1.1</id>
+                          <phase>validate</phase>
+                          <goals>
+                            <goal>download-single</goal>
+                          </goals>
+                          <configuration>
+                            <url>dav:http://docs.oasis-open.org/office/v1.1</url>
+                            <fromFile>OS/OpenDocument-schema-v1.1.rng</fromFile>
+                            <toDir>src/main/resources/schema/odf1.1</toDir>
+                          </configuration>
+                    </execution>
+                    <execution>
+                          <id>download-odf-strict-schema-v1.1</id>
+                          <phase>validate</phase>
+                          <goals>
+                            <goal>download-single</goal>
+                          </goals>
+                          <configuration>
+                            <url>dav:http://docs.oasis-open.org/office/v1.1</url>
+                            <fromFile>OS/OpenDocument-strict-schema-v1.1.rng</fromFile>
+                            <toDir>src/main/resources/schema/odf1.1</toDir>
+                          </configuration>
+                    </execution>
+                    <execution>
+                          <id>download-odf-manifest-schema-v1.0</id>
+                          <phase>validate</phase>
+                          <goals>
+                            <goal>download-single</goal>
+                          </goals>
+                          <configuration>
+                            <url>dav:http://oasis-open.org/committees/download.php/12570</url>
+                            <fromFile>OpenDocument-manifest-schema-v1.0-os.rng</fromFile>
+                            <toDir>src/main/resources/schema/odf1.0</toDir>
+                          </configuration>
+                    </execution>
+                    <execution>
+                          <id>download-odf-schema-v1.0</id>
+                          <phase>validate</phase>
+                          <goals>
+                            <goal>download-single</goal>
+                          </goals>
+                          <configuration>
+                            <url>dav:http://www.oasis-open.org/committees/download.php/12571</url>
+                            <fromFile>OpenDocument-schema-v1.0-os.rng</fromFile>
+                            <toDir>src/main/resources/schema/odf1.0</toDir>
+                          </configuration>
+                    </execution>
+                    <execution>
+                          <id>download-odf-strict-schema-v1.0</id>
+                          <phase>validate</phase>
+                          <goals>
+                            <goal>download-single</goal>
+                          </goals>
+                          <configuration>
+                            <url>dav:http://www.oasis-open.org/committees/download.php/12569</url>
+                            <fromFile>OpenDocument-strict-schema-v1.0-os.rng</fromFile>
+                            <toDir>src/main/resources/schema/odf1.0</toDir>
+                          </configuration>
+                    </execution>
+                    <execution>
+                          <id>download-mathml-schema-v3.0</id>
+                          <phase>validate</phase>
+                          <goals>
+                            <goal>download-single</goal>
+                          </goals>
+                          <configuration>
+                            <url>dav:http://www.w3.org/Math/RelaxNG</url>
+                            <fromFile>mathml3-relaxng.zip</fromFile>
+                            <toDir>${project.build.directory}/schemas</toDir>
+                          </configuration>
+                    </execution>
+                    <execution>
+                          <id>download-mathml-schema-v2.0</id>
+                          <phase>validate</phase>
+                          <goals>
+                            <goal>download-single</goal>
+                          </goals>
+                          <configuration>
+                            <url>dav:http://www.w3.org/Math/XMLSchema</url>
+                            <fromFile>mathml2.tgz</fromFile>
+                            <toDir>${project.build.directory}/schemas</toDir>
+                          </configuration>
+                    </execution>
+                    <execution>
+                          <id>download-mathml-schema-v1.01</id>
+                          <phase>validate</phase>
+                          <goals>
+                            <goal>download-single</goal>
+                          </goals>
+                          <configuration>
+                            <url>dav:http://www.w3.org/pub/WWW/TR/REC-MathML</url>
+                            <fromFile>mmlents.zip</fromFile>
+                            <toDir>${project.build.directory}/schemas</toDir>
+                          </configuration>
+                      </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>unzip schema packages</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <tasks>
+                                <echo message="unzip odf 1.2 schemas" />
+                                <unzip src="${project.build.directory}/schemas/odf1.2/OpenDocument-v1.2-cos01-schemas.zip" dest="src/main/resources/schema/odf1.2/" />
+                                <echo message="unzip mathml 3.0 schemas" />
+                                <unzip src="${project.build.directory}/schemas/mathml3-relaxng.zip" dest="src/main/resources/schema/" />
+                                <move file="src/main/resources/schema/mathml3" tofile="src/main/resources/schema/mathml3.0"/>                                
+                                <echo message="untar mathml 2.0 schemas" />
+                                <untar src="${project.build.directory}/schemas/mathml2.tgz" dest="src/main/resources/schema/"/>   
+                                <move file="src/main/resources/schema/mathml2" tofile="src/main/resources/schema/mathml2.0"/>                             
+                                <echo message="unzip mathml 1.01 schemas" />
+                                <unzip src="${project.build.directory}/schemas/mmlents.zip" dest="src/main/resources/schema/" />
+                                <move file="src/main/resources/schema/mmlents" tofile="src/main/resources/schema/mathml1.01"/>
+                            </tasks>                       
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>clean schema files</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <tasks>
+                                <echo message="remove schema files" />
+                                <delete>
+                                     <fileset dir="src/main/resources/schema/" excludes="odf*.properties" defaultexcludes="false"/>
+                                </delete>
+                            </tasks>                                
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>          
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <meminitial>512m</meminitial>
+                    <maxmem>1024m</maxmem>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.1</version>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifestEntries>
+                            <version>${project.version}</version>
+                        </manifestEntries>
+                        <manifestSections>
+                            <manifestSection>
+                                <name>odfvalidator</name>
+                                <manifestEntries>
+                                    <ODFDOM-Name>ODFDOM Validator</ODFDOM-Name>
+                                    <ODFDOM-Version>${project.version}</ODFDOM-Version>
+                                    <ODFDOM-Website>http://incubator.apache.org/odftoolkit/conformance/ODFValidator.html</ODFDOM-Website>
+                                    <ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
+                                    <ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
+                                </manifestEntries>
+                            </manifestSection>
+                        </manifestSections>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <!-- Workaround for http://jira.codehaus.org/browse/MGPG-9 -->
+                    <mavenExecutorId>forked-path</mavenExecutorId>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <!-- Explizit version required for fix on systemPropertyVariables -->
+                <version>2.6</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <odfdom.version>${project.version}</odfdom.version>
+                        <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
+                        <org.odftoolkit.odfdom.validation>org.odftoolkit.odfdom.pkg.DefaultErrorHandler</org.odftoolkit.odfdom.validation>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>single</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
@@ -328,282 +328,282 @@
                     </excludes>
                 </configuration>
             </plugin>
-		</plugins>
-	</build>
-	<reporting>
-		<plugins>
-			<!-- Code Coverage Testing generated by Cobertura -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<instrumentation>
-						<excludes>
-							<exclude>org/odftoolkit/**/*Test.class</exclude>
-						</excludes>
-					</instrumentation>
-				</configuration>
-			</plugin>
-			
-			<!-- Reporting integration test results -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.5</version>
-				<reportSets>
-					<reportSet>
-						<id>integration-tests</id>
-						<reports>
-							<report>report-only</report>
-						</reports>
-						<configuration>
-							<outputName>failsafe-report</outputName>
-						</configuration>
-					</reportSet>
-				</reportSets>
-			</plugin>
-		</plugins>
-	</reporting>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <!-- Code Coverage Testing generated by Cobertura -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <instrumentation>
+                        <excludes>
+                            <exclude>org/odftoolkit/**/*Test.class</exclude>
+                        </excludes>
+                    </instrumentation>
+                </configuration>
+            </plugin>
+            
+            <!-- Reporting integration test results -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.5</version>
+                <reportSets>
+                    <reportSet>
+                        <id>integration-tests</id>
+                        <reports>
+                            <report>report-only</report>
+                        </reports>
+                        <configuration>
+                            <outputName>failsafe-report</outputName>
+                        </configuration>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
 
-	<!-- More Project Information -->
-	<name>ODF Validator</name>
-	<description>
-		ODF Validator is a tool that validates OpenDocument files and checks them for certain conformance criteria.
-	</description>
-	<url>http://incubator.apache.org/odftoolkit/conformance/ODFValidator.html</url>
-	<inceptionYear>2008</inceptionYear>
-	<licenses>
-		<license>
-			<name>Apache 2</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-		</license>
-	</licenses>
-	<organization>
-    	<name>The Apache Software Foundation</name>
-    	<url>http://www.apache.org/</url>
-	</organization>
-	<developers>
-		<developer>
-			<id>svanteschubert</id>
-			<name>Svante</name>
-			<email>svanteschubert AT apache.org</email>
-			<url>http://odftoolkit.org/people/7-Svante-Schubert</url>
-			<roles>
-				<role>architect</role>
-				<role>developer</role>
-			</roles>
-			<timezone>+1</timezone>
-			<properties>
-				<picUrl>http://asset-1.odftoolkit.org/attachments/images/person/SvanteSchubert-2_small.jpg</picUrl>
-			</properties>
-		</developer>
-		<developer>
-			<id>devinhan</id>
-			<name>Han Biao</name>
-			<email>devinhan AT apache.org</email>
-			<url>http://odftoolkit.org/people/748-Devin</url>
-			<organization>IBM</organization>
-			<organizationUrl>http://www.ibm.com/</organizationUrl>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+8</timezone>
-		</developer>
-		<developer>
-			<id>daisyguo</id>
-			<name>Ying Chun Guo</name>
-			<email>daisyguo AT apache.org</email>
-			<url>http://odftoolkit.org/people/274-Ying-Chun-Guo</url>
-			<organization>IBM</organization>
-			<organizationUrl>http://www.ibm.com/</organizationUrl>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+8</timezone>
-			<properties>
-				<picUrl>http://asset-2.odftoolkit.org/attachments/images/person/Daisy.jpg</picUrl>
-			</properties>
-		</developer>
-		<developer>
-			<id>FrankMeies</id>
-			<name>Frank</name>
-			<email>FrankMeies AT odftoolkit.org</email>
-			<url>http://odftoolkit.org/people/332-FrankMeies</url>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+1</timezone>
-			<properties>
-				<picUrl>http://asset-1.odftoolkit.org/attachments/images/person/FrankMeies.jpg</picUrl>
-			</properties>
-		</developer>
-		<developer>
-			<id>lars_behrmann</id>
-			<name>Lars</name>
-			<email>lars_behrmann AT odftoolkit.org</email>
-			<url>http://odftoolkit.org/people/6-Lars-Behrmann</url>
-			<roles>			
-				<role>developer</role>
-			</roles>
-			<timezone>+1</timezone>
-			<properties>
-				<picUrl>http://asset-2.odftoolkit.org/attachments/images/person/lars_behrmann_small.png</picUrl>
-			</properties>
-		</developer>
-		<developer>
-			<id>steffeng</id>
-			<name>Steffen</name>
-			<email>steffeng AT odftoolkit.org</email>
-			<url>http://odftoolkit.org/people/418-steffeng</url>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+1</timezone>
-		</developer>
-		<developer>
-			<id>hans-peter</id>
-			<name>Hans-Peter</name>
-			<email>hans-peter AT odftoolkit.org</email>
-			<url>http://odftoolkit.org/people/463-hans-peter</url>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+1</timezone>
-		</developer>
-		<developer>
-			<id>bei</id>
-			<name>Bernd</name>
-			<email>bei AT odftoolkit.org</email>
-			<url>http://odftoolkit.org/people/16-Bernd-Eilers</url>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+1</timezone>
-			<properties>
-				<picUrl>http://asset-0.odftoolkit.org/attachments/images/person/bei.JPG</picUrl>
-			</properties>
-		</developer>
-		<developer>
-			<id>mst</id>
-			<name>Michael</name>
-			<email>mst AT odftoolkit.org</email>
-			<url>http://odftoolkit.org/people/768-Michael-Stahl</url>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+1</timezone>
-		</developer>
-		<developer>
-			<id>clippka</id>
-			<name>Christian</name>
-			<email>clippka AT odftoolkit.org</email>
-			<url>http://odftoolkit.org/people/259-clippka</url>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+1</timezone>
-		</developer>
-	</developers>
+    <!-- More Project Information -->
+    <name>ODF Validator</name>
+    <description>
+        ODF Validator is a tool that validates OpenDocument files and checks them for certain conformance criteria.
+    </description>
+    <url>http://incubator.apache.org/odftoolkit/conformance/ODFValidator.html</url>
+    <inceptionYear>2008</inceptionYear>
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <organization>
+        <name>The Apache Software Foundation</name>
+        <url>http://www.apache.org/</url>
+    </organization>
+    <developers>
+        <developer>
+            <id>svanteschubert</id>
+            <name>Svante</name>
+            <email>svanteschubert AT apache.org</email>
+            <url>http://odftoolkit.org/people/7-Svante-Schubert</url>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+            <properties>
+                <picUrl>http://asset-1.odftoolkit.org/attachments/images/person/SvanteSchubert-2_small.jpg</picUrl>
+            </properties>
+        </developer>
+        <developer>
+            <id>devinhan</id>
+            <name>Han Biao</name>
+            <email>devinhan AT apache.org</email>
+            <url>http://odftoolkit.org/people/748-Devin</url>
+            <organization>IBM</organization>
+            <organizationUrl>http://www.ibm.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <id>daisyguo</id>
+            <name>Ying Chun Guo</name>
+            <email>daisyguo AT apache.org</email>
+            <url>http://odftoolkit.org/people/274-Ying-Chun-Guo</url>
+            <organization>IBM</organization>
+            <organizationUrl>http://www.ibm.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+            <properties>
+                <picUrl>http://asset-2.odftoolkit.org/attachments/images/person/Daisy.jpg</picUrl>
+            </properties>
+        </developer>
+        <developer>
+            <id>FrankMeies</id>
+            <name>Frank</name>
+            <email>FrankMeies AT odftoolkit.org</email>
+            <url>http://odftoolkit.org/people/332-FrankMeies</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+            <properties>
+                <picUrl>http://asset-1.odftoolkit.org/attachments/images/person/FrankMeies.jpg</picUrl>
+            </properties>
+        </developer>
+        <developer>
+            <id>lars_behrmann</id>
+            <name>Lars</name>
+            <email>lars_behrmann AT odftoolkit.org</email>
+            <url>http://odftoolkit.org/people/6-Lars-Behrmann</url>
+            <roles>            
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+            <properties>
+                <picUrl>http://asset-2.odftoolkit.org/attachments/images/person/lars_behrmann_small.png</picUrl>
+            </properties>
+        </developer>
+        <developer>
+            <id>steffeng</id>
+            <name>Steffen</name>
+            <email>steffeng AT odftoolkit.org</email>
+            <url>http://odftoolkit.org/people/418-steffeng</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>hans-peter</id>
+            <name>Hans-Peter</name>
+            <email>hans-peter AT odftoolkit.org</email>
+            <url>http://odftoolkit.org/people/463-hans-peter</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>bei</id>
+            <name>Bernd</name>
+            <email>bei AT odftoolkit.org</email>
+            <url>http://odftoolkit.org/people/16-Bernd-Eilers</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+            <properties>
+                <picUrl>http://asset-0.odftoolkit.org/attachments/images/person/bei.JPG</picUrl>
+            </properties>
+        </developer>
+        <developer>
+            <id>mst</id>
+            <name>Michael</name>
+            <email>mst AT odftoolkit.org</email>
+            <url>http://odftoolkit.org/people/768-Michael-Stahl</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>clippka</id>
+            <name>Christian</name>
+            <email>clippka AT odftoolkit.org</email>
+            <url>http://odftoolkit.org/people/259-clippka</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
 
-	<!-- Environment Settings -->
-	<issueManagement>
+    <!-- Environment Settings -->
+    <issueManagement>
         <system>JIRA</system>
         <url>https://issues.apache.org/jira/browse/ODFTOOLKIT</url>
     </issueManagement>
-	<mailingLists>
-		<mailingList>
-			<name>User List</name>
-			<post>odf-users@incubator.apache.org</post>
-			<subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
-			<unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
-			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
-		</mailingList>
-		<mailingList>
-			<name>Developer List</name>
-			<post>odf-dev@incubator.apache.org</post>
-			<subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
-			<unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
-			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
-		</mailingList>
-		<mailingList>
-			<name>Commits</name>
-			<subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
-			<unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
-			<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
-		</mailingList>
-	</mailingLists>
+    <mailingLists>
+        <mailingList>
+            <name>User List</name>
+            <post>odf-users@incubator.apache.org</post>
+            <subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
+            <unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
+        </mailingList>
+        <mailingList>
+            <name>Developer List</name>
+            <post>odf-dev@incubator.apache.org</post>
+            <subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
+            <unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
+        </mailingList>
+        <mailingList>
+            <name>Commits</name>
+            <subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
+            <unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
+        </mailingList>
+    </mailingLists>
     <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/validator</connection>
         <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/validator</developerConnection>
         <url>http://svn.apache.org/viewvc/incubator/odf/trunk/validator</url>
     </scm>
-	<!-- Upload of JAVA DOC for SNAPSHOOTs
-	<distributionManagement>
-		<site>
-			<id>odfdom</id>
-			<name>ODFDOM Java Toolkit Project</name>
-			<url>dav:https://odftoolkit.org/website/odfdom/${project.version}</url>
-		</site>
-	</distributionManagement> -->
-	<profiles>
-		<profile>
-			<id>integration-test</id>
-			<activation>
-				<property>
-					<name>integration-test</name>
-				</property>
-			</activation>
-			<build>
-				<defaultGoal>verify</defaultGoal>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-failsafe-plugin</artifactId>
-						<version>2.5</version>
-						<executions>
-							<execution>
-								<id>failsafe-it</id>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>integration-test</goal>
-									<goal>verify</goal>
-								</goals>
-								<configuration>
-									<classesDirectory>${basedir}/target/odfdom.jar</classesDirectory>
-									<systemPropertyVariables>
-										<testresourcefolder>performance</testresourcefolder>
-										<executetimes>1</executetimes>
-										<testflag>test</testflag>
-									</systemPropertyVariables>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<!-- Explizit version required for fix on systemPropertyVariables -->
-						<version>2.6</version>
-						<configuration>
-							<systemPropertyVariables>
-								<odfdom.version>${project.version}</odfdom.version>
-								<odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
-								<org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
-							</systemPropertyVariables>
-							<skip>true</skip>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
+    <!-- Upload of JAVA DOC for SNAPSHOOTs
+    <distributionManagement>
+        <site>
+            <id>odfdom</id>
+            <name>ODFDOM Java Toolkit Project</name>
+            <url>dav:https://odftoolkit.org/website/odfdom/${project.version}</url>
+        </site>
+    </distributionManagement> -->
+    <profiles>
+        <profile>
+            <id>integration-test</id>
+            <activation>
+                <property>
+                    <name>integration-test</name>
+                </property>
+            </activation>
+            <build>
+                <defaultGoal>verify</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.5</version>
+                        <executions>
+                            <execution>
+                                <id>failsafe-it</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                                <configuration>
+                                    <classesDirectory>${basedir}/target/odfdom.jar</classesDirectory>
+                                    <systemPropertyVariables>
+                                        <testresourcefolder>performance</testresourcefolder>
+                                        <executetimes>1</executetimes>
+                                        <testflag>test</testflag>
+                                    </systemPropertyVariables>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <!-- Explizit version required for fix on systemPropertyVariables -->
+                        <version>2.6</version>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <odfdom.version>${project.version}</odfdom.version>
+                                <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
+                                <org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
+                            </systemPropertyVariables>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     <!-- Profile for deploying to the Sonatype repository, which
          requires GPG signatures 
-		 see
-		 https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
-		 https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
-		 https://issues.sonatype.org/browse/OSSRH-960
-		 -->
+         see
+         https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+         https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+         https://issues.sonatype.org/browse/OSSRH-960
+         -->
         <profile>
             <id>release-sign-artifacts</id>
             <activation>
@@ -630,13 +630,13 @@
                     </plugin>
                 </plugins>
             </build><!--
-			<distributionManagement>
-				<site>
-					<id>odfvalidator</id>
-					<name>ODF Toolkit Project</name>
-					<url>dav:https://odftoolkit.org/website/odfdom/${project.version}/odfdom</url>
-				</site>
-			</distributionManagement>-->
-		</profile>
-	</profiles>
+            <distributionManagement>
+                <site>
+                    <id>odfvalidator</id>
+                    <name>ODF Toolkit Project</name>
+                    <url>dav:https://odftoolkit.org/website/odfdom/${project.version}/odfdom</url>
+                </site>
+            </distributionManagement>-->
+        </profile>
+    </profiles>
 </project>
