@@ -28,10 +28,6 @@
     <fileSet>
       <directory>${project.basedir}/target/${project.version}-bin/</directory>
       <outputDirectory>/</outputDirectory>
-      <excludes>
-        <exclude>*.md5</exclude>
-        <exclude>*.sha</exclude>
-      </excludes>
     </fileSet>
   </fileSets>
 </assembly>

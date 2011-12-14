@@ -83,7 +83,7 @@
 		<module>validator</module>
 		<module>simple</module>
 	</modules>
-	
+	 
 	<profiles>
 		<profile>
 			<id>pedantic</id>
@@ -107,7 +107,7 @@
 		<profile>
 			<id>apache-release</id>
 			<properties>
-				<username>devinhan</username>
+				<username>${user.name}</username>
 			</properties>
 			<build>
 				<plugins>
@@ -131,7 +131,7 @@
 								<goals>
 									<goal>single</goal>
 								</goals>
-								<phase>install</phase>
+								<phase>package</phase>
 								<configuration>
 									<descriptors>
 										<descriptor>assemble/doc.xml</descriptor>
@@ -143,7 +143,7 @@
 								<goals>
 									<goal>single</goal>
 								</goals>
-								<phase>install</phase>
+								<phase>package</phase>
 								<configuration>
 									<descriptors>
 										<descriptor>assemble/bin.xml</descriptor>
@@ -156,10 +156,11 @@
 						<artifactId>maven-antrun-plugin</artifactId>
 						<executions>
 							<execution>
+								<id>package</id>
 								<goals>
 									<goal>run</goal>
 								</goals>
-								<phase>package</phase>
+								<phase>prepare-package</phase>
                 				<configuration>
                 					<tasks>
                     					<mkdir dir="${basedir}/target/${project.version}-bin" />
@@ -184,23 +185,30 @@
         										<include name="KEYS" />               					
                         						<include name="**/target/*-javadoc.jar" />
         									</fileset>
-                    					</copy>                    					
+                    					</copy>
+                    					</tasks>                 				
+								</configuration>
+							</execution>
+							<execution>
+								<id>checksum</id>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<phase>install</phase>
+                				<configuration>
+                					<tasks>                   					
                     					<checksum algorithm="MD5" fileext=".md5">
-                      						<fileset dir="${basedir}/target/${project.version}-bin">
+                      						<fileset dir="${basedir}/target">
                         						<include name="*.zip" />
-                        						<include name="*.?ar" />
-                      						</fileset>
-                      						<fileset dir="${basedir}/target/${project.version}-docs">
-                        						<include name="*.jar" />
+                        						<include name="*.tar.gz" />
+                        						<include name="*.tar.bz2" />
                       						</fileset>
                     					</checksum>
                     					<checksum algorithm="SHA1" fileext=".sha">
-                      						<fileset dir="${basedir}/target/${project.version}-bin">
+                      						<fileset dir="${basedir}/target">
                         						<include name="*.zip" />
-                        						<include name="*.?ar" />
-                      						</fileset>
-                      						<fileset dir="${basedir}/target/${project.version}-docs">
-                        						<include name="*.jar" />
+                        						<include name="*.tar.gz" />
+                        						<include name="*.tar.bz2" />
                       						</fileset>
                     					</checksum>
                     					<checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA1" property="checksum" />								

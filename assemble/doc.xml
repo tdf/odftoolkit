@@ -29,10 +29,6 @@
       <directory>${project.basedir}/target/${project.version}-docs</directory>
       <outputDirectory>/</outputDirectory>
       <useDefaultExcludes>true</useDefaultExcludes>
-      <excludes>
-        <exclude>*.md5</exclude>
-        <exclude>*.sha</exclude>
-      </excludes>
     </fileSet>
   </fileSets>
 </assembly>
