@@ -315,9 +315,37 @@ public class ODFXSLTRunner {
 
         if( aTransformerFactoryClassName!=null )
             aLogger.logInfo( "Requesting transformer factory class: " + aTransformerFactoryClassName );
-        TransformerFactory aFactory =
-                aTransformerFactoryClassName==null ? TransformerFactory.newInstance()
-                    : TransformerFactory.newInstance( aTransformerFactoryClassName, null );
+		TransformerFactory aFactory = null;
+		if(aTransformerFactoryClassName==null)
+		{
+			aFactory = TransformerFactory.newInstance();
+		}
+		else
+		{
+		  try
+		  {
+			ClassLoader cl = Thread.currentThread().getContextClassLoader();
+            if (cl == null)
+                cl = ClassLoader.getSystemClassLoader();
+            Class classInstance = cl.loadClass(aTransformerFactoryClassName);
+			aFactory = (TransformerFactory)classInstance.newInstance();
+		  }
+		  catch( ClassNotFoundException ce )
+          {
+            aLogger.logFatalError(ce.getMessage());
+            return true;            
+          }
+		  catch( InstantiationException ie )
+          {
+            aLogger.logFatalError(ie.getMessage());
+            return true;            
+          }
+		  catch( IllegalAccessException ile )
+          {
+            aLogger.logFatalError(ile.getMessage());
+            return true;            
+          }
+		}
         ErrorListener aErrorListener = new TransformerErrorListener( aLogger );
         aLogger.logInfo( "Using transformer factory class: " + aFactory.getClass().getName() );
         aFactory.setErrorListener(aErrorListener);

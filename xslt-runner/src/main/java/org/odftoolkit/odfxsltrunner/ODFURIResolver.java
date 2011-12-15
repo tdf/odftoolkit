@@ -63,7 +63,7 @@ class ODFURIResolver implements URIResolver
         if( aBase.startsWith(m_aPackageBase) &&
             !aHRef.contains(":") && !aHRef.startsWith("/") )
         {
-            if( aHRef.isEmpty())
+            if( aHRef.length()==0)
             {
                 try
                 {
