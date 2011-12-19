@@ -92,6 +92,11 @@
                     <plugin>
                         <groupId>org.apache.rat</groupId>
                         <artifactId>apache-rat-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>CHANGES.txt</exclude>
+                            </excludes>
+                        </configuration>
                         <executions>
                             <execution>
                                 <phase>verify</phase>
