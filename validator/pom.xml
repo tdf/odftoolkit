@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <groupId>org.apache.odftoolkit</groupId>
-        <artifactId>odftoolkit</artifactId>
-        <version>0.5-incubating</version>
+      <groupId>org.apache.odftoolkit</groupId>
+      <artifactId>odftoolkit</artifactId>
+      <version>0.5-incubating</version>
     </parent>
-
     <artifactId>odfvalidator</artifactId>
     <version>1.1.5-incubating</version>
     <packaging>war</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>odfdom-java</artifactId>
-            <version>0.8.8-incubating</version>
-        </dependency>    
+           <groupId>${project.groupId}</groupId>
+           <artifactId>odfdom-java</artifactId>
+           <version>0.8.8-incubating</version>
+        </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
@@ -323,8 +321,8 @@
                 <artifactId>apache-rat-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>src/main/resources/META-INF/services/org.iso_relax.verifier.VerifierFactoryLoader</exclude>
-                        <exclude>src/test/resources/testInvalidPkg3.odt</exclude>
+                        <exclude>src/main/resources/**</exclude>
+                        <exclude>src/test/resources/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
