@@ -20,6 +20,7 @@ Bugs fixed list:
 [9] #ODFTOOLKIT-293# Submit Apache Licence info automatically added code to SVN.[Developer:Devin]
 [10] #ODFTOOLKIT-295# Exit condition of Length.parseUnit in ODFDOM is wrong.[Developer:Oliver Rau;Reviewer:Devin]
 [11] #ODFTOOLKIT-297# Test: testGetLanguage(org.odftoolkit.simple.meta.OfficeMetaTest) failed when the platform language is not 'Chinese'. [Developer:Devin]
+[12] #ODFTOOLKIT-298# XLST-Runner and Validator aren't compatible with Java 5. [Developer:Robert Wire,Devin] 
 
 ODF Toolkit relies on the current set of major dependencies (generated using mvn dependency:tree from the top-level odf toolkit src dir):
 
