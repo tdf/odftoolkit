@@ -14,7 +14,7 @@
         <dependency>
            <groupId>${project.groupId}</groupId>
            <artifactId>odfdom-java</artifactId>
-           <version>0.8.8-incubating</version>
+           <version>0.8.8-incubating-rc2</version>
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -64,7 +64,7 @@
                   <artifactId>wagon-maven-plugin</artifactId>
                   <version>1.0-beta-3</version>
                   <executions>
-                      <execution>
+                    <execution>
                           <id>download-odf-schema-v1.2</id>
                           <phase>validate</phase>
                           <goals>
@@ -73,7 +73,7 @@
                           <configuration>
                             <url>dav:http://docs.oasis-open.org/office/v1.2</url>
                             <fromFile>cos01/OpenDocument-v1.2-cos01-schemas.zip</fromFile>
-                            <toDir>${project.build.directory}/schemas/odf1.2</toDir>
+                            <toDir>${project.build.directory}/schemas</toDir>
                           </configuration>
                     </execution>
                     <execution>
@@ -85,7 +85,7 @@
                           <configuration>
                             <url>dav:http://docs.oasis-open.org/office/v1.1</url>
                             <fromFile>OS/OpenDocument-manifest-schema-v1.1.rng</fromFile>
-                            <toDir>src/main/resources/schema/odf1.1</toDir>
+                            <toDir>${project.build.directory}/classes/schema/odf1.1</toDir>
                           </configuration>
                     </execution>
                     <execution>
@@ -97,7 +97,7 @@
                           <configuration>
                             <url>dav:http://docs.oasis-open.org/office/v1.1</url>
                             <fromFile>OS/OpenDocument-schema-v1.1.rng</fromFile>
-                            <toDir>src/main/resources/schema/odf1.1</toDir>
+                            <toDir>${project.build.directory}/classes/schema/odf1.1</toDir>
                           </configuration>
                     </execution>
                     <execution>
@@ -109,7 +109,7 @@
                           <configuration>
                             <url>dav:http://docs.oasis-open.org/office/v1.1</url>
                             <fromFile>OS/OpenDocument-strict-schema-v1.1.rng</fromFile>
-                            <toDir>src/main/resources/schema/odf1.1</toDir>
+                            <toDir>${project.build.directory}/classes/schema/odf1.1</toDir>
                           </configuration>
                     </execution>
                     <execution>
@@ -121,7 +121,7 @@
                           <configuration>
                             <url>dav:http://oasis-open.org/committees/download.php/12570</url>
                             <fromFile>OpenDocument-manifest-schema-v1.0-os.rng</fromFile>
-                            <toDir>src/main/resources/schema/odf1.0</toDir>
+                            <toDir>${project.build.directory}/classes/schema/odf1.0</toDir>
                           </configuration>
                     </execution>
                     <execution>
@@ -133,7 +133,7 @@
                           <configuration>
                             <url>dav:http://www.oasis-open.org/committees/download.php/12571</url>
                             <fromFile>OpenDocument-schema-v1.0-os.rng</fromFile>
-                            <toDir>src/main/resources/schema/odf1.0</toDir>
+                            <toDir>${project.build.directory}/classes/schema/odf1.0</toDir>
                           </configuration>
                     </execution>
                     <execution>
@@ -145,7 +145,7 @@
                           <configuration>
                             <url>dav:http://www.oasis-open.org/committees/download.php/12569</url>
                             <fromFile>OpenDocument-strict-schema-v1.0-os.rng</fromFile>
-                            <toDir>src/main/resources/schema/odf1.0</toDir>
+                            <toDir>${project.build.directory}/classes/schema/odf1.0</toDir>
                           </configuration>
                     </execution>
                     <execution>
@@ -197,37 +197,23 @@
                         <configuration>
                             <tasks>
                                 <echo message="unzip odf 1.2 schemas" />
-                                <unzip src="${project.build.directory}/schemas/odf1.2/OpenDocument-v1.2-cos01-schemas.zip" dest="src/main/resources/schema/odf1.2/" />
+                                <unzip src="${project.build.directory}/schemas/OpenDocument-v1.2-cos01-schemas.zip" dest="${project.build.directory}/classes/schema/odf1.2/" />
                                 <echo message="unzip mathml 3.0 schemas" />
-                                <unzip src="${project.build.directory}/schemas/mathml3-relaxng.zip" dest="src/main/resources/schema/" />
-                                <move file="src/main/resources/schema/mathml3" tofile="src/main/resources/schema/mathml3.0"/>                                
+                                <unzip src="${project.build.directory}/schemas/mathml3-relaxng.zip" dest="${project.build.directory}/schemas/" />
+                                <move file="${project.build.directory}/schemas/mathml3" tofile="${project.build.directory}/classes/schema/mathml3.0"/>                                
                                 <echo message="untar mathml 2.0 schemas" />
-                                <untar src="${project.build.directory}/schemas/mathml2.tgz" dest="src/main/resources/schema/"/>   
-                                <move file="src/main/resources/schema/mathml2" tofile="src/main/resources/schema/mathml2.0"/>                             
+                                <untar src="${project.build.directory}/schemas/mathml2.tgz" dest="${project.build.directory}/schemas/"/>   
+                                <move file="${project.build.directory}/schemas/mathml2" tofile="${project.build.directory}/classes/schema/mathml2.0"/>                             
                                 <echo message="unzip mathml 1.01 schemas" />
-                                <unzip src="${project.build.directory}/schemas/mmlents.zip" dest="src/main/resources/schema/" />
-                                <move file="src/main/resources/schema/mmlents" tofile="src/main/resources/schema/mathml1.01"/>
+                                <unzip src="${project.build.directory}/schemas/mmlents.zip" dest="${project.build.directory}/schemas/" />
+                                <move file="${project.build.directory}/schemas/mmlents" tofile="${project.build.directory}/classes/schema/mathml1.01"/>
                             </tasks>                       
                         </configuration>
                         <goals>
                             <goal>run</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>clean schema files</id>
-                        <phase>clean</phase>
-                        <configuration>
-                            <tasks>
-                                <echo message="remove schema files" />
-                                <delete>
-                                     <fileset dir="src/main/resources/schema/" excludes="odf*.properties" defaultexcludes="false"/>
-                                </delete>
-                            </tasks>                                
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
+                    
                 </executions>
             </plugin>          
             <plugin>
