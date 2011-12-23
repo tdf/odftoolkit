@@ -24,11 +24,11 @@
     <parent>
         <groupId>org.apache.odftoolkit</groupId>
         <artifactId>odftoolkit</artifactId>
-        <version>0.5-incubating</version>
+        <version>0.5-incubating-SNAPSHOT</version>
     </parent>
 
     <artifactId>taglets</artifactId>
-    <version>0.8.8-incubating</version>
+    <version>0.8.8-incubating-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- Build Settings -->
