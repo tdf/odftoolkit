@@ -30,7 +30,7 @@
 
     <groupId>org.apache.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.5-incubating</version>
+    <version>0.6-incubating-SNAPSHOT</version>
 
     <name>Apache ODF Toolkit</name>
     <url>http://incubator.apache.org/odftoolkit/</url>
@@ -40,9 +40,9 @@
     </organization>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.5-incubating</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.5-incubating</developerConnection>
-        <url>http://svn.apache.org/viewvc/incubator/odf/tags/odftoolkit-0.5-incubating</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/trunk</url>
     </scm>
 
     <issueManagement>
