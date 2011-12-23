@@ -4,17 +4,17 @@
     <parent>
       <groupId>org.apache.odftoolkit</groupId>
       <artifactId>odftoolkit</artifactId>
-      <version>0.5-incubating-SNAPSHOT</version>
+      <version>0.5-incubating</version>
     </parent>
     <artifactId>odfvalidator</artifactId>
-    <version>1.1.5-incubating-SNAPSHOT</version>
+    <version>1.1.5-incubating</version>
     <packaging>war</packaging>
 
     <dependencies>
         <dependency>
            <groupId>${project.groupId}</groupId>
            <artifactId>odfdom-java</artifactId>
-           <version>0.8.8-incubating-SNAPSHOT</version>
+           <version>0.8.8-incubating</version>
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -200,13 +200,13 @@
                                 <unzip src="${project.build.directory}/schemas/OpenDocument-v1.2-cos01-schemas.zip" dest="${project.build.directory}/classes/schema/odf1.2/" />
                                 <echo message="unzip mathml 3.0 schemas" />
                                 <unzip src="${project.build.directory}/schemas/mathml3-relaxng.zip" dest="${project.build.directory}/schemas/" />
-                                <move file="${project.build.directory}/schemas/mathml3" tofile="${project.build.directory}/classes/schema/mathml3.0"/>                                
+                                <move file="${project.build.directory}/schemas/mathml3" tofile="${project.build.directory}/classes/schema/mathml3.0" />                                
                                 <echo message="untar mathml 2.0 schemas" />
-                                <untar src="${project.build.directory}/schemas/mathml2.tgz" dest="${project.build.directory}/schemas/"/>   
-                                <move file="${project.build.directory}/schemas/mathml2" tofile="${project.build.directory}/classes/schema/mathml2.0"/>                             
+                                <untar src="${project.build.directory}/schemas/mathml2.tgz" dest="${project.build.directory}/schemas/" />   
+                                <move file="${project.build.directory}/schemas/mathml2" tofile="${project.build.directory}/classes/schema/mathml2.0" />                             
                                 <echo message="unzip mathml 1.01 schemas" />
                                 <unzip src="${project.build.directory}/schemas/mmlents.zip" dest="${project.build.directory}/schemas/" />
-                                <move file="${project.build.directory}/schemas/mmlents" tofile="${project.build.directory}/classes/schema/mathml1.01"/>
+                                <move file="${project.build.directory}/schemas/mmlents" tofile="${project.build.directory}/classes/schema/mathml1.01" />
                             </tasks>                       
                         </configuration>
                         <goals>
@@ -518,9 +518,9 @@
         </mailingList>
     </mailingLists>
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/validator</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/validator</developerConnection>
-        <url>http://svn.apache.org/viewvc/incubator/odf/trunk/validator</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.5-incubating/validator</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.5-incubating/validator</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/tags/odftoolkit-0.5-incubating/validator</url>
     </scm>
     <!-- Upload of JAVA DOC for SNAPSHOOTs
     <distributionManagement>

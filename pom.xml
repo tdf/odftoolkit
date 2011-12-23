@@ -19,8 +19,7 @@
   under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <parent>
@@ -31,7 +30,7 @@
 
     <groupId>org.apache.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.5-incubating-SNAPSHOT</version>
+    <version>0.5-incubating</version>
 
     <name>Apache ODF Toolkit</name>
     <url>http://incubator.apache.org/odftoolkit/</url>
@@ -41,9 +40,9 @@
     </organization>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk</developerConnection>
-        <url>http://svn.apache.org/viewvc/incubator/odf/trunk</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.5-incubating</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.5-incubating</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/tags/odftoolkit-0.5-incubating</url>
     </scm>
 
     <issueManagement>
@@ -183,7 +182,7 @@
                                                 <exclude name="**/target/**-jar-with-dependencies.jar" />
                                               </fileset>
                                         </copy>
-                                        <mkdir dir="${basedir}/target/${project.version}-docs"/>
+                                        <mkdir dir="${basedir}/target/${project.version}-docs" />
                                         <copy todir="${basedir}/target/${project.version}-docs" flatten="true">  
                                             <fileset dir="${basedir}">   
                                                 <include name="*.txt" />
@@ -239,7 +238,7 @@
                                             [ ] +1 Release this package as Apache ODF Toolkit ${project.version}
                                             [ ] -1 Do not release this package because...${line.separator}
                                         </echo>
-                                        <echo/>
+                                        <echo />
                                         <echo>
                                             The release candidate has been prepared in:    ${basedir}/target/${project.version}
 
@@ -249,7 +248,7 @@
 
                                             A release vote template has been generated for you:    file://${basedir}/target/vote.txt
                                         </echo>
-                                        <echo/>
+                                        <echo />
                                     </tasks>                                 
                                 </configuration>
                             </execution>
