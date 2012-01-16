@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.apache.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.5-incubating</version>
+    <version>0.6-incubating-SNAPSHOT</version>
   </parent>
 
     <!-- The Basics -->
     <artifactId>schema2template-pom</artifactId>
-    <version>0.8.8-incubating</version>
+    <version>0.8.9-incubating-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -173,9 +173,9 @@
         </mailingList>
     </mailingLists>
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.5-incubating/generator</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.5-incubating/generator</developerConnection>
-        <url>http://svn.apache.org/viewvc/incubator/odf/tags/odftoolkit-0.5-incubating/generator</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/generator</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/generator</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/trunk/generator</url>
     </scm>
 
     <profiles>
