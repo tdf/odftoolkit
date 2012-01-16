@@ -108,7 +108,7 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
+        <!--<profile>
             <id>apache-release</id>
             <properties>
                 <username>${user.name}</username>
@@ -263,7 +263,7 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
+        </profile>-->
     </profiles>
 </project>
 
