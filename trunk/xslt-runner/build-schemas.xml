@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
+
+  Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+
+  Use is subject to license terms.
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  use this file except in compliance with the License. You may obtain a copy
+  of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
+  obtain a copy of the License at http://odftoolkit.org/docs/license.txt
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+-->
+
+<project name="build-schemas" default="default" basedir=".">
+    <description>Prepares ODF schema and specification location properties for use within this project.</description>
+
+    <dirname property="build-schemas.basedir" file="${ant.file.build-schemas}"/>
+    <property file="${build-schemas.basedir}/schema.user.properties" prefix="user"/>
+    <property file="${build-schemas.basedir}/schema.properties"/>
+
+    <target name="-init-schema-props">
+        <!-- Set schema properties from schema.user.properties file if they are not set in private.properties already -->
+        <condition property="opendocument.v12.part1.schema.dir" value="${user.opendocument.v12.part1.schema.dir}">
+            <not>
+                <isset property="opendocument.v12.part1.schema.dir"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.part3.schema.dir" value="${user.opendocument.v12.part3.schema.dir}">
+            <not>
+                <isset property="opendocument.v12.part3.schema.dir"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.part0.spec-source" value="${user.opendocument.v12.part0.spec-source}">
+            <not>
+                <isset property="opendocument.v12.part0.spec-source"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.part1.spec-source" value="${user.opendocument.v12.part1.spec-source}">
+            <not>
+                <isset property="opendocument.v12.part1.spec-source"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.part2.spec-source" value="${user.opendocument.v12.part2.spec-source}">
+            <not>
+                <isset property="opendocument.v12.part2.spec-source"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.part3.spec-source" value="${user.opendocument.v12.part3.spec-source}">
+            <not>
+                <isset property="opendocument.v12.part3.spec-source"/>
+            </not>
+        </condition>
+        <condition property="opendocument.v12.product.dir" value="${user.opendocument.v12.product.dir}">
+            <not>
+                <isset property="opendocument.v12.product.dir"/>
+            </not>
+        </condition>
+
+        <!-- Some basic document names -->
+        <property name="opendocument.v12.schema" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-schema.rng"/>
+        <property name="opendocument.v12.schema.manifest" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-manifest-schema.rng"/>
+        <property name="opendocument.v12.schema.dsig" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-dsig-schema.rng"/>
+        <property name="opendocument.v12.ontology.part1" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-metadata.owl"/>
+        <property name="opendocument.v12.ontology.part3" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-package-metadata.owl"/>
+
+        <property name="opendocument.v12.schema.xref" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-xref-schema.rng"/>
+        <property name="opendocument.v12.schema.dtype" value="OpenDocument-v1.2${opendocument.v12.part1.schema.state}-dtype-schema.rng"/>
+        <property name="opendocument.v12.manifest-schema.xref" value="OpenDocument-v1.2${opendocument.v12.part3.schema.state}-xref-manifest-schema.rng"/>
+    </target>
+
+</project>
+
+
+

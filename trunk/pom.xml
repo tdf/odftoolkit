@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>10</version>
+    </parent>
+
+    <groupId>org.apache.odftoolkit</groupId>
+    <artifactId>odftoolkit</artifactId>
+    <version>0.5-incubating</version>
+
+    <name>Apache ODF Toolkit</name>
+    <url>http://incubator.apache.org/odftoolkit/</url>
+    <organization>
+        <name>The Apache Software Foundation</name>
+        <url>http://www.apache.org/</url>
+    </organization>
+
+    <scm>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.5-incubating</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.5-incubating</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/tags/odftoolkit-0.5-incubating</url>
+    </scm>
+
+    <issueManagement>
+        <system>jira</system>
+        <url>https://issues.apache.org/jira/browse/ODFTOOLKIT</url>
+    </issueManagement>
+
+    <mailingLists>
+        <mailingList>
+            <name>User List</name>
+            <post>odf-users@incubator.apache.org</post>
+            <subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
+            <unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
+        </mailingList>
+        <mailingList>
+            <name>Developer List</name>
+            <post>odf-dev@incubator.apache.org</post>
+            <subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
+            <unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
+        </mailingList>
+        <mailingList>
+            <name>Commits</name>
+            <subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
+            <unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
+        </mailingList>
+    </mailingLists>
+    
+    <modules>
+        <module>taglets</module>
+        <module>generator</module>
+        <module>xslt-runner</module>
+        <module>xslt-runner-task</module>
+        <module>odfdom</module>
+        <module>validator</module>
+        <module>simple</module>
+    </modules>
+     
+    <profiles>
+        <profile>
+            <id>pedantic</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.rat</groupId>
+                        <artifactId>apache-rat-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>CHANGES.txt</exclude>
+                            </excludes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!--<profile>
+            <id>apache-release</id>
+            <properties>
+                <username>${user.name}</username>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>src</id>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <phase>package</phase>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>assemble/src.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>doc</id>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <phase>package</phase>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>assemble/doc.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>            
+                            <execution>
+                                <id>bin</id>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <phase>package</phase>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>assemble/bin.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>                            
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>package</id>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <phase>prepare-package</phase>
+                                <configuration>
+                                    <tasks>
+                                        <mkdir dir="${basedir}/target/${project.version}-bin" />
+                                        <copy todir="${basedir}/target/${project.version}-bin" flatten="true">
+                                              <fileset dir="${basedir}">
+                                                <include name="*.txt" />
+                                                <include name="KEYS" />      
+                                                <include name="odfdom/target/*.jar" />
+                                                <include name="simple/target/*.jar" />
+                                                <include name="validator/target/*.?ar" />
+                                                <include name="xslt-runner/target/*.jar" />
+                                                <include name="xslt-runner-task/target/*.jar" />
+                                                <exclude name="**/target/**-javadoc.jar" />
+                                                <exclude name="**/target/**-sources.jar" />
+                                                <exclude name="**/target/**-jar-with-dependencies.jar" />
+                                              </fileset>
+                                        </copy>
+                                        <mkdir dir="${basedir}/target/${project.version}-docs" />
+                                        <copy todir="${basedir}/target/${project.version}-docs" flatten="true">  
+                                            <fileset dir="${basedir}">   
+                                                <include name="*.txt" />
+                                                <include name="KEYS" />                                   
+                                                <include name="**/target/*-javadoc.jar" />
+                                            </fileset>
+                                        </copy>
+                                        </tasks>                                 
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>checksum</id>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <phase>install</phase>
+                                <configuration>
+                                    <tasks>                                       
+                                        <checksum algorithm="MD5" fileext=".md5">
+                                              <fileset dir="${basedir}/target">
+                                                <include name="*.zip" />
+                                                <include name="*.tar.gz" />
+                                                <include name="*.tar.bz2" />
+                                              </fileset>
+                                        </checksum>
+                                        <checksum algorithm="SHA1" fileext=".sha">
+                                              <fileset dir="${basedir}/target">
+                                                <include name="*.zip" />
+                                                <include name="*.tar.gz" />
+                                                <include name="*.tar.bz2" />
+                                              </fileset>
+                                        </checksum>
+                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA1" property="checksum" />                                
+                                        <echo file="${basedir}/target/vote.txt">
+                                            From: ${username}@apache.org
+                                            To: odf-dev@incubator.apache.org
+                                            Subject: [VOTE] Release Apache ODF Toolkit ${project.version}
+
+                                            A candidate for the ODF Toolkit ${project.version} release is available    at:
+
+                                            http://people.apache.org/~${username}/odftoolkit-release/odftoolkit-${project.version}/
+                                            
+                                            The release candidate is a zip archive of the sources in:
+
+                                            https://svn.apache.org/repos/asf/incubator/odf/tags/${project.version}/
+
+                                            The SHA1 checksum of the archive is ${checksum}.
+
+                                            Please vote on releasing this package as Apache ODF Toolkit ${project.version}.
+                                            The vote is open for the next 72 hours and passes if a majority
+                                            of at least three +1 ODF Toolkit PMC votes are cast.
+
+                                            [ ] +1 Release this package as Apache ODF Toolkit ${project.version}
+                                            [ ] -1 Do not release this package because...${line.separator}
+                                        </echo>
+                                        <echo />
+                                        <echo>
+                                            The release candidate has been prepared in:    ${basedir}/target/${project.version}
+
+                                            Please deploy it to people.apache.org like this:
+
+                                            scp -r ${basedir}/target/${project.version} people.apache.org:public_html/odftoolkit/
+
+                                            A release vote template has been generated for you:    file://${basedir}/target/vote.txt
+                                        </echo>
+                                        <echo />
+                                    </tasks>                                 
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-nodeps</artifactId>
+                                <version>1.8.1</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>-->
+    </profiles>
+</project>
+

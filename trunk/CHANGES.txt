@@ -1,0 +1,145 @@
+Apache ODF Toolkit Change Log
+=============================
+
+Release 0.5 incubating
+
+The most notable changes in ODF Toolkit 0.5 incubating over previous releases in ODF Toolkit Union are:
+ * All of the sub-projects release with an all in one package.
+ * Mark ODFDOM DOC API's as "deprecated", will be replaced by Simple API in future.
+ * Some bugs fixed.
+ 
+Bugs fixed list:
+[1] #ODFTOOLKIT-104# Create new spreadsheet, save it, load it, add a sheet, save it, then load it causes failure. [Developer:Devin]
+[2] #ODFTOOLKIT-133# NullPointerException sometimes happened when parsing a centain kind of XML under IBM JDK.[Reviewer:Devin]
+[3] #ODFTOOLKIT-287# PraragraphProperties should contain methods for margins and text indention.[Developer:Oliver Rau,Devin;Reviewer:Devin]
+[4] #ODFTOOLKIT-288# No null check for lastNode in setTextContent of Span class.[Developer:Oliver Rau,Devin;Reviewer:Devin]
+[5] #ODFTOOLKIT-289# Clean up unnecessary log messages.[Developer:Devin] 
+[6] #ODFTOOLKIT-290# Consolidate build of ODFToolkit sub-projects.[Developer:Yegor Kozlov,Devin;Reviewer:Devin]
+[7] #ODFTOOLKIT-291# Adapt Simple API to the newest ODFDOM trunk.[Developer:Devin]
+[8] #ODFTOOLKIT-292# Mark ODFDOM DOC API's as "deprecated".[Developer:Devin]
+[9] #ODFTOOLKIT-293# Submit Apache Licence info automatically added code to SVN.[Developer:Devin]
+[10] #ODFTOOLKIT-295# Exit condition of Length.parseUnit in ODFDOM is wrong.[Developer:Oliver Rau;Reviewer:Devin]
+[11] #ODFTOOLKIT-297# Test: testGetLanguage(org.odftoolkit.simple.meta.OfficeMetaTest) failed when the platform language is not 'Chinese'. [Developer:Devin]
+[12] #ODFTOOLKIT-298# XLST-Runner and Validator aren't compatible with Java 5. [Developer:Robert Wire,Devin] 
+
+ODF Toolkit relies on the current set of major dependencies (generated using mvn dependency:tree from the top-level odf toolkit src dir):
+
+org.apache.odftoolkit:taglets:jar:0.8.8-incubating
+org.apache.odftoolkit:schema2template:jar:0.8.8-incubating
++- org.apache.velocity:velocity:jar:1.6.4:compile
+|  +- commons-collections:commons-collections:jar:3.2.1:compile
+|  +- commons-lang:commons-lang:jar:2.4:compile
+|  \- oro:oro:jar:2.0.8:compile
++- net.java.dev.msv:msv-core:jar:2009.1:compile
+|  +- com.sun.msv.datatype.xsd:xsdlib:jar:2009.1:compile
+|  +- net.java.dev.msv:msv-testharness:jar:2009.1:compile
+|  |  \- org.apache.ant:ant:jar:1.7.1:compile
+|  |     \- org.apache.ant:ant-launcher:jar:1.7.1:compile
+|  +- xml-resolver:xml-resolver:jar:1.2:compile
+|  +- xerces:xercesImpl:jar:2.9.1:compile
+|  |  \- xml-apis:xml-apis:jar:1.3.04:compile
+|  +- isorelax:isorelax:jar:20030108:compile
+|  \- relaxngDatatype:relaxngDatatype:jar:20020414:compile
+\- junit:junit:jar:4.5:test
+org.apache.odftoolkit:schema2template-maven-plugin:maven-plugin:0.8.8-incubating
++- org.apache.odftoolkit:schema2template:jar:0.8.8-incubating:compile
+|  +- org.apache.velocity:velocity:jar:1.6.4:compile
+|  |  +- commons-collections:commons-collections:jar:3.2.1:compile
+|  |  +- commons-lang:commons-lang:jar:2.4:compile
+|  |  \- oro:oro:jar:2.0.8:compile
+|  \- net.java.dev.msv:msv-core:jar:2009.1:compile
+|     +- com.sun.msv.datatype.xsd:xsdlib:jar:2009.1:compile
+|     +- net.java.dev.msv:msv-testharness:jar:2009.1:compile
+|     |  \- org.apache.ant:ant:jar:1.7.1:compile
+|     |     \- org.apache.ant:ant-launcher:jar:1.7.1:compile
+|     +- xml-resolver:xml-resolver:jar:1.2:compile
+|     +- xerces:xercesImpl:jar:2.9.1:compile
+|     |  \- xml-apis:xml-apis:jar:1.3.04:compile
+|     +- isorelax:isorelax:jar:20030108:compile
+|     \- relaxngDatatype:relaxngDatatype:jar:20020414:compile
++- junit:junit:jar:4.5:test
++- org.apache.maven:maven-plugin-api:jar:2.0.7:provided
++- org.apache.maven:maven-project:jar:2.0.7:provided
+|  +- org.apache.maven:maven-settings:jar:2.0.7:provided
+|  +- org.apache.maven:maven-profile:jar:2.0.7:provided
+|  +- org.apache.maven:maven-model:jar:2.0.7:provided
+|  +- org.apache.maven:maven-artifact-manager:jar:2.0.7:provided
+|  |  +- org.apache.maven:maven-repository-metadata:jar:2.0.7:provided
+|  |  \- org.apache.maven.wagon:wagon-provider-api:jar:1.0-beta-2:provided
+|  +- org.apache.maven:maven-plugin-registry:jar:2.0.7:provided
+|  +- org.codehaus.plexus:plexus-utils:jar:1.4.1:provided
+|  \- org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:provided
+|     \- classworlds:classworlds:jar:1.1-alpha-2:provided
+\- org.apache.maven:maven-artifact:jar:2.0.7:provided
+org.apache.odftoolkit:odfdom-java:jar:0.8.8-incubating
++- org.apache.odftoolkit:taglets:jar:0.8.8-incubating:compile
++- xerces:xercesImpl:jar:2.9.1:compile
+|  \- xml-apis:xml-apis:jar:1.3.04:compile
+\- junit:junit:jar:4.8.1:test
+org.apache.odftoolkit:xslt-runner:jar:1.2.1-incubating
+\- org.apache.odftoolkit:odfdom-java:jar:0.8.8-incubating:compile
+   +- org.apache.odftoolkit:taglets:jar:0.8.8-incubating:compile
+   \- xerces:xercesImpl:jar:2.9.1:compile
+      \- xml-apis:xml-apis:jar:1.3.04:compile
+org.apache.odftoolkit:xslt-runner-task:jar:1.2.1-incubating
++- org.apache.odftoolkit:xslt-runner:jar:1.2.1-incubating:compile
+|  \- org.apache.odftoolkit:odfdom-java:jar:0.8.8-incubating:compile
+|     +- org.apache.odftoolkit:taglets:jar:0.8.8-incubating:compile
+|     \- xerces:xercesImpl:jar:2.9.1:compile
+|        \- xml-apis:xml-apis:jar:1.3.04:compile
+\- org.apache.ant:ant:jar:1.8.2:compile
+   \- org.apache.ant:ant-launcher:jar:1.8.2:compile
+org.apache.odftoolkit:odfvalidator:war:1.1.5-incubating
++- org.apache.odftoolkit:odfdom-java:jar:0.8.8-incubating:compile
+|  \- org.apache.odftoolkit:taglets:jar:0.8.8-incubating:compile
++- commons-fileupload:commons-fileupload:jar:1.2.2:compile
++- net.java.dev.msv:msv-core:jar:2011.1:compile
+|  +- com.sun.msv.datatype.xsd:xsdlib:jar:2010.1:compile
+|  +- isorelax:isorelax:jar:20030108:compile
+|  \- relaxngDatatype:relaxngDatatype:jar:20020414:compile
++- org.iso_relax.verifier.jaxp.validation:isorelax-jaxp-bridge:jar:1.0:compile
++- xerces:xercesImpl:jar:2.9.1:compile
+|  \- xml-apis:xml-apis:jar:1.3.04:compile
+\- junit:junit:jar:4.8.1:test
+org.apache.odftoolkit:simple-odf:jar:0.7-incubating
++- org.apache.odftoolkit:odfdom-java:jar:0.8.8-incubating:compile
+|  \- org.apache.odftoolkit:taglets:jar:0.8.8-incubating:compile
++- xerces:xercesImpl:jar:2.9.1:compile
+|  \- xml-apis:xml-apis:jar:1.3.04:compile
+\- junit:junit:jar:4.8.1:test
+org.apache.odftoolkit:odftoolkit:pom:0.5-incubating
+
+The following people have contributed to ODF Toolkit 0.5 incubating by submitting or commenting on the issues resolved in this release, 
+or contributed via reported bugs/comments on the mailing list:
+
+Sam Ruby (mentor)
+Nick Burch (mentor)
+Yegor Kozlov (mentor)
+Rob Weir (committer)
+Devin Han (committer)
+Svante Schubert (committer)
+Daisy Guo (committer)
+Donald Harbison (committer)
+Andy Brown (committer)
+Dave Fisher (committer)
+Juergen Schmidt (committer)
+Oliver Rau (committer)
+Dennis E. Hamilton
+Jeremias Maerki
+Wilson Barbosa
+Ansgar Konermann
+Grzegorz Kaczor
+Watte Babbu
+Ashok Hariharan
+Henrique Lobo Weissmann
+Ian Lynch
+Michael McCandless
+Michael Stahl
+Patrick Durusau
+Pedro F. Giffuni
+Drew Jensen
+Kevin Skelton
+Neelima
+Ram Kane
+
+See http://s.apache.org/odfC for more details on these contributions.

@@ -1,0 +1,49 @@
+This file contains the PGP keys of various developers.
+Please don't use them for email unless you have to. Their main purpose is code signing.
+
+Users:
+    pgp < KEYS
+    gpg --import KEYS
+
+Developers: 
+    pgp -kxa <your name>   # and append to KEYS (this file)
+    (pgpk -ll <your name> && pgpk -xa <your name>) >> KEYS
+    (gpg --list-sigs <your name> && gpg --armor --export <your name>) >> KEYS
+
+----
+
+pub   2048R/56185A70 2011-10-26
+uid                  Devin Han (Devin Han works at Apache ODF Toolkit) <devinhan@apache.org>
+sub   2048R/6D6BE53E 2011-10-26
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.4.11 (MingW32)
+
+mQENBE6ndOQBCAClgcmg2rAtuWjfMZ2lItoljoV6fM7jx8Svv5I19lQwjrUMXXzK
+yD/Wlo7GKwBa2e6THzekguvIUDnDJZ+VuxuNbShZg1qiihO2eTpiqkh7wOF069Yn
+ZNjmIZG7s2jpGiKpFEX+7q+cQHuyvbv6eu/CTUsqbBEDFpOkqDL9hvJO9Z9m+MXN
+X2kSwx9vXVuJgWEIi7afAbPXYJoxo5yw7jgfX0sq3iGYhfe7otX4YvSvLnETH26B
+tIBDqossKx6b0LTg7032yFo0mN6QvhIBl7+ie7lMVDNjVZAgpXKCY/wj7wqcvcS7
+M6ML9VIQqfsGbz1b6zzWKjFR08EydwXMptghABEBAAG0R0RldmluIEhhbiAoRGV2
+aW4gSGFuIHdvcmtzIGF0IEFwYWNoZSBPREYgVG9vbGtpdCkgPGRldmluaGFuQGFw
+YWNoZS5vcmc+iQE4BBMBAgAiBQJOp3TkAhsDBgsJCAcDAgYVCAIJCgsEFgIDAQIe
+AQIXgAAKCRBRtKVqVhhacM0VB/4lz5kwETfR53Ov6xrvnbtd8hoLYRR2VhpyoVIl
+eZS3ltZjYlC/HjBEPX6ly7sAr/5WZKveOJchQlE10gmzZh6gmM4JOt9Uay5ftQ/O
+3sAD6jWYa6X0teTbkj5kVVj3Qxhsj5bu0AUlUuMI2DMokfM2FVqz8WtX8w7/k7VY
+gKb1rzKBnFQXmJx3URM8QfvtNqwnnyLF6E2ZhmSQyng4N5gcYG3zBZNwpBUsQN02
+1QKNqTLkZ7E8f0XPJQu/6XFwxOahhGB5maWoPatSLUHGVsjRopakuzVDgxn/wNjM
+uzUxRhZ0zWWz5a0kBqHLYpaSYL6ZELg36hWkyD2oJyM8Cv8NuQENBE6ndOQBCADj
+KYBQLHIGt7ujGbkTwS0V7VMaLp4t6flsXhzbpWoEZYqBWNner3tU/zgfu+xh6hmB
+YQeItg1ON/0EF3ERw9CUoSMXIWXRfCXUFRLt6tEMYgoRtjH+Fkvndp8aQMS47Olk
+3eUhSOaa5ccetowTepqIRY0iVFI024Rrufd3RnEFuZdC1f5vynfo+2aLEk2e/BC4
+DT/d+LCgOTBqpktUEX9KZ3ptJ0nu+7w4yPgUDkaRQ6NKKfCdiJfqoGdrf6ZY3bF1
+OmJbP9cPz5r8V1QoT9Hj4ETRHgnJk0O++O40saXZBDE6Uui8AwWi04NI5Y5jPOcT
+BNF42wCMj77KIXH3E4dNABEBAAGJAR8EGAECAAkFAk6ndOQCGwwACgkQUbSlalYY
+WnCDfwgAnt8kM6d1u5gupGM9AhDAKz17DIqD2cqYnsYNB3yFtFcGBp68cSII98DS
+ahvKB7J+AHd4XLSqVQkj8aOaaufNmje4xvQy4WuvhzqnFOxXhqnDQ3fwZhfurZ89
+ux7/x8ndj6BZ6H85WrG3NAsf9Rvz1CLc6yDith53A5AAkd/dE1fZ7XBiFQ0IX5Fu
+UHbGzYOAIkd99Bo1KravSWb6NgLhxS0ebS9l0An8fcaIGTAU2g9WNB9p5Vot4We7
+nRlEHcTeF2eu5nAD2yqVrhCvSnT6qS5xgdavuBn26uv2lWwq+EZfEZvAkQ5vSTTS
+nOLKnHz0oVxS7VOAlBr7hq/U5YqV0Q==
+=Xu22
+-----END PGP PUBLIC KEY BLOCK-----

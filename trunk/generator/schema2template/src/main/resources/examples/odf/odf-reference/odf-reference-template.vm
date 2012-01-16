@@ -1,0 +1,201 @@
+##################################################################
+## 
+## Licensed to the Apache Software Foundation (ASF) under one
+## or more contributor license agreements.  See the NOTICE file
+## distributed with this work for additional information
+## regarding copyright ownership.  The ASF licenses this file
+## to you under the Apache License, Version 2.0 (the
+## "License"); you may not use this file except in compliance
+## with the License.  You may obtain a copy of the License at
+## 
+##  http://www.apache.org/licenses/LICENSE-2.0
+## 
+## Unless required by applicable law or agreed to in writing,
+## software distributed under the License is distributed on an
+## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+## KIND, either express or implied.  See the License for the
+## specific language governing permissions and limitations
+## under the License.
+##
+##################################################################
+
+## Template to create the Java class representing an ODF element.
+##
+## Documentation of template development can be found in local file
+## TemplateHelp.html.
+##
+<html>
+<head>
+<style type="text/css">
+<!--
+.left { width: 30%; }
+.right { width: 100%; }
+td { text-indent:0em; }
+.unbreakable { white-space:nowrap; }
+.mandatory { color:navy; font-weight:bold; }
+-->
+</style>
+</head>
+<body>
+<h2>ODF 1.2 XML Reference</h2>
+
+<p>This is a list of elements defined in ODF-Spec together with allowed parent and child elements and allowed attributes.</p>
+
+<p>Please note that "allowed" has the meaning of "may be allowed" as there might be a condition (like a special attribute value) 
+for an element to have a special child element.</p>
+
+<p>left displayed in bold blue letters describe a mandatory relationship. All other relationships are optional.</p>
+
+<p>The asterisk (*) symbol marks child elements which can occur multiple times.</p>
+
+<p>Here's a shortcut to the content <a href="#element_office:document_0">toplevel</a> element.</p>
+
+#foreach( $element in ${model.getElements()} )
+#set ($oldelement = "")
+#set ($oldelement = ${oldmodel.getElement($element.getQName())} )
+#if ($element != "*")
+##
+#if (${element.withMultiples().size()} == 1)
+#set ($dup = "")
+#else
+#set ($dup = "[${element.getMultipleNumber()}]")
+#end
+<h3><a name="element_${element}_${element.getMultipleNumber()}">${element}${dup} Element</a>#if (${oldelement} == "")&nbsp;(new in Odf 1.2) #end</h3>
+#if ( ${element.withMultiples().size()} > 1 )
+<p>There are more than one Definitions by this name.</p>
+#end
+#if (${element.canHaveText()})
+<p>This element can have a text node child.</p>
+#end
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+#foreach ($parent in ${element.getParents()})
+#if ($parent == "*")
+[any org.w3c.dom.Element]&nbsp;
+#else
+#if (${parent.withMultiples().size()} == 1)
+#set ($dup = "")
+#else
+#set ($dup = "[${parent.getMultipleNumber()}]")
+#end
+	<a href="#element_${parent}_${parent.getMultipleNumber()}" class="unbreakable">${parent}${dup}</a>&nbsp;
+#end
+#end
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+#foreach($child in ${element.getChildElements()})
+#if ($child == "*")
+[any org.w3c.dom.Element]&nbsp;
+#else
+#if (${child.withMultiples().size()} == 1)
+#set ($dup = "")
+#else
+#set ($dup = "[${child.getMultipleNumber()}]")
+#end
+##
+#if (${element.isMandatory($child)})
+#set ($mandatory = "mandatory")
+#else
+#set ($mandatory = "")
+#end
+##
+#if (${element.isSingleton($child)})
+#set ($multiple = "")
+#else
+#set ($multiple = "*")
+#end
+##
+	<a href="#element_${child}_${child.getMultipleNumber()}" class="unbreakable ${mandatory}">${child}${dup}</a>${multiple}&nbsp;
+#end
+#end
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+#foreach( $attribute in ${element.getAttributes()} )
+#if ($attribute == "*")
+[any org.w3c.dom.Attribute]&nbsp;
+#else
+#if (${attribute.withMultiples().size()} == 1)
+#set ($dup = "")
+#else
+#set ($dup = "[${attribute.getMultipleNumber()}]")
+#end
+##
+#if (${element.isMandatory($attribute)})
+#set ($mandatory = "mandatory")
+#else
+#set ($mandatory = "")
+#end
+##
+	<a href="#attribute_${attribute}_${attribute.getMultipleNumber()}" class="unbreakable ${mandatory}">${attribute}${dup}</a>&nbsp;
+#end
+#end
+&nbsp;</td>
+</tr>
+</table>
+<br />
+#end
+#end
+##
+##
+#foreach( $attribute in ${model.getAttributes()} )
+#set ($oldattribute = "")
+#set ($oldattribute = ${oldmodel.getAttribute($attribute.getQName())} )
+#if ($attribute != "*")
+##
+#if (${attribute.withMultiples().size()} == 1)
+#set ($dup = "")
+#else
+#set ($dup = "[${attribute.getMultipleNumber()}]")
+#end
+<h3><a name="attribute_${attribute}_${attribute.getMultipleNumber()}">${attribute}${dup} Attribute</a>#if (${oldattribute} == "")&nbsp;(new in Odf 1.2) #end</h3>
+#if ( ${attribute.withMultiples().size()} > 1 )
+<p>There are more than one Definitions by this name.</p>
+#end
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+#foreach ($parent in ${attribute.getParents()})
+#if ($parent == "*")
+[any org.w3c.dom.Element]&nbsp;
+#else
+#if (${parent.withMultiples().size()} == 1)
+#set ($dup = "")
+#else
+#set ($dup = "[${parent.getMultipleNumber()}]")
+#end
+	<a href="#element_${parent}_${parent.getMultipleNumber()}" class="unbreakable">${parent}${dup}</a>&nbsp;
+#end
+#end
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+#foreach ($datatype in ${attribute.getDatatypes()})
+	<span style="unbreakable">${datatype}</a>&nbsp;
+#end
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+#foreach ($value in ${attribute.getValues()})
+	<span style="unbreakable">"${value}"</a>&nbsp;
+#end
+&nbsp;</td>
+</tr>
+</table>
+<br />
+#end
+#end
+</body>
+</html>
