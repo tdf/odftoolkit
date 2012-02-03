@@ -23,30 +23,27 @@ package org.odftoolkit.odfdom.pkg;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
-import javax.xml.namespace.NamespaceContext;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;
-import org.apache.xerces.dom.DocumentImpl;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Node;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathFactory;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.xml.XMLConstants;
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
+
+import org.apache.xerces.dom.DocumentImpl;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfMetaDom;
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
-import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
@@ -354,6 +351,19 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 	public String getNamespaceURI(String prefix) {
 		String nsURI = null;
 		nsURI = mUriByPrefix.get(prefix);
+		if (nsURI == null) {
+			// look in Duplicate URI prefixes
+			Set<String> urisWithDuplicatePrefixes = this.mDuplicatePrefixesByUri.keySet();
+			for (String aURI : urisWithDuplicatePrefixes) {
+				Set<String> prefixes = this.mDuplicatePrefixesByUri.get(aURI);
+				// check if requested prefix exists in hashset
+				if (prefixes.contains(prefix)) {
+					nsURI = aURI;
+					break;
+				}
+			}
+		}
+		// there is a possibility it still may be null - so we check
 		if (nsURI == null) {
 			nsURI = XMLConstants.NULL_NS_URI;
 		}

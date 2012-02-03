@@ -30,6 +30,7 @@ import javax.xml.xpath.XPathConstants;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.pkg.OdfAlienElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfPresentationDocument;
@@ -42,7 +43,7 @@ public class XPathTest {
 	private static final Logger LOG = Logger.getLogger(XPathTest.class.getName());
 	private static final String SOURCE_FILE_1 = "XPathTest-foreignPrefix.odp";
 	private static final String SOURCE_FILE_2 = "XPathTest-foreignPrefix2.odp";
-
+        private static final String SOURCE_FILE_3 = "XPathTest-duplicate-prefix.odt";
 	/**
 	 * 1) The first test document "slideDeckWithTwoSlides.odp" uses the prefix "daisy" instead of "office" for ODF XML elements.
 	   <daisy:document-content xmlns:daisy="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="ur...
@@ -179,4 +180,69 @@ public class XPathTest {
 			Assert.fail(e.toString());
 		}
 	}
+
+        /**
+         * This test checks if the XPath returned by OdfFileDom is correctly aware of namespacess.
+         * The NamespaceContext implementation in OdfFileDom is aware of duplicate prefixes, but getNamespaceURI(prefix)
+         * in OdfFileDom does not implement it correctly
+         *
+         * With the patch applied in OdfFileDom these tests pass correctly
+         *
+         * sample metadata rdf generate from Openoffice 3.3 looks like this :
+         * <?xml version="1.0" encoding="utf-8"?>
+         *   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+         *     <rdf:Description rdf:about="../content.xml#id1366098766">
+         *       <ns1:BungeniActionEvent xmlns:ns1="http://editor.bungeni.org/1.0/anx/"></ns1:BungeniActionEvent>
+         *       <ns2:BungeniSectionID xmlns:ns2="http://editor.bungeni.org/1.0/anx/">Xda+5VC/SQKKG7Bk83a2JA</ns2:BungeniSectionID>
+         *       <ns3:BungeniSectionType xmlns:ns3="http://editor.bungeni.org/1.0/anx/">Conclusion</ns3:BungeniSectionType>
+         *       <ns4:hiddenBungeniMetaEditable xmlns:ns4="http://editor.bungeni.org/1.0/anx/">false</ns4:hiddenBungeniMetaEditable>
+         *     </rdf:Description>
+         *
+         * @throws Exception
+         */
+        @Test
+        public void testXPathDuplicatePrefixForForeignNamespace() throws Exception{
+           try {
+
+            OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE_FILE_3));
+            OdfFileDom fileDom = odfDoc.getFileDom("meta/meta.rdf");
+            
+            // add additional duplicate NS prefixes to the DOM
+            fileDom.setNamespace("anx", "http://editor.bungeni.org/1.0/anx/");
+            fileDom.setNamespace("myrdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+
+            //get the XPath from the file dom and set its NS context to the OdfFileDom object
+            XPath xpathFileDom = fileDom.getXPath();
+            xpathFileDom.setNamespaceContext(fileDom);
+
+            //PASS - this works correctly
+            String rdfNsUri = fileDom.getNamespaceURI("rdf");
+            LOG.log(Level.INFO, "The value of the nsuri is {0} expected ns-uri is ''http://www.w3.org/1999/02/22-rdf-syntax-ns#''", rdfNsUri);
+            Assert.assertEquals("http://www.w3.org/1999/02/22-rdf-syntax-ns#", rdfNsUri);
+
+            //FAIL - for duplicate RDF ns prefix
+            String myrdfNsUri = fileDom.getNamespaceURI("myrdf");
+            LOG.log(Level.INFO, "The value of the nsuri is {0} expected ns-uri is ''http://www.w3.org/1999/02/22-rdf-syntax-ns#''", myrdfNsUri);
+            Assert.assertEquals("http://www.w3.org/1999/02/22-rdf-syntax-ns#", myrdfNsUri);
+
+            //PASS - for custom NS prefix in document, only the first one
+            String anxNsUri1 = fileDom.getNamespaceURI("ns1");
+            LOG.log(Level.INFO, "The value of the nsuri is {0} expected ns-uri is ''http://editor.bungeni.org/1.0/anx/''", anxNsUri1);
+            Assert.assertEquals("http://editor.bungeni.org/1.0/anx/", anxNsUri1);
+
+            //FAIL - for custom NS prefix in document ns3, ns4, ns...
+            String anxNsUri2 = fileDom.getNamespaceURI("ns2");
+            LOG.log(Level.INFO, "The value of the ns-uri is {0} expected ns-uri is ''http://editor.bungeni.org/1.0/anx/''", anxNsUri2);
+            Assert.assertEquals("http://editor.bungeni.org/1.0/anx/", anxNsUri2);
+
+            //FAIL - for custom duplicate NS prefix anx
+            String anxNsUriCustom = fileDom.getNamespaceURI("anx");
+            LOG.log(Level.INFO, "The value of the ns-uri is {0} expected ns-uri is ''http://editor.bungeni.org/1.0/anx/''", anxNsUriCustom);
+            Assert.assertEquals("http://editor.bungeni.org/1.0/anx/", anxNsUriCustom);
+
+           } catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.toString());
+           }
+        }
 }
