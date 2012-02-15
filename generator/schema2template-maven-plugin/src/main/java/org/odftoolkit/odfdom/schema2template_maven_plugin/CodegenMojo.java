@@ -42,7 +42,7 @@ public class CodegenMojo extends AbstractMojo {
 	 * @parameter
 	 * @required
 	 */
-	File resourceRoot;
+	File domResourceRoot;
 	
 	/**
 	 * @parameter
@@ -60,13 +60,31 @@ public class CodegenMojo extends AbstractMojo {
 	 * @parameter
 	 * @required
 	 */
-	String configFile;
+	File pkgResourceRoot;
+	
+	/**
+	 * @parameter
+	 * @required
+	 */
+	String signatureSchemaFile;
+	
+	/**
+	 * @parameter
+	 * @required
+	 */
+	String manifestSchemaFile;
 	
 	/**
 	 * @parameter
 	 * @required
 	 */
 	File targetRoot;
+	
+	/**
+	 * @parameter
+	 * @required
+	 */
+	String configFile;
 	
 	/**
 	 * @parameter expression="${project}"
@@ -93,22 +111,38 @@ public class CodegenMojo extends AbstractMojo {
 				getLog().error("Please set odf1.1 schema file patch.");
 				throw new MojoFailureException("Please set schema file patch.");
 			}
+			if (signatureSchemaFile == null) {
+				getLog().error("Please set odf1.2 document signature schema file patch.");
+				throw new MojoFailureException("Please set schema file patch.");
+			}
+			if (manifestSchemaFile == null) {
+				getLog().error("Please set odf1.2 manifest schema file patch.");
+				throw new MojoFailureException("Please set schema file patch.");
+			}
 			String targetRootPath = targetRoot.getAbsolutePath();
 			if (targetRootPath == null) {
 				getLog().error("Please set generation code root patch.");
 				throw new MojoFailureException("Please set generation code root patch.");
 			}
-			String resourceRootPath = resourceRoot.getAbsolutePath();
-			if (resourceRootPath == null) {
-				getLog().error("Please set templates root patch.");
+			String domResourceRootPath = domResourceRoot.getAbsolutePath();
+			if (domResourceRootPath == null) {
+				getLog().error("Please set dom templates root patch.");
 				throw new MojoFailureException("Please set templates root patch.");
 			}
-			getLog().debug("Template Files Directory " + resourceRootPath);
+			String pkgResourceRootPath = pkgResourceRoot.getAbsolutePath();
+			if (pkgResourceRootPath == null) {
+				getLog().error("Please set pkg templates root patch.");
+				throw new MojoFailureException("Please set templates root patch.");
+			}
 			getLog().debug("Generation Code Files Root Directory " + targetRootPath);
+			getLog().debug("Config File " + configFile);
+			getLog().debug("Dom Template Files Directory " + domResourceRootPath);
 			getLog().debug("ODF1.2 Schema File " + odf12SchemaFile);
 			getLog().debug("ODF1.1 Schema File " + odf11SchemaFile);
-			getLog().debug("Config File " + configFile);
-			OdfHelper codeGen = new OdfHelper(resourceRootPath, targetRootPath, odf12SchemaFile, odf11SchemaFile, configFile);
+			getLog().debug("Pkg Template Files Directory " + pkgResourceRootPath);
+			getLog().debug("ODF1.2 Signature Schema File " + signatureSchemaFile);
+			getLog().debug("ODF1.2 Manifest Schema File " + manifestSchemaFile);
+			OdfHelper codeGen = new OdfHelper(domResourceRootPath, odf12SchemaFile, odf11SchemaFile, pkgResourceRootPath, signatureSchemaFile, manifestSchemaFile, targetRootPath, configFile);
 			codeGen.start();
 		} catch (Exception ex) {
 			getLog().error("Failed to parse template.");

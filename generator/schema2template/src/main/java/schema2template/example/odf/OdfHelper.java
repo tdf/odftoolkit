@@ -84,7 +84,8 @@ public class OdfHelper {
 	NOTE: Ignoring the '*' there can be 1162 elements parsed, but with fixed schema it should be 1169. */
 	public static final int ODF11_ATTRIBUTE_NUMBER = 1162; //ToDo: 1169 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or attribute declaration
 	public static final int ODF12_ATTRIBUTE_NUMBER = 1300; //in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie. @office:process-content)
-	public static String odfResourceDir;
+	public static String odfDomResourceDir;
+	public static String odfPkgResourceDir;
 	public static String outputRoot;
 	public static final String INPUT_ROOT = "target" + File.separator + "odf-schemas";
 	public static final String TEST_INPUT_ROOT = "target" + File.separator + "test-classes" + File.separator
@@ -92,50 +93,75 @@ public class OdfHelper {
 	public static final String ODF10_RNG_FILE_NAME = "OpenDocument-strict-schema-v1.0-os.rng";
 	public static final String ODF11_RNG_FILE_NAME = "OpenDocument-strict-schema-v1.1.rng";
 	public static final String ODF12_RNG_FILE_NAME = "OpenDocument-v1.2-cs01-schema.rng";
+	public static final String ODF12_SIGNATURE_RNG_FILE_NAME = "OpenDocument-v1.2-cs01-dsig-schema.rng";
+	public static final String ODF12_MANIFEST_RNG_FILE_NAME = "OpenDocument-v1.2-cs01-manifest-schema.rng";
 	public static String odf12RngFile;
+	public static String odf12SignatureRngFile;
+	public static String odf12ManifestRngFile;
 	public static String odf11RngFile;
 	public static String odf10RngFile;
 	private static String mConfigFile;
-	private static final String OUTPUT_FILES_TEMPLATE = "output-files.vm";
-	private static final String OUTPUT_FILES = "target" + File.separator + "output-files.xml";
+	private static final String DOM_OUTPUT_FILES_TEMPLATE = "dom-output-files.vm";
+	private static final String DOM_OUTPUT_FILES = "target" + File.separator + "dom-output-files.xml";
+	private static final String PKG_OUTPUT_FILES_TEMPLATE = "pkg-output-files.vm";
+	private static final String PKG_OUTPUT_FILES = "target" + File.separator + "pkg-output-files.xml";
+	private static XMLModel mOdf12SignatureSchemaModel;
+	private static XMLModel mOdf12ManifestSchemaModel;
 	private static XMLModel mOdf12SchemaModel;
 	private static XMLModel mOdf11SchemaModel;
 	private static OdfModel mOdfModel;
 	private static SourceCodeModel mJavaModel;
+	private static Expression mOdf12SignatureRoot;
+	private static Expression mOdf12ManifestRoot;
 	private static Expression mOdf12Root;
 	private static Expression mOdf11Root;
 
-	public OdfHelper(String resourceRoot, String targetRoot, String odf12SchemaFile, String odf11SchemaFile, String configFile) {
-		odfResourceDir = resourceRoot;
-		outputRoot = targetRoot;
+	public OdfHelper(String domResourceRoot, String odf12SchemaFile, String odf11SchemaFile, String pkgResourceRoot, String odf12SignatureSchemaFile, String odf12ManifestSchemaFile, String targetRoot, String configFile) {
+		odfDomResourceDir = domResourceRoot;
 		odf12RngFile = odf12SchemaFile;
 		odf11RngFile = odf11SchemaFile;
+		odfPkgResourceDir = pkgResourceRoot;
+		odf12SignatureRngFile = odf12SignatureSchemaFile;
+		odf12ManifestRngFile = odf12ManifestSchemaFile;
+		outputRoot = targetRoot;
 		mConfigFile = configFile;
 	}
-
+	
 	static {
-		odfResourceDir = INPUT_ROOT + File.separator + "odfdom-java";
+		odfDomResourceDir = INPUT_ROOT + File.separator + "odfdom-java" + File.separator + "dom";
+		odfPkgResourceDir = INPUT_ROOT + File.separator + "odfdom-java" + File.separator + "pkg";
+		odf12SignatureRngFile = INPUT_ROOT + File.separator + ODF12_SIGNATURE_RNG_FILE_NAME;
+		odf12ManifestRngFile = INPUT_ROOT + File.separator + ODF12_MANIFEST_RNG_FILE_NAME;
 		odf12RngFile = INPUT_ROOT + File.separator + ODF12_RNG_FILE_NAME;
 		odf11RngFile = INPUT_ROOT + File.separator + ODF11_RNG_FILE_NAME;
 		odf10RngFile = INPUT_ROOT + File.separator + ODF10_RNG_FILE_NAME;
-		mConfigFile = INPUT_ROOT + File.separator + "config.xml";
 		outputRoot = "target";
+		mConfigFile = INPUT_ROOT + File.separator + "config.xml";		
 	}
 
 	public void start() throws Exception{
 		LOG.info("Starting code generation:");
 		initialize();
-		fillTemplates(odfResourceDir, mOdf12Root);
+		fillTemplates(odfDomResourceDir, mOdf12Root, DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES);
+		fillTemplates(odfPkgResourceDir, mOdf12SignatureRoot, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
+		fillTemplates(odfPkgResourceDir, mOdf12ManifestRoot, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
 	}
 	
 	public static void main(String[] args) throws Exception {
 		initialize();
-		fillTemplates(odfResourceDir + File.separator + "odf-reference", mOdf12Root);
-		fillTemplates(odfResourceDir + File.separator + "odfdom-java", mOdf12Root);
-		fillTemplates(odfResourceDir + File.separator + "odfdom-python", mOdf12Root);
+		fillTemplates(INPUT_ROOT + File.separator + "odf-reference", mOdf12Root, DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES);
+		fillTemplates(odfDomResourceDir, mOdf12Root, DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES);
+		fillTemplates(INPUT_ROOT + File.separator +"odfdom-python", mOdf12Root, DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES);
+		fillTemplates(odfPkgResourceDir, mOdf12SignatureRoot, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
+		fillTemplates(odfPkgResourceDir, mOdf12ManifestRoot, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
 	}
 
 	private static void initialize() throws Exception{
+		// calling MSV to parse the ODF 1.2 DSIG RelaxNG, returning a tree
+		System.out.println(new File(odf12SignatureRngFile).getAbsolutePath());
+		mOdf12SignatureRoot = loadSchema(new File(odf12SignatureRngFile));
+		// calling MSV to parse the ODF 1.2 Manifest RelaxNG, returning a tree
+		mOdf12ManifestRoot = loadSchema(new File(odf12ManifestRngFile));
 		// calling MSV to parse the ODF 1.2 RelaxNG, returning a tree
 		mOdf12Root = loadSchema(new File(odf12RngFile));
 		// calling MSV to parse the ODF 1.1 RelaxNG, returning a tree
@@ -151,14 +177,16 @@ public class OdfHelper {
 		Map<String, OdfModel.AttributeDefaults> attributeDefaultMap = new HashMap<String, OdfModel.AttributeDefaults>();
 		OdfConfigFileHandler.readConfigFile(new File(mConfigFile), elementToBaseNameMap, attributeDefaultMap, elementStyleFamiliesMap, datatypeValueAndConversionMap);
 
+		mOdf12SignatureSchemaModel = new XMLModel(mOdf12SignatureRoot);
+		mOdf12ManifestSchemaModel = new XMLModel(mOdf12ManifestRoot);
 		mOdf12SchemaModel = new XMLModel(mOdf12Root);
 		mOdf11SchemaModel = new XMLModel(mOdf11Root);
 		mOdfModel = new OdfModel(elementStyleFamiliesMap, attributeDefaultMap);
 		// Needed for the base classes - common attributes are being moved into the base classes
-		mJavaModel = new SourceCodeModel(mOdf12SchemaModel, mOdfModel, elementToBaseNameMap, datatypeValueAndConversionMap);
+		mJavaModel = new SourceCodeModel(mOdf12SchemaModel, mOdf12SignatureSchemaModel, mOdf12ManifestSchemaModel, mOdfModel, elementToBaseNameMap, datatypeValueAndConversionMap);
 	}
 
-	private static void fillTemplates(String sourceDir, Expression root) throws Exception {
+	private static void fillTemplates(String sourceDir, Expression root, String outputRuleTemplate, String outputRuleFile) throws Exception {
 		// intialising template engine (ie. Velocity)
 		Properties props = new Properties();
 		props.setProperty("file.resource.loader.path", sourceDir);
@@ -166,15 +194,15 @@ public class OdfHelper {
 		ve.init();
 
 		// Create output-files.xml
-		createOutputFileList(ve);
-		LOG.info("DONE.\n");
+		createOutputFileList(ve, outputRuleTemplate, outputRuleFile);
+		LOG.info("output-files.xml created done.");
 
 		// Process output-files.xml, create output files
 		LOG.fine("Processing output files... ");
-		processFileList(ve, root);
+		processFileList(ve, root, outputRuleFile);
 		LOG.fine("DONE.\n");
 	}
-
+	
 	/**
 	 * Load and parse the ODF 1.0 Schema.
 	 *
@@ -216,10 +244,9 @@ public class OdfHelper {
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		factory.setNamespaceAware(true);
 		// Parsing the Schema with MSV
-		Expression root = RELAXNGReader.parse(
-				rngFile.getAbsolutePath(),
-				factory,
-				new com.sun.msv.reader.util.IgnoreController()).getTopLevel();
+		String absolutePath = rngFile.getAbsolutePath();
+		com.sun.msv.reader.util.IgnoreController ignoreController = new com.sun.msv.reader.util.IgnoreController();
+		Expression root = RELAXNGReader.parse(absolutePath,	factory, ignoreController).getTopLevel();
 
 
 		if (root == null) {
@@ -230,6 +257,8 @@ public class OdfHelper {
 
 	private static VelocityContext getContext(String contextStr, String param) {
 		VelocityContext context = new VelocityContext();
+		context.put("signaturemodel", mOdf12SignatureSchemaModel);
+		context.put("manifestmodel", mOdf12ManifestSchemaModel);
 		context.put("model", mOdf12SchemaModel);
 		context.put("oldmodel", mOdf11SchemaModel);
 		context.put("odfmodel", mOdfModel);
@@ -239,15 +268,15 @@ public class OdfHelper {
 		return context;
 	}
 
-	private static void createOutputFileList(VelocityEngine ve) throws Exception {
+	private static void createOutputFileList(VelocityEngine ve, String template, String output) throws Exception {
 		VelocityContext context = getContext(null, null);
-		File parentPatch = new File(OUTPUT_FILES).getParentFile();
+		File parentPatch = new File(output).getParentFile();
 		if (!parentPatch.exists()) {
 			parentPatch.mkdirs();
 		}
-		FileWriter listout = new FileWriter(new File(OUTPUT_FILES));
+		FileWriter listout = new FileWriter(new File(output));
 		String encoding = "utf-8";
-		ve.mergeTemplate(OUTPUT_FILES_TEMPLATE, encoding, context, listout);
+		ve.mergeTemplate(template, encoding, context, listout);
 		listout.close();
 	}
 
@@ -271,8 +300,8 @@ public class OdfHelper {
 		}
 	}
 
-	public static void processFileList(VelocityEngine ve, Expression root) throws Exception {
-		File outputFiles = new File(OUTPUT_FILES);
+	public static void processFileList(VelocityEngine ve, Expression root, String outputRuleFile) throws Exception {
+		File outputFiles = new File(outputRuleFile);
 		List<OutputFileListEntry> fl = OutputFileListHandler.readFileListFile(outputFiles);
 
 		for (OutputFileListEntry f : fl) {
@@ -295,7 +324,6 @@ public class OdfHelper {
 
 					ve.mergeTemplate(f.getAttribute("template"), encoding, context, fileout);
 					fileout.close();
-
 					break;
 			}
 		}
