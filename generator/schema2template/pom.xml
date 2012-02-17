@@ -29,7 +29,7 @@
   
 	<!-- The Basics -->
 	<artifactId>schema2template</artifactId>
-	<version>0.8.8-incubating-rc3</version>
+	<version>0.8.9-incubating-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
