@@ -70,7 +70,7 @@ public class StyleCellProtectAttribute extends OdfAttribute {
 	 * The value set of {@odf.attribute style:cell-protect}.
 	 */
 	public enum Value {
-		HIDDEN_AND_PROTECTED("hidden-and-protected"), NONE("none") ;
+		FORMULA_HIDDEN("formula-hidden"), HIDDEN_AND_PROTECTED("hidden-and-protected"), NONE("none"), PROTECTED("protected") ;
 
 		private String mValue;
 

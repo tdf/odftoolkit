@@ -69,6 +69,26 @@ public class DrawExtrusionOriginAttribute extends OdfAttribute {
 	}
 
 	/**
+	 * @param value The <code>double</code> value of the attribute.
+	 */
+	public void setDoubleValue(double value) {
+		super.setValue(String.valueOf(value));
+	}
+
+	/**
+	 * @return Returns the <code>double</code> value of the attribute
+	 */
+	public double doubleValue() {
+		String val = super.getValue();
+		try {
+			return Double.parseDouble(val);
+		} catch (NumberFormatException e) {
+			// TODO: validation handling/logging
+			throw (e);
+		}
+	}
+
+	/**
 	 * Returns the default value of {@odf.attribute draw:extrusion-origin}.
 	 *
 	 * @return the default value as <code>String</code> dependent of its element name

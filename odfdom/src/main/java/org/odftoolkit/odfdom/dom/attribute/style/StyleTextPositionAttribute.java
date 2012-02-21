@@ -67,6 +67,47 @@ public class StyleTextPositionAttribute extends OdfAttribute {
 	}
 
 	/**
+	 * The value set of {@odf.attribute style:text-position}.
+	 */
+	public enum Value {
+		SUB("sub"), SUPER("super") ;
+
+		private String mValue;
+
+		Value(String value) {
+			mValue = value;
+		}
+
+		@Override
+		public String toString() {
+			return mValue;
+		}
+
+		public static Value enumValueOf(String value) {
+			for(Value aIter : values()) {
+				if (value.equals(aIter.toString())) {
+				return aIter;
+				}
+			}
+			return null;
+		}
+	}
+
+	/**
+	 * @param attrValue The <code>Enum</code> value of the attribute.
+	 */
+	public void setEnumValue(Value attrValue) {
+		setValue(attrValue.toString());
+	}
+
+	/**
+	 * @return Returns the <code>Enum</code> value of the attribute
+	 */
+	public Value getEnumValue() {
+		return Value.enumValueOf(this.getValue());
+	}
+
+	/**
 	 * Returns the default value of {@odf.attribute style:text-position}.
 	 *
 	 * @return the default value as <code>String</code> dependent of its element name

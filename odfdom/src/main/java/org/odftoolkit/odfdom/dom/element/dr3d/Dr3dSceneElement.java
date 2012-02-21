@@ -829,10 +829,10 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	 * Create child element {@odf.element dr3d:extrude}.
 	 *
 	 * @param svgDValue  the <code>String</code> value of <code>SvgDAttribute</code>, see {@odf.attribute  svg:d} at specification
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element dr3d:extrude}
 	 */
-	 public Dr3dExtrudeElement newDr3dExtrudeElement(String svgDValue, String svgViewBoxValue) {
+	 public Dr3dExtrudeElement newDr3dExtrudeElement(String svgDValue, int svgViewBoxValue) {
 		Dr3dExtrudeElement dr3dExtrude = ((OdfFileDom) this.ownerDocument).newOdfElement(Dr3dExtrudeElement.class);
 		dr3dExtrude.setSvgDAttribute(svgDValue);
 		dr3dExtrude.setSvgViewBoxAttribute(svgViewBoxValue);
@@ -857,10 +857,10 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	 * Create child element {@odf.element dr3d:rotate}.
 	 *
 	 * @param svgDValue  the <code>String</code> value of <code>SvgDAttribute</code>, see {@odf.attribute  svg:d} at specification
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element dr3d:rotate}
 	 */
-	 public Dr3dRotateElement newDr3dRotateElement(String svgDValue, String svgViewBoxValue) {
+	 public Dr3dRotateElement newDr3dRotateElement(String svgDValue, int svgViewBoxValue) {
 		Dr3dRotateElement dr3dRotate = ((OdfFileDom) this.ownerDocument).newOdfElement(Dr3dRotateElement.class);
 		dr3dRotate.setSvgDAttribute(svgDValue);
 		dr3dRotate.setSvgViewBoxAttribute(svgViewBoxValue);

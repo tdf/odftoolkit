@@ -295,12 +295,12 @@ public class Dr3dRotateElement extends OdfStyleableShapeElement {
 	 *
 	 * Attribute is mandatory.
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getSvgViewBoxAttribute() {
+	public Integer getSvgViewBoxAttribute() {
 		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "viewBox");
 		if (attr != null) {
-			return String.valueOf(attr.getValue());
+			return Integer.valueOf(attr.intValue());
 		}
 		return null;
 	}
@@ -308,12 +308,12 @@ public class Dr3dRotateElement extends OdfStyleableShapeElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>SvgViewBoxAttribute</code> , See {@odf.attribute svg:viewBox}
 	 *
-	 * @param svgViewBoxValue   The type is <code>String</code>
+	 * @param svgViewBoxValue   The type is <code>Integer</code>
 	 */
-	public void setSvgViewBoxAttribute(String svgViewBoxValue) {
+	public void setSvgViewBoxAttribute(Integer svgViewBoxValue) {
 		SvgViewBoxAttribute attr = new SvgViewBoxAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(svgViewBoxValue);
+		attr.setIntValue(svgViewBoxValue.intValue());
 	}
 
 	/**

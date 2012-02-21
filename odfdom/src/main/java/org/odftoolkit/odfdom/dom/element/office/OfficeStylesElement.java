@@ -135,10 +135,10 @@ public class OfficeStylesElement extends OdfContainerElementBase {
 	 *
 	 * @param drawNameValue  the <code>String</code> value of <code>DrawNameAttribute</code>, see {@odf.attribute  draw:name} at specification
 	 * @param svgDValue  the <code>String</code> value of <code>SvgDAttribute</code>, see {@odf.attribute  svg:d} at specification
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element draw:marker}
 	 */
-	 public DrawMarkerElement newDrawMarkerElement(String drawNameValue, String svgDValue, String svgViewBoxValue) {
+	 public DrawMarkerElement newDrawMarkerElement(String drawNameValue, String svgDValue, int svgViewBoxValue) {
 		DrawMarkerElement drawMarker = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawMarkerElement.class);
 		drawMarker.setDrawNameAttribute(drawNameValue);
 		drawMarker.setSvgDAttribute(svgDValue);

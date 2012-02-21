@@ -70,7 +70,7 @@ public class FormListLinkageTypeAttribute extends OdfAttribute {
 	 * The value set of {@odf.attribute form:list-linkage-type}.
 	 */
 	public enum Value {
-		SELECTION("selection"), SELECTION_INDEXES("selection-indexes") ;
+		SELECTION("selection"), SELECTION_INDICES("selection-indices") ;
 
 		private String mValue;
 

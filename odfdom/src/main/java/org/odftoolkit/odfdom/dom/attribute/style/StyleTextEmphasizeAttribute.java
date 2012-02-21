@@ -70,7 +70,7 @@ public class StyleTextEmphasizeAttribute extends OdfAttribute {
 	 * The value set of {@odf.attribute style:text-emphasize}.
 	 */
 	public enum Value {
-		NONE("none") ;
+		ABOVE("above"), ACCENT("accent"), BELOW("below"), CIRCLE("circle"), DISC("disc"), DOT("dot"), NONE("none") ;
 
 		private String mValue;
 

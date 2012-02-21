@@ -26,6 +26,7 @@
  */
 package org.odftoolkit.odfdom.dom.element.style;
 
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;

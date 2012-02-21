@@ -67,6 +67,47 @@ public class StylePrintAttribute extends OdfAttribute {
 	}
 
 	/**
+	 * The value set of {@odf.attribute style:print}.
+	 */
+	public enum Value {
+		ANNOTATIONS("annotations"), CHARTS("charts"), DRAWINGS("drawings"), FORMULAS("formulas"), GRID("grid"), HEADERS("headers"), OBJECTS("objects"), ZERO_VALUES("zero-values") ;
+
+		private String mValue;
+
+		Value(String value) {
+			mValue = value;
+		}
+
+		@Override
+		public String toString() {
+			return mValue;
+		}
+
+		public static Value enumValueOf(String value) {
+			for(Value aIter : values()) {
+				if (value.equals(aIter.toString())) {
+				return aIter;
+				}
+			}
+			return null;
+		}
+	}
+
+	/**
+	 * @param attrValue The <code>Enum</code> value of the attribute.
+	 */
+	public void setEnumValue(Value attrValue) {
+		setValue(attrValue.toString());
+	}
+
+	/**
+	 * @return Returns the <code>Enum</code> value of the attribute
+	 */
+	public Value getEnumValue() {
+		return Value.enumValueOf(this.getValue());
+	}
+
+	/**
 	 * Returns the default value of {@odf.attribute style:print}.
 	 *
 	 * @return the default value as <code>String</code> dependent of its element name

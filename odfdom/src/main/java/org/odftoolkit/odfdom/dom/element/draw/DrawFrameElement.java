@@ -431,10 +431,10 @@ public class DrawFrameElement extends DrawShapeElementBase {
 	 *
 	 * @param drawRecreateOnEditValue  the <code>Boolean</code> value of <code>DrawRecreateOnEditAttribute</code>, see {@odf.attribute  draw:recreate-on-edit} at specification
 	 * @param svgDValue  the <code>String</code> value of <code>SvgDAttribute</code>, see {@odf.attribute  svg:d} at specification
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element draw:contour-path}
 	 */
-	 public DrawContourPathElement newDrawContourPathElement(boolean drawRecreateOnEditValue, String svgDValue, String svgViewBoxValue) {
+	 public DrawContourPathElement newDrawContourPathElement(boolean drawRecreateOnEditValue, String svgDValue, int svgViewBoxValue) {
 		DrawContourPathElement drawContourPath = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawContourPathElement.class);
 		drawContourPath.setDrawRecreateOnEditAttribute(drawRecreateOnEditValue);
 		drawContourPath.setSvgDAttribute(svgDValue);
@@ -448,10 +448,10 @@ public class DrawFrameElement extends DrawShapeElementBase {
 	 *
 	 * @param drawPointsValue  the <code>String</code> value of <code>DrawPointsAttribute</code>, see {@odf.attribute  draw:points} at specification
 	 * @param drawRecreateOnEditValue  the <code>Boolean</code> value of <code>DrawRecreateOnEditAttribute</code>, see {@odf.attribute  draw:recreate-on-edit} at specification
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element draw:contour-polygon}
 	 */
-	 public DrawContourPolygonElement newDrawContourPolygonElement(String drawPointsValue, boolean drawRecreateOnEditValue, String svgViewBoxValue) {
+	 public DrawContourPolygonElement newDrawContourPolygonElement(String drawPointsValue, boolean drawRecreateOnEditValue, int svgViewBoxValue) {
 		DrawContourPolygonElement drawContourPolygon = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawContourPolygonElement.class);
 		drawContourPolygon.setDrawPointsAttribute(drawPointsValue);
 		drawContourPolygon.setDrawRecreateOnEditAttribute(drawRecreateOnEditValue);

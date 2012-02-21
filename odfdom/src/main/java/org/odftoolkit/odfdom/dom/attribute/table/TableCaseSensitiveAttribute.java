@@ -43,8 +43,8 @@ import org.odftoolkit.odfdom.dom.element.table.TableSubtotalRulesElement;
 public class TableCaseSensitiveAttribute extends OdfAttribute {
 
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "case-sensitive");
-	public static final String DEFAULT_VALUE_TRUE = Value.TRUE.toString();
 	public static final String DEFAULT_VALUE_FALSE = Value.FALSE.toString();
+	public static final String DEFAULT_VALUE_TRUE = Value.TRUE.toString();
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:case-sensitive}.

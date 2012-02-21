@@ -72,7 +72,7 @@ public class TableRangeUsableAsAttribute extends OdfAttribute {
 	 * The value set of {@odf.attribute table:range-usable-as}.
 	 */
 	public enum Value {
-		NONE("none") ;
+		FILTER("filter"), NONE("none"), PRINT_RANGE("print-range"), REPEAT_COLUMN("repeat-column"), REPEAT_ROW("repeat-row") ;
 
 		private String mValue;
 

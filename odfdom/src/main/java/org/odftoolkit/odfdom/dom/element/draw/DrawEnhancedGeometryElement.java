@@ -489,25 +489,25 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>DrawExtrusionOriginAttribute</code> , See {@odf.attribute draw:extrusion-origin}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getDrawExtrusionOriginAttribute() {
+	public Double getDrawExtrusionOriginAttribute() {
 		DrawExtrusionOriginAttribute attr = (DrawExtrusionOriginAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "extrusion-origin");
 		if (attr != null) {
-			return String.valueOf(attr.getValue());
+			return Double.valueOf(attr.doubleValue());
 		}
-		return DrawExtrusionOriginAttribute.DEFAULT_VALUE;
+		return Double.valueOf(DrawExtrusionOriginAttribute.DEFAULT_VALUE);
 	}
 
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>DrawExtrusionOriginAttribute</code> , See {@odf.attribute draw:extrusion-origin}
 	 *
-	 * @param drawExtrusionOriginValue   The type is <code>String</code>
+	 * @param drawExtrusionOriginValue   The type is <code>Double</code>
 	 */
-	public void setDrawExtrusionOriginAttribute(String drawExtrusionOriginValue) {
+	public void setDrawExtrusionOriginAttribute(Double drawExtrusionOriginValue) {
 		DrawExtrusionOriginAttribute attr = new DrawExtrusionOriginAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(drawExtrusionOriginValue);
+		attr.setDoubleValue(drawExtrusionOriginValue.doubleValue());
 	}
 
 	/**
@@ -1113,12 +1113,12 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>SvgViewBoxAttribute</code> , See {@odf.attribute svg:viewBox}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getSvgViewBoxAttribute() {
+	public Integer getSvgViewBoxAttribute() {
 		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "viewBox");
 		if (attr != null) {
-			return String.valueOf(attr.getValue());
+			return Integer.valueOf(attr.intValue());
 		}
 		return null;
 	}
@@ -1126,12 +1126,12 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>SvgViewBoxAttribute</code> , See {@odf.attribute svg:viewBox}
 	 *
-	 * @param svgViewBoxValue   The type is <code>String</code>
+	 * @param svgViewBoxValue   The type is <code>Integer</code>
 	 */
-	public void setSvgViewBoxAttribute(String svgViewBoxValue) {
+	public void setSvgViewBoxAttribute(Integer svgViewBoxValue) {
 		SvgViewBoxAttribute attr = new SvgViewBoxAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(svgViewBoxValue);
+		attr.setIntValue(svgViewBoxValue.intValue());
 	}
 
 	/**

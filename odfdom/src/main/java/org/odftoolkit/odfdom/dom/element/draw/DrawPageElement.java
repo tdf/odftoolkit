@@ -520,10 +520,10 @@ public class DrawPageElement extends OdfStylableElement {
 	/**
 	 * Create child element {@odf.element draw:connector}.
 	 *
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element draw:connector}
 	 */
-	 public DrawConnectorElement newDrawConnectorElement(String svgViewBoxValue) {
+	 public DrawConnectorElement newDrawConnectorElement(int svgViewBoxValue) {
 		DrawConnectorElement drawConnector = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawConnectorElement.class);
 		drawConnector.setSvgViewBoxAttribute(svgViewBoxValue);
 		this.appendChild(drawConnector);
@@ -653,10 +653,10 @@ public class DrawPageElement extends OdfStylableElement {
 	 * Create child element {@odf.element draw:path}.
 	 *
 	 * @param svgDValue  the <code>String</code> value of <code>SvgDAttribute</code>, see {@odf.attribute  svg:d} at specification
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element draw:path}
 	 */
-	 public DrawPathElement newDrawPathElement(String svgDValue, String svgViewBoxValue) {
+	 public DrawPathElement newDrawPathElement(String svgDValue, int svgViewBoxValue) {
 		DrawPathElement drawPath = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPathElement.class);
 		drawPath.setSvgDAttribute(svgDValue);
 		drawPath.setSvgViewBoxAttribute(svgViewBoxValue);
@@ -668,10 +668,10 @@ public class DrawPageElement extends OdfStylableElement {
 	 * Create child element {@odf.element draw:polygon}.
 	 *
 	 * @param drawPointsValue  the <code>String</code> value of <code>DrawPointsAttribute</code>, see {@odf.attribute  draw:points} at specification
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element draw:polygon}
 	 */
-	 public DrawPolygonElement newDrawPolygonElement(String drawPointsValue, String svgViewBoxValue) {
+	 public DrawPolygonElement newDrawPolygonElement(String drawPointsValue, int svgViewBoxValue) {
 		DrawPolygonElement drawPolygon = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPolygonElement.class);
 		drawPolygon.setDrawPointsAttribute(drawPointsValue);
 		drawPolygon.setSvgViewBoxAttribute(svgViewBoxValue);
@@ -683,10 +683,10 @@ public class DrawPageElement extends OdfStylableElement {
 	 * Create child element {@odf.element draw:polyline}.
 	 *
 	 * @param drawPointsValue  the <code>String</code> value of <code>DrawPointsAttribute</code>, see {@odf.attribute  draw:points} at specification
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element draw:polyline}
 	 */
-	 public DrawPolylineElement newDrawPolylineElement(String drawPointsValue, String svgViewBoxValue) {
+	 public DrawPolylineElement newDrawPolylineElement(String drawPointsValue, int svgViewBoxValue) {
 		DrawPolylineElement drawPolyline = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPolylineElement.class);
 		drawPolyline.setDrawPointsAttribute(drawPointsValue);
 		drawPolyline.setSvgViewBoxAttribute(svgViewBoxValue);

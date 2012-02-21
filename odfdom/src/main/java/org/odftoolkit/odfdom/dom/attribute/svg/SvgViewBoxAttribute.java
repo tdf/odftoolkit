@@ -67,6 +67,26 @@ public class SvgViewBoxAttribute extends OdfAttribute {
 	}
 
 	/**
+	 * @param value The <code>int</code> value of the attribute.
+	 */
+	public void setIntValue(int value) {
+		super.setValue(String.valueOf(value));
+	}
+
+	/**
+	 * @return Returns the <code>int</code> value of the attribute
+	 */
+	public int intValue() {
+		String val = super.getValue();
+		try {
+			return Integer.parseInt(val);
+		} catch (NumberFormatException e) {
+			// TODO: validation handling/logging
+			throw (e);
+		}
+	}
+
+	/**
 	 * Returns the default value of {@odf.attribute svg:viewBox}.
 	 *
 	 * @return the default value as <code>String</code> dependent of its element name

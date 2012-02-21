@@ -81,13 +81,13 @@ public class DrawImageMapElement extends OdfElement {
 	 *
 	 * @param drawPointsValue  the <code>String</code> value of <code>DrawPointsAttribute</code>, see {@odf.attribute  draw:points} at specification
 	 * @param svgHeightValue  the <code>String</code> value of <code>SvgHeightAttribute</code>, see {@odf.attribute  svg:height} at specification
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @param svgWidthValue  the <code>String</code> value of <code>SvgWidthAttribute</code>, see {@odf.attribute  svg:width} at specification
 	 * @param svgXValue  the <code>String</code> value of <code>SvgXAttribute</code>, see {@odf.attribute  svg:x} at specification
 	 * @param svgYValue  the <code>String</code> value of <code>SvgYAttribute</code>, see {@odf.attribute  svg:y} at specification
 	 * @return the element {@odf.element draw:area-polygon}
 	 */
-	 public DrawAreaPolygonElement newDrawAreaPolygonElement(String drawPointsValue, String svgHeightValue, String svgViewBoxValue, String svgWidthValue, String svgXValue, String svgYValue) {
+	 public DrawAreaPolygonElement newDrawAreaPolygonElement(String drawPointsValue, String svgHeightValue, int svgViewBoxValue, String svgWidthValue, String svgXValue, String svgYValue) {
 		DrawAreaPolygonElement drawAreaPolygon = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawAreaPolygonElement.class);
 		drawAreaPolygon.setDrawPointsAttribute(drawPointsValue);
 		drawAreaPolygon.setSvgHeightAttribute(svgHeightValue);

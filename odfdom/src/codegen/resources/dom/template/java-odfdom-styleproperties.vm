@@ -18,8 +18,6 @@
 ## under the License.
 ##
 ##################################################################
-
-
 #include('copyright.txt')
 // !!! GENERATED SOURCE CODE !!!
 package org.odftoolkit.odfdom.dom.style.props;

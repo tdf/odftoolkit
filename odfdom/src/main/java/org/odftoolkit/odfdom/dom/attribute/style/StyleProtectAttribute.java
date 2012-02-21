@@ -70,7 +70,7 @@ public class StyleProtectAttribute extends OdfAttribute {
 	 * The value set of {@odf.attribute style:protect}.
 	 */
 	public enum Value {
-		FALSE("false"), NONE("none"), TRUE("true") ;
+		CONTENT("content"), FALSE("false"), NONE("none"), POSITION("position"), SIZE("size"), TRUE("true") ;
 
 		private String mValue;
 

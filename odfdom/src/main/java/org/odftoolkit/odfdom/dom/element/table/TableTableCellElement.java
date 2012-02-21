@@ -69,7 +69,6 @@ import org.odftoolkit.odfdom.dom.element.text.TextSoftPageBreakElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTableIndexElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTableOfContentElement;
 import org.odftoolkit.odfdom.dom.element.text.TextUserIndexElement;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberColumnsSpannedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberMatrixColumnsSpannedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberMatrixRowsSpannedAttribute;
@@ -99,32 +98,6 @@ public class TableTableCellElement extends TableTableCellElementBase {
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>OfficeValueTypeAttribute</code> , See {@odf.attribute office:value-type}
-	 *
-	 * Attribute is mandatory.
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getOfficeValueTypeAttribute() {
-		OfficeValueTypeAttribute attr = (OfficeValueTypeAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "value-type");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>OfficeValueTypeAttribute</code> , See {@odf.attribute office:value-type}
-	 *
-	 * @param officeValueTypeValue   The type is <code>String</code>
-	 */
-	public void setOfficeValueTypeAttribute(String officeValueTypeValue) {
-		OfficeValueTypeAttribute attr = new OfficeValueTypeAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setValue(officeValueTypeValue);
 	}
 
 	/**
@@ -274,10 +247,10 @@ public class TableTableCellElement extends TableTableCellElementBase {
 	/**
 	 * Create child element {@odf.element draw:connector}.
 	 *
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element draw:connector}
 	 */
-	 public DrawConnectorElement newDrawConnectorElement(String svgViewBoxValue) {
+	 public DrawConnectorElement newDrawConnectorElement(int svgViewBoxValue) {
 		DrawConnectorElement drawConnector = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawConnectorElement.class);
 		drawConnector.setSvgViewBoxAttribute(svgViewBoxValue);
 		this.appendChild(drawConnector);
@@ -394,10 +367,10 @@ public class TableTableCellElement extends TableTableCellElementBase {
 	 * Create child element {@odf.element draw:path}.
 	 *
 	 * @param svgDValue  the <code>String</code> value of <code>SvgDAttribute</code>, see {@odf.attribute  svg:d} at specification
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element draw:path}
 	 */
-	 public DrawPathElement newDrawPathElement(String svgDValue, String svgViewBoxValue) {
+	 public DrawPathElement newDrawPathElement(String svgDValue, int svgViewBoxValue) {
 		DrawPathElement drawPath = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPathElement.class);
 		drawPath.setSvgDAttribute(svgDValue);
 		drawPath.setSvgViewBoxAttribute(svgViewBoxValue);
@@ -409,10 +382,10 @@ public class TableTableCellElement extends TableTableCellElementBase {
 	 * Create child element {@odf.element draw:polygon}.
 	 *
 	 * @param drawPointsValue  the <code>String</code> value of <code>DrawPointsAttribute</code>, see {@odf.attribute  draw:points} at specification
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element draw:polygon}
 	 */
-	 public DrawPolygonElement newDrawPolygonElement(String drawPointsValue, String svgViewBoxValue) {
+	 public DrawPolygonElement newDrawPolygonElement(String drawPointsValue, int svgViewBoxValue) {
 		DrawPolygonElement drawPolygon = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPolygonElement.class);
 		drawPolygon.setDrawPointsAttribute(drawPointsValue);
 		drawPolygon.setSvgViewBoxAttribute(svgViewBoxValue);
@@ -424,10 +397,10 @@ public class TableTableCellElement extends TableTableCellElementBase {
 	 * Create child element {@odf.element draw:polyline}.
 	 *
 	 * @param drawPointsValue  the <code>String</code> value of <code>DrawPointsAttribute</code>, see {@odf.attribute  draw:points} at specification
-	 * @param svgViewBoxValue  the <code>String</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
+	 * @param svgViewBoxValue  the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see {@odf.attribute  svg:viewBox} at specification
 	 * @return the element {@odf.element draw:polyline}
 	 */
-	 public DrawPolylineElement newDrawPolylineElement(String drawPointsValue, String svgViewBoxValue) {
+	 public DrawPolylineElement newDrawPolylineElement(String drawPointsValue, int svgViewBoxValue) {
 		DrawPolylineElement drawPolyline = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPolylineElement.class);
 		drawPolyline.setDrawPointsAttribute(drawPointsValue);
 		drawPolyline.setSvgViewBoxAttribute(svgViewBoxValue);
