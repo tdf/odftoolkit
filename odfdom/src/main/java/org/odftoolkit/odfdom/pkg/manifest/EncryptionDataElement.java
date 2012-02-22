@@ -32,7 +32,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 /**
- * Manifest implementation of OpenDocument element  {@odf.element encryption-data}.
+ * Manifest implementation of OpenDocument element  {@odf.element manifest:encryption-data}.
  *
  */
 public class EncryptionDataElement extends OdfElement {
@@ -42,7 +42,7 @@ public class EncryptionDataElement extends OdfElement {
 	/**
 	 * Create the instance of <code>EncryptionDataElement</code>
 	 *
-	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
+	 * @param  ownerDoc  The type is <code>OdfFileDom</code>
 	 */
 	public EncryptionDataElement(OdfFileDom ownerDoc) {
 		super(ownerDoc, ELEMENT_NAME);
@@ -51,14 +51,14 @@ public class EncryptionDataElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element encryption-data}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:encryption-data}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>ChecksumAttribute</code> , See {@odf.attribute checksum}
+	 * Receives the value of the ODFDOM attribute representation <code>ChecksumAttribute</code> , See {@odf.attribute manifest:checksum}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -73,7 +73,7 @@ public class EncryptionDataElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>ChecksumAttribute</code> , See {@odf.attribute checksum}
+	 * Sets the value of ODFDOM attribute representation <code>ChecksumAttribute</code> , See {@odf.attribute manifest:checksum}
 	 *
 	 * @param checksumValue   The type is <code>String</code>
 	 */
@@ -84,7 +84,7 @@ public class EncryptionDataElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>ChecksumTypeAttribute</code> , See {@odf.attribute checksum-type}
+	 * Receives the value of the ODFDOM attribute representation <code>ChecksumTypeAttribute</code> , See {@odf.attribute manifest:checksum-type}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -99,7 +99,7 @@ public class EncryptionDataElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>ChecksumTypeAttribute</code> , See {@odf.attribute checksum-type}
+	 * Sets the value of ODFDOM attribute representation <code>ChecksumTypeAttribute</code> , See {@odf.attribute manifest:checksum-type}
 	 *
 	 * @param checksumTypeValue   The type is <code>String</code>
 	 */
@@ -110,15 +110,15 @@ public class EncryptionDataElement extends OdfElement {
 	}
 
 	/**
-	 * Create child element {@odf.element algorithm}.
+	 * Create child element {@odf.element manifest:algorithm}.
 	 *
-	 * @param algorithmNameValue  the <code>String</code> value of <code>AlgorithmNameAttribute</code>, see {@odf.attribute  algorithm-name} at specification
-	 * @param initialisationVectorValue  the <code>String</code> value of <code>InitialisationVectorAttribute</code>, see {@odf.attribute  initialisation-vector} at specification
+	 * @param algorithmNameValue  the <code>String</code> value of <code>AlgorithmNameAttribute</code>, see {@odf.attribute  manifest:algorithm-name} at specification
+	 * @param initialisationVectorValue  the <code>String</code> value of <code>InitialisationVectorAttribute</code>, see {@odf.attribute  manifest:initialisation-vector} at specification
 	 * Child element is new in Odf 1.2
 	 *
 	 * Child element is mandatory.
 	 *
-	 * @return the element {@odf.element algorithm}
+	 * @return the element {@odf.element manifest:algorithm}
 	 */
 	 public AlgorithmElement newAlgorithmElement(String algorithmNameValue, String initialisationVectorValue) {
 		AlgorithmElement algorithm = ((OdfFileDom) this.ownerDocument).newOdfElement(AlgorithmElement.class);
@@ -129,16 +129,16 @@ public class EncryptionDataElement extends OdfElement {
 	}
 
 	/**
-	 * Create child element {@odf.element key-derivation}.
+	 * Create child element {@odf.element manifest:key-derivation}.
 	 *
-	 * @param iterationCountValue  the <code>Integer</code> value of <code>IterationCountAttribute</code>, see {@odf.attribute  iteration-count} at specification
-	 * @param keyDerivationNameValue  the <code>String</code> value of <code>KeyDerivationNameAttribute</code>, see {@odf.attribute  key-derivation-name} at specification
-	 * @param saltValue  the <code>String</code> value of <code>SaltAttribute</code>, see {@odf.attribute  salt} at specification
+	 * @param iterationCountValue  the <code>Integer</code> value of <code>IterationCountAttribute</code>, see {@odf.attribute  manifest:iteration-count} at specification
+	 * @param keyDerivationNameValue  the <code>String</code> value of <code>KeyDerivationNameAttribute</code>, see {@odf.attribute  manifest:key-derivation-name} at specification
+	 * @param saltValue  the <code>String</code> value of <code>SaltAttribute</code>, see {@odf.attribute  manifest:salt} at specification
 	 * Child element is new in Odf 1.2
 	 *
 	 * Child element is mandatory.
 	 *
-	 * @return the element {@odf.element key-derivation}
+	 * @return the element {@odf.element manifest:key-derivation}
 	 */
 	 public KeyDerivationElement newKeyDerivationElement(int iterationCountValue, String keyDerivationNameValue, String saltValue) {
 		KeyDerivationElement keyDerivation = ((OdfFileDom) this.ownerDocument).newOdfElement(KeyDerivationElement.class);
@@ -150,12 +150,12 @@ public class EncryptionDataElement extends OdfElement {
 	}
 
 	/**
-	 * Create child element {@odf.element start-key-generation}.
+	 * Create child element {@odf.element manifest:start-key-generation}.
 	 *
-	 * @param startKeyGenerationNameValue  the <code>String</code> value of <code>StartKeyGenerationNameAttribute</code>, see {@odf.attribute  start-key-generation-name} at specification
+	 * @param startKeyGenerationNameValue  the <code>String</code> value of <code>StartKeyGenerationNameAttribute</code>, see {@odf.attribute  manifest:start-key-generation-name} at specification
 	 * Child element is new in Odf 1.2
 	 *
-	 * @return the element {@odf.element start-key-generation}
+	 * @return the element {@odf.element manifest:start-key-generation}
 	 */
 	 public StartKeyGenerationElement newStartKeyGenerationElement(String startKeyGenerationNameValue) {
 		StartKeyGenerationElement startKeyGeneration = ((OdfFileDom) this.ownerDocument).newOdfElement(StartKeyGenerationElement.class);

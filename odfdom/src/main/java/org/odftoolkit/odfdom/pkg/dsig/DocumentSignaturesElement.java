@@ -34,7 +34,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 
 
 /**
- * Data signature implementation of OpenDocument element  {@odf.element document-signatures}.
+ * DOM implementation of OpenDocument element  {@odf.element dsig:document-signatures}.
  *
  */
 public class DocumentSignaturesElement extends OdfElement {
@@ -44,7 +44,7 @@ public class DocumentSignaturesElement extends OdfElement {
 	/**
 	 * Create the instance of <code>DocumentSignaturesElement</code>
 	 *
-	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
+	 * @param  ownerDoc The type is <code>OdfFileDom</code>
 	 */
 	public DocumentSignaturesElement(OdfFileDom ownerDoc) {
 		super(ownerDoc, ELEMENT_NAME);
@@ -53,14 +53,14 @@ public class DocumentSignaturesElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element document-signatures}.
+	 * @return  return <code>OdfName</code> the name of element {@odf.element dsig:document-signatures}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>VersionAttribute</code> , See {@odf.attribute version}
+	 * Receives the value of the ODFDOM attribute representation <code>VersionAttribute</code> , See {@odf.attribute dsig:version}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -75,7 +75,7 @@ public class DocumentSignaturesElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>VersionAttribute</code> , See {@odf.attribute version}
+	 * Sets the value of ODFDOM attribute representation <code>VersionAttribute</code> , See {@odf.attribute dsig:version}
 	 *
 	 * @param versionValue   The type is <code>String</code>
 	 */
@@ -86,13 +86,13 @@ public class DocumentSignaturesElement extends OdfElement {
 	}
 
 	/**
-	 * Create child element {@odf.element Signature}.
+	 * Create child element {@odf.element ds:Signature}.
 	 *
 	 * Child element is new in Odf 1.2
 	 *
 	 * Child element is mandatory.
 	 *
-	 * @return the element {@odf.element Signature}
+	 * @return the element {@odf.element ds:Signature}
 	 */
 	public SignatureElement newSignatureElement() {
 		SignatureElement signature = ((OdfFileDom) this.ownerDocument).newOdfElement(SignatureElement.class);

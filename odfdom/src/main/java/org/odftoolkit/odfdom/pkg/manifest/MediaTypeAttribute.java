@@ -33,7 +33,7 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
- * Manifest implementation of OpenDocument attribute  {@odf.attribute media-type}.
+ * Manifest implementation of OpenDocument attribute  {@odf.attribute manifest:media-type}.
  *
  */
 public class MediaTypeAttribute extends OdfAttribute {
@@ -41,7 +41,7 @@ public class MediaTypeAttribute extends OdfAttribute {
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:media-type");
 
 	/**
-	 * Create the instance of OpenDocument attribute {@odf.attribute media-type}.
+	 * Create the instance of OpenDocument attribute {@odf.attribute manifest:media-type}.
 	 *
 	 * @param ownerDocument       The type is <code>OdfFileDom</code>
 	 */
@@ -52,7 +52,7 @@ public class MediaTypeAttribute extends OdfAttribute {
 	/**
 	 * Returns the attribute name.
 	 *
-	 * @return the <code>OdfName</code> for {@odf.attribute media-type}.
+	 * @return the <code>OdfName</code> for {@odf.attribute manifest:media-type}.
 	 */
 	@Override
 	public OdfName getOdfName() {
@@ -98,7 +98,7 @@ public class MediaTypeAttribute extends OdfAttribute {
 	}
 
 	/**
-	 * Returns the default value of {@odf.attribute media-type}.
+	 * Returns the default value of {@odf.attribute manifest:media-type}.
 	 *
 	 * @return the default value as <code>String</code> dependent of its element name
 	 *         return <code>null</code> if the default value does not exist
@@ -111,7 +111,7 @@ public class MediaTypeAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 *
-	 * @return <code>true</code> if {@odf.attribute media-type} has an element parent
+	 * @return <code>true</code> if {@odf.attribute manifest:media-type} has an element parent
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

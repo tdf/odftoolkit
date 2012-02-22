@@ -32,7 +32,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 /**
- * Manifest implementation of OpenDocument element  {@odf.element key-derivation}.
+ * Manifest implementation of OpenDocument element  {@odf.element manifest:key-derivation}.
  *
  */
 public class KeyDerivationElement extends OdfElement {
@@ -42,7 +42,7 @@ public class KeyDerivationElement extends OdfElement {
 	/**
 	 * Create the instance of <code>KeyDerivationElement</code>
 	 *
-	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
+	 * @param  ownerDoc  The type is <code>OdfFileDom</code>
 	 */
 	public KeyDerivationElement(OdfFileDom ownerDoc) {
 		super(ownerDoc, ELEMENT_NAME);
@@ -51,14 +51,14 @@ public class KeyDerivationElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element key-derivation}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:key-derivation}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>IterationCountAttribute</code> , See {@odf.attribute iteration-count}
+	 * Receives the value of the ODFDOM attribute representation <code>IterationCountAttribute</code> , See {@odf.attribute manifest:iteration-count}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -73,7 +73,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>IterationCountAttribute</code> , See {@odf.attribute iteration-count}
+	 * Sets the value of ODFDOM attribute representation <code>IterationCountAttribute</code> , See {@odf.attribute manifest:iteration-count}
 	 *
 	 * @param iterationCountValue   The type is <code>Integer</code>
 	 */
@@ -84,7 +84,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>KeyDerivationNameAttribute</code> , See {@odf.attribute key-derivation-name}
+	 * Receives the value of the ODFDOM attribute representation <code>KeyDerivationNameAttribute</code> , See {@odf.attribute manifest:key-derivation-name}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -99,7 +99,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>KeyDerivationNameAttribute</code> , See {@odf.attribute key-derivation-name}
+	 * Sets the value of ODFDOM attribute representation <code>KeyDerivationNameAttribute</code> , See {@odf.attribute manifest:key-derivation-name}
 	 *
 	 * @param keyDerivationNameValue   The type is <code>String</code>
 	 */
@@ -110,7 +110,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>KeySizeAttribute</code> , See {@odf.attribute key-size}
+	 * Receives the value of the ODFDOM attribute representation <code>KeySizeAttribute</code> , See {@odf.attribute manifest:key-size}
 	 *
 	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
@@ -123,7 +123,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>KeySizeAttribute</code> , See {@odf.attribute key-size}
+	 * Sets the value of ODFDOM attribute representation <code>KeySizeAttribute</code> , See {@odf.attribute manifest:key-size}
 	 *
 	 * @param keySizeValue   The type is <code>Integer</code>
 	 */
@@ -134,7 +134,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>SaltAttribute</code> , See {@odf.attribute salt}
+	 * Receives the value of the ODFDOM attribute representation <code>SaltAttribute</code> , See {@odf.attribute manifest:salt}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -149,7 +149,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>SaltAttribute</code> , See {@odf.attribute salt}
+	 * Sets the value of ODFDOM attribute representation <code>SaltAttribute</code> , See {@odf.attribute manifest:salt}
 	 *
 	 * @param saltValue   The type is <code>String</code>
 	 */

@@ -32,7 +32,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 /**
- * Manifest implementation of OpenDocument element  {@odf.element file-entry}.
+ * Manifest implementation of OpenDocument element  {@odf.element manifest:file-entry}.
  *
  */
 public class FileEntryElement extends OdfElement {
@@ -42,7 +42,7 @@ public class FileEntryElement extends OdfElement {
 	/**
 	 * Create the instance of <code>FileEntryElement</code>
 	 *
-	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
+	 * @param  ownerDoc  The type is <code>OdfFileDom</code>
 	 */
 	public FileEntryElement(OdfFileDom ownerDoc) {
 		super(ownerDoc, ELEMENT_NAME);
@@ -51,14 +51,14 @@ public class FileEntryElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element file-entry}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:file-entry}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>FullPathAttribute</code> , See {@odf.attribute full-path}
+	 * Receives the value of the ODFDOM attribute representation <code>FullPathAttribute</code> , See {@odf.attribute manifest:full-path}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -73,7 +73,7 @@ public class FileEntryElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>FullPathAttribute</code> , See {@odf.attribute full-path}
+	 * Sets the value of ODFDOM attribute representation <code>FullPathAttribute</code> , See {@odf.attribute manifest:full-path}
 	 *
 	 * @param fullPathValue   The type is <code>String</code>
 	 */
@@ -84,7 +84,7 @@ public class FileEntryElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>MediaTypeAttribute</code> , See {@odf.attribute media-type}
+	 * Receives the value of the ODFDOM attribute representation <code>MediaTypeAttribute</code> , See {@odf.attribute manifest:media-type}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -99,7 +99,7 @@ public class FileEntryElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>MediaTypeAttribute</code> , See {@odf.attribute media-type}
+	 * Sets the value of ODFDOM attribute representation <code>MediaTypeAttribute</code> , See {@odf.attribute manifest:media-type}
 	 *
 	 * @param mediaTypeValue   The type is <code>String</code>
 	 */
@@ -110,7 +110,7 @@ public class FileEntryElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>PreferredViewModeAttribute</code> , See {@odf.attribute preferred-view-mode}
+	 * Receives the value of the ODFDOM attribute representation <code>PreferredViewModeAttribute</code> , See {@odf.attribute manifest:preferred-view-mode}
 	 *
 	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
@@ -123,7 +123,7 @@ public class FileEntryElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>PreferredViewModeAttribute</code> , See {@odf.attribute preferred-view-mode}
+	 * Sets the value of ODFDOM attribute representation <code>PreferredViewModeAttribute</code> , See {@odf.attribute manifest:preferred-view-mode}
 	 *
 	 * @param preferredViewModeValue   The type is <code>String</code>
 	 */
@@ -134,7 +134,7 @@ public class FileEntryElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>SizeAttribute</code> , See {@odf.attribute size}
+	 * Receives the value of the ODFDOM attribute representation <code>SizeAttribute</code> , See {@odf.attribute manifest:size}
 	 *
 	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
@@ -147,7 +147,7 @@ public class FileEntryElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>SizeAttribute</code> , See {@odf.attribute size}
+	 * Sets the value of ODFDOM attribute representation <code>SizeAttribute</code> , See {@odf.attribute manifest:size}
 	 *
 	 * @param sizeValue   The type is <code>Integer</code>
 	 */
@@ -158,7 +158,7 @@ public class FileEntryElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>VersionAttribute</code> , See {@odf.attribute version}
+	 * Receives the value of the ODFDOM attribute representation <code>VersionAttribute</code> , See {@odf.attribute manifest:version}
 	 *
 	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
@@ -171,7 +171,7 @@ public class FileEntryElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>VersionAttribute</code> , See {@odf.attribute version}
+	 * Sets the value of ODFDOM attribute representation <code>VersionAttribute</code> , See {@odf.attribute manifest:version}
 	 *
 	 * @param versionValue   The type is <code>String</code>
 	 */
@@ -182,13 +182,13 @@ public class FileEntryElement extends OdfElement {
 	}
 
 	/**
-	 * Create child element {@odf.element encryption-data}.
+	 * Create child element {@odf.element manifest:encryption-data}.
 	 *
-	 * @param checksumValue  the <code>String</code> value of <code>ChecksumAttribute</code>, see {@odf.attribute  checksum} at specification
-	 * @param checksumTypeValue  the <code>String</code> value of <code>ChecksumTypeAttribute</code>, see {@odf.attribute  checksum-type} at specification
+	 * @param checksumValue  the <code>String</code> value of <code>ChecksumAttribute</code>, see {@odf.attribute  manifest:checksum} at specification
+	 * @param checksumTypeValue  the <code>String</code> value of <code>ChecksumTypeAttribute</code>, see {@odf.attribute  manifest:checksum-type} at specification
 	 * Child element is new in Odf 1.2
 	 *
-	 * @return the element {@odf.element encryption-data}
+	 * @return the element {@odf.element manifest:encryption-data}
 	 */
 	 public EncryptionDataElement newEncryptionDataElement(String checksumValue, String checksumTypeValue) {
 		EncryptionDataElement encryptionData = ((OdfFileDom) this.ownerDocument).newOdfElement(EncryptionDataElement.class);

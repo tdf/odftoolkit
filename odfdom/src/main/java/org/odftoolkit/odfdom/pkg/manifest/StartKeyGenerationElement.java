@@ -32,7 +32,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 /**
- * Manifest implementation of OpenDocument element  {@odf.element start-key-generation}.
+ * Manifest implementation of OpenDocument element  {@odf.element manifest:start-key-generation}.
  *
  */
 public class StartKeyGenerationElement extends OdfElement {
@@ -42,7 +42,7 @@ public class StartKeyGenerationElement extends OdfElement {
 	/**
 	 * Create the instance of <code>StartKeyGenerationElement</code>
 	 *
-	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
+	 * @param  ownerDoc  The type is <code>OdfFileDom</code>
 	 */
 	public StartKeyGenerationElement(OdfFileDom ownerDoc) {
 		super(ownerDoc, ELEMENT_NAME);
@@ -51,14 +51,14 @@ public class StartKeyGenerationElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element start-key-generation}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:start-key-generation}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>KeySizeAttribute</code> , See {@odf.attribute key-size}
+	 * Receives the value of the ODFDOM attribute representation <code>KeySizeAttribute</code> , See {@odf.attribute manifest:key-size}
 	 *
 	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
@@ -71,7 +71,7 @@ public class StartKeyGenerationElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>KeySizeAttribute</code> , See {@odf.attribute key-size}
+	 * Sets the value of ODFDOM attribute representation <code>KeySizeAttribute</code> , See {@odf.attribute manifest:key-size}
 	 *
 	 * @param keySizeValue   The type is <code>Integer</code>
 	 */
@@ -82,7 +82,7 @@ public class StartKeyGenerationElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>StartKeyGenerationNameAttribute</code> , See {@odf.attribute start-key-generation-name}
+	 * Receives the value of the ODFDOM attribute representation <code>StartKeyGenerationNameAttribute</code> , See {@odf.attribute manifest:start-key-generation-name}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -97,7 +97,7 @@ public class StartKeyGenerationElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>StartKeyGenerationNameAttribute</code> , See {@odf.attribute start-key-generation-name}
+	 * Sets the value of ODFDOM attribute representation <code>StartKeyGenerationNameAttribute</code> , See {@odf.attribute manifest:start-key-generation-name}
 	 *
 	 * @param startKeyGenerationNameValue   The type is <code>String</code>
 	 */

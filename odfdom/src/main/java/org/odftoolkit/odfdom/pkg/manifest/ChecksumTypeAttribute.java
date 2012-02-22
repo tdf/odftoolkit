@@ -33,7 +33,7 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
- * Manifest implementation of OpenDocument attribute  {@odf.attribute checksum-type}.
+ * Manifest implementation of OpenDocument attribute  {@odf.attribute manifest:checksum-type}.
  *
  */
 public class ChecksumTypeAttribute extends OdfAttribute {
@@ -41,7 +41,7 @@ public class ChecksumTypeAttribute extends OdfAttribute {
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:checksum-type");
 
 	/**
-	 * Create the instance of OpenDocument attribute {@odf.attribute checksum-type}.
+	 * Create the instance of OpenDocument attribute {@odf.attribute manifest:checksum-type}.
 	 *
 	 * @param ownerDocument       The type is <code>OdfFileDom</code>
 	 */
@@ -52,7 +52,7 @@ public class ChecksumTypeAttribute extends OdfAttribute {
 	/**
 	 * Returns the attribute name.
 	 *
-	 * @return the <code>OdfName</code> for {@odf.attribute checksum-type}.
+	 * @return the <code>OdfName</code> for {@odf.attribute manifest:checksum-type}.
 	 */
 	@Override
 	public OdfName getOdfName() {
@@ -68,7 +68,7 @@ public class ChecksumTypeAttribute extends OdfAttribute {
 	}
 
 	/**
-	 * The value set of {@odf.attribute checksum-type}.
+	 * The value set of {@odf.attribute manifest:checksum-type}.
 	 */
 	public enum Value {
 		SHA1_1K("SHA1/1K") ;
@@ -128,7 +128,7 @@ public class ChecksumTypeAttribute extends OdfAttribute {
 	}
 
 	/**
-	 * Returns the default value of {@odf.attribute checksum-type}.
+	 * Returns the default value of {@odf.attribute manifest:checksum-type}.
 	 *
 	 * @return the default value as <code>String</code> dependent of its element name
 	 *         return <code>null</code> if the default value does not exist
@@ -141,7 +141,7 @@ public class ChecksumTypeAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 *
-	 * @return <code>true</code> if {@odf.attribute checksum-type} has an element parent
+	 * @return <code>true</code> if {@odf.attribute manifest:checksum-type} has an element parent
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

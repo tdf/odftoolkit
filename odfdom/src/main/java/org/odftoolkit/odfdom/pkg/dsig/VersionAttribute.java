@@ -33,7 +33,7 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
- * DOM implementation of OpenDocument attribute  {@odf.attribute version}.
+ * DOM implementation of OpenDocument attribute  {@odf.attribute dsig:version}.
  *
  */
 public class VersionAttribute extends OdfAttribute {
@@ -41,7 +41,7 @@ public class VersionAttribute extends OdfAttribute {
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:digitalsignature:1.0", "dsig:version");
 
 	/**
-	 * Create the instance of OpenDocument attribute {@odf.attribute version}.
+	 * Create the instance of OpenDocument attribute {@odf.attribute dsig:version}.
 	 *
 	 * @param ownerDocument       The type is <code>OdfFileDom</code>
 	 */
@@ -52,7 +52,7 @@ public class VersionAttribute extends OdfAttribute {
 	/**
 	 * Returns the attribute name.
 	 *
-	 * @return the <code>OdfName</code> for {@odf.attribute version}.
+	 * @return the <code>OdfName</code> for {@odf.attribute dsig:version}.
 	 */
 	@Override
 	public OdfName getOdfName() {
@@ -68,7 +68,7 @@ public class VersionAttribute extends OdfAttribute {
 	}
 
 	/**
-	 * The value set of {@odf.attribute version}.
+	 * The value set of {@odf.attribute dsig:version}.
 	 */
 	public enum Value {
 		_1_2("1.2") ;
@@ -129,12 +129,12 @@ public class VersionAttribute extends OdfAttribute {
 		try {
 			return Value.enumValueOf(super.getValue()).toString();
 		} catch (NullPointerException e) {
-			throw new IllegalArgumentException("the value of version is not valid");
+			throw new IllegalArgumentException("the value of dsig:version is not valid");
 		}
 	}
 
 	/**
-	 * Returns the default value of {@odf.attribute version}.
+	 * Returns the default value of {@odf.attribute dsig:version}.
 	 *
 	 * @return the default value as <code>String</code> dependent of its element name
 	 *         return <code>null</code> if the default value does not exist
@@ -147,7 +147,7 @@ public class VersionAttribute extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 *
-	 * @return <code>true</code> if {@odf.attribute version} has an element parent
+	 * @return <code>true</code> if {@odf.attribute dsig:version} has an element parent
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

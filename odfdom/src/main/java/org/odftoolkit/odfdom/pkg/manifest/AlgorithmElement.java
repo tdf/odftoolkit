@@ -32,7 +32,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 /**
- * Manifest implementation of OpenDocument element  {@odf.element algorithm}.
+ * Manifest implementation of OpenDocument element  {@odf.element manifest:algorithm}.
  *
  */
 public class AlgorithmElement extends OdfElement {
@@ -42,7 +42,7 @@ public class AlgorithmElement extends OdfElement {
 	/**
 	 * Create the instance of <code>AlgorithmElement</code>
 	 *
-	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
+	 * @param  ownerDoc  The type is <code>OdfFileDom</code>
 	 */
 	public AlgorithmElement(OdfFileDom ownerDoc) {
 		super(ownerDoc, ELEMENT_NAME);
@@ -51,14 +51,14 @@ public class AlgorithmElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element algorithm}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:algorithm}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>AlgorithmNameAttribute</code> , See {@odf.attribute algorithm-name}
+	 * Receives the value of the ODFDOM attribute representation <code>AlgorithmNameAttribute</code> , See {@odf.attribute manifest:algorithm-name}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -73,7 +73,7 @@ public class AlgorithmElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>AlgorithmNameAttribute</code> , See {@odf.attribute algorithm-name}
+	 * Sets the value of ODFDOM attribute representation <code>AlgorithmNameAttribute</code> , See {@odf.attribute manifest:algorithm-name}
 	 *
 	 * @param algorithmNameValue   The type is <code>String</code>
 	 */
@@ -84,7 +84,7 @@ public class AlgorithmElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>InitialisationVectorAttribute</code> , See {@odf.attribute initialisation-vector}
+	 * Receives the value of the ODFDOM attribute representation <code>InitialisationVectorAttribute</code> , See {@odf.attribute manifest:initialisation-vector}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -99,7 +99,7 @@ public class AlgorithmElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>InitialisationVectorAttribute</code> , See {@odf.attribute initialisation-vector}
+	 * Sets the value of ODFDOM attribute representation <code>InitialisationVectorAttribute</code> , See {@odf.attribute manifest:initialisation-vector}
 	 *
 	 * @param initialisationVectorValue   The type is <code>String</code>
 	 */

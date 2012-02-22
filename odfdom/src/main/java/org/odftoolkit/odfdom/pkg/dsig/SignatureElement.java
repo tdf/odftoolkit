@@ -34,7 +34,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 
 
 /**
- * Data signature implementation of OpenDocument element  {@odf.element Signature}.
+ * DOM implementation of OpenDocument element  {@odf.element ds:Signature}.
  *
  */
 public class SignatureElement extends OdfElement {
@@ -44,7 +44,7 @@ public class SignatureElement extends OdfElement {
 	/**
 	 * Create the instance of <code>SignatureElement</code>
 	 *
-	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
+	 * @param  ownerDoc The type is <code>OdfFileDom</code>
 	 */
 	public SignatureElement(OdfFileDom ownerDoc) {
 		super(ownerDoc, ELEMENT_NAME);
@@ -53,7 +53,7 @@ public class SignatureElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element Signature}.
+	 * @return  return <code>OdfName</code> the name of element {@odf.element ds:Signature}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
