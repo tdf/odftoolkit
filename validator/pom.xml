@@ -72,7 +72,7 @@
                           </goals>
                           <configuration>
                             <url>dav:http://docs.oasis-open.org/office/v1.2</url>
-                            <fromFile>cos01/OpenDocument-v1.2-cos01-schemas.zip</fromFile>
+                            <fromFile>os/OpenDocument-v1.2-os-schemas.zip</fromFile>
                             <toDir>${project.build.directory}/schemas</toDir>
                           </configuration>
                     </execution>
@@ -197,7 +197,7 @@
                         <configuration>
                             <tasks>
                                 <echo message="unzip odf 1.2 schemas" />
-                                <unzip src="${project.build.directory}/schemas/OpenDocument-v1.2-cos01-schemas.zip" dest="${project.build.directory}/classes/schema/odf1.2/" />
+                                <unzip src="${project.build.directory}/schemas/OpenDocument-v1.2-os-schemas.zip" dest="${project.build.directory}/classes/schema/odf1.2/" />
                                 <echo message="unzip mathml 3.0 schemas" />
                                 <unzip src="${project.build.directory}/schemas/mathml3-relaxng.zip" dest="${project.build.directory}/schemas/" />
                                 <move file="${project.build.directory}/schemas/mathml3" tofile="${project.build.directory}/classes/schema/mathml3.0" />                                
