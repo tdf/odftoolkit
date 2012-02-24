@@ -182,7 +182,8 @@
                     <excludes>
                         <exclude>src/main/resources/**</exclude>
                         <exclude>src/test/resources/**</exclude>
-                        <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-cd05-part1.html</exclude>
+                        <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-part1.html</exclude>
+                        <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-part3.html</exclude>
                         <exclude>src/codegen/resources/dom/*.rng</exclude>
                         <exclude>src/codegen/resources/pkg/*.rng</exclude>
                     </excludes>
