@@ -92,7 +92,7 @@ import ${baseimport};
 ## ---------------------------------------------------
 ##
 /**
- * Data signature implementation of OpenDocument element  {@odf.element ${context}}.
+ * DOM implementation of OpenDocument element  {@odf.element ${PREFIX}:${context}}.
  *
 #if ($anychild)
  * This class can have any org.w3c.dom.Element child element.
@@ -108,7 +108,7 @@ public class $classname extends $baseclassname {
 	/**
 	 * Create the instance of <code>$classname</code>
 	 *
-	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
+	 * @param  ownerDoc The type is <code>OdfFileDom</code>
 	 */
 	public $classname(OdfFileDom ownerDoc) {
 		super(ownerDoc, ELEMENT_NAME);
@@ -117,7 +117,7 @@ public class $classname extends $baseclassname {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element ${context}}.
+	 * @return  return <code>OdfName</code> the name of element {@odf.element ${PREFIX}:${context}}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
@@ -173,7 +173,7 @@ public class $classname extends $baseclassname {
 #set ($aParam = "${signaturemodel.javaCase($attribute)}Value")
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>$aClassname</code> , See {@odf.attribute ${attribute.getQName()}}
+	 * Receives the value of the ODFDOM attribute representation <code>$aClassname</code> , See {@odf.attribute ${PREFIX}:${attribute.getQName()}}
 	 *
 #if (${element.isMandatory($attribute)})
 	 * Attribute is mandatory.
@@ -213,7 +213,7 @@ public class $classname extends $baseclassname {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>$aClassname</code> , See {@odf.attribute ${attribute.getQName()}}
+	 * Sets the value of ODFDOM attribute representation <code>$aClassname</code> , See {@odf.attribute ${PREFIX}:${attribute.getQName()}}
 	 *
 	 * @param $aParam   The type is <code>$valueObject</code>
 	 */
@@ -249,7 +249,7 @@ public class $classname extends $baseclassname {
 #end
 #if ($hasParams)
 	/**
-	 * Create child element {@odf.element ${child}}.
+	 * Create child element {@odf.element ds:${child}}.
 	 *
 #set ($seperateFlag="")
 #set ($params="")
@@ -292,7 +292,7 @@ public class $classname extends $baseclassname {
 #set ($aNS = ${attribute.getNamespace()})
 #set ($aClassname = "${signaturemodel.camelCase($attribute)}Attribute")
 #set ($aParam = "${signaturemodel.javaCase($attribute)}Value")
-	 * @param $aParam  the <code>$ch_ValueObject</code> value of <code>$aClassname</code>, see {@odf.attribute  ${attribute.getQName()}} at specification
+	 * @param $aParam  the <code>$ch_ValueObject</code> value of <code>$aClassname</code>, see {@odf.attribute ${PREFIX}:${attribute.getQName()}} at specification
 #if ($ch_SimpleValue!="")
 #set ($params="${params}${seperateFlag}${ch_SimpleValue} ${aParam}")
 #else
@@ -312,7 +312,7 @@ public class $classname extends $baseclassname {
 	 * Child element is mandatory.
 	 *
 #end
-	 * @return the element {@odf.element ${child}}
+	 * @return the element {@odf.element ds:${child}}
 	 */
 	 public $cClassname new${cClassname}($params) {
 		$cClassname $cVar = ((OdfFileDom) this.ownerDocument).newOdfElement(${cClassname}.class);
@@ -329,7 +329,7 @@ public class $classname extends $baseclassname {
 
 #else
 	/**
-	 * Create child element {@odf.element ${child}}.
+	 * Create child element {@odf.element ds:${child}}.
 	 *
 ## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
 ## but we can compare by name
@@ -341,7 +341,7 @@ public class $classname extends $baseclassname {
 	 * Child element is mandatory.
 	 *
 #end
-	 * @return the element {@odf.element ${child}}
+	 * @return the element {@odf.element ds:${child}}
 	 */
 	public $cClassname new${cClassname}() {
 		$cClassname $cVar = ((OdfFileDom) this.ownerDocument).newOdfElement(${cClassname}.class);
