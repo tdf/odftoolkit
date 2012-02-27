@@ -51,8 +51,9 @@ public class LoadSaveTest {
 		try {
 			OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE));
 			Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
-			String baseURI = odfDocument.getBaseURI();
-			//Assert.assertTrue(ResourceUtilities.getURI(SOURCE).toString().compareToIgnoreCase(baseURI) == 0);
+			String baseURI1 = odfDocument.getBaseURI();
+			String baseURI2 = ResourceUtilities.getURI(SOURCE).toString();
+			Assert.assertTrue(baseURI2.compareToIgnoreCase(baseURI1) == 0);
 			OdfFileDom odfContent = odfDocument.getContentDom();
 			String odf12 = OfficeVersionAttribute.Value._1_2.toString();
 			OfficeDocumentContentElement content = (OfficeDocumentContentElement) odfContent.getDocumentElement();
