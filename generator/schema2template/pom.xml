@@ -117,6 +117,7 @@
                 <configuration>
                     <excludes>
                         <exclude>src/test/resources/examples/odf/*.ref</exclude>
+						<exclude>src/main/resources/examples/odf/odfdom-python/OdfTextDocument.odt</exclude>
                     </excludes>
                 </configuration>
             </plugin>
