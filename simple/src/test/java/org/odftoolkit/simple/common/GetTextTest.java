@@ -76,7 +76,7 @@ public class GetTextTest {
 
 			int count = 0;
 			for (int i = 0; i < text.length(); i++)
-				if (text.charAt(i) == '\r')
+				if (text.charAt(i) == '\n')
 					count++;
 			Assert.assertEquals(2, count);
 
@@ -84,7 +84,7 @@ public class GetTextTest {
 			text = extractor.getText();
 			count = 0;
 			for (int i = 0; i < text.length(); i++)
-				if (text.charAt(i) == '\r')
+				if (text.charAt(i) == '\n')
 					count++;
 			Assert.assertEquals(0, count);
 		} catch (Exception e) {

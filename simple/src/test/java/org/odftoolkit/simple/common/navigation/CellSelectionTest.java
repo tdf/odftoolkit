@@ -15,7 +15,7 @@ software distributed under the License is distributed on an
 KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
-*/
+ */
 
 package org.odftoolkit.simple.common.navigation;
 
@@ -35,11 +35,11 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
  * Test the method of class org.odftoolkit.simple.common.navigation.CellSelection
  */
 public class CellSelectionTest {
-	
-	public static final String TEST_FILE = "TestCellSelection.ods";
+
+	public static final String TEST_FILE         = "TestCellSelection.ods";
 	public static final String SAVE_FILE_REPLACE = "CellSelectionResultReplace.ods";
-	SpreadsheetDocument doc;
-	
+	SpreadsheetDocument        doc;
+
 	@Before
 	public void setUp() {
 		try {
@@ -49,25 +49,26 @@ public class CellSelectionTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	/**
-	 * Test replaceWith method of org.odftoolkit.simple.common.navigation.TextSelection
-	 * replace all the 'SIMPLE' with 'Odf Toolkit'
+	 * Test replaceWith method of org.odftoolkit.simple.common.navigation.TextSelection replace all the 'SIMPLE' with 'Odf
+	 * Toolkit'
 	 */
 	@Test
 	public void testAdvancedReplacewith() {
-		Map<String, String> valueProperties = new HashMap<String,String>();
+		Map<String, String> valueProperties = new HashMap<String, String>();
 		valueProperties.put("Amount", "3,000,000");
 		valueProperties.put("Task", "Develop");
 		valueProperties.put("Date", "11/09/2010");
 		valueProperties.put("Time", "14:30");
 		valueProperties.put("Status", "true");
-		Map<String, String> typeProperties = new HashMap<String,String>();
+		Map<String, String> typeProperties = new HashMap<String, String>();
 		typeProperties.put("Amount", "float");
 		typeProperties.put("Task", "string");
 		typeProperties.put("Date", "date");
 		typeProperties.put("Time", "time");
 		typeProperties.put("Status", "boolean");
+		
 		// simple text replace
 		for (String key : valueProperties.keySet()) {
 			String value = valueProperties.get(key);
@@ -78,6 +79,40 @@ public class CellSelectionTest {
 					selection.advancedReplaceWith(value);
 					String valueType = selection.getCell().getValueType();
 					Assert.assertEquals(typeProperties.get(key), valueType);
+				} catch (InvalidNavigationException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	/**
+	 * this method tests a simple replace with. Especially Line breaks
+	 */
+	@Test
+	public void testReplaceWith() {
+		Map<String, String> valueProperties = new HashMap<String, String>();
+		valueProperties.put("Amount", "3,000,000");
+		valueProperties.put("Task", "Develop\nWith a second line");
+		valueProperties.put("Date", "11/09/2010");
+		valueProperties.put("Time", "14:30");
+		valueProperties.put("Status", "true");
+
+		// simple text replace
+		for (String key : valueProperties.keySet()) {
+			String value = valueProperties.get(key);
+			TextNavigation navigate = new TextNavigation(key, doc);
+			while (navigate.hasNext()) {
+				CellSelection selection = (CellSelection) navigate.nextSelection();
+				try {
+					// use a simple replace to replace the values
+					selection.replaceWith(value);
+
+					// get the cell's string value (which is different from the textvalue)
+					String newValue = selection.getCell().getStringValue();
+
+					// make sure that the cell's value is the same as the intended value
+					Assert.assertEquals(valueProperties.get(key), newValue);
 				} catch (InvalidNavigationException e) {
 					e.printStackTrace();
 				}

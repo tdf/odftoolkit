@@ -64,7 +64,7 @@ public class TableCellRangeTest {
 		cellRange.merge();
 		Cell cell = cellRange.getCellByPosition(0, 0);
 		saveodt("MergeTwoCell");
-		Assert.assertEquals(cell.getDisplayText(), "cell1\rcell2");
+		Assert.assertEquals(cell.getDisplayText(), "cell1\ncell2");
 		try {
 			TextDocument saveddoc = (TextDocument) TextDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream(odtfilename + "MergeTwoCell.odt"));

@@ -53,11 +53,11 @@ import org.w3c.dom.Node;
  */
 public class TextExtractor extends DefaultElementVisitor {
 
-	protected static final char NewLineChar = '\r';
+	protected static final char NewLineChar = '\n';
 	protected static final char TabChar = '\t';
 	protected final ExtractorStringBuilder mTextBuilder;
 	OdfElement mElement;
-
+	
 	/**
 	 * This class is used to provide the string builder functions to extractor.
 	 * It will automatically process the last NewLineChar.

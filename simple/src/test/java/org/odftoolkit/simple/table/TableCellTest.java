@@ -285,7 +285,7 @@ public class TableCellTest {
 		Table table1 = odtdoc.getTableByName("Table1");
 		Cell fcell2 = table1.getCellByPosition(0, 1);
 		text = fcell2.getDisplayText();
-		Assert.assertEquals("Aa\rbb\rcc\rdd\ree", text);
+		Assert.assertEquals("Aa\nbb\ncc\ndd\nee", text);
 	}
 
 	@Test
