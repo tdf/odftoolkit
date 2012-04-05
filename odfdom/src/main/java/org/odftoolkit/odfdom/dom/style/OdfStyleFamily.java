@@ -26,7 +26,8 @@
  */
 package org.odftoolkit.odfdom.dom.style;
 
-import org.odftoolkit.odfdom.dom.attribute.style.StyleFamilyAttribute;
+import java.util.Arrays;
+import java.util.Collections;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import java.util.Set;
 import java.util.TreeSet;
@@ -50,7 +51,6 @@ import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 
 	private String m_name;
-//    private Class m_styleClass;
 	private Set<OdfStyleProperty> m_properties = new TreeSet<OdfStyleProperty>();
 	private static Map<String, OdfStyleFamily> m_familyByName = new HashMap<String, OdfStyleFamily>();
 
@@ -58,15 +58,17 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 		return m_familyByName.get(name);
 	}
 
-	private OdfStyleFamily(String name /*, Class styleClass*/, OdfStyleProperty[] props) {
+	private OdfStyleFamily(String name, OdfStyleProperty[] props) {
 		m_name = name;
-//        m_styleClass = styleClass;
-		for (OdfStyleProperty prop : props) {
-			m_properties.add(prop);
-		}
+		m_properties.addAll(Arrays.asList(props));
 		m_familyByName.put(name, this);
 	}
 
+	private OdfStyleFamily(String name) {
+		m_name = name;
+		m_familyByName.put(name, this);
+	}
+		
 	public String getName() {
 		return m_name;
 	}
@@ -77,17 +79,19 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 
 	public static OdfStyleFamily valueOf(String name) {
 		OdfStyleFamily family = getByName(name);
-		if (family == null)
-			family = new OdfStyleFamily(name,  new OdfStyleProperty[]{ null });
-
+		if (family == null) {
+			family = new OdfStyleFamily(name);
+		} 
 		return family;
 	}
 
 	public static String toString(OdfStyleFamily family) {
-		if (family != null)
+		if (family != null) {
 			return family.toString();
-		else
+		}
+		else {
 			return new String();
+		}
 	}
 
 	@Override
@@ -96,7 +100,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 	}
 
 	public Set<OdfStyleProperty> getProperties() {
-		return m_properties;
+		return Collections.unmodifiableSet(m_properties);
 	}
 
 	public final static OdfStyleFamily Chart = new OdfStyleFamily("chart",
