@@ -509,9 +509,11 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 		Set<String> prefixes = mDuplicatePrefixesByUri.get(namespaceURI);
 		if (prefixes == null) {
 			prefixes = new HashSet<String>();
-			mDuplicatePrefixesByUri.put(namespaceURI, prefixes);
 		}
-		prefixes.add(mPrefixByUri.get(namespaceURI));
+		String givenPrefix = mPrefixByUri.get(namespaceURI);
+		if(givenPrefix != null){
+			prefixes.add(givenPrefix);
+		}
 		return prefixes.iterator();
 	}
 

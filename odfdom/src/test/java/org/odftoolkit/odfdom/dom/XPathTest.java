@@ -45,7 +45,7 @@ public class XPathTest {
 	private static final String SOURCE_FILE_2 = "XPathTest-foreignPrefix2.odp";
         private static final String SOURCE_FILE_3 = "XPathTest-duplicate-prefix.odt";
 	/**
-	 * 1) The first test document "slideDeckWithTwoSlides.odp" uses the prefix "daisy" instead of "office" for ODF XML elements.
+	 * 1) The first test document "XPathTest-foreignPrefix.odp" uses the prefix "daisy" instead of "office" for ODF XML elements.
 	   <daisy:document-content xmlns:daisy="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="ur...
 			<daisy:scripts/>
 			<daisy:automatic-styles>
@@ -94,7 +94,7 @@ public class XPathTest {
 			}
 			// There should be no further prefix
 			Assert.assertFalse(prefixes.hasNext());
-
+					
 			Iterator<String> prefixes2 = contentDom.getPrefixes("urn://some-test-odfdom-namespace");
 			prefix = prefixes2.next();
 			Assert.assertTrue(prefix.equals("prefixOne") || prefix.equals("prefixTwo"));
@@ -131,6 +131,10 @@ public class XPathTest {
 			String alienElementValue = (String) xpath.evaluate("//text:p/test", node, XPathConstants.STRING);
 			LOG.log(Level.INFO, "The value of the alien element is {0}, expected is ''good''!", alienElementValue);
 			Assert.assertEquals("good", alienElementValue);
+			
+			// Test if an empty iterator is being returned for a none existing URL
+			Iterator<String> prefixes3 = contentDom.getPrefixes("urn://this-prefix-does-not-exist-in-the-xml");
+			Assert.assertFalse("Not used prefix returned a none-empty iterator!", prefixes3.hasNext());
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.toString());
