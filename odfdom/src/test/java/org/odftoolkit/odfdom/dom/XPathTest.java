@@ -110,27 +110,31 @@ public class XPathTest {
 			// There should be no further prefix
 			Assert.assertFalse(prefixes.hasNext());
 
-			Node node = contentDom.getRootElement();
+			Node rootNode = contentDom.getRootElement();
 			odpWithSlides.save(ResourceUtilities.newTestOutputFile("XPathTest-ForeignPrefix-output.odp"));
 
-			if (node instanceof OdfAlienElement) {
+			if (rootNode instanceof OdfAlienElement) {
 				Assert.fail("The none OOO default prefix for office: was not exchanged!");
 			}
-			NodeList linkNodes = (NodeList) xpath.evaluate(".//*[@xlink:href]", node, XPathConstants.NODESET);
-			Assert.assertNotNull(linkNodes);
+			NodeList styleNameAttributes = (NodeList) xpath.evaluate(".//*[@style:name]", rootNode, XPathConstants.NODESET);
+			LOG.log(Level.INFO, "Amount of style:name is {0}", styleNameAttributes.getLength());
+
+			Assert.assertTrue(styleNameAttributes.getLength() == 11);
 			// test if the identical namespace prefixes with different URI have been renamed correctly (earlier draw:element1/draw:element2).
-			String attributeWithDuplicatePrefix = (String) xpath.evaluate(".//draw__1:element1/draw__2:element2/@draw__2:attribute2", node, XPathConstants.STRING);
+			String attributeWithDuplicatePrefix = (String) xpath.evaluate(".//draw__1:element1/draw__2:element2/@draw__2:attribute2", rootNode, XPathConstants.STRING);
 			Assert.assertTrue(attributeWithDuplicatePrefix.equals("importantValue"));
 			Assert.assertEquals("urn:oasis:names:tc:opendocument:xmlns:office:1.0", xpath.getNamespaceContext().getNamespaceURI("office"));
 			Assert.assertEquals("http://www.w3.org/1999/xlink", xpath.getNamespaceContext().getNamespaceURI("xlink"));
 
-			String alienAttributeValue = (String) xpath.evaluate(".//*/@foreign", node, XPathConstants.STRING);
+			String alienAttributeValue = (String) xpath.evaluate(".//*/@foreign", rootNode, XPathConstants.STRING);
 			LOG.log(Level.INFO, "The value of the alien attribute is {0}, expected is ''alien:valueOfAlienAttribute''!", alienAttributeValue);
 			Assert.assertEquals("alien:valueOfAlienAttribute", alienAttributeValue);
 
-			String alienElementValue = (String) xpath.evaluate("//text:p/test", node, XPathConstants.STRING);
+			String alienElementValue = (String) xpath.evaluate("//text:p/test", rootNode, XPathConstants.STRING);
 			LOG.log(Level.INFO, "The value of the alien element is {0}, expected is ''good''!", alienElementValue);
 			Assert.assertEquals("good", alienElementValue);
+			LOG.log(Level.INFO, "Amount of @alien:foreignAttribute and @style:name is {0}", ((NodeList) xpath.evaluate(".//*[@alien:foreignAttribute or @style:name]", rootNode, XPathConstants.NODESET)).getLength());
+			Assert.assertTrue("Amount of @alien:foreignAttribute and @style:name is not 13!!", ((NodeList) xpath.evaluate(".//*[@alien:foreignAttribute or @style:name]", rootNode, XPathConstants.NODESET)).getLength() == 13);
 			
 			// Test if an empty iterator is being returned for a none existing URL
 			Iterator<String> prefixes3 = contentDom.getPrefixes("urn://this-prefix-does-not-exist-in-the-xml");
