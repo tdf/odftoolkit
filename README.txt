@@ -67,7 +67,7 @@ Simple API Getting Start Guide:
     http://incubator.apache.org/odftoolkit/simple/gettingstartguide.html    
        
 Simple API Cookbook:
-    http://simple.odftoolkit.org/
+    http://incubator.apache.org/odftoolkit/simple/document/cookbook/index.html
     
 Simple API Demos:
     http://incubator.apache.org/odftoolkit/simple/demo/index.html
