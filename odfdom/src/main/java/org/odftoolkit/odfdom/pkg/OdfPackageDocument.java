@@ -62,7 +62,6 @@ public class OdfPackageDocument implements Closeable {
 	 *      - media type of stream. If unknown null can be used.
 	 */
 	protected OdfPackageDocument(OdfPackage pkg, String internalPath, String mediaTypeString) {
-		super();
 		if (pkg != null) {
 			mPackage = pkg;
 			mDocumentPathInPackage = internalPath;

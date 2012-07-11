@@ -23,6 +23,7 @@ package org.odftoolkit.odfvalidator;
 
 import junit.framework.Assert;
 import org.junit.Test;
+import org.junit.Ignore;
 
 /** Test some invalid packages.
  */
@@ -95,6 +96,7 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
 	}
 
 	@Test
+	@Ignore
 	public void validatePackage3() {
 		String output = "";
 		try {

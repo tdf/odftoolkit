@@ -98,6 +98,8 @@
                 <!-- Explizit version required for fix on systemPropertyVariables -->
                 <version>2.6</version>
                 <configuration>
+                    <forkMode>pertest</forkMode>
+                    <argLine>-Xms512m -Xmx512m</argLine>
                     <systemPropertyVariables>
                         <odfdom.version>${project.version}</odfdom.version>
                         <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
