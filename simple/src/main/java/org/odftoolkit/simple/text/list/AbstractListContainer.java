@@ -20,12 +20,15 @@ under the License.
 package org.odftoolkit.simple.text.list;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * AbstractListContainer is an abstract implementation of the ListContainer
@@ -86,57 +89,62 @@ public abstract class AbstractListContainer implements ListContainer {
 	}
 
 	// default iterator to iterate list item.
-	private class SimpleListIterator implements Iterator<List> {
-
-		private OdfElement containerElement;
-		private TextListElement nextListElement;
-		private TextListElement tempListElement;
-
-		private SimpleListIterator(ListContainer container) {
-			containerElement = container.getListContainerElement();
+	private static class SimpleListIterator implements Iterator<List> {
+		
+		private java.util.List<List> allLists;
+		private int index;
+		private List currentList;
+		
+		public SimpleListIterator(ListContainer container) {
+			this.allLists = getLists(container.getListContainerElement().getChildNodes());
 		}
 
 		public boolean hasNext() {
-			tempListElement = findNext(nextListElement);
-			return (tempListElement != null);
+			return this.index < this.allLists.size();
 		}
 
 		public List next() {
-			if (tempListElement != null) {
-				nextListElement = tempListElement;
-				tempListElement = null;
+			if (hasNext()) {
+				this.currentList = allLists.get(index);
+				this.index++;
+				return this.currentList;
 			} else {
-				nextListElement = findNext(nextListElement);
-			}
-			if (nextListElement == null) {
-				return null;
-			} else {
-				return new List(nextListElement);
+				throw new NoSuchElementException();
 			}
 		}
 
 		public void remove() {
-			if (nextListElement == null) {
-				throw new IllegalStateException("please call next() first.");
-			}
-			containerElement.removeChild(nextListElement);
-		}
-
-		private TextListElement findNext(TextListElement nextListElement) {
-			Node child = null;
-			if (nextListElement == null) {
-				child = containerElement.getFirstChild();
+			if (this.currentList == null) {
+				throw new IllegalStateException();
 			} else {
-				child = nextListElement.getNextSibling();
+				this.allLists.remove(this.currentList);
+				this.currentList = null;
 			}
-
-			while (child != null) {
-				if (child instanceof TextListElement) {
-					return (TextListElement) child;
-				}
-				child = child.getNextSibling();
-			}
-			return null;
 		}
+		
+		private java.util.List<List> getLists(NodeList nodes) {
+			java.util.List<List> lists = new LinkedList<List>();
+			int numberOfNodes = nodes.getLength();
+			for (int i = 0; i < numberOfNodes; i++) {
+				Node node = nodes.item(i);
+				lists.addAll(getLists(node));
+			}
+			return lists;
+		}
+		
+		private java.util.List<List> getLists(Node node) {
+			java.util.List<List> lists = new LinkedList<List>();
+			if (node instanceof TextListElement) {
+				TextListElement textListElement = (TextListElement) node;
+				List list = new List(textListElement);
+				lists.add(list);
+			} else {
+				NodeList childNodes = node.getChildNodes();
+				lists.addAll(getLists(childNodes));
+			}
+			return lists;
+		}
+		
 	}
+	
 }
