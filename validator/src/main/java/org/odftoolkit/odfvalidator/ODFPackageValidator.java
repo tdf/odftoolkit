@@ -33,7 +33,7 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.validation.Validator;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
-import org.odftoolkit.odfdom.pkg.manifest.EncryptionDataElement;
+import org.odftoolkit.odfdom.pkg.manifest.EncryptionData;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLFilter;
@@ -361,7 +361,7 @@ abstract class ODFPackageValidator {
 	private boolean isEncrypted(String aEntryName, Logger aLogger) {
 		OdfFileEntry aFileEntry = getPackage(aLogger).getFileEntry(aEntryName);
 		if (aFileEntry != null) {
-			EncryptionDataElement aEncData = aFileEntry.getEncryptionData();
+			EncryptionData aEncData = aFileEntry.getEncryptionData();
 			if (aEncData != null) {
 				aLogger.logFatalError("stream content is encrypted. Validataion of encrypted content is not supported.");
 				return true;

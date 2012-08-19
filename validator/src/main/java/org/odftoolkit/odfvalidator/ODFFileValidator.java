@@ -57,7 +57,7 @@ public class ODFFileValidator extends ODFRootPackageValidator {
 
     protected OdfPackage getPackage(ErrorHandler handler) throws Exception
     {
-        return OdfPackage.loadPackage(m_aFile, null, handler);
+        return OdfPackage.loadPackage(m_aFile, handler);
     }
 
 }

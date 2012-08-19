@@ -87,8 +87,8 @@ import org.odftoolkit.odfdom.type.Duration;
 import org.odftoolkit.simple.meta.Meta;
 import org.odftoolkit.simple.table.AbstractTableContainer;
 import org.odftoolkit.simple.table.Table;
-import org.odftoolkit.simple.table.Table.TableBuilder;
 import org.odftoolkit.simple.table.TableContainer;
+import org.odftoolkit.simple.table.Table.TableBuilder;
 import org.odftoolkit.simple.text.Section;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
@@ -108,9 +108,9 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	private TableContainerImpl tableContainerImpl;
 	private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
 	private static final String EMPTY_STRING = "";
-
+	
 	private IdentityHashMap<OdfElement, Component> mComponentRepository = new IdentityHashMap<OdfElement, Component>();
-
+	
 	// FIXME: This field is only used in method copyResourcesFrom to improve
 	// copy performance, should not be used in any other way.
 	// methods loadDocument(String documentPath) and loadDocument(File file)
@@ -161,11 +161,11 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 		IMAGE("application/vnd.oasis.opendocument.image", "odi"), 
 		IMAGE_TEMPLATE("application/vnd.oasis.opendocument.image-template", "oti"), 
 		PRESENTATION("application/vnd.oasis.opendocument.presentation", "odp"), 
-		PRESENTATION_TEMPLATE("application/vnd.oasis.opendocument.presentation-template", "otp"), 
+		PRESENTATION_TEMPLATE("application/vnd.oasis.opendocument.presentation-template", "otp"),
 		SPREADSHEET("application/vnd.oasis.opendocument.spreadsheet", "ods"), 
 		SPREADSHEET_TEMPLATE("application/vnd.oasis.opendocument.spreadsheet-template", "ots"), 
 		TEXT("application/vnd.oasis.opendocument.text", "odt"), 
-		TEXT_MASTER("application/vnd.oasis.opendocument.text-master", "odm"), 
+		TEXT_MASTER("application/vnd.oasis.opendocument.text-master", "odm"),
 		TEXT_TEMPLATE("application/vnd.oasis.opendocument.text-template", "ott"), 
 		TEXT_WEB("application/vnd.oasis.opendocument.text-web", "oth");
 
@@ -245,30 +245,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * 
 	 * <p>
 	 * Document relies on the file being available for read access over the
-	 * whole life cycle of Document.
-	 * </p>
-	 * 
-	 * @param documentPath
-	 *            - the path from where the document can be loaded
-	 * @param password
-	 *            - file password.
-	 * @return the Document from the given path or NULL if the media type is not
-	 *         supported by SIMPLE.
-	 * @throws java.lang.Exception
-	 *             - if the document could not be created.
-	 * @since 0.8
-	 */
-	public static Document loadDocument(String documentPath, String password) throws Exception {
-		File file = new File(documentPath);
-		return loadDocument(file, password);
-	}
-
-	/**
-	 * Loads a Document from the provided path.
-	 * 
-	 * <p>
-	 * Document relies on the file being available for read access over the
-	 * whole life cycle of Document.
+	 * whole lifecycle of Document.
 	 * </p>
 	 * 
 	 * @param documentPath
@@ -280,7 +257,9 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 */
 	public static Document loadDocument(String documentPath) throws Exception {
 		File file = new File(documentPath);
-		return loadDocument(file);
+		Document doc = loadDocument(OdfPackage.loadPackage(documentPath));
+		doc.setFile(file);
+		return doc;
 	}
 
 	/**
@@ -325,29 +304,6 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	}
 
 	/**
-	 * Creates a Document from the Document provided by a File.
-	 * 
-	 * <p>
-	 * Document relies on the file being available for read access over the
-	 * whole lifecycle of Document.
-	 * </p>
-	 * 
-	 * @param file
-	 *            - a file representing the ODF document.
-	 * @param password
-	 *            - file password.
-	 * @return the document created from the given File
-	 * @throws java.lang.Exception
-	 *             - if the document could not be created.
-	 * @since 0.7
-	 */
-	public static Document loadDocument(File file, String password) throws Exception {
-		Document doc = loadDocument(OdfPackage.loadPackage(file, password, null));
-		doc.setFile(file);
-		return doc;
-	}
-
-	/**
 	 * Creates a Document from the Document provided by an ODF package.
 	 * 
 	 * @param odfPackage
@@ -374,7 +330,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	public static Document loadDocument(OdfPackage odfPackage, String internalPath) throws Exception {
 		String documentMediaType = odfPackage.getMediaTypeString(internalPath);
 		if (documentMediaType == null) {
-			throw new IllegalArgumentException("Given internalPath '" + internalPath + "' is an illegal or inappropriate argument.");
+			throw new IllegalArgumentException("Given internalPath '" + internalPath
+					+ "' is an illegal or inappropriate argument.");
 		}
 		OdfMediaType odfMediaType = OdfMediaType.getOdfMediaType(documentMediaType);
 		if (odfMediaType == null) {
@@ -383,24 +340,14 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 			if (matcherCTRL.find()) {
 				documentMediaType = matcherCTRL.replaceAll(EMPTY_STRING);
 			}
-			OdfValidationException ve = new OdfValidationException(OdfSchemaConstraint.DOCUMENT_WITHOUT_ODF_MIMETYPE, internalPath, documentMediaType);
+			OdfValidationException ve = new OdfValidationException(OdfSchemaConstraint.DOCUMENT_WITHOUT_ODF_MIMETYPE,
+					internalPath, documentMediaType);
 			if (errorHandler != null) {
 				errorHandler.fatalError(ve);
 			}
 			throw ve;
 		}
 		return newDocument(odfPackage, internalPath, odfMediaType);
-	}
-
-	/**
-	 * Sets password of this document.
-	 * 
-	 * @param password
-	 *            the password of this document.
-	 * @since 0.8
-	 */
-	public void setPassword(String password) {
-		getPackage().setPassword(password);
 	}
 
 	// return null if the media type can not be recognized.
@@ -460,7 +407,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 			// case IMAGE_TEMPLATE:
 
 		default:
-			throw new IllegalArgumentException("Given mediaType '" + odfMediaType.toString() + "' is either not yet supported or not an ODF mediatype!");
+			throw new IllegalArgumentException("Given mediaType '" + odfMediaType.toString()
+					+ "' is either not yet supported or not an ODF mediatype!");
 		}
 	}
 
@@ -504,7 +452,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 			break;
 
 		case PRESENTATION_TEMPLATE:
-			newDoc = new PresentationDocument(pkg, internalPath, PresentationDocument.OdfMediaType.PRESENTATION_TEMPLATE);
+			newDoc = new PresentationDocument(pkg, internalPath,
+					PresentationDocument.OdfMediaType.PRESENTATION_TEMPLATE);
 			break;
 
 		case GRAPHICS:
@@ -527,7 +476,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 		default:
 			newDoc = null;
-			throw new IllegalArgumentException("Given mediaType '" + odfMediaType.mMediaType + "' is not yet supported!");
+			throw new IllegalArgumentException("Given mediaType '" + odfMediaType.mMediaType
+					+ "' is not yet supported!");
 		}
 		// returning null if MediaType is not supported
 		return newDoc;
@@ -780,58 +730,6 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	}
 
 	/**
-	 * Save the document to a given file with given password.
-	 * 
-	 * <p>
-	 * If the input file has been cached (this is the case when loading from an
-	 * InputStream), the input file can be overwritten.
-	 * </p>
-	 * 
-	 * <p>
-	 * Otherwise it's allowed to overwrite the input file as long as the same
-	 * path name is used that was used for loading (no symbolic link foo2.odt
-	 * pointing to the loaded file foo1.odt, no network path X:\foo.odt pointing
-	 * to the loaded file D:\foo.odt).
-	 * </p>
-	 * 
-	 * <p>
-	 * When saving the embedded document to a stand alone document, all files of
-	 * the embedded document will be copied to a new document package. If the
-	 * embedded document is outside of the current document directory, you have
-	 * to embed it to the sub directory and refresh the link of the embedded
-	 * document. You should reload it from the given file to get the saved
-	 * embedded document.
-	 * 
-	 * @param file
-	 *            the file to save the document.
-	 * @param file
-	 *            the password of this document.
-	 * 
-	 * @throws java.lang.Exception
-	 *             if the document could not be saved
-	 * @since 0.8
-	 */
-	public void save(File file, String password) throws Exception {
-		// 2DO FLUSH AND SAVE IN PACKAGE
-		flushDoms();
-		updateMetaData();
-		if (!isRootDocument()) {
-			Document newDoc = loadDocumentFromTemplate(getOdfMediaType());
-			newDoc.insertDocument(this, ROOT_DOCUMENT_PATH);
-			newDoc.updateMetaData();
-			newDoc.mPackage.setPassword(password);
-			newDoc.mPackage.save(file);
-			// ToDo: (Issue 219 - PackageRefactoring) - Return the document,
-			// when not closing!
-			// Should we close the sources now? User will never receive the open
-			// package!
-		} else {
-			mPackage.setPassword(password);
-			mPackage.save(file);
-		}
-	}
-
-	/**
 	 * Close the OdfPackage and release all temporary created data. Acter
 	 * execution of this method, this class is no longer usable. Do this as the
 	 * last action to free resources. Closing an already closed document has no
@@ -910,19 +808,22 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 			OdfDrawFrame drawFrame = contentDom.newOdfElement(OdfDrawFrame.class);
 			XPath xpath = contentDom.getXPath();
 			if (this instanceof SpreadsheetDocument) {
-				TableTableCellElement lastCell = (TableTableCellElement) xpath.evaluate("//table:table-cell[last()]", contentDom, XPathConstants.NODE);
+				TableTableCellElement lastCell = (TableTableCellElement) xpath.evaluate("//table:table-cell[last()]",
+						contentDom, XPathConstants.NODE);
 				lastCell.appendChild(drawFrame);
 				drawFrame.removeAttribute("text:anchor-type");
 
 			} else if (this instanceof TextDocument) {
-				TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", contentDom, XPathConstants.NODE);
+				TextPElement lastPara = (TextPElement) xpath.evaluate("//text:p[last()]", contentDom,
+						XPathConstants.NODE);
 				if (lastPara == null) {
 					lastPara = ((TextDocument) this).newParagraph();
 				}
 				lastPara.appendChild(drawFrame);
 				drawFrame.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PARAGRAPH.toString());
 			} else if (this instanceof PresentationDocument) {
-				DrawPageElement lastPage = (DrawPageElement) xpath.evaluate("//draw:page[last()]", contentDom, XPathConstants.NODE);
+				DrawPageElement lastPage = (DrawPageElement) xpath.evaluate("//draw:page[last()]", contentDom,
+						XPathConstants.NODE);
 				lastPage.appendChild(drawFrame);
 			}
 			OdfDrawImage image = (OdfDrawImage) drawFrame.newDrawImageElement();
@@ -1009,7 +910,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 				DatatypeFactory aFactory = DatatypeFactory.newInstance();
 				metaData.setEditingDuration(new Duration(aFactory.newDurationDayTime(editingDuration)));
 			} catch (DatatypeConfigurationException e) {
-				Logger.getLogger(Document.class.getName()).log(Level.SEVERE, "editing duration update fail as DatatypeFactory can not be instanced", e);
+				Logger.getLogger(Document.class.getName()).log(Level.SEVERE,
+						"editing duration update fail as DatatypeFactory can not be instanced", e);
 			}
 		}
 	}
@@ -1202,7 +1104,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 		}
 	}
 
-	private Locale getDefaultLanguageByProperty(OdfStyleProperty countryProp, OdfStyleProperty languageProp) throws Exception {
+	private Locale getDefaultLanguageByProperty(OdfStyleProperty countryProp, OdfStyleProperty languageProp)
+			throws Exception {
 		String lang = null, ctry = null;
 
 		OdfOfficeStyles styles = getStylesDom().getOfficeStyles();
@@ -1255,8 +1158,10 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 		if (getScriptType(locale) != ScriptType.CJK)
 			return;
 		String user_language = locale.getLanguage();
-		if (!user_language.equals(Locale.CHINESE.getLanguage()) && !user_language.equals(Locale.TRADITIONAL_CHINESE.getLanguage())
-				&& !user_language.equals(Locale.JAPANESE.getLanguage()) && !user_language.equals(Locale.KOREAN.getLanguage()))
+		if (!user_language.equals(Locale.CHINESE.getLanguage())
+				&& !user_language.equals(Locale.TRADITIONAL_CHINESE.getLanguage())
+				&& !user_language.equals(Locale.JAPANESE.getLanguage())
+				&& !user_language.equals(Locale.KOREAN.getLanguage()))
 			return;
 
 		OdfOfficeStyles styles = getStylesDom().getOfficeStyles();
@@ -1322,7 +1227,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 			// Search in style.xml
 			root = getStylesDom().getRootElement();
-			OfficeMasterStylesElement masterStyle = OdfElement.findFirstChildNode(OfficeMasterStylesElement.class, root);
+			OfficeMasterStylesElement masterStyle = OdfElement
+					.findFirstChildNode(OfficeMasterStylesElement.class, root);
 			sectionList = masterStyle.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "section");
 			for (int i = 0; i < sectionList.getLength(); i++) {
 				element = (TextSectionElement) sectionList.item(i);
@@ -1360,9 +1266,11 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 			}
 
 			root = getStylesDom().getRootElement();
-			OfficeMasterStylesElement masterStyle = OdfElement.findFirstChildNode(OfficeMasterStylesElement.class, root);
+			OfficeMasterStylesElement masterStyle = OdfElement
+					.findFirstChildNode(OfficeMasterStylesElement.class, root);
 			xpath = getStylesDom().getXPath();
-			element = (TextSectionElement) xpath.evaluate(".//text:section[@text:name=\"" + name + "\"]", masterStyle, XPathConstants.NODE);
+			element = (TextSectionElement) xpath.evaluate(".//text:section[@text:name=\"" + name + "\"]", masterStyle,
+					XPathConstants.NODE);
 			if (element != null) {
 				return Section.getInstance(element);
 			}
@@ -1586,7 +1494,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 					if (objectRenameMap.containsKey(refObjPath)) {
 						// this object has been copied already
 						newObjPath = objectRenameMap.get(refObjPath);
-						object.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href", hasPrefix ? (prefix + newObjPath) : newObjPath);
+						object.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href",
+								hasPrefix ? (prefix + newObjPath) : newObjPath);
 						continue;
 					}
 					// check if the current document contains the same path
@@ -1605,13 +1514,15 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 							// then change the name before the suffix string
 							int dotIndex = refObjPath.indexOf(".");
 							if (dotIndex != -1) {
-								newObjPath = refObjPath.substring(0, dotIndex) + "-" + makeUniqueName() + refObjPath.substring(dotIndex);
+								newObjPath = refObjPath.substring(0, dotIndex) + "-" + makeUniqueName()
+										+ refObjPath.substring(dotIndex);
 							} else {
 								newObjPath = refObjPath + "-" + makeUniqueName();
 							}
 							objectRenameMap.put(refObjPath, newObjPath);
 						}
-						object.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href", hasPrefix ? (prefix + newObjPath) : newObjPath);
+						object.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href",
+								hasPrefix ? (prefix + newObjPath) : newObjPath);
 					} else
 						objectRenameMap.put(refObjPath, refObjPath);
 				}
@@ -1895,13 +1806,15 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 							// then change the name before the suffix string
 							int dotIndex = refObjPath.indexOf(".");
 							if (dotIndex != -1) {
-								newObjPath = refObjPath.substring(0, dotIndex) + "-" + makeUniqueName() + refObjPath.substring(dotIndex);
+								newObjPath = refObjPath.substring(0, dotIndex) + "-" + makeUniqueName()
+										+ refObjPath.substring(dotIndex);
 							} else {
 								newObjPath = refObjPath + "-" + makeUniqueName();
 							}
 							objectRenameMap.put(refObjPath, newObjPath);
 						}
-						object.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href", hasPrefix ? (prefix + newObjPath) : newObjPath);
+						object.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href",
+								hasPrefix ? (prefix + newObjPath) : newObjPath);
 					}
 					InputStream is = srcDoc.getPackage().getInputStream(refObjPath);
 					if (is != null) {
@@ -1938,16 +1851,20 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 			// attribute
 			// 1.1. style:name of content.xml
 			String styleQName = "style:name";
-			NodeList srcStyleDefNodeList = (NodeList) xpath.evaluate("*/office:automatic-styles/*[@" + styleQName + "]", srcContentDom, XPathConstants.NODESET);
+			NodeList srcStyleDefNodeList = (NodeList) xpath.evaluate(
+					"*/office:automatic-styles/*[@" + styleQName + "]", srcContentDom, XPathConstants.NODESET);
 			IdentityHashMap<OdfElement, List<OdfElement>> srcContentStyleCloneEleList = new IdentityHashMap<OdfElement, List<OdfElement>>();
 			IdentityHashMap<OdfElement, OdfElement> appendContentStyleList = new IdentityHashMap<OdfElement, OdfElement>();
-			getCopyStyleList(null, sourceCloneEle, styleQName, srcStyleDefNodeList, srcContentStyleCloneEleList, appendContentStyleList, tempList, true);
+			getCopyStyleList(null, sourceCloneEle, styleQName, srcStyleDefNodeList, srcContentStyleCloneEleList,
+					appendContentStyleList, tempList, true);
 			// 1.2. style:name of styles.xml
-			srcStyleDefNodeList = (NodeList) xpath.evaluate(".//*[@" + styleQName + "]", srcDoc.getStylesDom(), XPathConstants.NODESET);
+			srcStyleDefNodeList = (NodeList) xpath.evaluate(".//*[@" + styleQName + "]", srcDoc.getStylesDom(),
+					XPathConstants.NODESET);
 			IdentityHashMap<OdfElement, List<OdfElement>> srcStylesStyleCloneEleList = new IdentityHashMap<OdfElement, List<OdfElement>>();
 			IdentityHashMap<OdfElement, OdfElement> appendStylesStyleList = new IdentityHashMap<OdfElement, OdfElement>();
 			tempList.clear();
-			getCopyStyleList(null, sourceCloneEle, styleQName, srcStyleDefNodeList, srcStylesStyleCloneEleList, appendStylesStyleList, tempList, true);
+			getCopyStyleList(null, sourceCloneEle, styleQName, srcStyleDefNodeList, srcStylesStyleCloneEleList,
+					appendStylesStyleList, tempList, true);
 			// 1.3 rename, copy the referred style element to the corresponding
 			// position in the dom tree
 			insertCollectedStyle(styleQName, srcContentStyleCloneEleList, getContentDom(), appendContentStyleList);
@@ -1963,22 +1880,23 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 			// element, so only search it in styles.xml dom
 			tempList.clear();
 			styleQName = "draw:name";
-			srcStyleDefNodeList = (NodeList) xpath.evaluate(".//*[@" + styleQName + "]", srcDoc.getStylesDom(), XPathConstants.NODESET);
+			srcStyleDefNodeList = (NodeList) xpath.evaluate(".//*[@" + styleQName + "]", srcDoc.getStylesDom(),
+					XPathConstants.NODESET);
 			IdentityHashMap<OdfElement, List<OdfElement>> srcDrawStyleCloneEleList = new IdentityHashMap<OdfElement, List<OdfElement>>();
 			IdentityHashMap<OdfElement, OdfElement> appendDrawStyleList = new IdentityHashMap<OdfElement, OdfElement>();
 			Iterator<OdfElement> iter = appendContentStyleList.keySet().iterator();
 			while (iter.hasNext()) {
 				OdfElement styleElement = iter.next();
 				OdfElement cloneStyleElement = appendContentStyleList.get(styleElement);
-				getCopyStyleList(styleElement, cloneStyleElement, styleQName, srcStyleDefNodeList, srcDrawStyleCloneEleList, appendDrawStyleList, tempList,
-						false);
+				getCopyStyleList(styleElement, cloneStyleElement, styleQName, srcStyleDefNodeList,
+						srcDrawStyleCloneEleList, appendDrawStyleList, tempList, false);
 			}
 			iter = appendStylesStyleList.keySet().iterator();
 			while (iter.hasNext()) {
 				OdfElement styleElement = iter.next();
 				OdfElement cloneStyleElement = appendStylesStyleList.get(styleElement);
-				getCopyStyleList(styleElement, cloneStyleElement, styleQName, srcStyleDefNodeList, srcDrawStyleCloneEleList, appendDrawStyleList, tempList,
-						false);
+				getCopyStyleList(styleElement, cloneStyleElement, styleQName, srcStyleDefNodeList,
+						srcDrawStyleCloneEleList, appendDrawStyleList, tempList, false);
 			}
 			// 2.2 rename, copy the referred style element to the corresponding
 			// position in the dom tree
@@ -1996,7 +1914,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	// referred style name of the element which reference this style
 	// 3. All the style which also contains other style reference, should be
 	// copied to the source document.
-	private void insertCollectedStyle(String styleQName, IdentityHashMap<OdfElement, List<OdfElement>> srcStyleCloneEleList, OdfFileDom dom,
+	private void insertCollectedStyle(String styleQName,
+			IdentityHashMap<OdfElement, List<OdfElement>> srcStyleCloneEleList, OdfFileDom dom,
 			IdentityHashMap<OdfElement, OdfElement> appendStyleList) {
 		try {
 			String stylePrefix = OdfNamespace.getPrefixPart(styleQName);
@@ -2008,7 +1927,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 			XPath xpath = dom.getXPath();
 			NodeList destStyleNodeList;
 			if (dom instanceof OdfContentDom)
-				destStyleNodeList = (NodeList) xpath.evaluate("*/office:automatic-styles/*[@" + styleQName + "]", dom, XPathConstants.NODESET);
+				destStyleNodeList = (NodeList) xpath.evaluate("*/office:automatic-styles/*[@" + styleQName + "]", dom,
+						XPathConstants.NODESET);
 			else
 				destStyleNodeList = (NodeList) xpath.evaluate(".//*[@" + styleQName + "]", dom, XPathConstants.NODESET);
 			Iterator<OdfElement> iter = srcStyleCloneEleList.keySet().iterator();
@@ -2040,7 +1960,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 							// if not, the cloneStyleElement should rename,
 							// rather than reuse the new style name
 							cloneStyleElement.setAttributeNS(styleURI, styleQName, styleNameIter);
-							if ((destStyleElementWithNewName != null) && destStyleElementWithNewName.equals(cloneStyleElement)) {
+							if ((destStyleElementWithNewName != null)
+									&& destStyleElementWithNewName.equals(cloneStyleElement)) {
 								newStyleName = styleNameIter;
 								break;
 							}
@@ -2061,8 +1982,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 						// if display name should also be renamed
 						String displayName = cloneStyleElement.getAttributeNS(styleURI, "display-name");
 						if ((displayName != null) && (displayName.length() > 0)) {
-							cloneStyleElement.setAttributeNS(styleURI, stylePrefix + ":display-name",
-									displayName + newStyleName.substring(newStyleName.length() - 8));
+							cloneStyleElement.setAttributeNS(styleURI, stylePrefix + ":display-name", displayName
+									+ newStyleName.substring(newStyleName.length() - 8));
 						}
 					}
 				}
@@ -2110,8 +2031,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	// if loop == true, get the style definition element reference other style
 	// definition element
 	private void getCopyStyleList(OdfElement ele, OdfElement cloneEle, String styleQName, NodeList srcStyleNodeList,
-			IdentityHashMap<OdfElement, List<OdfElement>> copyStyleEleList, IdentityHashMap<OdfElement, OdfElement> appendStyleList, List<String> attrStrList,
-			boolean loop) {
+			IdentityHashMap<OdfElement, List<OdfElement>> copyStyleEleList,
+			IdentityHashMap<OdfElement, OdfElement> appendStyleList, List<String> attrStrList, boolean loop) {
 		try {
 			String styleLocalName = OdfNamespace.getLocalPart(styleQName);
 			String stylePrefix = OdfNamespace.getPrefixPart(styleQName);
@@ -2136,7 +2057,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 						}
 						attrStrList.add(attrStr + "=" + "\"" + styleName + "\"");
 						XPath xpath = ((OdfFileDom) cloneEle.getOwnerDocument()).getXPath();
-						NodeList styleRefNodes = (NodeList) xpath.evaluate(".//*[@" + attrStr + "='" + styleName + "']", cloneEle, XPathConstants.NODESET);
+						NodeList styleRefNodes = (NodeList) xpath.evaluate(
+								".//*[@" + attrStr + "='" + styleName + "']", cloneEle, XPathConstants.NODESET);
 						boolean isExist = false;
 						for (int j = 0; j <= styleRefNodes.getLength(); j++) {
 							OdfElement styleRefElement = null;
@@ -2169,8 +2091,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 								appendStyleList.put(styleElement, cloneStyleElement);
 							}
 							if (loop && !hasLoopStyleDef) {
-								getCopyStyleList(styleElement, cloneStyleElement, styleQName, srcStyleNodeList, copyStyleEleList, appendStyleList, attrStrList,
-										loop);
+								getCopyStyleList(styleElement, cloneStyleElement, styleQName, srcStyleNodeList,
+										copyStyleEleList, appendStyleList, attrStrList, loop);
 							}
 						}
 						index = cloneEleStr.indexOf("=\"" + styleName + "\"", index + styleName.length());
@@ -2339,9 +2261,11 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 				int relation = odfEle.compareDocumentPosition(object);
 				// if slide element contains the returned element which has the
 				// xlink:href reference
-				if ((relation & Node.DOCUMENT_POSITION_CONTAINED_BY) > 0 && refObjPath != null && refObjPath.length() > 0) {
+				if ((relation & Node.DOCUMENT_POSITION_CONTAINED_BY) > 0 && refObjPath != null
+						&& refObjPath.length() > 0) {
 					// the path of the object is start with "./"
-					NodeList pathNodes = (NodeList) xpath.evaluate("//*[@xlink:href='" + refObjPath + "']", getContentDom(), XPathConstants.NODESET);
+					NodeList pathNodes = (NodeList) xpath.evaluate("//*[@xlink:href='" + refObjPath + "']",
+							getContentDom(), XPathConstants.NODESET);
 					int refCount = pathNodes.getLength();
 					if (refCount == 1) {
 						// delete "./"
@@ -2407,7 +2331,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 					if (styleName != null) {
 						// search the styleName contained at the current page
 						// element
-						NodeList styleNodes = (NodeList) xpath.evaluate("//*[@*='" + styleName + "']", contentDom, XPathConstants.NODESET);
+						NodeList styleNodes = (NodeList) xpath.evaluate("//*[@*='" + styleName + "']", contentDom,
+								XPathConstants.NODESET);
 						int styleCnt = styleNodes.getLength();
 						if (styleCnt > 1) {
 							// the first styleName is occurred in the style
@@ -2469,7 +2394,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	public TableBuilder getTableBuilder() {
 		return getTableContainerImpl().getTableBuilder();
 	}
-
+	
 	protected TableContainer getTableContainerImpl() {
 		if (tableContainerImpl == null) {
 			tableContainerImpl = new TableContainerImpl();

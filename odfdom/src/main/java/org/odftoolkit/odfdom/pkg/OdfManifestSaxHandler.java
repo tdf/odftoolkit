@@ -18,7 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- ************************************************************************//*
+ ************************************************************************/
 package org.odftoolkit.odfdom.pkg;
 
 import java.util.Map;
@@ -42,40 +42,40 @@ class OdfManifestSaxHandler implements ContentHandler {
 		mPackage = pkg;
 	}
 
-	*//**
+	/**
 	 * Receive an object for locating the origin of SAX document events.
-	 *//*
+	 */
 	public void setDocumentLocator(Locator locator) {
 	}
 
-	*//**
+	/**
 	 * Receive notification of the beginning of a document.
-	 *//*
+	 */
 	public void startDocument() throws SAXException {
 	}
 
-	*//**
+	/**
 	 * Receive notification of the end of a document.
-	 *//*
+	 */
 	public void endDocument() throws SAXException {
 	}
 
-	*//**
+	/**
 	 * Begin the scope of a prefix-URI Namespace mapping.
-	 *//*
+	 */
 	public void startPrefixMapping(String prefix, String uri)
 			throws SAXException {
 	}
 
-	*//**
+	/**
 	 * End the scope of a prefix-URI mapping.
-	 *//*
+	 */
 	public void endPrefixMapping(String prefix) throws SAXException {
 	}
 
-	*//**
+	/**
 	 * Receive notification of the beginning of an element.
-	 *//*
+	 */
 	public void startElement(String namespaceURI, String localName,
 			String qName, Attributes atts) throws SAXException {
 		Map<String, OdfFileEntry> entries = mPackage.getManifestEntries();
@@ -140,9 +140,9 @@ class OdfManifestSaxHandler implements ContentHandler {
 
 	}
 
-	*//**
+	/**
 	 * Receive notification of the end of an element.
-	 *//*
+	 */
 	public void endElement(String namespaceURI, String localName,
 			String qName) throws SAXException {
 		//ToDo Issue 263: Parsing of Manifest.xml specific part to be added to parser
@@ -151,31 +151,30 @@ class OdfManifestSaxHandler implements ContentHandler {
 		}
 	}
 
-	*//**
+	/**
 	 * Receive notification of character data.
-	 *//*
+	 */
 	public void characters(char[] ch, int start, int length)
 			throws SAXException {
 	}
 
-	*//**
+	/**
 	 * Receive notification of ignorable whitespace in element content.
-	 *//*
+	 */
 	public void ignorableWhitespace(char[] ch, int start, int length)
 			throws SAXException {
 	}
 
-	*//**
+	/**
 	 * Receive notification of a processing instruction.
-	 *//*
+	 */
 	public void processingInstruction(String target, String data)
 			throws SAXException {
 	}
 
-	*//**
+	/**
 	 * Receive notification of a skipped entity.
-	 *//*
+	 */
 	public void skippedEntity(String name) throws SAXException {
 	}
 }
-*/

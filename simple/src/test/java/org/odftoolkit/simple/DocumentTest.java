@@ -377,41 +377,6 @@ public class DocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
-	@Test
-	public void testDocumentPassword() {
-		File passwordOutputFile = ResourceUtilities.newTestOutputFile("PasswordDocument.odt");
-		File noPassOutputFile = ResourceUtilities.newTestOutputFile("NoPasswordDocument.odt");
-		try {
-			TextDocument doc = TextDocument.newTextDocument();
-			doc.addParagraph("blablabla...");
-			doc.setPassword("password");
-			doc.save(passwordOutputFile);
-			
-			Document redoc = Document.loadDocument(passwordOutputFile, "password");
-			//test load content.xml
-			Assert.assertNotNull(redoc.getContentRoot().toString());
-			//test load styles.xml
-			((TextDocument) redoc).getHeader().addTable();
-			//test load meta.xml
-			Assert.assertNotNull(redoc.getOfficeMetadata().getCreator());
-			
-			//remove password
-			redoc.setPassword(null);
-			redoc.save(noPassOutputFile);
-			
-			//test inserted document
-			doc = TextDocument.newTextDocument();
-			doc.addParagraph("embed_document");
-			redoc.insertDocument(doc, "/embed");
-			redoc.setPassword("password");
-			
-			redoc.save(passwordOutputFile);
-		} catch (Exception ex) {
-			LOG.log(Level.SEVERE, "document password test failed.", ex);
-			Assert.fail();
-		}
-	}
 
 	@Test
 	public void testSetLocale() {

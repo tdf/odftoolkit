@@ -130,7 +130,7 @@ public class PackageTest {
 			LOG.info("Loading an unsupported image file as an ODF Package (with error handler)!");
 			try {
 				// Exception is expected by error handler!
-				OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE)), null, new DefaultHandler());
+				OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE)), new DefaultHandler());
 				Assert.fail();
 			} catch (SAXException e) {
 				String errorMsg = OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage();
@@ -313,14 +313,14 @@ public class PackageTest {
 		ErrorHandlerStub handler4 = new ErrorHandlerStub(null, null, expectedFatalErrors4);
 
 		try {
-			OdfPackage pkg1 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler1.getTestFilePath())), null, handler1);
+			OdfPackage pkg1 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler1.getTestFilePath())), handler1);
 			Assert.assertNotNull(pkg1);
-			OdfPackage pkg2 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler2.getTestFilePath())), null, handler2);
+			OdfPackage pkg2 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler2.getTestFilePath())), handler2);
 			Assert.assertNotNull(pkg2);
-			OdfPackage pkg3 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler3.getTestFilePath())), null, handler3);
+			OdfPackage pkg3 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler3.getTestFilePath())), handler3);
 			Assert.assertNotNull(pkg3);
 			try {
-				OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath("testA.jpg")), null, handler4);
+				OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath("testA.jpg")), handler4);
 				Assert.fail();
 			} catch (Exception e) {
 				String errorMsg = OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage();
@@ -336,23 +336,5 @@ public class PackageTest {
 		handler2.validate();
 		handler3.validate();
 		handler4.validate();
-	}
-
-	@Test
-	public void testPackagePassword() {
-		File tmpFile = ResourceUtilities.newTestOutputFile("PackagePassword.ods");
-		OdfDocument doc = null;
-		try {
-			doc = OdfSpreadsheetDocument.newSpreadsheetDocument();
-			doc.getPackage().setPassword("password");
-			doc.save(tmpFile);
-			doc.close();
-			OdfPackage odfPackage = OdfPackage.loadPackage(tmpFile, "password", null);
-			byte[] contentBytes = odfPackage.getBytes("content.xml");
-			Assert.assertNotNull(contentBytes);
-		} catch (Exception ex) {
-			LOG.log(Level.SEVERE, "password test failed.", ex);			
-			Assert.fail();
-		}
 	}
 }

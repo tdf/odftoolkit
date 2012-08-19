@@ -26,7 +26,6 @@ import java.util.logging.Logger;
 import junit.framework.Assert;
 
 import org.junit.Test;
-import org.junit.Ignore;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
@@ -88,7 +87,6 @@ public class FooterTest {
 	}
 	
 	@Test
-        @Ignore
 	public void testFooterHidden() {
 		try {
 			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("headerFooterHidden.odt"));

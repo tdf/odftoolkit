@@ -132,13 +132,13 @@ public class SpreadsheetDocumentTest {
 			Assert.assertNotNull(spChart);
 			spChart.setChartType(ChartType.AREA);
 			//save
-			spDocument.save(ResourceUtilities.getTestOutput("Chart_"+TEST_FILE));
+			spDocument.save(ResourceUtilities.getAbsolutePath(TEST_FILE));
 			
 			Assert.assertEquals(dataset, spChart.getChartData());
 			Assert.assertEquals("XXXTitle", spChart.getChartTitle());
 			Assert.assertEquals(ChartType.AREA, spChart.getChartType());
 			
-			LOG.log(Level.INFO,"spChart--> " + spChart);
+			System.out.println("spChart--> " + spChart);
 			
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
@@ -226,7 +226,7 @@ public class SpreadsheetDocumentTest {
 		Table tablem = spDocument.getSheetByIndex(0);
 		Assert.assertNotSame(tablea, tablem);
 		
-		spDocument.save(ResourceUtilities.getAbsolutePath(TEST_FILE));
+		//spDocument.save(ResourceUtilities.getAbsolutePath(TEST_FILE));
 	}
 	
 	@Test

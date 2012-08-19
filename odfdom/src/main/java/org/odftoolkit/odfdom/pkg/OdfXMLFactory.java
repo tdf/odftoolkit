@@ -3,7 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -135,8 +135,6 @@ public class OdfXMLFactory {
 						localName = stok.nextToken();
 					}
 					className = getOdfIncubatorNodeClassName(prefix, localName);
-				} else if ("manifest".equals(prefix)) {
-					className = getOdfPKGNodeClassName(prefix, localName, nodeType);
 				} else {
 					className = getOdfDOMNodeClassName(prefix, localName, nodeType);
 				}
@@ -178,21 +176,7 @@ public class OdfXMLFactory {
 
 		return className.toString();
 	}
-	
-	private static String getOdfPKGNodeClassName(String prefix, String localName, String nodeType) {
-		StringBuilder className = new StringBuilder("org.odftoolkit.odfdom.pkg." + prefix + ".");
-		if (localName.indexOf(LOCAL_NAME_DELIMITER) != -1) {
-			StringTokenizer stok = new StringTokenizer(localName, LOCAL_NAME_DELIMITER);
-			while (stok.hasMoreElements()) {
-				className = className.append(toUpperCaseFirstCharacter(stok.nextToken()));
-			}
-		} else {
-			className = className.append(toUpperCaseFirstCharacter(localName));
-		}
-		className.append(toUpperCaseFirstCharacter(nodeType));
-		return className.toString();
-	}
-	
+
 	private static String getOdfDOMNodeClassName(String prefix, String localName, String nodeType) {
 		StringBuilder className = new StringBuilder("org.odftoolkit.odfdom.dom." + nodeType + "." + prefix + ".");
 		className = className.append(toUpperCaseFirstCharacter(prefix));

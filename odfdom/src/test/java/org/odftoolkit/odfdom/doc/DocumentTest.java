@@ -428,7 +428,7 @@ public class DocumentTest {
 		return stringBuilder.toString();
 	}
 
-	/** Saves the data string as UTF8 to the given filePath */
+	/** Saves the datastring as UTF8 to the given filePath */
 	private static void saveString(String dataString, String filePath) throws UnsupportedEncodingException, IOException {
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), "UTF8"));
 		out.append(dataString);
@@ -485,12 +485,12 @@ public class DocumentTest {
 		handler1.setTestFilePath("testInvalidPkg1.odt");
 		try {
 			// First Test / Handler2
-			OdfPackage pkg2 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler2.getTestFilePath())), null, handler2);
+			OdfPackage pkg2 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler2.getTestFilePath())), handler2);
 			OdfDocument doc2 = OdfDocument.loadDocument(pkg2);
 			Assert.assertNotNull(doc2);
 
 			// Second Test / Handler3
-			OdfPackage pkg3 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler3.getTestFilePath())), null, handler3);
+			OdfPackage pkg3 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler3.getTestFilePath())), handler3);
 			OdfDocument doc3 = OdfDocument.loadDocument(pkg3);
 			Assert.assertNotNull(doc3);
 			Map subDocs = doc3.loadSubDocuments();
@@ -498,7 +498,7 @@ public class DocumentTest {
 			Assert.assertEquals(PRESENTATION1_DOC_COUNT, subDocs.size());
 
 			// Third Test / Handler1
-			OdfPackage pkg1 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler1.getTestFilePath())), null, handler1);
+			OdfPackage pkg1 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler1.getTestFilePath())), handler1);
 			OdfDocument.loadDocument(pkg1);
 			Assert.fail();
 		} catch (Exception e) {

@@ -32,7 +32,6 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 public class ListItemTest {
 
 	private final static String SAMPLE_LIST_DOCUMENT = "testList.odt";
-    private static final String SAMPLE_LIST_DOCUMENT_2 = "testList2.odt";
 	private String[] subItemContents = { "sub list item 1", "sub list item 2", "sub list item 3" };
 
 	@Test
@@ -194,27 +193,4 @@ public class ListItemTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-    
-    @Test
-    public void testListIterator()  {
-        try {
-            // load test list container, which contains 2 lists.
-			TextDocument odtdoc = TextDocument.loadDocument(ResourceUtilities
-					.getTestResourceAsStream(SAMPLE_LIST_DOCUMENT_2));
-			Iterator<List> listIterator = odtdoc.getListIterator();
-            
-            final List bodyList = listIterator.next();
-            Assert.assertEquals("body list should have 2 items", 2, bodyList.size());
-            
-            Assert.assertTrue("iterator should have 1 more list (in the Section)", listIterator.hasNext());
-                        
-            final List sectionList = listIterator.next();
-            Assert.assertEquals("section list should have 3 items", 3, sectionList.size());
-            
-            Assert.assertFalse("iterator should have no more lists", listIterator.hasNext());
-        } catch (Exception e) {
-            Logger.getLogger(ListItemTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-}
-    }
 }
