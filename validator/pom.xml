@@ -347,6 +347,8 @@
 					<excludes>
 						<exclude>src/main/resources/**</exclude>
 						<exclude>src/test/resources/**</exclude>
+						<exclude>src/main/assembly/src.xml</exclude>
+
 					</excludes>
 				</configuration>
 			</plugin>
