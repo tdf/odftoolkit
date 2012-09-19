@@ -152,7 +152,7 @@ public class Main {
             else if( aArg.startsWith("-") )
             {
                 System.out.print(aArg);
-                System.out.println(": unknown option, use '-' for help");
+                System.out.println(": unknown option, use '-h' for help");
                 return;
             }
             else if( aArg.length()>0 )
@@ -278,12 +278,12 @@ public class Main {
         System.out.println( "-h: Print this help and exit" );
         System.out.println( "-o: Store validation errors in <outputfile>" );
         System.out.println( "-r: Process directory recursively" );
-        System.out.println( "-s: Validate against strict schema (ODF 1.2 documents only)" );
+        System.out.println( "-s: Validate against strict schema (ODF 1.0/1.1 documents only)" );
         System.out.println( "-v: Verbose output, including generator and warnings" );
         System.out.println( "-w: Print warnings" );
         System.out.println( "-x: Exclude paths that match <regexp>" );
         System.out.println();
-        System.out.println( "If no option is provided, <odffiles> are validated using <schemafile>" );
+        System.out.println( "If no option is provided, <odffiles> are validated using the schemas matching the detected ODF version of the files" );
     }
 
 }
