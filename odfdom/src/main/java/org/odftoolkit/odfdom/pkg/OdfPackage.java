@@ -2051,7 +2051,10 @@ public class OdfPackage implements Closeable {
 
 	void logValidationWarning(ValidationConstraint constraint, String baseURI, Object... o)
 			throws SAXException {
-		int varCount = 0;
+		if (mErrorHandler == null) {
+                    return;
+                }
+                int varCount = 0;
 		if (o != null) {
 			varCount = o.length;
 		}
@@ -2070,7 +2073,10 @@ public class OdfPackage implements Closeable {
 
 	void logValidationError(ValidationConstraint constraint, String baseURI, Object... o)
 				throws SAXException {
-		int varCount = 0;
+		if (mErrorHandler == null) {
+                    return;
+                }
+                int varCount = 0;
 		if (o != null) {
 			varCount = o.length;
 		}

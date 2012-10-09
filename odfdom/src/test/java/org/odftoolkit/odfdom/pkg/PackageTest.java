@@ -22,6 +22,7 @@
 package org.odftoolkit.odfdom.pkg;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,6 +34,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerFactory;
@@ -258,13 +260,30 @@ public class PackageTest {
 		try {
 			OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath("testA.jpg"));
 			Assert.fail();
-		} catch (Exception e) {
+                } catch (Exception e) {
 			String errorMsg = OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage();
 			if (!e.getMessage().endsWith(errorMsg.substring(errorMsg.indexOf("%1$s") + 4))) {
 				Assert.fail();
 			}
 		}
 	}
+        
+        @Test
+        public void loadPackageWithoutManifest() throws Exception {
+            // regression for ODFTOOLKIT-327: invalid package without errorhandler
+            // doesn't throw NPE
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            ZipOutputStream zipped = new ZipOutputStream(out);
+            ZipEntry entry = new ZipEntry("someentry");
+            zipped.putNextEntry(entry);
+            zipped.close();
+            
+            byte [] data = out.toByteArray();
+            ByteArrayInputStream in = new ByteArrayInputStream(data);
+            OdfPackage pkg = OdfPackage.loadPackage(in);
+            
+            Assert.assertNotNull(pkg);
+        }
 
 	@Test
 	public void validationTest() {
@@ -337,4 +356,4 @@ public class PackageTest {
 		handler3.validate();
 		handler4.validate();
 	}
-}
+}    
