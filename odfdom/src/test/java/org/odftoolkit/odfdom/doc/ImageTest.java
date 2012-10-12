@@ -170,6 +170,32 @@ public class ImageTest {
 
 	}
 
+        @Test
+	public void testSVGInTextDocument() {
+		try {
+			OdfTextDocument doc = OdfTextDocument.newTextDocument();
+			String imagePath1 = doc.newImage(ResourceUtilities.getURI("simple.svg"));
+			Assert.assertTrue(getImageCount(doc) == 1);
+			OdfDrawImage image = getImageByPath(doc, imagePath1).get(0);
+			Assert.assertTrue(image.getImageUri().toString().equals(imagePath1));
+			OdfDrawFrame frame1 = (OdfDrawFrame) image.getParentNode();
+			frame1.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PAGE.toString());
+			frame1.setTextAnchorPageNumberAttribute(1);
+
+			doc.save(ResourceUtilities.newTestOutputFile("svg-image.odt"));
+
+			//load the file again
+			OdfTextDocument doc1 = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("svg-image.odt"));
+
+			Assert.assertTrue(getImageCount(doc1) == 1);
+
+		} catch (Exception ex) {
+			Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
+		}
+
+	}
+
 	@Test
 	public void testRemoveAllImage() {
 		try {

@@ -120,10 +120,14 @@ public class OdfDrawImage extends DrawImageElement {
 		OdfDrawFrame odfFrame = (OdfDrawFrame) this.getParentNode();
 		if (odfFrame != null) {
 			BufferedImage image = ImageIO.read(is);
-			int height = image.getHeight(null);
-			int width = image.getWidth(null);
-			odfFrame.setSvgHeightAttribute(Length.mapToUnit(String.valueOf(height) + "px", Unit.CENTIMETER));
-			odfFrame.setSvgWidthAttribute(Length.mapToUnit(String.valueOf(width) + "px", Unit.CENTIMETER));
+			// some image formats like SVG might not be understood by ImageIO			
+			if (image != null)
+			{
+				int height = image.getHeight(null);
+				int width = image.getWidth(null);
+				odfFrame.setSvgHeightAttribute(Length.mapToUnit(String.valueOf(height) + "px", Unit.CENTIMETER));
+				odfFrame.setSvgWidthAttribute(Length.mapToUnit(String.valueOf(width) + "px", Unit.CENTIMETER));
+			}
 		}
 	}
 
