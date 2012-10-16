@@ -500,9 +500,11 @@ public class TableCellProperties {
 	 *            - the background color
 	 */
 	public void setBackgroundColor(Color aColor) {
-		if (aColor == null)
-			mElement.removeAttribute(FoBackgroundColorAttribute.ATTRIBUTE_NAME.getQName());
-		mElement.setFoBackgroundColorAttribute(aColor.toString());
+		if (aColor == null) {
+                    mElement.removeAttribute(FoBackgroundColorAttribute.ATTRIBUTE_NAME.getQName());
+                } else {
+                    mElement.setFoBackgroundColorAttribute(aColor.toString());
+                }
 	}
 
 	// //style:cell-protect

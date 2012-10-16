@@ -184,6 +184,42 @@ public class TableCellPropertiesTest {
 		}
 	}
 	
-	
-	
+        @Test
+	public void testSettingNullBackgroundOnProperties() throws Exception {
+            SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
+            Table table = doc.getTableByName("Sheet1");
+            Cell cell = table.getCellByPosition(1, 1);
+            cell.setCellBackgroundColor(Color.BLACK);
+            // setting null resets the element, see ODFTOOLKIT-326
+            cell.getStyleHandler().getTableCellPropertiesForWrite().setBackgroundColor(null);
+            Assert.assertNull(cell.getStyleHandler().getTableCellPropertiesForRead().getBackgroundColor());
+            // defaulting to white when color is null
+            Assert.assertEquals(Color.WHITE, cell.getCellBackgroundColor());
+            Cell newCell = table.appendRow().getCellByIndex(1);
+            Assert.assertNull(newCell.getStyleHandler().getTableCellPropertiesForRead().getBackgroundColor());
+            Assert.assertEquals(Color.WHITE, newCell.getCellBackgroundColor());
+        }
+        
+        @Test
+        public void testSettingBlackBackgroundOnProperties() throws Exception {
+            SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
+            Table table = doc.getTableByName("Sheet1");
+            Cell cell = table.getCellByPosition(1, 1);
+            cell.setCellBackgroundColor(Color.BLUE);
+            cell.getStyleHandler().getTableCellPropertiesForWrite().setBackgroundColor(Color.BLACK);
+            Assert.assertEquals(Color.BLACK, cell.getStyleHandler().getTableCellPropertiesForRead().getBackgroundColor());
+            Assert.assertEquals(Color.BLACK, cell.getCellBackgroundColor());
+            Cell newCell = table.appendRow().getCellByIndex(1);
+            Assert.assertEquals(Color.BLACK, newCell.getStyleHandler().getBackgroundColor());
+        }
+        
+        @Test
+        public void testSettingNullBackgroundOnCell() throws Exception {
+            SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
+            Table table = doc.getTableByName("Sheet1");
+            Cell cell = table.getCellByPosition(1, 1);
+            cell.setCellBackgroundColor((Color) null);
+            Assert.assertNull(cell.getStyleHandler().getTableCellPropertiesForRead().getBackgroundColor());
+            Assert.assertEquals(Color.WHITE, cell.getCellBackgroundColor());
+        }
 }

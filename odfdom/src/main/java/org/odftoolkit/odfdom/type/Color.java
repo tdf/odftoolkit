@@ -411,4 +411,28 @@ public class Color implements OdfDataType {
 			return value;
 		}
 	}
+
+        
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Color other = (Color) obj;
+        if ((this.mColorAsSixHexRGB == null) ? (other.mColorAsSixHexRGB != null) : !this.mColorAsSixHexRGB.equals(other.mColorAsSixHexRGB)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + (this.mColorAsSixHexRGB != null ? this.mColorAsSixHexRGB.hashCode() : 0);
+        return hash;
+    }
+        
 }
