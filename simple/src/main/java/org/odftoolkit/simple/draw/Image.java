@@ -254,7 +254,7 @@ public class Image extends Component {
 	}
 
 	/* Helper method */
-	private static String getPackagePath(OdfSchemaDocument mOdfSchemaDoc, String imageRef) {
+	public static String getPackagePath(OdfSchemaDocument mOdfSchemaDoc, String imageRef) {
 		if (imageRef.contains(SLASH)) {
 			imageRef = imageRef.substring(imageRef.lastIndexOf(SLASH) + 1, imageRef.length());
 		}
@@ -263,7 +263,7 @@ public class Image extends Component {
 	}
 
 	/* Helper method */
-	private static URI configureInsertedImage(OdfSchemaDocument mOdfSchemaDoc, DrawImageElement imageElement,
+	public static URI configureInsertedImage(OdfSchemaDocument mOdfSchemaDoc, DrawImageElement imageElement,
 			String packagePath, boolean isResetSize) throws Exception {
 		// Set path to image attribute
 		URI uri = new URI(AnyURI.encodePath(packagePath).toString());

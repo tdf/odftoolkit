@@ -45,6 +45,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextIndexBodyElement;
 import org.odftoolkit.odfdom.dom.element.text.TextIndexEntryLinkStartElement;
 import org.odftoolkit.odfdom.dom.element.text.TextIndexEntryTabStopElement;
@@ -81,6 +82,7 @@ import org.odftoolkit.simple.common.field.VariableField;
 import org.odftoolkit.simple.common.field.VariableField.VariableType;
 import org.odftoolkit.simple.style.MasterPage;
 import org.odftoolkit.simple.style.TOCStyle;
+import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.text.AbstractParagraphContainer;
 import org.odftoolkit.simple.text.Footer;
 import org.odftoolkit.simple.text.Header;
@@ -1254,4 +1256,112 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 		}
 	}
 	
+	/**
+	 * Copy a Paragraph and insert it before or after the Reference Paragraph in the text document, whether the
+	 * Paragraph is in this document or in a different document.
+	 * 
+	 * @param referenceParagraph
+	 *            - where the Paragraph be inserted 
+	 * @param sourceParagraph
+	 *            - the Paragraph which will be copied
+	 * @param before
+	 *            true:insert Paragraph before the reference paragraph. 
+	 *            false:insert Paragraph after the reference paragraph.       
+	 */
+	public Paragraph insertParagraph(Paragraph referenceParagraph, Paragraph sourceParagraph,boolean before) {
+		boolean isForeignNode = false;
+		try {
+			Node refparagraphNode = referenceParagraph.getOdfElement();
+			if (sourceParagraph.getOdfElement().getOwnerDocument() != getContentDom())
+				isForeignNode = true;
+			 TextParagraphElementBase oldParagraphEle = sourceParagraph.getOdfElement();
+			 TextParagraphElementBase newParagraphEle = (TextParagraphElementBase) oldParagraphEle.cloneNode(true);
+			
+			if (isForeignNode)
+				copyForeignStyleRef(sourceParagraph.getOdfElement(), sourceParagraph.getOwnerDocument());
+			if (isForeignNode) // not in a same document
+				newParagraphEle = (TextParagraphElementBase) cloneForeignElement(newParagraphEle, getContentDom(), true);
+			
+			if (before) {
+				refparagraphNode.getParentNode().insertBefore(newParagraphEle, refparagraphNode);
+			} else {
+				// Insert Paragraph after the refParagraph
+				Node refNextNode = refparagraphNode.getNextSibling();
+				if (refNextNode == null) {
+					refparagraphNode.getParentNode().appendChild(newParagraphEle);
+				} else {
+					refparagraphNode.getParentNode().insertBefore(newParagraphEle, refNextNode);
+				}
+			}
+			
+			return Paragraph.getInstanceof(newParagraphEle);
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return null;
+	}
+	/**
+	 * Copy a Table and insert it before or after the Reference Paragraph in the text document, whether the
+	 * Table is in this TextDocument or in a different Document.
+	 * 
+	 * @param referenceParagraph
+	 *            - where the Paragraph be inserted 
+	 * @param sourceParagraph
+	 *            - the Paragraph which will be copied
+	 * @param before
+	 *            true:insert Paragraph before the reference paragraph. 
+	 *            false:insert Paragraph after the reference paragraph.       
+	 */
+	public Table insertTable(Paragraph referenceParagraph, Table sourceTable,boolean before) {
+		
+		Document ownDocument = sourceTable.getOwnerDocument();
+		TableTableElement newTEle = (TableTableElement)insertOdfElement(referenceParagraph.getOdfElement(),ownDocument,sourceTable.getOdfElement(),before);
+		Table table = Table.getInstance(newTEle);
+		return table;
+	}
+	/**
+	 * Copy a OdfElement and insert it before or after the Reference OdfElement in the TextDocument, whether the
+	 * OdfElement is in this TextDocument or in a different Document.
+	 * 
+	 * @param referenceOdfElement
+	 *            - where the OdfElement be inserted 
+	 * @param sourceDocument
+	 *            - the source Document which contain the sourceOdfElement
+	 * @param sourceOdfElement
+	 *            - the OdfElement which will be copied
+	 * @param before
+	 *            true:insert OdfElement before the reference OdfElement. 
+	 *            false:insert OdfElement after the reference OdfElement.       
+	 */
+	public OdfElement insertOdfElement(OdfElement referenceOdfElement,Document sourceDocument ,OdfElement sourceOdfElement,boolean before) {
+		boolean isForeignNode = false;
+		try {
+			
+			if (sourceOdfElement.getOwnerDocument() != getContentDom())
+				isForeignNode = true;
+			 
+			OdfElement newOdfElement = (OdfElement) sourceOdfElement.cloneNode(true);
+			
+			if (isForeignNode)
+				copyForeignStyleRef(sourceOdfElement,sourceDocument);
+			if (isForeignNode) // not in a same document
+				newOdfElement = (OdfElement)  cloneForeignElement(newOdfElement, getContentDom(), true);
+			
+			if (before) {
+				referenceOdfElement.getParentNode().insertBefore(newOdfElement, referenceOdfElement);
+			} else {
+				// Insert newOdfElement after the referenceOdfElement
+				Node refNextNode = referenceOdfElement.getNextSibling();
+				if (refNextNode == null) {
+					referenceOdfElement.getParentNode().appendChild(newOdfElement);
+				} else {
+					referenceOdfElement.getParentNode().insertBefore(newOdfElement, refNextNode);
+				}
+			}
+			return newOdfElement;
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return null;
+	}
 }

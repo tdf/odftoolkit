@@ -28,6 +28,7 @@ import org.junit.Test;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.common.field.Field.FieldType;
+import org.odftoolkit.simple.common.navigation.FieldSelectionTest;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class VariableFieldTest {
@@ -60,6 +61,15 @@ public class VariableFieldTest {
 			FieldType fieldType = simpleVariableField.getFieldType();
 			Assert.assertNotNull(fieldType);
 			Assert.assertEquals(FieldType.SIMPLE_VARIABLE_FIELD, fieldType);
+			newTextSpanElement = doc.newParagraph("Show Simple Variable Field:").newTextSpanElement();
+			simpleVariableField.displayField(newTextSpanElement);
+			simpleVariableField.updateField("aaaa", newTextSpanElement);
+			try {
+				doc.save(ResourceUtilities.newTestOutputFile("TextFieldSampleDocumentVariableField.odt"));
+			} catch (Exception e) {
+				Logger.getLogger(FieldSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+				Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+			}
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());

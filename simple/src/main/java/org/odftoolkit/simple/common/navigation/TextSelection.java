@@ -19,6 +19,7 @@ under the License.
 
 package org.odftoolkit.simple.common.navigation;
 
+import java.net.URI;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,9 +36,13 @@ import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextAElement;
+import org.odftoolkit.odfdom.dom.element.text.TextConditionalTextElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
 import org.odftoolkit.odfdom.dom.element.text.TextSElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
+import org.odftoolkit.odfdom.dom.element.text.TextUserFieldDeclElement;
+import org.odftoolkit.odfdom.dom.element.text.TextVariableDeclElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
@@ -49,7 +54,16 @@ import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Document;
+import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.common.TextExtractor;
+import org.odftoolkit.simple.common.field.ConditionField;
+import org.odftoolkit.simple.common.field.Field;
+import org.odftoolkit.simple.common.field.Field.FieldType;
+import org.odftoolkit.simple.common.field.Fields;
+import org.odftoolkit.simple.common.field.VariableField;
+import org.odftoolkit.simple.draw.Image;
+import org.odftoolkit.simple.table.Table;
+import org.odftoolkit.simple.text.Paragraph;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -224,7 +238,228 @@ public class TextSelection extends Selection {
 		SelectionManager.refresh(getContainerElement(), offset, index + getText().length());
 		mMatchedText = newText;
 	}
-
+	
+	/**
+	 * Replace the text content of selection with a new Table.
+	 * 
+	 * @param newTable
+	 *            the replace Table
+	 * @return 
+	 * @throws InvalidNavigationException
+	 *             if the selection is unavailable.
+	 * @return the new Table in the TextDocument
+	 */
+	public Table replaceWith(Table newTable) throws InvalidNavigationException {
+		if (validate() == false) {
+			throw new InvalidNavigationException("No matched string at this position");
+		}
+		TableSelection nextTableSelection=new TableSelection(this);
+		return nextTableSelection.replaceWithTable(newTable);
+	}
+	/**
+	 * Replace the text content of selection with a new Image.
+	 * 
+	 * @param newImage
+	 *            the replace Image
+	 * @return 
+	 * @throws InvalidNavigationException
+	 *             if the selection is unavailable.
+	 * @return the new Image in the TextDocument,the image name is set to "replace" + System.currentTimeMillis(), please update the name to others by yourself.
+	 */
+	public Image replaceWith(Image newImage) throws InvalidNavigationException {
+		if (validate() == false) {
+			throw new InvalidNavigationException("No matched string at this position");
+		}
+		ImageSelection nextImageSelection=new ImageSelection(this);
+		return nextImageSelection.replaceWithImage(newImage);
+	}
+	/**
+	 * Replace the text content of selection with a new Image.
+	 * 
+	 * @param imageUri
+	 *            the replace Image URI
+	 * @throws InvalidNavigationException
+	 *             if the selection is unavailable.
+	 * @return the new Image in the TextDocument,the image name is set to "replace" + System.currentTimeMillis(), please update the name to others by yourself.
+	 */
+	public Image replaceWith(URI imageUri) throws InvalidNavigationException {
+		if (validate() == false) {
+			throw new InvalidNavigationException("No matched string at this position");
+		}
+		ImageSelection nextImageSelection=new ImageSelection(this);
+		return nextImageSelection.replaceWithImage(imageUri);
+	}
+	/**
+	 * Replace the content with a Field
+	 * 
+	 * @param orgField
+	 *            the reference Field to replace.
+     * @throws InvalidNavigationException
+	 *             if the selection is unavailable.   
+	 * @return the created field.         
+	 */
+	public Field replaceWith(Field orgField) throws InvalidNavigationException {
+		if (validate() == false) {
+			throw new InvalidNavigationException("No matched string at this position");
+		}
+		Field newfield=null;
+		OdfElement parentElement = getContainerElement();
+		Paragraph orgparagraph = Paragraph.getInstanceof((TextParagraphElementBase) parentElement);
+		TextDocument document = (TextDocument) orgparagraph.getOwnerDocument();
+		
+		FieldSelection nextFieldSelection=new FieldSelection(this);
+		FieldType fieldType = orgField.getFieldType();
+	
+		switch (fieldType) {
+		case DATE_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case FIXED_DATE_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case TIME_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case FIXED_TIME_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case PREVIOUS_PAGE_NUMBER_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case CURRENT_PAGE_NUMBER_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case NEXT_PAGE_NUMBER_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case PAGE_COUNT_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case TITLE_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case SUBJECT_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case AUTHOR_NAME_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case AUTHOR_INITIALS_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case CHAPTER_FIELD:
+			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
+			break;
+		case SIMPLE_VARIABLE_FIELD:
+			VariableField SimpleVariableField = (VariableField)orgField;
+			String simplefieldname = SimpleVariableField.getVariableName();
+			VariableField simplefield=Fields.createSimpleVariableField(document, simplefieldname);
+			nextFieldSelection.replaceWithVariableField(simplefield);
+			newfield=simplefield;
+			break;
+		case USER_VARIABLE_FIELD:
+			VariableField userVariableField = (VariableField)orgField;
+			TextUserFieldDeclElement textUserFieldDeclElement =(TextUserFieldDeclElement) userVariableField.getOdfElement();
+			String fieldname = userVariableField.getVariableName();
+			String value=textUserFieldDeclElement.getOfficeStringValueAttribute();
+			VariableField variableField=Fields.createUserVariableField(document, fieldname,value);
+			nextFieldSelection.replaceWithVariableField(variableField);
+			newfield=variableField;
+			break;
+		case CONDITION_FIELD:
+			ConditionField conditionField = (ConditionField)orgField;
+			TextConditionalTextElement textConditionalTextElement =(TextConditionalTextElement) conditionField.getOdfElement();
+			String StringValueIfFalse=textConditionalTextElement.getTextStringValueIfFalseAttribute();
+			String StringValueIfTrue=textConditionalTextElement.getTextStringValueIfTrueAttribute();
+			String StringCondition=textConditionalTextElement.getTextConditionAttribute();
+			boolean CurrentValue=textConditionalTextElement.getTextCurrentValueAttribute();
+			ConditionField newdConditionField = nextFieldSelection.replaceWithConditionField(StringCondition, StringValueIfTrue, StringValueIfFalse);
+			TextConditionalTextElement newTextConditionalTextElement=(TextConditionalTextElement)newdConditionField.getOdfElement();
+			newTextConditionalTextElement.setTextCurrentValueAttribute(CurrentValue);
+			newfield=newdConditionField;
+			break;
+		case HIDDEN_TEXT_FIELD:
+			ConditionField conditionFieldHIDDEN = (ConditionField)orgField;
+			TextConditionalTextElement textConditionalTextElementHIDDEN =(TextConditionalTextElement) conditionFieldHIDDEN.getOdfElement();
+			String StringValueIfFalseHIDDEN=textConditionalTextElementHIDDEN.getTextStringValueIfFalseAttribute();
+			String StringConditionHIDDEN=textConditionalTextElementHIDDEN.getTextConditionAttribute();
+			boolean CurrentValueHIDDEN=textConditionalTextElementHIDDEN.getTextCurrentValueAttribute();
+			ConditionField newdConditionFieldHIDDEN = nextFieldSelection.replaceWithHiddenTextField(StringConditionHIDDEN, StringValueIfFalseHIDDEN);
+			TextConditionalTextElement newTextConditionalTextElementHIDDEN=(TextConditionalTextElement)newdConditionFieldHIDDEN.getOdfElement();
+			newTextConditionalTextElementHIDDEN.setTextCurrentValueAttribute(CurrentValueHIDDEN);
+			newfield=newdConditionFieldHIDDEN;
+			break;
+		case REFERENCE_FIELD:
+		default: throw new IllegalArgumentException("Simple Java API for ODF doesn't support this type now.");
+		}
+		return newfield;
+	}
+	
+	/**
+	 * Replace the content with a paragraph, the paragraph can be in the same TextDocument or in a different Document.
+	 * 
+	 * @param newParagraph
+	 *            the reference paragraph to replace.
+     * @throws InvalidNavigationException
+	 *             if the selection is unavailable.   
+	 * @return the replaced Paragraph.             
+	 */
+	public Paragraph replaceWith(Paragraph newParagraph) throws InvalidNavigationException {
+		if (validate() == false) {
+			throw new InvalidNavigationException("No matched string at this position");
+		}
+		ParagraphSelection nextParagraphSelection=new ParagraphSelection(this);
+		return nextParagraphSelection.replaceWithParagraph(newParagraph);
+	}
+	/**
+	 * Replace the content with a TextDocument with Styles.
+	 * Note: You need cache the TextNavigation.nextSelection item because after
+	 * you replace currtenTextSelection with TextDocument, TextNavigation.nextSelection will search from the inserted Content, 
+	 * it will make you into a loop if the Search keyword also can be found in the new inserted Content.
+	 * </p>
+	 * The right way to use this replaceWithTextDocument(TextDocument textDocument) method should like this: 
+	 * <Code>
+	 * <p>	search = new TextNavigation("SIMPLE", doc);    </p>
+	 * <p>	TextSelection currtenTextSelection,nextTextSelection=null;</p>
+	 * <p>		while (search.hasNext()) {</p>
+	 * <p>			if(nextTextSelection!=null){</p>
+	 * <p>				currtenTextSelection=nextTextSelection;</p>
+	 * <p>			}else {</p>
+	 * <p>			 	currtenTextSelection = (TextSelection) search.nextSelection();</p>
+	 * <p>			}</p>
+	 * <p>			nextTextSelection = (TextSelection) search.nextSelection();</p>
+	 * <p>			if(currtenTextSelection!=null){</p>
+	 * <p>				try {</p>
+	 * <p>					nextTextSelection.replaceWithTextDocument(sourcedoc);</p>
+	 * <p>				} catch (Exception e) {</p>
+	 * <p>					e.printStackTrace();</p>
+	 * <p>				}</p>
+	 * <p>			}</p>
+	 * <p>		}</p>
+	 * <p>		if(nextTextSelection!=null){</p>
+	 * <p>			try {</p>
+	 * <p>				nextTextSelection.replaceWithTextDocument(sourcedoc);</p>
+	 * <p>			} catch (Exception e) {</p>
+	 * <p>				e.printStackTrace();</p>
+	 * <p>			}</p>
+	 * <p>		}</p>
+	 * </Code>
+	 * 
+	 * @param newTextDocument
+	 *            the reference TextDocument to replace.
+	 * @throws InvalidNavigationException 
+	 */
+	public void replaceWith(TextDocument newTextDocument) throws InvalidNavigationException{
+		if (validate() == false) {
+			throw new InvalidNavigationException("No matched string at this position");
+		}
+		TextDocumentSelection nextTextDocumentSelection=new TextDocumentSelection(this);
+		try {
+			nextTextDocumentSelection.replaceWithTextDocument(newTextDocument);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Create a span element for this text selection.
 	 * 
