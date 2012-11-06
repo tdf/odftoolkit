@@ -1364,4 +1364,86 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 		}
 		return null;
 	}
+	
+	private OdfElement insertOdfElementwithoutstyle(OdfElement referenceOdfElement,Document sourceDocument ,OdfElement sourceOdfElement,boolean before) {
+		try {			 
+			OdfElement newOdfElement = (OdfElement) sourceOdfElement.cloneNode(true);
+			newOdfElement = (OdfElement)  cloneForeignElement(newOdfElement, getContentDom(), true);
+			if (before) {
+				referenceOdfElement.getParentNode().insertBefore(newOdfElement, referenceOdfElement);
+			} else {
+				// Insert newOdfElement after the referenceOdfElement
+				Node refNextNode = referenceOdfElement.getNextSibling();
+				if (refNextNode == null) {
+					referenceOdfElement.getParentNode().appendChild(newOdfElement);
+				} else {
+					referenceOdfElement.getParentNode().insertBefore(newOdfElement, refNextNode);
+				}
+			}
+			return newOdfElement;
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return null;
+	}
+	
+	/**
+	 * Copy text content of the source TextDocument and insert it to the current TextDocument
+	 * after the reference Paragraph, with Styles or without Styles.
+	 * 
+	 * @param sourceDocument
+	 *            the source TextDocument
+	 * @param referenceParagraph
+	 *  		  where the text content of the source TextDocument be inserted 
+	 * @param isCopyStyle
+	 *            true:copy the styles in source document to current TextDocment. 
+	 *            false:don't copy the styles in source document to current TextDocment. 
+	 */
+	public void insertContentFromDocumentAfter(TextDocument sourceDocument, Paragraph referenceParagraph, boolean isCopyStyle){
+		try {
+			OfficeTextElement sroot = sourceDocument.getContentRoot();
+			NodeList clist = sroot.getChildNodes();
+			for (int i=(clist.getLength()-1); i>=0; i--) {
+				OdfElement node = (OdfElement) clist.item(i);
+				if(isCopyStyle){
+					insertOdfElement(referenceParagraph.getOdfElement(), sourceDocument, node, false);
+				}
+				else {
+					insertOdfElementwithoutstyle(referenceParagraph.getOdfElement(), sourceDocument, node, false);
+				}
+			}
+			
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+	}
+	/**
+	 * Copy text content of the source TextDocument and insert it to the current TextDocument
+	 * before the reference Paragraph, with Styles or without Styles.
+	 * 
+	 * @param srcDoc
+	 *            the source TextDocument
+	 * @param referenceParagraph
+	 *  		  where the text content of the source TextDocument be inserted 
+	 * @param isCopyStyle
+	 *            true:copy the styles in source document to current TextDocment. 
+	 *            false:don't copy the styles in source document to current TextDocment. 
+	 */
+	public void insertContentFromDocumentBefore(TextDocument sourceDocument, Paragraph referenceParagraph, boolean isCopyStyle){
+		try {
+			OfficeTextElement sroot = sourceDocument.getContentRoot();
+			NodeList clist = sroot.getChildNodes();
+			for (int i = 0; i < clist.getLength(); i++) {
+				OdfElement node = (OdfElement) clist.item(i);
+				if(isCopyStyle){
+					insertOdfElement(referenceParagraph.getOdfElement(), sourceDocument, node, true);
+				}
+				else {
+					insertOdfElementwithoutstyle(referenceParagraph.getOdfElement(), sourceDocument, node, true);
+				}
+			}
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
+		}
+	}
 }
