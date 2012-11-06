@@ -73,6 +73,7 @@ import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.text.Paragraph;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -1011,6 +1012,204 @@ public class Table extends Component {
 		}
 
 		return newTEle;
+	}
+
+	/**
+	 * Apply the formatting specified in the template to corresponding table
+	 * cells.
+	 * <p>
+	 * A table can only be formatted as one type of styles: even-odd-rows or
+	 * even-odd-columns. The rule is to check the style of odd rows and even
+	 * rows in the template, only if they have one different properties, table:
+	 * style-name or table:paragraph-style-name, the table template will be
+	 * treated as a even-odd-columns styled table.
+	 * <p>
+	 * If one style in the template is null, the style of corresponding cells
+	 * will be removed. An empty template can be used to remove all the styles
+	 * in a table.
+	 * 
+	 * @param template
+	 * @throws IllegalArgumentException
+	 *             if the given template is null
+	 * @throws Exception
+	 *             if content DOM could not be initialized
+	 */
+	public void applyStyle(TableTemplate template) throws Exception {
+
+		if (template == null)
+			throw new IllegalArgumentException(
+					"The template cannot null to be applied to a table.");
+
+		Document doc = this.getOwnerDocument();
+		OdfOfficeAutomaticStyles styles = doc.getContentDom()
+				.getAutomaticStyles();
+
+		// decide row style or column style
+		boolean isEqualTableStyle = true;
+		boolean isEqualParaStyle = true;
+		OdfStyle evenRowsTableStyle = styles.getStyle(template
+				.getTableEvenRowsTableStyle(), OdfStyleFamily.TableCell);
+		OdfStyle oddRowsTableStyle = styles.getStyle(template
+				.getTableOddRowsTableStyle(), OdfStyleFamily.TableCell);
+		OdfStyle evenRowsParagraphStyle = styles.getStyle(template
+				.getTableEvenRowsParagraphStyle(), OdfStyleFamily.Paragraph);
+		OdfStyle oddRowsParagraphStyle = styles.getStyle(template
+				.getTableOddRowsParagraphStyle(), OdfStyleFamily.Paragraph);
+		if (evenRowsTableStyle != null || oddRowsTableStyle != null)
+			isEqualTableStyle = evenRowsTableStyle.compareTo(oddRowsTableStyle) == 0;
+		if (evenRowsParagraphStyle != null || oddRowsParagraphStyle != null)
+			isEqualParaStyle = evenRowsParagraphStyle
+					.compareTo(oddRowsParagraphStyle) == 0;
+
+		Iterator<Row> rowIterator = this.getRowIterator();
+
+		if (rowIterator.hasNext()) { // first row
+			Row currentRow = rowIterator.next();
+			String firstCellTableStyle = template
+					.getExtendedTableStyleByType(TableTemplate.ExtendedStyleType.FIRSTROWSTARTCOLUM);
+			String firstCellParagraphStyle = template
+					.getExtendedParagraphStyleByType(TableTemplate.ExtendedStyleType.FIRSTROWSTARTCOLUM);
+			String lastCellTableStyle = template
+					.getExtendedTableStyleByType(TableTemplate.ExtendedStyleType.FIRSTROWENDCOLUMN);
+			String lastCellParagraphStyle = template
+					.getExtendedParagraphStyleByType(TableTemplate.ExtendedStyleType.FIRSTROWENDCOLUMN);
+			String evenCellTableStyle = template.getTableFirstRowTableStyle();
+			String evenCellParagraphStyle = template
+					.getTableFirstRowParagraphStyle();
+			String oddCellTableStyle = evenCellTableStyle;
+			String oddCellParagraphStyle = evenCellParagraphStyle;
+
+			applyStyleToRow(template, currentRow, firstCellTableStyle,
+					oddCellTableStyle, evenCellTableStyle, lastCellTableStyle,
+					firstCellParagraphStyle, oddCellParagraphStyle,
+					evenCellParagraphStyle, lastCellParagraphStyle);
+
+			int line = 0;
+			while (rowIterator.hasNext()) {
+				currentRow = rowIterator.next();
+				line++;
+
+				if (!rowIterator.hasNext()) { // last row
+					firstCellTableStyle = template
+							.getExtendedTableStyleByType(TableTemplate.ExtendedStyleType.LASTROWSTARTCOLUMN);
+					firstCellParagraphStyle = template
+							.getExtendedParagraphStyleByType(TableTemplate.ExtendedStyleType.LASTROWSTARTCOLUMN);
+					lastCellTableStyle = template
+							.getExtendedTableStyleByType(TableTemplate.ExtendedStyleType.LASTROWENDCOLUMN);
+					lastCellParagraphStyle = template
+							.getExtendedParagraphStyleByType(TableTemplate.ExtendedStyleType.LASTROWENDCOLUMN);
+					oddCellTableStyle = evenCellTableStyle = template
+							.getTableLastRowTableStyle();
+					oddCellParagraphStyle = evenCellParagraphStyle = template
+							.getTableLastRowParagraphStyle();
+
+					applyStyleToRow(template, currentRow, firstCellTableStyle,
+							oddCellTableStyle, evenCellTableStyle,
+							lastCellTableStyle, firstCellParagraphStyle,
+							oddCellParagraphStyle, evenCellParagraphStyle,
+							lastCellParagraphStyle);
+
+				} else if (!isEqualTableStyle || !isEqualParaStyle) {
+					firstCellTableStyle = template
+							.getTableFirstColumnTableStyle();
+					firstCellParagraphStyle = template
+							.getTableFirstColumnParagraphStyle();
+					lastCellTableStyle = template
+							.getTableLastColumnTableStyle();
+					lastCellParagraphStyle = template
+							.getTableLastColumnParagraphStyle();
+
+					if (line % 2 != 0) { // odd row
+
+						oddCellTableStyle = evenCellTableStyle = template
+								.getTableOddRowsTableStyle();
+						oddCellParagraphStyle = evenCellParagraphStyle = template
+								.getTableOddRowsParagraphStyle();
+						applyStyleToRow(template, currentRow,
+								firstCellTableStyle, oddCellTableStyle,
+								evenCellTableStyle, lastCellTableStyle,
+								firstCellParagraphStyle, oddCellParagraphStyle,
+								evenCellParagraphStyle, lastCellParagraphStyle);
+					} else { // even row
+
+						oddCellTableStyle = evenCellTableStyle = template
+								.getTableEvenRowsTableStyle();
+						oddCellParagraphStyle = evenCellParagraphStyle = template
+								.getTableEvenRowsParagraphStyle();
+
+						applyStyleToRow(template, currentRow,
+								firstCellTableStyle, oddCellTableStyle,
+								evenCellTableStyle, lastCellTableStyle,
+								firstCellParagraphStyle, oddCellParagraphStyle,
+								evenCellParagraphStyle, lastCellParagraphStyle);
+					}
+
+				} else { // even&odd column
+					firstCellTableStyle = template
+							.getTableFirstColumnTableStyle();
+					firstCellParagraphStyle = template
+							.getTableFirstColumnParagraphStyle();
+					lastCellTableStyle = template
+							.getTableLastColumnTableStyle();
+					lastCellParagraphStyle = template
+							.getTableLastColumnParagraphStyle();
+					evenCellTableStyle = template
+							.getTableEvenColumnsTableStyle();
+					evenCellParagraphStyle = template
+							.getTableEvenColumnsParagraphStyle();
+					oddCellTableStyle = template.getTableOddColumnsTableStyle();
+					oddCellParagraphStyle = template
+							.getTableOddColumnsParagraphStyle();
+					applyStyleToRow(template, currentRow, firstCellTableStyle,
+							oddCellTableStyle, evenCellTableStyle,
+							lastCellTableStyle, firstCellParagraphStyle,
+							oddCellParagraphStyle, evenCellParagraphStyle,
+							lastCellParagraphStyle);
+				}
+			}
+
+		}
+
+	}
+
+	private void applyStyleToRow(TableTemplate template, Row row,
+			String firstCellTableStyle, String oddCellTableStyle,
+			String evenCellTableStyle, String lastCellTableStyle,
+			String firstCellParagraphStyle, String oddCellParagraphStyle,
+			String evenCellParagraphStyle, String lastCellParagraphStyle) {
+		int cellIndex = 0;
+		int mnRepeatedIndex = row.getRowsRepeatedNumber();
+		int lastIndex = row.getCellCount() - 1;
+		Cell cell;
+		String tableStyle, paraStyle;
+		for (Node n : new DomNodeList(row.getOdfElement().getChildNodes())) {
+			if (n instanceof TableTableCellElementBase) {
+				cell = this.getCellInstance((TableTableCellElementBase) n, 0,
+						mnRepeatedIndex);
+				if (cell.getColumnsRepeatedNumber() > 1)
+					lastIndex -= cell.getColumnsRepeatedNumber() - 1;
+				if (cellIndex == 0) {
+					tableStyle = firstCellTableStyle;
+					paraStyle = firstCellParagraphStyle;
+				} else if (cellIndex == lastIndex) {
+					tableStyle = lastCellTableStyle;
+					paraStyle = lastCellParagraphStyle;
+				} else if (cellIndex % 2 == 0) {
+					tableStyle = evenCellTableStyle;
+					paraStyle = evenCellParagraphStyle;
+				} else {
+					tableStyle = oddCellTableStyle;
+					paraStyle = oddCellParagraphStyle;
+				}
+				cell.setCellStyleName(tableStyle);
+				Iterator<Paragraph> paraIterator = cell.getParagraphIterator();
+				while (paraIterator.hasNext()) {
+					Paragraph t = paraIterator.next();
+					t.getOdfElement().setStyleName(paraStyle);
+				}
+				cellIndex++;
+			}
+		}
 	}
 
 	private static String getUniqueTableName(TableContainer container) {

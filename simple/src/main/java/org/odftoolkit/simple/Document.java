@@ -64,6 +64,8 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
+import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
@@ -85,10 +87,13 @@ import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.type.Duration;
 import org.odftoolkit.simple.meta.Meta;
+import org.odftoolkit.simple.table.TableTemplate;
 import org.odftoolkit.simple.table.AbstractTableContainer;
+import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.Table;
-import org.odftoolkit.simple.table.TableContainer;
 import org.odftoolkit.simple.table.Table.TableBuilder;
+import org.odftoolkit.simple.table.TableContainer;
+import org.odftoolkit.simple.text.Paragraph;
 import org.odftoolkit.simple.text.Section;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
@@ -2423,4 +2428,169 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	protected IdentityHashMap<OdfElement, Component> getComponentMap() {
 		return mComponentRepository;
 	}
+
+	/**
+	 * Construct a
+	 * 
+	 * 
+	 * <code>TableTemplate<code> feature by extracting style template from an pre-defined table in a foreign document. The styles loaded by the template will be copied into the document as well and can be referenced by table directly.
+	 * <p>
+	 * The imported table need to be at least a 5*5 table (e.g. A1E5).  Each type of style in the template will be set according to the style reference in a specific table cell, as following:
+	 * <br>first column - A2
+	 * <br>last column - E2
+	 * <br>first row - A2
+	 * <br>last row - E2
+	 * <br>even rows - B3
+	 * <br>odd rows - B2
+	 * <br>even columns - C2
+	 * <br>odd columns - B2
+	 * <br>body - B2
+	 * <br>first-row-start-column -A1
+	 * <br>first-row-end-column -E1
+	 * <br>last-row-start-column -A5
+	 * <br>last-row-end-column -E5
+	 * 
+	 * @param templateFileInputStream
+	 *            - the InputStream of the ODF document.
+	 * @param tableName
+	 *            - the table name which will be used to load styles as template
+	 * @throws Exception
+	 *             - if content DOM could not be initialized
+	 */
+	public TableTemplate LoadTableTemplateFromForeignTable(
+			InputStream templateFileInputStream, String tableName) throws Exception {
+
+		Document doc = Document.loadDocument(templateFileInputStream);
+
+		if (doc == null)
+			throw new IllegalStateException(
+					"Cannot load specified template file.");
+
+		Table table = doc.getTableByName(tableName);
+		if (table == null)
+			throw new IllegalStateException(
+					"Cannot load table template from specified file.");
+
+		if (table.getRowCount() < 5 || table.getColumnCount() < 5)
+			throw new IllegalStateException(
+					"The template cannot be loaded. It should be at least a 5*5 table.");
+
+		TableTemplate template = new TableTemplate(getStylesDom()
+				.newOdfElement(TableTableTemplateElement.class));
+
+		// first-row-start-column
+		Cell cell = table.getCellByPosition(0, 0);
+		cell.getParagraphIterator().hasNext();
+		cell.getParagraphIterator().next().getStyleName();
+		Paragraph para = cell.getParagraphByIndex(0, false);
+		String paraStyle = (para != null ? para.getStyleName() : null);
+		template.setExtendedStyleByType(
+				TableTemplate.ExtendedStyleType.FIRSTROWSTARTCOLUM, cell
+						.getStyleName(), paraStyle);
+		TableTableCellElementBase oldCellEle = cell.getOdfElement();
+		TableTableCellElementBase newCellEle = (TableTableCellElementBase) oldCellEle
+				.cloneNode(true);
+		copyForeignStyleRef(newCellEle, cell.getOwnerDocument());
+
+		// first-row-end-column
+		cell = table.getCellByPosition(4, 0);
+		para = cell.getParagraphByIndex(0, false);
+		paraStyle = (para != null ? para.getStyleName() : null);
+		template.setExtendedStyleByType(
+				TableTemplate.ExtendedStyleType.FIRSTROWENDCOLUMN, cell
+						.getStyleName(), paraStyle);
+		oldCellEle = cell.getOdfElement();
+		newCellEle = (TableTableCellElementBase) oldCellEle.cloneNode(true);
+		copyForeignStyleRef(newCellEle, cell.getOwnerDocument());
+
+		// last-row-start-column
+		cell = table.getCellByPosition(0, 4);
+		para = cell.getParagraphByIndex(0, false);
+		paraStyle = (para != null ? para.getStyleName() : null);
+		template.setExtendedStyleByType(
+				TableTemplate.ExtendedStyleType.LASTROWSTARTCOLUMN, cell
+						.getStyleName(), paraStyle);
+		oldCellEle = cell.getOdfElement();
+		newCellEle = (TableTableCellElementBase) oldCellEle.cloneNode(true);
+		copyForeignStyleRef(newCellEle, cell.getOwnerDocument());
+
+		// last-row-end-column
+		cell = table.getCellByPosition(4, 4);
+		para = cell.getParagraphByIndex(0, false);
+		paraStyle = (para != null ? para.getStyleName() : null);
+		template.setExtendedStyleByType(
+				TableTemplate.ExtendedStyleType.LASTROWENDCOLUMN, cell
+						.getStyleName(), paraStyle);
+		oldCellEle = cell.getOdfElement();
+		newCellEle = (TableTableCellElementBase) oldCellEle.cloneNode(true);
+		copyForeignStyleRef(newCellEle, cell.getOwnerDocument());
+
+		// first column
+		cell = table.getCellByPosition(0, 1);
+		para = cell.getParagraphByIndex(0, false);
+		paraStyle = (para != null ? para.getStyleName() : null);
+		template.setTableFirstColumnStyle(cell.getStyleName(), paraStyle);
+		oldCellEle = cell.getOdfElement();
+		newCellEle = (TableTableCellElementBase) oldCellEle.cloneNode(true);
+		copyForeignStyleRef(newCellEle, cell.getOwnerDocument());
+
+		// last column
+		cell = table.getCellByPosition(4, 2);
+		para = cell.getParagraphByIndex(0, false);
+		paraStyle = (para != null ? para.getStyleName() : null);
+		template.setTableLastColumnStyle(cell.getStyleName(), paraStyle);
+		oldCellEle = cell.getOdfElement();
+		newCellEle = (TableTableCellElementBase) oldCellEle.cloneNode(true);
+		copyForeignStyleRef(newCellEle, cell.getOwnerDocument());
+
+		// first row
+		cell = table.getCellByPosition(1, 0);
+		para = cell.getParagraphByIndex(0, false);
+		paraStyle = (para != null ? para.getStyleName() : null);
+		template.setTableFirstRowStyle(cell.getStyleName(), paraStyle);
+		oldCellEle = cell.getOdfElement();
+		newCellEle = (TableTableCellElementBase) oldCellEle.cloneNode(true);
+		copyForeignStyleRef(newCellEle, cell.getOwnerDocument());
+
+		// last row
+		cell = table.getCellByPosition(1, 4);
+		para = cell.getParagraphByIndex(0, false);
+		paraStyle = (para != null ? para.getStyleName() : null);
+		template.setTableLastRowStyle(cell.getStyleName(), paraStyle);
+		oldCellEle = cell.getOdfElement();
+		newCellEle = (TableTableCellElementBase) oldCellEle.cloneNode(true);
+		copyForeignStyleRef(newCellEle, cell.getOwnerDocument());
+
+		// body (=odd row/column)
+		cell = table.getCellByPosition(1, 1);
+		para = cell.getParagraphByIndex(0, false);
+		paraStyle = (para != null ? para.getStyleName() : null);
+		template.setTableBodyStyle(cell.getStyleName(), paraStyle);
+		template.setTableOddRowsStyle(cell.getStyleName(), paraStyle);
+		template.setTableOddColumnsStyle(cell.getStyleName(), paraStyle);
+		oldCellEle = cell.getOdfElement();
+		newCellEle = (TableTableCellElementBase) oldCellEle.cloneNode(true);
+		copyForeignStyleRef(newCellEle, cell.getOwnerDocument());
+
+		// even row
+		cell = table.getCellByPosition(1, 2);
+		para = cell.getParagraphByIndex(0, false);
+		paraStyle = (para != null ? para.getStyleName() : null);
+		template.setTableEvenRowsStyle(cell.getStyleName(), paraStyle);
+		oldCellEle = cell.getOdfElement();
+		newCellEle = (TableTableCellElementBase) oldCellEle.cloneNode(true);
+		copyForeignStyleRef(newCellEle, cell.getOwnerDocument());
+
+		// even row
+		cell = table.getCellByPosition(2, 1);
+		para = cell.getParagraphByIndex(0, false);
+		paraStyle = (para != null ? para.getStyleName() : null);
+		template.setTableEvenColumnsStyle(cell.getStyleName(), paraStyle);
+		oldCellEle = cell.getOdfElement();
+		newCellEle = (TableTableCellElementBase) oldCellEle.cloneNode(true);
+		copyForeignStyleRef(newCellEle, cell.getOwnerDocument());
+
+		return template;
+	}
+
 }
