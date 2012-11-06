@@ -73,7 +73,14 @@ public abstract class AbstractVariableContainer implements VariableContainer {
 					.getFirstChild();
 			while (userVariableElement != null) {
 				if (name.equals(userVariableElement.getTextNameAttribute())) {
-					return Fields.createUserVariableField(this, name, "");
+					String type = userVariableElement.getOfficeValueTypeAttribute();
+					if(type.equalsIgnoreCase("string")){
+						String stringValue = userVariableElement.getOfficeStringValueAttribute();
+						return Fields.createUserVariableField(this, name, stringValue);
+					}
+					Double DoubleValue = userVariableElement.getOfficeValueAttribute();
+					DoubleValue.toString();
+					return Fields.createUserVariableField(this, name, DoubleValue.toString());
 				} else {
 					userVariableElement = (TextUserFieldDeclElement) userVariableElement.getNextSibling();
 				}
