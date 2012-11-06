@@ -21,6 +21,7 @@ package org.odftoolkit.simple;
 
 import java.awt.Rectangle;
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -94,6 +95,164 @@ public class TextDocumentTest {
 			Logger.getLogger(TextDocumentTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail();
 		}
+	}
+	
+	@Test
+	public void testAddPagebreakWithMasterPage() {
+		try {
+
+			TextDocument newDoc = TextDocument.newTextDocument();
+
+			// create a new master page
+			Paragraph paragraph = newDoc
+					.addParagraph("before page break - original Landscape");
+			MasterPage master1 = MasterPage.getOrCreateMasterPage(newDoc,
+					"Landscape");
+			master1.setPageWidth(279.4);
+			master1.setPageHeight(215.9);
+			master1.setNumberFormat(NumberFormat.HINDU_ARABIC_NUMBER.toString());
+			master1.setPrintOrientation(PrintOrientation.LANDSCAPE);
+			master1.setFootnoteMaxHeight(0);
+			master1.setWritingMode(StyleTypeDefinitions.WritingMode.LRTB);
+			master1.setMargins(20, 20, 20, 20);
+			master1.setFootnoteSepProperties(AdjustmentStyle.LEFT, Color
+					.valueOf("#000000"), 1, 1, null, Percent.valueOf("25%"),
+					0.18);
+			newDoc.addPageBreak(paragraph, master1);
+			newDoc.addParagraph("after page break - original Landscape");
+			validMasterPageApplied(newDoc, paragraph, master1);
+			newDoc
+					.save(ResourceUtilities
+							.newTestOutputFile("AddPageBreakWithMasterPageOutput1.odt"));
+
+			// modify the master page
+			paragraph = newDoc
+					.addParagraph("before page break - modified Landscape");
+			MasterPage master2 = MasterPage.getOrCreateMasterPage(newDoc,
+					"Landscape");
+			master2.setPageWidth(100);
+			master2.setPageHeight(300);
+			master2.setNumberFormat(null);
+			master2.setPrintOrientation(null);
+			master2.setMargins(20, 20, 0, 0);
+			newDoc.addPageBreak(paragraph, master2);
+			newDoc.addParagraph("after page break - modified Landscape");
+			validMasterPageApplied(newDoc, paragraph, master2);
+
+			// apply existing master page
+			paragraph = newDoc.addParagraph("before page break - Standard");
+			MasterPage master3 = MasterPage.getOrCreateMasterPage(newDoc,
+					"Standard");
+			newDoc.addPageBreak(paragraph, master3);
+			newDoc.addParagraph("after page break - Standard");
+			newDoc.addParagraph("end page");
+			newDoc
+					.save(ResourceUtilities
+							.newTestOutputFile("AddPageBreakWithMasterPageOutput2.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(TextDocumentTest.class.getName()).log(
+					Level.SEVERE, null, e);
+			Assert.fail();
+		}
+	}
+
+	private void validMasterPageApplied(TextDocument newDoc,
+			Paragraph paragraph, MasterPage masterPage) throws Exception {
+		Node paragraphNode = paragraph.getOdfElement().getNextSibling();
+		Assert.assertTrue(paragraphNode instanceof TextPElement);
+
+		// check paragraph style
+		OdfOfficeAutomaticStyles styles = newDoc.getContentDom()
+				.getAutomaticStyles();
+		OdfStyle style = styles.getStyle(((TextPElement) paragraphNode)
+				.getStyleName(), OdfStyleFamily.Paragraph);
+		Assert.assertNotNull(style);
+
+		// check master page style
+		String masterName = style.getStyleMasterPageNameAttribute();
+		StyleMasterPageElement master = newDoc.getOfficeMasterStyles()
+				.getMasterPage(masterName);
+		Assert.assertEquals(masterPage.getName(), masterName);
+		Assert.assertNotNull(master);
+
+		// check page layout style
+		String pageLayoutName = master.getStylePageLayoutNameAttribute();
+		OdfStylePageLayout pageLayout = master.getAutomaticStyles()
+				.getPageLayout(pageLayoutName);
+		Assert.assertNotNull(pageLayout);
+
+		// check page layout properties
+		StylePageLayoutPropertiesElement properties = (StylePageLayoutPropertiesElement) pageLayout
+				.getPropertiesElement(OdfStylePropertiesSet.PageLayoutProperties);
+		Assert.assertNotNull(properties);
+		// page width
+		checkDoubleValue(masterPage.getPageWidth(), properties
+				.getFoPageWidthAttribute());
+		// page height
+		checkDoubleValue(masterPage.getPageHeight(), properties
+				.getFoPageHeightAttribute());
+		// footnote max height
+		checkDoubleValue(masterPage.getFootnoteMaxHeight(), properties
+				.getStyleFootnoteMaxHeightAttribute());
+		// margins
+		checkDoubleValue(masterPage.getMarginTop(), properties
+				.getFoMarginTopAttribute());
+		checkDoubleValue(masterPage.getMarginBottom(), properties
+				.getFoMarginBottomAttribute());
+		checkDoubleValue(masterPage.getMarginLeft(), properties
+				.getFoMarginLeftAttribute());
+		checkDoubleValue(masterPage.getMarginRight(), properties
+				.getFoMarginRightAttribute());
+		// writing mode
+		checkStringValue(masterPage.getWritingMode(), properties
+				.getStyleWritingModeAttribute());
+		// number format
+		checkStringValue(masterPage.getNumberFormat(), properties
+				.getStyleNumFormatAttribute());
+		// print orientation
+		checkStringValue(masterPage.getPrintOrientation(), properties
+				.getStylePrintOrientationAttribute());
+
+		// check footnote separator line
+		StyleFootnoteSepElement footnoteSep = (StyleFootnoteSepElement) properties
+				.getElementsByTagName("style:footnote-sep").item(0);
+		Assert.assertNotNull(footnoteSep);
+		checkStringValue(masterPage.getFootnoteSepAdjustment(), footnoteSep
+				.getStyleAdjustmentAttribute());
+		checkStringValue(masterPage.getFootnoteSepColor(), footnoteSep
+				.getStyleColorAttribute());
+		checkStringValue(masterPage.getFootnoteSepLineStyle(), footnoteSep
+				.getStyleLineStyleAttribute());
+		checkDoubleValue(masterPage.getFootnoteSepDistanceAfterSep(),
+				footnoteSep.getStyleDistanceAfterSepAttribute());
+		checkDoubleValue(masterPage.getFootnoteSepDistanceBeforeSep(),
+				footnoteSep.getStyleDistanceBeforeSepAttribute());
+		checkDoubleValue(masterPage.getFootnoteSepThickness(), footnoteSep
+				.getStyleWidthAttribute());
+		checkDoubleValue(masterPage.getFootnoteSepWidth(), footnoteSep
+				.getStyleRelWidthAttribute());
+	}
+
+	private void checkStringValue(String expected, String actual) {
+		if (expected == null) {
+			Assert.assertNull(actual);
+		} else if (expected.equals("page")) {
+			Assert.assertTrue(actual == null || actual.equals(expected));
+		} else {
+			Assert.assertEquals(expected, actual);
+		}
+	}
+
+	private void checkDoubleValue(double expected, String actual) {
+		double value = 0;
+		if (actual != null) {
+			if (Percent.isValid(actual)) {
+				value = Percent.valueOf(actual).doubleValue();
+			} else {
+				value = Length.parseDouble(actual, Unit.MILLIMETER);
+			}
+		}
+		Assert.assertEquals(expected, value);
 	}
 	
 	@Test
@@ -490,5 +649,96 @@ public class TextDocumentTest {
 		
 		//save
 		//tdoc.save(ResourceUtilities.getAbsolutePath("headerFooterHidden.odt"));
+	}
+	
+	@Test
+	public void testinsertContentFromDocumentBefore() throws Exception {
+		TextDocument src1 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
+		TextDocument src2 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
+		TextDocument target1 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
+		TextDocument target2 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
+		Paragraph p1 = target1.getParagraphByIndex(2, true);
+		target1.insertContentFromDocumentBefore(src1, p1, true);
+		Iterable<OdfStyle> pstyles1 = target1.getStylesDom().getOfficeStyles().getStylesForFamily(OdfStyleFamily.Paragraph);
+		Iterator<OdfStyle> ite = pstyles1.iterator();
+		int i=0;
+		System.out.println("Custom Styles in TestInsertDocumentWithStyleBefore.odt");
+		while(ite.hasNext()){
+			OdfStyle odfStyle = ite.next();
+			String sname = odfStyle.getAttribute("style:name");
+			if(sname.startsWith("style"))
+			{
+				i++;
+				System.out.println(sname);
+			}
+		}	
+		Assert.assertEquals(6, i);
+		target1.save(ResourceUtilities.newTestOutputFile("TestInsertDocumentWithStyleBefore.odt"));
+		
+		target2 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
+		Paragraph p2 = target2.getParagraphByIndex(2, true);
+		target2.insertContentFromDocumentBefore(src2, p2, false);
+		
+		Iterable<OdfStyle> pstyles2 = target2.getStylesDom().getOfficeStyles().getStylesForFamily(OdfStyleFamily.Paragraph);
+		Iterator<OdfStyle> ite2 = pstyles2.iterator();
+		i=0;
+		System.out.println("Custom Styles in TestInsertDocumentWithoutStyleBefore.odt");
+		while(ite2.hasNext()){
+			OdfStyle odfStyle = ite2.next();
+			String sname = odfStyle.getAttribute("style:name");
+			if(sname.startsWith("style"))
+			{
+				i++;
+				System.out.println(sname);
+			}
+		}	
+		Assert.assertEquals(3, i);
+		target2.save(ResourceUtilities.newTestOutputFile("TestInsertDocumentWithoutStyleBefore.odt"));
+	}
+	@Test
+	public void testinsertContentFromDocumentAfter() throws Exception {
+		TextDocument src1 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
+		TextDocument src2 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
+		TextDocument target1 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
+		TextDocument target2 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
+		Paragraph p1 = target1.getParagraphByIndex(2, true);
+		target1.insertContentFromDocumentAfter(src1, p1, true);
+		Iterable<OdfStyle> pstyles1 = target1.getStylesDom().getOfficeStyles().getStylesForFamily(OdfStyleFamily.Paragraph);
+		Iterator<OdfStyle> ite = pstyles1.iterator();
+		int i=0;
+		System.out.println("Custom Styles in TestInsertDocumentWithStyleAfter.odt:");
+		while(ite.hasNext()){
+			OdfStyle odfStyle = ite.next();
+			String sname = odfStyle.getAttribute("style:name");
+			if(sname.startsWith("style"))
+			{
+				i++;
+				System.out.println(sname);
+			}
+		}	
+		Assert.assertEquals(6, i);
+		target1.save(ResourceUtilities.newTestOutputFile("TestInsertDocumentWithStyleAfter.odt"));
+		
+		
+		
+		target2 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
+		Paragraph p2 = target2.getParagraphByIndex(2, true);
+		target2.insertContentFromDocumentAfter(src2, p2, false);
+		
+		Iterable<OdfStyle> pstyles2 = target2.getStylesDom().getOfficeStyles().getStylesForFamily(OdfStyleFamily.Paragraph);
+		Iterator<OdfStyle> ite2 = pstyles2.iterator();
+		i=0;
+		System.out.println("Custom Styles in TestInsertDocumentWithoutStyleAfter.odt:");
+		while(ite2.hasNext()){
+			OdfStyle odfStyle = ite2.next();
+			String sname = odfStyle.getAttribute("style:name");
+			if(sname.startsWith("style"))
+			{
+				i++;
+				System.out.println(sname);
+			}
+		}	
+		Assert.assertEquals(3, i);
+		target2.save(ResourceUtilities.newTestOutputFile("TestInsertDocumentWithoutStyleAfter.odt"));
 	}
 }
