@@ -90,7 +90,25 @@ public class StyleTypeDefinitions {
 			return fontStyle;
 		}
 	}
-	
+
+	/**
+	 * Common used font adjustment style from users perspective
+	 */
+	public static enum AdjustmentStyle {
+		CENTER("center"), LEFT("left"), RIGHT("right");
+
+		private String adjustment = "left";
+
+		AdjustmentStyle(String value) {
+			this.adjustment = value;
+		}
+
+		public String toString() {
+			return adjustment;
+		}
+
+	}
+
 	/**
 	 * Common used font text line position from users perspective.
 	 * <p>Currently, only support underline and strike through.
@@ -814,6 +832,61 @@ public class StyleTypeDefinitions {
 		@Override
 		public String toString() {
 			return value;
+		}
+	}
+
+	public static enum PrintOrientation {
+		LANDSCAPE("landscape"), PORTRAIT("portrait");
+
+		private String printOrientaiton;
+
+		PrintOrientation(String orientation) {
+			this.printOrientaiton = orientation;
+		}
+
+		public static PrintOrientation enumValueOf(String aValue) {
+			if ((aValue == null) || (aValue.length() == 0))
+				return PORTRAIT;
+
+			for (PrintOrientation aIter : values()) {
+				if (aValue.equals(aIter.toString())) {
+					return aIter;
+				}
+			}
+			return PORTRAIT;
+		}
+
+		@Override
+		public String toString() {
+			return printOrientaiton;
+		}
+	}
+
+	public static enum WritingMode {
+		LRTB("lr-tb"), RLTB("rl-tb"), TBRL("tb-rl"), TBLR("tb-lr"), LR("lr"), RL(
+				"rl"), TB("tb"), PAGE("page");
+
+		private String mode;
+
+		WritingMode(String mode) {
+			this.mode = mode;
+		}
+
+		public static WritingMode enumValueOf(String aValue) {
+			if ((aValue == null) || (aValue.length() == 0))
+				return PAGE;
+
+			for (WritingMode aIter : values()) {
+				if (aValue.equals(aIter.toString())) {
+					return aIter;
+				}
+			}
+			return PAGE;
+		}
+
+		@Override
+		public String toString() {
+			return mode;
 		}
 	}
 

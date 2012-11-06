@@ -30,18 +30,32 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleFootnoteSepElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
+import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.type.Color;
+import org.odftoolkit.odfdom.type.Length;
+import org.odftoolkit.odfdom.type.Percent;
+import org.odftoolkit.odfdom.type.Length.Unit;
 import org.odftoolkit.simple.Document.OdfMediaType;
 import org.odftoolkit.simple.chart.Chart;
 import org.odftoolkit.simple.chart.ChartType;
 import org.odftoolkit.simple.chart.DataSet;
 import org.odftoolkit.simple.common.field.VariableField;
+import org.odftoolkit.simple.style.MasterPage;
+import org.odftoolkit.simple.style.NumberFormat;
+import org.odftoolkit.simple.style.StyleTypeDefinitions;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.AdjustmentStyle;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.PrintOrientation;
 import org.odftoolkit.simple.table.TableContainer;
 import org.odftoolkit.simple.text.Paragraph;
 import org.odftoolkit.simple.utils.ResourceUtilities;
@@ -82,6 +96,164 @@ public class TextDocumentTest {
 		}
 	}
 	
+	@Test
+	public void testAddPagebreakWithMasterPage() {
+		try {
+
+			TextDocument newDoc = TextDocument.newTextDocument();
+
+			// create a new master page
+			Paragraph paragraph = newDoc
+					.addParagraph("before page break - original Landscape");
+			MasterPage master1 = MasterPage.getOrCreateMasterPage(newDoc,
+					"Landscape");
+			master1.setPageWidth(279.4);
+			master1.setPageHeight(215.9);
+			master1.setNumberFormat(NumberFormat.HINDU_ARABIC_NUMBER.toString());
+			master1.setPrintOrientation(PrintOrientation.LANDSCAPE);
+			master1.setFootnoteMaxHeight(0);
+			master1.setWritingMode(StyleTypeDefinitions.WritingMode.LRTB);
+			master1.setMargins(20, 20, 20, 20);
+			master1.setFootnoteSepProperties(AdjustmentStyle.LEFT, Color
+					.valueOf("#000000"), 1, 1, null, Percent.valueOf("25%"),
+					0.18);
+			newDoc.addPageBreak(paragraph, master1);
+			newDoc.addParagraph("after page break - original Landscape");
+			validMasterPageApplied(newDoc, paragraph, master1);
+			newDoc
+					.save(ResourceUtilities
+							.newTestOutputFile("AddPageBreakWithMasterPageOutput1.odt"));
+
+			// modify the master page
+			paragraph = newDoc
+					.addParagraph("before page break - modified Landscape");
+			MasterPage master2 = MasterPage.getOrCreateMasterPage(newDoc,
+					"Landscape");
+			master2.setPageWidth(100);
+			master2.setPageHeight(300);
+			master2.setNumberFormat(null);
+			master2.setPrintOrientation(null);
+			master2.setMargins(20, 20, 0, 0);
+			newDoc.addPageBreak(paragraph, master2);
+			newDoc.addParagraph("after page break - modified Landscape");
+			validMasterPageApplied(newDoc, paragraph, master2);
+
+			// apply existing master page
+			paragraph = newDoc.addParagraph("before page break - Standard");
+			MasterPage master3 = MasterPage.getOrCreateMasterPage(newDoc,
+					"Standard");
+			newDoc.addPageBreak(paragraph, master3);
+			newDoc.addParagraph("after page break - Standard");
+			newDoc.addParagraph("end page");
+			newDoc
+					.save(ResourceUtilities
+							.newTestOutputFile("AddPageBreakWithMasterPageOutput2.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(TextDocumentTest.class.getName()).log(
+					Level.SEVERE, null, e);
+			Assert.fail();
+		}
+	}
+
+	private void validMasterPageApplied(TextDocument newDoc,
+			Paragraph paragraph, MasterPage masterPage) throws Exception {
+		Node paragraphNode = paragraph.getOdfElement().getNextSibling();
+		Assert.assertTrue(paragraphNode instanceof TextPElement);
+
+		// check paragraph style
+		OdfOfficeAutomaticStyles styles = newDoc.getContentDom()
+				.getAutomaticStyles();
+		OdfStyle style = styles.getStyle(((TextPElement) paragraphNode)
+				.getStyleName(), OdfStyleFamily.Paragraph);
+		Assert.assertNotNull(style);
+
+		// check master page style
+		String masterName = style.getStyleMasterPageNameAttribute();
+		StyleMasterPageElement master = newDoc.getOfficeMasterStyles()
+				.getMasterPage(masterName);
+		Assert.assertEquals(masterPage.getName(), masterName);
+		Assert.assertNotNull(master);
+
+		// check page layout style
+		String pageLayoutName = master.getStylePageLayoutNameAttribute();
+		OdfStylePageLayout pageLayout = master.getAutomaticStyles()
+				.getPageLayout(pageLayoutName);
+		Assert.assertNotNull(pageLayout);
+
+		// check page layout properties
+		StylePageLayoutPropertiesElement properties = (StylePageLayoutPropertiesElement) pageLayout
+				.getPropertiesElement(OdfStylePropertiesSet.PageLayoutProperties);
+		Assert.assertNotNull(properties);
+		// page width
+		checkDoubleValue(masterPage.getPageWidth(), properties
+				.getFoPageWidthAttribute());
+		// page height
+		checkDoubleValue(masterPage.getPageHeight(), properties
+				.getFoPageHeightAttribute());
+		// footnote max height
+		checkDoubleValue(masterPage.getFootnoteMaxHeight(), properties
+				.getStyleFootnoteMaxHeightAttribute());
+		// margins
+		checkDoubleValue(masterPage.getMarginTop(), properties
+				.getFoMarginTopAttribute());
+		checkDoubleValue(masterPage.getMarginBottom(), properties
+				.getFoMarginBottomAttribute());
+		checkDoubleValue(masterPage.getMarginLeft(), properties
+				.getFoMarginLeftAttribute());
+		checkDoubleValue(masterPage.getMarginRight(), properties
+				.getFoMarginRightAttribute());
+		// writing mode
+		checkStringValue(masterPage.getWritingMode(), properties
+				.getStyleWritingModeAttribute());
+		// number format
+		checkStringValue(masterPage.getNumberFormat(), properties
+				.getStyleNumFormatAttribute());
+		// print orientation
+		checkStringValue(masterPage.getPrintOrientation(), properties
+				.getStylePrintOrientationAttribute());
+
+		// check footnote separator line
+		StyleFootnoteSepElement footnoteSep = (StyleFootnoteSepElement) properties
+				.getElementsByTagName("style:footnote-sep").item(0);
+		Assert.assertNotNull(footnoteSep);
+		checkStringValue(masterPage.getFootnoteSepAdjustment(), footnoteSep
+				.getStyleAdjustmentAttribute());
+		checkStringValue(masterPage.getFootnoteSepColor(), footnoteSep
+				.getStyleColorAttribute());
+		checkStringValue(masterPage.getFootnoteSepLineStyle(), footnoteSep
+				.getStyleLineStyleAttribute());
+		checkDoubleValue(masterPage.getFootnoteSepDistanceAfterSep(),
+				footnoteSep.getStyleDistanceAfterSepAttribute());
+		checkDoubleValue(masterPage.getFootnoteSepDistanceBeforeSep(),
+				footnoteSep.getStyleDistanceBeforeSepAttribute());
+		checkDoubleValue(masterPage.getFootnoteSepThickness(), footnoteSep
+				.getStyleWidthAttribute());
+		checkDoubleValue(masterPage.getFootnoteSepWidth(), footnoteSep
+				.getStyleRelWidthAttribute());
+	}
+
+	private void checkStringValue(String expected, String actual) {
+		if (expected == null) {
+			Assert.assertNull(actual);
+		} else if (expected.equals("page")) {
+			Assert.assertTrue(actual == null || actual.equals(expected));
+		} else {
+			Assert.assertEquals(expected, actual);
+		}
+	}
+
+	private void checkDoubleValue(double expected, String actual) {
+		double value = 0;
+		if (actual != null) {
+			if (Percent.isValid(actual)) {
+				value = Percent.valueOf(actual).doubleValue();
+			} else {
+				value = Length.parseDouble(actual, Unit.MILLIMETER);
+			}
+		}
+		Assert.assertEquals(expected, value);
+	}
+
 	@Test
 	public void testAddComment() {
 		try {

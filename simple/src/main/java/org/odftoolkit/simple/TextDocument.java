@@ -79,6 +79,7 @@ import org.odftoolkit.simple.common.field.AbstractVariableContainer;
 import org.odftoolkit.simple.common.field.VariableContainer;
 import org.odftoolkit.simple.common.field.VariableField;
 import org.odftoolkit.simple.common.field.VariableField.VariableType;
+import org.odftoolkit.simple.style.MasterPage;
 import org.odftoolkit.simple.style.TOCStyle;
 import org.odftoolkit.simple.text.AbstractParagraphContainer;
 import org.odftoolkit.simple.text.Footer;
@@ -681,7 +682,44 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 			throw new RuntimeException(breakAttribute + "Break appends failed.", e);
 		}
 	}
-	
+
+	/**
+	 * Appends a new page break to this document after the reference paragraph,
+	 * and the master page style will be applied to the new page.
+	 * 
+	 * @param refParagraph
+	 *            the reference paragraph after where the page break inserted.
+	 * @param master
+	 *            the master page style applied to the new page.
+	 * @since 0.8
+	 */
+
+	public void addPageBreak(Paragraph refParagraph, MasterPage master) {
+		TextPElement pEle = null;
+		try {
+			OdfContentDom contentDocument = getContentDom();
+			OdfOfficeAutomaticStyles styles = contentDocument
+					.getAutomaticStyles();
+			OdfStyle style = styles.newStyle(OdfStyleFamily.Paragraph);
+			style.setStyleMasterPageNameAttribute(master.getName());
+
+			if (refParagraph == null) {
+				pEle = getContentRoot().newTextPElement();
+			} else {
+				OfficeTextElement contentRoot = getContentRoot();
+				pEle = contentRoot.newTextPElement();
+				OdfElement refEle = refParagraph.getOdfElement();
+				contentRoot.insertBefore(pEle, refEle.getNextSibling());
+			}
+			pEle.setStyleName(style.getStyleNameAttribute());
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE,
+					null, e);
+			throw new RuntimeException("PageBreak with mater page - "
+					+ master.getName() + " - appends failed.", e);
+		}
+	}
+
 	/**
 	 * Creates a new paragraph and append text.
 	 * 
