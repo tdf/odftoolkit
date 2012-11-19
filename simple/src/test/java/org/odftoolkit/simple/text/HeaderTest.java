@@ -242,4 +242,26 @@ public class HeaderTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+
+	@Test
+	public void testAppendNewSection() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Header header = doc.getHeader();
+			Section sect = header.appendSection("Section1");
+			Assert.assertNotNull(sect);
+
+			StyleHeaderElement styleHead = header.getOdfElement();
+			Node nod = styleHead.getFirstChild();
+			NamedNodeMap nameMap = nod.getAttributes();
+			Node nodtext = nameMap.getNamedItem("text:name");
+			Assert.assertEquals("Section1", nodtext.getNodeValue());
+
+		} catch (Exception e) {
+			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE,
+					null, e);
+			Assert.fail(e.getMessage());
+		}
+
+	}
 }

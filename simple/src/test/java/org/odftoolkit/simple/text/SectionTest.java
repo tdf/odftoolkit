@@ -19,7 +19,11 @@ under the License.
 
 package org.odftoolkit.simple.text;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -28,10 +32,20 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.table.Cell;
+import org.odftoolkit.simple.table.Table;
+import org.odftoolkit.simple.text.list.List;
+import org.odftoolkit.simple.text.list.ListDecorator;
+import org.odftoolkit.simple.text.list.ListTest;
+import org.odftoolkit.simple.text.list.NumberDecorator;
+import org.odftoolkit.simple.text.list.OutLineDecorator;
 import org.odftoolkit.simple.utils.ResourceUtilities;
+
+import sun.misc.BASE64Encoder;
 
 public class SectionTest {
 
@@ -178,6 +192,137 @@ public class SectionTest {
 			}
 			// an embed section is counted two times
 			Assert.assertEquals(count * 2 + 1, i);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testAppendNewSection() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			doc.addParagraph("Paragraph1");
+			Section section = doc.appendSection("Section1");
+			section.addParagraph("Here's a section.");
+			Assert.assertNotNull(section);
+			Assert.assertEquals(section.getName(), "Section1");
+			Assert.assertEquals(section.getParagraphByIndex(0, true)
+					.getTextContent(), "Here's a section.");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+
+	private class MyDigestGenerator implements ProtectionKeyDigestProvider {
+
+//		@Override
+		public String generateHashKey(String passwd) {
+
+			String hashKey = null;
+			if (passwd != null && passwd.length() > 0) {
+				MessageDigest md;
+				try {
+					byte[] pwd = passwd.getBytes();
+					md = MessageDigest.getInstance("MD5");
+					byte[] byteCode = md.digest(pwd);
+					BASE64Encoder encoder = new BASE64Encoder();
+					hashKey = encoder.encode(byteCode);
+				} catch (NoSuchAlgorithmException e) {
+					Logger.getLogger(Section.class.getName(),
+							"Fail to initiate the digest method.");
+				}
+			}
+			return hashKey;
+
+		}
+
+//		@Override
+		public String getProtectionKeyDigestAlgorithm() {
+			return "http://www.w3.org/2000/09/#md5";
+		}
+
+	}
+
+	@Test
+	public void testSetProtectionKeyDigestProvider() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Section section = doc.appendSection("Section1");
+			section.addParagraph("Section 1");
+			Assert.assertNotNull(section);
+
+			section.setProtectionKeyDigestProvider(new MyDigestGenerator());
+			section.setProtectedWithPassword("12345");
+			Assert.assertEquals(true, section.isProtected());
+			Assert.assertEquals("gnzLDuqKcGxMNKFokfhOew==", section
+					.getProtectedPassword());
+			Assert.assertEquals("http://www.w3.org/2000/09/#md5", section
+					.getProtectionKeyDigestAlgorithm());
+
+			section.setProtectionKeyDigestProvider(null);
+			section.setProtectedWithPassword("12345");
+			Assert.assertEquals(true, section.isProtected());
+			Assert.assertEquals("LyQWujvPXbGDYsrSDKkAiVFavg8=", section
+					.getProtectedPassword());
+			Assert.assertEquals("http://www.w3.org/2000/09/xmldsig#sha1",
+					section.getProtectionKeyDigestAlgorithm());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testSetProtectSection() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			doc.addParagraph("Paragraph1");
+			String secName = "Section1";
+			Section section = doc.appendSection(secName);
+			Assert.assertNotNull(section);
+
+			section.setProtectedWithPassword("12345");
+			Assert.assertEquals(true, section.isProtected());
+			Assert.assertEquals("LyQWujvPXbGDYsrSDKkAiVFavg8=", section
+					.getProtectedPassword());
+			Assert.assertEquals("http://www.w3.org/2000/09/xmldsig#sha1",
+					section.getProtectionKeyDigestAlgorithm());
+
+			section.setProtectedWithPassword("");
+			Assert.assertEquals(true, section.isProtected());
+			Assert.assertNull(section.getProtectedPassword());
+			Assert.assertEquals("http://www.w3.org/2000/09/xmldsig#sha1",
+					section.getProtectionKeyDigestAlgorithm());
+
+			section.setProtected(false);
+			Assert.assertEquals(false, section.isProtected());
+			Assert.assertNull(section.getProtectedPassword());
+			Assert.assertEquals("http://www.w3.org/2000/09/xmldsig#sha1",
+					section.getProtectionKeyDigestAlgorithm());
+
+			section.setProtectedWithPassword(null);
+			Assert.assertEquals(false, section.isProtected());
+			Assert.assertEquals("http://www.w3.org/2000/09/xmldsig#sha1",
+					section.getProtectionKeyDigestAlgorithm());
+			Assert.assertNull(section.getProtectedPassword());
+
+			section.setProtected(true);
+			Assert.assertEquals(true, section.isProtected());
+			Assert.assertEquals("http://www.w3.org/2000/09/xmldsig#sha1",
+					section.getProtectionKeyDigestAlgorithm());
+			Assert.assertNull(section.getProtectedPassword());
+
+			section.setProtectedWithPassword("12345");
+			Assert.assertEquals(true, section.isProtected());
+			Assert.assertEquals("LyQWujvPXbGDYsrSDKkAiVFavg8=", section
+					.getProtectedPassword());
+			Assert.assertEquals("http://www.w3.org/2000/09/xmldsig#sha1",
+					section.getProtectionKeyDigestAlgorithm());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -348,6 +493,161 @@ public class SectionTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testAddTable() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Section theSec = doc.appendSection("TableSection");
+
+			Table table1 = theSec.addTable();
+			table1.getCellByPosition("A1").addParagraph("A1");
+			OdfElement odfEle = theSec.getTableContainerElement();
+			Assert.assertEquals("A1", Table.getInstance(
+					(TableTableElement) odfEle.getLastChild())
+					.getCellByPosition("A1").getDisplayText());
+
+			Table table2 = theSec.addTable(3, 3);
+			table2.getCellByPosition("C3").addParagraph("C3");
+			odfEle = theSec.getTableContainerElement();
+			Assert.assertEquals("C3", Table.getInstance(
+					(TableTableElement) odfEle.getLastChild())
+					.getCellByPosition("C3").getDisplayText());
+
+			table1.remove();
+			table2.remove();
+			OdfElement odfEle1 = theSec.getTableContainerElement();
+			Assert.assertNull(odfEle1.getLastChild());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testGetTableByName() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Section sect = doc.appendSection("TableSeciton");
+			sect.addTable(2, 2);
+			sect.addTable(2, 2);
+			sect.addTable(5, 5).getCellByPosition("E5").setBooleanValue(true);
+			Cell cell = sect.getTableByName("Table3").getCellByPosition(4, 4);
+			Assert.assertNotNull(cell);
+			Assert.assertTrue(cell.getBooleanValue());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testAddRemoveList() {
+
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Section sect = doc.appendSection("List Section");
+
+			ListDecorator numberDecorator = new NumberDecorator(doc);
+			ListDecorator outLineDecorator = new OutLineDecorator(doc);
+			String[] subItemContents = { "sub list item 1", "sub list item 2",
+					"sub list item 3" };
+
+			List list1 = new List(sect);
+			boolean removeResult = sect.removeList(list1);
+			Assert.assertTrue(removeResult);
+
+			List list2 = new List(sect, numberDecorator);
+			list2.addItems(subItemContents);
+			Assert.assertEquals(ListDecorator.ListType.NUMBER, list2.getType());
+			removeResult = sect.removeList(list2);
+			Assert.assertTrue(removeResult);
+
+			List list3 = new List(sect, "Bullet List", null);
+			list3.addItems(subItemContents);
+			Assert.assertEquals(ListDecorator.ListType.BULLET, list3.getType());
+			removeResult = sect.removeList(list3);
+			Assert.assertTrue(removeResult);
+
+			List list4 = sect.addList();
+			removeResult = sect.removeList(list4);
+			Assert.assertTrue(removeResult);
+
+			List list5 = sect.addList(outLineDecorator);
+			list5.addItems(subItemContents);
+			Assert.assertEquals(ListDecorator.ListType.NUMBER, list5.getType());
+			removeResult = sect.removeList(list5);
+			Assert.assertTrue(removeResult);
+		} catch (Exception e) {
+			Logger.getLogger(ListTest.class.getName()).log(Level.SEVERE, null,
+					e);
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void testIterateList() {
+		try {
+
+			TextDocument doc = TextDocument.newTextDocument();
+			Section sect = doc.appendSection("List Section");
+
+			ListDecorator numberDecorator = new NumberDecorator(doc);
+			ListDecorator outLineDecorator = new OutLineDecorator(doc);
+			String[] subItemContents = { "sub list item 1", "sub list item 2",
+					"sub list item 3" };
+
+			// create 2 lists
+			new List(sect, numberDecorator);
+			sect.addList().addItems(subItemContents);
+
+			Iterator<List> listIterator = sect.getListIterator();
+			int i = 0;
+			while (listIterator.hasNext()) {
+				listIterator.next();
+				i++;
+			}
+			Assert.assertEquals(2, i);
+
+			// add 2 new lists.
+			sect.addList(outLineDecorator);
+			List list = sect.addList();
+			listIterator = sect.getListIterator();
+			i = 0;
+			while (listIterator.hasNext()) {
+				listIterator.next();
+				i++;
+			}
+			Assert.assertEquals(4, i);
+
+			// remove 1 list.
+			sect.removeList(list);
+			listIterator = sect.getListIterator();
+			i = 0;
+			while (listIterator.hasNext()) {
+				listIterator.next();
+				i++;
+			}
+			Assert.assertEquals(3, i);
+
+			// remove all of the lists.
+			sect.clearList();
+			listIterator = sect.getListIterator();
+			i = 0;
+			while (listIterator.hasNext()) {
+				listIterator.next();
+				i++;
+			}
+			Assert.assertEquals(0, i);
+
+		} catch (Exception e) {
+			Logger.getLogger(ListTest.class.getName()).log(Level.SEVERE, null,
+					e);
+			Assert.fail(e.getMessage());
 		}
 	}
 }

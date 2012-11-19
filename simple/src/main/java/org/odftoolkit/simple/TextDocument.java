@@ -47,6 +47,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleSectionPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextIndexBodyElement;
 import org.odftoolkit.odfdom.dom.element.text.TextIndexEntryLinkStartElement;
@@ -439,6 +440,42 @@ public class TextDocument extends Document implements ListContainer,
 			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
 		}
 		return null;
+	}
+
+	/**
+	 * Create an empty section and append it at the end of the text document.
+	 * 
+	 * @param name
+	 *            - specify the section name
+	 * @return an instance of the section
+	 * @throws RuntimeException
+	 *             if content DOM could not be initialized
+	 */
+	public Section appendSection(String name) {
+		TextSectionElement newSectionEle = null;
+		try {
+			OdfContentDom contentDocument = getContentDom();
+			OdfOfficeAutomaticStyles styles = contentDocument
+					.getAutomaticStyles();
+			OdfStyle style = styles.newStyle(OdfStyleFamily.Section);
+			StyleSectionPropertiesElement sProperties = style
+					.newStyleSectionPropertiesElement();
+			sProperties.setTextDontBalanceTextColumnsAttribute(false);
+			sProperties.setStyleEditableAttribute(false);
+			StyleColumnsElement columnEle = sProperties
+					.newStyleColumnsElement(1);
+			columnEle.setFoColumnGapAttribute("0in");
+
+			newSectionEle = getContentRoot()
+					.newTextSectionElement("true", name);
+			newSectionEle.setStyleName(style.getStyleNameAttribute());
+			return Section.getInstance(newSectionEle);
+
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE,
+					null, e);
+			throw new RuntimeException(name + "Section appends failed.", e);
+		}
 	}
 
 	/**

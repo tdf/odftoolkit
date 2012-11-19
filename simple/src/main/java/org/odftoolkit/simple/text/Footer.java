@@ -25,19 +25,24 @@ import java.util.logging.Logger;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
+import org.odftoolkit.odfdom.dom.element.style.StyleColumnsElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleSectionPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Component;
+import org.odftoolkit.simple.Document;
+import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.common.field.AbstractVariableContainer;
 import org.odftoolkit.simple.common.field.VariableContainer;
 import org.odftoolkit.simple.common.field.VariableField;
@@ -234,4 +239,42 @@ public class Footer extends Component implements TableContainer, VariableContain
 			}
 		}
 	}
+
+	/**
+	 * Create an empty section and append it at the end of the footer.
+	 * 
+	 * @param name
+	 *            - specify the section name
+	 * @return an instance of the section
+	 * @throws RuntimeException
+	 *             if content DOM could not be initialized
+	 */
+	public Section appendSection(String name) {
+		TextSectionElement newSectionEle = null;
+		try {
+			Document doc = (Document) ((OdfFileDom) footerEle
+					.getOwnerDocument()).getDocument();
+			OdfContentDom contentDocument = doc.getContentDom();
+			OdfOfficeAutomaticStyles styles = contentDocument
+					.getAutomaticStyles();
+			OdfStyle style = styles.newStyle(OdfStyleFamily.Section);
+			StyleSectionPropertiesElement sProperties = style
+					.newStyleSectionPropertiesElement();
+			sProperties.setTextDontBalanceTextColumnsAttribute(false);
+			sProperties.setStyleEditableAttribute(false);
+			StyleColumnsElement columnEle = sProperties
+					.newStyleColumnsElement(1);
+			columnEle.setFoColumnGapAttribute("0in");
+
+			newSectionEle = footerEle.newTextSectionElement("true", name);
+			newSectionEle.setStyleName(style.getStyleNameAttribute());
+			return Section.getInstance(newSectionEle);
+
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE,
+					null, e);
+			throw new RuntimeException(name + "Section appends failed.", e);
+		}
+	}
+
 }

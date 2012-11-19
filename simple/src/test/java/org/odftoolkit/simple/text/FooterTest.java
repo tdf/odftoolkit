@@ -260,4 +260,26 @@ public class FooterTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+
+	@Test
+	public void testAppendNewSection() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+			Footer footer = doc.getFooter();
+			Section sect = footer.appendSection("Section1");
+			Assert.assertNotNull(sect);
+
+			StyleFooterElement styleFoot = footer.getOdfElement();
+			Node nod = styleFoot.getFirstChild();
+			NamedNodeMap nameMap = nod.getAttributes();
+			Node nodtext = nameMap.getNamedItem("text:name");
+			Assert.assertEquals("Section1", nodtext.getNodeValue());
+
+		} catch (Exception e) {
+			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE,
+					null, e);
+			Assert.fail(e.getMessage());
+		}
+
+	}
 }
