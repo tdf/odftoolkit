@@ -31,6 +31,7 @@ import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawControlElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextAElement;
@@ -52,6 +53,8 @@ import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.PresentationDocument;
 import org.odftoolkit.simple.draw.AbstractTextboxContainer;
+import org.odftoolkit.simple.draw.Control;
+import org.odftoolkit.simple.draw.ControlContainer;
 import org.odftoolkit.simple.draw.FrameRectangle;
 import org.odftoolkit.simple.draw.Textbox;
 import org.odftoolkit.simple.draw.TextboxContainer;
@@ -69,7 +72,8 @@ import org.w3c.dom.Text;
  * 
  * @since 0.5
  */
-public class Paragraph extends Component implements TextboxContainer, TextHyperlinkContainer {
+public class Paragraph extends Component implements TextboxContainer,
+		TextHyperlinkContainer, ControlContainer {
 
 	private TextPElement mParagraphElement;
 	private TextHElement mHeadingElement;
@@ -758,4 +762,14 @@ public class Paragraph extends Component implements TextboxContainer, TextHyperl
 		return mHyperlinkContainerImpl;
 	}
 	/************ End of Hyperlink support ************/
+
+//	@Override
+	public Control createDrawControl() {
+		return Control.newDrawControl(this);
+	}
+
+//	@Override
+	public OdfElement getDrawControlContainerElement() {
+		return this.getOdfElement();
+	}
 }

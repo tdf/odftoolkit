@@ -36,8 +36,10 @@ import java.util.logging.Logger;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
+import org.odftoolkit.odfdom.dom.element.draw.DrawControlElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentStylesElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeFormsElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleColumnsElement;
@@ -55,6 +57,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextIndexTitleTemplateElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
+import org.odftoolkit.odfdom.dom.element.text.TextSequenceDeclsElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTableOfContentElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTableOfContentEntryTemplateElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTableOfContentSourceElement;
@@ -69,6 +72,7 @@ import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.type.CellRangeAddressList;
 import org.odftoolkit.odfdom.type.Length.Unit;
@@ -80,6 +84,11 @@ import org.odftoolkit.simple.common.field.AbstractVariableContainer;
 import org.odftoolkit.simple.common.field.VariableContainer;
 import org.odftoolkit.simple.common.field.VariableField;
 import org.odftoolkit.simple.common.field.VariableField.VariableType;
+import org.odftoolkit.simple.draw.Control;
+import org.odftoolkit.simple.draw.ControlContainer;
+import org.odftoolkit.simple.form.AbstractFormContainer;
+import org.odftoolkit.simple.form.Form;
+import org.odftoolkit.simple.form.FormContainer;
 import org.odftoolkit.simple.style.MasterPage;
 import org.odftoolkit.simple.style.TOCStyle;
 import org.odftoolkit.simple.table.Table;
@@ -101,7 +110,9 @@ import org.w3c.dom.Text;
  * This class represents an empty ODF text document.
  * 
  */
-public class TextDocument extends Document implements ListContainer, ParagraphContainer, VariableContainer, ChartContainer {
+public class TextDocument extends Document implements ListContainer,
+		ParagraphContainer, VariableContainer, ChartContainer, FormContainer,
+		ControlContainer {
 
 	private static final String EMPTY_TEXT_DOCUMENT_PATH = "/OdfTextDocument.odt";
 	static final Resource EMPTY_TEXT_DOCUMENT_RESOURCE = new Resource(EMPTY_TEXT_DOCUMENT_PATH);
@@ -110,6 +121,7 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 	private ParagraphContainerImpl paragraphContainerImpl;
 	private VariableContainerImpl variableContainerImpl;
 	private ChartContainerImpl chartContainerImpl;
+	private FormContainerImpl formContainerImpl = null;
 	
 	private Header firstPageHeader;
 	private Header standardHeader;
@@ -1446,4 +1458,122 @@ public class TextDocument extends Document implements ListContainer, ParagraphCo
 			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
+
+	private FormContainerImpl getFormContainerImpl() {
+		if (formContainerImpl == null) {
+			formContainerImpl = new FormContainerImpl();
+		}
+		return formContainerImpl;
+	}
+
+	private class FormContainerImpl extends AbstractFormContainer {
+
+		public OfficeFormsElement getFormContainerElement() {
+			OfficeFormsElement forms = null;
+			try {
+				OfficeTextElement root = getContentRoot();
+				forms = OdfElement.findFirstChildNode(OfficeFormsElement.class,
+						root);
+				if (forms == null) {
+					Node firstChild = root.getFirstChild();
+					OfficeFormsElement officeForms = ((OdfFileDom) getContentDom())
+							.newOdfElement(OfficeFormsElement.class);
+					forms = (OfficeFormsElement) root.insertBefore(officeForms,
+							firstChild);
+				}
+				return forms;
+			} catch (Exception e) {
+				Logger.getLogger(TextDocument.class.getName()).log(
+						Level.SEVERE, null, e);
+			}
+			return forms;
+		}
+
+	}
+
+	/**
+	 * Create a form with specified name in this text document.
+	 * 
+	 * @see FormContainer#createForm(String)
+	 */
+	public Form createForm(String name) {
+		return getFormContainerImpl().createForm(name);
+	}
+
+	/**
+	 * Get a form iterator to traverse all the forms in this document.
+	 * 
+	 * @see FormContainer#getFormIterator()
+	 */
+	public Iterator<Form> getFormIterator() {
+		return getFormContainerImpl().getFormIterator();
+	}
+
+	/**
+	 * Remove a form with the specified name in this document.
+	 * 
+	 * @see FormContainer#removeForm(Form)
+	 */
+	public boolean removeForm(Form form) {
+		return getFormContainerImpl().removeForm(form);
+	}
+
+//	@Override
+	public Form getFormByName(String name) {
+		return getFormContainerImpl().getFormByName(name);
+	}
+
+//	@Override
+	public OfficeFormsElement getFormContainerElement() {
+		return getFormContainerImpl().getFormContainerElement();
+	}
+
+//	@Override
+	public boolean getApplyDesignMode() {
+		return getFormContainerImpl().getApplyDesignMode();
+	}
+
+//	@Override
+	public boolean getAutomaticFocus() {
+		return getFormContainerImpl().getAutomaticFocus();
+	}
+
+//	@Override
+	public void setApplyDesignMode(boolean isDesignMode) {
+		getFormContainerImpl().setApplyDesignMode(isDesignMode);
+
+	}
+
+//	@Override
+	public void setAutomaticFocus(boolean isAutoFocus) {
+		getFormContainerImpl().setAutomaticFocus(isAutoFocus);
+
+	}
+
+//	@Override
+	public Control createDrawControl() {
+		OdfElement parent = this.getDrawControlContainerElement();
+		OdfFileDom ownerDom = (OdfFileDom) parent.getOwnerDocument();
+		DrawControlElement element = ownerDom
+				.newOdfElement(DrawControlElement.class);
+		Node refChild = OdfElement.findFirstChildNode(
+				TextSequenceDeclsElement.class, parent);
+		parent.insertBefore(element, refChild.getNextSibling());
+		Control control = new Control(element);
+		Component.registerComponent(control, element);
+		return control;
+	}
+
+//	@Override
+	public OdfElement getDrawControlContainerElement() {
+		OdfElement element = null;
+		try {
+			element = this.getContentRoot();
+		} catch (Exception e) {
+			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE,
+					null, e);
+		}
+		return element;
+	}
+
 }
