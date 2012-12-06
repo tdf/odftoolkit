@@ -25,6 +25,8 @@ import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.pkg.OdfAlienElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.utils.ResourceUtilities;
@@ -92,4 +94,14 @@ public class GetTextTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+        
+        @Test
+        public void testExtractFromDocumentWithAlienElement() throws Exception {
+            TextDocument document = TextDocument.newTextDocument();
+            document.getContentRoot().appendChild(new OdfAlienElement(document.getContentDom(), OdfName.newName("instance")));
+            document.addParagraph("Some text");
+            TextExtractor extractor = TextExtractor.newOdfTextExtractor(document.getContentRoot());
+            String text = extractor.getText();
+            Assert.assertEquals("\nSome text", text);
+        }
 }

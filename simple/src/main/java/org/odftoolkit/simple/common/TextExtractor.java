@@ -27,6 +27,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTabElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.w3c.dom.Node;
 
 /**
@@ -176,8 +177,8 @@ public class TextExtractor extends DefaultElementVisitor {
 	@Override
 	public void visit(OdfElement element) {
 		appendElementText(element);
-		if (element.getNamespaceURI().equals(OdfDocumentNamespace.META.getUri())
-				|| element.getNamespaceURI().equals(OdfDocumentNamespace.DC.getUri())) {
+		if (OdfDocumentNamespace.META.getUri().equals(element.getNamespaceURI())
+				|| OdfDocumentNamespace.DC.getUri().equals(element.getNamespaceURI())) {
 			mTextBuilder.appendLine();
 		}
 	}
