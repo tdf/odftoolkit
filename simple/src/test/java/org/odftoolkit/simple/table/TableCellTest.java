@@ -35,6 +35,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
@@ -580,6 +581,22 @@ public class TableCellTest {
 		fcell = table.getCellByPosition(columnindex, rowindex);
 		Assert.assertEquals(0, fcell.getDateValue().compareTo(expectedCalendar));
 	}
+
+        @Test
+        public void testGetFromEmptyDateValue() throws Exception {
+            Table table = odsdoc.getTableByName("Sheet1");
+            Cell cell = table.appendRow().getCellByIndex(1);
+            cell.setValueType(OfficeValueTypeAttribute.Value.DATE.toString());
+            Assert.assertNull(cell.getDateValue());
+        }
+        
+        @Test
+        public void testGetFromEmptyTimeValue() throws Exception {
+            Table table = odsdoc.getTableByName("Sheet1");
+            Cell cell = table.appendRow().getCellByIndex(1);
+            cell.setValueType(OfficeValueTypeAttribute.Value.TIME.toString());
+            Assert.assertNull(cell.getTimeValue());
+        }
 
 	@Test
 	public void testGetSetStringValue() {

@@ -883,6 +883,9 @@ public class OdfTableCell {
 	public Calendar getTimeValue() {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.TIME) {
 			String timeStr = mCellElement.getOfficeTimeValueAttribute();
+                        if (timeStr == null) {
+                            return null;
+                        }
 			Date date = parseString(timeStr, DEFAULT_TIME_FORMAT);
 			Calendar calender = Calendar.getInstance();
 			calender.setTime(date);

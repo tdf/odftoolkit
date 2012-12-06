@@ -32,12 +32,12 @@ import java.util.logging.Logger;
 import junit.framework.Assert;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
+import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
@@ -50,7 +50,6 @@ import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
-@Ignore
 public class TableCellTest {
 
 	final static String SAMPLE_SPREADSHEET = "TestSpreadsheetTable";
@@ -1051,4 +1050,23 @@ public class TableCellTest {
 			Assert.fail();
 		}
 	}
+        
+        @Test
+        public void testGetFromEmptyDateValue() throws Exception {
+            OdfSpreadsheetDocument doc = OdfSpreadsheetDocument.newSpreadsheetDocument();
+            OdfTable table = OdfTable.newTable(doc);
+            OdfTableCell dateCell = table.appendRow().getCellByIndex(0);
+            dateCell.setValueType(OfficeValueTypeAttribute.Value.DATE.toString());
+            Assert.assertNull(dateCell.getDateValue());
+        }
+        
+        @Test
+        public void testGetFromEmptyTimeValue() throws Exception {
+            OdfSpreadsheetDocument doc = OdfSpreadsheetDocument.newSpreadsheetDocument();
+            OdfTable table = OdfTable.newTable(doc);
+            OdfTableCell timeCell = table.appendRow().getCellByIndex(0);
+            timeCell.setValueType(OfficeValueTypeAttribute.Value.TIME.toString());
+            Assert.assertNull(timeCell.getTimeValue());
+        }
+        
 }
