@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -43,14 +44,24 @@ import org.odftoolkit.odfdom.dom.OdfMetaDom;
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
+import org.odftoolkit.odfdom.dom.rdfa.BookmarkRDFMetadataExtractor;
+import org.odftoolkit.odfdom.pkg.manifest.OdfManifestDom;
+import org.odftoolkit.odfdom.pkg.rdfa.DOMRDFaParser;
+import org.odftoolkit.odfdom.pkg.rdfa.JenaSink;
+import org.odftoolkit.odfdom.pkg.rdfa.MultiContentHandler;
+import org.odftoolkit.odfdom.pkg.rdfa.SAXRDFaParser;
+import org.odftoolkit.odfdom.pkg.rdfa.Util;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 /**
- * The DOM repesentation of an XML file within the ODF document.
+ * The DOM representation of an XML file within the ODF document.
  */
 public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 
@@ -62,9 +73,17 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 	protected Map<String, String> mUriByPrefix;
 	protected Map<String, String> mPrefixByUri;
 	/** Contains only the duplicate prefix. 
-	 * The primary hold by mPrefixByUri still have to be added */
+	 * The primary hold by mPrefixByUri still have to be added
+	 */
 	protected Map<String, Set<String>> mDuplicatePrefixesByUri;
+	/**
+	* The cache of in content metadata: key: a Node in the dom ; value: the
+	* Jena RDF model of triples of the Node
+	*/
+	protected Map<Node, Model> inCententMetadataCache;
 
+	protected JenaSink sink;
+	
 	/**
 	 * Creates the DOM representation of an XML file of an Odf document.
 	 *
@@ -81,6 +100,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 			mUriByPrefix = new HashMap<String, String>();
 			mPrefixByUri = new HashMap<String, String>();
 			mDuplicatePrefixesByUri = new HashMap<String, Set<String>>();
+			inCententMetadataCache = new IdentityHashMap<Node, Model>();
 			initialize();
 			// Register every DOM to OdfPackage,
 			// so a package close might save this DOM (similar as OdfDocumentPackage)
@@ -90,8 +110,37 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 		}
 	}
 
-	/** Adds the document to the pool of open documents of the package.
-	A document of a certain path is opened only once to avoid data duplication.
+	/**
+	* Creates the DOM representation of an XML file of an Odf document.
+	*
+	* @param pkg
+	* the package the XML files belongs to
+	* @param packagePath
+	* the internal package path to the XML file
+	*/
+	protected OdfFileDom(OdfPackage pkg, String packagePath) {
+		super(false);
+		if (pkg != null && packagePath != null) {
+			mPackageDocument = null;
+			mPackage = pkg;
+			mPackagePath = packagePath;
+			mUriByPrefix = new HashMap<String, String>();
+			mPrefixByUri = new HashMap<String, String>();
+			mDuplicatePrefixesByUri = new HashMap<String, Set<String>>();
+			inCententMetadataCache = new HashMap<Node, Model>();
+			initialize();
+			// Register every DOM to OdfPackage,
+			// so a package close might save this DOM (similar as
+			// OdfDocumentPackage)
+			addDomToCache(mPackage, packagePath);
+		} else {
+			throw new IllegalArgumentException("Arguments are not allowed to be NULL for OdfFileDom constructor!");
+		}
+	}
+
+	/** 
+	 *Adds the document to the pool of open documents of the package.
+	 *A document of a certain path is opened only once to avoid data duplication.
 	 */
 	private void addDomToCache(OdfPackage pkg, String internalPath) {
 		pkg.cacheDom(this, internalPath);
@@ -134,11 +183,18 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 			fileStream = mPackage.getInputStream(mPackagePath);
 			if (fileStream != null) {
 				XMLReader xmlReader = mPackage.getXMLReader();
-				xmlReader.setContentHandler(new OdfFileSaxHandler(this));
+				OdfFileSaxHandler odf = new OdfFileSaxHandler(this);
+				String baseUri = Util.getRDFBaseUri(mPackage.getBaseURI(),mPackagePath);
+				sink = new JenaSink(this);
+				odf.setSink(sink);
+				SAXRDFaParser rdfa = SAXRDFaParser.createInstance(sink);
+				rdfa.setBase(baseUri);
+				// the file is parsed by ODF ContentHandler, and then RDFa ContentHandler
+				MultiContentHandler multi = new MultiContentHandler(odf, rdfa);
+				xmlReader.setContentHandler(multi);
 				InputSource xmlSource = new InputSource(fileStream);
 				xmlReader.parse(xmlSource);
 			}
-
 		} catch (Exception ex) {
 			Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
@@ -588,4 +644,42 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 		return setNamespace(name.getPrefix(), name.getUri());
 	}
 
+
+	/**
+	* Get in-content metadata cache model
+	*
+	* @return in-content metadata cache model
+	*/
+	public Map<Node, Model> getInContentMetadataCache() {
+		return this.inCententMetadataCache;
+	}
+
+	/**
+	* Update the in content metadata of the node. It should be called whenever
+	* the xhtml:xxx attrbutes values of the node are changed.
+	* @param the node, whose in content metadata will be updated
+	*/
+	public void updateInContentMetadataCache(Node node) {
+		this.getInContentMetadataCache().remove(node);
+		DOMRDFaParser parser = DOMRDFaParser.createInstance(this.sink);
+		String baseUri = Util.getRDFBaseUri(mPackage.getBaseURI(), mPackagePath);
+		parser.setBase(baseUri);
+		parser.parse(node);
+	}
+
+	/**
+	* @return the RDF metadata of all the bookmarks within the dom
+	*/
+	public Model getBookmarkRDFMetadata() {
+		return BookmarkRDFMetadataExtractor.newBookmarkTextExtractor().getBookmarkRDFMetadata(this);
+	}
+
+	/**
+	* The end users needn't to care of this method, which is used by
+	* BookmarkRDFMetadataExtractor
+	* @return the JenaSink
+	*/
+	public JenaSink getSink() {
+		return sink;
+	}
 }

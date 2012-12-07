@@ -69,6 +69,7 @@ import org.odftoolkit.odfdom.pkg.manifest.Algorithm;
 import org.odftoolkit.odfdom.pkg.manifest.EncryptionData;
 import org.odftoolkit.odfdom.pkg.manifest.KeyDerivation;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
+import org.odftoolkit.odfdom.pkg.rdfa.Util;
 import org.w3c.dom.Document;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSOutput;
@@ -1862,7 +1863,7 @@ public class OdfPackage implements Closeable {
 	}
 
 	private static String getBaseURLFromFile(File file) throws IOException {
-		String baseURL = file.getCanonicalFile().toURI().toString();
+		String baseURL = Util.toExternalForm(file.getCanonicalFile().toURI());
 		baseURL = BACK_SLASH_PATTERN.matcher(baseURL).replaceAll(SLASH);
 		return baseURL;
 	}

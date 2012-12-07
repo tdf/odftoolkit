@@ -27,11 +27,9 @@
 package org.odftoolkit.odfdom.dom.element.text;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlAboutAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlContentAttribute;
@@ -113,6 +111,7 @@ public class TextBookmarkStartElement extends OdfElement {
 		XhtmlAboutAttribute attr = new XhtmlAboutAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xhtmlAboutValue);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
 	/**
@@ -137,6 +136,7 @@ public class TextBookmarkStartElement extends OdfElement {
 		XhtmlContentAttribute attr = new XhtmlContentAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xhtmlContentValue);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
 	/**
@@ -161,6 +161,7 @@ public class TextBookmarkStartElement extends OdfElement {
 		XhtmlDatatypeAttribute attr = new XhtmlDatatypeAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xhtmlDatatypeValue);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
 	/**
@@ -185,6 +186,7 @@ public class TextBookmarkStartElement extends OdfElement {
 		XhtmlPropertyAttribute attr = new XhtmlPropertyAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xhtmlPropertyValue);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
 	/**
@@ -210,14 +212,21 @@ public class TextBookmarkStartElement extends OdfElement {
 		setOdfAttribute(attr);
 		attr.setValue(xmlIdValue);
 	}
+	/**
+	* Set text content. Only elements which are allowed to have text content offer this method.
+	*/
+	public void setTextContent(String content){
+		super.setTextContent(content);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
+	}
+	
+	protected void onRemoveNode() {
+		super.onRemoveNode();
+		((OdfFileDom) this.ownerDocument).getInContentMetadataCache().remove(this);
+	}
 
-	@Override
-	public void accept(ElementVisitor visitor) {
-		if (visitor instanceof DefaultElementVisitor) {
-			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
-			defaultVisitor.visit(this);
-		} else {
-			visitor.visit(this);
-		}
+	protected void onInsertNode() {
+		super.onInsertNode();
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 }

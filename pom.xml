@@ -94,7 +94,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>CHANGES.txt</exclude>
-				<exclude>.gitignore</exclude>
+								<exclude>.gitignore</exclude>
                             </excludes>
                         </configuration>
                         <executions>
@@ -247,24 +247,24 @@
 
                                             scp -r ${basedir}/target/${project.version} people.apache.org:public_html/odftoolkit/
 
-                                            A release vote template has been generated for you:    file://${basedir}/target/vote.txt
-                                        </echo>
-                                        <echo />
-                                    </tasks>                                 
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.apache.ant</groupId>
-                                <artifactId>ant-nodeps</artifactId>
-                                <version>1.8.1</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>-->
-    </profiles>
+											A release vote template has been generated for you:    file://${basedir}/target/vote.txt
+										</echo>
+										<echo />
+									</tasks>                                 
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant-nodeps</artifactId>
+								<version>1.8.1</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>-->
+	</profiles>
 </project>
 

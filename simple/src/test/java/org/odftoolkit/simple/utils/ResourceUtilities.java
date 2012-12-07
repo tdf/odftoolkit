@@ -29,8 +29,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.odftoolkit.odfdom.pkg.rdfa.Util;
 
-/** Test utitility class providing resources for the test in- and output */
+/** Test utility class providing resources for the test in- and output */
 public final class ResourceUtilities {
 	private ResourceUtilities() {
 	}
@@ -50,6 +51,7 @@ public final class ResourceUtilities {
 		URI uri = null;
 		try {
 			uri = ResourceUtilities.class.getClassLoader().getResource(relativeFilePath).toURI();
+			uri = new URI(Util.toExternalForm(uri));
 		} catch (URISyntaxException ex) {
 			Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -72,6 +74,7 @@ public final class ResourceUtilities {
 	 */
 	public static URI getURI(String relativeFilePath) throws URISyntaxException {
 		String filePath = "file:" + ResourceUtilities.class.getClassLoader().getResource(relativeFilePath).getPath();
+		filePath = Util.toExternalForm(new URI(filePath));
 		return new URI(filePath);
 	}
 

@@ -23,6 +23,8 @@ package org.odftoolkit.odfdom.pkg;
 
 import java.io.IOException;
 import java.util.Stack;
+import net.rootdev.javardfa.StatementSink;
+import org.odftoolkit.odfdom.pkg.rdfa.JenaSink;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
@@ -32,7 +34,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-class OdfFileSaxHandler extends DefaultHandler {
+public class OdfFileSaxHandler extends DefaultHandler {
 
 	private static final String EMPTY_STRING = "";
 	// the empty XML file to which nodes will be added
@@ -42,7 +44,8 @@ class OdfFileSaxHandler extends DefaultHandler {
 	// they are required and must pop themselves from the stack when done
 	private Stack<ContentHandler> mHandlerStack = new Stack<ContentHandler>();
 	private StringBuilder mCharsForTextNode = new StringBuilder();
-
+	private JenaSink sink;
+	
 	OdfFileSaxHandler(Node rootNode) {
 		if (rootNode instanceof OdfFileDom) {
 			mFileDom = (OdfFileDom) rootNode;
@@ -119,6 +122,9 @@ class OdfFileSaxHandler extends DefaultHandler {
 		mNode.appendChild(element);
 		// push the new element as the context node...
 		mNode = element;
+		if (!localName.equals("bookmark-start")){
+			setContextNode(mNode);
+		}
 	}
 
 	/**
@@ -148,5 +154,23 @@ class OdfFileSaxHandler extends DefaultHandler {
 	@Override
 	public InputSource resolveEntity(String publicId, String systemId) throws IOException, SAXException {
 		return super.resolveEntity(publicId, systemId);
+	}
+	
+	/**
+	* Expose the current node to JenaSink to for caching the parsed RDF triples.
+	* @return
+	*/
+	private void setContextNode(Node node){
+		if (this.sink !=null){
+			sink.setContextNode(node);
+		}
+	}
+
+	/**
+	* Set the JenaSink object.
+	* @param sink
+	*/
+	public void setSink(JenaSink sink) {
+		this.sink = sink;
 	}
 }

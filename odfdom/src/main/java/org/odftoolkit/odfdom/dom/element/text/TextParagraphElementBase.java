@@ -179,6 +179,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement {
 		XhtmlAboutAttribute attr = new XhtmlAboutAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xhtmlAboutValue);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
 	/**
@@ -203,6 +204,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement {
 		XhtmlContentAttribute attr = new XhtmlContentAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xhtmlContentValue);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
 	/**
@@ -227,6 +229,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement {
 		XhtmlDatatypeAttribute attr = new XhtmlDatatypeAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xhtmlDatatypeValue);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
 	/**
@@ -251,6 +254,7 @@ public abstract class TextParagraphElementBase extends OdfStylableElement {
 		XhtmlPropertyAttribute attr = new XhtmlPropertyAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xhtmlPropertyValue);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
 	/**
@@ -275,5 +279,24 @@ public abstract class TextParagraphElementBase extends OdfStylableElement {
 		XmlIdAttribute attr = new XmlIdAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xmlIdValue);
+	}
+	
+	/**
+	* Set text content. Only elements which are allowed to have text content offer this method.
+	*
+	*/
+	public void setTextContent(String content){
+		super.setTextContent(content);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
+	}
+
+	protected void onRemoveNode() {
+		super.onRemoveNode();
+		((OdfFileDom) this.ownerDocument).getInContentMetadataCache().remove(this);
+	}
+
+	protected void onInsertNode() {
+		super.onInsertNode();
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 }

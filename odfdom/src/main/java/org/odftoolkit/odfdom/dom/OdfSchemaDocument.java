@@ -1,20 +1,21 @@
-/************************************************************************
+/**
+ * **********************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -41,18 +42,24 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
+import org.odftoolkit.odfdom.pkg.rdfa.Util;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.util.ResourceUtils;
+import java.io.InputStreamReader;
+
 /**
  * A document in ODF is from the package view a directory with a media type.
  * If the media type represents a document described by the ODF 1.2 Schema,
  * certain files are assumed within:
  * content.xml, styles.xml, metadata.xml and settings.xml.
- * 
+ *
  * The class represents such a document, providing easier access to its XML files.
  */
 public abstract class OdfSchemaDocument extends OdfPackageDocument {
@@ -65,7 +72,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 
 	/**
 	 * Creates a new OdfSchemaDocument.
-	 * 
+	 *
 	 * @param pkg - the ODF Package that contains the document. A baseURL is being generated based on its location.
 	 * @param internalPath - the directory path within the package from where the document should be loaded.
 	 * @param mediaTypeString
@@ -130,6 +137,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 
 	/**
 	 * Gets the ODF content.xml file as stream.
+	 *
 	 * @return - a stream of the ODF content 'content.xml' file
 	 * @throws java.lang.Exception - if the stream can not be extracted
 	 */
@@ -189,6 +197,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 
 	/**
 	 * Return the ODF type-based content DOM of the content.xml
+	 *
 	 * @return ODF type-based content DOM or null if no content.xml exists.
 	 * @throws Exception if content DOM could not be initialized
 	 */
@@ -201,6 +210,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 
 	/**
 	 * Return the ODF type-based styles DOM of the styles.xml
+	 *
 	 * @return ODF type-based styles DOM or null if no styles.xml exists.
 	 * @throws Exception if styles DOM could not be initialized
 	 */
@@ -213,7 +223,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 
 	/**
 	 * Return the ODF type-based metadata DOM of the meta.xml
-	 * 
+	 *
 	 * @return ODF type-based meta DOM or null if no meta.xml exists.
 	 * @throws Exception if meta DOM could not be initialized
 	 */
@@ -239,8 +249,8 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 
 	/**
 	 *
-	 * @return the office:styles element from the styles dom or null if there
-	 *         is no such element.
+	 * @return the office:styles element from the styles dom or null if there is
+	 * no such element.
 	 */
 	public OdfOfficeStyles getDocumentStyles() {
 		if (mDocumentStyles == null) {
@@ -260,6 +270,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 
 	/**
 	 * return the office:master-styles element of this document.
+	 *
 	 * @return the office:master-styles element
 	 */
 	public OdfOfficeMasterStyles getOfficeMasterStyles() {
@@ -300,6 +311,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 
 	/**
 	 * Return a list of table features in this document.
+	 *
 	 * @return a list of table features in this document.
 	 */
 	// ToDo: Instead of a method to receive all possible feature/components on the document, there might be a generic or one each element?
@@ -310,7 +322,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 			OfficeBodyElement officeBody = OdfElement.findFirstChildNode(OfficeBodyElement.class, getContentDom().getRootElement());
 			OdfElement contentRoot = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
 			tableList = fillTableList(contentRoot, tableList);
-			
+
 			// find tables from styles.xml (header & footer)
 			Map<String, StyleMasterPageElement> masterPages = getMasterPages();
 			StyleMasterPageElement defaultMasterPage = masterPages.get("Standard");
@@ -346,10 +358,10 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 	 * might add a pattern to the code generation to create a HashMap either on
 	 * demand (whenever such a structure is required from the user) or by
 	 * default
-	 * 
+	 *
 	 * @deprecated This method will be moved to the generated sources as soon
 	 *              code generation was improved!
-	 * 
+	 *
 	 */
 	public Map<String, StyleMasterPageElement> getMasterPages() throws Exception {
 
@@ -391,5 +403,94 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 
 	public OdfFileDom getFileDom(OdfXMLFile file) throws Exception {
 		return getFileDom(getXMLFilePath(file));
+	}
+
+	/**
+	 * Get all two types of RDF Metadata through GRDDL XSLT:
+	 * http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html#__RefHeading__1415068_253892949
+	 */
+	public Model getRDFMetadata() throws Exception {
+		Model m = getInContentMetadata().union(this.getManifestRDFMetadata());
+		return m;
+	}
+
+	/**
+	 * Get In Content RDF Metadata through GRDDL XSLT
+	 * http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html#__RefHeading__1415070_253892949
+	 */
+	public Model getInContentMetadata() throws Exception {
+		Model documentRDFModel = ModelFactory.createDefaultModel();
+		Model fileRDFModel = null;
+		for (String internalPath : this.getPackage().getFilePaths()) {
+			for (OdfXMLFile file : OdfXMLFile.values()) {
+				if (Util.isSubPathOf(internalPath, this.getDocumentPath())
+						&& internalPath.endsWith(file.getFileName())) {
+					fileRDFModel = getXMLFileMetadata(internalPath);
+					if (fileRDFModel.size() > 0) {
+						documentRDFModel = documentRDFModel.union(fileRDFModel);
+					}
+					break;
+				}
+			}
+		}
+		if (fileRDFModel.size() > 0) {
+			documentRDFModel = documentRDFModel.union(fileRDFModel);
+		}
+		return documentRDFModel;
+	}
+
+	/**
+	 * Get in-content metadata cache model
+	 *
+	 * @return The in-content metadata cache model
+	 * @throws Exception
+	 */
+	public Model getInContentMetadataFromCache() throws Exception {
+		Model m = ModelFactory.createDefaultModel();
+		// find and merge the RDF triples cache from the OdfXMLFile files
+		for (OdfXMLFile file : OdfXMLFile.values()) {
+			for (Model m1 : this.getFileDom(file).getInContentMetadataCache().values()) {
+				m = m.union(m1);
+			}
+		}
+		return m;
+	}
+
+	/**
+	 * Get RDF metadata from manifest.rdf and those rdf files registered in the
+	 * manifest.xml as "application/rdf+xml" through GRDDL XSLT
+	 * http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html#__RefHeading__1415072_253892949
+	 */
+	public Model getManifestRDFMetadata() throws Exception {
+		Model m = ModelFactory.createDefaultModel();
+		for (String internalPath : this.getPackage().getFilePaths()) {
+			if (Util.isSubPathOf(internalPath, this.getDocumentPath()) && this.getPackage().getMediaTypeString(internalPath).endsWith("application/rdf+xml")) {
+				Model m1 = ModelFactory.createDefaultModel();
+				String RDFBaseUri = Util.getRDFBaseUri(this.getPackage().getBaseURI(), internalPath);
+				m1.read(new InputStreamReader(this.getPackage().getInputStream(internalPath), "utf-8"), RDFBaseUri);
+				// remove the last SLASH at the end of the RDFBaseUri:
+				// test_rdfmeta.odt/ --> test_rdfmeta.odt
+				ResourceUtils.renameResource(m1.getResource(RDFBaseUri), RDFBaseUri.substring(0, RDFBaseUri.length() - 1));
+				if (m1.size() > 0) {
+					m = m.union(m1);
+				}
+			}
+		}
+		return m;
+	}
+
+	/**
+	 * Get in-content metadata model of bookmarks
+	 *
+	 * @return The in-content metadata model of bookmarks
+	 * @throws Exception
+	 */
+	public Model getBookmarkRDFMetadata() throws Exception {
+		Model m = ModelFactory.createDefaultModel();
+		for (OdfXMLFile file : OdfXMLFile.values()) {
+			OdfFileDom dom = getFileDom(file);
+			m = m.union(dom.getBookmarkRDFMetadata());
+		}
+		return m;
 	}
 }

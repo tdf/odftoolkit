@@ -27,11 +27,9 @@
 package org.odftoolkit.odfdom.dom.element.text;
 
 import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCaptionElement;
@@ -109,6 +107,7 @@ public class TextMetaElement extends OdfElement {
 		XhtmlAboutAttribute attr = new XhtmlAboutAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xhtmlAboutValue);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
 	/**
@@ -133,6 +132,7 @@ public class TextMetaElement extends OdfElement {
 		XhtmlContentAttribute attr = new XhtmlContentAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xhtmlContentValue);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
 	/**
@@ -157,6 +157,7 @@ public class TextMetaElement extends OdfElement {
 		XhtmlDatatypeAttribute attr = new XhtmlDatatypeAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xhtmlDatatypeValue);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
 	/**
@@ -181,6 +182,7 @@ public class TextMetaElement extends OdfElement {
 		XhtmlPropertyAttribute attr = new XhtmlPropertyAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(xhtmlPropertyValue);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
 	/**
@@ -2047,15 +2049,6 @@ public class TextMetaElement extends OdfElement {
 		return textWordCount;
 	}
 
-	@Override
-	public void accept(ElementVisitor visitor) {
-		if (visitor instanceof DefaultElementVisitor) {
-			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
-			defaultVisitor.visit(this);
-		} else {
-			visitor.visit(this);
-		}
-	}
 	/**
 	 * Add text content. Only elements which are allowed to have text content offer this method.
 	 */
@@ -2064,4 +2057,23 @@ public class TextMetaElement extends OdfElement {
 			this.appendChild(this.getOwnerDocument().createTextNode(content));
 		}
 	}
+	
+	/**
+	* Set text content. Only elements which are allowed to have text content offer this method.
+	*/
+	public void setTextContent(String content) {
+		super.setTextContent(content);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
+	}
+
+	protected void onRemoveNode() {
+		super.onRemoveNode();
+		((OdfFileDom) this.ownerDocument).getInContentMetadataCache().remove(this);
+	}
+
+	protected void onInsertNode() {
+		super.onInsertNode();
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
+	}
+
 }
