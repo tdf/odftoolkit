@@ -68,162 +68,94 @@ public class MetaDocumentStatisticTest {
 
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		if (doc!=null)
-			doc.save(ResourceUtilities.getAbsolutePath(filename));
-		doc = null;
-		metadom = null;
-	}
-
-	@Test
-	public void testSetCellCount() {
-		stat.setCellCount(cellCount);
-	}
-
 	@Test
 	public void testGetCellCount() {
+		stat.setCellCount(cellCount);
 		Assert.assertEquals(cellCount, stat.getCellCount());
 	}
 
 	@Test
-	public void testSetCharacterCount() {
-		stat.setCharacterCount(characterCount);
-	}
-
-	@Test
 	public void testGetCharacterCount() {
+		stat.setCharacterCount(characterCount);
 		Assert.assertEquals(characterCount, stat.getCharacterCount());
 	}
 
 	@Test
-	public void testSetDrawCount() {
-		stat.setDrawCount(drawCount);
-	}
-
-	@Test
 	public void testGetDrawCount() {
+		stat.setDrawCount(drawCount);
 		Assert.assertEquals(drawCount, stat.getDrawCount());
 	}
 
 	@Test
-	public void testSetFrameCount() {
-		stat.setFrameCount(frameCount);
-	}
-
-	@Test
 	public void testGetFrameCount() {
+		stat.setFrameCount(frameCount);
 		Assert.assertEquals(frameCount, stat.getFrameCount());
 	}
 
 	@Test
-	public void testSetImageCount() {
-		stat.setImageCount(imageCount);
-	}
-
-	@Test
 	public void testGetImageCount() {
+		stat.setImageCount(imageCount);
 		Assert.assertEquals(imageCount, stat.getImageCount());
 	}
 
 	@Test
-	public void testSetNonWhitespaceCharacterCount() {
-		stat.setNonWhitespaceCharacterCount(nonWhitespaceCharacterCount);
-	}
-
-	@Test
 	public void testGetNonWhitespaceCharacterCount() {
+		stat.setNonWhitespaceCharacterCount(nonWhitespaceCharacterCount);
 		Assert.assertEquals(nonWhitespaceCharacterCount, stat
 				.getNonWhitespaceCharacterCount());
 	}
 
 	@Test
-	public void testSetObjectCount() {
-		stat.setObjectCount(objectCount);
-	}
-
-	@Test
 	public void testGetObjectCount() {
+		stat.setObjectCount(objectCount);
 		Assert.assertEquals(objectCount, stat.getObjectCount());
 	}
 
 	@Test
-	public void testSetOleObjectCount() {
-		stat.setOleObjectCount(oleObjectCount);
-	}
-
-	@Test
 	public void testGetOleObjectCount() {
+		stat.setOleObjectCount(oleObjectCount);
 		Assert.assertEquals(oleObjectCount, stat.getOleObjectCount());
 	}
 
 	@Test
-	public void testSetPageCount() {
-		stat.setPageCount(pageCount);
-	}
-
-	@Test
 	public void testGetPageCount() {
+		stat.setPageCount(pageCount);
 		Assert.assertEquals(pageCount, stat.getPageCount());
 	}
 
 	@Test
-	public void testSetParagraphCount() {
-		stat.setParagraphCount(paragraphCount);
-	}
-
-	@Test
 	public void testGetParagraphCount() {
+		stat.setParagraphCount(paragraphCount);
 		Assert.assertEquals(paragraphCount, stat.getParagraphCount());
 	}
 
 	@Test
-	public void testSetRowCount() {
-		stat.setRowCount(rowCount);
-	}
-
-	@Test
 	public void testGetRowCount() {
+		stat.setRowCount(rowCount);
 		Assert.assertEquals(rowCount, stat.getRowCount());
 	}
 
 	@Test
-	public void testSetSentenceCount() {
-		stat.setSentenceCount(sentenceCount);
-	}
-
-	@Test
 	public void testGetSentenceCount() {
+		stat.setSentenceCount(sentenceCount);
 		Assert.assertEquals(sentenceCount, stat.getSentenceCount());
 	}
 
 	@Test
-	public void testSetSyllableCount() {
-		stat.setSyllableCount(syllableCount);
-	}
-
-	@Test
 	public void testGetSyllableCount() {
+		stat.setSyllableCount(syllableCount);
 		Assert.assertEquals(syllableCount, stat.getSyllableCount());
 	}
 
 	@Test
-	public void testSetTableCount() {
-		stat.setTableCount(tableCount);
-	}
-
-	@Test
 	public void testGetTableCount() {
+		stat.setTableCount(tableCount);
 		Assert.assertEquals(tableCount, stat.getTableCount());
 	}
 
 	@Test
-	public void testSetWordCount() {
-		stat.setWordCount(wordCount);
-	}
-
-	@Test
 	public void testGetWordCount() {
+		stat.setWordCount(wordCount);
 		Assert.assertEquals(wordCount, stat.getWordCount());
 	}
 
