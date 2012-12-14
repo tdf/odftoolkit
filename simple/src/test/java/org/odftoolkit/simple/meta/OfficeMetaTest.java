@@ -19,6 +19,8 @@ under the License.
 
 package org.odftoolkit.simple.meta;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,50 +63,31 @@ public class OfficeMetaTest {
 		fMetadata = new Meta(metadom);
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		doc.save(ResourceUtilities.getAbsolutePath(filename));
-		doc = null;
-		metadom = null;
-	}
-
 	@Test
-	public void testSetGenerator() {
+	public void testGetGenerator() throws Exception {
 		fMetadata.setGenerator(generator);
-	}
-
-	@Test
-	public void testGetGenerator() {
+                writeAndReload();
 		Assert.assertEquals(generator, fMetadata.getGenerator());
 	}
 
 	@Test
-	public void testSetDcTitle() {
+	public void testGetDcTitle() throws Exception {
 		fMetadata.setTitle(dctitle);
-	}
-
-	@Test
-	public void testGetDcTitle() {
+                writeAndReload();
 		Assert.assertEquals(dctitle, fMetadata.getTitle());
 	}
 
 	@Test
-	public void testSetDcDescription() {
+	public void testGetDcDescription() throws Exception {
 		fMetadata.setDescription(dcdescription);
-	}
-
-	@Test
-	public void testGetDcDescription() {
+                writeAndReload();
 		Assert.assertEquals(dcdescription, fMetadata.getDescription());
 	}
 
 	@Test
-	public void testSetSubject() {
+	public void testGetSubject() throws Exception {
 		fMetadata.setSubject(subject);
-	}
-
-	@Test
-	public void testGetSubject() {
+                writeAndReload();
 		Assert.assertEquals(subject, fMetadata.getSubject());
 	}
 
@@ -114,38 +97,28 @@ public class OfficeMetaTest {
 		keywords.add("computer3");
 		keywords.add("think center");
 		fMetadata.setKeywords(keywords);
-		tearDown();
-		setUp();
+		writeAndReload();
 		Assert.assertEquals(keywords, fMetadata.getKeywords());
 	}
 
 	@Test
-	public void testSetInitialCreator() {
+	public void testGetInitialCreator() throws Exception {
 		fMetadata.setInitialCreator(initialCreator);
-	}
-
-	@Test
-	public void testGetInitialCreator() {
+                writeAndReload();
 		Assert.assertEquals(initialCreator, fMetadata.getInitialCreator());
 	}
 
 	@Test
-	public void testSetDcCreator() {
+	public void testGetDcCreator() throws Exception {
 		fMetadata.setCreator(dccreator);
-	}
-
-	@Test
-	public void testGetDcCreator() {
+                writeAndReload();
 		Assert.assertEquals(dccreator, fMetadata.getCreator());
 	}
 
 	@Test
-	public void testSetPrintedBy() {
+	public void testGetPrintedBy() throws Exception {
 		fMetadata.setPrintedBy(printedBy);
-	}
-
-	@Test
-	public void testGetPrintedBy() {
+                writeAndReload();
 		Assert.assertEquals(printedBy, fMetadata.getPrintedBy());
 	}
 
@@ -153,8 +126,7 @@ public class OfficeMetaTest {
 	public void testSetAndGetCreationDate() throws Exception {
 		Calendar creationDate = Calendar.getInstance();
 		fMetadata.setCreationDate(creationDate);
-		tearDown();
-		setUp();
+		writeAndReload();
 		// //the millisecond lost while changing calendar to string
 		// creationDate.clear(Calendar.MILLISECOND);
 		// fMetadata.getCreationDate().clear(Calendar.MILLISECOND);
@@ -169,8 +141,7 @@ public class OfficeMetaTest {
 	public void testSetDcDate() throws Exception {
 		Calendar dcDate = Calendar.getInstance();
 		fMetadata.setDcdate(dcDate);
-		tearDown();
-		setUp();
+		writeAndReload();
 		// dcDate.clear(Calendar.MILLISECOND);
 		// fMetadata.getDcdate().clear(Calendar.MILLISECOND);
 		// Assert.assertEquals(0,dcDate.compareTo(fMetadata.getDcdate()));
@@ -183,8 +154,7 @@ public class OfficeMetaTest {
 	public void testSetPrintDate() throws Exception {
 		Calendar printDate = Calendar.getInstance();
 		fMetadata.setPrintDate(printDate);
-		tearDown();
-		setUp();
+		writeAndReload();
 		// printDate.clear(Calendar.MILLISECOND);
 		// fMetadata.getPrintDate().clear(Calendar.MILLISECOND);
 		// Assert.assertEquals(0,printDate.compareTo(fMetadata.getPrintDate()));
@@ -194,32 +164,23 @@ public class OfficeMetaTest {
 	}
 
 	@Test
-	public void testSetLanguage() {
+	public void testGetLanguage() throws Exception {
 		fMetadata.setLanguage(language);
-	}
-
-	@Test
-	public void testGetLanguage() {
+                writeAndReload();
 		Assert.assertEquals(language, fMetadata.getLanguage());
 	}
 
 	@Test
-	public void testSetEditingCycles() {
+	public void testGetEditingCycles() throws Exception {
 		fMetadata.setEditingCycles(editingCycles);
-	}
-
-	@Test
-	public void testGetEditingCycles() {
+                writeAndReload();
 		Assert.assertNotNull(fMetadata.getEditingCycles());
 	}
 
 	@Test
-	public void testSetEditingDuration() {
+	public void testGetEditingDuration() throws Exception {
 		fMetadata.setEditingDuration(editingDuration);
-	}
-
-	@Test
-	public void testGetEditingDuration() {
+                writeAndReload();
 		Assert.assertNotNull(fMetadata.getEditingDuration());
 	}
 
@@ -227,8 +188,7 @@ public class OfficeMetaTest {
 	public void testEmptyKeyword() throws Exception {
 		List<String> emptyKeyword = new ArrayList<String>();
 		fMetadata.setKeywords(emptyKeyword);
-		tearDown();
-		setUp();
+		writeAndReload();
 		Assert.assertNull(fMetadata.getKeywords());
 	}
 
@@ -236,8 +196,7 @@ public class OfficeMetaTest {
 	public void testAddKeyword() throws Exception {
 		String newKeyword = "hello";
 		fMetadata.addKeyword(newKeyword);
-		tearDown();
-		setUp();
+		writeAndReload();
 		Assert.assertEquals(true, fMetadata.getKeywords().contains(newKeyword));
 	}
 
@@ -264,9 +223,8 @@ public class OfficeMetaTest {
 				"happy");
 		fMetadata.setUserDefinedData(names.get(2), Value.BOOLEAN.toString(),
 				"false");
-		tearDown();
-
-		setUp();
+		writeAndReload();
+                
 		// test get
 		Assert.assertEquals(names, fMetadata.getUserDefinedDataNames());
 		Assert.assertEquals(Value.STRING.toString(), fMetadata.getUserDefinedDataType(names.get(0)));
@@ -276,21 +234,16 @@ public class OfficeMetaTest {
 		fMetadata.setUserDefinedDataType(names.get(1), Value.BOOLEAN.toString());
 		fMetadata.setUserDefinedData(names.get(2), Value.STRING.toString(),
 				"no");
-		tearDown();
-
-		setUp();
+		writeAndReload();
 		// update
 		Assert.assertEquals("false", fMetadata.getUserDefinedDataValue(names.get(1)));
 		Assert.assertEquals(Value.BOOLEAN.toString(), fMetadata.getUserDefinedDataType(names.get(1)));
 		Assert.assertEquals("no", fMetadata.getUserDefinedDataValue(names.get(2)));
 		Assert.assertEquals(Value.STRING.toString(), fMetadata.getUserDefinedDataType(names.get(2)));
-		tearDown();
-
-		setUp();
+		writeAndReload();
 		// remove
 		fMetadata.removeUserDefinedDataByName(names.get(0));
-		tearDown();
-		setUp();
+		writeAndReload();
 		Assert.assertEquals(2, fMetadata.getUserDefinedDataNames().size());
 	}
 
@@ -335,4 +288,14 @@ public class OfficeMetaTest {
 		Assert.assertNotNull(meta.getLanguage());
 		textDoc.close();
 	}
+        
+    private void writeAndReload() throws Exception {
+        File persistedDocument = File.createTempFile(getClass().getName(), ".odt");
+        persistedDocument.deleteOnExit();
+	doc.save(persistedDocument);
+	doc = (TextDocument) TextDocument.loadDocument(persistedDocument);
+	metadom = doc.getMetaDom();
+	fMetadata = new Meta(metadom);
+    }
+        
 }
