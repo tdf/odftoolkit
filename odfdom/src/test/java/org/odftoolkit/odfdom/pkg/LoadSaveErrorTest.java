@@ -57,7 +57,7 @@ public class LoadSaveErrorTest {
 	 * @throws IOException if an I/O error occurs
 	 */
 	@Test
-	public void testInvalidZipAsODF() throws SAXException, IOException {
+	public void testInvalidZipAsODF() throws Exception {
 		ByteArrayOutputStream baout = new ByteArrayOutputStream();
 		ZipOutputStream zout = new ZipOutputStream(baout);
 		ZipEntry entry = new ZipEntry("mimetype");
