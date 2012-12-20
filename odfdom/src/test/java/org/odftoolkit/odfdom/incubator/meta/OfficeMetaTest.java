@@ -71,9 +71,12 @@ public class OfficeMetaTest {
 
 	@After
 	public void tearDown() throws Exception {
+//		Thread.sleep(100);
 		doc.save(ResourceUtilities.getAbsolutePath(filename));
+		doc.close();
 		doc = null;
 		metadom = null;
+//		Thread.sleep(100);
 	}
 
 	@Test

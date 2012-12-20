@@ -90,7 +90,6 @@ public class OdfPackageDocument implements Closeable {
 	 * used.
 	 */
 	protected OdfPackageDocument(OdfPackage pkg, String internalPath, String mediaTypeString) {
-		super();
 		if (pkg != null) {
 			mPackage = pkg;
 			mDocumentPathInPackage = internalPath;

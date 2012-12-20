@@ -293,6 +293,7 @@ public class OfficeMetaTest {
         File persistedDocument = File.createTempFile(getClass().getName(), ".odt");
         persistedDocument.deleteOnExit();
 	doc.save(persistedDocument);
+	Thread.sleep(100);
 	doc = (TextDocument) TextDocument.loadDocument(persistedDocument);
 	metadom = doc.getMetaDom();
 	fMetadata = new Meta(metadom);

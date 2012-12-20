@@ -82,7 +82,8 @@ class ZipHelper {
 						try {
 							zipEntry = inputStream.getNextEntry();
 						} catch (java.util.zip.ZipException e) {
-							// JDK 6 -- the try/catch is workaround for a specific JDK 5 only problem
+							// JDK 6 -- the try/catch is workaround for a
+							// specific JDK 5 only problem
 							if (!e.getMessage().contains("missing entry name") && !System.getProperty("Java.version").equals("1.5.0")) {
 								Logger.getLogger(ZipHelper.class.getName()).info("ZIP ENTRY not found");
 								throw e;
@@ -103,7 +104,8 @@ class ZipHelper {
 			try {
 				int zipMethod = zipEntry.getMethod();
 				if (zipMethod != ZipEntry.STORED && zipMethod != ZipEntry.DEFLATED) {
-					mPackage.getErrorHandler().error(new OdfValidationException(OdfPackageConstraint.PACKAGE_ENTRY_USING_INVALID_COMPRESSION, mPackage.getBaseURI(), filePath));
+					mPackage.getErrorHandler().error(
+							new OdfValidationException(OdfPackageConstraint.PACKAGE_ENTRY_USING_INVALID_COMPRESSION, mPackage.getBaseURI(), filePath));
 				}
 			} catch (SAXException ex) {
 				Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,8 +118,7 @@ class ZipHelper {
 		if (mZipFile != null) {
 			return mZipFile.getInputStream(entry);
 		} else {
-			ZipInputStream inputStream = new ZipInputStream(
-					new ByteArrayInputStream(mZipBuffer));
+			ZipInputStream inputStream = new ZipInputStream(new ByteArrayInputStream(mZipBuffer));
 			ZipEntry zipEntry = inputStream.getNextEntry();
 			while (zipEntry != null) {
 				if (zipEntry.getName().equalsIgnoreCase(entry.getName())) {
@@ -129,8 +130,7 @@ class ZipHelper {
 		}
 	}
 
-	private InputStream readAsInputStream(ZipInputStream inputStream)
-			throws IOException {
+	private InputStream readAsInputStream(ZipInputStream inputStream) throws IOException {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		if (outputStream != null) {
 			byte[] buf = new byte[4096];

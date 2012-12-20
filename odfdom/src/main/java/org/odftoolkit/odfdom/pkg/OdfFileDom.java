@@ -83,17 +83,18 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 	protected Map<Node, Model> inCententMetadataCache;
 
 	protected JenaSink sink;
-	
+
 	/**
 	 * Creates the DOM representation of an XML file of an Odf document.
-	 *
-	 * @param packageDocument   the document the XML files belongs to
-	 * @param packagePath   the internal package path to the XML file
+	 * 
+	 * @param packageDocument
+	 *            the document the XML files belongs to
+	 * @param packagePath
+	 *            the internal package path to the XML file
 	 */
 	protected OdfFileDom(OdfPackageDocument packageDocument, String packagePath) {
 		super(false);
 		if (packageDocument != null && packagePath != null) {
-
 			mPackageDocument = packageDocument;
 			mPackage = packageDocument.getPackage();
 			mPackagePath = packagePath;
@@ -104,7 +105,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 			initialize();
 			// Register every DOM to OdfPackage,
 			// so a package close might save this DOM (similar as OdfDocumentPackage)
-			this.addDomToCache(mPackageDocument.mPackage, packagePath);
+			this.addDomToCache(mPackage, packagePath);
 		} else {
 			throw new IllegalArgumentException("Arguments are not allowed to be NULL for OdfFileDom constructor!");
 		}
@@ -160,6 +161,8 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 				newFileDom = new OdfMetaDom((OdfSchemaDocument) packageDocument, packagePath);
 			} else if (packagePath.equals("settings.xml") || packagePath.endsWith("/settings.xml")) {
 				newFileDom = new OdfSettingsDom((OdfSchemaDocument) packageDocument, packagePath);
+			} else if (packagePath.equals("META-INF/manifest.xml") || packagePath.endsWith("/META-INF/manifest.xml")) {
+				newFileDom = new OdfManifestDom((OdfSchemaDocument) packageDocument, packagePath);
 			} else {
 				newFileDom = new OdfFileDom(packageDocument, packagePath);
 			}
@@ -177,6 +180,30 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 		return newFileDom;
 	}
 
+	public static OdfFileDom newFileDom(OdfPackage pkg, String packagePath) {
+		OdfFileDom newFileDom = null;
+		// before creating a new dom, make sure that there no DOM opened for this file already
+		Document existingDom = pkg.getCachedDom(packagePath);
+		if (existingDom == null) {
+			if (packagePath.equals("META-INF/manifest.xml") || packagePath.endsWith("/META-INF/manifest.xml")) {
+				newFileDom = new OdfManifestDom(pkg, packagePath);
+			} else {
+				newFileDom = new OdfFileDom(pkg, packagePath);
+			}
+		} else {
+			if (existingDom instanceof OdfFileDom) {
+				newFileDom = (OdfFileDom) existingDom;
+//ToDO: Issue 264 - Otherwise if NOT an OdfFileDom serialize old DOM AND CREATE A NEW ONE?!
+// Or shall we always reference to the dom, than we can not inherit from Document? Pro/Con?s
+//			}else{
+//				// Create an OdfFileDOM from an existing DOM
+//				newFileDom =
+			}
+
+		}
+		return newFileDom;
+	}
+	
 	protected void initialize() {
 		InputStream fileStream = null;
 		try {
@@ -196,14 +223,14 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 				xmlReader.parse(xmlSource);
 			}
 		} catch (Exception ex) {
-			Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(OdfFileDom.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			try {
 				if (fileStream != null) {
 					fileStream.close();
 				}
 			} catch (IOException ex) {
-				Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(OdfFileDom.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
 	}
