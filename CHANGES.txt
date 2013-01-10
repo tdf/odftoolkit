@@ -70,6 +70,51 @@ Other
 * ODFTOOLKIT-299 Build with JDK 7 as well as Earlier versions (Svante Schubert, Patch by Dennis E. Hamilton)
 * ODFTOOLKIT-312 Better exception handling for OdfPackage (Svante Schubert, Patch by Jeremias Maerki)
 
+
+The following people have contributed to ODF Toolkit 0.6 incubating by submitting or commenting on the issues resolved in this release, 
+or contributed via reported bugs/comments on the mailing list:
+
+Nick Burch (mentor)
+Yegor Kozlov (mentor)
+Dali Liu (committer)
+Devin Han (committer)
+Donald Harbison (committer)
+Florian Hopf (committer)
+Oliver Rau (committer)
+Rob Weir (committer)
+Svante Schubert (committer)
+Andy Jefferson
+Anders Sjostrom
+Ashok Hariharan
+Charitha Madusanka
+Dani Prieto 
+Dave Fisher
+Dennis E. Hamilton 
+Gavin McDonald
+Graham Weatherup
+Ian Cunningham
+Jeremias Maerki
+Johnny Haugen Sorgard
+Kejia Ye
+Lars Moller 
+Pavel Jisl
+Philip Helger
+Peter Junge
+Marc Schreiber
+Mathias Silbermann 
+Michael Stahl
+Michan Jaskurzyński
+Nick de Graeve
+Noah Tilton
+Romain Benefice
+Steele, Raymond
+Stefan Renz
+Sherzod Muratov
+Svante Schubert
+Tao Lin
+Torsten Krah 
+Vicente Villegas Larios
+
 ======= Release 0.5 incubating =======
 
 The most notable changes in ODF Toolkit 0.5 incubating over previous releases in ODF Toolkit Union are:
