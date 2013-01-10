@@ -24,12 +24,12 @@
   <parent>
     <groupId>org.apache.odftoolkit</groupId>
     <artifactId>schema2template-pom</artifactId>
-    <version>0.8.9-incubating-SNAPSHOT</version>
+    <version>0.8.9-incubating</version>
   </parent>
   
     <!-- The Basics -->
     <artifactId>schema2template-maven-plugin</artifactId>
-    <version>0.8.9-incubating-SNAPSHOT</version>
+    <version>0.8.9-incubating</version>
     <packaging>maven-plugin</packaging>
     <dependencies>
         <dependency>
