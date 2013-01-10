@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.apache.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.6-incubating-SNAPSHOT</version>
+    <version>0.6-incubating</version>
   </parent>
 
     <!-- The Basics -->
     <artifactId>schema2template-pom</artifactId>
-    <version>0.8.9-incubating-SNAPSHOT</version>
+    <version>0.8.9-incubating</version>
     <packaging>pom</packaging>
 
     <properties>
