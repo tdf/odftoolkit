@@ -209,7 +209,6 @@
                     <links>
                         <link>http://download.oracle.com/javase/6/docs/api/</link>
                         <link>http://xerces.apache.org/xerces-j/apiDocs/</link>
-                        <link>http://odfdom.odftoolkit.org/0.8.7/odfdom/apidocs/</link>
                     </links>
                     <splitindex>true</splitindex>
                     <windowtitle>Simple ODF API v${project.version} - http://incubator.apache.org/odftoolkit/</windowtitle>
@@ -249,7 +248,7 @@
     </reporting>
     <!-- More Project Information -->
     <name>Simple Java API for ODF (Simple ODF)</name>
-    <description>A simple API for manipulate ODF documents easily.</description>
+    <description>A simple API for easy manipulation of ODF documents.</description>
     <url>http://incubator.apache.org/odftoolkit/simple/index.html</url>
     <inceptionYear>2010</inceptionYear>
     <licenses>
@@ -263,58 +262,6 @@
         <name>The Apache Software Foundation</name>
         <url>http://www.apache.org/</url>
     </organization>
-    <developers>
-        <developer>
-            <id>daisyguo</id>
-            <name>Ying Chun Guo</name>
-            <email>daisyguo AT apache.org</email>
-            <organization>IBM</organization>
-            <organizationUrl>http://www.ibm.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <id>devinhan</id>
-            <name>Han Biao</name>
-            <email>devinhan AT apache.org</email>
-            <organization>IBM</organization>
-            <organizationUrl>http://www.ibm.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-    </developers>
-    
-    <!-- Environment Settings -->
-    <issueManagement>
-        <system>JIRA</system>
-        <url>https://issues.apache.org/jira/browse/ODFTOOLKIT</url>
-    </issueManagement>
-    <mailingLists>
-        <mailingList>
-            <name>User List</name>
-            <post>odf-users@incubator.apache.org</post>
-            <subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
-            <unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
-            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
-        </mailingList>
-        <mailingList>
-            <name>Developer List</name>
-            <post>odf-dev@incubator.apache.org</post>
-            <subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
-            <unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
-            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
-        </mailingList>
-        <mailingList>
-            <name>Commits</name>
-            <subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
-            <unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
-            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
-        </mailingList>
-    </mailingLists>
     <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/simple</connection>
         <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/simple</developerConnection>
