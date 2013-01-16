@@ -134,7 +134,7 @@
           				</goals>
           				<configuration>
             				<url>dav:http://docs.oasis-open.org/office/v1.2</url>
-            				<fromFile>cs01/OpenDocument-v1.2-cs01-schema.rng</fromFile>
+            				<fromFile>os/OpenDocument-v1.2-os-schema.rng</fromFile>
             				<toDir>${project.build.directory}/odf-schemas</toDir>
           				</configuration>
         			</execution>
@@ -146,7 +146,7 @@
           				</goals>
           				<configuration>
             				<url>dav:http://docs.oasis-open.org/office/v1.2</url>
-            				<fromFile>cs01/OpenDocument-v1.2-cs01-manifest-schema.rng</fromFile>
+            				<fromFile>os/OpenDocument-v1.2-os-manifest-schema.rng</fromFile>
             				<toDir>${project.build.directory}/odf-schemas</toDir>
           				</configuration>
         			</execution>
@@ -158,7 +158,7 @@
           				</goals>
           				<configuration>
             				<url>dav:http://docs.oasis-open.org/office/v1.2</url>
-            				<fromFile>cs01/OpenDocument-v1.2-cs01-dsig-schema.rng</fromFile>
+            				<fromFile>os/OpenDocument-v1.2-os-dsig-schema.rng</fromFile>
             				<toDir>${project.build.directory}/odf-schemas</toDir>
           				</configuration>
         			</execution>

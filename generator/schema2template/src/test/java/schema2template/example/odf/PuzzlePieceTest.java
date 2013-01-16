@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ************************************************************************/
-package schema2template;
+package schema2template.example.odf;
 
 import com.sun.msv.grammar.Expression;
 import java.io.BufferedReader;
@@ -36,7 +36,6 @@ import schema2template.model.PuzzlePiece;
 import schema2template.model.PuzzlePieceSet;
 import org.junit.Assert;
 import org.junit.Ignore;
-import schema2template.example.odf.OdfHelper;
 import schema2template.model.MSVExpressionIterator;
 
 public class PuzzlePieceTest {
@@ -45,9 +44,9 @@ public class PuzzlePieceTest {
 	private static final String OUTPUT_DUMP_ODF10 = "target" + File.separator + "odf10-msvtree.dump";
 	private static final String OUTPUT_DUMP_ODF11 = "target" + File.separator + "odf11-msvtree.dump";
 	private static final String OUTPUT_DUMP_ODF12 = "target" + File.separator + "odf12-msvtree.dump";
-	private static final String OUTPUT_REF_ODF10 = TEST_INPUT_ROOT + File.separator + "odf10-msvtree.ref";
-	private static final String OUTPUT_REF_ODF11 = TEST_INPUT_ROOT + File.separator + "odf11-msvtree.ref";
-	private static final String OUTPUT_REF_ODF12 = TEST_INPUT_ROOT + File.separator + "odf12-msvtree.ref";
+	private static final String OUTPUT_REF_ODF10 = TEST_REFERENCE_DIR + File.separator + "odf10-msvtree.ref";
+	private static final String OUTPUT_REF_ODF11 = TEST_REFERENCE_DIR + File.separator + "odf11-msvtree.ref";
+	private static final String OUTPUT_REF_ODF12 = TEST_REFERENCE_DIR + File.separator + "odf12-msvtree.ref";
 	private static final int ODF12_ELEMENT_DUPLICATES = 7;
 	private static final int ODF12_ATTRIBUTE_DUPLICATES = 134;
 
@@ -218,5 +217,5 @@ public class PuzzlePieceTest {
 			LOG.info("********************");
 			Assert.fail(errorMsg);
 		}
-	}
+	}	
 }
