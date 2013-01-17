@@ -1,4 +1,5 @@
-/************************************************************************
+/**
+ * **********************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
@@ -7,8 +8,8 @@
  * Use is subject to license terms.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,7 +19,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- ************************************************************************/
+ ***********************************************************************
+ */
 package schema2template.example.odf;
 
 import java.io.File;
@@ -109,7 +111,6 @@ public class OdfHelper {
 	private static final String REFERENCE_OUTPUT_FILES = "target" + File.separator + "reference-output-files.xml";
 	private static final String PYTHON_OUTPUT_FILES_TEMPLATE = "dom-output-files.vm";
 	private static final String PYTHON_OUTPUT_FILES = "target" + File.separator + "python-output-files.xml";
-
 	private static final String DOM_OUTPUT_FILES_TEMPLATE = "dom-output-files.vm";
 	private static final String DOM_OUTPUT_FILES = "target" + File.separator + "dom-output-files.xml";
 	private static final String PKG_OUTPUT_FILES_TEMPLATE = "pkg-output-files.vm";
@@ -135,8 +136,8 @@ public class OdfHelper {
 		outputRoot = targetRoot;
 		mConfigFile = configFile;
 	}
-	
-	static {		
+
+	static {
 		odfDomResourceDir = TEST_INPUT_ROOT + File.separator + "odfdom-java" + File.separator + "dom";
 		odfPkgResourceDir = TEST_INPUT_ROOT + File.separator + "odfdom-java" + File.separator + "pkg";
 		odfPythonResourceDir = TEST_INPUT_ROOT + File.separator + "odfdom-python";
@@ -147,35 +148,35 @@ public class OdfHelper {
 		odf11RngFile = INPUT_ROOT + File.separator + ODF11_RNG_FILE_NAME;
 		odf10RngFile = INPUT_ROOT + File.separator + ODF10_RNG_FILE_NAME;
 		outputRoot = "target";
-		mConfigFile = TEST_INPUT_ROOT + File.separator + "config.xml";		
+		mConfigFile = TEST_INPUT_ROOT + File.separator + "config.xml";
 	}
 
-	public void start() throws Exception{
+	public void start() throws Exception {
 		LOG.info("Starting code generation:");
 		initialize();
-		
+
 		// ODF 1.2 Code Generation
 		fillTemplates(odfDomResourceDir, mOdf12Root, DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES);
 		fillTemplates(odfPkgResourceDir, mOdf12SignatureRoot, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
 		fillTemplates(odfPkgResourceDir, mOdf12ManifestRoot, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
 	}
-	
+
 	public static void main(String[] args) throws Exception {
-		LOG.info("Starting code generation:");		
-		initialize();		
-		
+		LOG.info("Starting code generation:");
+		initialize();
+
 		// ODF 1.2 HTML Reference (yet without BNF nor images)
 		fillTemplates(odfReferenceResourceDir, mOdf12Root, REFERENCE_OUTPUT_FILES_TEMPLATE, REFERENCE_OUTPUT_FILES);
 		// ODF 1.2 Python (The generated Python source is from a former colleague and might not work any longer..)
-		fillTemplates(odfPythonResourceDir,	   mOdf12Root, PYTHON_OUTPUT_FILES_TEMPLATE, PYTHON_OUTPUT_FILES);		
+		fillTemplates(odfPythonResourceDir, mOdf12Root, PYTHON_OUTPUT_FILES_TEMPLATE, PYTHON_OUTPUT_FILES);
 
 		// ODF 1.2 Code Generation
-		fillTemplates(odfDomResourceDir, mOdf12Root, DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES);				
+		fillTemplates(odfDomResourceDir, mOdf12Root, DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES);
 		fillTemplates(odfPkgResourceDir, mOdf12ManifestRoot, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
 		fillTemplates(odfPkgResourceDir, mOdf12SignatureRoot, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
 	}
 
-	private static void initialize() throws Exception{
+	private static void initialize() throws Exception {
 		LOG.info("Starting initilization..");
 		// calling MSV to parse the ODF 1.2 DSIG RelaxNG, returning a tree
 		mOdf12SignatureRoot = loadSchema(new File(odf12SignatureRngFile));
@@ -222,11 +223,12 @@ public class OdfHelper {
 		processFileList(ve, root, outputRuleFile);
 		LOG.fine("DONE.\n");
 	}
-	
+
 	/**
 	 * Load and parse the ODF 1.0 Schema.
 	 *
-	 * @return MSV Expression Tree of ODF 1.0 RelaxNG schema (more specific: The tree's MSV root expression)
+	 * @return MSV Expression Tree of ODF 1.0 RelaxNG schema (more specific: The
+	 * tree's MSV root expression)
 	 * @throws Exception
 	 */
 	public static Expression loadSchemaODF10() throws Exception {
@@ -236,7 +238,8 @@ public class OdfHelper {
 	/**
 	 * Load and parse the ODF 1.1 Schema.
 	 *
-	 * @return MSV Expression Tree of ODF 1.1 RelaxNG schema (more specific: The tree's MSV root expression)
+	 * @return MSV Expression Tree of ODF 1.1 RelaxNG schema (more specific: The
+	 * tree's MSV root expression)
 	 * @throws Exception
 	 */
 	public static Expression loadSchemaODF11() throws Exception {
@@ -246,7 +249,8 @@ public class OdfHelper {
 	/**
 	 * Load and parse the ODF 1.2 Schema.
 	 *
-	 * @return MSV Expression Tree of ODF 1.2 RelaxNG schema  (more specific: The tree's MSV root expression)
+	 * @return MSV Expression Tree of ODF 1.2 RelaxNG schema (more specific: The
+	 * tree's MSV root expression)
 	 * @throws Exception
 	 */
 	public static Expression loadSchemaODF12() throws Exception {
@@ -257,7 +261,8 @@ public class OdfHelper {
 	 * Load and parse a Schema from File.
 	 *
 	 * @param rngFile
-	 * @return MSV Expression Tree (more specific: The tree's MSV root expression)
+	 * @return MSV Expression Tree (more specific: The tree's MSV root
+	 * expression)
 	 * @throws Exception
 	 */
 	public static Expression loadSchema(File rngFile) throws Exception {
@@ -266,7 +271,7 @@ public class OdfHelper {
 		// Parsing the Schema with MSV
 		String absolutePath = rngFile.getAbsolutePath();
 		com.sun.msv.reader.util.IgnoreController ignoreController = new com.sun.msv.reader.util.IgnoreController();
-		Expression root = RELAXNGReader.parse(absolutePath,	factory, ignoreController).getTopLevel();
+		Expression root = RELAXNGReader.parse(absolutePath, factory, ignoreController).getTopLevel();
 
 
 		if (root == null) {
@@ -301,12 +306,17 @@ public class OdfHelper {
 	}
 
 	private static String generateFilename(String rawName) {
-		File retfile = new File(".");
+		String retFilePath = null;
 		StringTokenizer toktok = new StringTokenizer(rawName.replaceAll(":", "_"), "/");
-		while (toktok.hasMoreTokens()) {
-			retfile = new File(retfile, toktok.nextToken());
+		if (toktok.hasMoreTokens()) {
+			File retfile = null;
+			retfile = new File(toktok.nextToken());
+			while (toktok.hasMoreTokens()) {
+				retfile = new File(retfile, toktok.nextToken());
+			}
+			retFilePath = retfile.getPath();
 		}
-		return retfile.getPath();
+		return retFilePath;
 	}
 
 	private static void ensureParentFolders(File newFile) {
@@ -337,7 +347,7 @@ public class OdfHelper {
 						throw new RuntimeException("Error in output-files.xml, line " + f.getLineNumber() + ": no or invalid odf-scope");
 					}
 
-					File out = new File(outputRoot + generateFilename(f.getAttribute("path"))).getCanonicalFile();
+					File out = new File(outputRoot + File.separator + generateFilename(f.getAttribute("path"))).getCanonicalFile();
 					ensureParentFolders(out);
 					FileWriter fileout = new FileWriter(out);
 					String encoding = "utf-8";
