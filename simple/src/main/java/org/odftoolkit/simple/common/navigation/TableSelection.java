@@ -19,13 +19,27 @@ under the License.
 
 package org.odftoolkit.simple.common.navigation;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
 import org.odftoolkit.odfdom.dom.element.text.TextSElement;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.common.TextExtractor;
+import org.odftoolkit.simple.common.navigation.Navigation;
+import org.odftoolkit.simple.common.navigation.Selection;
+import org.odftoolkit.simple.common.navigation.TextNavigation;
+import org.odftoolkit.simple.common.navigation.TextSelection;
+import org.odftoolkit.simple.style.DefaultStyleHandler;
+import org.odftoolkit.simple.style.ParagraphProperties;
+import org.odftoolkit.simple.style.TableProperties;
+import org.odftoolkit.simple.table.Cell;
+import org.odftoolkit.simple.table.Row;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.text.Paragraph;
 import org.w3c.dom.Element;
@@ -51,9 +65,37 @@ public class TableSelection extends Selection {
 	 */
 	public Table replaceWithTable(Table table) {
 		this.sourceTable=table;
+		if (search instanceof TextNavigation) {
 		int leftLength = textSelection.getText().length();
 		int index = textSelection.getIndex();
-		preparetableContainer(leftLength, index);
+			boolean continued = false;
+			TextNavigation textSearch = (TextNavigation) search;
+			if (textSearch != null
+					&& textSearch.getReplacedItem() != null
+					&& textSearch.getReplacedItem().getElement() == this.textSelection
+							.getElement()) {
+				continued = true;
+			} else {
+				textSearch.setHandlePageBreak(false);
+			}
+			preparetableContainer(leftLength, index, continued);
+			Selection.SelectionManager.unregisterItem(this.textSelection);
+			if (textSearch != null) {
+				textSearch.setReplacedItem(this.textSelection);
+				Paragraph lastParagraph = getLastParagraphInTable(tableContainer);
+				OdfElement newStartPoint;
+				if (lastParagraph != null) {
+					newStartPoint = lastParagraph.getOdfElement();
+				} else {
+					newStartPoint = tableContainer.getOdfElement();
+				}
+				String content = TextExtractor.getText(newStartPoint);
+				TextSelection selected = newTextSelection(textSearch,
+						this.textSelection.getText(), newStartPoint,
+						content.length() - 1);
+				textSearch.setSelectedItem(selected);
+			}
+		}
 		return tableContainer;
 	}
 
@@ -66,6 +108,7 @@ public class TableSelection extends Selection {
 	 */
 	public TableSelection(TextSelection selection) {
 		textSelection = selection;
+		search = textSelection.getTextNavigation();
 		tableContainer = null;
 	}
 
@@ -192,54 +235,216 @@ public class TableSelection extends Selection {
 		textSelection.refreshAfterFrontalInsert(insertedItem);
 	}
 
-	private void preparetableContainer(int leftLength, int index) {
+	private void preparetableContainer(int leftLength, int index,
+			boolean continued) {
 		if (tableContainer == null) {
+			String pos = "middle";
 			OdfElement rightparentElement = textSelection.getContainerElement();
 			int nodeLength = TextExtractor.getText(rightparentElement).length();
 			if(index==0){
 				
 				if(leftLength==nodeLength){
 					//Replace whole Paragraph
-					Paragraph orgparagraph = Paragraph.getInstanceof((TextParagraphElementBase)rightparentElement);
-					TextDocument document = (TextDocument)orgparagraph.getOwnerDocument();
-					tableContainer = document.insertTable(orgparagraph, sourceTable, false);
-					NodeList cnl = rightparentElement.getChildNodes();
-					for(int i=0;i<cnl.getLength();i++){
-						rightparentElement.removeChild(cnl.item(i));
-					}
-					
+					Paragraph orgparagraph = Paragraph
+							.getInstanceof((TextParagraphElementBase) rightparentElement);
+					TextDocument document = (TextDocument) orgparagraph
+							.getOwnerDocument();
+					tableContainer = document.insertTable(orgparagraph,
+							sourceTable, false);
+					pos = "whole";
+					handlePageBreak(orgparagraph, pos, continued);
+
+					rightparentElement.getParentNode().removeChild(
+							rightparentElement);
 				}else{
 					//at the start of original Paragraph, insert before original Paragraph
 					delete(index, leftLength, rightparentElement);
-					Paragraph orgparagraph = Paragraph.getInstanceof((TextParagraphElementBase)rightparentElement);
-					TextDocument document = (TextDocument)orgparagraph.getOwnerDocument();
-					tableContainer = document.insertTable(orgparagraph, sourceTable, true);					
-				}
+					Paragraph orgparagraph = Paragraph
+							.getInstanceof((TextParagraphElementBase) rightparentElement);
+					TextDocument document = (TextDocument) orgparagraph
+							.getOwnerDocument();
+					tableContainer = document.insertTable(orgparagraph,
+							sourceTable, true);
+					pos = "head";
+					handlePageBreak(orgparagraph, pos, continued);
 			}
-			else if(nodeLength==(index+leftLength)){
+			} else if (nodeLength == (index + leftLength)) {
 				//at the end of original Paragraph, insert after original Paragraph
 				delete(index, leftLength, rightparentElement);
-				Paragraph orgparagraph = Paragraph.getInstanceof((TextParagraphElementBase)rightparentElement);
-				TextDocument document = (TextDocument)orgparagraph.getOwnerDocument();
-				tableContainer =document.insertTable(orgparagraph, sourceTable,false);
+				Paragraph orgparagraph = Paragraph
+						.getInstanceof((TextParagraphElementBase) rightparentElement);
+				TextDocument document = (TextDocument) orgparagraph
+						.getOwnerDocument();
+				tableContainer = document.insertTable(orgparagraph,
+						sourceTable, false);
+				handlePageBreak(orgparagraph, pos, continued);
 			}else{
 				//at the middle of original Paragraph, split original Paragraph, insert before the second Paragraph.
 				delete(index, leftLength, rightparentElement);
 				Node leftparentElement = rightparentElement.cloneNode(true);
-				rightparentElement.getParentNode().insertBefore(leftparentElement,rightparentElement);
-				nodeLength = TextExtractor.getText((OdfElement) leftparentElement).length();
+				rightparentElement.getParentNode().insertBefore(
+						leftparentElement, rightparentElement);
+				nodeLength = TextExtractor.getText(
+						(OdfElement) leftparentElement).length();
 				delete(index, nodeLength-index, leftparentElement);
 				delete(0, index, rightparentElement);
-				Paragraph orgparagraph = Paragraph.getInstanceof((TextParagraphElementBase)rightparentElement);
-				TextDocument document = (TextDocument)orgparagraph.getOwnerDocument();
-				tableContainer =  document.insertTable(orgparagraph, sourceTable, true);
+				Paragraph orgparagraph = Paragraph
+						.getInstanceof((TextParagraphElementBase) rightparentElement);
+				TextDocument document = (TextDocument) orgparagraph
+						.getOwnerDocument();
+				tableContainer = document.insertTable(orgparagraph,
+						sourceTable, true);
+				if (!continued)
+					textSelection.cleanBreakProperty(orgparagraph);
 			}
 		} else{
-			TextDocument document = (TextDocument)tableContainer.getOwnerDocument();
-			TableTableElement newTEle =(TableTableElement) document.insertOdfElement(tableContainer.getOdfElement(),tableContainer.getOwnerDocument(), sourceTable.getOdfElement(), true);
-			tableContainer.getOdfElement().getParentNode().removeChild(tableContainer.getOdfElement());
+			TextDocument document = (TextDocument) tableContainer
+					.getOwnerDocument();
+			TableTableElement newTEle = (TableTableElement) document
+					.insertOdfElement(tableContainer.getOdfElement(),
+							tableContainer.getOwnerDocument(),
+							sourceTable.getOdfElement(), true);
+			tableContainer.getOdfElement().getParentNode()
+					.removeChild(tableContainer.getOdfElement());
 			Table table = Table.getInstance(newTEle);
 			tableContainer=table;
 		}
+	}
+	private Paragraph getLastParagraphInTable(Table table) {
+		Paragraph paragraph = null;
+		int rowCount = table.getRowCount();
+		for (int i = rowCount - 1; i >= 0; i--) {
+			Row row = table.getRowByIndex(i);
+			int cellCount = row.getCellCount();
+			for (int j = cellCount - 1; j >= 0; j--) {
+				Cell cell = row.getCellByIndex(j);
+				paragraph = cell.getParagraphByReverseIndex(0, false);
+				if (paragraph != null)
+					return paragraph;
+			}
+		}
+		return paragraph;
+	}
+	private TableProperties getTablePropertiesForWrite() {
+		OdfStyleBase style = tableContainer.getStyleHandler()
+				.getStyleElementForRead();
+		if (style == null || style.getLocalName().equals("default-style")) {
+			OdfStyle element = tableContainer.getStyleHandler()
+					.getStyleElementForWrite();
+			NodeList nodes = element.getChildNodes();
+			int size = nodes.getLength();
+			for (int i = 0; i < size; i++) {
+				element.removeChild(nodes.item(0));
+			}
+		}
+		TableProperties properties = tableContainer.getStyleHandler()
+				.getTablePropertiesForWrite();
+		return properties;
+	}
+	private OdfStyleBase getParagraphStyleElementForWrite() {
+		OdfStyleBase style = tableContainer.getStyleHandler()
+				.getStyleElementForRead();
+		OdfStyle element = tableContainer.getStyleHandler()
+				.getStyleElementForWrite();
+		if (style == null || style.getLocalName().equals("default-style")) {
+			NodeList nodes = element.getChildNodes();
+			int size = nodes.getLength();
+			for (int i = 0; i < size; i++) {
+				element.removeChild(nodes.item(0));
+			}
+		}
+		return element;
+	}
+	private void handlePageBreak(Paragraph origParagraph, String pos,
+			boolean continued) {
+		if (continued
+				&& this.textSelection.getTextNavigation().isHandlePageBreak())
+			return;
+		ParagraphProperties orgParaPty = origParagraph.getStyleHandler()
+				.getParagraphPropertiesForRead();
+		boolean handleBreak = false;
+		String posInPara = "middle";
+		if (continued && pos.equals("whole")) {
+			posInPara = "end";
+		} else if (continued && pos.endsWith("head")) {
+			posInPara = "middle";
+		} else if (continued && pos.endsWith("end")) {
+			posInPara = "end";
+		} else if (!continued && pos.endsWith("whole")) {
+			posInPara = "whole";
+		} else if (!continued && pos.endsWith("head")) {
+			posInPara = "head";
+		} else if (!continued && pos.endsWith("end")) {
+			posInPara = "end";
+		}
+		if (orgParaPty != null) {
+			String breakAttribute = orgParaPty.getBreakBefore();
+			if (breakAttribute != null) {
+				if (posInPara.equals("head") || posInPara.equals("whole")) {
+					getTablePropertiesForWrite().setBreak("before",
+							breakAttribute);
+					handleBreak = true;
+				}
+			}
+			breakAttribute = orgParaPty.getBreakAfter();
+			if (breakAttribute != null) {
+				if (posInPara.equals("end") || posInPara.equals("whole")) {
+					getTablePropertiesForWrite().setBreak("after",
+							breakAttribute);
+					handleBreak = true;
+				}
+			}
+		}
+		String masterStyle = origParagraph
+				.getStyleHandler()
+				.getStyleElementForRead()
+				.getOdfAttributeValue(
+						OdfName.newName(OdfDocumentNamespace.STYLE,
+								"master-page-name"));
+		if (masterStyle != null && !masterStyle.isEmpty()) {
+			if (posInPara.equals("head") || posInPara.equals("whole")) {
+				getParagraphStyleElementForWrite().setOdfAttributeValue(
+						OdfName.newName(OdfDocumentNamespace.STYLE,
+								"master-page-name"), masterStyle);
+				handleBreak = true;
+				try {
+					int pageNumber = orgParaPty.getPageNumber();
+					if (pos.equals("head")) {
+						tableContainer.getStyleHandler()
+								.getParagraphPropertiesForWrite()
+								.setPageNumber(pageNumber);
+					}
+				} catch (NumberFormatException e) {
+					Logger.getLogger(ParagraphSelection.class.getName()).log(
+							Level.SEVERE, e.getMessage(), "NumberFormatException");
+				}
+			}
+		}
+		if (handleBreak && !posInPara.equals("whole"))
+			textSelection.cleanBreakProperty(origParagraph);
+	}
+	private class TextSelectionForTableReplacement extends TextSelection {
+		private OdfElement mContainer;
+		TextSelectionForTableReplacement(Navigation search, String text,
+				OdfElement containerElement, int index) {
+			super(search, text, containerElement, index);
+			if (containerElement instanceof TableTableElement)
+				mContainer = containerElement;
+		}
+		@Override
+		public OdfElement getContainerElement() {
+			OdfElement element = super.getContainerElement();
+			if (element == null) {
+				element = mContainer;
+			}
+			return element;
+		}
+	}
+	TextSelection newTextSelection(Navigation search, String text,
+			OdfElement containerElement, int index) {
+		TextSelection selection = new TextSelectionForTableReplacement(search,
+				text, containerElement, index);
+		Selection.SelectionManager.registerItem(selection);
+		return selection;
 	}
 }

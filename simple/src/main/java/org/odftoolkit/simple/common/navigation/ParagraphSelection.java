@@ -19,14 +19,29 @@ under the License.
 
 package org.odftoolkit.simple.common.navigation;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.attribute.style.StyleMasterPageNameAttribute;
+import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
+import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
 import org.odftoolkit.odfdom.dom.element.text.TextSElement;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
+import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.common.TextExtractor;
+import org.odftoolkit.simple.common.navigation.Selection;
+import org.odftoolkit.simple.common.navigation.TextNavigation;
+import org.odftoolkit.simple.common.navigation.TextSelection;
+import org.odftoolkit.simple.style.ParagraphProperties;
 import org.odftoolkit.simple.text.Paragraph;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -48,9 +63,32 @@ public class ParagraphSelection extends Selection {
 	 */
 	public Paragraph replaceWithParagraph(Paragraph paragraph) {
 		this.sourceParagraph=paragraph;
+		if (search instanceof TextNavigation) {
+			TextNavigation textSearch = (TextNavigation) search;
 		int leftLength = textSelection.getText().length();
 		int index = textSelection.getIndex();
-		prepareParagraphContainer(leftLength, index);
+			boolean continued = false;
+			if (textSearch != null
+					&& textSearch.getReplacedItem() != null
+					&& textSearch.getReplacedItem().getElement() == this.textSelection
+							.getElement()) {
+				continued = true;
+			} else {
+				textSearch.setHandlePageBreak(false);
+			}
+			prepareParagraphContainer(leftLength, index, continued);
+			Selection.SelectionManager.unregisterItem(this.textSelection);
+			if (textSearch != null) {
+				textSearch.setReplacedItem(this.textSelection);
+				OdfElement containerElement = paragraphContainer
+						.getOdfElement();
+				String content = TextExtractor.getText(containerElement);
+				TextSelection selected = TextSelection.newTextSelection(
+						textSearch, this.textSelection.getText(),
+						containerElement, content.length() - 1);
+				textSearch.setSelectedItem(selected);
+			}
+		}
 		return paragraphContainer;
 	}
 
@@ -63,6 +101,7 @@ public class ParagraphSelection extends Selection {
 	 */
 	public ParagraphSelection(TextSelection selection) {
 		textSelection = selection;
+		search = textSelection.getTextNavigation();
 		paragraphContainer = null;
 	}
 
@@ -189,50 +228,228 @@ public class ParagraphSelection extends Selection {
 		textSelection.refreshAfterFrontalInsert(insertedItem);
 	}
 
-	private void prepareParagraphContainer(int leftLength, int index) {
+	private ParagraphProperties getParagraphPropertiesForWrite() {
+		OdfStyleBase style = paragraphContainer.getStyleHandler()
+				.getStyleElementForRead();
+		if (style == null || style.getLocalName().equals("default-style")) {
+			OdfStyle element = paragraphContainer.getStyleHandler()
+					.getStyleElementForWrite();
+			NodeList nodes = element.getChildNodes();
+			int size = nodes.getLength();
+			for (int i = 0; i < size; i++) {
+				element.removeChild(nodes.item(0));
+			}
+		}
+		ParagraphProperties properties = paragraphContainer.getStyleHandler()
+				.getParagraphPropertiesForWrite();
+		return properties;
+	}
+	private OdfStyleBase getParagraphStyleElementForWrite() {
+		OdfStyleBase style = paragraphContainer.getStyleHandler()
+				.getStyleElementForRead();
+		OdfStyle element = paragraphContainer.getStyleHandler()
+				.getStyleElementForWrite();
+		if (style == null || style.getLocalName().equals("default-style")) {
+			NodeList nodes = element.getChildNodes();
+			int size = nodes.getLength();
+			for (int i = 0; i < size; i++) {
+				element.removeChild(nodes.item(0));
+			}
+		}
+		return element;
+	}
+	private void handlePageBreak(Paragraph origParagraph, String pos,
+			boolean continued) {
+		if (continued
+				&& this.textSelection.getTextNavigation().isHandlePageBreak())
+			return;
+		ParagraphProperties orgParaPty = origParagraph.getStyleHandler()
+				.getParagraphPropertiesForRead();
+		boolean handleBreak = false;
+		String posInPara = "middle";
+		if (continued && pos.equals("whole")) {
+			posInPara = "end";
+		} else if (continued && pos.endsWith("head")) {
+			posInPara = "middle";
+		} else if (continued && pos.endsWith("end")) {
+			posInPara = "end";
+		} else if (!continued && pos.endsWith("whole")) {
+			posInPara = "whole";
+		} else if (!continued && pos.endsWith("head")) {
+			posInPara = "head";
+		} else if (!continued && pos.endsWith("end")) {
+			posInPara = "end";
+		}
+		if (orgParaPty != null) {
+			String breakAttribute = orgParaPty.getBreakBefore();
+			if (breakAttribute != null) {
+				if (posInPara.equals("head") || posInPara.equals("whole")) {
+					getParagraphPropertiesForWrite().setBreak("before",
+							breakAttribute);
+					handleBreak = true;
+				}
+			}
+			breakAttribute = orgParaPty.getBreakAfter();
+			if (breakAttribute != null) {
+				if (posInPara.equals("end") || posInPara.equals("whole")) {
+					getParagraphPropertiesForWrite().setBreak("after",
+							breakAttribute);
+					handleBreak = true;
+				}
+			}
+		}
+		String masterStyle = origParagraph
+				.getStyleHandler()
+				.getStyleElementForRead()
+				.getOdfAttributeValue(
+						OdfName.newName(OdfDocumentNamespace.STYLE,
+								"master-page-name"));
+		if (masterStyle != null && !masterStyle.isEmpty()) {
+			if (posInPara.equals("head") || posInPara.equals("whole")) {
+				getParagraphStyleElementForWrite().setOdfAttributeValue(
+						OdfName.newName(OdfDocumentNamespace.STYLE,
+								"master-page-name"), masterStyle);
+				handleBreak = true;
+				try {
+					int pageNumber = orgParaPty.getPageNumber();
+					if (pos.equals("head")) {
+						paragraphContainer.getStyleHandler()
+								.getParagraphPropertiesForWrite()
+								.setPageNumber(pageNumber);
+					}
+				} catch (NumberFormatException e) {
+					Logger.getLogger(ParagraphSelection.class.getName()).log(
+							Level.SEVERE, e.getMessage(), "NumberFormatException");
+				}
+			}
+		}
+		if (handleBreak && !posInPara.equals("whole"))
+			cleanBreakProperty(origParagraph);
+	}
+	private void cleanBreakProperty(Paragraph paragraph) {
+		TextNavigation search = this.textSelection.getTextNavigation();
+		if (search == null)
+			throw new IllegalStateException("Navigation is null");
+		OdfStyleBase styleElement = paragraph.getStyleHandler()
+				.getStyleElementForRead();
+		String name = styleElement.getAttribute("style:name");
+		String newName = null;
+		OdfElement modifiedStyleElement = search
+				.getModifiedStyleElement(styleElement);
+		if (modifiedStyleElement == null) {
+			modifiedStyleElement = (OdfElement) styleElement.cloneNode(true);
+			search.addModifiedStyleElement(styleElement, modifiedStyleElement);
+			NodeList paragraphProperties = modifiedStyleElement
+					.getElementsByTagName("style:paragraph-properties");
+			if (paragraphProperties != null
+					&& paragraphProperties.getLength() > 0) {
+				StyleParagraphPropertiesElement property = (StyleParagraphPropertiesElement) paragraphProperties
+						.item(0);
+				property.removeAttribute("fo:break-before");
+				property.removeAttribute("fo:break-after");
+				property.removeAttribute("style:page-number");
+			}
+			modifiedStyleElement.removeAttribute("style:master-page-name");
+			newName = name + "-" + makeUniqueName();
+			NamedNodeMap attributes = modifiedStyleElement.getAttributes();
+			if (attributes != null) {
+				for (int i = 0; i < attributes.getLength(); i++) {
+					Node item = attributes.item(i);
+					String value = item.getNodeValue();
+					if (name.equals(value)) {
+						item.setNodeValue(newName);
+						break;
+					}
+				}
+			}
+			styleElement.getParentNode().appendChild(modifiedStyleElement);
+		} else {
+			newName = modifiedStyleElement.getAttribute("style:name");
+		}
+		NamedNodeMap attributes = paragraph.getOdfElement().getAttributes();
+		if (attributes != null) {
+			for (int i = 0; i < attributes.getLength(); i++) {
+				Node item = attributes.item(i);
+				String value = item.getNodeValue();
+				if (name.equals(value)) {
+					item.setNodeValue(newName);
+					break;
+				}
+			}
+		}
+		this.textSelection.getTextNavigation().setHandlePageBreak(true);
+	}
+	String makeUniqueName() {
+		return String.format("p%06x", (int) (Math.random() * 0xffffff));
+	}
+	private void prepareParagraphContainer(int leftLength, int index,
+			boolean continued) {
 		if (paragraphContainer == null) {
+			String pos = "middle";
 			OdfElement rightparentElement = textSelection.getContainerElement();
 			int nodeLength = TextExtractor.getText(rightparentElement).length();
 			if(index==0){
 				if(leftLength==nodeLength){
 					//Replace whole Paragraph
-					Paragraph orgparagraph = Paragraph.getInstanceof((TextParagraphElementBase)rightparentElement);
-					TextDocument document = (TextDocument)orgparagraph.getOwnerDocument();
-					paragraphContainer = document.insertParagraph(orgparagraph, sourceParagraph, false);
+					Paragraph orgparagraph = Paragraph
+							.getInstanceof((TextParagraphElementBase) rightparentElement);
+					TextDocument document = (TextDocument) orgparagraph
+							.getOwnerDocument();
+					paragraphContainer = document.insertParagraph(orgparagraph,
+							sourceParagraph, false);
 					NodeList cnl = rightparentElement.getChildNodes();
-					for(int i=0;i<cnl.getLength();i++){
-						rightparentElement.removeChild(cnl.item(i));
-					}
+					pos = "whole";
+					handlePageBreak(orgparagraph, pos, continued);
+
+					rightparentElement.getParentNode().removeChild(
+							rightparentElement);
 				}else{
 					//at the start of original Paragraph, insert before original Paragraph
 					delete(index, leftLength, rightparentElement);
-					Paragraph orgparagraph = Paragraph.getInstanceof((TextParagraphElementBase)rightparentElement);
-					TextDocument document = (TextDocument)orgparagraph.getOwnerDocument();
-					paragraphContainer = document.insertParagraph(orgparagraph, sourceParagraph, true);					
-				}
+					Paragraph orgparagraph = Paragraph
+							.getInstanceof((TextParagraphElementBase) rightparentElement);
+					TextDocument document = (TextDocument) orgparagraph
+							.getOwnerDocument();
+					paragraphContainer = document.insertParagraph(orgparagraph,
+							sourceParagraph, true);
+					pos = "head";
+					handlePageBreak(orgparagraph, pos, continued);
 			}
-			else if(nodeLength==(index+leftLength)){
+			} else if (nodeLength == (index + leftLength)) {
 				//at the end of original Paragraph, insert after original Paragraph
 				delete(index, leftLength, rightparentElement);
-				Paragraph orgparagraph = Paragraph.getInstanceof((TextParagraphElementBase)rightparentElement);
-				TextDocument document = (TextDocument)orgparagraph.getOwnerDocument();
-				paragraphContainer = document.insertParagraph(orgparagraph, sourceParagraph, false);
+				Paragraph orgparagraph = Paragraph
+						.getInstanceof((TextParagraphElementBase) rightparentElement);
+				TextDocument document = (TextDocument) orgparagraph
+						.getOwnerDocument();
+				paragraphContainer = document.insertParagraph(orgparagraph,
+						sourceParagraph, false);
+				handlePageBreak(orgparagraph, pos, continued);
 			}else{
 				//at the middle of original Paragraph, split original Paragraph, insert before the second Paragraph.
 				delete(index, leftLength, rightparentElement);
 				Node leftparentElement = rightparentElement.cloneNode(true);
-				rightparentElement.getParentNode().insertBefore(leftparentElement,rightparentElement);
-				nodeLength = TextExtractor.getText((OdfElement) leftparentElement).length();
+				rightparentElement.getParentNode().insertBefore(
+						leftparentElement, rightparentElement);
+				nodeLength = TextExtractor.getText(
+						(OdfElement) leftparentElement).length();
 				delete(index, nodeLength-index, leftparentElement);
 				delete(0, index, rightparentElement);
-				Paragraph orgparagraph = Paragraph.getInstanceof((TextParagraphElementBase)rightparentElement);
-				TextDocument document = (TextDocument)orgparagraph.getOwnerDocument();
-				paragraphContainer = document.insertParagraph(orgparagraph, sourceParagraph, true);
+				Paragraph orgparagraph = Paragraph
+						.getInstanceof((TextParagraphElementBase) rightparentElement);
+				TextDocument document = (TextDocument) orgparagraph
+						.getOwnerDocument();
+				paragraphContainer = document.insertParagraph(orgparagraph,
+						sourceParagraph, true);
+				if (!continued)
+					cleanBreakProperty(orgparagraph);
 				
 			}
 		} else{
-			TextDocument document = (TextDocument)paragraphContainer.getOwnerDocument();
-			Paragraph tmp = document.insertParagraph(paragraphContainer, sourceParagraph, true);
+			TextDocument document = (TextDocument) paragraphContainer
+					.getOwnerDocument();
+			Paragraph tmp = document.insertParagraph(paragraphContainer,
+					sourceParagraph, true);
 			paragraphContainer.remove();
 			paragraphContainer=tmp;
 		}

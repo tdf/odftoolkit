@@ -34,6 +34,7 @@ import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextAElement;
 import org.odftoolkit.odfdom.dom.element.text.TextConditionalTextElement;
@@ -65,7 +66,9 @@ import org.odftoolkit.simple.draw.Image;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.text.Paragraph;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <code>TextSelection</code> describes a sub element in a paragraph element or
@@ -83,6 +86,7 @@ public class TextSelection extends Selection {
 	private OdfTextHeading mHeading;
 	private int mIndexInContainer;
 	private boolean mIsInserted;
+	private boolean isSelectionReplaced = false;
 
 	/**
 	 * Constructor of <code>TextSelection</code>.
@@ -96,7 +100,9 @@ public class TextSelection extends Selection {
 	 *            the start index of the text content in container element
 	 * 
 	 */
-	TextSelection(String text, OdfElement containerElement, int index) {
+	TextSelection(Navigation search, String text, OdfElement containerElement,
+			int index) {
+		this.search = search;
 		mMatchedText = text;
 		if (containerElement instanceof OdfTextParagraph) {
 			mParagraph = (OdfTextParagraph) containerElement;
@@ -106,6 +112,12 @@ public class TextSelection extends Selection {
 		mIndexInContainer = index;
 	}
 
+	public TextNavigation getTextNavigation() {
+		if (search instanceof TextNavigation) {
+			return (TextNavigation) search;
+		}
+		return null;
+	}
 	/**
 	 * Create a new <code>TextSelection</code>.
 	 * 
@@ -119,8 +131,10 @@ public class TextSelection extends Selection {
 	 * 
 	 * @since 0.5.5
 	 */
-	public static TextSelection newTextSelection(String text, OdfElement containerElement, int index) {
-		TextSelection selection = new TextSelection(text, containerElement, index);
+	public static TextSelection newTextSelection(Navigation search,
+			String text, OdfElement containerElement, int index) {
+		TextSelection selection = new TextSelection(search, text,
+				containerElement, index);
 		Selection.SelectionManager.registerItem(selection);
 		return selection;
 	}
@@ -539,6 +553,12 @@ public class TextSelection extends Selection {
 		adjustStyle(newElement, textSpan, null);
 		SelectionManager.refreshAfterPasteAtEndOf(this, positionItem);
 	}
+	public void setSelectionReplaced(boolean b) {
+		this.isSelectionReplaced = b;
+	}
+	public boolean isSelectionReplaced() {
+		return this.isSelectionReplaced;
+	}
 
 	/**
 	 * Add a hypertext reference to the selection.
@@ -650,6 +670,62 @@ public class TextSelection extends Selection {
 		}
 	}
 
+	void cleanBreakProperty(Paragraph paragraph) {
+		TextNavigation search = this.getTextNavigation();
+		if (search == null)
+			throw new IllegalStateException("Navigation is null");
+		OdfStyleBase styleElement = paragraph.getStyleHandler()
+				.getStyleElementForRead();
+		String name = styleElement.getAttribute("style:name");
+		String newName = null;
+		OdfElement modifiedStyleElement = search
+				.getModifiedStyleElement(styleElement);
+		if (modifiedStyleElement == null) {
+			modifiedStyleElement = (OdfElement) styleElement.cloneNode(true);
+			search.addModifiedStyleElement(styleElement, modifiedStyleElement);
+			NodeList paragraphProperties = modifiedStyleElement
+					.getElementsByTagName("style:paragraph-properties");
+			if (paragraphProperties != null
+					&& paragraphProperties.getLength() > 0) {
+				StyleParagraphPropertiesElement property = (StyleParagraphPropertiesElement) paragraphProperties
+						.item(0);
+				property.removeAttribute("fo:break-before");
+				property.removeAttribute("fo:break-after");
+				property.removeAttribute("style:page-number");
+			}
+			modifiedStyleElement.removeAttribute("style:master-page-name");
+			newName = name + "-" + makeUniqueName();
+			NamedNodeMap attributes = modifiedStyleElement.getAttributes();
+			if (attributes != null) {
+				for (int i = 0; i < attributes.getLength(); i++) {
+					Node item = attributes.item(i);
+					String value = item.getNodeValue();
+					if (name.equals(value)) {
+						item.setNodeValue(newName);
+						break;
+					}
+				}
+			}
+			styleElement.getParentNode().appendChild(modifiedStyleElement);
+		} else {
+			newName = modifiedStyleElement.getAttribute("style:name");
+		}
+		NamedNodeMap attributes = paragraph.getOdfElement().getAttributes();
+		if (attributes != null) {
+			for (int i = 0; i < attributes.getLength(); i++) {
+				Node item = attributes.item(i);
+				String value = item.getNodeValue();
+				if (name.equals(value)) {
+					item.setNodeValue(newName);
+					break;
+				}
+			}
+		}
+		this.getTextNavigation().setHandlePageBreak(true);
+	}
+	String makeUniqueName() {
+		return String.format("p%06x", (int) (Math.random() * 0xffffff));
+	}
 	/*
 	 * Return a new span that cover this selection and keep the original style
 	 * of this <code>Selection</code>.

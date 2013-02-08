@@ -63,6 +63,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleFontFaceElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
 import org.odftoolkit.odfdom.dom.element.table.TableTableTemplateElement;
@@ -2161,12 +2162,14 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 								}
 							}
 							boolean hasLoopStyleDef = true;
+							if (!(styleElement instanceof StyleFontFaceElement)) {
 							if (copyStyleEleList.get(styleElement) == null) {
 								List<OdfElement> styleRefEleList = new ArrayList<OdfElement>();
 								copyStyleEleList.put(styleElement, styleRefEleList);
 								hasLoopStyleDef = false;
 							}
 							copyStyleEleList.get(styleElement).add(styleRefElement);
+							}
 
 							OdfElement cloneStyleElement = appendStyleList.get(styleElement);
 							if (cloneStyleElement == null) {
@@ -2192,10 +2195,12 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	private void appendForeignStyleElement(OdfElement cloneStyleEle, OdfFileDom dom, String styleElePath) {
 		StringTokenizer token = new StringTokenizer(styleElePath, "/");
 		boolean isExist = true;
+		boolean found = false;
 		Node iterNode = dom.getFirstChild();
 		Node parentNode = dom;
 		while (token.hasMoreTokens()) {
 			String onePath = token.nextToken();
+			found = false;
 
 			while ((iterNode != null) && isExist) {
 				String path = iterNode.getNamespaceURI();
@@ -2213,12 +2218,13 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 					// found, then get the child nodes to find the next path
 					// node
 					parentNode = iterNode;
+					found = true;
 					iterNode = iterNode.getFirstChild();
 					break;
 				}
 			}
 
-			if (iterNode == null) {
+			if (!found) {
 				// should new the element since the current path node
 				if (isExist) {
 					isExist = false;

@@ -32,8 +32,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
+import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextAElement;
 import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
@@ -44,13 +46,19 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.common.TextExtractor;
 import org.odftoolkit.simple.common.field.Field;
 import org.odftoolkit.simple.common.field.Fields;
 import org.odftoolkit.simple.common.field.VariableField;
+import org.odftoolkit.simple.common.navigation.TextNavigation;
+import org.odftoolkit.simple.common.navigation.TextSelection;
+import org.odftoolkit.simple.common.navigation.TextSelectionTest;
 import org.odftoolkit.simple.draw.Image;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.FontStyle;
 import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.text.Paragraph;
+import org.odftoolkit.simple.text.Span;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -62,6 +70,7 @@ import org.w3c.dom.NodeList;
 public class TextSelectionTest {
 
 	private static final String TEXT_FILE = "TestTextSelection.odt";
+	private static final String TEST_FILE = "TestReplaceWithBasicCases.odt";
 	private static final String TEXT_COMMENT_FILE = "TestTextSelectionComment.odt";
 	private static final String SAVE_FILE_DELETE = "TextSelectionResultDelete.odt";
 	private static final String SAVE_FILE_STYLE = "TextSelectionResultStyle.odt";
@@ -548,6 +557,33 @@ public class TextSelectionTest {
 			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
+		doc = (TextDocument) Document.loadDocument(ResourceUtilities
+				.getAbsolutePath(TEST_FILE));
+		search = new TextNavigation("<<target>>", doc);
+		int i = 0;
+		try {
+			while (search.hasNext()) {
+				i++;
+				TextSelection item = (TextSelection) search.nextSelection();
+				table = sourcedoc.getTableByName("Table1");
+				Table newtable = item.replaceWith(table);
+				Assert.assertNotNull(newtable);
+				Assert.assertEquals(1, newtable.getHeaderColumnCount());
+				Assert.assertEquals(1, newtable.getHeaderRowCount());
+				Assert.assertEquals(7 + 1, newtable.getRowCount());
+				Assert.assertEquals(5 + 1, newtable.getColumnCount());
+				Cell cell = newtable.getCellByPosition(1, 1);
+				Assert.assertEquals("string", cell.getValueType());
+			}
+			doc.save(ResourceUtilities
+					.newTestOutputFile("TextSelectionReplacewithTableResult-BasicCases.odt"));
+			verifyReplaceWithTableByBasicCases("TextSelectionReplacewithTableResult-BasicCases.odt");
+		} catch (Exception e) {
+			Logger.getLogger(TextSelectionTest.class.getName()).log(
+					Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '"
+					+ e.getMessage() + "'");
+		}
 	}
 	
 	/**
@@ -556,9 +592,8 @@ public class TextSelectionTest {
 	 */
 	@Test
 	public void testReplacewithImage() throws Exception {
-		doc = (TextDocument) Document.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
+		// create source image
 		TextDocument sourcedoc = TextDocument.newTextDocument();
-		sourcedoc = TextDocument.newTextDocument();
 		Paragraph para = sourcedoc.addParagraph("helloImage");
 		Image image = Image.newImage(para, ResourceUtilities.getURI("image_list_item.png"));
 		image.setName("this image 1");
@@ -570,6 +605,7 @@ public class TextSelectionTest {
 		search = null;
 		// 6 Simple, at the middle of original Paragraph, split original
 		// Paragraph, insert before the second Paragraph.
+		doc = (TextDocument) Document.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
 		search = new TextNavigation("SIMPLE", doc);
 		int i = 0;
 		TextSelection item = null;
@@ -599,7 +635,6 @@ public class TextSelectionTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 		doc = (TextDocument) Document.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
-		search = null;
 		// 6 Simple, at the middle of original Paragraph, split original
 		// Paragraph, insert before the second Paragraph.
 		search = new TextNavigation("SIMPLE", doc);
@@ -623,6 +658,59 @@ public class TextSelectionTest {
 		} catch (Exception e) {
 			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+		doc = (TextDocument) Document.loadDocument(ResourceUtilities
+				.getAbsolutePath(TEST_FILE));
+		search = new TextNavigation("<<target>>", doc);
+		i = 0;
+		try {
+			while (search.hasNext()) {
+				i++;
+				item = (TextSelection) search.nextSelection();
+				URI imageuri = ResourceUtilities.getURI("image_list_item.png");
+				image = item.replaceWith(imageuri);
+				Assert.assertNotNull(image);
+				if (image.getName().startsWith("replace")) {
+					Assert.assertTrue(true);
+				} else {
+					Assert.fail();
+				}
+			}
+			Assert.assertEquals(11, i);
+			doc.save(ResourceUtilities
+					.newTestOutputFile("TextSelectionReplacewithImageResult-URI-BasicCases.odt"));
+			verifyReplaceWithImageByBasicCases("TextSelectionReplacewithImageResult-URI-BasicCases.odt");
+		} catch (Exception e) {
+			Logger.getLogger(TextSelectionTest.class.getName()).log(
+					Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '"
+					+ e.getMessage() + "'");
+		}
+		doc = (TextDocument) Document.loadDocument(ResourceUtilities
+				.getAbsolutePath(TEST_FILE));
+		search = new TextNavigation("<<target>>", doc);
+		i = 0;
+		try {
+			while (search.hasNext()) {
+				i++;
+				item = (TextSelection) search.nextSelection();
+				image = item.replaceWith(image);
+				Assert.assertNotNull(image);
+				if (image.getName().startsWith("replace")) {
+					Assert.assertTrue(true);
+				} else {
+					Assert.fail();
+				}
+			}
+			Assert.assertEquals(11, i);
+			doc.save(ResourceUtilities
+					.newTestOutputFile("TextSelectionReplacewithImageResult-BasicCases.odt"));
+			verifyReplaceWithImageByBasicCases("TextSelectionReplacewithImageResult-BasicCases.odt");
+		} catch (Exception e) {
+			Logger.getLogger(TextSelectionTest.class.getName()).log(
+					Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '"
+					+ e.getMessage() + "'");
 		}
 	}
 	
@@ -698,6 +786,30 @@ public class TextSelectionTest {
 		} catch (Exception e) {
 			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+		doc = (TextDocument) Document.loadDocument(ResourceUtilities
+				.getAbsolutePath(TEST_FILE));
+		search = new TextNavigation("<<target>>", doc);
+		i = 0;
+		try {
+			while (search.hasNext()) {
+				i++;
+				item = (TextSelection) search.nextSelection();
+				Paragraph paragraph = sourcedoc.getParagraphByIndex(1, true);
+				paragraph = item.replaceWith(paragraph);
+				Assert.assertNotNull(paragraph);
+				Assert.assertEquals(
+						TextExtractor.getText(paragraph.getOdfElement()),
+						"Hello2 from source document!");
+			}
+			doc.save(ResourceUtilities
+					.newTestOutputFile("TextSelectionReplacewithPararaphResult-BasicCases.odt"));
+			verifyReplaceWithParagraphByBasicCases("TextSelectionReplacewithPararaphResult-BasicCases.odt");
+		} catch (Exception e) {
+			Logger.getLogger(TextSelectionTest.class.getName()).log(
+					Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '"
+					+ e.getMessage() + "'");
 		}
 	}
 	/**
@@ -797,6 +909,210 @@ public class TextSelectionTest {
 		} catch (Exception e) {
 			Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+	}
+	private void verifyReplaceWithTableByBasicCases(String fileName) {
+		try {
+			doc = (TextDocument) Document.loadDocument(ResourceUtilities
+					.getAbsolutePath(fileName));
+			search = new TextNavigation("#1", doc);
+			while (search.hasNext()) {
+				OdfElement description = search.nextSelection().getElement();
+				OdfElement replacement = (OdfElement) description
+						.getNextSibling();
+				Assert.assertNotNull(replacement);
+				Assert.assertTrue(replacement instanceof TableTableElement);
+			}
+			search = new TextNavigation("#2", doc);
+			while (search.hasNext()) {
+				OdfElement description = search.nextSelection().getElement();
+				String contents;
+				do {
+					OdfElement replacement = (OdfElement) description
+							.getNextSibling();
+					Assert.assertNotNull(replacement);
+					contents = TextExtractor.getText(replacement);
+					if (contents.contains("<<target>>")) {
+						Assert.fail();
+					}
+				} while (contents.startsWith("#"));
+			}
+			search = new TextNavigation("#3", doc);
+			OdfElement description = search.nextSelection().getElement();
+			Node replacement = description.getNextSibling();
+			Assert.assertTrue(replacement instanceof TableTableElement);
+			Table table = Table.getInstance((TableTableElement) replacement);
+			String breakBefore = table.getStyleHandler()
+					.getTablePropertiesForRead().getBreakBefore();
+			Assert.assertNotNull(breakBefore);
+			description = search.nextSelection().getElement();
+			replacement = description.getNextSibling();
+			Assert.assertEquals("prefix", TextExtractor
+					.getText((TextParagraphElementBase) replacement));
+			Paragraph para = Paragraph
+					.getInstanceof((TextParagraphElementBase) replacement);
+			breakBefore = para.getStyleHandler()
+					.getParagraphPropertiesForRead().getBreakBefore();
+			Assert.assertNotNull(breakBefore);
+			replacement = replacement.getNextSibling();
+			Assert.assertTrue(replacement instanceof TableTableElement);
+			table = Table.getInstance((TableTableElement) replacement);
+			breakBefore = table.getStyleHandler().getTablePropertiesForRead()
+					.getBreakBefore();
+			Assert.assertNull(breakBefore);
+			replacement = replacement.getNextSibling();
+			Assert.assertEquals("suffix", TextExtractor
+					.getText((TextParagraphElementBase) replacement));
+			para = Paragraph
+					.getInstanceof((TextParagraphElementBase) replacement);
+			breakBefore = para.getStyleHandler()
+					.getParagraphPropertiesForRead().getBreakBefore();
+			Assert.assertNull(breakBefore);
+			description = search.nextSelection().getElement();
+			replacement = description.getNextSibling();
+			Assert.assertTrue(replacement instanceof TableTableElement);
+			table = Table.getInstance((TableTableElement) replacement);
+			String masterStyle = table.getStyleHandler()
+					.getStyleElementForRead()
+					.getAttribute("style:master-page-name");
+			Assert.assertNotNull(masterStyle);
+		} catch (Exception e) {
+			Logger.getLogger(TextSelectionTest.class.getName()).log(
+					Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '"
+					+ e.getMessage() + "'");
+		}
+	}
+	private void verifyReplaceWithImageByBasicCases(String fileName) {
+		try {
+			doc = (TextDocument) Document.loadDocument(ResourceUtilities
+					.getAbsolutePath(fileName));
+			search = new TextNavigation("#2", doc);
+			while (search.hasNext()) {
+				OdfElement description = search.nextSelection().getElement();
+				Node replacement = description.getNextSibling();
+				NodeList children = replacement.getChildNodes();
+				Assert.assertNotNull(children);
+				int count = 0;
+				for (int m = 0; m < children.getLength(); m++) {
+					if (children.item(m) instanceof DrawFrameElement) {
+						count++;
+					}
+				}
+				Assert.assertEquals(3, count);
+			}
+		} catch (Exception e) {
+			Logger.getLogger(TextSelectionTest.class.getName()).log(
+					Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '"
+					+ e.getMessage() + "'");
+		}
+	}
+	private void verifyReplaceWithParagraphByBasicCases(String fileName) {
+		try {
+			doc = (TextDocument) Document.loadDocument(ResourceUtilities
+					.getAbsolutePath(fileName));
+			search = new TextNavigation("#1", doc);
+			while (search.hasNext()) {
+				OdfElement description = search.nextSelection().getElement();
+				OdfElement replacement = (OdfElement) description
+						.getNextSibling();
+				Assert.assertNotNull(replacement);
+				Assert.assertEquals("Hello2 from source document!",
+						TextExtractor.getText(replacement));
+			}
+			search = new TextNavigation("#2", doc);
+			while (search.hasNext()) {
+				OdfElement description = search.nextSelection().getElement();
+				String contents;
+				do {
+					OdfElement replacement = (OdfElement) description
+							.getNextSibling();
+					Assert.assertNotNull(replacement);
+					contents = TextExtractor.getText(replacement);
+					if (contents.contains("<<target>>")) {
+						Assert.fail();
+					}
+				} while (contents.startsWith("#"));
+			}
+			search = new TextNavigation("#3", doc);
+			OdfElement description = search.nextSelection().getElement();
+			TextParagraphElementBase replacement = (TextParagraphElementBase) description
+					.getNextSibling();
+			Assert.assertEquals("Hello2 from source document!",
+					TextExtractor.getText(replacement));
+			Paragraph para = Paragraph.getInstanceof(replacement);
+			String breakBefore = para.getStyleHandler()
+					.getParagraphPropertiesForRead().getBreakBefore();
+			Assert.assertNotNull(breakBefore);
+			description = search.nextSelection().getElement();
+			replacement = (TextParagraphElementBase) description
+					.getNextSibling();
+			Assert.assertEquals("prefix", TextExtractor.getText(replacement));
+			para = Paragraph.getInstanceof(replacement);
+			breakBefore = para.getStyleHandler()
+					.getParagraphPropertiesForRead().getBreakBefore();
+			Assert.assertNotNull(breakBefore);
+			replacement = (TextParagraphElementBase) replacement
+					.getNextSibling();
+			Assert.assertEquals("Hello2 from source document!",
+					TextExtractor.getText(replacement));
+			para = Paragraph.getInstanceof(replacement);
+			breakBefore = para.getStyleHandler()
+					.getParagraphPropertiesForRead().getBreakBefore();
+			Assert.assertNull(breakBefore);
+			replacement = (TextParagraphElementBase) replacement
+					.getNextSibling();
+			Assert.assertEquals("suffix", TextExtractor.getText(replacement));
+			para = Paragraph.getInstanceof(replacement);
+			breakBefore = para.getStyleHandler()
+					.getParagraphPropertiesForRead().getBreakBefore();
+			Assert.assertNull(breakBefore);
+			description = search.nextSelection().getElement();
+			replacement = (TextParagraphElementBase) description
+					.getNextSibling();
+			Assert.assertEquals("Hello2 from source document!",
+					TextExtractor.getText(replacement));
+			para = Paragraph.getInstanceof(replacement);
+			String masterStyle = para.getStyleHandler()
+					.getStyleElementForRead()
+					.getAttribute("style:master-page-name");
+			Assert.assertNotNull(masterStyle);
+		} catch (Exception e) {
+			Logger.getLogger(TextSelectionTest.class.getName()).log(
+					Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '"
+					+ e.getMessage() + "'");
+		}
+	}
+	private void verifyReplaceWithTextDocumentByBasicCases(String fileName) {
+		try {
+			doc = (TextDocument) Document.loadDocument(ResourceUtilities
+					.getAbsolutePath(fileName));
+			search = new TextNavigation("This is the first paragraph", doc);
+			Assert.assertNotNull(search.hasNext());
+			TextParagraphElementBase pElement = (TextParagraphElementBase) search
+					.nextSelection().getElement();
+			Node nextPElement = pElement.getNextSibling();
+			Assert.assertTrue(nextPElement instanceof TextParagraphElementBase);
+			String contents = TextExtractor
+					.getText((TextParagraphElementBase) nextPElement);
+			if (!contents
+					.startsWith("This is a picture from the source document:"))
+				Assert.fail();
+			TextSpanElement spanEle = (TextSpanElement) pElement
+					.getElementsByTagName("text:span").item(0);
+			Span span = Span.getInstanceof(spanEle);
+			FontStyle fontStyle = span.getStyleHandler()
+					.getTextPropertiesForRead().getFontStyle();
+			Assert.assertEquals(FontStyle.BOLD, fontStyle);
+			Assert.assertTrue(doc.getContentDom().getDocument().getPackage()
+					.contains("Pictures/20000007000010550000107047D3E406.svm"));
+		} catch (Exception e) {
+			Logger.getLogger(TextSelectionTest.class.getName()).log(
+					Level.SEVERE, e.getMessage(), e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '"
+					+ e.getMessage() + "'");
 		}
 	}
 }

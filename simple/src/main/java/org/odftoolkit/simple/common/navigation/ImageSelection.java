@@ -60,12 +60,18 @@ public class ImageSelection extends Selection {
 	 */
 	public Image replaceWithImage(Image image) {
 		Image mImage =null;
+		if(search instanceof TextNavigation){
+			TextNavigation textSearch = (TextNavigation) search;
 		int leftLength = textSelection.getText().length();
 		int index = textSelection.getIndex();
 		mIsInserted = false;
 		OdfElement parentElement = textSelection.getContainerElement();
 		OdfFileDom ownerDom = (OdfFileDom) parentElement.getOwnerDocument();
 		
+			int nodeLength = TextExtractor.getText(
+					this.textSelection.getContainerElement()).length();
+			if (this.textSelection.getText().length() != nodeLength)
+				this.textSelection.setSelectionReplaced(true);
 		try {
 			if (imageContainer == null) {
 				delete(index, leftLength, parentElement);
@@ -100,6 +106,7 @@ public class ImageSelection extends Selection {
 		} catch (Exception e) {
 			Logger.getLogger(ImageSelection.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
+		}
 		return mImage;
 	}	
 	/**
@@ -112,11 +119,17 @@ public class ImageSelection extends Selection {
 	 */
 	public Image replaceWithImage(URI imageUri) {
 		Image mImage =null;
+		if(search instanceof TextNavigation){
+			TextNavigation textSearch = (TextNavigation) search;
 		int leftLength = textSelection.getText().length();
 		int index = textSelection.getIndex();
 		mIsInserted = false;
 		OdfElement parentElement = textSelection.getContainerElement();
 		OdfFileDom ownerDom = (OdfFileDom) parentElement.getOwnerDocument();
+			int nodeLength = TextExtractor.getText(
+					this.textSelection.getContainerElement()).length();
+			if (this.textSelection.getText().length() != nodeLength)
+				this.textSelection.setSelectionReplaced(true);
 		try{
 			if (imageContainer == null) {
 				delete(index, leftLength, parentElement);
@@ -149,6 +162,7 @@ public class ImageSelection extends Selection {
 			
 		} catch (Exception e) {
 			Logger.getLogger(ImageSelection.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			}
 		}
 		return mImage;
 	}	
@@ -237,7 +251,7 @@ public class ImageSelection extends Selection {
 	 */
 	public ImageSelection(TextSelection selection) {
 		textSelection = selection;
-		
+		search = textSelection.getTextNavigation();
 		imageContainer = null;
 	}
 

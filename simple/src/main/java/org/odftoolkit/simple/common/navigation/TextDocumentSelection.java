@@ -250,16 +250,14 @@ public class TextDocumentSelection extends Selection {
 		if (index == 0) {
 			if (leftLength == nodeLength) {
 				// Replace whole Paragraph
-				
+				OdfElement refElement = orgparagraph.getOdfElement();
 				for (int i = 0; i < clist.getLength(); i++) {
 					OdfElement node = (OdfElement) clist.item(i);
-					document.insertOdfElement(orgparagraph.getOdfElement(), sourceDocument, node, false);
+					refElement = document.insertOdfElement(refElement,
+							sourceDocument, node, false);
 				}
-				
-				NodeList cnl = rightparentElement.getChildNodes();
-				for (int i = 0; i < cnl.getLength(); i++) {
-					rightparentElement.removeChild(cnl.item(i));
-				}
+				rightparentElement.getParentNode().removeChild(
+						rightparentElement);
 			} else {
 				// at the start of original Paragraph, insert before original
 				// Paragraph

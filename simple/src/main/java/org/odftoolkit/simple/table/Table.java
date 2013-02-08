@@ -73,6 +73,7 @@ import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.style.DefaultStyleHandler;
 import org.odftoolkit.simple.text.Paragraph;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
@@ -101,6 +102,7 @@ public class Table extends Component {
 	IdentityHashMap<TableTableCellElementBase, Vector<Cell>> mCellRepository = new IdentityHashMap<TableTableCellElementBase, Vector<Cell>>();
 	IdentityHashMap<TableTableRowElement, Vector<Row>> mRowRepository = new IdentityHashMap<TableTableRowElement, Vector<Row>>();
 	IdentityHashMap<TableTableColumnElement, Vector<Column>> mColumnRepository = new IdentityHashMap<TableTableColumnElement, Vector<Column>>();
+	private DefaultStyleHandler mStyleHandler;
 	static {
 		IN_FORMAT.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
 	}
@@ -3268,6 +3270,11 @@ public class Table extends Component {
 		}
 	}
 	
+	public DefaultStyleHandler getStyleHandler() {
+		if (mStyleHandler == null)
+			mStyleHandler = new DefaultStyleHandler(this.getOdfElement());
+		return mStyleHandler;
+	}
 	// default iterator to iterate column item.
 	private class SimpleColumnIterator implements Iterator<Column> {
 		private Table ownerTable;

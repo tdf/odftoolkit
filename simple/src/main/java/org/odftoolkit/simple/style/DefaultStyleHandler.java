@@ -107,7 +107,15 @@ public class DefaultStyleHandler {
 	 * The writable graphics properties element.
 	 */
 	protected GraphicProperties mWritableGraphicProperties;
+	/**
+	 * The readable table properties element.
+	 */
+	protected TableProperties mTableProperties;
 
+	/**
+	 * The writable table properties element.
+	 */
+	protected TableProperties mWritableTableProperties;
 	/**
 	 * Constructor of DefaultStyleHandler
 	 * 
@@ -433,6 +441,78 @@ public class DefaultStyleHandler {
 		OdfStyle style = getStyleElementForWrite();
 		mWritableGraphicProperties = GraphicProperties.getOrCreateGraphicProperties(style);
 		return mWritableGraphicProperties;
+	}
+
+	/**
+	 * Return the table style properties definition for this component, only for
+	 * read function.
+	 * <p>
+	 * Null will be returned if there is no style definition.
+	 * Note if you try to write style properties to the returned object, errors
+	 * will be met with.
+	 * 
+	 * @return the table style properties definition for this component, only
+	 *         for read function
+	 */
+	public TableProperties getTablePropertiesForRead() {
+		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(
+				OdfStylePropertiesSet.TableProperties)) {
+			Logger.getLogger(DefaultStyleHandler.class.getName()).log(
+					Level.FINE,
+					"Table properties are not supported by style family: "
+							+ mOdfElement.getStyleFamily() + "!", "");
+			return null;
+		}
+
+		if (mWritableTableProperties != null)
+			return mWritableTableProperties;
+		else if (mTableProperties != null)
+			return mTableProperties;
+
+		OdfStyleBase style = getStyleElementForRead();
+		if (style == null) {
+			Logger.getLogger(DefaultStyleHandler.class.getName()).log(
+					Level.FINE, "No style definition is found!", "");
+			return null;
+		}
+		mTableProperties = TableProperties.getTableProperties(style);
+		if (mTableProperties != null)
+			return mTableProperties;
+		else {
+			Logger.getLogger(DefaultStyleHandler.class.getName()).log(
+					Level.FINE,
+					"No explicit table properties definition is found!", "");
+			return null;
+		}
+	}
+
+	/**
+	 * Return the table style properties definition for this component, for read
+	 * and write function.
+	 * <p>
+	 * An empty style definition will be created if there is no style
+	 * An empty table style properties definition will be created if there is no
+	 * explicit table style properties definition.
+	 * 
+	 * @return the table style properties definition for this component, for
+	 *         read and write function
+	 */
+	public TableProperties getTablePropertiesForWrite() {
+		if (!mFamilyProperties.get(mOdfElement.getStyleFamily()).contains(
+				OdfStylePropertiesSet.TableProperties)) {
+			Logger.getLogger(DefaultStyleHandler.class.getName()).log(
+					Level.FINE,
+					"Table properties are not supported by style family: "
+							+ mOdfElement.getStyleFamily() + "!", "");
+			return null;
+		}
+
+		if (mWritableTableProperties != null)
+			return mWritableTableProperties;
+		OdfStyle style = getStyleElementForWrite();
+		mWritableTableProperties = TableProperties
+				.getOrCreateTableProperties(style);
+		return mWritableTableProperties;
 	}
 
 	/**

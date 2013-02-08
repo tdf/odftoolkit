@@ -19,6 +19,8 @@ under the License.
 
 package org.odftoolkit.simple.style;
 
+import org.odftoolkit.odfdom.dom.attribute.fo.FoBreakAfterAttribute;
+import org.odftoolkit.odfdom.dom.attribute.fo.FoBreakBeforeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoMarginBottomAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoMarginLeftAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoMarginRightAttribute;
@@ -336,5 +338,37 @@ public class ParagraphProperties {
 
 		// return the value
 		return inchValueString;
+	}
+	public void setBreak(String breakPosition, String breakAttribute) {
+		if (breakPosition == null) {
+			return;
+		}
+		if (breakAttribute == null) {
+			if (breakPosition.equals("before")) {
+				mElement.removeAttribute(FoBreakBeforeAttribute.ATTRIBUTE_NAME
+						.getQName());
+			} else if (breakPosition.equals("after"))
+				mElement.removeAttribute(FoBreakAfterAttribute.ATTRIBUTE_NAME
+						.getQName());
+		} else if (breakPosition.equals("before")) {
+			mElement.setFoBreakBeforeAttribute(breakAttribute);
+		} else if (breakPosition.equals("after"))
+			mElement.setFoBreakAfterAttribute(breakAttribute);
+	}
+	public String getBreakBefore() {
+		return mElement.getFoBreakBeforeAttribute();
+	}
+	public String getBreakAfter() {
+		return mElement.getFoBreakAfterAttribute();
+	}
+	public int getPageNumber() {
+		return mElement.getStylePageNumberAttribute();
+	}
+	public void setPageNumber(int pageNumber) {
+		if (pageNumber > 0) {
+			mElement.setStylePageNumberAttribute(pageNumber);
+		} else {
+			mElement.removeAttribute("style:page-number");
+		}
 	}
 }

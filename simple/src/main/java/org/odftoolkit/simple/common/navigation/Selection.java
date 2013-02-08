@@ -33,6 +33,10 @@ public abstract class Selection {
 
 	private OdfElement mElement;
 	private int mIndex;
+	protected Navigation search;
+	public Navigation getNavigation() {
+		return search;
+	}
 
 	/**
 	 * Get the container element of this <code>Selection</code>.

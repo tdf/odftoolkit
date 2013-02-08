@@ -19,6 +19,7 @@ under the License.
 
 package org.odftoolkit.simple.common.navigation;
 
+import java.util.IdentityHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -26,6 +27,7 @@ import java.util.regex.Pattern;
 
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
@@ -48,9 +50,12 @@ public class TextNavigation extends Navigation {
 	private OdfElement mElement;
 	private TextSelection mNextSelectedItem;
 	private TextSelection mTempSelectedItem;
+	private TextSelection mReplacedItem;
+	private boolean handlePageBreak;
 	private String mNextText;
 	private int mNextIndex;
 	private boolean mbFinishFindInHeaderFooter;
+	private IdentityHashMap<OdfElement, OdfElement> modifiedStyleList;
 
 	/**
 	 * Construct <code>TextNavigation</code> with matched condition and
@@ -68,6 +73,7 @@ public class TextNavigation extends Navigation {
 		mNextSelectedItem = null;
 		mTempSelectedItem = null;
 		mbFinishFindInHeaderFooter = false;
+		setHandlePageBreak(false);
 	}
 
 	/**
@@ -99,6 +105,12 @@ public class TextNavigation extends Navigation {
 	public boolean hasNext() {
 		mTempSelectedItem = findNext(mNextSelectedItem);
 		return (mTempSelectedItem != null);
+	}
+	void setSelectedItem(TextSelection nextSelectedItem) {
+		this.mNextSelectedItem = nextSelectedItem;
+	}
+	TextSelection getSelectedItem() {
+		return this.mNextSelectedItem;
 	}
 
 	/**
@@ -271,8 +283,15 @@ public class TextNavigation extends Navigation {
 		int nextIndex = -1;
 		Matcher matcher = mPattern.matcher(content);
 		// start from the end index of the selected item
+		if (!selected.isSelectionReplaced()) {
 		if (((content.length() > index + selected.getText().length()))
 				&& (matcher.find(index + selected.getText().length()))) {
+				nextIndex = matcher.start();
+				int eIndex = matcher.end();
+				mNextText = content.substring(nextIndex, eIndex);
+			}
+		} else if (((content.length() >= index + selected.getText().length()))
+				&& (matcher.find(index))) {
 			// here just consider \n\r\t occupy one char
 			nextIndex = matcher.start();
 			int eIndex = matcher.end();
@@ -301,7 +320,8 @@ public class TextNavigation extends Navigation {
 			if (TableTableCellElementBase.class.isInstance(parent)) {
 				TableTableCellElementBase cellElement = (TableTableCellElementBase) parent;
 				Cell cell = Cell.getInstance(cellElement);
-				item = new CellSelection(mNextText, containerElement, nextIndex, cell);
+				item = new CellSelection(this, mNextText, containerElement,
+						nextIndex, cell);
 				break;
 			} else {
 				OdfName odfName = ((OdfElement) parent).getOdfName();
@@ -314,8 +334,35 @@ public class TextNavigation extends Navigation {
 			}
 		}
 		if (item == null) {
-			item = new TextSelection(mNextText, containerElement, nextIndex);
+			item = new TextSelection(this, mNextText, containerElement,
+					nextIndex);
 		}
 		return item;
+	}
+	OdfElement getModifiedStyleElement(OdfElement styleElement) {
+		if (modifiedStyleList == null)
+			return null;
+		return modifiedStyleList.get(styleElement);
+	}
+	void addModifiedStyleElement(OdfElement styleElment,
+			OdfElement modifiedStyleElement) {
+		if (modifiedStyleElement != null) {
+			if (modifiedStyleList == null) {
+				modifiedStyleList = new IdentityHashMap<OdfElement, OdfElement>();
+			}
+			modifiedStyleList.put(styleElment, modifiedStyleElement);
+		}
+	}
+	boolean isHandlePageBreak() {
+		return handlePageBreak;
+	}
+	void setHandlePageBreak(boolean handlePageBreak) {
+		this.handlePageBreak = handlePageBreak;
+	}
+	void setReplacedItem(TextSelection replacedItem) {
+		this.mReplacedItem = replacedItem;
+	}
+	TextSelection getReplacedItem() {
+		return this.mReplacedItem;
 	}
 }

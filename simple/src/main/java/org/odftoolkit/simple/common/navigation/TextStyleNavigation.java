@@ -151,7 +151,8 @@ public class TextStyleNavigation extends Navigation {
 		}
 		if (mNode != null) {
 			element = (OdfElement) getPHElement(mNode);
-			TextSelection item = new TextSelection(mText, element, mCurrentIndex);
+			TextSelection item = new TextSelection(this, mText, element,
+					mCurrentIndex);
 			return item;
 		}
 		return null;

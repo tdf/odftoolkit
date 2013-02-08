@@ -51,8 +51,9 @@ public class CellSelection extends TextSelection {
 	 * @param cell
 	 *            the table cell which is selected
 	 */
-	CellSelection(String text, OdfElement containerElement, int index, Cell cell) {
-		super(text, containerElement, index);
+	CellSelection(Navigation search, String text, OdfElement containerElement,
+			int index, Cell cell) {
+		super(search, text, containerElement, index);
 		mCell = cell;
 	}
 

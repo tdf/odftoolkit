@@ -1391,10 +1391,12 @@ public class TextDocument extends Document implements ListContainer,
 			 
 			OdfElement newOdfElement = (OdfElement) sourceOdfElement.cloneNode(true);
 			
-			if (isForeignNode)
-				copyForeignStyleRef(sourceOdfElement,sourceDocument);
-			if (isForeignNode) // not in a same document
-				newOdfElement = (OdfElement)  cloneForeignElement(newOdfElement, getContentDom(), true);
+			if (isForeignNode) {
+				copyForeignStyleRef(newOdfElement, sourceDocument);
+				copyLinkedRef(newOdfElement);
+				newOdfElement = (OdfElement) cloneForeignElement(newOdfElement,
+						getContentDom(), true);
+			}
 			
 			if (before) {
 				referenceOdfElement.getParentNode().insertBefore(newOdfElement, referenceOdfElement);
