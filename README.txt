@@ -52,7 +52,8 @@ build system. To build ODF Toolkit, use the following command in this directory:
     mvn clean install
 
 The simplest way to use these modules are just put the jars files in your classpath
-directly.
+directly. If you are not using maven you can see the versions of the major components for
+your release in CHANGES.txt.
 
 Documentation
 =============
