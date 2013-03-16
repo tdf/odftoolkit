@@ -34,6 +34,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.odftoolkit.Junit.AlphabeticalOrderedRunner;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
@@ -42,10 +44,12 @@ import org.odftoolkit.odfdom.dom.example.LoadMultipleTimes;
 import org.odftoolkit.odfdom.type.Duration;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
+@RunWith(AlphabeticalOrderedRunner.class)
 public class OfficeMetaTest {
 
 	private static final Logger LOG = Logger.getLogger(OfficeMetaTest.class.getName());
 	private String filename = "metaTest.odt";
+	private String filenameOut = "metaTest_OfficeMetaTest.odt";
 	private OdfTextDocument doc;
 	private OdfFileDom metadom;
 	private OdfOfficeMeta fMetadata;
@@ -61,22 +65,28 @@ public class OfficeMetaTest {
 	private Integer editingCycles = new Integer(4);
 	private Duration editingDuration = Duration.valueOf("P49DT11H8M9S");
 	private SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-
-	@Before
+	
+	@Before	
 	public void setUp() throws Exception {
-		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(filename));
+		// Former developer was writing into the original file, triggering a race discussion of regression tests working on all documents.
+		// Sometimes the file was changed (if this test ran earlier), sometimes not. Fixed by doing the test result in a new ODT output file
+		File newMetaFile = ResourceUtilities.newTestOutputFile(filenameOut);
+		if(!newMetaFile.exists()){
+			doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(filename));
+		}else{
+			doc = (OdfTextDocument) OdfTextDocument.loadDocument(newMetaFile);
+		}
+		
 		metadom = doc.getMetaDom();
 		fMetadata = new OdfOfficeMeta(metadom);
 	}
 
 	@After
 	public void tearDown() throws Exception {
-//		Thread.sleep(100);
-		doc.save(ResourceUtilities.getAbsolutePath(filename));
+		doc.save(ResourceUtilities.newTestOutputFile(filenameOut));
 		doc.close();
 		doc = null;
 		metadom = null;
-//		Thread.sleep(100);
 	}
 
 	@Test
@@ -139,42 +149,43 @@ public class OfficeMetaTest {
 	}
 
 	@Test
-	public void testSetGenerator() {
+	public void test1SetGenerator() {
 		fMetadata.setGenerator(generator);
 	}
 
 	@Test
-	public void testGetGenerator() {
+	public void test2GetGenerator() {
 		Assert.assertEquals(generator, fMetadata.getGenerator());
 	}
 
 	@Test
-	public void testSetDcTitle() {
+	public void test1SetDcTitle() {
 		fMetadata.setTitle(dctitle);
 	}
 
 	@Test
-	public void testGetDcTitle() {
+	public void test2GetDcTitle() {
 		Assert.assertEquals(dctitle, fMetadata.getTitle());
 	}
 
 	@Test
-	public void testSetDcDescription() {
+	public void test1SetDcDescription() {
 		fMetadata.setDescription(dcdescription);
 	}
 
 	@Test
-	public void testGetDcDescription() {
+	public void test2GetDcDescription() {
+		fMetadata.setDescription(dcdescription);
 		Assert.assertEquals(dcdescription, fMetadata.getDescription());
 	}
 
 	@Test
-	public void testSetSubject() {
+	public void test1SetSubject() {
 		fMetadata.setSubject(subject);
 	}
 
 	@Test
-	public void testGetSubject() {
+	public void test2GetSubject() {
 		Assert.assertEquals(subject, fMetadata.getSubject());
 	}
 
@@ -190,32 +201,33 @@ public class OfficeMetaTest {
 	}
 
 	@Test
-	public void testSetInitialCreator() {
+	public void test1SetInitialCreator() {
 		fMetadata.setInitialCreator(initialCreator);
 	}
 
 	@Test
-	public void testGetInitialCreator() {
+	public void test2GetInitialCreator() {
 		Assert.assertEquals(initialCreator, fMetadata.getInitialCreator());
 	}
 
 	@Test
-	public void testSetDcCreator() {
+	public void test1SetDcCreator() {
 		fMetadata.setCreator(dccreator);
 	}
 
 	@Test
-	public void testGetDcCreator() {
+	public void test2GetDcCreator() {
+		fMetadata.setCreator(dccreator);
 		Assert.assertEquals(dccreator, fMetadata.getCreator());
 	}
 
 	@Test
-	public void testSetPrintedBy() {
+	public void test1SetPrintedBy() {
 		fMetadata.setPrintedBy(printedBy);
 	}
 
 	@Test
-	public void testGetPrintedBy() {
+	public void test2GetPrintedBy() {
 		Assert.assertEquals(printedBy, fMetadata.getPrintedBy());
 	}
 
@@ -264,32 +276,32 @@ public class OfficeMetaTest {
 	}
 
 	@Test
-	public void testSetLanguage() {
+	public void test1SetLanguage() {
 		fMetadata.setLanguage(language);
 	}
 
 	@Test
-	public void testGetLanguage() {
+	public void test2GetLanguage() {
 		Assert.assertEquals(language, fMetadata.getLanguage());
 	}
 
 	@Test
-	public void testSetEditingCycles() {
+	public void test1SetEditingCycles() {
 		fMetadata.setEditingCycles(editingCycles);
 	}
 
 	@Test
-	public void testGetEditingCycles() {
+	public void test2GetEditingCycles() {
 		Assert.assertNotNull(fMetadata.getEditingCycles());
 	}
 
 	@Test
-	public void testSetEditingDuration() {
+	public void test1SetEditingDuration() {
 		fMetadata.setEditingDuration(editingDuration);
 	}
 
 	@Test
-	public void testGetEditingDuration() {
+	public void test2GetEditingDuration() {
 		Assert.assertNotNull(fMetadata.getEditingDuration());
 	}
 

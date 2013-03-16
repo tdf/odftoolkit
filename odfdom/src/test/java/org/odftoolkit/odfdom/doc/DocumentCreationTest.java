@@ -30,6 +30,8 @@ import javax.xml.xpath.XPathConstants;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.odftoolkit.Junit.AlphabeticalOrderedRunner;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
@@ -54,13 +56,15 @@ import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
+@RunWith(AlphabeticalOrderedRunner.class)
 public class DocumentCreationTest {
 
 	private static final Logger LOG = Logger.getLogger(DocumentCreationTest.class.getName());
 	private static final String TEST_FILE_FOLDER = ResourceUtilities.getTestOutputFolder();
 	private static final String TEST_FILE_EMBEDDED = TEST_FILE_FOLDER + "testEmbeddedDoc.odt";
 	private static final String TEST_PIC = "testA.jpg";
-	private static final String TEST_SPAN_TEXT = " Find Truth!!!";
+	// Changed leading space against character as leading space have to be <text:s/> element in ODF, see http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html#White-space_Characters 
+	private static final String TEST_SPAN_TEXT = "*Find Truth!!!";
 	private static final String TEST_FILE_ACCESS_EMBEDDED = TEST_FILE_FOLDER + "TestAccess_EmbeddedDocument.odt";
 	private static final String TEST_FILE_EMBEDDED_EMBEDDED = TEST_FILE_FOLDER + "TestAccess_EmbeddedinEmbedded.odt";
 	private static final String TEST_FILE_SAVE_EMBEDDED = TEST_FILE_FOLDER + "testSaveEmbeddedDoc.odt";
@@ -73,7 +77,7 @@ public class DocumentCreationTest {
 	private static final String CORRUPTED_MIMETYPE_CHART_OUT = TEST_FILE_FOLDER + "TestSaveCorruptedMimetypeChart.odc";
 
 	@Test
-	public void createEmptyDocs() {
+	public void _1_createEmptyDocs() {
 		try {
 			OdfTextDocument odtDoc1 = OdfTextDocument.newTextDocument();
 			OdfTextDocument odtDoc2 = OdfTextDocument.newTextDocument();
@@ -156,7 +160,7 @@ public class DocumentCreationTest {
 	}
 
 	@Test
-	public void createEmbeddedDocs() {
+	public void _2_createEmbeddedDocs() {
 		try {
 			OdfTextDocument odtDoc1 = OdfTextDocument.newTextDocument();
 
@@ -203,7 +207,7 @@ public class DocumentCreationTest {
 	}
 
 	@Test
-	public void accessEmbeddedDocs() {
+	public void _3_accessEmbeddedDocs() {
 		try {
 			OdfDocument docWithEmbeddedObjects = OdfDocument.loadDocument(TEST_FILE_EMBEDDED);
 			Map<String, OdfDocument> embDocs = docWithEmbeddedObjects.loadSubDocuments();
@@ -265,7 +269,7 @@ public class DocumentCreationTest {
 	}
 
 	@Test
-	public void accessEmbeddedWithinEmbeddedDocs() {
+	public void _4_accessEmbeddedWithinEmbeddedDocs() {
 
 		try {
 			OdfDocument rootDocument = OdfDocument.loadDocument(TEST_FILE_EMBEDDED);
@@ -316,7 +320,7 @@ public class DocumentCreationTest {
 	}
 
 	@Test
-	public void testCacheDocuments() {
+	public void _5_testCacheDocuments() {
 		OdfDocument docWithEmbeddedObjects;
 		try {
 			docWithEmbeddedObjects = OdfDocument.loadDocument(TEST_FILE_EMBEDDED);
@@ -337,7 +341,7 @@ public class DocumentCreationTest {
 	}
 
 	@Test
-	public void testSaveEmbeddedDocuments() {
+	public void _6_testSaveEmbeddedDocuments() {
 		OdfDocument docWithEmbeddedObjects;
 		try {
 			docWithEmbeddedObjects = OdfDocument.loadDocument(TEST_FILE_SAVE_EMBEDDED);
@@ -406,7 +410,7 @@ public class DocumentCreationTest {
 	 * docA containing docB, like
 	 * OdfPackage/dummy/docA/docB
 	 */
-	public void testDocumentWithQueerPath() {
+	public void _7_testDocumentWithQueerPath() {
 		try {
 
 			OdfDocument containerDoc = OdfTextDocument.newTextDocument();
@@ -433,7 +437,7 @@ public class DocumentCreationTest {
 	 * ODF package.
 	 */
 	@Test
-	public void testWritingCorrectMimetype() {
+	public void _8_testWritingCorrectMimetype() {
 		try {
 			OdfDocument docWithCorruptedMimetype = OdfDocument.loadDocument(CORRUPTED_MIMETYPE_DOC);
 			docWithCorruptedMimetype.save(CORRUPTED_MIMETYPE_DOC_OUT);
