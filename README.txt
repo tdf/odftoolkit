@@ -5,7 +5,7 @@
         
 ====================================================================================
 
-The Apache ODF Toolkit (incuating) is a set of Java modules that allow programmatic 
+The Apache ODF Toolkit (incubating) is a set of Java modules that allow programmatic 
 creation, scanning and manipulation of Open Document Format (ISO/IEC 26300 == ODF) 
 documents. Unlike other approaches which rely on runtime manipulation of heavy-weight 
 editors via an automation interface, the ODF Toolkit is lightweight and ideal for 
