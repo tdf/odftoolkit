@@ -364,6 +364,21 @@
                                               </fileset>
                                         </checksum>
                                         <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA1" property="checksum" />                                
+                                        <copy todir="${basedir}/target/release/${project.version}/">  
+                                            <fileset dir="${basedir}/target">   
+                                                <include name="*-src.*" />
+                                            </fileset>
+                                        </copy>
+                                        <copy todir="${basedir}/target/release/${project.version}/binaries">  
+                                            <fileset dir="${basedir}/target">   
+                                                <include name="*-bin.*" />
+                                            </fileset>
+                                        </copy>
+                                        <copy todir="${basedir}/target/release/${project.version}/docs">  
+                                            <fileset dir="${basedir}/target">   
+                                                <include name="*-doc.*" />
+                                            </fileset>
+                                        </copy>
                                         <echo file="${basedir}/target/vote.txt">
                                             From: ${username}@apache.org
                                             To: odf-dev@incubator.apache.org
