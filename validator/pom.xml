@@ -24,17 +24,17 @@
 	<parent>
 		<groupId>org.apache.odftoolkit</groupId>
 		<artifactId>odftoolkit</artifactId>
-		<version>0.6-incubating</version>
+		<version>0.6.1-incubating-SNAPSHOT</version>
 	</parent>
 	<artifactId>odfvalidator</artifactId>
-	<version>1.1.6-incubating</version>
+	<version>1.1.7-incubating-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>odfdom-java</artifactId>
-			<version>0.8.9-incubating</version>
+			<version>0.8.10-incubating-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
