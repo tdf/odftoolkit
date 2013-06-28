@@ -24,11 +24,11 @@
     <parent>
         <groupId>org.apache.odftoolkit</groupId>
         <artifactId>odftoolkit</artifactId>
-        <version>0.6.1-incubating</version>
+        <version>0.6.1-incubating-SNAPSHOT</version>
     </parent>
 
     <artifactId>taglets</artifactId>
-    <version>0.8.10-incubating</version>
+    <version>0.8.10-incubating-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- Build Settings -->
@@ -110,9 +110,9 @@
         <url>http://www.apache.org/</url>
     </organization>
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.1-incubating-RC1/taglets</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.1-incubating-RC1/taglets</developerConnection>
-        <url>http://svn.apache.org/viewvc/incubator/odf/tags/odftoolkit-0.6.1-incubating-RC1/taglets</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/taglets</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/taglets</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/trunk/taglets</url>
     </scm>
     <profiles>
 		<profile>
