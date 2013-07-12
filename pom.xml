@@ -242,6 +242,7 @@
                             <excludes>
                                 <exclude>CHANGES.txt</exclude>
 								<exclude>.gitignore</exclude>
+                                <exclude>DEPENDENCIES</exclude>
                             </excludes>
                         </configuration>
                         <executions>
