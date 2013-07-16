@@ -2467,7 +2467,7 @@ public class Table extends Component {
 			}
 		}
 		// 2. if mediumRow becomes as top row, revise style
-		if (deleted && startIndex == 0) {
+		if (deleted && startIndex == 0 && getRowCount() > 0) {
 			Row aRow = getRowByIndex(0);
 			reviseStyleFromMediumRowToTopRow(aRow);
 		}

@@ -1175,6 +1175,18 @@ public class TableTest {
 		}
 	}
 
+	@Test
+	public void testDeleteRowsOnEmptyTable() throws Exception {
+		SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
+		Table odfTable = doc.addTable();
+		// two rows are created by default
+		Assert.assertEquals(2, odfTable.getRowCount());
+		while(odfTable.getRowCount() != 0) {
+			odfTable.removeRowsByIndex(0, 1);
+		}
+		Assert.assertEquals(0, odfTable.getRowCount());
+	}
+
 	private void testAppendRow(TableTableElement table) {
 		Table fTable = Table.getInstance(table);
 		int count = fTable.getRowCount();

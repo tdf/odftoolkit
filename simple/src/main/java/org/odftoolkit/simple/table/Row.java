@@ -958,16 +958,19 @@ public class Row extends Component {
 		Table table = getTable();
 		for (int i = 0; i < table.getColumnCount();) {
 			Cell cell = getCellByIndex(i);
-			if (cell.isCoveredElement()) {
-				// cell is a cover cell
-				Cell coverCell = cell.getCoverCellInSameColumn();
-				if (coverCell != null) {
-					coverCell.setRowSpannedNumber(coverCell.getRowSpannedNumber() - getRowsRepeatedNumber());
-				}
-				getOdfElement().removeChild(cell.getOdfElement());
+			if (cell == null) {
+				// cell might be null for empty row
+				i++;
 			} else {
-				// cell is not a cover cell and it span more rows
-				if (cell.getRowSpannedNumber() > 1) {
+				if (cell.isCoveredElement()) {
+					// cell is a cover cell
+					Cell coverCell = cell.getCoverCellInSameColumn();
+					if (coverCell != null) {
+						coverCell.setRowSpannedNumber(coverCell.getRowSpannedNumber() - getRowsRepeatedNumber());
+					}
+					getOdfElement().removeChild(cell.getOdfElement());
+				} else if (cell.getRowSpannedNumber() > 1) {
+					// cell is not a cover cell and it span more rows
 					// split the cell under this cell to a single cell
 					Row nextRow = table.getRowByIndex(getRowIndex() + 1);
 					if (nextRow.getRowsRepeatedNumber() > 1) {
@@ -990,8 +993,8 @@ public class Row extends Component {
 					coveredCell.getOdfElement().getParentNode().replaceChild(newCellEle, coveredCell.getOdfElement());
 					table.updateRepositoryWhenCellElementChanged(startRow, endRow, startClm, endClm, newCellEle);
 				}
+				i += cell.getColumnSpannedNumber();
 			}
-			i += cell.getColumnSpannedNumber();
 		}
 	}
 }
