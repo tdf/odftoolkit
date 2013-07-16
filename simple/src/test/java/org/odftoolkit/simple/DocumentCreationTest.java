@@ -29,6 +29,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -72,143 +73,133 @@ public class DocumentCreationTest {
 	private static final String CORRUPTED_MIMETYPE_CHART = TEST_FILE_FOLDER + "CorruptedMimetypeChart.odc";
 	private static final String CORRUPTED_MIMETYPE_CHART_OUT = TEST_FILE_FOLDER + "TestSaveCorruptedMimetypeChart.odc";
 
-	@Test
-	public void createEmptyDocs() {
-		try {
-			TextDocument odtDoc1 = TextDocument.newTextDocument();
-			TextDocument odtDoc2 = TextDocument.newTextDocument();
-			odtDoc2.getContentDom();
-			odtDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfTextDocument.odt"));
+	@BeforeClass
+	public static void createEmptyDocs() throws Exception {
+		TextDocument odtDoc1 = TextDocument.newTextDocument();
+		TextDocument odtDoc2 = TextDocument.newTextDocument();
+		odtDoc2.getContentDom();
+		odtDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfTextDocument.odt"));
 
-			GraphicsDocument odgDoc1 = GraphicsDocument.newGraphicsDocument();
-			GraphicsDocument odgDoc2 = GraphicsDocument.newGraphicsDocument();
-			odgDoc2.getContentDom();
-			odgDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfGraphicsDocument.odg"));
+		GraphicsDocument odgDoc1 = GraphicsDocument.newGraphicsDocument();
+		GraphicsDocument odgDoc2 = GraphicsDocument.newGraphicsDocument();
+		odgDoc2.getContentDom();
+		odgDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfGraphicsDocument.odg"));
 
-			SpreadsheetDocument odsDoc1 = SpreadsheetDocument.newSpreadsheetDocument();
-			SpreadsheetDocument odsDoc2 = SpreadsheetDocument.newSpreadsheetDocument();
-			odsDoc2.getContentDom();
-			odsDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfSpreadsheetDocument.ods"));
+		SpreadsheetDocument odsDoc1 = SpreadsheetDocument.newSpreadsheetDocument();
+		SpreadsheetDocument odsDoc2 = SpreadsheetDocument.newSpreadsheetDocument();
+		odsDoc2.getContentDom();
+		odsDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfSpreadsheetDocument.ods"));
 
-			PresentationDocument odpDoc1 = PresentationDocument.newPresentationDocument();
-			PresentationDocument odpDoc2 = PresentationDocument.newPresentationDocument();
-			odpDoc2.getContentDom();
-			odpDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfPresentationDocument.odp"));
+		PresentationDocument odpDoc1 = PresentationDocument.newPresentationDocument();
+		PresentationDocument odpDoc2 = PresentationDocument.newPresentationDocument();
+		odpDoc2.getContentDom();
+		odpDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfPresentationDocument.odp"));
 
-			ChartDocument odcDoc1 = ChartDocument.newChartDocument();
-			ChartDocument odcDoc2 = ChartDocument.newChartDocument();
-			odcDoc2.getContentDom();
-			odcDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfChartDocument.odc"));
+		ChartDocument odcDoc1 = ChartDocument.newChartDocument();
+		ChartDocument odcDoc2 = ChartDocument.newChartDocument();
+		odcDoc2.getContentDom();
+		odcDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfChartDocument.odc"));
 
-			// loads the ODF document package from the path
-			OdfPackage pkg = OdfPackage.loadPackage(ResourceUtilities
-					.getTestResourceAsStream("TestEmpty_OdfTextDocument.odt"));
+		// loads the ODF document package from the path
+		OdfPackage pkg = OdfPackage.loadPackage(ResourceUtilities
+				.getTestResourceAsStream("TestEmpty_OdfTextDocument.odt"));
 
-			// loads the images from the URLs and inserts the image in the
-			// package, adapting the manifest
-			pkg.insert(ResourceUtilities.getURI(TEST_PIC), "Pictures/" + TEST_PIC, null);
-			// Deactivated as test fail, when test machine is not online
-			// (painful for offline work)
-			// pkg.insert(new
-			// URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"),
-			// "someweiredname/tableandfruits.jpg", null);
-			pkg.save(ResourceUtilities.newTestOutputFile("simple-wiki-package.odt"));
+		// loads the images from the URLs and inserts the image in the
+		// package, adapting the manifest
+		pkg.insert(ResourceUtilities.getURI(TEST_PIC), "Pictures/" + TEST_PIC, null);
+		// Deactivated as test fail, when test machine is not online
+		// (painful for offline work)
+		// pkg.insert(new
+		// URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"),
+		// "someweiredname/tableandfruits.jpg", null);
+		pkg.save(ResourceUtilities.newTestOutputFile("simple-wiki-package.odt"));
 
-			// loads the ODF document from the path
-			Document odfDoc = Document.loadDocument(ResourceUtilities
-					.getTestResourceAsStream("TestEmpty_OdfTextDocument.odt"));
+		// loads the ODF document from the path
+		Document odfDoc = Document.loadDocument(ResourceUtilities
+				.getTestResourceAsStream("TestEmpty_OdfTextDocument.odt"));
 
-			// get the ODF content as DOM tree representation
-			OdfFileDom odfContent = odfDoc.getContentDom();
+		// get the ODF content as DOM tree representation
+		OdfFileDom odfContent = odfDoc.getContentDom();
 
-			// // W3C XPath initialization ''(JDK5 functionality)'' - XPath is
-			// the path within the XML file
-			// // (Find XPath examples here:
-			// http://www.w3.org/TR/xpath#path-abbrev)
-			XPath xpath2 = odfContent.getXPath();
+		// // W3C XPath initialization ''(JDK5 functionality)'' - XPath is
+		// the path within the XML file
+		// // (Find XPath examples here:
+		// http://www.w3.org/TR/xpath#path-abbrev)
+		XPath xpath2 = odfContent.getXPath();
 
-			// receiving the first paragraph "//text:p[1]" ''(JDK5
-			// functionality)''
-			TextPElement para = (TextPElement) xpath2.evaluate("//text:p[1]", odfContent, XPathConstants.NODE);
+		// receiving the first paragraph "//text:p[1]" ''(JDK5
+		// functionality)''
+		TextPElement para = (TextPElement) xpath2.evaluate("//text:p[1]", odfContent, XPathConstants.NODE);
 
-			// adding an image - expecting the user to know that
-			// an image consists always of a 'draw:image' and a 'draw:frame'
-			// parent
+		// adding an image - expecting the user to know that
+		// an image consists always of a 'draw:image' and a 'draw:frame'
+		// parent
 
-			// FUTURE USAGE:
-			// para.createDrawFrame().createDrawImage("/myweb.org/images/myHoliday.png",
-			// "/Pictures/myHoliday.png");
-			// Child access methods are still not part of the v0.6.x releases
-			// CURRENT USAGE:
-			OdfDrawFrame odfFrame = (OdfDrawFrame) OdfXMLFactory.newOdfElement(odfContent,
-					DrawFrameElement.ELEMENT_NAME);
-			para.appendChild(odfFrame);
-			OdfDrawImage odfImage = (OdfDrawImage) OdfXMLFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
-			odfFrame.appendChild(odfImage);
-			odfImage.newImage(ResourceUtilities.getURI(TEST_PIC));
+		// FUTURE USAGE:
+		// para.createDrawFrame().createDrawImage("/myweb.org/images/myHoliday.png",
+		// "/Pictures/myHoliday.png");
+		// Child access methods are still not part of the v0.6.x releases
+		// CURRENT USAGE:
+		OdfDrawFrame odfFrame = (OdfDrawFrame) OdfXMLFactory.newOdfElement(odfContent,
+				DrawFrameElement.ELEMENT_NAME);
+		para.appendChild(odfFrame);
+		OdfDrawImage odfImage = (OdfDrawImage) OdfXMLFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
+		odfFrame.appendChild(odfImage);
+		odfImage.newImage(ResourceUtilities.getURI(TEST_PIC));
 
-			OdfDrawImage odfImage2 = (OdfDrawImage) OdfXMLFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
-			odfFrame.appendChild(odfImage2);
-			// Deactivated as test fail, when test machine is not online
-			// (painful for offline work)
-			// odfImage2.newImage(new
-			// URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"));
-			odfDoc.save(ResourceUtilities.newTestOutputFile("simple-wiki-dom.odt"));
+		OdfDrawImage odfImage2 = (OdfDrawImage) OdfXMLFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
+		odfFrame.appendChild(odfImage2);
+		// Deactivated as test fail, when test machine is not online
+		// (painful for offline work)
+		// odfImage2.newImage(new
+		// URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"));
+		odfDoc.save(ResourceUtilities.newTestOutputFile("simple-wiki-dom.odt"));
 
-		} catch (Exception e) {
-			LOG.log(Level.SEVERE, null, e);
-			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
-		}
 	}
 
 	@Test
-	public void createEmbeddedDocs() {
-		try {
-			TextDocument odtDoc1 = TextDocument.newTextDocument();
+	public void createEmbeddedDocs() throws Exception {
+		TextDocument odtDoc1 = TextDocument.newTextDocument();
 
-			odtDoc1.insertDocument(TextDocument.newTextDocument(), "Object1/");
-			odtDoc1.insertDocument(TextDocument.newTextDocument(), "Object2/");
-			odtDoc1.insertDocument(Document.loadDocument(ResourceUtilities
-					.getTestResourceAsStream("TestEmpty_OdfGraphicsDocument.odg")), "Object3");
-			odtDoc1.insertDocument(ChartDocument.newChartDocument(), "Object4");
-			odtDoc1.insertDocument(GraphicsDocument.newGraphicsDocument(), "Object5");
-			odtDoc1.insertDocument(PresentationDocument.newPresentationDocument(), "Object6");
+		odtDoc1.insertDocument(TextDocument.newTextDocument(), "Object1/");
+		odtDoc1.insertDocument(TextDocument.newTextDocument(), "Object2/");
+		odtDoc1.insertDocument(Document.loadDocument(ResourceUtilities
+				.getTestResourceAsStream("TestEmpty_OdfGraphicsDocument.odg")), "Object3");
+		odtDoc1.insertDocument(ChartDocument.newChartDocument(), "Object4");
+		odtDoc1.insertDocument(GraphicsDocument.newGraphicsDocument(), "Object5");
+		odtDoc1.insertDocument(PresentationDocument.newPresentationDocument(), "Object6");
 
-			List<Document> embeddedDocs = odtDoc1.getEmbeddedDocuments();
-			LOG.log(Level.INFO, "Embedded Document count: {0}", embeddedDocs.size());
-			odtDoc1.save(ResourceUtilities.newTestOutputFile("TestCreate_EmbeddedDocuments.odt"));
+		List<Document> embeddedDocs = odtDoc1.getEmbeddedDocuments();
+		LOG.log(Level.INFO, "Embedded Document count: {0}", embeddedDocs.size());
+		odtDoc1.save(ResourceUtilities.newTestOutputFile("TestCreate_EmbeddedDocuments.odt"));
 
-			Assert.assertTrue(embeddedDocs.size() == 6);
+		Assert.assertTrue(embeddedDocs.size() == 6);
 
-			List<Document> embeddedTextDocs = odtDoc1.getEmbeddedDocuments(Document.OdfMediaType.TEXT);
-			LOG.log(Level.INFO, "Only Embedded Text Docs Size: {0}", embeddedTextDocs.size());
-			Assert.assertTrue(embeddedTextDocs.size() == 2);
+		List<Document> embeddedTextDocs = odtDoc1.getEmbeddedDocuments(Document.OdfMediaType.TEXT);
+		LOG.log(Level.INFO, "Only Embedded Text Docs Size: {0}", embeddedTextDocs.size());
+		Assert.assertTrue(embeddedTextDocs.size() == 2);
 
-			List<Document> embeddedChartDocs = odtDoc1.getEmbeddedDocuments(Document.OdfMediaType.CHART);
-			LOG.log(Level.INFO, "Only Embedded Chart Docs Size: {0}", embeddedChartDocs.size());
-			Assert.assertTrue(embeddedChartDocs.size() == 1);
+		List<Document> embeddedChartDocs = odtDoc1.getEmbeddedDocuments(Document.OdfMediaType.CHART);
+		LOG.log(Level.INFO, "Only Embedded Chart Docs Size: {0}", embeddedChartDocs.size());
+		Assert.assertTrue(embeddedChartDocs.size() == 1);
 
-			Document embeddedObject1 = odtDoc1.getEmbeddedDocument("Object1/");
-			LOG.log(Level.INFO, "Embedded Object1 path: {0}", embeddedObject1.getDocumentPath());
-			LOG.log(Level.INFO, "Embedded Object1 media-type: {0}", embeddedObject1.getMediaTypeString());
-			Assert.assertEquals(embeddedObject1.getMediaTypeString(), Document.OdfMediaType.TEXT.getMediaTypeString());
+		Document embeddedObject1 = odtDoc1.getEmbeddedDocument("Object1/");
+		LOG.log(Level.INFO, "Embedded Object1 path: {0}", embeddedObject1.getDocumentPath());
+		LOG.log(Level.INFO, "Embedded Object1 media-type: {0}", embeddedObject1.getMediaTypeString());
+		Assert.assertEquals(embeddedObject1.getMediaTypeString(), Document.OdfMediaType.TEXT.getMediaTypeString());
 
-			Document embeddedObject3 = odtDoc1.getEmbeddedDocument("Object3");
-			LOG.log(Level.INFO, "Embedded Object3 path: {0}", embeddedObject3.getDocumentPath());
-			LOG.log(Level.INFO, "Embedded Object3 media-type: {0}", embeddedObject3.getMediaTypeString());
-			Assert.assertEquals(embeddedObject3.getMediaTypeString(), Document.OdfMediaType.GRAPHICS
-					.getMediaTypeString());
+		Document embeddedObject3 = odtDoc1.getEmbeddedDocument("Object3");
+		LOG.log(Level.INFO, "Embedded Object3 path: {0}", embeddedObject3.getDocumentPath());
+		LOG.log(Level.INFO, "Embedded Object3 media-type: {0}", embeddedObject3.getMediaTypeString());
+		Assert.assertEquals(embeddedObject3.getMediaTypeString(), Document.OdfMediaType.GRAPHICS
+				.getMediaTypeString());
 
-			Document embeddedObject6 = odtDoc1.getEmbeddedDocument("Object6/");
-			LOG.log(Level.INFO, "Embedded Object6 path: {0}", embeddedObject6.getDocumentPath());
-			LOG.log(Level.INFO, "Embedded Object6 media-type: {0}", embeddedObject6.getMediaTypeString());
-			Assert.assertEquals(embeddedObject6.getMediaTypeString(), Document.OdfMediaType.PRESENTATION
-					.getMediaTypeString());
+		Document embeddedObject6 = odtDoc1.getEmbeddedDocument("Object6/");
+		LOG.log(Level.INFO, "Embedded Object6 path: {0}", embeddedObject6.getDocumentPath());
+		LOG.log(Level.INFO, "Embedded Object6 media-type: {0}", embeddedObject6.getMediaTypeString());
+		Assert.assertEquals(embeddedObject6.getMediaTypeString(), Document.OdfMediaType.PRESENTATION
+				.getMediaTypeString());
 
-		} catch (Exception e) {
-			LOG.log(Level.SEVERE, null, e);
-			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
-		}
 	}
 
 	@Test
