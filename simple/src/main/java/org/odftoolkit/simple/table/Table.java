@@ -1316,6 +1316,7 @@ public class Table extends Component {
 				setRightTopBorderStyleProperties(borderStyle);
 				aCell.setStyleName(borderStyle.getStyleNameAttribute());
 			}
+			aRow.appendChild(aCell);
 		} else {
 			OdfStyle lefttopStyle = null, righttopStyle = null;
 			// create 2 kinds of styles
