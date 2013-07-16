@@ -581,6 +581,29 @@ public class TableCellTest {
 		fcell = table.getCellByPosition(columnindex, rowindex);
 		Assert.assertEquals(0, fcell.getDateValue().compareTo(expectedCalendar));
 	}
+	
+	@Test
+	public void testDateTimeValue() {
+		int rowindex = 7, columnindex = 7;
+		Table table = odsdoc.getTableByName("Sheet1");
+		Cell fcell = table.getCellByPosition(columnindex, rowindex);
+		try {
+			fcell.setDateTimeValue(null);
+			Assert.fail("Null date time value should throw IllegalArgumentException");
+		} catch (IllegalArgumentException ie) {
+			Assert.assertEquals("date shouldn't be null.", ie.getMessage());
+		}
+
+		Calendar expectedCalendar = new GregorianCalendar(2010, 1, 30, 23, 12, 56);
+		fcell.setDateTimeValue(expectedCalendar);
+		saveods();
+		// reload
+		loadOutputSpreadsheet();
+		table = odsdoc.getTableByName("Sheet1");
+		fcell = table.getCellByPosition(columnindex, rowindex);
+		Assert.assertEquals(expectedCalendar, fcell.getDateTimeValue());
+	}
+	
 
         @Test
         public void testGetFromEmptyDateValue() throws Exception {

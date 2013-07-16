@@ -135,6 +135,8 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * The default time format of table cell.
 	 */
 	private static final String DEFAULT_TIME_FORMAT = "'PT'HH'H'mm'M'ss'S'";
+	// example format: 2002-05-30T09:30:10
+	private static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
 	/**
 	 * The default cell back color of table cell.
 	 */
@@ -1016,12 +1018,30 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 *             is not "date".
 	 */
 	public Calendar getDateValue() {
+		return getOfficeDateValue(DEFAULT_DATE_FORMAT);
+	}
+	
+	/**
+	 * Get the cell date time value (date and time) as Calendar.
+	 * <p>
+	 * Throw IllegalArgumentException if the cell type is not "date".
+	 * 
+	 * @return the Calendar value of cell
+	 * @throws IllegalArgumentException
+	 *             an IllegalArgumentException will be thrown, if the cell type
+	 *             is not "date".
+	 */
+	public Calendar getDateTimeValue() {
+		return getOfficeDateValue(DEFAULT_DATE_TIME_FORMAT);
+	}
+	
+	private Calendar getOfficeDateValue(String pattern) {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.DATE) {
 			String dateStr = mCellElement.getOfficeDateValueAttribute();
 			if (dateStr == null) {
 				return null;
 			}
-			Date date = parseString(dateStr, DEFAULT_DATE_FORMAT);
+			Date date = parseString(dateStr, pattern);
 			Calendar calender = Calendar.getInstance();
 			calender.setTime(date);
 			return calender;
@@ -1038,17 +1058,29 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 *            type.
 	 */
 	public void setDateValue(Calendar date) {
+		setOfficeDateValue(date, DEFAULT_DATE_FORMAT);
+	}
+	
+	/**
+	 * Sets the cell value as a date with second precision and the value type to be "date".
+	 * @param date 
+	 */
+	public void setDateTimeValue(Calendar date) {
+		setOfficeDateValue(date, DEFAULT_DATE_TIME_FORMAT);
+	}
+
+	private void setOfficeDateValue(Calendar date, String pattern) {
 		if (date == null) {
 			throw new IllegalArgumentException("date shouldn't be null.");
 		}
 		splitRepeatedCells();
 		setTypeAttr(OfficeValueTypeAttribute.Value.DATE);
-		SimpleDateFormat simpleFormat = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
+		SimpleDateFormat simpleFormat = new SimpleDateFormat(pattern);
 		String svalue = simpleFormat.format(date.getTime());
 		mCellElement.setOfficeDateValueAttribute(svalue);
 		setDisplayTextContent(svalue, null);
 	}
-
+	
 	/**
 	 * Set the cell style name. When lots of cells have the same style features,
 	 * the user can configuration the first one and set the other's style name
