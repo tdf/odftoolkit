@@ -19,6 +19,8 @@ under the License.
 
 package org.odftoolkit.simple.common.navigation;
 
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,13 +29,19 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.PresentationDocument;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.common.TextExtractor;
 import org.odftoolkit.simple.presentation.Slide;
+import org.odftoolkit.simple.table.Cell;
+import org.odftoolkit.simple.table.Table;
+import org.odftoolkit.simple.text.Paragraph;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Node;
 
@@ -171,4 +179,65 @@ public class TextNavigationTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
+	
+
+	@Test
+	public void testCellReplacementWithParagraph() throws Exception {
+		replace(new ReplacementAction() {
+
+			public void replace(TextSelection selection, String value) throws Exception {
+				TextParagraphElementBase paragraphElement = new TextPElement(doc.getContentDom());
+				Paragraph para = Paragraph.getInstanceof(paragraphElement);
+				para.setTextContent(value);
+				selection.replaceWith(para);
+			}
+		});
+		
+	}
+	
+	@Ignore("This test currently fails because of a special handling of CellSelection which resets the display text."
+			+ "It is not clear why this special handling is necessary as display text and string value are consistent even if removed.")
+	@Test
+	public void testCellReplacementWithString() throws Exception {
+		replace(new ReplacementAction() {
+
+			public void replace(TextSelection selection, String value) throws Exception {
+				selection.replaceWith(value);
+			}
+		});
+		
+	}
+	
+
+	private void replace(ReplacementAction replacementAction) throws Exception {
+		TextDocument docToReplaceIn = TextDocument.newTextDocument();
+		Table newTable = docToReplaceIn.getTableBuilder().newTable(2, 2);
+		Cell cell = newTable.getCellByPosition(0, 0);
+		cell.addParagraph("<<ONE>>");
+		cell.addParagraph("<<TWO>>");
+
+		Map<String, String> replacements = new TreeMap<String, String>();
+		replacements.put("<<ONE>>", "1");
+		replacements.put("<<TWO>>", "2");
+
+		// sanity check
+		Assert.assertEquals("<<ONE>>\n<<TWO>>", cell.getDisplayText());
+		Assert.assertEquals("<<ONE>>\n<<TWO>>", cell.getStringValue());
+		
+		for (String toReplace : replacements.keySet()) {
+			TextNavigation navigation = new TextNavigation(toReplace, docToReplaceIn);
+			while (navigation.hasNext()) {
+				TextSelection selection = (TextSelection) navigation.nextSelection();
+				Assert.assertEquals(toReplace, selection.getElement().getTextContent());
+				replacementAction.replace(selection, replacements.get(toReplace));
+			}
+		}
+
+		Assert.assertEquals("1\n2", cell.getDisplayText());
+		Assert.assertEquals("1\n2", cell.getStringValue());
+	}
+	
+	private static interface ReplacementAction {
+		void replace(TextSelection selection, String value) throws Exception;
+	}	
 }
