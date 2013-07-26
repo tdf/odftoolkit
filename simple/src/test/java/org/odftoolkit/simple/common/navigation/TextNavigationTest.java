@@ -195,8 +195,7 @@ public class TextNavigationTest {
 		
 	}
 	
-	@Ignore("This test currently fails because of a special handling of CellSelection which resets the display text."
-			+ "It is not clear why this special handling is necessary as display text and string value are consistent even if removed.")
+
 	@Test
 	public void testCellReplacementWithString() throws Exception {
 		replace(new ReplacementAction() {

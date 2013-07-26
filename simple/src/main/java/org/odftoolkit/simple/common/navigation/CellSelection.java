@@ -57,26 +57,6 @@ public class CellSelection extends TextSelection {
 		mCell = cell;
 	}
 
-	/**
-	 * Replace the text content of selection with a new string. The cell value
-	 * type will be updated as "string" after replacement.
-	 * 
-	 * @param newText
-	 *            the replace text String
-	 * @throws InvalidNavigationException
-	 *            if the selection is unavailable.
-	 * 
-	 * @see org.odftoolkit.simple.table.Cell#setValueType(String)
-	 * @see org.odftoolkit.simple.table.Cell#setStringValue(String)
-	 */
-	public void replaceWith(String newText) throws InvalidNavigationException {
-		super.replaceWith(newText);
-		if (mCell != null) {
-			// update mCell value and value type to string.
-			String text = mCell.getDisplayText();
-			mCell.setStringValue(text);
-		}
-	}
 
 	/**
 	 * Replace the text content of selection with a new string. The cell value
