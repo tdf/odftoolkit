@@ -369,7 +369,7 @@
                                         <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA1" property="checksum" />                                
                                         <copy todir="${basedir}/target/release/${project.version}/">  
                                             <fileset dir="${basedir}/target">   
-                                                <include name="*-src.*" />
+                                                <include name="*-source-release.*" />
                                             </fileset>
                                         </copy>
                                         <copy todir="${basedir}/target/release/${project.version}/binaries">  
