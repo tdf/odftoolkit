@@ -42,8 +42,9 @@ import org.xml.sax.InputSource;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.test.ModelTestBase;
-import com.ibm.icu.impl.Assert;
+
 import java.util.logging.Level;
+import org.junit.Assert;
 
 public class GRDDLTest extends ModelTestBase {
 

@@ -23,7 +23,6 @@ package org.odftoolkit.odfdom.pkg;
 
 import java.io.IOException;
 import java.util.Stack;
-import net.rootdev.javardfa.StatementSink;
 import org.odftoolkit.odfdom.pkg.rdfa.JenaSink;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

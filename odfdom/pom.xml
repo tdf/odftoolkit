@@ -62,9 +62,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.clerezza</groupId>
-			<artifactId>rdf.rdfa</artifactId>
-			<version>0.1-incubating</version>
+			<groupId>net.rootdev</groupId>
+			<artifactId>java-rdfa</artifactId>
+			<version>0.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-validator</groupId>

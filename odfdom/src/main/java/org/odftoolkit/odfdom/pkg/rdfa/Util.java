@@ -22,11 +22,12 @@
 package org.odftoolkit.odfdom.pkg.rdfa;
 
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.XMLConstants;
 import javax.xml.namespace.QName;
-import org.apache.clerezza.utils.UriException;
-import org.apache.clerezza.utils.UriUtil;
 
 public class Util {
 	
@@ -135,10 +136,11 @@ public class Util {
 			sb.append('#');
 			sb.append(u.getFragment());
 		}
-		String ret = sb.toString();
+		String ret = sb.toString();		
 		try {
-			ret = UriUtil.encodePath(ret);
-		} catch (UriException e) {
+			ret = new URI(ret).toASCIIString();
+		} catch (URISyntaxException ex) {
+			Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return ret;
 	}
