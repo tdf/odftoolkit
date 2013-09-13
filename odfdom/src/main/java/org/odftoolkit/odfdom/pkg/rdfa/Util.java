@@ -23,8 +23,6 @@ package org.odftoolkit.odfdom.pkg.rdfa;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.XMLConstants;
 import javax.xml.namespace.QName;
@@ -94,8 +92,8 @@ public class Util {
 	 * @param u - the File URI
 	 * @return the String of the URI
 	 */
-	public static String toExternalForm(URI u) {
-		StringBuffer sb = new StringBuffer();
+	public static String toExternalForm(URI u) throws URISyntaxException {
+		StringBuilder sb = new StringBuilder();
 		if (u.getScheme() != null) {
 			sb.append(u.getScheme());
 			sb.append(':');
@@ -119,29 +117,24 @@ public class Util {
 					sb.append(':');
 					sb.append(u.getPort());
 				}
-			} else if (u.getAuthority() != null) {
+			} else if (u.getRawAuthority() != null) {
 				sb.append("//");
-				sb.append(u.getAuthority());
+				sb.append(u.getRawAuthority());
 			} else {
 				sb.append("//");
 			}
-			if (u.getPath() != null)
-				sb.append(u.getPath());
-			if (u.getQuery() != null) {
+			if (u.getRawPath() != null)
+				sb.append(u.getRawPath());
+			if (u.getRawQuery() != null) {
 				sb.append('?');
-				sb.append(u.getQuery());
+				sb.append(u.getRawQuery());
 			}
 		}
 		if (u.getFragment() != null) {
 			sb.append('#');
 			sb.append(u.getFragment());
-		}
-		String ret = sb.toString();		
-		try {
-			ret = new URI(ret).toASCIIString();
-		} catch (URISyntaxException ex) {
-			Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		}		
+		String ret = new URI(sb.toString()).toASCIIString();
 		return ret;
 	}
 }
