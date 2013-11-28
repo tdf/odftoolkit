@@ -40,6 +40,7 @@ Bug Fixes
 * ODFTOOLKIT-355 NullPointerException when removing rows from a new Spreadsheet table (Florian Hopf)
 * ODFTOOLKIT-362 TextSelection.replaceWith() ends in an infinite loop (Florian Hopf)
 * ODFTOOLKIT-363 Table#appendRow() method creates a row without any cell (Florian Hopf)
+* ODFTOOLKIT-379 NullPointerException in Paragraph.getTextContent() (Florian Hopf, Patch by Marc Schreiber)
 
 Other
 -----

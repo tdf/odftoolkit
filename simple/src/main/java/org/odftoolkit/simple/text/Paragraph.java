@@ -226,7 +226,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	}
 
 	static String getTextContent(OdfElement ownerEle) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		NodeList nodeList = ownerEle.getChildNodes();
 		int i;
 		for (i = 0; i < nodeList.getLength(); i++) {
@@ -235,9 +235,12 @@ public class Paragraph extends Component implements TextboxContainer,
 			if (node.getNodeType() == Node.TEXT_NODE)
 				buffer.append(node.getNodeValue());
 			else if (node.getNodeType() == Node.ELEMENT_NODE) {
-				if (node.getNodeName().equals("text:s")) {
-					int count = ((TextSElement) node).getTextCAttribute();
-					for (int j = 0; j < count; j++)
+				if (node instanceof TextSpanElement) {
+					buffer.append(((TextSpanElement) node).getTextContent());
+				}
+				else if (node.getNodeName().equals("text:s")) {
+					Integer count = ((TextSElement) node).getTextCAttribute();
+					for (int j = 0; j < (count != null ? count : 0); j++)
 						buffer.append(' ');
 				} else if (node.getNodeName().equals("text:tab"))
 					buffer.append('\t');

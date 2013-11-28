@@ -19,6 +19,7 @@ under the License.
 
 package org.odftoolkit.simple.text;
 
+import java.io.FileNotFoundException;
 import java.net.URI;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -309,5 +310,25 @@ public class ParagraphTest {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail();
 		}
+	}
+        
+	@Test
+	public void testGetTextContentWithLibreOfficeFile() throws FileNotFoundException, Exception {
+		TextDocument document = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("Bell.odt"));
+		Paragraph paragraph = document.getParagraphByIndex(0, true);
+
+		Assert.assertEquals(
+			"Bell, based in Los Angeles, makes and distributes electronic articles, "
+			+ "computer and building products.", 
+			paragraph.getTextContent());
+	}
+        
+	@Test
+	public void shouldReturnMultipleLines() throws Exception {
+		final String expected = "Hello\tWorld!\twho \t ever read this, is stupid.\n\n\nReally!";
+		TextDocument document = TextDocument.newTextDocument();
+		Paragraph p = document.addParagraph(expected);
+		String textContent = p.getTextContent();
+		Assert.assertEquals(expected, textContent.replace("\r", ""));
 	}
 }
