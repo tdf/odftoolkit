@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--
+ /************************************************************************
+ *
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
+
+  Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+
+  Use is subject to license terms.
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  use this file except in compliance with the License. You may obtain a copy
+  of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
+  obtain a copy of the License at http://odftoolkit.org/docs/license.txt
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+ ************************************************************************/
+
+-->
+<html>
+    <body>
+
+		<div class="wikiMainBody"><p><br />
+				The ODFDOM project's objective is to provide an easy API for reading, writing and manipulating documents of the OpenDocument format (ODF).
+			</p><h1><a name='The_ODFDOM_Layers'></a>The ODFDOM Layers</h1>
+			<p>
+			<div id='toc' style='border:solid #DEDEDF 1px;background:#EEE;padding:10px;'>
+
+				<div id='toctitle' style='padding-bottom:5px;font-weight:bold;'>
+
+					<span>Contents</span>
+				</div>
+				<div id='toccontents' style='list-style-type:none;'><ul><li>1 <a href='#The_ODFDOM_Layers'>The ODFDOM Layers</a></li></
+						<ul><li>1.1 <a href='#The_ODF_Package_Layer'>The ODF Package Layer</a></li>
+							<ul><li>1.1.1 <a href='#The_ODF_Package_API'>The ODF Package API</a></li>
+							</ul><li>1.2 <a href='#The_ODF_XML_Layer'>The ODF XML Layer</a></li>
+							<ul><li>1.2.1 <a href='#The_ODF_DOM_API'>The ODF DOM API</a></li>
+								<li>1.2.2 <a href='#The_ODF_Document_API'>The ODF Document API</a></li>
+							</ul></ul></ul></div>
+			</div><p><br />
+
+			</p><h1><a name='The_ODFDOM_Layers'></a>The ODFDOM Layers</h1>
+			<p>
+				The ODFDOM project's objective is to provide an easy API for reading, writing and manipulating documents of the OpenDocument format (ODF).
+				To archive this, the ODFDOM API follows a layered approach to access documents, as layered design is the robust foundation for a well-designed modular structure.
+
+			</p><p><img src='doc-files/ODFDOM-Layered-Model.png' />
+			</p><h2><a name='The_ODF_Package_Layer'></a>The ODF Package Layer</h2>
+		<p>The ODF Package Layer provides access to all resources stored within the ODF package, such as XML streams, images or embedded objects.
+		</p><h3><a name='The_ODF_Package_API'></a>The ODF Package API</h3>
+		<p>The ODF Package API covers all features from the <a class='external' href="http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part3.html">third part of the ODF 1.2 specification</a> defining the ODF Package features. The ODF 1.2 package features are build on top technologies as <a class='external' href="http://www.pkware.com/documents/APPNOTE/APPNOTE_6.2.0.txt">ZIP package handling</a>, <a class='external' href="http://www.w3.org/TR/2002/REC-xmlenc-core-20021210/">W3C encryption</a>, <a class='external' href="http://www.w3.org/TR/2008/REC-xmldsig-core-20080610/">W3C signature</a> and <a class='external' href="http://www.w3.org/TR/2004/REC-rdf-concepts-20040210/">W3C metadata</a>.
+
+		</p><p>At this layer a document is in general represented by a bundle of named resources zipped to a package.
+			For instance, an ODF text document like 'myVacation.odt' might contain the following files:
+
+		</p><p><img src='doc-files/ODF_Package.jpg' />
+
+		</p><p><b>Note:</b>
+			All file streams aside of the '/Pictures' directory and its content are specified by the ODF standard.
+			Furthermore, the file streams are similar for all types of ODF documents.
+
+		</p><p>The main requirements for this layer in regard of ZIP are:
+		</p><ul><li> Zip/unzip the file streams of the package
+			</li><li> Enlist all file streams in the /META-INF/manifest.xml (similar to an inventory)
+			</li><li> Begin the package with an unzipped 'mimetype' file stream (allowing others to easily identify the package)
+			</li></ul><p>
+			All sources of the Package layer are organized in ODFDOM beyond <code>org.odftoolkit.odfdom.pkg.*</code>
+
+		</p><p>The following example illustrates how to add a graphic to the package level
+			(although not shown by an ODF application (like OpenOffice.org), as not used by the shown content):
+
+		</p><p><pre>
+
+import org.odftoolkit.odfdom.pkg.OdfPackage;
+[...]
+
+// loads the ODF document package from the path
+OdfPackage pkg = OdfPackage.loadPackage(&quot;/home/myDocuments/myVacation.odt&quot;);
+
+// loads the image from the URL and inserts the image in the package,
+// adapting the manifest
+pkg.insert(new URI(&quot;./myHoliday.png&quot;), &quot;Pictures/myHoliday.png&quot;, &quot;image/png&quot;);
+pkg.save(&quot;/home/myDocuments/myVacation.odt&quot;);
+
+		</pre>
+
+	</p><p><br />
+
+	</p><h2><a name='The_ODF_XML_Layer'></a>The ODF XML Layer</h2>
+	<p>The ODF XML Layer provides all the features of an office format, such as tables, images, numbering etc. All features are defined in <a class='external' href="http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part1.html">the first part of the ODF 1.2 specification</a> describing the ODF XML schema. This layer consists of two APIs representing two different views on the features.
+
+	</p><h3><a name='The_ODF_DOM_API'></a>The ODF DOM API</h3>
+	<p>The ODF DOM API gives access to the XML, the elemental parts of the ODF schema features. With this API it is easy to manipulate all specified XML nodes extending the platform and language independent DOM API <a class='external' href="http://www.w3.org/DOM/">DOM API standardized by the W3C</a> - best-known by its implementation through the browsers. It extends the DOM API using a typed DOM. For every ODF XML element and ODF XML attribute defined by the ODF grammar (the RelaxNG schema) a unique class exists, providing methods for their allowed children. The purpose is to provide the user a corset to easily write valid ODF without consulting the spec constantly. This API is very consistent as instead of laboriously writing all these classes, the sources were generated directly from the ODF schema. This generation guarantees complete coverage of the ODF specification on one side and an easy and accurate upgrade to future ODF specifications on the other.
+
+	</p><p>At this level, all XML file streams of the document are accessible via the <a class='external' href="http://www.w3.org/DOM/">W3C DOM API</a>, but only the ODF standardized XML file streams of the document (e.g. content.xml, meta.xml) have their own classes representing their ODF XML elements. Foreign XML within a specified ODF XML file will remain in the document model in general and won't be neglected unless desired ( which still might be a future option).
+
+	</p><p>Example of the ODF XML representing a table in ODF:
+
+	</p><p><img src='doc-files/FruitTable_code.jpg' />
+
+	</p><p><b>Note:</b> In the OpenDocument standard the ODF elements are reused among all document types. The above XML of a table is for instance equally usable in Text and Spreadsheet documents.
+
+	</p><p>
+		This XML would be mapped to a W3C derived ODF DOM class structure:
+
+	</p><p><img src='doc-files/800px-Table_fruits_diagramm.jpg' width="670px" height="346px" />
+
+	</p><p>All sources of the typed DOM API are organized beyond <code>org.odftoolkit.odfdom.dom.*</code>
+
+	</p><p>The sources for the ODF elements are all generated from the ODF grammar (RelaxNG schema) using the following naming conventions in the Java reference implementation:
+	</p><ul><li> The class name is equal to the element local name using the Namespace as prefix and 'Element' as suffix (e.g. the 'draw:frame' element has the <code>DrawFrameElement</code> class).
+		</li><li> Elements are stored beyond a sub-package equal to their Namespace used by the OOo. Therefore the frame element 'draw:frame' would be generated in Java as class <code>org.odftoolkit.odfdom.dom.draw.DrawFrameElement</code>.
+		</li></ul><p><b>Note:</b> The element local names 'h' and 'p' have been renamed to the classes 'Heading' and 'Paragraph' for usability reasons.
+
+	</p><p>The following example illustrates how to add a graphic to the ODF document, that it is viewable:
+	<pre>
+
+import java.net.URI;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
+import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+
+[...]
+
+// Load file
+OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(&quot;ImageIn.odt&quot;);
+
+// get root of all content of a text document
+OfficeTextElement officeText = odt.getContentRoot();
+
+// get first paragraph
+TextPElement firstParagraph =
+  OdfElement.findFirstChildNode(TextPElement.class, officeText);
+
+// XPath alternative to get the first paragraph
+/*
+  XPath xpath = XPathFactory.newInstance().newXPath();
+  xpath.setNamespaceContext(new OdfNamespace());
+  OdfFileDom dom = odt.getContentDom();
+  firstParagraph = (TextPElement) xpath.evaluate(&quot;//text:p[1]&quot;, dom, XPathConstants.NODE);
+*/
+
+// insert a frame
+DrawFrameElement frame = firstParagraph.newDrawFrameElement();
+
+// insert an image: This is a class from the Document API
+OdfDrawImage image = (OdfDrawImage) frame.newDrawImageElement();
+image.newImage(new URI(&quot;./MySampleImage.png&quot;));
+
+// Save file
+odt.save(&quot;ImageOut.odt&quot;);
+	</pre><br />
+	Even in this example we had to refer to a class from the Document API. Otherwise our implementation had gotten quite long and complex.
+
+</p><p><br />
+
+</p><h3><a name='The_ODF_Document_API'></a>The ODF Document API</h3>
+<p>
+	The ODF Document API provides a different much more high level view on the ODF schema features. This API is concerned about usability, hiding all ODF XML implementation details from the user, covering frequent user scenarios. For example, changing the content of a certain spreadsheet cell (e.g. Add 'Hello World' to a spreadsheet cell positioned at 'B2'). While in the ODF DOM API in general each class represents an ODF XML node, here a class covers multiple underlying ODF XML elements (&amp; their attributes). Think of puzzle piece consisting of multiple smaller pieces. Therefore the typed DOM tree is being mapped to feature tree.
+
+</p><p>As naming convention all sources of the ODF document functionality layer are organized beyond <code>org.odftoolkit.odfdom.doc.*</code>
+	The name of a document class is in general similar as the root element from the XML layer feature, only there is the new prefix 'Odf' and the suffix 'Element' has been neglected.
+
+</p><p>For example, the document class for a 'draw:frame' element would be represented in the ODFDOM Java reference implemenation as <code>org.odftoolkit.odfdom.doc.draw.OdfDrawFrame</code> class. Some classes of the Document API differ from this naming convention, e.g. OdfTextParagraph is the subclass of TextPElement. However by browsing the packages you will easily find the classes your looking for.
+
+</p><p><b>Note:</b> The Document API will change. The current inheritance between DOM and DOC elements does not fit any longer in the multiple elements to a single document feature (1:n) pattern. The first Document Object is the table <code>rg.odftoolkit.odfdom.doc.table.OdfTable</code>, others will follow soon.
+
+</p><p>Again let's look at the previous code example for the DOM API: Remember all DOM element classes are abstract and we're really getting objects from the Document API: Even if <code>frame.newDrawFrameElement()</code> is defined to return the DOM class DrawFrameElement, it really returns the DOC subclass OdfDrawFrame. So it's always save to use explicit casting <code>OdfDrawFrame frame = (OdfDrawFrame) firstParagraph.newDrawFrameElement();</code>.
+
+</p><p>However reworking the previous example would just make the code larger, since we're not using any of the document methods provided by the DOC subclasses.
+
+</p><p>Here's an example for working with DOC classes, completely avoiding handling the DOM manually:
+
+</p><p><pre>
+[...]
+// Load Image
+OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(&quot;ImageIn.odt&quot;);
+
+// Play around with text
+odt.addText(&quot;When there is no paragraph, the text will be embedded in a new paragraph&quot;);
+odt.newParagraph(&quot;Create new paragraph&quot;);
+odt.addText(&quot;\nThis is a new line&quot;);
+
+// Insert Image and make last paragraph its anchor
+odt.newImage(new URI(&quot;./MySampleImage.png&quot;));
+
+// Save file
+odt.save(&quot;ImageOut.odt&quot;);
+</pre>
+
+</p><p><br />
+
+<h2>Further Information</h2>
+For further Information about ODFDOM and related topics please visit following pages:
+<ol>
+	<li><a href="http://incubator.apache.org/odftoolkit/odfdom/index.html">ODFDOM</a></li>
+	<li><a href="http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part1.html">OpenDocument v1.2 specification - part 1: OpenDocument Schema</a></li>
+	<li><a href="http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part3.html">OpenDocument v1.2 specification - part 3: Packages</a></li>
+	<li><a href="http://incubator.apache.org/odftoolkit/simple/index.html">Simple Java API</a></li>
+</ol>
+</p>
+</div>
+</body>
+</html>
