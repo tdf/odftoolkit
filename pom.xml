@@ -23,7 +23,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.6.1-incubating-SNAPSHOT</version>
+    <version>0.6.1-incubating</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -128,9 +128,9 @@
     </organization>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk</developerConnection>
-        <url>http://svn.apache.org/viewvc/incubator/odf/trunk</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.1-incubating-RC1</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.1-incubating-RC1</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/tags/odftoolkit-0.6.1-incubating-RC1</url>
     </scm>
 
     <issueManagement>
