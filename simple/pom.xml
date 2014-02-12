@@ -24,18 +24,18 @@
     <parent>
       <groupId>org.apache.odftoolkit</groupId>
       <artifactId>odftoolkit</artifactId>
-      <version>0.6.1-incubating</version>
+      <version>0.6.1-incubating-SNAPSHOT</version>
     </parent>
 
     <artifactId>simple-odf</artifactId>
-    <version>0.8.1-incubating</version>
+    <version>0.8.1-incubating-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
            <groupId>${project.groupId}</groupId>
            <artifactId>odfdom-java</artifactId>
-           <version>0.8.10-incubating</version>
+           <version>0.8.10-incubating-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>xerces</groupId>
@@ -285,9 +285,9 @@
         <url>http://www.apache.org/</url>
     </organization>
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.1-incubating-RC4/simple</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.1-incubating-RC4/simple</developerConnection>
-        <url>http://svn.apache.org/viewvc/incubator/odf/tags/odftoolkit-0.6.1-incubating-RC4/simple</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/simple</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/simple</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/trunk/simple</url>
     </scm>
     <profiles>
         <profile>
