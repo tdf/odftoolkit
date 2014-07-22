@@ -25,11 +25,11 @@
 	<parent>
 		<groupId>org.apache.odftoolkit</groupId>
 		<artifactId>odftoolkit</artifactId>
-		<version>0.6.1-incubating</version>
+		<version>0.6.1-incubating-SNAPSHOT</version>
 	</parent>
   
 	<artifactId>odfdom-java</artifactId>
-	<version>0.8.10-incubating</version>
+	<version>0.8.10-incubating-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -311,9 +311,9 @@
 	</organization>
 
 	<scm>
-		<connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.1-incubating-maven-release/odfdom</connection>
-		<developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.1-incubating-maven-release/odfdom</developerConnection>
-		<url>http://svn.apache.org/viewvc/incubator/odf/tags/odftoolkit-0.6.1-incubating-maven-release/odfdom</url>
+		<connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/odfdom</connection>
+		<developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/odfdom</developerConnection>
+		<url>http://svn.apache.org/viewvc/incubator/odf/trunk/odfdom</url>
 	</scm>
 	<profiles>
 		<profile>
