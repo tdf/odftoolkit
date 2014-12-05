@@ -106,7 +106,10 @@ class ForeignContentFilter extends XMLFilterImpl {
         else
         {
             if( isProcessContent() )
+            {
+                m_aParagraphAncestorElements.removeElementAt(m_aParagraphAncestorElements.size()-1);
                 super.endElement(aUri,aLocalName,aQName);
+            }
         }
     }
 
@@ -123,7 +126,9 @@ class ForeignContentFilter extends XMLFilterImpl {
                 String aProcessContentValue = aAtts.getValue( OFFICE_NAMESPACE_URI, PROCESS_CONTENT );
                 if( m_aVersion.compareTo( OdfVersion.V1_2 ) >= 0 )
                 {
-                    bProcessContent = aProcessContentValue != null ? aProcessContentValue.equals(TRUE) : true;
+                    bProcessContent = aProcessContentValue != null
+                                        ? aProcessContentValue.equals(TRUE)
+                                        : hasParagraphAncestorElement();
                 }
                 else
                 {

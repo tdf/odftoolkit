@@ -84,5 +84,62 @@ public class ValidTest extends OdfValidatorTestBase {
 		}
         //Assert.assertTrue(output.contains("dummy.odt:Info:no errors, no warnings"));
     }	
-	
+
+    @Test
+    public void validateForeignElementCharacterContentStrict() {
+        String output = "";
+        try {
+            String name = "extnumberstyle.ods";
+            output = doValidation(name, OdfVersion.V1_2, OdfValidatorMode.CONFORMANCE, true);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            Assert.fail(t.toString());
+        }
+        if(output.contains("Exception")){
+            System.out.println("OUTPUT:" + output);
+            Assert.fail("An exception occurred during validation!");
+        }
+        System.out.println("OUTPUT:" + output);
+        Assert.assertTrue(output.contains("Error:"));
+        Assert.assertTrue(output.contains("styles.xml[32,19]:"));
+    }
+
+    @Test
+    public void validateForeignElementCharacterContentExtended() {
+        String output = "";
+        try {
+            String name = "extnumberstyle.ods";
+            output = doValidation(name, OdfVersion.V1_2, OdfValidatorMode.EXTENDED_CONFORMANCE, true);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            Assert.fail(t.toString());
+        }
+        if(output.contains("Exception")){
+            System.out.println("OUTPUT:" + output);
+            Assert.fail("An exception occurred during validation!");
+        }
+        System.out.println("OUTPUT:" + output);
+        Assert.assertFalse(output.contains("unexpected character literal"));
+        Assert.assertFalse(output.contains("Error:"));
+    }
+
+    @Test
+    public void validateForeignElementCharacterContentExtendedProcessContent() {
+        String output = "";
+        try {
+            String name = "extnumberstyle-processcontent.ods";
+            output = doValidation(name, OdfVersion.V1_2, OdfValidatorMode.EXTENDED_CONFORMANCE, true);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            Assert.fail(t.toString());
+        }
+        if(output.contains("Exception")){
+            System.out.println("OUTPUT:" + output);
+            Assert.fail("An exception occurred during validation!");
+        }
+        System.out.println("OUTPUT:" + output);
+        Assert.assertTrue(output.contains("unexpected character literal"));
+        Assert.assertTrue(output.contains("styles.xml[34,79]:"));
+    }
+
 }
