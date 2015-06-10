@@ -425,7 +425,9 @@ public class CellStyleHandler extends DefaultStyleHandler {
 		if (!isDefault) {
 			OdfDefaultStyle defaultStyle = getCellDefaultStyle();
 			TableCellProperties defaultStyleSetting = TableCellProperties.getTableCellProperties(defaultStyle);
-			tempColor = defaultStyleSetting.getBackgroundColor();
+			if (defaultStyleSetting != null) {
+				tempColor = defaultStyleSetting.getBackgroundColor();
+			}
 		}
 		// use default
 		if (tempColor == null)

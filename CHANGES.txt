@@ -1,6 +1,42 @@
 Apache ODF Toolkit Change Log
 =============================
 
+======= Release 0.6.2 =======
+
+The most notable changes in ODF Toolkit 0.6.2 incubating over previous release:
+
+Release wiki page: https://cwiki.apache.org/confluence/display/ODFTOOLKIT/0.6.2-incubating
+
+Versions of major components
+----------------------------
+
+* Xerces 2.9.1 (http://xerces.apache.org/mirrors.cgi)
+* Apache Jena 2.9.4 (http://jena.apache.org/download/index.html)
+* Apache Commons Validator 1.4.0 (http://commons.apache.org/proper/commons-validator//download_validator.cgi)
+
+For a full dependecy list run mvn dependency:tree from the top level in the source module or see the release wiki page.
+
+Upgrading from 0.6.1-incubating
+-----------------------------
+
+
+Detailed Change List
+--------------------
+
+New Features
+------------
+
+Optimizations
+-------------
+
+Bug Fixes
+---------
+
+* ODFTOOLKIT-398 prevent NullPointerException in getCellBackgroundColor() (Florian Hopf, Patch by David Reepmeyer)
+
+Other
+-----
+
 ======= Release 0.6.1 =======
 
 The most notable changes in ODF Toolkit 0.6.1 incubating over previous release:
