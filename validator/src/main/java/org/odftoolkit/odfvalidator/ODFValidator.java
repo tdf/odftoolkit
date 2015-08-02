@@ -1,40 +1,38 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  ************************************************************************/
 package org.odftoolkit.odfvalidator;
 
-import javax.xml.XMLConstants;
-
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 public class ODFValidator implements ODFValidatorProvider {
@@ -57,6 +55,7 @@ public class ODFValidator implements ODFValidatorProvider {
 	private HashMap<OdfVersion, Configuration> m_aConfigurationMap = null;
 	// Generator from last validateFile or validateStream call
 	private String m_aGenerator = "";
+    private static final String MISSING_ODF_VERSION = " 'Missing ODF version'";
 
 	/** Creates a new instance of Validator */
 	public ODFValidator(Configuration aConfig,
@@ -88,10 +87,10 @@ public class ODFValidator implements ODFValidatorProvider {
 
 	/** Returns either the ODF version request to validate or the ODF version of the root document as fall-back */
 	public String getOdfVersion() {
-		String version = null;
+		String version = MISSING_ODF_VERSION;
 		if (m_aVersion != null) {
 			version = m_aVersion.toString();
-		} else {
+		} else if(mOdfPackageVersion != null){
 			version = mOdfPackageVersion.toString();
 		}
 		return version;
