@@ -59,10 +59,7 @@ import java.util.zip.CRC32;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
-import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
-
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
 import javax.crypto.spec.IvParameterSpec;
@@ -75,7 +72,6 @@ import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
-
 import org.apache.xerces.dom.DOMXSImplementationSourceImpl;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
@@ -107,7 +103,7 @@ import org.xml.sax.XMLReader;
  * effect, when the OdfPackage is being made persisted by save().
  */
 public class OdfPackage implements Closeable {
-	
+
 	// Static parts of file references
 	private static final String DOUBLE_DOT = "..";
 	private static final String DOT = ".";
@@ -139,16 +135,16 @@ public class OdfPackage implements Closeable {
 	// save() will check 1) mPkgDoms, 2) if not check mMemoryFileCache
 	private HashMap<String, Document> mPkgDoms;
 	private HashMap<String, byte[]> mMemoryFileCache;
-	
+
 	private ErrorHandler mErrorHandler;
 	private String mManifestVersion;
 	private OdfManifestDom mManifestDom;
 	private String oldPwd;
 	private String newPwd;
-	
+
 	/* Commonly used files within the ODF Package */
 	public enum OdfFile {
-		
+
 		/**
 		 * The image directory is not defined by the OpenDocument standard,
 		 * nevertheless the most spread ODF application OpenOffice.org is using
@@ -169,22 +165,22 @@ public class OdfPackage implements Closeable {
 		 */
 		MEDIA_TYPE("mimetype");
 		private final String internalPath;
-		
+
 		OdfFile(String internalPath) {
 			this.internalPath = internalPath;
 		}
-		
+
 		public String getPath() {
 			return internalPath;
 		}
 	}
-	
+
 	static {
 		mCompressedFileTypes = new HashSet<String>();
 		String[] typelist = new String[] { "jpg", "gif", "png", "zip", "rar", "jpeg", "mpe", "mpg", "mpeg", "mpeg4", "mp4", "7z", "ari", "arj", "jar", "gz", "tar", "war", "mov", "avi" };
 		mCompressedFileTypes.addAll(Arrays.asList(typelist));
 	}
-	
+
 	/**
 	 * Creates the ODFPackage as an empty Package.
 	 */
@@ -216,14 +212,14 @@ public class OdfPackage implements Closeable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Creates an OdfPackage from the OpenDocument provided by a File.
 	 * <p>
 	 * OdfPackage relies on the file being available for read access over the
 	 * whole lifecycle of OdfPackage.
 	 * </p>
-	 * 
+	 *
 	 * @param pkgFile
 	 *            - a file representing the ODF document
 	 * @param baseURI
@@ -244,17 +240,17 @@ public class OdfPackage implements Closeable {
 		oldPwd = password;
 		newPwd = oldPwd;
 		mBaseURI = baseURI;
-		
+
 		InputStream packageStream = new FileInputStream(pkgFile);
 		try {
 			initializeZip(packageStream);
 		} finally {
 			close(packageStream);
 		}
-		
+
 		// initializeZip(pkgFile);
 	}
-	
+
 	/**
 	 * Creates an OdfPackage from the OpenDocument provided by a InputStream.
 	 * <p>
@@ -262,7 +258,7 @@ public class OdfPackage implements Closeable {
 	 * read access needed by OdfPackage, the InputStream is cached. This usually
 	 * takes more time compared to the other constructors.
 	 * </p>
-	 * 
+	 *
 	 * @param packageStream
 	 *            - an inputStream representing the ODF package
 	 * @param baseURI
@@ -284,14 +280,14 @@ public class OdfPackage implements Closeable {
 		newPwd = oldPwd;
 		initializeZip(packageStream);
 	}
-	
+
 	/**
 	 * Loads an OdfPackage from the given documentURL.
 	 * <p>
 	 * OdfPackage relies on the file being available for read access over the
 	 * whole lifecycle of OdfPackage.
 	 * </p>
-	 * 
+	 *
 	 * @param path
 	 *            - the documentURL to the ODF package
 	 * @return the OpenDocument document represented as an OdfPackage
@@ -302,14 +298,14 @@ public class OdfPackage implements Closeable {
 		File pkgFile = new File(path);
 		return new OdfPackage(pkgFile, getBaseURLFromFile(pkgFile), null, null);
 	}
-	
+
 	/**
 	 * Loads an OdfPackage from the OpenDocument provided by a File.
 	 * <p>
 	 * OdfPackage relies on the file being available for read access over the
 	 * whole lifecycle of OdfPackage.
 	 * </p>
-	 * 
+	 *
 	 * @param pkgFile
 	 *            - the ODF Package
 	 * @return the OpenDocument document represented as an OdfPackage
@@ -319,7 +315,7 @@ public class OdfPackage implements Closeable {
 	public static OdfPackage loadPackage(File pkgFile) throws Exception {
 		return new OdfPackage(pkgFile, getBaseURLFromFile(pkgFile), null, null);
 	}
-	
+
 	/**
 	 * Creates an OdfPackage from the given InputStream.
 	 * <p>
@@ -327,7 +323,7 @@ public class OdfPackage implements Closeable {
 	 * read access needed by OdfPackage, the InputStream is cached. This usually
 	 * takes more time compared to the other loadPackage methods.
 	 * </p>
-	 * 
+	 *
 	 * @param packageStream
 	 *            - an inputStream representing the ODF package
 	 * @return the OpenDocument document represented as an OdfPackage
@@ -337,14 +333,14 @@ public class OdfPackage implements Closeable {
 	public static OdfPackage loadPackage(InputStream packageStream) throws Exception {
 		return new OdfPackage(packageStream, null, null, null);
 	}
-	
+
 	/**
 	 * Creates an OdfPackage from the given InputStream.
 	 * <p>
 	 * OdfPackage relies on the file being available for read access over the
 	 * whole lifecycle of OdfPackage.
 	 * </p>
-	 * 
+	 *
 	 * @param packageStream
 	 *            - an inputStream representing the ODF package
 	 * @param baseURI
@@ -362,14 +358,14 @@ public class OdfPackage implements Closeable {
 	public static OdfPackage loadPackage(InputStream packageStream, String baseURI, ErrorHandler errorHandler) throws Exception {
 		return new OdfPackage(packageStream, baseURI, null, errorHandler);
 	}
-	
+
 	/**
 	 * Loads an OdfPackage from the given File.
 	 * <p>
 	 * OdfPackage relies on the file being available for read access over the
 	 * whole lifecycle of OdfPackage.
 	 * </p>
-	 * 
+	 *
 	 * @param pkgFile
 	 *            - the ODF Package. A baseURL is being generated based on its
 	 *            location.
@@ -382,14 +378,14 @@ public class OdfPackage implements Closeable {
 	public static OdfPackage loadPackage(File pkgFile, ErrorHandler errorHandler) throws Exception {
 		return new OdfPackage(pkgFile, getBaseURLFromFile(pkgFile), null, errorHandler);
 	}
-	
+
 	/**
 	 * Loads an OdfPackage from the given File.
 	 * <p>
 	 * OdfPackage relies on the file being available for read access over the
 	 * whole lifecycle of OdfPackage.
 	 * </p>
-	 * 
+	 *
 	 * @param pkgFile
 	 *            - the ODF Package. A baseURL is being generated based on its
 	 *            location.
@@ -404,7 +400,7 @@ public class OdfPackage implements Closeable {
 	public static OdfPackage loadPackage(File pkgFile, String password, ErrorHandler errorHandler) throws Exception {
 		return new OdfPackage(pkgFile, getBaseURLFromFile(pkgFile), password, errorHandler);
 	}
-	
+
 	// Initialize using memory
 	private void initializeZip(InputStream odfStream) throws Exception {
 		ByteArrayOutputStream tempBuf = new ByteArrayOutputStream();
@@ -421,7 +417,7 @@ public class OdfPackage implements Closeable {
 		mZipFile = new ZipHelper(this, mTempByteBuf);
 		readZip();
 	}
-	
+
 	// // Initialize using ZipFile
 	// private void initializeZip(File pkgFile) throws Exception {
 	// try {
@@ -437,7 +433,7 @@ public class OdfPackage implements Closeable {
 	// }
 	// readZip();
 	// }
-	
+
 	private void readZip() throws Exception {
 		mZipEntries = new HashMap<String, ZipEntry>();
 		String firstEntryName = mZipFile.entriesToMap(mZipEntries);
@@ -450,10 +446,10 @@ public class OdfPackage implements Closeable {
 		} else {
 			// initialize the files of the package (fileEnties of Manifest)
 			parseManifest();
-			
+
 			// initialize the package media type
 			initializeMediaType(firstEntryName);
-			
+
 			// ToDo: Remove all META-INF/* files from the fileEntries of
 			// Manifest
 			mOriginalZipEntries = new HashMap<String, ZipEntry>();
@@ -479,10 +475,10 @@ public class OdfPackage implements Closeable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Validates if all file entries exist in the ZIP and vice versa
-	 * 
+	 *
 	 * @throws SAXException
 	 */
 	private void validateManifest() throws SAXException {
@@ -490,7 +486,7 @@ public class OdfPackage implements Closeable {
 		Set manifestPaths = mManifestEntries.keySet();
 		Set<String> sharedPaths = new HashSet<String>(zipPaths);
 		sharedPaths.retainAll(manifestPaths);
-		
+
 		if (sharedPaths.size() < zipPaths.size()) {
 			Set<String> zipPathSuperset = new HashSet<String>(mZipEntries.keySet());
 			zipPathSuperset.removeAll(sharedPaths);
@@ -510,7 +506,7 @@ public class OdfPackage implements Closeable {
 			zipPathSubset.removeAll(sharedPaths);
 			// removing root directory
 			zipPathSubset.remove(SLASH);
-			
+
 			// No directory are listed in a ZIP removing all directory with
 			// content
 			Iterator<String> manifestOnlyPaths = zipPathSubset.iterator();
@@ -536,10 +532,10 @@ public class OdfPackage implements Closeable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Removes directories without a mimetype (all none documents)
-	 * 
+	 *
 	 * @throws SAXException
 	 */
 	private void removeDirectory(String path) throws SAXException {
@@ -555,11 +551,11 @@ public class OdfPackage implements Closeable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Reads the uncompressed "mimetype" file, which contains the package
 	 * media/mimte type
-	 * 
+	 *
 	 * @throws SAXException
 	 */
 	private void initializeMediaType(String firstEntryName) throws SAXException {
@@ -614,9 +610,9 @@ public class OdfPackage implements Closeable {
 			}
 		}
 	}
-	
+
 	private void validateMimeTypeEntry(ZipEntry mimetypeEntry, String firstEntryName) throws SAXException {
-		
+
 		if (mimetypeEntry.getMethod() != ZipEntry.STORED) {
 			logValidationError(OdfPackageConstraint.MIMETYPE_IS_COMPRESSED, getBaseURI());
 		}
@@ -627,7 +623,7 @@ public class OdfPackage implements Closeable {
 			logValidationError(OdfPackageConstraint.MIMETYPE_NOT_FIRST_IN_PACKAGE, getBaseURI());
 		}
 	}
-	
+
 	/** @returns the media type of the root document from the manifest.xml */
 	private String getMediaTypeFromManifest() {
 		OdfFileEntry rootDocumentEntry = mManifestEntries.get(SLASH);
@@ -637,7 +633,7 @@ public class OdfPackage implements Closeable {
 			return null;
 		}
 	}
-	
+
 	/** @returns the media type of the root document from the manifest.xml */
 	private String getMediaTypeFromEntry(ZipEntry mimetypeEntry) {
 		String entryMediaType = null;
@@ -659,12 +655,12 @@ public class OdfPackage implements Closeable {
 		}
 		return entryMediaType;
 	}
-	
+
 	/**
 	 * Insert an Odf document into the package at the given path. The path has
 	 * to be a directory and will receive the MIME type of the
 	 * OdfPackageDocument.
-	 * 
+	 *
 	 * @param doc
 	 *            the OdfPackageDocument to be inserted.
 	 * @param internalPath
@@ -676,18 +672,18 @@ public class OdfPackage implements Closeable {
 		updateFileEntry(ensureFileEntryExistence(internalPath), doc.getMediaTypeString());
 		mPkgDocuments.put(internalPath, doc);
 	}
-	
+
 	/**
 	 * Set the baseURI for this ODF package. NOTE: Should only be set during
 	 * saving the package.
-	 * 
+	 *
 	 * @param baseURI
 	 *            defining the location of the package
 	 */
 	void setBaseURI(String baseURI) {
 		mBaseURI = baseURI;
 	}
-	
+
 	/**
 	 * @return The URI to the ODF package, usually the URL, where this ODF
 	 *         package is located. If the package has not URI NULL is returned.
@@ -697,10 +693,10 @@ public class OdfPackage implements Closeable {
 	public String getBaseURI() {
 		return mBaseURI;
 	}
-	
+
 	/**
 	 * Returns on ODF documents based a given mediatype.
-	 * 
+	 *
 	 * @param internalPath
 	 *            path relative to the package root, where the document should
 	 *            be inserted.
@@ -732,7 +728,7 @@ public class OdfPackage implements Closeable {
 		}
 		return doc;
 	}
-	
+
 	/**
 	 * @deprecated This method is only added temporary as workaround for the IBM
 	 *             fork using different DOC classes. Until the registering of
@@ -747,7 +743,7 @@ public class OdfPackage implements Closeable {
 		internalPath = normalizeDirectoryPath(internalPath);
 		return mPkgDocuments.get(internalPath);
 	}
-	
+
 	/**
 	 * @param dom
 	 *            the DOM tree that has been parsed and should be added to the
@@ -761,7 +757,7 @@ public class OdfPackage implements Closeable {
 		internalPath = normalizeFilePath(internalPath);
 		this.insert(dom, internalPath, null);
 	}
-	
+
 	/**
 	 * @param internalPath
 	 *            path relative to the package root, where the document should
@@ -772,7 +768,7 @@ public class OdfPackage implements Closeable {
 		internalPath = normalizeFilePath(internalPath);
 		return this.mPkgDoms.get(internalPath);
 	}
-	
+
 	/**
 	 * @return a map with all open W3C XML documents with their internal package
 	 *         path as key.
@@ -780,11 +776,11 @@ public class OdfPackage implements Closeable {
 	Map<String, Document> getCachedDoms() {
 		return this.mPkgDoms;
 	}
-	
+
 	/**
 	 * Removes a document from the package via its path. Independent if it was
 	 * already opened or not.
-	 * 
+	 *
 	 * @param internalPath
 	 *            path relative to the package root, where the document should
 	 *            be removed.
@@ -795,7 +791,7 @@ public class OdfPackage implements Closeable {
 		try {
 			// get all files of the package
 			Set<String> allPackageFileNames = getFilePaths();
-			
+
 			// If the document is the root document
 			// the "/" representing the root document is outside the
 			// manifest.xml in the API an empty path
@@ -822,28 +818,28 @@ public class OdfPackage implements Closeable {
 		} catch (Exception ex) {
 			Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		
+
 	}
-	
+
 	/** @return all currently opened OdfPackageDocument of this OdfPackage */
 	Set<String> getCachedPackageDocuments() {
 		return mPkgDocuments.keySet();
 	}
-	
+
 	public OdfPackageDocument getRootDocument() {
 		return mPkgDocuments.get(OdfPackageDocument.ROOT_DOCUMENT_PATH);
 	}
-	
+
 	public OdfManifestDom getManifestDom() {
 		return mManifestDom;
 	}
-	
+
 	/**
 	 * Get the media type of the ODF file or document (ie. a directory). A
 	 * directory with a mediatype can be loaded as
 	 * <code>OdfPackageDocument</code>. Note: A directoy is represented by in
 	 * the package as directory with media type
-	 * 
+	 *
 	 * @param internalPath
 	 *            within the package of the file or document.
 	 * @return the mediaType for the resource of the given path
@@ -863,7 +859,7 @@ public class OdfPackage implements Closeable {
 		}
 		return mediaType;
 	}
-	
+
 	private String getMediaTypeFromEntry(String internalPath) {
 		OdfFileEntry entry = getFileEntry(internalPath);
 		// if the document is not in the package, the return is NULL
@@ -873,32 +869,32 @@ public class OdfPackage implements Closeable {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Get the media type of the ODF package (equal to media type of ODF root
 	 * document)
-	 * 
+	 *
 	 * @return the mediaType string of this ODF package
 	 */
 	public String getMediaTypeString() {
 		return mMediaType;
 	}
-	
+
 	/**
 	 * Set the media type of the ODF package (equal to media type of ODF root
 	 * document)
-	 * 
+	 *
 	 * @param mediaType
 	 *            string of this ODF package
 	 */
 	void setMediaTypeString(String mediaType) {
 		mMediaType = mediaType;
 	}
-	
+
 	/**
 	 * Get an OdfFileEntry for the internalPath NOTE: This method should be
 	 * better moved to a DOM inherited Manifest class
-	 * 
+	 *
 	 * @param internalPath
 	 *            The relative package path within the ODF package
 	 * @return The manifest file entry will be returned.
@@ -907,19 +903,19 @@ public class OdfPackage implements Closeable {
 		internalPath = normalizeFilePath(internalPath);
 		return mManifestEntries.get(internalPath);
 	}
-	
+
 	/**
 	 * Get a OdfFileEntries from the manifest file (i.e. /META/manifest.xml")
-	 * 
+	 *
 	 * @return The paths of the manifest file entries will be returned.
 	 */
 	public Set<String> getFilePaths() {
 		return mManifestEntries.keySet();
 	}
-	
+
 	/**
 	 * Check existence of a file in the package.
-	 * 
+	 *
 	 * @param internalPath
 	 *            The relative package documentURL within the ODF package
 	 * @return True if there is an entry and a file for the given documentURL
@@ -928,10 +924,10 @@ public class OdfPackage implements Closeable {
 		internalPath = normalizeFilePath(internalPath);
 		return mManifestEntries.containsKey(internalPath);
 	}
-	
+
 	/**
 	 * Save the package to given documentURL.
-	 * 
+	 *
 	 * @param odfPath
 	 *            - the path to the ODF package destination
 	 * @throws java.lang.Exception
@@ -941,11 +937,11 @@ public class OdfPackage implements Closeable {
 		File f = new File(odfPath);
 		save(f);
 	}
-	
+
 	/**
 	 * Save package to a given File. After saving it is still necessary to close
 	 * the package to have again full access about the file.
-	 * 
+	 *
 	 * @param pkgFile
 	 *            - the File to save the ODF package to
 	 * @throws java.lang.Exception
@@ -963,15 +959,15 @@ public class OdfPackage implements Closeable {
 		FileOutputStream fos = new FileOutputStream(pkgFile);
 		save(fos, baseURL);
 	}
-	
+
 	public void save(OutputStream odfStream) throws Exception {
 		save(odfStream, null);
 	}
-	
+
 	/**
 	 * Sets the password of this package. if password is not null, package will
 	 * be encrypted when save.
-	 * 
+	 *
 	 * @param password
 	 *            password
 	 * @since 0.8.9
@@ -979,10 +975,10 @@ public class OdfPackage implements Closeable {
 	public void setPassword(String password) {
 		newPwd = password;
 	}
-	
+
 	/**
 	 * Save an ODF document to the OutputStream.
-	 * 
+	 *
 	 * @param odfStream
 	 *            - the OutputStream to insert content to
 	 * @param baseURL
@@ -1040,15 +1036,15 @@ public class OdfPackage implements Closeable {
 			data = getBytes(OdfFile.MANIFEST.getPath());
 			createZipEntry(OdfFile.MANIFEST.getPath(), data, zos, modTime, crc);
 		} finally {
+            zos.flush();
 			zos.close();
 		}
-		odfStream.flush();
 		// } catch (IOException ex) {
 		// Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null,
 		// ex);
 		// }
 	}
-	
+
 	private void createZipEntry(String path, byte[] data, ZipOutputStream zos, long modTime, CRC32 crc) throws IOException {
 		ZipEntry ze = null;
 		// try {
@@ -1104,10 +1100,10 @@ public class OdfPackage implements Closeable {
 		// ex);
 		// }
 	}
-	
+
 	/**
 	 * Determines if a file have to be encrypted.
-	 * 
+	 *
 	 * @param internalPath
 	 *            the file location
 	 * @return true if the file needs encrypted, false, otherwise
@@ -1123,17 +1119,17 @@ public class OdfPackage implements Closeable {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Determines if a file have to be compressed.
-	 * 
+	 *
 	 * @param internalPath
 	 *            the file location
 	 * @return true if the file needs compression, false, otherwise
 	 */
 	private boolean fileNeedsCompression(String internalPath) {
 		boolean result = true;
-		
+
 		// ODF spec does not allow compression of "./mimetype" file
 		if (internalPath.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
 			return false;
@@ -1147,7 +1143,7 @@ public class OdfPackage implements Closeable {
 		}
 		return result;
 	}
-	
+
 	private void close(Closeable closeable) throws SAXException, IOException {
 		if (closeable != null) {
 			try {
@@ -1159,7 +1155,7 @@ public class OdfPackage implements Closeable {
 			}
 		}
 	}
-	
+
 	private void handleIOException(IOException ex, boolean warningOnly) throws SAXException, IOException {
 		if (mErrorHandler != null) {
 			SAXParseException se = new SAXParseException(ex.getMessage(), null, ex);
@@ -1181,7 +1177,7 @@ public class OdfPackage implements Closeable {
 		}
 		throw ex; // No error handler? Just throw the original IOException
 	}
-	
+
 	/**
 	 * Close the OdfPackage after it is no longer needed. Even after saving it
 	 * is still necessary to close the package to have again full access about
@@ -1208,7 +1204,7 @@ public class OdfPackage implements Closeable {
 		mBaseURI = null;
 		mResolver = null;
 	}
-	
+
 	/**
 	 * Parse the Manifest file
 	 */
@@ -1249,7 +1245,7 @@ public class OdfPackage implements Closeable {
 		// ex);
 		// }
 	}
-	
+
 	XMLReader getXMLReader() throws ParserConfigurationException, SAXException {
 		// create sax parser
 		SAXParserFactory saxFactory = new org.apache.xerces.jaxp.SAXParserFactoryImpl();
@@ -1260,7 +1256,7 @@ public class OdfPackage implements Closeable {
 		} catch (Exception ex) {
 			Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		
+
 		SAXParser parser = saxFactory.newSAXParser();
 		XMLReader xmlReader = parser.getXMLReader();
 		// More details at
@@ -1274,7 +1270,7 @@ public class OdfPackage implements Closeable {
 		xmlReader.setFeature("http://xml.org/sax/features/xmlns-uris", true);
 		return xmlReader;
 	}
-	
+
 	// Add the given path and all its subdirectories to the internalPath list
 	// to be written later to the manifest
 	private void createSubEntries(String internalPath) {
@@ -1295,10 +1291,10 @@ public class OdfPackage implements Closeable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Insert DOM tree into OdfPackage. An existing file will be replaced.
-	 * 
+	 *
 	 * @param fileDOM
 	 *            - XML DOM tree to be inserted as file.
 	 * @param internalPath
@@ -1325,11 +1321,11 @@ public class OdfPackage implements Closeable {
 		// remove byte array version of new DOM
 		mMemoryFileCache.remove(internalPath);
 	}
-	
+
 	/**
 	 * Embed an OdfPackageDocument to the current OdfPackage. All the file
 	 * entries of child document will be inserted.
-	 * 
+	 *
 	 * @param sourceDocument
 	 *            the OdfPackageDocument to be embedded.
 	 * @param internalPath
@@ -1340,7 +1336,7 @@ public class OdfPackage implements Closeable {
 		internalPath = normalizeDirectoryPath(internalPath);
 		// opened DOM of descendant Documents will be flashed to the their pkg
 		flushDoms(sourceDocument);
-		
+
 		// Gets the OdfDocument's manifest entry info, no matter it is a
 		// independent document or an embeddedDocument.
 		Map<String, OdfFileEntry> entryMapToCopy;
@@ -1388,11 +1384,11 @@ public class OdfPackage implements Closeable {
 		sourceDocument.setPackage(this);
 		cacheDocument(sourceDocument, internalPath);
 	}
-	
+
 	/**
 	 * Insert all open DOMs of XML files beyond parent document to the package.
 	 * The XML files will be updated in the package after calling save.
-	 * 
+	 *
 	 * @param parentDocument
 	 *            the document, which XML files shall be serialized
 	 */
@@ -1419,7 +1415,7 @@ public class OdfPackage implements Closeable {
 			}
 		}
 	}
-	
+
 	/** Get all the file entries from a sub directory */
 	private Map<String, OdfFileEntry> getSubDirectoryEntries(OdfPackage destinationPackage, String directory) {
 		directory = normalizeDirectoryPath(directory);
@@ -1442,21 +1438,21 @@ public class OdfPackage implements Closeable {
 		}
 		return subEntries;
 	}
-	
+
 	/**
 	 * Method returns the paths of all document within the package.
-	 * 
+	 *
 	 * @return A set of paths of all documents of the package, including the
 	 *         root document.
 	 */
 	public Set<String> getDocumentPaths() {
 		return getDocumentPaths(null, null);
 	}
-	
+
 	/**
 	 * Method returns the paths of all document within the package matching the
 	 * given criteria.
-	 * 
+	 *
 	 * @param mediaTypeString
 	 *            limits the desired set of document paths to documents of the
 	 *            given mediaType
@@ -1466,11 +1462,11 @@ public class OdfPackage implements Closeable {
 	public Set<String> getDocumentPaths(String mediaTypeString) {
 		return getDocumentPaths(mediaTypeString, null);
 	}
-	
+
 	/**
 	 * Method returns the paths of all document within the package matching the
 	 * given criteria.
-	 * 
+	 *
 	 * @param mediaTypeString
 	 *            limits the desired set of document paths to documents of the
 	 *            given mediaType
@@ -1505,7 +1501,7 @@ public class OdfPackage implements Closeable {
 		}
 		return innerDocuments;
 	}
-	
+
 	/**
 	 * Adding a manifest:file-entry to be saved in manifest.xml. In addition,
 	 * sub directories will be added as well to the manifest.
@@ -1531,7 +1527,7 @@ public class OdfPackage implements Closeable {
 		}
 		return fileEntry;
 	}
-	
+
 	/**
 	 * update file entry setting.
 	 */
@@ -1543,10 +1539,10 @@ public class OdfPackage implements Closeable {
 		// reset size to be unset
 		fileEntry.setSize(null);
 	}
-	
+
 	/**
 	 * Gets org.w3c.dom.Document for XML file contained in package.
-	 * 
+	 *
 	 * @param internalPath
 	 *            to a file within the Odf Package (eg. content.xml)
 	 * @return an org.w3c.dom.Document
@@ -1558,46 +1554,46 @@ public class OdfPackage implements Closeable {
 	 * @throws TransformerException
 	 */
 	public Document getDom(String internalPath) throws SAXException, ParserConfigurationException, IllegalArgumentException, TransformerConfigurationException, TransformerException, IOException {
-		
+
 		Document doc = mPkgDoms.get(internalPath);
 		if (doc != null) {
 			return doc;
 		}
-		
+
 		InputStream is = getInputStream(internalPath);
-		
+
 		// We depend on Xerces. So we just go ahead and create a Xerces DBF,
 		// without
 		// forcing everything else to do so.
 		DocumentBuilderFactory factory = new org.apache.xerces.jaxp.DocumentBuilderFactoryImpl();
 		factory.setNamespaceAware(true);
 		factory.setValidating(false);
-		
+
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		builder.setEntityResolver(getEntityResolver());
-		
+
 		String uri = getBaseURI() + internalPath;
-		
+
 		if (mErrorHandler != null) {
 			builder.setErrorHandler(mErrorHandler);
 		}
-		
+
 		InputSource ins = new InputSource(is);
 		ins.setSystemId(uri);
-		
+
 		doc = builder.parse(ins);
-		
+
 		if (doc != null) {
 			mPkgDoms.put(internalPath, doc);
 			mMemoryFileCache.remove(internalPath);
 		}
 		return doc;
 	}
-	
+
 	/**
 	 * Inserts an external file into an OdfPackage. An existing file will be
 	 * replaced.
-	 * 
+	 *
 	 * @param sourceURI
 	 *            - the source URI to the file to be inserted into the package.
 	 * @param internalPath
@@ -1619,11 +1615,11 @@ public class OdfPackage implements Closeable {
 		}
 		insert(is, internalPath, mediaType);
 	}
-	
+
 	/**
 	 * Inserts InputStream into an OdfPackage. An existing file will be
 	 * replaced.
-	 * 
+	 *
 	 * @param fileStream
 	 *            - the stream of the file to be inserted into the ODF package.
 	 * @param internalPath
@@ -1650,12 +1646,12 @@ public class OdfPackage implements Closeable {
 			insert(data, internalPath, mediaType);
 		}
 	}
-	
+
 	/**
 	 * Inserts a byte array into OdfPackage. An existing file will be replaced.
 	 * If the byte array is NULL a directory with the given mimetype will be
 	 * created.
-	 * 
+	 *
 	 * @param fileBytes
 	 *            - data of the file stream to be stored in package. If NULL a
 	 *            directory with the given mimetype will be created.
@@ -1684,16 +1680,16 @@ public class OdfPackage implements Closeable {
 		}
 		updateFileEntry(ensureFileEntryExistence(internalPath), mediaTypeString);
 	}
-	
+
 	// changed to package access as the manifest interiors are an implementation
 	// detail
 	Map<String, OdfFileEntry> getManifestEntries() {
 		return mManifestEntries;
 	}
-	
+
 	/**
 	 * Get package (sub-) content as byte array
-	 * 
+	 *
 	 * @param internalPath
 	 *            relative documentURL to the package content
 	 * @return the unzipped package content as byte array
@@ -1724,7 +1720,7 @@ public class OdfPackage implements Closeable {
 			// if the path's file was cached to memory (second high priority)
 		} else if (mManifestEntries.containsKey(internalPath) && mMemoryFileCache.get(internalPath) != null) {
 			data = mMemoryFileCache.get(internalPath);
-			
+
 			// if the path's file was cached to disc (lowest priority)
 		}
 		// if not available, check if file exists in ZIP
@@ -1765,7 +1761,7 @@ public class OdfPackage implements Closeable {
 		}
 		return data;
 	}
-	
+
 	// encrypt data and update manifest.
 	private byte[] encryptData(byte[] data, OdfFileEntry fileEntry) {
 		byte[] encryptedData = null;
@@ -1773,14 +1769,14 @@ public class OdfPackage implements Closeable {
 			// 1.The original uncompressed, unencrypted size is
 			// contained in the manifest:size.
 			fileEntry.setSize(data.length);
-			
+
 			// 2.Compress with the "deflate" algorithm
 			Deflater compresser = new Deflater(Deflater.DEFLATED, true);
 			compresser.setInput(data);
 			compresser.finish();
 			byte[] compressedData = new byte[data.length];
 			int compressedDataLength = compresser.deflate(compressedData);
-			
+
 			// 3. The start key is generated: the byte sequence
 			// representing the password in UTF-8 is used to
 			// generate a 20-byte SHA1 digest.
@@ -1794,14 +1790,14 @@ public class OdfPackage implements Closeable {
 			md.update(compressedData, 0, (compressedDataLength > 1024 ? 1024 : compressedDataLength));
 			byte[] checksumBytes = new byte[20];
 			md.digest(checksumBytes, 0, 20);
-			
+
 			// 5. For each file, a 16-byte salt is generated by a random
 			// generator.
 			// The salt is a BASE64 encoded binary sequence.
 			SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
 			byte[] salt = new byte[16];
 			secureRandom.nextBytes(salt);
-			
+
 			// char passChars[] = new String(passBytes, "UTF-8").toCharArray();
 			/*
 			 * char passChars[] = new char[20]; for (int i = 0; i <
@@ -1820,7 +1816,7 @@ public class OdfPackage implements Closeable {
 			 * raw = skey.getEncoded(); // algorithm-name="Blowfish CFB"
 			 * SecretKeySpec skeySpec = new SecretKeySpec(raw, "Blowfish");
 			 */
-			
+
 			byte[] dk = derivePBKDF2Key(passBytes, salt, 1024, 16);
 			SecretKeySpec key = new SecretKeySpec(dk, "Blowfish");
 			// 8.The files are encrypted: The random number
@@ -1840,7 +1836,7 @@ public class OdfPackage implements Closeable {
 			IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
 			cipher.init(Cipher.ENCRYPT_MODE, key, ivParameterSpec);
 			encryptedData = cipher.doFinal(compressedData, 0, compressedDataLength);
-			
+
 			// 9.update file entry encryption data.
 			String checksum = new Base64Binary(checksumBytes).toString();
 			FileEntryElement fileEntryElement = fileEntry.getOdfElement();
@@ -1866,12 +1862,12 @@ public class OdfPackage implements Closeable {
 				encryptionDataElement.removeChild(startKeyGenerationElement);
 			}
 			encryptionDataElement.newStartKeyGenerationElement("SHA1").setKeySizeAttribute(20);
-			
+
 			// System.out.println("full-path=\""+ path +"\"");
 			// System.out.println("size=\""+ data.length +"\"");
 			// System.out.println("checksum=\""+ checksum +"\"");
 			// System.out.println("compressedData ="+compressedDataLength);
-			
+
 		} catch (Exception e) {
 			// throws NoSuchAlgorithmException,
 			// InvalidKeySpecException, NoSuchPaddingException,
@@ -1882,7 +1878,7 @@ public class OdfPackage implements Closeable {
 		}
 		return encryptedData;
 	}
-	
+
 	private byte[] decryptData(byte[] data, OdfFileEntry manifestEntry, EncryptionDataElement encryptionDataElement) {
 		byte[] decompressData = null;
 		try {
@@ -1908,12 +1904,12 @@ public class OdfPackage implements Closeable {
 			 */
 			byte[] dk = derivePBKDF2Key(passBytes, salt, 1024, 16);
 			SecretKeySpec key = new SecretKeySpec(dk, "Blowfish");
-			
+
 			Cipher cipher = Cipher.getInstance("Blowfish/CFB/NoPadding");
 			IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
 			cipher.init(Cipher.DECRYPT_MODE, key, ivParameterSpec);
 			byte[] decryptedData = cipher.doFinal(data);
-			
+
 			// valid checksum
 			md.reset();
 			md.update(decryptedData, 0, (decryptedData.length > 1024 ? 1024 : decryptedData.length));
@@ -1935,7 +1931,7 @@ public class OdfPackage implements Closeable {
 		}
 		return decompressData;
 	}
-	
+
 	// derive PBKDF2Key (reference http://www.ietf.org/rfc/rfc2898.txt)
 	byte[] derivePBKDF2Key(byte[] password, byte[] salt, int iterationCount, int keyLength) throws NoSuchAlgorithmException, InvalidKeyException {
 		SecretKeySpec keyspec = new SecretKeySpec(password, "HmacSHA1");
@@ -1984,7 +1980,7 @@ public class OdfPackage implements Closeable {
 		}
 		return T;
 	}
-	
+
 	// Serializes a DOM tree into a byte array.
 	// Providing the counterpart of the generic Namespace handling of
 	// OdfFileDom.
@@ -2010,12 +2006,12 @@ public class OdfPackage implements Closeable {
 		writer.write(dom, output);
 		return baos.toByteArray();
 	}
-	
+
 	/**
 	 * Get the latest version of package content as InputStream, as it would be
 	 * saved. This might not be the original version once loaded from the
 	 * package.
-	 * 
+	 *
 	 * @param internalPath
 	 *            of the desired stream.
 	 * @return Inputstream of the ODF file within the package for the given
@@ -2039,12 +2035,12 @@ public class OdfPackage implements Closeable {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Get the latest version of package content as InputStream, as it would be
 	 * saved. This might not be the original version once loaded from the
 	 * package.
-	 * 
+	 *
 	 * @param internalPath
 	 *            of the desired stream.
 	 * @param useOriginal
@@ -2069,10 +2065,10 @@ public class OdfPackage implements Closeable {
 		}
 		return stream;
 	}
-	
+
 	/**
 	 * Gets the InputStream containing whole OdfPackage.
-	 * 
+	 *
 	 * @return the ODF package as input stream
 	 * @throws java.lang.Exception
 	 *             - if the package could not be read
@@ -2080,11 +2076,11 @@ public class OdfPackage implements Closeable {
 	public InputStream getInputStream() throws Exception {
 		final PipedOutputStream os = new PipedOutputStream();
 		final PipedInputStream is = new PipedInputStream();
-		
+
 		is.connect(os);
-		
+
 		Thread thread1 = new Thread() {
-			
+
 			@Override
 			public void run() {
 				try {
@@ -2093,9 +2089,9 @@ public class OdfPackage implements Closeable {
 				}
 			}
 		};
-		
+
 		Thread thread2 = new Thread() {
-			
+
 			@Override
 			public void run() {
 				try {
@@ -2108,17 +2104,17 @@ public class OdfPackage implements Closeable {
 				}
 			}
 		};
-		
+
 		thread1.start();
 		thread2.start();
-		
+
 		return is;
 	}
-	
+
 	/**
 	 * Insert the OutputStream for into OdfPackage. An existing file will be
 	 * replaced.
-	 * 
+	 *
 	 * @param internalPath
 	 *            - relative documentURL where the DOM tree should be inserted
 	 *            as XML file
@@ -2129,11 +2125,11 @@ public class OdfPackage implements Closeable {
 	public OutputStream insertOutputStream(String internalPath) throws Exception {
 		return insertOutputStream(internalPath, null);
 	}
-	
+
 	/**
 	 * Insert the OutputStream - to be filled after method - when stream is
 	 * closed into OdfPackage. An existing file will be replaced.
-	 * 
+	 *
 	 * @param internalPath
 	 *            - relative documentURL where the DOM tree should be inserted
 	 *            as XML file
@@ -2148,9 +2144,9 @@ public class OdfPackage implements Closeable {
 		final String fPath = internalPath;
 		final OdfFileEntry fFileEntry = getFileEntry(internalPath);
 		final String fMediaType = mediaType;
-		
+
 		ByteArrayOutputStream baos = new ByteArrayOutputStream() {
-			
+
 			@Override
 			public void close() {
 				try {
@@ -2168,10 +2164,10 @@ public class OdfPackage implements Closeable {
 		};
 		return baos;
 	}
-	
+
 	/**
 	 * Removes a single file from the package.
-	 * 
+	 *
 	 * @param internalPath
 	 *            of the file relative to the package root
 	 */
@@ -2186,7 +2182,7 @@ public class OdfPackage implements Closeable {
 			manifestEle.getParentNode().removeChild(manifestEle);
 		}
 	}
-	
+
 	/**
 	 * Encoded XML Attributes
 	 */
@@ -2195,11 +2191,11 @@ public class OdfPackage implements Closeable {
 		encodedValue = APOSTROPHE_PATTERN.matcher(encodedValue).replaceAll(ENCODED_APOSTROPHE);
 		return encodedValue;
 	}
-	
+
 	/**
 	 * Get EntityResolver to be used in XML Parsers which can resolve content
 	 * inside the OdfPackage
-	 * 
+	 *
 	 * @return a SAX EntityResolver
 	 */
 	public EntityResolver getEntityResolver() {
@@ -2208,11 +2204,11 @@ public class OdfPackage implements Closeable {
 		}
 		return mResolver;
 	}
-	
+
 	/**
 	 * Get URIResolver to be used in XSL Transformations which can resolve
 	 * content inside the OdfPackage
-	 * 
+	 *
 	 * @return a TraX Resolver
 	 */
 	public URIResolver getURIResolver() {
@@ -2221,13 +2217,13 @@ public class OdfPackage implements Closeable {
 		}
 		return mResolver;
 	}
-	
+
 	private static String getBaseURLFromFile(File file) throws Exception {
 		String baseURL = Util.toExternalForm(file.getCanonicalFile().toURI());
 		baseURL = BACK_SLASH_PATTERN.matcher(baseURL).replaceAll(SLASH);
 		return baseURL;
 	}
-	
+
 	/**
 	 * Ensures that the given file path is not null nor empty and not an
 	 * external reference
@@ -2236,7 +2232,7 @@ public class OdfPackage implements Closeable {
 	 * <li>Any substring "/../", "/./" or "//" will be removed</li>
 	 * <li>A prefix "./" and "../" will be removed</li>
 	 * </ol>
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *             If the path is NULL, empty or an external path (e.g. starting
 	 *             with "../" is given). None relative URLs will NOT throw an
@@ -2252,7 +2248,7 @@ public class OdfPackage implements Closeable {
 			return normalizePath(internalPath);
 		}
 	}
-	
+
 	/**
 	 * Ensures the given directory path is not null nor an external reference to
 	 * resources outside the package. An empty path and slash "/" are both
@@ -2260,7 +2256,7 @@ public class OdfPackage implements Closeable {
 	 * "/" as root, the empty path aligns more adequate with the file system
 	 * concept. To ensure the given directory path within the package can be
 	 * used as a key (is unique for the Package) the path will be normalized.
-	 * 
+	 *
 	 * @see #normalizeFilePath(String) In addition to the file path
 	 *      normalization a trailing slash will be used for directories.
 	 */
@@ -2274,7 +2270,7 @@ public class OdfPackage implements Closeable {
 		}
 		return directoryPath;
 	}
-	
+
 	/** Normalizes both directory and file path */
 	static String normalizePath(String path) {
 		if (path == null) {
@@ -2302,7 +2298,7 @@ public class OdfPackage implements Closeable {
 		}
 		return path;
 	}
-	
+
 	/** Normalizes both directory and file path */
 	private static boolean mightBeExternalReference(String internalPath) {
 		boolean isExternalReference = false;
@@ -2317,7 +2313,7 @@ public class OdfPackage implements Closeable {
 		}
 		return isExternalReference;
 	}
-	
+
 	/**
 	 * Resolving the directory replacements (ie. "/../" and "/./") with a slash
 	 * "/"
@@ -2369,11 +2365,11 @@ public class OdfPackage implements Closeable {
 			return out.toString();
 		}
 	}
-	
+
 	/**
 	 * Checks if the given reference is a reference, which points outside the
 	 * ODF package
-	 * 
+	 *
 	 * @param internalPath
 	 *            the file reference to be checked
 	 * @return true if the reference is an package external reference
@@ -2385,7 +2381,7 @@ public class OdfPackage implements Closeable {
 			return mightBeExternalReference(normalizePath(internalPath));
 		}
 	}
-	
+
 	/**
 	 * Allow an application to register an error event handler.
 	 * <p>
@@ -2399,7 +2395,7 @@ public class OdfPackage implements Closeable {
 	 * Applications may register a new or different handler in the middle of a
 	 * parse, and the ODFDOM will begin using the new handler immediately.
 	 * </p>
-	 * 
+	 *
 	 * @param handler
 	 *            The error handler.
 	 * @see #getErrorHandler
@@ -2407,10 +2403,10 @@ public class OdfPackage implements Closeable {
 	public void setErrorHandler(ErrorHandler handler) {
 		mErrorHandler = handler;
 	}
-	
+
 	/**
 	 * Return the current error handler used for ODF validation.
-	 * 
+	 *
 	 * @return The current error handler, or null if none has been registered
 	 *         and validation is disabled.
 	 * @see #setErrorHandler
@@ -2418,7 +2414,7 @@ public class OdfPackage implements Closeable {
 	public ErrorHandler getErrorHandler() {
 		return mErrorHandler;
 	}
-	
+
 	void logValidationWarning(ValidationConstraint constraint, String baseURI, Object... o) throws SAXException {
 		// try{
 		if (mErrorHandler == null) {
@@ -2444,7 +2440,7 @@ public class OdfPackage implements Closeable {
 		// ex);
 		// }
 	}
-	
+
 	void logValidationError(ValidationConstraint constraint, String baseURI, Object... o) throws SAXException {
 		// try{
 		if (mErrorHandler == null) {
@@ -2470,7 +2466,7 @@ public class OdfPackage implements Closeable {
 		// ex);
 		// }
 	}
-	
+
 	/**
 	 * @param odfVersion
 	 *            parsed from the manifest
@@ -2478,7 +2474,7 @@ public class OdfPackage implements Closeable {
 	void setManifestVersion(String odfVersion) {
 		mManifestVersion = odfVersion;
 	}
-	
+
 	/**
 	 * @return the ODF version found in the manifest. Meant to be used to reuse
 	 *         when the manifest is recreated
