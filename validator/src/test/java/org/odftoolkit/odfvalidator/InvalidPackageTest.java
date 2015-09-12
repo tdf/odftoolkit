@@ -21,6 +21,8 @@
  ************************************************************************/
 package org.odftoolkit.odfvalidator;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -106,5 +108,21 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
 		}
 		Assert.assertTrue(output.contains("Error: The ODF package 'testInvalidPkg3.odt' shall contain the 'META-INF/manifest.xml' file"));
 		Assert.assertTrue(output.contains("testInvalidPkg3.odt:  Info: 2 errors, no warnings"));
+	}
+
+	@Test
+	public void validateEncryptedODT() {
+		String output = "";
+		try {
+            // password: hello
+            String name = "encrypted-with-pwd_hello.odt";
+			output = doValidation(name, null);
+		} catch (Throwable t) {
+                StringWriter errors = new StringWriter();
+                t.printStackTrace(new PrintWriter(errors));
+			Assert.fail(t.toString() + "\n" + errors.toString());
+		}
+		Assert.assertTrue(output.contains("Fatal: ZIP entry 'mimetype': only DEFLATED entries can have EXT descriptor"));
+        java.util.logging.Logger.getLogger(getClass().getName()).info("Test result:\n"+ output);
 	}
 }

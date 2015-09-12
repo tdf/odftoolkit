@@ -25,6 +25,7 @@ package org.odftoolkit.odfvalidator;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.logging.Level;
 import org.junit.Ignore;
 
 @Ignore
@@ -38,14 +39,17 @@ public class OdfValidatorTestBase {
         ByteArrayOutputStream aOut = new ByteArrayOutputStream();
         PrintStream aPOut = new PrintStream(aOut);
         InputStream aIn = getClass().getClassLoader().getResourceAsStream(aFileName);
+        if(aIn == null){
+            java.util.logging.Logger.getLogger(OdfValidatorTestBase.class.getName()).log(Level.SEVERE, "The input document '" + aFileName + "' could not be found!");
+        }
         aValidator.validateStream(aPOut, aIn, aFileName, OdfValidatorMode.VALIDATE, null);
         return aOut.toString();
     }
 
     String doValidation(String aFileName, OdfVersion aVersion, OdfValidatorMode odfValidatorMode) throws Exception {
-        return doValidation(aFileName, aVersion, odfValidatorMode, false);				
-	}		
-	
+        return doValidation(aFileName, aVersion, odfValidatorMode, false);
+	}
+
     String doValidation(String aFileName, OdfVersion aVersion, OdfValidatorMode odfValidatorMode, boolean htmlOutput) throws Exception {
         ODFValidator aValidator = new ODFValidator(null, Logger.LogLevel.INFO, htmlOutput, aVersion, true);
         ByteArrayOutputStream aOut = new ByteArrayOutputStream();
@@ -55,8 +59,8 @@ public class OdfValidatorTestBase {
 		try {
 			aValidator.validateStream(aPOut, aIn, aFileName, odfValidatorMode, filter);
 		} catch (Exception e) {
-			e.printStackTrace(aPOut);			
+			e.printStackTrace(aPOut);
 		}
-        return aOut.toString();							
-	}				
+        return aOut.toString();
+	}
 }
