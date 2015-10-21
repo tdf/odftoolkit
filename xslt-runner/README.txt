@@ -2,11 +2,6 @@
 * ODFXSLTRunner                                             *
 *                                                           *
 *************************************************************
-*                                                           *
-* Version: 1.1.0                                     *
-* Release Date: xx/xx/2010                                  *
-*                                                           *
-*************************************************************
 
 
 About ODF XSLT Runner
@@ -22,7 +17,7 @@ Documentation
 
 In general, the Wiki page is a great place to start when looking for online
 documentation and other information about ODFXSLTRunner.
-    http://odftoolkit.org/projects/odftoolkit/pages/ODFXSLTRunner
+    https://incubator.apache.org/odftoolkit/xsltrunner/ODFXSLTRunner.html
 
 
 License
@@ -37,7 +32,7 @@ Installation
 Just put the file odfxsltrunner.jar in your classpath.
 
 You will need ODFDOM. Get it from
-    http://odftoolkit.org/projects/odfdom
+    https://incubator.apache.org/odftoolkit/odfdom/index.html
 
 You will further need Apache Xerces-J. Get it from
     http://xml.apache.org/dist/xerces-j/
