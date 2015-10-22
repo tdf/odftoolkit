@@ -23,27 +23,23 @@
  */
 package schema2template.example.odf;
 
+import com.sun.msv.grammar.Expression;
+import com.sun.msv.reader.trex.ng.RELAXNGReader;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.xml.parsers.SAXParserFactory;
-
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
-
 import schema2template.OutputFileListEntry;
 import schema2template.OutputFileListHandler;
 import schema2template.model.XMLModel;
-
-import com.sun.msv.grammar.Expression;
-import com.sun.msv.reader.trex.ng.RELAXNGReader;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Three ODF examples in one:
@@ -90,6 +86,7 @@ public class OdfHelper {
 	private static String odfPkgResourceDir;
 	private static String odfPythonResourceDir;
 	private static String odfReferenceResourceDir;
+    private static String odfSchemaResourceDir;
 	private static String outputRoot;
 	public static final String INPUT_ROOT = "target" + File.separator + "odf-schemas";
 	public static final String TEST_REFERENCE_DIR = "target" + File.separator + "test-classes" + File.separator
@@ -142,11 +139,12 @@ public class OdfHelper {
 		odfPkgResourceDir = TEST_INPUT_ROOT + File.separator + "odfdom-java" + File.separator + "pkg";
 		odfPythonResourceDir = TEST_INPUT_ROOT + File.separator + "odfdom-python";
 		odfReferenceResourceDir = TEST_INPUT_ROOT + File.separator + "odf-reference";
+        odfSchemaResourceDir = TEST_INPUT_ROOT + File.separator + "odf-schemas";
 		odf12SignatureRngFile = INPUT_ROOT + File.separator + ODF12_SIGNATURE_RNG_FILE_NAME;
 		odf12ManifestRngFile = INPUT_ROOT + File.separator + ODF12_MANIFEST_RNG_FILE_NAME;
 		odf12RngFile = INPUT_ROOT + File.separator + ODF12_RNG_FILE_NAME;
 		odf11RngFile = INPUT_ROOT + File.separator + ODF11_RNG_FILE_NAME;
-		odf10RngFile = INPUT_ROOT + File.separator + ODF10_RNG_FILE_NAME;
+		odf10RngFile = odfSchemaResourceDir + File.separator + ODF10_RNG_FILE_NAME;
 		outputRoot = "target";
 		mConfigFile = TEST_INPUT_ROOT + File.separator + "config.xml";
 	}

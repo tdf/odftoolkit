@@ -188,6 +188,11 @@
             				<toDir>${project.build.directory}/odf-schemas</toDir>
           				</configuration>
         			</execution>
+                    <!-- Disabled due to a security exception on Apache servers, when downloading from that OASIS host
+                    Error handling resource: sun.security.validator.ValidatorException: 
+                        PKIX path building failed: 
+                            sun.security.provider.certpath.SunCertPathBuilderException: 
+                                unable to find valid certification path to requested target
         			<execution>
           				<id>download-odf-schema-v1.0</id>
           				<phase>process-resources</phase>
@@ -211,7 +216,7 @@
             				<fromFile>OpenDocument-strict-schema-v1.0-os.rng</fromFile>
             				<toDir>${project.build.directory}/odf-schemas</toDir>
           				</configuration>
-        			</execution>
+        			</execution>-->
       			</executions>
     		</plugin>
 		</plugins>
