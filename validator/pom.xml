@@ -151,6 +151,13 @@
 							<toDir>${project.build.directory}/classes/schema/odf1.1</toDir>
 						</configuration>
 					</execution>
+                    <!-- https://issues.apache.org/jira/browse/ODFTOOLKIT-406
+                    Disabled due to a security exception on Apache servers, when downloading from that OASIS host
+                    Error handling resource: sun.security.validator.ValidatorException: 
+                        PKIX path building failed: 
+                            sun.security.provider.certpath.SunCertPathBuilderException: 
+                                unable to find valid certification path to requested target
+                                                        
 					<execution>
 						<id>download-odf-manifest-schema-v1.0</id>
 						<phase>validate</phase>
@@ -187,6 +194,7 @@
 							<toDir>${project.build.directory}/classes/schema/odf1.0</toDir>
 						</configuration>
 					</execution>
+                                        -->       
 					<execution>
 						<id>download-mathml-schema-v3.0</id>
 						<phase>validate</phase>
