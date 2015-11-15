@@ -1414,6 +1414,24 @@ public class TableCellTest {
 		}
 	}
 
+	@Test
+	public void testSetValidityListWithReuseContentValidationEl() {
+		try {
+      SpreadsheetDocument ods = SpreadsheetDocument.newSpreadsheetDocument();
+      Table table = ods.appendSheet("New sheet");
+
+      List<String> values = Arrays.asList("Mon", "Tue", "Wed", "Thu", "Fri");
+      for (int rowIndex = 0; rowIndex < 3; rowIndex++) {
+        Cell fcell = table.getCellByPosition(0, rowIndex);
+        fcell.setValidityList(values);
+  			Assert.assertNotNull(fcell.getOdfElement().getTableContentValidationNameAttribute());
+      }
+		} catch (Exception e) {
+			Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+
 	private void compareResults(Element element, String input, String[] output) {
 		int i;
 		int nSpaces;

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -34,10 +34,8 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.imageio.ImageIO;
 import javax.swing.JTextField;
-
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoTextAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
@@ -153,7 +151,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * The default columns repeated number.
 	 */
 	private static final int DEFAULT_COLUMNS_REPEATED_NUMBER = 1;
-	
+
 	private ParagraphContainerImpl paragraphContainerImpl;
 	private ListContainerImpl listContainerImpl;
 
@@ -172,7 +170,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * Each <code>TableTableCellElementBase</code> instance has a one-to-one
 	 * relationship to the a <code>Cell</code> instance.
-	 * 
+	 *
 	 * @param cellElement
 	 *            the cell element that need to get the corresponding
 	 *            <code>Cell</code> instance
@@ -225,9 +223,9 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * The returned value can be "center", "end", "justify", "left", "right", or
 	 * "start". If no horizontal alignment is set, null will be returned.
-	 * 
+	 *
 	 * @return the horizontal alignment setting.
-	 * 
+	 *
 	 * @see #getHorizontalAlignmentType()
 	 * @deprecated As of Simple version 0.3, replaced by
 	 *             <code>getHorizontalAlignmentType()</code>
@@ -251,7 +249,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * Default value will be returned if explicit style definition is found but
 	 * no horizontal alignment is set.
-	 * 
+	 *
 	 * @return the horizontal alignment setting.
 	 */
 	public HorizontalAlignmentType getHorizontalAlignmentType() {
@@ -265,7 +263,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * "start". Actually, "left" will be interpreted as "start", while "right"
 	 * will be interpreted as "end". If argument is null, the explicit
 	 * horizontal alignment setting is removed.
-	 * 
+	 *
 	 * @param horizontalAlignment
 	 *            the horizontal alignment setting.
 	 * @see #setHorizontalAlignment(StyleTypeDefinitions.HorizontalAlignmentType)
@@ -296,7 +294,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	/**
 	 * Set the horizontal alignment setting of this cell. If the alignment is
 	 * set as Default, the explicit horizontal alignment setting is removed.
-	 * 
+	 *
 	 * @param alignType
 	 *            the horizontal alignment setting.
 	 */
@@ -309,9 +307,9 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * The returned value can be "auto", "automatic", "baseline", "bottom",
 	 * "middle", or "top".
-	 * 
+	 *
 	 * @return the vertical alignment setting of this cell.
-	 * 
+	 *
 	 * @see #getVerticalAlignmentType()
 	 * @deprecated As of Simple version 0.3, replaced by
 	 *             <code>getVerticalAlignmentType()</code>
@@ -335,7 +333,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * Default value will be returned if explicit style definition is found but
 	 * no vertical alignment is set.
-	 * 
+	 *
 	 * @return the vertical alignment setting.
 	 */
 	public VerticalAlignmentType getVerticalAlignmentType() {
@@ -348,7 +346,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * The parameter can be "auto", "automatic", "baseline", "bottom", "middle",
 	 * or "top". If argument is null, the explicit vertical alignment setting is
 	 * removed.
-	 * 
+	 *
 	 * @param verticalAlignment
 	 *            the vertical alignment setting.
 	 * @see #setVerticalAlignment(StyleTypeDefinitions.VerticalAlignmentType)
@@ -375,7 +373,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * If the alignment is set as Default or null, the explicit vertical
 	 * alignment setting is removed.
-	 * 
+	 *
 	 * @param verticalAlignment
 	 *            the vertical alignment setting.
 	 */
@@ -385,7 +383,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Return the wrap option of this cell.
-	 * 
+	 *
 	 * @return true if the cell content can be wrapped;
 	 *         <p>
 	 *         false if the cell content cannot be wrapped.
@@ -396,7 +394,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Set the wrap option of this cell.
-	 * 
+	 *
 	 * @param isTextWrapped
 	 *            whether the cell content can be wrapped or not
 	 */
@@ -483,7 +481,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the index of the table row which contains this cell.
-	 * 
+	 *
 	 * @return the index of the row containing this cell
 	 */
 	public int getRowIndex() {
@@ -501,7 +499,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get an instance of table feature which contains this cell.
-	 * 
+	 *
 	 * @return the table containing this cell
 	 */
 	public Table getTable() {
@@ -514,7 +512,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the index of the table column which contains this cell.
-	 * 
+	 *
 	 * @return the index of the column containing this cell
 	 */
 	public int getColumnIndex() {
@@ -533,7 +531,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the instance of table column feature which contains this cell.
-	 * 
+	 *
 	 * @return the instance of table column feature which contains the cell.
 	 */
 	public Column getTableColumn() {
@@ -553,7 +551,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the instance of table row feature which contains this cell.
-	 * 
+	 *
 	 * @return the instance of table row feature which contains the cell.
 	 */
 	public Row getTableRow() {
@@ -571,7 +569,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the table object who contains this cell.
-	 * 
+	 *
 	 * @return the table object who contains the cell.
 	 */
 	private TableTableElement getTableElement() {
@@ -590,7 +588,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * If the cell is a covered cell, the owner cell will be returned; if the
 	 * cell is a real cell , the cell itself will be returned.
-	 * 
+	 *
 	 * @return the cell that covers the current cell
 	 */
 	public Cell getOwnerTableCell() {
@@ -603,7 +601,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	/**
 	 * Get the instance of <code>TableTableCellElementBase</code> which
 	 * represents this cell.
-	 * 
+	 *
 	 * @return the instance of <code>TableTableCellElementBase</code>
 	 */
 	public TableTableCellElementBase getOdfElement() {
@@ -616,7 +614,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * If the value type is not "currency", an IllegalArgumentException will be
 	 * thrown.
-	 * 
+	 *
 	 * @return the currency code
 	 *         <p>
 	 * @throws IllegalArgumentException
@@ -634,7 +632,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	/**
 	 * Set the currency code of this cell, for example, "USD", "EUR", "CNY", and
 	 * etc.
-	 * 
+	 *
 	 * @param currency
 	 *            the currency code that need to be set.
 	 * @throws IllegalArgumentException
@@ -663,7 +661,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * If the parameter <code>type</code> is not a valid cell type, an
 	 * IllegalArgumentException will be thrown.
-	 * 
+	 *
 	 * @param type
 	 *            the type that need to be set If input type is null, an
 	 *            IllegalArgumentException will be thrown.
@@ -685,7 +683,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Get the value type of this cell. The returned value can be "boolean",
 	 * "currency", "date", "float", "percentage", "string" or "time". If no
 	 * value type is set, null will be returned.
-	 * 
+	 *
 	 * @return the type of the cell
 	 */
 	public String getValueType() {
@@ -701,7 +699,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Get the double value of this cell as Double object.
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "float".
-	 * 
+	 *
 	 * @return the double value of this cell as a Double object. If the cell
 	 *         value is empty, null will be returned.
 	 *         <p>
@@ -720,7 +718,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Get the currency value of this cell as Double object.
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "currency".
-	 * 
+	 *
 	 * @return the currency value of this cell as a Double object. If the cell
 	 *         value is empty, null will be returned.
 	 * @throws IllegalArgumentException
@@ -737,7 +735,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the symbol of currency.
-	 * 
+	 *
 	 * @return the currency symbol
 	 * @throws IllegalArgumentException
 	 *             an IllegalArgumentException will be thrown if the value type
@@ -767,7 +765,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Set the value and currency of the cell, and set the value type as
 	 * "currency". If
 	 * <code>value</value> is null, the cell value will be removed.
-	 * 
+	 *
 	 * @param value
 	 *            the value that will be set
 	 * @param currency
@@ -790,7 +788,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Get the cell percentage value as Double object.
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "percentage".
-	 * 
+	 *
 	 * @return the percentage value of this cell as a Double object. If the cell
 	 *         value is empty, null will be returned.
 	 * @throws IllegalArgumentException
@@ -809,7 +807,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Set the cell value as a percentage value and set the value type as
 	 * percentage too. If
 	 * <code>value</value> is null, the cell value will be removed.
-	 * 
+	 *
 	 * @param value
 	 *            the value that will be set
 	 */
@@ -821,7 +819,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the text displayed in this cell.
-	 * 
+	 *
 	 * @return the text displayed in this cell
 	 */
 	public String getDisplayText() {
@@ -838,13 +836,13 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * value set by this method, because the displayed text in ODF viewer is
 	 * calculated and set by editor. So an adapter can be assigned to adapt cell
 	 * value and value type.
-	 * 
+	 *
 	 * @param content
 	 *            the displayed text.
 	 * @param adapter
 	 *            the <code>CellValueAdapter</code> used to adapt cell value and
 	 *            value type.
-	 * 
+	 *
 	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 * @since 0.3
 	 */
@@ -867,10 +865,10 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * updated follow by the rules which are designed in the
 	 * {@link org.odftoolkit.simple.table.DefaultCellValueAdapter
 	 * <code>DefaultCellValueAdapter</code>}.
-	 * 
+	 *
 	 * @param content
 	 *            the displayed text.
-	 * 
+	 *
 	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 * @see org.odftoolkit.simple.table.DefaultCellValueAdapter
 	 */
@@ -885,7 +883,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * value set by this method, because the displayed text in ODF viewer is
 	 * calculated and set by editor. So an adapter can be assigned to adapt cell
 	 * value and value type.
-	 * 
+	 *
 	 * @param content
 	 *            the displayed text. If content is null, it will display the
 	 *            empty string instead.
@@ -895,7 +893,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * @param stylename
 	 *            the style name. If style name is null, the content will use
 	 *            the default paragraph style.
-	 * 
+	 *
 	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 * @since 0.3
 	 */
@@ -917,14 +915,14 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * updated follow by the rules which are designed in the
 	 * {@link org.odftoolkit.simple.table.DefaultCellValueAdapter
 	 * <code>DefaultCellValueAdapter</code>}.
-	 * 
+	 *
 	 * @param content
 	 *            the displayed text. If content is null, it will display the
 	 *            empty string instead.
 	 * @param stylename
 	 *            the style name. If style name is null, the content will use
 	 *            the default paragraph style.
-	 * 
+	 *
 	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 * @see org.odftoolkit.simple.table.DefaultCellValueAdapter
 	 */
@@ -962,7 +960,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Set the cell value as a double and set the value type to be "float".
-	 * 
+	 *
 	 * @param value
 	 *            the double value that will be set. If
 	 *            <code>value</value> is null, the cell value will be removed.
@@ -978,7 +976,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Get the cell boolean value as Boolean object.
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "boolean".
-	 * 
+	 *
 	 * @return the Boolean value of cell. If the cell value is empty, null will
 	 *         be returned.
 	 * @throws IllegalArgumentException
@@ -996,7 +994,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	/**
 	 * Set the cell value as a boolean and set the value type to be boolean. If
 	 * <code>value</value> is null, the cell value will be removed.
-	 * 
+	 *
 	 * @param value
 	 *            the value of boolean type
 	 */
@@ -1011,7 +1009,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Get the cell date value as Calendar.
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "date".
-	 * 
+	 *
 	 * @return the Calendar value of cell
 	 * @throws IllegalArgumentException
 	 *             an IllegalArgumentException will be thrown, if the cell type
@@ -1020,12 +1018,12 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	public Calendar getDateValue() {
 		return getOfficeDateValue(DEFAULT_DATE_FORMAT);
 	}
-	
+
 	/**
 	 * Get the cell date time value (date and time) as Calendar.
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "date".
-	 * 
+	 *
 	 * @return the Calendar value of cell
 	 * @throws IllegalArgumentException
 	 *             an IllegalArgumentException will be thrown, if the cell type
@@ -1034,7 +1032,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	public Calendar getDateTimeValue() {
 		return getOfficeDateValue(DEFAULT_DATE_TIME_FORMAT);
 	}
-	
+
 	private Calendar getOfficeDateValue(String pattern) {
 		if (getTypeAttr() == OfficeValueTypeAttribute.Value.DATE) {
 			String dateStr = mCellElement.getOfficeDateValueAttribute();
@@ -1052,7 +1050,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Set the cell value as a date, and set the value type to be "date".
-	 * 
+	 *
 	 * @param date
 	 *            the value of {@link java.util.Calendar java.util.Calendar}
 	 *            type.
@@ -1060,10 +1058,10 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	public void setDateValue(Calendar date) {
 		setOfficeDateValue(date, DEFAULT_DATE_FORMAT);
 	}
-	
+
 	/**
 	 * Sets the cell value as a date with second precision and the value type to be "date".
-	 * @param date 
+	 * @param date
 	 */
 	public void setDateTimeValue(Calendar date) {
 		setOfficeDateValue(date, DEFAULT_DATE_TIME_FORMAT);
@@ -1080,12 +1078,12 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 		mCellElement.setOfficeDateValueAttribute(svalue);
 		setDisplayTextContent(svalue, null);
 	}
-	
+
 	/**
 	 * Set the cell style name. When lots of cells have the same style features,
 	 * the user can configuration the first one and set the other's style name
 	 * directly. That will improve the performance.
-	 * 
+	 *
 	 * @param styleName
 	 *            an exit cell style name.
 	 * @since 0.4
@@ -1096,7 +1094,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the cell style name.
-	 * 
+	 *
 	 * @return cell style name.
 	 * @since 0.4
 	 */
@@ -1106,7 +1104,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Set the cell value as a string, and set the value type to be string.
-	 * 
+	 *
 	 * @param str
 	 *            the value of string type. If input string is null, an empty
 	 *            string will be set.
@@ -1213,7 +1211,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Get the cell value as a string.
 	 * <p>
 	 * If the cell type is not string, the display text will be returned.
-	 * 
+	 *
 	 * @return the string value of this cell, or the display text
 	 */
 	public String getStringValue() {
@@ -1224,7 +1222,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Get the cell value as {@link java.util.Calendar java.util.Calendar}.
 	 * <p>
 	 * Throw exception if the cell type is not "time".
-	 * 
+	 *
 	 * @return the Calendar value of cell
 	 * @throws IllegalArgumentException
 	 *             an IllegalArgumentException will be thrown if the cell type
@@ -1250,7 +1248,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Set the cell value as a time and set the value type to be "time" too.
-	 * 
+	 *
 	 * @param time
 	 *            the value of {@link java.util.Calendar java.util.Calendar}
 	 *            type.
@@ -1287,7 +1285,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * If no background color is set, default background color "#FFFFFF" will be
 	 * returned.
-	 * 
+	 *
 	 * @return the background color of this cell
 	 */
 	public Color getCellBackgroundColor() {
@@ -1299,9 +1297,9 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * If no background color is set, default background color "#FFFFFF" will be
 	 * returned.
-	 * 
+	 *
 	 * @return the background color of this cell
-	 * 
+	 *
 	 * @see #getCellBackgroundColor()
 	 * @deprecated As of Simple version 0.3, replaced by
 	 *             <code>getCellBackgroundColor()</code>
@@ -1323,7 +1321,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Set the background color of this cell.
-	 * 
+	 *
 	 * @param cellBackgroundColor
 	 *            the background color that need to set. If
 	 *            <code>cellBackgroundColor</code> is null, default background
@@ -1337,7 +1335,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Set the background color of this cell using string. The string must be a
 	 * valid argument for constructing {@link org.odftoolkit.odfdom.type.Color
 	 * <code>org.odftoolkit.odfdom.type.Color</code>}.
-	 * 
+	 *
 	 * @param cellBackgroundColor
 	 *            the background color that need to set. If cellBackgroundColor
 	 *            is null, default background color #FFFFFF will be set.
@@ -1364,7 +1362,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the column spanned number of this cell.
-	 * 
+	 *
 	 * @return the column spanned number
 	 */
 	public int getColumnSpannedNumber() {
@@ -1380,7 +1378,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the column repeated number of this cell.
-	 * 
+	 *
 	 * @return the column repeated number
 	 */
 	int getColumnsRepeatedNumber() {
@@ -1393,7 +1391,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the row spanned number of this cell.
-	 * 
+	 *
 	 * @return the row spanned number
 	 */
 	public int getRowSpannedNumber() {
@@ -1409,7 +1407,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Set the column spanned number.
-	 * 
+	 *
 	 * @param spannedNum
 	 *            the column spanned number to be set. If spannedNum is less
 	 *            than 1, default column spanned number 1 will be set.
@@ -1428,7 +1426,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Set the column repeated number.
-	 * 
+	 *
 	 * @param repeatedNum
 	 *            the column repeated number that need to be set. If repeatedNum
 	 *            is less than 1, default columns repeated number 1 will be set.
@@ -1442,7 +1440,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Set the row spanned number.
-	 * 
+	 *
 	 * @param spannedNum
 	 *            row spanned number that need to be set the row spanned number
 	 *            that need to be set. If spannedNum is less than 1, default row
@@ -1462,7 +1460,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Judge if the ODF DOM element of this cell is the covered cell element.
-	 * 
+	 *
 	 * @return true if the Odf element is TableCoveredTableCellElement
 	 */
 	boolean isCoveredElement() {
@@ -1474,7 +1472,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the style name of this cell.
-	 * 
+	 *
 	 * @return the name of the style
 	 */
 	public String getStyleName() {
@@ -1494,7 +1492,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Please note, the parameter <code>formula</code> will not be checked and
 	 * interpreted; the cell value will not be calculated. It's just simply set
 	 * as a formula attribute.
-	 * 
+	 *
 	 * @param formula
 	 *            the formula that need to be set.
 	 * @see org.odftoolkit.odfdom.dom.attribute.table.TableFormulaAttribute
@@ -1512,11 +1510,11 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the formula string of the cell.
-	 * 
+	 *
 	 * @return the formula representation of the cell
 	 *         <p>
 	 *         If the cell does not contain a formula, null will be returned.
-	 * 
+	 *
 	 */
 	public String getFormula() {
 		return mCellElement.getTableFormulaAttribute();
@@ -1542,7 +1540,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * example: $#,##0.00.
 	 * <p>
 	 * This function only works for currency.
-	 * 
+	 *
 	 * @param currencySymbol
 	 *            the currency symbol
 	 * @param format
@@ -1606,16 +1604,16 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Set the format string of the cell.
 	 * <p>
 	 * This function only works for float, date, time and percentage, otherwise an
-	 * {@link java.lang.IllegalArgumentException} will be thrown. 
+	 * {@link java.lang.IllegalArgumentException} will be thrown.
 	 * <p>
-	 * For value type float and percentage, the <code>formatStr</code> must follow the encoding 
+	 * For value type float and percentage, the <code>formatStr</code> must follow the encoding
 	 * rule of {@link java.text.DecimalFormat <code>java.text.DecimalFormat</code>}.
-	 * For value type date and time, the <code>formatStr</code> must follow the encoding 
+	 * For value type date and time, the <code>formatStr</code> must follow the encoding
 	 * rule of {@link java.text.SimpleDateFormat <code>java.text.SimpleDateFormat</code>}.
 	 * <p>
 	 * Refer to {@link org.odftoolkit.simple.table.Cell#setCurrencyFormat <code>setCurrencyFormat</code>} to set the format of currency.
 	 * <p>
-	 * If the cell value type is not set, the method will try to give it a value type, according 
+	 * If the cell value type is not set, the method will try to give it a value type, according
 	 * to common ordination. The adapt order is: percentage-> time-> date-> float.
 	 * <blockquote>
 	 * <table border=0 cellspacing=3 cellpadding=0 summary="Chart showing ValueType, Distinguish Symbol
@@ -1642,7 +1640,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 *          <td>4
 	 * </table>
 	 * </blockquote>
-	 * The adapt result may be inaccurate, so you'd better set value type before call this method. 
+	 * The adapt result may be inaccurate, so you'd better set value type before call this method.
 	 * If adaptive failed, an {@link java.lang.UnsupportedOperationException} will be thrown.
 	 * <p>
 	 * @param formatStr	the cell need be formatted as this specified format string.
@@ -1790,7 +1788,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the format string of the cell.
-	 * 
+	 *
 	 * @return the format string of the cell
 	 */
 	public String getFormatString() {
@@ -1893,7 +1891,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Append the content of another cell.
-	 * 
+	 *
 	 * @param fromCell
 	 *            another cell whose content will be appended to this cell
 	 */
@@ -1915,7 +1913,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/*****************************************
 	 * Moved from Table
-	 * 
+	 *
 	 *******************************************/
 	/**
 	 * This method is invoked by insertCellBefore and insertRowBefore When it is
@@ -1949,7 +1947,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	/**
 	 * This method is invoked by getCoverCell. It's to get the cell in a same
 	 * row who covers this cell.
-	 * 
+	 *
 	 * @return the cell in a same row who covers this cell
 	 *         <p>
 	 *         Null if there is no cell who covers this cell
@@ -2002,10 +2000,10 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * Null will be returned if there is no explicit style definition, or even
 	 * default style definition, for this cell.
-	 * 
+	 *
 	 * @return the font definition null if there is no style definition for this
 	 *         cell
-	 * 
+	 *
 	 * @since 0.3
 	 */
 	public Font getFont() {
@@ -2015,10 +2013,10 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Set font style for this cell.
-	 * 
+	 *
 	 * @param font
 	 *            - the font
-	 * 
+	 *
 	 * @since 0.3
 	 */
 	public void setFont(Font font) {
@@ -2030,12 +2028,12 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * This method will invoke
 	 * <code>CellStyleHandler.setBorders(Border border, SimpleCellBordersType bordersType).</code>
-	 * 
+	 *
 	 * @param bordersType
 	 *            - A predefined border type
 	 * @param border
 	 *            - border style description
-	 * 
+	 *
 	 * @see CellStyleHandler#setBorders(Border border,
 	 *      StyleTypeDefinitions.CellBordersType bordersType)
 	 * @since 0.3
@@ -2049,11 +2047,11 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * This method will invoke
 	 * <code>CellStyleHandler.getBorder(SimpleCellBordersType type).</code>
-	 * 
+	 *
 	 * @param type
 	 *            - the border type which describes a single border
 	 * @return the border setting
-	 * 
+	 *
 	 * @see CellStyleHandler#getBorder(StyleTypeDefinitions.CellBordersType
 	 *      type)
 	 * @since 0.3.5
@@ -2068,7 +2066,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * The note may contain text list, text paragraph and styles, but this
 	 * method extracts only text from them.
-	 * 
+	 *
 	 * @return the note text of this cell.
 	 */
 	public String getNoteText() {
@@ -2095,7 +2093,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * Only simple text is supported to receive in this method, which is a sub
 	 * function of office annotation. So overwriting a note with text might
 	 * loose structure and styles.
-	 * 
+	 *
 	 * @param note
 	 *            note content.
 	 */
@@ -2129,7 +2127,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	/**
 	 * Insert an Image from the specified uri to cell. Note: if there is any
 	 * other text content in this cell, it will be removed.
-	 * 
+	 *
 	 * @param imageUri
 	 *            The URI of the image that will be added to the cell, add image
 	 *            stream to the package, in the 'Pictures/' graphic directory
@@ -2184,7 +2182,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the Image from the specified cell.
-	 * 
+	 *
 	 * @return If there is a image exist in this cell, An {@link java.awt.Image
 	 *         Image} will be returned.
 	 * @since 0.4.5
@@ -2215,7 +2213,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Get the image from the specified cell.
-	 * 
+	 *
 	 * @return If there is a image exist in this cell, an
 	 *         {@link org.odftoolkit.simple.draw.Image Image} will be returned.
 	 * @since 0.5.5
@@ -2241,12 +2239,12 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Return style handler for this cell
-	 * 
+	 *
 	 * @return the style handler
-	 * 
+	 *
 	 * @since 0.3
 	 */
 	public CellStyleHandler getStyleHandler() {
@@ -2293,7 +2291,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Creates a new paragraph and append text
-	 * 
+	 *
 	 * @param text
 	 * @return the new paragraph
 	 * @throws Exception
@@ -2307,23 +2305,23 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 
 	/**
 	 * Remove paragraph from this document
-	 * 
+	 *
 	 * @param para
 	 *            - the instance of paragraph
 	 * @return true if the paragraph is removed successfully, false if errors
 	 *         happen.
-	 *         
+	 *
 	 * @since 0.5.5
 	 */
 	public boolean removeParagraph(Paragraph para) {
 		return getParagraphContainerImpl().removeParagraph(para);
 	}
-	
+
 	/**
 	 * Get the ODF element which can have <text:p> as child element directly.
-	 * 
+	 *
 	 * @return - an ODF element which can have paragraph as child.
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public OdfElement getParagraphContainerElement() {
@@ -2335,43 +2333,43 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * An index of zero represents the first paragraph.
 	 * <p>
 	 * If empty paragraph is skipped, the empty paragraph won't be counted.
-	 * 
+	 *
 	 * @param index
 	 *            - the index started from 0.
 	 * @param isEmptyParagraphSkipped
 	 *            - whether the empty paragraph is skipped or not
 	 * @return the paragraph with a given index
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public Paragraph getParagraphByIndex(int index, boolean isEmptyParagraphSkipped) {
 		return getParagraphContainerImpl().getParagraphByIndex(index, isEmptyParagraphSkipped);
 	}
-	
+
 	/**
 	 * Return a paragraph with a given index. The index is in reverse order.
 	 * <p>
 	 * An index of zero represents the last paragraph.
 	 * <p>
 	 * If empty paragraph is skipped, the empty paragraph won't be counted.
-	 * 
+	 *
 	 * @param reverseIndex
 	 *            - the index started from 0 in reverse order.
 	 * @param isEmptyParagraphSkipped
 	 *            - whether the empty paragraph is skipped or not
 	 * @return the paragraph with a given index
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public Paragraph getParagraphByReverseIndex(int reverseIndex, boolean isEmptyParagraphSkipped) {
 		return getParagraphContainerImpl().getParagraphByReverseIndex(reverseIndex, isEmptyParagraphSkipped);
 	}
-	
+
 	/**
 	 * Return an Iterator of the paragraph in this container.
-	 * 
+	 *
 	 * @return an Iterator of the paragraph in this container
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public Iterator<Paragraph> getParagraphIterator() {
@@ -2388,7 +2386,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * <p>
 	 * NOTE: Now, the validity rule does not take effect when a cell value
 	 * is updated by Simple ODF API yet.
-	 * 
+	 *
 	 * @param values
 	 *            the list of allowed values.
 	 * @since 0.6
@@ -2418,7 +2416,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	/**
 	 * Sets the title and the text of the tip, which will then be displayed if
 	 * the cell is selected.
-	 * 
+	 *
 	 * @param title
 	 *            the title of the tip.
 	 * @param text
@@ -2441,11 +2439,11 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 			Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
-	
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////// private methods ///////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
 	private TableContentValidationElement getContentValidationEle() throws Exception {
 		Document ownerDocument = getOwnerDocument();
 		OdfElement contentRootElement = ownerDocument.getContentRoot();
@@ -2466,6 +2464,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 					validationElement = contentValidationElementRef;
 					break;
 				}
+                child = child.getNextSibling();
 			}
 		} else {
 			String valName = "val" + String.format("d%06x", (int) (Math.random() * 0xffffff));
@@ -2488,7 +2487,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 		String cs = new String(buf, charPos, (32 - charPos));
 		return cs + (getRowIndex() + 1);
 	}
-	
+
 	private ListContainerImpl getListContainerImpl() {
 		if (listContainerImpl == null) {
 			listContainerImpl = new ListContainerImpl();
@@ -2502,7 +2501,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 			return mCellElement;
 		}
 	}
-	
+
 	private class ParagraphContainerImpl extends AbstractParagraphContainer {
 		public OdfElement getParagraphContainerElement() {
 			return mCellElement;
@@ -2514,7 +2513,7 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 			paragraphContainerImpl = new ParagraphContainerImpl();
 		return paragraphContainerImpl;
 	}
-	
+
 	//column can fit the width to the text, if column.isOptimalWidth() is true.
 	//since 0.5.5
 	private void optimizeCellSize(String content){
