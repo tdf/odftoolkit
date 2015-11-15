@@ -31,7 +31,7 @@ import javax.xml.xpath.XPathConstants;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.odftoolkit.Junit.AlphabeticalOrderedRunner;
+import org.odftoolkit.junit.AlphabeticalOrderedRunner;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
