@@ -39,6 +39,7 @@ import javax.swing.JTextField;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoTextAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
+import org.odftoolkit.odfdom.dom.attribute.table.TableMessageTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
@@ -53,6 +54,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableContentValidationElement;
 import org.odftoolkit.odfdom.dom.element.table.TableContentValidationsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
+import org.odftoolkit.odfdom.dom.element.table.TableErrorMessageElement;
 import org.odftoolkit.odfdom.dom.element.table.TableHelpMessageElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
@@ -2383,6 +2385,10 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	/**
 	 * Specifies the allowed values of this cell in a list. Any value out of
 	 * this list is invalid.
+   * <p>
+   * NOTE: The validity list is per default only used for a drop down box
+   * to select possible values. Validation error messages can be enabled
+   * by {@code setInputErrorMessage()}.
 	 * <p>
 	 * NOTE: Now, the validity rule does not take effect when a cell value
 	 * is updated by Simple ODF API yet.
@@ -2390,6 +2396,8 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 	 * @param values
 	 *            the list of allowed values.
 	 * @since 0.6
+   *
+   * @see #setInputErrorMessage(String, String, String)
 	 */
 	public void setValidityList(List<String> values) {
 		try {
@@ -2439,6 +2447,53 @@ public class Cell extends Component implements ListContainer, ParagraphContainer
 			Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
+
+  /**
+   * Sets the title and text of the message box which will
+   * be displayed if if invalid input is entered into the cell.
+   * <p>
+   * This message has only effect if a content validation is
+   * active for the cell, e. g. by setting a validation list.
+   *
+   * @param title Title of the message box. May be {@code null} for using
+   *              default title.
+   * @param text Text of the message box. May be {@code null} for using
+   *             default message.
+   * @param messageType The severity of the message. If {@code null}, the
+   *                    default is used ("stop"). Allowed values are enumerated
+   *                    by {@code TableMessageTypeAttribute.Value}: {@code "stop"}
+   *                    (Default), {@code "warning"}, {@code "information"}.
+   * @since 0.8.2
+   *
+   * @see #setValidityList(List)
+   * @see TableMessageTypeAttribute.Value
+   */
+  public void setInputErrorMessage(String title, String text, String messageType) {
+    try {
+      TableContentValidationElement validationElement = getContentValidationEle();
+      TableErrorMessageElement errorMessageElement = OdfElement.findFirstChildNode(TableErrorMessageElement.class,
+          validationElement);
+      if (errorMessageElement != null) {
+        validationElement.removeChild(errorMessageElement);
+      }
+      errorMessageElement = validationElement.newTableErrorMessageElement();
+      errorMessageElement.setTableDisplayAttribute(true);
+      if (title != null) {
+        errorMessageElement.setTableTitleAttribute(title);
+      }
+      if (text != null) {
+         errorMessageElement.newTextPElement().setTextContent(text);
+      }
+      if (messageType == null) {
+        messageType = TableMessageTypeAttribute.DEFAULT_VALUE;
+      }
+      errorMessageElement.setTableMessageTypeAttribute(messageType);
+
+    } catch (Exception e) {
+      Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, e);
+    }
+  }
+
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////// private methods ///////////////////////////////////////////////////////////

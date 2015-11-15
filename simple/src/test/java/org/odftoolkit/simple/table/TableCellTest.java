@@ -1432,6 +1432,24 @@ public class TableCellTest {
 		}
 	}
 
+  @Test
+  public void testSetValidityListAndInputErrorMessage() {
+    try {
+      int rowindex = 3, columnindex = 2;
+      Table table = odsdoc.getTableByName("Sheet2");
+      Cell fcell = table.getCellByPosition(columnindex, rowindex);
+      List<String> values = new ArrayList<String>(Arrays.asList("Mon", "Tue", "Wed", "Thu", "Fri"));
+      fcell.setValidityList(values);
+      fcell.setInputErrorMessage("Error message", "This cell only allows working days.", null);
+      fcell.setStringValue("Tue");
+      Assert.assertNotNull(fcell.getOdfElement().getTableContentValidationNameAttribute());
+      saveods();
+    } catch (Exception e) {
+      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
+
 	private void compareResults(Element element, String input, String[] output) {
 		int i;
 		int nSpaces;
