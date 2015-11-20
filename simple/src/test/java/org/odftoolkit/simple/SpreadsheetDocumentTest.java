@@ -113,6 +113,31 @@ public class SpreadsheetDocumentTest {
 		}
 		
 	}
+
+	@Test
+	public void testLoadDocumentFileWithExcelDummyRows0() {
+		testLoadDocumentFileWithExcelDummyRows("ExcelDummyRowProblem_rows0.ods", 0);
+	}
+
+	@Test
+	public void testLoadDocumentFileWithExcelDummyRows1() {
+		testLoadDocumentFileWithExcelDummyRows("ExcelDummyRowProblem_rows1.ods", 1);
+	}
+
+	private void testLoadDocumentFileWithExcelDummyRows(String file, int rowCount) {
+		try {
+			String filePath = ResourceUtilities.getAbsolutePath(file);
+			File fileDoc = new File(filePath);
+			SpreadsheetDocument spreadDoc = SpreadsheetDocument.loadDocument(fileDoc);
+			Assert.assertNotNull(spreadDoc);
+			Table table = spreadDoc.getSheetByIndex(0);
+			Assert.assertNotNull(table);
+			Assert.assertEquals(rowCount, table.getRowCount());
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getMessage(), e);
+			Assert.fail(e.getMessage());
+		}
+	}
 	
 	@Test
 	public void testCreateChart() throws Exception{
