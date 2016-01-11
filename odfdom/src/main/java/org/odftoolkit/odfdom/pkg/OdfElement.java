@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -22,7 +22,6 @@
 package org.odftoolkit.odfdom.pkg;
 
 import java.util.ArrayList;
-
 import org.apache.xerces.dom.ElementNSImpl;
 import org.apache.xerces.dom.ParentNode;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -135,7 +134,7 @@ abstract public class OdfElement extends ElementNSImpl {
 
 	/**
 	 * Set the value of an ODF attribute by <code>OdfName</code>.
-	 * 
+	 *
 	 * @param name
 	 *            The qualified name of the ODF attribute.
 	 * @param value
@@ -147,7 +146,7 @@ abstract public class OdfElement extends ElementNSImpl {
 
 	/**
 	 * Set an ODF attribute to this element
-	 * 
+	 *
 	 * @param attribute
 	 *            the attribute to be set
 	 */
@@ -157,7 +156,7 @@ abstract public class OdfElement extends ElementNSImpl {
 
 	/**
 	 * Retrieves a value of an ODF attribute by <code>OdfName</code>.
-	 * 
+	 *
 	 * @param name
 	 *            The qualified name of the ODF attribute.
 	 * @return The value of the attribute as <code>String</code> or
@@ -169,7 +168,7 @@ abstract public class OdfElement extends ElementNSImpl {
 
 	/**
 	 * Retrieves an ODF attribute by <code>OdfName</code>.
-	 * 
+	 *
 	 * @param name
 	 *            The qualified name of the ODF attribute.
 	 * @return The <code>OdfAttribute</code> or <code>null</code> if the
@@ -181,7 +180,7 @@ abstract public class OdfElement extends ElementNSImpl {
 
 	/**
 	 * Retrieves an ODF attribute by <code>NamespaceName</code>, and local name.
-	 * 
+	 *
 	 * @param namespace
 	 *            The namespace of the ODF attribute.
 	 * @param localname
@@ -196,7 +195,7 @@ abstract public class OdfElement extends ElementNSImpl {
 
 	/**
 	 * Determines if an ODF attribute exists.
-	 * 
+	 *
 	 * @param name
 	 *            The qualified name of the ODF attribute.
 	 * @return True if the attribute exists.
@@ -207,7 +206,7 @@ abstract public class OdfElement extends ElementNSImpl {
 
 	/**
 	 * returns the first child node that implements the given class.
-	 * 
+	 *
 	 * @param <T>
 	 *            The type of the ODF element to be found.
 	 * @param clazz
@@ -237,7 +236,7 @@ abstract public class OdfElement extends ElementNSImpl {
 	/**
 	 * returns the first sibling after the given reference node that implements
 	 * the given class.
-	 * 
+	 *
 	 * @param <T>
 	 *            The type of the ODF element to be found.
 	 * @param clazz
@@ -267,7 +266,7 @@ abstract public class OdfElement extends ElementNSImpl {
 	/**
 	 * returns the first previous sibling before the given reference node that
 	 * implements the given class.
-	 * 
+	 *
 	 * @param clazz
 	 *            is a class that extends OdfElement.
 	 * @param refNode
@@ -292,10 +291,14 @@ abstract public class OdfElement extends ElementNSImpl {
 		return null;
 	}
 
+    protected OdfElement cloneOdfElement() {
+		return ((OdfFileDom) this.ownerDocument).newOdfElement(this.getClass());
+	}
+
 	@Override
 	public Node cloneNode(boolean deep) {
-		OdfElement cloneElement = ((OdfFileDom) this.ownerDocument).newOdfElement(this.getClass());
-
+		OdfElement cloneElement = this.cloneOdfElement();
+        
 		if (attributes != null) {
 			for (int i = 0; i < attributes.getLength(); i++) {
 				Node item = attributes.item(i);
@@ -323,7 +326,7 @@ abstract public class OdfElement extends ElementNSImpl {
 
 	/**
 	 * indicates if some other object is equal to this one.
-	 * 
+	 *
 	 * @param obj
 	 *            - the reference object with which to compare.
 	 * @return true if this object is the same as the obj argument; false

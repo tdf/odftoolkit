@@ -42,4 +42,9 @@ public class OdfAlienElement extends OdfElement {
 	public OdfName getOdfName() {
         return ELEMENT_NAME;
     }
+
+	@Override
+	protected OdfElement cloneOdfElement() {
+		return new OdfAlienElement((OdfFileDom) this.ownerDocument, this.ELEMENT_NAME);
+	}
 }
