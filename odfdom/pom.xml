@@ -156,9 +156,8 @@
 					<minmemory>1024m</minmemory>
 					<maxmemory>1024m</maxmemory>
 					<links>
-						<link>http://download.oracle.com/javase/6/docs/api/</link>
-						<link>http://xerces.apache.org/xerces-j/apiDocs/</link>
-						<link>http://simple.odftoolkit.org/javadoc/</link>
+						<link>http://docs.oracle.com/javase/8/docs/api/</link>
+						<link>http://xerces.apache.org/xerces-j/apiDocs/</link>						
 					</links>
 					<splitindex>true</splitindex>
 					<windowtitle>ODFDOM API v${project.version} - http://incubator.apache.org/odftoolkit/</windowtitle>
@@ -483,8 +482,7 @@
 								<odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
 								<org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
 							</systemPropertyVariables>
-							<skip>true</skip>
-						</configuration>
+							<skip>true</skip>						</configuration>
 					</plugin>
 				</plugins>
 			</build>

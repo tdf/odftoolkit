@@ -21,24 +21,23 @@ Documentation
 --------------
 
 The latest release notes and a summary of API changes (if any) are available
-online at the project's Wiki page:
-    http://odftoolkit.org/projects/odfdom/pages/ReleaseNotes
+online at the project's page:
+    http://incubator.apache.org/odftoolkit/odfdom/index.html
 
-In general, the Wiki page is a great place to start when looking for online
+In general, the project page is a great place to start when looking for online
 documentation and other information about the odfdom project.
-    http://odftoolkit.org/projects/odfdom/pages/Home
+    http://incubator.apache.org/odftoolkit/
 
-API documentation (Javadoc) can be downloaded from the project's download area:
-    http://odftoolkit.org/projects/odfdom/downloads
-
-The Javadoc can also be viewed online and is available for each version, e.g.
-    http://odfdom.odftoolkit.org/0.8.6/docs/api/
+API documentation (Javadoc), sources and binaries can be downloaded 
+from the project's download area:
+    http://incubator.apache.org/odftoolkit/downloads.html
 
 
 License
 --------
 
-Apache License, Version 2.0. Please see file LICENSE.txt.
+Apache License, Version 2.0. See file LICENSE.txt or
+http://www.apache.org/licenses/LICENSE-2.0
 
 
 Installation
