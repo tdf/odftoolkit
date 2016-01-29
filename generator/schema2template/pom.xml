@@ -123,7 +123,7 @@
 						<exclude>src/main/resources/examples/odf/odf-schemas/*.rng</exclude>
                     </excludes>
                 </configuration>
-            </plugin>
+            </plugin><!--
             <plugin>
       			<groupId>org.codehaus.mojo</groupId>
       			<artifactId>wagon-maven-plugin</artifactId>
@@ -189,7 +189,7 @@
             				<toDir>${project.build.directory}/odf-schemas</toDir>
           				</configuration>
         			</execution>
-                    <!-- Disabled due to a security exception on Apache servers, when downloading from that OASIS host
+                    <!- Disabled due to a security exception on Apache servers, when downloading from that OASIS host
                     Error handling resource: sun.security.validator.ValidatorException: 
                         PKIX path building failed: 
                             sun.security.provider.certpath.SunCertPathBuilderException: 
@@ -217,9 +217,9 @@
             				<fromFile>OpenDocument-strict-schema-v1.0-os.rng</fromFile>
             				<toDir>${project.build.directory}/odf-schemas</toDir>
           				</configuration>
-        			</execution>-->
+        			</execution>
       			</executions>
-    		</plugin>
+    		</plugin>-->
 		</plugins>
 	</build>
 	<!-- <distributionManagement>

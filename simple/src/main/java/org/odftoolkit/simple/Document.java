@@ -45,13 +45,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
-
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfSchemaConstraint;
@@ -88,12 +86,12 @@ import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.type.Duration;
 import org.odftoolkit.simple.meta.Meta;
-import org.odftoolkit.simple.table.TableTemplate;
 import org.odftoolkit.simple.table.AbstractTableContainer;
 import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.table.Table.TableBuilder;
 import org.odftoolkit.simple.table.TableContainer;
+import org.odftoolkit.simple.table.TableTemplate;
 import org.odftoolkit.simple.text.Paragraph;
 import org.odftoolkit.simple.text.Section;
 import org.w3c.dom.Attr;
@@ -157,22 +155,22 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 */
 	public enum OdfMediaType implements MediaType {
 
-		CHART("application/vnd.oasis.opendocument.chart", "odc"), 
-		CHART_TEMPLATE("application/vnd.oasis.opendocument.chart-template", "otc"), 
-		FORMULA("application/vnd.oasis.opendocument.formula", "odf"), 
-		FORMULA_TEMPLATE("application/vnd.oasis.opendocument.formula-template", "otf"), 
-		DATABASE_FRONT_END("application/vnd.oasis.opendocument.base", "odb"), 
-		GRAPHICS("application/vnd.oasis.opendocument.graphics", "odg"), 
-		GRAPHICS_TEMPLATE("application/vnd.oasis.opendocument.graphics-template", "otg"), 
-		IMAGE("application/vnd.oasis.opendocument.image", "odi"), 
-		IMAGE_TEMPLATE("application/vnd.oasis.opendocument.image-template", "oti"), 
-		PRESENTATION("application/vnd.oasis.opendocument.presentation", "odp"), 
-		PRESENTATION_TEMPLATE("application/vnd.oasis.opendocument.presentation-template", "otp"), 
-		SPREADSHEET("application/vnd.oasis.opendocument.spreadsheet", "ods"), 
-		SPREADSHEET_TEMPLATE("application/vnd.oasis.opendocument.spreadsheet-template", "ots"), 
-		TEXT("application/vnd.oasis.opendocument.text", "odt"), 
-		TEXT_MASTER("application/vnd.oasis.opendocument.text-master", "odm"), 
-		TEXT_TEMPLATE("application/vnd.oasis.opendocument.text-template", "ott"), 
+		CHART("application/vnd.oasis.opendocument.chart", "odc"),
+		CHART_TEMPLATE("application/vnd.oasis.opendocument.chart-template", "otc"),
+		FORMULA("application/vnd.oasis.opendocument.formula", "odf"),
+		FORMULA_TEMPLATE("application/vnd.oasis.opendocument.formula-template", "otf"),
+		DATABASE_FRONT_END("application/vnd.oasis.opendocument.base", "odb"),
+		GRAPHICS("application/vnd.oasis.opendocument.graphics", "odg"),
+		GRAPHICS_TEMPLATE("application/vnd.oasis.opendocument.graphics-template", "otg"),
+		IMAGE("application/vnd.oasis.opendocument.image", "odi"),
+		IMAGE_TEMPLATE("application/vnd.oasis.opendocument.image-template", "oti"),
+		PRESENTATION("application/vnd.oasis.opendocument.presentation", "odp"),
+		PRESENTATION_TEMPLATE("application/vnd.oasis.opendocument.presentation-template", "otp"),
+		SPREADSHEET("application/vnd.oasis.opendocument.spreadsheet", "ods"),
+		SPREADSHEET_TEMPLATE("application/vnd.oasis.opendocument.spreadsheet-template", "ots"),
+		TEXT("application/vnd.oasis.opendocument.text", "odt"),
+		TEXT_MASTER("application/vnd.oasis.opendocument.text-master", "odm"),
+		TEXT_TEMPLATE("application/vnd.oasis.opendocument.text-template", "ott"),
 		TEXT_WEB("application/vnd.oasis.opendocument.text-web", "oth");
 
 		private final String mMediaType;
@@ -198,7 +196,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 		}
 
 		/**
-		 * 
+		 *
 		 * @param mediaType
 		 *            string defining an ODF document
 		 * @return the according OdfMediatype encapuslating the given string and
@@ -222,7 +220,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * Loads an Document from the given resource. NOTE: Initial meta data will
 	 * be added in this method.
-	 * 
+	 *
 	 * @param res
 	 *            a resource containing a package with a root document
 	 * @param odfMediaType
@@ -248,12 +246,12 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Loads a Document from the provided path.
-	 * 
+	 *
 	 * <p>
 	 * Document relies on the file being available for read access over the
 	 * whole life cycle of Document.
 	 * </p>
-	 * 
+	 *
 	 * @param documentPath
 	 *            - the path from where the document can be loaded
 	 * @param password
@@ -271,12 +269,12 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Loads a Document from the provided path.
-	 * 
+	 *
 	 * <p>
 	 * Document relies on the file being available for read access over the
 	 * whole life cycle of Document.
 	 * </p>
-	 * 
+	 *
 	 * @param documentPath
 	 *            - the path from where the document can be loaded
 	 * @return the Document from the given path or NULL if the media type is not
@@ -291,7 +289,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Creates a Document from the Document provided by a resource Stream.
-	 * 
+	 *
 	 * <p>
 	 * Since an InputStream does not provide the arbitrary (non sequentiell)
 	 * read access needed by Document, the InputStream is cached. This usually
@@ -299,7 +297,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * advantage of caching is that there are no problems overwriting an input
 	 * file.
 	 * </p>
-	 * 
+	 *
 	 * @param inStream
 	 *            - the InputStream of the ODF document.
 	 * @return the document created from the given InputStream
@@ -312,12 +310,12 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Creates a Document from the Document provided by a File.
-	 * 
+	 *
 	 * <p>
 	 * Document relies on the file being available for read access over the
 	 * whole lifecycle of Document.
 	 * </p>
-	 * 
+	 *
 	 * @param file
 	 *            - a file representing the ODF document.
 	 * @return the document created from the given File
@@ -332,12 +330,12 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Creates a Document from the Document provided by a File.
-	 * 
+	 *
 	 * <p>
 	 * Document relies on the file being available for read access over the
 	 * whole lifecycle of Document.
 	 * </p>
-	 * 
+	 *
 	 * @param file
 	 *            - a file representing the ODF document.
 	 * @param password
@@ -355,7 +353,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Creates a Document from the Document provided by an ODF package.
-	 * 
+	 *
 	 * @param odfPackage
 	 *            - the ODF package containing the ODF document.
 	 * @return the root document of the given OdfPackage
@@ -368,7 +366,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Creates a Document from the Document provided by an ODF package.
-	 * 
+	 *
 	 * @param odfPackage
 	 *            - the ODF package containing the ODF document.
 	 * @param internalPath
@@ -400,7 +398,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Sets password of this document.
-	 * 
+	 *
 	 * @param password
 	 *            the password of this document.
 	 * @since 0.8
@@ -472,7 +470,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Creates one of the ODF documents based a given mediatype.
-	 * 
+	 *
 	 * @param odfMediaType
 	 *            The ODF Mediatype of the ODF document to be created.
 	 * @return The ODF document, which mediatype dependends on the parameter or
@@ -541,7 +539,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Returns an embedded OdfPackageDocument from the given package path.
-	 * 
+	 *
 	 * @param documentPath
 	 *            path to the ODF document within the package. The path is
 	 *            relative to the current document.
@@ -577,7 +575,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * Method returns all embedded OdfPackageDocuments, which match a valid
 	 * OdfMediaType, of the root OdfPackageDocument.
-	 * 
+	 *
 	 * @return a list with all embedded documents of the root OdfPackageDocument
 	 */
 	// ToDo: (Issue 219 - PackageRefactoring) - Better return Path of
@@ -599,7 +597,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * OdfPackageDocument matching the according MediaType. This is done by
 	 * matching the subfolder entries of the manifest file with the given
 	 * OdfMediaType.
-	 * 
+	 *
 	 * @param mediaType
 	 *            media type which is used as a filter
 	 * @return embedded documents of the root OdfPackageDocument matching the
@@ -644,7 +642,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * Embed an OdfPackageDocument to the current OdfPackageDocument. All the
 	 * file entries of child document will be embedded as well to the current
 	 * document package.
-	 * 
+	 *
 	 * @param documentPath
 	 *            to the directory the ODF document should be inserted (relative
 	 *            to the current document).
@@ -657,7 +655,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Sets the media type of the Document
-	 * 
+	 *
 	 * @param odfMediaType
 	 *            media type to be set
 	 */
@@ -675,7 +673,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Get the meta data feature instance of the current document
-	 * 
+	 *
 	 * @return the meta data feature instance which represent
 	 *         <code>office:meta</code> in the meta.xml
 	 */
@@ -693,17 +691,17 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * Save the document to an OutputStream. Delegate to the root document and
 	 * save possible embedded Documents.
-	 * 
+	 *
 	 * <p>
 	 * If the input file has been cached (this is the case when loading from an
 	 * InputStream), the input file can be overwritten.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If not, the OutputStream may not point to the input file! Otherwise this
 	 * will result in unwanted behaviour and broken files.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * When save the embedded document to a stand alone document, all the file
 	 * entries of the embedded document will be copied to a new document
@@ -711,7 +709,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * directory, you have to embed it to the sub directory and refresh the link
 	 * of the embedded document. you should reload it from the stream to get the
 	 * saved embedded document.
-	 * 
+	 *
 	 * @param out
 	 *            - the OutputStream to write the file to
 	 * @throws java.lang.Exception
@@ -741,19 +739,19 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Save the document to a given file.
-	 * 
+	 *
 	 * <p>
 	 * If the input file has been cached (this is the case when loading from an
 	 * InputStream), the input file can be overwritten.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * Otherwise it's allowed to overwrite the input file as long as the same
 	 * path name is used that was used for loading (no symbolic link foo2.odt
 	 * pointing to the loaded file foo1.odt, no network path X:\foo.odt pointing
 	 * to the loaded file D:\foo.odt).
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * When saving the embedded document to a stand alone document, all files of
 	 * the embedded document will be copied to a new document package. If the
@@ -761,7 +759,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * to embed it to the sub directory and refresh the link of the embedded
 	 * document. You should reload it from the given file to get the saved
 	 * embedded document.
-	 * 
+	 *
 	 * @param file
 	 *            - the file to save the document
 	 * @throws java.lang.Exception
@@ -787,19 +785,19 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Save the document to a given file with given password.
-	 * 
+	 *
 	 * <p>
 	 * If the input file has been cached (this is the case when loading from an
 	 * InputStream), the input file can be overwritten.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * Otherwise it's allowed to overwrite the input file as long as the same
 	 * path name is used that was used for loading (no symbolic link foo2.odt
 	 * pointing to the loaded file foo1.odt, no network path X:\foo.odt pointing
 	 * to the loaded file D:\foo.odt).
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * When saving the embedded document to a stand alone document, all files of
 	 * the embedded document will be copied to a new document package. If the
@@ -807,12 +805,12 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * to embed it to the sub directory and refresh the link of the embedded
 	 * document. You should reload it from the given file to get the saved
 	 * embedded document.
-	 * 
+	 *
 	 * @param file
 	 *            the file to save the document.
 	 * @param file
 	 *            the password of this document.
-	 * 
+	 *
 	 * @throws java.lang.Exception
 	 *             if the document could not be saved
 	 * @since 0.8
@@ -854,11 +852,11 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Get the content root of a document.
-	 * 
+	 *
 	 * You may prefer to use the getContentRoot methods of subclasses of
 	 * Document. Their return parameters are already casted to respective
 	 * subclasses of OdfElement.
-	 * 
+	 *
 	 * @param clazz
 	 *            the type of the content root, depend on the document type
 	 * @return the child element of office:body, e.g. office:text for text docs
@@ -881,10 +879,10 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Get the content root of a document.
-	 * 
+	 *
 	 * You may prefer to use the getContentRoot methods of subclasses of
 	 * Document.
-	 * 
+	 *
 	 * @return the child element of office:body, e.g. office:text for text docs
 	 * @throws Exception
 	 *             if the file DOM could not be created.
@@ -900,7 +898,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Insert an Image from the specified uri to the end of the Document.
-	 * 
+	 *
 	 * @param imageUri
 	 *            The URI of the image that will be added to the document, add
 	 *            image stream to the package, in the 'Pictures/' graphic
@@ -950,10 +948,10 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * <li>The number of times this document has been edited.</li>
 	 * <li>The default language will be the Java user.language System property.</li>
 	 * </ul>
-	 * 
+	 *
 	 * @param newDoc
 	 *            the Document object which need to initialize meta data.
-	 * 
+	 *
 	 *            TODO:This method will be moved to OdfMetadata class. see
 	 *            http://odftoolkit.org/bugzilla/show_bug.cgi?id=204
 	 */
@@ -986,10 +984,10 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * </li>
 	 * <li>The total time spent editing this document</li>
 	 * </ul>
-	 * 
+	 *
 	 * TODO:This method will be moved to OdfMetadata class. see
 	 * http://odftoolkit.org/bugzilla/show_bug.cgi?id=204
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	private void updateMetaData() throws Exception {
@@ -1028,16 +1026,16 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * <p>
 	 * Unicode characters are in general divided by office applications into
 	 * three different types:
-	 * 
+	 *
 	 * <p>
 	 * 1) There is CJK: the Chinese, Japanese and Korean script (also old
 	 * Vietnamese belong to this group). See
 	 * http://en.wikipedia.org/wiki/CJK_characters
-	 * 
+	 *
 	 * <p>
 	 * 2) There is CTL: Complex Text Layout, which uses BIDI algorithms and/or
 	 * glyph modules. See http://en.wikipedia.org/wiki/Complex_Text_Layout
-	 * 
+	 *
 	 * <p>
 	 * 3) And there is all the rest, which was once called by MS Western.
 	 */
@@ -1110,7 +1108,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * The locale information will affect the language and country setting of
 	 * the document. Thus the font settings, the spell checkings and etc will be
 	 * affected.
-	 * 
+	 *
 	 * @param locale
 	 *            - an instance of Locale
 	 */
@@ -1133,7 +1131,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * Set a locale of a specific script type.
 	 * <p>
 	 * If the locale is not belone to the script type, nothing will happen.
-	 * 
+	 *
 	 * @param locale
 	 *            - Locale information
 	 * @param scriptType
@@ -1160,7 +1158,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * <p>
 	 * Get a locale information of a specific script type.
-	 * 
+	 *
 	 * @param scriptType
 	 *            - The script type
 	 * @return the Locale information
@@ -1184,7 +1182,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * This method will set the default language and country information of the
 	 * document, based on the parameter of the Locale information.
-	 * 
+	 *
 	 * @param locale
 	 *            - an instance of Locale that the default language and country
 	 *            will be set to.
@@ -1241,7 +1239,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * This method will return an instance of Locale, which presents the default
 	 * language and country information settings in this document.
-	 * 
+	 *
 	 * @return an instance of Locale that the default language and country is
 	 *         set to.
 	 */
@@ -1251,7 +1249,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * of the document, based on the parameter of the Locale information. If the
 	 * Locale instance is not set a Asian language (Chinese, Traditional
 	 * Chinese, Japanese and Korean, nothing will take effect.
-	 * 
+	 *
 	 * @param locale
 	 *            - an instance of Locale that the default Asian language and
 	 *            country will be set to.
@@ -1282,7 +1280,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * This method will set the default complex language and country information
 	 * of the document, based on the parameter of the Locale information.
-	 * 
+	 *
 	 * @param locale
 	 *            - an instance of Locale that the default complex language and
 	 *            country will be set to.
@@ -1310,7 +1308,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * return an iterator of section objects.
 	 * <p>
 	 * The sections defined in embed document won't be covered.
-	 * 
+	 *
 	 * @return an iterator of Section objects
 	 */
 	public Iterator<Section> getSectionIterator() {
@@ -1348,7 +1346,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * This method won't search in the embed document.
 	 * <p>
 	 * Null will be returned if there is no section found.
-	 * 
+	 *
 	 * @param name
 	 *            - the name of a section
 	 * @return a section object with a specific name
@@ -1384,7 +1382,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * Remove an ODF element from the document. All the resources that are only
 	 * related with this element will be removed at the same time.
-	 * 
+	 *
 	 * @param odfElement
 	 *            - the odf element that would be moved.
 	 */
@@ -1397,7 +1395,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * Return a unique string with a character "a" followed by randomly
 	 * generating 6 hex numbers
-	 * 
+	 *
 	 * @return a unique string
 	 */
 	String makeUniqueName() {
@@ -1425,7 +1423,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * Make a content copy of the specified element, and the returned element
 	 * should have the specified ownerDocument.
-	 * 
+	 *
 	 * @param element
 	 *            The element that need to be copied
 	 * @param dom
@@ -1448,11 +1446,11 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 					String prefix = item.getPrefix();
 					if (prefix == null) {
 						qname = item.getLocalName();
+						cloneElement.setAttribute(qname, item.getNodeValue());
 					} else {
 						qname = prefix + ":" + item.getLocalName();
+						cloneElement.setAttributeNS(item.getNamespaceURI(), qname, item.getNodeValue());
 					}
-
-					cloneElement.setAttributeNS(item.getNamespaceURI(), qname, item.getNodeValue());
 				}
 			}
 
@@ -1477,7 +1475,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * <p>
 	 * This method is usually be invoked before inserting a copied ODF element
 	 * to document content.
-	 * 
+	 *
 	 * @param element
 	 *            - the element that need to be inserted.
 	 */
@@ -1506,7 +1504,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * <p>
 	 * This method is usually be invoked before inserting a copied ODF element
 	 * to document content.
-	 * 
+	 *
 	 * @param element
 	 *            - the element that need to be inserted.
 	 */
@@ -1547,7 +1545,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * the name of the resource will be renamed.
 	 * <p>
 	 * This method will copy resources all in one batch.
-	 * 
+	 *
 	 * @param sourceCloneEle
 	 *            - the element that need to be copied
 	 * @param srcDocument
@@ -1555,7 +1553,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 */
 	void copyLinkedRefInBatch(OdfElement sourceCloneEle, Document srcDocument) {
 		try {
-			OdfFileDom fileDom = (OdfFileDom) sourceCloneEle.getOwnerDocument();
+   			OdfFileDom fileDom = (OdfFileDom) sourceCloneEle.getOwnerDocument();
 			XPath xpath;
 			if (fileDom instanceof OdfContentDom) {
 				xpath = ((OdfContentDom) fileDom).getXPath();
@@ -1601,7 +1599,6 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 					if (fileEntry == null) {
 						fileEntry = getPackage().getFileEntry(refObjPath + "/");
 					}
-					newObjPath = refObjPath;
 					if (fileEntry != null) {
 						// rename the object path
 						newObjPath = objectRenameMap.get(refObjPath);
@@ -1774,11 +1771,11 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * loaded from a file, a good performance method will be used. If the source
 	 * document is loaded from a input stream, package layer methods will be
 	 * invoked to copy these resources, with bad performance.
-	 * 
+	 *
 	 * In future, the code of this method will move to ODFDOM package layer.
 	 * Till then, good performance will be gotten whether the source document is
 	 * loaded from file or from input stream.
-	 * 
+	 *
 	 */
 	void copyResourcesFrom(Document srcDoc, HashMap<String, String> objectRenameMap) throws Exception {
 		if (srcDoc.getFile() != null) {
@@ -1823,7 +1820,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 				InputStream is = srcDoc.getPackage().getInputStream(refObjPath);
 				if (is != null) {
 					String mediaType = srcDoc.getPackage().getFileEntry(refObjPath).getMediaTypeString();
-					getPackage().insert(is, newObjPath, mediaType);
+                    getPackage().insert(is, newObjPath, mediaType);
 				} else {
 					Document embedDoc = ((Document) srcDoc).getEmbeddedDocument(refObjPath);
 					if (embedDoc != null) {
@@ -1840,7 +1837,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * <p>
 	 * If the target package contains a resource with the same path and name,
 	 * the name of the resource will be renamed.
-	 * 
+	 *
 	 * @param sourceCloneEle
 	 *            - the element that need to be copied
 	 */
@@ -1929,7 +1926,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * When a element needs to be copied to a different document, all the style
 	 * definitions that are related with this element need to be copied.
-	 * 
+	 *
 	 * @param sourceCloneEle
 	 *            - the element that need to be copied
 	 * @param srcDoc
@@ -2331,7 +2328,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * This method will delete all the linked resources that are only related
 	 * with this element.
-	 * 
+	 *
 	 * @param odfEle
 	 *            - the element to be deleted.
 	 * @return true if successfully delete, or else, false will be returned
@@ -2386,7 +2383,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	/**
 	 * This method will delete all the style definitions that are only related
 	 * with this element.
-	 * 
+	 *
 	 * @param odfEle
 	 *            - the element to be deleted.
 	 * @return true if successfully delete, or else, false will be returned
@@ -2503,7 +2500,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Return the component repository of this document.
-	 * 
+	 *
 	 * @return the component repository of this document.
 	 */
 	protected IdentityHashMap<OdfElement, Component> getComponentMap() {
@@ -2512,8 +2509,8 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 
 	/**
 	 * Construct a
-	 * 
-	 * 
+	 *
+	 *
 	 * <code>TableTemplate<code> feature by extracting style template from an pre-defined table in a foreign document. The styles loaded by the template will be copied into the document as well and can be referenced by table directly.
 	 * <p>
 	 * The imported table need to be at least a 5*5 table (e.g. A1E5).  Each type of style in the template will be set according to the style reference in a specific table cell, as following:
@@ -2530,7 +2527,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
 	 * <br>first-row-end-column -E1
 	 * <br>last-row-start-column -A5
 	 * <br>last-row-end-column -E5
-	 * 
+	 *
 	 * @param templateFileInputStream
 	 *            - the InputStream of the ODF document.
 	 * @param tableName

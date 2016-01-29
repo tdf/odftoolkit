@@ -298,7 +298,7 @@ abstract public class OdfElement extends ElementNSImpl {
 	@Override
 	public Node cloneNode(boolean deep) {
 		OdfElement cloneElement = this.cloneOdfElement();
-        
+
 		if (attributes != null) {
 			for (int i = 0; i < attributes.getLength(); i++) {
 				Node item = attributes.item(i);
@@ -306,10 +306,11 @@ abstract public class OdfElement extends ElementNSImpl {
 				String prefix = item.getPrefix();
 				if (prefix == null) {
 					qname = item.getLocalName();
+                    cloneElement.setAttribute(qname, item.getNodeValue());
 				} else {
 					qname = prefix + ":" + item.getLocalName();
+                    cloneElement.setAttributeNS(item.getNamespaceURI(), qname, item.getNodeValue());
 				}
-				cloneElement.setAttributeNS(item.getNamespaceURI(), qname, item.getNodeValue());
 			}
 		}
 

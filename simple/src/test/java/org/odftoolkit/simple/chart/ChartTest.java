@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -15,25 +15,34 @@ software distributed under the License is distributed on an
 KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
-*/
-
+ */
 package org.odftoolkit.simple.chart;
 
 import java.awt.Rectangle;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.type.CellRangeAddressList;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.PresentationDocument;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.utils.ResourceUtilities;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class ChartTest {
 
+	private static final Logger LOG = Logger.getLogger(ChartTest.class.getName());
+
+	private static final String TEST_SPREADSHEET_WITH_CHART = "SpreadsheetWithChart.ods";
 	private static final String TEST_FILE = "ChartTest.ods";
 	private static final String CHART_FILE1 = "TestCreateChartWithLocalData.ods";
 	private static final String CHART_FILE2 = "TestCreateChartWithCellRange.ods";
@@ -41,15 +50,78 @@ public class ChartTest {
 	private static final String CHART_FILE_ODT = "TestODTChart.odt";
 	private static final String CHART_FILE_ODP = "TestODPChart.odp";
 
+	// NEW OUTPUT DOCS
+	private static final String TEST_SPREADSHEET_WITH_APPENDED_CHART = "SpreadsheetWithAppendedChart.ods";
+
+	@Test
+	public void testCopyChart() {
+		try {
+			SpreadsheetDocument emptySpreadsheetDocument = SpreadsheetDocument.newSpreadsheetDocument();
+			SpreadsheetDocument chartSpreadSheetDocument = (SpreadsheetDocument) Document.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_SPREADSHEET_WITH_CHART));
+			// Make sure there are no manifest entries duplicates in the beginning..
+			checkManifestEntryDuplication(emptySpreadsheetDocument);
+
+			emptySpreadsheetDocument.appendSheet(chartSpreadSheetDocument.getSheetByIndex(0), "test");
+			// Make sure no duplicate manifest entries are after the insertion of the sheet with its dependencies..
+			checkManifestEntryDuplication(emptySpreadsheetDocument);
+
+			emptySpreadsheetDocument.save(ResourceUtilities.newTestOutputFile(TEST_SPREADSHEET_WITH_APPENDED_CHART));
+			SpreadsheetDocument reloadedSpreadsheetWithChart = (SpreadsheetDocument) Document.loadDocument(ResourceUtilities.newTestOutputFile(TEST_SPREADSHEET_WITH_APPENDED_CHART));
+			// Make sure no duplicate manifest entries are after reload of the document..
+			checkManifestEntryDuplication(reloadedSpreadsheetWithChart);
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, null, e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+	}
+
+	// simply tests the given file path for duplicate
+	private static void checkManifestEntryDuplication(Document testDocument) throws XPathExpressionException {
+		OdfFileDom manifestDom = testDocument.getPackage().getManifestDom();
+		XPath xpath = manifestDom.getXPath();
+		Node manifestRootElement = manifestDom.getRootElement();
+		NodeList manifestEntries = (NodeList) xpath.evaluate("./*/@manifest:full-path", manifestRootElement, XPathConstants.NODESET);
+		Assert.assertNotNull(manifestEntries);
+		Map<String, Integer> entries = new HashMap<String, Integer>();
+		for (int i = 0; i < manifestEntries.getLength(); i++) {
+			String entryName = manifestEntries.item(i).toString();
+			if (!entries.containsKey(entryName)) {
+				entries.put(entryName, 1);
+			} else {
+				int newCount = entries.get(entryName) + 1;
+				entries.put(entryName, newCount);
+			}
+		}
+		boolean duplicated = false;
+		StringBuilder sb = null;
+
+		// check if there are multiple occurances
+		for (String s : entries.keySet()) {
+			if (entries.get(s) > 1) {
+				if (sb == null) {
+					sb = new StringBuilder();
+					sb.append("The following manifest entrie(s) are duplicated:\n");
+				}
+				sb.append("\tThe entry '").append(s).append("' exists ").append(entries.get(s)).append(" times.\n");
+				duplicated = true;
+			}
+		}
+		String errorMsg = "";
+		if (sb != null) {
+			errorMsg = sb.toString();
+		}
+		Assert.assertFalse(errorMsg, duplicated);
+	}
+
 	@Test
 	public void testEquals() {
 		try {
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			String title = "Main";
-			String[] lables = new String[]{"Anna","Daisy","Tony","MingFei"};
-			String[] legends = new String[]{"Day1","Day2","Day3"};
-			double[][] data = new double[][]{{1,2,3},{2,3,4},{3,4,5},{4,5,6}};
-			DataSet dataset = new DataSet(lables,legends,data);
+			String[] lables = new String[]{"Anna", "Daisy", "Tony", "MingFei"};
+			String[] legends = new String[]{"Day1", "Day2", "Day3"};
+			double[][] data = new double[][]{{1, 2, 3}, {2, 3, 4}, {3, 4, 5}, {4, 5, 6}};
+			DataSet dataset = new DataSet(lables, legends, data);
 			Rectangle rect = new Rectangle();
 			rect.x = 67;
 			rect.y = 89;
@@ -63,11 +135,11 @@ public class ChartTest {
 			Assert.assertEquals(dataset, chart.getChartData());
 			Assert.assertEquals("Main", chart.getChartTitle());
 			Assert.assertEquals(ChartType.AREA, chart.getChartType());
-			
-			System.out.println("chart " + chart);
-			
+
+			LOG.info("chart " + chart);
+
 		} catch (Exception e) {
-			Logger.getLogger(DataSetTest.class.getName()).log(Level.SEVERE, null, e);
+			LOG.log(Level.SEVERE, null, e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -79,9 +151,9 @@ public class ChartTest {
 			doc = SpreadsheetDocument.newSpreadsheetDocument();
 			String title = "LocalData";
 			// double[][] data = new double[3][3];
-			String[] lables = new String[] { "Anna", "Daisy", "Tony", "MingFei" };
-			String[] legends = new String[] { "Day1", "Day2", "Day3" };
-			double[][] data = new double[][] { { 1, 2, 3, 4 }, { 2, 3, 4, 5 }, { 3, 4, 5, 6 } };
+			String[] lables = new String[]{"Anna", "Daisy", "Tony", "MingFei"};
+			String[] legends = new String[]{"Day1", "Day2", "Day3"};
+			double[][] data = new double[][]{{1, 2, 3, 4}, {2, 3, 4, 5}, {3, 4, 5, 6}};
 			Rectangle rect = new Rectangle();
 			rect.x = 2000;
 			rect.y = 2700;
@@ -117,7 +189,7 @@ public class ChartTest {
 			Assert.assertTrue(legends.length == newChart.getChartData().getDataSeriesCount());
 
 		} catch (Exception e) {
-			Logger.getLogger(DataSetTest.class.getName()).log(Level.SEVERE, null, e);
+			LOG.log(Level.SEVERE, null, e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -126,7 +198,7 @@ public class ChartTest {
 	public void testCreateChartWithCellRange() {
 		try {
 			SpreadsheetDocument doc = (SpreadsheetDocument) Document.loadDocument(ResourceUtilities
-					.getTestResourceAsStream(TEST_FILE));
+				.getTestResourceAsStream(TEST_FILE));
 			String barTitle = "Bar Chart with CellRange ";
 			String areaTitle = "AREA Chart with CellRange";
 			Rectangle rect = new Rectangle();
@@ -143,16 +215,16 @@ public class ChartTest {
 			doc.createChart(barTitle, doc, CellRangeAddressList.valueOf("A.B2:A.E21"), false, false, true, rect);
 			doc.createChart(barTitle, doc, CellRangeAddressList.valueOf("A.B2:A.E21"), false, false, false, rect);
 			Chart chartID8 = doc.createChart(areaTitle, doc, CellRangeAddressList.valueOf("A.B2:A.E21"), false, false,
-					false, rect);
+				false, rect);
 			Chart chart8 = doc.getChartById(chartID8.getChartID());
 			chart8.setChartType(ChartType.AREA);
 			Assert.assertEquals(ChartType.AREA, chart8.getChartType());
 			//Assert.assertEquals(8, doc.getChartByTitle(barTitle).size());
 			Assert.assertNotNull(doc.getChartByTitle(areaTitle));
 			doc.save(ResourceUtilities.newTestOutputFile(CHART_FILE2));
-			
+
 		} catch (Exception e) {
-			Logger.getLogger(DataSetTest.class.getName()).log(Level.SEVERE, null, e);
+			LOG.log(Level.SEVERE, null, e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
@@ -162,7 +234,7 @@ public class ChartTest {
 
 		try {
 			SpreadsheetDocument doc = (SpreadsheetDocument) Document.loadDocument(ResourceUtilities
-					.getTestResourceAsStream(CHART_FILE2));
+				.getTestResourceAsStream(CHART_FILE2));
 			doc.deleteChartById("Object 1");
 			//Assert.assertEquals(9, doc.getChartCount());
 			String barTitle = "Bar Chart with CellRange ";
@@ -173,20 +245,20 @@ public class ChartTest {
 			doc.save(ResourceUtilities.newTestOutputFile(CHART_FILE3));
 
 		} catch (Exception e) {
-			Logger.getLogger(DataSetTest.class.getName()).log(Level.SEVERE, null, e);
+			LOG.log(Level.SEVERE, null, e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	@Test
 	public void testCreateChartInDocument() {
 		try {
 			TextDocument doc = TextDocument.newTextDocument();
 			String title = "LocalData";
 			// double[][] data = new double[3][3];
-			String[] lables = new String[] { "Anna", "Daisy", "Tony", "MingFei" };
-			String[] legends = new String[] { "Day1", "Day2", "Day3" };
-			double[][] data = new double[][] { { 1, 2, 3, 4 }, { 2, 3, 4, 5 }, { 3, 4, 5, 6 } };
+			String[] lables = new String[]{"Anna", "Daisy", "Tony", "MingFei"};
+			String[] legends = new String[]{"Day1", "Day2", "Day3"};
+			double[][] data = new double[][]{{1, 2, 3, 4}, {2, 3, 4, 5}, {3, 4, 5, 6}};
 			Rectangle rect = new Rectangle();
 			rect.x = 2000;
 			rect.y = 2700;
@@ -215,7 +287,7 @@ public class ChartTest {
 			pDoc.save(ResourceUtilities.newTestOutputFile(CHART_FILE_ODP));
 
 		} catch (Exception e) {
-			Logger.getLogger(DataSetTest.class.getName()).log(Level.SEVERE, null, e);
+			LOG.log(Level.SEVERE, null, e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}

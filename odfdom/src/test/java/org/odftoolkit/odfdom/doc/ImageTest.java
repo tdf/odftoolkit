@@ -1,31 +1,25 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
-
-import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.deleteImage;
-import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.deleteImageByPath;
-import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.getImageByPath;
-import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.getImageCount;
-import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.getImagePathSet;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -33,7 +27,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -41,6 +34,11 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
 import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawFrame;
 import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
+import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.deleteImage;
+import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.deleteImageByPath;
+import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.getImageByPath;
+import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.getImageCount;
+import static org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage.getImagePathSet;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.utils.NodeAction;
@@ -80,9 +78,9 @@ public class ImageTest {
 						try {
 							String packagePath = img.newImage(mImageUri_ODFDOM);
 							if (packagePath == null || !pkg.contains(packagePath)) {
-								Assert.fail("The folloing image could not be embedded:" + mImageUri_ODFDOM.toString());
+								Assert.fail("The following image could not be embedded:" + mImageUri_ODFDOM.toString());
 							} else if (!packagePath.equals(mPackageGraphicsPath + mImageName_ODFDOM)) {
-								Assert.fail("Instead of '" + mPackageGraphicsPath + mImageName_ODFDOM + "' the folloing image path was returned: '" + packagePath + "'");
+								Assert.fail("Instead of '" + mPackageGraphicsPath + mImageName_ODFDOM + "' the following image path was returned: '" + packagePath + "'");
 							}
 						} catch (Exception ex) {
 							Logger.getLogger(ImageTest.class.getName()).log(
@@ -93,7 +91,7 @@ public class ImageTest {
 				}
 			};
 			addImages.performAction(doc.getContentDom().getDocumentElement(),
-					null);			
+					null);
 			doc.save(ResourceUtilities.getTestOutput("add-images-by-uri.odt"));
 
 		} catch (Exception e) {
@@ -199,6 +197,8 @@ public class ImageTest {
 	@Test
 	public void testRemoveAllImage() {
 		try {
+			// this test is dependent of the output of the following test, which is therefore being called explicitly
+            testImageInTextDocument();
 			OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("addimages.odt"));
 
 			Set<String> pathSet = getImagePathSet(doc);

@@ -40,7 +40,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
-import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.pkg.rdfa.Util;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
@@ -308,6 +307,7 @@ public class OdfPackageDocument implements Closeable {
 	 */
 	public void insertDocument(OdfPackageDocument newDocument, String documentPath) {
 		newDocument.flushDoms();
+		// if the existing document already has a subdirtory if had to be added to the absolute
 		mPackage.insertDocument(newDocument, mDocumentPathInPackage + documentPath);
 	}
 
@@ -380,7 +380,7 @@ public class OdfPackageDocument implements Closeable {
 
 	/**
 	 * Extracts RDF Metadata triple from XML files
-	 * 
+	 *
 	 * @param internalPath path to the XML file relative to package root
 	 * @return RDF Metadata through GRDDL XSLT of given XML file
 	 */

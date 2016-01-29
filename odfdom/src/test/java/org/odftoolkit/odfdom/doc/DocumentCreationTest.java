@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -24,10 +24,8 @@ package org.odftoolkit.odfdom.doc;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,7 +61,7 @@ public class DocumentCreationTest {
 	private static final String TEST_FILE_FOLDER = ResourceUtilities.getTestOutputFolder();
 	private static final String TEST_FILE_EMBEDDED = TEST_FILE_FOLDER + "testEmbeddedDoc.odt";
 	private static final String TEST_PIC = "testA.jpg";
-	// Changed leading space against character as leading space have to be <text:s/> element in ODF, see http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html#White-space_Characters 
+	// Changed leading space against character as leading space have to be <text:s/> element in ODF, see http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html#White-space_Characters
 	private static final String TEST_SPAN_TEXT = "*Find Truth!!!";
 	private static final String TEST_FILE_ACCESS_EMBEDDED = TEST_FILE_FOLDER + "TestAccess_EmbeddedDocument.odt";
 	private static final String TEST_FILE_EMBEDDED_EMBEDDED = TEST_FILE_FOLDER + "TestAccess_EmbeddedinEmbedded.odt";
@@ -163,7 +161,6 @@ public class DocumentCreationTest {
 	public void _2_createEmbeddedDocs() {
 		try {
 			OdfTextDocument odtDoc1 = OdfTextDocument.newTextDocument();
-
 			odtDoc1.insertDocument(OdfTextDocument.newTextDocument(), "Object1/");
 			odtDoc1.insertDocument(OdfTextDocument.newTextDocument(), "Object2/");
 			odtDoc1.insertDocument(OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestEmpty_OdfGraphicsDocument.odg")), "Object3");
@@ -295,7 +292,7 @@ public class DocumentCreationTest {
 			addFrameForEmbeddedDoc(contentDom, lastPara, "Object in Object1");
 			Map<String, OdfDocument> emb_embDocs = embDoc.loadSubDocuments();
 			Assert.assertEquals(embDocsNumber + 1, emb_embDocs.size());
-			
+
 			OdfDocument emb_embDoc = rootDocument.loadSubDocument(embDoc.getDocumentPath()+ pathOfSecondInnerDoc);
 			contentDom = emb_embDoc.getContentDom();
 			TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", contentDom, XPathConstants.NODE);
@@ -397,7 +394,7 @@ public class DocumentCreationTest {
 					Assert.assertNotNull(span4);
 					Assert.assertEquals(span4.getTextContent(), TEST_SPAN_TEXT);
 				}
-			}			
+			}
 		} catch (Exception ex) {
 			Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
 			Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");

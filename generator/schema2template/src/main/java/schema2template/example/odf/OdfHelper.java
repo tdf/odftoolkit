@@ -140,10 +140,10 @@ public class OdfHelper {
 		odfPythonResourceDir = TEST_INPUT_ROOT + File.separator + "odfdom-python";
 		odfReferenceResourceDir = TEST_INPUT_ROOT + File.separator + "odf-reference";
         odfSchemaResourceDir = TEST_INPUT_ROOT + File.separator + "odf-schemas";
-		odf12SignatureRngFile = INPUT_ROOT + File.separator + ODF12_SIGNATURE_RNG_FILE_NAME;
-		odf12ManifestRngFile = INPUT_ROOT + File.separator + ODF12_MANIFEST_RNG_FILE_NAME;
-		odf12RngFile = INPUT_ROOT + File.separator + ODF12_RNG_FILE_NAME;
-		odf11RngFile = INPUT_ROOT + File.separator + ODF11_RNG_FILE_NAME;
+		odf12SignatureRngFile = odfSchemaResourceDir + File.separator + ODF12_SIGNATURE_RNG_FILE_NAME;
+		odf12ManifestRngFile = odfSchemaResourceDir + File.separator + ODF12_MANIFEST_RNG_FILE_NAME;
+		odf12RngFile = odfSchemaResourceDir + File.separator + ODF12_RNG_FILE_NAME;
+		odf11RngFile = odfSchemaResourceDir + File.separator + ODF11_RNG_FILE_NAME;
 		odf10RngFile = odfSchemaResourceDir + File.separator + ODF10_RNG_FILE_NAME;
 		outputRoot = "target";
 		mConfigFile = TEST_INPUT_ROOT + File.separator + "config.xml";

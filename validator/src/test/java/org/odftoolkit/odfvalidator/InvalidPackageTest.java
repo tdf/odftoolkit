@@ -106,8 +106,8 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
 			t.printStackTrace();
 			Assert.fail(t.toString());
 		}
-		Assert.assertTrue(output.contains("Error: The ODF package 'testInvalidPkg3.odt' shall contain the 'META-INF/manifest.xml' file"));
-		Assert.assertTrue(output.contains("testInvalidPkg3.odt:  Info: 2 errors, no warnings"));
+		Assert.assertTrue("Output of validatePackage3(): " + output, output.contains("Error: The ODF package 'testInvalidPkg3.odt' shall contain the 'META-INF/manifest.xml' file"));
+		Assert.assertTrue("Output of validatePackage3(): " + output, output.contains("testInvalidPkg3.odt:  Info: 3 errors, no warnings"));
 	}
 
 	@Test
