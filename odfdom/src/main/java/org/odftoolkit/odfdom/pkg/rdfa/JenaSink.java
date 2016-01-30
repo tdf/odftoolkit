@@ -1,42 +1,36 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  ************************************************************************/
 package org.odftoolkit.odfdom.pkg.rdfa;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
 import net.rootdev.javardfa.StatementSink;
-
+import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfFileSaxHandler;
 import org.w3c.dom.Node;
-
-import com.hp.hpl.jena.rdf.model.Literal;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.shared.PrefixMapping.IllegalPrefixException;
 
 /**
  * To cache the Jena RDF triples parsed from RDFaParser
@@ -44,7 +38,6 @@ import com.hp.hpl.jena.shared.PrefixMapping.IllegalPrefixException;
  */
 public class JenaSink implements StatementSink {
 
-//	private OdfFileSaxHandler odf;
 	private Node contextNode;
 	private OdfFileDom mFileDom;
     private Map<String, Resource> bnodeLookup;
@@ -56,17 +49,17 @@ public class JenaSink implements StatementSink {
 		this.bnodeLookup = new HashMap<String, Resource>();
     }
 
-    //@Override
+    @Override
     public void start() {
         bnodeLookup = new HashMap<String, Resource>();
     }
 
-    //@Override
+    @Override
     public void end() {
         bnodeLookup = null;
     }
 
-    //@Override
+    @Override
     public void addObject(String subject, String predicate, String object) {
     	Model model =getContextModel();
         Resource s = getResource(model, subject.trim());
@@ -75,7 +68,7 @@ public class JenaSink implements StatementSink {
         model.add(s, p, o);
     }
 
-    //@Override
+    @Override
     public void addLiteral(String subject, String predicate, String lex, String lang, String datatype) {
     	if (lex.isEmpty()){
     		return;
@@ -108,15 +101,12 @@ public class JenaSink implements StatementSink {
     }
 
     public void addPrefix(String prefix, String uri) {
-//    	Model model =getContextModel();
-//        try {
-//            model.setNsPrefix(prefix.trim(), uri.trim());
-//        } catch (IllegalPrefixException e) {
-//        }
+    	Model model =getContextModel();
+        model.setNsPrefix(prefix.trim(), uri.trim());
     }
 
     public void setBase(String base) {}
-    
+
 	private Model getContextModel() {
 		Map<Node, Model> cache = this.mFileDom.getInContentMetadataCache();
 		Model model = cache.get(contextNode);
@@ -151,8 +141,8 @@ public class JenaSink implements StatementSink {
 	public void setContext(EvalContext context) {
 		this.context = context;
 	}
-		
-	
+
+
 //    // Namespace methods
 //    public void setNamespaceURI(String prefix, String uri) {
 //        if (uri.length() == 0) {

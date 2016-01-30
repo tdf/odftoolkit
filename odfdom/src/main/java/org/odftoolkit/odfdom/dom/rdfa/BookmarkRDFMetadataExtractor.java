@@ -43,10 +43,10 @@ import org.odftoolkit.odfdom.pkg.rdfa.JenaSink;
 import org.w3c.dom.Node;
 import org.xml.sax.Attributes;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
 
 /**
  * This is a sub class of <code>DefaultElementVisitor</code>, which is used to

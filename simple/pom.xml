@@ -24,18 +24,18 @@
     <parent>
       <groupId>org.apache.odftoolkit</groupId>
       <artifactId>odftoolkit</artifactId>
-      <version>0.6.1-incubating-SNAPSHOT</version>
+      <version>0.6.2-incubating-SNAPSHOT</version>
     </parent>
 
     <artifactId>simple-odf</artifactId>
-    <version>0.8.1-incubating-SNAPSHOT</version>
+    <version>0.8.2-incubating-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
            <groupId>${project.groupId}</groupId>
            <artifactId>odfdom-java</artifactId>
-           <version>0.8.10-incubating-SNAPSHOT</version>
+           <version>0.8.11-incubating-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>xerces</groupId>
@@ -117,8 +117,7 @@
                     <maxmemory>1024m</maxmemory>
                     <links>
                         <link>http://download.oracle.com/javase/6/docs/api/</link>
-                        <link>http://xerces.apache.org/xerces-j/apiDocs/</link>
-                        <link>http://odfdom.odftoolkit.org/0.8.7/odfdom/apidocs/</link>
+                        <link>http://xerces.apache.org/xerces-j/apiDocs/</link>                        
                     </links>
                     <splitindex>true</splitindex>
                     <windowtitle>Simple ODF v${project.version} - http://odftoolkit</windowtitle>

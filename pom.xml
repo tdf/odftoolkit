@@ -23,7 +23,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.6.1-incubating-SNAPSHOT</version>
+    <version>0.6.2-incubating-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -56,19 +56,14 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.jena</groupId>
-                <artifactId>jena-arq</artifactId>
-                <version>2.9.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.jena</groupId>
                 <artifactId>jena-core</artifactId>
-                <version>2.7.4</version>
+                <version>3.0.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.jena</groupId>
                 <artifactId>jena-core</artifactId>
                 <classifier>tests</classifier>
-                <version>2.7.4</version>
+                <version>3.0.1</version>
             </dependency>
             <dependency>
                 <groupId>net.rootdev</groupId>
@@ -78,7 +73,7 @@
             <dependency>
                 <groupId>commons-validator</groupId>
                 <artifactId>commons-validator</artifactId>
-                <version>1.4.0</version>
+                <version>1.5.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-fileupload</groupId>
@@ -88,7 +83,7 @@
             <dependency>
                 <groupId>net.java.dev.msv</groupId>
                 <artifactId>msv-core</artifactId>
-                <version>2011.1</version>
+                <version>2013.6.1</version>
             </dependency>
             <dependency>
                 <groupId>org.iso_relax.verifier.jaxp.validation</groupId>

@@ -25,11 +25,11 @@
 	<parent>
 		<groupId>org.apache.odftoolkit</groupId>
 		<artifactId>odftoolkit</artifactId>
-		<version>0.6.1-incubating-SNAPSHOT</version>
+		<version>0.6.2-incubating-SNAPSHOT</version>
 	</parent>
   
 	<artifactId>odfdom-java</artifactId>
-	<version>0.8.10-incubating-SNAPSHOT</version>
+	<version>0.8.11-incubating-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -51,20 +51,22 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-core</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
 			<groupId>org.apache.jena</groupId>
 			<artifactId>jena-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.jena</groupId>
-			<artifactId>jena-core</artifactId>
-			<classifier>tests</classifier>
+			<version>3.0.1</version>
+            <classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.rootdev</groupId>
 			<artifactId>java-rdfa</artifactId>
-		</dependency>
+		</dependency>        
 		<dependency>
 			<groupId>commons-validator</groupId>
 			<artifactId>commons-validator</artifactId>

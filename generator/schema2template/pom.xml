@@ -24,12 +24,12 @@
   <parent>
     <groupId>org.apache.odftoolkit</groupId>
     <artifactId>schema2template-pom</artifactId>
-    <version>0.8.10-incubating-SNAPSHOT</version>
+    <version>0.8.11-incubating-SNAPSHOT</version>
   </parent>
   
 	<!-- The Basics -->
 	<artifactId>schema2template</artifactId>
-	<version>0.8.10-incubating-SNAPSHOT</version>
+	<version>0.8.11-incubating-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>net.java.dev.msv</groupId>
 			<artifactId>msv-core</artifactId>
-            <version>2009.1</version>
+            <version>2013.6.1</version>
 		</dependency>
         <dependency>
             <groupId>xml-apis</groupId>
