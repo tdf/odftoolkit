@@ -27,7 +27,7 @@
 		<version>0.6.2-incubating-SNAPSHOT</version>
 	</parent>
 	<artifactId>odfvalidator</artifactId>
-	<version>1.1.7-incubating-SNAPSHOT</version>
+	<version>1.1.8-incubating-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<dependencies>
