@@ -40,8 +40,8 @@ import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.xml.sax.InputSource;
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.test.ModelTestBase;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.test.ModelTestBase;
 
 import java.util.logging.Level;
 import org.junit.Assert;

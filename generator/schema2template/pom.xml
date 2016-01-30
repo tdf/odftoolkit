@@ -243,6 +243,7 @@
 					</links>
 					<splitindex>true</splitindex>
 					<windowtitle>Schema2template v${project.version} - http://incubator.apache.org/odftoolkit/</windowtitle>
+                    <additionalparam>${javadoc.opts}</additionalparam>                        
 				</configuration>
 			</plugin>
 
@@ -261,7 +262,17 @@
 			</plugin>
 		</plugins>
 	</reporting>
-
+    <profiles>
+        <profile>
+            <id>doclint-java8-disable</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <javadoc.opts>-Xdoclint:none</javadoc.opts>
+            </properties>
+        </profile>
+	</profiles>
 	<!-- More Project Information -->
 	<name>XML Schema to Template Mapping Tool: Library</name>
 	<description>XML Schema to Template Mapping Tool: Library</description>

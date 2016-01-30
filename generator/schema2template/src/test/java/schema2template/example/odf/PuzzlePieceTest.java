@@ -23,7 +23,6 @@ package schema2template.example.odf;
 
 import com.sun.msv.grammar.Expression;
 import java.io.BufferedReader;
-import static schema2template.example.odf.OdfHelper.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -31,12 +30,13 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.Test;
-import schema2template.model.PuzzlePiece;
-import schema2template.model.PuzzlePieceSet;
 import org.junit.Assert;
 import org.junit.Ignore;
+import org.junit.Test;
+import static schema2template.example.odf.OdfHelper.*;
 import schema2template.model.MSVExpressionIterator;
+import schema2template.model.PuzzlePiece;
+import schema2template.model.PuzzlePieceSet;
 
 public class PuzzlePieceTest {
 
@@ -137,6 +137,7 @@ public class PuzzlePieceTest {
 	 * extract PuzzlePieces out of a XML schema</p>
 	 */
 	@Test
+	@Ignore // due to issue https://issues.apache.org/jira/browse/ODFTOOLKIT-180
 	public void testExtractPuzzlePieces() {
 		try {
 			PuzzlePieceSet allElements_ODF11 = new PuzzlePieceSet();
@@ -217,5 +218,5 @@ public class PuzzlePieceTest {
 			LOG.info("********************");
 			Assert.fail(errorMsg);
 		}
-	}	
+	}
 }
