@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -24,12 +24,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
@@ -44,7 +41,6 @@ import org.odftoolkit.simple.text.list.ListTest;
 import org.odftoolkit.simple.text.list.NumberDecorator;
 import org.odftoolkit.simple.text.list.OutLineDecorator;
 import org.odftoolkit.simple.utils.ResourceUtilities;
-
 import sun.misc.BASE64Encoder;
 
 public class SectionTest {
@@ -393,43 +389,43 @@ public class SectionTest {
 			Assert.fail();
 		}
 	}
-	
+
 	@Test
 	public void testAddParagraph() {
 		try {
 			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("Sections.odt"));
 			Section theSec = doc.getSectionByName("ImageSection");
-			
+
 			Paragraph para = theSec.addParagraph("paragraph");
 			String paracontent = para.getTextContent();
 			Assert.assertEquals("paragraph", paracontent);
-			
+
 			OdfElement odfEle = theSec.getParagraphContainerElement();
 			Assert.assertEquals("paragraph", odfEle.getLastChild().getTextContent());
-			
+
 			boolean flag = theSec.removeParagraph(para);
 			if(flag){
 				OdfElement odfEle1 = theSec.getParagraphContainerElement();
 				Assert.assertTrue(odfEle1.getLastChild().getTextContent() != "paragraph");
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetParagraphIterator() {
 		try {
 			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("Sections.odt"));
 			Section theSec = doc.getSectionByName("ImageSection");
-			
+
 			Paragraph para = theSec.addParagraph("paragraph");
 			String paracontent = para.getTextContent();
 			Assert.assertEquals("paragraph", paracontent);
-			
+
 			boolean flag = false;
 			Iterator<Paragraph> iter = theSec.getParagraphIterator();
 			while(iter.hasNext()){
@@ -437,59 +433,59 @@ public class SectionTest {
 				if("paragraph".equals(parai.getTextContent()))
 						flag = true;
 			}
-			
+
 			Assert.assertTrue(flag);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetParagraphByIndex() {
 		try {
 			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("Sections.odt"));
 			Section theSec = doc.getSectionByName("ImageSection");
-			
+
 			Paragraph para = theSec.addParagraph("paragraph");
 			String paracontent = para.getTextContent();
 			Assert.assertEquals("paragraph", paracontent);
-			
+
 			Paragraph para1 = theSec.getParagraphByIndex(2, true);
 			Assert.assertEquals("paragraph", para1.getTextContent());
-			
-			
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetParagraphByReverseIndex() {
 		try {
 			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("Sections.odt"));
 			Section theSec = doc.getSectionByName("ImageSection");
 			Section theSec2 = doc.getSectionByName("ImageSection");
-			
+
 			Paragraph para = theSec.addParagraph("paragraph");
 			String paracontent = para.getTextContent();
 			Assert.assertEquals("paragraph", paracontent);
-			
+
 			Paragraph para1 = theSec.getParagraphByReverseIndex(0, true);
 			Assert.assertEquals("paragraph", para1.getTextContent());
-			
+
 			Paragraph para2 = theSec.getParagraphByIndex(2, true);
 			Assert.assertEquals("paragraph", para2.getTextContent());
-			
+
 			boolean flag = theSec.equals(para);
 			Assert.assertTrue(!flag);
 			flag = theSec.equals(theSec2);
 			Assert.assertTrue(flag);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -650,4 +646,17 @@ public class SectionTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+
+    @Test
+    public void testGetEmbeddedSectionByName() {
+        try {
+            TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("Sections.odt"));
+            Section sectOut = doc.getSectionByName("InnerSection");
+            Section sectEmbedded = sectOut.getEmbeddedSectionByName("EmbedSection");
+            Assert.assertEquals(true, sectEmbedded != null);
+        } catch (Exception e) {
+            Logger.getLogger(ListTest.class.getName()).log(Level.SEVERE, "Problem with section test:", e);
+            Assert.fail();
+        }
+    }
 }

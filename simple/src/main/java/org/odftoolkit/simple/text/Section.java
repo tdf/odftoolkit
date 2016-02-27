@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
@@ -34,19 +33,19 @@ import org.odftoolkit.simple.Component;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.table.AbstractTableContainer;
 import org.odftoolkit.simple.table.Table;
-import org.odftoolkit.simple.table.TableContainer;
 import org.odftoolkit.simple.table.Table.TableBuilder;
+import org.odftoolkit.simple.table.TableContainer;
 import org.odftoolkit.simple.text.list.AbstractListContainer;
 import org.odftoolkit.simple.text.list.ListContainer;
 import org.odftoolkit.simple.text.list.ListDecorator;
-
+import org.w3c.dom.Node;
 import sun.misc.BASE64Encoder;
 
 /**
  * This class represents section definition in text document. It provides
  * methods to manipulate section in text document, such as getting/setting
  * section name, moving section and so on.
- * 
+ *
  * @since 0.4
  */
 public class Section extends Component implements ParagraphContainer,
@@ -67,7 +66,7 @@ public class Section extends Component implements ParagraphContainer,
 
 	/**
 	 * Get a section instance by an object of <code>TextSectionElement</code>.
-	 * 
+	 *
 	 * @param element
 	 *            - an object of <code>TextSectionElement</code>
 	 * @return an instance of <code>Section</code> that can represent
@@ -79,7 +78,7 @@ public class Section extends Component implements ParagraphContainer,
 
 	/**
 	 * Return the ODF document which this section belongs to.
-	 * 
+	 *
 	 * @return - the ODF document which this section belongs to.
 	 */
 	public Document getOwnerDocument() {
@@ -88,7 +87,7 @@ public class Section extends Component implements ParagraphContainer,
 
 	/**
 	 * Return the name of this section
-	 * 
+	 *
 	 * @return - the name of this section
 	 */
 	public String getName() {
@@ -97,7 +96,7 @@ public class Section extends Component implements ParagraphContainer,
 
 	/**
 	 * Set the value of this section name
-	 * 
+	 *
 	 * @param name
 	 *            - the value of name to be set
 	 */
@@ -110,7 +109,7 @@ public class Section extends Component implements ParagraphContainer,
 	 * <p>
 	 * All the linked resources which are only linked to this section will be
 	 * removed too.
-	 * 
+	 *
 	 */
 	public void remove() {
 		mDocument.removeElementLinkedResource(mSectionElement);
@@ -123,7 +122,7 @@ public class Section extends Component implements ParagraphContainer,
 	/**
 	 * Return an instance of <code>TextSectionElement</code> which represents
 	 * this section.
-	 * 
+	 *
 	 * @return - an instance of <code>TextSectionElement</code> which represents
 	 *         this section
 	 */
@@ -133,7 +132,7 @@ public class Section extends Component implements ParagraphContainer,
 
 	/**
 	 * Return whether this section is contained in footer or header.
-	 * 
+	 *
 	 * @return - true if this section is contained in footer or header. false if
 	 *         this section is not contained in footer or header.
 	 */
@@ -152,7 +151,7 @@ public class Section extends Component implements ParagraphContainer,
 	 * <p>
 	 * If this value is set to false, the existing password will be removed at
 	 * the same.
-	 * 
+	 *
 	 * @param isProtected
 	 *            - "true" represents the section cannot be edited through a
 	 *            user interface. "false" represents the section is allowed to
@@ -167,7 +166,7 @@ public class Section extends Component implements ParagraphContainer,
 	/**
 	 * Return the value of section which specifies whether the section is
 	 * protected.
-	 * 
+	 *
 	 * @return whether the section is protected.
 	 */
 	public boolean isProtected() {
@@ -186,10 +185,10 @@ public class Section extends Component implements ParagraphContainer,
 	 * {@link Section#setProtectionKeyDigestProvider(ProtectionKeyDigestProvider)}
 	 * . The default digest algorighom of the protection key is SHA-1:
 	 * {@link http://www.w3.org/2000/09/xmldsig#sha1.}
-	 * 
+	 *
 	 * @param key
 	 *            -the value of the password.
-	 * 
+	 *
 	 */
 	public void setProtectedWithPassword(String key) {
 		if (key != null && key.length() > 0) {
@@ -207,7 +206,7 @@ public class Section extends Component implements ParagraphContainer,
 
 	/**
 	 * Get the protection key of this section.
-	 * 
+	 *
 	 * @return the protection key of this section
 	 */
 	public String getProtectedPassword() {
@@ -219,7 +218,7 @@ public class Section extends Component implements ParagraphContainer,
 	 * <p>
 	 * The default value is http://www.w3.org/2000/09/xmldsig#sha1, if no value
 	 * specified.
-	 * 
+	 *
 	 * @return an IRI that identifies an authentication procedure for removing a
 	 *         protection.
 	 */
@@ -271,7 +270,7 @@ public class Section extends Component implements ParagraphContainer,
 	/**
 	 * Set the provider which provides corresponding protection key digest
 	 * algorithm.
-	 * 
+	 *
 	 * @param provider
 	 *            - an instance of a protection key digest algorithm provider
 	 */
@@ -283,7 +282,7 @@ public class Section extends Component implements ParagraphContainer,
 	/**
 	 * Get current used provider which provides corresponding protection key
 	 * digest algorithm.
-	 * 
+	 *
 	 * @return the current used provider.
 	 */
 	public ProtectionKeyDigestProvider getProtectionKeyDigestProvier() {
@@ -296,7 +295,7 @@ public class Section extends Component implements ParagraphContainer,
 	/**
 	 * Get the default provider which use SHA-1 standard as the protection key
 	 * digest algorithm.
-	 * 
+	 *
 	 * @return the default protection key digest algorithm.
 	 */
 	public ProtectionKeyDigestProvider getDefaultProtectionKeyDigestProvider() {
@@ -323,7 +322,7 @@ public class Section extends Component implements ParagraphContainer,
 	}
 
 	//****************Paragraph support******************//
-	
+
 	public Paragraph addParagraph(String textContent) {
 		return getParagraphContainerImpl().addParagraph(textContent);
 	}
@@ -451,4 +450,52 @@ public class Section extends Component implements ParagraphContainer,
 		return getListContainerImpl().removeList(list);
 	}
 
+    /**
+     * Looks for an embedded section with a given name.
+     *
+     * @param chdSecName Section name looked for
+     * @return TextSectionElement with the given name or null
+     */
+    public Section getEmbeddedSectionByName(String chdSecName) {
+        OdfElement sectEle = getOdfElement();
+        TextSectionElement sectChdEle = findChildSectionByName(sectEle, chdSecName);
+        if (sectChdEle != null) {
+            return new Section((Document) ((OdfFileDom) (sectEle.getOwnerDocument())).getDocument(), sectChdEle);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Recursive function. Looks for an TextSectionElement inside the father
+     * Element 'ele' with the name sectionName
+     *
+     * @param ele
+     * @param sectionName
+     * @return TextSectionElement with the given name or null
+     */
+    private static TextSectionElement findChildSectionByName(OdfElement ele, String sectionName) {
+        if (ele instanceof TextSectionElement) {
+            // is ele the wanted Element?
+            String name = ((TextSectionElement) ele).getTextNameAttribute();
+            if (name != null) {
+                if (name.equals(sectionName)) {
+                    return (TextSectionElement) ele;
+                }
+            }
+        }
+
+        // this Element is not the wanted one? then examine all children
+        Node chdNode = ele.getFirstChild();
+        while (chdNode != null) {
+            if (chdNode instanceof OdfElement) {
+                TextSectionElement result = findChildSectionByName((OdfElement) chdNode, sectionName);
+                if (result != null) {
+                    return result;
+                }
+            }
+            chdNode = chdNode.getNextSibling();
+        }
+        return null;
+    }
 }
