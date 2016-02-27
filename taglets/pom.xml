@@ -31,6 +31,10 @@
     <version>0.8.11-incubating-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
+	</properties>
     <!-- Build Settings -->
     <build>
         <plugins>

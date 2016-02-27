@@ -35,12 +35,14 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+
+ // ToDo: Shall we keep one config file or shall we split them?!
+ // Java specific + other separating??
+
 /**
- * Often Process the custom configuration data .xml
- * Liest nur die config.xml
- * Soll man die Konfiguration in einer behalten, oder aufsplitten!
- * Java speczifische + anderes aufteilen
- * Handler für existierende config.xml
+ * Often Process the custom configuration data XML
+ * Reads only the config.xml
+ * Handler for existing config.xml
  */
 class OdfConfigFileHandler extends DefaultHandler {
 
@@ -210,7 +212,7 @@ class OdfConfigFileHandler extends DefaultHandler {
      *
      * @param cf Config file
      */
-    public static void readConfigFile(File cf, Map<String, String> elementBaseNames, 
+    public static void readConfigFile(File cf, Map<String, String> elementBaseNames,
             Map<String, OdfModel.AttributeDefaults> attributeDefaults, Map<String, List<String>> elementStyleFamilies,
             Map<String, String[]> datatypeValueConversion) throws Exception {
 
