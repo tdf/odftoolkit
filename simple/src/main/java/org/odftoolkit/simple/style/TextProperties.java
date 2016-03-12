@@ -1191,15 +1191,34 @@ public class TextProperties {
         return null;
     }
 
-    // public void setBackgroundColor(Color bkColor)
-    // {
-    //
-    // }
-    //
-    // public Color getBackgroundColor()
-    // {
-    // return null;
-    // }
+    /**
+     * Sets backgroundColor represented by the OpenDocument format used data
+     * type {@odf.datatype color} See
+     * <a href="http://www.w3.org/TR/CSS21/syndata.html#value-def-color">W3C CSS
+     * specification</a> for further details.
+     * @param bkColor
+     */
+    public void setBackgroundColorAttribute(Color bkColor) {
+        if (bkColor != null) {
+            mElement.setFoBackgroundColorAttribute(bkColor.toString());
+        } else {
+            mElement.setFoBackgroundColorAttribute(null);
+        }
+    }
+
+    /**
+     *
+     * Gets backgroundColor represented by the OpenDocument format used data
+     * type {@odf.datatype color} See
+     * <a href="http://www.w3.org/TR/CSS21/syndata.html#value-def-color">W3C CSS
+     * specification</a> for further details.
+     *
+     * @return bkColor as String (see above)
+     */
+    public String getBackgroundColorAttribute() {
+        return mElement.getFoBackgroundColorAttribute();
+    }
+
     //
     // public void setIsShadow(boolean shadow)
     // {

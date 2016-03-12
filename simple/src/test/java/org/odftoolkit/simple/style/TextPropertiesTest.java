@@ -442,4 +442,23 @@ public class TextPropertiesTest {
         }
     }
 
+    @Test
+    public void testBackgroundColor() {
+        try {
+            SpreadsheetDocument document = SpreadsheetDocument.newSpreadsheetDocument();
+            Table table = document.getTableByName("Sheet1");
+            Cell cell = table.getCellByPosition("A1");
+
+            TextProperties textProperties = cell.getStyleHandler().getTextPropertiesForWrite();
+            textProperties.setBackgroundColorAttribute(new Color(255, 0, 0));
+
+            //validate
+            Assert.assertEquals("#ff0000", textProperties.getBackgroundColorAttribute());
+
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            Assert.fail(e.getMessage());
+        }
+    }
+
 }
