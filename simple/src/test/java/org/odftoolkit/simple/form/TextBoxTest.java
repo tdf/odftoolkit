@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -22,9 +22,7 @@ package org.odftoolkit.simple.form;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.odftoolkit.simple.TextDocument;
@@ -63,13 +61,14 @@ public class TextBoxTest {
 			Cell cell = table.getCellByPosition("B1");
 			para = cell.addParagraph("Insert a text box here.");
 			form.createTextBox(para, textBoxRtg, "TextBox3", "TextBox3", false);
-			
+
 			doc.save(ResourceUtilities
 					.newTestOutputFile("TestCreateTextBox.odt"));
 
 		} catch (Exception e) {
 			Logger.getLogger(TextBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+            Assert.fail();
 		}
 	}
 
@@ -91,6 +90,7 @@ public class TextBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(TextBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+            Assert.fail();
 		}
 
 	}
@@ -123,6 +123,7 @@ public class TextBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(TextBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+            Assert.fail();
 		}
 	}
 
@@ -154,6 +155,7 @@ public class TextBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(TextBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+            Assert.fail();
 		}
 	}
 
@@ -190,6 +192,7 @@ public class TextBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(TextBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+            Assert.fail();
 		}
 	}
 
@@ -235,6 +238,7 @@ public class TextBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(TextBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+            Assert.fail();
 		}
 	}
 }

@@ -1,4 +1,4 @@
-/* 
+/*
   Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
        distributed with this work for additional information
@@ -25,7 +25,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import junit.framework.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
@@ -94,7 +94,7 @@ public class PerformanceIT {
 			writeToLog();
 		} catch (Exception e) {
 			Logger.getLogger(PerformanceIT.class.getName()).log(Level.SEVERE, null, e);
-
+            Assert.fail();
 		}
 	}
 

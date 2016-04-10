@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -22,9 +22,7 @@ package org.odftoolkit.simple.form;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.odftoolkit.simple.TextDocument;
@@ -81,6 +79,7 @@ public class CheckBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -133,6 +132,7 @@ public class CheckBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -164,6 +164,7 @@ public class CheckBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -204,6 +205,7 @@ public class CheckBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -236,6 +238,7 @@ public class CheckBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -268,6 +271,7 @@ public class CheckBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 
@@ -298,6 +302,7 @@ public class CheckBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
 

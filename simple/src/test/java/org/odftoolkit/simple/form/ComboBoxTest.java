@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -23,9 +23,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.odftoolkit.simple.TextDocument;
@@ -84,6 +82,7 @@ public class ComboBoxTest {
 		} catch (Exception e) {
 			Logger.getLogger(ComboBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
+            Assert.fail();
 		}
 	}
 
@@ -95,7 +94,7 @@ public class ComboBoxTest {
 			Form form = textDoc.getFormByName("Test Form");
 			Iterator<FormControl> iterator = ComboBox.getSimpleIterator(form);
 			int count = 0;
-			
+
 			// combo1
 			ComboBox comboBox = (ComboBox) iterator.next();
 			Assert.assertNotNull(comboBox);
@@ -104,7 +103,7 @@ public class ComboBoxTest {
 			ArrayList<String> entries = comboBox.getEntries();
 			Assert.assertEquals("aa", entries.get(0));
 			Assert.assertEquals("jj", entries.get(entries.size() - 1));
-			
+
 			// combo2
 			comboBox = (ComboBox) iterator.next();
 			Assert.assertNotNull(comboBox);
@@ -115,7 +114,7 @@ public class ComboBoxTest {
 			Assert.assertEquals(FormListSourceType.SQL, comboBox
 					.getListSourceType());
 			Assert.assertEquals("Author", comboBox.getDataField());
-		
+
 			// combo3
 			comboBox = (ComboBox) iterator.next();
 			Assert.assertNotNull(comboBox);
