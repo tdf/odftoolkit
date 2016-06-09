@@ -23,7 +23,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.draw.ControlStyleHandler;
@@ -42,28 +42,30 @@ import org.odftoolkit.simple.text.Paragraph;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class CheckBoxTest {
-	private static final FrameRectangle checkBoxRtg = new FrameRectangle(
+	private static final FrameRectangle CHECK_BOX_RTG = new FrameRectangle(
 			0.7972, 1.2862, 2.4441, 0.2669, SupportedLinearMeasure.IN);
 
-	@BeforeClass
-	public static void createForm() {
+    private static final Logger LOG = Logger.getLogger(CheckBoxTest.class.getName());
+
+	@Before
+	public void createForm() {
 		try {
 			TextDocument doc = TextDocument.newTextDocument();
 			Form form = doc.createForm("Test Form");
 
 			// checkbox 1
 			CheckBox checkbox = (CheckBox) form.createCheckBox(doc,
-					checkBoxRtg, "CheckBox 1", "CheckBox 1", "1");
+					CHECK_BOX_RTG, "CheckBox 1", "CheckBox 1", "1");
 
 			// checkbox 2
 			Paragraph para = doc.addParagraph("CheckBox2 anchor to heading.");
 			para.applyHeading();
-			form.createCheckBox(para, checkBoxRtg, "CheckBox 2", "CheckBox 2",
+			form.createCheckBox(para, CHECK_BOX_RTG, "CheckBox 2", "CheckBox 2",
 					"2");
 
 			// checkbox 3
 			para = doc.addParagraph("Insert checkbox3 here, as_char.");
-			checkbox = (CheckBox) form.createCheckBox(para, checkBoxRtg,
+			checkbox = (CheckBox) form.createCheckBox(para, CHECK_BOX_RTG,
 					"CheckBox 3", "CheckBox 3", "3");
 			checkbox.setCurrentState(FormCheckboxState.CHECKED);
 			checkbox.setAnchorType(AnchorType.AS_CHARACTER);
@@ -71,11 +73,12 @@ public class CheckBoxTest {
 			Table table1 = Table.newTable(doc, 2, 2);
 			Cell cell = table1.getCellByPosition("B1");
 			para = cell.addParagraph("Insert a check box here.");
-			form.createCheckBox(para, checkBoxRtg, "CheckBox 4", "CheckBox 4",
+			form.createCheckBox(para, CHECK_BOX_RTG, "CheckBox 4", "CheckBox 4",
 					"4");
 			doc.save(ResourceUtilities
 					.newTestOutputFile("TestCreateCheckbox.odt"));
 
+            LOG.info("Test input file has been created!");
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
