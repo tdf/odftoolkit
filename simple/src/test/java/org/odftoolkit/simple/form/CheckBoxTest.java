@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.draw.ControlStyleHandler;
@@ -47,20 +46,19 @@ public class CheckBoxTest {
 
     private static final Logger LOG = Logger.getLogger(CheckBoxTest.class.getName());
 
-	@Before
-	public void createForm() {
+	public void createForm(String testFileName) {
 		try {
+            LOG.log(Level.INFO, "Creation of ''{0}'' started!", testFileName);
 			TextDocument doc = TextDocument.newTextDocument();
 			Form form = doc.createForm("Test Form");
 
 			// checkbox 1
-			CheckBox checkbox = (CheckBox) form.createCheckBox(doc,
-					CHECK_BOX_RTG, "CheckBox 1", "CheckBox 1", "1");
+			form.createCheckBox(doc, CHECK_BOX_RTG, "CheckBox 1", "CheckBox 1", "1");
 
 			// checkbox 2
 			Paragraph para = doc.addParagraph("CheckBox2 anchor to heading.");
 			para.applyHeading();
-			form.createCheckBox(para, CHECK_BOX_RTG, "CheckBox 2", "CheckBox 2",
+			CheckBox checkbox = (CheckBox) form.createCheckBox(para, CHECK_BOX_RTG, "CheckBox 2", "CheckBox 2",
 					"2");
 
 			// checkbox 3
@@ -75,10 +73,9 @@ public class CheckBoxTest {
 			para = cell.addParagraph("Insert a check box here.");
 			form.createCheckBox(para, CHECK_BOX_RTG, "CheckBox 4", "CheckBox 4",
 					"4");
-			doc.save(ResourceUtilities
-					.newTestOutputFile("TestCreateCheckbox.odt"));
+			doc.save(ResourceUtilities.newTestOutputFile(testFileName));
 
-            LOG.info("Test input file has been created!");
+            LOG.log(Level.INFO, "Creation of ''{0}'' succeded!", testFileName);
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
@@ -89,8 +86,10 @@ public class CheckBoxTest {
 	@Test
 	public void testCreateCheckBox() {
 		try {
+            String testFileName = "CreatedCheckBox";
+            createForm(testFileName + ".odt");
 			TextDocument textDoc = TextDocument.loadDocument(ResourceUtilities
-					.getTestResourceAsStream("TestCreateCheckbox.odt"));
+					.getTestResourceAsStream(testFileName + ".odt"));
 			Form form = textDoc.getFormByName("Test Form");
 			Iterator<FormControl> iterator = CheckBox.getSimpleIterator(form);
 			int count = 0;
@@ -104,14 +103,15 @@ public class CheckBoxTest {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
 		}
-
 	}
 
 	@Test
 	public void testRemoveCheckBox() {
 		try {
+            String testFileName = "testRemoveCheckBox";
+            createForm(testFileName + ".odt");
 			TextDocument textDoc = TextDocument.loadDocument(ResourceUtilities
-					.getTestResourceAsStream("TestCreateCheckBox.odt"));
+					.getTestResourceAsStream(testFileName + ".odt"));
 			Form form = textDoc.getFormByName("Test Form");
 			Iterator<FormControl> iterator = CheckBox.getSimpleIterator(form);
 			while (iterator.hasNext()) {
@@ -131,7 +131,7 @@ public class CheckBoxTest {
 			}
 			Assert.assertNull(find);
 			textDoc.save(ResourceUtilities
-					.newTestOutputFile("TestRemoveCheckBox.odt"));
+					.newTestOutputFile(testFileName + "_OUT.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
@@ -142,8 +142,10 @@ public class CheckBoxTest {
 	@Test
 	public void testSetCheckBoxRectangle() {
 		try {
+            String testFileName = "testSetCheckBoxRectangle";
+            createForm(testFileName + ".odt");
 			TextDocument textDoc = TextDocument.loadDocument(ResourceUtilities
-					.getTestResourceAsStream("TestCreateCheckBox.odt"));
+					.getTestResourceAsStream(testFileName + ".odt"));
 			Form form = textDoc.getFormByName("Test Form");
 			Iterator<FormControl> iterator = CheckBox.getSimpleIterator(form);
 			CheckBox find = null;
@@ -163,7 +165,7 @@ public class CheckBoxTest {
 			Assert.assertEquals(5.0, find.getRectangle().getY());
 			Assert.assertEquals(2.2546, find.getRectangle().getX());
 			textDoc.save(ResourceUtilities
-					.newTestOutputFile("TestSetCheckBoxRectangle.odt"));
+					.newTestOutputFile(testFileName + "_OUT.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
@@ -172,10 +174,12 @@ public class CheckBoxTest {
 	}
 
 	@Test
-	public void testSetAnchorType() {
+	public void testSetCheckBoxAnchorType() {
 		try {
+            String testFileName = "TestSetCheckBoxAnchorType";
+            createForm(testFileName + ".odt");
 			TextDocument textDoc = TextDocument.loadDocument(ResourceUtilities
-					.getTestResourceAsStream("TestCreateCheckBox.odt"));
+					.getTestResourceAsStream(testFileName + ".odt"));
 			Form form = textDoc.getFormByName("Test Form");
 			Iterator<FormControl> iterator = CheckBox.getSimpleIterator(form);
 			CheckBox find = null;
@@ -204,7 +208,7 @@ public class CheckBoxTest {
 					graphicPropertiesForWrite.getHorizontalPosition());
 
 			textDoc.save(ResourceUtilities
-					.newTestOutputFile("TestSetCheckBoxAnchorType.odt"));
+                .newTestOutputFile(testFileName + "_OUT.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
@@ -213,10 +217,12 @@ public class CheckBoxTest {
 	}
 
 	@Test
-	public void testSetLabel() {
+	public void testSetCheckBoxLabel() {
+            String testFileName = "TestSetCheckBoxLabel";
+            createForm(testFileName + ".odt");
 		try {
 			TextDocument textDoc = TextDocument.loadDocument(ResourceUtilities
-					.getTestResourceAsStream("TestCreateCheckBox.odt"));
+					.getTestResourceAsStream(testFileName + ".odt"));
 			Form form = textDoc.getFormByName("Test Form");
 			Iterator<FormControl> iterator = CheckBox.getSimpleIterator(form);
 			CheckBox find = null;
@@ -237,7 +243,7 @@ public class CheckBoxTest {
 			Assert.assertEquals("", find.getLabel());
 
 			textDoc.save(ResourceUtilities
-					.newTestOutputFile("TestSetCheckBoxLabel.odt"));
+					.newTestOutputFile(testFileName + "_OUT.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
@@ -248,8 +254,10 @@ public class CheckBoxTest {
 	@Test
 	public void testCheckedState() {
 		try {
+            String testFileName = "TestSetCheckBoxState";
+            createForm(testFileName + ".odt");
 			TextDocument textDoc = TextDocument.loadDocument(ResourceUtilities
-					.getTestResourceAsStream("TestCreateCheckBox.odt"));
+					.getTestResourceAsStream(testFileName + ".odt"));
 			Form form = textDoc.getFormByName("Test Form");
 			Iterator<FormControl> iterator = CheckBox.getSimpleIterator(form);
 			CheckBox find = null;
@@ -270,7 +278,7 @@ public class CheckBoxTest {
 					.getCurrentState());
 
 			textDoc.save(ResourceUtilities
-					.newTestOutputFile("TestSetCheckBoxState.odt"));
+					.newTestOutputFile(testFileName + "_OUT.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
@@ -281,8 +289,10 @@ public class CheckBoxTest {
 	@Test
 	public void testSetValue() {
 		try {
+            String testFileName = "TestSetCheckBoxValue";
+            createForm(testFileName + ".odt");
 			TextDocument textDoc = TextDocument.loadDocument(ResourceUtilities
-					.getTestResourceAsStream("TestCreateCheckBox.odt"));
+					.getTestResourceAsStream(testFileName + ".odt"));
 			Form form = textDoc.getFormByName("Test Form");
 			Iterator<FormControl> iterator = CheckBox.getSimpleIterator(form);
 			CheckBox find = null;
@@ -301,7 +311,7 @@ public class CheckBoxTest {
 			Assert.assertEquals("15", find.getValue());
 
 			textDoc.save(ResourceUtilities
-					.newTestOutputFile("TestSetCheckBoxValue.odt"));
+                .newTestOutputFile(testFileName + "_OUT.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(CheckBoxTest.class.getName()).log(Level.SEVERE,
 					null, e);
