@@ -226,8 +226,16 @@ public class Main {
                     System.out.println("error reading " + aConfigFile.getAbsolutePath() + ": " + e.getLocalizedMessage() );
                     return;
                 }
+
+                // Permit input file override from command line, even
+                // if config file is given
+                if( aFileNames.size() > 0 )
+                {
+                    // But just one for the while...
+                    aConfig.setProperty( Configuration.PATH, aFileNames.get(0) );
+                }
             }
-            
+
             if( aSchemaFileName != null )
             {
                 aConfig = new Configuration();
