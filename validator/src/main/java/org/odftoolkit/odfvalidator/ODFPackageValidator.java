@@ -221,6 +221,7 @@ abstract class ODFPackageValidator {
 		InputStream aInStream = null;
 		try {
 			aInStream = aPkg.getInputStream(aEntryName, true);
+            aLogger.setInputStream(aPkg.getInputStream(aEntryName, true));
 		} catch (Exception e) {
 			throw new ODFValidatorException(e);
 		}
@@ -231,8 +232,6 @@ abstract class ODFPackageValidator {
 			aLogger.logWarning("no Validator configured in selected Configuration for this file type");
 			return false;
 		}
-
-
 
 		return aInStream != null ? validate(aInStream, aFilter, aValidator, aLogger) : false;
 	}

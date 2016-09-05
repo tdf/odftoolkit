@@ -39,7 +39,7 @@ class SchemaErrorHandler implements org.xml.sax.ErrorHandler {
     
     public void warning(SAXParseException e) throws SAXException {
         if( !filter(e) )
-            m_aLogger.logWarning(  e );
+            m_aLogger.logWarning( e );
     }
 
     public void fatalError(SAXParseException e) throws SAXException {
