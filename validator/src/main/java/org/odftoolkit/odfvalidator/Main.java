@@ -51,7 +51,10 @@ public class Main {
         
         String aConfigFileName = null;
         String aFilterFileName = null;
+        String aStrictSchemaFileName = null;
         String aSchemaFileName = null;
+        String aManifestSchemaFileName = null;
+        String aDSigSchemaFileName = null;
         String aOutputFileName = null;
         String aExcludeRegExp = null;
         boolean bPrintGenerator = false;
@@ -137,7 +140,28 @@ public class Main {
             else if( aArg.equals("-S") )
             {
                 if( aArgIter.hasNext() )
+                    aStrictSchemaFileName = aArgIter.next();
+                else
+                    bCommandLineValid = false;
+            }
+            else if( aArg.equals("-O") )
+            {
+                if( aArgIter.hasNext() )
                     aSchemaFileName = aArgIter.next();
+                else
+                    bCommandLineValid = false;
+            }
+            else if( aArg.equals("-M") )
+            {
+                if( aArgIter.hasNext() )
+                    aManifestSchemaFileName = aArgIter.next();
+                else
+                    bCommandLineValid = false;
+            }
+            else if( aArg.equals("-D") )
+            {
+                if( aArgIter.hasNext() )
+                    aDSigSchemaFileName = aArgIter.next();
                 else
                     bCommandLineValid = false;
             }
@@ -236,10 +260,26 @@ public class Main {
                 }
             }
 
-            if( aSchemaFileName != null )
+            if( aConfig == null )
             {
                 aConfig = new Configuration();
-                aConfig.setProperty( Configuration.STRICT_SCHEMA, aSchemaFileName );
+            }
+
+            if( aStrictSchemaFileName != null )
+            {
+                aConfig.setProperty( Configuration.STRICT_SCHEMA, aStrictSchemaFileName );
+            }
+            if( aSchemaFileName != null )
+            {
+                aConfig.setProperty( Configuration.SCHEMA, aSchemaFileName );
+            }
+            if( aManifestSchemaFileName != null )
+            {
+                aConfig.setProperty( Configuration.MANIFEST_SCHEMA, aManifestSchemaFileName );
+            }
+            if( aDSigSchemaFileName != null )
+            {
+                aConfig.setProperty( Configuration.DSIG_SCHEMA, aDSigSchemaFileName );
             }
 
             PrintStream aOut = aOutputFileName != null ? new PrintStream( aOutputFileName ) : System.out;
@@ -276,7 +316,10 @@ public class Main {
         System.out.println( "       odfvalidator -V");
         System.out.println();
         System.out.println( "-C: Validate using configuration file <configfile>" );
-        System.out.println( "-S: Use schema <schemafile> for validation" );
+        System.out.println( "-S: Use strict ODF schema <schemafile> for validation" );
+        System.out.println( "-O: Use ODF schema <schemafile> for validation" );
+        System.out.println( "-M: Use ODF manifest schema <schemafile> for validation" );
+        System.out.println( "-D: Use ODF dsig schema <schemafile> for validation" );
         System.out.println( "-V: Print version" );
         System.out.println( "-c: Check conformance (default for ODF 1.2 documents)" );
         System.out.println( "-e: Check extended conformance (ODF 1.2 documents only)" );
