@@ -57,8 +57,9 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.2</version>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <!-- defined in the parent pom.xml -->
+		  <source>${jdk.version}</source>
+		  <target>${jdk.version}</target>
           <meminitial>512m</meminitial>
           <maxmem>1024m</maxmem>
           <showDeprecation>true</showDeprecation>
