@@ -3395,6 +3395,8 @@ public class Table extends Component {
 				tempRowElement = null;
 			} else {
 				nextRowElement = findNext(nextRowElement);
+				// since findNext() modifies tempRowElement, we have to clean it
+				tempRowElement = null;
 			}
 			if (nextRowElement == null) {
 				return null;
