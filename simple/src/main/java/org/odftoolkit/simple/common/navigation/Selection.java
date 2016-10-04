@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -21,7 +21,6 @@ package org.odftoolkit.simple.common.navigation;
 
 import java.util.Hashtable;
 import java.util.Vector;
-
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /**
@@ -40,7 +39,7 @@ public abstract class Selection {
 
 	/**
 	 * Get the container element of this <code>Selection</code>.
-	 * 
+	 *
 	 * @return the container element
 	 */
 	public OdfElement getElement() {
@@ -51,7 +50,7 @@ public abstract class Selection {
 	 * Get the start index of the text content in the container element. This is
 	 * only meaningful for {@link TextSelection TextSelection} and its sub
 	 * classes, other type of <code>Selection</code> will return 0.
-	 * 
+	 *
 	 * @return the start index of the container element
 	 */
 	public int getIndex() {
@@ -60,7 +59,7 @@ public abstract class Selection {
 
 	/**
 	 * Cut current <code>Selection</code>.
-	 * 
+	 *
 	 * @throws InvalidNavigationException
 	 */
 	public abstract void cut() throws InvalidNavigationException;
@@ -68,7 +67,7 @@ public abstract class Selection {
 	/**
 	 * Paste current <code>Selection</code> at front of the specified position
 	 * <code>Selection</code>.
-	 * 
+	 *
 	 * @param positionItem
 	 *            the position <code>Selection</code>
 	 * @throws InvalidNavigationException
@@ -78,7 +77,7 @@ public abstract class Selection {
 	/**
 	 * Paste current <code>Selection</code> at end of the specified position
 	 * <code>Selection</code>.
-	 * 
+	 *
 	 * @param positionItem
 	 *            the position <code>Selection</code>
 	 * @throws InvalidNavigationException
@@ -89,7 +88,7 @@ public abstract class Selection {
 	 * When a selected item has been deleted, the <code>Selection</code>s after
 	 * this deleted <code>Selection</code> should be refreshed, as these
 	 * <code>Selection</code>s index have been changed.
-	 * 
+	 *
 	 * @param deletedItem
 	 *            the deleted <code>Selection</code>
 	 */
@@ -99,7 +98,7 @@ public abstract class Selection {
 	 * When a selected item has been inserted, the <code>Selection</code> after
 	 * the inserted item should be refresh, as these <code>Selection</code>s
 	 * index have been changed.
-	 * 
+	 *
 	 * @param insertedItem
 	 *            the inserted <code>Selection</code>
 	 */
@@ -107,7 +106,7 @@ public abstract class Selection {
 
 	/**
 	 * A quick method to update the index of this <code>Selection</code>.
-	 * 
+	 *
 	 * @param offset
 	 *            the offset that the index should be added.
 	 */
@@ -125,7 +124,7 @@ public abstract class Selection {
 
 		/**
 		 * Register the <code>Selection</code> item.
-		 * 
+		 *
 		 * @param item
 		 *            the <code>Selection</code> item
 		 */
@@ -154,7 +153,7 @@ public abstract class Selection {
 		/**
 		 * Refresh the <code>Selection</code>s in repository after a item is
 		 * cut.
-		 * 
+		 *
 		 * @param cutItem
 		 *            the cut item
 		 */
@@ -174,7 +173,7 @@ public abstract class Selection {
 		/**
 		 * Refresh the selections in repository after pastedAtFrontOf operation
 		 * is called.
-		 * 
+		 *
 		 * @param item
 		 *            the pasted item
 		 * @param positionItem
@@ -196,7 +195,7 @@ public abstract class Selection {
 		/**
 		 * Refresh the <code>Selection</code>s in repository after pastedAtEndOf
 		 * operation is called.
-		 * 
+		 *
 		 * @param item
 		 *            the pasted item
 		 * @param positionItem
@@ -222,7 +221,7 @@ public abstract class Selection {
 
 		/**
 		 * Remove the <code>Selection</code> from repository.
-		 * 
+		 *
 		 * @param item
 		 *            <code>Selection</code> item
 		 */
@@ -237,7 +236,7 @@ public abstract class Selection {
 		/**
 		 * A direct method to update all the <code>Selection</code>s contained
 		 * in a element after a certain position.
-		 * 
+		 *
 		 * @param containerElement
 		 *            the container element
 		 * @param offset
@@ -254,6 +253,14 @@ public abstract class Selection {
 					}
 				}
 			}
+		}
+
+		/**
+		 * Clears the repository being used by the SelectionManager.
+		 * Must be called at the end of Navigation.
+		 */
+		public static void clearRepository (){
+			repository.clear();
 		}
 
 		private SelectionManager() {
