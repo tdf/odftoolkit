@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -33,16 +33,15 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -63,6 +62,8 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
+import org.odftoolkit.simple.table.Cell;
+import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.utils.NodeAction;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Node;
@@ -315,7 +316,7 @@ public class DocumentTest {
 					}
 				}
 			};
-//            replaceText.performAction(e, "X");            
+//            replaceText.performAction(e, "X");
 			odfdoc.save(ResourceUtilities.newTestOutputFile("list-out.odt"));
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
@@ -377,7 +378,7 @@ public class DocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testDocumentPassword() {
 		File passwordOutputFile = ResourceUtilities.newTestOutputFile("PasswordDocument.odt");
@@ -387,7 +388,7 @@ public class DocumentTest {
 			doc.addParagraph("blablabla...");
 			doc.setPassword("password");
 			doc.save(passwordOutputFile);
-			
+
 			Document redoc = Document.loadDocument(passwordOutputFile, "password");
 			//test load content.xml
 			Assert.assertNotNull(redoc.getContentRoot().toString());
@@ -395,17 +396,17 @@ public class DocumentTest {
 			((TextDocument) redoc).getHeader().addTable();
 			//test load meta.xml
 			Assert.assertNotNull(redoc.getOfficeMetadata().getCreator());
-			
+
 			//remove password
 			redoc.setPassword(null);
 			redoc.save(noPassOutputFile);
-			
+
 			//test inserted document
 			doc = TextDocument.newTextDocument();
 			doc.addParagraph("embed_document");
 			redoc.insertDocument(doc, "/embed");
 			redoc.setPassword("password");
-			
+
 			redoc.save(passwordOutputFile);
 		} catch (Exception ex) {
 			LOG.log(Level.SEVERE, "document password test failed.", ex);
@@ -445,7 +446,7 @@ public class DocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testLoadDocumentWithIllegalArgument() throws Exception {
 		String filepath = ResourceUtilities.getAbsolutePath("presentation.odp");
@@ -465,7 +466,7 @@ public class DocumentTest {
 			Assert.assertEquals("Given mediaType 'text/xml' is either not yet supported or not an ODF mediatype!", e.getMessage());
 		}
 	}
-	
+
 	private static String inputStreamToString(InputStream in) throws IOException {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
 		StringBuilder stringBuilder = new StringBuilder();
@@ -484,7 +485,7 @@ public class DocumentTest {
 		out.append(dataString);
 		out.close();
 	}
-	
+
 	@Test
 	public void testGetEmbeddedDocuments() throws Exception {
 		try {
@@ -502,9 +503,9 @@ public class DocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testGetEmbeddedDocument() throws Exception {
 		try {
@@ -516,7 +517,7 @@ public class DocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testGetContentRootDoc() throws Exception {
 		try {
@@ -528,7 +529,7 @@ public class DocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testToString() throws Exception {
 		try {
@@ -540,9 +541,9 @@ public class DocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testSave() throws Exception {
 		try {
@@ -558,24 +559,56 @@ public class DocumentTest {
 				System.out.println("outerFile is not exist. ");
 			}
 			Assert.assertNotNull(doc);
-			
+
 			OutputStream out = new FileOutputStream(outerFile);
 			doc.save(out);
-			
+
 			//save
 			doc.save(ResourceUtilities.newTestOutputFile("testSave.odt"));
 			out.close();
-			
+
 			//verify
 			Document docnew = Document.loadDocument(ResourceUtilities.getTestResourceAsStream("testSave.odt"));
 			Assert.assertNotNull(docnew);
 			String docnewMedia = docnew.getOdfMediaType().getMediaTypeString();
-			
+
 			Assert.assertEquals(docmedia, docnewMedia);
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
 	}
+
+	@Test
+    /**
+     * Testing the 'Hello World' example of https://incubator.apache.org/odftoolkit/simple/gettingstartguide.html
+     */
+	public void testHelloWorldExample() throws Exception {
+        TextDocument outputOdt;
+        try {
+            outputOdt = TextDocument.newTextDocument();
+
+            // add image
+            outputOdt.newImage(new URI(ResourceUtilities.getAbsolutePath("testA.jpg")));
+
+            // add paragraph
+            outputOdt.addParagraph("Hello World, Hello Simple ODF!");
+
+            // add list
+            outputOdt.addParagraph("The following is a list.");
+            org.odftoolkit.simple.text.list.List list = outputOdt.addList();
+            String[] items = {"item1", "item2", "item3"};
+            list.addItems(items);
+
+            // add table
+            Table table = outputOdt.addTable(2, 2);
+            Cell cell = table.getCellByPosition(0, 0);
+            cell.setStringValue("Hello World!");
+
+            outputOdt.save(ResourceUtilities.newTestOutputFile("HelloWorldExample.odt"));
+            outputOdt.close();
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
 }
