@@ -1,6 +1,71 @@
 Apache ODF Toolkit Change Log
 =============================
 
+======= Release 0.6.3 =======
+
+The most notable changes in ODF Toolkit 0.6.3 incubating over previous release:
+
+Versions of major components
+----------------------------
+
+* Apache Xerces 2.9.1 (http://xerces.apache.org/mirrors.cgi)
+* Apache Jena 2.11.2 (http://jena.apache.org/download/index.html)
+* Apache Commons Validator 1.5.0 (http://commons.apache.org/proper/commons-validator//download_validator.cgi)
+
+For a full dependecy list run mvn dependency:tree from the top level in the source module or see the release wiki page.
+
+Optimizations
+-------------
+* ODFTOOLKIT-200 Supply signature and manifest features to ODFDOM
+* ODFTOOLKIT-294 Adding the XSL stylesheet for extracting default values to XSLT_RUNNER XSL sample folder
+* ODFTOOLKIT-358 Add method to set date time value on Cell
+* ODFTOOLKIT-365 Improve Release Process to easily publish releases with maven
+* ODFTOOLKIT-374 Set the field "Last Modified By" in the metadata file
+* ODFTOOLKIT-376 Get Metadata from Open Office Files
+* ODFTOOLKIT-417 Missing methods for set and get background-color, subscripted and superscripted for a paragraph
+* ODFTOOLKIT-418 missing method to find an embedded section
+* ODFTOOLKIT-420 missing functions in TextProperties set/get background color
+* ODFTOOLKIT-426 PERFORMANCE: simple Document.getCopyStyleList improvements to reduce String allocation, hashing, etc.
+* ODFTOOLKIT-436 odfvalidator: better error reporting
+* ODFTOOLKIT-437 odfvalidator: make schema files configurable from cmd line
+* ODFTOOLKIT-438 odfvalidator: always honour input file on cmd line
+* ODFTOOLKIT-440 Java base line: Change to JDK 6 for next release
+
+Bug Fixes
+---------
+* ODFTOOLKIT-300 Memory Leak in ODF Simple API
+* ODFTOOLKIT-323 Remove old references to odftoolkit.org site
+* ODFTOOLKIT-355 NullPointerException when removing rows from a new Spreadsheet table
+* ODFTOOLKIT-362 TextSelection.replaceWith() ends in an infinite loop
+* ODFTOOLKIT-363 Table#appendRow() method creates a row without any cell
+* ODFTOOLKIT-367 Paragraph.getTextContent throws NullPointerException with exactly 2 spaces between words
+* ODFTOOLKIT-368 Column.setWidth wrong size
+* ODFTOOLKIT-369 java.lang.NoClassDefFoundError: com/hp/hpl/jena/rdf/model/Model
+* ODFTOOLKIT-379 NullPointerException in Paragraph.getTextContent()
+* ODFTOOLKIT-386 Project doesn't build with JDK 8
+* ODFTOOLKIT-388 Test hangs when iterating over a spreadsheet created with LibreOffice 4.0.0
+* ODFTOOLKIT-391 Publish ODF Toolkit artifacts to Maven Central + tag release version in SVN
+* ODFTOOLKIT-395 [PATCH] validator applies ODF 1.1 rules to ODF 1.2 documents when checking character content in foreign elements
+* ODFTOOLKIT-396 SpreadsheetDocument.appendSheet fails because of buggy alien element cloning
+* ODFTOOLKIT-397 DataSet cannot set values from spreadsheet if there are repeated rows before data rows
+* ODFTOOLKIT-398 crash when calling getCellBackgroundColor from the org.odftoolkit.simple.table.Cell
+* ODFTOOLKIT-401 NullPointerException from typo hides all ZIP exceptions
+* ODFTOOLKIT-404 Obsolete Jena dependency at ODF Toolkit
+* ODFTOOLKIT-405 XSLTRunner JAR unexecutable from commandline
+* ODFTOOLKIT-406 Build failure on Apache Build server when downloading ODF 1.0 schema
+* ODFTOOLKIT-407 Mixed case package name org.odftoolkit.Junit avoids building on Linux
+* ODFTOOLKIT-408 OdfXmlHelper duplicated in src/test
+* ODFTOOLKIT-409 Hang on Cell.setValidityList() if the ContentValidationElement is reused New Feature ODFTOOLKIT-410 Set table:error-message for content-validation to activate actual validation
+* ODFTOOLKIT-412 Document.loadDocument(File file, String password) doesn't work for encrypted ods file
+* ODFTOOLKIT-413 Document corrupted after copying a sheet including a chart into new spreadsheet
+* ODFTOOLKIT-421 Chinese Word Can't set font
+* ODFTOOLKIT-425 Please delete old releases from mirroring system
+* ODFTOOLKIT-433 Document.updateXMLIds(...) does not update referenced id's
+* ODFTOOLKIT-442 Table.getRowIterator() out of sync without calling hasNext()
+* ODFTOOLKIT-443 Error converting .ods file to .pdf
+
+
+
 ======= Release 0.6.2 =======
 
 The most notable changes in ODF Toolkit 0.6.2 incubating over previous release:
