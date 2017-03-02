@@ -29,13 +29,13 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>13</version>
+        <version>18</version>
     </parent>
-    
+
     <properties>
         <jdk.version>1.6</jdk.version>
     </properties>
-    
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -101,7 +101,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
- 
+
     <modules>
         <module>taglets</module>
         <module>generator</module>
@@ -114,11 +114,11 @@
 
     <name>Apache ODF Toolkit</name>
     <description>
-        The Apache ODF Toolkit is a set of Java modules that allow 
-        programmatic creation, scanning and manipulation of Open Document Format 
-        (ISO/IEC 26300 == ODF) documents. Unlike other approaches which rely on 
-        runtime manipulation of heavy-weight editors via an automation 
-        interface, the ODF Toolkit is lightweight and ideal for server use. 
+        The Apache ODF Toolkit is a set of Java modules that allow
+        programmatic creation, scanning and manipulation of Open Document Format
+        (ISO/IEC 26300 == ODF) documents. Unlike other approaches which rely on
+        runtime manipulation of heavy-weight editors via an automation
+        interface, the ODF Toolkit is lightweight and ideal for server use.
     </description>
     <url>http://incubator.apache.org/odftoolkit/</url>
     <organization>
@@ -299,7 +299,7 @@
             <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
         </mailingList>
     </mailingLists>
-    
+
 
     <profiles>
         <profile>
@@ -362,7 +362,7 @@
                                         <descriptor>assemble/doc.xml</descriptor>
                                     </descriptors>
                                 </configuration>
-                            </execution>            
+                            </execution>
                             <execution>
                                 <id>bin</id>
                                 <goals>
@@ -374,7 +374,7 @@
                                         <descriptor>assemble/bin.xml</descriptor>
                                     </descriptors>
                                 </configuration>
-                            </execution>                            
+                            </execution>
                         </executions>
                     </plugin>
                     <plugin>
@@ -393,7 +393,7 @@
                                         <copy todir="${basedir}/target/${project.version}-bin" flatten="true">
                                               <fileset dir="${basedir}">
                                                 <include name="*.txt" />
-                                                <include name="KEYS" />      
+                                                <include name="KEYS" />
                                                 <include name="odfdom/target/*.jar" />
                                                 <include name="simple/target/*.jar" />
                                                 <include name="validator/target/*.?ar" />
@@ -405,14 +405,14 @@
                                               </fileset>
                                         </copy>
                                         <mkdir dir="${basedir}/target/${project.version}-docs" />
-                                        <copy todir="${basedir}/target/${project.version}-docs" flatten="true">  
-                                            <fileset dir="${basedir}">   
+                                        <copy todir="${basedir}/target/${project.version}-docs" flatten="true">
+                                            <fileset dir="${basedir}">
                                                 <include name="*.txt" />
-                                                <include name="KEYS" />                                   
+                                                <include name="KEYS" />
                                                 <include name="**/target/*-javadoc.jar" />
                                             </fileset>
                                         </copy>
-                                        </tasks>                                 
+                                        </tasks>
                                 </configuration>
                             </execution>
                             <execution>
@@ -422,7 +422,7 @@
                                 </goals>
                                 <phase>install</phase>
                                 <configuration>
-                                    <tasks>                                       
+                                    <tasks>
                                         <checksum algorithm="MD5" fileext=".md5">
                                               <fileset dir="${basedir}/target">
                                                 <include name="*.zip" />
@@ -437,19 +437,19 @@
                                                 <include name="*.tar.bz2" />
                                               </fileset>
                                         </checksum>
-                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA1" property="checksum" />                                
-                                        <copy todir="${basedir}/target/release/${project.version}/">  
-                                            <fileset dir="${basedir}/target">   
+                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA1" property="checksum" />
+                                        <copy todir="${basedir}/target/release/${project.version}/">
+                                            <fileset dir="${basedir}/target">
                                                 <include name="*-source-release.*" />
                                             </fileset>
                                         </copy>
-                                        <copy todir="${basedir}/target/release/${project.version}/binaries">  
-                                            <fileset dir="${basedir}/target">   
+                                        <copy todir="${basedir}/target/release/${project.version}/binaries">
+                                            <fileset dir="${basedir}/target">
                                                 <include name="*-bin.*" />
                                             </fileset>
                                         </copy>
-                                        <copy todir="${basedir}/target/release/${project.version}/docs">  
-                                            <fileset dir="${basedir}/target">   
+                                        <copy todir="${basedir}/target/release/${project.version}/docs">
+                                            <fileset dir="${basedir}/target">
                                                 <include name="*-doc.*" />
                                             </fileset>
                                         </copy>
@@ -461,7 +461,7 @@
                                             A candidate for the ODF Toolkit ${project.version} release is available    at:
 
                                             http://people.apache.org/~${username}/odftoolkit-release/odftoolkit-${project.version}/
-                                            
+
                                             The release candidate is a zip archive of the sources in:
 
                                             https://svn.apache.org/repos/asf/incubator/odf/tags/${project.version}/
@@ -486,7 +486,7 @@
 											A release vote template has been generated for you:    file://${basedir}/target/vote.txt
 										</echo>
 										<echo />
-									</tasks>                                 
+									</tasks>
 								</configuration>
 							</execution>
 						</executions>
@@ -497,6 +497,19 @@
 								<version>1.8.1</version>
 							</dependency>
 						</dependencies>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>
