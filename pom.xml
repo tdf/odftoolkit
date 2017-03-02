@@ -460,7 +460,7 @@
 
                                             A candidate for the ODF Toolkit ${project.version} release is available    at:
 
-                                            http://people.apache.org/~${username}/odftoolkit-release/odftoolkit-${project.version}/
+                                            http://repository.apache.org/snapshots/odftoolkit/
 
                                             The release candidate is a zip archive of the sources in:
 
@@ -478,11 +478,6 @@
                                         <echo />
                                         <echo>
                                             The release candidate has been prepared in:    ${basedir}/target/${project.version}
-
-                                            Please deploy it to people.apache.org like this:
-
-                                            scp -r ${basedir}/target/${project.version} people.apache.org:public_html/odftoolkit/
-
 											A release vote template has been generated for you:    file://${basedir}/target/vote.txt
 										</echo>
 										<echo />
