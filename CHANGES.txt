@@ -1,9 +1,9 @@
 Apache ODF Toolkit Change Log
 =============================
 
-======= Release 0.6.3 =======
+======= Release 0.6.2 =======
 
-The most notable changes in ODF Toolkit 0.6.3 incubating over previous release:
+Release wiki page: https://cwiki.apache.org/confluence/display/ODFTOOLKIT/0.6.2-incubating
 
 Versions of major components
 ----------------------------
@@ -18,8 +18,6 @@ Optimizations
 -------------
 * ODFTOOLKIT-200 Supply signature and manifest features to ODFDOM
 * ODFTOOLKIT-294 Adding the XSL stylesheet for extracting default values to XSLT_RUNNER XSL sample folder
-* ODFTOOLKIT-358 Add method to set date time value on Cell
-* ODFTOOLKIT-365 Improve Release Process to easily publish releases with maven
 * ODFTOOLKIT-374 Set the field "Last Modified By" in the metadata file
 * ODFTOOLKIT-376 Get Metadata from Open Office Files
 * ODFTOOLKIT-417 Missing methods for set and get background-color, subscripted and superscripted for a paragraph
@@ -35,10 +33,6 @@ Bug Fixes
 ---------
 * ODFTOOLKIT-300 Memory Leak in ODF Simple API
 * ODFTOOLKIT-323 Remove old references to odftoolkit.org site
-* ODFTOOLKIT-355 NullPointerException when removing rows from a new Spreadsheet table
-* ODFTOOLKIT-362 TextSelection.replaceWith() ends in an infinite loop
-* ODFTOOLKIT-363 Table#appendRow() method creates a row without any cell
-* ODFTOOLKIT-367 Paragraph.getTextContent throws NullPointerException with exactly 2 spaces between words
 * ODFTOOLKIT-368 Column.setWidth wrong size
 * ODFTOOLKIT-369 java.lang.NoClassDefFoundError: com/hp/hpl/jena/rdf/model/Model
 * ODFTOOLKIT-379 NullPointerException in Paragraph.getTextContent()
@@ -64,43 +58,54 @@ Bug Fixes
 * ODFTOOLKIT-442 Table.getRowIterator() out of sync without calling hasNext()
 * ODFTOOLKIT-443 Error converting .ods file to .pdf
 
+The following people have contributed to ODF Toolkit 0.6.1 incubating by submitting or commenting on the issues resolved in this release, 
+or contributed via reported bugs/comments on the mailing list:
 
-
-======= Release 0.6.2 =======
-
-The most notable changes in ODF Toolkit 0.6.2 incubating over previous release:
-
-Release wiki page: https://cwiki.apache.org/confluence/display/ODFTOOLKIT/0.6.2-incubating
-
-Versions of major components
-----------------------------
-
-* Xerces 2.9.1 (http://xerces.apache.org/mirrors.cgi)
-* Apache Jena 2.9.4 (http://jena.apache.org/download/index.html)
-* Apache Commons Validator 1.4.0 (http://commons.apache.org/proper/commons-validator//download_validator.cgi)
-
-For a full dependecy list run mvn dependency:tree from the top level in the source module or see the release wiki page.
-
-Upgrading from 0.6.1-incubating
------------------------------
-
-
-Detailed Change List
---------------------
-
-New Features
-------------
-
-Optimizations
--------------
-
-Bug Fixes
----------
-
-* ODFTOOLKIT-398 prevent NullPointerException in getCellBackgroundColor() (Florian Hopf, Patch by David Reepmeyer)
-
-Other
------
+Nick Burch (mentor)
+Yegor Kozlov (mentor)
+Sam Ruby (mentor)
+Rob Weir (mentor)
+Dali Liu (committer)
+Devin Han (committer)
+Donald Harbison (committer)
+Florian Hopf (committer)
+Oliver Rau (committer)
+Svante Schubert (committer)
+Alain Fagot Béarez 
+Alexandr Klimov
+Andy Jefferson
+Anders Sjostrom
+Ashok Hariharan
+Charitha Madusanka
+Dani Prieto 
+Dave Fisher
+Dennis E. Hamilton 
+Gavin McDonald
+Graham Weatherup
+Ian Cunningham
+Jeremias Maerki
+Johnny Haugen Sorgard
+Jörg Büsse
+Kejia Ye
+Lars Moller 
+Pavel Jisl
+Philip Helger
+Peter Junge
+Marc Schreiber
+Mathias Silbermann 
+Michael Stahl
+Michan Jaskurzyński
+Nick de Graeve
+Noah Tilton
+Romain Benefice
+Steele, Raymond
+Stefan Renz
+Steffen Börsig
+Sherzod Muratov
+Svante Schubert
+Tao Lin
+Torsten Krah 
+Vicente Villegas Larios
 
 ======= Release 0.6.1 =======
 
