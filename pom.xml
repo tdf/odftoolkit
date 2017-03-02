@@ -494,6 +494,7 @@
 						</dependencies>
 					</plugin>
 					<plugin>
+					<!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
 						<executions>
@@ -503,6 +504,9 @@
 								<goals>
 									<goal>sign</goal>
 								</goals>
+								<configuration>
+								  <keyname>${gpg.keyname}</keyname>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>
