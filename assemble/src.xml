@@ -25,7 +25,7 @@
   <fileSets>
     <fileSet>
       <directory>${project.basedir}</directory>
-      <outputDirectory>/</outputDirectory>
+      <outputDirectory></outputDirectory>
       <excludes>
         <exclude>**/target/**</exclude>
         <exclude>**/.*/**</exclude>

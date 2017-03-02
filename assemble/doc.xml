@@ -25,7 +25,7 @@
   <fileSets>
     <fileSet>
       <directory>${project.basedir}/target/${project.version}-docs</directory>
-      <outputDirectory>/</outputDirectory>
+      <outputDirectory></outputDirectory>
       <useDefaultExcludes>true</useDefaultExcludes>
     </fileSet>
   </fileSets>
