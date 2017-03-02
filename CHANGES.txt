@@ -19,7 +19,6 @@ Optimizations
 * ODFTOOLKIT-200 Supply signature and manifest features to ODFDOM
 * ODFTOOLKIT-294 Adding the XSL stylesheet for extracting default values to XSLT_RUNNER XSL sample folder
 * ODFTOOLKIT-374 Set the field "Last Modified By" in the metadata file
-* ODFTOOLKIT-376 Get Metadata from Open Office Files
 * ODFTOOLKIT-417 Missing methods for set and get background-color, subscripted and superscripted for a paragraph
 * ODFTOOLKIT-418 missing method to find an embedded section
 * ODFTOOLKIT-420 missing functions in TextProperties set/get background color
@@ -34,7 +33,6 @@ Bug Fixes
 * ODFTOOLKIT-300 Memory Leak in ODF Simple API
 * ODFTOOLKIT-323 Remove old references to odftoolkit.org site
 * ODFTOOLKIT-368 Column.setWidth wrong size
-* ODFTOOLKIT-369 java.lang.NoClassDefFoundError: com/hp/hpl/jena/rdf/model/Model
 * ODFTOOLKIT-379 NullPointerException in Paragraph.getTextContent()
 * ODFTOOLKIT-386 Project doesn't build with JDK 8
 * ODFTOOLKIT-388 Test hangs when iterating over a spreadsheet created with LibreOffice 4.0.0
@@ -56,56 +54,41 @@ Bug Fixes
 * ODFTOOLKIT-425 Please delete old releases from mirroring system
 * ODFTOOLKIT-433 Document.updateXMLIds(...) does not update referenced id's
 * ODFTOOLKIT-442 Table.getRowIterator() out of sync without calling hasNext()
-* ODFTOOLKIT-443 Error converting .ods file to .pdf
 
-The following people have contributed to ODF Toolkit 0.6.1 incubating by submitting or commenting on the issues resolved in this release, 
-or contributed via reported bugs/comments on the mailing list:
+The following people have contributed to ODF Toolkit 0.6.2 incubating by reporting or submitting on the issues resolved in this release:
 
 Nick Burch (mentor)
-Yegor Kozlov (mentor)
-Sam Ruby (mentor)
 Rob Weir (mentor)
-Dali Liu (committer)
-Devin Han (committer)
-Donald Harbison (committer)
-Florian Hopf (committer)
-Oliver Rau (committer)
+Sam Ruby (mentor)
+Yegor Kozlov (mentor)
+Damjan Jovanovic (committer)
+Dave Fisher (committer)
+Oliver Rau  (committer)
 Svante Schubert (committer)
 Alain Fagot Béarez 
 Alexandr Klimov
-Andy Jefferson
-Anders Sjostrom
-Ashok Hariharan
-Charitha Madusanka
-Dani Prieto 
-Dave Fisher
-Dennis E. Hamilton 
-Gavin McDonald
-Graham Weatherup
-Ian Cunningham
+Bruno Girin
+David Reepmeyer
+Erika Köster
+Florian Hopf 
+Georg Füchsle
+Guzman Rejon
+Hendy Irawan
+Igor Avila
 Jeremias Maerki
-Johnny Haugen Sorgard
+Jerry Sie Hsiung
+Josef Petrák
 Jörg Büsse
-Kejia Ye
-Lars Moller 
-Pavel Jisl
-Philip Helger
-Peter Junge
 Marc Schreiber
 Mathias Silbermann 
 Michael Stahl
-Michan Jaskurzyński
-Nick de Graeve
-Noah Tilton
-Romain Benefice
-Steele, Raymond
-Stefan Renz
-Steffen Börsig
-Sherzod Muratov
-Svante Schubert
-Tao Lin
-Torsten Krah 
-Vicente Villegas Larios
+Nimarukan
+Raimund Hölle
+Reaper
+Sebb
+Stefan Szpikowski
+Uwe Ryssel
+William Zhang
 
 ======= Release 0.6.1 =======
 
