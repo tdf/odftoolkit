@@ -23,7 +23,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.6.3-incubating-SNAPSHOT</version>
+    <version>0.6.2-incubating-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
