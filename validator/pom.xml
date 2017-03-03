@@ -24,17 +24,17 @@
 	<parent>
 		<groupId>org.apache.odftoolkit</groupId>
 		<artifactId>odftoolkit</artifactId>
-		<version>0.6.2-incubating-RC1</version>
+		<version>0.6.2-incubating-SNAPSHOT</version>
 	</parent>
 	<artifactId>odfvalidator</artifactId>
-	<version>1.1.8-incubating-RC1</version>
+	<version>1.1.8-incubating-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>odfdom-java</artifactId>
-			<version>0.8.11-incubating-RC1</version>
+			<version>0.8.11-incubating-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -450,9 +450,9 @@
 		<url>http://www.apache.org/</url>
 	</organization>
 	<scm>
-		<connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.2-incubating-RC1/validator</connection>
-		<developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.2-incubating-RC1/validator</developerConnection>
-		<url>http://svn.apache.org/viewvc/incubator/odf/tags/odftoolkit-0.6.2-incubating-RC1/validator</url>
+		<connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/validator</connection>
+		<developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/validator</developerConnection>
+		<url>http://svn.apache.org/viewvc/incubator/odf/trunk/validator</url>
 	</scm>
 	<profiles>
 		<profile>
