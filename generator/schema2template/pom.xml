@@ -24,12 +24,12 @@
   <parent>
     <groupId>org.apache.odftoolkit</groupId>
     <artifactId>schema2template-pom</artifactId>
-    <version>0.8.12-incubating</version>
+    <version>0.8.13-incubating-SNAPSHOT</version>
   </parent>
   
 	<!-- The Basics -->
 	<artifactId>schema2template</artifactId>
-	<version>0.8.12-incubating</version>
+	<version>0.8.13-incubating-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
