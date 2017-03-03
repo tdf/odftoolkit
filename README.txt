@@ -46,7 +46,7 @@ The ODF Toolkit consists of four subcomponents:
 Getting Started
 ===============
 
-The ODF Toolkit is based on Java 5 and uses the Maven 2 <http://maven.apache.org/>
+The ODF Toolkit is based on Java 6 and uses the Maven 3 <http://maven.apache.org/>
 build system. To build ODF Toolkit, use the following command in this directory:
 
     mvn clean install
@@ -86,7 +86,7 @@ ODF XSLT Runner Getting Start Guide:
 License (see also LICENSE.txt)
 ==============================
 
-Collective work: Copyright 2011-2014 The Apache Software Foundation.
+Collective work: Copyright 2011-2017 The Apache Software Foundation.
 
 Licensed to the Apache Software Foundation (ASF) under one or more
 contributor license agreements.  See the NOTICE file distributed with
