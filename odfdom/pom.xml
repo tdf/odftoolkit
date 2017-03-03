@@ -25,11 +25,11 @@
 	<parent>
 		<groupId>org.apache.odftoolkit</groupId>
 		<artifactId>odftoolkit</artifactId>
-		<version>0.6.4-incubating-SNAPSHOT</version>
+		<version>0.6.2-incubating-SNAPSHOT</version>
 	</parent>
   
 	<artifactId>odfdom-java</artifactId>
-	<version>0.8.13-incubating-SNAPSHOT</version>
+	<version>0.8.11-incubating-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<dependencies>
