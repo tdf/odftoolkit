@@ -36,7 +36,7 @@ Bug Fixes
 ---------
 * ODFTOOLKIT-300 Memory Leak in ODF Simple API
 * ODFTOOLKIT-323 Remove old references to odftoolkit.org site
-* ODFTOOLKIT-367 Paragraph.getTextContent throws NullPointerException with exactly 2 spaces between words Improvement ODFTOOLKIT-365 Improve Release Process to easily publish releases with maven 
+* ODFTOOLKIT-367 Paragraph.getTextContent sometimes failed to replace text:s with spaces 
 * ODFTOOLKIT-368 Column.setWidth wrong size
 * ODFTOOLKIT-386 Project doesn't build with JDK 8
 * ODFTOOLKIT-388 Test hangs when iterating over a spreadsheet created with LibreOffice 4.0.0
@@ -50,7 +50,7 @@ Bug Fixes
 * ODFTOOLKIT-406 Build failure on Apache Build server when downloading ODF 1.0 schema
 * ODFTOOLKIT-407 Mixed case package name org.odftoolkit.Junit avoids building on Linux
 * ODFTOOLKIT-408 OdfXmlHelper duplicated in src/test
-* ODFTOOLKIT-409 Hang on Cell.setValidityList() if the ContentValidationElement is reused New Feature ODFTOOLKIT-410 Set table:error-message for content-validation to activate actual validation
+* ODFTOOLKIT-409 Hang on Cell.setValidityList() if the ContentValidationElement is reused New Feature 
 * ODFTOOLKIT-412 Document.loadDocument(File file, String password) doesn't work for encrypted ods file
 * ODFTOOLKIT-413 Document corrupted after copying a sheet including a chart into new spreadsheet
 * ODFTOOLKIT-421 Chinese Word Can't set font
