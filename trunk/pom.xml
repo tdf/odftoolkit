@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.apache.odftoolkit</groupId>
+    <artifactId>odftoolkit</artifactId>
+    <version>0.6.2-incubating</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>18</version>
+    </parent>
+
+    <properties>
+        <jdk.version>1.6</jdk.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>1.6.4</version>
+            </dependency>
+            <dependency>
+                <groupId>xml-apis</groupId>
+                <artifactId>xml-apis</artifactId>
+                <version>1.3.04</version>
+            </dependency>
+            <dependency>
+                <groupId>xerces</groupId>
+                <artifactId>xercesImpl</artifactId>
+                <version>2.9.1</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.8.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>jena-core</artifactId>
+                <version>2.11.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>jena-core</artifactId>
+                <classifier>tests</classifier>
+                <version>2.11.2</version>
+            </dependency>
+            <dependency>
+                <groupId>net.rootdev</groupId>
+                <artifactId>java-rdfa</artifactId>
+                <version>0.4.2</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>1.5.0</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>1.2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>net.java.dev.msv</groupId>
+                <artifactId>msv-core</artifactId>
+                <version>2013.6.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.iso_relax.verifier.jaxp.validation</groupId>
+                <artifactId>isorelax-jaxp-bridge</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.ant</groupId>
+                <artifactId>ant</artifactId>
+                <version>1.8.2</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>taglets</module>
+        <module>generator</module>
+        <module>xslt-runner</module>
+        <module>xslt-runner-task</module>
+        <module>odfdom</module>
+        <module>validator</module>
+        <module>simple</module>
+    </modules>
+
+    <name>Apache ODF Toolkit</name>
+    <description>
+        The Apache ODF Toolkit is a set of Java modules that allow
+        programmatic creation, scanning and manipulation of Open Document Format
+        (ISO/IEC 26300 == ODF) documents. Unlike other approaches which rely on
+        runtime manipulation of heavy-weight editors via an automation
+        interface, the ODF Toolkit is lightweight and ideal for server use.
+    </description>
+    <url>http://incubator.apache.org/odftoolkit/</url>
+    <organization>
+        <name>The Apache Software Foundation</name>
+        <url>http://www.apache.org/</url>
+    </organization>
+
+    <scm>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.2-incubating</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.2-incubating</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/tags/odftoolkit-0.6.2-incubating</url>
+    </scm>
+
+    <issueManagement>
+        <system>jira</system>
+        <url>https://issues.apache.org/jira/browse/ODFTOOLKIT</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>jenkins</system>
+        <url>https://builds.apache.org</url>
+    </ciManagement>
+
+    <distributionManagement>
+        <!-- not used for deployment but only for site:stage goal -->
+        <site>
+            <id>incubator.apache.org/odftoolkit/</id>
+            <url>http://incubator.apache.org/odftoolkit/reports/${project.version}/</url>
+        </site>
+    </distributionManagement>
+
+    <developers>
+        <developer>
+            <id>svanteschubert</id>
+            <name>Svante</name>
+            <email>svanteschubert AT apache.org</email>
+            <organization>Individual</organization>
+            <roles>
+                <role>ODFDOM working group chair</role>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>devinhan</id>
+            <name>Han Biao</name>
+            <email>devinhan AT apache.org</email>
+            <organization>IBM</organization>
+            <organizationUrl>http://www.ibm.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <id>daisyguo</id>
+            <name>Ying Chun Guo</name>
+            <email>daisyguo AT apache.org</email>
+            <organization>IBM</organization>
+            <organizationUrl>http://www.ibm.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <id>weihuaWang</id>
+            <name>Wei Hua Wang</name>
+            <organization>IBM</organization>
+            <organizationUrl>http://www.ibm.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <id>FrankMeies</id>
+            <name>Frank</name>
+            <organization>Oracle Inc.</organization>
+            <organizationUrl>http://www.oracle.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>lars_behrmann</id>
+            <name>Lars</name>
+            <organization>Oracle Inc.</organization>
+            <organizationUrl>http://www.oracle.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>steffeng</id>
+            <name>Steffen</name>
+            <organization>Oracle Inc.</organization>
+            <organizationUrl>http://www.oracle.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>hans-peter</id>
+            <name>Hans-Peter</name>
+            <organization>Oracle Inc.</organization>
+            <organizationUrl>http://www.oracle.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>bei</id>
+            <name>Bernd</name>
+            <organization>Oracle Inc.</organization>
+            <organizationUrl>http://www.oracle.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>mst</id>
+            <name>Michael</name>
+            <organization>Oracle Inc.</organization>
+            <organizationUrl>http://www.oracle.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>clippka</id>
+            <name>Christian</name>
+            <organization>Oracle Inc.</organization>
+            <organizationUrl>http://www.oracle.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>fhopf</id>
+            <name>Florian Hopf</name>
+            <email>fhopf AT apache.org</email>
+            <url>http://blog.florian-hopf.de</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+
+    <mailingLists>
+        <mailingList>
+            <name>User List</name>
+            <post>odf-users@incubator.apache.org</post>
+            <subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
+            <unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
+        </mailingList>
+        <mailingList>
+            <name>Developer List</name>
+            <post>odf-dev@incubator.apache.org</post>
+            <subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
+            <unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
+        </mailingList>
+        <mailingList>
+            <name>Commits</name>
+            <subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
+            <unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
+        </mailingList>
+    </mailingLists>
+
+
+    <profiles>
+        <profile>
+            <id>pedantic</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.rat</groupId>
+                        <artifactId>apache-rat-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>CHANGES.txt</exclude>
+								<exclude>.gitignore</exclude>
+                                <exclude>DEPENDENCIES</exclude>
+                            </excludes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>release-distribution</id>
+            <properties>
+                <username>${user.name}</username>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+                                <id>src</id>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <phase>package</phase>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>assemble/src.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>doc</id>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <phase>package</phase>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>assemble/doc.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>bin</id>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <phase>package</phase>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>assemble/bin.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+                                <id>package</id>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <phase>prepare-package</phase>
+                                <configuration>
+                                    <tasks>
+                                        <mkdir dir="${basedir}/target/${project.version}-bin" />
+                                        <copy todir="${basedir}/target/${project.version}-bin" flatten="true">
+                                              <fileset dir="${basedir}">
+                                                <include name="*.txt" />
+                                                <include name="KEYS" />
+                                                <include name="odfdom/target/*.jar" />
+                                                <include name="simple/target/*.jar" />
+                                                <include name="validator/target/*.?ar" />
+                                                <include name="xslt-runner/target/*.jar" />
+                                                <include name="xslt-runner-task/target/*.jar" />
+                                                <exclude name="**/target/**-javadoc.jar" />
+                                                <exclude name="**/target/**-sources.jar" />
+                                                <exclude name="**/target/**-jar-with-dependencies.jar" />
+                                              </fileset>
+                                        </copy>
+                                        <mkdir dir="${basedir}/target/${project.version}-docs" />
+                                        <copy todir="${basedir}/target/${project.version}-docs" flatten="true">
+                                            <fileset dir="${basedir}">
+                                                <include name="*.txt" />
+                                                <include name="KEYS" />
+                                                <include name="**/target/*-javadoc.jar" />
+                                            </fileset>
+                                        </copy>
+                                        </tasks>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>checksum</id>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <phase>install</phase>
+                                <configuration>
+                                    <tasks>
+                                        <checksum algorithm="MD5" fileext=".md5">
+                                              <fileset dir="${basedir}/target">
+                                                <include name="*.zip" />
+                                                <include name="*.tar.gz" />
+                                                <include name="*.tar.bz2" />
+                                              </fileset>
+                                        </checksum>
+                                        <checksum algorithm="SHA1" fileext=".sha">
+                                              <fileset dir="${basedir}/target">
+                                                <include name="*.zip" />
+                                                <include name="*.tar.gz" />
+                                                <include name="*.tar.bz2" />
+                                              </fileset>
+                                        </checksum>
+                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA1" property="checksum" />
+                                        <copy todir="${basedir}/target/release/${project.version}/">
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*-source-release.*" />
+                                            </fileset>
+                                        </copy>
+                                        <copy todir="${basedir}/target/release/${project.version}/binaries">
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*-bin.*" />
+                                            </fileset>
+                                        </copy>
+                                        <copy todir="${basedir}/target/release/${project.version}/docs">
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*-doc.*" />
+                                            </fileset>
+                                        </copy>
+                                        <echo file="${basedir}/target/vote.txt">
+                                            From: ${username}@apache.org
+                                            To: odf-dev@incubator.apache.org
+                                            Subject: [VOTE] Release Apache ODF Toolkit ${project.version}
+
+                                            A candidate for the ODF Toolkit ${project.version} release is available    at:
+
+                                            http://repository.apache.org/snapshots/odftoolkit/
+
+                                            The release candidate is a zip archive of the sources in:
+
+                                            https://svn.apache.org/repos/asf/incubator/odf/tags/${project.version}/
+
+                                            The SHA1 checksum of the archive is ${checksum}.
+
+                                            Please vote on releasing this package as Apache ODF Toolkit ${project.version}.
+                                            The vote is open for the next 72 hours and passes if a majority
+                                            of at least three +1 ODF Toolkit PMC votes are cast.
+
+                                            [ ] +1 Release this package as Apache ODF Toolkit ${project.version}
+                                            [ ] -1 Do not release this package because...${line.separator}
+                                        </echo>
+                                        <echo />
+                                        <echo>
+                                            The release candidate has been prepared in:    ${basedir}/target/${project.version}
+											A release vote template has been generated for you:    file://${basedir}/target/vote.txt
+										</echo>
+										<echo />
+									</tasks>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant-nodeps</artifactId>
+								<version>1.8.1</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+					<plugin>
+					<!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+								  <keyname>${gpg.keyname}</keyname>
+<passphraseServerId>${gpg.keyname}</passphraseServerId>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
+

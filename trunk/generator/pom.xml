@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.apache.odftoolkit</groupId>
+    <artifactId>odftoolkit</artifactId>
+    <version>0.6.2-incubating</version>
+  </parent>
+
+    <!-- The Basics -->
+    <artifactId>schema2template-pom</artifactId>
+    <version>0.8.11-incubating</version>
+    <packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
+	</properties>
+
+    <!-- Build Settings -->
+    <build>
+        <defaultGoal>install</defaultGoal>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.0.2</version>
+                    <configuration>
+                        <!-- defined in the parent pom.xml -->
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                        <meminitial>512m</meminitial>
+                        <maxmem>1024m</maxmem>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.0-beta-9</version>
+                    <configuration>
+                        <!-- Workaround for http://jira.codehaus.org/browse/MGPG-9 -->
+                        <mavenExecutorId>forked-path</mavenExecutorId>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <doctitle>Schema2template</doctitle>
+                    <minmemory>512m</minmemory>
+                    <maxmemory>1024m</maxmemory>
+                    <splitindex>true</splitindex>
+                    <windowtitle>Schema2template v${project.version} - http://incubator.apache.org/odftoolkit/</windowtitle>
+                    <links>
+                        <link>http://download.oracle.com/javase/6/docs/api/</link>
+                    </links>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>                        
+                        <configuration>
+                            <additionalparam>${javadoc.opts}</additionalparam>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+  <!-- Multimodule build -->
+    <modules>
+        <module>schema2template</module>
+        <module>schema2template-maven-plugin</module>
+    </modules>
+    
+    <!-- More Project Information -->
+    <name>XML Schema to Template Mapping Tool: Parent POM</name>
+    <description>Parent project for XML Schema to Template Mapping Tool</description>
+    <url>http://incubator.apache.org/odftoolkit/odfdom/index.html</url>
+    <inceptionYear>2010</inceptionYear>
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <organization>
+        <name>The Apache Software Foundation</name>
+        <url>http://www.apache.org/</url>
+    </organization>
+    <scm>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.2-incubating/generator</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/tags/odftoolkit-0.6.2-incubating/generator</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/odf/tags/odftoolkit-0.6.2-incubating/generator</url>
+    </scm>
+
+    <profiles>
+    <!-- Profile for deploying to the Sonatype repository, which
+         requires GPG signatures
+         see
+         https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+         https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+         https://issues.sonatype.org/browse/OSSRH-960
+         -->
+        <profile>
+            <id>release</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>                    
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>            
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <!-- <distributionManagement>
+                <site>
+                    <id>odfdom</id>
+                    <name>ODFDOM Java Toolkit Project</name>
+                    <url>dav:https://odftoolkit.org/website/odfdom/${project.version}/codegeneration/schema2template-pom</url>
+                </site>
+            </distributionManagement> -->        
+        </profile>
+        <profile>
+          <id>doclint-java8-disable</id>
+          <activation>
+            <jdk>[1.8,)</jdk>
+          </activation>
+          <properties>
+            <javadoc.opts>-Xdoclint:none</javadoc.opts>
+          </properties>
+        </profile>
+    </profiles>
+</project>

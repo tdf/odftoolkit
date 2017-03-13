@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+    <head>
+<!--
+  
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+
+-->
+    </head>
+    <body>
+
+		<div class="wikiMainBody"><p><br />
+				The Simple Java API for ODF builds upon the lower-level ODFDOM DOM and Package layer to provide an easy-to-use, high-level Java API for creating, modifying and extracting data from Open Document Format documents.
+			</p>
+			<p>
+			<div id='toc' style='border:solid #DEDEDF 1px;background:#EEE;padding:10px;'>
+
+				<div id='toctitle' style='padding-bottom:5px;font-weight:bold;'>
+
+					<span>Simple Java API for ODF</span>
+				</div>
+				<div id='toccontents' style='list-style-type:none;'><ul><li>1 <a href='#The_ODFDOM_Layers'>Pakages introduction</a></li>
+				<li>2 <a href="#Further_Information">Further information</a></li>
+						</ul></div>
+			</div><h1><a name='The_ODFDOM_Layers'>Packages introduction</a></h1>
+			<p>
+				The design principle is &quot;make users easily to locate the functions they want&quot;. </p>
+				<h3>Document methods</h3>
+				<p>For each frequently used document type, there is a class under package &quot;org.odftoolkit.simple&quot; to provide high level methods to manipulate this kind of documents.</p>
+				<h3>Specific methods for different mimetype</h3>
+				<p>For each frequently used mimetype, their is a package to contain the high level methods for this kind of mimetype, such as org.odftoolkit.simple.text and org.odftoolkit.simple.presentation. The packages for different mimetype contain:
+				<div>
+				<ul>
+				<li>The frequently used features functions, such as org.odftoolkit.simpleodf.chart will contain the function related with chart, org.odftoolkit.simpleodf.text will contain the function related with text content.</li> 
+<li>Specific functions for different mimetypes, for example, the navigation API is put in package &quot;org.odftoolkit.simpleodf.text.search&quot;.</li>
+</ul>
+</div></p> 
+<h3>Features methods</h3>
+<p>there are some packages defined for important common features available for all kinds of documents, such as table, meta and style. The packages for common features will contain the methods for specific features.</p>
+<h3>Common methods</h3>
+<p>There is another package named "org.odftoolkit.simpleodf.common", which contains functions that are not related with a specific document type nor a specific feature. For example, the text extractor functions are put in this package.</p>
+
+
+
+
+<h2><a name='Further_Information'>Further Information</a></h2>
+For further Information about Simple Java API for ODF and related topics please visit following pages:
+<ol>
+	<li><a href="http://incubator.apache.org/odftoolkit/simple/index.html">Simple Java API</a></li>
+	<li><a href="http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part1.html">OpenDocument v1.2 specification - part 1: OpenDocument Schema</a></li>
+	<li><a href="http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part3.html">OpenDocument v1.2 specification - part 3: Packages</a></li>
+	<li><a href="http://incubator.apache.org/odftoolkit/odfdom/index.html">ODFDOM</a></li>
+</ol>
+</p>
+</div>
+</body>
+</html>
