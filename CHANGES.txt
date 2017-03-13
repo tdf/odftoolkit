@@ -3,6 +3,9 @@ Apache ODF Toolkit Change Log
 
 ======= Release 0.6.2 =======
 
+The most notable changes in ODF Toolkit 0.6.2 incubating over previous release:
+* Supply signature and manifest features to ODFDOM
+
 Release wiki page: https://cwiki.apache.org/confluence/display/ODFTOOLKIT/0.6.2-incubating
 
 Versions of major components
@@ -19,6 +22,7 @@ Optimizations
 * ODFTOOLKIT-200 Supply signature and manifest features to ODFDOM
 * ODFTOOLKIT-294 Adding the XSL stylesheet for extracting default values to XSLT_RUNNER XSL sample folder
 * ODFTOOLKIT-374 Set the field "Last Modified By" in the metadata file
+* ODFTOOLKIT-410 Set table:error-message for content-validation to activate actual validation
 * ODFTOOLKIT-417 Missing methods for set and get background-color, subscripted and superscripted for a paragraph
 * ODFTOOLKIT-418 missing method to find an embedded section
 * ODFTOOLKIT-420 missing functions in TextProperties set/get background color
@@ -32,14 +36,13 @@ Bug Fixes
 ---------
 * ODFTOOLKIT-300 Memory Leak in ODF Simple API
 * ODFTOOLKIT-323 Remove old references to odftoolkit.org site
+* ODFTOOLKIT-367 Paragraph.getTextContent throws NullPointerException with exactly 2 spaces between words Improvement ODFTOOLKIT-365 Improve Release Process to easily publish releases with maven 
 * ODFTOOLKIT-368 Column.setWidth wrong size
-* ODFTOOLKIT-379 NullPointerException in Paragraph.getTextContent()
 * ODFTOOLKIT-386 Project doesn't build with JDK 8
 * ODFTOOLKIT-388 Test hangs when iterating over a spreadsheet created with LibreOffice 4.0.0
 * ODFTOOLKIT-391 Publish ODF Toolkit artifacts to Maven Central + tag release version in SVN
 * ODFTOOLKIT-395 [PATCH] validator applies ODF 1.1 rules to ODF 1.2 documents when checking character content in foreign elements
 * ODFTOOLKIT-396 SpreadsheetDocument.appendSheet fails because of buggy alien element cloning
-* ODFTOOLKIT-397 DataSet cannot set values from spreadsheet if there are repeated rows before data rows
 * ODFTOOLKIT-398 crash when calling getCellBackgroundColor from the org.odftoolkit.simple.table.Cell
 * ODFTOOLKIT-401 NullPointerException from typo hides all ZIP exceptions
 * ODFTOOLKIT-404 Obsolete Jena dependency at ODF Toolkit

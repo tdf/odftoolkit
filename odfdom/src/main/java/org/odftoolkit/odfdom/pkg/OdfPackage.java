@@ -139,8 +139,8 @@ public class OdfPackage implements Closeable {
 	private ErrorHandler mErrorHandler;
 	private String mManifestVersion;
 	private OdfManifestDom mManifestDom;
-	private String oldPwd;
-	private String newPwd;
+	private String mOldPwd;
+	private String mNewPwd;
 
 	/* Commonly used files within the ODF Package */
 	public enum OdfFile {
@@ -247,8 +247,8 @@ public class OdfPackage implements Closeable {
 		this();
 		mBaseURI = getBaseURLFromFile(pkgFile);
 		mErrorHandler = errorHandler;
-		oldPwd = password;
-		newPwd = oldPwd;
+		mOldPwd = password;
+		mNewPwd = mOldPwd;
 		mBaseURI = baseURI;
 
 		InputStream packageStream = new FileInputStream(pkgFile);
@@ -280,8 +280,8 @@ public class OdfPackage implements Closeable {
 		this(); // calling private constructor
 		mErrorHandler = errorHandler;
 		mBaseURI = baseURI;
-		oldPwd = password;
-		newPwd = oldPwd;
+		mOldPwd = password;
+		mNewPwd = mOldPwd;
 		initializeZip(packageStream);
 	}
 
@@ -372,6 +372,23 @@ public class OdfPackage implements Closeable {
 	public static OdfPackage loadPackage(File pkgFile, ErrorHandler errorHandler) throws SAXException, IOException {
 		return new OdfPackage(pkgFile, getBaseURLFromFile(pkgFile), null, errorHandler);
 	}
+
+	/**
+	 * Loads an OdfPackage from the given File.
+	 * <p>
+	 * OdfPackage relies on the file being available for read access over the whole lifecycle of
+	 * OdfPackage.
+	 * </p>
+	 *
+	 * @param pkgFile - the ODF Package. A baseURL is being generated based on its location.
+	 * @param password - the ODF Package password.
+	 * @throws SAXException if there's an XML- or validation-related error while loading the package
+	 * @throws IOException if there's an I/O error while loading the package
+	 * @see #getErrorHandler
+	 */
+	public static OdfPackage loadPackage(File pkgFile, String password) throws SAXException, IOException {
+        return OdfPackage.loadPackage(pkgFile, password, null);
+    }
 
 	/**
 	 * Loads an OdfPackage from the given File.
@@ -804,9 +821,14 @@ public class OdfPackage implements Closeable {
 		return mPkgDocuments.keySet();
 	}
 
-	public OdfPackageDocument getRootDocument() {
-		return mPkgDocuments.get(OdfPackageDocument.ROOT_DOCUMENT_PATH);
-	}
+    public OdfPackageDocument getRootDocument() {
+        OdfPackageDocument odfPackageDocument = null;
+        odfPackageDocument = mPkgDocuments.get(OdfPackageDocument.ROOT_DOCUMENT_PATH);
+        if (odfPackageDocument == null) {
+            odfPackageDocument = this.loadDocument(OdfPackageDocument.ROOT_DOCUMENT_PATH);
+        }
+        return odfPackageDocument;
+    }
 
 	public OdfManifestDom getManifestDom() {
 		return mManifestDom;
@@ -943,7 +965,7 @@ public class OdfPackage implements Closeable {
 	 * @since 0.8.9
 	 */
 	public void setPassword(String password) {
-		newPwd = password;
+		mNewPwd = password;
 	}
 
 	/**
@@ -1064,7 +1086,7 @@ public class OdfPackage implements Closeable {
 	 * @return true if the file needs encrypted, false, otherwise
 	 */
 	private boolean fileNeedsEncryption(String internalPath) {
-		if (newPwd != null) {
+		if (mNewPwd != null) {
 			// ODF spec does not allow encrytion of "./mimetype" file
 			if (internalPath.endsWith(SLASH) || OdfFile.MANIFEST.getPath().equals(internalPath) || OdfPackage.OdfFile.MEDIA_TYPE.getPath().equals(internalPath)) {
 				return false;
@@ -1688,7 +1710,12 @@ public class OdfPackage implements Closeable {
 							OdfFileEntry manifestEntry = getManifestEntries().get(internalPath);
 							EncryptionDataElement encryptionDataElement = manifestEntry.getEncryptionData();
 							if (encryptionDataElement != null) {
-								data = decryptData(data, manifestEntry, encryptionDataElement);
+                                byte[] newData = decryptData(data, manifestEntry, encryptionDataElement);
+                                if(newData != null){
+                                    data = newData;
+                                }else{
+                                    Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, "Wrong password being used for decryption!");
+                                }
 							}
 						}
 						// store for further usage; do not care about manifest:
@@ -1730,7 +1757,7 @@ public class OdfPackage implements Closeable {
 			// 3. The start key is generated: the byte sequence
 			// representing the password in UTF-8 is used to
 			// generate a 20-byte SHA1 digest.
-			byte[] passBytes = newPwd.getBytes("UTF-8");
+			byte[] passBytes = mNewPwd.getBytes("UTF-8");
 			MessageDigest md = MessageDigest.getInstance("SHA1");
 			passBytes = md.digest(passBytes);
 			// 4. Checksum specifies a digest in BASE64 encoding
@@ -1838,7 +1865,7 @@ public class OdfPackage implements Closeable {
 			String checksum = encryptionDataElement.getChecksumAttribute();
 			byte[] salt = Base64Binary.valueOf(saltStr).getBytes();
 			byte[] iv = Base64Binary.valueOf(ivStr).getBytes();
-			byte[] passBytes = oldPwd.getBytes("UTF-8");
+			byte[] passBytes = mOldPwd.getBytes("UTF-8");
 			MessageDigest md = MessageDigest.getInstance("SHA-1");
 			passBytes = md.digest(passBytes);
 			/*
