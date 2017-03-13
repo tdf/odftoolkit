@@ -1,9 +1,9 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -31,6 +31,8 @@ package org.odftoolkit.odfdom.pkg.manifest;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
+import org.w3c.dom.NodeList;
 /**
  * Manifest implementation of OpenDocument element  {@odf.element manifest:encryption-data}.
  *
@@ -124,7 +126,21 @@ public class EncryptionDataElement extends OdfElement {
 		AlgorithmElement algorithm = ((OdfFileDom) this.ownerDocument).newOdfElement(AlgorithmElement.class);
 		algorithm.setAlgorithmNameAttribute(algorithmNameValue);
 		algorithm.setInitialisationVectorAttribute(initialisationVectorValue);
-		this.appendChild(algorithm);
+        if(this.hasChildNodes()){
+            OdfElement precedingSibling = null;
+            NodeList nl = this.getElementsByTagNameNS(OdfPackageNamespace.MANIFEST.getUri(), "start-key-generation");
+            if(nl.getLength() == 0){
+                nl = this.getElementsByTagNameNS(OdfPackageNamespace.MANIFEST.getUri(), "key-derivation");
+            }
+            if(nl.getLength() != 0){
+               precedingSibling = (OdfElement) nl.item(0);
+               this.insertBefore(algorithm, precedingSibling);
+            }else{
+                this.appendChild(algorithm);
+            }
+        }else{
+            this.appendChild(algorithm);
+        }
 		return algorithm;
 	}
 
@@ -160,8 +176,20 @@ public class EncryptionDataElement extends OdfElement {
 	 public StartKeyGenerationElement newStartKeyGenerationElement(String startKeyGenerationNameValue) {
 		StartKeyGenerationElement startKeyGeneration = ((OdfFileDom) this.ownerDocument).newOdfElement(StartKeyGenerationElement.class);
 		startKeyGeneration.setStartKeyGenerationNameAttribute(startKeyGenerationNameValue);
-		this.appendChild(startKeyGeneration);
-		return startKeyGeneration;
+
+        if(this.hasChildNodes()){
+            OdfElement precedingSibling = null;
+            NodeList nl = this.getElementsByTagNameNS(OdfPackageNamespace.MANIFEST.getUri(), "key-derivation");
+            if(nl.getLength() != 0){
+               precedingSibling = (OdfElement) nl.item(0);
+               this.insertBefore(startKeyGeneration, precedingSibling);
+            }else{
+                this.appendChild(startKeyGeneration);
+            }
+        }else{
+            this.appendChild(startKeyGeneration);
+        }
+        return startKeyGeneration;
 	}
 
 }
