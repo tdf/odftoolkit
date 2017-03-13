@@ -15,7 +15,7 @@ Versions of major components
 * Apache Jena 2.11.2 (http://jena.apache.org/download/index.html)
 * Apache Commons Validator 1.5.0 (http://commons.apache.org/proper/commons-validator//download_validator.cgi)
 
-For a full dependecy list run mvn dependency:tree from the top level in the source module or see the release wiki page.
+For a full dependency list run mvn dependency:tree from the top level in the source module or see the release wiki page.
 
 Optimizations
 -------------
@@ -57,6 +57,8 @@ Bug Fixes
 * ODFTOOLKIT-425 Please delete old releases from mirroring system
 * ODFTOOLKIT-433 Document.updateXMLIds(...) does not update referenced id's
 * ODFTOOLKIT-442 Table.getRowIterator() out of sync without calling hasNext()
+* ODFTOOLKIT-446 Receiving encrypted file without password should be not NULL
+* ODFTOOLKIT-447 Encrypted documents invalid due to misordered manifest XML elements
 
 The following people have contributed to ODF Toolkit 0.6.2 incubating by reporting or submitting on the issues resolved in this release:
 
@@ -107,7 +109,7 @@ Versions of major components
 * Apache Jena 2.9.4 (http://jena.apache.org/download/index.html)
 * Apache Commons Validator 1.4.0 (http://commons.apache.org/proper/commons-validator//download_validator.cgi)
 
-For a full dependecy list run mvn dependency:tree from the top level in the source module or see the release wiki page.
+For a full dependency list run mvn dependency:tree from the top level in the source module or see the release wiki page.
 
 Upgrading from 0.6-incubating
 -----------------------------
@@ -204,7 +206,7 @@ Versions of major components
 * Apache Clerezza 0.1-incubating (http://incubator.apache.org/clerezza/downloads/)
 * Apache Commons Validator 1.4.0 (http://commons.apache.org/proper/commons-validator//download_validator.cgi)
 
-For a full dependecy list run mvn dependency:tree from the top level in the source module or see the release wiki page.
+For a full dependency list run mvn dependency:tree from the top level in the source module or see the release wiki page.
 
 Upgrading from 0.5-incubating
 -----------------------------
