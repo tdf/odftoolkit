@@ -3,6 +3,9 @@ Apache ODF Toolkit Change Log
 
 ======= Release 0.6.2 =======
 
+The most notable changes in ODF Toolkit 0.6.2 incubating over previous release:
+* Enable password encryption and encryption manifest handling to ODFDOM
+
 Release wiki page: https://cwiki.apache.org/confluence/display/ODFTOOLKIT/0.6.2-incubating
 
 Versions of major components
@@ -12,13 +15,14 @@ Versions of major components
 * Apache Jena 2.11.2 (http://jena.apache.org/download/index.html)
 * Apache Commons Validator 1.5.0 (http://commons.apache.org/proper/commons-validator//download_validator.cgi)
 
-For a full dependecy list run mvn dependency:tree from the top level in the source module or see the release wiki page.
+For a full dependency list run mvn dependency:tree from the top level in the source module or see the release wiki page.
 
 Optimizations
 -------------
-* ODFTOOLKIT-200 Supply signature and manifest features to ODFDOM
+* ODFTOOLKIT-200 Enable password encryption and encryption manifest handling to ODFDOM
 * ODFTOOLKIT-294 Adding the XSL stylesheet for extracting default values to XSLT_RUNNER XSL sample folder
 * ODFTOOLKIT-374 Set the field "Last Modified By" in the metadata file
+* ODFTOOLKIT-410 Set table:error-message for content-validation to activate actual validation
 * ODFTOOLKIT-417 Missing methods for set and get background-color, subscripted and superscripted for a paragraph
 * ODFTOOLKIT-418 missing method to find an embedded section
 * ODFTOOLKIT-420 missing functions in TextProperties set/get background color
@@ -32,14 +36,13 @@ Bug Fixes
 ---------
 * ODFTOOLKIT-300 Memory Leak in ODF Simple API
 * ODFTOOLKIT-323 Remove old references to odftoolkit.org site
+* ODFTOOLKIT-367 Paragraph.getTextContent sometimes failed to replace text:s with spaces 
 * ODFTOOLKIT-368 Column.setWidth wrong size
-* ODFTOOLKIT-379 NullPointerException in Paragraph.getTextContent()
 * ODFTOOLKIT-386 Project doesn't build with JDK 8
 * ODFTOOLKIT-388 Test hangs when iterating over a spreadsheet created with LibreOffice 4.0.0
 * ODFTOOLKIT-391 Publish ODF Toolkit artifacts to Maven Central + tag release version in SVN
 * ODFTOOLKIT-395 [PATCH] validator applies ODF 1.1 rules to ODF 1.2 documents when checking character content in foreign elements
 * ODFTOOLKIT-396 SpreadsheetDocument.appendSheet fails because of buggy alien element cloning
-* ODFTOOLKIT-397 DataSet cannot set values from spreadsheet if there are repeated rows before data rows
 * ODFTOOLKIT-398 crash when calling getCellBackgroundColor from the org.odftoolkit.simple.table.Cell
 * ODFTOOLKIT-401 NullPointerException from typo hides all ZIP exceptions
 * ODFTOOLKIT-404 Obsolete Jena dependency at ODF Toolkit
@@ -47,13 +50,15 @@ Bug Fixes
 * ODFTOOLKIT-406 Build failure on Apache Build server when downloading ODF 1.0 schema
 * ODFTOOLKIT-407 Mixed case package name org.odftoolkit.Junit avoids building on Linux
 * ODFTOOLKIT-408 OdfXmlHelper duplicated in src/test
-* ODFTOOLKIT-409 Hang on Cell.setValidityList() if the ContentValidationElement is reused New Feature ODFTOOLKIT-410 Set table:error-message for content-validation to activate actual validation
+* ODFTOOLKIT-409 Hang on Cell.setValidityList() if the ContentValidationElement is reused New Feature 
 * ODFTOOLKIT-412 Document.loadDocument(File file, String password) doesn't work for encrypted ods file
 * ODFTOOLKIT-413 Document corrupted after copying a sheet including a chart into new spreadsheet
 * ODFTOOLKIT-421 Chinese Word Can't set font
 * ODFTOOLKIT-425 Please delete old releases from mirroring system
 * ODFTOOLKIT-433 Document.updateXMLIds(...) does not update referenced id's
 * ODFTOOLKIT-442 Table.getRowIterator() out of sync without calling hasNext()
+* ODFTOOLKIT-446 Receiving encrypted file without password should be not NULL
+* ODFTOOLKIT-447 Encrypted documents invalid due to misordered manifest XML elements
 
 The following people have contributed to ODF Toolkit 0.6.2 incubating by reporting or submitting on the issues resolved in this release:
 
@@ -104,7 +109,7 @@ Versions of major components
 * Apache Jena 2.9.4 (http://jena.apache.org/download/index.html)
 * Apache Commons Validator 1.4.0 (http://commons.apache.org/proper/commons-validator//download_validator.cgi)
 
-For a full dependecy list run mvn dependency:tree from the top level in the source module or see the release wiki page.
+For a full dependency list run mvn dependency:tree from the top level in the source module or see the release wiki page.
 
 Upgrading from 0.6-incubating
 -----------------------------
@@ -201,7 +206,7 @@ Versions of major components
 * Apache Clerezza 0.1-incubating (http://incubator.apache.org/clerezza/downloads/)
 * Apache Commons Validator 1.4.0 (http://commons.apache.org/proper/commons-validator//download_validator.cgi)
 
-For a full dependecy list run mvn dependency:tree from the top level in the source module or see the release wiki page.
+For a full dependency list run mvn dependency:tree from the top level in the source module or see the release wiki page.
 
 Upgrading from 0.5-incubating
 -----------------------------

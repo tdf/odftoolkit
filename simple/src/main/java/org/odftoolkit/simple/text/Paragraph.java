@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -24,14 +24,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
-import org.odftoolkit.odfdom.dom.element.draw.DrawControlElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextAElement;
@@ -69,7 +67,7 @@ import org.w3c.dom.Text;
  * manipulate text content, and other child component under the paragraph.
  * Headings and body text paragraphs are collectively referred to as paragraph
  * elements.
- * 
+ *
  * @since 0.5
  */
 public class Paragraph extends Component implements TextboxContainer,
@@ -98,7 +96,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	/**
 	 * Gets a paragraph instance by an instance of
 	 * <code>TextParagraphElementBase</code>.
-	 * 
+	 *
 	 * @param paragraphElement
 	 *            the instance of TextParagraphElementBase.
 	 * @return an instance of paragraph.
@@ -121,7 +119,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	 * Create an instance of paragraph
 	 * <p>
 	 * The paragrah will be added at the end of this container.
-	 * 
+	 *
 	 * @param container
 	 *            the paragraph container that contains this paragraph.
 	 */
@@ -147,7 +145,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	 * The white space characters in the content would be collapsed by default.
 	 * For example, tab character would be replaced with <text:tab>, break line
 	 * character would be replaced with <text:line-break>.
-	 * 
+	 *
 	 * @param content
 	 *            - the text content
 	 * @see #setTextContentNotCollapsed(String content)
@@ -186,7 +184,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	 * will be removed.
 	 * <p>
 	 * The other child elements except text content will not be removed.
-	 * 
+	 *
 	 */
 	public void removeTextContent() {
 		removeTextContentImpl(getOdfElement());
@@ -218,7 +216,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	 * Return the text content of this paragraph.
 	 * <p>
 	 * The other child elements except text content will not be returned.
-	 * 
+	 *
 	 * @return - the text content of this paragraph
 	 */
 	public String getTextContent() {
@@ -236,11 +234,11 @@ public class Paragraph extends Component implements TextboxContainer,
 				buffer.append(node.getNodeValue());
 			else if (node.getNodeType() == Node.ELEMENT_NODE) {
 				if (node instanceof TextSpanElement) {
-					buffer.append(((TextSpanElement) node).getTextContent());
+					buffer.append((getTextContent((TextSpanElement) node)));
 				}
 				else if (node.getNodeName().equals("text:s")) {
 					Integer count = ((TextSElement) node).getTextCAttribute();
-					for (int j = 0; j < (count != null ? count : 0); j++)
+					for (int j = 0; j < (count != null ? count : 1); j++)
 						buffer.append(' ');
 				} else if (node.getNodeName().equals("text:tab"))
 					buffer.append('\t');
@@ -261,7 +259,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	 * then new text content would be set.
 	 * <p>
 	 * The white space characters in the content would not be collapsed.
-	 * 
+	 *
 	 * @param content
 	 *            - the text content
 	 * @see #setTextContent(String content)
@@ -279,7 +277,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	 * The white space characters in the content would be collapsed by default.
 	 * For example, tab character would be replaced with <text:tab>, break line
 	 * character would be replaced with <text:line-break>.
-	 * 
+	 *
 	 * @param content
 	 *            - the text content
 	 * @see #appendTextContentNotCollapsed(String content)
@@ -297,7 +295,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	 * The white space characters in the content would be collapsed by default.
 	 * For example, tab character would be replaced with <text:tab>, break line
 	 * character would be replaced with <text:line-break>.
-	 * 
+	 *
 	 * @param content
 	 *            - the text content
 	 * @param isStyleInherited
@@ -325,7 +323,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	 * would follow the style of the last character.
 	 * <p>
 	 * The white space characters in the content would not be collapsed.
-	 * 
+	 *
 	 * @param content
 	 *            - the text content
 	 * @see #appendTextContent(String content)
@@ -348,7 +346,7 @@ public class Paragraph extends Component implements TextboxContainer,
 
 	/**
 	 * Set the style name of this paragraph
-	 * 
+	 *
 	 * @param styleName
 	 *            - the style name
 	 */
@@ -358,7 +356,7 @@ public class Paragraph extends Component implements TextboxContainer,
 
 	/**
 	 * Get the style name of this paragraph
-	 * 
+	 *
 	 * @return - the style name
 	 */
 	public String getStyleName() {
@@ -374,7 +372,7 @@ public class Paragraph extends Component implements TextboxContainer,
 
 	/**
 	 * Get the owner document of this paragraph.
-	 * 
+	 *
 	 * @return the document who owns this paragraph.
 	 */
 	public Document getOwnerDocument() {
@@ -383,7 +381,7 @@ public class Paragraph extends Component implements TextboxContainer,
 
 	/**
 	 * Remove this paragraph from its container.
-	 * 
+	 *
 	 * @since 0.6.5
 	 */
 	public void remove(){
@@ -396,12 +394,12 @@ public class Paragraph extends Component implements TextboxContainer,
 		mTextboxContainerImpl=null;
 		mHyperlinkContainerImpl=null;
 	}
-	
+
 	/**
 	 * Get the style handler of this paragraph.
 	 * <p>
 	 * The style handler is an instance of ParagraphStyleHandler
-	 * 
+	 *
 	 * @return an instance of ParagraphStyleHandler
 	 * @see ParagraphStyleHandler
 	 */
@@ -419,7 +417,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	 * Headings and body text paragraphs are collectively referred to as
 	 * paragraph elements, so the <code>TextParagraphElementBase</code> can be
 	 * <code>TextHElement</code> element or <code>TextPElement</code> element.
-	 * 
+	 *
 	 * @return the <code>TextParagraphElementBase</code> of this paragraph.
 	 */
 	@Override
@@ -433,7 +431,7 @@ public class Paragraph extends Component implements TextboxContainer,
 
 	/**
 	 * Creates a comment in the front of this paragraph.
-	 * 
+	 *
 	 * @param content
 	 *            the content of this comment.
 	 * @param creator
@@ -480,10 +478,10 @@ public class Paragraph extends Component implements TextboxContainer,
 
 	/**
 	 * Returns the paragraph type, heading or body text paragraph.
-	 * 
+	 *
 	 * @return the paragraph type, if this paragraph is heading, returns
 	 *         <code>true</code>, otherwise return <code>false</code>.
-	 * 
+	 *
 	 * @since 0.6.5
 	 */
 	public boolean isHeading() {
@@ -496,10 +494,10 @@ public class Paragraph extends Component implements TextboxContainer,
 
 	/**
 	 * Returns outline level of this paragraph.
-	 * 
+	 *
 	 * @return outline level, if this paragraph is a body text paragraph, 0 will
 	 *         be returned.
-	 * 
+	 *
 	 * @since 0.6.5
 	 */
 	public int getHeadingLevel() {
@@ -511,14 +509,14 @@ public class Paragraph extends Component implements TextboxContainer,
 
 	/**
 	 * Sets the paragraph type, heading or body text paragraph.
-	 * 
+	 *
 	 * @param isHeading
 	 *            if <code>true</code>, this paragraph would be formatted as
 	 *            heading, otherwise as a body text paragraph.
 	 * @param level
 	 *            the heading outline level of this paragraph, if
 	 *            <code>isHeading</code> is <code>true</code>.
-	 * 
+	 *
 	 * @since 0.6.5
 	 */
 	public void applyHeading(boolean isHeading, int level) {
@@ -577,7 +575,7 @@ public class Paragraph extends Component implements TextboxContainer,
 
 	/**
 	 * Formats the paragraph as heading. Its outline level is 1.
-	 * 
+	 *
 	 * @since 0.6.5
 	 */
 	public void applyHeading() {
@@ -586,10 +584,10 @@ public class Paragraph extends Component implements TextboxContainer,
 
 	/**
 	 * Returns the font definition for this paragraph.
-	 * 
+	 *
 	 * @return font if there is no style definition for this paragraph,
 	 *         <code>null</code> will be returned.
-	 * 
+	 *
 	 * @since 0.6.5
 	 */
 	public Font getFont() {
@@ -598,10 +596,10 @@ public class Paragraph extends Component implements TextboxContainer,
 
 	/**
 	 * Sets font style for this paragraph.
-	 * 
+	 *
 	 * @param font
 	 *            the font definition of this paragraph
-	 * 
+	 *
 	 * @since 0.6.5
 	 */
 	public void setFont(Font font) {
@@ -616,7 +614,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	 * <p>
 	 * Default value will be returned if explicit style definition is found but
 	 * no horizontal alignment is set.
-	 * 
+	 *
 	 * @return the horizontal alignment setting.
 	 * @since 0.6.5
 	 */
@@ -627,7 +625,7 @@ public class Paragraph extends Component implements TextboxContainer,
 	/**
 	 * Set the horizontal alignment setting of this paragraph. If the alignment
 	 * is set as Default, the explicit horizontal alignment setting is removed.
-	 * 
+	 *
 	 * @param alignType
 	 *            the horizontal alignment setting.
 	 * @since 0.6.5
