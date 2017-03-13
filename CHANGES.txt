@@ -4,7 +4,7 @@ Apache ODF Toolkit Change Log
 ======= Release 0.6.2 =======
 
 The most notable changes in ODF Toolkit 0.6.2 incubating over previous release:
-* Supply signature and manifest features to ODFDOM
+* Enable password encryption and encryption manifest handling to ODFDOM
 
 Release wiki page: https://cwiki.apache.org/confluence/display/ODFTOOLKIT/0.6.2-incubating
 
@@ -19,7 +19,7 @@ For a full dependency list run mvn dependency:tree from the top level in the sou
 
 Optimizations
 -------------
-* ODFTOOLKIT-200 Supply signature and manifest features to ODFDOM
+* ODFTOOLKIT-200 Enable password encryption and encryption manifest handling to ODFDOM
 * ODFTOOLKIT-294 Adding the XSL stylesheet for extracting default values to XSLT_RUNNER XSL sample folder
 * ODFTOOLKIT-374 Set the field "Last Modified By" in the metadata file
 * ODFTOOLKIT-410 Set table:error-message for content-validation to activate actual validation
