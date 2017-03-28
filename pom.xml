@@ -430,7 +430,7 @@
                                                 <include name="*.tar.bz2" />
                                               </fileset>
                                         </checksum>
-                                        <checksum algorithm="SHA512" fileext=".sha">
+                                        <checksum algorithm="SHA-512" fileext=".sha">
                                               <fileset dir="${basedir}/target">
                                                 <include name="*.zip" />
                                                 <include name="*.tar.gz" />
@@ -516,4 +516,3 @@
 		</profile>
 	</profiles>
 </project>
-
