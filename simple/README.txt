@@ -2,11 +2,6 @@
 * Simple Java API for ODF                                   *
 *                                                           *
 *************************************************************
-*                                                           *
-* Version: @VERSION@                                              *
-* Release Date: @DATE@                         *
-*                                                           *
-*************************************************************
 
 
 About Simple
@@ -22,36 +17,20 @@ level abstraction of the lower-level ODFDOM API
 Documentation
 --------------
 
-The latest release notes are available online at the project's 
-Wiki page:
-    http://odftoolkit.org/projects/simple/pages/Home
-
-In general, the Wiki page is a great place to start when looking 
-for online information about the simple project:
-    http://odftoolkit.org/projects/simple/pages/Home
-
-The website is another place that you can get online documentations, 
-such as cookbook, javadoc and demo codes:
-    http://simple.odftoolkit.org/
-
-API documentation (Javadoc) can be downloaded from the project's 
-download area:
-    http://odftoolkit.org/projects/simple/downloads
-
-The Javadoc can also be viewed online:
-    http://simple.odftoolkit.org/javadoc/index.html
-
-
-License
---------
-
-Apache License, Version 2.0. Please see file LICENSE.txt.
-
-
-Installation
--------------
-
-Just put the file simple.jar in your classpath. You will
-need ODFDOM0.9-SNAPSHOT and Apache Xerces-J 2.9.1 as well. Get them from
-    http://odftoolkit.org/projects/simple/downloads/directory/tools
-    http://xerces.apache.org/mirrors.cgi
+The Home Page for the ODF Toolkit:
+    http://incubator.apache.org/odftoolkit/index.html
+    
+ODFDOM Getting Start Guide:    
+    http://incubator.apache.org/odftoolkit/odfdom/index.html   
+     
+Simple API Getting Start Guide:    
+    http://incubator.apache.org/odftoolkit/simple/gettingstartguide.html    
+       
+Simple API Cookbook:
+    http://incubator.apache.org/odftoolkit/simple/document/cookbook/index.html
+    
+Simple API Demos:
+    http://incubator.apache.org/odftoolkit/simple/demo/index.html
+    
+Simple API Online JavaDoc:
+    http://incubator.apache.org/odftoolkit/simple/document/javadoc/index.html

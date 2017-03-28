@@ -31,18 +31,3 @@ documentation and other information about the odfdom project.
 API documentation (Javadoc), sources and binaries can be downloaded 
 from the project's download area:
     http://incubator.apache.org/odftoolkit/downloads.html
-
-
-License
---------
-
-Apache License, Version 2.0. See file LICENSE.txt or
-http://www.apache.org/licenses/LICENSE-2.0
-
-
-Installation
--------------
-
-Just put the file odfdom.jar in your classpath. You will
-need Apache Xerces-J as well. Get it from
-    http://xml.apache.org/dist/xerces-j/

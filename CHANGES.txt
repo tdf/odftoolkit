@@ -21,6 +21,8 @@ Optimizations
 -------------
 * ODFTOOLKIT-200 Enable password encryption and encryption manifest handling to ODFDOM
 * ODFTOOLKIT-294 Adding the XSL stylesheet for extracting default values to XSLT_RUNNER XSL sample folder
+* ODFTOOLKIT-304 Update ODF 1.2 schema to OpenDocument-v1.2 final version
+* ODFTOOLKIT-375 odftoolkit-0.6 does not work in my environment
 * ODFTOOLKIT-374 Set the field "Last Modified By" in the metadata file
 * ODFTOOLKIT-410 Set table:error-message for content-validation to activate actual validation
 * ODFTOOLKIT-417 Missing methods for set and get background-color, subscripted and superscripted for a paragraph
@@ -65,6 +67,7 @@ The following people have contributed to ODF Toolkit 0.6.2 incubating by reporti
 Nick Burch (mentor)
 Rob Weir (mentor)
 Sam Ruby (mentor)
+Tom Barber (mentor)
 Yegor Kozlov (mentor)
 Damjan Jovanovic (committer)
 Dave Fisher (committer)
@@ -84,6 +87,7 @@ Jeremias Maerki
 Jerry Sie Hsiung
 Josef Petrák
 Jörg Büsse
+Kakha Kheladze
 Marc Schreiber
 Mathias Silbermann 
 Michael Stahl

@@ -155,9 +155,9 @@
             <id>svanteschubert</id>
             <name>Svante</name>
             <email>svanteschubert AT apache.org</email>
-            <organization>Individual</organization>
+            <organization>Freelancer</organization>
             <roles>
-                <role>ODFDOM working group chair</role>
+                <role>OASIS ODF Collaboration subcommittee chair</role>
                 <role>architect</role>
                 <role>developer</role>
             </roles>
@@ -208,7 +208,7 @@
         <developer>
             <id>lars_behrmann</id>
             <name>Lars</name>
-            <organization>Oracle Inc.</organization>
+            <organization>Freelancer</organization>
             <organizationUrl>http://www.oracle.com/</organizationUrl>
             <roles>
                 <role>developer</role>
@@ -430,14 +430,14 @@
                                                 <include name="*.tar.bz2" />
                                               </fileset>
                                         </checksum>
-                                        <checksum algorithm="SHA1" fileext=".sha">
+                                        <checksum algorithm="SHA512" fileext=".sha">
                                               <fileset dir="${basedir}/target">
                                                 <include name="*.zip" />
                                                 <include name="*.tar.gz" />
                                                 <include name="*.tar.bz2" />
                                               </fileset>
                                         </checksum>
-                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA1" property="checksum" />
+                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA512" property="checksum" />
                                         <copy todir="${basedir}/target/release/${project.version}/">
                                             <fileset dir="${basedir}/target">
                                                 <include name="*-source-release.*" />
@@ -466,7 +466,7 @@
 
                                             https://svn.apache.org/repos/asf/incubator/odf/tags/${project.version}/
 
-                                            The SHA1 checksum of the archive is ${checksum}.
+                                            The SHA512 checksum of the archive is ${checksum}.
 
                                             Please vote on releasing this package as Apache ODF Toolkit ${project.version}.
                                             The vote is open for the next 72 hours and passes if a majority

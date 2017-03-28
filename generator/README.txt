@@ -43,15 +43,5 @@ Installation
 Just put the file odfdom.jar in your classpath. You will
 need Apache Velocity Engine and Sun's Multi Schema Validator (MSV) as well. Get it from
    http://velocity.apache.org/
-   http://java.net/downloads/msv/releases/
+   https://msv.java.net/
 
-
-Documentation
---------------
-
-Javadoc can be downloaded from the project's download area:
-   http://
-
-For online documentation please start by reading the project's
-Wiki page
-   http://

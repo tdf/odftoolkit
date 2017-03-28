@@ -7,11 +7,12 @@
 About Taglets
 -------------
 
-This sub project defines some javadoc tags for ODFDOM. Most of users no need to care it.
+This sub project defines some javadoc tags for ODFDOM. 
+There are three kind of taglets for ODF elements, attributes and types.
+
+The purpose is that the JavaDoc of generated Java classes for ODF XML elements, 
+attributes and types are being linked to their correct anchor in the ODF 
+specification (as well in HTML).
 
 
-License
---------
-
-Apache License, Version 2.0. Please see file LICENSE.txt.
 
