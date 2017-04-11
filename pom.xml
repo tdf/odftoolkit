@@ -437,7 +437,7 @@
                                                 <include name="*.tar.bz2" />
                                               </fileset>
                                         </checksum>
-                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA512" property="checksum" />
+                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA-512" property="checksum" />
                                         <copy todir="${basedir}/target/release/${project.version}/">
                                             <fileset dir="${basedir}/target">
                                                 <include name="*-source-release.*" />
@@ -466,7 +466,7 @@
 
                                             https://svn.apache.org/repos/asf/incubator/odf/tags/${project.version}/
 
-                                            The SHA512 checksum of the archive is ${checksum}.
+                                            The SHA-512 checksum of the archive is ${checksum}.
 
                                             Please vote on releasing this package as Apache ODF Toolkit ${project.version}.
                                             The vote is open for the next 72 hours and passes if a majority

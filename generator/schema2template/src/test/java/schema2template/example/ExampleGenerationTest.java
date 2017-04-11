@@ -25,8 +25,8 @@ package schema2template.example;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 import schema2template.example.odf.OdfHelper;
 
 public class ExampleGenerationTest {
@@ -39,8 +39,9 @@ public class ExampleGenerationTest {
 		try {
 			OdfHelper.main(null);
 		} catch (Exception ex) {
-			Logger.getLogger(ExampleGenerationTest.class.getName()).log(Level.SEVERE, null, ex);
+			LOG.log(Level.SEVERE, null, ex);
 			Assert.fail(ex.toString());
 		}
 	}
+    private static final Logger LOG = Logger.getLogger(ExampleGenerationTest.class.getName());
 }
