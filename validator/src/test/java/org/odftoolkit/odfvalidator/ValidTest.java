@@ -22,7 +22,7 @@
 
 package org.odftoolkit.odfvalidator;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -35,7 +35,7 @@ public class ValidTest extends OdfValidatorTestBase {
         String output = "";
         try {
             String name = "empty.odt";
-            output = doValidation(name, OdfVersion.V1_0, OdfValidatorMode.VALIDATE_STRICT, true);						
+            output = doValidation(name, OdfVersion.V1_0, OdfValidatorMode.VALIDATE_STRICT, true);
         } catch (Throwable t) {
             t.printStackTrace();
             Assert.fail(t.toString());
@@ -46,7 +46,7 @@ public class ValidTest extends OdfValidatorTestBase {
 		}
         Assert.assertTrue(output.contains("<span "));
     }
-	
+
     @Test
 	@Ignore
     public void validate2() {
@@ -61,9 +61,9 @@ public class ValidTest extends OdfValidatorTestBase {
 		if(output.contains("Exception")){
 			System.out.println("OUTPUT:" + output);
 			Assert.fail("An exception occured during validation!");
-		}		
+		}
         Assert.assertTrue(output.contains("testValid1.odt:Info:no errors, no warnings"));
-    }	
+    }
 
    @Test
    @Ignore
@@ -71,9 +71,9 @@ public class ValidTest extends OdfValidatorTestBase {
         String output = "";
         try {
             String name = "empty.odt";
-            output = doValidation(name, OdfVersion.V1_0, OdfValidatorMode.VALIDATE_STRICT);				
+            output = doValidation(name, OdfVersion.V1_0, OdfValidatorMode.VALIDATE_STRICT);
 			output = doValidation(name, OdfVersion.V1_1, OdfValidatorMode.VALIDATE);
-			output = doValidation(name, OdfVersion.V1_2, null);			
+			output = doValidation(name, OdfVersion.V1_2, null);
         } catch (Throwable t) {
             t.printStackTrace();
             Assert.fail(t.toString());
@@ -83,7 +83,7 @@ public class ValidTest extends OdfValidatorTestBase {
 			Assert.fail("An exception occured during validation!");
 		}
         //Assert.assertTrue(output.contains("dummy.odt:Info:no errors, no warnings"));
-    }	
+    }
 
     @Test
     public void validateForeignElementCharacterContentStrict() {

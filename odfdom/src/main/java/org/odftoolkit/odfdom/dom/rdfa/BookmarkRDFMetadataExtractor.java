@@ -1,37 +1,39 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  ************************************************************************/
 package org.odftoolkit.odfdom.dom.rdfa;
 
+import org.apache.jena.rdf.model.Resource;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
-
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.text.TextBookmarkEndElement;
@@ -42,11 +44,6 @@ import org.odftoolkit.odfdom.pkg.rdfa.DOMAttributes;
 import org.odftoolkit.odfdom.pkg.rdfa.JenaSink;
 import org.w3c.dom.Node;
 import org.xml.sax.Attributes;
-
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.Resource;
 
 /**
  * This is a sub class of <code>DefaultElementVisitor</code>, which is used to
@@ -69,7 +66,7 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
 	/**
 	 * This class is used to provide the string builder functions to extractor.
 	 * It will automatically process the last NewLineChar.
-	 * 
+	 *
 	 * @since 0.3.5
 	 */
 	protected static class ExtractorStringBuilder {
@@ -83,7 +80,7 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
 
 		/**
 		 * Append a string
-		 * 
+		 *
 		 * @param str
 		 *            - the string
 		 */
@@ -93,7 +90,7 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
 
 		/**
 		 * Append a character
-		 * 
+		 *
 		 * @param ch
 		 *            - the character
 		 */
@@ -127,7 +124,7 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
 	 * Create a BookmarkRDFMetadataExtractor instance, which RDF metadata
 	 * content of bookmarks can be extracted by
 	 * <code>getBookmarkRDFMetadata()</code>.
-	 * 
+	 *
 	 * @param element
 	 *            the ODF element whose text will be extracted.
 	 * @return an instance of BookmarkRDFMetadataExtractor
@@ -138,7 +135,7 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
 
 	/**
 	 * Return the RDF metadata of specified ODF element as a Jena Model.
-	 * 
+	 *
 	 * @return the text content as a string
 	 */
 	public Model getBookmarkRDFMetadata(OdfFileDom dom) {
@@ -213,7 +210,7 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
 
 	/**
 	 * Constructor with an ODF element as parameter
-	 * 
+	 *
 	 * @param element
 	 *            the ODF element whose text would be extracted.
 	 */
@@ -225,7 +222,7 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
 	/**
 	 * The end users needn't to care of this method, if you don't want to
 	 * override the text content handling strategy of <code>OdfElement</code>.
-	 * 
+	 *
 	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.pkg.OdfElement)
 	 */
 	@Override
@@ -256,7 +253,7 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
 
 	/**
 	 * Append the text content of this element to string buffer.
-	 * 
+	 *
 	 * @param ele
 	 *            the ODF element whose text will be appended.
 	 */

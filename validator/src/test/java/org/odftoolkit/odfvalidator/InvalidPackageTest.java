@@ -23,7 +23,7 @@ package org.odftoolkit.odfvalidator;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /** Test some invalid packages.

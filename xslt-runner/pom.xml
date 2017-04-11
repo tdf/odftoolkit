@@ -55,7 +55,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
+        <version>3.6.1</version>        
         <configuration>
           <!-- defined in the parent pom.xml -->
           <source>${jdk.version}</source>
@@ -78,7 +78,6 @@
         </plugin>
         <plugin>
             <artifactId>maven-assembly-plugin</artifactId>
-            <version>2.4</version>
             <configuration>
                 <descriptorRefs>
                     <descriptorRef>jar-with-dependencies</descriptorRef>
