@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -25,7 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
-
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
@@ -43,7 +42,6 @@ import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
 import org.odftoolkit.odfdom.dom.element.text.TextSElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.dom.element.text.TextUserFieldDeclElement;
-import org.odftoolkit.odfdom.dom.element.text.TextVariableDeclElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
@@ -90,7 +88,7 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Constructor of <code>TextSelection</code>.
-	 * 
+	 *
 	 * @param text
 	 *            the text content of this <code>TextSelection</code>
 	 * @param containerElement
@@ -98,7 +96,7 @@ public class TextSelection extends Selection {
 	 *            <code>TextSelection</code>
 	 * @param index
 	 *            the start index of the text content in container element
-	 * 
+	 *
 	 */
 	TextSelection(Navigation search, String text, OdfElement containerElement,
 			int index) {
@@ -120,7 +118,7 @@ public class TextSelection extends Selection {
 	}
 	/**
 	 * Create a new <code>TextSelection</code>.
-	 * 
+	 *
 	 * @param text
 	 *            the text content of this <code>TextSelection</code>
 	 * @param containerElement
@@ -128,7 +126,7 @@ public class TextSelection extends Selection {
 	 *            <code>TextSelection</code>
 	 * @param index
 	 *            the start index of the text content in container element
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public static TextSelection newTextSelection(Navigation search,
@@ -142,7 +140,7 @@ public class TextSelection extends Selection {
 	/**
 	 * Get the paragraph element or heading element that contains this
 	 * <code>TextSelection</code>.
-	 * 
+	 *
 	 * @return OdfElement the container element
 	 */
 	@Override
@@ -152,7 +150,7 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Get the paragraph element or heading element that contains this text.
-	 * 
+	 *
 	 * @return OdfElement
 	 */
 	public OdfElement getContainerElement() {
@@ -165,7 +163,7 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Get the start index of the text content of its container element.
-	 * 
+	 *
 	 * @return index the start index of the text content of its container
 	 *         element
 	 */
@@ -176,7 +174,7 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Get the text content of this <code>TextSelection</code>.
-	 * 
+	 *
 	 * @return text the text content
 	 */
 	public String getText() {
@@ -188,7 +186,7 @@ public class TextSelection extends Selection {
 	 * same container element will be updated automatically because the start
 	 * index of the following selections will be changed when the previous
 	 * selection has been deleted.
-	 * 
+	 *
 	 * @throws InvalidNavigationException
 	 *             if the selection is unavailable.
 	 */
@@ -206,7 +204,7 @@ public class TextSelection extends Selection {
 	/**
 	 * Apply a style to the selection so that the text style of this selection
 	 * will append the specified style.
-	 * 
+	 *
 	 * @param style
 	 *            the style can be from the current document or user defined
 	 * @throws InvalidNavigationException
@@ -228,7 +226,7 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Replace the text content of selection with a new string.
-	 * 
+	 *
 	 * @param newText
 	 *            the replace text String
 	 * @throws InvalidNavigationException
@@ -252,13 +250,13 @@ public class TextSelection extends Selection {
 		SelectionManager.refresh(getContainerElement(), offset, index + getText().length());
 		mMatchedText = newText;
 	}
-	
+
 	/**
 	 * Replace the text content of selection with a new Table.
-	 * 
+	 *
 	 * @param newTable
 	 *            the replace Table
-	 * @return 
+	 * @return
 	 * @throws InvalidNavigationException
 	 *             if the selection is unavailable.
 	 * @return the new Table in the TextDocument
@@ -272,10 +270,10 @@ public class TextSelection extends Selection {
 	}
 	/**
 	 * Replace the text content of selection with a new Image.
-	 * 
+	 *
 	 * @param newImage
 	 *            the replace Image
-	 * @return 
+	 * @return
 	 * @throws InvalidNavigationException
 	 *             if the selection is unavailable.
 	 * @return the new Image in the TextDocument,the image name is set to "replace" + System.currentTimeMillis(), please update the name to others by yourself.
@@ -289,7 +287,7 @@ public class TextSelection extends Selection {
 	}
 	/**
 	 * Replace the text content of selection with a new Image.
-	 * 
+	 *
 	 * @param imageUri
 	 *            the replace Image URI
 	 * @throws InvalidNavigationException
@@ -305,12 +303,12 @@ public class TextSelection extends Selection {
 	}
 	/**
 	 * Replace the content with a Field
-	 * 
+	 *
 	 * @param orgField
 	 *            the reference Field to replace.
      * @throws InvalidNavigationException
-	 *             if the selection is unavailable.   
-	 * @return the created field.         
+	 *             if the selection is unavailable.
+	 * @return the created field.
 	 */
 	public Field replaceWith(Field orgField) throws InvalidNavigationException {
 		if (validate() == false) {
@@ -320,10 +318,10 @@ public class TextSelection extends Selection {
 		OdfElement parentElement = getContainerElement();
 		Paragraph orgparagraph = Paragraph.getInstanceof((TextParagraphElementBase) parentElement);
 		TextDocument document = (TextDocument) orgparagraph.getOwnerDocument();
-		
+
 		FieldSelection nextFieldSelection=new FieldSelection(this);
 		FieldType fieldType = orgField.getFieldType();
-	
+
 		switch (fieldType) {
 		case DATE_FIELD:
 			newfield=nextFieldSelection.replaceWithSimpleField(fieldType);
@@ -408,15 +406,15 @@ public class TextSelection extends Selection {
 		}
 		return newfield;
 	}
-	
+
 	/**
 	 * Replace the content with a paragraph, the paragraph can be in the same TextDocument or in a different Document.
-	 * 
+	 *
 	 * @param newParagraph
 	 *            the reference paragraph to replace.
      * @throws InvalidNavigationException
-	 *             if the selection is unavailable.   
-	 * @return the replaced Paragraph.             
+	 *             if the selection is unavailable.
+	 * @return the replaced Paragraph.
 	 */
 	public Paragraph replaceWith(Paragraph newParagraph) throws InvalidNavigationException {
 		if (validate() == false) {
@@ -428,10 +426,10 @@ public class TextSelection extends Selection {
 	/**
 	 * Replace the content with a TextDocument with Styles.
 	 * Note: You need cache the TextNavigation.nextSelection item because after
-	 * you replace currtenTextSelection with TextDocument, TextNavigation.nextSelection will search from the inserted Content, 
+	 * you replace currtenTextSelection with TextDocument, TextNavigation.nextSelection will search from the inserted Content,
 	 * it will make you into a loop if the Search keyword also can be found in the new inserted Content.
 	 * </p>
-	 * The right way to use this replaceWithTextDocument(TextDocument textDocument) method should like this: 
+	 * The right way to use this replaceWithTextDocument(TextDocument textDocument) method should like this:
 	 * <Code>
 	 * <p>	search = new TextNavigation("SIMPLE", doc);    </p>
 	 * <p>	TextSelection currtenTextSelection,nextTextSelection=null;</p>
@@ -458,10 +456,10 @@ public class TextSelection extends Selection {
 	 * <p>			}</p>
 	 * <p>		}</p>
 	 * </Code>
-	 * 
+	 *
 	 * @param newTextDocument
 	 *            the reference TextDocument to replace.
-	 * @throws InvalidNavigationException 
+	 * @throws InvalidNavigationException
 	 */
 	public void replaceWith(TextDocument newTextDocument) throws InvalidNavigationException{
 		if (validate() == false) {
@@ -476,7 +474,7 @@ public class TextSelection extends Selection {
 	}
 	/**
 	 * Create a span element for this text selection.
-	 * 
+	 *
 	 * @return the created text span element for this selection
 	 * @throws InvalidNavigationException
 	 *             if the selection is unavailable.
@@ -502,7 +500,7 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Paste this selection just before a specific selection.
-	 * 
+	 *
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
@@ -529,7 +527,7 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Paste this selection just after a specific selection.
-	 * 
+	 *
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
@@ -562,7 +560,7 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Add a hypertext reference to the selection.
-	 * 
+	 *
 	 * @param url
 	 *            the URL of this hypertext reference
 	 * @throws InvalidNavigationException
@@ -577,10 +575,10 @@ public class TextSelection extends Selection {
 		int index = mIndexInContainer;
 		addHref(index, leftLength, parentElement, url.toString());
 	}
-	
+
 	/**
 	 * Add a comment to the selection.
-	 * 
+	 *
 	 * @param content
 	 *            the content of this comment.
 	 * @param creator
@@ -633,12 +631,12 @@ public class TextSelection extends Selection {
 		int offset = content.length() + 1 + dcDate.length() + 1 + creator.length();
 		SelectionManager.refresh(getContainerElement(), offset, getIndex());
 	}
-	
+
 	/**
 	 * return a String Object representing this selection value the text content
 	 * of the selection, start index in the container element and the text
 	 * content of the container element will be provided.
-	 * 
+	 *
 	 * @return a String representation of the value of this
 	 *         <code>TextSelection</code>
 	 */
@@ -989,6 +987,10 @@ public class TextSelection extends Selection {
 					} else if (node.getLocalName().equals("line-break") || node.getLocalName().equals("tab")) {
 						fromIndex = 0;
 						leftLength--;
+						Node nodeMerker = node.getNextSibling();
+						pNode.removeChild(node);
+						node = nodeMerker;
+						continue;
 					} else {
 						delete(fromIndex, leftLength, node);
 						int length = (fromIndex + leftLength) - nodeLength;
@@ -1109,7 +1111,7 @@ public class TextSelection extends Selection {
 	/*
 	 * Get a map containing text properties of the specified styleable
 	 * <code>element</code>.
-	 * 
+	 *
 	 * @return a map of text properties.
 	 */
 	private Map<OdfStyleProperty, String> getTextStyleProperties(OdfStylableElement element) {
@@ -1144,7 +1146,7 @@ public class TextSelection extends Selection {
 	 * Get a map containing text properties of the specified styleable
 	 * <code>element</code>. The map will also include any properties set by
 	 * parent styles.
-	 * 
+	 *
 	 * @return a map of text properties.
 	 */
 	private Map<OdfStyleProperty, String> getTextStylePropertiesDeep(OdfStylableElement element) {
@@ -1176,7 +1178,7 @@ public class TextSelection extends Selection {
 
 	/*
 	 * Validate if the <code>Selection</code> is still available.
-	 * 
+	 *
 	 * @return true if the selection is available; false if the
 	 * <code>Selection</code> is not available.
 	 */

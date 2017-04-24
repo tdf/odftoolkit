@@ -150,5 +150,84 @@ public class SpanTest {
 		}
 
 	}
+
+	@Test
+	public void testRemoveTextContentLb() {
+		try {
+
+			TextDocument doc = TextDocument.newTextDocument();
+
+			Iterator<Paragraph> paraA = doc.getParagraphIterator();
+			while (paraA.hasNext()) {
+				Paragraph pp = paraA.next();
+				doc.removeParagraph(pp);
+			}
+
+			Paragraph para = doc.addParagraph("This is a beforelb\nafterlb paragraph!");
+
+			System.out.println(para.getTextContent());
+
+			TextNavigation navigation = new TextNavigation("beforelb\nafterlb", doc);
+			TextSelection sel = (TextSelection) navigation.nextSelection();
+			Span span = Span.newSpan(sel);
+
+			span.removeTextContent();
+			boolean flag = false;
+			Iterator<Paragraph> parai = doc.getParagraphIterator();
+			while (parai.hasNext()) {
+				Paragraph pp = parai.next();
+				System.out.println(pp.getTextContent());
+				if ("This is a  paragraph!".equals(pp.getTextContent())) {
+					flag = true;
+				}
+			}
+			Assert.assertTrue("Linebreak is not removed from paragraph!", flag);
+
+		} catch (Exception e) {
+			Logger.getLogger(SpanTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail();
+		}
+
+	}
+
+	@Test
+	public void testRemoveTextContentTab() {
+		try {
+
+			TextDocument doc = TextDocument.newTextDocument();
+
+			Iterator<Paragraph> paraA = doc.getParagraphIterator();
+			while (paraA.hasNext()) {
+				Paragraph pp = paraA.next();
+				doc.removeParagraph(pp);
+			}
+
+			Paragraph para = doc.addParagraph("This is a beforetab\taftertab paragraph!");
+
+			System.out.println(para.getTextContent());
+
+			TextNavigation navigation = new TextNavigation("beforetab\taftertab", doc);
+			TextSelection sel = (TextSelection) navigation.nextSelection();
+			Span span = Span.newSpan(sel);
+
+			span.removeTextContent();
+			boolean flag = false;
+			Iterator<Paragraph> parai = doc.getParagraphIterator();
+			while (parai.hasNext()) {
+				Paragraph pp = parai.next();
+				System.out.println(pp.getTextContent());
+				if ("This is a  paragraph!".equals(pp.getTextContent())) {
+					flag = true;
+				}
+			}
+			Assert.assertTrue("Tabulator is not removed from paragraph!", flag);
+
+		} catch (Exception e) {
+			Logger.getLogger(SpanTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail();
+		}
+
+	}
+
 	
 }
