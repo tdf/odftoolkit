@@ -27,10 +27,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.odftoolkit.odfdom.pkg.rdfa.Util;
+
 
 /** Test utility class providing resources for the test in- and output */
 public final class ResourceUtilities {
@@ -65,7 +65,7 @@ public final class ResourceUtilities {
 	public static URI getURI(String relativeFilePath) throws URISyntaxException {
 		String filePath = "file:" + ResourceUtilities.class.getClassLoader().getResource(relativeFilePath).getPath();
 		filePath = Util.toExternalForm(new URI(filePath));
-		return new URI(filePath);		
+		return new URI(filePath);
 	}
 
 	/** The relative path of the test file will be used to determine an absolute
@@ -100,7 +100,7 @@ public final class ResourceUtilities {
 		return new File(filepath);
 	}
 
-	/** 
+	/**
 	 * @return the absolute path of the test output folder, which is usually <code>target/test-classes/</code>.
 	 */
 	public static String getTestOutputFolder() {
@@ -110,6 +110,12 @@ public final class ResourceUtilities {
 		} catch (URISyntaxException ex) {
 			Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return testFolder;		
+		return testFolder;
+	}
+
+	public static File getTempTestDirectory() {
+		File tempDir = new File(ResourceUtilities.getTestOutputFolder() + "temp");
+		tempDir.mkdir(); //if it already exist no problem
+ 		return tempDir;
 	}
 }

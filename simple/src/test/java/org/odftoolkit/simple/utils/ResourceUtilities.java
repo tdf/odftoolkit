@@ -31,6 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.odftoolkit.odfdom.pkg.rdfa.Util;
 
+
 /** Test utility class providing resources for the test in- and output */
 public final class ResourceUtilities {
 	private ResourceUtilities() {
@@ -39,7 +40,7 @@ public final class ResourceUtilities {
 	/**
 	 * The relative path of the test file will be resolved and the absolute will
 	 * be returned
-	 * 
+	 *
 	 * @param relativeFilePath
 	 *            Path of the test resource relative to
 	 *            <code>src/test/resource/</code>.
@@ -64,7 +65,7 @@ public final class ResourceUtilities {
 	/**
 	 * The relative path of the test file will be resolved and the absolute will
 	 * be returned
-	 * 
+	 *
 	 * @param relativeFilePath
 	 *            Path of the test resource relative to
 	 *            <code>src/test/resource/</code>.
@@ -81,7 +82,7 @@ public final class ResourceUtilities {
 	/**
 	 * The relative path of the test file will be used to determine an absolute
 	 * path to a temporary directory in the output directory.
-	 * 
+	 *
 	 * @param relativeFilePath
 	 *            Path of the test resource relative to
 	 *            <code>src/test/resource/</code>.
@@ -96,7 +97,7 @@ public final class ResourceUtilities {
 	/**
 	 * The Input of the test file will be resolved and the absolute will be
 	 * returned
-	 * 
+	 *
 	 * @param relativeFilePath
 	 *            Path of the test resource relative to
 	 *            <code>src/test/resource/</code>.
@@ -109,7 +110,7 @@ public final class ResourceUtilities {
 	/**
 	 * Relative to the test output directory a test file will be returned
 	 * dependent on the relativeFilePath provided.
-	 * 
+	 *
 	 * @param relativeFilePath
 	 *            Path of the test output resource relative to
 	 *            <code>target/test-classes/</code>.
@@ -137,5 +138,11 @@ public final class ResourceUtilities {
 			Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return testFolder;
+	}
+
+	public static File getTempTestDirectory() {
+		File tempDir = new File(ResourceUtilities.getTestOutputFolder() +"temp");
+		tempDir.mkdir(); //if it already exist no problem
+		return tempDir;
 	}
 }

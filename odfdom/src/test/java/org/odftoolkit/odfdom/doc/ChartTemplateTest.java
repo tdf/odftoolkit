@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -21,7 +21,6 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.io.File;
-
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -45,7 +44,7 @@ public class ChartTemplateTest {
 	@Test
 	public void testSavingAChartTemplate() throws Exception {
 		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_CHART_TEMPLATE));
-		File destination = File.createTempFile("odfdom-test", ".otc");
+		File destination = File.createTempFile("odfdom-test", ".otc", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again
@@ -62,7 +61,7 @@ public class ChartTemplateTest {
 
 		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getMediaTypeString(),
 				document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("odfdom-test", ".otc");
+		File destination = File.createTempFile("odfdom-test", ".otc", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again

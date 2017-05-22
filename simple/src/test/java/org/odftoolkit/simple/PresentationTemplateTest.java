@@ -24,6 +24,8 @@ import java.io.File;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.simple.utils.ResourceUtilities;
+
 
 /**
  * Test class for template aspects of presentations.
@@ -42,7 +44,7 @@ public class PresentationTemplateTest {
 	@Test
 	public void testSavingAPresentationTemplate() throws Exception {
 		Document document = Document.loadDocument(this.getClass().getResourceAsStream(TEST_PRESENTATION));
-		File destination = File.createTempFile("simple-test", ".otp");
+		File destination = File.createTempFile("simple-test", ".otp", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again
@@ -56,7 +58,7 @@ public class PresentationTemplateTest {
 		Assert.assertEquals(Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
 		Assert.assertEquals(Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
 
-		File destination = File.createTempFile("simple-test", ".otp");
+		File destination = File.createTempFile("simple-test", ".otp", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again

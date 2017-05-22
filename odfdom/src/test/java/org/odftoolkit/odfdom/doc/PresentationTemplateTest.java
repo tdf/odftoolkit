@@ -21,9 +21,9 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.io.File;
-
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**
  * Test class for template aspects of presentations.
@@ -42,7 +42,7 @@ public class PresentationTemplateTest {
 	@Test
 	public void testSavingAPresentationTemplate() throws Exception {
 		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_PRESENTATION));
-		File destination = File.createTempFile("odfdom-test", ".otp");
+		File destination = File.createTempFile("odfdom-test", ".otp", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again
@@ -56,7 +56,7 @@ public class PresentationTemplateTest {
 		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
 		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
 
-		File destination = File.createTempFile("odfdom-test", ".otp");
+		File destination = File.createTempFile("odfdom-test", ".otp", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again

@@ -21,13 +21,13 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.io.File;
-
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**
  * Test class for template aspects of calc documents.
- * 
+ *
  * @author <a href="mailto:fhopf@odftoolkit.org">Florian Hopf</a>
  */
 public class TextTemplateTest {
@@ -44,7 +44,7 @@ public class TextTemplateTest {
 	@Test
 	public void testSavingATextTemplate() throws Exception {
 		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_TEXT_TEMPLATE));
-		File destination = File.createTempFile("odfdom-test", ".ott");
+		File destination = File.createTempFile("odfdom-test", ".ott", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again
@@ -60,7 +60,7 @@ public class TextTemplateTest {
 				document.getMediaTypeString());
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
 				document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("odfdom-test", ".ott");
+		File destination = File.createTempFile("odfdom-test", ".ott", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again
@@ -77,7 +77,7 @@ public class TextTemplateTest {
 				document.getMediaTypeString());
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_MASTER.getMediaTypeString(),
 				document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("odfdom-test", ".ott");
+		File destination = File.createTempFile("odfdom-test", ".ott", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again
@@ -94,7 +94,7 @@ public class TextTemplateTest {
 				document.getMediaTypeString());
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_WEB.getMediaTypeString(),
 				document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("odfdom-test", ".ott");
+		File destination = File.createTempFile("odfdom-test", ".ott", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again

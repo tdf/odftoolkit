@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -20,15 +20,11 @@ under the License.
 package org.odftoolkit.simple.meta;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import junit.framework.Assert;
-
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute.Value;
@@ -224,7 +220,7 @@ public class OfficeMetaTest {
 		fMetadata.setUserDefinedData(names.get(2), Value.BOOLEAN.toString(),
 				"false");
 		writeAndReload();
-                
+
 		// test get
 		Assert.assertEquals(names, fMetadata.getUserDefinedDataNames());
 		Assert.assertEquals(Value.STRING.toString(), fMetadata.getUserDefinedDataType(names.get(0)));
@@ -269,7 +265,7 @@ public class OfficeMetaTest {
 		Assert.assertNull(fMetadata.getPrintDate());
 		Assert.assertNotNull(fMetadata.getUserDefinedDataNames());
 	}
-	
+
 	@Test
 	public void testReadDocumentMeta() throws Exception {
 		// create a new empty document
@@ -288,9 +284,9 @@ public class OfficeMetaTest {
 		Assert.assertNotNull(meta.getLanguage());
 		textDoc.close();
 	}
-        
+
     private void writeAndReload() throws Exception {
-        File persistedDocument = File.createTempFile(getClass().getName(), ".odt");
+        File persistedDocument = File.createTempFile(getClass().getName(), ".odt", ResourceUtilities.getTempTestDirectory());
         persistedDocument.deleteOnExit();
 	doc.save(persistedDocument);
 	Thread.sleep(100);
@@ -298,5 +294,5 @@ public class OfficeMetaTest {
 	metadom = doc.getMetaDom();
 	fMetadata = new Meta(metadom);
     }
-        
+
 }

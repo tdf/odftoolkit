@@ -21,9 +21,9 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.io.File;
-
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**
  * Test class for template aspects of graphics.
@@ -42,7 +42,7 @@ public class GraphicsTemplateTest {
 	@Test
 	public void testSavingAGraphicsTemplate() throws Exception {
 		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_GRAPHICS_TEMPLATE));
-		File destination = File.createTempFile("odfdom-test", ".otg");
+		File destination = File.createTempFile("odfdom-test", ".otg", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again
@@ -55,7 +55,7 @@ public class GraphicsTemplateTest {
 		OdfDocument document = OdfGraphicsDocument.newGraphicsTemplateDocument();
 		Assert.assertEquals(OdfDocument.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
 		Assert.assertEquals(OdfDocument.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("odfdom-test", ".otg");
+		File destination = File.createTempFile("odfdom-test", ".otg", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again

@@ -21,9 +21,9 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.io.File;
-
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**
  * Test class for template aspects of calc documents.
@@ -42,7 +42,7 @@ public class SpreadsheetTemplateTest {
 	@Test
 	public void testSavingASpreadsheetTemplate() throws Exception {
 		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_SPREADSHEET_TEMPLATE));
-		File destination = File.createTempFile("odfdom-test", ".ots");
+		File destination = File.createTempFile("odfdom-test", ".ots", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again
@@ -55,7 +55,7 @@ public class SpreadsheetTemplateTest {
 		OdfDocument document = OdfSpreadsheetDocument.newSpreadsheetTemplateDocument();
 		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
 		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("odfdom-test", ".ots");
+		File destination = File.createTempFile("odfdom-test", ".ots", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again

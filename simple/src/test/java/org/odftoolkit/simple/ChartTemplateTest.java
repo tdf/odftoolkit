@@ -26,6 +26,8 @@ import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.simple.utils.ResourceUtilities;
+
 
 /**
  * Test class for template aspects of chart.
@@ -45,7 +47,7 @@ public class ChartTemplateTest {
 	@Test
 	public void testSavingAChartTemplate() throws Exception {
 		Document document = Document.loadDocument(this.getClass().getResourceAsStream(TEST_CHART_TEMPLATE));
-		File destination = File.createTempFile("simple-test", ".otc");
+		File destination = File.createTempFile("simple-test", ".otc", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again
@@ -62,7 +64,7 @@ public class ChartTemplateTest {
 
 		Assert.assertEquals(Document.OdfMediaType.CHART_TEMPLATE.getMediaTypeString(),
 				document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("simple-test", ".otc");
+		File destination = File.createTempFile("simple-test", ".otc", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 
 		// load again
