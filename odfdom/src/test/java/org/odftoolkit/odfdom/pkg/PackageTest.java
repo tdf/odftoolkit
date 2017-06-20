@@ -21,11 +21,14 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.pkg;
 
+import static org.junit.Assert.fail;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.HashMap;
@@ -35,12 +38,14 @@ import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
+
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
+
 import junit.framework.Assert;
-import static org.junit.Assert.fail;
+
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfPresentationDocument;
@@ -59,6 +64,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class PackageTest {
 
+	
 	private static final Logger LOG = Logger.getLogger(PackageTest.class.getName());
 	private static final String mImagePath = "src/main/javadoc/doc-files/";
 	private static final String mImageName = "ODFDOM-Layered-Model.png";
@@ -75,7 +81,8 @@ public class PackageTest {
 	private static final String TARGET_STEP_1 = "PackageLoadTestStep1.ods";
 	private static final String TARGET_STEP_2 = "PackageLoadTestStep2.ods";
 	private static final String TARGET_STEP_3 = "PackageLoadTestStep3.ods";
-
+	private static final String TEST_STYLE_STYLE_ATTRIBUTE_ODT = "TestStyleStyleAttribute.odt";
+	
 	public PackageTest() {
 	}
 
@@ -247,7 +254,7 @@ public class PackageTest {
 		}
 
 	}
-
+	
 	@Test
 	public void validationTestDefault() {
 		try {
@@ -397,4 +404,16 @@ public class PackageTest {
 			Assert.fail();
 		}
 	}
-}
+
+	@Test
+	public void testLoadingDocumentWithStyleStyleAttribute() {
+		try {
+			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_STYLE_STYLE_ATTRIBUTE_ODT));
+			OdfElement contentRoot = doc.getContentRoot();			
+		} catch (Throwable t) {
+			Logger.getLogger(PackageTest.class.getName()).log(Level.SEVERE, t.getMessage(), t);
+			Assert.fail();
+		}
+	}
+	
+} 

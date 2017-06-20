@@ -3,7 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -34,7 +34,6 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.w3c.dom.DOMException;
 
 /** This factory determines what elements are being used in the DOC layer
@@ -46,7 +45,7 @@ import org.w3c.dom.DOMException;
  *  For example, a user might want to create a table always with a certain style or default data and
  *  might want to overwrite the mapping for <code>{odf.element table:table}</code>, that a different
  *  class instead of <code>OdfTable</code> is being used.
- * 
+ *
  */
 public class OdfXMLFactory {
 
@@ -90,7 +89,7 @@ public class OdfXMLFactory {
 	}
 
 	/** Mapping an ODF element to a new Java DOM element class.
-	 *  Note: There is a default class for each element being generated from the latest ODF schema 
+	 *  Note: There is a default class for each element being generated from the latest ODF schema
 	 */
 	private static void setOdfElementClass(OdfName odfName, Class className) {
 		mElementTypes.put(odfName, className);
@@ -106,27 +105,31 @@ public class OdfXMLFactory {
 	 * @param odfName the name of the ODF attribute the desired DOM class should represent.
 	 * @return the Java DOM attribute class to be mapped to a certain ODF attribute. */
 	private static Class getOdfAttributeClass(OdfName odfName) {
-		return getOdfNodeClass(odfName, ATTRIBUTE_PACKAGE_NAME, mAttributeTypes);
+		return getOdfNodeClass(odfName, ATTRIBUTE_PACKAGE_NAME, mAttributeTypes, true);
 	}
 
 	/**
 	 * @param odfName the name of the ODF element the desired DOM class should represent.
 	 * @return the Java DOM element class to be mapped to a certain ODF element. */
 	private static Class getOdfElementClass(OdfName odfName) {
-		return getOdfNodeClass(odfName, ELEMENT_PACKAGE_NAME, mElementTypes);
+		return getOdfNodeClass(odfName, ELEMENT_PACKAGE_NAME, mElementTypes, false);
 	}
 
-	private static Class getOdfNodeClass(OdfName odfName, String nodeType, Map<OdfName, Class> classCache) {
+	private static Class getOdfNodeClass(OdfName odfName, String nodeType, Map<OdfName, Class> classCache, boolean isAttribute) {
 		Class c = null;
 		String className = "";
 		c = classCache.get(odfName);
 		if (c == null) {
-			String prefix = odfName.getPrefix();
-			if (prefix != null && !(nodeType.equals(ATTRIBUTE_PACKAGE_NAME) && prefix.equals("xmlns"))) {
+        // Ignore looking for XML namespace attributes or ODF elements without prefix,
+        // as there are no typed ODF classes
+        // (NOTE: For any ODF node from the schema the ODF prefix would ALWAYS exist
+        // as there is a prefix normalization during the previous loading)
+        String prefix = odfName.getPrefix();
+		if (prefix != null && !(isAttribute && prefix.equals("xmlns"))) {
 				String qName = odfName.getQName();
 				String localName = odfName.getLocalName();
 				//judge whether the element need to load class from incubator package.
-				if (mIncubatorElements.contains(qName)) {
+				if (mIncubatorElements.contains(qName) && !isAttribute) {
 					//judge whether the element need to rename before find class name.
 					if (mElementRenames.containsKey(qName)) {
 						String renameName = mElementRenames.get(qName);
@@ -178,7 +181,7 @@ public class OdfXMLFactory {
 
 		return className.toString();
 	}
-	
+
 	private static String getOdfPKGNodeClassName(String prefix, String localName, String nodeType) {
 		StringBuilder className = new StringBuilder("org.odftoolkit.odfdom.pkg." + prefix + ".");
 		if (localName.indexOf(LOCAL_NAME_DELIMITER) != -1) {
@@ -192,7 +195,7 @@ public class OdfXMLFactory {
 		className.append(toUpperCaseFirstCharacter(nodeType));
 		return className.toString();
 	}
-	
+
 	private static String getOdfDOMNodeClassName(String prefix, String localName, String nodeType) {
 		StringBuilder className = new StringBuilder("org.odftoolkit.odfdom.dom." + nodeType + "." + prefix + ".");
 		className = className.append(toUpperCaseFirstCharacter(prefix));
