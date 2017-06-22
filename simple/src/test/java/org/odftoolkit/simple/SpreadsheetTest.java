@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -21,15 +21,13 @@ package org.odftoolkit.simple;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class SpreadsheetTest {
-	
+
 	private final static String TEST_FILE_NAME = "TestSpreadsheetTable.ods";
 
 	@Test
@@ -58,7 +56,21 @@ public class SpreadsheetTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
+	@Test
+	public void testGetActiveSheet() {
+		try {
+			SpreadsheetDocument document = SpreadsheetDocument.loadDocument(ResourceUtilities
+					.getTestResourceAsStream(TEST_FILE_NAME));
+			Table table = document.getActiveSheet();
+			Assert.assertEquals("Sheet2", table.getTableName());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Logger.getLogger(SpreadsheetTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+
 	@Test
 	public void testInsertSheet() {
 		try {
@@ -71,8 +83,8 @@ public class SpreadsheetTest {
 			Assert.assertEquals(1, newCount - oldCount);
 			table = document.insertSheet(document.getSheetByName("Sheet1"), 2);
 			Assert.assertEquals(table.getTableName(), document.getSheetByIndex(2).getTableName());
-			document.save(ResourceUtilities.newTestOutputFile("Output_"+TEST_FILE_NAME)); 
-			
+			document.save(ResourceUtilities.newTestOutputFile("Output_"+TEST_FILE_NAME));
+
 			//data table from difference document.
 			document = SpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_NAME));
 			Table sheet1 = document.getSheetByName("Sheet1");
@@ -85,7 +97,7 @@ public class SpreadsheetTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testAppendAndRemoveSheet() {
 		try {
@@ -96,14 +108,14 @@ public class SpreadsheetTest {
 			table = document.appendSheet(document.getSheetByName("Sheet1"), "Sheet5");
 			Assert.assertEquals("Sheet5", table.getTableName());
 			document.save(ResourceUtilities.newTestOutputFile("Output_"+TEST_FILE_NAME));
-			
+
 			//reload
 			document = SpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("Output_"+TEST_FILE_NAME));
 			document.removeSheet(4);
 			Assert.assertNull(document.getSheetByName("Sheet5"));
 			document.removeSheet(3);
 			Assert.assertNull(document.getSheetByName("Sheet4"));
-			
+
 			//data table from difference document.
 			document = SpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_NAME));
 			Table sheet1 = document.getSheetByName("Sheet1");

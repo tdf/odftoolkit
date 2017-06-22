@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -29,9 +29,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
@@ -44,6 +42,7 @@ import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberStyle;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.type.Color;
+import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.style.Border;
@@ -52,6 +51,7 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.FontStyle;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
+import org.odftoolkit.simple.style.StyleTypeDefinitions.SupportedLinearMeasure;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.TextLinePosition;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
 import org.odftoolkit.simple.text.Paragraph;
@@ -63,8 +63,6 @@ import org.odftoolkit.simple.text.list.NumberDecorator;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.odftoolkit.simple.Document;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.SupportedLinearMeasure;
 
 
 public class TableCellTest {
@@ -74,7 +72,7 @@ public class TableCellTest {
 	final static String SAMPLE_STYLE_SPREADSHEET = "TestSpreadsheetStyleTable";
 	final static String SAMPLE_TEXT = "TestTextTable";
 	static final String filename = "testGetCellAt.ods";
-	
+
 	SpreadsheetDocument odsdoc, odsstyle;
 	TextDocument odtdoc;
 	Table odsTable, odtTable;
@@ -303,7 +301,7 @@ public class TableCellTest {
 
 		Cell dcell = table.getCellByPosition(3, 2);
 		format = dcell.getFormatString();
-		Assert.assertEquals("MMM d, yy", format);
+		Assert.assertEquals("d. MMM yy", format);
 
 		dcell.setFormatString("yyyy-MM-dd");
 		displayvalue = dcell.getDisplayText();
@@ -581,7 +579,7 @@ public class TableCellTest {
 		fcell = table.getCellByPosition(columnindex, rowindex);
 		Assert.assertEquals(0, fcell.getDateValue().compareTo(expectedCalendar));
 	}
-	
+
 	@Test
 	public void testDateTimeValue() {
 		int rowindex = 7, columnindex = 7;
@@ -603,7 +601,7 @@ public class TableCellTest {
 		fcell = table.getCellByPosition(columnindex, rowindex);
 		Assert.assertEquals(expectedCalendar, fcell.getDateTimeValue());
 	}
-	
+
 
         @Test
         public void testGetFromEmptyDateValue() throws Exception {
@@ -612,7 +610,7 @@ public class TableCellTest {
             cell.setValueType(OfficeValueTypeAttribute.Value.DATE.toString());
             Assert.assertNull(cell.getDateValue());
         }
-        
+
         @Test
         public void testGetFromEmptyTimeValue() throws Exception {
             Table table = odsdoc.getTableByName("Sheet1");
@@ -1349,10 +1347,10 @@ public class TableCellTest {
 			final SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			final Table table = doc.addTable();
 			final String contentStr = "This is a long text content.";
-			
+
 			// basically the default font is of Arial type, so assume the default family
 			final String nfFamilyName = "Arial";
-			
+
 			if (isFontAvailable(nfFamilyName)) {
 				checkCellWidth(table.getCellByPosition(0, 0), null, 44.0977, contentStr);
 			}
@@ -1476,8 +1474,8 @@ public class TableCellTest {
 		}
 		Assert.assertEquals(node, null);
 	}
-	
-	
+
+
 	@Test
 	public void testSetHorizontalAlignment() {
 		try {
@@ -1487,17 +1485,17 @@ public class TableCellTest {
 			String right = cell1.getHorizontalAlignment();
 			Assert.assertEquals(null, right);
 			/**
-			 *The parameter can be "center", "end", "justify", "left", "right", or 
-			 * "start". Actually, "left" will be interpreted as "start", while "right" 
-             * will be interpreted as "end". If argument is null, the explicit 
-             * horizontal alignment setting is removed. 
+			 *The parameter can be "center", "end", "justify", "left", "right", or
+			 * "start". Actually, "left" will be interpreted as "start", while "right"
+             * will be interpreted as "end". If argument is null, the explicit
+             * horizontal alignment setting is removed.
 			 */
 			cell1.setHorizontalAlignment("left");
-			
+
 			//validate
 			String left = cell1.getHorizontalAlignment();
 			Assert.assertEquals("start", left);
-			
+
 			//save
 			//odsdoc.save(ResourceUtilities.newTestOutputFile("testTableCell.ods"));
 
@@ -1505,10 +1503,10 @@ public class TableCellTest {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testGetCountry() {
 		try {
@@ -1516,7 +1514,7 @@ public class TableCellTest {
 			borderbase.setLineStyle(StyleTypeDefinitions.LineType.DOUBLE);
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			Table table = doc.getTableByName("Sheet1");
-			
+
 			Cell cell = table.getCellByPosition(2, 2);
 
 			CellStyleHandler cellHandler = cell.getStyleHandler();
@@ -1524,17 +1522,17 @@ public class TableCellTest {
 			//validate
 			String country = cellHandler.getCountry(Document.ScriptType.CJK);
 			Assert.assertEquals("English", country);
-			
+
 			//save
 			doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testGetLanguage() {
 		try {
@@ -1542,7 +1540,7 @@ public class TableCellTest {
 			borderbase.setLineStyle(StyleTypeDefinitions.LineType.DOUBLE);
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			Table table = doc.getTableByName("Sheet1");
-			
+
 			Cell cell = table.getCellByPosition(2, 2);
 
 			CellStyleHandler cellHandler = cell.getStyleHandler();
@@ -1551,17 +1549,17 @@ public class TableCellTest {
 			String language = cellHandler.getLanguage(Document.ScriptType.WESTERN);
 			System.out.println(language);
 			Assert.assertEquals("English", language);
-			
+
 			//save
 			doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testSetColor() {
 		try {
@@ -1569,7 +1567,7 @@ public class TableCellTest {
 			borderbase.setLineStyle(StyleTypeDefinitions.LineType.DOUBLE);
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			Table table = doc.getTableByName("Sheet1");
-			
+
 			Cell cell = table.getCellByPosition(2, 2);
 
 			CellStyleHandler cellHandler = cell.getStyleHandler();
@@ -1577,17 +1575,17 @@ public class TableCellTest {
 			//validate
 			Color red = cellHandler.getBackgroundColor();
 			Assert.assertEquals(Color.RED.toString(), red.toString());
-			
+
 			//save
 			doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testSetBorder() {
 		Border borderbase = new Border(new Color("#00ccff"), 0.0701, 0.0008, 0.0346, SupportedLinearMeasure.IN);
@@ -1595,12 +1593,12 @@ public class TableCellTest {
 			SpreadsheetDocument doc = SpreadsheetDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream(filename));
 			Table table = doc.getTableByName("A");
-			
+
 			borderbase.setLinearMeasure(StyleTypeDefinitions.SupportedLinearMeasure.CM);
-			
+
 			Cell cell = table.getCellByPosition("A14");
 			cell.setBorders(CellBordersType.LEFT, borderbase);
-			
+
 
 			CellStyleHandler cellHandler = cell.getStyleHandler();
 			Border border = cellHandler.getBorder(CellBordersType.LEFT);
@@ -1612,9 +1610,9 @@ public class TableCellTest {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail();
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testIsTextWrapped() {
 		Border borderbase = new Border(new Color("#00ccff"), 0.0701, 0.0008, 0.0346, SupportedLinearMeasure.CM);
@@ -1629,13 +1627,13 @@ public class TableCellTest {
 			CellStyleHandler cellHandler = cell.getStyleHandler();
 			cellHandler.setTextWrapped(true);
 			Assert.assertTrue(cellHandler.isTextWrapped());
-			
+
 			//save
 			//doc.save(ResourceUtilities.newTestOutputFile("testSetWidth.ods"));
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail();
 		}
-		
+
 	}
 }

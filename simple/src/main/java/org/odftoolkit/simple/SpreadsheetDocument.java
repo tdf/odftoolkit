@@ -31,6 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.xpath.XPathConstants;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
@@ -265,6 +266,32 @@ public class SpreadsheetDocument extends Document implements ChartContainer {
      */
     public Table getSheetByName(String name) {
         return getTableByName(name);
+    }
+
+
+    /**
+     * Retrieves the active sheet of this document.
+     *
+     * @return the active sheet of this document. If active sheet doesn't exist, it returns <code>null</code>.
+     */
+    public Table getActiveSheet() {
+        try {
+            OdfSettingsDom settingsDom = getSettingsDom();
+            String activeSheetName = (String) settingsDom.getXPath().evaluate(
+                    "/office:document-settings/office:settings/config:config-item-set/config:config-item-map-indexed"
+                            + "/config:config-item-map-entry/config:config-item[@config:name='ActiveTable']",
+                    settingsDom,
+                    XPathConstants.STRING
+            );
+            Table table = getTableByName(activeSheetName);
+            if(table == null){
+                table = getSheetByIndex(0);
+            }
+            return table;
+        } catch (Exception e) {
+            Logger.getLogger(SpreadsheetDocument.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
     }
 
     /**
