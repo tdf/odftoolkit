@@ -127,4 +127,22 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
         Assert.assertTrue(output.contains("Fatal: ZIP entry 'mimetype': only DEFLATED entries can have EXT descriptor"));
         java.util.logging.Logger.getLogger(getClass().getName()).log(Level.INFO, "Test result:\n{0}", output);
     }
+
+    @Test
+    public void validateDocumentSignature() {
+        String output = "";
+        try {
+            // the manifest.xml is valid, but "META-INF/documentsignatures.xml"
+            // was erroneously reported as missing
+            String name = "good.odt";
+            output = doValidation(name, OdfVersion.V1_2, OdfValidatorMode.EXTENDED_CONFORMANCE);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            Assert.fail(t.toString());
+        }
+        Assert.assertFalse("Output of validateDocumentSignature(): " + output, output.contains("Error: The file 'META-INF/documentsignatures.xml' shall be listed in the 'META-INF/manifest.xml' file as it exists in the ODF package 'good.odt'"));
+        Assert.assertTrue("Output of validateDocumentSignature(): " + output, output.contains("Error: element \"document-signatures\" is missing \"version\" attribute"));
+        Assert.assertTrue("Output of validateDocumentSignature(): " + output, output.contains("good.odt:  Info: 1 errors, no warnings"));
+    }
+
 }

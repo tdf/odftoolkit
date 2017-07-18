@@ -502,7 +502,10 @@ public class OdfPackage implements Closeable {
 			String internalPath;
 			while (iter.hasNext()) {
 				internalPath = (String) iter.next();
-				if (!internalPath.endsWith(SLASH)) { // not for directories!
+				if (!internalPath.endsWith(SLASH) && // not for directories!
+					// The “META-INF/manifest.xml” file need not contain <manifest:file-entry> elements 4.3 whose manifest:full-path attribute 4.8.4 references files whose relative path start with "META-INF/".
+					!internalPath.startsWith("META-INF/"))
+				{
 					logValidationError(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, documentURL, internalPath);
 				}
 			}
