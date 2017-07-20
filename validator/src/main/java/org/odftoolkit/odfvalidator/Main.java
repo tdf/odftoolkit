@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -39,16 +39,16 @@ import java.util.Vector;
 public class Main {
 
     private static final String VERSION="1.1.4";
-    
+
     /** Creates a new instance of Main */
     public Main() {
     }
-    
+
     /**
      * @param aArgs the command line arguments
      */
     public static void main(String[] aArgs) {
-        
+
         String aConfigFileName = null;
         String aFilterFileName = null;
         String aStrictSchemaFileName = null;
@@ -215,11 +215,11 @@ public class Main {
             System.out.println( VERSION );
             return;
         }
-        
+
         try
         {
             // Print generator (does not require config file)
-            if( bPrintGenerator ) 
+            if( bPrintGenerator )
             {
                 MetaInformation aMetaInformation = new MetaInformation( System.out );
                 Iterator<String> aIter = aFileNames.iterator();
@@ -227,8 +227,10 @@ public class Main {
                     aMetaInformation.getInformation(aIter.next());
                 return;
             }
-            
-            // Read configuration
+
+            // Read configuration - by default aConfig is null, so the version
+            // will be read from the input file in
+            // ODFPackageValidator.getVersion() and config created based on that
             Configuration aConfig = null;
             if( aConfigFileName != null )
             {
@@ -260,7 +262,12 @@ public class Main {
                 }
             }
 
-            if( aConfig == null )
+            // if schema files specified, only use exactly those schema files
+            if (aConfig == null
+                && (   aStrictSchemaFileName != null
+                    || aSchemaFileName != null
+                    || aManifestSchemaFileName != null
+                    || aDSigSchemaFileName != null))
             {
                 aConfig = new Configuration();
             }
@@ -305,7 +312,7 @@ public class Main {
             System.out.println( "Validation aborted." );
         }
     }
-    
+
     private static void printUsage()
     {
         System.out.println( "usage: odfvalidator -g <odffiles>");

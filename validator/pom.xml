@@ -282,18 +282,6 @@
 				<configuration>
 					<archive>
 						<index>true</index>
-						<!--  No custom manifest worked, neither the below..
-							<index>true</index>
-							<manifest>
-								<addClasspath>true</addClasspath>
-								<odfdomName>ODFDOM Validator</odfdomName>
-								<odfdomVersion>${project.version}</odfdomVersion>
-								<odfdomWebsite>http://incubator.apache.org/odftoolkit/conformance/ODFValidator.html</odfdomWebsite>
-								<odfdomBuiltDate>${build.timestamp}</odfdomBuiltDate>
-								<odfdomSupportedOdfVersion>1.2</odfdomSupportedOdfVersion>
-								<mainClass>org.odftoolkit.odfvalidator.Main</mainClass>
-							</manifest>
-						</archive>-->
 						<manifestEntries>
 							<version>${project.version}</version>
 						</manifestEntries>
@@ -322,15 +310,12 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<!-- Explizit version required for fix on systemPropertyVariables -->
-				<version>2.15</version>
+				<artifactId>maven-surefire-plugin</artifactId>				
+				<version>2.20</version>
 				<configuration>
-					<systemPropertyVariables>
-						<odfdom.version>${project.version}</odfdom.version>
-						<odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
-						<org.odftoolkit.odfdom.validation>org.odftoolkit.odfdom.pkg.DefaultErrorHandler</org.odftoolkit.odfdom.validation>
-					</systemPropertyVariables>
+                    <excludes>                                        
+                        <exclude>**/*.java</exclude>
+                    </excludes>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -378,6 +363,29 @@
 					</excludes>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <includes>                                        
+                        <include>**/*.java</include>
+                    </includes> 
+					<systemPropertyVariables>
+						<odfvalidator.version>${project.version}</odfvalidator.version>
+						<org.odftoolkit.odfdom.validation>org.odftoolkit.odfdom.pkg.DefaultErrorHandler</org.odftoolkit.odfdom.validation>
+					</systemPropertyVariables>                                                       
+                </configuration>                
+                <executions>
+                    <execution>
+                        <id>failsafe-it</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>		            
 		</plugins>
 	</build>
 	<reporting>
@@ -413,7 +421,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.19.1</version>
+				<version>2.20</version>
 				<reportSets>
 					<reportSet>
 						<id>integration-tests</id>
@@ -452,56 +460,6 @@
 		<url>http://svn.apache.org/viewvc/incubator/odf/trunk/validator</url>
 	</scm>
 	<profiles>
-		<profile>
-			<id>integration-test</id>
-			<activation>
-				<property>
-					<name>integration-test</name>
-				</property>
-			</activation>
-			<build>
-				<defaultGoal>verify</defaultGoal>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-failsafe-plugin</artifactId>
-						<version>2.5</version>
-						<executions>
-							<execution>
-								<id>failsafe-it</id>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>integration-test</goal>
-									<goal>verify</goal>
-								</goals>
-								<configuration>
-									<classesDirectory>${basedir}/target/odfdom.jar</classesDirectory>
-									<systemPropertyVariables>
-										<testresourcefolder>performance</testresourcefolder>
-										<executetimes>1</executetimes>
-										<testflag>test</testflag>
-									</systemPropertyVariables>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<!-- Explizit version required for fix on systemPropertyVariables -->
-						<version>2.19.1</version>
-						<configuration>
-							<systemPropertyVariables>
-								<odfdom.version>${project.version}</odfdom.version>
-								<odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
-								<org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
-							</systemPropertyVariables>
-							<skip>true</skip>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
 		<!-- Profile for deploying to the Sonatype repository, which
   requires GPG signatures 
   see
