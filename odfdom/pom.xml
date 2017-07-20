@@ -132,9 +132,8 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<!-- Explizit version required for fix on systemPropertyVariables -->
-				<version>2.19.1</version>
+				<artifactId>maven-surefire-plugin</artifactId>				
+				<version>2.20</version>
 				<configuration>
 					<forkMode>pertest</forkMode>
 					<systemPropertyVariables>
@@ -173,7 +172,7 @@
 						<version>${project.version}</version>
 					</tagletArtifact>
 				</configuration>
-				<executions>
+				<executions> 
 					<execution>
 						<id>attach-javadocs</id>
 						<goals>
@@ -200,6 +199,27 @@
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
+					<archive>
+						<index>true</index>
+						<manifest>
+							<mainClass>org.odftoolkit.odfdom.JarManifest</mainClass>
+						</manifest>
+						<manifestEntries>
+							<version>${project.version}</version>
+						</manifestEntries>
+						<manifestSections>
+							<manifestSection>
+								<name>ODFDOM</name>
+								<manifestEntries>
+									<ODFDOM-Name>odfdom</ODFDOM-Name>
+									<ODFDOM-Version>${project.version}</ODFDOM-Version>
+									<ODFDOM-Website>http://incubator.apache.org/odftoolkit/odfdom/index.html</ODFDOM-Website>
+									<ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
+									<ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
+								</manifestEntries>
+							</manifestSection>
+						</manifestSections>
+					</archive>
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
@@ -228,6 +248,29 @@
 					</excludes>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <excludes>                                        
+                        <exclude>**/PerformanceIT.java</exclude>
+                    </excludes>
+					<systemPropertyVariables>
+						<odfdom.version>${project.version}</odfdom.version>
+						<org.odftoolkit.odfdom.validation>org.odftoolkit.odfdom.pkg.DefaultErrorHandler</org.odftoolkit.odfdom.validation>
+					</systemPropertyVariables>
+                </configuration>                
+                <executions>
+                    <execution>
+                        <id>failsafe-it</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>     
 		</plugins>
 	</build>
 	<reporting>
@@ -265,7 +308,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.19.1</version>
+				<version>2.20</version>
 				<reportSets>
 					<reportSet>
 						<id>integration-tests</id>
@@ -446,8 +489,15 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-failsafe-plugin</artifactId>
-						<version>2.19.1</version>
-						<executions>
+						<version>2.20</version>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <testresourcefolder>performance</testresourcefolder>
+                                <executetimes>1</executetimes>
+                                <testflag>test</testflag>
+                            </systemPropertyVariables>
+                        </configuration>
+                        <executions>
 							<execution>
 								<id>failsafe-it</id>
 								<phase>integration-test</phase>
@@ -455,29 +505,21 @@
 									<goal>integration-test</goal>
 									<goal>verify</goal>
 								</goals>
-								<configuration>
-									<classesDirectory>${basedir}/target/odfdom*.jar</classesDirectory>
-									<systemPropertyVariables>
-										<testresourcefolder>performance</testresourcefolder>
-										<executetimes>1</executetimes>
-										<testflag>test</testflag>
-									</systemPropertyVariables>
-								</configuration>
 							</execution>
 						</executions>
 					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<!-- Explizit version required for fix on systemPropertyVariables -->
-						<version>2.19.1</version>
+						<artifactId>maven-surefire-plugin</artifactId>						
+						<version>2.20</version>
 						<configuration>
 							<systemPropertyVariables>
 								<odfdom.version>${project.version}</odfdom.version>
 								<odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
 								<org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
 							</systemPropertyVariables>
-							<skip>true</skip>						</configuration>
+							<skip>true</skip>						
+                        </configuration>
 					</plugin>
 				</plugins>
 			</build>
