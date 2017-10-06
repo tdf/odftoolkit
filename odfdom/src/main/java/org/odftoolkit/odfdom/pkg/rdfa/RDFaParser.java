@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLOutputFactory;
@@ -34,11 +33,12 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
-
 import net.rootdev.javardfa.Constants;
+import net.rootdev.javardfa.ProfileCollector;
 import net.rootdev.javardfa.Setting;
 import net.rootdev.javardfa.literal.LiteralCollector;
-
+import net.rootdev.javardfa.uri.IRIResolver;
+import net.rootdev.javardfa.uri.URIExtractor10;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 
@@ -47,7 +47,7 @@ import org.xml.sax.Locator;
  *
  */
 class RDFaParser extends net.rootdev.javardfa.Parser {
-	
+
 	boolean ignore = false;
 
 	protected XMLEventFactory eventFactory;
@@ -60,7 +60,7 @@ class RDFaParser extends net.rootdev.javardfa.Parser {
 
 	protected RDFaParser(JenaSink sink, XMLOutputFactory outputFactory,
 			XMLEventFactory eventFactory, URIExtractor extractor) {
-		super(sink);
+		super(sink, outputFactory, eventFactory, new URIExtractor10(new IRIResolver()), ProfileCollector.EMPTY_COLLECTOR);
 		this.sink = sink;
 		this.eventFactory = eventFactory;
 		this.settings = EnumSet.noneOf(Setting.class);
@@ -116,7 +116,7 @@ class RDFaParser extends net.rootdev.javardfa.Parser {
 			throw new RuntimeException("Streaming issue", ex);
 		}
 	}
-	
+
 	protected void endRDFaElement(String arg0, String localname, String qname) {
 		if (localname.equals("bookmark-start")) {
 			ignore = false;
@@ -132,7 +132,7 @@ class RDFaParser extends net.rootdev.javardfa.Parser {
 		if (!literalCollector.isCollectingXML())
 			context = context.parent;
 	}
-	
+
 	protected void writeCharacters(String value) {
 		if (!ignore) {
 			if (literalCollector.isCollecting()) {
@@ -141,11 +141,11 @@ class RDFaParser extends net.rootdev.javardfa.Parser {
 			}
 		}
 	}
-	
-	/** 
+
+	/**
 	 * Set the base uri of the DOM.
 	 */
-	public void setBase(String base) {	
+	public void setBase(String base) {
 		this.context = new EvalContext(base);
 		sink.setBase(context.getBase());
 	}
@@ -202,7 +202,7 @@ class RDFaParser extends net.rootdev.javardfa.Parser {
 		}
 		if (getAttributeByName(element, Constants.rev) == null
 				&& getAttributeByName(element, Constants.rel) == null) {
-			Attribute nSubj = findAttribute(element, Constants.about);	
+			Attribute nSubj = findAttribute(element, Constants.about);
 			if (nSubj != null) {
 				newSubject = extractor.getURI(element, nSubj, context);
 			}
