@@ -34,6 +34,9 @@ class ForeignContentFilter extends XMLFilterImpl {
 
     private static final String OFFICE_NAMESPACE_URI = OdfDocumentNamespace.OFFICE.getUri();
     private static final String TEXT_NAMESPACE_URI = OdfDocumentNamespace.TEXT.getUri();
+    private static final String DRAW_NAMESPACE_URI = OdfDocumentNamespace.DRAW.getUri();
+    private static final String DR3D_NAMESPACE_URI = OdfDocumentNamespace.DR3D.getUri();
+    private static final String PRESENTATION_NAMESPACE_URI = OdfDocumentNamespace.PRESENTATION.getUri();
 
     private static final String H = "h";
     private static final String P = "p";
@@ -163,7 +166,65 @@ class ForeignContentFilter extends XMLFilterImpl {
             }
 
             boolean bParagraphAncestor = hasParagraphAncestorElement();
-            bParagraphAncestor |= ((aLocalName.equals(P) || aLocalName.equals(H)) && aUri.equals(TEXT_NAMESPACE_URI));
+            if ((aLocalName.equals(P) || aLocalName.equals(H)) && aUri.equals(TEXT_NAMESPACE_URI))
+                bParagraphAncestor = true;
+            else if ((aUri.equals(TEXT_NAMESPACE_URI) && (
+                       aLocalName.equals("s")
+                    || aLocalName.equals("tab")
+                    || aLocalName.equals("line-break")
+                    || aLocalName.equals("soft-page-break")
+                    || aLocalName.equals("bookmark")
+                    || aLocalName.equals("bookmark-start")
+                    || aLocalName.equals("bookmark-end")
+                    || aLocalName.equals("reference-mark")
+                    || aLocalName.equals("reference-mark-start")
+                    || aLocalName.equals("reference-mark-end")
+                    || aLocalName.equals("note")
+                    || aLocalName.equals("change")
+                    || aLocalName.equals("change-start")
+                    || aLocalName.equals("change-end")
+                    || aLocalName.equals("toc-mark")
+                    || aLocalName.equals("toc-mark-start")
+                    || aLocalName.equals("toc-mark-end")
+                    || aLocalName.equals("alphabetical-index-mark")
+                    || aLocalName.equals("alphabetical-index-mark-start")
+                    || aLocalName.equals("alphabetical-index-mark-end")
+                    || aLocalName.equals("user-index-mark")
+                    || aLocalName.equals("user-index-mark-start")
+                    || aLocalName.equals("user-index-mark-end")))
+                || (aUri.equals(OFFICE_NAMESPACE_URI) && (
+                       aLocalName.equals("annotation")
+                    || aLocalName.equals("annotation-end")))
+                || (aUri.equals(DRAW_NAMESPACE_URI) && (
+                       aLocalName.equals("a")
+                    || aLocalName.equals("rect")
+                    || aLocalName.equals("line")
+                    || aLocalName.equals("polyline")
+                    || aLocalName.equals("polygon")
+                    || aLocalName.equals("regular-polygon")
+                    || aLocalName.equals("path")
+                    || aLocalName.equals("circle")
+                    || aLocalName.equals("g")
+                    || aLocalName.equals("page-thumbnail")
+                    || aLocalName.equals("frame")
+                    || aLocalName.equals("measure")
+                    || aLocalName.equals("caption")
+                    || aLocalName.equals("connector")
+                    || aLocalName.equals("control")
+                    || aLocalName.equals("custom-shape")))
+                || (aUri.equals(DR3D_NAMESPACE_URI) && (
+                       aLocalName.equals("scene")))
+                || (aUri.equals(PRESENTATION_NAMESPACE_URI) && (
+                       aLocalName.equals("header")
+                    || aLocalName.equals("footer")
+                    || aLocalName.equals("date-time"))))
+            {
+                // elements that do not contain character data - by ODF 1.2
+                // part 1 3.17, the character data in foreign elements
+                // below these should be ignored by default
+                bParagraphAncestor = false;
+            }
+
             m_aParagraphAncestorElements.add(bParagraphAncestor);
 
             super.startElement(aUri, aLocalName, aQName, aAtts);
