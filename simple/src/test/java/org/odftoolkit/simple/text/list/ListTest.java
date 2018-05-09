@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -22,9 +22,7 @@ package org.odftoolkit.simple.text.list;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.table.Cell;
@@ -383,7 +381,128 @@ public class ListTest {
 			Assert.assertEquals(ListType.NUMBER, outLineList.getType());
 			outLineList.setDecorator(imageDecorator);
 			Assert.assertEquals(ListType.IMAGE, outLineList.getType());
-			doc.save(ResourceUtilities.getTestOutput("ListOutput.odt"));
+			doc.save(ResourceUtilities.newTestOutputFile("ListOutput.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(ListTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+
+
+	@Test
+	public void testSetExtendedNumberedListDecorator() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+
+			String[] subItemContents = { "sub list item 1", "sub list item 2", "sub list item 3" };
+
+			doc.newParagraph(" ");
+			doc.newParagraph("Alpha lower List Example:");
+			List alphaLwrList = doc.addList(new NumberedAlphaLowerDecorator(doc));
+			alphaLwrList.setHeader("Alpha lower List");
+			for (String listitem : subItemContents)
+			{
+			    alphaLwrList.addItem(listitem);
+			}
+			Assert.assertEquals(ListType.NUMBER, alphaLwrList.getType());
+
+			doc.newParagraph(" ");
+			doc.newParagraph("Alpha upper List Example:");
+			List alphaUprList = doc.addList(new NumberedAlphaUpperDecorator(doc));
+			alphaUprList.setHeader("Alpha upper List");
+			for (String listitem : subItemContents)
+			{
+			    alphaUprList.addItem(listitem);
+			}
+
+			Assert.assertEquals(ListType.NUMBER, alphaUprList.getType());
+
+
+			doc.newParagraph(" ");
+			doc.newParagraph("Greek lower List Example:");
+			List greekLwrList = doc.addList(new NumberedGreekLowerDecorator(doc));
+			greekLwrList.setHeader("Greek lower List");
+			for (String listitem : subItemContents)
+			{
+			    greekLwrList.addItem(listitem);
+			}
+
+			Assert.assertEquals(ListType.NUMBER, greekLwrList.getType());
+
+
+			doc.newParagraph(" ");
+			doc.newParagraph("Roman lower List Example:");
+			List romanLwrList = doc.addList(new NumberedRomanLowerDecorator(doc));
+			romanLwrList.setHeader("Roman lower List");
+			for (String listitem : subItemContents)
+			{
+			    romanLwrList.addItem(listitem);
+			}
+
+			Assert.assertEquals(ListType.NUMBER, romanLwrList.getType());
+
+
+			doc.newParagraph(" ");
+			doc.newParagraph("Roman upper List Example:");
+			List romanUprList = doc.addList(new NumberedRomanUpperDecorator(doc));
+			romanUprList.setHeader("Roman upper List");
+			for (String listitem : subItemContents)
+			{
+			    romanUprList.addItem(listitem);
+			}
+
+			Assert.assertEquals(ListType.NUMBER, romanUprList.getType());
+
+
+			doc.save(ResourceUtilities.newTestOutputFile("NumberedListOutput.odt"));
+		} catch (Exception e) {
+			Logger.getLogger(ListTest.class.getName()).log(Level.SEVERE, null, e);
+			Assert.fail(e.getMessage());
+		}
+	}
+
+
+	@Test
+	public void testSetExtendedBulletListDecorator() {
+		try {
+			TextDocument doc = TextDocument.newTextDocument();
+
+			String[] subItemContents = { "sub list item 1", "sub list item 2", "sub list item 3" };
+
+			doc.newParagraph(" ");
+			doc.newParagraph("Bullet List Example:");
+			List bulletList = doc.addList(new BulletDecorator(doc));
+			bulletList.setHeader("Bullet List");
+			for (String listitem : subItemContents)
+			{
+			    bulletList.addItem(listitem);
+			}
+			Assert.assertEquals(ListType.BULLET, bulletList.getType());
+
+			doc.newParagraph(" ");
+			doc.newParagraph("Disc List Example:");
+			List discList = doc.addList(new DiscDecorator(doc));
+			discList.setHeader("Disc List");
+			for (String listitem : subItemContents)
+			{
+			    discList.addItem(listitem);
+			}
+
+			Assert.assertEquals(ListType.BULLET, discList.getType());
+
+
+			doc.newParagraph(" ");
+			doc.newParagraph("Square List Example:");
+			List squareList = doc.addList(new SquareDecorator(doc));
+			squareList.setHeader("Square List");
+			for (String listitem : subItemContents)
+			{
+			    squareList.addItem(listitem);
+			}
+
+			Assert.assertEquals(ListType.BULLET, squareList.getType());
+
+			doc.save(ResourceUtilities.newTestOutputFile("BulletListOutput.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(ListTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());

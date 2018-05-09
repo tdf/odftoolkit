@@ -34,7 +34,6 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
 import org.odftoolkit.simple.Document;
-import static org.odftoolkit.simple.text.list.BulletDecoratorBase.DEFAULT_BULLET_CHAR;
 import org.w3c.dom.Node;
 
 /**
@@ -47,13 +46,14 @@ import org.w3c.dom.Node;
  *
  * @since 0.4
  */
-public class BulletDecorator implements ListDecorator {
+public abstract class BulletDecoratorBase implements ListDecorator {
 
-	private static String[] DEFAULT_TEXT_SPACE_BEFORE_ATTRIBUTES = { null, "0.401cm", "0.799cm", "1.2cm", "1.6cm",
+	private static final String[] DEFAULT_TEXT_SPACE_BEFORE_ATTRIBUTES = { null, "0.401cm", "0.799cm", "1.2cm", "1.6cm",
 			"2.001cm", "2.399cm", "2.8cm", "3.2cm", "3.601cm" };
-	private static String DEFAULT_TEXT_MIN_LABEL_WIDTH = "0.4cm";
-	private static String DEFAULT_FONT_NAME = "Tahoma";
-	private static String DEFAULT_NAME = "Simple_Default_Bullet_List";
+	private static final String DEFAULT_TEXT_MIN_LABEL_WIDTH = "0.4cm";
+	private static final String DEFAULT_FONT_NAME = "Tahoma";
+	protected static final String DEFAULT_BULLET_CHAR = "\u25e6";
+//	private static String DEFAULT_NAME = "Simple_Default_Bullet_List";
 
 	private OdfTextListStyle listStyle;
 	private OdfStyle paragraphStyle;
@@ -64,25 +64,28 @@ public class BulletDecorator implements ListDecorator {
 	 *
 	 * @param doc
 	 *            the Document which this BulletDecorator will be used on.
+	 * @param styleName style name: (i.e. BulletDecorator:  BulletDecorator.DEFAULT_NAME)
+	 * @param styleNameIntern intern style name:  (i.e. BulletDecorator:  "Bullet_20_Symbols")
+	 * @param listCharacter listing character: (i.e. BulletDecorator:  BulletDecorator.DEFAULT_BULLET_CHAR)
 	 */
-	public BulletDecorator(Document doc) {
+	public BulletDecoratorBase(Document doc, String styleName, String styleNameIntern, String listCharacter) {
 		OdfContentDom contentDocument;
 		try {
 			contentDocument = doc.getContentDom();
 			styles = contentDocument.getAutomaticStyles();
 			OdfOfficeStyles documentStyles = doc.getDocumentStyles();
-			listStyle = styles.getListStyle(DEFAULT_NAME);
+			listStyle = styles.getListStyle(styleName);
 			// create bullet style
 			if (listStyle == null) {
 				listStyle = styles.newListStyle();
 				// <style:style style:name="Numbering_20_Symbols"
 				// style:display-name="Numbering Symbols" style:family="text" />
-				getOrCreateStyleByName(documentStyles, styles, "Bullet_20_Symbols", OdfStyleFamily.Text);
+				getOrCreateStyleByName(documentStyles, styles, styleNameIntern, OdfStyleFamily.Text);
 				for (int i = 0; i < 10; i++) {
 					TextListLevelStyleBulletElement listLevelElement = listStyle.newTextListLevelStyleBulletElement(
-							DEFAULT_BULLET_CHAR, i + 1);
+						listCharacter, i + 1);
 					// get from default style element
-					listLevelElement.setTextStyleNameAttribute("Bullet_20_Symbols");
+					listLevelElement.setTextStyleNameAttribute(styleNameIntern);
 					StyleListLevelPropertiesElement styleListLevelPropertiesElement = listLevelElement
 							.newStyleListLevelPropertiesElement();
 					if (DEFAULT_TEXT_SPACE_BEFORE_ATTRIBUTES[i] != null) {
@@ -111,7 +114,7 @@ public class BulletDecorator implements ListDecorator {
 			paragraphStyle.setStyleParentStyleNameAttribute("Default_20_Text");
 			paragraphStyle.setStyleListStyleNameAttribute(listStyle.getStyleNameAttribute());
 		} catch (Exception e) {
-			Logger.getLogger(BulletDecorator.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(BulletDecoratorBase.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 

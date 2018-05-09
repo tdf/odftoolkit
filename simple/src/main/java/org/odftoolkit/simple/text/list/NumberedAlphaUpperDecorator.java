@@ -31,18 +31,14 @@ import org.odftoolkit.simple.Document;
  * 
  * @since 0.4
  */
-public class NumberDecorator extends NumberDecoratorBase {
-
-	private static String DEFAULT_NUM_FORMAT = "1";
-	private static String DEFAULT_NUM_SUFFIX = ".";
-	private static String DEFAULT_NAME = "Simple_Default_Number_List";
+public class NumberedAlphaUpperDecorator extends NumberDecoratorBase {
 
 	/**
 	 * Constructor with Document.
 	 * @param doc
 	 *            the Document which this NumberDecorator will be used on.
 	 */
-	public NumberDecorator(Document doc) {
-	    	super(doc, DEFAULT_NAME, "Numbering_20_Symbols", DEFAULT_NUM_FORMAT, DEFAULT_NUM_SUFFIX, null);
+	public NumberedAlphaUpperDecorator(Document doc) {
+	    	super(doc, "Simple_Default_alfa_upper_List", "Numbering_20_Symbols", "A", ")", null);
 	}
 }

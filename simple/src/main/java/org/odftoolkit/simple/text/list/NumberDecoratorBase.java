@@ -1,4 +1,4 @@
-/*
+/* 
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -21,12 +21,13 @@ package org.odftoolkit.simple.text.list;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListItemElement;
-import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleBulletElement;
+import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleNumberElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
@@ -34,55 +35,63 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
 import org.odftoolkit.simple.Document;
-import static org.odftoolkit.simple.text.list.BulletDecoratorBase.DEFAULT_BULLET_CHAR;
 import org.w3c.dom.Node;
 
 /**
- * BulletDecorator is an implementation of the ListDecorator interface,
- * decorates a given List as bullet list. User can extend this class and realize
+ * NumberDecorator is an implementation of the ListDecorator interface,
+ * decorates a given List as number list. User can extend this class and realize
  * their own list and list item style. For example, set a specifies list item
  * with red color.
  * <p>
- * A BulletDecorator can be reused in the same Document.
- *
+ * A NumberDecorator can be reused in the same Document.
+ * 
  * @since 0.4
  */
-public class BulletDecorator implements ListDecorator {
+public abstract class NumberDecoratorBase implements ListDecorator {
 
-	private static String[] DEFAULT_TEXT_SPACE_BEFORE_ATTRIBUTES = { null, "0.401cm", "0.799cm", "1.2cm", "1.6cm",
-			"2.001cm", "2.399cm", "2.8cm", "3.2cm", "3.601cm" };
-	private static String DEFAULT_TEXT_MIN_LABEL_WIDTH = "0.4cm";
+	private static String[] DEFAULT_TEXT_SPACE_BEFORE_ATTRIBUTES = { null, "0.501cm", "1cm", "1.501cm", "2cm",
+			"2.501cm", "3.001cm", "3.502cm", "4.001cm", "4.502cm" };
+	private static String DEFAULT_TEXT_MIN_LABEL_WIDTH = "0.499cm";
 	private static String DEFAULT_FONT_NAME = "Tahoma";
-	private static String DEFAULT_NAME = "Simple_Default_Bullet_List";
+//	protected static String DEFAULT_NUM_FORMAT = "1";
+//	protected static String DEFAULT_NUM_SUFFIX = ".";
+//	private static String DEFAULT_NAME = "Simple_Custom_Number_List";
 
-	private OdfTextListStyle listStyle;
-	private OdfStyle paragraphStyle;
-	private OdfOfficeAutomaticStyles styles;
+	protected OdfTextListStyle listStyle;
+	protected OdfStyle paragraphStyle;
+	protected OdfOfficeAutomaticStyles styles;
 
 	/**
 	 * Constructor with Document.
-	 *
+	 * 
 	 * @param doc
-	 *            the Document which this BulletDecorator will be used on.
+	 *            the Document which this NumberDecorator will be used on.
+	 * @param styleName style name: (i.e. NumberDecorator:  NumberDecorator.DEFAULT_NAME)                 
+	 * @param styleNameIntern intern stylename (i.e. NumberDecorator:  "Numbering_20_Symbols")      
+	 * @param numberingFormat the numbering format (i.e. NumberDecorator:  "1", sonsrt "a", "A", "i", "I", ....)      
+	 * @param suffix  suffix after the number ("." for 1., 2., ... ")" for a) b) c) etc)
+	 * @param prefix  prefix before the number ("(" for (a) (b) (c) etc)
 	 */
-	public BulletDecorator(Document doc) {
+	protected NumberDecoratorBase(Document doc, String styleName, String styleNameIntern, String numberingFormat, String suffix, String prefix) {
 		OdfContentDom contentDocument;
 		try {
 			contentDocument = doc.getContentDom();
 			styles = contentDocument.getAutomaticStyles();
 			OdfOfficeStyles documentStyles = doc.getDocumentStyles();
-			listStyle = styles.getListStyle(DEFAULT_NAME);
-			// create bullet style
+			listStyle = styles.getListStyle(styleName);
+			// create number style
 			if (listStyle == null) {
 				listStyle = styles.newListStyle();
 				// <style:style style:name="Numbering_20_Symbols"
 				// style:display-name="Numbering Symbols" style:family="text" />
-				getOrCreateStyleByName(documentStyles, styles, "Bullet_20_Symbols", OdfStyleFamily.Text);
+				getOrCreateStyleByName(documentStyles, styles, styleNameIntern, OdfStyleFamily.Text);
 				for (int i = 0; i < 10; i++) {
-					TextListLevelStyleBulletElement listLevelElement = listStyle.newTextListLevelStyleBulletElement(
-							DEFAULT_BULLET_CHAR, i + 1);
+					TextListLevelStyleNumberElement listLevelElement = listStyle.newTextListLevelStyleNumberElement(
+						numberingFormat, i + 1);
 					// get from default style element
-					listLevelElement.setTextStyleNameAttribute("Bullet_20_Symbols");
+					listLevelElement.setTextStyleNameAttribute(styleNameIntern);
+					listLevelElement.setStyleNumSuffixAttribute(suffix);
+					listLevelElement.setStyleNumPrefixAttribute(prefix);
 					StyleListLevelPropertiesElement styleListLevelPropertiesElement = listLevelElement
 							.newStyleListLevelPropertiesElement();
 					if (DEFAULT_TEXT_SPACE_BEFORE_ATTRIBUTES[i] != null) {
@@ -111,7 +120,7 @@ public class BulletDecorator implements ListDecorator {
 			paragraphStyle.setStyleParentStyleNameAttribute("Default_20_Text");
 			paragraphStyle.setStyleListStyleNameAttribute(listStyle.getStyleNameAttribute());
 		} catch (Exception e) {
-			Logger.getLogger(BulletDecorator.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(NumberDecoratorBase.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 
@@ -126,18 +135,6 @@ public class BulletDecorator implements ListDecorator {
 		while (child != null) {
 			if (child instanceof TextPElement) {
 				TextPElement pElement = (TextPElement) child;
-				// user can realize defined style for specifies item.
-				/*
-				 * if (pElement.getTextContent().contains("item1")) { OdfStyle
-				 * sParagraphStyle = styles.newStyle(OdfStyleFamily.Paragraph);
-				 * sParagraphStyle
-				 * .setStyleParentStyleNameAttribute("Default_20_Text");
-				 * sParagraphStyle
-				 * .newStyleTextPropertiesElement(null).setFoColorAttribute
-				 * ("#ff3333");
-				 * pElement.setTextStyleNameAttribute(sParagraphStyle
-				 * .getStyleNameAttribute()); } else
-				 */
 				pElement.setTextStyleNameAttribute(paragraphStyle.getStyleNameAttribute());
 			}
 			child = child.getNextSibling();
@@ -145,7 +142,7 @@ public class BulletDecorator implements ListDecorator {
 	}
 
 	public ListType getListType() {
-		return ListType.BULLET;
+		return ListType.NUMBER;
 	}
 
 	private OdfStyle getOrCreateStyleByName(OdfOfficeStyles documentStyles, OdfOfficeAutomaticStyles styles,
@@ -161,4 +158,14 @@ public class BulletDecorator implements ListDecorator {
 		}
 		return odfStyle;
 	}
+	
+	/**
+	 * only for JUnit Test
+	 * @return
+	 */
+	OdfTextListStyle getListStyle()
+	{
+	    return listStyle;
+	}
+
 }
