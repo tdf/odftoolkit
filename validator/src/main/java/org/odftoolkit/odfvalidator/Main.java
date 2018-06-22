@@ -55,6 +55,7 @@ public class Main {
         String aSchemaFileName = null;
         String aManifestSchemaFileName = null;
         String aDSigSchemaFileName = null;
+        String aMathMLSchemaFileName = null;
         String aOutputFileName = null;
         String aExcludeRegExp = null;
         boolean bPrintGenerator = false;
@@ -165,6 +166,13 @@ public class Main {
                 else
                     bCommandLineValid = false;
             }
+            else if( aArg.equals("-m") )
+            {
+                if( aArgIter.hasNext() )
+                    aMathMLSchemaFileName = aArgIter.next();
+                else
+                    bCommandLineValid = false;
+            }
             else if( aArg.equals("-V") )
             {
                 bPrintVersion = true;
@@ -267,7 +275,8 @@ public class Main {
                 && (   aStrictSchemaFileName != null
                     || aSchemaFileName != null
                     || aManifestSchemaFileName != null
-                    || aDSigSchemaFileName != null))
+                    || aDSigSchemaFileName != null
+                    || aMathMLSchemaFileName != null))
             {
                 aConfig = new Configuration();
             }
@@ -287,6 +296,10 @@ public class Main {
             if( aDSigSchemaFileName != null )
             {
                 aConfig.setProperty( Configuration.DSIG_SCHEMA, aDSigSchemaFileName );
+            }
+            if (aMathMLSchemaFileName != null)
+            {
+                aConfig.setProperty(Configuration.MATHML2_SCHEMA, aMathMLSchemaFileName);
             }
 
             PrintStream aOut = aOutputFileName != null ? new PrintStream( aOutputFileName ) : System.out;
@@ -320,6 +333,7 @@ public class Main {
         System.out.println( "usage: odfvalidator -g <odffiles>");
         System.out.println( "       odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] [-1.0|-1.1|-1.2] <odffiles>");
         System.out.println( "       odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] -S <schemafile> <odffiles>");
+        System.out.println( "       odfvalidator [-r] [-c|-e|-s] [-v|-w] -O <rngfile> -M <rngfile> -D <rngfile> -m <xsdfile> [-f <filterfile>] [-x <regexp>] [-o outputfile] <odffiles>");
         System.out.println( "       odfvalidator [-c|-s] [-v|-w] [-d] [-o outputfile] -C <configfile>");
         System.out.println( "       odfvalidator -h");
         System.out.println( "       odfvalidator -V");
@@ -329,6 +343,7 @@ public class Main {
         System.out.println( "-O: Use ODF schema <schemafile> for validation" );
         System.out.println( "-M: Use ODF manifest schema <schemafile> for validation" );
         System.out.println( "-D: Use ODF dsig schema <schemafile> for validation" );
+        System.out.println( "-m: Use MathML2 schema <schemafile> for validation" );
         System.out.println( "-V: Print version" );
         System.out.println( "-c: Check conformance (default for ODF 1.2 documents)" );
         System.out.println( "-e: Check extended conformance (ODF 1.2 documents only)" );
