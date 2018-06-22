@@ -177,7 +177,7 @@ public class Main {
             {
                 System.out.print(aArg);
                 System.out.println(": unknown option, use '-h' for help");
-                return;
+                System.exit(1);
             }
             else if( aArg.length()>0 )
             {
@@ -207,13 +207,13 @@ public class Main {
         if( !bCommandLineValid || bPrintHelp )
         {
             printUsage();
-            return;
+            System.exit(bCommandLineValid ? 0 : 1);
         }
         if( bPrintVersion )
         {
             System.out.print("odfvalidator v");
             System.out.println( VERSION );
-            return;
+            System.exit(0);
         }
 
         try
@@ -225,7 +225,7 @@ public class Main {
                 Iterator<String> aIter = aFileNames.iterator();
                 while( aIter.hasNext() )
                     aMetaInformation.getInformation(aIter.next());
-                return;
+                System.exit(0);
             }
 
             // Read configuration - by default aConfig is null, so the version
@@ -244,13 +244,13 @@ public class Main {
                     if( aConfigFileName != null )
                     {
                         System.out.println( aConfigFile.getAbsolutePath() + ": file not found.");
-                        return;
+                        System.exit(1);
                     }
                 }
                 catch( IOException e )
                 {
                     System.out.println("error reading " + aConfigFile.getAbsolutePath() + ": " + e.getLocalizedMessage() );
-                    return;
+                    System.exit(1);
                 }
 
                 // Permit input file override from command line, even
@@ -305,11 +305,13 @@ public class Main {
         {
             System.out.println( e.getMessage() );
             System.out.println( "Validation aborted." );
+            System.exit(1);
         }
         catch( FileNotFoundException e )
         {
             System.out.println( e.getMessage() );
             System.out.println( "Validation aborted." );
+            System.exit(1);
         }
     }
 
