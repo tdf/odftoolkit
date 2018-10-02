@@ -1,3 +1,4 @@
+
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
@@ -31,6 +32,7 @@ package org.odftoolkit.odfdom.pkg.manifest;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
 /**
  * Manifest implementation of OpenDocument attribute  {@odf.attribute manifest:iteration-count}.
@@ -38,7 +40,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class IterationCountAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:iteration-count");
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "iteration-count");
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute manifest:iteration-count}.
@@ -113,7 +115,7 @@ public class IterationCountAttribute extends OdfAttribute {
 			return super.getValue();
 		} catch (IllegalArgumentException e) {
 			// TODO: validation handling/logging
-			throw new NumberFormatException("the value of iteration-count is not valid");
+			throw new NumberFormatException("the value of manifest:iteration-count is not valid");
 		}
 	}
 

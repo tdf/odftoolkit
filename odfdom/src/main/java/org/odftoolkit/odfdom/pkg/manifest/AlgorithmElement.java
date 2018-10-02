@@ -1,3 +1,4 @@
+
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
@@ -31,18 +32,21 @@ package org.odftoolkit.odfdom.pkg.manifest;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
+
+
 /**
  * Manifest implementation of OpenDocument element  {@odf.element manifest:algorithm}.
  *
  */
 public class AlgorithmElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:algorithm");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "algorithm");
 
 	/**
 	 * Create the instance of <code>AlgorithmElement</code>
 	 *
-	 * @param  ownerDoc  The type is <code>OdfFileDom</code>
+	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
 	 */
 	public AlgorithmElement(OdfFileDom ownerDoc) {
 		super(ownerDoc, ELEMENT_NAME);
@@ -53,6 +57,7 @@ public class AlgorithmElement extends OdfElement {
 	 *
 	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:algorithm}.
 	 */
+    @Override
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
@@ -65,7 +70,7 @@ public class AlgorithmElement extends OdfElement {
 	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
 	public String getAlgorithmNameAttribute() {
-		AlgorithmNameAttribute attr = (AlgorithmNameAttribute) getOdfAttribute(AlgorithmNameAttribute.ATTRIBUTE_NAME);
+		AlgorithmNameAttribute attr = (AlgorithmNameAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "algorithm-name");
 		if (attr != null) {
 			return String.valueOf(attr.getValue());
 		}
@@ -91,7 +96,7 @@ public class AlgorithmElement extends OdfElement {
 	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
 	public String getInitialisationVectorAttribute() {
-		InitialisationVectorAttribute attr = (InitialisationVectorAttribute) getOdfAttribute(InitialisationVectorAttribute.ATTRIBUTE_NAME);
+		InitialisationVectorAttribute attr = (InitialisationVectorAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "initialisation-vector");
 		if (attr != null) {
 			return String.valueOf(attr.getValue());
 		}

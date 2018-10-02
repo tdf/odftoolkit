@@ -1,9 +1,10 @@
+
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- *
+ * 
  * Use is subject to license terms.
- *
+ * 
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -32,19 +33,20 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
-import org.w3c.dom.NodeList;
+
+
 /**
  * Manifest implementation of OpenDocument element  {@odf.element manifest:encryption-data}.
  *
  */
 public class EncryptionDataElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:encryption-data");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "encryption-data");
 
 	/**
 	 * Create the instance of <code>EncryptionDataElement</code>
 	 *
-	 * @param  ownerDoc  The type is <code>OdfFileDom</code>
+	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
 	 */
 	public EncryptionDataElement(OdfFileDom ownerDoc) {
 		super(ownerDoc, ELEMENT_NAME);
@@ -55,6 +57,7 @@ public class EncryptionDataElement extends OdfElement {
 	 *
 	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:encryption-data}.
 	 */
+    @Override
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
@@ -67,7 +70,7 @@ public class EncryptionDataElement extends OdfElement {
 	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
 	public String getChecksumAttribute() {
-		ChecksumAttribute attr = (ChecksumAttribute) getOdfAttribute(ChecksumAttribute.ATTRIBUTE_NAME);
+		ChecksumAttribute attr = (ChecksumAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "checksum");
 		if (attr != null) {
 			return String.valueOf(attr.getValue());
 		}
@@ -93,7 +96,7 @@ public class EncryptionDataElement extends OdfElement {
 	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
 	public String getChecksumTypeAttribute() {
-		ChecksumTypeAttribute attr = (ChecksumTypeAttribute) getOdfAttribute(ChecksumTypeAttribute.ATTRIBUTE_NAME);
+		ChecksumTypeAttribute attr = (ChecksumTypeAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "checksum-type");
 		if (attr != null) {
 			return String.valueOf(attr.getValue());
 		}
@@ -123,25 +126,11 @@ public class EncryptionDataElement extends OdfElement {
 	 * @return the element {@odf.element manifest:algorithm}
 	 */
 	 public AlgorithmElement newAlgorithmElement(String algorithmNameValue, String initialisationVectorValue) {
-		AlgorithmElement algorithm = ((OdfFileDom) this.ownerDocument).newOdfElement(AlgorithmElement.class);
-		algorithm.setAlgorithmNameAttribute(algorithmNameValue);
-		algorithm.setInitialisationVectorAttribute(initialisationVectorValue);
-        if(this.hasChildNodes()){
-            OdfElement precedingSibling = null;
-            NodeList nl = this.getElementsByTagNameNS(OdfPackageNamespace.MANIFEST.getUri(), "start-key-generation");
-            if(nl.getLength() == 0){
-                nl = this.getElementsByTagNameNS(OdfPackageNamespace.MANIFEST.getUri(), "key-derivation");
-            }
-            if(nl.getLength() != 0){
-               precedingSibling = (OdfElement) nl.item(0);
-               this.insertBefore(algorithm, precedingSibling);
-            }else{
-                this.appendChild(algorithm);
-            }
-        }else{
-            this.appendChild(algorithm);
-        }
-		return algorithm;
+		AlgorithmElement manifestAlgorithm = ((OdfFileDom) this.ownerDocument).newOdfElement(AlgorithmElement.class);
+		manifestAlgorithm.setAlgorithmNameAttribute(algorithmNameValue);
+		manifestAlgorithm.setInitialisationVectorAttribute(initialisationVectorValue);
+		this.appendChild(manifestAlgorithm);
+		return manifestAlgorithm;
 	}
 
 	/**
@@ -157,12 +146,12 @@ public class EncryptionDataElement extends OdfElement {
 	 * @return the element {@odf.element manifest:key-derivation}
 	 */
 	 public KeyDerivationElement newKeyDerivationElement(int iterationCountValue, String keyDerivationNameValue, String saltValue) {
-		KeyDerivationElement keyDerivation = ((OdfFileDom) this.ownerDocument).newOdfElement(KeyDerivationElement.class);
-		keyDerivation.setIterationCountAttribute(iterationCountValue);
-		keyDerivation.setKeyDerivationNameAttribute(keyDerivationNameValue);
-		keyDerivation.setSaltAttribute(saltValue);
-		this.appendChild(keyDerivation);
-		return keyDerivation;
+		KeyDerivationElement manifestKeyDerivation = ((OdfFileDom) this.ownerDocument).newOdfElement(KeyDerivationElement.class);
+		manifestKeyDerivation.setIterationCountAttribute(iterationCountValue);
+		manifestKeyDerivation.setKeyDerivationNameAttribute(keyDerivationNameValue);
+		manifestKeyDerivation.setSaltAttribute(saltValue);
+		this.appendChild(manifestKeyDerivation);
+		return manifestKeyDerivation;
 	}
 
 	/**
@@ -174,22 +163,10 @@ public class EncryptionDataElement extends OdfElement {
 	 * @return the element {@odf.element manifest:start-key-generation}
 	 */
 	 public StartKeyGenerationElement newStartKeyGenerationElement(String startKeyGenerationNameValue) {
-		StartKeyGenerationElement startKeyGeneration = ((OdfFileDom) this.ownerDocument).newOdfElement(StartKeyGenerationElement.class);
-		startKeyGeneration.setStartKeyGenerationNameAttribute(startKeyGenerationNameValue);
-
-        if(this.hasChildNodes()){
-            OdfElement precedingSibling = null;
-            NodeList nl = this.getElementsByTagNameNS(OdfPackageNamespace.MANIFEST.getUri(), "key-derivation");
-            if(nl.getLength() != 0){
-               precedingSibling = (OdfElement) nl.item(0);
-               this.insertBefore(startKeyGeneration, precedingSibling);
-            }else{
-                this.appendChild(startKeyGeneration);
-            }
-        }else{
-            this.appendChild(startKeyGeneration);
-        }
-        return startKeyGeneration;
+		StartKeyGenerationElement manifestStartKeyGeneration = ((OdfFileDom) this.ownerDocument).newOdfElement(StartKeyGenerationElement.class);
+		manifestStartKeyGeneration.setStartKeyGenerationNameAttribute(startKeyGenerationNameValue);
+		this.appendChild(manifestStartKeyGeneration);
+		return manifestStartKeyGeneration;
 	}
 
 }

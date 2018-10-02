@@ -1,3 +1,4 @@
+
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
@@ -31,18 +32,21 @@ package org.odftoolkit.odfdom.pkg.manifest;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
+
+
 /**
  * Manifest implementation of OpenDocument element  {@odf.element manifest:key-derivation}.
  *
  */
 public class KeyDerivationElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:key-derivation");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "key-derivation");
 
 	/**
 	 * Create the instance of <code>KeyDerivationElement</code>
 	 *
-	 * @param  ownerDoc  The type is <code>OdfFileDom</code>
+	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
 	 */
 	public KeyDerivationElement(OdfFileDom ownerDoc) {
 		super(ownerDoc, ELEMENT_NAME);
@@ -53,6 +57,7 @@ public class KeyDerivationElement extends OdfElement {
 	 *
 	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:key-derivation}.
 	 */
+    @Override
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
@@ -65,7 +70,7 @@ public class KeyDerivationElement extends OdfElement {
 	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
 	public Integer getIterationCountAttribute() {
-		IterationCountAttribute attr = (IterationCountAttribute) getOdfAttribute(IterationCountAttribute.ATTRIBUTE_NAME);
+		IterationCountAttribute attr = (IterationCountAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "iteration-count");
 		if (attr != null) {
 			return Integer.valueOf(attr.intValue());
 		}
@@ -91,7 +96,7 @@ public class KeyDerivationElement extends OdfElement {
 	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
 	public String getKeyDerivationNameAttribute() {
-		KeyDerivationNameAttribute attr = (KeyDerivationNameAttribute) getOdfAttribute(KeyDerivationNameAttribute.ATTRIBUTE_NAME);
+		KeyDerivationNameAttribute attr = (KeyDerivationNameAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "key-derivation-name");
 		if (attr != null) {
 			return String.valueOf(attr.getValue());
 		}
@@ -115,7 +120,7 @@ public class KeyDerivationElement extends OdfElement {
 	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
 	public Integer getKeySizeAttribute() {
-		KeySizeAttribute attr = (KeySizeAttribute) getOdfAttribute(KeySizeAttribute.ATTRIBUTE_NAME);
+		KeySizeAttribute attr = (KeySizeAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "key-size");
 		if (attr != null) {
 			return Integer.valueOf(attr.intValue());
 		}
@@ -141,7 +146,7 @@ public class KeyDerivationElement extends OdfElement {
 	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
 	public String getSaltAttribute() {
-		SaltAttribute attr = (SaltAttribute) getOdfAttribute(SaltAttribute.ATTRIBUTE_NAME);
+		SaltAttribute attr = (SaltAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "salt");
 		if (attr != null) {
 			return String.valueOf(attr.getValue());
 		}

@@ -23,15 +23,9 @@
 ## Documentation of template development can be found in local file
 ## TemplateHelp.html.
 ##
-#set ($element = ${signaturemodel.getElement($context)})
-#if ($element == "Signature")
-	#set ($NS = "http://www.w3.org/2000/09/xmldsig#")
-	#set ($PREFIX = "ds")
-#else
-	#set ($NS = "urn:oasis:names:tc:opendocument:xmlns:digitalsignature:1.0")
-	#set ($PREFIX = "dsig")
-#end
-###set ($NS = "${element.getNamespace()}")
+#set ($element = ${model.getElement($context)})
+#set ($oldelement = ${oldmodel.getElement($context)})
+#set ($NS = ${element.getNamespace()})
 #set ($classname = "${model.camelCase($element)}Element")
 ##
 ## Set child element and child attributes
@@ -79,7 +73,37 @@ package org.odftoolkit.odfdom.pkg.dsig;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
+#set ($element = ${model.getElement($context)})
+#set ($oldelement = ${oldmodel.getElement($context)})
+#set ($NS = ${element.getNamespace()})
+#set ($classname = "${model.camelCase($element.getLocalName())}Element")
 
+#foreach ($child in $children)
+#if ($child == "*")
+    #set ($anychild = true)
+#else
+    #set ($childNS = ${child.getNamespace()})
+    #set ($childClassname = "${model.camelCase($child.getLocalName())}Element")
+#if ($childNS != $NS)
+## we call it all DSIG no DS folder..
+## WE DO NOT IMPORT SAME PACKAGE FOLDER
+##import org.odftoolkit.odfdom.pkg.dsig.$childClassname;
+#end
+#end
+#end
+##
+#foreach ($child in $attributes)
+#if ($child == "*")
+#set ($anyattribute = true)
+#else
+#set ($childNS = ${child.getNamespace()})
+#set ($childClassname = "${model.camelCase($child.getLocalName())}Attribute")
+#if (!$childNS.equals("dsig")) ## Do not generate "import" for the same package!
+import org.odftoolkit.odfdom.pkg.${childNS}.$childClassname;
+#end
+#end
+#end
 ##
 ## If there is a base class which is not in the current package
 #if ($baseimport)
@@ -103,7 +127,7 @@ import ${baseimport};
  */
 public class $classname extends $baseclassname {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("${NS}", "${PREFIX}:${element}");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.${NS.toUpperCase()}, "${element.getLocalName()}");
 
 	/**
 	 * Create the instance of <code>$classname</code>
@@ -119,6 +143,7 @@ public class $classname extends $baseclassname {
 	 *
 	 * @return  return   <code>OdfName</code> the name of element {@odf.element ${context}}.
 	 */
+    @Override
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
@@ -134,7 +159,7 @@ public class $classname extends $baseclassname {
 ## ---------------------------------------------------
 ##
 #foreach ($attr in $attributes)
-#set($attri = ${signaturemodel.getAttribute($attr.getQName())})
+#set($attri = ${model.getAttribute($attr.getQName())})
 #set ($valueObject = "String")
 #set ($simpleValue = "")
 #set ($dataTypes = ${attri.getDatatypes().withoutMultiples()})
@@ -169,8 +194,8 @@ public class $classname extends $baseclassname {
 #if ($attr != "*")
 #set ($attribute = ${attr.withMultiples()})
 #set ($aNS = ${attribute.getNamespace()})
-#set ($aClassname = "${signaturemodel.camelCase($attribute)}Attribute")
-#set ($aParam = "${signaturemodel.javaCase($attribute)}Value")
+#set ($aClassname = "${model.camelCase($attribute.getLocalName())}Attribute")
+#set ($aParam = "${model.javaCase($attribute.getLocalName())}Value")
 
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>$aClassname</code> , See {@odf.attribute ${attribute.getQName()}}
@@ -182,7 +207,7 @@ public class $classname extends $baseclassname {
 	 * @return - the <code>$valueObject</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
 	public $valueObject get${aClassname}() {
-		$aClassname attr = ($aClassname) getOdfAttribute(${aClassname}.ATTRIBUTE_NAME);
+		$aClassname attr = ($aClassname) getOdfAttribute(OdfPackageNamespace.${aNS.toUpperCase()}, "${attribute.getLocalName()}");
 		if (attr != null) {
 #if ($simpleValue!="")
 			return ${valueObject}.valueOf(attr.${simpleValue}Value());
@@ -191,14 +216,14 @@ public class $classname extends $baseclassname {
 #end
 		}
 #if ($odfmodel.getDefaultAttributeValue($attribute, $element))
-#set ($defaultValue = ${signaturemodel.escapeLiteral($odfmodel.getDefaultAttributeValue($attribute, $element))})
+#set ($defaultValue = ${model.escapeLiteral($odfmodel.getDefaultAttributeValue($attribute, $element))})
 #set ($defaultValueSet = $odfmodel.getDefaultAttributeValues($attribute))
 #if ($defaultValueSet.size()>1)
-#set ($constant = $signaturemodel.constantCase($defaultValue))
+#set ($constant = $model.constantCase($defaultValue))
 #if ($valueObject == "String")
-		return ${aClassname}.DEFAULT_VALUE_${signaturemodel.escapeKeyword($constant)};
+		return ${aClassname}.DEFAULT_VALUE_${model.escapeKeyword($constant)};
 #else
-		return ${valueObject}.valueOf(${aClassname}.DEFAULT_VALUE_${signaturemodel.escapeKeyword($constant)});
+		return ${valueObject}.valueOf(${aClassname}.DEFAULT_VALUE_${model.escapeKeyword($constant)});
 #end
 #else
 #if ($valueObject == "String")
@@ -223,7 +248,7 @@ public class $classname extends $baseclassname {
 #if ($valueObject == "String")
 		attr.setValue($aParam);
 #else
-		attr.set${signaturemodel.camelCase($simpleValue)}Value($aParam.${simpleValue}Value());
+		attr.set${model.camelCase($simpleValue)}Value($aParam.${simpleValue}Value());
 #end
 	}
 #end
@@ -237,8 +262,8 @@ public class $classname extends $baseclassname {
 #foreach($ch in $children)
 #if ($ch != "*")
 #set ($child = ${ch.withMultiples()})
-#set ($cClassname = "${signaturemodel.camelCase($child)}Element")
-#set ($cVar = ${signaturemodel.javaCase($child)})
+#set ($cClassname = "${model.camelCase($child.getLocalName())}Element")
+#set ($cVar = ${model.javaCase($child)})
 #set ($ch_attributes = ${child.getAttributes().withoutMultiples()})
 ##set has parameter flag
 #set ($hasParams = false)
@@ -255,7 +280,7 @@ public class $classname extends $baseclassname {
 #set ($params="")
 #foreach ($ch_attr in $ch_attributes)
 #if (${child.isMandatory($ch_attr)})
-#set($ch_attri = ${signaturemodel.getAttribute($ch_attr.getQName())})
+#set($ch_attri = ${model.getAttribute($ch_attr.getQName())})
 #set ($ch_ValueObject = "String")
 #set ($ch_SimpleValue = "")
 #set ($ch_DataTypes = ${ch_attri.getDatatypes().withoutMultiples()})
@@ -290,8 +315,8 @@ public class $classname extends $baseclassname {
 #if ($ch_attr != "*")
 #set ($attribute = ${ch_attr.withMultiples()})
 #set ($aNS = ${attribute.getNamespace()})
-#set ($aClassname = "${signaturemodel.camelCase($attribute)}Attribute")
-#set ($aParam = "${signaturemodel.javaCase($attribute)}Value")
+#set ($aClassname = "${model.camelCase($attribute.getLocalName())}Attribute")
+#set ($aParam = "${model.javaCase($attribute.getLocalName())}Value")
 	 * @param $aParam  the <code>$ch_ValueObject</code> value of <code>$aClassname</code>, see {@odf.attribute  ${attribute.getQName()}} at specification
 #if ($ch_SimpleValue!="")
 #set ($params="${params}${seperateFlag}${ch_SimpleValue} ${aParam}")
@@ -318,8 +343,8 @@ public class $classname extends $baseclassname {
 		$cClassname $cVar = ((OdfFileDom) this.ownerDocument).newOdfElement(${cClassname}.class);
 #foreach ($ch_attr in $ch_attributes)
 #if ($ch_attr != "*" && ${child.isMandatory($ch_attr)})
-#set ($aClassname = "${signaturemodel.camelCase($ch_attr)}Attribute")
-#set ($aParam = "${signaturemodel.javaCase($ch_attr)}Value")
+#set ($aClassname = "${model.camelCase($ch_attr.getLocalName())}Attribute")
+#set ($aParam = "${model.javaCase($ch_attr.getLocalName())}Value")
 		${cVar}.set$aClassname($aParam);
 #end
 #end
@@ -362,7 +387,7 @@ public class $classname extends $baseclassname {
 	 * Add text content. Only elements which are allowed to have text content offer this method.
 	 */
 	 public void newTextNode(String content) {
-		if (content != null && !content.equals("")) {
+		if (content != null && !content.isEmpty()) {
 			this.appendChild(this.getOwnerDocument().createTextNode(content));
 		}
 	 }

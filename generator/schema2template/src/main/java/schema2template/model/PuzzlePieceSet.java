@@ -61,7 +61,7 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
             throw new RuntimeException("Attempt to " + plannedAction + " of empty DefinitionSet ");
         }
     }
-    
+
     private void assertMultiples(String plannedAction) {
         assertNotEmpty(plannedAction);
         PuzzlePiece first = first();
@@ -85,7 +85,7 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
     public int hashCode() {
         return mDefinitions.hashCode();
     }
-    
+
     private PuzzlePiece first() {
         return this.iterator().next();
     }
@@ -139,7 +139,7 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
         }
         return retval;
     }
-    
+
     /**
      * Make PuzzlePieceSet immutable. Cannot be undone.
      *

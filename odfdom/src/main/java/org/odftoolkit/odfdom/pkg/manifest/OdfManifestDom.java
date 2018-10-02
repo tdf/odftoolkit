@@ -25,23 +25,22 @@ package org.odftoolkit.odfdom.pkg.manifest;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
-
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 
 /**
  * The DOM representation of the ODF manifest.xml file of an ODF document.
- * 
+ *
  * @since 0.8.9
  */
 public class OdfManifestDom extends OdfFileDom {
-	
+
 	private static final long serialVersionUID = 8149848234988627233L;
-	
+
 	/**
 	 * Creates the DOM representation of an XML file of an Odf document.
-	 * 
+	 *
 	 * @param odfDocument
 	 *            the document the XML files belongs to
 	 * @param packagePath
@@ -50,10 +49,10 @@ public class OdfManifestDom extends OdfFileDom {
 	public OdfManifestDom(OdfSchemaDocument odfDocument, String packagePath) {
 		super(odfDocument, packagePath);
 	}
-	
+
 	/**
 	 * Creates the DOM representation of an XML file of an Odf document.
-	 * 
+	 *
 	 * @param pkg
 	 *            the package the XML files belongs to
 	 * @param packagePath
@@ -62,7 +61,7 @@ public class OdfManifestDom extends OdfFileDom {
 	public OdfManifestDom(OdfPackage pkg, String packagePath) {
 		super(pkg, packagePath);
 	}
-	
+
 	/**
 	 * Might be used to initialize specific XML Namespace prefixes/URIs for this
 	 * XML file
@@ -73,7 +72,7 @@ public class OdfManifestDom extends OdfFileDom {
 		mPrefixByUri.put("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest");
 		super.initialize();
 	}
-	
+
 	/**
 	 * @return The root element <manifest:manifest > of the manifest.xml file as
 	 *         <code>ManifestElement</code>.
@@ -82,12 +81,12 @@ public class OdfManifestDom extends OdfFileDom {
 	public ManifestElement getRootElement() {
 		return (ManifestElement) getDocumentElement();
 	}
-	
+
 	/**
 	 * Creates an JDK <code>XPath</code> instance. Initialized with ODF
 	 * namespaces from <code>OdfDocumentNamespace</code>. Updated with all
 	 * namespace of the XML file.
-	 * 
+	 *
 	 * @return an XPath instance with namespace context set to include the
 	 *         standard ODFDOM prefixes.
 	 */

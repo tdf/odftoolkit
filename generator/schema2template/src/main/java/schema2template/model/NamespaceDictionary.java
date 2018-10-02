@@ -109,8 +109,10 @@ public class NamespaceDictionary {
 	dict.put("grddl","http://www.w3.org/2003/g/data-view#");
 	dict.put("xhtml","http://www.w3.org/1999/xhtml");
 	dict.put("smil","urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0");
-        dict.put("xml", "http://www.w3.org/XML/1998/namespace");
-
+    dict.put("xml", "http://www.w3.org/XML/1998/namespace");
+    dict.put("manifest", "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0");
+    dict.put("dsig", "urn:oasis:names:tc:opendocument:xmlns:digitalsignature:1.0");
+	dict.put("ds", "http://www.w3.org/2000/09/xmldsig#");
         return dict;
     }
 

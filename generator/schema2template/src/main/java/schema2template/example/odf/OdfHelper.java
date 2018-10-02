@@ -110,8 +110,10 @@ public class OdfHelper {
 	private static final String PYTHON_OUTPUT_FILES = "target" + File.separator + "python-output-files.xml";
 	private static final String DOM_OUTPUT_FILES_TEMPLATE = "dom-output-files.vm";
 	private static final String DOM_OUTPUT_FILES = "target" + File.separator + "dom-output-files.xml";
-	private static final String PKG_OUTPUT_FILES_TEMPLATE = "pkg-output-files.vm";
-	private static final String PKG_OUTPUT_FILES = "target" + File.separator + "pkg-output-files.xml";
+	private static final String PKG_MANIFEST_OUTPUT_FILES_TEMPLATE = "pkg-manifest-output-files.vm";
+	private static final String PKG_MANIFEST_OUTPUT_FILES = "target" + File.separator + "pkg-manifest-output-files.xml";
+	private static final String PKG_DSIG_OUTPUT_FILES_TEMPLATE = "pkg-dsig-output-files.vm";
+	private static final String PKG_DSIG_OUTPUT_FILES = "target" + File.separator + "pkg-dsig-output-files.xml";
 	private static XMLModel mOdf12SignatureSchemaModel;
 	private static XMLModel mOdf12ManifestSchemaModel;
 	private static XMLModel mOdf12SchemaModel;
@@ -154,9 +156,9 @@ public class OdfHelper {
 		initialize();
 
 		// ODF 1.2 Code Generation
-		fillTemplates(odfDomResourceDir, mOdf12Root, DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES);
-		fillTemplates(odfPkgResourceDir, mOdf12SignatureRoot, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
-		fillTemplates(odfPkgResourceDir, mOdf12ManifestRoot, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
+        fillTemplates(odfDomResourceDir, mOdf12Root, DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES, mOdf12SchemaModel);
+        fillTemplates(odfPkgResourceDir, mOdf12ManifestRoot, PKG_MANIFEST_OUTPUT_FILES_TEMPLATE, PKG_MANIFEST_OUTPUT_FILES, mOdf12ManifestSchemaModel);
+        fillTemplates(odfPkgResourceDir, mOdf12SignatureRoot, PKG_DSIG_OUTPUT_FILES_TEMPLATE, PKG_DSIG_OUTPUT_FILES, mOdf12SignatureSchemaModel);
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -164,14 +166,14 @@ public class OdfHelper {
 		initialize();
 
 		// ODF 1.2 HTML Reference (yet without BNF nor images)
-		fillTemplates(odfReferenceResourceDir, mOdf12Root, REFERENCE_OUTPUT_FILES_TEMPLATE, REFERENCE_OUTPUT_FILES);
+		fillTemplates(odfReferenceResourceDir, mOdf12Root, REFERENCE_OUTPUT_FILES_TEMPLATE, REFERENCE_OUTPUT_FILES, mOdf12SchemaModel);
 		// ODF 1.2 Python (The generated Python source is from a former colleague and might not work any longer..)
-		fillTemplates(odfPythonResourceDir, mOdf12Root, PYTHON_OUTPUT_FILES_TEMPLATE, PYTHON_OUTPUT_FILES);
+		fillTemplates(odfPythonResourceDir, mOdf12Root, PYTHON_OUTPUT_FILES_TEMPLATE, PYTHON_OUTPUT_FILES, mOdf12SchemaModel);
 
 		// ODF 1.2 Code Generation
-		fillTemplates(odfDomResourceDir, mOdf12Root, DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES);
-		fillTemplates(odfPkgResourceDir, mOdf12ManifestRoot, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
-		fillTemplates(odfPkgResourceDir, mOdf12SignatureRoot, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
+		fillTemplates(odfDomResourceDir, mOdf12Root, DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES, mOdf12SchemaModel);
+        fillTemplates(odfPkgResourceDir, mOdf12ManifestRoot, PKG_MANIFEST_OUTPUT_FILES_TEMPLATE, PKG_MANIFEST_OUTPUT_FILES, mOdf12ManifestSchemaModel);
+		fillTemplates(odfPkgResourceDir, mOdf12SignatureRoot, PKG_DSIG_OUTPUT_FILES_TEMPLATE, PKG_DSIG_OUTPUT_FILES, mOdf12SignatureSchemaModel);
 	}
 
 	private static void initialize() throws Exception {
@@ -205,7 +207,7 @@ public class OdfHelper {
 		LOG.info("Finished initilization..");
 	}
 
-	private static void fillTemplates(String sourceDir, Expression root, String outputRuleTemplate, String outputRuleFile) throws Exception {
+	private static void fillTemplates(String sourceDir, Expression root, String outputRuleTemplate, String outputRuleFile, XMLModel model) throws Exception {
 		// intialising template engine (ie. Velocity)
 		Properties props = new Properties();
 		props.setProperty("file.resource.loader.path", sourceDir);
@@ -213,12 +215,12 @@ public class OdfHelper {
 		ve.init();
 
 		// Create output-files.xml
-		createOutputFileList(ve, outputRuleTemplate, outputRuleFile);
+		createOutputFileList(ve, outputRuleTemplate, outputRuleFile, model);
 		LOG.info("output-files.xml created done.");
 
 		// Process output-files.xml, create output files
 		LOG.fine("Processing output files... ");
-		processFileList(ve, root, outputRuleFile);
+		processFileList(ve, root, outputRuleFile, model);
 		LOG.fine("DONE.\n");
 	}
 
@@ -264,12 +266,26 @@ public class OdfHelper {
 	 * @throws Exception
 	 */
 	public static Expression loadSchema(File rngFile) throws Exception {
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		factory.setNamespaceAware(true);
+
+   		SAXParserFactory saxFactory = new org.apache.xerces.jaxp.SAXParserFactoryImpl();
+		saxFactory.setNamespaceAware(true);
+		saxFactory.setValidating(false);
+		try {
+			saxFactory.setXIncludeAware(false);
+			saxFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+			// removing potential vulnerability: see https://www.owasp.org/index.php/XML_External_Entity_%28XXE%29_Processing
+			saxFactory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+			saxFactory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+			saxFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+		} catch (Exception ex) {
+			Logger.getLogger(OdfHelper.class.getName()).log(Level.SEVERE, null, ex);
+			throw new RuntimeException();
+		}
+
 		// Parsing the Schema with MSV
 		String absolutePath = rngFile.getAbsolutePath();
 		com.sun.msv.reader.util.IgnoreController ignoreController = new com.sun.msv.reader.util.IgnoreController();
-		Expression root = RELAXNGReader.parse(absolutePath, factory, ignoreController).getTopLevel();
+		Expression root = RELAXNGReader.parse(absolutePath, saxFactory, ignoreController).getTopLevel();
 
 
 		if (root == null) {
@@ -280,9 +296,6 @@ public class OdfHelper {
 
 	private static VelocityContext getContext(String contextStr, String param) {
 		VelocityContext context = new VelocityContext();
-		context.put("signaturemodel", mOdf12SignatureSchemaModel);
-		context.put("manifestmodel", mOdf12ManifestSchemaModel);
-		context.put("model", mOdf12SchemaModel);
 		context.put("oldmodel", mOdf11SchemaModel);
 		context.put("odfmodel", mOdfModel);
 		context.put("javamodel", mJavaModel);
@@ -291,8 +304,9 @@ public class OdfHelper {
 		return context;
 	}
 
-	private static void createOutputFileList(VelocityEngine ve, String template, String output) throws Exception {
+	private static void createOutputFileList(VelocityEngine ve, String template, String output, XMLModel model) throws Exception {
 		VelocityContext context = getContext(null, null);
+        context.put("model", model);
 		File parentPatch = new File(output).getParentFile();
 		if (!parentPatch.exists()) {
 			parentPatch.mkdirs();
@@ -328,7 +342,7 @@ public class OdfHelper {
 		}
 	}
 
-	public static void processFileList(VelocityEngine ve, Expression root, String outputRuleFile) throws Exception {
+	public static void processFileList(VelocityEngine ve, Expression root, String outputRuleFile, XMLModel model) throws Exception {
 		File outputFiles = new File(outputRuleFile);
 		List<OutputFileListEntry> fl = OutputFileListHandler.readFileListFile(outputFiles);
 
@@ -337,15 +351,18 @@ public class OdfHelper {
 				case PATH:
 					break;
 				case FILE:
-					LOG.log(Level.INFO, "Processing line{0}: Generating file {1}\n", new Object[]{f.getLineNumber(), generateFilename(f.getAttribute("path"))});
+					LOG.log(Level.INFO, "Processing line {0}: Generating file {1}\n", new Object[]{f.getLineNumber(), generateFilename(f.getAttribute("path"))});
 					String odfContextStr = f.getAttribute("context");
 					String param = f.getAttribute("param");
 					VelocityContext context = getContext(odfContextStr, param);
 					if (context == null) {
 						throw new RuntimeException("Error in output-files.xml, line " + f.getLineNumber() + ": no or invalid odf-scope");
-					}
+					}else{
+                        context.put("model", model);
+                    }
 
 					File out = new File(outputRoot + File.separator + generateFilename(f.getAttribute("path"))).getCanonicalFile();
+                    LOG.info("Absolute path of generated file: " + out.getAbsolutePath());
 					ensureParentFolders(out);
 					FileWriter fileout = new FileWriter(out);
 					String encoding = "utf-8";

@@ -1,3 +1,4 @@
+
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
@@ -31,6 +32,7 @@ package org.odftoolkit.odfdom.pkg.dsig;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute dsig:version}.
@@ -38,7 +40,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class VersionAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:digitalsignature:1.0", "dsig:version");
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.DSIG, "version");
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute dsig:version}.

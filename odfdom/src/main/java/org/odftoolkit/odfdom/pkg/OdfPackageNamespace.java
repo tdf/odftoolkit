@@ -26,8 +26,10 @@ package org.odftoolkit.odfdom.pkg;
 public enum OdfPackageNamespace implements NamespaceName {
 
 
-	MANIFEST("chart", "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"),
-	XML("xml", "http://www.w3.org/XML/1998/namespace" );
+	MANIFEST("manifest", "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"),
+	XML("xml", "http://www.w3.org/XML/1998/namespace"),
+    DSIG("dsig", "urn:oasis:names:tc:opendocument:xmlns:digitalsignature:1.0"),
+	DS("ds", "http://www.w3.org/2000/09/xmldsig#");
 
 	private String mPrefix;
 	private String mUri;
