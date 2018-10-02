@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
   or more contributor license agreements.  See the NOTICE file
@@ -110,7 +109,8 @@
         <module>odfdom</module>
         <module>validator</module>
         <module>simple</module>
-    </modules>
+        <module>benchmark</module>
+  </modules>
 
     <name>Apache ODF Toolkit</name>
     <description>
@@ -389,27 +389,27 @@
                                 <phase>prepare-package</phase>
                                 <configuration>
                                     <tasks>
-                                        <mkdir dir="${basedir}/target/${project.version}-bin" />
+                                        <mkdir dir="${basedir}/target/${project.version}-bin"/>
                                         <copy todir="${basedir}/target/${project.version}-bin" flatten="true">
                                               <fileset dir="${basedir}">
-                                                <include name="*.txt" />
-                                                <include name="KEYS" />
-                                                <include name="odfdom/target/*.jar" />
-                                                <include name="simple/target/*.jar" />
-                                                <include name="validator/target/*.?ar" />
-                                                <include name="xslt-runner/target/*.jar" />
-                                                <include name="xslt-runner-task/target/*.jar" />
-                                                <exclude name="**/target/**-javadoc.jar" />
-                                                <exclude name="**/target/**-sources.jar" />
-                                                <exclude name="**/target/**-jar-with-dependencies.jar" />
+                                                <include name="*.txt"/>
+                                                <include name="KEYS"/>
+                                                <include name="odfdom/target/*.jar"/>
+                                                <include name="simple/target/*.jar"/>
+                                                <include name="validator/target/*.?ar"/>
+                                                <include name="xslt-runner/target/*.jar"/>
+                                                <include name="xslt-runner-task/target/*.jar"/>
+                                                <exclude name="**/target/**-javadoc.jar"/>
+                                                <exclude name="**/target/**-sources.jar"/>
+                                                <exclude name="**/target/**-jar-with-dependencies.jar"/>
                                               </fileset>
                                         </copy>
-                                        <mkdir dir="${basedir}/target/${project.version}-docs" />
+                                        <mkdir dir="${basedir}/target/${project.version}-docs"/>
                                         <copy todir="${basedir}/target/${project.version}-docs" flatten="true">
                                             <fileset dir="${basedir}">
-                                                <include name="*.txt" />
-                                                <include name="KEYS" />
-                                                <include name="**/target/*-javadoc.jar" />
+                                                <include name="*.txt"/>
+                                                <include name="KEYS"/>
+                                                <include name="**/target/*-javadoc.jar"/>
                                             </fileset>
                                         </copy>
                                         </tasks>
@@ -425,32 +425,32 @@
                                     <tasks>
                                         <checksum algorithm="MD5" fileext=".md5">
                                               <fileset dir="${basedir}/target">
-                                                <include name="*.zip" />
-                                                <include name="*.tar.gz" />
-                                                <include name="*.tar.bz2" />
+                                                <include name="*.zip"/>
+                                                <include name="*.tar.gz"/>
+                                                <include name="*.tar.bz2"/>
                                               </fileset>
                                         </checksum>
                                         <checksum algorithm="SHA-512" fileext=".sha">
                                               <fileset dir="${basedir}/target">
-                                                <include name="*.zip" />
-                                                <include name="*.tar.gz" />
-                                                <include name="*.tar.bz2" />
+                                                <include name="*.zip"/>
+                                                <include name="*.tar.gz"/>
+                                                <include name="*.tar.bz2"/>
                                               </fileset>
                                         </checksum>
-                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA-512" property="checksum" />
+                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA-512" property="checksum"/>
                                         <copy todir="${basedir}/target/release/${project.version}/">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-source-release.*" />
+                                                <include name="*-source-release.*"/>
                                             </fileset>
                                         </copy>
                                         <copy todir="${basedir}/target/release/${project.version}/binaries">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-bin.*" />
+                                                <include name="*-bin.*"/>
                                             </fileset>
                                         </copy>
                                         <copy todir="${basedir}/target/release/${project.version}/docs">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-doc.*" />
+                                                <include name="*-doc.*"/>
                                             </fileset>
                                         </copy>
                                         <echo file="${basedir}/target/vote.txt">
@@ -475,12 +475,12 @@
                                             [ ] +1 Release this package as Apache ODF Toolkit ${project.version}
                                             [ ] -1 Do not release this package because...${line.separator}
                                         </echo>
-                                        <echo />
+                                        <echo/>
                                         <echo>
                                             The release candidate has been prepared in:    ${basedir}/target/${project.version}
 											A release vote template has been generated for you:    file://${basedir}/target/vote.txt
 										</echo>
-										<echo />
+										<echo/>
 									</tasks>
 								</configuration>
 							</execution>
