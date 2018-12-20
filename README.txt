@@ -1,11 +1,11 @@
 ====================================================================================
 
-                            Apache ODF Toolkit  
-            <http://incubator.apache.org/odftoolkit/index.html>
+                            The ODF Toolkit  
+                        <http://odftoolkit.org>
         
 ====================================================================================
 
-The Apache ODF Toolkit (incubating) is a set of Java modules that allow programmatic 
+The ODF Toolkit is a set of Java modules that allow programmatic 
 creation, scanning and manipulation of Open Document Format (ISO/IEC 26300 == ODF) 
 documents. Unlike other approaches which rely on runtime manipulation of heavy-weight 
 editors via an automation interface, the ODF Toolkit is lightweight and ideal for 
@@ -33,7 +33,7 @@ The ODF Toolkit consists of four subcomponents:
     for conformance according to the ODF Standard. ODF Validator is available as an 
     online service and as a command line tool. This page primarily describes the 
     command line tool. Please visit web page:
-       http://incubator.apache.org/odftoolkit/conformance/ODFValidator.html
+       http://odftoolkit.org/conformance/ODFValidator.html
     for details regarding the online tool.
 
 4. ODF XSLT Runner(xslt-runner-*.jar, xslt-runner-task-*.jar)
@@ -59,36 +59,36 @@ Documentation
 =============
 
 The Home Page for the ODF Toolkit:
-    http://incubator.apache.org/odftoolkit/index.html
+    http://odftoolkit.org/index.html
     
 ODFDOM Getting Start Guide:    
-    http://incubator.apache.org/odftoolkit/odfdom/index.html   
+    http://odftoolkit.org/odfdom/index.html   
      
 Simple API Getting Start Guide:    
-    http://incubator.apache.org/odftoolkit/simple/gettingstartguide.html    
+    http://odftoolkit.org/simple/gettingstartguide.html    
        
 Simple API Cookbook:
-    http://incubator.apache.org/odftoolkit/simple/document/cookbook/index.html
+    http://odftoolkit.org/simple/document/cookbook/index.html
     
 Simple API Demos:
-    http://incubator.apache.org/odftoolkit/simple/demo/index.html
+    http://odftoolkit.org/simple/demo/index.html
     
 Simple API Online JavaDoc:
-    http://incubator.apache.org/odftoolkit/simple/document/javadoc/index.html
+    http://odftoolkit.org/simple/document/javadoc/index.html
     
 ODF Validator Getting Start Guide:   
-    http://incubator.apache.org/odftoolkit/conformance/ODFValidator.html
+    http://odftoolkit.org/conformance/ODFValidator.html
     
 ODF XSLT Runner Getting Start Guide:   
-    http://incubator.apache.org/odftoolkit/xsltrunner/ODFXSLTRunner.html     
+    http://odftoolkit.org/xsltrunner/ODFXSLTRunner.html     
     
     
 License (see also LICENSE.txt)
 ==============================
 
-Collective work: Copyright 2011-2017 The Apache Software Foundation.
+Collective work: Copyright 2011-2019 The Document Foundation.
 
-Licensed to the Apache Software Foundation (ASF) under one or more
+Licensed to the Document Software Foundation (TSF) under one or more
 contributor license agreements.  See the NOTICE file distributed with
 this work for additional information regarding copyright ownership.
 The ASF licenses this file to You under the Apache License, Version 2.0
@@ -103,7 +103,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Apache ODF Toolkit includes a number of subcomponents with separate copyright
+The ODF Toolkit includes a number of subcomponents with separate copyright
 notices and license terms. Your use of these subcomponents is subject to
 the terms and conditions of the licenses listed in the LICENSE.txt file.
     

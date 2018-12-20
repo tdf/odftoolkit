@@ -20,24 +20,24 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.odftoolkit</groupId>
+    <groupId>org.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.7.0-incubating-SNAPSHOT</version>
+    <version>0.9.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>xslt-runner-task</artifactId>
   <name>ODF XSLT-Runner Ant Task</name>
-  <version>1.3.0-incubating-SNAPSHOT</version>
+  <version>0.9.0-SNAPSHOT</version>
   
   <organization>
-    <name>The Apache Software Foundation</name>
-    <url>http://www.apache.org/</url>
+	<name>The Document Foundation</name>
+	<url>https://www.documentfoundation.org/</url>
   </organization>
   <dependencies>
 	<dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>xslt-runner</artifactId>
-      <version>1.3.0-incubating-SNAPSHOT</version>
+      <version>0.9.0-SNAPSHOT</version>
 	</dependency>	
     <dependency>
       <groupId>org.apache.ant</groupId>

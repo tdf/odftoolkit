@@ -22,14 +22,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.odftoolkit</groupId>
+    <groupId>org.odftoolkit</groupId>
     <artifactId>schema2template-pom</artifactId>
-    <version>0.9.0-incubating-SNAPSHOT</version>
+    <version>0.9.0-SNAPSHOT</version>
   </parent>
   
 	<!-- The Basics -->
 	<artifactId>schema2template</artifactId>
-	<version>0.9.0-incubating-SNAPSHOT</version>
+	<version>0.9.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<dependencies>
         <dependency>
@@ -133,112 +133,9 @@
 						<exclude>src/main/resources/examples/odf/odf-schemas/*.rng</exclude>
                     </excludes>
                 </configuration>
-            </plugin><!--
-            <plugin>
-      			<groupId>org.codehaus.mojo</groupId>
-      			<artifactId>wagon-maven-plugin</artifactId>
-      			<version>1.0-beta-3</version>
-      			<executions>
-        			<execution>
-          				<id>download-odf-schema-v1.2</id>
-          				<phase>process-resources</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://docs.oasis-open.org/office/v1.2</url>
-            				<fromFile>os/OpenDocument-v1.2-os-schema.rng</fromFile>
-            				<toDir>${project.build.directory}/odf-schemas</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-odf-manifest-schema-v1.2</id>
-          				<phase>process-resources</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://docs.oasis-open.org/office/v1.2</url>
-            				<fromFile>os/OpenDocument-v1.2-os-manifest-schema.rng</fromFile>
-            				<toDir>${project.build.directory}/odf-schemas</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-odf-dsig-schema-v1.2</id>
-          				<phase>process-resources</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://docs.oasis-open.org/office/v1.2</url>
-            				<fromFile>os/OpenDocument-v1.2-os-dsig-schema.rng</fromFile>
-            				<toDir>${project.build.directory}/odf-schemas</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-odf-schema-v1.1</id>
-          				<phase>process-resources</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://docs.oasis-open.org/office/v1.1</url>
-            				<fromFile>OS/OpenDocument-schema-v1.1.rng</fromFile>
-            				<toDir>${project.build.directory}/odf-schemas</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-odf-strict-schema-v1.1</id>
-          				<phase>process-resources</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://docs.oasis-open.org/office/v1.1</url>
-            				<fromFile>OS/OpenDocument-strict-schema-v1.1.rng</fromFile>
-            				<toDir>${project.build.directory}/odf-schemas</toDir>
-          				</configuration>
-        			</execution>
-                    <!- Disabled due to a security exception on Apache servers, when downloading from that OASIS host
-                    Error handling resource: sun.security.validator.ValidatorException: 
-                        PKIX path building failed: 
-                            sun.security.provider.certpath.SunCertPathBuilderException: 
-                                unable to find valid certification path to requested target
-        			<execution>
-          				<id>download-odf-schema-v1.0</id>
-          				<phase>process-resources</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://www.oasis-open.org/committees/download.php/12571</url>
-            				<fromFile>OpenDocument-schema-v1.0-os.rng</fromFile>
-            				<toDir>${project.build.directory}/odf-schemas</toDir>
-          				</configuration>
-        			</execution>
-        			<execution>
-          				<id>download-odf-strict-schema-v1.0</id>
-          				<phase>process-resources</phase>
-          				<goals>
-            				<goal>download-single</goal>
-          				</goals>
-          				<configuration>
-            				<url>dav:http://www.oasis-open.org/committees/download.php/12569</url>
-            				<fromFile>OpenDocument-strict-schema-v1.0-os.rng</fromFile>
-            				<toDir>${project.build.directory}/odf-schemas</toDir>
-          				</configuration>
-        			</execution>
-      			</executions>
-    		</plugin>-->
+            </plugin>
 		</plugins>
 	</build>
-	<!-- <distributionManagement>
-		<site>
-			<id>odfdom</id>
-			<name>ODFDOM Java Toolkit Project</name>
-			<url>dav:https://odftoolkit.org/website/odfdom/${project.version}/codegeneration/schema2template</url>
-		</site>
-	</distributionManagement> -->
 	<reporting>
 		<plugins>
 			<plugin>
@@ -284,8 +181,8 @@
 	<!-- More Project Information -->
 	<name>XML Schema to Template Mapping Tool: Library</name>
 	<description>XML Schema to Template Mapping Tool: Library</description>
-	<organization>
-        <name>The Apache Software Foundation</name>
-        <url>http://www.apache.org/</url>
-    </organization>
+	<organization>	
+        <name>The Document Foundation</name>        
+        <url>https://www.documentfoundation.org/</url>
+    </organization>    
 </project>

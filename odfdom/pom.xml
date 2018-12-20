@@ -23,13 +23,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.apache.odftoolkit</groupId>
+		<groupId>org.odftoolkit</groupId>
 		<artifactId>odftoolkit</artifactId>
-		<version>0.7.0-incubating-SNAPSHOT</version>
+		<version>0.9.0-SNAPSHOT</version>
 	</parent>
   
 	<artifactId>odfdom-java</artifactId>
-	<version>0.9.0-incubating-SNAPSHOT</version>
+	<version>0.9.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -340,15 +340,14 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
 		</license>
 	</licenses>
-	<organization>
-		<name>The Apache Software Foundation</name>
-		<url>http://www.apache.org/</url>
-	</organization>
-
-	<scm>
-		<connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/odfdom</connection>
-		<developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/odfdom</developerConnection>
-		<url>http://svn.apache.org/viewvc/incubator/odf/trunk/odfdom</url>
+    <organization>
+        <name>The Document Foundation</name>
+        <url>https://www.documentfoundation.org/</url>
+    </organization>
+    <scm>
+		<connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
+		<developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
+		<url>https://github.com/tdf/odftoolkit/tree/trunk/odfdom</url>		
 	</scm>
 	<profiles>
 		<profile>

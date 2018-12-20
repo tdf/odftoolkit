@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.odftoolkit</groupId>
+    <groupId>org.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.7.0-incubating-SNAPSHOT</version>
+    <version>0.9.0-SNAPSHOT</version>
   </parent>
 
     <!-- The Basics -->
     <artifactId>schema2template-pom</artifactId>
-    <version>0.9.0-incubating-SNAPSHOT</version>
+    <version>0.9.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
 	<properties>
@@ -96,7 +96,7 @@
     <!-- More Project Information -->
     <name>XML Schema to Template Mapping Tool: Parent POM</name>
     <description>Parent project for XML Schema to Template Mapping Tool</description>
-    <url>http://incubator.apache.org/odftoolkit/odfdom/index.html</url>
+    <url>http://odftoolkit.org</url>
     <inceptionYear>2010</inceptionYear>
     <licenses>
         <license>
@@ -105,13 +105,13 @@
         </license>
     </licenses>
     <organization>
-        <name>The Apache Software Foundation</name>
-        <url>http://www.apache.org/</url>
+        <name>The Document Foundation</name>
+        <url>https://www.documentfoundation.org/</url>
     </organization>
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/generator</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/generator</developerConnection>
-        <url>http://svn.apache.org/viewvc/incubator/odf/trunk/generator</url>
+		<connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
+		<developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
+		<url>https://github.com/tdf/odftoolkit/tree/trunk/generator</url>		
     </scm>
 
     <profiles>

@@ -22,19 +22,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.apache.odftoolkit</groupId>
+		<groupId>org.odftoolkit</groupId>
 		<artifactId>odftoolkit</artifactId>
-		<version>0.7.0-incubating-SNAPSHOT</version>
+		<version>0.9.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>odfvalidator</artifactId>
-	<version>1.2.0-incubating-SNAPSHOT</version>
+	<version>0.9.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>odfdom-java</artifactId>
-			<version>0.9.0-incubating-SNAPSHOT</version>
+			<version>0.9.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -97,172 +97,7 @@
 				<version>2.12</version>
 			</extension>
 		</extensions>
-		<plugins><!--
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>wagon-maven-plugin</artifactId>
-				<version>1.0-beta-3</version>
-				<executions>
-					<execution>
-						<id>download-odf-schema-v1.2</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>download-single</goal>
-						</goals>
-						<configuration>
-							<url>dav:http://docs.oasis-open.org/office/v1.2</url>
-							<fromFile>os/OpenDocument-v1.2-os-schemas.zip</fromFile>
-							<toDir>${project.build.directory}/schemas</toDir>
-						</configuration>
-					</execution>
-					<execution>
-						<id>download-odf-manifest-schema-v1.1</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>download-single</goal>
-						</goals>
-						<configuration>
-							<url>dav:http://docs.oasis-open.org/office/v1.1</url>
-							<fromFile>OS/OpenDocument-manifest-schema-v1.1.rng</fromFile>
-							<toDir>${project.build.directory}/classes/schema/odf1.1</toDir>
-						</configuration>
-					</execution>
-					<execution>
-						<id>download-odf-schema-v1.1</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>download-single</goal>
-						</goals>
-						<configuration>
-							<url>dav:http://docs.oasis-open.org/office/v1.1</url>
-							<fromFile>OS/OpenDocument-schema-v1.1.rng</fromFile>
-							<toDir>${project.build.directory}/classes/schema/odf1.1</toDir>
-						</configuration>
-					</execution>
-					<execution>
-						<id>download-odf-strict-schema-v1.1</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>download-single</goal>
-						</goals>
-						<configuration>
-							<url>dav:http://docs.oasis-open.org/office/v1.1</url>
-							<fromFile>OS/OpenDocument-strict-schema-v1.1.rng</fromFile>
-							<toDir>${project.build.directory}/classes/schema/odf1.1</toDir>
-						</configuration>
-					</execution>
-                    <!- https://issues.apache.org/jira/browse/ODFTOOLKIT-406
-                    Disabled due to a security exception on Apache servers, when downloading from that OASIS host
-                    Error handling resource: sun.security.validator.ValidatorException: 
-                        PKIX path building failed: 
-                            sun.security.provider.certpath.SunCertPathBuilderException: 
-                                unable to find valid certification path to requested target
-                                                        
-					<execution>
-						<id>download-odf-manifest-schema-v1.0</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>download-single</goal>
-						</goals>
-						<configuration>
-							<url>dav:http://oasis-open.org/committees/download.php/12570</url>
-							<fromFile>OpenDocument-manifest-schema-v1.0-os.rng</fromFile>
-							<toDir>${project.build.directory}/classes/schema/odf1.0</toDir>
-						</configuration>
-					</execution>
-					<execution>
-						<id>download-odf-schema-v1.0</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>download-single</goal>
-						</goals>
-						<configuration>
-							<url>dav:http://www.oasis-open.org/committees/download.php/12571</url>
-							<fromFile>OpenDocument-schema-v1.0-os.rng</fromFile>
-							<toDir>${project.build.directory}/classes/schema/odf1.0</toDir>
-						</configuration>
-					</execution>
-					<execution>
-						<id>download-odf-strict-schema-v1.0</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>download-single</goal>
-						</goals>
-						<configuration>
-							<url>dav:http://www.oasis-open.org/committees/download.php/12569</url>
-							<fromFile>OpenDocument-strict-schema-v1.0-os.rng</fromFile>
-							<toDir>${project.build.directory}/classes/schema/odf1.0</toDir>
-						</configuration>
-					</execution>
-                                        ->     
-					<execution>
-						<id>download-mathml-schema-v3.0</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>download-single</goal>
-						</goals>
-						<configuration>
-							<url>dav:http://www.w3.org/Math/RelaxNG</url>
-							<fromFile>mathml3-relaxng.zip</fromFile>
-							<toDir>${project.build.directory}/schemas</toDir>
-						</configuration>
-					</execution>
-					<execution>
-						<id>download-mathml-schema-v2.0</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>download-single</goal>
-						</goals>
-						<configuration>
-							<url>dav:http://www.w3.org/Math/XMLSchema</url>
-							<fromFile>mathml2.tgz</fromFile>
-							<toDir>${project.build.directory}/schemas</toDir>
-						</configuration>
-					</execution>
-					<execution>
-						<id>download-mathml-schema-v1.01</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>download-single</goal>
-						</goals>
-						<configuration>
-							<url>dav:http://www.w3.org/pub/WWW/TR/REC-MathML</url>
-							<fromFile>mmlents.zip</fromFile>
-							<toDir>${project.build.directory}/schemas</toDir>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.2</version>
-				<executions>
-					<execution>
-						<id>unzip schema packages</id>
-						<phase>validate</phase>
-						<configuration>
-							<tasks>
-								<echo message="unzip odf 1.2 schemas" />
-								<unzip src="${project.build.directory}/schemas/OpenDocument-v1.2-os-schemas.zip" dest="${project.build.directory}/classes/schema/odf1.2/" />
-								<echo message="unzip mathml 3.0 schemas" />
-								<unzip src="${project.build.directory}/schemas/mathml3-relaxng.zip" dest="${project.build.directory}/schemas/" />
-								<move file="${project.build.directory}/schemas/mathml3" tofile="${project.build.directory}/classes/schema/mathml3.0" />
-								<echo message="untar mathml 2.0 schemas" />
-								<untar src="${project.build.directory}/schemas/mathml2.tgz" dest="${project.build.directory}/schemas/" />
-								<move file="${project.build.directory}/schemas/mathml2" tofile="${project.build.directory}/classes/schema/mathml2.0" />
-								<echo message="unzip mathml 1.01 schemas" />
-								<unzip src="${project.build.directory}/schemas/mmlents.zip" dest="${project.build.directory}/schemas/" />
-								<move file="${project.build.directory}/schemas/mmlents" tofile="${project.build.directory}/classes/schema/mathml1.01" />
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-
-				</executions>
-			</plugin>-->
+		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.6.1</version>
@@ -450,14 +285,14 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
 		</license>
 	</licenses>
-	<organization>
-		<name>The Apache Software Foundation</name>
-		<url>http://www.apache.org/</url>
-	</organization>
-	<scm>
-		<connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk/validator</connection>
-		<developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk/validator</developerConnection>
-		<url>http://svn.apache.org/viewvc/incubator/odf/trunk/validator</url>
+    <organization>
+        <name>The Document Foundation</name>
+        <url>https://www.documentfoundation.org/</url>
+    </organization>
+    <scm>
+		<connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
+		<developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
+		<url>https://github.com/tdf/odftoolkit/tree/trunk/validator</url>		
 	</scm>
 	<profiles>
 		<!-- Profile for deploying to the Sonatype repository, which

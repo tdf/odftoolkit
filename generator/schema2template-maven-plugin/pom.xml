@@ -22,14 +22,14 @@
     <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.odftoolkit</groupId>
+    <groupId>org.odftoolkit</groupId>
     <artifactId>schema2template-pom</artifactId>
-    <version>0.9.0-incubating-SNAPSHOT</version>
+    <version>0.9.0-SNAPSHOT</version>
   </parent>
   
     <!-- The Basics -->
     <artifactId>schema2template-maven-plugin</artifactId>
-    <version>0.9.0-incubating-SNAPSHOT</version>
+    <version>0.9.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <dependencies>
         <dependency>
@@ -82,13 +82,6 @@
             </plugin>
         </plugins>
     </build>
-    <!-- <distributionManagement>
-        <site>
-            <id>odfdom</id>
-            <name>ODFDOM Java Toolkit Project</name>
-            <url>dav:https://odftoolkit.org/website/odfdom/${project.version}/codegeneration/schema2template-maven-plugin</url>
-        </site>
-    </distributionManagement> -->
 
     <!-- More Project Information -->
     <name>XML Schema to Template Mapping Tool: Maven2 Plugin</name>

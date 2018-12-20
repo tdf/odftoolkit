@@ -21,9 +21,9 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.apache.odftoolkit</groupId>
+    <groupId>org.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.7.0-incubating-SNAPSHOT</version>
+    <version>0.9.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -112,24 +112,23 @@
         <module>simple</module>
     </modules>
 
-    <name>Apache ODF Toolkit</name>
+    <name>The ODF Toolkit</name>
     <description>
-        The Apache ODF Toolkit is a set of Java modules that allow
+        The ODF Toolkit is a set of Java modules that allow
         programmatic creation, scanning and manipulation of Open Document Format
         (ISO/IEC 26300 == ODF) documents. Unlike other approaches which rely on
         runtime manipulation of heavy-weight editors via an automation
         interface, the ODF Toolkit is lightweight and ideal for server use.
     </description>
-    <url>http://incubator.apache.org/odftoolkit/</url>
+    <url>http://odftoolkit.org</url>
     <organization>
-        <name>The Apache Software Foundation</name>
-        <url>http://www.apache.org/</url>
+        <name>The Document Foundation</name>
+        <url>https://www.documentfoundation.org/</url>
     </organization>
-
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/odf/trunk</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/odf/trunk</developerConnection>
-        <url>http://svn.apache.org/viewvc/incubator/odf/trunk</url>
+		<connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
+		<developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
+		<url>https://github.com/tdf/odftoolkit.git</url>		
     </scm>
 
     <issueManagement>
@@ -164,112 +163,10 @@
             <timezone>+1</timezone>
         </developer>
         <developer>
-            <id>devinhan</id>
-            <name>Han Biao</name>
-            <email>devinhan AT apache.org</email>
-            <organization>IBM</organization>
-            <organizationUrl>http://www.ibm.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <id>daisyguo</id>
-            <name>Ying Chun Guo</name>
-            <email>daisyguo AT apache.org</email>
-            <organization>IBM</organization>
-            <organizationUrl>http://www.ibm.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <id>weihuaWang</id>
-            <name>Wei Hua Wang</name>
-            <organization>IBM</organization>
-            <organizationUrl>http://www.ibm.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <id>FrankMeies</id>
-            <name>Frank</name>
-            <organization>Oracle Inc.</organization>
-            <organizationUrl>http://www.oracle.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
-            <id>lars_behrmann</id>
-            <name>Lars</name>
-            <organization>Freelancer</organization>
-            <organizationUrl>http://www.oracle.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
-            <id>steffeng</id>
-            <name>Steffen</name>
-            <organization>Oracle Inc.</organization>
-            <organizationUrl>http://www.oracle.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
-            <id>hans-peter</id>
-            <name>Hans-Peter</name>
-            <organization>Oracle Inc.</organization>
-            <organizationUrl>http://www.oracle.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
-            <id>bei</id>
-            <name>Bernd</name>
-            <organization>Oracle Inc.</organization>
-            <organizationUrl>http://www.oracle.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
             <id>mst</id>
             <name>Michael</name>
-            <organization>Oracle Inc.</organization>
-            <organizationUrl>http://www.oracle.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
-            <id>clippka</id>
-            <name>Christian</name>
-            <organization>Oracle Inc.</organization>
-            <organizationUrl>http://www.oracle.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
-            <id>fhopf</id>
-            <name>Florian Hopf</name>
-            <email>fhopf AT apache.org</email>
-            <url>http://blog.florian-hopf.de</url>
+            <organization>CIB Software</organization>
+            <organizationUrl>http://www.cib.de/</organizationUrl>
             <roles>
                 <role>developer</role>
             </roles>
