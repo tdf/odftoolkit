@@ -10,7 +10,6 @@ creation, scanning and manipulation of Open Document Format (ISO/IEC 26300 == OD
 documents. Unlike other approaches which rely on runtime manipulation of heavy-weight 
 editors via an automation interface, the ODF Toolkit is lightweight and ideal for 
 server use.
-It's an incubator project of the Apache Software Foundation <http://www.apache.org/>.
 
 The ODF Toolkit consists of four subcomponents:
 
@@ -86,14 +85,18 @@ ODF XSLT Runner Getting Start Guide:
 License (see also LICENSE.txt)
 ==============================
 
-Collective work: Copyright 2011-2019 The Document Foundation.
+Collective work: Copyright 2011-2018 The Apache Software Foundation.
+                 Copyright 2018-2019 The Document Foundation.
 
-Licensed to the Document Software Foundation (TSF) under one or more
-contributor license agreements.  See the NOTICE file distributed with
-this work for additional information regarding copyright ownership.
-The ASF licenses this file to You under the Apache License, Version 2.0
-(the "License"); you may not use this file except in compliance with
-the License.  You may obtain a copy of the License at
+This product has been created by The Document Foundation, incorporating
+many modifications from different contributors.
+
+See the NOTICE file distributed with this work for additional information
+regarding copyright ownership.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
      http://www.apache.org/licenses/LICENSE-2.0
 

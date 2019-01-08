@@ -206,9 +206,9 @@
 
 ====================================================================================================
 
-APACHE ODF TOOLKIT DEPENDENCIES: 
+ODF TOOLKIT DEPENDENCIES: 
 
-The Apache ODF Toolkit ODF Validator component includes several third party jars or schemas with 
+The ODF Toolkit ODF Validator component includes several third party jars or schemas with 
 separate copyright notices and license terms. Your use of the source code or bin of ODF Validator 
 is subject to the terms and conditions of the following licenses. 
 
