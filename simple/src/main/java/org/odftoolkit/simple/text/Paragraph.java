@@ -135,6 +135,27 @@ public class Paragraph extends Component implements TextboxContainer,
 		return para;
 	}
 
+
+	/**
+	 * Create an instance of paragraph
+	 * <p>
+	 * The paragraph will be added before the odfelement 'brother'.
+	 *
+	 * @param container the paragraph container that contains this paragraph.
+	 * @param brother   the the brother odfelement before that the new paragraph
+	 *                  will be inserted.
+	 */
+	public static Paragraph insertNewParagraphBefore(ParagraphContainer container, Node brother) {
+		Paragraph para = null;
+		OdfElement parent = container.getParagraphContainerElement();
+		OdfFileDom ownerDom = (OdfFileDom) parent.getOwnerDocument();
+		TextPElement pEle = ownerDom.newOdfElement(TextPElement.class);
+		parent.insertBefore(pEle, brother);
+		para = new Paragraph(pEle);
+		Component.registerComponent(para, pEle);
+		return para;
+	}
+	
 	/**
 	 * Set the text content of this paragraph.
 	 * <p>
