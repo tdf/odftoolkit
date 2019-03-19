@@ -39,7 +39,7 @@ The ODF Toolkit consists of four subcomponents:
 
 ## Getting Started
 
-The ODF Toolkit is based on Java 6 and uses the Maven 3 <http://maven.apache.org/>
+The ODF Toolkit is based on Java 8 and uses the Maven 3 <http://maven.apache.org/>
 build system. To build ODF Toolkit, use the following command in this directory:
 
     mvn clean install
