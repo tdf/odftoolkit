@@ -5,3 +5,7 @@ target/
 *~
 .*sw?
 \#*
+.idea/
+*.iml
+*.ipr
+*.iws
