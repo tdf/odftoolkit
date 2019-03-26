@@ -43,7 +43,7 @@
             <plugins>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.6.1</version>
+                    <version>3.8.0</version>
                     <configuration>
                         <!-- defined in the parent pom.xml -->
                         <source>${jdk.version}</source>
@@ -79,10 +79,14 @@
                 <configuration>
                     <doctitle>Schema2template</doctitle>
                     <splitindex>true</splitindex>
-                    <windowtitle>Schema2template v${project.version} - https://odftoolkit.org/</windowtitle>
+                    <windowtitle>Schema2template v${project.version} - https://odftoolkit.org</windowtitle>
+                    <links>
+                        <link>http://download.oracle.com/javase/8/docs/api/</link>
+                    </links>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <attach>true</attach>
-                    <additionalOptions>${javadoc.opts}</additionalOptions>
+					<additionalOptions>${javadoc.opts}</additionalOptions>
+					<bottom>${javadoc.bottom}</bottom>					
                 </configuration>
                 <executions>
                     <execution>
@@ -95,7 +99,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>           
             <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
