@@ -39,17 +39,12 @@
         </dependency>
 		<dependency>
 			<groupId>xerces</groupId>
-			<artifactId>xercesImpl</artifactId>
+			<artifactId>xercesImpl</artifactId>			
 		</dependency>        
 		<dependency>
 			<groupId>net.java.dev.msv</groupId>
 			<artifactId>msv-core</artifactId>
-            <version>2013.6.1</version>
 		</dependency>
-        <dependency>
-            <groupId>xml-apis</groupId>
-            <artifactId>xml-apis</artifactId>
-        </dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -89,7 +84,7 @@
 								<manifestEntries>
 									<Application-Name>schema2template</Application-Name>
 									<Application-Version>${project.version}</Application-Version>
-									<Application-Website>http://incubator.apache.org/odftoolkit/</Application-Website>
+									<Application-Website>https://odftoolkit.org</Application-Website>
 									<Built-By>${user.name}</Built-By>
 									<Built-Date>${build.timestamp}</Built-Date>
 								</manifestEntries>
@@ -149,7 +144,8 @@
 					</links>
 					<splitindex>true</splitindex>
 					<windowtitle>Schema2template v${project.version} - https://odftoolkit.org</windowtitle>
-					<bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved2..</bottom>
+					<bottom>${javadoc.bottom}</bottom>
+					<additionalOptions>${javadoc.opts}</additionalOptions>
 				</configuration>
 			</plugin>
 

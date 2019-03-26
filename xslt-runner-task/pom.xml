@@ -1,79 +1,80 @@
- <!-- 
-       Licensed to the Apache Software Foundation (ASF) under one
-       or more contributor license agreements.  See the NOTICE file
-       distributed with this work for additional information
-       regarding copyright ownership.  The ASF licenses this file
-       to you under the Apache License, Version 2.0 (the
-       "License"); you may not use this file except in compliance
-       with the License.  You may obtain a copy of the License at
+ 
+<!-- 
+	   Licensed to the Apache Software Foundation (ASF) under one
+	   or more contributor license agreements.  See the NOTICE file
+	   distributed with this work for additional information
+	   regarding copyright ownership.  The ASF licenses this file
+	   to you under the Apache License, Version 2.0 (the
+	   "License"); you may not use this file except in compliance
+	   with the License.  You may obtain a copy of the License at
 
-         http://www.apache.org/licenses/LICENSE-2.0
+		 http://www.apache.org/licenses/LICENSE-2.0
 
-       Unless required by applicable law or agreed to in writing,
-       software distributed under the License is distributed on an
-       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-       KIND, either express or implied.  See the License for the
-       specific language governing permissions and limitations
-       under the License.
+	   Unless required by applicable law or agreed to in writing,
+	   software distributed under the License is distributed on an
+	   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+	   KIND, either express or implied.  See the License for the
+	   specific language governing permissions and limitations
+	   under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.odftoolkit</groupId>
-    <artifactId>odftoolkit</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<groupId>org.odftoolkit</groupId>
+		<artifactId>odftoolkit</artifactId>
+		<version>0.9.0-SNAPSHOT</version>
+	</parent>
 
-  <artifactId>xslt-runner-task</artifactId>
-  <name>ODF XSLT-Runner Ant Task</name>
-  <version>0.9.0-SNAPSHOT</version>
+	<artifactId>xslt-runner-task</artifactId>
+	<name>ODF XSLT-Runner Ant Task</name>
+	<version>0.9.0-SNAPSHOT</version>
   
-  <organization>
-	<name>The Document Foundation</name>
-	<url>https://www.documentfoundation.org/</url>
-  </organization>
-  <dependencies>
-	<dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>xslt-runner</artifactId>
-      <version>0.9.0-SNAPSHOT</version>
-	</dependency>	
-    <dependency>
-      <groupId>org.apache.ant</groupId>
-      <artifactId>ant</artifactId>
-    </dependency>
-  </dependencies>
-  <properties>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
-  </properties>
+	<organization>
+		<name>The Document Foundation</name>
+		<url>https://www.documentfoundation.org/</url>
+	</organization>
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>xslt-runner</artifactId>
+			<version>0.9.0-SNAPSHOT</version>
+		</dependency>	
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+		</dependency>
+	</dependencies>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
+	</properties>
 
 
-  <!-- Build Settings -->
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
-        <configuration>
-          <!-- defined in the parent pom.xml -->
-		  <source>${jdk.version}</source>
-		  <target>${jdk.version}</target>
-          <meminitial>512m</meminitial>
-          <maxmem>1024m</maxmem>
-          <showDeprecation>true</showDeprecation>
-        </configuration>
-    </plugin>
-        <plugin>
-            <groupId>org.apache.rat</groupId>
-            <artifactId>apache-rat-plugin</artifactId>
-            <configuration>
-                <excludes>
-                    <exclude>nbproject/**</exclude>
-                </excludes>
-            </configuration>
-        </plugin>
- </plugins>
-</build>
+	<!-- Build Settings -->
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<!-- defined in the parent pom.xml -->
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<meminitial>512m</meminitial>
+					<maxmem>1024m</maxmem>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.rat</groupId>
+				<artifactId>apache-rat-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>nbproject/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
