@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE- 2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<link href="/odftoolkit/css/odf.css" rel="stylesheet" type="text/css">
+
+<title>ODF XSLT Runner and ODF XSLT Runner Task Examples</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28945571-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="banner">
+   <!-- <div id="bannerleft"><a alt="Apache ODF Toolkit (incubating)" href="http://incubator.apache.org/odftoolkit/">
+      <img id="logo" alt="Apache ODF Toolkit (Incubating)" src="/odftoolkit/images/ooo-logo.png"/></a></div> -->
+    <div id="bannerright"><a alt="Apache Incubator" href="http://incubator.apache.org">
+      <img id="asf-logo" alt="Apache Incubator" src="/odftoolkit/images/apache-incubator-logo.png"/></a></div>
+   <div id="bannercenter"><br/>&nbsp;&nbsp;&nbsp;&nbsp;Apache ODF Toolkit (incubating)</div>
+  </div>
+  <div id="clear"></div>
+  
+  <div id="sidenav">
+    <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/index.html">About</a></li>
+<li><a href="/odftoolkit/downloads.html">Downloads</a></li>
+<li><a href="http://incubator.apache.org/projects/odftoolkit.html">Incubator page</a></li>
+<li><a href="/odftoolkit/license.html">License</a></li>
+<li><a href="/odftoolkit/privacy.html">Privacy Policy</a></li>
+</ul>
+<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/odfdom/index.html">ODFDOM</a></li>
+<li><a href="/odftoolkit/simple/index.html">Simple API</a></li>
+<li><a href="/odftoolkit/conformance/ODFValidator.html">ODF Validator</a></li>
+<li><a href="/odftoolkit/xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
+</ul>
+<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/get-involved.html">Get Involved</a></li>
+<li><a href="/odftoolkit/mailing-lists.html">Mailing Lists</a></li>
+<li><a href="/odftoolkit/people.html">People</a></li>
+<li><a href="/odftoolkit/community-faqs.html">Community FAQs</a></li>
+</ul>
+<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/source.html">Source Code</a></li>
+<li><a href="https://issues.apache.org/jira/browse/ODFTOOLKIT">Bug Tracker</a></li>
+<li><a href="/odftoolkit/mvn-site/0.6-incubating/" target="_blank">Maven Reports</a></li>
+<li><a href="/odftoolkit/website-local.html">Website</a></li>
+<li><a href="/odftoolkit/developer-faqs.html">Developer FAQs</a></li>
+</ul>
+<h1 id="ppmc">PPMC<a class="headerlink" href="#ppmc" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/ppmc-faqs.html">PPMC FAQs</a></li>
+<li><a href="/odftoolkit/odftoolkit-release-guide.html">Release Guide</a>   </li>
+</ul>
+<h1 id="asf">ASF<a class="headerlink" href="#asf" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="http://www.apache.org">Apache Software Foundation</a></li>
+<li><a href="http://www.apache.org/foundation/thanks.html">Thanks</a></li>
+<li><a href="http://www.apache.org/foundation/sponsorship.html">Become a Sponsor</a></li>
+</ul>
+  </div>
+  <div id="contenta">
+  
+    <h1 class="title">ODF XSLT Runner and ODF XSLT Runner Task Examples</h1>
+    <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h2 id="xhtml">XHTML<a class="headerlink" href="#xhtml" title="Permanent link">&para;</a></h2>
+<p>The XHTML transformation contained in <a href="http://www.openoffice.org">OpenOffice.org</a> can be used to 
+transform ODF documents into XHTML. Using <strong>ODFXSLTRunner</strong> it is not even 
+required to extract the ODF package.</p>
+<p>The XHTML style sheet runs only with the <a href="http://saxon.sourceforge.net/">SAXON XSLT Processor</a>. 
+Using version 9.1 is recommended.</p>
+<p>The following command converts an ODF text document <strong>&lt;ODT&gt;</strong> into 
+an XHTML document <strong>&lt;XHTML&gt;</strong>: </p>
+<div class="codehilite"><pre><span></span>java -cp odfxsltrunner.jar:&lt;saxon.jar&gt; org.odftoolkit.odfxsltrunner.Main
+   -f net.sf.saxon.TransformerFactoryImpl  -x Pictures/ 
+  &lt;ooo-xslt&gt;/export/xhtml/opendoc2xhtml.xsl &lt;ODT&gt; -o &lt;XHTML&gt;
+</pre></div>
+
+
+<p><em>&lt;saxon.jar&gt;</em> is the jar of the <a href="http://saxon.sourceforge.net/">SAXON</a> XSLT Processor.  <em>&lt;ooo-xslt&gt;</em> 
+is the location of the OpenOffice.org XSLT stylesheets within an OpenOffice.org 
+installation. In a typical OpenOffice.org installation, this is 
+<tt>openoffice.org/basis3.3/share/xslt</tt> (Linux) or <tt>Basis/share/xslt</tt> (Windows).</p>
+<p><strong><em>Note:</em></strong> A few changes are necessary to use OpenOffice.org's XHTML 
+transformation with <strong>ODFXSLTRunner</strong>. These are available as patch in the 
+OpenOffice.org issue <a href="http://qa.openoffice.org/issues/show_bug.cgi?id=115881">i115881</a>.</p>
+<h2 id="xhtml-with-referenced-images-only">XHTML with referenced images only<a class="headerlink" href="#xhtml-with-referenced-images-only" title="Permanent link">&para;</a></h2>
+<p>The XHTML  transformation in the above example extracts all images from the 
+ODF document, regardless whether these are referenced in the XHTML document. 
+To extract only the images that are referenced a list of referenced images 
+may be created by  the <strong>create-html-img-list.xsl</strong> style sheet that is 
+contained in the <strong>sample-xslt</strong> folder of <strong>ODFXSLTRunner</strong>. It is applied 
+to the XHTML file, and the target is a text file that contains the references 
+images. Although the input file is an XHTML rather than a ODF file, 
+<strong>ODFXSLTRunner</strong> may be used to apply the style sheet.</p>
+<div class="codehilite"><pre><span></span>java -jar odfxsltrunner.jar create-html-img-list.xsl -i &lt;XHTML&gt; -o &lt;img-list&gt; 
+ unzip &lt;ODT&gt; `&lt;img-list&gt;`
+</pre></div>
+
+
+<h2 id="replace-embedded-objects-with-bitmap-images">Replace embedded objects with bitmap images<a class="headerlink" href="#replace-embedded-objects-with-bitmap-images" title="Permanent link">&para;</a></h2>
+<p>Unlike OpenOffice.org's HTML filter, the XSLT-based XHTML filter does not 
+convert embedded objects into bitmap images. It is however possible to 
+replace the embedded objects of ODF document with the images that the 
+HTML filter has exported by applying the <strong>replace-object.xsl</strong> style sheet 
+that is contained in the <strong>sample-xslt</strong> folder of <strong>ODFXSLTRunner</strong> to the 
+ODF document.</p>
+<p>The following steps are required:</p>
+<ul>
+<li>Load the ODT document into OpenOffice.org and save it with the HTML
+    filter. The file may have an arbitrary name.
+    <strong>&lt;ooo-html-file&gt;</strong> is used as a placeholder here.</li>
+<li>Convert the HTML file into an XHTML file. You may use <strong>xmllint</strong> for this purpose, which is part of <a href="http://xmlsoft.org/">libxml2</a>, or any other tools that converts HTML into XHTML. The command line for <strong>xmllint</strong> is:
+ xmllint --html --xmlout --dropdtd -o &lt;ooo-xhtml-file&gt; &lt;ooo-html-file&gt;</li>
+<li>Apply the <strong>replace-object.xsl</strong> style sheet to the ODF document. The style sheet requires the name of the XHTML file converted in the previous step as '''hrml-ref''' parameter.
+ java -jar odfxsltrunner.jar replace-objects.xsl &lt;input odf&gt; &lt;output odf&gt; 
+  ref-html=&lt;ooo-xhtml-file&gt;</li>
+<li>Zip the images that OpenOffice.org has saved next to the HTML document into the output ODF file.
+The new ODF file now can be transformed to XHTML with OpenOffice.org's XHTML transformation.</li>
+</ul>
+  </div>
+
+  <div id="footera">
+    <div id="poweredby">
+      <p><img src="/odftoolkit/images/feather-small.gif"/><br/>Powered by the Apache CMS.</p>
+    </div>
+    <div id="copyrighta">
+      <p>
+	Apache "ODF Toolkit" is an effort undergoing incubation at The Apache Software Foundation (ASF), sponsored by the Apache Incubator.
+	Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and
+	decision making process	have stabilized in a manner consistent with other successful ASF projects. While incubation status is
+	not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has
+	yet to be fully endorsed by the ASF.</p>
+      <p>
+	Copyright &copy; 2011 The Apache Software Foundation Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+	<a href="/openofficeorg/contact.html">Contact Us</a>
+	<br />Apache and the Apache feather logos are trademarks of The Apache Software Foundation.
+	<br />Other names appearing on the site may be trademarks of their respective owners.
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

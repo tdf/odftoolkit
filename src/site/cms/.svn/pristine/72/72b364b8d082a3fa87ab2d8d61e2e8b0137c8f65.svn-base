@@ -1,0 +1,197 @@
+#!/bin/sh
+#
+# $FreeBSD: ports/www/apache22/files/apache22.in,v 1.7 2010/03/27 00:15:10 dougb Exp $
+#
+
+# PROVIDE: httpd
+# REQUIRE: LOGIN cleanvar
+# KEYWORD: shutdown
+
+#
+# Add the following lines to /etc/rc.conf to enable httpd:
+# httpd_enable (bool):      Set to "NO" by default.
+#                             Set it to "YES" to enable httpd
+# httpd_profiles (str):     Set to "" by default.
+#                              Define your profiles here.
+# httpdlimits_enable (bool):Set to "NO" by default.
+#                             Set it to yes to run `limits $limits_args`
+#                             just before apache starts.
+# httpd_flags (str):        Set to "" by default.
+#                             Extra flags passed to start command.
+# httpdlimits_args (str):   Default to "-e -C daemon"
+#                             Arguments of pre-start limits run.
+# httpd_http_accept_enable (bool): Set to "NO" by default.
+#                             Set to yes to check for accf_http kernel
+#                             module on start up and load if not loaded.
+# httpd_fib (str):	      Set an altered default network view for apache
+
+ulimit -m 500000
+ulimit -v 500000
+
+. /etc/rc.subr
+
+name="httpd"
+rcvar=`set_rcvar`
+
+start_precmd="httpd_prestart"
+restart_precmd="httpd_checkconfig"
+reload_cmd="httpd_reload"
+graceful_cmd="httpd_graceful"
+gracefulstop_cmd="httpd_gracefulstop"
+configtest_cmd="httpd_checkconfig"
+command="/usr/local/sbin/httpd"
+_pidprefix="/var/run/httpd"
+pidfile="${_pidprefix}.pid"
+required_files=/usr/local/etc/apache22/httpd.conf
+
+[ -z "$httpd_enable" ]       && httpd_enable="NO"
+[ -z "$httpdlimits_enable" ] && httpdlimits_enable="NO"
+[ -z "$httpdlimits_args" ]   && httpdlimits_args="-e -C daemon"
+[ -z "$httpd_http_accept_enable" ] && httpd_http_accept_enable="NO"
+[ -z "$httpd_fib" ] && httpd_fib="NO"
+
+httpd_accf() {
+
+  if checkyesno httpd_http_accept_enable; then
+    /sbin/kldstat -v | grep accf_http > /dev/null 2>&1 || /sbin/kldload accf_http || return ${?}
+    /sbin/kldstat -v | grep accf_data > /dev/null 2>&1 || /sbin/kldload accf_data || return ${?}
+  else
+    httpd_flags="${httpd_flags} -DNOHTTPACCEPT"
+  fi
+}
+
+load_rc_config $name
+
+if [ -n "$2" ]; then
+	profile="$2"
+	if [ "x${httpd_profiles}" != "x" ]; then
+		pidfile="${_pidprefix}.${profile}.pid"
+		eval httpd_configfile="\${httpd_${profile}_configfile:-}"
+		if [ "x${httpd_configfile}" = "x" ]; then
+			echo "You must define a configuration file (httpd_${profile}_configfile)"
+			exit 1
+		fi
+		required_files="${httpd_configfile}"
+		eval httpd_enable="\${httpd_${profile}_enable:-${httpd_enable}}"
+		eval httpd_flags="\${httpd_${profile}_flags:-${httpd_flags}}"
+		eval httpd_http_accept_enable="\${httpd_${profile}_http_accept_enable:-${httpd_http_accept_enable}}"
+		eval httpdlimits_enable="\${httpdlimits_${profile}_enable:-${httpdlimits_enable}}"
+		eval httpdlimits_args="\${httpdlimits_${profile}_args:-${httpdlimits_args}}"
+		eval httpd_fib="\${httpd_${profile}_fib:-${httpd_fib}}"
+		httpd_flags="-f ${httpd_configfile} -c \"PidFile ${pidfile}\" ${httpd_flags}"
+	else
+		echo "$0: extra argument ignored"
+	fi
+else
+	if [ "x${httpd_profiles}" != "x" -a "x$1" != "x" ]; then
+		for profile in ${httpd_profiles}; do
+			eval _enable="\${httpd_${profile}_enable}"
+			case "x${_enable:-${httpd_enable}}" in
+			x|x[Nn][Oo]|x[Nn][Oo][Nn][Ee])
+				continue
+				;;
+			x[Yy][Ee][Ss])
+				;;
+			*)
+				if test -z "$_enable"; then
+					_var=httpd_enable
+				else
+					_var=httpd_"${profile}"_enable
+				fi
+				echo "Bad value" \
+				    "'${_enable:-${httpd_enable}}'" \
+				    "for ${_var}. " \
+				    "Profile ${profile} skipped."
+				continue
+				;;
+			esac
+			echo "===> httpd profile: ${profile}"
+			/usr/local/etc/rc.d/httpd $1 ${profile}
+			retcode="$?"
+			if [ "0${retcode}" -ne 0 ]; then
+				failed="${profile} (${retcode}) ${failed:-}"
+			else
+				success="${profile} ${success:-}"
+			fi
+		done
+		exit 0
+	fi
+fi
+
+if [ "${1}" != "stop" ] ; then \
+	httpd_accf
+fi
+
+httpd_requirepidfile()
+{
+    httpd_checkconfig
+
+	if [ ! "0`check_pidfile ${pidfile} ${command}`" -gt 1 ]; then
+		echo "${name} not running? (check $pidfile)."
+		exit 1
+	fi
+}
+
+httpd_checkconfig()
+{
+	if test -f /usr/local/sbin/envvars
+	then
+		. /usr/local/sbin/envvars
+	fi
+
+	echo "Performing sanity check on httpd configuration:"
+	eval ${command} ${httpd_flags} -t
+}
+
+httpd_reload() {
+	httpd_requirepidfile
+
+	echo "Performing a server reload"
+	eval ${command} ${httpd_flags} -k restart
+}
+httpd_graceful() {
+	httpd_requirepidfile
+
+	echo "Performing a graceful restart"
+	eval ${command} ${httpd_flags} -k graceful
+}
+
+httpd_gracefulstop() {
+	httpd_requirepidfile
+
+	echo "Performing a graceful stop"
+	eval ${command} ${httpd_flags} -k graceful-stop
+}
+
+httpd_precmd() 
+{
+	httpd_checkconfig
+
+	if checkyesno httpdlimits_enable
+	then
+		eval `/usr/bin/limits ${httpdlimits_args}` 2>/dev/null
+	else
+		return 0
+        fi
+
+}
+
+httpd_checkfib () {
+	sysctl net.fibs >/dev/null 2>&1
+	ret=$? 
+ 	[ $ret -gt 0 ] && return 0 
+	if [ "x$httpd_fib" != "xNO" ]
+	then 
+		command="setfib -F ${httpd_fib} ${command}"
+	else
+		return	0
+	fi
+}
+
+httpd_prestart() {
+	httpd_checkfib
+	httpd_precmd
+}
+
+extra_commands="reload graceful gracefulstop configtest"
+run_rc_command "$1"

@@ -1,0 +1,57 @@
+Title: Package Layer
+##Package Description
+
+The Simple Java API for ODF focuses on the high level methods development. 
+It has three layers:
+
+ 1. **Feature Layer** provides convenient methods for features in ODF documents, for example, table, style, metadata. It has several
+    packages, e.g. *org.odftoolkit.simple.table*,
+    ''org.odftoolkit.simple.presentation''. Each package is either
+    related with a specific document type or related with a common
+    feature.
+ 2. **Document Layer** has classes defined for each document type, for example, TextDocument, PresentationDocument,
+    SpreadsheetDocument. The root package is in this layer.
+ 3. **Business Layer** provides more high level methods which are driven from business scenarios. These methods are not related with a
+    document type nor a common feature. The package
+    *org.odftoolkit.simple.common* package is in this layer.
+
+Following diagram shows the structure of Simple Java API for ODF. The yellow 
+boxes represent packages. The root package is *org.odftoolkit.simple*. The 
+other packages are under the root package, and the name has eliminated 
+*org.odftoolkit.simple*.
+
+![Layers of ODF Toolkit][1]
+
+
+##API changes from ODFDOM
+
+The Simple Java API has corresponding classes for the document layer of 
+ODFDOM. Follow table shows the mapping between ODFDOM and Simple Java API.
+
+Note: The first column "ODFDOM Package" is relative to 
+"org.odftoolkit.odfdom", and the third column "Simple Package" is relative 
+to "org.odftoolkit.simple".
+
+
+| ODFDOM Package | ODFDOM Class    | Simple Package    | Simple Class |
+|----------------|-----------------|-------------------|--------------|
+| doc            | OdfDocument     | root              | Document     |
+|                | OdfTextDocument |  | TextDocument      |             
+| | OdfSpreadsheetDocument |         | SpreadsheetDocument |      
+| | OdfPresentationDocument        |               | PresentationDocument |
+| | OdfChartDocument | | ChartDocument |
+| | OdfGraphicsDocument | |  GraphicsDocument |
+| doc.table | OdfTable |table |Table |
+| | OdfTableRow  | | Row |
+| | OdfTableColumn | | Column |
+| | OdfTableCell | | Cell |
+| | OdfTableCellRange | | CellRange |
+| doc.presentation | OdfSlide | presentation | Slide |
+| | OdfPresentationNotes | | Notes |
+| incubator.meta | OdfOfficeMeta | meta |Meta |
+| | OdfMetaDocumentStatistic | | DocumentStatistic | 
+| incubator.search | | common.navigation | |
+| incubator.doc.text | | common | |
+
+
+[1]: simple_odf_structure.jpg

@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE- 2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<link href="/odftoolkit/css/odf.css" rel="stylesheet" type="text/css">
+{% if header %}
+{% autoescape off %}{{ header }}{% endautoescape %}{% else %}
+<title>{% block title %}{{ headers.title }}{% endblock %}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+{% endif %}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28945571-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="banner">
+   <!-- <div id="bannerleft"><a alt="Apache ODF Toolkit (incubating)" href="http://incubator.apache.org/odftoolkit/">
+      <img id="logo" alt="Apache ODF Toolkit (Incubating)" src="/odftoolkit/images/ooo-logo.png"/></a></div> -->
+    <div id="bannerright"><a alt="Apache Incubator" href="http://incubator.apache.org">
+      <img id="asf-logo" alt="Apache Incubator" src="/odftoolkit/images/apache-incubator-logo.png"/></a></div>
+   <div id="bannercenter"><br/>&nbsp;&nbsp;&nbsp;&nbsp;Apache ODF Toolkit (incubating)</div>
+  </div>
+  <div id="clear"></div>
+  {% if sidenav %}
+  <div id="sidenav">
+    {% filter markdown %}{% include "sidenav.mdtext" %}{% endfilter %}
+  </div>
+  <div id="contenta">
+  {% else %}
+  <div id="content">
+  {% endif %}
+    {% block title %}{% if headers.title %}<h1 class="title">{{ headers.title }}</h1>{% endif %}{% endblock %}
+    {% block content %}{{ content|markdown }}{% endblock %}
+  </div>
+
+  <div id="footera">
+    <div id="poweredby">
+      <p><img src="/odftoolkit/images/feather-small.gif"/><br/>Powered by the Apache CMS.</p>
+    </div>
+    <div id="copyrighta">
+      <p>
+	Apache "ODF Toolkit" is an effort undergoing incubation at The Apache Software Foundation (ASF), sponsored by the Apache Incubator.
+	Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and
+	decision making process	have stabilized in a manner consistent with other successful ASF projects. While incubation status is
+	not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has
+	yet to be fully endorsed by the ASF.</p>
+      <p>
+	Copyright &copy; 2011 The Apache Software Foundation Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+	<a href="/openofficeorg/contact.html">Contact Us</a>
+	<br />Apache and the Apache feather logos are trademarks of The Apache Software Foundation.
+	<br />Other names appearing on the site may be trademarks of their respective owners.
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

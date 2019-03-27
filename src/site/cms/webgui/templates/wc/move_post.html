@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    {% if error %}
+    <title>Move failed! ({{ http_status }})</title>
+    {% else %}
+    <title>Move successful! ({{ http_status }})</title>
+    {% endif %}
+  {% include "head.html" %}
+  </head>
+
+  <body>
+    {% if error %}
+    <h1>Move failed!</h1>
+    <pre>{{ error }}</pre>
+    {% else %}
+    <h1>Move successful (revision {{ revision }})!</h1>
+{% if warning %}
+WARNING: there was a problem with the implicit deletion to the staging tree:<br />
+{{ warning }}
+{% endif %}
+<a href="http://ci.apache.org/builders/{{ project }}-site-staging">[Follow Staging Build]</a>
+<a href="{{ target }}?action=staged" title="View Staged">[Staged]</a>
+{% ifequal user "anonymous" %}{% else %}
+<a href="/{{ project }}/publish">[Publish Site]</a>
+{% endifequal %}
+<a href="{{ target }}?action=production" title="View Production">[Production]</a>
+<a href="{{ target }}?action=browse">[Browse]</a>
+    {% endif %}
+  </body>
+</html>

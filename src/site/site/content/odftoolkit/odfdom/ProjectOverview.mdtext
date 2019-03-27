@@ -1,0 +1,36 @@
+Title: Project Overview
+The ODFDOM project's objective is to provide an easy API for reading, writing and manipulating documents of the OpenDocument format (ODF). 
+To archive this, the ODFDOM API follows a layered approach to access documents, as layered design is the robust foundation for a well-designed modular structure.
+
+The two ODFDOM layers are:   
+
+**-The ODF Package Layer**:  
+  Provides access to all resources stored within the ODF package, such as XML streams, images or embedded objects. This layer covers all features from the [third part of the ODF 1.2 specification][1] defining the ODF Package features. The ODF 1.2 package features are build on top technologies as [ZIP package handling][2], [W3C encryption][3], [W3C signature][4] and [W3C metadata][5].       
+
+**-The ODF XML Layer**:<br/>Provides all the features of an office format, such as tables, images, numbering etc. All features are defined in [the first part of the ODF 1.2 specification][6] describing the ODF XML schema. This layer consists of two APIs representing two different views on the features:   
+
+- *The low-level DOM API*:   
+Gives access to the XML, the elemental parts of the ODF schema features. With this API it is easy to manipulate all specified XML nodes extending the platform and language independent DOM API [DOM API standardized by the W3C][7] - best-known by its implementation through the browsers. It extends the DOM API using a typed DOM. For every ODF XML element and ODF XML attribute defined by the ODF grammar (the RelaxNG schema) a unique class exists, providing methods for their allowed children. The purpose is to provide the user a corset to easily write valid ODF without consulting the spec constantly. This API is very consistent as instead of laboriously writing all these classes, the sources were generated directly from the ODF schema. This generation guarantees complete coverage of the ODF specification on one side and an easy and accurate upgrade to future ODF specifications on the other.   
+ 
+- *The high-level Document API*:   
+Provides a different much more high level view on the ODF schema features. This API is concerned about usability, hiding all ODF XML implementation details from the user, covering frequent user scenarios. For example, changing the content of a certain spreadsheet cell (e.g. Add 'Hello World' to a spreadsheet cell positioned at 'B2'). While in the ODF DOM API in general each class represents an ODF XML node, here a class covers multiple underlying ODF XML elements (& their attributes). Think of puzzle piece consisting of multiple smaller pieces. Therefore the typed DOM tree is being mapped to feature tree.    
+
+![alt text][8]
+
+ODFDOM is part of [Apache ODF Toolkit project][9]. Development is discussed on [the dev mailing list][10], users should ask their questions on [the users mailing list][11].
+
+***[More detailed information about ODFDOM layers][12]***.
+
+
+  [1]: http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part3.html
+  [2]: http://www.pkware.com/documents/APPNOTE/APPNOTE_6.2.0.txt
+  [3]: http://www.w3.org/TR/2002/REC-xmlenc-core-20021210/
+  [4]: http://www.w3.org/TR/2008/REC-xmldsig-core-20080610/
+  [5]: http://www.w3.org/TR/2004/REC-rdf-concepts-20040210/
+  [6]: http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part1.html
+  [7]: http://www.w3.org/DOM/
+  [8]: ODFDOM-New-Layered-Model.png
+  [9]: http://incubator.apache.org/odftoolkit/
+  [10]: mailto:odf-dev@incubator.apache.org
+  [11]: mailto:odf-users@incubator.apache.org
+  [12]: Layers.html

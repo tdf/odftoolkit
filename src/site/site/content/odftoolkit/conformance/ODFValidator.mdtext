@@ -1,0 +1,304 @@
+Title: ODF Validator
+
+**ODF Validator** is a tool that validates OpenDocument files and checks them for certain conformance criteria.
+
+**ODF Validator** is available as Java library for command line or embedded use,
+as well as a servlet.  An instance of the servlet is [hosted online][1] courtesy of the
+[OpenDoc Society][2].  This page primarily describes the command line tool.
+
+## How to start
+To use the '''ODF Validator''', the following steps are required:
+
+* Get the source code.
+* Add the jar files listed under Requirements to the project's libraries.
+* Get the ODF 1.0, 1,1 and 1.2 schemas, and add the directories where your local copies of the schemas are stored to the '''schema.user.properties''' file.
+* Get the MathML 1.01 DTD and the MathML 2.0 schemas, and add the directories where you local copies of the schemas are stored to the '''schema.user.properties''' file.
+* Build the project.
+* You may deploy the WAR bundle from the target file into your application server of choice (e.g. Tomcat)
+* Choose an arbitrary OpenDocument file &lt;odffile&gt;
+* OR for command line usage and help, call the '''ODF Validator''' with
+
+    java -jar "./target/odfvalidator-&lt;VERSION&gt;-incubating-jar-with-dependencies.jar" &lt;odffile&gt;
+
+* You may call the ODF Validator with
+
+    java
+      -Djavax.xml.validation.SchemaFactory:http://relaxng.org/ns/structure/1.0=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
+      -Dorg.iso_relax.verifier.VerifierFactoryLoader=com.sun.msv.verifier.jarv.FactoryLoaderImpl
+      -jar "&lt;PATH&gt;/odfvalidator-&lt;VERSION&gt;-incubating-jar-with-dependencies.jar"  &lt;odffile&gt;
+
+## Usage
+
+### Usage Summary
+
+In a command-line environment, **ODF Validator** is invoked by the following command:
+
+     java -jar "<path>/odfvalidator-VERSION-incubating-jar-with-dependencies.jar"
+
+For instance, with the following parameters:
+
+
+
+    java
+      -Djavax.xml.validation.SchemaFactory:http://relaxng.org/ns/structure/1.0=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
+      -Dorg.iso_relax.verifier.VerifierFactoryLoader=com.sun.msv.verifier.jarv.FactoryLoaderImpl
+      -jar "<path>/odfvalidator-<VERSION>-incubating-jar-with-dependencies.jar"
+
+These command lines are abbreviated *odfvalidator* from now on.
+
+The **ODF Validator** may be called with the following options:
+
+
+
+     odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x <expclude pattern>]
+                  [-o outputfile] [-1.0|-1.1|-1.2] <odffiles>
+     odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x <expclude pattern>]
+                  [-o outputfile] -S <schemafile> &lt;odffiles>
+     odfvalidator [-c|-s] [-v|-w] [-d] [-o outputfile] -C &lt;configfile>
+     odfvalidator -g <odffiles>
+     odfvalidator -h
+     odfvalidator -V
+
+If no parameters are specified, the files **<odffiles>** are validated using the schema that belongs to the ODF version of the file. For ODF 1.0 files the ODF 1.0 schema is used, for ODF 1.1 files the ODF 1.1 schema is used, and so on. The version of an ODF file is detected for each file separately.
+
+The options have the following meaning:
+
+**-1.0**: Use the ODF 1.0 schemas regardless of the version specified by the validated document.
+
+**-1.1**: Use the ODF 1.0 schemas regardless of the version specified by the validated document.
+
+**-1.2**: Use the ODF 1.0 schemas regardless of the version specified by the validated document.
+
+**-c**: Apply ODF conformance rules (ODF 1.0 and 1.1 documents only): Unknown markup is ignored during validation. For ODF 1.2 documents this option does not have any effect.
+
+**-e**: Apply extended ODF conformance rules (ODF 1.2 documents only): Unknown markup is ignored during validation. For ODF 1.0/1.1 documents this option does not have any effect.
+
+**-d**: Use MathML 1.01 DTD rather than MathML 2.0 schema for content.xml of formula documents.
+
+**-g**: Show the generator information of the specified *&lt;odffiles&gt;* without validation.
+
+**-h**: Print a short help.
+
+**-o**: Print output into specified file rather than standard output.
+
+**-r**: Process directories recursively.
+
+**-s**: Use the strict schema for validation (ODF 1.0/1.1 documents only).
+
+**-v**: Verbose: print information like the generator or the documents that are processed.
+
+**-w**: Print warnings.
+
+**-x**: Exclude files that match the specified [regular expression] [3] from validation.
+
+**-C**: Validate using configuration file **&lt;configfile&gt;**.
+
+**-S**: Use the specified **&lt;schemafile&gt;** for validation.
+
+**-V**: Print version information.
+
+### Validation using default schemas
+
+The ODF 1.0, ODF 1.1, ODF 1.2 schemas as well as the MathML 1.01 DTD and
+the MathML 2.0 schema are included in the **ODFValidator.jar** file. If
+the ODFValidator is called without the **-S** or **-C** options, these schemas are used for validation.
+
+
+
+    odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x <expclude pattern>]
+                  [-o outputfile] [-1.0|-1.1|-1.2] <odffiles>
+
+**&lt;odffiles&gt;** is the list of files and directories that should be
+validated. If a directory is specified, all files that have an OpenDocument
+extension (like **odt**, **ods** or **ott**) are validated. If **-r** is
+specified additionally, all directories are processed recursively.
+
+By default, the **ODF Validator** detects the version of the files that
+shall be validated and chooses the corresponding schema. The command line
+options **-1.0**', **-1.1** and **-1.2** can be used to specify that the
+schemas of a particular ODF version should be used for all files,
+regardless of the version they specify themselves.
+
+The command line option **-d** specifies that the MathML 1.01 DTD should
+be used for the validation of the **content.xml** of formula documents.
+Default is to use the MathML 2.0 schema.
+
+If the **-c** command line option is specified and if the validated document
+is an ODF 1.0 or ODF 1.1 document, unknown markup is ignored as specified
+in the conformance rules for ODF 1.0/1.1.  If the **-s** command line
+option is specified and if the validated document is an ODF 1.0 or ODF 1.1
+document, the strict schema is used for validation. If the **-e** command
+line option is specified and if the validated document is an ODF 1.2
+document, unknown markup is ignored as specified in the extended conformance
+class rules for ODF 1.2. If neither **-c** nor **-e**  nor **-s**
+are specified, the regular ODF schemas are used and errors are reported
+for unknown markup, unless it appears in styles or metadata of ODF 1.0/1.1
+documents.
+
+The optional **-x** switch allows to exclude certain files or directories
+from the validation. The files that shall be excluded are specified by a
+[regular expression] [4]. Please note that the full absolute path names of
+directories and files are matched against this pattern. This means that the
+regular expression either must include the absolute path of the files and
+directories that shall be excluded, or must start with **.***.
+The **-x** option can be specified only once. If several paths shall
+be excluded, these paths have to be specified in a single regular
+expression using the **|** operator.
+
+If **-w** is specified additionally, not only validation errors are reported, but also warnings.
+
+If **-v** is specified additionally, not only validation errors and warnings are reported, but also the generator stored in the manifest, MIME types, the files that are processed, etc.
+
+If the **-o** option is present, all messages go into the specified file. Otherwise, they are printed to standard out.
+
+### Validation using a non-default schema
+
+To specify the schema that is used for **meta-xml**, **content.xml**,
+**styles.xml** and **settings.xml** on the command line,
+**ODF Validator** has to be called with the following parameters:
+
+
+
+    odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x &lt;expclude pattern&gt;]
+     [-o outputfile] -S <schemafile> <odffiles>
+
+**&lt;schemafile&gt;** is the schema that shall be used.
+
+All other command line option are as described in *Validation using default schemas*.
+
+### Validation using a configuration file
+
+The schemas and the files that should be validated can be specified in a
+configuration file. A configuration file is a Java XML properties file as
+described in the [Java 2 API documentation] [5]. The following properties
+are supported:
+
+* **strict-schema**: Specifies the strict schema to be used.
+* **manifest-schema**: Specifies the manifest schema to be used.
+* **mathml-schema**: Specifies the MathML 1.01 schema to be used.
+* **mathml2-schema**: Specifies the MathML 2 schema to be used.
+* **path***: All properties whose names start with "path" are considered to be files or directories that shall be validated.
+* **recursive**: This boolean property specifies whether directories are scanned recursively. It takes the values **true** and **false**.
+* **exclude**: Specifies files and directories that shall be excluded as
+a [regular expression] [6]. See description of **-x** option.
+
+A sample configuration file looks like this:
+
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+      <properties>
+      <entry key="strict-schema">/home/odf11-cd2/msv/OpenDocument-strict-schema-v1.1-cd2.rng</entry>
+      <entry key="manifest-schema">/home/odf11-cd2/msv/OpenDocument-manifest-schema-v1.1-cd2.rng</entry>
+      <entry key="mathml-schema">/home/odf11-cd2/msv/mathml2.xsd</entry>
+      <entry key="path1">/home/testdocs</entry>
+      <entry key="path2">/home/temp</entry>
+      </properties>
+
+## What is checked?
+
+The following items are checked:
+
+  - OpenDocument v1.2 documents:
+      - If the test type is **conformance test** (default, or if **-c** is provided) , and if the file is not a formula file, then the sub files *content.xml*, *styles.xml*, *meta.xml* and *settings.xml* are  validated with respect to the OpenDocument v1.2 schema.
+      - If the test type is **extended conformance test** (**-e** is provided), and if the file is not a formula file, then the sub files *content.xml*, *styles.xml*, *meta.xml* and *settings.xml* are pre-processed as described in section 1.4.2.1 of the OpenDocument v1.2 specification (that is *foreign elements and attributes* are removed), and are then validated with respect to the OpenDocument v1.2 schema.
+  - OpenDocument v1.1/1.0 documents:
+      - If the test type is **conformance test** (**-c** is provided),
+and if the file is not a formula file, then the sub files *content.xml*, *styles.xml*, *meta.xml* and *settings.xml* are pre-processed as described in section 1.5 of the <a href="http://docs.oasis-open.org/office/v1.1/OS/OpenDocument-v1.1.odt">OpenDocument specification</a> (that is *foreign elements and attributes* are removed), and are then validated with respect to the schema of the selected OpenDocument version.
+      - If the test type is **validation** (default), and if the file is not a formula file, then the sub files *content.xml*, *styles.xml*, *meta.xml* and *settings.xml* are validated with respect to the schema of the selected OpenDocument version. Pre-processing of *foreign elements and attributes* is not applied.
+      - If the test type is **strict validation** (**-s** is provided), and if the file is not a formula file, then the sub files *content.xml*, *styles.xml*, *meta.xml* and *settings.xml* are validated with respect to the strict schema of the selected OpenDocument version. Pre-processing of *foreign elements and attributes* is not applied.
+  - All versions:
+      - If the file is a formula file, then the sub file *content.xml* is validated with respect to the MathML 2.0 W3C XSD schema.  The sub files *styles.xml*, *meta.xml* and *settings.xml* are checked as described for other document types.
+      - The file *META-INF/manifest.xml* is validated with respect to the manifest schema of the selected ODF specification.
+      - If the file is an ODF 1.2 file, then the *META-INF/documentsignatures.xml* and *META-INF/macrosignatures.xml* sub files are validated with respect to the digital signatures schema of the ODF 1.2 specification.
+      - For all embedded objects in ODF format, the *content.xml*, *styles.xml*, *meta.xml* and *settings.xml* are validated as described for the main document above.
+      - It is checked whether the file itself and all embedded objects in ODF format contain at least a *content.xml* or *styles.xml* sub file.
+
+The following actions take place before or during the validation:
+
+  - A DTD document declaration within a *manifest.xml* file is ignored.
+    For the logging level **all**, an information is displayed if this
+    happens. <br/>**Note:** Very early ODF implementations in
+    OpenOffice.org wrongly included a document type declaration.
+    Ignoring the document type enables the validation of the manifest
+    despite of this error.
+  - A namespace &quot;http://openoffice.org/2001/manifest&quot; within a
+    *manifest.xml* file is changed to &quot;urn:oasis:names:tc:opendocument:xmlns:manifest:1.0&quot;. For
+    the logging level **all**, an information is displayed if this
+    happens. <br/>**Note:** Early ODF implementations in OpenOffice.org
+    used the wrong namespace. Changing it to the correct one enables the
+    validation of the manifest despite the wrong namespace.
+  - Namespaces defined in the <a
+    href="http://www.oasis-open.org/committees/download.php/10765/office-spec-1.0-cd-2.pdf">ODF
+    v1.0 Committee Draft 2</a> are replaced with those of the <a
+    href="http://www.oasis-open.org/specs/index.php#opendocumentv1.0">ODF
+    v1.0 OASIS Standard</a>. For the logging level **all**, an
+    information is displayed if this happens.<br/>**Note:** Changing the
+    namespaces enables the validation of documents that conform to the
+    ODF v1.0 CD2. Such documents have been saved by OpenOffice.org 1.0
+    beta versions.
+  - The value of *draw:points* attributes is truncated to 2048
+    characters. For the logging level **all**, an information is
+    displayed if this happens.<br/>**Note:** The truncation of this
+    attribute value avoids a stack overflow in MSV while validating the
+    attribute value against a regular expression.
+  - A namespace &quot;http://openoffice.org/2004/database&quot; within a
+    *content.xml* file is changed to &quot;urn:oasis:names:tc:opendocument:xmlns:database:1.0&quot;, and
+    a namespace &quot;http://openoffice.org/2004/office&quot; within a
+    *content.xml* file is changed to &quot;urn:oasis:names:tc:opendocument:xmlns:office:1.0&quot;. For
+    the logging level **all**, an information is displayed if this
+    happens.<br/>**Note:** These namespaces were used in OpenOffice.org
+    2.x database documents, because database documents are included in OpenDocument since version 1.2 only. Changing them enables the
+    validation of  OpenOffice.org 2.x database documents.
+
+## Where do I get the schemas?
+
+The OpenDocument schemas are available on the [OASIS OpenDocument Technical
+Committee] [7] page. The ODF 1.0 and 1.1 schemas can be downloaded directly
+from that page]. A zip file containing the most recent ODF 1.2 schemas is
+available in the document section.
+
+The MathML DTD that is included in the ODF Validator us the one that is
+included in the **/share/dtd/math/1_01/** folder of each
+OpenOffice.org/Oracle Open Office installation.
+
+## Requirements
+
+**ODF Validator** requires J2RE 1.5 or J2RE 1.6. For J2RE 1.6, the following options have to be included into the **java** command line:
+
+     -Djavax.xml.validation.SchemaFactory:http://relaxng.org/ns/structure/1.0=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
+     -Dorg.iso_relax.verifier.VerifierFactoryLoader=com.sun.msv.verifier.jarv.FactoryLoaderImpl
+
+**ODF Validator** further requires the following packages:
+
+* [MSV] [8]. **msv.jar**, **isorelax.jar**, **relaxngDatatype.jar** and **xsdlib.jar** included in the MSV distribution must be added to the project's libraries and must be in the classpath or a folder called **lib** that is next to the **odfvalidator.jar** at runtime.
+* [ISORELAX JARV -&gt; JAXP 1.3 Xml Validation Engine Adaptor] [9].  **isorelax-jaxp-bridge-1.0.jar** must be added to the project's libraries and must be in the classpath or a folder called **lib** that is next to the **odfvalidator.jar**  at runtime.
+* **odfdom.jar** from the ODFDOM component must be added to the project's libraries and must be in the classpath or a folder called **lib** that is next to the **odfvalidator.jar**  at runtime.
+
+The NetBeans project is pre-configured to build ODFDOM while building **ODF Validator**. This requires that the ODFDOM sources are located in a folder **odfdom** next to the folder of the **ODF Validator** project.
+
+Alternatively, the reference to the ODFDOM project in the compile time classpath of the **ODF Validator** project may be replaced with a reference to an already compiled **odfdom.jar**.
+
+The references to all other jar files must be updated manually before
+building **ODF Validator**.
+
+**Note:** ODFDOM requires [Apache Xerces] [10]. The jar file **xercesImpl.jar** also must exist in a folder **lib** next to **odvalidator.jar** file, or it must be in the classpath. The **ODF Validator** NetBeans projects includes a reference to **xersesImpl.jar** in the runtime classpath which has to be adapted after checking out the project.
+
+**Note:** ODFDOM requires at least Xerces 2.8.0. Please note that MSV distribution contains an xercesImpl.jar which is older.
+
+## Source Code
+
+The **ODF Validator** source code is located [here][11]. **ODF Validator** uses Mercurial for source control. Please check the
+help for instruction how to use Mercurial.
+
+
+  [1]: http://odf-validator.rhcloud.com/
+  [2]: http://www.opendocsociety.org/
+  [3]: http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum
+  [4]: http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum
+  [5]: http://docs.oracle.com/javase/8/docs/api/java/util/Properties.html
+  [6]: http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum
+  [7]: http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office
+  [8]: https://msv.dev.java.net/
+  [9]: https://isorelax-jaxp-bridge.dev.java.net
+  [10]: http://xml.apache.org/dist/xerces-j/
+  [11]: http://svn.apache.org/viewvc/incubator/odf/trunk/validator/

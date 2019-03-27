@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    {% if error %}
+    <title>Commit failed! ({{ http_status }})</title>
+    {% else %}
+    <title>Commit successful! ({{ http_status }})</title>
+    {% endif %}
+    {% include "head.html" %}
+    {% if base %}
+    <base href="{{ base }}" />
+    {% endif %}
+  </head>
+
+  <body>
+    {% if error %}
+    <h1>Commit failed!</h1>
+    <pre>{{ error }}</pre>
+    {% else %}
+    <h1>Commit successful (<a href="http://svn.apache.org/r{{ revision }}">revision {{ revision }}</a>){% if update %} -
+      <a href="http://www.apache.org/dev/cmsref#exception">warning: merged
+        external content</a>{% endif %}!</h1>
+    <p>
+      <strong>
+        Keep coming back to this page as you proceed through the following
+        links in order:
+      </strong>
+    </p>
+    <a href="http://ci.apache.org/builders/{{ project }}-site-staging">[Follow Staging Build]</a>
+    <a href="?action=staged" title="View Staged">[Staged]</a>
+    {% ifequal user "anonymous" %}{% else %}
+<a href="/{{ project }}/publish">[Publish Site]</a>
+{% endifequal %}
+    <a href="?action=production" title="View Production">[Production]</a>
+    <a href="?action=browse">[Browse]</a>
+    <a href="?action=edit">[Edit]</a>
+    <p>Note: the build process is ASYNCHRONOUS and you will need to wait for the
+      build to complete before attempting to publish your changes.</p>
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,87 @@
+ASF CMS STATUS
+
+Currently in production for ~5 dozen projects, at version 1.x, and ready
+for wide-scale adoption.  The only feature currently lacking is support
+for per-branch staging builds, but we'll get there.
+
+So, How do I use this damned thing?
+
+To build stuff you need the build/ subdir.  The relevant scripts
+are build_file.pl and build_site.pl.  There are only a few modest perl
+prereqs, but the odd one to pick up is the python markdown package.
+Be sure to set your MARKDOWN_SOCKET env var to something appropriate
+for both the build scripts and build/markdownd.py, and to pick up the
+python Pygments package for codehilighting support.  To get the daemon
+started (*nix only) just invoke ./markdownd.py from within the build dir.
+
+See http://www.apache.org/dev/cmsref.html#local-build for details on the
+python prereqs.
+
+There are some conversion utilities for converting sources to markdown.
+For anakia based stuff use 
+
+% xsltproc conversion-utilities/anakia2markdown.xslt path/to/xml/source.xml \
+  | ./conversion-utilities/wraptext.pl > path/to/markdown/file.mdtext
+
+(there are a few caveats with this, one being that the xml source file needs
+to contain an enveloping <section> block for the actual content).
+
+Also, be sure to add
+
+*.mdtext = svn:eol-style=native
+
+to your ~/.subversion/config file.
+
+
+More stuff in conversion-utilities/cwiki related to confluence migration
+is ongoing.
+
+
+SETUP
+=====
+
+0) Read the pod documentation in webgui/lib/ASF/CMS.pm to get a general feel
+for what needs local modification.
+
+1) From CPAN I had to install (you only need these if you're building the www site):
+
+sudo perl -MCPAN -e shell
+install XML::RSS::Parser::Lite
+install XML::Atom
+
+If you want restructured text support:
+
+install Text::Restructured
+
+* you may need to "force install Text::Restructured" - was necessary on my box.
+
+
+2) Checkout CMS
+
+svn co https://svn.apache.org/repos/infra/websites/cms apache-cms
+
+3) Checkout the project's site repo
+
+svn co https://svn.apache.org/repos/asf/<project>/site/trunk svn_<project>_site
+
+
+SITE GENERATION
+===============
+
+1) cd into the project site repo
+
+2) mkdir t
+
+3) run CMS site generation
+
+../apache-cms/build/build_site.pl --source-base . --target-base ./t
+
+(whatever the relative path is to build_site.pl)
+
+4) open t/index.html in a browser
+
+
+TODO
+====
+
+Migrate the wmd stuff to pagedown- it's actively developed.

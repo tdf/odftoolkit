@@ -1,0 +1,450 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE- 2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<link href="/odftoolkit/css/odf.css" rel="stylesheet" type="text/css">
+
+<title>Requirements</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28945571-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="banner">
+   <!-- <div id="bannerleft"><a alt="Apache ODF Toolkit (incubating)" href="http://incubator.apache.org/odftoolkit/">
+      <img id="logo" alt="Apache ODF Toolkit (Incubating)" src="/odftoolkit/images/ooo-logo.png"/></a></div> -->
+    <div id="bannerright"><a alt="Apache Incubator" href="http://incubator.apache.org">
+      <img id="asf-logo" alt="Apache Incubator" src="/odftoolkit/images/apache-incubator-logo.png"/></a></div>
+   <div id="bannercenter"><br/>&nbsp;&nbsp;&nbsp;&nbsp;Apache ODF Toolkit (incubating)</div>
+  </div>
+  <div id="clear"></div>
+  
+  <div id="sidenav">
+    <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/index.html">About</a></li>
+<li><a href="/odftoolkit/downloads.html">Downloads</a></li>
+<li><a href="http://incubator.apache.org/projects/odftoolkit.html">Incubator page</a></li>
+<li><a href="/odftoolkit/license.html">License</a></li>
+<li><a href="/odftoolkit/privacy.html">Privacy Policy</a></li>
+</ul>
+<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/odfdom/index.html">ODFDOM</a></li>
+<li><a href="/odftoolkit/simple/index.html">Simple API</a></li>
+<li><a href="/odftoolkit/conformance/ODFValidator.html">ODF Validator</a></li>
+<li><a href="/odftoolkit/xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
+</ul>
+<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/get-involved.html">Get Involved</a></li>
+<li><a href="/odftoolkit/mailing-lists.html">Mailing Lists</a></li>
+<li><a href="/odftoolkit/people.html">People</a></li>
+<li><a href="/odftoolkit/community-faqs.html">Community FAQs</a></li>
+</ul>
+<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/source.html">Source Code</a></li>
+<li><a href="https://issues.apache.org/jira/browse/ODFTOOLKIT">Bug Tracker</a></li>
+<li><a href="/odftoolkit/mvn-site/0.6-incubating/" target="_blank">Maven Reports</a></li>
+<li><a href="/odftoolkit/website-local.html">Website</a></li>
+<li><a href="/odftoolkit/developer-faqs.html">Developer FAQs</a></li>
+</ul>
+<h1 id="ppmc">PPMC<a class="headerlink" href="#ppmc" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/ppmc-faqs.html">PPMC FAQs</a></li>
+<li><a href="/odftoolkit/odftoolkit-release-guide.html">Release Guide</a>   </li>
+</ul>
+<h1 id="asf">ASF<a class="headerlink" href="#asf" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="http://www.apache.org">Apache Software Foundation</a></li>
+<li><a href="http://www.apache.org/foundation/thanks.html">Thanks</a></li>
+<li><a href="http://www.apache.org/foundation/sponsorship.html">Become a Sponsor</a></li>
+</ul>
+  </div>
+  <div id="contenta">
+  
+    <h1 class="title">Requirements</h1>
+    <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h2 id="function-analysis">Function analysis<a class="headerlink" href="#function-analysis" title="Permanent link">&para;</a></h2>
+<p>This page is used to analysis the functions and requirements, and discuss the priority and the project plan.</p>
+<div class="toc">
+<ul>
+<li><a href="#function-analysis">Function analysis</a><ul>
+<li><a href="#requirements-tracking">Requirements Tracking</a></li>
+<li><a href="#requirements-for-table-20101220">Requirements for table (2010.12.20)</a><ul>
+<li><a href="#requirements-for-section-and-text-box-20101220">Requirements for section and text box (2010.12.20)</a></li>
+</ul>
+</li>
+<li><a href="#functions-collection">Functions Collection</a><ul>
+<li><a href="#cutcopypasteselection">Cut/copy/paste/selection</a></li>
+<li><a href="#navigatordocument-map">Navigator/document map</a></li>
+<li><a href="#fields">Fields</a></li>
+<li><a href="#frame">Frame</a><ul>
+<li><a href="#text-frame">Text frame</a></li>
+<li><a href="#graphics">Graphics</a></li>
+</ul>
+</li>
+<li><a href="#section">Section</a></li>
+<li><a href="#bullet-numbering">Bullet &amp; numbering</a></li>
+<li><a href="#heading">Heading</a></li>
+<li><a href="#table-of-content">Table of Content</a></li>
+<li><a href="#headerfooter">Header/footer</a></li>
+<li><a href="#footnoteendnote">Footnote/endnote</a></li>
+<li><a href="#hyperlinks">Hyperlinks</a></li>
+<li><a href="#break">Break</a></li>
+<li><a href="#page-numbering">Page numbering</a></li>
+<li><a href="#comment">Comment</a></li>
+<li><a href="#document-bookmark">Document bookmark</a></li>
+<li><a href="#fontwork">Fontwork</a></li>
+<li><a href="#chart">Chart</a></li>
+<li><a href="#ole-object">OLE object</a></li>
+<li><a href="#layout-and-columns">Layout and columns</a></li>
+<li><a href="#table">Table</a><ul>
+<li><a href="#filter-and-validity">Filter and validity</a></li>
+<li><a href="#group">Group</a></li>
+<li><a href="#data-pilot">Data pilot</a></li>
+<li><a href="#split">Split</a></li>
+</ul>
+</li>
+<li><a href="#slide">Slide</a><ul>
+<li><a href="#master-slide">Master Slide</a></li>
+<li><a href="#animation">Animation</a></li>
+</ul>
+</li>
+<li><a href="#page-setup">Page setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 id="requirements-tracking">Requirements Tracking<a class="headerlink" href="#requirements-tracking" title="Permanent link">&para;</a></h3>
+<p>Below are requirements from our users.</p>
+<h3 id="requirements-for-table-20101220">Requirements for table (2010.12.20)<a class="headerlink" href="#requirements-for-table-20101220" title="Permanent link">&para;</a></h3>
+<ul>
+<li>getRowList/getColumnList, if there is a row element with 65535 repeate number, then get row list will return a list which contains 65535 row element, it is not necessary and time consuming.    </li>
+<li>memory leak, because of using static map variables (Recorded in bugzilla, 2010.12.21)   </li>
+<li>use SAX API to get the content/style element as required, rather than load whole dom tree to memory, which might cause out of memory exception if many large document has been loaded in the same time.    </li>
+<li>create row/column/cell with/without repeat number(for example,if i want to create 10 rows, how to implement it ? with 10 row element or 1 row element with 10 repeate number)   </li>
+<li>append row/column with/without previous row/column style, there should be a flag for setting it.    </li>
+<li>cell format type can be auto calculated according to the style of cell.    </li>
+</ul>
+<h4 id="requirements-for-section-and-text-box-20101220">Requirements for section and text box (2010.12.20)<a class="headerlink" href="#requirements-for-section-and-text-box-20101220" title="Permanent link">&para;</a></h4>
+<ul>
+<li>repeating sections of data. Repeating section may be to clone a section of a template multiple times for different data. So identify an element(s) in the document and be able to clone it and add it into the document. Think like a block of text in a document (maybe a table or a paragraph) that we grab, copy, repeat x times, and then modify a bookmark inside each section.        </li>
+<li>text boxes that get a name at design time and something we can call it programmatically and then do something with it (delete, modify, etc.)      </li>
+<li>embedded text tagging with multiple levels - tag a paragraph and then tag a section of text within it - so we can turn stuff off, do repeats, and do repeats within the sections.     </li>
+</ul>
+<h3 id="functions-collection">Functions Collection<a class="headerlink" href="#functions-collection" title="Permanent link">&para;</a></h3>
+<p>Follow are functions collected from a perspective of an Office software user.    </p>
+<h4 id="cutcopypasteselection">Cut/copy/paste/selection<a class="headerlink" href="#cutcopypasteselection" title="Permanent link">&para;</a></h4>
+<p>Select something, cut or copy it, and paste to somewhere else. These operations are easily made in Office softwares, but are hard done in APIs. The functions include: </p>
+<ul>
+<li>Create a selection  </li>
+<li>Create a position   </li>
+<li>Cut a selection    </li>
+<li>Copy a selection    </li>
+<li>Paste a selection to some position    </li>
+<li>Delete a selection <br />
+Part of these functions have been implemented with package org.odftoolkit.simple.common.navigation    </li>
+</ul>
+<table>
+<tr>
+<th>Functions</th><th>Plan and status</th>
+</tr>
+<tr><td>
+ Create a "selection"</td><td></td></tr><tr><td>
+ Create a "position" </td><td></td></tr><tr><td>
+ Cut a selection     </td><td></td></tr><tr><td>
+ Copy a selection    </td><td></td></tr><tr><td>
+ Paste a selection   </td><td></td></tr><tr><td>
+ Delete a selection  </td><td></td></tr>
+</table>
+
+<h4 id="navigatordocument-map">Navigator/document map<a class="headerlink" href="#navigatordocument-map" title="Permanent link">&para;</a></h4>
+<p>With these functions, users can easily go to a certain place in the whole document. These functions can provide methods to get a certain heading, get a certain image, get a certain table and so on. The functions include:    </p>
+<ul>
+<li>Return a list of main features, such as heading,paragraphs,graphics,table,bookmark,sections,hyperlinks,reference,index,comments,text frames, and draw objects.   </li>
+<li>get next or previous feature, for example, there is a table under a paragraph, then the API can allow users to get next table after this paragraph. <br />
+Part of these functions have been implemented with getTableList() in org.odftoolkit.simple.Document.   </li>
+</ul>
+<h4 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">&para;</a></h4>
+<p>With this feature, users can create fields in the document. The available fields include:</p>
+<ul>
+<li>Fields are used to insert information about the current document, for example, file name, template, statistics, user data, date, and time.   </li>
+<li>The references or referenced fields that are referenced fields within the same document or within sub-documents of a master document.    </li>
+<li>Variable fields which are dynamic content to the document.    </li>
+</ul>
+<p>The functions include:</p>
+<ul>
+<li>Add a field   </li>
+<li>Edit a field   </li>
+<li>Navigator among fields   </li>
+<li>Delete a field   </li>
+</ul>
+<h4 id="frame">Frame<a class="headerlink" href="#frame" title="Permanent link">&para;</a></h4>
+<p>With frame, users can create a layout of one or more columns of text and objects. The functions include:</p>
+<ul>
+<li>Set properties to a frame, including names</li>
+<li>Delete a frame</li>
+<li>Navigator among frames</li>
+<li>Add caption</li>
+</ul>
+<h5 id="text-frame">Text frame<a class="headerlink" href="#text-frame" title="Permanent link">&para;</a></h5>
+<p>The functions include:</p>
+<ul>
+<li>Add a text frame</li>
+<li>Search a text frame by name</li>
+</ul>
+<h5 id="graphics">Graphics<a class="headerlink" href="#graphics" title="Permanent link">&para;</a></h5>
+<p>With graphics, users can insert a picture or create with shapes. The functions include:</p>
+<ul>
+<li>Insert a picture from file</li>
+<li>Create shapes</li>
+<li>Navigator among images and shapes</li>
+<li>Delete images or shapes</li>
+<li>Set properties</li>
+<li>Add caption</li>
+</ul>
+<h4 id="section">Section<a class="headerlink" href="#section" title="Permanent link">&para;</a></h4>
+<p>Sections are named blocks of text, including graphics or objects. With section, users can:</p>
+<ul>
+<li>To prevent text from being edited.</li>
+<li>To show or hide text.</li>
+<li>To reuse text and graphics from other Lotus? Symphony? documents.</li>
+<li>To insert sections of text that uses a different column layout than the current page style.</li>
+<li>Add caption</li>
+</ul>
+<p>The functions include:</p>
+<ul>
+<li>Create Section</li>
+<li>Delete Section</li>
+<li>Copy and paste section</li>
+<li>Navigator through sections</li>
+<li>Set properties of section</li>
+</ul>
+<h4 id="bullet-numbering">Bullet &amp; numbering<a class="headerlink" href="#bullet-numbering" title="Permanent link">&para;</a></h4>
+<p>To create bullet and numbering. The functions include:</p>
+<ul>
+<li>Create bullet to paragraphs, including graphics bullets</li>
+<li>create numbering to paragraphs</li>
+<li>Set the style properties</li>
+</ul>
+<h4 id="heading">Heading<a class="headerlink" href="#heading" title="Permanent link">&para;</a></h4>
+<p>To create heading of a document. The functions include:</p>
+<ul>
+<li>Create headings</li>
+<li>Set styles of headings</li>
+<li>Set outline numbering</li>
+</ul>
+<h4 id="table-of-content">Table of Content<a class="headerlink" href="#table-of-content" title="Permanent link">&para;</a></h4>
+<p>To create a TOC at some place.</p>
+<h4 id="headerfooter">Header/footer<a class="headerlink" href="#headerfooter" title="Permanent link">&para;</a></h4>
+<p>With these function, you can set header and footer.</p>
+<ul>
+<li>Set header and footer</li>
+<li>Set the styles of header and footer</li>
+</ul>
+<h4 id="footnoteendnote">Footnote/endnote<a class="headerlink" href="#footnoteendnote" title="Permanent link">&para;</a></h4>
+<p>With these function, you can create footnote or endnote in your document.</p>
+<ul>
+<li>Add the footnote and the endnote</li>
+<li>Find the footnote and endnote</li>
+<li>Delete the foontnote and endnote</li>
+</ul>
+<h4 id="hyperlinks">Hyperlinks<a class="headerlink" href="#hyperlinks" title="Permanent link">&para;</a></h4>
+<p>With these function, you can create a hyperlink in your document.</p>
+<ul>
+<li>Add a hyperlink</li>
+<li>Delete a hyperlink</li>
+<li>Find hyperlinks</li>
+</ul>
+<h4 id="break">Break<a class="headerlink" href="#break" title="Permanent link">&para;</a></h4>
+<p>With these function, you can add break characters in your document.</p>
+<ul>
+<li>Add breaks</li>
+<li>Delete breaks</li>
+<li>Find breaks</li>
+</ul>
+<h4 id="page-numbering">Page numbering<a class="headerlink" href="#page-numbering" title="Permanent link">&para;</a></h4>
+<p>With these function, you can add page numbering in your document.</p>
+<ul>
+<li>Add page numbering</li>
+<li>Delete page numbering</li>
+</ul>
+<h4 id="comment">Comment<a class="headerlink" href="#comment" title="Permanent link">&para;</a></h4>
+<p>With this function, you can add comment to your document.</p>
+<ul>
+<li>Add comments</li>
+<li>Navigation among comments</li>
+<li>delete comments</li>
+</ul>
+<h4 id="document-bookmark">Document bookmark<a class="headerlink" href="#document-bookmark" title="Permanent link">&para;</a></h4>
+<p>To create bookmark</p>
+<ul>
+<li>Add bookmark</li>
+<li>Navigation through bookmarks</li>
+<li>Delete bookmarks</li>
+</ul>
+<h4 id="fontwork">Fontwork<a class="headerlink" href="#fontwork" title="Permanent link">&para;</a></h4>
+<p>To create a fontwork</p>
+<ul>
+<li>Add frontwork</li>
+<li>Delete fontwork</li>
+<li>Navigation through fontwork</li>
+</ul>
+<h4 id="chart">Chart<a class="headerlink" href="#chart" title="Permanent link">&para;</a></h4>
+<p>To create a chart</p>
+<ul>
+<li>Add chart</li>
+<li>Update chart properties</li>
+<li>Update style setting of chart</li>
+<li>Navigation through chart</li>
+<li>Delete chart</li>
+</ul>
+<h4 id="ole-object">OLE object<a class="headerlink" href="#ole-object" title="Permanent link">&para;</a></h4>
+<p>To operate OLE object</p>
+<ul>
+<li>Add a OLE object</li>
+<li>Navigation through OLE object</li>
+<li>Delete OLE object</li>
+<li>Update OLE object properties</li>
+</ul>
+<h4 id="layout-and-columns">Layout and columns<a class="headerlink" href="#layout-and-columns" title="Permanent link">&para;</a></h4>
+<p>To edit the layout and columns properties</p>
+<ul>
+<li>Set properties of layout</li>
+</ul>
+<h4 id="table">Table<a class="headerlink" href="#table" title="Permanent link">&para;</a></h4>
+<p>To provide functions to manipulate table. Following functions have been provided:</p>
+<ul>
+<li>create table</li>
+<li>insert row/column</li>
+<li>access cell</li>
+<li>styles handling</li>
+<li>merge cell</li>
+<li>delete row/column</li>
+<li>numbering format</li>
+<li>insert formula</li>
+</ul>
+<h5 id="filter-and-validity">Filter and validity<a class="headerlink" href="#filter-and-validity" title="Permanent link">&para;</a></h5>
+<p>To provide filter/validity functions to data in a table</p>
+<ul>
+<li>Add/delete/update filter</li>
+<li>Add/delete/update validity</li>
+</ul>
+<h5 id="group">Group<a class="headerlink" href="#group" title="Permanent link">&para;</a></h5>
+<p>To group rows or columns</p>
+<ul>
+<li>Add group</li>
+<li>Delete group</li>
+</ul>
+<h5 id="data-pilot">Data pilot<a class="headerlink" href="#data-pilot" title="Permanent link">&para;</a></h5>
+<p>To create or delete data pilot in a spreadsheet document.</p>
+<ul>
+<li>Create data pilot</li>
+<li>Delete data pilot</li>
+</ul>
+<h5 id="split">Split<a class="headerlink" href="#split" title="Permanent link">&para;</a></h5>
+<p>To split a cell</p>
+<h4 id="slide">Slide<a class="headerlink" href="#slide" title="Permanent link">&para;</a></h4>
+<p>To manipulate slides. Following functions have been provided:</p>
+<ul>
+<li>Add/delete slides</li>
+<li>Navigation through slides</li>
+<li>Merge slides</li>
+</ul>
+<h5 id="master-slide">Master Slide<a class="headerlink" href="#master-slide" title="Permanent link">&para;</a></h5>
+<p>To manipulate master slides</p>
+<ul>
+<li>update styles of master slides</li>
+</ul>
+<h5 id="animation">Animation<a class="headerlink" href="#animation" title="Permanent link">&para;</a></h5>
+<p>To manipulate the animation settings.</p>
+<ul>
+<li>Set effects</li>
+<li>Set order</li>
+<li>Remove animation setting</li>
+</ul>
+<h4 id="page-setup">Page setup<a class="headerlink" href="#page-setup" title="Permanent link">&para;</a></h4>
+<p>To define the page setup.</p>
+<ul>
+<li>Set page orientation</li>
+<li>Set page margin</li>
+</ul>
+  </div>
+
+  <div id="footera">
+    <div id="poweredby">
+      <p><img src="/odftoolkit/images/feather-small.gif"/><br/>Powered by the Apache CMS.</p>
+    </div>
+    <div id="copyrighta">
+      <p>
+	Apache "ODF Toolkit" is an effort undergoing incubation at The Apache Software Foundation (ASF), sponsored by the Apache Incubator.
+	Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and
+	decision making process	have stabilized in a manner consistent with other successful ASF projects. While incubation status is
+	not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has
+	yet to be fully endorsed by the ASF.</p>
+      <p>
+	Copyright &copy; 2011 The Apache Software Foundation Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+	<a href="/openofficeorg/contact.html">Contact Us</a>
+	<br />Apache and the Apache feather logos are trademarks of The Apache Software Foundation.
+	<br />Other names appearing on the site may be trademarks of their respective owners.
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

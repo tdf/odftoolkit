@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# PROVIDE: buildslave
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+
+# Add the following lines to /etc/rc.conf to enable buildbot:
+# buildslave_enable="YES"
+
+# Below setting will be used if exist. If not enabled or the
+# user does not exist then user will be root to ensure that
+# the service starts.
+
+buildslave_runas_user="cmsslave"
+buildslave_slave_base="/home/cmsslave/slave15"
+
+buildslave_enable=${buildslave_enable-"NO"}
+
+. /etc/rc.subr
+
+name="buildslave"
+rcvar=`set_rcvar`
+
+command="/usr/local/bin/buildslave"
+
+if [ $buildslave_runas_user ]; then
+  run_as="su - ${buildslave_runas_user} -c"
+else
+  run_as=""
+fi
+extra_commands="restart checkconfig reconfig"
+
+load_rc_config ${name}
+
+start_cmd="${run_as} '${command} start ${buildslave_slave_base}'"
+stop_cmd="${run_as} '${command} stop ${buildslave_slave_base}'"
+restart_cmd="${run_as} '${command} restart ${buildslave_slave_base}'"
+checkconfig_cmd="${run_as} '${command} checkconfig ${buildslave_slave_base}'"
+reconfig_cmd="${run_as} '${command} reconfig ${buildslave_slave_base}'"
+
+run_rc_command "$1"
+

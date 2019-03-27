@@ -1,0 +1,145 @@
+{% load markup %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Edit: {{ title }}</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/code.css" />
+    {% include "head.html" %}
+    {% if base %}
+    <base href="{{ base }}" />
+    {% endif %}
+  </head>
+  <body>
+<h1>Edit Directory: {{ title }}</h1>
+<div id="breadcrumbs">{{ breadcrumbs|safe }}</div>
+Status: {{ status }}<br />
+<a href="?action=update">[Update]</a>
+{% if status %}
+<a href="?action=diff" title="View Diff">[Diff]</a>
+{% ifequal user "anonymous" %}{% else %}
+<a href="?action=commit" title="Ignores Edits!">[Commit]</a>
+{% endifequal %}
+<a href="?action=revert">[Revert]</a>
+<a href="?action=resolve">[Resolve]</a>
+{% endif status %}
+<a href="?action=copy">[Copy]</a>
+{% ifequal user "anonymous" %}{% else %}
+<a href="?action=move">[Move]</a>
+{% endifequal %}
+<a href="?action=delete">[Delete]</a>
+<a href="?action=browse">[Browse]</a>
+<a href="{{ url }}">[URL]</a>
+
+<form method="GET">
+  <input type="hidden" name="action" value="add" />
+  Add New File or Directory: <input type="text" name="path" />
+  (relative path to new resource;
+  details <a href="http://www.apache.org/dev/cmsref.html#add-resource" target="_blank">here (opens in new window)</a>)
+</form>
+{% if file_url %}
+<h2>Directory Index File</h2>
+<table class="dir" border=1 style="width:100%">
+<tr><th>Edit Path</th><th>Status</th><th>Actions</th><th>Preview</th></tr>
+<tr>
+
+<td><a href="{{ file_url }}" title="{{ title }}">{{ file_url }}</a></td>
+<td><pre class="status">{{ status }}</pre></td>
+<td>
+{% if status %}
+<a href="{{ file_url }}?action=diff" title="View Diff">[Diff]</a>
+{% ifequal user "anonymous" %}{% else %}
+<a href="{{ file_url }}?action=commit">[Commit]</a>
+{% endifequal %}
+<a href="{{ file_url }}?action=revert">[Revert]</a>
+<a href="{{ file_url }}?action=resolve">[Resolve]</a>
+{% endif %}
+<a href="{{ file_url }}?action=copy">[Copy]</a>
+{% ifequal user "anonymous" %}{% else %}
+<a href="{{ file_url }}?action=move">[Move]</a>
+{% endifequal %}
+<a href="{{ file_url }}?action=delete">[Delete]</a>
+<a href="{{ file_url }}?action=browse">[Browse]</a>
+</td>
+<td><div style="overflow:auto; width:100%">
+{% if file_content %}
+  {{ file_content|markdown|truncatewords_html:100 }}
+{% endif %}
+</div></td>
+</tr>
+</table>
+{% endif file_url %}
+
+{% if attachments %}
+  <h2>Attachments</h2>
+<table class="dir" border=1 style="width:100%">
+<tr><th>Edit Path</th><th>Status</th><th>Actions</th><th>Preview</th></tr>
+{% for e in attachments %}
+<tr>
+
+<td><a href="{{ e.path }}" title="{{ e.title }}">{{ e.link_content }}</a></td>
+<td><pre class="status">{{ e.status }}</pre></td>
+<td>
+{% if e.status %}
+<a href="{{ e.path }}?action=diff" title="View Diff">[Diff]</a>
+{% ifequal user "anonymous" %}{% else %}
+<a href="{{ e.path }}?action=commit">[Commit]</a>
+{% endifequal %}
+<a href="{{ e.path }}?action=revert">[Revert]</a>
+<a href="{{ e.path }}?action=resolve">[Resolve]</a>
+{% endif %}
+<a href="{{ e.path }}?action=copy">[Copy]</a>
+{% ifequal user "anonymous" %}{% else %}
+<a href="{{ e.path }}?action=move">[Move]</a>
+{% endifequal %}
+<a href="{{ e.path }}?action=delete">[Delete]</a>
+<a href="{{ e.path }}?action=browse">[Browse]</a>
+</td>
+<td><div style="overflow:auto; width:100%">
+{% if e.is_image %}
+  <img src="{{ e.path }}?action=static" title="{{ e.title }}"
+       style="float:left" />
+{% endif %}
+{% if e.file_content %}
+  {{ e.file_content|markdown|truncatewords_html:100 }}
+{% endif %}
+</div></td>
+</tr>
+{% endfor %}
+</table>
+{% endif attachments %}
+<h2>Directory Listing</h2>
+<table class="dir" border=1 style="width:100%">
+<tr><th>Edit Path</th><th>Status</th><th>Actions</th><th>Preview</th></tr>
+{% for e in dir %}
+<tr>
+
+<td><a href="{{ e.path }}" title="{{ e.title }}">{{ e.link_content }}</a></td>
+<td><pre class="status">{{ e.status }}</pre></td>
+<td>
+{% if e.status %}
+<a href="{{ e.path }}?action=diff" title="View Diff">[Diff]</a>
+{% ifequal user "anonymous" %}{% else %}
+<a href="{{ e.path }}?action=commit">[Commit]</a>
+{% endifequal %}
+<a href="{{ e.path }}?action=revert">[Revert]</a>
+<a href="{{ e.path }}?action=resolve">[Resolve]</a>
+{% endif %}
+<a href="{{ e.path }}?action=copy">[Copy]</a>
+{% ifequal user "anonymous" %}{% else %}
+<a href="{{ e.path }}?action=move">[Move]</a>
+{% endifequal %}
+<a href="{{ e.path }}?action=delete">[Delete]</a>
+<a href="{{ e.path }}?action=browse">[Browse]</a>
+</td>
+<td><div style="overflow:auto; width:100%">
+{% if e.is_image %}
+  <img src="{{ e.path }}?action=static" title="{{ e.title }}"
+       style="float:left" />
+{% endif %}
+{% if e.file_content %}
+  {{ e.file_content|markdown|truncatewords_html:100 }}
+{% endif %}
+</div></td>
+</tr>
+{% endfor %}
+</table>

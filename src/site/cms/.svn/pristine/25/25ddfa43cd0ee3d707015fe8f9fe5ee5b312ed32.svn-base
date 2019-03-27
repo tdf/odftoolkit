@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    {% if error %}
+    <title>Delete failed! ({{ http_status }})</title>
+    {% else %}
+    <title>Delete successful! ({{ http_status }})</title>
+    {% endif %}
+  {% include "head.html" %}
+  </head>
+
+  <body>
+    {% if error %}
+    <h1>Delete failed!</h1>
+    <pre>{{ error }}</pre>
+    {% else %}
+    <h1>Delete successful!</h1>
+{% ifequal user "anonymous" %}{% else %}
+<a href="../?action=commit">[Commit]</a>
+{% endifequal %}
+<a href="../?action=browse">[Browse]</a>
+<a href="../?action=staged" title="View Staged">[Staged]</a>
+{% ifequal user "anonymous" %}{% else %}
+<a href="/{{ project }}/publish">[Publish Site]</a>
+{% endifequal %}
+<a href="../?action=production" title="View Production">[Production]</a>
+    {% endif %}
+  </body>
+</html>

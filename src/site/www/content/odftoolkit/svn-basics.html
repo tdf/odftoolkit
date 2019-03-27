@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE- 2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<link href="/odftoolkit/css/odf.css" rel="stylesheet" type="text/css">
+
+<title>Subversion Basics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28945571-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="banner">
+   <!-- <div id="bannerleft"><a alt="Apache ODF Toolkit (incubating)" href="http://incubator.apache.org/odftoolkit/">
+      <img id="logo" alt="Apache ODF Toolkit (Incubating)" src="/odftoolkit/images/ooo-logo.png"/></a></div> -->
+    <div id="bannerright"><a alt="Apache Incubator" href="http://incubator.apache.org">
+      <img id="asf-logo" alt="Apache Incubator" src="/odftoolkit/images/apache-incubator-logo.png"/></a></div>
+   <div id="bannercenter"><br/>&nbsp;&nbsp;&nbsp;&nbsp;Apache ODF Toolkit (incubating)</div>
+  </div>
+  <div id="clear"></div>
+  
+  <div id="sidenav">
+    <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/index.html">About</a></li>
+<li><a href="/odftoolkit/downloads.html">Downloads</a></li>
+<li><a href="http://incubator.apache.org/projects/odftoolkit.html">Incubator page</a></li>
+<li><a href="/odftoolkit/license.html">License</a></li>
+<li><a href="/odftoolkit/privacy.html">Privacy Policy</a></li>
+</ul>
+<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/odfdom/index.html">ODFDOM</a></li>
+<li><a href="/odftoolkit/simple/index.html">Simple API</a></li>
+<li><a href="/odftoolkit/conformance/ODFValidator.html">ODF Validator</a></li>
+<li><a href="/odftoolkit/xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
+</ul>
+<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/get-involved.html">Get Involved</a></li>
+<li><a href="/odftoolkit/mailing-lists.html">Mailing Lists</a></li>
+<li><a href="/odftoolkit/people.html">People</a></li>
+<li><a href="/odftoolkit/community-faqs.html">Community FAQs</a></li>
+</ul>
+<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/source.html">Source Code</a></li>
+<li><a href="https://issues.apache.org/jira/browse/ODFTOOLKIT">Bug Tracker</a></li>
+<li><a href="/odftoolkit/mvn-site/0.6-incubating/" target="_blank">Maven Reports</a></li>
+<li><a href="/odftoolkit/website-local.html">Website</a></li>
+<li><a href="/odftoolkit/developer-faqs.html">Developer FAQs</a></li>
+</ul>
+<h1 id="ppmc">PPMC<a class="headerlink" href="#ppmc" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/ppmc-faqs.html">PPMC FAQs</a></li>
+<li><a href="/odftoolkit/odftoolkit-release-guide.html">Release Guide</a>   </li>
+</ul>
+<h1 id="asf">ASF<a class="headerlink" href="#asf" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="http://www.apache.org">Apache Software Foundation</a></li>
+<li><a href="http://www.apache.org/foundation/thanks.html">Thanks</a></li>
+<li><a href="http://www.apache.org/foundation/sponsorship.html">Become a Sponsor</a></li>
+</ul>
+  </div>
+  <div id="contenta">
+  
+    <h1 class="title">Subversion Basics</h1>
+    <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<p>We use <a href="http://subversion.apache.org">Apache Subversion</a> for version control. For a complete reference on Subversion see the <a href="http://svnbook.red-bean.com">Subversion Book</a>. You can <a href="http://svn.apache.org/viewvc/incubator/odf/trunk">browse our repository</a> in your web browser.</p>
+<p>This page gives instructions on performing basic development tasks using the Subversion Command-Line Client. This instruction assumes you have Apache Subversion installed.</p>
+<ul>
+<li><a href="#overview">Overview</a> </li>
+<li><a href="#sub-commands_and_abbreviations">Sub-commands and Abbreviations</a> </li>
+<li><a href="#client_configuration">Client Configuration</a></li>
+<li><a href="#repository_layout">Repository Layout</a></li>
+<li><a href="#getting_the_source_code">Getting the source code</a></li>
+<li><a href="#basic_work_cycle">Basic Work Cycle</a></li>
+<li><a href="#committing_changes_by_others">Committing Changes By Others</a></li>
+<li><a href="#creating_and_submitting_patches">Creating and Submitting Patches</a></li>
+<li><a href="#further_information">Further Information</a></li>
+</ul>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>You begin using Subversion by copying a directory from a remote repository to a local directory on your file system. This is known as a checkout of a working copy.</p>
+<p>Subversion uses a copy-modify-merge model meaning that you can add and edit files and directories in your working copy like any other files on your system, but you should use subversion commands for everything else such as <code>svn copy</code> and <code>svn move</code> instead of the operating system commands.</p>
+<h2 id="sub-commands-and-abbreviations">Sub-commands and Abbreviations<a class="headerlink" href="#sub-commands-and-abbreviations" title="Permanent link">&para;</a></h2>
+<p>Subversion commands can be run from a command shell such as Bash on Linux. The subversion client command is <code>svn</code> followed by optional sub-commands, options, and arguments.</p>
+<p>Show the program version and modules</p>
+<div class="codehilite"><pre><span></span>$ svn --version
+</pre></div>
+
+
+<p>Run a sub-command</p>
+<div class="codehilite"><pre><span></span>$ svn &lt;subcommand&gt; <span class="o">[</span>options<span class="o">]</span> <span class="o">[</span>args<span class="o">]</span>
+</pre></div>
+
+
+<p>Most sub-commands take file and/or directory arguments, recursing on the directories. If no arguments are supplied to such a command, it recurses on the current directory (inclusive) by default. (from <code>svn help</code>)</p>
+<p>The following is only a partial list of sub-commands relating to this instruction. For a complete list, see the <a href="http://svnbook.red-bean.com">Subversion Book</a>, or use <code>svn help</code>.</p>
+<ul>
+<li><code>add</code> - Schedule a new file or directory (including contained files) for inclusion in the repository</li>
+<li><code>checkout</code>, <code>co</code> - Create a local working copy of a remote repository</li>
+<li><code>commit</code>, <code>ci</code> - Commit (check in) local changes to the repository</li>
+<li><code>copy</code>, <code>cp</code> - Copy one or more files in a working copy or in the repository</li>
+<li><code>delete</code>, <code>del</code>, <code>remove</code>, <code>rm</code> - Items specified are scheduled for deletion upon the next commit. Working copy files not yet committed are deleted immediately.</li>
+<li><code>diff</code>, <code>di</code> - Displays differences in files from the directory</li>
+<li><code>help</code>, <code>?</code>, <code>h</code> - Subversion help and help on sub-commands</li>
+<li><code>move</code>, <code>mv</code>, <code>rename</code>, <code>ren</code> - Moves files or directories in your working copy or repository</li>
+<li><code>resolve</code> - Resolve conflicts on working copy files or directories</li>
+<li><code>revert</code> - Undo all local edits or optionally a file or directory</li>
+<li><code>status</code> - Print the status of working copy files and directories</li>
+<li><code>update</code> - Bring changes from the repository into your working copy</li>
+</ul>
+<h2 id="client-configuration">Client Configuration<a class="headerlink" href="#client-configuration" title="Permanent link">&para;</a></h2>
+<p>Committers need to <a href="http://www.apache.org/dev/version-control.html#https-svn-config">configure their Subversion client</a> to handle the differences in line endings of text files on different operating systems.</p>
+<p>There are instances where Subversion may need to open an editor. You need to have the environment variable EDITOR set to the editor you would like to use. To set it for the current terminal session in Bash (your path may differ):</p>
+<div class="codehilite"><pre><span></span>$ <span class="nb">export</span> <span class="nv">EDITOR</span><span class="o">=</span>/usr/bin/vim
+</pre></div>
+
+
+<h2 id="repository-layout">Repository Layout<a class="headerlink" href="#repository-layout" title="Permanent link">&para;</a></h2>
+<p>The Odf repository layout uses the following top-level directories <code>branches</code>, <code>site</code>, <code>tags</code>, and <code>trunk</code>.</p>
+<ul>
+<li><code>branches</code> - Contains branches used for continued development of a specific version, experimental versions, or for  developing features to be merged into the trunk or a branch later. (needs examples)</li>
+<li><code>site</code> - Contains the web site source code. Also contains it's own trunk directory.</li>
+<li><code>tags</code> - Contains specific versions of the project. These tags are not to be revised. (needs examples)</li>
+<li><code>trunk</code> - Contains the current source code.
+For more information see the <a href="http://www.apache.org/dev/contributors.html#svnbasics">Contributors Tech Guide</a>.</li>
+</ul>
+<h2 id="getting-the-source-code">Getting the source code<a class="headerlink" href="#getting-the-source-code" title="Permanent link">&para;</a></h2>
+<p>From the parent directory of where you want the working copy. In this example the <code>odf-trunk</code> directory will be created if it does not exist.</p>
+<div class="codehilite"><pre><span></span>$ svn co https://svn.apache.org/repos/asf/incubator/odf/trunk odf-trunk
+A    odf-trunk/tools
+A    odf-trunk/tools/dev
+A    odf-trunk/tools/dev/fetch-all-cws.sh
+A    odf-trunk/tools/dev/cws-list.txt
+A    odf-trunk/tools/dev/fetch-all-web.sh
+A    odf-trunk/tools/dev/web-list.txt
+A    odf-trunk/tools/dev/single-hg.sh
+Checked out revision <span class="m">1145818</span>.
+</pre></div>
+
+
+<p>"A" indicates file or directory is "Added" to working copy</p>
+<h2 id="basic-work-cycle">Basic Work Cycle<a class="headerlink" href="#basic-work-cycle" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Update your working copy - For this you use the <code>svn update</code> command</li>
+<li>Make changes - For this you may edit files in an editor, or use the <code>svn add</code>, <code>svn delete</code>, <code>svn copy</code>, <code>svn-move</code> commands</li>
+<li>Review Changes - For this you use the <code>svn status</code> and <code>svn diff</code></li>
+<li>Fix Mistakes - Make additional edits to files or you can use the <code>svn revert</code> to restore files or directories to an unmodified state</li>
+<li>Resolve Conflicts - There is a chance others have committed changes while you have been changing your working copy. You should run the <code>svn update</code> command to bring your copy up to date. This may create a local conflict where someone may have added a file with a name that you also want to add, or may have made changes to the same line of a file as you. For this use the <code>svn resolve</code> command.</li>
+<li>Publish Changes - For this you use the <code>svn commit</code> command</li>
+</ul>
+<h3 id="adding-a-file">Adding a File<a class="headerlink" href="#adding-a-file" title="Permanent link">&para;</a></h3>
+<p>After creating the file "test-file.txt" in the working copy.</p>
+<div class="codehilite"><pre><span></span>$ svn status
+?       test-file.txt
+</pre></div>
+
+
+<p>? indicates test-file.txt is not under version control</p>
+<h3 id="scheduling-a-file-for-addition-to-repository">Scheduling a file for addition to repository<a class="headerlink" href="#scheduling-a-file-for-addition-to-repository" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>$ svn add test-file.txt
+A         test-file.txt
+
+$ svn status
+A       test-file.txt
+</pre></div>
+
+
+<p>"A" indicates file is scheduled for addition</p>
+<h3 id="running-a-diff">Running a diff<a class="headerlink" href="#running-a-diff" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>$ svn diff
+Index: test-file.txt
+<span class="o">===================================================================</span>
+--- test-file.txt   <span class="o">(</span>revision <span class="m">0</span><span class="o">)</span>
++++ test-file.txt   <span class="o">(</span>revision <span class="m">0</span><span class="o">)</span>
+@@ -0,0 +1 @@
++This is a <span class="nb">test</span> file <span class="k">for</span> svn-basics.
+
+Property changes on: test-file.txt
+___________________________________________________________________
+Added: svn:eol-style
+   + native
+</pre></div>
+
+
+<h3 id="committing-a-file">Committing a file<a class="headerlink" href="#committing-a-file" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>$ svn commit test-file.txt -m <span class="s2">&quot;added test-file.txt&quot;</span>
+Adding         test-file.txt
+Transmitting file data .
+Committed revision <span class="m">2</span>.
+</pre></div>
+
+
+<h3 id="update-the-working-copy">Update the working copy<a class="headerlink" href="#update-the-working-copy" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>$ svn update
+U    test-file.txt
+Updated to revision <span class="m">3</span>.
+</pre></div>
+
+
+<p>"U" indicates an "Update" to a file or directory</p>
+<p>Modify the file (this example uses the vim editor)</p>
+<div class="codehilite"><pre><span></span>$ vim test-file.txt
+</pre></div>
+
+
+<h3 id="check-the-status">Check the Status<a class="headerlink" href="#check-the-status" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>$ svn status
+M       test-file.txt
+</pre></div>
+
+
+<p>"M" indicates the file has been "Modified"</p>
+<div class="codehilite"><pre><span></span>$ svn diff
+Index: test-file.txt
+<span class="o">===================================================================</span>
+--- test-file.txt   <span class="o">(</span>revision <span class="m">3</span><span class="o">)</span>
++++ test-file.txt   <span class="o">(</span>working copy<span class="o">)</span>
+@@ -1,2 +1,3 @@
+ This is a <span class="nb">test</span> file <span class="k">for</span> svn-basics.
+ This is a new line added by someone <span class="k">else</span>.
++This line added by me.
+</pre></div>
+
+
+<h3 id="resolving-conflicts">Resolving Conflicts<a class="headerlink" href="#resolving-conflicts" title="Permanent link">&para;</a></h3>
+<p>Suppose someone edits the same line as you before you commit</p>
+<div class="codehilite"><pre><span></span>$ svn update
+Conflict discovered in <span class="s1">&#39;test-file.txt&#39;</span>.
+Select: <span class="o">(</span>p<span class="o">)</span> postpone, <span class="o">(</span>df<span class="o">)</span> diff-full, <span class="o">(</span>e<span class="o">)</span> edit,
+        <span class="o">(</span>mc<span class="o">)</span> mine-conflict, <span class="o">(</span>tc<span class="o">)</span> theirs-conflict,
+        <span class="o">(</span>s<span class="o">)</span> show all options:
+</pre></div>
+
+
+<p>This is just like if you had ran the <code>svn resolve</code> command</p>
+<p>Selecting <code>df</code> displays this:</p>
+<div class="codehilite"><pre><span></span><span class="gd">--- .svn/text-base/test-file.txt.svn-base   Sun Jul 17 17:38:52 2011</span>
+<span class="gi">+++ .svn/tmp/test-file.txt.tmp  Sun Jul 17 21:35:09 2011</span>
+<span class="gu">@@ -1,2 +1,7 @@</span>
+ This is a test file for svn-basics.
+ This is a new line added by someone else.
+<span class="gi">+&lt;&lt;&lt;&lt;&lt;&lt;&lt; .mine</span>
+<span class="gi">+This line added by me.</span>
+<span class="gi">+=======</span>
+<span class="gi">+This line is added by someone else also.</span>
+<span class="gi">+&gt;&gt;&gt;&gt;&gt;&gt;&gt; .r4</span>
+Select: (p) postpone, (df) diff-full, (e) edit, (r) resolved,
+        (mc) mine-conflict, (tc) theirs-conflict,
+        (s) show all options:
+</pre></div>
+
+
+<p>If you choose <code>e</code>, Subversion will launch an editor with both sets of changes included for you to edit. You can save your changes in the editor and then select <code>r</code> (for resolved).</p>
+<div class="codehilite"><pre><span></span>G    test-file.txt
+Updated to revision 4.
+</pre></div>
+
+
+<p>"G" indicates "merGed"</p>
+<h3 id="committing-the-changes">Committing the Changes<a class="headerlink" href="#committing-the-changes" title="Permanent link">&para;</a></h3>
+<p>Only Committers can commit directly to the repository. The following example shows using your Apache ID and password.</p>
+<div class="codehilite"><pre><span></span>$ svn commit test-file.txt --username your-name --password your-password <span class="se">\</span>
+  -m <span class="s2">&quot;added new line&quot;</span>
+Sending        test-file.txt
+Transmitting file data .
+Committed revision <span class="m">5</span>.
+</pre></div>
+
+
+<p>For further information see the <a href="http://svnbook.red-bean.com/nightly/en/svn.tour.cycle.html">Basic Work Cycle</a> page from <a href="http://svnbook.red-bean.com">Subversion Book</a>.</p>
+<h2 id="committing-changes-by-others">Committing Changes By Others<a class="headerlink" href="#committing-changes-by-others" title="Permanent link">&para;</a></h2>
+<p>See the <a href="http://www.apache.org/dev/committers.html#applying-patches">Applying Patches</a> section of the Committer FAQ page.</p>
+<p>Example similar to one on Committer FAQ:</p>
+<div class="codehilite"><pre><span></span>Issue #43835:
+Added some cool new feature.
+Submitted by: John Doe &lt;john.doe.at.null.org&gt;
+</pre></div>
+
+
+<p>Using the <code>-m (--message)</code> option only allows a single line log message. To commit a multi-line message use the <code>-F (--file)</code> option (with a previously created file) or use neither -m or -F and an editor will be started.</p>
+<h2 id="creating-and-submitting-patches">Creating and Submitting Patches<a class="headerlink" href="#creating-and-submitting-patches" title="Permanent link">&para;</a></h2>
+<p>See the <a href="http://www.apache.org/dev/contributors.html#patches">Sending in Patches</a> section on the Contributors Tech Guide page.</p>
+<p>Create the patch file from <code>svn diff</code> where <code>your-patch-name.patch</code> is the full path to the patch file to create.</p>
+<div class="codehilite"><pre><span></span>svn diff &gt; your-patch-name.patch
+</pre></div>
+
+
+<h2 id="further-information">Further Information<a class="headerlink" href="#further-information" title="Permanent link">&para;</a></h2>
+<p>For more information see: </p>
+<ul>
+<li><a href="http://subversion.apache.org">Apache Subversion Project</a></li>
+<li><a href="http://svnbook.red-bean.com">Subversion Book</a></li>
+<li><a href="http://www.apache.org/dev/">Apache Developer Information</a></li>
+</ul>
+  </div>
+
+  <div id="footera">
+    <div id="poweredby">
+      <p><img src="/odftoolkit/images/feather-small.gif"/><br/>Powered by the Apache CMS.</p>
+    </div>
+    <div id="copyrighta">
+      <p>
+	Apache "ODF Toolkit" is an effort undergoing incubation at The Apache Software Foundation (ASF), sponsored by the Apache Incubator.
+	Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and
+	decision making process	have stabilized in a manner consistent with other successful ASF projects. While incubation status is
+	not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has
+	yet to be fully endorsed by the ASF.</p>
+      <p>
+	Copyright &copy; 2011 The Apache Software Foundation Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+	<a href="/openofficeorg/contact.html">Contact Us</a>
+	<br />Apache and the Apache feather logos are trademarks of The Apache Software Foundation.
+	<br />Other names appearing on the site may be trademarks of their respective owners.
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
