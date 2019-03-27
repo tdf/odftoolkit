@@ -1,0 +1,68 @@
+Title: ODF XSLT Runner and ODF XSLT Runner Task Examples
+##XHTML
+
+The XHTML transformation contained in [OpenOffice.org] [1] can be used to 
+transform ODF documents into XHTML. Using **ODFXSLTRunner** it is not even 
+required to extract the ODF package.
+
+The XHTML style sheet runs only with the [SAXON XSLT Processor][2]. 
+Using version 9.1 is recommended.
+
+The following command converts an ODF text document **&lt;ODT&gt;** into 
+an XHTML document **&lt;XHTML&gt;**: 
+
+    java -cp odfxsltrunner.jar:<saxon.jar> org.odftoolkit.odfxsltrunner.Main
+       -f net.sf.saxon.TransformerFactoryImpl  -x Pictures/ 
+      <ooo-xslt>/export/xhtml/opendoc2xhtml.xsl <ODT> -o <XHTML>
+
+*&lt;saxon.jar&gt;* is the jar of the [SAXON][2] XSLT Processor.  *&lt;ooo-xslt&gt;* 
+is the location of the OpenOffice.org XSLT stylesheets within an OpenOffice.org 
+installation. In a typical OpenOffice.org installation, this is 
+<tt>openoffice.org/basis3.3/share/xslt</tt> (Linux) or <tt>Basis/share/xslt</tt> (Windows).
+
+***Note:*** A few changes are necessary to use OpenOffice.org's XHTML 
+transformation with **ODFXSLTRunner**. These are available as patch in the 
+OpenOffice.org issue [i115881][3].
+
+##XHTML with referenced images only
+
+The XHTML  transformation in the above example extracts all images from the 
+ODF document, regardless whether these are referenced in the XHTML document. 
+To extract only the images that are referenced a list of referenced images 
+may be created by  the **create-html-img-list.xsl** style sheet that is 
+contained in the **sample-xslt** folder of **ODFXSLTRunner**. It is applied 
+to the XHTML file, and the target is a text file that contains the references 
+images. Although the input file is an XHTML rather than a ODF file, 
+**ODFXSLTRunner** may be used to apply the style sheet.
+
+    java -jar odfxsltrunner.jar create-html-img-list.xsl -i <XHTML> -o <img-list> 
+     unzip <ODT> `<img-list>`
+
+##Replace embedded objects with bitmap images
+
+Unlike OpenOffice.org's HTML filter, the XSLT-based XHTML filter does not 
+convert embedded objects into bitmap images. It is however possible to 
+replace the embedded objects of ODF document with the images that the 
+HTML filter has exported by applying the **replace-object.xsl** style sheet 
+that is contained in the **sample-xslt** folder of **ODFXSLTRunner** to the 
+ODF document.
+
+The following steps are required:
+
+  - Load the ODT document into OpenOffice.org and save it with the HTML
+    filter. The file may have an arbitrary name.
+    **&lt;ooo-html-file&gt;** is used as a placeholder here.
+  - Convert the HTML file into an XHTML file. You may use **xmllint** for this purpose, which is part of [libxml2][4], or any other tools that converts HTML into XHTML. The command line for **xmllint** is:
+ xmllint --html --xmlout --dropdtd -o &lt;ooo-xhtml-file&gt; &lt;ooo-html-file&gt;
+  - Apply the **replace-object.xsl** style sheet to the ODF document. The style sheet requires the name of the XHTML file converted in the previous step as '''hrml-ref''' parameter.
+ java -jar odfxsltrunner.jar replace-objects.xsl &lt;input odf&gt; &lt;output odf&gt; 
+  ref-html=&lt;ooo-xhtml-file&gt;
+  - Zip the images that OpenOffice.org has saved next to the HTML document into the output ODF file.
+The new ODF file now can be transformed to XHTML with OpenOffice.org's XHTML transformation.
+
+
+
+[1]: http://www.openoffice.org
+[2]: http://saxon.sourceforge.net/
+[3]: http://qa.openoffice.org/issues/show_bug.cgi?id=115881
+[4]: http://xmlsoft.org/

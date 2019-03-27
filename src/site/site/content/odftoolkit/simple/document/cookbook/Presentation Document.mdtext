@@ -1,0 +1,57 @@
+<strong><a href="../index.html">Documents</a></strong> > <strong><a href="index.html">Cookbook</a></strong> ><strong><a href="Presentation Document.html">Presentation Document</a></strong>
+<div class="navigation">
+ <ul>
+  <li><a href="Text Document.html">previous</a></li>
+  <li><a href="Slide.html">next</a></li>
+ </ul>
+</div>
+<br/>
+<br/><strong><a href="#Create Presentation Document" >Create Presentation Document</a></strong>
+<div class="bodytext">
+Let's create an empty presentation document first. The following codes generates an empty presentation document with one slide:
+</div>
+<br/><pre class='code' id="code0">
+		    <span class='javaclass'>PresentationDocument</span> document=<span class='javaclass'>PresentationDocument</span>.newPresentationDocument();	 <br/>
+		    document.save(filePath);<br/>
+</pre>
+<br/><div class="bodytext">
+We can also create a presentation template document by using the following codes. The operation of the template document is the same with the normal presentation document.
+</div>
+<br/><pre class='code' id="code1">
+                    <span class='javaclass'>PresentationDocument</span> documentTmp=<span class='javaclass'>PresentationDocument</span>.newPresentationTemplateDocument();			    <br/>
+</pre>
+<br/><br/><strong><a href="#Get Presentation Document" >Get Presentation Document</a></strong>
+<div class="bodytext">
+We can get the existing presentation Document by using the loadDocument function like follows: 
+</div>
+<div class="bodytext">
+Here presentation.odp is the name of the existing presentation document.
+</div>
+<div class="bodytext">
+Also we can append all the slides of the specified presentation document to the current document by using the following codes:
+</div>
+<div class="bodytext">
+Here the slides of the documents "presentation.odp" will be appended to "document".
+</div>
+<br/><pre class='code' id="code2">
+		    <span class='javaclass'>PresentationDocument</span> presentationmodel;<br/>
+		    presentationmodel=(<span class='javaclass'>PresentationDocument</span>)<span class='javaclass'>PresentationDocument</span>.loadDocument("presentation.odp");<br/>
+	            document.appendPresentation(presentationmodel);	       <br/>
+</pre>
+<br/><br/><strong><a href="#Change Presentation Mode" >Change Presentation Mode</a></strong>
+<div class="bodytext">
+We can switch the mode presentation documents by using the following codes. Here the first one convert the presentation document to a template, and the second one convert the template to a normal presentation document.
+</div>
+<br/><pre class='code' id="code3">
+		    document.changeMode(<span class='javaclass'>OdfMediaType</span>.PRESENTATION_TEMPLATE);	<br/>
+		    documentTmp.changeMode(<span class='javaclass'>OdfMediaType</span>.<span class='javaclass'>PRESENTATION</span>);<br/>
+</pre>
+<br/><br/> 
+<div class="navigation">
+ <ul>
+  <li><a href="Text Document.html">previous</a></li>
+  <li><a href="Slide.html">next</a></li>
+  <li><a href="#">top</a></li>
+ </ul>
+</div>
+<link type="text/css" rel="stylesheet" href="cookbook.css"/>

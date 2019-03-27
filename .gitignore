@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Created by https://www.gitignore.io/api/java,maven,eclipse,intellij+all
 # Edit at https://www.gitignore.io/?templates=java,maven,eclipse,intellij+all
 
@@ -200,3 +201,15 @@ buildNumber.properties
 # End of https://www.gitignore.io/api/java,maven,eclipse,intellij+all
 /xslt-runner/nbproject/private/
 /xslt-runner-task/nbproject/private/
+=======
+*.class
+# compiled python source from Apache CMS
+src/site/cms/build/*.pyc 
+**/*.pyc
+.DS_Store
+bin/
+target/
+*~
+.*sw?
+\#*
+>>>>>>> Test version of new website and tooling

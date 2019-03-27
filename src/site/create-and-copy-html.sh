@@ -8,7 +8,14 @@ echo Build the site..
 cms/build/build_site.pl --source-base site --target-base www
 
 echo Copying the HTML to GitHub Docs
-#mv -v ../../docs/api  ../..
-#rm -rfv ../../docs/*
-#mv -v ./www/content/odftoolkit/* ../../docs/
-#mv -v ../../api ../../docs
+# saving the generated JAVADOC API
+mv -v ../../docs/api  ../..
+# removing all prior website content
+rm -rfv ../../docs/*
+# copying all generated HTML as new website content
+mv -v ./www/content/odftoolkit/* ../../docs/
+# restore the generated javadoc
+mv -v ../../api ../../docs
+# remove temporary files and directories
+rm markdown.socket
+rm -rf www
