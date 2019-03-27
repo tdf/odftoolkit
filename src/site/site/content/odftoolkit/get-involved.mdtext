@@ -1,0 +1,101 @@
+Title: Get Involved
+Notice:    Licensed to the Apache Software Foundation (ASF) under one
+           or more contributor license agreements.  See the NOTICE file
+           distributed with this work for additional information
+           regarding copyright ownership.  The ASF licenses this file
+           to you under the Apache License, Version 2.0 (the
+           "License"); you may not use this file except in compliance
+           with the License.  You may obtain a copy of the License at
+           .
+             http://www.apache.org/licenses/LICENSE-2.0
+           .
+           Unless required by applicable law or agreed to in writing,
+           software distributed under the License is distributed on an
+           "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+           KIND, either express or implied.  See the License for the
+           specific language governing permissions and limitations
+           under the License.
+
+You don't need to be a software developer to contribute to 
+Apache ODF Toolkit. To be successful this project 
+requires a range of different skills, levels of involvement and degrees of 
+technical expertise. So, if you want to get involved in Apache ODF Toolkit, there 
+is almost certainly a role for you. 
+
+We are looking for people to:
+
+  - provide feedback
+  - write or update documentation
+  - help new users
+  - recommend the project to others
+  - test the code and report bugs
+  - fix bugs
+  - give us feedback on required features
+  - write and update the software
+  - create artwork
+  - anything you can see that needs doing
+
+All of these contributions help to keep a project active and strengthen 
+the community. The project team and the broader community will 
+therefore welcome and encourage participation, and attempt to make it 
+as easy as possible for people to get involved. 
+
+We maintain a list of specific areas where we need volunteers on our [Help Wanted] [15] page of the wiki.
+
+## Mailing lists
+
+Your first engagement with the project should be to subscribe to our
+[mailing lists][14].
+
+## Decision Making
+
+The most important thing about engaging with any Apache project is that everyone
+is equal. All people with an opinion are entitled to express that opinion and, where 
+appropriate, have it considered by the community.
+
+To some the idea of having to establish consensus in a large and distributed team 
+sounds inefficient and frustrating. Don't despair though, The Apache Way has a
+set of simple processes to ensure things proceed at a good pace.
+
+In ASF projects we don't like to vote. We reserve that for the few things that need 
+official approval for legal or process reasons (e.g. a release or a new committer). 
+Most of the time we work with the consensus building techniques documented below.
+
+
+### Lazy Consensus
+
+[Lazy consensus][10] is the first, and possibly the most important, consensus building 
+tool we have. Essentially lazy consensus means that you don't need to get explicit
+approval to proceed, but you need to be prepared to listen if someone objects.
+
+### Consensus Building
+
+Sometimes lazy consensus is not appropriate. In such cases it is necessary to
+make a proposal to the mailing list and discuss options. There are mechanisms
+for quickly showing your support or otherwise for a proposal and 
+[building consensus][11] amongst the community.
+
+Once there is a consensus people can proceed with the work under the [lazy 
+consensus][12] model.
+
+### Voting
+
+Occasionally a "feel" for consensus is not enough. Sometimes we need to 
+have a measurable consensus. For example, when [voting][13] in new committers or 
+to approve a release. 
+
+
+  [1]: mailto:odf-dev-subscribe@incubator.apache.org
+  [2]: mailto:odf-dev@incubator.apache.org
+  [3]: mailto:odf-dev-unsubscribe@incubator.apache.org
+  [4]: http://markmail.org/search/+list:org.apache.incubator.odf-dev
+  [5]: http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/
+  [6]: mailto:odf-commits-subscribe@incubator.apache.org
+  [7]: mailto:odf-commmits-unsubscribe@incubator.apache.org
+  [8]: http://markmail.org/search/+list:org.apache.incubator.odf-commits
+  [9]: http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/
+  [10]: /odftoolkit/docs/governance/lazyConsensus.html
+  [11]: /odftoolkit/docs/governance/consensusBuilding.html
+  [12]: /odftoolkit/docs/governance/lazyConsensus.html
+  [13]: /odftoolkit/docs/governance/voting.html
+  [14]:/odftoolkit/mailing-lists.html

@@ -1,4 +1,7 @@
 *.class
+# compiled python source from Apache CMS
+src/site/cms/build/*.pyc 
+**/*.pyc
 .DS_Store
 bin/
 target/

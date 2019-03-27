@@ -1,0 +1,64 @@
+**[Demos][1]** > **Booking Sheet with Text Box**   
+
+**Overview**   
+
+This demo shows the power of text box and paragraph support in Simple API.   
+
+The background of this demo is that a travel agency has to help customers book hotel. They have a spreadsheet file in hand, which records all of the visitors' information. They need to generate an order form with the requirements of hotel reservation using these data. A order form template has been supplied. This program generates order forms for all the visitors based on records of passengers in spreadsheet and the given template.    
+
+<img src="image/demo6.png" ><br/><br/> 
+**Code Introduction**
+
+There code of this demo is very simple. First, load template document and spreadsheet separately. Secondly, iterate data table and create new section and paragraph. The Text Boxes in the paragraph are also cloned. All of them are iterated and filled information from data table.<br/>
+Data items counts are also computed. These counts are wrote to the bottom table of the sheet.<br/>
+   
+	public static void main(String[] args) {
+		try {
+			// load template document
+			TextDocument doc = TextDocument.loadDocument("DemoTemplate.odt");
+			Table roomtable = doc.getTableByName("RoomTable");
+			roomtable.remove();
+			Section templateSection = doc.getSectionByName("SectionForm");
+			// load passenger data document
+			SpreadsheetDocument data = SpreadsheetDocument.loadDocument("Passengers.ods");
+			Table table = data.getTableByName("passenger");
+			int count = table.getRowCount();
+			int type1Count = 0, type2Count = 0, type3Count = 0;
+			for (int i = 1; i < count; i++) {
+				Row row = table.getRowByIndex(i);
+				for (int j = 0; j < 6; j++) {
+					Paragraph para = templateSection.getParagraphByIndex(j,	false);
+					Textbox nameBox = para.getTextboxIterator().next();
+					String content = row.getCellByIndex(j).getDisplayText();
+					nameBox.setTextContent(content);
+					if (j == 5) {
+						if (content.equals("Deluxe Room"))
+							type1Count++;
+						else if (content.equals("Studio/Junior Suite"))
+							type2Count++;
+						else if (content.equals("Executive Suite"))
+							type3Count++;
+					}
+				}
+				doc.appendSection(templateSection, false);
+				doc.addParagraph(null);
+			}
+			templateSection.remove();
+			roomtable.getCellByPosition(2, 1).setStringValue(type1Count + "");
+			roomtable.getCellByPosition(2, 2).setStringValue(type2Count + "");
+			roomtable.getCellByPosition(2, 3).setStringValue(type3Count + "");
+
+			doc.getContentRoot().appendChild(roomtable.getOdfElement());
+			doc.save("output.odt");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+**Download**   
+
+Powered by the Simple Java API for ODF version  <a target="_new" href="../downloads.html">0.5</a>.  
+You can download the code of this demo from <a href="TextboxDemo.zip">here</a>.
+
+  [1]: index.html

@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE- 2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+  <link href="/odftoolkit/css/odf.css" rel="stylesheet" type="text/css">
+  
+  <title>Simple Java API for ODF</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28945571-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+
+<body>
+
+  <div id="banner">
+    <!--
+    <div id="bannerright"><a alt="Apache Incubator" href="http://incubator.apache.org">
+      <img id="asf-logo" alt="Apache Incubator" src="/odftoolkit/images/apache-incubator-logo.png"/></a></div>
+    <div id="bannercenter"><br/>&nbsp;&nbsp;&nbsp;&nbsp;Apache ODF Toolkit (incubating)</div>
+    -->
+    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
+        <img id="tdf-logo" class="w350" alt="The Document Foundation"
+          src="/odftoolkit/images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
+  </div>
+  <div id="clear"></div>
+  
+  <div id="sidenav">
+    <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/index.html">About</a></li>
+<li><a href="/odftoolkit/downloads.html">Downloads</a></li>
+<li><a href="/odftoolkit/license.html">License</a></li>
+<li><a href="/odftoolkit/privacy.html">Privacy Policy</a></li>
+</ul>
+<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/odfdom/index.html">ODFDOM</a></li>
+<li><a href="/odftoolkit/simple/index.html">Simple API (deprecated)</a></li>
+<li><a href="/odftoolkit/conformance/ODFValidator.html">ODF Validator</a></li>
+<li><a href="/odftoolkit/xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
+</ul>
+<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/get-involved.html">Get Involved</a></li>
+<li><a href="/odftoolkit/mailing-lists.html">Mailing Lists</a></li>
+<li><a href="/odftoolkit/people.html">People</a></li>
+<li><a href="/odftoolkit/community-faqs.html">Community FAQs</a></li>
+</ul>
+<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="/odftoolkit/source.html">Source Code</a></li>
+<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
+<li><a href="/odftoolkit/api/" target="_blank">JavaDoc</a></li>
+<li><a href="/odftoolkit/website-local.html">Website</a></li>
+<li><a href="/odftoolkit/developer-faqs.html">Developer FAQs</a></li>
+</ul>
+<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
+<li><a href="https://www.documentfoundation.org/">Become a Sponsor</a></li>
+</ul>
+  </div>
+  <div id="contenta">
+    
+      <h1 class="title">Simple Java API for ODF</h1>
+      <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h2 id="what-is-the-simple-java-api-for-odf">What is the Simple Java API for ODF?<a class="headerlink" href="#what-is-the-simple-java-api-for-odf" title="Permanent link">&para;</a></h2>
+<p>The Simple Java API for ODF is an easy-to-use, high-level Java API for creating, 
+modifying and extracting data from ODF 1.2 documents.  It is written in pure 
+Java and does not require that you install any document editor on your system.<br />
+The Simple Java API for ODF is a high level abstraction of the lower-level ODFDOM API.</p>
+<h2 id="new-release-066">New Release 0.6.6<a class="headerlink" href="#new-release-066" title="Permanent link">&para;</a></h2>
+<p>We are pleased to announce the release of the Simple Java API for ODF version 
+0.6.6 on Auguest 12th. The improvements in this version include:</p>
+<ul>
+<li>Two critical bugs in the Navigation API are fixed, as well as
+    several other issues.</li>
+<li>*Page columns,  a page layout feature in text documents, are supported.</li>
+<li>*Unit test coverage rate increased.  This work improves the stability of our API.</li>
+</ul>
+<p>You can download it here. The full release notes can be found here. </p>
+<p>ODF Toolkit has been accepted as an Apache incubator project and the move 
+process has been started. The security features (encryption and digital 
+signatures) will be included in Apache version. Thanks all of the contributors 
+and users, please continue to pay attention to us in Apache.</p>
+<h2 id="project-roadmap-and-schedule">Project roadmap and schedule<a class="headerlink" href="#project-roadmap-and-schedule" title="Permanent link">&para;</a></h2>
+<p>The Simple Java API for ODF adheres to the "Release Early and Often" development 
+philosophy.  We will target a monthly release, for the end of each month.<br />
+Code that is ready makes it into that month's release.  Code that is not yet 
+ready will wait.</p>
+<p>Proposed Roadmap:</p>
+<ul>
+<li>Version 0.2 at the end of Oct, 2010 with the high-level methods migrated from ODFDOM and organized in new package structure;</li>
+<li>Version 0.3 at the end of Nov, 2010 with high-level style API;</li>
+<li>Version 0.4 at the end of Jan, 2011 with additional high-level text methods;</li>
+<li>Version 0.5 at the end of March, 2011 with text box and fields methods;</li>
+<li>Version 0.6 at the end of May, 2011 with chart methods;</li>
+<li>Version 0.6.6 at the middle of August, 2011 with bugs fixed;</li>
+<li>More work will be started in Apache.</li>
+</ul>
+<h2 id="frequently-asked-questions">Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">&para;</a></h2>
+<h3 id="for-users">For Users<a class="headerlink" href="#for-users" title="Permanent link">&para;</a></h3>
+<h4 id="how-to-download-and-install">How to download and install<a class="headerlink" href="#how-to-download-and-install" title="Permanent link">&para;</a></h4>
+<p>You can get Simple Java API for ODF as binary distribution from the download area. There you'll find Javadocs as well. To obtain source code, please refer to development section. </p>
+<h4 id="how-to-start-development">How to start development<a class="headerlink" href="#how-to-start-development" title="Permanent link">&para;</a></h4>
+<p>I suggest you to start from an overview of this project. This page will give you 
+an overall introduction of the package structures. After that, you can go to the
+Cookbook and Demos to read some code samples. And then, you can start your own program 
+to manipulate ODF document.</p>
+<p>If you are familiar with ODFDOM, here are the API changes from ODFDOM.</p>
+<h4 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h4>
+<p>In addition to the Simple Java API JAR file you will need to download and install the following runtime prerequisite:</p>
+<ul>
+<li>JDK version 1.6</li>
+<li>ODFDOM 0.8.7</li>
+<li>The Apache Xerces 2.9.1 or higher version.</li>
+</ul>
+<h4 id="code-examples">Code examples<a class="headerlink" href="#code-examples" title="Permanent link">&para;</a></h4>
+<p>You can find sample codes from our Cookbook] and Demos.</p>
+<h4 id="how-to-report-defects">How to report defects<a class="headerlink" href="#how-to-report-defects" title="Permanent link">&para;</a></h4>
+<p>The Simple Java API for ODF uses Bugzilla to track the defects. You can report defects [http://odftoolkit.org/bugzilla/buglist.cgi?product=simple&amp;order=bugs.bug_id here].</p>
+<h3 id="for-developers">For Developers<a class="headerlink" href="#for-developers" title="Permanent link">&para;</a></h3>
+<h3 id="how-to-download-source">How to download source<a class="headerlink" href="#how-to-download-source" title="Permanent link">&para;</a></h3>
+<p>First, install [http://mercurial.selenic.com/wiki/ latest Mercurial]</p>
+<p>Second, setup Mercurial (optional):<br />Config file <Hg Install Dir>\Mercurial.ini on Windows or <Hg Install Dir>/.hgrc on Unix.
+Enhance the default configuration, using GIT diff and enable [http://mercurial.selenic.com/wiki/Win32TextExtension default plugin] avoid different line breaks in the source.</p>
+<div class="codehilite"><pre><span></span><span class="k">[ui]</span>
+<span class="na">username</span> <span class="o">=</span> <span class="s">your Name &lt;yourLoginName@odftoolkit.org&gt;</span>
+<span class="c1">;merge = your-merge-program (or internal:merge)</span>
+
+<span class="k">[diff]</span>
+<span class="na">git</span> <span class="o">=</span> <span class="s">1</span>
+
+<span class="k">[defaults]</span>
+<span class="na">diff</span><span class="o">=</span><span class="s">-p -U 8</span>
+
+<span class="k">[extensions]</span>
+<span class="c1"># Enables mercurial EOL extension for line break handling</span>
+<span class="c1"># See http://mercurial.selenic.com/wiki/EolExtension (bundled since 1.5.4)</span>
+<span class="na">eol</span> <span class="o">=</span>
+
+<span class="c1"># It&#39;ll remove unknown files and empty directories by default. </span>
+<span class="c1"># Usually you call &#39;hg update -C&#39; and &#39;hg purge&#39; in sequence</span>
+<span class="c1"># See http://mercurial.selenic.com/wiki/PurgeExtension  (bundled)</span>
+<span class="na">hgext.purge</span><span class="o">=</span>
+
+<span class="k">[eol]</span>
+<span class="c1"># Converts mixed line ending within a file to LF (Unix) format </span>
+<span class="c1"># before adding the file to the source repository</span>
+<span class="c1"># See http://mercurial.selenic.com/wiki/EolExtension</span>
+<span class="na">only-consistent</span> <span class="o">=</span> <span class="s">False</span>
+</pre></div>
+
+
+</pre>
+
+<p>Now, get the source code from the Simple project 
+[http://www.selenic.com/mercurial/wiki/ Mercurial] repository. 
+Please see below for a short introduction to using Mercurial on odftoolkit.org. 
+There's also a more general <a href="{{project help page 
+SourceControl}}">help</a> on how to use source control systems on 
+odftoolkit.org. The command <br /><pre>
+hg clone https://hg.odftoolkit.org/hg/simple~code-base</pre>will 
+download the repository into a new directory.</p>
+<p>Please note that by this you'll get the latest changeset. If you for example 
+want stable release 0.2, you may want to use</p>
+<div class="codehilite"><pre><span></span>hg clone https://odftoolkit.org/hg/simple~code-base -r v0.2
+</pre></div>
+
+
+<p>Developers however always work on the latest changeset.</p>
+<h4 id="how-to-build-and-run-the-unit-tests">How to build and run the unit tests<a class="headerlink" href="#how-to-build-and-run-the-unit-tests" title="Permanent link">&para;</a></h4>
+<p>After the source code is checked out, now get and install 
+[http://maven.apache.org/ Apache Maven]. On command line test your 
+installation with "mvn -v".</p>
+<p>If Maven is correctly installed, change into the project directory and build 
+with command "mvn".</p>
+<h2 id="communications">Communications<a class="headerlink" href="#communications" title="Permanent link">&para;</a></h2>
+<p>You can subscribe to the project's mailing lists from [http://odftoolkit.org/projects/simple/lists this page].  The "users" list is for discussions about using the toolkit, and the "dev" list is for discussing the development of the toolkit.  Active developers should also subscribe to the "issues" and "commit" mailing lists so they will receive those automatic notifications.</p>
+<h2 id="easy-entry-level-tasks">Easy entry level tasks<a class="headerlink" href="#easy-entry-level-tasks" title="Permanent link">&para;</a></h2>
+<p>TBD</p>
+<h2 id="design-of-the-api">Design of the API<a class="headerlink" href="#design-of-the-api" title="Permanent link">&para;</a></h2>
+<p>The design principle is "make it easy for users to locate the functions they 
+want".</p>
+<p>org.odftoolkit.simple.Document is the abstract base class which the specific document classes are derived from:  TextDocument, SpreadsheetDocument, PresentationDocument, GraphicsDocument and ChartDocument.</p>
+<p>For each document type  we have a subpackage that contain additional classes related to that kind of documents.  So org.odftoolkit.simple.chart has classes related to chart, org.odftoolkit.simple.text has classes related to text content,  and org.odftoolkit.simple.presentation has classes related to presentation documents.</p>
+<p>Besides the packages for different document types, there are additional packages defined for important common ODF features which are available across all kinds of documents, such as table, meta and style. </p>
+<p>There is another package named org.odftoolkit.simple.common, which contains functions that are not related with a specific document type nor a specific feature. For example, the text extractor functions are put in this package.</p>
+<h2 id="how-to-contribute-patches">How to contribute patches<a class="headerlink" href="#how-to-contribute-patches" title="Permanent link">&para;</a></h2>
+<p>If you want to contribute a patch to this project, following below steps:</p>
+<ul>
+<li>Step 1. Create an issue in [http://odftoolkit.org/bugzilla/buglist.cgi?product=simple&amp;order=bugs.bug_id
+    bugzilla], or write a comment to a related open issue, to describe
+    what functions you want to provide.</li>
+<li>Step 2. Go through "[[#Design_of_the_API|Design of the API]]" to make sure your contribution will follow it.</li>
+<li>Step 3. Check out the source code following the steps in [[#download_source|development selection]], and add your
+    contribution codes, including the source code and the unit tests.
+    Every public method should have a corresponding unit test method.
+    The
+    [http://odftoolkit.org/projects/odfdom/pages/Development#Coding_Guidelines
+    code guidelines] are same as ODFDOM.</li>
+<li>Step 4. Test your contribution with Mecurial command to make sure all the unit tests pass.  mvn</li>
+<li>Step 5. Generate a patch with hg commands.  hg commit -A -u "Developer:xxx" -m "#bug XY# Description of changes"  hg export -a
+    -g -o ../myChanges.patch</li>
+<li>Step 6. Upload your patch to bugzilla.</li>
+<li>Step 7. Refactor your patch if you get comments from reviewers.</li>
+</ul>
+<h2 id="how-to-review-patches">How to review patches<a class="headerlink" href="#how-to-review-patches" title="Permanent link">&para;</a></h2>
+<p>As a reviewer, you need to carefully read the source code, run the unit tests, to make sure the new contributed code won't hurt the quality of this project.</p>
+<ul>
+<li>Step 1. Write a comment to [http://odftoolkit.org/bugzilla/buglist.cgi?product=simple&amp;order=bugs.bug_id
+    bugzilla], saying you would like to review this patch.</li>
+<li>Step 2. Check out the source code following the steps in [[#download_source|development selection]], and download the patch.</li>
+<li>Step 3. Merge the patch to the source code with Mecurial command:  hg import --no-commit ../someFile.patch</li>
+<li>Step 4. Carefully read the code to make sure the code follows the "[[#Design_of_the_API|Design of the API]]", the code can reach the
+    goal and the code won't bring other problems.</li>
+<li>Step 5. Carefully check the unit test code to make sure every public method has been enough tested.</li>
+<li>Step 6. Run the unit tests with Maven command to see if all the unit tests pass:  mvn</li>
+<li>Step 7. Write comment to bugzilla if you think anything needs to be improved.</li>
+<li>Step 8. Repeat step 2 to 7 after the contributor improves the patch.</li>
+<li>Step 9. Push the patch to repository with Mecurial command if you think the patch is good enough:  hg commit -A -u "Developer:xxx
+    Reviewer:yyy" -m "#bug XY# Description of changes"  hg push
+    https://<your user id>:<your
+    password>@odftoolkit.org/hg/simple~code-base</li>
+</ul>
+<h2 id="reference-material">Reference material<a class="headerlink" href="#reference-material" title="Permanent link">&para;</a></h2>
+<h3 id="odf">ODF<a class="headerlink" href="#odf" title="Permanent link">&para;</a></h3>
+<p>The current draft of the OASIS ODF 1.2 standard can be downloaded [http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office#odf12 here].</p>
+<h3 id="commands-line-tools">Commands line tools<a class="headerlink" href="#commands-line-tools" title="Permanent link">&para;</a></h3>
+<p><em>[http://odftoolkit.org/projects/odfdom/pages/Development#Mercurial Here] is a list of the most frequently used commands for Mercurial.
+</em>[http://odftoolkit.org/projects/odfdom/pages/Development#Maven Here] is a list of the most frequently used commands for Maven.</p>
+    </div>
+    
+    <div id="footera">
+      <div id="copyrighta">
+        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
+            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
+            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
+            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
+            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
+          are licensed under the <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">Creative
+            Commons Attribution-Share Alike 3.0 License</a>. This does not include the source code of LibreOffice, which
+          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
+            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
+          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
+          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
+            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
+          LibreOffice was based on OpenOffice.org.</p>
+      </div>
+    </div>   
+  </div>
+</body>
+</html>
