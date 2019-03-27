@@ -13,7 +13,7 @@ mv -v ../../docs/api  ../..
 # removing all prior website content
 rm -rfv ../../docs/*
 # copying all generated HTML as new website content
-mv -v ./www/content/odftoolkit/* ../../docs/
+mv -v ./www/content/odftoolkit_website/* ../../docs/
 # restore the generated javadoc
 mv -v ../../api ../../docs
 # remove temporary files and directories
