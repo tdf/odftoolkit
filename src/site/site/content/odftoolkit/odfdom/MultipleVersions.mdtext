@@ -1,0 +1,12 @@
+Title: ODF Version Processing in ODFDOM
+Hello everyone in this community!  I'm working on ODFDOM now. This is my first to write wiki. In the future, I'll have more issues about requirements, designs and implementation details to discuss with you. Now I  have a topic about ODF versions.  
+
+- ODFDOM now only supports ODF 1.1, and surely we'll support ODF 1.2, also one of our team members is doing that now. But do we plan to support ODF 1.0? My opinion is that although ODF 1.0 is used in not many cases before,  ODF 1.0(2nd) is ISO standard ISO26300, so ODFDOM should consider the back compatible with ODF1.0, and can load/create ODF1.0 documents.  Of course, if we plan to do that, it should be done as early as possible. Welcome your opinion.
+- ODFDOM should support all versions of ODF because in the practice, many ODF documents with different versions are mixed together, ODFDOM need to process them automatically for whatever ODF version. So a single code base should support all ODF versions instead of different code streams for different ODF versions.
+- ODFDOM dom layer code have to support all elements and attributes defined in all ODF versions, that means it is a union set of all ODF versions.
+- Generate different source code using different ODF schema, may modify the code generator source code
+- Create a new code base that contain all ODF versions source files using some auto merge tools
+- Identify the difference places in the source code for different ODF versions. Minor places are in dom layer, most places are in doc layer.
+- Compare different ODF schemas, first do some automatic processing based on the assumption that ODF schema is back compatible completely. Then do some special processing for those elements or attributes that are not back compatible.
+
+Welcome your suggestions.

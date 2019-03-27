@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Revert</title>
+  {% include "head.html" %}
+  </head>
+
+  <body>
+    <h1>Revert</h1>
+
+{% if status %}
+<h2>Revert local changes</h2>
+<pre>{{ status }}</pre>
+<form method="POST">
+<input type="submit" name="submit" value="Submit" />
+</form>
+{% else %}
+<h2>Can't revert this resource as it is unmodified in your working copy.</h2>
+<a href="?action=edit">[Edit]</a>
+<a href="?action=browse">[Browse]</a>
+{% endif %}
+  </body>
+</html>

@@ -1,0 +1,25 @@
+Title: ODF Conformance and other Tools
+
+This project develops tools for checking [ODF][1] conformance as well as tools that simplify the processing of ODF documents.
+[Online JavaDoc is available](odftoolkit/0.6.2-incubating/odfvalidator/)
+
+Conformance Tools
+-----------------
+
+Tools for validating and checking conformance of of ODF documents.
+
+ - **ODFValidator**: A validating for ODF documents.
+ - [**Online ODF Validator**][2]: An online validator for ODF documents.
+
+Application and Tools
+---------------------
+
+Other tools for processing ODF documents.
+
+ - **ODF XSLT Runner**: A tools that simplifies the application of XSLT stylesheets to ODF documents. [Online JavaDoc is available](odftoolkit/0.6.2-incubating/xslt-runner/)
+
+ - **ODF XSLT Runner Task**: An Ant task for the application of XSLT stylesheets to ODF documents.
+
+
+  [1]: http://www.oasis-open.org/committees/office
+  [2]: http://tools.odftoolkit.org/odfvalidator

@@ -1,0 +1,115 @@
+<strong><a href="../index.html">Documents</a></strong> > <strong><a href="index.html">Cookbook</a></strong> ><strong><a href="Table.html">Table</a></strong>
+<div class="navigation">
+ <ul>
+  <li><a href="Slide.html">previous</a></li>
+  <li><a href="Column and Row.html">next</a></li>
+ </ul>
+</div>
+<br/>
+<br/><strong><a href="#Overview" >Overview</a></strong>
+<div class="bodytext">
+ This <a href="">Table</a> API supports to manipulate tables in text and spreadsheet documents. It covers the table definition in <a href="http:docs.oasis-open.org/office/v1.2/cd05/OpenDocument-v1.2-cd05-part1.html#a_9_Tables">ODF Specification 1.2 Committee Draft05</a>
+</div>
+<br/><strong><a href="#Create Table" >Create Table</a></strong>
+<div class="bodytext">
+Let's create an empty table first.By default,the code below create a table with 5 columns and 2 rows.
+</div>
+<br/><pre class='code' id="code0">
+            <span class='javaclass'>TextDocument</span> document = <span class='javaclass'>TextDocument</span>.newTextDocument();<br/>
+            <span class='javaclass'>Table</span> table1 = <span class='javaclass'>Table</span>.newTable(document);<br/>
+            table1.setTableName("table1");<br/>
+            document.save(filePath);<br/>
+</pre>
+<br/><div class="bodytext">
+If you want to create table with specified column and row,you can do like this:
+</div>
+<br/><pre class='code' id="code1">
+            <span class='basic'>int</span> row=4;<br/>
+            <span class='basic'>int</span> column=3;<br/>
+            <span class='javaclass'>Table</span> table2=<span class='javaclass'>Table</span>.newTable(document, row, column);<br/>
+            table2.setTableName("table2");<br/>
+</pre>
+<br/><div class="bodytext">
+       If you want to put some numbers into a table while creating it, you can use the constructor Table.newTable(document,rowlabels,columnlabels, data)       which you should specify a 2 dimension array as the data and 2 String arrays as table labels,one for row and the other for column. 
+</div>
+<br/><pre class='code' id="code2">
+        <span class='basic'>int</span> rowcount = 10, columncount = 4;<br/>
+     	<span class='basic'>double</span>[][] data = <span class='modifier'>new</span> <span class='basic'>double</span>[rowcount][columncount];	<br/>
+     	<span class='javaclass'>String</span>[] rowlabels = <span class='modifier'>new</span> <span class='javaclass'>String</span>[rowcount];<br/>
+     	<span class='javaclass'>String</span>[] columnlabels = <span class='modifier'>new</span> <span class='javaclass'>String</span>[columncount];<br/>
+     	<span class='javaclass'>Table</span> table3=<span class='javaclass'>Table</span>.newTable(document,rowlabels,columnlabels, data);<br/>
+     	table3.setTableName("dataTable");<br/>
+</pre>
+<br/><div class="bodytext">
+You can also fill table with string values while creating it, to do this you should provide a 2 dimension string array instead of double array.
+</div>
+<br/><pre class='code' id="code3">
+     	<span class='javaclass'>String</span>[][] stringData = <span class='modifier'>new</span> <span class='javaclass'>String</span>[rowcount][columncount];<br/>
+     	<span class='javaclass'>Table</span> table4 = <span class='javaclass'>Table</span>.newTable(document, rowlabels, columnlabels, stringData);<br/>
+     	table4.setTableName("stringTable");<br/>
+</pre>
+<br/><br/><strong><a href="#Find Table" >Find Table</a></strong>
+<div class="bodytext">
+To get all the tables in the document,you can do like this:
+</div>
+<br/><pre class='code' id="code4">
+        <span class='javaclass'>List</span>&lt;<span class='javaclass'>Table</span>&gt; tableList=document.getTableList();<br/>
+</pre>
+<br/><div class="bodytext">
+If you want to get a single table,you can use the table name to find it.If it's not found,the method returns null.
+</div>
+<br/><pre class='code' id="code5">
+        <span class='javaclass'>Table</span> emptyTable=document.getTableByName("table1");<br/>
+</pre>
+<br/><br/><strong><a href="#Delete Table" >Delete Table</a></strong>
+<br/><pre class='code' id="code6">
+        <span class='javaclass'>Table</span> table = document.getTableByName("<span class='javaclass'>DeletedTable</span>");<br/>
+        <span class='control'>if</span> (table != <span class='basic'>null</span>) {<br/>
+     	table.remove();<br/>
+        }<br/>
+</pre>
+<br/><br/><strong><a href="#Set Table" >Set Table</a></strong>
+<div class="bodytext">
+You can set or update table name,which can be regarded as table identifier in a document.
+</div>
+<br/><pre class='code' id="code7">
+           table1.getTableName();<br/>
+           table1.setTableName("<span class='javaclass'>EnglishScore</span>");<br/>
+</pre>
+<br/><div class="bodytext">
+If you want to change table width,you can do like this:
+</div>
+<br/><pre class='code' id="code8">
+        <span class='javaclass'>Table</span> tableWidth=document.getTableByName("table1");<br/>
+        <span class='control'>if</span>(tableWidth!=<span class='basic'>null</span>) {<br/>
+            <span class='basic'>long</span> width=500;<br/>
+            tableWidth.setWidth(width);<br/>
+            tableWidth.getWidth();<br/>
+        }<br/>
+</pre>
+<br/><div class="bodytext">
+Each table in the document has a protect attribute to show whether it is protected or not.
+</div>
+<br/><pre class='code' id="code9">
+           <span class='basic'>boolean</span> isProtected=table1.isProtected();<br/>
+           table1.setProtected(<span class='basic'>true</span>);<br/>
+</pre>
+<br/><br/><strong><a href="#Format Table" >Format Table</a></strong>
+<div class="bodytext">
+Since version 0.8, new APIs are added to format a table, which will load the formatting from a template table in a foreign document and apply them to corresponding cells of current table. The template table should be a 5*5 table with predefined formatting, includes number format, text format, text alignment, borders and background.	The following code will load formatting from a foreign template table - Table1 in TemplateTable.odt, and apply the styles to a new table - Table2 in TargetTable.odt.
+</div>
+<br/><pre class='code' id="code10">
+          <span class='javaclass'>Document</span> doc = <span class='javaclass'>TextDocument</span>.loadDocument("TargetTable.odt");<br/>
+          <span class='basic'>TableTemplate</span> template = doc.LoadTableTemplateFromForeignTable(<span class='modifier'>new</span> <span class='javaclass'>FileInputStream</span>("TableTemplate.odt"), "Table1");<br/>
+          <span class='basic'>Table</span> table = doc.getTableByName("Table2");<br/>
+          table.applyStyle(template);<br/>
+</pre>
+<br/><br/> 
+<div class="navigation">
+ <ul>
+  <li><a href="Slide.html">previous</a></li>
+  <li><a href="Column and Row.html">next</a></li>
+  <li><a href="#">top</a></li>
+ </ul>
+</div>
+<link type="text/css" rel="stylesheet" href="cookbook.css"/>

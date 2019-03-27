@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    {% if error %}
+    <title>Add failed! ({{ http_status }})</title>
+    {% else %}
+    <title>Add successful! ({{ http_status }})</title>
+    {% endif %}
+  {% include "head.html" %}
+  </head>
+
+  <body>
+    {% if error %}
+    <h1>Add failed!</h1>
+    <pre>{{ error }}</pre>
+    {% else %}
+    <h1>Add successful!</h1>
+<a href="?action=diff" title="View Diff">[Diff]</a>
+{% ifequal user "anonymous" %}{% else %}
+<a href="?action=commit">[Commit]</a>
+{% endifequal %}
+<a href="?action=edit">[Edit]</a>
+<a href="?action=browse">[Browse]</a>
+<a href="?action=staged" title="View Staged">[Staged]</a>
+<a href="?action=production" title="View Production">[Production]</a>
+    {% endif %}
+
+
+
+  </body>
+</html>
