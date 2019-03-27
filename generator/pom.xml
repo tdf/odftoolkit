@@ -85,7 +85,9 @@
                     </links>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <attach>true</attach>
-					<additionalOptions>${javadoc.opts}</additionalOptions>
+                    <additionalOptions>
+					    <additionalOption>${javadoc.opts}</additionalOption>
+                    </additionalOptions>
 					<bottom>${javadoc.bottom}</bottom>					
                 </configuration>
                 <executions>
