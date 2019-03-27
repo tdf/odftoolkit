@@ -1,0 +1,39 @@
+Title: Developer FAQs
+Notice:    Licensed to the Apache Software Foundation (ASF) under one
+           or more contributor license agreements.  See the NOTICE file
+           distributed with this work for additional information
+           regarding copyright ownership.  The ASF licenses this file
+           to you under the Apache License, Version 2.0 (the
+           "License"); you may not use this file except in compliance
+           with the License.  You may obtain a copy of the License at
+           .
+             http://www.apache.org/licenses/LICENSE-2.0
+           .
+           Unless required by applicable law or agreed to in writing,
+           software distributed under the License is distributed on an
+           "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+           KIND, either express or implied.  See the License for the
+           specific language governing permissions and limitations
+           under the License.
+
+##How do I edit this website?
+
+The pages on this website are written in [markdown syntax][1] and stored in SVN at 
+[https://svn.apache.org/repos/asf/incubator/odf/site][2]
+
+Via integration with the Apache CMS, it is possible to edit, stage and publish 
+website updates from the command line, or by using a web-based interface.
+
+Detailed information can be found in the [How to edit the ODF website][3] page.
+
+Information on deeper website development is found on the [Website Development][4] page.
+
+##How to contribute to an open-source project on GitHub?
+
+Information can be found on [this blog] [5].
+
+  [1]: http://www.simpleeditions.com/59001/markdown-an-introduction
+  [2]: https://svn.apache.org/repos/asf/incubator/odf/site
+  [3]: http://incubator.apache.org/odftoolkit/docs/edit-cms.html
+  [4]: website-local.html
+  [5]: https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github

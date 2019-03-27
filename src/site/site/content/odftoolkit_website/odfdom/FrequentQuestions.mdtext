@@ -1,0 +1,16 @@
+Title: Frequently asked questions
+***Question:*** How to extracte featured text from a document, for example: extract all bold, italicized or underlined text from a document and any other layout evidence of emphasis like the text font size and so on?  
+
+***Answer:*** The model of ODF is for there to be "blocks" of text and each run can have an associated style reference. These style references then have definitions of exactly what text attributes they correspond to. There are two methods you can refer to.  
+
+ 1. First identify which styles have the bold (or italics) attribute.
+    The document might have more than one style that defines bold text.
+    Find which text blocks reference that style. You can download a
+    sample code [here][1].  
+
+ 1. For each text block, identify the style. For the style, resolve the
+    underlying text attributes. If it is bold (or italics or whatever)
+    then extract it. You can download a sample code [here][2].
+
+  [1]: http://langintro.com/odfdom_tutorials/search_by_style_09_07_22.zip
+  [2]: https://odftoolkit.org/attachments/lists/odftoolkit/users/2009-07/6/collect-font-size.zip

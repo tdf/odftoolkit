@@ -1,0 +1,53 @@
+Title: ODFDOM - the OpenDocument API
+
+ODFDOM is a free OpenDocument Format (ODF) library. Its purpose is to provide an easy common way to create, access and manipulate ODF files, without requiring detailed knowledge of the ODF specification. It is designed to provide the ODF developer community with an easy lightwork programming API portable to any object-oriented language.
+
+The current reference implementation is written in Java (see [JavaDocs online][23]). 
+
+To learn more about the project's architecture, refer to the [project overview][1] and the [ODFDOM Layers][2] section.
+
+Quickstart
+----------
+
+Put the odfdom.jar file in your classpath. You will need [Apache Xerces-J][20] as XML parser and DOM implementation as well. Start with the following sample code to create a simple text document.
+
+    // Create a text document from a standard template (empty documents within the JAR)
+    OdfTextDocument odt = OdfTextDocument.newTextDocument();
+    // Append text to the end of the document.
+    odt.addText("This is my very first ODF test");
+    // Save document
+    odt.save("MyFilename.odt");
+
+For information on working with the source code, please refer to [the development section][19].
+
+Documentation
+-------------
+
+A good starting point is reading [the project overview][21] and [the ODFDOM Layers][22] will help you to get an overview over the ODFDOM package structure.
+
+Access [JavaDocs online][23] or [JavaDoc as bundle][24] from the official Apache repository.
+
+There are [David's ODFDOM tutorials][25]. You'll find an introduction as well as sample code for creating text and spreadsheet documents. (Note: The tutorials might not yet be adapted to the latest version).
+
+When meeting with questions, check if [FAQs][26] can help you.
+
+How to Participate
+---------
+
+There are many ways to participate and we're always looking for contributors. Just on the Apache ODF Toolkit Project and afterwards watch this project. Then you may want to start with reading and posting on the [mailing lists][27] or report bugs or write documentation.
+
+If you're a developer, just dive into [the development section][28]. Here you find information on where to access the source code and how to set up a build environment.
+
+  [1]: ProjectOverview.html
+  [2]: Layers.html
+  [4]: ReleaseNotes.html
+  [19]: Development.html
+  [20]: http://xml.apache.org/dist/xerces-j/
+  [21]: ProjectOverview.html
+  [22]: Layers.html
+  [23]: ../api/odfdom/index.html
+  [24]: http://www.apache.org/dist/incubator/odftoolkit/docs/
+  [25]: http://www.langintro.com/odfdom_tutorials/
+  [26]: FrequentQuestions.html
+  [27]: mailto:odf-users@incubator.apache.org
+  [28]: Development.html
