@@ -194,7 +194,9 @@
 					</links>
 					<splitindex>true</splitindex>
 					<windowtitle>ODFDOM API v${project.version} - https://odftoolkit.org</windowtitle>
-					<additionalOptions>${javadoc.opts}</additionalOptions>
+					<additionalOptions>
+						<additionalOption>${javadoc.opts}</additionalOption>
+					</additionalOptions>
 					<bottom>${javadoc.bottom}</bottom>
 					<taglets>
 						<taglet>
@@ -281,7 +283,9 @@
 					</links>
 					<splitindex>true</splitindex>
 					<windowtitle>ODFDOM API v${project.version} - https://odftoolkit.org</windowtitle>
-					<additionalOptions>${javadoc.opts}</additionalOptions>
+					<additionalOptions>
+						<additionalOption>${javadoc.opts}</additionalOption>
+					</additionalOptions>
 					<bottom>${javadoc.bottom}</bottom>
 					<taglets>
 						<taglet>
