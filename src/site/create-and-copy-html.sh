@@ -7,15 +7,32 @@ python cms/build/markdownd.py
 echo Build the site..
 cms/build/build_site.pl --source-base site --target-base www
 
-echo Copying the HTML to GitHub Docs
-# saving the generated JAVADOC API
-mv -v ../../docs/api  ../..
-# removing all prior website content
-rm -rfv ../../docs/*
-# copying all generated HTML as new website content
-mv -v ./www/content/odftoolkit_website/* ../../docs/
+echo Copy the HTML to GitHub Docs
+echo Save the generated JAVADOC API
+#mv  ../../docs/api  ../..
+#echo Remove all prior website content
+#rm -rf ../../docs/*
+
+: ' gathering basics for exchanging "odftoolkit_website" against  some stuff
+sed -i -e "s/odftoolkit/odftoolkit_website/g" .
+./conformance
+./xsltrunner
+./simple
+./simple/document
+./simple/document/cookbook
+./simple/demo
+./simple/demo/image
+./odfdom
+./images
+./css
+./docs
+./docs/governance
+'
+
+# echo Copy all generated HTML as new website content
+#mv -v ./www/content/odftoolkit_website/* ../../docs/
 # restore the generated javadoc
-mv -v ../../api ../../docs
+#mv -v ../../api ../../docs
 # remove temporary files and directories
-rm markdown.socket
-rm -rf www
+#rm markdown.socket
+#rm -rf www
