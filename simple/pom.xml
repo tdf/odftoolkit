@@ -129,7 +129,7 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <additionalparam>${javadoc.opts}</additionalparam>
+                            <additionalOptions>${javadoc.opts}</additionalOptions>
                         </configuration>                        
                     </execution>
                 </executions>
@@ -225,7 +225,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
+                <version>3.1.0</version>
                 <configuration>
                     <doctitle>Simple Java API for ODF(Simple ODF)</doctitle>
                     <minmemory>512m</minmemory>
