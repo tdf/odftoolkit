@@ -19,7 +19,8 @@
   under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
@@ -126,9 +127,9 @@
         <url>https://www.documentfoundation.org/</url>
     </organization>
     <scm>
-		<connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
-		<developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
-		<url>https://github.com/tdf/odftoolkit.git</url>		
+        <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
+        <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
+        <url>https://github.com/tdf/odftoolkit.git</url>
     </scm>
 
     <issueManagement>
@@ -200,6 +201,21 @@
 
     <profiles>
         <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies> <!-- For JDK 8 and later-->
+                <dependency>
+                    <groupId>com.sun</groupId>
+                    <artifactId>tools</artifactId>
+                    <version>1.8.0</version>
+                    <scope>system</scope>
+                    <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
             <id>pedantic</id>
             <build>
                 <plugins>
@@ -209,7 +225,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>CHANGES.txt</exclude>
-								<exclude>.gitignore</exclude>
+                                <exclude>.gitignore</exclude>
                                 <exclude>DEPENDENCIES</exclude>
                             </excludes>
                         </configuration>
@@ -286,30 +302,30 @@
                                 <phase>prepare-package</phase>
                                 <configuration>
                                     <tasks>
-                                        <mkdir dir="${basedir}/target/${project.version}-bin" />
+                                        <mkdir dir="${basedir}/target/${project.version}-bin"/>
                                         <copy todir="${basedir}/target/${project.version}-bin" flatten="true">
-                                              <fileset dir="${basedir}">
-                                                <include name="*.txt" />
-                                                <include name="KEYS" />
-                                                <include name="odfdom/target/*.jar" />
-                                                <include name="simple/target/*.jar" />
-                                                <include name="validator/target/*.?ar" />
-                                                <include name="xslt-runner/target/*.jar" />
-                                                <include name="xslt-runner-task/target/*.jar" />
-                                                <exclude name="**/target/**-javadoc.jar" />
-                                                <exclude name="**/target/**-sources.jar" />
-                                                <exclude name="**/target/**-jar-with-dependencies.jar" />
-                                              </fileset>
-                                        </copy>
-                                        <mkdir dir="${basedir}/target/${project.version}-docs" />
-                                        <copy todir="${basedir}/target/${project.version}-docs" flatten="true">
                                             <fileset dir="${basedir}">
-                                                <include name="*.txt" />
-                                                <include name="KEYS" />
-                                                <include name="**/target/*-javadoc.jar" />
+                                                <include name="*.txt"/>
+                                                <include name="KEYS"/>
+                                                <include name="odfdom/target/*.jar"/>
+                                                <include name="simple/target/*.jar"/>
+                                                <include name="validator/target/*.?ar"/>
+                                                <include name="xslt-runner/target/*.jar"/>
+                                                <include name="xslt-runner-task/target/*.jar"/>
+                                                <exclude name="**/target/**-javadoc.jar"/>
+                                                <exclude name="**/target/**-sources.jar"/>
+                                                <exclude name="**/target/**-jar-with-dependencies.jar"/>
                                             </fileset>
                                         </copy>
-                                        </tasks>
+                                        <mkdir dir="${basedir}/target/${project.version}-docs"/>
+                                        <copy todir="${basedir}/target/${project.version}-docs" flatten="true">
+                                            <fileset dir="${basedir}">
+                                                <include name="*.txt"/>
+                                                <include name="KEYS"/>
+                                                <include name="**/target/*-javadoc.jar"/>
+                                            </fileset>
+                                        </copy>
+                                    </tasks>
                                 </configuration>
                             </execution>
                             <execution>
@@ -321,33 +337,34 @@
                                 <configuration>
                                     <tasks>
                                         <checksum algorithm="MD5" fileext=".md5">
-                                              <fileset dir="${basedir}/target">
-                                                <include name="*.zip" />
-                                                <include name="*.tar.gz" />
-                                                <include name="*.tar.bz2" />
-                                              </fileset>
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*.zip"/>
+                                                <include name="*.tar.gz"/>
+                                                <include name="*.tar.bz2"/>
+                                            </fileset>
                                         </checksum>
                                         <checksum algorithm="SHA-512" fileext=".sha">
-                                              <fileset dir="${basedir}/target">
-                                                <include name="*.zip" />
-                                                <include name="*.tar.gz" />
-                                                <include name="*.tar.bz2" />
-                                              </fileset>
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*.zip"/>
+                                                <include name="*.tar.gz"/>
+                                                <include name="*.tar.bz2"/>
+                                            </fileset>
                                         </checksum>
-                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA-512" property="checksum" />
+                                        <checksum file="target/odftoolkit-${project.version}-src.zip"
+                                                  algorithm="SHA-512" property="checksum"/>
                                         <copy todir="${basedir}/target/release/${project.version}/">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-source-release.*" />
+                                                <include name="*-source-release.*"/>
                                             </fileset>
                                         </copy>
                                         <copy todir="${basedir}/target/release/${project.version}/binaries">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-bin.*" />
+                                                <include name="*-bin.*"/>
                                             </fileset>
                                         </copy>
                                         <copy todir="${basedir}/target/release/${project.version}/docs">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-doc.*" />
+                                                <include name="*-doc.*"/>
                                             </fileset>
                                         </copy>
                                         <echo file="${basedir}/target/vote.txt">
@@ -355,7 +372,7 @@
                                             To: odf-dev@incubator.apache.org
                                             Subject: [VOTE] Release Apache ODF Toolkit ${project.version}
 
-                                            A candidate for the ODF Toolkit ${project.version} release is available    at:
+                                            A candidate for the ODF Toolkit ${project.version} release is available at:
 
                                             http://repository.apache.org/snapshots/odftoolkit/
 
@@ -365,51 +382,54 @@
 
                                             The SHA-512 checksum of the archive is ${checksum}.
 
-                                            Please vote on releasing this package as Apache ODF Toolkit ${project.version}.
+                                            Please vote on releasing this package as Apache ODF Toolkit
+                                            ${project.version}.
                                             The vote is open for the next 72 hours and passes if a majority
                                             of at least three +1 ODF Toolkit PMC votes are cast.
 
                                             [ ] +1 Release this package as Apache ODF Toolkit ${project.version}
                                             [ ] -1 Do not release this package because...${line.separator}
                                         </echo>
-                                        <echo />
+                                        <echo/>
                                         <echo>
-                                            The release candidate has been prepared in:    ${basedir}/target/${project.version}
-											A release vote template has been generated for you:    file://${basedir}/target/vote.txt
-										</echo>
-										<echo />
-									</tasks>
-								</configuration>
-							</execution>
-						</executions>
-						<dependencies>
-							<dependency>
-								<groupId>org.apache.ant</groupId>
-								<artifactId>ant-nodeps</artifactId>
-								<version>1.8.1</version>
-							</dependency>
-						</dependencies>
-					</plugin>
-					<plugin>
-					<!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-								<configuration>
-								  <keyname>${gpg.keyname}</keyname>
-<passphraseServerId>${gpg.keyname}</passphraseServerId>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+                                            The release candidate has been prepared in:
+                                            ${basedir}/target/${project.version}
+                                            A release vote template has been generated for you:
+                                            file://${basedir}/target/vote.txt
+                                        </echo>
+                                        <echo/>
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-nodeps</artifactId>
+                                <version>1.8.1</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                    <plugin>
+                        <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <keyname>${gpg.keyname}</keyname>
+                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
