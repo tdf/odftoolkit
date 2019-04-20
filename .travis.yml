@@ -1,0 +1,13 @@
+dist: xenial
+
+language: java
+
+cache:
+  directories:
+    - $HOME/.m2
+
+jdk:
+  - oraclejdk8
+  #- oraclejdk11
+  - openjdk8
+  #- openjdk11
