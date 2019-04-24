@@ -48,6 +48,7 @@
 		<dependency>
 			<groupId>org.iso_relax.verifier.jaxp.validation</groupId>
 			<artifactId>isorelax-jaxp-bridge</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>xerces</groupId>
@@ -165,6 +166,10 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-remote-resources-plugin</artifactId>
+				<version>1.6.0</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
