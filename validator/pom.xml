@@ -81,12 +81,10 @@
 			<id>apache.smx.repo</id>
 			<url>http://svn.apache.org/repos/asf/servicemix/m2-repo/</url>
 			<name>Apache ServiceMix Repo</name>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
+		</repository>
+		<repository>
+			<id>central.maven</id>
+			<url>http://central.maven.org/maven2</url>
 		</repository>
 	</repositories>
 
