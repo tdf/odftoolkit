@@ -108,7 +108,7 @@
 								<manifestEntries>
 									<ODFDOM-Name>odfdom</ODFDOM-Name>
 									<ODFDOM-Version>${project.version}</ODFDOM-Version>
-									<ODFDOM-Website>http://incubator.apache.org/odftoolkit/odfdom/index.html</ODFDOM-Website>
+									<ODFDOM-Website>https://odftoolkit.org/odfdom/index.html</ODFDOM-Website>
 									<ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
 									<ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
 								</manifestEntries>
@@ -209,7 +209,7 @@
 								<name>ODFDOM</name>
 								<manifestEntries>
 									<ODFDOM-Name>odfdom</ODFDOM-Name>
-									<ODFDOM-Version>${project.vers1ion}</ODFDOM-Version>
+									<ODFDOM-Version>${project.version}</ODFDOM-Version>
 									<ODFDOM-Website>https://odftoolkit.org/odfdom/index.html</ODFDOM-Website>
 									<ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
 									<ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
