@@ -45,10 +45,11 @@
 			<groupId>net.java.dev.msv</groupId>
 			<artifactId>msv-core</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jopendocument/isorelax-jaxp-bridge-ILM -->
 		<dependency>
-			<groupId>org.iso_relax.verifier.jaxp.validation</groupId>
-			<artifactId>isorelax-jaxp-bridge</artifactId>
-			<version>1.0</version>
+			<groupId>org.jopendocument</groupId>
+			<artifactId>isorelax-jaxp-bridge-ILM</artifactId>
+			<version>1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>xerces</groupId>
@@ -68,25 +69,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
 	</properties>
-
-	<!--
-   The POM of org.iso_relax.verifier.jaxp.validation:isorelax-jaxp-bridge:jar:1.0
-   on the central repo is not 4.0.0 complaint so that we should pick the one SMX
-   Repo already provides, as otherwise building under Maven 3.0.4 would fail!
-   So delete any old .m2 cache entries of yours for this artifact beforehand if
-   you make use of Maven 3.0.4+
- -->
-	<repositories>
-		<repository>
-			<id>apache.smx.repo</id>
-			<url>http://svn.apache.org/repos/asf/servicemix/m2-repo/</url>
-			<name>Apache ServiceMix Repo</name>
-		</repository>
-		<repository>
-			<id>central.maven</id>
-			<url>http://central.maven.org/maven2</url>
-		</repository>
-	</repositories>
 
 	<!-- Build Settings -->
 	<build>
@@ -164,10 +146,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-remote-resources-plugin</artifactId>
-				<version>1.6.0</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
