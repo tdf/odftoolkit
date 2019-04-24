@@ -153,6 +153,50 @@ public class List {
 	}
 
 	/**
+	 * Constructor with ListContainer, ListDecorator and header; List will be
+	 * appended before the OdfElement bigBrother. Like the Contructor:
+	 * <code>List(ListContainer container, String header, ListDecorator decorator)</code>
+	 * but the List will be implemented as a brother before brother-element
+	 * 
+	 * @param container the container in where this list will be appended.
+	 * @param brother   the new List will be appended as a brother before this
+	 *                  Element
+	 * @param decorator the ListDecorator of this list.
+	 * @param header    the header of this list.
+	 */
+	private List(ListContainer container, OdfElement brother, String header, ListDecorator decorator) {
+		OdfElement containerElement = container.getListContainerElement();
+		OdfFileDom ownerDocument = (OdfFileDom) containerElement.getOwnerDocument();
+		listElement = ownerDocument.newOdfElement(TextListElement.class);
+		listElement.setXmlIdAttribute(getUniqueXMLID());
+		containerElement.insertBefore(listElement, brother);
+		setHeader(header);
+		if (decorator == null) {
+			Document doc = (Document) ownerDocument.getDocument();
+			decorator = new BulletDecorator(doc);
+		}
+		this.decorator = decorator;
+		decorator.decorateList(this);
+	}
+
+	/**
+	 * creates a List like the Contructor:
+	 * <code>List(ListContainer container, String header, ListDecorator decorator)</code>
+	 * but the List will be implemented as a brother before brother-element
+	 * 
+	 * @param container the container in where this list will be appended.
+	 * @param brother   the new List will be appended as a brother before this
+	 *                  Element
+	 * @param decorator the ListDecorator of this list.
+	 * @param header    the header of this list.
+	 */
+	public static List appendListBefore(ListContainer container, OdfElement brother, String header,
+			ListDecorator decorator) {
+		List newList = new List(container, brother, header, decorator);
+		return newList;
+	}
+	
+	/**
 	 * Get the type of this list. The list type can be BULLET, NUMBER and IMAGE.
 	 * 
 	 * @return the list type.

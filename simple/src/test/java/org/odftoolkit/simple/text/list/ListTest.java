@@ -19,14 +19,19 @@ under the License.
 
 package org.odftoolkit.simple.text.list;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.Assert;
 import org.junit.Test;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.Table;
+import org.odftoolkit.simple.text.Paragraph;
+import org.odftoolkit.simple.text.ParagraphContainer;
 import org.odftoolkit.simple.text.list.ListDecorator.ListType;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
@@ -521,4 +526,27 @@ public class ListTest {
 			}
 		}
 	}
+	
+    
+	@Test
+	public void testInsertListBefore() {
+		TextDocument doc;
+		try {
+			doc = readListTestDocument();
+			OdfElement brotherParagraph = doc.getListIterator().next().getOdfElement();
+			List firstPara = List.appendListBefore(doc, brotherParagraph, "Header of first List",
+					new SquareDecorator(doc));
+			Iterator<List> it = doc.getListIterator();
+			it.next();
+			OdfElement secondParagraph = it.next().getOdfElement();
+			assertTrue(brotherParagraph.equals(secondParagraph));
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	private TextDocument readListTestDocument() throws Exception {
+		return (TextDocument) TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("ListTest.odt"));
+	}
+	
 }

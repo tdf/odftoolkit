@@ -18,6 +18,8 @@ under the License.
  */
 package org.odftoolkit.simple.text;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.FileNotFoundException;
 import java.net.URI;
 import java.util.Iterator;
@@ -25,7 +27,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
+import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.type.Color;
+import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.StyleTypeDefinitions;
@@ -66,7 +71,44 @@ public class ParagraphTest {
         }
     }
 
+    
+	private class ParagraphContainerOfDocumentImpl extends AbstractParagraphContainer {
+		OdfElement containerElement;
+		
+		public ParagraphContainerOfDocumentImpl(Document doc) throws Exception
+		{
+			containerElement = doc.getContentRoot();
+		}
+
+		public OdfElement getParagraphContainerElement() {
+			return containerElement;
+		}
+	}
+    
+     
     @Test
+    public void testInsertParagraphBefore() {
+        TextDocument doc;
+        try {
+            doc = readParagraphDocument();
+    	    ParagraphContainer paraContainer = new ParagraphContainerOfDocumentImpl(doc);
+    	    OdfElement brotherParagraph = paraContainer.getParagraphByIndex(0, false).getOdfElement();
+    	    Paragraph firstPara = Paragraph.insertNewParagraphBefore(paraContainer, brotherParagraph);
+    	    firstPara.appendTextContent("this is the first Paragraph");
+    	    OdfElement secondParagraph = paraContainer.getParagraphByIndex(1, false).getOdfElement();
+    	    assertTrue(brotherParagraph.equals(secondParagraph));
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            Assert.fail(e.getMessage());
+        }
+    }
+    
+    
+    private TextDocument readParagraphDocument() throws Exception {
+			return (TextDocument) TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("Paragraph.odt"));
+	}
+
+	@Test
     public void testSetTextContent() {
         TextDocument doc;
         try {
@@ -86,6 +128,8 @@ public class ParagraphTest {
         }
     }
 
+    
+    
     @Test
     public void testRemoveContent() {
         TextDocument doc;
