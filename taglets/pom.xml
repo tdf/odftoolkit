@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
   or more contributor license agreements.  See the NOTICE file
@@ -9,7 +8,7 @@
   "License"); you may not use this file except in compliance
   with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing,
   software distributed under the License is distributed on an
@@ -31,10 +30,10 @@
     <version>0.9.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
+    </properties>
     <!-- Build Settings -->
     <build>
         <plugins>
@@ -43,8 +42,8 @@
                 <version>3.6.1</version>
                 <configuration>
                     <!-- defined in the parent pom.xml -->
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -105,12 +104,12 @@
      <!-- More Project Information -->
     <name>ODF Custom Javadoc Taglets</name>
     <description>Javadoc taglets for ODFDOM</description>
-    <url>http://odftoolkit.org/odfdom/index.html</url>
+    <url>https://odftoolkit.org/odfdom/index.html</url>
     <inceptionYear>2008</inceptionYear>
     <licenses>
         <license>
             <name>Apache 2</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
     <organization>
@@ -118,47 +117,47 @@
         <url>https://www.documentfoundation.org/</url>
     </organization>
     <scm>
-		<connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
-		<developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
-		<url>https://github.com/tdf/odftoolkit/tree/trunk/taglets</url>		
+        <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
+        <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
+        <url>https://github.com/tdf/odftoolkit/tree/trunk/taglets</url>
     </scm>
     <profiles>
-		<profile>
-			<id>tools.jar</id><!-- For JDK 7 and later - with Oracle Brand --> 
-			<activation>
-				<property>
-					<name>java.vendor</name>
-					<value>Oracle Corporation</value>
-				</property>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>com.sun</groupId>
-					<artifactId>tools</artifactId>
+        <profile>
+            <id>tools.jar</id><!-- For JDK 7 and later - with Oracle Brand -->
+            <activation>
+                <property>
+                    <name>java.vendor</name>
+                    <value>Oracle Corporation</value>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sun</groupId>
+                    <artifactId>tools</artifactId>
                     <version>1.7.0</version>
-					<scope>system</scope>
-					<systemPath>${java.home}/../lib/tools.jar</systemPath>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>tools-sun.jar</id><!-- For JDK 6 and OpenJDK - with Sun Brand --> 
-			<activation>
-				<property>
-					<name>java.vendor</name>
-					<value>Sun Microsystems Inc.</value>
-				</property>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>com.sun</groupId>
-					<artifactId>tools</artifactId>
-					<version>1.5.0</version>
-					<scope>system</scope>
-					<systemPath>${java.home}/../lib/tools.jar</systemPath>
-				</dependency>
-			</dependencies>
-		</profile>
+                    <scope>system</scope>
+                    <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>tools-sun.jar</id><!-- For JDK 6 and OpenJDK - with Sun Brand -->
+            <activation>
+                <property>
+                    <name>java.vendor</name>
+                    <value>Sun Microsystems Inc.</value>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sun</groupId>
+                    <artifactId>tools</artifactId>
+                    <version>1.5.0</version>
+                    <scope>system</scope>
+                    <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                </dependency>
+            </dependencies>
+        </profile>
         <profile>
             <id>release-sign-artifacts</id>
             <activation>
@@ -187,13 +186,13 @@
             </build>
         </profile>
         <profile>
-          <id>doclint-java8-disable</id>
-          <activation>
-            <jdk>[1.8,)</jdk>
-          </activation>
-          <properties>
-            <javadoc.opts>-Xdoclint:none</javadoc.opts>
-          </properties>
-        </profile>        
+            <id>doclint-java8-disable</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <javadoc.opts>-Xdoclint:none</javadoc.opts>
+            </properties>
+        </profile>
     </profiles>
 </project>

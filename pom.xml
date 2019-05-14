@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
   or more contributor license agreements.  See the NOTICE file
@@ -9,7 +8,7 @@
   "License"); you may not use this file except in compliance
   with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing,
   software distributed under the License is distributed on an
@@ -18,7 +17,6 @@
   specific language governing permissions and limitations
   under the License.
 -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -30,20 +28,18 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>18</version>
+        <version>19</version>
     </parent>
 
     <properties>
         <jdk.version>1.8</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>        
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity</artifactId>
-                <version>1.7</version>
-            </dependency>
             <dependency>
                 <groupId>xml-apis</groupId>
                 <artifactId>xml-apis</artifactId>
@@ -52,7 +48,7 @@
             <dependency>
                 <groupId>xerces</groupId>
                 <artifactId>xercesImpl</artifactId>
-                <version>2.11.0</version>
+                <version>2.12.0</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -62,13 +58,13 @@
             <dependency>
                 <groupId>org.apache.jena</groupId>
                 <artifactId>jena-core</artifactId>
-                <version>3.2.0</version>
+                <version>3.9.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.jena</groupId>
                 <artifactId>jena-core</artifactId>
                 <classifier>tests</classifier>
-                <version>3.2.0</version>
+                <version>3.9.0</version>
             </dependency>
             <dependency>
                 <groupId>net.rootdev</groupId>
@@ -121,7 +117,7 @@
         runtime manipulation of heavy-weight editors via an automation
         interface, the ODF Toolkit is lightweight and ideal for server use.
     </description>
-    <url>http://odftoolkit.org</url>
+    <url>https://odftoolkit.org</url>
     <organization>
         <name>The Document Foundation</name>
         <url>https://www.documentfoundation.org/</url>
@@ -133,20 +129,20 @@
     </scm>
 
     <issueManagement>
-        <system>jira</system>
-        <url>https://issues.apache.org/jira/browse/ODFTOOLKIT</url>
+        <system>github</system>
+        <url>https://github.com/tdf/odftoolkit/issues</url>
     </issueManagement>
 
     <ciManagement>
-        <system>jenkins</system>
-        <url>https://builds.apache.org</url>
+        <system>travis</system>
+        <url>https://travis-ci.community</url>
     </ciManagement>
 
     <distributionManagement>
         <!-- not used for deployment but only for site:stage goal -->
         <site>
-            <id>incubator.apache.org/odftoolkit/</id>
-            <url>http://incubator.apache.org/odftoolkit/reports/${project.version}/</url>
+            <id>odftoolkit.org</id>
+            <url>https://odftoolkit.org/reports/${project.version}/</url>
         </site>
     </distributionManagement>
 
@@ -167,7 +163,7 @@
             <id>mst</id>
             <name>Michael</name>
             <organization>CIB Software</organization>
-            <organizationUrl>http://www.cib.de/</organizationUrl>
+            <organizationUrl>https://www.cib.de/</organizationUrl>
             <roles>
                 <role>developer</role>
             </roles>
@@ -177,25 +173,21 @@
 
     <mailingLists>
         <mailingList>
-            <name>User List</name>
-            <post>odf-users@incubator.apache.org</post>
-            <subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
-            <unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
-            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
-        </mailingList>
-        <mailingList>
             <name>Developer List</name>
-            <post>odf-dev@incubator.apache.org</post>
-            <subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
-            <unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
-            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
+            <post>dev@odftoolkit.org</post>
+            <!--2DO
+          <subscribe></subscribe>
+          <unsubscribe>odf-users-unsubscribe@odftoolkit.org</unsubscribe>
+          <archive>https://mail-archives.odftoolkit.org/mod_mbox/dev/</archive>
+            -->
         </mailingList>
+        <!-- Watch GitHub ?
         <mailingList>
             <name>Commits</name>
-            <subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
-            <unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
-            <archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
-        </mailingList>
+            <subscribe>commits-subscribe@odftoolkit.org</subscribe>
+            <unsubscribe>commmits-unsubscribe@odftoolkit</unsubscribe>
+            <archive>https://mail-archives.odftoolkit.org/mod_mbox/commits/</archive>
+        </mailingList>-->
     </mailingLists>
 
 
@@ -226,6 +218,7 @@
                             <excludes>
                                 <exclude>CHANGES.txt</exclude>
                                 <exclude>.gitignore</exclude>
+                                <exclude>README.md</exclude>
                                 <exclude>DEPENDENCIES</exclude>
                             </excludes>
                         </configuration>
@@ -367,35 +360,10 @@
                                                 <include name="*-doc.*"/>
                                             </fileset>
                                         </copy>
-                                        <echo file="${basedir}/target/vote.txt">
-                                            From: ${username}@apache.org
-                                            To: odf-dev@incubator.apache.org
-                                            Subject: [VOTE] Release Apache ODF Toolkit ${project.version}
-
-                                            A candidate for the ODF Toolkit ${project.version} release is available at:
-
-                                            http://repository.apache.org/snapshots/odftoolkit/
-
-                                            The release candidate is a zip archive of the sources in:
-
-                                            https://svn.apache.org/repos/asf/incubator/odf/tags/${project.version}/
-
-                                            The SHA-512 checksum of the archive is ${checksum}.
-
-                                            Please vote on releasing this package as Apache ODF Toolkit
-                                            ${project.version}.
-                                            The vote is open for the next 72 hours and passes if a majority
-                                            of at least three +1 ODF Toolkit PMC votes are cast.
-
-                                            [ ] +1 Release this package as Apache ODF Toolkit ${project.version}
-                                            [ ] -1 Do not release this package because...${line.separator}
-                                        </echo>
                                         <echo/>
                                         <echo>
                                             The release candidate has been prepared in:
                                             ${basedir}/target/${project.version}
-                                            A release vote template has been generated for you:
-                                            file://${basedir}/target/vote.txt
                                         </echo>
                                         <echo/>
                                     </tasks>
@@ -411,7 +379,7 @@
                         </dependencies>
                     </plugin>
                     <plugin>
-                        <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
+                        <!-- see https://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <executions>

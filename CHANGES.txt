@@ -1,5 +1,10 @@
-Apache ODF Toolkit Change Log
+ODF Toolkit Change Log
 =============================
+======= Release 0.9.0 =======
+
+First release at the Document Foundation, resembling the latest state of the sources from Apache ODF Toolkit.
+Release is based on JDK 1.8, the next release will be start working based on JDK 11.
+Last release including the Simple API, which includes too many copied sources from ODFDOM and has not sufficient development support.
 
 ======= Release 0.6.2 =======
 

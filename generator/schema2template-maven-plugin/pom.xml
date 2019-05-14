@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
   or more contributor license agreements.  See the NOTICE file
@@ -9,7 +8,7 @@
   "License"); you may not use this file except in compliance
   with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing,
   software distributed under the License is distributed on an
@@ -21,14 +20,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.odftoolkit</groupId>
-    <artifactId>schema2template-pom</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
-  </parent>
+    <parent>
+        <groupId>org.odftoolkit</groupId>
+        <artifactId>schema2template-pom</artifactId>
+        <version>0.9.0-SNAPSHOT</version>
+    </parent>
   
     <!-- The Basics -->
+    <name>XML Schema to Template Mapping Tool: Maven2 Plugin</name>
     <artifactId>schema2template-maven-plugin</artifactId>
+    <description>Maven Plugin for XML Schema to Template Mapping Tool</description>
     <version>0.9.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <dependencies>
@@ -41,7 +42,7 @@
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
             <scope>provided</scope>
-            <version>3.3.9</version>
+            <version>3.6.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -53,7 +54,7 @@
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-artifact</artifactId>
             <scope>provided</scope>
-            <version>3.3.9</version>
+            <version>3.6.1</version>
         </dependency>
     </dependencies>
 
@@ -69,26 +70,52 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <!-- defined in the parent pom.xml -->
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.5</version>
+                <version>3.6.0</version>
                 <configuration>
                     <goalPrefix>schema2template</goalPrefix>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <doctitle>Schema2template maven plugin</doctitle>
+                    <splitindex>true</splitindex>
+                    <windowtitle>Schema2template Maven plugin v${project.version} - https://odftoolkit.org/</windowtitle>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <attach>true</attach>
+                    <doclint>none</doclint>
+                    <additionalOptions>${javadoc.opts}</additionalOptions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <additionalOptions>${javadoc.opts}</additionalOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
-    <!-- More Project Information -->
-    <name>XML Schema to Template Mapping Tool: Maven2 Plugin</name>
-    <description>Maven Plugin for XML Schema to Template Mapping Tool</description>
-    <url>http://incubator.apache.org/odftoolkit/</url>
-    <organization>
-        <name>The Apache Software Foundation</name>
-        <url>http://www.apache.org/</url>
-    </organization>
+    <profiles>
+        <profile>
+            <id>doclint-java8-disable</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <javadoc.opts>-Xdoclint:none</javadoc.opts>
+            </properties>
+        </profile>
+    </profiles>
 </project>
