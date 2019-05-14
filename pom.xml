@@ -172,24 +172,19 @@
     </developers>
 
     <mailingLists>
-        <mailingList>
-            <name>Developer List</name>
-            <post>dev@odftoolkit.org</post>
-            <!--2DO
-          <subscribe></subscribe>
-          <unsubscribe>odf-users-unsubscribe@odftoolkit.org</unsubscribe>
-          <archive>https://mail-archives.odftoolkit.org/mod_mbox/dev/</archive>
-            -->
-        </mailingList>
-        <!-- Watch GitHub ?
-        <mailingList>
-            <name>Commits</name>
-            <subscribe>commits-subscribe@odftoolkit.org</subscribe>
-            <unsubscribe>commmits-unsubscribe@odftoolkit</unsubscribe>
-            <archive>https://mail-archives.odftoolkit.org/mod_mbox/commits/</archive>
-        </mailingList>-->
+      <mailingList>
+        <!--
+        Help: <dev+help@odftoolkit.org>
+        Digest subscription: <dev+subscribe-digest@odftoolkit.org>
+        No-mail subscription: <dev+subscribe-nomail@odftoolkit.org>
+        -->
+        <post>dev@odftoolkit.org</post>
+        <subscribe>dev+subscribe@odftoolkit.org</subscribe>
+        <unsubscribe>dev+unsubscribe@odftoolkit.org</unsubscribe>
+        <archive>https://listarchives.odftoolkit.org/dev/</archive>
+        <name>dev.odftoolkit.org</name><!-- List-Id -->
+      </mailingList>
     </mailingLists>
-
 
     <profiles>
         <profile>
