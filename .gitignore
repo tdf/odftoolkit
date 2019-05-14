@@ -14,6 +14,9 @@ local.properties
 .loadpath
 .recommenders
 
+### Netbeans ###
+nb-configuration.xml
+
 # External tool builders
 .externalToolBuilders/
 
@@ -195,3 +198,5 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 # End of https://www.gitignore.io/api/java,maven,eclipse,intellij+all
+/xslt-runner/nbproject/private/
+/xslt-runner-task/nbproject/private/
