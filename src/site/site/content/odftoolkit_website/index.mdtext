@@ -3,7 +3,7 @@ Title: The Document Foundation - ODF Toolkit
 **2018-12-18 - ODF Toolkit becomes a project of The Document Foundation (TDF) **
 
 The ODF Toolkit team is pleased to announce the reuniation with LibreOffice.
-We are working on an initial Maven release based on the latest Apache soruces. The upcoming release will be based on JDK 8.
+We are working on an initial Maven release based on the latest Apache sources. The upcoming release will be based on JDK 8.
 
 People interested should also follow the [mail list](mailing-lists.html) to track progress.
 
