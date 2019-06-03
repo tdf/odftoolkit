@@ -42,6 +42,6 @@ For the setup of the build environment, please see [Java JDK download for Window
     cd odftoolkit
     mvn clean install
 
-[1]: http://github.com/git/odftoolkit
-[2]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+[1]: http://github.com/tdf/odftoolkit
+[2]: https://openjdk.java.net/install/
 [3]: https://maven.apache.org/guides/getting-started/windows-prerequisites.html
