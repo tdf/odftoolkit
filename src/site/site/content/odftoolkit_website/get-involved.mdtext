@@ -84,18 +84,8 @@ Occasionally a "feel" for consensus is not enough. Sometimes we need to
 have a measurable consensus. For example, when [voting][13] in new committers or 
 to approve a release. 
 
-
-  [1]: mailto:odf-dev-subscribe@incubator.apache.org
-  [2]: mailto:odf-dev@incubator.apache.org
-  [3]: mailto:odf-dev-unsubscribe@incubator.apache.org
-  [4]: http://markmail.org/search/+list:org.apache.incubator.odf-dev
-  [5]: http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/
-  [6]: mailto:odf-commits-subscribe@incubator.apache.org
-  [7]: mailto:odf-commmits-unsubscribe@incubator.apache.org
-  [8]: http://markmail.org/search/+list:org.apache.incubator.odf-commits
-  [9]: http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/
-  [10]: /odftoolkit_website/docs/governance/lazyConsensus.html
-  [11]: /odftoolkit_website/docs/governance/consensusBuilding.html
-  [12]: /odftoolkit_website/docs/governance/lazyConsensus.html
-  [13]: /odftoolkit_website/docs/governance/voting.html
-  [14]: /odftoolkit_website/mailing-lists.html
+  [10]: docs/governance/lazyConsensus.html
+  [11]: docs/governance/consensusBuilding.html
+  [12]: docs/governance/lazyConsensus.html
+  [13]: docs/governance/voting.html
+  [14]: mailing-lists.html

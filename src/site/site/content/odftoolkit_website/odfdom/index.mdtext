@@ -36,7 +36,7 @@ How to Participate
 
 There are many ways to participate and we're always looking for contributors. Just on the Apache ODF Toolkit Project and afterwards watch this project. Then you may want to start with reading and posting on the [mailing lists][27] or report bugs or write documentation.
 
-If you're a developer, just dive into [the development section][28]. Here you find information on where to access the source code and how to set up a build environment.
+If you're a developer, just dive into [the source section][28]. Here you find information on where to access the source code and how to set up a build environment.
 
   [1]: ProjectOverview.html
   [2]: Layers.html
@@ -46,8 +46,8 @@ If you're a developer, just dive into [the development section][28]. Here you fi
   [21]: ProjectOverview.html
   [22]: Layers.html
   [23]: ../api/odfdom/index.html
-  [24]: http://www.apache.org/dist/incubator/odftoolkit/docs/
+  [24]: odftoolkit.org/api/odfdom/index.html
   [25]: http://www.langintro.com/odfdom_tutorials/
   [26]: FrequentQuestions.html
-  [27]: mailto:odf-users@incubator.apache.org
-  [28]: Development.html
+  [27]: mailing-lists.html
+  [28]: source.html

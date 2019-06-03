@@ -16,48 +16,25 @@ Notice:    Licensed to the Apache Software Foundation (ASF) under one
            specific language governing permissions and limitations
            under the License.
 
-We use [Apache Subversion][1] for version control. You can [browse our 
+We use [Git][1] for version control. You can [browse our 
 repository][2] in your web browser.
 
-Quick editing of the site is available for committers using the Apache CMS
-[from your browser.][6]
+This page gives instructions on doing website development on your computer.
 
-This page gives instructions on doing website development on your local computer.
-
-* [Setup](#setup) - How to download the Odf project site repos and setup the Apache CMS.
+* [Setup](#setup) - How to download the website and setup the tooling.
 * [Directory Layout](#directory-layout) - Where to find the content, templates, and scripts.
 * [Local Development](#local-development) - How to build and test locally.
 * [Submitting Your Results](#submitting-your-results) - How to contribute your edits.
 
 ## Setup
 
-### Create a directory on your computer.
-
-    mkdir odf-site
-    cd odf-site
-
-### Download the svn repos for the Odf site.
-
-    svn co https://svn.apache.org/repos/asf/incubator/odf/site/trunk site
-
-### Download the svn repos for the Apache CMS.
-
-    svn co https://svn.apache.org/repos/infra/websites/cms/ cms
-
-
-### Install Python dependencies.
-
-Adapted from the [Apache CMS Reference][3]
-
-The easiest way to install the dependencies is to use Python setuptools.
+### Install Python 2 dependencies.
 
 #### Check your version of Python
 
     python --version
 
-Source code generation has been tested successfully with Python 2.7.15rc1
-
-#### Follow the installation instructions for [setuptools][4].
+Source code generation has been tested successfully with Python 2.7.16
 
 #### Install dependencies
 
@@ -66,25 +43,29 @@ Source code generation has been tested successfully with Python 2.7.15rc1
     python -m pip install "Markdown<2.6.0"
     python -m pip install "Pygments==2.2.0"
 
-The Apache CMS [3] depends on old libraries.
-NOTE: The former described 'easy_install' approach is no longer working.
+NOTE: The Apache CMS [3] bundled within site depends on old libraries.
+
+### Download the repo 
+
+    git clone https://github.com/tdf/odftoolkit
+    cd odftoolkit/src/site
 
 ## Directory Layout
 
 #### Content directory
 
-The `site/content/odftoolkit` directory contains web content - markdown, html, javascript, css, images and other files. Files that do not fit recognized patterns from `site/lib/path.pm` are copied as is to the web site during the build.
+The `src/site/site/content/odftoolkit` directory contains web content - markdown, html, javascript, css, images and other files. Files that do not fit recognized patterns from `site/lib/path.pm` are copied as is to the web site during the build.
 
 #### Templates directory
 
-The `site/templates` directory contains the html skeletons used during the site build.
+The `src/site/site/templates` directory contains the html skeletons used during the site build.
 
 * `skeleton.html` - our current html page template.
 * `sidenav.mdtext` - markdown of the side navigation panel.
 
 #### Lib directory
 
-The `site/lib` directory contains two python modules that determine how content files are processed during the site build.
+The `src/site/site/lib` directory contains two python modules that determine how content files are processed during the site build.
 
 * `path.pm` - maps file patterns like `.mdtext` into the view building routines. We can expand to cover other patterns.
 * `view.pm` - a set of python subroutines for converting content into web pages.
@@ -93,61 +74,39 @@ The `site/lib` directory contains two python modules that determine how content 
 
 You can find the CMS build tools in the `cms` directory.
 
-* `cms/build/` - perl scripts for building the site and markdown extensions.
-* `cms/conversion-utilities/` - scripts used by various projects for conversion including `cwiki` conversion.
-* `cms/webgui/` - the webgui behind the `bookmarklet`.
-
-These can be extended locally. Before any changes become part of our process they will need to be cleared with Apache Infrastructure. We'll need to submit patches. These should be additive or be bug fixes.
+* `src/site/cms/build/` - perl scripts for building the site and markdown extensions.
+* `src/site/cms/conversion-utilities/` - scripts used by various projects for conversion including `cwiki` conversion.
+* `src/site/cms/webgui/` - the webgui behind the `bookmarklet`.
 
 ## Local Development
 
 ### Edit the site
 
-Using your favorite editors edit the site content, templates, and lib scripts.
+Using your favorite editors edit the site content, templates.
 
-### Python Markdown Daemon
+### build the site
 
-Start the Python Markdown daemon.
+Run the `build-site.sh` script to build the markdown to HTML and copy all resources into the odftoolkit/docs directory.
+Afterthe changes have been merged to the master branch, all changes will become visible at https://tdf.github.io/odftoolkit/docs/
 
-    export MARKDOWN_SOCKET=`pwd`/markdown.socket PYTHONPATH=`pwd`
-    python cms/build/markdownd.py
+## building JavaDoc and publishing the JavaDoc
 
-### Build the site.
-
-    cms/build/build_site.pl --source-base site --target-base www
-
-### Copy the site to your computer's web server.
-
-On my Mac:
-
-    sudo scp -rp www/content/odftoolkit /Library/WebServer/Documents/.
-
-The site is then available with [http://localhost/odftoolkit/][5].
-
-Or serve the site directly using the Python SimpleHTTPServer:
-
-    (cd www/content/ && python -m SimpleHTTPServer 8080)
-
-The site is then available with [http://localhost:8080/odftoolkit/][8].
+JavaDoc is generated as part of the `mvn clean install` command called from the root of the project.
+Run the `copy-javadoc.sh` script to build copy the created API directories into the odftoolkit/docs/api directory and remove any prior files within.
 
 ## Submitting your results.
 
 ### Committer
 
-Do the appropriate combination of svn status, svn add, and svn commits. Commits will cause staging rebuilds.
-See [How to Edit the ODF Toolkit Website][6]
+Do the appropriate combination of git status, git add, and git commits.
 
 ### Contributor
 
 (Add instructions on creating patches.)
 
-For further information see the [Apache Source Code Repository][7] page.
+For further information see the [GitHub help on creating a pull request from a fork][7] page.
 
-[1]: http://subversion.apache.org
-[2]: http://svn.apache.org/viewvc/incubator/odf/site/trunk
+[1]: https://git-scm.com/
+[2]: https://github.com/tdf/odftoolkit
 [3]: http://www.apache.org/dev/cmsref.html#local-build
-[4]: http://pypi.python.org/pypi/setuptools
-[5]: http://localhost/odftoolkit
-[6]: docs/edit-cms.html
-[7]: http://www.apache.org/dev/version-control.html
-[8]: http://localhost:8080/odftoolkit/
+[7]: https://help.github.com/en/articles/creating-a-pull-request-from-a-fork

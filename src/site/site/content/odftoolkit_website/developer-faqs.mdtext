@@ -18,8 +18,8 @@ Notice:    Licensed to the Apache Software Foundation (ASF) under one
 
 ##How do I edit this website?
 
-The pages on this website are written in [markdown syntax][1] and stored in SVN at 
-[https://svn.apache.org/repos/asf/incubator/odf/site][2]
+The pages on this website are written in [markdown syntax][1] and stored in GIT at 
+[https://github.com/tdf/odftoolkit/tree/master/src/site][2]
 
 Via integration with the Apache CMS, it is possible to edit, stage and publish 
 website updates from the command line, or by using a web-based interface.
@@ -33,7 +33,7 @@ Information on deeper website development is found on the [Website Development][
 Information can be found on [this blog] [5].
 
   [1]: http://www.simpleeditions.com/59001/markdown-an-introduction
-  [2]: https://svn.apache.org/repos/asf/incubator/odf/site
-  [3]: http://incubator.apache.org/odftoolkit/docs/edit-cms.html
+  [2]: https://github.com/tdf/odftoolkit/tree/master/src/site
+  [3]: docs/edit-cms.html
   [4]: website-local.html
   [5]: https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github

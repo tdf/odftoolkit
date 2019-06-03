@@ -2,10 +2,12 @@
 
 echo "Creating HTML from MarkDown as described"
 echo "  in https://tdf.github.io/odftoolkit/website-local.html"
+# Start the Python Markdown daemon. (tested with Python 2.7.16)
 export MARKDOWN_SOCKET=`pwd`/markdown.socket PYTHONPATH=`pwd`
 python cms/build/markdownd.py
 echo 
 echo 1. Build the site..
+#  Build the site
 cms/build/build_site.pl --source-base site --target-base www
 
 echo 2. Exchanging the absolute HTML reference with relative ones..
@@ -19,7 +21,7 @@ find www -mindepth 7 -maxdepth 7 -type f -print0 -name *.html | xargs -0 sed -i 
 find www -mindepth 8 -maxdepth 8 -type f -print0 -name *.html | xargs -0 sed -i -e 's+/odftoolkit_website+../../../../..+g' 2>/dev/null
 find www -mindepth 9 -maxdepth 9 -type f -print0 -name *.html | xargs -0 sed -i -e 's+/odftoolkit_website+../../../../../..+g' 2>/dev/null
 
-echo 3. Copy the HTML to GitHub Docs
+echo 3. Copy the HTML to GitHub /docs
 echo 4. Save the generated JAVADOC API
 mv  ../../docs/api  ../..
 
@@ -36,4 +38,6 @@ echo 8. Remove temporary files and directories
 rm markdown.socket
 rm -rf www
 rm -rf cms/build/*.pyc
+
 echo 
+echo View the generated website in the odftoolkit/docs/ directory
