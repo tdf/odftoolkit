@@ -40,7 +40,6 @@ If you're a developer, just dive into [the development section][28]. Here you fi
 
   [1]: ProjectOverview.html
   [2]: Layers.html
-  [4]: ReleaseNotes.html
   [20]: http://xml.apache.org/dist/xerces-j/
   [21]: ProjectOverview.html
   [22]: Layers.html
@@ -48,5 +47,5 @@ If you're a developer, just dive into [the development section][28]. Here you fi
   [24]: odftoolkit.org/api/odfdom/index.html
   [25]: http://www.langintro.com/odfdom_tutorials/
   [26]: FrequentQuestions.html
-  [27]: mailing-lists.html
-  [28]: source.html
+  [27]: ../mailing-lists.html
+  [28]: ../source.html
