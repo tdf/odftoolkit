@@ -38,13 +38,6 @@ Below is a list of the downloads:
 	[[sha](http://www.apache.org/dist/incubator/odftoolkit/docs/odftoolkit-0.6.2-incubating-doc.zip.sha)]
 
 
-  *Note*: All downloads can be verified using the Apache ODF Toolkit code signing [KEYS](http://www.apache.org/dist/incubator/odftoolkit/KEYS).
-  When downloading from a mirror please check the [md5sum](http://www.apache.org/dev/release-signing#md5)
-  and verify the [OpenPGP](http://www.apache.org/dev/release-signing#openpgp) compatible
-  signature from the main [Apache site](http://www.apache.org). Links are provided above (next to the release download link). This [KEYS](http://www.apache.org/dist/incubator/odftoolkit/KEYS) file contains the public
-  keys used for signing release. It is recommended that (when possible) a [web of trust](http://www.apache.org/dev/release-signing#web-of-trust) is
-  used to confirm the identity of these keys. For more information, please see the [Apache Release FAQ](http://www.apache.org/dev/release.html).
-
 
 **Older Apache Versions**
 
