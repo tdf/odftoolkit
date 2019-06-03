@@ -23,8 +23,6 @@ ideas about Apache ODF Toolkit
 
  - [Participation Guidelines](#participation-guidelines).
  - [Development Mailing List](#development-mailing-list).
- - [Commits Mailing List](#commits-mailing-list).
- - [Users Mailing List](#users-mailing-list).
 
 ## Participation Guidelines
 We ask all mailing list participants to observe [these guidelines][0].
@@ -46,7 +44,7 @@ In addition to the topic subject tags, there are also tags used to indicate a re
 
 Note: it is common for a topic tag and an action tag to be combined, e.g.:
 
- - [PROPOSAL][Repo] Migration of legacy repository to SVN
+ - [PROPOSAL][Repo] Migration of legacy repository to GIT
  - [DISCUSS][download] What are our options of mirroring legacy releases?
 
 
@@ -55,47 +53,14 @@ Note: it is common for a topic tag and an action tag to be combined, e.g.:
 This is where the community hangs out. This list is used to coordinate
 activities and ensure we are all pulling in the same direction.  This is a high traffic list, with an average of 57 posts/day.
 
-  - Subscribe: [odf-dev-subscribe@incubator.apache.org][1]
-  - Post (after subscription): [odf-dev@incubator.apache.org][2]
-  - Unsubscribe: [odf-dev-unsubscribe@incubator.apache.org][3]
-  - Archives
-    - [PonyMail][4]
-    - [Apache][6]
-
-## Commits Mailing List
-
-This is where the community receives automated notifications of any changes to the
-ODF Toolkit code and documentation.  This is a moderate traffic list, with an average of 10 posts/day.
-
-  - Subscribe: [odf-commits-subscribe@incubator.apache.org][7]
-  - Unsubscribe: [odf-commmits-unsubscribe@incubator.apache.org][8]
-  - Archives
-    - [PonyMail][9]
-    - [Apache][10]
-
-## Users Mailing List
-
-This is where the users ask questions, suggest features, etc. This is a low traffic list.
-
-  - Subscribe: [odf-users-subscribe@incubator.apache.org][11]
-  - Unsubscribe: [odf-users-unsubscribe@incubator.apache.org][12]
-  - Archives
-    - [PonyMail][13]
-    - [Apache][14]
+  - Subscribe: [dev+subscribe@odftoolkit.org][1]
+  - Post (after subscription): [dev@odftoolkit.org][2]
+  - Unsubscribe: [dev+unsubscribe@odftoolkit.org][3]
+  - Archives - [https://listarchives.odftoolkit.org/dev/][4]    
 
 
   [0]: http://www.apache.org/dev/contrib-email-tips.html
-  [1]:  mailto:odf-dev-subscribe@incubator.apache.org
-  [2]:  mailto:odf-dev@incubator.apache.org
-  [3]:  mailto:odf-dev-unsubscribe@incubator.apache.org
-  [4]:  https://lists.apache.org/list.html?odf-dev@incubator.apache.org
-
-  [6]:  http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/
-  [7]:  mailto:odf-commits-subscribe@incubator.apache.org
-  [8]:  mailto:odf-commmits-unsubscribe@incubator.apache.org
-  [9]:  https://lists.apache.org/list.html?odf-commits@incubator.apache.org
-  [10]: http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/
-  [11]:  mailto:odf-users-subscribe@incubator.apache.org
-  [12]:  mailto:odf-users-unsubscribe@incubator.apache.org
-  [13]:  https://lists.apache.org/list.html?odf-users@incubator.apache.org
-  [14]: http://mail-archives.apache.org/mod_mbox/incubator-odf-users/
+  [1]:  mailto:dev+subscribe@odftoolkit.org
+  [2]:  mailto:dev@odftoolkit.org
+  [3]:  mailto:dev+unsubscribe@odftoolkit.org
+  [4]:  https://listarchives.odftoolkit.org/dev/
