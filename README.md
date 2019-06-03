@@ -95,21 +95,11 @@ the terms and conditions of the licenses listed in the LICENSE.txt file.
 
 Discussion about ODF Toolkit takes place on the following mailing lists:
 
-* Development Mailing List
-  * Subscribe: odf-dev-subscribe@incubator.apache.org
-  * Post (after subscription): odf-dev@incubator.apache.org
-  * Unsubscribe: odf-dev-unsubscribe@incubator.apache.org
-  * Archives
-    * [Markmail](http://markmail.org/search/+list:org.apache.incubator.odf-dev/)
-    * [Apache](http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/)
-* Users Mailing List
-  * Subscribe: odf-users-subscribe@incubator.apache.org
-  * Post (after subscription): odf-users@incubator.apache.org
-  * Unsubscribe: odf-users-unsubscribe@incubator.apache.org
-  * Archives
-    * [Apache](http://mail-archives.apache.org/mod_mbox/incubator-odf-users/)
-
-Notification on all code changes are sent to the following mailing list: odf-commits@incubator.apache.org
+* Development and Users Mailing List
+  * Subscribe: dev+subscribe@odftoolkit.org
+  * Post (after subscription): dev@odftoolkit.org
+  * Unsubscribe: dev+unsubscribe@odftoolkit.org
+  * Archives - https://listarchives.odftoolkit.org/dev/
 
 The mailing lists are open to anyone and publicly archived.
 
@@ -118,5 +108,5 @@ The mailing lists are open to anyone and publicly archived.
 
 If you encounter errors in ODF Toolkit or want to suggest an improvement or
 a new feature, please visit the ODF Toolkit issue tracker at
-https://issues.apache.org/jira/browse/ODFTOOLKIT. There you can also find the
+https://github.com/tdf/odftoolkit/issues. There you can also find the
 latest information on known issues and recent bug fixes and enhancements.
