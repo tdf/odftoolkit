@@ -21,29 +21,16 @@ find www -mindepth 9 -maxdepth 9 -type f -print0 -name *.html | xargs -0 sed -i 
 echo Copy the HTML to GitHub Docs
 echo Save the generated JAVADOC API
 mv  ../../docs/api  ../..
+
 echo Remove all prior website content
 rm -rf ../../docs/*
 
-: ' gathering basics for exchanging "odftoolkit_website" against  some stuff
-
-./conformance
-./xsltrunner
-./simple
-./simple/document
-./simple/document/cookbook
-./simple/demo
-./simple/demo/image
-./odfdom
-./images
-./css
-./docs
-./docs/governance
-'
-
 echo Copy all generated HTML as new website content
 mv ./www/content/odftoolkit_website/* ../../docs/
+
 echo Restore saved generated javadoc
 mv ../../api ../../docs
+
 echo Remove temporary files and directories
 rm markdown.socket
 rm -rf www

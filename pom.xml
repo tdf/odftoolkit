@@ -28,12 +28,13 @@
 	<parent>
 		<groupId>org.apache</groupId>
 		<artifactId>apache</artifactId>
-		<version>18</version>
+		<version>19</version>
 	</parent>
 
 	<properties>
 		<jdk.version>1.8</jdk.version>
 		<javadoc.bottom>Copyright &#169; {inceptionYear}&#x2013;2018 Apache Software Foundation; Copyright &#169; 2018&#x2013;{currentYear} {organizationName}. All rights reserved.</javadoc.bottom>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 
@@ -107,7 +108,7 @@
 		runtime manipulation of heavy-weight editors via an automation
 		interface, the ODF Toolkit is lightweight and ideal for server use.
 	</description>
-	<url>http://odftoolkit.org</url>
+	<url>https://odftoolkit.org</url>
 	<organization>
 		<name>The Document Foundation</name>
 		<url>https://www.documentfoundation.org/</url>
@@ -117,25 +118,23 @@
 		<developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
 		<url>https://github.com/tdf/odftoolkit.git</url>		
 	</scm>
-	<!--
-		<issueManagement>				
-			<system>GitHub Issues</system>        
-			<url>https://github.com/tdf/odftoolkit/issues</url>
-		</issueManagement>
-	
-		<ciManagement>
-			<system>jenkins ??</system>
-			<url>https:// 2DO</url>
-		</ciManagement>
-	
-		<distributionManagement>
-			<!~~ not used for deployment but only for site:stage goal ~~>
-			<site>
-				<id>odftoolkit.org</id>
-				<url>https://odftoolkit.org/reports/${project.version}/</url>
-			</site>
-		</distributionManagement>
-	-->
+	<issueManagement>				
+		<system>GitHub Issues</system>        
+		<url>https://github.com/tdf/odftoolkit/issues</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>travis</system>
+		<url>https://travis-ci.community</url>
+	</ciManagement>
+
+	<distributionManagement>
+		<!-- not used for deployment but only for site:stage goal -->
+		<site>
+			<id>odftoolkit.org</id>
+			<url>https://odftoolkit.org/reports/${project.version}/</url>
+		</site>
+	</distributionManagement>
 	<developers>
 		<developer>
 			<id>svanteschubert</id>
@@ -154,7 +153,7 @@
 			<id>mst</id>
 			<name>Michael</name>
 			<organization>CIB Software</organization>
-			<organizationUrl>http://www.cib.de/</organizationUrl>
+			<organizationUrl>https://www.cib.de/</organizationUrl>
 			<roles>
 				<role>OASIS ODF committee member</role>
 				<role>developer</role>
@@ -163,30 +162,20 @@
 		</developer>
 	</developers>
 
-	<!-- 2DO
-		<mailingLists>
-			<mailingList>
-				<name>User List</name>
-				<post>odf-users@incubator.apache.org</post>
-				<subscribe>odf-users-subscribe@incubator.apache.org</subscribe>
-				<unsubscribe>odf-users-unsubscribe@incubator.apache.org</unsubscribe>
-				<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-users/</archive>
-			</mailingList>
-			<mailingList>
-				<name>Developer List</name>
-				<post>odf-dev@incubator.apache.org</post>
-				<subscribe>odf-dev-subscribe@incubator.apache.org</subscribe>
-				<unsubscribe>odf-dev-unsubscribe@incubator.apache.org</unsubscribe>
-				<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-dev/</archive>
-			</mailingList>
-			<mailingList>
-				<name>Commits</name>
-				<subscribe>odf-commits-subscribe@incubator.apache.org</subscribe>
-				<unsubscribe>odf-commmits-unsubscribe@incubator.apache.org</unsubscribe>
-				<archive>http://mail-archives.apache.org/mod_mbox/incubator-odf-commits/</archive>
-			</mailingList>
-		</mailingLists>
-	-->
+	<mailingLists>
+		<mailingList>
+			<!--
+			Help: <dev+help@odftoolkit.org>
+			Digest subscription: <dev+subscribe-digest@odftoolkit.org>
+			No-mail subscription: <dev+subscribe-nomail@odftoolkit.org>
+			-->
+			<post>dev@odftoolkit.org</post>
+			<subscribe>dev+subscribe@odftoolkit.org</subscribe>
+			<unsubscribe>dev+unsubscribe@odftoolkit.org</unsubscribe>
+			<archive>https://listarchives.odftoolkit.org/dev/</archive>
+			<name>dev.odftoolkit.org</name><!-- List-Id -->
+		</mailingList>
+	</mailingLists>
 
 	<profiles>
 		<profile>
@@ -200,6 +189,7 @@
 							<excludes>
 								<exclude>CHANGES.txt</exclude>
 								<exclude>.gitignore</exclude>
+                                <exclude>README.md</exclude>
 								<exclude>DEPENDENCIES</exclude>
 							</excludes>
 						</configuration>

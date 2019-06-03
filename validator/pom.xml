@@ -43,10 +43,11 @@
 			<groupId>net.java.dev.msv</groupId>
 			<artifactId>msv-core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.iso_relax.verifier.jaxp.validation</groupId>
-			<artifactId>isorelax-jaxp-bridge</artifactId>
-			<version>1.0</version>
+        <!-- https://mvnrepository.com/artifact/org.jopendocument/isorelax-jaxp-bridge-ILM -->
+        <dependency>
+            <groupId>org.jopendocument</groupId>
+            <artifactId>isorelax-jaxp-bridge-ILM</artifactId>
+            <version>1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>xerces</groupId>
@@ -138,7 +139,7 @@
 								<manifestEntries>
 									<ODFDOM-Name>ODFDOM Validator</ODFDOM-Name>
 									<ODFDOM-Version>${project.version}</ODFDOM-Version>
-									<ODFDOM-Website>https://odftoolkit.org/</ODFDOM-Website>
+									<ODFDOM-Website>${project.url}</ODFDOM-Website>
 									<ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
 									<ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
 								</manifestEntries>
@@ -250,6 +251,22 @@
 					</instrumentation>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <doctitle>Validator</doctitle>
+                    <links>
+                        <link>https://download.oracle.com/javase/8/docs/api/</link>
+                        <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
+                    </links>
+                    <doclint>none</doclint>
+                    <splitindex>true</splitindex>
+                    <validateLinks>true</validateLinks>
+                    <windowtitle>Validator API v${project.version} - https://odftoolkit.org/</windowtitle>
+                </configuration>
+            </plugin>
 			<!-- Reporting integration test results -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

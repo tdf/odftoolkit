@@ -84,7 +84,7 @@
                                 <manifestEntries>
                                     <SIMPLE-ODF-Name>Simple Java API for ODF(Simple ODF)</SIMPLE-ODF-Name>
                                     <SIMPLE-ODF-Version>${project.version}</SIMPLE-ODF-Version>
-                                    <SIMPLE-ODF-Website>http://odftoolkit.org</SIMPLE-ODF-Website>
+                                    <SIMPLE-ODF-Website>${project.url}</SIMPLE-ODF-Website>
                                     <SIMPLE-ODF-Built-By>${user.name}</SIMPLE-ODF-Built-By>
                                     <SIMPLE-ODF-Built-Date>${build.timestamp}</SIMPLE-ODF-Built-Date>
                                     <SIMPLE-ODF-Supported-ODF-Version>1.2</SIMPLE-ODF-Supported-ODF-Version>
