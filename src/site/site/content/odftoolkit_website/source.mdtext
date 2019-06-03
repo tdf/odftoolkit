@@ -39,7 +39,7 @@ For the setup of the build environment, please see [Java JDK download for Window
 
 ## Build
 ###Linux / Windows
-    cd odf-toolkit
+    cd odftoolkit
     mvn clean install
 
 [1]: http://github.com/git/odftoolkit

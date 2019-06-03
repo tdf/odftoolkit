@@ -18,7 +18,7 @@ Put the odfdom.jar file in your classpath. You will need [Apache Xerces-J][20] a
     // Save document
     odt.save("MyFilename.odt");
 
-For information on working with the source code, please refer to [the development section][19].
+For information on working with the source code, please refer to [the development section][28].
 
 Documentation
 -------------
@@ -36,12 +36,11 @@ How to Participate
 
 There are many ways to participate and we're always looking for contributors. Just on the Apache ODF Toolkit Project and afterwards watch this project. Then you may want to start with reading and posting on the [mailing lists][27] or report bugs or write documentation.
 
-If you're a developer, just dive into [the source section][28]. Here you find information on where to access the source code and how to set up a build environment.
+If you're a developer, just dive into [the development section][28]. Here you find information on where to access the source code and how to set up a build environment.
 
   [1]: ProjectOverview.html
   [2]: Layers.html
   [4]: ReleaseNotes.html
-  [19]: Development.html
   [20]: http://xml.apache.org/dist/xerces-j/
   [21]: ProjectOverview.html
   [22]: Layers.html
