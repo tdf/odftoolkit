@@ -38,12 +38,12 @@ Source code generation has been tested successfully with Python 2.7.16
 
 #### Install dependencies
 
+NOTE: The Apache CMS [3] bundled within the site directory depends on old libraries.
+
     sudo apt-get install -y python2.7-elementtree
     sudo apt install python-pip
     python -m pip install "Markdown<2.6.0"
     python -m pip install "Pygments==2.2.0"
-
-NOTE: The Apache CMS [3] bundled within site depends on old libraries.
 
 ### Download the repo 
 
@@ -101,8 +101,6 @@ Run the `copy-javadoc.sh` script to build copy the created API directories into 
 Do the appropriate combination of git status, git add, and git commits.
 
 ### Contributor
-
-(Add instructions on creating patches.)
 
 For further information see the [GitHub help on creating a pull request from a fork][7] page.
 

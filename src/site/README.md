@@ -1,2 +1,7 @@
 # odftoolkit website
-Transition from Apache SVN Website to TDF
+ODFTOOLKIT Website: 
+https://github.com/tdf/odftoolkit/tree/master/docs
+https://tdf.github.io/odftoolkit/docs/
+https://odftoolkit.org
+
+For build information see: https://tdf.github.io/odftoolkit/docs/website-local.html
