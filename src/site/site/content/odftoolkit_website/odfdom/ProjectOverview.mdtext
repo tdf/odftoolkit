@@ -17,7 +17,7 @@ Provides a different much more high level view on the ODF schema features. This 
 
 ![alt text][8]
 
-ODFDOM is part of [Apache ODF Toolkit project][9]. Development is discussed on [the dev mailing list][10], users should ask their questions on [the users mailing list][11].
+ODFDOM is part of [ODF Toolkit project][9]. Development is discussed on [mailing list][10].
 
 ***[More detailed information about ODFDOM layers][12]***.
 
@@ -30,7 +30,6 @@ ODFDOM is part of [Apache ODF Toolkit project][9]. Development is discussed on [
   [6]: http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part1.html
   [7]: http://www.w3.org/DOM/
   [8]: ODFDOM-New-Layered-Model.png
-  [9]: http://incubator.apache.org/odftoolkit/
-  [10]: mailto:odf-dev@incubator.apache.org
-  [11]: mailto:odf-users@incubator.apache.org
+  [9]: https://odftoolkit.org
+  [10]: ../mailing-lists.html
   [12]: Layers.html
