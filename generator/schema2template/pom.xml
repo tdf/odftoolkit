@@ -83,7 +83,7 @@
 								<manifestEntries>
 									<Application-Name>schema2template</Application-Name>
 									<Application-Version>${project.version}</Application-Version>
-									<Application-Website>https://odftoolkit.org</Application-Website>
+									<Application-Website>${project.url}</Application-Website>
 									<Built-By>${user.name}</Built-By>
 									<Built-Date>${build.timestamp}</Built-Date>
 								</manifestEntries>
@@ -175,6 +175,8 @@
 					<additionalOptions>
 						<additionalOption>${javadoc.opts}</additionalOption>
 					</additionalOptions>
+                    <docfilessubdirs>true</docfilessubdirs>
+                    <doclint>none</doclint>
 				</configuration>
 				
 			</plugin>
