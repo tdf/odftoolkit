@@ -21,11 +21,23 @@ Notice:    Licensed to the Apache Software Foundation (ASF) under one
 We welcome you to join our mailing lists and let us know about your thoughts or
 ideas about Apache ODF Toolkit
 
- - [Participation Guidelines](#participation-guidelines).
  - [Development Mailing List](#development-mailing-list).
+ - [Participation Guidelines](#participation-guidelines).
+
+
+## Development Mailing List
+
+This is where the community hangs out. This list is used to coordinate
+activities and ensure we are all pulling in the same direction.
+
+  - Subscribe: [dev+subscribe@odftoolkit.org][0]
+  - Post (after subscription): [dev@odftoolkit.org][1]
+  - Unsubscribe: [dev+unsubscribe@odftoolkit.org][2]
+  - Archives - [https://listarchives.odftoolkit.org/dev/][3]    
+
 
 ## Participation Guidelines
-We ask all mailing list participants to observe [these guidelines][0].
+We ask all mailing list participants to observe [these guidelines][4].
 
 Specifically note the request "Use sensible and concise email subject headings".
 
@@ -48,19 +60,9 @@ Note: it is common for a topic tag and an action tag to be combined, e.g.:
  - [DISCUSS][download] What are our options of mirroring legacy releases?
 
 
-## Development Mailing List
-
-This is where the community hangs out. This list is used to coordinate
-activities and ensure we are all pulling in the same direction.  This is a high traffic list, with an average of 57 posts/day.
-
-  - Subscribe: [dev+subscribe@odftoolkit.org][1]
-  - Post (after subscription): [dev@odftoolkit.org][2]
-  - Unsubscribe: [dev+unsubscribe@odftoolkit.org][3]
-  - Archives - [https://listarchives.odftoolkit.org/dev/][4]    
-
-
-  [0]: http://www.apache.org/dev/contrib-email-tips.html
-  [1]:  mailto:dev+subscribe@odftoolkit.org
-  [2]:  mailto:dev@odftoolkit.org
-  [3]:  mailto:dev+unsubscribe@odftoolkit.org
-  [4]:  https://listarchives.odftoolkit.org/dev/
+  [0]:  mailto:dev+subscribe@odftoolkit.org
+  [1]:  mailto:dev@odftoolkit.org
+  [2]:  mailto:dev+unsubscribe@odftoolkit.org
+  [3]:  https://listarchives.odftoolkit.org/dev/
+  [4]: http://www.apache.org/dev/contrib-email-tips.html
+  
