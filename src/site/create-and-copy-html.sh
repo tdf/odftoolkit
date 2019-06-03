@@ -34,3 +34,4 @@ mv ../../api ../../docs
 echo Remove temporary files and directories
 rm markdown.socket
 rm -rf www
+rm -rf cms/build/*.pyc
