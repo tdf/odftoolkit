@@ -86,7 +86,7 @@ class OdfManifestSaxHandler implements ContentHandler {
 				if(mPackage.getErrorHandler() != null){
 					mPackage.logValidationError(OdfPackageConstraint.MANIFEST_WITH_EMPTY_PATH, mPackage.getBaseURI());
 				}
-			} 
+			}
 			path = OdfPackage.normalizePath(path);
 			_currentFileEntry = entries.get(path);
 			if (_currentFileEntry == null) {

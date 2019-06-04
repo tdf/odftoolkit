@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**
- * Test the method of class org.odftoolkit.odfdom.incubator.search.TextStyleNavigation 
+ * Test the method of class org.odftoolkit.odfdom.incubator.search.TextStyleNavigation
  */
 public class TextStyleNavigationTest {
 

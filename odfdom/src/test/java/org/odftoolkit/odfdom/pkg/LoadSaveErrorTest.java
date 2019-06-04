@@ -52,7 +52,7 @@ public class LoadSaveErrorTest {
 	 * The ZIP in this test claims to be an ODT file but then backs this with nothing.
 	 * We should be able to cancel the whole operation through a custom ErrorHandler,
 	 * throwing exception not only for fatal errors.
-	 * 
+	 *
 	 * @throws SAXException if an XML-related error occurs
 	 * @throws IOException if an I/O error occurs
 	 */

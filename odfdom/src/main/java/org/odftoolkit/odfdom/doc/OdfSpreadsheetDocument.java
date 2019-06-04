@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -31,7 +31,7 @@ import org.xml.sax.SAXException;
 
 /**
  * This class represents an empty ODF spreadsheet document.
- * 
+ *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.SpreadsheetDocument} in Simple API.
  */
 public class OdfSpreadsheetDocument extends OdfDocument {
@@ -111,7 +111,7 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 	 * takes more time compared to the other createInternalDocument methods.
 	 * An advantage of caching is that there are no problems overwriting
 	 * an input file.</p>
-	 * 
+	 *
 	 * <p>If the resource stream is not a ODF spreadsheet document, ClassCastException might be thrown.</p>
 	 *
 	 * @param inputStream - the InputStream of the ODF spreadsheet document.
@@ -121,7 +121,7 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 	public static OdfSpreadsheetDocument loadDocument(InputStream inputStream) throws Exception {
         return (OdfSpreadsheetDocument) OdfDocument.loadDocument(inputStream);
     }
-	
+
 	/**
 	 * Loads an OdfSpreadsheetDocument from the provided path.
 	 *
@@ -129,7 +129,7 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 	 * the whole lifecycle of OdfSpreadsheetDocument.</p>
 	 *
 	 * <p>If the resource stream is not a ODF spreadsheet document, ClassCastException might be thrown.</p>
-	 * 
+	 *
 	 * @param documentPath - the path from where the document can be loaded
 	 * @return the spreadsheet document from the given path
 	 *		  or NULL if the media type is not supported by ODFDOM.
@@ -138,7 +138,7 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 	public static OdfSpreadsheetDocument loadDocument(String documentPath) throws Exception {
 		return (OdfSpreadsheetDocument)OdfDocument.loadDocument(documentPath);
 	}
-	
+
 	/**
 	 * Creates an OdfSpreadsheetDocument from the OpenDocument provided by a File.
 	 *
@@ -146,7 +146,7 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 	 * the whole lifecycle of OdfSpreadsheetDocument.</p>
 	 *
 	 * <p>If the resource stream is not a ODF spreadsheet document, ClassCastException might be thrown.</p>
-	 * 
+	 *
 	 * @param file - a file representing the ODF spreadsheet document.
 	 * @return the spreadsheet document created from the given File
 	 * @throws java.lang.Exception - if the document could not be created.
@@ -154,7 +154,7 @@ public class OdfSpreadsheetDocument extends OdfDocument {
 	public static OdfSpreadsheetDocument loadDocument(File file) throws Exception {
 		return (OdfSpreadsheetDocument)OdfDocument.loadDocument(file);
 	}
-	
+
 	/**
 	 * Get the content root of a spreadsheet document.
 	 *

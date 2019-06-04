@@ -302,15 +302,15 @@
                         <!--<exclude>src/main/**/*.whatever</exclude>-->
 					</excludes>
                     <!-- All files are included by default: -->
-					<includes>
+					<includes><!--
 						<include>pom.xml</include>
 						<include>src/codegen/resources/config.xml</include>
 						<include>src/codegen/resources/pkg/config.xml</include>
 						<include>src/codegen/resources/pkg/javacodetemplate.xml</include>
 						<include>src/main/java/org/odftoolkit/odfdom/doc/OdfChartDocument.java</include>
-						<include>src/main/java/org/odftoolkit/odfdom/doc/OdfDocument.java</include>
-                        <!--<include>**</include>-->
-					</includes>
+						<include>src/main/java/org/odftoolkit/odfdom/doc/OdfDocument.java</include>-->
+						<include>**</include>
+					</includes>>
 				</configuration>
 			</plugin>
 		</plugins>

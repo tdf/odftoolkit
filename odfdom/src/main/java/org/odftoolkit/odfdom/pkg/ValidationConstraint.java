@@ -34,7 +34,7 @@ public interface ValidationConstraint {
      * <code>getMessage()</code>.
      *
      * @return  The localized description of this constraint. */
-	
+
 	public String getLocalizedMessage();
 
 

@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -745,7 +745,7 @@ public class TableCellTest {
 			OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
 			String expected = "ce1";
 			Assert.assertEquals(expected, fcell.getStyleName());
-			// the default setting is inherited, so for new row, 
+			// the default setting is inherited, so for new row,
 			// the cell style name should be "ce1".
 			//test appendColumn
 			table.appendColumn();
@@ -780,7 +780,7 @@ public class TableCellTest {
 			Assert.assertEquals("Default", fcell.getStyleName());
 			odsstyle.close();
 
-			// change setting is not inherited, so for new row, 
+			// change setting is not inherited, so for new row,
 			// the cell style name should be "Default".
 			odsstyle = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath(SAMPLE_STYLE_SPREADSHEET
 					+ ".ods"));
@@ -1050,7 +1050,7 @@ public class TableCellTest {
 			Assert.fail();
 		}
 	}
-        
+
         @Test
         public void testGetFromEmptyDateValue() throws Exception {
             OdfSpreadsheetDocument doc = OdfSpreadsheetDocument.newSpreadsheetDocument();
@@ -1059,7 +1059,7 @@ public class TableCellTest {
             dateCell.setValueType(OfficeValueTypeAttribute.Value.DATE.toString());
             Assert.assertNull(dateCell.getDateValue());
         }
-        
+
         @Test
         public void testGetFromEmptyTimeValue() throws Exception {
             OdfSpreadsheetDocument doc = OdfSpreadsheetDocument.newSpreadsheetDocument();
@@ -1068,5 +1068,5 @@ public class TableCellTest {
             timeCell.setValueType(OfficeValueTypeAttribute.Value.TIME.toString());
             Assert.assertNull(timeCell.getTimeValue());
         }
-        
+
 }

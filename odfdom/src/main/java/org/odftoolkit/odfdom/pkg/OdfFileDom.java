@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -72,7 +72,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 	protected XPath mXPath;
 	protected Map<String, String> mUriByPrefix;
 	protected Map<String, String> mPrefixByUri;
-	/** Contains only the duplicate prefix. 
+	/** Contains only the duplicate prefix.
 	 * The primary hold by mPrefixByUri still have to be added
 	 */
 	protected Map<String, Set<String>> mDuplicatePrefixesByUri;
@@ -86,7 +86,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 
 	/**
 	 * Creates the DOM representation of an XML file of an Odf document.
-	 * 
+	 *
 	 * @param packageDocument
 	 *            the document the XML files belongs to
 	 * @param packagePath
@@ -139,7 +139,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 		}
 	}
 
-	/** 
+	/**
 	 *Adds the document to the pool of open documents of the package.
 	 *A document of a certain path is opened only once to avoid data duplication.
 	 */
@@ -203,7 +203,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 		}
 		return newFileDom;
 	}
-	
+
 	protected void initialize() {
 		InputStream fileStream = null;
 		try {
@@ -248,7 +248,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 
 	/**
 	 * Retrieves the <code>String</code> of Package Path
-	 * 
+	 *
 	 * @return The path of the XML file relative to the package root
 	 */
 	public String getPackagePath() {
@@ -311,7 +311,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 
 	/**
 	 * Create the ODF attribute with namespace uri and qname
-	 * 
+	 *
 	 * @param nsuri  The namespace uri
 	 * @param qname  the attribute qname
 	 * @return The <code>OdfAttribute</code>

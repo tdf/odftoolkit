@@ -64,7 +64,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class PackageTest {
 
-	
+
 	private static final Logger LOG = Logger.getLogger(PackageTest.class.getName());
 	private static final String mImagePath = "src/main/javadoc/doc-files/";
 	private static final String mImageName = "ODFDOM-Layered-Model.png";
@@ -82,7 +82,7 @@ public class PackageTest {
 	private static final String TARGET_STEP_2 = "PackageLoadTestStep2.ods";
 	private static final String TARGET_STEP_3 = "PackageLoadTestStep3.ods";
 	private static final String TEST_STYLE_STYLE_ATTRIBUTE_ODT = "TestStyleStyleAttribute.odt";
-	
+
 	public PackageTest() {
 	}
 
@@ -254,7 +254,7 @@ public class PackageTest {
 		}
 
 	}
-	
+
 	@Test
 	public void validationTestDefault() {
 		try {
@@ -409,11 +409,11 @@ public class PackageTest {
 	public void testLoadingDocumentWithStyleStyleAttribute() {
 		try {
 			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_STYLE_STYLE_ATTRIBUTE_ODT));
-			OdfElement contentRoot = doc.getContentRoot();			
+			OdfElement contentRoot = doc.getContentRoot();
 		} catch (Throwable t) {
 			Logger.getLogger(PackageTest.class.getName()).log(Level.SEVERE, t.getMessage(), t);
 			Assert.fail();
 		}
 	}
-	
-} 
+
+}

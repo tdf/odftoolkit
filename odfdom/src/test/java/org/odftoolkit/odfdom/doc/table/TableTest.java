@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -766,7 +766,7 @@ public class TableTest {
 		Assert.assertTrue(illegalArgumentFlag);
 		// test TextTable automatically expands.
 		// Table3 original size is 7 rows and 5 columns;
-		//test row index 8 and column index 6, row index and column index both out of bound, work well. 
+		//test row index 8 and column index 6, row index and column index both out of bound, work well.
 		cell = table.getCellByPosition(8, 6);
 		Assert.assertNotNull(cell);
 		cell.setStringValue("string86");
@@ -791,7 +791,7 @@ public class TableTest {
 		Assert.assertNotNull(cell);
 		cell.setStringValue("stringD11");
 		Assert.assertEquals("stringD11", cell.getStringValue());
-		//test row index and column index both out of bound, work well. 
+		//test row index and column index both out of bound, work well.
 		cell = table.getCellByPosition("K12");
 		Assert.assertNotNull(cell);
 		cell.setStringValue("stringK12");
@@ -1065,7 +1065,7 @@ public class TableTest {
 			Assert.assertNotNull(headerContentRoot2);
 			StyleFooterElement footerContentRoot2 = OdfElement.findFirstChildNode(StyleFooterElement.class, masterPage2);
 			Assert.assertNotNull(footerContentRoot2);
-			
+
 		} catch (Exception ex) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -1073,7 +1073,7 @@ public class TableTest {
 	}
 
 	private Map<String, StyleMasterPageElement> getMasterPages(OdfDocument doc) throws Exception {
-	
+
 		OdfStylesDom stylesDoc = doc.getStylesDom();
 		OfficeMasterStylesElement masterStyles = OdfElement.findFirstChildNode(OfficeMasterStylesElement.class, stylesDoc.getRootElement());
 		Map<String, StyleMasterPageElement> masterPages = null;

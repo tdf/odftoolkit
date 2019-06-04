@@ -203,7 +203,7 @@ public class OdfCurrencyStyleTest {
 		}
 
 		// check if grouping is set properly
-		nodeGrouped = (number.getNumberGroupingAttribute() == null) ? 
+		nodeGrouped = (number.getNumberGroupingAttribute() == null) ?
 			false :
 			number.getNumberGroupingAttribute().booleanValue();
 		Assert.assertTrue("Grouping", grouped == nodeGrouped);

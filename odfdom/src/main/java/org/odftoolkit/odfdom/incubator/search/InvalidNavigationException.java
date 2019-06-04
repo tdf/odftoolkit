@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -23,7 +23,7 @@ package org.odftoolkit.odfdom.incubator.search;
 /**
  * Thrown to indicate that the navigation operation can not be processed on
  * selections
- * 
+ *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.navigation.InvalidNavigationException} in Simple API.
  */
 public class InvalidNavigationException extends Exception {
@@ -33,7 +33,7 @@ public class InvalidNavigationException extends Exception {
 	/**
 	 * Constructs a <code>InvalidNavigateOperation</code> with the specified
 	 * detail message.
-	 * 
+	 *
 	 * @param msg
 	 *            the detail message.
 	 */

@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -29,7 +29,7 @@ public class Vector3D implements OdfDataType {
 
 	private String mVector3D;
 	private static final Pattern vector3DPattern = Pattern.compile("^\\([ ]*-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)([ ]+-?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)){2}[ ]*\\)$");
-	
+
 	/**
 	 * Construct Vector3D by the parsing the given string
 	 *

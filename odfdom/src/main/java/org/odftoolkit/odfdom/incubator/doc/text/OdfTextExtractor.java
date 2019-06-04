@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -33,11 +33,11 @@ import org.w3c.dom.Node;
 /**
  * It's a sub class of DefaultElementVisitor. It provides a method to get the display text
  * of a single element.
- * <p> If you pass the content root as the parameter, the whole document content will be 
+ * <p> If you pass the content root as the parameter, the whole document content will be
  * returned, without any tag information.</p>
  * <p> It implements part of white space handling fuctions: text:p, text:h, text:s, text:tab, text:linebreak are processed
  * according to ODF specification.</p>
- * 
+ *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.TextExtractor} in Simple API.
  */
 public class OdfTextExtractor extends DefaultElementVisitor {
@@ -55,7 +55,7 @@ public class OdfTextExtractor extends DefaultElementVisitor {
 
 	/**
 	 * Constructor with an ODF element as paramter
-	 * @param element the ODF element whose text would be extracted. 
+	 * @param element the ODF element whose text would be extracted.
 	 */
 	protected OdfTextExtractor(OdfElement element) {
 		mTextBuilder = new StringBuilder();
@@ -81,7 +81,7 @@ public class OdfTextExtractor extends DefaultElementVisitor {
 	}
 
 	/**
-	 * An instance of OdfTextExtractor will be created to 
+	 * An instance of OdfTextExtractor will be created to
 	 * extract the text content of an ODF element.
 	 * @param element the ODF element whose text will be extracted.
 	 * @return An instance of OdfTextExtractor

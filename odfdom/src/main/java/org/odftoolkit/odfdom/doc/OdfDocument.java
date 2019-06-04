@@ -75,9 +75,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
-/** 
+/**
  * This abstract class is representing one of the possible ODF documents.
- * 
+ *
  */
 public abstract class OdfDocument extends OdfSchemaDocument {
 	// Static parts of file references
@@ -166,9 +166,9 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 	/**
 	 * Loads the ODF root document from the given Resource.
-	 * 
+	 *
 	 * NOTE: Initial meta data (like the document creation time) will be added in this method.
-	 * 
+	 *
 	 * @param res a resource containing a package with a root document
 	 * @param odfMediaType the media type of the root document
 	 * @return the OpenDocument document
@@ -471,9 +471,9 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 	/**
 	 * Get the meta data feature instance of the current document
-	 * 
-	 * @return the meta data feature instance which represent 
-	 * <code>office:meta</code> in the meta.xml	 
+	 *
+	 * @return the meta data feature instance which represent
+	 * <code>office:meta</code> in the meta.xml
 	 */
 	public OdfOfficeMeta getOfficeMetadata() {
 		if (mOfficeMeta == null) {
@@ -533,10 +533,10 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * the same path name is used that was used for loading (no symbolic link
 	 * foo2.odt pointing to the loaded file foo1.odt, no network path X:\foo.odt
 	 * pointing to the loaded file D:\foo.odt).</p>
-	 * 
+	 *
 	 * <p>When saving the embedded document to a stand alone document,
 	 * all files of the embedded document will be copied to a new document package.
-	 * If the embedded document is outside of the current document directory, 
+	 * If the embedded document is outside of the current document directory,
 	 * you have to embed it to the sub directory and refresh the link of the embedded document.
 	 * You should reload it from the given file to get the saved embedded document.
 	 *
@@ -605,7 +605,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 *
 	 * You may prefer to use the getContentRoot methods of subclasses of
 	 * OdfDocument.
-	 * 
+	 *
 	 * @return the child element of office:body, e.g. office:text for text docs
 	 * @throws Exception if the file DOM could not be created.
 	 */
@@ -711,11 +711,11 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * <li>The number of times this document has been edited is incremented by 1</li>
 	 * <li>The total time spent editing this document</li>
 	 * </ul>
-	 * 
-	 * TODO:This method will be moved to OdfMetadata class. 
+	 *
+	 * TODO:This method will be moved to OdfMetadata class.
 	 *      see http://odftoolkit.org/bugzilla/show_bug.cgi?id=204
-	 * @throws Exception 
-	 * @throws IllegalArgumentException 
+	 * @throws Exception
+	 * @throws IllegalArgumentException
 	 */
 	private void updateMetaData() throws IllegalArgumentException, Exception {
 		if (getOfficeMetadata().hasAutomaticUpdate()) {
@@ -757,16 +757,16 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * <p>
 	 * Unicode characters are in general divided by office applications into
 	 * three different groups.
-	 * 
+	 *
 	 * <p>
 	 * 1) There is CJK: the Chinese, Japanese and Korean script (also old
 	 * Vietnamese belong to this group). See
 	 * http://en.wikipedia.org/wiki/CJK_characters
-	 * 
+	 *
 	 * <p>
 	 * 2) There is CTL: Complex Text Layout, which uses BIDI algorithms and/or
 	 * glyph modules for instance Arabic, Hebrew, Indic and Thai. See http://en.wikipedia.org/wiki/Complex_Text_Layout
-	 * 
+	 *
 	 * <p>
 	 * 3) And there is all the rest, which was once called by MS Western.
 	 */
@@ -839,7 +839,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * The locale information will affect the language and country setting of
 	 * the document. Thus the font settings, the spell checkings and etc will be
 	 * affected.
-	 * 
+	 *
 	 * @param locale
 	 *            - an instance of Locale
 	 */
@@ -908,7 +908,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * <p>
 	 * ODF allows to set a Locale for each of the three UnicodeGroups.
 	 * Therefore there might be three different Locale for the document.
-	 * 
+	 *
 	 * @param unicodeGroup
 	 *            - One of the three (CJK, CTL or Western).
 	 * @return the Locale for the given UnicodeGroup
@@ -997,7 +997,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * of the document, based on the parameter of the Locale information. If the
 	 * Locale instance is not set a Asian language (Chinese, Traditional
 	 * Chinese, Japanese and Korean, nothing will take effect.
-	 * 
+	 *
 	 * @param locale
 	 *            - an instance of Locale that the default Asian language and
 	 *            country will be set to.
@@ -1022,7 +1022,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	/**
 	 * This method will set the default complex language and country information
 	 * of the document, based on the parameter of the Locale information.
-	 * 
+	 *
 	 * @param locale
 	 *            - an instance of Locale that the default complex language and
 	 *            country will be set to.

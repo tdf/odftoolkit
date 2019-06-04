@@ -67,7 +67,7 @@ public class EmbeddedDocumentTest {
 	private static final String SLASH = "/";
 
 	/**
-	 * The document A contains the embedded document E1, 
+	 * The document A contains the embedded document E1,
 	 * this test case is used to embed E1 to another document B
 	 */
 	@Test
@@ -103,7 +103,7 @@ public class EmbeddedDocumentTest {
 	}
 
 	/**
-	 * The document B is embedded to document A 
+	 * The document B is embedded to document A
 	 * and the directory path of A and B are absolute from the package
 	 * DOCA/ and DOCB/
 	 */
@@ -153,7 +153,7 @@ public class EmbeddedDocumentTest {
 	 * 4) In the last paragraph of /DOCA a frame with a reference to the subdocument DOCB is added
 	 * 5) A picture is being added to the second subdocument (ie. /DOCA/DOCB/Pictures/testB.jpg)
 	 * 6) The spreadsheetname of DOCB is set to "NewTable"
-	 * 7) DOCA/ is saved in a document for its own	 
+	 * 7) DOCA/ is saved in a document for its own
 	 */
 	@Test
 	public void testembeddedDocumentWithSubPath() {
@@ -178,7 +178,7 @@ public class EmbeddedDocumentTest {
 			OdfFileEntry imageEntry = testLoad.getPackage().getFileEntry(OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC);
 			Assert.assertNotNull(imageEntry);
 			Map<String, OdfDocument> embDocs = testLoad.loadSubDocuments(OdfDocument.OdfMediaType.SPREADSHEET);
-			for (String childDocPath : embDocs.keySet()) {	
+			for (String childDocPath : embDocs.keySet()) {
 				OdfDocument doc1 = embDocs.get(childDocPath);
 				imageEntry = doc1.getPackage().getFileEntry(doc1.getDocumentPath() + OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + TEST_PIC_ANOTHER);
 				Assert.assertNotNull(doc1.getTableByName("NewTable"));
@@ -289,7 +289,7 @@ public class EmbeddedDocumentTest {
 			}
 			doc.save(TEST_FILE_FOLDER + TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT);
 			doc.close();
-			//check manifest entry for the embed document 
+			//check manifest entry for the embed document
 			//the sub entry of the embed document such as the pictures of the document should also be removed
 			doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_REMOVE_EMBEDDED_SAVE_OUT));
 			Map<String, OdfDocument> reloadedSubDocs = doc.loadSubDocuments();

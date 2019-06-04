@@ -27,7 +27,7 @@ import org.odftoolkit.odfdom.dom.element.meta.MetaHyperlinkBehaviourElement;
 /**
  * <code>OdfMetaHyperlinkBehaviour</code> feature specifies default behavior of
  * hyperlinks in the current document.
- * 
+ *
  */
 // TODO: the functions are not completed.
 public class OdfMetaHyperlinkBehaviour {
@@ -35,7 +35,7 @@ public class OdfMetaHyperlinkBehaviour {
 
 	/**
 	 * Constructor of <code>OdfMetaHyperlinkBehaviour</code> feature.
-	 * 
+	 *
 	 * @param element
 	 *            an instance of ODF Element
 	 *            <code>MetaHyperlinkBehaviourElement</code>.
@@ -47,7 +47,7 @@ public class OdfMetaHyperlinkBehaviour {
 	/**
 	 * Return the instance of ODF Element
 	 * <code>MetaHyperlinkBehaviourElement</code>. which represents this feature.
-	 * 
+	 *
 	 * @return the instance of ODF Element
 	 *         <code>MetaHyperlinkBehaviourElement</code>.
 	 */

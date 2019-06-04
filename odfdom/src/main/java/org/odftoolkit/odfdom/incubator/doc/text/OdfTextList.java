@@ -36,14 +36,14 @@ import org.w3c.dom.Node;
 
 /**
  * Convenient functionalty for the parent ODF OpenDocument element
- * 
+ *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.text.list.List} in Simple API.
  */
 public class OdfTextList extends TextListElement {
 
 	/**
 	 * Creates a new instance of OdfList.
-	 * 
+	 *
 	 * @param ownerDoc
 	 */
 	public OdfTextList(OdfFileDom ownerDoc) {
@@ -52,7 +52,7 @@ public class OdfTextList extends TextListElement {
 
 	/**
 	 * Creates a new instance of OdfList.
-	 * 
+	 *
 	 * @param ownerDoc
 	 *            The document to which the list belongs
 	 * @param itemList
@@ -124,7 +124,7 @@ public class OdfTextList extends TextListElement {
 
 	/**
 	 * Retrieves Odf Text List Style
-	 * 
+	 *
 	 * @return the <code>OdfTextListStyle</code> element
 	 */
 	public OdfTextListStyle getListStyle() {
@@ -138,7 +138,7 @@ public class OdfTextList extends TextListElement {
 				autoStyles = ((OdfContentDom) fileDom).getAutomaticStyles();
 			}else if(fileDom instanceof OdfStylesDom){
 				autoStyles = ((OdfStylesDom) fileDom).getAutomaticStyles();
-			}			
+			}
 			if (autoStyles != null) {
 				style = autoStyles.getListStyle(listName);
 			}
@@ -162,7 +162,7 @@ public class OdfTextList extends TextListElement {
 
 	/**
 	 * Retrieves the list level count
-	 * 
+	 *
 	 * @return the level count
 	 */
 	public int getListLevel() {
@@ -179,7 +179,7 @@ public class OdfTextList extends TextListElement {
 
 	/**
 	 * Retrieves the List Level Style
-	 * 
+	 *
 	 * @return the <code>TextListLevelStyleElementBase</code>
 	 */
 	public TextListLevelStyleElementBase getListLevelStyle() {
@@ -197,7 +197,7 @@ public class OdfTextList extends TextListElement {
 
 	/**
 	 * Retrieves or create local list style
-	 * 
+	 *
 	 * @return the <code>OdfTextListStyle</code> element
 	 */
 	public OdfTextListStyle getOrCreateLocalListStyle() {
@@ -209,7 +209,7 @@ public class OdfTextList extends TextListElement {
 				autoStyles = ((OdfContentDom) fileDom).getOrCreateAutomaticStyles();
 			}else if(fileDom instanceof OdfStylesDom){
 				autoStyles = ((OdfStylesDom) fileDom).getOrCreateAutomaticStyles();
-			}	
+			}
 			if (autoStyles != null) {
 				listStyle = autoStyles.newListStyle();
 			}
@@ -219,7 +219,7 @@ public class OdfTextList extends TextListElement {
 
 	/**
 	 * Retrieves the parent list of text list
-	 * 
+	 *
 	 * @return The <code>OdfTextList</code>
 	 */
 	public OdfTextList getParentList() {

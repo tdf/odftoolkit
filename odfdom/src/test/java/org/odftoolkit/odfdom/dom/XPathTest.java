@@ -3,18 +3,18 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -94,16 +94,16 @@ public class XPathTest {
 			}
 			// There should be no further prefix
 			Assert.assertFalse(prefixes.hasNext());
-					
+
 			Iterator<String> prefixes2 = contentDom.getPrefixes("urn://some-test-odfdom-namespace");
 			prefix = prefixes2.next();
 			Assert.assertTrue(prefix.equals("prefixOne") || prefix.equals("prefixTwo"));
 			if(prefix.equals("prefixOne")){
 				prefix = prefixes2.next();
-				Assert.assertTrue(prefix.equals("prefixTwo"));				
+				Assert.assertTrue(prefix.equals("prefixTwo"));
 			}else if(prefix.equals("prefixTwo")){
 				prefix = prefixes2.next();
-				Assert.assertTrue(prefix.equals("prefixOne"));				
+				Assert.assertTrue(prefix.equals("prefixOne"));
 			}else{
 				Assert.fail();
 			}
@@ -135,7 +135,7 @@ public class XPathTest {
 			Assert.assertEquals("good", alienElementValue);
 			LOG.log(Level.INFO, "Amount of @alien:foreignAttribute and @style:name is {0}", ((NodeList) xpath.evaluate(".//*[@alien:foreignAttribute or @style:name]", rootNode, XPathConstants.NODESET)).getLength());
 			Assert.assertTrue("Amount of @alien:foreignAttribute and @style:name is not 13!!", ((NodeList) xpath.evaluate(".//*[@alien:foreignAttribute or @style:name]", rootNode, XPathConstants.NODESET)).getLength() == 13);
-			
+
 			// Test if an empty iterator is being returned for a none existing URL
 			Iterator<String> prefixes3 = contentDom.getPrefixes("urn://this-prefix-does-not-exist-in-the-xml");
 			Assert.assertFalse("Not used prefix returned a none-empty iterator!", prefixes3.hasNext());
@@ -214,7 +214,7 @@ public class XPathTest {
 
             OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE_FILE_3));
             OdfFileDom fileDom = odfDoc.getFileDom("meta/meta.rdf");
-            
+
             // add additional duplicate NS prefixes to the DOM
             fileDom.setNamespace("anx", "http://editor.bungeni.org/1.0/anx/");
             fileDom.setNamespace("myrdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");

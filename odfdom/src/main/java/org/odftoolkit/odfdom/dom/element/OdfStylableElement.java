@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -54,7 +54,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Creates a new instance of OdfElementImpl
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param name
 	 * @param family
@@ -71,7 +71,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Retrieve or create uniqiue ODF AutomaticStyle
-	 * 
+	 *
 	 * @return The <code>StyleStyleElement</code> element
 	 */
 	public StyleStyleElement getOrCreateUnqiueAutomaticStyle() {
@@ -105,7 +105,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Retrieve ODF OfficeAutomaticStyles
-	 * 
+	 *
 	 * @return the <code>OdfOfficeAutomaticStyles</code> element that contains
 	 *         the automatic style for this element, or null if not available.
 	 */
@@ -125,7 +125,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Set style attribute value with uri and name
-	 * 
+	 *
 	 * @param uri
 	 *            The namespace uri
 	 * @param qname
@@ -168,7 +168,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Retrieve style name
-	 * 
+	 *
 	 * @return the style name
 	 */
 	public String getStyleName() {
@@ -177,7 +177,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Set style name
-	 * 
+	 *
 	 * @param name
 	 *            The style name
 	 */
@@ -188,7 +188,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Retrieve ODF AutomaticStyle
-	 * 
+	 *
 	 * @return the <code>OdfStyle</code> element
 	 */
 	public OdfStyle getAutomaticStyle() {
@@ -197,7 +197,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Judge if there is an automatic style
-	 * 
+	 *
 	 * @return true if there is an automatic style
 	 */
 	public boolean hasAutomaticStyle() {
@@ -210,9 +210,9 @@ abstract public class OdfStylableElement extends OdfElement implements
 	 */
 	/**
 	 * Returns a DocumentStyle if there is no local style
-	 * 
+	 *
 	 * @return The <code>OdfStyle</code> element
-	 * 
+	 *
 	 * */
 	public OdfStyle reuseDocumentStyle(String styleName) {
 		OdfStyle style = null;
@@ -228,7 +228,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Set ODF DocumentStyle
-	 * 
+	 *
 	 * @param style
 	 *            The document style
 	 */
@@ -251,7 +251,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 	 */
 	/**
 	 * Retrieve ODF DocumentStyle
-	 * 
+	 *
 	 * @return the document style
 	 */
 	public OdfStyle getDocumentStyle() {
@@ -267,7 +267,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 	}
 
 	/**
-	 * 
+	 *
 	 * @return true if there is a document style.
 	 */
 	public boolean hasDocumentStyle() {
@@ -283,7 +283,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 	 */
 	/**
 	 * Retrieve ODF style family
-	 * 
+	 *
 	 * @return the style family.
 	 */
 	public OdfStyleFamily getStyleFamily() {
@@ -299,16 +299,16 @@ abstract public class OdfStylableElement extends OdfElement implements
 	 * mOdfSchemaDocument.getDocumentStyles().getStyle(mAutomaticStyle
 	 * .getParentName()); } // copy local style to merged style
 	 * mAutomaticStyle.copyTo(merged, true,false); }
-	 * 
+	 *
 	 * // copy doc style to merged style // copyTo only copies properties that
 	 * are not already set at the // target style if (docStyle != null) {
 	 * docStyle.copyTo(merged, true,false); }
-	 * 
+	 *
 	 * return merged; }
 	 */
 	/**
 	 * Retrieve ODF style property
-	 * 
+	 *
 	 * @param property
 	 *            The style property
 	 * @return string for a property.
@@ -330,7 +330,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Retrieve the set of ODF style proerties
-	 * 
+	 *
 	 * @param properties
 	 * @return a map of all the properties.
 	 */
@@ -346,7 +346,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Retrieve the set of strict ODF properties
-	 * 
+	 *
 	 * @return a set of all the properties from the style family.
 	 */
 	public Set<OdfStyleProperty> getStrictProperties() {
@@ -355,7 +355,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Judge if there is an automatic style with this property
-	 * 
+	 *
 	 * @param property
 	 * @return true if there is an automatic style with this property.
 	 */
@@ -366,7 +366,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Remove the ODF property
-	 * 
+	 *
 	 * @param property
 	 */
 	public void removeProperty(OdfStyleProperty property) {
@@ -377,7 +377,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Set ODF properties
-	 * 
+	 *
 	 * @param properties
 	 */
 	public void setProperties(Map<OdfStyleProperty, String> properties) {
@@ -388,7 +388,7 @@ abstract public class OdfStylableElement extends OdfElement implements
 
 	/**
 	 * Set ODF style property with value
-	 * 
+	 *
 	 * @param property
 	 * @param value
 	 */

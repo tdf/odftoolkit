@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -48,7 +48,7 @@ import org.w3c.dom.Node;
  * OdfTableColumn represents table column feature in ODF document.
  * <p>
  * OdfTableColumn provides methods to get table cells that belong to this table column.
- * 
+ *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.table.Column} in Simple API.
  */
 public class OdfTableColumn {
@@ -60,10 +60,10 @@ public class OdfTableColumn {
 
 	/**
 	 * Construct the <code>OdfTableColumn</code> feature.
-	 * 
+	 *
 	 * @param odfElement
 	 * 					the element that can construct this table column
-	 * @param repeatedIndex 
+	 * @param repeatedIndex
 	 * 					the index in the repeated columns
 	 */
 	OdfTableColumn(TableTableColumnElement colElement, int repeatedIndex) {
@@ -76,7 +76,7 @@ public class OdfTableColumn {
 	 * Get the <code>OdfTableColumn</code> instance from the <code>TableTableColumnElement</code> instance.
 	 * <p>
 	 * Each <code>TableTableColumnElement</code> instance has a one-to-one relationship to the a <code>OdfTableColumn</code> instance.
-	 * 
+	 *
 	 * @param colElement	the column element that need to get the corresponding <code>OdfTableColumn</code> instance
 	 * @return the <code>OdfTableColumn</code> instance represent the specified column element
 	 */
@@ -135,7 +135,7 @@ public class OdfTableColumn {
 
 	/**
 	 * Get the width of the column (in Millimeter).
-	 * 
+	 *
 	 * @return the width of the current column (in Millimeter).
 	 */
 	public long getWidth() {
@@ -236,7 +236,7 @@ public class OdfTableColumn {
 
 	/**
 	 * Returns if the column always keeps its optimal width.
-	 * @return 
+	 * @return
 	 * 			true if the column always keeps its optimal width;
 	 * 			vice versa
 	 */
@@ -246,7 +246,7 @@ public class OdfTableColumn {
 
 	/**
 	 * Set if the column always keeps its optimal width.
-	 * 
+	 *
 	 * @param isUseOptimalWidth
 	 * 					the flag that indicate column should keep its optimal width or not
 	 */
@@ -256,7 +256,7 @@ public class OdfTableColumn {
 
 	/**
 	 * Return an instance of <code>TableTableColumnElement</code> which represents this feature.
-	 * 
+	 *
 	 * @return an instance of <code>TableTableColumnElement</code>
 	 */
 	public TableTableColumnElement getOdfElement() {
@@ -265,7 +265,7 @@ public class OdfTableColumn {
 
 	/**
 	 * Get the count of cells in this column.
-	 * 
+	 *
 	 * @return 	the cells count in the current column
 	 */
 	public int getCellCount() {
@@ -275,7 +275,7 @@ public class OdfTableColumn {
 	/**
 	 * Get a cell with a specific index. The table will be automatically
 	 * expanded, when the given index is outside of the original table.
-	 * 
+	 *
 	 * @param index
 	 *            the cell index in this column
 	 * @return the cell object in the given cell index
@@ -390,7 +390,7 @@ public class OdfTableColumn {
 
 	/**
 	 * Get the index of this column in the owner table.
-	 * 
+	 *
 	 * @return the index of the column
 	 */
 	public int getColumnIndex() {
@@ -435,10 +435,10 @@ public class OdfTableColumn {
 	 * <p>
 	 * The style should already exist in this document.
 	 * <p>
-	 * This method is not recommended for text document cases. 
+	 * This method is not recommended for text document cases.
 	 * These is a style assigned to each cell in tables under text documents.
 	 * So setting the default cell style to a column may not work.
-	 * 
+	 *
 	 * @param style
 	 * 			the cell style of the document
 	 */

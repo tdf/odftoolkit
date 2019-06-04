@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -29,7 +29,7 @@ public class TextEncoding implements OdfDataType {
 
 	private String mTextEncoding;
 	private static final Pattern textEncodingPattern = Pattern.compile("^[A-Za-z][A-Za-z0-9._\\-]*$");
-	
+
 	/**
 	 * Construct TextEncoding by the parsing the given string
 	 *

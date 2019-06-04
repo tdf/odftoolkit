@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -61,7 +61,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * 
+ *
  */
 abstract public class OdfStyleBase extends OdfContainerElementBase implements OdfStylePropertySet, Comparable {
 
@@ -114,7 +114,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
 
     /**
      * get a map containing all properties of this style and their values.
-     * @return map of properties. 
+     * @return map of properties.
      */
     public Map<OdfStyleProperty, String> getStyleProperties() {
         TreeMap<OdfStyleProperty, String> result = new TreeMap<OdfStyleProperty, String>();
@@ -181,7 +181,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
 
 
     /**
-     * 
+     *
      * @param set
      * @return the style:*-properties element for the given set. Returns null if
      *         such element does not exist yet.
@@ -195,7 +195,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
     }
 
     /**
-     * 
+     *
      * @param set
      * @return the style:*-properties element for the given set. If such element
      *         does not yet exist, it is created.
@@ -251,7 +251,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
     }
 
     /**
-     * 
+     *
      * @return a property value.
      */
     public String getProperty(OdfStyleProperty prop) {
@@ -437,7 +437,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
 
             String attrValue1 = attr1.get(key1);
             String attrValue2 = attr2.get(key1);
-            
+
             if ((c = attrValue1.compareTo(attrValue2)) != 0) {
                 return c;
             }
@@ -516,7 +516,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
     public int hashCode() {
         return 59 * 7 + (this.mPropertySetElementMap != null ? this.mPropertySetElementMap.hashCode() : 0);
     }
-    
+
     public OdfStyleFamily getFamily() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

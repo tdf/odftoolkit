@@ -505,7 +505,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 		setOdfAttribute(attr);
 		attr.setValue(xmlIdValue);
 	}
-	
+
 	/**
 	* Set text content. Only elements which are allowed to have text content offer this method.
 	*/

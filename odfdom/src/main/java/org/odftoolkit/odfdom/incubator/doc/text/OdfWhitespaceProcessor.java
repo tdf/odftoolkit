@@ -32,7 +32,7 @@ import org.w3c.dom.Node;
 
 /**
  * It's a tool class to help process white space.
- * 
+ *
  * @author J David Eisenberg
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.WhitespaceProcessor} in Simple API.
  */

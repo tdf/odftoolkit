@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -40,11 +40,11 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.w3c.dom.NodeList;
 
 /**
- * It's a sub class of OdfTextExtractor. It provides a method to return all the text 
- * that the user can typically edit in a document, including text in cotent.xml, 
- * header and footer in styles.xml, meta data in meta.xml. 
- * 
- * <p>This function can be used by search engine, and text analytic operations. </p> 
+ * It's a sub class of OdfTextExtractor. It provides a method to return all the text
+ * that the user can typically edit in a document, including text in cotent.xml,
+ * header and footer in styles.xml, meta data in meta.xml.
+ *
+ * <p>This function can be used by search engine, and text analytic operations. </p>
  *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.EditableTextExtractor} in Simple API.
  */
@@ -56,7 +56,7 @@ public class OdfEditableTextExtractor extends OdfTextExtractor {
 
 	/**
 	 * Constructor with an ODF document as a parameter
-	 * @param doc the ODF document whose editable text would be extracted. 
+	 * @param doc the ODF document whose editable text would be extracted.
 	 */
 	private OdfEditableTextExtractor(OdfDocument doc) {
 		mTextBuilder = new StringBuilder();
@@ -66,7 +66,7 @@ public class OdfEditableTextExtractor extends OdfTextExtractor {
 
 	/**
 	 * Constructor with an ODF element as parameter
-	 * @param element the ODF element whose editable text would be extracted. 
+	 * @param element the ODF element whose editable text would be extracted.
 	 */
 	private OdfEditableTextExtractor(OdfElement element) {
 		mTextBuilder = new StringBuilder();
@@ -75,7 +75,7 @@ public class OdfEditableTextExtractor extends OdfTextExtractor {
 	}
 
 	/**
-	 * An instance of OdfEditableTextExtractor will be created to 
+	 * An instance of OdfEditableTextExtractor will be created to
 	 * extract the editable text content of an ODF element.
 	 * @param doc the ODF document whose text will be extracted.
 	 * @return An instance of OdfEditableTextExtractor
@@ -85,7 +85,7 @@ public class OdfEditableTextExtractor extends OdfTextExtractor {
 	}
 
 	/**
-	 * An instance of OdfEditableTextExtractor will be created to 
+	 * An instance of OdfEditableTextExtractor will be created to
 	 * extract the editable text content of an ODF element.
 	 * @param element the ODF element whose text will be extracted.
 	 * @return An instance of OdfEditableTextExtractor

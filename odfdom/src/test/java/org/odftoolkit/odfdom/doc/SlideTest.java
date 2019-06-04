@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -64,7 +64,7 @@ public class SlideTest {
 	/**
 	 * Test case for get presentation slide, including get the slide count, get
 	 * the slide at the specified position or with the specified name, and get
-	 * the collection of slide. 
+	 * the collection of slide.
 	 * <p>
 	 * <b>Precondition</b> Load Presentation File at test\resources\performance\Presentation1.odp
 	 * <b>Method</b> 1)By using OdfPresentationDocument.getSlideCount() to Get the
@@ -125,9 +125,9 @@ public class SlideTest {
 	 * we should modified the duplicate slide name to make them unique.
 	 * <p>
 	 * <b>Precondition</b> Load Presentation File at test\resources\performance\Presentation1.odp
-	 * Using the dom method to make slide index 4 and 8 have the same name, 
+	 * Using the dom method to make slide index 4 and 8 have the same name,
 	 * and delete the "draw:name" attribute of slide 7.
-	 * <b>Method</b> 
+	 * <b>Method</b>
 	 * 1)By accessing any slide API to trigger the duplicate slide name check method.
 	 * After this operation, slide 8 will change the slide name.
 	 * 2)Trigger OdfDrawPage.getSlideName() to make the slide 7 has the unique slide name.
@@ -269,7 +269,7 @@ public class SlideTest {
 	 * OdfDrawPage.SlideLayout slideLayout) is used to new a slide at the specified
 	 * position with the specified name, and use the specified slide template.
 	 * <b>Postcondition</b> Save the modified document at SlideResultNew.odp
-	 * <b>Covered Element</b> 
+	 * <b>Covered Element</b>
 	 * 1) &lt;style:presentation-page-layout&gt; referred by "presentation:presentation-page-layout-name" attribute of &lt;draw:page&gt;
 	 * 2) &lt;style:master-page&gt; referred by "draw:master-page-name" attribute of &lt;draw:page&gt;
 	 * 3) The placeholder element of &lt;draw:page&gt;, such as title, outline placeholder
@@ -318,7 +318,7 @@ public class SlideTest {
 	 * specified slide and insert it to another specified position.
 	 * <p>
 	 * <b>Precondition</b> Load Presentation File at test\resources\performance\Presentation1.odp
-	 * test\resources\performance\Presentation1.odp 
+	 * test\resources\performance\Presentation1.odp
 	 * <b>Method</b> 1)Using OdfPresentationDocument.moveSlide(int current, int destination)
 	 * to move a slide at the current position to the destination position.
 	 * 2)OdfPresentationDocument.copySlide(int source, int dest, String newName)
@@ -329,8 +329,8 @@ public class SlideTest {
 	 * <b>Covered Element</b> 1) &lt;office:presentation&gt;,&lt;draw:page&gt;
 	 * 2) &lt;presentation:notes&gt; of each slide.
 	 * <b>Note</b> Each slide has its own notes page to show its notes view,
-	 * while the notes page has the "draw:page-number" attribute to show the notes view of which slide 
-	 * so when the slide is moved or copied, the index of this slide will be change, 
+	 * while the notes page has the "draw:page-number" attribute to show the notes view of which slide
+	 * so when the slide is moved or copied, the index of this slide will be change,
 	 * the notes page have to change the "draw:page-number" value.
 	 */
 	@Test
@@ -401,7 +401,7 @@ public class SlideTest {
 	 * 2) All the element that contains "xlink:href" attribute, such as &lt;draw:object&gt;, &lt;draw:image&gt;, etc.
 	 * 3) Each style definition element of &lt;draw:page&gt; and its all child elements
 	 * such as layout style, master page style, object style and text style
-	 * the style definition element must contain "style:name" or "draw:name" attribute, include 
+	 * the style definition element must contain "style:name" or "draw:name" attribute, include
 	 *         &lt;style:mater-page&gt;,&lt;style:page-layout&gt;,&lt;style:presentation-page-layout&gt;,
 	 *         &lt;style:style&gt;, &lt;text:list-style&gt;, &lt;number:time-style&gt;, &lt;number:date-style&gt;,
 	 *         &lt;number:boolean-style&gt;, &lt;number:number-style&gt;, &lt;number:currency-style&gt;,
@@ -471,7 +471,7 @@ public class SlideTest {
 	 * <b>Method</b> Using OdfPresentationDocument.appendPresentation(OdfPresentationDocument aDoc)
 	 * to append the specified presentation to the current presentation.
 	 * <b>Postcondition</b> Save the modified document at SlideResultMerge.odp
-	 * <b>Covered Element</b> 
+	 * <b>Covered Element</b>
 	 * Same with <code>CopyForeignSlide</code> method,
 	 * except that it covers all the slide element of the document,rather than specific slide.
 	 * <b>Note</b> 1)You'd better check the generated document to look at if there are any object/style is lost.
@@ -535,11 +535,11 @@ public class SlideTest {
 	/**
 	 * Test case for merge the three presentation document
 	 * <p>
-	 * <b>Precondition</b> Load Presentation File at test\resources\performance\SlideTest1.odp, 
+	 * <b>Precondition</b> Load Presentation File at test\resources\performance\SlideTest1.odp,
 	 * 	 test\resources\performance\SlideTest2.odp and test\resources\performance\SlideTest3.odp
 	 * <b>Method</b> copy the slide from SlideTest2.odp and SlideTest3.odp to SlideTest1.odp
 	 * <b>Postcondition</b> Save the modified document at SlideResultCopyThreeDoc.odp
-	 * <b>Notice</b> 
+	 * <b>Notice</b>
 	 * This test case is used to show that the style name can be renamed if they define the different style.
 	 */
 	@Test

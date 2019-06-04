@@ -149,7 +149,7 @@ public class OdfTextHeading extends TextHElement
 		}
 		return this;
 	}
-    
+
 	/**
 	 * Add a span with the given styleName and content to this paragraph.
 	 * If the style name is null or the null string, no span is added.

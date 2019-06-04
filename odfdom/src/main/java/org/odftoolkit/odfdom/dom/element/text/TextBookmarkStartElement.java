@@ -219,7 +219,7 @@ public class TextBookmarkStartElement extends OdfElement {
 		super.setTextContent(content);
 		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
-	
+
 	protected void onRemoveNode() {
 		super.onRemoveNode();
 		((OdfFileDom) this.ownerDocument).getInContentMetadataCache().remove(this);

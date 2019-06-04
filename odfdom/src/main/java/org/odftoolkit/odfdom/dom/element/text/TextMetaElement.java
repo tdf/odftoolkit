@@ -2057,7 +2057,7 @@ public class TextMetaElement extends OdfElement {
 			this.appendChild(this.getOwnerDocument().createTextNode(content));
 		}
 	}
-	
+
 	/**
 	* Set text content. Only elements which are allowed to have text content offer this method.
 	*/

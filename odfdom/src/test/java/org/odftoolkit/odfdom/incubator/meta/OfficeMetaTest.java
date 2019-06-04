@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -65,8 +65,8 @@ public class OfficeMetaTest {
 	private Integer editingCycles = new Integer(4);
 	private Duration editingDuration = Duration.valueOf("P49DT11H8M9S");
 	private SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-	
-	@Before	
+
+	@Before
 	public void setUp() throws Exception {
 		// Former developer was writing into the original file, triggering a race discussion of regression tests working on all documents.
 		// Sometimes the file was changed (if this test ran earlier), sometimes not. Fixed by doing the test result in a new ODT output file
@@ -76,7 +76,7 @@ public class OfficeMetaTest {
 		}else{
 			doc = (OdfTextDocument) OdfTextDocument.loadDocument(newMetaFile);
 		}
-		
+
 		metadom = doc.getMetaDom();
 		fMetadata = new OdfOfficeMeta(metadom);
 	}

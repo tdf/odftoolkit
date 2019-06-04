@@ -68,10 +68,10 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         super(ownerDoc);
         mStylesBaseImpl = new OdfStylesBase();
     }
-    
+
     /**
      * Create an ODF style with style name and family
-     * 
+     *
      * @param name  The style name
      * @param family The style family
      * @return  The <code>OdfStyle</code> element
@@ -86,7 +86,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
 
     /**
      * Retrieve or create ODF default style
-     * 
+     *
      * @param family The style family
      * @return The code>OdfDefaultStyle</code> element
      */
@@ -99,10 +99,10 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         }
         return style;
     }
-    
+
     /**
-     * Create ODF TextListStyle 
-     * 
+     * Create ODF TextListStyle
+     *
      * @param name  The style name
      * @return The code>OdfTextListStyle</code> element
      */
@@ -115,7 +115,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
 
     /**
      * Retrieve or create ODF OutlineStyle
-     * 
+     *
      * @return The code>OdfTextOutlineStyle</code> element
      */
     public OdfTextOutlineStyle getOrCreateOutlineStyle() {
@@ -126,7 +126,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mOutlineStyle;
     }
 
-    /** 
+    /**
      * Returns the <code>OdfTextOutlineStyle</code> element.
      *
      * @return a pointer to the outline stye or null if there is no such element
@@ -135,7 +135,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mOutlineStyle;
     }
 
-    /** 
+    /**
      * Returns the <code>OdfStyleDefaultStyle</code>  element.
      *
      * @param familyType is the family for the default style
@@ -149,7 +149,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         }
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>OdfStyleDefaultStyle</code> elements.
      *
      * @return iterator for all <code>OdfStyleDefaultStyle</code> elements
@@ -162,7 +162,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         }
     }
 
-    /** 
+    /**
      * Returns the <code>DrawMarkerElement</code> element with the given name.
      *
      * @param name is the name of the marker
@@ -176,7 +176,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         }
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>DrawMarkerElement</code> elements.
      *
      * @return an iterator for all <code>DrawMarkerElement</code> elements
@@ -189,7 +189,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         }
     }
 
-    /** 
+    /**
      * Returns the <code>DrawGradientElement</code> element with the given name.
      *
      * @param name is the name of the gradient
@@ -203,7 +203,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         }
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>DrawGradientElement</code> elements.
      *
      * @return an iterator for all <code>DrawGradientElement</code> elements
@@ -216,7 +216,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         }
     }
 
-    /** 
+    /**
      * Returns the <code>DrawHatchElement</code> element with the given name.
      *
      * @param name is the name of the hatch
@@ -230,7 +230,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         }
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>DrawHatchElement</code> elements.
      *
      * @return an iterator for all <code>DrawHatchElement</code> elements
@@ -243,7 +243,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         }
     }
 
-    /** 
+    /**
      * Returns the <code>DrawFillImageElement</code> element with the given name.
      *
      * @param name is the name of the fill image
@@ -257,7 +257,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         }
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>DrawFillImageElement</code> elements.
      *
      * @return an iterator for all <code>DrawFillImageElement</code> elements
@@ -270,7 +270,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         }
     }
 
-    /** 
+    /**
      * Returns the <code>OdfStyle</code> element with the given name and family.
      *
      * @param name is the name of the style
@@ -281,7 +281,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getStyle(name, familyType);
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>OdfStyle</code> elements for the given family.
      *
      * @param familyType
@@ -291,7 +291,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getStylesForFamily(familyType);
     }
 
-    /** 
+    /**
      * Returns the <code>OdfTextListStyle</code> element with the given name.
      *
      * @param name is the name of the list style
@@ -301,7 +301,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getListStyle(name);
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>OdfTextListStyle</code> elements.
      *
      * @return an iterator for all <code>OdfTextListStyle</code> elements
@@ -310,7 +310,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getListStyles();
     }
 
-    /** 
+    /**
      * Returns the <code>OdfNumberNumberStyle</code> element with the given name.
      *
      * @param name is the name of the number style
@@ -320,7 +320,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getNumberStyle(name);
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>OdfNumberNumberStyle</code> elements.
      *
      * @return an iterator for all <code>OdfNumberNumberStyle</code> elements
@@ -329,7 +329,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getNumberStyles();
     }
 
-    /** 
+    /**
      * Returns the <code>OdfNumberDateStyle</code> element with the given name.
      *
      * @param name is the name of the date style
@@ -339,7 +339,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getDateStyle(name);
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>OdfNumberDateStyle</code> elements.
      *
      * @return an iterator for all <code>OdfNumberDateStyle</code> elements
@@ -348,7 +348,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getDateStyles();
     }
 
-    /** 
+    /**
      * Returns the <code>OdfNumberPercentageStyle</code> element with the given name.
      *
      * @param name is the name of the percentage style
@@ -358,7 +358,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getPercentageStyle(name);
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>OdfNumberPercentageStyle</code> elements.
      *
      * @return an iterator for all <code>OdfNumberPercentageStyle</code> elements
@@ -367,7 +367,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getPercentageStyles();
     }
 
-    /** 
+    /**
      * Returns the <code>OdfNumberCurrencyStyle</code> element with the given name.
      *
      * @param name is the name of the currency style
@@ -377,7 +377,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getCurrencyStyle(name);
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>OdfNumberCurrencyStyle</code> elements.
      *
      * @return an iterator for all <code>OdfNumberCurrencyStyle</code> elements
@@ -386,7 +386,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getCurrencyStyles();
     }
 
-    /** 
+    /**
      * Returns the <code>OdfNumberTimeStyle</code> element with the given name.
      *
      * @param name is the name of the time style
@@ -396,7 +396,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getTimeStyle(name);
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>OdfNumberTimeStyle</code> elements.
      *
      * @return an iterator for all <code>OdfNumberTimeStyle</code> elements
@@ -405,7 +405,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getTimeStyles();
     }
 
-    /** 
+    /**
      * Returns the <code>NumberBooleanStyleElement</code> element with the given name.
      *
      * @param name is the name of the boolean style
@@ -415,7 +415,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getBooleanStyle(name);
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>NumberBooleanStyleElement</code> elements.
      *
      * @return an iterator for all <code>NumberBooleanStyleElement</code> elements
@@ -424,7 +424,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getBooleanStyles();
     }
 
-    /** 
+    /**
      * Returns the <code>OdfNumberTextStyle</code> element with the given name.
      *
      * @param name is the name of the text style
@@ -434,7 +434,7 @@ public class OdfOfficeStyles extends OfficeStylesElement {
         return mStylesBaseImpl.getTextStyle(name);
     }
 
-    /** 
+    /**
      * Returns an iterator for all <code>OdfNumberTextStyle</code> elements.
      *
      * @return an iterator for all <code>OdfNumberTextStyle</code> elements
