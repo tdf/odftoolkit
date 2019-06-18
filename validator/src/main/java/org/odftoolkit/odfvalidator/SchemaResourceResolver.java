@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -30,13 +30,13 @@ import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
 
-    class SchemaResourceResolver implements LSResourceResolver 
+    class SchemaResourceResolver implements LSResourceResolver
     {
         private String m_aBaseURI = null;
         private Logger m_aLogger = null;
         private DOMImplementationLS m_aDOMImplLS = null;
         private boolean m_bGetDOMImplLSFailed = false;
-        
+
         class LSInputImpl implements LSInput
         {
             private InputStream m_aInputStream = null;
@@ -107,21 +107,21 @@ import org.w3c.dom.ls.LSResourceResolver;
             }
 
         }
-        
+
         public SchemaResourceResolver( Logger aLogger, String aBaseURI )
         {
             m_aBaseURI = aBaseURI;
             m_aLogger = aLogger;
         }
-    
-        public LSInput resolveResource(String aType, String aNamespaceURI, String aPublicId, String aSystemId, String aBaseURI) 
+
+        public LSInput resolveResource(String aType, String aNamespaceURI, String aPublicId, String aSystemId, String aBaseURI)
         {
             LSInput aInput = null;
-            
-            if( aBaseURI == null )
-                aBaseURI = m_aBaseURI; 
 
-            if( aSystemId != null && aBaseURI != null && 
+            if( aBaseURI == null )
+                aBaseURI = m_aBaseURI;
+
+            if( aSystemId != null && aBaseURI != null &&
                 InternalResources.isInternalResourceIdentifer(aBaseURI) )
             {
                 String aURI = aBaseURI.substring(0, aBaseURI.lastIndexOf('/')+1).concat(aSystemId);
@@ -132,7 +132,7 @@ import org.w3c.dom.ls.LSResourceResolver;
                     aInput = createLSInput();
                     aInput.setSystemId(aURI);
                     aInput.setByteStream(aInStream);
- 
+
                     String aMsg = "resolving '" + aURI + "'";
                     m_aLogger.logInfo( aMsg , false);
                 }
@@ -141,20 +141,20 @@ import org.w3c.dom.ls.LSResourceResolver;
                     m_aLogger.logFatalError("Missing internal schema file: ".concat(aPath));
                 }
             }
-        
+
            return aInput;
         }
-        
+
         private LSInput createLSInput()
         {
             LSInput aLSInput = null;
-            
+
             if( m_aDOMImplLS == null && !m_bGetDOMImplLSFailed )
             {
                 DOMImplementationRegistry aDOMReg = null;
 
                 try
-                {        
+                {
                     aDOMReg = DOMImplementationRegistry.newInstance();
                 }
                 catch( ClassNotFoundException e )
@@ -188,7 +188,7 @@ import org.w3c.dom.ls.LSResourceResolver;
             {
                 aLSInput = new LSInputImpl();
             }
-            
+
             return aLSInput;
         }
     }

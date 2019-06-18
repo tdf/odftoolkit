@@ -116,7 +116,7 @@ class ODFPackageErrorHandler implements ErrorHandler {
                             bRet = true;
                             break;
                     }
-                } 
+                }
                 else if (aConstraint instanceof OdfSchemaConstraint)
                 {
                     switch (((OdfSchemaConstraint) aConstraint))

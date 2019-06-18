@@ -42,7 +42,7 @@ public enum OdfValidatorMode {
      * ODF 1.2 only, equals CONFORMANCE for ODF 1.0/1.1
      */
     EXTENDED_CONFORMANCE ("extended conformant");
-	
+
     private String mValue;
 
     OdfValidatorMode( String value )
@@ -54,5 +54,5 @@ public enum OdfValidatorMode {
     public String toString()
     {
         return mValue;
-    }	
+    }
 }

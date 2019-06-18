@@ -23,7 +23,7 @@
 -->
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<!-- display name -->
-	<display-name>ODF Validator Application</display-name>	
+    <display-name>ODF Validator Application</display-name>
 	<!-- some needed application values, change if needed -->
     <context-param>
 		<!-- application title, shown in the header of the application -->
@@ -49,32 +49,32 @@
 		<!-- the icon of the donator of this service, used in the footer  -->
         <param-name>SUPPORTER_ICON_URL</param-name>
         <param-value>http://opendocsociety.org/organisation/logo/png/opendocsociety_logo_normal_color-on-trans-200x42/;download</param-value>
-    </context-param>    
+    </context-param>
     <context-param>
 		<!-- the site of the donator of this service, used in the footer on the their icon -->
         <param-name>SUPPORTER_URL</param-name>
         <param-value>http://www.opendocsociety.org/</param-value>
-    </context-param>        
+    </context-param>
     <context-param>
 		<!-- the name of the donator of this service, used as tool tip on their icon -->
         <param-name>SUPPORTER_TITLE</param-name>
         <param-value>OpenDoc Society</param-value>
-    </context-param>    
+    </context-param>
     <context-param>
 		<!-- the favicon of the donator of this service, used as icon on browser tab and left of URL -->
         <param-name>SUPPORTER_FAVICON_URL</param-name>
         <param-value>http://www.opendocsociety.org/favicon/;download</param-value>
-    </context-param>            
-	<servlet>
-	  <servlet-name>InfoPage</servlet-name>
-	  <jsp-file>/jsp/info/index.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-	  <servlet-name>InfoPage</servlet-name>
-	  <url-pattern>/info.html</url-pattern>
-	</servlet-mapping>	
+    </context-param>
+    <servlet>
+        <servlet-name>InfoPage</servlet-name>
+        <jsp-file>/jsp/info/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InfoPage</servlet-name>
+        <url-pattern>/info.html</url-pattern>
+    </servlet-mapping>
 	<!-- welcome file list -->
-    <welcome-file-list>        
+    <welcome-file-list>
         <welcome-file>/jsp/index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

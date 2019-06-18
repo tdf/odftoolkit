@@ -37,7 +37,7 @@ import schema2template.model.XMLModel;
  * valuetypes used in schema.
  */
 public class SourceCodeModel {
-    
+
 	 Map<String, SourceCodeBaseClass> mElementBaseMap;
 	    SortedSet<SourceCodeBaseClass> mBaseclasses;
 	    Map<String, SourceCodeBaseClass> mBasenameToBaseclass;
@@ -208,7 +208,7 @@ public class SourceCodeModel {
 	        String retval = tuple[1];
 	        return (retval == null) ? "" : retval;
 	    }
-	    
+
 	    /**
 	     * Use in templates: Get Java conversion class for datatype used in schema.
 	     *

@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -38,25 +38,25 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
 
-    
+
     private static final String FILTER_ENTRY = "filter-entry";
     private static final String TASK_ID = "task-id";
     private static final String RESOLVED_IN = "resolved-in";
-    
+
     int m_nBuildId = 0;
-    
+
     class FilterEntry
     {
         String m_aTaskId;
         int m_nBuildId;
-        
+
         FilterEntry( String aTaskId, int nBuildId )
         {
             m_aTaskId = aTaskId;
             m_nBuildId = nBuildId;
         }
     }
-            
+
 
     private HashMap<String,FilterEntry> m_aFilterEntries;
     private HashSet<String> m_aTaskIdsReported;
@@ -101,7 +101,7 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
                     if( aBuildId != null && aBuildId.length() > 0)
                         m_aEntry.m_nBuildId = Integer.valueOf(aBuildId);
                 }
-               
+
             }
         }
 
@@ -117,7 +117,7 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
         }
 
     }
-    
+
     /** Creates a new instance of ValidationErrorFilter */
     public ValidationOOoTaskIdErrorFilter( File aFilterFile, PrintStream aOut ) throws ODFValidatorException {
         m_aFilterEntries = new HashMap<String,FilterEntry>();
@@ -153,13 +153,13 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
 
 
     }
-    
+
     public SAXParseException filterException( SAXParseException aExc )
     {
         if( m_nBuildId > 0 )
         {
             FilterEntry aEntry = m_aFilterEntries.get(aExc.getMessage());
-            if( aEntry != null && 
+            if( aEntry != null &&
                 (aEntry.m_nBuildId == 0 || m_nBuildId <= aEntry.m_nBuildId) )
             {
                 String aTaskId = aEntry.m_aTaskId;
@@ -172,7 +172,7 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
                     return null;
             }
         }
-        
+
         return aExc;
     }
 
@@ -180,13 +180,13 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
     {
         m_nBuildId = aGenerator.length() > 0 ? getBuildId( aGenerator) : 0;
     }
-    
-    
+
+
     public void startSubFile() {
         m_aTaskIdsReported = new HashSet<String>();
         // the build id is kept
     }
-    
+
     public void setGenerator( String aGenerator )
     {
         m_nBuildId = aGenerator.length() > 0 ? getBuildId( aGenerator) : 0;
@@ -206,8 +206,8 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
                 nBuildId = Integer.valueOf(nPos > 0 ? aGenerator.substring(nStart,nPos) : aGenerator.substring(nStart));
             }
         }
-        
+
         return nBuildId;
     }
-    
+
 }

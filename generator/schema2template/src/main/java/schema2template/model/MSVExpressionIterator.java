@@ -37,11 +37,11 @@ import java.util.logging.Logger;
 /**
  * Iterates through the MSV expression tree.
  *
- * Traversing the MSV Tree structure by 
+ * Traversing the MSV Tree structure by
  *	1) First trying to get the child (going as deep as possible)
  *  2) Second if no child is available, trying to get the next sibling
  *  3) If no sibling available, get a sibling of the parent (going back to step 1)
- * 
+ *
  * <p>Also has the ability to limit iteration to given subclasses and to limit subtree
  * to the next element expressions below. </p>
  */
@@ -49,7 +49,7 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
 
 	private static final Logger LOG = Logger.getLogger(MSVExpressionIterator.class.getName());
 	private Expression mCurrentExpression; // the expression that will be received by next()
-	public int mCurrentExpressionDepth;   // Level of current expression starting with 0 
+	public int mCurrentExpressionDepth;   // Level of current expression starting with 0
 	private MSVExpressionVisitorChildren mVisitor;
 	// list of already visited expressions to avoid endless recursion
 	// The stack assists the iteration to go back up (usually done in by recursion)
@@ -131,7 +131,7 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
 		while (!mDesiredExpression.isInstance(mCurrentExpression) && mCurrentExpression != null) {
 			mCurrentExpression = getNextExpression();
 		}
-		
+
 		// Ignore root, if only children are desired
 		if (mOnlyChildren && root == mCurrentExpression) {
 			mCurrentExpression = getNextExpression();
@@ -181,7 +181,7 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
 		return (mCurrentExpression != null) ? true : false;
 	}
 
-	/** Iterating the Tree like the following	 
+	/** Iterating the Tree like the following
 	If there are (unvisited) children -> go down
 	If there are no (unvisited) children, but unvistsiblings -> go up and right
 	 */
@@ -249,7 +249,7 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
 		Expression retVal = mCurrentExpression;
 		mCurrentDepth = mAncestorsAndCurrent.size() - 1;
 		mCurrentExpression = getNextExpression();
-		
+
 		// as there is always a desired expression, make sure the next one is adequate
 		while (!mDesiredExpression.isInstance(mCurrentExpression) && mCurrentExpression != null) {
 			mCurrentExpression = getNextExpression();

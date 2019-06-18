@@ -30,7 +30,7 @@ import java.util.StringTokenizer;
 
 /**
  * The most important model, the first access to the XML Schema information.
- * 
+ *
  * Provides all XML attribute and XML element definitions from the schema.
  * All further information can be accessed from those definitions
  * (e.g. dependencies, constant values, data types, etc.).
@@ -77,7 +77,7 @@ public class XMLModel {
 
     /**
      * Get all attributes, sorted by ns:local name.
-     * 
+     *
      * @return Unmodifiable SortedSet of attributes
      */
     public PuzzlePieceSet getAttributes() {
@@ -101,7 +101,7 @@ public class XMLModel {
 
     /**
      * Get element by tag name and hash code. The hash code distincts
-     * Elements sharing the same tag name. 
+     * Elements sharing the same tag name.
      *
      * @param name
      * @param hashCode
@@ -137,7 +137,7 @@ public class XMLModel {
 
     /**
      * Get attribute by tag name and hash code. The hash code distincts
-     * Attributes sharing the same tag name. 
+     * Attributes sharing the same tag name.
      *
      * @param name
      * @param hashCode
@@ -318,7 +318,7 @@ public class XMLModel {
 
     /**
      * Escape the quotation marks of String literals
-     * 
+     *
      * @param in raw input
      * @return filtered output, with escaped quotation marks
      */

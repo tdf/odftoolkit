@@ -105,5 +105,5 @@ public interface PuzzleComponent {
      * @return Collection of PuzzlePiece objects
      */
     public Collection<PuzzlePiece> getCollection();
-    
+
 }
